@@ -345,10 +345,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         ///   Current Hierarachy
         /// </summary>
         /// <returns></returns>
-        [HttpGet("ongoing-licensee-data")]
-        public async Task<OngoingLicenseeData> GetOngoingLicenseeData()
+        [HttpGet("licensee-data/{type}")]
+        public async Task<OngoingLicenseeData> GetLicenseeData(string type)
         {
-
+            bool forceCreate  = (type == "create");
 
             OngoingLicenseeData result = new OngoingLicenseeData();
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -356,7 +356,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var application = GetCurrentLicenseeApplication(userSettings);
+                var application = GetCurrentLicenseeApplication(userSettings, forceCreate);
 
                 if (!string.IsNullOrEmpty(application._adoxioApplicationtypeidValue))
                 {
@@ -486,12 +486,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return newNode;
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication GetCurrentLicenseeApplication(UserSettings userSettings)
+        private MicrosoftDynamicsCRMadoxioApplication GetCurrentLicenseeApplication(UserSettings userSettings, bool forceCreate)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;
-            // get the current user.
+            var applicationType = _dynamicsClient.GetApplicationTypeByName("Licensee Changes");
 
-            string[] expand = { "adoxio_localgovindigenousnationid",
+            if (!forceCreate)
+            {
+
+                string[] expand = { "adoxio_localgovindigenousnationid",
                     "adoxio_application_SharePointDocumentLocations",
                     "adoxio_application_adoxio_tiedhouseconnection_Application",
                     "adoxio_AssignedLicence",
@@ -501,38 +504,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     "adoxio_application_SharePointDocumentLocations"
                 };
 
-            // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
-            var filter = $"_adoxio_applicant_value eq {userSettings.AccountId} and adoxio_paymentrecieved ne true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
-            filter += $" and adoxio_isapplicationcomplete ne 1";
-            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
-            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
-            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
-            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+                // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
+                var filter = $"_adoxio_applicant_value eq {userSettings.AccountId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                // filter += $" and adoxio_isapplicationcomplete ne 1";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
-            var applicationType = _dynamicsClient.GetApplicationTypeByName("Licensee Changes");
-            if (applicationType != null)
-            {
-                filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
-            }
-
-            try
-            {
-                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.OrderBy(app => app.Createdon);
-                var application = applications.FirstOrDefault();
-                if (application != null)
+                if (applicationType != null)
                 {
-                    result = application;
+                    filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
                 }
-                else
+
+                try
                 {
+                    var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.OrderByDescending(app => app.Createdon);
+                    var application = applications.FirstOrDefault(); // Get the latest application
+                    if (application != null)
+                    {
+                        result = application;
+                    }
+                    else
+                    {
+                        result = null;
+                    }
+                }
+                catch (HttpOperationException e)
+                {
+                    _logger.LogError(e, "Error getting licensee application");
                     result = null;
                 }
             }
-            catch (HttpOperationException e)
-            {
-                _logger.LogError(e, "Error getting licensee application");
-                result = null;
-            }
+
             if (result == null && applicationType != null)
             {
                 // create one.
@@ -570,7 +574,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             try
             {
-                var application = GetCurrentLicenseeApplication(userSettings);
+                var application = GetCurrentLicenseeApplication(userSettings, false);
                 if (application != null)
                 {
                     result = new JsonResult(application.AdoxioApplicationid);
@@ -816,6 +820,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
                 {
                     AddServiceAreasToApplication(item.OutsideAreas, adoxioApplication.AdoxioApplicationid);
+                }
+
+                if ((bool)applicationType.AdoxioIsshowhoursofsale && false)
+                {
+                    string filter = $"_adoxio_applicationtype_value eq {applicationType.AdoxioApplicationtypeid}";
+                    MicrosoftDynamicsCRMadoxioHoursofservice defaultHours = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.First();
+                    MicrosoftDynamicsCRMadoxioHoursofservice newHours = new MicrosoftDynamicsCRMadoxioHoursofservice()
+                    {
+                        ApplicationODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", adoxioApplication.AdoxioApplicationid),
+                        AdoxioSundayclose = defaultHours.AdoxioSundayclose,
+                        AdoxioSundayopen = defaultHours.AdoxioSundayopen,
+                        AdoxioMondayclose = defaultHours.AdoxioMondayclose,
+                        AdoxioMondayopen = defaultHours.AdoxioMondayopen,
+                        AdoxioTuesdayclose = defaultHours.AdoxioTuesdayclose,
+                        AdoxioTuesdayopen = defaultHours.AdoxioTuesdayopen,
+                        AdoxioWednesdayclose = defaultHours.AdoxioWednesdayclose,
+                        AdoxioWednesdayopen = defaultHours.AdoxioWednesdayopen,
+                        AdoxioThursdayclose = defaultHours.AdoxioThursdayclose,
+                        AdoxioThursdayopen = defaultHours.AdoxioThursdayopen,
+                        AdoxioFridayclose = defaultHours.AdoxioFridayclose,
+                        AdoxioFridayopen = defaultHours.AdoxioFridayopen,
+                        AdoxioSaturdayclose = defaultHours.AdoxioSaturdayclose,
+                        AdoxioSaturdayopen = defaultHours.AdoxioSaturdayopen
+                    };
+                    _dynamicsClient.Hoursofservices.Create(newHours);
+
                 }
             }
             catch (HttpOperationException httpOperationException)
@@ -1065,7 +1095,52 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     AddServiceAreasToApplication(item.CapacityArea, item.Id);
                 }
-                
+
+                if ((bool)item.ApplicationType?.ShowHoursOfSale)
+                {
+                    try
+                    {
+                        // get entityid
+                        string filter = $"_adoxio_application_value eq {id}";
+                        int count = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.Count();
+                        MicrosoftDynamicsCRMadoxioHoursofservice hoursEntity = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.FirstOrDefault();
+                        MicrosoftDynamicsCRMadoxioHoursofservice patchHoursEntity = new MicrosoftDynamicsCRMadoxioHoursofservice()
+                        {
+                            AdoxioSundayclose = (int?)item.ServiceHoursSundayClose,
+                            AdoxioSundayopen = (int?)item.ServiceHoursSundayOpen,
+                            AdoxioMondayclose = (int?)item.ServiceHoursMondayClose,
+                            AdoxioMondayopen = (int?)item.ServiceHoursMondayOpen,
+                            AdoxioTuesdayclose = (int?)item.ServiceHoursTuesdayClose,
+                            AdoxioTuesdayopen = (int?)item.ServiceHoursTuesdayOpen,
+                            AdoxioWednesdayclose = (int?)item.ServiceHoursWednesdayClose,
+                            AdoxioWednesdayopen = (int?)item.ServiceHoursWednesdayOpen,
+                            AdoxioThursdayclose = (int?)item.ServiceHoursThursdayClose,
+                            AdoxioThursdayopen = (int?)item.ServiceHoursThursdayOpen,
+                            AdoxioFridayclose = (int?)item.ServiceHoursFridayClose,
+                            AdoxioFridayopen = (int?)item.ServiceHoursFridayOpen,
+                            AdoxioSaturdayclose = (int?)item.ServiceHoursSaturdayClose,
+                            AdoxioSaturdayopen = (int?)item.ServiceHoursSaturdayOpen
+                        };
+
+                        if (hoursEntity != null)
+                        {
+                            _dynamicsClient.Hoursofservices.Update(hoursEntity.AdoxioHoursofserviceid, patchHoursEntity);
+                        }
+                        else
+                        {
+                            // Create hours of service
+                            string applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", id);
+                            patchHoursEntity.ApplicationODataBind = applicationUri;
+                            var serviceHours = _dynamicsClient.Hoursofservices.Create(patchHoursEntity);
+
+                        }
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error updating/creating application hours of service");
+                        throw;
+                    }
+                }
 
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
             }

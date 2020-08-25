@@ -17,6 +17,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   @Input() rootNode: LicenseeChangeLog;
   @Input() account: Account;
   @Input() licencesOnFile: boolean;
+  @Input() isReadOnly: boolean;
   @Input() changeTypeSuffix: string;
   @Input() addLabel: string = 'Add Associate';
   @Output() childAdded = new EventEmitter<LicenseeChangeLog>();
@@ -204,41 +205,43 @@ export class AssociateListComponent extends FormBase implements OnInit {
     this.personalHistoryItemsChange.emit(value);
   }
 
-  saveLog(item: LicenseeChangeLog, index: number): Observable<boolean> {
+  saveLog(index: number): Observable<boolean> {
     const valid = this.associates.at(index).valid;
+    const patchValue = <LicenseeChangeLog>{};
+    let value = this.associates.at(index).value;
     let saved = false;
 
     if (valid) {
-      item = Object.assign(new LicenseeChangeLog(), item || {}) as LicenseeChangeLog;
-      if (!item.isAddChangeType() && item.someFieldsHaveChanged()) {
-        item.changeType = `update${this.changeTypeSuffix}`;
-        this.associates.at(index).get('changeType').setValue(item.changeType);
+      value = Object.assign(new LicenseeChangeLog(), value || {}) as LicenseeChangeLog;
+      if (!value.isAddChangeType() && value.someFieldsHaveChanged()) {
+        patchValue.changeType = `update${this.changeTypeSuffix}`;;
       }
-      this.associates.at(index).get('edit').setValue(false);
-      this.associates.at(index).get('saved').setValue(true);
+      patchValue.edit = false;
+      patchValue.saved = true;
 
       if (this.changeTypeSuffix === 'Leadership') {
-        this.associates.at(index).get('isIndividual').setValue(true);
+        patchValue.isIndividual = true;
         // check to see if this is a sole prop.
         if (this.rootNode.businessType === 'SoleProprietorship') {
-          this.associates.at(index).get('isOwnerNew').setValue(true);
+          patchValue.isOwnerNew = true;
         }
         // check to see if this is a trust.
         if (this.rootNode.businessType === 'Trust') {
-          this.associates.at(index).get('isTrusteeNew').setValue(true);
+          patchValue.isTrusteeNew = true;
         }
         
       } else if (this.changeTypeSuffix === 'IndividualShareholder') {
-        this.associates.at(index).get('isIndividual').setValue(true);
-        this.associates.at(index).get('isShareholderNew').setValue(true);
+        patchValue.isIndividual = true;
+        patchValue.isShareholderNew = true;
       } else if (this.changeTypeSuffix === 'BusinessShareholder') {
-        this.associates.at(index).get('isIndividual').setValue(false);
-        this.associates.at(index).get('isShareholderNew').setValue(true);
+        patchValue.isIndividual = false;
+        patchValue.isShareholderNew = true;
       }
 
       
+      this.associates.at(index).patchValue(patchValue);
       this.associates.at(index).value.refObject = Object.assign(this.associates.at(index).value.refObject, this.associates.at(index).value);
-      this.emitValue();
+     this.emitValue();
       saved = true;
     } else {
       // put associate into edit mode to show validation errors
@@ -261,7 +264,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   saveAll(): Observable<boolean> {
     let saveResults = [];
     this.associates.getRawValue().forEach((value, index) => {
-        saveResults.push(this.saveLog(value, index));
+        saveResults.push(this.saveLog(index));
     });
 
     // save all org structure children

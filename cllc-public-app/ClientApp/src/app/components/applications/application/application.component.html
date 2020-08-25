@@ -249,7 +249,7 @@
 
               <!-- Proof of Zoning-->
               <section *ngIf="showZoning()">
-                <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
+                <app-proof-of-zoning *ngIf="application" [application]="application" [formGroup]="form" #proofOfZoning>
                 </app-proof-of-zoning>
                 <hr>
               </section>
@@ -298,6 +298,7 @@
             </div>
           </section>
         </section>
+        
 
             <!-- Local Government and Police Jurisdiction -->
             <section class="pt-3" *ngIf="showFormControl(application?.applicationType?.lGandPoliceSelectors)"
@@ -397,7 +398,7 @@
 
             <!-- Proof of Zoning-->
             <section *ngIf="showZoning() && !showFormControl(application?.applicationType?.newEstablishmentAddress)">
-              <app-proof-of-zoning *ngIf="application" [application]="application" #proofOfZoning>
+              <app-proof-of-zoning *ngIf="application" [application]="application" [formGroup]="form" #proofOfZoning>
               </app-proof-of-zoning>
               <hr>
       
@@ -474,8 +475,14 @@
               </app-business-plan>
             </section>
 
+            <div *ngIf="!isFormControlDisabled('isHasPatio')">
+              <mat-checkbox formControlName="isHasPatio">
+                Will the {{application?.applicationType?.name}} have a patio?
+              </mat-checkbox>
+            </div>
+
             <!-- Dynamic form details-->
-            <section *ngIf="application?.applicationType?.formReference && dynamicsForm?.tabs">
+            <section *ngIf="showDynamicForm(application?.applicationType?.formReference, dynamicsForm?.tabs)">
               <h3 class="blue-header">Application Details</h3>
               <!-- for each formTab on the linked form-->
               <div *ngFor="let formTab of dynamicsForm.tabs" class='content'>
@@ -880,9 +887,9 @@
 
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Site Photos"
-                  fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                  fileTypes="FILE MUST BE IN PDF, JPG, JPEG OR PNG FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
                   [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
-                  entityName="application" [useDocumentTypeForName]="true"
+                  entityName="application" [useDocumentTypeForName]="true" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
                   (numberOfUploadedFiles)="uploadedSitePhotos = $event" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD SITE PHOTOS DOCUMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
@@ -1825,7 +1832,7 @@
                                     && !lGHasApproved()
                                     && !lGHasRejected()
                                     && application?.applicationStatus === 'Intake'"
-          class=" btn btn-primary" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
+          class=" btn btn-primary ng-test-submit-for-lg-review" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
           <span><i class="fa fa-university mr-1"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
           <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
         </button>

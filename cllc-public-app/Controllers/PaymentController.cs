@@ -130,7 +130,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 Dictionary<string, string> redirectUrl;
                 redirectUrl = new Dictionary<string, string>();
 
-                bool isAlternateAccount = application.IsLiquor(); // set to true for Liquor.
+                bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // set to true for Liquor.
 
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount);
 
@@ -252,7 +252,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // dynamics determines the amount based on the licence type of the application
                 var orderamt = invoice.Totalamount;
 
-                bool isAlternateAccount = application.IsLiquor(); // set to true for Liquor.
+                bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // set to true for Liquor.
 
                 Dictionary<string, string> redirectUrl;
                 redirectUrl = new Dictionary<string, string>();
@@ -297,9 +297,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
 
-            bool isAlternateAccount = application.IsLiquor(); // determine if it is for liquor
+            bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // determine if it is for liquor
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
+
+            if (response.ContainsKey ("error"))
+            {
+                // handle error.
+                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
+                return StatusCode(503); // client will retry.
+            }
+
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
@@ -437,9 +445,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
 
-            bool isAlternateAccount = application.IsLiquor(); // set to true for Liquor.
+            bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // set to true for Liquor.
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
+
+            if (response.ContainsKey("error"))
+            {
+                // handle error.
+                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
+                return StatusCode(503); // client will retry.
+            }
+
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
@@ -783,6 +799,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             bool isAlternateAccount = false;  // in this case it is always false, as the worker process uses the Cannabis account.
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, workerId, isAlternateAccount);
+
+            if (response.ContainsKey("error"))
+            {
+                // handle error.
+                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for worker {workerId}");
+                return StatusCode(503); // client will retry.
+            }
+
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)

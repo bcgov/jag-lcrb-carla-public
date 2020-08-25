@@ -3,9 +3,9 @@
 
   <div *ngIf="licenseeApplicationLoaded">
     <section class="col-md-8">
-      <app-org-structure *ngIf="licenseeApplicationLoaded" [node]="treeRoot" [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure></app-org-structure>
+      <app-org-structure *ngIf="licenseeApplicationLoaded" [isReadOnly]="application?.isPaid" (reportAdditionalChanges)="loadData('create')" [node]="treeRoot" [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure></app-org-structure>
       <p>&nbsp;</p>
-      <section class="d-flex" *ngIf="licencesOnFile && LicenseeChangeLog.HasChanges(this.treeRoot)">
+      <section class="d-flex" *ngIf="!application?.isPaid && licencesOnFile && LicenseeChangeLog.HasChanges(this.treeRoot)">
 
         <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
         <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
@@ -14,6 +14,35 @@
             Because you have one or more licences, you are required to pay a fee for your organizational changes.
             Fees are calculated based on the type of change reported and the number of licences impacted.
           </p>
+          <table class="greyGridTable" style="background-color:white;">
+            <tr *ngIf="LicenseeChangeLog.HasLeadershipChanges(this.treeRoot)">
+              <td style="text-align:left;"><strong>Addition or change of, or change of name of, director, officer, senior manager</strong></td>
+              <td>$500 x {{this.numberOfCannabisLicences}} Cannabis Licences</td>
+              <td>$220 x {{this.numberOfLiquorLicences}} Liquor Licences</td>
+              <td><strong>${{this.calculateSubTotal(500,220)}}</strong></td>
+            </tr>
+            <tr *ngIf="LicenseeChangeLog.HasExternalShareholderChanges(this.treeRoot)">
+              <td style="text-align:left;"><strong>Licensee providing notice that
+                <ul>
+                <li>licensee has issued new shares to persons who are not existing shareholders, or</li>
+                <li>existing shareholders have transferred shares to persons who are not existing shareholders</li></ul></strong></td>
+              <td>$330 x {{this.numberOfCannabisLicences}} Cannabis Licences</td>
+              <td>$330 x {{this.numberOfLiquorLicences}} Liquor Licences</td>
+              <td><strong>${{this.calculateSubTotal(330,330)}}</strong></td>
+            </tr>
+            <tr *ngIf="LicenseeChangeLog.HasInternalShareholderChanges(this.treeRoot)">
+              <td style="text-align:left;"><strong>Licensee providing notice that
+                <ul>
+                <li>licensee has issued new shares to existing shareholders, or</li>
+                <li>existing shareholders have transferred shares to existing shareholders</li>
+              </ul></strong>
+            </td>
+              <td>$110 x {{this.numberOfCannabisLicences}} Cannabis Licences</td>
+              <td>$110 x {{this.numberOfLiquorLicences}} Liquor Licences</td>
+              <td><strong>${{this.calculateSubTotal(110,110)}}</strong></td>
+            </tr>
+          </table>
+            <br><br>
           <ul>
             <li>Applicable fees for cannabis licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1" target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
             <li>Applicable fees for liquor licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1" target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
@@ -22,7 +51,7 @@
         </div>
       </section>
 
-      <section class="error mt-3" *ngIf="validationErrors?.length">
+      <section class="error mt-3" *ngIf="validationErrors?.length && !application?.isPaid">
         <p *ngFor="let message of validationErrors">
           <span class="app-cancel">
             <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
@@ -31,7 +60,7 @@
         </p>
       </section>
 
-      <section class="mt-5" style="position: relative;">
+      <section *ngIf="!application?.isPaid" class="mt-5" style="position: relative;">
         <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
           <span>
             <i class="fa fa-save"></i>
@@ -49,6 +78,14 @@
                 (click)="save()">
           <i class="fa fa-save" style="color: #fff;"></i>
           {{getSaveLabel()}}
+        </button>
+      </section>
+
+      <section *ngIf="application?.isPaid" class="mt-5" style="position: relative;">
+        <button *ngIf="treeRoot" class="btn btn-primary" name="submit-application" style="float: right;"
+                (click)="saveReadOnly()">
+          <i class="fa fa-save" style="color: #fff;"></i>
+          Confirm Organization Information Is Complete
         </button>
       </section>
     </section>
@@ -124,7 +161,7 @@
         </div>
       </section> -->
 
-      <section class="submit-container mt-5" _ngcontent-ekk-c6="" style="background-color:#38598A; border-bottom: solid 4px #FFCC00; color: #fff; margin-bottom: 20px; padding: 30px; padding-top:20px;">
+      <section class="submit-container mt-5" _ngcontent-ekk-c6="" style="background-color:#38598A; border-bottom: solid 4px #FFCC00; color: #fff; margin-bottom: 20px; padding: 30px; padding-top:20px;" *ngIf="!application?.isPaid">
         <table>
           <tr>
             <td><h2 class="round-icon-wrapper"><i class="fas fa-info-circle" _ngcontent-jyo-c6="" style="color:#fff;"></i></h2></td>
@@ -132,7 +169,7 @@
           </tr>
         </table>
 
-        <div class="submit-content">
+        <div class="submit-content"> 
           <p>
             If your details are complete, you can click confirm at the bottom of the page to continue.
             Otherwise, update the information by providing the required documents and use the controls

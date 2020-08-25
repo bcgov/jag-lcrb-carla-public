@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentDataService } from '@services/payment-data.service';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-licence-fee-payment-confirmation',
@@ -27,6 +28,7 @@ export class LicenceFeePaymentConfirmationComponent implements OnInit {
   trnOrderNumber: string;
   invoice: string;
   isApproved = false;
+  retryCount = 0;
 
   paymentTransactionTitle: string;
   paymentTransactionMessage: string;
@@ -36,7 +38,8 @@ export class LicenceFeePaymentConfirmationComponent implements OnInit {
   /** payment-confirmation ctor */
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private paymentDataService: PaymentDataService
+    private paymentDataService: PaymentDataService,
+    public snackBar: MatSnackBar
   ) {
     this.route.queryParams.subscribe(params => {
       this.transactionId = params['trnId'];
@@ -55,6 +58,7 @@ export class LicenceFeePaymentConfirmationComponent implements OnInit {
    * Payment verification
    * */
   verify_payment() {
+    this.retryCount++;
     this.busy = this.paymentDataService.verifyLicenceFeePaymentSubmission(this.applicationId).subscribe(
       res => {
         const verifyPayResponse = <any>res;
@@ -109,8 +113,19 @@ export class LicenceFeePaymentConfirmationComponent implements OnInit {
 
         this.loaded = true;
       },
-      () => {
-        console.log('Error occured');
+      err => {
+        if (err === "503") {
+          if (this.retryCount < 30) {
+            this.snackBar.open('Attempt ' + this.retryCount + ' at payment verification, please wait...', 'Verifying Payment', { duration: 3500, panelClass: ['red - snackbar'] });
+            this.verify_payment();
+          }
+        }
+        else {
+          this.snackBar.open('An unexpected error occured, please contact the branch to check if payment was processed', 'Verifying Payment', { duration: 3500, panelClass: ['red - snackbar'] });
+          console.log('Unexpected Error occured:');
+          console.log(err);
+        }
+
       }
     );
   }

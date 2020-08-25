@@ -71,7 +71,7 @@ export class LicenseeChangeLog {
    */
   public static CreateFromLegalEntity(legalEntity: LegalEntity = null) {
     let newItem: LicenseeChangeLog = null;
-
+    
     if (legalEntity) {
       newItem = new LicenseeChangeLog();
       newItem.legalEntityId = legalEntity.id;
@@ -237,6 +237,23 @@ export class LicenseeChangeLog {
     const individualShareholderChanged = this.GetIndividualShareholderDecendents(changeLog).length > 0;
     const businessShareholderChanged = this.GetBusinessShareholderDecendents(changeLog).length > 0;
     return keyPersonnnelChanged || individualShareholderChanged || businessShareholderChanged;
+  }
+
+  public static HasLeadershipChanges(changeLog: LicenseeChangeLog): Boolean {
+    return this.GetKeyPersonnelDecendents(changeLog).length > 0;
+
+    // if a key personnel is also a shareholder, changing a shareholder amount (including shares) will return true
+  }
+
+  public static HasExternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
+    return (this.GetIndividualShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length +
+            this.GetBusinessShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length) > 0;
+  }
+
+  public static HasInternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
+
+    return (this.GetIndividualShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length +
+            this.GetBusinessShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length) > 0;
   }
 
   public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {

@@ -124,23 +124,23 @@ Scenario: Save for Later feature for private corporation org structure
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And I add a business shareholder with the same individual as a director and a shareholder
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And I add a second individual as a director and a shareholder to the business shareholder
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And I remove the latest director after saving
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And I remove the latest shareholder after saving
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And the latest director and shareholder is removed
     And I remove the business shareholder
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And the saved org structure is present
     And the account is deleted
@@ -156,7 +156,7 @@ Scenario: CRS application with mixed business shareholder types
     And I add in business shareholders of different business types
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
-    And I review the mixed business shareholder types security screening requirements
+    And I review the security screening requirements for mixed business shareholders
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
@@ -174,9 +174,9 @@ Scenario: Complex Save for Later mixed business shareholders
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I enter business shareholders of different business types to be saved for later
-    And I click on the Save for Later button
+    And I click on the button for Save for Later
     And I click on the Complete Organization Information button
-    And the saved for later mixed business shareholder org structure is correct
+    And I review the security screening requirements for saved for later mixed business shareholder
     And the account is deleted
     Then I see the login page
 
@@ -216,7 +216,7 @@ namespace bdd_tests
         [And(@"I modify the director name")]
         public void ModifyDirectorName()
         {
-            // click on the Edit button for Key Personnel
+            // click on the Edit button for Leader
             NgWebElement uiEditInfoButton = ngDriver.FindElement(By.XPath("//i/span"));
             uiEditInfoButton.Click();
 

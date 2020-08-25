@@ -49,7 +49,7 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the link for licensee representative
+    And I click on the link for Add Licensee Representative
     And I do not complete the application correctly
     And the expected validation errors are thrown for a licensee representative
     And the account is deleted

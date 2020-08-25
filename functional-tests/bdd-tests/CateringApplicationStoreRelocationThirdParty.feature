@@ -125,7 +125,7 @@ Scenario: Validation for Catering Store Relocation
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the link for relocation application
+    And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering store relocation application
@@ -146,7 +146,7 @@ Scenario: Validation for Catering Third Party Operator
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the link for third party operator 
+    And I click on the link for Add or Change a Third Party Operator
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering third party application
     And the account is deleted

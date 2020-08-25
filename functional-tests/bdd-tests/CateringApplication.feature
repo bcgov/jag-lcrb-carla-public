@@ -98,6 +98,22 @@ Scenario: Sole Proprietorship Catering Application
     And the account is deleted
     Then I see the login page
 
+@e2e @catering @localgovernment @cateringapp
+Scenario: Local Government Catering Application
+    Given I am logged in to the dashboard as a local government
+    And I click on the Start Application button for Catering
+    And I review the account profile for a local government
+    And I review the organization structure for a local government
+    And I click on the button for Submit Organization Information
+    And I complete the Catering application
+    And I click on the Submit button
+    And I review the security screening requirements for a local government
+    And I click on the button for Pay for Application for a local government 
+    And I enter the payment information
+    And I confirm the payment receipt for a Catering application
+    And the account is deleted
+    Then I see the login page
+
 @catering @validation @validation
 Scenario: Validation for Catering Application 
     Given I am logged in to the dashboard as a private corporation
