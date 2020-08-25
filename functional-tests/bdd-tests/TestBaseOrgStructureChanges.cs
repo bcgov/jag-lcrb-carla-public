@@ -24,9 +24,6 @@ namespace bdd_tests
         [And(@"I confirm that the director name has been updated")]
         public void DirectorNameUpdated()
         {
-            // click on Dashboard link
-            ClickOnDashboard();
-
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
