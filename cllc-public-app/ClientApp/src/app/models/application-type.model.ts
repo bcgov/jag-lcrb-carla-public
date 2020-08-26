@@ -84,5 +84,6 @@ export enum ApplicationTypeNames {
   MFG = "Manufacturer",
   UBV = "UBrew and UVin",
   LoungeAreaEndorsment = "Lounge Area Endorsement",
-  SpecialEventAreaEndorsement = "Special Event Area Endorsement"
+  SpecialEventAreaEndorsement = "Special Event Area Endorsement",
+  LRSStructuralChange = "LRS Structural Change"
 }
