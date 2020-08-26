@@ -203,6 +203,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       isOwner: ['', []],
       isOwnerBusiness: ['', []],
       isHasPatio: ['', []],
+      hasCoolerAccess: ['', []],
       hasValidInterest: ['', []],
       willhaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
@@ -419,6 +420,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
     //add guard
     if (!(this.application && this.application.applicationType)) {
       return;
+    }
+
+    if (this.application.applicationType.name !== ApplicationTypeNames.LRSStructuralChange) {
+      this.form.get('hasCoolerAccess').disable();
     }
 
     if (this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
