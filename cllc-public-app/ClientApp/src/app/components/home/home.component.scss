@@ -38,6 +38,22 @@ p {
     max-width: 775px;
 }
 
+.warning {
+    background-color: #E1E8F2;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    div:first-of-type {
+        margin-right: 10px;
+        font-size: 30px;
+        color: #38598a;
+    }
+    p {
+        font-size: 12px;
+    }
+}
+
 .side-box {
     max-width: 400px;
     margin: 40px 0px 40px -15px;
