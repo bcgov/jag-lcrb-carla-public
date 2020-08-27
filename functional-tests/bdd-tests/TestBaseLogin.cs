@@ -183,7 +183,7 @@ namespace bdd_tests
         {
             if (user == "local government for Saanich")
             {
-                string localGovt = "Saanich";
+                string localGovt = "login/token/Saanich";
                 ngDriver.IgnoreSynchronization = true;
                 ngDriver.Navigate().GoToUrl($"{baseUri}{localGovt}");
                 ngDriver.IgnoreSynchronization = false;
