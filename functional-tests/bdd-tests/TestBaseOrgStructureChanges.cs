@@ -325,7 +325,7 @@ namespace bdd_tests
             */
 
             // confirm that the page loads
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Detailed Organization Information')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Legal Entity Structure')]")).Displayed);
         }
 
 
