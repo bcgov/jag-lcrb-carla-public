@@ -24,7 +24,7 @@ namespace bdd_tests
         public void ReviewOrganizationStructure(string businessType)
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             if (businessType == " private corporation")

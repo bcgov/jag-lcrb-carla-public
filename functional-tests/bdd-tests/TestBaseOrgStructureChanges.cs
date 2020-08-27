@@ -32,7 +32,7 @@ namespace bdd_tests
             ClickReviewOrganizationInformation();
 
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // check that the director name has been updated
@@ -45,7 +45,7 @@ namespace bdd_tests
         public void SameDirectorShareholder()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // find the upload test files in the bdd-tests\upload_files folder
@@ -233,7 +233,7 @@ namespace bdd_tests
         public void DeleteDirectorRecord()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // click on the delete button for leader > director record    
@@ -250,7 +250,7 @@ namespace bdd_tests
         public void ShareholderRecordDisplayed()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // check that the director email is not displayed to confirm deletion
@@ -265,7 +265,7 @@ namespace bdd_tests
         public void ModifyOnlyDirectorRecord()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // create new name for same individual
@@ -300,7 +300,7 @@ namespace bdd_tests
         public void DirectorShareholderNameIdentical()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // check that the director first name has been updated
@@ -321,7 +321,7 @@ namespace bdd_tests
         public void OrgStructureDisplays()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // confirm that the page loads
@@ -333,7 +333,7 @@ namespace bdd_tests
         public void BusinessShareholderSameDirShare()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // create the business shareholder data
@@ -460,7 +460,7 @@ namespace bdd_tests
         public void BusinessShareholderSameDirShare2()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // create business shareholder leader #2 data
@@ -534,7 +534,7 @@ namespace bdd_tests
         public void OrgStructureCorrect()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // confirm that first individual is in correct positions
@@ -555,7 +555,7 @@ namespace bdd_tests
         public void OrgStructureCorrectPayment()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // confirm that first individual is in correct positions
@@ -576,7 +576,7 @@ namespace bdd_tests
         public void RemoveLatestDirectorShareholder()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // delete the most recent director
@@ -593,7 +593,7 @@ namespace bdd_tests
         public void RemoveLatestDirectorAfterSave()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // delete the most recent director
@@ -606,7 +606,7 @@ namespace bdd_tests
         public void RemoveLatestShareholderAfterSave()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // delete the most recent shareholder 
@@ -619,7 +619,7 @@ namespace bdd_tests
         public void LatestDirectorShareholderRemoved()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // confirm that the most recent director and shareholder not present
@@ -631,7 +631,7 @@ namespace bdd_tests
         public void RemoveBusinessShareholder()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // delete the business shareholder
@@ -644,7 +644,7 @@ namespace bdd_tests
         public void BusinessShareholderRemoved()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             // confirm that the business shareholder not present	
@@ -663,7 +663,7 @@ namespace bdd_tests
         public void MixedBusinessShareholders()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             /********** Business Shareholder - Public Corporation **********/
@@ -1030,7 +1030,7 @@ namespace bdd_tests
         public void ReviewMixedBusinessShareholdersOrgStructure()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             //TODO
@@ -1041,7 +1041,7 @@ namespace bdd_tests
         public void SaveForLaterMixedBusinessShareholders()
         {
             /* 
-            Page Title: [client name] Detailed Organization Information
+            Page Title: [client name] Legal Entity Structure
             */
 
             /********** Business Shareholder - Public Corporation **********/
