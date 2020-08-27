@@ -41,6 +41,8 @@ namespace bdd_tests
             string contactEmail = "contact@email.com";
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
+            string localGovernmentSaanich = "Saanich";
+            string policeJurisdictionSaanich = "Saanich";
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
@@ -74,19 +76,38 @@ namespace bdd_tests
             NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
             uiALRInclusion.Click();
 
-            // search for and select the indigenous nation
-            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
-            uiIndigenousNation.SendKeys(indigenousNation);
+            if (manufacturerType == "winery in Saanich")
+            {
+                // search for and select the local government
+                NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+                uiIndigenousNation.SendKeys(localGovernmentSaanich);
 
-            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
-            uiIndigenousNation2.Click();
+                NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
+                uiIndigenousNation2.Click();
 
-            // search for and select the police jurisdiction
-            NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
-            uiPoliceJurisdiction.SendKeys(policeJurisdiction);
+                // search for and select the police jurisdiction
+                NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
+                uiPoliceJurisdiction.SendKeys(policeJurisdictionSaanich);
 
-            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
-            uiPoliceJurisdiction2.Click();
+                NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
+                uiPoliceJurisdiction2.Click();
+            }
+            else
+            {
+                // search for and select the indigenous nation
+                NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+                uiIndigenousNation.SendKeys(indigenousNation);
+
+                NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
+                uiIndigenousNation2.Click();
+
+                // search for and select the police jurisdiction
+                NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
+                uiPoliceJurisdiction.SendKeys(policeJurisdiction);
+
+                NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
+                uiPoliceJurisdiction2.Click();
+            }
 
             // enter the store email
             NgWebElement uiEstabEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentEmail']"));
@@ -96,7 +117,7 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentPhone']"));
             uiEstabPhone.SendKeys(storePhone);
 
-            if (manufacturerType == "winery")
+            if ((manufacturerType == "winery") || (manufacturerType == "winery in Saanich"))
             {
                 // select winery radio button
                 NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-5"));
@@ -139,7 +160,7 @@ namespace bdd_tests
             NgWebElement uiUploadProductionSales = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
             uiUploadProductionSales.SendKeys(productionSalesPath);
 
-            if (manufacturerType == "winery")
+            if ((manufacturerType == "winery") || (manufacturerType == "winery in Saanich"))
             {
                 // create winery test data
                 string grapesAcres = "100";
