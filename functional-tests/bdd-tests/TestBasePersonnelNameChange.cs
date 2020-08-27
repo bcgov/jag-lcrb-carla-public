@@ -33,7 +33,7 @@ namespace bdd_tests
                 ClickReviewOrganizationInformation();
 
                 /* 
-                Page Title: [client name] Detailed Organization Information
+                Page Title: [client name] Legal Entity Structure
                 */
 
                 // click on the Edit button for Leader (partnership, sole proprietorship, private corporation, or society)
@@ -143,7 +143,7 @@ namespace bdd_tests
                 ClickReviewOrganizationInformation();
 
                 /* 
-                Page Title: [client name] Detailed Organization Information
+                Page Title: [client name] Legal Entity Structure
                 */
 
                 // click on the Edit button for Leader (partnership, sole proprietorship, public corporation, or society)
