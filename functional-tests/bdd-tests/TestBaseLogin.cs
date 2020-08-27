@@ -131,6 +131,7 @@ namespace bdd_tests
 
             // load the dashboard page
             string test_start = "login/token/AT" + DateTime.Now.Ticks.ToString() + random.Next(0, 999).ToString();
+            returnUser = test_start;
             ngDriver.IgnoreSynchronization = true;
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
             ngDriver.IgnoreSynchronization = false;
@@ -174,6 +175,26 @@ namespace bdd_tests
         public void SeeLogin()
         {
             Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+        }
+
+
+        [And(@"I log in as (.*)")]
+        public void LocalGovernmentLogin(string user)
+        {
+            if (user == "local government for Saanich")
+            {
+                string localGovt = "Saanich";
+                ngDriver.IgnoreSynchronization = true;
+                ngDriver.Navigate().GoToUrl($"{baseUri}{localGovt}");
+                ngDriver.IgnoreSynchronization = false;
+            }
+
+            if (user == "the manufacturer")
+            {
+                ngDriver.IgnoreSynchronization = true;
+                ngDriver.Navigate().GoToUrl($"{baseUri}{returnUser}");
+                ngDriver.IgnoreSynchronization = false;
+            }
         }
 
 
