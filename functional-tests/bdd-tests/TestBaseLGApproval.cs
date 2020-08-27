@@ -35,5 +35,36 @@ namespace bdd_tests
         {
 
         }
+
+
+        [And(@"I specify that the zoning allows the endorsement")]
+        public void ZoningAllowsEndorsement()
+        {
+
+        }
+
+
+        [And(@"I specify my contact details")]
+        public void SpecifyContactDetails()
+        {
+
+        }
+
+
+        [And(@"I review the local government")]
+        public void ReviewLocalGovernment()
+        {
+
+        }
+
+
+        [And(@"the dashboard status is updated as (.*)")]
+        public void DashboardStatus(string status)
+        {
+            if (status == "Application Under Review")
+            { 
+            
+            }
+        }
     }
 }

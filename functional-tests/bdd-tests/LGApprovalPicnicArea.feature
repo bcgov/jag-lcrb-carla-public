@@ -20,7 +20,7 @@ Scenario: Local Government Approval for Picnic Area Endorsement
     And I specify my contact details
     And I log in as the manufacturer
     And I review the local government
-    And I submit the application
+    And I click on the Submit button
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page 
