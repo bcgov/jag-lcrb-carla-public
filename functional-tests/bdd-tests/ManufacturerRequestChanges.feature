@@ -19,8 +19,8 @@ Scenario: Winery Transfer Licence
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a transfer of ownership
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @winery
 Scenario: Winery Third Party Operator
@@ -35,8 +35,8 @@ Scenario: Winery Third Party Operator
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a third party operator
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @winery
 Scenario: Winery Picnic Area Endorsement Application
@@ -51,8 +51,8 @@ Scenario: Winery Picnic Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a picnic area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @winery
 Scenario: Winery On-Site Store Endorsement Application
@@ -67,8 +67,8 @@ Scenario: Winery On-Site Store Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @winery
 Scenario: Winery Lounge Area Endorsement Application
@@ -83,8 +83,8 @@ Scenario: Winery Lounge Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a lounge area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @winery
 Scenario: Winery Establishment Name Change Application
@@ -99,8 +99,8 @@ Scenario: Winery Establishment Name Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a valid store name or branding change for Manufacturing
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @winery
 Scenario: Winery Facility Structural Change Application
@@ -115,8 +115,8 @@ Scenario: Winery Facility Structural Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a facility structural change
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @winery
 Scenario: Winery Location Change Application
@@ -131,8 +131,8 @@ Scenario: Winery Location Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a location change
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @winery
 Scenario: Winery Special Event Area Endorsement Application
@@ -147,8 +147,8 @@ Scenario: Winery Special Event Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a special event area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @winery
 Scenario: Winery Structural Alterations to an Approved Lounge or Special Events Area Application
@@ -163,8 +163,8 @@ Scenario: Winery Structural Alterations to an Approved Lounge or Special Events 
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request structural alterations to an approved lounge or special events area
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 #------------------------
 # Brewery Change Requests
@@ -642,7 +642,7 @@ Scenario: Co-packer Special Event Area Endorsement Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @winery
+@e2e @privatecorporation @manufacturer @copacker
 Scenario: Co-packer Structural Alterations to an Approved Lounge or Special Events Area Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
