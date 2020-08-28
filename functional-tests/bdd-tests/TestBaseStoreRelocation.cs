@@ -121,8 +121,6 @@ namespace bdd_tests
         [And(@"I confirm the relocation request is displayed on the dashboard")]
         public void RequestedRelocationOnDashboard()
         {
-            ClickOnDashboard();
-
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */

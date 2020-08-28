@@ -31,7 +31,7 @@ Scenario: Change private corporation director name and pay fee
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Cannabis
-    And I click on the Dashboard link
+    And I click on the link for Dashboard
     And I click on the Review Organization Information button
     And I modify the director name
     And I click on the button for Submit Organization Information
@@ -160,7 +160,7 @@ Scenario: CRS application with mixed business shareholder types
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I return to the dashboard
+    And I click on the link for Return to Dashboard
     And I click on the Complete Organization Information button
     And the mixed business shareholder org structure is correct
     And the account is deleted
@@ -252,7 +252,7 @@ namespace bdd_tests
         }
 
         [And(@"the director name is now updated")]
-        public void DirectorNameUpdated()
+        public void DirectorNameNowUpdated()
         {
             // click on Return to Dashboard link
             string retDash = "Return to Dashboard";
