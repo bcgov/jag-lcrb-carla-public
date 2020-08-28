@@ -34,6 +34,9 @@ namespace bdd_tests
             NgWebElement uiLoungeAreaEndorsement = ngDriver.FindElement(By.LinkText(loungeAreaEndorsement));
             uiLoungeAreaEndorsement.Click();
 
+            System.Threading.Thread.Sleep(9000);
+
+
             NgWebElement uiJobTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='jobTitle']"));
             uiJobTitle.SendKeys(jobTitle);
 
@@ -44,6 +47,8 @@ namespace bdd_tests
             // click on the Continue to Application button
             NgWebElement uiContinueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp.save-cont.btn-primary"));
             uiContinueToApplicationButton.Click();
+
+
 
             /* 
             Page Title: Lounge Area Endorsement Application
