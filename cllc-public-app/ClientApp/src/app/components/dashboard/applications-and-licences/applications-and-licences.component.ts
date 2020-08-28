@@ -472,6 +472,13 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         return true;
     }
   }
+
+  getApplicationStatusText(status: string) {
+    if (status === 'Processed') {
+      return 'Application Under Review';
+    }
+    return status;
+  }
 }
 
 @Component({
