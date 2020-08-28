@@ -479,6 +479,13 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     }
     return status;
   }
+
+  getApplicationLink(item: ApplicationSummary) {
+    if (item.isForLicence || this.isApprovedByLGAndNotSubmitted(item)) {
+      return `/multi-step-application/${item.id}`;
+    }
+    return `/account-profile/${item.id}`;
+  }
 }
 
 @Component({
