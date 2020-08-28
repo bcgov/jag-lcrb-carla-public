@@ -5,7 +5,7 @@
         <ng-container *ngIf="!terminatedApplicationExists">
             <div>
                 You have not yet activated your review capabilities. Before you can review liquor applications, you must first
-                request activation from LCRB. Activation ensures that you will maintain full control of you liquor approvals.
+                request activation from LCRB. Activation ensures that you will maintain full control of your liquor approvals.
             </div>
             <div class="d-flex flex-row-reverse">
                 <button *ngIf="!nonTerminatedApplicationExists" (click)="requestApprovals(); requestBtn.disabled = true;" class="btn btn-primary mt-3" #requestBtn>REQUEST ACTIVATION</button>

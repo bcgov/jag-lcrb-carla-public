@@ -5,7 +5,9 @@
 
       <div [formGroup]="form" style="padding-left: 45px; position: relative">
         <!-- Title -->
-        <h1 class="ngtest-page-title" *ngIf="!this.isOpenedByLGForApproval">{{ htmlContent?.title }}</h1>
+        <h1 class="ngtest-page-title" *ngIf="!this.isOpenedByLGForApproval">{{ htmlContent?.title }}
+          <span *ngIf="application?.applicationStatus === 'Pending for LG/FN/Police Feedback'">(Sent to LG/IN)</span>
+        </h1>
         <h1 class="ngtest-page-title"
           *ngIf="this.isOpenedByLGForApproval && application?.applicationType.isShowLGINApproval">Provide Comment on
           Application</h1>
@@ -256,7 +258,7 @@
               <section>
               <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
                 [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status"
-                [isFullWidth]="true">
+                [isFullWidth]="true" *ngIf="application?.applicationType?.hasALRQuestion">
                 <mat-radio-group formControlName="isAlr">
                   <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
                   <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
@@ -402,48 +404,49 @@
               </app-proof-of-zoning>
               <hr>
       
-                            <section>
-                            <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
-                              [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status"
-                              [isFullWidth]="true">
-                              <mat-radio-group formControlName="isAlr">
-                                <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
-                                <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
-                              </mat-radio-group>
-                            </app-field>
-                            <div *ngIf="application.licenseType === 'Manufacturer' && this.form.get('isAlr').value === true">
-                              <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
-                              <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
-                                <p><strong>By submitting this application to LCRB, you are confirming that your licenced establishment
-                                    will adhere to the requirements laid out in the <a
-                                      href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019"
-                                      target="_blank">Agricultural Land Reserve (ALR) Use Regulation</a>.</strong></p>
-                              </div>
-                            </div>
-                          </section>
-              
-              
-                            <!-- Letter of Intent -->
-                            <section *ngIf="application?.applicationType.name === 'Special Event Area Endorsement'">
-                              <h3 class="blue-header">Letter of Intent</h3>
-                              <section class="content-bottom">
-                              <div *ngIf="htmlContent.letterOfIntent">
-                                <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
-                              </div>
-              
-                              <section>
-                                <app-file-uploader *ngIf="applicationId" documentType="letterOfIntent"
-                                  [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
-                                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                                  [extensions]="['pdf']"
-                                  (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="applicationId"
-                                  [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
-                                </app-file-uploader>
-                              </section>
-                            </section>
-                            </section>
-              
+              <section *ngIf="application?.applicationType?.hasALRQuestion">
+                <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
+                  [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status"
+                  [isFullWidth]="true">
+                  <mat-radio-group formControlName="isAlr">
+                    <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+                    <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
+                  </mat-radio-group>
+                </app-field>
+                <div *ngIf="application.licenseType === 'Manufacturer' && this.form.get('isAlr').value === true">
+                  <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
+                  <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
+                    <p>
+                      <strong>By submitting this application to LCRB, you are confirming that your licenced establishment
+                        will adhere to the requirements laid out in the <a
+                          href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019"
+                          target="_blank">Agricultural Land Reserve (ALR) Use Regulation</a>.</strong>
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+
+              <!-- Letter of Intent -->
+              <section *ngIf="application?.applicationType.name === 'Special Event Area Endorsement'">
+                <h3 class="blue-header">Letter of Intent</h3>
+                <section class="content-bottom">
+                  <div *ngIf="htmlContent.letterOfIntent">
+                    <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
+                  </div>
+
+                  <section>
+                    <app-file-uploader *ngIf="applicationId" documentType="letterOfIntent"
+                      [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                      [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
+                      fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                      [extensions]="['pdf']"
+                      (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="applicationId"
+                      [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+                    </app-file-uploader>
+                  </section>
+                </section>
+              </section>
             </section>
 
             <!-- Store Contact Info -->
@@ -476,9 +479,14 @@
             </section>
 
             <div *ngIf="!isFormControlDisabled('isHasPatio')">
-              <mat-checkbox formControlName="isHasPatio">
-                Will the {{application?.applicationType?.name}} have a patio?
-              </mat-checkbox>
+              <app-field label="Will the application have a patio?"
+                [valid]="isValidOrNotTouched('isHasPatio')" [showChevrons]="false" errorMessage="Specify if application will have a patio"
+                [isFullWidth]="true">
+                <mat-radio-group formControlName="isHasPatio">
+                  <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+                  <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
+                </mat-radio-group>
+              </app-field>
             </div>
 
             <!-- Dynamic form details-->
@@ -575,9 +583,9 @@
               <h3 class="blue-header">DESCRIPTION OF PROPOSED CHANGE</h3>
               <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement'">
                 <div class="padded-section">
-                  <app-field label="Please briefly outline the  proposed change" [required]="true" [isFullWidth]="true"
+                  <app-field label="Please briefly outline the proposed change" [required]="true" [isFullWidth]="true"
                     [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
-                    errorMessage="Please enter a description ">
+                    errorMessage="Please enter a description">
                     <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000"
                       minlength="10" id="description1"></textarea>
                   </app-field>
@@ -595,6 +603,22 @@
                 </div>
               </div>
             </section>
+
+            <!-- Cooler access -->
+            <mat-card *ngIf="!isFormControlDisabled('hasCoolerAccess')" class="mat-elevation-z0" style="margin-bottom: 10px;">
+              <section style="display: flex; justify-content: space-between; width: 100%;">
+                <div class="question-label">
+                  Is the public permitted to walk into the cooler space?
+                </div>
+                <div style="flex: 0 0 85px;">
+                  <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('hasCoolerAccess')}"
+                    formControlName="hasCoolerAccess" aria-label="Font Style">
+                    <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                    <mat-button-toggle [value]="false">No</mat-button-toggle>
+                  </mat-button-toggle-group>
+                </div>
+              </section>
+            </mat-card>
 
             <!-- Photos or Renderings of Signage-->
             <div class="ngtest-photo-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
@@ -661,9 +685,7 @@
             </mat-card>
 
 
-
             <!-- Floor Plan-->
-
             <section *ngIf="showFormControl(application?.applicationType?.floorPlan)">
               <div class="ngtest-floor-plan" [formGroup]="form">
                 <hr><br>
