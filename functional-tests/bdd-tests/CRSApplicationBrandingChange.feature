@@ -19,8 +19,8 @@ Scenario: Indigenous Nation CRS Name Branding Change
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @partnership @crsbranding
 Scenario: Partnership CRS Name Branding Change
@@ -38,8 +38,8 @@ Scenario: Partnership CRS Name Branding Change
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @privatecorporation @crsbranding
 Scenario: Private Corporation CRS Name Branding Change
@@ -57,8 +57,8 @@ Scenario: Private Corporation CRS Name Branding Change
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @publiccorporation @crsbranding2
 Scenario: Public Corporation CRS Name Branding Change
@@ -76,8 +76,8 @@ Scenario: Public Corporation CRS Name Branding Change
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @society @crsbranding2
 Scenario: Society CRS Name Branding Change
@@ -95,8 +95,8 @@ Scenario: Society CRS Name Branding Change
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @soleproprietorship @crsbranding
 Scenario: Sole Proprietorship CRS Name Branding Change
@@ -114,8 +114,8 @@ Scenario: Sole Proprietorship CRS Name Branding Change
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @privatecorporation @validation
 Scenario: Validation for CRS Branding Change 
@@ -135,5 +135,5 @@ Scenario: Validation for CRS Branding Change
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a CRS Branding Change application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page

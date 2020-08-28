@@ -183,8 +183,8 @@ Scenario: Brewery Transfer Licence
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a transfer of ownership
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @brewery
 Scenario: Brewery Third Party Operator
@@ -199,8 +199,8 @@ Scenario: Brewery Third Party Operator
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a third party operator
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @brewery
 Scenario: Brewery Picnic Area Endorsement Application
@@ -215,8 +215,8 @@ Scenario: Brewery Picnic Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a picnic area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @brewery
 Scenario: Brewery On-Site Store Endorsement Application
@@ -231,8 +231,8 @@ Scenario: Brewery On-Site Store Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @brewery
 Scenario: Brewery Lounge Area Endorsement Application
@@ -247,8 +247,8 @@ Scenario: Brewery Lounge Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a lounge area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @brewery
 Scenario: Brewery Establishment Name Change Application
@@ -263,8 +263,8 @@ Scenario: Brewery Establishment Name Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a valid store name or branding change for Manufacturing
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @brewery
 Scenario: Brewery Facility Structural Change Application
@@ -279,8 +279,8 @@ Scenario: Brewery Facility Structural Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a facility structural change
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @brewery
 Scenario: Brewery Location Change Application
@@ -295,8 +295,8 @@ Scenario: Brewery Location Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a location change
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @brewery
 Scenario: Brewery Special Event Area Endorsement Application
@@ -311,8 +311,8 @@ Scenario: Brewery Special Event Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a special event area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @winery
 Scenario: Brewery Structural Alterations to an Approved Lounge or Special Events Area Application
@@ -327,8 +327,8 @@ Scenario: Brewery Structural Alterations to an Approved Lounge or Special Events
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request structural alterations to an approved lounge or special events area
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 #------------------------
 # Distillery Change Requests
@@ -347,8 +347,8 @@ Scenario: Distillery Transfer Licence
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a transfer of ownership
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @distillery
 Scenario: Distillery Third Party Operator
@@ -363,8 +363,8 @@ Scenario: Distillery Third Party Operator
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a third party operator
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @distillery
 Scenario: Distillery Picnic Area Endorsement Application
@@ -379,8 +379,8 @@ Scenario: Distillery Picnic Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a picnic area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @distillery
 Scenario: Distillery On-Site Store Endorsement Application
@@ -395,8 +395,8 @@ Scenario: Distillery On-Site Store Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @distillery
 Scenario: Distillery Lounge Area Endorsement Application
@@ -411,8 +411,8 @@ Scenario: Distillery Lounge Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a lounge area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @distillery
 Scenario: Distillery Establishment Name Change Application
@@ -427,8 +427,8 @@ Scenario: Distillery Establishment Name Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a valid store name or branding change for Manufacturing
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @distillery
 Scenario: Distillery Facility Structural Change Application
@@ -443,8 +443,8 @@ Scenario: Distillery Facility Structural Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a facility structural change
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @distillery
 Scenario: Distillery Location Change Application
@@ -459,8 +459,8 @@ Scenario: Distillery Location Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a location change
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @distillery
 Scenario: Distillery Special Event Area Endorsement Application
@@ -475,8 +475,8 @@ Scenario: Distillery Special Event Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a special event area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @winery
 Scenario: Distillery Structural Alterations to an Approved Lounge or Special Events Area Application
@@ -491,8 +491,8 @@ Scenario: Distillery Structural Alterations to an Approved Lounge or Special Eve
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request structural alterations to an approved lounge or special events area
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 #------------------------
 # Co-packer Change Requests
@@ -511,8 +511,8 @@ Scenario: Co-packer Transfer Licence
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a transfer of ownership
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
 Scenario: Co-packer Third Party Operator
@@ -527,8 +527,8 @@ Scenario: Co-packer Third Party Operator
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a third party operator
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
 Scenario: Co-packer Picnic Area Endorsement Application
@@ -543,8 +543,8 @@ Scenario: Co-packer Picnic Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a picnic area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
 Scenario: Co-packer On-Site Store Endorsement Application
@@ -559,8 +559,8 @@ Scenario: Co-packer On-Site Store Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
 Scenario: Co-packer Lounge Area Endorsement Application
@@ -575,8 +575,8 @@ Scenario: Co-packer Lounge Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a lounge area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
 Scenario: Co-packer Establishment Name Change Application
@@ -591,8 +591,8 @@ Scenario: Co-packer Establishment Name Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a valid store name or branding change for Manufacturing
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
 Scenario: Co-packer Facility Structural Change Application
@@ -607,8 +607,8 @@ Scenario: Co-packer Facility Structural Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a facility structural change
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
 Scenario: Co-packer Location Change Application
@@ -623,8 +623,8 @@ Scenario: Co-packer Location Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a location change
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
 Scenario: Co-packer Special Event Area Endorsement Application
@@ -639,8 +639,8 @@ Scenario: Co-packer Special Event Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a special event area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
 Scenario: Co-packer Structural Alterations to an Approved Lounge or Special Events Area Application
@@ -655,8 +655,8 @@ Scenario: Co-packer Structural Alterations to an Approved Lounge or Special Even
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request structural alterations to an approved lounge or special events area
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 #-------------------------------
 # Manufacturing Validation Tests
@@ -678,8 +678,8 @@ Scenario: Validation for Manufacturer Transfer of Ownership
     And I click on the link for Transfer Licence
     And I do not complete the application correctly
     And the expected validation errors are thrown for a transfer of ownership
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @validation
 Scenario: Validation for Manufacturer Third Party Operator
@@ -697,8 +697,8 @@ Scenario: Validation for Manufacturer Third Party Operator
     And I click on the link for Add or Change a Third Party Operator
     And I do not complete the application correctly
     And the expected validation errors are thrown for a third party operator
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @validation
 Scenario: Validation for Manufacturer Picnic Area Endorsement
@@ -717,8 +717,8 @@ Scenario: Validation for Manufacturer Picnic Area Endorsement
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a picnic area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @validation
 Scenario: Validation for Manufacturer On-Site Store Endorsement
@@ -737,8 +737,8 @@ Scenario: Validation for Manufacturer On-Site Store Endorsement
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for an on-site store endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @validation
 Scenario: Validation for Manufacturer Lounge Area Endorsement
@@ -757,8 +757,8 @@ Scenario: Validation for Manufacturer Lounge Area Endorsement
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a lounge area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @validation
 Scenario: Validation for Manufacturer Establishment Name Change
@@ -777,8 +777,8 @@ Scenario: Validation for Manufacturer Establishment Name Change
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Branding Change application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @validation
 Scenario: Validation for Manufacturer Facility Structural Change Application
@@ -797,8 +797,8 @@ Scenario: Validation for Manufacturer Facility Structural Change Application
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a facility structural change application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @validation
 Scenario: Validation for Manufacturer Location Change Application
@@ -817,8 +817,8 @@ Scenario: Validation for Manufacturer Location Change Application
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a location change application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @validation
 Scenario: Validation for Special Event Area Endorsement Application
@@ -837,8 +837,8 @@ Scenario: Validation for Special Event Area Endorsement Application
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a special event area endorsement
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @privatecorporation @manufacturer @validation
 Scenario: Validation for Structural Alterations to an Approved Lounge or Special Events Area
@@ -857,5 +857,5 @@ Scenario: Validation for Structural Alterations to an Approved Lounge or Special
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a structural alterations request
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page

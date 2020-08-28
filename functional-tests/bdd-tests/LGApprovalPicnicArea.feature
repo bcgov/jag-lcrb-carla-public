@@ -22,5 +22,5 @@ Scenario: Local Government Approval for Picnic Area Endorsement
     And I review the local government
     And I click on the Submit button
     And the dashboard status is updated as Application Under Review
-    And the account is deleted
-    Then I see the login page 
+    # And the account is deleted
+    # Then I see the login page 

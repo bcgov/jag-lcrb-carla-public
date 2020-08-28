@@ -21,8 +21,8 @@ Scenario: Catering Indigenous Nation Branding Change
     And the correct terms and conditions are displayed for Catering
     # And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @partnership @cateringbranding2
 Scenario: Catering Partnership Branding Change
@@ -42,8 +42,8 @@ Scenario: Catering Partnership Branding Change
     And the correct terms and conditions are displayed for Catering
     # And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @privatecorporation @cateringbranding3
 Scenario: Catering Private Corporation Branding Change
@@ -63,8 +63,8 @@ Scenario: Catering Private Corporation Branding Change
     And the correct terms and conditions are displayed for Catering
     # And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @publiccorporation @cateringbranding4
 Scenario: Catering Public Corporation Branding Change
@@ -84,8 +84,8 @@ Scenario: Catering Public Corporation Branding Change
     And the correct terms and conditions are displayed for Catering
     # And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @society @cateringbranding5
 Scenario: Catering Society Branding Change
@@ -105,8 +105,8 @@ Scenario: Catering Society Branding Change
     And the correct terms and conditions are displayed for Catering
     # And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @soleproprietorship @cateringbranding6
 Scenario: Catering Sole Proprietorship Branding Change
@@ -126,8 +126,8 @@ Scenario: Catering Sole Proprietorship Branding Change
     And the correct terms and conditions are displayed for Catering
     # And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @privatecorporation @validation
 Scenario: Validation for Catering Branding Change 
@@ -147,5 +147,5 @@ Scenario: Validation for Catering Branding Change
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Branding Change application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
