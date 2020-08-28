@@ -22,8 +22,8 @@ Scenario: Indigenous Nation Cannabis Store Changes
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @partnership @crsstorechangespartnership
 Scenario: Partnership Cannabis Store Changes
@@ -44,8 +44,8 @@ Scenario: Partnership Cannabis Store Changes
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @privatecorporation @crsstorechangesprivcorp
 Scenario: Private Corporation Cannabis Store Changes
@@ -66,8 +66,8 @@ Scenario: Private Corporation Cannabis Store Changes
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @publiccorporation @crsstorechangespubcorp
 Scenario: Public Corporation Cannabis Store Changes
@@ -88,8 +88,8 @@ Scenario: Public Corporation Cannabis Store Changes
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @society @crsstorechangessociety
 Scenario: Society Cannabis Store Changes
@@ -110,8 +110,8 @@ Scenario: Society Cannabis Store Changes
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @soleproprietorship @crsstorechangessoleprop
 Scenario: Sole Proprietorship Cannabis Store Changes
@@ -132,8 +132,8 @@ Scenario: Sole Proprietorship Cannabis Store Changes
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And I confirm the structural change request is displayed on the dashboard
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @privatecorporation @validation
 Scenario: Validation for CRS Store Relocation
@@ -153,8 +153,8 @@ Scenario: Validation for CRS Store Relocation
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a store relocation application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @privatecorporation @validation
 Scenario: Validation for CRS Structural Change
@@ -174,8 +174,8 @@ Scenario: Validation for CRS Structural Change
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a structural change application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @privatecorporation @validation
 Scenario: Validation for CRS Transfer of Ownership
@@ -194,5 +194,5 @@ Scenario: Validation for CRS Transfer of Ownership
     And I click on the link for Transfer Licence
     And I do not complete the application correctly
     And the expected validation errors are thrown for a CRS transfer of ownership
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page

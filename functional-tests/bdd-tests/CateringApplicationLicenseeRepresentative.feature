@@ -17,8 +17,8 @@
     And the application is approved
     And I pay the licensing fee for Catering
     And I request a licensee representative
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
  @e2e @licenseerep @validation
  Scenario: Validation for Licensee Representative Request
@@ -37,5 +37,5 @@
     And I click on the link for Add Licensee Representative
     And I do not complete the application correctly
     And the expected validation errors are thrown for a licensee representative
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
