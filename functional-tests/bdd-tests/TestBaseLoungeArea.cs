@@ -28,12 +28,22 @@ namespace bdd_tests
             */
 
             string loungeAreaEndorsement = "Lounge Area Endorsement Application";
+            string jobTitle = "CEO";
 
             // click on the Lounge Area Endorsement Application link
             NgWebElement uiLoungeAreaEndorsement = ngDriver.FindElement(By.LinkText(loungeAreaEndorsement));
             uiLoungeAreaEndorsement.Click();
 
-            ContinueToApplicationButton();
+            NgWebElement uiJobTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='jobTitle']"));
+            uiJobTitle.SendKeys(jobTitle);
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please Review Your Account Profile ')]")).Displayed);
+
+            System.Threading.Thread.Sleep(4000);
+
+            // click on the Continue to Application button
+            NgWebElement uiContinueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp.save-cont.btn-primary"));
+            uiContinueToApplicationButton.Click();
 
             /* 
             Page Title: Lounge Area Endorsement Application
