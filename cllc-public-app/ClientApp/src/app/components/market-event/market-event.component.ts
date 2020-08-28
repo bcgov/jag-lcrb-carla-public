@@ -60,17 +60,17 @@ export class MarketEventComponent extends FormBase implements OnInit {
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
     contactEmail: ['', [Validators.required]],
-    eventType: ['', [Validators.required]],
-    eventTypeDescription: ['', [Validators.required]],
-    mktOrganizerContactName: ['', [Validators.required]],
-    mktOrganizerContactPhone: ['', [Validators.required]],
-    registrationNumber: ['', [Validators.required]],
+    eventType: ['', []],
+    eventTypeDescription: ['', []],
+    mktOrganizerContactName: ['', []],
+    mktOrganizerContactPhone: ['', []],
+    registrationNumber: ['', []],
     marketName: ['', [Validators.required]],
-    marketWebsite: ['', [Validators.required]],
-    marketDuration: ['', [Validators.required]],
+    marketWebsite: ['', []],
+    marketDuration: ['', []],
     clientHostname: ['', [Validators.required]],
     venueDescription: ['', [Validators.required]],
-    specificLocation: ['', [Validators.required]],
+    specificLocation: ['', []],
     additionalLocationInformation: ['', []],
     street1: ['', []],
     street2: ['', []],
@@ -108,11 +108,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
     }
 
   ngOnInit() {
-    this.store.select(state => state.currentUserState.currentUser)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: User) => {
-        this.eventForm.controls['contactEmail'].setValue(data.email);
-      });
+    
   }
 
   retrieveSavedEvent(eventId: string) {
