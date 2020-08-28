@@ -23,8 +23,8 @@ Scenario: Partnership CRS Personnel Name Changes
     And I confirm that the director name has been updated
     And I click on the link for Dashboard
     And I change a personnel email address for a partnership
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @privatecorporation @crsemail
 Scenario: Private Corporation CRS Personnel Name Changes
@@ -46,8 +46,8 @@ Scenario: Private Corporation CRS Personnel Name Changes
     And I confirm that the director name has been updated
     And I click on the link for Dashboard
     And I change a personnel email address for a private corporation
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @publiccorporation @crsemailpubcorp
 Scenario: Public Corporation CRS Personnel Name Changes
@@ -69,8 +69,8 @@ Scenario: Public Corporation CRS Personnel Name Changes
     And I confirm that the director name has been updated
     And I click on the link for Dashboard
     And I change a personnel email address for a public corporation
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @society @crsemail2
 Scenario: Society CRS Personnel Name Changes
@@ -92,8 +92,8 @@ Scenario: Society CRS Personnel Name Changes
     And I confirm that the director name has been updated
     And I click on the link for Dashboard
     And I change a personnel email address for a society
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @soleproprietorship @crsemail
 Scenario: Sole Proprietorship CRS Personnel Name Changes
@@ -115,5 +115,5 @@ Scenario: Sole Proprietorship CRS Personnel Name Changes
     And I confirm that the director name has been updated
     And I click on the link for Dashboard
     And I change a personnel email address for a sole proprietorship
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page

@@ -22,8 +22,8 @@ Scenario: Change individual partner name and pay fee
     And I click on the button for Submit Organization Information
     And I pay the name change fee
     And the individual partner name is now updated
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @cannabis @partnership @validation @partnerorgstructure2
 Scenario: Delete an individual who is both an individual partner and individual partner of business partner
@@ -37,8 +37,8 @@ Scenario: Delete an individual who is both an individual partner and individual 
     And I delete only the individual partner record (person 1)
     And I click on the Complete Organization Information button
     And only the individual partner of a business partner record is displayed (person 1, 2, 3)
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @cannabis @partnership @validation @partnerorgstructure3
 Scenario: Change individual partner and business partner same name 
@@ -51,8 +51,8 @@ Scenario: Change individual partner and business partner same name
     And I modify only the individual partner record
     And I click on the Complete Organization Information button
     And the individual partner and business shareholder name are identical
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @cannabis @partnership @validation @partnerorgstructure4
 Scenario: Confirm partnership business shareholder org structure update
@@ -76,8 +76,8 @@ Scenario: Confirm partnership business shareholder org structure update
     And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And the business shareholder is removed
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @cannabis @partnership @validation @partnerorgstructure5
 Scenario: Confirm partnership business shareholder org structure update after payment 
@@ -104,8 +104,8 @@ Scenario: Confirm partnership business shareholder org structure update after pa
     And the application is approved
     And I click on the Review Organization Information button
     And the partnership org structure is correct after payment
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @cannabis @partnership @validation @partnerorgstructure6
 Scenario: Save for Later feature for partnership org structure
@@ -131,5 +131,5 @@ Scenario: Save for Later feature for partnership org structure
     And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And the saved org structure for partnership is present
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
