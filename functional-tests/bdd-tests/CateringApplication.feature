@@ -15,8 +15,8 @@ Scenario: Indigenous Nation Catering Application
     And I click on the button for Pay for Application for an indigenous nation
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @partnership @cateringapp
 Scenario: Partnership Catering Application
@@ -31,8 +31,8 @@ Scenario: Partnership Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @privatecorporation @cateringapp
 Scenario: Private Corporation Catering Application
@@ -47,8 +47,8 @@ Scenario: Private Corporation Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @publiccorporation @cateringapp2
 Scenario: Public Corporation Catering Application
@@ -63,8 +63,8 @@ Scenario: Public Corporation Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @society @cateringapp2
 Scenario: Society Catering Application
@@ -79,8 +79,8 @@ Scenario: Society Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @soleproprietorship @cateringapp
 Scenario: Sole Proprietorship Catering Application
@@ -95,8 +95,8 @@ Scenario: Sole Proprietorship Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @catering @localgovernment @cateringapp
 Scenario: Local Government Catering Application
@@ -111,8 +111,8 @@ Scenario: Local Government Catering Application
     And I click on the button for Pay for Application for a local government 
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @catering @validation @validation
 Scenario: Validation for Catering Application 
@@ -123,5 +123,5 @@ Scenario: Validation for Catering Application
     And I click on the button for Submit Organization Information
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
