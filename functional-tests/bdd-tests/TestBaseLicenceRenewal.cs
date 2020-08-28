@@ -104,20 +104,19 @@ namespace bdd_tests
             NgWebElement uiFloorPlan = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalFloorPlan'] button#mat-button-toggle-44-button"));
             uiFloorPlan.Click();
 
-            // click on the authorized to submit checkbox
-            NgWebElement uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
-            uiAuthorizedSubmit.Click();
+            // select the authorized to submit checkbox
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
+            uiAuthorizedToSubmit.Click();
 
-            // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
-            uiSignatureAgree.Click();
+            // select the signature agreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
+            uiSignatureAgreement.Click();
 
-            ClickOnSubmitButton();
+            // click on the Submit & Pay button
+            NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
+            uiSubmitAndPay.Click();
 
             MakePayment();
-
-            // confirm renewal amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1500.00')]")).Displayed);
         }
     }
 }

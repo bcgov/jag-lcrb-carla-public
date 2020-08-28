@@ -29,6 +29,9 @@ namespace bdd_tests
 
         protected string applicationID;
 
+        protected string licenceID;
+
+        protected string returnUser;
 
         protected TestBase()
         {

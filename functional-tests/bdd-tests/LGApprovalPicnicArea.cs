@@ -13,50 +13,45 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: Payments.feature
+Feature: LGApprovalPicnicArea
     As a logged in business user
-    I want to test the payments for a CRS and Catering application
+    I want to submit a Picnic Area Endorsement Application for review and approval
 
-@e2e @cannabis @privatecorporation @payments
-Scenario: Payments for CRS and Catering Applications
+@e2e @catering @privatecorporation @picnic @lgapproval
+Scenario: Local Government Approval for Picnic Area Endorsement
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the button for Pay for Application
+    And I complete the Manufacturer application for a winery in Saanich
     And I enter the payment information
-    And I click on the link for Return to Dashboard
-    And I click on the Start Application button for Catering
-    And I click on the button for Continue to Organization Review
-    And I click on the button for Confirm Organization Information is Complete
-    And I complete the Catering application
-    And I click on the Submit button
-    And I click on the button for Pay for Application
-    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee for a Manufacturer application
+    And I request a picnic area endorsement
+    And I log in as Saanich local government
+    And I approve the picnic application
+    And I log in as the manufacturer
+    And I review the local government response
+    And the status on the dashboard is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./Payments.feature")]
-    public sealed class Payments : TestBase
+    [FeatureFile("./LGApprovalPicnicArea.feature")]
+    public sealed class LGApprovalPicnicArea : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
 
-            CheckFeatureFlagsLGIN();
-
-            CheckFeatureFlagsIN();
+            CheckFeatureFlagsLiquorTwo();
 
             CheckFeatureFlagsLicenseeChanges();
-
-            CheckFeatureFlagsSecurityScreening();
 
             IgnoreSynchronizationFalse();
 
