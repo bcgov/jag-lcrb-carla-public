@@ -229,7 +229,7 @@
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <div style="text-transform: uppercase; font-weight: 600;">
                   <span *ngIf="!isApprovedByLGAndNotSubmitted(item)">
-                    {{item.applicationStatus}}
+                    {{getApplicationStatusText(item.applicationStatus)}}
                   </span>
  
                   <span *ngIf="isApprovedByLGAndNotSubmitted(item)">
@@ -237,6 +237,9 @@
                   </span>
  
                 </div>
+                <p *ngIf="item.applicationStatus === 'Processed'">
+                  This application has been received and is being reviewed by the LCRB.
+                </p>
                 <p *ngIf="item.applicationStatus === 'Not Submitted'">
                   This application has not yet been submitted.
                 </p>
@@ -365,7 +368,7 @@
                   </a>
                 </div>
                 <div
-                  *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Application Under Review'].indexOf(item.applicationStatus) !== -1">
+                  *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Processed'].indexOf(item.applicationStatus) !== -1">
                   <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
                     <i class="fas fa-plus" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Add Supporting Documents</span>
