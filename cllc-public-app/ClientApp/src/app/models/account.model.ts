@@ -40,14 +40,6 @@ export class Account {
 
   websiteUrl: string;
 
-  isLocalGovernment(): boolean {
-    return this.businessType === 'LocalGovernment';
-  }
-
-  isIndigenousNation(): boolean {
-    return this.businessType === 'IndigenousNation';
-  }
-
   isPartnership(): boolean {
     const isPartnership = [
       'GeneralPartnership',

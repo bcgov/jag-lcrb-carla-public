@@ -53,7 +53,8 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
           if (application.applicationType.category === 'Cannabis') {
             this.isCannabisApplication = true;
           }
-          if (application.account !== null && (application.account.isLocalGovernment() || application.account.isIndigenousNation())) {
+          
+          if (application.applicant !== null && ['LocalGovernment', 'IndigenousNation'].indexOf(application.applicant.businessType) >= 0) {
             this.skipScreeningRequirements = true;
           }
         });
