@@ -47,8 +47,8 @@ Scenario: Private Corporation CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And the account is deleted
-    Then I see the login page
+    # And the account is deleted
+    # Then I see the login page
 
 @e2e @cannabis @publiccorporation @crsapp
 Scenario: Public Corporation CRS Application
