@@ -25,6 +25,7 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
   isLiquorApplication: boolean;
   isCannabisApplication: boolean;
   errorMessages: string[] = [];
+  skipScreeningRequirements: boolean = false;
 
   constructor(private snackBar: MatSnackBar,
     private route: ActivatedRoute,
@@ -51,6 +52,9 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
           }
           if (application.applicationType.category === 'Cannabis') {
             this.isCannabisApplication = true;
+          }
+          if (application.account !== null && (application.account.isLocalGovernment() || application.account.isIndigenousNation())) {
+            this.skipScreeningRequirements = true;
           }
         });
     }
