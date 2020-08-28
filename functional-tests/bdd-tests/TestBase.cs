@@ -31,6 +31,8 @@ namespace bdd_tests
 
         protected string licenceID;
 
+        protected string returnUser;
+
         protected TestBase()
         {
             string path = Directory.GetCurrentDirectory();
