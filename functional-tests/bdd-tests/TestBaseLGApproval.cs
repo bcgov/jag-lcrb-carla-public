@@ -20,23 +20,6 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I approve the application for a (.*)")]
-        public void ApproveApplication(string applicationType)
-        {
-            if (applicationType == "picnic area")
-            {
-
-            }
-        }
-
-
-        [And(@"I read the response from the local government")]
-        public void ReadResponse()
-        {
-
-        }
-
-
         [And(@"I specify that the zoning allows the endorsement")]
         public void ZoningAllowsEndorsement()
         {
@@ -94,7 +77,17 @@ namespace bdd_tests
         [And(@"I review the local government")]
         public void ReviewLocalGovernment()
         {
+            // create test data
+            string completeApplication = "Complete Application";
 
+            // click on Complete Application link
+            ClickOnLink(completeApplication);
+
+            Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Manufacturer Picnic Area Endorsement Application ')]")).Displayed);
+
+            System.Threading.Thread.Sleep(4000);
+
+            ClickOnSubmitButton();
         }
 
 
@@ -102,8 +95,10 @@ namespace bdd_tests
         public void DashboardStatus(string status)
         {
             if (status == "Application Under Review")
-            { 
-            
+            {
+                System.Threading.Thread.Sleep(4000);
+
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Processed ')]")).Displayed);
             }
         }
     }
