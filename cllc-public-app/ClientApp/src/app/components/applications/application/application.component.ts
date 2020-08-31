@@ -526,7 +526,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('outsideAreas').disable();
     }
     if (!this.application.applicationType.capacityArea) {
-      this.form.get('capacityArea').disable();
+      this.form.get('capacityArea.capacity').disable();
     }
   }
 
@@ -1005,24 +1005,130 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
         return message;
       })(),
-      establishmentParcelId: 'Please enter the Parcel Identifier (format: 9 digits)',
+      
+      signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
+
+      description1: 'Please enter a description',
+      IsReadyProductNotVisibleOutside: 'Please confirm that product will not be visible from the outside',
+      serviceAreas: 'All service area rows must be complete',
+
+      additionalPropertyInformation: 'Please enter additional property information',      
+      applyingPerson: 'Please enter the applying person',
+      authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
+      'capacityArea.capacity': 'Please enter capacity area',
+      contactPersonEmail: 'Please enter the business contact\'s email address',
       contactPersonFirstName: 'Please enter the business contact\'s first name',
       contactPersonLastName: 'Please enter the business contact\'s last name',
-      contactPersonEmail: 'Please enter the business contact\'s email address',
       contactPersonPhone: 'Please enter the business contact\'s 10-digit phone number',
+      contactPersonRole: 'Please enter the contact person role',
+
       establishmentAddressStreet: 'Please enter the street address',
       establishmentAddressCity: 'Please enter the city',
       establishmentAddressPostalCode: 'Please enter the postal code',
       establishmentEmail: 'Please enter the email address for the store',
-      establishmentPhone: 'Please enter the store phone number',
-      authorizedToSubmit: 'Please affirm that you are authorized to submit the application.',
-      signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
-      indigenousNationId: 'Please select the Indigenous nation',
+      establishmentPhone: 'Please enter the store phone number',          
+      establishmentParcelId: 'Please enter the Parcel Identifier (format: 9 digits)',
+      establishmentopeningdate: 'Please enter the store opening date',
       federalProducerNames: 'Please enter the name of federal producer',
-      description1: 'Please enter a description',
-      IsReadyProductNotVisibleOutside: 'Please confirm that product will not be visible from the outside',
-      serviceAreas: 'All service area rows must be complete'
+      hasValidInterest: 'Please enter a value for valid interest',      
+      indigenousNationId: 'Please select the Indigenous nation',
+      isAlr: 'Please indicate ALR status',      
+      isLocatedInGroceryStore: 'Please specify if the establishment is located in a grocery store.',
+      isOwnerBusiness: 'Please enter a value for owner business',
+      isPackaging: 'Please enter a value for packaging',
+      isPermittedInZoning: 'Please enter a value for permitted in zoning',
+      isReadyDisplays: 'Please confirm displays are ready',
+      isReadyExtranceExit: 'Please confirm the exit is ready',
+      isReadyFireAlarm: 'Please confirm the fire alarm is ready',
+      isReadyIntruderAlarm: 'Please confirm the intruder alarm is ready',
+      isReadyLockedCases: 'Please confirm locked cases are ready',
+      isReadyLockedStorage: 'Please confirm locked storage is ready',
+      isReadyNameBranding: 'Please confirm branding is ready',
+      isReadyPerimeter: 'Please confirm perimeter is ready',
+      isReadyProductNotVisibleOutside: 'Please confirm product is not visible outside',
+      isReadyRetailArea: 'Please confirm retail area is ready',
+      isReadyStorage: 'Please confirm storage is ready',
+      isReadySurveillanceNotice: 'Please confirm surveilance notice is ready',
+      isReadyValidInterest: 'Please confirm valid interest is ready',
+      isReadyWorkers: 'Please confirm workers are ready',
+      lGApprovalDecision: 'Please enter a value for local government approval decision',      
+      lGContactEmail: 'Please enter a value for local government contact email',      
+      lGContactPhone: 'Please enter a value for local government contact phone', 
+      lGDecisionComments: 'Please enter a value for local government decision comments', 
+      lGDecisionSubmissionDate: 'Please enter a value for local government decision submission date', 
+      lGNameOfOfficial: 'Please enter a value for local government name of official', 
+      lGTitlePosition: 'Please enter a value for local government title of position', 
+      lgZoning: 'Please enter a value for local government zoning', 
+      licenceSubCategory: 'Please select the licence sub category',
+      liquorIndustryConnections: 'Please enter industry connections',
+      liquorIndustryConnectionsDetails: 'Please enter industry connection details',
+      locatedAboveDescription: 'Please enter a value for located above description',
+      mfgAcresOfFruit: 'Please enter a value for acres of fruit',
+      mfgAcresOfGrapes: 'Please enter a value for acres of grapes',
+      mfgAcresOfHoney: 'Please enter a value for acres of honey',
+      mfgBrewPubOnSite: 'Please enter a value for brew pub on site',
+      mfgMeetsProductionMinimum: 'Please enter a value for meets production minimum',
+      mfgPipedInProduct: 'Please enter a value for brew pub on site',
+      mfgStepBlending: 'Please enter a value for manufacturing blending step',
+      mfgStepCrushing: 'Please enter a value for manufacturing crushing step',
+      mfgStepFiltering: 'Please enter a value for manufacturing filtering step',
+      mfgStepSecFermOrCarb: 'Please enter a value for manufacturing secondary fermentation or carbonation step',
+      mfgUsesNeutralGrainSpirits: 'Please enter a value for manufacturing use of neutral grain spirits',
+      otherBusinesses: 'Please enter a value for other businesses',
+      otherBusinessesDetails: 'Please enter a value for other business details',
+      patioAccessControlDescription: 'Please enter a value for patio access control description',
+      patioAccessDescription: 'Please enter a value for patio access description',
+      patioCompDescription: 'Please enter a value for patio comp description',
+      patioIsLiquorCarried: 'Please enter a value for patio liquor carried',
+      patioLiquorCarriedDescription: 'Please enter a value for patio liquor carried description',
+      patioLocationDescription: 'Please enter a value for patio location description',
+      patioServiceBar: 'Please enter a value for patio service bar',
+      pidList: 'Please enter a value for PID list',
+      policeJurisdictionId: 'Please enter a value for police jurisdiction',      
+      previousApplicationDetails: 'Please enter a value for previous application details',
+      registeredEstablishment: 'Please enter a value for registered establishment number',
+      renewalBranding: 'Please enter a value for renewal branding',
+      renewalBusinessType: 'Please enter a value for renewal business type',
+      renewalCriminalOffenceCheck: 'Please enter a value for renewal criminal offence check',
+      renewalDUI: 'Please enter a value for renewal DUI check',
+      renewalEstablishmentAddress: 'Please enter a value for renewal establishment address',
+      renewalFloorPlan: 'Please enter a value for renewal floor plan',
+      renewalOrgLeadership: 'Please enter a value for renewal organization leadership',
+      renewalOutstandingFines: 'Please enter a value for renewal outstanding fines',
+      renewalShareholders: 'Please enter a value for renewal shareholder',
+      renewalSignage: 'Please enter a value for renewal signage',
+      renewalSiteMap: 'Please enter a value for renewal site map',
+      renewalThirdParty: 'Please enter a value for renwal third party',
+      renewalTiedhouse: 'Please enter a value for renwal tied house',
+      renewalUnreportedSaleOfBusiness: 'Please enter a value for renwal unreported sale of business',
+      renewalValidInterest: 'Please enter a value for renwal valid interest',
+      renewalZoning: 'Please enter a value for renwal zoning',
+      renewalkeypersonnel: 'Please enter a value for renwal key personnel',
+      resolutionDocsUploaded: 'Please enter a value for renwal documentation uploaded',
+      ruralAgencyStoreAppointment: 'Please enter a value for rural agency store appointment number',      
+      tiedhouseFederalInterest: 'Please enter a value for tied house federal interest',      
+      willHaveValidInterest: 'Please enter a value for will have valid interest',      
+      zoningStatus: 'Please enter a value for zoning status'      
+
     };
+
+    // add the dynamic fields to the error map.
+    if (this.dynamicsForm) {
+      this.dynamicsForm.tabs.forEach(function (tab) {
+        tab.sections.forEach(function (section) {
+          if (section.fields) {
+            section.fields.forEach(function (field) {
+              if (field.required && ![field.datafieldname]) {               
+                errorMap[field.datafieldname] =  field.name + ' is required.';
+              }              
+            }, this);
+          }
+
+        }, this);
+      }, this);
+    }
+    
+
 
     return errorMap;
   }
@@ -1122,9 +1228,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showDynamicForm(formReference, tabs) {
     if (this.form.get('isHasPatio').enabled) {
-      console.log(this.form.get('isHasPatio').value);
-      console.log(formReference);
-      console.log(tabs);
       return this.form.get('isHasPatio').value && formReference && tabs;
     }
     return formReference && tabs;
