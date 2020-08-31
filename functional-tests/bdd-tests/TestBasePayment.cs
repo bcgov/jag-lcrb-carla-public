@@ -76,6 +76,9 @@ namespace bdd_tests
             Page Title: Payment Approved
             */
 
+            // check that Return to Dashboard link is displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Return to Dashboard ')]")).Displayed);
+
             if (feeType == "Cannabis")
             {
                 // confirm correct payment amount for CRS
