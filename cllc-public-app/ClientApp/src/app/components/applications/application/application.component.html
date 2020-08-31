@@ -1764,7 +1764,8 @@
 
         <section *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                 && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')
-                && !lgApprovalDecisionMade()">
+                && !lgApprovalDecisionMade()
+                && !lgHasReviewedZoning()">
           <br>
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
