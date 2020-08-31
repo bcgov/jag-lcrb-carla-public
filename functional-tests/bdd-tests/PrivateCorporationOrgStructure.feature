@@ -22,8 +22,8 @@ Scenario: Change private corporation director name and pay fee
     And I click on the button for Submit Organization Information
     And I pay the name change fee
     And the director name is now updated
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @cannabis @privatecorporation @validation @privatecorporgstructure
 Scenario: Delete an individual who is both a private corporation director and shareholder
@@ -35,8 +35,8 @@ Scenario: Delete an individual who is both a private corporation director and sh
     And I delete only the director record
     And I click on the Complete Organization Information button
     And only the shareholder record is displayed
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @cannabis @privatecorporation @validation @privatecorporgstructure
 Scenario: Change private corporation director and shareholder same name
@@ -48,8 +48,8 @@ Scenario: Change private corporation director and shareholder same name
     And I modify only the director record
     And I click on the Complete Organization Information button
     And the director and shareholder name are identical
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @cannabis @privatecorporation @validation @privatecorporgstructure
 Scenario: Confirm private corporation business shareholder org structure update
@@ -73,8 +73,8 @@ Scenario: Confirm private corporation business shareholder org structure update
     And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And the business shareholder is removed
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @cannabis @privatecorporation @validation @privatecorporgstructure
 Scenario: Confirm private corporation business shareholder org structure update after payment
@@ -101,8 +101,8 @@ Scenario: Confirm private corporation business shareholder org structure update 
     And the application is approved
     And I click on the Review Organization Information button
     And the org structure is correct after payment
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @cannabis @privatecorporation @validation @privatecorporgstructure
 Scenario: Save for Later feature for private corporation org structure
@@ -128,8 +128,8 @@ Scenario: Save for Later feature for private corporation org structure
     And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And the saved org structure is present
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
 Scenario: CRS application with mixed business shareholder types
@@ -148,8 +148,8 @@ Scenario: CRS application with mixed business shareholder types
     And I click on the link for Return to Dashboard
     And I click on the Complete Organization Information button
     And the mixed business shareholder org structure is correct
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
 Scenario: Complex Save for Later mixed business shareholders
@@ -162,8 +162,8 @@ Scenario: Complex Save for Later mixed business shareholders
     And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And I review the security screening requirements for saved for later mixed business shareholder
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
 Scenario: Confirm org structure records not duplicated
@@ -173,5 +173,5 @@ Scenario: Confirm org structure records not duplicated
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I confirm that no duplicates are shown in the org structure
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page

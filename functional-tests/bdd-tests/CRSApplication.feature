@@ -15,8 +15,8 @@ Scenario: Indigenous Nation CRS Application
     And I click on the button for Pay for Application for an indigenous nation
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @partnership @crsapp
 Scenario: Partnership CRS Application
@@ -31,8 +31,8 @@ Scenario: Partnership CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @privatecorporation @crsapp
 Scenario: Private Corporation CRS Application
@@ -47,8 +47,8 @@ Scenario: Private Corporation CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @publiccorporation @crsapp
 Scenario: Public Corporation CRS Application
@@ -63,8 +63,8 @@ Scenario: Public Corporation CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @society @crsapp
 Scenario: Society CRS Application
@@ -79,8 +79,8 @@ Scenario: Society CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @soleproprietorship @crsapp
 Scenario: Sole Proprietorship CRS Application
@@ -95,8 +95,8 @@ Scenario: Sole Proprietorship CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @localgovernment @crsapp
 Scenario: Local Government CRS Application
@@ -111,8 +111,8 @@ Scenario: Local Government CRS Application
     And I click on the button for Pay for Application for a local government
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @crsapp @validation @privatecorporation
 Scenario: Validation for Private Corporation CRS Application 
@@ -124,8 +124,8 @@ Scenario: Validation for Private Corporation CRS Application
     And I click on the button for Submit Organization Information
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Cannabis application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @crsapp @validation indigenousnation
 Scenario: Validation for IN CRS Application
@@ -137,5 +137,5 @@ Scenario: Validation for IN CRS Application
     And I click on the button for Submit Organization Information
     And I do not complete the application correctly
     And the expected validation errors are thrown for an indigenous nation Cannabis application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
