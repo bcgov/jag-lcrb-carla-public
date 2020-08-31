@@ -23,8 +23,8 @@ Scenario: Catering Partnership Personnel Email Change
     And I confirm that the director name has been updated
     And I click on the link for Dashboard
     And I change a personnel email address for a partnership
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @catering @privatecorporation @cateringemailprivcorp
 Scenario: Catering Private Corporation Personnel Email Change
@@ -46,8 +46,8 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I confirm that the director name has been updated
     And I click on the link for Dashboard
     And I change a personnel email address for a private corporation
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @catering @publiccorporation @cateringemailpubcorp
 Scenario: Catering Public Corporation Personnel Email Change
@@ -69,8 +69,8 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I confirm that the director name has been updated
     And I click on the link for Dashboard
     And I change a personnel email address for a public corporation
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @catering @society @cateringemailsociety
 Scenario: Catering Society Personnel Email Change
@@ -92,8 +92,8 @@ Scenario: Catering Society Personnel Email Change
     And I confirm that the director name has been updated
     And I click on the link for Dashboard
     And I change a personnel email address for a society
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @catering @soleproprietorship @cateringemailsoleprop
 Scenario: Catering Sole Proprietorship Personnel Email Change
@@ -115,5 +115,5 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I confirm that the director name has been updated
     And I click on the link for Dashboard
     And I change a personnel email address for a sole proprietorship
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page

@@ -8,5 +8,5 @@ Scenario: Check Organization Structure
     And I click on the Complete Organization Information button
     And the organization structure page is displayed
     And I click on the link for Dashboard
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page

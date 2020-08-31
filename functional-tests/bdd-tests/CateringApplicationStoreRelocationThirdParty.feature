@@ -18,8 +18,8 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering
     And I request a third party operator
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
  @e2e @catering @partnership @cateringrelocationtpo
  Scenario: Partnership Catering Store Relocation Request
@@ -36,8 +36,8 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering
     And I request a third party operator
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
  @e2e @catering @privatecorporation @cateringrelocationtpo
  Scenario: Private Corporation Catering Store Relocation Request
@@ -54,8 +54,8 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering
     And I request a third party operator
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
  @e2e @catering @publiccorporation @cateringrelocationtpo2
  Scenario: Public Corporation Catering Store Relocation Request
@@ -72,8 +72,8 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering
     And I request a third party operator
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
  @e2e @catering @society @cateringrelocationtpo2
  Scenario: Society Catering Store Relocation Request
@@ -90,8 +90,8 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering
     And I request a third party operator
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
  @e2e @catering @soleproprietorship @cateringrelocationtpo
  Scenario: Sole Proprietorship Catering Store Relocation Request
@@ -108,8 +108,8 @@ Scenario: Indigenous Nation Catering Store Relocation Request
     And I pay the licensing fee for Catering
     And I request a store relocation for Catering
     And I request a third party operator
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @catering @privatecorporation @validation
 Scenario: Validation for Catering Store Relocation
@@ -129,8 +129,8 @@ Scenario: Validation for Catering Store Relocation
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering store relocation application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @catering @privatecorporation @validation
 Scenario: Validation for Catering Third Party Operator
@@ -149,5 +149,5 @@ Scenario: Validation for Catering Third Party Operator
     And I click on the link for Add or Change a Third Party Operator
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering third party application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
