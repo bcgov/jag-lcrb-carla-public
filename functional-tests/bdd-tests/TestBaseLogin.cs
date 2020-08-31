@@ -186,9 +186,18 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}{localGovt}");
             ngDriver.IgnoreSynchronization = false;
 
-            System.Threading.Thread.Sleep(9000);
+            System.Threading.Thread.Sleep(4000);
+        }
 
-            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Saanich']")).Displayed);
+        
+        [And(@"I log in as the manufacturer")]
+        public void ManufacturerLogin()
+        {
+            ngDriver.IgnoreSynchronization = true;
+            ngDriver.Navigate().GoToUrl($"{baseUri}{returnUser}");
+            ngDriver.IgnoreSynchronization = false;
+
+            System.Threading.Thread.Sleep(4000);
         }
 
 
