@@ -181,22 +181,14 @@ namespace bdd_tests
         [And(@"I log in as local government for Saanich")]
         public void LocalGovernmentLogin()
         {
-            //if (user == "local government for Saanich")
-            //{
-                string localGovt = "login/token/Saanich";
-                ngDriver.IgnoreSynchronization = true;
-                ngDriver.Navigate().GoToUrl($"{baseUri}{localGovt}");
-                ngDriver.IgnoreSynchronization = false;
-            //}
+            string localGovt = "login/token/Saanich";
+            ngDriver.IgnoreSynchronization = true;
+            ngDriver.Navigate().GoToUrl($"{baseUri}{localGovt}");
+            ngDriver.IgnoreSynchronization = false;
 
-            /*
-            if (user == "the manufacturer")
-            {
-                ngDriver.IgnoreSynchronization = true;
-                ngDriver.Navigate().GoToUrl($"{baseUri}{returnUser}");
-                ngDriver.IgnoreSynchronization = false;
-            }
-            */
+            System.Threading.Thread.Sleep(9000);
+
+            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Saanich']")).Displayed);
         }
 
 

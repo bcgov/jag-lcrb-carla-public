@@ -40,14 +40,54 @@ namespace bdd_tests
         [And(@"I specify that the zoning allows the endorsement")]
         public void ZoningAllowsEndorsement()
         {
+            // create test data
+            string appsForReview = "Applications for Review";
+            string reviewApp = "Review Application";
 
+            // click on Applications for Review link
+            ClickOnLink(appsForReview);
+
+            // click on Review Application link
+            ClickOnLink(reviewApp);
+
+            // select 'Allows' for zoning confirmation
+            NgWebElement uiAllowsZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='lgZoning'] mat-radio-button#mat-radio-2"));
+            uiAllowsZoning.Click();
         }
 
 
         [And(@"I specify my contact details")]
         public void SpecifyContactDetails()
         {
+            // create test data
+            string nameOfOfficial = "Official Name";
+            string title = "Title";
+            string phone = "1811811818";
+            string email = "test@automation.com";
+            string zoningComments = "Sample zoning comments.";
 
+            // enter the name of the official
+            NgWebElement uiOfficialName = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'lGNameOfOfficial']"));
+            uiOfficialName.SendKeys(nameOfOfficial);
+
+            // enter the official's title
+            NgWebElement uiOfficialTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGTitlePosition']"));
+            uiOfficialTitle.SendKeys(title);
+
+            // enter the official's phone number
+            NgWebElement uiOfficialPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactPhone']"));
+            uiOfficialPhone.SendKeys(phone);
+
+            // enter the official's email
+            NgWebElement uiOfficialEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactEmail']"));
+            uiOfficialEmail.SendKeys(email);
+
+            // enter the zoning comments
+            NgWebElement uiZoningComments = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='lGDecisionComments']"));
+            uiZoningComments.SendKeys(zoningComments);
+
+            // click on the Submit button
+            ClickOnSubmitButton();
         }
 
 
