@@ -96,8 +96,6 @@ namespace bdd_tests
         {
             if (status == "Application Under Review")
             {
-                System.Threading.Thread.Sleep(4000);
-
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Processed ')]")).Displayed);
             }
         }
