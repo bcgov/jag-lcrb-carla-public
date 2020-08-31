@@ -21,5 +21,5 @@ Scenario: Payments for CRS and Catering Applications
     And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page

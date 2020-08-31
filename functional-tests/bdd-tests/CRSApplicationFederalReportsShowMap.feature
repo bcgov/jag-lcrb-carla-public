@@ -18,8 +18,8 @@ Scenario: Indigenous Nation Federal Reports and Show Map
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @partnership @crsfedreports
 Scenario: Partnership Federal Reports and Show Map
@@ -36,8 +36,8 @@ Scenario: Partnership Federal Reports and Show Map
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @privatecorporation @crsfedreports
 Scenario: Private Corporation Federal Reports and Show Map
@@ -54,8 +54,8 @@ Scenario: Private Corporation Federal Reports and Show Map
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @publiccorporation @crsfedreports2
 Scenario: Public Corporation Federal Reports and Show Map
@@ -72,8 +72,8 @@ Scenario: Public Corporation Federal Reports and Show Map
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @society @crsfedreports2
 Scenario: Society Federal Reports and Show Map
@@ -90,8 +90,8 @@ Scenario: Society Federal Reports and Show Map
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
 @e2e @cannabis @soleproprietorship @crsfedreports
 Scenario: Sole Proprietorship Federal Reports and Show Map
@@ -108,5 +108,5 @@ Scenario: Sole Proprietorship Federal Reports and Show Map
     And I pay the licensing fee for Cannabis
     And I show the store as open on the map
     And I review the federal reports
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page

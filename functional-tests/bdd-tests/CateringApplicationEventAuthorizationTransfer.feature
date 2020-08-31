@@ -18,8 +18,8 @@
     And I pay the licensing fee for Catering
     And I request an event authorization
     And I request a transfer of ownership
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
  @e2e @catering @partnership @cateringeventtransfer
  Scenario: Partnership Event Authorization Transfer Ownership Requests
@@ -36,8 +36,8 @@
     And I pay the licensing fee for Catering
     And I request an event authorization
     And I request a transfer of ownership
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
  @e2e @catering @privatecorporation @cateringeventtransfer
  Scenario: Private Corporation Event Authorization Transfer Ownership Requests
@@ -54,8 +54,8 @@
     And I pay the licensing fee for Catering
     And I request an event authorization
     And I request a transfer of ownership
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
  @e2e @catering @publiccorporation @cateringeventtransfer2
  Scenario: Public Corporation Event Authorization Transfer Ownership Requests
@@ -72,8 +72,8 @@
     And I pay the licensing fee for Catering
     And I request an event authorization
     And I request a transfer of ownership
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
  @e2e @catering @society @cateringeventtransfer2
  Scenario: Society Event Authorization Transfer Ownership Requests
@@ -90,8 +90,8 @@
     And I pay the licensing fee for Catering
     And I request an event authorization
     And I request a transfer of ownership
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
   @e2e @catering @soleproprietorship @cateringeventtransfer
   Scenario: Sole Proprietorship Event Authorization Transfer Ownership Requests
@@ -108,8 +108,8 @@
     And I pay the licensing fee for Catering
     And I request an event authorization
     And I request a transfer of ownership
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
  @e2e @catering @privatecorporation @validation
  Scenario: Validation for Event Authorization 
@@ -128,8 +128,8 @@
     And I click on the link for Request Event Authorization
     And I do not complete the application correctly
     And the expected validation errors are thrown for an event authorization
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
 
  @e2e @catering @privatecorporation @validation
  Scenario: Validation for Catering Transfer of Ownership
@@ -148,5 +148,5 @@
     And I click on the link for Transfer Licence
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering transfer of ownership
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page
