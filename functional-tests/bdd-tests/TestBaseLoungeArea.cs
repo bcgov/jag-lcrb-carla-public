@@ -28,27 +28,14 @@ namespace bdd_tests
             */
 
             string loungeAreaEndorsement = "Lounge Area Endorsement Application";
-            string jobTitle = "CEO";
 
             // click on the Lounge Area Endorsement Application link
             NgWebElement uiLoungeAreaEndorsement = ngDriver.FindElement(By.LinkText(loungeAreaEndorsement));
             uiLoungeAreaEndorsement.Click();
 
-            System.Threading.Thread.Sleep(9000);
-
-
-            NgWebElement uiJobTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='jobTitle']"));
-            uiJobTitle.SendKeys(jobTitle);
-
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please Review Your Account Profile ')]")).Displayed);
-
-            System.Threading.Thread.Sleep(4000);
-
             // click on the Continue to Application button
             NgWebElement uiContinueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp.save-cont.btn-primary"));
             uiContinueToApplicationButton.Click();
-
-
 
             /* 
             Page Title: Lounge Area Endorsement Application
@@ -57,10 +44,6 @@ namespace bdd_tests
             // select the zoning checkbox
             NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
             uiZoningCheckbox.Click();
-
-            // select 'Yes' for ALR zoning           
-            NgWebElement uiYesALRZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
-            uiYesALRZoning.Click();
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
@@ -72,11 +55,16 @@ namespace bdd_tests
             NgWebElement uiUploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uiUploadFloorplan.SendKeys(floorplanPath);
 
+            // upload the site plan
+            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
+            NgWebElement uiUploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+            uiUploadSitePlan.SendKeys(sitePlanPath);
+
             // add a service area
             NgWebElement uiServiceArea = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceAreas'] button"));
             uiServiceArea.Click();
 
-            // creeate test data
+            // create test data
             string areaDescription = "Area description";
             string occupantLoad = "100";
 
@@ -87,11 +75,6 @@ namespace bdd_tests
             // enter the occupant load
             NgWebElement uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
             uiOccupantLoad.SendKeys(occupantLoad);
-
-            // upload the site plan
-            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uiUploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-            uiUploadSitePlan.SendKeys(sitePlanPath);
 
             // select the Sunday opening time
             NgWebElement uiSundayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursSundayOpen'] option[value='10:00']"));

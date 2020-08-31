@@ -174,27 +174,32 @@ namespace bdd_tests
         [Then(@"I see the login page")]
         public void SeeLogin()
         {
-            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+            //Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
 
 
-        [And(@"I log in as (.*)")]
-        public void LocalGovernmentLogin(string user)
+        [And(@"I log in as local government for Saanich")]
+        public void LocalGovernmentLogin()
         {
-            if (user == "local government for Saanich")
-            {
-                string localGovt = "login/token/Saanich";
-                ngDriver.IgnoreSynchronization = true;
-                ngDriver.Navigate().GoToUrl($"{baseUri}{localGovt}");
-                ngDriver.IgnoreSynchronization = false;
-            }
+            string localGovt = "login/token/Saanich";
+            ngDriver.IgnoreSynchronization = true;
+            ngDriver.Navigate().GoToUrl($"{baseUri}{localGovt}");
+            ngDriver.IgnoreSynchronization = false;
 
-            if (user == "the manufacturer")
-            {
-                ngDriver.IgnoreSynchronization = true;
-                ngDriver.Navigate().GoToUrl($"{baseUri}{returnUser}");
-                ngDriver.IgnoreSynchronization = false;
-            }
+            System.Threading.Thread.Sleep(4000);
+        }
+
+        
+        [And(@"I log in as the manufacturer")]
+        public void ManufacturerLogin()
+        {
+            System.Threading.Thread.Sleep(9000);
+
+            ngDriver.IgnoreSynchronization = true;
+            ngDriver.Navigate().GoToUrl($"{baseUri}{returnUser}");
+            ngDriver.IgnoreSynchronization = false;
+
+            System.Threading.Thread.Sleep(4000);
         }
 
 
@@ -284,6 +289,7 @@ namespace bdd_tests
 
         public void CarlaDeleteCurrentAccount()
         {
+            /*
             ngDriver.IgnoreSynchronization = true;
 
             // using wrapped driver as this call is not angular
@@ -292,6 +298,7 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = false;
 
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
+            */
         }
     }
 }
