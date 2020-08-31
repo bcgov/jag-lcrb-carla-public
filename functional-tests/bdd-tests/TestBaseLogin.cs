@@ -193,6 +193,8 @@ namespace bdd_tests
         [And(@"I log in as the manufacturer")]
         public void ManufacturerLogin()
         {
+            System.Threading.Thread.Sleep(9000);
+
             ngDriver.IgnoreSynchronization = true;
             ngDriver.Navigate().GoToUrl($"{baseUri}{returnUser}");
             ngDriver.IgnoreSynchronization = false;
