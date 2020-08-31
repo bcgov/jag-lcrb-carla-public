@@ -472,6 +472,20 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         return true;
     }
   }
+
+  getApplicationStatusText(status: string) {
+    if (status === 'Processed') {
+      return 'Application Under Review';
+    }
+    return status;
+  }
+
+  getApplicationLink(item: ApplicationSummary) {
+    if (item.isForLicence || this.isApprovedByLGAndNotSubmitted(item)) {
+      return `/multi-step-application/${item.id}`;
+    }
+    return `/account-profile/${item.id}`;
+  }
 }
 
 @Component({

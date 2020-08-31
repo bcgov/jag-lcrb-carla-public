@@ -80,7 +80,7 @@
 
             <!-- Incorporation/ BC Registration Number Box-->
             <section
-              *ngIf="['Partnership', 'Sole Proprietor', 'University', 'Church', 'Indigenous Nation', 'Local Government'].indexOf(getBusinessTypeName()) == -1">
+              *ngIf="['Partnership', 'Sole Proprietorship', 'University', 'Church', 'Indigenous Nation', 'Local Government'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">Incorporation
                   Number</label>
@@ -102,7 +102,7 @@
 
             <!-- Incorporation Date -->
             <section
-              *ngIf="['Partnership', 'Sole Proprietor', 'University', 'Church', 'Local Government', 'Indigenous Nation'].indexOf(getBusinessTypeName()) == -1">
+              *ngIf="['Partnership', 'Sole Proprietorship', 'University', 'Church', 'Local Government', 'Indigenous Nation'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">Date
                   of Incorporation in B.C.</label>
