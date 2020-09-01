@@ -289,7 +289,6 @@ namespace bdd_tests
 
         public void CarlaDeleteCurrentAccount()
         {
-            /*
             ngDriver.IgnoreSynchronization = true;
 
             // using wrapped driver as this call is not angular
@@ -298,7 +297,6 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = false;
 
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
-            */
         }
     }
 }
