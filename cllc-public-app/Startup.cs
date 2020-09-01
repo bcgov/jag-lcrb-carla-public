@@ -236,6 +236,17 @@ namespace Gov.Lclb.Cllb.Public
             return retryWithJitterPolicy;
         }
 
+        /// <summary>
+        /// circuit breaker policy is configured so it breaks or opens the circuit when there have been five consecutive faults when retrying the Http requests. When that happens, the circuit will break for 30 seconds.
+        /// </summary>
+        /// <returns></returns>
+        static IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy()
+        {
+            return HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .CircuitBreakerAsync(5, TimeSpan.FromSeconds(30));
+        }
+
         private void SetupServices(IServiceCollection services)
         {
 
@@ -288,15 +299,18 @@ namespace Gov.Lclb.Cllb.Public
 
             // add BC Express Pay (Bambora) service
             services.AddHttpClient<IBCEPService, BCEPService>()
-                .AddPolicyHandler(GetRetryPolicy());
+                .AddPolicyHandler(GetRetryPolicy())
+                .AddPolicyHandler(GetCircuitBreakerPolicy());
 
             // add the PDF client.
             services.AddHttpClient<IPdfService, PdfService>()
-                .AddPolicyHandler(GetRetryPolicy());
+                .AddPolicyHandler(GetRetryPolicy())
+                .AddPolicyHandler(GetCircuitBreakerPolicy());
 
             // add the GeoCoder Client.
             services.AddHttpClient<IGeocoderService, GeocoderService>()                
-                .AddPolicyHandler(GetRetryPolicy()); 
+                .AddPolicyHandler(GetRetryPolicy())
+                .AddPolicyHandler(GetCircuitBreakerPolicy());
 
             // add the file manager.
             string fileManagerURI = _configuration["FILE_MANAGER_URI"];
