@@ -14,7 +14,8 @@
             Because you have one or more licences, you are required to pay a fee for your organizational changes.
             Fees are calculated based on the type of change reported and the number of licences impacted.
           </p>
-          <table class="greyGridTable" style="background-color:white;">
+          <!--  to do, if a change is to an added shareholder company, it is not a leadership change-->
+          <!--table class="greyGridTable" style="background-color:white;">
             <tr *ngIf="LicenseeChangeLog.HasLeadershipChanges(this.treeRoot)">
               <td style="text-align:left;"><strong>Addition or change of, or change of name of, director, officer, senior manager</strong></td>
               <td>$500 x {{this.numberOfCannabisLicences}} Cannabis Licences</td>
@@ -42,7 +43,8 @@
               <td><strong>${{this.calculateSubTotal(110,110)}}</strong></td>
             </tr>
           </table>
-            <br><br>
+            <br-->
+            <br>
           <ul>
             <li>Applicable fees for cannabis licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1" target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
             <li>Applicable fees for liquor licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1" target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
