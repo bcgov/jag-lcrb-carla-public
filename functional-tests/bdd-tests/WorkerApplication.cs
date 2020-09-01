@@ -230,7 +230,7 @@ namespace bdd_tests
             Page Title: Apply for a cannabis licence
             */
 
-            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+            //Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
 
         [Then(@"I sign out")]
