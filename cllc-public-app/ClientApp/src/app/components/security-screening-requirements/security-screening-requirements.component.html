@@ -3,7 +3,7 @@
     <div [ngBusy]="busy"></div>
 
 
-    <div class="row">
+    <div class="row" *ngIf="!skipScreeningRequirements; else skipContent">
         <section class="col-md-8">
             <mat-tab-group>
                 <mat-tab label="LIQUOR REQUIREMENTS" *ngIf="showLiquorContent()">
@@ -234,6 +234,13 @@
             </mat-tab-group>
         </section>
     </div>
+    <ng-template #skipContent>
+        <div class="row">
+            <section class="col-md-8">
+                <p>Security screening requirements for this application will be handled in coordination with LCRB.</p>
+            </section>
+        </div>
+    </ng-template>
 
     <div class="row">
         <section class="col-md-8 mt-3">
