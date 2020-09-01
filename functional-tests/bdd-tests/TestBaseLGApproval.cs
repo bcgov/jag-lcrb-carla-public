@@ -98,7 +98,9 @@ namespace bdd_tests
             {
                 System.Threading.Thread.Sleep(4000);
 
-                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Processed ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Application Under Review ')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Add Supporting Documents')]")).Displayed);
             }
         }
     }
