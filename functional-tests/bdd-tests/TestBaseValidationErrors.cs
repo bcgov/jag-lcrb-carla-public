@@ -81,10 +81,12 @@ namespace bdd_tests
                 if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == "n indigenous nation Cannabis application"))
                 {
                     // check missing police jurisdiction error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'policeJurisdiction is not valid')]")).Displayed);
+                    // under review - see LCSD-3846
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'policeJurisdiction is not valid')]")).Displayed);
 
                     // check missing indigenous nation error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'indigenousNation is not valid')]")).Displayed);
+                    // under review - see LCSD-3846
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'indigenousNation is not valid')]")).Displayed);
                 }
 
                 if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == " location change application") || (applicationType == "n indigenous nation Cannabis application"))
@@ -119,9 +121,32 @@ namespace bdd_tests
 
                 if (applicationType == "n event authorization")
                 {
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TO BE COMPLETED')]")).Displayed);
+                    // check missing contact name error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the contact name')]")).Displayed);
 
-                    // waiting for bug fix: LCSD-3663
+                    // check missing contact phone number error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the contact phone number')]")).Displayed);
+
+                    // check missing event description error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter a description of the event')]")).Displayed);
+
+                    // check missing client or host name error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the client or host name')]")).Displayed);
+
+                    // check maximum attendance error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum attendance (must be a number)')]")).Displayed);
+
+                    // check maximum staff attendance error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum staff attendance (must be a number)')]")).Displayed);
+
+                    // check missing venue error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the name and a description of the venue')]")).Displayed);
+
+                    // check missing address error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the address line 1')]")).Displayed);
+
+                    // check missing postal code error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the postal code')]")).Displayed);
                 }
 
                 if (applicationType == " transfer of ownership")
