@@ -6,8 +6,8 @@
         <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
         <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
           <p>
-            <label>BEFORE YOU APPLY</label>: &nbsp;
-            TO DO
+            <label>BEFORE YOU APPLY</label>:&nbsp;
+            Ensure you have completed the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associate Financial Integrity Form</a>.
           </p>
 
           <p class="pl-3">
@@ -19,7 +19,7 @@
             <label>INSTRUCTIONS</label>:
             <ul>
               <li>
-                You must complete all questions in order submit. Information will not be saved unless
+                You must complete all questions in order to submit. Information will not be saved unless
                 the form is complete.
               </li>
               <li>Attach all supporting documentation as directed.</li>
@@ -34,17 +34,202 @@
           </div>
         </div>
       </section>
+
       <section class="login-section p-3" *ngIf="!user">
-        <h2>This associate screening is meant for {{form.get('contact.shortName').value}}.</h2>
-        <p>If this is you please sign in below.</p>
-        <p class="login-bc-service d-flex justify-content-between">
-          <strong style="margin-top: 10px">I have a BC Services Card set-up to use online</strong>
-          <a class="btn btn-primary float-right" href="bcservice/token/joe?path=cannabis-associate-screening&code={{contactToken}}">Login with a BC Services Card</a>
-        </p>
-        <p class="login-bc-service d-flex justify-content-between">
-          <strong style="margin-top: 10px">I am out of province</strong>
-          <a class="btn btn-primary" href="#">I am out of province</a>
-        </p>
+        <h2>This cannabis associate security screening is meant for {{form.get('contact.shortName').value}}.</h2>
+        <p>If this is you please complete the following questions:</p>
+        <app-field label="Where do you currently reside?"
+          [showChevrons]="false" [isFullWidth]="true">
+          <mat-radio-group class="radio-group" formControlName="residency">
+            <mat-radio-button class="mr-5" value="bc">I am a resident of B.C.</mat-radio-button>
+            <mat-radio-button class="mr-5" value="canada">I am a resident of a different Canadian province.</mat-radio-button>
+            <mat-radio-button class="mr-5" value="outside">I am a resident of a country outside of Canada.</mat-radio-button>
+          </mat-radio-group>
+        </app-field>
+
+
+        <div *ngIf="form.get('residency').value === 'bc'">
+          <app-field label="Do you have a BC Services Card?"
+            [showChevrons]="false" [isFullWidth]="true">
+            <mat-radio-group class="radio-group" formControlName="hasServicesCard">
+              <mat-radio-button class="mr-5" value="yes">Yes, I have a BC Services Card</mat-radio-button>
+              <mat-radio-button class="mr-5" value="no">No, I do not have a BC Services Card</mat-radio-button>
+            </mat-radio-group>
+          </app-field>
+          <div *ngIf="form.get('hasServicesCard').value === 'yes'">
+            <p class="login-bc-service d-flex justify-content-between">
+              <strong style="margin-top: 10px">I have BC Services Card set-up to use online</strong>
+              <a class="btn btn-primary float-right" href="bcservice/token/joe?path=cannabis-associate-screening&code={{contactToken}}">BC Services Card Login</a>
+            </p>
+            <p class="login-bc-service d-flex justify-content-between">
+              <strong style="margin-top: 10px">I do not have BC Services Card set-up to use online</strong>
+              <a class="btn btn-primary float-right" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/log-in-with-card/setup" target="_blank">Get Set Up</a>
+            </p>
+          </div>
+          <div *ngIf="form.get('hasServicesCard').value === 'no'">
+            <a class="btn btn-primary" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/your-card/get-a-card" target="_blank">Get a BC Services Card</a>
+            <h3>-or-</h3>
+            <p>Manually submit the required information by completing the following steps:</p>
+            <ol>
+              <li>Visit a Service BC location with:</li>
+                <ul>
+                  <li>2 pieces of valid ID for copying and verification by a Service BC staff member</li>
+                  <ul>
+                    <li>A piece of valid government-issued photo ID that contains your name, date of birth and signature</li>
+                    <li>A piece of secondary ID with an imprinted name that exactly matches that on the government-issued ID and with a signature</li>
+                  </ul>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification Attestation Form</a></li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-witness-signature.pdf" target="_blank">Witness of Signature Attestation Form</a></li>
+                  <li>Unsigned copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening Form</a></li>
+                </ul>
+              <li>Have a Service BC representative:</li>
+              <ul>
+                <li>Conduct an in-person verification of your two piecees of ID and make a copies</li>
+                <li>Complete the Identity Verification Attestation Form</li>
+                <li>Witness your signature on the Consent for Cannabis Security Screening form and ensure information on the form matches the ID presented</li>
+                <li>Complete the Witness of Signature Attestation Form</li>
+                <li>Send both attestation forms, copies of your ID and the signed Consent for Cannabis Security Screening form to the B.C. Liquor and Cannabis Regulation Branch</li>
+              </ul>
+              <li>Contact <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a> to arrange for a secure file transfer of your <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associates Financial Integrity Form</a>. Please include the cannabis retail store licence application number in your email. Do not include your form or any personal information.</li>
+            </ol>
+          </div>
+        </div>
+
+
+        <div *ngIf="form.get('residency').value === 'canada'">
+          <app-field label="Are you currently in B.C.?"
+            [showChevrons]="false" [isFullWidth]="true">
+            <mat-radio-group class="radio-group" formControlName="inBC">
+              <mat-radio-button class="mr-5" value="yes">Yes</mat-radio-button>
+              <mat-radio-button class="mr-5" value="no">No</mat-radio-button>
+            </mat-radio-group>
+          </app-field>
+          <div *ngIf="form.get('inBC').value === 'yes'">
+            <p>Manually submit the required information by completing the following steps:</p>
+            <ol>
+              <li>Visit a Service BC location with:</li>
+                <ul>
+                  <li>A piece of valid government-issued photo ID That contains your name, date of birth and signature</li>
+                  <li>A piece of secondary ID with an imprinted name that exactly matches that on the government-issued ID and with a signature</li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification Attestation Form</a></li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-witness-signature.pdf" target="_blank">Witness of Signature Attestation Form</a></li>
+                  <li>Unsigned copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening Form</a></li>
+                </ul>
+              <li>Have a Service BC representative:</li>
+              <ul>
+                <li>Conduct an in-person verification of your two pieces of ID and make copies</li>
+                <li>Complete the Identity Verification Attestation Form</li>
+                <li>Witness your signature on the Consent for Cannabis Security Screening form and ensure information on the form matches the ID presented</li>
+                <li>Complete the Witness of Signature Attestation Form</li>
+                <li>Send both attestation forms, copies of your ID and the signed Consent for Cannabis Security Screening form to the B.C. Liquor and Cannabis Regulation Branch</li>
+              </ul>
+              <li>Contact <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a> to arrange for a secure file transfer of your <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associates Financial Integrity Form</a>. Please include the cannabis retail store licence application number in your email. Do not include your form or any personal information.</li>
+            </ol>
+          </div>
+          <div *ngIf="form.get('inBC').value === 'no'">
+            <p>Manually submit the required information by completing the following steps:</p>
+            <ol>
+              <li>Visit a local police station with:</li>
+                <ul>
+                  <li>A piece of valid government-issued photo ID That contains your name, date of birth and signature</li>
+                  <li>A piece of secondary ID with an imprinted name that exactly matches that on the government-issued ID and with a signature</li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification Attestation Form</a></li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-witness-signature.pdf" target="_blank">Witness of Signature Attestation Form</a></li>
+                  <li>Unsigned copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening Form</a></li>
+                </ul>
+              <li>At the local police station:</li>
+              <ul>
+                <li>Apply for a Police Information Check (PIC) at a local police department. DO NOT OPEN the Plice Information Check when you receive it.</li>
+                <li>Have the police station clerk:</li>
+                <ul>
+                  <li>Conduct an in-person verification of your two pieces of ID</li>
+                  <li>Complete the Identity Verification Attestation Form</li>
+                  <li>Witness your signature on the Consent for Cannabis Security Screening Form and ensure information on the form matches the ID presented</li>
+                  <li>Complete the Witness of Signature Attestation Form</li>
+                </ul>
+              </ul>
+              <li>Send your UNOPENED Police Information Check to the B.C. Liquor and Cannabis Regulation Branch at PO Box 9292 Stn Provincial Govt, Victoria, BC, V8W 9J8 -- include a note indicating the relevant application's Reference Number or the address of the proposed retail store location (provided to you by the applicant if you are an associate)</li>
+              <li>Contact <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a> to arrange for a secure file transfer of the required documents. Please include the cannabis retail store licence application number in your email. Do not include your form or any personal information.</li>
+                <ul>
+                  <li>Associates Financial Integrity Form and supporting documents</li>
+                  <li>Scanned copies of your passport and secondary ID</li>
+                  <li>Scanned copy of completed and signed Consent for Cannabis Security Screening</li>
+                  <li>Scanned copy of completed and signed Witness of Signature Attestation Form</li>
+                  <li>Scanned copy of completed and signed Identity Verification Attestation Form</li>
+                </ul>
+            </ol>
+          </div>
+        </div>
+
+        <div *ngIf="form.get('residency').value === 'outside'">
+          <app-field label="Are you currently in B.C.?"
+            [showChevrons]="false" [isFullWidth]="true">
+            <mat-radio-group class="radio-group" formControlName="inBC">
+              <mat-radio-button class="mr-5" value="yes">Yes</mat-radio-button>
+              <mat-radio-button class="mr-5" value="no">No</mat-radio-button>
+            </mat-radio-group>
+          </app-field>
+          <div *ngIf="form.get('inBC').value === 'yes'">
+            <p>Manually submit the required information by completing the following steps:</p>
+            <ol>
+              <li>Request a Criminal Record Check from your country of residency; if your Criminal Record Check will not be in English, you must request a second copy for translation</li>
+              <li>If the original Criminal Record Check is not in English, have the check translated by a translator who is admitted to a professional association</li>
+              <li>Visit a Service BC location with:</li>
+                <ul>
+                  <li>A valid passport</li>
+                  <li>Another piece of valid government-issued ID with a signature and an imprinted name that exactly matches that on the passport</li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification Attestation Form</a></li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-witness-signature.pdf" target="_blank">Witness of Signature Attestation Form</a></li>
+                  <li>Unsigned copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening Form</a></li>
+                </ul>
+              <li>Have a Service BC representative:</li>
+              <ul>
+                <li>Conduct an in-person verification of your passport and piece of government-issued ID and make a copies</li>
+                <li>Complete the Identity Verification Attestation Form</li>
+                <li>Witness your signature on the Consent for Cannabis Security Screening form and ensure information on the form matches the ID presented</li>
+                <li>Complete the Witness of Signature Attestation Form</li>
+                <li>Send both attestation forms, copies of your ID and the signed Consent for Cannabis Security Screening form to the B.C. Liquor and Cannabis Regulation Branch</li>
+              </ul>
+              <li>Send your UNOPENED Police Information Check to the B.C. Liquor and Cannabis Regulation Branch at PO Box 9292 Stn Provincial Govt, Victoria, BC, V8W 9J8 -- include a note indicating the relevant application's Reference Number or the address of the proposed retail store location (provided to you by the applicant if you are an associate)</li>
+              <li>Contact <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a> to arrange for a secure file transfer of your <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associates Financial Integrity Form</a>. Please include the cannabis retail store licence application number in your email. Do not include your form or any personal information.</li>
+            </ol>
+          </div>
+          <div *ngIf="form.get('inBC').value === 'no'">
+            <p>Manually submit the required information by completing the following steps:</p>
+            <ol>
+              <li>Visit a local police station with:</li>
+                <ul>
+                  <li>A valid passport</li>
+                  <li>Another piece of valid government-issued ID with a signature and an imprinted name that exactly matches that on the passport</li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification Attestation Form</a></li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-witness-signature.pdf" target="_blank">Witness of Signature Attestation Form</a></li>
+                  <li>Unsigned copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening Form</a></li>
+                </ul>
+              <li>At the local police station:</li>
+              <ul>
+                <li>Request a Criminal Record Check; if your Criminal Record Check will not be in English, you must request a second copy for translation</li>
+                <li>If the original Criminal Record Check is not in English, have the check translated by a translator who is admitted to a professional association</li>
+                <li>Have the police station clerk:</li>
+                <ul>
+                  <li>Conduct an in-person verification of your two pieces of ID</li>
+                  <li>Complete the Identity Verification Attestation Form</li>
+                  <li>Witness your signature on the Consent for Cannabis Security Screening Form and ensure information on the form matches the ID presented</li>
+                  <li>Complete the Witness of Signature Attestation Form</li>
+                </ul>
+              </ul>
+              <li>Send your UNOPENED Police Information Check to the B.C. Liquor and Cannabis Regulation Branch at PO Box 9292 Stn Provincial Govt, Victoria, BC, V8W 9J8 -- include a note indicating the relevant application's Reference Number or the address of the proposed retail store location (provided to you by the applicant if you are an associate)</li>
+              <li>Contact <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a> to arrange for a secure file transfer of the required documents. Please include the cannabis retail store licence application number in your email. Do not include your form or any personal information.</li>
+                <ul>
+                  <li>Associates Financial Integrity Form and supporting documents</li>
+                  <li>Scanned copies of your passport and secondary ID</li>
+                  <li>Scanned copy of completed and signed Consent for Cannabis Security Screening</li>
+                  <li>Scanned copy of completed and signed Witness of Signature Attestation Form</li>
+                  <li>Scanned copy of completed and signed Identity Verification Attestation Form</li>
+                </ul>
+            </ol>
+          </div>
+        </div>
+
       </section>
       <div *ngIf="user && showForm">
         <!-- {{form.value | json}} -->
@@ -180,8 +365,8 @@
           <p>
             <span>
               <input type="checkbox" formControlName="consentToCollection">
-              I
-              <span style="text-decoration: underline;">{{user?.firstname}} {{user?.lastname}} </span>
+              I,
+              <span style="text-decoration: underline;">{{user?.firstname}} {{user?.lastname}},</span> 
               authorize the collection of my personal information on this application by the Royal Canadian Mounted Police (RCMP)
               and other federal government institution under the Privacy Act for the purpose of conducting a check of criminal investigations,
               charges and convictions. I also authorize the provision of my personal information on this application by the BC Municipal Law

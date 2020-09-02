@@ -11,6 +11,12 @@
   font-size: 16px;
 }
 
+.radio-group {
+  .mat-radio-button {
+    display: block;
+  }
+}
+
 .fa-trash-alt {
     color: #1a5a96;
   }
