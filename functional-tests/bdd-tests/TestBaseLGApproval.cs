@@ -20,41 +20,74 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I approve the application for a (.*)")]
-        public void ApproveApplication(string applicationType)
-        {
-            if (applicationType == "picnic area")
-            {
-
-            }
-        }
-
-
-        [And(@"I read the response from the local government")]
-        public void ReadResponse()
-        {
-
-        }
-
-
         [And(@"I specify that the zoning allows the endorsement")]
         public void ZoningAllowsEndorsement()
         {
+            // create test data
+            string appsForReview = "Applications for Review";
+            string reviewApp = "Review Application";
 
+            // click on Applications for Review link
+            ClickOnLink(appsForReview);
+
+            // click on Review Application link
+            ClickOnLink(reviewApp);
+
+            // select 'Allows' for zoning confirmation
+            NgWebElement uiAllowsZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='lgZoning'] mat-radio-button#mat-radio-2"));
+            uiAllowsZoning.Click();
         }
 
 
         [And(@"I specify my contact details")]
         public void SpecifyContactDetails()
         {
+            // create test data
+            string nameOfOfficial = "Official Name";
+            string title = "Title";
+            string phone = "1811811818";
+            string email = "test@automation.com";
+            string zoningComments = "Sample zoning comments.";
 
+            // enter the name of the official
+            NgWebElement uiOfficialName = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'lGNameOfOfficial']"));
+            uiOfficialName.SendKeys(nameOfOfficial);
+
+            // enter the official's title
+            NgWebElement uiOfficialTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGTitlePosition']"));
+            uiOfficialTitle.SendKeys(title);
+
+            // enter the official's phone number
+            NgWebElement uiOfficialPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactPhone']"));
+            uiOfficialPhone.SendKeys(phone);
+
+            // enter the official's email
+            NgWebElement uiOfficialEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactEmail']"));
+            uiOfficialEmail.SendKeys(email);
+
+            // enter the zoning comments
+            NgWebElement uiZoningComments = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='lGDecisionComments']"));
+            uiZoningComments.SendKeys(zoningComments);
+
+            // click on the Submit button
+            ClickOnSubmitButton();
         }
 
 
         [And(@"I review the local government")]
         public void ReviewLocalGovernment()
         {
+            // create test data
+            string completeApplication = "Complete Application";
 
+            // click on Complete Application link
+            ClickOnLink(completeApplication);
+
+            Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Manufacturer Picnic Area Endorsement Application ')]")).Displayed);
+
+            System.Threading.Thread.Sleep(4000);
+
+            ClickOnSubmitButton();
         }
 
 
@@ -62,8 +95,12 @@ namespace bdd_tests
         public void DashboardStatus(string status)
         {
             if (status == "Application Under Review")
-            { 
-            
+            {
+                System.Threading.Thread.Sleep(4000);
+
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Application Under Review ')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Add Supporting Documents')]")).Displayed);
             }
         }
     }

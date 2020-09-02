@@ -772,8 +772,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentParcelId = dynamicsApplication.AdoxioEstablishmentparcelid,
                 IndigenousNationId = dynamicsApplication._adoxioLocalgovindigenousnationidValue,
                 PoliceJurisdictionId = dynamicsApplication._adoxioPolicejurisdictionidValue,
-                IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete,
-
+                IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete
             };
 
             // id
@@ -790,6 +789,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (dynamicsApplication.AdoxioApplicationTypeId != null)
             {
                 applicationSummary.ApplicationTypeName = dynamicsApplication.AdoxioApplicationTypeId.AdoxioName;
+                applicationSummary.IsForLicence = dynamicsApplication.AdoxioApplicationTypeId._adoxioLicencetypeValue != null;
                 applicationSummary.Portallabel = dynamicsApplication.AdoxioApplicationTypeId.AdoxioPortallabel;
                 applicationSummary.ApplicationTypeCategory = (ApplicationTypeCategory?)dynamicsApplication.AdoxioApplicationTypeId.AdoxioCategory;
             }
