@@ -36,19 +36,19 @@ namespace bdd_tests
             string proposedPID = "111111111";
 
             // enter the proposed address
-            NgWebElement uiProposedAddress = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiProposedAddress = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
             uiProposedAddress.SendKeys(proposedAddress);
 
             // enter the proposed city
-            NgWebElement uiProposedCity = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiProposedCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
             uiProposedCity.SendKeys(proposedCity);
 
             // enter the proposed postal code
-            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiProposedPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
             uiProposedPostalCode.SendKeys(proposedPostalCode);
 
             // enter the proposed PID
-            NgWebElement uiProposedPID = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiProposedPID = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
             uiProposedPID.SendKeys(proposedPID);
 
             // find the upload test files in the bdd-tests\upload_files folder
@@ -58,32 +58,32 @@ namespace bdd_tests
 
             // upload the signage document
             string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[14]"));
+            NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
             uiUploadSignage.SendKeys(signagePath);
 
             // upload the floor plan
             string floorPlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-            NgWebElement uiUploadFloorPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[17]"));
+            NgWebElement uiUploadFloorPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
             uiUploadFloorPlan.SendKeys(floorPlanPath);
 
             // upload the site plan
             string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uiUploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[]"));
+            NgWebElement uiUploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
             uiUploadSitePlan.SendKeys(sitePlanPath);
 
             // upload the exterior photos
             string exteriorPhotosPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "exterior_photos.pdf");
-            NgWebElement uiUploadExteriorPhotos = ngDriver.FindElement(By.XPath("(//input[@type='file'])[]"));
+            NgWebElement uiUploadExteriorPhotos = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
             uiUploadExteriorPhotos.SendKeys(exteriorPhotosPath);
 
             // select 'Yes' for proposed LRS site located within a grocery store
-            NgWebElement uiProposedSiteInGrocery = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiProposedSiteInGrocery = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1 button#mat-button-toggle-1-button"));
             uiProposedSiteInGrocery.Click();
 
             // upload grocery declaration document
-            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uiUploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[20]"));
-            uiUploadSitePlan.SendKeys(sitePlanPath);
+            string groceryDeclarationPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "grocery_declaration.pdf");
+            NgWebElement uiUploadGroceryDeclaration = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
+            uiUploadGroceryDeclaration.SendKeys(groceryDeclarationPath);
 
             // select the owner checkbox
             NgWebElement uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwnerBusiness']"));
@@ -98,6 +98,9 @@ namespace bdd_tests
             uiFutureValidInterest.Click();
 
             // upload valid interest document
+            string validInterestPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "valid_interest.pdf");
+            NgWebElement uiUploadValidInterest = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
+            uiUploadValidInterest.SendKeys(validInterestPath);
 
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
