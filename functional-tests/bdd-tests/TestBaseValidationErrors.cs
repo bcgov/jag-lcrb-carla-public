@@ -228,7 +228,8 @@ namespace bdd_tests
                 if (applicationType == " structural alterations request")
                 {
                     // check that missing capacity error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
+                    // under review - see LCSD-3803
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
 
                     // check missing floor plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
@@ -260,7 +261,8 @@ namespace bdd_tests
                 if (applicationType == " picnic area endorsement")
                 {
                     // check that missing capacity error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
+                    // under review - see LCSD-3803
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
 
                     // check missing site plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
