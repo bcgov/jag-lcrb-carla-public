@@ -44,6 +44,9 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
 
   ngOnInit() {
     this.form = this.fb.group({
+      residency: [],
+      hasServicesCard: [],
+      inBC: [],
       firstNameAtBirth: [''],
       lastNameAtBirth: [''],
       sameNameAtBirth: [true],

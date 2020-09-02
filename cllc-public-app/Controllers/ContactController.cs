@@ -604,7 +604,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(phsLink);
         }
 
-        
+        public static string GetPhsLink(string contactId, IConfiguration _configuration, string encryptionKey)
+        {
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
+            result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, encryptionKey));
+            return result;
+        }
 
         [HttpGet("phs/{code}")]
         [AllowAnonymous]
