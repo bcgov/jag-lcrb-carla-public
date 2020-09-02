@@ -237,7 +237,8 @@ namespace bdd_tests
                 if ((applicationType == " special event area endorsement") || (applicationType == " lounge area endorsement"))
                 {
                     // check that service hours error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'serviceHoursWednesdayOpen is not valid')]")).Displayed);
+                    // under review - see LCSD-3849
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'serviceHoursWednesdayOpen is not valid')]")).Displayed);
 
                     // check missing site plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
@@ -246,7 +247,8 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
 
                     // check that missing hours of sale error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Hours of sale are required')]")).Displayed);
+                    // under review - see LCSD-3849
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Hours of sale are required')]")).Displayed);
                 }
 
                 if (applicationType == " third party operator")
