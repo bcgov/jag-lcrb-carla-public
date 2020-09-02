@@ -1,10 +1,10 @@
 ﻿Feature: CateringApplicationPersonnelNameChanges
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit personnel name and email changes for different business types
+    And submit personnel name changes for different business types
 
 @e2e @catering @partnership @cateringemailpartner
-Scenario: Catering Partnership Personnel Email Change
+Scenario: Catering Partnership Personnel Name Change
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -21,13 +21,11 @@ Scenario: Catering Partnership Personnel Email Change
     And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
-    And I click on the link for Dashboard
-    And I change a personnel email address for a partnership
     And the account is deleted
     Then I see the login page
 
 @e2e @catering @privatecorporation @cateringemailprivcorp
-Scenario: Catering Private Corporation Personnel Email Change
+Scenario: Catering Private Corporation Personnel Name Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -44,13 +42,11 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
-    And I click on the link for Dashboard
-    And I change a personnel email address for a private corporation
     And the account is deleted
     Then I see the login page
 
 @e2e @catering @publiccorporation @cateringemailpubcorp
-Scenario: Catering Public Corporation Personnel Email Change
+Scenario: Catering Public Corporation Personnel Name Change
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -67,13 +63,11 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
-    And I click on the link for Dashboard
-    And I change a personnel email address for a public corporation
     And the account is deleted
     Then I see the login page
 
 @e2e @catering @society @cateringemailsociety
-Scenario: Catering Society Personnel Email Change
+Scenario: Catering Society Personnel Name Change
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -90,13 +84,11 @@ Scenario: Catering Society Personnel Email Change
     And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
-    And I click on the link for Dashboard
-    And I change a personnel email address for a society
     And the account is deleted
     Then I see the login page
 
 @e2e @catering @soleproprietorship @cateringemailsoleprop
-Scenario: Catering Sole Proprietorship Personnel Email Change
+Scenario: Catering Sole Proprietorship Personnel Name Change
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
@@ -113,7 +105,5 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
-    And I click on the link for Dashboard
-    And I change a personnel email address for a sole proprietorship
     And the account is deleted
     Then I see the login page

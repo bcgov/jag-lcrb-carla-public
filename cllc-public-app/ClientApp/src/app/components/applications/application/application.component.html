@@ -509,13 +509,14 @@
                         <!-- if it's a textbox, show it like a text box-->
                         <app-field
                           *ngIf="formField.controltype == 'TextBoxControl' && formField.datafieldname !== 'establishmentParcelId'"
-                          [label]="formField.name" [required]="formField.required">
+                          [label]="formField.name" [required]="formField.required"  [errorMessage]="'This field is required.'">
                           <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname"
                             [id]="formField.datafieldname" />
                         </app-field>
                         <!-- show text area-->
-                        <div class="padded-section" style="padding-left: 20px;" *ngIf="formField.controltype == 'TextAreaControl'">
-                          <app-field [label]="formField.name" [required]="formField.required" [isFullWidth]="true"
+
+                        <div class="padded-section" style="padding-left: 10px;" *ngIf="formField.controltype == 'TextAreaControl'">
+                          <app-field [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'" [isFullWidth]="true"
                             [valid]="isValidOrNotTouched(formField.datafieldname)" [showChevrons]="false">
                             <textarea rows="8" style="width: 100%;" maxlength="5000" [formControlName]="formField.datafieldname"
                               [id]="formField.datafieldname"></textarea>
@@ -524,7 +525,7 @@
             
                         <!-- date time controls-->
                         <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.name"
-                          [required]="formField.required">
+                          [required]="formField.required" [errorMessage]="'This field is required.'">
                           <input type="text" style="width: 200px; background-color: #fff;"
                             [formControlName]="formField.datafieldname" [id]="formField.datafieldname" placeholder="yyyy-mm-dd"
                             readonly class="form-control" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
@@ -532,43 +533,46 @@
                         </app-field>
             
                         <!-- pick list-->
-                        <mat-card *ngIf="formField.controltype == 'PicklistControl'" class="mat-elevation-z0"
-                          style="margin-bottom: 10px;">
-                          <section style="width: 100%;">
-                            <div class="question-label" style="margin-bottom:10px;">
-                              {{formField.name}}
-                            </div>
-                            <div>
-                              <mat-button-toggle-group aria-label="Font Style" [formControlName]="formField.datafieldname"
-                                [id]="formField.datafieldname">
-                                <mat-button-toggle *ngFor="let option of formField.options" [value]="option.value">
-                                  {{option.label}}</mat-button-toggle>
-                              </mat-button-toggle-group>
-                            </div>
-                          </section>
-                        </mat-card>
-            
-                        <!-- lookup field-->
-            
-                        <app-field *ngIf="formField.controltype == 'LookupControl'" [label]="formField.name"
-                          [required]="formField.required">
-                          Lookup
-                        </app-field>
-            
-                        <!-- Radio Control -->
-                        <app-field *ngIf="formField.controltype == 'RadioControl'"
-                          [valid]="!showValidationMessages || form.get(formField.datafieldname).valid" errorMessage=""
-                          [showChevrons]="false">
-                          <section style="display: flex; padding-left: 20px;">
-                            <input type="checkbox" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-                            <span class="error-states">*</span>
-                            <div style="padding-left: 10px;" class="question-label">
-                              {{formField.name}}
-                            </div>
-                          </section>
-                        </app-field>
-            
-                    </div>
+                        <div *ngIf="formField.controltype == 'PicklistControl'" style="padding-left: 10px;">
+                          <app-field [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'" [valid]="isValidOrNotTouched(formField.datafieldname)" >
+
+                            <mat-card *ngIf="formField.controltype == 'PicklistControl'" class="mat-elevation-z0"
+                                      style="margin-bottom: 10px;">
+                              <section style="width: 100%;">
+
+                                <div>
+                                  <mat-button-toggle-group aria-label="Font Style" [formControlName]="formField.datafieldname"
+                                                           [id]="formField.datafieldname">
+                                    <mat-button-toggle *ngFor="let option of formField.options" [value]="option.value">
+                                      {{option.label}}
+                                    </mat-button-toggle>
+                                  </mat-button-toggle-group>
+                                </div>
+                              </section>
+                            </mat-card>
+                          </app-field>
+                        </div>
+                          <!-- lookup field-->
+
+                          <app-field *ngIf="formField.controltype == 'LookupControl'" [label]="formField.name"
+                                     [required]="formField.required" [errorMessage]="'This field is required.'">
+                            Lookup Not Implemented
+                          </app-field>
+
+                          <!-- Radio Control -->
+                          <app-field *ngIf="formField.controltype == 'RadioControl'"
+                                     [valid]="!showValidationMessages || form.get(formField.datafieldname).valid" [required]="formField.required" [errorMessage]="'This field is required.'"
+                                     [showChevrons]="false">
+                            <section style="display: flex; padding-left: 20px;">
+                              <input type="checkbox" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                              <span class="error-states">*</span>
+                              <div style="padding-left: 10px;" class="question-label">
+                                {{formField.name}}
+                              </div>
+                            </section>
+                          </app-field>
+
+</div>
             
                   </div>
             
@@ -810,9 +814,9 @@
             <h3 class="blue-header" *ngIf="application.applicationType.capacityArea">CAPACITY AREA</h3>
             <section *ngIf="application.applicationType.capacityArea" class="padded-section content-bottom" formGroupName="capacityArea">
               <div *ngIf="htmlContent?.capacityArea" [innerHTML]="htmlContent.capacityArea"></div>
-              <app-field label="Capacity" [required]="true" [valid]="!showValidationMessages || form.get('capacityArea').valid"
+              <app-field label="Capacity" [required]="true" [valid]="!showValidationMessages || form.get('capacityArea.capacity').valid"
                 errorMessage="Capacity is required." [showChevrons]="false" [isFullWidth]="false">
-                <input formControlName="capacity" placeholder="Enter Capacity" mask="0*" [readonly]="isOpenedByLGForApproval || lGHasApproved()"/>
+                <input formControlName="capacity" id="capacity" placeholder="Enter Capacity" mask="0*" [readonly]="isOpenedByLGForApproval || lGHasApproved()"/>
               </app-field>
             </section>
 
@@ -1960,7 +1964,7 @@
               rel="noopener noreferrer">
               and complete
             </a>
-            &nbsp;the Associate Form..
+            &nbsp;the Associate Form.
           </i>
           <p>Upload the completed form below.</p>
           <section>

@@ -7,7 +7,7 @@ namespace Gov.Lclb.Cllb.Public.Mapping
 {
     public class FieldMap
     {
-        protected Dictionary<string, string> fieldMap;
+        protected Dictionary<string, FieldMapping> fieldMap;
 
         public string GetViewModelKey (string dataModelKey)
         {
@@ -15,10 +15,22 @@ namespace Gov.Lclb.Cllb.Public.Mapping
             // convert from the data model to the view model.
             if (fieldMap != null && fieldMap.ContainsKey (dataModelKey))
             {
-                result = fieldMap[dataModelKey];
+                result = fieldMap[dataModelKey].FieldName;
             }
             return result;
         }
+
+        public bool GetRequired(string dataModelKey)
+        {
+            bool result = false;
+            // convert from the data model to the view model.
+            if (fieldMap != null && fieldMap.ContainsKey(dataModelKey))
+            {
+                result = fieldMap[dataModelKey].IsRequired;
+            }
+            return result;
+        }
+
 
     }
 }

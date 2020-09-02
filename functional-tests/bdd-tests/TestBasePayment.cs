@@ -61,7 +61,9 @@ namespace bdd_tests
             Page Title: Licences
             */
 
+            // create test data
             string firstYearLicenceFee = "Pay First Year Licensing Fee";
+            string returnToDashboard = "Return to Dashboard";
 
             // click on the pay first year licence fee link
             NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
@@ -81,6 +83,10 @@ namespace bdd_tests
                 // confirm correct payment amount for CRS
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
             }
+
+            // click on the return to dashboard link
+            NgWebElement uiReturnToDashboard = ngDriver.FindElement(By.LinkText(returnToDashboard));
+            uiReturnToDashboard.Click();
 
             ClickLicencesTab();
         }
