@@ -120,33 +120,12 @@ namespace bdd_tests
                 }
 
                 if (applicationType == "n event authorization")
-                {
-                    // check missing contact name error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the contact name')]")).Displayed);
-
-                    // check missing contact phone number error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the contact phone number')]")).Displayed);
-
-                    // check missing event description error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter a description of the event')]")).Displayed);
-
-                    // check missing client or host name error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the client or host name')]")).Displayed);
-
+                { 
                     // check maximum attendance error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum attendance (must be a number)')]")).Displayed);
 
                     // check maximum staff attendance error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum staff attendance (must be a number)')]")).Displayed);
-
-                    // check missing venue error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the name and a description of the venue')]")).Displayed);
-
-                    // check missing address error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the address line 1')]")).Displayed);
-
-                    // check missing postal code error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the postal code')]")).Displayed);
                 }
 
                 if (applicationType == " transfer of ownership")
