@@ -167,7 +167,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     };
                     _dynamicsClient.Licenceses.Update(licenceGuid, patchRecord);
 
-                    BackgroundJob.Schedule(() => new OneStopUtils(Configuration, _cache).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString("D3"))// zero pad 3 digit.
+                    BackgroundJob.Schedule(() => new OneStopUtils(Configuration, _cache).SendProgramAccountRequestREST(null, licenceGuid, currentSuffix.ToString("D3"))// zero pad 3 digit.
                     , TimeSpan.FromSeconds(30)); // Try again after 30 seconds
                 }                
                 else
