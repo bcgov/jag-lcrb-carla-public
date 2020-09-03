@@ -12,7 +12,7 @@ Scenario: Indigenous Nation Catering Application
     And I complete the Catering application
     And I click on the Submit button
     And I review the security screening requirements for an indigenous nation
-    And I click on the button for Pay for Application for an indigenous nation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And the account is deleted
@@ -108,7 +108,23 @@ Scenario: Local Government Catering Application
     And I complete the Catering application
     And I click on the Submit button
     And I review the security screening requirements for a local government
-    And I click on the button for Pay for Application for a local government 
+    And I click on the button for Pay for Application
+    And I enter the payment information
+    And I confirm the payment receipt for a Catering application
+    And the account is deleted
+    Then I see the login page
+
+@e2e @catering @university @cateringapp
+Scenario: University Catering Application
+    Given I am logged in to the dashboard as a university
+    And I click on the Start Application button for Catering
+    And I review the account profile for a university
+    And I review the organization structure for a university
+    And I click on the button for Submit Organization Information
+    And I complete the Catering application
+    And I click on the Submit button
+    And I review the security screening requirements for a university
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And the account is deleted

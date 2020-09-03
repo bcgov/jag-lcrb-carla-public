@@ -787,6 +787,67 @@ namespace bdd_tests
                 NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
                 uiUploadAdditionalSupporting.SendKeys(additionalSupportingPath);
             }
+
+            if (businessType == " university")
+            {
+                // find the upload test file in the bdd-tests\upload_files folder
+                var environment = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                // upload an official document
+                string officialDocumentPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
+                NgWebElement uiUploadOfficialDocument = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+                uiUploadOfficialDocument.SendKeys(officialDocumentPath);
+
+                // upload the additional supporting document
+                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
+                NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+                uiUploadAdditionalSupporting.SendKeys(additionalSupportingPath);
+
+                /********** Leader #0 **********/
+
+                // create the leader data
+                string leaderFirstName = "Leader0";
+                string leaderLastName = "University";
+                string leaderTitle = "CTO";
+                string leaderEmail = "leader0@university.com";
+
+                // open leader #0 form  
+                NgWebElement uiOpenLeaderForm = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'][addlabel='Add Leadership'] button.btn-secondary"));
+                uiOpenLeaderForm.Click();
+
+                // enter leader #0 first name
+                NgWebElement uiLeaderFirst = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstNameNew']"));
+                uiLeaderFirst.SendKeys(leaderFirstName);
+
+                // enter leader #0 last name
+                NgWebElement uiLeaderLast = ngDriver.FindElement(By.CssSelector("input[formControlName='lastNameNew']"));
+                uiLeaderLast.SendKeys(leaderLastName);
+
+                // select leader #0 role
+                NgWebElement uiLeaderRole = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leadership'][changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
+                uiLeaderRole.Click();
+
+                // enter leader #0 title
+                NgWebElement uiLeaderTitle = ngDriver.FindElement(By.CssSelector("input[formControlName='titleNew']"));
+                uiLeaderTitle.SendKeys(leaderTitle);
+
+                // enter leader #0 email
+                NgWebElement uiLeaderEmail = ngDriver.FindElement(By.CssSelector("input[formControlName='emailNew']"));
+                uiLeaderEmail.SendKeys(leaderEmail);
+
+                // enter leader #0 DOB
+                NgWebElement uiOpenLeaderDOB = ngDriver.FindElement(By.CssSelector("input[formControlName='dateofBirthNew']"));
+                uiOpenLeaderDOB.Click();
+
+                // select the date
+                SharedCalendarDate();
+
+                // click on the Confirm button
+                NgWebElement uiConfirmButtonLeader = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] .fa-save span"));
+                uiConfirmButtonLeader.Click();
+            }
         }
     }
 }

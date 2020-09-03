@@ -1110,7 +1110,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                                 // translate the data field name
                                 formField.datafieldname = applicationMapping.GetViewModelKey(datafieldname);
 
-                                formField.required = control.Attribute("isrequired").DynamicsAttributeToBoolean();
+                                formField.required = applicationMapping.GetRequired(datafieldname);
 
                                 if (formField.controltype.Equals("PicklistControl"))
                                 {
