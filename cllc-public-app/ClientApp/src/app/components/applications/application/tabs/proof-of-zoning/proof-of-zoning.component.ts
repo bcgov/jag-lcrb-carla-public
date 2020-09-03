@@ -30,10 +30,20 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
     //this.form.patchValue(this.application);
   }
 
+  showQuestion() {
+
+    const licenceTypes = ["Manufacturer"];
+    const applicationTypes = ["On-Site Store Endorsement"];
+
+    return (licenceTypes.indexOf(this.application.licenseType) > -1 || 
+            applicationTypes.indexOf(this.application.applicationType.name) > -1);
+
+  }
+
 
   getValidationErrors(): string[]{
     let res = [];
-    if (this.application && this.application.licenseType !== 'Manufacturer' && (this.uploadedZoningDocuments || 0) < 1) {
+    if (!this.showQuestion() && (this.uploadedZoningDocuments || 0) < 1) {
       res.push('At least one zoning document is required.');
     }
     return res;
