@@ -20,7 +20,7 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request an event authorization")]
+        [And(@"I request an event authorization (.*)")]
         public void RequestEventAuthorization()
         {
             /* 
