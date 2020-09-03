@@ -304,16 +304,16 @@ namespace bdd_tests
             */
 
             // check that the director first name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
 
             // check that the director last name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[2]/span[contains(.,'NewLastName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section/app-associate-list/div/table/tr[1]/td[2]/span[contains(.,'NewLastName')]")).Displayed);
 
             // check that the shareholder first name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
 
             // check that the shareholder last name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
         }
 
 
