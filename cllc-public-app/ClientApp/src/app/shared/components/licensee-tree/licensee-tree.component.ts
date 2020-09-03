@@ -164,25 +164,6 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     this.refreshTreeAndChangeTables();
   }
 
-  /*
-  * Performs a Depth First Traversal and transforms the LegalEntity tree to change objects
-  */
-  processLegalEntityTree(node: LegalEntity): LicenseeChangeLog {
-    const newNode = LicenseeChangeLog.CreateFromLegalEntity(node);
-    if (node.children && node.children.length) {
-      newNode.children = [];
-      node.children.forEach(child => {
-        const childNode = this.processLegalEntityTree(child);
-        childNode.parentLicenseeChangeLog = newNode;
-        newNode.children.push(childNode);
-      });
-      newNode.children.sort((a, b) => {
-        return a.totalSharesNew - b.totalSharesNew;
-      });
-    }
-    return newNode;
-  }
-
   /**
    * Opens dialog for adding and editting shareholders
    * @param leader 'A LicenseeChangeLog'
