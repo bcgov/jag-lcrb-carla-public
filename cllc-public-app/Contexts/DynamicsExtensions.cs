@@ -984,7 +984,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public static Public.ViewModels.Form GetSystemformViewModel(this IDynamicsClient _dynamicsClient,  ILogger _logger, string formid)
+        public static Public.ViewModels.Form GetSystemformViewModel(this IDynamicsClient _dynamicsClient, IMemoryCache _cache, ILogger _logger, string formid)
         {
 
             // get the picklists.
@@ -993,7 +993,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             try
             {
-                picklistMetadata = _dynamicsClient.Entitydefinitions.GetEntityPicklists("adoxio_application").Value;
+                picklistMetadata = _dynamicsClient.GetCachedApplicationPicklists(_cache);
             }
             catch (Exception e)
             {
