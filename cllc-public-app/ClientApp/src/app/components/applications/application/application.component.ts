@@ -781,7 +781,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
               // mark application as complete
               this.save(!this.application.applicationType.isFree, <Application>{ isApplicationComplete: 'Yes' })
                 .subscribe(res => {
-                  debugger;
                   this.saveComplete.emit(true);
                   // however we need to redirect if the application is Free
                   if (this.application.applicationType.isFree) {
