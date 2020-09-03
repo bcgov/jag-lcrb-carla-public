@@ -150,7 +150,7 @@
                                                 documentType="{{asLicenseeChangeLog(associate?.value).fileUploadPrefix}} Name Change Documents"
                                                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                                                 entityName="account"
-                                                (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value?.refObject)"
+                                                (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value)"
                                                 [entityId]="account.id"
                                                 [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENT, DRAG FILE HERE OR'"
                                                 #financialIntegrityDocuments>
@@ -301,7 +301,7 @@
                                                 documentType="{{asLicenseeChangeLog(associate?.value).fileUploadPrefix}} Name Change Documents"
                                                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                                                 entityName="account"
-                                                (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value?.refObject)"
+                                                (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Name Change Documents', associate?.value)"
                                                 [entityId]="account.id"
                                                 [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENT, DRAG FILE HERE OR'"
                                                 #financialIntegrityDocuments>
@@ -447,7 +447,7 @@
 
 
     <br>
-    <button *ngIf="!isReadOnly" class="btn btn-secondary" (click)="addAssociate()" style="text-transform: uppercase;">
+    <button class="btn btn-secondary Add{{changeTypeSuffix}}" (click)="addAssociate()" style="text-transform: uppercase;">
         <i class="fas fa-plus"></i>
         {{addLabel}}</button>
 </div>
