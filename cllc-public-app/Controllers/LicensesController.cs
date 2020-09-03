@@ -1179,7 +1179,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         { "title", "Liquor_License" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
-                        { "establishmentName", adoxioLicense.AdoxioLicencee?.Name  },
+                        { "establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName   },
                         { "establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet },
                         { "establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
