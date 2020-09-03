@@ -393,7 +393,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     }
     // remove parent reference
     node.parentLicenseeChangeLog = undefined;
-    node.refObject = undefined;
 
     if (node.children && node.children.length) {
       node.children.forEach(child => {
