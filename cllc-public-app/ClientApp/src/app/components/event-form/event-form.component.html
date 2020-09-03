@@ -163,7 +163,7 @@
         <app-field class="col-md-4 col-xs-12" label="Location" [required]="true"
           [valid]="eventForm.get('specificLocation').valid || !eventForm.get('specificLocation').touched"
           errorMessage="Please enter the location" [isFullWidth]="true">
-          <select class="form-control" formControlName="specificLocation" [compareWith]="compareFn">
+          <select class="form-control" formControlName="specificLocation">
             <option *ngFor="let item of specificLocation" [ngValue]="item.value">{{item.label}}</option>
           </select>
         </app-field>

@@ -48,7 +48,7 @@
 
     <div *ngIf="!showBceidTermsOfUse()">
       <!-- /NAVBAR -->
-      <div class="navigationRibbon" *ngIf="!currentUser">
+      <div class="navigationRibbon" *ngIf="!currentUser && showNavbar">
         <div class="level2Navigation">
           <div class="">
             <nav class="navbar navbar-expand-md navbar-light justify-content-end"
@@ -108,7 +108,7 @@
 
       </div>
 
-      <section *ngIf="currentUser && !isAssociate" class="navigationRibbon">
+      <section *ngIf="currentUser && !isAssociate && showNavbar" class="navigationRibbon">
         <div class="level2Navigation ">
           <div class="d-flex justify-content-between align-items-center">
             <nav class="navbar navbar-expand-md navbar-light justify-content-end"
