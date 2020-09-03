@@ -189,7 +189,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
-      description1: ['', [Validators.required]],
+      description1: [''],
       proposedChange: ['', [Validators.required]],
       isLocatedInGroceryStore: [null, []],
       sitePhotos: ['', []],
@@ -483,9 +483,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('proposedChange').disable();
     }
 
-    if (!this.application.applicationType.showDescription1) {
-      this.form.get('description1').disable();
-    }
+    //if (!this.application.applicationType.showDescription1) {
+    //  this.form.get('description1').disable();
+    //}
 
     if (this.application.applicationType.showLiquorDeclarations) {
       this.form.get('liquorDeclarationCheck').setValidators([this.customRequiredCheckboxValidator()]);
@@ -781,7 +781,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
               // mark application as complete
               this.save(!this.application.applicationType.isFree, <Application>{ isApplicationComplete: 'Yes' })
                 .subscribe(res => {
-                  debugger;
                   this.saveComplete.emit(true);
                   // however we need to redirect if the application is Free
                   if (this.application.applicationType.isFree) {
