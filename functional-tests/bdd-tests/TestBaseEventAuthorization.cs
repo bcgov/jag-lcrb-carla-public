@@ -149,12 +149,12 @@ namespace bdd_tests
             Subtitle:   Catering Licences
             */
 
-            // click on the Event History bar - TODO
-            // NgWebElement expandEventHistory = ngDriver.FindElement(By.Id("mat-expansion-panel-header-1"));
-            // expandEventHistory.Click();
+            // click on the Event History bar
+            NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
+            uiExpandEventHistory.Click();
 
-            // confirm that the Event Status = In Review and the Client or Host Name is present - TODO
-            // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
+            // confirm that the Event Status = In Review and the Client or Host Name is present
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
         }
 
         [And(@"I do not complete the event authorization application correctly")]
