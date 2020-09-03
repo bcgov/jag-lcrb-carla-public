@@ -704,7 +704,7 @@ namespace bdd_tests
 
             // upload a notice of articles document
             string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-            NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[21]"));
+            NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[24]"));
             uiUploadSignage.SendKeys(noticeOfArticles);
 
             // click on the Add Leader button
@@ -755,7 +755,7 @@ namespace bdd_tests
             string emailAddressSoleProprietorship = "sole@proprietorship.com";
 
             // click on the sole proprietorship Add Business Shareholder button
-            NgWebElement uiAddSoleProprietorshipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddSoleProprietorshipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
             uiAddSoleProprietorshipRow.Click();
 
             // add the sole proprietorship business name
@@ -817,7 +817,7 @@ namespace bdd_tests
             string emailAddressSociety = "society@test.com";
 
             // click on the society Add Business Shareholder button
-            NgWebElement uiAddSocietyRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddSocietyRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
             uiAddSocietyRow.Click();
 
             // add the society business name
@@ -898,7 +898,7 @@ namespace bdd_tests
             string emailAddressTrust = "trust@test.com";
 
             // click on the trust Add Business Shareholder button
-            NgWebElement uiAddTrustRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddTrustRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
             uiAddTrustRow.Click();
 
             // add the trust business name
