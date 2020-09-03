@@ -674,27 +674,27 @@ namespace bdd_tests
             string emailAddressPublicCorp = "public@corporation.com";
 
             // click on the Add Business Shareholder button
-            NgWebElement uiAddPublicCorporationRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddPublicCorporationRow = ngDriver.FindElement(By.CssSelector(".btn-secondary span"));
             uiAddPublicCorporationRow.Click();
 
             // add the public corporation business name
-            NgWebElement uiAddPublicCorporationBizName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
+            NgWebElement uiAddPublicCorporationBizName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='businessNameNew']"));
             uiAddPublicCorporationBizName.SendKeys(businessNamePublicCorp);
 
             // add the public corporation number of shares
-            NgWebElement uiAddPublicCorporationShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
+            NgWebElement uiAddPublicCorporationShares = ngDriver.FindElement(By.CssSelector("input[formcontrolname='numberofSharesNew']"));
             uiAddPublicCorporationShares.SendKeys(sharesPublicCorp);
 
             // select the public corporation organization type
-            NgWebElement uiAddOrganizationTypePublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='PublicCorporation']"));
+            NgWebElement uiAddOrganizationTypePublicCorp = ngDriver.FindElement(By.CssSelector("[formcontrolname='businessType'] option[value='PublicCorporation']"));
             uiAddOrganizationTypePublicCorp.Click();
 
             // add the public corporation email address
-            NgWebElement uiAddEmailAddressPublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
+            NgWebElement uiAddEmailAddressPublicCorp = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailNew']"));
             uiAddEmailAddressPublicCorp.SendKeys(emailAddressPublicCorp);
 
             // click on the public corporation Confirm button
-            NgWebElement uiConfirmButtonPublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
+            NgWebElement uiConfirmButtonPublicCorp = ngDriver.FindElement(By.CssSelector(".fa-save span"));
             uiConfirmButtonPublicCorp.Click();
 
             // find the upload test files in the bdd-tests\upload_files folder
