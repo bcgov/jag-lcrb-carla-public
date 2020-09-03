@@ -220,7 +220,10 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
   save() {
     this.showErrors = false;
 
-    if (this.uploadsValid() && this.form.valid) {
+    if (this.uploadsValid() && this.form.valid
+        && this.form.get('privacyAgreement').value
+        && this.form.get('consentToCollection').value
+      ) {
       const contact = this.form.value.contact;
       contact.casDateSubmitted = new Date();
       contact.casComplete = 'Yes';
