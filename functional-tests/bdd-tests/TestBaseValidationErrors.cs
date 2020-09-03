@@ -43,6 +43,14 @@ namespace bdd_tests
                 // check missing declaration checkbox error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Declaration Checkbox')]")).Displayed);
             }
+            else if (applicationType == "n event authorization")
+                {
+                    // check maximum attendance error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum attendance (must be a number)')]")).Displayed);
+
+                    // check maximum staff attendance error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum staff attendance (must be a number)')]")).Displayed);
+            }
             else
             {
                 // check missing authorized to submit error is thrown
@@ -81,10 +89,12 @@ namespace bdd_tests
                 if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == "n indigenous nation Cannabis application"))
                 {
                     // check missing police jurisdiction error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'policeJurisdiction is not valid')]")).Displayed);
+                    // under review - see LCSD-3846
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'policeJurisdiction is not valid')]")).Displayed);
 
                     // check missing indigenous nation error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'indigenousNation is not valid')]")).Displayed);
+                    // under review - see LCSD-3846
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'indigenousNation is not valid')]")).Displayed);
                 }
 
                 if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == " location change application") || (applicationType == "n indigenous nation Cannabis application"))
@@ -115,13 +125,6 @@ namespace bdd_tests
 
                     // check missing supporting document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one supporting document is required.')]")).Displayed);
-                }
-
-                if (applicationType == "n event authorization")
-                {
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TO BE COMPLETED')]")).Displayed);
-
-                    // waiting for bug fix: LCSD-3663
                 }
 
                 if (applicationType == " transfer of ownership")
@@ -228,7 +231,8 @@ namespace bdd_tests
                 if (applicationType == " structural alterations request")
                 {
                     // check that missing capacity error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
+                    // under review - see LCSD-3803
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
 
                     // check missing floor plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
@@ -237,7 +241,8 @@ namespace bdd_tests
                 if ((applicationType == " special event area endorsement") || (applicationType == " lounge area endorsement"))
                 {
                     // check that service hours error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'serviceHoursWednesdayOpen is not valid')]")).Displayed);
+                    // under review - see LCSD-3849
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'serviceHoursWednesdayOpen is not valid')]")).Displayed);
 
                     // check missing site plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
@@ -246,7 +251,8 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
 
                     // check that missing hours of sale error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Hours of sale are required')]")).Displayed);
+                    // under review - see LCSD-3849
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Hours of sale are required')]")).Displayed);
                 }
 
                 if (applicationType == " third party operator")
@@ -258,7 +264,8 @@ namespace bdd_tests
                 if (applicationType == " picnic area endorsement")
                 {
                     // check that missing capacity error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
+                    // under review - see LCSD-3803
+                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
 
                     // check missing site plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
