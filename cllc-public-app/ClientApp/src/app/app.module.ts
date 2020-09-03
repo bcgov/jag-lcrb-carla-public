@@ -184,7 +184,7 @@ import { DynamicApplicationComponent } from './components/applications/dynamic-a
 import { PersonalHistorySummaryComponent } from './components/personal-history-summary/personal-history-summary.component';
 import { CannabisAssociateScreeningComponent} from './components/cannabis-associate-screening/cannabis-associate-screening.component';
 import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
-import { PhsConfirmationComponent } from './components/phs-confirmation/phs-confirmation.component';
+import { SecurityScreeningConfirmationComponent } from './components/security-screening-confirmation/security-screening-confirmation.component';
 import { MultiStageApplicationFlowComponent } from './components/multi-stage-application-flow/multi-stage-application-flow.component';
 import { EventFormComponent } from '@components/event-form/event-form.component';
 import { EventSecurityFormComponent } from '@components/event-form/security.component';
@@ -322,7 +322,7 @@ import { ProductionStagesComponent } from './components/applications/application
     PersonalHistorySummaryComponent,
     CannabisAssociateScreeningComponent,
     AccountCompletenessComponent,
-    PhsConfirmationComponent,
+    SecurityScreeningConfirmationComponent,
     MultiStageApplicationFlowComponent,
     SecurityScreeningRequirementsComponent,
     EligibilityFormComponent,

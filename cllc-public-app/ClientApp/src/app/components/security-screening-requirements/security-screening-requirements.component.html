@@ -4,7 +4,7 @@
 
 
     <div class="row" *ngIf="!skipScreeningRequirements; else skipContent">
-        <section class="col-md-8">
+        <section class="col-md-12">
             <mat-tab-group>
                 <mat-tab label="LIQUOR REQUIREMENTS" *ngIf="showLiquorContent()">
                     <div class="content">
@@ -42,13 +42,13 @@
                                 associates
                                 as needed:
                             </p>
-                            <table class="greyGridTable" style="width:700px;">
+                            <table class="greyGridTable">
                                 <thead>
                                     <tr>
-                                        <th style="width:200px;">First Name</th>
-                                        <th style="width:200px;">Last Name</th>
-                                        <th style="width:200px;">Status</th>
-                                        <th style="width:100px;">Action</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tr [ngClass]="{'alt-row': i%2 === 0}"
@@ -82,12 +82,12 @@
                             history summary forms.
                         </p-->
 
-                            <table class="greyGridTable" style="width:700px;">
+                            <table class="greyGridTable">
                                 <thead>
                                     <tr>
-                                        <th style="width:200px;">First Name</th>
-                                        <th style="width:200px;">Last Name</th>
-                                        <th style="width:300px;">Date Submitted</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Date Submitted</th>
                                     </tr>
                                 </thead>
                                 <tr [ngClass]="{'alt-row': i%2 === 0}"
@@ -170,37 +170,26 @@
 
                         <!-- to do, make the cannabis outstanding items look at the right field-->
                         <ng-container *ngIf="data?.cannabis?.outstandingItems?.length">
-                            <table class="greyGridTable" style="width: 400px;">
+                            <table class="greyGridTable">
                                 <thead>
                                     <tr>
-                                        <th style="width:400px;">Associates Requiring Security Screening:</th>
-                                        <!--th>Last Name</th-->
-                                        <!--th>Status</th>
-                                <th>Action</th-->
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tr [ngClass]="{'alt-row': i%2 === 0}"
                                     *ngFor="let item of data?.cannabis?.outstandingItems; let i=index">
-                                    <td>{{item.firstName}} {{item.lastName}}</td>
-                                    <!--td>{{item.lastName}} </td-->
-                                    <!--td style="text-align: center;">Not Submitted</td>
-                                <td style="text-align: center;">
-                                    <a href="javascript: void(0)" (click)="copyMessage(item.casLink)">
-                                        <i class="fas fa-copy"></i>
-                                        Copy Link</a>
-                                </td-->
-                            </tr>
-                                <tr [ngClass]="{'alt-row': i%2 === 0}"
-                                    *ngFor="let item of data?.cannabis?.completedItems; let i=index;">
-                                    <td><i class="fas fa-check"></i>{{item.firstName}} {{item.lastName}}</td>
-                                    <!--td>{{item.lastName}} </td-->
-                                    <!--td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td-->
+                                    <td>{{item.firstName}}</td>
+                                    <td>{{item.lastName}} </td>
+                                    <td class="missing" style="text-align: center;">Not Submitted</td>
+                                    <td style="text-align: center;">
+                                        <a href="javascript: void(0)" (click)="copyMessage(item.casLink)"><i class="fas fa-copy"></i>Copy Link</a>
+                                    </td>
                                 </tr>
                             </table>
-
                         </ng-container>
-
-
 
                     <div *ngIf="!(!data?.cannabis?.outstandingItems?.length && !data?.cannabis?.completedItems?.length)">
                     <h4 class="plain-header">Completed Cannabis Associate Security Screening Forms</h4>
