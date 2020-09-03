@@ -40,7 +40,7 @@
         <p>If this is you please complete the following questions:</p>
         <app-field label="Where do you currently reside?"
           [showChevrons]="false" [isFullWidth]="true">
-          <mat-radio-group class="radio-group" formControlName="residency">
+          <mat-radio-group class="radio-group-vertical" formControlName="residency">
             <mat-radio-button class="mr-5" value="bc">I am a resident of B.C.</mat-radio-button>
             <mat-radio-button class="mr-5" value="canada">I am a resident of a different Canadian province.</mat-radio-button>
             <mat-radio-button class="mr-5" value="outside">I am a resident of a country outside of Canada.</mat-radio-button>
@@ -51,7 +51,7 @@
         <div *ngIf="form.get('residency').value === 'bc'">
           <app-field label="Do you have a BC Services Card?"
             [showChevrons]="false" [isFullWidth]="true">
-            <mat-radio-group class="radio-group" formControlName="hasServicesCard">
+            <mat-radio-group class="radio-group-vertical" formControlName="hasServicesCard">
               <mat-radio-button class="mr-5" value="yes">Yes, I have a BC Services Card</mat-radio-button>
               <mat-radio-button class="mr-5" value="no">No, I do not have a BC Services Card</mat-radio-button>
             </mat-radio-group>
@@ -99,7 +99,7 @@
         <div *ngIf="form.get('residency').value === 'canada'">
           <app-field label="Are you currently in B.C.?"
             [showChevrons]="false" [isFullWidth]="true">
-            <mat-radio-group class="radio-group" formControlName="inBC">
+            <mat-radio-group class="radio-group-vertical" formControlName="inBC">
               <mat-radio-button class="mr-5" value="yes">Yes</mat-radio-button>
               <mat-radio-button class="mr-5" value="no">No</mat-radio-button>
             </mat-radio-group>
@@ -164,7 +164,7 @@
         <div *ngIf="form.get('residency').value === 'outside'">
           <app-field label="Are you currently in B.C.?"
             [showChevrons]="false" [isFullWidth]="true">
-            <mat-radio-group class="radio-group" formControlName="inBC">
+            <mat-radio-group class="radio-group-vertical" formControlName="inBC">
               <mat-radio-button class="mr-5" value="yes">Yes</mat-radio-button>
               <mat-radio-button class="mr-5" value="no">No</mat-radio-button>
             </mat-radio-group>
@@ -338,11 +338,137 @@
             </app-field>
           </section>
         </div>
+        
+        <h3 class="blue-header">PAST ADDRESSES</h3>
+        <section class="padded-section border-around">
+          <app-field label="Have you resided outside of British Columbia at any point within the past 5 years?"
+            [showChevrons]="false" [isFullWidth]="FALSE">
+            <mat-radio-group class="radio-group" formControlName="residedOutsideBC"
+              (change)="previousAddressesToggleChanged()">
+              <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+              <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </app-field>
+          <div *ngIf="previousAddresses.length > 0">
+            <div class="d-flex">
+              <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+              <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+                <p class="font-weight-bold">Please provide the city, province/state, country and year(s) for each place you resided outside of British Columbia (from most recent/current to oldest)</p>
+              </div>
+            </div>
+            <div formArrayName="previousAddresses">
+              <div *ngFor="let address of previousAddresses.controls; let i = index">
+                <div [formGroupName]="i">
+                  <h3>PAST ADDRESS {{i + 1}}
+                    <button class="btn btn-secondary" style="float: right;" (click)="deleteAddress(i)">
+                      <i class="fa fa-trash"></i>
+                      DELETE ADDRESS
+                    </button>
+                  </h3>
+                  <section>
+                    <div [ngClass]="{'has-error': !address.get('city').valid && address.get('city').touched}">
+                      <label>City</label>
+                      <br />
+                      <input class="form-control" style="min-width: 250px; max-width: 350px;" type="text"
+                        formControlName="city">
+                      <div *ngIf="!address.get('city').valid && address.get('city').touched" class="alert alert-danger"
+                        style="min-width: 250px; max-width: 350px;">
+                        <div *ngIf="!address.get('city').valid && address.get('city').touched ">
+                          This is required
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section>
+                    <div [ngClass]="{'has-error': !address.get('provstate').valid && address.get('provstate').touched}">
+                      <label>Province / State</label>
+                      <br />
+                      <input class="form-control" style="width: 200px;" type="text" formControlName="provstate">
+                      <div *ngIf="!address.get('provstate').valid && address.get('provstate').touched"
+                        class="alert alert-danger" style="width: 200px;">
+                        <div *ngIf="!address.get('provstate').valid && address.get('provstate').touched ">
+                          This is required
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section>
+                    <div [ngClass]="{'has-error': !address.get('country').valid && address.get('country').touched}">
+                      <label>Country</label>
+                      <br />
+                      <select class="form-control" style="width: 250px;" formControlName="country">
+                        <option value="Canada">Canada</option>
+                        <option value="United States of America">United States of America</option>
+                        <hr>
+                        <option *ngFor="let c of countryList" value="{{c}}">{{c}}</option>
+                      </select>
+                      <div *ngIf="!address.get('country').valid && address.get('country').touched"
+                        class="alert alert-danger" style="width: 250px;">
+                        <div *ngIf="!address.get('country').valid && address.get('country').touched ">
+                          This is required
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section style="display: inline-block; vertical-align: top;">
+                    <div [ngClass]="{'has-error': !address.get('fromdate').valid && address.get('fromdate').touched}">
+                      <label>Date: From</label>
+                      <br />
+                      <input type="text" formControlName='fromdate' style="width: 200px; background-color: #fff;"
+                        placeholder="yyyy-mm-dd" class="form-control" readonly [min]="minDate" [max]="currentDate"
+                        [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()">
+                      <mat-datepicker #picker1></mat-datepicker>
+                      <div
+                        *ngIf="address.get('fromdate').touched && (!address.get('fromdate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
+                        class="alert alert-danger" style="width: 200px;">
+                        <div *ngIf="!address.get('fromdate').valid">
+                          This is required
+                        </div>
+                        <div
+                          *ngIf="address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)">
+                          From Date should be less than To Date
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section style="display: inline-block; vertical-align: top; padding-left: 30px;">
+                    <div [ngClass]="{'has-error': !address.get('todate').valid && address.get('todate').touched}">
+                      <label>Date: To</label>
+                      <br />
+                      <input type="text" formControlName='todate' style="width: 200px; background-color: #fff;"
+                        placeholder="yyyy-mm-dd" class="form-control" readonly [min]="minDate" [max]="currentDate"
+                        [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()">
+                      <mat-datepicker #picker2></mat-datepicker>
+                      <div
+                        *ngIf="address.get('todate').touched && (!address.get('todate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
+                        class="alert alert-danger" style="width: 200px;">
+                        <div *ngIf="!address.get('todate').valid">
+                          This is required
+                        </div>
+                        <div
+                          *ngIf="address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)">
+                          To Date should be greater than From Date
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                <hr>
+              </div>
+              <button *ngIf="previousAddresses.controls.length < 9" class="btn btn-primary" (click)="addAddress()"
+                style="float: right;">ADD
+                ANOTHER ADDRESS</button>
+              <div style="clear: both;"></div>
+              <p></p>
+            </div>
+          </div>
+        </section>
+        
         <h3 class="blue-header">REQUIRED DOCUMENTS</h3>
         <section formGroupName="contact" class="padded-section border-around">
           <ng-container>
             <section class="padded-section">
-              <h4 class="plain-header">DOCUMENT REQUIRED: Associate Financial Integrity FOrm</h4>
+              <h4 class="plain-header">DOCUMENT REQUIRED: Associate Financial Integrity Form</h4>
               <p>
                 Please complete and upload the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associate Financial Interity</a> form.
               </p>
@@ -424,7 +550,7 @@
 
       <button class="btn btn-primary mt-3" (click)="save()">Save</button>
     </div>
-      <div *ngIf="user && !showForm && contact.isWrongUser">
+      <div *ngIf="user && !showForm && contact && contact.isWrongUser">
         <h1>Hello {{user.firstname}},</h1>
         <p>Unfortunately this screening is meant for <strong>{{contact.shortName}}</strong>. If you believe you are seeing this message in error ensure the licensee that sent you this link has entered your name and birthdate correctly.</p>
       </div>

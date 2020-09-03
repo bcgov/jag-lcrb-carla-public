@@ -9,7 +9,11 @@ import { takeWhile } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app-state/models/app-state';
 import { User } from '../../models/user.model';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, forkJoin } from 'rxjs';
+import { PreviousAddressDataService } from '@services/previous-address-data.service';
+import { MatSnackBar } from '@angular/material';
+import { COUNTRIES } from '@components/account-profile/country-list';
+import { PreviousAddress } from '@models/previous-address.model';
 
 @Component({
   selector: 'app-cannabis-associate-screening',
@@ -27,16 +31,23 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
   fileCount: any = {};
   showForm = false;
   validationErrors: string[] = [];
+  countryList = COUNTRIES;
 
   public get aliases(): FormArray {
     return this.form.get('contact.aliases') as FormArray;
+  }
+
+  public get previousAddresses(): FormArray {
+    return this.form.get('previousAddresses') as FormArray;
   }
 
   constructor(private fb: FormBuilder,
     private contactDataService: ContactDataService,
     private store: Store<AppState>,
     private router: Router,
-    private route: ActivatedRoute) {
+    private previousAddressDataService: PreviousAddressDataService,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar) {
     super();
     this.route.paramMap.subscribe(pmap => this.contactToken = pmap.get('token'));
 
@@ -47,6 +58,7 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
       residency: [],
       hasServicesCard: [],
       inBC: [],
+      residedOutsideBC: [],
       firstNameAtBirth: [''],
       lastNameAtBirth: [''],
       sameNameAtBirth: [true],
@@ -66,6 +78,7 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
         mobilePhone: ['', [Validators.required,]],
         aliases: this.fb.array([])
       }),
+      previousAddresses: this.fb.array([]),
       consentToCollection: ['', [Validators.required]],
       privacyAgreement: ['', [Validators.required]]
     });
@@ -140,7 +153,52 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
     });
   }
 
+  previousAddressesToggleChanged() {
+    if (this.form.get('residedOutsideBC').value && this.previousAddresses.length === 0) {
+      this.addAddress();
+    } else if (!this.form.get('residedOutsideBC').value) {
+      this.clearAddresses();
+    }
+  }
 
+  createAddress(address: PreviousAddress = null) {
+    address = address || <PreviousAddress>{
+      id: undefined,
+      city: '',
+      provstate: '',
+      country: '',
+      fromdate: '',
+      todate: '',
+      contactId: this.contact.id
+    };
+    return this.fb.group({
+      id: [address.id],
+      city: [address.city, Validators.required],
+      provstate: [address.provstate, Validators.required],
+      country: [address.country, Validators.required],
+      fromdate: [address.fromdate, Validators.required],
+      todate: [address.todate, Validators.required],
+      contactId: [this.contact.id]
+    });
+  }
+
+  addAddress(address: PreviousAddress = null) {
+    this.previousAddresses.push(this.createAddress(address));
+  }
+
+  deleteAddress(index: number) {
+    this.previousAddresses.removeAt(index);
+  }
+
+  clearAddresses() {
+    for (let i = this.previousAddresses.controls.length; i > 0; i--) {
+      this.previousAddresses.removeAt(0);
+    }
+  }
+
+  isAscending(fromDate: string, toDate: string) {
+    return new Date(toDate) >= new Date(fromDate);
+  }
 
   updateUploadedFiles(uploadedNumber: number, docType: string) {
     this.fileCount[docType] = uploadedNumber;
@@ -177,10 +235,29 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
         });
       }
 
-      this.contactDataService.updateContactByToken(contact, this.contactToken)
-        .subscribe(res => {
-          this.router.navigateByUrl('/security-screening/confirmation');
-        });
+
+      const saves: Observable<any>[] = [
+        this.contactDataService.updateContactByToken(contact, this.contactToken)
+      ];
+      
+      const addressControls = this.previousAddresses.controls;
+      for (let i = 0; i < addressControls.length; i++) {
+        if (addressControls[i].value.id) {
+          const save = this.previousAddressDataService.updatePreviousAdderess(addressControls[i].value, addressControls[i].value.id);
+          saves.push(save);
+        } else {
+          const newAddress = addressControls[i].value;
+          const save = this.previousAddressDataService.createPreviousAdderess(newAddress);
+          saves.push(save);
+        }
+      }
+
+      this.busy = forkJoin([...saves]).subscribe(res => {
+        this.router.navigateByUrl('/security-screening/confirmation');
+      }, err => {
+        this.snackBar.open('Error saving form', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+      });
+
     } else {
       // show error messages
       this.showErrors = true;
