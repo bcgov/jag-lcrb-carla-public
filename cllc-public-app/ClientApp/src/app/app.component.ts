@@ -50,6 +50,7 @@ export class AppComponent extends FormBase implements OnInit {
   parseInt = parseInt; // make available in template
   licenseeChangeFeatureOn: boolean;
   isEligibilityDialogOpen: boolean;
+  showNavbar = true;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -81,6 +82,8 @@ export class AppComponent extends FormBase implements OnInit {
             this.showMessageCenterContent = false;
           } else if (event.url.search('application') >= 0) {
             this.reloadUser();
+          } else if (event.url.search('personal-history-summary') >= 0 || event.url.search('cannabis-associate-screening') >= 0 || event.url.search('security-screening/confirmation') >= 0) {
+            this.showNavbar = false;
           }
           const prevSlug = this.previousUrl;
           let nextSlug = event.url.slice(1);
