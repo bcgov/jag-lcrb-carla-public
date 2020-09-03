@@ -12,7 +12,7 @@ Scenario: Catering Indigenous Nation Branding Change
     And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the button for Pay for Application for an indigenous nation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab

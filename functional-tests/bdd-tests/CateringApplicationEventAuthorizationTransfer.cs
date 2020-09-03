@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-   Feature: CateringApplicationEventAuthorizationTransfer
+ Feature: CateringApplicationEventAuthorizationTransfer
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit an event authorization and transfer of ownership request for different business types
@@ -32,6 +32,7 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
+    And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
@@ -50,6 +51,7 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
+    And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
@@ -68,6 +70,7 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
+    And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
@@ -86,6 +89,7 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
+    And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
@@ -104,6 +108,7 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
+    And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
@@ -122,6 +127,7 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization
+    And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
@@ -140,8 +146,9 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I click on the link for Request Event Authorization
-    And I do not complete the application correctly
+    And I request an event authorization
+    And I click on the Submit button
+    And I do not complete the event authorization application correctly
     And the expected validation errors are thrown for an event authorization
     And the account is deleted
     Then I see the login page
