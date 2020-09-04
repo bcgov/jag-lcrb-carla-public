@@ -2,7 +2,7 @@
   <div *ngIf="node?.isRoot">
     <h1>{{node?.businessNameNew}} Legal Entity Structure</h1>
 
-  
+
     <div class=row>
       <div class="col-md-12">
 
@@ -11,138 +11,149 @@
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
 
             <section *ngIf="isReadOnly">
-              <p><strong>You have recently reported changes to the legal entity structure on file with LCRB. Those changes have not yet been processed.</strong></p>
-              <p>If you have made additional changes since they have been submited you may report additional changes:</p>
-              <button *ngIf="isReadOnly" class="btn btn-secondary mb-2" (click)="reportAdditionalChanges.next(true)">Report Additional Changes</button>
+              <p><strong>You have recently reported changes to the legal entity structure on file with LCRB. Those
+                  changes have not yet been processed.</strong></p>
+              <p>If you have made additional changes since they have been submited you may report additional changes:
+              </p>
+              <button *ngIf="isReadOnly" class="btn btn-secondary mb-2"
+                (click)="reportAdditionalChanges.next(true)">Report Additional Changes</button>
             </section>
 
-           <section *ngIf="!isReadOnly">
-            <!-- For all corporations -->
-            <section *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
-              <p>All licensees and applicants must maintain a complete and current list of leadership and businesses
-                associated with their organization.</p>
-              <p>You are required to notify the LCRB of any changes to your legal entity structure within ten business
-                days of the change being made. These changes include:</p>
-              <ul>
-                <li>Change of directors, officers, or senior managers</li>
-                <li>Name changes</li>
-                <!-- for private corporations only-->
-                <li *ngIf="node?.businessType === 'PrivateCorporation'">Internal transfer of shares</li>
-                <li *ngIf="node?.businessType === 'PrivateCorporation'">External transfer of shares</li>
-              </ul>
-              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences
-                dashboard.</p>
+            <section *ngIf="!isReadOnly">
+              <!-- For all corporations -->
+              <section
+                *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
+                <p>All licensees and applicants must maintain a complete and current list of leadership and businesses
+                  associated with their organization.</p>
+                <p>You are required to notify the LCRB of any changes to your legal entity structure within ten business
+                  days of the change being made. These changes include:</p>
+                <ul>
+                  <li>Change of directors, officers, or senior managers</li>
+                  <li>Name changes</li>
+                  <!-- for private corporations only-->
+                  <li *ngIf="node?.businessType === 'PrivateCorporation'">Internal transfer of shares</li>
+                  <li *ngIf="node?.businessType === 'PrivateCorporation'">External transfer of shares</li>
+                </ul>
+                <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the
+                  Licences
+                  dashboard.</p>
+              </section>
+
+              <!-- For Partnerships -->
+              <section *ngIf="node?.businessType === 'Partnership'">
+                <p>All licensees and applicants must maintain a complete and current list of individual and businesses
+                  partners associated with their organization.</p>
+                <p>You are required to notify the LCRB of any changes to your legal entity structure within ten business
+                  days of the change being made. These changes include:</p>
+                <ul>
+                  <li>Change of partners</li>
+                  <li>Name changes</li>
+                  <li>Internal transfer of shares for partner businesses</li>
+                  <li>External transfer of shares for partner businesses</li>
+                </ul>
+                <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the
+                  Licences
+                  dashboard.</p>
+              </section>
+
+              <!-- For Sole Proprietors -->
+              <section *ngIf="node?.businessType === 'SoleProprietorship'">
+                <p>Sole Proprietors must provide their leadership information and keep it up to date.</p>
+                <p>You are required to notify the LCRB of name changes within ten business days of the change being
+                  made.
+                </p>
+                <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the
+                  Licences
+                  dashboard.</p>
+              </section>
+
+              <!-- For Societies, Universities and Churches-->
+              <section *ngIf="['Society', 'University', 'Church'].indexOf(node?.businessType) !== -1">
+                <p>{{node?.businessType}} applicants and licensees must provide their leadership information and keep it
+                  up to date.</p>
+                <p>You are required to notify the LCRB of name changes within ten business days of the change being
+                  made.
+                </p>
+                <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the
+                  Licences
+                  dashboard.</p>
+              </section>
+
+              <!-- For Indigenous Nations -->
+              <section *ngIf="node?.businessType === 'IndigenousNation'">
+                <p>
+                  An applicant that is an <i>Indigenous Nation</i> may have associates that are required to consent to
+                  security
+                  screening
+                  and financial integrity assessments as part of the application for a non-medical cannabis retail store
+                  licence.
+                  Applicants are required to provide associates with the Parcel Identifier (PID) or proposed retail
+                  store
+                  location
+                  address.
+                </p>
+                <span style="font-style: italic;" class="li-header"><i>Parcel Identifier (PID):</i></span>
+                <br>
+                <ul>
+                  <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
+                  <li>
+                    The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment
+                    documents,
+                    on the lease, or obtained from the landlord.
+                  </li>
+                </ul>
+                <p>
+                  Applicants should direct associates to the
+                  <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                    target="_blank" rel="noopener noreferrer">LCRB non-medical cannabis webpage</a> to download required
+                  forms and instructions
+                  for submitting documentation.
+                </p>
+
+                <p>
+                  Associates will submit documentation for security screening and financial integrity assessments
+                  directly
+                  to
+                  the LCRB. Applicants should not delay submitting a completed application form and business financial
+                  integrity
+                  form. It is the applicant's responsibility to direct all associates to the
+                  <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                    target="_blank" rel="noopener noreferrer">link provided</a>.
+                </p>
+                <p>
+                  Associates for Indigenous Nations applications include all persons who are authorized to act on behalf
+                  of the
+                  nation.
+                </p>
+                <p>
+                  If you require more information please email <a
+                    href="mailto:lcrbcannabis@gov.bc.ca?Subject=Indigenous Nations">lcrbcannabis@gov.bc.ca</a>.
+                </p>
+
+                <p>
+                  Please note: While they are not normally required as part of the licence application process, the
+                  Liquor
+                  and
+                  Cannabis Regulation Branch reserves the right to ask for an Indigenous Nation’s membership lists.
+                </p>
+              </section>
+
+              <section *ngIf="node?.businessType !=='IndigenousNation'">
+                <p>Fees are calculated based on the type of change reported and the number of licences impacted. If no
+                  changes are made, or no licences are held, you will not be charged a fee for submitting this
+                  information.</p>
+                <ul>
+                  <li>Applicable fees for cannabis licensees are listed in <a
+                      href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
+                      target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
+                  <li>Applicable fees for liquor licensees are listed in <a
+                      href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
+                      target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
+                </ul>
+              </section>
+
+              <!-- For Indigenous Nations -->
             </section>
-
-            <!-- For Partnerships -->
-            <section *ngIf="node?.businessType === 'Partnership'">
-              <p>All licensees and applicants must maintain a complete and current list of individual and businesses
-                partners associated with their organization.</p>
-              <p>You are required to notify the LCRB of any changes to your legal entity structure within ten business
-                days of the change being made. These changes include:</p>
-              <ul>
-                <li>Change of partners</li>
-                <li>Name changes</li>
-                <li>Internal transfer of shares for partner businesses</li>
-                <li>External transfer of shares for partner businesses</li>
-              </ul>
-              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences
-                dashboard.</p>
-            </section>
-
-            <!-- For Sole Proprietors -->
-            <section *ngIf="node?.businessType === 'SoleProprietorship'">
-              <p>Sole Proprietors must provide their leadership information and keep it up to date.</p>
-              <p>You are required to notify the LCRB of name changes within ten business days of the change being made.
-              </p>
-              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences
-                dashboard.</p>
-            </section>
-
-            <!-- For Societies, Universities and Churches-->
-            <section *ngIf="['Society', 'University', 'Church'].indexOf(node?.businessType) !== -1">
-              <p>{{node?.businessType}} applicants and licensees must provide their leadership information and keep it
-                up to date.</p>
-              <p>You are required to notify the LCRB of name changes within ten business days of the change being made.
-              </p>
-              <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through the Licences
-                dashboard.</p>
-            </section>
-
-            <!-- For Indigenous Nations -->
-            <section *ngIf="node?.businessType === 'IndigenousNation'">
-              <p>
-                An applicant that is an <i>Indigenous Nation</i> may have associates that are required to consent to
-                security
-                screening
-                and financial integrity assessments as part of the application for a non-medical cannabis retail store
-                licence.
-                Applicants are required to provide associates with the Parcel Identifier (PID) or proposed retail store
-                location
-                address.
-              </p>
-              <span style="font-style: italic;" class="li-header"><i>Parcel Identifier (PID):</i></span>
-              <br>
-              <ul>
-                <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
-                <li>
-                  The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment
-                  documents,
-                  on the lease, or obtained from the landlord.
-                </li>
-              </ul>
-              <p>
-                Applicants should direct associates to the
-                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-                  target="_blank" rel="noopener noreferrer">LCRB non-medical cannabis webpage</a> to download required
-                forms and instructions
-                for submitting documentation.
-              </p>
-
-              <p>
-                Associates will submit documentation for security screening and financial integrity assessments
-                directly
-                to
-                the LCRB. Applicants should not delay submitting a completed application form and business financial
-                integrity
-                form. It is the applicant's responsibility to direct all associates to the
-                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-                  target="_blank" rel="noopener noreferrer">link provided</a>.
-              </p>
-              <p>
-                Associates for Indigenous Nations applications include all persons who are authorized to act on behalf
-                of the
-                nation.
-              </p>
-              <p>
-                If you require more information please email <a
-                  href="mailto:lcrbcannabis@gov.bc.ca?Subject=Indigenous Nations">lcrbcannabis@gov.bc.ca</a>.
-              </p>
-
-              <p>
-                Please note: While they are not normally required as part of the licence application process, the
-                Liquor
-                and
-                Cannabis Regulation Branch reserves the right to ask for an Indigenous Nation’s membership lists.
-              </p>
-            </section>
-
-            <section *ngIf="node?.businessType !=='IndigenousNation'">
-              <p>Fees are calculated based on the type of change reported and the number of licences impacted. If no
-                changes are made, or no licences are held, you will not be charged a fee for submitting this
-                information.</p>
-              <ul>
-                <li>Applicable fees for cannabis licensees are listed in <a
-                    href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
-                    target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
-                <li>Applicable fees for liquor licensees are listed in <a
-                    href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
-                    target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
-              </ul>
-            </section>
-
-            <!-- For Indigenous Nations -->
-          </section>
           </div>
         </section>
       </div>
@@ -309,18 +320,16 @@
       <h3 class="blue-header">Provide Ownership Information</h3>
       <div class="content-bottom">
         <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-          [isReadOnly]="isReadOnly" [account]="account"
-          (personalHistoryItemsChange)="updateChildren($event, 'Leadership')" [licencesOnFile]="licencesOnFile"
-          changeTypeSuffix="Leadership" addLabel="Add Leader" #associateList>
+          [isReadOnly]="isReadOnly" [account]="account" [licencesOnFile]="licencesOnFile" changeTypeSuffix="Leadership"
+          addLabel="Add Leader" #associateList>
         </app-associate-list>
       </div>
     </ng-container>
 
     <ng-container *ngIf="node?.businessType === 'Trust'">
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-        [licencesOnFile]="licencesOnFile" [account]="account"
-        (personalHistoryItemsChange)="updateChildren($event, 'Leadership')" [isReadOnly]="isReadOnly"
-        changeTypeSuffix="Leadership" addLabel="Add Trustee" #associateList>
+        [licencesOnFile]="licencesOnFile" [account]="account" [isReadOnly]="isReadOnly" changeTypeSuffix="Leadership"
+        addLabel="Add Trustee" #associateList>
       </app-associate-list>
     </ng-container>
 
@@ -343,8 +352,7 @@
             related information.
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-            [isReadOnly]="isReadOnly" [account]="account"
-            (personalHistoryItemsChange)="updateChildren($event, 'Leadership')" [licencesOnFile]="licencesOnFile"
+            [isReadOnly]="isReadOnly" [account]="account" [licencesOnFile]="licencesOnFile"
             changeTypeSuffix="Leadership" addLabel="Add Leadership" #associateList></app-associate-list>
         </section>
       </div>
@@ -362,9 +370,8 @@
             required to provide security screening related information.
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"
-            [licencesOnFile]="licencesOnFile" (personalHistoryItemsChange)="updateChildren($event, 'Leadership')"
-            [rootNode]="node" [account]="account" [isReadOnly]="isReadOnly" changeTypeSuffix="Leadership"
-            addLabel="Add Director or Officer" #associateList></app-associate-list>
+            [licencesOnFile]="licencesOnFile" [rootNode]="node" [account]="account" [isReadOnly]="isReadOnly"
+            changeTypeSuffix="Leadership" addLabel="Add Director or Officer" #associateList></app-associate-list>
         </section>
       </div>
     </ng-container>
@@ -384,10 +391,9 @@
             related information.
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"
-            [licencesOnFile]="licencesOnFile"
-            (personalHistoryItemsChange)="updateChildren( $event, 'IndividualShareholder')" [rootNode]="node"
-            [account]="account" [isReadOnly]="isReadOnly" changeTypeSuffix="IndividualShareholder"
-            addLabel="Add Individual Partner" #associateList></app-associate-list>
+            [licencesOnFile]="licencesOnFile" [rootNode]="node" [account]="account" [isReadOnly]="isReadOnly"
+            changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Partner" #associateList>
+          </app-associate-list>
         </section>
 
         <h4 class="plain-header">Business Partners</h4>
@@ -399,7 +405,6 @@
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
             [rootNode]="node" [account]="account" [licencesOnFile]="licencesOnFile" [isReadOnly]="isReadOnly"
-            (personalHistoryItemsChange)="updateChildren($event, 'BusinessShareholder')"
             changeTypeSuffix="BusinessShareholder" addLabel="Add Business Partner" #associateList></app-associate-list>
         </section>
       </div>
@@ -422,8 +427,7 @@
             owned, and email address.
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"
-            [isReadOnly]="isReadOnly" (personalHistoryItemsChange)="updateChildren($event, 'IndividualShareholder')"
-            [rootNode]="node" [licencesOnFile]="licencesOnFile" [account]="account"
+            [isReadOnly]="isReadOnly" [rootNode]="node" [licencesOnFile]="licencesOnFile" [account]="account"
             changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder" #associateList>
           </app-associate-list>
         </section>
@@ -438,7 +442,6 @@
           </p>
           <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
             [rootNode]="node" [account]="account" [licencesOnFile]="licencesOnFile" [isReadOnly]="isReadOnly"
-            (personalHistoryItemsChange)="updateChildren($event, 'BusinessShareholder')"
             changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder" #associateList>
           </app-associate-list>
           <p>&nbsp;</p>

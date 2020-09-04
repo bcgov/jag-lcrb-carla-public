@@ -84,28 +84,6 @@ export class OrgStructureComponent implements OnInit {
     this.fileUploads[docType] = numberOfFiles;
   }
 
-  updateChildren(children: LicenseeChangeLog[], changeType: string) {
-
-    // children = children || [];
-    // this.node.children = this.node.children || [];
-    // if (changeType === 'Leadership') {
-    //   this.node.children = [...children,
-    //   ...this.node.individualShareholderChildren,
-    //   ...this.node.businessShareholderChildren];
-    // } else if (changeType === 'IndividualShareholder') {
-    //   this.node.children = [...children,
-    //   ...this.node.keyPersonnelChildren,
-    //   ...this.node.businessShareholderChildren
-    //   ];
-    // } else if (changeType === 'BusinessShareholder') {
-    //   this.node.children = [...children,
-    //   ...this.node.individualShareholderChildren,
-    //   ...this.node.keyPersonnelChildren
-    //   ];
-    // }
-
-  }
-
   /**
   * saves all open associate list items
   * returns an Observable<boolean>. False means there is validation errors
