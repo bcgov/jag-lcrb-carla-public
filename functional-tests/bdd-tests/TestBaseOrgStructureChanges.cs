@@ -304,16 +304,16 @@ namespace bdd_tests
             */
 
             // check that the director first name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
 
             // check that the director last name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[4]/section/app-associate-list/div/table/tr[1]/td[2]/span[contains(.,'NewLastName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section/app-associate-list/div/table/tr[1]/td[2]/span[contains(.,'NewLastName')]")).Displayed);
 
             // check that the shareholder first name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
 
             // check that the shareholder last name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
         }
 
 
@@ -674,27 +674,27 @@ namespace bdd_tests
             string emailAddressPublicCorp = "public@corporation.com";
 
             // click on the Add Business Shareholder button
-            NgWebElement uiAddPublicCorporationRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddPublicCorporationRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
             uiAddPublicCorporationRow.Click();
 
             // add the public corporation business name
-            NgWebElement uiAddPublicCorporationBizName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
+            NgWebElement uiAddPublicCorporationBizName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='businessNameNew']"));
             uiAddPublicCorporationBizName.SendKeys(businessNamePublicCorp);
 
             // add the public corporation number of shares
-            NgWebElement uiAddPublicCorporationShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
+            NgWebElement uiAddPublicCorporationShares = ngDriver.FindElement(By.CssSelector("input[formcontrolname='numberofSharesNew']"));
             uiAddPublicCorporationShares.SendKeys(sharesPublicCorp);
 
             // select the public corporation organization type
-            NgWebElement uiAddOrganizationTypePublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='PublicCorporation']"));
+            NgWebElement uiAddOrganizationTypePublicCorp = ngDriver.FindElement(By.CssSelector("[formcontrolname='businessType'] option[value='PublicCorporation']"));
             uiAddOrganizationTypePublicCorp.Click();
 
             // add the public corporation email address
-            NgWebElement uiAddEmailAddressPublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
+            NgWebElement uiAddEmailAddressPublicCorp = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailNew']"));
             uiAddEmailAddressPublicCorp.SendKeys(emailAddressPublicCorp);
 
             // click on the public corporation Confirm button
-            NgWebElement uiConfirmButtonPublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
+            NgWebElement uiConfirmButtonPublicCorp = ngDriver.FindElement(By.CssSelector(".fa-save span"));
             uiConfirmButtonPublicCorp.Click();
 
             // find the upload test files in the bdd-tests\upload_files folder
@@ -704,7 +704,7 @@ namespace bdd_tests
 
             // upload a notice of articles document
             string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-            NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[21]"));
+            NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[24]"));
             uiUploadSignage.SendKeys(noticeOfArticles);
 
             // click on the Add Leader button
@@ -755,7 +755,7 @@ namespace bdd_tests
             string emailAddressSoleProprietorship = "sole@proprietorship.com";
 
             // click on the sole proprietorship Add Business Shareholder button
-            NgWebElement uiAddSoleProprietorshipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddSoleProprietorshipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
             uiAddSoleProprietorshipRow.Click();
 
             // add the sole proprietorship business name
@@ -817,7 +817,7 @@ namespace bdd_tests
             string emailAddressSociety = "society@test.com";
 
             // click on the society Add Business Shareholder button
-            NgWebElement uiAddSocietyRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddSocietyRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
             uiAddSocietyRow.Click();
 
             // add the society business name
@@ -898,7 +898,7 @@ namespace bdd_tests
             string emailAddressTrust = "trust@test.com";
 
             // click on the trust Add Business Shareholder button
-            NgWebElement uiAddTrustRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddTrustRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
             uiAddTrustRow.Click();
 
             // add the trust business name
@@ -952,7 +952,7 @@ namespace bdd_tests
             NgWebElement uiConfirmTrustee = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] .fa-save span"));
             uiConfirmTrustee.Click();
 
-            /********** Business Shareholder - Partnership **********/
+            /********** Business Shareholder - Partnership **********
 
             // create partnership test data
             string businessNamePartnership = "Partnership";
@@ -960,7 +960,7 @@ namespace bdd_tests
             string emailAddressPartnership = "partnership@test.com";
 
             // click on the partnership Add Business Shareholder button
-            NgWebElement uiAddPartnershipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddPartnershipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
             uiAddPartnershipRow.Click();
 
             // add the partnership business name
@@ -1023,6 +1023,7 @@ namespace bdd_tests
             string partnershipAgreement = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
             NgWebElement uiUploadPartner = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-5']/div/section/app-org-structure/div/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
             uiUploadPartner.SendKeys(partnershipAgreement);
+            */
         }
 
 
@@ -1052,7 +1053,7 @@ namespace bdd_tests
             string emailAddressPublicCorp = "public@corporation.com";
 
             // click on the Add Business Shareholder button
-            NgWebElement uiAddPublicCorporationRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[5]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddPublicCorporationRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
             uiAddPublicCorporationRow.Click();
 
             // add the public corporation business name
