@@ -8,7 +8,7 @@
 #-----------------------
 
  @e2e @catering @indigenousnation @cateringeventtransfer2
- Scenario: Indigenous Nation Event Authorization No Approval Request
+ Scenario: No Approval Indigenous Nation Event Authorization Request
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
     And I review the account profile for an indigenous nation
@@ -27,7 +27,7 @@
     Then I see the login page
 
  @e2e @catering @partnership @cateringeventtransfer
- Scenario: Partnership Event Authorization No Approval Request
+ Scenario: No Approval Partnership Event Authorization Request
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -46,7 +46,7 @@
     Then I see the login page
 
  @e2e @catering @privatecorporation @cateringeventtransfer
- Scenario: Private Corporation Event Authorization No Approval Request
+ Scenario: No Approval Private Corporation Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -65,7 +65,7 @@
     Then I see the login page
 
  @e2e @catering @publiccorporation @cateringeventtransfer2
- Scenario: Public Corporation Event Authorization No Approval Request
+ Scenario: No Approval Public Corporation Event Authorization Request
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -84,7 +84,7 @@
     Then I see the login page
 
  @e2e @catering @society @cateringeventtransfer2
- Scenario: Society Event Authorization No Approval Request
+ Scenario: No Approval Society Event Authorization Request
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -103,7 +103,7 @@
     Then I see the login page
 
   @e2e @catering @soleproprietorship @cateringeventtransfer
-  Scenario: Sole Proprietorship Event Authorization No Approval Request
+  Scenario: No Approval Sole Proprietorship Event Authorization Request
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
@@ -122,7 +122,7 @@
     Then I see the login page
 
  @e2e @catering @privatecorporation @validation
- Scenario: Validation for Event Authorization No Approval Request
+ Scenario: Validation for No Approval Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -145,7 +145,7 @@
 # 500+ Attendees Request
 #-----------------------
 
- Scenario: Private Corporation Event Authorization 500+ Attendees Request
+ Scenario: 500+ Attendees Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -166,7 +166,7 @@
 # Outdoor Request
 #-----------------------
 
- Scenario: Private Corporation Event Authorization Outdoor Request
+ Scenario: Outdoor Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -187,7 +187,7 @@
 # Indoor/Outdoor Request
 #-----------------------
 
- Scenario: Private Corporation Event Authorization Both Indoor and Outdoor Request
+ Scenario: Both Indoor and Outdoor Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -208,7 +208,7 @@
 # Past 2am (non-community)
 #-------------------------
 
- Scenario: Private Corporation Event Authorization Past 2am Request
+ Scenario: Past 2am Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -229,7 +229,7 @@
 # Past 2am (community)
 #-------------------------
 
- Scenario: Private Corporation Event Authorization Past 2am Community Request
+ Scenario: Past 2am Community Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
