@@ -56,7 +56,7 @@
     <None Update="CateringApplicationPersonnelEmailChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CombinedCateringCRSApplication.feature">
+    <None Update="CombinedCateringCRSApplications.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CRSApplicationPersonnelEmailChanges.feature">
