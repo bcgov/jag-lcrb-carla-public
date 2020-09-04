@@ -16,6 +16,7 @@ Scenario: Indigenous Nation Federal Reports and Show Map
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the link for Download Licence
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
@@ -34,6 +35,7 @@ Scenario: Partnership Federal Reports and Show Map
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the link for Download Licence
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
@@ -52,6 +54,7 @@ Scenario: Private Corporation Federal Reports and Show Map
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the link for Download Licence
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
@@ -70,6 +73,7 @@ Scenario: Public Corporation Federal Reports and Show Map
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the link for Download Licence
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
@@ -88,6 +92,7 @@ Scenario: Society Federal Reports and Show Map
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the link for Download Licence
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
@@ -106,6 +111,7 @@ Scenario: Sole Proprietorship Federal Reports and Show Map
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
+    And I click on the link for Download Licence
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted
