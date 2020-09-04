@@ -617,7 +617,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(httpOperationException, "Error updating application");
                 }
 
-                return new JsonResult(await application.ToViewModel(_dynamicsClient, _logger));
+                return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
 
             }
         }
