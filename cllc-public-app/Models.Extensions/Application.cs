@@ -608,7 +608,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 try
                 {
                     var adoxioLicencesubcategory = dynamicsClient.Licencesubcategories.GetByKey(dynamicsApplication._adoxioLicencesubcategoryidValue);
-                    applicationVM.LicenseType = adoxioLicencesubcategory.AdoxioName;
                     applicationVM.LicenceSubCategory = adoxioLicencesubcategory.AdoxioName;
                 }
                 catch (Exception e)
