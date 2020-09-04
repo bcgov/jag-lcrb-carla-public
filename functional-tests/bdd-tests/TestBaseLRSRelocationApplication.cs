@@ -113,5 +113,13 @@ namespace bdd_tests
             // click on the submit for LG/IN review button
             ClickOnSubmitButton();
         }
+
+
+        [And(@"an LRS licence has been created")]
+        public void LRSApproval()
+        {
+            // TODO
+            // To be completed when workflow is ready
+        }
     }
 }
