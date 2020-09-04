@@ -531,16 +531,16 @@ export class LicenseeChangeLog {
         // Key personnel here
         if (child.isIndividual && (child.isDirectorNew || child.isManagerNew || child.isOfficerNew || child.isTrusteeNew || child.isOwnerNew)) {
           const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
-          fixedChild.isShareholderIndividual = true;
+          fixedChild.isLeadershipIndividual = true;
           fixedChild.isShareholderNew = false;
           fixedChild.isShareholderOld = false;
           fixedChildren.push(fixedChild);
         }
-
+        
         // Individual shareholders here
         if (child.isIndividual && child.isShareholderNew) {
           const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
-          fixedChild.isLeadershipIndividual = true;
+          fixedChild.isShareholderIndividual = true;
           child.isDirectorNew = false;
           child.isManagerNew = false;
           child.isOfficerNew = false;
