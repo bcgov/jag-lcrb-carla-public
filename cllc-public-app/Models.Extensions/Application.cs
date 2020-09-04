@@ -6,6 +6,7 @@ using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -263,6 +264,36 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }
 
+        public static List<MicrosoftDynamicsCRMpicklistAttributeMetadata> GetCachedApplicationPicklists(this IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
+        {
+            string cacheKey = CacheKeys.PicklistTypePrefix + "Application";
+            if (memoryCache == null || !memoryCache.TryGetValue(cacheKey, out List<MicrosoftDynamicsCRMpicklistAttributeMetadata> result))
+            {
+                // Key not in cache, so get data.
+                try
+                {
+                    result = dynamicsClient.Entitydefinitions.GetEntityPicklists("adoxio_application").Value;
+                    if (memoryCache != null)
+                    {
+                        var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromDays(365));
+                        // Save data in cache.
+                        memoryCache.Set(cacheKey, result, cacheEntryOptions);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Serilog.Log.Error(e, "ERROR getting accounts picklist metadata");
+                    result = new List<MicrosoftDynamicsCRMpicklistAttributeMetadata>();
+                }
+
+                
+            }
+
+            return result;
+        }
+
+
         /// <summary>
         /// Get the licence type
         /// </summary>
@@ -282,7 +313,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
         }
 
-        public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, ILogger logger)
+        public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger )
         {
             ViewModels.Application applicationVM = new ViewModels.Application()
             {
@@ -577,7 +608,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 try
                 {
                     var adoxioLicencesubcategory = dynamicsClient.Licencesubcategories.GetByKey(dynamicsApplication._adoxioLicencesubcategoryidValue);
-                    applicationVM.LicenseType = adoxioLicencesubcategory.AdoxioName;
                     applicationVM.LicenceSubCategory = adoxioLicencesubcategory.AdoxioName;
                 }
                 catch (Exception e)
@@ -612,7 +642,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 if (!string.IsNullOrEmpty(applicationVM.ApplicationType.FormReference))
                 {
-                    applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(logger, applicationVM.ApplicationType.FormReference);
+                    applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(cache, logger, applicationVM.ApplicationType.FormReference);
                 }
             }
             if (dynamicsApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication != null)
@@ -647,7 +677,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
 
-        public async static Task<ViewModels.CovidApplication> ToCovidViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, ILogger logger)
+        public async static Task<ViewModels.CovidApplication> ToCovidViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger)
         {
             ViewModels.CovidApplication applicationVM = new ViewModels.CovidApplication()
             {
@@ -743,7 +773,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 if (!string.IsNullOrEmpty(applicationVM.ApplicationType.FormReference))
                 {
-                    applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(logger, applicationVM.ApplicationType.FormReference);
+                    applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(cache, logger, applicationVM.ApplicationType.FormReference);
                 }
             }
 

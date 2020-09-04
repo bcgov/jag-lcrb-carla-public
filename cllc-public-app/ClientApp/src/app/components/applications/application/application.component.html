@@ -816,7 +816,7 @@
               <div *ngIf="htmlContent?.capacityArea" [innerHTML]="htmlContent.capacityArea"></div>
               <app-field label="Capacity" [required]="true" [valid]="!showValidationMessages || form.get('capacityArea.capacity').valid"
                 errorMessage="Capacity is required." [showChevrons]="false" [isFullWidth]="false">
-                <input formControlName="capacity" id="capacity" placeholder="Enter Capacity" mask="0*" [readonly]="isOpenedByLGForApproval || lGHasApproved()"/>
+                <input class="form-control" formControlName="capacity" id="capacity" placeholder="Enter Capacity" mask="0*" [readonly]="isOpenedByLGForApproval || lGHasApproved()"/>
               </app-field>
             </section>
 
@@ -1768,7 +1768,8 @@
 
         <section *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                 && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')
-                && !lgApprovalDecisionMade()">
+                && !lgApprovalDecisionMade()
+                && !lgHasReviewedZoning()">
           <br>
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
