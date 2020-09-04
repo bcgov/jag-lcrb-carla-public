@@ -3,7 +3,7 @@
     I want to submit a CRS and Catering application for the same account
 
 @e2e @cannabis @privatecorporation @crsapp
-Scenario: Private Corporation CRS Application
+Scenario: Combined Catering and CRS Applications
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -17,8 +17,7 @@ Scenario: Private Corporation CRS Application
     And I confirm the payment receipt for a Cannabis Retail Store application
     And I click on the Dashboard tab
     And I click on the Start Application button for Catering
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
+    And I click on the button for Continue to Organization Review
     And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
