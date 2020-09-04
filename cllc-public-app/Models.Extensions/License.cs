@@ -43,10 +43,20 @@ namespace Gov.Lclb.Cllb.Public.Models
             License adoxioLicenseVM = new License();
 
             adoxioLicenseVM.Id = dynamicsLicense.AdoxioLicencesid;
-            if (dynamicsLicense.AdoxioLicencesubcategory != null)
+            
+            if (dynamicsLicense._adoxioLicencesubcategoryidValue != null)
             {
-                adoxioLicenseVM.LicenseSubCategory = EnumExtensions.GetEnumMemberValue((LicenseSubCategory?)dynamicsLicense.AdoxioLicencesubcategory);
-            }            
+                try
+                {
+                    var adoxioLicencesubcategory = dynamicsClient.Licencesubcategories.GetByKey(dynamicsLicense._adoxioLicencesubcategoryidValue);
+                    adoxioLicenseVM.LicenseSubCategory = adoxioLicencesubcategory.AdoxioName;
+                }
+                catch (Exception e)
+                {
+                    adoxioLicenseVM.LicenseSubCategory = null;
+                }
+            }
+            
             // fetch the establishment and get name and address
             Guid? adoxioEstablishmentId = null;
             if (!string.IsNullOrEmpty(dynamicsLicense._adoxioEstablishmentValue))
@@ -123,7 +133,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 LicenseId = licence.AdoxioLicencesid,
                 LicenseNumber = licence.AdoxioLicencenumber,
-                LicenseSubCategory = (LicenseSubCategory?)licence.AdoxioLicencesubcategory, // TG added for wine stores
                 EstablishmentAddressStreet = licence.AdoxioEstablishmentaddressstreet,
                 EstablishmentAddressCity = licence.AdoxioEstablishmentaddresscity,
                 EstablishmentAddressPostalCode = licence.AdoxioEstablishmentaddresspostalcode,
@@ -151,7 +160,20 @@ namespace Gov.Lclb.Cllb.Public.Models
                 RepresentativeCanRepresentAtHearings = licence.AdoxioCanrepresentathearings
             };
 
-            if(licence.AdoxioThirdPartyOperatorId != null){
+            if (licence._adoxioLicencesubcategoryidValue != null)
+            {
+                try
+                {
+                    var adoxioLicencesubcategory = dynamicsClient.Licencesubcategories.GetByKey(licence._adoxioLicencesubcategoryidValue);
+                    licenseSummary.LicenseSubCategory = adoxioLicencesubcategory.AdoxioName;
+                }
+                catch (Exception e)
+                {
+                    licenseSummary.LicenseSubCategory = null;
+                }
+            }
+
+            if (licence.AdoxioThirdPartyOperatorId != null){
                 licenseSummary.ThirdPartyOperatorAccountName = licence.AdoxioThirdPartyOperatorId.Name;
             }
 
