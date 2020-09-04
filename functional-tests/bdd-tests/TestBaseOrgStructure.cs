@@ -685,6 +685,7 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                /*
                 // open business partner row
                 NgWebElement uiOpenPartnerRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));
                 uiOpenPartnerRow.Click();
@@ -754,7 +755,7 @@ namespace bdd_tests
 
                 // click on individual partner2 confirm button
                 NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Partner'][changetypesuffix='BusinessShareholder'] .fa-save span"));
-                uiConfirmButton2.Click();
+                uiConfirmButton2.Click();*/
             }
 
             if (businessType == "n indigenous nation")
