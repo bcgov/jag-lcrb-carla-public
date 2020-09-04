@@ -617,7 +617,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(httpOperationException, "Error updating application");
                 }
 
-                return new JsonResult(await application.ToViewModel(_dynamicsClient, _logger));
+                return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
 
             }
         }
@@ -1091,7 +1091,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var storeHours = $@"
                 <tr>
-                    <td>Open</td>
+                    <td>Start</td>
                     <td>9:00 am</td>
                     <td>9:00 am</td>
                     <td>9:00 am</td>
@@ -1101,7 +1101,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>9:00 am</td>
                 </tr>                
                 <tr>
-                    <td>Close</td>
+                    <td>End</td>
                     <td>11:00 pm</td>
                     <td>11:00 pm</td>
                     <td>11:00 pm</td>
@@ -1179,7 +1179,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         { "title", "Liquor_License" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
-                        { "establishmentName", adoxioLicense.AdoxioLicencee?.Name  },
+                        { "establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName   },
                         { "establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet },
                         { "establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
@@ -1204,6 +1204,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         case "Catering":
                             templateName = "catering_licence";
                             break;
+                        
+                        case "UBrew and UVin":
+                            templateName = "wine_store_licence";
+                            break;
+                        
+                        case "Licensee Retail Store":
+                            templateName = "wine_store_licence";
+                            break;                        
+                        
                         case "Wine Store":
                             templateName = "wine_store_licence";
                             break;

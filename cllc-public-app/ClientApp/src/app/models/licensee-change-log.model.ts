@@ -188,6 +188,18 @@ export class LicenseeChangeLog {
     return leaders;
   }
 
+  public static GetLeadershipChanges(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    let children = (changeLog && changeLog.children) || [];
+    let leaders = children.filter(item => item.isIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
+
+    if(changeLog.changeType != LicenseeChangeType.addBusinessShareholder) { 
+      children.forEach(child => {
+        leaders = leaders.concat(LicenseeChangeLog.GetKeyPersonnelDecendents(child));
+      });
+    }
+    return leaders;
+  }
+
   public static HasChanges(changeLog: LicenseeChangeLog): Boolean {
     changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     const keyPersonnnelChanged = this.GetKeyPersonnelDecendents(changeLog).length > 0;
@@ -197,10 +209,16 @@ export class LicenseeChangeLog {
   }
 
   public static HasLeadershipChanges(changeLog: LicenseeChangeLog): Boolean {
-    return this.GetKeyPersonnelDecendents(changeLog).length > 0;
+    return this.GetLeadershipChanges(changeLog).length > 0;
+
+    // if we have added leadership
 
     // if a key personnel is also a shareholder, changing a shareholder amount (including shares) will return true
   }
+
+
+  // if we have added leadership that is under a NEW shareholder or trust, then it is not a leadership change
+
 
   public static HasExternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
     changeLog = Object.assign(new LicenseeChangeLog(), changeLog);

@@ -3,7 +3,7 @@
     <label for="">Zoning</label>
     <br>
     
-    <section *ngIf="application?.licenseType === 'Manufacturer'">
+    <section *ngIf="showQuestion()">
       <div>
           <mat-checkbox formControlName="isPermittedInZoning">
             <span>
@@ -13,7 +13,7 @@
       </div>
     </section>
   
-    <section *ngIf="application?.licenseType !== 'Manufacturer'"> 
+    <section *ngIf="!showQuestion()"> 
       <p>Please provide proof from your local government that the proposed location has been:</p>
       <ul>
         <li>appropriately zoned to operate a {{application?.licenseType}} licence, or</li>
