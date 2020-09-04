@@ -179,6 +179,7 @@ export class LicenseeChangeLog {
   }
 
   public static GetKeyPersonnelDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     let children = (changeLog && changeLog.children) || [];
     let leaders = children.filter(item => item.isLeadershipIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
@@ -188,6 +189,7 @@ export class LicenseeChangeLog {
   }
 
   public static HasChanges(changeLog: LicenseeChangeLog): Boolean {
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     const keyPersonnnelChanged = this.GetKeyPersonnelDecendents(changeLog).length > 0;
     const individualShareholderChanged = this.GetIndividualShareholderDecendents(changeLog).length > 0;
     const businessShareholderChanged = this.GetBusinessShareholderDecendents(changeLog).length > 0;
@@ -201,17 +203,19 @@ export class LicenseeChangeLog {
   }
 
   public static HasExternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     return (this.GetIndividualShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length +
       this.GetBusinessShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length) > 0;
   }
 
   public static HasInternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
-
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     return (this.GetIndividualShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length +
       this.GetBusinessShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length) > 0;
   }
 
   public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     let children = (changeLog && changeLog.children) || [];
     let shareholders = children.filter(item => item.isShareholderIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
@@ -221,6 +225,7 @@ export class LicenseeChangeLog {
   }
 
   public static GetBusinessShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     let children = (changeLog && changeLog.children) || [];
     let shareholders = children.filter(item => !item.isShareholderIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
