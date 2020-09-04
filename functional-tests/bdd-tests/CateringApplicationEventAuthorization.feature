@@ -245,3 +245,24 @@
     And the event history is updated correctly
     And the account is deleted
     Then I see the login page
+
+#-------------------------
+# Save For Later
+#-------------------------
+
+ Scenario: Save For Later Event Authorization Request
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for Catering
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the button for Submit Organization Information
+    And I complete the Catering application
+    And I click on the Submit button
+    And I click on the button for Pay for Application
+    And I enter the payment information
+    And the application is approved
+    And I pay the licensing fee for Catering
+    And I request an event authorization as a draft
+    And the event history is updated correctly
+    And the account is deleted
+    Then I see the login page
