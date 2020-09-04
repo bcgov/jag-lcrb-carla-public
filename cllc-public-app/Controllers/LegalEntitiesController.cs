@@ -281,7 +281,82 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
-        
+        private LegalEntity GetLegalEntityTree(string accountId)
+        {
+            LegalEntity result = null;
+            var filter = "_adoxio_account_value eq " + accountId;
+            filter += " and _adoxio_legalentityowned_value eq null";
+
+            var expand = new List<string>{
+                "adoxio_Contact"
+            };
+
+            var response = _dynamicsClient.Legalentities.Get(filter: filter, expand: expand);
+
+            if (response != null && response.Value != null)
+            {
+                var legalEntity = response.Value.FirstOrDefault();
+                if (legalEntity != null)
+                {
+                    result = legalEntity.ToViewModel();
+                    if (!string.IsNullOrEmpty(result.contactId))
+                    {
+                        result.PhsLink = ContactController.GetPhsLink(result.contactId, _configuration, _encryptionKey);
+                        result.CasLink = ContactController.GetCASSLink(result.contactId, _configuration, _encryptionKey);
+                    }
+                    result.children = this.GetLegalEntityChildren(result.id);
+                }
+            }
+            return result;
+        }
+
+        private List<LegalEntity> GetLegalEntityChildren(string parentLegalEntityId, List<string> processedEntities = null)
+        {
+            List<LegalEntity> result = new List<LegalEntity>();
+            MicrosoftDynamicsCRMadoxioLegalentityCollection response = null;
+            var filter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
+            if (processedEntities == null)
+            {
+                processedEntities = new List<string>();
+            }
+            try
+            {
+                response = _dynamicsClient.Legalentities.Get(filter: filter);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, $"Error while patching legal entity");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Unexpected Exception while patching legal entity");
+            }
+
+            if (response != null && response.Value != null)
+            {
+                var legalEntities = response.Value.ToList();
+
+                foreach (var legalEntity in legalEntities)
+                {
+                    var viewModel = legalEntity.ToViewModel();
+                    if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
+                    {
+                        processedEntities.Add(legalEntity.AdoxioLegalentityid);
+                        viewModel.children = GetLegalEntityChildren(legalEntity.AdoxioLegalentityid, processedEntities);
+                    }
+                    if (!string.IsNullOrEmpty(viewModel.contactId))
+                    {
+                        viewModel.PhsLink = ContactController.GetPhsLink(viewModel.contactId, _configuration, _encryptionKey);
+                        viewModel.CasLink = ContactController.GetCASSLink(viewModel.contactId, _configuration, _encryptionKey);
+                    }
+
+                    result.Add(viewModel);
+                }
+
+            }
+            return result;
+
+        }
 
         private List<LegalEntity> GetAccountHierarchy(string accountId, List<string> shareHolders = null)
         {

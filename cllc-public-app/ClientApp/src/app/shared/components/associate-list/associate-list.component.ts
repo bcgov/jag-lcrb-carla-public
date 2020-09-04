@@ -286,6 +286,25 @@ export class AssociateListComponent extends FormBase implements OnInit {
     }
   }
 
+  getData(): LicenseeChangeLog[]{
+    let res = [];
+    const controls = this.associates.controls;
+    for (let control in controls) {
+      let value = controls[control].value;
+      if (control) {
+        // check for children
+        let childOrgs = this.orgStructureList.filter(item => item.parentAssociate === controls[control]);
+        if(childOrgs.length){
+          let childOrg = childOrgs[0];
+          value = childOrg.getData();
+        }
+        res.push(value);
+      }
+    }
+
+    return res;
+  }
+
   deleteChange(node: LicenseeChangeLog, index: number) {
     node.businessNameNew = node.nameOld;
     node.isDirectorNew = node.isDirectorOld;
