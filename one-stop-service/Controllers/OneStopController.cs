@@ -32,7 +32,7 @@ namespace one_stop_service.Controllers
         public async Task<IActionResult> SendLicenceCreationMessage(string licenceGuid)
         {
             _logger.Information($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendLicenceCreationMessageREST(null, licenceGuid, "001"));
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendProgramAccountRequestREST(null, licenceGuid, "001"));
             return Ok();
         }
 
