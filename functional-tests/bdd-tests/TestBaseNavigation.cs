@@ -60,8 +60,15 @@ namespace bdd_tests
             string licencesLink = "Licences";
 
             // click on the Licences link
-            NgWebElement uiLicences = ngDriver.FindElement(By.LinkText(licencesLink));
-            uiLicences.Click();
+            ClickOnLink(licencesLink);
+        }
+
+
+        [And(@"I click on the Dashboard tab")]
+        public void ClickDashboardTab()
+        {
+            string dashboard = "Dashboard";
+            ClickOnLink(dashboard);
         }
 
 
