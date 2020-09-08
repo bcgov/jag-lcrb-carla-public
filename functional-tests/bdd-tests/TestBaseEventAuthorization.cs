@@ -307,7 +307,7 @@ namespace bdd_tests
         [And(@"the saved event authorization details are correct")]
         public void SavedEventHistoryIsCorrect()
         {
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains('234234j2')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains('TODO')]")).Displayed);
         }
     }
 }
