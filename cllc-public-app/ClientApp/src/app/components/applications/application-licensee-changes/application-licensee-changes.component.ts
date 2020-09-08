@@ -175,13 +175,15 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     let errors = [];
     let fileErrors = [];
 
+    let data = this.orgStructure.getData();
+
     // Only check file validation errors if changes were made
-    if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
-      fileErrors = this.validateFileUploads(this.treeRoot);
+    if (!this.thereIsExistingOrgStructure || (data && LicenseeChangeLog.HasChanges(data))) {
+      fileErrors = this.validateFileUploads(data);
     }
-    if (this.treeRoot) {
+    if (data) {
       errors = [
-        ...this.validateNonIndividauls(this.treeRoot),
+        ...this.validateNonIndividauls(data),
         ...fileErrors
       ]
     }
@@ -247,6 +249,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    * Sends data to dynamics
    */
   save() {
+
+  
     this.orgStructure.saveAll()
       .subscribe(result => {
         this.validationErrors = this.validateFormData();
@@ -316,7 +320,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   private prepareSaveRequest() {
     this.validationErrors = [];
-    const data = this.cleanSaveData(this.treeRoot);
+
+    const data = this.cleanSaveData(this.orgStructure.getData());
     return this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id)
       .pipe(mergeMap(result => {
         // do something with result
@@ -338,7 +343,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
             .toPromise()
             .then(() => {
               this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-              this.loadedValue = this.cleanSaveData(this.treeRoot);  // Update loadedValue to prevent double saving
+              this.loadedValue = this.cleanSaveData(this.orgStructure.getData());  // Update loadedValue to prevent double saving
               if (navigateAfterSaving) {
                 this.router.navigateByUrl('/dashboard');
               }
@@ -357,7 +362,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   canDeactivate(): Observable<boolean> {
-    const data = this.cleanSaveData(this.treeRoot);
+    const data = this.cleanSaveData(this.orgStructure.getData());
     if (JSON.stringify(data) === JSON.stringify(this.loadedValue)) { //no change made. Skip save
       return of(true);
     }
@@ -393,7 +398,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     }
     // remove parent reference
     node.parentLicenseeChangeLog = undefined;
-    node.refObject = undefined;
 
     if (node.children && node.children.length) {
       node.children.forEach(child => {

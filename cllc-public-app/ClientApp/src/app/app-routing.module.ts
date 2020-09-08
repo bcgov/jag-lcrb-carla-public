@@ -36,7 +36,7 @@ import { LicencesComponent } from '@components/licences/licences.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
 import { CannabisAssociateScreeningComponent } from '@components/cannabis-associate-screening/cannabis-associate-screening.component';
 import { PersonalHistorySummaryComponent } from '@components/personal-history-summary/personal-history-summary.component';
-import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
+import { SecurityScreeningConfirmationComponent } from '@components/security-screening-confirmation/security-screening-confirmation.component';
 import { MultiStageApplicationFlowComponent } from '@components/multi-stage-application-flow/multi-stage-application-flow.component';
 import { EventFormComponent } from '@components/event-form/event-form.component';
 import { EventSecurityFormComponent } from '@components/event-form/security.component';
@@ -86,8 +86,8 @@ const routes: Routes = [
     data: { feature: 'LGApprovals' }
   },
   {
-    path: 'personal-history-summary/confirmation',
-    component: PhsConfirmationComponent,
+    path: 'security-screening/confirmation',
+    component: SecurityScreeningConfirmationComponent,
     canActivate: [FeatureGuard],
     data: { feature: 'LicenseeChanges' }
   },

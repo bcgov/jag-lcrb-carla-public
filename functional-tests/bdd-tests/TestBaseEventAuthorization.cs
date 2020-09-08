@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request an event authorization")]
-        public void RequestEventAuthorization()
+        [And(@"I request an event authorization (.*)")]
+        public void RequestEventAuthorization(string eventType)
         {
             /* 
             Page Title: Licences
@@ -46,6 +46,8 @@ namespace bdd_tests
             string eventClientOrHostName = "Automated test event";
             string maximumAttendance = "100";
             string maximumStaffAttendance = "25";
+            string maximumAttendanceApproval = "300";
+            string maximumStaffAttendanceApproval = "300";
 
             string venueNameDescription = "Automated test venue name or description";
             string venueAdditionalInfo = "Automated test additional venue information added here.";
@@ -62,9 +64,18 @@ namespace bdd_tests
             NgWebElement uiEventContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
             uiEventContactPhone.SendKeys(eventContactPhone);
 
-            // select event type
-            NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType'] option[value='2: 845280002']"));
-            uiEventType.Click();
+            if (eventType == "for a community event after 2am")
+            {
+                // select community event type
+                NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType'] [value='1: 845280001']"));
+                uiEventType.Click();
+            }
+            else
+            {
+                // select corporate event type
+                NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType'] option[value='2: 845280002']"));
+                uiEventType.Click();
+            }
 
             // enter event description
             NgWebElement uiEventDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='eventTypeDescription']"));
@@ -74,13 +85,26 @@ namespace bdd_tests
             NgWebElement uiEventClientOrHostName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='clientHostname']"));
             uiEventClientOrHostName.SendKeys(eventClientOrHostName);
 
-            // enter maximum attendance
-            NgWebElement uiMaxAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxAttendance']"));
-            uiMaxAttendance.SendKeys(maximumAttendance);
+            if (eventType == "with more than 500 people")
+            {
+                // enter maximum attendance
+                NgWebElement uiMaxAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxAttendance']"));
+                uiMaxAttendance.SendKeys(maximumAttendanceApproval);
 
-            // enter maximum staff attendance
-            NgWebElement uiMaxStaffAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxStaffAttendance']"));
-            uiMaxStaffAttendance.SendKeys(maximumStaffAttendance);
+                // enter maximum staff attendance
+                NgWebElement uiMaxStaffAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxStaffAttendance']"));
+                uiMaxStaffAttendance.SendKeys(maximumStaffAttendanceApproval);
+            }
+            else
+            {
+                // enter maximum attendance
+                NgWebElement uiMaxAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxAttendance']"));
+                uiMaxAttendance.SendKeys(maximumAttendance);
+
+                // enter maximum staff attendance
+                NgWebElement uiMaxStaffAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxStaffAttendance']"));
+                uiMaxStaffAttendance.SendKeys(maximumStaffAttendance);
+            }
 
             // select whether minors are attending - yes
             NgWebElement uiMinorsAttending = ngDriver.FindElement(By.CssSelector("[formcontrolname='minorsAttending'] option[value='true']"));
@@ -98,9 +122,24 @@ namespace bdd_tests
             NgWebElement uiVenueNameDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
             uiVenueNameDescription.SendKeys(venueNameDescription);
 
-            // select venue location
-            NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation'] option[value='2: 845280002']"));
-            uiVenueLocation.Click();
+            if (eventType == "for an outdoor location")
+            {
+                // select outdoor venue location
+                NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation'] option[value='1: 845280001']"));
+                uiVenueLocation.Click();
+            }
+            else if (eventType == "for an indoor and outdoor location")
+            {
+                // select both indoor/outdoor venue location
+                NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation'] option[value='2: 845280002']"));
+                uiVenueLocation.Click();
+            }
+            else
+            {
+                // select indoor venue location
+                NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation'] option[value='0: 845280000']"));
+                uiVenueLocation.Click();
+            }
 
             // enter venue additional info
             NgWebElement uiVenueAdditionalInfo = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
@@ -136,6 +175,15 @@ namespace bdd_tests
             NgWebElement uiVenueEndDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
             uiVenueEndDate2.Click();
 
+            // select start and end times - TODO
+
+            if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
+            {
+            }
+            else 
+            { 
+            }
+
             // select event and liquor service times are different on specific dates checkbox
             NgWebElement uiEventLiquorServiceTimesDifferent = ngDriver.FindElement(By.Id("mat-checkbox-1"));
             uiEventLiquorServiceTimesDifferent.Click();
@@ -144,17 +192,26 @@ namespace bdd_tests
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiTermsAndConditions.Click();
 
+            if (eventType != "as a draft")
+            {
+            }
+            else
+            {
+                // click on Submit button
+                ClickOnSubmitButton();
+            }
+
             /* 
             Page Title: Licences
             Subtitle:   Catering Licences
             */
 
-            // click on the Event History bar - TODO
-            // NgWebElement expandEventHistory = ngDriver.FindElement(By.Id("mat-expansion-panel-header-1"));
-            // expandEventHistory.Click();
+            // click on the Event History bar
+            NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
+            uiExpandEventHistory.Click();
 
-            // confirm that the Event Status = In Review and the Client or Host Name is present - TODO
-            // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
+            // confirm that the Event Status = In Review and the Client or Host Name is present
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
         }
 
         [And(@"I do not complete the event authorization application correctly")]
