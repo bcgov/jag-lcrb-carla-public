@@ -179,7 +179,7 @@ namespace bdd_tests
 
             // select liquor end time after 2am
             if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
-            {       
+            {
                 NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Minutes']"));
                 uiLiquorCloseTime.SendKeys(liquorCloseTime);
             }
@@ -301,6 +301,13 @@ namespace bdd_tests
 
             if (eventType == "for a community event after 2am")
             { }
+        }
+
+
+        [And(@"the saved event authorization details are correct")]
+        public void SavedEventHistoryIsCorrect()
+        {
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains('234234j2')]")).Displayed);
         }
     }
 }

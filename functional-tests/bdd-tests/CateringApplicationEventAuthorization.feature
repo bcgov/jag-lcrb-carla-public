@@ -265,6 +265,6 @@
     And I request an event authorization as a draft
     And the event history is updated correctly for an application as a draft
     And I click on the link for Draft
-
+    And the saved event authorization details are correct
     And the account is deleted
     Then I see the login page
