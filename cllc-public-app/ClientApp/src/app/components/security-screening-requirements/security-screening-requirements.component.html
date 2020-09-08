@@ -1,7 +1,6 @@
+<div [ngBusy]="busy"></div>
 <div class="form-wrapper">
     <h1>Security Screening Requirements</h1>
-    <div [ngBusy]="busy"></div>
-
 
     <div class="row" *ngIf="!skipScreeningRequirements; else skipContent">
         <section class="col-md-12">
