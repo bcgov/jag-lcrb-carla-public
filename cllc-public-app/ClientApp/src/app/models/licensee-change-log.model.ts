@@ -57,21 +57,19 @@ export class LicenseeChangeLog {
 
   isRoot: boolean; // This is only used on the client side
   isIndividual: boolean; // This is only used on the client side
+  isLeadershipIndividual: boolean; // This is only used on the client side
+  isShareholderIndividual: boolean; // This is only used on the client side
   edit: boolean; // This is only used on the client side
   collapse: boolean; // This is only used on the client side
-  refObject: LicenseeChangeLog; // This is only used on the client side
   saved: boolean; // This is only used on the client side
   fileUploads: any = {}; // This is only used on the client side
-
-
-
 
   /**
    * Create from LegalEntity
    */
   public static CreateFromLegalEntity(legalEntity: LegalEntity = null) {
     let newItem: LicenseeChangeLog = null;
-    
+
     if (legalEntity) {
       newItem = new LicenseeChangeLog();
       newItem.legalEntityId = legalEntity.id;
@@ -123,46 +121,6 @@ export class LicenseeChangeLog {
     return newItem;
   }
 
-  /*
-  * Performs a Depth First Traversal and transforms the LegalEntity tree to change objects
-  */
-  public processLegalEntityTree(node: LegalEntity): LicenseeChangeLog {
-    const newNode = LicenseeChangeLog.CreateFromLegalEntity(node);
-
-    if (node && node.children && node.children.length) {
-      newNode.children = [];
-      node.children.forEach(child => {
-        const childNode = this.processLegalEntityTree(child);
-        childNode.parentLicenseeChangeLog = newNode;
-
-        //split the change log if it is both a shareholder and key-personnel
-        if (childNode.isIndividual && (childNode.isDirectorNew || childNode.isManagerNew || childNode.isOfficerNew || childNode.isTrusteeNew)) {
-          const newIndividualNode = <LicenseeChangeLog>{ ...childNode, isShareholderNew: false, isShareholderOld: false };
-          newNode.children.push(newIndividualNode);
-
-          childNode.isManagerNew = false;
-          childNode.isOfficerNew = false;
-          childNode.isOwnerNew = false;
-          childNode.isDirectorNew = false;
-          childNode.isTrusteeNew = false;
-          childNode.isManagerOld = false;
-          childNode.isOfficerOld = false;
-          childNode.isOwnerOld = false;
-          childNode.isDirectorOld = false;
-          childNode.isTrusteeOld = false;
-        }
-
-        newNode.children.push(childNode);
-      });
-
-      newNode.children.sort((a, b) => {
-        return a.totalSharesNew - b.totalSharesNew;
-      });
-    }
-
-    return newNode;
-  }
-
   // public get percentageShares(): number {
   //   let percent = 0;
   //   if (this.parentLinceseeChangeLog && this.parentLinceseeChangeLog.totalSharesNew && this.numberofSharesNew) {
@@ -182,13 +140,12 @@ export class LicenseeChangeLog {
   // }
 
   public get keyPersonnelChildren(): LicenseeChangeLog[] {
-    const leaders = (this.children || []).filter(item => item.isIndividual &&
-      (item.isDirectorNew || item.isManagerNew || item.isOfficerNew || item.isTrusteeNew || item.isOwnerNew));
+    const leaders = (this.children || []).filter(item => item.isLeadershipIndividual);
     return leaders;
   }
 
   public get individualShareholderChildren(): LicenseeChangeLog[] {
-    const leaders = (this.children || []).filter(item => item.isIndividual && item.isShareholderNew);
+    const leaders = (this.children || []).filter(item => item.isShareholderIndividual);
     return leaders;
   }
 
@@ -200,9 +157,7 @@ export class LicenseeChangeLog {
   public get keyPersonnelChildrenNoRemoves(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => {
       item = Object.assign(new LicenseeChangeLog, item);
-      return item.isIndividual &&
-        (item.isDirectorNew || item.isManagerNew || item.isOfficerNew || item.isTrusteeNew || item.isOwnerNew)
-        && !item.isRemoveChangeType();
+      return item.isLeadershipIndividual && !item.isRemoveChangeType();
     });
     return leaders;
   }
@@ -210,7 +165,7 @@ export class LicenseeChangeLog {
   public get individualShareholderChildrenNoRemoves(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => {
       item = Object.assign(new LicenseeChangeLog, item);
-      return item.isIndividual && item.isShareholderNew && !item.isRemoveChangeType();
+      return item.isShareholderIndividual && !item.isRemoveChangeType();
     });
     return leaders;
   }
@@ -218,14 +173,15 @@ export class LicenseeChangeLog {
   public get businessShareholderChildrenNoRemoves(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => {
       item = Object.assign(new LicenseeChangeLog, item);
-      return !item.isIndividual && item.isShareholderNew && !item.isRemoveChangeType();
+      return !item.isShareholderIndividual && !item.isRemoveChangeType();
     });
     return leaders;
   }
 
   public static GetKeyPersonnelDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     let children = (changeLog && changeLog.children) || [];
-    let leaders = children.filter(item => item.isIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
+    let leaders = children.filter(item => item.isLeadershipIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       leaders = leaders.concat(LicenseeChangeLog.GetKeyPersonnelDecendents(child));
     });
@@ -245,6 +201,7 @@ export class LicenseeChangeLog {
   }
 
   public static HasChanges(changeLog: LicenseeChangeLog): Boolean {
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     const keyPersonnnelChanged = this.GetKeyPersonnelDecendents(changeLog).length > 0;
     const individualShareholderChanged = this.GetIndividualShareholderDecendents(changeLog).length > 0;
     const businessShareholderChanged = this.GetBusinessShareholderDecendents(changeLog).length > 0;
@@ -264,19 +221,21 @@ export class LicenseeChangeLog {
 
 
   public static HasExternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     return (this.GetIndividualShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length +
-            this.GetBusinessShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length) > 0;
+      this.GetBusinessShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length) > 0;
   }
 
   public static HasInternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
-
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     return (this.GetIndividualShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length +
-            this.GetBusinessShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length) > 0;
+      this.GetBusinessShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length) > 0;
   }
 
   public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     let children = (changeLog && changeLog.children) || [];
-    let shareholders = children.filter(item => item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
+    let shareholders = children.filter(item => item.isShareholderIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       shareholders = shareholders.concat(LicenseeChangeLog.GetIndividualShareholderDecendents(child));
     });
@@ -284,8 +243,9 @@ export class LicenseeChangeLog {
   }
 
   public static GetBusinessShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     let children = (changeLog && changeLog.children) || [];
-    let shareholders = children.filter(item => !item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
+    let shareholders = children.filter(item => !item.isShareholderIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       shareholders = shareholders.concat(LicenseeChangeLog.GetBusinessShareholderDecendents(child));
     });
@@ -555,7 +515,7 @@ export class LicenseeChangeLog {
       data.forEach(child => {
         const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
         if (fixedChild.children) {
-          fixedChild.fixChildren;
+          fixedChild.fixChildren();
         }
         fixedChildren.push(fixedChild);
       });
@@ -568,11 +528,41 @@ export class LicenseeChangeLog {
     if (this.children) {
       const fixedChildren = [];
       this.children.forEach(child => {
-        const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
-        if (fixedChild.children) {
-          fixedChild.fixChildren;
+        // Key personnel here
+        if (child.isIndividual && (child.isDirectorNew || child.isManagerNew || child.isOfficerNew || child.isTrusteeNew || child.isOwnerNew)) {
+          const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
+          fixedChild.isLeadershipIndividual = true;
+          fixedChild.isShareholderNew = false;
+          fixedChild.isShareholderOld = false;
+          fixedChildren.push(fixedChild);
         }
-        fixedChildren.push(fixedChild);
+        
+        // Individual shareholders here
+        if (child.isIndividual && child.isShareholderNew) {
+          const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
+          fixedChild.isShareholderIndividual = true;
+          child.isDirectorNew = false;
+          child.isManagerNew = false;
+          child.isOfficerNew = false;
+          child.isTrusteeNew = false;
+          child.isOwnerNew = false;
+          child.isDirectorOld = false;
+          child.isManagerOld = false;
+          child.isOfficerOld = false;
+          child.isTrusteeOld = false;
+          child.isOwnerOld = false;
+          fixedChildren.push(fixedChild);
+        }
+
+        // Business shareholders here
+        if (!child.isIndividual && child.isShareholderNew) {
+          const fixedChild: LicenseeChangeLog = new LicenseeChangeLog(child);
+          if (fixedChild.children) {
+            fixedChild.fixChildren();
+          }
+          fixedChildren.push(fixedChild);
+        }
+
       });
       this.children = fixedChildren;
     }

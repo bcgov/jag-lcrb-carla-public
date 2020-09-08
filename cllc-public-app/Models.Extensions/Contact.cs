@@ -335,6 +335,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSelfdisclosure = from.SelfDisclosure;
             to.AdoxioIdentificationtype = (int?)from.PrimaryIdentificationType;
             to.AdoxioSecondaryidentificationtype = (int?)from.SecondaryIdentificationType;
+            to.AdoxioCascomplete = (int?)from.CasComplete;
+            to.AdoxioCasdatesubmitted = from.CasDateSubmitted;
+            to.AdoxioConsentvalidated = (int?)from.CasConsentValidated;
+            to.AdoxioConsentvalidatedexpirydate = from.CasConsentValidatedExpiryDate;
             to.AdoxioPhslivesincanada = (int?)from.PhsLivesInCanada;
             to.AdoxioPhshaslivedincanada = (int?)from.PhsHasLivedInCanada;
             to.AdoxioPhsexpired = (int?)from.PhsExpired;
@@ -381,6 +385,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.AdoxioCansignpermanentchangeapplications = contact.adoxio_cansignpermanentchangeapplications;
                 result.AdoxioCansigntemporarychangeapplications = contact.adoxio_cansigntemporarychangeapplications;
                 result.Telephone1 = contact.telephone1;
+
+                result.AdoxioCascomplete = (int?)contact.CasComplete;
+                result.AdoxioCasdatesubmitted = contact.CasDateSubmitted;
+                result.AdoxioConsentvalidated = (int?)contact.CasConsentValidated;
+                result.AdoxioConsentvalidatedexpirydate = contact.CasConsentValidatedExpiryDate;
 
                 result.AdoxioPhslivesincanada = (int?)contact.PhsLivesInCanada;
                 result.AdoxioPhshaslivedincanada = (int?)contact.PhsHasLivedInCanada;

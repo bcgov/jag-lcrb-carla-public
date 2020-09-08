@@ -43,6 +43,14 @@ namespace bdd_tests
                 // check missing declaration checkbox error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Declaration Checkbox')]")).Displayed);
             }
+            else if (applicationType == "n event authorization")
+                {
+                    // check maximum attendance error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum attendance (must be a number)')]")).Displayed);
+
+                    // check maximum staff attendance error is thrown
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum staff attendance (must be a number)')]")).Displayed);
+            }
             else
             {
                 // check missing authorized to submit error is thrown
@@ -117,15 +125,6 @@ namespace bdd_tests
 
                     // check missing supporting document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one supporting document is required.')]")).Displayed);
-                }
-
-                if (applicationType == "n event authorization")
-                { 
-                    // check maximum attendance error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum attendance (must be a number)')]")).Displayed);
-
-                    // check maximum staff attendance error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum staff attendance (must be a number)')]")).Displayed);
                 }
 
                 if (applicationType == " transfer of ownership")

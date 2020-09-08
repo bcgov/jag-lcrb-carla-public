@@ -1,259 +1,574 @@
-<div class="form-wrapper" [formGroup]="form">
-    <h1>Cannabis Associate Screening</h1>
+<div class="form-wrapper" [formGroup]="form" [ngBusy]="busy">
+  <h1>Cannabis Associate Security Screening</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <section class="d-flex">
+        <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+        <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+          <p>
+            <label>BEFORE YOU APPLY</label>:&nbsp;
+            Ensure you have completed the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associate Financial Integrity Form</a>.
+          </p>
 
-    <div class="row">
-        <div class="col-md-8">
+          <p class="pl-3">
+            <strong>Note</strong>:&nbsp;
+            At any time, the LCRB may require you to consent to subsequent criminal record checks.
+          </p>
 
-            <section class="d-flex">
-                <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
-                <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-                    <p>
-                        <label>BEFORE YOU APPLY</label>: &nbsp;
-                        TO DO
-                    </p>
+          <div>
+            <label>INSTRUCTIONS</label>:
+            <ul>
+              <li>
+                You must complete all questions in order to submit. Information will not be saved unless
+                the form is complete.
+              </li>
+              <li>Attach all supporting documentation as directed.</li>
+            </ul>
+            <p class="pl-3">
+              <strong>Note</strong>: &nbsp;
+              Having a criminal record does not cause your LCRB application to automatically be denied.
+              LCRB will carefully review the circumstances of the individual case; severity and date of
+              the offence for example, and how the type of offence relates to the responsibility of
+              holding a cannabis licence.
+            </p>
+          </div>
+        </div>
+      </section>
 
-                    <p class="pl-3">
-                        <strong>Note</strong>:&nbsp;
-                        At any time, the LCRB may require you to consent to subsequent criminal record checks.
-                    </p>
+      <section class="login-section p-3" *ngIf="!user">
+        <h2>This cannabis associate security screening is meant for {{form.get('contact.shortName').value}}.</h2>
+        <p>If this is you please complete the following questions:</p>
+        <app-field label="Where do you currently reside?"
+          [showChevrons]="false" [isFullWidth]="true">
+          <mat-radio-group class="radio-group-vertical" formControlName="residency">
+            <mat-radio-button class="mr-5" value="bc">I am a resident of B.C.</mat-radio-button>
+            <mat-radio-button class="mr-5" value="canada">I am a resident of a different Canadian province.</mat-radio-button>
+            <mat-radio-button class="mr-5" value="outside">I am a resident of a country outside of Canada.</mat-radio-button>
+          </mat-radio-group>
+        </app-field>
 
-                    <div>
-                        <label>INSTRUCTIONS</label>:
-                        <ul>
-                            <li>You must complete all questions in order submit. Information will not be saved unless
-                                the form is complete.
-                            </li>
-                            <li>Attach all supporting documentation as directed.</li>
-                        </ul>
-                        <p class="pl-3">
-                            <strong>Note</strong>: &nbsp;
-                            Having a criminal record does not cause your LCRB application to automatically be denied.
-                            LCRB will carefully review the circumstances of the individual case; severity and date of
-                            the offence for example, and how the type of offence relates to the responsibility of
-                            holding a cannabis licence.
-                        </p>
-                    </div>
-                </div>
-            </section>
 
-            <!-- {{form.value | json}} -->
-            <h3 class="blue-header">BASIC INFORMATION</h3>
+        <div *ngIf="form.get('residency').value === 'bc'">
+          <app-field label="Do you have a BC Services Card?"
+            [showChevrons]="false" [isFullWidth]="true">
+            <mat-radio-group class="radio-group-vertical" formControlName="hasServicesCard">
+              <mat-radio-button class="mr-5" value="yes">Yes, I have a BC Services Card</mat-radio-button>
+              <mat-radio-button class="mr-5" value="no">No, I do not have a BC Services Card</mat-radio-button>
+            </mat-radio-group>
+          </app-field>
+          <div *ngIf="form.get('hasServicesCard').value === 'yes'">
+            <p class="login-bc-service d-flex justify-content-between">
+              <strong style="margin-top: 10px">I have BC Services Card set-up to use online</strong>
+              <a class="btn btn-primary float-right" href="bcservice?path=cannabis-associate-screening&code={{contactToken}}">BC Services Card Login</a>
+            </p>
+            <p class="login-bc-service d-flex justify-content-between">
+              <strong style="margin-top: 10px">I do not have BC Services Card set-up to use online</strong>
+              <a class="btn btn-primary float-right" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/log-in-with-card/setup" target="_blank">Get Set Up</a>
+            </p>
+          </div>
+          <div *ngIf="form.get('hasServicesCard').value === 'no'">
+            <a class="btn btn-primary" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/your-card/get-a-card" target="_blank">Get a BC Services Card</a>
+            <h3>-or-</h3>
+            <p>Manually submit the required information by completing the following steps:</p>
+            <ol>
+              <li>Visit a Service BC location with:</li>
+                <ul>
+                  <li>2 pieces of valid ID for copying and verification by a Service BC staff member</li>
+                  <ul>
+                    <li>A piece of valid government-issued photo ID that contains your name, date of birth and signature</li>
+                    <li>A piece of secondary ID with an imprinted name that exactly matches that on the government-issued ID and with a signature</li>
+                  </ul>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification Attestation Form</a></li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-witness-signature.pdf" target="_blank">Witness of Signature Attestation Form</a></li>
+                  <li>Unsigned copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening Form</a></li>
+                </ul>
+              <li>Have a Service BC representative:</li>
+              <ul>
+                <li>Conduct an in-person verification of your two piecees of ID and make a copies</li>
+                <li>Complete the Identity Verification Attestation Form</li>
+                <li>Witness your signature on the Consent for Cannabis Security Screening form and ensure information on the form matches the ID presented</li>
+                <li>Complete the Witness of Signature Attestation Form</li>
+                <li>Send both attestation forms, copies of your ID and the signed Consent for Cannabis Security Screening form to the B.C. Liquor and Cannabis Regulation Branch</li>
+              </ul>
+              <li>Contact <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a> to arrange for a secure file transfer of your <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associates Financial Integrity Form</a>. Please include the cannabis retail store licence application number in your email. Do not include your form or any personal information.</li>
+            </ol>
+          </div>
+        </div>
 
-            <section class="padded-section border-around">
-                <div formGroupName="contact">
-                    <app-field label="Name">
-                        <input class="form-control" style="width: 400px;" type="text" formControlName="shortName"
-                            readonly disabled>
-                    </app-field>
 
-                    <app-field label="Date of Birth" errorMessage="Date of Birth is required"
-                        [valid]="!form.get('contact.birthDate').touched || form.get('contact.birthDate').valid">
-                        <input type="text" formControlName='birthDate' style="width: 200px; background-color: #fff;"
-                            placeholder="yyyy-mm-dd" readonly class="form-control" [matDatepicker]="picker"
-                            (focus)="picker.open()" (click)="picker.open()">
-                        <mat-datepicker #picker></mat-datepicker>
-                    </app-field>
+        <div *ngIf="form.get('residency').value === 'canada'">
+          <app-field label="Are you currently in B.C.?"
+            [showChevrons]="false" [isFullWidth]="true">
+            <mat-radio-group class="radio-group-vertical" formControlName="inBC">
+              <mat-radio-button class="mr-5" value="yes">Yes</mat-radio-button>
+              <mat-radio-button class="mr-5" value="no">No</mat-radio-button>
+            </mat-radio-group>
+          </app-field>
+          <div *ngIf="form.get('inBC').value === 'yes'">
+            <p>Manually submit the required information by completing the following steps:</p>
+            <ol>
+              <li>Visit a Service BC location with:</li>
+                <ul>
+                  <li>A piece of valid government-issued photo ID That contains your name, date of birth and signature</li>
+                  <li>A piece of secondary ID with an imprinted name that exactly matches that on the government-issued ID and with a signature</li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification Attestation Form</a></li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-witness-signature.pdf" target="_blank">Witness of Signature Attestation Form</a></li>
+                  <li>Unsigned copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening Form</a></li>
+                </ul>
+              <li>Have a Service BC representative:</li>
+              <ul>
+                <li>Conduct an in-person verification of your two pieces of ID and make copies</li>
+                <li>Complete the Identity Verification Attestation Form</li>
+                <li>Witness your signature on the Consent for Cannabis Security Screening form and ensure information on the form matches the ID presented</li>
+                <li>Complete the Witness of Signature Attestation Form</li>
+                <li>Send both attestation forms, copies of your ID and the signed Consent for Cannabis Security Screening form to the B.C. Liquor and Cannabis Regulation Branch</li>
+              </ul>
+              <li>Contact <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a> to arrange for a secure file transfer of your <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associates Financial Integrity Form</a>. Please include the cannabis retail store licence application number in your email. Do not include your form or any personal information.</li>
+            </ol>
+          </div>
+          <div *ngIf="form.get('inBC').value === 'no'">
+            <p>Manually submit the required information by completing the following steps:</p>
+            <ol>
+              <li>Visit a local police station with:</li>
+                <ul>
+                  <li>A piece of valid government-issued photo ID That contains your name, date of birth and signature</li>
+                  <li>A piece of secondary ID with an imprinted name that exactly matches that on the government-issued ID and with a signature</li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification Attestation Form</a></li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-witness-signature.pdf" target="_blank">Witness of Signature Attestation Form</a></li>
+                  <li>Unsigned copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening Form</a></li>
+                </ul>
+              <li>At the local police station:</li>
+              <ul>
+                <li>Apply for a Police Information Check (PIC) at a local police department. DO NOT OPEN the Plice Information Check when you receive it.</li>
+                <li>Have the police station clerk:</li>
+                <ul>
+                  <li>Conduct an in-person verification of your two pieces of ID</li>
+                  <li>Complete the Identity Verification Attestation Form</li>
+                  <li>Witness your signature on the Consent for Cannabis Security Screening Form and ensure information on the form matches the ID presented</li>
+                  <li>Complete the Witness of Signature Attestation Form</li>
+                </ul>
+              </ul>
+              <li>Send your UNOPENED Police Information Check to the B.C. Liquor and Cannabis Regulation Branch at PO Box 9292 Stn Provincial Govt, Victoria, BC, V8W 9J8 -- include a note indicating the relevant application's Reference Number or the address of the proposed retail store location (provided to you by the applicant if you are an associate)</li>
+              <li>Contact <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a> to arrange for a secure file transfer of the required documents. Please include the cannabis retail store licence application number in your email. Do not include your form or any personal information.</li>
+                <ul>
+                  <li>Associates Financial Integrity Form and supporting documents</li>
+                  <li>Scanned copies of your passport and secondary ID</li>
+                  <li>Scanned copy of completed and signed Consent for Cannabis Security Screening</li>
+                  <li>Scanned copy of completed and signed Witness of Signature Attestation Form</li>
+                  <li>Scanned copy of completed and signed Identity Verification Attestation Form</li>
+                </ul>
+            </ol>
+          </div>
+        </div>
 
-                    <app-field label="Gender" errorMessage="Please select gender"
-                        [valid]="!form.get('contact.gender').touched || form.get('contact.gender').valid">
-                        <mat-radio-group formControlName="gender">
-                            <mat-radio-button value="Male" style="margin-right: 10px;">Male </mat-radio-button>
-                            <mat-radio-button value="Female" style="margin-right: 10px;">Female </mat-radio-button>
-                            <mat-radio-button value="Other">Other </mat-radio-button>
-                        </mat-radio-group>
-                    </app-field>
-                </div>
-                <hr>
-                <app-field label="Name at Birth">
-                    <section class="padded">
-                        <mat-checkbox color="primary" formControlName="sameNameAtBirth">I had the same name at birth
-                        </mat-checkbox>
+        <div *ngIf="form.get('residency').value === 'outside'">
+          <app-field label="Are you currently in B.C.?"
+            [showChevrons]="false" [isFullWidth]="true">
+            <mat-radio-group class="radio-group-vertical" formControlName="inBC">
+              <mat-radio-button class="mr-5" value="yes">Yes</mat-radio-button>
+              <mat-radio-button class="mr-5" value="no">No</mat-radio-button>
+            </mat-radio-group>
+          </app-field>
+          <div *ngIf="form.get('inBC').value === 'yes'">
+            <p>Manually submit the required information by completing the following steps:</p>
+            <ol>
+              <li>Request a Criminal Record Check from your country of residency; if your Criminal Record Check will not be in English, you must request a second copy for translation</li>
+              <li>If the original Criminal Record Check is not in English, have the check translated by a translator who is admitted to a professional association</li>
+              <li>Visit a Service BC location with:</li>
+                <ul>
+                  <li>A valid passport</li>
+                  <li>Another piece of valid government-issued ID with a signature and an imprinted name that exactly matches that on the passport</li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification Attestation Form</a></li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-witness-signature.pdf" target="_blank">Witness of Signature Attestation Form</a></li>
+                  <li>Unsigned copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening Form</a></li>
+                </ul>
+              <li>Have a Service BC representative:</li>
+              <ul>
+                <li>Conduct an in-person verification of your passport and piece of government-issued ID and make a copies</li>
+                <li>Complete the Identity Verification Attestation Form</li>
+                <li>Witness your signature on the Consent for Cannabis Security Screening form and ensure information on the form matches the ID presented</li>
+                <li>Complete the Witness of Signature Attestation Form</li>
+                <li>Send both attestation forms, copies of your ID and the signed Consent for Cannabis Security Screening form to the B.C. Liquor and Cannabis Regulation Branch</li>
+              </ul>
+              <li>Send your UNOPENED Police Information Check to the B.C. Liquor and Cannabis Regulation Branch at PO Box 9292 Stn Provincial Govt, Victoria, BC, V8W 9J8 -- include a note indicating the relevant application's Reference Number or the address of the proposed retail store location (provided to you by the applicant if you are an associate)</li>
+              <li>Contact <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a> to arrange for a secure file transfer of your <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associates Financial Integrity Form</a>. Please include the cannabis retail store licence application number in your email. Do not include your form or any personal information.</li>
+            </ol>
+          </div>
+          <div *ngIf="form.get('inBC').value === 'no'">
+            <p>Manually submit the required information by completing the following steps:</p>
+            <ol>
+              <li>Visit a local police station with:</li>
+                <ul>
+                  <li>A valid passport</li>
+                  <li>Another piece of valid government-issued ID with a signature and an imprinted name that exactly matches that on the passport</li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification Attestation Form</a></li>
+                  <li>Copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-witness-signature.pdf" target="_blank">Witness of Signature Attestation Form</a></li>
+                  <li>Unsigned copy of the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening Form</a></li>
+                </ul>
+              <li>At the local police station:</li>
+              <ul>
+                <li>Request a Criminal Record Check; if your Criminal Record Check will not be in English, you must request a second copy for translation</li>
+                <li>If the original Criminal Record Check is not in English, have the check translated by a translator who is admitted to a professional association</li>
+                <li>Have the police station clerk:</li>
+                <ul>
+                  <li>Conduct an in-person verification of your two pieces of ID</li>
+                  <li>Complete the Identity Verification Attestation Form</li>
+                  <li>Witness your signature on the Consent for Cannabis Security Screening Form and ensure information on the form matches the ID presented</li>
+                  <li>Complete the Witness of Signature Attestation Form</li>
+                </ul>
+              </ul>
+              <li>Send your UNOPENED Police Information Check to the B.C. Liquor and Cannabis Regulation Branch at PO Box 9292 Stn Provincial Govt, Victoria, BC, V8W 9J8 -- include a note indicating the relevant application's Reference Number or the address of the proposed retail store location (provided to you by the applicant if you are an associate)</li>
+              <li>Contact <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a> to arrange for a secure file transfer of the required documents. Please include the cannabis retail store licence application number in your email. Do not include your form or any personal information.</li>
+                <ul>
+                  <li>Associates Financial Integrity Form and supporting documents</li>
+                  <li>Scanned copies of your passport and secondary ID</li>
+                  <li>Scanned copy of completed and signed Consent for Cannabis Security Screening</li>
+                  <li>Scanned copy of completed and signed Witness of Signature Attestation Form</li>
+                  <li>Scanned copy of completed and signed Identity Verification Attestation Form</li>
+                </ul>
+            </ol>
+          </div>
+        </div>
 
-                        <ng-container *ngIf="form.get('sameNameAtBirth').value === false">
-                            <app-field label="First Name at Birth" errorMessage="Please enter First Name at Birth"
-                                [valid]="!form.get('firstNameAtBirth').touched || form.get('firstNameAtBirth').valid">
-                                <input class="form-control" style="width: 300px;" type="text"
-                                    formControlName="firstNameAtBirth">
-                            </app-field>
+      </section>
+      <div *ngIf="user && showForm">
+        <!-- {{form.value | json}} -->
+        <h3 class="blue-header">BASIC INFORMATION</h3>
 
-                            <app-field label="Last Name at Birth" errorMessage="Please enter Last Name at Birth"
-                                [valid]="!form.get('lastNameAtBirth').touched || form.get('lastNameAtBirth').valid">
-                                <input class="form-control" style="width: 300px;" type="text"
-                                    formControlName="lastNameAtBirth">
-                            </app-field>
-                        </ng-container>
-                    </section>
+        <section class="padded-section border-around">
+          <div formGroupName="contact">
+            <app-field label="Name">
+              <input class="form-control" type="text" formControlName="shortName" readonly disabled style="width: 300px;">
+            </app-field>
+
+            <app-field label="Date of Birth">
+              <input class="form-control" type="text" formControlName='birthDate' readonly disabled style="width: 300px;">
+            </app-field>
+
+            <app-field label="Gender">
+              <mat-radio-group formControlName="gender" readonly disabled>
+                <mat-radio-button value="Male" style="margin-right: 10px;">Male </mat-radio-button>
+                <mat-radio-button value="Female" style="margin-right: 10px;">Female </mat-radio-button>
+                <mat-radio-button value="Other">Other </mat-radio-button>
+              </mat-radio-group>
+            </app-field>
+          </div>
+          <hr>
+          <app-field label="Name at Birth">
+            <section class="padded">
+              <mat-checkbox color="primary" formControlName="sameNameAtBirth">I had the same name at birth</mat-checkbox>
+
+              <ng-container *ngIf="form.get('sameNameAtBirth').value === false">
+                <app-field label="First Name at Birth" errorMessage="Please enter First Name at Birth"
+                           [valid]="!form.get('firstNameAtBirth').touched || form.get('firstNameAtBirth').valid">
+                  <input class="form-control" style="width: 300px;" type="text" formControlName="firstNameAtBirth">
                 </app-field>
-                <hr>
 
-                <app-field label="Other Last Names Used">
-                    <div formGroupName="contact">
-                        <section formArrayName="aliases" class="padded-section">
-                            <div *ngFor="let alias of aliases.controls; let i = index">
-                                <div [formGroupName]="i">
-                                    <app-field label="Last Name {{ i + 1}}" style="width:80%"
-                                        errorMessage="Please enter last name" [showChevrons]="false"
-                                        [valid]="!aliases.at(i).get('lastname').touched || aliases.at(i).get('lastname').valid"
-                                        [isFullWidth]="true">
-                                        <input class="form-control" style="width: 300px;" type="text"
-                                            formControlName="lastname"> <i class="fas fa-trash-alt ml-3"
-                                            (click)="deleteAlias(i)"></i>
-                                    </app-field>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <button (click)="addAlias()" class="btn btn-secondary" style="padding-left:10px;">Add Last
-                        Name</button>
+                <app-field label="Last Name at Birth" errorMessage="Please enter Last Name at Birth"
+                           [valid]="!form.get('lastNameAtBirth').touched || form.get('lastNameAtBirth').valid">
+                  <input class="form-control" style="width: 300px;" type="text" formControlName="lastNameAtBirth">
                 </app-field>
+              </ng-container>
             </section>
+          </app-field>
+          <hr>
 
-
-            <h3 class="blue-header">CURRENT ADDRESS</h3>
-            <div formGroupName="contact" class="padded-section border-around">
-                <address class="row">
-                    <app-field class="col-md-12 col-xs-12" label="Address" [required]="true"
-                        errorMessage="Plaese enter Address"
-                        [valid]="!form.get('contact.address1_line1').touched || form.get('contact.address1_line1').valid"
-                        [isFullWidth]="true">
-                        <input class="form-control" type="text" formControlName="address1_line1">
+          <app-field label="Other Last Names Used">
+            <div formGroupName="contact">
+              <section formArrayName="aliases" class="padded-section">
+                <div *ngFor="let alias of aliases.controls; let i = index">
+                  <div [formGroupName]="i">
+                    <app-field label="Last Name {{ i + 1}}" style="width:80%"
+                               errorMessage="Please enter last name" [showChevrons]="false"
+                               [valid]="!aliases.at(i).get('lastname').touched || aliases.at(i).get('lastname').valid"
+                               [isFullWidth]="true">
+                      <input class="form-control" style="width: 300px;" type="text"
+                             formControlName="lastname"> <i class="fas fa-trash-alt ml-3"
+                                                            (click)="deleteAlias(i)"></i>
                     </app-field>
-                    <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true"
-                        errorMessage="Plaese enter City" [required]="true"
-                        [valid]="!form.get('contact.address1_city').touched || form.get('contact.address1_city').valid">
-                        <input class="form-control" type="text" formControlName="address1_city">
-                    </app-field>
-                    <section class="col-md-4 col-xs-12">
-                        <app-field label="Province/State" [isFullWidth]="true" errorMessage="Plaese enter Province"
-                            [required]="true"
-                            [valid]="!form.get('contact.address1_stateorprovince').touched || form.get('contact.address1_stateorprovince').valid">
-                            <input class="form-control" type="text" formControlName="address1_stateorprovince"
-                                value="British Columbia">
-                        </app-field>
-                    </section>
-                    <section class="col-md-4 col-xs-12">
-                        <app-field label="Postal Code" errorMessage="Plaese enter Postal Code" [required]="true"
-                            [valid]="!form.get('contact.address1_postalcode').touched || form.get('contact.address1_postalcode').valid">
-                            <input class="form-control" type="text" formControlName="address1_postalcode">
-                        </app-field>
-                    </section>
-                    <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true"
-                        errorMessage="Plaese enter Country" [required]="true"
-                        [valid]="!form.get('contact.address1_country').touched || form.get('contact.address1_country').valid">
-                        <input formControlName="address1_country" class="form-control" autocomplete="country-name"
-                            type="text" value="Canada">
-                    </app-field>
-                </address>
-                <section>
-                    <app-field label="Phone Number" [required]="true"
-                        [valid]="!form.get('contact.mobilePhone').touched || form.get('contact.mobilePhone').valid"
-                        errorMessage="Please enter a 10-digit phone number">
-                        <input formControlName="mobilePhone" class="form-control" style="width: 350px;" maxlength="10"
-                            autocomplete="tel" type="text">
-                    </app-field>
-
-                    <app-field label="Email" [required]="true" errorMessage="Please enter email address"
-                        [valid]="!form.get('contact.emailaddress1').touched || form.get('contact.emailaddress1').valid"
-                        afterLabelText="By submitting this email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your Personal History Summary."
-                        style="padding-left:20px;">
-                        <input formControlName="emailaddress1" class="form-control" style="width: 350px;" type="text"
-                            autocomplete="email">
-                    </app-field>
-                </section>
+                  </div>
+                </div>
+              </section>
             </div>
+            <button (click)="addAlias()" class="btn btn-secondary" style="padding-left:10px;">
+              Add Last
+              Name
+            </button>
+          </app-field>
+        </section>
+
+
+        <h3 class="blue-header">CURRENT ADDRESS</h3>
+        <div formGroupName="contact" class="padded-section border-around">
+          <address class="row">
+            <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
+              <input class="form-control" type="text" formControlName="address1_line1" readonly disabled>
+            </app-field>
+            <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true">
+              <input class="form-control" type="text" formControlName="address1_city" readonly disabled>
+            </app-field>
+            <section class="col-md-4 col-xs-12">
+              <app-field label="Province/State" [isFullWidth]="true">
+                <input class="form-control" type="text" formControlName="address1_stateorprovince" readonly disabled>
+              </app-field>
+            </section>
+            <section class="col-md-4 col-xs-12">
+              <app-field label="Postal Code">
+                <input class="form-control" type="text" formControlName="address1_postalcode" readonly disabled>
+              </app-field>
+            </section>
+            <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
+              <input formControlName="address1_country" class="form-control" type="text" readonly disabled>
+            </app-field>
+          </address>
+          <section>
+            <app-field label="Phone Number" [required]="true"
+                       [valid]="!form.get('contact.mobilePhone').touched || form.get('contact.mobilePhone').valid"
+                       errorMessage="Please enter a 10-digit phone number">
+              <input formControlName="mobilePhone" class="form-control" style="width: 350px;" mask="(000) 000-0000"
+                     autocomplete="tel" type="text">
+            </app-field>
+
+            <app-field label="Email" [required]="true" errorMessage="Please enter email address"
+                       [valid]="!form.get('contact.emailaddress1').touched || form.get('contact.emailaddress1').valid"
+                       afterLabelText="By submitting this email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your Cannabis Associate Security Screening."
+                       style="padding-left:20px;">
+              <input formControlName="emailaddress1" class="form-control" style="width: 350px;" type="text"
+                     autocomplete="email">
+            </app-field>
+          </section>
+        </div>
+        
+        <h3 class="blue-header">PAST ADDRESSES</h3>
+        <section class="padded-section border-around">
+          <app-field label="Have you resided outside of British Columbia at any point within the past 5 years?"
+            [showChevrons]="false" [isFullWidth]="FALSE">
+            <mat-radio-group class="radio-group" formControlName="residedOutsideBC"
+              (change)="previousAddressesToggleChanged()">
+              <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+              <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </app-field>
+          <div *ngIf="previousAddresses.length > 0">
+            <div class="d-flex">
+              <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+              <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+                <p class="font-weight-bold">Please provide the city, province/state, country and year(s) for each place you resided outside of British Columbia (from most recent/current to oldest)</p>
+              </div>
+            </div>
+            <div formArrayName="previousAddresses">
+              <div *ngFor="let address of previousAddresses.controls; let i = index">
+                <div [formGroupName]="i">
+                  <h3>PAST ADDRESS {{i + 1}}
+                    <button class="btn btn-secondary" style="float: right;" (click)="deleteAddress(i)">
+                      <i class="fa fa-trash"></i>
+                      DELETE ADDRESS
+                    </button>
+                  </h3>
+                  <section>
+                    <div [ngClass]="{'has-error': !address.get('city').valid && address.get('city').touched}">
+                      <label>City</label>
+                      <br />
+                      <input class="form-control" style="min-width: 250px; max-width: 350px;" type="text"
+                        formControlName="city">
+                      <div *ngIf="!address.get('city').valid && address.get('city').touched" class="alert alert-danger"
+                        style="min-width: 250px; max-width: 350px;">
+                        <div *ngIf="!address.get('city').valid && address.get('city').touched ">
+                          This is required
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section>
+                    <div [ngClass]="{'has-error': !address.get('provstate').valid && address.get('provstate').touched}">
+                      <label>Province / State</label>
+                      <br />
+                      <input class="form-control" style="width: 200px;" type="text" formControlName="provstate">
+                      <div *ngIf="!address.get('provstate').valid && address.get('provstate').touched"
+                        class="alert alert-danger" style="width: 200px;">
+                        <div *ngIf="!address.get('provstate').valid && address.get('provstate').touched ">
+                          This is required
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section>
+                    <div [ngClass]="{'has-error': !address.get('country').valid && address.get('country').touched}">
+                      <label>Country</label>
+                      <br />
+                      <select class="form-control" style="width: 250px;" formControlName="country">
+                        <option value="Canada">Canada</option>
+                        <option value="United States of America">United States of America</option>
+                        <hr>
+                        <option *ngFor="let c of countryList" value="{{c}}">{{c}}</option>
+                      </select>
+                      <div *ngIf="!address.get('country').valid && address.get('country').touched"
+                        class="alert alert-danger" style="width: 250px;">
+                        <div *ngIf="!address.get('country').valid && address.get('country').touched ">
+                          This is required
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section style="display: inline-block; vertical-align: top;">
+                    <div [ngClass]="{'has-error': !address.get('fromdate').valid && address.get('fromdate').touched}">
+                      <label>Date: From</label>
+                      <br />
+                      <input type="text" formControlName='fromdate' style="width: 200px; background-color: #fff;"
+                        placeholder="yyyy-mm-dd" class="form-control" readonly [min]="minDate" [max]="currentDate"
+                        [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()">
+                      <mat-datepicker #picker1></mat-datepicker>
+                      <div
+                        *ngIf="address.get('fromdate').touched && (!address.get('fromdate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
+                        class="alert alert-danger" style="width: 200px;">
+                        <div *ngIf="!address.get('fromdate').valid">
+                          This is required
+                        </div>
+                        <div
+                          *ngIf="address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)">
+                          From Date should be less than To Date
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section style="display: inline-block; vertical-align: top; padding-left: 30px;">
+                    <div [ngClass]="{'has-error': !address.get('todate').valid && address.get('todate').touched}">
+                      <label>Date: To</label>
+                      <br />
+                      <input type="text" formControlName='todate' style="width: 200px; background-color: #fff;"
+                        placeholder="yyyy-mm-dd" class="form-control" readonly [min]="minDate" [max]="currentDate"
+                        [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()">
+                      <mat-datepicker #picker2></mat-datepicker>
+                      <div
+                        *ngIf="address.get('todate').touched && (!address.get('todate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
+                        class="alert alert-danger" style="width: 200px;">
+                        <div *ngIf="!address.get('todate').valid">
+                          This is required
+                        </div>
+                        <div
+                          *ngIf="address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)">
+                          To Date should be greater than From Date
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                <hr>
+              </div>
+              <button *ngIf="previousAddresses.controls.length < 9" class="btn btn-primary" (click)="addAddress()"
+                style="float: right;">ADD
+                ANOTHER ADDRESS</button>
+              <div style="clear: both;"></div>
+              <p></p>
+            </div>
+          </div>
+        </section>
+        
         <h3 class="blue-header">REQUIRED DOCUMENTS</h3>
         <section formGroupName="contact" class="padded-section border-around">
-
-    
-        <ng-container>
-                <section class="padded-section">
-                    <h4 class="plain-header">DOCUMENT REQUIRED: Associate Financial Integrity FOrm</h4>
-                    <p>
-                        Please complete and upload the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associate Financial Interity</a> form.
-                    </p>
-                    <section>
-                        <app-file-uploader documentType="Associate_Fin" [useDocumentTypeForName]="true"
-                            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
-                            entityName="contact" [extensions]="['pdf']"
-                            [entityId]="contactToken" (numberOfUploadedFiles)="updateUploadedFiles($event, 'Associate_Fin')"
-                            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY, DRAG FILE HERE OR'"
-                            [publicAccess]="true">
-                        </app-file-uploader>
-                    </section>
-                </section>
-                <hr>    
-        </ng-container>
-                    
-        <ng-container>
-                <h4 class="plain-header">DOCUMENT REQUIRED: Consent for Cannabis Security Screening</h4>
-                <p>
-                        Please complete and upload the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-can-security-consent.pdf" target="_blank">Consent for Cannabis Security Screening</a> form.
-                </p>
-                <section>
-                    <app-file-uploader documentType="Cannabis_Consent" [useDocumentTypeForName]="true"
-                        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
-                        (numberOfUploadedFiles)="updateUploadedFiles($event, 'Consent')"
-                        entityName="contact" [extensions]="['pdf']" [entityId]="contactToken"
-                        [uploadHeader]="'TO UPLOAD CONSENT, DRAG FILE HERE OR'"
-                        [publicAccess]="true">
-                    </app-file-uploader>
-                </section>
-                <hr>
-            </ng-container>
-
-
-        <ng-container>
-                <h4 class="plain-header">DOCUMENT REQUIRED: Identify Verification Form</h4>
-                <p>
-                        Please complete, sign and date the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/attestation-forms/attestation-form-identity.pdf" target="_blank">Identity Verification</a> form.
-                    </p>
-                <section>
-                    <app-file-uploader documentType="ID_FORM" [useDocumentTypeForName]="true"
-                        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
-                        (numberOfUploadedFiles)="updateUploadedFiles($event, 'IDForm')"
-                        entityName="contact" [extensions]="['pdf']" [entityId]="contactToken"
-                        [uploadHeader]="'TO UPLOAD IDENTITY FORM, DRAG FILE HERE OR'"
-                        [publicAccess]="true">
-                    </app-file-uploader>
-                </section>
-                
-            </ng-container>
-
+          <ng-container>
+            <section class="padded-section">
+              <h4 class="plain-header">DOCUMENT REQUIRED: Associate Financial Integrity Form</h4>
+              <p>
+                Please complete and upload the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf" target="_blank">Associate Financial Interity</a> form.
+              </p>
+              <section>
+                <app-file-uploader documentType="Associate_Fin" [useDocumentTypeForName]="true"
+                                   fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+                                   entityName="contact" [extensions]="['pdf']"
+                                   [entityId]="contactToken" (numberOfUploadedFiles)="updateUploadedFiles($event, 'Associate_Fin')"
+                                   [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY, DRAG FILE HERE OR'"
+                                   [publicAccess]="true">
+                </app-file-uploader>
+              </section>
             </section>
+            <hr>
+          </ng-container>
+        </section>
 
+        <h2 class="blue-header">DECLARATION AND CONSENT</h2>
+        <section style="padding-left: 10px;">
+          <p>
+            <span>
+              <input type="checkbox" formControlName="consentToCollection">
+              I,
+              <span style="text-decoration: underline;">{{user?.firstname}} {{user?.lastname}},</span> 
+              authorize the collection of my personal information on this application by the Royal Canadian Mounted Police (RCMP)
+              and other federal government institution under the Privacy Act for the purpose of conducting a check of criminal investigations,
+              charges and convictions. I also authorize the provision of my personal information on this application by the BC Municipal Law
+              Enforcement Agencies as well as other authorized public bodies under FoIPPA for the same purpose.
+            </span>
+          </p>
+          <p>
+            Additionally, I consent to the disclosure to the Ministry of Public Safety and Solicitor General by the RCMP, the BC Municipal Law
+            Enforcement Agencies as well as other authorized public body agencies of any personal information related to my security screening
+            checks under the Privacy Act, FoIPPA, and other relevant applicable provincial and federal legislation. The information may include:
+            (a) criminal record check or fingerprint-based criminal record verification by searching the Canadian Police Information Centre
+            database; (b) a police information check, including the Police Records Information Management Environment (PRIME-BC) and the
+            Police Reporting and Occurrence System (PROS); (c) a check of intelligence databases maintained by law enforcement agencies.
+          </p>
+          <p>
+            I certify that, to the best of my knowledge, the information I have provided on my application is complete, honest and accurate. I understand that a
+            false statement or omission of facts herein may be grounds for denying a cannabis security verification pursuant to the Cannabis Associate Security Screening Regulation
+            and the CCLA. I am also aware that later discovery of an omission or misrepresentation could lead to enforcement action such as the revocation of a
+            cannabis security verification.
+          </p>
+          <div *ngIf="showValidationMessages && !form.get('consentToCollection').touched" class="missing" style="background-color: #F2F2F2; margin-top: 2px; padding: 10px;">
+            <i class="fas fa-exclamation-triangle"></i> Please provide your consent to proceed
+          </div>
 
-            <section class="error mt-3" *ngIf="validationErrors?.length">
-                <p *ngFor="let message of validationErrors">
-                    <span class="app-cancel">
-                        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-                        {{message}}
-                    </span>
-                </p>
-            </section>
+        </section>
+        <h3>PRIVACY STATEMENT</h3>
+        <section style="padding-left: 10px;">
+          <p>
+            <input type="checkbox" formControlName="privacyAgreement">
+            I hereby release and forever discharge (i) Her Majesty the Queen in Right of Canada, the Royal Canadian
+            Mounted Police, their members, employees, agents and assigns, and (ii) Her Majesty the Queen in Right of the
+            Province of British Columbia and all employees and agents of the Province of British Columbia from any and
+            all actions, causes of actions, claims, complaints and demands for any form of relief, damages, loss or
+            injury which may hereafter be sustained by myself, howsoever arising from the above authorized disclosure of
+            information and waive all rights thereto.
+          </p>
+          <div *ngIf="validationErrors?.length && !form.get('privacyAgreement').touched" class="missing" style="background-color: #F2F2F2; margin-top: 2px; padding: 10px;">
+              <i class="fas fa-exclamation-triangle"></i> Please provide your consent to proceed
+          </div>
+      </section>
 
-            <div *ngIf="!form.valid && showErrors" class="error-summary mt-3">
-                <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
-                <span>Some required fields have not been completed</span>
-            </div>
+      <section class="error mt-3" *ngIf="validationErrors?.length">
+        <p *ngFor="let message of validationErrors">
+          <span class="app-cancel">
+            <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+            {{message}}
+          </span>
+        </p>
+      </section>
 
-            <button class="btn btn-primary mt-3" (click)="save()">Save</button>
-        </div>
-        <div class="col-md-4">
-            <section class="submit-container p-3" style="background-color: #F2F2F2; color:#000; border: none;">
-                <h2 style="color: #000">Collection Notice:</h2>
-                <div class="submit-content p-3">
-                    <p>
-                        The information requested on this form is collected by the Liquor and Cannabis Regulation Branch
-                        under Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act for
-                        the purpose of cannabis licensing, compliance and enforcement matters in accordance with the
-                        Cannabis Control and Licensing Act. Should you have any questions about the collection, use, or
-                        disclosure of personal information, please contact the Freedom of Information Officer at PO Box
-                        9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
-                    </p>
-                </div>
-            </section>
-        </div>
+      <div *ngIf="!form.valid && showErrors" class="error-summary mt-3">
+        <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+        <span>Some required fields have not been completed</span>
+      </div>
+
+      <button class="btn btn-primary mt-3" (click)="save()">Save</button>
     </div>
-
-
+      <div *ngIf="user && !showForm && contact && contact.isWrongUser">
+        <h1>Hello {{user.firstname}},</h1>
+        <p>Unfortunately this screening is meant for <strong>{{contact.shortName}}</strong>. If you believe you are seeing this message in error ensure the licensee that sent you this link has entered your name and birthdate correctly.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <section class="submit-container p-3" style="background-color: #F2F2F2; color:#000; border: none;">
+        <h2 style="color: #000">Collection Notice:</h2>
+        <div class="submit-content p-3">
+          <p>
+            The information requested on this form is collected by the Liquor and Cannabis Regulation Branch
+            under Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act for
+            the purpose of cannabis licensing, compliance and enforcement matters in accordance with the
+            Cannabis Control and Licensing Act. Should you have any questions about the collection, use, or
+            disclosure of personal information, please contact the Freedom of Information Officer at PO Box
+            9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
 </div>

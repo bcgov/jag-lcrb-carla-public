@@ -114,6 +114,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? CasComplete { get; set; }
+        public DateTimeOffset? CasDateSubmitted { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoOptions? CasConsentValidated { get; set; }
+        public DateTimeOffset? CasConsentValidatedExpiryDate { get; set; }
 
         public List<ViewModels.Alias> Aliases { get; set; }
 
@@ -124,6 +128,5 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string phsFinancialIntDetails   { get; set; }
         public YesNoOptions? phsProfitAgreement   { get; set; }
         public string phsProfitAgreementDetails   { get; set; }
-        
     }
 }

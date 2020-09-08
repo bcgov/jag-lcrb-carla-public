@@ -121,7 +121,7 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
         this.contact = contact;
         this.form.get('contact.shortName').setValue(contact.shortName);
         if (this.contact.isComplete) {
-          this.router.navigateByUrl('/personal-history-summary/confirmation');
+          this.router.navigateByUrl('/security-screening/confirmation');
         }
       });
 
@@ -215,9 +215,9 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
         });
       }
 
-      this.contactDataService.updatePHSContact(contact, this.contactToken)
+      this.contactDataService.updateContactByToken(contact, this.contactToken)
         .subscribe(res => {
-          this.router.navigateByUrl('/personal-history-summary/confirmation');
+          this.router.navigateByUrl('/security-screening/confirmation');
         });
     } else {
       // show error messages

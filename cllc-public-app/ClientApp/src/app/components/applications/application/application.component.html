@@ -816,7 +816,7 @@
               <div *ngIf="htmlContent?.capacityArea" [innerHTML]="htmlContent.capacityArea"></div>
               <app-field label="Capacity" [required]="true" [valid]="!showValidationMessages || form.get('capacityArea.capacity').valid"
                 errorMessage="Capacity is required." [showChevrons]="false" [isFullWidth]="false">
-                <input formControlName="capacity" id="capacity" placeholder="Enter Capacity" mask="0*" [readonly]="isOpenedByLGForApproval || lGHasApproved()"/>
+                <input class="form-control" formControlName="capacity" id="capacity" placeholder="Enter Capacity" mask="0*" [readonly]="isOpenedByLGForApproval || lGHasApproved()"/>
               </app-field>
             </section>
 
@@ -1493,7 +1493,7 @@
                 formControlName="contactPersonLastName" id="contactPersonLastName">
             </app-field>
 
-            <app-field label="Title/ Position" [required]="false" [valid]="true">
+            <app-field label="Title/Position" [required]="false" [valid]="true">
               <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
             </app-field>
 

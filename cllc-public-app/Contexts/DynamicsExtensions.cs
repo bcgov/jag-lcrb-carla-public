@@ -984,7 +984,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public static Public.ViewModels.Form GetSystemformViewModel(this IDynamicsClient _dynamicsClient,  ILogger _logger, string formid)
+        public static Public.ViewModels.Form GetSystemformViewModel(this IDynamicsClient _dynamicsClient, IMemoryCache _cache, ILogger _logger, string formid)
         {
 
             // get the picklists.
@@ -993,7 +993,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             try
             {
-                picklistMetadata = _dynamicsClient.Entitydefinitions.GetEntityPicklists("adoxio_application").Value;
+                picklistMetadata = _dynamicsClient.GetCachedApplicationPicklists(_cache);
             }
             catch (Exception e)
             {
@@ -1218,94 +1218,91 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMcontact contact = null;
             Guid userGuid;
 
-            if (user == null)
+            _logger.LogDebug(">>>> LoadUser for BCEID.");
+            if (Guid.TryParse(smGuid, out userGuid))
             {
-                _logger.LogDebug(">>>> LoadUser for BCEID.");
-                if (Guid.TryParse(smGuid, out userGuid))
+                user = _dynamicsClient.GetUserBySmGuid(smGuid);
+                if (user == null)
                 {
-                    user = _dynamicsClient.GetUserBySmGuid(smGuid);
-                    if (user == null)
-                    {
-                        // try by other means.
-                        var contactVM = new Public.ViewModels.Contact();
-                        contactVM.CopyHeaderValues(Headers);
-                        user = _dynamicsClient.GetUserByContactVmBlankSmGuid(contactVM);
-                    }
-                    if (user != null)
-                    {
-                        _logger.LogDebug(">>>> LoadUser for BCEID: user != null");
-                        // Update the contact with info from Siteminder
-                        var contactVM = new Public.ViewModels.Contact();
-                        contactVM.CopyHeaderValues(Headers);
-                        _logger.LogDebug(">>>> After reading headers: " + Newtonsoft.Json.JsonConvert.SerializeObject(contactVM));
-                        MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
-                        patchContact.CopyValues(contactVM);
-                        try
-                        {
-                            _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.LogError(httpOperationException, "Error updating Contact");
-                            // fail if we can't create.
-                            throw (httpOperationException);
-                        }
-
-                        // The account will be patched when we fetch data from bceid.
-
-
-                    }
+                    // try by other means.
+                    var contactVM = new Public.ViewModels.Contact();
+                    contactVM.CopyHeaderValues(Headers);
+                    user = _dynamicsClient.GetUserByContactVmBlankSmGuid(contactVM);
                 }
-                else
-                { //BC service card login
-
-                    _logger.LogDebug(">>>> LoadUser for BC Services Card.");
-                    string externalId = GetServiceCardID(smGuid);
-                    contact = _dynamicsClient.GetContactByExternalId(externalId);
-
-                    if (contact != null)
+                if (user != null)
+                {
+                    _logger.LogDebug(">>>> LoadUser for BCEID: user != null");
+                    // Update the contact with info from Siteminder
+                    var contactVM = new Public.ViewModels.Contact();
+                    contactVM.CopyHeaderValues(Headers);
+                    _logger.LogDebug(">>>> After reading headers: " + Newtonsoft.Json.JsonConvert.SerializeObject(contactVM));
+                    MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
+                    patchContact.CopyValues(contactVM);
+                    try
                     {
-                        _logger.LogDebug(">>>> LoadUser for BC Services Card: contact != null");
-                        user = new User();
-                        user.FromContact(contact);
-
-                        // Update the contact and worker with info from Siteminder
-                        var contactVM = new Public.ViewModels.Contact();
-                        var workerVm = new Public.ViewModels.Worker();
-                        contactVM.CopyHeaderValues(Headers);
-                        workerVm.CopyHeaderValues(Headers);
-                        MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
-
-                        patchContact.CopyValuesNoEmailPhone(contactVM);
-                        try
-                        {
-                            _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.LogError(httpOperationException, "Error updating Contact");
-                            // fail if we can't update.
-                            throw (httpOperationException);
-                        }
-
-                        // update worker(s)
-                        try
-                        {
-                            string filter = $"_adoxio_contactid_value eq {contact.Contactid}";
-                            var workers = _dynamicsClient.Workers.Get(filter: filter).Value;
-                            foreach (var item in workers)
-                            {
-                                MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
-                                patchWorker.CopyValuesNoEmailPhone(workerVm);
-                                _dynamicsClient.Workers.Update(item.AdoxioWorkerid, patchWorker);
-                            }
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.LogError(httpOperationException, "Error updating Worker");
-                        }
-
+                        _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
                     }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error updating Contact");
+                        // fail if we can't create.
+                        throw (httpOperationException);
+                    }
+
+                    // The account will be patched when we fetch data from bceid.
+
+
+                }
+            }
+            else
+            { //BC service card login
+
+                _logger.LogDebug(">>>> LoadUser for BC Services Card.");
+                string externalId = GetServiceCardID(smGuid);
+                contact = _dynamicsClient.GetContactByExternalId(externalId);
+
+                if (contact != null)
+                {
+                    _logger.LogDebug(">>>> LoadUser for BC Services Card: contact != null");
+                    user = new User();
+                    user.FromContact(contact);
+
+                    // Update the contact and worker with info from Siteminder
+                    var contactVM = new Public.ViewModels.Contact();
+                    var workerVm = new Public.ViewModels.Worker();
+                    contactVM.CopyHeaderValues(Headers);
+                    workerVm.CopyHeaderValues(Headers);
+                    MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
+
+                    patchContact.CopyValuesNoEmailPhone(contactVM);
+                    try
+                    {
+                        _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error updating Contact");
+                        // fail if we can't update.
+                        throw (httpOperationException);
+                    }
+
+                    // update worker(s)
+                    try
+                    {
+                        string filter = $"_adoxio_contactid_value eq {contact.Contactid}";
+                        var workers = _dynamicsClient.Workers.Get(filter: filter).Value;
+                        foreach (var item in workers)
+                        {
+                            MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
+                            patchWorker.CopyValuesNoEmailPhone(workerVm);
+                            _dynamicsClient.Workers.Update(item.AdoxioWorkerid, patchWorker);
+                        }
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error updating Worker");
+                    }
+
                 }
             }
 

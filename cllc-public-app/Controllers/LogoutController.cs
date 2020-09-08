@@ -29,6 +29,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // clear session
             HttpContext.Session.Clear();
+            string tempSession = HttpContext.Request.Cookies[".AspNetCore.Session"];
+            if (tempSession == null)
+            {
+                tempSession = "";
+            }
+            if (! string.IsNullOrEmpty(tempSession))
+            {
+                // expire session user cookie
+                Response.Cookies.Append(
+                    ".AspNetCore.Session",
+                    tempSession,
+                    new CookieOptions
+                    {
+                        Path = "/",
+                        SameSite = SameSiteMode.Strict,
+                        Expires = DateTime.UtcNow.AddDays(-1)
+                    }
+                );
+            }
+
+
             if (!_env.IsProduction()) // clear dev tokens
             {
                 string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
@@ -43,7 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     new CookieOptions
                     {
                         Path = "/",
-                        SameSite = SameSiteMode.None,
+                        SameSite = SameSiteMode.Strict,
                         Expires = DateTime.UtcNow.AddDays(-1)
                     }
                 );
@@ -59,7 +80,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     new CookieOptions
                     {
                         Path = "/",
-                        SameSite = SameSiteMode.None,
+                        SameSite = SameSiteMode.Strict,
                         Expires = DateTime.UtcNow.AddDays(-1)
                     }
                 );

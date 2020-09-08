@@ -115,7 +115,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Cancelled
                         && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded))
                     {
-                        result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient, _logger));
+                        result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger));
                     }
                 }
 
@@ -316,7 +316,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in applications)
                     {
-                        var viewModel = await dynamicsApplication.ToViewModel(_dynamicsClient, _logger);
+                        var viewModel = await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger);
                         List<ViewModels.FileSystemItem> resolutionFiles = await FileController.GetListFilesInFolder(dynamicsApplication.AdoxioApplicationid, "application", "LGIN Resolution", _dynamicsClient, _fileManagerClient, _logger);
                         if (resolutionFiles.Count > 0)
                         {
@@ -376,7 +376,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
 
-                result.Application = await application.ToViewModel(_dynamicsClient, _logger).ConfigureAwait(true);
+                result.Application = await application.ToViewModel(_dynamicsClient, _cache, _logger).ConfigureAwait(true);
 
 
 
@@ -635,7 +635,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     return new NotFoundResult();
                 }
-                result = await dynamicsApplication.ToViewModel(_dynamicsClient, _logger);
+                result = await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger);
             }
 
 
@@ -881,7 +881,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             await initializeSharepoint(adoxioApplication);
 
-            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _logger));
+            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _cache, _logger));
 
         }
 
@@ -939,7 +939,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             await initializeSharepoint(adoxioApplication);
 
-            return new JsonResult(await adoxioApplication.ToCovidViewModel(_dynamicsClient, _logger));
+            return new JsonResult(await adoxioApplication.ToCovidViewModel(_dynamicsClient, _cache, _logger));
         }
         private async Task initializeSharepoint(MicrosoftDynamicsCRMadoxioApplication adoxioApplication)
         {
@@ -1153,7 +1153,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             adoxioApplication = await _dynamicsClient.GetApplicationByIdWithChildren(adoxio_applicationId);
 
-            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _logger));
+            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _cache, _logger));
         }
 
         /// <summary>

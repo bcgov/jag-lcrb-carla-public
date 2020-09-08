@@ -37,7 +37,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   }
 
   constructor(private fb: FormBuilder,
-    public snackBar: MatSnackBar, ) {
+    public snackBar: MatSnackBar) {
     super();
     this.YearsAgo19 = new Date();
     this.YearsAgo19.setFullYear(this.YearsAgo19.getFullYear() - 19);
@@ -57,7 +57,6 @@ export class AssociateListComponent extends FormBase implements OnInit {
 
   addFormArray(item: LicenseeChangeLog = null) {
     item = item || <LicenseeChangeLog>{};
-    item.refObject = item;
     const group = this.fb.group({
       id: [''],
       changeType: [''],
@@ -109,7 +108,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
       isIndividual: [''],
       edit: [''],
       collapse: [''],
-      refObject: [''], //used to preserve object references
+      isLeadershipIndividual: [''],
+      isShareholderIndividual: [''],
       saved: [false]
     });
 
@@ -119,13 +119,13 @@ export class AssociateListComponent extends FormBase implements OnInit {
       group.get('emailNew').setValidators([Validators.required, Validators.email]);
       group.get('dateofBirthNew').setValidators([Validators.required]);
       // these validators are not required for SoleProps because they're always owners
-      if(this.rootNode.businessType !== 'SoleProprietorship' && this.rootNode.businessType !== 'Trust') {
+      if (this.rootNode.businessType !== 'SoleProprietorship' && this.rootNode.businessType !== 'Trust') {
         group.get('isDirectorNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
         group.get('isOfficerNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
         group.get('isManagerNew').setValidators([this.requiredCheckboxGroupValidator(['isDirectorNew', 'isOfficerNew', 'isManagerNew'])]);
-       }
       }
-    
+    }
+
 
     if (this.changeTypeSuffix === 'Trust') {
       group.get('firstNameNew').setValidators([Validators.required]);
@@ -185,7 +185,6 @@ export class AssociateListComponent extends FormBase implements OnInit {
     associate.parentLicenseeChangeLog = this.rootNode;
     associate.edit = true;
     associate.collapse = true;
-    associate.refObject = associate;
     this.childAdded.emit(associate);
     this.addFormArray(associate);
   }
@@ -195,11 +194,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
     const controls = this.associates.controls;
     for (let control in controls) {
       if (control) {
-        // sync refObject
-        let refObject = controls[control].value.refObject;
-        refObject = Object.assign(refObject, controls[control].value);
         // add item to value
-        value.push(controls[control].value.refObject);
+        value.push(controls[control].value);
       }
     }
     this.personalHistoryItemsChange.emit(value);
@@ -209,48 +205,54 @@ export class AssociateListComponent extends FormBase implements OnInit {
     const valid = this.associates.at(index).valid;
     const patchValue = <LicenseeChangeLog>{};
     let value = this.associates.at(index).value;
+    value = Object.assign(new LicenseeChangeLog, value);
     let saved = false;
 
-    if (valid) {
-      value = Object.assign(new LicenseeChangeLog(), value || {}) as LicenseeChangeLog;
-      if (!value.isAddChangeType() && value.someFieldsHaveChanged()) {
-        patchValue.changeType = `update${this.changeTypeSuffix}`;;
-      }
-      patchValue.edit = false;
-      patchValue.saved = true;
-
-      if (this.changeTypeSuffix === 'Leadership') {
-        patchValue.isIndividual = true;
-        // check to see if this is a sole prop.
-        if (this.rootNode.businessType === 'SoleProprietorship') {
-          patchValue.isOwnerNew = true;
-        }
-        // check to see if this is a trust.
-        if (this.rootNode.businessType === 'Trust') {
-          patchValue.isTrusteeNew = true;
-        }
-        
-      } else if (this.changeTypeSuffix === 'IndividualShareholder') {
-        patchValue.isIndividual = true;
-        patchValue.isShareholderNew = true;
-      } else if (this.changeTypeSuffix === 'BusinessShareholder') {
-        patchValue.isIndividual = false;
-        patchValue.isShareholderNew = true;
-      }
-
-      
-      this.associates.at(index).patchValue(patchValue);
-      this.associates.at(index).value.refObject = Object.assign(this.associates.at(index).value.refObject, this.associates.at(index).value);
-     this.emitValue();
+    if (value.isRemoveChangeType()) {
       saved = true;
     } else {
-      // put associate into edit mode to show validation errors
-      this.associates.at(index).get('edit').setValue(true);
-      // mark all contols as touched to show validation rules
-      const controls = (<FormGroup>(this.associates.at(index))).controls;
-      for (let control in controls) {
-        if (control) {
-          (controls[control] as FormControl).markAsTouched();
+      if (valid) {
+        value = Object.assign(new LicenseeChangeLog(), value || {}) as LicenseeChangeLog;
+        if (!value.isAddChangeType() && value.someFieldsHaveChanged()) {
+          patchValue.changeType = `update${this.changeTypeSuffix}`;;
+        }
+        patchValue.edit = false;
+        patchValue.saved = true;
+
+        if (this.changeTypeSuffix === 'Leadership') {
+          patchValue.isIndividual = true;
+          patchValue.isLeadershipIndividual = true;
+          // check to see if this is a sole prop.
+          if (this.rootNode.businessType === 'SoleProprietorship') {
+            patchValue.isOwnerNew = true;
+          }
+          // check to see if this is a trust.
+          if (this.rootNode.businessType === 'Trust') {
+            patchValue.isTrusteeNew = true;
+          }
+
+        } else if (this.changeTypeSuffix === 'IndividualShareholder') {
+          patchValue.isIndividual = true;
+          patchValue.isShareholderIndividual = true;
+          patchValue.isShareholderNew = true;
+        } else if (this.changeTypeSuffix === 'BusinessShareholder') {
+          patchValue.isIndividual = false;
+          patchValue.isShareholderNew = true;
+        }
+
+
+        this.associates.at(index).patchValue(patchValue);
+        this.emitValue();
+        saved = true;
+      } else {
+        // put associate into edit mode to show validation errors
+        this.associates.at(index).get('edit').setValue(true);
+        // mark all contols as touched to show validation rules
+        const controls = (<FormGroup>(this.associates.at(index))).controls;
+        for (let control in controls) {
+          if (control) {
+            (controls[control] as FormControl).markAsTouched();
+          }
         }
       }
     }
@@ -264,7 +266,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   saveAll(): Observable<boolean> {
     let saveResults = [];
     this.associates.getRawValue().forEach((value, index) => {
-        saveResults.push(this.saveLog(index));
+      saveResults.push(this.saveLog(index));
     });
 
     // save all org structure children
@@ -282,6 +284,25 @@ export class AssociateListComponent extends FormBase implements OnInit {
     else {
       return of(true);
     }
+  }
+
+  getData(): LicenseeChangeLog[]{
+    let res = [];
+    const controls = this.associates.controls;
+    for (let control in controls) {
+      let value = controls[control].value;
+      if (control) {
+        // check for children
+        let childOrgs = this.orgStructureList.filter(item => item.parentAssociate === controls[control]);
+        if(childOrgs.length){
+          let childOrg = childOrgs[0];
+          value = childOrg.getData();
+        }
+        res.push(value);
+      }
+    }
+
+    return res;
   }
 
   deleteChange(node: LicenseeChangeLog, index: number) {
@@ -327,7 +348,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   showNameChangeSection(associate): boolean {
     const show = associate && !this.asLicenseeChangeLog(associate.value).isRemoveChangeType()
       && this.licencesOnFile
-      && this.isNameChangePerformed(associate.value.refObject)
+      && this.isNameChangePerformed(associate.value)
       && !associate.get('edit').value;
     return show;
   }
@@ -369,7 +390,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   showPHSLevel1(): boolean {
     let show = false;
     // get associates with a phsLink
-    const links = this.associates.value.filter(item => !!item.refObject.phsLink && !item.refObject.isRemoveChangeType());
+    const links = this.associates.value.filter(item => !!item.phsLink && !item.isRemoveChangeType());
     if (links.length > 0) {
       show = true;
     }

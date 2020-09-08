@@ -18,34 +18,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Attempted = 845280006,
     }
 
-    public enum LicenseSubCategory
-    {
-        [EnumMember(Value = "Grocery Store")]
-        GroceryStore = 845280000,
-        [EnumMember(Value = "Independent Wine Store")]
-        IndependentWineStore = 845280001,
-        [EnumMember(Value = "Off Site Wine Store")]
-        OffSiteWineStore = 845280002,
-        [EnumMember(Value = "On Site Wine Store")]
-        OnSiteWineStore = 845280003,
-        [EnumMember(Value = "Sacramental Wine Store")]
-        SacramentalWineStore = 845280004,
-        [EnumMember(Value = "Special Wine Store")]
-        SpecialWineStore = 845280005,
-        [EnumMember(Value = "Tourist Wine Store")]
-        TouristWineStore = 845280006,
-        [EnumMember(Value = "Wine On Shelf")]
-        WineOnShelf = 845280007,
-        [EnumMember(Value = "BC VQA Store")]
-        BCVQAStore = 845280008,
-        [EnumMember(Value = "Winery")]
-        Winery = 845280009,
-        [EnumMember(Value = "Brewery")]
-        Brewery = 845280010,
-        [EnumMember(Value = "Distillery")]
-        Distillery = 845280011
-    }
-
     public enum EnumYesNo
     {
         Yes = 845280001,
@@ -79,8 +51,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string EstablishmentPhoneNumber { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        public LicenseSubCategory? LicenseSubCategory { get; set; }
+        public string LicenseSubCategory { get; set; }
 
         public string EstablishmentEmail { get; set; }
         public bool? EstablishmentIsOpen { get; set; }

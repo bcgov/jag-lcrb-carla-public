@@ -22,7 +22,12 @@ export class Contact {
   selfDisclosure: string;
   secondaryIdentificationType: string;
   primaryIdentificationType: string;
+}
 
+export class PHSContact {
+  id: string;
+  token: string;
+  shortName: string;
   phsConnectionsDetails: string;
   phsLivesInCanada: string;
   phsHasLivedInCanada: string;
@@ -32,11 +37,24 @@ export class Contact {
   phsCanadianDrugAlchoholDrivingOffence: string;
   phsDateSubmitted: Date;
   phsForeignDrugAlchoholOffence: string;
+  isComplete: boolean;
 }
 
-export class PHSContact {
+export class CASSContact {
   id: string;
   token: string;
   shortName: string;
-  isComplete: boolean;
+  dateOfBirth: string;
+  gender: string;
+  streetAddress: string;
+  city: string;
+  province: string;
+  postalCode: string;
+  country: string;
+  email: string;
+  casDateSubmitted: Date;
+  casComplete: string;
+  casConsentValidated: string;
+  casConsentValidatedExpiryDate: Date;
+  isWrongUser: boolean;
 }
