@@ -180,8 +180,8 @@ namespace bdd_tests
             if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
             {
             }
-            else 
-            { 
+            else
+            {
             }
 
             // select event and liquor service times are different on specific dates checkbox
@@ -272,6 +272,30 @@ namespace bdd_tests
             // deselect terms and conditions checkbox
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiTermsAndConditions.Click();
+        }
+
+
+        [And(@"the event history is updated correctly")]
+        public void EventHistoryIsUpdatedCorrectly(string eventType)
+        {
+
+            if (eventType == "as a draft")
+            { }
+
+            if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
+            { }
+
+            if (eventType == "for an outdoor location")
+            { }
+
+            if (eventType == "for an indoor and outdoor location")
+            { }
+
+            if (eventType == "with more than 500 people")
+            { }
+
+            if (eventType == "for a community event after 2am")
+            { }
         }
     }
 }
