@@ -275,14 +275,16 @@ namespace bdd_tests
         }
 
 
-        [And(@"the event history is updated correctly")]
+        [And(@"the event history is updated correctly for an application (.*)")]
         public void EventHistoryIsUpdatedCorrectly(string eventType)
         {
-
             if (eventType == "as a draft")
             { }
 
-            if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
+            if (eventType == "for after 2am")
+            { }
+
+            if (eventType == "for a community event after 2am")
             { }
 
             if (eventType == "for an outdoor location")
