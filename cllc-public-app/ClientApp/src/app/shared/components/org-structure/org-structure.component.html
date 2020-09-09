@@ -12,7 +12,7 @@
 
             <section *ngIf="isReadOnly">
               <p><strong>You have recently reported changes to the legal entity structure on file with LCRB. Those changes have not yet been processed.</strong></p>
-              <p>If you have made additional changes since they have been submited you may report additional changes:</p>
+              <p>If you have made additional changes since they have been submitted you may report additional changes:</p>
               <button *ngIf="isReadOnly" class="btn btn-secondary mb-2" (click)="reportAdditionalChanges.next(true)">Report Additional Changes</button>
             </section>
 

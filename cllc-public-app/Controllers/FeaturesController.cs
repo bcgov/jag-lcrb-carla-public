@@ -78,6 +78,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("LGApprovals");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_CASS"]))
+            {
+                features.Add("CASS");
+            }
+
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_MARKET_EVENTS"]))
+            {
+                features.Add("MarketEvents");
+            }
+
             return features;
         }
 
