@@ -6,7 +6,6 @@
 Scenario: Change private corporation director name and pay fee
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -92,7 +91,6 @@ Scenario: Confirm private corporation business shareholder org structure update 
     And the org structure is correct
     And I click on the button for Confirm Organization Information is Complete
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I click on the button for Confirm Organization Information is Complete
     And I complete the Cannabis Retail Store application for a private corporation
@@ -135,7 +133,6 @@ Scenario: Save for Later feature for private corporation org structure
 Scenario: CRS application with mixed business shareholder types
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I add in business shareholders of different business types
@@ -155,7 +152,6 @@ Scenario: CRS application with mixed business shareholder types
 Scenario: Complex Save for Later mixed business shareholders
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I enter business shareholders of different business types to be saved for later
@@ -169,7 +165,6 @@ Scenario: Complex Save for Later mixed business shareholders
 Scenario: Confirm org structure records not duplicated
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I confirm that no duplicates are shown in the org structure
