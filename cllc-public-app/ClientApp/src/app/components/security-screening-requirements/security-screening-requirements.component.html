@@ -1,7 +1,6 @@
+<div [ngBusy]="busy"></div>
 <div class="form-wrapper">
     <h1>Security Screening Requirements</h1>
-    <div [ngBusy]="busy"></div>
-
 
     <div class="row" *ngIf="!skipScreeningRequirements; else skipContent">
         <section class="col-md-12">
@@ -176,7 +175,7 @@
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th appRemoveIfFeatureOff="CASS">Action</th>
                                     </tr>
                                 </thead>
                                 <tr [ngClass]="{'alt-row': i%2 === 0}"
@@ -184,7 +183,7 @@
                                     <td>{{item.firstName}}</td>
                                     <td>{{item.lastName}} </td>
                                     <td class="missing" style="text-align: center;">Not Submitted</td>
-                                    <td style="text-align: center;">
+                                    <td style="text-align: center;" appRemoveIfFeatureOff="CASS">
                                         <a href="javascript: void(0)" (click)="copyMessage(item.casLink)"><i class="fas fa-copy"></i>Copy Link</a>
                                     </td>
                                 </tr>
