@@ -945,21 +945,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="system"></param>
         /// <param name="siteminderId"></param>
         /// <returns></returns>
-        public static MicrosoftDynamicsCRMcontact GetContactByNameAndBirthdate(this IDynamicsClient system, string firstInitial, string lastName, string birthdate)
+        public static MicrosoftDynamicsCRMcontact GetContactByNameAndBirthdate(this IDynamicsClient system, string firstName, string lastName, string birthdate)
         {
             MicrosoftDynamicsCRMcontact result = null;
             try
             {
                 Serilog.ILogger logger = Log.Logger;
                 string[] dateParts = birthdate.Split('-');
-                logger.Information($"initial: {firstInitial}");
+                logger.Information($"initial: {firstName}");
                 logger.Information($"lastName: {lastName}");
                 logger.Information($"year: {dateParts[0]}");
                 logger.Information($"month: {dateParts[1]}");
                 logger.Information($"day: {dateParts[2]}");
                 var contactsResponse = system.Contacts.Get(filter: "lastname eq '" + lastName + "'");
                 result = contactsResponse.Value
-                    .Where(contact => contact.Firstname.Substring(0, 1).ToLower() == firstInitial.ToLower()
+                    .Where(contact => contact.Firstname.Substring(0, 1).ToLower() == firstName.Substring(0, 1).ToLower()
                             && contact.Birthdate.Value.Year.ToString() == dateParts[0]
                             && contact.Birthdate.Value.Month.ToString() == dateParts[1]
                             && contact.Birthdate.Value.Day.ToString() == dateParts[2]).FirstOrDefault();
