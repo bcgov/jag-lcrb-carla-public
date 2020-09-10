@@ -1308,9 +1308,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 if (contact == null)
                 {
-                    string firstInitial = Headers['smgov_givenname'];
-                    string lastName = Headers['smgov_surname'];
-                    string birthDate = Headers['smgov_birthdate'];
+                    string firstInitial = Headers["smgov_givenname"];
+                    string lastName = Headers["smgov_surname"];
+                    string birthDate = Headers["smgov_birthdate"];
                     contact = _dynamicsClient.GetContactByNameAndBirthdate(firstInitial, lastName, birthDate);
                 }
 
