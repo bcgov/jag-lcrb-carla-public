@@ -23,6 +23,7 @@ using System.Web;
 using Gov.Lclb.Cllb.Public.Utility;
 using Microsoft.Rest;
 using System.Collections.Specialized;
+using Serilog;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {
@@ -219,7 +220,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
     /// </summary>
     public class SiteminderAuthenticationHandler : AuthenticationHandler<SiteMinderAuthOptions>
     {
-        private readonly ILogger _logger;
+        private readonly Serilog.ILogger _logger;
+        private readonly Microsoft.Extensions.Logging.ILogger _ms_logger;
         private readonly SiteMinderAuthOptions _options;
         private IDynamicsClient _dynamicsClient;
 
@@ -234,7 +236,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             : base(configureOptions, loggerFactory, encoder, clock)
         {
             _logger = Log.Logger;
-            // _logger = loggerFactory.CreateLogger(typeof(SiteminderAuthenticationHandler));
+            _ms_logger = loggerFactory.CreateLogger(typeof(SiteminderAuthenticationHandler));
             _options = new SiteMinderAuthOptions();
         }
 
@@ -245,7 +247,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             // get siteminder headers
-            _logger.LogDebug("Parsing the HTTP headers for SiteMinder authentication credential");
+            _logger.Debug("Parsing the HTTP headers for SiteMinder authentication credential");
 
 
             string userId = null;
@@ -282,14 +284,14 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 try
                 {
-                    _logger.LogDebug("Checking user session");
+                    _logger.Debug("Checking user session");
                     userSettings = UserSettings.ReadUserSettings(context);
-                    _logger.LogDebug("UserSettings found: " + userSettings.GetJson());
+                    _logger.Debug("UserSettings found: " + userSettings.GetJson());
                 }
                 catch
                 {
                     //do nothing
-                    _logger.LogDebug("No UserSettings found");
+                    _logger.Debug("No UserSettings found");
                 }
 
                 // is user authenticated - if so we're done
@@ -297,7 +299,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     (userSettings.UserAuthenticated && !string.IsNullOrEmpty(userId) &&
                      !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
                 {
-                    _logger.LogDebug("User already authenticated with active session: " + userSettings.UserId);
+                    _logger.Debug("User already authenticated with active session: " + userSettings.UserId);
                     principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
@@ -318,20 +320,20 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogInformation(ex.Message);
-                        _logger.LogInformation("Couldn't successfully login as dev user - continuing as regular user");
+                        _logger.Information(ex.Message);
+                        _logger.Information("Couldn't successfully login as dev user - continuing as regular user");
                     }
                 }
 
                 foreach (KeyValuePair<string, Microsoft.Extensions.Primitives.StringValues> header in context.Request.Headers)
                 {
-                    _logger.LogInformation($"key: {header.Key.ToString()}, value: {header.Value.ToString()}");
+                    _logger.Information($"key: {header.Key.ToString()}, value: {header.Value.ToString()}");
                 }
                 // **************************************************
                 // Authenticate based on SiteMinder Headers
                 // **************************************************
-                _logger.LogDebug("Parsing the HTTP headers for SiteMinder authentication credential");
-                _logger.LogDebug("Getting user data from headers");
+                _logger.Debug("Parsing the HTTP headers for SiteMinder authentication credential");
+                _logger.Debug("Getting user data from headers");
 
                 if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserIdentifierKey]))
                 {
@@ -359,25 +361,25 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 if (string.IsNullOrEmpty(userId))
                 {
-                    _logger.LogDebug(_options.MissingSiteMinderUserIdError);
+                    _logger.Debug(_options.MissingSiteMinderUserIdError);
                     return AuthenticateResult.Fail(_options.MissingSiteMinderGuidError);
                 }
 
                 if (string.IsNullOrEmpty(siteMinderGuid))
                 {
-                    _logger.LogDebug(_options.MissingSiteMinderGuidError);
+                    _logger.Debug(_options.MissingSiteMinderGuidError);
                     return AuthenticateResult.Fail(_options.MissingSiteMinderGuidError);
                 }
                 if (string.IsNullOrEmpty(siteMinderUserType))
                 {
-                    _logger.LogDebug(_options.MissingSiteMinderUserTypeError);
+                    _logger.Debug(_options.MissingSiteMinderUserTypeError);
                     return AuthenticateResult.Fail(_options.MissingSiteMinderUserTypeError);
                 }
 
-                _logger.LogDebug("Loading user external id = " + siteMinderGuid);
+                _logger.Debug("Loading user external id = " + siteMinderGuid);
                 // 3/18/2020 - Note that LoadUser will now work if there is a match on the guid, as well as a match on name in a case where there is no guid.
-                userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(siteMinderGuid, context.Request.Headers, _logger);
-                _logger.LogDebug("After getting authenticated user = " + userSettings.GetJson());
+                userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(siteMinderGuid, context.Request.Headers, _ms_logger);
+                _logger.Debug("After getting authenticated user = " + userSettings.GetJson());
 
                 // check that the potential new user is 19.
                 if (userSettings.AuthenticatedUser != null
@@ -391,7 +393,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 if (userSettings.AuthenticatedUser != null
                     && !userSettings.AuthenticatedUser.Active)
                 {
-                    _logger.LogDebug(_options.InactivegDbUserIdError + " (" + userId + ")");
+                    _logger.Debug(_options.InactivegDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(_options.InactivegDbUserIdError);
                 }
 
@@ -410,8 +412,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Create authenticated user
                 // **************************************************
-                _logger.LogDebug("Authentication successful: " + userId);
-                _logger.LogDebug("Setting identity and creating session for: " + userId);
+                _logger.Debug("Authentication successful: " + userId);
+                _logger.Debug("Setting identity and creating session for: " + userId);
 
                 // create session info for the current user
                 userSettings.UserId = userId;
@@ -421,8 +423,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // set other session info
                 userSettings.SiteMinderGuid = siteMinderGuid;
                 userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
-                _logger.LogDebug("Before getting contact and account ids = " + userSettings.GetJson());
-                _logger.LogInformation($"authed user is: {userSettings.AuthenticatedUser.ContactId.ToString()}");
+                _logger.Debug("Before getting contact and account ids = " + userSettings.GetJson());
+                _logger.Information($"authed user is: {userSettings.AuthenticatedUser.ContactId.ToString()}");
                 if (userSettings.AuthenticatedUser != null)
                 {
                     userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
@@ -488,7 +490,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception.Message);
+                _logger.Error(exception.Message);
                 throw;
             }
         }
@@ -513,12 +515,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
-                    _logger.LogError($"Error creating folder for account {logFolderName}. Error is {createFolderResult.ErrorDetail}");
+                    _logger.Error($"Error creating folder for account {logFolderName}. Error is {createFolderResult.ErrorDetail}");
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error creating folder for account {logFolderName}");
+                _logger.Error(e, $"Error creating folder for account {logFolderName}");
             }
         
         }
@@ -543,12 +545,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
-                    _logger.LogError($"Error creating folder for contact {logFolderName}. Error is {createFolderResult.ErrorDetail}");
+                    _logger.Error($"Error creating folder for contact {logFolderName}. Error is {createFolderResult.ErrorDetail}");
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error creating folder for contact {logFolderName}");
+                _logger.Error(e, $"Error creating folder for contact {logFolderName}");
             }
         }
 
@@ -572,12 +574,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
-                    _logger.LogError($"Error creating folder for contact {logFolderName}. Error is {createFolderResult.ErrorDetail}");
+                    _logger.Error($"Error creating folder for contact {logFolderName}. Error is {createFolderResult.ErrorDetail}");
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error creating folder for contact {logFolderName}");
+                _logger.Error(e, $"Error creating folder for contact {logFolderName}");
             }
         }
 
@@ -682,7 +684,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 }
                 isDeveloperLogin = true;
 
-                _logger.LogDebug("Got user from dev cookie = " + userId + ", company = " + devCompanyId);
+                _logger.Debug("Got user from dev cookie = " + userId + ", company = " + devCompanyId);
             }
             else
             {
@@ -698,13 +700,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     userId = temp;
                     isBCSCDeveloperLogin = true;
-                    _logger.LogDebug("Got user from dev cookie = " + userId);
+                    _logger.Debug("Got user from dev cookie = " + userId);
                 }
             }
 
             if (isDeveloperLogin)
             {
-                _logger.LogDebug("Generating a Development user");
+                _logger.Debug("Generating a Development user");
                 userSettings.BusinessLegalName = devCompanyId + " TestBusiness";
                 userSettings.UserDisplayName = userId + " TestUser";
                 userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
@@ -713,7 +715,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
             else if (isBCSCDeveloperLogin)
             {
-                _logger.LogDebug("Generating a Development BC Services user");
+                _logger.Debug("Generating a Development BC Services user");
                 userSettings.BusinessLegalName = null;
                 userSettings.UserDisplayName = userId + " Associate";
                 userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("bcsc", userSettings.UserDisplayName).ToString();
@@ -753,10 +755,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.UserDisplayName = "JOE ONE";
             }
 
-            _logger.LogDebug("DEV MODE Setting identity and creating session for: " + userId);
+            _logger.Debug("DEV MODE Setting identity and creating session for: " + userId);
 
             // create session info for the current user
-            userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(userSettings.SiteMinderGuid, context.Request.Headers, _logger);
+            userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(userSettings.SiteMinderGuid, context.Request.Headers, _ms_logger);
             if (userSettings.AuthenticatedUser == null)
             {
                 if (Guid.TryParse(userSettings.SiteMinderGuid, out Guid contactId))
@@ -779,7 +781,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     _dynamicsClient.Accounts.Create(newAccount);
                 }
 
-                userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(userSettings.SiteMinderGuid, context.Request.Headers, _logger);
+                userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(userSettings.SiteMinderGuid, context.Request.Headers, _ms_logger);
                 userSettings.UserAuthenticated = true;
                 userSettings.IsNewUserRegistration = true;
             }
