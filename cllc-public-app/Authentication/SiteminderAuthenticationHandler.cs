@@ -325,19 +325,15 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     }
                 }
 
-                foreach (KeyValuePair<string, Microsoft.Extensions.Primitives.StringValues> header in context.Request.Headers)
-                {
-                    _logger.Information($"key: {header.Key.ToString()}, value: {header.Value.ToString()}");
-                }
                 // **************************************************
                 // Authenticate based on SiteMinder Headers
                 // **************************************************
                 _logger.Debug("Parsing the HTTP headers for SiteMinder authentication credential");
                 _logger.Debug("Getting user data from headers");
 
-                if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserIdentifierKey]))
+                if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserDisplayNameKey]))
                 {
-                    userSettings.UserDisplayName = context.Request.Headers[_options.SiteMinderUserIdentifierKey];
+                    userSettings.UserDisplayName = context.Request.Headers[_options.SiteMinderUserDisplayNameKey];
                 }
 
                 if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderBusinessLegalNameKey]))

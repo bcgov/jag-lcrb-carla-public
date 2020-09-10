@@ -18,7 +18,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using Serilog;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -91,7 +90,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return licenseSummaryList;
         }
 
-        public static List<Public.ViewModels.LicenseeChangeLog> GetApplicationChangeLogs(this IDynamicsClient _dynamicsClient, string applicationId, Microsoft.Extensions.Logging.ILogger _logger)
+        public static List<Public.ViewModels.LicenseeChangeLog> GetApplicationChangeLogs(this IDynamicsClient _dynamicsClient, string applicationId, ILogger _logger)
         {
             
             var result = new List<Public.ViewModels.LicenseeChangeLog>();
@@ -115,7 +114,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public static Public.ViewModels.LegalEntity GetLegalEntityTree(this IDynamicsClient _dynamicsClient, string accountId, Microsoft.Extensions.Logging.ILogger _logger, IConfiguration _configuration)
+        public static Public.ViewModels.LegalEntity GetLegalEntityTree(this IDynamicsClient _dynamicsClient, string accountId, ILogger _logger, IConfiguration _configuration)
         {
             Public.ViewModels.LegalEntity result = null;
             var filter = "_adoxio_account_value eq " + accountId;
@@ -163,7 +162,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
 
-        public static List<Public.ViewModels.LegalEntity> GetLegalEntityChildren(this IDynamicsClient _dynamicsClient, string parentLegalEntityId, Microsoft.Extensions.Logging.ILogger _logger, IConfiguration _configuration, List<string> processedEntities = null)
+        public static List<Public.ViewModels.LegalEntity> GetLegalEntityChildren(this IDynamicsClient _dynamicsClient, string parentLegalEntityId, ILogger _logger, IConfiguration _configuration, List<string> processedEntities = null)
         {
             List<Public.ViewModels.LegalEntity> result = new List<Public.ViewModels.LegalEntity>();
             MicrosoftDynamicsCRMadoxioLegalentityCollection response = null;
@@ -950,13 +949,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMcontact result = null;
             try
             {
-                Serilog.ILogger logger = Log.Logger;
                 string[] dateParts = birthdate.Split('-');
-                logger.Information($"initial: {firstName}");
-                logger.Information($"lastName: {lastName}");
-                logger.Information($"year: {dateParts[0]}");
-                logger.Information($"month: {dateParts[1]}");
-                logger.Information($"day: {dateParts[2]}");
                 var contactsResponse = system.Contacts.Get(filter: "lastname eq '" + lastName + "'");
                 result = contactsResponse.Value
                     .Where(contact => contact.Firstname.Substring(0, 1).ToLower() == firstName.Substring(0, 1).ToLower()
@@ -1036,7 +1029,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public static Public.ViewModels.Form GetSystemformViewModel(this IDynamicsClient _dynamicsClient, IMemoryCache _cache, Microsoft.Extensions.Logging.ILogger _logger, string formid)
+        public static Public.ViewModels.Form GetSystemformViewModel(this IDynamicsClient _dynamicsClient, IMemoryCache _cache, ILogger _logger, string formid)
         {
 
             // get the picklists.
@@ -1264,7 +1257,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="smGuid"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string smGuid, IHeaderDictionary Headers, Microsoft.Extensions.Logging.ILogger _logger)
+        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string smGuid, IHeaderDictionary Headers, ILogger _logger)
         {
             User user = null;
             MicrosoftDynamicsCRMcontact contact = null;
