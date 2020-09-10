@@ -350,7 +350,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                         {
                             hangfireContext.WriteLine($"SET key {cacheKey} to {newNumber}");
                         }
-                            await SendProgramAccountRequestREST(hangfireContext, licenceId, programAccountCode);
+                            await SendProgramAccountRequestREST(hangfireContext, licenceId, suffix);
                         currentItem++;
                     }
 
