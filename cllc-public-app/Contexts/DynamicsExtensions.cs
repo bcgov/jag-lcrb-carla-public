@@ -938,6 +938,37 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        /// <summary>
+        /// Get a contact by their First Initial, Last Name and Birthdate
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="siteminderId"></param>
+        /// <returns></returns>
+        public static MicrosoftDynamicsCRMcontact GetContactByNameAndBirthdate(this IDynamicsClient system, string firstInitial, string lastName, string birthdate)
+        {
+            MicrosoftDynamicsCRMcontact result = null;
+            try
+            {
+                string[] dateParts = birthdate.Split('-');
+                var contactsResponse = system.Contacts.Get(filter: "lastname eq '" + lastName + "'");
+                result = contactsResponse.Value
+                    .Where(contact => contact.Firstname.Substring(0, 1) == firstInitial
+                            && contact.Birthdate.Value.Year.ToString() == dateParts[0]
+                            && contact.Birthdate.Value.Month.ToString() == dateParts[1]
+                            && contact.Birthdate.Value.Day.ToString() == dateParts[2]).FirstOrDefault();
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
         public static MicrosoftDynamicsCRMadoxioLegalentity GetAdoxioLegalentityByAccountId(this IDynamicsClient _dynamicsClient, Guid id)
         {
             MicrosoftDynamicsCRMadoxioLegalentity result = null;
@@ -1274,6 +1305,14 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _logger.LogDebug(">>>> LoadUser for BC Services Card.");
                 string externalId = GetServiceCardID(smGuid);
                 contact = _dynamicsClient.GetContactByExternalId(externalId);
+
+                if (contact == null)
+                {
+                    string firstInitial = Headers['smgov_givenname'];
+                    string lastName = Headers['smgov_surname'];
+                    string birthDate = Headers['smgov_birthdate'];
+                    contact = _dynamicsClient.GetContactByNameAndBirthdate(firstInitial, lastName, birthDate);
+                }
 
                 if (contact != null)
                 {

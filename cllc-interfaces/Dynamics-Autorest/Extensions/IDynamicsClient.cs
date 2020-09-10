@@ -57,5 +57,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IInspector.
         /// </summary>
         IInspector Inspector { get; }
+
+        MicrosoftDynamicsCRMcontact GetContactByNameAndBirthdate();
     }
 }
