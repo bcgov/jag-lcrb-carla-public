@@ -1,4 +1,4 @@
-﻿Feature: CombinedCateringCRSApplications.feature
+﻿Feature: CombinedCateringCRSApplications
     As a logged in business user
     I want to submit a CRS and Catering application for the same account
 
