@@ -324,8 +324,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 foreach (KeyValuePair<string, Microsoft.Extensions.Primitives.StringValues> header in context.Request.Headers)
                 {
-                    _logger.LogInformation(header.Key.ToString());
-                    _logger.LogInformation(header.Value.ToString());
+                    _logger.LogInformation($"key: {header.Key.ToString()}, value: {header.Value.ToString()}");
                 }
                 // **************************************************
                 // Authenticate based on SiteMinder Headers
