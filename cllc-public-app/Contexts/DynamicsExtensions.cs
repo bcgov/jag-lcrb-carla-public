@@ -282,7 +282,14 @@ namespace Gov.Lclb.Cllb.Interfaces
                 else
                 {
                     pos = value.IndexOf(" ");
-                    result = value.Substring(0, pos);
+                    if (pos > -1)
+                    {
+                        result = value.Substring(0, pos);
+                    }    
+                    else
+                    {
+                        result = "";
+                    }
                 }
             }
             return result;
@@ -302,7 +309,14 @@ namespace Gov.Lclb.Cllb.Interfaces
                 else
                 {
                     pos = value.IndexOf(" ");
-                    result = value.Substring(pos + 1);
+                    if (pos > -1)
+                    {
+                        result = value.Substring(0, pos);
+                    }
+                    else
+                    {
+                        result = "";
+                    }
                 }
             }
             return result;
