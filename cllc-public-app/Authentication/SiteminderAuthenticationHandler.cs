@@ -421,7 +421,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.SiteMinderGuid = siteMinderGuid;
                 userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
                 _logger.LogDebug("Before getting contact and account ids = " + userSettings.GetJson());
-
+                _logger.LogInformation($"authed user is: {userSettings.AuthenticatedUser.UseridClaim}");
                 if (userSettings.AuthenticatedUser != null)
                 {
                     userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
