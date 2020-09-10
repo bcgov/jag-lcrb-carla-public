@@ -136,7 +136,7 @@
                                 <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Event Authorization
                             </a>
                         </div>
-                        <div *ngIf="isActive(item) && actionsVisible(item) && hasEndorsementByName(item, 'On-Site Store Endorsement')">
+                        <div *ngIf="isActive(item) && actionsVisible(item) && hasEndorsementByName(item, 'On-Site Store Endorsement')" appRemoveIfFeatureOff="MarketEvents">
                             <a [routerLink]="[ '/licence/' + item.licenseId + '/market-event']">
                                 <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Market Event Authorization
                             </a>

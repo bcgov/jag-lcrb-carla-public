@@ -20,7 +20,7 @@
         </section>
         <section class="col-md-4 col-xs-12 sign-container">
           <span class="sign" *ngIf="currentUser">
-            <span>{{currentUser.name}}</span>
+            <span>{{currentUser.firstname}} {{currentUser.lastname}}</span>
             &nbsp;
             <span class="text-right signin">
               <a href="logout">Sign Out</a>
@@ -97,7 +97,7 @@
                     </a>
                   </li>
                   <li class="nav-item" appRemoveIfFeatureOff="CovidApplication">
-                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/covid-temporary-extension">Covid Temporary Extension
+                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/covid-temporary-extension" appRemoveIfFeatureOn="DisableLogin">Covid Temporary Extension
                     </a>
                   </li>
                 </ul>

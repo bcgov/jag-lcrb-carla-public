@@ -154,7 +154,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string GetDevRedirectPath(IConfiguration configuration, string path, string code)
         {
             string basePath = string.IsNullOrEmpty(configuration["BASE_PATH"]) ? "" : configuration["BASE_PATH"];
-            if (path.Equals("cannabis-associate-screening"))
+            if (path != null && path.Equals("cannabis-associate-screening"))
             {
                 basePath += $"/bcservice?path={path}&code={code}";
             }

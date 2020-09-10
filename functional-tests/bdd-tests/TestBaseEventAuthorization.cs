@@ -192,8 +192,14 @@ namespace bdd_tests
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiTermsAndConditions.Click();
 
-            // click on Submit button
-            ClickOnSubmitButton();
+            if (eventType != "as a draft")
+            {
+            }
+            else
+            {
+                // click on Submit button
+                ClickOnSubmitButton();
+            }
 
             /* 
             Page Title: Licences
