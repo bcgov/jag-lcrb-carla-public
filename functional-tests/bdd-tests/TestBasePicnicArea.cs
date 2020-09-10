@@ -44,14 +44,14 @@ namespace bdd_tests
             */
 
             // create test data
-            //string proposedChange = "Description of proposed change(s) such as moving, adding or changing approved picnic area(s)";
+            string proposedChange = "Description of proposed change(s) such as moving, adding or changing approved picnic area(s)";
             string otherBizDetails = "Description of other business details";
             string patioCompositionDescription = "Description of patio composition";
             string capacity = "100";
 
-            // enter the description of the proposed change in the text area - waiting for LCSD-3793
-            //NgWebElement uiProposedChange = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
-            //uiProposedChange.SendKeys(proposedChange);
+            // enter the description of the proposed change
+            NgWebElement uiProposedChange = ngDriver.FindElement(By.CssSelector("textarea#description1"));
+            uiProposedChange.SendKeys(proposedChange);
 
             // enter the other business details
             NgWebElement uiOtherBizDetails = ngDriver.FindElement(By.CssSelector("textarea#otherBusinessesDetails"));
@@ -89,6 +89,7 @@ namespace bdd_tests
 
             // enter the capacity
             NgWebElement uiCapacity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            uiCapacity.Clear();
             uiCapacity.SendKeys(capacity);
 
             // find the upload test files in the bdd-tests\upload_files folder
