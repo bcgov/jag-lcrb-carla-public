@@ -1,4 +1,4 @@
-﻿Feature: RuralStore.feature
+﻿Feature: RuralStore
     As a logged in business user
     I want to submit a rural store application for a private corporation
 
