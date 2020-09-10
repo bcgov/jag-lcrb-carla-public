@@ -1,7 +1,7 @@
-﻿ Feature: CateringApplicationEventAuthorizationTransfer
+﻿ Feature: CateringApplicationEventAuthorization
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit an event authorization and transfer of ownership request for different business types
+    And submit an event authorization request for different business types
 
 #-----------------------
 # No Approval Requests
