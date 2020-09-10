@@ -379,7 +379,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 _logger.Debug("Loading user external id = " + siteMinderGuid);
                 // 3/18/2020 - Note that LoadUser will now work if there is a match on the guid, as well as a match on name in a case where there is no guid.
                 userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(siteMinderGuid, context.Request.Headers, _ms_logger);
-                _logger.Debug("After getting authenticated user = " + userSettings.GetJson());
+                _logger.Information("After getting authenticated user = " + userSettings.GetJson());
 
                 // check that the potential new user is 19.
                 if (userSettings.AuthenticatedUser != null
