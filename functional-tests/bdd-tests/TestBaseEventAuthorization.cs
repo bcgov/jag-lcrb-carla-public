@@ -177,16 +177,15 @@ namespace bdd_tests
             NgWebElement uiVenueEndDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
             uiVenueEndDate2.Click();
 
-            // select liquor end time after 2am
+            // select event and liquor end time after 2am
             if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
             {
-                NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Minutes']"));
-                uiLiquorCloseTime.SendKeys(liquorCloseTime);
-            }
+                NgWebElement uiEventCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(3) .ngb-tp-minute .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
+                uiEventCloseTime.Click();
 
-            // select event and liquor service times are different on specific dates checkbox
-            NgWebElement uiEventLiquorServiceTimesDifferent = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            uiEventLiquorServiceTimesDifferent.Click();
+                NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(5) .ngb-tp-minute .btn-link:nth-child(1) .ngb-tp-chevron"));
+                uiLiquorCloseTime.Click();
+            }
 
             // select terms and conditions checkbox
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
