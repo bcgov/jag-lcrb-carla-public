@@ -48,62 +48,14 @@ namespace Gov.Lclb.Cllb.OneStopService
         }
 
         /// <summary>
-        /// Hangfire job to send LicenceCreationMessage to One stop.
-        /// </summary>
-        public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuidRaw, string suffix)
-        {
-            hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
-            string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
-
-            OneStopHubService.receiveFromPartnerResponse output;
-            var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
-            serviceClient.ClientCredentials.UserName.UserName = Configuration["ONESTOP_HUB_USERNAME"];
-            serviceClient.ClientCredentials.UserName.Password = Configuration["ONESTOP_HUB_PASSWORD"];
-            var basicHttpBinding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
-            basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
-            serviceClient.Endpoint.Binding = basicHttpBinding;
-
-            using (new OperationContextScope(serviceClient.InnerChannel))
-            {
-                //Create message header containing the credentials
-                var header = new OneStopServiceReference.SoapSecurityHeader("", Configuration["ONESTOP_HUB_USERNAME"],
-                                                                            Configuration["ONESTOP_HUB_PASSWORD"], "");
-                //Add the credentials message header to the outgoing request
-                OperationContext.Current.OutgoingMessageHeaders.Add(header);
-
-                try
-                {
-                    var req = new ProgramAccountRequest();
-                    var innerXML = req.CreateXML(_dynamics.GetLicenceByIdWithChildren(licenceGuid), suffix);
-                    var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
-                    output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
-                }
-                catch (Exception ex)
-                {
-                    hangfireContext.WriteLine($"Exception occured. {ex.Message}");
-                    hangfireContext.WriteLine($"Cancelling");
-
-                    if (Log.Logger != null)
-                    {
-                        Log.Logger.Error(ex, $"Exception occured. {ex.Message}");
-                    }
-
-                    throw;
-                }
-            }
-            hangfireContext.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(output));
-
-            hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
-        }
-        /// <summary>
         /// Hangfire job to send LicenceCreationMessage to One stop using REST.
         /// </summary>
         [AutomaticRetry(Attempts = 0)]
-        public async Task SendLicenceCreationMessageREST(PerformContext hangfireContext, string licenceGuidRaw, string suffix)
+        public async Task SendProgramAccountRequestREST(PerformContext hangfireContext, string licenceGuidRaw, string suffix)
         {
             if (hangfireContext != null)
             {
-                hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
+                hangfireContext.WriteLine("Starting OneStop ProgramAccountRequest Job.");
             }
             
 
@@ -138,16 +90,40 @@ namespace Gov.Lclb.Cllb.OneStopService
             }
             else
             {
-                var innerXML = req.CreateXML(licence, suffix);
-                // send message to Onestop hub
-                var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
-
-                if (hangfireContext != null)
+                // only send the request if Dynamics says the licence is not sent yet.
+                if (licence.AdoxioOnestopsent == null || licence.AdoxioOnestopsent == false)
                 {
-                    hangfireContext.WriteLine(outputXML);
-                    hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
+
+                    var innerXML = req.CreateXML(licence, suffix);
+                    // send message to Onestop hub
+                    var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
+
+                    if (hangfireContext != null)
+                    {
+                        hangfireContext.WriteLine(outputXML);
+                    }
                 }
+                else
+                {
+                    if (hangfireContext != null)
+                    {
+                        hangfireContext.WriteLine($"Skipping ProgramAccountRequest for Licence {licence.AdoxioName} {licenceGuid} as the record is marked as sent to OneStop.");
+                    }
+                    if (Log.Logger != null)
+                    {
+                        Log.Logger.Error($"Skipping ProgramAccountRequest for Licence {licence.AdoxioName} {licenceGuid} as the record is marked as sent to OneStop.");
+                    }                    
+                }
+
             }
+
+
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine("End of OneStop ProgramAccountRequest  Job.");
+            }
+            
+
         }
 
 
@@ -159,7 +135,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             if (hangfireContext != null)
             {
-                hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
+                hangfireContext.WriteLine("Starting OneStop ProgramAccountRequest Job.");
             }
             
             string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
@@ -194,11 +170,15 @@ namespace Gov.Lclb.Cllb.OneStopService
                     {
                         hangfireContext.WriteLine("Got licence. Creating XML request");
                     }
-                    
+
                     var innerXML = req.CreateXML(licence);
                     hangfireContext.WriteLine("Sending request.");
                     var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
                     output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
+                    
+                    
+
+                    
                 }
                 catch (Exception ex)
                 {
@@ -220,7 +200,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             if (hangfireContext != null)
             {
                 hangfireContext.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(output));
-                hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
+                hangfireContext.WriteLine("End of OneStop ProgramAccountDetails  Job.");
             }
 
 
@@ -233,7 +213,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             if (hangfireContext != null)
             {
-                hangfireContext.WriteLine("Starting OneStop REST SendLicenceCreationMessage Job.");
+                hangfireContext.WriteLine("Starting OneStop REST ProgramAccountDetailsBroadcast Job.");
             }
             
             string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
@@ -269,7 +249,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 if (hangfireContext != null)
                 {
                     hangfireContext.WriteLine(outputXML);
-                    hangfireContext.WriteLine("End ofOneStop REST SendLicenceCreationMessage  Job.");
+                    hangfireContext.WriteLine("End of OneStop REST ProgramAccountDetailsBroadcast  Job.");
                 }
             }            
         }
@@ -370,7 +350,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                         {
                             hangfireContext.WriteLine($"SET key {cacheKey} to {newNumber}");
                         }
-                            await SendLicenceCreationMessageREST(hangfireContext, licenceId, programAccountCode);
+                            await SendProgramAccountRequestREST(hangfireContext, licenceId, suffix);
                         currentItem++;
                     }
 
