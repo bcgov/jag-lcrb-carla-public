@@ -233,7 +233,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         public SiteminderAuthenticationHandler(IOptionsMonitor<SiteMinderAuthOptions> configureOptions, ILoggerFactory loggerFactory, UrlEncoder encoder, ISystemClock clock)
             : base(configureOptions, loggerFactory, encoder, clock)
         {
-            _logger = loggerFactory.CreateLogger(typeof(SiteminderAuthenticationHandler));
+            _logger = Log.Logger;
+            // _logger = loggerFactory.CreateLogger(typeof(SiteminderAuthenticationHandler));
             _options = new SiteMinderAuthOptions();
         }
 
@@ -324,8 +325,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 foreach (KeyValuePair<string, Microsoft.Extensions.Primitives.StringValues> header in context.Request.Headers)
                 {
-                    _logger.LogInformation(header.Key.ToString());
-                    _logger.LogInformation(header.Value.ToString());
+                    _logger.LogInformation($"key: {header.Key.ToString()}, value: {header.Value.ToString()}");
                 }
                 // **************************************************
                 // Authenticate based on SiteMinder Headers
@@ -422,7 +422,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.SiteMinderGuid = siteMinderGuid;
                 userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
                 _logger.LogDebug("Before getting contact and account ids = " + userSettings.GetJson());
-
+                _logger.LogInformation($"authed user is: {userSettings.AuthenticatedUser.ContactId.ToString()}");
                 if (userSettings.AuthenticatedUser != null)
                 {
                     userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();

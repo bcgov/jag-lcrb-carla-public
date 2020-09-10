@@ -1,14 +1,25 @@
-﻿ Feature: CateringApplicationEventAuthorizationTransfer
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support;
+using OpenQA.Selenium.Support.UI;
+using Protractor;
+using System;
+using Xunit.Gherkin.Quick;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using System.IO;
+using Xunit;
+
+/*
+ Feature: CateringApplicationEventAuthorizationTransfer
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit an event authorization and transfer of ownership request for different business types
 
-#-----------------------
-# No Approval Requests
-#-----------------------
-
  @e2e @catering @indigenousnation @cateringeventtransfer2
- Scenario: No Approval Indigenous Nation Event Authorization Request
+ Scenario: Indigenous Nation Event Authorization Transfer Ownership Requests
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
     And I review the account profile for an indigenous nation
@@ -20,14 +31,14 @@
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And I request an event authorization that doesn't require approval
+    And I request an event authorization
     And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
  @e2e @catering @partnership @cateringeventtransfer
- Scenario: No Approval Partnership Event Authorization Request
+ Scenario: Partnership Event Authorization Transfer Ownership Requests
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -39,14 +50,14 @@
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And I request an event authorization that doesn't require approval
+    And I request an event authorization
     And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
  @e2e @catering @privatecorporation @cateringeventtransfer
- Scenario: No Approval Private Corporation Event Authorization Request
+ Scenario: Private Corporation Event Authorization Transfer Ownership Requests
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -58,14 +69,14 @@
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And I request an event authorization that doesn't require approval
+    And I request an event authorization
     And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
  @e2e @catering @publiccorporation @cateringeventtransfer2
- Scenario: No Approval Public Corporation Event Authorization Request
+ Scenario: Public Corporation Event Authorization Transfer Ownership Requests
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -77,14 +88,14 @@
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And I request an event authorization that doesn't require approval
+    And I request an event authorization
     And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
  @e2e @catering @society @cateringeventtransfer2
- Scenario: No Approval Society Event Authorization Request
+ Scenario: Society Event Authorization Transfer Ownership Requests
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -96,14 +107,14 @@
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And I request an event authorization that doesn't require approval
+    And I request an event authorization
     And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
   @e2e @catering @soleproprietorship @cateringeventtransfer
-  Scenario: No Approval Sole Proprietorship Event Authorization Request
+  Scenario: Sole Proprietorship Event Authorization Transfer Ownership Requests
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
@@ -115,14 +126,14 @@
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And I request an event authorization that doesn't require approval
+    And I request an event authorization
     And I click on the Submit button
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
  @e2e @catering @privatecorporation @validation
- Scenario: Validation for No Approval Event Authorization Request
+ Scenario: Validation for Event Authorization 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -135,17 +146,15 @@
     And the application is approved
     And I pay the licensing fee for Catering
     And I click on the Licences tab
-    And I request an event authorization that doesn't require approval
+    And I request an event authorization
+    And I click on the Submit button
     And I do not complete the event authorization application correctly
     And the expected validation errors are thrown for an event authorization
     And the account is deleted
     Then I see the login page
 
-#-----------------------
-# 500+ Attendees Request
-#-----------------------
-
- Scenario: 500+ Attendees Event Authorization Request
+ @e2e @catering @privatecorporation @validation
+ Scenario: Validation for Catering Transfer of Ownership
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -157,112 +166,37 @@
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And I request an event authorization with more than 500 people
-    And the event history is updated correctly
+    And I click on the Licences tab
+    And I click on the link for Transfer Licence
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a Catering transfer of ownership
     And the account is deleted
     Then I see the login page
+*/
 
-#-----------------------
-# Outdoor Request
-#-----------------------
+namespace bdd_tests
+{
+    [FeatureFile("./CateringApplicationEventAuthorizationTransfer.feature")]
+    public sealed class CateringApplicationEventAuthorizationTransfer : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as a(.*)")]
+        public void LogInToDashboard(string businessType)
+        {
+            NavigateToFeatures();
 
- Scenario: Outdoor Event Authorization Request
-    Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for Catering
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I pay the licensing fee for Catering
-    And I request an event authorization for an outdoor location
-    And the event history is updated correctly
-    And the account is deleted
-    Then I see the login page
+            CheckFeatureFlagsLiquorOne();
 
-#-----------------------
-# Indoor/Outdoor Request
-#-----------------------
+            CheckFeatureFlagsLGIN();
 
- Scenario: Both Indoor and Outdoor Event Authorization Request
-    Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for Catering
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I pay the licensing fee for Catering
-    And I request an event authorization for an indoor and outdoor location
-    And the event history is updated correctly
-    And the account is deleted
-    Then I see the login page
+            CheckFeatureFlagsIN();
 
-#-------------------------
-# Past 2am (non-community)
-#-------------------------
+            CheckFeatureFlagsLicenseeChanges();
 
- Scenario: Past 2am Event Authorization Request
-    Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for Catering
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I pay the licensing fee for Catering
-    And I request an event authorization for after 2am
-    And the event history is updated correctly
-    And the account is deleted
-    Then I see the login page
+            CheckFeatureFlagsSecurityScreening();
 
-#-------------------------
-# Past 2am (community)
-#-------------------------
+            IgnoreSynchronizationFalse();
 
- Scenario: Past 2am Community Event Authorization Request
-    Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for Catering
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I pay the licensing fee for Catering
-    And I request an event authorization for a community event after 2am
-    And the event history is updated correctly
-    And the account is deleted
-    Then I see the login page
-
-#-------------------------
-# Save For Later
-#-------------------------
-
- Scenario: Save For Later Event Authorization Request
-    Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for Catering
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I pay the licensing fee for Catering
-    And I request an event authorization as a draft
-    And the event history is updated correctly
-    And the account is deleted
-    Then I see the login page
+            CarlaLogin(businessType);
+        }
+    }
+}
