@@ -233,7 +233,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         public SiteminderAuthenticationHandler(IOptionsMonitor<SiteMinderAuthOptions> configureOptions, ILoggerFactory loggerFactory, UrlEncoder encoder, ISystemClock clock)
             : base(configureOptions, loggerFactory, encoder, clock)
         {
-            _logger = loggerFactory.CreateLogger(typeof(SiteminderAuthenticationHandler));
+            _logger = Log.Logger;
+            // _logger = loggerFactory.CreateLogger(typeof(SiteminderAuthenticationHandler));
             _options = new SiteMinderAuthOptions();
         }
 
