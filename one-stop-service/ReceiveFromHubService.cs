@@ -78,8 +78,23 @@ namespace Gov.Lclb.Cllb.OneStopService
             Log.Logger.Information($"Getting licence with number of {licenceNumber}");
 
             // Get licence from dynamics
+
+            string businessProgramAccountNumber = "1";
+            MicrosoftDynamicsCRMadoxioLicences licence = null;
+
             var filter = $"adoxio_licencenumber eq '{licenceNumber}'";
-            MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.Licenceses.Get(filter: filter).Value.FirstOrDefault();
+            try
+            {
+                licence = _dynamicsClient.Licenceses.Get(filter: filter).Value.FirstOrDefault();
+                businessProgramAccountNumber = licenseData.body.businessProgramAccountNumber.businessProgramAccountReferenceNumber;
+            }
+            catch (Exception e)
+            {
+                Log.Logger.Error($"Unable to get licence data for licence number {licenceNumber} {e.Message}");
+                licence = null;
+            }
+
+            
             if (licence == null)
             {
                 Log.Logger.Information("licence is null - returning 400.");
@@ -89,7 +104,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 Log.Logger.Information($"Licence record retrieved from Dynamics.");
                 //save the program account number to dynamics
-                var businessProgramAccountNumber = licenseData.body.businessProgramAccountNumber.businessProgramAccountReferenceNumber;
+                
                 int tempBpan = int.Parse(businessProgramAccountNumber);
                 string sanitizedBpan = tempBpan.ToString();
 
