@@ -1,4 +1,4 @@
-﻿Feature: PrivateCorporationOrgStructure.feature
+﻿Feature: PrivateCorporationOrgStructure
     As a logged in private corporation business user
     I want to confirm the organization structure functionality
 

@@ -13,10 +13,10 @@ using System.IO;
 using Xunit;
 
 /*
-  Feature: CateringApplicationEventAuthorizationTransfer
+ Feature: CateringApplicationEventAuthorization
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit an event authorization and transfer of ownership request for different business types
+    And submit an event authorization request for different business types
 
 #-----------------------
 # No Approval Requests
@@ -278,7 +278,10 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization as a draft
+    And I click on the button for Save For Later
     And the event history is updated correctly for an application as a draft
+    And I click on the link for Draft
+    And the saved event authorization details are correct
     And the account is deleted
     Then I see the login page
 */

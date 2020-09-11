@@ -174,7 +174,7 @@ namespace bdd_tests
         [Then(@"I see the login page")]
         public void SeeLogin()
         {
-            //Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
 
 
