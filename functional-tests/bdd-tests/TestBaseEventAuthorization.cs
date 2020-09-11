@@ -56,8 +56,6 @@ namespace bdd_tests
             string physicalAddCity = "Victoria";
             string physicalAddPostalCode = "V9A 6X5";
 
-            string liquorCloseTime = "01";
-
             // enter event contact name
             NgWebElement uiEventContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
             uiEventContactName.SendKeys(eventContactName);
@@ -212,8 +210,24 @@ namespace bdd_tests
             NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
             uiExpandEventHistory.Click();
 
-            // confirm that the Event Status = In Review and the Client or Host Name is present
+            // confirm that the Client or Host Name is present
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
+
+            // confirm that the correct status based on application type is present
+            if (eventType == "as a draft")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Draft')]")).Displayed);
+            }
+
+            if ((eventType == "for after 2am") || (eventType == "for an indoor and outdoor location") || (eventType == "with more than 500 people"))
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'In Review')]")).Displayed);
+            }
+
+            if ((eventType == "for a community event after 2am") || (eventType == "for an outdoor location"))
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Approved')]")).Displayed);
+            }
         }
 
         [And(@"I do not complete the event authorization application correctly")]
