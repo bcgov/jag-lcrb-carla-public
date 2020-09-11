@@ -193,6 +193,10 @@ namespace bdd_tests
         [And(@"I do not complete the event authorization application correctly")]
         public void EventAuthorizationValidation()
         {
+            /* 
+            Page Title: Catered Event Authorization Request
+            */
+
             // remove event contact name
             NgWebElement uiEventContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
             uiEventContactName.Clear();
@@ -289,7 +293,95 @@ namespace bdd_tests
         [And(@"the saved event authorization details are correct")]
         public void SavedEventHistoryIsCorrect()
         {
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains('TODO')]")).Displayed);
+            /* 
+            Page Title: Catered Event Authorization Request
+            */
+
+            // create event authorization data
+            string eventContactName = "AutoTestEventContactName";
+            string eventContactPhone = "2500000000";
+
+            string eventDescription = "Automated test event description added here.";
+            string eventClientOrHostName = "Automated test event";
+            string maximumAttendance = "100";
+            string maximumStaffAttendance = "25";
+            string maximumAttendanceApproval = "300";
+            string maximumStaffAttendanceApproval = "300";
+
+            string venueNameDescription = "Automated test venue name or description";
+            string venueAdditionalInfo = "Automated test additional venue information added here.";
+            string physicalAddStreetAddress1 = "Automated test street address 1";
+            string physicalAddStreetAddress2 = "Automated test street address 2";
+            string physicalAddCity = "Victoria";
+            string physicalAddPostalCode = "V9A 6X5";
+
+            // check event contact name
+            NgWebElement uiEventContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
+
+            // check event contact phone
+            NgWebElement uiEventContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
+            
+            // check community event type selected
+            NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType'] [value='1: 845280001']"));
+
+            // check event description
+            NgWebElement uiEventDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='eventTypeDescription']"));
+
+            // check event client or host name
+            NgWebElement uiEventClientOrHostName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='clientHostname']"));
+            
+            // check maximum attendance
+            NgWebElement uiMaxAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxAttendance']"));
+
+            // check maximum staff attendance
+            NgWebElement uiMaxStaffAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxStaffAttendance']"));
+
+            // check whether minors are attending - yes
+            NgWebElement uiMinorsAttending = ngDriver.FindElement(By.CssSelector("[formcontrolname='minorsAttending'] option[value='true']"));
+            Assert.True(uiMinorsAttending.Selected);
+
+            // check type of food service provided
+            NgWebElement uiFoodServiceProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='foodService'] option[value='0: 845280000']"));
+
+            // check type of entertainment provided
+            NgWebElement uiEntertainmentProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='entertainment'] option[value='1: 845280001']"));
+
+            // check venue name description
+            NgWebElement uiVenueNameDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
+            
+            // check venue location
+            NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation'] option[value='1: 845280001']"));
+                     
+            // check venue additional info
+            NgWebElement uiVenueAdditionalInfo = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
+
+            // check physical address - street address 1
+            NgWebElement uiPhysicalAddStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='street1']"));
+
+            // check physical address - street address 2 
+            NgWebElement uiPhysicalAddStreetAddress2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='street2']"));
+
+            // check physical address - city
+            NgWebElement uiPhysicalAddCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='city']"));
+
+            // check physical address - postal code
+            NgWebElement uiPhysicalAddPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='postalCode']"));
+
+            // check start date is selected
+            NgWebElement uiVenueStartDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='startDate']"));
+
+            // check end date is selected
+            NgWebElement uiVenueEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
+
+            // check event end time after 2am            
+            NgWebElement uiEventCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(3) .ngb-tp-minute .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
+
+            // check liquor end time after 2am            
+            NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(5) .ngb-tp-minute .btn-link:nth-child(1) .ngb-tp-chevron"));            
+
+            // check terms and conditions checkbox is selected
+            NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            Assert.True(uiTermsAndConditions.Selected);
         }
     }
 }
