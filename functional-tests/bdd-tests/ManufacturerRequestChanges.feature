@@ -1,4 +1,4 @@
-﻿Feature: ManufacturerRequestChanges.feature
+﻿Feature: ManufacturerRequestChanges
     As a logged in business user
     I want to request changes for a manufacturer licence
 
