@@ -1,4 +1,4 @@
-﻿Feature: PartnershipOrgStructure.feature
+﻿Feature: PartnershipOrgStructure
     As a logged in partnership business user
     I want to confirm the organization structure functionality
 
