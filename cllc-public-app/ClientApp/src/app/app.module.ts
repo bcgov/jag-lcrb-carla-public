@@ -212,7 +212,7 @@ import { TermsAndConditionsDataService } from '@services/terms-and-condtions-dat
 import { LgZoningConfirmationComponent } from './components/applications/application/tabs/lg-zoning-confirmation/lg-zoning-confirmation.component';
 import { ProofOfZoningComponent } from './components/applications/application/tabs/proof-of-zoning/proof-of-zoning.component';
 import { ProductionStagesComponent } from './components/applications/application/tabs/business-plan/production-stages/production-stages.component';
-
+import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -336,7 +336,8 @@ import { ProductionStagesComponent } from './components/applications/application
     LgInfoPanelComponent,
     AdditionalPidsComponent,
     LgZoningConfirmationComponent,
-    ProductionStagesComponent
+    ProductionStagesComponent,
+    PhsConfirmationComponent
   ],
   imports: [
     ChartsModule,
