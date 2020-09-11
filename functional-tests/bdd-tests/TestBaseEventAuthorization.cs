@@ -29,6 +29,23 @@ namespace bdd_tests
             Subtitle:   Catering Licences
             */
 
+            /*
+            Temporary workaround for LCSD-3867 - start
+            */
+
+            // sign out
+            SignOut();
+
+            // log back in as same user
+            ReturnLogin();
+
+            // navigate to Licences tab
+            ClickLicencesTab();
+
+            /*
+            Temporary workaround for LCSD-3867 - end
+            */
+
             string requestEventAuthorization = "Request Event Authorization";
 
             // click on the request event authorization link
@@ -197,6 +214,12 @@ namespace bdd_tests
                 uiSaveForLater.Click();
 
                 System.Threading.Thread.Sleep(4000);
+            }
+            else
+            {
+                // click on the Submit button
+                NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary~ .btn-primary+ .btn-primary"));
+                uiSubmit.Click();
             }
         }
 

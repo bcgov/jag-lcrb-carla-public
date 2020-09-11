@@ -203,6 +203,24 @@ namespace bdd_tests
         }
 
 
+        public void ReturnLogin()
+        {
+            System.Threading.Thread.Sleep(4000);
+
+            ngDriver.IgnoreSynchronization = true;
+            ngDriver.Navigate().GoToUrl($"{baseUri}{returnUser}");
+            ngDriver.IgnoreSynchronization = false;
+
+            System.Threading.Thread.Sleep(4000);
+        }
+
+
+        public void SignOut()
+        {
+            ClickOnLink("Sign Out");
+        }
+
+
         public void Dispose()
         {
             ngDriver.Quit();
@@ -286,6 +304,7 @@ namespace bdd_tests
         {
             CheckFeatureFlag("SecurityScreening");
         }
+
 
         public void CarlaDeleteCurrentAccount()
         {
