@@ -21,7 +21,6 @@
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    # And I click on the Submit button
     # And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
@@ -40,7 +39,6 @@
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    # And I click on the Submit button
     # And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
@@ -59,7 +57,6 @@
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    # And I click on the Submit button
     # And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
@@ -78,7 +75,6 @@
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    # And I click on the Submit button
     # And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
@@ -97,7 +93,6 @@
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    # And I click on the Submit button
     # And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
@@ -116,7 +111,6 @@
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    # And I click on the Submit button
     # And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
