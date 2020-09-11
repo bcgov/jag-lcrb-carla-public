@@ -45,7 +45,7 @@
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @privatecorporation @cateringeventtransfer
+ @e2e @catering @privatecorporation @cateringeventtransfer @hourlyTest
  Scenario: No Approval Private Corporation Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
