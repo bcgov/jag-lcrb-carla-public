@@ -188,48 +188,6 @@ namespace bdd_tests
             // select terms and conditions checkbox
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiTermsAndConditions.Click();
-
-            if (eventType != "as a draft")
-            {
-                // click on the Save For Later button
-                NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1) span"));
-                uiSaveForLater.Click();
-            }
-            else
-            {
-                // click on Submit button
-                ClickOnSubmitButton();
-            }
-
-            /* 
-            Page Title: Licences
-            Subtitle:   Catering Licences
-            */
-
-            // click on the Event History bar
-            NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
-            uiExpandEventHistory.Click();
-
-            // confirm that the Client or Host Name is present
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
-
-            // confirm that the correct status based on application type is present
-            if (eventType == "as a draft")
-            {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Draft')]")).Displayed);
-            }
-
-            if ((eventType == "for after 2am") || (eventType == "for an indoor and outdoor location") || (eventType == "with more than 500 people"))
-            {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'In Review')]")).Displayed);
-
-                Assert.False(ngDriver.FindElement(By.XPath("//body[contains(.,'Download Licence')]")).Displayed);
-            }
-
-            if ((eventType == "for a community event after 2am") || (eventType == "for an outdoor location"))
-            {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Approved')]")).Displayed);
-            }
         }
 
         [And(@"I do not complete the event authorization application correctly")]
@@ -296,26 +254,35 @@ namespace bdd_tests
         [And(@"the event history is updated correctly for an application (.*)")]
         public void EventHistoryIsUpdatedCorrectly(string eventType)
         {
+            /* 
+            Page Title: Licences
+            Subtitle:   Catering Licences
+            */
+
+            // click on the Event History bar
+            NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
+            uiExpandEventHistory.Click();
+
+            // confirm that the Client or Host Name is present
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
+
+            // confirm that the correct status based on application type is present
             if (eventType == "as a draft")
-            { }
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Draft')]")).Displayed);
+            }
 
-            if (eventType == "for after 2am")
-            { }
+            if ((eventType == "for after 2am") || (eventType == "for an indoor and outdoor location") || (eventType == "with more than 500 people"))
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'In Review')]")).Displayed);
 
-            if (eventType == "for a community event after 2am")
-            { }
+                Assert.False(ngDriver.FindElement(By.XPath("//body[contains(.,'Download Licence')]")).Displayed);
+            }
 
-            if (eventType == "for an outdoor location")
-            { }
-
-            if (eventType == "for an indoor and outdoor location")
-            { }
-
-            if (eventType == "with more than 500 people")
-            { }
-
-            if (eventType == "for a community event after 2am")
-            { }
+            if ((eventType == "for a community event after 2am") || (eventType == "for an outdoor location") || (eventType == "without approval"))
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Approved')]")).Displayed);
+            }
         }
 
 
