@@ -240,7 +240,7 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
 
 
       const saves: Observable<any>[] = [
-        this.contactDataService.updateContactByToken(contact, this.contactToken)
+        this.contactDataService.updateContact(contact)
       ];
       
       const addressControls = this.previousAddresses.controls;
