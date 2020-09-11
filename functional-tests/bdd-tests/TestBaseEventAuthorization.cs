@@ -271,12 +271,11 @@ namespace bdd_tests
             Subtitle:   Catering Licences
             */
 
+            System.Threading.Thread.Sleep(4000);
+
             // click on the Event History bar
             NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
             uiExpandEventHistory.Click();
-
-            // confirm that the Client or Host Name is present
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,eventContactName)]")).Displayed);
 
             // confirm that the correct status based on application type is present
             if (eventType == "as a draft")
@@ -397,10 +396,6 @@ namespace bdd_tests
 
             // check liquor end time after 2am - TODO           
             NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(5) .ngb-tp-minute .btn-link:nth-child(1) .ngb-tp-chevron"));            
-
-            // check terms and conditions checkbox is selected - biz requirements to be confirmed
-            //NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            //Assert.True(uiTermsAndConditions.Selected);
         }
     }
 }
