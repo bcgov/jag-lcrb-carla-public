@@ -306,7 +306,7 @@ namespace bdd_tests
 
             // create event authorization data
             string eventContactName = "AutoTestEventContactName";
-            string eventContactPhone = "2500000000";
+            string eventContactPhone = "(250) 000-0000";
 
             string eventDescription = "Automated test event description added here.";
             string eventClientOrHostName = "Automated test event";
@@ -325,9 +325,8 @@ namespace bdd_tests
             Assert.True(uiEventContactName.GetAttribute("value") == eventContactName);
 
             // check event contact phone
-            //NgWebElement uiEventContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
-            //Assert.True(uiEventContactPhone.GetAttribute("value") == eventContactPhone);
-            //check formatting
+            NgWebElement uiEventContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
+            Assert.True(uiEventContactPhone.GetAttribute("value") == eventContactPhone);
 
             // check community event type selected - TODO
             NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType'] [value='1: 845280001']"));
