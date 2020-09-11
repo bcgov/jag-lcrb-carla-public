@@ -195,71 +195,9 @@ namespace bdd_tests
                 // click on the Save For Later button
                 NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1) span"));
                 uiSaveForLater.Click();
+
+                System.Threading.Thread.Sleep(4000);
             }
-        }
-
-        [And(@"I do not complete the event authorization application correctly")]
-        public void EventAuthorizationValidation()
-        {
-            /* 
-            Page Title: Catered Event Authorization Request
-            */
-
-            // remove event contact name
-            NgWebElement uiEventContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
-            uiEventContactName.Clear();
-
-            // remove event contact phone
-            NgWebElement uiEventContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
-            uiEventContactPhone.Clear();
-
-            // remove event description
-            NgWebElement uiEventDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='eventTypeDescription']"));
-            uiEventDescription.Clear();
-
-            // remove event client or host name
-            NgWebElement uiEventClientOrHostName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='clientHostname']"));
-            uiEventClientOrHostName.Clear();
-
-            // remove maximum attendance
-            NgWebElement uiMaxAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxAttendance']"));
-            uiMaxAttendance.Clear();
-
-            // remove maximum staff attendance
-            NgWebElement uiMaxStaffAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxStaffAttendance']"));
-            uiMaxStaffAttendance.Clear();
-
-            // remove venue name description
-            NgWebElement uiVenueNameDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
-            uiVenueNameDescription.Clear();
-
-            // remove venue additional info
-            NgWebElement uiVenueAdditionalInfo = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
-            uiVenueAdditionalInfo.Clear();
-
-            // remove physical address - street address 1
-            NgWebElement uiPhysicalAddStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='street1']"));
-            uiPhysicalAddStreetAddress1.Clear();
-
-            // remove physical address - street address 2 
-            NgWebElement uiPhysicalAddStreetAddress2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='street2']"));
-            uiPhysicalAddStreetAddress2.Clear();
-
-            // remove physical address - city
-            NgWebElement uiPhysicalAddCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='city']"));
-            uiPhysicalAddCity.Clear();
-
-            // remove physical address - postal code
-            NgWebElement uiPhysicalAddPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='postalCode']"));
-            uiPhysicalAddPostalCode.Clear();
-
-            // deselect event and liquor service times are different on specific dates checkbox
-            NgWebElement uiEventLiquorServiceTimesDifferent = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            uiEventLiquorServiceTimesDifferent.Click();
-
-            // deselect terms and conditions checkbox
-            NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            uiTermsAndConditions.Click();
         }
 
 
@@ -271,11 +209,11 @@ namespace bdd_tests
             Subtitle:   Catering Licences
             */
 
-            System.Threading.Thread.Sleep(4000);
-
             // click on the Event History bar
             NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
             uiExpandEventHistory.Click();
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Automated test event')]")).Displayed);
 
             // confirm that the correct status based on application type is present
             if (eventType == "as a draft")
@@ -363,7 +301,7 @@ namespace bdd_tests
 
             // check venue location - TODO
             NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation'] option[value='1: 845280001']"));
-                     
+
             // check venue additional info
             NgWebElement uiVenueAdditionalInfo = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
             Assert.True(uiVenueAdditionalInfo.GetAttribute("value") == venueAdditionalInfo);
@@ -394,7 +332,72 @@ namespace bdd_tests
             NgWebElement uiEventCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(3) .ngb-tp-minute .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
 
             // check liquor end time after 2am - TODO           
-            NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(5) .ngb-tp-minute .btn-link:nth-child(1) .ngb-tp-chevron"));            
+            NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(5) .ngb-tp-minute .btn-link:nth-child(1) .ngb-tp-chevron"));
+        }
+
+
+        [And(@"I do not complete the event authorization application correctly")]
+        public void EventAuthorizationValidation()
+        {
+            /* 
+            Page Title: Catered Event Authorization Request
+            */
+
+            // remove event contact name
+            NgWebElement uiEventContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
+            uiEventContactName.Clear();
+
+            // remove event contact phone
+            NgWebElement uiEventContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
+            uiEventContactPhone.Clear();
+
+            // remove event description
+            NgWebElement uiEventDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='eventTypeDescription']"));
+            uiEventDescription.Clear();
+
+            // remove event client or host name
+            NgWebElement uiEventClientOrHostName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='clientHostname']"));
+            uiEventClientOrHostName.Clear();
+
+            // remove maximum attendance
+            NgWebElement uiMaxAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxAttendance']"));
+            uiMaxAttendance.Clear();
+
+            // remove maximum staff attendance
+            NgWebElement uiMaxStaffAttendance = ngDriver.FindElement(By.CssSelector("input[formcontrolname='maxStaffAttendance']"));
+            uiMaxStaffAttendance.Clear();
+
+            // remove venue name description
+            NgWebElement uiVenueNameDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
+            uiVenueNameDescription.Clear();
+
+            // remove venue additional info
+            NgWebElement uiVenueAdditionalInfo = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
+            uiVenueAdditionalInfo.Clear();
+
+            // remove physical address - street address 1
+            NgWebElement uiPhysicalAddStreetAddress1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='street1']"));
+            uiPhysicalAddStreetAddress1.Clear();
+
+            // remove physical address - street address 2 
+            NgWebElement uiPhysicalAddStreetAddress2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='street2']"));
+            uiPhysicalAddStreetAddress2.Clear();
+
+            // remove physical address - city
+            NgWebElement uiPhysicalAddCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='city']"));
+            uiPhysicalAddCity.Clear();
+
+            // remove physical address - postal code
+            NgWebElement uiPhysicalAddPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='postalCode']"));
+            uiPhysicalAddPostalCode.Clear();
+
+            // deselect event and liquor service times are different on specific dates checkbox
+            NgWebElement uiEventLiquorServiceTimesDifferent = ngDriver.FindElement(By.Id("mat-checkbox-1"));
+            uiEventLiquorServiceTimesDifferent.Click();
+
+            // deselect terms and conditions checkbox
+            NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiTermsAndConditions.Click();
         }
     }
 }
