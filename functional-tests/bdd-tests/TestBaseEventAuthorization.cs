@@ -215,6 +215,12 @@ namespace bdd_tests
 
                 System.Threading.Thread.Sleep(4000);
             }
+            else
+            {
+                // click on the Submit button
+                NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary~ .btn-primary+ .btn-primary"));
+                uiSubmit.Click();
+            }
         }
 
 
