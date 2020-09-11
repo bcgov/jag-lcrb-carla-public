@@ -328,9 +328,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 _logger.LogDebug("Parsing the HTTP headers for SiteMinder authentication credential");
                 _logger.LogDebug("Getting user data from headers");
 
-                if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserIdentifierKey]))
+                if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserDisplayNameKey]))
                 {
-                    userSettings.UserDisplayName = context.Request.Headers[_options.SiteMinderUserIdentifierKey];
+                    userSettings.UserDisplayName = context.Request.Headers[_options.SiteMinderUserDisplayNameKey];
                 }
 
                 if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderBusinessLegalNameKey]))
