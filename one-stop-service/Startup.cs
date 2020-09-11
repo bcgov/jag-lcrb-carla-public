@@ -128,8 +128,8 @@ namespace Gov.Lclb.Cllb.OneStopService
             // Add a memory cache
             var x = services.AddMemoryCache();
 
-            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _configuration, _env));
+            
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(_configuration, _env));
 
 
             services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopUtils"));
