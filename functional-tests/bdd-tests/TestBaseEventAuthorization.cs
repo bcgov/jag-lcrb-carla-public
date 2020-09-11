@@ -222,6 +222,8 @@ namespace bdd_tests
             if ((eventType == "for after 2am") || (eventType == "for an indoor and outdoor location") || (eventType == "with more than 500 people"))
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'In Review')]")).Displayed);
+
+                Assert.False(ngDriver.FindElement(By.XPath("//body[contains(.,'Download Licence')]")).Displayed);
             }
 
             if ((eventType == "for a community event after 2am") || (eventType == "for an outdoor location"))
