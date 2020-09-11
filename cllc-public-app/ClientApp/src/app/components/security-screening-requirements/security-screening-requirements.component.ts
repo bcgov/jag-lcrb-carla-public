@@ -8,7 +8,7 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationType } from '@models/application-type.model';
 import { PaymentDataService } from '@services/payment-data.service';
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-security-screening-requirements',
@@ -33,11 +33,6 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
     private licenseDataService: LicenseDataService,
     private paymentDataService: PaymentDataService,
     private legalEntityDataService: LegalEntityDataService) {
-    this.busy = this.legalEntityDataService.getCurrentSecurityScreeningItems()
-      .subscribe(summary => {
-        this.data = summary;
-      });
-
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
   }
 
@@ -53,18 +48,21 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
           if (application.applicationType.category === 'Cannabis') {
             this.isCannabisApplication = true;
           }
-          
+
           if (application.applicant !== null && ['LocalGovernment', 'IndigenousNation'].indexOf(application.applicant.businessType) >= 0) {
             this.skipScreeningRequirements = true;
           }
         });
     }
 
-    this.busy = this.licenseDataService.getAllCurrentLicenses()
-      .subscribe(licences => {
-        this.liquorLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Liquor').length > 0;
-        this.cannabisLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Cannabis').length > 0;
-      });
+    this.busy = forkJoin([
+      this.legalEntityDataService.getCurrentSecurityScreeningItems(),
+      this.licenseDataService.getAllCurrentLicenses()
+    ]).subscribe(([summary, licences]) => {
+      this.data = summary;
+      this.liquorLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Liquor').length > 0;
+      this.cannabisLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Cannabis').length > 0;
+    });
   }
 
   // Copy value to clipboard

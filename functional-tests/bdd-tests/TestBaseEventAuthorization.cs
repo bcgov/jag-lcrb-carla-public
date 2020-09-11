@@ -56,6 +56,8 @@ namespace bdd_tests
             string physicalAddCity = "Victoria";
             string physicalAddPostalCode = "V9A 6X5";
 
+            string liquorCloseTime = "01";
+
             // enter event contact name
             NgWebElement uiEventContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
             uiEventContactName.SendKeys(eventContactName);
@@ -175,13 +177,11 @@ namespace bdd_tests
             NgWebElement uiVenueEndDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
             uiVenueEndDate2.Click();
 
-            // select start and end times - TODO
-
+            // select liquor end time after 2am
             if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
             {
-            }
-            else 
-            { 
+                NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Minutes']"));
+                uiLiquorCloseTime.SendKeys(liquorCloseTime);
             }
 
             // select event and liquor service times are different on specific dates checkbox
@@ -194,6 +194,9 @@ namespace bdd_tests
 
             if (eventType != "as a draft")
             {
+                // click on the Save For Later button
+                NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1) span"));
+                uiSaveForLater.Click();
             }
             else
             {
@@ -272,6 +275,39 @@ namespace bdd_tests
             // deselect terms and conditions checkbox
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiTermsAndConditions.Click();
+        }
+
+
+        [And(@"the event history is updated correctly for an application (.*)")]
+        public void EventHistoryIsUpdatedCorrectly(string eventType)
+        {
+            if (eventType == "as a draft")
+            { }
+
+            if (eventType == "for after 2am")
+            { }
+
+            if (eventType == "for a community event after 2am")
+            { }
+
+            if (eventType == "for an outdoor location")
+            { }
+
+            if (eventType == "for an indoor and outdoor location")
+            { }
+
+            if (eventType == "with more than 500 people")
+            { }
+
+            if (eventType == "for a community event after 2am")
+            { }
+        }
+
+
+        [And(@"the saved event authorization details are correct")]
+        public void SavedEventHistoryIsCorrect()
+        {
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains('TODO')]")).Displayed);
         }
     }
 }

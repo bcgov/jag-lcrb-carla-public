@@ -44,14 +44,14 @@ namespace bdd_tests
             */
 
             // create test data
-            //string proposedChange = "Description of proposed change(s) such as moving, adding or changing approved picnic area(s)";
+            string proposedChange = "Description of proposed change(s) such as moving, adding or changing approved picnic area(s)";
             string otherBizDetails = "Description of other business details";
             string patioCompositionDescription = "Description of patio composition";
             string capacity = "100";
 
-            // enter the description of the proposed change in the text area - waiting for LCSD-3793
-            //NgWebElement uiProposedChange = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
-            //uiProposedChange.SendKeys(proposedChange);
+            // enter the description of the proposed change
+            NgWebElement uiProposedChange = ngDriver.FindElement(By.CssSelector("textarea#description1"));
+            uiProposedChange.SendKeys(proposedChange);
 
             // enter the other business details
             NgWebElement uiOtherBizDetails = ngDriver.FindElement(By.CssSelector("textarea#otherBusinessesDetails"));
@@ -61,34 +61,33 @@ namespace bdd_tests
             NgWebElement uiPatioCompDesc = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
             uiPatioCompDesc.SendKeys(patioCompositionDescription);
 
-            /*
             // select 'Grass' for patio location
-            NgWebElement uiGrass = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-71-button.mat-button-toggle-button"));
+            NgWebElement uiGrass = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-43-button"));
             uiGrass.Click();
 
             // select 'Earth' for patio location
-            NgWebElement uiEarth = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-72-button"));
+            NgWebElement uiEarth = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-44-button"));
             uiEarth.Click();
 
             // select 'Gravel' for patio location
-            NgWebElement uiGravel = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-73-button"));
+            NgWebElement uiGravel = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-45-button"));
             uiGravel.Click();
 
             // select 'Finished Flooring' for patio location
-            NgWebElement uiFinishedFlooring = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-74-button"));
+            NgWebElement uiFinishedFlooring = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-46-button"));
             uiFinishedFlooring.Click();
 
             // select 'Cement Sidewalk' for patio location
-            NgWebElement uiCementSidewalk = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-75-button"));
+            NgWebElement uiCementSidewalk = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-47-button"));
             uiCementSidewalk.Click();
 
             // select 'Other' for patio location
-            NgWebElement uiOther = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-76-button"));
+            NgWebElement uiOther = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-48-button"));
             uiOther.Click();
-            */
-
+            
             // enter the capacity
             NgWebElement uiCapacity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            uiCapacity.Clear();
             uiCapacity.SendKeys(capacity);
 
             // find the upload test files in the bdd-tests\upload_files folder
