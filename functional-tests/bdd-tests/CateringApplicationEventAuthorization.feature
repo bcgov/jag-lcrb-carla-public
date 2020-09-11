@@ -263,6 +263,7 @@
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization as a draft
+    And I click on the Save For Later button
     And the event history is updated correctly for an application as a draft
     And I click on the link for Draft
     And the saved event authorization details are correct
