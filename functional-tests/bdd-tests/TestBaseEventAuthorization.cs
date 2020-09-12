@@ -234,6 +234,8 @@ namespace bdd_tests
             Subtitle:   Catering Licences
             */
 
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licences')]")).Displayed);
+
             // click on the Event History bar
             NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
             uiExpandEventHistory.Click();
