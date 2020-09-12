@@ -220,6 +220,8 @@ namespace bdd_tests
                 // click on the Submit button
                 NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary~ .btn-primary+ .btn-primary"));
                 uiSubmit.Click();
+
+                System.Threading.Thread.Sleep(4000);
             }
         }
 
@@ -248,7 +250,7 @@ namespace bdd_tests
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'In Review')]")).Displayed);
 
-                Assert.False(ngDriver.FindElement(By.XPath("//body[contains(.,'Download Licence')]")).Displayed);
+                Assert.False(ngDriver.FindElement(By.XPath("//body[contains(.,'Download Authorization')]")).Displayed);
             }
 
             if ((eventType == "for a community event after 2am") || (eventType == "for an outdoor location") || (eventType == "without approval"))
