@@ -252,7 +252,7 @@ namespace bdd_tests
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'In Review')]")).Displayed);
 
-                Assert.False(ngDriver.FindElement(By.XPath("//body[contains(.,'Download Authorization')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Download Authorization'))]")).Displayed);
             }
 
             if ((eventType == "for a community event after 2am") || (eventType == "for an outdoor location") || (eventType == "without approval"))
