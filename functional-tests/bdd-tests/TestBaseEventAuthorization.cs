@@ -207,10 +207,10 @@ namespace bdd_tests
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiTermsAndConditions.Click();
 
-            if (eventType == "as a draft")
+            if (eventType == "for a draft")
             {
                 // click on the Save For Later button
-                NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1) span"));
+                NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1)"));
                 uiSaveForLater.Click();
 
                 System.Threading.Thread.Sleep(4000);
@@ -245,7 +245,7 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Automated test event')]")).Displayed);
 
             // confirm that the correct status based on application type is present
-            if (eventType == "as a draft")
+            if (eventType == "for a draft")
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Draft')]")).Displayed);
             }
