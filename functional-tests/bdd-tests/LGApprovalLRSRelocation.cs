@@ -29,7 +29,7 @@ Scenario: Local Government Approval for LRS Relocation
     And I specify that the zoning allows the endorsement
     And I specify my contact details
     And I log in as a return user
-    And I review the local government response
+    And I review the local government response for a LRS relocation
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page 
