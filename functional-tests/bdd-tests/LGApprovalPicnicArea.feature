@@ -18,7 +18,7 @@ Scenario: Local Government Approval for Picnic Area Endorsement
     And I log in as local government for Saanich
     And I specify that the zoning allows the endorsement
     And I specify my contact details
-    And I log in as the manufacturer
+    And I log in as a return user
     And I review the local government
     And the dashboard status is updated as Application Under Review
     And the account is deleted
