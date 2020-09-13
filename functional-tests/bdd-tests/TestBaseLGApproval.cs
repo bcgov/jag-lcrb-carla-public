@@ -74,7 +74,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"I review the local government")]
+        [And(@"I review the local government response")]
         public void ReviewLocalGovernment()
         {
             // create test data
