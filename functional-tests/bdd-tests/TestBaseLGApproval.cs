@@ -74,20 +74,24 @@ namespace bdd_tests
         }
 
 
-        [And(@"I review the local government response")]
-        public void ReviewLocalGovernment()
+        [And(@"I review the local government response for (.*)")]
+        public void ReviewLocalGovernment(string responseType)
         {
-            // create test data
-            string completeApplication = "Complete Application";
+            if (responseType == "a picnic area endorsement")
+            {
 
-            // click on Complete Application link
-            ClickOnLink(completeApplication);
+                // create test data
+                string completeApplication = "Complete Application";
 
-            Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Manufacturer Picnic Area Endorsement Application ')]")).Displayed);
+                // click on Complete Application link
+                ClickOnLink(completeApplication);
 
-            System.Threading.Thread.Sleep(4000);
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Manufacturer Picnic Area Endorsement Application ')]")).Displayed);
 
-            ClickOnSubmitButton();
+                System.Threading.Thread.Sleep(4000);
+
+                ClickOnSubmitButton();
+            }
         }
 
 
