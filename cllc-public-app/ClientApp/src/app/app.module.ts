@@ -214,7 +214,6 @@ import { ProofOfZoningComponent } from './components/applications/application/ta
 import { ProductionStagesComponent } from './components/applications/application/tabs/business-plan/production-stages/production-stages.component';
 import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
 
-
 @NgModule({
   declarations: [
     ModalComponent,
