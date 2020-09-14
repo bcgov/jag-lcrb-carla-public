@@ -46,10 +46,10 @@ namespace bdd_tests
             else if (applicationType == "n event authorization")
                 {
                     // check maximum attendance error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum attendance (must be a number)')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please enter the maximum attendance (must be a number) ')]")).Displayed);
 
                     // check maximum staff attendance error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the maximum staff attendance (must be a number)')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please enter the maximum staff attendance (must be a number) ')]")).Displayed);
             }
             else
             {

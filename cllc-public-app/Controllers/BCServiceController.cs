@@ -36,7 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _configuration = configuration;
             _env = env;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
-            _logger = loggerFactory.CreateLogger(typeof(ContactController));
+            _logger = loggerFactory.CreateLogger(typeof(BCServiceController));
             _dynamicsClient = dynamicsClient;
         }
 
@@ -139,7 +139,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string GetRedirectPath(IConfiguration configuration, string path, string code)
         {
             string basePath = string.IsNullOrEmpty(configuration["BASE_PATH"]) ? "" : configuration["BASE_PATH"];
-            if (path.Equals("cannabis-associate-screening"))
+            if (path != null && path.Equals("cannabis-associate-screening"))
             {
                 basePath += "/cannabis-associate-screening/" + code;
             }
