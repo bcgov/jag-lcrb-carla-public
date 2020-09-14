@@ -756,27 +756,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             // create session info for the current user
             userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(userSettings.SiteMinderGuid, context.Request.Headers, _ms_logger);
             if (userSettings.AuthenticatedUser == null)
-            {
-                if (Guid.TryParse(userSettings.SiteMinderGuid, out Guid contactId))
-                {
-                    MicrosoftDynamicsCRMcontact newContact;
-                    Contact contact = new Contact();
-                    contact.CopyHeaderValues(context.Request.Headers);
-                    newContact = contact.ToModel();
-                    newContact.AdoxioExternalid = userSettings.SiteMinderGuid;
-                    _dynamicsClient.Contacts.Create(newContact);
-                }
-
-                if (Guid.TryParse(userSettings.SiteMinderBusinessGuid, out Guid accountId))
-                {
-                    MicrosoftDynamicsCRMaccount newAccount = new MicrosoftDynamicsCRMaccount()
-                    {
-                        AdoxioExternalid = userSettings.SiteMinderBusinessGuid,
-                        Name = userSettings.BusinessLegalName
-                    };
-                    _dynamicsClient.Accounts.Create(newAccount);
-                }
-
+            {               
                 userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(userSettings.SiteMinderGuid, context.Request.Headers, _ms_logger);
                 userSettings.UserAuthenticated = true;
                 userSettings.IsNewUserRegistration = true;
