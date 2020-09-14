@@ -77,7 +77,7 @@ namespace bdd_tests
             Page Title: Worker Dashboard
             */
 
-            NgWebElement uiNameLink = ngDriver.FindElement(By.XPath("//a[contains(text(),'Associate')]"));
+            NgWebElement uiNameLink = ngDriver.FindElement(By.CssSelector("section section a"));
             uiNameLink.Click();
         }
 

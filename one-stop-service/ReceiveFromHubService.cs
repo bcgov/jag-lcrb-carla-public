@@ -18,17 +18,15 @@ namespace Gov.Lclb.Cllb.OneStopService
 {
     public class ReceiveFromHubService : IReceiveFromHubService
     {
-        IDynamicsClient _dynamicsClient;
+        
         private IMemoryCache _cache;
 
-        private readonly IConfiguration Configuration;
+        private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
 
-        public ReceiveFromHubService(IDynamicsClient dynamicsClient, IConfiguration configuration, IWebHostEnvironment env)
+        public ReceiveFromHubService( IConfiguration configuration, IWebHostEnvironment env)
         {
-            _dynamicsClient = dynamicsClient;
-            
-            Configuration = configuration;
+            _configuration = configuration;
             _env = env;
         }
 
@@ -57,6 +55,8 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private string HandleSBNCreateProgramAccountResponse(string inputXML)
         {
+            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
+
             Log.Logger.Information($"Reached HandleSBNCreateProgramAccountResponse");
             if (! _env.IsProduction())
             {
@@ -78,8 +78,23 @@ namespace Gov.Lclb.Cllb.OneStopService
             Log.Logger.Information($"Getting licence with number of {licenceNumber}");
 
             // Get licence from dynamics
+
+            string businessProgramAccountNumber = "1";
+            MicrosoftDynamicsCRMadoxioLicences licence = null;
+
             var filter = $"adoxio_licencenumber eq '{licenceNumber}'";
-            MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.Licenceses.Get(filter: filter).Value.FirstOrDefault();
+            try
+            {
+                licence = dynamicsClient.Licenceses.Get(filter: filter).Value.FirstOrDefault();
+                businessProgramAccountNumber = licenseData.body.businessProgramAccountNumber.businessProgramAccountReferenceNumber;
+            }
+            catch (Exception e)
+            {
+                Log.Logger.Error($"Unable to get licence data for licence number {licenceNumber} {e.Message}");
+                licence = null;
+            }
+
+            
             if (licence == null)
             {
                 Log.Logger.Information("licence is null - returning 400.");
@@ -89,7 +104,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 Log.Logger.Information($"Licence record retrieved from Dynamics.");
                 //save the program account number to dynamics
-                var businessProgramAccountNumber = licenseData.body.businessProgramAccountNumber.businessProgramAccountReferenceNumber;
+                
                 int tempBpan = int.Parse(businessProgramAccountNumber);
                 string sanitizedBpan = tempBpan.ToString();
 
@@ -101,7 +116,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 Log.Logger.Information($"Sending update to Dynamics for BusinessProgramAccountNumber.");
                 try
                 {
-                    _dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, pathLicence);
+                    dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, pathLicence);
                     Log.Logger.Information($"ONESTOP Updated Licence {licenceNumber} record {licence.AdoxioLicencesid} to {businessProgramAccountNumber}");
                 }
                 catch (HttpOperationException odee)
@@ -112,7 +127,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
 
                 //Trigger the Send ProgramAccountDetailsBroadcast Message                
-                BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
+                BackgroundJob.Enqueue(() => new OneStopUtils(_configuration, _cache).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
 
                 Log.Logger.Information("send program account details broadcast done.");
             }
@@ -123,6 +138,8 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private string HandleSBNErrorNotification(string inputXML)
         {
+            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
+
             string result = "200";
             // deserialize the inputXML
             var serializer = new XmlSerializer(typeof(SBNErrorNotification1));
@@ -159,20 +176,20 @@ namespace Gov.Lclb.Cllb.OneStopService
                 if (currentSuffix < suffixLimit)
                 {
                     currentSuffix++;
-                    Log.Logger.Information($"Starting resend of licence creation message, with new value of {currentSuffix}");
+                    Log.Logger.Information($"Starting resend of send program account request message, with new value of {currentSuffix}");
 
                     var patchRecord = new MicrosoftDynamicsCRMadoxioLicences()
                     {
                         AdoxioBusinessprogramaccountreferencenumber = currentSuffix.ToString()
                     };
-                    _dynamicsClient.Licenceses.Update(licenceGuid, patchRecord);
+                    dynamicsClient.Licenceses.Update(licenceGuid, patchRecord);
 
-                    BackgroundJob.Schedule(() => new OneStopUtils(Configuration, _cache).SendProgramAccountRequestREST(null, licenceGuid, currentSuffix.ToString("D3"))// zero pad 3 digit.
+                    BackgroundJob.Schedule(() => new OneStopUtils(_configuration, _cache).SendProgramAccountRequestREST(null, licenceGuid, currentSuffix.ToString("D3"))// zero pad 3 digit.
                     , TimeSpan.FromSeconds(30)); // Try again after 30 seconds
                 }                
                 else
                 {
-                    Log.Logger.Error($"Skipping resend of licence creation message as there have been too many tries({currentSuffix} - {suffixLimit}) Partner Note is partner note {errorNotification.header.partnerNote}");         
+                    Log.Logger.Error($"Skipping resend of send program account request message as there have been too many tries({currentSuffix} - {suffixLimit}) Partner Note is partner note {errorNotification.header.partnerNote}");         
                 }
             }
             else
