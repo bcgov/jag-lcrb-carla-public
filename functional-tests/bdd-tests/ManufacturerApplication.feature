@@ -1,4 +1,4 @@
-﻿Feature: ManufacturerApplication.feature
+﻿Feature: ManufacturerApplication
     As a logged in business user
     I want to submit a Manufacturer Applications for different manufacturer types
 
