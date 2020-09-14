@@ -372,17 +372,17 @@ namespace bdd_tests
 
             // upload a notice of articles document for business shareholder 
             string noticeOfArticlesBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-            NgWebElement uiUploadNoticeofArticlesBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
+            NgWebElement uiUploadNoticeofArticlesBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
             uiUploadNoticeofArticlesBiz.SendKeys(noticeOfArticlesBiz);
 
             // upload a central securities register document for business shareholder 
             string centralSecuritiesRegisterBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
-            NgWebElement uiUploadCentralSecRegBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
+            NgWebElement uiUploadCentralSecRegBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
             uiUploadCentralSecRegBiz.SendKeys(centralSecuritiesRegisterBiz);
 
             // upload a special rights and restrictions document for business shareholder
             string specialRightsRestrictionsBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "special_rights_restrictions.pdf");
-            NgWebElement uiUploadSpecialRightsResBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
+            NgWebElement uiUploadSpecialRightsResBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[21]"));
             uiUploadSpecialRightsResBiz.SendKeys(specialRightsRestrictionsBiz);
 
             /********** Business Shareholder - Leader #1 **********/
