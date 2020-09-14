@@ -238,19 +238,8 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(4000);
 
-            //string elementTitle = "Event History ";
-
-            // click on the Event History bar
-            /*NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-1[role='button']"));
-            if ((uiExpandEventHistory.GetAttribute("mat-expansion-panel-header-title") == elementTitle))
-            {
-                uiExpandEventHistory.Click();
-            }
-            else
-            {*/
-                NgWebElement uiExpandEventHistory2 = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
-                uiExpandEventHistory2.Click();
-            //}
+            NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector("mat-expansion-panel-header[role='button'] #expand-history-button-0"));
+            uiExpandEventHistory.Click();
             
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Automated test event')]")).Displayed);
 
