@@ -174,7 +174,7 @@ namespace bdd_tests
         [Then(@"I see the login page")]
         public void SeeLogin()
         {
-            //Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//a[text()='Log In']")).Displayed);
         }
 
 
@@ -200,6 +200,24 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = false;
 
             System.Threading.Thread.Sleep(4000);
+        }
+
+
+        public void ReturnLogin()
+        {
+            System.Threading.Thread.Sleep(4000);
+
+            ngDriver.IgnoreSynchronization = true;
+            ngDriver.Navigate().GoToUrl($"{baseUri}{returnUser}");
+            ngDriver.IgnoreSynchronization = false;
+
+            System.Threading.Thread.Sleep(4000);
+        }
+
+
+        public void SignOut()
+        {
+            ClickOnLink("Sign Out");
         }
 
 
@@ -286,6 +304,7 @@ namespace bdd_tests
         {
             CheckFeatureFlag("SecurityScreening");
         }
+
 
         public void CarlaDeleteCurrentAccount()
         {
