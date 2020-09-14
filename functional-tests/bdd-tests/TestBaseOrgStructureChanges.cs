@@ -394,7 +394,7 @@ namespace bdd_tests
             string leaderEmailBiz = "sameindividual@privatecorp.com";
 
             // open business shareholder > leader form #1
-            NgWebElement uiOpenLeaderFormBiz = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] app-associate-list[addlabel='Add Key Personnel'][changetypesuffix='Leadership'] button"));
+            NgWebElement uiOpenLeaderFormBiz = ngDriver.FindElement(By.CssSelector("#cdk-accordion-child-0 .padded-section:nth-child(1) .btn-secondary"));
             uiOpenLeaderFormBiz.Click();
 
             // enter business shareholder > leader #1 first name
@@ -406,7 +406,7 @@ namespace bdd_tests
             uiLeaderLastBiz.SendKeys(leaderLastNameBiz);
 
             // select business shareholder > leader #1 role
-            NgWebElement uiLeaderRoleBiz = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [addlabel='Add Key Personnel'][changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
+            NgWebElement uiLeaderRoleBiz = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [addlabel='Add Leadership'][changetypesuffix='Leadership'] input[formcontrolname='isDirectorNew']"));
             uiLeaderRoleBiz.Click();
 
             // enter business shareholder > leader #1 title
