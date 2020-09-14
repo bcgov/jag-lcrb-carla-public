@@ -207,7 +207,7 @@ namespace bdd_tests
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiTermsAndConditions.Click();
 
-            if (eventType == "for a draft")
+            if ((eventType == "for a draft") || (eventType == "being validated"))
             {
                 // click on the Save For Later button
                 NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1)"));
@@ -238,14 +238,23 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(4000);
 
-            // click on the Event History bar
-            NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
-            uiExpandEventHistory.Click();
+            if (eventType == "being validated")
+            {
+                // click on the Event History bar
+                NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-1[role='button']"));
+                uiExpandEventHistory.Click();
+            }
+            else
+            {
+                // click on the Event History bar
+                NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
+                uiExpandEventHistory.Click();
+            }
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Automated test event')]")).Displayed);
 
             // confirm that the correct status based on application type is present
-            if (eventType == "for a draft")
+            if ((eventType == "for a draft") || (eventType == "being validated"))
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Draft')]")).Displayed);
             }

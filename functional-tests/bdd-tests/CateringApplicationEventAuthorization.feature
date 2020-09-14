@@ -132,8 +132,8 @@
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And I request an event authorization for a draft
-    And the event history is updated correctly for an application for a draft
+    And I request an event authorization being validated
+    And the event history is updated correctly for an application being validated
     And I click on the link for Draft
     And I do not complete the event authorization application correctly
     And the expected validation errors are thrown for an event authorization
