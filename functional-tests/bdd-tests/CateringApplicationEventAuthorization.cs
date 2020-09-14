@@ -36,7 +36,6 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    And I click on the Submit button
     And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
@@ -55,12 +54,11 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    And I click on the Submit button
     And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @privatecorporation @cateringeventtransfer
+ @e2e @catering @privatecorporation @cateringeventtransfer @hourlyTest
  Scenario: No Approval Private Corporation Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -74,7 +72,6 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    And I click on the Submit button
     And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
@@ -93,7 +90,6 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    And I click on the Submit button
     And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
@@ -112,7 +108,6 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    And I click on the Submit button
     And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
@@ -131,7 +126,6 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization that doesn't require approval
-    And I click on the Submit button
     And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
@@ -278,7 +272,6 @@ using Xunit;
     And the application is approved
     And I pay the licensing fee for Catering
     And I request an event authorization as a draft
-    And I click on the button for Save For Later
     And the event history is updated correctly for an application as a draft
     And I click on the link for Draft
     And the saved event authorization details are correct
