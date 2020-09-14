@@ -28,9 +28,9 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private static readonly HttpClient Client = new HttpClient();
 
-        private IConfiguration Configuration { get; }
+        private IConfiguration _configuration { get; }
 
-        private IDynamicsClient _dynamics;
+
 
         private IOneStopRestClient _onestopRestClient;
 
@@ -38,9 +38,9 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         public OneStopUtils(IConfiguration Configuration, IMemoryCache cache)
         {
-            this.Configuration = Configuration;
+            this._configuration = Configuration;
             _cache = cache;
-            _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
+            
 
             _onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, Log.Logger);
 
@@ -57,7 +57,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 hangfireContext.WriteLine("Starting OneStop ProgramAccountRequest Job.");
             }
-            
+            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
 
             string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
 
@@ -69,7 +69,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 hangfireContext.WriteLine($"Getting Licence {licenceGuid}");
             }
 
-            var licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
+            var licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
 
             if (hangfireContext != null && licence != null)
             {
@@ -133,6 +133,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// </summary>
         public async Task SendProgramAccountDetailsBroadcastMessage(PerformContext hangfireContext, string licenceGuidRaw)
         {
+            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             if (hangfireContext != null)
             {
                 hangfireContext.WriteLine("Starting OneStop ProgramAccountRequest Job.");
@@ -142,8 +143,8 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             OneStopHubService.receiveFromPartnerResponse output;
             var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
-            serviceClient.ClientCredentials.UserName.UserName = Configuration["ONESTOP_HUB_USERNAME"];
-            serviceClient.ClientCredentials.UserName.Password = Configuration["ONESTOP_HUB_PASSWORD"];
+            serviceClient.ClientCredentials.UserName.UserName = _configuration["ONESTOP_HUB_USERNAME"];
+            serviceClient.ClientCredentials.UserName.Password = _configuration["ONESTOP_HUB_PASSWORD"];
             var basicHttpBinding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
             basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
             serviceClient.Endpoint.Binding = basicHttpBinding;
@@ -151,8 +152,8 @@ namespace Gov.Lclb.Cllb.OneStopService
             using (new OperationContextScope(serviceClient.InnerChannel))
             {
                 //Create message header containing the credentials
-                var header = new OneStopServiceReference.SoapSecurityHeader("", Configuration["ONESTOP_HUB_USERNAME"],
-                                                                            Configuration["ONESTOP_HUB_PASSWORD"], "");
+                var header = new OneStopServiceReference.SoapSecurityHeader("", _configuration["ONESTOP_HUB_USERNAME"],
+                                                                            _configuration["ONESTOP_HUB_PASSWORD"], "");
                 //Add the credentials message header to the outgoing request
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
 
@@ -164,7 +165,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                         hangfireContext.WriteLine($"Getting licence {licenceGuid}");
                     }
                         
-                    MicrosoftDynamicsCRMadoxioLicences licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
+                    MicrosoftDynamicsCRMadoxioLicences licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
 
                     if (hangfireContext != null)
                     {
@@ -211,6 +212,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// </summary>
         public async Task SendProgramAccountDetailsBroadcastMessageREST(PerformContext hangfireContext, string licenceGuidRaw)
         {
+            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             if (hangfireContext != null)
             {
                 hangfireContext.WriteLine("Starting OneStop REST ProgramAccountDetailsBroadcast Job.");
@@ -220,7 +222,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             //prepare soap content
             var req = new ProgramAccountDetailsBroadcast();
-            var licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
+            var licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
 
             if (hangfireContext != null && licence != null)
             {
@@ -261,6 +263,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         [AutomaticRetry(Attempts = 0)]
         public async Task CheckForNewLicences(PerformContext hangfireContext)
         {
+            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             if (hangfireContext != null)
             {
                 hangfireContext.WriteLine("Starting check for new licences for onestop job.");
@@ -303,7 +306,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 string filter = $"adoxio_onestopsent ne true and statuscode eq 1";
                 string[] expand = { "adoxio_establishment" };
-                result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;                
+                result = dynamicsClient.Licenceses.Get(filter: filter, expand: expand).Value;                
             }
             catch (HttpOperationException odee)
             {
@@ -350,7 +353,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                         {
                             hangfireContext.WriteLine($"SET key {cacheKey} to {newNumber}");
                         }
-                            await SendProgramAccountRequestREST(hangfireContext, licenceId, programAccountCode);
+                            await SendProgramAccountRequestREST(hangfireContext, licenceId, suffix);
                         currentItem++;
                     }
 

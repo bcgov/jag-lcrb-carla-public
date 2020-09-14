@@ -1,4 +1,4 @@
-﻿Feature: Payments.feature
+﻿Feature: Payments
     As a logged in business user
     I want to test the payments for a CRS and Catering application
 

@@ -476,9 +476,8 @@
                 <app-file-uploader documentType="Associate_Fin" [useDocumentTypeForName]="true"
                                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                                    entityName="contact" [extensions]="['pdf']"
-                                   [entityId]="contactToken" (numberOfUploadedFiles)="updateUploadedFiles($event, 'Associate_Fin')"
-                                   [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY, DRAG FILE HERE OR'"
-                                   [publicAccess]="true">
+                                   [entityId]="contact.id" (numberOfUploadedFiles)="updateUploadedFiles($event, 'Associate_Fin')"
+                                   [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY, DRAG FILE HERE OR'">
                 </app-file-uploader>
               </section>
             </section>
