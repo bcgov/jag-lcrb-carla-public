@@ -51,7 +51,7 @@ namespace bdd_tests
                 // check maximum staff attendance error is thrown
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please enter the maximum staff attendance (must be a number) ')]")).Displayed);
             }
-            else if (applicationType == "n account profile")
+            else if (applicationType == " private corporation account profile")
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Business Number')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Corporation Address Business Phone')]")).Displayed);
