@@ -1084,10 +1084,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var endorsementsText = "";
                 License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
-                foreach (var item in licenceVM.Endorsements)
-                {
-                    endorsementsText += $"<li>{item}</li>";
-                }
+                if(licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0){
+                    endorsementsText += "<h2 style='text-align: center;'>ENDORSEMENTS</h2><ul>";
+                    foreach (var item in licenceVM.Endorsements)
+                    {
+                        endorsementsText += $"<li>{item}</li>";
+                    }
+                    endorsementsText += "</ul>";
+
+                }       
 
                 var storeHours = $@"
                 <tr>
@@ -1114,7 +1119,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     storeHours = $@"
                 <tr>
-                    <td>Open</td>
+                    <td>Start</td>
                     <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioMondayopen)}</td>
                     <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioTuesdayopen)}</td>
                     <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioWednesdayopen)}</td>
@@ -1124,7 +1129,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioSundayopen)}</td>
                 </tr>                
                 <tr>
-                    <td>Close</td>
+                    <td>End</td>
                     <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioMondayclose)}</td>
                     <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioTuesdayclose)}</td>
                     <td>{ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioWednesdayclose)}</td>
@@ -1195,6 +1200,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     var templateName = "cannabis_licence";
+                    
 
                     switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
                     {
