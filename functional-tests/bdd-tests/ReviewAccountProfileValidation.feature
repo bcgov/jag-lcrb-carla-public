@@ -8,7 +8,7 @@ Scenario: Validation for Private Corporation Review Account Profile
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I click on the Submit button
-    And the expected validation errors are thrown for a private corporation account profile
+    And the expected validation errors are thrown for an account profile
     And the account is deleted
     Then I see the login page
 
@@ -18,7 +18,7 @@ Scenario: Validation for Partnership Review Account Profile
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I click on the Submit button
-    And the expected validation errors are thrown for a partnership account profile
+    And the expected validation errors are thrown for an account profile
     And the account is deleted
     Then I see the login page
 
@@ -28,7 +28,7 @@ Scenario: Validation for Public Corporation Review Account Profile
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I click on the Submit button
-    And the expected validation errors are thrown for a public corporation account profile
+    And the expected validation errors are thrown for an account profile
     And the account is deleted
     Then I see the login page
 
@@ -38,7 +38,7 @@ Scenario: Validation for Society Review Account Profile
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I click on the Submit button
-    And the expected validation errors are thrown for a society account profile
+    And the expected validation errors are thrown for an account profile
     And the account is deleted
     Then I see the login page
 
@@ -48,7 +48,7 @@ Scenario: Validation for Sole Proprietorship Review Account Profile
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I click on the Submit button   
-    And the expected validation errors are thrown for a sole proprietorship account profile
+    And the expected validation errors are thrown for an account profile
     And the account is deleted
     Then I see the login page
 
@@ -58,7 +58,7 @@ Scenario: Validation for Sole Proprietorship Review Account Profile
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I click on the Submit button   
-    And the expected validation errors are thrown for an indigenous nation account profile
+    And the expected validation errors are thrown for an account profile
     And the account is deleted
     Then I see the login page
 
@@ -68,6 +68,6 @@ Scenario: Validation for Sole Proprietorship Review Account Profile
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I click on the Submit button   
-    And the expected validation errors are thrown for a local government account profile
+    And the expected validation errors are thrown for an account profile
     And the account is deleted
     Then I see the login page
