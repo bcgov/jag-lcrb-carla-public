@@ -749,6 +749,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 context.Request.Headers.Add("smgov_country", "CA");
                 context.Request.Headers.Add("smgov_surname", "ONE");
                 userSettings.UserDisplayName = "JOE ONE";
+                userSettings.ContactId = "3c254b30-ebf2-ea11-b81d-00505683fbf4";
             }
 
             _logger.Debug("DEV MODE Setting identity and creating session for: " + userId);
@@ -756,8 +757,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             // create session info for the current user
             userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(userSettings.SiteMinderGuid, context.Request.Headers, _ms_logger);
             if (userSettings.AuthenticatedUser == null)
-            {               
-                userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(userSettings.SiteMinderGuid, context.Request.Headers, _ms_logger);
+            {
                 userSettings.UserAuthenticated = true;
                 userSettings.IsNewUserRegistration = true;
             }
@@ -770,7 +770,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.IsNewUserRegistration = false;
             }
             userSettings.UserId = userId;
-
 
             ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
             UserSettings.SaveUserSettings(userSettings, context);
