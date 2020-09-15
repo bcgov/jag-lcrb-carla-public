@@ -2,18 +2,6 @@
     As a logged in business user
     I want to confirm the validation messages for the org structure
 
-@e2e @cannabis @indigenousnation @orgstructure
-Scenario: Validation for Indigenous Nation Org Structure
-    # Note: There is no validation configured for this biz type.
-    Given I am logged in to the dashboard as an indigenous nation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
-    And I review the account profile for an indigenous nation
-    And I click on the button for Submit Organization Information
-    And the expected validation errors are thrown for an indigenous nation org structure
-    And the account is deleted
-    Then I see the login page
-
 @e2e @cannabis @partnership @orgstructure
 Scenario: Validation for Partnership Org Structure
     Given I am logged in to the dashboard as a partnership
@@ -69,14 +57,26 @@ Scenario: Validation for Sole Proprietorship Org Structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @localgovernment @orgstructure
-Scenario: Validation for Local Government Org Structure
-    # Note: There is no validation configured for this biz type.
-    Given I am logged in to the dashboard as a local government
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
-    And I review the account profile for a local government
-    And I click on the button for Submit Organization Information
-    And the expected validation errors are thrown for a local government org structure
-    And the account is deleted
-    Then I see the login page
+# Note: There is no validation configured for this biz type.
+# @e2e @cannabis @indigenousnation @orgstructure
+# Scenario: Validation for Indigenous Nation Org Structure
+#    Given I am logged in to the dashboard as an indigenous nation
+#    And I click on the Start Application button for a Cannabis Retail Store
+#    And I complete the eligibility disclosure
+#    And I review the account profile for an indigenous nation
+#    And I click on the button for Submit Organization Information
+#    And the expected validation errors are thrown for an indigenous nation org structure
+#    And the account is deleted
+#    Then I see the login page
+
+# Note: There is no validation configured for this biz type.
+# @e2e @cannabis @localgovernment @orgstructure
+# Scenario: Validation for Local Government Org Structure
+#    Given I am logged in to the dashboard as a local government
+#    And I click on the Start Application button for a Cannabis Retail Store
+#    And I complete the eligibility disclosure
+#    And I review the account profile for a local government
+#    And I click on the button for Submit Organization Information
+#    And the expected validation errors are thrown for a local government org structure
+#    And the account is deleted
+#    Then I see the login page
