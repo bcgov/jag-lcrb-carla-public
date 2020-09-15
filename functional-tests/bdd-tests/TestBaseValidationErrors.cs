@@ -85,7 +85,7 @@ namespace bdd_tests
             }
             else if (applicationType == " society org structure")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more directors & officers ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more  directors & officers ')]")).Displayed);
             }
             else if (applicationType == " sole proprietorship org structure")
             {
