@@ -22,7 +22,7 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
             checkout scm
 
             dir('functional-tests/bdd-tests') {               
-                withEnv(["baseUri=${baseUri}","test_start=${test_start}","test_start_worker=${test_start_worker}","test_cc=${test_cc}","test_ccv=${test_ccv}","CHROME_BINARY_LOCATION=${CHROME_BINARY_LOCATION}"])
+                withEnv(["TZ=GMT-7,baseUri=${baseUri}","test_start=${test_start}","test_start_worker=${test_start_worker}","test_cc=${test_cc}","test_ccv=${test_ccv}","CHROME_BINARY_LOCATION=${CHROME_BINARY_LOCATION}"])
                 {
                     try {                        
                         sh 'dotnet test --filter Category=@hourlyTest --logger "junit;LogFilePath=functionalResults.xml"'					
