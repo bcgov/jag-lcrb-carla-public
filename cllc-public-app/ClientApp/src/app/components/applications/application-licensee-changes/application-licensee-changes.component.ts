@@ -151,11 +151,11 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     let label = 'Continue to Application';
 
     // if No Organizational Information on File  OR changes made
-    if (!this.thereIsExistingOrgStructure || LicenseeChangeLog.HasChanges(this.orgStructure.getData())) {
+    if (!this.thereIsExistingOrgStructure || (this.orgStructure && LicenseeChangeLog.HasChanges(this.orgStructure.getData()))) {
       label = 'Submit Organization Information';
     }
     // if Organization Information on File  AND no changes
-    else if (this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.orgStructure.getData())) {
+    else if (this.thereIsExistingOrgStructure && (this.orgStructure && !LicenseeChangeLog.HasChanges(this.orgStructure.getData()))) {
       label = 'Confirm Organization Information Is Complete';
     }
     return label.toUpperCase();
