@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top160 { get; set; }
+        int? Top181 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip160 { get; set; }
+        int? Skip181 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count160 { get; set; }
+        bool? Count181 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter160 { get; set; }
+        string Filter181 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search160 { get; set; }
+        string Search181 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -133,6 +133,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationadoxiohoursofserviceapplication Applicationadoxiohoursofserviceapplication { get; }
 
         /// <summary>
+        /// Gets the IPmuarea.
+        /// </summary>
+        IPmuarea Pmuarea { get; }
+
+        /// <summary>
         /// Gets the IApplicationstructurechangev1s.
         /// </summary>
         IApplicationstructurechangev1s Applicationstructurechangev1s { get; }
@@ -141,6 +146,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtermsconditionslimitations.
         /// </summary>
         IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; }
+
+        /// <summary>
+        /// Gets the IEndorsement.
+        /// </summary>
+        IEndorsement Endorsement { get; }
 
         /// <summary>
         /// Gets the IApplicationtransferownershipv1s.
@@ -166,6 +176,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypeadoxiohoursofserviceapplicationtype.
         /// </summary>
         IApplicationtypeadoxiohoursofserviceapplicationtype Applicationtypeadoxiohoursofserviceapplicationtype { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeadoxiohoursofservicesdefaultapplicationtype.
+        /// </summary>
+        IApplicationtypeadoxiohoursofservicesdefaultapplicationtype Applicationtypeadoxiohoursofservicesdefaultapplicationtype { get; }
 
         /// <summary>
         /// Gets the IApplicationtypeadoxioproratedlicencefeescheduleapplicationtype.
@@ -281,6 +296,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEndorsements.
         /// </summary>
         IEndorsements Endorsements { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementadoxioapplicationtermsconditionslimitationendorsement.
+        /// </summary>
+        IEndorsementadoxioapplicationtermsconditionslimitationendorsement Endorsementadoxioapplicationtermsconditionslimitationendorsement { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementadoxiohoursofserviceendorsement.
+        /// </summary>
+        IEndorsementadoxiohoursofserviceendorsement Endorsementadoxiohoursofserviceendorsement { get; }
+
+        /// <summary>
+        /// Gets the IEndorsementadoxioserviceareaendorsement.
+        /// </summary>
+        IEndorsementadoxioserviceareaendorsement Endorsementadoxioserviceareaendorsement { get; }
 
         /// <summary>
         /// Gets the IEnforcementactionbpfs.
@@ -418,6 +448,41 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicence Licence { get; }
 
         /// <summary>
+        /// Gets the IHoursofservicesdefaults.
+        /// </summary>
+        IHoursofservicesdefaults Hoursofservicesdefaults { get; }
+
+        /// <summary>
+        /// Gets the IHoursofservicesdefaultasyncoperations.
+        /// </summary>
+        IHoursofservicesdefaultasyncoperations Hoursofservicesdefaultasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IHoursofservicesdefaultbulkdeletefailures.
+        /// </summary>
+        IHoursofservicesdefaultbulkdeletefailures Hoursofservicesdefaultbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IHoursofservicesdefaultmailboxtrackingfolders.
+        /// </summary>
+        IHoursofservicesdefaultmailboxtrackingfolders Hoursofservicesdefaultmailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IHoursofservicesdefaultprincipalobjectattributeaccesses.
+        /// </summary>
+        IHoursofservicesdefaultprincipalobjectattributeaccesses Hoursofservicesdefaultprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IHoursofservicesdefaultprocesssession.
+        /// </summary>
+        IHoursofservicesdefaultprocesssession Hoursofservicesdefaultprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IHoursofservicesdefaultsyncerrors.
+        /// </summary>
+        IHoursofservicesdefaultsyncerrors Hoursofservicesdefaultsyncerrors { get; }
+
+        /// <summary>
         /// Gets the IIncidentadoxiolicencetypeset.
         /// </summary>
         IIncidentadoxiolicencetypeset Incidentadoxiolicencetypeset { get; }
@@ -543,6 +608,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IManufacturinginspectorid Manufacturinginspectorid { get; }
 
         /// <summary>
+        /// Gets the IPmuareaadoxioapplicationpmuarea.
+        /// </summary>
+        IPmuareaadoxioapplicationpmuarea Pmuareaadoxioapplicationpmuarea { get; }
+
+        /// <summary>
         /// Gets the IPmuareaareas.
         /// </summary>
         IPmuareaareas Pmuareaareas { get; }
@@ -566,6 +636,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IPmuareaduplicatematchingrecord.
         /// </summary>
         IPmuareaduplicatematchingrecord Pmuareaduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IPmuareainspections.
+        /// </summary>
+        IPmuareainspections Pmuareainspections { get; }
+
+        /// <summary>
+        /// Gets the IPmuarealicences.
+        /// </summary>
+        IPmuarealicences Pmuarealicences { get; }
 
         /// <summary>
         /// Gets the IPmuareamailboxtrackingfolders.
@@ -733,6 +813,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxiohoursofservice Regardingobjectidadoxiohoursofservice { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiohoursofservicesdefault.
+        /// </summary>
+        IRegardingobjectidadoxiohoursofservicesdefault Regardingobjectidadoxiohoursofservicesdefault { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxiopmuarea.
         /// </summary>
         IRegardingobjectidadoxiopmuarea Regardingobjectidadoxiopmuarea { get; }
@@ -746,6 +831,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxiohoursofservice.
         /// </summary>
         IBusinessunitadoxiohoursofservice Businessunitadoxiohoursofservice { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiohoursofservicesdefault.
+        /// </summary>
+        IBusinessunitadoxiohoursofservicesdefault Businessunitadoxiohoursofservicesdefault { get; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxiopmuarea.
@@ -818,6 +908,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IObjectidadoxiohoursofservice Objectidadoxiohoursofservice { get; }
 
         /// <summary>
+        /// Gets the IObjectidadoxiohoursofservicesdefault.
+        /// </summary>
+        IObjectidadoxiohoursofservicesdefault Objectidadoxiohoursofservicesdefault { get; }
+
+        /// <summary>
         /// Gets the IObjectidadoxiopmuarea.
         /// </summary>
         IObjectidadoxiopmuarea Objectidadoxiopmuarea { get; }
@@ -888,6 +983,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxiohoursofservicemodifiedonbehalfby Lkadoxiohoursofservicemodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the ILkadoxiohoursofservicesdefaultcreatedby.
+        /// </summary>
+        ILkadoxiohoursofservicesdefaultcreatedby Lkadoxiohoursofservicesdefaultcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiohoursofservicesdefaultcreatedonbehalfby.
+        /// </summary>
+        ILkadoxiohoursofservicesdefaultcreatedonbehalfby Lkadoxiohoursofservicesdefaultcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiohoursofservicesdefaultmodifiedby.
+        /// </summary>
+        ILkadoxiohoursofservicesdefaultmodifiedby Lkadoxiohoursofservicesdefaultmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiohoursofservicesdefaultmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxiohoursofservicesdefaultmodifiedonbehalfby Lkadoxiohoursofservicesdefaultmodifiedonbehalfby { get; }
+
+        /// <summary>
         /// Gets the ILkadoxiopmuareacreatedby.
         /// </summary>
         ILkadoxiopmuareacreatedby Lkadoxiopmuareacreatedby { get; }
@@ -933,6 +1048,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IUseradoxiohoursofservice Useradoxiohoursofservice { get; }
 
         /// <summary>
+        /// Gets the IUseradoxiohoursofservicesdefault.
+        /// </summary>
+        IUseradoxiohoursofservicesdefault Useradoxiohoursofservicesdefault { get; }
+
+        /// <summary>
         /// Gets the IUseradoxiopmuarea.
         /// </summary>
         IUseradoxiopmuarea Useradoxiopmuarea { get; }
@@ -946,6 +1066,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxiohoursofservice.
         /// </summary>
         ITeamadoxiohoursofservice Teamadoxiohoursofservice { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiohoursofservicesdefault.
+        /// </summary>
+        ITeamadoxiohoursofservicesdefault Teamadoxiohoursofservicesdefault { get; }
 
         /// <summary>
         /// Gets the ITeamadoxiopmuarea.
