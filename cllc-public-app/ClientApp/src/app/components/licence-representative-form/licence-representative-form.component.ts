@@ -100,7 +100,7 @@ export class LicenceRepresentativeFormComponent extends FormBase implements OnIn
     if (!this.form.valid) {
       this.validationMessages = this.listControlsWithErrors(this.form, FormValidationErrorMap)
       this.showValidationMessages = true;
-      this.markConstrolsAsTouched(this.form);  
+      this.markControlsAsTouched(this.form);  
     }
     else {
       this.validationMessages = [];

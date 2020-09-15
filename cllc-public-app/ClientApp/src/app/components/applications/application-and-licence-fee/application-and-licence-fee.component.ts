@@ -213,7 +213,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
 
   isValid(): boolean {
     // mark controls as touched
-    this.markConstrolsAsTouched(this.form);
+    this.markControlsAsTouched(this.form);
     this.showValidationMessages = false;
     let valid = true;
     this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
