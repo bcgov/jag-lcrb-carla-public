@@ -5,7 +5,7 @@
     <section class="col-md-8">
       <app-org-structure *ngIf="licenseeApplicationLoaded" [isReadOnly]="application?.isPaid" (reportAdditionalChanges)="loadData('create')" [node]="treeRoot" [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure></app-org-structure>
       <p>&nbsp;</p>
-      <section class="d-flex" *ngIf="!application?.isPaid && licencesOnFile && LicenseeChangeLog.HasChanges(this.treeRoot)">
+      <section class="d-flex" *ngIf="!application?.isPaid && licencesOnFile && this.orgStructure && LicenseeChangeLog.HasChanges(this.orgStructure.getData())">
 
         <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
         <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
