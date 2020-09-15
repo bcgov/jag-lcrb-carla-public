@@ -44,12 +44,28 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Declaration Checkbox')]")).Displayed);
             }
             else if (applicationType == "n event authorization")
-                {
-                    // check maximum attendance error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please enter the maximum attendance (must be a number) ')]")).Displayed);
+            {
+                // check maximum attendance error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please enter the maximum attendance (must be a number) ')]")).Displayed);
 
-                    // check maximum staff attendance error is thrown
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please enter the maximum staff attendance (must be a number) ')]")).Displayed);
+                // check maximum staff attendance error is thrown
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please enter the maximum staff attendance (must be a number) ')]")).Displayed);
+            }
+            else if (applicationType == "n account profile")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Business Number')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Corporation Address Business Phone')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'businessProfile.contactEmail is not valid')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Physical Address Street')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Physical Address City')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Physical Address Postal Code')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Mailing Address Street')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Mailing Address City')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Mailing Address Postal Code')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Mailing Address Province')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Mailing Address Country')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Corporation Contact Telephone')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Corporation Contact Email')]")).Displayed);
             }
             else
             {
