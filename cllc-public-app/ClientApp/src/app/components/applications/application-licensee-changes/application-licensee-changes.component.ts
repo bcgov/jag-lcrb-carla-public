@@ -151,11 +151,11 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     let label = 'Continue to Application';
 
     // if No Organizational Information on File  OR changes made
-    if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
+    if (!this.thereIsExistingOrgStructure || LicenseeChangeLog.HasChanges(this.orgStructure.getData())) {
       label = 'Submit Organization Information';
     }
     // if Organization Information on File  AND no changes
-    else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
+    else if (this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.orgStructure.getData())) {
       label = 'Confirm Organization Information Is Complete';
     }
     return label.toUpperCase();
@@ -163,7 +163,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   disableSaveLabel(): boolean {
     let disable = false;
-    const errors = this.validateNonIndividauls(this.treeRoot);
+    const errors = this.validateNonIndividauls(this.orgStructure.getData());
     if (errors.length > 0) {
       disable = true;
     }
@@ -257,7 +257,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         if (!result) {
           this.validationErrors = ['There are incomplete fields on the page', ...this.validationErrors];
         }
-        if (this.validationErrors.length === 0) {
+
+        let noChanges = (this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.orgStructure.getData()));
+
+        if (this.validationErrors.length === 0 || noChanges) {
           // set value to cause invoice generationP
           this.busyPromise = this.prepareSaveRequest()
 
@@ -274,13 +277,13 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
                   } else if (app) { // go to the application page
                     // mark application as complete
                     let saveData = { ...this.application, ...this.form.value };
-                    if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
+                    if (LicenseeChangeLog.HasChanges(this.orgStructure.getData())) {
                       saveData.isApplicationComplete = 'Yes';
                     }
 
                     this.applicationDataService.updateApplication(saveData)
                       .subscribe(res => {
-                        this.loadedValue = this.cleanSaveData(this.treeRoot);  // Update loadedValue to prevent double saving
+                        this.loadedValue = this.cleanSaveData(this.orgStructure.getData());  // Update loadedValue to prevent double saving
                         this.saveComplete.emit(true);
                         if (this.redirectToDashboardOnSave) {
                           this.router.navigateByUrl('/dashboard');
@@ -322,7 +325,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     this.validationErrors = [];
 
     const data = this.cleanSaveData(this.orgStructure.getData());
-    return this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id)
+    return this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: data.numberOfMembers, annualMembershipFee: data.annualMembershipFee }, this.currentLegalEntities.id)
       .pipe(mergeMap(result => {
         // do something with result
         return this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId);
