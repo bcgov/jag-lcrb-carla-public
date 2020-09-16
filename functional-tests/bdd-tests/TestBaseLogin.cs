@@ -189,20 +189,8 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(4000);
         }
 
-        
-        [And(@"I log in as the manufacturer")]
-        public void ManufacturerLogin()
-        {
-            System.Threading.Thread.Sleep(9000);
 
-            ngDriver.IgnoreSynchronization = true;
-            ngDriver.Navigate().GoToUrl($"{baseUri}{returnUser}");
-            ngDriver.IgnoreSynchronization = false;
-
-            System.Threading.Thread.Sleep(4000);
-        }
-
-
+        [And(@"I log in as a return user")]
         public void ReturnLogin()
         {
             System.Threading.Thread.Sleep(4000);

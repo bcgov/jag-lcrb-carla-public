@@ -50,7 +50,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
   }
 
   isValid() {
-    this.markConstrolsAsTouched(this.form);
+    this.markControlsAsTouched(this.form);
     this.validationMessages = this.listControlsWithErrors(this.form);
     return this.form.valid;
   }

@@ -1090,6 +1090,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var endorsementsText = "";
                 License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
+                
                 if (licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0)
                 {
                     endorsementsText += "<h2 style='text-align: center;'>ENDORSEMENTS</h2><ul>";
@@ -1098,7 +1099,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         endorsementsText += $"<li>{item}</li>";
                     }
                     endorsementsText += "</ul>";
-
                 }
 
                 var storeHours = $@"
@@ -1207,6 +1207,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     var templateName = "cannabis_licence";
+                    
 
 
                     switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
