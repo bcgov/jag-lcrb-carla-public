@@ -287,7 +287,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
 
   isValid(): boolean {
     this.showValidationMessages = false;
-    this.markConstrolsAsTouched(this.form);
+    this.markControlsAsTouched(this.form);
     this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
     if (this.form.get('ldbOrderTotals') && this.form.get('ldbOrderTotals').value !== this.form.get('ldbOrderTotalsConfirm').value) {
