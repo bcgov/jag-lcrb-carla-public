@@ -17,18 +17,16 @@ namespace Gov.Lclb.Cllb.OneStopService
 {
     public class LdbExport
     {
-        private static readonly HttpClient Client = new HttpClient();
 
         private IConfiguration Configuration { get; }
 
-        private IDynamicsClient _dynamics;
+        private readonly IDynamicsClient _dynamics;
 
 
         public LdbExport(IConfiguration Configuration)
         {
             this.Configuration = Configuration;
-            this._dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
-            
+            _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
         }
 
         /// <summary>
@@ -41,7 +39,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             // Get data
 
             List<MicrosoftDynamicsCRMadoxioLicences> result = null;
-            string filter = $"adoxio_businessprogramaccountreferencenumber eq null";
+            string filter = "adoxio_businessprogramaccountreferencenumber eq null";
             var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
             try
             {
@@ -83,12 +81,12 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                 csvList.Add(headers);
 
-                
+
 
                 if (result != null && result.Count > 0)
                 {
                     foreach (var row in result)
-                    {                                                          
+                    {
                         var item = new List<string>();
 
                         foreach (var h in headerDefinition)
@@ -108,12 +106,12 @@ namespace Gov.Lclb.Cllb.OneStopService
                             }
                             catch (Exception)
                             {
-                                item.Add("\"\""); ;
+                                item.Add("\"\""); 
                             }
                         }
                         csvList.Add(item);
                     }
-                    
+
                 }
 
                 var csv = new StringBuilder();
@@ -146,7 +144,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         private List<KeyValuePair<string, string>> GetExportHeaders()
         {
             var result = new List<KeyValuePair<string, string>>
-            {                
+            {
                 new KeyValuePair<string, string>("AdoxioLicenceprintname", "Licence Type"),
                 new KeyValuePair<string, string>("AdoxioLicencee.Name", "Legal Name"),
                 new KeyValuePair<string, string>("AdoxioLicencenumber", "Licence Number"),

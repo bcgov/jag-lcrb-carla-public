@@ -9,33 +9,33 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
         public Uri BaseUri { get; set; }
         public string AuthorizationHeaderValue { get; set; }
-        private readonly HttpClient httpClient = new HttpClient();
-        private readonly ILogger logger;
+        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly ILogger _logger;
 
         public OneStopRestClient(Uri baseUri, string authorizationHeaderValue, ILogger logger)
         {
             BaseUri = baseUri;
             AuthorizationHeaderValue = authorizationHeaderValue;
-            httpClient.DefaultRequestHeaders.Add("Authorization", authorizationHeaderValue);
-            this.logger = logger;
+            _httpClient.DefaultRequestHeaders.Add("Authorization", authorizationHeaderValue);
+            this._logger = logger;
         }
 
-        public async Task<string> receiveFromPartner(string inputXml)
+        public async Task<string> ReceiveFromPartner(string inputXml)
         {
             var url = $"{BaseUri}?inputXML={Uri.EscapeDataString(inputXml)}";
-            logger.Debug($"InputXML to send = {inputXml}");
-            var response = await httpClient.GetAsync(url);
+            _logger.Debug($"InputXML to send = {inputXml}");
+            var response = await _httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                logger.Debug("OneStop message sequence completed successfully ");
+                _logger.Debug("OneStop message sequence completed successfully ");
                 return content;
             }
             else
             {
                 string content = await response.Content.ReadAsStringAsync();
                 string ex = response.ReasonPhrase + " \n >>>" + content;
-                logger.Error($"Error received: {ex}");
+                _logger.Error($"Error received: {ex}");
                 throw new Exception(ex);
             }
         }
@@ -45,6 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
         Uri BaseUri { get; set; }
         string AuthorizationHeaderValue { get; set; }
-        Task<string> receiveFromPartner(string inputXml);
+        Task<string> ReceiveFromPartner(string inputXml);
     }
 }
