@@ -1,6 +1,4 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.OneStopService;
-using Hangfire;
+﻿using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
 using HealthChecks.UI.Client;
@@ -9,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -22,7 +19,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using Serilog.Events;
 using Serilog.Exceptions;
 using SoapCore;
 using System;
@@ -34,68 +30,16 @@ using System.Text;
 namespace Gov.Lclb.Cllb.OneStopService
 {
 
-    public static class LogHelper
-    {
-        public static void EnrichFromRequest(IDiagnosticContext diagnosticContext, HttpContext httpContext)
-        {
-            var request = httpContext.Request;
-
-            // Set all the common properties available for every request
-            diagnosticContext.Set("Host", request.Host);
-            diagnosticContext.Set("Protocol", request.Protocol);
-            diagnosticContext.Set("Scheme", request.Scheme);
-
-            // Only set it if available. You're not sending sensitive data in a querystring right?!
-            if (request.QueryString.HasValue)
-            {
-                diagnosticContext.Set("QueryString", request.QueryString.Value);
-            }
-
-            // Set the content-type of the Response at this point
-            diagnosticContext.Set("ContentType", httpContext.Response.ContentType);
-
-            // Retrieve the IEndpointFeature selected for the request
-            var endpoint = httpContext.GetEndpoint();
-            if (endpoint is object) // endpoint != null
-            {
-                diagnosticContext.Set("EndpointName", endpoint.DisplayName);
-            }
-        }
-
-        private static bool IsHealthCheckEndpoint(HttpContext ctx)
-        {
-            var endpoint = ctx.GetEndpoint();
-            if (endpoint is object) // same as !(endpoint is null)
-            {
-                return string.Equals(
-                    endpoint.DisplayName,
-                    "Health checks",
-                    StringComparison.Ordinal);
-            }
-            // No endpoint, so not a health check endpoint
-            return false;
-        }
-
-        public static LogEventLevel ExcludeHealthChecks(HttpContext ctx, double _, Exception ex) =>
-                ex != null
-                    ? LogEventLevel.Error
-                    : ctx.Response.StatusCode > 499
-                        ? LogEventLevel.Error
-                        : IsHealthCheckEndpoint(ctx) // Not an error, check if it was a health check
-                            ? LogEventLevel.Verbose // Was a health check, use Verbose
-                            : LogEventLevel.Information;
-     }    
-
-
+   
     public class Startup
     {
         private readonly ILoggerFactory _loggerFactory;
-        public IConfiguration _configuration { get; }
-        public IWebHostEnvironment _env { get; }
+        public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Env { get; }
 
         public Startup(IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            _loggerFactory = loggerFactory; 
+            _loggerFactory = loggerFactory;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -107,8 +51,8 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 builder.AddUserSecrets<Startup>();
             }
-            _env = env;
-            _configuration = builder.Build();
+            Env = env;
+            Configuration = builder.Build();
 
         }
 
@@ -126,19 +70,19 @@ namespace Gov.Lclb.Cllb.OneStopService
             });
 
             // Add a memory cache
-            var x = services.AddMemoryCache();
-
-            
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(_configuration, _env));
+            services.AddMemoryCache();
 
 
-            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopUtils"));
-            services.AddSingleton<Serilog.ILogger>(Log.Logger);
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(Configuration, Env));
+
+
+            services.AddSingleton(_loggerFactory.CreateLogger("OneStopUtils"));
+            services.AddSingleton(Log.Logger);
 
             services.AddMvc(config =>
             {
                 config.EnableEndpointRouting = false;
-                if (!string.IsNullOrEmpty(_configuration["JWT_TOKEN_KEY"]))
+                if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
                 {
                     var policy = new AuthorizationPolicyBuilder()
                                  .RequireAuthenticatedUser()
@@ -158,7 +102,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders();
 
-            if (!string.IsNullOrEmpty(_configuration["JWT_TOKEN_KEY"]))
+            if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
             {
                 // Configure JWT authentication
                 services.AddAuthentication(o =>
@@ -172,9 +116,9 @@ namespace Gov.Lclb.Cllb.OneStopService
                     o.TokenValidationParameters = new TokenValidationParameters()
                     {
                         RequireExpirationTime = false,
-                        ValidIssuer = _configuration["JWT_VALID_ISSUER"],
-                        ValidAudience = _configuration["JWT_VALID_AUDIENCE"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_TOKEN_KEY"]))
+                        ValidIssuer = Configuration["JWT_VALID_ISSUER"],
+                        ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
                     };
                 });
             }
@@ -198,18 +142,17 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
 
             // enable Splunk logger using Serilog
-            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
-                !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
+            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
                 )
             {
 
                 Serilog.Sinks.Splunk.CustomFields fields = new Serilog.Sinks.Splunk.CustomFields();
-                if (!string.IsNullOrEmpty(_configuration["SPLUNK_CHANNEL"]))
+                if (!string.IsNullOrEmpty(Configuration["SPLUNK_CHANNEL"]))
                 {
-                    fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", _configuration["SPLUNK_CHANNEL"]));
+                    fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", Configuration["SPLUNK_CHANNEL"]));
                 }
-                var splunkUri = new Uri(_configuration["SPLUNK_COLLECTOR_URL"]);
-                var upperSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
+                var splunkUri = new Uri(Configuration["SPLUNK_COLLECTOR_URL"]);
 
                 // Fix for bad SSL issues 
 
@@ -218,8 +161,8 @@ namespace Gov.Lclb.Cllb.OneStopService
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
-                    .WriteTo.EventCollector(splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
+                    .WriteTo.EventCollector(splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
+                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
                        messageHandler: new HttpClientHandler()
@@ -299,7 +242,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 app.UseHangfireDashboard("/hangfire", dashboardOptions);
             }
 
-            if (!string.IsNullOrEmpty(_configuration["ENABLE_HANGFIRE_JOBS"]))
+            if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
             {
                 SetupHangfireJobs(app, cache);
             }
@@ -335,12 +278,12 @@ namespace Gov.Lclb.Cllb.OneStopService
             }
         }
 
-            /// <summary>
-            /// Setup the Hangfire jobs.
-            /// </summary>
-            /// <param name="app"></param>
-            /// <param name="loggerFactory"></param>
-            private void SetupHangfireJobs(IApplicationBuilder app, IMemoryCache cache)
+        /// <summary>
+        /// Setup the Hangfire jobs.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="cache"></param>
+        private void SetupHangfireJobs(IApplicationBuilder app, IMemoryCache cache)
         {
 
             Log.Logger.Information("Starting setup of Hangfire job ...");
@@ -351,8 +294,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 {
                     Log.Logger.Information("Creating Hangfire jobs for License issuance check ...");
 
-                    
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(_configuration, cache).CheckForNewLicences(null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, cache).CheckForNewLicences(null), Cron.Hourly());
 
                     Log.Logger.Information("Hangfire License issuance check jobs setup.");
                 }

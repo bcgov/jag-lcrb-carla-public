@@ -18,19 +18,19 @@ namespace Gov.Lclb.Cllb.OneStopService
 {
     public class ReceiveFromHubService : IReceiveFromHubService
     {
-        
+
         private IMemoryCache _cache;
 
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
 
-        public ReceiveFromHubService( IConfiguration configuration, IWebHostEnvironment env)
+        public ReceiveFromHubService(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
             _env = env;
         }
 
-        public void SetCache (IMemoryCache cache)
+        public void SetCache(IMemoryCache cache)
         {
             _cache = cache;
         }
@@ -49,7 +49,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             if (xmlDocument.ChildNodes.Count > 1)
             {
                 result = xmlDocument.ChildNodes[1].Name;
-            }            
+            }
             return result;
         }
 
@@ -57,8 +57,8 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
 
-            Log.Logger.Information($"Reached HandleSBNCreateProgramAccountResponse");
-            if (! _env.IsProduction())
+            Log.Logger.Information("Reached HandleSBNCreateProgramAccountResponse");
+            if (!_env.IsProduction())
             {
                 Log.Logger.Information($"InputXML is: {inputXML}");
             }
@@ -80,9 +80,9 @@ namespace Gov.Lclb.Cllb.OneStopService
             // Get licence from dynamics
 
             string businessProgramAccountNumber = "1";
-            MicrosoftDynamicsCRMadoxioLicences licence = null;
+            MicrosoftDynamicsCRMadoxioLicences licence;
 
-            var filter = $"adoxio_licencenumber eq '{licenceNumber}'";
+            string filter = $"adoxio_licencenumber eq '{licenceNumber}'";
             try
             {
                 licence = dynamicsClient.Licenceses.Get(filter: filter).Value.FirstOrDefault();
@@ -94,7 +94,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 licence = null;
             }
 
-            
+
             if (licence == null)
             {
                 Log.Logger.Information("licence is null - returning 400.");
@@ -102,9 +102,9 @@ namespace Gov.Lclb.Cllb.OneStopService
             }
             else
             {
-                Log.Logger.Information($"Licence record retrieved from Dynamics.");
+                Log.Logger.Information("Licence record retrieved from Dynamics.");
                 //save the program account number to dynamics
-                
+
                 int tempBpan = int.Parse(businessProgramAccountNumber);
                 string sanitizedBpan = tempBpan.ToString();
 
@@ -113,7 +113,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     AdoxioBusinessprogramaccountreferencenumber = sanitizedBpan,
                     AdoxioOnestopsent = true
                 };
-                Log.Logger.Information($"Sending update to Dynamics for BusinessProgramAccountNumber.");
+                Log.Logger.Information("Sending update to Dynamics for BusinessProgramAccountNumber.");
                 try
                 {
                     dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, pathLicence);
@@ -127,13 +127,13 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
 
                 //Trigger the Send ProgramAccountDetailsBroadcast Message                
-                BackgroundJob.Enqueue(() => new OneStopUtils(_configuration, _cache).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
+                BackgroundJob.Enqueue(() => new OneStopUtils(_configuration, _cache).SendProgramAccountDetailsBroadcastMessageRest(null, licence.AdoxioLicencesid));
 
                 Log.Logger.Information("send program account details broadcast done.");
             }
 
             return httpStatusCode;
-            
+
         }
 
         private string HandleSBNErrorNotification(string inputXML)
@@ -147,14 +147,14 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             using (TextReader reader = new StringReader(inputXML))
             {
-                errorNotification = (SBNErrorNotification1)serializer.Deserialize(reader);                
+                errorNotification = (SBNErrorNotification1)serializer.Deserialize(reader);
             }
-            
+
 
             // check to see if it is simply a problem with an old account number.
             if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11845")) // Transaction not allowed - Duplicate Client event exists )
             {
-                  
+
                 Log.Logger.Error($"CRA has rejected the message due to an incorrect business number.  The business in question may have had multiple business numbers in the past and the number in the record is no longer valid.  Please correct the business number for record with partnernote of {errorNotification.header.partnerNote}");
 
             }
@@ -167,11 +167,14 @@ namespace Gov.Lclb.Cllb.OneStopService
                 int currentSuffix = OneStopUtils.GetSuffixFromPartnerNote(errorNotification.header.partnerNote, Log.Logger);
 
                 string cacheKey = "_BPAR_" + licenceGuid;
-                int suffixLimit = 10;
+                
                 Log.Logger.Information($"Reading cache value for key {cacheKey}");
 
-                _cache.TryGetValue(cacheKey, out suffixLimit);               
-                
+                if (! _cache.TryGetValue(cacheKey, out int suffixLimit))
+                {
+                    suffixLimit = 10;
+                }
+
                 // sanity check
                 if (currentSuffix < suffixLimit)
                 {
@@ -186,16 +189,16 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                     BackgroundJob.Schedule(() => new OneStopUtils(_configuration, _cache).SendProgramAccountRequestREST(null, licenceGuid, currentSuffix.ToString("D3"))// zero pad 3 digit.
                     , TimeSpan.FromSeconds(30)); // Try again after 30 seconds
-                }                
+                }
                 else
                 {
-                    Log.Logger.Error($"Skipping resend of send program account request message as there have been too many tries({currentSuffix} - {suffixLimit}) Partner Note is partner note {errorNotification.header.partnerNote}");         
+                    Log.Logger.Error($"Skipping resend of send program account request message as there have been too many tries({currentSuffix} - {suffixLimit}) Partner Note is partner note {errorNotification.header.partnerNote}");
                 }
             }
             else
             {
                 Log.Logger.Error($"Received error notification for record with partner note {errorNotification.header.partnerNote} Error Code is  {errorNotification.body.validationErrors[0].errorMessageNumber}. Error Text is {errorNotification.body.validationErrors[0].errorMessageText} {inputXML}");
-                
+
             }
 
             return result;
@@ -217,7 +220,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             try
             {
                 // sanitize inputXML.
-                inputXML = inputXML.Trim();                
+                inputXML = inputXML.Trim();
 
                 // determine the type of XML.
                 string rootNodeName = GetRootNodeName(inputXML);
