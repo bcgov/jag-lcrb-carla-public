@@ -106,16 +106,6 @@ namespace bdd_tests
                 // return to the Licences tab
                 ClickLicencesTab();
             }
-
-            if (applicationType == "Catering")
-            {
-                /* 	
-                Page Title: Payment Approved	
-                */
-
-                // confirm correct payment amount	
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
-            }
         }
 
         [And(@"I confirm the relocation request is displayed on the dashboard")]
