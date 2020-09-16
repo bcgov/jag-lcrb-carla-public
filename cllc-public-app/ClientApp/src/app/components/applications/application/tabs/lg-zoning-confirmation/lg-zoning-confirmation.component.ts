@@ -43,7 +43,7 @@ export class LgZoningConfirmationComponent extends FormBase implements OnInit {
   }
 
   isValid() {
-    this.markConstrolsAsTouched(this.form);
+    this.markControlsAsTouched(this.form);
     this.validationMessages = this.listControlsWithErrors(this.form);
     return this.form.valid;
   }
