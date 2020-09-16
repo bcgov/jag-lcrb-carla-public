@@ -133,7 +133,7 @@ export class ApplicationThirdPartyOperatorComponent extends FormBase implements 
   }
 
   isValid(): boolean {
-    this.markConstrolsAsTouched(this.form);
+    this.markControlsAsTouched(this.form);
     this.showValidationMessages = false;
     let valid = true;
     this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
