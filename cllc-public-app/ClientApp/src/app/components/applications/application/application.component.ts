@@ -361,6 +361,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
                 }, this);
               }, this);
+              this.updateDynamicValidation();
             }
 
             const noNulls = Object.keys(data)
@@ -892,12 +893,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   isValid(): boolean {
-    this.markConstrolsAsTouched(this.form);
+    
 
     this.showValidationMessages = false;
     let valid = true;
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
 
+    this.markControlsAsTouched(this.form);
     // handle supporting documents for sole proprietor who submit marketing applications 
     let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietorship";
 
@@ -1112,15 +1114,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     };
 
+
     // add the dynamic fields to the error map.
-    if (this.dynamicsForm) {
+    if (this.dynamicsForm ) {
       this.dynamicsForm.tabs.forEach(function (tab) {
         tab.sections.forEach(function (section) {
           if (section.fields) {
             section.fields.forEach(function (field) {
-              if (field.required && ![field.datafieldname]) {               
-                errorMap[field.datafieldname] =  field.name + ' is required.';
-              }              
+              if (field.required) {                  
+                if (!errorMap[field.datafieldname]) {
+                  errorMap[field.datafieldname] = field.name + ' is required';
+                }
+              }             
             }, this);
           }
 
@@ -1133,6 +1138,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return errorMap;
   }
 
+
+  
 
   /**
    * Dialog to confirm the application cancellation (status changed to "Termindated")
@@ -1226,8 +1233,39 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
   }
 
+  updateDynamicValidation() {
+    let useDynamicValidation = true;
+
+    // special case for Lounge Area and Special Event Area Endorsement.
+    // If the patio checkbox is false then do not include the dynamic fields in validation.
+    if (this.form.get('isHasPatio') && this.form.get('isHasPatio').enabled && !this.form.get('isHasPatio').value) {
+      useDynamicValidation = false;
+    }
+
+    // loop through the dynamic form, updating validators.
+    if (this.dynamicsForm) {
+      this.dynamicsForm.tabs.forEach(function (tab) {
+        tab.sections.forEach(function (section) {
+          if (section.fields) {
+            section.fields.forEach(function (field) {
+              this.form.controls[field.datafieldname].clearValidators();
+              if (useDynamicValidation === true) {
+                if (field.required) {
+                  this.form.controls[field.datafieldname].setValidators([Validators.required]);
+                }
+              }
+            }, this);
+          }
+
+        }, this);
+      }, this);
+    }
+
+  }
+
   showDynamicForm(formReference, tabs) {
     if (this.form.get('isHasPatio').enabled) {
+      this.updateDynamicValidation();
       return this.form.get('isHasPatio').value && formReference && tabs;
     }
     return formReference && tabs;

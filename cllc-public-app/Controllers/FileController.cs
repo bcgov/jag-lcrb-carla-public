@@ -313,7 +313,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="entityName"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private async Task<string> GetEntitySharePointDocumentLocation(string entityName, string entityId)
+        private static async Task<string> GetEntitySharePointDocumentLocation(string entityName, string entityId, IDynamicsClient _dynamicsClient)
         {
             string result = null;
             var id = Guid.Parse(entityId);
@@ -740,32 +740,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         private static async Task<string> GetFolderName(string entityName, string entityId, IDynamicsClient _dynamicsClient)
         {
-            var folderName = "";
-            switch (entityName.ToLower())
+
+            string folderName = null;
+
+            folderName = await GetEntitySharePointDocumentLocation(entityName, entityId, _dynamicsClient).ConfigureAwait(true);
+
+            if (folderName == null)
             {
-                case "account":
-                    var account = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(entityId)).ConfigureAwait(true);
-                    folderName = account.GetDocumentFolderName();
-                    break;
-                case "application":
-                    var application = await _dynamicsClient.GetApplicationById(Guid.Parse(entityId)).ConfigureAwait(true);
-                    folderName = application.GetDocumentFolderName();
-                    break;
-                case "contact":
-                    var contact = await _dynamicsClient.GetContactById(Guid.Parse(entityId)).ConfigureAwait(true);
-                    folderName = contact.GetDocumentFolderName();
-                    break;
-                case "worker":
-                    var worker = await _dynamicsClient.GetWorkerById(Guid.Parse(entityId)).ConfigureAwait(true);
-                    folderName = worker.GetDocumentFolderName();
-                    break;
-                case "event":
-                    var eventEntity = _dynamicsClient.GetEventById(Guid.Parse(entityId));
-                    folderName = eventEntity.GetDocumentFolderName();
-                    break;
-                default:
-                    break;
+                switch (entityName.ToLower())
+                {
+                    case "account":
+                        var account = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(entityId)).ConfigureAwait(true);
+                        folderName = account.GetDocumentFolderName();
+                        break;
+                    case "application":
+                        var application = await _dynamicsClient.GetApplicationById(Guid.Parse(entityId)).ConfigureAwait(true);
+                        folderName = application.GetDocumentFolderName();
+                        break;
+                    case "contact":
+                        var contact = await _dynamicsClient.GetContactById(Guid.Parse(entityId)).ConfigureAwait(true);
+                        folderName = contact.GetDocumentFolderName();
+                        break;
+                    case "worker":
+                        var worker = await _dynamicsClient.GetWorkerById(Guid.Parse(entityId)).ConfigureAwait(true);
+                        folderName = worker.GetDocumentFolderName();
+                        break;
+                    case "event":
+                        var eventEntity = _dynamicsClient.GetEventById(Guid.Parse(entityId));
+                        folderName = eventEntity.GetDocumentFolderName();
+                        break;
+                    default:
+                        break;
+                }
             }
+            
             return folderName;
         }
 
@@ -1258,16 +1266,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             fileName = illegalInFileName.Replace(fileName, "-");
 
             fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
-            string folderName = null;
+            
+            string folderName = await GetFolderName(entityName, entityId, _dynamicsClient).ConfigureAwait(true);
 
-            folderName = await GetEntitySharePointDocumentLocation(entityName, entityId).ConfigureAwait(true);
-
-            if (folderName == null)
-            {
-                folderName = await GetFolderName(entityName, entityId, _dynamicsClient).ConfigureAwait(true);
-
-                await CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
-            }
+            await CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
 
             MemoryStream ms = new MemoryStream();
             file.OpenReadStream().CopyTo(ms);

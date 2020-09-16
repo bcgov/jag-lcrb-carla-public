@@ -207,10 +207,10 @@ namespace bdd_tests
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiTermsAndConditions.Click();
 
-            if (eventType == "as a draft")
+            if ((eventType == "for a draft") || (eventType == "being validated"))
             {
                 // click on the Save For Later button
-                NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1) span"));
+                NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1)"));
                 uiSaveForLater.Click();
 
                 System.Threading.Thread.Sleep(4000);
@@ -220,6 +220,8 @@ namespace bdd_tests
                 // click on the Submit button
                 NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary~ .btn-primary+ .btn-primary"));
                 uiSubmit.Click();
+
+                System.Threading.Thread.Sleep(4000);
             }
         }
 
@@ -232,26 +234,29 @@ namespace bdd_tests
             Subtitle:   Catering Licences
             */
 
-            // click on the Event History bar
-            NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector(".mat-expansion-panel #mat-expansion-panel-header-2[role='button']"));
-            uiExpandEventHistory.Click();
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licences')]")).Displayed);
 
+            System.Threading.Thread.Sleep(4000);
+
+            NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector("mat-expansion-panel-header[role='button'] #expand-history-button-0"));
+            uiExpandEventHistory.Click();
+            
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Automated test event')]")).Displayed);
 
             // confirm that the correct status based on application type is present
-            if (eventType == "as a draft")
+            if ((eventType == "for a draft") || (eventType == "being validated"))
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Draft')]")).Displayed);
             }
 
-            if ((eventType == "for after 2am") || (eventType == "for an indoor and outdoor location") || (eventType == "with more than 500 people"))
+            if ((eventType == "for after 2am") || (eventType == "for an indoor and outdoor location") || (eventType == "with more than 500 people") || (eventType == "for an outdoor location"))
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'In Review')]")).Displayed);
 
-                Assert.False(ngDriver.FindElement(By.XPath("//body[contains(.,'Download Licence')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Download Authorization'))]")).Displayed);
             }
 
-            if ((eventType == "for a community event after 2am") || (eventType == "for an outdoor location") || (eventType == "without approval"))
+            if ((eventType == "for a community event after 2am") || (eventType == "without approval"))
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Approved')]")).Displayed);
             }
@@ -413,10 +418,6 @@ namespace bdd_tests
             // remove physical address - postal code
             NgWebElement uiPhysicalAddPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='postalCode']"));
             uiPhysicalAddPostalCode.Clear();
-
-            // deselect event and liquor service times are different on specific dates checkbox
-            NgWebElement uiEventLiquorServiceTimesDifferent = ngDriver.FindElement(By.Id("mat-checkbox-1"));
-            uiEventLiquorServiceTimesDifferent.Click();
 
             // deselect terms and conditions checkbox
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));

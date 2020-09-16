@@ -153,7 +153,7 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
       (this.lgConfirmationRequired() && this.lGConfirmationDocuments.files.length == 0)) {
 
         this.showValidationMessages = true;
-        this.markConstrolsAsTouched(this.form);
+        this.markControlsAsTouched(this.form);
         this.validationMessages = this.listControlsWithErrors(this.form, FormValidationErrorMap)
 
         // validation messages for missing files
