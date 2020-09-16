@@ -1,10 +1,7 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.OneStopService;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace WebApplicationSoap.OneStop
@@ -98,7 +95,7 @@ namespace WebApplicationSoap.OneStop
             programAccountRequestBody.businessCore = GetBusinessCore(licence, suffix);
             programAccountRequestBody.programAccountStatus = GetProgramAccountStatus();
             //the name of the applicant(licensee)- lastName, firstName middleName or company name
-            programAccountRequestBody.legalName = licence.AdoxioLicencee.Name; 
+            programAccountRequestBody.legalName = licence.AdoxioLicencee.Name;
             programAccountRequestBody.operatingName = getOperatingName(licence);
             programAccountRequestBody.businessAddress = getBusinessAddress(licence);
             programAccountRequestBody.mailingAddress = getMailingAddress(licence);
@@ -152,7 +149,7 @@ namespace WebApplicationSoap.OneStop
             businessAddress.foreignLegacy = GetForeignLegacyBusiness(licence);
             businessAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
             businessAddress.provinceStateCode = "BC"; // BC is province code for British Columbia
-            businessAddress.postalCode = Utils.FormatPostalCode( licence.AdoxioEstablishment.AdoxioAddresspostalcode );
+            businessAddress.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             businessAddress.countryCode = "CA"; // CA is country code for Canada
 
             return businessAddress;

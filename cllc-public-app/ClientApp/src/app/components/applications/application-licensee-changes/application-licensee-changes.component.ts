@@ -238,7 +238,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   }
 
-  saveReadOnly(){
+  saveReadOnly() {
     this.saveComplete.emit(true);
     if (this.redirectToDashboardOnSave) {
       this.router.navigateByUrl('/dashboard');
@@ -250,7 +250,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    */
   save() {
 
-  
+
     this.orgStructure.saveAll()
       .subscribe(result => {
         this.validationErrors = this.validateFormData();
@@ -371,13 +371,13 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     }
     return this.saveForLater(false);
   }
-  
+
   calculateSubTotal(can, liq): string {
 
-      const cannabis = can * this.numberOfCannabisLicences;
-      const liquor = liq * this.numberOfLiquorLicences;
-      const total = cannabis + liquor;
-      return total.toString();
+    const cannabis = can * this.numberOfCannabisLicences;
+    const liquor = liq * this.numberOfLiquorLicences;
+    const total = cannabis + liquor;
+    return total.toString();
   }
 
   /**
