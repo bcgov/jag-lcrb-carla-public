@@ -237,6 +237,17 @@ namespace bdd_tests
         }
 
 
+        [And(@"I do not complete the licence renewal application correctly")]
+        public void CompleteApplicationRenewalIncorrectly()
+        {
+            // click on the Submit button
+            NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button:nth-child(2)"));
+            uiSubmitButton.Click();
+
+            System.Threading.Thread.Sleep(5000);
+        }
+
+
         [And(@"the expiry date is changed to today")]
         public void ExpiryDateToday()
         {            

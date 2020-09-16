@@ -17,7 +17,7 @@ Feature: LGApprovalLRSRelocation
     As a logged in business user
     I want to submit a LRS Relocation Application for review and approval
 
-@e2e @catering @privatecorporation @picnic @lgapproval
+@e2e @catering @privatecorporation @relocation @lgapproval
 Scenario: Local Government Approval for LRS Relocation
     Given I am logged in to the dashboard as a private corporation
     And an LRS licence has been created
@@ -28,8 +28,8 @@ Scenario: Local Government Approval for LRS Relocation
     And I log in as local government for Saanich
     And I specify that the zoning allows the endorsement
     And I specify my contact details
-    And I log in as the LRS
-    And I review the local government response
+    And I log in as a return user
+    And I review the local government response for a LRS relocation
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page 
