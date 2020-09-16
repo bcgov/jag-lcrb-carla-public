@@ -114,7 +114,7 @@ namespace bdd_tests
                 */
 
                 // confirm correct payment amount	
-                // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$330.00')]")).Displayed);
             }
         }
 
