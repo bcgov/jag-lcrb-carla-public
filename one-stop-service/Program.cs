@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 using Serilog;
-using Serilog.AspNetCore;
-using Serilog.Events;
-using System;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -18,13 +13,13 @@ namespace Gov.Lclb.Cllb.OneStopService
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)            
+            WebHost.CreateDefaultBuilder(args)
             .UseSerilog()
             .ConfigureAppConfiguration((hostingContext, config) =>
                     {
-                config.AddEnvironmentVariables();
-            })
-            
+                        config.AddEnvironmentVariables();
+                    })
+
             .UseStartup<Startup>();
     }
 }
