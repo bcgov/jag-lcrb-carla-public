@@ -6,6 +6,7 @@
 Scenario: Validation for Partnership Security Screening
     Given I am logged in to the dashboard as a partnership
     And I click on the link for Security Screening
+    And I click on the Complete Organization Information button
     And I review the organization structure for a partnership    
     And I click on the link for Security Screening
     And I review the security screening requirements for a partnership
@@ -16,6 +17,7 @@ Scenario: Validation for Partnership Security Screening
 Scenario: Validation for Private Corporation Security Screening
     Given I am logged in to the dashboard as a private corporation
     And I click on the link for Security Screening
+    And I click on the Complete Organization Information button
     And I review the organization structure for a private corporation
     And I click on the link for Security Screening
     And I review the security screening requirements for a private corporation
@@ -26,6 +28,7 @@ Scenario: Validation for Private Corporation Security Screening
 Scenario: Validation for Public Corporation Security Screening
     Given I am logged in to the dashboard as a public corporation
     And I click on the link for Security Screening
+    And I click on the Complete Organization Information button
     And I review the organization structure for a public corporation
     And I click on the link for Security Screening
     And I review the security screening requirements for a public corporation
@@ -36,6 +39,7 @@ Scenario: Validation for Public Corporation Security Screening
 Scenario: Validation for Society Security Screening
     Given I am logged in to the dashboard as a society
     And I click on the link for Security Screening
+    And I click on the Complete Organization Information button
     And I review the organization structure for a society
     And I click on the link for Security Screening
     And I review the security screening requirements for a society
@@ -46,6 +50,7 @@ Scenario: Validation for Society Security Screening
 Scenario: Validation for Sole Proprietorship Security Screening
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the link for Security Screening
+    And I click on the Complete Organization Information button
     And I review the organization structure for a sole proprietorship
     And I click on the link for Security Screening
     And I review the security screening requirements for a sole proprietorship
@@ -56,6 +61,7 @@ Scenario: Validation for Sole Proprietorship Security Screening
 # Scenario: Validation for Indigenous Nation Security Screening
 #    Given I am logged in to the dashboard as an indigenous nation
 #    And I click on the link for Security Screening
+#    And I click on the Complete Organization Information button
 #    And I review the organization structure for an indigenous nation
 #    And I click on the link for Security Screening
 #    And I review the security screening requirements for an indigenous nation
@@ -66,6 +72,7 @@ Scenario: Validation for Sole Proprietorship Security Screening
 # Scenario: Validation for Local Government Security Screening
 #    Given I am logged in to the dashboard as a local government
 #    And I click on the link for Security Screening
+#    And I click on the Complete Organization Information button
 #    And I review the organization structure for a local government
 #    And I click on the link for Security Screening
 #    And I review the security screening requirements for a local government
