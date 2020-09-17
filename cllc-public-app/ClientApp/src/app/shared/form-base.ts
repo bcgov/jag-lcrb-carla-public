@@ -130,6 +130,19 @@ export class FormBase implements OnDestroy {
         };
     }
 
+    public requireOneOfGroupValidator(fields: string[]): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } | null => {
+            if (!control.parent) {
+                return null;
+            }
+            let valid = false;
+            fields.forEach(f => {
+                valid = valid || control.parent.get(f).value;
+            });
+            return valid ? null : { 'require-one-of': { value: control.value } };
+        };
+    }
+
     public requiredCheckboxChildValidator(checkboxField: string): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } | null => {
             if (!control.parent || !control.parent.get(checkboxField)) {

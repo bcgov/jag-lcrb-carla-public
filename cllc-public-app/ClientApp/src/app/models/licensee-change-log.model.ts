@@ -22,6 +22,8 @@ export class LicenseeChangeLog {
   businessType: string;
   numberofSharesNew: number;
   numberofSharesOld: number;
+  numberOfNonVotingSharesNew: number;
+  numberOfNonVotingSharesOld: number;
   totalSharesNew: number;
   totalSharesOld: number;
   emailNew: string;
@@ -98,6 +100,8 @@ export class LicenseeChangeLog {
       }
       newItem.numberofSharesNew = legalEntity.commonvotingshares;
       newItem.numberofSharesOld = legalEntity.commonvotingshares;
+      newItem.numberOfNonVotingSharesNew = legalEntity.commonnonvotingshares;
+      newItem.numberOfNonVotingSharesOld = legalEntity.commonnonvotingshares;
       newItem.emailNew = legalEntity.email;
       newItem.emailOld = legalEntity.email;
       newItem.firstNameNew = legalEntity.firstname;
