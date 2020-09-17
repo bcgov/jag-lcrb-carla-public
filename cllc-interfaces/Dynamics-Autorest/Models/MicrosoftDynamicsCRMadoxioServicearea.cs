@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioServicearea class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioServicearea(System.DateTimeOffset? adoxioDateadded = default(System.DateTimeOffset?), bool? adoxioIsoutdoor = default(bool?), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), int? statecode = default(int?), string _owningbusinessunitValue = default(string), string _modifiedbyValue = default(string), string adoxioArealocation = default(string), int? adoxioCapacity = default(int?), int? timezoneruleversionnumber = default(int?), string _adoxioApplicationidValue = default(string), string _adoxioEstablishmentidValue = default(string), string versionnumber = default(string), int? adoxioAreacategory = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), int? statuscode = default(int?), string adoxioServiceareaid = default(string), string _owneridValue = default(string), string _owninguserValue = default(string), bool? adoxioIsindoor = default(bool?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), bool? adoxioIspatio = default(bool?), string adoxioName = default(string), System.DateTimeOffset? adoxioDateupdated = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _adoxioLicenceidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioAreanumber = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioServiceareaSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioServiceareaDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioServiceareaDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioServiceareaAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioServiceareaMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioServiceareaProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioServiceareaBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioServiceareaPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationId = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences))
+        public MicrosoftDynamicsCRMadoxioServicearea(System.DateTimeOffset? adoxioDateadded = default(System.DateTimeOffset?), bool? adoxioIsoutdoor = default(bool?), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), int? statecode = default(int?), string _owningbusinessunitValue = default(string), bool? adoxioIspatio = default(bool?), string _modifiedbyValue = default(string), string adoxioArealocation = default(string), int? adoxioCapacity = default(int?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _adoxioApplicationidValue = default(string), string _adoxioEstablishmentidValue = default(string), string versionnumber = default(string), int? adoxioAreacategory = default(int?), string _owningteamValue = default(string), int? statuscode = default(int?), string adoxioServiceareaid = default(string), string _owneridValue = default(string), string _owninguserValue = default(string), bool? adoxioIsindoor = default(bool?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string _adoxioEndorsementValue = default(string), string adoxioName = default(string), System.DateTimeOffset? adoxioDateupdated = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _adoxioLicenceidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioAreanumber = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioServiceareaSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioServiceareaDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioServiceareaDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioServiceareaAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioServiceareaMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioServiceareaProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioServiceareaBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioServiceareaPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationId = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioEndorsement adoxioEndorsement = default(MicrosoftDynamicsCRMadoxioEndorsement))
         {
             AdoxioDateadded = adoxioDateadded;
             AdoxioIsoutdoor = adoxioIsoutdoor;
@@ -37,15 +37,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Importsequencenumber = importsequencenumber;
             Statecode = statecode;
             this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioIspatio = adoxioIspatio;
             this._modifiedbyValue = _modifiedbyValue;
             AdoxioArealocation = adoxioArealocation;
             AdoxioCapacity = adoxioCapacity;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            Overriddencreatedon = overriddencreatedon;
             this._adoxioApplicationidValue = _adoxioApplicationidValue;
             this._adoxioEstablishmentidValue = _adoxioEstablishmentidValue;
             Versionnumber = versionnumber;
             AdoxioAreacategory = adoxioAreacategory;
-            Overriddencreatedon = overriddencreatedon;
             this._owningteamValue = _owningteamValue;
             Statuscode = statuscode;
             AdoxioServiceareaid = adoxioServiceareaid;
@@ -54,7 +55,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioIsindoor = adoxioIsindoor;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._createdbyValue = _createdbyValue;
-            AdoxioIspatio = adoxioIspatio;
+            this._adoxioEndorsementValue = _adoxioEndorsementValue;
             AdoxioName = adoxioName;
             AdoxioDateupdated = adoxioDateupdated;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
@@ -81,6 +82,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioApplicationId = adoxioApplicationId;
             AdoxioEstablishmentId = adoxioEstablishmentId;
             AdoxioLicenceId = adoxioLicenceId;
+            AdoxioEndorsement = adoxioEndorsement;
             CustomInit();
         }
 
@@ -121,6 +123,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ispatio")]
+        public bool? AdoxioIspatio { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
@@ -141,6 +148,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_adoxio_applicationid_value")]
         public string _adoxioApplicationidValue { get; set; }
 
@@ -158,11 +170,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_areacategory")]
         public int? AdoxioAreacategory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -206,8 +213,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ispatio")]
-        public bool? AdoxioIspatio { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_endorsement_value")]
+        public string _adoxioEndorsementValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -338,6 +345,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_LicenceId")]
         public MicrosoftDynamicsCRMadoxioLicences AdoxioLicenceId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_Endorsement")]
+        public MicrosoftDynamicsCRMadoxioEndorsement AdoxioEndorsement { get; set; }
 
     }
 }
