@@ -44,6 +44,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="ReviewSecurityScreening.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ReviewOrgStructureValidation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
