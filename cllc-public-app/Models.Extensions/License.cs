@@ -14,9 +14,9 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class LicenseExtensions
     {
-        public static List<Endorsement> GetEndorsements(string licenceId, IDynamicsClient dynamicsClient)
+        public static List<ViewModels.Endorsement> GetEndorsements(string licenceId, IDynamicsClient dynamicsClient)
         {
-            List<Endorsement> endorsementsList = new List<Endorsement>();
+            var endorsementsList = new List<ViewModels.Endorsement>();
             string filter = $"_adoxio_licence_value eq {licenceId}";
             string[] expand = { "adoxio_ApplicationType" };
             MicrosoftDynamicsCRMadoxioEndorsementCollection endorsementsCollection = dynamicsClient.Endorsements.Get(filter: filter, expand: expand);
@@ -25,7 +25,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 foreach (var item in endorsementsCollection.Value)
                 {
                     if (item.AdoxioApplicationType != null) {
-                        Endorsement endorsement = new Endorsement()
+                        var endorsement = new ViewModels.Endorsement()
                         {
                             Id = item.AdoxioApplicationType.AdoxioApplicationtypeid,
                             Name = item.AdoxioApplicationType.AdoxioName

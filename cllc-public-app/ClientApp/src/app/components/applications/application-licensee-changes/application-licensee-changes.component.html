@@ -3,9 +3,13 @@
 
   <div *ngIf="licenseeApplicationLoaded">
     <section class="col-md-8">
-      <app-org-structure *ngIf="licenseeApplicationLoaded" [isReadOnly]="application?.isPaid" (reportAdditionalChanges)="loadData('create')" [node]="treeRoot" [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure></app-org-structure>
+      <app-org-structure *ngIf="licenseeApplicationLoaded" [isReadOnly]="application?.isPaid"
+        (reportAdditionalChanges)="loadData('create')" [node]="treeRoot" [account]="account"
+        [licencesOnFile]="licencesOnFile" (changesMade)="treeRoot = orgStructure.getData()" #orgStructure>
+      </app-org-structure>
       <p>&nbsp;</p>
-      <section class="d-flex" *ngIf="!application?.isPaid && licencesOnFile && this.orgStructure && LicenseeChangeLog.HasChanges(this.orgStructure.getData())">
+      <section class="d-flex"
+        *ngIf="!application?.isPaid && licencesOnFile && treeRoot && LicenseeChangeLog.HasChanges(treeRoot)">
 
         <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
         <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
@@ -46,8 +50,12 @@
             <br-->
           <br>
           <ul>
-            <li>Applicable fees for cannabis licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1" target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
-            <li>Applicable fees for liquor licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1" target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
+            <li>Applicable fees for cannabis licensees are listed in <a
+                href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
+                target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
+            <li>Applicable fees for liquor licensees are listed in <a
+                href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
+                target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
           </ul>
 
         </div>
@@ -70,14 +78,14 @@
           </span>
         </button>
 
-        <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right:10px;" [disabled]="!LicenseeChangeLog.HasChanges(treeRoot)"
-                (click)="cancel()">
+        <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right:10px;"
+          [disabled]="!LicenseeChangeLog.HasChanges(treeRoot)" (click)="cancel()">
           <i class="fa fa-save"></i>
           Cancel Changes
         </button>
 
         <button *ngIf="treeRoot" class="btn btn-primary" name="submit-application" style="float: right;"
-                (click)="save()">
+          (click)="save()">
           <i class="fa fa-save" style="color: #fff;"></i>
           {{getSaveLabel()}}
         </button>
@@ -85,7 +93,7 @@
 
       <section *ngIf="application?.isPaid" class="mt-5" style="position: relative;">
         <button *ngIf="treeRoot" class="btn btn-primary" name="submit-application" style="float: right;"
-                (click)="saveReadOnly()">
+          (click)="saveReadOnly()">
           <i class="fa fa-save" style="color: #fff;"></i>
           Confirm Organization Information Is Complete
         </button>
@@ -163,11 +171,18 @@
         </div>
       </section> -->
 
-      <section class="submit-container mt-5" _ngcontent-ekk-c6="" style="background-color:#38598A; border-bottom: solid 4px #FFCC00; color: #fff; margin-bottom: 20px; padding: 30px; padding-top:20px;" *ngIf="!application?.isPaid">
+      <section class="submit-container mt-5" _ngcontent-ekk-c6=""
+        style="background-color:#38598A; border-bottom: solid 4px #FFCC00; color: #fff; margin-bottom: 20px; padding: 30px; padding-top:20px;"
+        *ngIf="!application?.isPaid">
         <table>
           <tr>
-            <td><h2 class="round-icon-wrapper"><i class="fas fa-info-circle" _ngcontent-jyo-c6="" style="color:#fff;"></i></h2></td>
-            <td style="padding-left: 10px;"><h2 style="color:#fff" _ngcontent-jyo-c6="">Instructions:</h2></td>
+            <td>
+              <h2 class="round-icon-wrapper"><i class="fas fa-info-circle" _ngcontent-jyo-c6="" style="color:#fff;"></i>
+              </h2>
+            </td>
+            <td style="padding-left: 10px;">
+              <h2 style="color:#fff" _ngcontent-jyo-c6="">Instructions:</h2>
+            </td>
           </tr>
         </table>
 
@@ -179,21 +194,27 @@
           </p>
           <ul>
             <li>Add associates using the <i class="fas fa-plus">Add</i> buttons.</li>
-            <li>Clicking the <i _ngcontent-ema-c17="" class="fas fa-pencil-alt ng-star-inserted"></i> icon will allow you to <strong>update associate names</strong> and <strong>modify share amounts</strong> to indicate share transfers.</li>
-            <li>Confirm changes by clicking <i _ngcontent-dqh-c17="" class="fas fa-save save ng-star-inserted"></i>.</li>
-            <li>Clicking the <i _ngcontent-ema-c17="" class="fas fa-trash-alt"></i> icon will <strong>remove</strong> an associate from your organization structure.</li>
+            <li>Clicking the <i _ngcontent-ema-c17="" class="fas fa-pencil-alt ng-star-inserted"></i> icon will allow
+              you to <strong>update associate names</strong> and <strong>modify share amounts</strong> to indicate share
+              transfers.</li>
+            <li>Confirm changes by clicking <i _ngcontent-dqh-c17="" class="fas fa-save save ng-star-inserted"></i>.
+            </li>
+            <li>Clicking the <i _ngcontent-ema-c17="" class="fas fa-trash-alt"></i> icon will <strong>remove</strong> an
+              associate from your organization structure.</li>
           </ul>
 
           <hr>
           <p>
-            <strong>Fees</strong> are calculated based on the types of changes you have made, multiplied by the number of licences you currently have. <strong>If you do not yet have a licence there is no charge for submitting changes</strong>.
+            <strong>Fees</strong> are calculated based on the types of changes you have made, multiplied by the number
+            of licences you currently have. <strong>If you do not yet have a licence there is no charge for submitting
+              changes</strong>.
           </p>
 
         </div>
       </section>
 
       <section class="submit-container"
-               style="background-color: #F2F2F2; color:#000; border: none; padding-left: 20px; padding-top: 5px;">
+        style="background-color: #F2F2F2; color:#000; border: none; padding-left: 20px; padding-top: 5px;">
 
         <h2 style="color: #000">Collection Notice:</h2>
         <div class="submit-content">
