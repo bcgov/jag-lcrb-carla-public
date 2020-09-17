@@ -74,5 +74,61 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Thrown when a required parameter is null
         /// </exception>
         Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioPmuarea>> Get1WithHttpMessagesAsync(string adoxioEventid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get adoxio_PMUAreaId from adoxio_licenceses
+        /// </summary>
+        /// <param name='adoxioLicencesid'>
+        /// key: adoxio_licencesid of adoxio_licences
+        /// </param>
+        /// <param name='select'>
+        /// Select properties to be returned
+        /// </param>
+        /// <param name='expand'>
+        /// Expand related entities
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioPmuarea>> Get2WithHttpMessagesAsync(string adoxioLicencesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get adoxio_PMUAreaId from incidents
+        /// </summary>
+        /// <param name='incidentid'>
+        /// key: incidentid of incident
+        /// </param>
+        /// <param name='select'>
+        /// Select properties to be returned
+        /// </param>
+        /// <param name='expand'>
+        /// Expand related entities
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioPmuarea>> Get3WithHttpMessagesAsync(string incidentid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
