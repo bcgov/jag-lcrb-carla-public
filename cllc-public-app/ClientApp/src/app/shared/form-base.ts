@@ -233,13 +233,13 @@ export class FormBase implements OnDestroy {
     }
 
 
-    public markConstrolsAsTouched(form: FormGroup | FormArray) {
+    public markControlsAsTouched(form: FormGroup | FormArray) {
         if (form instanceof FormGroup) {
             for (const c in form.controls) {
                 let control = form.get(c);
                 if (!control.valid) {
                     if (control instanceof FormGroup || control instanceof FormArray) {
-                        this.markConstrolsAsTouched(control);
+                        this.markControlsAsTouched(control);
                     } else {
                         control.markAsTouched();
                     }
@@ -249,7 +249,7 @@ export class FormBase implements OnDestroy {
             form.controls.forEach((control, index) => {
                 if (!control.valid) {
                     if (control instanceof FormGroup || control instanceof FormArray) {
-                        this.markConstrolsAsTouched(control);
+                        this.markControlsAsTouched(control);
                     } else {
                         control.markAsTouched();
                     }
