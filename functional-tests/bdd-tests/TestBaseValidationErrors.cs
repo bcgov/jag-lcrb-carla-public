@@ -218,7 +218,7 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please confirm that product will not be visible from the outside')]")).Displayed);
                 }
 
-                if ((applicationType == " structural change application") || (applicationType == " Rural Store application"))
+                if (applicationType == " structural change application")
                 {
                     // check missing description error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter a description')]")).Displayed);
