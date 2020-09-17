@@ -42,6 +42,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsIndividual { get; set; }
         public int? NumberofSharesNew { get; set; }
         public int? NumberofSharesOld { get; set; }
+        public int? NumberofNonVotingSharesNew { get; set; }
+        public int? NumberofNonVotingSharesOld { get; set; }
         public int? TotalSharesNew { get; set; }
         public int? TotalSharesOld { get; set; }
         public int? Statecode { get; set; }
@@ -176,6 +178,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 }
                 NumberofSharesNew = legalEntity.commonvotingshares;
                 NumberofSharesOld = legalEntity.commonvotingshares;
+                NumberofNonVotingSharesNew = legalEntity.commonnonvotingshares;
+                NumberofNonVotingSharesOld = legalEntity.commonnonvotingshares;
                 EmailNew = legalEntity.email;
                 EmailOld = legalEntity.email;
                 FirstNameNew = legalEntity.firstname;
