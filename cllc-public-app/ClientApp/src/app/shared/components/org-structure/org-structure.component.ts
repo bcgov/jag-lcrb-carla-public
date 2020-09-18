@@ -33,6 +33,7 @@ export class OrgStructureComponent implements OnInit {
   @Input() licencesOnFile: boolean;
   @Input() isReadOnly: boolean;
   @Output() deletedChanges: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
+  @Output() changesMade: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() reportAdditionalChanges: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @ViewChildren('associateList') associateList: QueryList<AssociateListComponent>;
@@ -85,25 +86,7 @@ export class OrgStructureComponent implements OnInit {
   }
 
   updateChildren(children: LicenseeChangeLog[], changeType: string) {
-
-    // children = children || [];
-    // this.node.children = this.node.children || [];
-    // if (changeType === 'Leadership') {
-    //   this.node.children = [...children,
-    //   ...this.node.individualShareholderChildren,
-    //   ...this.node.businessShareholderChildren];
-    // } else if (changeType === 'IndividualShareholder') {
-    //   this.node.children = [...children,
-    //   ...this.node.keyPersonnelChildren,
-    //   ...this.node.businessShareholderChildren
-    //   ];
-    // } else if (changeType === 'BusinessShareholder') {
-    //   this.node.children = [...children,
-    //   ...this.node.individualShareholderChildren,
-    //   ...this.node.keyPersonnelChildren
-    //   ];
-    // }
-
+    this.changesMade.next(true)
   }
 
   /**
