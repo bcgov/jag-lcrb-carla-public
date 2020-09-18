@@ -27,8 +27,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                     if (item.AdoxioApplicationType != null) {
                         var endorsement = new ViewModels.Endorsement()
                         {
-                            Id = item.AdoxioApplicationType.AdoxioApplicationtypeid,
-                            Name = item.AdoxioApplicationType.AdoxioName
+                            ApplicationTypeId = item.AdoxioApplicationType.AdoxioApplicationtypeid,
+                            ApplicationTypeName = item.AdoxioApplicationType.AdoxioName,
+                            EndorsementId = item.AdoxioEndorsementid,
+                            EndorsementName = item.AdoxioName
                         };
                         endorsementsList.Add(endorsement);
                     }
