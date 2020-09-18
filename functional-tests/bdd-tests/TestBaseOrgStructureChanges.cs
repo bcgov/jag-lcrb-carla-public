@@ -703,6 +703,10 @@ namespace bdd_tests
             NgWebElement uiAddPublicCorporationShares = ngDriver.FindElement(By.CssSelector("input[formcontrolname='numberofSharesNew']"));
             uiAddPublicCorporationShares.SendKeys(sharesPublicCorp);
 
+            // add the public corporation number of non voting shares
+            NgWebElement uiAddPublicCorporationNonVotingShares = ngDriver.FindElement(By.CssSelector("input[formcontrolname='numberOfNonVotingSharesNew']"));
+            uiAddPublicCorporationNonVotingShares.SendKeys(sharesPublicCorp);
+
             // select the public corporation organization type
             NgWebElement uiAddOrganizationTypePublicCorp = ngDriver.FindElement(By.CssSelector("[formcontrolname='businessType'] option[value='PublicCorporation']"));
             uiAddOrganizationTypePublicCorp.Click();
@@ -784,6 +788,10 @@ namespace bdd_tests
             NgWebElement uiAddSoleProprietorshipShares = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
             uiAddSoleProprietorshipShares.SendKeys(sharesSoleProprietorship);
 
+            // add the sole proprietorship number of non voting shares
+            NgWebElement uiAddSoleProprietorshipNonVotingShares = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='numberOfNonVotingSharesNew']"));
+            uiAddSoleProprietorshipNonVotingShares.SendKeys(sharesSoleProprietorship);
+
             // select the sole proprietorship organization type
             NgWebElement uiAddOrganizationTypeSoleProprietorship = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='SoleProprietorship']"));
             uiAddOrganizationTypeSoleProprietorship.Click();
@@ -845,6 +853,10 @@ namespace bdd_tests
             // add the society number of shares
             NgWebElement uiAddSocietyShares = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
             uiAddSocietyShares.SendKeys(sharesSociety);
+
+            // add the society number of non voting shares
+            NgWebElement uiAddSocietyNonVotingShares = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] input[formcontrolname='numberOfNonVotingSharesNew']"));
+            uiAddSocietyNonVotingShares.SendKeys(sharesSociety);
 
             // select the society organization type
             NgWebElement uiAddOrganizationTypeSociety = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Society']"));
@@ -926,6 +938,10 @@ namespace bdd_tests
             // add the trust number of shares
             NgWebElement uiAddTrustShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
             uiAddTrustShares.SendKeys(sharesTrust);
+
+            // add the trust number of non voting shares
+            NgWebElement uiAddTrustNonVotingShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberOfNonVotingSharesNew']"));
+            uiAddTrustNonVotingShares.SendKeys(sharesTrust);
 
             // select the trust organization type
             NgWebElement uiAddOrganizationTypeTrust = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Trust']"));
