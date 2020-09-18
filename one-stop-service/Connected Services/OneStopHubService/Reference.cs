@@ -24,7 +24,7 @@ namespace OneStopHubService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.1")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="receiveFromPartner", WrapperNamespace="http://142.32.211.230/SOAP.BCPartner", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReceiveFromPartner", WrapperNamespace="http://142.32.211.230/SOAP.BCPartner", IsWrapped=true)]
     public partial class receiveFromPartnerRequest
     {
         

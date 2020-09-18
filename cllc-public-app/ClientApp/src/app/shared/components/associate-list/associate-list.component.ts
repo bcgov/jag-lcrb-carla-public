@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, QueryList, ViewChildren, ChangeDetectorRef } from '@angular/core';
 import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
@@ -25,7 +25,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   @Input('personalHistoryItems') set personalHistoryItems(value: LicenseeChangeLog[]) {
     this.items = value || [];
   };
-  @Output() personalHistoryItemsChange = new EventEmitter<LicenseeChangeLog[]>();
+  @Output() changesMade = new EventEmitter<boolean>();
   @ViewChildren('orgStructure') orgStructureList: QueryList<OrgStructureComponent>;
 
   LicenseeChangeLog = LicenseeChangeLog;
@@ -37,6 +37,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
   }
 
   constructor(private fb: FormBuilder,
+    private cd: ChangeDetectorRef,
     public snackBar: MatSnackBar) {
     super();
     this.YearsAgo19 = new Date();
@@ -75,6 +76,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
       businessType: [''],
       numberofSharesNew: [''],
       numberofSharesOld: [''],
+      numberOfNonVotingSharesNew: [''],
+      numberOfNonVotingSharesOld: [''],
       totalSharesNew: [''],
       totalSharesOld: [''],
       emailNew: [''],
@@ -142,7 +145,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
       if (this.rootNode.businessType === 'Partnership') {
         group.get('interestPercentageNew').setValidators([Validators.required]);
       } else {
-        group.get('numberofSharesNew').setValidators([Validators.required]);
+        group.get('numberofSharesNew').setValidators([this.requireOneOfGroupValidator(['numberofSharesNew' , 'numberOfNonVotingSharesNew'])]);
+        group.get('numberOfNonVotingSharesNew').setValidators([this.requireOneOfGroupValidator(['numberofSharesNew' , 'numberOfNonVotingSharesNew'])]);
       }
     }
 
@@ -152,7 +156,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
       if (this.rootNode.businessType === 'Partnership') {
         group.get('interestPercentageNew').setValidators([Validators.required]);
       } else {
-        group.get('numberofSharesNew').setValidators([Validators.required]);
+        group.get('numberofSharesNew').setValidators([this.requireOneOfGroupValidator(['numberofSharesNew' , 'numberOfNonVotingSharesNew'])]);
+        group.get('numberOfNonVotingSharesNew').setValidators([this.requireOneOfGroupValidator(['numberofSharesNew' , 'numberOfNonVotingSharesNew'])]);
       }
       group.get('emailNew').setValidators([Validators.required, Validators.email]);
     }
@@ -189,20 +194,13 @@ export class AssociateListComponent extends FormBase implements OnInit {
     this.addFormArray(associate);
   }
 
-  emitValue() {
-    let value = [];
-    const controls = this.associates.controls;
-    for (let control in controls) {
-      if (control) {
-        // add item to value
-        value.push(controls[control].value);
-      }
-    }
-    this.personalHistoryItemsChange.emit(value);
-  }
-
   saveLog(index: number): Observable<boolean> {
+    for(var item in (<FormGroup>this.associates.at(index)).controls){
+      this.associates.at(index).get(item).updateValueAndValidity();
+    }
+
     const valid = this.associates.at(index).valid;
+    this
     const patchValue = <LicenseeChangeLog>{};
     let value = this.associates.at(index).value;
     value = Object.assign(new LicenseeChangeLog, value);
@@ -242,7 +240,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
 
 
         this.associates.at(index).patchValue(patchValue);
-        this.emitValue();
+        this.changesMade.next(true);
         saved = true;
       } else {
         // put associate into edit mode to show validation errors
@@ -286,7 +284,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
     }
   }
 
-  getData(): LicenseeChangeLog[]{
+  getData(): LicenseeChangeLog[] {
     let res = [];
     const controls = this.associates.controls;
     for (let control in controls) {
@@ -294,7 +292,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
       if (control) {
         // check for children
         let childOrgs = this.orgStructureList.filter(item => item.parentAssociate === controls[control]);
-        if(childOrgs.length){
+        if (childOrgs.length) {
           let childOrg = childOrgs[0];
           value = childOrg.getData();
         }
@@ -314,6 +312,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
     node.isShareholderNew = node.isShareholderOld;
     node.isTrusteeNew = node.isTrusteeOld;
     node.numberofSharesNew = node.numberofSharesOld;
+    node.numberOfNonVotingSharesNew = node.numberOfNonVotingSharesOld;
     node.totalSharesNew = node.totalSharesOld;
     node.emailNew = node.emailOld;
     node.firstNameNew = node.firstNameOld;
@@ -333,7 +332,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
         node.changeType = 'removeBusinessShareholder';
       }
     }
-    this.emitValue();
+    this.changesMade.next(true);
   }
 
   isNameChangePerformed(changeLog: LicenseeChangeLog): boolean {
