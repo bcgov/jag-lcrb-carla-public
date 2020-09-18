@@ -791,7 +791,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 
                 if (licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0)
                 {
-                    endorsementsText += item.ToHtml(_dynamicsClient);
+                    foreach (ViewModels.Endorsement endorsement in licenceVM.Endorsements)
+                    {
+                        endorsementsText += endorsement.ToHtml(_dynamicsClient);
+                    }
                 }
 
                 var storeHours = $@"
