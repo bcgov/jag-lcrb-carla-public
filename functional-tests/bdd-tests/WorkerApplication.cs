@@ -88,9 +88,9 @@ namespace bdd_tests
             Page Title: Worker Security Verification Application - Step 1
             */
 
-            string previousFirst = "First";
-            string previousMiddle = "Middle";
-            string previousLast = "Last";
+            //string previousFirst = "First";
+            //string previousMiddle = "Middle";
+            //string previousLast = "Last";
             string birthCityCountry = "Victoria, Canada";
             string BCDL = "1234568";
             string BCID = "123456789";
@@ -101,6 +101,7 @@ namespace bdd_tests
             string mailingProvince = "BC";
             string postalCode = "V8V4Y3";
 
+            /* - under development
             // click on link to add previous name
             NgWebElement uiPreviousNameLink = ngDriver.FindElement(By.CssSelector("div:nth-child(3) span a"));
             uiPreviousNameLink.Click();
@@ -119,6 +120,7 @@ namespace bdd_tests
             NgWebElement uiPreviousLastName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lastname']"));
             uiPreviousLastName.Click();
             //uiPreviousLastName.SendKeys(previousLast);
+            */
 
             // enter the birth city and country
             NgWebElement uiBirthCityCountry = ngDriver.FindElement(By.CssSelector("input[formcontrolname='birthPlace']"));
