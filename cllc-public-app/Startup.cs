@@ -277,15 +277,30 @@ namespace Gov.Lclb.Cllb.Public
                                         "https://justice.gov.bc.ca");
                 });
             });
+            /*
 
+            services.AddHttpClient("Dynamics", c =>
+                {
 
+                    c.BaseAddress = new Uri(dynamicsOdataUri);
+                })
+                .AddPolicyHandler(GetRetryPolicy())
+                .AddPolicyHandler(GetCircuitBreakerPolicy());
+            
             services.AddTransient(new Func<IServiceProvider, IDynamicsClient>((serviceProvider) =>
             {
+                var service = serviceProvider.GetRequiredService<System.Net.Http.IHttpClientFactory>();
+                var httpClient = service.CreateClient("Dynamics");
 
-                IDynamicsClient client = DynamicsSetupUtil.SetupDynamics(_configuration);
+                IDynamicsClient client = new DynamicsClient(httpClient, _configuration);
 
                 return client;
             }));
+            */
+
+            services.AddHttpClient<IDynamicsClient, DynamicsClient>()
+                .AddPolicyHandler(GetRetryPolicy())
+                .AddPolicyHandler(GetCircuitBreakerPolicy());
 
 
             // add BCeID Web Services
@@ -412,7 +427,14 @@ namespace Gov.Lclb.Cllb.Public
             using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 log.LogDebug("Fetching the application's MS Dynamics interface ...");
-                IDynamicsClient dynamicsClient = serviceScope.ServiceProvider.GetService<IDynamicsClient>();
+                var httpClientFactory = serviceScope.ServiceProvider.GetService<System.Net.Http.IHttpClientFactory>();
+
+                
+                var httpClient = httpClientFactory.CreateClient("Dynamics");
+
+                IDynamicsClient dynamicsClient = new DynamicsClient(httpClient, _configuration);
+
+
                 // run the database seeders
                 log.LogDebug("Adding/Updating seed data ...");
                 Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(_configuration, env, loggerFactory, dynamicsClient);
