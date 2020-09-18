@@ -175,8 +175,9 @@
                         <th style="width: 200px;">Last Name</th>
                         <th style="width: 200px;" *ngIf="rootNode.businessType !== 'Partnership'">Number of
                             Voting Shares</th>
-                        <th style="width: 200px;" *ngIf="rootNode.businessType === 'Partnership'">Interest (%)
-                        </th>
+                        <th style="width: 200px;" *ngIf="rootNode.businessType === 'Partnership'">Interest (%) </th>
+                        <th style="width: 200px;" *ngIf="rootNode.businessType !== 'Partnership'">Number of
+                            Non Voting Shares</th>
                         <th style="min-width: 200px;">Email</th>
                         <th style="width: 150px;">Date of Birth</th>
                         <!-- <th *ngIf="false">Liquor Associate Status </th>
@@ -242,6 +243,22 @@
                                         </div>
                                     </app-field>
                                 </ng-container>
+                            </td>
+                            <td *ngIf="rootNode.businessType !== 'Partnership'">
+                                <span *ngIf="!associate.get('edit').value">
+                                    {{associate.get('numberOfNonVotingSharesNew').value}}
+                                </span>
+
+                                <app-field [showChevrons]="false" *ngIf="associate.get('edit').value"
+                                    [isFullWidth]="true"
+                                    [valid]="!associate.get('numberOfNonVotingSharesNew').touched || associate.get('numberOfNonVotingSharesNew').valid"
+                                    errorMessage="Please enter Shares">
+                                    <div class="d-flex">
+                                        <input class="form-control" type="text"
+                                            (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                                            formControlName="numberOfNonVotingSharesNew">
+                                    </div>
+                                </app-field>
                             </td>
                             <td>
                                 <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
@@ -327,6 +344,8 @@
                             Voting Shares</th>
                         <th style="width: 200px;" *ngIf="rootNode.businessType === 'Partnership'">Interest (%)
                         </th>
+                        <th style="width: 200px;" *ngIf="rootNode.businessType !== 'Partnership'">Number of
+                            Non Voting Shares</th>
                         <th style="width: 200px;">Business Type</th>
                         <th style="width: 200px;">Email</th>
                         <!-- <th *ngIf="false">Liquor Associate Status </th>
@@ -374,6 +393,19 @@
                                             formControlName="numberofSharesNew">
                                     </app-field>
                                 </ng-container>
+                            </td>
+                            <td *ngIf="rootNode.businessType !== 'Partnership'">
+                                <span *ngIf="!associate.get('edit').value">
+                                    {{associate.get('numberOfNonVotingSharesNew').value}}
+                                </span>
+                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                    [isFullWidth]="true"
+                                    [valid]="!associate.get('numberOfNonVotingSharesNew').touched || associate.get('numberOfNonVotingSharesNew').valid"
+                                    errorMessage="Please enter Shares">
+                                    <input class="form-control" type="text"
+                                        (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                                        formControlName="numberOfNonVotingSharesNew">
+                                </app-field>
                             </td>
                             <td>
                                 <span *ngIf="!associate.get('edit').value || associate.get('id').value">
@@ -432,8 +464,10 @@
                                         </mat-panel-description>
                                     </mat-expansion-panel-header>
                                     <section style="text-align: left;">
-                                        <app-org-structure [parentAssociate]="associate" [node]="associate.value" [isReadOnly]="isReadOnly"
-                                            [account]="account" [licencesOnFile]="licencesOnFile" #orgStructure>
+                                        <app-org-structure [parentAssociate]="associate" [node]="associate.value"
+                                            [isReadOnly]="isReadOnly" [account]="account"
+                                            [licencesOnFile]="licencesOnFile" (changesMade)="changesMade.next(true)"
+                                            #orgStructure>
                                         </app-org-structure>
                                     </section>
                                 </mat-expansion-panel>
@@ -447,7 +481,8 @@
 
 
     <br>
-    <button class="btn btn-secondary Add{{changeTypeSuffix}}" (click)="addAssociate()" style="text-transform: uppercase;">
+    <button class="btn btn-secondary Add{{changeTypeSuffix}}" (click)="addAssociate()"
+        style="text-transform: uppercase;">
         <i class="fas fa-plus"></i>
         {{addLabel}}</button>
 </div>
