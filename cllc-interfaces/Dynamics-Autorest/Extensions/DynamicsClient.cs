@@ -1,6 +1,12 @@
+
+
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Gov.Lclb.Cllb.Interfaces
 {
     using Microsoft.Rest;
+    using Microsoft.Extensions.Configuration;
+    using System.Net.Http;
     using Models;
     using System;
     using System.Collections.Generic;
@@ -10,12 +16,52 @@ namespace Gov.Lclb.Cllb.Interfaces
     /// <summary>
     /// Auto Generated
     /// </summary>
-    public partial class DynamicsClient : ServiceClient<DynamicsClient>, IDynamicsClient
+    public partial class DynamicsClient : IDynamicsClient
     {
         /// <summary>
         /// The base URI of the service.
         /// </summary>
         public System.Uri NativeBaseUri { get; set; }
+
+        private readonly IConfiguration _configuration;
+
+        [ActivatorUtilitiesConstructor]
+        public DynamicsClient(HttpClient httpClient, IConfiguration configuration) 
+        {
+            Initialize();
+
+            HttpClient = httpClient;
+
+            _configuration = configuration;
+            
+            string baseUri = _configuration["DYNAMICS_ODATA_URI"]; // Dynamics ODATA endpoint
+
+            if (string.IsNullOrEmpty(baseUri))
+            {
+                throw new Exception("Configuration setting DYNAMICS_ODATA_URI is blank.");
+            }
+
+            ServiceClientCredentials credentials = DynamicsSetupUtil.GetServiceClientCredentials(_configuration);
+            BaseUri = new Uri(baseUri);
+            Credentials = credentials;
+
+            // set the native client URI.  This is required if you have a reverse proxy or IFD in place and the native URI is different from your access URI.
+            if (string.IsNullOrEmpty(_configuration["DYNAMICS_NATIVE_ODATA_URI"]))
+            {
+                NativeBaseUri = new Uri(_configuration["DYNAMICS_ODATA_URI"]);
+            }
+            else
+            {
+                NativeBaseUri = new Uri(_configuration["DYNAMICS_NATIVE_ODATA_URI"]);
+            }
+
+            if (Credentials != null)
+            {
+                Credentials.InitializeServiceClient(this);
+            }
+
+            
+        }
 
         public string GetEntityURI(string entityType, string id)
         {
