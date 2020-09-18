@@ -1,11 +1,8 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.OneStopService;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace WebApplicationSoap.OneStop
@@ -20,7 +17,7 @@ namespace WebApplicationSoap.OneStop
          */
         public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence)
         {
-            if(licence == null)
+            if (licence == null)
             {
                 throw new Exception("The licence can not be null");
             }
@@ -53,7 +50,7 @@ namespace WebApplicationSoap.OneStop
             header.senderID = OneStopUtils.SENDER_ID;
             header.receiverID = OneStopUtils.RECEIVER_ID;
             //any note wanted by LCRB. Currently in liquor is: licence Id, licence number - sequence number
-            header.partnerNote = licence.AdoxioLicencenumber;                   
+            header.partnerNote = licence.AdoxioLicencenumber;
 
             header.CCRAHeader = GetCCRAHeader(licence);
 
@@ -90,7 +87,7 @@ namespace WebApplicationSoap.OneStop
             {
                 userCredentials.lastName = "N/A";
             }
-            
+
 
             return userCredentials;
         }
@@ -119,13 +116,13 @@ namespace WebApplicationSoap.OneStop
             }
 
             // convert the XML to a string.
-            using (var stringwriter = new System.IO.StringWriter())
+            using (var stringwriter = new StringWriter())
             {
-               
+
                 XmlSerializer serializer = new XmlSerializer(primaryContactDetails.GetType());
                 serializer.Serialize(stringwriter, primaryContactDetails);
-                return stringwriter.ToString();                
-            };            
+                return stringwriter.ToString();
+            }
         }
 
         private SBNProgramAccountDetailsBroadcastBody GetProgramAccountDetailsBroadcastBody(MicrosoftDynamicsCRMadoxioLicences licence)
@@ -134,33 +131,33 @@ namespace WebApplicationSoap.OneStop
 
             // BN9
             programAccountDetailsBroadcastBody.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
-            
+
             // this code identifies that the message is from LCRB.  It's the same in every message from LCRB
             programAccountDetailsBroadcastBody.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
-            
+
             // reference number received on SBNCreateProgramAccountResponseBody.businessProgramAccountReferenceNumber
             programAccountDetailsBroadcastBody.businessProgramAccountReferenceNumber = licence.AdoxioBusinessprogramaccountreferencenumber;
 
             // Set the SBNProgramTypeCode to the value specified in the licence -> licenceType record.
 
-            if (licence?.AdoxioLicenceType?.AdoxioOnestopprogramaccounttype != null )
+            if (licence?.AdoxioLicenceType?.AdoxioOnestopprogramaccounttype != null)
             {
                 programAccountDetailsBroadcastBody.SBNProgramTypeCode = licence?.AdoxioLicenceType?.AdoxioOnestopprogramaccounttype.ToString();
             }
             else
             {
-                if ("Cannabis Retail Store" == licence?.AdoxioLicenceType?.AdoxioName  )
+                if ("Cannabis Retail Store" == licence?.AdoxioLicenceType?.AdoxioName)
                 {
                     programAccountDetailsBroadcastBody.SBNProgramTypeCode = OneStopUtils.PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE;
                 }
-                
+
             }
-            
+
 
             programAccountDetailsBroadcastBody.businessCore = GetBusinessCore(licence);
 
             programAccountDetailsBroadcastBody.programAccountStatus = GetProgramAccountStatus(licence);
-            
+
             // the legal name of the establishment
             programAccountDetailsBroadcastBody.legalName = licence.AdoxioLicencee.Name;
 
@@ -169,7 +166,7 @@ namespace WebApplicationSoap.OneStop
             programAccountDetailsBroadcastBody.businessAddress = GetBusinessAddress(licence);
 
             programAccountDetailsBroadcastBody.mailingAddress = GetMailingAddress(licence);
-            
+
             // licence number
             programAccountDetailsBroadcastBody.partnerInfo1 = licence.AdoxioLicencenumber;
 
@@ -182,7 +179,7 @@ namespace WebApplicationSoap.OneStop
             if (licence.AdoxioExpirydate != null)
             {
                 programAccountDetailsBroadcastBody.expiryDate = licence.AdoxioExpirydate.Value.ToString("yyyy-MM-dd");
-            }            
+            }
 
             return programAccountDetailsBroadcastBody;
         }
@@ -275,6 +272,6 @@ namespace WebApplicationSoap.OneStop
 
             return foreignLegacyMailing;
         }
-        
+
     }
 }

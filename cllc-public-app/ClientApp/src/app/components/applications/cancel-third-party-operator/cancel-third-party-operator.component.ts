@@ -120,7 +120,7 @@ export class CancelThirdPartyOperatorComponent extends FormBase implements OnIni
   }
 
   isValid(): boolean {
-    this.markConstrolsAsTouched(this.form);
+    this.markControlsAsTouched(this.form);
     this.showValidationMessages = false;
     this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
