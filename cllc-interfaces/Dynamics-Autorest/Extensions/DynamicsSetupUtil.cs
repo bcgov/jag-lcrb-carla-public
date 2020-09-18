@@ -11,25 +11,25 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static class DynamicsSetupUtil
     {
 
-        public static ServiceClientCredentials GetServiceClientCredentials(IConfiguration Configuration)
+        public static ServiceClientCredentials GetServiceClientCredentials(IConfiguration configuration)
         {
             // Cloud - x.dynamics.com
-            string aadTenantId = Configuration["DYNAMICS_AAD_TENANT_ID"]; // Cloud AAD Tenant ID
-            string serverAppIdUri = Configuration["DYNAMICS_SERVER_APP_ID_URI"]; // Cloud Server App ID URI
-            string appRegistrationClientKey = Configuration["DYNAMICS_APP_REG_CLIENT_KEY"]; // Cloud App Registration Client Key
-            string appRegistrationClientId = Configuration["DYNAMICS_APP_REG_CLIENT_ID"]; // Cloud App Registration Client Id
+            string aadTenantId = configuration["DYNAMICS_AAD_TENANT_ID"]; // Cloud AAD Tenant ID
+            string serverAppIdUri = configuration["DYNAMICS_SERVER_APP_ID_URI"]; // Cloud Server App ID URI
+            string appRegistrationClientKey = configuration["DYNAMICS_APP_REG_CLIENT_KEY"]; // Cloud App Registration Client Key
+            string appRegistrationClientId = configuration["DYNAMICS_APP_REG_CLIENT_ID"]; // Cloud App Registration Client Id
 
             // One Premise ADFS (2016)
-            string adfsOauth2Uri = Configuration["ADFS_OAUTH2_URI"]; // ADFS OAUTH2 URI - usually /adfs/oauth2/token on STS
-            string applicationGroupResource = Configuration["DYNAMICS_APP_GROUP_RESOURCE"]; // ADFS 2016 Application Group resource (URI)
-            string applicationGroupClientId = Configuration["DYNAMICS_APP_GROUP_CLIENT_ID"]; // ADFS 2016 Application Group Client ID
-            string applicationGroupSecret = Configuration["DYNAMICS_APP_GROUP_SECRET"]; // ADFS 2016 Application Group Secret
-            string serviceAccountUsername = Configuration["DYNAMICS_USERNAME"]; // Service account username
-            string serviceAccountPassword = Configuration["DYNAMICS_PASSWORD"]; // Service account password
+            string adfsOauth2Uri = configuration["ADFS_OAUTH2_URI"]; // ADFS OAUTH2 URI - usually /adfs/oauth2/token on STS
+            string applicationGroupResource = configuration["DYNAMICS_APP_GROUP_RESOURCE"]; // ADFS 2016 Application Group resource (URI)
+            string applicationGroupClientId = configuration["DYNAMICS_APP_GROUP_CLIENT_ID"]; // ADFS 2016 Application Group Client ID
+            string applicationGroupSecret = configuration["DYNAMICS_APP_GROUP_SECRET"]; // ADFS 2016 Application Group Secret
+            string serviceAccountUsername = configuration["DYNAMICS_USERNAME"]; // Service account username
+            string serviceAccountPassword = configuration["DYNAMICS_PASSWORD"]; // Service account password
 
             // API Gateway to NTLM user.  This is used in v8 environments.  Note that the SSG Username and password are not the same as the NTLM user.
-            string ssgUsername = Configuration["SSG_USERNAME"];  // BASIC authentication username
-            string ssgPassword = Configuration["SSG_PASSWORD"];  // BASIC authentication password
+            string ssgUsername = configuration["SSG_USERNAME"];  // BASIC authentication username
+            string ssgPassword = configuration["SSG_PASSWORD"];  // BASIC authentication password
 
 
 
@@ -125,7 +125,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (string.IsNullOrEmpty(dynamicsOdataUri))
             {
-                throw new Exception("Configuration setting DYNAMICS_ODATA_URI is blank.");
+                throw new Exception("configuration setting DYNAMICS_ODATA_URI is blank.");
             }
 
             ServiceClientCredentials serviceClientCredentials = GetServiceClientCredentials(Configuration);
@@ -141,6 +141,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 client.NativeBaseUri = new Uri(Configuration["DYNAMICS_NATIVE_ODATA_URI"]);
             }
+
+            return client;
+        }
+
+        public static IDynamicsClient SetupDynamics(HttpClient httpClient, IConfiguration Configuration)
+        {
+            
+            IDynamicsClient client = new DynamicsClient(httpClient, Configuration);
 
             return client;
         }

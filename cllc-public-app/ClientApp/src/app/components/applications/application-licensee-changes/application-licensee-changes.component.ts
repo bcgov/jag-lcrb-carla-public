@@ -155,7 +155,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       label = 'Submit Organization Information';
     }
     // if Organization Information on File  AND no changes
-    else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
+    else if (this.thereIsExistingOrgStructure && (this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot))) {
       label = 'Confirm Organization Information Is Complete';
     }
     return label.toUpperCase();
@@ -175,7 +175,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     let errors = [];
     let fileErrors = [];
 
-    let data = this.orgStructure.getData();
+    let data = this.treeRoot;
 
     // Only check file validation errors if changes were made
     if (!this.thereIsExistingOrgStructure || (data && LicenseeChangeLog.HasChanges(data))) {
@@ -238,7 +238,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   }
 
-  saveReadOnly(){
+  saveReadOnly() {
     this.saveComplete.emit(true);
     if (this.redirectToDashboardOnSave) {
       this.router.navigateByUrl('/dashboard');
@@ -249,57 +249,63 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    * Sends data to dynamics
    */
   save() {
+    let noChanges = (this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.treeRoot));
+    let validateResult = this.orgStructure.saveAll();
 
-  
-    this.orgStructure.saveAll()
-      .subscribe(result => {
-        this.validationErrors = this.validateFormData();
-        if (!result) {
-          this.validationErrors = ['There are incomplete fields on the page', ...this.validationErrors];
-        }
-        if (this.validationErrors.length === 0) {
-          // set value to cause invoice generationP
-          this.busyPromise = this.prepareSaveRequest()
+    if (noChanges) {
+      validateResult = of(true);
+    }
 
-            .pipe(mergeMap(results => {
-              const saveOverrideValue = { invoiceTrigger: 1 };
+    validateResult.subscribe(result => {
+      this.validationErrors = this.validateFormData();
+      if (!result) {
+        this.validationErrors = ['There are incomplete fields on the page', ...this.validationErrors];
+      }
 
-              return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
-                .pipe(takeWhile(() => this.componentActive))
-                .toPromise()
-                .then(app => {
-                  // payment is required
-                  if (app && app.adoxioInvoiceId) {
-                    this.submitPayment();
-                  } else if (app) { // go to the application page
-                    // mark application as complete
-                    let saveData = { ...this.application, ...this.form.value };
-                    if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
-                      saveData.isApplicationComplete = 'Yes';
-                    }
 
-                    this.applicationDataService.updateApplication(saveData)
-                      .subscribe(res => {
-                        this.loadedValue = this.cleanSaveData(this.treeRoot);  // Update loadedValue to prevent double saving
-                        this.saveComplete.emit(true);
-                        if (this.redirectToDashboardOnSave) {
-                          this.router.navigateByUrl('/dashboard');
-                        }
-                      });
+      if (this.validationErrors.length === 0 || noChanges) {
+        // set value to cause invoice generationP
+        this.busyPromise = this.prepareSaveRequest()
+
+          .pipe(mergeMap(results => {
+            const saveOverrideValue = { invoiceTrigger: 1 };
+
+            return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
+              .pipe(takeWhile(() => this.componentActive))
+              .toPromise()
+              .then(app => {
+                // payment is required
+                if (app && app.adoxioInvoiceId) {
+                  this.submitPayment();
+                } else if (app) { // go to the application page
+                  // mark application as complete
+                  let saveData = { ...this.application, ...this.form.value };
+                  if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
+                    saveData.isApplicationComplete = 'Yes';
                   }
-                  return of(app);
-                });
-            }))
-            .toPromise()
-            .then(() => {
-              this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
 
-            })
-            .catch(() => {
-              this.snackBar.open('Error saving application', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
-            });
-        }
-      });
+                  this.applicationDataService.updateApplication(saveData)
+                    .subscribe(res => {
+                      this.loadedValue = this.cleanSaveData(this.treeRoot);  // Update loadedValue to prevent double saving
+                      this.saveComplete.emit(true);
+                      if (this.redirectToDashboardOnSave) {
+                        this.router.navigateByUrl('/dashboard');
+                      }
+                    });
+                }
+                return of(app);
+              });
+          }))
+          .toPromise()
+          .then(() => {
+            this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+
+          })
+          .catch(() => {
+            this.snackBar.open('Error saving application', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
+          });
+      }
+    });
   }
 
   /**
@@ -321,8 +327,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   private prepareSaveRequest() {
     this.validationErrors = [];
 
-    const data = this.cleanSaveData(this.orgStructure.getData());
-    return this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: this.treeRoot.numberOfMembers, annualMembershipFee: this.treeRoot.annualMembershipFee }, this.currentLegalEntities.id)
+    const data = this.cleanSaveData(this.treeRoot);
+    return this.legalEntityDataService.updateLegalEntity({ ...this.currentLegalEntities, numberOfMembers: data.numberOfMembers, annualMembershipFee: data.annualMembershipFee }, this.currentLegalEntities.id)
       .pipe(mergeMap(result => {
         // do something with result
         return this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId);
@@ -343,7 +349,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
             .toPromise()
             .then(() => {
               this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-              this.loadedValue = this.cleanSaveData(this.orgStructure.getData());  // Update loadedValue to prevent double saving
+              this.loadedValue = this.cleanSaveData(this.treeRoot);  // Update loadedValue to prevent double saving
               if (navigateAfterSaving) {
                 this.router.navigateByUrl('/dashboard');
               }
@@ -362,19 +368,19 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   canDeactivate(): Observable<boolean> {
-    const data = this.cleanSaveData(this.orgStructure.getData());
+    const data = this.cleanSaveData(this.treeRoot);
     if (JSON.stringify(data) === JSON.stringify(this.loadedValue)) { //no change made. Skip save
       return of(true);
     }
     return this.saveForLater(false);
   }
-  
+
   calculateSubTotal(can, liq): string {
 
-      const cannabis = can * this.numberOfCannabisLicences;
-      const liquor = liq * this.numberOfLiquorLicences;
-      const total = cannabis + liquor;
-      return total.toString();
+    const cannabis = can * this.numberOfCannabisLicences;
+    const liquor = liq * this.numberOfLiquorLicences;
+    const total = cannabis + liquor;
+    return total.toString();
   }
 
   /**

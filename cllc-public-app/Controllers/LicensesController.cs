@@ -523,20 +523,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 try
                 {
-                    var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue )).FirstOrDefault();
+                    var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue)).FirstOrDefault();
                     string lginvalue;
                     string policevalue;
 
 
-                    if(licenceApp == null){
-                        if(adoxioLicense?._adoxioLginValue != null){
+                    if (licenceApp == null)
+                    {
+                        if (adoxioLicense?._adoxioLginValue != null)
+                        {
                             lginvalue = adoxioLicense?._adoxioLginValue;
-                        } else {
+                        }
+                        else
+                        {
                             lginvalue = adoxioLicense?.AdoxioEstablishment._adoxioLginValue;
-                        }                        
-                    } else {
+                        }
+                    }
+                    else
+                    {
                         lginvalue = licenceApp._adoxioLocalgovindigenousnationidValue;
-                    
+
                     }
 
                     if (!string.IsNullOrEmpty(lginvalue))
@@ -544,7 +550,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", lginvalue);
                     }
 
-                    licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioPolicejurisdictionidValue )).FirstOrDefault();
+                    licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioPolicejurisdictionidValue)).FirstOrDefault();
                     // Police Jurisdiction association
                     if (!string.IsNullOrEmpty(licenceApp?._adoxioPolicejurisdictionidValue))
                     {
@@ -575,7 +581,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     string filter = $"_adoxio_licenceid_value eq {licenceId}";
                     string applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", application.AdoxioApplicationid);
-                    
+
                     IList<MicrosoftDynamicsCRMadoxioServicearea> areas = _dynamicsClient.Serviceareas.Get(filter: filter).Value;
                     foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
                     {
@@ -782,14 +788,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var endorsementsText = "";
                 License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
-                foreach (var item in licenceVM.Endorsements)
+                
+                if (licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0)
                 {
                     endorsementsText += item.ToHtml(_dynamicsClient);
                 }
 
                 var storeHours = $@"
                 <tr>
-                    <td>Start</td>
+                    <td>Open</td>
                     <td>9:00 am</td>
                     <td>9:00 am</td>
                     <td>9:00 am</td>
@@ -799,7 +806,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>9:00 am</td>
                 </tr>                
                 <tr>
-                    <td>End</td>
+                    <td>Close</td>
                     <td>11:00 pm</td>
                     <td>11:00 pm</td>
                     <td>11:00 pm</td>
@@ -912,6 +919,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     var templateName = "cannabis_licence";
+                    
+
 
                     switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
                     {
@@ -921,15 +930,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         case "Catering":
                             templateName = "catering_licence";
                             break;
-                        
+
                         case "UBrew and UVin":
                             templateName = "wine_store_licence";
                             break;
-                        
+
                         case "Licensee Retail Store":
                             templateName = "wine_store_licence";
-                            break;                        
-                        
+                            break;
+
                         case "Wine Store":
                             templateName = "wine_store_licence";
                             break;

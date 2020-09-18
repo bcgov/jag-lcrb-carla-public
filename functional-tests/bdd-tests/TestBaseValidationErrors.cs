@@ -74,6 +74,23 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Corporation Notice of Articles ')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Central Securities Register ')]")).Displayed);
             }
+            else if (applicationType == " partnership org structure")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more shareholders ')]")).Displayed);
+            }
+            else if (applicationType == " public corporation org structure")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more key personnel ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Corporation Notice of Articles ')]")).Displayed);
+            }
+            else if (applicationType == " society org structure")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more  directors & officers ')]")).Displayed);
+            }
+            else if (applicationType == " sole proprietorship org structure")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have a leader ')]")).Displayed);
+            }
             else
             {
                 // check missing authorized to submit error is thrown
@@ -113,11 +130,11 @@ namespace bdd_tests
                 {
                     // check missing police jurisdiction error is thrown
                     // under review - see LCSD-3846
-                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'policeJurisdiction is not valid')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Police Jurisdiction is not valid')]")).Displayed);
 
                     // check missing indigenous nation error is thrown
                     // under review - see LCSD-3846
-                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'indigenousNation is not valid')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Indigenous Nation is not valid')]")).Displayed);
                 }
 
                 if ((applicationType == " Manufacturing application") || (applicationType == " Cannabis application") || (applicationType == " Catering application") || (applicationType == " location change application") || (applicationType == "n indigenous nation Cannabis application"))
@@ -201,7 +218,7 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please confirm that product will not be visible from the outside')]")).Displayed);
                 }
 
-                if ((applicationType == " structural change application") || (applicationType == " Rural Store application"))
+                if (applicationType == " structural change application")
                 {
                     // check missing description error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter a description')]")).Displayed);
@@ -228,7 +245,7 @@ namespace bdd_tests
                 if (applicationType == "n indigenous nation Cannabis application")
                 {
                     // check missing IN error is shown
-                    // waiting for bug fix: LCSD-3671
+                    // waiting for bug fix: LCSD-3846
                 }
 
                 if (applicationType == " licence renewal application")
@@ -253,10 +270,6 @@ namespace bdd_tests
 
                 if (applicationType == " structural alterations request")
                 {
-                    // check that missing capacity error is thrown
-                    // under review - see LCSD-3803
-                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
-
                     // check missing floor plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
                 }
@@ -265,7 +278,7 @@ namespace bdd_tests
                 {
                     // check that service hours error is thrown
                     // under review - see LCSD-3849
-                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'serviceHoursWednesdayOpen is not valid')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Service Hours Wednesday Open is not valid')]")).Displayed);
 
                     // check missing site plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
@@ -275,7 +288,7 @@ namespace bdd_tests
 
                     // check that missing hours of sale error is thrown
                     // under review - see LCSD-3849
-                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Hours of sale are required')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Hours of sale are to be confirmed')]")).Displayed);
                 }
 
                 if (applicationType == " third party operator")
@@ -286,10 +299,6 @@ namespace bdd_tests
 
                 if (applicationType == " picnic area endorsement")
                 {
-                    // check that missing capacity error is thrown
-                    // under review - see LCSD-3803
-                    // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'capacityArea.capacity is not valid')]")).Displayed);
-
                     // check missing site plan document error is thrown
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
                 }

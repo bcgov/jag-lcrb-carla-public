@@ -13,6 +13,7 @@ LABEL com.redhat.component="rh-dotnet31-jenkins-slave-container" \
 # Don't download/extract docs for nuget packages
 # Enable nodejs and dotnet scl
 ENV DOTNET_CORE_VERSION=3.1 \
+    TZ=GMT-7 \
     BASH_ENV=/usr/local/bin/scl_enable \
     ENV=/usr/local/bin/scl_enable \
     PROMPT_COMMAND=". /usr/local/bin/scl_enable" \

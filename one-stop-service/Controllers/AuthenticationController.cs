@@ -11,11 +11,11 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
     [Route("api/authentication")]
     public class AuthenticationController : Controller
     {
-        private readonly IConfiguration Configuration;
+        private readonly IConfiguration _configuration;
 
-        public AuthenticationController(IConfiguration configuration) 
+        public AuthenticationController(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -28,15 +28,15 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         public string GetToken(string secret)
         {
             string result = "Invalid secret.";
-            string configuredSecret = Configuration["JWT_TOKEN_KEY"];
+            string configuredSecret = _configuration["JWT_TOKEN_KEY"];
             if (configuredSecret.Equals(secret))
             {
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_TOKEN_KEY"]));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var jwtSecurityToken = new JwtSecurityToken(
-                    Configuration["JWT_VALID_ISSUER"],
-                    Configuration["JWT_VALID_AUDIENCE"],
+                    _configuration["JWT_VALID_ISSUER"],
+                    _configuration["JWT_VALID_AUDIENCE"],
                     expires: DateTime.UtcNow.AddYears(5),
                     signingCredentials: creds
                     );
