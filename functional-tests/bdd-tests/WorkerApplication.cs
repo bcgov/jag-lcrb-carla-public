@@ -105,19 +105,20 @@ namespace bdd_tests
             NgWebElement uiPreviousNameLink = ngDriver.FindElement(By.CssSelector("div:nth-child(3) span a"));
             uiPreviousNameLink.Click();
 
-            System.Threading.Thread.Sleep(2000);
-
             // enter the previous first name
-            NgWebElement uiPreviousFirstName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstname']"));
-            uiPreviousFirstName.SendKeys(previousFirst);
+            NgWebElement uiPreviousFirstName = ngDriver.FindElement(By.CssSelector("section:nth-child(2) input"));
+            uiPreviousFirstName.Click();
+            //uiPreviousFirstName.SendKeys(previousFirst);
 
             // enter the previous middle name
             NgWebElement uiPreviousMiddleName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='middlename']"));
-            uiPreviousMiddleName.SendKeys(previousMiddle);
+            uiPreviousMiddleName.Click();
+            //uiPreviousMiddleName.SendKeys(previousMiddle);
 
             // enter the previous last name
             NgWebElement uiPreviousLastName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lastname']"));
-            uiPreviousLastName.SendKeys(previousLast);
+            uiPreviousLastName.Click();
+            //uiPreviousLastName.SendKeys(previousLast);
 
             // enter the birth city and country
             NgWebElement uiBirthCityCountry = ngDriver.FindElement(By.CssSelector("input[formcontrolname='birthPlace']"));
