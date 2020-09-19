@@ -112,7 +112,24 @@
           <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
           matTooltip="In the case of an application in respect of a market managed or carried on by a corporation under the Business Corporations Act, Societies Act, Canada Business Corporations Act or Canada Not-for-profit Corporations Act, the registration number shown on the certificate of incorporation, continuation or amalgamation of the corporation."></i>
         </div>
-
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Duration" [required]="true"
+            [valid]="eventForm.get('marketDuration').valid || !eventForm.get('marketDuration').touched"
+            errorMessage="Please indicate the market duration" [isFullWidth]="true">
+            <select class="form-control" formControlName="marketDuration">
+              <option *ngFor="let item of marketDuration" [ngValue]="item.value">{{item.label}}</option>
+            </select>
+          </app-field>
+          <app-field class="col-md-4 col-xs-12" label="Type" [required]="true"
+            [valid]="eventForm.get('marketEventType').valid || !eventForm.get('marketEventType').touched"
+            errorMessage="Please enter the type of event" [isFullWidth]="true">
+            <select class="form-control" formControlName="marketEventType">
+              <option *ngFor="let item of marketEventType" [ngValue]="item.value">{{item.label}}</option>
+            </select>
+          </app-field>
+          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+          matTooltip="Select the type of market event." ></i>
+        </div>
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Address 1"
             [valid]="eventForm.get('street1').valid || !eventForm.get('street1').touched"
@@ -138,36 +155,21 @@
           </app-field>
         </div>
         <div class="row">
-          <app-field class="col-md-4 col-xs-12" label="Additional Details" [required]="true"
+          <app-field class="col-md-4 col-xs-12" label="Additional Details"
             [valid]="eventForm.get('venueDescription').valid || !eventForm.get('venueDescription').touched"
             errorMessage="Please enter any additional details of the market venue" [isFullWidth]="true">
             <textarea class="form-control" formControlName="venueDescription"></textarea>
           </app-field>
-          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-          matTooltip="Provide any additional details of the market venue" ></i>
+          <app-field class="col-md-4 col-xs-12" label="Additional Information"
+            [valid]="eventForm.get('additionalLocationInformation').valid || !eventForm.get('additionalLocationInformation').touched"
+            [isFullWidth]="true">
+            <textarea class="form-control" formControlName="additionalLocationInformation"></textarea>
+          </app-field>
         </div>
       </div>
 
-        <!-- <div class="row">
-          <app-field class="col-md-4 col-xs-12" label="Duration" [required]="true"
-            [valid]="eventForm.get('marketDuration').valid || !eventForm.get('marketDuration').touched"
-            errorMessage="Please indicate the market duration" [isFullWidth]="true">
-            <select class="form-control" formControlName="marketDuration">
-              <option *ngFor="let item of marketDuration" [ngValue]="item.value">{{item.label}}</option>
-            </select>
-          </app-field>
-        </div>
-        <div class="row">
-          <app-field class="col-md-4 col-xs-12" label="Type" [required]="true"
-            [valid]="eventForm.get('eventType').valid || !eventForm.get('eventType').touched"
-            errorMessage="Please enter the type of event" [isFullWidth]="true">
-            <select class="form-control" formControlName="eventType">
-              <option *ngFor="let item of eventType" [ngValue]="item.value">{{item.label}}</option>
-            </select>
-          </app-field>
-          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-          matTooltip="Select the type of event." ></i>
-        </div>
+        <!-- 
+        
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Description" [required]="true"
             [valid]="eventForm.get('eventTypeDescription').valid || !eventForm.get('eventTypeDescription').touched"
@@ -195,13 +197,7 @@
         <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
         matTooltip="Select whether the event is being held indoors, outdoors, or both." ></i>
       </div>
-      <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Additional Information"
-          [valid]="eventForm.get('additionalLocationInformation').valid || !eventForm.get('additionalLocationInformation').touched"
-          [isFullWidth]="true">
-          <textarea class="form-control" formControlName="additionalLocationInformation"></textarea>
-        </app-field>
-      </div>
+      
 
       <h3>Physical Address of Venue</h3>
       
@@ -261,6 +257,12 @@
             <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()" [disabled]="eventForm.controls['startDate'].invalid || eventForm.controls['endDate'].invalid || isReadOnly">The event and liquor service times are different on specific dates.</mat-checkbox>
           </app-field>
         </div>
+      </div>
+
+      <h3 class="blue-header">LIQUOR SALES</h3>
+      <div class="padded-section">
+        <mat-checkbox formControlName="isAllStaffServingitRight"></mat-checkbox><span class="checkbox-label">All staff selling liquor at the market have Serving It Right certification and are not minors</span><br/>
+        <mat-checkbox formControlName="isSampleSizeCompliant"></mat-checkbox><span class="checkbox-label">Sample sizes comply with <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/manufacturer-handbook.pdf" target="_blank">Liquor Manufacturing Terms and Conditions</a></span><br/>
       </div>
   
       <h3 class="blue-header">AGREEMENT</h3>
