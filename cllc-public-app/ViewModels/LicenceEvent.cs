@@ -87,10 +87,27 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public enum MarketDuration
     {
+        [EnumMember(Value = "Weekly")]
+        Weekly = 845280000,
+        [EnumMember(Value = "Bi-Weekly")]
+        BiWeekly = 845280001,
+        [EnumMember(Value = "Monthly")]
+        Monthly = 845280002,
+        [EnumMember(Value = "Other")]
+        Other = 845280003
+    }
+    public enum MarketEventType
+    {
+        [EnumMember(Value = "Artisan")]
+        Artisan = 845280000,
+        [EnumMember(Value = "Farmers")]
+        Farmers = 845280001,
         [EnumMember(Value = "Annual")]
-        Annual = 845280000,
-        [EnumMember(Value = "Continuous")]
-        Continuous = 845280001
+        Annual = 845280002,
+        [EnumMember(Value = "Christmas")]
+        Christmas = 845280003,
+        [EnumMember(Value = "Other")]
+        Other = 845280004
     }
 
     public enum EventCategory
@@ -222,5 +239,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsSampleSizeCompliant { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public EventCategory? EventCategory { get; set; }
+        public MarketEventType? MarketEventType { get; set; }
     }
 }
