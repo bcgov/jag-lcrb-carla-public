@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return BadRequest();
                 }
                 item.EventClass = item.DetermineEventClass(alwaysAuthorization);
-                if (item.EventClass != EventClass.Authorization)
+                if (item.EventClass != EventClass.Authorization || item.EventCategory == EventCategory.Market)
                 {
                     item.Status = LicenceEventStatus.Approved;
                 }

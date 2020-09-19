@@ -289,11 +289,11 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       }
 
     hasEndorsement(licence: License, endorsementId: string) {
-      return typeof licence.endorsements.find(endorsement => endorsement.id === endorsementId) !== "undefined";
+      return typeof licence.endorsements.find(endorsement => endorsement.endorsementId === endorsementId) !== "undefined";
     }
 
     hasEndorsementByName(licence: License, endorsementName: string) {
-      return typeof licence.endorsements.find(endorsement => endorsement.name === endorsementName) !== "undefined";
+      return typeof licence.endorsements.find(endorsement => endorsement.endorsementName === endorsementName) !== "undefined";
     }
 
     getHandbookLink(licenceType: string) {
