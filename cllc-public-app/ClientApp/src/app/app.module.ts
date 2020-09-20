@@ -186,8 +186,8 @@ import { CannabisAssociateScreeningComponent} from './components/cannabis-associ
 import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
 import { SecurityScreeningConfirmationComponent } from './components/security-screening-confirmation/security-screening-confirmation.component';
 import { MultiStageApplicationFlowComponent } from './components/multi-stage-application-flow/multi-stage-application-flow.component';
-import { EventFormComponent } from '@components/event-form/event-form.component';
-import { EventSecurityFormComponent } from '@components/event-form/security.component';
+import { CateringEventFormComponent } from '@components/catering-event/catering-event-form.component';
+import { EventSecurityFormComponent } from '@components/catering-event/security.component';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { SecurityScreeningRequirementsComponent } from './components/security-screening-requirements/security-screening-requirements.component';
 import { EligibilityFormComponent } from './components/eligibility-form/eligibility-form.component';
@@ -247,7 +247,7 @@ import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confi
     KeyPersonnelComponent,
     LicenceFeePaymentConfirmationComponent,
     LicenceRepresentativeFormComponent,
-    EventFormComponent,
+    CateringEventFormComponent,
     EventSecurityFormComponent,
     TemporaryOffsiteComponent,
     MarketEventComponent,
