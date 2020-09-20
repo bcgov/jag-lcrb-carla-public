@@ -38,8 +38,8 @@ import { CannabisAssociateScreeningComponent } from '@components/cannabis-associ
 import { PersonalHistorySummaryComponent } from '@components/personal-history-summary/personal-history-summary.component';
 import { SecurityScreeningConfirmationComponent } from '@components/security-screening-confirmation/security-screening-confirmation.component';
 import { MultiStageApplicationFlowComponent } from '@components/multi-stage-application-flow/multi-stage-application-flow.component';
-import { EventFormComponent } from '@components/event-form/event-form.component';
-import { EventSecurityFormComponent } from '@components/event-form/security.component';
+import { CateringEventFormComponent } from '@components/catering-event/catering-event-form.component';
+import { EventSecurityFormComponent } from '@components/catering-event/security.component';
 import { SecurityScreeningRequirementsComponent } from '@components/security-screening-requirements/security-screening-requirements.component';
 import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
 import { LiquorRenewalComponent } from '@components/applications/liquor-renewal/liquor-renewal.component';
@@ -121,12 +121,12 @@ const routes: Routes = [
   },
   {
     path: 'licence/:licenceId/event',
-    component: EventFormComponent,
+    component: CateringEventFormComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
     path: 'licence/:licenceId/event/:eventId',
-    component: EventFormComponent,
+    component: CateringEventFormComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
