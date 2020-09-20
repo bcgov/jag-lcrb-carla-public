@@ -167,6 +167,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.IsSalesAreaAvailandDefined = item.AdoxioIssalesareaavailanddefined;
                 result.IsSampleSizeCompliant = item.AdoxioIssamplesizecompliant;
                 result.EventCategory = (EventCategory?)item.AdoxioEventcategory;
+                result.MarketEventType = (MarketEventType?)item.AdoxioMarketeventtype;
             }
 
             MicrosoftDynamicsCRMadoxioEventscheduleCollection eventSchedules = dynamicsClient.GetEventSchedulesByEventId(result.Id);
@@ -292,6 +293,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIssalesareaavailanddefined = from.IsSalesAreaAvailandDefined;
             to.AdoxioIssamplesizecompliant = from.IsSampleSizeCompliant;
             to.AdoxioEventcategory = (int?)from.EventCategory;
+            to.AdoxioMarketeventtype = (int?)from.MarketEventType;
         }
     }
 }

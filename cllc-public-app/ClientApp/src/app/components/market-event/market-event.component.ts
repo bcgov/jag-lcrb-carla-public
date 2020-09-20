@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
-import { LicenceEvent, EventStatus, MarketDuration, EventType, SpecificLocation, EventCategory } from '../../models/licence-event.model';
+import { LicenceEvent, EventStatus, MarketDuration, SpecificLocation, EventCategory, MarketEventType } from '../../models/licence-event.model';
 import { LicenceEventsService } from '@services/licence-events.service';
-import { takeWhile, switchMap } from 'rxjs/operators';
-import { AppState } from '@app/app-state/models/app-state';
-import { Store } from '@ngrx/store';
-import { User } from '@models/user.model';
 import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -32,7 +28,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   busy: Subscription;
   eventStatus = EventStatus;
-  eventType = EventType;
+  marketEventType = MarketEventType;
   marketDuration = MarketDuration;
   specificLocation = SpecificLocation;
   eventCategory = EventCategory;
@@ -60,17 +56,17 @@ export class MarketEventComponent extends FormBase implements OnInit {
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
     contactEmail: ['', [Validators.required]],
-    eventType: ['', [Validators.required]],
-    eventTypeDescription: ['', [Validators.required]],
-    mktOrganizerContactName: ['', [Validators.required]],
-    mktOrganizerContactPhone: ['', [Validators.required]],
-    registrationNumber: ['', [Validators.required]],
+    marketEventType: ['', [Validators.required]],
+    eventTypeDescription: ['', []],
+    mktOrganizerContactName: ['', []],
+    mktOrganizerContactPhone: ['', []],
+    registrationNumber: ['', []],
     marketName: ['', [Validators.required]],
-    marketWebsite: ['', [Validators.required]],
+    marketWebsite: ['', []],
     marketDuration: ['', [Validators.required]],
     clientHostname: ['', [Validators.required]],
-    venueDescription: ['', [Validators.required]],
-    specificLocation: ['', [Validators.required]],
+    venueDescription: ['', []],
+    specificLocation: ['', []],
     additionalLocationInformation: ['', []],
     street1: ['', []],
     street2: ['', []],
@@ -86,7 +82,6 @@ export class MarketEventComponent extends FormBase implements OnInit {
   constructor(
     private fb: FormBuilder,
     private licenceEvents: LicenceEventsService,
-    private store: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute
     ) {
@@ -108,11 +103,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
     }
 
   ngOnInit() {
-    this.store.select(state => state.currentUserState.currentUser)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: User) => {
-        this.eventForm.controls['contactEmail'].setValue(data.email);
-      });
+    
   }
 
   retrieveSavedEvent(eventId: string) {
@@ -161,7 +152,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
       marketName: licenceEvent.marketName,
       marketWebsite: licenceEvent.marketWebsite,
       marketDuration: licenceEvent.marketDuration,
-      eventType: licenceEvent.eventType,
+      marketEventType: licenceEvent.marketEventType,
       eventTypeDescription: licenceEvent.eventTypeDescription,
       mktOrganizerContactName: licenceEvent.mktOrganizerContactName,
       mktOrganizerContactPhone: licenceEvent.mktOrganizerContactPhone,
@@ -391,7 +382,10 @@ export class MarketEventComponent extends FormBase implements OnInit {
   }
 
   isFormValid() {
-    return this.eventForm.invalid || !this.eventForm.controls['agreement'].value;
+    return this.eventForm.invalid || !this.eventForm.controls['agreement'].value ||
+    !this.eventForm.controls['isNoPreventingSaleofLiquor'].value || !this.eventForm.controls['isMarketManagedorCarried'].value || !this.eventForm.controls['isMarketOnlyVendors'].value ||
+    !this.eventForm.controls['isNoImportedGoods'].value || !this.eventForm.controls['isMarketHostsSixVendors'].value || !this.eventForm.controls['isMarketMaxAmountorDuration'].value ||
+    !this.eventForm.controls['isAllStaffServingitRight'].value || !this.eventForm.controls['isSampleSizeCompliant'].value;
   }
 
   cancel() {
