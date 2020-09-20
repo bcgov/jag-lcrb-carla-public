@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SpecificLocation, FoodService, Entertainment, EventType, LicenceEvent, EventStatus } from '../../models/licence-event.model';
+import { SpecificLocation, FoodService, Entertainment, EventType, LicenceEvent, EventStatus, EventCategory } from '../../models/licence-event.model';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { takeWhile } from 'rxjs/operators';
 import { AppState } from '@app/app-state/models/app-state';
@@ -37,9 +37,9 @@ export const MY_FORMATS = {
 };
 
 @Component({
-  selector: 'app-event-form',
-  templateUrl: './event-form.component.html',
-  styleUrls: ['./event-form.component.scss'],
+  selector: 'app-catering-event-form',
+  templateUrl: './catering-event-form.component.html',
+  styleUrls: ['./catering-event-form.component.scss'],
   providers: [
     // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
     // application's root module. We provide it at the component level here, due to limitations of
@@ -48,7 +48,7 @@ export const MY_FORMATS = {
 
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }  ],
 })
-export class EventFormComponent extends FormBase implements OnInit {
+export class CateringEventFormComponent extends FormBase implements OnInit {
   isEditMode = false;
   isReadOnly = false;
   licenceEvent: LicenceEvent;
@@ -56,6 +56,7 @@ export class EventFormComponent extends FormBase implements OnInit {
   busy: Subscription;
   specificLocation = SpecificLocation;
   foodService = FoodService;
+  eventCategory = EventCategory;
   entertainment = Entertainment;
   eventType = EventType;
   eventStatus = EventStatus;
@@ -94,7 +95,8 @@ export class EventFormComponent extends FormBase implements OnInit {
     postalCode: ['', [Validators.required]],
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
-    agreement: [false, [Validators.required]]
+    agreement: [false, [Validators.required]],
+    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Catering').value, []]
   });
 
   constructor(

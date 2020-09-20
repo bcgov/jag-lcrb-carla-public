@@ -103,6 +103,7 @@ namespace bdd_tests
                 string shareholderFirstName = "IndividualShareholder0";
                 string shareholderLastName = "PrivateCorp";
                 string shareholderVotingShares = "500";
+                string shareholderNonVotingShares = "10";
                 string shareholderEmail = "individualshareholder0@privatecorp.com";
 
                 // open shareholder #0 form
@@ -120,6 +121,10 @@ namespace bdd_tests
                 // enter shareholder #0 number of voting shares
                 NgWebElement uiShareVotes = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='numberofSharesNew']"));
                 uiShareVotes.SendKeys(shareholderVotingShares);
+
+                // enter shareholder #0 number of non voting shares
+                NgWebElement uiShareNonVotes = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='numberOfNonVotingSharesNew']"));
+                uiShareNonVotes.SendKeys(shareholderNonVotingShares);
 
                 // enter shareholder #0 email
                 NgWebElement uiShareEmail = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='IndividualShareholder'] input[formControlName='emailNew']"));
@@ -141,6 +146,7 @@ namespace bdd_tests
                 // create the business shareholder data
                 string businessName = "Business Shareholder 1";
                 string businessVotingShares = "50";
+                string businessNonVotingShares = "50";
                 string businessEmail = "business@shareholder1.com";
 
                 // open business shareholder #1 form    
@@ -154,6 +160,10 @@ namespace bdd_tests
                 // enter business shareholder #1 voting shares
                 NgWebElement uiShareVotesBiz = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] input[formControlName='numberofSharesNew']"));
                 uiShareVotesBiz.SendKeys(businessVotingShares);
+
+                // enter business shareholder #1 non voting shares
+                NgWebElement uiShareNonVotesBiz = ngDriver.FindElement(By.CssSelector("app-associate-list[changetypesuffix='BusinessShareholder'] input[formControlName='numberOfNonVotingSharesNew']"));
+                uiShareNonVotesBiz.SendKeys(businessNonVotingShares);
 
                 // select the business shareholder #1 type
                 NgWebElement uiShareBizType = ngDriver.FindElement(By.CssSelector("[formcontrolname='businessType'] option[value='PrivateCorporation']"));
@@ -231,6 +241,7 @@ namespace bdd_tests
                 string shareholderFirstNameBiz = "IndividualShareholder1";
                 string shareholderLastNameBiz = "BizShareholderPrivateCorp";
                 string shareholderVotingSharesBiz = "500";
+                string shareholderNonVotingSharesBiz = "500";
                 string shareholderEmailBiz = "individualshareholder1bizshareholder@privatecorp.com";
 
                 // open business shareholder #1 > individual shareholder #1 form
@@ -248,6 +259,10 @@ namespace bdd_tests
                 // enter business shareholder #1 > individual shareholder #1 number of voting shares
                 NgWebElement uiIndyShareVotesBiz = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formcontrolname='numberofSharesNew']"));
                 uiIndyShareVotesBiz.SendKeys(shareholderVotingSharesBiz);
+
+                // enter business shareholder #1 > individual shareholder #1 number of non voting shares
+                NgWebElement uiIndyShareNonVotesBiz = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formcontrolname='numberOfNonVotingSharesNew']"));
+                uiIndyShareNonVotesBiz.SendKeys(shareholderNonVotingSharesBiz);
 
                 // enter business shareholder #1 > individual shareholder #1 email
                 NgWebElement uiIndyShareEmailBiz = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formcontrolname='emailNew']"));
