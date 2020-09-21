@@ -602,7 +602,7 @@ namespace bdd_tests
             uiRemoveDirector.Click();
 
             // delete the most recent shareholder
-            NgWebElement uiRemoveShareholder = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[6]/i[2]/span"));
+            NgWebElement uiRemoveShareholder = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-2']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[7]/i[2]/span"));
             uiRemoveShareholder.Click();
         }
 
