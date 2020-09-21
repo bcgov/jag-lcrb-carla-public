@@ -1,6 +1,7 @@
 <ng-container *ngIf="category === 'OptOut'">
     <p>
-        You are opting out of providing comment on this application. LCRB will seek public comment. Do you wish to proceed?
+        You are opting out of providing comment on this application. LCRB will seek public comment. Do you wish to
+        proceed?
     </p>
     <section>
         <app-file-uploader *ngIf="application?.id" documentType="OptOut Reason"
@@ -14,9 +15,14 @@
 <p *ngIf="category === 'Reject'">
     You are about to reject this application. This process cannot be undone. Do you wish to proceed?
 </p>
-<p *ngIf="category === 'Approve'">
-    You can conditionally approve this application, but you must provide a resolution within 90 days of doing so. Return
-    to this screen to provide the resolution when ready.
+<p *ngIf="category === 'Approve' ">
+    <ng-container *ngIf="!requiredFilesUploaded">
+        You can conditionally approve this application, but you must provide a resolution within 90 days of doing so.
+        Return to this screen to provide the resolution when ready.
+    </ng-container>
+    <ng-container *ngIf="requiredFilesUploaded">
+        This will provide your acceptance on the application, do you wish to continue?
+    </ng-container>
 </p>
 
 <section class="d-flex justify-content-between">
