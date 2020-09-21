@@ -1,4 +1,6 @@
 export class Endorsement {
-    id: string;
-    name: string;
+    endorsementId: string;
+    endorsementName: string;
+    applicationTypeId: string;
+    applicationTypeName: string;
 }

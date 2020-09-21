@@ -30,9 +30,9 @@
         <mat-checkbox formControlName="isNoPreventingSaleofLiquor"></mat-checkbox><span class="checkbox-label">There is no local rule preventing the sale of packaged liquor at a market.</span><br/>
         <mat-checkbox formControlName="isMarketManagedorCarried"></mat-checkbox>
           <span class="checkbox-label">The market is managed or carried on</span><br/>
-          <span class="checkbox-label">(i) by a society as defined in section 1 of the Societies Act, a company as defined in section 1 (1) of the Business Corporations Act, or a corporation as defined in section 2 (1) of the Canada Business Corporations Act or section 2 (1) of the Canada Not-for-profit Corporations Act,</span><br/>
-          <span class="checkbox-label">(ii) by a municipality or regional district in the municipality or regional district in which the market is located, or</span><br/>
-          <span class="checkbox-label">(iii) in respect of the market at Granville Island in Vancouver Harbour, by the Canada Mortgage and Housing Corporation,</span><br/>
+          <span class="checkbox-label ml-5">(i) by a society as defined in section 1 of the Societies Act, a company as defined in section 1 (1) of the Business Corporations Act, or a corporation as defined in section 2 (1) of the Canada Business Corporations Act or section 2 (1) of the Canada Not-for-profit Corporations Act,</span><br/>
+          <span class="checkbox-label ml-5">(ii) by a municipality or regional district in the municipality or regional district in which the market is located, or</span><br/>
+          <span class="checkbox-label ml-5">(iii) in respect of the market at Granville Island in Vancouver Harbour, by the Canada Mortgage and Housing Corporation,</span><br/>
         <mat-checkbox formControlName="isMarketOnlyVendors"></mat-checkbox><span class="checkbox-label">The market will be comprised entirely of vendors (excluding liquor manufacturers who hold market authorizations) that sell artisanal goods entirely of their own making or agricultural goods they produce, grow or raise themselves.</span><br/>
         <mat-checkbox formControlName="isNoImportedGoods"></mat-checkbox><span class="checkbox-label">The market doesn’t sell used or imported goods (for example, flea markets and commercial markets would not be considered eligible).</span><br/>
         <mat-checkbox formControlName="isMarketHostsSixVendors"></mat-checkbox><span class="checkbox-label">The market hosts at least six vendors that don’t sell or serve liquor. The sale of liquor must not be the focus of the market.</span><br/>
@@ -48,19 +48,22 @@
             errorMessage="Please enter the contact name" [isFullWidth]="true">
             <input class="form-control" type="text" formControlName="contactName">
           </app-field>
-          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-          matTooltip="The name of the contact person for the event." ></i>
-        </div>
-        <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true"
             [valid]="eventForm.get('contactPhone').valid || !eventForm.get('contactPhone').touched"
             errorMessage="Please enter the contact phone number" [isFullWidth]="true">
             <input class="form-control" type="text" formControlName="contactPhone" mask="(000) 000-0000">
           </app-field>
         </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Email" [required]="true"
+            [valid]="eventForm.get('contactEmail').valid || !eventForm.get('contactEmail').touched"
+            [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="contactEmail">
+          </app-field>
+        </div>
       </div>
 
-      <h3 class="blue-header">MARKET ORGANIZER CONTACT INFORMATION</h3>
+      <!-- <h3 class="blue-header">MARKET ORGANIZER CONTACT INFORMATION</h3>
       <div class="padded-section clearfix">
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Name" [required]="true"
@@ -78,28 +81,10 @@
             <input class="form-control" type="text" formControlName="mktOrganizerContactPhone" mask="(000) 000-0000">
           </app-field>
         </div>
-        <div class="row">
-          <app-field class="col-md-4 col-xs-12" label="Registration Number" [required]="true"
-            [valid]="eventForm.get('registrationNumber').valid || !eventForm.get('registrationNumber').touched"
-            errorMessage="Please enter the market registration number" [isFullWidth]="true">
-            <input class="form-control" type="text" formControlName="registrationNumber" mask="0*">
-          </app-field>
-        </div>
-      </div>
+        
+      </div> -->
   
-      <h3 class="blue-header">NOTIFICATIONS</h3>
-      <div class="padded-section">
-        <div class="row">
-          <app-field class="col-md-4 col-xs-12" label="Email"
-            [valid]="eventForm.get('contactEmail').valid || !eventForm.get('contactEmail').touched"
-            [isFullWidth]="true">
-            <input class="form-control" type="text" formControlName="contactEmail" readonly>
-          </app-field>
-        </div>
-        <p>To update this email address, please see your Account Profile</p>
-      </div>
-  
-      <h3 class="blue-header">MARKET DETAILS</h3> 
+      <h3 class="blue-header">MARKET INFORMATION AND LOCATION</h3> 
       <div class="padded-section clearfix">
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Market Name" [required]="true"
@@ -107,13 +92,25 @@
             errorMessage="Please enter the Market Name" [isFullWidth]="true">
             <input class="form-control" type="text" formControlName="marketName">
           </app-field>
-        </div>
-        <div class="row">
-          <app-field class="col-md-4 col-xs-12" label="Market Website" [required]="true"
+          <app-field class="col-md-4 col-xs-12" label="Market Website" [required]="false"
             [valid]="eventForm.get('marketWebsite').valid || !eventForm.get('marketWebsite').touched"
             errorMessage="Please enter the Market Website" [isFullWidth]="true">
             <input class="form-control" type="text" formControlName="marketWebsite">
           </app-field>
+        </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Business Legal Name" [required]="true"
+            [valid]="eventForm.get('clientHostname').valid || !eventForm.get('clientHostname').touched"
+            errorMessage="Please enter the market organizer" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="clientHostname">
+          </app-field>
+          <app-field class="col-md-4 col-xs-12" label="Registration Number"
+            [valid]="eventForm.get('registrationNumber').valid || !eventForm.get('registrationNumber').touched"
+            errorMessage="Please enter the market registration number" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="registrationNumber" mask="0*">
+          </app-field>
+          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+          matTooltip="In the case of an application in respect of a market managed or carried on by a corporation under the Business Corporations Act, Societies Act, Canada Business Corporations Act or Canada Not-for-profit Corporations Act, the registration number shown on the certificate of incorporation, continuation or amalgamation of the corporation."></i>
         </div>
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Duration" [required]="true"
@@ -123,18 +120,56 @@
               <option *ngFor="let item of marketDuration" [ngValue]="item.value">{{item.label}}</option>
             </select>
           </app-field>
-        </div>
-        <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Type" [required]="true"
-            [valid]="eventForm.get('eventType').valid || !eventForm.get('eventType').touched"
+            [valid]="eventForm.get('marketEventType').valid || !eventForm.get('marketEventType').touched"
             errorMessage="Please enter the type of event" [isFullWidth]="true">
-            <select class="form-control" formControlName="eventType">
-              <option *ngFor="let item of eventType" [ngValue]="item.value">{{item.label}}</option>
+            <select class="form-control" formControlName="marketEventType">
+              <option *ngFor="let item of marketEventType" [ngValue]="item.value">{{item.label}}</option>
             </select>
           </app-field>
           <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-          matTooltip="Select the type of event." ></i>
+          matTooltip="Select the type of market event." ></i>
         </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Address 1"
+            [valid]="eventForm.get('street1').valid || !eventForm.get('street1').touched"
+            errorMessage="Please enter the address line 1" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="street1">
+          </app-field>
+          <app-field class="col-md-4 col-xs-12" label="Address 2"
+            [valid]="eventForm.get('street2').valid || !eventForm.get('street2').touched"
+            [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="street2">
+          </app-field>
+        </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="City" [required]="true"
+            [valid]="eventForm.get('city').valid || !eventForm.get('city').touched"
+            errorMessage="Please enter the city" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="city">
+          </app-field>
+          <app-field class="col-md-4 col-xs-12" label="Postal Code" [required]="true"
+            [valid]="eventForm.get('postalCode').valid || !eventForm.get('postalCode').touched"
+            errorMessage="Please enter the postal code" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="postalCode">
+          </app-field>
+        </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Additional Details"
+            [valid]="eventForm.get('venueDescription').valid || !eventForm.get('venueDescription').touched"
+            errorMessage="Please enter any additional details of the market venue" [isFullWidth]="true">
+            <textarea class="form-control" formControlName="venueDescription"></textarea>
+          </app-field>
+          <app-field class="col-md-4 col-xs-12" label="Additional Information"
+            [valid]="eventForm.get('additionalLocationInformation').valid || !eventForm.get('additionalLocationInformation').touched"
+            [isFullWidth]="true">
+            <textarea class="form-control" formControlName="additionalLocationInformation"></textarea>
+          </app-field>
+        </div>
+      </div>
+
+        <!-- 
+        
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Description" [required]="true"
             [valid]="eventForm.get('eventTypeDescription').valid || !eventForm.get('eventTypeDescription').touched"
@@ -145,26 +180,12 @@
           matTooltip="Briefly describe the event." ></i>
   
         </div>
-        <div class="row">
-          <app-field class="col-md-4 col-xs-12" label="Client or Host Name" [required]="true"
-            [valid]="eventForm.get('clientHostname').valid || !eventForm.get('clientHostname').touched"
-            errorMessage="Please enter the client or host name" [isFullWidth]="true">
-            <input class="form-control" type="text" formControlName="clientHostname">
-          </app-field>
-        </div>
+        
       </div>
 
       <h3 class="blue-header">MARKET LOCATION</h3>
     <div class="padded-section clearfix">
-      <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Market Name/Description" [required]="true"
-          [valid]="eventForm.get('venueDescription').valid || !eventForm.get('venueDescription').touched"
-          errorMessage="Please enter the name and a description of the market" [isFullWidth]="true">
-          <textarea class="form-control" formControlName="venueDescription"></textarea>
-        </app-field>
-        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-        matTooltip="Provide the name of and briefly describe the venue." ></i>
-      </div>
+      
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Location" [required]="true"
           [valid]="eventForm.get('specificLocation').valid || !eventForm.get('specificLocation').touched"
@@ -176,40 +197,11 @@
         <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
         matTooltip="Select whether the event is being held indoors, outdoors, or both." ></i>
       </div>
-      <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Additional Information"
-          [valid]="eventForm.get('additionalLocationInformation').valid || !eventForm.get('additionalLocationInformation').touched"
-          [isFullWidth]="true">
-          <textarea class="form-control" formControlName="additionalLocationInformation"></textarea>
-        </app-field>
-      </div>
+      
 
       <h3>Physical Address of Venue</h3>
-      <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Address 1"
-          [valid]="eventForm.get('street1').valid || !eventForm.get('street1').touched"
-          errorMessage="Please enter the address line 1" [isFullWidth]="true">
-          <input class="form-control" type="text" formControlName="street1">
-        </app-field>
-        <app-field class="col-md-4 col-xs-12" label="Address 2"
-          [valid]="eventForm.get('street2').valid || !eventForm.get('street2').touched"
-          [isFullWidth]="true">
-          <input class="form-control" type="text" formControlName="street2">
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="City" [required]="true"
-          [valid]="eventForm.get('city').valid || !eventForm.get('city').touched"
-          errorMessage="Please enter the city" [isFullWidth]="true">
-          <input class="form-control" type="text" formControlName="city">
-        </app-field>
-        <app-field class="col-md-4 col-xs-12" label="Postal Code" [required]="true"
-          [valid]="eventForm.get('postalCode').valid || !eventForm.get('postalCode').touched"
-          errorMessage="Please enter the postal code" [isFullWidth]="true">
-          <input class="form-control" type="text" formControlName="postalCode">
-        </app-field>
-      </div>
-    </div>
+      
+    </div> -->
   
       <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
       <div class="padded-section clearfix">
@@ -238,8 +230,8 @@
             <div class="row mt-3">
               <div class="col-md-2 offset-md-2"><label>Event Start</label></div>
               <div class="col-md-2"><label>Event End</label></div>
-              <div class="col-md-2"><label>Liquor Service Start</label></div>
-              <div class="col-md-2"><label>Liquor Service End</label></div>
+              <div class="col-md-2"><label>Liquor Sale Start</label></div>
+              <div class="col-md-2"><label>Liquor Sale End</label></div>
             </div>
             <div class="row">
               <div class="col-md-2 time-picker-title">
@@ -265,6 +257,12 @@
             <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()" [disabled]="eventForm.controls['startDate'].invalid || eventForm.controls['endDate'].invalid || isReadOnly">The event and liquor service times are different on specific dates.</mat-checkbox>
           </app-field>
         </div>
+      </div>
+
+      <h3 class="blue-header">LIQUOR SALES</h3>
+      <div class="padded-section">
+        <mat-checkbox formControlName="isAllStaffServingitRight"></mat-checkbox><span class="checkbox-label">All staff selling liquor at the market have Serving It Right certification and are not minors</span><br/>
+        <mat-checkbox formControlName="isSampleSizeCompliant"></mat-checkbox><span class="checkbox-label">Sample sizes comply with <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/manufacturer-handbook.pdf" target="_blank">Liquor Manufacturing Terms and Conditions</a></span><br/>
       </div>
   
       <h3 class="blue-header">AGREEMENT</h3>
