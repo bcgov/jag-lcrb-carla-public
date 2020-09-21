@@ -107,6 +107,7 @@ export class LicenceEvent {
   registrationNumber: string;
   marketName: string;
   marketWebsite: string;
+  marketEventType: number;
   marketDuration: number;
   isAllStaffServingitRight: boolean;
   isSalesAreaAvailandDefined: boolean;
@@ -244,14 +245,45 @@ export const EventType = [
   }
 ];
 
-export const MarketDuration = [
+export const MarketEventType = [
   {
-    label: 'Annual',
+    label: 'Artisan',
     value: 845280000
   },
   {
-    label: 'Continuous',
+    label: 'Farmers',
     value: 845280001
+  },
+  {
+    label: 'Annual',
+    value: 845280002
+  },
+  {
+    label: 'Christmas',
+    value: 845280003
+  },
+  {
+    label: 'Other',
+    value: 845280004
+  }
+]
+
+export const MarketDuration = [
+  {
+    label: 'Weekly',
+    value: 845280000
+  },
+  {
+    label: 'Bi-Weekly',
+    value: 845280001
+  },
+  {
+    label: 'Monthly',
+    value: 845280002
+  },
+  {
+    label: 'Other',
+    value: 845280003
   }
 ];
 
