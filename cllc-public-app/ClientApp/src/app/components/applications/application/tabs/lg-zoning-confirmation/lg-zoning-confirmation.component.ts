@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LgZoningConfirmationComponent extends FormBase implements OnInit {
   @Input() application: Application;
+  @Input() isOpenedByLGForApproval: boolean;
   @Input() disableForm = false;
   busy: any;
   validationMessages: string[];
