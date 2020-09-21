@@ -5,10 +5,6 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AssociateListComponent } from '../associate-list/associate-list.component';
 import { forkJoin, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { Application } from '@models/application.model';
-import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
-import { ApplicationDataService } from '@services/application-data.service';
-import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-org-structure',
@@ -43,9 +39,7 @@ export class OrgStructureComponent implements OnInit {
   Account = Account;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder,
-    private snackBar: MatSnackBar,
-    private applicationDataService: ApplicationDataService) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     let numberOfMembers: number = null;
@@ -85,7 +79,7 @@ export class OrgStructureComponent implements OnInit {
     this.fileUploads[docType] = numberOfFiles;
   }
 
-  updateChildren(children: LicenseeChangeLog[], changeType: string) {
+  updateChildren() {
     this.changesMade.next(true)
   }
 
