@@ -57,9 +57,9 @@ namespace bdd_tests
                 /********** Leader #0 **********/
 
                 // create the leader data
-                string leaderFirstName = "Leader0";
-                string leaderLastName = "PrivateCorp";
-                string leaderTitle = "CTO";
+                string leaderFirstName = "Leader0First";
+                string leaderLastName = "Leader0Last";
+                string leaderTitle = "CTOLeader0";
                 string leaderEmail = "leader0@privatecorp.com";
 
                 // open leader #0 form  
@@ -100,10 +100,10 @@ namespace bdd_tests
                 /********** Individual Shareholder #0 **********/
 
                 // create the shareholder data
-                string shareholderFirstName = "IndividualShareholder0";
-                string shareholderLastName = "PrivateCorp";
-                string shareholderVotingShares = "500";
-                string shareholderNonVotingShares = "10";
+                string shareholderFirstName = "IndyShareholder0First";
+                string shareholderLastName = "IndyShareholder0Last";
+                string shareholderVotingShares = "1001";
+                string shareholderNonVotingShares = "1002";
                 string shareholderEmail = "individualshareholder0@privatecorp.com";
 
                 // open shareholder #0 form
@@ -145,8 +145,8 @@ namespace bdd_tests
 
                 // create the business shareholder data
                 string businessName = "Business Shareholder 1";
-                string businessVotingShares = "50";
-                string businessNonVotingShares = "50";
+                string businessVotingShares = "1003";
+                string businessNonVotingShares = "1004";
                 string businessEmail = "business@shareholder1.com";
 
                 // open business shareholder #1 form    
@@ -195,9 +195,9 @@ namespace bdd_tests
                 /********** Business Shareholder #1 - Leader #1 **********/
 
                 // create business shareholder #1 leader data
-                string leaderFirstNameBiz = "Leader1";
-                string leaderLastNameBiz = "BizShareholderPrivateCorp";
-                string leaderTitleBiz = "Event Planner";
+                string leaderFirstNameBiz = "Leader1BizFirst";
+                string leaderLastNameBiz = "Leader1BizLast";
+                string leaderTitleBiz = "Leader1BizTitle";
                 string leaderEmailBiz = "leader1bizshareholder@privatecorp.com";
 
                 // open business shareholder #1 > leader form #1
@@ -238,10 +238,10 @@ namespace bdd_tests
                 /********** Business Shareholder #1 - Individual Shareholder #1 **********/
 
                 // create the business shareholder #1 > individual shareholder data
-                string shareholderFirstNameBiz = "IndividualShareholder1";
-                string shareholderLastNameBiz = "BizShareholderPrivateCorp";
-                string shareholderVotingSharesBiz = "500";
-                string shareholderNonVotingSharesBiz = "500";
+                string shareholderFirstNameBiz = "IndividualShareholder1Biz1First";
+                string shareholderLastNameBiz = "IndividualShareholder1Biz1Last";
+                string shareholderVotingSharesBiz = "1005";
+                string shareholderNonVotingSharesBiz = "1006";
                 string shareholderEmailBiz = "individualshareholder1bizshareholder@privatecorp.com";
 
                 // open business shareholder #1 > individual shareholder #1 form
