@@ -38,7 +38,7 @@
                     <br>
                     <span>Status: <strong>{{getLicenceStatusText(item.status)}}</strong></span>
                     <br>
-                    <div *ngIf="!item.isOperated && isActive(item) && actionsVisible(item) && item?.licenceTypeName != 'Manufacturer'"  style="min-width: 10px;">
+                    <div *ngIf="!item.isOperated && isActive(item) && actionsVisible(item)"  style="min-width: 10px;">
                         <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
                             <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                         </a>
@@ -99,7 +99,7 @@
                     <ng-container *ngIf="item.endorsements.length > 0 && isActive(item) && (actionsVisible(item) || item.isOperated)">
                         <span><strong>Endorsements:</strong></span>
                         <div *ngFor="let endorsement of item.endorsements; let i = index;">
-                            <span><i class="fas fa-certificate" style="margin-right: 10px;"></i>{{endorsement.name}}</span>
+                            <span><i class="fas fa-certificate" style="margin-right: 10px;"></i>{{endorsement.endorsementName}}</span>
                         </div>
                         <br><br>
                     </ng-container>
