@@ -42,6 +42,15 @@
             [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
         </app-file-uploader>
 
+        <p> Please upload a stamped copy of the floor plan:</p>
+
+        <app-file-uploader *ngIf="application?.id" documentType="StampedFloorPlan"
+            [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval"
+            (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [maxNumberOfFiles]="200"
+            fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="application?.id"
+            [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
+        </app-file-uploader>
+
     </section>
 </div>
 

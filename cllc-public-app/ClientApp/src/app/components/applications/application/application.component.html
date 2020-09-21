@@ -1762,7 +1762,7 @@
           </app-lg-in-confirmation-of-receipt>
           <app-lg-zoning-confirmation
             *ngIf="application?.applicationType?.isShowLGZoningConfirmation || lgHasReviewedZoning()"
-            [disableForm]="lgHasReviewedZoning()" [application]="application"></app-lg-zoning-confirmation>
+            [disableForm]="lgHasReviewedZoning()" [application]="application" [isOpenedByLGForApproval]="isOpenedByLGForApproval"></app-lg-zoning-confirmation>
         </section>
 
 
