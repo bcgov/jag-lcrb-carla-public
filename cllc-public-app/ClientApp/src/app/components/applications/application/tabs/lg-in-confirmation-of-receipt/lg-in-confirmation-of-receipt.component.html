@@ -42,7 +42,7 @@
             [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
         </app-file-uploader>
 
-        <p> Plese upload a stamped copy of the floor plan:</p>
+        <p> Please upload a stamped copy of the floor plan:</p>
 
         <app-file-uploader *ngIf="application?.id" documentType="StampedFloorPlan"
             [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval"
