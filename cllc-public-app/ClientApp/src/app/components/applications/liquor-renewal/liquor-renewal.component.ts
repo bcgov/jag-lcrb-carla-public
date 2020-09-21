@@ -75,6 +75,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   uploadedFinancialIntegrityDocuments: 0;
   uploadedAssociateDocuments: 0;
   window = window;
+  previousYear: string;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -114,8 +115,11 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       contactPersonPhone: ['', Validators.required],
 
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
+      isManufacturedMinimum: ['', []]
     });
+
+    this.previousYear = (new Date().getFullYear() - 1).toString();
 
     this.applicationDataService.getSubmittedApplicationCount()
       .pipe(takeWhile(() => this.componentActive))
@@ -136,6 +140,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         this.busy = this.licenceDataService.getLicenceById(data.assignedLicence.id)
           .pipe(takeWhile(() => this.componentActive))
           .subscribe((data: License) => {
+            console.log(data.licenseSubCategory);
             if (data.licenseSubCategory !== null &&
               data.licenseSubCategory !== 'Independent Wine Store' &&
               data.licenseSubCategory !== 'Tourist Wine Store' &&
@@ -150,6 +155,8 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
 
         this.application = data;
         this.licenseSubCategory = this.application.assignedLicence.licenseSubCategory;
+
+        // if (this.isSubcategory('Winery'))
 
         this.addDynamicContent();
 
@@ -170,6 +177,10 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
           console.log('Error occured');
         }
       );
+  }
+
+  isSubcategory(subcategoryName: string) {
+    return this.licenseSubCategory == subcategoryName;
   }
 
   isTouchedAndInvalid(fieldName: string): boolean {

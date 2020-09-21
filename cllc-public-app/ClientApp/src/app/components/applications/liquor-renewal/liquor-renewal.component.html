@@ -23,6 +23,54 @@
                 <input class="form-control" style="width: 350px;" type="text" formControlName="ldbOrderTotalsConfirm" prefix="$" thousandSeparator="," mask="separator">
             </app-field>
         </section>
+
+        <h3 class="blue-header" *ngIf="isSubcategory('Winery') || isSubcategory('Brewery')">{{licenseSubCategory}} Production</h3>
+        <div class="content-bottom" *ngIf="isSubcategory('Winery') || isSubcategory('Brewery')">
+            <section *ngIf="isSubcategory('Winery')">
+                <mat-checkbox formControlName="isManufacturedMinimum">I confirm that I have manufactured (including fermentation) the minimum requirement of 4500 litres on site.</mat-checkbox>
+                <p>If you manufactured less than the required 4500 litre minimum, you must submit a letter which explains why and asks for discretion from the Branch to allow you to renew your liquor licence. As per Section 29(3) of the LCL Regulation, your reasons must satisfy the general manager of the Branch that the lower production was caused by crop failure; standard agricultural practices that result in the temporary loss of sufficient plant products, milk or honey to meet normal production volumes; or an event that is beyond the control of the licensee. You must also indicate the measures you will take to ensure you are able to meet the production requirement for future years.</p>
+                <app-file-uploader documentType="Discretion Letter" 
+                    [disableUploads]="form.get('isManufacturedMinimum').value"
+                    [enableFileDeletion]="true" [useDocumentTypeForName]="true"
+                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                    [extensions]="['pdf']" [entityId]="applicationId"
+                    [uploadHeader]="'TO UPLOAD DISCRETION LETTER, DRAG FILES HERE OR'">
+                  </app-file-uploader>
+            </section>
+            <hr/>
+            <section>
+                <ul>
+                    <li>Production reporting period is January 1, {{previousYear}} to December 31, {{previousYear}}</li>
+                    <li *ngIf="isSubcategory('Brewery')">Production includes all malt liquor shipped by a brewer in BC from any brewery owned, occupied or used by that brewer in the previous year.</li>
+                    <li *ngIf="isSubcategory('Winery')">Production includes all product that was started within the reporting period even if fermentation or bottling has not been completed.</li>
+                    <li *ngIf="isSubcategory('Winery')">Volume destroyed includes all product spilled or spoiled and should be included in the total production.</li>
+                    <li *ngIf="isSubcategory('Winery')">All purchase, disposition, and movement. Records must be kept and recorded on an ongoing basis, and must be available to view.</li>
+                </ul>
+            </section>
+            <hr/>
+            <section *ngIf="isSubcategory('Winery')">
+                <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
+                <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;"><p>Please Note: You are required to retain all records of your primary ingredients, additions to wine, what your wine was produced from, any wine purchased and any wine sold and to whom. Documents must be readily available upon request from the Liquor and Cannabis Regulation Branch.</p></div>
+            </section>
+            <section class="d-flex justify-content-between w-100">
+                <div class="question-label align-self-center">
+                    What was your {{licenseSubCategory}}'s total volume produced (in {{isSubcategory('Brewery') ? 'hectolitres' : 'litres'}}) between January 1 and December 31? 
+                </div>
+                <div style="flex: 0 0 85px;">
+                    <!-- <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
+                        [label]="getEstablishmentLabel(application?.applicationType)" [required]="true"
+                        [valid]="isValidOrNotTouched('establishmentName')"
+                        errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
+                        <input class="form-control" style="width: 500px;" type="text"
+                            [readonly]="application?.applicationType?.establishmentName === FormControlState.ReadOnly"
+                            (change)="checkPossibleProblematicWords()" formControlName="establishmentName"
+                            id="establishmentName">
+                    </app-field> -->
+                </div>
+            </section>
+        </div>
+
+
         <h3 class="blue-header">Questionnaire</h3>
         <div class="content-bottom">
 
