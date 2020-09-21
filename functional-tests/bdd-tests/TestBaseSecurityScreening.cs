@@ -86,8 +86,8 @@ namespace bdd_tests
             // confirm that university personnel are present
             if (businessType == "a university")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'University')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0FirstUniversity')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0LastUniversity')]")).Displayed);
             }
 
             // confirm that private corporation personnel are present for a multilevel business
