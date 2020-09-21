@@ -414,10 +414,10 @@ namespace bdd_tests
                 uiOpenDirectorForm.Click();
 
                 // create the director #1 info
-                string firstName = "Director";
-                string lastName = "Society";
-                string title = "Chair";
-                string email = "director@society.com";
+                string firstName = "Director1First";
+                string lastName = "Director1Last";
+                string title = "Director1Title";
+                string email = "director1@society.com";
 
                 // enter the director #1 first name
                 NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("[formcontrolname='firstNameNew']"));
@@ -453,7 +453,9 @@ namespace bdd_tests
                 uiOpenDirectorForm2.Click();
 
                 // create the director #2 info
-                string firstName2 = "Director2";
+                string firstName2 = "Director2First";
+                string lastName2 = "Director2Last";
+                string title2 = "Director2Title";
                 string email2 = "director2@society.com";
 
                 // enter the director #2 first name
@@ -462,7 +464,7 @@ namespace bdd_tests
 
                 // enter the director #2 last name
                 NgWebElement uiLastName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLastName2.SendKeys(lastName);
+                uiLastName2.SendKeys(lastName2);
 
                 // select the director #2 position
                 NgWebElement uiPosition2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='isDirectorNew']"));
@@ -470,7 +472,7 @@ namespace bdd_tests
 
                 // enter the director #2 title
                 NgWebElement uiTitle2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(4) input[formControlName='titleNew']"));
-                uiTitle2.SendKeys(title);
+                uiTitle2.SendKeys(title2);
 
                 // enter the director #2 email
                 NgWebElement uiEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(5) input[formControlName='emailNew']"));
@@ -490,7 +492,9 @@ namespace bdd_tests
                 uiOpenDirectorForm3.Click();
 
                 // create the director #3 info
-                string firstName3 = "Director3";
+                string firstName3 = "Director3First";
+                string lastName3 = "Director3Last";
+                string title3 = "Director3Title";
                 string email3 = "director3@society.com";
 
                 // enter the director #3 first name
@@ -499,7 +503,7 @@ namespace bdd_tests
 
                 // enter the director #3 last name
                 NgWebElement uiLastName3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLastName3.SendKeys(lastName);
+                uiLastName3.SendKeys(lastName3);
 
                 // select the director #3 position
                 NgWebElement uiPosition3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(3) input[formControlName='isDirectorNew']"));
@@ -507,7 +511,7 @@ namespace bdd_tests
 
                 // enter the director #3 title
                 NgWebElement uiTitle3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(4) input[formControlName='titleNew']"));
-                uiTitle3.SendKeys(title);
+                uiTitle3.SendKeys(title3);
 
                 // enter the director #3 email
                 NgWebElement uiEmail3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(5) input[formControlName='emailNew']"));
@@ -526,9 +530,9 @@ namespace bdd_tests
                 /********** Leader #1 **********/
 
                 // create the leader #1 data
-                string leaderFirst = "Leader1";
-                string leaderLast = "Public Corp";
-                string leaderTitle = "CEO";
+                string leaderFirst = "Leader1FirstPubCorp";
+                string leaderLast = "Leader1LastPubCorp";
+                string leaderTitle = "Leader1TitlePubCorp";
                 string leaderEmail = "leader1@publiccorp.com";
 
                 // find the upload test file in the bdd-tests\upload_files folder
@@ -580,8 +584,10 @@ namespace bdd_tests
                 /********** Leader #2 **********/
 
                 // create the leader #2 data
-                string leaderFirst2 = "Leader2";
-                string leaderEmail2 = "leader@publiccorp.com";
+                string leaderFirst2 = "Leader2FirstPubCorp";
+                string leaderLast2 = "Leader2LastPubCorp";
+                string leaderTitle2 = "Leader2TitlePubCorp";
+                string leaderEmail2 = "leader2@publiccorp.com";
 
                 // open leader #2 form
                 NgWebElement uiOpenLeaderForm2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
@@ -593,7 +599,7 @@ namespace bdd_tests
 
                 // enter leader #2 last name
                 NgWebElement uiLeaderLast2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLeaderLast2.SendKeys(leaderLast);
+                uiLeaderLast2.SendKeys(leaderLast2);
 
                 // select leader #2 role
                 NgWebElement uiLeaderRole2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='isDirectorNew']"));
@@ -601,7 +607,7 @@ namespace bdd_tests
 
                 // enter leader #2 title
                 NgWebElement uiLeaderTitle2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(4) input[formControlName='titleNew']"));
-                uiLeaderTitle2.SendKeys(leaderTitle);
+                uiLeaderTitle2.SendKeys(leaderTitle2);
 
                 // enter leader #2 email
                 NgWebElement uiLeaderEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(5) input[formControlName='emailNew']"));
@@ -617,7 +623,9 @@ namespace bdd_tests
                 /********** Leader #3 **********/
 
                 // create the leader #3 data
-                string leaderFirst3 = "Leader3";
+                string leaderFirst3 = "Leader3FirstPubCorp";
+                string leaderLast3 = "Leader3LastPubCorp";
+                string leaderTitle3 = "Leader3TitlePubCorp";
                 string leaderEmail3 = "leader3@publiccorp.com";
 
                 // open leader #3 form
@@ -630,7 +638,7 @@ namespace bdd_tests
 
                 // enter leader #3 last name
                 NgWebElement uiLeaderLast3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLeaderLast3.SendKeys(leaderLast);
+                uiLeaderLast3.SendKeys(leaderLast3);
 
                 // select leader #3 role
                 NgWebElement uiLeaderRole3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(3) input[formControlName='isDirectorNew']"));
@@ -638,7 +646,7 @@ namespace bdd_tests
 
                 // enter leader #3 title
                 NgWebElement uiLeaderTitle3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(4) input[formControlName='titleNew']"));
-                uiLeaderTitle3.SendKeys(leaderTitle);
+                uiLeaderTitle3.SendKeys(leaderTitle3);
 
                 // enter leader #3 email
                 NgWebElement uiLeaderEmail3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(5) input[formControlName='emailNew']"));
@@ -655,10 +663,10 @@ namespace bdd_tests
             if (businessType == " partnership")
             {
                 // create individual partner info
-                string partnerFirstName = "Individual";
-                string partnerLastName = "Partner";
-                string partnerPercentage = "50";
-                string partnerEmail = "individual@partner.com";
+                string partnerFirstName = "IndividualPartner1First";
+                string partnerLastName = "IndividualPartner1Last";
+                string partnerPercentage = "501";
+                string partnerEmail = "individual1@partner.com";
 
                 // find the upload test file in the bdd-tests\upload_files folder
                 var environment = Environment.CurrentDirectory;
@@ -708,7 +716,7 @@ namespace bdd_tests
 
                 // create business partner info
                 string bizPartnerName = "Business Partner";
-                string bizPartnerPercentage = "50";
+                string bizPartnerPercentage = "502";
                 string bizPartnerEmail = "business@partner.com";
 
                 // enter the business partner name
@@ -741,9 +749,9 @@ namespace bdd_tests
                 uiOpenPartner2Row.Click();
 
                 // create individual partner 2 info
-                string partner2FirstName = "Individual";
-                string partner2LastName = "Partner2";
-                string partner2Percentage = "50";
+                string partner2FirstName = "IndividualPartner2First";
+                string partner2LastName = "IndividualPartner2Last";
+                string partner2Percentage = "503";
                 string partner2Email = "individual@partner2.com";
 
                 // enter individual partner2 first name

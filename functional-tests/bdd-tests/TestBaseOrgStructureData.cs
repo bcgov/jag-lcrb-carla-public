@@ -70,17 +70,55 @@ namespace bdd_tests
 
             if (businessType == " society")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director1First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director1Last')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director1Title')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'director1@society.com')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director2First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director2Last')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director2Title')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'director2@society.com')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director3First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director3Last')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Director3Title')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'director3@society.com')]")).Displayed);
             }
 
             if (businessType == " public corporation")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1FirstPubCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1LastPubCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1TitlePubCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'leader1@publiccorp.com')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader2FirstPubCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader2LastPubCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader2TitlePubCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'leader2@publiccorp.com')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader3FirstPubCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader3LastPubCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader3TitlePubCorp')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'leader3@publiccorp.com')]")).Displayed);
             }
 
             if (businessType == " partnership")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner1First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner1Last')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'501')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'individual1@partner.com')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Business Partner')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'502')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'business@partner.com')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner2First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner2Last')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'503')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'individual@partner2.com')]")).Displayed);
             }
 
             if (businessType == "n indigenous nation")
