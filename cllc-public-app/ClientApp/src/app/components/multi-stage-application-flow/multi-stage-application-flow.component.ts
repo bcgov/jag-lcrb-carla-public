@@ -27,19 +27,20 @@ export class MultiStageApplicationFlowComponent implements OnInit {
   @ViewChild('dynamicApplication', { static: false }) dynamicApplicationComponent: DynamicApplicationComponent;
   stepType: 'post-lg-decision';
   application: Application;
+  allSteps = ['account-profile', 'licensee-changes', 'application', 'security-screening', 'payment'];
+  stepsForApplication = ['account-profile', 'licensee-changes', 'application', 'security-screening', 'payment'];
 
-
-  constructor(public featureFlagService: FeatureFlagService, 
-              private route: ActivatedRoute, 
-              public applicationDataService: ApplicationDataService, 
-              ) {
+  constructor(public featureFlagService: FeatureFlagService,
+    private route: ActivatedRoute,
+    public applicationDataService: ApplicationDataService,
+  ) {
 
     featureFlagService.featureOn('SecurityScreening')
       .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
 
     this.route.paramMap.subscribe(params => {
       this.applicationId = params.get('applicationId');
-      if (params.get('stepType') === 'post-lg-decision'){
+      if (params.get('stepType') === 'post-lg-decision') {
         this.stepType = 'post-lg-decision';
       }
     });
@@ -54,13 +55,28 @@ export class MultiStageApplicationFlowComponent implements OnInit {
           (<any>data).applyAsIndigenousNation = true;
         }
         this.isFree = data.applicationType.isFree;
+        this.determineSteps();
       },
-      () => {
-        console.log('Error occured');
+        () => {
+          console.log('Error occured');
+        }
+      );
+  }
+
+  // determine which steps to show or hide
+  determineSteps() {
+    let steps = [];
+    this.allSteps.forEach(step => {
+      if (
+        (step === 'account-profile' && this.stepType !== 'post-lg-decision') ||
+        (step === 'licensee-changes' && this.stepType !== 'post-lg-decision'&& this.securityScreeningEnabled && this.application && this.application.applicationType.requiresSecurityScreening) ||
+        (step === 'application') ||
+        (step === 'security-screening' && this.securityScreeningEnabled && this.application && this.application.applicationType.requiresSecurityScreening) ||
+        (step === 'payment' && this.applicationId && !this.isFree)
+      ) {
+        steps.push(step);
       }
-    );
-
-
+    });
   }
 
   canDeactivate(): Observable<boolean> {
