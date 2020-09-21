@@ -833,9 +833,9 @@ namespace bdd_tests
                 /********** Leader #0 **********/
 
                 // create the leader data
-                string leaderFirstName = "Leader0";
-                string leaderLastName = "University";
-                string leaderTitle = "CTO";
+                string leaderFirstName = "Leader0FirstUniversity";
+                string leaderLastName = "Leader0LastUniversity";
+                string leaderTitle = "Leader0TitleUniversity";
                 string leaderEmail = "leader0@university.com";
 
                 // open leader #0 form  
