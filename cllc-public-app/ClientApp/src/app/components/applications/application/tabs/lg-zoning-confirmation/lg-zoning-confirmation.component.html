@@ -41,6 +41,16 @@
         <app-field [isFullWidth]="true" label="Comments (optional)">
             <textarea class="form-controls w-100" formControlName="lGDecisionComments" rows="6"></textarea>
         </app-field>
+
+        <p>
+            Please upload LG Proof of Zoning Document:
+        </p>
+        <app-file-uploader *ngIf="application?.id" documentType="LGProofOfZoning"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedZoningDocuments = $event"
+            [entityId]="application?.id" [uploadHeader]="'TO UPLOAD LG PROOF OF ZONING DOCUMENTS, DRAG FILES HERE OR'"
+            #proofOfZoningDocs>
+        </app-file-uploader>
     </section>
 </div>
 
