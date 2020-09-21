@@ -45,11 +45,12 @@
         <p>
             Please upload LG Proof of Zoning Document:
         </p>
+
         <app-file-uploader *ngIf="application?.id" documentType="LGProofOfZoning"
-            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-            [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedZoningDocuments = $event"
-            [entityId]="application?.id" [uploadHeader]="'TO UPLOAD LG PROOF OF ZONING DOCUMENTS, DRAG FILES HERE OR'"
-            #proofOfZoningDocs>
+            [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval"
+            (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [maxNumberOfFiles]="200"
+            fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="application?.id"
+            [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
         </app-file-uploader>
     </section>
 </div>
