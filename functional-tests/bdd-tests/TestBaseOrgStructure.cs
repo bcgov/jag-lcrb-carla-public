@@ -299,9 +299,9 @@ namespace bdd_tests
                 uiOpenLeaderForm.Click();
 
                 // create the leader info
-                string firstName = "Leader";
-                string lastName = "SoleProprietor";
-                string email = "leader@soleproprietor.com";
+                string firstName = "Leader1First";
+                string lastName = "Leader1Last";
+                string email = "leader1@soleproprietor.com";
 
                 // enter the leader first name
                 NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("[formControlName='firstNameNew']"));
@@ -329,7 +329,8 @@ namespace bdd_tests
                 uiOpenLeaderForm2.Click();
 
                 // create the leader #2 info
-                string firstName2 = "Leader2";
+                string firstName2 = "Leader2First";
+                string lastName2 = "Leader2Last";
                 string email2 = "leader2@soleproprietor.com";
 
                 // enter the leader #2 first name
@@ -338,7 +339,7 @@ namespace bdd_tests
 
                 // enter the leader #2 last name
                 NgWebElement uiLastName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLastName2.SendKeys(lastName);
+                uiLastName2.SendKeys(lastName2);
 
                 // enter the leader #2 email
                 NgWebElement uiEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='emailNew']"));
@@ -358,7 +359,8 @@ namespace bdd_tests
                 uiOpenLeaderForm3.Click();
 
                 // create the leader #2 info
-                string firstName3 = "Leader3";
+                string firstName3 = "Leader3First";
+                string lastName3 = "Leader3Last";
                 string email3 = "leader3@soleproprietor.com";
 
                 // enter the leader #2 first name
@@ -367,7 +369,7 @@ namespace bdd_tests
 
                 // enter the leader #2 last name
                 NgWebElement uiLastName3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLastName3.SendKeys(lastName);
+                uiLastName3.SendKeys(lastName3);
 
                 // enter the leader #3 email
                 NgWebElement uiEmail3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(3) input[formControlName='emailNew']"));
