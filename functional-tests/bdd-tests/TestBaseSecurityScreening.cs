@@ -93,18 +93,41 @@ namespace bdd_tests
             // confirm that private corporation personnel are present for a multilevel business
             if (businessType == "a multilevel business")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder0')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndyShareholder0First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndyShareholder0Last')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0Last')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1Biz1First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1Biz1Last')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1BizFirst')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1BizLast')]")).Displayed);
+
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz2First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1Biz1Last')]")).Displayed);
+
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz2First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz2Last')]")).Displayed);
+
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz3First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz3Last')]")).Displayed);
+
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz3First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz3Last')]")).Displayed);
+
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz4First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz4Last')]")).Displayed);
+
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz4First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz4Last')]")).Displayed);
+
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz5First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholderBiz5Last')]")).Displayed);
+
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz5First')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderBiz5Last')]")).Displayed);
             }
 
             // confirm that mixed business shareholder personnel are present
