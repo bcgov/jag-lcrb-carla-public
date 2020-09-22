@@ -19,7 +19,8 @@
       </div>
   
       <div class="padded-section">
-        <h2>Status <b>{{getOptionFromValue(eventStatus, eventForm.get('status').value) === null ? '' : getOptionFromValue(eventStatus, eventForm.get('status').value).label}}</b></h2>
+        <h2>Status: <b>{{getOptionFromValue(eventStatus, eventForm.get('status').value) === null ? '' : getOptionFromValue(eventStatus, eventForm.get('status').value).label}}</b></h2>
+        <h3 *ngIf="licenceEvent != null && licenceEvent.eventNumber != null">Number: <b>{{licenceEvent.eventNumber}}</b></h3>
       </div>
 
       <h3 class="blue-header">MARKET ELIGIBILITY CONSENT</h3>

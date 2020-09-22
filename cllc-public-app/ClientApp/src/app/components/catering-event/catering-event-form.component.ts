@@ -134,6 +134,7 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
   retrieveSavedEvent(eventId: string) {
     this.busy = this.licenceEvents.getLicenceEvent(eventId)
     .subscribe((licenceEvent) => {
+      this.licenceEvent = licenceEvent;
       this.setFormToLicenceEvent(licenceEvent);
     });
   }
@@ -177,6 +178,7 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
       postalCode: licenceEvent.postalCode,
       startDate: _moment.utc(licenceEvent.startDate),
       endDate: _moment.utc(licenceEvent.endDate),
+      eventCategory: this.getOptionFromLabel(this.eventCategory, 'Catering').value,
       agreement: false
     });
 
