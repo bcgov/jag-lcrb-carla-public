@@ -13,7 +13,8 @@
     </div>
 
     <div class="padded-section">
-      <h2>Status <b>{{getOptionFromValue(eventStatus, eventForm.get('status').value) === null ? '' : getOptionFromValue(eventStatus, eventForm.get('status').value).label}}</b></h2>
+      <h2>Status: <b>{{getOptionFromValue(eventStatus, eventForm.get('status').value) === null ? '' : getOptionFromValue(eventStatus, eventForm.get('status').value).label}}</b></h2>
+      <h3 *ngIf="licenceEvent != null && licenceEvent.eventNumber != null">Event Number: <b>{{licenceEvent.eventNumber}}</b></h3>
     </div>
 
     <h3 class="blue-header">EVENT CONTACT INFORMATION</h3>
