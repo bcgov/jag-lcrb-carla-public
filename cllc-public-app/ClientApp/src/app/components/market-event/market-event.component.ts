@@ -109,6 +109,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
   retrieveSavedEvent(eventId: string) {
     this.busy = this.licenceEvents.getLicenceEvent(eventId)
     .subscribe((licenceEvent) => {
+      this.licenceEvent = licenceEvent;
       this.setFormToLicenceEvent(licenceEvent);
     });
   }
