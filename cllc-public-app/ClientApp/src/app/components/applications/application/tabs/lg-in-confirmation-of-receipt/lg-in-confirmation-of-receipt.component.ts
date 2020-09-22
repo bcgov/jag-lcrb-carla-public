@@ -24,6 +24,8 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
   approvingApplication: boolean;
   rejectingApp: boolean;
   optingOutOfComment: boolean;
+  uploadedResolutionDocuments: number = 0; 
+  uploadedStampedFloorPlanDocuments: number = 0; 
 
   constructor(private applicationDataService: ApplicationDataService,
     private snackBar: MatSnackBar,
@@ -60,7 +62,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
       return;
     }
 
-    this.showComfirmation('OptOut').subscribe(result => {
+    this.showComfirmation('OptOut', true).subscribe(result => {
       if (result === 'OK') {
         this.optingOutOfComment = true;
         this.cd.detectChanges();
@@ -93,7 +95,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
       return;
     }
 
-    this.showComfirmation('Reject').subscribe(result => {
+    this.showComfirmation('Reject', true).subscribe(result => {
       if (result === 'OK') {
         this.rejectingApp = true;
         this.cd.detectChanges();
@@ -127,8 +129,8 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     if (!this.isValid()) {
       return;
     }
-
-    this.showComfirmation('Approve').subscribe(result => {
+    let filesUploaded = (this.uploadedResolutionDocuments > 0);
+    this.showComfirmation('Approve', filesUploaded).subscribe(result => {
       if (result === 'OK') {
         this.approvingApplication = true;
         this.cd.detectChanges();
@@ -156,13 +158,14 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
   }
 
 
-  showComfirmation(category: string): Observable<string> {
+  showComfirmation(category: string, requiredFilesUploaded: boolean): Observable<string> {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
       width: '400px',
       data: {
         category,
+        requiredFilesUploaded,
         application: this.application
       }
     };
@@ -185,11 +188,13 @@ export class LGDecisionDialogComponent {
 
   category: string;
   application: Application;
+  requiredFilesUploaded: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<LGDecisionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.category = data.category;
+    this.requiredFilesUploaded = data.requiredFilesUploaded;
     this.application = data.application;
   }
 
