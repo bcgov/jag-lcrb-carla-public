@@ -299,7 +299,7 @@
                         </tr>
 
                         <tr *ngIf="showNameChangeSection(associate)" style="height:20px;">
-                            <td colspan="7">
+                            <td colspan="8">
                                 <div (click)="associate.get('collapse').value = !associate.get('collapse').value"
                                     style="padding-left: 20px;">
                                     <mat-expansion-panel [expanded]="true" class="mat-elevation-z1">
@@ -453,7 +453,7 @@
                         </tr>
 
                         <tr *ngIf="!associate.get('edit').value" style="height:20px;">
-                            <td colspan="5">
+                            <td colspan="6">
                                 <mat-expansion-panel [expanded]="true" class="mat-elevation-z1">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title>
