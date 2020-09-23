@@ -128,7 +128,7 @@ namespace bdd_tests
                 uiConfirmButtonIndyShareholder.Click(); 
             }
 
-            if (bizType == " a partnership")
+            if (bizType == " partnership")
             {
                     // create individual partner info
                     string partnerFirstName = "IndividualPartner1First";
