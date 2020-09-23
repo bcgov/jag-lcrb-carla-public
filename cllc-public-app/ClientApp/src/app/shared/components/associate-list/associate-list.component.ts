@@ -331,6 +331,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
       } else if (this.changeTypeSuffix === 'BusinessShareholder') {
         node.changeType = 'removeBusinessShareholder';
       }
+      this.associates.at(index).patchValue(node);
     }
     this.changesMade.next(true);
   }

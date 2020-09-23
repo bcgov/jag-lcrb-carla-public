@@ -139,6 +139,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       });
   }
 
+  updateData(){
+    this.treeRoot = this.orgStructure.getData();
+  }
+
   getSaveLabel(): string {
     let label = 'Continue to Application';
 
