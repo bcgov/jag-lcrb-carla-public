@@ -134,7 +134,7 @@ namespace bdd_tests
                     // create individual partner info
                     string partnerFirstName = "IndividualPartner1First";
                     string partnerLastName = "IndividualPartner1Last";
-                    string partnerPercentage = "501";
+                    string partnerPercentage = "51";
                     string partnerEmail = "individual1@partner.com";
 
                     // find the upload test file in the bdd-tests\upload_files folder
