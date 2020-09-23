@@ -146,11 +146,6 @@ namespace bdd_tests
                     NgWebElement uiUploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
                     uiUploadPartnershipAgreement.SendKeys(partnershipPath);
 
-                    // upload the additional supporting document
-                    string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-                    NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-                    uiUploadAdditionalSupporting.SendKeys(additionalSupportingPath);
-
                     // open partner row
                     NgWebElement uiPartnerRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] button"));
                     uiPartnerRow.Click();
