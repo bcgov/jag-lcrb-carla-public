@@ -127,6 +127,57 @@ namespace bdd_tests
                 NgWebElement uiConfirmButtonIndyShareholder = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] .fa-save span"));
                 uiConfirmButtonIndyShareholder.Click(); 
             }
+
+            if (bizType == " a partnership")
+            {
+                    // create individual partner info
+                    string partnerFirstName = "IndividualPartner1First";
+                    string partnerLastName = "IndividualPartner1Last";
+                    string partnerPercentage = "501";
+                    string partnerEmail = "individual1@partner.com";
+
+                    // find the upload test file in the bdd-tests\upload_files folder
+                    var environment = Environment.CurrentDirectory;
+                    string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                    string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                    // upload the partnership agreement
+                    string partnershipPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
+                    NgWebElement uiUploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+                    uiUploadPartnershipAgreement.SendKeys(partnershipPath);
+
+                    // upload the additional supporting document
+                    string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
+                    NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+                    uiUploadAdditionalSupporting.SendKeys(additionalSupportingPath);
+
+                    // open partner row
+                    NgWebElement uiPartnerRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] button"));
+                    uiPartnerRow.Click();
+
+                    // enter partner first name
+                    NgWebElement uiPartnerFirst = ngDriver.FindElement(By.CssSelector("[formcontrolname='firstNameNew']"));
+                    uiPartnerFirst.SendKeys(partnerFirstName);
+
+                    // enter partner last name
+                    NgWebElement uiPartnerLast = ngDriver.FindElement(By.CssSelector("[formcontrolname='lastNameNew']"));
+                    uiPartnerLast.SendKeys(partnerLastName);
+
+                    // enter partner percentage
+                    NgWebElement uiPartnerPercentage = ngDriver.FindElement(By.CssSelector("[formcontrolname='interestPercentageNew']"));
+                    uiPartnerPercentage.SendKeys(partnerPercentage);
+
+                    // enter partner email
+                    NgWebElement uiPartnerEmail = ngDriver.FindElement(By.CssSelector("[formcontrolname='emailNew']"));
+                    uiPartnerEmail.SendKeys(partnerEmail);
+
+                    // enter partner DOB
+                    NgWebElement uiOpenPartnerDOB = ngDriver.FindElement(By.CssSelector("[formcontrolname='dateofBirthNew']"));
+                    uiOpenPartnerDOB.Click();
+
+                    // select the date
+                    SharedCalendarDate();
+                }
         }
 
 
@@ -140,6 +191,9 @@ namespace bdd_tests
 
                 NgWebElement uiDeleteShareholder = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Shareholder'] .fa-trash-alt span"));
                 uiDeleteShareholder.Click();
+
+                System.Threading.Thread.Sleep(9000);
+
             }
         }
 
