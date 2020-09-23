@@ -42,8 +42,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsIndividual { get; set; }
         public int? NumberofSharesNew { get; set; }
         public int? NumberofSharesOld { get; set; }
-        public int? NumberofNonVotingSharesNew { get; set; }
-        public int? NumberofNonVotingSharesOld { get; set; }
+        public int? NumberOfNonVotingSharesNew { get; set; }
+        public int? NumberOfNonVotingSharesOld { get; set; }
         public int? TotalSharesNew { get; set; }
         public int? TotalSharesOld { get; set; }
         public int? Statecode { get; set; }
@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string ParentLegalEntityId { get; set; }
         public string LegalEntityId { get; set; }
         public string ParentLicenseeChangeLogId { get; set; }
-        public IList<LicenseeChangeLog> Children { get; set; }
+        public IList<LicenseeChangeLog> Children { get; set; } = new List<LicenseeChangeLog>();
 
         public decimal? InterestPercentageOld { get; set; }
         public decimal? InterestPercentageNew { get; set; }
@@ -82,6 +82,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string NameOld { get; set; }
 
         public string PhsLink { get; set; }
+
+        public bool? IsShareholderIndividual { get; set; }
+        public bool? IsLeadershipIndividual { get; set; }
 
 
         public LicenseeChangeLog ParentLicenseeChangeLog { get; set; }
@@ -142,6 +145,56 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             }
         }
 
+        public void UpdateValues(LicenseeChangeLog update){
+             if (update != null)
+            {
+                Id = update.Id;
+                ParentLicenseeChangeLogId = update.ParentLicenseeChangeLogId;
+                LegalEntityId = update.LegalEntityId;
+                BusinessAccountId = update.BusinessAccountId;
+                BusinessType = update.BusinessType;
+                IsIndividual = update.IsIndividual;
+                ParentLegalEntityId = update.ParentLegalEntityId;
+                ChangeType = update.ChangeType;
+                IsDirectorNew = update.IsDirectorNew;
+                IsDirectorOld = update.IsDirectorOld;
+                IsManagerNew = update.IsManagerNew;
+                IsManagerOld = update.IsManagerOld;
+                IsOfficerNew = update.IsOfficerNew;
+                IsOfficerOld = update.IsOfficerOld;
+                IsOwnerNew = update.IsOwnerNew;
+                IsOwnerOld = update.IsOwnerOld;
+                IsShareholderNew = update.IsShareholderNew;
+                IsShareholderOld = update.IsShareholderOld;
+                IsTrusteeNew = update.IsTrusteeNew;
+                IsTrusteeOld = update.IsTrusteeOld;
+                ParentBusinessAccountId = update.ParentBusinessAccountId;
+                BusinessAccountId = update.BusinessAccountId;
+
+                NumberofSharesNew = update.NumberofSharesNew;
+                NumberofSharesOld = update.NumberofSharesOld;
+                EmailNew = update.EmailNew;
+                EmailOld = update.EmailOld;
+                FirstNameNew = update.FirstNameNew;
+                FirstNameOld = update.FirstNameOld;
+                LastNameNew = update.LastNameNew;
+                LastNameOld = update.LastNameOld;
+                BusinessNameNew = update.BusinessNameNew;
+                NameOld = update.NameOld;
+                DateofBirthNew = update.DateofBirthNew;
+                DateofBirthOld = update.DateofBirthOld;
+                TitleNew = update.TitleNew;
+                TitleOld = update.TitleOld;
+                // PhsLink = update.PhsLink;
+                NumberOfMembers = update.NumberOfMembers;
+                AnnualMembershipFee = update.AnnualMembershipFee;
+                TotalSharesOld = update.TotalSharesOld;
+                TotalSharesNew = update.TotalSharesNew;
+                InterestPercentageOld = update.InterestPercentageOld;
+                InterestPercentageNew = update.InterestPercentageNew;
+            }
+        }
+
         public LicenseeChangeLog(LegalEntity legalEntity)
         {
             if (legalEntity != null)
@@ -178,8 +231,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 }
                 NumberofSharesNew = legalEntity.commonvotingshares;
                 NumberofSharesOld = legalEntity.commonvotingshares;
-                NumberofNonVotingSharesNew = legalEntity.commonnonvotingshares;
-                NumberofNonVotingSharesOld = legalEntity.commonnonvotingshares;
+                NumberOfNonVotingSharesNew = legalEntity.commonnonvotingshares;
+                NumberOfNonVotingSharesOld = legalEntity.commonnonvotingshares;
                 EmailNew = legalEntity.email;
                 EmailOld = legalEntity.email;
                 FirstNameNew = legalEntity.firstname;
@@ -200,6 +253,39 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 InterestPercentageOld = legalEntity.interestpercentage;
                 InterestPercentageNew = legalEntity.interestpercentage;
             }
+        }
+    
+        public LicenseeChangeLog FindNodByLegalEntityId(string id){
+            LicenseeChangeLog result = null;
+            if(id == LegalEntityId){
+                result = this;
+            } else if(Children != null && Children.Count > 0){
+                foreach (var item in Children)
+                {
+                    var found = item.FindNodByLegalEntityId(id);
+                    if(found != null){
+                        result = found;
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+        public LicenseeChangeLog FindNodByParentChangeLogId(string id){
+            LicenseeChangeLog result = null;
+            if(id == Id){
+                result = this;
+            } else if(Children != null && Children.Count > 0){
+                foreach (var item in Children)
+                {
+                    var found = item.FindNodByParentChangeLogId(id);
+                    if(found != null){
+                        result = found;
+                        break;
+                    }
+                }
+            }
+            return result;
         }
     }
 }

@@ -58,7 +58,6 @@ export class DashboardComponent extends FormBase implements OnInit {
             .pipe(takeWhile(() => this.componentActive))
             .subscribe((data: LegalEntity) => {
               this.tree = LicenseeChangeLog.CreateFromLegalEntity(data);
-              //this.tree.processLegalEntityTree(data);
               this.tree.isRoot = true;
             },
               () => {
