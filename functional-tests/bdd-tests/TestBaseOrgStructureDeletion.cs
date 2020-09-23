@@ -130,7 +130,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"I delete the personnel for a (.*)")]
+        [And(@"I delete the personnel for a(.*)")]
         public void DeletePersonnelFromOrgStructure(string bizType)
         {
             if (bizType == " private corporation")
