@@ -244,6 +244,56 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
             }
+
+            if (bizType == " public corporation")
+            {
+                // create the leader #1 data
+                string leaderFirst = "Leader1FirstPubCorp";
+                string leaderLast = "Leader1LastPubCorp";
+                string leaderTitle = "Leader1TitlePubCorp";
+                string leaderEmail = "leader1@publiccorp.com";
+
+                // find the upload test file in the bdd-tests\upload_files folder
+                var environment = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                // upload NOA form
+                string NOAPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+                NgWebElement uiUploadNOA = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+                uiUploadNOA.SendKeys(NOAPath);
+
+                // open leader #1 form
+                NgWebElement uiOpenLeaderForm = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
+                uiOpenLeaderForm.Click();
+
+                // enter leader #1 first name
+                NgWebElement uiLeaderFirst = ngDriver.FindElement(By.CssSelector("[formcontrolname='firstNameNew']"));
+                uiLeaderFirst.SendKeys(leaderFirst);
+
+                // enter leader #1 last name
+                NgWebElement uiLeaderLast = ngDriver.FindElement(By.CssSelector("[formcontrolname='lastNameNew']"));
+                uiLeaderLast.SendKeys(leaderLast);
+
+                // select leader #1 role
+                NgWebElement uiLeaderRole = ngDriver.FindElement(By.CssSelector("[formcontrolname='isDirectorNew']"));
+                uiLeaderRole.Click();
+
+                // enter leader #1 title
+                NgWebElement uiLeaderTitle = ngDriver.FindElement(By.CssSelector("[formcontrolname='titleNew']"));
+                uiLeaderTitle.SendKeys(leaderTitle);
+
+                // enter leader #1 email
+                NgWebElement uiLeaderEmail = ngDriver.FindElement(By.CssSelector("[formcontrolname='emailNew']"));
+                uiLeaderEmail.SendKeys(leaderEmail);
+
+                // select leader #1 DOB
+                NgWebElement uiLeaderDOB = ngDriver.FindElement(By.CssSelector("[formcontrolname='dateofBirthNew']"));
+                uiLeaderDOB.Click();
+
+                // select the date
+                SharedCalendarDate();
+            }
         }
 
 
@@ -276,6 +326,12 @@ namespace bdd_tests
                 NgWebElement uiDeleteDirector = ngDriver.FindElement(By.CssSelector(".fa-trash-alt span"));
                 uiDeleteDirector.Click();
             }
+
+            if (bizType == " public corporation")
+            {
+                NgWebElement uiDeleteLeader = ngDriver.FindElement(By.CssSelector(".fa-trash-alt span"));
+                uiDeleteLeader.Click();
+            }
         }
 
 
@@ -302,6 +358,11 @@ namespace bdd_tests
             if (bizType == " society")
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Director1First'))]")).Displayed);
+            }
+
+            if (bizType == " public corporation")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Leader1FirstPubCorp'))]")).Displayed);
             }
         }
     }
