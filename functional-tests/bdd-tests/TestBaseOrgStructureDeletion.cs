@@ -173,6 +173,77 @@ namespace bdd_tests
                     // select the date
                     SharedCalendarDate();
                 }
+
+            if (bizType == " sole proprietorship")
+            {
+                // open the leader row
+                NgWebElement uiOpenLeaderForm = ngDriver.FindElement(By.CssSelector("button.btn.btn-secondary"));
+                uiOpenLeaderForm.Click();
+
+                // create the leader info
+                string firstName = "Leader1First";
+                string lastName = "Leader1Last";
+                string email = "leader1@soleproprietor.com";
+
+                // enter the leader first name
+                NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("[formControlName='firstNameNew']"));
+                uiFirstName.SendKeys(firstName);
+
+                // enter the leader last name
+                NgWebElement uiLastName = ngDriver.FindElement(By.CssSelector("[formControlName='lastNameNew']"));
+                uiLastName.SendKeys(lastName);
+
+                // enter the leader email
+                NgWebElement uiEmail = ngDriver.FindElement(By.CssSelector("[formControlName='emailNew']"));
+                uiEmail.SendKeys(email);
+
+                // select the leader DOB
+                NgWebElement uiOpenLeaderDOB = ngDriver.FindElement(By.CssSelector("[formcontrolname='dateofBirthNew']"));
+                uiOpenLeaderDOB.Click();
+
+                // select the date
+                SharedCalendarDate();
+            }
+
+            if (bizType == " society")
+            { 
+                // create the director #1 info
+                string firstName = "Director1First";
+                string lastName = "Director1Last";
+                string title = "Director1Title";
+                string email = "director1@society.com";
+                
+                // open the director #1 row 
+                NgWebElement uiOpenDirectorForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'][changetypesuffix='Leadership'] button"));
+                uiOpenDirectorForm.Click();
+                
+                // enter the director #1 first name
+                NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("[formcontrolname='firstNameNew']"));
+                uiFirstName.SendKeys(firstName);
+
+                // enter the director #1 last name
+                NgWebElement uiLastName = ngDriver.FindElement(By.CssSelector("[formcontrolname='lastNameNew']"));
+                uiLastName.SendKeys(lastName);
+
+                // select the director #1 position
+                NgWebElement uiPosition = ngDriver.FindElement(By.CssSelector("[formcontrolname='isDirectorNew']"));
+                uiPosition.Click();
+
+                // enter the director #1 title
+                NgWebElement uiTitle = ngDriver.FindElement(By.CssSelector("[formcontrolname='titleNew']"));
+                uiTitle.SendKeys(title);
+
+                // enter the director #1 email
+                NgWebElement uiEmail = ngDriver.FindElement(By.CssSelector("[formcontrolname='emailNew']"));
+                uiEmail.SendKeys(email);
+
+                // select the director #1 DOB
+                NgWebElement uiOpenDirectorDOB = ngDriver.FindElement(By.CssSelector("[formcontrolname='dateofBirthNew']"));
+                uiOpenDirectorDOB.Click();
+
+                // select the date
+                SharedCalendarDate();
+            }
         }
 
 
@@ -186,9 +257,24 @@ namespace bdd_tests
 
                 NgWebElement uiDeleteShareholder = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Shareholder'] .fa-trash-alt span"));
                 uiDeleteShareholder.Click();
+            }
 
-                System.Threading.Thread.Sleep(9000);
+            if (bizType == " partnership")
+            {
+                NgWebElement uiDeletePartner = ngDriver.FindElement(By.CssSelector(".fa-trash-alt span"));
+                uiDeletePartner.Click();
+            }
 
+            if (bizType == " sole proprietorship")
+            {
+                NgWebElement uiDeleteSoleProprietor = ngDriver.FindElement(By.CssSelector(".fa-trash-alt span"));
+                uiDeleteSoleProprietor.Click();
+            }
+
+            if (bizType == " society")
+            {
+                NgWebElement uiDeleteDirector = ngDriver.FindElement(By.CssSelector(".fa-trash-alt span"));
+                uiDeleteDirector.Click();
             }
         }
 
@@ -201,6 +287,21 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Leader0First'))]")).Displayed);
 
                 Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'IndyShareholder0First'))]")).Displayed);
+            }
+
+            if (bizType == " partnership")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'IndividualPartner1First'))]")).Displayed);
+            }
+
+            if (bizType == " sole proprietorship")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Leader1First'))]")).Displayed);
+            }
+
+            if (bizType == " society")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Director1First'))]")).Displayed);
             }
         }
     }
