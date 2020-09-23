@@ -348,7 +348,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("licensee-data/{type}")]
         public async Task<OngoingLicenseeData> GetLicenseeData(string type)
         {
-            bool forceCreate  = (type == "create");
+            bool forceCreate = (type == "create");
 
             OngoingLicenseeData result = new OngoingLicenseeData();
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -392,6 +392,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             result.TreeRoot = ProcessLegalEntityTree(result.CurrentHierarchy, result.ChangeLogs);
 
+            // no need to send change logs to the client side
+            result.ChangeLogs = null;
+
             result.NonTerminatedApplications = _dynamicsClient.GetNotTerminatedCRSApplicationCount(userSettings.AccountId);
 
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
@@ -427,24 +430,82 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /*
-* Performs a Depth First Traversal and transforms the LegalEntity tree to change objects
-*/
-        private LicenseeChangeLog ProcessLegalEntityTree(LegalEntity node, List<LicenseeChangeLog> currentChangeLogs)
+        *  Combines the associate tree with the changelogs
+        */
+        private LicenseeChangeLog ProcessLegalEntityTree(LegalEntity root, List<LicenseeChangeLog> currentChangeLogs)
+        {
+            //conver associate tree to licensee change log tee
+            LicenseeChangeLog tree = AssociateTreeToChangeLog(root);
+
+            //merge application change logs into the tree that was derived from legal entities
+            currentChangeLogs.ForEach(change =>
+            {
+                if (change.ChangeType == LicenseeChangeType.addLeadership
+                    || change.ChangeType == LicenseeChangeType.removeLeadership
+                    || change.ChangeType == LicenseeChangeType.updateLeadership)
+                {
+                    change.IsIndividual = true;
+                    change.IsLeadershipIndividual = true;
+                }
+                if (change.ChangeType == LicenseeChangeType.addIndividualShareholder
+                    || change.ChangeType == LicenseeChangeType.removeIndividualShareholder
+                    || change.ChangeType == LicenseeChangeType.updateIndividualShareholder)
+                {
+                    change.IsIndividual = true;
+                    change.IsShareholderIndividual = true;
+                }
+
+                if (!string.IsNullOrEmpty(change.LegalEntityId))
+                { // if changelog is for an existing associate
+                    var matchingNode = tree.FindNodeByLegalEntityId(change.LegalEntityId);
+                    if (matchingNode != null)
+                    {
+                        matchingNode.UpdateValues(change);
+                    }
+                }
+                else if (!string.IsNullOrEmpty(change.ParentLegalEntityId))
+                { // if changelog if a child of an existing associate
+                    var parentNode = tree.FindNodeByLegalEntityId(change.ParentLegalEntityId);
+                    if (parentNode != null)
+                    {
+                        parentNode.Children.Add(change);
+                    }
+                }
+                else if (!string.IsNullOrEmpty(change.ParentLicenseeChangeLogId))
+                { // if changelog if a child of another change log
+                    var parentNode = tree.FindNodeByParentChangeLogId(change.ParentLicenseeChangeLogId);
+                    if (parentNode != null)
+                    {
+                        parentNode.Children.Add(change);
+                    }
+                }
+            });
+
+            return tree;
+
+        }
+
+        private LicenseeChangeLog AssociateTreeToChangeLog(LegalEntity node)
         {
             var newNode = new LicenseeChangeLog(node);
-            // match up the id.  
-            newNode.Id = FindChangeLogId(currentChangeLogs, newNode.LegalEntityId);
-
-            if (node != null && node.children != null && node.children.Count > 0)
+            if (node?.children != null && node.children.Count > 0)
             {
                 var children = new List<LicenseeChangeLog>();
                 foreach (var child in node.children)
                 {
-                    var childNode = ProcessLegalEntityTree(child, currentChangeLogs);
-                    childNode.ParentLicenseeChangeLog = newNode;
+                    var childNode = AssociateTreeToChangeLog(child);
+                    // childNode.ParentLicenseeChangeLog = newNode;
+
+                    var IsShareholderIndividual = (childNode.IsIndividual == true && childNode.IsShareholderNew == true);
+                    var IsKeyPersonnel = (childNode.IsIndividual == true && (
+                            childNode.IsDirectorNew == true ||
+                            childNode.IsManagerNew == true ||
+                            childNode.IsOfficerNew == true ||
+                            childNode.IsTrusteeNew == true
+                            ));
 
                     //split the change log if it is both a shareholder and key-personnel
-                    if (childNode.IsIndividual.GetValueOrDefault(false) && (childNode.IsDirectorNew.GetValueOrDefault(false) || childNode.IsManagerNew.GetValueOrDefault(false) || childNode.IsOfficerNew.GetValueOrDefault(false) || childNode.IsTrusteeNew.GetValueOrDefault(false)))
+                    if (IsShareholderIndividual && IsKeyPersonnel)
                     {
                         var newIndividualNode = new LicenseeChangeLog(childNode);
                         newIndividualNode.Id = null; // force it to be a new record.
@@ -462,6 +523,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         childNode.IsOwnerOld = false;
                         childNode.IsDirectorOld = false;
                         childNode.IsTrusteeOld = false;
+                    }
+                    else if (IsShareholderIndividual)
+                    {
+                        childNode.IsShareholderIndividual = true;
+                    }
+                    else if (IsKeyPersonnel)
+                    {
+                        childNode.IsLeadershipIndividual = true;
                     }
 
                     children.Add(childNode);
@@ -485,7 +554,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return newNode;
         }
-
         private MicrosoftDynamicsCRMadoxioApplication GetCurrentLicenseeApplication(UserSettings userSettings, bool forceCreate)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;

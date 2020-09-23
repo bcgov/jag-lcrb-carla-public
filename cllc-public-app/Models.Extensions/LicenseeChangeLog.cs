@@ -27,8 +27,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             toDynamics.AdoxioIstrusteeold = fromVM.IsTrusteeOld;
             toDynamics.AdoxioNumberofsharesnew = fromVM.NumberofSharesNew;
             toDynamics.AdoxioNumberofsharesold = fromVM.NumberofSharesOld;
-            toDynamics.AdoxioNumberofnonvotingsharesnew = fromVM.NumberofNonVotingSharesNew;
-            toDynamics.AdoxioNumberofnonvotingsharesold = fromVM.NumberofNonVotingSharesOld;
+            toDynamics.AdoxioNumberofnonvotingsharesnew = fromVM.NumberOfNonVotingSharesNew;
+            toDynamics.AdoxioNumberofnonvotingsharesold = fromVM.NumberOfNonVotingSharesOld;
             toDynamics.AdoxioTotalsharesnew = fromVM.TotalSharesNew;
             toDynamics.AdoxioTotalsharesold = fromVM.NumberofSharesOld;
             toDynamics.AdoxioEmailnew = fromVM.EmailNew;
@@ -70,8 +70,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsTrusteeOld = changeLog.AdoxioIstrusteeold,
                 NumberofSharesNew = changeLog.AdoxioNumberofsharesnew,
                 NumberofSharesOld = changeLog.AdoxioNumberofsharesold,
-                NumberofNonVotingSharesNew = changeLog.AdoxioNumberofnonvotingsharesnew,
-                NumberofNonVotingSharesOld = changeLog.AdoxioNumberofnonvotingsharesold,
+                NumberOfNonVotingSharesNew = changeLog.AdoxioNumberofnonvotingsharesnew,
+                NumberOfNonVotingSharesOld = changeLog.AdoxioNumberofnonvotingsharesold,
                 TotalSharesNew = changeLog.AdoxioTotalsharesnew,
                 TotalSharesOld = changeLog.AdoxioTotalsharesold,
                 EmailNew = changeLog.AdoxioEmailnew,
@@ -94,7 +94,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 ParentLegalEntityId = changeLog._adoxioParentlegalentityidValue,
                 ParentLicenseeChangeLogId = changeLog._adoxioParentlinceseechangelogidValue, // Dynamics has a typo for this
                 NumberOfMembers = changeLog.AdoxioNumberofmembers,
-                AnnualMembershipFee = changeLog.AdoxioAnnualmembershipfee
+                AnnualMembershipFee = changeLog.AdoxioAnnualmembershipfee,
             };
             return result;
         }

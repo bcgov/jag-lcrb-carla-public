@@ -112,8 +112,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
         this.form.patchValue(this.application);
 
-        const currentChangeLogs: LicenseeChangeLog[] = LicenseeChangeLog.FixLicenseeChangeLogArray(data.changeLogs || []);
-
         this.licenses = data.licenses || [];
         // to do: cannabis licences & liquor licences
         this.licencesOnFile = this.licenses.length > 0;
@@ -132,20 +130,14 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.treeRoot.fileUploads = {}; // This is only used on the client side
 
         this.treeRoot.isRoot = true;
-        this.treeRoot.fixChildren();
-
-        this.treeRoot.applySavedChangeLogs(currentChangeLogs);
 
         this.loadedValue = this.cleanSaveData(this.treeRoot);
-
 
         this.addDynamicContent();
 
         this.licenseeApplicationLoaded = true;
       });
   }
-
-
 
   getSaveLabel(): string {
     let label = 'Continue to Application';
@@ -169,7 +161,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     }
     return disable;
   }
-
 
   validateFormData() {
     let errors = [];
