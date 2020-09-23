@@ -20,6 +20,7 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
+
         [And(@"I add personnel to the organization structure for a(.*)")]
         public void AddPersonnelToOrgStructure(string bizType)
         {
@@ -297,73 +298,59 @@ namespace bdd_tests
         }
 
 
-        [And(@"I delete the personnel for a(.*)")]
+        [And(@"I delete the personnel for a (.*)")]
         public void DeletePersonnelFromOrgStructure(string bizType)
         {
-            if (bizType == " private corporation")
+            switch (bizType)
             {
-                NgWebElement uiDeleteLeader = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leadership'] .fa-trash-alt span"));
-                uiDeleteLeader.Click();
-
-                NgWebElement uiDeleteShareholder = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Shareholder'] .fa-trash-alt span"));
-                uiDeleteShareholder.Click();
-            }
-
-            if (bizType == " partnership")
-            {
-                NgWebElement uiDeletePartner = ngDriver.FindElement(By.CssSelector(".fa-trash-alt span"));
-                uiDeletePartner.Click();
-            }
-
-            if (bizType == " sole proprietorship")
-            {
-                NgWebElement uiDeleteSoleProprietor = ngDriver.FindElement(By.CssSelector(".fa-trash-alt span"));
-                uiDeleteSoleProprietor.Click();
-            }
-
-            if (bizType == " society")
-            {
-                NgWebElement uiDeleteDirector = ngDriver.FindElement(By.CssSelector(".fa-trash-alt span"));
-                uiDeleteDirector.Click();
-            }
-
-            if (bizType == " public corporation")
-            {
-                NgWebElement uiDeleteLeader = ngDriver.FindElement(By.CssSelector(".fa-trash-alt span"));
-                uiDeleteLeader.Click();
+                case "private corporation":
+                    ngDriver.FindElement(By.Id("deleteLeaderChange0")).Click();
+                    ngDriver.FindElement(By.Id("deleteShareholderChange0")).Click();
+                    break;
+                case "partnership":
+                    ngDriver.FindElement(By.Id("deleteLeaderChange0")).Click();
+                    break;
+                case "public corporation":
+                    ngDriver.FindElement(By.Id("deleteLeaderChange0")).Click();
+                    break;
+                case "society":
+                    ngDriver.FindElement(By.Id("deleteLeaderChange0")).Click();
+                    break;
+                case "sole proprietorship":
+                    ngDriver.FindElement(By.Id("deleteLeaderChange0")).Click();
+                    break;
+                default:
+                    throw (new Exception($"Unknown bizType {bizType}"));
             }
         }
+            
 
-
-        [And(@"the org structure data is successfully deleted for a(.*)")]
+        [And(@"the org structure data is successfully deleted for a (.*)")]
         public void DeletionSuccessful(string bizType)
         {
-            if (bizType == " private corporation")
-            {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Leader0First'))]")).Displayed);
 
-                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'IndyShareholder0First'))]")).Displayed);
+            switch (bizType)
+            {
+                case "private corporation":
+                    Assert.False(IsIdPresent("deleteLeaderChange0"));
+                    Assert.False(IsIdPresent("deleteShareholderChange0"));
+                    break;
+                case "partnership":
+                    Assert.False(IsIdPresent("deleteLeaderChange0"));
+                    break;
+                case "public corporation":
+                    Assert.False(IsIdPresent("deleteLeaderChange0"));
+                    break;
+                case "society":
+                    Assert.False(IsIdPresent("deleteLeaderChange0"));
+                    break;
+                case "sole proprietorship":
+                    Assert.False(IsIdPresent("deleteLeaderChange0"));
+                    break;
+                default:
+                    throw (new Exception($"Unknown bizType {bizType}"));
             }
 
-            if (bizType == " partnership")
-            {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'IndividualPartner1First'))]")).Displayed);
-            }
-
-            if (bizType == " sole proprietorship")
-            {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Leader1First'))]")).Displayed);
-            }
-
-            if (bizType == " society")
-            {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Director1First'))]")).Displayed);
-            }
-
-            if (bizType == " public corporation")
-            {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Leader1FirstPubCorp'))]")).Displayed);
-            }
         }
     }
 }
