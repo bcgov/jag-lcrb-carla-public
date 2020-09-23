@@ -255,14 +255,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             }
         }
     
-        public LicenseeChangeLog FindNodByLegalEntityId(string id){
+        public LicenseeChangeLog FindNodeByLegalEntityId(string id){
             LicenseeChangeLog result = null;
             if(id == LegalEntityId){
                 result = this;
             } else if(Children != null && Children.Count > 0){
                 foreach (var item in Children)
                 {
-                    var found = item.FindNodByLegalEntityId(id);
+                    var found = item.FindNodeByLegalEntityId(id);
                     if(found != null){
                         result = found;
                         break;
@@ -271,14 +271,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             }
             return result;
         }
-        public LicenseeChangeLog FindNodByParentChangeLogId(string id){
+        public LicenseeChangeLog FindNodeByParentChangeLogId(string id){
             LicenseeChangeLog result = null;
             if(id == Id){
                 result = this;
             } else if(Children != null && Children.Count > 0){
                 foreach (var item in Children)
                 {
-                    var found = item.FindNodByParentChangeLogId(id);
+                    var found = item.FindNodeByParentChangeLogId(id);
                     if(found != null){
                         result = found;
                         break;

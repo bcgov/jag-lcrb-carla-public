@@ -457,7 +457,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (!string.IsNullOrEmpty(change.LegalEntityId))
                 { // if changelog is for an existing associate
-                    var matchingNode = tree.FindNodByLegalEntityId(change.LegalEntityId);
+                    var matchingNode = tree.FindNodeByLegalEntityId(change.LegalEntityId);
                     if (matchingNode != null)
                     {
                         matchingNode.UpdateValues(change);
@@ -465,7 +465,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 else if (!string.IsNullOrEmpty(change.ParentLegalEntityId))
                 { // if changelog if a child of an existing associate
-                    var parentNode = tree.FindNodByLegalEntityId(change.ParentLegalEntityId);
+                    var parentNode = tree.FindNodeByLegalEntityId(change.ParentLegalEntityId);
                     if (parentNode != null)
                     {
                         parentNode.Children.Add(change);
@@ -473,7 +473,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 else if (!string.IsNullOrEmpty(change.ParentLicenseeChangeLogId))
                 { // if changelog if a child of another change log
-                    var parentNode = tree.FindNodByParentChangeLogId(change.ParentLicenseeChangeLogId);
+                    var parentNode = tree.FindNodeByParentChangeLogId(change.ParentLicenseeChangeLogId);
                     if (parentNode != null)
                     {
                         parentNode.Children.Add(change);
