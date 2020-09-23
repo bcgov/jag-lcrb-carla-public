@@ -21,6 +21,7 @@ import { ApplicationCancellationDialogComponent } from '@components/dashboard/ap
 import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { License } from '@models/license.model';
+import { AnnualVolumeService } from '@services/annual-volume.service';
 
 const ValidationErrorMap = {
   renewalCriminalOffenceCheck: 'Please answer question 1',
@@ -87,6 +88,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog,
+    public annualVolumeService: AnnualVolumeService,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
@@ -140,13 +142,18 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         this.busy = this.licenceDataService.getLicenceById(data.assignedLicence.id)
           .pipe(takeWhile(() => this.componentActive))
           .subscribe((data: License) => {
-            console.log(data.licenseSubCategory);
             if (data.licenseSubCategory !== null &&
               data.licenseSubCategory !== 'Independent Wine Store' &&
               data.licenseSubCategory !== 'Tourist Wine Store' &&
               data.licenseSubCategory !== 'Special Wine Store') {
               this.form.addControl('ldbOrderTotals', this.fb.control('', [Validators.required, Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]));
               this.form.addControl('ldbOrderTotalsConfirm', this.fb.control('', [Validators.required]));
+            }
+            if (data.licenseSubCategory === 'Winery' || data.licenseSubCategory === 'Brewery') {
+              this.form.addControl('volumeProduced', this.fb.control('', [Validators.required]));
+            }
+            if (data.licenseSubCategory === 'Winery') {
+              this.form.addControl('volumeDestroyed', this.fb.control('', [Validators.required]));
             }
           });
         if (data.establishmentParcelId) {
@@ -188,6 +195,11 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       && !this.form.get(fieldName).valid;
   }
 
+  getVolumeLabel() {
+    const label = this.isSubcategory('Brewery') ? 'hectolitres' : 'litres';
+    return `What was your ${this.licenseSubCategory}'s total volume produced (in ${label}) between January 1 and December 31?`;
+  }
+
   doAction(licenseId: string, actionName: string) {
 
     this.busy = this.licenceDataService.createApplicationForActionType(licenseId, actionName)
@@ -217,7 +229,6 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   }
 
   checkPossibleProblematicWords() {
-    console.log(this.form.get('establishmentName').errors);
     this.possibleProblematicNameWarning =
       this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
   }
@@ -228,14 +239,25 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
+    var reqs = [];
 
     if (this.form.get('ldbOrderTotals')) {
-      this.licenceDataService.updateLicenceLDBOrders(this.application.assignedLicence.id, this.form.get('ldbOrderTotals').value)
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe(() => { });
+      reqs.push(this.licenceDataService.updateLicenceLDBOrders(this.application.assignedLicence.id, this.form.get('ldbOrderTotals').value));
     }
-
-    return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
+    if (this.licenseSubCategory === "Winery" || this.licenseSubCategory === "Brewery") {
+      var data = {
+        applicationId: this.applicationId,
+        volumeProduced: this.form.get('volumeProduced') ? this.form.get('volumeProduced').value : null,
+        volumeDestroyed: this.form.get('volumeDestroyed') ? this.form.get('volumeDestroyed').value : null,
+        calendarYear: this.previousYear
+      }
+      reqs.push(this.annualVolumeService.updateAnnualVolumeForApplication(data, this.applicationId));
+    
+    }
+    return forkJoin([
+        ...reqs,
+        this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })]
+      )
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
