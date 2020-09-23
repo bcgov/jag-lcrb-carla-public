@@ -108,16 +108,16 @@ namespace bdd_tests
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner1First')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner1Last')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'501')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'51')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'individual1@partner.com')]")).Displayed);
 
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Business Partner')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'502')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'52')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'business@partner.com')]")).Displayed);
 
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner2First')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner2Last')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'503')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'53')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'individual@partner2.com')]")).Displayed);
             }
 
