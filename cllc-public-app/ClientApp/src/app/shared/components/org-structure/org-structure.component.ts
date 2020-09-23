@@ -47,7 +47,6 @@ export class OrgStructureComponent implements OnInit {
     let totalShares: number = null;
     if (this.node) {
       this.node = Object.assign(new LicenseeChangeLog(), this.node);
-      this.node.fixChildren();
       numberOfMembers = this.node.numberOfMembers;
       annualMembershipFee = this.node.annualMembershipFee;
       totalShares = this.node.totalSharesOld;
