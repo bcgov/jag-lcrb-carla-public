@@ -297,13 +297,15 @@ namespace bdd_tests
         public void CarlaDeleteCurrentAccount()
         {
             ngDriver.IgnoreSynchronization = true;
-
+            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
             // using wrapped driver as this call is not angular
             ngDriver.Navigate().GoToUrl($"{baseUri}api/accounts/delete/current");
 
             ngDriver.IgnoreSynchronization = false;
 
             ngDriver.Navigate().GoToUrl($"{baseUri}logout");
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
         }
     }
 }
