@@ -36,8 +36,8 @@
                     [extensions]="['pdf']" [entityId]="applicationId"
                     [uploadHeader]="'TO UPLOAD DISCRETION LETTER, DRAG FILES HERE OR'">
                   </app-file-uploader>
+                  <hr/>
             </section>
-            <hr/>
             <section>
                 <ul>
                     <li>Production reporting period is January 1, {{previousYear}} to December 31, {{previousYear}}</li>
@@ -47,25 +47,32 @@
                     <li *ngIf="isSubcategory('Winery')">All purchase, disposition, and movement. Records must be kept and recorded on an ongoing basis, and must be available to view.</li>
                 </ul>
             </section>
-            <hr/>
             <section *ngIf="isSubcategory('Winery')">
+                <hr/>
                 <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
                 <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;"><p>Please Note: You are required to retain all records of your primary ingredients, additions to wine, what your wine was produced from, any wine purchased and any wine sold and to whom. Documents must be readily available upon request from the Liquor and Cannabis Regulation Branch.</p></div>
             </section>
-            <section class="d-flex justify-content-between w-100">
-                <div class="question-label align-self-center">
-                    What was your {{licenseSubCategory}}'s total volume produced (in {{isSubcategory('Brewery') ? 'hectolitres' : 'litres'}}) between January 1 and December 31? 
+            <hr/>
+            <section class="w-100">
+                <div>
+                    <app-field *ngIf="form.controls['volumeProduced']"
+                        [label]="getVolumeLabel()"
+                        [required]="true"
+                        [valid]="isValidOrNotTouched('volumeProduced')">
+                        <input class="form-control" type="text"
+                            formControlName="volumeProduced"
+                            id="volumeProduced" mask="0*">
+                    </app-field>
                 </div>
-                <div style="flex: 0 0 85px;">
-                    <!-- <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
-                        [label]="getEstablishmentLabel(application?.applicationType)" [required]="true"
-                        [valid]="isValidOrNotTouched('establishmentName')"
-                        errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
-                        <input class="form-control" style="width: 500px;" type="text"
-                            [readonly]="application?.applicationType?.establishmentName === FormControlState.ReadOnly"
-                            (change)="checkPossibleProblematicWords()" formControlName="establishmentName"
-                            id="establishmentName">
-                    </app-field> -->
+                <div *ngIf="form.controls['volumeDestroyed']">
+                    <app-field
+                    label="What was the total volume destroyed (in litres and included in production volume)?"
+                    [required]="true"
+                    [valid]="isValidOrNotTouched('volumeDestroyed')">
+                        <input class="form-control" type="text"
+                            formControlName="volumeDestroyed"
+                            id="volumeDestroyed" mask="0*">
+                    </app-field>
                 </div>
             </section>
         </div>
