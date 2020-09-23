@@ -18,7 +18,7 @@
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
                     <ng-container *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()">
                         <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()" [formGroupName]="i"
-                            [ngClass]="{'alt-row': i%2 === 0}">
+                            [ngClass]="{'alt-row': i%2 === 0, '': i%2 !== 0}">
                             <td>
                                 <span *ngIf="!associate.get('edit').value || associate.get('id').value">
                                     {{associate.get('firstNameNew').value}}
@@ -125,7 +125,7 @@
                                     style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
                                 <i class="fas fa-save save" *ngIf="associate.get('edit').value " (click)="saveLog(i)"
                                     style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
-                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span
+                                <i class="fas fa-trash-alt" id="deleteLeaderChange{{i}}" (click)="deleteChange(associate.value, i)"><span
                                         class="icon-label">Delete</span></i>
                             </td>
                         </tr>
@@ -293,8 +293,8 @@
                                     style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
                                 <i class="fas fa-save" *ngIf="associate.get('edit').value" (click)="saveLog(i)"
                                     style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
-                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span
-                                        class="icon-label">Delete</span></i>
+                                <i class="fas fa-trash-alt" id="deleteShareholderChange{{i}}" (click)="deleteChange(associate.value, i)"><span
+                                                                                                                                      class="icon-label">Delete</span></i>
                             </td>
                         </tr>
 
