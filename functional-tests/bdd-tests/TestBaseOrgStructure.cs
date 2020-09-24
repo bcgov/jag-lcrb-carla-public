@@ -57,9 +57,9 @@ namespace bdd_tests
                 /********** Leader #0 **********/
 
                 // create the leader data
-                string leaderFirstName = "Leader0";
-                string leaderLastName = "PrivateCorp";
-                string leaderTitle = "CTO";
+                string leaderFirstName = "Leader0First";
+                string leaderLastName = "Leader0Last";
+                string leaderTitle = "CTOLeader0";
                 string leaderEmail = "leader0@privatecorp.com";
 
                 // open leader #0 form  
@@ -100,10 +100,10 @@ namespace bdd_tests
                 /********** Individual Shareholder #0 **********/
 
                 // create the shareholder data
-                string shareholderFirstName = "IndividualShareholder0";
-                string shareholderLastName = "PrivateCorp";
-                string shareholderVotingShares = "500";
-                string shareholderNonVotingShares = "10";
+                string shareholderFirstName = "IndyShareholder0First";
+                string shareholderLastName = "IndyShareholder0Last";
+                string shareholderVotingShares = "1001";
+                string shareholderNonVotingShares = "1002";
                 string shareholderEmail = "individualshareholder0@privatecorp.com";
 
                 // open shareholder #0 form
@@ -145,8 +145,8 @@ namespace bdd_tests
 
                 // create the business shareholder data
                 string businessName = "Business Shareholder 1";
-                string businessVotingShares = "50";
-                string businessNonVotingShares = "50";
+                string businessVotingShares = "1003";
+                string businessNonVotingShares = "1004";
                 string businessEmail = "business@shareholder1.com";
 
                 // open business shareholder #1 form    
@@ -195,9 +195,9 @@ namespace bdd_tests
                 /********** Business Shareholder #1 - Leader #1 **********/
 
                 // create business shareholder #1 leader data
-                string leaderFirstNameBiz = "Leader1";
-                string leaderLastNameBiz = "BizShareholderPrivateCorp";
-                string leaderTitleBiz = "Event Planner";
+                string leaderFirstNameBiz = "Leader1BizFirst";
+                string leaderLastNameBiz = "Leader1BizLast";
+                string leaderTitleBiz = "Leader1BizTitle";
                 string leaderEmailBiz = "leader1bizshareholder@privatecorp.com";
 
                 // open business shareholder #1 > leader form #1
@@ -238,10 +238,10 @@ namespace bdd_tests
                 /********** Business Shareholder #1 - Individual Shareholder #1 **********/
 
                 // create the business shareholder #1 > individual shareholder data
-                string shareholderFirstNameBiz = "IndividualShareholder1";
-                string shareholderLastNameBiz = "BizShareholderPrivateCorp";
-                string shareholderVotingSharesBiz = "500";
-                string shareholderNonVotingSharesBiz = "500";
+                string shareholderFirstNameBiz = "IndividualShareholder1Biz1First";
+                string shareholderLastNameBiz = "IndividualShareholder1Biz1Last";
+                string shareholderVotingSharesBiz = "1005";
+                string shareholderNonVotingSharesBiz = "1006";
                 string shareholderEmailBiz = "individualshareholder1bizshareholder@privatecorp.com";
 
                 // open business shareholder #1 > individual shareholder #1 form
@@ -299,9 +299,9 @@ namespace bdd_tests
                 uiOpenLeaderForm.Click();
 
                 // create the leader info
-                string firstName = "Leader";
-                string lastName = "SoleProprietor";
-                string email = "leader@soleproprietor.com";
+                string firstName = "Leader1First";
+                string lastName = "Leader1Last";
+                string email = "leader1@soleproprietor.com";
 
                 // enter the leader first name
                 NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("[formControlName='firstNameNew']"));
@@ -329,7 +329,8 @@ namespace bdd_tests
                 uiOpenLeaderForm2.Click();
 
                 // create the leader #2 info
-                string firstName2 = "Leader2";
+                string firstName2 = "Leader2First";
+                string lastName2 = "Leader2Last";
                 string email2 = "leader2@soleproprietor.com";
 
                 // enter the leader #2 first name
@@ -338,7 +339,7 @@ namespace bdd_tests
 
                 // enter the leader #2 last name
                 NgWebElement uiLastName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLastName2.SendKeys(lastName);
+                uiLastName2.SendKeys(lastName2);
 
                 // enter the leader #2 email
                 NgWebElement uiEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='emailNew']"));
@@ -358,7 +359,8 @@ namespace bdd_tests
                 uiOpenLeaderForm3.Click();
 
                 // create the leader #2 info
-                string firstName3 = "Leader3";
+                string firstName3 = "Leader3First";
+                string lastName3 = "Leader3Last";
                 string email3 = "leader3@soleproprietor.com";
 
                 // enter the leader #2 first name
@@ -367,7 +369,7 @@ namespace bdd_tests
 
                 // enter the leader #2 last name
                 NgWebElement uiLastName3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLastName3.SendKeys(lastName);
+                uiLastName3.SendKeys(lastName3);
 
                 // enter the leader #3 email
                 NgWebElement uiEmail3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(3) input[formControlName='emailNew']"));
@@ -412,10 +414,10 @@ namespace bdd_tests
                 uiOpenDirectorForm.Click();
 
                 // create the director #1 info
-                string firstName = "Director";
-                string lastName = "Society";
-                string title = "Chair";
-                string email = "director@society.com";
+                string firstName = "Director1First";
+                string lastName = "Director1Last";
+                string title = "Director1Title";
+                string email = "director1@society.com";
 
                 // enter the director #1 first name
                 NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("[formcontrolname='firstNameNew']"));
@@ -451,7 +453,9 @@ namespace bdd_tests
                 uiOpenDirectorForm2.Click();
 
                 // create the director #2 info
-                string firstName2 = "Director2";
+                string firstName2 = "Director2First";
+                string lastName2 = "Director2Last";
+                string title2 = "Director2Title";
                 string email2 = "director2@society.com";
 
                 // enter the director #2 first name
@@ -460,7 +464,7 @@ namespace bdd_tests
 
                 // enter the director #2 last name
                 NgWebElement uiLastName2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLastName2.SendKeys(lastName);
+                uiLastName2.SendKeys(lastName2);
 
                 // select the director #2 position
                 NgWebElement uiPosition2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='isDirectorNew']"));
@@ -468,7 +472,7 @@ namespace bdd_tests
 
                 // enter the director #2 title
                 NgWebElement uiTitle2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(4) input[formControlName='titleNew']"));
-                uiTitle2.SendKeys(title);
+                uiTitle2.SendKeys(title2);
 
                 // enter the director #2 email
                 NgWebElement uiEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(5) input[formControlName='emailNew']"));
@@ -488,7 +492,9 @@ namespace bdd_tests
                 uiOpenDirectorForm3.Click();
 
                 // create the director #3 info
-                string firstName3 = "Director3";
+                string firstName3 = "Director3First";
+                string lastName3 = "Director3Last";
+                string title3 = "Director3Title";
                 string email3 = "director3@society.com";
 
                 // enter the director #3 first name
@@ -497,7 +503,7 @@ namespace bdd_tests
 
                 // enter the director #3 last name
                 NgWebElement uiLastName3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLastName3.SendKeys(lastName);
+                uiLastName3.SendKeys(lastName3);
 
                 // select the director #3 position
                 NgWebElement uiPosition3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(3) input[formControlName='isDirectorNew']"));
@@ -505,7 +511,7 @@ namespace bdd_tests
 
                 // enter the director #3 title
                 NgWebElement uiTitle3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(4) input[formControlName='titleNew']"));
-                uiTitle3.SendKeys(title);
+                uiTitle3.SendKeys(title3);
 
                 // enter the director #3 email
                 NgWebElement uiEmail3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(5) input[formControlName='emailNew']"));
@@ -524,9 +530,9 @@ namespace bdd_tests
                 /********** Leader #1 **********/
 
                 // create the leader #1 data
-                string leaderFirst = "Leader1";
-                string leaderLast = "Public Corp";
-                string leaderTitle = "CEO";
+                string leaderFirst = "Leader1FirstPubCorp";
+                string leaderLast = "Leader1LastPubCorp";
+                string leaderTitle = "Leader1TitlePubCorp";
                 string leaderEmail = "leader1@publiccorp.com";
 
                 // find the upload test file in the bdd-tests\upload_files folder
@@ -578,8 +584,10 @@ namespace bdd_tests
                 /********** Leader #2 **********/
 
                 // create the leader #2 data
-                string leaderFirst2 = "Leader2";
-                string leaderEmail2 = "leader@publiccorp.com";
+                string leaderFirst2 = "Leader2FirstPubCorp";
+                string leaderLast2 = "Leader2LastPubCorp";
+                string leaderTitle2 = "Leader2TitlePubCorp";
+                string leaderEmail2 = "leader2@publiccorp.com";
 
                 // open leader #2 form
                 NgWebElement uiOpenLeaderForm2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
@@ -591,7 +599,7 @@ namespace bdd_tests
 
                 // enter leader #2 last name
                 NgWebElement uiLeaderLast2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLeaderLast2.SendKeys(leaderLast);
+                uiLeaderLast2.SendKeys(leaderLast2);
 
                 // select leader #2 role
                 NgWebElement uiLeaderRole2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(3) input[formControlName='isDirectorNew']"));
@@ -599,7 +607,7 @@ namespace bdd_tests
 
                 // enter leader #2 title
                 NgWebElement uiLeaderTitle2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(4) input[formControlName='titleNew']"));
-                uiLeaderTitle2.SendKeys(leaderTitle);
+                uiLeaderTitle2.SendKeys(leaderTitle2);
 
                 // enter leader #2 email
                 NgWebElement uiLeaderEmail2 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(3) td:nth-child(5) input[formControlName='emailNew']"));
@@ -615,7 +623,9 @@ namespace bdd_tests
                 /********** Leader #3 **********/
 
                 // create the leader #3 data
-                string leaderFirst3 = "Leader3";
+                string leaderFirst3 = "Leader3FirstPubCorp";
+                string leaderLast3 = "Leader3LastPubCorp";
+                string leaderTitle3 = "Leader3TitlePubCorp";
                 string leaderEmail3 = "leader3@publiccorp.com";
 
                 // open leader #3 form
@@ -628,7 +638,7 @@ namespace bdd_tests
 
                 // enter leader #3 last name
                 NgWebElement uiLeaderLast3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(2) input[formControlName='lastNameNew']"));
-                uiLeaderLast3.SendKeys(leaderLast);
+                uiLeaderLast3.SendKeys(leaderLast3);
 
                 // select leader #3 role
                 NgWebElement uiLeaderRole3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(3) input[formControlName='isDirectorNew']"));
@@ -636,7 +646,7 @@ namespace bdd_tests
 
                 // enter leader #3 title
                 NgWebElement uiLeaderTitle3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(4) input[formControlName='titleNew']"));
-                uiLeaderTitle3.SendKeys(leaderTitle);
+                uiLeaderTitle3.SendKeys(leaderTitle3);
 
                 // enter leader #3 email
                 NgWebElement uiLeaderEmail3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(5) input[formControlName='emailNew']"));
@@ -653,10 +663,10 @@ namespace bdd_tests
             if (businessType == " partnership")
             {
                 // create individual partner info
-                string partnerFirstName = "Individual";
-                string partnerLastName = "Partner";
-                string partnerPercentage = "50";
-                string partnerEmail = "individual@partner.com";
+                string partnerFirstName = "IndividualPartner1First";
+                string partnerLastName = "IndividualPartner1Last";
+                string partnerPercentage = "51";
+                string partnerEmail = "individual1@partner.com";
 
                 // find the upload test file in the bdd-tests\upload_files folder
                 var environment = Environment.CurrentDirectory;
@@ -706,7 +716,7 @@ namespace bdd_tests
 
                 // create business partner info
                 string bizPartnerName = "Business Partner";
-                string bizPartnerPercentage = "50";
+                string bizPartnerPercentage = "52";
                 string bizPartnerEmail = "business@partner.com";
 
                 // enter the business partner name
@@ -739,9 +749,9 @@ namespace bdd_tests
                 uiOpenPartner2Row.Click();
 
                 // create individual partner 2 info
-                string partner2FirstName = "Individual";
-                string partner2LastName = "Partner2";
-                string partner2Percentage = "50";
+                string partner2FirstName = "IndividualPartner2First";
+                string partner2LastName = "IndividualPartner2Last";
+                string partner2Percentage = "53";
                 string partner2Email = "individual@partner2.com";
 
                 // enter individual partner2 first name
@@ -823,9 +833,9 @@ namespace bdd_tests
                 /********** Leader #0 **********/
 
                 // create the leader data
-                string leaderFirstName = "Leader0";
-                string leaderLastName = "University";
-                string leaderTitle = "CTO";
+                string leaderFirstName = "Leader0FirstUniversity";
+                string leaderLastName = "Leader0LastUniversity";
+                string leaderTitle = "Leader0TitleUniversity";
                 string leaderEmail = "leader0@university.com";
 
                 // open leader #0 form  

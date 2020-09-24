@@ -43,6 +43,7 @@ Scenario: Payments for CRS and Catering Applications
 namespace bdd_tests
 {
     [FeatureFile("./Payments.feature")]
+    [Collection("Cannabis")]
     public sealed class Payments : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

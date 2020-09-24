@@ -164,6 +164,8 @@ namespace bdd_tests
         [And(@"I click on the Start Application button for (.*)")]
         public void ClickStartApplication(string applicationType)
         {
+            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
@@ -195,6 +197,8 @@ namespace bdd_tests
                 NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
                 uiStartAppButton.Click();
             }
+
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
         }
 
 
@@ -214,6 +218,8 @@ namespace bdd_tests
         public void ApplicationIsApproved()
         {
             ngDriver.IgnoreSynchronization = true;
+            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
 
             // navigate to api/applications/<Application ID>/process
             ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
@@ -222,7 +228,7 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
 
             ngDriver.IgnoreSynchronization = false;
-
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
             // navigate back to Licenses tab
             ngDriver.Navigate().GoToUrl($"{baseUri}licences");
         }
@@ -233,7 +239,7 @@ namespace bdd_tests
         {
             ClickOnSubmitButton();
 
-            System.Threading.Thread.Sleep(5000);
+            //System.Threading.Thread.Sleep(5000);
         }
 
 
@@ -244,7 +250,7 @@ namespace bdd_tests
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button:nth-child(2)"));
             uiSubmitButton.Click();
 
-            System.Threading.Thread.Sleep(5000);
+            //System.Threading.Thread.Sleep(5000);
         }
 
 

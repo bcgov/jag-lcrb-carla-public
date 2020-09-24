@@ -159,6 +159,7 @@ Scenario: Validation for IN CRS Application
 namespace bdd_tests
 {
     [FeatureFile("./CRSApplication.feature")]
+    [Collection("Cannabis")]
     public sealed class CRSApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

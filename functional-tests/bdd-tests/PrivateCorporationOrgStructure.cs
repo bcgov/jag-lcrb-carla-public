@@ -195,6 +195,7 @@ Scenario: Confirm org structure records not duplicated
 namespace bdd_tests
 {
     [FeatureFile("./PrivateCorporationOrgStructure.feature")]
+    [Collection("Cannabis")]
     public sealed class PrivateCorporationOrgStructure : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

@@ -1,25 +1,25 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.ViewModels;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Google.Protobuf;
-using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Authentication;
+using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Utils;
+using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.VisualBasic.CompilerServices;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
+using Newtonsoft.Json;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using Application = Gov.Lclb.Cllb.Public.ViewModels.Application;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -30,13 +30,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IMemoryCache _cache;
         private readonly IConfiguration _configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IWebHostEnvironment _env;
         private readonly FileManagerClient _fileManagerClient;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger _logger;
 
-        public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IWebHostEnvironment env, IMemoryCache memoryCache)
+        public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
+            ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient,
+            IWebHostEnvironment env, IMemoryCache memoryCache)
         {
             _cache = memoryCache;
             _configuration = configuration;
@@ -48,42 +50,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-
         /// <summary>
-        /// Get a license application by applicant id
+        ///     Get a license application by applicant id
         /// </summary>
         /// <param name="applicantId"></param>
         /// <returns></returns>
-        private List<ViewModels.ApplicationSummary> GetApplicationSummariesByApplicant(string applicantId)
+        private List<ApplicationSummary> GetApplicationSummariesByApplicant(string applicantId)
         {
-            List<ViewModels.ApplicationSummary> result = new List<ViewModels.ApplicationSummary>();
+            var result = new List<ApplicationSummary>();
 
-            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = _dynamicsClient.GetApplicationListByApplicant(applicantId);
+            var dynamicsApplicationList = _dynamicsClient.GetApplicationListByApplicant(applicantId);
             if (dynamicsApplicationList != null)
-            {
-                foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
+                foreach (var dynamicsApplication in dynamicsApplicationList)
                 {
                     var endorsements = new List<string>();
                     //get endorsement application types
-                    if (dynamicsApplication.AdoxioLicenceType != null && dynamicsApplication.AdoxioPaymentrecieved == true)
+                    if (dynamicsApplication.AdoxioLicenceType != null &&
+                        dynamicsApplication.AdoxioPaymentrecieved == true)
                     {
-                        var name = dynamicsApplication.AdoxioLicenceType.AdoxioName;
-                        var filter = $"adoxio_licencetypeid eq {dynamicsApplication.AdoxioLicenceType.AdoxioLicencetypeid}";
-                        var expand = new List<string> { "adoxio_licencetypes_applicationtypes" };
-                        var licenceType = _dynamicsClient.Licencetypes.GetByKey(dynamicsApplication._adoxioLicencetypeValue, expand: expand);
+                        var expand = new List<string> {"adoxio_licencetypes_applicationtypes"};
+                        var licenceType =
+                            _dynamicsClient.Licencetypes.GetByKey(dynamicsApplication._adoxioLicencetypeValue,
+                                expand: expand);
                         if (licenceType?.AdoxioLicencetypesApplicationtypes != null)
-                        {
                             endorsements = licenceType.AdoxioLicencetypesApplicationtypes
-                            .Where(type => type.AdoxioIsendorsement == true)
-                            .Select(type => type.AdoxioName)
-                            .ToList();
-                        }
+                                .Where(type => type.AdoxioIsendorsement == true)
+                                .Select(type => type.AdoxioName)
+                                .ToList();
                     }
+
                     // hide terminated applications from view.
-                    if (dynamicsApplication.Statuscode == null || (dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated
-                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Refused
-                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Cancelled
-                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded))
+                    if (dynamicsApplication.Statuscode == null || dynamicsApplication.Statuscode !=
+                        (int) AdoxioApplicationStatusCodes.Terminated
+                        && dynamicsApplication.Statuscode != (int) AdoxioApplicationStatusCodes.Refused
+                        && dynamicsApplication.Statuscode != (int) AdoxioApplicationStatusCodes.Cancelled
+                        && dynamicsApplication.Statuscode != (int) AdoxioApplicationStatusCodes.TerminatedAndRefunded)
                     {
                         var row = dynamicsApplication.ToSummaryViewModel();
                         row.Endorsements = endorsements;
@@ -91,93 +92,84 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
 
-            }
             return result;
         }
 
         /// <summary>
-        /// Get a license application by applicant id
+        ///     Get a license application by applicant id
         /// </summary>
         /// <param name="applicantId"></param>
         /// <returns></returns>
-        private async Task<List<ViewModels.Application>> GetApplicationsByApplicant(string applicantId)
+        private async Task<List<Application>> GetApplicationsByApplicant(string applicantId)
         {
-            List<ViewModels.Application> result = new List<ViewModels.Application>();
+            var result = new List<Application>();
 
-            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = _dynamicsClient.GetApplicationListByApplicant(applicantId);
+            var dynamicsApplicationList = _dynamicsClient.GetApplicationListByApplicant(applicantId);
             if (dynamicsApplicationList != null)
             {
-                foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
-                {
+                foreach (var dynamicsApplication in dynamicsApplicationList)
                     // hide terminated applications from view.
-                    if (dynamicsApplication.Statuscode == null || (dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated
-                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Refused
-                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Cancelled
-                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded))
-                    {
+                    if (dynamicsApplication.Statuscode == null || dynamicsApplication.Statuscode !=
+                        (int) AdoxioApplicationStatusCodes.Terminated
+                        && dynamicsApplication.Statuscode != (int) AdoxioApplicationStatusCodes.Refused
+                        && dynamicsApplication.Statuscode != (int) AdoxioApplicationStatusCodes.Cancelled
+                        && dynamicsApplication.Statuscode != (int) AdoxioApplicationStatusCodes.TerminatedAndRefunded)
                         result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger));
-                    }
-                }
 
                 // second pass to determine if transfer or location change is in progress.
 
                 foreach (var item in result)
-                {
-                    if (item.LicenseType == "Cannabis Retail Store" && item.ApplicationStatus == AdoxioApplicationStatusCodes.Approved
-                        && item.AssignedLicence != null && item.AssignedLicence.ExpiryDate > DateTime.Now
+                    if (item.LicenseType == "Cannabis Retail Store" && item.ApplicationStatus ==
+                                                                    AdoxioApplicationStatusCodes.Approved
+                                                                    && item.AssignedLicence != null &&
+                                                                    item.AssignedLicence.ExpiryDate > DateTime.Now
                         )
-                    {
                         // determine if there is a transfer in progress.
                         item.IsLocationChangeInProgress = FindRelatedApplication(result, item, "CRS Location Change");
-                        // item.isTransferInProgress = FindRelatedApplication(result, item, "CRS Transfer of Ownership");
-                    }
-                }
-
+                    // item.isTransferInProgress = FindRelatedApplication(result, item, "CRS Transfer of Ownership");
             }
+
             return result;
         }
 
-        bool FindRelatedApplication(List<ViewModels.Application> applicationList, ViewModels.Application application, string licenseType)
+        private bool FindRelatedApplication(List<Application> applicationList, Application application,
+            string licenseType)
         {
-            bool result = false;
+            var result = false;
             foreach (var item in applicationList)
-            {
-                if (item.LicenseType == licenseType && item.AssignedLicence != null && item.AssignedLicence.Id == application.AssignedLicence.Id)
+                if (item.LicenseType == licenseType && item.AssignedLicence != null &&
+                    item.AssignedLicence.Id == application.AssignedLicence.Id)
                 {
                     result = true;
                     break;
                 }
-            }
+
             return result;
         }
 
 
         /// <summary>
-        /// Gets the number of active licences
+        ///     Gets the number of active licences
         /// </summary>
         /// <param name="licenceeId"></param>
         /// <returns></returns>
         private int GetApprovedLicenceCountByApplicant(string licenceeId)
         {
-
             var result = 0;
-            List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
-            IEnumerable<MicrosoftDynamicsCRMadoxioLicences> licences = null;
             if (!string.IsNullOrEmpty(licenceeId))
             {
                 var filter = $"_adoxio_licencee_value eq {licenceeId}";
-                filter += $" and statuscode eq { (int)LicenceStatusCodes.Active}";
-                var expand = new List<string> { "adoxio_LicenceType" };
+                filter += $" and statuscode eq {(int) LicenceStatusCodes.Active}";
+                var expand = new List<string> {"adoxio_LicenceType"};
                 try
                 {
                     result = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand).Value
-                    .Count(licence => licence.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store");
+                        .Count(licence => licence.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store");
                 }
                 catch (HttpOperationException)
                 {
                     result = 0;
                 }
-
             }
 
             return result;
@@ -185,27 +177,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         /// <summary>
-        /// Gets the number of applications that are submitted
+        ///     Gets the number of applications that are submitted
         /// </summary>
         /// <param name="applicantId"></param>
         /// <returns></returns>
         private int GetSubmittedCountByApplicant(string applicantId)
         {
-
             var result = 0;
             if (!string.IsNullOrEmpty(applicantId))
             {
-                var filter = $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+                var filter =
+                    $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true and statuscode ne {(int) AdoxioApplicationStatusCodes.Terminated}";
+                filter += $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Cancelled}";
+                filter += $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Approved}";
+                filter += $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Refused}";
+                filter += $" and statuscode ne {(int) AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
                 var applicationType = _dynamicsClient.GetApplicationTypeByName("Cannabis Retail Store");
                 if (applicationType != null)
-                {
                     filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
-                }
 
                 try
                 {
@@ -216,18 +206,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     result = 0;
                 }
             }
+
             return result;
         }
 
         /// <summary>
-        /// GET all applications in Dynamics. Optional parameter for applicant ID. Or all applications if the applicantId is null
+        ///     GET all applications in Dynamics. Optional parameter for applicant ID. Or all applications if the applicantId is
+        ///     null
         /// </summary>
         /// <param name="applicantId"></param>
         /// <returns></returns>
-        [HttpGet()]
+        [HttpGet]
         public async Task<JsonResult> GetDynamicsApplications(string applicantId)
         {
-            List<ViewModels.Application> adoxioApplications = await GetApplicationsByApplicant(applicantId);
+            var adoxioApplications = await GetApplicationsByApplicant(applicantId);
             return new JsonResult(adoxioApplications);
         }
 
@@ -237,69 +229,64 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetCurrentUserApplications()
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
-            List<ViewModels.ApplicationSummary> adoxioApplications = GetApplicationSummariesByApplicant(userSettings.AccountId);
+            var adoxioApplications = GetApplicationSummariesByApplicant(userSettings.AccountId);
             return new JsonResult(adoxioApplications);
         }
 
         /// GET all applications of the given application type in Dynamics for the current user
         [HttpGet("current/by-type/{applicationType}")]
-        public JsonResult GetCurrentUserLGApprovalApplications(string applicationType)
+        public JsonResult GetCurrentUserLgApprovalApplications(string applicationType)
         {
             var results = new List<ApplicationSummary>();
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             var filter = $"_adoxio_applicant_value eq {userSettings.AccountId}";
             var appType = _dynamicsClient.GetApplicationTypeByName(applicationType);
             if (appType != null)
-            {
                 filter += $" and _adoxio_applicationtypeid_value eq {appType.AdoxioApplicationtypeid} ";
-            }
 
             try
             {
                 var applications = _dynamicsClient.Applications.Get(filter: filter).Value.ToList();
                 if (applications != null)
-                {
-                    foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in applications)
-                    {
+                    foreach (var dynamicsApplication in applications)
                         results.Add(dynamicsApplication.ToSummaryViewModel());
-                    }
-                }
-
             }
             catch (HttpOperationException e)
             {
                 _logger.LogError(e, "Error getting licensee application");
                 throw;
             }
+
             return new JsonResult(results);
         }
 
         /// GET all local government approval applications in Dynamics for the current user
         [HttpGet("current/lg-approvals")]
-        public async Task<JsonResult> GetLGApprovalApplications()
+        public async Task<JsonResult> GetLgApprovalApplications()
         {
-            var results = new List<ViewModels.Application>();
+            var results = new List<Application>();
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             try
             {
                 // get user account
-                var accountId = Utils.GuidUtility.SanitizeGuidString(userSettings.AccountId);
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
+                var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
+                var account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
 
                 var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
-                filter += $" and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
+                filter += $" and statuscode eq {(int) AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
 
-                var expand = new List<string>{
+                var expand = new List<string>
+                {
                     "adoxio_Applicant",
                     "adoxio_localgovindigenousnationid",
                     "adoxio_application_SharePointDocumentLocations",
@@ -313,46 +300,44 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
                 if (applications != null)
-                {
-                    foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in applications)
+                    foreach (var dynamicsApplication in applications)
                     {
                         var viewModel = await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger);
-                        List<ViewModels.FileSystemItem> resolutionFiles = await FileController.GetListFilesInFolder(dynamicsApplication.AdoxioApplicationid, "application", "LGIN Resolution", _dynamicsClient, _fileManagerClient, _logger);
-                        if (resolutionFiles.Count > 0)
-                        {
-                            viewModel.ResolutionDocsUploaded = true;
-                        }
+                        var resolutionFiles = await FileController.GetListFilesInFolder(
+                            dynamicsApplication.AdoxioApplicationid, "application", "LGIN Resolution", _dynamicsClient,
+                            _fileManagerClient, _logger);
+                        if (resolutionFiles.Count > 0) viewModel.ResolutionDocsUploaded = true;
                         results.Add(viewModel);
                     }
-                }
-
             }
             catch (HttpOperationException e)
             {
                 _logger.LogError(e, "Error getting licensee applications by type");
                 throw;
             }
+
             return new JsonResult(results);
         }
 
 
         /// <summary>
-        /// all in one function that is used on the OrgStructure ( ApplicationLicenseeChangesComponent ) page to get the initial data.
-        /// This includes:
-        ///   The Application data for the current org structure / licenseeChanges record
-        ///   Application Changelogs for the Application record
-        ///   Count of NonTerminatedApplications
-        ///   Current Hierarachy
+        ///     all in one function that is used on the OrgStructure ( ApplicationLicenseeChangesComponent ) page to get the
+        ///     initial data.
+        ///     This includes:
+        ///     The Application data for the current org structure / licenseeChanges record
+        ///     Application Changelogs for the Application record
+        ///     Count of NonTerminatedApplications
+        ///     Current Hierarachy
         /// </summary>
         /// <returns></returns>
         [HttpGet("licensee-data/{type}")]
         public async Task<OngoingLicenseeData> GetLicenseeData(string type)
         {
-            bool forceCreate  = (type == "create");
+            var forceCreate = type == "create";
 
-            OngoingLicenseeData result = new OngoingLicenseeData();
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var result = new OngoingLicenseeData();
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             try
             {
@@ -360,14 +345,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (!string.IsNullOrEmpty(application._adoxioApplicationtypeidValue))
                 {
-                    application.AdoxioApplicationTypeId = await _dynamicsClient.GetApplicationTypeById(application._adoxioApplicationtypeidValue).ConfigureAwait(true); ;
+                    application.AdoxioApplicationTypeId = await _dynamicsClient
+                        .GetApplicationTypeById(application._adoxioApplicationtypeidValue).ConfigureAwait(true);
                     if (application.AdoxioApplicationTypeId != null)
                     {
-                        var filter = $"_adoxio_applicationtype_value eq { application._adoxioApplicationtypeidValue}";
+                        var filter = $"_adoxio_applicationtype_value eq {application._adoxioApplicationtypeidValue}";
                         try
                         {
                             var typeContents = _dynamicsClient.Applicationtypecontents.Get(filter: filter).Value;
-                            application.AdoxioApplicationTypeId.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType = typeContents;
+                            application.AdoxioApplicationTypeId
+                                .AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType = typeContents;
                         }
                         catch (HttpOperationException e)
                         {
@@ -376,80 +363,120 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
 
-                result.Application = await application.ToViewModel(_dynamicsClient, _cache, _logger).ConfigureAwait(true);
-
+                result.Application =
+                    await application.ToViewModel(_dynamicsClient, _cache, _logger).ConfigureAwait(true);
 
 
                 result.ChangeLogs = _dynamicsClient.GetApplicationChangeLogs(result.Application.Id, _logger);
             }
             catch (HttpOperationException e)
             {
-                _logger.LogError(e, "Error getting application");
+                _logger.LogError(e, "Error getting application change logs");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected Error getting application change logs");
             }
 
 
-            result.CurrentHierarchy = _dynamicsClient.GetLegalEntityTree(userSettings.AccountId, _logger, _configuration);
+            result.CurrentHierarchy =
+                _dynamicsClient.GetLegalEntityTree(userSettings.AccountId, _logger, _configuration);
 
             result.TreeRoot = ProcessLegalEntityTree(result.CurrentHierarchy, result.ChangeLogs);
 
-            result.NonTerminatedApplications = _dynamicsClient.GetNotTerminatedCRSApplicationCount(userSettings.AccountId);
+            // no need to send change logs to the client side
+            result.ChangeLogs = null;
+
+            result.NonTerminatedApplications =
+                _dynamicsClient.GetNotTerminatedCRSApplicationCount(userSettings.AccountId);
 
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             result.Licenses = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
-            List<ApplicationLicenseSummary> transterredLicenses = _dynamicsClient.GetPaidLicensesOnTransfer(userSettings.AccountId);
-            result.Licenses.AddRange(transterredLicenses);
+            var transferredLicences = _dynamicsClient.GetPaidLicensesOnTransfer(userSettings.AccountId);
+            result.Licenses.AddRange(transferredLicences);
 
-            return result;
-        }
-
-        private string FindChangeLogId(List<LicenseeChangeLog> changelogs, string legalEntityId)
-        {
-            string result = null;
-            foreach (var item in changelogs)
-            {
-                if (item.LegalEntityId == legalEntityId)
-                {
-                    result = item.Id;
-                }
-                else
-                {
-                    if (item.Children != null)
-                    {
-                        result = FindChangeLogId((List<LicenseeChangeLog>)item.Children, legalEntityId);
-                    }
-                }
-                if (result != null)
-                {
-                    break;
-                }
-            }
             return result;
         }
 
         /*
-* Performs a Depth First Traversal and transforms the LegalEntity tree to change objects
-*/
-        private LicenseeChangeLog ProcessLegalEntityTree(LegalEntity node, List<LicenseeChangeLog> currentChangeLogs)
+        *  Combines the associate tree with the changelogs
+        */
+        private LicenseeChangeLog ProcessLegalEntityTree(LegalEntity root, List<LicenseeChangeLog> currentChangeLogs)
+        {
+            // convert associate tree to licensee change log tree
+            var tree = AssociateTreeToChangeLog(root);
+
+            //merge application change logs into the tree that was derived from legal entities
+            currentChangeLogs.ForEach(change =>
+            {
+                if (change.ChangeType == LicenseeChangeType.addLeadership
+                    || change.ChangeType == LicenseeChangeType.removeLeadership
+                    || change.ChangeType == LicenseeChangeType.updateLeadership)
+                {
+                    change.IsIndividual = true;
+                    change.IsLeadershipIndividual = true;
+                }
+
+                if (change.ChangeType == LicenseeChangeType.addIndividualShareholder
+                    || change.ChangeType == LicenseeChangeType.removeIndividualShareholder
+                    || change.ChangeType == LicenseeChangeType.updateIndividualShareholder)
+                {
+                    change.IsIndividual = true;
+                    change.IsShareholderIndividual = true;
+                }
+
+                if (!string.IsNullOrEmpty(change.LegalEntityId))
+                {
+                    // if changelog is for an existing associate
+                    var matchingNode = tree.FindNodeByLegalEntityId(change.LegalEntityId);
+                    if (matchingNode != null) matchingNode.UpdateValues(change);
+                }
+                else if (!string.IsNullOrEmpty(change.ParentLegalEntityId))
+                {
+                    // if changelog if a child of an existing associate
+                    var parentNode = tree.FindNodeByLegalEntityId(change.ParentLegalEntityId);
+                    if (parentNode != null) parentNode.Children.Add(change);
+                }
+                else if (!string.IsNullOrEmpty(change.ParentLicenseeChangeLogId))
+                {
+                    // if changelog if a child of another change log
+                    var parentNode = tree.FindNodeByParentChangeLogId(change.ParentLicenseeChangeLogId);
+                    if (parentNode != null) parentNode.Children.Add(change);
+                }
+            });
+
+            return tree;
+        }
+
+        private LicenseeChangeLog AssociateTreeToChangeLog(LegalEntity node)
         {
             var newNode = new LicenseeChangeLog(node);
-            // match up the id.  
-            newNode.Id = FindChangeLogId(currentChangeLogs, newNode.LegalEntityId);
-
-            if (node != null && node.children != null && node.children.Count > 0)
+            if (node?.children != null && node.children.Count > 0)
             {
                 var children = new List<LicenseeChangeLog>();
                 foreach (var child in node.children)
                 {
-                    var childNode = ProcessLegalEntityTree(child, currentChangeLogs);
-                    childNode.ParentLicenseeChangeLog = newNode;
+                    var childNode = AssociateTreeToChangeLog(child);
+                    // childNode.ParentLicenseeChangeLog = newNode;
+
+                    var isShareholderIndividual = childNode.IsIndividual == true && childNode.IsShareholderNew == true;
+                    var isKeyPersonnel = childNode.IsIndividual == true && (
+                        childNode.IsDirectorNew == true ||
+                        childNode.IsManagerNew == true ||
+                        childNode.IsOfficerNew == true ||
+                        childNode.IsTrusteeNew == true ||
+                        childNode.IsOwnerNew == true 
+                    );
 
                     //split the change log if it is both a shareholder and key-personnel
-                    if (childNode.IsIndividual.GetValueOrDefault(false) && (childNode.IsDirectorNew.GetValueOrDefault(false) || childNode.IsManagerNew.GetValueOrDefault(false) || childNode.IsOfficerNew.GetValueOrDefault(false) || childNode.IsTrusteeNew.GetValueOrDefault(false)))
+                    if (isShareholderIndividual && isKeyPersonnel)
                     {
-                        var newIndividualNode = new LicenseeChangeLog(childNode);
-                        newIndividualNode.Id = null; // force it to be a new record.
-                        newIndividualNode.IsShareholderNew = false;
-                        newIndividualNode.IsShareholderOld = false;
+                        var newIndividualNode = new LicenseeChangeLog(childNode)
+                        {
+                            Id = null, // force it to be a new record.
+                            IsShareholderNew = false,
+                            IsShareholderOld = false
+                        };
                         children.Add(newIndividualNode);
 
                         childNode.IsManagerNew = false;
@@ -463,6 +490,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         childNode.IsDirectorOld = false;
                         childNode.IsTrusteeOld = false;
                     }
+                    else if (isShareholderIndividual)
+                    {
+                        childNode.IsShareholderIndividual = true;
+                    }
+                    else if (isKeyPersonnel)
+                    {
+                        childNode.IsLeadershipIndividual = true;
+                    }
 
                     children.Add(childNode);
                 }
@@ -470,13 +505,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // sort the list by shares
                 children.Sort((a, b) =>
                 {
-                    if (a.TotalSharesNew == null || b.TotalSharesNew == null)
-                    {
-                        return 0;
-                    }
+                    if (a.TotalSharesNew == null || b.TotalSharesNew == null) return 0;
 
                     return a.TotalSharesNew.Value.CompareTo(b.TotalSharesNew);
-
                 });
 
 
@@ -486,15 +517,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return newNode;
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication GetCurrentLicenseeApplication(UserSettings userSettings, bool forceCreate)
+        private MicrosoftDynamicsCRMadoxioApplication GetCurrentLicenseeApplication(UserSettings userSettings,
+            bool forceCreate)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;
             var applicationType = _dynamicsClient.GetApplicationTypeByName("Licensee Changes");
 
             if (!forceCreate)
             {
-
-                string[] expand = { "adoxio_localgovindigenousnationid",
+                string[] expand =
+                {
+                    "adoxio_localgovindigenousnationid",
                     "adoxio_application_SharePointDocumentLocations",
                     "adoxio_application_adoxio_tiedhouseconnection_Application",
                     "adoxio_AssignedLicence",
@@ -505,30 +538,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 };
 
                 // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
-                var filter = $"_adoxio_applicant_value eq {userSettings.AccountId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                var filter =
+                    $"_adoxio_applicant_value eq {userSettings.AccountId} and statuscode ne {(int) AdoxioApplicationStatusCodes.Processed} and statuscode ne {(int) AdoxioApplicationStatusCodes.Terminated}";
                 // filter += $" and adoxio_isapplicationcomplete ne 1";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+                filter += $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Cancelled}";
+                filter += $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Approved}";
+                filter += $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Refused}";
+                filter += $" and statuscode ne {(int) AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
                 if (applicationType != null)
-                {
                     filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
-                }
 
                 try
                 {
-                    var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.OrderByDescending(app => app.Createdon);
+                    var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value
+                        .OrderByDescending(app => app.Createdon);
                     var application = applications.FirstOrDefault(); // Get the latest application
                     if (application != null)
-                    {
                         result = application;
-                    }
                     else
-                    {
                         result = null;
-                    }
                 }
                 catch (HttpOperationException e)
                 {
@@ -541,19 +570,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // create one.
                 var account = _dynamicsClient.GetAccountById(userSettings.AccountId);
-                result = new MicrosoftDynamicsCRMadoxioApplication()
+                result = new MicrosoftDynamicsCRMadoxioApplication
                 {
                     AdoxioApplicanttype = account.AdoxioBusinesstype,
                     AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId),
                     // set application type relationship 
-                    AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid)
+                    AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes",
+                        applicationType.AdoxioApplicationtypeid)
                 };
 
                 try
                 {
                     result = _dynamicsClient.Applications.Create(result);
-                    result = _dynamicsClient.GetApplicationByIdWithChildren(result.AdoxioApplicationid).GetAwaiter().GetResult();
-
+                    result = _dynamicsClient.GetApplicationByIdWithChildren(result.AdoxioApplicationid).GetAwaiter()
+                        .GetResult();
                 }
                 catch (HttpOperationException e)
                 {
@@ -569,26 +599,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("ongoing-licensee-application-id")]
         public IActionResult GetOngoingLicenseeApplicationId()
         {
-            JsonResult result = new JsonResult(null);
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            JsonResult result;
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             try
             {
                 var application = GetCurrentLicenseeApplication(userSettings, false);
                 if (application != null)
-                {
                     result = new JsonResult(application.AdoxioApplicationid);
-                }
                 else
-                {
                     result = new JsonResult(null);
-                }
             }
             catch (HttpOperationException e)
             {
                 _logger.LogError(e, "Error getting licensee application");
                 throw;
             }
+
             return result;
         }
 
@@ -597,8 +624,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetCountForCurrentUserSubmittedApplications()
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
             var count = GetSubmittedCountByApplicant(userSettings.AccountId);
@@ -607,7 +634,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// GET an Application by ID
+        ///     GET an Application by ID
         /// </summary>
         /// <param name="id">GUID of the Application to get</param>
         /// <returns></returns>
@@ -615,80 +642,72 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> GetApplication(string id)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             _logger.LogDebug("Application id = " + id);
             _logger.LogDebug("User id = " + userSettings.AccountId);
 
-            ViewModels.Application result = null;
+            Application result;
             var dynamicsApplication = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(id));
-            if (dynamicsApplication == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                bool allowLGAccess = await CurrentUserIsLGForApplication(dynamicsApplication);
-                if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue)
-                    && !allowLGAccess)
-                {
-                    return new NotFoundResult();
-                }
-                result = await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger);
-            }
+            if (dynamicsApplication == null) return NotFound();
 
-
+            var allowLgAccess = await CurrentUserIsLgForApplication(dynamicsApplication);
+            if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue)
+                && !allowLgAccess)
+                return new NotFoundResult();
+            result = await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger);
 
 
             if (dynamicsApplication.AdoxioApplicationSharePointDocumentLocations.Count == 0)
-            {
-                await initializeSharepoint(dynamicsApplication);
-            }
+                await InitializeSharepoint(dynamicsApplication);
 
             return new JsonResult(result);
         }
 
-        private async Task<bool> CurrentUserIsLGForApplication(MicrosoftDynamicsCRMadoxioApplication application)
+        private async Task<bool> CurrentUserIsLgForApplication(MicrosoftDynamicsCRMadoxioApplication application)
         {
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // get user account
-            var accountId = Utils.GuidUtility.SanitizeGuidString(userSettings.AccountId);
-            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
+            var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
+            var account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
 
             // make sure the application and account have matching local government values
-            bool isLGForApplication = (application != null && application._adoxioLocalgovindigenousnationidValue == account._adoxioLginlinkidValue);
-            return isLGForApplication;
+            var isLgForApplication = application != null &&
+                                     application._adoxioLocalgovindigenousnationidValue ==
+                                     account._adoxioLginlinkidValue;
+            return isLgForApplication;
         }
 
         private string GetApplicationFolderName(MicrosoftDynamicsCRMadoxioApplication application)
         {
-            string applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
-            string folderName = $"{application.AdoxioJobnumber}_{applicationIdCleaned}";
+            var applicationIdCleaned = application.AdoxioApplicationid.ToUpper().Replace("-", "");
+            var folderName = $"{application.AdoxioJobnumber}_{applicationIdCleaned}";
             return folderName;
         }
 
         /// <summary>
-        /// Get a document location by reference
+        ///     Get a document location by reference
         /// </summary>
         /// <param name="relativeUrl"></param>
         /// <returns></returns>
-        private string GetDocumentLocationReferenceByRelativeURL(string relativeUrl)
+        private string GetDocumentLocationReferenceByRelativeUrl(string relativeUrl)
         {
             string result = null;
-            string sanitized = relativeUrl.Replace("'", "''");
+            var sanitized = relativeUrl.Replace("'", "''");
             // first see if one exists.
-            var locations = _dynamicsClient.Sharepointdocumentlocations.Get(filter: "relativeurl eq '" + sanitized + "'");
+            var locations =
+                _dynamicsClient.Sharepointdocumentlocations.Get(filter: "relativeurl eq '" + sanitized + "'");
 
             var location = locations.Value.FirstOrDefault();
 
             if (location == null)
             {
                 var parentSite = _dynamicsClient.Sharepointsites.Get().Value.FirstOrDefault();
-                var parentSiteRef = _dynamicsClient.GetEntityURI("sharepointsites", parentSite.Sharepointsiteid);
-                MicrosoftDynamicsCRMsharepointdocumentlocation newRecord = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                var parentSiteRef = _dynamicsClient.GetEntityURI("sharepointsites", parentSite?.Sharepointsiteid);
+                var newRecord = new MicrosoftDynamicsCRMsharepointdocumentlocation
                 {
                     Relativeurl = relativeUrl,
                     Name = "Application",
@@ -705,44 +724,35 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            if (location != null)
-            {
-                result = location.Sharepointdocumentlocationid;
-            }
+            if (location != null) result = location.Sharepointdocumentlocationid;
 
             return result;
         }
 
 
         /// <summary>
-        /// Create an Application in Dynamics (POST)
+        ///     Create an Application in Dynamics (POST)
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        [HttpPost()]
-        public async Task<IActionResult> CreateApplication([FromBody] ViewModels.Application item)
+        [HttpPost]
+        public async Task<IActionResult> CreateApplication([FromBody] Application item)
         {
-
             // for association with current user
-            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
-            int count = GetSubmittedCountByApplicant(userSettings.AccountId);
+            var userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+            var count = GetSubmittedCountByApplicant(userSettings.AccountId);
             count += GetApprovedLicenceCountByApplicant(userSettings.AccountId);
 
             if (count >= 8 && item.ApplicationType.Name == "Cannabis Retail Store")
-            {
                 return BadRequest("8 applications have already been submitted. Can not create more");
-            }
-            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
+            var adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
             // copy received values to Dynamics Application
             adoxioApplication.CopyValues(item);
-            adoxioApplication.AdoxioApplicanttype = (int?)item.ApplicantType;
+            adoxioApplication.AdoxioApplicanttype = (int?) item.ApplicantType;
 
             // fix for an invalid licence sub category
-            if (adoxioApplication.AdoxioLicencesubcategory == 0)
-            {
-                adoxioApplication.AdoxioLicencesubcategory = null;
-            }
+            if (adoxioApplication.AdoxioLicencesubcategory == 0) adoxioApplication.AdoxioLicencesubcategory = null;
 
             try
             {
@@ -750,19 +760,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (!string.IsNullOrEmpty(item.LicenseType))
                 {
                     var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.LicenseType);
-                    adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
+                    adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes",
+                        adoxioLicencetype.AdoxioLicencetypeid);
                 }
 
                 // set licence subtype
                 if (!string.IsNullOrEmpty(item.LicenceSubCategory))
                 {
                     var adoxioSubLicencetype = _dynamicsClient.GetAdoxioSubLicencetypeByName(item.LicenseType);
-                    adoxioApplication.AdoxioLicenceSubCategoryODataBind = _dynamicsClient.GetEntityURI("adoxio_licencesubcategories", adoxioSubLicencetype.AdoxioLicencesubcategoryid);
+                    adoxioApplication.AdoxioLicenceSubCategoryODataBind =
+                        _dynamicsClient.GetEntityURI("adoxio_licencesubcategories",
+                            adoxioSubLicencetype.AdoxioLicencesubcategoryid);
                 }
 
 
                 // set account relationship
-                adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
+                adoxioApplication.AdoxioApplicantODataBind =
+                    _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
                 // set application type relationship 
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(item.ApplicationType.Name);
@@ -780,96 +794,62 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     // Indigenous nation association
                     if (!string.IsNullOrEmpty(item?.IndigenousNationId))
-                    {
-                        adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNationId);
-                    }
+                        adoxioApplication.AdoxioLocalgovindigenousnationidODataBind =
+                            _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNationId);
 
                     // Police Jurisdiction association
                     if (!string.IsNullOrEmpty(item?.PoliceJurisdictionId))
-                    {
-                        adoxioApplication.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdictionId);
-                    }
+                        adoxioApplication.AdoxioPoliceJurisdictionIdODataBind =
+                            _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdictionId);
 
                     if (!string.IsNullOrEmpty(item?.ParentApplicationId))
-                    {
-                        adoxioApplication.AdoxioParentApplicationIDODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);
-                    }
+                        adoxioApplication.AdoxioParentApplicationIDODataBind =
+                            _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);
                 }
 
-                adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
+                adoxioApplication.AdoxioApplicationTypeIdODataBind =
+                    _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
                 if (item.ApplicationType.Name == "Marketing")
-                {
                     // create tiedhouse relationship
-                    adoxioApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication = new List<MicrosoftDynamicsCRMadoxioTiedhouseconnection>{
-                            new MicrosoftDynamicsCRMadoxioTiedhouseconnection()
+                    adoxioApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication =
+                        new List<MicrosoftDynamicsCRMadoxioTiedhouseconnection>
+                        {
+                            new MicrosoftDynamicsCRMadoxioTiedhouseconnection
                             {
-                                AdoxioConnectiontype = (int?)TiedHouseConnectionType.Marketer
+                                AdoxioConnectiontype = (int?) TiedHouseConnectionType.Marketer
                             }
                         };
-                }
 
                 // create application
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
 
                 if (item.ServiceAreas != null && item.ServiceAreas.Count > 0)
-                {
                     AddServiceAreasToApplication(item.ServiceAreas, adoxioApplication.AdoxioApplicationid);
-                }
 
                 if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
-                {
                     AddServiceAreasToApplication(item.OutsideAreas, adoxioApplication.AdoxioApplicationid);
-                }
-
-                if ((bool)applicationType.AdoxioIsshowhoursofsale && false)
-                {
-                    string filter = $"_adoxio_applicationtype_value eq {applicationType.AdoxioApplicationtypeid}";
-                    MicrosoftDynamicsCRMadoxioHoursofservice defaultHours = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.First();
-                    MicrosoftDynamicsCRMadoxioHoursofservice newHours = new MicrosoftDynamicsCRMadoxioHoursofservice()
-                    {
-                        ApplicationODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", adoxioApplication.AdoxioApplicationid),
-                        AdoxioSundayclose = defaultHours.AdoxioSundayclose,
-                        AdoxioSundayopen = defaultHours.AdoxioSundayopen,
-                        AdoxioMondayclose = defaultHours.AdoxioMondayclose,
-                        AdoxioMondayopen = defaultHours.AdoxioMondayopen,
-                        AdoxioTuesdayclose = defaultHours.AdoxioTuesdayclose,
-                        AdoxioTuesdayopen = defaultHours.AdoxioTuesdayopen,
-                        AdoxioWednesdayclose = defaultHours.AdoxioWednesdayclose,
-                        AdoxioWednesdayopen = defaultHours.AdoxioWednesdayopen,
-                        AdoxioThursdayclose = defaultHours.AdoxioThursdayclose,
-                        AdoxioThursdayopen = defaultHours.AdoxioThursdayopen,
-                        AdoxioFridayclose = defaultHours.AdoxioFridayclose,
-                        AdoxioFridayopen = defaultHours.AdoxioFridayopen,
-                        AdoxioSaturdayclose = defaultHours.AdoxioSaturdayclose,
-                        AdoxioSaturdayopen = defaultHours.AdoxioSaturdayopen
-                    };
-                    _dynamicsClient.Hoursofservices.Create(newHours);
-
-                }
             }
             catch (HttpOperationException httpOperationException)
             {
-                string applicationId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
-                if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
+                var applicationId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
+                if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out var applicationGuid))
                 {
                     adoxioApplication = await _dynamicsClient.GetApplicationById(applicationGuid);
                 }
                 else
                 {
-
                     _logger.LogError(httpOperationException, "Error creating application");
                     // fail if we can't create.
-                    throw (httpOperationException);
+                    throw httpOperationException;
                 }
-
             }
 
             // in case the job number is not there, try getting the record from the server.
             if (adoxioApplication.AdoxioJobnumber == null)
             {
                 _logger.LogDebug("AdoxioJobnumber is null, fetching record again.");
-                Guid id = Guid.Parse(adoxioApplication.AdoxioApplicationid);
+                var id = Guid.Parse(adoxioApplication.AdoxioApplicationid);
                 adoxioApplication = await _dynamicsClient.GetApplicationById(id);
             }
 
@@ -879,40 +859,37 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error creating Licence Application.");
             }
 
-            await initializeSharepoint(adoxioApplication);
+            await InitializeSharepoint(adoxioApplication);
 
             return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _cache, _logger));
-
         }
 
 
         [HttpPost("covid")]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateCovidApplication([FromBody] ViewModels.CovidApplication item)
+        public async Task<IActionResult> CreateCovidApplication([FromBody] CovidApplication item)
         {
             // check to see if the feature is on.
-            if (string.IsNullOrEmpty(_configuration["FEATURE_COVID_APPLICATION"]))
-            {
-                return BadRequest();
-            }
-
+            if (string.IsNullOrEmpty(_configuration["FEATURE_COVID_APPLICATION"])) return BadRequest();
 
 
             var adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
             adoxioApplication.CopyValuesForCovidApplication(item);
 
-            adoxioApplication.AdoxioApplicanttype = (int?)845280000;  // private corp - change to public user.
+            adoxioApplication.AdoxioApplicanttype = 845280000; // private corp - change to public user.
 
             // set license type relationship 
             if (!string.IsNullOrEmpty(item.LicenceType))
             {
                 var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.LicenceType);
-                adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
+                adoxioApplication.AdoxioLicenceTypeODataBind =
+                    _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
             }
 
             // set application type relationship 
             var applicationType = _dynamicsClient.GetApplicationTypeByName("Temporary Extension of Licensed Area");
-            adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
+            adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes",
+                applicationType.AdoxioApplicationtypeid);
 
             try
             {
@@ -922,35 +899,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                string applicationId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
-                if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
+                var applicationId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
+                if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out var applicationGuid))
                 {
                     adoxioApplication = await _dynamicsClient.GetApplicationById(applicationGuid);
                 }
                 else
                 {
-
                     _logger.LogError(httpOperationException, "Error creating COVID application");
                     // fail if we can't create.
-                    throw (httpOperationException);
+                    throw httpOperationException;
                 }
-
             }
 
-            await initializeSharepoint(adoxioApplication);
+            await InitializeSharepoint(adoxioApplication);
 
             return new JsonResult(await adoxioApplication.ToCovidViewModel(_dynamicsClient, _cache, _logger));
         }
-        private async Task initializeSharepoint(MicrosoftDynamicsCRMadoxioApplication adoxioApplication)
+
+        private async Task InitializeSharepoint(MicrosoftDynamicsCRMadoxioApplication adoxioApplication)
         {
             // create a SharePointDocumentLocation link
-            string folderName = GetApplicationFolderName(adoxioApplication);
-            string name = adoxioApplication.AdoxioJobnumber + " Files";
+            var folderName = GetApplicationFolderName(adoxioApplication);
+            var name = adoxioApplication.AdoxioJobnumber + " Files";
 
             _fileManagerClient.CreateFolderIfNotExist(_logger, ApplicationDocumentUrlTitle, folderName);
 
             // Create the SharePointDocumentLocation entity
-            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+            var mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation
             {
                 Relativeurl = folderName,
                 Description = "Application Files",
@@ -964,7 +940,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                string mdcsdlId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
+                var mdcsdlId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
                 if (!string.IsNullOrEmpty(mdcsdlId))
                 {
                     mdcsdl.Sharepointdocumentlocationid = mdcsdlId;
@@ -974,36 +950,42 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(httpOperationException, "Error creating SharepointDocumentLocation");
                     mdcsdl = null;
                 }
-
             }
+
             if (mdcsdl != null)
             {
                 // add a regardingobjectid.
-                string applicationReference = _dynamicsClient.GetEntityURI("adoxio_applications", adoxioApplication.AdoxioApplicationid);
+                var applicationReference =
+                    _dynamicsClient.GetEntityURI("adoxio_applications", adoxioApplication.AdoxioApplicationid);
                 var patchSharePointDocumentLocation = new MicrosoftDynamicsCRMsharepointdocumentlocation();
                 patchSharePointDocumentLocation.RegardingobjectidAdoxioApplicationODataBind = applicationReference;
                 // set the parent document library.
-                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("adoxio_application");
-                patchSharePointDocumentLocation.ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference);
+                var parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeUrl("adoxio_application");
+                patchSharePointDocumentLocation.ParentsiteorlocationSharepointdocumentlocationODataBind =
+                    _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference);
 
                 try
                 {
-                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocation);
+                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid,
+                        patchSharePointDocumentLocation);
                 }
                 catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(httpOperationException, "Error adding reference SharepointDocumentLocation to application");
+                    _logger.LogError(httpOperationException,
+                        "Error adding reference SharepointDocumentLocation to application");
                 }
 
-                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
+                var sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations",
+                    mdcsdl.Sharepointdocumentlocationid);
                 // update the sharePointLocationData.
-                Odataid oDataId = new Odataid()
+                var oDataId = new Odataid
                 {
                     OdataidProperty = sharePointLocationData
                 };
                 try
                 {
-                    _dynamicsClient.Applications.AddReference(adoxioApplication.AdoxioApplicationid, "adoxio_application_SharePointDocumentLocations", oDataId);
+                    _dynamicsClient.Applications.AddReference(adoxioApplication.AdoxioApplicationid,
+                        "adoxio_application_SharePointDocumentLocations", oDataId);
                 }
                 catch (HttpOperationException httpOperationException)
                 {
@@ -1013,151 +995,127 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Update a Dynamics Application (PUT)
+        ///     Update a Dynamics Application (PUT)
         /// </summary>
         /// <param name="item"></param>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateApplication([FromBody] ViewModels.Application item, string id)
+        public async Task<IActionResult> UpdateApplication([FromBody] Application item, string id)
         {
-            if (id != item.Id)
-            {
-                return BadRequest();
-            }
-
-            // for association with current user
-            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
-
+            if (id != item.Id) return BadRequest();
 
             //Prepare application for update
-            Guid adoxio_applicationId = new Guid(id);
-            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationId);
+            var applicationId = new Guid(id);
+            var application = await _dynamicsClient.GetApplicationById(applicationId);
 
-            bool allowLGAccess = await CurrentUserIsLGForApplication(adoxioApplication);
-            if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue) && !allowLGAccess)
-            {
+            var allowLgAccess = await CurrentUserIsLgForApplication(application);
+            if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue) && !allowLgAccess)
                 return new NotFoundResult();
-            }
 
-            adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
+            application = new MicrosoftDynamicsCRMadoxioApplication();
 
-            adoxioApplication.CopyValues(item);
-
+            application.CopyValues(item);
 
             // set licence subtype
             if (!string.IsNullOrEmpty(item.LicenceSubCategory))
             {
-                var adoxioSubLicencetype = _dynamicsClient.GetAdoxioSubLicencetypeByName(item.LicenceSubCategory);
-                adoxioApplication.AdoxioLicenceSubCategoryODataBind = _dynamicsClient.GetEntityURI("adoxio_licencesubcategories", adoxioSubLicencetype.AdoxioLicencesubcategoryid);
+                var subLicencetype = _dynamicsClient.GetAdoxioSubLicencetypeByName(item.LicenceSubCategory);
+                application.AdoxioLicenceSubCategoryODataBind =
+                    _dynamicsClient.GetEntityURI("adoxio_licencesubcategories",
+                        subLicencetype.AdoxioLicencesubcategoryid);
             }
 
             if (item.ApplicationStatus == AdoxioApplicationStatusCodes.PendingForLGFNPFeedback)
-            {
-                adoxioApplication.Statuscode = (int?)item.ApplicationStatus;
-            }
+                application.Statuscode = (int?) item.ApplicationStatus;
 
             try
             {
                 // Indigenous nation association
                 if (!string.IsNullOrEmpty(item?.IndigenousNation?.Id))
-                {
-                    adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNation.Id);
-                }
+                    application.AdoxioLocalgovindigenousnationidODataBind =
+                        _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNation.Id);
                 else
-                {
                     //remove reference
-                    await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id, "adoxio_localgovindigenousnationid");
-                }
+                    await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id,
+                        "adoxio_localgovindigenousnationid");
 
                 // Police Jurisdiction association
                 if (!string.IsNullOrEmpty(item?.PoliceJurisdiction?.id))
-                {
-                    adoxioApplication.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdiction.id);
-                }
+                    application.AdoxioPoliceJurisdictionIdODataBind =
+                        _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdiction.id);
                 else
-                {
                     //remove reference
                     await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id, "adoxio_PoliceJurisdictionId");
-                }
 
                 RemoveServiceAreasFromApplication(item.Id);
                 if (item.ServiceAreas != null && item.ServiceAreas.Count > 0)
-                {
                     AddServiceAreasToApplication(item.ServiceAreas, item.Id);
-                }
                 if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
-                {
                     AddServiceAreasToApplication(item.OutsideAreas, item.Id);
-                }
                 if (item.CapacityArea != null && item.CapacityArea.Count > 0)
-                {
                     AddServiceAreasToApplication(item.CapacityArea, item.Id);
-                }
 
-                if ((bool)item.ApplicationType?.ShowHoursOfSale)
-                {
+                if ((bool) item.ApplicationType?.ShowHoursOfSale)
                     try
                     {
                         // get entityid
-                        string filter = $"_adoxio_application_value eq {id}";
-                        int count = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.Count();
-                        MicrosoftDynamicsCRMadoxioHoursofservice hoursEntity = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.FirstOrDefault();
-                        MicrosoftDynamicsCRMadoxioHoursofservice patchHoursEntity = new MicrosoftDynamicsCRMadoxioHoursofservice()
+                        var filter = $"_adoxio_application_value eq {id}";
+                        var hoursEntity = _dynamicsClient.Hoursofservices.Get(filter: filter).Value.FirstOrDefault();
+                        var patchHoursEntity = new MicrosoftDynamicsCRMadoxioHoursofservice
                         {
-                            AdoxioSundayclose = (int?)item.ServiceHoursSundayClose,
-                            AdoxioSundayopen = (int?)item.ServiceHoursSundayOpen,
-                            AdoxioMondayclose = (int?)item.ServiceHoursMondayClose,
-                            AdoxioMondayopen = (int?)item.ServiceHoursMondayOpen,
-                            AdoxioTuesdayclose = (int?)item.ServiceHoursTuesdayClose,
-                            AdoxioTuesdayopen = (int?)item.ServiceHoursTuesdayOpen,
-                            AdoxioWednesdayclose = (int?)item.ServiceHoursWednesdayClose,
-                            AdoxioWednesdayopen = (int?)item.ServiceHoursWednesdayOpen,
-                            AdoxioThursdayclose = (int?)item.ServiceHoursThursdayClose,
-                            AdoxioThursdayopen = (int?)item.ServiceHoursThursdayOpen,
-                            AdoxioFridayclose = (int?)item.ServiceHoursFridayClose,
-                            AdoxioFridayopen = (int?)item.ServiceHoursFridayOpen,
-                            AdoxioSaturdayclose = (int?)item.ServiceHoursSaturdayClose,
-                            AdoxioSaturdayopen = (int?)item.ServiceHoursSaturdayOpen
+                            AdoxioSundayclose = (int?) item.ServiceHoursSundayClose,
+                            AdoxioSundayopen = (int?) item.ServiceHoursSundayOpen,
+                            AdoxioMondayclose = (int?) item.ServiceHoursMondayClose,
+                            AdoxioMondayopen = (int?) item.ServiceHoursMondayOpen,
+                            AdoxioTuesdayclose = (int?) item.ServiceHoursTuesdayClose,
+                            AdoxioTuesdayopen = (int?) item.ServiceHoursTuesdayOpen,
+                            AdoxioWednesdayclose = (int?) item.ServiceHoursWednesdayClose,
+                            AdoxioWednesdayopen = (int?) item.ServiceHoursWednesdayOpen,
+                            AdoxioThursdayclose = (int?) item.ServiceHoursThursdayClose,
+                            AdoxioThursdayopen = (int?) item.ServiceHoursThursdayOpen,
+                            AdoxioFridayclose = (int?) item.ServiceHoursFridayClose,
+                            AdoxioFridayopen = (int?) item.ServiceHoursFridayOpen,
+                            AdoxioSaturdayclose = (int?) item.ServiceHoursSaturdayClose,
+                            AdoxioSaturdayopen = (int?) item.ServiceHoursSaturdayOpen
                         };
 
                         if (hoursEntity != null)
                         {
-                            _dynamicsClient.Hoursofservices.Update(hoursEntity.AdoxioHoursofserviceid, patchHoursEntity);
+                            _dynamicsClient.Hoursofservices.Update(hoursEntity.AdoxioHoursofserviceid,
+                                patchHoursEntity);
                         }
                         else
                         {
                             // Create hours of service
-                            string applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", id);
+                            var applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", id);
                             patchHoursEntity.ApplicationODataBind = applicationUri;
-                            var serviceHours = _dynamicsClient.Hoursofservices.Create(patchHoursEntity);
-
+                            _dynamicsClient.Hoursofservices.Create(patchHoursEntity);
                         }
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating/creating application hours of service");
+                        _logger.LogError(httpOperationException,
+                            "Error updating/creating application hours of service");
                         throw;
                     }
-                }
 
-                _dynamicsClient.Applications.Update(id, adoxioApplication);
+                _dynamicsClient.Applications.Update(id, application);
             }
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error updating application");
                 // fail if we can't create.
-                throw (httpOperationException);
+                throw httpOperationException;
             }
 
-            adoxioApplication = await _dynamicsClient.GetApplicationByIdWithChildren(adoxio_applicationId);
+            application = await _dynamicsClient.GetApplicationByIdWithChildren(applicationId);
 
-            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient, _cache, _logger));
+            return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
         }
 
         /// <summary>
-        /// Cancel an Application.  Using a HTTP Post to avoid Siteminder issues with DELETE
+        ///     Cancel an Application.  Using a HTTP Post to avoid Siteminder issues with DELETE
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -1165,24 +1123,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> CancelApplication(string id)
         {
             // get the application.
-            Guid adoxio_applicationid = new Guid(id);
+            var applicationId = new Guid(id);
 
-            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationid);
-            if (adoxioApplication == null)
-            {
-                return new NotFoundResult();
-            }
+            var adoxioApplication = await _dynamicsClient.GetApplicationById(applicationId);
+            if (adoxioApplication == null) return new NotFoundResult();
 
             if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
-            {
                 return new NotFoundResult();
-            }
 
             // set the status to Terminated.
-            MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
+            var patchRecord = new MicrosoftDynamicsCRMadoxioApplication
             {
                 //StatusCodeODataBind = ((int)AdoxioApplicationStatusCodes.Terminated).ToString()
-                Statuscode = (int)AdoxioApplicationStatusCodes.Terminated
+                Statuscode = (int) AdoxioApplicationStatusCodes.Terminated
             };
 
             try
@@ -1193,7 +1146,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(httpOperationException, "Error cancelling application");
                 // fail if we can't create.
-                throw (httpOperationException);
+                throw httpOperationException;
             }
 
 
@@ -1201,7 +1154,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Process an application.  Only useful for automated testing.
+        ///     Process an application.  Only useful for automated testing.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -1212,24 +1165,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
             // get the current user.
-            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+            var sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
 
 
             // query the Dynamics system to get the account record.
-            if (userSettings.AccountId != null && !userSettings.IsNewUserRegistration && userSettings.AccountId.Length > 0)
-            {
-
+            if (userSettings.AccountId != null && !userSettings.IsNewUserRegistration &&
+                userSettings.AccountId.Length > 0)
                 // call the bpf to process the application.
                 try
                 {
                     // this needs to be the guid for the published workflow.
-                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("0a78e6dc-8d62-480f-909f-c104051cf467", id);
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync(
+                        "0a78e6dc-8d62-480f-909f-c104051cf467", id);
                     return Ok("OK");
                 }
                 catch (HttpOperationException httpOperationException)
                 {
-                    string error = httpOperationException.Response.Content;
+                    var error = httpOperationException.Response.Content;
                     return BadRequest(error);
                 }
                 catch (Exception e)
@@ -1237,15 +1190,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     throw e;
                 }
 
-            }
-            else
-            {
-                return BadRequest("This API is not available to an unregistered user.");
-            }
+            return BadRequest("This API is not available to an unregistered user.");
         }
 
         /// <summary>
-        /// Delete an Application.  Using a HTTP Post to avoid Siteminder issues with DELETE
+        ///     Delete an Application.  Using a HTTP Post to avoid Siteminder issues with DELETE
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -1253,21 +1202,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> DeleteApplication(string id)
         {
             // get the application.
-            Guid adoxio_applicationid = new Guid(id);
+            var applicationId = new Guid(id);
 
-            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationid);
-            if (adoxioApplication == null)
-            {
-                return new NotFoundResult();
-            }
+            var adoxioApplication = await _dynamicsClient.GetApplicationById(applicationId);
+            if (adoxioApplication == null) return new NotFoundResult();
 
             if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
-            {
                 return new NotFoundResult();
-            }
 
 
-            await _dynamicsClient.Applications.DeleteAsync(adoxio_applicationid.ToString());
+            await _dynamicsClient.Applications.DeleteAsync(applicationId.ToString());
 
             return NoContent(); // 204
         }
@@ -1279,36 +1223,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
             // get the application.
-            Guid adoxio_applicationid = new Guid(id);
+            var applicationId = new Guid(id);
 
-            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationid);
-            if (adoxioApplication == null)
-            {
-                return new NotFoundResult();
-            }
+            var adoxioApplication = await _dynamicsClient.GetApplicationById(applicationId);
+            if (adoxioApplication == null) return new NotFoundResult();
 
 
-            await _dynamicsClient.Applications.DeleteAsync(adoxio_applicationid.ToString());
+            await _dynamicsClient.Applications.DeleteAsync(applicationId.ToString());
 
             return NoContent(); // 204
         }
 
         /// <summary>
-        /// Verify whether currently logged in user has access to this account id
+        ///     Verify whether currently logged in user has access to this account id
         /// </summary>
         /// <returns>boolean</returns>
         private bool CurrentUserHasAccessToApplicationOwnedBy(string accountId)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
-            {
                 return userSettings.AccountId == accountId;
-            }
 
             // if current user doesn't have an account they are probably not logged in
             return false;
@@ -1316,12 +1255,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private void RemoveServiceAreasFromApplication(string applicationId)
         {
-            string filter = $"_adoxio_applicationid_value eq {applicationId}";
+            var filter = $"_adoxio_applicationid_value eq {applicationId}";
             try
             {
-                IList<MicrosoftDynamicsCRMadoxioServicearea> areas = _dynamicsClient.Serviceareas.Get(filter: filter).Value;
-                foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
-                {
+                var areas = _dynamicsClient.Serviceareas.Get(filter: filter).Value;
+                foreach (var area in areas)
                     try
                     {
                         _dynamicsClient.Serviceareas.Delete(area.AdoxioServiceareaid);
@@ -1334,7 +1272,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _logger.LogError(e, "Unexpected error deleting a service area.");
                     }
-                }
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -1348,10 +1285,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private void AddServiceAreasToApplication(List<CapacityArea> areas, string applicationId)
         {
-            string applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", applicationId);
-            foreach (CapacityArea area in areas)
+            var applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", applicationId);
+            foreach (var area in areas)
             {
-                MicrosoftDynamicsCRMadoxioServicearea serviceArea = new MicrosoftDynamicsCRMadoxioServicearea()
+                var serviceArea = new MicrosoftDynamicsCRMadoxioServicearea
                 {
                     ApplicationOdataBind = applicationUri,
                     AdoxioAreacategory = area.AreaCategory,
