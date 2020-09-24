@@ -105,6 +105,7 @@ Scenario: Validation for Manufacturer On-Site Store Endorsement
 namespace bdd_tests
 {
     [FeatureFile("./ManufacturerOnSiteStoreEndorsement.feature")]
+    [Collection("Liquor")]
     public sealed class ManufacturerOnSiteStoreEndorsement : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

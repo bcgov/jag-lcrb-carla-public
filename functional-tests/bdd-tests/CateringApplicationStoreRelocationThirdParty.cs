@@ -171,6 +171,7 @@ Scenario: Validation for Catering Third Party Operator
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplicationStoreRelocationThirdParty.feature")]
+    [Collection("Liquor")]
     public sealed class CateringApplicationStoreRelocationThirdParty : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

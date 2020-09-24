@@ -105,6 +105,7 @@ Scenario: Validation for Manufacturer Facility Structural Change Application
 namespace bdd_tests
 {
     [FeatureFile("./ManufacturerFacilityStructuralChange.feature")]
+    [Collection("Liquor")]
     public sealed class ManufacturerFacilityStructuralChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

@@ -91,6 +91,7 @@ Scenario: Validation for Sole Proprietorship Review Account Profile
 namespace bdd_tests
 {
     [FeatureFile("./ReviewAccountProfileValidation.feature")]
+    [Collection("Cannabis")]
     public sealed class ReviewAccountProfileValidation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

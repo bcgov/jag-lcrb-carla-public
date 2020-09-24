@@ -153,6 +153,7 @@ Scenario: Save for Later feature for partnership org structure
 namespace bdd_tests
 {
     [FeatureFile("./PartnershipOrgStructure.feature")]
+    [Collection("Cannabis")]
     public sealed class PartnershipOrgStructure : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

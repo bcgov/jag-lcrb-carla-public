@@ -60,6 +60,7 @@ Scenario: Validation for CRS Licence Renewal
 namespace bdd_tests
 {
     [FeatureFile("./CRSApplicationLicensingRenewal.feature")]
+    [Collection("Cannabis")]
     public sealed class CRSApplicationLicensingRenewal : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

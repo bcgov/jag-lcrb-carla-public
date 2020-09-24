@@ -100,6 +100,7 @@ Scenario: Validation for Sole Proprietorship Org Structure
 namespace bdd_tests
 {
     [FeatureFile("./ReviewOrgStructureValidation.feature")]
+    [Collection("Cannabis")]
     public sealed class ReviewOrgStructureValidation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

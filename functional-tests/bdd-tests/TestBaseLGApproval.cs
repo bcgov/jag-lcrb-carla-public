@@ -90,7 +90,7 @@ namespace bdd_tests
 
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Manufacturer Picnic Area Endorsement Application ')]")).Displayed);
 
-                System.Threading.Thread.Sleep(4000);
+                //System.Threading.Thread.Sleep(4000);
 
                 ClickOnSubmitButton();
             }
@@ -102,7 +102,7 @@ namespace bdd_tests
         {
             if (status == "Application Under Review")
             {
-                System.Threading.Thread.Sleep(4000);
+                //System.Threading.Thread.Sleep(4000);
 
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Application Under Review ')]")).Displayed);
 

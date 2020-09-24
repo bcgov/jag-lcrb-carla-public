@@ -64,14 +64,14 @@ namespace bdd_tests
             double timeout = 20.0;
 
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
-            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout);
+            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout * 2);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
 
             ngDriver = new NgWebDriver(driver);
 
             ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
             ngDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
-            ngDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout);
+            ngDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout * 2);
 
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
 

@@ -98,6 +98,7 @@ Scenario: Data for Sole Proprietorship Org Structure
 namespace bdd_tests
 {
     [FeatureFile("./ReviewOrgStructureData.feature")]
+    [Collection("Cannabis")]
     public sealed class ReviewOrgStructureData : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

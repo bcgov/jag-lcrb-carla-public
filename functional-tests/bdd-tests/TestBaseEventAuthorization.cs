@@ -213,7 +213,7 @@ namespace bdd_tests
                 NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1)"));
                 uiSaveForLater.Click();
 
-                System.Threading.Thread.Sleep(4000);
+                //System.Threading.Thread.Sleep(4000);
             }
             else
             {
@@ -221,7 +221,7 @@ namespace bdd_tests
                 NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary~ .btn-primary+ .btn-primary"));
                 uiSubmit.Click();
 
-                System.Threading.Thread.Sleep(4000);
+                //System.Threading.Thread.Sleep(4000);
             }
         }
 
@@ -236,7 +236,7 @@ namespace bdd_tests
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licences')]")).Displayed);
 
-            System.Threading.Thread.Sleep(4000);
+            //System.Threading.Thread.Sleep(4000);
 
             NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector("mat-expansion-panel-header[role='button'] #expand-history-button-0"));
             uiExpandEventHistory.Click();
