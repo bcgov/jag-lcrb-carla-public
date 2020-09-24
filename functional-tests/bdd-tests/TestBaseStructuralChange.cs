@@ -83,8 +83,6 @@ namespace bdd_tests
             // pay for the structural change application
             MakePayment();
 
-            System.Threading.Thread.Sleep(4000);
-
             /* 
             Page Title: Payment Approved
             */

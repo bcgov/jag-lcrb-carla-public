@@ -105,6 +105,7 @@ Scenario: Validation for Manufacturer Picnic Area Endorsement
 namespace bdd_tests
 {
     [FeatureFile("./ManufacturerPicnicAreaEndorsement.feature")]
+    [Collection("Liquor")]
     public sealed class ManufacturerPicnicAreaEndorsement : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

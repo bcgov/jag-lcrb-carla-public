@@ -105,6 +105,7 @@ Scenario: Validation for Manufacturer Location Change Application
 namespace bdd_tests
 {
     [FeatureFile("./ManufacturerLocationChange.feature")]
+    [Collection("Liquor")]
     public sealed class ManufacturerLocationChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

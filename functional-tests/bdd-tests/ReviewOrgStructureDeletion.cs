@@ -119,6 +119,7 @@ Scenario: Deletion from Sole Proprietorship Org Structure
 namespace bdd_tests
 {
     [FeatureFile("./ReviewOrgStructureDeletion.feature")]
+    [Collection("Cannabis")]
     public sealed class ReviewOrgStructureDeletion : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
