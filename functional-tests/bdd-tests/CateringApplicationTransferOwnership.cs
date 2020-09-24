@@ -144,6 +144,7 @@ using Xunit;
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplicationTransferOwnership.feature")]
+    [Collection("Liquor")]
     public sealed class CateringApplicationTransferOwnership : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

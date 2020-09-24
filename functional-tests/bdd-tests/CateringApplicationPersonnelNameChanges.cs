@@ -127,6 +127,7 @@ Scenario: Catering Sole Proprietorship Personnel Name Change
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplicationPersonnelNameChanges.feature")]
+    [Collection("Liquor")]
     public sealed class CateringApplicationPersonnelNameChanges : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

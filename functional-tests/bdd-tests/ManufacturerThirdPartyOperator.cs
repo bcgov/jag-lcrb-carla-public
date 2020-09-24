@@ -19,6 +19,7 @@ using Xunit;
 namespace bdd_tests
 {
     [FeatureFile("./ManufacturerThirdPartyOperator.feature")]
+    [Collection("Liquor")]
     public sealed class ManufacturerThirdPartyOperator : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

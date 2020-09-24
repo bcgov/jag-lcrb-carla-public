@@ -128,7 +128,8 @@ namespace bdd_tests
         public void CarlaLogin(string businessType)
         {
             Random random = new Random();
-
+            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
             // load the dashboard page
             string test_start = "login/token/AT" + DateTime.Now.Ticks.ToString() + random.Next(0, 999).ToString();
             returnUser = test_start;
@@ -137,6 +138,8 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = false;
 
             DoLogin(businessType);
+
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
         }
 
 
@@ -186,20 +189,20 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}{localGovt}");
             ngDriver.IgnoreSynchronization = false;
 
-            System.Threading.Thread.Sleep(4000);
+            System.Threading.Thread.Sleep(2000);
         }
 
 
         [And(@"I log in as a return user")]
         public void ReturnLogin()
         {
-            System.Threading.Thread.Sleep(4000);
+            System.Threading.Thread.Sleep(2000);
 
             ngDriver.IgnoreSynchronization = true;
             ngDriver.Navigate().GoToUrl($"{baseUri}{returnUser}");
             ngDriver.IgnoreSynchronization = false;
 
-            System.Threading.Thread.Sleep(4000);
+            System.Threading.Thread.Sleep(2000);
         }
 
 
