@@ -159,11 +159,6 @@
             errorMessage="Please enter any additional details of the market venue" [isFullWidth]="true">
             <textarea class="form-control" formControlName="venueDescription"></textarea>
           </app-field>
-          <app-field class="col-md-4 col-xs-12" label="Additional Information"
-            [valid]="eventForm.get('additionalLocationInformation').valid || !eventForm.get('additionalLocationInformation').touched"
-            [isFullWidth]="true">
-            <textarea class="form-control" formControlName="additionalLocationInformation"></textarea>
-          </app-field>
         </div>
       </div>
 
@@ -208,9 +203,14 @@
           <app-field class="col-md-4 col-xs-12" label="Frequency" [required]="true"
             [valid]="eventForm.get('marketDuration').valid || !eventForm.get('marketDuration').touched"
             errorMessage="Please indicate the market frequency" [isFullWidth]="true">
-            <select class="form-control" formControlName="marketDuration">
+            <select class="form-control" formControlName="marketDuration" (change)="refreshTimeDays()">
               <option *ngFor="let item of marketDuration" [ngValue]="item.value">{{item.label}}</option>
             </select>
+          </app-field>
+          <app-field class="col-md-4 col-xs-12" label="Additional Information"
+            [valid]="eventForm.get('additionalLocationInformation').valid || !eventForm.get('additionalLocationInformation').touched"
+            [isFullWidth]="true">
+            <textarea class="form-control" formControlName="additionalLocationInformation"></textarea>
           </app-field>
         </div>
         <div class="row">
@@ -232,6 +232,22 @@
               [max]="endDateMaximum" (dateChange)="endDateChanged()">
             <mat-datepicker #endPicker></mat-datepicker>
           </app-field>
+        </div>
+        <div class="row mb-5 attention-section"
+          *ngIf="getOptionFromValue(marketDuration, eventForm.get('marketDuration').value).label === 'Weekly'
+                || getOptionFromValue(marketDuration, eventForm.get('marketDuration').value).label === 'Bi-Weekly'">
+          <div class="p-4">
+            <label>Please select the days of the week that the event will occur</label>
+          </div>
+          <div class="d-flex justify-content-between col-xs-12">
+            <mat-checkbox formControlName="sunday" (change)="weekDateChanged('sunday')" [disabled]="!this.eventForm.get('sunday').value && daysChecked === 3"><span class="checkbox-label">Sunday</span></mat-checkbox>
+            <mat-checkbox formControlName="monday" (change)="weekDateChanged('monday')" [disabled]="!this.eventForm.get('monday').value && daysChecked === 3"><span class="checkbox-label">Monday</span></mat-checkbox>
+            <mat-checkbox formControlName="tuesday" (change)="weekDateChanged('tuesday')" [disabled]="!this.eventForm.get('tuesday').value && daysChecked === 3"><span class="checkbox-label">Tuesday</span></mat-checkbox>
+            <mat-checkbox formControlName="wednesday" (change)="weekDateChanged('wednesday')" [disabled]="!this.eventForm.get('wednesday').value && daysChecked === 3"><span class="checkbox-label">Wednesday</span></mat-checkbox>
+            <mat-checkbox formControlName="thursday" (change)="weekDateChanged('thursday')" [disabled]="!this.eventForm.get('thursday').value && daysChecked === 3"><span class="checkbox-label">Thursday</span></mat-checkbox>
+            <mat-checkbox formControlName="friday" (change)="weekDateChanged('friday')" [disabled]="!this.eventForm.get('friday').value && daysChecked === 3"><span class="checkbox-label">Friday</span></mat-checkbox>
+            <mat-checkbox formControlName="saturday" (change)="weekDateChanged('saturday')" [disabled]="!this.eventForm.get('saturday').value && daysChecked === 3"><span class="checkbox-label">Saturday</span></mat-checkbox>
+          </div>
         </div>
         <div *ngFor="let form of timeForms.controls" class="row mr-0 mt-3" style="background-color: #E1E8F2; border-bottom: 4px solid #E4E4E4">
           <form [formGroup]="form" class="col-md-12">
@@ -262,7 +278,9 @@
         </div>
         <div class="row">
           <app-field class="col-xs-12">
-            <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()" [disabled]="eventForm.controls['startDate'].invalid || eventForm.controls['endDate'].invalid || isReadOnly">The event and liquor service times are different on specific dates.</mat-checkbox>
+            <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()"
+                          [disabled]="eventForm.controls['startDate'].invalid || eventForm.controls['endDate'].invalid || isReadOnly">
+                          The event and liquor sale times are different on specific dates.</mat-checkbox>
           </app-field>
         </div>
       </div>
