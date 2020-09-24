@@ -102,26 +102,10 @@
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Business Legal Name" [required]="true"
             [valid]="eventForm.get('clientHostname').valid || !eventForm.get('clientHostname').touched"
-            errorMessage="Please enter the market organizer" [isFullWidth]="true">
+            errorMessage="Please enter the market business legal name" [isFullWidth]="true">
             <input class="form-control" type="text" formControlName="clientHostname">
           </app-field>
-          <app-field class="col-md-4 col-xs-12" label="Registration Number"
-            [valid]="eventForm.get('registrationNumber').valid || !eventForm.get('registrationNumber').touched"
-            errorMessage="Please enter the market registration number" [isFullWidth]="true">
-            <input class="form-control" type="text" formControlName="registrationNumber" mask="0*">
-          </app-field>
-          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-          matTooltip="In the case of an application in respect of a market managed or carried on by a corporation under the Business Corporations Act, Societies Act, Canada Business Corporations Act or Canada Not-for-profit Corporations Act, the registration number shown on the certificate of incorporation, continuation or amalgamation of the corporation."></i>
-        </div>
-        <div class="row">
-          <app-field class="col-md-4 col-xs-12" label="Duration" [required]="true"
-            [valid]="eventForm.get('marketDuration').valid || !eventForm.get('marketDuration').touched"
-            errorMessage="Please indicate the market duration" [isFullWidth]="true">
-            <select class="form-control" formControlName="marketDuration">
-              <option *ngFor="let item of marketDuration" [ngValue]="item.value">{{item.label}}</option>
-            </select>
-          </app-field>
-          <app-field class="col-md-4 col-xs-12" label="Type" [required]="true"
+          <app-field class="col-md-4 col-xs-12" label="Market Type" [required]="true"
             [valid]="eventForm.get('marketEventType').valid || !eventForm.get('marketEventType').touched"
             errorMessage="Please enter the type of event" [isFullWidth]="true">
             <select class="form-control" formControlName="marketEventType">
@@ -130,6 +114,20 @@
           </app-field>
           <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
           matTooltip="Select the type of market event." ></i>
+        </div>
+        <div class="row">
+          <app-field class="col-md-4 col-xs-12" label="Market Business Number"
+            [valid]="eventForm.get('businessNumber').valid || !eventForm.get('businessNumber').touched"
+            errorMessage="Please enter the market business number" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="businessNumber" mask="0*">
+          </app-field>
+          <app-field class="col-md-4 col-xs-12" label="Incorporation/Registration Number"
+            [valid]="eventForm.get('registrationNumber').valid || !eventForm.get('registrationNumber').touched"
+            errorMessage="Please enter the market registration number" [isFullWidth]="true">
+            <input class="form-control" type="text" formControlName="registrationNumber" mask="0*">
+          </app-field>
+          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
+          matTooltip="In the case of an application in respect of a market managed or carried on by a corporation under the Business Corporations Act, Societies Act, Canada Business Corporations Act or Canada Not-for-profit Corporations Act, the registration number shown on the certificate of incorporation, continuation or amalgamation of the corporation."></i>
         </div>
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Address 1"
@@ -207,20 +205,29 @@
       <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
       <div class="padded-section clearfix">
         <div class="row">
-          <app-field class="col-md-4 col-xs-12" label="Start Date" [required]="true"
+          <app-field class="col-md-4 col-xs-12" label="Frequency" [required]="true"
+            [valid]="eventForm.get('marketDuration').valid || !eventForm.get('marketDuration').touched"
+            errorMessage="Please indicate the market frequency" [isFullWidth]="true">
+            <select class="form-control" formControlName="marketDuration">
+              <option *ngFor="let item of marketDuration" [ngValue]="item.value">{{item.label}}</option>
+            </select>
+          </app-field>
+        </div>
+        <div class="row">
+          <app-field class="col-md-2 col-xs-6" label="Start Date" [required]="true"
             [valid]="eventForm.get('startDate').valid || !eventForm.get('startDate').touched"
-            [isFullWidth]="false">
+            [isFullWidth]="true">
             <input type="text" formControlName='startDate'
-              style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
+              placeholder="yyyy-mm-dd" class="form-control"
               [min]="startDateMinimum" [matDatepicker]="startPicker" (focus)="startPicker.open()" (click)="startPicker.open()"
               (dateChange)="startDateChanged()">
             <mat-datepicker #startPicker></mat-datepicker>
           </app-field>
-          <app-field class="col-md-4 col-xs-12" label="End Date" [required]="true"
+          <app-field class="col-md-2 col-xs-6" label="End Date" [required]="true"
             [valid]="eventForm.get('endDate').valid || !eventForm.get('endDate').touched"
-            [isFullWidth]="false">
+            [isFullWidth]="true">
             <input type="text" formControlName='endDate'
-              style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
+              placeholder="yyyy-mm-dd" class="form-control"
               [min]="endDateMinimum" [matDatepicker]="endPicker" (focus)="endPicker.open()" (click)="endPicker.open()"
               [max]="endDateMaximum" (dateChange)="endDateChanged()">
             <mat-datepicker #endPicker></mat-datepicker>
@@ -277,6 +284,14 @@
       <div class="p-3 attention-section">
         <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</p>
       </div>
+      <section class="error mt-3" *ngIf="showErrorSection">
+        <p *ngFor="let message of validationMessages">
+          <span class="app-cancel">
+            <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+            {{message}}
+          </span>
+        </p>
+      </section>
   
       <div class="p-4 button-row">
         <button class="btn btn-primary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
@@ -291,7 +306,7 @@
             CANCEL
           </span>
         </button>
-        <button class="btn btn-primary" (click)="save(true)" [disabled]="isFormValid()" *ngIf="!isReadOnly">SUBMIT</button>
+        <button class="btn btn-primary" (click)="save(true)" *ngIf="!isReadOnly">SUBMIT</button>
       </div>
     </form>
   </div>
