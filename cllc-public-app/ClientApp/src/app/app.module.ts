@@ -57,7 +57,7 @@ import { DynamicsDataService } from '@services/dynamics-data.service';
 import { DynamicsFormComponent } from '@components/dynamics-form/dynamics-form.component';
 import { DynamicsFormDataService } from '@services/dynamics-form-data.service';
 import { FileDataService } from '@services/file-data.service';
-
+import { AnnualVolumeService } from '@services/annual-volume.service';
 
 import {
   EditShareholdersComponent, ShareholderDialogComponent,
@@ -440,6 +440,7 @@ import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confi
     MatBadgeModule
   ],
   providers: [
+    AnnualVolumeService,
     AccountDataService,
     ApplicationDataService,
     LegalEntityDataService,
