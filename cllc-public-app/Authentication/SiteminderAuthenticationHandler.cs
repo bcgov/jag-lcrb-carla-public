@@ -428,7 +428,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     
                     if (siteMinderBusinessGuid != null) // BCeID user
                     {
-                        var contact = _dynamicsClient.GetContactByExternalId(userSettings.ContactId);
+                        var contact = _dynamicsClient.GetActiveContactByExternalId(userSettings.ContactId);
                         if (contact == null)
                         {
                             // try by other means.
