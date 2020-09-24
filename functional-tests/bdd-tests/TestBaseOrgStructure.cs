@@ -751,7 +751,7 @@ namespace bdd_tests
                 // create individual partner 2 info
                 string partner2FirstName = "IndividualPartner2First";
                 string partner2LastName = "IndividualPartner2Last";
-                string partner2Percentage = "503";
+                string partner2Percentage = "53";
                 string partner2Email = "individual@partner2.com";
 
                 // enter individual partner2 first name
