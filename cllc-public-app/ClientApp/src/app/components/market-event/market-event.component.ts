@@ -5,7 +5,6 @@ import { LicenceEvent, EventStatus, MarketDuration, SpecificLocation, EventCateg
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
-import { conditionalValidator } from '@shared/validators';
 
 const DEFAULT_START_TIME = {
   hour: 9,
@@ -36,6 +35,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
   startDateMinimum: Date;
   endDateMinimum: Date;
   endDateMaximum: Date;
+  daysChecked = 0;
   scheduleIsInconsistent = false;
   showErrorSection = false;
   validationMessages: any[];
@@ -79,6 +79,13 @@ export class MarketEventComponent extends FormBase implements OnInit {
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
     agreement: ['', [Validators.required]],
+    sunday: [false, []],
+    monday: [false, []],
+    tuesday: [false, []],
+    wednesday: [false, []],
+    thursday: [false, []],
+    friday: [false, []],
+    saturday: [false, []],
     eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Market').value, []]
   },);
 
@@ -161,7 +168,14 @@ export class MarketEventComponent extends FormBase implements OnInit {
       mktOrganizerContactPhone: licenceEvent.mktOrganizerContactPhone,
       businessNumber: licenceEvent.businessNumber,
       registrationNumber: licenceEvent.registrationNumber,
-      clientHostname: licenceEvent.clientHostname
+      clientHostname: licenceEvent.clientHostname,
+      sunday: false,
+      monday: false,
+      tuesday: false,
+      wednesday: false,
+      thursday: false,
+      friday: false,
+      saturday: false
     });
 
     if (this.isReadOnly) {
@@ -329,7 +343,6 @@ export class MarketEventComponent extends FormBase implements OnInit {
   }
 
   startDateChanged() {
-    // this.updateEndDateMinimum();
     this.refreshTimeDays();
   }
   endDateChanged() {
@@ -366,7 +379,6 @@ export class MarketEventComponent extends FormBase implements OnInit {
     this.validationMessages = [...new Set(this.listControlsWithErrors(this.eventForm, this.getValidationErrorMap()))];
     if (this.eventForm.get('registrationNumber').value == '' && this.eventForm.get('businessNumber').value == '') {
       this.validationMessages.push(`Please enter either the 'Market Business Number' or the 'Incorporation/Registration Number'`);
-      console.log(this.validationMessages);
     }
     
     if (this.validationMessages.length > 0) {
@@ -403,21 +415,39 @@ export class MarketEventComponent extends FormBase implements OnInit {
     return errorMap;
   }
 
+  isOnSelectedDayOfWeek(d: Date): boolean {
+    if (this.eventForm.get('sunday').value && d.getDay() == 0)
+        return true;
+    if (this.eventForm.get('monday').value && d.getDay() == 1)
+      return true;
+    if (this.eventForm.get('tuesday').value && d.getDay() == 2)
+      return true;
+    if (this.eventForm.get('wednesday').value && d.getDay() == 3)
+      return true;
+    if (this.eventForm.get('thursday').value && d.getDay() == 4)
+      return true;
+    if (this.eventForm.get('friday').value && d.getDay() == 5)
+      return true;
+    if (this.eventForm.get('saturday').value && d.getDay() == 6)
+      return true;
+    return false;
+  }
+
   getDaysArray(start, end) {
+    const isBiWeekly = this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Bi-Weekly';
+    let dayNum = 0;
     start = new Date(start);
     end = new Date(end);
     for(var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
-        arr.push(new Date(dt));
+      const d = new Date(dt);
+      if(this.isOnSelectedDayOfWeek(d)) {
+        if ((isBiWeekly && dayNum % 14 < 7) || !isBiWeekly)
+          arr.push(d);
+      }
+      dayNum++;
     }
     return arr;
   }
-
-  // isFormValid() {
-  //   return !this.eventForm.valid;// || this.eventForm.controls['agreement'].value;// ||
-  //   // this.eventForm.controls['isNoPreventingSaleofLiquor'].value || this.eventForm.controls['isMarketManagedorCarried'].value || this.eventForm.controls['isMarketOnlyVendors'].value ||
-  //   // this.eventForm.controls['isNoImportedGoods'].value || this.eventForm.controls['isMarketHostsSixVendors'].value || this.eventForm.controls['isMarketMaxAmountorDuration'].value ||
-  //   // this.eventForm.controls['isAllStaffServingitRight'].value || this.eventForm.controls['isSampleSizeCompliant'].value;
-  // }
 
   cancel() {
     if (this.isEditMode) {
@@ -430,5 +460,14 @@ export class MarketEventComponent extends FormBase implements OnInit {
     } else {
       this.router.navigate(['/licences']);
     }
+  }
+
+  weekDateChanged(day: string) {
+    if (this.eventForm.get(day).value) {
+      this.daysChecked++;
+    } else {
+      this.daysChecked--;
+    }
+    this.refreshTimeDays();
   }
 }
