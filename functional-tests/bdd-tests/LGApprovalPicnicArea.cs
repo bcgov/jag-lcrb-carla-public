@@ -43,6 +43,7 @@ Scenario: Local Government Approval for Picnic Area Endorsement
 namespace bdd_tests
 {
     [FeatureFile("./LGApprovalPicnicArea.feature")]
+    [Collection("Liquor")]
     public sealed class LGApprovalPicnicArea : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

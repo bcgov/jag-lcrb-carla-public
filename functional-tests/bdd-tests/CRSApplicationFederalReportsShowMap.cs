@@ -130,6 +130,7 @@ Scenario: Sole Proprietorship Federal Reports and Show Map
 namespace bdd_tests
 {
     [FeatureFile("./CRSApplicationFederalReportsShowMap.feature")]
+    [Collection("Cannabis")]
     public sealed class CRSApplicationFederalReportsShowMap : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

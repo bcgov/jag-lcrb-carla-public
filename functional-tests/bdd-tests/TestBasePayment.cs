@@ -33,6 +33,7 @@ namespace bdd_tests
             /* 
             Page Title: Internet Payments Program (Bambora)
             */
+            System.Threading.Thread.Sleep(2000);
 
             ngDriver.FindElement(By.Name("trnCardNumber")).SendKeys(testCC);
 
@@ -40,7 +41,7 @@ namespace bdd_tests
 
             ngDriver.FindElement(By.Name("submitButton")).Click();
 
-            System.Threading.Thread.Sleep(4000);
+            System.Threading.Thread.Sleep(3000);
 
             //turn back on when returning to Angular
             ngDriver.IgnoreSynchronization = false;
@@ -71,8 +72,6 @@ namespace bdd_tests
 
             // pay the licence fee
             MakePayment();
-
-            System.Threading.Thread.Sleep(4000);
 
             /* 
             Page Title: Payment Approved

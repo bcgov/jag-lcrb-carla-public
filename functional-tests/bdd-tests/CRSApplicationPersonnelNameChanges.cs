@@ -127,6 +127,7 @@ Scenario: Sole Proprietorship CRS Personnel Name Changes
 namespace bdd_tests
 {
     [FeatureFile("./CRSApplicationPersonnelNameChanges.feature")]
+    [Collection("Cannabis")]
     public sealed class CRSApplicationPersonnelNameChanges : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

@@ -94,7 +94,7 @@ namespace bdd_tests
 
             MakePayment();
 
-            System.Threading.Thread.Sleep(3000);
+
         }
     }
 }

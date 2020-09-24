@@ -157,6 +157,7 @@ Scenario: Validation for Catering Branding Change
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplicationBrandingChange.feature")]
+    [Collection("Liquor")]
     public sealed class CateringApplicationBrandingChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
