@@ -308,7 +308,7 @@ namespace bdd_tests
                     ngDriver.FindElement(By.Id("deleteShareholderChange0")).Click();
                     break;
                 case "partnership":
-                    ngDriver.FindElement(By.Id("deleteLeaderChange0")).Click();
+                    ngDriver.FindElement(By.Id("deleteShareholderChange0")).Click();
                     break;
                 case "public corporation":
                     ngDriver.FindElement(By.Id("deleteLeaderChange0")).Click();
