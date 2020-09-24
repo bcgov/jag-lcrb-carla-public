@@ -440,7 +440,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // see if the contact exists.
             try
             {
-                userContact = _dynamicsClient.GetContactByExternalId(contactSiteminderGuid);
+                userContact = _dynamicsClient.GetActiveContactByExternalId(contactSiteminderGuid);
                 if (userContact != null)
                 {
                     createContact = false;
