@@ -25,8 +25,7 @@ Scenario: Deletion from Partnership Org Structure
     And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I delete the personnel for a partnership
-    And I click on the button for Submit Organization Information
-    And I click on the Complete Organization Information button
+    And I click on the button for Save For Later
     And the org structure data is successfully deleted for a partnership
     And the account is deleted
     Then I see the login page
@@ -39,8 +38,7 @@ Scenario: Deletion from Private Corporation Org Structure
     And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I delete the personnel for a private corporation
-    And I click on the button for Submit Organization Information
-    And I click on the Complete Organization Information button
+    And I click on the button for Save For Later
     And the org structure data is successfully deleted for a private corporation
     And the account is deleted
     Then I see the login page
@@ -53,8 +51,7 @@ Scenario: Deletion from Public Corporation Org Structure
     And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I delete the personnel for a public corporation
-    And I click on the button for Submit Organization Information
-    And I click on the Complete Organization Information button
+    And I click on the button for Save For Later
     And the org structure data is successfully deleted for a public corporation
     And the account is deleted
     Then I see the login page
@@ -67,8 +64,7 @@ Scenario: Deletion from Society Org Structure
     And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I delete the personnel for a society
-    And I click on the button for Submit Organization Information
-    And I click on the Complete Organization Information button
+    And I click on the button for Save For Later
     And the org structure data is successfully deleted for a society
     And the account is deleted
     Then I see the login page
@@ -81,8 +77,7 @@ Scenario: Deletion from Sole Proprietorship Org Structure
     And I click on the button for Submit Organization Information
     And I click on the Complete Organization Information button
     And I delete the personnel for a sole proprietorship
-    And I click on the button for Submit Organization Information
-    And I click on the Complete Organization Information button
+    And I click on the button for Save For Later
     And the org structure data is successfully deleted for a sole proprietorship
     And the account is deleted
     Then I see the login page

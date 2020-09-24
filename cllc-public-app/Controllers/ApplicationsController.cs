@@ -464,7 +464,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         childNode.IsDirectorNew == true ||
                         childNode.IsManagerNew == true ||
                         childNode.IsOfficerNew == true ||
-                        childNode.IsTrusteeNew == true
+                        childNode.IsTrusteeNew == true ||
+                        childNode.IsOwnerNew == true 
                     );
 
                     //split the change log if it is both a shareholder and key-personnel
