@@ -386,6 +386,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "licenseePhone", account.Telephone1 },
                 { "licenseeEmail", account.Emailaddress1 },
                 { "contactName", licenceEventVM.ContactName },
+                { "contactEmail", licenceEventVM.ContactEmail },
                 { "contactPhone", licenceEventVM.ContactPhone },
                 { "hostname", licenceEventVM.ClientHostname },
                 { "startDate", licenceEventVM.StartDate?.ToString("MMMM dd, yyyy") },
@@ -404,14 +405,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "inspectorName", licenceEvent.AdoxioEventinspectorname },
                 { "inspectorPhone", licenceEvent.AdoxioEventinspectorphone },
                 { "inspectorEmail", licenceEvent.AdoxioEventinspectoremail },
-                { "date", DateTime.Now.ToString("MMMM dd, yyyy") }
+                { "date", DateTime.Now.ToString("MMMM dd, yyyy") },
+                { "marketName", licenceEventVM.MarketName },
+                { "marketDuration",  licenceEventVM.MarketDuration.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.MarketDuration) : "" }
             };
 
             byte[] data;
             try
             {
-                data = await _pdfClient.GetPdf(parameters, "event_authorization");
-                return File(data, "application/pdf", $"authorization.pdf");
+                string pdfType = null;
+                if (licenceEventVM.EventCategory == EventCategory.Market)
+                {
+                    pdfType = "market_event_authorization";
+                } else if (licenceEventVM.EventCategory == EventCategory.Catering)
+                {
+                    pdfType = "catering_event_authorization";
+                }
+                if (pdfType != null)
+                {
+                    data = await _pdfClient.GetPdf(parameters, pdfType);
+                    return File(data, "application/pdf", $"authorization.pdf");
+                }
+                return new NotFoundResult();
             }
             catch (Exception)
             {
