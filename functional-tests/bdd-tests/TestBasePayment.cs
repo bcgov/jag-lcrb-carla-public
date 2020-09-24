@@ -33,6 +33,7 @@ namespace bdd_tests
             /* 
             Page Title: Internet Payments Program (Bambora)
             */
+            System.Threading.Thread.Sleep(2000);
 
             ngDriver.FindElement(By.Name("trnCardNumber")).SendKeys(testCC);
 
