@@ -160,6 +160,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.MKTOrganizerContactName = item.AdoxioMktorganizercontactname;
                 result.MKTOrganizerContactPhone = item.AdoxioMktorganizercontactphone;
                 result.RegistrationNumber = item.AdoxioRegistrationnumber;
+                result.BusinessNumber = item.AdoxioBusinessnumber;
                 result.MarketName = item.AdoxioMarketname;
                 result.MarketWebsite = item.AdoxioMarketwebsite;
                 result.MarketDuration = (MarketDuration?)item.AdoxioMarketduration;
@@ -286,6 +287,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMktorganizercontactname = from.MKTOrganizerContactName;
             to.AdoxioMktorganizercontactphone = from.MKTOrganizerContactPhone;
             to.AdoxioRegistrationnumber = from.RegistrationNumber;
+            to.AdoxioBusinessnumber = from.BusinessNumber;
             to.AdoxioMarketname = from.MarketName;
             to.AdoxioMarketwebsite = from.MarketWebsite;
             to.AdoxioMarketduration = (int?)from.MarketDuration;
