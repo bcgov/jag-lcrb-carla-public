@@ -14,12 +14,12 @@ namespace Gov.Lclb.Cllb.Public.Mapping
             {
                 // catering fields
                 { "adoxio_previouslicenceapplication", new FieldMapping ("previousApplication", true) },
-                { "adoxio_previouslicenceapplicationdetails", new FieldMapping ("previousApplicationDetails", true) },
+                { "adoxio_previouslicenceapplicationdetails", new FieldMapping ("previousApplicationDetails", false) },
                 { "adoxio_ruralagencystoreappointment", new FieldMapping ("ruralAgencyStoreAppointment", true) },
                 { "adoxio_liquorindustryconnections", new FieldMapping ("liquorIndustryConnections", true) },
-                { "adoxio_liquorindustryconnectionsdetails", new FieldMapping ("liquorIndustryConnectionsDetails", true) },                
+                { "adoxio_liquorindustryconnectionsdetails", new FieldMapping ("liquorIndustryConnectionsDetails", false) },                
                 { "adoxio_otherbusinessesatthesamelocation", new FieldMapping ("otherBusinesses", true)},
-                { "adoxio_otherbusinesssamelocationdetails", new FieldMapping ("otherBusinessesDetails", true) },
+                { "adoxio_otherbusinesssamelocationdetails", new FieldMapping ("otherBusinessesDetails", false) },
 
 
                 {"adoxio_name",new FieldMapping ("name", true) },
