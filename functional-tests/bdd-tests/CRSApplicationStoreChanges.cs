@@ -216,6 +216,7 @@ Scenario: Validation for CRS Transfer of Ownership
 namespace bdd_tests
 {
     [FeatureFile("./CRSApplicationStoreChanges.feature")]
+    [Collection("Cannabis")]
     public sealed class CRSApplicationStoreChanges : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

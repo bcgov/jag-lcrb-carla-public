@@ -38,6 +38,7 @@ Scenario: Local Government Approval for LRS Relocation
 namespace bdd_tests
 {
     [FeatureFile("./LGApprovalLRSRelocation.feature")]
+    [Collection("Liquor")]
     public sealed class LGApprovalLRSRelocation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

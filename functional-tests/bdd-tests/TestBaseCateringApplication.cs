@@ -51,7 +51,7 @@ namespace bdd_tests
             }
             catch (Exception)
             {
-                System.Threading.Thread.Sleep(1000);
+                //System.Threading.Thread.Sleep(1000);
 
                 NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
                 uiEstabName.SendKeys(estName);

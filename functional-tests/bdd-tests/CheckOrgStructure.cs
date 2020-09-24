@@ -30,6 +30,7 @@ Scenario: Check Organization Structure
 namespace bdd_tests
 {
     [FeatureFile("./CheckOrgStructure.feature")]
+    [Collection("Liquor")]
     public sealed class CheckOrgStructure : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

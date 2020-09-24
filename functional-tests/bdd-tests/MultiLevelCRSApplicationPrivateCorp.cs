@@ -39,6 +39,7 @@ Scenario: Multiple Nested Shareholders
 namespace bdd_tests
 {
     [FeatureFile("./MultiLevelCRSApplicationPrivateCorp.feature")]
+    [Collection("Cannabis")]
     public sealed class MultiLevelCRSApplicationPrivateCorp : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

@@ -282,6 +282,7 @@ using Xunit;
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplicationEventAuthorization.feature")]
+    [Collection("Liquor")]
     public sealed class CateringApplicationEventAuthorization : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

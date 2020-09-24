@@ -145,6 +145,7 @@ Scenario: Validation for CRS Branding Change
 namespace bdd_tests
 {
     [FeatureFile("./CRSApplicationBrandingChange.feature")]
+    [Collection("Cannabis")]
     public sealed class CRSApplicationBrandingChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

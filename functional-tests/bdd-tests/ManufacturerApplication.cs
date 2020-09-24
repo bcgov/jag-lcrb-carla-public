@@ -61,6 +61,7 @@ Scenario: Private Corporation Co-packer Manufacturer Application
 namespace bdd_tests
 {
     [FeatureFile("./ManufacturerApplication.feature")]
+    [Collection("Liquor")]
     public sealed class ManufacturerApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

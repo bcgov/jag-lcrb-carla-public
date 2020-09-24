@@ -105,6 +105,7 @@ Scenario: Validation for Special Event Area Endorsement Application
 namespace bdd_tests
 {
     [FeatureFile("./ManufacturerSpecialEventAreaEndorsement.feature")]
+    [Collection("Liquor")]
     public sealed class ManufacturerSpecialEventAreaEndorsement : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
