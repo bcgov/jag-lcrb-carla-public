@@ -87,9 +87,6 @@ namespace bdd_tests
             Page Title: Payment Approved
             */
 
-            // confirm correct payment amount
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$440.00')]")).Displayed);
-
             ClickLicencesTab();
         }
 
