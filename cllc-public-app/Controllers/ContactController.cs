@@ -260,7 +260,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // see if the contact exists.
             try
             {
-                userContact = _dynamicsClient.GetContactByExternalId(contactSiteminderGuid);
+                userContact = _dynamicsClient.GetActiveContactByExternalId(contactSiteminderGuid);
                 if (userContact != null)
                 {
                     throw new Exception("Contact already Exists");
@@ -357,7 +357,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // see if the contact exists.
             try
             {
-                userContact = _dynamicsClient.GetContactByExternalId(contactSiteminderGuid);
+                userContact = _dynamicsClient.GetActiveContactByExternalId(contactSiteminderGuid);
                 if (userContact != null)
                 {
                     throw new Exception("Contact already Exists");
