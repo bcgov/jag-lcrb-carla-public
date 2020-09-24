@@ -115,7 +115,7 @@ namespace bdd_tests
 
             ClickOnSubmitButton();
 
-            System.Threading.Thread.Sleep(3000);
+            //System.Threading.Thread.Sleep(3000);
         }
     }
 }

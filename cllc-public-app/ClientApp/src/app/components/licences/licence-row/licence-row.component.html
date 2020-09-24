@@ -217,6 +217,7 @@
                             <table style="width: 100%; text-align: center;">
                                 <thead>
                                     <th>Event Status</th>
+                                    <th>Number</th>
                                     <th>Name</th>
                                     <th>Date Submitted</th>
                                     <th></th>
@@ -226,6 +227,7 @@
                                     <td><a
                                         [routerLink]="[ '/licence/' + item.licenseId + getEventPath(event) + event.id]">{{getOptionFromValue(eventStatus, event.status).label}}</a>
                                     </td>
+                                    <td>{{event.eventNumber}}</td>
                                     <td>{{getEventName(event)}}</td>
                                     <td>{{event.modifiedOn | date:'mediumDate'}}</td>
                                     <td><a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id + '/security']"

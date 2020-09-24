@@ -47,6 +47,7 @@ Scenario: Combined Catering and CRS Applications
 namespace bdd_tests
 {
     [FeatureFile("./CombinedCateringCRSApplications.feature")]
+    [Collection("Cannabis")]
     public sealed class CombinedCateringCRSApplications : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

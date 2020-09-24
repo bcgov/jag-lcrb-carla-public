@@ -44,6 +44,7 @@ Scenario: Validation for Rural Store Application
 namespace bdd_tests
 {
     [FeatureFile("./RuralStore.feature")]
+    [Collection("Cannabis")]
     public sealed class RuralStore : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

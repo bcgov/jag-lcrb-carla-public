@@ -44,6 +44,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="ReviewOrgStructureDeletion.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ReviewOrgStructureData.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ReviewSecurityScreening.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -161,6 +161,7 @@ Scenario: Validation for Catering Application
 namespace bdd_tests
 {
     [FeatureFile("./CateringApplication.feature")]
+    [Collection("Liquor")]
     public sealed class CateringApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

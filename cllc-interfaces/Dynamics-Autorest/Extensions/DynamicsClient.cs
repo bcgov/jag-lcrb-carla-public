@@ -66,7 +66,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         public string GetEntityURI(string entityType, string id)
         {
             string result = "";
-            result = NativeBaseUri + entityType + "(" + id.Trim() + ")";
+            if (id != null)
+            {
+                result = NativeBaseUri + entityType + "(" + id.Trim() + ")";
+            }
             return result;
         }
 
