@@ -49,6 +49,7 @@ Scenario: Validation for Worker Application
 namespace bdd_tests
 {
     [FeatureFile("./WorkerApplication.feature")]
+    [Collection("General")]
     public sealed class WorkerApplication : TestBaseWorker
     {
 
