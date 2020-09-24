@@ -37,7 +37,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   application: Application;
   currentChangeLogs: LicenseeChangeLog[];
   currentLegalEntities: LegalEntity;
-  @ViewChild('orgStructure', { static: false }) orgStructure: OrgStructureComponent;
+  @ViewChild('orgStructure') orgStructure: OrgStructureComponent;
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() redirectToDashboardOnSave = true;
 

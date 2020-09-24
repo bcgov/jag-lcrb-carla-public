@@ -13,7 +13,7 @@ import { FileUploaderComponent } from '@shared/components/file-uploader/file-upl
 export class ProofOfZoningComponent extends FormBase implements OnInit {
   @Input() application: Application;
   @Input() formGroup: FormGroup;
-  @ViewChild('proofOfZoningDocs', { static: false }) mainForm: FileUploaderComponent;
+  @ViewChild('proofOfZoningDocs') mainForm: FileUploaderComponent;
   validationMessages: string[];
   // form: FormGroup;
   uploadedZoningDocuments = 0;
