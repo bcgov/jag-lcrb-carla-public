@@ -164,6 +164,7 @@ namespace bdd_tests
         [And(@"I click on the Start Application button for (.*)")]
         public void ClickStartApplication(string applicationType)
         {
+            
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
@@ -233,7 +234,7 @@ namespace bdd_tests
         {
             ClickOnSubmitButton();
 
-            System.Threading.Thread.Sleep(5000);
+            //System.Threading.Thread.Sleep(5000);
         }
 
 
@@ -244,7 +245,7 @@ namespace bdd_tests
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button:nth-child(2)"));
             uiSubmitButton.Click();
 
-            System.Threading.Thread.Sleep(5000);
+            //System.Threading.Thread.Sleep(5000);
         }
 
 

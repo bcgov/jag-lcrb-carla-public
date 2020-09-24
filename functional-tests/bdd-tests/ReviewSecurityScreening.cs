@@ -105,6 +105,7 @@ Scenario: Validation for Sole Proprietorship Security Screening
 namespace bdd_tests
 {
     [FeatureFile("./ReviewSecurityScreening.feature")]
+    [Collection("Cannabis")]
     public sealed class ReviewSecurityScreening : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
