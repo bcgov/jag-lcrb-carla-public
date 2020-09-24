@@ -92,8 +92,6 @@ namespace bdd_tests
             // pay for the relocation application
             MakePayment();
 
-            System.Threading.Thread.Sleep(4000);
-
             if (applicationType == "Cannabis")
             {
                 /* 	

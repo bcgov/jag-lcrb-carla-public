@@ -104,6 +104,7 @@ Scenario: Validation for Manufacturer Transfer of Ownership
 namespace bdd_tests
 {
     [FeatureFile("./ManufacturerTransferLicence.feature")]
+    [Collection("Liquor")]
     public sealed class ManufacturerTransferLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

@@ -105,6 +105,7 @@ Scenario: Validation for Structural Alterations to an Approved Lounge or Special
 namespace bdd_tests
 {
     [FeatureFile("./ManufacturerStructuralAlterations.feature")]
+    [Collection("Liquor")]
     public sealed class ManufacturerStructuralAlterations : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]

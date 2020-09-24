@@ -19,6 +19,7 @@ using Xunit;
 namespace bdd_tests
 {
     [FeatureFile("./ManufacturerLoungeAreaEndorsement.feature")]
+    [Collection("Liquor")]
     public sealed class ManufacturerLoungeAreaEndorsement : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
