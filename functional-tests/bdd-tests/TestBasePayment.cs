@@ -27,24 +27,18 @@ namespace bdd_tests
             string testCC = configuration["test_cc"];
             string testCVD = configuration["test_ccv"];
 
-            //browser sync - don't wait for Angular
-            ngDriver.IgnoreSynchronization = true;
+            var tempWait = ngDriver.Manage().Timeouts().ImplicitWait;
+            ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(120);
+            ngDriver.WrappedDriver.FindElement(By.Name("trnCardNumber")).SendKeys(testCC);
 
-            /* 
-            Page Title: Internet Payments Program (Bambora)
-            */
+            ngDriver.WrappedDriver.FindElement(By.Name("trnCardCvd")).SendKeys(testCVD);
+
+            ngDriver.WrappedDriver.FindElement(By.Name("submitButton")).Click();
+
             System.Threading.Thread.Sleep(2000);
+            ngDriver.Manage().Timeouts().ImplicitWait = tempWait;
 
-            ngDriver.FindElement(By.Name("trnCardNumber")).SendKeys(testCC);
-
-            ngDriver.FindElement(By.Name("trnCardCvd")).SendKeys(testCVD);
-
-            ngDriver.FindElement(By.Name("submitButton")).Click();
-
-            System.Threading.Thread.Sleep(3000);
-
-            //turn back on when returning to Angular
-            ngDriver.IgnoreSynchronization = false;
+            
         }
 
 
@@ -77,12 +71,6 @@ namespace bdd_tests
             Page Title: Payment Approved
             */
 
-            if (feeType == "Cannabis")
-            {
-                // confirm correct payment amount for CRS
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$1,500.00')]")).Displayed);
-            }
-
             // click on the return to dashboard link
             NgWebElement uiReturnToDashboard = ngDriver.FindElement(By.LinkText(returnToDashboard));
             uiReturnToDashboard.Click();
@@ -94,6 +82,8 @@ namespace bdd_tests
         [And(@"I confirm the payment receipt for a (.*)")]
         public void ConfirmPaymentReceipt(string applicationType)
         {
+
+            System.Threading.Thread.Sleep(2000);
             /* 
             Page Title: Payment Approved
             */

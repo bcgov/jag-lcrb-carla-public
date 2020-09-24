@@ -93,8 +93,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         BiWeekly = 845280001,
         [EnumMember(Value = "Monthly")]
         Monthly = 845280002,
-        [EnumMember(Value = "Other")]
-        Other = 845280003
+        [EnumMember(Value = "Once")]
+        Once = 845280003
     }
     public enum MarketEventType
     {
@@ -230,6 +230,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string MKTOrganizerContactName { get; set; }
         public string MKTOrganizerContactPhone { get; set; }
         public string RegistrationNumber { get; set; }
+        public string BusinessNumber { get; set; }
         public string MarketName { get; set; }
         public string MarketWebsite { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]

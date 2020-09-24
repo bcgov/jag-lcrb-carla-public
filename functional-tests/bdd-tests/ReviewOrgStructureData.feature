@@ -67,14 +67,3 @@ Scenario: Data for Sole Proprietorship Org Structure
     And the org structure data is present for an indigenous nation
     And the account is deleted
     Then I see the login page
-
- @e2e @cannabis @localgovernment @orgstructure
- Scenario: Data for Local Government Org Structure
-    Given I am logged in to the dashboard as a local government
-    And I click on the Complete Organization Information button
-    And I review the organization structure for a local government
-    And I click on the button for Submit Organization Information
-    And I click on the Complete Organization Information button
-    And the org structure data is present for a local government
-    And the account is deleted
-    Then I see the login page

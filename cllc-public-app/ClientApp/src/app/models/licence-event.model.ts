@@ -105,6 +105,7 @@ export class LicenceEvent {
   mktOrganizerContactName: string;
   mktOrganizerContactPhone: string;
   registrationNumber: string;
+  businessNumber: string;
   marketName: string;
   marketWebsite: string;
   marketEventType: number;
@@ -282,7 +283,7 @@ export const MarketDuration = [
     value: 845280002
   },
   {
-    label: 'Other',
+    label: 'Once',
     value: 845280003
   }
 ];
