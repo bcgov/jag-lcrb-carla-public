@@ -55,6 +55,9 @@
     <None Update="Templates\catering_licence.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Templates\event_authorization - Copy.mustache">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Templates\event_authorization.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
