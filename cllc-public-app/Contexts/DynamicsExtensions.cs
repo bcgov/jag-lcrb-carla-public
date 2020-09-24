@@ -917,13 +917,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="system"></param>
         /// <param name="siteminderId"></param>
         /// <returns></returns>
-        public static MicrosoftDynamicsCRMcontact GetContactByExternalId(this IDynamicsClient system, string siteminderId)
+        public static MicrosoftDynamicsCRMcontact GetActiveContactByExternalId(this IDynamicsClient system, string siteminderId)
         {
             string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
             MicrosoftDynamicsCRMcontact result = null;
             try
             {
-                var contactsResponse = system.Contacts.Get(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
+                // 9-23-2020 - LCSD-3972 changed to only get active contacts.
+                var contactsResponse = system.Contacts.Get(filter: "statecode eq 0 and adoxio_externalid eq '" + sanitizedSiteminderId + "'");
                 result = contactsResponse.Value.FirstOrDefault();
             }
             catch (HttpOperationException)
@@ -1266,7 +1267,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             _logger.LogDebug(">>>> LoadUser for BCEID.");
             if (Guid.TryParse(smGuid, out userGuid))
             {
-                user = _dynamicsClient.GetUserBySmGuid(smGuid);
+                user = _dynamicsClient.GetActiveUserBySmGuid(smGuid);
                 if (user == null)
                 {
                     // try by other means.
@@ -1304,7 +1305,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 _logger.LogDebug(">>>> LoadUser for BC Services Card.");
                 string externalId = GetServiceCardID(smGuid);
-                contact = _dynamicsClient.GetContactByExternalId(externalId);
+                contact = _dynamicsClient.GetActiveContactByExternalId(externalId);
 
                 if (contact == null)
                 {
@@ -1391,11 +1392,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="context"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public static User GetUserBySmGuid(this IDynamicsClient _dynamicsClient, string guid)
+        public static User GetActiveUserBySmGuid(this IDynamicsClient _dynamicsClient, string guid)
         {
             Guid id = new Guid(guid);
             User user = null;
-            var contact = _dynamicsClient.GetContactByExternalId(id.ToString());
+            var contact = _dynamicsClient.GetActiveContactByExternalId(id.ToString());
             if (contact != null)
             {
                 user = new User();
