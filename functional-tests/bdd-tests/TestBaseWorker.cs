@@ -107,7 +107,7 @@ namespace bdd_tests
             string testCVD = configuration["test_ccv"];
 
             var tempWait = ngDriver.Manage().Timeouts().ImplicitWait;
-            ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(90);
+            ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(120);
             ngDriver.WrappedDriver.FindElement(By.Name("trnCardNumber")).SendKeys(testCC);
 
             ngDriver.WrappedDriver.FindElement(By.Name("trnCardCvd")).SendKeys(testCVD);
