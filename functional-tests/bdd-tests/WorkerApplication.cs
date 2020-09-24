@@ -215,7 +215,7 @@ namespace bdd_tests
             Page Title: Internet Payments Program (Bambora)
             */
 
-            MakeWorkerPayment();
+            MakePayment();
         }
 
         [And(@"I return to the dashboard")]
