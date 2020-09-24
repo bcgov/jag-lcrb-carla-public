@@ -78,7 +78,6 @@ namespace bdd_tests
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner1First')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner1Last')]")).Displayed);
-                // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Business Partner')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner2First')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualPartner2Last')]")).Displayed);
             }
