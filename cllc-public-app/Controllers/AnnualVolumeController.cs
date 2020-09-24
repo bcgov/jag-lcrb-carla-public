@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create it!
             try
             {
-                _dynamicsClient.Annualvolumes.CreateAsync(dynamicsVol);
+                _dynamicsClient.Annualvolumes.Create(dynamicsVol);
                 return Ok();
             }
             catch (HttpOperationException httpOperationException)
