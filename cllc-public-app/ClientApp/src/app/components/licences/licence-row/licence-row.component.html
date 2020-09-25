@@ -207,10 +207,10 @@
                     </section>
                 </td>
                 </tr>
-                <tr *ngIf="licenceTypeHasEvents(item?.licenceTypeName)">
+                <tr *ngIf="licenceTypeHasEvents(item?.licenceTypeName) && !item?.eventsBusy?.closed"><mat-progress-bar mode="indeterminate"></mat-progress-bar></tr>
+                <tr *ngIf="item?.events !== undefined && item?.events.length > 0">
                     <td colspan="5">
-                        <mat-progress-bar *ngIf="!item?.eventsBusy?.closed" mode="indeterminate"></mat-progress-bar>
-                        <mat-expansion-panel [expanded]="false" class="mat-elevation-z1" *ngIf="item?.events !== undefined && item?.events.length > 0">
+                        <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>Event History <i class="fas fa-calendar-alt" style="margin-left: 10px;"></i></mat-panel-title>
                                 <mat-panel-description id="{{'expand-history-button-' + i}}">Click to expand or collapse</mat-panel-description>
@@ -245,10 +245,10 @@
                         </mat-expansion-panel>
                     </td>
                 </tr>
-                <tr *ngIf="licenceTypeHasTerms(item?.licenceTypeName)">
+                <tr *ngIf="licenceTypeHasTerms(item?.licenceTypeName) && !item?.termsAndConditionsBusy?.closed"><mat-progress-bar mode="indeterminate"></mat-progress-bar></tr>
+                <tr *ngIf="item?.termsAndConditions !== null && item?.termsAndConditions.length > 0">
                     <td colspan="5">
-                        <mat-progress-bar *ngIf="!item?.termsAndConditionsBusy?.closed" mode="indeterminate"></mat-progress-bar>
-                        <mat-expansion-panel [expanded]="false" class="mat-elevation-z1" *ngIf="item?.termsAndConditions !== null && item?.termsAndConditions.length > 0">
+                        <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                             Terms and Conditions
