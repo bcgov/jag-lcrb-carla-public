@@ -5,7 +5,7 @@ import { LicenceEvent, EventStatus, MarketDuration, SpecificLocation, EventCateg
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getMonthlyWeekday, getWeekOfMonth } from '../../shared/date-fns';
+import { getMonthlyWeekday } from '../../shared/date-fns';
 
 const DEFAULT_START_TIME = {
   hour: 9,
