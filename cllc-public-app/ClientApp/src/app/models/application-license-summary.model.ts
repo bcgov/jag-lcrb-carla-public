@@ -3,6 +3,7 @@ import { ApplicationType } from './application-type.model';
 import { LicenceEvent } from './licence-event.model';
 import { TermsAndConditions } from './terms-and-conditions.model';
 import { ServiceArea } from './service-area.model';
+import { Observable, Subscription } from 'rxjs';
 
 export class ApplicationLicenseSummary {
 
@@ -41,6 +42,7 @@ export class ApplicationLicenseSummary {
 
   actionApplications: LicenceActionApplication[];
   events: LicenceEvent[];
+  eventsBusy: Subscription;
   transferRequested: boolean;
   dormant: boolean;
   suspended: boolean;
@@ -63,6 +65,7 @@ export class ApplicationLicenseSummary {
   representativeCanRepresentAtHearings: boolean;
 
   termsAndConditions: TermsAndConditions[];
+  termsAndConditionsBusy: Subscription;
 
   headerRowSpan: number;
   serviceAreas: ServiceArea[];
