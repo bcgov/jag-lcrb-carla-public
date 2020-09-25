@@ -44,6 +44,12 @@ export class MarketEventComponent extends FormBase implements OnInit {
   monthlyDaySelected: string = null;
 
   timeForms = this.fb.array([]);
+  defaultTimeForm = this.fb.group({
+    startTime: [DEFAULT_START_TIME, [Validators.required]],
+    endTime: [DEFAULT_END_TIME, [Validators.required]],
+    liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
+    liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
+  });
   eventForm = this.fb.group({
     status: ['', [Validators.required]],
     id: ['', []],
@@ -288,32 +294,21 @@ export class MarketEventComponent extends FormBase implements OnInit {
         return new Array();
       }
       let eventBegin, eventEnd, serviceBegin, serviceEnd;
+      const date = this.timeForms.controls[i]['controls']['date'].value;
 
-      if (this.timeForms.controls[i]['controls']['dateTitle'].value === null) {
-        const beginDate = this.eventForm.controls['startDate'].value;
-        const endDate = this.eventForm.controls['endDate'].value;
+      eventBegin = new Date(date);
+      eventEnd = new Date(date);
+      serviceBegin = new Date(date);
+      serviceEnd = new Date(date);
 
-        eventBegin = new Date(beginDate);
-        eventEnd = new Date(endDate);
-        serviceBegin = new Date(beginDate);
-        serviceEnd = new Date(endDate);
-      } else {
-        const date = this.timeForms.controls[i]['controls']['date'].value;
-
-        eventBegin = new Date(date);
-        eventEnd = new Date(date);
-        serviceBegin = new Date(date);
-        serviceEnd = new Date(date);
-      }
-
-      eventBegin.setHours(this.timeForms.controls[i]['controls']['startTime'].value['hour']);
-      eventBegin.setMinutes(this.timeForms.controls[i]['controls']['startTime'].value['minute']);
-      eventEnd.setHours(this.timeForms.controls[i]['controls']['endTime'].value['hour']);
-      eventEnd.setMinutes(this.timeForms.controls[i]['controls']['endTime'].value['minute']);
-      serviceBegin.setHours(this.timeForms.controls[i]['controls']['liquorStartTime'].value['hour']);
-      serviceBegin.setMinutes(this.timeForms.controls[i]['controls']['liquorStartTime'].value['minute']);
-      serviceEnd.setHours(this.timeForms.controls[i]['controls']['liquorEndTime'].value['hour']);
-      serviceEnd.setMinutes(this.timeForms.controls[i]['controls']['liquorEndTime'].value['minute']);
+      eventBegin.setHours(this.defaultTimeForm.get('startTime').value['hour']);
+      eventBegin.setMinutes(this.defaultTimeForm.get('startTime').value['minute']);
+      eventEnd.setHours(this.defaultTimeForm.get('endTime').value['hour']);
+      eventEnd.setMinutes(this.defaultTimeForm.get('endTime').value['minute']);
+      serviceBegin.setHours(this.defaultTimeForm.get('liquorStartTime').value['hour']);
+      serviceBegin.setMinutes(this.defaultTimeForm.get('liquorStartTime').value['minute']);
+      serviceEnd.setHours(this.defaultTimeForm.get('liquorEndTime').value['hour']);
+      serviceEnd.setMinutes(this.defaultTimeForm.get('liquorEndTime').value['minute']);
 
       if ((eventEnd.getTime() - eventBegin.getTime()) < 0) {
         eventEnd.setDate(eventEnd.getDate() + 1);
@@ -394,14 +389,6 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   resetDateFormsToDefault() {
     this.timeForms = this.fb.array([]);
-    // this.timeForms.push(this.fb.group({
-    //   dateTitle: [null, []],
-    //   date: [null, []],
-    //   startTime: [DEFAULT_START_TIME, [Validators.required]],
-    //   endTime: [DEFAULT_END_TIME, [Validators.required]],
-    //   liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
-    //   liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
-    // }));
   }
 
   resetDateFormsToArray(datesArray) {
