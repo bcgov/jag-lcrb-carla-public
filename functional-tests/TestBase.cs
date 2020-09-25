@@ -60,16 +60,54 @@ namespace FunctionalTest
                 Width = 1920
             });
 
+            
+
             XrmTestBrowser.LoginPage.Login(xrmUri, username, password);
 
-            XrmTestBrowser.ThinkTime(200);
-            if (XrmTestBrowser.Driver.IsVisible(By.XPath(Elements.Xpath[Reference.Login.StaySignedIn])))
-            {
-                XrmTestBrowser.Driver.ClickWhenAvailable(By.XPath(Elements.Xpath[Reference.Login.StaySignedIn]));
-                XrmTestBrowser.Driver.FindElement(By.XPath(Elements.Xpath[Reference.Login.StaySignedIn])).Submit();
-            }
+            // login via ADFS.
+            var d = XrmTestBrowser.Driver;
+            d.FindElement(By.Id("userNameInput")).SendKeys(username.ToUnsecureString());
 
-            XrmTestBrowser.GuidedHelp.CloseGuidedHelp();
+            d.FindElement(By.Id("passwordInput")).SendKeys(password.ToUnsecureString());
+            d.ClickWhenAvailable(By.Id("submitButton"), new TimeSpan(0, 0, 2));
+
+            //Wait for CRM Page to load
+            d.WaitUntilVisible(By.XPath(Elements.Xpath[Reference.Login.CrmMainPage])
+                , new TimeSpan(0, 0, 60),
+                e =>
+                {
+                    d.WaitForPageToLoad();
+                    d.SwitchTo().Frame(0);
+                    d.WaitForPageToLoad();
+                });
+
+        }
+
+        public void CustomLoginAction(LoginRedirectEventArgs args)
+        {
+            //Login Page details go here.  You will need to find out the id of the password field on the form as well as the submit button. 
+            //You will also need to add a reference to the Selenium Webdriver to use the base driver. 
+
+            //Example
+            //--------------------------------------------------------------------------------------
+            var d = args.Driver;
+            d.FindElement(By.Id("userNameInput")).SendKeys(args.Username.ToUnsecureString());
+
+            d.FindElement(By.Id("passwordInput")).SendKeys(args.Password.ToUnsecureString());
+            d.ClickWhenAvailable(By.Id("submitButton"), new TimeSpan(0, 0, 2));
+
+            //Insert any additional code as required for the SSO scenario
+
+            //Wait for CRM Page to load
+            d.WaitUntilVisible(By.XPath(Elements.Xpath[Reference.Login.CrmMainPage])
+                , new TimeSpan(0, 0, 60),
+                e =>
+                {
+                    d.WaitForPageToLoad();
+                    d.SwitchTo().Frame(0);
+                    d.WaitForPageToLoad();
+                });
+            //--------------------------------------------------------------------------------------
         }
 
         protected void SetOptionSet(string id, string value)
