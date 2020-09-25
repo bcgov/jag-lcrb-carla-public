@@ -5,6 +5,7 @@ import { LicenceEvent, EventStatus, MarketDuration, SpecificLocation, EventCateg
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
+import { getMonthlyWeekday, getWeekOfMonth } from '../../shared/date-fns';
 
 const DEFAULT_START_TIME = {
   hour: 9,
@@ -36,9 +37,11 @@ export class MarketEventComponent extends FormBase implements OnInit {
   endDateMinimum: Date;
   endDateMaximum: Date;
   daysChecked = 0;
+  daysCheckedLimit = 3;
   scheduleIsInconsistent = false;
   showErrorSection = false;
   validationMessages: any[];
+  monthlyDaySelected: string = null;
 
   timeForms = this.fb.array([]);
   eventForm = this.fb.group({
@@ -86,7 +89,8 @@ export class MarketEventComponent extends FormBase implements OnInit {
     thursday: [false, []],
     friday: [false, []],
     saturday: [false, []],
-    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Market').value, []]
+    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Market').value, []],
+    weekOfMonth: ['', []]
   },);
 
   constructor(
@@ -114,6 +118,49 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  get isWeekly() {
+    return this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Weekly';
+  }
+  get isBiWeekly() {
+    return this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Bi-Weekly';
+  }
+  get isMonthly() {
+    return this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Monthly';
+  }
+  get isOnce() {
+    return this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Once';
+  }
+
+  get selectedDaysOfWeekArray() {
+    var arr = [];
+    if (this.eventForm.get('sunday').value) {
+      arr.push('sunday');
+    }
+    if (this.eventForm.get('monday').value) {
+      arr.push('monday');
+    }
+    if (this.eventForm.get('tuesday').value) {
+      arr.push('tuesday');
+    }
+    if (this.eventForm.get('wednesday').value) {
+      arr.push('wednesday');
+    }
+    if (this.eventForm.get('thursday').value) {
+      arr.push('thursday');
+    }
+    if (this.eventForm.get('friday').value) {
+      arr.push('friday');
+    }
+    if (this.eventForm.get('saturday').value) {
+      arr.push('saturday');
+    }
+    return arr;
+  }
+
+  get selectedWeekOfMonth() {
+    return this.eventForm.get('weekOfMonth').value;
   }
 
   retrieveSavedEvent(eventId: string) {
@@ -334,12 +381,8 @@ export class MarketEventComponent extends FormBase implements OnInit {
   }
 
   refreshTimeDays() {
-    if (this.scheduleIsInconsistent) {
-      const days = this.getDaysArray(this.eventForm.controls['startDate'].value, this.eventForm.controls['endDate'].value);
-      this.resetDateFormsToArray(days);
-    } else {
-      this.resetDateFormsToDefault();
-    }
+    const days = this.getDaysArray(this.eventForm.controls['startDate'].value, this.eventForm.controls['endDate'].value);
+    this.resetDateFormsToArray(days);
   }
 
   startDateChanged() {
@@ -351,14 +394,14 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   resetDateFormsToDefault() {
     this.timeForms = this.fb.array([]);
-    this.timeForms.push(this.fb.group({
-      dateTitle: [null, []],
-      date: [null, []],
-      startTime: [DEFAULT_START_TIME, [Validators.required]],
-      endTime: [DEFAULT_END_TIME, [Validators.required]],
-      liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
-      liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
-    }));
+    // this.timeForms.push(this.fb.group({
+    //   dateTitle: [null, []],
+    //   date: [null, []],
+    //   startTime: [DEFAULT_START_TIME, [Validators.required]],
+    //   endTime: [DEFAULT_END_TIME, [Validators.required]],
+    //   liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
+    //   liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
+    // }));
   }
 
   resetDateFormsToArray(datesArray) {
@@ -379,6 +422,9 @@ export class MarketEventComponent extends FormBase implements OnInit {
     this.validationMessages = [...new Set(this.listControlsWithErrors(this.eventForm, this.getValidationErrorMap()))];
     if (this.eventForm.get('registrationNumber').value == '' && this.eventForm.get('businessNumber').value == '') {
       this.validationMessages.push(`Please enter either the 'Market Business Number' or the 'Incorporation/Registration Number'`);
+    }
+    if (this.timeForms.controls.length < 1) {
+      this.validationMessages.push('No market dates selected')
     }
     
     if (this.validationMessages.length > 0) {
@@ -433,16 +479,36 @@ export class MarketEventComponent extends FormBase implements OnInit {
     return false;
   }
 
+  fallsOnSelectedMonthDay(d: Date) {
+    var retVal = false;
+    if (!this.eventForm.get('weekOfMonth').value) {
+      return retVal;
+    }
+    this.selectedDaysOfWeekArray.forEach(element => {
+      const date = getMonthlyWeekday(this.selectedWeekOfMonth, element, d.toLocaleString('default', { month: 'long'}), d.getFullYear());
+      
+      if(date == d.getDate()) {
+        retVal = true;
+      }
+    });
+    return retVal;
+  }
+
   getDaysArray(start, end) {
-    const isBiWeekly = this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Bi-Weekly';
     let dayNum = 0;
     start = new Date(start);
     end = new Date(end);
     for(var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
       const d = new Date(dt);
-      if(this.isOnSelectedDayOfWeek(d)) {
-        if ((isBiWeekly && dayNum % 14 < 7) || !isBiWeekly)
+      if((this.isWeekly || this.isBiWeekly)) {
+        if (this.isOnSelectedDayOfWeek(d) && ((this.isBiWeekly && dayNum % 14 < 7) || !this.isBiWeekly)) {
           arr.push(d);
+        }
+      } else if (this.isMonthly) {
+        if(this.fallsOnSelectedMonthDay(d))
+          arr.push(d);
+      } else {
+        arr.push(d);
       }
       dayNum++;
     }
@@ -463,11 +529,45 @@ export class MarketEventComponent extends FormBase implements OnInit {
   }
 
   weekDateChanged(day: string) {
+    if (this.isMonthly) {
+      this.monthlyDaySelected = day;
+    } else {
+      this.monthlyDaySelected = null;
+    }
     if (this.eventForm.get(day).value) {
       this.daysChecked++;
     } else {
       this.daysChecked--;
     }
     this.refreshTimeDays();
+  }
+
+  frequencyChanged() {
+    if (this.isMonthly) {
+      this.daysCheckedLimit = 1;
+      this.clearWeeklyChecks();
+    } else if (this.isWeekly || this.isBiWeekly) {
+      this.daysCheckedLimit = 3;
+    }
+    this.refreshTimeDays();
+  }
+
+  weekOfMonthChanged() {
+    this.refreshTimeDays();
+  }
+
+  clearWeeklyChecks() {
+    this.daysChecked = 0;
+    this.eventForm.get('sunday').setValue(false);
+    this.eventForm.get('monday').setValue(false);
+    this.eventForm.get('tuesday').setValue(false);
+    this.eventForm.get('wednesday').setValue(false);
+    this.eventForm.get('thursday').setValue(false);
+    this.eventForm.get('friday').setValue(false);
+  }
+
+  capitalize(val: string) {
+    if (typeof val !== 'string') return ''
+    return val.charAt(0).toUpperCase() + val.slice(1)
   }
 }
