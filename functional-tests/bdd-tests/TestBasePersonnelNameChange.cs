@@ -118,13 +118,13 @@ namespace bdd_tests
             if (applicationType == "Cannabis licence")
             {
                 // check Cannabis name change fee
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
+                Assert.True(ngDriver.WrappedDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
             }
 
             if (applicationType == "Catering licence")
             {
                 // check Catering name change fee
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+                Assert.True(ngDriver.WrappedDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
             }
         }
 
