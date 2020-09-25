@@ -228,7 +228,8 @@ export class MarketEventComponent extends FormBase implements OnInit {
       wednesday: false,
       thursday: false,
       friday: false,
-      saturday: false
+      saturday: false,
+      weekOfMonth: ''
     });
 
     if (this.isReadOnly) {
