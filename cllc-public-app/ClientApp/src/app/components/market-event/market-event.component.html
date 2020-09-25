@@ -271,6 +271,33 @@
                           The event and liquor sale times are different on specific dates.</mat-checkbox>
           </app-field>
         </div> -->
+        <div class="row mr-0 mt-3" style="background-color: #E1E8F2; border-bottom: 4px solid #E4E4E4">
+          <form [formGroup]="defaultTimeForm" class="col-md-12">
+            <div class="row mt-3">
+              <div class="col-md-2 offset-md-2"><label>Event Start</label></div>
+              <div class="col-md-2"><label>Event End</label></div>
+              <div class="col-md-2"><label>Liquor Sale Start</label></div>
+              <div class="col-md-2"><label>Liquor Sale End</label></div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 time-picker-title">
+                <h4>Market Time</h4>
+              </div>
+              <div class="col-md-2">
+                <ngb-timepicker [meridian]="true" formControlName="startTime"></ngb-timepicker>
+              </div>
+              <div class="col-md-2">
+                <ngb-timepicker [meridian]="true" formControlName="endTime"></ngb-timepicker>
+              </div>
+              <div class="col-md-2">
+                <ngb-timepicker [meridian]="true" formControlName="liquorStartTime"></ngb-timepicker>
+              </div>
+              <div class="col-md-2">
+                <ngb-timepicker [meridian]="true" formControlName="liquorEndTime"></ngb-timepicker>
+              </div>
+            </div>
+          </form>
+        </div>
 
         <div *ngIf="timeForms.controls.length > 0">
           <div class="pl-4">
