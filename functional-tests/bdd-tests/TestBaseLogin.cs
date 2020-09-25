@@ -230,7 +230,8 @@ namespace bdd_tests
 
         public void NavigateToFeatures()
         {
-            
+            ngDriver.IgnoreSynchronization = true;
+
             // navigate to the feature flags page
             ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/features");
             System.Threading.Thread.Sleep(1000);
