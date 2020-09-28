@@ -16,10 +16,12 @@ Scenario: Check CRS Release status
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the application is approved
+    And I pay the licensing fee for Cannabis
     And I click on the Licences tab
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
+    And I click on the Licences tab
     And I click on the link for Download Licence
     And I show the store as open on the map
     And I review the federal reports
