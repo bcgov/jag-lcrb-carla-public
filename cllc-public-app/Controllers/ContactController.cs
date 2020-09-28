@@ -679,7 +679,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (contact != null
                     && userContact.Firstname != null && contact.Firstname.StartsWith(userContact.Firstname.Substring(0, 1), true, CultureInfo.CurrentCulture)
-                    && userContact.Lastname != null && userContact.Lastname == contact.Lastname
+                    && userContact.Lastname != null && userContact.Lastname.ToLower() == contact.Lastname.ToLower()
                     && userContact.Birthdate != null && userContact.Birthdate.Value.Date.ToShortDateString() == contact.Birthdate.Value.Date.ToShortDateString()
                 )
                 {
