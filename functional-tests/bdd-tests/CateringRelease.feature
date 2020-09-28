@@ -25,13 +25,13 @@ Scenario: Check Catering Release status
     And the event history is updated correctly for an application without approval
     And I request a licensee representative
     And I click on the link for Dashboard
-    And I change a personnel email address for a private corporation
-    And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
     And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
+    And I click on the Licences tab
     And I request a store relocation for Catering
+    And I click on the Licences tab
     And I request a third party operator
     And I request a transfer of ownership
     And the account is deleted
