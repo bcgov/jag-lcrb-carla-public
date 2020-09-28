@@ -15,7 +15,9 @@ Scenario: Check Manufacturer Release status
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a valid store name or branding change for Manufacturing
+    And I click on the Licences tab
     And I request a facility structural change
+    And I click on the Licences tab
     And I request a location change
     And I request a lounge area endorsement
     And I request an on-site store endorsement
