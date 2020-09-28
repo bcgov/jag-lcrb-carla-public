@@ -23,7 +23,17 @@ namespace bdd_tests
         [And(@"I click on the link for (.*)")]
         public void ClickOnLink(string specificLink)
         {
-            NgWebElement uiRequestedLink = ngDriver.FindElement(By.LinkText(specificLink));
+            NgWebElement uiRequestedLink;
+            try
+            {
+                uiRequestedLink = ngDriver.FindElement(By.LinkText(specificLink));
+            }
+            catch (Exception)
+            {
+                System.Threading.Thread.Sleep(3000);
+                uiRequestedLink = ngDriver.FindElement(By.LinkText(specificLink));
+            }
+            
             uiRequestedLink.Click();
         }
 
