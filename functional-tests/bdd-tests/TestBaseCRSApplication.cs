@@ -104,10 +104,30 @@ namespace bdd_tests
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
-            System.Threading.Thread.Sleep(3000);
+            
 
             // enter the establishment name
-            NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
+            NgWebElement uiEstabName = null;
+            // try up to 10 times to get an element.
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var names = ngDriver.FindElements(By.Id("establishmentName"));
+                    if (names.Count > 0)
+                    {
+                        uiEstabName = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                
+            }
+            
+            
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address

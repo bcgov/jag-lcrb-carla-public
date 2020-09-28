@@ -61,7 +61,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
               phone: [licence.establishmentPhoneNumber],
               email: [licence.establishmentEmail]
             });
-          this.termsAndConditionsService.getTermsAndCondtions(licence.licenseId)
+          licence.termsAndConditionsBusy = this.termsAndConditionsService.getTermsAndCondtions(licence.licenseId)
             .subscribe((terms) => {
               licence.termsAndConditions = terms;
               if (terms.length > 0) {
@@ -120,7 +120,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
             this.licenceDataService.updateLicenceEstablishment(licence.licenseId, licence)
         ])
         .subscribe(([licenceResp]) => {
-            if (licenceResp.licenceTypeName.indexOf('Catering') >= 0 || licenceResp.licenceTypeName.indexOf('Wine Store') >= 0) {
+            if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
               forkJoin([
                 this.licenceEventsService.getLicenceEventsList(licenceResp.licenseId, 10)
               ])
@@ -403,5 +403,13 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         value: null,
         label: ''
       };
+    }
+
+    licenceTypeHasEvents(licenceType: string) {
+      return licenceType.indexOf('Catering') >= 0 || licenceType.indexOf('Wine Store') >= 0 || licenceType.indexOf('Manufacturer') >= 0;
+    }
+
+    licenceTypeHasTerms(licenceType: string) {
+      return licenceType.indexOf('Cannabis') < 0;
     }
 }

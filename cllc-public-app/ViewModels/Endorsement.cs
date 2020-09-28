@@ -75,11 +75,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> capacityAreas = allServiceAreas.Value
                     .Where(area => area.AdoxioAreacategory == (int)ServiceAreaCategoryEnum.Capacity)
                     .OrderBy(area => area.AdoxioAreanumber);
-
+                if (serviceAreas.Any() || outdoorAreas.Any())
+                {
+                    htmlVal += $@"<h3 style=""text-align: center;"">MAXIMUM CAPACITY {EndorsementName.ToUpper()}</h3>";
+                }
                 // print the service areas
                 if (serviceAreas.Any())
                 {
-                    htmlVal += $@"<h3 style=""text-align: center;"">MAXIMUM CAPACITY {EndorsementName.ToUpper()}</h3>";
                     htmlVal += $@"<table>
                                     <tr>
                                         <th>Area No.</th>
@@ -105,7 +107,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 // print the outdoor areas
                 if (outdoorAreas.Any())
                 {
-                        htmlVal += $@"<h3 style=""text-align: center"">MAXIMUM CAPACITY {EndorsementName.ToUpper()}</h3>";
                         htmlVal += $@"<table>
                                             <tr>
                                                 <th>Area No.</th>
@@ -122,14 +123,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     }
                     htmlVal += "</table>";
                 }
-
-                // print the capacity area (should only be one)
-                if (capacityAreas.Any())
-                {
-                    htmlVal += $@"<h3 style=""text-align: center"">MAXIMUM CAPACITY {EndorsementName.ToUpper()}</h3>";
-                    htmlVal += $@"<table><td>Capacity</td><td style=""font-weight: bold;"">{capacityAreas.First().AdoxioCapacity}</td></table>";
-                }
-
             }
 
             return htmlVal;

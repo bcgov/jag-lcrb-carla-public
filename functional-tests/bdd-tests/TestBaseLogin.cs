@@ -231,8 +231,10 @@ namespace bdd_tests
         public void NavigateToFeatures()
         {
             ngDriver.IgnoreSynchronization = true;
+
             // navigate to the feature flags page
             ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/features");
+            System.Threading.Thread.Sleep(1000);
         }
 
 
@@ -245,7 +247,19 @@ namespace bdd_tests
         public void CheckFeatureFlag(string flag)
         {
             // confirm that the correct flag is enabled during this test
-            Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'{flag}')]")).Displayed);
+            bool found;
+            try
+            {
+                found = ngDriver.FindElement(By.XPath($"//body[contains(.,'{flag}')]")).Displayed;
+            }
+            catch (Exception) // handle cases where nginx did not show features.
+            {
+                ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/features");
+                System.Threading.Thread.Sleep(5000);
+                found = ngDriver.FindElement(By.XPath($"//body[contains(.,'{flag}')]")).Displayed;
+            }
+
+            Assert.True(found);
         }
 
 

@@ -108,7 +108,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       licence.actionApplications.push(action);
     });
     if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
-      forkJoin([
+      licence.eventsBusy = forkJoin([
         this.licenceEventsService.getLicenceEventsList(licence.licenseId, 20)
       ])
         .subscribe(data => {

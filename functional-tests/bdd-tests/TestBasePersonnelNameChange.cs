@@ -124,7 +124,7 @@ namespace bdd_tests
             if (applicationType == "Catering licence")
             {
                 // check Catering name change fee
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
+                Assert.True(ngDriver.WrappedDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
             }
         }
 
