@@ -71,8 +71,8 @@ namespace bdd_tests
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more key personnel ')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more shareholders ')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Corporation Notice of Articles ')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Central Securities Register ')]")).Displayed);
+                // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Corporation Notice of Articles ')]")).Displayed);
+                // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Central Securities Register ')]")).Displayed);
             }
             else if (applicationType == " partnership org structure")
             {
@@ -81,7 +81,7 @@ namespace bdd_tests
             else if (applicationType == " public corporation org structure")
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more key personnel ')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Corporation Notice of Articles ')]")).Displayed);
+                // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Corporation Notice of Articles ')]")).Displayed);
             }
             else if (applicationType == " society org structure")
             {

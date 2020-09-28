@@ -83,7 +83,7 @@ namespace bdd_tests
         public void ConfirmPaymentReceipt(string applicationType)
         {
 
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(3000);
             /* 
             Page Title: Payment Approved
             */
