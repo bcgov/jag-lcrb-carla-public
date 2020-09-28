@@ -29,12 +29,11 @@ Scenario: Check CRS Release status
     And the expiry date is changed to today
     And I renew the licence
     And I click on the link for Dashboard
-    And I change a personnel email address for a private corporation
-    And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
     And I confirm the correct personnel name change fee for a Cannabis licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
+    And I click on the Licences tab
     And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
