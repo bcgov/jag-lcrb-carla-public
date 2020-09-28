@@ -23,6 +23,7 @@ Scenario: Check Manufacturer Release status
     And I request a lounge area endorsement
     And I click on the Licences tab
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And I request a picnic area endorsement
     And I request a special event area endorsement
     And I request structural alterations to an approved lounge or special events area
