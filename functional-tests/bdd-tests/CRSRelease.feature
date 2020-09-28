@@ -25,6 +25,7 @@ Scenario: Check CRS Release status
     And I click on the link for Download Licence
     And I show the store as open on the map
     And I review the federal reports
+    And I click on the Licences tab
     And the expiry date is changed to today
     And I renew the licence
     And I click on the link for Dashboard
