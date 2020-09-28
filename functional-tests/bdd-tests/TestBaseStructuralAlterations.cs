@@ -78,7 +78,6 @@ namespace bdd_tests
             ClickOnSubmitButton();
 
             MakePayment();
-
         }
     }
 }
