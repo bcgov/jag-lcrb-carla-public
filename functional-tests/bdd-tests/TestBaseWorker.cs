@@ -101,32 +101,23 @@ namespace bdd_tests
             yesButton.Click();
         }
 
-
-        public void MakeWorkerPayment()
+        public void MakePayment()
         {
-            /* 
-            Page Title: Internet Payments Program (Bambora)
-            */
-
             string testCC = configuration["test_cc"];
             string testCVD = configuration["test_ccv"];
 
-            System.Threading.Thread.Sleep(2000);
+            var tempWait = ngDriver.Manage().Timeouts().ImplicitWait;
+            ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(120);
+            ngDriver.WrappedDriver.FindElement(By.Name("trnCardNumber")).SendKeys(testCC);
 
-            ngDriver.IgnoreSynchronization = true;
+            ngDriver.WrappedDriver.FindElement(By.Name("trnCardCvd")).SendKeys(testCVD);
 
-            // enter the test credit card number
-            driver.FindElementByName("trnCardNumber").SendKeys(testCC);
-
-            // enter the test credit card CVD number
-            driver.FindElementByName("trnCardCvd").SendKeys(testCVD);
-
-            // click on the Pay Now button
-            driver.FindElementByName("submitButton").Click();
+            ngDriver.WrappedDriver.FindElement(By.Name("submitButton")).Click();
 
             System.Threading.Thread.Sleep(2000);
+            ngDriver.Manage().Timeouts().ImplicitWait = tempWait;
 
-            ngDriver.IgnoreSynchronization = false;
+            
         }
 
 
