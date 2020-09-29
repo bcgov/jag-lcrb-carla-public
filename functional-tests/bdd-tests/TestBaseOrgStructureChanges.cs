@@ -1084,6 +1084,7 @@ namespace bdd_tests
             // create public corporation test data
             string businessNamePublicCorp = "Public Corporation";
             string sharesPublicCorp = "10";
+            string sharesNonVotingPublicCorp = "11";
             string emailAddressPublicCorp = "public@corporation.com";
 
             // click on the Add Business Shareholder button
@@ -1097,6 +1098,10 @@ namespace bdd_tests
             // add the public corporation number of shares
             NgWebElement uiAddPublicCorporationShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
             uiAddPublicCorporationShares.SendKeys(sharesPublicCorp);
+
+            // add the public corporation number of non voting shares
+            NgWebElement uiAddPublicCorporationNonVotingShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberOfNonVotingSharesNew']"));
+            uiAddPublicCorporationNonVotingShares.SendKeys(sharesNonVotingPublicCorp);
 
             // select the public corporation organization type
             NgWebElement uiAddOrganizationTypePublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='PublicCorporation']"));

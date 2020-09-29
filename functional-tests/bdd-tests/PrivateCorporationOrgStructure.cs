@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: PrivateCorporationOrgStructure.feature
+Feature: PrivateCorporationOrgStructure
     As a logged in private corporation business user
     I want to confirm the organization structure functionality
 
@@ -169,9 +169,7 @@ Scenario: CRS application with mixed business shareholder types
 @e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
 Scenario: Complex Save for Later mixed business shareholders
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
-    And I review the account profile for a private corporation
+    And I click on the Complete Organization Information button
     And I review the organization structure for a private corporation
     And I enter business shareholders of different business types to be saved for later
     And I click on the button for Save for Later
@@ -183,9 +181,7 @@ Scenario: Complex Save for Later mixed business shareholders
 @e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
 Scenario: Confirm org structure records not duplicated
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
-    And I review the account profile for a private corporation
+    And I click on the Complete Organization Information button
     And I review the organization structure for a private corporation
     And I confirm that no duplicates are shown in the org structure
     And the account is deleted

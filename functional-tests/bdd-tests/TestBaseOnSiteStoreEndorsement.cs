@@ -44,7 +44,7 @@ namespace bdd_tests
             */
 
             // select the zoning checkbox
-            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
+            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning']"));
             uiZoningCheckbox.Click();
 
             // find the upload test files in the bdd-tests\upload_files folder
