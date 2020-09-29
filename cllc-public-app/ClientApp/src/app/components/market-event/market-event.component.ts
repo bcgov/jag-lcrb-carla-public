@@ -5,6 +5,7 @@ import { LicenceEvent, EventStatus, MarketDuration, SpecificLocation, EventCateg
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
+import { getMonthlyWeekday } from '../../shared/date-fns';
 
 const DEFAULT_START_TIME = {
   hour: 9,
@@ -36,11 +37,19 @@ export class MarketEventComponent extends FormBase implements OnInit {
   endDateMinimum: Date;
   endDateMaximum: Date;
   daysChecked = 0;
+  daysCheckedLimit = 3;
   scheduleIsInconsistent = false;
   showErrorSection = false;
   validationMessages: any[];
+  monthlyDaySelected: string = null;
 
   timeForms = this.fb.array([]);
+  defaultTimeForm = this.fb.group({
+    startTime: [DEFAULT_START_TIME, [Validators.required]],
+    endTime: [DEFAULT_END_TIME, [Validators.required]],
+    liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
+    liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
+  });
   eventForm = this.fb.group({
     status: ['', [Validators.required]],
     id: ['', []],
@@ -86,7 +95,8 @@ export class MarketEventComponent extends FormBase implements OnInit {
     thursday: [false, []],
     friday: [false, []],
     saturday: [false, []],
-    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Market').value, []]
+    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Market').value, []],
+    weekOfMonth: ['', []]
   },);
 
   constructor(
@@ -114,6 +124,49 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  get isWeekly() {
+    return this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Weekly';
+  }
+  get isBiWeekly() {
+    return this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Bi-Weekly';
+  }
+  get isMonthly() {
+    return this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Monthly';
+  }
+  get isOnce() {
+    return this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Once';
+  }
+
+  get selectedDaysOfWeekArray() {
+    var arr = [];
+    if (this.eventForm.get('sunday').value) {
+      arr.push('sunday');
+    }
+    if (this.eventForm.get('monday').value) {
+      arr.push('monday');
+    }
+    if (this.eventForm.get('tuesday').value) {
+      arr.push('tuesday');
+    }
+    if (this.eventForm.get('wednesday').value) {
+      arr.push('wednesday');
+    }
+    if (this.eventForm.get('thursday').value) {
+      arr.push('thursday');
+    }
+    if (this.eventForm.get('friday').value) {
+      arr.push('friday');
+    }
+    if (this.eventForm.get('saturday').value) {
+      arr.push('saturday');
+    }
+    return arr;
+  }
+
+  get selectedWeekOfMonth() {
+    return this.eventForm.get('weekOfMonth').value;
   }
 
   retrieveSavedEvent(eventId: string) {
@@ -175,7 +228,8 @@ export class MarketEventComponent extends FormBase implements OnInit {
       wednesday: false,
       thursday: false,
       friday: false,
-      saturday: false
+      saturday: false,
+      weekOfMonth: ''
     });
 
     if (this.isReadOnly) {
@@ -241,32 +295,21 @@ export class MarketEventComponent extends FormBase implements OnInit {
         return new Array();
       }
       let eventBegin, eventEnd, serviceBegin, serviceEnd;
+      const date = this.timeForms.controls[i]['controls']['date'].value;
 
-      if (this.timeForms.controls[i]['controls']['dateTitle'].value === null) {
-        const beginDate = this.eventForm.controls['startDate'].value;
-        const endDate = this.eventForm.controls['endDate'].value;
+      eventBegin = new Date(date);
+      eventEnd = new Date(date);
+      serviceBegin = new Date(date);
+      serviceEnd = new Date(date);
 
-        eventBegin = new Date(beginDate);
-        eventEnd = new Date(endDate);
-        serviceBegin = new Date(beginDate);
-        serviceEnd = new Date(endDate);
-      } else {
-        const date = this.timeForms.controls[i]['controls']['date'].value;
-
-        eventBegin = new Date(date);
-        eventEnd = new Date(date);
-        serviceBegin = new Date(date);
-        serviceEnd = new Date(date);
-      }
-
-      eventBegin.setHours(this.timeForms.controls[i]['controls']['startTime'].value['hour']);
-      eventBegin.setMinutes(this.timeForms.controls[i]['controls']['startTime'].value['minute']);
-      eventEnd.setHours(this.timeForms.controls[i]['controls']['endTime'].value['hour']);
-      eventEnd.setMinutes(this.timeForms.controls[i]['controls']['endTime'].value['minute']);
-      serviceBegin.setHours(this.timeForms.controls[i]['controls']['liquorStartTime'].value['hour']);
-      serviceBegin.setMinutes(this.timeForms.controls[i]['controls']['liquorStartTime'].value['minute']);
-      serviceEnd.setHours(this.timeForms.controls[i]['controls']['liquorEndTime'].value['hour']);
-      serviceEnd.setMinutes(this.timeForms.controls[i]['controls']['liquorEndTime'].value['minute']);
+      eventBegin.setHours(this.defaultTimeForm.get('startTime').value['hour']);
+      eventBegin.setMinutes(this.defaultTimeForm.get('startTime').value['minute']);
+      eventEnd.setHours(this.defaultTimeForm.get('endTime').value['hour']);
+      eventEnd.setMinutes(this.defaultTimeForm.get('endTime').value['minute']);
+      serviceBegin.setHours(this.defaultTimeForm.get('liquorStartTime').value['hour']);
+      serviceBegin.setMinutes(this.defaultTimeForm.get('liquorStartTime').value['minute']);
+      serviceEnd.setHours(this.defaultTimeForm.get('liquorEndTime').value['hour']);
+      serviceEnd.setMinutes(this.defaultTimeForm.get('liquorEndTime').value['minute']);
 
       if ((eventEnd.getTime() - eventBegin.getTime()) < 0) {
         eventEnd.setDate(eventEnd.getDate() + 1);
@@ -334,12 +377,8 @@ export class MarketEventComponent extends FormBase implements OnInit {
   }
 
   refreshTimeDays() {
-    if (this.scheduleIsInconsistent) {
-      const days = this.getDaysArray(this.eventForm.controls['startDate'].value, this.eventForm.controls['endDate'].value);
-      this.resetDateFormsToArray(days);
-    } else {
-      this.resetDateFormsToDefault();
-    }
+    const days = this.getDaysArray(this.eventForm.controls['startDate'].value, this.eventForm.controls['endDate'].value);
+    this.resetDateFormsToArray(days);
   }
 
   startDateChanged() {
@@ -351,14 +390,6 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   resetDateFormsToDefault() {
     this.timeForms = this.fb.array([]);
-    this.timeForms.push(this.fb.group({
-      dateTitle: [null, []],
-      date: [null, []],
-      startTime: [DEFAULT_START_TIME, [Validators.required]],
-      endTime: [DEFAULT_END_TIME, [Validators.required]],
-      liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
-      liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
-    }));
   }
 
   resetDateFormsToArray(datesArray) {
@@ -379,6 +410,9 @@ export class MarketEventComponent extends FormBase implements OnInit {
     this.validationMessages = [...new Set(this.listControlsWithErrors(this.eventForm, this.getValidationErrorMap()))];
     if (this.eventForm.get('registrationNumber').value == '' && this.eventForm.get('businessNumber').value == '') {
       this.validationMessages.push(`Please enter either the 'Market Business Number' or the 'Incorporation/Registration Number'`);
+    }
+    if (this.timeForms.controls.length < 1) {
+      this.validationMessages.push('No market dates selected')
     }
     
     if (this.validationMessages.length > 0) {
@@ -433,16 +467,36 @@ export class MarketEventComponent extends FormBase implements OnInit {
     return false;
   }
 
+  fallsOnSelectedMonthDay(d: Date) {
+    var retVal = false;
+    if (!this.eventForm.get('weekOfMonth').value) {
+      return retVal;
+    }
+    this.selectedDaysOfWeekArray.forEach(element => {
+      const date = getMonthlyWeekday(this.selectedWeekOfMonth, element, d.toLocaleString('default', { month: 'long'}), d.getFullYear());
+      
+      if(date == d.getDate()) {
+        retVal = true;
+      }
+    });
+    return retVal;
+  }
+
   getDaysArray(start, end) {
-    const isBiWeekly = this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Bi-Weekly';
     let dayNum = 0;
     start = new Date(start);
     end = new Date(end);
     for(var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
       const d = new Date(dt);
-      if(this.isOnSelectedDayOfWeek(d)) {
-        if ((isBiWeekly && dayNum % 14 < 7) || !isBiWeekly)
+      if((this.isWeekly || this.isBiWeekly)) {
+        if (this.isOnSelectedDayOfWeek(d) && ((this.isBiWeekly && dayNum % 14 < 7) || !this.isBiWeekly)) {
           arr.push(d);
+        }
+      } else if (this.isMonthly) {
+        if(this.fallsOnSelectedMonthDay(d))
+          arr.push(d);
+      } else {
+        arr.push(d);
       }
       dayNum++;
     }
@@ -463,11 +517,45 @@ export class MarketEventComponent extends FormBase implements OnInit {
   }
 
   weekDateChanged(day: string) {
+    if (this.isMonthly) {
+      this.monthlyDaySelected = day;
+    } else {
+      this.monthlyDaySelected = null;
+    }
     if (this.eventForm.get(day).value) {
       this.daysChecked++;
     } else {
       this.daysChecked--;
     }
     this.refreshTimeDays();
+  }
+
+  frequencyChanged() {
+    if (this.isMonthly) {
+      this.daysCheckedLimit = 1;
+      this.clearWeeklyChecks();
+    } else if (this.isWeekly || this.isBiWeekly) {
+      this.daysCheckedLimit = 3;
+    }
+    this.refreshTimeDays();
+  }
+
+  weekOfMonthChanged() {
+    this.refreshTimeDays();
+  }
+
+  clearWeeklyChecks() {
+    this.daysChecked = 0;
+    this.eventForm.get('sunday').setValue(false);
+    this.eventForm.get('monday').setValue(false);
+    this.eventForm.get('tuesday').setValue(false);
+    this.eventForm.get('wednesday').setValue(false);
+    this.eventForm.get('thursday').setValue(false);
+    this.eventForm.get('friday').setValue(false);
+  }
+
+  capitalize(val: string) {
+    if (typeof val !== 'string') return ''
+    return val.charAt(0).toUpperCase() + val.slice(1)
   }
 }
