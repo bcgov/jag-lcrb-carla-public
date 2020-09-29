@@ -5,6 +5,7 @@
     <StartupObject>Pdf.Program</StartupObject>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     <UserSecretsId>e01b8a3f-2545-470e-84fc-ae1a3393b2f2</UserSecretsId>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
 
   <ItemGroup>
