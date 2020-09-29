@@ -1,10 +1,10 @@
 <div class="form-wrapper">
   <div [ngBusy]="busy"></div>
-  <h1>Licences</h1>
+  <h1>Licences & Authorizations</h1>
 
   <div *ngIf="getNumberOfLicences() === 0">
-    <h2>You do not have any licences on file</h2>
-    <p>If you currently have a liquor licence and are not seeing it here, please contact <a
+    <h2>You do not have any licences or authorizations on file</h2>
+    <p>If you currently have a liquor licence or authorization and are not seeing it here, please contact <a
         href="mailto:LCRBLiquor@gov.bc.ca">LCRBLiquor@gov.bc.ca</a>.</p>
   </div>
   <section *ngFor="let mappingItem of licenceMappings | keyvalue">
