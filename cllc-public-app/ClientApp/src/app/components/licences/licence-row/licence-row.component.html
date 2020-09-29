@@ -1,16 +1,17 @@
 <div [ngBusy]="busy">
     <div *ngIf="available">
-        <h2>{{licenceType}} Licences</h2>
+        <h2>{{licenceType}}</h2>
         <form [formGroup]="mainForm">
             <table class="eq-table">
             <tr>
                 <th class="p-0">
                     <img *ngIf="licenceType === 'Cannabis Retail Store'" class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="">
+                    <img *ngIf="licenceType === 'Section 119 Authorization'" class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="">
                     <img *ngIf="licenceType === 'Marketing'" class="icon" src="assets/Cannabis-marketing-icon-blue-40px.png" alt="">
                     <img *ngIf="licenceType === 'Catering'" class="icon" src="assets/Catering-icon-blue-40px.png" alt="">
                     <img *ngIf="licenceType === 'Wine Store'" class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="">
                 </th>
-                <th style="width:250px;">Licence Details</th>
+                <th style="width:250px;">Details</th>
                 <th style="width:250px;">Location</th>
                 <th style="width:250px;">Operate</th>
                 <th style="width:300px;">Request Changes</th>
@@ -31,14 +32,14 @@
                     </div>
                     <strong *ngIf="item?.licenceTypeName === 'Marketing'" style="color: #1a5a96;">
                     Marketing Licence</strong>
-                    <span *ngIf="item?.licenceTypeName !== 'Marketing' && isActive(item)">Licence Number: <i>{{item.licenseNumber}}</i></span>
+                    <span *ngIf="item?.licenceTypeName !== 'Marketing' && isActive(item)"><span *ngIf="item?.licenceTypeName !== 'Section 119 Authorization'">Licence</span> Number:<i>{{item.licenseNumber}}</i></span>
 
                     <br>
                     <span *ngIf="isActive(item)">Expiry / Renewal Date: {{item.expiryDate | date: 'MM/dd/yyyy'}}</span>
                     <br>
                     <span>Status: <strong>{{getLicenceStatusText(item.status)}}</strong></span>
                     <br>
-                    <div *ngIf="!item.isOperated && isActive(item) && actionsVisible(item)"  style="min-width: 10px;">
+                    <div *ngIf="!item.isOperated && isActive(item) && actionsVisible(item) && item?.licenceTypeName !== 'Section 119 Authorization'"  style="min-width: 10px;">
                         <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
                             <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                         </a>
@@ -107,7 +108,7 @@
                         <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
                             <span>
                                 <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
-                                Pay First Year Licensing Fee
+                                Pay First Year Fee
                             </span>
                         </a>
                     </div>
@@ -162,7 +163,7 @@
                 <td style="background-color: #E1E8F2; padding: 10px;">
                     <!-- 3rd Party Operators cannot submit  changes -->
                     <div *ngIf="!item.isOperated">
-                        <div *ngIf="isActive(item) && actionsVisible(item) && !item.transferRequested">
+                        <div *ngIf="isActive(item) && actionsVisible(item) && !item.transferRequested && item?.licenceTypeName !== 'Section 119 Authorization'">
                             <p>
                                 <a [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
                                 <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Licence</span>
@@ -267,11 +268,16 @@
             </table>
 
         </form>
-        <p *ngIf="!licenceType.includes('Operated')" style="text-align: center; font-style: italic;">All
+        <p *ngIf="!licenceType.includes('Operated') && licenceType !== 'Section 119 Authorization'" style="text-align: center; font-style: italic;">All
             {{licenceType}} licence holders must follow the terms
             and
             conditions of their licence as set out in the <a href="{{getHandbookLink(licenceType)}}"
             target="_blank">{{licenceType}} Terms and Conditions Handbook</a></p>
+        <p *ngIf="!licenceType.includes('Operated') && licenceType === 'Section 119 Authorization'" style="text-align: center; font-style: italic;">All
+            {{licenceType}} holders must follow the terms
+            and
+            conditions set out in the <a href="{{getHandbookLink(licenceType)}}"
+            target="_blank">Cannabis Retail Store Licence Terms and Conditions Handbook</a> for anything not explicitly covered by their authorization agreement.</p>            
         <p *ngIf="licenceType.includes('Operated')" style="text-align: center; font-style: italic;">All Third Party
             Operators must follow the terms
             and
