@@ -290,6 +290,31 @@
     </ng-container>
 
     <ng-container [formGroup]="form" *ngIf="node?.isRoot">
+      <h3 class="blue-header">Selling it Right Certificate</h3>
+      <div class="content-bottom">
+        <section class="padded-section">
+          <p>
+            If you have a Cannabis Marketer Licence or plan to attain one, you must provide a copy of your Selling it Right Certificate to the Branch for their records. 
+            Please upload a copy in the box below.
+          </p>
+          <p><strong>Note: the certificate must belong to 
+            <span *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">an authorized signing officer of the corporation.</span>
+            <span *ngIf="node?.businessType === 'IndigenousNation' || node?.businessType === 'Society'">the person you identify as your representative.</span>
+            <span *ngIf="node?.businessType === 'Partnership'">at least one partner, or the general partner.</span>
+            <span *ngIf="node?.businessType === 'SoleProprietorship'">the sole proprietor.</span>
+          </strong>
+          </p>
+          <app-file-uploader *ngIf="account?.id"
+            documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} SIR-C"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+            (numberOfUploadedFiles)="updateNumberOfFiles($event, 'Official Documents')" [useDocumentTypeForName]="true"
+            [entityId]="account?.id" [uploadHeader]="'TO UPLOAD CERTIFICATE, DRAG FILE HERE OR'">
+          </app-file-uploader>
+        </section>
+      </div>
+    </ng-container>    
+
+    <ng-container [formGroup]="form" *ngIf="node?.isRoot">
       <h3 class="blue-header">Additional Supporting Documents</h3>
       <div class="content-bottom">
         <section class="padded-section">

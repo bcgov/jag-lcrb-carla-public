@@ -124,7 +124,7 @@
                     <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/dashboard">Dashboard</a>
                     <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
-                      class="nav-link" routerLink="/licences">Licences</a>
+                      class="nav-link" routerLink="/licences">Licences & Authorizations</a>
                     <a appRemoveIfFeatureOff="SecurityScreening" *ngIf="currentUser.userType == 'Business'"
                       (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/security-screening">Security
                       Screening</a>
