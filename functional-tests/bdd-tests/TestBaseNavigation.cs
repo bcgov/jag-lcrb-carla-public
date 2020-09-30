@@ -67,7 +67,7 @@ namespace bdd_tests
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
-            string licencesLink = "Licences";
+            string licencesLink = "Licences & Authorizations";
 
             // click on the Licences link
             ClickOnLink(licencesLink);
