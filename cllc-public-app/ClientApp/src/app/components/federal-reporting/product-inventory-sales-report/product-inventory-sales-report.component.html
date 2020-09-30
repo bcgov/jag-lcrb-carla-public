@@ -26,10 +26,12 @@
                 type="text"
                 formControlName="openingInventory"
                 mask="separator" thousandSeparator=","
+                disabled
               >
               <div class="input-group-append">
                 <span class="input-group-text">units</span>
               </div>
+              <i data-html="true" style="color: #38598a; margin: auto 0 auto 10px" class="fas fa-question-circle" matTooltipClass="multiline-tooltip" matTooltip="To update the opening inventory value please e-mail tracking.reports@gov.bc.ca"></i>
               <div *ngIf="isFieldInvalid('openingInventory')" style="flex: 0 0 15px; align-self: center;">
                 <i class="fas fa-chevron-left error-states"></i>
                 <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
