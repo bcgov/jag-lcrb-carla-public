@@ -342,7 +342,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 licenceEvent = _dynamicsClient.Events.GetByKey(eventId);
                 licenceEventVM = licenceEvent.ToViewModel(_dynamicsClient);
-                licence = _dynamicsClient.Licenceses.GetByKey(licenceEventVM.LicenceId);
+                licence = _dynamicsClient.Licenceses.GetByKey(
+                    licenceEventVM.LicenceId,
+                    expand: new List<string> { "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence" });
                 account = _dynamicsClient.Accounts.GetByKey(licence._adoxioLicenceeValue);
             }
             catch (HttpOperationException)
@@ -377,6 +379,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         <td style='width: 50%; text-align: left;'>Service Hours: {liquorStartTime} to {liquorEndTime}</td>
                     </tr>";
             }
+
+            var termsAndConditions = "";
+            foreach (var item in licence.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
+            {
+                termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
+            }
+
             Dictionary<string, string> parameters;
             parameters = new Dictionary<string, string>
             {
@@ -407,7 +416,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "inspectorEmail", licenceEvent.AdoxioEventinspectoremail },
                 { "date", DateTime.Now.ToString("MMMM dd, yyyy") },
                 { "marketName", licenceEventVM.MarketName },
-                { "marketDuration",  licenceEventVM.MarketDuration.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.MarketDuration) : "" }
+                { "marketDuration",  licenceEventVM.MarketDuration.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.MarketDuration) : "" },
+                
             };
 
             byte[] data;

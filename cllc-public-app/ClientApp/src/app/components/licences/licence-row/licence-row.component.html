@@ -207,6 +207,7 @@
                     </section>
                 </td>
                 </tr>
+                <tr *ngIf="licenceTypeHasEvents(item?.licenceTypeName) && !item?.eventsBusy?.closed"><mat-progress-bar mode="indeterminate"></mat-progress-bar></tr>
                 <tr *ngIf="item?.events !== undefined && item?.events.length > 0">
                     <td colspan="5">
                         <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
@@ -244,44 +245,7 @@
                         </mat-expansion-panel>
                     </td>
                 </tr>
-                <!-- <tr *ngIf="item?.events !== undefined && item?.events.length > 0">
-                    <td colspan="5">
-                        <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                            Event History <i class="fas fa-calendar-alt" style="margin-left: 10px;"></i>
-                            </mat-panel-title>
-                            <mat-panel-description>
-                            Click to expand or collapse
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-                        <table style="width: 100%; text-align: center;">
-                            <thead>
-                                <th>Event Status</th>
-                                <th>Event Name</th>
-                                <th>Date Submitted</th>
-                                <th></th>
-                                <th>Authorization</th>
-                            </thead>
-                            <tr *ngFor="let event of item?.events">
-                            <td><a
-                                [routerLink]="[ '/licence/' + item.licenseId + '/temporary-offsite/' + event.id]">{{getOptionFromValue(eventStatus, event.status).label}}</a>
-                            </td>
-                            <td>{{event.name === null ? null : event.name}}</td>
-                            <td>{{event.modifiedOn | date:'mediumDate'}}</td>
-                            <td></td>
-                            <td *ngIf="getOptionFromValue(eventStatus, event.status).label === 'Approved';else empty_td"><a
-                                [href]="'api/licenceevents/' + event.id + '/authorization.pdf'" download>
-                                <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Authorization</span>
-                                </a></td>
-                            <ng-template #empty_td>
-                                <td></td>
-                            </ng-template>
-                            </tr>
-                        </table>
-                        </mat-expansion-panel>
-                    </td>
-                </tr> -->
+                <tr *ngIf="licenceTypeHasTerms(item?.licenceTypeName) && !item?.termsAndConditionsBusy?.closed"><mat-progress-bar mode="indeterminate"></mat-progress-bar></tr>
                 <tr *ngIf="item?.termsAndConditions !== null && item?.termsAndConditions.length > 0">
                     <td colspan="5">
                         <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">

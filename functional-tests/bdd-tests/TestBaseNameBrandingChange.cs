@@ -100,13 +100,6 @@ namespace bdd_tests
 
             // pay for the branding change application
             MakePayment();
-
-            /* 
-            Page Title: Payment Approved
-            */
-
-            // confirm correct payment amount	
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
         }
     }
 }

@@ -14,7 +14,7 @@
         .stamp {
             position: absolute;
             right: 30px;
-            top: 2785px;
+            top: 2085px;
             border-width: 5px;
             padding: 20px;
             border-style: dashed;
@@ -22,19 +22,17 @@
             text-align: center;
             background-color: white;
         }
-        
         .page:first-of-type {
-            height: 2635px;
+            border: solid 10px black;
         }
+        
         .page {
+            height: 1960px;
+            width: 83%;
             position: relative;
             display: block;
             page-break-after: auto;
-            overflow: hidden;
-            border: solid 10px black;
-            width: 83%;
             padding: 20px 120px;
-            margin: 10px;
         }
 
         tr {
@@ -264,7 +262,7 @@
             </thead>
             <tr class="hided-border">
                 <td style="text-align: left;">
-                    The terms and conditions to which this catering authorization is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time.
+                    {{restrictionsText}}
                 </td>
             </tr>
         </div>
