@@ -484,7 +484,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_LicenceType",
                 "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
                 "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
-                "adoxio_establishment"
+                "adoxio_establishment",
+                "adoxio_LicenceSubCategoryId"
             };
 
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(licenceId, expand: expand);
@@ -494,12 +495,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                // var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(applicationTypeName);
-
-                MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication()
-                {
-                    // START WITH BLANK FIELDS.
-                };
+                // START WITH BLANK FIELDS.
+                MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication();
 
                 application.CopyValuesForChangeOfLocation(adoxioLicense, applicationTypeName != "CRS Location Change");
 
@@ -507,14 +504,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
 
-                // set applicaiton type relationship 
+                // set application type relationship 
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
                 application.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
+                // set licence type relationship 
                 if (adoxioLicense.AdoxioLicenceType != null)
                 {
-                    // set license type relationship 
+                    
                     application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
+                }
+
+                // set the licence subtype.
+
+                if (adoxioLicense.AdoxioLicenceSubCategoryId != null)
+                {
+                    application.AdoxioLicenceSubCategoryODataBind =
+                        _dynamicsClient.GetEntityURI("adoxio_licencesubcategories",
+                            adoxioLicense.AdoxioLicenceSubCategoryId.AdoxioLicencesubcategoryid);
                 }
 
                 application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
@@ -525,7 +532,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue)).FirstOrDefault();
                     string lginvalue;
-                    string policevalue;
 
 
                     if (licenceApp == null)
@@ -571,7 +577,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                         _logger.LogError(httpOperationException, "Error creating application");
                         // fail if we can't create.
-                        throw (httpOperationException);
+                        throw httpOperationException;
                     }
 
                 }
