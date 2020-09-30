@@ -79,7 +79,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             dynamicsEvent.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
             if (!string.IsNullOrEmpty(item.LicenceId)) {
-                dynamicsEvent.LicenceODataBind = _dynamicsClient.GetEntityURI("licenses", item.LicenceId);
+                dynamicsEvent.LicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", item.LicenceId);
             }
             
             try
@@ -191,7 +191,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioEvent patchEvent = new MicrosoftDynamicsCRMadoxioEvent();
             patchEvent.CopyValues(item);
             if (!string.IsNullOrEmpty(item.LicenceId) && item.LicenceId != dynamicsEvent._adoxioLicenceValue) {
-                patchEvent.LicenceODataBind = _dynamicsClient.GetEntityURI("licenses", item.LicenceId);
+                patchEvent.LicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", item.LicenceId);
             }
             try
             {
