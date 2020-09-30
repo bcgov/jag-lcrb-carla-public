@@ -292,9 +292,14 @@ namespace bdd_tests
                 string projectDirectory = Directory.GetParent(environment).Parent.FullName;
                 string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
+                // upload a Selling It Right certificate
+                string sellingItRight = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "selling_it_right_certificate.pdf");
+                NgWebElement uiUploadSellingItRight = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
+                uiUploadSellingItRight.SendKeys(sellingItRight);
+
                 // upload an additional supporting document
                 string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-                NgWebElement uiUploadadditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+                NgWebElement uiUploadadditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
                 uiUploadadditionalSupporting.SendKeys(additionalSupportingPath);
 
                 /********** Sole Proprietor > Leader #1 **********/
@@ -683,9 +688,14 @@ namespace bdd_tests
                 NgWebElement uiUploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
                 uiUploadPartnershipAgreement.SendKeys(partnershipPath);
 
+                // upload a Selling It Right certificate
+                string sellingItRight = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "selling_it_right_certificate.pdf");
+                NgWebElement uiUploadSellingItRight = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+                uiUploadSellingItRight.SendKeys(sellingItRight);
+
                 // upload the additional supporting document
                 string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-                NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+                NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
                 uiUploadAdditionalSupporting.SendKeys(additionalSupportingPath);
 
                 // open partner row
@@ -799,9 +809,14 @@ namespace bdd_tests
                 NgWebElement uiUploadAssociates = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
                 uiUploadAssociates.SendKeys(associatesPath);
 
+                // upload a Selling It Right certificate
+                string sellingItRight = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "selling_it_right_certificate.pdf");
+                NgWebElement uiUploadSellingItRight = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
+                uiUploadSellingItRight.SendKeys(sellingItRight);
+
                 // upload the additional supporting document
                 string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
-                NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
+                NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
                 uiUploadAdditionalSupporting.SendKeys(additionalSupportingPath);
             }
 
