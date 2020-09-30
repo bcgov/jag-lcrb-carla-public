@@ -106,6 +106,7 @@ export class CannabisAssociateScreeningComponent extends FormBase implements OnI
         this.contact = contact;
         if (!contact.isWrongUser) {
           this.showForm = true;
+          this.form.get('contact.id').setValue(contact.id);
           this.form.get('contact.shortName').setValue(contact.shortName);
           this.form.get('contact.birthDate').setValue(contact.dateOfBirth);
           this.form.get('contact.gender').setValue(contact.gender);
