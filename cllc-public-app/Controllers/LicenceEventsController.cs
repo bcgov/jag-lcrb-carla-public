@@ -417,7 +417,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "date", DateTime.Now.ToString("MMMM dd, yyyy") },
                 { "marketName", licenceEventVM.MarketName },
                 { "marketDuration",  licenceEventVM.MarketDuration.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.MarketDuration) : "" },
-                
+                { "restrictionsText", termsAndConditions }
             };
 
             byte[] data;
