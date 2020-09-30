@@ -322,7 +322,7 @@
                   </a>
                 </div>
                 <div *ngIf="item.applicationStatus === 'Transfer Initiated'">
-                  <a [routerLink]="['/account-profile/' + item.id, { mode: TRANSFER_LICENCE_MODE }]">
+                  <a routerLink="/multi-step-application/{{item.id}}">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Transfer</span>
                   </a>
