@@ -1554,6 +1554,29 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public static bool IsMostlyLiquor(List<MicrosoftDynamicsCRMadoxioLicences> licences)
+        {
+            bool result = false;
+            int liquorCount = 0;
+            // check the licence type's category field to determine how many licences are liquor related
+            foreach (var licence in licences)
+            {
+                if (licence.AdoxioLicenceType?.AdoxioCategory != null &&
+                    (Public.ViewModels.ApplicationTypeCategory)licence.AdoxioLicenceType?.AdoxioCategory == Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory.Liquor)
+                {
+                    liquorCount++;
+                }
+            }
+
+            // note that we specify floating point here, as otherwise the math will not work correctly.
+            if (licences.Count > 0 && (( liquorCount * 1.0f) >= (licences.Count * 1.0f) / 2.0f))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -1568,21 +1591,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // get the licences for the given account.
 
                 var licences = dynamicsClient.GetAllLicensesByLicencee(null, account.Accountid).ToList();
-                int liquorCount = 0;
-                // check the licence type's category field to determine how many licences are liquor related
-                foreach (var licence in licences)
-                {
-                    if (licence.AdoxioLicenceType != null && licence.AdoxioLicenceType.AdoxioCategory != null &&
-                        (Public.ViewModels.ApplicationTypeCategory)licence.AdoxioLicenceType.AdoxioCategory == Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory.Liquor)
-                    {
-                        liquorCount++;
-                    }
-                }
-
-                if (licences.Count > 0 && liquorCount >= licences.Count / 2)
-                {
-                    result = true;
-                }
+                result = IsMostlyLiquor(licences);
             }
 
             return result;
