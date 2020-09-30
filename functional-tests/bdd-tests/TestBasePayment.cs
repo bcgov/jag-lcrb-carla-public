@@ -57,7 +57,7 @@ namespace bdd_tests
             */
 
             // create test data
-            string firstYearLicenceFee = "Pay First Year Licensing Fee";
+            string firstYearLicenceFee = "Pay First Year Fee";
             string returnToDashboard = "Return to Dashboard";
 
             // click on the pay first year licence fee link
