@@ -49,9 +49,14 @@ namespace bdd_tests
                 NgWebElement uiUploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
                 uiUploadSpecialRightsRes.SendKeys(specialRightsRestrictions);
 
+                // upload a Selling It Right certificate
+                string sellingItRight = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "selling_it_right_certificate.pdf");
+                NgWebElement uiUploadSellingItRight = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
+                uiUploadSellingItRight.SendKeys(sellingItRight);
+
                 // upload an additional supporting document
                 string additionalSupportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
-                NgWebElement uiUploadAdditionalSupportingDocument = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
+                NgWebElement uiUploadAdditionalSupportingDocument = ngDriver.FindElement(By.XPath("(//input[@type='file'])[14]"));
                 uiUploadAdditionalSupportingDocument.SendKeys(additionalSupportingDocument);
 
                 /********** Leader #0 **********/
