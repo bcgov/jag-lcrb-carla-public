@@ -299,6 +299,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     getHandbookLink(licenceType: string) {
         switch (licenceType) {
           case 'Cannabis Retail Store':
+          case 'Section 119 Authorization':
             return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/cannabis-retail-store-licence-handbook.pdf';
           case 'Marketing':
             return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/marketing-handbook.pdf';
@@ -368,7 +369,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
             case 'PreInspection':
                 return 'Pre-Inspection';
             case 'PendingLicenceFee':
-                return 'Pending Licence Fee';
+                return 'Pending First Year Fee';
             default:
                 return status;
         }

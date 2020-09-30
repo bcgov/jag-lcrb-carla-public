@@ -477,6 +477,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     if (status === 'Processed') {
       return 'Application Under Review';
     }
+    if (status === "Pending Licence Fee"){
+      return 'Pending First Year Fee'
+    }
     return status;
   }
 
