@@ -45,8 +45,8 @@ Scenario: Data for Society Review Account Profile
 @e2e @cannabis @soleproprietorship @reviewaccountdata
 Scenario: Data for Sole Proprietorship Review Account Profile
     Given I am logged in to the dashboard as a sole proprietorship
-        And I click on the link for Edit Account Profile
-        And I review the account profile for a partnership
+    And I click on the link for Edit Account Profile
+    And I review the account profile for a sole proprietorship
     And I click on the Submit button   
     And the correct data is displayed for a sole proprietorship account profile
     And the account is deleted
@@ -55,8 +55,8 @@ Scenario: Data for Sole Proprietorship Review Account Profile
  @e2e @cannabis @indigenousnation @reviewaccountdata
  Scenario: Data for Indigenous Nation Review Account Profile
     Given I am logged in to the dashboard as an indigenous nation
-        And I click on the link for Edit Account Profile
-        And I review the account profile for a partnership
+    And I click on the link for Edit Account Profile
+    And I review the account profile for an indigenous nation
     And I click on the Submit button   
     And the correct data is displayed for an indigenous nation account profile
     And the account is deleted
@@ -65,8 +65,8 @@ Scenario: Data for Sole Proprietorship Review Account Profile
  @e2e @cannabis @localgovernment @reviewaccountdata
  Scenario: Data for Local Government Review Account Profile
     Given I am logged in to the dashboard as a local government
-        And I click on the link for Edit Account Profile
-And I review the account profile for a partnership
+    And I click on the link for Edit Account Profile
+    And I review the account profile for a local government
     And I click on the Submit button   
     And the correct data is displayed for a local government account profile
     And the account is deleted
