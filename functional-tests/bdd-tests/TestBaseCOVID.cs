@@ -156,15 +156,8 @@ namespace bdd_tests
             NgWebElement boundedStatus = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='boundedStatus']"));
             boundedStatus.Click();
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload a floor plan document
-            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-            NgWebElement uploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uploadFloorplan.SendKeys(floorplanPath);
+            FileUpload("floor_plan.pdf", "(//input[@type='file'])[2]");
 
             if (licenceType != "Food Primary licence")
             {
@@ -173,17 +166,13 @@ namespace bdd_tests
                 LGINReview.Click();
 
                 // upload LG/IN approval document
-                string LGINPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "LG_IN_approval.pdf");
-                NgWebElement uploadLGINApproval = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-                uploadLGINApproval.SendKeys(LGINPath);
+                FileUpload("LG_IN_approval.pdf","(//input[@type='file'])[8]");
             }
 
             if (licenceType == "Food Primary licence")
             {
                 // upload a representative notification form 
-                string repNotifyPathFP = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "licensee_rep_notification.pdf");
-                NgWebElement uploadRepNotifyFP = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-                uploadRepNotifyFP.SendKeys(repNotifyPathFP);
+                FileUpload("licensee_rep_notification.pdf", "(//input[@type='file'])[5]");
             }
 
             // click on the signature agreement checkbox
