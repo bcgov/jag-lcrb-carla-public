@@ -20,8 +20,8 @@ RUN pushd /opt \
     && rm sonar-scanner-msbuild.zip \
     && rm -R /opt/app-root/.pki \
 	&& mv /opt/rh/rh-dotnet20/root/usr/lib64/dotnet/shared/Microsoft.NETCore.App/2.0.9  /opt/rh/rh-dotnet31/root/usr/lib64/dotnet/shared/Microsoft.NETCore.App \
-    && npm install -g @angular/cli \
-	&& npm install -g typescript \
+    && /opt/rh/rh-nodejs10/root/usr/bin/npm install -g @angular/cli \
+	&& /opt/rh/rh-nodejs10/root/usr/bin/npm install -g typescript \
     && popd
 
 
