@@ -104,100 +104,6 @@ namespace Gov.Lclb.Cllb.OneStopService
         }
 
 
-
-        /// <summary>
-        /// Hangfire job to send LicenceDetailsMessage to One stop.
-        /// </summary>
-        public async Task SendProgramAccountDetailsBroadcastMessage(PerformContext hangfireContext, string licenceGuidRaw)
-        {
-            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            if (hangfireContext != null)
-            {
-                hangfireContext.WriteLine("Starting OneStop ProgramAccountRequest Job.");
-            }
-
-            string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
-
-            OneStopHubService.receiveFromPartnerResponse output;
-            var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
-            serviceClient.ClientCredentials.UserName.UserName = _configuration["ONESTOP_HUB_USERNAME"];
-            serviceClient.ClientCredentials.UserName.Password = _configuration["ONESTOP_HUB_PASSWORD"];
-            var basicHttpBinding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
-            basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
-            serviceClient.Endpoint.Binding = basicHttpBinding;
-
-            using (new OperationContextScope(serviceClient.InnerChannel))
-            {
-                //Create message header containing the credentials
-                var header = new OneStopServiceReference.SoapSecurityHeader("", _configuration["ONESTOP_HUB_USERNAME"],
-                                                                            _configuration["ONESTOP_HUB_PASSWORD"], "");
-                //Add the credentials message header to the outgoing request
-                OperationContext.Current.OutgoingMessageHeaders.Add(header);
-
-                try
-                {
-                    var req = new ProgramAccountDetailsBroadcast();
-                    if (hangfireContext != null)
-                    {
-                        hangfireContext.WriteLine($"Getting licence {licenceGuid}");
-                    }
-
-                    MicrosoftDynamicsCRMadoxioLicences licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
-
-                    if (hangfireContext != null)
-                    {
-                        hangfireContext.WriteLine("Got licence. Creating XML request");
-                    }
-
-                    var innerXML = req.CreateXML(licence);
-
-                    
-
-                    hangfireContext.WriteLine("Sending request.");
-
-                    if (Log.Logger != null)
-                    {
-                        Log.Logger.Information(innerXML);
-                    }
-
-                    if (hangfireContext != null)
-                    {
-                        hangfireContext.WriteLine(innerXML);
-                    }
-
-                    var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
-                    output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
-
-
-
-
-                }
-                catch (Exception ex)
-                {
-                    if (Log.Logger != null)
-                    {
-                        Log.Logger.Error(ex, "Error sending request.");
-                    }
-
-                    if (hangfireContext != null)
-                    {
-                        hangfireContext.WriteLine("Error sending program account details broadcast:");
-                        hangfireContext.WriteLine(ex.Message);
-                    }
-
-                    throw;
-                }
-            }
-
-            if (hangfireContext != null)
-            {
-                hangfireContext.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(output));
-                hangfireContext.WriteLine("End of OneStop ProgramAccountDetails  Job.");
-            }
-
-
-        }
-
         /// <summary>
         /// Hangfire job to send LicenceDetailsMessage to One stop.
         /// </summary>
@@ -235,6 +141,16 @@ namespace Gov.Lclb.Cllb.OneStopService
             else
             {
                 var innerXML = req.CreateXML(licence);
+
+                if (Log.Logger != null)
+                {
+                    Log.Logger.Information(innerXML);
+                }
+
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine(innerXML);
+                }
 
                 //send message to Onestop hub
                 var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXML);
