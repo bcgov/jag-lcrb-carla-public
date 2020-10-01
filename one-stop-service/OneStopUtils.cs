@@ -150,7 +150,21 @@ namespace Gov.Lclb.Cllb.OneStopService
                     }
 
                     var innerXML = req.CreateXML(licence);
+
+                    
+
                     hangfireContext.WriteLine("Sending request.");
+
+                    if (Log.Logger != null)
+                    {
+                        Log.Logger.Information(innerXML);
+                    }
+
+                    if (hangfireContext != null)
+                    {
+                        hangfireContext.WriteLine(innerXML);
+                    }
+
                     var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
                     output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
 
