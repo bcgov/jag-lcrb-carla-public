@@ -117,6 +117,7 @@ namespace bdd_tests
                     string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
                     NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
                     uiUploadSignage.SendKeys(signagePath);
+                    break;
                 }
                 catch (Exception e)
                 {
