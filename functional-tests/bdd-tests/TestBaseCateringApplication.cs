@@ -104,30 +104,8 @@ namespace bdd_tests
             NgWebElement uiLiqIndConnection = ngDriver.FindElement(By.Id("liquorIndustryConnectionsDetails"));
             uiLiqIndConnection.SendKeys(liqConnectionDetails);
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-            for (int i = 0; i < 10; i++)
-            {
-                try
-                {
-                    // upload a store signage document
-                    string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-                    NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-                    uiUploadSignage.SendKeys(signagePath);
-                    break;
-                }
-                catch (Exception e)
-                {
-                    if (e.ToString().Contains("OpenQA.Selenium.UnhandledAlertException"))
-                    {
-                        IAlert alert = ngDriver.SwitchTo().Alert();
-                        alert.Accept();
-                    }
-                }
-            }
+            // upload a store signage document
+            FileUpload("signage.pdf", "(//input[@type='file'])[2]");
 
             // enter the first name of the application contact
             NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
