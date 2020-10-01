@@ -80,6 +80,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 {
 
                     var innerXml = req.CreateXML(licence, suffix);
+                    Log.Logger?.Information(innerXml);
                     // send message to Onestop hub
                     var outputXml = await _onestopRestClient.ReceiveFromPartner(innerXml);
 
