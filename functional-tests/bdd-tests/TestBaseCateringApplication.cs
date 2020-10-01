@@ -109,10 +109,24 @@ namespace bdd_tests
             string projectDirectory = Directory.GetParent(environment).Parent.FullName;
             string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
 
-            // upload a store signage document
-            string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uiUploadSignage.SendKeys(signagePath);
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    // upload a store signage document
+                    string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
+                    NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+                    uiUploadSignage.SendKeys(signagePath);
+                }
+                catch (Exception e)
+                {
+                    if (e.ToString().Contains("OpenQA.Selenium.UnhandledAlertException"))
+                    {
+                        IAlert alert = ngDriver.SwitchTo().Alert();
+                        alert.Accept();
+                    }
+                }
+            }
 
             // enter the first name of the application contact
             NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
