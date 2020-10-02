@@ -66,36 +66,20 @@ namespace bdd_tests
                 NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector(".fa-save span"));
                 uiConfirmButton.Click();
 
-                // find the upload test file in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
                 // upload a marriage certificate document
-                string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
-
                 if (businessType == "public corporation" || businessType == "partnership")
                 {
-                    NgWebElement uiUploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
-                    uiUploadMarriageCert.SendKeys(marriageCertificate);
+                    FileUpload("marriage_certificate.pdf","(//input[@type='file'])[9]");
                 }
 
                 if (businessType == "private corporation")
                 {
-                    NgWebElement uiUploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
-                    uiUploadMarriageCert.SendKeys(marriageCertificate);
+                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[15]");
                 }
 
-                if (businessType == "society")
+                if ((businessType == "society") || (businessType == "sole proprietorship"))
                 {
-                    NgWebElement uiUploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-                    uiUploadMarriageCert.SendKeys(marriageCertificate);
-                }
-
-                if (businessType == "sole proprietorship")
-                {
-                    NgWebElement uiUploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-                    uiUploadMarriageCert.SendKeys(marriageCertificate);
+                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[6]");
                 }
 
                 // click on Submit Organization Information button
