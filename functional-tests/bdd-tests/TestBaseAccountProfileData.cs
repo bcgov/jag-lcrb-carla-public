@@ -26,7 +26,7 @@ namespace bdd_tests
             // check that previously entered account profile data has been saved
 
             NgWebElement uiBusinessNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='businessNumber']"));
-            Assert.True(uiBusinessNumber.GetAttribute("value") == "012345678");
+            Assert.True(uiBusinessNumber.GetAttribute("value") == "123456789");
 
             NgWebElement uiPhysicalAddressStreet = ngDriver.FindElement(By.CssSelector("input[formcontrolname='physicalAddressStreet']"));
             Assert.True(uiPhysicalAddressStreet.GetAttribute("value") == "645 Tyee Road");
