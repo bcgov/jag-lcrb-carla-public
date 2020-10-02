@@ -23,6 +23,8 @@ Scenario: Data for Private Corporation Review Account Profile
     And I click on the link for Edit Account Profile
     And I review the account profile for a private corporation
     And I click on the Submit button
+        And I click on the link for Edit Account Profile
+
     And the correct data is displayed for a private corporation account profile
     And the account is deleted
     Then I see the login page
@@ -33,6 +35,8 @@ Scenario: Data for Partnership Review Account Profile
     And I click on the link for Edit Account Profile
     And I review the account profile for a partnership
     And I click on the Submit button
+        And I click on the link for Edit Account Profile
+
     And the correct data is displayed for a partnership account profile
     And the account is deleted
     Then I see the login page
@@ -43,6 +47,7 @@ Scenario: Data for Public Corporation Review Account Profile
     And I click on the link for Edit Account Profile
     And I review the account profile for a public corporation
     And I click on the Submit button
+    And I click on the link for Edit Account Profile
     And the correct data is displayed for a public corporation account profile
     And the account is deleted
     Then I see the login page
@@ -53,6 +58,7 @@ Scenario: Data for Society Review Account Profile
     And I click on the link for Edit Account Profile
     And I review the account profile for a society
     And I click on the Submit button
+    And I click on the link for Edit Account Profile
     And the correct data is displayed for a society account profile
     And the account is deleted
     Then I see the login page
@@ -62,7 +68,8 @@ Scenario: Data for Sole Proprietorship Review Account Profile
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the link for Edit Account Profile
     And I review the account profile for a sole proprietorship
-    And I click on the Submit button   
+    And I click on the Submit button  
+    And I click on the link for Edit Account Profile
     And the correct data is displayed for a sole proprietorship account profile
     And the account is deleted
     Then I see the login page
@@ -72,7 +79,8 @@ Scenario: Data for Sole Proprietorship Review Account Profile
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the link for Edit Account Profile
     And I review the account profile for an indigenous nation
-    And I click on the Submit button   
+    And I click on the Submit button  
+    And I click on the link for Edit Account Profile
     And the correct data is displayed for an indigenous nation account profile
     And the account is deleted
     Then I see the login page
@@ -82,7 +90,8 @@ Scenario: Data for Sole Proprietorship Review Account Profile
     Given I am logged in to the dashboard as a local government
     And I click on the link for Edit Account Profile
     And I review the account profile for a local government
-    And I click on the Submit button   
+    And I click on the Submit button  
+    And I click on the link for Edit Account Profile
     And the correct data is displayed for a local government account profile
     And the account is deleted
     Then I see the login page
