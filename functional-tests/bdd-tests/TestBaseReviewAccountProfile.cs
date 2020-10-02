@@ -27,7 +27,7 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            string bizNumber = "012345678";
+            string bizNumber = "123456789";
             string incorporationNumber = "BC1234567";
 
             string physStreetAddress1 = "645 Tyee Road";
