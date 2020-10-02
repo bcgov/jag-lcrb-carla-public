@@ -28,6 +28,7 @@ export class ApplicationHTMLContent {
 
 }
 
+// TODO: Add Angular decorator.
 export class FormBase implements OnDestroy {
     form: FormGroup;
     account: Account;
