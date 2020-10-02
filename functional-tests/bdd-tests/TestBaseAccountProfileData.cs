@@ -32,7 +32,7 @@ namespace bdd_tests
             Assert.True(uiPhysicalAddressStreet.GetAttribute("value") == "645 Tyee Road");
 
             NgWebElement uiPhysicalAddressStreet2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='physicalAddressStreet2']"));
-            Assert.True(uiPhysicalAddressStreet2.GetAttribute("value") == "West of Victoria");
+            Assert.True(uiPhysicalAddressStreet2.GetAttribute("value") == "West");
 
             NgWebElement uiPhysicalAddressCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='physicalAddressCity']"));
             Assert.True(uiPhysicalAddressCity.GetAttribute("value") == "Victoria");
@@ -41,22 +41,22 @@ namespace bdd_tests
             Assert.True(uiPhysicalAddressPostalCode.GetAttribute("value") == "V9A6X5");
 
             NgWebElement uiMailingAddressStreet = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mailingAddressStreet']"));
-            Assert.True(uiMailingAddressStreet.GetAttribute("value") == "P.O. Box 123");
+            Assert.True(uiMailingAddressStreet.GetAttribute("value") == "#22");
 
             NgWebElement uiMailingAddressStreet2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mailingAddressStreet2']"));
-            Assert.True(uiMailingAddressStreet2.GetAttribute("value") == "303 Prideaux St.");
+            Assert.True(uiMailingAddressStreet2.GetAttribute("value") == "700 Bellevue Way NE");
 
             NgWebElement uiMailingAddressCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mailingAddressCity']"));
-            Assert.True(uiMailingAddressCity.GetAttribute("value") == "Victoria");
+            Assert.True(uiMailingAddressCity.GetAttribute("value") == "Bellevue");
 
             NgWebElement uiMailingAddressProvince = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mailingAddressProvince']"));
-            Assert.True(uiMailingAddressProvince.GetAttribute("value") == "B.C.");
+            Assert.True(uiMailingAddressProvince.GetAttribute("value") == "WA");
 
             NgWebElement uiMailingAddressPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mailingAddressPostalCode']"));
-            Assert.True(uiMailingAddressPostalCode.GetAttribute("value") == "V9A6X5");
+            Assert.True(uiMailingAddressPostalCode.GetAttribute("value") == "98004");
 
             NgWebElement uiMailingAddressCountry = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mailingAddressCountry']"));
-            Assert.True(uiMailingAddressCountry.GetAttribute("value") == "Canada");
+            Assert.True(uiMailingAddressCountry.GetAttribute("value") == "United States");
 
             NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
             Assert.True(uiContactPhone.GetAttribute("value") == "(250) 181-1818");
