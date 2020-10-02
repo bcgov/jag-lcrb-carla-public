@@ -64,8 +64,11 @@ namespace bdd_tests
             NgWebElement uiContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactEmail']"));
             Assert.True(uiContactEmail.GetAttribute("value") == "test@automation.com");
 
-            NgWebElement uiWebsiteUrl = ngDriver.FindElement(By.CssSelector("input[formcontrolname='websiteUrl']"));
-            Assert.True(uiWebsiteUrl.GetAttribute("value") == "https://www.liquorpolicy.org");
+            if ((bizType == "n indigenous nation account profile") || (bizType == " local government account profile"))
+            {
+                NgWebElement uiWebsiteUrl = ngDriver.FindElement(By.CssSelector("input[formcontrolname='websiteUrl']"));
+                Assert.True(uiWebsiteUrl.GetAttribute("value") == "https://www.liquorpolicy.org");
+            }
 
             NgWebElement uiJobTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='jobTitle']"));
             Assert.True(uiJobTitle.GetAttribute("value") == "CEO");
