@@ -55,11 +55,11 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   application: Application;
   @Input() skipPayment: boolean = false;
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
-  @ViewChild('financialIntegrityDocuments', { static: false }) financialIntegrityDocuments: FileUploaderComponent;
-  @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
-  @ViewChild('accountCompleteness', { static: false }) accountCompleteness: AccountCompletenessComponent;
-  @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
+  @ViewChild('mainForm') mainForm: FileUploaderComponent;
+  @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
+  @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
+  @ViewChild('accountCompleteness') accountCompleteness: AccountCompletenessComponent;
+  @ViewChild(ConnectionToNonMedicalStoresComponent) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   form: FormGroup;
   savedFormData: any;
   applicationId: string;

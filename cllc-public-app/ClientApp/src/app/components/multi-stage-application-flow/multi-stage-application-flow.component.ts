@@ -21,10 +21,10 @@ export class MultiStageApplicationFlowComponent implements OnInit {
   isFree: boolean = false;
   hasLGApproval: boolean = false;
 
-  @ViewChild('accountProfile', { static: false }) accountProfileComponent: AccountProfileComponent;
-  @ViewChild('orgStructure', { static: false }) licenseeChangesComponent: ApplicationLicenseeChangesComponent;
-  @ViewChild('mainApplication', { static: false }) applicationComponent: ApplicationComponent;
-  @ViewChild('dynamicApplication', { static: false }) dynamicApplicationComponent: DynamicApplicationComponent;
+  @ViewChild('accountProfile') accountProfileComponent: AccountProfileComponent;
+  @ViewChild('orgStructure') licenseeChangesComponent: ApplicationLicenseeChangesComponent;
+  @ViewChild('mainApplication') applicationComponent: ApplicationComponent;
+  @ViewChild('dynamicApplication') dynamicApplicationComponent: DynamicApplicationComponent;
   stepType: 'post-lg-decision';
   application: Application;
   allSteps = ['account-profile', 'licensee-changes', 'application', 'security-screening', 'payment'];
