@@ -48,25 +48,14 @@ namespace bdd_tests
             Page Title: [client name] Legal Entity Structure
             */
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload a notice of articles document
-            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-            uiUploadSignage.SendKeys(noticeOfArticles);
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[3]");
 
             // upload a central securities register document
-            string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uiUploadCentralSecReg = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-            uiUploadCentralSecReg.SendKeys(centralSecuritiesRegister);
+            FileUpload("central_securities_register.pdf","(//input[@type='file'])[6]");
 
             // upload a special rights and restrictions document
-            string specialRightsRestrictions = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uiUploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
-            uiUploadSpecialRightsRes.SendKeys(specialRightsRestrictions);
+            FileUpload("signage.pdf","(//input[@type='file'])[9]");
 
             /***** Leader #1 *****/
 
@@ -373,25 +362,14 @@ namespace bdd_tests
             NgWebElement uiShareBizConfirmButton = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] .fa-save.ng-star-inserted span"));
             uiShareBizConfirmButton.Click();
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload a notice of articles document for business shareholder 
-            string noticeOfArticlesBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-            NgWebElement uiUploadNoticeofArticlesBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
-            uiUploadNoticeofArticlesBiz.SendKeys(noticeOfArticlesBiz);
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[15]");
 
-            // upload a central securities register document for business shareholder 
-            string centralSecuritiesRegisterBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
-            NgWebElement uiUploadCentralSecRegBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
-            uiUploadCentralSecRegBiz.SendKeys(centralSecuritiesRegisterBiz);
+            // upload a central securities register document for business shareholder
+            FileUpload("central_securities_register.pdf","(//input[@type='file'])[18]");
 
             // upload a special rights and restrictions document for business shareholder
-            string specialRightsRestrictionsBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "special_rights_restrictions.pdf");
-            NgWebElement uiUploadSpecialRightsResBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[21]"));
-            uiUploadSpecialRightsResBiz.SendKeys(specialRightsRestrictionsBiz);
+            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[21]");
 
             /********** Business Shareholder - Leader #1 **********/
 
@@ -719,15 +697,8 @@ namespace bdd_tests
             NgWebElement uiConfirmButtonPublicCorp = ngDriver.FindElement(By.CssSelector(".fa-save span"));
             uiConfirmButtonPublicCorp.Click();
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload a notice of articles document
-            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-            NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[24]"));
-            uiUploadSignage.SendKeys(noticeOfArticles);
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[24]");
 
             // click on the Add Leader button
             NgWebElement uiAddPublicCorporationLeader = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] #cdk-accordion-child-1 [changetypesuffix='Leadership'] button"));
@@ -1115,15 +1086,8 @@ namespace bdd_tests
             NgWebElement uiConfirmButtonPublicCorp = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
             uiConfirmButtonPublicCorp.Click();
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload a notice of articles document
-            string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-            NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[21]"));
-            uiUploadSignage.SendKeys(noticeOfArticles);
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[21]");
 
             // click on the Add Leader button
             NgWebElement uiAddPublicCorporationLeader = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] #cdk-accordion-child-1 [changetypesuffix='Leadership'] button"));
@@ -1239,25 +1203,14 @@ namespace bdd_tests
             NgWebElement uiShareBizConfirmButton2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] .fa-save span"));
             uiShareBizConfirmButton2.Click();
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload a notice of articles document for business shareholder
-            string noticeOfArticlesBiz2 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-            NgWebElement uiUploadNoticeofArticlesBiz2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[21]"));
-            uiUploadNoticeofArticlesBiz2.SendKeys(noticeOfArticlesBiz2);
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[21]");
 
             // upload a central securities register document for business shareholder
-            string centralSecuritiesRegisterBiz2 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
-            NgWebElement uiUploadCentralSecRegBiz2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[24]"));
-            uiUploadCentralSecRegBiz2.SendKeys(centralSecuritiesRegisterBiz2);
+            FileUpload("central_securities_register.pdf","(//input[@type='file'])[24]");
 
             // upload a special rights and restrictions document for business shareholder
-            string specialRightsRestrictionsBiz2 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "special_rights_restrictions.pdf");
-            NgWebElement uiUploadSpecialRightsResBiz2 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[27]"));
-            uiUploadSpecialRightsResBiz2.SendKeys(specialRightsRestrictionsBiz2);
+            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[27]");
 
             /********** Business Shareholder #2 - Leader **********/
 
@@ -1373,25 +1326,14 @@ namespace bdd_tests
             NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] .fa-save span"));
             uiShareBizConfirmButton3.Click();
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload a notice of articles document for business shareholder
-            string noticeOfArticlesBiz3 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-            NgWebElement uiUploadNoticeofArticlesBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[30]"));
-            uiUploadNoticeofArticlesBiz3.SendKeys(noticeOfArticlesBiz3);
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[30]");
 
             // upload a central securities register document for business shareholder
-            string centralSecuritiesRegisterBiz3 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
-            NgWebElement uiUploadCentralSecRegBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[33]"));
-            uiUploadCentralSecRegBiz3.SendKeys(centralSecuritiesRegisterBiz3);
+            FileUpload("central_securities_register.pdf","(//input[@type='file'])[33]");
 
             // upload a special rights and restrictions document for business shareholder
-            string specialRightsRestrictionsBiz3 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "special_rights_restrictions.pdf");
-            NgWebElement uiUploadSpecialRightsResBiz3 = ngDriver.FindElement(By.XPath("(//input[@type='file'])[36]"));
-            uiUploadSpecialRightsResBiz3.SendKeys(specialRightsRestrictionsBiz3);
+            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[36]");
 
             /********** Business Shareholder #3 - Leader **********/
 
