@@ -47,20 +47,11 @@ namespace bdd_tests
             NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning']"));
             uiZoningCheckbox.Click();
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload the floor plan
-            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-            NgWebElement uiUploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uiUploadFloorplan.SendKeys(floorplanPath);
+            FileUpload("floor_plan.pdf","(//input[@type='file'])[2]");
 
             // upload the site plan
-            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uiUploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-            uiUploadSitePlan.SendKeys(sitePlanPath);
+            FileUpload("site_plan.pdf","(//input[@type='file'])[5]");
 
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
