@@ -326,7 +326,7 @@ namespace bdd_tests
                 }
                 catch (Exception e)
                 {
-                    if (e.ToString().Contains("OpenQA.Selenium.UnhandledAlertException"))
+                    if (e.ToString().Contains("OpenQA.Selenium.UnhandledAlertException : unexpected alert open: {Alert text : Failed to upload file}"))
                     {
                         IAlert alert = ngDriver.SwitchTo().Alert();
                         alert.Accept();
