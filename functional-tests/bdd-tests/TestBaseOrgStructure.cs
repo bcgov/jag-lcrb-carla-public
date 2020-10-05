@@ -30,19 +30,19 @@ namespace bdd_tests
             if (businessType == " private corporation")
             {
                 // upload a notice of articles document
-                FileUpload("notice_of_articles.pdf","(//input[@type='file'])[3]");
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
 
                 // upload a central securities register document
-                FileUpload("central_securities_register.pdf","(//input[@type='file'])[6]");
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[6]");
 
                 // upload a special rights and restrictions document
-                FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[9]");
+                FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[9]");
 
                 // upload a Selling It Right certificate
-                FileUpload("selling_it_right_certificate.pdf","(//input[@type='file'])[12]");
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[12]");
 
                 // upload an additional supporting document
-                FileUpload("associates.pdf","(//input[@type='file'])[14]");
+                FileUpload("associates.pdf", "(//input[@type='file'])[14]");
 
                 /********** Leader #0 **********/
 
@@ -168,13 +168,13 @@ namespace bdd_tests
                 uiShareBizConfirmButton.Click();
 
                 // upload a notice of articles document for business shareholder #1 
-                FileUpload("notice_of_articles.pdf","(//input[@type='file'])[15]");
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[15]");
 
                 // upload a central securities register document for business shareholder #1 
-                FileUpload("central_securities_register.pdf","(//input[@type='file'])[18]");
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[18]");
 
                 // upload a special rights and restrictions document for business shareholder #1 
-                FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[21]");
+                FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[21]");
 
                 /********** Business Shareholder #1 - Leader #1 **********/
 
@@ -262,15 +262,18 @@ namespace bdd_tests
                 // click on the Confirm button
                 NgWebElement uiConfirmButtonBusIndyShareholder = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] .fa-save span"));
                 uiConfirmButtonBusIndyShareholder.Click();
+
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
             }
 
             if (businessType == " sole proprietorship")
             {
                 // upload a Selling It Right certificate
-                FileUpload("selling_it_right_certificate.pdf","(//input[@type='file'])[3]");
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[3]");
 
                 // upload an additional supporting document
-                FileUpload("notice_of_articles.pdf","(//input[@type='file'])[5]");
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[5]");
 
                 /********** Sole Proprietor > Leader #1 **********/
 
@@ -361,6 +364,9 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
             }
 
             if (businessType == " society")
@@ -380,10 +386,10 @@ namespace bdd_tests
                 uiMemberNumber.SendKeys(membershipNumber);
 
                 // upload a Selling It Right certificate
-                FileUpload("selling_it_right_certificate.pdf","(//input[@type='file'])[3]");
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[3]");
 
                 // upload an additional supporting document
-                FileUpload("notice_of_articles.pdf","(//input[@type='file'])[5]");
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[5]");
 
                 // open the director #1 row 
                 NgWebElement uiOpenDirectorForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'][changetypesuffix='Leadership'] button"));
@@ -499,6 +505,9 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
             }
 
             if (businessType == " public corporation")
@@ -512,13 +521,13 @@ namespace bdd_tests
                 string leaderEmail = "leader1@publiccorp.com";
 
                 // upload NOA form
-                FileUpload("signage.pdf","(//input[@type='file'])[3]");
+                FileUpload("signage.pdf", "(//input[@type='file'])[3]");
 
                 // upload a Selling It Right certificate
-                FileUpload("selling_it_right_certificate.pdf","(//input[@type='file'])[6]");
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[6]");
 
                 // upload additional supporting document
-                FileUpload("signage.pdf","(//input[@type='file'])[8]");
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
 
                 // open leader #1 form
                 NgWebElement uiOpenLeaderForm = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
@@ -628,6 +637,9 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
             }
 
             if (businessType == " partnership")
@@ -639,13 +651,13 @@ namespace bdd_tests
                 string partnerEmail = "individual1@partner.com";
 
                 // upload the partnership agreement
-                FileUpload("partnership_agreement.pdf","(//input[@type='file'])[3]");
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
 
                 // upload a Selling It Right certificate
-                FileUpload("selling_it_right_certificate.pdf","(//input[@type='file'])[6]");
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[6]");
 
                 // upload the additional supporting document
-                FileUpload("partnership_agreement.pdf","(//input[@type='file'])[8]");
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[8]");
 
                 // open partner row
                 NgWebElement uiPartnerRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] button"));
@@ -704,7 +716,7 @@ namespace bdd_tests
                 uiConfirmButton.Click();
 
                 // upload a second partnership agreement
-                FileUpload("partnership_agreement.pdf","(//input[@type='file'])[9]");
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[9]");
 
                 // open individual partner 2 row
                 NgWebElement uiOpenPartner2Row = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] button"));
@@ -742,30 +754,33 @@ namespace bdd_tests
                 // click on individual partner2 confirm button
                 NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Partner'][changetypesuffix='BusinessShareholder'] .fa-save span"));
                 uiConfirmButton2.Click();
+
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
             }
 
             if (businessType == "n indigenous nation")
             {
                 // upload the associates document
-                FileUpload("associates.pdf","(//input[@type='file'])[2]");
+                FileUpload("associates.pdf", "(//input[@type='file'])[2]");
 
                 // upload a Selling It Right certificate
-                FileUpload("selling_it_right_certificate.pdf","(//input[@type='file'])[6]");
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[6]");
 
                 // upload the additional supporting document
-                FileUpload("associates.pdf","(//input[@type='file'])[8]");
+                FileUpload("associates.pdf", "(//input[@type='file'])[8]");
             }
 
             if (businessType == " university")
             {
                 // upload an official document
-                FileUpload("associates.pdf","(//input[@type='file'])[3]");
+                FileUpload("associates.pdf", "(//input[@type='file'])[3]");
 
                 // upload a Selling It Right certificate
-                FileUpload("selling_it_right_certificate.pdf","(//input[@type='file'])[6]");
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[6]");
 
                 // upload the additional supporting document
-                FileUpload("associates.pdf","(//input[@type='file'])[8]");
+                FileUpload("associates.pdf", "(//input[@type='file'])[8]");
 
                 /********** Leader #0 **********/
 
@@ -809,6 +824,19 @@ namespace bdd_tests
                 // click on the Confirm button
                 NgWebElement uiConfirmButtonLeader = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] .fa-save span"));
                 uiConfirmButtonLeader.Click();
+
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
+            }
+
+
+            if (businessType == " local government")
+            {
+                // upload a Selling It Right certificate
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[3]");
+
+                // upload the additional supporting document
+                FileUpload("associates.pdf", "(//input[@type='file'])[5]");
             }
         }
     }
