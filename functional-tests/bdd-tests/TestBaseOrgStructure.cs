@@ -168,13 +168,13 @@ namespace bdd_tests
                 uiShareBizConfirmButton.Click();
 
                 // upload a notice of articles document for business shareholder #1 
-                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[15]");
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[18]");
 
                 // upload a central securities register document for business shareholder #1 
-                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[18]");
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[21]");
 
                 // upload a special rights and restrictions document for business shareholder #1 
-                FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[21]");
+                FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[24]");
 
                 /********** Business Shareholder #1 - Leader #1 **********/
 
@@ -262,9 +262,6 @@ namespace bdd_tests
                 // click on the Confirm button
                 NgWebElement uiConfirmButtonBusIndyShareholder = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] .fa-save span"));
                 uiConfirmButtonBusIndyShareholder.Click();
-
-
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
             }
 
             if (businessType == " sole proprietorship")
@@ -364,9 +361,6 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
-
-
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
             }
 
             if (businessType == " society")
@@ -505,9 +499,6 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
-
-
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
             }
 
             if (businessType == " public corporation")
@@ -637,9 +628,6 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
-
-
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
             }
 
             if (businessType == " partnership")
@@ -716,7 +704,7 @@ namespace bdd_tests
                 uiConfirmButton.Click();
 
                 // upload a second partnership agreement
-                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[9]");
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[12]");
 
                 // open individual partner 2 row
                 NgWebElement uiOpenPartner2Row = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] button"));
@@ -754,9 +742,6 @@ namespace bdd_tests
                 // click on individual partner2 confirm button
                 NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Partner'][changetypesuffix='BusinessShareholder'] .fa-save span"));
                 uiConfirmButton2.Click();
-
-
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
             }
 
             if (businessType == "n indigenous nation")
@@ -824,9 +809,6 @@ namespace bdd_tests
                 // click on the Confirm button
                 NgWebElement uiConfirmButtonLeader = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] .fa-save span"));
                 uiConfirmButtonLeader.Click();
-
-
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'magic')]")).Displayed);
             }
 
 
