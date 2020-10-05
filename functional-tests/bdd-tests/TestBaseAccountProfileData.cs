@@ -22,7 +22,7 @@ namespace bdd_tests
     {
         [And(@"the correct data is displayed for a(.*)")]
         public void AccountProfileData(string bizType)
-        {
+        {           
             // check legal name field is populated
             NgWebElement uiLegalName = ngDriver.FindElement(By.CssSelector("div:nth-of-type(2) > div:nth-of-type(1) > div > div > div:nth-of-type(1) > app-field:nth-of-type(1) > section > div > section > input"));
             string fieldValueLegalName = uiLegalName.GetAttribute("value");
@@ -32,12 +32,56 @@ namespace bdd_tests
             NgWebElement uiBusinessNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='businessNumber']"));
             Assert.True(uiBusinessNumber.GetAttribute("value") == "123456789");
 
-            // check business type has been selected
+            // check business type has been selected correctly
             if (bizType != "n indigenous nation account profile")
             {
                 NgWebElement uiBusinessType = ngDriver.FindElement(By.CssSelector("select.form-control"));
-                string fieldValueBusinessType = uiBusinessType.GetAttribute("value");
-                Assert.True(fieldValueBusinessType != null);
+
+                if (bizType == " private corporation")
+                {
+                    Assert.True(uiBusinessType.GetAttribute("value") == "Private Corporation");
+                }
+
+                if (bizType == " public corporation")
+                {
+                    Assert.True(uiBusinessType.GetAttribute("value") == "Public Corporation");
+                }
+
+                if (bizType == " sole proprietorship")
+                {
+                    Assert.True(uiBusinessType.GetAttribute("value") == "Sole Proprietor");
+                }
+
+                if (bizType == " partnership")
+                {
+                    Assert.True(uiBusinessType.GetAttribute("value") == "Partnership");
+                }
+
+                if (bizType == " society")
+                {
+                    Assert.True(uiBusinessType.GetAttribute("value") == "Society");
+                }
+
+                if (bizType == " university")
+                {
+                    Assert.True(uiBusinessType.GetAttribute("value") == "University");
+                }
+
+                if (bizType == " local government")
+                {
+                    Assert.True(uiBusinessType.GetAttribute("value") == "Local Government");
+                }
+            }
+
+            // check incorporation number and date of incorporation are correct
+            if (bizType == " private corporation" || bizType == " society" || bizType == " public corporation")
+            {
+                NgWebElement uiIncorporationNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='bcIncorporationNumber']"));
+                Assert.True(uiIncorporationNumber.GetAttribute("value") == "BC1234567");
+
+                NgWebElement uiIncorporationDate = ngDriver.FindElement(By.CssSelector("input[formcontrolname='bcIncorporationNumber']"));
+                string fieldValueIncorporationDate = uiIncorporationDate.GetAttribute("value");
+                Assert.True(fieldValueIncorporationDate != null);
             }
 
             // check street address 1 is correct
