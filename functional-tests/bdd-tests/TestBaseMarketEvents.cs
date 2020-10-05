@@ -98,48 +98,110 @@ namespace bdd_tests
             uiContactEmail.SendKeys(contactEmail);
 
             // enter market name
+            NgWebElement uiMarketName = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'marketName']"));
+            uiMarketName.SendKeys(marketName);
 
             // enter market website
+            NgWebElement uiMarketWebsite = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'marketWebsite']"));
+            uiMarketWebsite.SendKeys(marketWebsite);
 
             // enter business legal name
+            NgWebElement uiClientHostname = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'clientHostname']"));
+            uiClientHostname.SendKeys(bizLegalName);
 
-            // select market type
-            //[formcontrolname= 'marketEventType'] option[value = '2: 845280002']
+            // select market event type
+            NgWebElement uiMarketEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'marketEventType'] option[value = '2: 845280002']"));
+            uiMarketEventType.Click();
 
             // enter market business number
+            NgWebElement uiBusinessNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'businessNumber']"));
+            uiBusinessNumber.SendKeys(marketBizNumber);
 
             // enter incorporation/registration number
+            NgWebElement uiRegistrationNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'registrationNumber']"));
+            uiRegistrationNumber.SendKeys(incorporationNumber);
 
             // enter address 1
+            NgWebElement uiStreet1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'street1']"));
+            uiStreet1.SendKeys(address1);
 
             // enter address 2
+            NgWebElement uiStreet2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'street2']"));
+            uiStreet2.SendKeys(address2);
 
             // enter city
+            NgWebElement uiCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'city']"));
+            uiCity.SendKeys(city);
 
             // enter postal code
+            NgWebElement uiPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'postalCode']"));
+            uiPostalCode.SendKeys(postalCode);
 
             // enter additional details
+            NgWebElement uiAdditionalDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
+            uiAdditionalDetails.SendKeys(additionalDetails);
 
             // select frequency
-            //[formcontrolname='marketDuration'] option[value='2: 845280002']
+            NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='2: 845280002']"));
+            uiFrequency.Click();
 
             // enter additional information
+            NgWebElement uiAdditionalInformation = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
+            uiAdditionalInformation.SendKeys(additionalInformation);
 
             // select start date
+            NgWebElement uiStartDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='startDate']"));
+            uiStartDate1.Click();
 
+            NgWebElement uiStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
+            uiStartDate2.Click();
+            
             // select end date
+            NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='startDate']"));
+            uiEndDate1.Click();
 
-            // enter event start
-
-            // enter event end
+            NgWebElement uiEndDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
+            uiEndDate2.Click();
 
             // select day of the week
+            NgWebElement uiDayOfWeek = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='sunday']"));
+            uiDayOfWeek.Click();
 
             // select week of the month
+            NgWebElement uiWeekOfMonth = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] #mat-radio-2[tabindex='-1']"));
+            uiWeekOfMonth.Click();
 
-            // enter liquor sale start
+            // enter event start hour
+            NgWebElement uiEventStartHour = ngDriver.FindElement(By.CssSelector(".time-picker-title+ .col-md-2 .ngb-tp-hour .form-control"));
+            uiEventStartHour.SendKeys(eventStartHour);
 
-            // enter liquor sale end
+            // enter event start minute
+            NgWebElement uiEventStartMinute = ngDriver.FindElement(By.CssSelector(".time-picker-title+ .col-md-2 .ngb-tp-minute .form-control"));
+            uiEventStartMinute.SendKeys(eventStartMinute);
+
+            // enter event end hour
+            NgWebElement uiEventEndHour = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(3) .ngb-tp-hour .form-control"));
+            uiEventEndHour.SendKeys(eventEndHour);
+
+            // enter event end minute
+            NgWebElement uiEventEndMinute = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(3) .ngb-tp-minute .form-control"));
+            uiEventEndMinute.SendKeys(eventEndMinute);
+
+            // enter liquor sale start hour
+            NgWebElement uiLiquorStartHour = ngDriver.FindElement(By.CssSelector(".col-md-2~ .col-md-2+ .col-md-2 .ng-dirty .ngb-tp-hour .form-control"));
+            uiLiquorStartHour.SendKeys(liquorStartHour);
+
+            // enter liquor sale start minute
+            NgWebElement uiLiquorStartMinute = ngDriver.FindElement(By.CssSelector(".col-md-2~ .col-md-2+ .col-md-2 .ng-dirty .ngb-tp-minute .form-control"));
+            uiLiquorStartMinute.SendKeys(liquorStartMinute);
+
+            // enter liquor sale end hour
+            NgWebElement uiLiquorEndHour = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(5) .ngb-tp-hour .form-control"));
+            uiLiquorEndHour.SendKeys(liquorEndHour);
+
+            // enter liquor sale end minute
+            NgWebElement uiLiquorEndMinute = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(5) .ngb-tp-minute .form-control"));
+            uiLiquorEndMinute.SendKeys(liquorEndMinute);
 
             // select serving it right/minors checkbox
             NgWebElement uiServingItRight = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAllStaffServingitRight']"));
