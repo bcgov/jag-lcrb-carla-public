@@ -145,20 +145,11 @@ namespace bdd_tests
                 uiCoPacker.Click();
             }
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload the business plan
-            string businessPlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "production_sales_forecast.pdf");
-            NgWebElement uiUploadBusinessPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uiUploadBusinessPlan.SendKeys(businessPlanPath);
+            FileUpload("business_plan.pdf","(//input[@type='file'])[2]");
 
             // upload the production sales forecast
-            string productionSalesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "production_sales_forecast.pdf");
-            NgWebElement uiUploadProductionSales = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-            uiUploadProductionSales.SendKeys(productionSalesPath);
+            FileUpload("production_sales_forecast.pdf","(//input[@type='file'])[5]");
 
             if ((manufacturerType == "winery") || (manufacturerType == "winery in Saanich"))
             {
@@ -219,49 +210,33 @@ namespace bdd_tests
                 uiPiping.Click();
 
                 // upload brew sheets sample
-                string brewSheetsPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "brew_sheets.pdf");
-                NgWebElement uiUploadBrewSheets = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-                uiUploadBrewSheets.SendKeys(brewSheetsPath);
+                FileUpload("brew_sheets.pdf","(//input[@type='file'])[8]");
 
                 // upload the business insurance
-                string insurancePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "business_insurance.pdf");
-                NgWebElement uiUploadInsurance = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
-                uiUploadInsurance.SendKeys(insurancePath);
+                FileUpload("business_insurance.pdf","(//input[@type='file'])[11]");
             }
 
             if (manufacturerType == "brewery")
             {
                 // upload the store signage
-                string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-                NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[14]"));
-                uiUploadSignage.SendKeys(signagePath);
+                FileUpload("signage.pdf","(//input[@type='file'])[14]");
 
                 // upload the floor plan 
-                string floorPlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-                NgWebElement uiUploadFloorPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[17]"));
-                uiUploadFloorPlan.SendKeys(floorPlanPath);
+                FileUpload("floor_plan.pdf","(//input[@type='file'])[17]");
 
                 // upload the site plan
-                string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-                NgWebElement uiUploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[20]"));
-                uiUploadSitePlan.SendKeys(sitePlanPath);
+                FileUpload("site_plan.pdf","(//input[@type='file'])[20]");
             }
             else
             {
                 // upload the store signage
-                string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-                NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-                uiUploadSignage.SendKeys(signagePath);
+                FileUpload("signage.pdf","(//input[@type='file'])[8]");
 
                 // upload the floor plan 
-                string floorPlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-                NgWebElement uiUploadFloorPlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
-                uiUploadFloorPlan.SendKeys(floorPlanPath);
+                FileUpload("floor_plan.pdf","(//input[@type='file'])[11]");
 
                 // upload the site plan 
-                string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-                NgWebElement uiUploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[14]"));
-                uiUploadSitePlan.SendKeys(sitePlanPath);
+                FileUpload("site_plan.pdf","(//input[@type='file'])[14]");
             }
 
             // select the owner checkbox
