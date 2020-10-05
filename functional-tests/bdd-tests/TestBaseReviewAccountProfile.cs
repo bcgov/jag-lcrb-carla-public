@@ -27,20 +27,20 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            string bizNumber = "012345678";
+            string bizNumber = "123456789";
             string incorporationNumber = "BC1234567";
 
             string physStreetAddress1 = "645 Tyee Road";
-            string physStreetAddress2 = "West of Victoria";
+            string physStreetAddress2 = "West";
             string physCity = "Victoria";
             string physPostalCode = "V9A 6X5";
 
-            string mailStreet1 = "P.O. Box 123";
-            string mailStreet2 = "303 Prideaux St.";
-            string mailCity = "Victoria";
-            string mailProvince = "B.C.";
-            string mailPostalCode = "V9A 6X5";
-            string mailCountry = "Canada";
+            string mailStreet1 = "#22";
+            string mailStreet2 = "700 Bellevue Way NE";
+            string mailCity = "Bellevue";
+            string mailProvince = "WA";
+            string mailPostalCode = "98004";
+            string mailCountry = "United States";
 
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
