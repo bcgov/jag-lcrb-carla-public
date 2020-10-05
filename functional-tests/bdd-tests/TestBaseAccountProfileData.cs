@@ -177,7 +177,7 @@ namespace bdd_tests
             if (bizType == "n indigenous nation account profile")
             {
                 NgWebElement uiINConnectionToFederalProducerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='iNConnectionToFederalProducerDetails']"));
-                Assert.True(uiINConnectionToFederalProducerDetails.GetAttribute("value") == "Name and details of federal producer (automated test) for IN.");
+                Assert.True(uiINConnectionToFederalProducerDetails.GetAttribute("value") == "Name and details of federal producer (automated test) for IN/local government.");
             }
         }
     }
