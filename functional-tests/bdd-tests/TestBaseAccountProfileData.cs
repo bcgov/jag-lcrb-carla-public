@@ -32,6 +32,14 @@ namespace bdd_tests
             NgWebElement uiBusinessNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='businessNumber']"));
             Assert.True(uiBusinessNumber.GetAttribute("value") == "123456789");
 
+            // check business type has been selected
+            if (bizType != "n indigenous nation account profile")
+            {
+                NgWebElement uiBusinessType = ngDriver.FindElement(By.CssSelector("select.form-control"));
+                string fieldValueBusinessType = uiBusinessType.GetAttribute("value");
+                Assert.True(fieldValueBusinessType != null);
+            }
+
             // check street address 1 is correct
             NgWebElement uiPhysicalAddressStreet = ngDriver.FindElement(By.CssSelector("input[formcontrolname='physicalAddressStreet']"));
             Assert.True(uiPhysicalAddressStreet.GetAttribute("value") == "645 Tyee Road");
