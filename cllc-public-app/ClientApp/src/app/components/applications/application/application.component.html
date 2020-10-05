@@ -125,6 +125,11 @@
                 <p *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly">Establishment names are subject to approval by LCRB</p>
               </div>
 
+              <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
+                As part of the licence transfer, you can change the name of the establishment.
+                If the name of the establishment is changing, you must provide a drawing or a photo of your proposed establishment sign below.
+              </p>
+
             </div>
             <div formGroupName="assignedLicence"
               *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
