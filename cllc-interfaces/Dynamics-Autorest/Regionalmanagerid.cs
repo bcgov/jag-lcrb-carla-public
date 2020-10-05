@@ -47,10 +47,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get adoxio_RegionalManagerId from adoxio_enforcementactions
+        /// Get adoxio_RegionalManagerId from adoxio_pmuareas
         /// </summary>
-        /// <param name='adoxioEnforcementactionid'>
-        /// key: adoxio_enforcementactionid of adoxio_enforcementaction
+        /// <param name='adoxioPmuareaid'>
+        /// key: adoxio_pmuareaid of adoxio_pmuarea
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -79,11 +79,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMsystemuser>> GetWithHttpMessagesAsync(string adoxioEnforcementactionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMsystemuser>> GetWithHttpMessagesAsync(string adoxioPmuareaid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioEnforcementactionid == null)
+            if (adoxioPmuareaid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioEnforcementactionid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioPmuareaid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioEnforcementactionid", adoxioEnforcementactionid);
+                tracingParameters.Add("adoxioPmuareaid", adoxioPmuareaid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -100,8 +100,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_enforcementactions({adoxio_enforcementactionid})/adoxio_RegionalManagerId").ToString();
-            _url = _url.Replace("{adoxio_enforcementactionid}", System.Uri.EscapeDataString(adoxioEnforcementactionid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_pmuareas({adoxio_pmuareaid})/adoxio_RegionalManagerId").ToString();
+            _url = _url.Replace("{adoxio_pmuareaid}", System.Uri.EscapeDataString(adoxioPmuareaid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {

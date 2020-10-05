@@ -19,10 +19,10 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface IRegionalmanagerid
     {
         /// <summary>
-        /// Get adoxio_RegionalManagerId from adoxio_enforcementactions
+        /// Get adoxio_RegionalManagerId from adoxio_pmuareas
         /// </summary>
-        /// <param name='adoxioEnforcementactionid'>
-        /// key: adoxio_enforcementactionid of adoxio_enforcementaction
+        /// <param name='adoxioPmuareaid'>
+        /// key: adoxio_pmuareaid of adoxio_pmuarea
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,6 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMsystemuser>> GetWithHttpMessagesAsync(string adoxioEnforcementactionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMsystemuser>> GetWithHttpMessagesAsync(string adoxioPmuareaid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

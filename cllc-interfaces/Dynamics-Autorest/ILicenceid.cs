@@ -19,10 +19,10 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface ILicenceid
     {
         /// <summary>
-        /// Get adoxio_LicenceId from adoxio_enforcementactions
+        /// Get adoxio_LicenceId from adoxio_offsitestorages
         /// </summary>
-        /// <param name='adoxioEnforcementactionid'>
-        /// key: adoxio_enforcementactionid of adoxio_enforcementaction
+        /// <param name='adoxioOffsitestorageid'>
+        /// key: adoxio_offsitestorageid of adoxio_offsitestorage
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,62 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences>> GetWithHttpMessagesAsync(string adoxioEnforcementactionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get adoxio_LicenceId from adoxio_ldborders
-        /// </summary>
-        /// <param name='adoxioLdborderid'>
-        /// key: adoxio_ldborderid of adoxio_ldborder
-        /// </param>
-        /// <param name='select'>
-        /// Select properties to be returned
-        /// </param>
-        /// <param name='expand'>
-        /// Expand related entities
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences>> Get1WithHttpMessagesAsync(string adoxioLdborderid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get adoxio_LicenceId from adoxio_serviceareas
-        /// </summary>
-        /// <param name='adoxioServiceareaid'>
-        /// key: adoxio_serviceareaid of adoxio_servicearea
-        /// </param>
-        /// <param name='select'>
-        /// Select properties to be returned
-        /// </param>
-        /// <param name='expand'>
-        /// Expand related entities
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences>> Get2WithHttpMessagesAsync(string adoxioServiceareaid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences>> GetWithHttpMessagesAsync(string adoxioOffsitestorageid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
