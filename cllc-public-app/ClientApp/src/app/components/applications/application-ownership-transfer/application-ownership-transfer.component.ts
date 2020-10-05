@@ -68,6 +68,11 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
         contactName: [{ value: '', disabled: true }],
         businessType: [{ value: '', disabled: true }],
       }),
+      licenseeContact: this.fb.group({
+        name: [{value: '', disabled: true}],
+        email: [{value: '', disabled: true}],
+        phone: [{value: '', disabled: true}]
+      }),
       transferConsent: ['', [this.customRequiredCheckboxValidator()]],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
@@ -84,9 +89,23 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
     this.busy = this.licenseDataService.getLicenceById(this.licenceId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: License) => {
-
-
         this.licence = data;
+        if(this.licenceHasRepresentativeContact()){
+          const contact = {
+            name: this.licence.representativeFullName,
+            email: this.licence.representativeEmail,
+            phone: this.licence.representativePhoneNumber
+          }
+          this.form.get('licenseeContact').patchValue(contact);
+        } else if(this.account){
+          const contact = {
+            name: this.account.name,
+            email: this.account.contactEmail,
+            phone: this.account.contactPhone
+          }
+          this.form.get('licenseeContact').patchValue(contact);
+        }
+
         this.form.patchValue(data);
       },
         () => {
@@ -96,7 +115,13 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
   }
 
 
-
+  private licenceHasRepresentativeContact(): boolean {
+    let hasContact = false;
+    if (this.licence && this.licence.representativeFullName) {
+      hasContact = true;
+    }
+    return hasContact;
+  }
 
 
   /**
