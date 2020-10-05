@@ -140,19 +140,19 @@ namespace bdd_tests
             NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailaddress1']"));
             uiCorpContactEmail.SendKeys(corpContactEmail);
 
-            if ((businessType == "n indigenous nation"))
+            if ((businessType == "n indigenous nation") || (businessType == " local government"))
             {
                 // select 'Yes' for connection to a federal producer
                 NgWebElement uiINConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='iNConnectionToFederalProducer']"));
                 uiINConnectionFederalProducer.Click();
 
                 // enter the name of the federal producer and details of the connection 
-                string INnameAndDetails = "Name and details of federal producer (automated test) for IN.";
+                string INnameAndDetails = "Name and details of federal producer (automated test) for IN/local government.";
                 NgWebElement uiINDetailsFederalProducer = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='iNConnectionToFederalProducerDetails']"));
                 uiINDetailsFederalProducer.SendKeys(INnameAndDetails);
             }
 
-            if ((businessType == " private corporation") || (businessType == " sole proprietorship"))
+            if ((businessType == " private corporation") || (businessType == " sole proprietorship") || (businessType == " university"))
             {
                 // select 'Yes' for corporation connection to federal producer 
                 NgWebElement uiCorpConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='corpConnectionFederalProducer']"));
