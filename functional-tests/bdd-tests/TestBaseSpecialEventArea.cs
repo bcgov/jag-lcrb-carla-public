@@ -50,20 +50,11 @@ namespace bdd_tests
             NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
             uiZoningCheckbox.Click();
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload the letter of intent
-            string letterOfIntentPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "letter_of_intent.pdf");
-            NgWebElement uiUploadLetterOfIntent = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uiUploadLetterOfIntent.SendKeys(letterOfIntentPath);
+            FileUpload("letter_of_intent.pdf","(//input[@type='file'])[2]");
 
             // upload the floor plan
-            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-            NgWebElement uiUploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-            uiUploadFloorplan.SendKeys(floorplanPath);
+            FileUpload("floor_plan.pdf","(//input[@type='file'])[5]");
 
             // add a service area
             NgWebElement uiServiceArea = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceAreas'] button"));
@@ -90,9 +81,7 @@ namespace bdd_tests
             uiOutdoorAreaOccupantLoad.SendKeys(outdoorAreaCapacity);
 
             // upload the site plan
-            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uiUploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-            uiUploadSitePlan.SendKeys(sitePlanPath);
+            FileUpload("site_plan.pdf", "(//input[@type='file'])[8]");
 
             // select the Sunday opening time
             NgWebElement uiSundayOpen = ngDriver.FindElement(By.CssSelector("select[formcontrolname='serviceHoursSundayOpen'] option[value='10:00']"));

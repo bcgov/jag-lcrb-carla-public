@@ -126,8 +126,8 @@ namespace bdd_tests
                 }
                 
             }
-            
-            
+
+
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address
@@ -153,15 +153,8 @@ namespace bdd_tests
                 uiSelectNation.Click();
             }
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload a proof of zoning form
-            string zoningPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "fin_integrity.pdf");
-            NgWebElement uiUploadZoning = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-            uiUploadZoning.SendKeys(zoningPath);
+            FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[3]");
 
             // search for and select the indigenous nation
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
@@ -186,33 +179,23 @@ namespace bdd_tests
             uiEstabPhone.SendKeys(estPhone);
 
             // upload a store signage document
-            string signagePath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-            uiUploadSignage.SendKeys(signagePath);
+            FileUpload("signage.pdf","(//input[@type='file'])[5]");
 
             // select not visible from outside checkbox
             NgWebElement uiVisibleFromOutside = ngDriver.FindElement(By.CssSelector(".mat-checkbox-inner-container"));
             uiVisibleFromOutside.Click();
 
             // upload a floor plan document
-            string floorplanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "floor_plan.pdf");
-            NgWebElement uiUploadFloorplan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-            uiUploadFloorplan.SendKeys(floorplanPath);
+            FileUpload("floor_plan.pdf","(//input[@type='file'])[8]");
 
             // upload a site plan document
-            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uiUploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[11]"));
-            uiUploadSitePlan.SendKeys(sitePlanPath);
+            FileUpload("site_plan.pdf","(//input[@type='file'])[11]");
 
             // upload a financial integrity form
-            string finIntegrityPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "fin_integrity.pdf");
-            NgWebElement uiUploadFinIntegrity = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
-            uiUploadFinIntegrity.SendKeys(finIntegrityPath);
+            FileUpload("fin_integrity.pdf","(//input[@type='file'])[15]");
 
             // upload a ownership details document
-            string ownershipDetailsPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "fin_integrity.pdf");
-            NgWebElement uiOwnershipDetails = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
-            uiOwnershipDetails.SendKeys(ownershipDetailsPath);
+            FileUpload("ownership_details.pdf","(//input[@type='file'])[18]");
 
             // enter the first name of the application contact
             NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
