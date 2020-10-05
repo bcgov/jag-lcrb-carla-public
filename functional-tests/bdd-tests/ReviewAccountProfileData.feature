@@ -71,3 +71,13 @@ Scenario: Data for Sole Proprietorship Review Account Profile
     And the correct data is displayed for a local government account profile
     And the account is deleted
     Then I see the login page
+
+ @e2e @cannabis @university @reviewaccountdata
+ Scenario: Data for University Review Account Profile
+    Given I am logged in to the dashboard as a university
+    And I click on the link for Edit Account Profile
+    And I review the account profile for a university
+    And I click on the link for Edit Account Profile
+    And the correct data is displayed for a university account profile
+    And the account is deleted
+    Then I see the login page
