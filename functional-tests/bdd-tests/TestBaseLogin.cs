@@ -310,6 +310,11 @@ namespace bdd_tests
             CheckFeatureFlag("SecurityScreening");
         }
 
+        public void CheckFeatureFlagsMarketEvents()
+        {
+            CheckFeatureFlag("MarketEvents");
+        }
+
 
         public void CarlaDeleteCurrentAccount()
         {
