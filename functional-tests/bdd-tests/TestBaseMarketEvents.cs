@@ -34,32 +34,124 @@ namespace bdd_tests
             uiOnSiteStoreEndorsement.Click();
 
             /* 
-            Page Title: Please Review the Account Profile
+            Page Title: Market Authorization Request
             */
 
-            ContinueToApplicationButton();
+            // create test data
+            string contactName = "Test Automation";
+            string contactPhoneNumber = "(222) 222-2222";
+            string contactEmail = "test@automation.com";
+            string marketName = "Point Ellis Market";
+            string marketWebsite = "http://www.pointellismarketisamazing.com";
+            string bizLegalName = "Point Ellis Market Cooperative";
+            string marketBizNumber = "2222222222222222";
+            string incorporationNumber = "1234567";
+            string address1 = "645 Tyee Road";
+            string address2 = "West";
+            string city = "Victoria";
+            string postalCode = "V9A 6X5";
+            string additionalDetails = "Additional details for automated test.";
+            string additionalInformation = "Additional information for automated test.";
+            string eventStartHour = "10";
+            string eventStartMinute = "30";
+            string eventEndHour = "11";
+            string eventEndMinute = "05";
+            string liquorStartHour = "22";
+            string liquorStartMinute = "30";
+            string liquorEndHour = "14";
+            string liquorEndMinute = "04";
 
-            /* 
-            Page Title: Manufacturer On-Site Store Endorsement Application
-            */
+            // select preventing sale of liquor checkbox
+            NgWebElement uiPreventingSaleOfLiquor = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoPreventingSaleofLiquor']"));
+            uiPreventingSaleOfLiquor.Click();
 
-            // select the zoning checkbox
-            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning']"));
-            uiZoningCheckbox.Click();
+            // select market managed or carried checkbox
+            NgWebElement uiMarketManagedOrCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketManagedorCarried']"));
+            uiMarketManagedOrCarried.Click();
 
-            // upload the floor plan
-            FileUpload("floor_plan.pdf","(//input[@type='file'])[2]");
+            // select market only vendors checkbox
+            NgWebElement uiIsMarketOnlyVendors = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketOnlyVendors']"));
+            uiIsMarketOnlyVendors.Click();
 
-            // upload the site plan
-            FileUpload("site_plan.pdf","(//input[@type='file'])[5]");
+            // select imported goods checkbox
+            NgWebElement uiIsNoImportedGoods = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoImportedGoods']"));
+            uiIsNoImportedGoods.Click();
 
-            // select the authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
-            uiAuthorizedToSubmit.Click();
+            // select six vendors checkbox
+            NgWebElement uiIsMarketHostsSixVendors = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketHostsSixVendors']"));
+            uiIsMarketHostsSixVendors.Click();
 
-            // select the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
-            uiSignatureAgreement.Click();
+            // select max amount or duration checkbox
+            NgWebElement uiIsMarketMaxAmountorDuration = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketMaxAmountorDuration']"));
+            uiIsMarketMaxAmountorDuration.Click();
+
+            // enter contact name
+            NgWebElement uiContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
+            uiContactName.SendKeys(contactName);
+
+            // enter contact phone number
+            NgWebElement uiContactPhoneNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'contactPhone']"));
+            uiContactPhoneNumber.SendKeys(contactPhoneNumber);
+
+            // enter contact email
+            NgWebElement uiContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'contactEmail']"));
+            uiContactEmail.SendKeys(contactEmail);
+
+            // enter market name
+
+            // enter market website
+
+            // enter business legal name
+
+            // select market type
+            //[formcontrolname= 'marketEventType'] option[value = '2: 845280002']
+
+            // enter market business number
+
+            // enter incorporation/registration number
+
+            // enter address 1
+
+            // enter address 2
+
+            // enter city
+
+            // enter postal code
+
+            // enter additional details
+
+            // select frequency
+            //[formcontrolname='marketDuration'] option[value='2: 845280002']
+
+            // enter additional information
+
+            // select start date
+
+            // select end date
+
+            // enter event start
+
+            // enter event end
+
+            // select day of the week
+
+            // select week of the month
+
+            // enter liquor sale start
+
+            // enter liquor sale end
+
+            // select serving it right/minors checkbox
+            NgWebElement uiServingItRight = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAllStaffServingitRight']"));
+            uiServingItRight.Click();
+
+            // select sample sizes checkbox
+            NgWebElement uiSampleSizes = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isSampleSizeCompliant']"));
+            uiSampleSizes.Click();
+
+            // select agreement checkbox
+            NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiAgreement.Click();
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();
