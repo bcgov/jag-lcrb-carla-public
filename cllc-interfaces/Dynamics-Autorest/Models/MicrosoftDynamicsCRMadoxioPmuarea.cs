@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMadoxioPmuarea
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioPmuarea(int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _owningteamValue = default(string), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), string _owninguserValue = default(string), string _adoxioManufacturinginspectoridValue = default(string), string adoxioName = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? statecode = default(int?), string _createdbyValue = default(string), int? statuscode = default(int?), string adoxioPmuareaid = default(string), string _owneridValue = default(string), int? timezoneruleversionnumber = default(int?), string _owningbusinessunitValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioPmuareaSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPmuareaDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPmuareaDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPmuareaAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioPmuareaMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioPmuareaProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPmuareaBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioPmuareaPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioArea> adoxioPmuareaAreas = default(IList<MicrosoftDynamicsCRMadoxioArea>), MicrosoftDynamicsCRMsystemuser adoxioManufacturingInspectorId = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioEvent> adoxioPmuareaMarketevents = default(IList<MicrosoftDynamicsCRMadoxioEvent>), IList<MicrosoftDynamicsCRMincident> adoxioPmuareaInspections = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioPmuareaLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioPmuareaAdoxioApplicationPMUArea = default(IList<MicrosoftDynamicsCRMadoxioApplication>))
+        public MicrosoftDynamicsCRMadoxioPmuarea(int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _owningteamValue = default(string), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), string _owninguserValue = default(string), string _adoxioRegionalmanageridValue = default(string), string _adoxioManufacturinginspectoridValue = default(string), string adoxioName = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? statecode = default(int?), string _createdbyValue = default(string), int? statuscode = default(int?), string adoxioPmuareaid = default(string), string _owneridValue = default(string), int? timezoneruleversionnumber = default(int?), string _owningbusinessunitValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioPmuareaSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPmuareaDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPmuareaDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPmuareaAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioPmuareaMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioPmuareaProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPmuareaBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioPmuareaPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioArea> adoxioPmuareaAreas = default(IList<MicrosoftDynamicsCRMadoxioArea>), MicrosoftDynamicsCRMsystemuser adoxioManufacturingInspectorId = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioEvent> adoxioPmuareaMarketevents = default(IList<MicrosoftDynamicsCRMadoxioEvent>), IList<MicrosoftDynamicsCRMincident> adoxioPmuareaInspections = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioPmuareaLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioPmuareaAdoxioApplicationPMUArea = default(IList<MicrosoftDynamicsCRMadoxioApplication>), MicrosoftDynamicsCRMsystemuser adoxioRegionalManagerId = default(MicrosoftDynamicsCRMsystemuser))
         {
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -37,6 +37,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Versionnumber = versionnumber;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._owninguserValue = _owninguserValue;
+            this._adoxioRegionalmanageridValue = _adoxioRegionalmanageridValue;
             this._adoxioManufacturinginspectoridValue = _adoxioManufacturinginspectoridValue;
             AdoxioName = adoxioName;
             Modifiedon = modifiedon;
@@ -73,6 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioPmuareaInspections = adoxioPmuareaInspections;
             AdoxioPmuareaLicences = adoxioPmuareaLicences;
             AdoxioPmuareaAdoxioApplicationPMUArea = adoxioPmuareaAdoxioApplicationPMUArea;
+            AdoxioRegionalManagerId = adoxioRegionalManagerId;
             CustomInit();
         }
 
@@ -110,6 +112,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_regionalmanagerid_value")]
+        public string _adoxioRegionalmanageridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -290,6 +297,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_pmuarea_adoxio_application_PMUArea")]
         public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioPmuareaAdoxioApplicationPMUArea { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_RegionalManagerId")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioRegionalManagerId { get; set; }
 
     }
 }
