@@ -53,9 +53,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         MicrosoftDynamicsCRMadoxioEvent GetEventById(string id);
         MicrosoftDynamicsCRMadoxioEvent GetEventById(Guid id);
         MicrosoftDynamicsCRMadoxioEventscheduleCollection GetEventSchedulesByEventId(string id);
-        /// <summary>
-        /// Gets the IInspector.
-        /// </summary>
-        IInspector Inspector { get; }
+       
     }
 }

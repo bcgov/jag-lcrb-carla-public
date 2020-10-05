@@ -538,7 +538,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return results;
         }
 
-        public virtual IInspector Inspector { get; private set; }
+        
 
    
     }
