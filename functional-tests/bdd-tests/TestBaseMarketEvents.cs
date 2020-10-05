@@ -20,17 +20,17 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request an on-site store endorsement")]
-        public void OnSiteStoreEndorsement()
+        [And(@"I request a market event")]
+        public void MarketEvents()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
-            string onSiteStoreEndorsement = "On-Site Store Endorsement Application";
+            string marketEvent = "Request Market Event Authorization";
 
-            // click on the On-Site Store Endorsement Application link
-            NgWebElement uiOnSiteStoreEndorsement = ngDriver.FindElement(By.LinkText(onSiteStoreEndorsement));
+            // click on the Request Market Event Authorization link
+            NgWebElement uiOnSiteStoreEndorsement = ngDriver.FindElement(By.LinkText(marketEvent));
             uiOnSiteStoreEndorsement.Click();
 
             /* 
