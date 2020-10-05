@@ -29,11 +29,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioEventschedule class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioEventschedule(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioServiceenddatetime = default(System.DateTimeOffset?), string adoxioName = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? adoxioEventstartdatetime = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), string _owninguserValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioEventenddatetime = default(System.DateTimeOffset?), string _adoxioEventidValue = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? statecode = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? adoxioServicestartdatetime = default(System.DateTimeOffset?), string adoxioEventscheduleid = default(string), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string _owningteamValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEventscheduleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventscheduleDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventscheduleDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEventscheduleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioEventscheduleMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioEventscheduleProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEventscheduleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioEventschedulePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioEvent adoxioEventId = default(MicrosoftDynamicsCRMadoxioEvent))
+        public MicrosoftDynamicsCRMadoxioEventschedule(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioDayofweek = default(int?), System.DateTimeOffset? adoxioServiceenddatetime = default(System.DateTimeOffset?), string adoxioName = default(string), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? adoxioEventstartdatetime = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), string _owninguserValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioEventenddatetime = default(System.DateTimeOffset?), string _adoxioEventidValue = default(string), string versionnumber = default(string), int? statecode = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? adoxioServicestartdatetime = default(System.DateTimeOffset?), string adoxioEventscheduleid = default(string), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string _owningteamValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEventscheduleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventscheduleDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventscheduleDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEventscheduleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioEventscheduleMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioEventscheduleProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEventscheduleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioEventschedulePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioEvent adoxioEventId = default(MicrosoftDynamicsCRMadoxioEvent))
         {
             Createdon = createdon;
+            AdoxioDayofweek = adoxioDayofweek;
             AdoxioServiceenddatetime = adoxioServiceenddatetime;
             AdoxioName = adoxioName;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioEventstartdatetime = adoxioEventstartdatetime;
             this._owningbusinessunitValue = _owningbusinessunitValue;
@@ -43,7 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Modifiedon = modifiedon;
             AdoxioEventenddatetime = adoxioEventenddatetime;
             this._adoxioEventidValue = _adoxioEventidValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Versionnumber = versionnumber;
             Statecode = statecode;
             this._modifiedbyValue = _modifiedbyValue;
@@ -87,6 +88,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dayofweek")]
+        public int? AdoxioDayofweek { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_serviceenddatetime")]
         public System.DateTimeOffset? AdoxioServiceenddatetime { get; set; }
 
@@ -94,6 +100,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_name")]
         public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -139,11 +150,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_eventid_value")]
         public string _adoxioEventidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
