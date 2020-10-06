@@ -56,8 +56,7 @@ namespace bdd_tests
                 case " private corporation org structure":
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more key personnel ')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more shareholders ')]")).Displayed);
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Corporation Notice of Articles ')]")).Displayed);
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Central Securities Register ')]")).Displayed); break;
+                    break;
                 case " partnership org structure":
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more shareholders ')]")).Displayed);
                     break;
