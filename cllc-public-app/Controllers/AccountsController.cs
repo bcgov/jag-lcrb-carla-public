@@ -20,6 +20,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using System.Security.Claims;
+using Gov.Lclb.Cllb.Public.Extensions;
+using Gov.Lclb.Cllb.Services.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -42,6 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             BCeIDBusinessQuery bceid,
             ILoggerFactory loggerFactory,
             IDynamicsClient dynamicsClient,
+            FileManagerClient fileManagerClient,
             IWebHostEnvironment env)
         {
             _configuration = configuration;
@@ -50,6 +53,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _env = env;
             _orgBookclient = orgBookClient;
             _httpContextAccessor = httpContextAccessor;
+            _fileManagerClient = fileManagerClient;
             _logger = loggerFactory.CreateLogger(typeof(AccountsController));
         }
 
@@ -570,6 +574,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 account.Accountid = legalEntity._adoxioAccountValue;
 
+                
+
+                // create the sharepoint document location for the account
+
+                var accountFolderName = await _dynamicsClient.GetFolderName("account", account.Accountid).ConfigureAwait(true);
+
+                // create the folder for the account
+
+                
+
+                _dynamicsClient.CreateEntitySharePointDocumentLocation("account", account.Accountid, accountFolderName, accountFolderName);
+
                 // fetch the account and get the created contact.
                 if (legalEntity.AdoxioAccount == null)
                 {
@@ -607,6 +623,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.LogError(e, "Error creating Tied house connection.");
                 }
+
+                // call the web service
+                var createFolderRequest = new CreateFolderRequest()
+                {
+                    EntityName = "account",
+                    FolderName = accountFolderName
+                };
+
+                _fileManagerClient.CreateFolder(createFolderRequest);
+
             }
             else // it is a new user only.
             {
