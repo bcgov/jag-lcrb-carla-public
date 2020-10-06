@@ -126,7 +126,7 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Indigenous Nation is not valid')]")).Displayed);
                     break;
                 case " Catering application":
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment name is required')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the Parcel Identifier (format: 9 digits)')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,\"Please enter the business contact's email address\")]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,\"Please enter the business contact's 10-digit phone number\")]")).Displayed);
@@ -136,7 +136,7 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that you are authorized to submit the application.')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter a value for previous application')]")).Displayed);
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter industry connections.')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter industry connections')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one signage document is required.')]")).Displayed);                 
                     break;
                 case " Rural Store application":
