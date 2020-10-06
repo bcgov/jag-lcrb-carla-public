@@ -885,7 +885,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var folderName = application.GetDocumentFolderName();
             //var name = application.AdoxioApplicationid + " Files";
 
-            _fileManagerClient.CreateFolderIfNotExist(_logger, WorkerDocumentUrlTitle, folderName);
+            _fileManagerClient.CreateFolderIfNotExist(_logger, ApplicationDocumentUrlTitle, folderName);
 
             _dynamicsClient.CreateEntitySharePointDocumentLocation("application", application.AdoxioApplicationid, folderName, folderName);
         }
