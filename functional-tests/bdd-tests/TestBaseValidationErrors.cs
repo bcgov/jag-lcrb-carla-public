@@ -88,8 +88,8 @@ namespace bdd_tests
                 case " Manufacturing application":
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Establishment Name is required')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the Parcel Identifier (format: 9 digits)')]")).Displayed);
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please enter the business contact's email address ')]")).Displayed);
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please enter the business contact's 10-digit phone number ')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,\" Please enter the business contact's email address \")]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,\" Please enter the business contact's 10-digit phone number \")]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the street address')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the city')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the postal code')]")).Displayed);
