@@ -44,6 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             BCeIDBusinessQuery bceid,
             ILoggerFactory loggerFactory,
             IDynamicsClient dynamicsClient,
+            FileManagerClient fileManagerClient,
             IWebHostEnvironment env)
         {
             _configuration = configuration;
@@ -52,6 +53,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _env = env;
             _orgBookclient = orgBookClient;
             _httpContextAccessor = httpContextAccessor;
+            _fileManagerClient = fileManagerClient;
             _logger = loggerFactory.CreateLogger(typeof(AccountsController));
         }
 
