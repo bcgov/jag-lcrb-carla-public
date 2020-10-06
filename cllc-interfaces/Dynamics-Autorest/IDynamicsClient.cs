@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top181 { get; set; }
+        int? Top234 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip181 { get; set; }
+        int? Skip234 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count181 { get; set; }
+        bool? Count234 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter181 { get; set; }
+        string Filter234 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search181 { get; set; }
+        string Search234 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -138,6 +138,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IPmuarea Pmuarea { get; }
 
         /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxiolqrlicencetransferbpf.
+        /// </summary>
+        IBpfadoxioapplicationadoxiolqrlicencetransferbpf Bpfadoxioapplicationadoxiolqrlicencetransferbpf { get; }
+
+        /// <summary>
         /// Gets the IApplicationstructurechangev1s.
         /// </summary>
         IApplicationstructurechangev1s Applicationstructurechangev1s { get; }
@@ -201,6 +206,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAreas.
         /// </summary>
         IAreas Areas { get; }
+
+        /// <summary>
+        /// Gets the IAreaadoxioinspectorreportarea.
+        /// </summary>
+        IAreaadoxioinspectorreportarea Areaadoxioinspectorreportarea { get; }
 
         /// <summary>
         /// Gets the IPmuareaid.
@@ -503,6 +513,66 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInspectorcommentsrollups Inspectorcommentsrollups { get; }
 
         /// <summary>
+        /// Gets the IInspectorreports.
+        /// </summary>
+        IInspectorreports Inspectorreports { get; }
+
+        /// <summary>
+        /// Gets the IArea.
+        /// </summary>
+        IArea Area { get; }
+
+        /// <summary>
+        /// Gets the IInspector.
+        /// </summary>
+        IInspector Inspector { get; }
+
+        /// <summary>
+        /// Gets the IInspectorreportasyncoperations.
+        /// </summary>
+        IInspectorreportasyncoperations Inspectorreportasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IInspectorreportbulkdeletefailures.
+        /// </summary>
+        IInspectorreportbulkdeletefailures Inspectorreportbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IInspectorreportduplicatebaserecord.
+        /// </summary>
+        IInspectorreportduplicatebaserecord Inspectorreportduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IInspectorreportduplicatematchingrecord.
+        /// </summary>
+        IInspectorreportduplicatematchingrecord Inspectorreportduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IInspectorreportmailboxtrackingfolders.
+        /// </summary>
+        IInspectorreportmailboxtrackingfolders Inspectorreportmailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IInspectorreportprincipalobjectattributeaccesses.
+        /// </summary>
+        IInspectorreportprincipalobjectattributeaccesses Inspectorreportprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IInspectorreportprocesssession.
+        /// </summary>
+        IInspectorreportprocesssession Inspectorreportprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IInspectorreportsyncerrors.
+        /// </summary>
+        IInspectorreportsyncerrors Inspectorreportsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the IRegion.
+        /// </summary>
+        IRegion Region { get; }
+
+        /// <summary>
         /// Gets the IInterests.
         /// </summary>
         IInterests Interests { get; }
@@ -548,6 +618,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicencesadoxiohoursofservicelicence Licencesadoxiohoursofservicelicence { get; }
 
         /// <summary>
+        /// Gets the ILicencesoffsitestoragelocations.
+        /// </summary>
+        ILicencesoffsitestoragelocations Licencesoffsitestoragelocations { get; }
+
+        /// <summary>
         /// Gets the ILicencesubcategories.
         /// </summary>
         ILicencesubcategories Licencesubcategories { get; }
@@ -591,6 +666,101 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILocalgovindigenousnationactivityparties.
         /// </summary>
         ILocalgovindigenousnationactivityparties Localgovindigenousnationactivityparties { get; }
+
+        /// <summary>
+        /// Gets the ILqrlicencetransferbpfs.
+        /// </summary>
+        ILqrlicencetransferbpfs Lqrlicencetransferbpfs { get; }
+
+        /// <summary>
+        /// Gets the ILqrlicencetransferbpfasyncoperations.
+        /// </summary>
+        ILqrlicencetransferbpfasyncoperations Lqrlicencetransferbpfasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the ILqrlicencetransferbpfbulkdeletefailures.
+        /// </summary>
+        ILqrlicencetransferbpfbulkdeletefailures Lqrlicencetransferbpfbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the ILqrlicencetransferbpfmailboxtrackingfolders.
+        /// </summary>
+        ILqrlicencetransferbpfmailboxtrackingfolders Lqrlicencetransferbpfmailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the ILqrlicencetransferbpfprincipalobjectattributeaccesses.
+        /// </summary>
+        ILqrlicencetransferbpfprincipalobjectattributeaccesses Lqrlicencetransferbpfprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the ILqrlicencetransferbpfprocesssession.
+        /// </summary>
+        ILqrlicencetransferbpfprocesssession Lqrlicencetransferbpfprocesssession { get; }
+
+        /// <summary>
+        /// Gets the ILqrlicencetransferbpfsyncerrors.
+        /// </summary>
+        ILqrlicencetransferbpfsyncerrors Lqrlicencetransferbpfsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the ILqrlicencetransferbpfworkflowlogs.
+        /// </summary>
+        ILqrlicencetransferbpfworkflowlogs Lqrlicencetransferbpfworkflowlogs { get; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationid.
+        /// </summary>
+        IBpfadoxioapplicationid Bpfadoxioapplicationid { get; }
+
+        /// <summary>
+        /// Gets the IOffsitestorages.
+        /// </summary>
+        IOffsitestorages Offsitestorages { get; }
+
+        /// <summary>
+        /// Gets the ILicenceid.
+        /// </summary>
+        ILicenceid Licenceid { get; }
+
+        /// <summary>
+        /// Gets the IOffsitestorageasyncoperations.
+        /// </summary>
+        IOffsitestorageasyncoperations Offsitestorageasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IOffsitestoragebulkdeletefailures.
+        /// </summary>
+        IOffsitestoragebulkdeletefailures Offsitestoragebulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IOffsitestorageduplicatebaserecord.
+        /// </summary>
+        IOffsitestorageduplicatebaserecord Offsitestorageduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IOffsitestorageduplicatematchingrecord.
+        /// </summary>
+        IOffsitestorageduplicatematchingrecord Offsitestorageduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IOffsitestoragemailboxtrackingfolders.
+        /// </summary>
+        IOffsitestoragemailboxtrackingfolders Offsitestoragemailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IOffsitestorageprincipalobjectattributeaccesses.
+        /// </summary>
+        IOffsitestorageprincipalobjectattributeaccesses Offsitestorageprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IOffsitestorageprocesssession.
+        /// </summary>
+        IOffsitestorageprocesssession Offsitestorageprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IOffsitestoragesyncerrors.
+        /// </summary>
+        IOffsitestoragesyncerrors Offsitestoragesyncerrors { get; }
 
         /// <summary>
         /// Gets the IPersonalhistorysummaries.
@@ -673,6 +843,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IPmuareasyncerrors Pmuareasyncerrors { get; }
 
         /// <summary>
+        /// Gets the IRegionalmanagerid.
+        /// </summary>
+        IRegionalmanagerid Regionalmanagerid { get; }
+
+        /// <summary>
         /// Gets the IPolicejurisdictions.
         /// </summary>
         IPolicejurisdictions Policejurisdictions { get; }
@@ -736,6 +911,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IRegions.
         /// </summary>
         IRegions Regions { get; }
+
+        /// <summary>
+        /// Gets the IRegionadoxioinspectorreportregion.
+        /// </summary>
+        IRegionadoxioinspectorreportregion Regionadoxioinspectorreportregion { get; }
 
         /// <summary>
         /// Gets the IRelatedparties.
@@ -818,6 +998,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxiohoursofservicesdefault Regardingobjectidadoxiohoursofservicesdefault { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioinspectorreport.
+        /// </summary>
+        IRegardingobjectidadoxioinspectorreport Regardingobjectidadoxioinspectorreport { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiolqrlicencetransferbpf.
+        /// </summary>
+        IRegardingobjectidadoxiolqrlicencetransferbpf Regardingobjectidadoxiolqrlicencetransferbpf { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiooffsitestorage.
+        /// </summary>
+        IRegardingobjectidadoxiooffsitestorage Regardingobjectidadoxiooffsitestorage { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxiopmuarea.
         /// </summary>
         IRegardingobjectidadoxiopmuarea Regardingobjectidadoxiopmuarea { get; }
@@ -836,6 +1031,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxiohoursofservicesdefault.
         /// </summary>
         IBusinessunitadoxiohoursofservicesdefault Businessunitadoxiohoursofservicesdefault { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioinspectorreport.
+        /// </summary>
+        IBusinessunitadoxioinspectorreport Businessunitadoxioinspectorreport { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiooffsitestorage.
+        /// </summary>
+        IBusinessunitadoxiooffsitestorage Businessunitadoxiooffsitestorage { get; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxiopmuarea.
@@ -858,6 +1063,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IBaserecordidadoxiohoursofservice Baserecordidadoxiohoursofservice { get; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioinspectorreport.
+        /// </summary>
+        IBaserecordidadoxioinspectorreport Baserecordidadoxioinspectorreport { get; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxiooffsitestorage.
+        /// </summary>
+        IBaserecordidadoxiooffsitestorage Baserecordidadoxiooffsitestorage { get; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxiopmuarea.
         /// </summary>
         IBaserecordidadoxiopmuarea Baserecordidadoxiopmuarea { get; }
@@ -866,6 +1081,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IDuplicaterecordidadoxiohoursofservice.
         /// </summary>
         IDuplicaterecordidadoxiohoursofservice Duplicaterecordidadoxiohoursofservice { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioinspectorreport.
+        /// </summary>
+        IDuplicaterecordidadoxioinspectorreport Duplicaterecordidadoxioinspectorreport { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxiooffsitestorage.
+        /// </summary>
+        IDuplicaterecordidadoxiooffsitestorage Duplicaterecordidadoxiooffsitestorage { get; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxiopmuarea.
@@ -903,6 +1128,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILists Lists { get; }
 
         /// <summary>
+        /// Gets the IOrganizationadoxiolqrlicencetransferbpf.
+        /// </summary>
+        IOrganizationadoxiolqrlicencetransferbpf Organizationadoxiolqrlicencetransferbpf { get; }
+
+        /// <summary>
         /// Gets the IObjectidadoxiohoursofservice.
         /// </summary>
         IObjectidadoxiohoursofservice Objectidadoxiohoursofservice { get; }
@@ -913,6 +1143,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         IObjectidadoxiohoursofservicesdefault Objectidadoxiohoursofservicesdefault { get; }
 
         /// <summary>
+        /// Gets the IObjectidadoxioinspectorreport.
+        /// </summary>
+        IObjectidadoxioinspectorreport Objectidadoxioinspectorreport { get; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiolqrlicencetransferbpf.
+        /// </summary>
+        IObjectidadoxiolqrlicencetransferbpf Objectidadoxiolqrlicencetransferbpf { get; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiooffsitestorage.
+        /// </summary>
+        IObjectidadoxiooffsitestorage Objectidadoxiooffsitestorage { get; }
+
+        /// <summary>
         /// Gets the IObjectidadoxiopmuarea.
         /// </summary>
         IObjectidadoxiopmuarea Objectidadoxiopmuarea { get; }
@@ -921,6 +1166,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IObjectidadoxioproratedlicencefeeschedule.
         /// </summary>
         IObjectidadoxioproratedlicencefeeschedule Objectidadoxioproratedlicencefeeschedule { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiolqrlicencetransferbpfactivestageid.
+        /// </summary>
+        ILkadoxiolqrlicencetransferbpfactivestageid Lkadoxiolqrlicencetransferbpfactivestageid { get; }
 
         /// <summary>
         /// Gets the IProductadoxioapplicationtypefylicencefeeproduct.
@@ -963,6 +1213,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IMfginspectorpmuareas Mfginspectorpmuareas { get; }
 
         /// <summary>
+        /// Gets the IRegionalmanagerpmuareas.
+        /// </summary>
+        IRegionalmanagerpmuareas Regionalmanagerpmuareas { get; }
+
+        /// <summary>
+        /// Gets the ISystemuseradoxioinspectorreportinspector.
+        /// </summary>
+        ISystemuseradoxioinspectorreportinspector Systemuseradoxioinspectorreportinspector { get; }
+
+        /// <summary>
         /// Gets the ILkadoxiohoursofservicecreatedby.
         /// </summary>
         ILkadoxiohoursofservicecreatedby Lkadoxiohoursofservicecreatedby { get; }
@@ -1001,6 +1261,66 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILkadoxiohoursofservicesdefaultmodifiedonbehalfby.
         /// </summary>
         ILkadoxiohoursofservicesdefaultmodifiedonbehalfby Lkadoxiohoursofservicesdefaultmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioinspectorreportcreatedby.
+        /// </summary>
+        ILkadoxioinspectorreportcreatedby Lkadoxioinspectorreportcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioinspectorreportcreatedonbehalfby.
+        /// </summary>
+        ILkadoxioinspectorreportcreatedonbehalfby Lkadoxioinspectorreportcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioinspectorreportmodifiedby.
+        /// </summary>
+        ILkadoxioinspectorreportmodifiedby Lkadoxioinspectorreportmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioinspectorreportmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioinspectorreportmodifiedonbehalfby Lkadoxioinspectorreportmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiolqrlicencetransferbpfcreatedby.
+        /// </summary>
+        ILkadoxiolqrlicencetransferbpfcreatedby Lkadoxiolqrlicencetransferbpfcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiolqrlicencetransferbpfcreatedonbehalfby.
+        /// </summary>
+        ILkadoxiolqrlicencetransferbpfcreatedonbehalfby Lkadoxiolqrlicencetransferbpfcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiolqrlicencetransferbpfmodifiedby.
+        /// </summary>
+        ILkadoxiolqrlicencetransferbpfmodifiedby Lkadoxiolqrlicencetransferbpfmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiolqrlicencetransferbpfmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxiolqrlicencetransferbpfmodifiedonbehalfby Lkadoxiolqrlicencetransferbpfmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiooffsitestoragecreatedby.
+        /// </summary>
+        ILkadoxiooffsitestoragecreatedby Lkadoxiooffsitestoragecreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiooffsitestoragecreatedonbehalfby.
+        /// </summary>
+        ILkadoxiooffsitestoragecreatedonbehalfby Lkadoxiooffsitestoragecreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiooffsitestoragemodifiedby.
+        /// </summary>
+        ILkadoxiooffsitestoragemodifiedby Lkadoxiooffsitestoragemodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiooffsitestoragemodifiedonbehalfby.
+        /// </summary>
+        ILkadoxiooffsitestoragemodifiedonbehalfby Lkadoxiooffsitestoragemodifiedonbehalfby { get; }
 
         /// <summary>
         /// Gets the ILkadoxiopmuareacreatedby.
@@ -1053,6 +1373,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IUseradoxiohoursofservicesdefault Useradoxiohoursofservicesdefault { get; }
 
         /// <summary>
+        /// Gets the IUseradoxioinspectorreport.
+        /// </summary>
+        IUseradoxioinspectorreport Useradoxioinspectorreport { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxiooffsitestorage.
+        /// </summary>
+        IUseradoxiooffsitestorage Useradoxiooffsitestorage { get; }
+
+        /// <summary>
         /// Gets the IUseradoxiopmuarea.
         /// </summary>
         IUseradoxiopmuarea Useradoxiopmuarea { get; }
@@ -1073,6 +1403,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         ITeamadoxiohoursofservicesdefault Teamadoxiohoursofservicesdefault { get; }
 
         /// <summary>
+        /// Gets the ITeamadoxioinspectorreport.
+        /// </summary>
+        ITeamadoxioinspectorreport Teamadoxioinspectorreport { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiooffsitestorage.
+        /// </summary>
+        ITeamadoxiooffsitestorage Teamadoxiooffsitestorage { get; }
+
+        /// <summary>
         /// Gets the ITeamadoxiopmuarea.
         /// </summary>
         ITeamadoxiopmuarea Teamadoxiopmuarea { get; }
@@ -1083,9 +1423,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         ITeamadoxioproratedlicencefeeschedule Teamadoxioproratedlicencefeeschedule { get; }
 
         /// <summary>
+        /// Gets the IAsyncoperationidadoxiolqrlicencetransferbpf.
+        /// </summary>
+        IAsyncoperationidadoxiolqrlicencetransferbpf Asyncoperationidadoxiolqrlicencetransferbpf { get; }
+
+        /// <summary>
         /// Gets the IWorkflows.
         /// </summary>
         IWorkflows Workflows { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiolqrlicencetransferbpfprocessid.
+        /// </summary>
+        ILkadoxiolqrlicencetransferbpfprocessid Lkadoxiolqrlicencetransferbpfprocessid { get; }
 
     }
 }

@@ -35,11 +35,11 @@
         </h3>
         <section *ngIf="htmlContent?.beforeStarting" class="padded-section content-bottom">
           <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
-        
+
           <p
             *ngIf="application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation">
             <strong>
-        
+
               Prior to payment, your application will be submitted to your local government/Indigenous Nation for their
               <span *ngIf="application?.applicationType.isShowLGINApproval">comment and assessment</span>
               <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">confirmation of zoning</span>.
@@ -49,9 +49,9 @@
               their policy <span *ngIf="form.get('indigenousNation').value.websiteUrl">(<a
                   [href]="form.get('indigenousNation').value.websiteUrl"
                   target="_blank">{{this.form.get('indigenousNation').value.websiteUrl}}</a>)</span>
-              to ensure your successful submission.        
+              to ensure your successful submission.
             </strong></p>
-        
+
         </section>
 
         <!-- Local Government advise -->
@@ -125,6 +125,10 @@
                 <p *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly">Establishment names are subject to approval by LCRB</p>
               </div>
 
+              <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
+                As part of the licence transfer, you can change the name of the establishment.
+                If the name of the establishment is changing, you must provide a drawing or a photo of your proposed establishment sign below.
+              </p>
 
             </div>
             <div formGroupName="assignedLicence"
@@ -300,7 +304,7 @@
             </div>
           </section>
         </section>
-        
+
 
             <!-- Local Government and Police Jurisdiction -->
             <section class="pt-3" *ngIf="showFormControl(application?.applicationType?.lGandPoliceSelectors)"
@@ -403,7 +407,7 @@
               <app-proof-of-zoning *ngIf="application" [application]="application" [formGroup]="form" #proofOfZoning>
               </app-proof-of-zoning>
               <hr>
-      
+
               <section *ngIf="application?.applicationType?.hasALRQuestion">
                 <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
                   [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status"
@@ -473,7 +477,7 @@
             </section>
             <!-- Business Plan for Manufacturers-->
 
-            <section *ngIf="application && form && application?.applicationType?.name === 'Manufacturer'">              
+            <section *ngIf="application && form && application?.applicationType?.name === 'Manufacturer'">
               <app-business-plan *ngIf="application" [application]="application" [form]="form">
               </app-business-plan>
             </section>
@@ -522,7 +526,7 @@
                               [id]="formField.datafieldname"></textarea>
                           </app-field>
                         </div>
-            
+
                         <!-- date time controls-->
                         <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.name"
                           [required]="formField.required" [errorMessage]="'This field is required.'">
@@ -531,7 +535,7 @@
                             readonly class="form-control" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
                           <mat-datepicker #picker></mat-datepicker>
                         </app-field>
-            
+
                         <!-- pick list-->
                         <div *ngIf="formField.controltype == 'PicklistControl'" style="padding-left: 10px;">
                           <app-field [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'" [valid]="isValidOrNotTouched(formField.datafieldname)" >
@@ -573,9 +577,9 @@
                           </app-field>
 
 </div>
-            
+
                   </div>
-            
+
                   </div>
                 </div>
               </div>
@@ -1798,7 +1802,7 @@
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
             <section class="ngtest-preamble-content">
               <h3>LG/IN Review Complete</h3>
-              Your application has been reviewed by your local government/Indigenous Nation and they have 
+              Your application has been reviewed by your local government/Indigenous Nation and they have
               <span *ngIf="application?.applicationType.isShowLGINApproval">
                   <span *ngIf="this.application.lGApprovalDecision !== 'OptOut'">accepted it for submission.</span>
                   <span *ngIf="this.application.lGApprovalDecision === 'OptOut'">decided to Opt-Out of the community assessment process. In their place, LCRB will complete the site community assessment.</span>
@@ -1818,7 +1822,7 @@
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
             <section class="ngtest-preamble-content">
               <h3>LG/IN Review Complete </h3>
-              Your application has been reviewed by your local government/Indigenous Nation and they have 
+              Your application has been reviewed by your local government/Indigenous Nation and they have
               <span *ngIf="application?.applicationType.isShowLGINApproval"><strong>rejected</strong> it.</span>
               <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">specified that zoning <strong>does not</strong> permit a {{application?.applicationType?.name}}.</span>
               You may contact the individual listed above for more information. If you intend to revise your application, you must submit a new one.
@@ -1842,18 +1846,18 @@
               <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
 
-        <!-- NEXT STEP BUTTONS               
+        <!-- NEXT STEP BUTTONS
                       LG Approval Required -- > Submit to LG For Approval
-        
-                      No LG Approvals Required 
+
+                      No LG Approvals Required
                         No Security Screening Required -- > Submit & Pay
                         Security Screening Required    -- > Proceed to Security Screening
                       LG Approved
                         No Security Screening Required -- > Submit & Pay
                         Security Screening Required    -- > Proceed to Security Screening
-                
+
                 -->
-        <!-- LG Approval Required --> 
+        <!-- LG Approval Required -->
         <button
           *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                                     && !lGHasApproved()
@@ -1863,9 +1867,9 @@
           <span><i class="fa fa-university mr-1"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
           <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
         </button>
-        
+
         <!-- NO LG Approval Required OR LG Already Approved -->
-   
+
         <!-- LG Approved OR NO LG Approvals Required -->
         <ng-container
           *ngIf="lGHasApproved() || !application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation">

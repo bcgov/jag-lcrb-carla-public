@@ -19,13 +19,13 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static partial class RegionExtensions
     {
             /// <summary>
-            /// Get adoxio_Region from adoxio_rmreviews
+            /// Get adoxio_Region from adoxio_inspectorreports
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioRmreviewid'>
-            /// key: adoxio_rmreviewid of adoxio_rmreview
+            /// <param name='adoxioInspectorreportid'>
+            /// key: adoxio_inspectorreportid of adoxio_inspectorreport
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -33,19 +33,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioRegion Get(this IRegion operations, string adoxioRmreviewid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioRegion Get(this IRegion operations, string adoxioInspectorreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(adoxioRmreviewid, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(adoxioInspectorreportid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get adoxio_Region from adoxio_rmreviews
+            /// Get adoxio_Region from adoxio_inspectorreports
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioRmreviewid'>
-            /// key: adoxio_rmreviewid of adoxio_rmreview
+            /// <param name='adoxioInspectorreportid'>
+            /// key: adoxio_inspectorreportid of adoxio_inspectorreport
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -56,22 +56,22 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioRegion> GetAsync(this IRegion operations, string adoxioRmreviewid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioRegion> GetAsync(this IRegion operations, string adoxioInspectorreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioRmreviewid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioInspectorreportid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Get adoxio_Region from adoxio_rmreviews
+            /// Get adoxio_Region from adoxio_inspectorreports
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioRmreviewid'>
-            /// key: adoxio_rmreviewid of adoxio_rmreview
+            /// <param name='adoxioInspectorreportid'>
+            /// key: adoxio_inspectorreportid of adoxio_inspectorreport
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -82,9 +82,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioRegion> GetWithHttpMessages(this IRegion operations, string adoxioRmreviewid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioRegion> GetWithHttpMessages(this IRegion operations, string adoxioInspectorreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(adoxioRmreviewid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(adoxioInspectorreportid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
