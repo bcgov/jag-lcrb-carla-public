@@ -4,12 +4,12 @@
   <div *ngIf="account?.businessType">
     <div [formGroup]="form" style="padding-left: 45px; position: relative">
       <!-- Title -->
-      <h1 class="ngtest-page-title">Transfer Your {{licence.licenseType}} Licence</h1>
+      <h1 class="ngtest-page-title">Transfer Your {{licence?.licenseType}} Licence</h1>
     </div>
 
     <div [formGroup]="form" class="application-wrapper">
       <!-- Preamble -->
-      <section class="ngtest-preamble-content" *ngIf="licence.licenseType === 'Cannabis Retail Store'">
+      <section class="ngtest-preamble-content" *ngIf="licence?.licenseType === 'Cannabis Retail Store'">
         <p>
           By submitting this application, the current cannabis retail store licence holder acknowledges that they
           <strong>must continue to hold valid interest</strong> (lease or land title) until the Transfer of Ownership
@@ -25,7 +25,7 @@
           closed until the transfer application has been approved.
         </p>
       </section>
-      <section class="ngtest-preamble-content" *ngIf="licence.licenseType !== 'Cannabis Retail Store'">
+      <section class="ngtest-preamble-content" *ngIf="licence?.licenseType !== 'Cannabis Retail Store'">
         <p>
           &nbsp;
         </p>
@@ -104,40 +104,30 @@
       <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
       <div class=content-bottom>
         <address class="padded-section" formGroupName="licenseeContact">
-          <app-field label="First Name" [required]="true" [valid]="isValidOrNotTouched('firstName')"
-            errorMessage="Please enter the business contact's first name">
-            <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-              formControlName="firstName" id="firstName">
+          <app-field label="Name"  [valid]="isValidOrNotTouched('licenseeContact.name')"
+            errorMessage="Please enter the contact's first name">
+            <input class="form-control" style="width: 350px;" type="text"
+              formControlName="name" id="name">
           </app-field>
 
-          <app-field label="Last Name" [required]="true" [valid]="isValidOrNotTouched('lastName')"
-            errorMessage="Please enter the business contact's last name">
-            <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-              formControlName="lastName" id="lastName">
-          </app-field>
-
-          <app-field label="Title/Position" [required]="false" [valid]="true">
-            <input class="form-control" style="width: 350px;" type="text" formControlName="role">
-          </app-field>
-
-          <app-field label="Phone Number (main)" [required]="true" [valid]="isValidOrNotTouched('phone')"
-            errorMessage="Please enter the business contact's 10-digit phone number">
+          <app-field label="Phone Number (main)" [valid]="isValidOrNotTouched('licenseeContact.phone')"
+            errorMessage="Please enter the contact's 10-digit phone number">
             <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
               (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="phone">
           </app-field>
 
-          <app-field label="Email" [required]="true" [valid]="isValidOrNotTouched('email')"
-            errorMessage="Please enter the business contact's email address">
-            <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
+          <app-field label="Email"  [valid]="isValidOrNotTouched('licenseeContact.email')"
+            errorMessage="Please enter the contact's email address">
+            <input class="form-control" style="width: 350px;" type="text" 
               formControlName="email" id="email"
-              (blur)="trimValue(form.get('email'))">
+              (blur)="trimValue(form.get('licenseeContact.email'))">
           </app-field>
         </address>
       </div>
 
       <h3 class="blue-header">IDENTIFY THE PROPOSED TRANSFEREE</h3>
       <section class="padded-section content-bottom">
-        <app-field label="Search for the business name you intend to transfer your {{licence.licenseType}} licence to:"
+        <app-field label="Search for the business name you intend to transfer your {{licence?.licenseType}} licence to:"
           errorMessage="Please select a value" [required]="true"
           [valid]="isValidOrNotTouched('proposedOwner.accountId')">
           <app-account-picker (valueSelected)="onAccountSelect($event)"></app-account-picker>
@@ -156,13 +146,13 @@
             <input type="checkbox" formControlName="transferConsent">
 
             <!-- for cannabis retail stores -->
-            <div style="padding-left: 10px;" *ngIf="licence.licenseType === 'Cannabis Retail Store'"> I agree to
-              transfer my {{licence.licenseType}} licence to the proposed transferee
+            <div style="padding-left: 10px;" *ngIf="licence?.licenseType === 'Cannabis Retail Store'"> I agree to
+              transfer my {{licence?.licenseType}} licence to the proposed transferee
               identified above.
             </div>
             <!-- for liquor licences -->
-            <div style="padding-left: 10px;" *ngIf="licence.licenseType !== 'Cannabis Retail Store'">
-              <p>I agree to transfer my {{licence.licenseType}} licence to the proposed transferee
+            <div style="padding-left: 10px;" *ngIf="licence?.licenseType !== 'Cannabis Retail Store'">
+              <p>I agree to transfer my {{licence?.licenseType}} licence to the proposed transferee
                 identified above. The proposed transferee will, if the general manager transfers the licence, be or
                 become the owner of the business in respect of
                 which the licence was issued.
@@ -202,7 +192,7 @@
             </div>
           </section>
         </app-field>
-        <p *ngIf="licence.licenseType === 'Cannabis Retail Store'">
+        <p *ngIf="licence?.licenseType === 'Cannabis Retail Store'">
           Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
           manager
           an application, or
@@ -210,7 +200,7 @@
           information, or
           fails to disclose a material fact”.
         </p>
-        <p *ngIf="licence.licenseType !== 'Cannabis Retail Store'">
+        <p *ngIf="licence?.licenseType !== 'Cannabis Retail Store'">
           Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to issue, renew,
           transfer or amend a licence if the applicant fails to disclose a material fact required by the application or
           makes a false or misleading statement in the application.”
