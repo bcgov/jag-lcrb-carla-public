@@ -811,7 +811,6 @@ namespace bdd_tests
                 uiConfirmButtonLeader.Click();
             }
 
-
             if (businessType == " local government")
             {
                 // upload a Selling It Right certificate
