@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 
 namespace Gov.Lclb.Cllb.Services.FileManager
 {
@@ -51,12 +52,12 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
             catch (SharePointRestException ex)
             {
-                _logger.LogError($"SharePointRestException creating sharepoint folder (status code: {ex.Response.StatusCode})");
+                Log.Error(ex, $"SharePointRestException creating sharepoint folder (status code: {ex.Response.StatusCode})");
                 folderExists = false;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                _logger.LogError($"Generic Exception creating sharepoint folder");
+                Log.Error(e, $"Generic Exception creating sharepoint folder");
                 folderExists = false;
             }
 
@@ -79,14 +80,14 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 {
                     result.ResultStatus = ResultStatus.Fail;
                     result.ErrorDetail = $"ERROR in creating folder {logFolder}";
-                    _logger.LogError(ex, result.ErrorDetail);
+                    Log.Error(ex, result.ErrorDetail);
 
                 }
                 catch (Exception e)
                 {
                     result.ResultStatus = ResultStatus.Fail;
                     result.ErrorDetail = $"ERROR in creating folder {logFolder}";
-                    _logger.LogError(e, result.ErrorDetail);
+                    Log.Error(e, result.ErrorDetail);
                 }
 
             }
@@ -122,7 +123,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
             catch (SharePointRestException spre)
             {
-                _logger.LogError(spre, "Error determining if file exists");
+                Log.Error(spre, "Error determining if file exists");
                 result.ResultStatus = result.ResultStatus = FileExistStatus.Error;
                 result.ErrorDetail = "Error determining if file exists";
             }
@@ -131,7 +132,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 result.ResultStatus =  FileExistStatus.Error;
                 result.ErrorDetail = $"Error determining if file exists";
-                _logger.LogError(e, result.ErrorDetail);
+                Log.Error(e, result.ErrorDetail);
             }
 
             return Task.FromResult(result);
@@ -233,14 +234,14 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"ERROR in deleting file {logUrl}";
-                _logger.LogError(ex, result.ErrorDetail);
+                Log.Error(ex, result.ErrorDetail);
 
             }
             catch (Exception e)
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"ERROR in deleting file {logUrl}";
-                _logger.LogError(e, result.ErrorDetail);
+                Log.Error(e, result.ErrorDetail);
             }
 
             return Task.FromResult(result);
@@ -272,14 +273,14 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"ERROR in downloading file {logUrl}";
-                _logger.LogError(ex, result.ErrorDetail);
+                Log.Error(ex, result.ErrorDetail);
 
             }
             catch (Exception e)
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"ERROR in downloading file {logUrl}";
-                _logger.LogError(e, result.ErrorDetail);
+                Log.Error(e, result.ErrorDetail);
             }
 
 
@@ -310,14 +311,14 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"ERROR in uploading file {logFileName} to folder {logFolderName}";
-                _logger.LogError(ex, result.ErrorDetail);
+                Log.Error(ex, result.ErrorDetail);
                 
             }
             catch (Exception e)
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"ERROR in uploading file {logFileName} to folder {logFolderName}";
-                _logger.LogError(e, result.ErrorDetail);
+                Log.Error(e, result.ErrorDetail);
             }
 
             return Task.FromResult(result);
@@ -358,7 +359,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
             catch (SharePointRestException spre)
             {
-                _logger.LogError(spre, "Error getting SharePoint File List");
+                Log.Error(spre, "Error getting SharePoint File List");
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = "Error getting SharePoint File List";
             }
