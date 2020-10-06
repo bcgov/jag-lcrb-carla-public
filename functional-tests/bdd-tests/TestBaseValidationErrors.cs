@@ -62,7 +62,6 @@ namespace bdd_tests
                     break;
                 case " public corporation org structure":
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more key personnel ')]")).Displayed);
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please upload the Corporation Notice of Articles ')]")).Displayed);
                     break;
                 case " society org structure":
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more  directors & officers ')]")).Displayed);
