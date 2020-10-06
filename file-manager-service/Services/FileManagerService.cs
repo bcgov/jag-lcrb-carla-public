@@ -139,7 +139,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
         private string GetDocumentListTitle(string entityName)
         {
-            var listTitle = "";
+            string listTitle;
             switch (entityName.ToLower())
             {
                 case "account":
@@ -173,7 +173,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             switch (entityName.ToLower())
             {
                 case "account":
-                    listTitle = SharePointFileManager.DefaultDocumentListTitle;
+                    listTitle = SharePointFileManager.DefaultDocumentUrlTitle;
                     break;
                 case "application":
                     listTitle = "adoxio_application";
