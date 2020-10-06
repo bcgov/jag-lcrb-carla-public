@@ -79,11 +79,12 @@ export enum ApplicationTypeNames {
   LGINClaim = 'LG/IN Claim',
   LiquorRelocation = 'Liquor Licence Relocation',
   LiquorRenewal = 'Liquor Licence Renewal',
+  LiquorTransferOfOwnership = 'Liquor Licence Transfer',
   WineStore = 'Wine Store',
-  RAS = "Rural Agency Store",
-  MFG = "Manufacturer",
-  UBV = "UBrew and UVin",
-  LoungeAreaEndorsment = "Lounge Area Endorsement",
-  SpecialEventAreaEndorsement = "Special Event Area Endorsement",
-  LRSStructuralChange = "LRS Structural Change"
+  RAS = 'Rural Agency Store',
+  MFG = 'Manufacturer',
+  UBV = 'UBrew and UVin',
+  LoungeAreaEndorsment = 'Lounge Area Endorsement',
+  SpecialEventAreaEndorsement = 'Special Event Area Endorsement',
+  LRSStructuralChange = 'LRS Structural Change'
 }
