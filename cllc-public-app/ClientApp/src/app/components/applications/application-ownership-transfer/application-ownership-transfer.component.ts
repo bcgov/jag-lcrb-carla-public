@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription, Observable, of, forkJoin } from 'rxjs';
+import { Subscription, Observable, of } from 'rxjs';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FeatureFlagService } from '@services/feature-flag.service';
@@ -14,8 +13,6 @@ import { takeWhile, filter, catchError, mergeMap, first } from 'rxjs/operators';
 import { Account, TransferAccount } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
-import { debug } from 'console';
-import { once } from 'process';
 
 const ValidationErrorMap = {
   "proposedOwner.accountId": 'Please select the proposed transferee',
@@ -173,7 +170,6 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
   isValid(): boolean {
     this.markControlsAsTouched(this.form);
     this.showValidationMessages = false;
-    let valid = true;
     this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
     return this.form.valid;
