@@ -7,8 +7,8 @@ Scenario: Winery On-Site Store Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
+    # And I review the organization structure for a private corporation
+    # And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -23,8 +23,8 @@ Scenario: Brewery On-Site Store Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
+    # And I review the organization structure for a private corporation
+    # And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -39,8 +39,8 @@ Scenario: Distillery On-Site Store Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
+    # And I review the organization structure for a private corporation
+    # And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -55,8 +55,8 @@ Scenario: Co-packer On-Site Store Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
+    # And I review the organization structure for a private corporation
+    # And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -71,8 +71,8 @@ Scenario: Validation for Manufacturer On-Site Store Endorsement
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
+    # And I review the organization structure for a private corporation
+    # And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
