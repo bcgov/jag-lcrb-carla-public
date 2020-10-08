@@ -11,6 +11,7 @@ Scenario: Private Corporation Winery Manufacturer Application
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
     And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the account is deleted
@@ -25,6 +26,7 @@ Scenario: Private Corporation Distillery Manufacturer Application
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
     And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the account is deleted
@@ -39,6 +41,7 @@ Scenario: Private Corporation Brewery Manufacturer Application
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
     And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the account is deleted
@@ -53,6 +56,7 @@ Scenario: Private Corporation Co-packer Manufacturer Application
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
     And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the account is deleted
