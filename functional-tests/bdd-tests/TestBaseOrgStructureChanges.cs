@@ -1327,13 +1327,13 @@ namespace bdd_tests
             uiShareBizConfirmButton3.Click();
 
             // upload a notice of articles document for business shareholder
-            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[30]");
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[36]");
 
             // upload a central securities register document for business shareholder
-            FileUpload("central_securities_register.pdf","(//input[@type='file'])[33]");
+            FileUpload("central_securities_register.pdf","(//input[@type='file'])[39]");
 
             // upload a special rights and restrictions document for business shareholder
-            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[36]");
+            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[42]");
 
             /********** Business Shareholder #3 - Leader **********/
 
