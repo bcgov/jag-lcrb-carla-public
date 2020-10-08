@@ -1204,13 +1204,13 @@ namespace bdd_tests
             uiShareBizConfirmButton2.Click();
 
             // upload a notice of articles document for business shareholder
-            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[21]");
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[27]");
 
             // upload a central securities register document for business shareholder
-            FileUpload("central_securities_register.pdf","(//input[@type='file'])[24]");
+            FileUpload("central_securities_register.pdf","(//input[@type='file'])[30]");
 
             // upload a special rights and restrictions document for business shareholder
-            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[27]");
+            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[33]");
 
             /********** Business Shareholder #2 - Leader **********/
 
