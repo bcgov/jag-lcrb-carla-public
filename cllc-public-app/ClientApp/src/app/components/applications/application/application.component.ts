@@ -898,10 +898,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.showValidationMessages = false;
     let valid = true;
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
+    const applicationTypeName = this.application && this.application.applicationType.name;
 
     this.markControlsAsTouched(this.form);
     // handle supporting documents for sole proprietor who submit marketing applications
-    let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietorship";
+    let marketing_soleprop = applicationTypeName === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietorship";
 
     if (this.proofOfZoning) {
       let zoningErrors = this.proofOfZoning.getValidationErrors();
@@ -930,7 +931,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one supporting document is required.');
     }
 
-    if (this.application.applicationType.signage === FormControlState.Show &&
+    const signageNotRequired = (
+       applicationTypeName === ApplicationTypeNames.LiquorLicenceTransfer
+       || applicationTypeName === ApplicationTypeNames.CRSTransferofOwnership
+    );
+
+    if (!signageNotRequired && this.application.applicationType.signage === FormControlState.Show &&
       ((this.uploadedSignageDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one signage document is required.');
@@ -964,10 +970,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
     }
-    if (this.application.applicationType.name === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
+    if (applicationTypeName === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
     }
+
     if (!this.isHoursOfSaleValid()) {
       this.validationMessages.push('Hours of sale are required');
     }
