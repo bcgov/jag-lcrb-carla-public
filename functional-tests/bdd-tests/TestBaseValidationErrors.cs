@@ -242,7 +242,9 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
                     break;
                 case " Catering third party application":
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select a value')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please select the business name to be a third party operator of your licence')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that you are authorized to submit the application.')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please affirm that all of the information provided for this application is true and complete.')]")).Displayed);
                     break;
                 case " licence renewal application":
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please answer question 1')]")).Displayed);
