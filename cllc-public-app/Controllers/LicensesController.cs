@@ -19,6 +19,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -33,9 +35,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IPdfService _pdfClient;
         private readonly IWebHostEnvironment _env;
         private readonly ILogger _logger;
+        private readonly FileManagerClient _fileManagerClient;
 
         public LicensesController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor,
-            IPdfService pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache, IWebHostEnvironment env)
+            IPdfService pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache, IWebHostEnvironment env, FileManagerClient fileClient)
         {
             _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
@@ -43,6 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _pdfClient = pdfClient;
             _logger = loggerFactory.CreateLogger(typeof(LicensesController));
             _env = env;
+            _fileManagerClient = fileClient;
         }
 
         /// GET licence by id
