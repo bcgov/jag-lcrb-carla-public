@@ -102,7 +102,11 @@ namespace Pdf
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthentication();
+            if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+            {
+                app.UseAuthentication();
+            }
+                
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>

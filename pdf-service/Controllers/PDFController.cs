@@ -7,6 +7,12 @@ using Microsoft.AspNetCore.NodeServices;
 using Microsoft.AspNetCore.Hosting;
 using Stubble.Core.Builders;
 using System.IO;
+using RazorLight.Extensions;
+
+using Wkhtmltopdf.NetCore;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using Wkhtmltopdf.NetCore.Options;
 
 namespace PDF.Controllers
 {
@@ -41,16 +47,23 @@ namespace PDF.Controllers
             if (System.IO.File.Exists(filename))
             {
                 string format = System.IO.File.ReadAllText(filename);
-                var templateData = stubble.Render(format, rawdata);
+                var html = stubble.Render(format, rawdata);
                 
 
-                JSONResponse result;
-                var options = new { format = "Letter", orientation = "portrait" };
+                RotativaConfiguration.RotativaPath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "rotativa");
+                RotativaConfiguration.IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+                var htmlToPdf = new HtmlAsPdf();
+                htmlToPdf.PageMargins = new Margins(5,5,5,20);
+                htmlToPdf.PageSize = Size.Letter;
+                
 
-                // execute the Node.js component
-                result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", templateData, rawdata, options);
 
-                return new FileContentResult(result.data, "application/pdf");
+                var pdf = htmlToPdf.GetPDF(html); 
+         
+                
+                
+
+                return new FileContentResult(pdf, "application/pdf");
             }
             else
             {
