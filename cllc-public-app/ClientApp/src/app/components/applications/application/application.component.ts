@@ -933,7 +933,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     const signageNotRequired = (
        applicationTypeName === ApplicationTypeNames.LiquorLicenceTransfer
-       || applicationTypeName === ApplicationTypeNames.CRSTransferofOwnership
     );
 
     if (!signageNotRequired && this.application.applicationType.signage === FormControlState.Show &&
