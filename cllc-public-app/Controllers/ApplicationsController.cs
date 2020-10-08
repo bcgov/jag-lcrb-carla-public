@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
+using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
@@ -688,46 +689,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return folderName;
         }
 
-        /// <summary>
-        ///     Get a document location by reference
-        /// </summary>
-        /// <param name="relativeUrl"></param>
-        /// <returns></returns>
-        private string GetDocumentLocationReferenceByRelativeUrl(string relativeUrl)
-        {
-            string result = null;
-            var sanitized = relativeUrl.Replace("'", "''");
-            // first see if one exists.
-            var locations =
-                _dynamicsClient.Sharepointdocumentlocations.Get(filter: "relativeurl eq '" + sanitized + "'");
-
-            var location = locations.Value.FirstOrDefault();
-
-            if (location == null)
-            {
-                var parentSite = _dynamicsClient.Sharepointsites.Get().Value.FirstOrDefault();
-                var parentSiteRef = _dynamicsClient.GetEntityURI("sharepointsites", parentSite?.Sharepointsiteid);
-                var newRecord = new MicrosoftDynamicsCRMsharepointdocumentlocation
-                {
-                    Relativeurl = relativeUrl,
-                    Name = "Application",
-                    ParentSiteODataBind = parentSiteRef
-                };
-                // create a new document location.
-                try
-                {
-                    location = _dynamicsClient.Sharepointdocumentlocations.Create(newRecord);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error creating document location");
-                }
-            }
-
-            if (location != null) result = location.Sharepointdocumentlocationid;
-
-            return result;
-        }
+        
 
 
         /// <summary>
@@ -917,81 +879,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(await adoxioApplication.ToCovidViewModel(_dynamicsClient, _cache, _logger));
         }
 
-        private async Task InitializeSharepoint(MicrosoftDynamicsCRMadoxioApplication adoxioApplication)
+        private async Task InitializeSharepoint(MicrosoftDynamicsCRMadoxioApplication application)
         {
             // create a SharePointDocumentLocation link
-            var folderName = GetApplicationFolderName(adoxioApplication);
-            var name = adoxioApplication.AdoxioJobnumber + " Files";
+            var folderName = application.GetDocumentFolderName();
+            //var name = application.AdoxioApplicationid + " Files";
 
             _fileManagerClient.CreateFolderIfNotExist(_logger, ApplicationDocumentUrlTitle, folderName);
 
-            // Create the SharePointDocumentLocation entity
-            var mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation
-            {
-                Relativeurl = folderName,
-                Description = "Application Files",
-                Name = name
-            };
-
-
-            try
-            {
-                mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                var mdcsdlId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
-                if (!string.IsNullOrEmpty(mdcsdlId))
-                {
-                    mdcsdl.Sharepointdocumentlocationid = mdcsdlId;
-                }
-                else
-                {
-                    _logger.LogError(httpOperationException, "Error creating SharepointDocumentLocation");
-                    mdcsdl = null;
-                }
-            }
-
-            if (mdcsdl != null)
-            {
-                // add a regardingobjectid.
-                var applicationReference =
-                    _dynamicsClient.GetEntityURI("adoxio_applications", adoxioApplication.AdoxioApplicationid);
-                var patchSharePointDocumentLocation = new MicrosoftDynamicsCRMsharepointdocumentlocation();
-                patchSharePointDocumentLocation.RegardingobjectidAdoxioApplicationODataBind = applicationReference;
-                // set the parent document library.
-                var parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeUrl("adoxio_application");
-                patchSharePointDocumentLocation.ParentsiteorlocationSharepointdocumentlocationODataBind =
-                    _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference);
-
-                try
-                {
-                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid,
-                        patchSharePointDocumentLocation);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException,
-                        "Error adding reference SharepointDocumentLocation to application");
-                }
-
-                var sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations",
-                    mdcsdl.Sharepointdocumentlocationid);
-                // update the sharePointLocationData.
-                var oDataId = new Odataid
-                {
-                    OdataidProperty = sharePointLocationData
-                };
-                try
-                {
-                    _dynamicsClient.Applications.AddReference(adoxioApplication.AdoxioApplicationid,
-                        "adoxio_application_SharePointDocumentLocations", oDataId);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error adding reference to SharepointDocumentLocation");
-                }
-            }
+            _dynamicsClient.CreateEntitySharePointDocumentLocation("application", application.AdoxioApplicationid, folderName, folderName);
         }
 
         /// <summary>

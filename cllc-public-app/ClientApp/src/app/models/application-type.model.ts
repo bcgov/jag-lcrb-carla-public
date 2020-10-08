@@ -79,6 +79,7 @@ export enum ApplicationTypeNames {
   LGINClaim = 'LG/IN Claim',
   LiquorRelocation = 'Liquor Licence Relocation',
   LiquorRenewal = 'Liquor Licence Renewal',
+  LiquorLicenceTransfer = 'Liquor Licence Transfer',
   WineStore = 'Wine Store',
   RAS = "Rural Agency Store",
   MFG = "Manufacturer",
@@ -86,5 +87,4 @@ export enum ApplicationTypeNames {
   LoungeAreaEndorsment = "Lounge Area Endorsement",
   SpecialEventAreaEndorsement = "Special Event Area Endorsement",
   LRSStructuralChange = "LRS Structural Change",
-  LiquorLicenceTransfer = 'Liquor Licence Transfer'
 }
