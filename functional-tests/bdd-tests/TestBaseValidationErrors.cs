@@ -271,12 +271,10 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
                     break;
                 case " special event area endorsement":
-                    // under review - see LCSD-3849
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Service Hours Wednesday Open is not valid')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please affirm that you are authorized to submit the application ')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please affirm that all of the information provided for this application is true and complete ')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one site plan document is required.')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
-                    // under review - see LCSD-3849
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Hours of sale are to be confirmed')]")).Displayed);
                     break;
                 case " lounge area endorsement":
                     // under review - see LCSD-3849
