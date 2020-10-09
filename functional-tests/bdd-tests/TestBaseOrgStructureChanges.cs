@@ -1204,13 +1204,13 @@ namespace bdd_tests
             uiShareBizConfirmButton2.Click();
 
             // upload a notice of articles document for business shareholder
-            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[21]");
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[27]");
 
             // upload a central securities register document for business shareholder
-            FileUpload("central_securities_register.pdf","(//input[@type='file'])[24]");
+            FileUpload("central_securities_register.pdf","(//input[@type='file'])[30]");
 
             // upload a special rights and restrictions document for business shareholder
-            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[27]");
+            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[33]");
 
             /********** Business Shareholder #2 - Leader **********/
 
@@ -1327,13 +1327,13 @@ namespace bdd_tests
             uiShareBizConfirmButton3.Click();
 
             // upload a notice of articles document for business shareholder
-            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[30]");
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[36]");
 
             // upload a central securities register document for business shareholder
-            FileUpload("central_securities_register.pdf","(//input[@type='file'])[33]");
+            FileUpload("central_securities_register.pdf","(//input[@type='file'])[39]");
 
             // upload a special rights and restrictions document for business shareholder
-            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[36]");
+            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[42]");
 
             /********** Business Shareholder #3 - Leader **********/
 
@@ -1450,13 +1450,13 @@ namespace bdd_tests
             uiShareBizConfirmButton4.Click();
 
             // upload a notice of articles document for business shareholder
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[39]");
+            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[45]");
 
             // upload a central securities register document for business shareholder
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[42]");
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[48]");
 
             // upload a special rights and restrictions document for business shareholder
-            FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[45]");
+            FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[51]");
 
             /********** Business Shareholder #4 - Leader **********/
 
@@ -1573,13 +1573,13 @@ namespace bdd_tests
             uiShareBizConfirmButton5.Click();
 
             // upload a notice of articles document for business shareholder
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[48]");
+            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[54]");
 
             // upload a central securities register document for business shareholder
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[51]");
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[57]");
 
             // upload a special rights and restrictions document for business shareholder
-            FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[54]");
+            FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[60]");
 
             /********** Business Shareholder #5 - Leader **********/
 
