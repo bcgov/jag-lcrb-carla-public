@@ -458,7 +458,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         }
                         else  // force the new user process if contact exists but account does not.
                         {
-                            userSettings.UserAuthenticated = false;
+                            userSettings.AuthenticatedUser = null;
                             userSettings.IsNewUserRegistration = true;
                         }
                     }
