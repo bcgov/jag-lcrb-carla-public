@@ -80,7 +80,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (account == null)
                 {
                     // Sometimes we receive the siteminderbusienssguid instead of the account id. 
-                    account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(accountId);
+                    account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(accountId);
                     if (account == null)
                     {
                         _logger.LogWarning(LoggingEvents.NotFound, "No Account Found.");
@@ -497,7 +497,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Statuscode = 1;
             }
             // this may be an existing account, as this service is used during the account confirmation process.
-            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(accountSiteminderGuid);
+            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(accountSiteminderGuid);
             _logger.LogDebug(LoggingEvents.HttpGet, "Account by siteminder business guid: " + JsonConvert.SerializeObject(account));
 
             if (account == null) // do a deep create.  create 3 objects at once.
