@@ -31,6 +31,7 @@ Scenario: Private Corporation Winery Market Event
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee for a Manufacturer application
     And I request a market event
     And the account is deleted
     Then I see the login page
@@ -49,6 +50,7 @@ Scenario: Private Corporation Distillery Market Event
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee for a Manufacturer application
     And I request a market event
     And the account is deleted
     Then I see the login page
@@ -67,6 +69,7 @@ Scenario: Private Corporation Brewery Market Event
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee for a Manufacturer application
     And I request a market event
     And the account is deleted
     Then I see the login page
@@ -85,6 +88,7 @@ Scenario: Private Corporation Co-packer Market Event
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee for a Manufacturer application
     And I request a market event
     And the account is deleted
     Then I see the login page
