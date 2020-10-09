@@ -298,9 +298,8 @@ namespace Gov.Lclb.Cllb.Public
             }));
             */
 
-            services.AddHttpClient<IDynamicsClient, DynamicsClient>()
-                .AddPolicyHandler(GetRetryPolicy())
-                .AddPolicyHandler(GetCircuitBreakerPolicy());
+            services.AddHttpClient<IDynamicsClient, DynamicsClient>();
+              
 
 
             // add BCeID Web Services
