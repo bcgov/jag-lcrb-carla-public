@@ -55662,6 +55662,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_isrequiresinspection": {
+          "type": "boolean"
+        },
         "adoxio_letterofintent": {
           "format": "int32",
           "type": "integer"
@@ -62424,7 +62427,7 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_issignstwodrinkmax": {
+        "adoxio_publicproper": {
           "type": "boolean"
         },
         "adoxio_issamplesizecompliant": {
@@ -62456,11 +62459,21 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_securitycompanypostal": {
+          "type": "string"
+        },
         "adoxio_securitycompanycontactname": {
           "type": "string"
         },
         "adoxio_businessnumber": {
           "type": "string"
+        },
+        "adoxio_publicorprivate": {
+          "type": "string"
+        },
+        "adoxio_specificlocation": {
+          "format": "int32",
+          "type": "integer"
         },
         "_owninguser_value": {
           "type": "string"
@@ -62473,6 +62486,9 @@
         },
         "adoxio_enddate": {
           "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_contactname": {
           "type": "string"
         },
         "adoxio_numberdailyeventattendees": {
@@ -62494,6 +62510,9 @@
         "createdon": {
           "format": "date-time",
           "type": "string"
+        },
+        "adoxio_private": {
+          "type": "boolean"
         },
         "adoxio_iseventloadavailable": {
           "type": "boolean"
@@ -62535,8 +62554,8 @@
         "adoxio_isminorsattending": {
           "type": "boolean"
         },
-        "adoxio_eventoccupantloadservicearea": {
-          "type": "string"
+        "adoxio_municipalsignificance": {
+          "type": "boolean"
         },
         "adoxio_additionlocationinfo": {
           "type": "string"
@@ -62558,7 +62577,7 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_securitycompanypostal": {
+        "adoxio_sirorses": {
           "type": "string"
         },
         "adoxio_liquorservicestartdate": {
@@ -62576,6 +62595,9 @@
           "type": "boolean"
         },
         "adoxio_city": {
+          "type": "string"
+        },
+        "adoxio_eventoccupantloadservicearea": {
           "type": "string"
         },
         "adoxio_safetysecuritychangesrequireddetails": {
@@ -62662,6 +62684,9 @@
         "adoxio_additionallocationinformation": {
           "type": "string"
         },
+        "adoxio_eventsignificance": {
+          "type": "boolean"
+        },
         "adoxio_dateoutcomed": {
           "format": "date-time",
           "type": "string"
@@ -62676,14 +62701,10 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_specificlocation": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_issignstwodrinkmax": {
+          "type": "boolean"
         },
         "adoxio_name": {
-          "type": "string"
-        },
-        "adoxio_contactname": {
           "type": "string"
         },
         "adoxio_isdisturbanceappendix2": {
@@ -62696,9 +62717,6 @@
           "type": "string"
         },
         "adoxio_entertainmentdescription": {
-          "type": "string"
-        },
-        "_createdonbehalfby_value": {
           "type": "string"
         },
         "adoxio_eventid": {
@@ -62755,6 +62773,9 @@
         "adoxio_foodservicedescription": {
           "type": "string"
         },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
         "adoxio_eventinspectorname": {
           "type": "string"
         },
@@ -62762,6 +62783,9 @@
           "type": "string"
         },
         "adoxio_isotherminorssafetydetails": {
+          "type": "string"
+        },
+        "adoxio_eventname": {
           "type": "string"
         },
         "_modifiedonbehalfby_value": {
@@ -62787,6 +62811,9 @@
         },
         "adoxio_province": {
           "type": "string"
+        },
+        "adoxio_publicproperty": {
+          "type": "boolean"
         },
         "adoxio_ismarketmanagedorcarried": {
           "type": "boolean"
@@ -70727,6 +70754,10 @@
         },
         "adoxio_name": {
           "type": "string"
+        },
+        "adoxio_reviewresult": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_rmreviewid": {
           "type": "string"
