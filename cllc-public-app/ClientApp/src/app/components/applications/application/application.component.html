@@ -123,12 +123,11 @@
                     formControlName="establishmentName" id="establishmentName">
                 </app-field>
                 <p *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly">Establishment names are subject to approval by LCRB</p>
+                <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.LiquorLicenceTransfer">
+                  As part of the licence transfer, you can change the name of the establishment.
+                  If the name of the establishment is changing, you must provide a drawing or a photo of your proposed establishment sign below.
+                </p>
               </div>
-
-              <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
-                As part of the licence transfer, you can change the name of the establishment.
-                If the name of the establishment is changing, you must provide a drawing or a photo of your proposed establishment sign below.
-              </p>
 
             </div>
             <div formGroupName="assignedLicence"
@@ -644,7 +643,20 @@
                     The signage submitted must show the name of the store and all words, images and symbols used in the
                     signage.
                   </p>
-
+    
+                  <section
+                    *ngIf="application?.applicationType?.name === ApplicationTypeNames.LiquorLicenceTransfer">
+                    <p>
+                      If the name of the establishment is changing, you must provide a drawing or a photo of your proposed establishment
+                      sign. Your name and signage must be approved by the Branch to ensure it is appropriate, accurately reflecting the
+                      nature of the business. Do not order signs until you have received this approval.
+                    </p>
+    
+                    <img src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage">
+                  </section>
+    
+                  
+    
                   <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                     Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis
                     (e.g. a

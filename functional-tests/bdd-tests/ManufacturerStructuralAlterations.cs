@@ -25,6 +25,8 @@ Scenario: Winery Structural Alterations to an Approved Lounge or Special Events 
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -41,6 +43,8 @@ Scenario: Brewery Structural Alterations to an Approved Lounge or Special Events
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -57,6 +61,8 @@ Scenario: Distillery Structural Alterations to an Approved Lounge or Special Eve
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -73,6 +79,8 @@ Scenario: Co-packer Structural Alterations to an Approved Lounge or Special Even
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -89,6 +97,8 @@ Scenario: Validation for Structural Alterations to an Approved Lounge or Special
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved

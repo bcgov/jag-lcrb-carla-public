@@ -10,6 +10,8 @@ Scenario: Winery Establishment Name Change Application
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -26,6 +28,8 @@ Scenario: Brewery Establishment Name Change Application
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -42,6 +46,8 @@ Scenario: Distillery Establishment Name Change Application
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -58,6 +64,8 @@ Scenario: Co-packer Establishment Name Change Application
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -74,6 +82,8 @@ Scenario: Validation for Manufacturer Establishment Name Change
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved

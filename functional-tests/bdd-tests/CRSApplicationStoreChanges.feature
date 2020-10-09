@@ -149,7 +149,7 @@ Scenario: Validation for CRS Store Relocation
     And the application is approved
     And I pay the licensing fee for Cannabis
     And I click on the Licences tab
-    And I click on the relocation application link
+    And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a store relocation application

@@ -85,7 +85,7 @@
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">Incorporation
                   Number</label>
                 <label *ngIf="getBusinessTypeName() == 'Society'" for="">B.C. Society
-                  Incorporation Number</label>                
+                  Incorporation Number</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" id="bcIncorporationNumber"
                   formControlName="bcIncorporationNumber">
@@ -260,7 +260,7 @@
             <app-field label="Phone Number" [required]="true"
               [valid]="form.get('primarycontact.telephone1').valid || !form.get('primarycontact.telephone1').touched"
               errorMessage="Please enter the business contact's 10-digit phone number">
-              <input class="form-control" style="width: 250px;" mask="(000) 000-0000"  
+              <input class="form-control" style="width: 250px;" mask="(000) 000-0000"
                 type="text" formControlName="telephone1">
             </app-field>
 

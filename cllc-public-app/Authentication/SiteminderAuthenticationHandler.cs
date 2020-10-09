@@ -441,12 +441,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                             await CreateContactDocumentLocation(_dynamicsClient, _fileManagerClient, contact);
                         }
 
-
-                        var account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
+                        // Note that this will search for active accounts
+                        var account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
                         if (account == null)
                         {
                             // try by other means.
-                            account = _dynamicsClient.GetAccountByLegalName(userSettings.BusinessLegalName);
+                            account = _dynamicsClient.GetActiveAccountByLegalName(userSettings.BusinessLegalName);
                         }
                         if (account != null && account.Accountid != null)
                         {

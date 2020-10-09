@@ -401,7 +401,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="system"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static MicrosoftDynamicsCRMaccount GetAccountByLegalName(this IDynamicsClient system, string legalName)
+        public static MicrosoftDynamicsCRMaccount GetActiveAccountByLegalName(this IDynamicsClient system, string legalName)
         {
             // ensure that the legal name is safe for a query.
             legalName.Replace("'", "''");
@@ -409,7 +409,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMaccount result = null;
             try
             {
-                var accountResponse = system.Accounts.Get(filter: $"name eq '{legalName}'");
+                var accountResponse = system.Accounts.Get(filter: $"statecode eq 0 and name eq '{legalName}'");
                 if (accountResponse.Value != null && accountResponse.Value.Count == 1)
                 {
                     var firstAccount = accountResponse.Value.FirstOrDefault();
@@ -442,7 +442,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="system"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<MicrosoftDynamicsCRMaccount> GetAccountBySiteminderBusinessGuid(this IDynamicsClient system, string siteminderId)
+        public static async Task<MicrosoftDynamicsCRMaccount> GetActiveAccountBySiteminderBusinessGuid(this IDynamicsClient system, string siteminderId)
         {
             // ensure that the siteminderId does not have any dashes.
             string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
@@ -450,7 +450,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMaccount result = null;
             try
             {
-                var accountResponse = await system.Accounts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
+                var accountResponse = await system.Accounts.GetAsync(filter: "statecode eq 0 and adoxio_externalid eq '" + sanitizedSiteminderId + "'");
                 result = accountResponse.Value.FirstOrDefault();
             }
             catch (Exception)
