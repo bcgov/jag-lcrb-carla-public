@@ -298,9 +298,8 @@ namespace Gov.Lclb.Cllb.Public
             }));
             */
 
-            services.AddHttpClient<IDynamicsClient, DynamicsClient>()
-                .AddPolicyHandler(GetRetryPolicy())
-                .AddPolicyHandler(GetCircuitBreakerPolicy());
+            services.AddHttpClient<IDynamicsClient, DynamicsClient>();
+              
 
 
             // add BCeID Web Services
@@ -565,7 +564,7 @@ namespace Gov.Lclb.Cllb.Public
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
                     .WriteTo.EventCollector(splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
+                       sourceType: "portal", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
                        messageHandler: new HttpClientHandler()
