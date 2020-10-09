@@ -266,6 +266,8 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please affirm that all of the information provided for this application is true and complete ')]")).Displayed);
                     break;
                 case " structural alterations request":
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please affirm that you are authorized to submit the application ')]")).Displayed);
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please affirm that all of the information provided for this application is true and complete ')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'At least one floor plan document is required.')]")).Displayed);
                     break;
                 case " special event area endorsement":
