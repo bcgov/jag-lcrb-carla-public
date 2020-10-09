@@ -640,5 +640,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool IsAlr { get; set; }
         public bool HasCoolerAccess { get; set; }
+
+        public string LocatedAboveOther { get; set; }
+
+
     }
 }
