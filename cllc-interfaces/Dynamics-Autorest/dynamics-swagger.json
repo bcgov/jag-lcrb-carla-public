@@ -53609,6 +53609,10 @@
         "_adoxio_licencefeeinvoice_value": {
           "type": "string"
         },
+        "adoxio_checklistlicenseechangesconfirmed": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_fitandproperstatus": {
           "format": "int32",
           "type": "integer"
@@ -53727,6 +53731,10 @@
         },
         "adoxio_isreadyproductnotvisibleoutside": {
           "type": "boolean"
+        },
+        "adoxio_checklistapplylicenseechanges": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_checklistletterofintentassessment": {
           "format": "int32",
@@ -54058,6 +54066,10 @@
         },
         "adoxio_pidlist": {
           "type": "string"
+        },
+        "adoxio_checklisthasopenapplication": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_checklistredlinedfloorplan": {
           "format": "int32",
