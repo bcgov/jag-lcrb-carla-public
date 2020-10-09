@@ -380,7 +380,7 @@ namespace Gov.Lclb.Cllb.Public.Extensions
             // set the parent document library.
             var parentDocumentLibraryReference = _dynamicsClient.GetDocumentLocationReferenceByRelativeURL("adoxio_worker");
 
-            var workerUri = _dynamicsClient.GetEntityURI("adoxio_worker", worker.AdoxioWorkerid);
+            var workerUri = _dynamicsClient.GetEntityURI("adoxio_workers", worker.AdoxioWorkerid);
             // now create a document location to link them.
 
             // Create the SharePointDocumentLocation entity
