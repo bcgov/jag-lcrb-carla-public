@@ -1,29 +1,26 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
+using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Utility;
 using Gov.Lclb.Cllb.Public.Utils;
+using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 using Newtonsoft.Json;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using Gov.Lclb.Cllb.Public.Utility;
-using System.Net;
-using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
-using System.Web;
-using Gov.Lclb.Cllb.Public.ViewModels;
-using CsvHelper.Configuration.Attributes;
-using System.Globalization;
+using User = Gov.Lclb.Cllb.Public.Models.User;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -35,13 +32,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IConfiguration _configuration;
 
         private readonly IDynamicsClient _dynamicsClient;
+        private readonly string _encryptionKey;
+        private readonly IWebHostEnvironment _env;
+        private readonly FileManagerClient _fileManagerClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
-        private readonly IWebHostEnvironment _env;
-        private readonly string _encryptionKey;
-        private readonly FileManagerClient _fileManagerClient;
 
-        public ContactController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IWebHostEnvironment env, FileManagerClient fileManagerClient)
+        public ContactController(IConfiguration configuration, IDynamicsClient dynamicsClient,
+            IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IWebHostEnvironment env,
+            FileManagerClient fileManagerClient)
         {
             _configuration = configuration;
             _dynamicsClient = dynamicsClient;
@@ -54,29 +53,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         /// <summary>
-        /// Get a specific legal entity
+        ///     Get a specific legal entity
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetContact(string id)
         {
-            ViewModels.Contact result = null;
+            Contact result = null;
 
             if (!string.IsNullOrEmpty(id))
             {
-                Guid contactId = Guid.Parse(id);
+                var contactId = Guid.Parse(id);
                 // query the Dynamics system to get the contact record.
-                MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactId);
+                var contact = await _dynamicsClient.GetContactById(contactId);
 
                 if (contact != null)
-                {
                     result = contact.ToViewModel();
-                }
                 else
-                {
                     return new NotFoundResult();
-                }
             }
             else
             {
@@ -88,25 +83,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         /// <summary>
-        /// Update a contact
+        ///     Update a contact
         /// </summary>
         /// <param name="item"></param>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateContact([FromBody] ViewModels.Contact item, string id)
+        public async Task<IActionResult> UpdateContact([FromBody] Contact item, string id)
         {
-            if (id != null && item.id != null && id != item.id)
-            {
-                return BadRequest();
-            }
-            bool accessGranted = false;
+            if (id != null && item.id != null && id != item.id) return BadRequest();
+            var accessGranted = false;
 
             // get the contact
-            Guid contactId = Guid.Parse(id);
+            var contactId = Guid.Parse(id);
 
-            MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactId);
-            
+            var contact = await _dynamicsClient.GetContactById(contactId);
+
             // Allow access if the current user is the contact - for scenarios such as a worker update.
             if (DynamicsExtensions.CurrentUserIsContact(id, _httpContextAccessor))
             {
@@ -117,18 +109,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // get the related account and determine if the current user is allowed access
                 if (!string.IsNullOrEmpty(contact._parentcustomeridValue))
                 {
-                    Guid accountId = Guid.Parse(contact._parentcustomeridValue);
-                    accessGranted = DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient);
+                    var accountId = Guid.Parse(contact._parentcustomeridValue);
+                    accessGranted =
+                        DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor,
+                            _dynamicsClient);
                 }
             }
-            
-            if (! accessGranted)
+
+            if (!accessGranted)
             {
                 _logger.LogError(LoggingEvents.BadRequest, $"Current user has NO access to the contact record. {id} ");
                 return NotFound();
             }
 
-            MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
+            var patchContact = new MicrosoftDynamicsCRMcontact();
             patchContact.CopyValues(item);
             try
             {
@@ -136,7 +130,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException,"Error updating contact");
+                _logger.LogError(httpOperationException, "Error updating contact");
             }
 
             contact = await _dynamicsClient.GetContactById(contactId);
@@ -145,30 +139,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         /// <summary>
-        /// Update a contact using PHS or CASS token
+        ///     Update a contact using PHS or CASS token
         /// </summary>
         /// <param name="item"></param>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("security-screening/{token}")]
         [AllowAnonymous]
-        public async Task<IActionResult> UpdateContactByToken([FromBody] ViewModels.Contact item, string token)
+        public async Task<IActionResult> UpdateContactByToken([FromBody] Contact item, string token)
         {
-            if (token == null || item == null)
-            {
-                return BadRequest();
-            }
-            
-            // get the contact
-            string contactId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
-            Guid contactGuid = Guid.Parse(contactId);
+            if (token == null || item == null) return BadRequest();
 
-            MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactGuid);
-            if (contact == null)
-            {
-                return new NotFoundResult();
-            }
-            MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
+            // get the contact
+            var contactId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
+            var contactGuid = Guid.Parse(contactId);
+
+            var contact = await _dynamicsClient.GetContactById(contactGuid);
+            if (contact == null) return new NotFoundResult();
+            var patchContact = new MicrosoftDynamicsCRMcontact();
             patchContact.CopyValues(item);
             try
             {
@@ -176,30 +164,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException,"Error updating contact");
+                _logger.LogError(httpOperationException, "Error updating contact");
             }
 
-            foreach (var alias in item.Aliases)
-            {
-                CreateAlias(alias, contactId);
-            }
+            foreach (var alias in item.Aliases) CreateAlias(alias, contactId);
 
             contact = await _dynamicsClient.GetContactById(contactGuid);
             return new JsonResult(contact.ToViewModel());
         }
 
-        private async Task<IActionResult> CreateAlias(ViewModels.Alias item, string contactId)
+        private async Task<IActionResult> CreateAlias(Alias item, string contactId)
         {
-            if (item == null || String.IsNullOrEmpty(contactId))
-            {
-                return BadRequest();
-            }
+            if (item == null || string.IsNullOrEmpty(contactId)) return BadRequest();
 
             // for association with current user
-            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+            var userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
 
-            MicrosoftDynamicsCRMadoxioAlias alias = new MicrosoftDynamicsCRMadoxioAlias();
+            var alias = new MicrosoftDynamicsCRMadoxioAlias();
             // copy received values to Dynamics Application
             alias.CopyValues(item);
             try
@@ -214,7 +196,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
 
-            MicrosoftDynamicsCRMadoxioAlias patchAlias = new MicrosoftDynamicsCRMadoxioAlias();
+            var patchAlias = new MicrosoftDynamicsCRMadoxioAlias();
 
             // set contact association
             try
@@ -234,20 +216,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Create a contact
+        ///     Create a contact
         /// </summary>
         /// <param name="viewModel"></param>
         /// <returns></returns>
-        [HttpPost()]
-        public async Task<IActionResult> CreateContact([FromBody] ViewModels.Contact item)
+        [HttpPost]
+        public async Task<IActionResult> CreateContact([FromBody] Contact item)
         {
-
             // get UserSettings from the session
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // first check to see that a contact exists.
-            string contactSiteminderGuid = userSettings.SiteMinderGuid;
+            var contactSiteminderGuid = userSettings.SiteMinderGuid;
             if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
             {
                 _logger.LogDebug(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
@@ -261,10 +242,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 userContact = _dynamicsClient.GetActiveContactByExternalId(contactSiteminderGuid);
-                if (userContact != null)
-                {
-                    throw new Exception("Contact already Exists");
-                }
+                if (userContact != null) throw new Exception("Contact already Exists");
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -273,15 +251,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // create a new contact.
-            MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
+            var contact = new MicrosoftDynamicsCRMcontact();
             contact.CopyValues(item);
 
 
             if (userSettings.IsNewUserRegistration)
-            {
                 // get additional information from the service card headers.
                 contact.CopyHeaderValues(_httpContextAccessor);
-            }
 
             contact.AdoxioExternalid = DynamicsExtensions.GetServiceCardID(contactSiteminderGuid);
             try
@@ -290,22 +266,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error creating contact. ");
+                _logger.LogError(httpOperationException, "Error creating contact. ");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unknown error creating contact.");
+                _logger.LogError(e, "Unknown error creating contact.");
             }
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
             {
-                userSettings.ContactId = contact.Contactid.ToString();
+                userSettings.ContactId = contact.Contactid;
 
                 // we can now authenticate.
                 if (userSettings.AuthenticatedUser == null)
                 {
-                    Models.User user = new Models.User();
+                    var user = new User();
                     user.Active = true;
                     user.ContactId = Guid.Parse(userSettings.ContactId);
                     user.UserType = userSettings.UserType;
@@ -315,7 +291,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 userSettings.IsNewUserRegistration = false;
 
-                string userSettingsString = JsonConvert.SerializeObject(userSettings);
+                var userSettingsString = JsonConvert.SerializeObject(userSettings);
                 _logger.LogDebug("userSettingsString --> " + userSettingsString);
 
                 // add the user to the session.
@@ -332,19 +308,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Create a contact
+        ///     Create a contact
         /// </summary>
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost("worker")]
-        public async Task<IActionResult> CreateWorkerContact([FromBody] ViewModels.Contact item)
+        public async Task<IActionResult> CreateWorkerContact([FromBody] Contact item)
         {
             // get UserSettings from the session
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // first check to see that we have the correct inputs.
-            string contactSiteminderGuid = userSettings.SiteMinderGuid;
+            var contactSiteminderGuid = userSettings.SiteMinderGuid;
             if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
             {
                 _logger.LogDebug(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
@@ -358,20 +334,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 userContact = _dynamicsClient.GetActiveContactByExternalId(contactSiteminderGuid);
-                if (userContact != null)
-                {
-                    throw new Exception("Contact already Exists");
-                }
+                if (userContact != null) throw new Exception("Contact already Exists");
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Error getting contact by Siteminder Guid.");                
+                _logger.LogError(httpOperationException, "Error getting contact by Siteminder Guid.");
                 throw new HttpOperationException("Error getting contact by Siteminder Guid");
             }
 
             // create a new contact.
-            MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
-            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker()
+            var contact = new MicrosoftDynamicsCRMcontact();
+            var worker = new MicrosoftDynamicsCRMadoxioWorker
             {
                 AdoxioFirstname = item.firstname,
                 AdoxioMiddlename = item.middlename,
@@ -392,14 +365,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             //Default the country to Canada
-            if (string.IsNullOrEmpty(contact.Address1Country))
-            {
-                contact.Address1Country = "Canada";
-            }
-            if (string.IsNullOrEmpty(contact.Address2Country))
-            {
-                contact.Address2Country = "Canada";
-            }
+            if (string.IsNullOrEmpty(contact.Address1Country)) contact.Address1Country = "Canada";
+            if (string.IsNullOrEmpty(contact.Address2Country)) contact.Address2Country = "Canada";
 
 
             contact.AdoxioExternalid = DynamicsExtensions.GetServiceCardID(contactSiteminderGuid);
@@ -414,7 +381,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException,"Error updating contact");
+                _logger.LogError(httpOperationException, "Error updating contact");
                 _logger.LogError(httpOperationException.Response.Content);
 
                 //fail
@@ -425,12 +392,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
             {
-                userSettings.ContactId = contact.Contactid.ToString();
+                userSettings.ContactId = contact.Contactid;
 
                 // we can now authenticate.
                 if (userSettings.AuthenticatedUser == null)
                 {
-                    Models.User user = new Models.User();
+                    var user = new User();
                     user.Active = true;
                     user.ContactId = Guid.Parse(userSettings.ContactId);
                     user.UserType = userSettings.UserType;
@@ -440,7 +407,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 userSettings.IsNewUserRegistration = false;
 
-                string userSettingsString = JsonConvert.SerializeObject(userSettings);
+                var userSettingsString = JsonConvert.SerializeObject(userSettings);
                 _logger.LogDebug("userSettingsString --> " + userSettingsString);
 
                 // add the user to the session.
@@ -460,110 +427,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task CreateSharepointDynamicsLink(MicrosoftDynamicsCRMadoxioWorker worker)
         {
             // create a SharePointDocumentLocation link
-            string folderName = worker.GetDocumentFolderName();
-            string name = worker.AdoxioWorkerid + " Files";
+            var folderName = worker.GetDocumentFolderName();
+            //var name = worker.AdoxioWorkerid + " Files";
 
             _fileManagerClient.CreateFolderIfNotExist(_logger, WorkerDocumentUrlTitle, folderName);
 
-            // Create the SharePointDocumentLocation entity
-            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
-            {
-                Relativeurl = folderName,
-                Description = "Worker Qualification",
-                Name = name
-            };
-
-
-            try
-            {
-                mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException,"Error creating SharepointDocumentLocation");
-                mdcsdl = null;
-            }
-            if (mdcsdl != null)
-            {
-                // add a regardingobjectid.
-                string workerReference = _dynamicsClient.GetEntityURI("adoxio_workers", worker.AdoxioWorkerid);
-                var patchSharePointDocumentLocation = new MicrosoftDynamicsCRMsharepointdocumentlocation();
-                patchSharePointDocumentLocation.RegardingobjectidWorkerApplicationODataBind = workerReference;
-                // set the parent document library.
-                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL(WorkerDocumentUrlTitle);
-                patchSharePointDocumentLocation.ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference);
-
-                try
-                {
-                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocation);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException,"Error adding reference SharepointDocumentLocation to application");
-                    throw httpOperationException;
-                }
-
-                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
-                // update the sharePointLocationData.
-                Odataid oDataId = new Odataid()
-                {
-                    OdataidProperty = sharePointLocationData
-                };
-                try
-                {
-                    _dynamicsClient.Workers.AddReference(worker.AdoxioWorkerid, "adoxio_worker_SharePointDocumentLocations", oDataId);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException,"Error adding reference to SharepointDocumentLocation");
-                    throw httpOperationException;
-                }
-            }
+            _dynamicsClient.CreateEntitySharePointDocumentLocation("worker", worker.AdoxioWorkerid, folderName, folderName);
         }
 
-
-        /// <summary>
-        /// Get a document location by reference
-        /// </summary>
-        /// <param name="relativeUrl"></param>
-        /// <returns></returns>
-        private string GetDocumentLocationReferenceByRelativeURL(string relativeUrl)
-        {
-            string result = null;
-            string sanitized = relativeUrl.Replace("'", "''");
-            // first see if one exists.
-            var locations = _dynamicsClient.Sharepointdocumentlocations.Get(filter: "relativeurl eq '" + sanitized + "'");
-            var location = locations.Value.FirstOrDefault();
-
-            if (location == null)
-            {
-                //get parent location 
-                var parentSite = _dynamicsClient.Sharepointsites.Get().Value.FirstOrDefault();
-                var parentSiteRef = _dynamicsClient.GetEntityURI("sharepointsites", parentSite.Sharepointsiteid);
-                MicrosoftDynamicsCRMsharepointdocumentlocation newRecord = new MicrosoftDynamicsCRMsharepointdocumentlocation()
-                {
-                    Relativeurl = relativeUrl,
-                    Name = "Worker Qualification",
-                    ParentSiteODataBind = parentSiteRef
-                };
-                // create a new document location.
-                try
-                {
-                    location = _dynamicsClient.Sharepointdocumentlocations.Create(newRecord);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException,"Error creating document location");
-                }
-            }
-
-            if (location != null)
-            {
-                result = location.Sharepointdocumentlocationid;
-            }
-
-            return result;
-        }
 
         [HttpGet("cass-link/{contactId}")]
         public JsonResult GetCASLinkForContactGuid(string contactId)
@@ -579,12 +450,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError("Details:");
                 _logger.LogError(ex.Message);
             }
+
             return new JsonResult(casLink);
         }
-        
+
         public static string GetCASSLink(string contactId, IConfiguration _configuration, string _encryptionKey)
         {
-            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/cannabis-associate-screening/";
+            var result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/cannabis-associate-screening/";
             result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, _encryptionKey));
             return result;
         }
@@ -601,12 +473,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(ex, "Error getting personal history link");
             }
+
             return new JsonResult(phsLink);
         }
 
         public static string GetPhsLink(string contactId, IConfiguration _configuration, string encryptionKey)
         {
-            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
+            var result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
             result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, encryptionKey));
             return result;
         }
@@ -615,10 +488,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetContactByToken(string code)
         {
-            string id = EncryptionUtility.DecryptStringHex(code, _encryptionKey);
+            var id = EncryptionUtility.DecryptStringHex(code, _encryptionKey);
             if (!string.IsNullOrEmpty(id))
             {
-                Guid contactId = Guid.Parse(id);
+                var contactId = Guid.Parse(id);
                 // query the Dynamics system to get the contact record.
                 var contact = await _dynamicsClient.GetContactById(contactId);
 
@@ -628,90 +501,81 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         Id = contact.Contactid,
                         token = code,
-                        shortName = (contact.Firstname.First().ToString() + " " + contact.Lastname),
-                        isComplete = (contact.AdoxioPhscomplete == (int)YesNoOptions.Yes)
+                        shortName = contact.Firstname.First() + " " + contact.Lastname,
+                        isComplete = contact.AdoxioPhscomplete == (int) YesNoOptions.Yes
                     };
                     return new JsonResult(result);
                 }
-                else
-                {
-                    return new NotFoundResult();
-                }
+
+                return new NotFoundResult();
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            return BadRequest();
         }
 
         [HttpGet("cass/{code}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetCASSContactByToken(string code)
         {
-            string id = EncryptionUtility.DecryptStringHex(code, _encryptionKey);
+            var id = EncryptionUtility.DecryptStringHex(code, _encryptionKey);
             if (!string.IsNullOrEmpty(id))
             {
                 MicrosoftDynamicsCRMcontact userContact = null;
                 try
                 {
-                    string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                    UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                    var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                    var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
                     userContact = await _dynamicsClient.GetContactById(userSettings.ContactId);
                 }
                 catch (ArgumentNullException)
                 {
                     // anonymous
                 }
-                
-                Guid contactId = Guid.Parse(id);
+
+                var contactId = Guid.Parse(id);
                 // query the Dynamics system to get the contact record.
                 var contact = await _dynamicsClient.GetContactById(contactId);
 
-                if (userContact == null) {
+                if (userContact == null)
                     return new JsonResult(new CASSPublicContact
                     {
                         Id = contact.Contactid,
                         token = code,
-                        shortName = (contact.Firstname.First().ToString() + " " + contact.Lastname),
+                        shortName = contact.Firstname.First() + " " + contact.Lastname,
                         IsWrongUser = false
                     });
-                }
 
                 if (contact != null
-                    && userContact.Firstname != null && contact.Firstname.StartsWith(userContact.Firstname.Substring(0, 1), true, CultureInfo.CurrentCulture)
+                    && userContact.Firstname != null &&
+                    contact.Firstname.StartsWith(userContact.Firstname.Substring(0, 1), true,
+                        CultureInfo.CurrentCulture)
                     && userContact.Lastname != null && userContact.Lastname.ToLower() == contact.Lastname.ToLower()
-                    && userContact.Birthdate != null && userContact.Birthdate.Value.Date.ToShortDateString() == contact.Birthdate.Value.Date.ToShortDateString()
+                    && userContact.Birthdate != null && userContact.Birthdate.Value.Date.ToShortDateString() ==
+                    contact.Birthdate.Value.Date.ToShortDateString()
                 )
-                {
                     return new JsonResult(new CASSPrivateContact
                     {
                         Id = contact.Contactid,
                         token = code,
                         shortName = contact.Firstname + " " + contact.Lastname,
                         dateOfBirth = contact.AdoxioDateofbirthshortdatestring,
-                        gender = ((Gender?)contact.AdoxioGendercode).ToString(),
+                        gender = ((Gender?) contact.AdoxioGendercode).ToString(),
                         streetAddress = contact.Address1Line1,
                         city = contact.Address1City,
                         province = contact.Address1Stateorprovince,
                         postalCode = contact.Address1Postalcode,
                         country = contact.Address1Country
                     });
-                }
-                else
+                return new JsonResult(new CASSPublicContact
                 {
-                    return new JsonResult(new CASSPublicContact
-                    {
-                        Id = contact.Contactid,
-                        token = code,
-                        shortName = (contact.Firstname.First().ToString() + " " + contact.Lastname),
-                        IsWrongUser = true
-                    });
-                }
+                    Id = contact.Contactid,
+                    token = code,
+                    shortName = contact.Firstname.First() + " " + contact.Lastname,
+                    IsWrongUser = true
+                });
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            return BadRequest();
         }
     }
 
@@ -722,7 +586,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public string shortName { get; set; }
     }
 
-    public class PHSContact : ScreeningContact 
+    public class PHSContact : ScreeningContact
     {
         public bool isComplete { get; set; }
     }
@@ -743,5 +607,4 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public string country { get; set; }
         public string email { get; set; }
     }
-
 }
