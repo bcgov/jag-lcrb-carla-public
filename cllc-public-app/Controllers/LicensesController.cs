@@ -1005,6 +1005,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     byte[] data = await _pdfClient.GetPdf(parameters, templateName);
+
+                    // _fileManagerClient.SaveGeneratedPdf(_logger, )
+
                     return File(data, "application/pdf", $"{adoxioLicense.AdoxioLicencenumber}.pdf");
                 }
                 catch (Exception e)

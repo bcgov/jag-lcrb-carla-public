@@ -6,11 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
-namespace Gov.Lclb.Cllb.Services.FileManager {
-  /// <summary>
-  /// The files service definition.
-  /// </summary>
-  public static partial class FileManager {
+namespace Gov.Lclb.Cllb.Services.FileManager
+{
+    /// <summary>
+    /// The files service definition.
+    /// </summary>
+    public static partial class FileManager
+    {
         public const string DefaultDocumentListTitle = "Account";
         public const string AccountDocumentUrlTitle = "account";
         public const string ApplicationDocumentListTitle = "Application";
@@ -19,12 +21,12 @@ namespace Gov.Lclb.Cllb.Services.FileManager {
         public const string WorkerDocumentListTitle = "Worker Qualification";
         public const string WorkerDocumentUrlTitle = "adoxio_worker";
 
-        public static void CreateFolderIfNotExist (this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string folderName)
+        public static void CreateFolderIfNotExist(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string folderName)
         {
             string logFolderName = WordSanitizer.Sanitize(folderName);
             try
             {
-                
+
                 var createFolderRequest = new CreateFolderRequest()
                 {
                     EntityName = entityName,
@@ -46,58 +48,102 @@ namespace Gov.Lclb.Cllb.Services.FileManager {
 
 
         public static List<Public.ViewModels.FileSystemItem> GetFileDetailsListInFolder(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName)
-        {            
-                List<Public.ViewModels.FileSystemItem> fileSystemItemVMList = new List<Public.ViewModels.FileSystemItem>();
+        {
+            List<Public.ViewModels.FileSystemItem> fileSystemItemVMList = new List<Public.ViewModels.FileSystemItem>();
 
 
-                try
+            try
+            {
+                // call the web service
+                var request = new FolderFilesRequest()
                 {
-                    // call the web service
-                    var request = new FolderFilesRequest()
-                    {
-                        DocumentType = "",
-                        EntityId = entityId,
-                        EntityName = entityName,
-                        FolderName = folderName
-                    };
+                    DocumentType = "",
+                    EntityId = entityId,
+                    EntityName = entityName,
+                    FolderName = folderName
+                };
 
-                    var result = _fileManagerClient.FolderFiles(request);
+                var result = _fileManagerClient.FolderFiles(request);
 
-                    if (result.ResultStatus == ResultStatus.Success)
+                if (result.ResultStatus == ResultStatus.Success)
+                {
+                    // convert the results to the view model.
+                    foreach (var fileDetails in result.Files)
                     {
-                        // convert the results to the view model.
-                        foreach (var fileDetails in result.Files)
-                        {
                         Public.ViewModels.FileSystemItem fileSystemItemVM = new Public.ViewModels.FileSystemItem()
-                            {
-                                // remove the document type text from file name
-                                name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2),
-                                // convert size from bytes (original) to KB
-                                size = fileDetails.Size,
-                                serverrelativeurl = fileDetails.ServerRelativeUrl,
-                                //timelastmodified = fileDetails.TimeLastModified.ToDateTime(),
-                                documenttype = fileDetails.DocumentType
-                            };
+                        {
+                            // remove the document type text from file name
+                            name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2),
+                            // convert size from bytes (original) to KB
+                            size = fileDetails.Size,
+                            serverrelativeurl = fileDetails.ServerRelativeUrl,
+                            //timelastmodified = fileDetails.TimeLastModified.ToDateTime(),
+                            documenttype = fileDetails.DocumentType
+                        };
 
-                            fileSystemItemVMList.Add(fileSystemItemVM);
-                        }
-
+                        fileSystemItemVMList.Add(fileSystemItemVM);
                     }
-                    else
-                    {
-                        _logger.LogError($"ERROR in getting folder files for entity {entityName}");
-                    }
-
-
 
                 }
-                catch (Exception e)
+                else
                 {
-                    _logger.LogError(e, "Error getting SharePoint File List");
+                    _logger.LogError($"ERROR in getting folder files for entity {entityName}");
                 }
 
-                return fileSystemItemVMList;
-                
+
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error getting SharePoint File List");
+            }
+
+            return fileSystemItemVMList;
+
         }
+
+        public static bool FileExistsByHash(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, string hash)
+        {
+            var exists = false;
+            try
+            {
+                // call the web service
+                var request = new FolderFilesRequest()
+                {
+                    DocumentType = "",
+                    EntityId = entityId,
+                    EntityName = entityName,
+                    FolderName = folderName
+                };
+
+                var result = _fileManagerClient.FolderFiles(request);
+
+                if (result.ResultStatus == ResultStatus.Success)
+                {
+                    exists = result.Files.Any(f => StripDocumentType(f.Name) == hash);
+                }
+                else
+                {
+                    _logger.LogError($"ERROR in getting folder files for entity {entityName}");
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error getting SharePoint File List");
+            }
+            return exists;
+        }
+
+        public static void SaveGeneratedPdf(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName)
+        {
+
+        }
+
+        private static string StripDocumentType(string fileName)
+        {
+            return fileName.Substring(fileName.IndexOf("__") + 2);
+        }
+
+        private static string ComputeHash()
     }
 }
