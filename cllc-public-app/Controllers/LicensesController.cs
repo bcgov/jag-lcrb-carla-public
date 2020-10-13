@@ -4,6 +4,7 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Gov.Lclb.Cllb.Public.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -1006,9 +1007,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     byte[] data = await _pdfClient.GetPdf(parameters, templateName);
 
-                    // _fileManagerClient.SaveGeneratedPdf(_logger, )
+                    // Save copy of generated licence PDF for auditing/logging purposes
+                    try
+                    {
+                        var entityName = "licence";
+                        var entityId = adoxioLicense.AdoxioLicencesid;
+                        var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+                        _fileManagerClient.UploadHashedPdf(_logger, entityName, entityId, folderName, data);
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error uploading PDF");
+                    }
 
                     return File(data, "application/pdf", $"{adoxioLicense.AdoxioLicencenumber}.pdf");
+
                 }
                 catch (Exception e)
                 {

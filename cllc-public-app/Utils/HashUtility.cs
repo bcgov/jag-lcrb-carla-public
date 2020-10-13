@@ -28,11 +28,9 @@ namespace Gov.Lclb.Cllb.Public.Utils
 
         private static string GetHash(HashAlgorithm hashAlgorithm, byte[] input)
         {
-            // Convert the input string to a byte array and compute the hash.
             byte[] data = hashAlgorithm.ComputeHash(input);
 
-            // Create a new Stringbuilder to collect the bytes
-            // and create a string.
+            // Create a new StringBuilder to collect the bytes and create a string.
             var sBuilder = new StringBuilder();
 
             // Loop through each byte of the hashed data
@@ -42,8 +40,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
                 sBuilder.Append(data[i].ToString("x2"));
             }
 
-            // Return the hexadecimal string.
             return sBuilder.ToString();
         }
-
     }
+}

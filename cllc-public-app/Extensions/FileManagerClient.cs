@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
+using Google.Protobuf;
 
 namespace Gov.Lclb.Cllb.Services.FileManager
 {
@@ -102,6 +103,43 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
         }
 
+        public static void UploadHashedPdf(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, byte[] data)
+        {
+            var hash = HashUtility.GetMD5(data);
+
+            // Abort early if PDF hasn't changed...
+            if (_fileManagerClient.FileExistsByHash(_logger, entityName, entityId, folderName, hash))
+            {
+                return;
+            }
+
+            // call the web service
+            var uploadRequest = new UploadFileRequest
+            {
+                ContentType = "application/pdf",
+                Data = ByteString.CopyFrom(data),
+                EntityName = entityName,
+                FileName = hash + ".pdf",
+                FolderName = folderName
+            };
+
+            var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
+
+            // Do not save full file names to the logs (for privacy)
+            var logFolderName = WordSanitizer.Sanitize(folderName);
+            var logFileName = WordSanitizer.Sanitize(hash);
+
+            if (uploadResult.ResultStatus == ResultStatus.Success)
+            {
+                _logger.LogInformation($"SUCCESS in uploading PDF file {logFileName} to folder {logFolderName}");
+            }
+            else
+            {
+                _logger.LogError($"ERROR in uploading PDF file {logFileName} to folder {logFolderName}");
+                throw new Exception($"ERROR in uploading PDF file {logFileName} to folder {logFolderName}");
+            }
+        }
+
         public static bool FileExistsByHash(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, string hash)
         {
             var exists = false;
@@ -120,7 +158,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                 if (result.ResultStatus == ResultStatus.Success)
                 {
-                    exists = result.Files.Any(f => StripDocumentType(f.Name) == hash);
+                    // TODO: deal with extension - make sure it matches
+                    exists = result.Files.Any(f => StripDocumentType(f.Name) == hash + ".pdf");
                 }
                 else
                 {
@@ -134,16 +173,10 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             return exists;
         }
 
-        public static void SaveGeneratedPdf(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName)
-        {
-
-        }
-
         private static string StripDocumentType(string fileName)
         {
             return fileName.Substring(fileName.IndexOf("__") + 2);
         }
 
-        private static string ComputeHash()
     }
 }

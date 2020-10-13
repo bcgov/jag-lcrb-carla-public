@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -274,7 +275,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError($"Unable to send Worker Qualification Letter for worker {workerId} - current user does not have access to worker");
                 return NotFound("No access to worker");
-            }            
+            }
 
             try
             {
@@ -317,8 +318,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 };
 
                 byte[] data = await _pdfClient.GetPdf(parameters, "worker_qualification_letter");
+
+                // Save copy of generated licence PDF for auditing/logging purposes
+                try
+                {
+                    var entityName = "worker";
+                    var entityId = adoxioWorker.AdoxioWorkerid;
+                    var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+                    _fileManagerClient.UploadHashedPdf(_logger, entityName, entityId, folderName, data);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error uploading PDF");
+                }
+
                 _logger.LogInformation($"Sending Worker Qualification Letter for worker {workerId}");
-                return File(data, "application/pdf","WorkerQualificationLetter.pdf");
+                return File(data, "application/pdf", "WorkerQualificationLetter.pdf");
             }
             catch (Exception e)
             {
