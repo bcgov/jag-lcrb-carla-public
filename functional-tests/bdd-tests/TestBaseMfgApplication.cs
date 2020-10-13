@@ -254,6 +254,8 @@ namespace bdd_tests
             // upload the valid interest document
             FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
 
+            // brewery - 21
+
             // enter the contact title
             NgWebElement uiContactTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
             uiContactTitle.SendKeys(contactTitle);
