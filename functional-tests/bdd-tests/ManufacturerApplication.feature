@@ -14,7 +14,7 @@ Scenario: Private Corporation Winery Manufacturer Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    # And the account is deleted
+    And the account is deleted
     Then I see the login page
 
 @e2e @privatecorporation @manufacturerapp @distillery
@@ -29,7 +29,7 @@ Scenario: Private Corporation Distillery Manufacturer Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    # And the account is deleted
+    And the account is deleted
     Then I see the login page
 
 @e2e @privatecorporation @manufacturerapp @brewery
@@ -44,7 +44,7 @@ Scenario: Private Corporation Brewery Manufacturer Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    # And the account is deleted
+    And the account is deleted
     Then I see the login page
 
 @e2e @privatecorporation @manufacturerapp @copacker
@@ -59,7 +59,7 @@ Scenario: Private Corporation Co-packer Manufacturer Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    # And the account is deleted
+    And the account is deleted
     Then I see the login page
 
 @e2e @privatecorporation @manufacturerapp @validation
