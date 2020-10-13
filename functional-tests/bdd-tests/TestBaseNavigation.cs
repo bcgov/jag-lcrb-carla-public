@@ -247,9 +247,9 @@ namespace bdd_tests
         [And(@"I do not complete the application correctly")]
         public void CompleteApplicationIncorrectly()
         {
-            ClickOnSubmitButton();
+            System.Threading.Thread.Sleep(5000);
 
-            //System.Threading.Thread.Sleep(5000);
+            ClickOnSubmitButton();
         }
 
 
