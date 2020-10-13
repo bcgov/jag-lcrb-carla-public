@@ -269,16 +269,16 @@ namespace bdd_tests
             NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-4[formcontrolname='willhaveValidInterest']"));
             uiFutureValidInterest.Click();
 
+            // upload the valid interest document
+
             if (manufacturerType == "winery")
             {
-                // upload the valid interest document
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
             }
 
             if (manufacturerType == "brewery")
             {
-                // upload the valid interest document
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[24]");
             }
                 
             // enter the contact title
