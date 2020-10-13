@@ -45,13 +45,14 @@ export class LicencesComponent extends FormBase implements OnInit {
 
   // note, in order for a licence type to show on the dashboard, they must be configured here:
   supportedLicenceTypes = [
-    "Catering", "Wine Store", "Cannabis Retail Store", "Marketing",
-    "Operated - Wine Store", "Operated - Catering",
-    "Transfer in Progress - Wine Store", "Transfer in Progress - Catering",
-    "Manufacturer", "Transfer in Progress - Manufacturer", "Operated - Manufacturer",
-    "Licensee Retail Store", "Transfer in Progress - Licensee Retail Store","Operated - Licensee Retail Store",
-    "UBrew and UVin", "Transfer in Progress - UBrew and UVin", "Operated - UBrew and UVin",
-    "Section 119 Authorization"
+    'Catering', 'Operated - Catering', 'Deemed - Catering', 'Transfer in Progress - Catering',
+    'Wine Store', 'Operated - Wine Store', 'Deemed - Wine Store', 'Transfer in Progress - Wine Store',
+    'Cannabis Retail Store', 
+    'Marketing',
+    'Manufacturer', 'Operated - Manufacturer', 'Deemed - Manufacturer', 'Transfer in Progress - Manufacturer',
+    'Licensee Retail Store', 'Transfer in Progress - Licensee Retail Store', 'Operated - Licensee Retail Store', 'Deemed - Licensee Retail Store',
+    'UBrew and UVin', 'Transfer in Progress - UBrew and UVin', 'Operated - UBrew and UVin', 'Deemed - UBrew and UVin',
+    'Section 119 Authorization'
   ];
 
   constructor(
@@ -74,17 +75,25 @@ export class LicencesComponent extends FormBase implements OnInit {
    * */
   private displayApplications() {
     this.busy =
-      forkJoin(this.applicationDataService.getAllCurrentApplications(),
+      forkJoin([this.applicationDataService.getAllCurrentApplications(),
         this.licenceDataService.getAllCurrentLicenses(),
-        this.licenceDataService.getAllOperatedLicenses()
+        this.licenceDataService.getAllOperatedLicenses(),
+        this.licenceDataService.getAllProposedLicenses()]
       ).pipe(takeWhile(() => this.componentActive))
-        .subscribe(([applications, licenses, operatedLicences]) => {
+        .subscribe(([applications, licenses, operatedLicences, proposedLicences = []]) => {
           this.applications = applications;
           operatedLicences.forEach(licence => {
             licence.isOperated = true;
             licence.licenceTypeName = 'Operated - ' + licence.licenceTypeName;
           });
-          const combinedLicences = [...licenses, ...operatedLicences];
+          proposedLicences.forEach(licence => {
+            licence.licenceTypeName = 'Deemed - ' + licence.licenceTypeName;
+          });
+          const combinedLicences = [
+            // do not show transfers if the corresponding application is 'deemed'
+            ...licenses.filter(lic => !(lic.licenceTypeName.includes('Transfer in Progress -') && lic.checklistConclusivelyDeem)), 
+            ...operatedLicences, 
+            ...proposedLicences.filter(lic => lic.checklistConclusivelyDeem)];
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
             licence.headerRowSpan = 1;
             this.addOrUpdateLicence(licence);

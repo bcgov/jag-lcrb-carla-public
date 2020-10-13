@@ -86,7 +86,7 @@ namespace bdd_tests
                 // click on Complete Application link
                 ClickOnLink(completeApplication);
 
-                ContinueToApplicationButton();
+                // ContinueToApplicationButton();
 
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Manufacturer Picnic Area Endorsement Application ')]")).Displayed);
 
