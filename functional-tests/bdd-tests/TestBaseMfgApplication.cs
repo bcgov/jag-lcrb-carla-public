@@ -271,7 +271,7 @@ namespace bdd_tests
 
             // upload the valid interest document
 
-            if (manufacturerType == "winery")
+            if ((manufacturerType == "winery") || (manufacturerType == "co-packer"))
             {
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
             }
