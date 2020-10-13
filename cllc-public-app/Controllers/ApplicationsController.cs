@@ -546,7 +546,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 filter += $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Approved}";
                 filter += $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Refused}";
                 filter += $" and statuscode ne {(int) AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
-
+        
                 if (applicationType != null)
                     filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
 
