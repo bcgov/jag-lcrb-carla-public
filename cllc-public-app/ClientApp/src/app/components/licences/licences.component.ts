@@ -89,7 +89,11 @@ export class LicencesComponent extends FormBase implements OnInit {
           proposedLicences.forEach(licence => {
             licence.licenceTypeName = 'Deemed - ' + licence.licenceTypeName;
           });
-          const combinedLicences = [...licenses, ...operatedLicences, ...proposedLicences];
+          const combinedLicences = [
+            // do not show transfers if the corresponding application is 'deemed'
+            ...licenses.filter(lic => !(lic.licenceTypeName.includes('Transfer in Progress -') && lic.checklistConclusivelyDeem)), 
+            ...operatedLicences, 
+            ...proposedLicences.filter(lic => lic.checklistConclusivelyDeem)];
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
             licence.headerRowSpan = 1;
             this.addOrUpdateLicence(licence);
