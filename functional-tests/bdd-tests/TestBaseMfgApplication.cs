@@ -270,17 +270,15 @@ namespace bdd_tests
             uiFutureValidInterest.Click();
 
             // upload the valid interest document
-
-            if ((manufacturerType == "winery") || (manufacturerType == "co-packer"))
-            {
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
-            }
-
             if (manufacturerType == "brewery")
             {
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[24]");
             }
-                
+            else 
+            {
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
+            }
+
             // enter the contact title
             NgWebElement uiContactTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
             uiContactTitle.SendKeys(contactTitle);
