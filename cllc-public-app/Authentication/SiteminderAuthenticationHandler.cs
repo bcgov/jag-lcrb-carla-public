@@ -456,6 +456,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                             // ensure that the given account has a documents folder.
                             await CreateAccountDocumentLocation(_dynamicsClient, _fileManagerClient, account);
                         }
+                        else  // force the new user process if contact exists but account does not.
+                        {
+                            userSettings.AuthenticatedUser = null;
+                            userSettings.IsNewUserRegistration = true;
+                        }
                     }
                 }
 
