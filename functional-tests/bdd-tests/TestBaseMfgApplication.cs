@@ -45,7 +45,25 @@ namespace bdd_tests
             string policeJurisdictionSaanich = "Saanich Police Department";
 
             // enter the establishment name
-            NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
+            NgWebElement uiEstabName = null;
+            // try up to 10 times to get an element.
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var names = ngDriver.FindElements(By.CssSelector("input[formcontrolname='establishmentName']"));
+                    if (names.Count > 0)
+                    {
+                        uiEstabName = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+
             uiEstabName.SendKeys(estName);
 
             // enter the establishment street address
@@ -252,7 +270,14 @@ namespace bdd_tests
             uiFutureValidInterest.Click();
 
             // upload the valid interest document
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
+            if (manufacturerType == "brewery")
+            {
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[24]");
+            }
+            else 
+            {
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
+            }
 
             // enter the contact title
             NgWebElement uiContactTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
