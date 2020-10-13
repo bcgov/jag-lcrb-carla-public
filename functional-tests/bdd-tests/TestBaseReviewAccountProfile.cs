@@ -27,20 +27,20 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
-            string bizNumber = "012345678";
+            string bizNumber = "123456789";
             string incorporationNumber = "BC1234567";
 
             string physStreetAddress1 = "645 Tyee Road";
-            string physStreetAddress2 = "West of Victoria";
+            string physStreetAddress2 = "West";
             string physCity = "Victoria";
             string physPostalCode = "V9A 6X5";
 
-            string mailStreet1 = "P.O. Box 123";
-            string mailStreet2 = "303 Prideaux St.";
-            string mailCity = "Victoria";
-            string mailProvince = "B.C.";
-            string mailPostalCode = "V9A 6X5";
-            string mailCountry = "Canada";
+            string mailStreet1 = "#22";
+            string mailStreet2 = "700 Bellevue Way NE";
+            string mailCity = "Bellevue";
+            string mailProvince = "WA";
+            string mailPostalCode = "98004";
+            string mailCountry = "United States";
 
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
@@ -140,19 +140,19 @@ namespace bdd_tests
             NgWebElement uiCorpContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='emailaddress1']"));
             uiCorpContactEmail.SendKeys(corpContactEmail);
 
-            if ((businessType == "n indigenous nation"))
+            if ((businessType == "n indigenous nation") || (businessType == " local government"))
             {
                 // select 'Yes' for connection to a federal producer
                 NgWebElement uiINConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='iNConnectionToFederalProducer']"));
                 uiINConnectionFederalProducer.Click();
 
                 // enter the name of the federal producer and details of the connection 
-                string INnameAndDetails = "Name and details of federal producer (automated test) for IN.";
+                string INnameAndDetails = "Name and details of federal producer (automated test) for IN/local government.";
                 NgWebElement uiINDetailsFederalProducer = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='iNConnectionToFederalProducerDetails']"));
                 uiINDetailsFederalProducer.SendKeys(INnameAndDetails);
             }
 
-            if ((businessType == " private corporation") || (businessType == " sole proprietorship"))
+            if ((businessType == " private corporation") || (businessType == " sole proprietorship") || (businessType == " university"))
             {
                 // select 'Yes' for corporation connection to federal producer 
                 NgWebElement uiCorpConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='corpConnectionFederalProducer']"));

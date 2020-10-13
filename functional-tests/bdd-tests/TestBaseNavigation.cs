@@ -247,9 +247,9 @@ namespace bdd_tests
         [And(@"I do not complete the application correctly")]
         public void CompleteApplicationIncorrectly()
         {
-            ClickOnSubmitButton();
+            System.Threading.Thread.Sleep(5000);
 
-            //System.Threading.Thread.Sleep(5000);
+            ClickOnSubmitButton();
         }
 
 
@@ -304,6 +304,35 @@ namespace bdd_tests
             // click on the Show Store as Open on Map checkbox
             NgWebElement uiMapCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox"));
             uiMapCheckbox.Click();
+        }
+
+
+        public void FileUpload(string fileName, string inputFile)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    // find the upload test files in the bdd-tests\upload_files folder
+                    var environment = Environment.CurrentDirectory;
+                    string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+                    string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+                    // upload the document
+                    string documentPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + fileName);
+                    NgWebElement uiUploadDocument = ngDriver.FindElement(By.XPath(inputFile));
+                    uiUploadDocument.SendKeys(documentPath);
+                    break;
+                }
+                catch (Exception e)
+                {
+                    if (e.ToString().Contains("OpenQA.Selenium.UnhandledAlertException : unexpected alert open: {Alert text : Failed to upload file}"))
+                    {
+                        IAlert alert = ngDriver.SwitchTo().Alert();
+                        alert.Accept();
+                    }
+                }
+            }
         }
     }
 }

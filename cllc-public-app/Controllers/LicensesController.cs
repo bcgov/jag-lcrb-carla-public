@@ -511,7 +511,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // set licence type relationship 
                 if (adoxioLicense.AdoxioLicenceType != null)
                 {
-                    
+
                     application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
                 }
 
@@ -646,8 +646,44 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<ApplicationLicenseSummary> adoxioLicences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
             List<ApplicationLicenseSummary> transferredLicences = _dynamicsClient.GetPaidLicensesOnTransfer(userSettings.AccountId);
             adoxioLicences.AddRange(transferredLicences);
+            adoxioLicences.ForEach(lic =>
+            {
+                lic.ChecklistConclusivelyDeem = isConclusivelyDeemed(lic);
+            });
+
 
             return adoxioLicences;
+        }
+
+        private bool isConclusivelyDeemed(ApplicationLicenseSummary lic)
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            var result = false;
+            var filter = $"_adoxio_applicant_value eq {userSettings.AccountId}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+            var applicationType = _dynamicsClient.GetApplicationTypeByName("Liquor Licence Transfer");
+            if (applicationType != null)
+            {
+                filter += $" and _adoxio_assignedlicence_value eq {lic.LicenseId}";
+                filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
+                var transferApp = _dynamicsClient.Applications.Get(filter: filter).Value.FirstOrDefault();
+                const int yes = 845280000;
+                if (transferApp?.AdoxioChecklistconclusivelydeem == yes)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
         }
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
@@ -660,6 +696,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get all third party operator licenses
             List<ApplicationLicenseSummary> adoxioLicenses = await GetThirdPartyOperatedLicencesForAccountAsync(userSettings.AccountId.ToString());
+            adoxioLicenses.ForEach(lic =>
+            {
+                lic.ChecklistConclusivelyDeem = isConclusivelyDeemed(lic);
+            });
 
             return new JsonResult(adoxioLicenses);
         }
@@ -674,7 +714,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get all proposed operator licenses
             List<ApplicationLicenseSummary> adoxioLicenses = await GetProposedOwnerLicencesForAccountAsync(userSettings.AccountId.ToString());
-
+            adoxioLicenses.ForEach(lic =>
+            {
+                lic.ChecklistConclusivelyDeem = isConclusivelyDeemed(lic);
+            });
             return new JsonResult(adoxioLicenses);
         }
 
@@ -794,7 +837,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var endorsementsText = "";
                 License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
-                
+
                 if (licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0)
                 {
                     foreach (ViewModels.Endorsement endorsement in licenceVM.Endorsements)
@@ -928,7 +971,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     var templateName = "cannabis_licence";
-                    
+
 
 
                     switch (adoxioLicense.AdoxioLicenceType.AdoxioName)

@@ -29,35 +29,20 @@ namespace bdd_tests
 
             if (businessType == " private corporation")
             {
-                // find the upload test files in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
                 // upload a notice of articles document
-                string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-                NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-                uiUploadSignage.SendKeys(noticeOfArticles);
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
 
                 // upload a central securities register document
-                string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
-                NgWebElement uiUploadCentralSecReg = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-                uiUploadCentralSecReg.SendKeys(centralSecuritiesRegister);
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[6]");
 
                 // upload a special rights and restrictions document
-                string specialRightsRestrictions = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "special_rights_restrictions.pdf");
-                NgWebElement uiUploadSpecialRightsRes = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
-                uiUploadSpecialRightsRes.SendKeys(specialRightsRestrictions);
+                FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[9]");
 
                 // upload a Selling It Right certificate
-                string sellingItRight = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "selling_it_right_certificate.pdf");
-                NgWebElement uiUploadSellingItRight = ngDriver.FindElement(By.XPath("(//input[@type='file'])[12]"));
-                uiUploadSellingItRight.SendKeys(sellingItRight);
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[12]");
 
                 // upload an additional supporting document
-                string additionalSupportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
-                NgWebElement uiUploadAdditionalSupportingDocument = ngDriver.FindElement(By.XPath("(//input[@type='file'])[14]"));
-                uiUploadAdditionalSupportingDocument.SendKeys(additionalSupportingDocument);
+                FileUpload("associates.pdf", "(//input[@type='file'])[14]");
 
                 /********** Leader #0 **********/
 
@@ -183,19 +168,13 @@ namespace bdd_tests
                 uiShareBizConfirmButton.Click();
 
                 // upload a notice of articles document for business shareholder #1 
-                string noticeOfArticlesBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-                NgWebElement uiUploadNoticeofArticlesBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
-                uiUploadNoticeofArticlesBiz.SendKeys(noticeOfArticlesBiz);
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[18]");
 
                 // upload a central securities register document for business shareholder #1 
-                string centralSecuritiesRegisterBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
-                NgWebElement uiUploadCentralSecRegBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[18]"));
-                uiUploadCentralSecRegBiz.SendKeys(centralSecuritiesRegisterBiz);
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[21]");
 
                 // upload a special rights and restrictions document for business shareholder #1 
-                string specialRightsRestrictionsBiz = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "special_rights_restrictions.pdf");
-                NgWebElement uiUploadSpecialRightsResBiz = ngDriver.FindElement(By.XPath("(//input[@type='file'])[21]"));
-                uiUploadSpecialRightsResBiz.SendKeys(specialRightsRestrictionsBiz);
+                FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[24]");
 
                 /********** Business Shareholder #1 - Leader #1 **********/
 
@@ -287,20 +266,11 @@ namespace bdd_tests
 
             if (businessType == " sole proprietorship")
             {
-                // find the upload test files in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
                 // upload a Selling It Right certificate
-                string sellingItRight = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "selling_it_right_certificate.pdf");
-                NgWebElement uiUploadSellingItRight = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-                uiUploadSellingItRight.SendKeys(sellingItRight);
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[3]");
 
                 // upload an additional supporting document
-                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-                NgWebElement uiUploadadditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-                uiUploadadditionalSupporting.SendKeys(additionalSupportingPath);
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[5]");
 
                 /********** Sole Proprietor > Leader #1 **********/
 
@@ -409,20 +379,11 @@ namespace bdd_tests
                 NgWebElement uiMemberNumber = ngDriver.FindElement(By.CssSelector("[formcontrolname='numberOfMembers']"));
                 uiMemberNumber.SendKeys(membershipNumber);
 
-                // find the upload test files in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
                 // upload a Selling It Right certificate
-                string sellingItRight = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "selling_it_right_certificate.pdf");
-                NgWebElement uiUploadSellingItRight = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-                uiUploadSellingItRight.SendKeys(sellingItRight);
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[3]");
 
                 // upload an additional supporting document
-                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-                NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-                uiUploadAdditionalSupporting.SendKeys(additionalSupportingPath);
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[5]");
 
                 // open the director #1 row 
                 NgWebElement uiOpenDirectorForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Director or Officer'][changetypesuffix='Leadership'] button"));
@@ -550,25 +511,14 @@ namespace bdd_tests
                 string leaderTitle = "Leader1TitlePubCorp";
                 string leaderEmail = "leader1@publiccorp.com";
 
-                // find the upload test file in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
                 // upload NOA form
-                string NOAPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-                NgWebElement uiUploadNOA = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-                uiUploadNOA.SendKeys(NOAPath);
+                FileUpload("signage.pdf", "(//input[@type='file'])[3]");
 
                 // upload a Selling It Right certificate
-                string sellingItRight = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "selling_it_right_certificate.pdf");
-                NgWebElement uiUploadSellingItRight = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-                uiUploadSellingItRight.SendKeys(sellingItRight);
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[6]");
 
                 // upload additional supporting document
-                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-                NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-                uiUploadAdditionalSupporting.SendKeys(additionalSupportingPath);
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
 
                 // open leader #1 form
                 NgWebElement uiOpenLeaderForm = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));
@@ -688,25 +638,14 @@ namespace bdd_tests
                 string partnerPercentage = "51";
                 string partnerEmail = "individual1@partner.com";
 
-                // find the upload test file in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
                 // upload the partnership agreement
-                string partnershipPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-                NgWebElement uiUploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-                uiUploadPartnershipAgreement.SendKeys(partnershipPath);
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
 
                 // upload a Selling It Right certificate
-                string sellingItRight = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "selling_it_right_certificate.pdf");
-                NgWebElement uiUploadSellingItRight = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-                uiUploadSellingItRight.SendKeys(sellingItRight);
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[6]");
 
                 // upload the additional supporting document
-                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-                NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-                uiUploadAdditionalSupporting.SendKeys(additionalSupportingPath);
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[8]");
 
                 // open partner row
                 NgWebElement uiPartnerRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] button"));
@@ -765,9 +704,7 @@ namespace bdd_tests
                 uiConfirmButton.Click();
 
                 // upload a second partnership agreement
-                string partnershipPath2 = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-                NgWebElement uiUploadPartnership2Agreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[9]"));
-                uiUploadPartnership2Agreement.SendKeys(partnershipPath2);
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[12]");
 
                 // open individual partner 2 row
                 NgWebElement uiOpenPartner2Row = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] button"));
@@ -809,48 +746,26 @@ namespace bdd_tests
 
             if (businessType == "n indigenous nation")
             {
-                // find the upload test file in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
                 // upload the associates document
-                string associatesPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
-                NgWebElement uiUploadAssociates = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-                uiUploadAssociates.SendKeys(associatesPath);
+                FileUpload("associates.pdf", "(//input[@type='file'])[2]");
 
                 // upload a Selling It Right certificate
-                string sellingItRight = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "selling_it_right_certificate.pdf");
-                NgWebElement uiUploadSellingItRight = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-                uiUploadSellingItRight.SendKeys(sellingItRight);
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[6]");
 
                 // upload the additional supporting document
-                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
-                NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-                uiUploadAdditionalSupporting.SendKeys(additionalSupportingPath);
+                FileUpload("associates.pdf", "(//input[@type='file'])[8]");
             }
 
             if (businessType == " university")
             {
-                // find the upload test file in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
                 // upload an official document
-                string officialDocumentPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
-                NgWebElement uiUploadOfficialDocument = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-                uiUploadOfficialDocument.SendKeys(officialDocumentPath);
+                FileUpload("associates.pdf", "(//input[@type='file'])[3]");
 
                 // upload a Selling It Right certificate
-                string sellingItRight = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "selling_it_right_certificate.pdf");
-                NgWebElement uiUploadSellingItRight = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-                uiUploadSellingItRight.SendKeys(sellingItRight);
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[6]");
 
                 // upload the additional supporting document
-                string additionalSupportingPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "associates.pdf");
-                NgWebElement uiUploadAdditionalSupporting = ngDriver.FindElement(By.XPath("(//input[@type='file'])[8]"));
-                uiUploadAdditionalSupporting.SendKeys(additionalSupportingPath);
+                FileUpload("associates.pdf", "(//input[@type='file'])[8]");
 
                 /********** Leader #0 **********/
 
@@ -894,6 +809,15 @@ namespace bdd_tests
                 // click on the Confirm button
                 NgWebElement uiConfirmButtonLeader = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] .fa-save span"));
                 uiConfirmButtonLeader.Click();
+            }
+
+            if (businessType == " local government")
+            {
+                // upload a Selling It Right certificate
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[3]");
+
+                // upload the additional supporting document
+                FileUpload("associates.pdf", "(//input[@type='file'])[5]");
             }
         }
     }

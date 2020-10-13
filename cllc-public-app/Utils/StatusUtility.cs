@@ -30,11 +30,13 @@ namespace Gov.Lclb.Cllb.Public.Utils
             {
                 if (shownStatus == "Intake" && !(application.AdoxioPaymentrecieved == true))
                 {
-                    if (application.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "CRS Transfer of Ownership")
+                    if (application.AdoxioApplicationTypeId != null && 
+                    (application.AdoxioApplicationTypeId.AdoxioName == "CRS Transfer of Ownership" ||
+                    application.AdoxioApplicationTypeId.AdoxioName == "Liquor Licence Transfer"))
                     {
                         shownStatus = "Transfer Initiated";
                     }
-                    else if (application.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "CRS Location Change")
+                    else if (application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName == "CRS Location Change")
                     {
                         shownStatus = "Relocation Initiated";
                     }
@@ -52,11 +54,12 @@ namespace Gov.Lclb.Cllb.Public.Utils
                            || shownStatus == "Reviewing Inspection Results" || shownStatus == "ReviewingInspectionResults"
                            || (shownStatus == "Intake" && application.AdoxioPaymentrecieved == true))
                 {
-                    if (application.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "CRS Transfer of Ownership")
+                    if (application?.AdoxioApplicationTypeId?.AdoxioName == "CRS Transfer of Ownership" ||
+                    application?.AdoxioApplicationTypeId?.AdoxioName == "Liquor Licence Transfer")
                     {
                         shownStatus = "Transfer Application Under Review";
                     }
-                    else if (application.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "CRS Location Change")
+                    else if (application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName == "CRS Location Change")
                     {
                         shownStatus = "Relocation Application Under Review";
                     }

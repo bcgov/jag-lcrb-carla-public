@@ -78,15 +78,8 @@ namespace bdd_tests
             NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSigAgreement.Click();
 
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload a supporting document
-            string supportingDocument = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-            NgWebElement uiUploadSupportingDoc = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uiUploadSupportingDoc.SendKeys(supportingDocument);
+            FileUpload("signage.pdf","(//input[@type='file'])[2]");
 
             if (changeType == "Cannabis")
             {

@@ -12,7 +12,7 @@ const DEFAULT_START_TIME = {
   minute: 0
 };
 const DEFAULT_END_TIME = {
-  hour: 2,
+  hour: 23,
   minute: 0
 };
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -430,7 +430,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
       contactEmail: 'Please enter the contact email address',
       marketEventType: 'Please enter the market type',
       marketName: 'Please enter the market name',
-      marketDuration: 'Please enter the market frquency',
+      marketDuration: 'Please enter the market frequency',
       clientHostname: 'Please enter the market business legal name',
       city: 'Please enter the city',
       postalCode: 'Please enter the postal code',

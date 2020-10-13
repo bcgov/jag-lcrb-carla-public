@@ -150,7 +150,7 @@
               </td>
               <td style="width:700px;">
                 <h3>Wine Retail Store Licence</h3>
-                <p>Wine Stores licences allow businesses to sell wine to retail customers. This include stores
+                <p>Wine Stores licences allow businesses to sell wine to retail customers. This includes stores
                   associated with a particular winery or group of wineries, independent wine stores, Vintners Quality
                   Alliance (VQA) wine stores and tourist wine stores. They operate as a separate retail store and are
                   not located at a winery. </p>
@@ -322,7 +322,7 @@
                   </a>
                 </div>
                 <div *ngIf="item.applicationStatus === 'Transfer Initiated'">
-                  <a [routerLink]="['/account-profile/' + item.id, { mode: TRANSFER_LICENCE_MODE }]">
+                  <a routerLink="/multi-step-application/{{item.id}}">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Transfer</span>
                   </a>
