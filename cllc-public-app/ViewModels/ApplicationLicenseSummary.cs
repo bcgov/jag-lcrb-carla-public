@@ -62,6 +62,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string Status { get; set; }
 
+        public bool ChecklistConclusivelyDeem { get; set; }
         public bool StoreInspected { get; set; }
         public bool TransferRequested { get; set; }
 
