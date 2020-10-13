@@ -228,15 +228,8 @@ namespace bdd_tests
             NgWebElement uiConfirmButton = ngDriver.FindElement(By.XPath("//i/span"));
             uiConfirmButton.Click();
 
-            // find the upload test file in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload a marriage certificate document
-            string marriageCertificate = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "marriage_certificate.pdf");
-            NgWebElement uploadMarriageCert = ngDriver.FindElement(By.XPath("(//input[@type='file'])[15]"));
-            uploadMarriageCert.SendKeys(marriageCertificate);
+            FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[15]");
         }
 
         [And(@"I pay the name change fee")]

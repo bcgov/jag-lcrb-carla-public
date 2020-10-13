@@ -19,10 +19,10 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface IRegion
     {
         /// <summary>
-        /// Get adoxio_Region from adoxio_rmreviews
+        /// Get adoxio_Region from adoxio_inspectorreports
         /// </summary>
-        /// <param name='adoxioRmreviewid'>
-        /// key: adoxio_rmreviewid of adoxio_rmreview
+        /// <param name='adoxioInspectorreportid'>
+        /// key: adoxio_inspectorreportid of adoxio_inspectorreport
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,6 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioRegion>> GetWithHttpMessagesAsync(string adoxioRmreviewid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioRegion>> GetWithHttpMessagesAsync(string adoxioInspectorreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

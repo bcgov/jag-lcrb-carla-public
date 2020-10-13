@@ -90,20 +90,11 @@ namespace bdd_tests
             uiCapacity.Clear();
             uiCapacity.SendKeys(capacity);
 
-            // find the upload test files in the bdd-tests\upload_files folder
-            var environment = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
             // upload the site plan
-            string sitePlanPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "site_plan.pdf");
-            NgWebElement uiUploadSitePlan = ngDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-            uiUploadSitePlan.SendKeys(sitePlanPath);
+            FileUpload("site_plan.pdf","(//input[@type='file'])[2]");
 
             // upload the exterior photos
-            string exteriorPhotosPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "exterior_photos.jpg");
-            NgWebElement uiUploadExteriorPhotos = ngDriver.FindElement(By.XPath("(//input[@type='file'])[5]"));
-            uiUploadExteriorPhotos.SendKeys(exteriorPhotosPath);
+            FileUpload("exterior_photos.jpg","(//input[@type='file'])[5]");
 
             // click on the authorized to submit checkbox
             NgWebElement uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
