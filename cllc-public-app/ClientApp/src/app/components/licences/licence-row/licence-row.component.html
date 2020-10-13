@@ -163,7 +163,7 @@
                 <td style="background-color: #E1E8F2; padding: 10px;">
                     <!-- 3rd Party Operators cannot submit  changes -->
                     <div *ngIf="!item.isOperated">
-                        <div *ngIf="isActive(item) && actionsVisible(item) && !item.transferRequested && item?.licenceTypeName !== 'Section 119 Authorization'">
+                        <div *ngIf="showLicenceTransferAction(item)">
                             <p>
                                 <a [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
                                 <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Licence</span>
@@ -171,7 +171,7 @@
                             </p>
                         </div>
                         <!-- if there is a third party application in progress, we don't show the ability to submit a new application-->
-                        <div *ngIf="isActive(item) && actionsVisible(item) && !item.tpoRequested && item.licenceTypeCategory === 'Liquor'">
+                        <div *ngIf="showAddOrChangeThirdPartyOperator(item)">
                             <p>
                                 <a [routerLink]="[ '/third-party-operator/' + item.licenseId]">
                                 <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Add or Change a Third Party Operator</span>
