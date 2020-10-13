@@ -90,8 +90,19 @@ namespace WebApplicationSoap.OneStop
             programAccountRequestBody.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             //this code identifies that the message is from LCRB.  It's the same in every message from LCRB
             programAccountRequestBody.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
-            //this identifies the licence type. Fixed number assigned by the OneStopHub
-            programAccountRequestBody.SBNProgramTypeCode = OneStopUtils.PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE;
+            //this identifies the licence type. 
+            if (licence?.AdoxioLicenceType?.AdoxioOnestopprogramaccounttype != null)
+            {
+                programAccountRequestBody.SBNProgramTypeCode = licence?.AdoxioLicenceType?.AdoxioOnestopprogramaccounttype.ToString();
+            }
+            else
+            {
+                if ("Cannabis Retail Store" == licence?.AdoxioLicenceType?.AdoxioName)
+                {
+                    programAccountRequestBody.SBNProgramTypeCode = OneStopUtils.PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE;
+                }
+            }
+
             programAccountRequestBody.businessCore = GetBusinessCore(licence, suffix);
             programAccountRequestBody.programAccountStatus = GetProgramAccountStatus();
             //the name of the applicant(licensee)- lastName, firstName middleName or company name

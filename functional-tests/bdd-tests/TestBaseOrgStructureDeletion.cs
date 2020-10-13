@@ -26,20 +26,11 @@ namespace bdd_tests
         {
             if (bizType == " private corporation")
             {
-                // find the upload test files in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
                 // upload a notice of articles document
-                string noticeOfArticles = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "notice_of_articles.pdf");
-                NgWebElement uiUploadSignage = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-                uiUploadSignage.SendKeys(noticeOfArticles);
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
 
                 // upload a central securities register document
-                string centralSecuritiesRegister = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "central_securities_register.pdf");
-                NgWebElement uiUploadCentralSecReg = ngDriver.FindElement(By.XPath("(//input[@type='file'])[6]"));
-                uiUploadCentralSecReg.SendKeys(centralSecuritiesRegister);
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[6]");
 
                 /********** Leader #0 **********/
 
@@ -137,15 +128,8 @@ namespace bdd_tests
                     string partnerPercentage = "51";
                     string partnerEmail = "individual1@partner.com";
 
-                    // find the upload test file in the bdd-tests\upload_files folder
-                    var environment = Environment.CurrentDirectory;
-                    string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                    string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
                     // upload the partnership agreement
-                    string partnershipPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-                    NgWebElement uiUploadPartnershipAgreement = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-                    uiUploadPartnershipAgreement.SendKeys(partnershipPath);
+                    FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
 
                     // open partner row
                     NgWebElement uiPartnerRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] button"));
@@ -254,15 +238,8 @@ namespace bdd_tests
                 string leaderTitle = "Leader1TitlePubCorp";
                 string leaderEmail = "leader1@publiccorp.com";
 
-                // find the upload test file in the bdd-tests\upload_files folder
-                var environment = Environment.CurrentDirectory;
-                string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
                 // upload NOA form
-                string NOAPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "signage.pdf");
-                NgWebElement uiUploadNOA = ngDriver.FindElement(By.XPath("(//input[@type='file'])[3]"));
-                uiUploadNOA.SendKeys(NOAPath);
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
 
                 // open leader #1 form
                 NgWebElement uiOpenLeaderForm = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] button"));

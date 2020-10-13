@@ -5,12 +5,11 @@ import { Subscription, Observable, of } from 'rxjs';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
-import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
+import { takeWhile, filter, catchError, mergeMap, first } from 'rxjs/operators';
 import { Account, TransferAccount } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
@@ -32,6 +31,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
   form: FormGroup;
   licenceId: string;
   busy: Subscription;
+  busyPromise: any;
   validationMessages: any[];
   showValidationMessages: boolean;
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
@@ -52,6 +52,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
     this.route.paramMap.subscribe(pmap => this.licenceId = pmap.get('licenceId'));
+
   }
 
   ngOnInit() {
@@ -68,26 +69,51 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
         contactName: [{ value: '', disabled: true }],
         businessType: [{ value: '', disabled: true }],
       }),
+      licenseeContact: this.fb.group({
+        name: [{ value: '', disabled: true }],
+        email: [{ value: '', disabled: true }],
+        phone: [{ value: '', disabled: true }]
+      }),
       transferConsent: ['', [this.customRequiredCheckboxValidator()]],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
-    this.store.select(state => state.currentAccountState.currentAccount)
-      .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(account => !!account))
-      .subscribe((account) => {
-        this.account = account;
-      });
-
-
+    // Get licence data
     this.busy = this.licenseDataService.getLicenceById(this.licenceId)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: License) => {
+      .subscribe((licence: License) => {
+        this.licence = licence;
+        if (this.licenceHasRepresentativeContact()) { //If the licence has a representative, set it to be the licensee contact
+          const contact = {
+            name: this.licence.representativeFullName,
+            email: this.licence.representativeEmail,
+            phone: this.licence.representativePhoneNumber
+          }
+          this.form.get('licenseeContact').patchValue(contact);
+        } else if (this.account) { // If the account is loaded, use it for the licensee contact
+          const contact = {
+            name: this.account.name,
+            email: this.account.contactEmail,
+            phone: this.account.contactPhone
+          }
+          this.form.get('licenseeContact').patchValue(contact);
+        } else { // Otherwise load the account and use it for the licensee representative
+          this.store.select(state => state.currentAccountState.currentAccount)
+          .pipe(filter(account => !!account))
+          .pipe(first())
+            .subscribe((account) => {
+              this.account = account;
+              const contact = {
+                name: this.account.name,
+                email: this.account.contactEmail,
+                phone: this.account.contactPhone
+              }
+              this.form.get('licenseeContact').patchValue(contact);
+            });
+        }
 
-
-        this.licence = data;
-        this.form.patchValue(data);
+        this.form.patchValue(this.licence);
       },
         () => {
           console.log('Error occured');
@@ -96,7 +122,13 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
   }
 
 
-
+  private licenceHasRepresentativeContact(): boolean {
+    let hasContact = false;
+    if (this.licence && this.licence.representativeFullName) {
+      hasContact = true;
+    }
+    return hasContact;
+  }
 
 
   /**
@@ -138,7 +170,6 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
   isValid(): boolean {
     this.markControlsAsTouched(this.form);
     this.showValidationMessages = false;
-    let valid = true;
     this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
     return this.form.valid;
