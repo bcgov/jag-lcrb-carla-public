@@ -627,7 +627,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showExteriorRenderings() {
     let show = this.application &&
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
-        || this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange);
+        );
     show = show && this.form.get('proposedChange').value === 'Yes';
     return show;
   }
