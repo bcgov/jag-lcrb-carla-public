@@ -13,138 +13,136 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CateringApplicationBrandingChange
+Feature: CRSApplicationStoreRelocation
     As a logged in business user
-    I want to pay the first year catering licence fee
-    And submit a name branding change for different business types
+    I want to submit a CRS Application for different business types
+    And request a store relocation for the approved application
 
-@e2e @catering @indigenousnation @cateringbranding1
-Scenario: Catering Indigenous Nation Branding Change
+@e2e @cannabis @indigenousnation @crsstorerelocationIN
+Scenario: Indigenous Nation Cannabis Store Relocation
     Given I am logged in to the dashboard as an indigenous nation
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
     And I review the account profile for an indigenous nation
     And I review the organization structure for an indigenous nation
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
+    And I complete the Cannabis Retail Store application for an indigenous nation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
-    And I pay the licensing fee for Catering
-    And I click on the link for Download Licence
-    And I request a valid store name or branding change for Catering
+    And I pay the licensing fee for Cannabis
+    And I request a store relocation for Cannabis
+    And I click on the link for Dashboard
+    And I confirm the relocation request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @partnership @cateringbranding2
-Scenario: Catering Partnership Branding Change
+@e2e @cannabis @partnership @crsstorerelocationpartnership
+Scenario: Partnership Cannabis Store Relocation
     Given I am logged in to the dashboard as a partnership
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
     And I review the account profile for a partnership
     And I review the organization structure for a partnership
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
+    And I complete the Cannabis Retail Store application for a partnership
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
-    And I pay the licensing fee for Catering
-    And I click on the link for Download Licence
-    And I request a valid store name or branding change for Catering
+    And I pay the licensing fee for Cannabis
+    And I request a store relocation for Cannabis
+    And I click on the link for Dashboard
+    And I confirm the relocation request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @cateringbranding3
-Scenario: Catering Private Corporation Branding Change
+@e2e @cannabis @privatecorporation @crsstorerelocationprivcorp
+Scenario: Private Corporation Cannabis Store Relocation
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
+    And I complete the Cannabis Retail Store application for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
-    And I pay the licensing fee for Catering
-    And I click on the link for Download Licence
-    And I request a valid store name or branding change for Catering
+    And I pay the licensing fee for Cannabis
+    And I request a store relocation for Cannabis
+    And I click on the link for Dashboard
+    And I confirm the relocation request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringbranding4
-Scenario: Catering Public Corporation Branding Change
+@e2e @cannabis @publiccorporation @crsstorerelocationpubcorp
+Scenario: Public Corporation Cannabis Store Relocation
     Given I am logged in to the dashboard as a public corporation
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
     And I review the account profile for a public corporation
     And I review the organization structure for a public corporation
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
+    And I complete the Cannabis Retail Store application for a public corporation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
-    And I pay the licensing fee for Catering
-    And I click on the link for Download Licence
-    And I request a valid store name or branding change for Catering
+    And I pay the licensing fee for Cannabis
+    And I request a store relocation for Cannabis
+    And I click on the link for Dashboard
+    And I confirm the relocation request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringbranding5
-Scenario: Catering Society Branding Change
+@e2e @cannabis @society @crsstorerelocationsociety
+Scenario: Society Cannabis Store Relocation
     Given I am logged in to the dashboard as a society
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
     And I review the account profile for a society
     And I review the organization structure for a society
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
+    And I complete the Cannabis Retail Store application for a society
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
-    And I pay the licensing fee for Catering
-    And I click on the link for Download Licence
-    And I request a valid store name or branding change for Catering
+    And I pay the licensing fee for Cannabis
+    And I request a store relocation for Cannabis
+    And I click on the link for Dashboard
+    And I confirm the relocation request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @soleproprietorship @cateringbranding6
-Scenario: Catering Sole Proprietorship Branding Change
+@e2e @cannabis @soleproprietorship @crsstorerelocationsoleprop
+Scenario: Sole Proprietorship Cannabis Store Relocation
     Given I am logged in to the dashboard as a sole proprietorship
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
     And I review the account profile for a sole proprietorship
     And I review the organization structure for a sole proprietorship
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
+    And I complete the Cannabis Retail Store application for a sole proprietorship
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
-    And I pay the licensing fee for Catering
-    And I click on the link for Download Licence
-    And I request a valid store name or branding change for Catering
+    And I pay the licensing fee for Cannabis
+    And I request a store relocation for Cannabis
+    And I click on the link for Dashboard
+    And I confirm the relocation request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplicationBrandingChange.feature")]
-    [Collection("Liquor")]
-    public sealed class CateringApplicationBrandingChange : TestBase
+    [FeatureFile("./CRSApplicationStoreRelocation.feature")]
+    [Collection("Cannabis")]
+    public sealed class CRSApplicationStoreRelocation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
-
-            CheckFeatureFlagsLiquorOne();
 
             CheckFeatureFlagsLGIN();
 

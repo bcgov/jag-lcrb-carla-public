@@ -22,7 +22,7 @@ using Xunit;
 # No Approval Requests
 #-----------------------
 
- @e2e @catering @indigenousnation @cateringeventtransfer2
+ @e2e @catering @indigenousnation @cateringevent
  Scenario: No Approval Indigenous Nation Event Authorization Request
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for Catering
@@ -40,7 +40,7 @@ using Xunit;
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @partnership @cateringeventtransfer
+ @e2e @catering @partnership @cateringevent
  Scenario: No Approval Partnership Event Authorization Request
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -58,7 +58,7 @@ using Xunit;
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @privatecorporation @cateringeventtransfer @hourlyTest
+ @e2e @catering @privatecorporation @cateringevent @hourlyTest
  Scenario: No Approval Private Corporation Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -76,7 +76,7 @@ using Xunit;
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @publiccorporation @cateringeventtransfer2
+ @e2e @catering @publiccorporation @cateringevent
  Scenario: No Approval Public Corporation Event Authorization Request
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
@@ -94,7 +94,7 @@ using Xunit;
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @society @cateringeventtransfer2
+ @e2e @catering @society @cateringevent
  Scenario: No Approval Society Event Authorization Request
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -112,7 +112,7 @@ using Xunit;
     And the account is deleted
     Then I see the login page
 
-  @e2e @catering @soleproprietorship @cateringeventtransfer
+  @e2e @catering @soleproprietorship @cateringevent
   Scenario: No Approval Sole Proprietorship Event Authorization Request
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -130,30 +130,11 @@ using Xunit;
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @privatecorporation @validation
- Scenario: Validation for No Approval Event Authorization Request
-    Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for Catering
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I pay the licensing fee for Catering
-    And I click on the Licences tab
-    And I request an event authorization that doesn't require approval
-    And I do not complete the event authorization application correctly
-    And the expected validation errors are thrown for an event authorization
-    And the account is deleted
-    Then I see the login page
-
 #-----------------------
 # 500+ Attendees Request
 #-----------------------
 
+ @e2e @cateringevent 
  Scenario: 500+ Attendees Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -175,6 +156,7 @@ using Xunit;
 # Outdoor Request
 #-----------------------
 
+ @e2e @cateringevent 
  Scenario: Outdoor Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -196,6 +178,7 @@ using Xunit;
 # Indoor/Outdoor Request
 #-----------------------
 
+ @e2e @cateringevent 
  Scenario: Both Indoor and Outdoor Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -217,6 +200,7 @@ using Xunit;
 # Past 2am (non-community)
 #-------------------------
 
+ @e2e @cateringevent 
  Scenario: Past 2am Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -238,6 +222,7 @@ using Xunit;
 # Past 2am (community)
 #-------------------------
 
+ @e2e @cateringevent 
  Scenario: Past 2am Community Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -259,6 +244,7 @@ using Xunit;
 # Save For Later
 #-------------------------
 
+ @e2e @cateringevent 
  Scenario: Save For Later Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -271,8 +257,8 @@ using Xunit;
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And I request an event authorization as a draft
-    And the event history is updated correctly for an application as a draft
+    And I request an event authorization for a draft
+    And the event history is updated correctly for an application for a draft
     And I click on the link for Draft
     And the saved event authorization details are correct
     And the account is deleted
