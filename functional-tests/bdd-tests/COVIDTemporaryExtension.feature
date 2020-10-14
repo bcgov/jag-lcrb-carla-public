@@ -34,11 +34,3 @@ Scenario: Manufacturer COVID Temp Extension Application
     And I complete the temporary extension application for a Manufacturer licence
     And I click on the Submit button
     Then the application is submitted
-
-@covid @validation
-Scenario: Validate COVID Temp Extension Application
-    Given I am not logged in to the Liquor and Cannabis Portal
-    And I click on the COVID Temporary Extension link
-    And I do not complete the temporary extension application
-    And I click on the Submit button
-    Then the COVID validation messages are displayed
