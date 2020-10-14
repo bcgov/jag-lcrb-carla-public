@@ -1,4 +1,19 @@
-﻿Feature: ReviewOrgStructureValidation
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support;
+using OpenQA.Selenium.Support.UI;
+using Protractor;
+using System;
+using Xunit.Gherkin.Quick;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using System.IO;
+using Xunit;
+
+/*
+Feature: ValidationReviewOrgStructure
     As a logged in business user
     I want to confirm the validation messages for the org structure
 
@@ -66,3 +81,30 @@ Scenario: Validation for Sole Proprietorship Org Structure
 #    And the expected validation errors are thrown for a local government org structure
 #    And the account is deleted
 #    Then I see the login page
+*/
+
+namespace bdd_tests
+{
+    [FeatureFile("./ValidationReviewOrgStructure.feature")]
+    [Collection("Cannabis")]
+    public sealed class ValidationReviewOrgStructure : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as a(.*)")]
+        public void LoggedInToDashboard(string businessType)
+        {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            IgnoreSynchronizationFalse();
+
+            CarlaLogin(businessType);
+        }
+    }
+}
