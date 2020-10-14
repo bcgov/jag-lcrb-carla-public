@@ -69,17 +69,17 @@ namespace bdd_tests
                 // upload a marriage certificate document
                 if (businessType == "public corporation" || businessType == "partnership")
                 {
-                    FileUpload("marriage_certificate.pdf","(//input[@type='file'])[9]");
+                    FileUpload("marriage_certificate.pdf","(//input[@type='file'])[12]");
                 }
 
                 if (businessType == "private corporation")
                 {
-                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[15]");
+                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[18]");
                 }
 
                 if ((businessType == "society") || (businessType == "sole proprietorship"))
                 {
-                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[6]");
+                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[9]");
                 }
 
                 // click on Submit Organization Information button
