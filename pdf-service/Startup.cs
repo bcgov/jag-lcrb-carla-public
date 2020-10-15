@@ -92,8 +92,16 @@ namespace Pdf
 
             // health checks. 
             services.AddHealthChecks();
-
-            services.AddWkhtmltopdf();
+            if (!string.IsNullOrEmpty(Configuration["WKHTMLTOPDF_LOCATION"]))
+            {
+                string wkhtmltopdfLocation = Configuration["WKHTMLTOPDF_LOCATION"];
+                services.AddWkhtmltopdf(wkhtmltopdfLocation);
+            }
+            else
+            {
+                services.AddWkhtmltopdf();
+            }
+                
 
         }
 

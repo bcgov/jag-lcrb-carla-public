@@ -45,6 +45,8 @@ namespace PDF.Controllers
                 string format = System.IO.File.ReadAllText(filename);
                 var html = stubble.Render(format, rawdata);
 
+                
+
                 _generatePdf.SetConvertOptions(new ConvertOptions
                 {
                     PageSize = Size.Letter,
