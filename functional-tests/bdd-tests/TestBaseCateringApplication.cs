@@ -44,17 +44,23 @@ namespace bdd_tests
             string conEmail = "test2@automation.com";
 
             // enter the establishment name
-            try
+            NgWebElement uiEstabName = null;
+            // try up to 10 times to get an element.
+            for (int i = 0; i < 10; i++)
             {
-                NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
-                uiEstabName.SendKeys(estName);
-            }
-            catch (Exception)
-            {
-                //System.Threading.Thread.Sleep(1000);
+                try
+                {
+                    var names = ngDriver.FindElements(By.CssSelector("input[formcontrolname='establishmentName']"));
+                    if (names.Count > 0)
+                    {
+                        uiEstabName = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
 
-                NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
-                uiEstabName.SendKeys(estName);
+                }
             }
 
             // enter the establishment address
