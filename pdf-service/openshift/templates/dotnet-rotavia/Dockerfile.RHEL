@@ -14,12 +14,15 @@ RUN pushd /opt \
     && yum clean all -y \
 	&& yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
 	&& yum install -y wkhtmltopdf \
-	&& curl -L https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos7.x86_64.rpm -o wkhtmltox.rpm \
-    && yum -y localinstall wkhtmltox.rpm \
-	&& rm wkhtmltox.rpm \
+	&& mkdir /usr/bin/Linux \
+    && ln -s /usr/bin/wkhtmltopdf /usr/bin/Linux/wkhtmltopdf \
 	&& rm -R /opt/app-root/.pki \
     && popd
 	
 USER 1001
 
+
+#	&& curl -L https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos7.x86_64.rpm -o wkhtmltox.rpm \
+#    && yum -y localinstall wkhtmltox.rpm \
+#	&& rm wkhtmltox.rpm \
 
