@@ -35,8 +35,8 @@ namespace bdd_tests
                         uiRequestedLink = names[0];
                         break;
                     }
-                    else { 
-                    //add sleep
+                    else {
+                        System.Threading.Thread.Sleep(2000);
                     }
                 }
                 catch (Exception)
