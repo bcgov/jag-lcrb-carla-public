@@ -4,7 +4,7 @@
       <div class="padded-section">
         <h1>Market Authorization Request</h1>
       </div>
-  
+
       <div class="p-3 padded-section attention-section">
         <p>On Apr. 16, 2020, the Provincial Health Officer ordered that vendors, who are liquor manufacturers with an on-site retail endorsement and are selling at markets (also known as "farmers markets" or "community markets"), must comply with the following conditions:</p>
         <ul>
@@ -12,12 +12,12 @@
           <li>You must sell your products at a market in sealed retail containers, such as bottles, cartons, boxes and cans.</li>
         </ul>
       </div>
-  
+
       <div class="padded-section">
         <p>If you plan to sell liquor manufactured under your licence at a farmers/artisan/annual market, you must fill out the below fields to submit a request for a market authorization.
           Your licence must include an on-site store endorsement to be able to submit this request. You must submit a new request for each market location you wish to attend.</p>
       </div>
-  
+
       <div class="padded-section">
         <h2>Status: <b>{{getOptionFromValue(eventStatus, eventForm.get('status').value) === null ? '' : getOptionFromValue(eventStatus, eventForm.get('status').value).label}}</b></h2>
         <h3 *ngIf="licenceEvent != null && licenceEvent.eventNumber != null">Number: <b>{{licenceEvent.eventNumber}}</b></h3>
@@ -39,8 +39,8 @@
         <mat-checkbox formControlName="isMarketHostsSixVendors"></mat-checkbox><span class="checkbox-label">The market hosts at least six vendors that don’t sell or serve liquor. The sale of liquor must not be the focus of the market.</span><br/>
         <mat-checkbox formControlName="isMarketMaxAmountorDuration"></mat-checkbox><span class="checkbox-label">The market occurs a maximum of three times a week. Annual markets can occur once a year and may be open for up to 35 consecutive days.</span><br/>
       </div>
-      
-  
+
+
       <h3 class="blue-header">LICENSEE STAFF RESPONSIBLE CONTACT INFORMATION</h3>
       <div class="padded-section clearfix">
         <div class="row">
@@ -82,10 +82,10 @@
             <input class="form-control" type="text" formControlName="mktOrganizerContactPhone" mask="(000) 000-0000">
           </app-field>
         </div>
-        
+
       </div> -->
-  
-      <h3 class="blue-header">MARKET INFORMATION AND LOCATION</h3> 
+
+      <h3 class="blue-header">MARKET INFORMATION AND LOCATION</h3>
       <div class="padded-section clearfix">
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Market Name" [required]="true"
@@ -162,8 +162,8 @@
         </div>
       </div>
 
-        <!-- 
-        
+        <!--
+
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Description" [required]="true"
             [valid]="eventForm.get('eventTypeDescription').valid || !eventForm.get('eventTypeDescription').touched"
@@ -172,14 +172,14 @@
           </app-field>
           <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
           matTooltip="Briefly describe the event." ></i>
-  
+
         </div>
-        
+
       </div>
 
       <h3 class="blue-header">MARKET LOCATION</h3>
     <div class="padded-section clearfix">
-      
+
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Location" [required]="true"
           [valid]="eventForm.get('specificLocation').valid || !eventForm.get('specificLocation').touched"
@@ -191,12 +191,12 @@
         <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
         matTooltip="Select whether the event is being held indoors, outdoors, or both." ></i>
       </div>
-      
+
 
       <h3>Physical Address of Venue</h3>
-      
+
     </div> -->
-  
+
       <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
       <div class="padded-section clearfix">
         <div class="row">
@@ -341,7 +341,7 @@
         <mat-checkbox formControlName="isAllStaffServingitRight"></mat-checkbox><span class="checkbox-label">All staff selling liquor at the market have Serving It Right certification and are not minors</span><br/>
         <mat-checkbox formControlName="isSampleSizeCompliant"></mat-checkbox><span class="checkbox-label">Sample sizes comply with <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/manufacturer-handbook.pdf" target="_blank">Liquor Manufacturing Terms and Conditions</a></span><br/>
       </div>
-  
+
       <h3 class="blue-header">AGREEMENT</h3>
       <div class="padded-section">
         <p>A person commits an offence if the person provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when making a report or when required and as specified by the general manager under section 59. - Liquor Control and Licensing Act, Section 57(1)(c).</p>
@@ -349,7 +349,7 @@
           <mat-checkbox formControlName="agreement">I understand and affirm that all of the information provided is true and complete.</mat-checkbox>
         </div>
       </div>
-  
+
       <div class="p-3 attention-section">
         <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</p>
       </div>
@@ -361,7 +361,7 @@
           </span>
         </p>
       </section>
-  
+
       <div class="p-4 button-row">
         <button class="btn btn-primary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
           <span>
