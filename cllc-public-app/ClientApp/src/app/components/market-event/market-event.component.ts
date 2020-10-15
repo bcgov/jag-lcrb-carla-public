@@ -87,7 +87,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
     venueDescription: ['', []],
     specificLocation: ['', []],
     additionalLocationInformation: ['', []],
-    street1: ['', []],
+    street1: ['', [Validators.required]],
     street2: ['', []],
     city: ['', [Validators.required]],
     province: ['BC', [Validators.required]],
