@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.NodeServices;
 using Microsoft.AspNetCore.Hosting;
 using Stubble.Core.Builders;
 using System.IO;
-using RazorLight.Extensions;
+
 
 using Wkhtmltopdf.NetCore;
 using System.Reflection;
@@ -24,11 +24,13 @@ namespace PDF.Controllers
     [Route("api/[controller]")]
     public class PDFController : Controller
     {
+        readonly IGeneratePdf _generatePdf;
         private readonly IConfiguration Configuration;        
         protected ILogger _logger;
 
-        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory, IGeneratePdf generatePdf)
         {
+            _generatePdf = generatePdf;
             Configuration = configuration;            
             _logger = loggerFactory.CreateLogger(typeof(PDFController));
         }
@@ -48,22 +50,16 @@ namespace PDF.Controllers
             {
                 string format = System.IO.File.ReadAllText(filename);
                 var html = stubble.Render(format, rawdata);
-                
 
-                RotativaConfiguration.RotativaPath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "rotativa");
-                RotativaConfiguration.IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-                var htmlToPdf = new HtmlAsPdf();
-                htmlToPdf.PageMargins = new Margins(5,5,5,20);
-                htmlToPdf.PageSize = Size.Letter;
+                _generatePdf.SetConvertOptions(new ConvertOptions()
+                {
+                    PageSize = Size.Letter,
+                    PageMargins = new Margins(5,5,5,5)
+                });
                 
+                var pdf = await _generatePdf.GetPdfViewInHtml(html);
 
-
-                var pdf = htmlToPdf.GetPDF(html); 
-         
-                
-                
-
-                return new FileContentResult(pdf, "application/pdf");
+                return pdf;
             }
             else
             {

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using Wkhtmltopdf.NetCore;
 
 
 namespace Pdf
@@ -91,6 +92,8 @@ namespace Pdf
 
             // health checks. 
             services.AddHealthChecks();
+
+            services.AddWkhtmltopdf();
 
         }
 
