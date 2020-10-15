@@ -1,4 +1,6 @@
-﻿using HealthChecks.UI.Client;
+﻿using System.Diagnostics;
+using System.Text;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -11,9 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
 using Wkhtmltopdf.NetCore;
-
 
 namespace Pdf
 {
@@ -25,7 +25,7 @@ namespace Pdf
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            if (!System.Diagnostics.Debugger.IsAttached)
+            if (!Debugger.IsAttached)
                 builder.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
             builder.AddEnvironmentVariables();
 
@@ -80,7 +80,7 @@ namespace Pdf
                {
                    o.SaveToken = true;
                    o.RequireHttpsMetadata = false;
-                   o.TokenValidationParameters = new TokenValidationParameters()
+                   o.TokenValidationParameters = new TokenValidationParameters
                    {
                     //    RequireExpirationTime = false,
                        ValidIssuer = Configuration["JWT_VALID_ISSUER"],

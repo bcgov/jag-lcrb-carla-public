@@ -1,17 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.NodeServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.NodeServices;
-using Microsoft.AspNetCore.Hosting;
 using Stubble.Core.Builders;
-using System.IO;
-
-
 using Wkhtmltopdf.NetCore;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using Wkhtmltopdf.NetCore.Options;
 
 namespace PDF.Controllers
@@ -51,7 +45,7 @@ namespace PDF.Controllers
                 string format = System.IO.File.ReadAllText(filename);
                 var html = stubble.Render(format, rawdata);
 
-                _generatePdf.SetConvertOptions(new ConvertOptions()
+                _generatePdf.SetConvertOptions(new ConvertOptions
                 {
                     PageSize = Size.Letter,
                     PageMargins = new Margins(5,5,5,5)
@@ -61,10 +55,8 @@ namespace PDF.Controllers
 
                 return pdf;
             }
-            else
-            {
-                return new NotFoundResult();
-            }
+
+            return new NotFoundResult();
 
         }        
        
