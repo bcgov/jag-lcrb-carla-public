@@ -110,7 +110,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             Contract.Requires(_fileManagerClient != null);
             Contract.Requires(documentType != null);
 
-            var hash = HashUtility.GetMD5(data);
+            var hash = HashUtility.GetSHA256(data);
             var filename = FileSystemItemExtensions.CombineNameDocumentType($"{hash}.pdf", documentType);
 
             // Abort early if PDF hasn't changed...
