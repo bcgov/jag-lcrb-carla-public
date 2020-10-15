@@ -451,7 +451,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         var entityName = "event";
                         var entityId = eventId;
                         var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
-                        _fileManagerClient.UploadHashedPdf(_logger, entityName, entityId, folderName, data);
+                        var documentType = "Event Authorization Letter";
+                        _fileManagerClient.UploadHashedPdf(_logger, entityName, entityId, folderName, documentType, data);
                     }
                     catch (Exception e)
                     {

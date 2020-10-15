@@ -1,4 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Public.Utils;
+using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 using Google.Protobuf;
+using System.Diagnostics.Contracts;
 
 namespace Gov.Lclb.Cllb.Services.FileManager
 {
@@ -103,12 +105,16 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
         }
 
-        public static void UploadHashedPdf(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, byte[] data)
+        public static void UploadHashedPdf(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, string documentType, byte[] data)
         {
+            Contract.Requires(_fileManagerClient != null);
+            Contract.Requires(documentType != null);
+
             var hash = HashUtility.GetMD5(data);
+            var filename = FileSystemItemExtensions.CombineNameDocumentType($"{hash}.pdf", documentType);
 
             // Abort early if PDF hasn't changed...
-            if (_fileManagerClient.FileExistsByHash(_logger, entityName, entityId, folderName, hash))
+            if (_fileManagerClient.FileExistsByHash(_logger, entityName, entityId, folderName, documentType, hash))
             {
                 return;
             }
@@ -119,7 +125,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 ContentType = "application/pdf",
                 Data = ByteString.CopyFrom(data),
                 EntityName = entityName,
-                FileName = hash + ".pdf",
+                FileName = filename,
                 FolderName = folderName
             };
 
@@ -127,7 +133,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             // Do not save full file names to the logs (for privacy)
             var logFolderName = WordSanitizer.Sanitize(folderName);
-            var logFileName = WordSanitizer.Sanitize(hash);
+            var logFileName = WordSanitizer.Sanitize(filename);
 
             if (uploadResult.ResultStatus == ResultStatus.Success)
             {
@@ -140,15 +146,18 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
         }
 
-        public static bool FileExistsByHash(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, string hash)
+        public static bool FileExistsByHash(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, string documentType, string hash)
         {
+            Contract.Requires(_fileManagerClient != null);
+
+            var filename = FileSystemItemExtensions.CombineNameDocumentType($"{hash}.pdf", documentType);
             var exists = false;
             try
             {
                 // call the web service
                 var request = new FolderFilesRequest()
                 {
-                    DocumentType = "",
+                    DocumentType = documentType,
                     EntityId = entityId,
                     EntityName = entityName,
                     FolderName = folderName
@@ -158,8 +167,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                 if (result.ResultStatus == ResultStatus.Success)
                 {
-                    // TODO: deal with extension - make sure it matches
-                    exists = result.Files.Any(f => StripDocumentType(f.Name) == hash + ".pdf");
+                    exists = result.Files.Any(f => FileSystemItemExtensions.GetDocumentName(f.Name) == filename);
                 }
                 else
                 {
@@ -172,11 +180,5 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
             return exists;
         }
-
-        private static string StripDocumentType(string fileName)
-        {
-            return fileName.Substring(fileName.IndexOf("__") + 2);
-        }
-
     }
 }

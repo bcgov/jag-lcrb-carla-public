@@ -325,7 +325,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var entityName = "worker";
                     var entityId = adoxioWorker.AdoxioWorkerid;
                     var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
-                    _fileManagerClient.UploadHashedPdf(_logger, entityName, entityId, folderName, data);
+                    var documentType = "Worker Qualification Letter";
+                    _fileManagerClient.UploadHashedPdf(_logger, entityName, entityId, folderName, documentType, data);
                 }
                 catch (Exception e)
                 {

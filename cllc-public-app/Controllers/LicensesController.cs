@@ -1013,7 +1013,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         var entityName = "licence";
                         var entityId = adoxioLicense.AdoxioLicencesid;
                         var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
-                        _fileManagerClient.UploadHashedPdf(_logger, entityName, entityId, folderName, data);
+                        var documentType = "Licence";
+                        _fileManagerClient.UploadHashedPdf(_logger, entityName, entityId, folderName, documentType, data);
                     }
                     catch (Exception e)
                     {
