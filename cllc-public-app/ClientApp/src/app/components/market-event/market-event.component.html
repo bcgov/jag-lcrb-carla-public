@@ -130,7 +130,7 @@
           matTooltip="In the case of an application in respect of a market managed or carried on by a corporation under the Business Corporations Act, Societies Act, Canada Business Corporations Act or Canada Not-for-profit Corporations Act, the registration number shown on the certificate of incorporation, continuation or amalgamation of the corporation."></i>
         </div>
         <div class="row">
-          <app-field class="col-md-4 col-xs-12" label="Address 1"
+          <app-field class="col-md-4 col-xs-12" label="Address 1" [required]="true"
             [valid]="eventForm.get('street1').valid || !eventForm.get('street1').touched"
             errorMessage="Please enter the address line 1" [isFullWidth]="true">
             <input class="form-control" type="text" formControlName="street1">
