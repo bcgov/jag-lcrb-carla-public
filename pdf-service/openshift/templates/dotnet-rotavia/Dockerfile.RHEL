@@ -17,6 +17,12 @@ RUN pushd /opt \
 	&& yum install -y wkhtmltopdf \
 	&& yum clean all -y \
 	&& mkdir /usr/bin/Linux \
+	echo $'#!/usr/bin/env sh\n\
+Xvfb :0 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset & \n\
+DISPLAY=:0.0 /usr/bin/wkhtmltopdf $@ \n\
+killall Xvfb\
+' > /usr/bin/Linux/wkhtmltopdf \
+    && chmod +x /usr/bin/Linux/wkhtmltopdf \
     && ln -s /usr/bin/wkhtmltopdf /usr/bin/Linux/wkhtmltopdf \
 	&& rm -R /opt/app-root/.pki \
     && popd
