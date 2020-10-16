@@ -13,7 +13,7 @@ RUN pushd /opt \
     && rpm -V $INSTALL_PKGS \
 	&& yum clean all -y \
 	&& yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
-	&& yum -y install xorg-x11-fonts* xorg-x11-xinit xorg-x11-xinit-session xorg-x11-server-Xvfb xorg-x11-twm xorg-x11-font dejavu-sans-fonts dejavu-serif-fonts xdotool --enablerepo=rhel-7-server-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-dotnet-rpms \
+	&& yum -y install xorg-x11-fonts* xorg-x11-xinit xorg-x11-xinit-session xorg-x11-server-Xvfb xorg-x11-twm xorg-x11-font dejavu-sans-fonts dejavu-serif-fonts xdotool --enablerepo=rhel-7-server-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-dotnet-rpms,rhel-7-server-optional-rpms \
 	&& rpm -V xorg-x11-server-Xvfb \ 
 	&& yum install -y wkhtmltopdf \
 	&& yum clean all -y \
