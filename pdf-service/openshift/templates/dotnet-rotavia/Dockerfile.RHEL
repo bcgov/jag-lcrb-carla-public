@@ -19,17 +19,24 @@ RUN pushd /opt \
 	&& yum clean all -y \
 	&& mkdir /usr/bin/Linux \
 	&& echo $'#!/usr/bin/env sh\n\
-Xvfb :0 -screen 0 1024x768x24 -ac +extension GLX +render -noreset & \	
-DISPLAY=:0.0 /usr/bin/wkhtmltopdf $@ \n\
+Xvfb :0 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset & \	
+DISPLAY=:0.0 /usr/bin/wkhtmltopdf --zoom 1.2 $@ \n\
 ' > /usr/bin/Linux/wkhtmltopdf \
     && chmod +x /usr/bin/Linux/wkhtmltopdf \
+	&& curl -L https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos7.x86_64.rpm -o wkhtmltox.rpm \
+    && yum -y localinstall wkhtmltox.rpm \
+	&& rm wkhtmltox.rpm \
+	&& mkdir /usr/local/bin/Linux \
+	&& echo $'#!/usr/bin/env sh\n\
+/usr/local/bin/wkhtmltopdf --zoom 1.2 $@ \n\
+' > /usr/local/bin/Linux/wkhtmltopdf \
+    && chmod +x /usr/local/bin/Linux/wkhtmltopdf \	
+	
 	&& rm -R /opt/app-root/.pki \
     && popd
 	
 USER 1001
 
 # RUN Xvfb :0 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset & 
-#	&& curl -L https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos7.x86_64.rpm -o wkhtmltox.rpm \
-#    && yum -y localinstall wkhtmltox.rpm \
-#	&& rm wkhtmltox.rpm \
+
 
