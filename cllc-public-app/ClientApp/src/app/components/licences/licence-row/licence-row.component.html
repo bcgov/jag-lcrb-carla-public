@@ -104,7 +104,7 @@
                         </div>
                         <br><br>
                     </ng-container>
-                    <div *ngIf="item.status === 'PendingLicenceFee'" style="min-width: 10px; margin-bottom: 10px;">
+                    <div *ngIf="item.status === 'PendingLicenceFee'  && item.missingFirstYearLicenceFee" style="min-width: 10px; margin-bottom: 10px;">
                         <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
                             <span>
                                 <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
