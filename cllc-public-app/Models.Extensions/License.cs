@@ -24,7 +24,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 foreach (var item in endorsementsCollection.Value)
                 {
-                    if (item.AdoxioApplicationType != null) {
+                    if (item.AdoxioApplicationType != null)
+                    {
                         var endorsement = new ViewModels.Endorsement()
                         {
                             ApplicationTypeId = item.AdoxioApplicationType.AdoxioApplicationtypeid,
@@ -45,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             License adoxioLicenseVM = new License();
 
             adoxioLicenseVM.Id = dynamicsLicense.AdoxioLicencesid;
-            
+
             if (dynamicsLicense._adoxioLicencesubcategoryidValue != null)
             {
                 try
@@ -58,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     adoxioLicenseVM.LicenseSubCategory = null;
                 }
             }
-            
+
             // fetch the establishment and get name and address
             Guid? adoxioEstablishmentId = null;
             if (!string.IsNullOrEmpty(dynamicsLicense._adoxioEstablishmentValue))
@@ -111,8 +112,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 adoxioLicenseVM.EstablishmentParcelId = dynamicsLicense.AdoxioEstablishment.AdoxioParcelid;
             }
-            
-            
+
+
             adoxioLicenseVM.Endorsements = GetEndorsements(adoxioLicenseVM.Id, dynamicsClient);
 
             adoxioLicenseVM.RepresentativeFullName = dynamicsLicense.AdoxioRepresentativename;
@@ -131,10 +132,17 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioLicences licence, IList<MicrosoftDynamicsCRMadoxioApplication> applications, IDynamicsClient dynamicsClient)
         {
+            bool missingLicenceFee = applications.Where(app =>
+                    app._adoxioLicencefeeinvoiceValue != null
+                    && app?.AdoxioApplicationTypeId?.AdoxioIsdefault == true
+                    && app?.AdoxioLicenceFeeInvoice?.Statuscode != (int)Adoxio_invoicestatuses.Paid
+                ).Any();
+
             ApplicationLicenseSummary licenseSummary = new ViewModels.ApplicationLicenseSummary()
             {
                 LicenseId = licence.AdoxioLicencesid,
                 LicenseNumber = licence.AdoxioLicencenumber,
+                MissingFirstYearLicenceFee = missingLicenceFee,
                 EstablishmentAddressStreet = licence.AdoxioEstablishmentaddressstreet,
                 EstablishmentAddressCity = licence.AdoxioEstablishmentaddresscity,
                 EstablishmentAddressPostalCode = licence.AdoxioEstablishmentaddresspostalcode,
@@ -175,7 +183,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
             }
 
-            if (licence.AdoxioThirdPartyOperatorId != null){
+            if (licence.AdoxioThirdPartyOperatorId != null)
+            {
                 licenseSummary.ThirdPartyOperatorAccountName = licence.AdoxioThirdPartyOperatorId.Name;
             }
 
@@ -223,7 +232,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
             licenseSummary.Endorsements = GetEndorsements(licenseSummary.LicenseId, dynamicsClient);
-            
+
             return licenseSummary;
         }
     }
