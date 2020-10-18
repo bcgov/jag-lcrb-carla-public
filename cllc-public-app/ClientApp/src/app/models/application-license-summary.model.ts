@@ -52,6 +52,7 @@ export class ApplicationLicenseSummary {
   missingFirstYearLicenceFee: boolean;
 
   thirdPartyOperatorAccountName: string;
+  currentOwner: string;
   isOperated: boolean; // only used on the client side
 
   licenceTypeCategory: string;
