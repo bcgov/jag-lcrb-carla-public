@@ -143,6 +143,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LicenseId = licence.AdoxioLicencesid,
                 LicenseNumber = licence.AdoxioLicencenumber,
                 MissingFirstYearLicenceFee = missingLicenceFee,
+                CurrentOwner = licence?.AdoxioLicencee?.Name,
                 EstablishmentAddressStreet = licence.AdoxioEstablishmentaddressstreet,
                 EstablishmentAddressCity = licence.AdoxioEstablishmentaddresscity,
                 EstablishmentAddressPostalCode = licence.AdoxioEstablishmentaddresspostalcode,
