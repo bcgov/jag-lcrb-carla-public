@@ -32,8 +32,12 @@ Scenario: Catering Indigenous Nation Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
+    And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -51,8 +55,12 @@ Scenario: Catering Partnership Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
+    And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -70,8 +78,12 @@ Scenario: Catering Private Corporation Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
+    And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -89,8 +101,12 @@ Scenario: Catering Public Corporation Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
+    And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -108,8 +124,12 @@ Scenario: Catering Society Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
+    And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -127,8 +147,12 @@ Scenario: Catering Sole Proprietorship Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee for Catering
+    And I click on the button for Catering terms and conditions
+    And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 */
