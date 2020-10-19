@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.NodeServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.NodeServices;
-using Microsoft.AspNetCore.Hosting;
 using Stubble.Core.Builders;
-using System.IO;
+using Wkhtmltopdf.NetCore;
+using Wkhtmltopdf.NetCore.Options;
 
 namespace PDF.Controllers
 {
@@ -18,11 +18,13 @@ namespace PDF.Controllers
     [Route("api/[controller]")]
     public class PDFController : Controller
     {
+        readonly IGeneratePdf _generatePdf;
         private readonly IConfiguration Configuration;        
         protected ILogger _logger;
 
-        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory, IGeneratePdf generatePdf)
         {
+            _generatePdf = generatePdf;
             Configuration = configuration;            
             _logger = loggerFactory.CreateLogger(typeof(PDFController));
         }
@@ -41,21 +43,22 @@ namespace PDF.Controllers
             if (System.IO.File.Exists(filename))
             {
                 string format = System.IO.File.ReadAllText(filename);
-                var templateData = stubble.Render(format, rawdata);
+                var html = stubble.Render(format, rawdata);
+
                 
 
-                JSONResponse result;
-                var options = new { format = "Letter", orientation = "portrait" };
+                _generatePdf.SetConvertOptions(new ConvertOptions
+                {
+                    PageSize = Size.Letter,
+                    PageMargins = new Margins(5,5,5,5)
+                });
+                
+                var pdf = await _generatePdf.GetPdfViewInHtml(html);
 
-                // execute the Node.js component
-                result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", templateData, rawdata, options);
+                return pdf;
+            }
 
-                return new FileContentResult(result.data, "application/pdf");
-            }
-            else
-            {
-                return new NotFoundResult();
-            }
+            return new NotFoundResult();
 
         }        
        
