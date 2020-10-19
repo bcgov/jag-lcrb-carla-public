@@ -104,7 +104,7 @@
                         </div>
                         <br><br>
                     </ng-container>
-                    <div *ngIf="item.status === 'PendingLicenceFee'" style="min-width: 10px; margin-bottom: 10px;">
+                    <div *ngIf="item.status === 'PendingLicenceFee'  && item.missingFirstYearLicenceFee" style="min-width: 10px; margin-bottom: 10px;">
                         <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
                             <span>
                                 <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
@@ -153,6 +153,8 @@
                     <ng-container *ngIf="item.thirdPartyOperatorAccountName">
                         <br>
                         <span>Operated By: </span><strong style="color: #1a5a96;">{{item.thirdPartyOperatorAccountName}}</strong>
+                        <br>
+                        <span>Licenced To: </span><strong style="color: #1a5a96;">{{item.currentOwner}}</strong>
                         
                     </ng-container>
                     <a  *ngIf="item.operated && !item.isOperated" [routerLink]="[ '/terminate-third-party-operator/' + item.licenseId]">
