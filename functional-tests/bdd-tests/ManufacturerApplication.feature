@@ -14,6 +14,8 @@ Scenario: Private Corporation Winery Manufacturer Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -29,6 +31,8 @@ Scenario: Private Corporation Distillery Manufacturer Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -44,6 +48,8 @@ Scenario: Private Corporation Brewery Manufacturer Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -59,5 +65,7 @@ Scenario: Private Corporation Co-packer Manufacturer Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
