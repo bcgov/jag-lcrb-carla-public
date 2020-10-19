@@ -50,7 +50,7 @@ namespace PDF.Controllers
                 _generatePdf.SetConvertOptions(new ConvertOptions
                 {
                     PageSize = Size.Letter,
-                    PageMargins = new Margins(5,0,5,15)
+                    PageMargins = new Margins(10,0,10,10)
                 });
                 
                 var pdf = await _generatePdf.GetPdfViewInHtml(html);
