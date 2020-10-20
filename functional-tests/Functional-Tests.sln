@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dynamics-tests", "dynamics-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bdd-tests", "bdd-tests\bdd-tests.csproj", "{170DECC8-E15D-4F3B-B857-0544E05A5787}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "account-creation-tests", "account-creation-tests\account-creation-tests.csproj", "{176BB18E-84AF-4E76-A17E-01F1ADA16282}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "smoke-tests", "smoke-tests\smoke-tests.csproj", "{A3FEDFA0-2638-44FC-99B8-EBFD8C3B13B4}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{170DECC8-E15D-4F3B-B857-0544E05A5787}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{170DECC8-E15D-4F3B-B857-0544E05A5787}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{170DECC8-E15D-4F3B-B857-0544E05A5787}.Release|Any CPU.Build.0 = Release|Any CPU
-		{176BB18E-84AF-4E76-A17E-01F1ADA16282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{176BB18E-84AF-4E76-A17E-01F1ADA16282}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{176BB18E-84AF-4E76-A17E-01F1ADA16282}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{176BB18E-84AF-4E76-A17E-01F1ADA16282}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A3FEDFA0-2638-44FC-99B8-EBFD8C3B13B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A3FEDFA0-2638-44FC-99B8-EBFD8C3B13B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3FEDFA0-2638-44FC-99B8-EBFD8C3B13B4}.Release|Any CPU.ActiveCfg = Release|Any CPU

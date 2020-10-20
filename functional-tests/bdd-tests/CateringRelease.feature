@@ -31,8 +31,9 @@ Scenario: Check Catering Release status
     And I confirm that the director name has been updated
     And I click on the Licences tab
     And I request a store relocation for Catering
+    # And I click on the Licences tab
+    # And I request a transfer of ownership
     And I click on the Licences tab
     And I request a third party operator
-    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page

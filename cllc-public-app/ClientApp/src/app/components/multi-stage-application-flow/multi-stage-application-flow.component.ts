@@ -28,7 +28,7 @@ export class MultiStageApplicationFlowComponent implements OnInit {
   stepType: 'post-lg-decision';
   application: Application;
   allSteps = ['account-profile', 'licensee-changes', 'application', 'security-screening', 'payment'];
-  stepsForApplication = ['account-profile', 'licensee-changes', 'application', 'security-screening', 'payment'];
+  stepsForApplication = [];
 
   constructor(public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
@@ -55,7 +55,7 @@ export class MultiStageApplicationFlowComponent implements OnInit {
           (<any>data).applyAsIndigenousNation = true;
         }
         this.isFree = data.applicationType.isFree;
-        this.determineSteps();
+        this.stepsForApplication = this.determineSteps();
       },
         () => {
           console.log('Error occured');
@@ -64,7 +64,7 @@ export class MultiStageApplicationFlowComponent implements OnInit {
   }
 
   // determine which steps to show or hide
-  determineSteps() {
+  determineSteps(): string[] {
     let steps = [];
     this.allSteps.forEach(step => {
       if (
@@ -77,6 +77,7 @@ export class MultiStageApplicationFlowComponent implements OnInit {
         steps.push(step);
       }
     });
+    return steps;
   }
 
   canDeactivate(): Observable<boolean> {
