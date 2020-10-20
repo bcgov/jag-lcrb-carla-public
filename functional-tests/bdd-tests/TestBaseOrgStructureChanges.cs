@@ -57,6 +57,12 @@ namespace bdd_tests
             // upload a special rights and restrictions document
             FileUpload("signage.pdf","(//input[@type='file'])[9]");
 
+            // upload a selling it right certificate
+            FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[12]");
+
+            // upload an additional supporting document
+            FileUpload("business_plan.pdf", "(//input[@type='file'])[14]");
+
             /***** Leader #1 *****/
 
             // click on the Add Leader button
@@ -296,17 +302,17 @@ namespace bdd_tests
             Page Title: [client name] Legal Entity Structure
             */
 
-            // check that the director first name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
+            // check that the director first name has been updated           
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
 
-            // check that the director last name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section/app-associate-list/div/table/tr[1]/td[2]/span[contains(.,'NewLastName')]")).Displayed);
+            // check that the director last name has been updated            
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section/app-associate-list/div/table/tr[1]/td[2]/span[contains(.,'NewLastName')]")).Displayed);
 
-            // check that the shareholder first name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
+            // check that the shareholder first name has been updated           
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[7]/section[1]/app-associate-list/div/table/tr/td[1]/span[contains(.,'NewFirstName')]")).Displayed);
 
             // check that the shareholder last name has been updated
-            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[7]/section[1]/app-associate-list/div/table/tr/td[2]/span[contains(.,'NewLastName')]")).Displayed);
         }
 
 
@@ -986,7 +992,7 @@ namespace bdd_tests
             string emailAddressPublicCorp = "public@corporation.com";
 
             // click on the Add Business Shareholder button
-            NgWebElement uiAddPublicCorporationRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddPublicCorporationRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] button"));
             uiAddPublicCorporationRow.Click();
 
             // add the public corporation business name
