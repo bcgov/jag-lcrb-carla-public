@@ -60,13 +60,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
   application: Application;
   @Input() skipPayment: boolean = false;
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
-  @ViewChild('financialIntegrityDocuments', { static: false }) financialIntegrityDocuments: FileUploaderComponent;
-  @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
-  @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
-  @ViewChild(ProofOfZoningComponent, { static: false }) proofOfZoning: ProofOfZoningComponent;
-  @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger, static: false }) lgAutoComplete: MatAutocompleteTrigger;
-  @ViewChild('pdAutoCompleteTrigger', { read: MatAutocompleteTrigger, static: false }) pdAutoComplete: MatAutocompleteTrigger;
+  @ViewChild('mainForm') mainForm: FileUploaderComponent;
+  @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
+  @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
+  @ViewChild(ConnectionToNonMedicalStoresComponent) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
+  @ViewChild(ProofOfZoningComponent) proofOfZoning: ProofOfZoningComponent;
+  @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger }) lgAutoComplete: MatAutocompleteTrigger;
+  @ViewChild('pdAutoCompleteTrigger', { read: MatAutocompleteTrigger }) pdAutoComplete: MatAutocompleteTrigger;
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
@@ -627,7 +627,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showExteriorRenderings() {
     let show = this.application &&
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
-        || this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange);
+        );
     show = show && this.form.get('proposedChange').value === 'Yes';
     return show;
   }

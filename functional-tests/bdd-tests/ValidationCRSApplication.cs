@@ -13,57 +13,59 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplicationStoreChanges
+Feature: ValidationCRSApplication
     As a logged in business user
-    I want to submit a CRS Application for different business types
-    And request a store relocation and structural change and transfer of ownership for the approved application
+    I want to confirm the validation messages for CRS Applications
 
-@e2e @cannabis @indigenousnation @crsstorechangesIN
-Scenario: Indigenous Nation Cannabis Store Changes
+@crsapp @validation @privatecorporation
+Scenario: Validation for Private Corporation CRS Application 
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the button for Submit Organization Information
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a Cannabis application
+    And the account is deleted
+    Then I see the login page
+
+@crsapp @validation indigenousnation
+Scenario: Validation for IN CRS Application
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for an indigenous nation
     And I review the organization structure for an indigenous nation
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Retail Store application for an indigenous nation
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I pay the licensing fee for Cannabis
-    And I request a store relocation for Cannabis
-    And I request a structural change
-    And I request a transfer of ownership
-    And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for an indigenous nation Cannabis application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsstorechangespartnership
-Scenario: Partnership Cannabis Store Changes
-    Given I am logged in to the dashboard as a partnership
+@e2e @cannabis @privatecorporation @validation
+Scenario: Validation for CRS Branding Change 
+    Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
-    And I review the account profile for a partnership
-    And I review the organization structure for a partnership
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Retail Store application for a partnership
+    And I complete the Cannabis Retail Store application for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee for Cannabis
-    And I request a store relocation for Cannabis
-    And I request a structural change
-    And I request a transfer of ownership
-    And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And I click on the branding change link for Cannabis
+    And I click on the Continue to Application button
+    And I do not complete the application correctly
+    And the expected validation errors are thrown for a CRS Branding Change application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsstorechangesprivcorp
-Scenario: Private Corporation Cannabis Store Changes
+@e2e @cannabis @privatecorporation @licencerenewal
+Scenario: Validation for CRS Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -75,78 +77,10 @@ Scenario: Private Corporation Cannabis Store Changes
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And I request a store relocation for Cannabis
-    And I request a structural change
-    And I request a transfer of ownership
-    And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
-    And the account is deleted
-    Then I see the login page
-
-@e2e @cannabis @publiccorporation @crsstorechangespubcorp
-Scenario: Public Corporation Cannabis Store Changes
-    Given I am logged in to the dashboard as a public corporation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
-    And I review the account profile for a public corporation
-    And I review the organization structure for a public corporation
-    And I click on the button for Submit Organization Information
-    And I complete the Cannabis Retail Store application for a public corporation
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I pay the licensing fee for Cannabis
-    And I request a store relocation for Cannabis
-    And I request a structural change
-    And I request a transfer of ownership
-    And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
-    And the account is deleted
-    Then I see the login page
-
-@e2e @cannabis @society @crsstorechangessociety
-Scenario: Society Cannabis Store Changes
-    Given I am logged in to the dashboard as a society
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
-    And I review the account profile for a society
-    And I review the organization structure for a society
-    And I click on the button for Submit Organization Information
-    And I complete the Cannabis Retail Store application for a society
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I pay the licensing fee for Cannabis
-    And I request a store relocation for Cannabis
-    And I request a structural change
-    And I request a transfer of ownership
-    And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
-    And the account is deleted
-    Then I see the login page
-
-@e2e @cannabis @soleproprietorship @crsstorechangessoleprop
-Scenario: Sole Proprietorship Cannabis Store Changes
-    Given I am logged in to the dashboard as a sole proprietorship
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
-    And I review the account profile for a sole proprietorship
-    And I review the organization structure for a sole proprietorship
-    And I click on the button for Submit Organization Information
-    And I complete the Cannabis Retail Store application for a sole proprietorship
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I pay the licensing fee for Cannabis
-    And I request a store relocation for Cannabis
-    And I request a structural change
-    And I request a transfer of ownership
-    And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And the expiry date is changed to today
+    And I click on the link for Renew Licence
+    And I do not complete the licence renewal application correctly
+    And the expected validation errors are thrown for a licence renewal application
     And the account is deleted
     Then I see the login page
 
@@ -215,9 +149,9 @@ Scenario: Validation for CRS Transfer of Ownership
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplicationStoreChanges.feature")]
+    [FeatureFile("./ValidationCRSApplication.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSApplicationStoreChanges : TestBase
+    public sealed class ValidationCRSApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
