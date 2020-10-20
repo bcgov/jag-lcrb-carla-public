@@ -441,12 +441,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                             await CreateContactDocumentLocation(_dynamicsClient, _fileManagerClient, contact);
                         }
 
-
-                        var account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
+                        // Note that this will search for active accounts
+                        var account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
                         if (account == null)
                         {
                             // try by other means.
-                            account = _dynamicsClient.GetAccountByLegalName(userSettings.BusinessLegalName);
+                            account = _dynamicsClient.GetActiveAccountByLegalName(userSettings.BusinessLegalName);
                         }
                         if (account != null && account.Accountid != null)
                         {
@@ -455,6 +455,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                             // ensure that the given account has a documents folder.
                             await CreateAccountDocumentLocation(_dynamicsClient, _fileManagerClient, account);
+                        }
+                        else  // force the new user process if contact exists but account does not.
+                        {
+                            userSettings.AuthenticatedUser = null;
+                            userSettings.IsNewUserRegistration = true;
                         }
                     }
                 }

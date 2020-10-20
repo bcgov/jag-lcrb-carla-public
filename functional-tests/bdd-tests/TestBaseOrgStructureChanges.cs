@@ -956,79 +956,6 @@ namespace bdd_tests
             // click on trustee confirm button
             NgWebElement uiConfirmTrustee = ngDriver.FindElement(By.CssSelector("[addlabel='Add Trustee'] .fa-save span"));
             uiConfirmTrustee.Click();
-
-            /********** Business Shareholder - Partnership **********
-
-            // create partnership test data
-            string businessNamePartnership = "Partnership";
-            string sharesPartnership = "10";
-            string emailAddressPartnership = "partnership@test.com";
-
-            // click on the partnership Add Business Shareholder button
-            NgWebElement uiAddPartnershipRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
-            uiAddPartnershipRow.Click();
-
-            // add the partnership business name
-            NgWebElement uiAddPartnershipBizName = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='businessNameNew']"));
-            uiAddPartnershipBizName.SendKeys(businessNamePartnership);
-
-            // add the partnership number of shares
-            NgWebElement uiAddPartnershipShares = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='numberofSharesNew']"));
-            uiAddPartnershipShares.SendKeys(sharesPartnership);
-
-            // select the partnership organization type
-            NgWebElement uiAddOrganizationTypePartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [formcontrolname='businessType'] option[value='Partnership']"));
-            uiAddOrganizationTypePartnership.Click();
-
-            // add the partnership email address
-            NgWebElement uiAddEmailAddressPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] input[formcontrolname='emailNew']"));
-            uiAddEmailAddressPartnership.SendKeys(emailAddressPartnership);
-
-            // click on the partnership Confirm button
-            NgWebElement uiConfirmButtonPartnership = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] .fa-save span"));
-            uiConfirmButtonPartnership.Click();
-
-            // click on the individual partner row
-            NgWebElement uiAddPartnerRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-5']/div/section/app-org-structure/div/div[3]/section[1]/app-associate-list/div/button"));
-            uiAddPartnerRow.Click();
-
-            // create the individual partner data
-            string firstNamePartner = "Individual";
-            string lastNamePartner = "Partner";
-            string percentage = "50";
-            string emailPartner = "individual@partner.com";
-
-            // add the individual partner first name
-            NgWebElement uiFirstNamePartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='firstNameNew']"));
-            uiFirstNamePartner.SendKeys(firstNamePartner);
-
-            // add the individual partner last name
-            NgWebElement uiLastNamePartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='lastNameNew']"));
-            uiLastNamePartner.SendKeys(lastNamePartner);
-
-            // add the individual partner percentage
-            NgWebElement uiPartnerPercentage = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='interestPercentageNew']"));
-            uiPartnerPercentage.SendKeys(percentage);
-
-            // add the individual partner email address
-            NgWebElement uiEmailPartner = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='emailNew']"));
-            uiEmailPartner.SendKeys(emailPartner);
-
-            // add the individual partner DOB
-            NgWebElement uiPartnerDOB = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] input[formcontrolname='dateofBirthNew']"));
-            uiPartnerDOB.Click();
-
-            SharedCalendarDate();
-
-            // click on the individual partner confirm button
-            NgWebElement uiPartnerConfirm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Individual Partner'][changetypesuffix='IndividualShareholder'] .fa-save span"));
-            uiPartnerConfirm.Click();
-
-            // upload partnership agreement
-            string partnershipAgreement = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + "partnership_agreement.pdf");
-            NgWebElement uiUploadPartner = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-5']/div/section/app-org-structure/div/div[2]/section/app-file-uploader/div/ngx-file-drop/div/div/input"));
-            uiUploadPartner.SendKeys(partnershipAgreement);
-            */
         }
 
 
@@ -1204,13 +1131,13 @@ namespace bdd_tests
             uiShareBizConfirmButton2.Click();
 
             // upload a notice of articles document for business shareholder
-            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[21]");
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[27]");
 
             // upload a central securities register document for business shareholder
-            FileUpload("central_securities_register.pdf","(//input[@type='file'])[24]");
+            FileUpload("central_securities_register.pdf","(//input[@type='file'])[30]");
 
             // upload a special rights and restrictions document for business shareholder
-            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[27]");
+            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[33]");
 
             /********** Business Shareholder #2 - Leader **********/
 
@@ -1327,13 +1254,13 @@ namespace bdd_tests
             uiShareBizConfirmButton3.Click();
 
             // upload a notice of articles document for business shareholder
-            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[30]");
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[36]");
 
             // upload a central securities register document for business shareholder
-            FileUpload("central_securities_register.pdf","(//input[@type='file'])[33]");
+            FileUpload("central_securities_register.pdf","(//input[@type='file'])[39]");
 
             // upload a special rights and restrictions document for business shareholder
-            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[36]");
+            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[42]");
 
             /********** Business Shareholder #3 - Leader **********/
 
@@ -1450,13 +1377,13 @@ namespace bdd_tests
             uiShareBizConfirmButton4.Click();
 
             // upload a notice of articles document for business shareholder
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[39]");
+            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[45]");
 
             // upload a central securities register document for business shareholder
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[42]");
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[48]");
 
             // upload a special rights and restrictions document for business shareholder
-            FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[45]");
+            FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[51]");
 
             /********** Business Shareholder #4 - Leader **********/
 
@@ -1573,13 +1500,13 @@ namespace bdd_tests
             uiShareBizConfirmButton5.Click();
 
             // upload a notice of articles document for business shareholder
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[48]");
+            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[54]");
 
             // upload a central securities register document for business shareholder
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[51]");
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[57]");
 
             // upload a special rights and restrictions document for business shareholder
-            FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[54]");
+            FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[60]");
 
             /********** Business Shareholder #5 - Leader **********/
 

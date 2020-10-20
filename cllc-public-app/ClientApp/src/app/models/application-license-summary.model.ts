@@ -47,9 +47,12 @@ export class ApplicationLicenseSummary {
   dormant: boolean;
   suspended: boolean;
   operated: boolean;
+  checklistConclusivelyDeem: boolean;
   tpoRequested: boolean; // indicates a Third Party Application in Progress
+  missingFirstYearLicenceFee: boolean;
 
   thirdPartyOperatorAccountName: string;
+  currentOwner: string;
   isOperated: boolean; // only used on the client side
 
   licenceTypeCategory: string;

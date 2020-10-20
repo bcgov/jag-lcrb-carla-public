@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplication.feature
+Feature: CRSApplication
     As a logged in business user
     I want to submit a CRS Application for different business types
 
@@ -30,6 +30,8 @@ Scenario: Indigenous Nation CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -46,6 +48,8 @@ Scenario: Partnership CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -62,6 +66,8 @@ Scenario: Private Corporation CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -78,6 +84,8 @@ Scenario: Public Corporation CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -94,6 +102,8 @@ Scenario: Society CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -110,6 +120,8 @@ Scenario: Sole Proprietorship CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -126,32 +138,8 @@ Scenario: Local Government CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And the account is deleted
-    Then I see the login page
-
-@crsapp @validation @privatecorporation
-Scenario: Validation for Private Corporation CRS Application 
-    Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
-    And I do not complete the application correctly
-    And the expected validation errors are thrown for a Cannabis application
-    And the account is deleted
-    Then I see the login page
-
-@crsapp @validation indigenousnation
-Scenario: Validation for IN CRS Application
-    Given I am logged in to the dashboard as an indigenous nation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
-    And I review the account profile for an indigenous nation
-    And I review the organization structure for an indigenous nation
-    And I click on the button for Submit Organization Information
-    And I do not complete the application correctly
-    And the expected validation errors are thrown for an indigenous nation Cannabis application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 */
