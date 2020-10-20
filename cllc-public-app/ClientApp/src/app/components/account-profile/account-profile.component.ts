@@ -124,7 +124,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         // businessDBAName: [''],
         bcIncorporationNumber: [''],
         dateOfIncorporationInBC: [''],
-        businessNumber: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+        // CRA business numbers are 9 digit long and start with a non-zero digit
+        businessNumber: ['', [Validators.required, Validators.pattern('^[1-9][0-9]{8}$')]],
         businessType: ['', Validators.required],
         contactPhone: ['', [Validators.required, /*Validators.minLength(10), Validators.maxLength(10)*/]],
         contactEmail: ['', [Validators.required, Validators.email]],

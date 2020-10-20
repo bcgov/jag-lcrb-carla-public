@@ -4,12 +4,12 @@
   <div *ngIf="account?.businessType">
     <div [formGroup]="form" style="padding-left: 45px; position: relative">
       <!-- Title -->
-      <h1 class="ngtest-page-title">Transfer Your {{licence.licenseType}} Licence</h1>
+      <h1 class="ngtest-page-title">Transfer Your {{licence?.licenseType}} Licence</h1>
     </div>
 
     <div [formGroup]="form" class="application-wrapper">
       <!-- Preamble -->
-      <section class="ngtest-preamble-content" *ngIf="licence.licenseType === 'Cannabis Retail Store'">
+      <section class="ngtest-preamble-content" *ngIf="licence?.licenseType === 'Cannabis Retail Store'">
         <p>
           By submitting this application, the current cannabis retail store licence holder acknowledges that they
           <strong>must continue to hold valid interest</strong> (lease or land title) until the Transfer of Ownership
@@ -25,7 +25,7 @@
           closed until the transfer application has been approved.
         </p>
       </section>
-      <section class="ngtest-preamble-content" *ngIf="licence.licenseType !== 'Cannabis Retail Store'">
+      <section class="ngtest-preamble-content" *ngIf="licence?.licenseType !== 'Cannabis Retail Store'">
         <p>
           &nbsp;
         </p>
@@ -37,7 +37,7 @@
       <section class="padded-section content-bottom">
         <div class="ngtest-before-starting-content">
           <p>
-            Please ensure that the proposed licensee of the has logged into the
+            Please ensure that the proposed licensee has logged into the
             portal (this website) at least once. If you cannot find their business when searching below, they have not
             yet logged in and created an account record.
           </p>
@@ -55,9 +55,9 @@
 
       <h3 class="blue-header">LICENCE TO BE TRANSFERRED</h3>
       <section class="padded-section content-bottom">
-          <app-field label="Licence" [required]="false">
+        <app-field label="Licence" [required]="false">
           <input class="form-control" style="width: 500px;" type="text" [readonly]="true"
-           formControlName="licenseNumber">
+            formControlName="licenseNumber">
         </app-field>
 
         <app-field label="Establishment Name" [required]="false" [valid]="isValidOrNotTouched('establishmentName')"
@@ -100,9 +100,34 @@
         </div>
       </section>
 
+      <!-- Contact Details -->
+      <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+      <div class=content-bottom>
+        <address class="padded-section" formGroupName="licenseeContact">
+          <app-field label="Name"  [valid]="isValidOrNotTouched('licenseeContact.name')"
+            errorMessage="Please enter the contact's first name">
+            <input class="form-control" style="width: 350px;" type="text"
+              formControlName="name" id="name">
+          </app-field>
+
+          <app-field label="Phone Number (main)" [valid]="isValidOrNotTouched('licenseeContact.phone')"
+            errorMessage="Please enter the contact's 10-digit phone number">
+            <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
+              (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="phone">
+          </app-field>
+
+          <app-field label="Email"  [valid]="isValidOrNotTouched('licenseeContact.email')"
+            errorMessage="Please enter the contact's email address">
+            <input class="form-control" style="width: 350px;" type="text" 
+              formControlName="email" id="email"
+              (blur)="trimValue(form.get('licenseeContact.email'))">
+          </app-field>
+        </address>
+      </div>
+
       <h3 class="blue-header">IDENTIFY THE PROPOSED TRANSFEREE</h3>
       <section class="padded-section content-bottom">
-        <app-field label="Search for the business name you intend to transfer your {{licence.licenseType}} licence to:"
+        <app-field label="Search for the business name you intend to transfer your {{licence?.licenseType}} licence to:"
           errorMessage="Please select a value" [required]="true"
           [valid]="isValidOrNotTouched('proposedOwner.accountId')">
           <app-account-picker (valueSelected)="onAccountSelect($event)"></app-account-picker>
@@ -119,18 +144,20 @@
           errorMessage="Please consent to the transfer" [showChevrons]="false">
           <section style="display: flex">
             <input type="checkbox" formControlName="transferConsent">
-            
+
             <!-- for cannabis retail stores -->
-            <div style="padding-left: 10px;" *ngIf="licence.licenseType === 'Cannabis Retail Store'"> I agree to transfer my {{licence.licenseType}} licence to the proposed transferee
+            <div style="padding-left: 10px;" *ngIf="licence?.licenseType === 'Cannabis Retail Store'"> I agree to
+              transfer my {{licence?.licenseType}} licence to the proposed transferee
               identified above.
             </div>
             <!-- for liquor licences -->
-            <div style="padding-left: 10px;" *ngIf="licence.licenseType !== 'Cannabis Retail Store'">
-              <p>I agree to transfer my {{licence.licenseType}} licence to the proposed transferee
-                identified above. The proposed transferee will, if the general manager transfers the licence, be or become the owner of the business in respect of
+            <div style="padding-left: 10px;" *ngIf="licence?.licenseType !== 'Cannabis Retail Store'">
+              <p>I agree to transfer my {{licence?.licenseType}} licence to the proposed transferee
+                identified above. The proposed transferee will, if the general manager transfers the licence, be or
+                become the owner of the business in respect of
                 which the licence was issued.
               </p>
-              </div>            
+            </div>
           </section>
         </app-field>
       </section>
@@ -148,7 +175,7 @@
             Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
             usually
             be
-            an officer or, in some cases, a director
+            an officer or, in some cases, a director.
           </div>
         </section>
         <p>Note: A lawyer or
@@ -165,7 +192,7 @@
             </div>
           </section>
         </app-field>
-        <p *ngIf="licence.licenseType === 'Cannabis Retail Store'"> 
+        <p *ngIf="licence?.licenseType === 'Cannabis Retail Store'">
           Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
           manager
           an application, or
@@ -173,9 +200,11 @@
           information, or
           fails to disclose a material fact”.
         </p>
-        <p *ngIf="licence.licenseType !== 'Cannabis Retail Store'"> 
-            Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to issue, renew, transfer or amend a licence if the applicant fails to disclose a material fact required by the application or makes a false or misleading statement in the application.”
-          </p>        
+        <p *ngIf="licence?.licenseType !== 'Cannabis Retail Store'">
+          Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to issue, renew,
+          transfer or amend a licence if the applicant fails to disclose a material fact required by the application or
+          makes a false or misleading statement in the application.”
+        </p>
         <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
           errorMessage="Please affirm that all of the information provided for this application is true and complete."
           [showChevrons]="false">

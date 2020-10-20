@@ -150,6 +150,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioProposedestablishmentisalr = from.IsAlr;
             to.AdoxioHascooleraccess = from.HasCoolerAccess;
 
+            to.AdoxioLocatedaboveother = from.LocatedAboveOther;
+
 
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
@@ -456,7 +458,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 PatioLiquorCarriedDescription = dynamicsApplication.AdoxioPatioliquorcarrieddescription,
                 PatioAccessControlDescription = dynamicsApplication.AdoxioPatioaccesscontroldescription,
                 IsAlr = dynamicsApplication.AdoxioProposedestablishmentisalr.HasValue && (bool)dynamicsApplication.AdoxioProposedestablishmentisalr,
-                HasCoolerAccess = dynamicsApplication.AdoxioHascooleraccess.HasValue && (bool)dynamicsApplication.AdoxioHascooleraccess
+                HasCoolerAccess = dynamicsApplication.AdoxioHascooleraccess.HasValue && (bool)dynamicsApplication.AdoxioHascooleraccess,
+
+                LocatedAboveOther = dynamicsApplication.AdoxioLocatedaboveother
             };
 
 

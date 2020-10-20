@@ -103,9 +103,7 @@ namespace bdd_tests
             string conEmail = "contact@email.com";
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
-
-            
-
+     
             // enter the establishment name
             NgWebElement uiEstabName = null;
             // try up to 10 times to get an element.
@@ -123,11 +121,8 @@ namespace bdd_tests
                 catch (Exception)
                 {
 
-                }
-                
+                }     
             }
-
-
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address

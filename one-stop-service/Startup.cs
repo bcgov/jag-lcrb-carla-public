@@ -162,7 +162,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
                     .WriteTo.EventCollector(splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"],
+                       sourceType: "onestop", eventCollectorToken: Configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
                        messageHandler: new HttpClientHandler()

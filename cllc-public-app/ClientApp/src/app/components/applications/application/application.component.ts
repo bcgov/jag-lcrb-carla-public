@@ -627,7 +627,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showExteriorRenderings() {
     let show = this.application &&
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
-        || this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange);
+        );
     show = show && this.form.get('proposedChange').value === 'Yes';
     return show;
   }
@@ -893,15 +893,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   isValid(): boolean {
-    
+
 
     this.showValidationMessages = false;
     let valid = true;
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
+    const applicationTypeName = this.application && this.application.applicationType.name;
 
     this.markControlsAsTouched(this.form);
-    // handle supporting documents for sole proprietor who submit marketing applications 
-    let marketing_soleprop = this.application.applicationType.name === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietorship";
+    // handle supporting documents for sole proprietor who submit marketing applications
+    let marketing_soleprop = applicationTypeName === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietorship";
 
     if (this.proofOfZoning) {
       let zoningErrors = this.proofOfZoning.getValidationErrors();
@@ -930,7 +931,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one supporting document is required.');
     }
 
-    if (this.application.applicationType.signage === FormControlState.Show &&
+    const signageNotRequired = (
+       applicationTypeName === ApplicationTypeNames.LiquorLicenceTransfer
+    );
+
+    if (!signageNotRequired && this.application.applicationType.signage === FormControlState.Show &&
       ((this.uploadedSignageDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one signage document is required.');
@@ -964,10 +969,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
     }
-    if (this.application.applicationType.name === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
+    if (applicationTypeName === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
     }
+
     if (!this.isHoursOfSaleValid()) {
       this.validationMessages.push('Hours of sale are required');
     }
@@ -1006,14 +1012,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
         return message;
       })(),
-      
+
       signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
 
       description1: 'Please enter a description',
       IsReadyProductNotVisibleOutside: 'Please confirm that product will not be visible from the outside',
       serviceAreas: 'All service area rows must be complete',
 
-      additionalPropertyInformation: 'Please enter additional property information',      
+      additionalPropertyInformation: 'Please enter additional property information',
       applyingPerson: 'Please enter the applying person',
       authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
       'capacityArea.capacity': 'Please enter capacity area',
@@ -1027,13 +1033,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
       establishmentAddressCity: 'Please enter the city',
       establishmentAddressPostalCode: 'Please enter the postal code',
       establishmentEmail: 'Please enter the email address for the store',
-      establishmentPhone: 'Please enter the store phone number',          
+      establishmentPhone: 'Please enter the store phone number',
       establishmentParcelId: 'Please enter the Parcel Identifier (format: 9 digits)',
       establishmentopeningdate: 'Please enter the store opening date',
       federalProducerNames: 'Please enter the name of federal producer',
-      hasValidInterest: 'Please enter a value for valid interest',      
+      hasValidInterest: 'Please enter a value for valid interest',
       indigenousNationId: 'Please select the Indigenous nation',
-      isAlr: 'Please indicate ALR status',      
+      isAlr: 'Please indicate ALR status',
       isLocatedInGroceryStore: 'Please specify if the establishment is located in a grocery store.',
       isOwnerBusiness: 'Please enter a value for owner business',
       isPackaging: 'Please enter a value for packaging',
@@ -1052,14 +1058,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
       isReadySurveillanceNotice: 'Please confirm surveilance notice is ready',
       isReadyValidInterest: 'Please confirm valid interest is ready',
       isReadyWorkers: 'Please confirm workers are ready',
-      lGApprovalDecision: 'Please enter a value for local government approval decision',      
-      lGContactEmail: 'Please enter a value for local government contact email',      
-      lGContactPhone: 'Please enter a value for local government contact phone', 
-      lGDecisionComments: 'Please enter a value for local government decision comments', 
-      lGDecisionSubmissionDate: 'Please enter a value for local government decision submission date', 
-      lGNameOfOfficial: 'Please enter a value for local government name of official', 
-      lGTitlePosition: 'Please enter a value for local government title of position', 
-      lgZoning: 'Please enter a value for local government zoning', 
+      lGApprovalDecision: 'Please enter a value for local government approval decision',
+      lGContactEmail: 'Please enter a value for local government contact email',
+      lGContactPhone: 'Please enter a value for local government contact phone',
+      lGDecisionComments: 'Please enter a value for local government decision comments',
+      lGDecisionSubmissionDate: 'Please enter a value for local government decision submission date',
+      lGNameOfOfficial: 'Please enter a value for local government name of official',
+      lGTitlePosition: 'Please enter a value for local government title of position',
+      lgZoning: 'Please enter a value for local government zoning',
       licenceSubCategory: 'Please select the licence sub category',
       liquorIndustryConnections: 'Please enter industry connections',
       liquorIndustryConnectionsDetails: 'Please enter industry connection details',
@@ -1107,10 +1113,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       renewalZoning: 'Please enter a value for renwal zoning',
       renewalkeypersonnel: 'Please enter a value for renwal key personnel',
       resolutionDocsUploaded: 'Please enter a value for renwal documentation uploaded',
-      ruralAgencyStoreAppointment: 'Please enter a value for rural agency store appointment number',      
-      tiedhouseFederalInterest: 'Please enter a value for tied house federal interest',      
-      willHaveValidInterest: 'Please enter a value for will have valid interest',      
-      zoningStatus: 'Please enter a value for zoning status'      
+      ruralAgencyStoreAppointment: 'Please enter a value for rural agency store appointment number',
+      tiedhouseFederalInterest: 'Please enter a value for tied house federal interest',
+      willHaveValidInterest: 'Please enter a value for will have valid interest',
+      zoningStatus: 'Please enter a value for zoning status'
 
     };
 
@@ -1121,25 +1127,25 @@ export class ApplicationComponent extends FormBase implements OnInit {
         tab.sections.forEach(function (section) {
           if (section.fields) {
             section.fields.forEach(function (field) {
-              if (field.required) {                  
+              if (field.required) {
                 if (!errorMap[field.datafieldname]) {
                   errorMap[field.datafieldname] = field.name + ' is required';
                 }
-              }             
+              }
             }, this);
           }
 
         }, this);
       }, this);
     }
-    
+
 
 
     return errorMap;
   }
 
 
-  
+
 
   /**
    * Dialog to confirm the application cancellation (status changed to "Termindated")
