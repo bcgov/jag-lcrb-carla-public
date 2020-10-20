@@ -4,7 +4,7 @@
     And renew the licence
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Private Corporation CRS Licence Renewal
+Scenario: Negative CRS Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -17,12 +17,12 @@ Scenario: Private Corporation CRS Licence Renewal
     And the application is approved
     And I pay the licensing fee for Cannabis
     And the expiry date is changed to today
-    And I renew the licence
+    And I renew the licence with negative responses
     And the account is deleted
     Then I see the login page
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Validation for CRS Licence Renewal
+Scenario: Positive CRS Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -35,8 +35,6 @@ Scenario: Validation for CRS Licence Renewal
     And the application is approved
     And I pay the licensing fee for Cannabis
     And the expiry date is changed to today
-    And I click on the link for Renew Licence
-    And I do not complete the licence renewal application correctly
-    And the expected validation errors are thrown for a licence renewal application
+    And I renew the licence with positive responses
     And the account is deleted
     Then I see the login page
