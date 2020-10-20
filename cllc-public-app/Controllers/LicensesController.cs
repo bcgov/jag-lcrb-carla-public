@@ -654,7 +654,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return adoxioLicences;
         }
-
         private bool isConclusivelyDeemed(ApplicationLicenseSummary lic)
         {
             // get the current user.
@@ -703,6 +702,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return new JsonResult(adoxioLicenses);
         }
+
 
         /// GET all proposed licenses in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("proposed-owner")]
@@ -837,60 +837,77 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var endorsementsText = "";
                 License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
-
+                
                 if (licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0)
                 {
-                    foreach (ViewModels.Endorsement endorsement in licenceVM.Endorsements)
-                    {
-                        endorsementsText += endorsement.ToHtml(_dynamicsClient);
-                    }
-                }
 
-                var storeHours = $@"
-                <tr>
-                    <td>Open</td>
-                    <td>9:00 am</td>
-                    <td>9:00 am</td>
-                    <td>9:00 am</td>
-                    <td>9:00 am</td>
-                    <td>9:00 am</td>
-                    <td>9:00 am</td>
-                    <td>9:00 am</td>
-                </tr>                
-                <tr>
-                    <td>Close</td>
-                    <td>11:00 pm</td>
-                    <td>11:00 pm</td>
-                    <td>11:00 pm</td>
-                    <td>11:00 pm</td>
-                    <td>11:00 pm</td>
-                    <td>11:00 pm</td>
-                    <td>11:00 pm</td>
-                </tr>";
-                if (adoxioLicense.AdoxioEstablishment?.AdoxioStandardhours != true && adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
-                {
-                    storeHours = $@"
-                <tr>
-                    <td>Open</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioMondayopen)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioTuesdayopen)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioWednesdayopen)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioThursdayopen)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioFridayopen)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioSaturdayopen)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioSundayopen)}</td>
-                </tr>                
-                <tr>
-                    <td>Close</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioMondayclose)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioTuesdayclose)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioWednesdayclose)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioThursdayclose)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioFridayclose)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioSaturdayclose)}</td>
-                    <td>{StoreHoursUtility.ConvertOpenHoursToString(adoxioLicense.AdoxioEstablishment?.AdoxioSundayclose)}</td>
-                </tr>";
+                    var licenceHasSEA = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Service Area Endorsement");
+                    var licenceHasLounge = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Lounge Area Endorsement");
+                    var licenceHasStore = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "On-Site Store Endorsement");
+                    var licenceHasCatering = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Catering Endorsement");
+                    var licenceHasOffsite = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Off-Site Store Endorsement");
+                    var licenceHasPicnic = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Picnic Area Endorsement");;
+
+                    if(licenceHasSEA > -1) {
+                        endorsementsText += licenceVM.Endorsements[licenceHasSEA].ToHtml(_dynamicsClient);
+                    }
+
+                    if(licenceHasLounge > -1) {
+                        endorsementsText += licenceVM.Endorsements[licenceHasLounge].ToHtml(_dynamicsClient);
+                    }
+                    
+                    if(licenceHasStore > -1) {
+                        endorsementsText += licenceVM.Endorsements[licenceHasStore].SimpleHeader();
+                    }
+
+                    if(licenceHasCatering > -1) {
+                        endorsementsText += licenceVM.Endorsements[licenceHasCatering].SimpleHeader();
+                    }
+
+                    if(licenceHasOffsite > -1) {
+                        endorsementsText += licenceVM.Endorsements[licenceHasCatering].SimpleHeader();
+                    }
+
+                    if(licenceHasPicnic > -1) {
+                        endorsementsText += licenceVM.Endorsements[licenceHasPicnic].SimpleHeader();
+                    }
+
                 }
+            var storeHours = "";
+
+            MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null");
+            
+            if (hours.Value.Count > 0){
+
+                MicrosoftDynamicsCRMadoxioHoursofservice hoursVal = hours.Value.First();
+
+                storeHours = $@"<h3 style=""text-align: center;"">HOURS OF SALE</h3>
+                            <table style=""width: 100%"">
+                            <tr>
+                                <td class='hours'>Start</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayopen)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioTuesdayopen)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioWednesdayopen)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioThursdayopen)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioFridayopen)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayopen)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayopen)}</td>
+                            </tr>                
+                            <tr>
+                                <td class='hours'>End</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayclose)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioTuesdayclose)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioWednesdayclose)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioThursdayclose)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioFridayclose)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayclose)}</td>
+                                <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayclose)}</td>
+                            </tr>";
+            } {
+                // to do: log when we expect to find hours of sale, but don't
+                // wine stores, ubrew, lrs.
+            }
+
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
                 if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
                 {
@@ -908,7 +925,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
                         { "endorsementsText", endorsementsText },
-                        { "storeHours", storeHours }
+                        { "storeHours", storeHours}
                     };
                 }
                 else if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
@@ -930,13 +947,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "storeHours", storeHours }
                     };
                 }
+
+
+
                 else if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Manufacturer")
                 {
                     parameters = new Dictionary<string, string>
                     {
                         { "title", "Liquor_License" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
-                        { "establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName   },
+                        { "establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName },
+                        { "licenceName", adoxioLicense.AdoxioEstablishment?.AdoxioName},                        // we may need another field for this...
                         { "establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet },
                         { "establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
@@ -946,9 +967,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
                         { "endorsementsText", endorsementsText },
-                        { "storeHours", storeHours }
+                        { "storeHours", storeHours },
+                        { "printDate", DateTime.Today.ToString("MMMM dd, yyyy")} // will be based on the users machine
                     };
                 }
+
+/*
+                else if (1 ==2 )
+                {
+                    endorsementsText = "";
+                    if (licenceHasSEA) {
+                        endorsementsText += "<h3 style='text-align: center;'>HOURS OF SALE FOR SPECIAL EVENT AREA</h3>" +
+                                            "<table style='width:100%''>" +
+                                                "<tr><th></th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th><th>Sunday</th></tr>";
+                        endorsementsText +=                                                 
+                    }
+                    
+                    var licenceHasLounge = licenceVM.Endorsements.Exists(x => x.EndorsementName == "Lounge Area Endorsement");
+                    var licenceHasStore = false;
+                    var licenceHasCatering = false;
+                    var licenceHasOffsite = false;
+
+                    parameters = new Dictionary<string, string>
+                    {
+
+                    }
+
+                }
+*/
                 else // handle other types such as catering
                 {
                     parameters = new Dictionary<string, string>
@@ -971,7 +1017,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     var templateName = "cannabis_licence";
-
+                    
 
 
                     switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
