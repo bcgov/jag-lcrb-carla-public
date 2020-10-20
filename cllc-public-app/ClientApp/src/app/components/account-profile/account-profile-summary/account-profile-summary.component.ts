@@ -28,8 +28,8 @@ export class AccountProfileSummaryComponent implements OnInit {
   profileSummaryList: ProfileSummary[] = [];
   busy: Subscription;
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
