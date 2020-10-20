@@ -17,9 +17,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string ApplicationTypeId { get; set; }
         public string ApplicationTypeName { get; set; }
 
+        public string SimpleHeader()
+        {
+            return $@"<h3>{EndorsementName} Approved</h3>";
+        }
+
         public string ToHtml(IDynamicsClient _dynamicsClient)
         {
-            string htmlVal = $"<h2>{EndorsementName} Approved</h2>";
+            string htmlVal = "";
             
             // get the hours of service and create a table
             MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_endorsement_value eq {EndorsementId}");
@@ -39,26 +44,29 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                                     <th>Sunday</th>
                                 </tr>
                                 <tr>
-                                    <td>Open</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayopen)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioTuesdayopen)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioWednesdayopen)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioThursdayopen)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioFridayopen)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayopen)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayopen)}</td>
+                                    <td class='hours'>Start</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayopen)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioTuesdayopen)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioWednesdayopen)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioThursdayopen)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioFridayopen)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayopen)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayopen)}</td>
                                 </tr>
                                 <tr>
-                                    <td>Close</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayclose)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioTuesdayclose)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioWednesdayclose)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioThursdayclose)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioFridayclose)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayclose)}</td>
-                                    <td>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayclose)}</td>
+                                    <td class='hours'>End</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayclose)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioTuesdayclose)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioWednesdayclose)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioThursdayclose)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioFridayclose)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayclose)}</td>
+                                    <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayclose)}</td>
                                 </tr>
                             </table>";
+            } else {
+                // to do:
+                // log Licence number: X with Endorsement: Y is missing Hours of Service
             }
 
             // get the service areas and get their html
@@ -82,46 +90,59 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 // print the service areas
                 if (serviceAreas.Any())
                 {
-                    htmlVal += $@"<table>
-                                    <tr>
-                                        <th>Area No.</th>
-                                        <th>Floor Level</th>
-                                        <th>Indoor</th>
-                                        <th>Patio</th>
-                                        <th>Occupant Load</th>
-                                    </tr>";
+                    htmlVal += $@"<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'>
+                                    <tr>";
+
+                    var cells = 0;
+                    var leftover = 0;
+
                     foreach (MicrosoftDynamicsCRMadoxioServicearea area in serviceAreas)
                     {
-                        htmlVal += $@"<tr>
-                                        <td>{area.AdoxioAreanumber}</td>
-                                        <td>{area.AdoxioArealocation}</td>
-                                        <td>{((bool)area.AdoxioIsindoor ? "✓" : "✗")}</td>
-                                        <td>{((bool)area.AdoxioIspatio ? "✓" : "✗")}</td>
-                                        <td style=""font-weight: bold;"">{area.AdoxioCapacity}</td>
-                                    </tr>";   
+                        cells++;
+
+                        htmlVal += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AdoxioArealocation}{area.AdoxioAreanumber}</td><td>{area.AdoxioCapacity}</td></tr></table></td>";
+
+                        // every 4 cells
+                        leftover = cells%4; 
+
+                        if(leftover == 0){
+                            htmlVal += "</tr><tr>"; // do a new row
+                        }
 
                     }
-                    htmlVal += "</table>";
+
+                    // fill in the remaining spaces 
+                    for(int i = 0; i < leftover; i++){
+                        htmlVal += "<td class='space'>&nbsp;</td>";
+                    }
+
+                    htmlVal += "</tr></table>";
                 }
 
                 // print the outdoor areas
                 if (outdoorAreas.Any())
                 {
-                        htmlVal += $@"<table>
-                                            <tr>
-                                                <th>Area No.</th>
-                                                <th>Outdoor Area</th>
-                                                <th>Capacity</th>
-                                            </tr>";
+
+                    htmlVal += $@"<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'>
+                                    <tr>";
+
+                    var cells = 0;
+                    var leftover = 0;
+
                     foreach (MicrosoftDynamicsCRMadoxioServicearea area in outdoorAreas)
                     {
-                        htmlVal += $@"<tr>
-                                        <td>{area.AdoxioAreanumber}</td>
-                                        <td>{area.AdoxioArealocation}</td>
-                                        <td style=""font-weight: bold;"">{area.AdoxioCapacity}</td>
-                                    </tr>";
+                        cells++;
+
+                        htmlVal += $@"<td class='area'>{area.AdoxioArealocation}{area.AdoxioAreanumber} <right>{area.AdoxioCapacity}</right></td>";
+
+                        // every 4 cells
+                        leftover = cells%4; 
+
+                        if(leftover == 0){
+                            htmlVal += "</tr><tr>"; // do a new row
+                        }
                     }
-                    htmlVal += "</table>";
+                    htmlVal += "</tr></table>";
                 }
             }
 
