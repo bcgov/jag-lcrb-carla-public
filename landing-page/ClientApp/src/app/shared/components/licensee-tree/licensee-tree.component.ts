@@ -21,7 +21,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   @Input() enableEditing = true;
   treeControl = new NestedTreeControl<LicenseeChangeLog>(node => node.children);
   dataSource = new MatTreeNestedDataSource<any>();
-  @ViewChild('tree', { static: false }) tree: MatTree<any>;
+  @ViewChild('tree') tree: MatTree<any>;
   componentActive = true;
   changeTree: LicenseeChangeLog;
   individualShareholderChanges: LicenseeChangeLog[];
