@@ -123,7 +123,6 @@ namespace bdd_tests
 
                 }     
             }
-
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address

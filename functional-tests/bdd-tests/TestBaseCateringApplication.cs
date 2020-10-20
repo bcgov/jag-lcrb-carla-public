@@ -28,8 +28,6 @@ namespace bdd_tests
             */
 
             // create application info
-            string prevAppDetails = "Here are the previous application details (automated test).";
-            string liqConnectionDetails = "Here are the liquor industry connection details (automated test).";
             string estName = "Point Ellis Greenhouse";
             string estAddress = "645 Tyee Rd";
             string estCity = "Victoria";
@@ -42,20 +40,30 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "test2@automation.com";
+            string prevAppDetails = "Here are the previous application details (automated test).";
+            string liqConnectionDetails = "Here are the liquor industry connection details (automated test).";
+            string kitchenDetails = "Here are the details of the kitchen equipment.";
 
             // enter the establishment name
-            try
+            NgWebElement uiEstabName = null;
+            // try up to 10 times to get an element.
+            for (int i = 0; i < 10; i++)
             {
-                NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
-                uiEstabName.SendKeys(estName);
-            }
-            catch (Exception)
-            {
-                //System.Threading.Thread.Sleep(1000);
+                try
+                {
+                    var names = ngDriver.FindElements(By.CssSelector("input[formcontrolname='establishmentName']"));
+                    if (names.Count > 0)
+                    {
+                        uiEstabName = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
 
-                NgWebElement uiEstabName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
-                uiEstabName.SendKeys(estName);
+                }
             }
+            uiEstabName.SendKeys(estName);
 
             // enter the establishment address
             NgWebElement uiEstabAddress = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
@@ -103,6 +111,10 @@ namespace bdd_tests
             // enter the connection details
             NgWebElement uiLiqIndConnection = ngDriver.FindElement(By.Id("liquorIndustryConnectionsDetails"));
             uiLiqIndConnection.SendKeys(liqConnectionDetails);
+
+            // enter the kitchen details
+            NgWebElement uiKitchenDescription = ngDriver.FindElement(By.CssSelector("textarea#Description2"));
+            uiKitchenDescription.SendKeys(kitchenDetails);
 
             // upload a store signage document
             FileUpload("signage.pdf", "(//input[@type='file'])[2]");

@@ -99,6 +99,7 @@ Scenario: Confirm private corporation business shareholder org structure update 
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Dashboard tab
     And I click on the Review Organization Information button
     And the org structure is correct after payment
     And the account is deleted

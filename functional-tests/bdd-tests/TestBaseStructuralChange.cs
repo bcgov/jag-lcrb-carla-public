@@ -58,9 +58,12 @@ namespace bdd_tests
             // upload a floor plan document
             FileUpload("floor_plan.pdf", "(//input[@type='file'])[2]");
 
-            // select 'no' for changes to entries
-            NgWebElement uiChangeToEntries = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
+            // select 'yes' for changes to entries
+            NgWebElement uiChangeToEntries = ngDriver.FindElement(By.Id("mat-button-toggle-1-button"));
             uiChangeToEntries.Click();
+
+            // upload a site plan
+            FileUpload("site_plan.pdf", "(//input[@type='file'])[5]");
 
             // select authorizedToSubmit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
