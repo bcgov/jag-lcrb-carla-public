@@ -814,7 +814,7 @@ namespace bdd_tests
             string emailAddressSociety = "society@test.com";
 
             // click on the society Add Business Shareholder button
-            NgWebElement uiAddSocietyRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddSocietyRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] button.AddBusinessShareholder"));
             uiAddSocietyRow.Click();
 
             // add the society business name
@@ -899,7 +899,7 @@ namespace bdd_tests
             string emailAddressTrust = "trust@test.com";
 
             // click on the trust Add Business Shareholder button
-            NgWebElement uiAddTrustRow = ngDriver.FindElement(By.XPath("//*[@id='cdk-step-content-0-1']/app-application-licensee-changes/div/div[2]/section[1]/app-org-structure/div/div[6]/section[2]/app-associate-list/div/button"));
+            NgWebElement uiAddTrustRow = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'] [addlabel='Add Business Shareholder'] button.AddBusinessShareholder"));
             uiAddTrustRow.Click();
 
             // add the trust business name
