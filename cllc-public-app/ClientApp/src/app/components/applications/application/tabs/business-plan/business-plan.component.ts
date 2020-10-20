@@ -20,7 +20,7 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
   
 
   @Input() form: FormGroup;
-  @ViewChild(ProductionStagesComponent, { static: false })
+  @ViewChild(ProductionStagesComponent)
   private productionStages: ProductionStagesComponent;
 
   constructor(private applicationDataService: ApplicationDataService,
