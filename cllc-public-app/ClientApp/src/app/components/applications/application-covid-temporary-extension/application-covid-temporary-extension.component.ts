@@ -55,9 +55,9 @@ export class ApplicationCovidTemporaryExtensionComponent extends FormBase implem
   uploadedLicenseeRepresentativeNotficationFormDocuments: any;
   uploadDocumentJobs: any[] = [];
 
-  @ViewChild('floorplanDocuments', { static: false }) floorplanDocuments: DelayedFileUploaderComponent;
-  @ViewChild('licenseeRepresentativeNotficationFormDocuments', { static: false }) licenseeRepresentativeNotficationFormDocuments: DelayedFileUploaderComponent;
-  @ViewChild('lGConfirmation', { static: false }) lGConfirmationDocuments: DelayedFileUploaderComponent;
+  @ViewChild('floorplanDocuments') floorplanDocuments: DelayedFileUploaderComponent;
+  @ViewChild('licenseeRepresentativeNotficationFormDocuments') licenseeRepresentativeNotficationFormDocuments: DelayedFileUploaderComponent;
+  @ViewChild('lGConfirmation') lGConfirmationDocuments: DelayedFileUploaderComponent;
 
   constructor(private fb: FormBuilder,
     private applicationDataService: ApplicationDataService,
