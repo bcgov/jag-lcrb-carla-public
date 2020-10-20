@@ -315,20 +315,28 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   getHandbookLink(licenceType: string) {
+    const pdfRoot = 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals'
     switch (licenceType) {
       case 'Cannabis Retail Store':
       case 'Section 119 Authorization':
-        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/cannabis-retail-store-licence-handbook.pdf';
+        return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
       case 'Marketing':
-        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/marketing-handbook.pdf';
+        return `${pdfRoot}/marketing-handbook.pdf`;
       case 'Operated - Catering':
       case 'Catering':
       case 'Transfer in Progress - Catering':
-        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/catering-handbook.pdf';
+        return `${pdfRoot}/catering-handbook.pdf`;
       case 'Wine Store':
       case 'Transfer in Progress - Wine Store':
       case 'Operated - Wine Store':
-        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/winestore-handbook.pdf';
+        return `${pdfRoot}/winestore-handbook.pdf`;
+      case 'Licensee Retail Store':
+      case 'Operated - Licensee Retail Store':
+        return `${pdfRoot}/licenseeretailstore-handbook.pdf`;
+      case 'Manufacturer':
+        return `${pdfRoot}/manufacturer-handbook.pdf`;
+      case 'UBrew and UVin':
+        return `${pdfRoot}/ubrewanduvin-handbook.pdf`;
       default:
         return '404';
     }
