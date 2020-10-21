@@ -17,6 +17,8 @@ Scenario: Winery Facility Structural Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a facility structural change
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -35,6 +37,8 @@ Scenario: Brewery Facility Structural Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a facility structural change
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -53,6 +57,8 @@ Scenario: Distillery Facility Structural Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a facility structural change
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -71,5 +77,7 @@ Scenario: Co-packer Facility Structural Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a facility structural change
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
