@@ -105,6 +105,8 @@ namespace bdd_tests
             uiSignatureAgree.Click();
 
             ClickOnSubmitButton();
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Pending External Review ')]")).Displayed);
         }
     }
 }
