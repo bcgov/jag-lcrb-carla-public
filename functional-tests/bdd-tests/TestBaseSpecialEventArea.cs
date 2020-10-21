@@ -153,8 +153,6 @@ namespace bdd_tests
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();
-
-            //System.Threading.Thread.Sleep(3000);
         }
     }
 }

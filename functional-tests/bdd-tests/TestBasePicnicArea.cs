@@ -105,8 +105,6 @@ namespace bdd_tests
             uiSignatureAgree.Click();
 
             ClickOnSubmitButton();
-
-            //System.Threading.Thread.Sleep(3000);
         }
     }
 }
