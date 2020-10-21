@@ -113,7 +113,7 @@ Scenario: Save for Later feature for private corporation org structure
     And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And I add a business shareholder with the same individual as a director and a shareholder
-    And I click on the button for Save for Later
+    # And I click on the button for Save for Later
     And I click on the Complete Organization Information button
     And I add a second individual as a director and a shareholder to the business shareholder
     And I click on the button for Save for Later
