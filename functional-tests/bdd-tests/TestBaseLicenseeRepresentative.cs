@@ -24,7 +24,7 @@ namespace bdd_tests
         public void RequestLicenseeRepresentative()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             // click on the Licensee Representative link

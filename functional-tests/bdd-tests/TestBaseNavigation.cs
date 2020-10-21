@@ -52,7 +52,7 @@ namespace bdd_tests
         public void ClickOnBrandingChangeLink(string changeType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
@@ -307,7 +307,7 @@ namespace bdd_tests
         public void ShowStoreOpenOnMap()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             Subtitle:   Cannabis Retail Store Licences
             */
 

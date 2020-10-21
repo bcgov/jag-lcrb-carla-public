@@ -53,7 +53,7 @@ namespace bdd_tests
         public void PayLicenceFee(string feeType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             // create test data
