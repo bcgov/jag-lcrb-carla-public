@@ -129,13 +129,6 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'associates.pdf')]")).Displayed);
             }
 
-            if (businessType == " local government")
-            {
-                // check for file upload - TODO
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0FirstUniversity')]")).Displayed);
-
-            }
-
             if (businessType == " university")
             {
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0FirstUniversity')]")).Displayed);
