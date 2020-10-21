@@ -17,7 +17,7 @@ Scenario: Winery Picnic Area Endorsement Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a picnic area endorsement
-    And the account is deleted
+    # And the account is deleted
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @brewery

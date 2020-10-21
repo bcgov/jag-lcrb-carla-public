@@ -17,6 +17,8 @@ Scenario: Winery Establishment Name Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a valid store name or branding change for Manufacturing
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -35,6 +37,8 @@ Scenario: Brewery Establishment Name Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a valid store name or branding change for Manufacturing
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -53,6 +57,8 @@ Scenario: Distillery Establishment Name Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a valid store name or branding change for Manufacturing
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -71,5 +77,7 @@ Scenario: Co-packer Establishment Name Change Application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a valid store name or branding change for Manufacturing
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
