@@ -198,6 +198,12 @@ namespace bdd_tests
             uiSubmitAndPay.Click();
 
             MakePayment();
+
+            // click on Licences tab
+            ClickLicencesTab();
+
+            // check that the licence is now active after renewal
+            Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/span[3][contains(.,'Active')]")).Displayed);
         }
     }
 }
