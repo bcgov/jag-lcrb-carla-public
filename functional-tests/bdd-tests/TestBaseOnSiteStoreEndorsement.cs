@@ -24,7 +24,7 @@ namespace bdd_tests
         public void OnSiteStoreEndorsement()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string onSiteStoreEndorsement = "On-Site Store Endorsement Application";

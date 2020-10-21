@@ -24,7 +24,7 @@ namespace bdd_tests
         public void SpecialEventAreaEndorsement()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string specialEventAreaEndorsement = "Special Event Area Endorsement Application";

@@ -24,7 +24,7 @@ namespace bdd_tests
         public void PicnicAreaEndorsement()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string picnicAreaEndorsement = "Picnic Area Endorsement Application";
