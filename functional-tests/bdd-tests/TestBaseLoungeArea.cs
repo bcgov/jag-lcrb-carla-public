@@ -24,7 +24,7 @@ namespace bdd_tests
         public void LoungeAreaEndorsement()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string loungeAreaEndorsement = "Lounge Area Endorsement Application";

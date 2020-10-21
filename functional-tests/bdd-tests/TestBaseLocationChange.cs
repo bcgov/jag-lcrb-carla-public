@@ -24,7 +24,7 @@ namespace bdd_tests
         public void LocationChange()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string locationChange = "Location Change Application";

@@ -24,7 +24,7 @@ namespace bdd_tests
         public void StructuralAlterations()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string structuralAlterations = "Structural Alterations to an Approved Lounge or Special Events Area";

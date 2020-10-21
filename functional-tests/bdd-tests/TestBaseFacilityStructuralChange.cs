@@ -24,7 +24,7 @@ namespace bdd_tests
         public void FacilityStructuralChange()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string facilityStructuralChange = "Facility Structural Change Application";
