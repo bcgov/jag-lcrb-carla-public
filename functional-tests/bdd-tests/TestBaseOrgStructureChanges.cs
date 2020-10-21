@@ -611,7 +611,7 @@ namespace bdd_tests
             */
 
             // delete the most recent shareholder 
-            NgWebElement uiRemoveShareholder = ngDriver.FindElement(By.XPath("//app-org-structure/div/div[7]/section[2]/app-associate-list/div/table/tr[1]/td[6]/i[2]/span"));
+            NgWebElement uiRemoveShareholder = ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[7]/i[2]/span"));
             uiRemoveShareholder.Click();
         }
 
@@ -656,7 +656,13 @@ namespace bdd_tests
         [And(@"the saved org structure is present")]
         public void SaveOrgStructurePresent()
         {
-            // TODO
+            // confirm that director is in correct positions
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'Same1')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section/app-associate-list/div/table/tr[1]/td[2]/span[contains(.,'Individual')]")).Displayed);
+
+            // confirm that shareholder is in correct positions
+            Assert.True(ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr/td[1]/span[contains(.,'Same1')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr/td[2]/span[contains(.,'Individual')]")).Displayed);
         }
 
 
