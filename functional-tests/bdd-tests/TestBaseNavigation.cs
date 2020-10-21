@@ -269,8 +269,6 @@ namespace bdd_tests
             // click on the Submit button
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button:nth-child(2)"));
             uiSubmitButton.Click();
-
-            //System.Threading.Thread.Sleep(5000);
         }
 
 
