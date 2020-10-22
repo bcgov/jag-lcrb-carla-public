@@ -24,7 +24,7 @@ namespace bdd_tests
         public void RequestStoreRelocation(string applicationType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string requestRelocationLink = "Request Relocation";
