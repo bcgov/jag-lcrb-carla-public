@@ -1089,6 +1089,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return BadRequest("This API is not available to an unregistered user.");
         }
 
+        [HttpGet("{id}/processEndorsement")]
+        public async Task<IActionResult> ProcessEndorsementApplication(string id)
+        {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
+
+            // get the current user.
+            var sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+
+
+            // query the Dynamics system to get the account record.
+            if (userSettings.AccountId != null && !userSettings.IsNewUserRegistration &&
+                userSettings.AccountId.Length > 0)
+                // call the bpf to process the application.
+                try
+                {
+                    // this needs to be the guid for the published workflow.
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync(
+                        "e755b96c-1c0d-4893-98dc-53ec980d57a1", id);
+                    return Ok("OK");
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    var error = httpOperationException.Response.Content;
+                    return BadRequest(error);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            return BadRequest("This API is not available to an unregistered user.");
+        }
+
         /// <summary>
         ///     Delete an Application.  Using a HTTP Post to avoid Siteminder issues with DELETE
         /// </summary>
