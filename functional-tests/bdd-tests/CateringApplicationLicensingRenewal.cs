@@ -45,7 +45,6 @@ Scenario: Positive Catering Licence Renewal
     And I click on the button for Submit Organization Information
     And I complete the Catering application
     And I click on the Submit button
-    And I complete the Cannabis Retail Store application for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
