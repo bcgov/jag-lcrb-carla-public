@@ -434,7 +434,7 @@ namespace bdd_tests
                 string orderTotals = "233";
                 string confirmTotals = "233";
                 string volumeProduced = "5000";
-                string volumeDestroyed = "200";
+                // string volumeDestroyed = "200";
 
                 // enter the order totals
                 NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
@@ -447,7 +447,7 @@ namespace bdd_tests
                 // click on manufacturer minimum checkbox
 
                 // upload discretion letter
-                FileUpload();
+                // FileUpload();
 
                 // enter the volume produced
                 NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
@@ -511,7 +511,7 @@ namespace bdd_tests
                 string orderTotals = "233";
                 string confirmTotals = "233";
                 string volumeProduced = "5000";
-                string volumeDestroyed = "200";
+                // string volumeDestroyed = "200";
 
                 // enter the order totals
                 NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
@@ -524,7 +524,7 @@ namespace bdd_tests
                 // click on manufacturer minimum checkbox
 
                 // upload discretion letter
-                FileUpload();
+                // FileUpload();
 
                 // enter the volume produced
                 NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
@@ -594,13 +594,31 @@ namespace bdd_tests
             }
 
             if (responses == "positive responses for co-packer")
-            { 
-            
+            {
+                string orderTotals = "233";
+                string confirmTotals = "233";
+
+                // enter the order totals
+                NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
+                uiOrderTotals.SendKeys(orderTotals);
+
+                // re-enter the order totals
+                NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
+                uiOrderTotals2.SendKeys(confirmTotals);
             }
 
             if (responses == "negative responses for co-packer")
-            { 
-            
+            {
+                string orderTotals = "233";
+                string confirmTotals = "233";
+
+                // enter the order totals
+                NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
+                uiOrderTotals.SendKeys(orderTotals);
+
+                // re-enter the order totals
+                NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
+                uiOrderTotals2.SendKeys(confirmTotals);
             }
 
             // select the authorized to submit checkbox
