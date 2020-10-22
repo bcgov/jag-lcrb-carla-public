@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: ManufacturerStructuralChanges
+Feature: ManufacturerStructuralAlterations
     As a logged in business user
     I want to request structural alterations to an approved lounge or special events area for a manufacturer licence
 
