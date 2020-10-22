@@ -91,27 +91,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I confirm the correct personnel name change fee for a (.*)")]
-        public void PersonnelNameChangeFee(string applicationType)
-        {
-            /* 
-            Page Title: Payment Approved
-            */
-
-            if (applicationType == "Cannabis licence")
-            {
-                // check Cannabis name change fee
-                // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
-            }
-
-            if (applicationType == "Catering licence")
-            {
-                // check Catering name change fee
-                // Assert.True(ngDriver.WrappedDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
-            }
-        }
-
-
         [And(@"I change a personnel email address for a (.*)")]
         public void RequestPersonnelEmailChange(string businessType)
         {

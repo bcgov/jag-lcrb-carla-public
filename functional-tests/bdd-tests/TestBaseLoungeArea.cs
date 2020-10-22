@@ -24,7 +24,7 @@ namespace bdd_tests
         public void LoungeAreaEndorsement()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string loungeAreaEndorsement = "Lounge Area Endorsement Application";
@@ -133,7 +133,7 @@ namespace bdd_tests
 
             ClickOnSubmitButton();
 
-            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Pending External Review ')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Pending External Review ')]")).Displayed);
         }
     }
 }

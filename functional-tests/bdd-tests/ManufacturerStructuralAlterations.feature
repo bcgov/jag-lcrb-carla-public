@@ -1,4 +1,4 @@
-﻿Feature: ManufacturerStructuralChanges
+﻿Feature: ManufacturerStructuralAlterations
     As a logged in business user
     I want to request structural alterations to an approved lounge or special events area for a manufacturer licence
 
@@ -17,6 +17,8 @@ Scenario: Winery Structural Alterations to an Approved Lounge or Special Events 
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request structural alterations to an approved lounge or special events area
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -35,6 +37,8 @@ Scenario: Brewery Structural Alterations to an Approved Lounge or Special Events
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request structural alterations to an approved lounge or special events area
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -53,6 +57,8 @@ Scenario: Distillery Structural Alterations to an Approved Lounge or Special Eve
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request structural alterations to an approved lounge or special events area
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -71,5 +77,7 @@ Scenario: Co-packer Structural Alterations to an Approved Lounge or Special Even
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request structural alterations to an approved lounge or special events area
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page

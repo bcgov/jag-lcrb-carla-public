@@ -25,7 +25,7 @@ namespace bdd_tests
         public void RequestEventAuthorization(string eventType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             Subtitle:   Catering Licences
             */
 
@@ -230,7 +230,7 @@ namespace bdd_tests
         public void EventHistoryIsUpdatedCorrectly(string eventType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             Subtitle:   Catering Licences
             */
 

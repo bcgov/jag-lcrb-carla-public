@@ -369,13 +369,13 @@ namespace bdd_tests
             uiShareBizConfirmButton.Click();
 
             // upload a notice of articles document for business shareholder 
-            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[15]");
+            FileUpload("notice_of_articles.pdf","(//input[@type='file'])[18]");
 
             // upload a central securities register document for business shareholder
-            FileUpload("central_securities_register.pdf","(//input[@type='file'])[18]");
+            FileUpload("central_securities_register.pdf","(//input[@type='file'])[21]");
 
             // upload a special rights and restrictions document for business shareholder
-            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[21]");
+            FileUpload("special_rights_restrictions.pdf","(//input[@type='file'])[24]");
 
             /********** Business Shareholder - Leader #1 **********/
 
@@ -611,7 +611,7 @@ namespace bdd_tests
             */
 
             // delete the most recent shareholder 
-            NgWebElement uiRemoveShareholder = ngDriver.FindElement(By.XPath("//*[@id='cdk-accordion-child-3']/div/section/app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[6]/i[2]/span"));
+            NgWebElement uiRemoveShareholder = ngDriver.FindElement(By.XPath("//app-org-structure/div/div[5]/section[1]/app-associate-list/div/table/tr[2]/td[7]/i[2]/span"));
             uiRemoveShareholder.Click();
         }
 
@@ -656,7 +656,13 @@ namespace bdd_tests
         [And(@"the saved org structure is present")]
         public void SaveOrgStructurePresent()
         {
-            // TODO
+            // confirm that director is in correct positions
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section/app-associate-list/div/table/tr[1]/td[1]/span[contains(.,'Same1')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-org-structure/div/div[6]/section/app-associate-list/div/table/tr[1]/td[2]/span[contains(.,'Individual')]")).Displayed);
+
+            // confirm that shareholder is in correct positions
+            Assert.True(ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr/td[1]/span[contains(.,'Same1')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-associate-list/div/table/tr/td[2]/span[contains(.,'Individual')]")).Displayed);
         }
 
 
@@ -970,8 +976,15 @@ namespace bdd_tests
             /* 
             Page Title: [client name] Legal Entity Structure
             */
-
-            //TODO
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0First')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndyShareholder0First')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Business Shareholder 1')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader1BizFirst')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndividualShareholder1Biz1First')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderPubCorp')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LeaderSoleProp')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'DirectorSociety')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'TrusteeTrust')]")).Displayed);
         }
 
 
