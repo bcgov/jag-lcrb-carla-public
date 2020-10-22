@@ -29,7 +29,7 @@ namespace bdd_tests
             NgWebElement uiRenewLicence = ngDriver.FindElement(By.LinkText(renewLicenceLink));
             uiRenewLicence.Click();
 
-            if (responses == "negative responses")
+            if (responses == "negative responses for Cannabis")
             {
                 // select 'No'
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
@@ -107,7 +107,7 @@ namespace bdd_tests
                 uiFloorPlan.Click();
             }
 
-            if (responses == "positive responses")
+            if (responses == "positive responses for Cannabis")
             {
                 // select 'Yes'
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
