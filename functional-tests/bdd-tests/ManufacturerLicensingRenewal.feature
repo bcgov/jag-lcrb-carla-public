@@ -17,7 +17,7 @@ Scenario:  Negative Winery Licence Renewal
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And the expiry date is changed to today
-    And I renew the licence with negative responses for Manufacturer
+    And I renew the licence with negative responses for a winery
     And the account is deleted
     Then I see the login page
 
@@ -35,7 +35,7 @@ Scenario:  Positive Winery Licence Renewal
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And the expiry date is changed to today
-    And I renew the licence with positive responses for Manufacturer
+    And I renew the licence with positive responses for a winery
     And the account is deleted
     Then I see the login page
 
@@ -53,7 +53,7 @@ Scenario:  Negative Brewery Licence Renewal
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And the expiry date is changed to today
-    And I renew the licence with negative responses for Manufacturer
+    And I renew the licence with negative responses for a brewery
     And the account is deleted
     Then I see the login page
 
@@ -71,7 +71,7 @@ Scenario:  Positive Brewery Licence Renewal
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And the expiry date is changed to today
-    And I renew the licence with positive responses for Manufacturer
+    And I renew the licence with positive responses for a brewery
     And the account is deleted
     Then I see the login page
 
@@ -89,7 +89,7 @@ Scenario:  Negative Distillery Licence Renewal
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And the expiry date is changed to today
-    And I renew the licence with negative responses for Manufacturer
+    And I renew the licence with negative responses for a distillery
     And the account is deleted
     Then I see the login page
 
@@ -107,7 +107,7 @@ Scenario:  Positive Distillery Licence Renewal
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And the expiry date is changed to today
-    And I renew the licence with positive responses for Manufacturer
+    And I renew the licence with positive responses for a distillery
     And the account is deleted
     Then I see the login page
 
@@ -125,7 +125,7 @@ Scenario:  Negative Co-packer Licence Renewal
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And the expiry date is changed to today
-    And I renew the licence with negative responses for Manufacturer
+    And I renew the licence with negative responses for a co-packer
     And the account is deleted
     Then I see the login page
 
@@ -143,6 +143,6 @@ Scenario:  Positive Co-packer Licence Renewal
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And the expiry date is changed to today
-    And I renew the licence with positive responses for Manufacturer
+    And I renew the licence with positive responses for a co-packer
     And the account is deleted
     Then I see the login page
