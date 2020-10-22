@@ -299,9 +299,19 @@ namespace bdd_tests
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
             uiSignatureAgreement.Click();
 
-            // click on the Submit & Pay button
-            NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
-            uiSubmitAndPay.Click();
+            if ((responses == "positive responses for Cannabis") || (responses == "negative responses for Cannabis"))
+            {
+                // click on the Submit & Pay button
+                NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
+                uiSubmitAndPay.Click();
+            }
+
+            if ((responses == "positive responses for Catering") || (responses == "negative responses for Catering"))
+            {
+                // click on the Submit & Pay button
+                NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+                uiSubmitAndPay.Click();
+            }
 
             MakePayment();
 
