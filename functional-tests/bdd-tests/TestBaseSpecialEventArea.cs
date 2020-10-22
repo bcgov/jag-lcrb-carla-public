@@ -153,6 +153,9 @@ namespace bdd_tests
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();
+
+            // confirm dashboard status
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Pending External Review ')]")).Displayed);
         }
     }
 }
