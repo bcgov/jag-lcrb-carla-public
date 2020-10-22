@@ -291,7 +291,7 @@ namespace bdd_tests
                 uiRenewalKeyPersonnel.Click();
             }
 
-            if (responses == "positive responses for brewery")
+            if (responses == "positive responses for a brewery")
             {
                 string ldbOrderTotals = "100";
                 string confirmOrderTotals = "100";
@@ -360,7 +360,7 @@ namespace bdd_tests
                 uiRenewalKeyPersonnel.Click();
             }
 
-            if (responses == "negative responses for brewery")
+            if (responses == "negative responses for a brewery")
             {
                 string ldbOrderTotals = "100";
                 string confirmOrderTotals = "100";
