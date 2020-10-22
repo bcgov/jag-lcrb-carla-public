@@ -430,22 +430,34 @@ namespace bdd_tests
             }
 
             if (responses == "positive responses for winery")
-            { }
+            { 
+            
+            }
 
             if (responses == "negative responses for winery")
-            { }
+            { 
+            
+            }
 
             if (responses == "positive responses for distillery")
-            { }
+            { 
+            
+            }
 
             if (responses == "negative responses for distillery")
-            { }
+            { 
+            
+            }
 
             if (responses == "positive responses for co-packer")
-            { }
+            { 
+            
+            }
 
             if (responses == "negative responses for co-packer")
-            { }
+            { 
+            
+            }
 
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
@@ -455,8 +467,7 @@ namespace bdd_tests
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
             uiSignatureAgreement.Click();
 
-            Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/span[3][contains(.,'Active')]")).Displayed);
-
+            // Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/span[3][contains(.,'Active')]")).Displayed);
 
             if ((responses == "positive responses for Cannabis") || (responses == "negative responses for Cannabis"))
             {
@@ -465,7 +476,7 @@ namespace bdd_tests
                 uiSubmitAndPay.Click();
             }
 
-            if ((responses == "positive responses for Catering") || (responses == "negative responses for Catering") || (responses == "negative responses for brewery") || (responses == "positive responses for brewery"))
+            if ((responses == "positive responses for Catering") || (responses == "negative responses for Catering") || (responses == "negative responses for a brewery") || (responses == "positive responses for a brewery"))
             {
                 // click on the Submit & Pay button
                 NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
