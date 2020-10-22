@@ -23,8 +23,8 @@ RUN pushd /opt \
 	&& PATH=/opt/rh/rh-nodejs10/root/usr/bin/:$PATH \
     && npm install -g @angular/cli@10.1.4 \
 	&& npm install -g typescript \
-	&& mkdir /opt/app-root/.config/jgit \
-	&& chmod a+rwx /opt/app-root/.config/jgit \
+	&& mkdir /opt/app-root/.config \
+	&& chmod a+rwx /opt/app-root/.config \
     && popd
 
 
