@@ -185,6 +185,16 @@ namespace bdd_tests
                 uiFloorPlan.Click();
             }
 
+            if (responses == "negative responses for Catering")
+            { 
+            
+            }
+
+            if (responses == "negative responses for Catering")
+            { 
+            
+            }
+
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
             uiAuthorizedToSubmit.Click();

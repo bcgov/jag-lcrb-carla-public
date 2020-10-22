@@ -17,7 +17,7 @@ Scenario: Negative Catering Licence Renewal
     And the application is approved
     And I pay the licensing fee for Catering
     And the expiry date is changed to today
-    And I renew the licence with negative responses
+    And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
 
@@ -35,6 +35,6 @@ Scenario: Positive Catering Licence Renewal
     And the application is approved
     And I pay the licensing fee for Catering
     And the expiry date is changed to today
-    And I renew the licence with positive responses
+    And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
