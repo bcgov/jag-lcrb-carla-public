@@ -3,7 +3,7 @@
     I want to pay the first year licensing fee for an approved Catering Application
     And renew the licence
 
-@e2e @cannabis @privatecorporation @licencerenewal
+@e2e @catering @privatecorporation @licencerenewal
 Scenario: Negative Catering Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -21,7 +21,7 @@ Scenario: Negative Catering Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @licencerenewal
+@e2e @catering @privatecorporation @licencerenewal
 Scenario: Positive Catering Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
