@@ -32,7 +32,7 @@ Scenario: Negative CRS Licence Renewal
     And the application is approved
     And I pay the licensing fee for Cannabis
     And the expiry date is changed to today
-    And I renew the licence with negative responses
+    And I renew the licence with negative responses for Cannabis
     And the account is deleted
     Then I see the login page
 
@@ -50,7 +50,7 @@ Scenario: Positive CRS Licence Renewal
     And the application is approved
     And I pay the licensing fee for Cannabis
     And the expiry date is changed to today
-    And I renew the licence with positive responses
+    And I renew the licence with positive responses for Cannabis
     And the account is deleted
     Then I see the login page
 */

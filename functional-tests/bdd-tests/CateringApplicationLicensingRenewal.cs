@@ -26,10 +26,11 @@ Scenario: Negative Catering Licence Renewal
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Catering application
+    And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Catering
     And the expiry date is changed to today
     And I renew the licence with negative responses
     And the account is deleted
@@ -42,11 +43,12 @@ Scenario: Positive Catering Licence Renewal
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I complete the Catering application
+    And I click on the Submit button
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee for Catering
     And the expiry date is changed to today
     And I renew the licence with positive responses
     And the account is deleted
