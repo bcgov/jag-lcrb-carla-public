@@ -291,11 +291,122 @@ namespace bdd_tests
                 uiRenewalKeyPersonnel.Click();
             }
 
-            if (responses == "positive responses for Manufacturer")
+            if (responses == "positive responses for brewery")
+            {
+                string ldbOrderTotals = "100";
+                string confirmOrderTotals = "100";
+                string volumeProduced = "200";
+
+                // enter the order totals
+                NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
+                uiOrderTotals.SendKeys(ldbOrderTotals);
+
+                // re-enter the order totals
+                NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
+                uiOrderTotals2.SendKeys(confirmOrderTotals);
+
+                // re-enter the order totals
+                NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
+                uiVolumeProduced.SendKeys(volumeProduced);
+
+                // select 'Yes'
+                // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
+
+                // select 'Yes'
+                // 2. Have you or any of your partners, shareholders or directors of this establishment received any alcohol related driving infractions in the past 12 months?
+
+                // select 'Yes'
+                // 3. Our records show that this establishment is licensed as a PrivateCorporation. Has this changed?
+
+                // select 'Yes'
+                // 4. Have you redistributed any shares within the past 12 months without notifying LCRB?
+
+                // select 'Yes'
+                // 5. Have you entered into an agreement allowing another person or business to use your licence within the past 12 months?
+
+                // select 'Yes'
+                // 6. Have you made any unreported structural changes to your establishment within the past 12 months?
+
+                // select 'Yes'
+                // 7. Have you acquired a new interest or expanded an existing interest financial or otherwise in a winery, brewery, distillery, liquor agent and/or a UBrew/UVin within the past 12 months without notifying LCRB?
+
+                // select 'Yes'
+                // 8. Have you sold the business associated with this liquor licence within the last 12 months without notifying LCRB?
+
+                // select 'Yes'
+                // 9.Have you sold the property or transferred the lease associated with this liquor licence within the last 12 months?
+
+                // select 'Yes'
+                // 10. Have you added, changed or removed a licensee representative within the past 12 months?
+            }
+
+            if (responses == "negative responses for brewery")
+            {
+                string ldbOrderTotals = "100";
+                string confirmOrderTotals = "100";
+                string volumeProduced = "200";
+
+                // enter the order totals
+                NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
+                uiOrderTotals.SendKeys(ldbOrderTotals);
+
+                // re-enter the order totals
+                NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
+                uiOrderTotals2.SendKeys(confirmOrderTotals);
+
+                // re-enter the order totals
+                NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
+                uiVolumeProduced.SendKeys(volumeProduced);
+
+                // select 'No'
+                // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
+
+                // select 'No'
+                // 2. Have you or any of your partners, shareholders or directors of this establishment received any alcohol related driving infractions in the past 12 months?
+
+                // select 'No'
+                // 3. Our records show that this establishment is licensed as a PrivateCorporation. Has this changed?
+
+                // select 'No'
+                // 4. Have you redistributed any shares within the past 12 months without notifying LCRB?
+
+                // select 'No'
+                // 5. Have you entered into an agreement allowing another person or business to use your licence within the past 12 months?
+
+                // select 'No'
+                // 6. Have you made any unreported structural changes to your establishment within the past 12 months?
+
+                // select 'No'
+                // 7. Have you acquired a new interest or expanded an existing interest financial or otherwise in a winery, brewery, distillery, liquor agent and/or a UBrew/UVin within the past 12 months without notifying LCRB?
+
+                // select 'No'
+                // 8. Have you sold the business associated with this liquor licence within the last 12 months without notifying LCRB?
+
+                // select 'No'
+                // 9.Have you sold the property or transferred the lease associated with this liquor licence within the last 12 months?
+
+                // select 'No'
+                // 10. Have you added, changed or removed a licensee representative within the past 12 months?
+            }
+
+            if (responses == "positive responses for winery")
             { }
 
-            if (responses == "positive responses for Manufacturer")
+            if (responses == "negative responses for winery")
             { }
+
+            if (responses == "positive responses for distillery")
+            { }
+
+            if (responses == "negative responses for distillery")
+            { }
+
+            if (responses == "positive responses for co-packer")
+            { }
+
+            if (responses == "negative responses for co-packer")
+            { }
+
 
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
