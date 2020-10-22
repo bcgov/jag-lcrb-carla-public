@@ -24,7 +24,7 @@ namespace bdd_tests
         public void RequestNameBrandingChange(string changeType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
