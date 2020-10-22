@@ -291,6 +291,12 @@ namespace bdd_tests
                 uiRenewalKeyPersonnel.Click();
             }
 
+            if (responses == "positive responses for Manufacturer")
+            { }
+
+            if (responses == "positive responses for Manufacturer")
+            { }
+
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
             uiAuthorizedToSubmit.Click();
@@ -299,12 +305,19 @@ namespace bdd_tests
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
             uiSignatureAgreement.Click();
 
-            Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/span[3][contains(.,'Active')]")).Displayed);
+            if ((responses == "positive responses for Cannabis") || (responses == "negative responses for Cannabis"))
+            {
+                // click on the Submit & Pay button
+                NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
+                uiSubmitAndPay.Click();
+            }
 
-
-            // click on the Submit & Pay button
-            NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
-            uiSubmitAndPay.Click();
+            if ((responses == "positive responses for Catering") || (responses == "negative responses for Catering"))
+            {
+                // click on the Submit & Pay button
+                NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+                uiSubmitAndPay.Click();
+            }
 
             MakePayment();
 
