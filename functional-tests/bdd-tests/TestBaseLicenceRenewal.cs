@@ -291,7 +291,7 @@ namespace bdd_tests
                 uiRenewalKeyPersonnel.Click();
             }
 
-            if ((responses == "positive responses for a brewery"))
+            if ((responses == "positive responses for a brewery") || (responses == "positive responses for a winery") || (responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
             {
                 if (responses == "positive responses for a brewery")
                 {
@@ -408,7 +408,7 @@ namespace bdd_tests
                 uiRenewalKeyPersonnelYes.Click();
             }
 
-            if (responses == "negative responses for a brewery")
+            if ((responses == "negative responses for a brewery") || (responses == "negative responses for a winery") || (responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
             { 
                 if (responses == "negative responses for a brewery")
                 {
@@ -538,7 +538,8 @@ namespace bdd_tests
                 // click on the Submit & Pay button
                 NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
                 uiSubmitAndPay.Click();
-            } else             
+            } 
+            else             
             {
                 // click on the Submit & Pay button
                 NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
