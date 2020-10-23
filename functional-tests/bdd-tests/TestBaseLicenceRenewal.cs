@@ -429,7 +429,7 @@ namespace bdd_tests
                 uiRenewalKeyPersonnel.Click();
             }
 
-            if (responses == "positive responses for winery")
+            if (responses == "positive responses for a winery")
             {
                 string orderTotals = "233";
                 string confirmTotals = "233";
@@ -510,7 +510,7 @@ namespace bdd_tests
                 uiRenewalKeyPersonnel.Click();
             }
 
-            if (responses == "negative responses for winery")
+            if (responses == "negative responses for a winery")
             {
                 string orderTotals = "233";
                 string confirmTotals = "233";
@@ -591,17 +591,17 @@ namespace bdd_tests
                 uiRenewalKeyPersonnel.Click();
             }
 
-            if (responses == "positive responses for distillery")
+            if (responses == "positive responses for a distillery")
             { 
             
             }
 
-            if (responses == "negative responses for distillery")
+            if (responses == "negative responses for a distillery")
             { 
             
             }
 
-            if (responses == "positive responses for co-packer")
+            if (responses == "positive responses for a co-packer")
             {
                 string orderTotals = "233";
                 string confirmTotals = "233";
@@ -615,7 +615,7 @@ namespace bdd_tests
                 uiOrderTotals2.SendKeys(confirmTotals);
             }
 
-            if (responses == "negative responses for co-packer")
+            if (responses == "negative responses for a co-packer")
             {
                 string orderTotals = "233";
                 string confirmTotals = "233";
