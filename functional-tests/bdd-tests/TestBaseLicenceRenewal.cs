@@ -299,6 +299,14 @@ namespace bdd_tests
                 // 10. Have you added, changed or removed a licensee representative within the past 12 months?
                 NgWebElement uiRenewalKeyPersonnel = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-28-button"));
                 uiRenewalKeyPersonnel.Click();
+
+                // confirm that correct information re positive responses for a Catering licensing renewal is displayed
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Shareholder Information on the Organization Details page')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Submit a Third Party Operator application from the Licences Dashboard')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Submit a Structural Change from the Licences Dashboard')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Financial Interest information on the Account Profile')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer this Licence from the Licences Dashboard')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Add, Remove or Update your Licensee Representative from the Licences Dashboard')]")).Displayed);   
             }
 
             if ((responses == "positive responses for a brewery") || (responses == "positive responses for a winery") || (responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
@@ -543,8 +551,7 @@ namespace bdd_tests
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
             uiSignatureAgreement.Click();
 
-            //Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/span[3][contains(.,'Active')]")).Displayed);
-
+            Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/span[3][contains(.,'Active')]")).Displayed);
 
             if ((responses == "positive responses for Cannabis") || (responses == "negative responses for Cannabis"))
             {
