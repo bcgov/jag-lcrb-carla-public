@@ -123,12 +123,10 @@ namespace bdd_tests
 
             if (businessType == "n indigenous nation")
             {
-                // check for file upload - TODO
-            }
-
-            if (businessType == " local government")
-            {
-                // check for file upload - TODO
+                // check for file uploads
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Associate Forms_1.pdf')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'SIR-C_1.pdf')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'associates.pdf')]")).Displayed);
             }
 
             if (businessType == " university")
