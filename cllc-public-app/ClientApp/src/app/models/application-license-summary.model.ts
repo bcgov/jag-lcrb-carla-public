@@ -54,6 +54,7 @@ export class ApplicationLicenseSummary {
   thirdPartyOperatorAccountName: string;
   currentOwner: string;
   isOperated: boolean; // only used on the client side
+  hasPaidForRenewalApplication: boolean; // client side use only
 
   licenceTypeCategory: string;
   representativeFullName: string;
