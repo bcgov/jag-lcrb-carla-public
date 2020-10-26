@@ -30,7 +30,6 @@ Scenario: Check CRS Release status
     And I renew the licence with negative responses
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
-    And I confirm the correct personnel name change fee for a Cannabis licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And I click on the Licences tab
