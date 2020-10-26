@@ -20,27 +20,11 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        /*
-        [And(@"I confirm the name or branding change is displayed on the dashboard")]
-        public void RequestedNameChangeOnDashboard()
-        {
-            ClickOnDashboard();
-
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            
-
-            // confirm that a name or branding change request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Name or Branding Change')]")).Displayed);
-        }
-        */
-
-
         [And(@"I request a valid store name or branding change for (.*)")]
         public void RequestNameBrandingChange(string changeType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
@@ -81,12 +65,22 @@ namespace bdd_tests
             // upload a supporting document
             FileUpload("signage.pdf","(//input[@type='file'])[2]");
 
+            
             if (changeType == "Cannabis")
             {
                 // click on the store exterior change button	
                 NgWebElement uiStoreExterior = ngDriver.FindElement(By.Id("mat-button-toggle-2-button"));
                 uiStoreExterior.Click();
             }
+
+            /*
+            if (changeType == "Cannabis")
+            {
+                // click on the store exterior change button	
+                NgWebElement uiStoreExterior = ngDriver.FindElement(By.Id("mat-button-toggle-1-button"));
+                uiStoreExterior.Click();
+            }
+            */
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();

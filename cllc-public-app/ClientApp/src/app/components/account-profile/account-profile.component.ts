@@ -91,7 +91,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   _showAdditionalAddress: boolean;
   _showAdditionalContact: boolean;
   legalEntityId: string;
-  @ViewChild(ConnectionToProducersComponent, { static: false }) connectionsToProducers: ConnectionToProducersComponent;
+  @ViewChild(ConnectionToProducersComponent) connectionsToProducers: ConnectionToProducersComponent;
   applicationId: string;
   applicationMode: string;
   account: Account;

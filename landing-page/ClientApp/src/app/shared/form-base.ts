@@ -8,6 +8,7 @@ import { ApplicationTypeNames } from '@models/application-type.model';
 export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
 export const USPostalRegex = '^\\d{5}([\-]\\d{4})?$';
 
+// TODO: Add Angular decorator.
 export class FormBase implements OnDestroy {
     form: FormGroup;
     componentActive = true;

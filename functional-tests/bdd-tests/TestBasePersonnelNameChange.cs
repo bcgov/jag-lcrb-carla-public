@@ -69,17 +69,17 @@ namespace bdd_tests
                 // upload a marriage certificate document
                 if (businessType == "public corporation" || businessType == "partnership")
                 {
-                    FileUpload("marriage_certificate.pdf","(//input[@type='file'])[9]");
+                    FileUpload("marriage_certificate.pdf","(//input[@type='file'])[12]");
                 }
 
                 if (businessType == "private corporation")
                 {
-                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[15]");
+                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[18]");
                 }
 
                 if ((businessType == "society") || (businessType == "sole proprietorship"))
                 {
-                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[6]");
+                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[9]");
                 }
 
                 // click on Submit Organization Information button
@@ -87,27 +87,6 @@ namespace bdd_tests
                 uiSubmitOrgStructure.Click();
 
                 MakePayment();
-            }
-        }
-
-
-        [And(@"I confirm the correct personnel name change fee for a (.*)")]
-        public void PersonnelNameChangeFee(string applicationType)
-        {
-            /* 
-            Page Title: Payment Approved
-            */
-
-            if (applicationType == "Cannabis licence")
-            {
-                // check Cannabis name change fee
-                // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$500.00')]")).Displayed);
-            }
-
-            if (applicationType == "Catering licence")
-            {
-                // check Catering name change fee
-                // Assert.True(ngDriver.WrappedDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
             }
         }
 

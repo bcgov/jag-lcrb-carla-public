@@ -24,7 +24,7 @@ namespace bdd_tests
         public void SpecialEventAreaEndorsement()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string specialEventAreaEndorsement = "Special Event Area Endorsement Application";
@@ -154,7 +154,8 @@ namespace bdd_tests
             // click on the Submit & Pay button
             ClickOnSubmitButton();
 
-            //System.Threading.Thread.Sleep(3000);
+            // confirm dashboard status
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Pending External Review ')]")).Displayed);
         }
     }
 }

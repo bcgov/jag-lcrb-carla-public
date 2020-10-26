@@ -24,7 +24,7 @@ namespace bdd_tests
         public void RequestOwnershipTransfer()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string transferOwnership = "Transfer Licence";
@@ -61,7 +61,7 @@ namespace bdd_tests
             ClickLicencesTab();
 
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             // check for transfer initiated status 

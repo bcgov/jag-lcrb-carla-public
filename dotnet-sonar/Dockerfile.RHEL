@@ -18,10 +18,13 @@ RUN pushd /opt \
     && unzip sonar-scanner-msbuild.zip -d /usr/lib/sonar-scanner \
     && chmod -R a+rx /usr/lib/sonar-scanner \
     && rm sonar-scanner-msbuild.zip \
-    && rm -R /opt/app-root/.pki \
+    && rm -R /opt/app-root/.pki \	
 	&& mv /opt/rh/rh-dotnet20/root/usr/lib64/dotnet/shared/Microsoft.NETCore.App/2.0.9  /opt/rh/rh-dotnet31/root/usr/lib64/dotnet/shared/Microsoft.NETCore.App \
-    && /opt/rh/rh-nodejs10/root/usr/bin/npm install -g @angular/cli \
-	&& /opt/rh/rh-nodejs10/root/usr/bin/npm install -g typescript \
+	&& PATH=/opt/rh/rh-nodejs10/root/usr/bin/:$PATH \
+    && npm install -g @angular/cli@10.1.4 \
+	&& npm install -g typescript \
+	&& mkdir /opt/app-root/.config \
+	&& chmod a+rwx /opt/app-root/.config \
     && popd
 
 

@@ -49,9 +49,12 @@ export class ApplicationLicenseSummary {
   operated: boolean;
   checklistConclusivelyDeem: boolean;
   tpoRequested: boolean; // indicates a Third Party Application in Progress
+  missingFirstYearLicenceFee: boolean;
 
   thirdPartyOperatorAccountName: string;
+  currentOwner: string;
   isOperated: boolean; // only used on the client side
+  hasPaidForRenewalApplication: boolean; // client side use only
 
   licenceTypeCategory: string;
   representativeFullName: string;

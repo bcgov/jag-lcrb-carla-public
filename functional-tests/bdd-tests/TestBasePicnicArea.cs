@@ -24,7 +24,7 @@ namespace bdd_tests
         public void PicnicAreaEndorsement()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string picnicAreaEndorsement = "Picnic Area Endorsement Application";
@@ -106,7 +106,7 @@ namespace bdd_tests
 
             ClickOnSubmitButton();
 
-            //System.Threading.Thread.Sleep(3000);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Pending External Review ')]")).Displayed);
         }
     }
 }

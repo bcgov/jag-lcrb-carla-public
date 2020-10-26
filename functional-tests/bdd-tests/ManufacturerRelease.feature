@@ -18,6 +18,9 @@ Scenario: Check Manufacturer Release status
     And I pay the licensing fee for a Manufacturer application
     And I request a valid store name or branding change for Manufacturing
     And I click on the Licences tab
+    And the expiry date is changed to today
+    And I renew the licence with positive responses for a winery
+    And I click on the Licences tab
     And I request a facility structural change
     And I click on the Licences tab
     And I request a location change

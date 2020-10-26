@@ -23,17 +23,27 @@ namespace bdd_tests
         [And(@"I click on the link for (.*)")]
         public void ClickOnLink(string specificLink)
         {
-            NgWebElement uiRequestedLink;
-            try
-            {
-                uiRequestedLink = ngDriver.FindElement(By.LinkText(specificLink));
-            }
-            catch (Exception)
-            {
-                System.Threading.Thread.Sleep(3000);
-                uiRequestedLink = ngDriver.FindElement(By.LinkText(specificLink));
-            }
             
+            NgWebElement uiRequestedLink = null;
+            for (int i = 0; i < 20; i++)
+            {
+                try
+                {
+                    var names = ngDriver.FindElements(By.LinkText(specificLink));
+                    if (names.Count > 0)
+                    {
+                        uiRequestedLink = names[0];
+                        break;
+                    }
+                    else {
+                        System.Threading.Thread.Sleep(2000);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
             uiRequestedLink.Click();
         }
 
@@ -42,7 +52,7 @@ namespace bdd_tests
         public void ClickOnBrandingChangeLink(string changeType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
@@ -239,6 +249,28 @@ namespace bdd_tests
 
             ngDriver.IgnoreSynchronization = false;
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
+            
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        }
+
+
+        [And(@"the on-site endorsement application is approved")]
+        public void OnSiteEndorsementApplicationIsApproved()
+        {
+            ngDriver.IgnoreSynchronization = true;
+            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
+
+            // navigate to api/applications/<Application ID>/process
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{endorsementID}/processEndorsement");
+
+            // wait for the automated approval process to run
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
+            
             // navigate back to Licenses tab
             ngDriver.Navigate().GoToUrl($"{baseUri}licences");
         }
@@ -259,8 +291,6 @@ namespace bdd_tests
             // click on the Submit button
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button:nth-child(2)"));
             uiSubmitButton.Click();
-
-            //System.Threading.Thread.Sleep(5000);
         }
 
 
@@ -297,7 +327,7 @@ namespace bdd_tests
         public void ShowStoreOpenOnMap()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             Subtitle:   Cannabis Retail Store Licences
             */
 

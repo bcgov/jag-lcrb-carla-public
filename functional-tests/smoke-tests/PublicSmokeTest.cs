@@ -70,7 +70,7 @@ namespace bdd_tests
         [Then(@"the Cannabis Worker Information is displayed")]
         public void WorkerInfoDisplayed()
         {
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Cannabis Retail Store Licence: Worker Information')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Worker Information')]")).Displayed);
         }
     }
 }
