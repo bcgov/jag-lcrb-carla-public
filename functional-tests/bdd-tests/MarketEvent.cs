@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-  Feature: MarketEvent
+ Feature: MarketEvent
     As a logged in business user
     I want to submit a market event for different manufacturer types
 
@@ -126,7 +126,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a weekly market event
+    And I request a market event weekly
     And the account is deleted
     Then I see the login page
 
@@ -147,7 +147,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a weekly market event
+    And I request a market event weekly
     And the account is deleted
     Then I see the login page
 
@@ -168,7 +168,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a weekly market event
+    And I request a market event weekly
     And the account is deleted
     Then I see the login page
 
@@ -189,7 +189,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a weekly market event
+    And I request a market event weekly
     And the account is deleted
     Then I see the login page
 
@@ -214,7 +214,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a bi-weekly market event
+    And I request a market event bi-weekly
     And the account is deleted
     Then I see the login page
 
@@ -235,7 +235,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a bi-weekly market event
+    And I request a market event bi-weekly
     And the account is deleted
     Then I see the login page
 
@@ -256,7 +256,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a bi-weekly market event
+    And I request a market event bi-weekly
     And the account is deleted
     Then I see the login page
 
@@ -277,7 +277,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a bi-weekly market event
+    And I request a market event bi-weekly
     And the account is deleted
     Then I see the login page
 
@@ -302,7 +302,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a monthly market event
+    And I request a market event monthly
     And the account is deleted
     Then I see the login page
 
@@ -323,7 +323,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a monthly market event
+    And I request a market event monthly
     And the account is deleted
     Then I see the login page
 
@@ -344,7 +344,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a monthly market event
+    And I request a market event monthly
     And the account is deleted
     Then I see the login page
 
@@ -365,7 +365,7 @@ using Xunit;
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
     And the on-site endorsement application is approved
-    And I request a monthly market event
+    And I request a market event monthly
     And the account is deleted
     Then I see the login page
 */
