@@ -158,7 +158,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   showLicenceTransferAction(item: ApplicationLicenseSummary) {
-    let result = this.isActive(item)
+    const result = this.isActive(item)
       && !item.transferRequested
       && this.actionsVisible(item)
       && item.licenceTypeName !== 'Section 119 Authorization';
@@ -167,11 +167,11 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
 
   showAddOrChangeThirdPartyOperator(item: ApplicationLicenseSummary): boolean {
-    let result = this.isActive(item)
+    const result = this.isActive(item)
       && this.actionsVisible(item)
       && !item.tpoRequested
       && item.licenceTypeCategory === 'Liquor';
-    return result
+    return result;
   }
 
   actionVisible(licence: License, actionId: string) {
@@ -307,63 +307,71 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   hasEndorsement(licence: License, endorsementId: string) {
-    return typeof licence.endorsements.find(endorsement => endorsement.endorsementId === endorsementId) !== "undefined";
+    return typeof licence.endorsements.find(endorsement => endorsement.endorsementId === endorsementId) !== 'undefined';
   }
 
   hasEndorsementByName(licence: License, endorsementName: string) {
-    return typeof licence.endorsements.find(endorsement => endorsement.endorsementName === endorsementName) !== "undefined";
+    return typeof licence.endorsements.find(endorsement => endorsement.endorsementName === endorsementName) !== 'undefined';
   }
 
   getHandbookLink(licenceType: string) {
+    const pdfRoot = 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals';
     switch (licenceType) {
       case 'Cannabis Retail Store':
       case 'Section 119 Authorization':
-        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/cannabis-retail-store-licence-handbook.pdf';
+        return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
       case 'Marketing':
-        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/marketing-handbook.pdf';
+        return `${pdfRoot}/marketing-handbook.pdf`;
       case 'Operated - Catering':
       case 'Catering':
       case 'Transfer in Progress - Catering':
-        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/catering-handbook.pdf';
+        return `${pdfRoot}/catering-handbook.pdf`;
       case 'Wine Store':
       case 'Transfer in Progress - Wine Store':
       case 'Operated - Wine Store':
-        return 'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/winestore-handbook.pdf';
+        return `${pdfRoot}/winestore-handbook.pdf`;
+      case 'Licensee Retail Store':
+      case 'Operated - Licensee Retail Store':
+        return `${pdfRoot}/licenseeretailstore-handbook.pdf`;
+      case 'Manufacturer':
+        return `${pdfRoot}/manufacturer-handbook.pdf`;
+      case 'UBrew and UVin':
+        return `${pdfRoot}/ubrewanduvin-handbook.pdf`;
       default:
         return '404';
     }
   }
 
   getSubCategory(subcategory: string) {
-    let label = "";
+    let label = '';
 
     switch (subcategory) {
-      case "GroceryStore":
-        label = "Grocery Store";
+      case 'GroceryStore':
+        label = 'Grocery Store';
         break;
-      case "IndependentWineStore":
-        label = "Independent Wine Store";
+      case 'IndependentWineStore':
+        label = 'Independent Wine Store';
         break;
-      case "OffSiteWineStore":
-        label = "Off-Site Wine Store";
+      case 'OffSiteWineStore':
+        label = 'Off-Site Wine Store';
         break;
-      case "OnSiteWineStore":
-        label = "On-Site Wine Store";
+      case 'OnSiteWineStore':
+        label = 'On-Site Wine Store';
         break;
-      case "SacramentalWineStore":
-        label = "Sacramental Wine Store";
+      case 'SacramentalWineStore':
+        label = 'Sacramental Wine Store';
         break;
-      case "SpecialWineStore":
-        label = "Special Wine Store";
+      case 'SpecialWineStore':
+        label = 'Special Wine Store';
         break;
-      case "TouristWineStore":
-        label = "Tourist Wine Store";
+      case 'TouristWineStore':
+        label = 'Tourist Wine Store';
         break;
-      case "WineOnShelf":
-        label = "Wine on Shelf";
+      case 'WineOnShelf':
+        label = 'Wine on Shelf';
         break;
-      case "BCVQA":
-        label = "BC VQA Store";
+      case 'BCVQA':
+        label = 'BC VQA Store';
         break;
       default:
         label = subcategory;

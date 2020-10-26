@@ -27,7 +27,7 @@ namespace bdd_tests
             ClickLicencesTab();
 
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             Subtitle:   Catering Licences
             */
 

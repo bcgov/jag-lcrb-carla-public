@@ -115,9 +115,7 @@ namespace bdd_tests
             ngDriver.WrappedDriver.FindElement(By.Name("submitButton")).Click();
 
             System.Threading.Thread.Sleep(2000);
-            ngDriver.Manage().Timeouts().ImplicitWait = tempWait;
-
-            
+            ngDriver.Manage().Timeouts().ImplicitWait = tempWait;          
         }
 
 
@@ -144,10 +142,6 @@ namespace bdd_tests
         [And(@"I do not complete Step 1 of the application")]
         public void Step1NotCompleted()
         {
-            // click on link to add previous name
-            // NgWebElement uiPreviousNameLink = ngDriver.FindElement(By.CssSelector("div:nth-child(3) span a"));
-            // uiPreviousNameLink.Click();
-
             // click on the Save & Continue to Step 2 button to generate errors
             NgWebElement submitButton = ngDriver.FindElement(By.CssSelector("span .btn-primary"));
             submitButton.Click();

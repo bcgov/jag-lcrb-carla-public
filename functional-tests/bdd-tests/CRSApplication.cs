@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplication.feature
+Feature: CRSApplication
     As a logged in business user
     I want to submit a CRS Application for different business types
 
@@ -30,6 +30,8 @@ Scenario: Indigenous Nation CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -46,6 +48,8 @@ Scenario: Partnership CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -62,6 +66,8 @@ Scenario: Private Corporation CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -78,6 +84,8 @@ Scenario: Public Corporation CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -94,6 +102,8 @@ Scenario: Society CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -110,6 +120,8 @@ Scenario: Sole Proprietorship CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -126,6 +138,8 @@ Scenario: Local Government CRS Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 */

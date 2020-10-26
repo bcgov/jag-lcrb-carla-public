@@ -32,12 +32,17 @@ if [ ! -z $NPM_MIRROR ]; then
   npm config set registry $NPM_MIRROR
 fi
 
+if [ -n "${PHASE1}" ]; then
+
 # build the application.
-npm install @angular/cli@8.3.12
+npm install @angular/cli@10.1.4
 npm install
+fi
+if [ -n "${PHASE2}" ]; then
 mkdir /opt/app-root/dist
 npm run build -- --prod --outputPath=/opt/app-root/src/dist
-
 # fix permissions
 fix-permissions /opt/app-root/dist
+fi
+
 

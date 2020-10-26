@@ -31,6 +31,8 @@ namespace bdd_tests
 
         protected string licenceID;
 
+        protected string endorsementID;
+
         protected string returnUser;
 
         protected TestBase()

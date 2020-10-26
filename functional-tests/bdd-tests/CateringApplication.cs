@@ -30,6 +30,8 @@ Scenario: Indigenous Nation Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -46,6 +48,8 @@ Scenario: Partnership Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -62,6 +66,8 @@ Scenario: Private Corporation Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -78,6 +84,8 @@ Scenario: Public Corporation Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -94,6 +102,8 @@ Scenario: Society Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -110,6 +120,8 @@ Scenario: Sole Proprietorship Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -126,6 +138,8 @@ Scenario: Local Government Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -142,6 +156,8 @@ Scenario: University Catering Application
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 */
