@@ -47,7 +47,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   supportedLicenceTypes = [
     'Catering', 'Operated - Catering', 'Deemed - Catering', 'Transfer in Progress - Catering',
     'Wine Store', 'Operated - Wine Store', 'Deemed - Wine Store', 'Transfer in Progress - Wine Store',
-    'Cannabis Retail Store', 
+    'Cannabis Retail Store',
     'Marketing',
     'Manufacturer', 'Operated - Manufacturer', 'Deemed - Manufacturer', 'Transfer in Progress - Manufacturer',
     'Licensee Retail Store', 'Transfer in Progress - Licensee Retail Store', 'Operated - Licensee Retail Store', 'Deemed - Licensee Retail Store',
@@ -76,9 +76,9 @@ export class LicencesComponent extends FormBase implements OnInit {
   private displayApplications() {
     this.busy =
       forkJoin([this.applicationDataService.getAllCurrentApplications(),
-        this.licenceDataService.getAllCurrentLicenses(),
-        this.licenceDataService.getAllOperatedLicenses(),
-        this.licenceDataService.getAllProposedLicenses()]
+      this.licenceDataService.getAllCurrentLicenses(),
+      this.licenceDataService.getAllOperatedLicenses(),
+      this.licenceDataService.getAllProposedLicenses()]
       ).pipe(takeWhile(() => this.componentActive))
         .subscribe(([applications, licenses, operatedLicences, proposedLicences = []]) => {
           this.applications = applications;
@@ -91,14 +91,30 @@ export class LicencesComponent extends FormBase implements OnInit {
           });
           const combinedLicences = [
             // do not show transfers if the corresponding application is 'deemed'
-            ...licenses.filter(lic => !(lic.licenceTypeName.includes('Transfer in Progress -') && lic.checklistConclusivelyDeem)), 
-            ...operatedLicences, 
+            ...licenses.filter(lic => !(lic.licenceTypeName.includes('Transfer in Progress -') && lic.checklistConclusivelyDeem)),
+            ...operatedLicences,
             ...proposedLicences.filter(lic => lic.checklistConclusivelyDeem)];
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
             licence.headerRowSpan = 1;
+            licence.hasPaidForRenewalApplication = this.hasPaidForRenewalApplication(licence);
             this.addOrUpdateLicence(licence);
           });
         });
+  }
+
+  hasPaidForRenewalApplication(licence: ApplicationLicenseSummary): boolean {
+    // check for any renewal application that is paid for and for the given licence
+    const apps = this.applications.filter(app => {
+      const isRenewalType = (
+        app.applicationTypeName === ApplicationTypeNames.LiquorRenewal
+        || app.applicationTypeName === ApplicationTypeNames.CRSRenewal
+      );
+      return (isRenewalType
+        && app.licenceId === licence.licenseId
+        && app.isPaid);
+    });
+
+    return apps && apps.length > 0;
   }
 
   uploadMoreFiles(application: Application) {

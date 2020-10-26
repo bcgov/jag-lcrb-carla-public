@@ -526,8 +526,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
-                application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
-
+                if (adoxioLicense.AdoxioEstablishment != null)
+                {
+                    application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
+                }
+                
                 try
                 {
                     var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue)).FirstOrDefault();
@@ -841,7 +844,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var endorsementsText = "";
                 License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
-                
+
                 if (licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0)
                 {
 
@@ -850,42 +853,49 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var licenceHasStore = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "On-Site Store Endorsement");
                     var licenceHasCatering = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Catering Endorsement");
                     var licenceHasOffsite = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Off-Site Store Endorsement");
-                    var licenceHasPicnic = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Picnic Area Endorsement");;
+                    var licenceHasPicnic = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Picnic Area Endorsement"); ;
 
-                    if(licenceHasSEA > -1) {
+                    if (licenceHasSEA > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasSEA].ToHtml(_dynamicsClient);
                     }
 
-                    if(licenceHasLounge > -1) {
+                    if (licenceHasLounge > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasLounge].ToHtml(_dynamicsClient);
                     }
-                    
-                    if(licenceHasStore > -1) {
+
+                    if (licenceHasStore > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasStore].SimpleHeader();
                     }
 
-                    if(licenceHasCatering > -1) {
+                    if (licenceHasCatering > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasCatering].SimpleHeader();
                     }
 
-                    if(licenceHasOffsite > -1) {
+                    if (licenceHasOffsite > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasCatering].SimpleHeader();
                     }
 
-                    if(licenceHasPicnic > -1) {
+                    if (licenceHasPicnic > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasPicnic].SimpleHeader();
                     }
 
                 }
-            var storeHours = "";
+                var storeHours = "";
 
-            MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null");
-            
-            if (hours.Value.Count > 0){
+                MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null");
 
-                MicrosoftDynamicsCRMadoxioHoursofservice hoursVal = hours.Value.First();
+                if (hours.Value.Count > 0)
+                {
 
-                storeHours = $@"<h3 style=""text-align: center;"">HOURS OF SALE</h3>
+                    MicrosoftDynamicsCRMadoxioHoursofservice hoursVal = hours.Value.First();
+
+                    storeHours = $@"<h3 style=""text-align: center;"">HOURS OF SALE</h3>
                             <table style=""width: 100%"">
                             <tr>
                                 <th></th>
@@ -992,7 +1002,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     var templateName = "cannabis_licence";
-                    
+
 
 
                     switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
