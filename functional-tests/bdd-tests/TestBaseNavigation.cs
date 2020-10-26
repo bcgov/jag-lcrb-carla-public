@@ -25,7 +25,7 @@ namespace bdd_tests
         {
             
             NgWebElement uiRequestedLink = null;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 try
                 {
@@ -52,7 +52,7 @@ namespace bdd_tests
         public void ClickOnBrandingChangeLink(string changeType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
@@ -269,8 +269,6 @@ namespace bdd_tests
             // click on the Submit button
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button:nth-child(2)"));
             uiSubmitButton.Click();
-
-            //System.Threading.Thread.Sleep(5000);
         }
 
 
@@ -307,7 +305,7 @@ namespace bdd_tests
         public void ShowStoreOpenOnMap()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             Subtitle:   Cannabis Retail Store Licences
             */
 

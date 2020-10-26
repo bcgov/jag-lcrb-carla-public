@@ -33,7 +33,6 @@ Scenario: Partnership CRS Personnel Name Changes
     And I pay the licensing fee for Cannabis
     And I click on the link for Dashboard
     And I request a personnel name change for a partnership
-    And I confirm the correct personnel name change fee for a Cannabis licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And the account is deleted
@@ -54,7 +53,6 @@ Scenario: Private Corporation CRS Personnel Name Changes
     And I pay the licensing fee for Cannabis
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
-    And I confirm the correct personnel name change fee for a Cannabis licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And the account is deleted
@@ -75,7 +73,6 @@ Scenario: Public Corporation CRS Personnel Name Changes
     And I pay the licensing fee for Cannabis
     And I click on the link for Dashboard
     And I request a personnel name change for a public corporation
-    And I confirm the correct personnel name change fee for a Cannabis licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And the account is deleted
@@ -96,7 +93,6 @@ Scenario: Society CRS Personnel Name Changes
     And I pay the licensing fee for Cannabis
     And I click on the link for Dashboard
     And I request a personnel name change for a society
-    And I confirm the correct personnel name change fee for a Cannabis licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And the account is deleted
@@ -117,7 +113,6 @@ Scenario: Sole Proprietorship CRS Personnel Name Changes
     And I pay the licensing fee for Cannabis
     And I click on the link for Dashboard
     And I request a personnel name change for a sole proprietorship
-    And I confirm the correct personnel name change fee for a Cannabis licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And the account is deleted
