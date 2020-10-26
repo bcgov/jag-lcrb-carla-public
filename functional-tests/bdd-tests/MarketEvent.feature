@@ -22,6 +22,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
     And the account is deleted
@@ -43,6 +44,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
     And the account is deleted
@@ -64,6 +66,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
     And the account is deleted
@@ -85,6 +88,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
     And the account is deleted
@@ -110,6 +114,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
     And the account is deleted
@@ -131,6 +136,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
     And the account is deleted
@@ -152,6 +158,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
     And the account is deleted
@@ -173,6 +180,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
     And the account is deleted
@@ -198,6 +206,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
     And the account is deleted
@@ -219,6 +228,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
     And the account is deleted
@@ -240,6 +250,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
     And the account is deleted
@@ -261,6 +272,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
     And the account is deleted
@@ -286,6 +298,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
     And the account is deleted
@@ -307,6 +320,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
     And the account is deleted
@@ -328,6 +342,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
     And the account is deleted
@@ -349,6 +364,7 @@
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
+    And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
     And the account is deleted
