@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: MarketEvent
+ Feature: MarketEvent
     As a logged in business user
     I want to submit a market event for different manufacturer types
 
-@e2e @privatecorporation @marketevent @winery
-Scenario: Private Corporation Winery Market Event
+ @e2e @privatecorporation @marketevent @winery
+ Scenario: Private Corporation Winery Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -33,13 +33,13 @@ Scenario: Private Corporation Winery Market Event
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
-    And the application is approved
+    And the on-site endorsement application is approved
     And I request a market event
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @marketevent @distillery
-Scenario: Private Corporation Distillery Market Event
+ @e2e @privatecorporation @marketevent @distillery
+ Scenario: Private Corporation Distillery Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -54,13 +54,13 @@ Scenario: Private Corporation Distillery Market Event
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
-    And the application is approved
+    And the on-site endorsement application is approved
     And I request a market event
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @marketevent @brewery
-Scenario: Private Corporation Brewery Market Event
+ @e2e @privatecorporation @marketevent @brewery
+ Scenario: Private Corporation Brewery Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -75,13 +75,13 @@ Scenario: Private Corporation Brewery Market Event
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
-    And the application is approved
+    And the on-site endorsement application is approved
     And I request a market event
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @marketevent @copacker
-Scenario: Private Corporation Co-packer Market Event
+ @e2e @privatecorporation @marketevent @copacker
+ Scenario: Private Corporation Co-packer Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -96,7 +96,7 @@ Scenario: Private Corporation Co-packer Market Event
     And I click on the Licences tab
     And I pay the licensing fee for a Manufacturer application
     And I request an on-site store endorsement
-    And the application is approved
+    And the on-site endorsement application is approved
     And I request a market event
     And the account is deleted
     Then I see the login page
