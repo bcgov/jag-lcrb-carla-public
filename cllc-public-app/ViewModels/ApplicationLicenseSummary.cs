@@ -72,6 +72,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool Operated { get; set; }
         public bool Suspended { get; set; }
         
+        public bool? AutoRenewal { get; set; }
         
         public bool TPORequested { get; set; }
         
