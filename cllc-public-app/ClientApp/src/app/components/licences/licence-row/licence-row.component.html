@@ -58,7 +58,7 @@
                             </div>
                             <div
                                 *ngIf="!item.isOperated && (item.status === 'Expired' || (isActive(item) && isAboutToExpire(item.expiryDate)))">
-                                <a *ngIf="!item.hasPaidForRenewalApplication" href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
+                                <a *ngIf="!item.hasPaidForRenewalApplication && item.autoRenewal" href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
                                     <span><i class="fas fa-exclamation-triangle"
                                             style="margin-right: 10px;"></i>{{isRecentlyExpired(item) ? 'Reinstate' : 'Renew'}}
                                         Licence</span>
@@ -238,7 +238,7 @@
                                         </ng-container>
                                     </p>
                                 </ng-container>
-                                <div *ngIf="isExpired(item)" class="licence-expired" style="text-align: center;">
+                                <div *ngIf="isExpired(item) && item.autoRenewal" class="licence-expired" style="text-align: center;">
                                     <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
                                         <strong>Attention</strong>: This Licence has Expired<br>Please
                                         {{isRecentlyExpired(item) ? 'Renew' : 'Reinstate'}}.
