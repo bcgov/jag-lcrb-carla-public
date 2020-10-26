@@ -24,7 +24,7 @@ namespace bdd_tests
         public void RequestLicenseeRepresentative()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             // click on the Licensee Representative link
@@ -82,6 +82,9 @@ namespace bdd_tests
             uiSignatureAgree.Click();
 
             ClickOnSubmitButton();
+
+            // check that new licensee representation is displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/div[4]/a/span[contains(.,'Licensee Representative: ')]")).Displayed);
         }
     }
 }

@@ -305,7 +305,6 @@ namespace bdd_tests
         [And(@"the org structure data is successfully deleted for a (.*)")]
         public void DeletionSuccessful(string bizType)
         {
-
             switch (bizType)
             {
                 case "private corporation":
@@ -327,7 +326,6 @@ namespace bdd_tests
                 default:
                     throw (new Exception($"Unknown bizType {bizType}"));
             }
-
         }
     }
 }
