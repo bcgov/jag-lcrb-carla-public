@@ -185,7 +185,7 @@ namespace bdd_tests
             uiStartDate2.Click();
             
             // select end date
-            NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='startDate']"));
+            NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
             uiEndDate1.Click();
 
             NgWebElement uiEndDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
