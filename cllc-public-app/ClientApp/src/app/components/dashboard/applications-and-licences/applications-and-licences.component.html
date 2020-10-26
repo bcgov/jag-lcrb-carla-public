@@ -259,7 +259,14 @@
                   Your relocation application has been received and is being reviewed by the LCRB.
                 </p>
                 <p *ngIf="item.applicationStatus === 'Pending Licence Fee'">
-                  Pay the first year fee on the <a routerLink="/licences">licences and authorizations</a> dashboard.
+
+                  <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
+                    <span>
+                        <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
+                        Pay First Year Fee
+                    </span>
+                  </a>
+
                 </p>
 
                 <p *ngIf="item.applicationStatus === 'Application Incomplete'">
