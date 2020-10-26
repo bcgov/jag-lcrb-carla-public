@@ -26,7 +26,6 @@ Scenario: Check Catering Release status
     And I request a licensee representative
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
-    And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And I click on the Licences tab
