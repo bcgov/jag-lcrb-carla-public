@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request a market event")]
-        public void MarketEvents()
+        [And(@"I request a market event (.*)")]
+        public void MarketEvents(string frequency)
         {
             /* 
             Page Title: Licences & Authorizations
@@ -141,9 +141,37 @@ namespace bdd_tests
             NgWebElement uiAdditionalDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
             uiAdditionalDetails.SendKeys(additionalDetails);
 
-            // select frequency
-            NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='2: 845280002']"));
-            uiFrequency.Click();
+            // select 'Once' from the frequency dropdown
+            if (frequency == "for one date only")
+            {
+                // select frequency
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='3: 845280003']"));
+                uiFrequency.Click();
+            }
+
+            // select 'Weekly' from the frequency dropdown
+            if (frequency == "weekly")
+            {
+                // select frequency
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='0: 845280000']"));
+                uiFrequency.Click();
+            }
+
+            // select 'Bi-Weekly' from the frequency dropdown
+            if (frequency == "bi-weekly")
+            {
+                // select frequency
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='1: 845280001']"));
+                uiFrequency.Click();
+            }
+
+            // select 'Monthly' from the frequency dropdown
+            if (frequency == "monthly")
+            {
+                // select frequency
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='2: 845280002']"));
+                uiFrequency.Click();
+            }
 
             // enter additional information
             NgWebElement uiAdditionalInformation = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
