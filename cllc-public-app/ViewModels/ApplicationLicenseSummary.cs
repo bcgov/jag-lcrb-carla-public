@@ -62,6 +62,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string Status { get; set; }
 
+        public bool MissingFirstYearLicenceFee { get; set; }
+        public string CurrentOwner { get; set; }
         public bool ChecklistConclusivelyDeem { get; set; }
         public bool StoreInspected { get; set; }
         public bool TransferRequested { get; set; }
@@ -70,6 +72,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool Operated { get; set; }
         public bool Suspended { get; set; }
         
+        public bool? AutoRenewal { get; set; }
         
         public bool TPORequested { get; set; }
         

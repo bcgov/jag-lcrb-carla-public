@@ -24,7 +24,7 @@ namespace bdd_tests
         public void RequestStoreRelocation(string applicationType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string requestRelocationLink = "Request Relocation";
@@ -107,7 +107,7 @@ namespace bdd_tests
             */
 
             // confirm that relocation request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Relocation Request')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Relocation Application Under Review ')]")).Displayed);
         }
     }
 }
