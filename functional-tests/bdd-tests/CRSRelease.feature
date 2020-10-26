@@ -27,7 +27,7 @@ Scenario: Check CRS Release status
     And I review the federal reports
     And I click on the Licences tab
     And the expiry date is changed to today
-    And I renew the licence with negative responses
+    And I renew the licence with negative responses for Cannabis
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
     And I click on the link for Dashboard
