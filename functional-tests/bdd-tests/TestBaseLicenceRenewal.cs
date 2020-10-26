@@ -183,6 +183,16 @@ namespace bdd_tests
                 // 15. Have you made any unreported changes to the store’s floor plan within the past 12 months? 
                 NgWebElement uiFloorPlan = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalFloorPlan'] button#mat-button-toggle-43-button"));
                 uiFloorPlan.Click();
+
+                // confirm that correct information re positive responses for a Cannabis licensing renewal is displayed
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'You can still renew your licence. Please contact us as soon as possible to transfer this licence to its new owner. ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'You can still renew your licence. Please contact us to update this information. ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' You can still renew your licence. After submitting your renewal, you can update your federal producer information on the Account Profile page on the Dashboard. A member of LCRB may contact you to determine any additional next steps. ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' You can still renew your licence. Please contact us to to pay your fines. ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' You can still renew your licence. After submitting your renewal, please start a Establishment Name or Branding Change application from the Dashboard. ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'You can still renew your licence. After submitting your renewal, please start a Relocation Request application from the Dashboard. ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'A LCRB Licensing Staff member may contact you as part of this renewal process ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' You can still renew your licence. After submitting your renewal, please start a Structural Change Request application from the Dashboard. ')]")).Displayed);
             }
 
             if (responses == "negative responses for Catering")
@@ -289,6 +299,14 @@ namespace bdd_tests
                 // 10. Have you added, changed or removed a licensee representative within the past 12 months?
                 NgWebElement uiRenewalKeyPersonnel = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-28-button"));
                 uiRenewalKeyPersonnel.Click();
+
+                // confirm that correct information re positive responses for a Catering licensing renewal is displayed
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Shareholder Information on the Organization Details page')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Submit a Third Party Operator application from the Licences Dashboard')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Submit a Structural Change from the Licences Dashboard')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Financial Interest information on the Account Profile')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer this Licence from the Licences Dashboard')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Add, Remove or Update your Licensee Representative from the Licences Dashboard')]")).Displayed);   
             }
 
             if ((responses == "positive responses for a brewery") || (responses == "positive responses for a winery") || (responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
@@ -406,6 +424,14 @@ namespace bdd_tests
                 // 10. Have you added, changed or removed a licensee representative within the past 12 months?
                 NgWebElement uiRenewalKeyPersonnelYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-28-button"));
                 uiRenewalKeyPersonnelYes.Click();
+
+                // confirm that correct information re positive responses for a Catering licensing renewal is displayed
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Shareholder Information on the Organization Details page')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Submit a Third Party Operator application from the Licences Dashboard')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Submit a Structural Change from the Licences Dashboard')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Financial Interest information on the Account Profile')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer this Licence from the Licences Dashboard')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Add, Remove or Update your Licensee Representative from the Licences Dashboard')]")).Displayed);
             }
 
             if ((responses == "negative responses for a brewery") || (responses == "negative responses for a winery") || (responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
