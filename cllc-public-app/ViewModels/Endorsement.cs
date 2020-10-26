@@ -75,15 +75,15 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             {
                 // sort the areas
                 IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> serviceAreas = allServiceAreas.Value
-                    .Where(area => area.AdoxioAreacategory == (int)ServiceAreaCategoryEnum.Service)
+                    .Where(area => area.AdoxioAreacategory != (int)ServiceAreaCategoryEnum.Capacity)
                     .OrderBy(area => area.AdoxioAreanumber);
-                IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> outdoorAreas = allServiceAreas.Value
-                    .Where(area => area.AdoxioAreacategory == (int)ServiceAreaCategoryEnum.OutdoorEvent)
-                    .OrderBy(area => area.AdoxioAreanumber);
+               // IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> outdoorAreas = allServiceAreas.Value
+               //     .Where(area => area.AdoxioAreacategory == (int)ServiceAreaCategoryEnum.OutdoorEvent)
+               //     .OrderBy(area => area.AdoxioAreanumber);
                 IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> capacityAreas = allServiceAreas.Value
                     .Where(area => area.AdoxioAreacategory == (int)ServiceAreaCategoryEnum.Capacity)
                     .OrderBy(area => area.AdoxioAreanumber);
-                if (serviceAreas.Any() || outdoorAreas.Any())
+                if (serviceAreas.Any())
                 {
                     htmlVal += $@"<h3 style=""text-align: center;"">MAXIMUM CAPACITY {EndorsementName.ToUpper()}</h3>";
                 }
@@ -119,31 +119,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     htmlVal += "</tr></table>";
                 }
 
-                // print the outdoor areas
-                if (outdoorAreas.Any())
-                {
-
-                    htmlVal += $@"<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'>
-                                    <tr>";
-
-                    var cells = 0;
-                    var leftover = 0;
-
-                    foreach (MicrosoftDynamicsCRMadoxioServicearea area in outdoorAreas)
-                    {
-                        cells++;
-
-                        htmlVal += $@"<td class='area'>{area.AdoxioArealocation}{area.AdoxioAreanumber} <right>{area.AdoxioCapacity}</right></td>";
-
-                        // every 4 cells
-                        leftover = cells%4; 
-
-                        if(leftover == 0){
-                            htmlVal += "</tr><tr>"; // do a new row
-                        }
-                    }
-                    htmlVal += "</tr></table>";
-                }
             }
 
             return htmlVal;
