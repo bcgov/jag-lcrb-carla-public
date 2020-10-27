@@ -19,9 +19,9 @@ node('master') {
 						def bc = openshift.selector('bc', 'cllc-public-angular')
 						def buildSelector = bc.startBuild()
 						buildSelector.logs('-f')
-						}
-                    }
+					}
                 }
+            }
 		
             
         }, 'C# API': {
@@ -32,9 +32,9 @@ node('master') {
 						def buildSelector = bc.startBuild()
 						buildSelector.logs('-f')
 						openshift.tag("cllc-public-api:latest", "cllc-public-api:dev")   
-						}
-                    }
-                }				              
+					}
+                }
+            }				              
             
         })
 
@@ -45,9 +45,9 @@ node('master') {
 				def buildSelector = bc.startBuild()
 				buildSelector.logs('-f')
 				openshift.tag("cllc-public-frontend:latest", "cllc-public-frontend:dev")   
-				}
 			}
-		}	
+		}
+			
     }
 }
 
