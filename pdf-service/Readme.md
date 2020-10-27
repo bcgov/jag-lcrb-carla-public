@@ -5,7 +5,7 @@ The purpose of the PDF microservice is to generate PDF documents based on templa
 
 ## Development ##
 
-This service is a Dotnet Core 2.1 application written using the Web SDK.  As such you can use an IDE such as Visual Studio or VS Code to edit the files.  
+This service is a Dotnet Core 3.1 application written using the Web SDK.  As such you can use an IDE such as Visual Studio or VS Code to edit the files.  
 
 ## Testing ##
 
@@ -70,3 +70,25 @@ To have multiple templates do the following:
 ```
 byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
 ```
+
+### DEFAULT SECRETS FOR DEVELOPMENT
+
+```
+{
+  "JWT_VALID_ISSUER": "http://127.0.0.1:8080", 
+  "JWT_VALID_AUDIENCE": "http://127.0.0.1:8080",    
+  "WKHTMLTOPDF_LOCATION": "C:\\Program Files\\wkhtmltopdf\\bin"
+}
+```
+
+The above secrets are intended for local development only.  
+
+- The setting WKHTMLTOPDF_LOCATION must point to the location where you installed the files for WKHTML
+- The WKHTMLTOPDF library that the code uses expects the binary for wkhtmltopdf.exe to be in a subdirectory with the name of the operating system.  For example:
+  - Windows for Windows
+  - Mac for Apple Mac
+  - Linux for Linux.
+  - Case is important for all of these.
+
+For Development purposes there is no authentication; this is controlled by not setting the environment value "JWT_TOKEN_KEY"
+
