@@ -396,7 +396,7 @@ namespace bdd_tests
             Assert.True(uiClientHostname.GetAttribute("value") == "Point Ellis Market Cooperative");
 
             // confirm market event type is correct
-            NgWebElement uiMarketEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'marketEventType'] option[value = '2: 845280002']"));
+            NgWebElement uiMarketEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'marketEventType']"));
             Assert.True(uiMarketEventType.GetAttribute("value") == "Annual");
 
             // confirm market business number is correct
