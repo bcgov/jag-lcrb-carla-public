@@ -278,37 +278,39 @@ namespace bdd_tests
                 }
             }
 
-            // enter event start hour
-            NgWebElement uiEventStartHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] input[aria-label='Hours']"));
-            uiEventStartHour.SendKeys(eventStartHour);
+            // decrement event start hour
+            NgWebElement uiEventStartHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] .ngb-tp-hour [type='button'] span.bottom"));
+            uiEventStartHour.Click();
 
-            // enter event start minute
-            NgWebElement uiEventStartMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] input[aria-label='Minutes']"));
-            uiEventStartMinute.SendKeys(eventStartMinute);
+            // decrement event start minute
+            NgWebElement uiEventStartMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] .ngb-tp-minute span.ngb-tp-chevron.bottom"));
+            uiEventStartMinute.Click();
 
-            // enter event end hour
-            NgWebElement uiEventEndHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Hours']"));
-            uiEventEndHour.SendKeys(eventEndHour);
+            // decrement event end hour
+            NgWebElement uiEventEndHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] .ngb-tp-hour [type='button'] span.bottom"));
+            uiEventEndHour.Click();
 
-            // enter event end minute
-            NgWebElement uiEventEndMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Minutes']"));
-            uiEventEndMinute.SendKeys(eventEndMinute);
+            // decrement event end minute
+            NgWebElement uiEventEndMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] .ngb-tp-minute [type='button'] span.bottom"));
+            uiEventEndMinute.Click();
 
-            // enter liquor sale start hour
-            NgWebElement uiLiquorStartHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorStartTime'] input[aria-label='Hours']"));
-            uiLiquorStartHour.SendKeys(liquorStartHour);
+            // increment liquor sale start hour
+            NgWebElement uiLiquorStartHour = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(4) .ngb-tp-hour .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
+            uiLiquorStartHour.Click();
 
-            // enter liquor sale start minute
-            NgWebElement uiLiquorStartMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorStartTime'] input[aria-label='Minutes']"));
-            uiLiquorStartMinute.SendKeys(liquorStartMinute);
+            // increment liquor sale start minute
+            NgWebElement uiLiquorStartMinute = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(4) .ngb-tp-minute .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
+            uiLiquorStartMinute.Click();
 
-            // enter liquor sale end hour
-            NgWebElement uiLiquorEndHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Hours']"));
-            uiLiquorEndHour.SendKeys(liquorEndHour);
+            // double decrement liquor sale end hour
+            NgWebElement uiLiquorEndHour1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] .ngb-tp-hour span.bottom"));
+            uiLiquorEndHour1.Click();
+            uiLiquorEndHour1.Click();
 
-            // enter liquor sale end minute
-            NgWebElement uiLiquorEndMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Minutes']"));
-            uiLiquorEndMinute.SendKeys(liquorEndMinute);
+            // double decrement liquor sale end minute
+            NgWebElement uiLiquorEndMinute1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] .ngb-tp-minute span.bottom"));
+            uiLiquorEndMinute1.Click();
+            uiLiquorEndMinute1.Click();
 
             // select serving it right/minors checkbox
             NgWebElement uiServingItRight = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAllStaffServingitRight']"));
@@ -321,6 +323,8 @@ namespace bdd_tests
             // select agreement checkbox
             NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiAgreement.Click();
+
+             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Inspect test')]")).Displayed);
 
             // click on the Submit button
             NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary+ .ng-star-inserted"));
