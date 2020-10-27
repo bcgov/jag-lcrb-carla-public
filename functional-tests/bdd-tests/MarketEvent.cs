@@ -40,6 +40,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -64,6 +65,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -88,6 +90,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -112,6 +115,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -140,6 +144,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -164,6 +169,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -188,6 +194,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -212,6 +219,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -240,6 +248,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -264,6 +273,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -288,6 +298,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -312,6 +323,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -340,6 +352,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -364,6 +377,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -388,6 +402,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
@@ -412,6 +427,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
+    And I click on the Licences tab
     And I click on the event history for markets
     And the market event is approved
     And the account is deleted
