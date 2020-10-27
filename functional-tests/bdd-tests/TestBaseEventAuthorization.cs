@@ -236,8 +236,6 @@ namespace bdd_tests
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licences')]")).Displayed);
 
-            //System.Threading.Thread.Sleep(4000);
-
             NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector("mat-expansion-panel-header[role='button'] #expand-history-button-0"));
             uiExpandEventHistory.Click();
             
