@@ -188,8 +188,13 @@ namespace bdd_tests
             NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
             uiEndDate1.Click();
 
-            NgWebElement uiEndDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-            uiEndDate2.Click();
+            // click on the next button
+            NgWebElement uiOpenCalendarNext = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
+            uiOpenCalendarNext.Click();
+
+            // click on the first day
+            NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
+            uiOpenCalendarYear.Click();
 
             if (frequency != "for one date only")
             {
