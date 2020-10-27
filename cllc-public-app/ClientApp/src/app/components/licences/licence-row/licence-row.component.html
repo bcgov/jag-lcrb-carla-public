@@ -60,7 +60,7 @@
                                 *ngIf="!item.isOperated && (item.status === 'Expired' || (isActive(item) && isAboutToExpire(item.expiryDate)))">
                                 <a *ngIf="!item.hasPaidForRenewalApplication && item.autoRenewal" href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
                                     <span><i class="fas fa-exclamation-triangle"
-                                            style="margin-right: 10px;"></i>{{isRecentlyExpired(item) ? 'Reinstate' : 'Renew'}}
+                                            style="margin-right: 10px;"></i>{{isRecentlyExpired(item) ? 'Renew' : 'Reinstate'}}
                                         Licence</span>
                                 </a>
                                 <span *ngIf="item.hasPaidForRenewalApplication" color="accent">Renewal Application Submitted</span>
