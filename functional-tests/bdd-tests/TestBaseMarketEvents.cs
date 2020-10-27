@@ -256,6 +256,10 @@ namespace bdd_tests
 
                 if (frequency == "monthly")
                 {
+                    // select day of the week
+                    NgWebElement uiSaturday3 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='saturday']"));
+                    uiSaturday3.Click();
+
                     // select first week of the month
                     NgWebElement uiWeekOfMonth1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-2-input']"));
                     uiWeekOfMonth1.Click();
@@ -317,6 +321,8 @@ namespace bdd_tests
             // select agreement checkbox
             NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiAgreement.Click();
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'stop test check page over')]")).Displayed);
 
             // click on the Submit button
             NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary+ .ng-star-inserted"));
