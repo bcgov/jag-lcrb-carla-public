@@ -192,6 +192,13 @@ namespace bdd_tests
             NgWebElement uiOpenCalendarNext = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
             uiOpenCalendarNext.Click();
 
+            if (frequency == "monthly")
+            {
+                // click on the next button again
+                NgWebElement uiOpenCalendarNext2 = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
+                uiOpenCalendarNext2.Click();
+            }
+
             // click on the first day
             NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
             uiOpenCalendarYear.Click();
