@@ -396,8 +396,8 @@ namespace bdd_tests
             Assert.True(uiClientHostname.GetAttribute("value") == "Point Ellis Market Cooperative");
 
             // confirm market event type is correct
-            NgWebElement uiMarketEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'marketEventType']"));
-            Assert.True(uiMarketEventType.GetAttribute("value") == "Annual");
+            // NgWebElement uiMarketEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'marketEventType']"));
+            // Assert.True(uiMarketEventType.GetAttribute("value") == "Annual");
 
             // confirm market business number is correct
             NgWebElement uiBusinessNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'businessNumber']"));
@@ -427,6 +427,7 @@ namespace bdd_tests
             NgWebElement uiAdditionalDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
             Assert.True(uiAdditionalDetails.GetAttribute("value") == "Additional details for automated test.");
 
+            /*
             if (frequency == "a one day event")
             {
                 NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='3: 845280003']"));
@@ -450,6 +451,7 @@ namespace bdd_tests
                 NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='1: 845280001']"));
                 Assert.True(uiFrequency.GetAttribute("value") == "Bi-Weekly");
             }
+            */
 
             // confirm additional information is correct
             NgWebElement uiAdditionalInformation = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
