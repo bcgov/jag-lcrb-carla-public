@@ -21,6 +21,15 @@ node('master') {
 						buildSelector.logs('-f')
 					}
                 }
+				echo "Building Application image..."
+				openshift.withCluster() {
+					openshift.withProject() {
+						def bc = openshift.selector('bc', 'cllc-public-frontend')
+						def buildSelector = bc.startBuild()
+						buildSelector.logs('-f')				  
+					}
+					openshift.tag("cllc-public-frontend:latest", "cllc-public-frontend:dev") 
+				}
             }
 		
             
@@ -30,23 +39,15 @@ node('master') {
 					openshift.withProject() {
 						def bc = openshift.selector('bc', 'cllc-public-api')
 						def buildSelector = bc.startBuild()
-						buildSelector.logs('-f')
-						openshift.tag("cllc-public-api:latest", "cllc-public-api:dev")   
+						buildSelector.logs('-f')						   
 					}
+					openshift.tag("cllc-public-api:latest", "cllc-public-api:dev")
                 }
             }				              
             
         })
 
-        echo "Building Application image..."
-		openshift.withCluster() {
-			openshift.withProject() {
-				def bc = openshift.selector('bc', 'cllc-public-frontend')
-				def buildSelector = bc.startBuild()
-				buildSelector.logs('-f')
-				openshift.tag("cllc-public-frontend:latest", "cllc-public-frontend:dev")   
-			}
-		}
+        
 			
     }
 }
