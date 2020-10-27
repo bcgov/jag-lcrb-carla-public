@@ -183,7 +183,7 @@ namespace bdd_tests
 
             NgWebElement uiStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
             uiStartDate2.Click();
-            
+
             // select end date
             NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
             uiEndDate1.Click();
@@ -310,6 +310,21 @@ namespace bdd_tests
             ClickOnSubmitButton();
 
             MakePayment();
+        }
+
+
+        [And(@"I click on the event history for markets")]
+        public void MarketEventsHistory()
+        {
+            NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector("mat-expansion-panel-header[role='button'] #expand-history-button-0"));
+            uiExpandEventHistory.Click();
+        }
+        
+
+        [And(@"the market event is approved")]
+        public void MarketEventsApproved()
+        {
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Approved')]")).Displayed);
         }
     }
 }
