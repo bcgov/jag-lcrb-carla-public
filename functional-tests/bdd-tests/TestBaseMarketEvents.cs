@@ -322,8 +322,6 @@ namespace bdd_tests
             NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiAgreement.Click();
 
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'stop test check page over')]")).Displayed);
-
             // click on the Submit button
             NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary+ .ng-star-inserted"));
             uiSubmit.Click();
