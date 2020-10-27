@@ -52,7 +52,7 @@ export class WorkerHomeComponent implements OnInit, AfterViewInit {
         if (formData === 'login') {
           window.location.href = '/bcservice';
         } else if (formData === 'create-account') {
-          window.location.href = 'https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/login-with-card';
+          window.location.href = 'https://justice.gov.bc.ca/cannabislicensing/policy-document/worker-qualification-training';
         }
       }
     );
