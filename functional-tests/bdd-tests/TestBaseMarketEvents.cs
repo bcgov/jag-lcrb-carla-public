@@ -250,19 +250,19 @@ namespace bdd_tests
                 if (frequency == "monthly")
                 {
                     // select first week of the month
-                    NgWebElement uiWeekOfMonth1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] #mat-radio-7[tabindex='-1']"));
+                    NgWebElement uiWeekOfMonth1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-2-input']"));
                     uiWeekOfMonth1.Click();
 
                     // select second week of the month
-                    NgWebElement uiWeekOfMonth2 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] #mat-radio-8[tabindex='-1']"));
+                    NgWebElement uiWeekOfMonth2 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-3-input']"));
                     uiWeekOfMonth2.Click();
 
                     // select third week of the month
-                    NgWebElement uiWeekOfMonth3 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] #mat-radio-9[tabindex='-1']"));
+                    NgWebElement uiWeekOfMonth3 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-4-input']"));
                     uiWeekOfMonth3.Click();
 
                     // select fourth week of the month
-                    NgWebElement uiWeekOfMonth4 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] #mat-radio-10[tabindex='-1']"));
+                    NgWebElement uiWeekOfMonth4 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-5-input']"));
                     uiWeekOfMonth4.Click();
                 }
             }
