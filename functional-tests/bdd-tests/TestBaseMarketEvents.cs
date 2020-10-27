@@ -311,11 +311,9 @@ namespace bdd_tests
             NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiAgreement.Click();
 
-            // click on the Submit & Pay button
-            NgWebElement uiSubmitandPay = ngDriver.FindElement(By.CssSelector(".btn-primary+ .ng-star-inserted"));
-            uiSubmitandPay.Click();
-
-            MakePayment();
+            // click on the Submit button
+            NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary+ .ng-star-inserted"));
+            uiSubmit.Click();
         }
 
 
