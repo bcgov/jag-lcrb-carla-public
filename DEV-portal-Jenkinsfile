@@ -18,12 +18,14 @@ node('master') {
 					openshift.withProject() {
 						def bc1 = openshift.selector('bc', 'cllc-public-angular')
 						def buildSelector1 = bc1.startBuild()
+						sleep(5)
 						buildSelector1.logs('-f')
 						
 						sleep(5)
 						
 						def bc2 = openshift.selector('bc', 'cllc-public-frontend')
 						def buildSelector2 = bc2.startBuild()
+						sleep(5)
 						buildSelector2.logs('-f')				  						
 					}
 					
