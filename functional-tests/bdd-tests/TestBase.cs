@@ -63,7 +63,7 @@ namespace bdd_tests
 
             var driver = new ChromeDriver(path, options);
 
-            double timeout = 20.0;
+            double timeout = 200.0;
 
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
             driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout * 2);
