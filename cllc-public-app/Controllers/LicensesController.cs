@@ -526,8 +526,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
-                application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
-
+                if (adoxioLicense.AdoxioEstablishment != null)
+                {
+                    application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
+                }
+                
                 try
                 {
                     var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue)).FirstOrDefault();
@@ -583,9 +586,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 // copy service areas from licence
+                /*  TG- Removing for now; will result in service areas being copied across endorsement types. 
+                    
                 try
                 {
                     string filter = $"_adoxio_licenceid_value eq {licenceId}";
+
                     string applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", application.AdoxioApplicationid);
 
                     IList<MicrosoftDynamicsCRMadoxioServicearea> areas = _dynamicsClient.Serviceareas.Get(filter: filter).Value;
@@ -611,7 +617,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.LogError(httpOperationException, "Error adding service areas from licence to application");
                 }
-
+                */
 
                 // now bind the new application to the given licence.
 
@@ -803,7 +809,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
                 "adoxio_LicenceType",
                 "adoxio_establishment",
-                "adoxio_ProposedOwner"
+                "adoxio_ProposedOwner",
+                "adoxio_LicenceSubCategoryId"
             };
 
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(licenceId, expand: expand);
@@ -837,52 +844,69 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var endorsementsText = "";
                 License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
-                
+
                 if (licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0)
                 {
 
-                    var licenceHasSEA = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Service Area Endorsement");
+                    var licenceHasSEA = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Special Event Area Endorsement");
                     var licenceHasLounge = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Lounge Area Endorsement");
                     var licenceHasStore = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "On-Site Store Endorsement");
                     var licenceHasCatering = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Catering Endorsement");
                     var licenceHasOffsite = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Off-Site Store Endorsement");
-                    var licenceHasPicnic = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Picnic Area Endorsement");;
+                    var licenceHasPicnic = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Picnic Area Endorsement"); ;
 
-                    if(licenceHasSEA > -1) {
+                    if (licenceHasSEA > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasSEA].ToHtml(_dynamicsClient);
                     }
 
-                    if(licenceHasLounge > -1) {
+                    if (licenceHasLounge > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasLounge].ToHtml(_dynamicsClient);
                     }
-                    
-                    if(licenceHasStore > -1) {
+
+                    if (licenceHasStore > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasStore].SimpleHeader();
                     }
 
-                    if(licenceHasCatering > -1) {
+                    if (licenceHasCatering > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasCatering].SimpleHeader();
                     }
 
-                    if(licenceHasOffsite > -1) {
+                    if (licenceHasOffsite > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasCatering].SimpleHeader();
                     }
 
-                    if(licenceHasPicnic > -1) {
+                    if (licenceHasPicnic > -1)
+                    {
                         endorsementsText += licenceVM.Endorsements[licenceHasPicnic].SimpleHeader();
                     }
 
                 }
-            var storeHours = "";
+                var storeHours = "";
 
-            MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null");
-            
-            if (hours.Value.Count > 0){
+                MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null");
 
-                MicrosoftDynamicsCRMadoxioHoursofservice hoursVal = hours.Value.First();
+                if (hours.Value.Count > 0)
+                {
 
-                storeHours = $@"<h3 style=""text-align: center;"">HOURS OF SALE</h3>
+                    MicrosoftDynamicsCRMadoxioHoursofservice hoursVal = hours.Value.First();
+
+                    storeHours = $@"<h3 style=""text-align: center;"">HOURS OF SALE</h3>
                             <table style=""width: 100%"">
+                            <tr>
+                                <th></th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                                <th>Saturday</th>
+                                <th>Sunday</th>
+                            </tr>
                             <tr>
                                 <td class='hours'>Start</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayopen)}</td>
@@ -902,7 +926,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioFridayclose)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayclose)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayclose)}</td>
-                            </tr>";
+                            </tr></table>";
             } {
                 // to do: log when we expect to find hours of sale, but don't
                 // wine stores, ubrew, lrs.
@@ -948,10 +972,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     };
                 }
 
-
-
-                else if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Manufacturer")
+                else // handle other types such as catering
                 {
+                    String typeLabel = adoxioLicense?.AdoxioLicenceSubCategoryId?.AdoxioName != null ? adoxioLicense.AdoxioLicenceSubCategoryId?.AdoxioName : adoxioLicense.AdoxioLicenceType?.AdoxioName;
+                    
+                   // adoxioLicense.AdoxioLicenceType?.AdoxioName
+
+                    //adoxioLicense.AdoxioLicenceSubCategoryId?
+
                     parameters = new Dictionary<string, string>
                     {
                         { "title", "Liquor_License" },
@@ -962,62 +990,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
                         { "licencee", adoxioLicense.AdoxioLicencee?.Name },
-                        { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
+                        { "licenceType", typeLabel},
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
                         { "endorsementsText", endorsementsText },
                         { "storeHours", storeHours },
                         { "printDate", DateTime.Today.ToString("MMMM dd, yyyy")} // will be based on the users machine
-                    };
-                }
-
-/*
-                else if (1 ==2 )
-                {
-                    endorsementsText = "";
-                    if (licenceHasSEA) {
-                        endorsementsText += "<h3 style='text-align: center;'>HOURS OF SALE FOR SPECIAL EVENT AREA</h3>" +
-                                            "<table style='width:100%''>" +
-                                                "<tr><th></th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th><th>Sunday</th></tr>";
-                        endorsementsText +=                                                 
-                    }
-                    
-                    var licenceHasLounge = licenceVM.Endorsements.Exists(x => x.EndorsementName == "Lounge Area Endorsement");
-                    var licenceHasStore = false;
-                    var licenceHasCatering = false;
-                    var licenceHasOffsite = false;
-
-                    parameters = new Dictionary<string, string>
-                    {
-
-                    }
-
-                }
-*/
-                else // handle other types such as catering
-                {
-                    parameters = new Dictionary<string, string>
-                    {
-                        { "title", "Liquor_License" },
-                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
-                        { "establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName   },
-                        { "establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet },
-                        { "establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C." },
-                        { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
-                        { "licencee", adoxioLicense.AdoxioLicencee?.Name },
-                        { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
-                        { "effectiveDate", effectiveDateParam },
-                        { "expiryDate", expiraryDateParam },
-                        { "restrictionsText", termsAndConditions },
-                        { "endorsementsText", endorsementsText },
-                        { "storeHours", storeHours }
-                    };
+                    };;
                 }
                 try
                 {
                     var templateName = "cannabis_licence";
-                    
+
 
 
                     switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
@@ -1025,6 +1010,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         case "Marketing":
                             templateName = "cannabis_marketer_licence";
                             break;
+                        /*
                         case "Catering":
                             templateName = "catering_licence";
                             break;
@@ -1043,6 +1029,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                         case "Manufacturer":
                             templateName = "manufacturer_licence";
+                            break;
+                        */
+                        case "Catering":
+                        case "UBrew and UVin":
+                        case "Licensee Retail Store":
+                        case "Wine Store":
+                        case "Manufacturer":
+                            templateName = "liquor_licence";
                             break;
                     }
 

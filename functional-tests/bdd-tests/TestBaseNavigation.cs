@@ -25,7 +25,7 @@ namespace bdd_tests
         {
             
             NgWebElement uiRequestedLink = null;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 try
                 {
@@ -52,7 +52,7 @@ namespace bdd_tests
         public void ClickOnBrandingChangeLink(string changeType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             */
 
             string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
@@ -249,6 +249,28 @@ namespace bdd_tests
 
             ngDriver.IgnoreSynchronization = false;
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
+            
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        }
+
+
+        [And(@"the on-site endorsement application is approved")]
+        public void OnSiteEndorsementApplicationIsApproved()
+        {
+            ngDriver.IgnoreSynchronization = true;
+            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
+
+            // navigate to api/applications/<Application ID>/process
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{endorsementID}/processEndorsement");
+
+            // wait for the automated approval process to run
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
+            
             // navigate back to Licenses tab
             ngDriver.Navigate().GoToUrl($"{baseUri}licences");
         }
@@ -269,8 +291,6 @@ namespace bdd_tests
             // click on the Submit button
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button:nth-child(2)"));
             uiSubmitButton.Click();
-
-            //System.Threading.Thread.Sleep(5000);
         }
 
 
@@ -307,7 +327,7 @@ namespace bdd_tests
         public void ShowStoreOpenOnMap()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             Subtitle:   Cannabis Retail Store Licences
             */
 
