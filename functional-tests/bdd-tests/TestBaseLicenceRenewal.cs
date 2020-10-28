@@ -23,7 +23,7 @@ namespace bdd_tests
         [And(@"I renew the licence with (.*)")]
         public void RenewLicence(string responses)
         {
-            string renewLicenceLink = "Reinstate Licence";
+            string renewLicenceLink = "Renew Licence";
 
             // click on the Renew Licence link
             NgWebElement uiRenewLicence = ngDriver.FindElement(By.LinkText(renewLicenceLink));
