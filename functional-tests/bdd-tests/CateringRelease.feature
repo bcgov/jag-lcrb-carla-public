@@ -34,6 +34,8 @@ Scenario: Private Corporation Catering Release
     And the event history is updated correctly for an application without approval
     # And I click on the Licences tab
     # And I request a transfer of ownership
+    And the expiry date is changed to today
+    And I renew the licence with positive responses for Catering
     And I click on the Licences tab
     And I request a third party operator
     And the account is deleted
@@ -71,6 +73,8 @@ Scenario: Sole Proprietorship Catering Release
     And the event history is updated correctly for an application without approval
     # And I click on the Licences tab
     # And I request a transfer of ownership
+    And the expiry date is changed to today
+    And I renew the licence with positive responses for Catering
     And I click on the Licences tab
     And I request a third party operator
     And the account is deleted
