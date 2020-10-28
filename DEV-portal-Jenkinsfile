@@ -16,20 +16,20 @@ node('master') {
             if (changeset("cllc-public-app/ClientApp/*")) {
 				openshift.withCluster() {
 					openshift.withProject() {
-						def bc = openshift.selector('bc', 'cllc-public-angular')
-						def buildSelector = bc.startBuild()
-						buildSelector.logs('-f')
+						def bc1 = openshift.selector('bc', 'cllc-public-angular')
+						def buildSelector1 = bc1.startBuild()
+						buildSelector1.logs('-f')
+						
+						sleep(5)
+						
+						def bc2 = openshift.selector('bc', 'cllc-public-frontend')
+						def buildSelector2 = bc2.startBuild()
+						buildSelector2.logs('-f')				  						
 					}
-                }
-				echo "Building Application image..."
-				openshift.withCluster() {
-					openshift.withProject() {
-						def bc = openshift.selector('bc', 'cllc-public-frontend')
-						def buildSelector = bc.startBuild()
-						buildSelector.logs('-f')				  
-					}
+					
 					openshift.tag("cllc-public-frontend:latest", "cllc-public-frontend:dev") 
-				}
+                }
+				
             }
 		
             
