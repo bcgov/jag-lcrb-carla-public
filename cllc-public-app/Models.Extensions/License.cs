@@ -168,7 +168,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 RepresentativeCanSignGroceryStoreProofOfSale = licence.AdoxioCansigngrocerystoreproofofsales,
                 RepresentativeCanAttendEducationSessions = licence.AdoxioCanattendeducationsessions,
                 RepresentativeCanAttendComplianceMeetings = licence.AdoxioCanattendcompliancemeetings,
-                RepresentativeCanRepresentAtHearings = licence.AdoxioCanrepresentathearings
+                RepresentativeCanRepresentAtHearings = licence.AdoxioCanrepresentathearings,
+                AutoRenewal = (licence.AdoxioAutorenewal == true)
             };
 
             if (licence._adoxioLicencesubcategoryidValue != null)
