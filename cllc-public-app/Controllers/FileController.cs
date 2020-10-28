@@ -773,6 +773,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // get the current user.
             var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            if (string.IsNullOrEmpty(temp))
+            {
+                throw new Exception("UserSettings Validation Error:  Session string is empty.");
+            }
+            
             var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             // check that the session is setup correctly.
             userSettings.Validate();
