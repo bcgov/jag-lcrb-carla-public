@@ -29,9 +29,13 @@ RUN chmod -R g+rwx $STI_SCRIPTS_PATH
 RUN chmod g+rw /var/cache/nginx \ 
                /var/run \
                /var/log/nginx \
-               /etc/nginx/nginx.conf \
-               /tmp
+               /etc/nginx/nginx.conf 
+
+RUN chmod a+rw /tmp
+
+			   
 # =================================================================================
+
 
 # Work-around for issues with S2I builds on Windows
 WORKDIR /tmp
