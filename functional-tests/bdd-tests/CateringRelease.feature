@@ -21,6 +21,7 @@ Scenario: Private Corporation Catering Release
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
+    And I click on the Licences tab
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
     And I request a licensee representative
@@ -58,6 +59,7 @@ Scenario: Sole Proprietorship Catering Release
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
+    And I click on the Licences tab
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
     And I request a licensee representative
