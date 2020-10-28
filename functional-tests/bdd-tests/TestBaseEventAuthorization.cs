@@ -187,11 +187,16 @@ namespace bdd_tests
             uiVenueStartDate2.Click();
 
             // select end date
-            NgWebElement uiVenueEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
-            uiVenueEndDate1.Click();
+            NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
+            uiEndDate1.Click();
 
-            NgWebElement uiVenueEndDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-            uiVenueEndDate2.Click();
+            // click on the next button
+            NgWebElement uiOpenCalendarNext = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
+            uiOpenCalendarNext.Click();
+
+            // click on the first day
+            NgWebElement uiOpenCalendarFirstDay = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
+            uiOpenCalendarFirstDay.Click();
 
             // select event and liquor end time after 2am
             if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
