@@ -18,7 +18,7 @@ Feature: CateringRelease
     I want to confirm that the Catering functionality is ready for release
 
 @validation @privatecorporation @release
-Scenario: Private Corporation Catering Release 
+Scenario: Private Corporation Catering Release
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -37,8 +37,6 @@ Scenario: Private Corporation Catering Release
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
     And I click on the Licences tab
-    And I request an event authorization that doesn't require approval
-    And the event history is updated correctly for an application without approval
     And I request a licensee representative
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
@@ -47,9 +45,12 @@ Scenario: Private Corporation Catering Release
     And I click on the Licences tab
     And I request a store relocation for Catering
     And I click on the Licences tab
+    And I request an event authorization that doesn't require approval
+    And the event history is updated correctly for an application without approval
+    # And I click on the Licences tab
+    # And I request a transfer of ownership
     And the expiry date is changed to today
     And I renew the licence with positive responses for Catering
-    # And I request a transfer of ownership
     And I click on the Licences tab
     And I request a third party operator
     And the account is deleted
@@ -75,8 +76,6 @@ Scenario: Sole Proprietorship Catering Release
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
     And I click on the Licences tab
-    And I request an event authorization that doesn't require approval
-    And the event history is updated correctly for an application without approval
     And I request a licensee representative
     And I click on the link for Dashboard
     And I request a personnel name change for a sole proprietorship
@@ -85,9 +84,12 @@ Scenario: Sole Proprietorship Catering Release
     And I click on the Licences tab
     And I request a store relocation for Catering
     And I click on the Licences tab
+    And I request an event authorization that doesn't require approval
+    And the event history is updated correctly for an application without approval
+    # And I click on the Licences tab
+    # And I request a transfer of ownership
     And the expiry date is changed to today
     And I renew the licence with positive responses for Catering
-    # And I request a transfer of ownership
     And I click on the Licences tab
     And I request a third party operator
     And the account is deleted
