@@ -73,15 +73,6 @@ namespace bdd_tests
                 uiStoreExterior.Click();
             }
 
-            /*
-            if (changeType == "Cannabis")
-            {
-                // click on the store exterior change button	
-                NgWebElement uiStoreExterior = ngDriver.FindElement(By.Id("mat-button-toggle-1-button"));
-                uiStoreExterior.Click();
-            }
-            */
-
             // click on the Submit & Pay button
             ClickOnSubmitButton();
 

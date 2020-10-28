@@ -21,8 +21,7 @@ Scenario: Check Catering Release status
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
-    And I request an event authorization that doesn't require approval
-    And the event history is updated correctly for an application without approval
+    And I click on the Licences tab
     And I request a licensee representative
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
@@ -30,6 +29,9 @@ Scenario: Check Catering Release status
     And I confirm that the director name has been updated
     And I click on the Licences tab
     And I request a store relocation for Catering
+    And I click on the Licences tab
+    And I request an event authorization that doesn't require approval
+    And the event history is updated correctly for an application without approval
     # And I click on the Licences tab
     # And I request a transfer of ownership
     And I click on the Licences tab
