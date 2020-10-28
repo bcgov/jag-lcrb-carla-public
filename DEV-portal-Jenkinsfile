@@ -14,18 +14,41 @@ node('master') {
         parallel('Angular': {
 
             if (changeset("cllc-public-app/ClientApp/*")) {
-                openshiftBuild bldCfg: 'cllc-public-angular', showBuildLogs: 'true', waitTime: 1800000
+				openshift.withCluster() {
+					openshift.withProject() {
+						def bc = openshift.selector('bc', 'cllc-public-angular')
+						def buildSelector = bc.startBuild()
+						buildSelector.logs('-f')
+					}
+                }
+				echo "Building Application image..."
+				openshift.withCluster() {
+					openshift.withProject() {
+						def bc = openshift.selector('bc', 'cllc-public-frontend')
+						def buildSelector = bc.startBuild()
+						buildSelector.logs('-f')				  
+					}
+					openshift.tag("cllc-public-frontend:latest", "cllc-public-frontend:dev") 
+				}
             }
+		
+            
         }, 'C# API': {
             if (changeset("cllc-public-app/*")) {
-                openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true', waitTime: 1800000
-                openshiftTag destStream: 'cllc-public-api', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public-api', srcTag: 'latest'
-            }
+                openshift.withCluster() {
+					openshift.withProject() {
+						def bc = openshift.selector('bc', 'cllc-public-api')
+						def buildSelector = bc.startBuild()
+						buildSelector.logs('-f')						   
+					}
+					openshift.tag("cllc-public-api:latest", "cllc-public-api:dev")
+                }
+            }				              
+            
         })
 
-        echo "Building Application image..."
-        openshiftBuild bldCfg: 'cllc-public-frontend', showBuildLogs: 'true', waitTime: 1800000
-        openshiftTag destStream: 'cllc-public-frontend', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public-frontend', srcTag: 'latest'
+        
+			
     }
 }
 
@@ -61,7 +84,7 @@ podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', 
         }
     }
 }
-*/
+
 
 podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
     containerTemplate(
@@ -112,6 +135,8 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
 	})
 	}
 }
+
+*/
 
         /*
         node('nodejs') 
