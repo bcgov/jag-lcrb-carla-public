@@ -25,7 +25,7 @@ namespace bdd_tests
         public void RequestEventAuthorization(string eventType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             Subtitle:   Catering Licences
             */
 
@@ -230,13 +230,11 @@ namespace bdd_tests
         public void EventHistoryIsUpdatedCorrectly(string eventType)
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             Subtitle:   Catering Licences
             */
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licences')]")).Displayed);
-
-            //System.Threading.Thread.Sleep(4000);
 
             NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector("mat-expansion-panel-header[role='button'] #expand-history-button-0"));
             uiExpandEventHistory.Click();

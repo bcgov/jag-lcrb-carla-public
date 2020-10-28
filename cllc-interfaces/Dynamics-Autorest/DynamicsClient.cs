@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top234 { get; set; }
+        public int? Top340 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip234 { get; set; }
+        public int? Skip340 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count234 { get; set; }
+        public bool? Count340 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter234 { get; set; }
+        public string Filter340 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search234 { get; set; }
+        public string Search340 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -74,6 +74,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IPartyidadoxiolocalgovindigenousnation.
         /// </summary>
         public virtual IPartyidadoxiolocalgovindigenousnation Partyidadoxiolocalgovindigenousnation { get; private set; }
+
+        /// <summary>
+        /// Gets the IPartyidadoxiospecialevent.
+        /// </summary>
+        public virtual IPartyidadoxiospecialevent Partyidadoxiospecialevent { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialevent.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialevent Regardingobjectidadoxiospecialevent { get; private set; }
 
         /// <summary>
         /// Gets the IAdoxiolicencetypeadoxioinvestigationset.
@@ -111,11 +121,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationlicenseechangesv10s Applicationlicenseechangesv10s { get; private set; }
 
         /// <summary>
-        /// Gets the IApplicationliquorbpfs.
-        /// </summary>
-        public virtual IApplicationliquorbpfs Applicationliquorbpfs { get; private set; }
-
-        /// <summary>
         /// Gets the IApplicationliquorbpfv2s.
         /// </summary>
         public virtual IApplicationliquorbpfv2s Applicationliquorbpfv2s { get; private set; }
@@ -139,6 +144,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IPmuarea.
         /// </summary>
         public virtual IPmuarea Pmuarea { get; private set; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicenseechangebpfv2.
+        /// </summary>
+        public virtual IBpfadoxioapplicationadoxioapplicenseechangebpfv2 Bpfadoxioapplicationadoxioapplicenseechangebpfv2 { get; private set; }
 
         /// <summary>
         /// Gets the IBpfadoxioapplicationadoxiolqrlicencetransferbpf.
@@ -204,6 +214,51 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IFylicencefeeproduct.
         /// </summary>
         public virtual IFylicencefeeproduct Fylicencefeeproduct { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicenseechangebpfv2s.
+        /// </summary>
+        public virtual IApplicenseechangebpfv2s Applicenseechangebpfv2s { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicenseechangebpfv2asyncoperations.
+        /// </summary>
+        public virtual IApplicenseechangebpfv2asyncoperations Applicenseechangebpfv2asyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicenseechangebpfv2bulkdeletefailures.
+        /// </summary>
+        public virtual IApplicenseechangebpfv2bulkdeletefailures Applicenseechangebpfv2bulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicenseechangebpfv2mailboxtrackingfolders.
+        /// </summary>
+        public virtual IApplicenseechangebpfv2mailboxtrackingfolders Applicenseechangebpfv2mailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicenseechangebpfv2principalobjectattributeaccesses.
+        /// </summary>
+        public virtual IApplicenseechangebpfv2principalobjectattributeaccesses Applicenseechangebpfv2principalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicenseechangebpfv2processsession.
+        /// </summary>
+        public virtual IApplicenseechangebpfv2processsession Applicenseechangebpfv2processsession { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicenseechangebpfv2syncerrors.
+        /// </summary>
+        public virtual IApplicenseechangebpfv2syncerrors Applicenseechangebpfv2syncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicenseechangebpfv2workflowlogs.
+        /// </summary>
+        public virtual IApplicenseechangebpfv2workflowlogs Applicenseechangebpfv2workflowlogs { get; private set; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationid.
+        /// </summary>
+        public virtual IBpfadoxioapplicationid Bpfadoxioapplicationid { get; private set; }
 
         /// <summary>
         /// Gets the IAreas.
@@ -354,6 +409,51 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEstablishmentwatchwords.
         /// </summary>
         public virtual IEstablishmentwatchwords Establishmentwatchwords { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventaddresses.
+        /// </summary>
+        public virtual IEventaddresses Eventaddresses { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventaddressasyncoperations.
+        /// </summary>
+        public virtual IEventaddressasyncoperations Eventaddressasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventaddressbulkdeletefailures.
+        /// </summary>
+        public virtual IEventaddressbulkdeletefailures Eventaddressbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventaddressduplicatebaserecord.
+        /// </summary>
+        public virtual IEventaddressduplicatebaserecord Eventaddressduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventaddressduplicatematchingrecord.
+        /// </summary>
+        public virtual IEventaddressduplicatematchingrecord Eventaddressduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventaddressmailboxtrackingfolders.
+        /// </summary>
+        public virtual IEventaddressmailboxtrackingfolders Eventaddressmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventaddressprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IEventaddressprincipalobjectattributeaccesses Eventaddressprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventaddressprocesssession.
+        /// </summary>
+        public virtual IEventaddressprocesssession Eventaddressprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventaddresssyncerrors.
+        /// </summary>
+        public virtual IEventaddresssyncerrors Eventaddresssyncerrors { get; private set; }
 
         /// <summary>
         /// Gets the IEvents.
@@ -711,11 +811,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILqrlicencetransferbpfworkflowlogs Lqrlicencetransferbpfworkflowlogs { get; private set; }
 
         /// <summary>
-        /// Gets the IBpfadoxioapplicationid.
-        /// </summary>
-        public virtual IBpfadoxioapplicationid Bpfadoxioapplicationid { get; private set; }
-
-        /// <summary>
         /// Gets the IOffsitestorages.
         /// </summary>
         public virtual IOffsitestorages Offsitestorages { get; private set; }
@@ -951,6 +1046,251 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISpdexportses Spdexportses { get; private set; }
 
         /// <summary>
+        /// Gets the ISpecialeventlicencedareas.
+        /// </summary>
+        public virtual ISpecialeventlicencedareas Specialeventlicencedareas { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventid.
+        /// </summary>
+        public virtual ISpecialeventid Specialeventid { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlicencedareaasyncoperations.
+        /// </summary>
+        public virtual ISpecialeventlicencedareaasyncoperations Specialeventlicencedareaasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlicencedareabulkdeletefailures.
+        /// </summary>
+        public virtual ISpecialeventlicencedareabulkdeletefailures Specialeventlicencedareabulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlicencedareamailboxtrackingfolders.
+        /// </summary>
+        public virtual ISpecialeventlicencedareamailboxtrackingfolders Specialeventlicencedareamailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlicencedareaprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ISpecialeventlicencedareaprincipalobjectattributeaccesses Specialeventlicencedareaprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlicencedareaprocesssession.
+        /// </summary>
+        public virtual ISpecialeventlicencedareaprocesssession Specialeventlicencedareaprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlicencedareasyncerrors.
+        /// </summary>
+        public virtual ISpecialeventlicencedareasyncerrors Specialeventlicencedareasyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlocationid.
+        /// </summary>
+        public virtual ISpecialeventlocationid Specialeventlocationid { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlocations.
+        /// </summary>
+        public virtual ISpecialeventlocations Specialeventlocations { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlocationasyncoperations.
+        /// </summary>
+        public virtual ISpecialeventlocationasyncoperations Specialeventlocationasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlocationbulkdeletefailures.
+        /// </summary>
+        public virtual ISpecialeventlocationbulkdeletefailures Specialeventlocationbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlocationlicemsedarea.
+        /// </summary>
+        public virtual ISpecialeventlocationlicemsedarea Specialeventlocationlicemsedarea { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlocationmailboxtrackingfolders.
+        /// </summary>
+        public virtual ISpecialeventlocationmailboxtrackingfolders Specialeventlocationmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlocationprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ISpecialeventlocationprincipalobjectattributeaccesses Specialeventlocationprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlocationprocesssession.
+        /// </summary>
+        public virtual ISpecialeventlocationprocesssession Specialeventlocationprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlocationschedule.
+        /// </summary>
+        public virtual ISpecialeventlocationschedule Specialeventlocationschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlocationsyncerrors.
+        /// </summary>
+        public virtual ISpecialeventlocationsyncerrors Specialeventlocationsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialevents.
+        /// </summary>
+        public virtual ISpecialevents Specialevents { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventactivityparties.
+        /// </summary>
+        public virtual ISpecialeventactivityparties Specialeventactivityparties { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventactivitypointers.
+        /// </summary>
+        public virtual ISpecialeventactivitypointers Specialeventactivitypointers { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventannotations.
+        /// </summary>
+        public virtual ISpecialeventannotations Specialeventannotations { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventappointments.
+        /// </summary>
+        public virtual ISpecialeventappointments Specialeventappointments { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventasyncoperations.
+        /// </summary>
+        public virtual ISpecialeventasyncoperations Specialeventasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventbulkdeletefailures.
+        /// </summary>
+        public virtual ISpecialeventbulkdeletefailures Specialeventbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventduplicatebaserecord.
+        /// </summary>
+        public virtual ISpecialeventduplicatebaserecord Specialeventduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventduplicatematchingrecord.
+        /// </summary>
+        public virtual ISpecialeventduplicatematchingrecord Specialeventduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventemails.
+        /// </summary>
+        public virtual ISpecialeventemails Specialeventemails { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventfaxes.
+        /// </summary>
+        public virtual ISpecialeventfaxes Specialeventfaxes { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventletters.
+        /// </summary>
+        public virtual ISpecialeventletters Specialeventletters { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventlicencedarea.
+        /// </summary>
+        public virtual ISpecialeventlicencedarea Specialeventlicencedarea { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventmailboxtrackingfolders.
+        /// </summary>
+        public virtual ISpecialeventmailboxtrackingfolders Specialeventmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventphonecalls.
+        /// </summary>
+        public virtual ISpecialeventphonecalls Specialeventphonecalls { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ISpecialeventprincipalobjectattributeaccesses Specialeventprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventprocesssession.
+        /// </summary>
+        public virtual ISpecialeventprocesssession Specialeventprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventrecurringappointmentmasters.
+        /// </summary>
+        public virtual ISpecialeventrecurringappointmentmasters Specialeventrecurringappointmentmasters { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventschedule.
+        /// </summary>
+        public virtual ISpecialeventschedule Specialeventschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventserviceappointments.
+        /// </summary>
+        public virtual ISpecialeventserviceappointments Specialeventserviceappointments { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventsocialactivities.
+        /// </summary>
+        public virtual ISpecialeventsocialactivities Specialeventsocialactivities { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventspecialeventlocations.
+        /// </summary>
+        public virtual ISpecialeventspecialeventlocations Specialeventspecialeventlocations { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventsyncerrors.
+        /// </summary>
+        public virtual ISpecialeventsyncerrors Specialeventsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventtasks.
+        /// </summary>
+        public virtual ISpecialeventtasks Specialeventtasks { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventschedules.
+        /// </summary>
+        public virtual ISpecialeventschedules Specialeventschedules { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventscheduleasyncoperations.
+        /// </summary>
+        public virtual ISpecialeventscheduleasyncoperations Specialeventscheduleasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventschedulebulkdeletefailures.
+        /// </summary>
+        public virtual ISpecialeventschedulebulkdeletefailures Specialeventschedulebulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventschedulemailboxtrackingfolders.
+        /// </summary>
+        public virtual ISpecialeventschedulemailboxtrackingfolders Specialeventschedulemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventscheduleprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ISpecialeventscheduleprincipalobjectattributeaccesses Specialeventscheduleprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventscheduleprocesssession.
+        /// </summary>
+        public virtual ISpecialeventscheduleprocesssession Specialeventscheduleprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventschedulesyncerrors.
+        /// </summary>
+        public virtual ISpecialeventschedulesyncerrors Specialeventschedulesyncerrors { get; private set; }
+
+        /// <summary>
         /// Gets the ITaxandaccountings.
         /// </summary>
         public virtual ITaxandaccountings Taxandaccountings { get; private set; }
@@ -991,6 +1331,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IWorkers Workers { get; private set; }
 
         /// <summary>
+        /// Gets the IObjectidadoxiospecialevent.
+        /// </summary>
+        public virtual IObjectidadoxiospecialevent Objectidadoxiospecialevent { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventappointment.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventappointment Regardingobjectidadoxiospecialeventappointment { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicenseechangebpfv2.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplicenseechangebpfv2 Regardingobjectidadoxioapplicenseechangebpfv2 { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioeventaddress.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioeventaddress Regardingobjectidadoxioeventaddress { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxiohoursofservice.
         /// </summary>
         public virtual IRegardingobjectidadoxiohoursofservice Regardingobjectidadoxiohoursofservice { get; private set; }
@@ -1026,6 +1386,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegardingobjectidadoxioproratedlicencefeeschedule Regardingobjectidadoxioproratedlicencefeeschedule { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventlicencedarea.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventlicencedarea Regardingobjectidadoxiospecialeventlicencedarea { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventlocation.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventlocation Regardingobjectidadoxiospecialeventlocation { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventschedule.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventschedule Regardingobjectidadoxiospecialeventschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioeventaddress.
+        /// </summary>
+        public virtual IBusinessunitadoxioeventaddress Businessunitadoxioeventaddress { get; private set; }
+
+        /// <summary>
         /// Gets the IBusinessunitadoxiohoursofservice.
         /// </summary>
         public virtual IBusinessunitadoxiohoursofservice Businessunitadoxiohoursofservice { get; private set; }
@@ -1056,9 +1436,34 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBusinessunitadoxioproratedlicencefeeschedule Businessunitadoxioproratedlicencefeeschedule { get; private set; }
 
         /// <summary>
+        /// Gets the IBusinessunitadoxiospecialevent.
+        /// </summary>
+        public virtual IBusinessunitadoxiospecialevent Businessunitadoxiospecialevent { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiospecialeventlicencedarea.
+        /// </summary>
+        public virtual IBusinessunitadoxiospecialeventlicencedarea Businessunitadoxiospecialeventlicencedarea { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiospecialeventlocation.
+        /// </summary>
+        public virtual IBusinessunitadoxiospecialeventlocation Businessunitadoxiospecialeventlocation { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiospecialeventschedule.
+        /// </summary>
+        public virtual IBusinessunitadoxiospecialeventschedule Businessunitadoxiospecialeventschedule { get; private set; }
+
+        /// <summary>
         /// Gets the IContacts.
         /// </summary>
         public virtual IContacts Contacts { get; private set; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioeventaddress.
+        /// </summary>
+        public virtual IBaserecordidadoxioeventaddress Baserecordidadoxioeventaddress { get; private set; }
 
         /// <summary>
         /// Gets the IBaserecordidadoxiohoursofservice.
@@ -1081,6 +1486,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBaserecordidadoxiopmuarea Baserecordidadoxiopmuarea { get; private set; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxiospecialevent.
+        /// </summary>
+        public virtual IBaserecordidadoxiospecialevent Baserecordidadoxiospecialevent { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioeventaddress.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioeventaddress Duplicaterecordidadoxioeventaddress { get; private set; }
+
+        /// <summary>
         /// Gets the IDuplicaterecordidadoxiohoursofservice.
         /// </summary>
         public virtual IDuplicaterecordidadoxiohoursofservice Duplicaterecordidadoxiohoursofservice { get; private set; }
@@ -1101,9 +1516,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IDuplicaterecordidadoxiopmuarea Duplicaterecordidadoxiopmuarea { get; private set; }
 
         /// <summary>
+        /// Gets the IDuplicaterecordidadoxiospecialevent.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxiospecialevent Duplicaterecordidadoxiospecialevent { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventemail.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventemail Regardingobjectidadoxiospecialeventemail { get; private set; }
+
+        /// <summary>
         /// Gets the IEntitydefinitions.
         /// </summary>
         public virtual IEntitydefinitions Entitydefinitions { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventfax.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventfax Regardingobjectidadoxiospecialeventfax { get; private set; }
 
         /// <summary>
         /// Gets the IGlobaloptionsetdefinitions.
@@ -1126,14 +1556,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILeads Leads { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventletter.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventletter Regardingobjectidadoxiospecialeventletter { get; private set; }
+
+        /// <summary>
         /// Gets the ILists.
         /// </summary>
         public virtual ILists Lists { get; private set; }
 
         /// <summary>
+        /// Gets the IOrganizationadoxioapplicenseechangebpfv2.
+        /// </summary>
+        public virtual IOrganizationadoxioapplicenseechangebpfv2 Organizationadoxioapplicenseechangebpfv2 { get; private set; }
+
+        /// <summary>
         /// Gets the IOrganizationadoxiolqrlicencetransferbpf.
         /// </summary>
         public virtual IOrganizationadoxiolqrlicencetransferbpf Organizationadoxiolqrlicencetransferbpf { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventphonecall.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventphonecall Regardingobjectidadoxiospecialeventphonecall { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioapplicenseechangebpfv2.
+        /// </summary>
+        public virtual IObjectidadoxioapplicenseechangebpfv2 Objectidadoxioapplicenseechangebpfv2 { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioeventaddress.
+        /// </summary>
+        public virtual IObjectidadoxioeventaddress Objectidadoxioeventaddress { get; private set; }
 
         /// <summary>
         /// Gets the IObjectidadoxiohoursofservice.
@@ -1171,6 +1626,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IObjectidadoxioproratedlicencefeeschedule Objectidadoxioproratedlicencefeeschedule { get; private set; }
 
         /// <summary>
+        /// Gets the IObjectidadoxiospecialeventlicencedarea.
+        /// </summary>
+        public virtual IObjectidadoxiospecialeventlicencedarea Objectidadoxiospecialeventlicencedarea { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiospecialeventlocation.
+        /// </summary>
+        public virtual IObjectidadoxiospecialeventlocation Objectidadoxiospecialeventlocation { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiospecialeventschedule.
+        /// </summary>
+        public virtual IObjectidadoxiospecialeventschedule Objectidadoxiospecialeventschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicenseechangebpfv2activestageid.
+        /// </summary>
+        public virtual ILkadoxioapplicenseechangebpfv2activestageid Lkadoxioapplicenseechangebpfv2activestageid { get; private set; }
+
+        /// <summary>
         /// Gets the ILkadoxiolqrlicencetransferbpfactivestageid.
         /// </summary>
         public virtual ILkadoxiolqrlicencetransferbpfactivestageid Lkadoxiolqrlicencetransferbpfactivestageid { get; private set; }
@@ -1186,9 +1661,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IProductadoxiolicencesubcategorylicencefeeproduct Productadoxiolicencesubcategorylicencefeeproduct { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventrecurringappointmentmaster.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventrecurringappointmentmaster Regardingobjectidadoxiospecialeventrecurringappointmentmaster { get; private set; }
+
+        /// <summary>
         /// Gets the ISavedqueries.
         /// </summary>
         public virtual ISavedqueries Savedqueries { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventserviceappointment.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventserviceappointment Regardingobjectidadoxiospecialeventserviceappointment { get; private set; }
 
         /// <summary>
         /// Gets the ISharepointdocumentlocations.
@@ -1199,6 +1684,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointsites.
         /// </summary>
         public virtual ISharepointsites Sharepointsites { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventsocialactivity.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventsocialactivity Regardingobjectidadoxiospecialeventsocialactivity { get; private set; }
 
         /// <summary>
         /// Gets the ISystemforms.
@@ -1224,6 +1714,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISystemuseradoxioinspectorreportinspector.
         /// </summary>
         public virtual ISystemuseradoxioinspectorreportinspector Systemuseradoxioinspectorreportinspector { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicenseechangebpfv2createdby.
+        /// </summary>
+        public virtual ILkadoxioapplicenseechangebpfv2createdby Lkadoxioapplicenseechangebpfv2createdby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicenseechangebpfv2createdonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicenseechangebpfv2createdonbehalfby Lkadoxioapplicenseechangebpfv2createdonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicenseechangebpfv2modifiedby.
+        /// </summary>
+        public virtual ILkadoxioapplicenseechangebpfv2modifiedby Lkadoxioapplicenseechangebpfv2modifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicenseechangebpfv2modifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicenseechangebpfv2modifiedonbehalfby Lkadoxioapplicenseechangebpfv2modifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventaddresscreatedby.
+        /// </summary>
+        public virtual ILkadoxioeventaddresscreatedby Lkadoxioeventaddresscreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventaddresscreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioeventaddresscreatedonbehalfby Lkadoxioeventaddresscreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventaddressmodifiedby.
+        /// </summary>
+        public virtual ILkadoxioeventaddressmodifiedby Lkadoxioeventaddressmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventaddressmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioeventaddressmodifiedonbehalfby Lkadoxioeventaddressmodifiedonbehalfby { get; private set; }
 
         /// <summary>
         /// Gets the ILkadoxiohoursofservicecreatedby.
@@ -1366,6 +1896,91 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxioproratedlicencefeeschedulemodifiedonbehalfby Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby { get; private set; }
 
         /// <summary>
+        /// Gets the ILkadoxiospecialeventcreatedby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventcreatedby Lkadoxiospecialeventcreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventcreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventcreatedonbehalfby Lkadoxiospecialeventcreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventmodifiedby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventmodifiedby Lkadoxiospecialeventmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventmodifiedonbehalfby Lkadoxiospecialeventmodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventlicencedareacreatedby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventlicencedareacreatedby Lkadoxiospecialeventlicencedareacreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventlicencedareacreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventlicencedareacreatedonbehalfby Lkadoxiospecialeventlicencedareacreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventlicencedareamodifiedby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventlicencedareamodifiedby Lkadoxiospecialeventlicencedareamodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventlicencedareamodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventlicencedareamodifiedonbehalfby Lkadoxiospecialeventlicencedareamodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventlocationcreatedby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventlocationcreatedby Lkadoxiospecialeventlocationcreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventlocationcreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventlocationcreatedonbehalfby Lkadoxiospecialeventlocationcreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventlocationmodifiedby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventlocationmodifiedby Lkadoxiospecialeventlocationmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventlocationmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventlocationmodifiedonbehalfby Lkadoxiospecialeventlocationmodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventschedulecreatedby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventschedulecreatedby Lkadoxiospecialeventschedulecreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventschedulecreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventschedulecreatedonbehalfby Lkadoxiospecialeventschedulecreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventschedulemodifiedby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventschedulemodifiedby Lkadoxiospecialeventschedulemodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiospecialeventschedulemodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiospecialeventschedulemodifiedonbehalfby Lkadoxiospecialeventschedulemodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxioeventaddress.
+        /// </summary>
+        public virtual IUseradoxioeventaddress Useradoxioeventaddress { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxiohoursofservice.
         /// </summary>
         public virtual IUseradoxiohoursofservice Useradoxiohoursofservice { get; private set; }
@@ -1394,6 +2009,36 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IUseradoxioproratedlicencefeeschedule.
         /// </summary>
         public virtual IUseradoxioproratedlicencefeeschedule Useradoxioproratedlicencefeeschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxiospecialevent.
+        /// </summary>
+        public virtual IUseradoxiospecialevent Useradoxiospecialevent { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxiospecialeventlicencedarea.
+        /// </summary>
+        public virtual IUseradoxiospecialeventlicencedarea Useradoxiospecialeventlicencedarea { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxiospecialeventlocation.
+        /// </summary>
+        public virtual IUseradoxiospecialeventlocation Useradoxiospecialeventlocation { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxiospecialeventschedule.
+        /// </summary>
+        public virtual IUseradoxiospecialeventschedule Useradoxiospecialeventschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospecialeventtask.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiospecialeventtask Regardingobjectidadoxiospecialeventtask { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioeventaddress.
+        /// </summary>
+        public virtual ITeamadoxioeventaddress Teamadoxioeventaddress { get; private set; }
 
         /// <summary>
         /// Gets the ITeamadoxiohoursofservice.
@@ -1426,6 +2071,31 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ITeamadoxioproratedlicencefeeschedule Teamadoxioproratedlicencefeeschedule { get; private set; }
 
         /// <summary>
+        /// Gets the ITeamadoxiospecialevent.
+        /// </summary>
+        public virtual ITeamadoxiospecialevent Teamadoxiospecialevent { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiospecialeventlicencedarea.
+        /// </summary>
+        public virtual ITeamadoxiospecialeventlicencedarea Teamadoxiospecialeventlicencedarea { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiospecialeventlocation.
+        /// </summary>
+        public virtual ITeamadoxiospecialeventlocation Teamadoxiospecialeventlocation { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiospecialeventschedule.
+        /// </summary>
+        public virtual ITeamadoxiospecialeventschedule Teamadoxiospecialeventschedule { get; private set; }
+
+        /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicenseechangebpfv2.
+        /// </summary>
+        public virtual IAsyncoperationidadoxioapplicenseechangebpfv2 Asyncoperationidadoxioapplicenseechangebpfv2 { get; private set; }
+
+        /// <summary>
         /// Gets the IAsyncoperationidadoxiolqrlicencetransferbpf.
         /// </summary>
         public virtual IAsyncoperationidadoxiolqrlicencetransferbpf Asyncoperationidadoxiolqrlicencetransferbpf { get; private set; }
@@ -1434,6 +2104,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IWorkflows.
         /// </summary>
         public virtual IWorkflows Workflows { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicenseechangebpfv2processid.
+        /// </summary>
+        public virtual ILkadoxioapplicenseechangebpfv2processid Lkadoxioapplicenseechangebpfv2processid { get; private set; }
 
         /// <summary>
         /// Gets the ILkadoxiolqrlicencetransferbpfprocessid.
@@ -1683,6 +2358,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             Accounts = new Accounts(this);
             Partyidadoxiolocalgovindigenousnation = new Partyidadoxiolocalgovindigenousnation(this);
+            Partyidadoxiospecialevent = new Partyidadoxiospecialevent(this);
+            Regardingobjectidadoxiospecialevent = new Regardingobjectidadoxiospecialevent(this);
             Adoxiolicencetypeadoxioinvestigationset = new Adoxiolicencetypeadoxioinvestigationset(this);
             Aliases = new Aliases(this);
             Annualvolumes = new Annualvolumes(this);
@@ -1690,12 +2367,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationcrsbpfv4s = new Applicationcrsbpfv4s(this);
             Applicationinvoicehistories = new Applicationinvoicehistories(this);
             Applicationlicenseechangesv10s = new Applicationlicenseechangesv10s(this);
-            Applicationliquorbpfs = new Applicationliquorbpfs(this);
             Applicationliquorbpfv2s = new Applicationliquorbpfv2s(this);
             Applicationrelocationv1s = new Applicationrelocationv1s(this);
             Applications = new Applications(this);
             Applicationadoxiohoursofserviceapplication = new Applicationadoxiohoursofserviceapplication(this);
             Pmuarea = new Pmuarea(this);
+            Bpfadoxioapplicationadoxioapplicenseechangebpfv2 = new Bpfadoxioapplicationadoxioapplicenseechangebpfv2(this);
             Bpfadoxioapplicationadoxiolqrlicencetransferbpf = new Bpfadoxioapplicationadoxiolqrlicencetransferbpf(this);
             Applicationstructurechangev1s = new Applicationstructurechangev1s(this);
             Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
@@ -1709,6 +2386,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypeadoxioproratedlicencefeescheduleapplicationtype = new Applicationtypeadoxioproratedlicencefeescheduleapplicationtype(this);
             Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype = new Applicationtypeadoxiotermsconditionslimitationspresetapplicationtype(this);
             Fylicencefeeproduct = new Fylicencefeeproduct(this);
+            Applicenseechangebpfv2s = new Applicenseechangebpfv2s(this);
+            Applicenseechangebpfv2asyncoperations = new Applicenseechangebpfv2asyncoperations(this);
+            Applicenseechangebpfv2bulkdeletefailures = new Applicenseechangebpfv2bulkdeletefailures(this);
+            Applicenseechangebpfv2mailboxtrackingfolders = new Applicenseechangebpfv2mailboxtrackingfolders(this);
+            Applicenseechangebpfv2principalobjectattributeaccesses = new Applicenseechangebpfv2principalobjectattributeaccesses(this);
+            Applicenseechangebpfv2processsession = new Applicenseechangebpfv2processsession(this);
+            Applicenseechangebpfv2syncerrors = new Applicenseechangebpfv2syncerrors(this);
+            Applicenseechangebpfv2workflowlogs = new Applicenseechangebpfv2workflowlogs(this);
+            Bpfadoxioapplicationid = new Bpfadoxioapplicationid(this);
             Areas = new Areas(this);
             Areaadoxioinspectorreportarea = new Areaadoxioinspectorreportarea(this);
             Pmuareaid = new Pmuareaid(this);
@@ -1739,6 +2425,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             Establishments = new Establishments(this);
             Establishmentadoxiohoursofserviceestablishment = new Establishmentadoxiohoursofserviceestablishment(this);
             Establishmentwatchwords = new Establishmentwatchwords(this);
+            Eventaddresses = new Eventaddresses(this);
+            Eventaddressasyncoperations = new Eventaddressasyncoperations(this);
+            Eventaddressbulkdeletefailures = new Eventaddressbulkdeletefailures(this);
+            Eventaddressduplicatebaserecord = new Eventaddressduplicatebaserecord(this);
+            Eventaddressduplicatematchingrecord = new Eventaddressduplicatematchingrecord(this);
+            Eventaddressmailboxtrackingfolders = new Eventaddressmailboxtrackingfolders(this);
+            Eventaddressprincipalobjectattributeaccesses = new Eventaddressprincipalobjectattributeaccesses(this);
+            Eventaddressprocesssession = new Eventaddressprocesssession(this);
+            Eventaddresssyncerrors = new Eventaddresssyncerrors(this);
             Events = new Events(this);
             Eventschedules = new Eventschedules(this);
             Exhibits = new Exhibits(this);
@@ -1810,7 +2505,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lqrlicencetransferbpfprocesssession = new Lqrlicencetransferbpfprocesssession(this);
             Lqrlicencetransferbpfsyncerrors = new Lqrlicencetransferbpfsyncerrors(this);
             Lqrlicencetransferbpfworkflowlogs = new Lqrlicencetransferbpfworkflowlogs(this);
-            Bpfadoxioapplicationid = new Bpfadoxioapplicationid(this);
             Offsitestorages = new Offsitestorages(this);
             Licenceid = new Licenceid(this);
             Offsitestorageasyncoperations = new Offsitestorageasyncoperations(this);
@@ -1858,6 +2552,55 @@ namespace Gov.Lclb.Cllb.Interfaces
             Settings = new Settings(this);
             Spddatarows = new Spddatarows(this);
             Spdexportses = new Spdexportses(this);
+            Specialeventlicencedareas = new Specialeventlicencedareas(this);
+            Specialeventid = new Specialeventid(this);
+            Specialeventlicencedareaasyncoperations = new Specialeventlicencedareaasyncoperations(this);
+            Specialeventlicencedareabulkdeletefailures = new Specialeventlicencedareabulkdeletefailures(this);
+            Specialeventlicencedareamailboxtrackingfolders = new Specialeventlicencedareamailboxtrackingfolders(this);
+            Specialeventlicencedareaprincipalobjectattributeaccesses = new Specialeventlicencedareaprincipalobjectattributeaccesses(this);
+            Specialeventlicencedareaprocesssession = new Specialeventlicencedareaprocesssession(this);
+            Specialeventlicencedareasyncerrors = new Specialeventlicencedareasyncerrors(this);
+            Specialeventlocationid = new Specialeventlocationid(this);
+            Specialeventlocations = new Specialeventlocations(this);
+            Specialeventlocationasyncoperations = new Specialeventlocationasyncoperations(this);
+            Specialeventlocationbulkdeletefailures = new Specialeventlocationbulkdeletefailures(this);
+            Specialeventlocationlicemsedarea = new Specialeventlocationlicemsedarea(this);
+            Specialeventlocationmailboxtrackingfolders = new Specialeventlocationmailboxtrackingfolders(this);
+            Specialeventlocationprincipalobjectattributeaccesses = new Specialeventlocationprincipalobjectattributeaccesses(this);
+            Specialeventlocationprocesssession = new Specialeventlocationprocesssession(this);
+            Specialeventlocationschedule = new Specialeventlocationschedule(this);
+            Specialeventlocationsyncerrors = new Specialeventlocationsyncerrors(this);
+            Specialevents = new Specialevents(this);
+            Specialeventactivityparties = new Specialeventactivityparties(this);
+            Specialeventactivitypointers = new Specialeventactivitypointers(this);
+            Specialeventannotations = new Specialeventannotations(this);
+            Specialeventappointments = new Specialeventappointments(this);
+            Specialeventasyncoperations = new Specialeventasyncoperations(this);
+            Specialeventbulkdeletefailures = new Specialeventbulkdeletefailures(this);
+            Specialeventduplicatebaserecord = new Specialeventduplicatebaserecord(this);
+            Specialeventduplicatematchingrecord = new Specialeventduplicatematchingrecord(this);
+            Specialeventemails = new Specialeventemails(this);
+            Specialeventfaxes = new Specialeventfaxes(this);
+            Specialeventletters = new Specialeventletters(this);
+            Specialeventlicencedarea = new Specialeventlicencedarea(this);
+            Specialeventmailboxtrackingfolders = new Specialeventmailboxtrackingfolders(this);
+            Specialeventphonecalls = new Specialeventphonecalls(this);
+            Specialeventprincipalobjectattributeaccesses = new Specialeventprincipalobjectattributeaccesses(this);
+            Specialeventprocesssession = new Specialeventprocesssession(this);
+            Specialeventrecurringappointmentmasters = new Specialeventrecurringappointmentmasters(this);
+            Specialeventschedule = new Specialeventschedule(this);
+            Specialeventserviceappointments = new Specialeventserviceappointments(this);
+            Specialeventsocialactivities = new Specialeventsocialactivities(this);
+            Specialeventspecialeventlocations = new Specialeventspecialeventlocations(this);
+            Specialeventsyncerrors = new Specialeventsyncerrors(this);
+            Specialeventtasks = new Specialeventtasks(this);
+            Specialeventschedules = new Specialeventschedules(this);
+            Specialeventscheduleasyncoperations = new Specialeventscheduleasyncoperations(this);
+            Specialeventschedulebulkdeletefailures = new Specialeventschedulebulkdeletefailures(this);
+            Specialeventschedulemailboxtrackingfolders = new Specialeventschedulemailboxtrackingfolders(this);
+            Specialeventscheduleprincipalobjectattributeaccesses = new Specialeventscheduleprincipalobjectattributeaccesses(this);
+            Specialeventscheduleprocesssession = new Specialeventscheduleprocesssession(this);
+            Specialeventschedulesyncerrors = new Specialeventschedulesyncerrors(this);
             Taxandaccountings = new Taxandaccountings(this);
             Termsconditionslimitationspresets = new Termsconditionslimitationspresets(this);
             Territories = new Territories(this);
@@ -1866,6 +2609,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
+            Objectidadoxiospecialevent = new Objectidadoxiospecialevent(this);
+            Regardingobjectidadoxiospecialeventappointment = new Regardingobjectidadoxiospecialeventappointment(this);
+            Regardingobjectidadoxioapplicenseechangebpfv2 = new Regardingobjectidadoxioapplicenseechangebpfv2(this);
+            Regardingobjectidadoxioeventaddress = new Regardingobjectidadoxioeventaddress(this);
             Regardingobjectidadoxiohoursofservice = new Regardingobjectidadoxiohoursofservice(this);
             Regardingobjectidadoxiohoursofservicesdefault = new Regardingobjectidadoxiohoursofservicesdefault(this);
             Regardingobjectidadoxioinspectorreport = new Regardingobjectidadoxioinspectorreport(this);
@@ -1873,28 +2620,47 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxiooffsitestorage = new Regardingobjectidadoxiooffsitestorage(this);
             Regardingobjectidadoxiopmuarea = new Regardingobjectidadoxiopmuarea(this);
             Regardingobjectidadoxioproratedlicencefeeschedule = new Regardingobjectidadoxioproratedlicencefeeschedule(this);
+            Regardingobjectidadoxiospecialeventlicencedarea = new Regardingobjectidadoxiospecialeventlicencedarea(this);
+            Regardingobjectidadoxiospecialeventlocation = new Regardingobjectidadoxiospecialeventlocation(this);
+            Regardingobjectidadoxiospecialeventschedule = new Regardingobjectidadoxiospecialeventschedule(this);
+            Businessunitadoxioeventaddress = new Businessunitadoxioeventaddress(this);
             Businessunitadoxiohoursofservice = new Businessunitadoxiohoursofservice(this);
             Businessunitadoxiohoursofservicesdefault = new Businessunitadoxiohoursofservicesdefault(this);
             Businessunitadoxioinspectorreport = new Businessunitadoxioinspectorreport(this);
             Businessunitadoxiooffsitestorage = new Businessunitadoxiooffsitestorage(this);
             Businessunitadoxiopmuarea = new Businessunitadoxiopmuarea(this);
             Businessunitadoxioproratedlicencefeeschedule = new Businessunitadoxioproratedlicencefeeschedule(this);
+            Businessunitadoxiospecialevent = new Businessunitadoxiospecialevent(this);
+            Businessunitadoxiospecialeventlicencedarea = new Businessunitadoxiospecialeventlicencedarea(this);
+            Businessunitadoxiospecialeventlocation = new Businessunitadoxiospecialeventlocation(this);
+            Businessunitadoxiospecialeventschedule = new Businessunitadoxiospecialeventschedule(this);
             Contacts = new Contacts(this);
+            Baserecordidadoxioeventaddress = new Baserecordidadoxioeventaddress(this);
             Baserecordidadoxiohoursofservice = new Baserecordidadoxiohoursofservice(this);
             Baserecordidadoxioinspectorreport = new Baserecordidadoxioinspectorreport(this);
             Baserecordidadoxiooffsitestorage = new Baserecordidadoxiooffsitestorage(this);
             Baserecordidadoxiopmuarea = new Baserecordidadoxiopmuarea(this);
+            Baserecordidadoxiospecialevent = new Baserecordidadoxiospecialevent(this);
+            Duplicaterecordidadoxioeventaddress = new Duplicaterecordidadoxioeventaddress(this);
             Duplicaterecordidadoxiohoursofservice = new Duplicaterecordidadoxiohoursofservice(this);
             Duplicaterecordidadoxioinspectorreport = new Duplicaterecordidadoxioinspectorreport(this);
             Duplicaterecordidadoxiooffsitestorage = new Duplicaterecordidadoxiooffsitestorage(this);
             Duplicaterecordidadoxiopmuarea = new Duplicaterecordidadoxiopmuarea(this);
+            Duplicaterecordidadoxiospecialevent = new Duplicaterecordidadoxiospecialevent(this);
+            Regardingobjectidadoxiospecialeventemail = new Regardingobjectidadoxiospecialeventemail(this);
             Entitydefinitions = new Entitydefinitions(this);
+            Regardingobjectidadoxiospecialeventfax = new Regardingobjectidadoxiospecialeventfax(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
             Inspectionhoursofservice = new Inspectionhoursofservice(this);
             Invoices = new Invoices(this);
             Leads = new Leads(this);
+            Regardingobjectidadoxiospecialeventletter = new Regardingobjectidadoxiospecialeventletter(this);
             Lists = new Lists(this);
+            Organizationadoxioapplicenseechangebpfv2 = new Organizationadoxioapplicenseechangebpfv2(this);
             Organizationadoxiolqrlicencetransferbpf = new Organizationadoxiolqrlicencetransferbpf(this);
+            Regardingobjectidadoxiospecialeventphonecall = new Regardingobjectidadoxiospecialeventphonecall(this);
+            Objectidadoxioapplicenseechangebpfv2 = new Objectidadoxioapplicenseechangebpfv2(this);
+            Objectidadoxioeventaddress = new Objectidadoxioeventaddress(this);
             Objectidadoxiohoursofservice = new Objectidadoxiohoursofservice(this);
             Objectidadoxiohoursofservicesdefault = new Objectidadoxiohoursofservicesdefault(this);
             Objectidadoxioinspectorreport = new Objectidadoxioinspectorreport(this);
@@ -1902,17 +2668,32 @@ namespace Gov.Lclb.Cllb.Interfaces
             Objectidadoxiooffsitestorage = new Objectidadoxiooffsitestorage(this);
             Objectidadoxiopmuarea = new Objectidadoxiopmuarea(this);
             Objectidadoxioproratedlicencefeeschedule = new Objectidadoxioproratedlicencefeeschedule(this);
+            Objectidadoxiospecialeventlicencedarea = new Objectidadoxiospecialeventlicencedarea(this);
+            Objectidadoxiospecialeventlocation = new Objectidadoxiospecialeventlocation(this);
+            Objectidadoxiospecialeventschedule = new Objectidadoxiospecialeventschedule(this);
+            Lkadoxioapplicenseechangebpfv2activestageid = new Lkadoxioapplicenseechangebpfv2activestageid(this);
             Lkadoxiolqrlicencetransferbpfactivestageid = new Lkadoxiolqrlicencetransferbpfactivestageid(this);
             Productadoxioapplicationtypefylicencefeeproduct = new Productadoxioapplicationtypefylicencefeeproduct(this);
             Productadoxiolicencesubcategorylicencefeeproduct = new Productadoxiolicencesubcategorylicencefeeproduct(this);
+            Regardingobjectidadoxiospecialeventrecurringappointmentmaster = new Regardingobjectidadoxiospecialeventrecurringappointmentmaster(this);
             Savedqueries = new Savedqueries(this);
+            Regardingobjectidadoxiospecialeventserviceappointment = new Regardingobjectidadoxiospecialeventserviceappointment(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
+            Regardingobjectidadoxiospecialeventsocialactivity = new Regardingobjectidadoxiospecialeventsocialactivity(this);
             Systemforms = new Systemforms(this);
             Systemusers = new Systemusers(this);
             Mfginspectorpmuareas = new Mfginspectorpmuareas(this);
             Regionalmanagerpmuareas = new Regionalmanagerpmuareas(this);
             Systemuseradoxioinspectorreportinspector = new Systemuseradoxioinspectorreportinspector(this);
+            Lkadoxioapplicenseechangebpfv2createdby = new Lkadoxioapplicenseechangebpfv2createdby(this);
+            Lkadoxioapplicenseechangebpfv2createdonbehalfby = new Lkadoxioapplicenseechangebpfv2createdonbehalfby(this);
+            Lkadoxioapplicenseechangebpfv2modifiedby = new Lkadoxioapplicenseechangebpfv2modifiedby(this);
+            Lkadoxioapplicenseechangebpfv2modifiedonbehalfby = new Lkadoxioapplicenseechangebpfv2modifiedonbehalfby(this);
+            Lkadoxioeventaddresscreatedby = new Lkadoxioeventaddresscreatedby(this);
+            Lkadoxioeventaddresscreatedonbehalfby = new Lkadoxioeventaddresscreatedonbehalfby(this);
+            Lkadoxioeventaddressmodifiedby = new Lkadoxioeventaddressmodifiedby(this);
+            Lkadoxioeventaddressmodifiedonbehalfby = new Lkadoxioeventaddressmodifiedonbehalfby(this);
             Lkadoxiohoursofservicecreatedby = new Lkadoxiohoursofservicecreatedby(this);
             Lkadoxiohoursofservicecreatedonbehalfby = new Lkadoxiohoursofservicecreatedonbehalfby(this);
             Lkadoxiohoursofservicemodifiedby = new Lkadoxiohoursofservicemodifiedby(this);
@@ -1941,20 +2722,49 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxioproratedlicencefeeschedulecreatedonbehalfby = new Lkadoxioproratedlicencefeeschedulecreatedonbehalfby(this);
             Lkadoxioproratedlicencefeeschedulemodifiedby = new Lkadoxioproratedlicencefeeschedulemodifiedby(this);
             Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby = new Lkadoxioproratedlicencefeeschedulemodifiedonbehalfby(this);
+            Lkadoxiospecialeventcreatedby = new Lkadoxiospecialeventcreatedby(this);
+            Lkadoxiospecialeventcreatedonbehalfby = new Lkadoxiospecialeventcreatedonbehalfby(this);
+            Lkadoxiospecialeventmodifiedby = new Lkadoxiospecialeventmodifiedby(this);
+            Lkadoxiospecialeventmodifiedonbehalfby = new Lkadoxiospecialeventmodifiedonbehalfby(this);
+            Lkadoxiospecialeventlicencedareacreatedby = new Lkadoxiospecialeventlicencedareacreatedby(this);
+            Lkadoxiospecialeventlicencedareacreatedonbehalfby = new Lkadoxiospecialeventlicencedareacreatedonbehalfby(this);
+            Lkadoxiospecialeventlicencedareamodifiedby = new Lkadoxiospecialeventlicencedareamodifiedby(this);
+            Lkadoxiospecialeventlicencedareamodifiedonbehalfby = new Lkadoxiospecialeventlicencedareamodifiedonbehalfby(this);
+            Lkadoxiospecialeventlocationcreatedby = new Lkadoxiospecialeventlocationcreatedby(this);
+            Lkadoxiospecialeventlocationcreatedonbehalfby = new Lkadoxiospecialeventlocationcreatedonbehalfby(this);
+            Lkadoxiospecialeventlocationmodifiedby = new Lkadoxiospecialeventlocationmodifiedby(this);
+            Lkadoxiospecialeventlocationmodifiedonbehalfby = new Lkadoxiospecialeventlocationmodifiedonbehalfby(this);
+            Lkadoxiospecialeventschedulecreatedby = new Lkadoxiospecialeventschedulecreatedby(this);
+            Lkadoxiospecialeventschedulecreatedonbehalfby = new Lkadoxiospecialeventschedulecreatedonbehalfby(this);
+            Lkadoxiospecialeventschedulemodifiedby = new Lkadoxiospecialeventschedulemodifiedby(this);
+            Lkadoxiospecialeventschedulemodifiedonbehalfby = new Lkadoxiospecialeventschedulemodifiedonbehalfby(this);
+            Useradoxioeventaddress = new Useradoxioeventaddress(this);
             Useradoxiohoursofservice = new Useradoxiohoursofservice(this);
             Useradoxiohoursofservicesdefault = new Useradoxiohoursofservicesdefault(this);
             Useradoxioinspectorreport = new Useradoxioinspectorreport(this);
             Useradoxiooffsitestorage = new Useradoxiooffsitestorage(this);
             Useradoxiopmuarea = new Useradoxiopmuarea(this);
             Useradoxioproratedlicencefeeschedule = new Useradoxioproratedlicencefeeschedule(this);
+            Useradoxiospecialevent = new Useradoxiospecialevent(this);
+            Useradoxiospecialeventlicencedarea = new Useradoxiospecialeventlicencedarea(this);
+            Useradoxiospecialeventlocation = new Useradoxiospecialeventlocation(this);
+            Useradoxiospecialeventschedule = new Useradoxiospecialeventschedule(this);
+            Regardingobjectidadoxiospecialeventtask = new Regardingobjectidadoxiospecialeventtask(this);
+            Teamadoxioeventaddress = new Teamadoxioeventaddress(this);
             Teamadoxiohoursofservice = new Teamadoxiohoursofservice(this);
             Teamadoxiohoursofservicesdefault = new Teamadoxiohoursofservicesdefault(this);
             Teamadoxioinspectorreport = new Teamadoxioinspectorreport(this);
             Teamadoxiooffsitestorage = new Teamadoxiooffsitestorage(this);
             Teamadoxiopmuarea = new Teamadoxiopmuarea(this);
             Teamadoxioproratedlicencefeeschedule = new Teamadoxioproratedlicencefeeschedule(this);
+            Teamadoxiospecialevent = new Teamadoxiospecialevent(this);
+            Teamadoxiospecialeventlicencedarea = new Teamadoxiospecialeventlicencedarea(this);
+            Teamadoxiospecialeventlocation = new Teamadoxiospecialeventlocation(this);
+            Teamadoxiospecialeventschedule = new Teamadoxiospecialeventschedule(this);
+            Asyncoperationidadoxioapplicenseechangebpfv2 = new Asyncoperationidadoxioapplicenseechangebpfv2(this);
             Asyncoperationidadoxiolqrlicencetransferbpf = new Asyncoperationidadoxiolqrlicencetransferbpf(this);
             Workflows = new Workflows(this);
+            Lkadoxioapplicenseechangebpfv2processid = new Lkadoxioapplicenseechangebpfv2processid(this);
             Lkadoxiolqrlicencetransferbpfprocessid = new Lkadoxiolqrlicencetransferbpfprocessid(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings

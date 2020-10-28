@@ -24,7 +24,7 @@ namespace bdd_tests
         public void ReviewFederalReports()
         {
             /* 
-            Page Title: Licences
+            Page Title: Licences & Authorizations
             Subtitle:   Cannabis Retail Store Licences
             */
 

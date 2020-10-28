@@ -86,8 +86,7 @@
 
                 <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                   Additionally, a name cannot imply an association with another business. This applies to signs,
-                  trademarks and any type of branding.
-                </p>
+                  trademarks and any type of branding.</p>
 
                 <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                   Establishment names will be reviewed for approval during the application process. For more
@@ -95,7 +94,9 @@
                   please see the <a routerLink="/policy-document/store-name">
                     Non-Medical Cannabis Retail Store Name Approval
                     Process
-                  </a>.
+                  </a>. A list of all currently licenced Cannabis Retail Stores in British
+                  Columbia can be found
+                  <a href="https://justice.gov.bc.ca/cannabislicensing/map" target="_blank">here</a>.
                 </p>
               </section>
               <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
@@ -1785,7 +1786,8 @@
         <section *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                 && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')
                 && !lgApprovalDecisionMade()
-                && !lgHasReviewedZoning()">
+                && !lgHasReviewedZoning()
+                && !lGHasApproved()">
           <br>
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">

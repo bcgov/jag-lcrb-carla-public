@@ -30,6 +30,7 @@ namespace bdd_tests
             // confirm that private corporation personnel are present
             if (businessType == "a private corporation")
             {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Security Screening Requirements')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0First')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Leader0Last')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'IndyShareholder0First')]")).Displayed);

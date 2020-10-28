@@ -18,7 +18,6 @@ Scenario: Catering Partnership Personnel Name Change
     And I pay the licensing fee for Catering
     And I click on the link for Dashboard
     And I request a personnel name change for a partnership
-    And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And the account is deleted
@@ -39,7 +38,6 @@ Scenario: Catering Private Corporation Personnel Name Change
     And I pay the licensing fee for Catering
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
-    And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And the account is deleted
@@ -60,7 +58,6 @@ Scenario: Catering Public Corporation Personnel Name Change
     And I pay the licensing fee for Catering
     And I click on the link for Dashboard
     And I request a personnel name change for a public corporation
-    And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And the account is deleted
@@ -81,7 +78,6 @@ Scenario: Catering Society Personnel Name Change
     And I pay the licensing fee for Catering
     And I click on the link for Dashboard
     And I request a personnel name change for a society
-    And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And the account is deleted
@@ -102,7 +98,6 @@ Scenario: Catering Sole Proprietorship Personnel Name Change
     And I pay the licensing fee for Catering
     And I click on the link for Dashboard
     And I request a personnel name change for a sole proprietorship
-    And I confirm the correct personnel name change fee for a Catering licence
     And I click on the link for Dashboard
     And I confirm that the director name has been updated
     And the account is deleted

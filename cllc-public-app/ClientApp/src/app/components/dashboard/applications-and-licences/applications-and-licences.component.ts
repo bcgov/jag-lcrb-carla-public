@@ -227,10 +227,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     }
   }
 
-  payLicenceFee(licence: ApplicationLicenseSummary) {
-    const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore);
-    if (crsApplication) {
-      this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(crsApplication.applicationId)
+  payLicenceFee(application: ApplicationSummary) {
+    // locate the application associated with the issuance of this licence
+   // const application = licence.actionApplications.find(app => app.applicationTypeName === licence.licenceTypeName);
+    if (application) {
+      this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(res => {
           const data = <any>res;
