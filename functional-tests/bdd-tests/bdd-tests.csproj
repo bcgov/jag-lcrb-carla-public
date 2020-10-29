@@ -44,6 +44,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="UBrewUVinLicence.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="CannabisMarketingLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
