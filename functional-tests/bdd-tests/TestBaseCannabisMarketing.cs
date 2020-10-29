@@ -30,7 +30,7 @@ namespace bdd_tests
             string contactPhone = "5555555555";
             string contactEmail = "vp@cannabis_marketing.com";
 
-            if (bizType != "a local government")
+            if ((bizType != "a local government") && (bizType != "a university"))
             {
                 // enter name of federal producer
                 NgWebElement uiFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='federalProducerNames']"));
@@ -69,24 +69,28 @@ namespace bdd_tests
                     NgWebElement uiCrsConnectionToMarketerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
                     uiCrsConnectionToMarketerDetails.SendKeys(crsConnectionToMarketer);
                 }
+
+                if (bizType == "a sole proprietorship")
+                {
+                    // select 'Yes'
+                    // Does the sole proprietor have an immediate family member that has any interest in a licensee or applicant?
+                    NgWebElement uiCrsConnectionToMarketer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
+                    uiCrsConnectionToMarketer.Click();
+
+                    // enter the details
+                    NgWebElement uiCrsConnectionToMarketerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
+                    uiCrsConnectionToMarketerDetails.SendKeys(crsConnectionToMarketer);
+                }
             }
 
             // upload the Associates form
             FileUpload("associates.pdf", "(//input[@type='file'])[3]");
 
-            if (bizType != "a society")
-            {
-                // upload the Notice of Articles
-                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[5]");
+            // upload the Notice of Articles
+            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[5]");
 
-                // upload the Central Securities Register
-                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
-            }
-            else 
-            { 
-                // upload the society supporting documents
-                // TODO
-            }
+            // upload the Central Securities Register
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
 
             // enter the contact title
             NgWebElement uiContactPersonRole = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
