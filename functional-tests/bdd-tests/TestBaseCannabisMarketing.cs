@@ -30,34 +30,37 @@ namespace bdd_tests
             string contactPhone = "5555555555";
             string contactEmail = "vp@cannabis_marketing.com";
 
-            // enter name of federal producer
-            NgWebElement uiFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='federalProducerNames']"));
-            uiFederalProducer.SendKeys(nameOfFederalProducer);
-
-            // select 'Yes'
-            // Does the corporation have any association, connection or financial interest in a B.C. non-medical cannabis retail store licensee or applicant of cannabis?
-            NgWebElement uiMarketerConnectionToCrs = ngDriver.FindElement(By.CssSelector("input[formcontrolname='marketerConnectionToCrs'][type='radio'][value='Yes']"));
-            uiMarketerConnectionToCrs.Click();
-
-            // enter the details
-            NgWebElement uiMarketerConnectionToCrsDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='marketerConnectionToCrsDetails']"));
-            uiMarketerConnectionToCrsDetails.SendKeys(marketerConnectionToCrsDetails);
-
-            if (bizType != "a society")
+            if (bizType != "a local government")
             {
+                // enter name of federal producer
+                NgWebElement uiFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='federalProducerNames']"));
+                uiFederalProducer.SendKeys(nameOfFederalProducer);
+
                 // select 'Yes'
-                // Does a B.C. non-medical cannabis retail store licensee or applicant of cannabis have any association, connection or financial interest in the corporation? 
-                NgWebElement uiCrsConnectionToMarketer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
-                uiCrsConnectionToMarketer.Click();
+                // Does the corporation have any association, connection or financial interest in a B.C. non-medical cannabis retail store licensee or applicant of cannabis?
+                NgWebElement uiMarketerConnectionToCrs = ngDriver.FindElement(By.CssSelector("input[formcontrolname='marketerConnectionToCrs'][type='radio'][value='Yes']"));
+                uiMarketerConnectionToCrs.Click();
 
                 // enter the details
-                NgWebElement uiCrsConnectionToMarketerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
-                uiCrsConnectionToMarketerDetails.SendKeys(crsConnectionToMarketer);
+                NgWebElement uiMarketerConnectionToCrsDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='marketerConnectionToCrsDetails']"));
+                uiMarketerConnectionToCrsDetails.SendKeys(marketerConnectionToCrsDetails);
+
+                // !society !indigenousnation
+                if ((bizType == "a private corporation") || (bizType == "a partnership"))
+                {
+                    // select 'Yes'
+                    // Does a B.C. non-medical cannabis retail store licensee or applicant of cannabis have any association, connection or financial interest in the corporation? 
+                    NgWebElement uiCrsConnectionToMarketer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
+                    uiCrsConnectionToMarketer.Click();
+
+                    // enter the details
+                    NgWebElement uiCrsConnectionToMarketerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
+                    uiCrsConnectionToMarketerDetails.SendKeys(crsConnectionToMarketer);
+                }
             }
 
             // upload the Associates form
             FileUpload("associates.pdf", "(//input[@type='file'])[3]");
-
 
             if (bizType != "a society")
             {
@@ -69,7 +72,7 @@ namespace bdd_tests
             }
             else 
             { 
-                // upload the supporting documents
+                // upload the society supporting documents
                 // TODO
             }
 
