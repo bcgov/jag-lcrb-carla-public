@@ -937,7 +937,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     parameters = new Dictionary<string, string>
                     {
-                        { "title", "Canabis_License" },
+                        { "title", "Cannabis_Licence" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
                         { "establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName },
                         { "establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet },
@@ -956,7 +956,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     parameters = new Dictionary<string, string>
                     {
-                        { "title", "Canabis_License" },
+                        { "title", "Cannabis_Licence" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
                         { "establishmentName", adoxioLicense.AdoxioLicencee?.Name  },
                         { "establishmentStreet", adoxioLicense.AdoxioLicencee?.Address1Line1 },
