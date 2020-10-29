@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I complete the Cannabis Marketing application")]
-        public void CannabisMarketingApplication()
+        [And(@"I complete the Cannabis Marketing application for (.*)")]
+        public void CannabisMarketingApplication(string bizType)
         {
             string nameOfFederalProducer = "Canadian Cannabis";
             string marketerConnectionToCrsDetails = "Details of association (marketer to store)";
@@ -43,23 +43,35 @@ namespace bdd_tests
             NgWebElement uiMarketerConnectionToCrsDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='marketerConnectionToCrsDetails']"));
             uiMarketerConnectionToCrsDetails.SendKeys(marketerConnectionToCrsDetails);
 
-            // select 'Yes'
-            // Does a B.C. non-medical cannabis retail store licensee or applicant of cannabis have any association, connection or financial interest in the corporation? 
-            NgWebElement uiCrsConnectionToMarketer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
-            uiCrsConnectionToMarketer.Click();
+            if (bizType != "a society")
+            {
+                // select 'Yes'
+                // Does a B.C. non-medical cannabis retail store licensee or applicant of cannabis have any association, connection or financial interest in the corporation? 
+                NgWebElement uiCrsConnectionToMarketer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
+                uiCrsConnectionToMarketer.Click();
 
-            // enter the details
-            NgWebElement uiCrsConnectionToMarketerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
-            uiCrsConnectionToMarketerDetails.SendKeys(crsConnectionToMarketer);
+                // enter the details
+                NgWebElement uiCrsConnectionToMarketerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
+                uiCrsConnectionToMarketerDetails.SendKeys(crsConnectionToMarketer);
+            }
 
             // upload the Associates form
             FileUpload("associates.pdf", "(//input[@type='file'])[3]");
 
-            // upload the Notice of Articles
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[5]");
 
-            // upload the Central Securities Register
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
+            if (bizType != "a society")
+            {
+                // upload the Notice of Articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[5]");
+
+                // upload the Central Securities Register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
+            }
+            else 
+            { 
+                // upload the supporting documents
+                // TODO
+            }
 
             // enter the contact title
             NgWebElement uiContactPersonRole = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
