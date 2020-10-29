@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
- Feature: MarketEvent
+  Feature: MarketEvent
     As a logged in business user
     I want to submit a market event for different manufacturer types
 
@@ -233,9 +233,10 @@ using Xunit;
     And the account is deleted
     Then I see the login page
 
-#-----------------------
+#-------------------------------------------------
 # Bi-Weekly Market Event
-#-----------------------
+# Note that 'bi-weekly' refers to twice per month
+#-------------------------------------------------
 
  @e2e @privatecorporation @marketeventbiweekly @winery
  Scenario: Private Corporation Winery Bi-Weekly Market Event
