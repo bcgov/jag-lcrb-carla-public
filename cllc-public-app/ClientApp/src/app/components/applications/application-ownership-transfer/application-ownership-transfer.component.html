@@ -62,10 +62,8 @@
             formControlName="licenseNumber">
         </app-field>
 
-        <app-field label="Establishment Name" [required]="false" [valid]="isValidOrNotTouched('establishmentName')"
-          errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
-          <input class="form-control" style="width: 500px;" type="text" [readonly]="true"
-            (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
+        <app-field label="Establishment Name" [required]="false">
+          <input class="form-control" style="width: 500px;" type="text" [readonly]="true" formControlName="establishmentName">
         </app-field>
 
         <div>
