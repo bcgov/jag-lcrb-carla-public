@@ -164,9 +164,9 @@ Scenario: University UBrew / UVin Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./CannabisMarketingLicence.feature")]
+    [FeatureFile("./UBrewUVinLicence.feature")]
     [Collection("Liquor")]
-    public sealed class CannabisMarketingLicence : TestBase
+    public sealed class UBrewUVinLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
