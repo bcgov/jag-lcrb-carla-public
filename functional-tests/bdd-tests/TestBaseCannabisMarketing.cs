@@ -57,6 +57,18 @@ namespace bdd_tests
                     NgWebElement uiCrsConnectionToMarketerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
                     uiCrsConnectionToMarketerDetails.SendKeys(crsConnectionToMarketer);
                 }
+
+                if (bizType == "a public corporation")
+                {
+                    // select 'Yes'
+                    // Does any shareholder with 20% or more voting shares have any association, connection or financial interest in a B.C. non-medical cannabis retail store licensee or applicant of cannabis?
+                    NgWebElement uiCrsConnectionToMarketer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
+                    uiCrsConnectionToMarketer.Click();
+
+                    // enter the details
+                    NgWebElement uiCrsConnectionToMarketerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
+                    uiCrsConnectionToMarketerDetails.SendKeys(crsConnectionToMarketer);
+                }
             }
 
             // upload the Associates form
