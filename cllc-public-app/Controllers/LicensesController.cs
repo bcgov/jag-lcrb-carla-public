@@ -488,16 +488,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_LicenceSubCategoryId"
             };
 
+            // grab the licence record
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(licenceId, expand: expand);
             if (adoxioLicense == null)
             {
+                // exit if we don't find one
                 throw new Exception("Error getting license.");
             }
             else
             {
-                // START WITH BLANK FIELDS.
+                // create a blank application
                 MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication();
 
+                // copy some standard values
                 application.CopyValuesForChangeOfLocation(adoxioLicense, applicationTypeName != "CRS Location Change");
 
                 // get the previous application for the licence.
@@ -515,7 +518,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
                 }
 
-                // set the licence subtype.
+                // set the licence subtype if we have one
 
                 if (adoxioLicense.AdoxioLicenceSubCategoryId != null)
                 {
@@ -524,8 +527,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             adoxioLicense.AdoxioLicenceSubCategoryId.AdoxioLicencesubcategoryid);
                 }
 
+                // set the applicant
                 application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
+                // if the licence has an establishment (from CopyValuesForChangeOfLocation)
                 if (adoxioLicense.AdoxioEstablishment != null)
                 {
                     application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
@@ -533,20 +538,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 
                 try
                 {
+                    // try finding a licence application
                     var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue)).FirstOrDefault();
-                    string lginvalue;
+                    string lginvalue = "";
 
-
+                    // if we don't find it
                     if (licenceApp == null)
                     {
+                        // check if there is a LGIN value on the Licence Record
                         if (adoxioLicense?._adoxioLginValue != null)
                         {
                             lginvalue = adoxioLicense?._adoxioLginValue;
                         }
+                        // otherwise check if there is an LGIN value on the Establishment
                         else
                         {
-                            lginvalue = adoxioLicense?.AdoxioEstablishment._adoxioLginValue;
+                            if(adoxioLicense?.AdoxioEstablishment != null) {
+                                lginvalue = adoxioLicense?.AdoxioEstablishment._adoxioLginValue;
+                            }    
                         }
+                        // note there will be no LGIN for Marketers or Agent, but we initialized to an empty string so we're all good
                     }
                     else
                     {
@@ -554,18 +565,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     }
 
+                    // if we found an LGIN value
                     if (!string.IsNullOrEmpty(lginvalue))
                     {
+                        // set the value on the application
                         application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", lginvalue);
                     }
 
+                    // look for a Police Jurisdiction value on the licence application
                     licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioPolicejurisdictionidValue)).FirstOrDefault();
-                    // Police Jurisdiction association
+                    // if we find one
                     if (!string.IsNullOrEmpty(licenceApp?._adoxioPolicejurisdictionidValue))
                     {
+                        // update the application with that value
                         application.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", licenceApp?._adoxioPolicejurisdictionidValue);
                     }
-
+                    // create the application with the data we've brought over
                     application = _dynamicsClient.Applications.Create(application);
                 }
                 catch (HttpOperationException httpOperationException)
@@ -937,7 +952,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     parameters = new Dictionary<string, string>
                     {
-                        { "title", "Canabis_License" },
+                        { "title", "Cannabis_Licence" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
                         { "establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName },
                         { "establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet },
@@ -956,7 +971,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     parameters = new Dictionary<string, string>
                     {
-                        { "title", "Canabis_License" },
+                        { "title", "Cannabis_Licence" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
                         { "establishmentName", adoxioLicense.AdoxioLicencee?.Name  },
                         { "establishmentStreet", adoxioLicense.AdoxioLicencee?.Address1Line1 },

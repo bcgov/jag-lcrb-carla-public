@@ -218,9 +218,10 @@
     And the account is deleted
     Then I see the login page
 
-#-----------------------
+#-------------------------------------------------
 # Bi-Weekly Market Event
-#-----------------------
+# Note that 'bi-weekly' refers to twice per month
+#-------------------------------------------------
 
  @e2e @privatecorporation @marketeventbiweekly @winery
  Scenario: Private Corporation Winery Bi-Weekly Market Event
