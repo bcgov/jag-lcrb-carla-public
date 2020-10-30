@@ -28,7 +28,7 @@ node('master') {
 						def buildSelector2 = bc2.startBuild()
 						def builds = bc2.related('builds')
 						
-						timeout(10) {
+						timeout(20) {
 
         
 							builds.watch {
