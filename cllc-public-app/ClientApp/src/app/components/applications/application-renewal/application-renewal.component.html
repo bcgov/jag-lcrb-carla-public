@@ -1,4 +1,4 @@
-<div class="dashboard-spacing" style="position: relative">
+<div class="dashboard-spacing" style="position: relative; width: 900px; padding: 20px;">
   <div [ngBusy]="busy"></div>
   <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
     <div>
@@ -62,7 +62,7 @@
       <mat-card class="mat-elevation-z1">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
-            3. Our records show that this establishment is licensed as a {{account?.getBusinessTypeName()}}. Has this
+            3. Our records show that you are licensed as a {{account?.getBusinessTypeName()}}. Has this
             changed?
             <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
                matTooltip="For example, has your business type changed to a sole proprietor, private corporation, partnership, etc.?"></i>
@@ -116,7 +116,7 @@
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             5. Has a federal produce of cannabis acquired a new interest or expanded an existing interest - financial or
-            otherwise - in the licensee {{account?.getBusinessTypeName()}} within the past 12 months?
+            otherwise - in the {{account?.getBusinessTypeName()}} within the past 12 months?
             <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
                matTooltip="Tied house relationships with federal producers must be reported to the LCRB to determine if there is a risk of the producer’s products being favoured by the licensee."></i>
           </div>
@@ -232,7 +232,7 @@
 
 
 
-      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isMarketing()">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             10. Have you made an unreported change to your store’s name in the past 12 months?
@@ -255,7 +255,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isMarketing()">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             11. Have you updated the store’s signage or branding in the past 12 months?
@@ -277,7 +277,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isMarketing()">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             12. Have you made an unreported change of location of your establishment within the past 12 months? (This
@@ -301,7 +301,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isMarketing()">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             13. Have you sold the property or transferred the lease associated with this cannabis retail store licence
@@ -323,7 +323,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isMarketing()">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             14. Are you aware of any local government or Indigenous nation zoning changes with respect to your
@@ -345,7 +345,7 @@
         </section>
       </mat-card>
 
-      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+      <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isMarketing()">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
            15. Have you made any unreported changes to the store’s floor plan within the past 12 months?
@@ -465,18 +465,6 @@
       </section>
 
       <div class="light-blue-bg">
-        <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
-          The Province does not know how many application for a cannabis retail store licence will be received.
-          Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
-          processing, applicants must make sure the application is complete before submitting it.
-        </p>
-        <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-          The Province does not know how many applications for a cannabis marketing licence will be received.
-          Therefore,
-          it is difficult to predict how long applications will take to process. To minimize delays in processing,
-          applicants must make sure the application is complete before submitting it.
-        </p>
-        <br>
         <p>
           The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised
           that
@@ -487,7 +475,7 @@
       </div>
 
       <section style="position: relative; margin-top: 20px;">
-        <button class="btn btn-primary" style="margin-right:10px;" (click)="saveForLater()">
+        <button class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
           <span>
             <i class="fa fa-save" style="color: #fff;"></i>
             SAVE FOR LATER
