@@ -225,6 +225,13 @@ namespace bdd_tests
                 uiStartAppButton.Click();
             }
 
+            if (applicationType == "a UBrew UVin application")
+            {
+                // click on the a UBrew UVin application Licence Start Application button
+                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
+                uiStartAppButton.Click();
+            }
+
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
         }
 
