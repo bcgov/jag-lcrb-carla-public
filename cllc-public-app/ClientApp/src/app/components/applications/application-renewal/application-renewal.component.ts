@@ -173,6 +173,8 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
         this.application = data;
 
+        this.hideFormControlByType();
+
         this.addDynamicContent();
 
         const noNulls = Object.keys(data)
@@ -192,6 +194,34 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
           console.log('Error occured');
         }
       );
+  }
+
+  private hideFormControlByType() {
+    //add guard
+    if (!(this.application && this.application.applicationType)) {
+      return;
+    }
+    debugger;
+    if(this.application.applicationType.name ===  ApplicationTypeNames.MarketingRenewal) {
+      this.form.get("renewalBranding").clearValidators();
+      this.form.get("renewalSignage").clearValidators();
+      this.form.get("renewalEstablishmentAddress").clearValidators();
+      this.form.get("renewalValidInterest").clearValidators();
+      this.form.get("renewalZoning").clearValidators();
+      this.form.get("renewalFloorPlan").clearValidators();
+
+      this.form.get("renewalBranding").updateValueAndValidity()
+      this.form.get("renewalSignage").updateValueAndValidity()
+      this.form.get("renewalEstablishmentAddress").updateValueAndValidity()
+      this.form.get("renewalValidInterest").updateValueAndValidity()
+      this.form.get("renewalZoning").updateValueAndValidity()
+      this.form.get("renewalFloorPlan").updateValueAndValidity()
+
+    }
+  }
+
+  isMarketing(): boolean {
+    return this.application.applicationType.name ===  ApplicationTypeNames.MarketingRenewal;
   }
 
   isTouchedAndInvalid(fieldName: string): boolean {
