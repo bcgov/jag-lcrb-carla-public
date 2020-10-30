@@ -33,7 +33,7 @@ node('master') {
         
 							builds.watch {
             
-							echo "So far, ${bc.name()} has created builds: ${it.names()}"
+							echo "So far, ${bc2.name()} has created builds: ${it.names()}"
 
 							return it.count() > 0
 							}
