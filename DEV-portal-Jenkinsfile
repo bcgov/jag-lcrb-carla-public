@@ -12,17 +12,17 @@ node('master') {
     }
 
     stage('Build') {
+	openshift.withCluster() {
         parallel('Angular': {
 
             if (changeset("cllc-public-app/ClientApp/*")) {
-				openshift.withCluster() {
+				
 					openshift.withProject() {
 						def bc1 = openshift.selector('bc', 'cllc-public-angular')
 						def buildSelector1 = bc1.startBuild()
 						sleep(5)
 						buildSelector1.logs('-f')
-						
-						sleep(5)
+					
 						
 						def bc2 = openshift.selector('bc', 'cllc-public-frontend')
 						def buildSelector2 = bc2.startBuild()
@@ -56,26 +56,25 @@ node('master') {
 					}
 					
 					openshift.tag("cllc-public-frontend:latest", "cllc-public-frontend:dev") 
-                }
+                
 				
-            }
-		
+				}
+			
+			}
             
         }, 'C# API': {
             if (changeset("cllc-public-app/*")) {
-                openshift.withCluster() {
-					openshift.withProject() {
-						def bc = openshift.selector('bc', 'cllc-public-api')
-						def buildSelector = bc.startBuild()
-						buildSelector.logs('-f')						   
-					}
-					openshift.tag("cllc-public-api:latest", "cllc-public-api:dev")
-                }
+                
+				openshift.withProject() {
+					def bc = openshift.selector('bc', 'cllc-public-api')
+					def buildSelector = bc.startBuild()
+					buildSelector.logs('-f')						   
+				}
+				openshift.tag("cllc-public-api:latest", "cllc-public-api:dev")
+                
             }				              
             
         })
-
-        
 			
     }
 }
