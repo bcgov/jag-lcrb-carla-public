@@ -55,7 +55,7 @@ const ValidationErrorMap = {
   styleUrls: ['./application-renewal.component.scss']
 })
 export class ApplicationRenewalComponent extends FormBase implements OnInit {
-  establishmentWatchWords: KeyValue<string, boolean>[];
+  //establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
 
   form: FormGroup;
@@ -155,7 +155,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.submittedApplications = value);
 
-    this.establishmentWatchWordsService.initialize();
+    //this.establishmentWatchWordsService.initialize();
 
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
