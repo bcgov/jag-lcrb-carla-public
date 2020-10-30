@@ -9,12 +9,12 @@ Scenario: Indigenous Nation UBrew / UVin Application
     And I review the account profile for an indigenous nation
     And I review the organization structure for an indigenous nation
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Marketing application for an indigenous nation
+    And I complete the UBrew / UVin application for an indigenous nation
     And I click on the Submit button
     And I review the security screening requirements for an indigenous nation
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a UBrew / UVin application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -27,12 +27,12 @@ Scenario: Partnership UBrew / UVin Application
     And I review the account profile for a partnership
     And I review the organization structure for a partnership
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Marketing application for a partnership
+    And I complete the UBrew / UVin application for a partnership
     And I click on the Submit button
     And I review the security screening requirements for a partnership
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a UBrew / UVin application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -45,12 +45,12 @@ Scenario: Private Corporation UBrew / UVin Application
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Marketing application for a private corporation
+    And I complete the UBrew / UVin application for a private corporation
     And I click on the Submit button
     And I review the security screening requirements for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a UBrew / UVin application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -63,12 +63,12 @@ Scenario: Public Corporation UBrew / UVin Application
     And I review the account profile for a public corporation
     And I review the organization structure for a public corporation
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Marketing application for a public corporation
+    And I complete the UBrew / UVin application for a public corporation
     And I click on the Submit button
     And I review the security screening requirements for a public corporation
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a UBrew / UVin application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -81,12 +81,12 @@ Scenario: Society UBrew / UVin Application
     And I review the account profile for a society
     And I review the organization structure for a society
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Marketing application for a society
+    And I complete the UBrew / UVin application for a society
     And I click on the Submit button
     And I review the security screening requirements for a society
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a UBrew / UVin application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -99,12 +99,12 @@ Scenario: Sole Proprietorship UBrew / UVin Application
     And I review the account profile for a sole proprietorship
     And I review the organization structure for a sole proprietorship
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Marketing application for a sole proprietorship
+    And I complete the UBrew / UVin application for a sole proprietorship
     And I click on the Submit button
     And I review the security screening requirements for a sole proprietorship
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a UBrew / UVin application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -117,12 +117,12 @@ Scenario: Local Government UBrew / UVin Application
     And I review the account profile for a local government
     And I review the organization structure for a local government
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Marketing application for a local government
+    And I complete the UBrew / UVin application for a local government
     And I click on the Submit button
     And I review the security screening requirements for a local government
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a UBrew / UVin application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -135,12 +135,12 @@ Scenario: University UBrew / UVin Application
     And I review the account profile for a university
     And I review the organization structure for a university
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Marketing application for a university
+    And I complete the UBrew / UVin application for a university
     And I click on the Submit button
     And I review the security screening requirements for a university
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a UBrew / UVin application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
