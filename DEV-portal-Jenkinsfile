@@ -1,4 +1,5 @@
 // The builds.
+// uses https://github.com/openshift/jenkins-client-plugin
 
 node('master') {
     stage('Startup') {
@@ -25,8 +26,33 @@ node('master') {
 						
 						def bc2 = openshift.selector('bc', 'cllc-public-frontend')
 						def buildSelector2 = bc2.startBuild()
-						sleep(5)
-						buildSelector2.logs('-f')				  						
+						def builds = bc2.related('builds')
+						
+						timeout(10) {
+
+        
+							builds.watch {
+            
+							echo "So far, ${bc.name()} has created builds: ${it.names()}"
+
+							return it.count() > 0
+							}
+
+							// wait for the build to complete.
+							builds.watch {
+								if ( it.count() == 0 ) return false
+
+								def allDone = true
+								it.withEach {
+									def buildModel = it.object()
+									if ( it.object().status.phase != "Complete" ) {
+									allDone = false
+								}
+							}
+
+							return allDone;
+						}
+						
 					}
 					
 					openshift.tag("cllc-public-frontend:latest", "cllc-public-frontend:dev") 
