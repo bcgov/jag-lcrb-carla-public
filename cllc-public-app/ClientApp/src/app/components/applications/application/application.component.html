@@ -1402,7 +1402,7 @@
               </section>
           </section>
 
-          <section class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest)">
+          <section class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest) || showValidInterestforTransfer()">
             <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">
               Offer or Proof of Ownership, Lease or
               Sub-Lease
