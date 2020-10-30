@@ -218,6 +218,13 @@ namespace bdd_tests
                 uiStartAppButton.Click();
             }
 
+            if (applicationType == "a Cannabis Marketing Licence")
+            {
+                // click on the Cannabis Marketing Licence Start Application button
+                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMarketing']"));
+                uiStartAppButton.Click();
+            }
+
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
         }
 
