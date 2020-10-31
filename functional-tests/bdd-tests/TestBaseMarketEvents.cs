@@ -348,28 +348,28 @@ namespace bdd_tests
         public void MarketEventDataCorrect(string frequency)
         {
             // confirm preventing sale of liquor checkbox is selected
-            // NgWebElement uiPreventingSaleOfLiquor = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoPreventingSaleofLiquor']"));
-            // Assert.True(uiPreventingSaleOfLiquor.GetAttribute("value") == "");
+            NgWebElement uiPreventingSaleOfLiquor = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoPreventingSaleofLiquor']"));
+            Assert.True(uiPreventingSaleOfLiquor.Selected);
 
             // confirm market managed or carried checkbox is selected
-            // NgWebElement uiMarketManagedOrCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketManagedorCarried']"));
-            // Assert.True(uiMarketManagedOrCarried.GetAttribute("value") == "");
+            NgWebElement uiMarketManagedOrCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketManagedorCarried']"));
+            Assert.True(uiMarketManagedOrCarried.Selected);
 
             // confirm market only vendors checkbox is selected
-            // NgWebElement uiIsMarketOnlyVendors = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketOnlyVendors']"));
-            // Assert.True(uiIsMarketOnlyVendors.GetAttribute("value") == "");
+            NgWebElement uiIsMarketOnlyVendors = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketOnlyVendors']"));
+            Assert.True(uiIsMarketOnlyVendors.Selected);
 
             // confirm imported goods checkbox is selected
-            // NgWebElement uiIsNoImportedGoods = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoImportedGoods']"));
-            // Assert.True(uiIsNoImportedGoods.GetAttribute("value") == "");
+            NgWebElement uiIsNoImportedGoods = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoImportedGoods']"));
+            Assert.True(uiIsNoImportedGoods.Selected);
 
             // confirm six vendors checkbox is selected
-            // NgWebElement uiIsMarketHostsSixVendors = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketHostsSixVendors']"));
-            // Assert.True(uiIsMarketHostsSixVendors.GetAttribute("value") == "");
+            NgWebElement uiIsMarketHostsSixVendors = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketHostsSixVendors']"));
+            Assert.True(uiIsMarketHostsSixVendors.Selected);
 
             // confirm max amount or duration checkbox is selected
-            // NgWebElement uiIsMarketMaxAmountorDuration = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketMaxAmountorDuration']"));
-            // Assert.True(uiIsMarketMaxAmountorDuration.GetAttribute("value") == "");
+            NgWebElement uiIsMarketMaxAmountorDuration = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketMaxAmountorDuration']"));
+            Assert.True(uiIsMarketMaxAmountorDuration.Selected);
 
             // confirm contact name is correct
             NgWebElement uiContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
@@ -517,16 +517,16 @@ namespace bdd_tests
             // Assert.True(uiLiquorEndMinute1.GetAttribute("value") == "58");
 
             // confirm serving it right/minors checkbox is selected
-            // NgWebElement uiServingItRight = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAllStaffServingitRight']"));
-            // Assert.True(uiServingItRight.GetAttribute("value") == "");
+            NgWebElement uiServingItRight = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAllStaffServingitRight']"));
+            Assert.True(uiServingItRight.Selected);
 
             // confirm sample sizes checkbox is selected
-            // NgWebElement uiSampleSizes = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isSampleSizeCompliant']"));
-            // Assert.True(uiSampleSizes.GetAttribute("value") == "");
+            NgWebElement uiSampleSizes = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isSampleSizeCompliant']"));
+            Assert.True(uiSampleSizes.Selected);
 
             // confirm agreement checkbox is selected
-            // NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']")); 
-            // Assert.True(uiAgreement.GetAttribute("value") == "");
+            NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']")); 
+            Assert.True(uiAgreement.Selected);
         }
     }
 }
