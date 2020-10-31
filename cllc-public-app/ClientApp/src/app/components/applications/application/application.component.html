@@ -703,7 +703,23 @@
                   </mat-button-toggle-group>
                 </div>
               </section>
+              <div class="ngtest-site-plan" *ngIf="showExteriorRenderings()">
+                <hr><br>
+                <label for="">Exterior Renderings</label>
+                <p>Upload renderings of the planned changes to the store's exterior:</p>
+                <section>
+                  <app-file-uploader *ngIf="applicationId" documentType="Exterior Renderings"
+                    fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                    [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                    entityName="application" [useDocumentTypeForName]="true"
+                    (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
+                    [uploadHeader]="'TO UPLOAD EXTERIOR RENDERINGS, DRAG FILES HERE OR'">
+                  </app-file-uploader>
+                </section>
+              </div>
+  
             </mat-card>
+
 
 
             <!-- Floor Plan-->
