@@ -1269,7 +1269,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   }
 
-  showValidInterestForTransfer(){
+  showValidInterestforTransfer(){
+    debugger;
     return this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
             (this.application.licenseType === "Licensee Retail Store" || "Wine Store");
   }

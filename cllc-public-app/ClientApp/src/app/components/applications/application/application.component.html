@@ -1401,7 +1401,9 @@
                 </div>
               </section>
           </section>
-
+          </div>
+        </section>
+          
           <section class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest) || showValidInterestforTransfer()">
             <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">
               Offer or Proof of Ownership, Lease or
@@ -1409,7 +1411,7 @@
             </label>
             <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Proof of Valid Interest</label>
             <br>
-            <section *ngIf="application?.applicationType?.validInterest === FormControlState.Show">
+            <section>
               <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                 <p>
                   If the applicant currently owns or leases the proposed store location, submit <b>Option 1</b>. If
@@ -1460,9 +1462,6 @@
                   relocation is finalized. LCRB may request a copy of valid interest at the current site during the
                   relocation application process.
                 </p>
-              </div>
-
-            </section>
 
             <p *ngIf="application?.applicationType?.validInterest === FormControlState.ReadOnly">
               The below offer or proof of ownership, lease or sub-lease is on file.
@@ -1476,9 +1475,10 @@
                 [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
               </app-file-uploader>
             </section>
-            </section>
+            
           </div>
-          </section>
+        </section>
+        </section>
 
 
         <!-- Contact Details -->
