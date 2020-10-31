@@ -271,7 +271,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError($"Unable to send Worker Qualification Letter for worker {workerId} - current user does not have access to worker");
                 return NotFound("No access to worker");
-            }            
+            }
 
             try
             {
@@ -315,7 +315,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 byte[] data = await _pdfClient.GetPdf(parameters, "worker_qualification_letter");
                 _logger.LogInformation($"Sending Worker Qualification Letter for worker {workerId}");
-                return File(data, "application/pdf","WorkerQualificationLetter.pdf");
+                return File(data, "application/pdf", "WorkerQualificationLetter.pdf");
             }
             catch (Exception e)
             {
