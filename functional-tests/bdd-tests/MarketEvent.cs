@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-  Feature: MarketEvent
+ Feature: MarketEvent
     As a logged in business user
     I want to submit a market event for different manufacturer types
 
@@ -475,7 +475,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a one day event
     And the account is deleted
     Then I see the login page
@@ -501,7 +501,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a one day event    
     And the account is deleted
     Then I see the login page
@@ -527,7 +527,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a one day event
     And the account is deleted
     Then I see the login page
@@ -553,7 +553,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a one day event
     And the account is deleted
     Then I see the login page
@@ -583,7 +583,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -609,7 +609,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -635,7 +635,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -661,7 +661,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -691,7 +691,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a bi-weekly event
     And the account is deleted
     Then I see the login page
@@ -717,7 +717,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a bi-weekly event
     And the account is deleted
     Then I see the login page
@@ -743,7 +743,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a bi-weekly event
     And the account is deleted
     Then I see the login page
@@ -769,7 +769,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a bi-weekly event    
     And the account is deleted
     Then I see the login page
@@ -799,7 +799,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page
@@ -825,7 +825,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page
@@ -851,7 +851,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page
@@ -877,7 +877,7 @@ using Xunit;
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page
