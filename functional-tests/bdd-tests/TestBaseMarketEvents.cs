@@ -533,6 +533,8 @@ namespace bdd_tests
         [And(@"I click on the market event save for later button")]
         public void MarketEventSaveForLater()
         {
+            NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1)"));
+            uiSaveForLater.Click();
         }
     }
 }
