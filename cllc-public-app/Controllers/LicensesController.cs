@@ -535,7 +535,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
                 }
-                
+
                 try
                 {
                     // try finding a licence application
@@ -553,9 +553,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // otherwise check if there is an LGIN value on the Establishment
                         else
                         {
-                            if(adoxioLicense?.AdoxioEstablishment != null) {
+                            if (adoxioLicense?.AdoxioEstablishment != null)
+                            {
                                 lginvalue = adoxioLicense?.AdoxioEstablishment._adoxioLginValue;
-                            }    
+                            }
                         }
                         // note there will be no LGIN for Marketers or Agent, but we initialized to an empty string so we're all good
                     }
@@ -942,10 +943,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayclose)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayclose)}</td>
                             </tr></table>";
-            } {
-                // to do: log when we expect to find hours of sale, but don't
-                // wine stores, ubrew, lrs.
-            }
+                }
+                else
+                {
+                    // to do: log when we expect to find hours of sale, but don't
+                    // wine stores, ubrew, lrs.
+                }
 
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
                 if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
@@ -990,8 +993,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else // handle other types such as catering
                 {
                     String typeLabel = adoxioLicense?.AdoxioLicenceSubCategoryId?.AdoxioName != null ? adoxioLicense.AdoxioLicenceSubCategoryId?.AdoxioName : adoxioLicense.AdoxioLicenceType?.AdoxioName;
-                    
-                   // adoxioLicense.AdoxioLicenceType?.AdoxioName
+
+                    // adoxioLicense.AdoxioLicenceType?.AdoxioName
 
                     //adoxioLicense.AdoxioLicenceSubCategoryId?
 
@@ -1012,7 +1015,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "endorsementsText", endorsementsText },
                         { "storeHours", storeHours },
                         { "printDate", DateTime.Today.ToString("MMMM dd, yyyy")} // will be based on the users machine
-                    };;
+                    };
                 }
                 try
                 {
