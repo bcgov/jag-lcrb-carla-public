@@ -24,12 +24,12 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
-    And I click on the market event submit button
-    And I click on the Licences tab
-    And I click on the event history for markets
-    And I click on the link for Approved
-    And the market event data is correct for a one day event
-    And the account is deleted
+    # And I click on the market event submit button
+    # And I click on the Licences tab
+    # And I click on the event history for markets
+    # And I click on the link for Approved
+    # And the market event data is correct for a one day event
+    # And the account is deleted
     Then I see the login page
 
  @e2e @privatecorporation @marketeventoneday @distillery
