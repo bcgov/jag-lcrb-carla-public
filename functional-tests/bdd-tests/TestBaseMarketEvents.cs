@@ -315,6 +315,9 @@ namespace bdd_tests
             // select agreement checkbox
             NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiAgreement.Click();
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'inspect test')]")).Displayed);
+
         }
 
 
@@ -333,7 +336,6 @@ namespace bdd_tests
             NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1)"));
             uiSaveForLater.Click();
         }
-
 
 
         [And(@"I click on the event history for markets")]
