@@ -2,24 +2,6 @@
     As a logged in business user
     I want to submit a UBrew / UVin Licence for different business types
 
-@e2e @ubrewuvin @indigenousnation 
-Scenario: Indigenous Nation UBrew / UVin Application
-    Given I am logged in to the dashboard as an indigenous nation
-    And I click on the Start Application button for a UBrew UVin application
-    And I review the account profile for an indigenous nation
-    And I review the organization structure for an indigenous nation
-    And I click on the button for Submit Organization Information
-    And I complete the UBrew / UVin application for an indigenous nation
-    And I click on the Submit button
-    And I review the security screening requirements for an indigenous nation
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
-    And the account is deleted
-    Then I see the login page
-
 @e2e @ubrewuvin @partnership 
 Scenario: Partnership UBrew / UVin Application
     Given I am logged in to the dashboard as a partnership
@@ -74,24 +56,6 @@ Scenario: Public Corporation UBrew / UVin Application
     And the account is deleted
     Then I see the login page
 
-@e2e @ubrewuvin @society 
-Scenario: Society UBrew / UVin Application
-    Given I am logged in to the dashboard as a society
-    And I click on the Start Application button for a UBrew UVin application
-    And I review the account profile for a society
-    And I review the organization structure for a society
-    And I click on the button for Submit Organization Information
-    And I complete the UBrew / UVin application for a society
-    And I click on the Submit button
-    And I review the security screening requirements for a society
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
-    And the account is deleted
-    Then I see the login page
-
 @e2e @ubrewuvin @soleproprietorship 
 Scenario: Sole Proprietorship UBrew / UVin Application
     Given I am logged in to the dashboard as a sole proprietorship
@@ -102,42 +66,6 @@ Scenario: Sole Proprietorship UBrew / UVin Application
     And I complete the UBrew / UVin application for a sole proprietorship
     And I click on the Submit button
     And I review the security screening requirements for a sole proprietorship
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
-    And the account is deleted
-    Then I see the login page
-
-@e2e @ubrewuvin @localgovernment 
-Scenario: Local Government UBrew / UVin Application
-    Given I am logged in to the dashboard as a local government
-    And I click on the Start Application button for a UBrew UVin application
-    And I review the account profile for a local government
-    And I review the organization structure for a local government
-    And I click on the button for Submit Organization Information
-    And I complete the UBrew / UVin application for a local government
-    And I click on the Submit button
-    And I review the security screening requirements for a local government
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
-    And the account is deleted
-    Then I see the login page
-
-@e2e @ubrewuvin @university 
-Scenario: University UBrew / UVin Application
-    Given I am logged in to the dashboard as a university
-    And I click on the Start Application button for a UBrew UVin application
-    And I review the account profile for a university
-    And I review the organization structure for a university
-    And I click on the button for Submit Organization Information
-    And I complete the UBrew / UVin application for a university
-    And I click on the Submit button
-    And I review the security screening requirements for a university
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
