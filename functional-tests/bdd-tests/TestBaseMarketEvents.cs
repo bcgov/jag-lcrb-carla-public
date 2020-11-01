@@ -315,9 +315,6 @@ namespace bdd_tests
             // select agreement checkbox
             NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiAgreement.Click();
-
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'inspect test')]")).Displayed);
-
         }
 
 
@@ -350,8 +347,8 @@ namespace bdd_tests
         public void MarketEventDataCorrect(string frequency)
         {
             // confirm preventing sale of liquor checkbox is selected
-            NgWebElement uiPreventingSaleOfLiquor = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoPreventingSaleofLiquor']"));
-            Assert.True(uiPreventingSaleOfLiquor.Selected);
+            NgWebElement uiPreventingSaleOfLiquor = ngDriver.FindElement(By.CssSelector("input#mat-checkbox-1-input.mat-checkbox-input"));
+            Assert.True(uiPreventingSaleOfLiquor.GetAttribute("aria-checked") == "true");
 
             // confirm market managed or carried checkbox is selected
             NgWebElement uiMarketManagedOrCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketManagedorCarried']"));
