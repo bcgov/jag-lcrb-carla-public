@@ -4,6 +4,7 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Gov.Lclb.Cllb.Public.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -19,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -33,9 +35,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IPdfService _pdfClient;
         private readonly IWebHostEnvironment _env;
         private readonly ILogger _logger;
+        private readonly FileManagerClient _fileManagerClient;
 
         public LicensesController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor,
-            IPdfService pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache, IWebHostEnvironment env)
+            IPdfService pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache, IWebHostEnvironment env, FileManagerClient fileClient)
         {
             _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
@@ -43,6 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _pdfClient = pdfClient;
             _logger = loggerFactory.CreateLogger(typeof(LicensesController));
             _env = env;
+            _fileManagerClient = fileClient;
         }
 
         /// GET licence by id
@@ -602,8 +606,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 // copy service areas from licence
-                /*  TG- Removing for now; will result in service areas being copied across endorsement types. 
-                    
+                /*  TG- Removing for now; will result in service areas being copied across endorsement types.
+
                 try
                 {
                     string filter = $"_adoxio_licenceid_value eq {licenceId}";
@@ -1021,8 +1025,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var templateName = "cannabis_licence";
 
-
-
                     switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
                     {
                         case "Marketing":
@@ -1059,6 +1061,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     byte[] data = await _pdfClient.GetPdf(parameters, templateName);
+
+                    // Save copy of generated licence PDF for auditing/logging purposes
+                    try
+                    {
+                        var hash = await _pdfClient.GetPdfHash(parameters, templateName);
+                        var entityName = "licence";
+                        var entityId = adoxioLicense.AdoxioLicencesid;
+                        var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+                        var documentType = "Licence";
+                        _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error uploading PDF");
+                    }
+
                     return File(data, "application/pdf", $"{adoxioLicense.AdoxioLicencenumber}.pdf");
                 }
                 catch (Exception e)

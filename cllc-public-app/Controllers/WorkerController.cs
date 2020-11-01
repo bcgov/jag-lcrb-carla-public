@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -27,14 +29,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IPdfService _pdfClient;
+        private readonly FileManagerClient _fileManagerClient;
 
-        public WorkerController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IPdfService pdfClient)
+        public WorkerController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IPdfService pdfClient, FileManagerClient fileClient)
         {
             _configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(WorkerController));
             _pdfClient = pdfClient;
+            _fileManagerClient = fileClient;
         }
 
         /// <summary>
@@ -314,6 +318,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 };
 
                 byte[] data = await _pdfClient.GetPdf(parameters, "worker_qualification_letter");
+
+                // Save copy of generated licence PDF for auditing/logging purposes
+                try
+                {
+                    var hash = await _pdfClient.GetPdfHash(parameters, "worker_qualification_letter");
+                    var entityName = "worker";
+                    var entityId = adoxioWorker.AdoxioWorkerid;
+                    var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+                    var documentType = "Worker Qualification Letter";
+                    _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error uploading PDF");
+                }
+
                 _logger.LogInformation($"Sending Worker Qualification Letter for worker {workerId}");
                 return File(data, "application/pdf", "WorkerQualificationLetter.pdf");
             }
