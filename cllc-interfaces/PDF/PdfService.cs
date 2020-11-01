@@ -32,10 +32,11 @@ namespace Gov.Lclb.Cllb.Interfaces
 
 
         /// <summary>
-        /// GetPDF
+        /// Gets a PDF file from the supplied inputs.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="parameters">Object holding the data to pass to the template for rendering a PDF file</param>
+        /// <param name="template">The template to render as PDF (e.g. "cannabis_licence")</param>
+        /// <returns>Binary data representing the PDF file</returns>
         public async Task<byte[]> GetPdf(Dictionary<string, string> parameters, string template)
         {
             byte[] result = null;
@@ -58,6 +59,42 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (_statusCode == HttpStatusCode.OK)
             {
                 result = await response.Content.ReadAsByteArrayAsync();
+            }
+            else
+            {
+                throw new Exception("PDF service did not return OK result.");
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets a hash of the generated PDF so that consumer code can determine whether to re-download the same file or not.
+        /// </summary>
+        /// <param name="parameters">Object holding the data to pass to the template for rendering a PDF file</param>
+        /// <param name="template">The template to render as PDF (e.g. "cannabis_licence")</param>
+        /// <returns>A string with the hash value</returns>
+        public async Task<string> GetPdfHash(Dictionary<string, string> parameters, string template)
+        {
+            string result = null;
+
+            HttpRequestMessage endpointRequest =
+                new HttpRequestMessage(HttpMethod.Post, BaseUri + "/api/pdf/GetHash/" + template);
+
+            string jsonString = JsonConvert.SerializeObject(parameters);
+            StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
+            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+            endpointRequest.Content = strContent;
+
+            // make the request.
+            var response = await _client.SendAsync(endpointRequest);
+            var _statusCode = response.StatusCode;
+
+            if (_statusCode == HttpStatusCode.OK)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                result = dict["hash"];
             }
             else
             {
