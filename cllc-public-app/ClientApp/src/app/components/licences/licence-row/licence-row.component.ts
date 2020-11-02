@@ -272,26 +272,60 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   startRenewal(licence: ApplicationLicenseSummary) {
-    let renewalType = CRS_RENEWAL_LICENCE_TYPE_NAME;
-    let renewalApplication = licence.actionApplications.find(app =>
-      app.applicationTypeName === ApplicationTypeNames.CRSRenewal && app.applicationStatus !== 'Active');
+    // there are three type of renewals;
+    // CRS Renewals
+    // Cannabis Marketing Renewals
+    // Liquor Renewals
 
-    if (licence.licenceTypeCategory === 'Liquor') {
+    // use a renewal type to direct to the right renewal application form (crs or liquor)
+    let renewalType;
+    // used to find an existing renewal application of that type, or create a new one
+    let renewalApplication;
+    // used to specify the type of renewal application too create
+    let renewalApplicationTypeName;
+
+    // if it's a cannabis related licence
+    if(licence.licenceTypeCategory === "Cannabis"){
+      renewalType = CRS_RENEWAL_LICENCE_TYPE_NAME;
+
+      if(licence.licenceTypeName === "Marketing"){
+        // see if there is an existing Marketing renewal application for this licence
+        renewalApplicationTypeName = this.ApplicationTypeNames.MarketingRenewal;
+        renewalApplication = licence.actionApplications.find(app =>
+          app.applicationTypeName === this.ApplicationTypeNames.MarketingRenewal && app.applicationStatus !== 'Active');
+      } else {
+      // if it's a CRS Licence        
+        // see if there is an existing CRS renewal application for this licence
+        renewalApplicationTypeName = this.ApplicationTypeNames.CRSRenewal;
+        renewalApplication = licence.actionApplications.find(app =>
+        app.applicationTypeName === this.ApplicationTypeNames.CRSRenewal && app.applicationStatus !== 'Active');
+      }
+
+    } else {
+      // otherwise it's a liquor licence
+      // set the renewal type to liquor
       renewalType = LIQUOR_RENEWAL_LICENCE_TYPE_NAME;
-      renewalApplication = licence.actionApplications.find(app =>
-        app.applicationTypeName === ApplicationTypeNames.LiquorRenewal && app.applicationStatus !== 'Active');
-    }
+      renewalApplicationTypeName = this.ApplicationTypeNames.LiquorRenewal;
 
+      // look for a liquor renewal application
+      renewalApplication = licence.actionApplications.find(app =>
+        app.applicationTypeName === this.ApplicationTypeNames.LiquorRenewal && app.applicationStatus !== 'Active');
+
+    }
+      
+    // if we found a renewal application that hasn't been paid for
     if (renewalApplication && !renewalApplication.isPaid) {
+      // let's go there
       this.router.navigateByUrl(`/renew-licence/${renewalType}/${renewalApplication.applicationId}`);
+    // otherwise if there's a paid renewal application
     } else if (renewalApplication && renewalApplication.isPaid) {
+      // that shouldnt have happened
       this.snackBar.open('Renewal application already submitted', 'Fail',
         { duration: 3500, panelClass: ['red-snackbar'] });
+    // otherwise
     } else {
-      let renewalApplicationTypeName = ApplicationTypeNames.CRSRenewal;
-      if (renewalType === LIQUOR_RENEWAL_LICENCE_TYPE_NAME) {
-        renewalApplicationTypeName = ApplicationTypeNames.LiquorRenewal;
-      }
+
+      // create an renewal application of the specified type
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, renewalApplicationTypeName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {

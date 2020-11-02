@@ -76,6 +76,7 @@ export enum ApplicationTypeNames {
   CannabisRetailStore = 'Cannabis Retail Store',
   LicenseeChanges = 'Licensee Changes',
   Marketer = 'Marketing',
+  MarketingRenewal = 'Marketing Renewal',
   LGINClaim = 'LG/IN Claim',
   LiquorRelocation = 'Liquor Licence Relocation',
   LiquorRenewal = 'Liquor Licence Renewal',
