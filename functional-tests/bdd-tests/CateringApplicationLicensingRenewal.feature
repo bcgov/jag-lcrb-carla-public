@@ -20,7 +20,7 @@ Scenario: Negative Private Corporation Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -38,7 +38,7 @@ Scenario: Positive Private Corporation Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -56,7 +56,7 @@ Scenario: Negative Indigenous Nation Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -74,7 +74,7 @@ Scenario: Positive Indigenous Nation Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -92,7 +92,7 @@ Scenario: Negative Partnership Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -110,7 +110,7 @@ Scenario: Positive Partnership Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -128,7 +128,7 @@ Scenario: Negative Public Corporation Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -146,7 +146,7 @@ Scenario: Positive Public Corporation Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -164,7 +164,7 @@ Scenario: Negative Society Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -182,7 +182,7 @@ Scenario: Positive Society Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -200,7 +200,7 @@ Scenario: Negative Sole Proprietorship Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -218,7 +218,7 @@ Scenario: Positive Sole Proprietorship Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -236,7 +236,7 @@ Scenario: Negative Local Government Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -254,7 +254,7 @@ Scenario: Positive Local Government Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -272,7 +272,7 @@ Scenario: Negative University Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -290,7 +290,7 @@ Scenario: Positive University Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -312,7 +312,7 @@ Scenario: Negative Private Corporation Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -330,7 +330,7 @@ Scenario: Positive Private Corporation Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -348,7 +348,7 @@ Scenario: Negative Indigenous Nation Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -366,7 +366,7 @@ Scenario: Positive Indigenous Nation Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -384,7 +384,7 @@ Scenario: Negative Partnership Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -402,7 +402,7 @@ Scenario: Positive Partnership Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -420,7 +420,7 @@ Scenario: Negative Public Corporation Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -438,7 +438,7 @@ Scenario: Positive Public Corporation Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -456,7 +456,7 @@ Scenario: Negative Society Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -474,7 +474,7 @@ Scenario: Positive Society Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -492,7 +492,7 @@ Scenario: Negative Sole Proprietorship Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -510,7 +510,7 @@ Scenario: Positive Sole Proprietorship Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -528,7 +528,7 @@ Scenario: Negative Local Government Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -546,7 +546,7 @@ Scenario: Positive Local Government Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -564,7 +564,7 @@ Scenario: Negative University Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -582,7 +582,7 @@ Scenario: Positive University Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -604,7 +604,7 @@ Scenario: Negative Private Corporation Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -622,7 +622,7 @@ Scenario: Positive Private Corporation Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -640,7 +640,7 @@ Scenario: Negative Indigenous Nation Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -658,7 +658,7 @@ Scenario: Positive Indigenous Nation Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -676,7 +676,7 @@ Scenario: Negative Partnership Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -694,7 +694,7 @@ Scenario: Positive Partnership Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -712,7 +712,7 @@ Scenario: Negative Public Corporation Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -730,7 +730,7 @@ Scenario: Positive Public Corporation Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -748,7 +748,7 @@ Scenario: Negative Society Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -766,7 +766,7 @@ Scenario: Positive Society Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -784,7 +784,7 @@ Scenario: Negative Sole Proprietorship Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -802,7 +802,7 @@ Scenario: Positive Sole Proprietorship Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -820,7 +820,7 @@ Scenario: Negative Local Government Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -838,7 +838,7 @@ Scenario: Positive Local Government Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -856,7 +856,7 @@ Scenario: Negative University Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -874,7 +874,7 @@ Scenario: Positive University Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 45 days ago
+    And the expiry date is changed using the workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -896,7 +896,7 @@ Scenario: Negative Private Corporation Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -914,7 +914,7 @@ Scenario: Positive Private Corporation Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -932,7 +932,7 @@ Scenario: Negative Indigenous Nation Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -950,7 +950,7 @@ Scenario: Positive Indigenous Nation Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -968,7 +968,7 @@ Scenario: Negative Partnership Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -986,7 +986,7 @@ Scenario: Positive Partnership Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1004,7 +1004,7 @@ Scenario: Negative Public Corporation Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1022,7 +1022,7 @@ Scenario: Positive Public Corporation Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1040,7 +1040,7 @@ Scenario: Negative Society Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1058,7 +1058,7 @@ Scenario: Positive Society Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1076,7 +1076,7 @@ Scenario: Negative Sole Proprietorship Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1094,7 +1094,7 @@ Scenario: Positive Sole Proprietorship Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1112,7 +1112,7 @@ Scenario: Negative Local Government Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1130,7 +1130,7 @@ Scenario: Positive Local Government Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1148,7 +1148,7 @@ Scenario: Negative University Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1166,7 +1166,7 @@ Scenario: Positive University Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 60 days from today
+    And the expiry date is changed using the workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1188,7 +1188,7 @@ Scenario: Negative Private Corporation Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1206,7 +1206,7 @@ Scenario: Positive Private Corporation Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1224,7 +1224,7 @@ Scenario: Negative Indigenous Nation Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1242,7 +1242,7 @@ Scenario: Positive Indigenous Nation Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1260,7 +1260,7 @@ Scenario: Negative Partnership Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1278,7 +1278,7 @@ Scenario: Positive Partnership Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1296,7 +1296,7 @@ Scenario: Negative Public Corporation Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1314,7 +1314,7 @@ Scenario: Positive Public Corporation Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1332,7 +1332,7 @@ Scenario: Negative Society Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1350,7 +1350,7 @@ Scenario: Positive Society Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1368,7 +1368,7 @@ Scenario: Negative Sole Proprietorship Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1386,7 +1386,7 @@ Scenario: Positive Sole Proprietorship Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1404,7 +1404,7 @@ Scenario: Negative Local Government Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1422,7 +1422,7 @@ Scenario: Positive Local Government Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1440,7 +1440,7 @@ Scenario: Negative University Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -1458,7 +1458,7 @@ Scenario: Positive University Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And the expiry date is changed to 30 days from today
+    And the expiry date is changed using the workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
