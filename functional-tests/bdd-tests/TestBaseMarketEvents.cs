@@ -372,6 +372,8 @@ namespace bdd_tests
 
             // confirm contact name is correct
             NgWebElement uiContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
+            //string value = uiContactName.GetProperty("value");
+            //Assert.True(value == "Test Automation");
             Assert.True(uiContactName.GetAttribute("value") == "Test Automation");
 
             // confirm contact phone number is correct
