@@ -426,25 +426,25 @@ namespace bdd_tests
             NgWebElement uiAdditionalDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
             Assert.True(uiAdditionalDetails.GetAttribute("value") == "Additional details for automated test.");
  
-            if (frequency == "a one day event")
+            if ((frequency == "a one day event") || (frequency == "one day event saved for later"))
             {
                 NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
                 Assert.True(uiFrequency.GetAttribute("value") == "3: 845280003");
             }
 
-            if (frequency == "a weekly event")
+            if ((frequency == "a weekly event") || (frequency == "a weekly event saved for later"))
             {
                 NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
                 Assert.True(uiFrequency.GetAttribute("value") == "0: 845280000");
             }
 
-            if (frequency == "a monthly event")
+            if ((frequency == "a monthly event") || (frequency == "a monthly event saved for later"))
             {
                 NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
                 Assert.True(uiFrequency.GetAttribute("value") == "2: 845280002");
             }
 
-            if (frequency == "a bi-weekly event")
+            if ((frequency == "a bi-weekly event") || (frequency == "a bi-weekly event saved for later"))
             {
                 NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
                 Assert.True(uiFrequency.GetAttribute("value") == "1: 845280001");
@@ -454,9 +454,9 @@ namespace bdd_tests
             NgWebElement uiAdditionalInformation = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
             Assert.True(uiAdditionalInformation.GetAttribute("value") == "Additional information for automated test.");
 
-            if (frequency != "a one day event")
+            if ((frequency != "a one day event") || (frequency != "a one day event saved for later")) 
             {
-                if ((frequency == "weekly") || (frequency == "bi-weekly"))
+                if ((frequency == "a weekly event") || (frequency == "a weekly event saved for later") || (frequency == "a bi-weekly event") || (frequency == "a bi-weekly event saved for later"))
                 {
                     // confirm selection re days of the week
                     NgWebElement uiThursdayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='thursday']"));
@@ -469,7 +469,7 @@ namespace bdd_tests
                     Assert.Contains("mat-checkbox-checked", uiSaturdayFinal.GetAttribute("class"));
                 }
 
-                if (frequency == "monthly")
+                if ((frequency == "a monthly event") || (frequency == "a monthly event saved for later"))
                 {
                     // confirm selected day of the week
                     NgWebElement uiSaturday3 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='saturday']"));
@@ -521,9 +521,12 @@ namespace bdd_tests
             NgWebElement uiSampleSizes = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isSampleSizeCompliant']"));
             Assert.Contains("mat-checkbox-checked", uiSampleSizes.GetAttribute("class"));
 
-            // confirm agreement checkbox is selected
-            NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            Assert.Contains("mat-checkbox-checked", uiAgreement.GetAttribute("class"));
+            if ((frequency != "a one time event saved for later") && (frequency != "a weekly event saved for later") && (frequency != "a bi-weekly event saved for later") && (frequency != "a monthly event saved for later"))
+            {
+                // confirm agreement checkbox is selected
+                NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+                Assert.Contains("mat-checkbox-checked", uiAgreement.GetAttribute("class"));
+            }
         }
 
 
