@@ -101,7 +101,7 @@ namespace bdd_tests
             NgWebElement uiClientHostname = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'clientHostname']"));
             uiClientHostname.SendKeys(bizLegalName);
 
-            // select market event type
+            // select market event type (annual)
             NgWebElement uiMarketEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'marketEventType'] option[value = '2: 845280002']"));
             uiMarketEventType.Click();
 
@@ -372,8 +372,6 @@ namespace bdd_tests
 
             // confirm contact name is correct
             NgWebElement uiContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
-            //string value = uiContactName.GetProperty("value");
-            //Assert.True(value == "Test Automation");
             Assert.True(uiContactName.GetAttribute("value") == "Test Automation");
 
             // confirm contact phone number is correct
@@ -397,8 +395,8 @@ namespace bdd_tests
             Assert.True(uiClientHostname.GetAttribute("value") == "Point Ellis Market Cooperative");
 
             // confirm market event type is correct
-            // NgWebElement uiMarketEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'marketEventType']"));
-            // Assert.True(uiMarketEventType.GetAttribute("value") == "Annual");
+            NgWebElement uiMarketEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'marketEventType']"));
+            Assert.True(uiMarketEventType.GetAttribute("value") == "2: 845280002");
 
             // confirm market business number is correct
             NgWebElement uiBusinessNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'businessNumber']"));
@@ -427,32 +425,30 @@ namespace bdd_tests
             // confirm additional details are correct
             NgWebElement uiAdditionalDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
             Assert.True(uiAdditionalDetails.GetAttribute("value") == "Additional details for automated test.");
-
-            /*
+ 
             if (frequency == "a one day event")
             {
-                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='3: 845280003']"));
-                Assert.True(uiFrequency.GetAttribute("value") == "Once");
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
+                Assert.True(uiFrequency.GetAttribute("value") == "3: 845280003");
             }
 
             if (frequency == "a weekly event")
             {
-                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='0: 845280000']"));
-                Assert.True(uiFrequency.GetAttribute("value") == "Weekly");
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
+                Assert.True(uiFrequency.GetAttribute("value") == "0: 845280000");
             }
 
             if (frequency == "a monthly event")
             {
-                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='2: 845280002']"));
-                Assert.True(uiFrequency.GetAttribute("value") == "Monthly");
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
+                Assert.True(uiFrequency.GetAttribute("value") == "2: 845280002");
             }
 
             if (frequency == "a bi-weekly event")
             {
-                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='1: 845280001']"));
-                Assert.True(uiFrequency.GetAttribute("value") == "Bi-Weekly");
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
+                Assert.True(uiFrequency.GetAttribute("value") == "1: 845280001");
             }
-            */
 
             // confirm additional information is correct
             NgWebElement uiAdditionalInformation = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
@@ -464,20 +460,20 @@ namespace bdd_tests
                 {
                     // confirm selection re days of the week
                     NgWebElement uiThursdayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='thursday']"));
-                    Assert.True(uiThursdayFinal.GetAttribute("value") == "Thursday");
+                    Assert.Contains("mat-checkbox-checked", uiThursdayFinal.GetAttribute("class"));
 
                     NgWebElement uiFridayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='friday']"));
-                    Assert.True(uiFridayFinal.GetAttribute("value") == "Friday");
+                    Assert.Contains("mat-checkbox-checked", uiFridayFinal.GetAttribute("class"));
 
                     NgWebElement uiSaturdayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='saturday']"));
-                    Assert.True(uiSaturdayFinal.GetAttribute("value") == "Saturday");
+                    Assert.Contains("mat-checkbox-checked", uiSaturdayFinal.GetAttribute("class"));
                 }
 
                 if (frequency == "monthly")
                 {
                     // confirm selected day of the week
                     NgWebElement uiSaturday3 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='saturday']"));
-                    Assert.True(uiSaturday3.GetAttribute("value") == "");
+                    Assert.Contains("mat-checkbox-checked", uiSaturday3.GetAttribute("class"));
 
                     // confirm selected week of the month
                     NgWebElement uiWeekOfMonth4 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-5-input']"));
