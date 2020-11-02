@@ -325,7 +325,7 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = true;
 
             // navigate to api/Licenses/<Licence ID>/setexpiry
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpirytoday");
 
             // wait for the automated expiry process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
@@ -354,7 +354,7 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = true;
 
             // navigate to api/Licenses/<Licence ID>/setexpiry
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiryyesterday");
 
             // wait for the automated expiry process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
@@ -383,7 +383,7 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = true;
 
             // navigate to api/Licenses/<Licence ID>/setexpiry
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry60daysfuture");
 
             // wait for the automated expiry process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
@@ -412,7 +412,7 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = true;
 
             // navigate to api/Licenses/<Licence ID>/setexpiry
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry30daysfuture");
 
             // wait for the automated expiry process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
@@ -441,7 +441,7 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = true;
 
             // navigate to api/Licenses/<Licence ID>/setexpiry
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry45dayspast");
 
             // wait for the automated expiry process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
