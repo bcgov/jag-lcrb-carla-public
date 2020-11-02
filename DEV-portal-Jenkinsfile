@@ -68,6 +68,7 @@ node('master') {
 				openshift.withProject() {
 					def bc = openshift.selector('bc', 'cllc-public-api')
 					def buildSelector = bc.startBuild()
+					sleep(5)
 					buildSelector.logs('-f')						   
 				}
 				openshift.tag("cllc-public-api:latest", "cllc-public-api:dev")
