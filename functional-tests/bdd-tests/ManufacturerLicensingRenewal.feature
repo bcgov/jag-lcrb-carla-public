@@ -3,9 +3,9 @@
     I want to pay the first year licensing fee for an approved Manucturer Application
     And renew the licence
 
-#-----------------------
-# Private Corporation
-#-----------------------
+#-----------------------------
+# Private Corporation - Today
+#-----------------------------
 
 @e2e @manufacturer @privatecorporation @licencerenewal
 Scenario:  Negative Private Corporation Winery Licence Renewal
@@ -20,7 +20,7 @@ Scenario:  Negative Private Corporation Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a winery
     And the account is deleted
     Then I see the login page
@@ -38,7 +38,7 @@ Scenario:  Positive Private Corporation Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a winery
     And the account is deleted
     Then I see the login page
@@ -56,7 +56,7 @@ Scenario:  Negative Private Corporation Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -74,7 +74,7 @@ Scenario:  Positive Private Corporation Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -92,7 +92,7 @@ Scenario:  Negative Private Corporation Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -110,7 +110,7 @@ Scenario:  Positive Private Corporation Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -128,7 +128,7 @@ Scenario:  Negative Private Corporation Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a co-packer
     And the account is deleted
     Then I see the login page
@@ -146,14 +146,14 @@ Scenario:  Positive Private Corporation Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a co-packer
     And the account is deleted
     Then I see the login page
 
-#-----------------------
-# Public Corporation
-#-----------------------
+#----------------------------
+# Public Corporation - Today
+#----------------------------
 
 @e2e @manufacturer @publiccorporation @licencerenewal
 Scenario:  Negative Public Corporation Winery Licence Renewal
@@ -168,7 +168,7 @@ Scenario:  Negative Public Corporation Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a winery
     And the account is deleted
     Then I see the login page
@@ -186,7 +186,7 @@ Scenario:  Positive Public Corporation Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a winery
     And the account is deleted
     Then I see the login page
@@ -204,7 +204,7 @@ Scenario:  Negative Public Corporation Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -222,7 +222,7 @@ Scenario:  Positive Public Corporation Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -240,7 +240,7 @@ Scenario:  Negative Public Corporation Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -258,7 +258,7 @@ Scenario:  Positive Public Corporation Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -276,7 +276,7 @@ Scenario:  Negative Public Corporation Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a co-packer
     And the account is deleted
     Then I see the login page
@@ -294,14 +294,14 @@ Scenario:  Positive Public Corporation Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a co-packer
     And the account is deleted
     Then I see the login page
 
-#-----------------------
-# Sole Proprietorship
-#-----------------------
+#-----------------------------
+# Sole Proprietorship - Today
+#-----------------------------
 
 @e2e @manufacturer @soleproprietorship @licencerenewal
 Scenario:  Negative Sole Proprietorship Winery Licence Renewal
@@ -316,7 +316,7 @@ Scenario:  Negative Sole Proprietorship Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a winery
     And the account is deleted
     Then I see the login page
@@ -334,7 +334,7 @@ Scenario:  Positive Sole Proprietorship Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a winery
     And the account is deleted
     Then I see the login page
@@ -352,7 +352,7 @@ Scenario:  Negative Sole Proprietorship Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -370,7 +370,7 @@ Scenario:  Positive Sole Proprietorship Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -388,7 +388,7 @@ Scenario:  Negative Sole Proprietorship Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -406,7 +406,7 @@ Scenario:  Positive Sole Proprietorship Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -424,7 +424,7 @@ Scenario:  Negative Sole Proprietorship Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a co-packer
     And the account is deleted
     Then I see the login page
@@ -442,13 +442,13 @@ Scenario:  Positive Sole Proprietorship Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a co-packer
     And the account is deleted
     Then I see the login page
 
 #-----------------------
-# Partnership
+# Partnership - Today
 #-----------------------
 
 @e2e @manufacturer @partnership @licencerenewal
@@ -464,7 +464,7 @@ Scenario:  Negative Partnership Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a winery
     And the account is deleted
     Then I see the login page
@@ -482,7 +482,7 @@ Scenario:  Positive Partnership Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a winery
     And the account is deleted
     Then I see the login page
@@ -500,7 +500,7 @@ Scenario:  Negative Partnership Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -518,7 +518,7 @@ Scenario:  Positive Partnership Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -536,7 +536,7 @@ Scenario:  Negative Partnership Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -554,7 +554,7 @@ Scenario:  Positive Partnership Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -572,7 +572,7 @@ Scenario:  Negative Partnership Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a co-packer
     And the account is deleted
     Then I see the login page
@@ -590,13 +590,13 @@ Scenario:  Positive Partnership Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a co-packer
     And the account is deleted
     Then I see the login page
 
 #-----------------------
-# Society
+# Society - Today
 #-----------------------
 
 @e2e @manufacturer @society @licencerenewal
@@ -612,7 +612,7 @@ Scenario:  Negative Society Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a winery
     And the account is deleted
     Then I see the login page
@@ -630,7 +630,7 @@ Scenario:  Positive Society Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a winery
     And the account is deleted
     Then I see the login page
@@ -648,7 +648,7 @@ Scenario:  Negative Society Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -666,7 +666,7 @@ Scenario:  Positive Society Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -684,7 +684,7 @@ Scenario:  Negative Society Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -702,7 +702,7 @@ Scenario:  Positive Society Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -720,7 +720,7 @@ Scenario:  Negative Society Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a co-packer
     And the account is deleted
     Then I see the login page
@@ -738,13 +738,13 @@ Scenario:  Positive Society Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a co-packer
     And the account is deleted
     Then I see the login page
 
 #-----------------------
-# University
+# University - Today
 #-----------------------
 
 @e2e @manufacturer @university @licencerenewal
@@ -760,7 +760,7 @@ Scenario:  Negative University Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a winery
     And the account is deleted
     Then I see the login page
@@ -778,7 +778,7 @@ Scenario:  Positive University Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a winery
     And the account is deleted
     Then I see the login page
@@ -796,7 +796,7 @@ Scenario:  Negative University Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -814,7 +814,7 @@ Scenario:  Positive University Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -832,7 +832,7 @@ Scenario:  Negative University Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -850,7 +850,7 @@ Scenario:  Positive University Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -868,7 +868,7 @@ Scenario:  Negative University Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a co-packer
     And the account is deleted
     Then I see the login page
@@ -886,14 +886,14 @@ Scenario:  Positive University Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a co-packer
     And the account is deleted
     Then I see the login page
 
-#-----------------------
-# Local Government
-#-----------------------
+#--------------------------
+# Local Government - Today
+#--------------------------
 
 @e2e @manufacturer @localgovernment @licencerenewal
 Scenario:  Negative Local Government Winery Licence Renewal
@@ -908,7 +908,7 @@ Scenario:  Negative Local Government Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a winery
     And the account is deleted
     Then I see the login page
@@ -926,7 +926,7 @@ Scenario:  Positive Local Government Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a winery
     And the account is deleted
     Then I see the login page
@@ -944,7 +944,7 @@ Scenario:  Negative Local Government Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -962,7 +962,7 @@ Scenario:  Positive Local Government Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -980,7 +980,7 @@ Scenario:  Negative Local Government Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -998,7 +998,7 @@ Scenario:  Positive Local Government Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -1016,7 +1016,7 @@ Scenario:  Negative Local Government Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a co-packer
     And the account is deleted
     Then I see the login page
@@ -1034,14 +1034,14 @@ Scenario:  Positive Local Government Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a co-packer
     And the account is deleted
     Then I see the login page
 
-#-----------------------
-# Indigenous Nation
-#-----------------------
+#---------------------------
+# Indigenous Nation - Today
+#---------------------------
 
 @e2e @manufacturer @indigenousnation @licencerenewal
 Scenario:  Negative Indigenous Nation Winery Licence Renewal
@@ -1056,7 +1056,7 @@ Scenario:  Negative Indigenous Nation Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a winery
     And the account is deleted
     Then I see the login page
@@ -1074,7 +1074,7 @@ Scenario:  Positive Indigenous Nation Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a winery
     And the account is deleted
     Then I see the login page
@@ -1092,7 +1092,7 @@ Scenario:  Negative Indigenous Nation Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -1110,7 +1110,7 @@ Scenario:  Positive Indigenous Nation Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -1128,7 +1128,7 @@ Scenario:  Negative Indigenous Nation Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -1146,7 +1146,7 @@ Scenario:  Positive Indigenous Nation Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -1164,7 +1164,7 @@ Scenario:  Negative Indigenous Nation Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with negative responses for a co-packer
     And the account is deleted
     Then I see the login page
@@ -1182,7 +1182,7 @@ Scenario:  Positive Indigenous Nation Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a co-packer
     And the account is deleted
     Then I see the login page
