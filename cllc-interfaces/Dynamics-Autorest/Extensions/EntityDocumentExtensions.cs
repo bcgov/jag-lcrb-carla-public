@@ -10,8 +10,6 @@ namespace Gov.Lclb.Cllb.Interfaces
     /// </summary>
     public static class EntityDocumentExtensions
     {
-        
-
         public static string CleanGuidForSharePoint(string guidString)
         {
             string result = null;
@@ -64,5 +62,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             return folderName;
         }
 
+        public static string GetDocumentFolderName(this MicrosoftDynamicsCRMadoxioLicences licence)
+        {
+            string licenceIdCleaned = CleanGuidForSharePoint(licence.AdoxioLicencesid);
+            string folderName = $"{licence.AdoxioName}_{licenceIdCleaned}";
+            return folderName;
+        }
     }
 }
