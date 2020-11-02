@@ -48,6 +48,15 @@ namespace bdd_tests
         }
 
 
+
+        [And(@"I click on the signature checkbox")]
+        public void ClickOnSignatureCheckbox()
+        {
+            NgWebElement uiSignature = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiSignature.Click();
+        }
+    
+
         [And(@"I click on the branding change link for (.*)")]
         public void ClickOnBrandingChangeLink(string changeType)
         {
