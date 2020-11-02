@@ -337,6 +337,122 @@ namespace bdd_tests
         }
 
 
+        [And(@"the expiry date is changed to yesterday")]
+        public void ExpiryDateYesterday()
+        {
+            string transferLicence = "Transfer Licence";
+
+            // find the Transfer Licence link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(transferLicence));
+            string URL = uiLicenceID.GetAttribute("href");
+
+            // retrieve the licence ID
+            string[] parsedURL = URL.Split('/');
+
+            licenceID = parsedURL[5];
+
+            ngDriver.IgnoreSynchronization = true;
+
+            // navigate to api/Licenses/<Licence ID>/setexpiry
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
+
+            // wait for the automated expiry process to run
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
+
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        }
+
+
+        [And(@"the expiry date is changed to 60 days from today")]
+        public void ExpiryDate60DaysFuture()
+        {
+            string transferLicence = "Transfer Licence";
+
+            // find the Transfer Licence link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(transferLicence));
+            string URL = uiLicenceID.GetAttribute("href");
+
+            // retrieve the licence ID
+            string[] parsedURL = URL.Split('/');
+
+            licenceID = parsedURL[5];
+
+            ngDriver.IgnoreSynchronization = true;
+
+            // navigate to api/Licenses/<Licence ID>/setexpiry
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
+
+            // wait for the automated expiry process to run
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
+
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        }
+
+
+        [And(@"the expiry date is changed to 30 days from today")]
+        public void ExpiryDate30DaysFuture()
+        {
+            string transferLicence = "Transfer Licence";
+
+            // find the Transfer Licence link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(transferLicence));
+            string URL = uiLicenceID.GetAttribute("href");
+
+            // retrieve the licence ID
+            string[] parsedURL = URL.Split('/');
+
+            licenceID = parsedURL[5];
+
+            ngDriver.IgnoreSynchronization = true;
+
+            // navigate to api/Licenses/<Licence ID>/setexpiry
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
+
+            // wait for the automated expiry process to run
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
+
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        }
+
+
+        [And(@"the expiry date is changed to 45 days ago")]
+        public void ExpiryDate45DaysPast()
+        {
+            string transferLicence = "Transfer Licence";
+
+            // find the Transfer Licence link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(transferLicence));
+            string URL = uiLicenceID.GetAttribute("href");
+
+            // retrieve the licence ID
+            string[] parsedURL = URL.Split('/');
+
+            licenceID = parsedURL[5];
+
+            ngDriver.IgnoreSynchronization = true;
+
+            // navigate to api/Licenses/<Licence ID>/setexpiry
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
+
+            // wait for the automated expiry process to run
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
+
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        }
+
+
         [And(@"I show the store as open on the map")]
         public void ShowStoreOpenOnMap()
         {
