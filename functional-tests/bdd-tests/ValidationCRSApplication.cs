@@ -77,7 +77,7 @@ Scenario: Validation for CRS Licence Renewal
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Cannabis
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
     And I do not complete the licence renewal application correctly
     And the expected validation errors are thrown for a licence renewal application
