@@ -268,12 +268,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Set expiry for a given licence to today.  Only useful for automated testing.
+        /// Set expiry for a given licence to different dates as specified by workflow GUIDs.  Only useful for automated testing.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}/setexpiry")]
-        public async Task<IActionResult> SetExpiry(string id)
+        [HttpGet("{workflowGUID}/setexpiry/{licenceID}")]
+        public async Task<IActionResult> SetExpiry(string workflowGUID, string licenceID)
         {
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
@@ -291,7 +291,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     // this needs to be the guid for the published workflow.
-                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("26e7e116-dace-426a-a798-e9134d913f19", id);
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync(workflowGUID, licenceID);
                     return Ok("OK");
                 }
                 catch (HttpOperationException httpOperationException)
