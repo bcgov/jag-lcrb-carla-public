@@ -482,36 +482,36 @@ namespace bdd_tests
             }
 
             // confirm event start hour
-            // NgWebElement uiEventStartHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] .ngb-tp-hour [type='button'] span.bottom"));
-            // Assert.True(uiEventStartHour.GetAttribute("value") == "07");
+            NgWebElement uiEventStartHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] input[aria-label='Hours']"));
+            Assert.True(uiEventStartHour.GetAttribute("value") == "07");
 
             // confirm event start minute
-            // NgWebElement uiEventStartMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] .ngb-tp-minute span.ngb-tp-chevron.bottom"));
-            // Assert.True(uiEventStartMinute.GetAttribute("value") == "59");
+            NgWebElement uiEventStartMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] input[aria-label='Minutes']"));
+            Assert.True(uiEventStartMinute.GetAttribute("value") == "59");
 
             // confirm event end hour
-            // NgWebElement uiEventEndHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] .ngb-tp-hour [type='button'] span.bottom"));
-            // Assert.True(uiEventEndHour.GetAttribute("value") == "09");
+            NgWebElement uiEventEndHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Hours']"));
+            Assert.True(uiEventEndHour.GetAttribute("value") == "09");
 
             // confirm event end minute
-            // NgWebElement uiEventEndMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] .ngb-tp-minute [type='button'] span.bottom"));
-            // Assert.True(uiEventEndMinute.GetAttribute("value") == "59");
+            NgWebElement uiEventEndMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Minutes']"));
+            Assert.True(uiEventEndMinute.GetAttribute("value") == "59");
 
             // confirm liquor sale start hour
-            // NgWebElement uiLiquorStartHour = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(4) .ngb-tp-hour .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
-            // Assert.True(uiLiquorStartHour.GetAttribute("value") == "10");
+            NgWebElement uiLiquorStartHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorStartTime'] input[aria-label='Hours']"));
+            Assert.True(uiLiquorStartHour.GetAttribute("value") == "10");
 
             // confirm liquor sale start minute
-            // NgWebElement uiLiquorStartMinute = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(4) .ngb-tp-minute .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
-            // Assert.True(uiLiquorStartMinute.GetAttribute("value") == "01");
+            NgWebElement uiLiquorStartMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorStartTime'] input[aria-label='Minutes']"));
+            Assert.True(uiLiquorStartMinute.GetAttribute("value") == "01");
 
             // confirm liquor sale end hour
-            // NgWebElement uiLiquorEndHour1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] .ngb-tp-hour span.bottom"));
-            // Assert.True(uiLiquorEndHour1.GetAttribute("value") == "08");
+            NgWebElement uiLiquorEndHour1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Hours']"));
+            Assert.True(uiLiquorEndHour1.GetAttribute("value") == "08");
 
             // confirm liquor sale end minute
-            // NgWebElement uiLiquorEndMinute1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] .ngb-tp-minute span.bottom"));
-            // Assert.True(uiLiquorEndMinute1.GetAttribute("value") == "58");
+            NgWebElement uiLiquorEndMinute1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Minutes']"));
+            Assert.True(uiLiquorEndMinute1.GetAttribute("value") == "58");
 
             // confirm serving it right/minors checkbox is selected
             NgWebElement uiServingItRight = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAllStaffServingitRight']"));
