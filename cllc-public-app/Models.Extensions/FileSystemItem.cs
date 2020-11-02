@@ -15,7 +15,7 @@
                 int pos = value.IndexOf(NameDocumentTypeSeparator);
                 if (pos > -1)
                 {
-                    result = value.Substring(pos + 1);
+                    result = value.Substring(pos + 2);
                 }
             }
             return result;
