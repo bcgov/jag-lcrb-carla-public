@@ -378,7 +378,7 @@ namespace bdd_tests
             Assert.True(uiLiquorStartTimeMinutes.GetAttribute("value") == "00");
 
             NgWebElement uiLiquorCloseTimeHours = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Hours']"));
-            Assert.True(uiLiquorCloseTimeHours.GetAttribute("value") == "09");
+            Assert.True(uiLiquorCloseTimeHours.GetAttribute("value") == "02");
 
             NgWebElement uiLiquorCloseTimeMinutes = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Minutes']"));
             Assert.True(uiLiquorCloseTimeMinutes.GetAttribute("value") == "00");
