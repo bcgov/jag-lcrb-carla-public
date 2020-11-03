@@ -14,26 +14,15 @@ RUN pushd /opt \
 	&& INSTALL_PKGS="openssh-clients xorg-x11-fonts-Type1 libpng libpng-devel libjpeg-turbo libjpeg-turbo-devel openssl libX11 libXext libXrender xorg-x11-fonts-Type1 fontconfig psmisc" \
     && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream install -y $INSTALL_PKGS \
     && rpm -V $INSTALL_PKGS \
-	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \	
-	&& yum -y install http://mirror.centos.org/altarch/7/os/aarch64/Packages/openssl-libs-1.0.2k-19.el7.aarch64.rpm \
-	&& yum -y install http://mirror.centos.org/centos/7/os/x86_64/Packages/qt-settings-19-23.10.el7.centos.noarch.rpm \
-	&& yum -y install http://mirror.centos.org/centos/7/os/x86_64/Packages/qt-4.8.7-8.el7.x86_64.rpm \
-	&& yum -y install http://mirror.centos.org/centos/7/os/x86_64/Packages/qt-devel-4.8.7-8.el7.x86_64.rpm \	
-	&& mkdir /usr/bin/Linux \
-	&& echo $'#!/usr/bin/env sh\n\
-Xvfb :0 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset & \	
-DISPLAY=:0.0 /usr/bin/wkhtmltopdf --zoom 1.3 $@ \n\
-' > /usr/bin/Linux/wkhtmltopdf \
-    && chmod +x /usr/bin/Linux/wkhtmltopdf \
-	&& curl -L https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos7.x86_64.rpm -o wkhtmltox.rpm \
-    && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y localinstall wkhtmltox.rpm \
+	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \	
+    && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream --enablerepo=ubi-8-baseos -y localinstall https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos7.x86_64.rpm \
 	&& rm wkhtmltox.rpm \
 	&& mkdir /usr/local/bin/Linux \
 	&& echo $'#!/usr/bin/env sh\n\
 /usr/local/bin/wkhtmltopdf --zoom 1.3 $@ \n\
 ' > /usr/local/bin/Linux/wkhtmltopdf \
     && chmod +x /usr/local/bin/Linux/wkhtmltopdf \	
-	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream  clean all -y \
+	&& yum clean all -y \
 	&& rm -R /opt/app-root/.pki \
     && popd
 	
