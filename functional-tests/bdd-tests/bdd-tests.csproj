@@ -44,6 +44,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="OnSiteEndorsementRenewal.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="UBrewUVinLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
