@@ -1,4 +1,4 @@
-FROM openshift3/jenkins-slave-base-rhel7
+FROM openshift3/ose-jenkins-agent-base
 
 # Labels consumed by Red Hat build service
 LABEL com.redhat.component="rh-dotnet31-jenkins-slave-container" \
@@ -23,9 +23,9 @@ ENV DOTNET_CORE_VERSION=3.1 \
 COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 
 # Install
-RUN INSTALL_PKGS="rh-dotnet31 rh-nodejs10-npm rh-nodejs10-nodejs-nodemon rh-dotnet31-dotnet-sdk-3.1 " && \
+RUN INSTALL_PKGS="dotnet-sdk-3.1  nodejs-10.19 npm-6.14.4" && \
     yum install -y --setopt=tsflags=nodocs --disablerepo=\* \
-      --enablerepo=rhel-7-server-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-dotnet-rpms,rhel-7-server-optional-rpms \
+      --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder \
       $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y && \
@@ -44,11 +44,10 @@ RUN yum -y install wget nano xorg-x11-xauth java-1.8.0-openjdk git rh-nodejs10-n
 	wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm && \
 	yum -y localinstall epel-release-latest-7.noarch.rpm && \
-	yum --enablerepo=rhel-7-server-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-dotnet-rpms,rhel-7-server-optional-rpms -y localinstall google-chrome-stable_current_x86_64.rpm && \
+	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y localinstall google-chrome-stable_current_x86_64.rpm && \
 	rm google-chrome-stable_current_x86_64.rpm && \
 	yum clean all -y && \
-    rm -rf /var/cache/yum/* && \
-    scl enable rh-nodejs10 bash
+    rm -rf /var/cache/yum/* 
 
 RUN echo ${PATH}
 
