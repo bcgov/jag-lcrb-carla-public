@@ -35,7 +35,8 @@ Given I am logged in to the dashboard as a private corporation
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I click on the Dashboard tab
-    And I pay the on-site endorsement first year licensing fee
+    And I click on the link for Pay First Year Fee
+    And I enter the payment information
     And I click on the Licences tab
     And the expiry date is set to yesterday
     And I renew the licence with negative responses for a winery
