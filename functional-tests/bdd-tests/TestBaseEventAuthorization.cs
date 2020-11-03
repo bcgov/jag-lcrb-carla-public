@@ -297,9 +297,9 @@ namespace bdd_tests
             NgWebElement uiEventContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
             Assert.True(uiEventContactPhone.GetAttribute("value") == eventContactPhone);
 
-            // check community event type selected
+            // check corporate event type selected
             NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType']"));
-            Assert.True(uiEventType.GetAttribute("value") == "1: 845280001");
+            Assert.True(uiEventType.GetAttribute("value") == "2: 845280002");
 
             // check event description
             NgWebElement uiEventDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='eventTypeDescription']"));
@@ -333,9 +333,9 @@ namespace bdd_tests
             NgWebElement uiVenueNameDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
             Assert.True(uiVenueNameDescription.GetAttribute("value") == venueNameDescription);
 
-            // check venue location
+            // check venue location - indoors
             NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation']"));
-            Assert.True(uiVenueLocation.GetAttribute("value") == "1: 845280001");
+            Assert.True(uiVenueLocation.GetAttribute("value") == "0: 845280000");
 
             // check venue additional info
             NgWebElement uiVenueAdditionalInfo = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
