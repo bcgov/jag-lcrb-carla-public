@@ -521,7 +521,7 @@ namespace bdd_tests
             NgWebElement uiSampleSizes = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isSampleSizeCompliant']"));
             Assert.Contains("mat-checkbox-checked", uiSampleSizes.GetAttribute("class"));
 
-            if ((frequency != "a one time event saved for later") && (frequency != "a weekly event saved for later") && (frequency != "a bi-weekly event saved for later") && (frequency != "a monthly event saved for later"))
+            if ((frequency == "a one day event") || (frequency == "a weekly event") || (frequency == "a bi-weekly event") || (frequency == "a monthly event"))
             {
                 // confirm agreement checkbox is selected
                 NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
