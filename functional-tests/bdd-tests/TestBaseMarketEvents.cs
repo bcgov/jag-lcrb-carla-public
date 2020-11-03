@@ -527,6 +527,9 @@ namespace bdd_tests
                 NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
                 Assert.Contains("mat-checkbox-checked", uiAgreement.GetAttribute("class"));
             }
+
+            // confirm that LCSD-4211 error is no longer happening
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Please enter the start date'))]")).Displayed);
         }
 
 

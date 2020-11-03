@@ -297,8 +297,9 @@ namespace bdd_tests
             NgWebElement uiEventContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
             Assert.True(uiEventContactPhone.GetAttribute("value") == eventContactPhone);
 
-            // check community event type selected - TODO
-            NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType'] [value='1: 845280001']"));
+            // check community event type selected
+            NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType']"));
+            Assert.True(uiEventType.GetAttribute("value") == "1: 845280001");
 
             // check event description
             NgWebElement uiEventDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='eventTypeDescription']"));
@@ -320,18 +321,21 @@ namespace bdd_tests
             NgWebElement uiMinorsAttending = ngDriver.FindElement(By.CssSelector("[formcontrolname='minorsAttending'] option[value='true']"));
             Assert.True(uiMinorsAttending.Selected);
 
-            // check type of food service provided - TODO
-            NgWebElement uiFoodServiceProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='foodService'] option[value='0: 845280000']"));
+            // check type of food service provided
+            NgWebElement uiFoodServiceProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='foodService']"));
+            Assert.True(uiFoodServiceProvided.GetAttribute("value") == "0: 845280000");
 
-            // check type of entertainment provided - TODO
-            NgWebElement uiEntertainmentProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='entertainment'] option[value='1: 845280001']"));
+            // check type of entertainment provided
+            NgWebElement uiEntertainmentProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='entertainment']"));
+            Assert.True(uiEntertainmentProvided.GetAttribute("value") == "1: 845280001");
 
             // check venue name description
             NgWebElement uiVenueNameDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
             Assert.True(uiVenueNameDescription.GetAttribute("value") == venueNameDescription);
 
-            // check venue location - TODO
-            NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation'] option[value='1: 845280001']"));
+            // check venue location
+            NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation']"));
+            Assert.True(uiVenueLocation.GetAttribute("value") == "1: 845280001");
 
             // check venue additional info
             NgWebElement uiVenueAdditionalInfo = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
