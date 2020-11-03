@@ -26,7 +26,7 @@ Scenario: Private Corporation CRS Release
     And I show the store as open on the map
     And I review the federal reports
     And I click on the Licences tab
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for Cannabis
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
@@ -34,11 +34,11 @@ Scenario: Private Corporation CRS Release
     And I confirm that the director name has been updated
     And I click on the Licences tab
     And I request a store relocation for Cannabis
-    And I request a structural change
+    # And I request a structural change
     And I request a transfer of ownership
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    # And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -66,7 +66,7 @@ Scenario: Sole Proprietorship CRS Release
     And I show the store as open on the map
     And I review the federal reports
     And I click on the Licences tab
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for Cannabis
     And I click on the link for Dashboard
     And I request a personnel name change for a sole proprietorship
@@ -74,10 +74,10 @@ Scenario: Sole Proprietorship CRS Release
     And I confirm that the director name has been updated
     And I click on the Licences tab
     And I request a store relocation for Cannabis
-    And I request a structural change
+    # And I request a structural change
     And I request a transfer of ownership
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    # And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
