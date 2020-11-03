@@ -4,6 +4,7 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Gov.Lclb.Cllb.Public.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -19,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -33,9 +35,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IPdfService _pdfClient;
         private readonly IWebHostEnvironment _env;
         private readonly ILogger _logger;
+        private readonly FileManagerClient _fileManagerClient;
 
         public LicensesController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor,
-            IPdfService pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache, IWebHostEnvironment env)
+            IPdfService pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache, IWebHostEnvironment env, FileManagerClient fileClient)
         {
             _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
@@ -43,6 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _pdfClient = pdfClient;
             _logger = loggerFactory.CreateLogger(typeof(LicensesController));
             _env = env;
+            _fileManagerClient = fileClient;
         }
 
         /// GET licence by id
@@ -264,12 +268,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Set expiry for a given licence to today.  Only useful for automated testing.
+        /// Set expiry for a given licence to different dates as specified by workflow GUIDs.  Only useful for automated testing.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}/setexpiry")]
-        public async Task<IActionResult> SetExpiry(string id)
+        [HttpGet("{workflowGUID}/setexpiry/{licenceID}")]
+        public async Task<IActionResult> SetExpiry(string workflowGUID, string licenceID)
         {
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
@@ -287,7 +291,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     // this needs to be the guid for the published workflow.
-                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("26e7e116-dace-426a-a798-e9134d913f19", id);
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync(workflowGUID, licenceID);
                     return Ok("OK");
                 }
                 catch (HttpOperationException httpOperationException)
@@ -488,16 +492,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_LicenceSubCategoryId"
             };
 
+            // grab the licence record
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(licenceId, expand: expand);
             if (adoxioLicense == null)
             {
+                // exit if we don't find one
                 throw new Exception("Error getting license.");
             }
             else
             {
-                // START WITH BLANK FIELDS.
+                // create a blank application
                 MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication();
 
+                // copy some standard values
                 application.CopyValuesForChangeOfLocation(adoxioLicense, applicationTypeName != "CRS Location Change");
 
                 // get the previous application for the licence.
@@ -515,7 +522,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
                 }
 
-                // set the licence subtype.
+                // set the licence subtype if we have one
 
                 if (adoxioLicense.AdoxioLicenceSubCategoryId != null)
                 {
@@ -524,29 +531,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             adoxioLicense.AdoxioLicenceSubCategoryId.AdoxioLicencesubcategoryid);
                 }
 
+                // set the applicant
                 application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
+                // if the licence has an establishment (from CopyValuesForChangeOfLocation)
                 if (adoxioLicense.AdoxioEstablishment != null)
                 {
                     application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
                 }
-                
+
                 try
                 {
+                    // try finding a licence application
                     var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue)).FirstOrDefault();
-                    string lginvalue;
+                    string lginvalue = "";
 
-
+                    // if we don't find it
                     if (licenceApp == null)
                     {
+                        // check if there is a LGIN value on the Licence Record
                         if (adoxioLicense?._adoxioLginValue != null)
                         {
                             lginvalue = adoxioLicense?._adoxioLginValue;
                         }
+                        // otherwise check if there is an LGIN value on the Establishment
                         else
                         {
-                            lginvalue = adoxioLicense?.AdoxioEstablishment._adoxioLginValue;
+                            if (adoxioLicense?.AdoxioEstablishment != null)
+                            {
+                                lginvalue = adoxioLicense?.AdoxioEstablishment._adoxioLginValue;
+                            }
                         }
+                        // note there will be no LGIN for Marketers or Agent, but we initialized to an empty string so we're all good
                     }
                     else
                     {
@@ -554,18 +570,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     }
 
+                    // if we found an LGIN value
                     if (!string.IsNullOrEmpty(lginvalue))
                     {
+                        // set the value on the application
                         application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", lginvalue);
                     }
 
+                    // look for a Police Jurisdiction value on the licence application
                     licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioPolicejurisdictionidValue)).FirstOrDefault();
-                    // Police Jurisdiction association
+                    // if we find one
                     if (!string.IsNullOrEmpty(licenceApp?._adoxioPolicejurisdictionidValue))
                     {
+                        // update the application with that value
                         application.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", licenceApp?._adoxioPolicejurisdictionidValue);
                     }
-
+                    // create the application with the data we've brought over
                     application = _dynamicsClient.Applications.Create(application);
                 }
                 catch (HttpOperationException httpOperationException)
@@ -586,8 +606,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 // copy service areas from licence
-                /*  TG- Removing for now; will result in service areas being copied across endorsement types. 
-                    
+                /*  TG- Removing for now; will result in service areas being copied across endorsement types.
+
                 try
                 {
                     string filter = $"_adoxio_licenceid_value eq {licenceId}";
@@ -927,17 +947,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayclose)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayclose)}</td>
                             </tr></table>";
-            } {
-                // to do: log when we expect to find hours of sale, but don't
-                // wine stores, ubrew, lrs.
-            }
+                }
+                else
+                {
+                    // to do: log when we expect to find hours of sale, but don't
+                    // wine stores, ubrew, lrs.
+                }
 
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
                 if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
                 {
                     parameters = new Dictionary<string, string>
                     {
-                        { "title", "Canabis_License" },
+                        { "title", "Cannabis_Licence" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
                         { "establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName },
                         { "establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet },
@@ -956,7 +978,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     parameters = new Dictionary<string, string>
                     {
-                        { "title", "Canabis_License" },
+                        { "title", "Cannabis_Licence" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
                         { "establishmentName", adoxioLicense.AdoxioLicencee?.Name  },
                         { "establishmentStreet", adoxioLicense.AdoxioLicencee?.Address1Line1 },
@@ -975,8 +997,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else // handle other types such as catering
                 {
                     String typeLabel = adoxioLicense?.AdoxioLicenceSubCategoryId?.AdoxioName != null ? adoxioLicense.AdoxioLicenceSubCategoryId?.AdoxioName : adoxioLicense.AdoxioLicenceType?.AdoxioName;
-                    
-                   // adoxioLicense.AdoxioLicenceType?.AdoxioName
+
+                    // adoxioLicense.AdoxioLicenceType?.AdoxioName
 
                     //adoxioLicense.AdoxioLicenceSubCategoryId?
 
@@ -997,13 +1019,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "endorsementsText", endorsementsText },
                         { "storeHours", storeHours },
                         { "printDate", DateTime.Today.ToString("MMMM dd, yyyy")} // will be based on the users machine
-                    };;
+                    };
                 }
                 try
                 {
                     var templateName = "cannabis_licence";
-
-
 
                     switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
                     {
@@ -1041,6 +1061,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     byte[] data = await _pdfClient.GetPdf(parameters, templateName);
+
+                    // Save copy of generated licence PDF for auditing/logging purposes
+                    try
+                    {
+                        var hash = await _pdfClient.GetPdfHash(parameters, templateName);
+                        var entityName = "licence";
+                        var entityId = adoxioLicense.AdoxioLicencesid;
+                        var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+                        var documentType = "Licence";
+                        _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error uploading PDF");
+                    }
+
                     return File(data, "application/pdf", $"{adoxioLicense.AdoxioLicencenumber}.pdf");
                 }
                 catch (Exception e)

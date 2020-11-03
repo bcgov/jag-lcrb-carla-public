@@ -218,9 +218,10 @@
     And the account is deleted
     Then I see the login page
 
-#-----------------------
+#-------------------------------------------------
 # Bi-Weekly Market Event
-#-----------------------
+# Note that 'bi-weekly' refers to twice per month
+#-------------------------------------------------
 
  @e2e @privatecorporation @marketeventbiweekly @winery
  Scenario: Private Corporation Winery Bi-Weekly Market Event
@@ -459,7 +460,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a one day event
     And the account is deleted
     Then I see the login page
@@ -485,7 +486,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a one day event    
     And the account is deleted
     Then I see the login page
@@ -511,7 +512,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a one day event
     And the account is deleted
     Then I see the login page
@@ -537,7 +538,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a one day event
     And the account is deleted
     Then I see the login page
@@ -567,7 +568,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -593,7 +594,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -619,7 +620,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -645,7 +646,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -675,7 +676,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a bi-weekly event
     And the account is deleted
     Then I see the login page
@@ -701,7 +702,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a bi-weekly event
     And the account is deleted
     Then I see the login page
@@ -727,7 +728,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a bi-weekly event
     And the account is deleted
     Then I see the login page
@@ -753,7 +754,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a bi-weekly event    
     And the account is deleted
     Then I see the login page
@@ -783,7 +784,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page
@@ -809,7 +810,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page
@@ -835,7 +836,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page
@@ -861,7 +862,7 @@
     And I click on the market event save for later button
     And I click on the Licences tab
     And I click on the event history for markets
-    And I click on the link for Approved
+    And I click on the link for Draft
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page
