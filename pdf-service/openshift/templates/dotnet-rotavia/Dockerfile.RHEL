@@ -22,7 +22,6 @@ RUN pushd /opt \
 ' > /usr/local/bin/Linux/wkhtmltopdf \
     && chmod +x /usr/local/bin/Linux/wkhtmltopdf \	
 	&& yum clean all -y \
-	&& rm -R /opt/app-root/.pki \
     && popd
 	
 USER 1001
