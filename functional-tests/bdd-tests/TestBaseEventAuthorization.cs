@@ -297,9 +297,9 @@ namespace bdd_tests
             NgWebElement uiEventContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
             Assert.True(uiEventContactPhone.GetAttribute("value") == eventContactPhone);
 
-            // check community event type selected
+            // check corporate event type selected
             NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType']"));
-            Assert.True(uiEventType.GetAttribute("value") == "1: 845280001");
+            Assert.True(uiEventType.GetAttribute("value") == "2: 845280002");
 
             // check event description
             NgWebElement uiEventDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='eventTypeDescription']"));
@@ -333,9 +333,9 @@ namespace bdd_tests
             NgWebElement uiVenueNameDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
             Assert.True(uiVenueNameDescription.GetAttribute("value") == venueNameDescription);
 
-            // check venue location
+            // check venue location - indoors
             NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation']"));
-            Assert.True(uiVenueLocation.GetAttribute("value") == "1: 845280001");
+            Assert.True(uiVenueLocation.GetAttribute("value") == "0: 845280000");
 
             // check venue additional info
             NgWebElement uiVenueAdditionalInfo = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
@@ -357,19 +357,31 @@ namespace bdd_tests
             NgWebElement uiPhysicalAddPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='postalCode']"));
             Assert.True(uiPhysicalAddPostalCode.GetAttribute("value") == physicalAddPostalCode);
 
-            // check event end time after 2am          
+            // check event start and end times     
+            NgWebElement uiEventStartTimeHours = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] input[aria-label='Hours']"));
+            Assert.True(uiEventStartTimeHours.GetAttribute("value") == "09");
+
+            NgWebElement uiEventStartTimeMinutes = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] input[aria-label='Minutes']"));
+            Assert.True(uiEventStartTimeMinutes.GetAttribute("value") == "00");
+
             NgWebElement uiEventCloseTimeHours = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Hours']"));
             Assert.True(uiEventCloseTimeHours.GetAttribute("value") == "02");
 
             NgWebElement uiEventCloseTimeMinutes = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Minutes']"));
-            Assert.True(uiEventCloseTimeMinutes.GetAttribute("value") == "01");
+            Assert.True(uiEventCloseTimeMinutes.GetAttribute("value") == "00");
 
-            // check liquor end time after 2am         
+            // check liquor start and end times 
+            NgWebElement uiLiquorStartTimeHours = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorStartTime'] input[aria-label='Hours']"));
+            Assert.True(uiLiquorStartTimeHours.GetAttribute("value") == "09");
+
+            NgWebElement uiLiquorStartTimeMinutes = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorStartTime'] input[aria-label='Minutes']"));
+            Assert.True(uiLiquorStartTimeMinutes.GetAttribute("value") == "00");
+
             NgWebElement uiLiquorCloseTimeHours = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Hours']"));
             Assert.True(uiLiquorCloseTimeHours.GetAttribute("value") == "02");
 
             NgWebElement uiLiquorCloseTimeMinutes = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Minutes']"));
-            Assert.True(uiLiquorCloseTimeMinutes.GetAttribute("value") == "01");
+            Assert.True(uiLiquorCloseTimeMinutes.GetAttribute("value") == "00");
         }
 
 
