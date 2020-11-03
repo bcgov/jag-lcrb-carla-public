@@ -19,7 +19,7 @@ Scenario: Private Corporation Manufacturer Release
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Manufacturing
     And I click on the Licences tab
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a winery
     And I click on the Licences tab
     And I request a facility structural change
@@ -57,7 +57,7 @@ Scenario: Sole Proprietorship Manufacturer Release
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Manufacturing
     And I click on the Licences tab
-    And the expiry date is changed to today
+    And the expiry date is changed using the workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I renew the licence with positive responses for a winery
     And I click on the Licences tab
     And I request a facility structural change
@@ -73,6 +73,7 @@ Scenario: Sole Proprietorship Manufacturer Release
     And I request a special event area endorsement
     And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
+    And I click on the Licences tab
     And I request a third party operator
     And I request a transfer of ownership
     And the account is deleted
