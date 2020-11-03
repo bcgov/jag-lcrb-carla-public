@@ -44,6 +44,9 @@ RUN yum -y install --disableplugin=subscription-manager --enablerepo=ubi-8-appst
 	wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm && \
 	yum -y localinstall epel-release-latest-7.noarch.rpm && \
+	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y https://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/xdg-utils-1.1.2-5.el8.noarch.rpm && \
+	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y https://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/vulkan-loader-1.2.148.0-1.el8.i686.rpm && \
+	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y https://rpmfind.net/linux/centos/8-stream/BaseOS/x86_64/os/Packages/liberation-fonts-2.00.3-7.el8.noarch.rpm && \
 	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y localinstall google-chrome-stable_current_x86_64.rpm && \
 	rm google-chrome-stable_current_x86_64.rpm && \
 	yum clean all -y && \
