@@ -214,6 +214,7 @@ import { ProofOfZoningComponent } from './components/applications/application/ta
 import { ProductionStagesComponent } from './components/applications/application/tabs/business-plan/production-stages/production-stages.component';
 import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
 import { PermanentChangesToALicenseeComponent } from './components/applications/permanent-changes-to-a-licensee/permanent-changes-to-a-licensee.component';
+import { LegalEntityTypeUpdateCalloutboxComponent } from './components/dashboard/legal-entity-type-update-calloutbox/legal-entity-type-update-calloutbox.component';
 
 @NgModule({
   declarations: [
@@ -339,7 +340,8 @@ import { PermanentChangesToALicenseeComponent } from './components/applications/
     LgZoningConfirmationComponent,
     ProductionStagesComponent,
     PhsConfirmationComponent,
-    PermanentChangesToALicenseeComponent
+    PermanentChangesToALicenseeComponent,
+    LegalEntityTypeUpdateCalloutboxComponent
   ],
   imports: [
     ChartsModule,
