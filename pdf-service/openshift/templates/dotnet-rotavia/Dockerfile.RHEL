@@ -14,8 +14,7 @@ RUN pushd /opt \
 	&& INSTALL_PKGS="openssh-clients xorg-x11-fonts-Type1 libpng libpng-devel libjpeg-turbo libjpeg-turbo-devel openssl libX11 libXext libXrender xorg-x11-fonts-Type1 fontconfig psmisc" \
     && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream install -y $INSTALL_PKGS \
     && rpm -V $INSTALL_PKGS \
-	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
-	&& rpm -V xorg-x11-server-Xvfb \ 
+	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \	
 	&& yum install -y wkhtmltopdf \
 	&& mkdir /usr/bin/Linux \
 	&& echo $'#!/usr/bin/env sh\n\
