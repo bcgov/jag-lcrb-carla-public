@@ -15,7 +15,7 @@ using Xunit;
 /*
 Feature: OnSiteEndorsementRenewal
     As a logged in business user
-    I want to renew a licence with an on-site endorsement
+    I want to renew a licence that expired yesterday and has an on-site endorsement
 
 @e2e @onsiteendorsement @renewal 
 Scenario: Winery On-Site Endorsement Licence Renewal
@@ -38,8 +38,86 @@ Given I am logged in to the dashboard as a private corporation
     And I click on the link for Pay First Year Fee
     And I enter the payment information
     And I click on the Licences tab
-    And the expiry date is set to yesterday
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for a winery
+    And the account is deleted
+    Then I see the login page
+
+@e2e @onsiteendorsement @renewal 
+Scenario: Brewery On-Site Endorsement Licence Renewal
+Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the button for Submit Organization Information
+    And I complete the Manufacturer application for a brewery
+    And I click on the button for Pay for Application
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee for a Manufacturer application
+    And I request an on-site store endorsement
+    And I click on the Licences tab
+    And the on-site endorsement application is approved
+    And I click on the Dashboard tab
+    And I click on the link for Pay First Year Fee
+    And I enter the payment information
+    And I click on the Licences tab
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
+    And I renew the licence with negative responses for a brewery
+    And the account is deleted
+    Then I see the login page
+
+@e2e @onsiteendorsement @renewal 
+Scenario: Distillery On-Site Endorsement Licence Renewal
+Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the button for Submit Organization Information
+    And I complete the Manufacturer application for a distillery
+    And I click on the button for Pay for Application
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee for a Manufacturer application
+    And I request an on-site store endorsement
+    And I click on the Licences tab
+    And the on-site endorsement application is approved
+    And I click on the Dashboard tab
+    And I click on the link for Pay First Year Fee
+    And I enter the payment information
+    And I click on the Licences tab
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
+    And I renew the licence with negative responses for a distillery
+    And the account is deleted
+    Then I see the login page
+
+@e2e @onsiteendorsement @renewal 
+Scenario: Co-packer On-Site Endorsement Licence Renewal
+Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the button for Submit Organization Information
+    And I complete the Manufacturer application for a co-packer
+    And I click on the button for Pay for Application
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee for a Manufacturer application
+    And I request an on-site store endorsement
+    And I click on the Licences tab
+    And the on-site endorsement application is approved
+    And I click on the Dashboard tab
+    And I click on the link for Pay First Year Fee
+    And I enter the payment information
+    And I click on the Licences tab
+    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
+    And I renew the licence with negative responses for a co-packer
     And the account is deleted
     Then I see the login page
 */
