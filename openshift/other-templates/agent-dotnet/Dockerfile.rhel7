@@ -23,7 +23,7 @@ ENV DOTNET_CORE_VERSION=3.1 \
 COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 
 # Install
-RUN INSTALL_PKGS="dotnet-sdk-3.1  nodejs-10.19 npm-6.14.4" && \
+RUN INSTALL_PKGS="dotnet-sdk-3.1.x86_64 nodejs.x86_64 nodejs-devel.x86_64 npm.x86_64" && \
     yum install -y --setopt=tsflags=nodocs --disablerepo=\* \
       --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder \
       $INSTALL_PKGS && \
