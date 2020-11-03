@@ -476,8 +476,8 @@ namespace bdd_tests
                     Assert.Contains("mat-checkbox-checked", uiSaturday3.GetAttribute("class"));
 
                     // confirm selected week of the month
-                    NgWebElement uiWeekOfMonth4 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-5-input']"));
-                    Assert.True(uiWeekOfMonth4.GetAttribute("value") == "");
+                    NgWebElement uiWeekOfMonth4 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] mat-radio-button#mat-radio-5"));
+                    Assert.Contains("mat-radio-checked", uiWeekOfMonth4.GetAttribute("class"));
                 }
             }
 
