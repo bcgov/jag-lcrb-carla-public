@@ -15,7 +15,7 @@ RUN pushd /opt \
     && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream install -y $INSTALL_PKGS \
     && rpm -V $INSTALL_PKGS \
 	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \	
-	&& yum install -y wkhtmltopdf \
+	&& yum --enablerepo=ubi-8-appstream install -y wkhtmltopdf \
 	&& mkdir /usr/bin/Linux \
 	&& echo $'#!/usr/bin/env sh\n\
 Xvfb :0 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset & \	
