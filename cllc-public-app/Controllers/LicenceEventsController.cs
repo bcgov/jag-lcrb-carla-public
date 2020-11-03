@@ -452,7 +452,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         var entityName = "event";
                         var entityId = eventId;
                         var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
-                        var documentType = "Event Authorization Letter";
+                        var documentType = "EventAuthorization";
                         _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
                     }
                     catch (Exception e)

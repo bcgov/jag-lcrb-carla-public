@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static string GetDocumentFolderName(this MicrosoftDynamicsCRMadoxioEvent eventEntity)
         {
             string entityIdCleaned = CleanGuidForSharePoint(eventEntity.AdoxioEventid);
-            string folderName = $"event_{entityIdCleaned}";
+            string folderName = $"{eventEntity.AdoxioName}_{entityIdCleaned}";
             return folderName;
         }
 
