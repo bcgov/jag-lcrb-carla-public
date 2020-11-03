@@ -52,6 +52,7 @@ import { TerminateTPORelationshipComponent } from '@components/applications/term
 import { LgApprovalsComponent } from '@components/lg-approvals/lg-approvals.component';
 import { LicenceRepresentativeFormComponent } from '@components/licence-representative-form/licence-representative-form.component';
 import { MarketEventComponent } from '@components/market-event/market-event.component';
+import { PermanentChangesToALicenseeComponent } from '@components/applications/permanent-changes-to-a-licensee/permanent-changes-to-a-licensee.component';
 
 
 const routes: Routes = [
@@ -173,6 +174,11 @@ const routes: Routes = [
   {
     path: 'renew-licence/:licenceType/:applicationId',
     component: LicenceRenewalStepsComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'permanent-changes-to-a-licensee/:applicationId',
+    component: PermanentChangesToALicenseeComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
