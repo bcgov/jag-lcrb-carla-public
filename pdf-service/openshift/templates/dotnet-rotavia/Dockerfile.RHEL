@@ -5,14 +5,16 @@ FROM dotnet-31:latest
 USER 0
 
 # Install packages
+#	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install xorg-x11-fonts* xorg-x11-xinit xorg-x11-xinit-session xorg-x11-server-Xvfb xorg-x11-twm xorg-x11-font dejavu-sans-fonts dejavu-serif-fonts xdotool  \
+
+
 
 RUN pushd /opt \
 
-	&& INSTALL_PKGS="xorg-x11-fonts-75dpi openssh-clients xorg-x11-fonts-Type1 libpng libpng-devel libjpeg-turbo libjpeg-turbo-devel openssl libX11 libXext libXrender xorg-x11-fonts-Type1 xorg-x11-fonts-75dpi fontconfig psmisc" \
+	&& INSTALL_PKGS="xorg-x11-fonts-75dpi openssh-clients xorg-x11-fonts-Type1 libpng libpng-devel libjpeg-turbo libjpeg-turbo-devel openssl libX11 libXext libXrender xorg-x11-fonts-Type1 fontconfig psmisc" \
     && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream install -y $INSTALL_PKGS \
     && rpm -V $INSTALL_PKGS \
 	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
-	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install xorg-x11-fonts* xorg-x11-xinit xorg-x11-xinit-session xorg-x11-server-Xvfb xorg-x11-twm xorg-x11-font dejavu-sans-fonts dejavu-serif-fonts xdotool --enablerepo=rhel-7-server-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-dotnet-rpms,rhel-7-server-optional-rpms \
 	&& rpm -V xorg-x11-server-Xvfb \ 
 	&& yum install -y wkhtmltopdf \
 	&& mkdir /usr/bin/Linux \
