@@ -31,7 +31,8 @@ RUN chmod g+rw /var/cache/nginx \
                /var/log/nginx \
                /etc/nginx/nginx.conf 
 
-RUN chmod a+rw /tmp
+RUN mkdir -p /tmp/app/dist/ \
+    && chmod a+rw /tmp
 
 			   
 # =================================================================================
