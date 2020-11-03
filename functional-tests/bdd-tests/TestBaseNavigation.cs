@@ -218,6 +218,20 @@ namespace bdd_tests
                 uiStartAppButton.Click();
             }
 
+            if (applicationType == "a Cannabis Marketing Licence")
+            {
+                // click on the Cannabis Marketing Licence Start Application button
+                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMarketing']"));
+                uiStartAppButton.Click();
+            }
+
+            if (applicationType == "a UBrew UVin application")
+            {
+                // click on the a UBrew UVin application Licence Start Application button
+                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
+                uiStartAppButton.Click();
+            }
+
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
         }
 
@@ -294,8 +308,8 @@ namespace bdd_tests
         }
 
 
-        [And(@"the expiry date is changed to today")]
-        public void ExpiryDateToday()
+        [And(@"the expiry date is changed using the workflow named (.*)")]
+        public void SetExpiryDate(string workflowGUID)
         {            
             string transferLicence = "Transfer Licence";
 
@@ -311,7 +325,7 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = true;
 
             // navigate to api/Licenses/<Licence ID>/setexpiry
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{workflowGUID}/setexpiry/{licenceID}");
 
             // wait for the automated expiry process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
