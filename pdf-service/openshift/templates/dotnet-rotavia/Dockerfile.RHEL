@@ -15,7 +15,8 @@ RUN pushd /opt \
     && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream install -y $INSTALL_PKGS \
     && rpm -V $INSTALL_PKGS \
 	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \	
-	&& yum --enablerepo=ubi-8-appstream install -y wkhtmltopdf \
+	&& yum -y install http://mirror.centos.org/centos/7/os/x86_64/Packages/qt-4.8.7-8.el7.x86_64.rpm \
+	&& yum -y install http://mirror.centos.org/centos/7/os/x86_64/Packages/qt-devel-4.8.7-8.el7.x86_64.rpm \	
 	&& mkdir /usr/bin/Linux \
 	&& echo $'#!/usr/bin/env sh\n\
 Xvfb :0 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset & \	
