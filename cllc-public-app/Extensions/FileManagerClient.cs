@@ -154,8 +154,6 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         public static bool FileExistsByHash(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, string documentType, string hash)
         {
             Contract.Requires(_fileManagerClient != null);
-
-            var filename = FileSystemItemExtensions.CombineNameDocumentType($"{hash}.pdf", documentType);
             var exists = false;
             try
             {
@@ -172,7 +170,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                 if (result.ResultStatus == ResultStatus.Success)
                 {
-                    exists = result.Files.Any(f => FileSystemItemExtensions.GetDocumentName(f.Name) == filename);
+                    exists = result.Files.Any(f => FileSystemItemExtensions.GetDocumentName(f.Name) == $"{hash}.pdf");
                 }
                 else
                 {
