@@ -46,6 +46,8 @@ RUN yum -y install --disableplugin=subscription-manager --enablerepo=ubi-8-appst
 	yum -y localinstall epel-release-latest-7.noarch.rpm && \
 	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y install https://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/desktop-file-utils-0.23-8.el8.x86_64.rpm && \
 	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y install https://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/xdg-utils-1.1.2-5.el8.noarch.rpm && \
+	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y install http://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/llvm-compat-libs-10.0.1-1.module_el8.4.0+533+50191577.i686.rpm && \
+	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y install http://rpmfind.net/linux/centos/7.8.2003/os/x86_64/Packages/vulkan-1.1.97.0-1.el7.x86_64.rpm && \
 	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y install https://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/mesa-vulkan-drivers-20.1.4-1.el8.i686.rpm && \
 	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y install https://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/vulkan-loader-1.2.148.0-1.el8.i686.rpm && \
 	yum --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y install https://rpmfind.net/linux/centos/8-stream/BaseOS/x86_64/os/Packages/liberation-fonts-2.00.3-7.el8.noarch.rpm && \
