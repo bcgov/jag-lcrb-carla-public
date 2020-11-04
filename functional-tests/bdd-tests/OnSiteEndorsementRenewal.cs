@@ -38,7 +38,7 @@ Given I am logged in to the dashboard as a private corporation
     And I click on the link for Pay First Year Fee
     And I enter the payment information
     And I click on the Licences tab
-    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
+    And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for a winery
     And the account is deleted
     Then I see the login page
@@ -64,7 +64,7 @@ Given I am logged in to the dashboard as a private corporation
     And I click on the link for Pay First Year Fee
     And I enter the payment information
     And I click on the Licences tab
-    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
+    And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for a brewery
     And the account is deleted
     Then I see the login page
@@ -90,7 +90,7 @@ Given I am logged in to the dashboard as a private corporation
     And I click on the link for Pay First Year Fee
     And I enter the payment information
     And I click on the Licences tab
-    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
+    And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for a distillery
     And the account is deleted
     Then I see the login page
@@ -116,7 +116,7 @@ Given I am logged in to the dashboard as a private corporation
     And I click on the link for Pay First Year Fee
     And I enter the payment information
     And I click on the Licences tab
-    And the expiry date is changed using the workflow named 26BE4A57-0066-4441-AC60-5910272C944C
+    And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I renew the licence with negative responses for a co-packer
     And the account is deleted
     Then I see the login page
