@@ -145,6 +145,11 @@ namespace Gov.Lclb.Cllb.Public.Extensions
                         var eventLocation = eventEntity.AdoxioEventSharePointDocumentLocations.FirstOrDefault();
                         if (eventLocation != null && !string.IsNullOrEmpty(eventLocation.Relativeurl)) result = eventLocation.Relativeurl;
                         break;
+                    case "licence":
+                        var licenceEntity = _dynamicsClient.GetLicenceByIdWithChildren(entityId);
+                        var licenceLocation = licenceEntity.AdoxioLicencesSharePointDocumentLocations.FirstOrDefault();
+                        if (licenceLocation != null && !string.IsNullOrEmpty(licenceLocation.Relativeurl)) result = licenceLocation.Relativeurl;
+                        break;
                 }
             }
             catch (ArgumentNullException)
@@ -191,6 +196,10 @@ namespace Gov.Lclb.Cllb.Public.Extensions
                         var eventEntity = _dynamicsClient.GetEventById(Guid.Parse(entityId));
                         folderName = eventEntity.GetDocumentFolderName();
                         break;
+                    case "licence":
+                        var licenceEntity = _dynamicsClient.GetLicenceById(Guid.Parse(entityId));
+                        folderName = licenceEntity.GetDocumentFolderName();
+                        break;
                 }
 
             return folderName;
@@ -220,6 +229,10 @@ namespace Gov.Lclb.Cllb.Public.Extensions
                 case "event":
                     var eventEntity = _dynamicsClient.GetEventByIdWithChildren(entityId);
                     _dynamicsClient.CreateEventDocumentLocation(eventEntity, folderName, name);
+                    break;
+                case "licence":
+                    var licenceEntity = _dynamicsClient.GetLicenceByIdWithChildren(entityId);
+                    _dynamicsClient.CreateLicenceDocumentLocation(licenceEntity, folderName, name);
                     break;
             }
         }
@@ -487,5 +500,59 @@ namespace Gov.Lclb.Cllb.Public.Extensions
             }
         }
 
+        private static void CreateLicenceDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioLicences licenceEntity, string folderName, string name)
+        {
+            // set the parent document library.
+            var parentDocumentLibraryReference = _dynamicsClient.GetDocumentLocationReferenceByRelativeURL("adoxio_licences");
+
+            var licenceUri = _dynamicsClient.GetEntityURI("adoxio_licenceses", licenceEntity.AdoxioLicencesid);
+            // now create a document location to link them.
+
+            // Create the SharePointDocumentLocation entity
+            var mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation
+            {
+                RegardingobjectIdEventODataBind = licenceUri,
+                ParentsiteorlocationSharepointdocumentlocationODataBind =
+                    _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
+                Relativeurl = folderName,
+                Description = "Licence Files",
+                Name = name
+            };
+
+            var sharepointdocumentlocationid = _dynamicsClient.DocumentLocationExistsWithCleanup(mdcsdl);
+
+            if (sharepointdocumentlocationid == null)
+            {
+                try
+                {
+                    mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
+                }
+                catch (HttpOperationException odee)
+                {
+                    Log.Error(odee, "Error creating SharepointDocumentLocation");
+                    mdcsdl = null;
+                }
+
+                if (mdcsdl != null)
+                {
+                    var sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations",
+                        mdcsdl.Sharepointdocumentlocationid);
+
+                    var oDataId = new Odataid
+                    {
+                        OdataidProperty = sharePointLocationData
+                    };
+                    try
+                    {
+                        _dynamicsClient.Licenceses.AddReference(licenceEntity.AdoxioLicencesid,
+                            "adoxio_licences_SharePointDocumentLocations", oDataId);
+                    }
+                    catch (HttpOperationException odee)
+                    {
+                        Log.Error(odee, "Error adding reference to SharepointDocumentLocation");
+                    }
+                }
+            }
+        }
     }
 }
