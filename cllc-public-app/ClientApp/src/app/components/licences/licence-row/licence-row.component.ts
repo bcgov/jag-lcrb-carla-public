@@ -25,6 +25,7 @@ export const LIQUOR_RENEWAL_LICENCE_TYPE_NAME = 'liquor';
 
 const ACTIVE = 'Active';
 const RENEWAL_DUE = 'Renewal Due';
+const NOW = moment(new Date()).startOf('day');
 
 @Component({
   selector: 'app-licence-row',
@@ -145,13 +146,11 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     this.busy = this.establishmentService.upEstablishment(establishment).subscribe();
   }
 
-  isExpired(licence: ApplicationLicenseSummary) {
-    return licence.status === 'Expired';
-  }
 
   actionsVisible(licence: ApplicationLicenseSummary) {
     if (licence.licenceTypeCategory === 'Liquor'
-      && (licence.transferRequested && !licence.licenceTypeName.toLowerCase().includes('deemed - '))) {
+      && (licence.transferRequested && !licence.licenceTypeName.toLowerCase().includes('deemed - '))
+      || this.isExpired(licence) ) {
       return false;
     }
     return true;
@@ -221,20 +220,44 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       });
   }
 
-  isAboutToExpire(expiryDate: string) {
-    const now = moment(new Date()).startOf('day');
-    const expiry = moment(expiryDate).startOf('day');
-    const diff = expiry.diff(now, 'days') + 1;
+  isExpired(licence: ApplicationLicenseSummary) {
+    //return licence.status === 'Expired' || ;
+   // debugger;
+    return NOW.diff(moment(licence.expiryDate).startOf('day')) > 0;
+  }
 
-    return diff <= 60 || expiry < now;
+
+  isAboutToExpire(licence: ApplicationLicenseSummary) {
+    if(!this.isExpired(licence)){
+
+      const expiry = moment(licence.expiryDate).startOf('day');
+      const diff = expiry.diff(NOW, 'days');
+      
+    //debugger;
+    return diff <= 60;
+
+    } else {
+      return false;
+    }
   }
 
   isRecentlyExpired(licence: ApplicationLicenseSummary) {
-    const now = moment(new Date()).startOf('day');
-    const expiry = moment(licence.expiryDate).startOf('day');
-    const diff = now.diff(expiry, 'days') + 1;
+    if(this.isExpired(licence)){ 
 
-    return licence.status === 'Expired' && diff <= 30;
+      const expiry = moment(licence.expiryDate).startOf('day');
+      const diff = NOW.diff(expiry, 'days');
+  
+      return diff <= 30;
+
+    } 
+      return false; 
+  }
+
+  isCancelled(licence: ApplicationLicenseSummary){
+    const expiry = moment(licence.expiryDate).startOf('day');
+    const diff = expiry.diff(NOW, 'days');
+
+    return diff >= 180 || licence.status === 'Cancelled';
   }
 
   isActive(licence: ApplicationLicenseSummary) {
