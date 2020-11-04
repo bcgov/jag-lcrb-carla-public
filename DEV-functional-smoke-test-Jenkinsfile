@@ -3,7 +3,7 @@
 
 podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
     containerTemplate(
-        name: 'agent-dotnet',
+        name: 'jnlp',
         image: "${env.image_registry}/agent-dotnet",
         resourceRequestCpu: '500m',
         resourceLimitCpu: '1000m',
