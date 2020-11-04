@@ -23,7 +23,7 @@ Feature: ManufacturerLicensingRenewal
 #-----------------------
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Today Negative Private Corporation Winery Licence Renewal
+Scenario:  Today Negative Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -41,7 +41,7 @@ Scenario:  Today Negative Private Corporation Winery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Today Positive Private Corporation Winery Licence Renewal
+Scenario:  Today Positive Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -59,7 +59,7 @@ Scenario:  Today Positive Private Corporation Winery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Today Negative Private Corporation Brewery Licence Renewal
+Scenario:  Today Negative Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -77,7 +77,7 @@ Scenario:  Today Negative Private Corporation Brewery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Today Positive Private Corporation Brewery Licence Renewal
+Scenario:  Today Positive Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -95,7 +95,7 @@ Scenario:  Today Positive Private Corporation Brewery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Today Negative Private Corporation Distillery Licence Renewal
+Scenario:  Today Negative Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -113,7 +113,7 @@ Scenario:  Today Negative Private Corporation Distillery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Today Positive Private Corporation Distillery Licence Renewal
+Scenario:  Today Positive Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -131,7 +131,7 @@ Scenario:  Today Positive Private Corporation Distillery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Today Negative Private Corporation Co-packer Licence Renewal
+Scenario:  Today Negative Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -149,7 +149,7 @@ Scenario:  Today Negative Private Corporation Co-packer Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Today Positive Private Corporation Co-packer Licence Renewal
+Scenario:  Today Positive Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -171,7 +171,7 @@ Scenario:  Today Positive Private Corporation Co-packer Licence Renewal
 #-----------------------
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Yesterday Negative Private Corporation Winery Licence Renewal
+Scenario:  Yesterday Negative Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -189,7 +189,7 @@ Scenario:  Yesterday Negative Private Corporation Winery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Yesterday Positive Private Corporation Winery Licence Renewal
+Scenario:  Yesterday Positive Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -207,7 +207,7 @@ Scenario:  Yesterday Positive Private Corporation Winery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Yesterday Negative Private Corporation Brewery Licence Renewal
+Scenario:  Yesterday Negative Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -225,7 +225,7 @@ Scenario:  Yesterday Negative Private Corporation Brewery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Yesterday Positive Private Corporation Brewery Licence Renewal
+Scenario:  Yesterday Positive Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -243,7 +243,7 @@ Scenario:  Yesterday Positive Private Corporation Brewery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Yesterday Negative Private Corporation Distillery Licence Renewal
+Scenario:  Yesterday Negative Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -261,7 +261,7 @@ Scenario:  Yesterday Negative Private Corporation Distillery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Yesterday Positive Private Corporation Distillery Licence Renewal
+Scenario:  Yesterday Positive Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -279,7 +279,7 @@ Scenario:  Yesterday Positive Private Corporation Distillery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Yesterday Negative Private Corporation Co-packer Licence Renewal
+Scenario:  Yesterday Negative Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -297,7 +297,7 @@ Scenario:  Yesterday Negative Private Corporation Co-packer Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  Yesterday Positive Private Corporation Co-packer Licence Renewal
+Scenario:  Yesterday Positive Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -319,7 +319,7 @@ Scenario:  Yesterday Positive Private Corporation Co-packer Licence Renewal
 #-----------------------
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  45 Days Ago Negative Private Corporation Winery Licence Renewal
+Scenario:  45 Days Ago Negative Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -337,7 +337,7 @@ Scenario:  45 Days Ago Negative Private Corporation Winery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  45 Days Ago Positive Private Corporation Winery Licence Renewal
+Scenario:  45 Days Ago Positive Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -355,7 +355,7 @@ Scenario:  45 Days Ago Positive Private Corporation Winery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  45 Days Ago Negative Private Corporation Brewery Licence Renewal
+Scenario:  45 Days Ago Negative Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -373,7 +373,7 @@ Scenario:  45 Days Ago Negative Private Corporation Brewery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  45 Days Ago Positive Private Corporation Brewery Licence Renewal
+Scenario:  45 Days Ago Positive Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -391,7 +391,7 @@ Scenario:  45 Days Ago Positive Private Corporation Brewery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  45 Days Ago Negative Private Corporation Distillery Licence Renewal
+Scenario:  45 Days Ago Negative Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -409,7 +409,7 @@ Scenario:  45 Days Ago Negative Private Corporation Distillery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  45 Days Ago Positive Private Corporation Distillery Licence Renewal
+Scenario:  45 Days Ago Positive Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -427,7 +427,7 @@ Scenario:  45 Days Ago Positive Private Corporation Distillery Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  45 Days Ago Negative Private Corporation Co-packer Licence Renewal
+Scenario:  45 Days Ago Negative Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -445,7 +445,7 @@ Scenario:  45 Days Ago Negative Private Corporation Co-packer Licence Renewal
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  45 Days Ago Positive Private Corporation Co-packer Licence Renewal
+Scenario:  45 Days Ago Positive Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -467,7 +467,7 @@ Scenario:  45 Days Ago Positive Private Corporation Co-packer Licence Renewal
 #-----------------------------
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  60 Days From Today Negative Private Corporation Winery Licence Renewal
+Scenario:  60 Days From Today Negative Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -485,7 +485,7 @@ Scenario:  60 Days From Today Negative Private Corporation Winery Licence Renewa
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  60 Days From Today Positive Private Corporation Winery Licence Renewal
+Scenario:  60 Days From Today Positive Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -503,7 +503,7 @@ Scenario:  60 Days From Today Positive Private Corporation Winery Licence Renewa
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  60 Days From Today Negative Private Corporation Brewery Licence Renewal
+Scenario:  60 Days From Today Negative Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -521,7 +521,7 @@ Scenario:  60 Days From Today Negative Private Corporation Brewery Licence Renew
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  60 Days From Today Positive Private Corporation Brewery Licence Renewal
+Scenario:  60 Days From Today Positive Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -539,7 +539,7 @@ Scenario:  60 Days From Today Positive Private Corporation Brewery Licence Renew
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  60 Days From Today Negative Private Corporation Distillery Licence Renewal
+Scenario:  60 Days From Today Negative Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -557,7 +557,7 @@ Scenario:  60 Days From Today Negative Private Corporation Distillery Licence Re
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  60 Days From Today Positive Private Corporation Distillery Licence Renewal
+Scenario:  60 Days From Today Positive Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -575,7 +575,7 @@ Scenario:  60 Days From Today Positive Private Corporation Distillery Licence Re
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  60 Days From Today Negative Private Corporation Co-packer Licence Renewal
+Scenario:  60 Days From Today Negative Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -593,7 +593,7 @@ Scenario:  60 Days From Today Negative Private Corporation Co-packer Licence Ren
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  60 Days From Today Positive Private Corporation Co-packer Licence Renewal
+Scenario:  60 Days From Today Positive Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -615,7 +615,7 @@ Scenario:  60 Days From Today Positive Private Corporation Co-packer Licence Ren
 #-----------------------------
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  30 Days From Today Negative Private Corporation Winery Licence Renewal
+Scenario:  30 Days From Today Negative Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -633,7 +633,7 @@ Scenario:  30 Days From Today Negative Private Corporation Winery Licence Renewa
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  30 Days From Today Positive Private Corporation Winery Licence Renewal
+Scenario:  30 Days From Today Positive Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -651,7 +651,7 @@ Scenario:  30 Days From Today Positive Private Corporation Winery Licence Renewa
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  30 Days From Today Negative Private Corporation Brewery Licence Renewal
+Scenario:  30 Days From Today Negative Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -669,7 +669,7 @@ Scenario:  30 Days From Today Negative Private Corporation Brewery Licence Renew
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  30 Days From Today Positive Private Corporation Brewery Licence Renewal
+Scenario:  30 Days From Today Positive Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -687,7 +687,7 @@ Scenario:  30 Days From Today Positive Private Corporation Brewery Licence Renew
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  30 Days From Today Negative Private Corporation Distillery Licence Renewal
+Scenario:  30 Days From Today Negative Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -705,7 +705,7 @@ Scenario:  30 Days From Today Negative Private Corporation Distillery Licence Re
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  30 Days From Today Positive Private Corporation Distillery Licence Renewal
+Scenario:  30 Days From Today Positive Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -723,7 +723,7 @@ Scenario:  30 Days From Today Positive Private Corporation Distillery Licence Re
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  30 Days From Today Negative Private Corporation Co-packer Licence Renewal
+Scenario:  30 Days From Today Negative Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -741,7 +741,7 @@ Scenario:  30 Days From Today Negative Private Corporation Co-packer Licence Ren
     Then I see the login page
 
 @e2e @manufacturer @privatecorporation @licencerenewal
-Scenario:  30 Days From Today Positive Private Corporation Co-packer Licence Renewal
+Scenario:  30 Days From Today Positive Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
