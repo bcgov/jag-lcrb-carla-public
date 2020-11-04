@@ -58,7 +58,7 @@ RUN yum -y install --disableplugin=subscription-manager --enablerepo=ubi-8-appst
 
 RUN echo ${PATH}
 
-RUN ls /opt/rh/rh-nodejs10/root/usr/lib/
+# RUN ls /opt/rh/rh-nodejs10/root/usr/lib/
 
 # ENV PATH="/opt/rh/rh-nodejs10/root/usr/bin:/opt/app-root/node_modules/.bin:${PATH}"
 
