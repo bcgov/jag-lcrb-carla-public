@@ -1,10 +1,10 @@
 // Functional test
-
+// 
 
 podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
     containerTemplate(
         name: 'jnlp',
-        image: '172.50.0.2:5000/yuumcs-tools/agent-dotnet',
+        image: '${image_registry}/agent-dotnet',
         resourceRequestCpu: '500m',
         resourceLimitCpu: '1000m',
         resourceRequestMemory: '4Gi',
