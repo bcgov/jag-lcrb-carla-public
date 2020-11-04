@@ -345,7 +345,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"the expiry date is changed using the workflow named (.*)")]
+        [And(@"the expiry date is changed using the Dynamics workflow named (.*)")]
         public void SetExpiryDate(string workflowGUID)
         {            
             string transferLicence = "Transfer Licence";
