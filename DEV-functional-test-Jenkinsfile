@@ -4,7 +4,7 @@
 podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
     containerTemplate(
         name: 'jnlp',
-        image: '172.50.0.2:5000/yuumcs-tools/agent-dotnet',
+        image: '${image_registry}/agent-dotnet',
         resourceRequestCpu: '1000m',
         resourceLimitCpu: '1500m',
         resourceRequestMemory: '4Gi',
@@ -38,7 +38,7 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
                 }            
             }
 			
-			timeout(time: 900){
+			timeout(time: 9000){
 				dir('functional-tests/bdd-tests') {               
 					withEnv(["baseUri=${baseUri}","test_start=${test_start}","test_start_worker=${test_start_worker}","test_cc=${test_cc}","test_ccv=${test_ccv}","CHROME_BINARY_LOCATION=${CHROME_BINARY_LOCATION}"])
 					{
