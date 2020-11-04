@@ -26,14 +26,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         private readonly IConfiguration _configuration;
 
         [ActivatorUtilitiesConstructor]
-        public DynamicsClient(HttpClient httpClient, IConfiguration configuration) 
+        public DynamicsClient(HttpClient httpClient, IConfiguration configuration)
         {
             Initialize();
 
             HttpClient = httpClient;
 
             _configuration = configuration;
-            
+
             string baseUri = _configuration["DYNAMICS_ODATA_URI"]; // Dynamics ODATA endpoint
 
             if (string.IsNullOrEmpty(baseUri))
@@ -59,8 +59,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Credentials.InitializeServiceClient(this);
             }
-
-            
         }
 
         public string GetEntityURI(string entityType, string id)
@@ -450,6 +448,26 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public MicrosoftDynamicsCRMadoxioLicences GetLicenceById(Guid id)
+        {
+            return GetLicenceById(id.ToString());
+        }
+
+        public MicrosoftDynamicsCRMadoxioLicences GetLicenceById(string id)
+        {
+            MicrosoftDynamicsCRMadoxioLicences result;
+            try
+            {
+                result = this.Licenceses.GetByKey(adoxioLicencesid: id);
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
         public MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(Guid id)
         {
             return GetLicenceByIdWithChildren(id.ToString());
@@ -538,8 +556,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             return results;
         }
 
-        
 
-   
+
+
     }
 }
