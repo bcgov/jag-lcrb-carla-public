@@ -511,11 +511,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
 
-                // set application type relationship 
+                // set application type relationship
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
                 application.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
-                // set licence type relationship 
+                // set licence type relationship
                 if (adoxioLicense.AdoxioLicenceType != null)
                 {
 
@@ -936,7 +936,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioFridayopen)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayopen)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayopen)}</td>
-                            </tr>                
+                            </tr>
                             <tr>
                                 <td class='hours'>End</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayclose)}</td>
