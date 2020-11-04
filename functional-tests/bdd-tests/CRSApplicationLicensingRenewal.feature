@@ -8,7 +8,7 @@
 #-----------------------
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Negative Private Corporation CRS Licence Renewal Today
+Scenario: Negative CRS Licence Renewal Today
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -26,7 +26,7 @@ Scenario: Negative Private Corporation CRS Licence Renewal Today
     Then I see the login page
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Positive Private Corporation CRS Licence Renewal Today
+Scenario: Positive CRS Licence Renewal Today
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -48,7 +48,7 @@ Scenario: Positive Private Corporation CRS Licence Renewal Today
 #-----------------------
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Negative Private Corporation CRS Licence Renewal Yesterday
+Scenario: Negative CRS Licence Renewal Yesterday
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -66,7 +66,7 @@ Scenario: Negative Private Corporation CRS Licence Renewal Yesterday
     Then I see the login page
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Positive Private Corporation CRS Licence Renewal Yesterday
+Scenario: Positive CRS Licence Renewal Yesterday
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -88,7 +88,7 @@ Scenario: Positive Private Corporation CRS Licence Renewal Yesterday
 #-----------------------
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Negative Private Corporation CRS Licence Renewal 45 Days Ago
+Scenario: Negative CRS Licence Renewal 45 Days Ago
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -106,7 +106,7 @@ Scenario: Negative Private Corporation CRS Licence Renewal 45 Days Ago
     Then I see the login page
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Positive Private Corporation CRS Licence Renewal 45 Days Ago
+Scenario: Positive CRS Licence Renewal 45 Days Ago
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -128,7 +128,7 @@ Scenario: Positive Private Corporation CRS Licence Renewal 45 Days Ago
 #-----------------------------
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Negative Private Corporation CRS Licence Renewal 60 Days Future
+Scenario: Negative CRS Licence Renewal 60 Days Future
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -146,7 +146,7 @@ Scenario: Negative Private Corporation CRS Licence Renewal 60 Days Future
     Then I see the login page
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Positive Private Corporation CRS Licence Renewal 60 Days Future
+Scenario: Positive CRS Licence Renewal 60 Days Future
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -168,7 +168,7 @@ Scenario: Positive Private Corporation CRS Licence Renewal 60 Days Future
 #-----------------------------
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Negative Private Corporation CRS Licence Renewal 30 Days Future
+Scenario: Negative CRS Licence Renewal 30 Days Future
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -186,7 +186,7 @@ Scenario: Negative Private Corporation CRS Licence Renewal 30 Days Future
     Then I see the login page
 
 @e2e @cannabis @privatecorporation @licencerenewal
-Scenario: Positive Private Corporation CRS Licence Renewal 30 Days Future
+Scenario: Positive CRS Licence Renewal 30 Days Future
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
