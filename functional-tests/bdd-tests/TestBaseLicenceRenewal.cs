@@ -305,25 +305,6 @@ namespace bdd_tests
 
             if ((responses == "positive responses for a brewery") || (responses == "positive responses for a winery") || (responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
             {
-                if (responses == "positive responses for a brewery")
-                {
-                    string ldbOrderTotals = "100";
-                    string confirmOrderTotals = "100";
-                    string volumeProduced = "200";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(ldbOrderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmOrderTotals);
-
-                    // enter the volume produced
-                    NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
-                    uiVolumeProduced.SendKeys(volumeProduced);
-                }
-
                 if (responses == "positive responses for a winery")
                 {
                     // click on manufacturer minimum checkbox
@@ -409,25 +390,6 @@ namespace bdd_tests
 
             if ((responses == "negative responses for a brewery") || (responses == "negative responses for a winery") || (responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
             { 
-                if (responses == "negative responses for a brewery")
-                {
-                    string ldbOrderTotals = "100";
-                    string confirmOrderTotals = "100";
-                    string volumeProduced = "200";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(ldbOrderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmOrderTotals);
-
-                    // enter the volume produced
-                    NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
-                    uiVolumeProduced.SendKeys(volumeProduced);
-                }
-
                 if (responses == "negative responses for a winery")
                 {
                     // click on manufacturer minimum checkbox
