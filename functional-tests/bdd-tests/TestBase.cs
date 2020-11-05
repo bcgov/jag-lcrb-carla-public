@@ -61,8 +61,8 @@ namespace bdd_tests
                 options.AddArguments("start-maximized");
             }
 
-            // setup ChromeDriver with a command timeout of 3 minutes.
-            var driver = new ChromeDriver(path, options, TimeSpan.FromMinutes(3));
+            // setup ChromeDriver with a command timeout of 6 minutes.
+            var driver = new ChromeDriver(path, options, TimeSpan.FromMinutes(6));
 
             double timeout = 200.0;
 
