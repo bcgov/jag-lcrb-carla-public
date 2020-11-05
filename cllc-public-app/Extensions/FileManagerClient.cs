@@ -23,6 +23,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         public const string ContactDocumentListTitle = "contact";
         public const string WorkerDocumentListTitle = "Worker Qualification";
         public const string WorkerDocumentUrlTitle = "adoxio_worker";
+        public const string LicenceDocumentUrlTitle = "adoxio_licences";
 
         public static void CreateFolderIfNotExist(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string folderName)
         {
