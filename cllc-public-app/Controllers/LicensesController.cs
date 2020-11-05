@@ -51,10 +51,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET licence by id
         [HttpGet("{id}")]
-        public ActionResult GetLicence(string id)
+        public async Task<IActionResult> GetLicence(string id)
         {
             MicrosoftDynamicsCRMadoxioLicences licence = null;
-
 
             try
             {
@@ -78,9 +77,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw (httpOperationException);
             }
 
-
+            // Create link to sharepoint folder if needed
+            if (licence.AdoxioLicencesSharePointDocumentLocations.Count == 0)
+            {
+                await InitializeSharepoint(licence);
+            }
 
             return new JsonResult(licence.ToViewModel(_dynamicsClient));
+        }
+
+        private async Task InitializeSharepoint(MicrosoftDynamicsCRMadoxioLicences licence)
+        {
+            // create a SharePointDocumentLocation link
+            var folderName = licence.GetDocumentFolderName();
+            _fileManagerClient.CreateFolderIfNotExist(_logger, LicenceDocumentUrlTitle, folderName);
+            _dynamicsClient.CreateEntitySharePointDocumentLocation("licence", licence.AdoxioLicencesid, folderName, folderName);
         }
 
         [HttpPut("{licenceId}/representative")]
@@ -511,11 +522,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
 
-                // set application type relationship 
+                // set application type relationship
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
                 application.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
-                // set licence type relationship 
+                // set licence type relationship
                 if (adoxioLicense.AdoxioLicenceType != null)
                 {
 
@@ -936,7 +947,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioFridayopen)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayopen)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayopen)}</td>
-                            </tr>                
+                            </tr>
                             <tr>
                                 <td class='hours'>End</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayclose)}</td>
