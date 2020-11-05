@@ -14,7 +14,7 @@ podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', service
         args: '${computer.jnlpmac} ${computer.name}'
     )
 ]) {
-    stage('Hourly BDD Test') {
+    stage('Release BDD Test') {
         node('jenkins-agent-dotnet') {
             //the checkout is mandatory
             echo "checking out source"
@@ -25,7 +25,7 @@ podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', service
                 withEnv(["TZ=GMT-7,baseUri=${baseUri}","test_start=${test_start}","test_start_worker=${test_start_worker}","test_cc=${test_cc}","test_ccv=${test_ccv}","CHROME_BINARY_LOCATION=${CHROME_BINARY_LOCATION}"])
                 {
                     try {                        
-                        sh 'dotnet test --filter Category=@hourlyTest --logger "junit;LogFilePath=functionalResults.xml"'					
+                        sh 'dotnet test --filter Category=@release --logger "junit;LogFilePath=functionalResults.xml"'					
                     }
                     catch (err)
                     {
