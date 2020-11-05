@@ -30,6 +30,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public const string WorkerDocumentUrlTitle = "adoxio_worker";
         public const string EventDocumentListTitle = "adoxio_event";
         public const string FederalReportListTitle = "adoxio_federalreportexport";
+        public const string LicenceDocumentUrlTitle = "adoxio_licences";
+        public const string LicenceDocumentListTitle = "Licence";
+
 
         private const int MaxUrlLength = 260; // default maximum URL length.
 
@@ -325,7 +328,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
 
             // Get the validated file name string
-            string result = Regex.Replace(filename, invalidRegStr, "_");                    
+            string result = Regex.Replace(filename, invalidRegStr, "_");
 
             return result;
         }
@@ -347,7 +350,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 string extension = Path.GetExtension(result);
                 result = Path.GetFileNameWithoutExtension(result).Substring(0, maxLength - extension.Length);
-                result += extension;                
+                result += extension;
             }
 
             return result;
@@ -392,7 +395,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             HttpStatusCode _statusCode = response.StatusCode;
 
             // check to see if the folder creation worked.
-            if ( ! (_statusCode == HttpStatusCode.OK || _statusCode == HttpStatusCode.Created))
+            if (!(_statusCode == HttpStatusCode.OK || _statusCode == HttpStatusCode.Created))
             {
                 string _responseContent;
                 var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
@@ -761,7 +764,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
 
-        private string GenerateUploadRequestUriString (string folderServerRelativeUrl, string fileName)
+        private string GenerateUploadRequestUriString(string folderServerRelativeUrl, string fileName)
         {
             string requestUriString = ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(folderServerRelativeUrl) + "')/Files/add(url='"
                 + EscapeApostrophe(fileName) + "',overwrite=true)";
@@ -873,7 +876,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             HttpRequestMessage endpointRequest = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(url) + "')/$value"),                
+                RequestUri = new Uri(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(url) + "')/$value"),
             };
 
             // make the request.
