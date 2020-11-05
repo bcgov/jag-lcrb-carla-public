@@ -315,20 +315,6 @@ namespace bdd_tests
                     FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
                 }
 
-                if ((responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
-                {
-                    string orderTotals = "233";
-                    string confirmTotals = "233";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(orderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmTotals);
-                }
-
                 // select 'Yes'
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
                 NgWebElement uiRenewalCriminalOffenceCheckYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-10-button"));
@@ -398,20 +384,6 @@ namespace bdd_tests
 
                     // upload discretion letter
                     FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
-                }
-
-                if ((responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
-                {
-                    string orderTotals = "233";
-                    string confirmTotals = "233";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(orderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmTotals);
                 }
 
                 // select 'No'
