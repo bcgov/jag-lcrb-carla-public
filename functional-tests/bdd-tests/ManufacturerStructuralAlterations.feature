@@ -3,7 +3,7 @@
     I want to request structural alterations to an approved lounge or special events area for a manufacturer licence
 
 @e2e @privatecorporation @manufacturer @winery
-Scenario: Winery Structural Alterations to an Approved Lounge or Special Events Area Application
+Scenario: Winery Structural Alterations
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -22,8 +22,8 @@ Scenario: Winery Structural Alterations to an Approved Lounge or Special Events 
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @winery
-Scenario: Brewery Structural Alterations to an Approved Lounge or Special Events Area Application
+@e2e @privatecorporation @manufacturer @brewery
+Scenario: Brewery Structural Alterations
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -42,8 +42,8 @@ Scenario: Brewery Structural Alterations to an Approved Lounge or Special Events
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @winery
-Scenario: Distillery Structural Alterations to an Approved Lounge or Special Events Area Application
+@e2e @privatecorporation @manufacturer @distillery
+Scenario: Distillery Structural Alterations
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -63,7 +63,7 @@ Scenario: Distillery Structural Alterations to an Approved Lounge or Special Eve
     Then I see the login page
 
 @e2e @privatecorporation @manufacturer @copacker
-Scenario: Co-packer Structural Alterations to an Approved Lounge or Special Events Area Application
+Scenario: Co-packer Structural Alterations
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
