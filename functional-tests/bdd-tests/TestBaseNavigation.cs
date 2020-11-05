@@ -265,10 +265,10 @@ namespace bdd_tests
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
 
             // navigate to api/applications/<Application ID>/process
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
+            ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
 
             // wait for the automated approval process to run
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+            Assert.True(ngDriver.WrappedDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
 
             ngDriver.IgnoreSynchronization = false;
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
