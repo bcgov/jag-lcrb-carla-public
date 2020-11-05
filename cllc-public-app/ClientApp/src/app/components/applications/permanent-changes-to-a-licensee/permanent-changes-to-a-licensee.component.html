@@ -1,10 +1,10 @@
 <div>
-    <h1>Permanent Changes to a  Licensee</h1>
+    <h1>Permanent Changes to a Licensee</h1>
 
     <!-- Licensee Details -->
     <section>
-        <h3>Licensee Details</h3>    
-        
+        <h3>Licensee Details</h3>
+
         <table>
             <tbody>
                 <tr>
@@ -43,38 +43,376 @@
         </table>
     </section>
 
-    Types of Changes Requested
+    <!-- Types of Changes Requested -->
     <section>
         <h3 class="blue-header">Types of Changes Requested</h3>
         <div>
-            <mat-checkbox>Internal Share Transfer</mat-checkbox> 
-            <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
-            matTooltip="What is this?"></i>
+            <mat-checkbox>Internal Share Transfer</mat-checkbox>
+            <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle" matTooltip="What is this?"></i>
             <section>
                 <p>Use this option to report:</p>
                 <ul>
-                    <li>When shares or partnership units are redistributed between existing sharesholders/unit holders</li>
+                    <li>When shares or partnership units are redistributed between
+                        existing sharesholders/unit holders</li>
                     <li>Removal of shareholders/ unit holders</li>
-                    <li>Amalgamations that do not add new shareholders or legal entities to the licensee coroporation</li>
+                    <li>Amalgamations that do not add new shareholders or legal entities
+                        to the licensee coroporation</li>
                 </ul>
             </section>
 
             <a href="">More Information</a>
         </div>
         <div>
-            <mat-checkbox>External Share Transfer</mat-checkbox> 
-            <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
-            matTooltip="What is this?"></i>
+            <mat-checkbox>External Share Transfer</mat-checkbox>
+            <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle" matTooltip="What is this?"></i>
             <section>
                 <p>Use this option to report:</p>
                 <ul>
-                    <li>When shares or partnership units are redistributed between existing sharesholders/unit holders</li>
+                    <li>When shares or partnership units are redistributed between
+                        existing sharesholders/unit holders</li>
                     <li>Removal of shareholders/ unit holders</li>
-                    <li>Amalgamations that do not add new shareholders or legal entities to the licensee coroporation</li>
+                    <li>Amalgamations that do not add new shareholders or legal entities
+                        to the licensee coroporation</li>
                 </ul>
             </section>
 
             <a href="">More Information</a>
         </div>
+
+        <mat-checkbox *ngFor="let item of changeList">{{item.name}}</mat-checkbox>
+    </section>
+
+    <!-- Person's Name Change -->
+    <section>
+        <h3 class="blue-header">Person's Name Change</h3>
+        <div class="">
+            <span>Person's Name:</span>
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-form-field class="example-form-field">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div class="">
+            <span>Name Changed To:</span>
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-form-field class="example-form-field">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </section>
+
+    <!-- Corporation Name Change -->
+    <section>
+        <h3 class="blue-header">Corporation Name Change</h3>
+        <p>
+            To be completed when a corporation with an interest in a licence has legally changed
+            its name, but existing corporate shareholders, directors and officers,
+            and certificate number on the certificate of incorporation have not
+            changed. The fee is 20 per licence.
+        </p>
+        <div class="">
+            <span>Current licensee or holding company name (in full): </span>
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>Company Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div class="">
+            <span>Name Changed To (in full):</span>
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>Company Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <p>
+            Upload a copy of the Certificate of Name of Change from BC Registrar of Companies.
+        </p>
+
+        <app-file-uploader *ngIf="true || applicationId" documentType="letterOfIntent"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
+            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+        </app-file-uploader>
+
+    </section>
+
+    <!-- Partnership Business Name Change -->
+    <section>
+        <h3 class="blue-header">Partership Business Name Change</h3>
+        <p>
+            To be completed when the legal name of a partnership is changed but no new partners
+            are added and no existing partners.????? The fee is $200 per licence.
+        </p>
+        <div class="">
+            <span>Current registered Partnership name (in full):?????? </span>
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>Parnership Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div class="">
+            <span>Name Changed To (in full):</span>
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>Partnership Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <p>
+            If the partnership is registered, upload a copy of the Parnership Registration
+            document from the BC Registrar of Companies showing the change of name.
+            If the partnership is not registered, provide a legal document showing
+            change of name.
+        </p>
+
+        <app-file-uploader *ngIf="true || applicationId" documentType="letterOfIntent"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
+            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+        </app-file-uploader>
+
+
+    </section>
+
+    <!-- Society Name Change -->
+    <section>
+        <h3 class="blue-header">Society Name Change</h3>
+        <p>
+            To be completed when the legal name of a society is changed, but the society structrure,
+            membership and certification number on the certificate of incorporation
+            does not change. The fee is $200 per licence.</p>
+        <div class="">
+            <span>Current registered society name (in full):?????? </span>
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>Society Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div class="">
+            <span>Name Changed To (in full):</span>
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>Society Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <p>
+            If the partnership is registered, upload a copy of the Parnership Registration
+            document from the BC Registrar of Companies showing the change of name.
+            If the partnership is not registered, provide a legal document showing
+            change of name.
+        </p>
+
+        <app-file-uploader *ngIf="true || applicationId" documentType="letterOfIntent"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
+            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+        </app-file-uploader>
+    </section>
+
+    <!-- Addition of Executor or Receiver -->
+    <section>
+        <h3 class="blue-header">Addition of Executor or Receiver</h3>
+        To be completed upon the death, bankruptcy or receivership of a licensee. Fill
+        out A or B and attach the required documents.
+        
+        <h4>A. Addition of Executor</h4>
+        <span>Executor's Name: </span>
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+        <p>
+        Upload a copy of Assignment of Executor or a copy of the last  will(s) and testament(s).
+        </p>
+
+        <app-file-uploader *ngIf="true || applicationId" documentType="letterOfIntent"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
+            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+        </app-file-uploader>
+
+        <p>
+        Upload a copy of the Death Certificate.
+        </p>
+
+        <app-file-uploader *ngIf="true || applicationId" documentType="letterOfIntent"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
+            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+        </app-file-uploader>
+
+
+        <h4>B. Addition of Receiver</h4>
+        <span>Receiver's Name: </span>
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field class="ml-1 mr-2">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+        <p>
+        Upload a copy of Court Order appointing Receiver 
+        (Order must include authority to operate the licensee's business and must specify the licences).
+        </p>
+
+        <app-file-uploader *ngIf="true || applicationId" documentType="letterOfIntent"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
+            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+        </app-file-uploader>
+
+        <p>Upload a copy of Court Order filed under the Office of the Superintendent of Bankruptcy Canada.</p>
+
+        <app-file-uploader *ngIf="true || applicationId" documentType="letterOfIntent"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
+            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+        </app-file-uploader>
+    </section>
+
+    <!-- Cannabis Associate Security Screening Forms -->
+    <section>
+        <h3 class="blue-header">Cannabis Associate Security Screening Forms</h3>
+        <p>
+        Sole proprietors and associates of applicants for a non-medical cannabis licence are required to submit documentation for 
+        security screenings and/or financial integrity checks. Cannabis retail store licence applications cannot be processed until
+        all required materials have been received.
+        </p>
+
+        <p>
+        Please note, the security screening for sole proprietors and associates differs from the security verification for people 
+        seeking work in non-medical cannabis retail stores. The screening for associates considers the associate within the context 
+        of a larger organizational structure. The security verification for workers considers the worker as an individual apart 
+        from an organization. If a sole proprietor or associate seeks to work in a non-medical cannabis retail store, they must pass both.
+        </p>
+
+        <p>
+        Cannabis Associate Security Screening documents are not required if you submit liquor related applications. If you do not provide 
+        Cannabis Associate Security Screening documents prior to your application submission, they will be requested via secure channels 
+        once your application has been received. Please note that the time to collect these documents directly impacts the time to process your application. 
+        </p>
+
+        <p>Please provide the documents as outlined on this page.</p>
+    </section>
+
+    <!-- Personal History Summary Forms -->
+    <section>
+        <h3 class="blue-header">Personal History Summary Forms</h3>
+
+        <p>
+        Each person involved in the applicant’s legal entity structure must submit a Personal History Summary form and a copy of 
+        your Criminal Record Search completed by the RCMP or local Police Department. The form may also require you to submit copy 
+        of your driver’s abstract or a statutory declaration. See the form for full details.
+        </p>
+        
+        <p>
+        Personal History Summary forms are not required if you submit cannabis-related applications. 
+        If you do not provide Personal History Summary documents prior to your application submission, 
+        they will be requested via secure channels once your application has been received. 
+        Please note that the time to collect these documents directly impacts the time to process your application.
+        </p>
+    </section>
+
+    <!-- Declaration -->
+    <section>
+        <p>Note: An agent, lawyer or third party operator may not sign the declaration on behalf of the licensee.</p>
+
+        <p>
+        This form should be signed by an individual with the authority to bind the applicant. The Branch relies on the 
+        licensee to ensure that the individual who signs this form is authorized to do so. Typically, an appropriate 
+        individual will be as follows:
+        </p>
+        
+        <ul> 
+            <li> If the licensee is an individual or sole proprietor, the individual himself/herself</li>
+            <li>If the licensee is a corporation, a duly authorized signatory who will usually be an officer or, in some cases, a director</li>
+            <li> If the licensee is a general partnership, one of the partners</li>
+            <li>If the licensee is a limited partnership, the general partner of the partnership</li>
+            <li>If the licensee is a society, then a director or a senior manager (as defined in the Societies Act)</li>
+        </ul>
+        <p>
+        If an authorized signatory has designated a Licensee Representative and they have specifically permitted a licensee representative 
+        to sign this form on the licensee's behalf, the branch will accept the licensee representative's submission.
+        </p>
+
+        <p>
+        Section 57(1)(c) of the Liquor Control and Licensing Act states: “A person commits an offence if the person (c) provides false or 
+        misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when making 
+        a report or when required and as specified by the general manager under section 59”.
+        </p>
+
+        <mat-checkbox>
+        As the licensee or authorized signatory of the licensee, I understand and affirm that all of the information provided is true and complete.
+        </mat-checkbox>
+
+    </section>
+
+    <!-- Application Contact Details -->
+    <section>
+
+    </section>
+
+    <!-- Payment -->
+    <section>
+
     </section>
 </div>
