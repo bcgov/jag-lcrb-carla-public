@@ -297,8 +297,9 @@ namespace bdd_tests
             NgWebElement uiEventContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
             Assert.True(uiEventContactPhone.GetAttribute("value") == eventContactPhone);
 
-            // check community event type selected - TODO
-            NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType'] [value='1: 845280001']"));
+            // check corporate event type selected
+            NgWebElement uiEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventType']"));
+            Assert.True(uiEventType.GetAttribute("value") == "2: 845280002");
 
             // check event description
             NgWebElement uiEventDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='eventTypeDescription']"));
@@ -317,21 +318,24 @@ namespace bdd_tests
             Assert.True(uiMaxStaffAttendance.GetAttribute("value") == maximumStaffAttendance);
 
             // check whether minors are attending - yes
-            NgWebElement uiMinorsAttending = ngDriver.FindElement(By.CssSelector("[formcontrolname='minorsAttending'] option[value='true']"));
-            Assert.True(uiMinorsAttending.Selected);
+            NgWebElement uiMinorsAttending = ngDriver.FindElement(By.CssSelector("[formcontrolname='minorsAttending']"));
+            Assert.True(uiMinorsAttending.GetAttribute("value") == "true");
 
-            // check type of food service provided - TODO
-            NgWebElement uiFoodServiceProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='foodService'] option[value='0: 845280000']"));
+            // check type of food service provided
+            NgWebElement uiFoodServiceProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='foodService']"));
+            Assert.True(uiFoodServiceProvided.GetAttribute("value") == "0: 845280000");
 
-            // check type of entertainment provided - TODO
-            NgWebElement uiEntertainmentProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='entertainment'] option[value='1: 845280001']"));
+            // check type of entertainment provided
+            NgWebElement uiEntertainmentProvided = ngDriver.FindElement(By.CssSelector("[formcontrolname='entertainment']"));
+            Assert.True(uiEntertainmentProvided.GetAttribute("value") == "1: 845280001");
 
             // check venue name description
             NgWebElement uiVenueNameDescription = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
             Assert.True(uiVenueNameDescription.GetAttribute("value") == venueNameDescription);
 
-            // check venue location - TODO
-            NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation'] option[value='1: 845280001']"));
+            // check venue location - indoors
+            NgWebElement uiVenueLocation = ngDriver.FindElement(By.CssSelector("[formcontrolname='specificLocation']"));
+            Assert.True(uiVenueLocation.GetAttribute("value") == "0: 845280000");
 
             // check venue additional info
             NgWebElement uiVenueAdditionalInfo = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
@@ -353,17 +357,31 @@ namespace bdd_tests
             NgWebElement uiPhysicalAddPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='postalCode']"));
             Assert.True(uiPhysicalAddPostalCode.GetAttribute("value") == physicalAddPostalCode);
 
-            // check start date is selected - TODO
-            NgWebElement uiVenueStartDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='startDate']"));
+            // check event start and end times     
+            NgWebElement uiEventStartTimeHours = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] input[aria-label='Hours']"));
+            Assert.True(uiEventStartTimeHours.GetAttribute("value") == "09");
 
-            // check end date is selected - TODO
-            NgWebElement uiVenueEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
+            NgWebElement uiEventStartTimeMinutes = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] input[aria-label='Minutes']"));
+            Assert.True(uiEventStartTimeMinutes.GetAttribute("value") == "00");
 
-            // check event end time after 2am - TODO           
-            NgWebElement uiEventCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(3) .ngb-tp-minute .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
+            NgWebElement uiEventCloseTimeHours = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Hours']"));
+            Assert.True(uiEventCloseTimeHours.GetAttribute("value") == "02");
 
-            // check liquor end time after 2am - TODO           
-            NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(5) .ngb-tp-minute .btn-link:nth-child(1) .ngb-tp-chevron"));
+            NgWebElement uiEventCloseTimeMinutes = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Minutes']"));
+            Assert.True(uiEventCloseTimeMinutes.GetAttribute("value") == "00");
+
+            // check liquor start and end times 
+            NgWebElement uiLiquorStartTimeHours = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorStartTime'] input[aria-label='Hours']"));
+            Assert.True(uiLiquorStartTimeHours.GetAttribute("value") == "09");
+
+            NgWebElement uiLiquorStartTimeMinutes = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorStartTime'] input[aria-label='Minutes']"));
+            Assert.True(uiLiquorStartTimeMinutes.GetAttribute("value") == "00");
+
+            NgWebElement uiLiquorCloseTimeHours = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Hours']"));
+            Assert.True(uiLiquorCloseTimeHours.GetAttribute("value") == "02");
+
+            NgWebElement uiLiquorCloseTimeMinutes = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Minutes']"));
+            Assert.True(uiLiquorCloseTimeMinutes.GetAttribute("value") == "00");
         }
 
 

@@ -1269,6 +1269,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   }
 
+  showValidInterestforTransfer(){
+    debugger;
+    return this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
+            (this.application.licenseType === "Licensee Retail Store" || "Wine Store");
+  }
+
   showDynamicForm(formReference, tabs) {
     if (this.form.get('isHasPatio').enabled) {
       this.updateDynamicValidation();

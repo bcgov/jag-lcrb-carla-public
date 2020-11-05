@@ -50,7 +50,7 @@ namespace bdd_tests
 
 
         [And(@"I pay the licensing fee for (.*)")]
-        public void PayLicenceFee(string feeType)
+        public void PayLicenceFee()
         {
             /* 
             Page Title: Licences & Authorizations

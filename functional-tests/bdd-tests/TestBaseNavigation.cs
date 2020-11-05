@@ -48,6 +48,15 @@ namespace bdd_tests
         }
 
 
+
+        [And(@"I click on the signature checkbox")]
+        public void ClickOnSignatureCheckbox()
+        {
+            NgWebElement uiSignature = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiSignature.Click();
+        }
+    
+
         [And(@"I click on the branding change link for (.*)")]
         public void ClickOnBrandingChangeLink(string changeType)
         {
@@ -299,6 +308,34 @@ namespace bdd_tests
         }
 
 
+        [And(@"autorenewal is set to 'No'")]
+        public void AutoRenewalDenied()
+        {
+            ngDriver.IgnoreSynchronization = true;
+            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
+
+            // navigate to api/applications/<Application ID>/process - TODO
+            //ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{endorsementID}/processEndorsement");
+
+            // wait for the automated approval process to run
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+
+            ngDriver.IgnoreSynchronization = false;
+            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
+
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        } 
+
+
+        [And(@"I am unable to renew the licence")]
+        public void RenewalLinkHidden()
+        {
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Renew Licence'))]")).Displayed);
+        }
+
+
         [And(@"I do not complete the licence renewal application correctly")]
         public void CompleteApplicationRenewalIncorrectly()
         {
@@ -308,7 +345,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"the expiry date is changed using the workflow named (.*)")]
+        [And(@"the expiry date is changed using the Dynamics workflow named (.*)")]
         public void SetExpiryDate(string workflowGUID)
         {            
             string transferLicence = "Transfer Licence";
