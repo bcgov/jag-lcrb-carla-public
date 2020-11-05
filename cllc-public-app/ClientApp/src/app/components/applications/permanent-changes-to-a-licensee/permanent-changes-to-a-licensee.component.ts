@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from '@models/account.model';
+import { Application } from '@models/application.model';
+import { ApplicationDataService } from '@services/application-data.service';
 
 @Component({
   selector: 'app-permanent-changes-to-a-licensee',
@@ -7,6 +9,7 @@ import { Account } from '@models/account.model';
   styleUrls: ['./permanent-changes-to-a-licensee.component.scss']
 })
 export class PermanentChangesToALicenseeComponent implements OnInit {
+    data: any = {};
 
   changeList = [
     {
@@ -46,9 +49,11 @@ export class PermanentChangesToALicenseeComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private applicationDataService: ApplicationDataService) { }
 
   ngOnInit(): void {
+      this.applicationDataService.getPermanentChangesToLicenseeData()
+      .subscribe( data => this.data = data);
   }
 
 }
