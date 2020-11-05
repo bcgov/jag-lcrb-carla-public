@@ -944,7 +944,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.validInterest === FormControlState.Show &&
       ((this.uploadedValidInterestDocuments || 0) < 1)) {
       valid = false;
-      this.validationMessages.push('At least one supporting document is required.');
+      this.validationMessages.push('At least proof of ownership document is required.');
     }
 
     if (this.showSitePlan() &&
@@ -1270,7 +1270,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showValidInterestforTransfer(){
-    debugger;
     return this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
             (this.application.licenseType === "Licensee Retail Store" || "Wine Store");
   }
