@@ -17,7 +17,7 @@ Feature: CateringRelease
     As a logged in business user
     I want to confirm that the Catering functionality is ready for release
 
-@validation @privatecorporation @release
+@validation @privatecorporation @cateringrelease
 Scenario: Private Corporation Catering Release
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -50,13 +50,14 @@ Scenario: Private Corporation Catering Release
     # And I click on the Licences tab
     # And I request a transfer of ownership
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    And I click on the link for Renew Licence
     And I renew the licence with positive responses for Catering
     And I click on the Licences tab
     And I request a third party operator
     And the account is deleted
     Then I see the login page
 
-@validation @soleproprietorship @release
+@validation @soleproprietorship @cateringrelease
 Scenario: Sole Proprietorship Catering Release
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -89,6 +90,7 @@ Scenario: Sole Proprietorship Catering Release
     # And I click on the Licences tab
     # And I request a transfer of ownership
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    And I click on the link for Renew Licence
     And I renew the licence with positive responses for Catering
     And I click on the Licences tab
     And I request a third party operator
