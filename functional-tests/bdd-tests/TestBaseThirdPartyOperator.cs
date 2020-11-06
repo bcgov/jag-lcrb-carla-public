@@ -47,9 +47,16 @@ namespace bdd_tests
             NgWebElement uiThirdPartyOperator = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));
             uiThirdPartyOperator.SendKeys(thirdparty);
 
-            NgWebElement uiThirdPartyOperatorOption = ngDriver.FindElement(By.CssSelector("mat-option[role='option'] span"));
-            uiThirdPartyOperatorOption.Click();
-
+            var uiThirdPartyOperatorOption = ngDriver.FindElements(By.CssSelector("mat-option[role='option'] span"));
+            if (uiThirdPartyOperatorOption.Count > 0)
+            {
+                uiThirdPartyOperatorOption[0].Click();
+            }
+            else
+            {
+                throw new Exception($"Unable to find {thirdparty}");
+            }
+            
             // click on authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
