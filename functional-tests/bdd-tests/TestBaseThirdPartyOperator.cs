@@ -23,8 +23,8 @@ namespace bdd_tests
         [And(@"I request a third party operator")]
         public void RequestThirdPartyOperator()
         {
-            // return to the Licences tab
-            ClickLicencesTab();
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
 
             /* 
             Page Title: Licences & Authorizations
@@ -61,8 +61,8 @@ namespace bdd_tests
             // click on submit button
             ClickOnSubmitButton();
 
-            // return to the Licences tab
-            ClickLicencesTab();
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
 
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
