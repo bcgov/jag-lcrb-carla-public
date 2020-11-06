@@ -23,12 +23,6 @@ namespace bdd_tests
         [And(@"I renew the licence with (.*)")]
         public void RenewLicence(string responses)
         {
-            string renewLicenceLink = "Renew Licence";
-
-            // click on the Renew Licence link
-            NgWebElement uiRenewLicence = ngDriver.FindElement(By.LinkText(renewLicenceLink));
-            uiRenewLicence.Click();
-
             if (responses == "negative responses for Cannabis")
             {
                 // select 'No'
@@ -311,68 +305,14 @@ namespace bdd_tests
 
             if ((responses == "positive responses for a brewery") || (responses == "positive responses for a winery") || (responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
             {
-                if (responses == "positive responses for a brewery")
-                {
-                    string ldbOrderTotals = "100";
-                    string confirmOrderTotals = "100";
-                    string volumeProduced = "200";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(ldbOrderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmOrderTotals);
-
-                    // enter the volume produced
-                    NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
-                    uiVolumeProduced.SendKeys(volumeProduced);
-                }
-
                 if (responses == "positive responses for a winery")
                 {
-                    string orderTotals = "233";
-                    string confirmTotals = "233";
-                    string volumeProduced = "5000";
-                    string volumeDestroyed = "200";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(orderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmTotals);
-
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
                     uiIsManufacturedMinimum.Click();
 
                     // upload discretion letter
                     FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
-
-                    // enter the volume produced
-                    NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
-                    uiVolumeProduced.SendKeys(volumeProduced);
-
-                    // enter the volume destroyed
-                    NgWebElement uiVolumeDestroyed = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeDestroyed']"));
-                    uiVolumeDestroyed.SendKeys(volumeDestroyed);
-                }
-
-                if ((responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
-                {
-                    string orderTotals = "233";
-                    string confirmTotals = "233";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(orderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmTotals);
                 }
 
                 // select 'Yes'
@@ -436,68 +376,14 @@ namespace bdd_tests
 
             if ((responses == "negative responses for a brewery") || (responses == "negative responses for a winery") || (responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
             { 
-                if (responses == "negative responses for a brewery")
-                {
-                    string ldbOrderTotals = "100";
-                    string confirmOrderTotals = "100";
-                    string volumeProduced = "200";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(ldbOrderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmOrderTotals);
-
-                    // enter the volume produced
-                    NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
-                    uiVolumeProduced.SendKeys(volumeProduced);
-                }
-
                 if (responses == "negative responses for a winery")
                 {
-                    string orderTotals = "233";
-                    string confirmTotals = "233";
-                    string volumeProduced = "5000";
-                    string volumeDestroyed = "200";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(orderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmTotals);
-
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
                     uiIsManufacturedMinimum.Click();
 
                     // upload discretion letter
                     FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
-
-                    // enter the volume produced
-                    NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
-                    uiVolumeProduced.SendKeys(volumeProduced);
-
-                    // enter the volume destroyed
-                    NgWebElement uiVolumeDestroyed = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeDestroyed']"));
-                    uiVolumeDestroyed.SendKeys(volumeDestroyed);
-                }
-
-                if ((responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
-                {
-                    string orderTotals = "233";
-                    string confirmTotals = "233";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(orderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmTotals);
                 }
 
                 // select 'No'

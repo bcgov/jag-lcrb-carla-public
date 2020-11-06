@@ -1,21 +1,19 @@
 // Functional test
-
-
-podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
+podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
     containerTemplate(
         name: 'jnlp',
-        image: '172.50.0.2:5000/yuumcs-tools/agent-dotnet',
-        resourceRequestCpu: '1000m',
-        resourceLimitCpu: '1500m',
+        image: "${env.image_registry}/agent-dotnet",
+        resourceRequestCpu: '500m',
+        resourceLimitCpu: '1000m',
         resourceRequestMemory: '4Gi',
-        resourceLimitMemory: '6Gi',
+        resourceLimitMemory: '4Gi',
         workingDir: '/home/jenkins',
         command: '',
         args: '${computer.jnlpmac} ${computer.name}'
     )
 ]) {
     stage('BDD Test') {
-        node('agent-dotnet') {
+        node('jenkins-agent-dotnet') {
             //the checkout is mandatory
             echo "checking out source"
             echo "Build: ${BUILD_ID}"
@@ -38,7 +36,7 @@ podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkin
                 }            
             }
 			
-			timeout(time: 900){
+			timeout(time: 9000){
 				dir('functional-tests/bdd-tests') {               
 					withEnv(["baseUri=${baseUri}","test_start=${test_start}","test_start_worker=${test_start_worker}","test_cc=${test_cc}","test_ccv=${test_ccv}","CHROME_BINARY_LOCATION=${CHROME_BINARY_LOCATION}"])
 					{

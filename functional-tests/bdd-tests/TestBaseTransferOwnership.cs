@@ -33,7 +33,7 @@ namespace bdd_tests
             NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
             uiTransferOwnership.Click();
 
-            string licensee = "GunderCorp";
+            string licensee = "GunderCorp TestBusiness";
 
             // search for the proposed licensee
             NgWebElement uiProposedLicensee = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));

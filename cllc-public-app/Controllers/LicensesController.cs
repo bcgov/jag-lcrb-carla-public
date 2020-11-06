@@ -51,10 +51,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET licence by id
         [HttpGet("{id}")]
-        public ActionResult GetLicence(string id)
+        public async Task<IActionResult> GetLicence(string id)
         {
             MicrosoftDynamicsCRMadoxioLicences licence = null;
-
 
             try
             {
@@ -78,9 +77,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw (httpOperationException);
             }
 
-
+            // Create link to sharepoint folder if needed
+            if (licence.AdoxioLicencesSharePointDocumentLocations.Count == 0)
+            {
+                await InitializeSharepoint(licence);
+            }
 
             return new JsonResult(licence.ToViewModel(_dynamicsClient));
+        }
+
+        private async Task InitializeSharepoint(MicrosoftDynamicsCRMadoxioLicences licence)
+        {
+            // create a SharePointDocumentLocation link
+            var folderName = licence.GetDocumentFolderName();
+            _fileManagerClient.CreateFolderIfNotExist(_logger, LicenceDocumentUrlTitle, folderName);
+            _dynamicsClient.CreateEntitySharePointDocumentLocation("licence", licence.AdoxioLicencesid, folderName, folderName);
         }
 
         [HttpPut("{licenceId}/representative")]
@@ -311,6 +322,48 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
+        /// <summary>
+        /// Set autorenewal to 'No' to deny licence renewal for a given licence. Must be preceded by setting licence to 'Expired'. Only useful for automated testing.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("denyautorenew/{licenceID}")]
+        public async Task<IActionResult> DenyAutoRenew(string licenceID)
+        {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
+            // get the current user.
+            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+
+            // query the Dynamics system to get the account record.
+            if (userSettings.AccountId != null && !userSettings.IsNewUserRegistration && userSettings.AccountId.Length > 0)
+            {
+
+                // call the bpf to process the application.
+                try
+                {
+                    // this needs to be the guid for the published workflow.
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("e1792ccf-e40b-491f-9a9a-ee8e977749e6",licenceID);
+                    return Ok("OK");
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    string error = httpOperationException.Response.Content;
+                    return BadRequest(error);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+            else
+            {
+                return BadRequest("This API is not available to an unregistered user.");
+            }
+        }
+
         [HttpPost("set-third-party-operator")]
         public ActionResult SetThirdPartyOperator(LicenceTransfer item)
         {
@@ -511,11 +564,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
 
-                // set application type relationship 
+                // set application type relationship
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
                 application.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
-                // set licence type relationship 
+                // set licence type relationship
                 if (adoxioLicense.AdoxioLicenceType != null)
                 {
 
@@ -936,7 +989,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioFridayopen)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayopen)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayopen)}</td>
-                            </tr>                
+                            </tr>
                             <tr>
                                 <td class='hours'>End</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayclose)}</td>

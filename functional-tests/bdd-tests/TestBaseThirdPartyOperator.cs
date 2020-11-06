@@ -23,8 +23,8 @@ namespace bdd_tests
         [And(@"I request a third party operator")]
         public void RequestThirdPartyOperator()
         {
-            // return to the Licences tab
-            ClickLicencesTab();
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
 
             /* 
             Page Title: Licences & Authorizations
@@ -41,15 +41,22 @@ namespace bdd_tests
             Page Title: Add or Change a Third Party Operator
             */
 
-            string thirdparty = "GunderCorp";
+            string thirdparty = "GunderCorp TestBusiness";
 
             // search for the proposed licensee
             NgWebElement uiThirdPartyOperator = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));
             uiThirdPartyOperator.SendKeys(thirdparty);
 
-            NgWebElement uiThirdPartyOperatorOption = ngDriver.FindElement(By.CssSelector("mat-option[role='option'] span"));
-            uiThirdPartyOperatorOption.Click();
-
+            var uiThirdPartyOperatorOption = ngDriver.FindElements(By.CssSelector("mat-option[role='option'] span"));
+            if (uiThirdPartyOperatorOption.Count > 0)
+            {
+                uiThirdPartyOperatorOption[0].Click();
+            }
+            else
+            {
+                throw new Exception($"Unable to find {thirdparty}");
+            }
+            
             // click on authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
@@ -61,8 +68,8 @@ namespace bdd_tests
             // click on submit button
             ClickOnSubmitButton();
 
-            // return to the Licences tab
-            ClickLicencesTab();
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
 
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
