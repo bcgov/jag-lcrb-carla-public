@@ -7,17 +7,17 @@ USER 0
 # Install packages
 #	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install xorg-x11-fonts* xorg-x11-xinit xorg-x11-xinit-session xorg-x11-server-Xvfb xorg-x11-twm xorg-x11-font dejavu-sans-fonts dejavu-serif-fonts xdotool  \
 
+#	&& yum -y install http://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/compat-openssl10-1.0.2o-3.el8.i686.rpm \
+#	&& yum -y install http://rpmfind.net/linux/centos/8.2.2004/AppStream/x86_64/os/Packages/xorg-x11-fonts-75dpi-7.5-19.el8.noarch.rpm \
+#	&& yum -y install http://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/libpng15-1.5.30-7.el8.x86_64.rpm \
+#	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \	
 
 
 RUN pushd /opt \
 
 	&& INSTALL_PKGS="openssh-clients openssl-1 xorg-x11-fonts-Type1 libpng libpng-devel libjpeg-turbo libjpeg-turbo-devel openssl libX11 libXext libXrender xorg-x11-fonts-Type1 fontconfig psmisc" \
-    && yum --disableplugin=subscription-manager --enablerepo=enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder install -y $INSTALL_PKGS \
+    && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder install -y $INSTALL_PKGS \
     && rpm -V $INSTALL_PKGS \
-	&& yum -y install http://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/compat-openssl10-1.0.2o-3.el8.i686.rpm \
-	&& yum -y install http://rpmfind.net/linux/centos/8.2.2004/AppStream/x86_64/os/Packages/xorg-x11-fonts-75dpi-7.5-19.el8.noarch.rpm \
-	&& yum -y install http://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/libpng15-1.5.30-7.el8.x86_64.rpm \
-	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \	
     && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y install https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos8.x86_64.rpm \
 	&& mkdir /usr/local/bin/Linux \
 	&& echo $'#!/usr/bin/env sh\n\
