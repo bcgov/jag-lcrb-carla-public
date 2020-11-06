@@ -268,8 +268,10 @@ namespace bdd_tests
             ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
 
             // Changed to Assert.Equal so that the error message will be recorded in the test log.
-
-            Assert.Equal("OK", ngDriver.WrappedDriver.PageSource);
+            if (!ngDriver.WrappedDriver.PageSource.Contains("OK"))
+            {
+                throw new Exception(ngDriver.WrappedDriver.PageSource);
+            }
 
             ngDriver.IgnoreSynchronization = false;
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
