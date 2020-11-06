@@ -331,8 +331,10 @@ namespace bdd_tests
             // navigate to api/Licenses/noautorenew/{licenceID}
             ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/noautorenew/{licenceID}");
 
-            // wait for the automated expiry process to run
-            Assert.Equal("OK", ngDriver.WrappedDriver.PageSource);
+            if (!ngDriver.WrappedDriver.PageSource.Contains("OK"))
+            {
+                throw new Exception(ngDriver.WrappedDriver.PageSource);
+            }
 
             ngDriver.IgnoreSynchronization = false;
 
