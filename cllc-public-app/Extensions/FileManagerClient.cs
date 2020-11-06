@@ -51,7 +51,6 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
         }
 
-
         public static List<Public.ViewModels.FileSystemItem> GetFileDetailsListInFolder(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName)
         {
             List<Public.ViewModels.FileSystemItem> fileSystemItemVMList = new List<Public.ViewModels.FileSystemItem>();
@@ -107,19 +106,22 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             Contract.Requires(_fileManagerClient != null);
             Contract.Requires(documentType != null);
 
-            var filename = FileSystemItemExtensions.CombineNameDocumentType($"{hash}.pdf", documentType);
-            var notChanged = _fileManagerClient.FileExistsByHash(_logger, entityName, entityId, folderName, documentType, hash);
+            // SharePoint can truncate file names that are too long. Make sure we account for that.
+            var fileName = FileSystemItemExtensions.CombineNameDocumentType($"{hash}.pdf", documentType);
+            fileName = _fileManagerClient.GetTruncatedFilename(_logger, entityName, folderName, fileName);
+
+            var notChanged = _fileManagerClient.FileExists(_logger, entityName, entityId, folderName, documentType, fileName);
             if (notChanged)
             {
                 // Do not save full file names to the logs (for privacy)
                 var logFolderName = WordSanitizer.Sanitize(folderName);
-                var logFileName = WordSanitizer.Sanitize(filename);
+                var logFileName = WordSanitizer.Sanitize(fileName);
                 _logger.LogInformation($"PDF file {logFileName} in folder {logFolderName} hasn't changed. Will NOT UPLOAD again.");
 
                 // Abort early if PDF hasn't changed...
                 return;
             }
-            _fileManagerClient.UploadPdf(_logger, entityName, entityId, folderName, filename, data);
+            _fileManagerClient.UploadPdf(_logger, entityName, entityId, folderName, fileName, data);
         }
 
         public static void UploadPdf(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, string filename, byte[] data)
@@ -153,7 +155,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
         }
 
-        public static bool FileExistsByHash(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, string documentType, string hash)
+        public static bool FileExists(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, string documentType, string fileName)
         {
             Contract.Requires(_fileManagerClient != null);
             var exists = false;
@@ -172,7 +174,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                 if (result.ResultStatus == ResultStatus.Success)
                 {
-                    exists = result.Files.Any(f => FileSystemItemExtensions.GetDocumentName(f.Name) == $"{hash}.pdf");
+                    exists = result.Files.Any(f => f.Name == fileName);
                 }
                 else
                 {
@@ -184,6 +186,46 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 _logger.LogError(e, "Error getting SharePoint File List");
             }
             return exists;
+        }
+
+        public static string GetTruncatedFilename(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string folderName, string fileName)
+        {
+            Contract.Requires(_fileManagerClient != null);
+            var truncated = fileName;
+
+            // Do not save full file names to the logs (for privacy)
+            var logFileName = WordSanitizer.Sanitize(fileName);
+            var logFolderName = WordSanitizer.Sanitize(folderName);
+            var errorMessage = $"ERROR in getting truncated filename {logFileName} for folder {logFolderName}";
+
+            try
+            {
+                // call the web service
+                var request = new TruncatedFilenameRequest()
+                {
+                    EntityName = entityName,
+                    FolderName = folderName,
+                    FileName = fileName
+                };
+
+                // Get the (potentially) truncated filename from SharePoint
+                var result = _fileManagerClient.GetTruncatedFilename(request);
+
+                if (result.ResultStatus == ResultStatus.Success)
+                {
+                    truncated = result.FileName;
+                }
+                else
+                {
+                    _logger.LogError(errorMessage);
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, errorMessage);
+            }
+
+            return truncated;
         }
     }
 }
