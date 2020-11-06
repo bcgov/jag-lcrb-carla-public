@@ -86,18 +86,14 @@ namespace bdd_tests
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
-            string licencesLink = "Licences & Authorizations";
-
-            // click on the Licences link
-            ClickOnLink(licencesLink);
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
         }
 
 
         [And(@"I click on the Dashboard tab")]
         public void ClickDashboardTab()
         {
-            string dashboard = "Dashboard";
-            ClickOnLink(dashboard);
+            ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
         }
 
 
