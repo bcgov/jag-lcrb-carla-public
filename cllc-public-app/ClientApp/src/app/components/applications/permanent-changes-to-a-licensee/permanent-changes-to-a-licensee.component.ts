@@ -10,6 +10,8 @@ import { ApplicationDataService } from '@services/application-data.service';
 })
 export class PermanentChangesToALicenseeComponent implements OnInit {
     data: any = {};
+    value: string; // Place holder propertry
+    applicationId: string; // Place holder prop
 
   changeList = [
     {
