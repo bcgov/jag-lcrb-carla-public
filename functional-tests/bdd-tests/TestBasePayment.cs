@@ -50,7 +50,7 @@ namespace bdd_tests
 
 
         [And(@"I pay the licensing fee for (.*)")]
-        public void PayLicenceFee(string feeType)
+        public void PayLicenceFee()
         {
             /* 
             Page Title: Licences & Authorizations
@@ -61,8 +61,8 @@ namespace bdd_tests
             string returnToDashboard = "Return to Dashboard";
 
             // click on the pay first year licence fee link
-            NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
-            uiFirstYearLicenceFee.Click();
+            var uiFirstYearLicenceFees = ngDriver.FindElements(By.LinkText(firstYearLicenceFee));
+            uiFirstYearLicenceFees[0].Click();
 
             // pay the licence fee
             MakePayment();

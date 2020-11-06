@@ -1,5 +1,5 @@
 // Functional test
-// 
+
 
 podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
     containerTemplate(
@@ -14,18 +14,18 @@ podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', service
         args: '${computer.jnlpmac} ${computer.name}'
     )
 ]) {
-    stage('BDD Test') {
+    stage('Release BDD Test') {
         node('jenkins-agent-dotnet') {
             //the checkout is mandatory
             echo "checking out source"
             echo "Build: ${BUILD_ID}"
             checkout scm
 
-            dir('functional-tests/smoke-tests') {               
-                withEnv(["baseUri=${baseUri}","test_start=${test_start}","test_start_worker=${test_start_worker}","test_cc=${test_cc}","test_ccv=${test_ccv}","CHROME_BINARY_LOCATION=${CHROME_BINARY_LOCATION}"])
+            dir('functional-tests/bdd-tests') {               
+                withEnv(["TZ=GMT-7,baseUri=${baseUri}","test_start=${test_start}","test_start_worker=${test_start_worker}","test_cc=${test_cc}","test_ccv=${test_ccv}","CHROME_BINARY_LOCATION=${CHROME_BINARY_LOCATION}"])
                 {
                     try {                        
-                        sh 'dotnet test --logger "junit;LogFilePath=functionalResults.xml"'					
+                        sh 'dotnet test --filter Category=@release --logger "junit;LogFilePath=functionalResults.xml"'					
                     }
                     catch (err)
                     {
