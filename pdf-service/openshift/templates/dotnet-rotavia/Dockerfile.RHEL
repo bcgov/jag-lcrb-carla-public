@@ -15,7 +15,7 @@ USER 0
 
 RUN pushd /opt \
 
-	&& INSTALL_PKGS="openssh-clients openssl-1 xorg-x11-fonts-Type1 libpng libpng-devel libjpeg-turbo libjpeg-turbo-devel openssl libX11 libXext libXrender xorg-x11-fonts-Type1 fontconfig psmisc" \
+	&& INSTALL_PKGS="openssh-clients xorg-x11-fonts-Type1 libpng libpng-devel libjpeg-turbo libjpeg-turbo-devel openssl libX11 libXext libXrender xorg-x11-fonts-Type1 fontconfig psmisc" \
     && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder install -y $INSTALL_PKGS \
     && rpm -V $INSTALL_PKGS \
     && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y install https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos8.x86_64.rpm \
