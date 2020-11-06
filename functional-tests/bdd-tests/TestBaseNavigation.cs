@@ -267,8 +267,9 @@ namespace bdd_tests
             // navigate to api/applications/<Application ID>/process
             ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
 
-            // wait for the automated approval process to run
-            Assert.True(ngDriver.WrappedDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+            // Changed to Assert.Equal so that the error message will be recorded in the test log.
+
+            Assert.Equal("OK", ngDriver.WrappedDriver.PageSource);
 
             ngDriver.IgnoreSynchronization = false;
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
