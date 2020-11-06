@@ -311,18 +311,26 @@ namespace bdd_tests
         [And(@"autorenewal is set to 'No'")]
         public void AutoRenewalDenied()
         {
+            string transferLicence = "Transfer Licence";
+
+            // find the Transfer Licence link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(transferLicence));
+            string URL = uiLicenceID.GetAttribute("href");
+
+            // retrieve the licence ID
+            string[] parsedURL = URL.Split('/');
+
+            licenceID = parsedURL[5];
+
             ngDriver.IgnoreSynchronization = true;
-            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
-            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
 
-            // navigate to api/applications/<Application ID>/process - TODO
-            //ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{endorsementID}/processEndorsement");
+            // navigate to api/Licenses/noautorenew/{licenceID}
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/noautorenew/{licenceID}");
 
-            // wait for the automated approval process to run
+            // wait for the automated expiry process to run
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
 
             ngDriver.IgnoreSynchronization = false;
-            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
 
             // navigate back to Licenses tab
             ngDriver.Navigate().GoToUrl($"{baseUri}licences");
