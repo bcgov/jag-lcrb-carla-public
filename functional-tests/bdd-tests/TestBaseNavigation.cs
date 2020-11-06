@@ -289,7 +289,7 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{endorsementID}/processEndorsement");
 
             // wait for the automated approval process to run
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+            Assert.Equal("OK", ngDriver.WrappedDriver.PageSource);
 
             ngDriver.IgnoreSynchronization = false;
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
@@ -328,7 +328,7 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/noautorenew/{licenceID}");
 
             // wait for the automated expiry process to run
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+            Assert.Equal("OK", ngDriver.WrappedDriver.PageSource);
 
             ngDriver.IgnoreSynchronization = false;
 
