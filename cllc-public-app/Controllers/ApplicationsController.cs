@@ -595,6 +595,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return result;
         }
+        
+        [HttpGet("permanent-changes-to-licensee-data")]
+        public IActionResult GetPermanetChangesToLicenseeData(){
+            var result = new OngoingLicenseeData();
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+            var result = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
+
+            return result;
+
+   
+        }
 
         /// GET all applications in Dynamics for the current user
         [HttpGet("ongoing-licensee-application-id")]
