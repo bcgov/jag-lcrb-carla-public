@@ -322,6 +322,48 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
+        /// <summary>
+        /// Set autorenewal to 'No' to deny licence renewal for a given licence. Must be preceded by setting licence to 'Expired'. Only useful for automated testing.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("denyautorenew/{licenceID}")]
+        public async Task<IActionResult> DenyAutoRenew(string licenceID)
+        {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
+            // get the current user.
+            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+
+            // query the Dynamics system to get the account record.
+            if (userSettings.AccountId != null && !userSettings.IsNewUserRegistration && userSettings.AccountId.Length > 0)
+            {
+
+                // call the bpf to process the application.
+                try
+                {
+                    // this needs to be the guid for the published workflow.
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("e1792ccf-e40b-491f-9a9a-ee8e977749e6",licenceID);
+                    return Ok("OK");
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    string error = httpOperationException.Response.Content;
+                    return BadRequest(error);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+            else
+            {
+                return BadRequest("This API is not available to an unregistered user.");
+            }
+        }
+
         [HttpPost("set-third-party-operator")]
         public ActionResult SetThirdPartyOperator(LicenceTransfer item)
         {
