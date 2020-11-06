@@ -48,6 +48,15 @@ namespace bdd_tests
         }
 
 
+
+        [And(@"I click on the signature checkbox")]
+        public void ClickOnSignatureCheckbox()
+        {
+            NgWebElement uiSignature = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiSignature.Click();
+        }
+    
+
         [And(@"I click on the branding change link for (.*)")]
         public void ClickOnBrandingChangeLink(string changeType)
         {
@@ -77,18 +86,14 @@ namespace bdd_tests
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
-            string licencesLink = "Licences & Authorizations";
-
-            // click on the Licences link
-            ClickOnLink(licencesLink);
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
         }
 
 
         [And(@"I click on the Dashboard tab")]
         public void ClickDashboardTab()
         {
-            string dashboard = "Dashboard";
-            ClickOnLink(dashboard);
+            ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
         }
 
 
@@ -256,10 +261,12 @@ namespace bdd_tests
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
 
             // navigate to api/applications/<Application ID>/process
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
+            ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
 
-            // wait for the automated approval process to run
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+            if (!ngDriver.WrappedDriver.PageSource.Contains("OK"))
+            {
+                throw new Exception(ngDriver.WrappedDriver.PageSource);
+            }
 
             ngDriver.IgnoreSynchronization = false;
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
@@ -279,8 +286,10 @@ namespace bdd_tests
             // navigate to api/applications/<Application ID>/process
             ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{endorsementID}/processEndorsement");
 
-            // wait for the automated approval process to run
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+            if (!ngDriver.WrappedDriver.PageSource.Contains("OK"))
+            {
+                throw new Exception(ngDriver.WrappedDriver.PageSource);
+            }
 
             ngDriver.IgnoreSynchronization = false;
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
@@ -299,6 +308,44 @@ namespace bdd_tests
         }
 
 
+        [And(@"autorenewal is set to 'No'")]
+        public void AutoRenewalDenied()
+        {
+            string transferLicence = "Transfer Licence";
+
+            // find the Transfer Licence link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(transferLicence));
+            string URL = uiLicenceID.GetAttribute("href");
+
+            // retrieve the licence ID
+            string[] parsedURL = URL.Split('/');
+
+            licenceID = parsedURL[5];
+
+            ngDriver.IgnoreSynchronization = true;
+
+            // navigate to api/Licenses/noautorenew/{licenceID}
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/noautorenew/{licenceID}");
+
+            if (!ngDriver.WrappedDriver.PageSource.Contains("OK"))
+            {
+                throw new Exception(ngDriver.WrappedDriver.PageSource);
+            }
+
+            ngDriver.IgnoreSynchronization = false;
+
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        } 
+
+
+        [And(@"I am unable to renew the licence")]
+        public void RenewalLinkHidden()
+        {
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Renew Licence'))]")).Displayed);
+        }
+
+
         [And(@"I do not complete the licence renewal application correctly")]
         public void CompleteApplicationRenewalIncorrectly()
         {
@@ -308,7 +355,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"the expiry date is changed using the workflow named (.*)")]
+        [And(@"the expiry date is changed using the Dynamics workflow named (.*)")]
         public void SetExpiryDate(string workflowGUID)
         {            
             string transferLicence = "Transfer Licence";
@@ -327,8 +374,10 @@ namespace bdd_tests
             // navigate to api/Licenses/<Licence ID>/setexpiry
             ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{workflowGUID}/setexpiry/{licenceID}");
 
-            // wait for the automated expiry process to run
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+            if (!ngDriver.WrappedDriver.PageSource.Contains("OK"))
+            {
+                throw new Exception(ngDriver.WrappedDriver.PageSource);
+            }
 
             ngDriver.IgnoreSynchronization = false;
 
