@@ -15,6 +15,7 @@ RUN pushd /opt \
     && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream install -y $INSTALL_PKGS \
     && rpm -V $INSTALL_PKGS \
 	&& yum -y install http://rpmfind.net/linux/centos/8.2.2004/AppStream/x86_64/os/Packages/xorg-x11-fonts-75dpi-7.5-19.el8.noarch.rpm \
+	&& yum -y install http://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/libpng15-1.5.30-7.el8.x86_64.rpm \
 	&& yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \	
     && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder -y install https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos7.x86_64.rpm \
 	&& mkdir /usr/local/bin/Linux \
