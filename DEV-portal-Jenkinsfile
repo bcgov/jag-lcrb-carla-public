@@ -39,8 +39,6 @@ node('master') {
 					
 					openshift.tag("cllc-public-frontend:latest", "cllc-public-frontend:dev") 
                 
-				
-				}
 			
 			}
             
