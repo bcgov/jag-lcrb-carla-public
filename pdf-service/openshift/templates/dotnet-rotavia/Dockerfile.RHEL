@@ -11,8 +11,8 @@ USER 0
 
 RUN pushd /opt \
 
-	&& INSTALL_PKGS="openssh-clients xorg-x11-fonts-Type1 libpng libpng-devel libjpeg-turbo libjpeg-turbo-devel openssl libX11 libXext libXrender xorg-x11-fonts-Type1 fontconfig psmisc" \
-    && yum --disableplugin=subscription-manager --enablerepo=ubi-8-appstream install -y $INSTALL_PKGS \
+	&& INSTALL_PKGS="openssh-clients openssl-1 xorg-x11-fonts-Type1 libpng libpng-devel libjpeg-turbo libjpeg-turbo-devel openssl libX11 libXext libXrender xorg-x11-fonts-Type1 fontconfig psmisc" \
+    && yum --disableplugin=subscription-manager --enablerepo=enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder install -y $INSTALL_PKGS \
     && rpm -V $INSTALL_PKGS \
 	&& yum -y install http://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/compat-openssl10-1.0.2o-3.el8.i686.rpm \
 	&& yum -y install http://rpmfind.net/linux/centos/8.2.2004/AppStream/x86_64/os/Packages/xorg-x11-fonts-75dpi-7.5-19.el8.noarch.rpm \
