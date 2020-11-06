@@ -1,4 +1,3 @@
-{{ data | json }}
 <div>
     <h1>Permanent Changes to a Licensee</h1>
 
@@ -79,8 +78,11 @@
 
             <a href="">More Information</a>
         </div>
-
-        <mat-checkbox *ngFor="let item of changeList">{{item.name}}</mat-checkbox>
+        
+        <ng-container *ngFor="let item of changeList">
+            <mat-checkbox >{{item.name}}</mat-checkbox>
+            <br>
+        </ng-container>
     </section>
 
     <!-- Person's Name Change -->
