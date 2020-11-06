@@ -17,7 +17,7 @@ Feature: CRSRelease
     As a logged in business user
     I want to confirm that the CRS functionality is ready for release
 
-@validation @privatecorporation @release
+@validation @privatecorporation @crsrelease
 Scenario: Private Corporation CRS Release 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -42,6 +42,7 @@ Scenario: Private Corporation CRS Release
     And I review the federal reports
     And I click on the Licences tab
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    And I click on the link for Renew Licence
     And I renew the licence with positive responses for Cannabis
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
@@ -49,15 +50,15 @@ Scenario: Private Corporation CRS Release
     And I confirm that the director name has been updated
     And I click on the Licences tab
     And I request a store relocation for Cannabis
-    And I request a structural change
+    # And I request a structural change
     And I request a transfer of ownership
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    # And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@validation @soleproprietorship @release
+@validation @soleproprietorship @crsrelease
 Scenario: Sole Proprietorship CRS Release 
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
@@ -82,6 +83,7 @@ Scenario: Sole Proprietorship CRS Release
     And I review the federal reports
     And I click on the Licences tab
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    And I click on the link for Renew Licence
     And I renew the licence with positive responses for Cannabis
     And I click on the link for Dashboard
     And I request a personnel name change for a sole proprietorship
@@ -89,11 +91,11 @@ Scenario: Sole Proprietorship CRS Release
     And I confirm that the director name has been updated
     And I click on the Licences tab
     And I request a store relocation for Cannabis
-    And I request a structural change
+    # And I request a structural change
     And I request a transfer of ownership
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    # And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 */
