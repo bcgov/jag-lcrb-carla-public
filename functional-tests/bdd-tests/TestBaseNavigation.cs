@@ -267,7 +267,6 @@ namespace bdd_tests
             // navigate to api/applications/<Application ID>/process
             ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
 
-            // Changed to Assert.Equal so that the error message will be recorded in the test log.
             if (!ngDriver.WrappedDriver.PageSource.Contains("OK"))
             {
                 throw new Exception(ngDriver.WrappedDriver.PageSource);
@@ -291,8 +290,10 @@ namespace bdd_tests
             // navigate to api/applications/<Application ID>/process
             ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{endorsementID}/processEndorsement");
 
-            // wait for the automated approval process to run
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+            if (!ngDriver.WrappedDriver.PageSource.Contains("OK"))
+            {
+                throw new Exception(ngDriver.WrappedDriver.PageSource);
+            }
 
             ngDriver.IgnoreSynchronization = false;
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
@@ -367,8 +368,10 @@ namespace bdd_tests
             // navigate to api/Licenses/<Licence ID>/setexpiry
             ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{workflowGUID}/setexpiry/{licenceID}");
 
-            // wait for the automated expiry process to run
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
+            if (!ngDriver.WrappedDriver.PageSource.Contains("OK"))
+            {
+                throw new Exception(ngDriver.WrappedDriver.PageSource);
+            }
 
             ngDriver.IgnoreSynchronization = false;
 
