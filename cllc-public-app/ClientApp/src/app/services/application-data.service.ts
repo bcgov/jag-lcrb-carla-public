@@ -58,6 +58,11 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getPermanentChangesToLicenseeData(): Observable<any> {
+    return this.http.get<any>(this.apiPath + 'permanent-changes-to-licensee-data', { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   getOngoingLicenseeData(type: 'on-going'| 'create'): Observable<OngoingLicenseeData> {
     return this.http.get<OngoingLicenseeData>(`${this.apiPath}licensee-data/${type}`, { headers: this.headers })
       .pipe(catchError(this.handleError));

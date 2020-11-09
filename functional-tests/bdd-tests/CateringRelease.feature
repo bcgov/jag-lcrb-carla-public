@@ -38,7 +38,7 @@ Scenario: Private Corporation Catering Release
     And I click on the link for Renew Licence
     And I renew the licence with positive responses for Catering
     And I click on the Licences tab
-    And I request a third party operator
+    # And I request a third party operator
     And the account is deleted
     Then I see the login page
 

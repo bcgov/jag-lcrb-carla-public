@@ -41,7 +41,7 @@ namespace bdd_tests
             Page Title: Add or Change a Third Party Operator
             */
 
-            string thirdparty = "GunderCorp";
+            string thirdparty = "GunderCorp TestBusiness";
 
             // search for the proposed licensee
             NgWebElement uiThirdPartyOperator = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));
