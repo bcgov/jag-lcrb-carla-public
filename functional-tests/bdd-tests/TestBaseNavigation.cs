@@ -311,10 +311,10 @@ namespace bdd_tests
         [And(@"autorenewal is set to 'No'")]
         public void AutoRenewalDenied()
         {
-            string transferLicence = "Transfer Licence";
+            string renewLicence = "Renew Licence";
 
-            // find the Transfer Licence link
-            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(transferLicence));
+            // find the Renew Licence link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(renewLicence));
             string URL = uiLicenceID.GetAttribute("href");
 
             // retrieve the licence ID
@@ -397,6 +397,17 @@ namespace bdd_tests
             // click on the Show Store as Open on Map checkbox
             NgWebElement uiMapCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox"));
             uiMapCheckbox.Click();
+        }
+
+
+        [And(@"the licence is successfully downloaded")]
+        public void SuccessfulLicenceDownload()
+        {
+            /* 
+            Page Title: Licences & Authorizations
+            */
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'No File'))]")).Displayed);
         }
 
 
