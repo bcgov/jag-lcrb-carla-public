@@ -19,20 +19,25 @@ namespace Gov.Lclb.Cllb.Public.Models
             // Attendance > 500
             int maxAttendance = item.MaxAttendance != null ? (int)item.MaxAttendance : 0;
             int maxStaffAttendance = item.MaxStaffAttendance != null ? (int)item.MaxStaffAttendance : 0;
-            if (maxAttendance + maxStaffAttendance >= 500) {
+            if (maxAttendance + maxStaffAttendance >= 500)
+            {
                 isHighRisk = true;
             }
 
             // Location is outdoors
             // int? location = item.SpecificLocation;
-            if (item.SpecificLocation == SpecificLocation.Outdoors || item.SpecificLocation == SpecificLocation.Both) {
+            if (item.SpecificLocation == SpecificLocation.Outdoors || item.SpecificLocation == SpecificLocation.Both)
+            {
                 isHighRisk = true;
             }
 
             // liquor service ends after 2am (but not community event)
-            if (item.EventType != EventType.Community) {
-                item.Schedules?.ForEach((schedule) => {
-                    if (schedule.ServiceEndDateTime.HasValue) {
+            if (item.EventType != EventType.Community)
+            {
+                item.Schedules?.ForEach((schedule) =>
+                {
+                    if (schedule.ServiceEndDateTime.HasValue)
+                    {
                         TimeZoneInfo hwZone;
                         try
                         {
@@ -42,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                         {
                             hwZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
                         }
-                        
+
                         DateTimeOffset endTime = TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceEndDateTime.HasValue ? schedule.ServiceEndDateTime.Value.DateTime : DateTime.MaxValue, hwZone);
                         if ((endTime.Hour == 2 && endTime.Minute != 0) || (endTime.Hour > 2 && endTime.Hour < 9))
                         {
@@ -52,7 +57,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 });
             }
 
-            if (isHighRisk || alwaysAuthorization) {
+            if (isHighRisk || alwaysAuthorization)
+            {
                 return EventClass.Authorization;
             }
             return EventClass.Notice;
@@ -71,8 +77,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
                 result.Status = (LicenceEventStatus?)item.Statuscode;
                 result.Name = item.AdoxioName;
-                result.StartDate = item.AdoxioStartdate?.Date;
-                result.EndDate = item.AdoxioEnddate?.Date;
+                // result.StartDate = item.AdoxioStartdate?.Date;
+                // result.EndDate = item.AdoxioEnddate?.Date;
+                result.StartDate = item.AdoxioEventstartdate?.Date;
+                result.EndDate = item.AdoxioEventenddate?.Date;
                 result.VenueDescription = item.AdoxioVenuenamedescription;
                 result.AdditionalLocationInformation = item.AdoxioAdditionallocationinfo;
                 result.FoodService = (FoodService?)item.AdoxioFoodservice;
@@ -149,7 +157,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.SEPLicenceNumber = item.AdoxioSeplicencenumber;
                 result.SEPContactName = item.AdoxioSepcontactname;
                 result.SEPContactPhoneNumber = item.AdoxioSepcontactphonenumber;
-                
                 //market events
                 result.IsNoPreventingSaleofLiquor = item.AdoxioIsnopreventingsaleofliquor;
                 result.IsMarketManagedorCarried = item.AdoxioIsmarketmanagedorcarried;
@@ -190,14 +197,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (from.StartDate.HasValue)
             {
                 DateTimeOffset oldStart = (DateTimeOffset)from.StartDate;
-                to.AdoxioStartdate = oldStart;
+                to.AdoxioEventstartdate = oldStart;
                 /*DateTimeOffset startDate = new DateTimeOffset(oldStart.Year, oldStart.Month, oldStart.Day, 0, 0, 0, new TimeSpan(0, 0, 0));
                 to.AdoxioStartdate = startDate;*/
             }
             if (from.EndDate.HasValue)
             {
                 DateTimeOffset oldEnd = (DateTimeOffset)from.EndDate;
-                to.AdoxioEnddate = oldEnd;
+                to.AdoxioEventenddate = oldEnd;
                 /*DateTimeOffset endDate = new DateTimeOffset(oldEnd.Year, oldEnd.Month, oldEnd.Day, 0, 0, 0, TimeZone.CurrentTimeZone);
                 to.AdoxioEnddate = endDate;*/
             }
@@ -228,7 +235,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCity = from.City;
             to.AdoxioProvince = from.Province;
             to.AdoxioPostalcode = from.PostalCode;
-            
+
             // Security Plan
             to.AdoxioRequestsafetysecurityplan = from.SecurityPlanRequested;
             to.AdoxioEventliquorlayout = from.EventLiquorLayout;
@@ -252,7 +259,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSecuritycompanycontactphone = from.SecurityCompanyPhoneNumber;
             to.AdoxioSecuritycompanycontactemail = from.SecurityCompanyEmail;
             to.AdoxioPoliceofficersummary = from.SecurityPoliceOfficerSummary;
-            to.AdoxioIsminorsattending  = from.SafeAndResponsibleMinorsNotAttending;
+            to.AdoxioIsminorsattending = from.SafeAndResponsibleMinorsNotAttending;
             to.AdoxioIsliquorareacontrolled = from.SafeAndResponsibleLiquorAreaControlled;
             to.AdoxioLiquorareacontrolleddetails = from.SafeAndResponsibleLiquorAreaControlledDescription;
             to.AdoxioIstwopiecesidrequired = from.SafeAndResponsibleMandatoryID;
