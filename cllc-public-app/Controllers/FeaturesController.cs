@@ -88,6 +88,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("MarketEvents");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_PERMANENT_CHANGES_TO_LICENSEE"]))
+            {
+                features.Add("PermanentChangesToLicensee");
+            }
             return features;
         }
 
