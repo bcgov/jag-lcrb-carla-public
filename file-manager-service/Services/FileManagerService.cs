@@ -400,5 +400,30 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
             return Task.FromResult(result);
         }
+
+        public override Task<TruncatedFilenameReply> GetTruncatedFilename(TruncatedFilenameRequest request, ServerCallContext context)
+        {
+            var result = new TruncatedFilenameReply();
+            string logFileName = WordSanitizer.Sanitize(request.FileName);
+            string logFolderName = WordSanitizer.Sanitize(request.FolderName);
+            try
+            {
+                var _sharePointFileManager = new SharePointFileManager(_configuration);
+
+                // Ask SharePoint whether this filename would be truncated upon upload
+                var listTitle = GetDocumentListTitle(request.EntityName);
+                var maybeTruncated = _sharePointFileManager.GetTruncatedFileName(request.FileName, listTitle, request.FolderName);
+                result.FileName = maybeTruncated;
+                result.ResultStatus = ResultStatus.Success;
+            }
+            catch (SharePointRestException ex)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = $"ERROR in getting truncated filename {logFileName} for folder {logFolderName}";
+                Log.Error(ex, result.ErrorDetail);
+
+            }
+            return Task.FromResult(result);
+        }
     }
 }

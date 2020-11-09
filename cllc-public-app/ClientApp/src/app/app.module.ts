@@ -213,6 +213,8 @@ import { LgZoningConfirmationComponent } from './components/applications/applica
 import { ProofOfZoningComponent } from './components/applications/application/tabs/proof-of-zoning/proof-of-zoning.component';
 import { ProductionStagesComponent } from './components/applications/application/tabs/business-plan/production-stages/production-stages.component';
 import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
+import { PermanentChangesToALicenseeComponent } from './components/applications/permanent-changes-to-a-licensee/permanent-changes-to-a-licensee.component';
+import { LegalEntityTypeUpdateCalloutboxComponent } from './components/dashboard/legal-entity-type-update-calloutbox/legal-entity-type-update-calloutbox.component';
 
 @NgModule({
   declarations: [
@@ -337,7 +339,9 @@ import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confi
     AdditionalPidsComponent,
     LgZoningConfirmationComponent,
     ProductionStagesComponent,
-    PhsConfirmationComponent
+    PhsConfirmationComponent,
+    PermanentChangesToALicenseeComponent,
+    LegalEntityTypeUpdateCalloutboxComponent
   ],
   imports: [
     ChartsModule,
