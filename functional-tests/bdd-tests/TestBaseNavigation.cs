@@ -400,6 +400,17 @@ namespace bdd_tests
         }
 
 
+        [And(@"the licence is successfully downloaded")]
+        public void SuccessfulLicenceDownload()
+        {
+            /* 
+            Page Title: Licences & Authorizations
+            */
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'No File'))]")).Displayed);
+        }
+
+
         public void FileUpload(string fileName, string inputFile)
         {
             for (int i = 0; i < 10; i++)
