@@ -77,10 +77,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
                 result.Status = (LicenceEventStatus?)item.Statuscode;
                 result.Name = item.AdoxioName;
-                // result.StartDate = item.AdoxioStartdate?.Date;
-                // result.EndDate = item.AdoxioEnddate?.Date;
-                result.StartDate = item.AdoxioEventstartdate?.Date;
-                result.EndDate = item.AdoxioEventenddate?.Date;
+                result.StartDate = item.AdoxioEventstartdate;
+                result.EndDate = item.AdoxioEventenddate;
                 result.VenueDescription = item.AdoxioVenuenamedescription;
                 result.AdditionalLocationInformation = item.AdoxioAdditionallocationinfo;
                 result.FoodService = (FoodService?)item.AdoxioFoodservice;
