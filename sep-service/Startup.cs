@@ -21,7 +21,7 @@ using HealthChecks.UI.Client;
 using Newtonsoft.Json;
 using System.Net.Mime;
 
-namespace sep_service
+namespace SepService
 {
     public class Startup
     {
