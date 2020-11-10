@@ -23,7 +23,7 @@ namespace sep_service.Controllers
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [HttpGet("echo")]
+        [HttpPost("echo")]
         public string Get([FromBody] string value)
         {
             return value;
