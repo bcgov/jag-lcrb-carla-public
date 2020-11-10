@@ -1,7 +1,7 @@
 using System;
-using sep_service.ViewModels;
+using SepService.ViewModels;
 
-namespace sep_service
+namespace SepService
 {
     public class Sol
     {
