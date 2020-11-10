@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace sep_service.ViewModels
+namespace SepService.ViewModels
 {
     public class ResponsibleIndividual
     {

@@ -8,7 +8,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace sep_service
+namespace SepService
 {
     public class AutoRestParameterFilter : IParameterFilter
     {

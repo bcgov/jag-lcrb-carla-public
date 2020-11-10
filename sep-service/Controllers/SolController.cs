@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace sep_service.Controllers
+namespace SepService.Controllers
 {
     [ApiController]
     [Route("sol")]
