@@ -142,6 +142,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 LicenseId = licence.AdoxioLicencesid,
                 LicenseNumber = licence.AdoxioLicencenumber,
+                LicenceTypeCategory = (LicenceTypeCategory)licence?.AdoxioLicenceType?.AdoxioCategory,
                 MissingFirstYearLicenceFee = missingLicenceFee,
                 CurrentOwner = licence?.AdoxioLicencee?.Name,
                 EstablishmentAddressStreet = licence.AdoxioEstablishmentaddressstreet,
