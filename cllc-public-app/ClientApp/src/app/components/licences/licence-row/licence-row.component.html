@@ -87,7 +87,8 @@
                                     <span *ngIf="item.representativeFullName">Licensee Representative:
                                         <strong>{{item.representativeFullName}}</strong></span>
                                 </a>
-                            </div>
+                                <a [routerLink]="[ '/licence/' + item.licenseId + '/offsite-storage']">Manage Off-Site Storage</a>
+                          </div>
                         </td>
 
                         <td style="padding: 10px;">
