@@ -154,6 +154,149 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
         }
 
+        [HttpPut("{licenceId}/offsite-storage")]
+        public IActionResult UpdateOffsiteStorageLocations([FromBody] ViewModels.ApplicationLicenseSummary item, string licenceId)
+        {
+            if (item == null || string.IsNullOrEmpty(licenceId) || licenceId != item.LicenseId)
+            {
+                return BadRequest();
+            }
+
+            MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.GetLicenceByIdWithChildren(licenceId);
+            if (licence == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            try
+            {
+                // UPDATE the offsite storage locations for this licence
+                if (item.OffsiteStorageLocations != null && item.OffsiteStorageLocations.Count > 0)
+                {
+                    var existingLocations = GetOffsiteLocationsFromLicence(licenceId);
+                    foreach (var loc in item.OffsiteStorageLocations.Where(x => x != null))
+                    {
+                        if (loc.Id == null)
+                        {
+                            CreateOffsiteStorage(loc, licenceId);
+                        }
+                        else if (existingLocations.Any(x => x.AdoxioOffsitestorageid == loc.Id))
+                        {
+                            UpdateOffsiteStorage(loc, licenceId);
+                        }
+                    }
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error updating offsite storage");
+                throw new Exception("Unable to update offsite storage");
+            }
+
+            try
+            {
+                licence = _dynamicsClient.GetLicenceByIdWithChildren(licenceId);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error getting licence");
+                throw new Exception("Unable to get licence after update");
+            }
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licence.AdoxioLicencee.Accountid);
+            var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
+
+            licence.AdoxioLicenceType = Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
+            return new JsonResult(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
+        }
+
+        // TODO: Remove if not useful
+        private void RemoveOffsiteLocationsFromLicence(string licenceId)
+        {
+            var filter = $"_adoxio_licenceid_value eq {licenceId}";
+            try
+            {
+                var locations = _dynamicsClient.Offsitestorages.Get(filter: filter).Value;
+                foreach (var loc in locations)
+                {
+                    try
+                    {
+                        _dynamicsClient.Offsitestorages.Delete(loc.AdoxioOffsitestorageid);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Unexpected error deleting an offsite location.");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Unexpected error deleting a offsite location.");
+                    }
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Unexpected error getting offsite locations.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected error getting offsite locations.");
+            }
+        }
+
+        private IList<MicrosoftDynamicsCRMadoxioOffsitestorage> GetOffsiteLocationsFromLicence(string licenceId)
+        {
+            var locations = new List<MicrosoftDynamicsCRMadoxioOffsitestorage>();
+            var filter = $"_adoxio_licenceid_value eq {licenceId}";
+            try
+            {
+                locations.AddRange(_dynamicsClient.Offsitestorages.Get(filter: filter).Value);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Unexpected error getting offsite locations.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected error getting offsite locations.");
+            }
+            return locations;
+        }
+
+        private void CreateOffsiteStorage(OffsiteStorage item, string licenceId)
+        {
+            // We are only interested in new entities here
+            if (item.Id != null)
+            {
+                return;
+            }
+            var licenceUri = _dynamicsClient.GetEntityURI("adoxio_licenceses", licenceId);
+            var dynamicsOffsiteStorage = new MicrosoftDynamicsCRMadoxioOffsitestorage
+            {
+                LicenceODataBind = licenceUri,
+                Statuscode = (int?)OffsiteStorageStatus.Added,
+                AdoxioDateadded = DateTimeOffset.Now,
+            };
+            dynamicsOffsiteStorage.CopyValues(item);
+            _dynamicsClient.Offsitestorages.Create(dynamicsOffsiteStorage);
+        }
+
+        private void UpdateOffsiteStorage(OffsiteStorage item, string licenceId)
+        {
+            // We are only interested in existing entities here
+            if (item.Id == null)
+            {
+                return;
+            }
+            var patchObject = new MicrosoftDynamicsCRMadoxioOffsitestorage();
+            patchObject.CopyValues(item);
+            _dynamicsClient.Offsitestorages.Update(item.Id, patchObject);
+        }
+
         [HttpPost("cancel-transfer")]
         public ActionResult CancelTransfer(LicenceTransfer item)
         {
@@ -344,7 +487,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     // this needs to be the guid for the published workflow.
-                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("e1792ccf-e40b-491f-9a9a-ee8e977749e6",licenceID);
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("e1792ccf-e40b-491f-9a9a-ee8e977749e6", licenceID);
                     return Ok("OK");
                 }
                 catch (HttpOperationException httpOperationException)
@@ -1218,6 +1361,66 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(httpOperationException, "Error updating licence establishment");
                 throw new Exception("Unable to update licence establishment");
+            }
+
+            try
+            {
+                licence = _dynamicsClient.GetLicenceByIdWithChildren(licenceId);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error getting licence");
+                throw new Exception("Unable to get licence after update");
+            }
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licence.AdoxioLicencee.Accountid);
+            var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
+
+            licence.AdoxioLicenceType = Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
+            return new JsonResult(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
+        }
+
+        [HttpPut("{licenceId}/representative")]
+        public async Task<IActionResult> UpdateOffsiteLocations([FromBody] ViewModels.ApplicationLicenseSummary item, string licenceId)
+        {
+            if (item == null || string.IsNullOrEmpty(licenceId) || licenceId != item.LicenseId)
+            {
+                return BadRequest();
+            }
+
+            MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.GetLicenceByIdWithChildren(licenceId);
+            if (licence == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            MicrosoftDynamicsCRMadoxioLicences patchObject = new MicrosoftDynamicsCRMadoxioLicences()
+            {
+                AdoxioRepresentativename = item.RepresentativeFullName,
+                AdoxioRepresentativephone = item.RepresentativePhoneNumber,
+                AdoxioRepresentativeemail = item.RepresentativeEmail,
+                AdoxioCansubmitpermanentchangeapplications = item.RepresentativeCanSubmitPermanentChangeApplications,
+                AdoxioCansigntemporarychangeapplications = item.RepresentativeCanSignTemporaryChangeApplications,
+                AdoxioCanobtainlicenceinformation = item.RepresentativeCanObtainLicenceInformation,
+                AdoxioCansigngrocerystoreproofofsales = item.RepresentativeCanSignGroceryStoreProofOfSale,
+                AdoxioCanattendeducationsessions = item.RepresentativeCanAttendEducationSessions,
+                AdoxioCanattendcompliancemeetings = item.RepresentativeCanAttendComplianceMeetings,
+                AdoxioCanrepresentathearings = item.RepresentativeCanRepresentAtHearings
+            };
+
+            try
+            {
+                await _dynamicsClient.Licenceses.UpdateAsync(licenceId, patchObject);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error updating licence representative");
+                throw new Exception("Unable to update licence representative");
             }
 
             try
