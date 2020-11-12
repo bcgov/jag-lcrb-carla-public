@@ -62,7 +62,7 @@ namespace bdd_tests
             Assert.True(fieldValueEstablishmentAddressCity != null);
 
             // check that establishment province field is populated
-            NgWebElement uiEstablishmentProvince = ngDriver.FindElement(By.CssSelector("input[formcontrolname='TODO']"));
+            NgWebElement uiEstablishmentProvince = ngDriver.FindElement(By.CssSelector("input.form-control[value='British Columbia']"));
             string fieldValueEstablishmentProvince = uiEstablishmentProvince.GetAttribute("value");
             Assert.True(fieldValueEstablishmentProvince != null);
 
@@ -72,7 +72,7 @@ namespace bdd_tests
             Assert.True(fieldValueEstablishmentAddressPostalCode != null);
 
             // check that establishment country field is populated
-            NgWebElement uiEstablishmentAddressCountry = ngDriver.FindElement(By.CssSelector("input[formcontrolname='TODO']"));
+            NgWebElement uiEstablishmentAddressCountry = ngDriver.FindElement(By.CssSelector("input.form-control[value='Canada']"));
             string fieldValueEstablishmentCountry = uiEstablishmentAddressCountry.GetAttribute("value");
             Assert.True(fieldValueEstablishmentCountry != null);
 
