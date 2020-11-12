@@ -1,45 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { AppState } from '@app/app-state/models/app-state';
 import { Account } from '@models/account.model';
 import { Application } from '@models/application.model';
 import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
+import { FormBase } from '@shared/form-base';
 import { filter } from 'rxjs/operators';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-permanent-changes-to-a-licensee',
   templateUrl: './permanent-changes-to-a-licensee.component.html',
   styleUrls: ['./permanent-changes-to-a-licensee.component.scss']
 })
-export class PermanentChangesToALicenseeComponent implements OnInit {
-    licences: any = {};
-    value: string; // Place holder propertry
-    applicationId: string; // Place holder prop
-    account: Account;
-    businessType: string;
+export class PermanentChangesToALicenseeComponent extends FormBase implements OnInit {
+  licences: any = {};
+  value: string; // Place holder propertry
+  applicationId: string; // Place holder prop
+  account: Account;
+  businessType: string;
 
-    changeList = [];
-   
-
-
-  ngOnInit(): void {
-      this.applicationDataService.getPermanentChangesToLicenseeData()
-      .subscribe( licences => this.licences = licences);
-  }
+  changeList = [];
 
   constructor(private applicationDataService: ApplicationDataService,
-
-    private store: Store<AppState>) {​​​​
+    private fb: FormBuilder,
+    private store: Store<AppState>) {
+    super();
     this.store.select(state => state.currentAccountState.currentAccount)
-      .pipe(filter(account => !!account))       // convert to boolean
-      .subscribe(account => {​​​​
+    .pipe(filter(account  => !!account))
+      .subscribe(account => {
         this.account = account;
-        this.businessType = account.businessType;
-        this.changeList = masterChangeList.filter(item => !!item.availableTo.find(bt => bt === this.businessType)); 
-      }​​​​);
+        this.changeList = masterChangeList.filter(item => !!item.availableTo.find(bt => bt === account.businessType));
+      });
+  }
 
-  }​​​​
+  ngOnInit(): void {
+    this.applicationDataService.getPermanentChangesToLicenseeData()
+    .subscribe( licences => this.licences = licences);
 
+  }
 }
 
 const masterChangeList = [
