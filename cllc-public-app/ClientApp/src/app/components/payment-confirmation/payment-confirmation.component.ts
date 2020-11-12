@@ -5,7 +5,9 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { Subscription } from 'rxjs';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ApplicationDataService } from '../../services/application-data.service';
+import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { MatSnackBar } from '@angular/material';
+import { Application } from '@models/application.model';
 
 @Component({
   selector: 'app-payment-confirmation',
@@ -13,8 +15,10 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./payment-confirmation.component.scss']
 })
 /** payment-confirmation component*/
-export class PaymentConfirmationComponent implements OnInit {
+export class PaymentConfirmationComponent extends FormBase implements OnInit {
   busy: Subscription;
+  htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
+  application: Application;
   transactionId: string;
   applicationId: string;
   authCode: string;
@@ -46,6 +50,7 @@ export class PaymentConfirmationComponent implements OnInit {
     private applicationDataService: ApplicationDataService,
     public snackBar: MatSnackBar,
   ) {
+    super();
     this.route.queryParams.subscribe(params => {
       this.transactionId = params['trnId'];
       this.applicationId = params['SessionKey'];
@@ -56,21 +61,24 @@ export class PaymentConfirmationComponent implements OnInit {
     if (!this.applicationId) {
       this.applicationId = this.inputApplicationId;
     }
-    
+
+    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
+      (data: Application) => {
+        this.applicationType = data.applicationType.name;
+        this.application = data;
+        this.addDynamicContent();
+      });
+
+      //debugger;
+
   }
 
   ngAfterViewInit() {
     this.verify_payment();
-    this.getApplicationType();
+    //this.getApplicationType();
   }
 
-  getApplicationType() {
-    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      res => {
-        this.applicationType = res.applicationType.name;
-      });
-  }
-
+  
   /**
    * Payment verification
    * */
