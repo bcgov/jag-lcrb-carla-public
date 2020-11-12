@@ -96,6 +96,14 @@ namespace bdd_tests
             // click on signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
             uiSignatureAgreement.Click();
+
+            // retrieve the current URL to get the application ID (needed downstream)
+            string URL = ngDriver.Url;
+
+            // retrieve the application ID
+            string[] parsedURL = URL.Split('/');
+
+            applicationID = parsedURL[5];
         }
     }
 }
