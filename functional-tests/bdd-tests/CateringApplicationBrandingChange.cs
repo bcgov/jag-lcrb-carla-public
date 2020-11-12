@@ -35,6 +35,7 @@ Scenario: Catering Indigenous Nation Branding Change
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And I request a valid store name or branding change for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -58,6 +59,7 @@ Scenario: Catering Partnership Branding Change
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And I request a valid store name or branding change for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -81,6 +83,7 @@ Scenario: Catering Private Corporation Branding Change
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And I request a valid store name or branding change for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -104,6 +107,7 @@ Scenario: Catering Public Corporation Branding Change
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And I request a valid store name or branding change for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -127,6 +131,7 @@ Scenario: Catering Society Branding Change
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And I request a valid store name or branding change for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -150,6 +155,7 @@ Scenario: Catering Sole Proprietorship Branding Change
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And I request a valid store name or branding change for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
