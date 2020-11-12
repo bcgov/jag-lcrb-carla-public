@@ -311,9 +311,9 @@ namespace bdd_tests
         [And(@"autorenewal is set to 'No'")]
         public void AutoRenewalDenied()
         {
-            string renewLicence = "Renew Licence";
+            string renewLicence = "Transfer Licence";
 
-            // find the Renew Licence link
+            // find the Transfer Licence link
             NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(renewLicence));
             string URL = uiLicenceID.GetAttribute("href");
 
