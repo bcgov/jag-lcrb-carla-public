@@ -20,7 +20,6 @@ Scenario:  Deny Today Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -40,7 +39,6 @@ Scenario:  Deny Today Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -60,7 +58,6 @@ Scenario:  Deny Today Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -80,7 +77,6 @@ Scenario:  Deny Today Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -104,7 +100,6 @@ Scenario:  Deny Yesterday Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -124,7 +119,6 @@ Scenario:  Deny Yesterday Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -144,7 +138,6 @@ Scenario:  Deny Yesterday Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -164,7 +157,6 @@ Scenario:  Deny Yesterday Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -188,7 +180,6 @@ Scenario:  Deny 45 Days Ago Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -208,7 +199,6 @@ Scenario:  Deny 45 Days Ago Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -228,7 +218,6 @@ Scenario:  Deny 45 Days Ago Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -248,7 +237,6 @@ Scenario:  Deny 45 Days Ago Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -272,7 +260,6 @@ Scenario:  Deny 60 Days From Today Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -292,7 +279,6 @@ Scenario:  Deny 60 Days From Today Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -312,7 +298,6 @@ Scenario:  Deny 60 Days From Today Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -332,7 +317,6 @@ Scenario:  Deny 60 Days From Today Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -356,7 +340,6 @@ Scenario:  Deny 30 Days From Today Winery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -376,7 +359,6 @@ Scenario:  Deny 30 Days From Today Brewery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -396,7 +378,6 @@ Scenario:  Deny 30 Days From Today Distillery Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
@@ -416,7 +397,6 @@ Scenario:  Deny 30 Days From Today Co-packer Licence Renewal
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
-    And the expiry date is changed using the Dynamics workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I click on the Licences tab
     And autorenewal is set to 'No'
     And I am unable to renew the licence
