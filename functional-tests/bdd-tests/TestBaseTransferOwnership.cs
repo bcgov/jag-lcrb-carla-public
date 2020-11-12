@@ -36,7 +36,8 @@ namespace bdd_tests
             // check that licence number field is populated
             NgWebElement uiLicenseNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='licenseNumber']"));
             string fieldValueLicenseNumber = uiLicenseNumber.GetAttribute("value");
-            Assert.True(fieldValueLicenseNumber != null);
+            //Assert.True(fieldValueLicenseNumber != null);
+            Assert.False(fieldValueLicenseNumber.Equals(null));
 
             // check that establishment name field is populated
             NgWebElement uiEstablishmentName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
