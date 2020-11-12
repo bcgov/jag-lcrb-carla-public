@@ -99,8 +99,6 @@ Scenario: Partnership UBrew / UVin Application Approved
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    # Application approval and request change options to be confirmed
-    And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
 
@@ -121,8 +119,6 @@ Scenario: Private Corporation UBrew / UVin Application Approved
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    # Application approval and request change options to be confirmed
-    And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
 
@@ -143,8 +139,6 @@ Scenario: Public Corporation UBrew / UVin Application Approved
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    # Application approval and request change options to be confirmed
-    And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
 
@@ -165,7 +159,5 @@ Scenario: Sole Proprietorship UBrew / UVin Application Approved
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    # Application approval and request change options to be confirmed
-    And I request a valid store name or branding change for Catering
     And the account is deleted
     Then I see the login page
