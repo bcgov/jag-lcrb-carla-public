@@ -41,6 +41,47 @@ namespace bdd_tests
             Page Title: Add or Change a Third Party Operator
             */
 
+            // check that licence number field is populated
+            NgWebElement uiLicenseNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='licenseNumber']"));
+            string fieldValueLicenseNumber = uiLicenseNumber.GetAttribute("value");
+            Assert.True(fieldValueLicenseNumber != null);
+
+            // check that establishment name field is populated
+            NgWebElement uiEstablishmentName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
+            string fieldValueEstablishmentName = uiEstablishmentName.GetAttribute("value");
+            Assert.True(fieldValueEstablishmentName != null);
+
+            // check that establishment address street field is populated
+            NgWebElement uiEstablishmentAddressStreet = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
+            string fieldValueEstablishmentAddressStreet = uiEstablishmentAddressStreet.GetAttribute("value");
+            Assert.True(fieldValueEstablishmentAddressStreet != null);
+
+            // check that establishment address city field is populated
+            NgWebElement uiEstablishmentAddressCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
+            string fieldValueEstablishmentAddressCity = uiEstablishmentAddressCity.GetAttribute("value");
+            Assert.True(fieldValueEstablishmentAddressCity != null);
+
+            // check that establishment province field is populated
+            NgWebElement uiEstablishmentProvince = ngDriver.FindElement(By.CssSelector("input[formcontrolname='TODO']"));
+            string fieldValueEstablishmentProvince = uiEstablishmentProvince.GetAttribute("value");
+            Assert.True(fieldValueEstablishmentProvince != null);
+
+            // check that establishment postal code field is populated
+            NgWebElement uiEstablishmentAddressPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
+            string fieldValueEstablishmentAddressPostalCode = uiEstablishmentAddressPostalCode.GetAttribute("value");
+            Assert.True(fieldValueEstablishmentAddressPostalCode != null);
+
+            // check that establishment country field is populated
+            NgWebElement uiEstablishmentAddressCountry = ngDriver.FindElement(By.CssSelector("input[formcontrolname='TODO']"));
+            string fieldValueEstablishmentCountry = uiEstablishmentAddressCountry.GetAttribute("value");
+            Assert.True(fieldValueEstablishmentCountry != null);
+
+            // check that establishment PID is populated
+            NgWebElement uiEstablishmentParcelId = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
+            string fieldValueEstablishmentParcelId = uiEstablishmentParcelId.GetAttribute("value");
+            Assert.True(fieldValueEstablishmentParcelId != null);
+
+            // create test data
             string thirdparty = "GunderCorp TestBusiness";
 
             // search for the proposed licensee
