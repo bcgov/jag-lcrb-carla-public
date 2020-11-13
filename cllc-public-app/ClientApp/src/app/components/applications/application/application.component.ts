@@ -1094,6 +1094,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       policeJurisdictionId: 'Please enter a value for police jurisdiction',
       previousApplication: 'Please enter a value for previous application',
       previousApplicationDetails: 'Please enter a value for previous application details',
+      proposedChange: 'Please specify if the  the store’s exterior will change', 
       registeredEstablishment: 'Please enter a value for registered establishment number',
       renewalBranding: 'Please enter a value for renewal branding',
       renewalBusinessType: 'Please enter a value for renewal business type',
