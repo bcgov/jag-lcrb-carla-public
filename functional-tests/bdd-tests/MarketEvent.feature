@@ -259,6 +259,6 @@
     And I click on the market event submit button
     And I click on the event history for markets
     And I click on the link for Approved
-    And the market event data is correct for a monthly event
+    And the market event data is correct for an approved monthly event
     And the account is deleted
     Then I see the login page
