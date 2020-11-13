@@ -35,45 +35,43 @@ namespace bdd_tests
 
             // check that licence number field is populated
             NgWebElement uiLicenseNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='licenseNumber']"));
-            //string fieldValueLicenseNumber = uiLicenseNumber.GetAttribute("value");
             string fieldValueLicenseNumber = uiLicenseNumber.GetProperty("value");
-            Assert.True(fieldValueLicenseNumber != null);
-            //Assert.False(fieldValueLicenseNumber.Equals(null));
+            Assert.False(string.IsNullOrEmpty(fieldValueLicenseNumber));
 
             // check that establishment name field is populated
             NgWebElement uiEstablishmentName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
-            string fieldValueEstablishmentName = uiEstablishmentName.GetAttribute("value");
-            Assert.True(fieldValueEstablishmentName != null);
+            string fieldValueEstablishmentName = uiEstablishmentName.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentName));
 
             // check that establishment address street field is populated
             NgWebElement uiEstablishmentAddressStreet = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
-            string fieldValueEstablishmentAddressStreet = uiEstablishmentAddressStreet.GetAttribute("value");
-            Assert.True(fieldValueEstablishmentAddressStreet != null);
+            string fieldValueEstablishmentAddressStreet = uiEstablishmentAddressStreet.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentAddressStreet));
 
             // check that establishment address city field is populated
             NgWebElement uiEstablishmentAddressCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
-            string fieldValueEstablishmentAddressCity = uiEstablishmentAddressCity.GetAttribute("value");
-            Assert.True(fieldValueEstablishmentAddressCity != null);
+            string fieldValueEstablishmentAddressCity = uiEstablishmentAddressCity.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentAddressCity));
 
             // check that establishment province field is populated
             NgWebElement uiEstablishmentProvince = ngDriver.FindElement(By.CssSelector("input.form-control[value='British Columbia']"));
-            string fieldValueEstablishmentProvince = uiEstablishmentProvince.GetAttribute("value");
-            Assert.True(fieldValueEstablishmentProvince != null);
+            string fieldValueEstablishmentProvince = uiEstablishmentProvince.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentProvince));
 
             // check that establishment postal code field is populated
             NgWebElement uiEstablishmentAddressPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
-            string fieldValueEstablishmentAddressPostalCode = uiEstablishmentAddressPostalCode.GetAttribute("value");
-            Assert.True(fieldValueEstablishmentAddressPostalCode != null);
+            string fieldValueEstablishmentAddressPostalCode = uiEstablishmentAddressPostalCode.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentAddressPostalCode));
 
             // check that establishment country field is populated
             NgWebElement uiEstablishmentAddressCountry = ngDriver.FindElement(By.CssSelector("input.form-control[value='Canada']"));
-            string fieldValueEstablishmentCountry = uiEstablishmentAddressCountry.GetAttribute("value");
-            Assert.True(fieldValueEstablishmentCountry != null);
+            string fieldValueEstablishmentCountry = uiEstablishmentAddressCountry.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentCountry));
 
             // check that establishment PID is populated
             NgWebElement uiEstablishmentParcelId = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
-            string fieldValueEstablishmentParcelId = uiEstablishmentParcelId.GetAttribute("value");
-            Assert.True(fieldValueEstablishmentParcelId != null);
+            string fieldValueEstablishmentParcelId = uiEstablishmentParcelId.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentParcelId));
 
             string licensee = "GunderCorp TestBusiness";
 
