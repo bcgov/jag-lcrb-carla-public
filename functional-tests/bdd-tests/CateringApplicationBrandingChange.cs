@@ -18,30 +18,6 @@ Feature: CateringApplicationBrandingChange
     I want to pay the first year catering licence fee
     And submit a name branding change for different business types
 
-@e2e @catering @indigenousnation @cateringbranding1
-Scenario: Catering Indigenous Nation Branding Change
-    Given I am logged in to the dashboard as an indigenous nation
-    And I click on the Start Application button for Catering
-    And I review the account profile for an indigenous nation
-    And I review the organization structure for an indigenous nation
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I click on the Licences tab
-    And I pay the licensing fee for Catering
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
-    And I click on the link for Download Licence
-    And the licence is successfully downloaded
-    And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
-    And the account is deleted
-    Then I see the login page
-
 @e2e @catering @partnership @cateringbranding2
 Scenario: Catering Partnership Branding Change
     Given I am logged in to the dashboard as a partnership
