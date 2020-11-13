@@ -95,9 +95,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var accessGranted = false;
 
             // get the contact
-            var contactId = Guid.Parse(id);
 
-            var contact = await _dynamicsClient.GetContactById(contactId);
+
+            var contact = await _dynamicsClient.GetContactById(id);
 
             // Allow access if the current user is the contact - for scenarios such as a worker update.
             if (DynamicsExtensions.CurrentUserIsContact(id, _httpContextAccessor))
@@ -126,14 +126,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             patchContact.CopyValues(item);
             try
             {
-                await _dynamicsClient.Contacts.UpdateAsync(contactId.ToString(), patchContact);
+                await _dynamicsClient.Contacts.UpdateAsync(id, patchContact);
             }
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error updating contact");
             }
 
-            contact = await _dynamicsClient.GetContactById(contactId);
+            contact = await _dynamicsClient.GetContactById(id);
             return new JsonResult(contact.ToViewModel());
         }
 
