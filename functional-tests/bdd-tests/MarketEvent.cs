@@ -479,6 +479,8 @@ using Xunit;
     And the market event data is correct for a one day event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a one day event
     And the account is deleted
     Then I see the login page
@@ -508,6 +510,8 @@ using Xunit;
     And the market event data is correct for a one day event saved for later  
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a one day event
     And the account is deleted
     Then I see the login page
@@ -537,6 +541,8 @@ using Xunit;
     And the market event data is correct for a one day event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a one day event
     And the account is deleted
     Then I see the login page
@@ -566,6 +572,8 @@ using Xunit;
     And the market event data is correct for a one day event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a one day event
     And the account is deleted
     Then I see the login page
@@ -599,6 +607,8 @@ using Xunit;
     And the market event data is correct for a weekly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -628,6 +638,8 @@ using Xunit;
     And the market event data is correct for a weekly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -657,6 +669,8 @@ using Xunit;
     And the market event data is correct for a weekly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -686,6 +700,8 @@ using Xunit;
     And the market event data is correct for a weekly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a weekly event
     And the account is deleted
     Then I see the login page
@@ -719,6 +735,8 @@ using Xunit;
     And the market event data is correct for a bi-weekly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a bi-weekly event
     And the account is deleted
     Then I see the login page
@@ -748,6 +766,8 @@ using Xunit;
     And the market event data is correct for a bi-weekly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a bi-weekly event
     And the account is deleted
     Then I see the login page
@@ -777,6 +797,8 @@ using Xunit;
     And the market event data is correct for a bi-weekly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a bi-weekly event
     And the account is deleted
     Then I see the login page
@@ -806,6 +828,8 @@ using Xunit;
     And the market event data is correct for a bi-weekly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a bi-weekly event
     And the account is deleted
     Then I see the login page
@@ -839,6 +863,8 @@ using Xunit;
     And the market event data is correct for a monthly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page
@@ -868,6 +894,8 @@ using Xunit;
     And the market event data is correct for a monthly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page
@@ -897,6 +925,8 @@ using Xunit;
     And the market event data is correct for a monthly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page
@@ -926,6 +956,8 @@ using Xunit;
     And the market event data is correct for a monthly event saved for later
     And I click on the signature checkbox
     And I click on the Submit button
+    And I click on the event history for markets
+    And I click on the link for Approved
     And the market event data is correct for a monthly event
     And the account is deleted
     Then I see the login page 
