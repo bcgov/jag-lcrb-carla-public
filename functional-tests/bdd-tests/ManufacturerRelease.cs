@@ -56,7 +56,7 @@ Scenario: Private Corporation Manufacturer Release
     And the account is deleted
     Then I see the login page
 
-@e2e @soleproprietorship @mfgrelease @winery
+@e2e @soleproprietorship @release @winery
 Scenario: Sole Proprietorship Manufacturer Release 
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
