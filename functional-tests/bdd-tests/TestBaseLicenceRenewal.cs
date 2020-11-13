@@ -310,9 +310,6 @@ namespace bdd_tests
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
                     uiIsManufacturedMinimum.Click();
-
-                    // upload discretion letter
-                    FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
                 }
 
                 // select 'Yes'
@@ -381,9 +378,6 @@ namespace bdd_tests
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
                     uiIsManufacturedMinimum.Click();
-
-                    // upload discretion letter
-                    FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
                 }
 
                 // select 'No'
