@@ -101,7 +101,7 @@ namespace bdd_tests
             NgWebElement uiClientHostname = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'clientHostname']"));
             uiClientHostname.SendKeys(bizLegalName);
 
-            // select market event type
+            // select market event type (annual)
             NgWebElement uiMarketEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'marketEventType'] option[value = '2: 845280002']"));
             uiMarketEventType.Click();
 
@@ -335,7 +335,6 @@ namespace bdd_tests
         }
 
 
-
         [And(@"I click on the event history for markets")]
         public void MarketEventsHistory()
         {
@@ -348,28 +347,28 @@ namespace bdd_tests
         public void MarketEventDataCorrect(string frequency)
         {
             // confirm preventing sale of liquor checkbox is selected
-            // NgWebElement uiPreventingSaleOfLiquor = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoPreventingSaleofLiquor']"));
-            // Assert.True(uiPreventingSaleOfLiquor.GetAttribute("value") == "");
+            NgWebElement uiPreventingSaleOfLiquor = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoPreventingSaleofLiquor']"));
+            Assert.Contains("mat-checkbox-checked", uiPreventingSaleOfLiquor.GetAttribute("class"));
 
             // confirm market managed or carried checkbox is selected
-            // NgWebElement uiMarketManagedOrCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketManagedorCarried']"));
-            // Assert.True(uiMarketManagedOrCarried.GetAttribute("value") == "");
+            NgWebElement uiMarketManagedOrCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketManagedorCarried']"));
+            Assert.Contains("mat-checkbox-checked", uiMarketManagedOrCarried.GetAttribute("class"));
 
             // confirm market only vendors checkbox is selected
-            // NgWebElement uiIsMarketOnlyVendors = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketOnlyVendors']"));
-            // Assert.True(uiIsMarketOnlyVendors.GetAttribute("value") == "");
+            NgWebElement uiIsMarketOnlyVendors = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketOnlyVendors']"));
+            Assert.Contains("mat-checkbox-checked", uiIsMarketOnlyVendors.GetAttribute("class"));
 
             // confirm imported goods checkbox is selected
-            // NgWebElement uiIsNoImportedGoods = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoImportedGoods']"));
-            // Assert.True(uiIsNoImportedGoods.GetAttribute("value") == "");
+            NgWebElement uiIsNoImportedGoods = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoImportedGoods']"));
+            Assert.Contains("mat-checkbox-checked", uiIsNoImportedGoods.GetAttribute("class"));
 
             // confirm six vendors checkbox is selected
-            // NgWebElement uiIsMarketHostsSixVendors = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketHostsSixVendors']"));
-            // Assert.True(uiIsMarketHostsSixVendors.GetAttribute("value") == "");
+            NgWebElement uiIsMarketHostsSixVendors = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketHostsSixVendors']"));
+            Assert.Contains("mat-checkbox-checked", uiIsMarketHostsSixVendors.GetAttribute("class"));
 
             // confirm max amount or duration checkbox is selected
-            // NgWebElement uiIsMarketMaxAmountorDuration = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketMaxAmountorDuration']"));
-            // Assert.True(uiIsMarketMaxAmountorDuration.GetAttribute("value") == "");
+            NgWebElement uiIsMarketMaxAmountorDuration = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketMaxAmountorDuration']"));
+            Assert.Contains("mat-checkbox-checked", uiIsMarketMaxAmountorDuration.GetAttribute("class"));
 
             // confirm contact name is correct
             NgWebElement uiContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
@@ -396,8 +395,8 @@ namespace bdd_tests
             Assert.True(uiClientHostname.GetAttribute("value") == "Point Ellis Market Cooperative");
 
             // confirm market event type is correct
-            // NgWebElement uiMarketEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'marketEventType']"));
-            // Assert.True(uiMarketEventType.GetAttribute("value") == "Annual");
+            NgWebElement uiMarketEventType = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'marketEventType']"));
+            Assert.True(uiMarketEventType.GetAttribute("value") == "2: 845280002");
 
             // confirm market business number is correct
             NgWebElement uiBusinessNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'businessNumber']"));
@@ -426,107 +425,119 @@ namespace bdd_tests
             // confirm additional details are correct
             NgWebElement uiAdditionalDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='venueDescription']"));
             Assert.True(uiAdditionalDetails.GetAttribute("value") == "Additional details for automated test.");
-
-            /*
-            if (frequency == "a one day event")
+ 
+            if ((frequency == "a one day event") || (frequency == "one day event saved for later"))
             {
-                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='3: 845280003']"));
-                Assert.True(uiFrequency.GetAttribute("value") == "Once");
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
+                Assert.True(uiFrequency.GetAttribute("value") == "3: 845280003");
             }
 
-            if (frequency == "a weekly event")
+            if ((frequency == "a weekly event") || (frequency == "a weekly event saved for later"))
             {
-                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='0: 845280000']"));
-                Assert.True(uiFrequency.GetAttribute("value") == "Weekly");
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
+                Assert.True(uiFrequency.GetAttribute("value") == "0: 845280000");
             }
 
-            if (frequency == "a monthly event")
+            if ((frequency == "a monthly event") || (frequency == "a monthly event saved for later"))
             {
-                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='2: 845280002']"));
-                Assert.True(uiFrequency.GetAttribute("value") == "Monthly");
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
+                Assert.True(uiFrequency.GetAttribute("value") == "2: 845280002");
             }
 
-            if (frequency == "a bi-weekly event")
+            if ((frequency == "a bi-weekly event") || (frequency == "a bi-weekly event saved for later"))
             {
-                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration'] option[value='1: 845280001']"));
-                Assert.True(uiFrequency.GetAttribute("value") == "Bi-Weekly");
+                NgWebElement uiFrequency = ngDriver.FindElement(By.CssSelector("[formcontrolname='marketDuration']"));
+                Assert.True(uiFrequency.GetAttribute("value") == "1: 845280001");
             }
-            */
 
             // confirm additional information is correct
             NgWebElement uiAdditionalInformation = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
             Assert.True(uiAdditionalInformation.GetAttribute("value") == "Additional information for automated test.");
 
-            if (frequency != "a one day event")
+            if ((frequency != "a one day event") || (frequency != "a one day event saved for later")) 
             {
-                if ((frequency == "weekly") || (frequency == "bi-weekly"))
+                if ((frequency == "a weekly event") || (frequency == "a weekly event saved for later") || (frequency == "a bi-weekly event") || (frequency == "a bi-weekly event saved for later"))
                 {
                     // confirm selection re days of the week
                     NgWebElement uiThursdayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='thursday']"));
-                    Assert.True(uiThursdayFinal.GetAttribute("value") == "Thursday");
+                    Assert.Contains("mat-checkbox-checked", uiThursdayFinal.GetAttribute("class"));
 
                     NgWebElement uiFridayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='friday']"));
-                    Assert.True(uiFridayFinal.GetAttribute("value") == "Friday");
+                    Assert.Contains("mat-checkbox-checked", uiFridayFinal.GetAttribute("class"));
 
                     NgWebElement uiSaturdayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='saturday']"));
-                    Assert.True(uiSaturdayFinal.GetAttribute("value") == "Saturday");
+                    Assert.Contains("mat-checkbox-checked", uiSaturdayFinal.GetAttribute("class"));
                 }
 
-                if (frequency == "monthly")
+                if ((frequency == "a monthly event") || (frequency == "a monthly event saved for later"))
                 {
                     // confirm selected day of the week
                     NgWebElement uiSaturday3 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='saturday']"));
-                    Assert.True(uiSaturday3.GetAttribute("value") == "");
+                    Assert.Contains("mat-checkbox-checked", uiSaturday3.GetAttribute("class"));
 
                     // confirm selected week of the month
-                    NgWebElement uiWeekOfMonth4 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-5-input']"));
-                    Assert.True(uiWeekOfMonth4.GetAttribute("value") == "");
+                    NgWebElement uiWeekOfMonth4 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] mat-radio-button#mat-radio-10"));
+                    Assert.Contains("mat-radio-checked", uiWeekOfMonth4.GetAttribute("class"));
                 }
             }
 
             // confirm event start hour
-            // NgWebElement uiEventStartHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] .ngb-tp-hour [type='button'] span.bottom"));
-            // Assert.True(uiEventStartHour.GetAttribute("value") == "07");
+            NgWebElement uiEventStartHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] input[aria-label='Hours']"));
+            Assert.True(uiEventStartHour.GetAttribute("value") == "07");
 
             // confirm event start minute
-            // NgWebElement uiEventStartMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] .ngb-tp-minute span.ngb-tp-chevron.bottom"));
-            // Assert.True(uiEventStartMinute.GetAttribute("value") == "59");
+            NgWebElement uiEventStartMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] input[aria-label='Minutes']"));
+            Assert.True(uiEventStartMinute.GetAttribute("value") == "59");
 
             // confirm event end hour
-            // NgWebElement uiEventEndHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] .ngb-tp-hour [type='button'] span.bottom"));
-            // Assert.True(uiEventEndHour.GetAttribute("value") == "09");
+            NgWebElement uiEventEndHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Hours']"));
+            Assert.True(uiEventEndHour.GetAttribute("value") == "09");
 
             // confirm event end minute
-            // NgWebElement uiEventEndMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] .ngb-tp-minute [type='button'] span.bottom"));
-            // Assert.True(uiEventEndMinute.GetAttribute("value") == "59");
+            NgWebElement uiEventEndMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] input[aria-label='Minutes']"));
+            Assert.True(uiEventEndMinute.GetAttribute("value") == "59");
 
             // confirm liquor sale start hour
-            // NgWebElement uiLiquorStartHour = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(4) .ngb-tp-hour .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
-            // Assert.True(uiLiquorStartHour.GetAttribute("value") == "10");
+            NgWebElement uiLiquorStartHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorStartTime'] input[aria-label='Hours']"));
+            Assert.True(uiLiquorStartHour.GetAttribute("value") == "10");
 
             // confirm liquor sale start minute
-            // NgWebElement uiLiquorStartMinute = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(4) .ngb-tp-minute .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
-            // Assert.True(uiLiquorStartMinute.GetAttribute("value") == "01");
+            NgWebElement uiLiquorStartMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorStartTime'] input[aria-label='Minutes']"));
+            Assert.True(uiLiquorStartMinute.GetAttribute("value") == "01");
 
             // confirm liquor sale end hour
-            // NgWebElement uiLiquorEndHour1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] .ngb-tp-hour span.bottom"));
-            // Assert.True(uiLiquorEndHour1.GetAttribute("value") == "08");
+            NgWebElement uiLiquorEndHour1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Hours']"));
+            Assert.True(uiLiquorEndHour1.GetAttribute("value") == "08");
 
             // confirm liquor sale end minute
-            // NgWebElement uiLiquorEndMinute1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] .ngb-tp-minute span.bottom"));
-            // Assert.True(uiLiquorEndMinute1.GetAttribute("value") == "58");
+            NgWebElement uiLiquorEndMinute1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] input[aria-label='Minutes']"));
+            Assert.True(uiLiquorEndMinute1.GetAttribute("value") == "58");
 
             // confirm serving it right/minors checkbox is selected
-            // NgWebElement uiServingItRight = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAllStaffServingitRight']"));
-            // Assert.True(uiServingItRight.GetAttribute("value") == "");
+            NgWebElement uiServingItRight = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAllStaffServingitRight']"));
+            Assert.Contains("mat-checkbox-checked", uiServingItRight.GetAttribute("class"));
 
             // confirm sample sizes checkbox is selected
-            // NgWebElement uiSampleSizes = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isSampleSizeCompliant']"));
-            // Assert.True(uiSampleSizes.GetAttribute("value") == "");
+            NgWebElement uiSampleSizes = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isSampleSizeCompliant']"));
+            Assert.Contains("mat-checkbox-checked", uiSampleSizes.GetAttribute("class"));
 
-            // confirm agreement checkbox is selected
-            // NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']")); 
-            // Assert.True(uiAgreement.GetAttribute("value") == "");
+            if ((frequency == "a one day event") || (frequency == "a weekly event") || (frequency == "a bi-weekly event") || (frequency == "a monthly event"))
+            {
+                // confirm agreement checkbox is selected
+                NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+                Assert.Contains("mat-checkbox-checked", uiAgreement.GetAttribute("class"));
+            }
+
+            // confirm that LCSD-4211 error is no longer happening
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Please enter the start date'))]")).Displayed);
+        }
+
+
+        [And(@"I click on the market event save for later button")]
+        public void MarketEventSaveForLater()
+        {
+            NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1)"));
+            uiSaveForLater.Click();
         }
     }
 }

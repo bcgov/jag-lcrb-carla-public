@@ -595,6 +595,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return result;
         }
+        
+        [HttpGet("permanent-changes-to-licensee-data")]
+        public IActionResult GetPermanetChangesToLicenseeData(){
+            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+            var result = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
+
+            return new JsonResult(result);
+
+   
+        }
 
         /// GET all applications in Dynamics for the current user
         [HttpGet("ongoing-licensee-application-id")]
@@ -1055,9 +1068,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}/process")]
-        public async Task<IActionResult> ProcessApplication(string id)
+        public async Task<string> ProcessApplication(string id)
         {
-            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+            if (_env.IsProduction()) return "This API is not available outside a development environment.";
 
 
             // get the current user.
@@ -1074,19 +1087,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // this needs to be the guid for the published workflow.
                     await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync(
                         "0a78e6dc-8d62-480f-909f-c104051cf467", id);
-                    return Ok("OK");
+                    return "OK";
                 }
                 catch (HttpOperationException httpOperationException)
                 {
-                    var error = httpOperationException.Response.Content;
-                    return BadRequest(error);
+                    return httpOperationException.Response.Content;
                 }
                 catch (Exception e)
                 {
                     throw e;
                 }
 
-            return BadRequest("This API is not available to an unregistered user.");
+            return "This API is not available to an unregistered user.";
         }
 
         [HttpGet("{id}/processEndorsement")]

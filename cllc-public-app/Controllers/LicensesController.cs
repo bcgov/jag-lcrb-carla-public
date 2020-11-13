@@ -4,6 +4,7 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Gov.Lclb.Cllb.Public.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -19,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -33,9 +35,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IPdfService _pdfClient;
         private readonly IWebHostEnvironment _env;
         private readonly ILogger _logger;
+        private readonly FileManagerClient _fileManagerClient;
 
         public LicensesController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor,
-            IPdfService pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache, IWebHostEnvironment env)
+            IPdfService pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache, IWebHostEnvironment env, FileManagerClient fileClient)
         {
             _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
@@ -43,14 +46,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _pdfClient = pdfClient;
             _logger = loggerFactory.CreateLogger(typeof(LicensesController));
             _env = env;
+            _fileManagerClient = fileClient;
         }
 
         /// GET licence by id
         [HttpGet("{id}")]
-        public ActionResult GetLicence(string id)
+        public async Task<IActionResult> GetLicence(string id)
         {
             MicrosoftDynamicsCRMadoxioLicences licence = null;
-
 
             try
             {
@@ -74,9 +77,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw (httpOperationException);
             }
 
-
+            // Create link to sharepoint folder if needed
+            if (licence.AdoxioLicencesSharePointDocumentLocations.Count == 0)
+            {
+                await InitializeSharepoint(licence);
+            }
 
             return new JsonResult(licence.ToViewModel(_dynamicsClient));
+        }
+
+        private async Task InitializeSharepoint(MicrosoftDynamicsCRMadoxioLicences licence)
+        {
+            // create a SharePointDocumentLocation link
+            var folderName = licence.GetDocumentFolderName();
+            _fileManagerClient.CreateFolderIfNotExist(_logger, LicenceDocumentUrlTitle, folderName);
+            _dynamicsClient.CreateEntitySharePointDocumentLocation("licence", licence.AdoxioLicencesid, folderName, folderName);
         }
 
         [HttpPut("{licenceId}/representative")]
@@ -264,12 +279,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Set expiry for a given licence to today.  Only useful for automated testing.
+        /// Set expiry for a given licence to different dates as specified by workflow GUIDs.  Only useful for automated testing.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}/setexpiry")]
-        public async Task<IActionResult> SetExpiry(string id)
+        [HttpGet("{workflowGUID}/setexpiry/{licenceID}")]
+        public async Task<IActionResult> SetExpiry(string workflowGUID, string licenceID)
         {
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
@@ -287,7 +302,49 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     // this needs to be the guid for the published workflow.
-                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("26e7e116-dace-426a-a798-e9134d913f19", id);
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync(workflowGUID, licenceID);
+                    return Ok("OK");
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    string error = httpOperationException.Response.Content;
+                    return BadRequest(error);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+            else
+            {
+                return BadRequest("This API is not available to an unregistered user.");
+            }
+        }
+
+        /// <summary>
+        /// Set autorenewal to 'No' to deny licence renewal for a given licence. Must be preceded by setting licence to 'Expired'. Only useful for automated testing.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("denyautorenew/{licenceID}")]
+        public async Task<IActionResult> DenyAutoRenew(string licenceID)
+        {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
+            // get the current user.
+            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+
+            // query the Dynamics system to get the account record.
+            if (userSettings.AccountId != null && !userSettings.IsNewUserRegistration && userSettings.AccountId.Length > 0)
+            {
+
+                // call the bpf to process the application.
+                try
+                {
+                    // this needs to be the guid for the published workflow.
+                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("e1792ccf-e40b-491f-9a9a-ee8e977749e6",licenceID);
                     return Ok("OK");
                 }
                 catch (HttpOperationException httpOperationException)
@@ -507,11 +564,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
 
-                // set application type relationship 
+                // set application type relationship
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
                 application.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
-                // set licence type relationship 
+                // set licence type relationship
                 if (adoxioLicense.AdoxioLicenceType != null)
                 {
 
@@ -535,7 +592,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
                 }
-                
+
                 try
                 {
                     // try finding a licence application
@@ -553,9 +610,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // otherwise check if there is an LGIN value on the Establishment
                         else
                         {
-                            if(adoxioLicense?.AdoxioEstablishment != null) {
+                            if (adoxioLicense?.AdoxioEstablishment != null)
+                            {
                                 lginvalue = adoxioLicense?.AdoxioEstablishment._adoxioLginValue;
-                            }    
+                            }
                         }
                         // note there will be no LGIN for Marketers or Agent, but we initialized to an empty string so we're all good
                     }
@@ -601,8 +659,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 // copy service areas from licence
-                /*  TG- Removing for now; will result in service areas being copied across endorsement types. 
-                    
+                /*  TG- Removing for now; will result in service areas being copied across endorsement types.
+
                 try
                 {
                     string filter = $"_adoxio_licenceid_value eq {licenceId}";
@@ -931,7 +989,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioFridayopen)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayopen)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayopen)}</td>
-                            </tr>                
+                            </tr>
                             <tr>
                                 <td class='hours'>End</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayclose)}</td>
@@ -942,10 +1000,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSaturdayclose)}</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayclose)}</td>
                             </tr></table>";
-            } {
-                // to do: log when we expect to find hours of sale, but don't
-                // wine stores, ubrew, lrs.
-            }
+                }
+                else
+                {
+                    // to do: log when we expect to find hours of sale, but don't
+                    // wine stores, ubrew, lrs.
+                }
 
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
                 if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
@@ -990,8 +1050,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else // handle other types such as catering
                 {
                     String typeLabel = adoxioLicense?.AdoxioLicenceSubCategoryId?.AdoxioName != null ? adoxioLicense.AdoxioLicenceSubCategoryId?.AdoxioName : adoxioLicense.AdoxioLicenceType?.AdoxioName;
-                    
-                   // adoxioLicense.AdoxioLicenceType?.AdoxioName
+
+                    // adoxioLicense.AdoxioLicenceType?.AdoxioName
 
                     //adoxioLicense.AdoxioLicenceSubCategoryId?
 
@@ -1012,13 +1072,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "endorsementsText", endorsementsText },
                         { "storeHours", storeHours },
                         { "printDate", DateTime.Today.ToString("MMMM dd, yyyy")} // will be based on the users machine
-                    };;
+                    };
                 }
                 try
                 {
                     var templateName = "cannabis_licence";
-
-
 
                     switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
                     {
@@ -1056,6 +1114,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     byte[] data = await _pdfClient.GetPdf(parameters, templateName);
+
+                    // Save copy of generated licence PDF for auditing/logging purposes
+                    try
+                    {
+                        var hash = await _pdfClient.GetPdfHash(parameters, templateName);
+                        var entityName = "licence";
+                        var entityId = adoxioLicense.AdoxioLicencesid;
+                        var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+                        var documentType = "Licence";
+                        _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error uploading PDF");
+                    }
+
                     return File(data, "application/pdf", $"{adoxioLicense.AdoxioLicencenumber}.pdf");
                 }
                 catch (Exception e)
