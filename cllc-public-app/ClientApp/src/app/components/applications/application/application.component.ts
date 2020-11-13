@@ -944,7 +944,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.validInterest === FormControlState.Show &&
       ((this.uploadedValidInterestDocuments || 0) < 1)) {
       valid = false;
-      this.validationMessages.push('At least one supporting document is required.');
+      this.validationMessages.push('At least proof of ownership document is required.');
     }
 
     if (this.showSitePlan() &&
@@ -1094,6 +1094,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       policeJurisdictionId: 'Please enter a value for police jurisdiction',
       previousApplication: 'Please enter a value for previous application',
       previousApplicationDetails: 'Please enter a value for previous application details',
+      proposedChange: 'Please specify if the  the store’s exterior will change', 
       registeredEstablishment: 'Please enter a value for registered establishment number',
       renewalBranding: 'Please enter a value for renewal branding',
       renewalBusinessType: 'Please enter a value for renewal business type',
@@ -1267,6 +1268,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }, this);
     }
 
+  }
+
+  showValidInterestforTransfer(){
+    return this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
+            (this.application.licenseType === "Licensee Retail Store" || "Wine Store");
   }
 
   showDynamicForm(formReference, tabs) {

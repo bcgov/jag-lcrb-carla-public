@@ -1,4 +1,5 @@
 // The builds.
+// uses https://github.com/openshift/jenkins-client-plugin
 
 node('master') {
     stage('Startup') {
@@ -11,45 +12,55 @@ node('master') {
     }
 
     stage('Build') {
+	openshift.withCluster() {
         parallel('Angular': {
 
             if (changeset("cllc-public-app/ClientApp/*")) {
-				openshift.withCluster() {
+				
 					openshift.withProject() {
-						def bc = openshift.selector('bc', 'cllc-public-angular')
-						def buildSelector = bc.startBuild()
-						buildSelector.logs('-f')
+						def bc1 = openshift.selector('bc', 'cllc-public-angular')
+						def buildSelector1 = bc1.startBuild()
+						sleep(5)
+						buildSelector1.logs('-f')
+					
+						sleep(10)
+						
+						
+						def builds = openshift.selector("bc", 'cllc-public-frontend').related('builds')
+						timeout(5) { 
+							builds.untilEach(1) {
+								return (it.object().status.phase == "Complete")
+							}
+						}
+						
+
+						
 					}
-                }
-				echo "Building Application image..."
-				openshift.withCluster() {
-					openshift.withProject() {
-						def bc = openshift.selector('bc', 'cllc-public-frontend')
-						def buildSelector = bc.startBuild()
-						buildSelector.logs('-f')				  
-					}
+					
 					openshift.tag("cllc-public-frontend:latest", "cllc-public-frontend:dev") 
-				}
-            }
-		
+                
+			
+			}
             
         }, 'C# API': {
             if (changeset("cllc-public-app/*")) {
-                openshift.withCluster() {
-					openshift.withProject() {
-						def bc = openshift.selector('bc', 'cllc-public-api')
-						def buildSelector = bc.startBuild()
-						buildSelector.logs('-f')						   
-					}
-					openshift.tag("cllc-public-api:latest", "cllc-public-api:dev")
-                }
+                
+				openshift.withProject() {
+					def bc = openshift.selector('bc', 'cllc-public-api')
+					
+					sleep(5)
+					def buildSelector = bc.startBuild()		
+					sleep(5)
+					buildSelector.logs('-f')						   
+				}
+				openshift.tag("cllc-public-api:latest", "cllc-public-api:dev")
+                
             }				              
             
         })
-
-        
 			
-    }
+		}
+	}
 }
 
 /*

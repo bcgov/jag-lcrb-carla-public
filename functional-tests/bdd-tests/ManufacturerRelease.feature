@@ -19,7 +19,8 @@ Scenario: Private Corporation Manufacturer Release
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Manufacturing
     And I click on the Licences tab
-    And the expiry date is changed to today
+    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    And I click on the link for Renew Licence
     And I renew the licence with positive responses for a winery
     And I click on the Licences tab
     And I request a facility structural change
@@ -57,7 +58,8 @@ Scenario: Sole Proprietorship Manufacturer Release
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Manufacturing
     And I click on the Licences tab
-    And the expiry date is changed to today
+    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    And I click on the link for Renew Licence
     And I renew the licence with positive responses for a winery
     And I click on the Licences tab
     And I request a facility structural change
