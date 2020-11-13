@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
- Feature: CateringApplicationEventAuthorization
+  Feature: CateringApplicationEventAuthorization
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit an event authorization request for different business types
@@ -21,24 +21,6 @@ using Xunit;
 #-----------------------
 # No Approval Requests
 #-----------------------
-
- @e2e @catering @indigenousnation @cateringevent
- Scenario: No Approval Indigenous Nation Event Authorization Request
-    Given I am logged in to the dashboard as an indigenous nation
-    And I click on the Start Application button for Catering
-    And I review the account profile for an indigenous nation
-    And I review the organization structure for an indigenous nation
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
-    And I pay the licensing fee for Catering
-    And I request an event authorization that doesn't require approval
-    And the event history is updated correctly for an application without approval
-    And the account is deleted
-    Then I see the login page
 
  @e2e @catering @partnership @cateringevent
  Scenario: No Approval Partnership Event Authorization Request
