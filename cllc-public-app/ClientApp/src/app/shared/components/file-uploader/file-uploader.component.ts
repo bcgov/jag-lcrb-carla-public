@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ApplicationDataService } from '@services/application-data.service';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material';
 
 export interface DropdownOption {
   id: string;
@@ -38,7 +39,10 @@ export class FileUploaderComponent implements OnInit {
   public files: FileSystemItem[] = [];
 
   // TODO: move http call to a service
-  constructor(private http: HttpClient, private adoxioApplicationDataService: ApplicationDataService) {
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar,
+    private adoxioApplicationDataService: ApplicationDataService) {
   }
 
   ngOnInit(): void {
@@ -60,7 +64,7 @@ export class FileUploaderComponent implements OnInit {
     }
     let count = this.getCurrentLastFileCounter() + 1;
     if (files.length > 1 && !this.multipleFiles) {
-      alert('Only one file can be uploaded here');
+      this.snackBar.open('Only one file can be uploaded here', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
       return;
     }
     if (this.maxNumberOfFiles < (this.files.length + newFileCount)) {
@@ -108,7 +112,7 @@ export class FileUploaderComponent implements OnInit {
     }
     let count = this.getCurrentLastFileCounter() + 1;
     if (uploadedFiles.length > 1 && !this.multipleFiles) {
-      alert('Only one file can be uploaded here');
+      this.snackBar.open('Only one file can be uploaded here', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
       return;
     }
     if (this.maxNumberOfFiles < (this.files.length + newFileCount)) {
@@ -126,12 +130,12 @@ export class FileUploaderComponent implements OnInit {
   public uploadFile(file, count) {
     const validExt = this.extensions.filter(ex => file.name.toLowerCase().endsWith(ex)).length > 0;
     if (!validExt) {
-      alert('File type not supported.');
+      this.snackBar.open('File type not supported.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
       return;
     }
 
     if (file && file.name && file.name.length > 128) {
-      alert('File name must be 128 characters or less.');
+      this.snackBar.open('File name must be 128 characters or less.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
       return;
     }
 
@@ -148,7 +152,8 @@ export class FileUploaderComponent implements OnInit {
     this.busy = this.http.post(this.attachmentURL, formData, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
     },
-      err => alert('Failed to upload file'));
+      err => this.snackBar.open('Failed to upload file', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] })
+    );
   }
 
   getUploadedFileData() {
@@ -181,7 +186,8 @@ export class FileUploaderComponent implements OnInit {
         this.files = data;
         this.numberOfUploadedFiles.emit(this.files.length);
       },
-        err => alert('Failed to get files'));
+        err => this.snackBar.open('Failed to get files', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] })
+      );
   }
 
   deleteFile(relativeUrl: string) {
@@ -192,7 +198,8 @@ export class FileUploaderComponent implements OnInit {
     this.busy = this.http.delete(this.attachmentURL + queryParams, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
     },
-      err => alert('Failed to delete file'));
+      err => this.snackBar.open('Failed to delete file', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] })
+    );
   }
 
   disableFileUpload(): boolean {

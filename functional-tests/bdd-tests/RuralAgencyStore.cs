@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: RuralStore.feature
+Feature: RuralAgencyStore
     As a logged in business user
     I want to submit a rural store application for a private corporation
 
-@privatecorporation @ruralstore
-Scenario: Rural Store Application
+@privatecorporation @ruralagencystore
+Scenario: Rural Agency Store Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Rural Agency Store
     And I review the account profile for a private corporation
@@ -31,9 +31,9 @@ Scenario: Rural Store Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./RuralStore.feature")]
+    [FeatureFile("./RuralAgencyStore.feature")]
     [Collection("Cannabis")]
-    public sealed class RuralStore : TestBase
+    public sealed class RuralAgencyStore : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

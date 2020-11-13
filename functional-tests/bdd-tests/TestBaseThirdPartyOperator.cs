@@ -23,8 +23,8 @@ namespace bdd_tests
         [And(@"I request a third party operator")]
         public void RequestThirdPartyOperator()
         {
-            // return to the Licences tab
-            ClickLicencesTab();
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
 
             /* 
             Page Title: Licences & Authorizations
@@ -41,15 +41,63 @@ namespace bdd_tests
             Page Title: Add or Change a Third Party Operator
             */
 
-            string thirdparty = "GunderCorp";
+            // check that licence number field is populated
+            NgWebElement uiLicenseNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='licenseNumber']"));
+            string fieldValueLicenseNumber = uiLicenseNumber.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueLicenseNumber));
+
+            // check that establishment name field is populated
+            NgWebElement uiEstablishmentName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
+            string fieldValueEstablishmentName = uiEstablishmentName.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentName));
+
+            // check that establishment address street field is populated
+            NgWebElement uiEstablishmentAddressStreet = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
+            string fieldValueEstablishmentAddressStreet = uiEstablishmentAddressStreet.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentAddressStreet));
+
+            // check that establishment address city field is populated
+            NgWebElement uiEstablishmentAddressCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
+            string fieldValueEstablishmentAddressCity = uiEstablishmentAddressCity.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentAddressCity));
+
+            // check that establishment province field is populated
+            NgWebElement uiEstablishmentProvince = ngDriver.FindElement(By.CssSelector("input.form-control[value='British Columbia']"));
+            string fieldValueEstablishmentProvince = uiEstablishmentProvince.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentProvince));
+
+            // check that establishment postal code field is populated
+            NgWebElement uiEstablishmentAddressPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
+            string fieldValueEstablishmentAddressPostalCode = uiEstablishmentAddressPostalCode.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentAddressPostalCode));
+
+            // check that establishment country field is populated
+            NgWebElement uiEstablishmentAddressCountry = ngDriver.FindElement(By.CssSelector("input.form-control[value='Canada']"));
+            string fieldValueEstablishmentCountry = uiEstablishmentAddressCountry.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentCountry));
+
+            // check that establishment PID is populated
+            NgWebElement uiEstablishmentParcelId = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
+            string fieldValueEstablishmentParcelId = uiEstablishmentParcelId.GetProperty("value");
+            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentParcelId));
+
+            // create test data
+            string thirdparty = "GunderCorp TestBusiness";
 
             // search for the proposed licensee
             NgWebElement uiThirdPartyOperator = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));
             uiThirdPartyOperator.SendKeys(thirdparty);
 
-            NgWebElement uiThirdPartyOperatorOption = ngDriver.FindElement(By.CssSelector("mat-option[role='option'] span"));
-            uiThirdPartyOperatorOption.Click();
-
+            var uiThirdPartyOperatorOption = ngDriver.FindElements(By.CssSelector("mat-option[role='option'] span"));
+            if (uiThirdPartyOperatorOption.Count > 0)
+            {
+                uiThirdPartyOperatorOption[0].Click();
+            }
+            else
+            {
+                throw new Exception($"Unable to find {thirdparty}");
+            }
+            
             // click on authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
@@ -61,8 +109,8 @@ namespace bdd_tests
             // click on submit button
             ClickOnSubmitButton();
 
-            // return to the Licences tab
-            ClickLicencesTab();
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
 
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing

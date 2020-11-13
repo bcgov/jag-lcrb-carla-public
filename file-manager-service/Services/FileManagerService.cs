@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     if (folder != null)
                     {
                         result.ResultStatus = ResultStatus.Success;
-                    }                    
+                    }
                 }
                 catch (SharePointRestException ex)
                 {
@@ -118,7 +118,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     {
                         result.ResultStatus = FileExistStatus.NotExist;
                     }
-                    
+
                 }
             }
             catch (SharePointRestException spre)
@@ -130,7 +130,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             catch (Exception e)
             {
-                result.ResultStatus =  FileExistStatus.Error;
+                result.ResultStatus = FileExistStatus.Error;
                 result.ErrorDetail = $"Error determining if file exists";
                 Log.Error(e, result.ErrorDetail);
             }
@@ -161,6 +161,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 case "federal_report":
                     listTitle = SharePointFileManager.FederalReportListTitle;
                     break;
+                case "licence":
+                    listTitle = SharePointFileManager.LicenceDocumentListTitle;
+                    break;
                 default:
                     listTitle = entityName;
                     break;
@@ -190,6 +193,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     break;
                 case "federal_report":
                     listTitle = SharePointFileManager.FederalReportListTitle;
+                    break;
+                case "licence":
+                    listTitle = SharePointFileManager.LicenceDocumentUrlTitle;
                     break;
                 default:
                     break;
@@ -299,11 +305,11 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             try
             {
-                string fileName = _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(request.EntityName), 
-                    request.FolderName, 
-                    request.FileName, 
+                string fileName = _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(request.EntityName),
+                    request.FolderName,
+                    request.FileName,
                     request.Data.ToByteArray(), request.ContentType).GetAwaiter().GetResult();
-                
+
                 result.FileName = fileName;
                 result.ResultStatus = ResultStatus.Success;
             }
@@ -312,7 +318,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"ERROR in uploading file {logFileName} to folder {logFolderName}";
                 Log.Error(ex, result.ErrorDetail);
-                
+
             }
             catch (Exception e)
             {
@@ -328,7 +334,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         {
             var result = new FolderFilesReply();
 
-            
+
             // Get the file details list in folder
             List<Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = null;
             SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
@@ -343,18 +349,18 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     {
                         FileSystemItem newItem = new FileSystemItem()
                         {
-                             DocumentType = item.DocumentType,
-                             Name = item.Name,
-                             ServerRelativeUrl = item.ServerRelativeUrl,
-                             Size = int.Parse (item.Length)
+                            DocumentType = item.DocumentType,
+                            Name = item.Name,
+                            ServerRelativeUrl = item.ServerRelativeUrl,
+                            Size = int.Parse(item.Length)
                         };
 
                         result.Files.Add(newItem);
-                                              
+
                     }
                     result.ResultStatus = ResultStatus.Success;
                 }
-                
+
 
             }
             catch (SharePointRestException spre)
@@ -384,13 +390,38 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     _configuration["JWT_VALID_AUDIENCE"],
                     expires: DateTime.UtcNow.AddYears(5),
                     signingCredentials: creds
-                    );                
+                    );
                 result.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
                 result.ResultStatus = ResultStatus.Success;
             }
             else
             {
                 result.ErrorDetail = "Bad Request";
+            }
+            return Task.FromResult(result);
+        }
+
+        public override Task<TruncatedFilenameReply> GetTruncatedFilename(TruncatedFilenameRequest request, ServerCallContext context)
+        {
+            var result = new TruncatedFilenameReply();
+            string logFileName = WordSanitizer.Sanitize(request.FileName);
+            string logFolderName = WordSanitizer.Sanitize(request.FolderName);
+            try
+            {
+                var _sharePointFileManager = new SharePointFileManager(_configuration);
+
+                // Ask SharePoint whether this filename would be truncated upon upload
+                var listTitle = GetDocumentListTitle(request.EntityName);
+                var maybeTruncated = _sharePointFileManager.GetTruncatedFileName(request.FileName, listTitle, request.FolderName);
+                result.FileName = maybeTruncated;
+                result.ResultStatus = ResultStatus.Success;
+            }
+            catch (SharePointRestException ex)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = $"ERROR in getting truncated filename {logFileName} for folder {logFolderName}";
+                Log.Error(ex, result.ErrorDetail);
+
             }
             return Task.FromResult(result);
         }

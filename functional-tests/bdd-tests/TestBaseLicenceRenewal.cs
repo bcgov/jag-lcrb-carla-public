@@ -23,57 +23,51 @@ namespace bdd_tests
         [And(@"I renew the licence with (.*)")]
         public void RenewLicence(string responses)
         {
-            string renewLicenceLink = "Renew Licence";
-
-            // click on the Renew Licence link
-            NgWebElement uiRenewLicence = ngDriver.FindElement(By.LinkText(renewLicenceLink));
-            uiRenewLicence.Click();
-
             if (responses == "negative responses for Cannabis")
             {
                 // select 'No'
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
-                NgWebElement uiCriminalOffence = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-16-button"));
+                NgWebElement uiCriminalOffence = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-10-button"));
                 uiCriminalOffence.Click();
 
                 // select 'No'
                 // 2. Has there been an unreported sale of the business associated with the licence within the past 12 months? 
-                NgWebElement uiUnreportedSale = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalUnreportedSaleOfBusiness'] button#mat-button-toggle-18-button"));
+                NgWebElement uiUnreportedSale = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalUnreportedSaleOfBusiness'] button#mat-button-toggle-12-button"));
                 uiUnreportedSale.Click();
 
                 // select 'No'
                 // 3. Our records show that this establishment is licensed as a Private Corporation. Has this changed? 
-                NgWebElement uiBusinessType = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalBusinessType'] button#mat-button-toggle-20-button"));
+                NgWebElement uiBusinessType = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalBusinessType'] button#mat-button-toggle-14-button"));
                 uiBusinessType.Click();
 
                 // select 'No'
                 // 4. Have you, any partner, shareholder, director, officer, or an immediate family member of any of the aforementioned associates acquired a new interest or expanded an existing interest - financial or otherwise - in a federal producer of cannabis within the past 12 months? 
-                NgWebElement uiTiedHouse = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalTiedhouse'] button#mat-button-toggle-22-button"));
+                NgWebElement uiTiedHouse = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalTiedhouse'] button#mat-button-toggle-16-button"));
                 uiTiedHouse.Click();
 
                 // select 'No'
                 // 5. Has a federal produce of cannabis acquired a new interest or expanded an existing interest - financial or otherwise - in the licensee Private Corporation within the past 12 months? 
-                NgWebElement uiTiedHouseFederalInterest = ngDriver.FindElement(By.CssSelector("[formcontrolname='tiedhouseFederalInterest'] button#mat-button-toggle-24-button"));
+                NgWebElement uiTiedHouseFederalInterest = ngDriver.FindElement(By.CssSelector("[formcontrolname='tiedhouseFederalInterest'] button#mat-button-toggle-18-button"));
                 uiTiedHouseFederalInterest.Click();
 
                 // select 'No'
                 // 6. Have you made any unreported changes to your organizational leadership within the past 12 months?
-                NgWebElement uiOrgLeadership = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalOrgLeadership'] button#mat-button-toggle-26-button"));
+                NgWebElement uiOrgLeadership = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalOrgLeadership'] button#mat-button-toggle-20-button"));
                 uiOrgLeadership.Click();
 
                 // select 'No'
                 // 7. Have you made any unreported changes to your key personnel within the past 12 months?
-                NgWebElement uiKeyPersonnel = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-28-button"));
+                NgWebElement uiKeyPersonnel = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-22-button"));
                 uiKeyPersonnel.Click();
 
                 // select 'No'
                 // 8. Have you made any unreported changes to your share structure within the past 12 months? 
-                NgWebElement uiShareholderStructure = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalShareholders'] button#mat-button-toggle-30-button"));
+                NgWebElement uiShareholderStructure = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalShareholders'] button#mat-button-toggle-24-button"));
                 uiShareholderStructure.Click();
 
                 // select 'No'
                 // 9. Do you have an outstanding payable fine under the Offence Act or outstanding payable monetary penalty under the Cannabis Control and Licensing Act that has not yet been paid?
-                NgWebElement uiOutstandingFine = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalOutstandingFines'] button#mat-button-toggle-32-button"));
+                NgWebElement uiOutstandingFine = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalOutstandingFines'] button#mat-button-toggle-26-button"));
                 uiOutstandingFine.Click();
 
                 // select 'No'
@@ -111,47 +105,47 @@ namespace bdd_tests
             {
                 // select 'Yes'
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
-                NgWebElement uiCriminalOffence = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-15-button"));
+                NgWebElement uiCriminalOffence = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-9-button"));
                 uiCriminalOffence.Click();
 
                 // select 'Yes'
                 // 2. Has there been an unreported sale of the business associated with the licence within the past 12 months? 
-                NgWebElement uiUnreportedSale = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalUnreportedSaleOfBusiness'] button#mat-button-toggle-17-button"));
+                NgWebElement uiUnreportedSale = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalUnreportedSaleOfBusiness'] button#mat-button-toggle-11-button"));
                 uiUnreportedSale.Click();
 
                 // select 'Yes'
                 // 3. Our records show that this establishment is licensed as a Private Corporation. Has this changed? 
-                NgWebElement uiBusinessType = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalBusinessType'] button#mat-button-toggle-19-button"));
+                NgWebElement uiBusinessType = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalBusinessType'] button#mat-button-toggle-13-button"));
                 uiBusinessType.Click();
 
                 // select 'Yes'
                 // 4. Have you, any partner, shareholder, director, officer, or an immediate family member of any of the aforementioned associates acquired a new interest or expanded an existing interest - financial or otherwise - in a federal producer of cannabis within the past 12 months? 
-                NgWebElement uiTiedHouse = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalTiedhouse'] button#mat-button-toggle-21-button"));
+                NgWebElement uiTiedHouse = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalTiedhouse'] button#mat-button-toggle-15-button"));
                 uiTiedHouse.Click();
 
                 // select 'Yes'
                 // 5. Has a federal produce of cannabis acquired a new interest or expanded an existing interest - financial or otherwise - in the licensee Private Corporation within the past 12 months? 
-                NgWebElement uiTiedHouseFederalInterest = ngDriver.FindElement(By.CssSelector("[formcontrolname='tiedhouseFederalInterest'] button#mat-button-toggle-23-button"));
+                NgWebElement uiTiedHouseFederalInterest = ngDriver.FindElement(By.CssSelector("[formcontrolname='tiedhouseFederalInterest'] button#mat-button-toggle-17-button"));
                 uiTiedHouseFederalInterest.Click();
 
                 // select 'Yes'
                 // 6. Have you made any unreported changes to your organizational leadership within the past 12 months?
-                NgWebElement uiOrgLeadership = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalOrgLeadership'] button#mat-button-toggle-25-button"));
+                NgWebElement uiOrgLeadership = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalOrgLeadership'] button#mat-button-toggle-19-button"));
                 uiOrgLeadership.Click();
 
                 // select 'Yes'
                 // 7. Have you made any unreported changes to your key personnel within the past 12 months?
-                NgWebElement uiKeyPersonnel = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-27-button"));
+                NgWebElement uiKeyPersonnel = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-21-button"));
                 uiKeyPersonnel.Click();
 
                 // select 'Yes'
                 // 8. Have you made any unreported changes to your share structure within the past 12 months? 
-                NgWebElement uiShareholderStructure = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalShareholders'] button#mat-button-toggle-29-button"));
+                NgWebElement uiShareholderStructure = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalShareholders'] button#mat-button-toggle-23-button"));
                 uiShareholderStructure.Click();
 
                 // select 'Yes'
                 // 9. Do you have an outstanding payable fine under the Offence Act or outstanding payable monetary penalty under the Cannabis Control and Licensing Act that has not yet been paid?
-                NgWebElement uiOutstandingFine = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalOutstandingFines'] button#mat-button-toggle-31-button"));
+                NgWebElement uiOutstandingFine = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalOutstandingFines'] button#mat-button-toggle-25-button"));
                 uiOutstandingFine.Click();
 
                 // select 'Yes'
@@ -311,68 +305,14 @@ namespace bdd_tests
 
             if ((responses == "positive responses for a brewery") || (responses == "positive responses for a winery") || (responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
             {
-                if (responses == "positive responses for a brewery")
-                {
-                    string ldbOrderTotals = "100";
-                    string confirmOrderTotals = "100";
-                    string volumeProduced = "200";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(ldbOrderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmOrderTotals);
-
-                    // enter the volume produced
-                    NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
-                    uiVolumeProduced.SendKeys(volumeProduced);
-                }
-
                 if (responses == "positive responses for a winery")
                 {
-                    string orderTotals = "233";
-                    string confirmTotals = "233";
-                    string volumeProduced = "5000";
-                    string volumeDestroyed = "200";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(orderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmTotals);
-
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
                     uiIsManufacturedMinimum.Click();
 
                     // upload discretion letter
                     FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
-
-                    // enter the volume produced
-                    NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
-                    uiVolumeProduced.SendKeys(volumeProduced);
-
-                    // enter the volume destroyed
-                    NgWebElement uiVolumeDestroyed = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeDestroyed']"));
-                    uiVolumeDestroyed.SendKeys(volumeDestroyed);
-                }
-
-                if ((responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
-                {
-                    string orderTotals = "233";
-                    string confirmTotals = "233";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(orderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmTotals);
                 }
 
                 // select 'Yes'
@@ -436,68 +376,14 @@ namespace bdd_tests
 
             if ((responses == "negative responses for a brewery") || (responses == "negative responses for a winery") || (responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
             { 
-                if (responses == "negative responses for a brewery")
-                {
-                    string ldbOrderTotals = "100";
-                    string confirmOrderTotals = "100";
-                    string volumeProduced = "200";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(ldbOrderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmOrderTotals);
-
-                    // enter the volume produced
-                    NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
-                    uiVolumeProduced.SendKeys(volumeProduced);
-                }
-
                 if (responses == "negative responses for a winery")
                 {
-                    string orderTotals = "233";
-                    string confirmTotals = "233";
-                    string volumeProduced = "5000";
-                    string volumeDestroyed = "200";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(orderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmTotals);
-
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
                     uiIsManufacturedMinimum.Click();
 
                     // upload discretion letter
                     FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
-
-                    // enter the volume produced
-                    NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
-                    uiVolumeProduced.SendKeys(volumeProduced);
-
-                    // enter the volume destroyed
-                    NgWebElement uiVolumeDestroyed = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeDestroyed']"));
-                    uiVolumeDestroyed.SendKeys(volumeDestroyed);
-                }
-
-                if ((responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
-                {
-                    string orderTotals = "233";
-                    string confirmTotals = "233";
-
-                    // enter the order totals
-                    NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
-                    uiOrderTotals.SendKeys(orderTotals);
-
-                    // re-enter the order totals
-                    NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
-                    uiOrderTotals2.SendKeys(confirmTotals);
                 }
 
                 // select 'No'
@@ -559,18 +445,9 @@ namespace bdd_tests
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
             uiSignatureAgreement.Click();
 
-            if ((responses == "positive responses for Cannabis") || (responses == "negative responses for Cannabis"))
-            {
-                // click on the Submit & Pay button
-                NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector(".btn-primary+ .btn-primary"));
-                uiSubmitAndPay.Click();
-            } 
-            else             
-            {
-                // click on the Submit & Pay button
-                NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
-                uiSubmitAndPay.Click();
-            }
+            // click on the Submit & Pay button
+            NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+            uiSubmitAndPay.Click();
 
             MakePayment();
 
@@ -579,6 +456,12 @@ namespace bdd_tests
 
             // check that the licence is now active after renewal
             Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/span[3][contains(.,'Active')]")).Displayed);
+
+            // confirm that Renew Licence messages are no longer displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Renew Licence'))]")).Displayed);
+
+            // confirm that Reinstate Licence messages are no longer displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Reinstate Licence'))]")).Displayed);
         }
     }
 }
