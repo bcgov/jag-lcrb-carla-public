@@ -304,13 +304,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         result.PhsLink = ContactController.GetPhsLink(result.contactId, _configuration, _encryptionKey);
                         result.CasLink = ContactController.GetCASSLink(result.contactId, _configuration, _encryptionKey);
                     }
-                    result.children = this.GetLegalEntityChildren(result.id);
+
+                    List<string> processedEntities = new List<string>();
+                    result.children = this.GetLegalEntityChildren(result.id, processedEntities);
                 }
             }
             return result;
         }
 
-        private List<LegalEntity> GetLegalEntityChildren(string parentLegalEntityId, List<string> processedEntities = null)
+        private List<LegalEntity> GetLegalEntityChildren(string parentLegalEntityId, List<string> processedEntities)
         {
             List<LegalEntity> result = new List<LegalEntity>();
             MicrosoftDynamicsCRMadoxioLegalentityCollection response = null;
