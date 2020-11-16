@@ -17,7 +17,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./offsite-storage.component.scss'],
 })
 export class OffsiteStorageComponent extends FormBase implements OnInit {
-  isEditMode = false;
+  isEditMode = true;
   isReadOnly = false;
   showErrorSection = false;
 
@@ -26,7 +26,7 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
   busy: Subscription;
   eventStatus = EventStatus;
 
-  eventForm = this.fb.group({
+  form = this.fb.group({
     status: ['', [Validators.required]],
     id: ['', []],
     name: ['', []],
@@ -58,13 +58,7 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
   ) {
     super();
     this.route.paramMap.subscribe(params => {
-      this.eventForm.controls['licenceId'].setValue(params.get('licenceId'));
-      if (params.get('eventId')) {
-        this.isEditMode = true;
-        this.retrieveSavedEvent(params.get('eventId'));
-      } else {
-        this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
-      }
+      this.form.get('licenceId').setValue(params.get('licenceId'));
     });
   }
 
@@ -73,7 +67,7 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
       .select(state => state.currentUserState.currentUser)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: User) => {
-        this.eventForm.controls['contactEmail'].setValue(data.email);
+        this.form.controls['contactEmail'].setValue(data.email);
       });
   }
 
@@ -90,7 +84,7 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
       this.isReadOnly = true;
     }
 
-    this.eventForm.setValue({
+    this.form.setValue({
       status: licenceEvent.status,
       id: licenceEvent.id,
       name: licenceEvent.name,
@@ -114,13 +108,13 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
     });
 
     if (this.isReadOnly) {
-      this.eventForm.disable();
+      this.form.disable();
     }
   }
 
   save(submit = false) {
     if (submit) {
-      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Submitted').value);
+      this.form.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Submitted').value);
     }
 
     if (this.isEditMode) {
@@ -131,15 +125,15 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
   }
 
   updateLicence() {
-    this.busy = this.licenceEvents.updateLicenceEvent(this.eventForm.get('id').value, { ...this.eventForm.value })
+    this.busy = this.licenceEvents.updateLicenceEvent(this.form.get('id').value, { ...this.form.value })
       .subscribe((licenceEvent) => {
         this.router.navigate(['/licences']);
       });
   }
 
   createLicence() {
-    this.eventForm.removeControl('id');
-    this.busy = this.licenceEvents.createLicenceEvent({ ...this.eventForm.value })
+    this.form.removeControl('id');
+    this.busy = this.licenceEvents.createLicenceEvent({ ...this.form.value })
       .subscribe((licenceEvent) => {
         this.router.navigate(['/licences']);
       });
@@ -169,14 +163,14 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
 
 
   isFormValid() {
-    return this.eventForm.invalid || !this.eventForm.controls['agreement'].value;
+    return this.form.invalid || !this.form.controls['agreement'].value;
   }
 
   cancel() {
     if (this.isEditMode) {
-      const id = this.eventForm.get('id').value;
+      const id = this.form.get('id').value;
       const status = this.getOptionFromLabel(this.eventStatus, 'Cancelled').value;
-      this.busy = this.licenceEvents.updateLicenceEvent(id, { ...this.eventForm.value, status: status, licenceId: this.eventForm.get('licenceId').value })
+      this.busy = this.licenceEvents.updateLicenceEvent(id, { ...this.form.value, status: status, licenceId: this.form.get('licenceId').value })
         .subscribe((licenceEvent) => {
           this.router.navigate(['/licences']);
         });

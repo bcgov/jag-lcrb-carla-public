@@ -157,11 +157,6 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'licence/:licenceId/offsite-storage/:eventId',
-    component: OffsiteStorageComponent,
-    canActivate: [BCeidAuthGuard]
-  },
-  {
     path: 'federal-reporting/:licenceId/:monthlyReportId',
     component: FederalReportingComponent,
     canActivate: [BCeidAuthGuard]
