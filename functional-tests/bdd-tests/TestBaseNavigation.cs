@@ -100,6 +100,7 @@ namespace bdd_tests
                 }
                 catch (Exception)
                 {
+                    ngDriver.Navigate().Refresh();
                     System.Threading.Thread.Sleep(2000);
                 }
             }

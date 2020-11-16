@@ -444,20 +444,23 @@ namespace bdd_tests
             uiSubmitAndPay.Click();
 
             MakePayment();
-          
+
+            ClickLicencesTab();
+
             // reload Licences page as needed
             for (int i = 0; i < 5; i++)
             {
-                ClickLicencesTab();
+
                 try
                 {
-                    if (ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/span[3][contains(.,'Active')]")).Displayed)
+                    if (ngDriver.FindElement(By.XPath("//body[contains(.,'Active')]")).Displayed)
                     {
                         break;
                     }
                 }
                 catch (Exception) 
                 {
+                    ngDriver.Navigate().Refresh();
                     System.Threading.Thread.Sleep(2000);
                 } 
             }
