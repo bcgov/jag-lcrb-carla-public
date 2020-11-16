@@ -10,7 +10,7 @@ Scenario: Food Primary COVID Temp Extension
     And I click on the Submit button
     Then the application is submitted
 
-@covid
+@covid @release
 Scenario: Liquor Primary COVID Temp Extension
     Given I am not logged in to the Liquor and Cannabis Portal
     And I click on the COVID Temporary Extension link
