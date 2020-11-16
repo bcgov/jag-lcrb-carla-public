@@ -87,6 +87,11 @@ namespace bdd_tests
         public void ClickLicencesTab()
         {
             ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+
+            // add in logic to check for an unsuccessful load of Licences & Authorizations tab
+
+            // reload the page
+            
         }
 
 
