@@ -22,19 +22,13 @@ node('master') {
 						def buildSelector1 = bc1.startBuild()
 						sleep(5)
 						buildSelector1.logs('-f')
-					
-						sleep(10)
+						sleep(30)
+						def bc2 = openshift.selector('bc', 'cllc-public-frontend')
+						def buildSelector2 = bc2.startBuild()
 						
-						
-						def builds = openshift.selector("bc", 'cllc-public-frontend').related('builds')
-						timeout(5) { 
-							builds.untilEach(1) {
-								return (it.object().status.phase == "Complete")
-							}
+						timeout(10) { 
+							buildSelector1.logs('-f')
 						}
-						
-
-						
 					}
 					
 					openshift.tag("cllc-public-frontend:latest", "cllc-public-frontend:dev") 
