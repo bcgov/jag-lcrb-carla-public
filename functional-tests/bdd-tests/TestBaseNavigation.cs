@@ -89,26 +89,14 @@ namespace bdd_tests
             ngDriver.Navigate().GoToUrl($"{baseUri}licences");
 
             // check for failure to load Licences & Authorizations tab successfully
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
-                try
+                NgWebElement licencesTabIsLoaded = ngDriver.FindElement(By.XPath("//body[contains(.,'Details')]"));
+
+                if ((licencesTabIsLoaded.Displayed) == false)
                 {
-                    NgWebElement licencesTabLoaded = ngDriver.FindElement(By.XPath("//body[contains(.,'You do not have any licences or authorizations on file')]"));
-
-                    if (licencesTabLoaded.Displayed)
-                    {
-                        ngDriver.Navigate().Refresh();
-                        Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'You do not have any licences or authorizations on file'))]")).Displayed);
-                        break;
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                    }
-                }
-                catch (Exception)
-                { 
-
+                    ngDriver.Navigate().Refresh();
+                    System.Threading.Thread.Sleep(2000);
                 }
             }
         }

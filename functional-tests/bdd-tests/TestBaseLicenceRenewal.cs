@@ -449,7 +449,11 @@ namespace bdd_tests
             ClickLicencesTab();
 
             // reload Licences page
-            ngDriver.Navigate().Refresh();
+            for (int i = 0; i < 3; i++)
+            { 
+                ngDriver.Navigate().Refresh();
+                System.Threading.Thread.Sleep(2000);   
+            }
 
             // check that the licence is now active after renewal
             Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/span[3][contains(.,'Active')]")).Displayed);
