@@ -21,7 +21,7 @@ using Xunit;
 # One Market Event
 #-----------------------
 
- @e2e @privatecorporation @marketeventoneday @winery
+ @e2e @privatecorporation @marketeventoneday @winery @release
  Scenario: Winery One Day Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
