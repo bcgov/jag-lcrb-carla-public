@@ -87,15 +87,25 @@ namespace bdd_tests
         public void ClickLicencesTab()
         {
             // check for failure to load Licences & Authorizations tab successfully
-            for (int i = 0; i < 3; i++)
-            { 
-                ngDriver.Navigate().GoToUrl($"{baseUri}licences");
-
-                if ((ngDriver.FindElement(By.XPath("//body[contains(.,'Details')]")).Displayed) == false)
+            try
+            {
+                for (int i = 0; i < 3; i++)
                 {
-                    ngDriver.Navigate().Refresh();
-                    System.Threading.Thread.Sleep(2000);
+                    ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+
+                    if ((ngDriver.FindElement(By.XPath("//body[contains(.,'You do not have any licences or authorizations on file')]")).Displayed))
+                    {
+                        ngDriver.Navigate().Refresh();
+                        System.Threading.Thread.Sleep(2000);
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
+            }
+            catch (Exception)
+            { 
             }
         }
 
