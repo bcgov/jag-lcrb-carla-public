@@ -313,18 +313,16 @@ namespace Gov.Lclb.Cllb.Public
 
             // add BC Express Pay (Bambora) service
             services.AddHttpClient<IBCEPService, BCEPService>()
-                .AddPolicyHandler(GetRetryPolicy())
-                .AddPolicyHandler(GetCircuitBreakerPolicy());
+                .AddPolicyHandler(GetRetryPolicy());
+
 
             // add the PDF client.
             services.AddHttpClient<IPdfService, PdfService>()
-                .AddPolicyHandler(GetRetryPolicy())
-                .AddPolicyHandler(GetCircuitBreakerPolicy());
+                .AddPolicyHandler(GetRetryPolicy());
 
             // add the GeoCoder Client.
-            services.AddHttpClient<IGeocoderService, GeocoderService>()                
-                .AddPolicyHandler(GetRetryPolicy())
-                .AddPolicyHandler(GetCircuitBreakerPolicy());
+            services.AddHttpClient<IGeocoderService, GeocoderService>()
+                .AddPolicyHandler(GetRetryPolicy());
 
             // add the file manager.
             string fileManagerURI = _configuration["FILE_MANAGER_URI"];
