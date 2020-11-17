@@ -44,6 +44,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="ChangeHoursLiquorService.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="CateringApplicationLicensingRenewalDenied.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -116,7 +119,7 @@
     <None Update="ValidationMarketEvent.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ValidationRuralStore.feature">
+    <None Update="ValidationRuralAgencyStore.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ValidationCOVID.feature">
@@ -203,7 +206,7 @@
     <None Update="COVIDTemporaryExtension.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralStore.feature">
+    <None Update="RuralAgencyStore.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationEventAuthorization.feature">
