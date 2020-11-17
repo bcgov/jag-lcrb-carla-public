@@ -12,7 +12,7 @@ Scenario: Indigenous Nation Cannabis Marketing Application
     And I review the security screening requirements for an indigenous nation
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a Cannabis Marketing Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -28,13 +28,13 @@ Scenario: Partnership Cannabis Marketing Application
     And I review the security screening requirements for a partnership
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a Cannabis Marketing Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabismktg @privatecorporation 
+@e2e @cannabismktg @privatecorporation @release
 Scenario: Private Corporation Cannabis Marketing Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
@@ -44,7 +44,7 @@ Scenario: Private Corporation Cannabis Marketing Application
     And I review the security screening requirements for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a Cannabis Marketing Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -60,7 +60,7 @@ Scenario: Public Corporation Cannabis Marketing Application
     And I review the security screening requirements for a public corporation
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a Cannabis Marketing Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -76,7 +76,7 @@ Scenario: Society Cannabis Marketing Application
     And I review the security screening requirements for a society
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a Cannabis Marketing Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -92,7 +92,7 @@ Scenario: Sole Proprietorship Cannabis Marketing Application
     And I review the security screening requirements for a sole proprietorship
     And I click on the button for Pay for Application
     And I enter the payment information
-    And I confirm the payment receipt for a Catering application
+    And I confirm the payment receipt for a Cannabis Marketing Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
