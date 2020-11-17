@@ -313,16 +313,8 @@ namespace Gov.Lclb.Cllb.Public
 
             // add BC Express Pay (Bambora) service
             services.AddHttpClient<IBCEPService, BCEPService>()
-                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
-                {
-                    ClientCertificateOptions = ClientCertificateOption.Manual,
-                    ServerCertificateCustomValidationCallback =
-                        (httpRequestMessage, cert, cetChain, policyErrors) =>  // bypass certificate check.
-                        {
-                            return true;
-                        }
-                });
-                
+                .AddPolicyHandler(GetRetryPolicy());
+
 
             // add the PDF client.
             services.AddHttpClient<IPdfService, PdfService>()
