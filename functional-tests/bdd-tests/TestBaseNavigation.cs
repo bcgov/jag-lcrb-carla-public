@@ -93,7 +93,7 @@ namespace bdd_tests
                 {
                     ngDriver.Navigate().GoToUrl($"{baseUri}licences");
 
-                    if ((ngDriver.FindElement(By.XPath("//body[contains(.,'You do not have any licences or authorizations on file')]")).Displayed))
+                    if (ngDriver.FindElement(By.XPath("//body[contains(.,'Details')]")).Displayed == false)
                     {
                         ngDriver.Navigate().Refresh();
                         System.Threading.Thread.Sleep(2000);
