@@ -6,7 +6,7 @@
 # One Market Event
 #-----------------------
 
- @e2e @privatecorporation @marketeventoneday @winery @release
+ @e2e @privatecorporation @marketevent @winery @release
  Scenario: Winery One Day Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -36,7 +36,7 @@
 # Weekly Market Event
 #-----------------------
 
- @e2e @privatecorporation @marketeventweekly @winery
+ @e2e @privatecorporation @marketevent @winery
  Scenario: Winery Weekly Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -67,7 +67,7 @@
 # Note that 'bi-weekly' refers to twice per month
 #-------------------------------------------------
 
- @e2e @privatecorporation @marketeventbiweekly @winery
+ @e2e @privatecorporation @marketevent @winery
  Scenario: Winery Bi-Weekly Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -97,7 +97,7 @@
 # Monthly Market Event
 #-----------------------
 
- @e2e @privatecorporation @marketeventmonthly @winery
+ @e2e @privatecorporation @marketevent @winery
  Scenario: Winery Monthly Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
