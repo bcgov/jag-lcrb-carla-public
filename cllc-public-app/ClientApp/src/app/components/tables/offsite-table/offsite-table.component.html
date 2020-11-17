@@ -1,0 +1,28 @@
+<table class="capacity">
+  <thead *ngIf="rows.controls.length > 0">
+    <th>Status</th>
+    <th style="width: 100px;">Address</th>
+    <th>City</th>
+    <th>Postal Code</th>
+    <th style="width: 45px"></th>
+  </thead>
+  <tr *ngFor="let row of rows.controls; let i=index">
+    <ng-container [formGroup]="row">
+      <td><input type="text" formControlName="status" [readonly]="true" /></td>
+      <td><input type="text" formControlName="street1" placeholder="Enter Address" [readonly]="!enabled"/></td>
+      <td><input type="text" formControlName="city" placeholder="Enter City" [readonly]="!enabled"/></td>
+      <td><input type="text" formControlName="postalCode" placeholder="Enter Postal Code" [readonly]="!enabled"/></td>
+      <td><button (click)="removeRow(i)" class="btn-clear" *ngIf="enabled"><i class="fas fa-trash-alt"></i></button></td>
+    </ng-container>
+  </tr>
+  <tr>
+    <td [colSpan]="2">
+      <button (click)="addRow()" class="btn-clear" style="height: 100%;" *ngIf="enabled">
+        <i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Additional Storage
+      </button>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
