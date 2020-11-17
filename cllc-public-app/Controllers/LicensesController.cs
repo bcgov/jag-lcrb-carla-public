@@ -215,39 +215,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
         }
 
-        // TODO: Remove if not useful
-        private void RemoveOffsiteLocationsFromLicence(string licenceId)
-        {
-            var filter = $"_adoxio_licenceid_value eq {licenceId}";
-            try
-            {
-                var locations = _dynamicsClient.Offsitestorages.Get(filter: filter).Value;
-                foreach (var loc in locations)
-                {
-                    try
-                    {
-                        _dynamicsClient.Offsitestorages.Delete(loc.AdoxioOffsitestorageid);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Unexpected error deleting an offsite location.");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Unexpected error deleting a offsite location.");
-                    }
-                }
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Unexpected error getting offsite locations.");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Unexpected error getting offsite locations.");
-            }
-        }
-
         private IList<MicrosoftDynamicsCRMadoxioOffsitestorage> GetOffsiteLocationsFromLicence(string licenceId)
         {
             var locations = new List<MicrosoftDynamicsCRMadoxioOffsitestorage>();
