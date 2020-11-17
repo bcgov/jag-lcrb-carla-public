@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { LicenceEvent, EventStatus } from '../../models/licence-event.model';
-import { LicenceEventsService } from '@services/licence-events.service';
-import { takeWhile } from 'rxjs/operators';
-import { AppState } from '@app/app-state/models/app-state';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
+import { LicenseDataService } from '@services/license-data.service';
+import { LicenceEvent, EventStatus } from '../../models/licence-event.model';
+import { AppState } from '@app/app-state/models/app-state';
 import { User } from '@models/user.model';
 import { FormBase } from '@shared/form-base';
-import { Router, ActivatedRoute } from '@angular/router';
+import { License } from '@models/license.model';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
   isReadOnly = false;
   showErrorSection = false;
 
-  licenceEvent: LicenceEvent;
+  licence: License;
 
   busy: Subscription;
   eventStatus = EventStatus;
@@ -31,27 +32,17 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
     id: ['', []],
     name: ['', []],
     licenceId: ['', []],
-    accountId: ['', []],
-    contactName: ['', [Validators.required]],
-    contactPhone: ['', [Validators.required]],
-    contactEmail: ['', [Validators.required]],
     street1: ['', [Validators.required]],
     street2: ['', []],
     city: ['', [Validators.required]],
     province: ['BC', [Validators.required]],
     postalCode: ['', [Validators.required]],
-    startDate: ['', [Validators.required]],
-    endDate: ['', [Validators.required]],
-    sepLicensee: ['', [Validators.required]],
-    sepLicenceNumber: ['', [Validators.required]],
-    sepContactName: ['', [Validators.required]],
-    sepContactPhoneNumber: ['', [Validators.required]],
     agreement: [false, [Validators.required]]
   });
 
   constructor(
     private fb: FormBuilder,
-    private licenceEvents: LicenceEventsService,
+    private licenceDataService: LicenseDataService,
     private store: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute
@@ -63,47 +54,28 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
-    this.store
-      .select(state => state.currentUserState.currentUser)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: User) => {
-        this.form.controls['contactEmail'].setValue(data.email);
+
+  }
+
+  retrieveLicence(licenceId: string) {
+    this.busy = this.licenceDataService.getLicenceById(licenceId)
+      .subscribe((licence) => {
+        this.licence = licence;
+        this.setFormToLicence(licence);
       });
   }
 
-  retrieveSavedEvent(eventId: string) {
-    this.busy = this.licenceEvents
-      .getLicenceEvent(eventId)
-      .subscribe((licenceEvent) => {
-        this.setFormToLicenceEvent(licenceEvent);
-      });
-  }
-
-  setFormToLicenceEvent(licenceEvent: LicenceEvent) {
-    if (licenceEvent.status === this.getOptionFromLabel(this.eventStatus, 'Approved').value) {
-      this.isReadOnly = true;
-    }
+  setFormToLicence(licence: License) {
+    //TODO: Temporary test code
+    const offsite = licence.offsiteStorageLocations.length > 0 ? licence.offsiteStorageLocations[0] : null;
 
     this.form.setValue({
-      status: licenceEvent.status,
-      id: licenceEvent.id,
-      name: licenceEvent.name,
-      licenceId: licenceEvent.licenceId,
-      accountId: licenceEvent.accountId,
-      contactName: licenceEvent.contactName,
-      contactPhone: licenceEvent.contactPhone,
-      contactEmail: licenceEvent.contactEmail,
-      sepLicenceNumber: licenceEvent.sepLicenceNumber,
-      sepLicensee: licenceEvent.sepLicensee,
-      sepContactName: licenceEvent.sepContactName,
-      sepContactPhoneNumber: licenceEvent.sepContactPhoneNumber,
-      street1: licenceEvent.street1,
-      street2: licenceEvent.street2,
-      city: licenceEvent.city,
-      province: licenceEvent.province,
-      postalCode: licenceEvent.postalCode,
-      startDate: new Date(licenceEvent.startDate),
-      endDate: new Date(licenceEvent.endDate),
+      licenceId: licence.id,
+      street1: licence.street1,
+      street2: licence.street2,
+      city: licence.city,
+      province: licence.province,
+      postalCode: licence.postalCode,
       agreement: false
     });
 
