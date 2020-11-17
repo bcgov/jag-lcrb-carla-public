@@ -457,23 +457,6 @@ namespace bdd_tests
                     System.Threading.Thread.Sleep(2000);
                 }
             }
-            
-            /*
-            ngDriver.Navigate().Refresh();
-            System.Threading.Thread.Sleep(2000);
-
-            ngDriver.Navigate().Refresh();
-            System.Threading.Thread.Sleep(2000);
-
-            ngDriver.Navigate().Refresh();
-            System.Threading.Thread.Sleep(2000);
-
-            ngDriver.Navigate().Refresh();
-            System.Threading.Thread.Sleep(2000);
-
-            ngDriver.Navigate().Refresh();
-            System.Threading.Thread.Sleep(2000);
-            */
 
             // confirm that Renew Licence messages are no longer displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Renew Licence'))]")).Displayed);
