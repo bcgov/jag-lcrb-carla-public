@@ -34,7 +34,7 @@ Scenario: Partnership Cannabis Marketing Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabismktg @privatecorporation 
+@e2e @cannabismktg @privatecorporation @release
 Scenario: Private Corporation Cannabis Marketing Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
