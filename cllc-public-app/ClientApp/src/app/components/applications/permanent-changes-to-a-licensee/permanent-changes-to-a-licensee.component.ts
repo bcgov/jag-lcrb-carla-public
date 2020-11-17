@@ -9,38 +9,27 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { FormBase } from '@shared/form-base';
 import { filter } from 'rxjs/operators';
 
-interface PageData {
-  licences: {
-    cannabis: ApplicationLicenseSummary[],
-    liquor: ApplicationLicenseSummary[],
-  },
-  application: Application
-
-}
-
 @Component({
   selector: 'app-permanent-changes-to-a-licensee',
   templateUrl: './permanent-changes-to-a-licensee.component.html',
   styleUrls: ['./permanent-changes-to-a-licensee.component.scss']
 })
 export class PermanentChangesToALicenseeComponent extends FormBase implements OnInit {
-  value: string; // Place holder propertry
-  applicationId: string; // Place holder prop
+  value: any; // placeholder prop
+  application: Application;
+  liquorLicences: ApplicationLicenseSummary[] = [];
+  cannabisLicences: ApplicationLicenseSummary[] = [];
   account: Account;
   businessType: string;
 
   get hasLiquor(): boolean {
-    return this.licences.liquor.length > 0;
+    return this.liquorLicences.length > 0;
   }
 
   get hasCannabis(): boolean {
-    return this.licences.cannabis.length > 0;
+    return this.cannabisLicences.length > 0;
   }
 
-  get licences() {
-    return this.form.get('licences').value;
-  }
-  
   changeList = [];
   form: FormGroup;
 
@@ -63,17 +52,28 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
     };
 
     this.form = this.fb.group({
-      application: this.fb.group({}),
-      licences: [{ value: defaultLicences, disabled: true }]
+      firstNameOld: [''],
+      firstNameNew: [''],
+      lastNameOld: [''],
+      lastNameNew: [''],
+      csInternalTransferOfShares: [''],
+      csExternalTransferOfShares: [''],
+      csChangeOfDirectorsOrOfficers: [''],
+      csNameChangeLicenseeCorporation: [''],
+      csNameChangeLicenseePartnership: [''],
+      csNameChangeLicenseeSociety: [''],
+      csNameChangeLicenseePerson: [''],
+      csAdditionalReceiverOrExecutor: [''],
+      description2: [''],
+      description3: [''],
     });
 
     this.applicationDataService.getPermanentChangesToLicenseeData()
       .subscribe(({ application, licences }) => {
-        const data: PageData = { licences: {} } as PageData;
-        data.licences.liquor = licences.filter(item => item.licenceTypeCategory === 'Liquor');
-        data.licences.cannabis = licences.filter(item => item.licenceTypeCategory === 'Cannabis');
-        data.application = application;
-        this.form.patchValue(data);
+        this.liquorLicences = licences.filter(item => item.licenceTypeCategory === 'Liquor');
+        this.cannabisLicences = licences.filter(item => item.licenceTypeCategory === 'Cannabis');
+        this.application = application;
+        this.form.patchValue(application);
       });
 
   }
@@ -82,6 +82,7 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
 const masterChangeList = [
   {
     name: 'Internal Transfer of Shares',
+    formControlName: 'csInternalTransferOfShares',
     availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
     CannabisFee: 110,
     LiquorFee: 110,
@@ -97,6 +98,7 @@ const masterChangeList = [
   },
   {
     name: 'External Transfer of Shares',
+    formControlName: 'csExternalTransferOfShares',
     availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
     CannabisFee: 330,
     LiquorFee: 330,
@@ -110,6 +112,7 @@ const masterChangeList = [
   },
   {
     name: 'Change of Directors or Officers',
+    formControlName: 'csChangeOfDirectorsOrOfficers',
     availableTo: ['PrivateCorporation', 'PublicCorporation', 'Society'],
     CannabisFee: 550,
     LiquorFee: 220,
@@ -122,6 +125,7 @@ const masterChangeList = [
   },
   {
     name: 'Name Change, Licensee -- Corporation',
+    formControlName: 'csNameChangeLicenseeCorporation',
     availableTo: ['PrivateCorporation', 'PublicCorporation'],
     CannabisFee: 500,
     LiquorFee: 500,
@@ -134,6 +138,7 @@ const masterChangeList = [
   },
   {
     name: 'Name Change, Licensee -- Partnership',
+    formControlName: 'csNameChangeLicenseePartnership',
     availableTo: ['GeneralPartnership', 'LimitedLiabilityPartnership'],
     CannabisFee: 220,
     LiquorFee: 220,
@@ -147,6 +152,7 @@ const masterChangeList = [
   },
   {
     name: 'Name Change, Licensee -- Society',
+    formControlName: 'csNameChangeLicenseeSociety',
     availableTo: ['Society'],
     CannabisFee: 220,
     LiquorFee: 220,
@@ -159,6 +165,7 @@ const masterChangeList = [
   },
   {
     name: 'Name Change, Person',
+    formControlName: 'csNameChangeLicenseePerson',
     availableTo: ['PrivateCorporation', 'PublicCorporation', 'GeneralPartnership',
       'LimitedLiabilityPartnership', 'IndigenousNation', 'LocalGovernment', 'Society'],
     CannabisFee: 220,
@@ -172,6 +179,7 @@ const masterChangeList = [
   },
   {
     name: 'Addition of Receiver or Executor',
+    formControlName: 'csAdditionalReceiverOrExecutor',
     availableTo: ['PrivateCorporation', 'PublicCorporation', 'GeneralPartnership',
       'LimitedLiabilityPartnership', 'Society'],
     CannabisFee: 220,
