@@ -150,13 +150,13 @@
                                 <tr>
                                     <td class="licenceTable">
                                         <ul>
-                                            <li *ngFor="let item of licences.cannabis">{{item.licenseNumber}} -
+                                            <li *ngFor="let item of cannabisLicences">{{item.licenseNumber}} -
                                                 {{item.establishmentName}}</li>
                                         </ul>
                                     </td>
                                     <td class="licenceTable">
                                         <ul>
-                                            <li *ngFor="let item of licences.liquor">{{item.licenseNumber}} -
+                                            <li *ngFor="let item of liquorLicences">{{item.licenseNumber}} -
                                                 {{item.establishmentName}}</li>
                                         </ul>
                                     </td>
@@ -191,7 +191,7 @@
             (30) day period, the application may be terminated.</p>
 
         <ng-container *ngFor="let item of changeList">
-            <mat-checkbox>{{item.name}}
+            <mat-checkbox [formControlName]="item.formControlName">{{item.name}}
             </mat-checkbox>
             <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle" matTooltip="What is this?"></i>
             <section class="infoCell" *ngIf="item.helpTextHeader || item.helpText || item.helpTextLink">
@@ -229,17 +229,18 @@
                 amalgamation occurs.</p>
 
             <h4>Updated Central Securities Register (shareholders) for the licensee corporation or holding company</h4>
-            <app-file-uploader *ngIf="true || applicationId" documentType="CentralSecuritiesRegister"
+            <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
-                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
+                [entityId]="application.id"
+                [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
             </app-file-uploader>
 
             <h4>Updated Register of Directors and Officers for the licensee corporation or holding company</h4>
-            <app-file-uploader *ngIf="true || applicationId" documentType="RegisterOfDirectorsAndOfficers"
+            <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
-                [entityId]="applicationId"
+                [entityId]="application.id"
                 [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
             </app-file-uploader>
 
@@ -247,25 +248,26 @@
             <p>If the change is the result of an internal amalgamation, attach:</p>
 
             <h4>Certificate of Amalgamation</h4>
-            <app-file-uploader *ngIf="true || applicationId" documentType="CertificateOfAmalgamation"
+            <app-file-uploader *ngIf="application?.id" documentType="CertificateOfAmalgamation"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
-                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD CERTIFICATE OF AMALGAMATION, DRAG FILES HERE OR'">
+                [entityId]="application.id"
+                [uploadHeader]="'TO UPLOAD CERTIFICATE OF AMALGAMATION, DRAG FILES HERE OR'">
             </app-file-uploader>
 
             <h4>Central Securities Register (shareholders) for the amalgamated company</h4>
-            <app-file-uploader *ngIf="true || applicationId" documentType="CentralSecuritiesRegisterForAmalgamated"
+            <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegisterForAmalgamated"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
-                [entityId]="applicationId"
+                [entityId]="application.id"
                 [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'">
             </app-file-uploader>
 
             <h4>Notice of Articles for the amalgamated company</h4>
-            <app-file-uploader *ngIf="true || applicationId" documentType="NOAAmalgamated"
+            <app-file-uploader *ngIf="application?.id" documentType="NOAAmalgamated"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedNOAAmalgamation = $event"
-                [entityId]="applicationId"
+                [entityId]="application.id"
                 [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'">
             </app-file-uploader>
 
@@ -284,17 +286,18 @@
         <div class="content-bottom">
 
             <h4>Updated Central Securities Register (shareholders) for the licensee corporation or holding company</h4>
-            <app-file-uploader *ngIf="true || applicationId" documentType="CentralSecuritiesRegister"
+            <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
-                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
+                [entityId]="application.id"
+                [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
             </app-file-uploader>
 
             <h4>Updated Register of Directors and Officers for the licensee corporation or holding company</h4>
-            <app-file-uploader *ngIf="true || applicationId" documentType="RegisterOfDirectorsAndOfficers"
+            <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
-                [entityId]="applicationId"
+                [entityId]="application.id"
                 [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
             </app-file-uploader>
 
@@ -363,10 +366,10 @@
 
 
             <h4>Supporting Business Documentation</h4>
-            <app-file-uploader *ngIf="true || applicationId" documentType="RegisterOfDirectorsAndOfficers"
+            <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
-                [entityId]="applicationId"
+                [entityId]="application.id"
                 [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
             </app-file-uploader>
 
@@ -379,10 +382,10 @@
             <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
             <p>Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide their
                 full legal name and date of birth.</p>
-            <app-file-uploader *ngIf="true || applicationId" documentType="IndividualsWithLessThan10"
+            <app-file-uploader *ngIf="application?.id" documentType="IndividualsWithLessThan10"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
-                [entityId]="applicationId"
+                [entityId]="application.id"
                 [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
             </app-file-uploader>
 
@@ -400,10 +403,10 @@
                 the licensee legal entity.</p>
 
             <h4>Updated Register of Directors and Officers for the licensee corporation or holding company</h4>
-            <app-file-uploader *ngIf="true || applicationId" documentType="RegisterOfDirectorsAndOfficers"
+            <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
-                [entityId]="applicationId"
+                [entityId]="application.id"
                 [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
             </app-file-uploader>
 
@@ -422,7 +425,7 @@
         <h3 class="blue-header">Person's Name Change</h3>
         <div class="content-bottom">
             <p>To be completed when a person holding an interest in a licence has legally changed their name.</p>
-            <table formGroupName="licences">
+            <table>
                 <tr>
                     <td>
                         <span><strong>Person's Name:</strong></span>
@@ -475,10 +478,10 @@
                 </tr>
             </table>
             <h4>Copy of Certificate of name Change, Marriage Certificate, etc.</h4>
-            <app-file-uploader *ngIf="true || applicationId" documentType="NameChangeDocument"
+            <app-file-uploader *ngIf="application?.id" documentType="NameChangeDocument"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedNameChangeDocuments = $event"
-                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILES HERE OR'">
+                [entityId]="application.id" [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILES HERE OR'">
             </app-file-uploader>
         </div>
     </section>
@@ -519,10 +522,10 @@
             <h4>
                 Copy of the Certificate of Name of Change from BC Registrar of Companies
             </h4>
-            <app-file-uploader *ngIf="true || applicationId" documentType="CertificateOfNameChange"
+            <app-file-uploader *ngIf="application?.id" documentType="CertificateOfNameChange"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfNameChange = $event"
-                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD CERTIFICATE OF NAME CHANGE, DRAG FILES HERE OR'">
+                [entityId]="application.id" [uploadHeader]="'TO UPLOAD CERTIFICATE OF NAME CHANGE, DRAG FILES HERE OR'">
             </app-file-uploader>
         </div>
     </section>
@@ -565,10 +568,10 @@
                 change of name.
             </p>
 
-            <app-file-uploader *ngIf="true || applicationId" documentType="PartnershipRegistration"
+            <app-file-uploader *ngIf="application?.id" documentType="PartnershipRegistration"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedPartnershipRegistration = $event"
-                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD PARTNERSHIP REGISTRATION, DRAG FILES HERE OR'">
+                [entityId]="application.id" [uploadHeader]="'TO UPLOAD PARTNERSHIP REGISTRATION, DRAG FILES HERE OR'">
             </app-file-uploader>
         </div>
 
@@ -603,10 +606,10 @@
             </div>
             <h4>Copy of the Certificate of Change of Name under the Societies Act</h4>
 
-            <app-file-uploader *ngIf="true || applicationId" documentType="SocietyNameChange"
+            <app-file-uploader *ngIf="application?.id" documentType="SocietyNameChange"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedSocietyNameChange = $event"
-                [entityId]="applicationId"
+                [entityId]="application.id"
                 [uploadHeader]="'TO UPLOAD SOCIETY NAME CHANGE CERTIFICATE, DRAG FILES HERE OR'">
             </app-file-uploader>
         </div>
@@ -641,20 +644,20 @@
                 Upload a copy of Assignment of Executor or a copy of the last will(s) and testament(s):
             </p>
 
-            <app-file-uploader *ngIf="true || applicationId" documentType="ExecutorDocuments"
+            <app-file-uploader *ngIf="application?.id" documentType="ExecutorDocuments"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedExecutorDocuments = $event"
-                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD EXECUTOR DOCUMENTS, DRAG FILES HERE OR'">
+                [entityId]="application.id" [uploadHeader]="'TO UPLOAD EXECUTOR DOCUMENTS, DRAG FILES HERE OR'">
             </app-file-uploader>
 
             <p>
                 Upload a copy of the Death Certificate:
             </p>
 
-            <app-file-uploader *ngIf="true || applicationId" documentType="DeathCertificate"
+            <app-file-uploader *ngIf="application?.id" documentType="DeathCertificate"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedlDeathCertificateDocuments = $event"
-                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD DEATH CERTIFICATE, DRAG FILES HERE OR'">
+                [entityId]="application.id" [uploadHeader]="'TO UPLOAD DEATH CERTIFICATE, DRAG FILES HERE OR'">
             </app-file-uploader>
 
             <hr>
@@ -682,18 +685,18 @@
                 (Order must include authority to operate the licensee's business and must specify the licences).
             </p>
 
-            <app-file-uploader *ngIf="true || applicationId" documentType="ReceiverAppointment"
+            <app-file-uploader *ngIf="application?.id" documentType="ReceiverAppointment"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
-                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD RECEIVER APPOINTMENT ORDER, DRAG FILES HERE OR'">
+                [entityId]="application.id" [uploadHeader]="'TO UPLOAD RECEIVER APPOINTMENT ORDER, DRAG FILES HERE OR'">
             </app-file-uploader>
 
             <p>Upload a copy of Court Order filed under the Office of the Superintendent of Bankruptcy Canada.</p>
 
-            <app-file-uploader *ngIf="true || applicationId" documentType="BankruptcyOrder"
+            <app-file-uploader *ngIf="application?.id" documentType="BankruptcyOrder"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                 [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
-                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD COURT ORDER, DRAG FILES HERE OR'">
+                [entityId]="application.id" [uploadHeader]="'TO UPLOAD COURT ORDER, DRAG FILES HERE OR'">
             </app-file-uploader>
         </div>
     </section>
@@ -865,18 +868,21 @@
         <h3 class="blue-header ngtest-declarations">
             PAYMENT
         </h3>
-        <div class="d-flex">
-            <table>
+        <div>
+            <table class="w-100" *ngIf="hasCannabis">
+
                 <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th>Type Of Change</th>
+                    <th>Num Licences</th>
+                    <th>Cost</th>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                <ng-container *ngFor="let item of changeList">
+                    <tr *ngIf="form.get(item.formControlName).value === true">
+                        <td>{{item.name}}</td>
+                        <td>x {{cannabisLicences.length}}</td>
+                        <td>${{item.CannabisFee}}</td>
+                    </tr>
+                </ng-container>
             </table>
         </div>
     </section>
