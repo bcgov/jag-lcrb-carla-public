@@ -86,7 +86,24 @@ namespace bdd_tests
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
-            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+            // check for failure to load Licences & Authorizations tab successfully
+            for (int i = 0; i < 3; i++)
+            {
+                ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+
+                try
+                {
+                   if (ngDriver.FindElement(By.XPath("//body[contains(.,'Details')]")).Displayed)      
+                    { 
+                        break; 
+                    }           
+                }
+                catch (Exception)
+                {
+                    ngDriver.Navigate().Refresh();
+                    System.Threading.Thread.Sleep(2000);
+                }
+            }
         }
 
 
@@ -311,9 +328,9 @@ namespace bdd_tests
         [And(@"autorenewal is set to 'No'")]
         public void AutoRenewalDenied()
         {
-            string renewLicence = "Renew Licence";
+            string renewLicence = "Transfer Licence";
 
-            // find the Renew Licence link
+            // find the Transfer Licence link
             NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(renewLicence));
             string URL = uiLicenceID.GetAttribute("href");
 

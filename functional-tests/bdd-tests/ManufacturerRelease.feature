@@ -36,12 +36,12 @@ Scenario: Private Corporation Manufacturer Release
     And I request a special event area endorsement
     And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
-    # And I request a third party operator
-    # And I request a transfer of ownership
+    And I request a third party operator
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @soleproprietorship @mfgrelease @winery
+@e2e @soleproprietorship @winery
 Scenario: Sole Proprietorship Manufacturer Release 
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence

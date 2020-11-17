@@ -20,6 +20,8 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
   applicationId: string; // Place holder prop
   account: Account;
   businessType: string;
+  hasLiquor: boolean;
+  hasCannabis: boolean;
 
   changeList = [];
 
