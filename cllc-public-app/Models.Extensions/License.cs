@@ -222,19 +222,27 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licenseSummary.LicenceTypeCategory = (LicenceTypeCategory?)licence.AdoxioLicenceType.AdoxioCategory;
             }
 
+            licenseSummary.Endorsements = GetEndorsements(licenseSummary.LicenseId, dynamicsClient);
+
             if (licence != null &&
                 licence.AdoxioLicenceType != null &&
                 licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
             {
                 foreach (var item in licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
                 {
-                    // check to see if there is an existing action on this licence.
+                    // we don't want to allow you to apply for an endorsement you already have...
+                    if(item.AdoxioIsendorsement != null && 
+                    item.AdoxioIsendorsement == true && 
+                    licenseSummary.Endorsements.Where(e=>e.ApplicationTypeId == item.AdoxioApplicationtypeid).Any()) { 
+                        // there is probably a better way to write this...
+                    } else {
                     licenseSummary.AllowedActions.Add(item.ToViewModel());
+                    }
                 }
 
             }
 
-            licenseSummary.Endorsements = GetEndorsements(licenseSummary.LicenseId, dynamicsClient);
+
 
             return licenseSummary;
         }
