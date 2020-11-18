@@ -16,7 +16,7 @@ import { License } from '@models/license.model';
 export class OffsiteStorageComponent extends FormBase implements OnInit {
   isEditMode = true;
   isReadOnly = false;
-  showErrorSection = false;
+  showValidationMessages = false;
 
   licence: License;
 
@@ -70,6 +70,13 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
   }
 
   save() {
+    // validate form before saving
+    if (this.isFormInvalid()) {
+      this.showValidationMessages = true;
+      this.markControlsAsTouched(this.form);
+      return;
+    }
+
     this.updateLicence();
   }
 
@@ -89,7 +96,7 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
       });
   }
 
-  isFormValid() {
+  isFormInvalid() {
     return this.form.invalid || !this.form.get('agreement').value;
   }
 
