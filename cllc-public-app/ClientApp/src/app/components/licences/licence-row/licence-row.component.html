@@ -79,15 +79,16 @@
                                 <p *ngIf="item.operated && !item.isOperated"><i class="fas fa-flag"
                                         style="margin-right: 10px;"></i>Licence Operated</p>
                             </div>
-                            <div
-                                *ngIf="item.licenceTypeCategory === 'Liquor' && isActive(item) && actionsVisible(item) && !item.isOperated">
+                            <div *ngIf="item.licenceTypeCategory === 'Liquor' && isActive(item) && actionsVisible(item) && !item.isOperated">
                                 <br>
                                 <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
                                     <span *ngIf="!item.representativeFullName">Add Licensee Representative</span>
                                     <span *ngIf="item.representativeFullName">Licensee Representative:
                                         <strong>{{item.representativeFullName}}</strong></span>
                                 </a>
-                            </div>
+                                <br>
+                                <a [routerLink]="[ '/licence/' + item.licenseId + '/offsite-storage']">Manage Off-Site Storage</a>
+                          </div>
                         </td>
 
                         <td style="padding: 10px;">
