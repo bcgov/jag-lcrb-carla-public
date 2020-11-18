@@ -27,6 +27,8 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
   registerOnChange(fn: any) { this.onChange = fn; }
   registerOnTouched(fn: any) { this.onTouched = fn; }
 
+  OffsiteStorageStatusEnum = OffsiteStorageStatus;
+
   constructor(private fb: FormBuilder) {
     super();
 
@@ -55,7 +57,7 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
 
   private addInternal(value: OffsiteStorage) {
     const group = this.fb.group({
-      id: [value.id || ''],
+      id: [value.id],
       street1: [value.street1, [Validators.required]],
       city: [value.city, [Validators.required]],
       province: ['BC', [Validators.required]],
@@ -74,7 +76,7 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
 
   removeRow(index: number) {
     if (index >= 0 && index < this.rows.length) {
-      this.rows.removeAt(index);
+      this.rows.at(index).patchValue({ status: OffsiteStorageStatus.Removed });
       this.writeValue(this.rows.value);
     }
   }

@@ -78,7 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // Create link to sharepoint folder if needed
-            if (licence.AdoxioLicencesSharePointDocumentLocations.Count == 0)
+            if (licence.AdoxioLicencesSharePointDocumentLocations == null || licence.AdoxioLicencesSharePointDocumentLocations.Count == 0)
             {
                 await InitializeSharepoint(licence);
             }
