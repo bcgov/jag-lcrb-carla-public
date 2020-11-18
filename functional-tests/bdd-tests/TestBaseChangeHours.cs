@@ -26,12 +26,12 @@ namespace bdd_tests
         {
             /* 
             Page Title: Licences & Authorizations
-            Subtitle:   
             */
 
             if (hoursType == "a lounge area within service hours")
             {
-
+                NgWebElement uiLoungeAreaWithinHours = ngDriver.FindElement(By.CssSelector(".ng-star-inserted:nth-child(11) span"));
+                uiLoungeAreaWithinHours.Click();
             }
 
             if (hoursType == "a lounge area outside of service hours")
@@ -48,6 +48,8 @@ namespace bdd_tests
             {
 
             }
+
+            ContinueToApplicationButton();
 
             // select the proposed new hours
             NgWebElement uiServiceHoursSundayOpen = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceHoursSundayOpen'] option[value='09:00']"));

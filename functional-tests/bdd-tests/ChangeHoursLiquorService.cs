@@ -32,8 +32,6 @@ Scenario: Change Lounge Area Hours of Liquor Service Within Service Hours
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I click on the Licences tab
-    And I click on the link for Change to Hours of Liquor Service (Lounge Area, within Service Hours)
-    And I click on the Continue to Application button
     And I complete the change hours application for a lounge area within service hours
     And I enter the payment information
     And the account is deleted
@@ -54,8 +52,6 @@ Scenario: Change Lounge Area Hours of Liquor Service Outside Service Hours
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I click on the Licences tab
-    And I click on the link for Change to Hours of Liquor Service (Lounge Area, outside Service Hours)
-    And I click on the Continue to Application button
     And I complete the change hours application for a lounge area outside of service hours
     And I enter the payment information
     And the account is deleted
@@ -76,8 +72,6 @@ Scenario: Change Special Event Area Hours of Liquor Service Within Service Hours
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I click on the Licences tab
-    And I click on the link for Change to Hours of Liquor Service (Special Event Area, within Service Hours)
-    And I click on the Continue to Application button
     And I complete the change hours application for a special event area within service hours
     And I enter the payment information
     And the account is deleted
@@ -98,8 +92,6 @@ Scenario: Change Special Event Area Hours of Liquor Service Outside Service Hour
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I click on the Licences tab
-    And I click on the link for Change to Hours of Liquor Service (Special Event Area, outside Service Hours)
-    And I click on the Continue to Application button
     And I complete the change hours application for a special event area outside of service hours
     And I enter the payment information
     And the account is deleted
