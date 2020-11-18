@@ -1347,66 +1347,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
         }
 
-        [HttpPut("{licenceId}/representative")]
-        public async Task<IActionResult> UpdateOffsiteLocations([FromBody] ViewModels.ApplicationLicenseSummary item, string licenceId)
-        {
-            if (item == null || string.IsNullOrEmpty(licenceId) || licenceId != item.LicenseId)
-            {
-                return BadRequest();
-            }
-
-            MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.GetLicenceByIdWithChildren(licenceId);
-            if (licence == null)
-            {
-                return NotFound();
-            }
-
-            if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid))
-            {
-                return Forbid();
-            }
-
-            MicrosoftDynamicsCRMadoxioLicences patchObject = new MicrosoftDynamicsCRMadoxioLicences()
-            {
-                AdoxioRepresentativename = item.RepresentativeFullName,
-                AdoxioRepresentativephone = item.RepresentativePhoneNumber,
-                AdoxioRepresentativeemail = item.RepresentativeEmail,
-                AdoxioCansubmitpermanentchangeapplications = item.RepresentativeCanSubmitPermanentChangeApplications,
-                AdoxioCansigntemporarychangeapplications = item.RepresentativeCanSignTemporaryChangeApplications,
-                AdoxioCanobtainlicenceinformation = item.RepresentativeCanObtainLicenceInformation,
-                AdoxioCansigngrocerystoreproofofsales = item.RepresentativeCanSignGroceryStoreProofOfSale,
-                AdoxioCanattendeducationsessions = item.RepresentativeCanAttendEducationSessions,
-                AdoxioCanattendcompliancemeetings = item.RepresentativeCanAttendComplianceMeetings,
-                AdoxioCanrepresentathearings = item.RepresentativeCanRepresentAtHearings
-            };
-
-            try
-            {
-                await _dynamicsClient.Licenceses.UpdateAsync(licenceId, patchObject);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error updating licence representative");
-                throw new Exception("Unable to update licence representative");
-            }
-
-            try
-            {
-                licence = _dynamicsClient.GetLicenceByIdWithChildren(licenceId);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error getting licence");
-                throw new Exception("Unable to get licence after update");
-            }
-
-            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licence.AdoxioLicencee.Accountid);
-            var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
-
-            licence.AdoxioLicenceType = Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
-            return new JsonResult(licence.ToLicenseSummaryViewModel(applications, _dynamicsClient));
-        }
-
         /// <summary>
         /// Verify whether currently logged in user has access to this account id
         /// </summary>
