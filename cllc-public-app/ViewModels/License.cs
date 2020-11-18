@@ -30,11 +30,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string LicenseStatus { get; set; }
         public string LicenseType { get; set; }
         public string LicenseNumber { get; set; }
-        public string LicenseSubCategory {get; set;}
+        public string LicenseSubCategory { get; set; }
         public DateTimeOffset? ExpiryDate { get; set; }
 
         public List<Endorsement> Endorsements { get; set; }
         public List<string> TermsAndConditions { get; set; }
+        public List<OffsiteStorage> OffsiteStorageLocations { get; set; }
 
         public string RepresentativeFullName { get; set; }
         public string RepresentativePhoneNumber { get; set; }

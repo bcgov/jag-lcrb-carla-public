@@ -4,6 +4,7 @@ import { LicenceEvent } from './licence-event.model';
 import { TermsAndConditions } from './terms-and-conditions.model';
 import { ServiceArea } from './service-area.model';
 import { Observable, Subscription } from 'rxjs';
+import { OffsiteStorage } from './offsite-storage.model';
 
 export class ApplicationLicenseSummary {
 
@@ -73,6 +74,7 @@ export class ApplicationLicenseSummary {
 
   headerRowSpan: number;
   serviceAreas: ServiceArea[];
+  offsiteStorageLocations: OffsiteStorage[];
 }
 
 export interface LicenceActionApplication {
