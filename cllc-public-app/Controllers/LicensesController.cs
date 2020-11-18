@@ -895,6 +895,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid) ||
                 (adoxioLicense.AdoxioProposedOwner != null && CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid)))
             {
+                var keyWord = "Liquor";
                 var effectiveDateParam = "";
                 if (adoxioLicense.AdoxioEffectivedate.HasValue)
                 {
@@ -1008,7 +1009,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
-                if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
+                /* if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
                 {
                     parameters = new Dictionary<string, string>
                     {
@@ -1027,12 +1028,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "storeHours", storeHours}
                     };
                 }
-                else if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
+                else */ if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
                 {
                     parameters = new Dictionary<string, string>
                     {
                         { "title", "Cannabis_Licence" },
-                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
+                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber},
                         { "establishmentName", adoxioLicense.AdoxioLicencee?.Name  },
                         { "establishmentStreet", adoxioLicense.AdoxioLicencee?.Address1Line1 },
                         { "establishmentCity", adoxioLicense.AdoxioLicencee?.Address1City + ", B.C." },
@@ -1043,7 +1044,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "expiryDate", expiraryDateParam },
                         { "restrictionsText", termsAndConditions },
                         { "endorsementsText", endorsementsText },
-                        { "storeHours", storeHours }
+                        { "storeHours", storeHours },
+                        { "keyWord", keyWord }
+
                     };
                 }
 
@@ -1104,6 +1107,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             templateName = "manufacturer_licence";
                             break;
                         */
+
+
+
+                        case "Cannabis Retail Store":
+                            keyWord = "Cannabis";
+                            templateName = "liquor_licence";
+                            break;
                         case "Catering":
                         case "UBrew and UVin":
                         case "Licensee Retail Store":
