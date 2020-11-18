@@ -23,9 +23,7 @@ import { BaseControlValueAccessor } from '../BaseControlValueAccessor';
 })
 export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStorage[]> {
   @Input() enabled: boolean = true;
-
   rows = new FormArray([]);
-
   registerOnChange(fn: any) { this.onChange = fn; }
   registerOnTouched(fn: any) { this.onTouched = fn; }
 
