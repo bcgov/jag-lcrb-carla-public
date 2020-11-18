@@ -16,6 +16,7 @@ export class License {
   establishmentAddressCity: string;
   establishmentAddressPostalCode: string;
   establishmentParcelId: string;
+
   endorsements: Endorsement[];
   offsiteStorageLocations: OffsiteStorage[];
 

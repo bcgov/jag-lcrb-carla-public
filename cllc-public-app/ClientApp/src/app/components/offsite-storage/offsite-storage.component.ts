@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
 import { LicenseDataService } from '@services/license-data.service';
-import { LicenceEvent, EventStatus } from '../../models/licence-event.model';
-import { AppState } from '@app/app-state/models/app-state';
-import { User } from '@models/user.model';
 import { FormBase } from '@shared/form-base';
 import { License } from '@models/license.model';
 
@@ -25,40 +21,36 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
   licence: License;
 
   busy: Subscription;
-  eventStatus = EventStatus;
 
   form = this.fb.group({
-    status: ['', [Validators.required]],
-    id: ['', []],
-    name: ['', []],
-    licenceId: ['', []],
-    street1: ['', [Validators.required]],
-    street2: ['', []],
-    city: ['', [Validators.required]],
-    province: ['BC', [Validators.required]],
-    postalCode: ['', [Validators.required]],
+    licenseId: ['', []],
+    offsiteStorageLocations: ['', []],
     agreement: [false, [Validators.required]]
   });
 
   constructor(
     private fb: FormBuilder,
     private licenceDataService: LicenseDataService,
-    private store: Store<AppState>,
+    private snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute
   ) {
     super();
     this.route.paramMap.subscribe(params => {
-      this.form.get('licenceId').setValue(params.get('licenceId'));
+      const licenceId = params.get('licenceId');
+      this.form.get('licenseId').setValue(licenceId);
+      if (licenceId) {
+        this.retrieveLicence(licenceId);
+      }
     });
   }
 
   ngOnInit() {
-
   }
 
   retrieveLicence(licenceId: string) {
-    this.busy = this.licenceDataService.getLicenceById(licenceId)
+    this.busy = this.licenceDataService
+      .getLicenceById(licenceId)
       .subscribe((licence) => {
         this.licence = licence;
         this.setFormToLicence(licence);
@@ -66,16 +58,9 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
   }
 
   setFormToLicence(licence: License) {
-    //TODO: Temporary test code
-    const offsite = licence.offsiteStorageLocations.length > 0 ? licence.offsiteStorageLocations[0] : null;
-
     this.form.setValue({
-      licenceId: licence.id,
-      street1: licence.street1,
-      street2: licence.street2,
-      city: licence.city,
-      province: licence.province,
-      postalCode: licence.postalCode,
+      licenseId: licence.id,
+      offsiteStorageLocations: licence.offsiteStorageLocations,
       agreement: false
     });
 
@@ -84,70 +69,31 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
     }
   }
 
-  save(submit = false) {
-    if (submit) {
-      this.form.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Submitted').value);
-    }
-
-    if (this.isEditMode) {
-      this.updateLicence();
-    } else {
-      this.createLicence();
-    }
+  save() {
+    this.updateLicence();
   }
 
   updateLicence() {
-    this.busy = this.licenceEvents.updateLicenceEvent(this.form.get('id').value, { ...this.form.value })
-      .subscribe((licenceEvent) => {
-        this.router.navigate(['/licences']);
+    const id = this.form.get('licenseId').value;
+    this.busy = this.licenceDataService
+      .updateLicenceOffsiteStorage(id, { ...this.form.value })
+      .subscribe((result) => {
+        if (result.licenseId) {
+          this.snackBar.open('Off-Site Storage Successfully Updated', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.router.navigateByUrl('/licences');
+        } else {
+          this.snackBar.open('Failed to Update Off-Site Storage', 'Fail', { duration: 2500, panelClass: ['red-snackbar'] });
+        }
+      }, err => {
+        this.snackBar.open('Failed to Update Off-Site Storage', 'Fail', { duration: 2500, panelClass: ['red-snackbar'] });
       });
   }
-
-  createLicence() {
-    this.form.removeControl('id');
-    this.busy = this.licenceEvents.createLicenceEvent({ ...this.form.value })
-      .subscribe((licenceEvent) => {
-        this.router.navigate(['/licences']);
-      });
-  }
-
-  getOptionFromValue(options: any, value: number) {
-    const idx = options.findIndex(opt => opt.value === value);
-    if (idx >= 0) {
-      return options[idx];
-    }
-    return {
-      value: null,
-      label: ''
-    };
-  }
-
-  getOptionFromLabel(options: any, label: string) {
-    const idx = options.findIndex(opt => opt.label === label);
-    if (idx >= 0) {
-      return options[idx];
-    }
-    return {
-      value: null,
-      label: ''
-    };
-  }
-
 
   isFormValid() {
-    return this.form.invalid || !this.form.controls['agreement'].value;
+    return this.form.invalid || !this.form.get('agreement').value;
   }
 
   cancel() {
-    if (this.isEditMode) {
-      const id = this.form.get('id').value;
-      const status = this.getOptionFromLabel(this.eventStatus, 'Cancelled').value;
-      this.busy = this.licenceEvents.updateLicenceEvent(id, { ...this.form.value, status: status, licenceId: this.form.get('licenceId').value })
-        .subscribe((licenceEvent) => {
-          this.router.navigate(['/licences']);
-        });
-    } else {
-      this.router.navigate(['/licences']);
-    }
+    this.router.navigate(['/licences']);
   }
 }

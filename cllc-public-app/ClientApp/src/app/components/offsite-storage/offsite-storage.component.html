@@ -21,14 +21,15 @@
       </div>
     </section>
 
-    <div class="padded-section">
-      <h2>Status: <b>{{getOptionFromValue(eventStatus, eventForm.get('status').value) === null ? '' : getOptionFromValue(eventStatus, eventForm.get('status').value).label}}</b></h2>
-    </div>
-
-    <!-- TODO: -->
+    <!-- Offsite Storage Locations -->
+    <h3 class="blue-header">Off-Site Storage Locations</h3>
+    <section class="padded-section">
+      <p>Please provide the following information for each of your off-site storage facilities, including storage unit numbers if applicable:</p>
+      <app-offsite-table formControlName="offsiteStorageLocations" [enabled]="true"></app-offsite-table>
+    </section>
 
     <h3 class="blue-header">DECLARATIONS</h3>
-    <div class="padded-section">
+    <section class="padded-section content-bottom">
       <p><strong>Section 57(1)(c)</strong> of the <strong>Liquor Control and Licensing Act</strong> states: <i>“A person commits an offence if the person (c)
         provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when
         making a report or when required and as specified by the general manager under section 59.</i>
@@ -36,11 +37,11 @@
       <div>
         <mat-checkbox formControlName="agreement">I understand and affirm that all of the information provided is true and complete.</mat-checkbox>
       </div>
-    </div>
+    </section>
 
-    <div class="p-3 attention-section">
+    <section class="p-3 attention-section">
       <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</p>
-    </div>
+    </section>
 
     <!-- Validation Errors -->
     <section class="error mt-3" *ngIf="showErrorSection">
