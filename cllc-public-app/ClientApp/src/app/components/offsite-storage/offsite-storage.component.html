@@ -1,6 +1,6 @@
 <div class="form-wrapper" style="position: relative;">
   <div [ngBusy]="[busy]"></div>
-  <form [formGroup]="eventForm">
+  <form [formGroup]="form">
     <div class="padded-section">
       <h1>Manage Off-Site Storage</h1>
     </div>
@@ -23,9 +23,12 @@
 
     <!-- Offsite Storage Locations -->
     <h3 class="blue-header">Off-Site Storage Locations</h3>
-    <section class="padded-section">
+    <section class="padded-section content-bottom">
       <p>Please provide the following information for each of your off-site storage facilities, including storage unit numbers if applicable:</p>
-      <app-offsite-table formControlName="offsiteStorageLocations" [enabled]="true"></app-offsite-table>
+      <app-field [valid]="!showValidationMessages || form.get('offsiteStorageLocations').valid"
+                errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+        <app-offsite-table formControlName="offsiteStorageLocations" [enabled]="true"></app-offsite-table>
+      </app-field>
     </section>
 
     <h3 class="blue-header">DECLARATIONS</h3>
@@ -35,7 +38,11 @@
         making a report or when required and as specified by the general manager under section 59.</i>
       </p>
       <div>
-        <mat-checkbox formControlName="agreement">I understand and affirm that all of the information provided is true and complete.</mat-checkbox>
+        <app-field [valid]="!showValidationMessages || form.get('agreement').valid"
+          errorMessage="Please affirm that all of the information provided is true and complete."
+          [showChevrons]="false">
+          <mat-checkbox formControlName="agreement">I understand and affirm that all of the information provided is true and complete.</mat-checkbox>
+        </app-field>
       </div>
     </section>
 
@@ -43,30 +50,14 @@
       <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</p>
     </section>
 
-    <!-- Validation Errors -->
-    <section class="error mt-3" *ngIf="showErrorSection">
-      <p *ngFor="let message of validationMessages">
-        <span class="app-cancel">
-          <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-          {{message}}
-        </span>
-      </p>
-    </section>
-
     <div class="p-4 button-row">
-      <button class="btn btn-secondary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
-        <span>
-          <i class="fa fa-save"></i>
-          SAVE FOR LATER
-        </span>
-      </button>
-      <button class="btn btn-primary" style="margin-right:10px;" (click)="cancel();">
+      <button type="button" class="btn btn-primary" style="margin-right:10px;" (click)="cancel();">
         <span>
           <i class="fa fa-trash" style="color: #fff;"></i>
           CANCEL
         </span>
       </button>
-      <button class="btn btn-primary" (click)="save(true)" *ngIf="!isReadOnly">SUBMIT</button>
+      <button type="button" class="btn btn-primary" (click)="save()" *ngIf="!isReadOnly">SUBMIT</button>
     </div>
   </form>
 </div>
