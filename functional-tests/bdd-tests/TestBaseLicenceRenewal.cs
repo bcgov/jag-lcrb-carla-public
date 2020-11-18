@@ -450,21 +450,23 @@ namespace bdd_tests
             // reload Licences page as needed
             for (int i = 0; i < 5; i++)
             {
-
                 try
                 {
-                    if (ngDriver.FindElement(By.XPath("//body[contains(.,'Active')]")).Displayed)
+                    if (ngDriver.FindElement(By.XPath("//body[contains(.,'Active')]")).Displayed == false)
+                    {
+                        ngDriver.Navigate().Refresh();
+                        System.Threading.Thread.Sleep(2000);
+                    }
+                    else
                     {
                         break;
                     }
                 }
-                catch (Exception) 
+                catch (Exception)
                 {
-                    ngDriver.Navigate().Refresh();
-                    System.Threading.Thread.Sleep(2000);
-                } 
+                }
             }
-         
+       
             // confirm that Renew Licence messages are no longer displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Renew Licence'))]")).Displayed);
 

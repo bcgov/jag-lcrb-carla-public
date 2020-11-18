@@ -12,6 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     public class BCEPService: IBCEPService
     {
         private string bcep_pay_url;
+        private string bcep_verify_url;
         private string bcep_merchid;
         private string bcep_alt_merchid;
         private string bcep_hashkey;
@@ -47,6 +48,13 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             this.client = httpClient;
             this.bcep_pay_url = configuration["BCEP_SERVICE_URL"];
+            this.bcep_verify_url = configuration["BCEP_SERVICE_VERIFY_URL"];
+
+            if (string.IsNullOrEmpty(bcep_verify_url))
+            {
+                bcep_verify_url = bcep_pay_url;
+            }
+
             this.bcep_merchid = configuration["BCEP_MERCHANT_ID"]; 
             this.bcep_alt_merchid = configuration["BCEP_ALTERNATE_MERCHANT_ID"];
             this.bcep_hashkey = configuration["BCEP_HASH_KEY"];
@@ -244,7 +252,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             paramString = paramString + "&" + BCEP_Q_HASH_VALUE + "=" + hashed;
 
             // Build re-direct URL
-            string query_url = this.bcep_pay_url + BCEP_Q_SCRIPT + "?" + paramString;
+            string query_url = this.bcep_verify_url + BCEP_Q_SCRIPT + "?" + paramString;
 
             return query_url;
         }
