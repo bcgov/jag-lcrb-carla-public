@@ -41,6 +41,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             return endorsementsList;
         }
 
+        public static List<OffsiteStorage> GetOffsiteStorage(string licenceId, IDynamicsClient dynamicsClient)
+        {
+            string filter = $"_adoxio_licenceid_value eq {licenceId}";
+            var entities = dynamicsClient.Offsitestorages.Get(filter: filter).Value;
+            var offsiteList = entities.Select(item => item.ToViewModel()).ToList();
+            return offsiteList;
+        }
+
         public static License ToViewModel(this MicrosoftDynamicsCRMadoxioLicences dynamicsLicense, IDynamicsClient dynamicsClient)
         {
             License adoxioLicenseVM = new License();
@@ -115,6 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
             adoxioLicenseVM.Endorsements = GetEndorsements(adoxioLicenseVM.Id, dynamicsClient);
+            adoxioLicenseVM.OffsiteStorageLocations = GetOffsiteStorage(adoxioLicenseVM.Id, dynamicsClient);
 
             adoxioLicenseVM.RepresentativeFullName = dynamicsLicense.AdoxioRepresentativename;
             adoxioLicenseVM.RepresentativeEmail = dynamicsLicense.AdoxioRepresentativeemail;
@@ -239,9 +248,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                     licenseSummary.AllowedActions.Add(item.ToViewModel());
                     }
                 }
-
             }
 
+            licenseSummary.OffsiteStorageLocations = GetOffsiteStorage(licenseSummary.LicenseId, dynamicsClient);
 
 
             return licenseSummary;
