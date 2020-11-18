@@ -86,7 +86,27 @@ namespace bdd_tests
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
-            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+            // check for failure to load Licences & Authorizations tab successfully
+            for (int i = 0; i < 3; i++)
+            {
+                try
+                {
+                    ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+
+                    if (ngDriver.FindElement(By.XPath("//body[contains(.,'Details')]")).Displayed == false)
+                    {
+                        ngDriver.Navigate().Refresh();
+                        System.Threading.Thread.Sleep(2000);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            }
         }
 
 
