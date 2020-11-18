@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top340 { get; set; }
+        public int? Top364 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip340 { get; set; }
+        public int? Skip364 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count340 { get; set; }
+        public bool? Count364 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter340 { get; set; }
+        public string Filter364 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search340 { get; set; }
+        public string Search364 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -69,6 +69,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccounts.
         /// </summary>
         public virtual IAccounts Accounts { get; private set; }
+
+        /// <summary>
+        /// Gets the IAccountadoxioleconnectionchildprofilename.
+        /// </summary>
+        public virtual IAccountadoxioleconnectionchildprofilename Accountadoxioleconnectionchildprofilename { get; private set; }
+
+        /// <summary>
+        /// Gets the IAccountadoxioleconnectionparentaccount.
+        /// </summary>
+        public virtual IAccountadoxioleconnectionparentaccount Accountadoxioleconnectionparentaccount { get; private set; }
 
         /// <summary>
         /// Gets the IPartyidadoxiolocalgovindigenousnation.
@@ -141,9 +151,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationadoxiohoursofserviceapplication Applicationadoxiohoursofserviceapplication { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationadoxioleconnectionapplication.
+        /// </summary>
+        public virtual IApplicationadoxioleconnectionapplication Applicationadoxioleconnectionapplication { get; private set; }
+
+        /// <summary>
         /// Gets the IPmuarea.
         /// </summary>
         public virtual IPmuarea Pmuarea { get; private set; }
+
+        /// <summary>
+        /// Gets the ISecondaryapplicationinvoice.
+        /// </summary>
+        public virtual ISecondaryapplicationinvoice Secondaryapplicationinvoice { get; private set; }
 
         /// <summary>
         /// Gets the IBpfadoxioapplicationadoxioapplicenseechangebpfv2.
@@ -391,9 +411,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEnforcementactions Enforcementactions { get; private set; }
 
         /// <summary>
+        /// Gets the IInspection.
+        /// </summary>
+        public virtual IInspection Inspection { get; private set; }
+
+        /// <summary>
         /// Gets the IEstablishmentincidents.
         /// </summary>
         public virtual IEstablishmentincidents Establishmentincidents { get; private set; }
+
+        /// <summary>
+        /// Gets the IEstablishmentincidentsharepointdocumentlocations.
+        /// </summary>
+        public virtual IEstablishmentincidentsharepointdocumentlocations Establishmentincidentsharepointdocumentlocations { get; private set; }
 
         /// <summary>
         /// Gets the IEstablishments.
@@ -701,6 +731,66 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILdborders Ldborders { get; private set; }
 
         /// <summary>
+        /// Gets the ILeconnections.
+        /// </summary>
+        public virtual ILeconnections Leconnections { get; private set; }
+
+        /// <summary>
+        /// Gets the IChildprofilenameaccount.
+        /// </summary>
+        public virtual IChildprofilenameaccount Childprofilenameaccount { get; private set; }
+
+        /// <summary>
+        /// Gets the IChildprofilenamecontact.
+        /// </summary>
+        public virtual IChildprofilenamecontact Childprofilenamecontact { get; private set; }
+
+        /// <summary>
+        /// Gets the ILeconnectionasyncoperations.
+        /// </summary>
+        public virtual ILeconnectionasyncoperations Leconnectionasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the ILeconnectionbulkdeletefailures.
+        /// </summary>
+        public virtual ILeconnectionbulkdeletefailures Leconnectionbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the ILeconnectionduplicatebaserecord.
+        /// </summary>
+        public virtual ILeconnectionduplicatebaserecord Leconnectionduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the ILeconnectionduplicatematchingrecord.
+        /// </summary>
+        public virtual ILeconnectionduplicatematchingrecord Leconnectionduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the ILeconnectionmailboxtrackingfolders.
+        /// </summary>
+        public virtual ILeconnectionmailboxtrackingfolders Leconnectionmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ILeconnectionprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ILeconnectionprincipalobjectattributeaccesses Leconnectionprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ILeconnectionprocesssession.
+        /// </summary>
+        public virtual ILeconnectionprocesssession Leconnectionprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the ILeconnectionsyncerrors.
+        /// </summary>
+        public virtual ILeconnectionsyncerrors Leconnectionsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IParentaccount.
+        /// </summary>
+        public virtual IParentaccount Parentaccount { get; private set; }
+
+        /// <summary>
         /// Gets the ILegalentities.
         /// </summary>
         public virtual ILegalentities Legalentities { get; private set; }
@@ -719,6 +809,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencesadoxiohoursofservicelicence.
         /// </summary>
         public virtual ILicencesadoxiohoursofservicelicence Licencesadoxiohoursofservicelicence { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencesadoxioleconnectionlicence.
+        /// </summary>
+        public virtual ILicencesadoxioleconnectionlicence Licencesadoxioleconnectionlicence { get; private set; }
 
         /// <summary>
         /// Gets the ILicencesoffsitestoragelocations.
@@ -1366,6 +1461,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegardingobjectidadoxioinspectorreport Regardingobjectidadoxioinspectorreport { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioleconnection.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioleconnection Regardingobjectidadoxioleconnection { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxiolqrlicencetransferbpf.
         /// </summary>
         public virtual IRegardingobjectidadoxiolqrlicencetransferbpf Regardingobjectidadoxiolqrlicencetransferbpf { get; private set; }
@@ -1421,6 +1521,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBusinessunitadoxioinspectorreport Businessunitadoxioinspectorreport { get; private set; }
 
         /// <summary>
+        /// Gets the IBusinessunitadoxioleconnection.
+        /// </summary>
+        public virtual IBusinessunitadoxioleconnection Businessunitadoxioleconnection { get; private set; }
+
+        /// <summary>
         /// Gets the IBusinessunitadoxiooffsitestorage.
         /// </summary>
         public virtual IBusinessunitadoxiooffsitestorage Businessunitadoxiooffsitestorage { get; private set; }
@@ -1461,6 +1566,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IContacts Contacts { get; private set; }
 
         /// <summary>
+        /// Gets the IContactadoxioleconnectionchildprofilename.
+        /// </summary>
+        public virtual IContactadoxioleconnectionchildprofilename Contactadoxioleconnectionchildprofilename { get; private set; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioeventaddress.
         /// </summary>
         public virtual IBaserecordidadoxioeventaddress Baserecordidadoxioeventaddress { get; private set; }
@@ -1474,6 +1584,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBaserecordidadoxioinspectorreport.
         /// </summary>
         public virtual IBaserecordidadoxioinspectorreport Baserecordidadoxioinspectorreport { get; private set; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioleconnection.
+        /// </summary>
+        public virtual IBaserecordidadoxioleconnection Baserecordidadoxioleconnection { get; private set; }
 
         /// <summary>
         /// Gets the IBaserecordidadoxiooffsitestorage.
@@ -1504,6 +1619,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IDuplicaterecordidadoxioinspectorreport.
         /// </summary>
         public virtual IDuplicaterecordidadoxioinspectorreport Duplicaterecordidadoxioinspectorreport { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioleconnection.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioleconnection Duplicaterecordidadoxioleconnection { get; private set; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxiooffsitestorage.
@@ -1541,6 +1661,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
 
         /// <summary>
+        /// Gets the IIncidentadoxioenforcementactioninspection.
+        /// </summary>
+        public virtual IIncidentadoxioenforcementactioninspection Incidentadoxioenforcementactioninspection { get; private set; }
+
+        /// <summary>
         /// Gets the IInspectionhoursofservice.
         /// </summary>
         public virtual IInspectionhoursofservice Inspectionhoursofservice { get; private set; }
@@ -1549,6 +1674,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IInvoices.
         /// </summary>
         public virtual IInvoices Invoices { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvoiceadoxioapplicationsecondaryapplicationinvoice.
+        /// </summary>
+        public virtual IInvoiceadoxioapplicationsecondaryapplicationinvoice Invoiceadoxioapplicationsecondaryapplicationinvoice { get; private set; }
 
         /// <summary>
         /// Gets the ILeads.
@@ -1604,6 +1734,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IObjectidadoxioinspectorreport.
         /// </summary>
         public virtual IObjectidadoxioinspectorreport Objectidadoxioinspectorreport { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioleconnection.
+        /// </summary>
+        public virtual IObjectidadoxioleconnection Objectidadoxioleconnection { get; private set; }
 
         /// <summary>
         /// Gets the IObjectidadoxiolqrlicencetransferbpf.
@@ -1679,6 +1814,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointdocumentlocations.
         /// </summary>
         public virtual ISharepointdocumentlocations Sharepointdocumentlocations { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioestablishmentincident.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioestablishmentincident Regardingobjectidadoxioestablishmentincident { get; private set; }
 
         /// <summary>
         /// Gets the ISharepointsites.
@@ -1814,6 +1954,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILkadoxioinspectorreportmodifiedonbehalfby.
         /// </summary>
         public virtual ILkadoxioinspectorreportmodifiedonbehalfby Lkadoxioinspectorreportmodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioleconnectioncreatedby.
+        /// </summary>
+        public virtual ILkadoxioleconnectioncreatedby Lkadoxioleconnectioncreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioleconnectioncreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioleconnectioncreatedonbehalfby Lkadoxioleconnectioncreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioleconnectionmodifiedby.
+        /// </summary>
+        public virtual ILkadoxioleconnectionmodifiedby Lkadoxioleconnectionmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioleconnectionmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioleconnectionmodifiedonbehalfby Lkadoxioleconnectionmodifiedonbehalfby { get; private set; }
 
         /// <summary>
         /// Gets the ILkadoxiolqrlicencetransferbpfcreatedby.
@@ -1996,6 +2156,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IUseradoxioinspectorreport Useradoxioinspectorreport { get; private set; }
 
         /// <summary>
+        /// Gets the IUseradoxioleconnection.
+        /// </summary>
+        public virtual IUseradoxioleconnection Useradoxioleconnection { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxiooffsitestorage.
         /// </summary>
         public virtual IUseradoxiooffsitestorage Useradoxiooffsitestorage { get; private set; }
@@ -2054,6 +2219,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxioinspectorreport.
         /// </summary>
         public virtual ITeamadoxioinspectorreport Teamadoxioinspectorreport { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioleconnection.
+        /// </summary>
+        public virtual ITeamadoxioleconnection Teamadoxioleconnection { get; private set; }
 
         /// <summary>
         /// Gets the ITeamadoxiooffsitestorage.
@@ -2357,6 +2527,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         private void Initialize()
         {
             Accounts = new Accounts(this);
+            Accountadoxioleconnectionchildprofilename = new Accountadoxioleconnectionchildprofilename(this);
+            Accountadoxioleconnectionparentaccount = new Accountadoxioleconnectionparentaccount(this);
             Partyidadoxiolocalgovindigenousnation = new Partyidadoxiolocalgovindigenousnation(this);
             Partyidadoxiospecialevent = new Partyidadoxiospecialevent(this);
             Regardingobjectidadoxiospecialevent = new Regardingobjectidadoxiospecialevent(this);
@@ -2371,7 +2543,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationrelocationv1s = new Applicationrelocationv1s(this);
             Applications = new Applications(this);
             Applicationadoxiohoursofserviceapplication = new Applicationadoxiohoursofserviceapplication(this);
+            Applicationadoxioleconnectionapplication = new Applicationadoxioleconnectionapplication(this);
             Pmuarea = new Pmuarea(this);
+            Secondaryapplicationinvoice = new Secondaryapplicationinvoice(this);
             Bpfadoxioapplicationadoxioapplicenseechangebpfv2 = new Bpfadoxioapplicationadoxioapplicenseechangebpfv2(this);
             Bpfadoxioapplicationadoxiolqrlicencetransferbpf = new Bpfadoxioapplicationadoxiolqrlicencetransferbpf(this);
             Applicationstructurechangev1s = new Applicationstructurechangev1s(this);
@@ -2421,7 +2595,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             Endorsementadoxioserviceareaendorsement = new Endorsementadoxioserviceareaendorsement(this);
             Enforcementactionbpfs = new Enforcementactionbpfs(this);
             Enforcementactions = new Enforcementactions(this);
+            Inspection = new Inspection(this);
             Establishmentincidents = new Establishmentincidents(this);
+            Establishmentincidentsharepointdocumentlocations = new Establishmentincidentsharepointdocumentlocations(this);
             Establishments = new Establishments(this);
             Establishmentadoxiohoursofserviceestablishment = new Establishmentadoxiohoursofserviceestablishment(this);
             Establishmentwatchwords = new Establishmentwatchwords(this);
@@ -2483,10 +2659,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             Investigationreactivationhistories = new Investigationreactivationhistories(this);
             Investigations = new Investigations(this);
             Ldborders = new Ldborders(this);
+            Leconnections = new Leconnections(this);
+            Childprofilenameaccount = new Childprofilenameaccount(this);
+            Childprofilenamecontact = new Childprofilenamecontact(this);
+            Leconnectionasyncoperations = new Leconnectionasyncoperations(this);
+            Leconnectionbulkdeletefailures = new Leconnectionbulkdeletefailures(this);
+            Leconnectionduplicatebaserecord = new Leconnectionduplicatebaserecord(this);
+            Leconnectionduplicatematchingrecord = new Leconnectionduplicatematchingrecord(this);
+            Leconnectionmailboxtrackingfolders = new Leconnectionmailboxtrackingfolders(this);
+            Leconnectionprincipalobjectattributeaccesses = new Leconnectionprincipalobjectattributeaccesses(this);
+            Leconnectionprocesssession = new Leconnectionprocesssession(this);
+            Leconnectionsyncerrors = new Leconnectionsyncerrors(this);
+            Parentaccount = new Parentaccount(this);
             Legalentities = new Legalentities(this);
             Licenceldbordertotalhistories = new Licenceldbordertotalhistories(this);
             Licenceses = new Licenceses(this);
             Licencesadoxiohoursofservicelicence = new Licencesadoxiohoursofservicelicence(this);
+            Licencesadoxioleconnectionlicence = new Licencesadoxioleconnectionlicence(this);
             Licencesoffsitestoragelocations = new Licencesoffsitestoragelocations(this);
             Licencesubcategories = new Licencesubcategories(this);
             Licencefeeproduct = new Licencefeeproduct(this);
@@ -2616,6 +2805,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxiohoursofservice = new Regardingobjectidadoxiohoursofservice(this);
             Regardingobjectidadoxiohoursofservicesdefault = new Regardingobjectidadoxiohoursofservicesdefault(this);
             Regardingobjectidadoxioinspectorreport = new Regardingobjectidadoxioinspectorreport(this);
+            Regardingobjectidadoxioleconnection = new Regardingobjectidadoxioleconnection(this);
             Regardingobjectidadoxiolqrlicencetransferbpf = new Regardingobjectidadoxiolqrlicencetransferbpf(this);
             Regardingobjectidadoxiooffsitestorage = new Regardingobjectidadoxiooffsitestorage(this);
             Regardingobjectidadoxiopmuarea = new Regardingobjectidadoxiopmuarea(this);
@@ -2627,6 +2817,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Businessunitadoxiohoursofservice = new Businessunitadoxiohoursofservice(this);
             Businessunitadoxiohoursofservicesdefault = new Businessunitadoxiohoursofservicesdefault(this);
             Businessunitadoxioinspectorreport = new Businessunitadoxioinspectorreport(this);
+            Businessunitadoxioleconnection = new Businessunitadoxioleconnection(this);
             Businessunitadoxiooffsitestorage = new Businessunitadoxiooffsitestorage(this);
             Businessunitadoxiopmuarea = new Businessunitadoxiopmuarea(this);
             Businessunitadoxioproratedlicencefeeschedule = new Businessunitadoxioproratedlicencefeeschedule(this);
@@ -2635,15 +2826,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             Businessunitadoxiospecialeventlocation = new Businessunitadoxiospecialeventlocation(this);
             Businessunitadoxiospecialeventschedule = new Businessunitadoxiospecialeventschedule(this);
             Contacts = new Contacts(this);
+            Contactadoxioleconnectionchildprofilename = new Contactadoxioleconnectionchildprofilename(this);
             Baserecordidadoxioeventaddress = new Baserecordidadoxioeventaddress(this);
             Baserecordidadoxiohoursofservice = new Baserecordidadoxiohoursofservice(this);
             Baserecordidadoxioinspectorreport = new Baserecordidadoxioinspectorreport(this);
+            Baserecordidadoxioleconnection = new Baserecordidadoxioleconnection(this);
             Baserecordidadoxiooffsitestorage = new Baserecordidadoxiooffsitestorage(this);
             Baserecordidadoxiopmuarea = new Baserecordidadoxiopmuarea(this);
             Baserecordidadoxiospecialevent = new Baserecordidadoxiospecialevent(this);
             Duplicaterecordidadoxioeventaddress = new Duplicaterecordidadoxioeventaddress(this);
             Duplicaterecordidadoxiohoursofservice = new Duplicaterecordidadoxiohoursofservice(this);
             Duplicaterecordidadoxioinspectorreport = new Duplicaterecordidadoxioinspectorreport(this);
+            Duplicaterecordidadoxioleconnection = new Duplicaterecordidadoxioleconnection(this);
             Duplicaterecordidadoxiooffsitestorage = new Duplicaterecordidadoxiooffsitestorage(this);
             Duplicaterecordidadoxiopmuarea = new Duplicaterecordidadoxiopmuarea(this);
             Duplicaterecordidadoxiospecialevent = new Duplicaterecordidadoxiospecialevent(this);
@@ -2651,8 +2845,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             Entitydefinitions = new Entitydefinitions(this);
             Regardingobjectidadoxiospecialeventfax = new Regardingobjectidadoxiospecialeventfax(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
+            Incidentadoxioenforcementactioninspection = new Incidentadoxioenforcementactioninspection(this);
             Inspectionhoursofservice = new Inspectionhoursofservice(this);
             Invoices = new Invoices(this);
+            Invoiceadoxioapplicationsecondaryapplicationinvoice = new Invoiceadoxioapplicationsecondaryapplicationinvoice(this);
             Leads = new Leads(this);
             Regardingobjectidadoxiospecialeventletter = new Regardingobjectidadoxiospecialeventletter(this);
             Lists = new Lists(this);
@@ -2664,6 +2860,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Objectidadoxiohoursofservice = new Objectidadoxiohoursofservice(this);
             Objectidadoxiohoursofservicesdefault = new Objectidadoxiohoursofservicesdefault(this);
             Objectidadoxioinspectorreport = new Objectidadoxioinspectorreport(this);
+            Objectidadoxioleconnection = new Objectidadoxioleconnection(this);
             Objectidadoxiolqrlicencetransferbpf = new Objectidadoxiolqrlicencetransferbpf(this);
             Objectidadoxiooffsitestorage = new Objectidadoxiooffsitestorage(this);
             Objectidadoxiopmuarea = new Objectidadoxiopmuarea(this);
@@ -2679,6 +2876,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Savedqueries = new Savedqueries(this);
             Regardingobjectidadoxiospecialeventserviceappointment = new Regardingobjectidadoxiospecialeventserviceappointment(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
+            Regardingobjectidadoxioestablishmentincident = new Regardingobjectidadoxioestablishmentincident(this);
             Sharepointsites = new Sharepointsites(this);
             Regardingobjectidadoxiospecialeventsocialactivity = new Regardingobjectidadoxiospecialeventsocialactivity(this);
             Systemforms = new Systemforms(this);
@@ -2706,6 +2904,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxioinspectorreportcreatedonbehalfby = new Lkadoxioinspectorreportcreatedonbehalfby(this);
             Lkadoxioinspectorreportmodifiedby = new Lkadoxioinspectorreportmodifiedby(this);
             Lkadoxioinspectorreportmodifiedonbehalfby = new Lkadoxioinspectorreportmodifiedonbehalfby(this);
+            Lkadoxioleconnectioncreatedby = new Lkadoxioleconnectioncreatedby(this);
+            Lkadoxioleconnectioncreatedonbehalfby = new Lkadoxioleconnectioncreatedonbehalfby(this);
+            Lkadoxioleconnectionmodifiedby = new Lkadoxioleconnectionmodifiedby(this);
+            Lkadoxioleconnectionmodifiedonbehalfby = new Lkadoxioleconnectionmodifiedonbehalfby(this);
             Lkadoxiolqrlicencetransferbpfcreatedby = new Lkadoxiolqrlicencetransferbpfcreatedby(this);
             Lkadoxiolqrlicencetransferbpfcreatedonbehalfby = new Lkadoxiolqrlicencetransferbpfcreatedonbehalfby(this);
             Lkadoxiolqrlicencetransferbpfmodifiedby = new Lkadoxiolqrlicencetransferbpfmodifiedby(this);
@@ -2742,6 +2944,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Useradoxiohoursofservice = new Useradoxiohoursofservice(this);
             Useradoxiohoursofservicesdefault = new Useradoxiohoursofservicesdefault(this);
             Useradoxioinspectorreport = new Useradoxioinspectorreport(this);
+            Useradoxioleconnection = new Useradoxioleconnection(this);
             Useradoxiooffsitestorage = new Useradoxiooffsitestorage(this);
             Useradoxiopmuarea = new Useradoxiopmuarea(this);
             Useradoxioproratedlicencefeeschedule = new Useradoxioproratedlicencefeeschedule(this);
@@ -2754,6 +2957,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Teamadoxiohoursofservice = new Teamadoxiohoursofservice(this);
             Teamadoxiohoursofservicesdefault = new Teamadoxiohoursofservicesdefault(this);
             Teamadoxioinspectorreport = new Teamadoxioinspectorreport(this);
+            Teamadoxioleconnection = new Teamadoxioleconnection(this);
             Teamadoxiooffsitestorage = new Teamadoxiooffsitestorage(this);
             Teamadoxiopmuarea = new Teamadoxiopmuarea(this);
             Teamadoxioproratedlicencefeeschedule = new Teamadoxioproratedlicencefeeschedule(this);
