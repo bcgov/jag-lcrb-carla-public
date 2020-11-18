@@ -21,7 +21,7 @@ using Xunit;
 # One Market Event
 #-----------------------
 
- @e2e @privatecorporation @marketeventoneday @winery
+ @e2e @privatecorporation @marketeventoneday @winery @release
  Scenario: Winery One Day Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -274,7 +274,7 @@ using Xunit;
     And I click on the market event submit button
     And I click on the event history for markets
     And I click on the link for Approved
-    And the market event data is correct for a monthly event
+    And the market event data is correct for an approved monthly event
     And the account is deleted
     Then I see the login page 
 */

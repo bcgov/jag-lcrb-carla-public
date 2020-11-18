@@ -155,7 +155,7 @@ export class Application {
   mfgStepSecFermOrCarb: boolean;
   mfgUsesNeutralGrainSpirits: string;
   isAlr: boolean;
-  pidList: string; 
+  pidList: string;
 
   zoningStatus: boolean;
   isOwnerBusiness: boolean;
@@ -165,14 +165,26 @@ export class Application {
 
   // Manufactuer Structural Change - Patio
   patioCompDescription: string;
-  patioLocationDescription: string; 
+  patioLocationDescription: string;
   patioAccessDescription: string;
   patioIsLiquorCarried: boolean;
   patioLiquorCarriedDescription: string;
   patioAccessControlDescription: string;
-        
+
   locatedAboveDescription: number;
   patioServiceBar: number;
 
+  firstNameOld: string;
+  firstNameNew: string;
+  lastNameOld: string;
+  lastNameNew: string;
+  csInternalTransferOfShares: string;
+  csExternalTransferOfShares: string;
+  csChangeOfDirectorsOrOfficers: string;
+  csNameChangeLicenseeCorporation: string;
+  csNameChangeLicenseePartnership: string;
+  csNameChangeLicenseeSociety: string;
+  csNameChangeLicenseePerson: string;
+  csAdditionalReceiverOrExecutor: string;
 
 }

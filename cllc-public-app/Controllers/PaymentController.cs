@@ -13,6 +13,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Serilog;
+
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -29,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
-        private readonly ILogger _logger;
+        private readonly Serilog.ILogger _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
 
@@ -42,7 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _geocoderClient = geocoderClient;
-            _logger = loggerFactory.CreateLogger(typeof(PaymentController));
+            _logger = Log.Logger;
         }
 
         /// <summary>
@@ -55,7 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("submit/{id}")]
         public async Task<IActionResult> GetPaymentUrl(string id)
         {
-            _logger.LogDebug("Called GetPaymentUrl(" + id + ")");
+            _logger.Debug("Called GetPaymentUrl(" + id + ")");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
@@ -83,7 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Error updating application");
+                _logger.Error(httpOperationException, "Error updating application");
                 // fail 
                 throw (httpOperationException);
             }
@@ -97,7 +99,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // should happen immediately, but ...
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
-                _logger.LogError($"No application {id} invoice found, retry = " + retries);
+                _logger.Error($"No application {id} invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 application = await GetDynamicsApplication(id);
                 invoiceId = application._adoxioInvoiceValue;
@@ -107,7 +109,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
 
 
-                _logger.LogDebug("Created invoice for application = " + invoiceId);
+                _logger.Debug("Created invoice for application = " + invoiceId);
 
                 /*
                  * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
@@ -134,13 +136,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount);
 
-                _logger.LogDebug(">>>>>" + redirectUrl["url"]);
+                _logger.Debug(">>>>>" + redirectUrl["url"]);
 
                 return new JsonResult(redirectUrl);
             }
             else
             {
-                _logger.LogError("GetPaymentUrl failed - Unable to get invoice for application {id}");
+                _logger.Error("GetPaymentUrl failed - Unable to get invoice for application {id}");
                 return NotFound();
             }
         }
@@ -155,7 +157,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("submit/licence-fee/{id}")]
         public async Task<IActionResult> GetLicencePaymentUrl(string id)
         {
-            _logger.LogDebug("Called GetLicencePaymentUrl(" + id + ")");
+            _logger.Debug("Called GetLicencePaymentUrl(" + id + ")");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
@@ -180,7 +182,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating application");
+                        _logger.Error(httpOperationException, "Error updating application");
                         // fail 
                         throw (httpOperationException);
                     }
@@ -207,7 +209,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating application");
+                        _logger.Error(httpOperationException, "Error updating application");
                         // fail 
                         throw (httpOperationException);
                     }
@@ -224,7 +226,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // should happen immediately, but ...
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
-                _logger.LogDebug("No invoice found, retry = " + retries);
+                _logger.Debug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 application = await GetDynamicsApplication(id);
                 invoiceId = application._adoxioInvoiceValue;
@@ -232,7 +234,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (!string.IsNullOrEmpty(invoiceId))
             {
-                _logger.LogDebug("Created invoice for application = " + invoiceId);
+                _logger.Debug("Created invoice for application = " + invoiceId);
 
                 /*
                  * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
@@ -260,13 +262,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
 
-                _logger.LogDebug(">>>>>" + redirectUrl["url"]);
+                _logger.Debug(">>>>>" + redirectUrl["url"]);
 
                 return new JsonResult(redirectUrl);
             }
             else
             {
-                _logger.LogError($"No invoice found for application {id}");
+                _logger.Error($"No invoice found for application {id}");
                 return NotFound();
             }
         }
@@ -292,7 +294,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // load the invoice for this application
             string invoiceId = application._adoxioInvoiceValue;
             Guid invoiceGuid = Guid.Parse(invoiceId);
-            _logger.LogDebug("Found invoice for application = " + invoiceId);
+            _logger.Debug("Found invoice for application = " + invoiceId);
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceGuid);
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
@@ -304,15 +306,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (response.ContainsKey ("error"))
             {
                 // handle error.
-                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
-                return StatusCode(503); // client will retry.
+                _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
+                return StatusCode(500,response); // client will retry.
             }
 
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
             {
-                _logger.LogDebug(">>>>>" + key + ":" + response[key]);
+                _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
             /* 
@@ -323,13 +325,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
             {
-                _logger.LogDebug("Processing invoice with status New");
+                _logger.Debug("Processing invoice with status New");
 
                 // if payment was successful:
                 var pay_status = response["trnApproved"];
                 if (pay_status == "1")
                 {
-                    _logger.LogDebug("Transaction approved");
+                    _logger.Debug("Transaction approved");
 
                     MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice()
                     {
@@ -345,7 +347,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating invoice");
+                        _logger.Error(httpOperationException, "Error updating invoice");
                         // fail 
                         throw (httpOperationException);
                     }
@@ -363,18 +365,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating application");
+                        _logger.Error(httpOperationException, "Error updating application");
                         // fail 
                         throw (httpOperationException);
                     }
 
-                    _logger.LogInformation($"Payment approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    _logger.Information($"Payment approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
 
                 }
                 // if payment failed:
                 else
                 {
-                    _logger.LogDebug("Transaction NOT approved");
+                    _logger.Debug("Transaction NOT approved");
 
                     // set invoice status to Cancelled
                     MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice()
@@ -388,7 +390,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating invoice");
+                        _logger.Error(httpOperationException, "Error updating invoice");
                         // fail 
                         throw (httpOperationException);
                     }
@@ -403,19 +405,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating application");
+                        _logger.Error(httpOperationException, "Error updating application");
                         // fail 
                         throw (httpOperationException);
                     }
 
-                    _logger.LogInformation($"Payment not approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    _logger.Information($"Payment not approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
 
                 }
             }
             else
             {
                 // that can happen if we are re-validating a completed invoice (paid or cancelled)
-                _logger.LogDebug("Invoice status is not New, skipping updates ...");
+                _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
             return new JsonResult(response);
@@ -440,7 +442,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // load the invoice for this application
             string invoiceId = application._adoxioLicencefeeinvoiceValue;
-            _logger.LogDebug("Found invoice for application = " + invoiceId);
+            _logger.Debug("Found invoice for application = " + invoiceId);
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
@@ -452,7 +454,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (response.ContainsKey("error"))
             {
                 // handle error.
-                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
+                _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
                 return StatusCode(503); // client will retry.
             }
 
@@ -460,7 +462,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             foreach (var key in response.Keys)
             {
-                _logger.LogDebug(">>>>>" + key + ":" + response[key]);
+                _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
             /* 
@@ -471,14 +473,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
             {
-                _logger.LogDebug("Processing invoice with status New");
+                _logger.Debug("Processing invoice with status New");
 
 
                 // if payment was successful:
                 var pay_status = response["trnApproved"];
                 if (pay_status == "1")
                 {
-                    _logger.LogDebug("Transaction approved");
+                    _logger.Debug("Transaction approved");
 
                     MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice()
                     {
@@ -493,7 +495,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating invoice");
+                        _logger.Error(httpOperationException, "Error updating invoice");
                         // fail 
                         throw (httpOperationException);
                     }
@@ -509,7 +511,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating application");
+                        _logger.Error(httpOperationException, "Error updating application");
                         // fail 
                         throw (httpOperationException);
                     }
@@ -520,13 +522,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         await _geocoderClient.GeocodeEstablishment(application._adoxioLicenceestablishmentValue, _logger);
                     }
 
-                    _logger.LogInformation($"Licence Fee Transaction approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    _logger.Information($"Licence Fee Transaction approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
 
                 }
                 // if payment failed:
                 else
                 {
-                    _logger.LogDebug("Transaction NOT approved");
+                    _logger.Debug("Transaction NOT approved");
 
                     MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice()
                     {
@@ -540,7 +542,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating invoice");
+                        _logger.Error(httpOperationException, "Error updating invoice");
 
                         // fail 
                         throw (httpOperationException);
@@ -558,11 +560,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating application");
+                        _logger.Error(httpOperationException, "Error updating application");
                         // fail 
                         throw (httpOperationException);
                     }
-                    _logger.LogInformation($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
                 }
 
 
@@ -571,7 +573,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 // that can happen if we are re-validating a completed invoice (paid or cancelled)
-                _logger.LogDebug("Invoice status is not New, skipping updates ...");
+                _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
             return new JsonResult(response);
@@ -583,8 +585,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            _logger.LogDebug("Application id = " + id);
-            _logger.LogDebug("User id = " + userSettings.AccountId);
+            _logger.Debug("Application id = " + id);
+            _logger.Debug("User id = " + userSettings.AccountId);
             var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_Invoice", "adoxio_Establishment" };
 
             MicrosoftDynamicsCRMadoxioApplication dynamicsApplication = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(id));
@@ -609,8 +611,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            _logger.LogDebug("Worker id = " + id);
-            _logger.LogDebug("User Contact id = " + userSettings.ContactId);
+            _logger.Debug("Worker id = " + id);
+            _logger.Debug("User Contact id = " + userSettings.ContactId);
 
             MicrosoftDynamicsCRMadoxioWorker worker = null;
             if (getInvoice)
@@ -692,7 +694,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("submit/worker/{workerId}")]
         public async Task<IActionResult> GetWorkerPaymentUrl(string workerId)
         {
-            _logger.LogDebug($"Called GetWorkerPaymentUrl({workerId})");
+            _logger.Debug($"Called GetWorkerPaymentUrl({workerId})");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid workerGuid = Guid.Parse(workerId);
@@ -718,7 +720,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Error updating worker");
+                _logger.Error(httpOperationException, "Error updating worker");
                 // fail 
                 throw (httpOperationException);
             }
@@ -733,12 +735,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // should happen immediately, but ...
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
-                _logger.LogDebug("No invoice found, retry = " + retries);
+                _logger.Debug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 patchWorker = await GetDynamicsWorker(workerId, false);
                 invoiceId = patchWorker._adoxioInvoiceValue;
             }
-            _logger.LogDebug("Created invoice for worker = " + invoiceId);
+            _logger.Debug("Created invoice for worker = " + invoiceId);
 
             /*
              * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
@@ -765,7 +767,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/worker-qualification/payment-confirmation";
             redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, workerId, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
 
-            _logger.LogDebug(">>>>>" + redirectUrl["url"]);
+            _logger.Debug(">>>>>" + redirectUrl["url"]);
 
             return new JsonResult(redirectUrl);
         }
@@ -791,7 +793,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // load the invoice for this application
             string invoiceId = worker._adoxioInvoiceValue;
-            _logger.LogDebug("Found invoice for application = " + invoiceId);
+            _logger.Debug("Found invoice for application = " + invoiceId);
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
@@ -803,7 +805,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (response.ContainsKey("error"))
             {
                 // handle error.
-                _logger.LogError($"PAYMENT VERIFICATION ERROR - {response["message"]} for worker {workerId}");
+                _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for worker {workerId}");
                 return StatusCode(503); // client will retry.
             }
 
@@ -811,7 +813,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             foreach (var key in response.Keys)
             {
-                _logger.LogDebug(">>>>>" + key + ":" + response[key]);
+                _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
             /* 
@@ -822,13 +824,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
             {
-                _logger.LogDebug("Processing invoice with status New");
+                _logger.Debug("Processing invoice with status New");
 
                 // if payment was successful:
                 var pay_status = response["trnApproved"];
                 if (pay_status == "1")
                 {
-                    _logger.LogDebug("Transaction approved");
+                    _logger.Debug("Transaction approved");
 
                     MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice()
                     {
@@ -843,7 +845,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating invoice");
+                        _logger.Error(httpOperationException, "Error updating invoice");
                         // fail 
                         throw (httpOperationException);
                     }
@@ -859,11 +861,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError("Error updating worker");
-                        _logger.LogError("Request:");
-                        _logger.LogError(httpOperationException.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(httpOperationException.Response.Content);
+                        _logger.Error("Error updating worker");
+                        _logger.Error("Request:");
+                        _logger.Error(httpOperationException.Request.Content);
+                        _logger.Error("Response:");
+                        _logger.Error(httpOperationException.Response.Content);
                         // fail 
                         throw (httpOperationException);
                     }
@@ -872,7 +874,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // if payment failed:
                 else
                 {
-                    _logger.LogDebug("Transaction NOT approved");
+                    _logger.Debug("Transaction NOT approved");
 
                     // set invoice status to Cancelled
                     MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice()
@@ -886,7 +888,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating invoice");
+                        _logger.Error(httpOperationException, "Error updating invoice");
                         // fail 
                         throw (httpOperationException);
                     }
@@ -905,7 +907,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating worker");
+                        _logger.Error(httpOperationException, "Error updating worker");
                         // fail 
                         throw (httpOperationException);
                     }
@@ -914,7 +916,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 // that can happen if we are re-validating a completed invoice (paid or cancelled)
-                _logger.LogDebug("Invoice status is not New, skipping updates ...");
+                _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
             return new JsonResult(response);

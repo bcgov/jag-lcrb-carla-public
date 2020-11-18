@@ -310,9 +310,6 @@ namespace bdd_tests
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
                     uiIsManufacturedMinimum.Click();
-
-                    // upload discretion letter
-                    FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
                 }
 
                 // select 'Yes'
@@ -381,9 +378,6 @@ namespace bdd_tests
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
                     uiIsManufacturedMinimum.Click();
-
-                    // upload discretion letter
-                    FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
                 }
 
                 // select 'No'
@@ -451,12 +445,28 @@ namespace bdd_tests
 
             MakePayment();
 
-            // click on Licences tab
             ClickLicencesTab();
 
-            // check that the licence is now active after renewal
-            Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/span[3][contains(.,'Active')]")).Displayed);
-
+            // reload Licences page as needed
+            for (int i = 0; i < 5; i++)
+            {
+                try
+                {
+                    if (ngDriver.FindElement(By.XPath("//body[contains(.,'Active')]")).Displayed == false)
+                    {
+                        ngDriver.Navigate().Refresh();
+                        System.Threading.Thread.Sleep(2000);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            }
+       
             // confirm that Renew Licence messages are no longer displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Renew Licence'))]")).Displayed);
 
