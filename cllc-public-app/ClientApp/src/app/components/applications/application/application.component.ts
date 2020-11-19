@@ -96,6 +96,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedFloorPlanDocuments: 0;
   uploadedPhotosOrRenderingsDocuments: 0;
   uploadedZoningDocuments: 0;
+  uploadedCentralSecuritiesRegister: 0;
+  uploadedRegisterOfDirectorsAndOfficers:0;
+  uploadedPartnershipAgreement:0;
+  uploadedOtherDocuments:0;
+  uploadedIndividualsWithLessThan10:0;
   dynamicsForm: DynamicsForm;
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
@@ -106,6 +111,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   saveForLaterInProgress: boolean;
   submitApplicationInProgress: boolean;
   proceedToSecurityScreeningInProgress: boolean;
+  
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -916,6 +922,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       ((this.uploadedAssociateDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('Associate form is required.');
+
+      /// here
+
     }
 
     if (this.application.applicationType.showFinancialIntegrityFormUpload &&
@@ -932,7 +941,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     const signageNotRequired = (
-       applicationTypeName === ApplicationTypeNames.LiquorLicenceTransfer
+       applicationTypeName === ApplicationTypeNames.LiquorLicenceTransfer ||
+       applicationTypeName === ApplicationTypeNames.MFG
     );
 
     if (!signageNotRequired && this.application.applicationType.signage === FormControlState.Show &&
@@ -1198,6 +1208,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
       ['PrivateCorporation',
         'UnlimitedLiabilityCorporation',
         'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
+  }
+
+  businessTypeIsCorporation(): boolean {
+    return this.businessTypeIsPrivateCorporation() || (this.account && ['PublicCorporation'].indexOf(this.account.businessType) !== -1);
+  }
+
+  businessTypeIsSoleProp(): boolean {
+    return (this.account && ['SoleProprietorship'].indexOf(this.account.businessType) !== -1);  
+  }
+
+  businessTypeIsSociety(): boolean {
+    return (this.account && ['Society'].indexOf(this.account.businessType) !== -1);  
   }
 
   isCRSRenewalApplication(): boolean {
