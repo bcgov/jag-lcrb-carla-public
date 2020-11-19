@@ -53,6 +53,7 @@ import { LgApprovalsComponent } from '@components/lg-approvals/lg-approvals.comp
 import { LicenceRepresentativeFormComponent } from '@components/licence-representative-form/licence-representative-form.component';
 import { MarketEventComponent } from '@components/market-event/market-event.component';
 import { PermanentChangesToALicenseeComponent } from '@components/applications/permanent-changes-to-a-licensee/permanent-changes-to-a-licensee.component';
+import { OffsiteStorageComponent } from '@components/offsite-storage/offsite-storage.component';
 
 
 const routes: Routes = [
@@ -83,7 +84,7 @@ const routes: Routes = [
     path: 'lg-approvals',
     component: LgApprovalsComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    canDeactivate: [CanDeactivateGuard], 
+    canDeactivate: [CanDeactivateGuard],
     data: { feature: 'LGApprovals' }
   },
   {
@@ -148,6 +149,11 @@ const routes: Routes = [
   {
     path: 'licence/:licenceId/market-event/:eventId',
     component: MarketEventComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'licence/:licenceId/offsite-storage',
+    component: OffsiteStorageComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
