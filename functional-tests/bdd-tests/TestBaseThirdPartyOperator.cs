@@ -40,7 +40,7 @@ namespace bdd_tests
             /* 
             Page Title: Add or Change a Third Party Operator
             */
-
+            
             // check that licence number field is populated
             NgWebElement uiLicenseNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='licenseNumber']"));
             string fieldValueLicenseNumber = uiLicenseNumber.GetProperty("value");
