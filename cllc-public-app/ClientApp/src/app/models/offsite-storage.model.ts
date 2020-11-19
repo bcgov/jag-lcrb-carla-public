@@ -1,5 +1,5 @@
 export enum OffsiteStorageStatus {
-  Added = 1,
+  Active = 1,
   Removed = 845280000,
 }
 

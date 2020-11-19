@@ -8,8 +8,7 @@
   </thead>
   <tr *ngFor="let row of rows.controls; let i=index">
     <ng-container [formGroup]="row">
-      <!-- <td>{{ OffsiteStorageStatusEnum[rows.at(i).get('status')] | uppercase }}</td> -->
-      <td><input type="text" formControlName="status" readonly /></td>
+      <td><span class="bold">{{ offsiteStorageStatus[row.value.status] }}</span></td>
       <td><input type="text" formControlName="street1" placeholder="Enter Address" [readonly]="!enabled"/></td>
       <td><input type="text" formControlName="city" placeholder="Enter City" [readonly]="!enabled"/></td>
       <td><input type="text" formControlName="postalCode" placeholder="Enter Postal Code" [readonly]="!enabled"/></td>
