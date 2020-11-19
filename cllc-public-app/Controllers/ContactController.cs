@@ -177,10 +177,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             if (item == null || string.IsNullOrEmpty(contactId)) return BadRequest();
 
-            // for association with current user
-            var userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
-
+            
             var alias = new MicrosoftDynamicsCRMadoxioAlias();
             // copy received values to Dynamics Application
             alias.CopyValues(item);
@@ -223,9 +220,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateContact([FromBody] Contact item)
         {
-            // get UserSettings from the session
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // first check to see that a contact exists.
             var contactSiteminderGuid = userSettings.SiteMinderGuid;
@@ -315,9 +311,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("worker")]
         public async Task<IActionResult> CreateWorkerContact([FromBody] Contact item)
         {
-            // get UserSettings from the session
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // first check to see that we have the correct inputs.
             var contactSiteminderGuid = userSettings.SiteMinderGuid;
