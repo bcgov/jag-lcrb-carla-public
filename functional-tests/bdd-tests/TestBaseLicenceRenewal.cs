@@ -450,8 +450,8 @@ namespace bdd_tests
             // reload Licences page as needed
             for (int i = 0; i < 5; i++)
             {
-                try
-                {
+                //try
+                //{
                     if ((ngDriver.FindElement(By.XPath("//body[contains(.,'Active')]")).Displayed == false))
                     {
                         ngDriver.Navigate().Refresh();
@@ -461,10 +461,10 @@ namespace bdd_tests
                     {
                         break;
                     }
-                }
-                catch (Exception)
-                {
-                }
+                //}
+                //catch (Exception)
+                //{
+                //}
             }
 
             // confirm that Renew Licence messages are no longer displayed
