@@ -27,7 +27,7 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
   registerOnChange(fn: any) { this.onChange = fn; }
   registerOnTouched(fn: any) { this.onTouched = fn; }
 
-  OffsiteStorageStatusEnum = OffsiteStorageStatus;
+  offsiteStorageStatus = OffsiteStorageStatus;
 
   constructor(private fb: FormBuilder) {
     super();
