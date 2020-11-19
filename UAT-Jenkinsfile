@@ -16,43 +16,19 @@ node('master') {
 			openshift.withProject() {
 				parallel('Angular': {
 
-					if (changeset("cllc-public-app/ClientApp/*")) {
-						
-								def bc1 = openshift.selector('bc', 'cllc-public-angular')
-								def buildSelector1 = bc1.startBuild("--commit=master")
-								sleep(5)
+					if (changeset("cllc-public-app/ClientApp/*")) {					
+						def bc1 = openshift.selector('bc', 'cllc-public-angular')
+						def buildSelector1 = bc1.startBuild("--commit=master")
+						sleep(5)
 						buildSelector1.logs('-f')
-					
-						
+						sleep(30)
 						def bc2 = openshift.selector('bc', 'cllc-public-frontend')
 						def buildSelector2 = bc2.startBuild()
-						def builds = bc2.related('builds')
 						
-						timeout(20) {
-
-        
-							builds.watch {
-            
-							echo "So far, ${bc2.name()} has created builds: ${it.names()}"
-
-							return it.count() > 0
-							}
-
-							// wait for the build to complete.
-							builds.watch {
-								if ( it.count() == 0 ) return false
-
-								def allDone = true
-								it.withEach {
-									def buildModel = it.object()
-									if ( it.object().status.phase != "Complete" ) {
-									allDone = false
-								}
-							}
-
-							return allDone;
+						timeout(10) { 
+							buildSelector1.logs('-f')
 						}
-						
+	
 					}
 				}, 'C# API': {
 					if (changeset("cllc-public-app/*")) {
@@ -62,6 +38,7 @@ node('master') {
 					sleep(5) 
 					buildSelector.logs('-f')						   
 				}
+				openshift.tag("cllc-public-frontend:latest", "cllc-public-frontend:test") 
 				openshift.tag("cllc-public-api:latest", "cllc-public-api:test")
 					
 				})
