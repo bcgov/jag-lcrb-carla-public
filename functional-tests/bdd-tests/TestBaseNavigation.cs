@@ -48,7 +48,6 @@ namespace bdd_tests
         }
 
 
-
         [And(@"I click on the signature checkbox")]
         public void ClickOnSignatureCheckbox()
         {
