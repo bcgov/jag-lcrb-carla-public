@@ -59,8 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             String accountfilter = null;
 
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
 
@@ -100,8 +99,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<ViewModels.LegalEntity> result = new List<LegalEntity>();
 
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
             List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = GetAccountLegalEntities(userSettings.AccountId);
@@ -118,8 +116,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetCurrentHierarchy()
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
 
@@ -208,8 +205,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetCurrentSecurityScreeningSummary()
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
 
@@ -495,9 +491,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(e, $"Unexpected Exception while getting legal entities.");
             }
 
-
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             if (legalEntities != null)
             {
@@ -525,8 +520,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ViewModels.LegalEntity result = null;
 
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
 
@@ -570,8 +564,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 // get the current user.
-                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
                 Guid adoxio_legalentityid = new Guid(id);
                 MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
@@ -599,8 +592,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
 
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
             // copy received values to Dynamics LegalEntity
@@ -1188,8 +1180,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // start by getting the record for the current legal entity.
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
 

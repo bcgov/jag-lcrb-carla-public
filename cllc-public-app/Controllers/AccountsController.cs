@@ -66,9 +66,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ViewModels.Account result = null;
 
             // get the current user.
-            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
-            _logger.LogDebug(LoggingEvents.HttpGet, "UserSettings: " + JsonConvert.SerializeObject(userSettings));
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // query the Dynamics system to get the account record.
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
@@ -108,8 +106,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             _logger.LogDebug(LoggingEvents.HttpGet, "UserSettings: " + JsonConvert.SerializeObject(userSettings));
 
             // query the BCeID API to get the business record.
@@ -404,9 +401,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             bool createContact = true;
 
-            // get UserSettings from the session
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             _logger.LogDebug(LoggingEvents.HttpPost, "UserSettings: " + JsonConvert.SerializeObject(userSettings));
 
             // get account Siteminder GUID
@@ -1136,8 +1132,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             // get the current user.
-            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             _logger.LogDebug(LoggingEvents.HttpGet, "UserSettings: " + JsonConvert.SerializeObject(userSettings));
 
             // query the Dynamics system to get the account record.

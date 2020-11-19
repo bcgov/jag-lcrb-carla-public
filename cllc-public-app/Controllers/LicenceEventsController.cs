@@ -77,8 +77,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             dynamicsEvent.CopyValues(item);
 
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             dynamicsEvent.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
             if (!string.IsNullOrEmpty(item.LicenceId))
@@ -294,8 +294,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("list/{licenceId}/{num}")]
         public async Task<IActionResult> GetLicenceEventsList(string licenceId, int num)
         {
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             MicrosoftDynamicsCRMadoxioEventCollection dynamicsEvents;
             List<ViewModels.LicenceEvent> responseEvents = new List<ViewModels.LicenceEvent>();
@@ -325,8 +325,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool CurrentUserHasAccessToEventOwnedBy(string accountId)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // For now, check if the account id matches the user's account.
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)

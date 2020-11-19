@@ -136,8 +136,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private async Task<bool> CurrentUserIsLGForApplication(MicrosoftDynamicsCRMadoxioApplication application)
         {
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // get user account
             var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
@@ -156,8 +156,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool CurrentUserHasAccessToAccount(string accountId)
         {
             // get the current user.
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future
@@ -174,8 +173,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool CurrentUserHasAccessToContactOwnedBy(string contactId)
         {
             // get the current user.
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future
@@ -772,13 +770,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private void ValidateSession()
         {
             // get the current user.
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            if (string.IsNullOrEmpty(temp))
-            {
-                throw new Exception("UserSettings Validation Error:  Session string is empty.");
-            }
-            
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
         }

@@ -401,9 +401,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
             // get the current user.
-            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
-
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // query the Dynamics system to get the account record.
             if (userSettings.AccountId != null && !userSettings.IsNewUserRegistration && userSettings.AccountId.Length > 0)
@@ -444,8 +442,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
             // get the current user.
-            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // query the Dynamics system to get the account record.
             if (userSettings.AccountId != null && !userSettings.IsNewUserRegistration && userSettings.AccountId.Length > 0)
@@ -643,9 +640,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{licenceId}/create-action-application/{applicationTypeName}")]
         public async Task<JsonResult> CreateApplicationForAction(string licenceId, string applicationTypeName)
         {
-            // for association with current user
-            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             var expand = new List<string> {
                 "adoxio_Licencee",
@@ -846,8 +842,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool isConclusivelyDeemed(ApplicationLicenseSummary lic)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             var result = false;
             var filter = $"_adoxio_applicant_value eq {userSettings.AccountId}";
@@ -879,8 +874,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<JsonResult> GetThirdPartyOperatedLicencesAsync()
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // get all third party operator licenses
             List<ApplicationLicenseSummary> adoxioLicenses = await GetThirdPartyOperatedLicencesForAccountAsync(userSettings.AccountId.ToString());
@@ -898,8 +892,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<JsonResult> GetProposedLicenseeLicences()
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // get all proposed operator licenses
             List<ApplicationLicenseSummary> adoxioLicenses = await GetProposedOwnerLicencesForAccountAsync(userSettings.AccountId.ToString());
@@ -1354,8 +1347,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool CurrentUserHasAccessToLicenseOwnedBy(string accountId)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future
@@ -1375,8 +1367,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool CurrentUserHasAccessToLicenseTransferredTo(string accountId)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // For now, check if the account id matches the user's account.
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)

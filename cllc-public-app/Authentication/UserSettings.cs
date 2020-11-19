@@ -113,6 +113,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             {
                 userSettings = new UserSettings();
                 userSettings.AccountId = httpContextAccessor.HttpContext.User.FindFirst(Models.User.AccountidClaim).Value;
+                userSettings.ContactId = httpContextAccessor.HttpContext.User.FindFirst(Models.User.UseridClaim).Value;
+                userSettings.SiteMinderGuid = httpContextAccessor.HttpContext.User.FindFirst(Models.User.SiteMinderGuidClaim).Value;
+                userSettings.SiteMinderBusinessGuid = httpContextAccessor.HttpContext.User.FindFirst(Models.User.SiteMinderBusinessGuidClaim).Value;
             }
 
             return userSettings;
