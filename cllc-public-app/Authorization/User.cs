@@ -11,6 +11,13 @@
         public const string PermissionClaim = "permission_claim";
 
         /// <summary>
+        /// SMGuid
+        /// </summary>
+        public const string SiteMinderGuidClaim = "smguid_claim";
+
+        public const string SiteMinderBusinessGuidClaim = "smbusinessguid_claim";
+
+        /// <summary>
         /// UserId Claim Property
         /// </summary>
         public const string UseridClaim = "userid_claim";
