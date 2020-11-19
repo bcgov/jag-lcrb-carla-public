@@ -3,7 +3,7 @@
     I want to ...
 
 @e2e @privatecorporation @offsitestore
-Scenario: Private Corporation Offsite Storage
+Scenario: Private Corporation Manage Offsite Storage
     Given I am logged in to the dashboard as a private corporation
 
     And the account is deleted
