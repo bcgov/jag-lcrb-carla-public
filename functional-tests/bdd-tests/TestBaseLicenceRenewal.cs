@@ -452,7 +452,7 @@ namespace bdd_tests
             {
                 try
                 {
-                    if (ngDriver.FindElement(By.XPath("//body[contains(.,'Active')]")).Displayed == false)
+                    if ((ngDriver.FindElement(By.XPath("//body[contains(.,'Active')]")).Displayed == false))
                     {
                         ngDriver.Navigate().Refresh();
                         System.Threading.Thread.Sleep(2000);
