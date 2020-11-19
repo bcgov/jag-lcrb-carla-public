@@ -54,7 +54,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetLicence(string id)
         {
-            MicrosoftDynamicsCRMadoxioLicences licence = null;
+            MicrosoftDynamicsCRMadoxioLicences licence;
 
             try
             {
@@ -81,13 +81,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // Create link to sharepoint folder if needed
             if (licence.AdoxioLicencesSharePointDocumentLocations == null || licence.AdoxioLicencesSharePointDocumentLocations.Count == 0)
             {
-                await InitializeSharepoint(licence);
+                InitializeSharepoint(licence);
             }
 
             return new JsonResult(licence.ToViewModel(_dynamicsClient));
         }
 
-        private async Task InitializeSharepoint(MicrosoftDynamicsCRMadoxioLicences licence)
+        private void InitializeSharepoint(MicrosoftDynamicsCRMadoxioLicences licence)
         {
             // create a SharePointDocumentLocation link
             var folderName = licence.GetDocumentFolderName();
