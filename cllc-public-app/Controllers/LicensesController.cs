@@ -19,6 +19,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
@@ -718,8 +719,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public List<ApplicationLicenseSummary> GetCurrentUserLicences()
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             List<ApplicationLicenseSummary> adoxioLicences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);

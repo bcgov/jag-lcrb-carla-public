@@ -16,6 +16,11 @@
         public const string UseridClaim = "userid_claim";
 
         /// <summary>
+        /// AccountId Claim Property
+        /// </summary>
+        public const string AccountidClaim = "accountid_claim";
+
+        /// <summary>
         /// User Type Claim Property
         /// </summary>
         public const string UserTypeClaim = "usertype_claim";
