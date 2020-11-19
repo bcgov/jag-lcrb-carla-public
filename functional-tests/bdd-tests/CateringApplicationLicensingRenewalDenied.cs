@@ -35,7 +35,7 @@ Scenario: Deny Catering Licence Renewal Today
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And autorenewal is set to 'No'
+    And autorenewal is set to 'No' using Dynamics workflow 322d410b-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -57,7 +57,7 @@ Scenario: Deny Catering Licence Renewal Yesterday
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And autorenewal is set to 'No'
+    And autorenewal is set to 'No' using Dynamics workflow e1792ccf-e40b-491f-9a9a-ee8e977749e6
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -79,7 +79,7 @@ Scenario: Deny Catering Licence Renewal 45 Days Ago
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And autorenewal is set to 'No'
+    And autorenewal is set to 'No' using using Dynamics workflow 65bfe79d-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -101,7 +101,7 @@ Scenario: Deny Catering Licence Renewal 60 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And autorenewal is set to 'No'
+    And autorenewal is set to 'No' using Dynamics workflow beb3243e-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -123,7 +123,7 @@ Scenario: Deny Catering Licence Renewal 30 Days Future
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee for Catering
-    And autorenewal is set to 'No'
+    And autorenewal is set to 'No' using Dynamics workflow 10eaae77-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page

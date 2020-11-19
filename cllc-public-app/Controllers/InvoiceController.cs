@@ -81,8 +81,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
                     // get the current user.
-                    string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                    UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                    UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
                     Guid adoxio_legalentityid = new Guid(id);
                     MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(adoxio_legalentityid);
@@ -121,8 +120,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 MicrosoftDynamicsCRMinvoice invoice = new MicrosoftDynamicsCRMinvoice();
 
                 // get the current user.
-                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
                 // check that the session is setup correctly.
                 userSettings.Validate();
                 // copy received values to Dynamics LegalEntity
