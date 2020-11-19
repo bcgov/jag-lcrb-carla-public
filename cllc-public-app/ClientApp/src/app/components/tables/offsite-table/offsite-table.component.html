@@ -12,7 +12,7 @@
       <td><input type="text" formControlName="street1" placeholder="Enter Address" [readonly]="!enabled"/></td>
       <td><input type="text" formControlName="city" placeholder="Enter City" [readonly]="!enabled"/></td>
       <td><input type="text" formControlName="postalCode" placeholder="Enter Postal Code" [readonly]="!enabled"/></td>
-      <td><button type="button" (click)="removeRow(i)" class="btn-clear" *ngIf="enabled"><i class="fa fa-trash" style="color: #ee220e"></i></button></td>
+      <td><button type="button" (click)="removeRow(i)" class="btn-clear" *ngIf="canRemove(i)"><i class="fa fa-trash" style="color: #ee220e"></i></button></td>
     </ng-container>
   </tr>
   <tr>

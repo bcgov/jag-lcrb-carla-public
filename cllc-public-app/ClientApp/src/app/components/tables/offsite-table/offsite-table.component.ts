@@ -70,7 +70,7 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
 
   addRow() {
     const newRow: OffsiteStorage = new OffsiteStorage();
-    newRow.status = OffsiteStorageStatus.Added;
+    newRow.status = OffsiteStorageStatus.Active;
     this.writeValue([...this.rows.value, newRow]);
   }
 
@@ -89,5 +89,9 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
       }
     }
     return isNotValid && { invalid: true };
+  }
+
+  canRemove(index: number): boolean {
+    return this.enabled && this.rows.at(index).get('status').value !== this.offsiteStorageStatus.Removed;
   }
 }
