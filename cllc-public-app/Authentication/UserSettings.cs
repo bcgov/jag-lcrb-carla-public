@@ -100,6 +100,24 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             return temp;
         }
 
+        public static UserSettings CreateFromHttpContext(IHttpContextAccessor httpContextAccessor)
+        {
+            string temp = httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings;
+
+            try
+            {
+                userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            }
+            catch (Exception)
+            {
+                userSettings = new UserSettings();
+                userSettings.AccountId = httpContextAccessor.HttpContext.User.FindFirst(Models.User.AccountidClaim).Value;
+            }
+
+            return userSettings;
+        }
+
         /// <summary>
         /// Save UserSettings to Session
         /// </summary>
