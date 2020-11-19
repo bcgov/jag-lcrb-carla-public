@@ -80,8 +80,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool CurrentUserHasAccessToMonthlyReportOwnedBy(string accountId)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future
@@ -99,8 +98,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetMonthlyReportsByLicence(string licenceId)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             List<MonthlyReport> monthlyReportsList = new List<MonthlyReport>();
             IEnumerable<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> monthlyReports;
@@ -132,8 +130,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetCurrentUserMonthlyReports([FromQuery] bool expandInventoryReports)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             if (string.IsNullOrEmpty(userSettings.AccountId)) {
                 return new BadRequestResult();
@@ -173,9 +170,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
-            // for association with current user
-            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             Guid monthlyReportId = new Guid(id);
             string filter = $"adoxio_cannabismonthlyreportid eq {id}";
