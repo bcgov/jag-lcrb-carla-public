@@ -55,7 +55,7 @@ namespace bdd_tests
             // enter postal code 1
             NgWebElement uiPostalCode1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='offsiteStorageLocations'] input[formcontrolname='postalCode']"));
             uiPostalCode1.SendKeys(postal1);
-            
+
             /*
             // enter street 2
             NgWebElement uiStreet2 = ngDriver.FindElement(By.CssSelector(""));
@@ -82,8 +82,10 @@ namespace bdd_tests
             uiPostalCode3.SendKeys(postal3);
             */
 
+            System.Threading.Thread.Sleep(2000);
+
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.XPath("mat-checkbox#mat-checkbox-2[formcontrolname='agreement']"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-2[formcontrolname='agreement']"));
             uiSignatureAgreement.Click();
         }
     }
