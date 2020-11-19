@@ -40,6 +40,10 @@ namespace bdd_tests
             string city3 = "Umpqua";
             string postal3 = "97486";
 
+            // click on the signature agreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiSignatureAgreement.Click();
+
             // click on Add Additional Storage button
             NgWebElement uiOffsiteStorageLocations = ngDriver.FindElement(By.CssSelector("[formcontrolname='offsiteStorageLocations'] button[type='button']"));
             uiOffsiteStorageLocations.Click();
@@ -56,7 +60,7 @@ namespace bdd_tests
             NgWebElement uiPostalCode1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='offsiteStorageLocations'] input[formcontrolname='postalCode']"));
             uiPostalCode1.SendKeys(postal1);
 
-            /*
+            /* TODO
             // enter street 2
             NgWebElement uiStreet2 = ngDriver.FindElement(By.CssSelector(""));
             uiStreet2.SendKeys(street2);
@@ -81,12 +85,6 @@ namespace bdd_tests
             NgWebElement uiPostalCode3 = ngDriver.FindElement(By.CssSelector(""));
             uiPostalCode3.SendKeys(postal3);
             */
-
-            System.Threading.Thread.Sleep(2000);
-
-            // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-2[formcontrolname='agreement']"));
-            uiSignatureAgreement.Click();
         }
     }
 }
