@@ -1,3 +1,13 @@
+::ng-deep {
+  table.offsite-storage {
+    td {
+      .app-field {
+        margin-bottom: 0; // override default bottom margin when used in this table component
+      }
+    }
+  }
+}
+
 table {
   width: 100%;
 
@@ -16,8 +26,7 @@ table {
       background-color: white;
       text-align: center;
       border: 1px solid black;
-      height: 27px;
-      vertical-align: bottom;
+      height: 35px;
       &:last-of-type {
         background: none !important;
         border: none;
@@ -51,4 +60,12 @@ table {
     background: none;
     border: none;
   }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.text-grey {
+  color: #999999;
 }
