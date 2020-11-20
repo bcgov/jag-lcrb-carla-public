@@ -22,7 +22,10 @@ import { BaseControlValueAccessor } from '../BaseControlValueAccessor';
   ]
 })
 export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStorage[]> {
+  // Whether this control is enabled or not (affects edit mode)
   @Input() enabled: boolean = true;
+  // Whether to run validation per row
+  @Input() shouldValidate: boolean = false;
   rows = new FormArray([]);
   registerOnChange(fn: any) { this.onChange = fn; }
   registerOnTouched(fn: any) { this.onTouched = fn; }
@@ -57,6 +60,7 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
   private addInternal(value: OffsiteStorage) {
     const group = this.fb.group({
       id: [value.id],
+      name: [value.name, [Validators.required, Validators.maxLength(250)]],
       street1: [value.street1, [Validators.required]],
       city: [value.city, [Validators.required]],
       province: ['BC', [Validators.required]],

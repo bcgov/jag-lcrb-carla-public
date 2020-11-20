@@ -26,8 +26,8 @@
     <section class="padded-section content-bottom">
       <p>Please provide the following information for each of your off-site storage facilities, including storage unit numbers if applicable:</p>
       <app-field [valid]="!showValidationMessages || form.get('offsiteStorageLocations').valid"
-                errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
-        <app-offsite-table formControlName="offsiteStorageLocations" [enabled]="true"></app-offsite-table>
+        errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+        <app-offsite-table formControlName="offsiteStorageLocations" [enabled]="true" [shouldValidate]="showValidationMessages"></app-offsite-table>
       </app-field>
     </section>
 
@@ -39,8 +39,7 @@
       </p>
       <div>
         <app-field [valid]="!showValidationMessages || form.get('agreement').valid"
-          errorMessage="Please affirm that all of the information provided is true and complete."
-          [showChevrons]="false">
+          errorMessage="Please affirm that all of the information provided is true and complete." [showChevrons]="false">
           <mat-checkbox formControlName="agreement">I understand and affirm that all of the information provided is true and complete.</mat-checkbox>
         </app-field>
       </div>
