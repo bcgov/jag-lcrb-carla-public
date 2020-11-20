@@ -21,7 +21,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                     Status = (OffsiteStorageStatus?)item.Statuscode,
                     Street1 = item.AdoxioStreet1,
                     City = item.AdoxioCity,
-                    PostalCode = item.AdoxioPostalcode
+                    PostalCode = item.AdoxioPostalcode,
+                    DateAdded = item.AdoxioDateadded,
+                    DateRemoved = item.AdoxioDateremoved
                 };
 
                 if (item.AdoxioOffsitestorageid != null)
@@ -44,6 +46,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioStreet1 = from.Street1;
             to.AdoxioCity = from.City;
             to.AdoxioPostalcode = from.PostalCode;
+            to.AdoxioDateadded = from.DateAdded;
+            to.AdoxioDateremoved = from.DateRemoved;
         }
     }
 }
