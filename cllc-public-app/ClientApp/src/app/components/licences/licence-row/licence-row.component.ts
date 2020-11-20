@@ -155,6 +155,23 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return true;
   }
 
+  /**
+   * The off-site storage feature is available for all *liquor* licences except for:
+   *   - Catering
+   *   - UBrew/UVin
+   *   - Agent
+   * It should not be available for any Cannabis licence type.
+   */
+  showManageOffsiteStorage(item: ApplicationLicenseSummary) {
+    const exclusions = [ApplicationTypeNames.Catering, ApplicationTypeNames.UBV] as string[];
+    const result = this.isActive(item)
+      && this.actionsVisible(item)
+      && item.licenceTypeCategory === 'Liquor'
+      && !exclusions.includes(item.licenceTypeName)
+      && !item.isOperated;
+    return result;
+  }
+
   showLicenceTransferAction(item: ApplicationLicenseSummary) {
     const result = this.isActive(item)
       && !item.transferRequested
@@ -162,7 +179,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       && item.licenceTypeName !== 'Section 119 Authorization';
     return result;
   }
-
 
   showAddOrChangeThirdPartyOperator(item: ApplicationLicenseSummary): boolean {
     const result = this.isActive(item)
