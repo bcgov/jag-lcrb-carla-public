@@ -108,16 +108,21 @@ namespace bdd_tests
             uiSignatureAgreement.Click();
         }
 
-        [And(@"I remove some rows from the offsite storage application")]
+
+        [And(@"I remove a row from the offsite storage application")]
         public void RemoveOffsiteStorageRows()
         {
-            // TODO
+            // click on the trashbin icon for the second row
+            NgWebElement uiTrash = ngDriver.FindElement(By.CssSelector(".offsite-storage .ng-star-inserted:nth-child(3) .fa-trash"));
+            uiTrash.Click();
         }
+
 
         [And(@"the updated offsite storage application is correct")]
         public void CorrectOffsiteStorageRecords()
         {
-            // TODO
+            // confirm that second row is no longer displayed
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'LCRB2'))]")).Displayed);
         }
     }
 }
