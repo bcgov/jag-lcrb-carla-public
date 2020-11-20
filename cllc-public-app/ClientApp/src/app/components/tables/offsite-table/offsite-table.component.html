@@ -10,12 +10,7 @@
   <tr *ngFor="let row of rows.controls; let i=index" [ngClass]="{ 'text-grey': readonly(i) }">
     <ng-container [formGroup]="row">
       <td><span class="bold">{{ offsiteStorageStatus[row.value.status] }}</span></td>
-      <td>
-        <input type="text" formControlName="name" placeholder="Enter a name for this location" [readonly]="readonly(i)"/>
-        <!-- <app-field class="h-100" [valid]="!shouldValidate || !row.get('name').value || row.get('name').valid"
-          errorMessage="Cannot exceed 250 characters" [showChevrons]="false" [isFullWidth]="true">
-        </app-field> -->
-      </td>
+      <td><input type="text" formControlName="name" placeholder="Enter a name for this location" [readonly]="readonly(i)"/></td>
       <td><input type="text" formControlName="street1" placeholder="Enter Address" [readonly]="readonly(i)"/></td>
       <td><input type="text" formControlName="city" placeholder="Enter City" [readonly]="readonly(i)"/></td>
       <td><input type="text" formControlName="postalCode" placeholder="Enter Postal Code" [readonly]="readonly(i)"/></td>
