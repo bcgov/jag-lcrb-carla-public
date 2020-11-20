@@ -15,7 +15,7 @@
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -34,7 +34,7 @@
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -53,7 +53,7 @@
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -72,7 +72,7 @@
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -91,7 +91,7 @@
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
