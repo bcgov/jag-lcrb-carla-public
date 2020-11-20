@@ -24,13 +24,16 @@ import { BaseControlValueAccessor } from '../BaseControlValueAccessor';
 export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStorage[]> {
   // Whether this control is enabled or not (affects edit mode)
   @Input() enabled: boolean = true;
+
   // Whether to run validation per row
   @Input() shouldValidate: boolean = false;
+
   rows = new FormArray([]);
+  offsiteStorageStatus = OffsiteStorageStatus;
+  validationMessages: string[] = [];
+
   registerOnChange(fn: any) { this.onChange = fn; }
   registerOnTouched(fn: any) { this.onTouched = fn; }
-
-  offsiteStorageStatus = OffsiteStorageStatus;
 
   constructor(private fb: FormBuilder) {
     super();
@@ -38,6 +41,10 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
       this.onChange(val);
       this.value = val;
     });
+  }
+
+  get showErrorSection(): boolean {
+    return this.enabled && this.shouldValidate && this.validationMessages.length > 0;
   }
 
   writeValue(array: OffsiteStorage[]) {
@@ -91,17 +98,43 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
     }
   }
 
-  validate({ value }: FormControl) {
-    let isNotValid = false;
-    for (const row of this.rows.controls) {
-      if (row.invalid) {
-        isNotValid = true;
-      }
-    }
-    return isNotValid && { invalid: true };
+  readonly(index: number): boolean {
+    return !this.enabled || this.rows.at(index).get('status').value === this.offsiteStorageStatus.Removed;
   }
 
-  canEdit(index: number): boolean {
-    return this.enabled && this.rows.at(index).get('status').value !== this.offsiteStorageStatus.Removed;
+  validate({ value }: FormControl) {
+    let invalid = false;
+    for (const row of this.rows.controls) {
+      if (row.invalid) {
+        invalid = true;
+      }
+    }
+    this.validationMessages = [...new Set<string>(this.listControlsWithErrors(this.rows))];
+    return invalid && { invalid: true };
+  }
+
+  private listControlsWithErrors(form: FormGroup | FormArray): string[] {
+    let errors = [];
+    if (form instanceof FormGroup || form instanceof FormArray) {
+      for (const c in form.controls) {
+        const control = form.get(c);
+
+        if (control.valid || control.status === 'DISABLED') {
+          continue;  // skip valid fields
+        }
+
+        if (control instanceof FormGroup || control instanceof FormArray) {
+          errors = [...errors, ...this.listControlsWithErrors(control)];
+        } else {
+          if (control.errors?.required) {
+            errors.push('All fields are required');
+          }
+          if (control.errors?.maxlength) {
+            errors.push('Location name cannot exceed 250 characters');
+          }
+        }
+      }
+    }
+    return errors;
   }
 }
