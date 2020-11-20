@@ -60,18 +60,25 @@ namespace bdd_tests
             NgWebElement uiPostalCode1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='offsiteStorageLocations'] input[formcontrolname='postalCode']"));
             uiPostalCode1.SendKeys(postal1);
 
-            /* TODO
+            // open second row
+            NgWebElement uiSecondRow = ngDriver.FindElement(By.XPath("(//button[@type='button'])[3]"));
+            uiSecondRow.Click();
+
             // enter street 2
-            NgWebElement uiStreet2 = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiStreet2 = ngDriver.FindElement(By.XPath(""));
             uiStreet2.SendKeys(street2);
 
             // enter city 2
-            NgWebElement uiCity2 = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiCity2 = ngDriver.FindElement(By.XPath(""));
             uiCity2.SendKeys(city2);
 
             // enter postal code 2
-            NgWebElement uiPostalCode2 = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiPostalCode2 = ngDriver.FindElement(By.XPath(""));
             uiPostalCode2.SendKeys(postal2);
+
+            // open third row
+            NgWebElement uiThirdRow = ngDriver.FindElement(By.XPath("(//button[@type='button'])[4]"));
+            uiThirdRow.Click();
 
             // enter street 3
             NgWebElement uiStreet3 = ngDriver.FindElement(By.CssSelector(""));
@@ -84,7 +91,6 @@ namespace bdd_tests
             // enter postal code 3
             NgWebElement uiPostalCode3 = ngDriver.FindElement(By.CssSelector(""));
             uiPostalCode3.SendKeys(postal3);
-            */
         }
     }
 }
