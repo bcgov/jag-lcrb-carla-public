@@ -73,7 +73,7 @@ namespace bdd_tests
             string fieldValueEstablishmentParcelId = uiEstablishmentParcelId.GetProperty("value");
             Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentParcelId));
 
-            string licensee = "GunderCorp TestBusiness";
+            string licensee = "GunderCorp";
 
             // search for the proposed licensee
             NgWebElement uiProposedLicensee = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));

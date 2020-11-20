@@ -82,7 +82,7 @@ namespace bdd_tests
             Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentParcelId));
 
             // create test data
-            string thirdparty = "GunderCorp TestBusiness";
+            string thirdparty = "GunderCorp";
 
             // search for the proposed licensee
             NgWebElement uiThirdPartyOperator = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));
