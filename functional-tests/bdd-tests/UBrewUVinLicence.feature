@@ -198,6 +198,8 @@ Scenario: Partnership UBrew / UVin Application Third Party Operator
     And I pay the licensing fee for UBrew / UVin
     And I click on the Licences tab
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
@@ -221,6 +223,8 @@ Scenario: Private Corporation UBrew / UVin Application Third Party Operator
     And I pay the licensing fee for UBrew / UVin
     And I click on the Licences tab
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
@@ -244,6 +248,8 @@ Scenario: Public Corporation UBrew / UVin Application Third Party Operator
     And I pay the licensing fee for UBrew / UVin
     And I click on the Licences tab
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
@@ -267,6 +273,8 @@ Scenario: Sole Proprietorship UBrew / UVin Application Third Party Operator
     And I pay the licensing fee for UBrew / UVin
     And I click on the Licences tab
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
