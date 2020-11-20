@@ -17,6 +17,8 @@ Scenario: Winery Third Party Operator
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
@@ -35,6 +37,8 @@ Scenario: Brewery Third Party Operator
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
@@ -53,6 +57,8 @@ Scenario: Distillery Third Party Operator
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
@@ -71,5 +77,7 @@ Scenario: Co-packer Third Party Operator
     And the application is approved
     And I pay the licensing fee for a Manufacturer application
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
