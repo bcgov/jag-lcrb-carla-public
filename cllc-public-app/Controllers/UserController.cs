@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using Gov.Lclb.Cllb.Public.Models;
+using System;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -44,6 +46,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             user.businessname = userSettings.BusinessLegalName;
             user.name = userSettings.UserDisplayName;
             user.UserType = userSettings.UserType;
+
+            // if Authenticated User is null, try and fetch it.
+
+            if (userSettings.AuthenticatedUser == null)
+            {
+                try
+                {
+                    userSettings.AuthenticatedUser = _dynamicsClient.GetActiveUserBySmGuid(userSettings.SiteMinderGuid);
+                    if (userSettings.AuthenticatedUser == null)
+                    {
+                        userSettings.IsNewUserRegistration = true;
+                    }
+                }
+                catch (Exception)
+                {
+                    userSettings.IsNewUserRegistration = true;
+                }
+            }
+
 
             if (userSettings.IsNewUserRegistration)
             {
