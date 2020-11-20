@@ -41,7 +41,7 @@ Scenario: Add and Remove Rows Offsite Storage Private Corporation
     And I click on the Licences tab
     And I click on the link for Manage Off-Site Storage
     And I complete the offsite storage application
-    And I remove some rows from the offsite storage application
+    And I remove a row from the offsite storage application
     And the updated offsite storage application is correct
     And I click on the Submit button
     # Confirm the expected result
