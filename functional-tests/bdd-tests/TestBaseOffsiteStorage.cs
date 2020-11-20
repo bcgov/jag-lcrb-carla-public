@@ -28,25 +28,28 @@ namespace bdd_tests
             */
 
             // create test data
+            string location1 = "LCRB1";
             string street1 = "645 Tyee Road";
             string city1 = "Victoria";
             string postal1 = "V9A6X5";
 
+            string location2 = "LCRB2";
             string street2 = "645 Tyee St";
             string city2 = "Duncan";
             string postal2 = "V9L1W4";
 
+            string location3 = "LCRB3";
             string street3 = "645 Tyee Road";
             string city3 = "Umpqua";
             string postal3 = "97486";
 
-            // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            uiSignatureAgreement.Click();
-
             // click on Add Additional Storage button
             NgWebElement uiOffsiteStorageLocations = ngDriver.FindElement(By.CssSelector("[formcontrolname='offsiteStorageLocations'] button[type='button']"));
             uiOffsiteStorageLocations.Click();
+
+            // enter location 1
+            NgWebElement uiLocation1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='offsiteStorageLocations'] input[formcontrolname='name']"));
+            uiLocation1.SendKeys(location1);
 
             // enter street 1
             NgWebElement uiStreet1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='offsiteStorageLocations'] input[formcontrolname='street1']"));
@@ -61,8 +64,12 @@ namespace bdd_tests
             uiPostalCode1.SendKeys(postal1);
 
             // open second row
-            NgWebElement uiSecondRow = ngDriver.FindElement(By.XPath("(//button[@type='button'])[3]"));
+            NgWebElement uiSecondRow = ngDriver.FindElement(By.CssSelector("[formcontrolname='offsiteStorageLocations'] button.btn-secondary"));
             uiSecondRow.Click();
+
+            // enter location 2
+            NgWebElement uiLocation2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[5]"));
+            uiLocation2.SendKeys(location2);
 
             // enter street 2
             NgWebElement uiStreet2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
@@ -77,8 +84,12 @@ namespace bdd_tests
             uiPostalCode2.SendKeys(postal2);
 
             // open third row
-            NgWebElement uiThirdRow = ngDriver.FindElement(By.XPath("(//button[@type='button'])[4]"));
+            NgWebElement uiThirdRow = ngDriver.FindElement(By.CssSelector("[formcontrolname='offsiteStorageLocations'] button.btn-secondary"));
             uiThirdRow.Click();
+
+            // enter location 3
+            NgWebElement uiLocation3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+            uiLocation3.SendKeys(location3);
 
             // enter street 3
             NgWebElement uiStreet3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
@@ -91,6 +102,10 @@ namespace bdd_tests
             // enter postal code 3
             NgWebElement uiPostalCode3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
             uiPostalCode3.SendKeys(postal3);
+
+            // click on the signature agreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiSignatureAgreement.Click();
         }
 
         [And(@"I remove some rows from the offsite storage application")]
