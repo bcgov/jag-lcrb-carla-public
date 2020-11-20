@@ -82,7 +82,7 @@ namespace bdd_tests
             Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentParcelId));
 
             // create test data
-            string thirdparty = "GunderCorp TestBusiness";
+            string thirdparty = "GunderCorp";
 
             // search for the proposed licensee
             NgWebElement uiThirdPartyOperator = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));
@@ -132,8 +132,25 @@ namespace bdd_tests
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
 
+            ngDriver.Navigate().Refresh();
+
             // confirm that the application has been initiated
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
+        }
+
+        [And(@"I cancel the third party operator application")]
+        public void CancelThirdPartyOperator()
+        {
+            /* 
+            Page Title: Cancel Third Party Operator Application
+            */
+
+            // click on agreement checkbox
+            NgWebElement uiTransferConsent = ngDriver.FindElement(By.CssSelector("input[formcontrolname='transferConsent'][type='checkbox']"));
+            uiTransferConsent.Click();
+
+            // click on Cancel Third Party Application button
+            ClickOnSubmitButton();
         }
     }
 }
