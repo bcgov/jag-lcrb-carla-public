@@ -30,7 +30,7 @@ Scenario: Catering Partnership Personnel Email Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a partnership
     And the account is deleted
@@ -48,7 +48,7 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a private corporation
     And the account is deleted
@@ -66,7 +66,7 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a public corporation
     And the account is deleted
@@ -84,7 +84,7 @@ Scenario: Catering Society Personnel Email Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a society
     And the account is deleted
@@ -102,7 +102,7 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a sole proprietorship
     And the account is deleted

@@ -15,7 +15,7 @@ Scenario: Partnership CRS Personnel Email Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I click on the link for Dashboard
     And I change a personnel email address for a partnership
     And the account is deleted
@@ -33,7 +33,7 @@ Scenario: Private Corporation CRS Personnel Email Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a private corporation
     And the account is deleted
@@ -51,7 +51,7 @@ Scenario: Public Corporation CRS Personnel Email Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I click on the link for Dashboard
     And I change a personnel email address for a public corporation
     And the account is deleted
@@ -69,7 +69,7 @@ Scenario: Society CRS Personnel Email Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I click on the link for Dashboard
     And I change a personnel email address for a society
     And the account is deleted
@@ -87,7 +87,7 @@ Scenario: Sole Proprietorship CRS Personnel Email Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a sole proprietorship
     And the account is deleted

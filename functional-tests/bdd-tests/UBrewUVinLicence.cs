@@ -114,7 +114,7 @@ Scenario: Partnership UBrew / UVin Application Transfer Licence
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I request a transfer of ownership
     And the account is deleted
@@ -137,7 +137,7 @@ Scenario: Private Corporation UBrew / UVin Application Transfer Licence
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I request a transfer of ownership
     And the account is deleted
@@ -160,7 +160,7 @@ Scenario: Public Corporation UBrew / UVin Application Transfer Licence
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee
     And I click on the Licences tab
     And I request a transfer of ownership
     And the account is deleted
@@ -183,7 +183,7 @@ Scenario: Sole Proprietorship UBrew / UVin Application Transfer Licence
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee
     And I click on the Licences tab
     And I request a transfer of ownership
     And the account is deleted
@@ -210,7 +210,7 @@ Scenario: Partnership UBrew / UVin Application Third Party Operator
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
@@ -235,7 +235,7 @@ Scenario: Private Corporation UBrew / UVin Application Third Party Operator
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
@@ -260,7 +260,7 @@ Scenario: Public Corporation UBrew / UVin Application Third Party Operator
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee
     And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
@@ -285,7 +285,7 @@ Scenario: Sole Proprietorship UBrew / UVin Application Third Party Operator
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
@@ -314,7 +314,7 @@ Scenario: Partnership UBrew / UVin Application Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I request a valid store name or branding change for UBrew
     And I click on the Dashboard tab
@@ -339,7 +339,7 @@ Scenario: Private Corporation UBrew / UVin Application Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I request a valid store name or branding change for UBrew
     And I click on the Dashboard tab
@@ -364,7 +364,7 @@ Scenario: Public Corporation UBrew / UVin Application Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee
     And I click on the Licences tab
     And I request a valid store name or branding change for UBrew
     And I click on the Dashboard tab
@@ -389,7 +389,7 @@ Scenario: Sole Proprietorship UBrew / UVin Application Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for UBrew / UVin
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I request a valid store name or branding change for UBrew
     And I click on the Dashboard tab
