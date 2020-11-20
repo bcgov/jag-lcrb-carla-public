@@ -3,7 +3,7 @@
     I want to manage offsite storage on the Licences & Authorizations tab
 
 @e2e @privatecorporation @offsitestorage
-Scenario: Private Corporation Manage Offsite Storage
+Scenario: Manage Offsite Storage Private Corporation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

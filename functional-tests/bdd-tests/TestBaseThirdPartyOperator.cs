@@ -132,6 +132,8 @@ namespace bdd_tests
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
 
+            ngDriver.Navigate().Refresh();
+
             // confirm that the application has been initiated
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
         }
