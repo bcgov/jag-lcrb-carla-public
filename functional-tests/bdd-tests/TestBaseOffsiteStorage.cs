@@ -92,5 +92,17 @@ namespace bdd_tests
             NgWebElement uiPostalCode3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[12]"));
             uiPostalCode3.SendKeys(postal3);
         }
+
+        [And(@"I remove some rows from the offsite storage application")]
+        public void RemoveOffsiteStorageRows()
+        {
+            // TODO
+        }
+
+        [And(@"the updated offsite storage application is correct")]
+        public void CorrectOffsiteStorageRecords()
+        {
+            // TODO
+        }
     }
 }
