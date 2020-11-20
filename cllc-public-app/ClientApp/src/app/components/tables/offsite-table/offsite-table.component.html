@@ -1,6 +1,7 @@
 <table class="capacity">
   <thead *ngIf="rows.controls.length > 0">
     <th style="width: 100px">Status</th>
+    <th>Location Name</th>
     <th>Address</th>
     <th>City</th>
     <th style="width: 200px">Postal Code</th>
@@ -9,6 +10,12 @@
   <tr *ngFor="let row of rows.controls; let i=index" [ngClass]="{ 'text-grey': !canEdit(i) }">
     <ng-container [formGroup]="row">
       <td><span class="bold">{{ offsiteStorageStatus[row.value.status] }}</span></td>
+      <td>
+        <app-field [valid]="!shouldValidate || !row.get('name').value || row.get('name').valid"
+          errorMessage="Cannot exceed 250 characters" [showChevrons]="false" [isFullWidth]="true">
+          <input type="text" formControlName="name" placeholder="Enter a name for this location" [readonly]="!canEdit(i)"/>
+        </app-field>
+      </td>
       <td><input type="text" formControlName="street1" placeholder="Enter Address" [readonly]="!canEdit(i)"/></td>
       <td><input type="text" formControlName="city" placeholder="Enter City" [readonly]="!canEdit(i)"/></td>
       <td><input type="text" formControlName="postalCode" placeholder="Enter Postal Code" [readonly]="!canEdit(i)"/></td>
@@ -21,6 +28,7 @@
         <i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Additional Storage
       </button>
     </td>
+    <td></td>
     <td></td>
     <td></td>
     <td></td>
