@@ -246,10 +246,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var dynamicsOffsiteStorage = new MicrosoftDynamicsCRMadoxioOffsitestorage
             {
                 LicenceODataBind = licenceUri,
-                Statuscode = (int?)OffsiteStorageStatus.Added,
-                AdoxioDateadded = DateTimeOffset.Now,
+                Statuscode = (int?)OffsiteStorageStatus.Added
             };
             dynamicsOffsiteStorage.CopyValues(item);
+            dynamicsOffsiteStorage.AdoxioDateadded = DateTimeOffset.Now;
             _dynamicsClient.Offsitestorages.Create(dynamicsOffsiteStorage);
         }
 
