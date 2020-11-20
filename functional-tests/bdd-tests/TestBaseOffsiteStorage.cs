@@ -65,15 +65,15 @@ namespace bdd_tests
             uiSecondRow.Click();
 
             // enter street 2
-            NgWebElement uiStreet2 = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiStreet2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[6]"));
             uiStreet2.SendKeys(street2);
 
             // enter city 2
-            NgWebElement uiCity2 = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiCity2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[7]"));
             uiCity2.SendKeys(city2);
 
             // enter postal code 2
-            NgWebElement uiPostalCode2 = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiPostalCode2 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[8]"));
             uiPostalCode2.SendKeys(postal2);
 
             // open third row
@@ -81,15 +81,15 @@ namespace bdd_tests
             uiThirdRow.Click();
 
             // enter street 3
-            NgWebElement uiStreet3 = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiStreet3 = ngDriver.FindElement(By.CssSelector("(//input[@type='text'])[9]"));
             uiStreet3.SendKeys(street3);
 
             // enter city 3
-            NgWebElement uiCity3 = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiCity3 = ngDriver.FindElement(By.CssSelector("(//input[@type='text'])[10]"));
             uiCity3.SendKeys(city3);
 
             // enter postal code 3
-            NgWebElement uiPostalCode3 = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiPostalCode3 = ngDriver.FindElement(By.CssSelector("(//input[@type='text'])[11]"));
             uiPostalCode3.SendKeys(postal3);
         }
     }
