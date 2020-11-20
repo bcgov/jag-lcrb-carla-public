@@ -1,5 +1,5 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validators, AbstractControl } from '@angular/forms';
 import { OffsiteStorage, OffsiteStorageStatus } from '@models/offsite-storage.model';
 import { BaseControlValueAccessor } from '../BaseControlValueAccessor';
 
@@ -89,12 +89,25 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
 
   removeRow(index: number) {
     if (index >= 0 && index < this.rows.length) {
+      this.removeInternal(index);
+      this.writeValue(this.rows.value);
+    }
+  }
+
+  private removeInternal(index: number) {
+    const row = this.rows.at(index);
+    const obj = row.value as OffsiteStorage;
+
+    // Existing location - flag it as "removed" in Dynamics
+    if (obj.id) {
       const patchObj: Partial<OffsiteStorage> = {
         status: OffsiteStorageStatus.Removed,
         dateRemoved: new Date()
       };
-      this.rows.at(index).patchValue(patchObj);
-      this.writeValue(this.rows.value);
+      row.patchValue(patchObj);
+    } else {
+      // This location has never been submitted. We can safely remove the whole row client-side.
+      this.rows.removeAt(index);
     }
   }
 
