@@ -11,5 +11,7 @@ export class OffsiteStorage {
   city: string;
   province: string;
   postalCode: string;
-  status: OffsiteStorageStatus;
+  status?: OffsiteStorageStatus;
+  dateAdded?: Date;
+  dateRemoved?: Date;
 }

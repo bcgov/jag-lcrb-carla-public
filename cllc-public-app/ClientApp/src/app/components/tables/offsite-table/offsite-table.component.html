@@ -6,18 +6,18 @@
     <th style="width: 200px">Postal Code</th>
     <th style="width: 45px"></th>
   </thead>
-  <tr *ngFor="let row of rows.controls; let i=index">
+  <tr *ngFor="let row of rows.controls; let i=index" [ngClass]="{ 'text-grey': !canEdit(i) }">
     <ng-container [formGroup]="row">
       <td><span class="bold">{{ offsiteStorageStatus[row.value.status] }}</span></td>
-      <td><input type="text" formControlName="street1" placeholder="Enter Address" [readonly]="!enabled"/></td>
-      <td><input type="text" formControlName="city" placeholder="Enter City" [readonly]="!enabled"/></td>
-      <td><input type="text" formControlName="postalCode" placeholder="Enter Postal Code" [readonly]="!enabled"/></td>
-      <td><button type="button" (click)="removeRow(i)" class="btn-clear" *ngIf="canRemove(i)"><i class="fa fa-trash" style="color: #ee220e"></i></button></td>
+      <td><input type="text" formControlName="street1" placeholder="Enter Address" [readonly]="!canEdit(i)"/></td>
+      <td><input type="text" formControlName="city" placeholder="Enter City" [readonly]="!canEdit(i)"/></td>
+      <td><input type="text" formControlName="postalCode" placeholder="Enter Postal Code" [readonly]="!canEdit(i)"/></td>
+      <td><button type="button" (click)="removeRow(i)" class="btn-clear" *ngIf="canEdit(i)"><i class="fa fa-trash" style="color: #ee220e"></i></button></td>
     </ng-container>
   </tr>
   <tr>
-    <td [colSpan]="2">
-      <button type="button" (click)="addRow()" class="btn-clear" style="height: 100%;" *ngIf="enabled">
+    <td [colSpan]="2" class="pt-3 text-left">
+      <button type="button" (click)="addRow()" class="btn btn-secondary" style="height: 100%;" *ngIf="enabled">
         <i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Additional Storage
       </button>
     </td>

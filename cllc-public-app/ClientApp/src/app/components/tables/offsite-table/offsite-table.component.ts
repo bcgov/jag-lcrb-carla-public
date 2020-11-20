@@ -31,7 +31,6 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
 
   constructor(private fb: FormBuilder) {
     super();
-
     this.rows.valueChanges.subscribe(val => {
       this.onChange(val);
       this.value = val;
@@ -62,7 +61,9 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
       city: [value.city, [Validators.required]],
       province: ['BC', [Validators.required]],
       postalCode: [value.postalCode, [Validators.required]],
-      status: [value.status]
+      status: [value.status],
+      dateAdded: [value.dateAdded],
+      dateRemoved: [value.dateRemoved]
     });
 
     this.rows.push(group);
@@ -71,12 +72,17 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
   addRow() {
     const newRow: OffsiteStorage = new OffsiteStorage();
     newRow.status = OffsiteStorageStatus.Active;
+    newRow.dateAdded = new Date();
     this.writeValue([...this.rows.value, newRow]);
   }
 
   removeRow(index: number) {
     if (index >= 0 && index < this.rows.length) {
-      this.rows.at(index).patchValue({ status: OffsiteStorageStatus.Removed });
+      const patchObj: Partial<OffsiteStorage> = {
+        status: OffsiteStorageStatus.Removed,
+        dateRemoved: new Date()
+      };
+      this.rows.at(index).patchValue(patchObj);
       this.writeValue(this.rows.value);
     }
   }
@@ -91,7 +97,7 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
     return isNotValid && { invalid: true };
   }
 
-  canRemove(index: number): boolean {
+  canEdit(index: number): boolean {
     return this.enabled && this.rows.at(index).get('status').value !== this.offsiteStorageStatus.Removed;
   }
 }
