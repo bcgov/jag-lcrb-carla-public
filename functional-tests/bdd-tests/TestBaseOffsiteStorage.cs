@@ -81,15 +81,15 @@ namespace bdd_tests
             uiThirdRow.Click();
 
             // enter street 3
-            NgWebElement uiStreet3 = ngDriver.FindElement(By.CssSelector("(//input[@type='text'])[9]"));
+            NgWebElement uiStreet3 = ngDriver.FindElement(By.CssSelector("(//input[@type='text'])[10]"));
             uiStreet3.SendKeys(street3);
 
             // enter city 3
-            NgWebElement uiCity3 = ngDriver.FindElement(By.CssSelector("(//input[@type='text'])[10]"));
+            NgWebElement uiCity3 = ngDriver.FindElement(By.CssSelector("(//input[@type='text'])[11]"));
             uiCity3.SendKeys(city3);
 
             // enter postal code 3
-            NgWebElement uiPostalCode3 = ngDriver.FindElement(By.CssSelector("(//input[@type='text'])[11]"));
+            NgWebElement uiPostalCode3 = ngDriver.FindElement(By.CssSelector("(//input[@type='text'])[12]"));
             uiPostalCode3.SendKeys(postal3);
         }
     }
