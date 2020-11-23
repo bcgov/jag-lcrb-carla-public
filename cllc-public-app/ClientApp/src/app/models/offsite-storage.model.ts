@@ -1,5 +1,5 @@
 export enum OffsiteStorageStatus {
-  Added = 1,
+  Active = 1,
   Removed = 845280000,
 }
 
@@ -11,5 +11,7 @@ export class OffsiteStorage {
   city: string;
   province: string;
   postalCode: string;
-  status: OffsiteStorageStatus;
+  status?: OffsiteStorageStatus;
+  dateAdded?: Date;
+  dateRemoved?: Date;
 }
