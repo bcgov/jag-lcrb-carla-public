@@ -30,7 +30,7 @@ Scenario: Partnership CRS Personnel Name Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I request a personnel name change for a partnership
     And I click on the link for Dashboard
@@ -50,7 +50,7 @@ Scenario: Private Corporation CRS Personnel Name Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
     And I click on the link for Dashboard
@@ -70,7 +70,7 @@ Scenario: Public Corporation CRS Personnel Name Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I request a personnel name change for a public corporation
     And I click on the link for Dashboard
@@ -90,7 +90,7 @@ Scenario: Society CRS Personnel Name Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I request a personnel name change for a society
     And I click on the link for Dashboard
@@ -110,7 +110,7 @@ Scenario: Sole Proprietorship CRS Personnel Name Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I click on the link for Dashboard
     And I request a personnel name change for a sole proprietorship
     And I click on the link for Dashboard
