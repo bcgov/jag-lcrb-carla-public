@@ -25,5 +25,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string Province { get; set; }
         public string PostalCode { get; set; }
         public OffsiteStorageStatus? Status { get; set; }
+        public DateTimeOffset? DateAdded { get; set; }
+        public DateTimeOffset? DateRemoved { get; set; }
     }
 }
