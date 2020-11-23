@@ -103,8 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool CurrentUserHasAccessToApplicationOwnedBy(string accountId)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future

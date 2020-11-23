@@ -15,7 +15,7 @@ Scenario: Winery Structural Alterations
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request structural alterations to an approved lounge or special events area
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -35,7 +35,7 @@ Scenario: Brewery Structural Alterations
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request structural alterations to an approved lounge or special events area
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -55,7 +55,7 @@ Scenario: Distillery Structural Alterations
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request structural alterations to an approved lounge or special events area
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -75,7 +75,7 @@ Scenario: Co-packer Structural Alterations
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request structural alterations to an approved lounge or special events area
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
