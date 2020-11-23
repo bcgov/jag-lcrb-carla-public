@@ -61,8 +61,8 @@ namespace bdd_tests
             string returnToDashboard = "Return to Dashboard";
 
             // click on the pay first year licence fee link
-            var uiFirstYearLicenceFees = ngDriver.FindElements(By.LinkText(firstYearLicenceFee));
-            uiFirstYearLicenceFees[0].Click();
+            NgWebElement uiFirstYearLicenceFees = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
+            uiFirstYearLicenceFees.Click();
 
             // pay the licence fee
             MakePayment();
