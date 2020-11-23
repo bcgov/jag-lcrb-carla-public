@@ -98,7 +98,7 @@ namespace bdd_tests
             uiThirdRow.Click();
 
             // enter location 3
-            NgWebElement uiLocation3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[10]"));
+            NgWebElement uiLocation3 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[9]"));
             uiLocation3.SendKeys(location3);
 
             // enter street 3
@@ -118,19 +118,19 @@ namespace bdd_tests
             uiFourthRow.Click();
 
             // enter location 4
-            NgWebElement uiLocation4 = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiLocation4 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[13]"));
             uiLocation4.SendKeys(location4);
 
             // enter street 4
-            NgWebElement uiStreet4 = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiStreet4 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[14]"));
             uiStreet4.SendKeys(street4);
 
             // enter city 4
-            NgWebElement uiCity4 = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiCity4 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[15]"));
             uiCity4.SendKeys(city4);
 
             // enter postal code 4
-            NgWebElement uiPostalCode4 = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiPostalCode4 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[16]"));
             uiPostalCode4.SendKeys(postal4);
 
             // open fifth row
@@ -138,19 +138,19 @@ namespace bdd_tests
             uiFifthRow.Click();
 
             // enter location 5
-            NgWebElement uiLocation5 = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiLocation5 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
             uiLocation5.SendKeys(location5);
 
             // enter street 5
-            NgWebElement uiStreet5 = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiStreet5 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
             uiStreet5.SendKeys(street5);
 
             // enter city 5
-            NgWebElement uiCity5 = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiCity5 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
             uiCity5.SendKeys(city5);
 
             // enter postal code 5
-            NgWebElement uiPostalCode5 = ngDriver.FindElement(By.XPath(""));
+            NgWebElement uiPostalCode5 = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
             uiPostalCode5.SendKeys(postal5);
 
             // click on the signature agreement checkbox
