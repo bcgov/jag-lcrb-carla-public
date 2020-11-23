@@ -15,7 +15,7 @@ Scenario: Private Corporation Cannabis Licence PDF Verification
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I click on the Licences tab
     And I click on the link for Download Licence
     Then the correct Cannabis licence PDF is generated with terms and conditions and without endorsements or hours of sales
@@ -32,7 +32,7 @@ Scenario: Private Corporation Catering Licence PDF Verification
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee
     And I click on the Licences tab
     And I click on the link for Download Licence
     Then the correct Catering licence PDF is generated with terms and conditions and without endorsements or hours of sales

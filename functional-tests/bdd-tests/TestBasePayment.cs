@@ -49,7 +49,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"I pay the licensing fee for (.*)")]
+        [And(@"I pay the licensing fee")]
         public void PayLicenceFee()
         {
             /* 

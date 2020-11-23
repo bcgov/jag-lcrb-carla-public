@@ -30,7 +30,7 @@ Given I am logged in to the dashboard as a private corporation
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -57,7 +57,7 @@ Given I am logged in to the dashboard as a private corporation
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -84,7 +84,7 @@ Given I am logged in to the dashboard as a private corporation
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -111,7 +111,7 @@ Given I am logged in to the dashboard as a private corporation
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved

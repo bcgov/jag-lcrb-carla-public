@@ -30,7 +30,7 @@ Scenario: Private Corporation Manufacturer Release
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Manufacturing
     And I click on the Licences tab
@@ -69,7 +69,7 @@ Scenario: Sole Proprietorship Manufacturer Release
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Manufacturing
     And I click on the Licences tab

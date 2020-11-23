@@ -30,7 +30,7 @@ Scenario: Winery Special Event Area Endorsement Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a special event area endorsement
     And the account is deleted
     Then I see the login page
@@ -48,7 +48,7 @@ Scenario: Brewery Special Event Area Endorsement Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a special event area endorsement
     And the account is deleted
     Then I see the login page
@@ -66,7 +66,7 @@ Scenario: Distillery Special Event Area Endorsement Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a special event area endorsement
     And the account is deleted
     Then I see the login page
@@ -84,7 +84,7 @@ Scenario: Co-packer Special Event Area Endorsement Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a special event area endorsement
     And the account is deleted
     Then I see the login page
