@@ -53,8 +53,15 @@ namespace bdd_tests
                 string leaderEmail = "leader0@privatecorp.com";
 
                 // open leader #0 form  
-                NgWebElement uiOpenLeaderForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leadership'][changetypesuffix='Leadership'] button"));
-                uiOpenLeaderForm.Click();
+                var uiOpenLeaderForm = ngDriver.FindElements(By.CssSelector("[addlabel='Add Leadership'][changetypesuffix='Leadership'] button"));
+                if (uiOpenLeaderForm.Count > 0)
+                {
+                    uiOpenLeaderForm[0].Click();
+                }
+                else
+                {
+                    throw new Exception($"Unable to Leadership button");
+                }
 
                 // enter leader #0 first name
                 NgWebElement uiLeaderFirst = ngDriver.FindElement(By.CssSelector("input[formControlName='firstNameNew']"));
