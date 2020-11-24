@@ -65,8 +65,11 @@ Scenario: Add Rows and Return to Offsite Storage Private Corporation
     And I complete the offsite storage application
     And I remove a row from the offsite storage application
     And the updated offsite storage application is correct for deletion
-    And I add and delete more rows to the offsite storage application
-    And the updated offsite storage application is correct for deletion and addition
     And I click on the Submit button
+    And I click on the link for Manage Off-Site Storage
+    And I add and delete more rows to the offsite storage application
+    And I click on the Submit button
+    And I click on the link for Manage Off-Site Storage
+    And the updated offsite storage application is correct for deletion and addition
     And the account is deleted
     Then I see the login page
