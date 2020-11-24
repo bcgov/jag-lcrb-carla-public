@@ -30,9 +30,11 @@ Scenario: Private Corporation Manufacturer Release
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee 
+    And I pay the licensing fee
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Manufacturing
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
@@ -72,6 +74,8 @@ Scenario: Sole Proprietorship Manufacturer Release
     And I pay the licensing fee 
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Manufacturing
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
