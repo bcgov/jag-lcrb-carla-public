@@ -52,8 +52,83 @@ namespace SepService.Controllers
 
             MicrosoftDynamicsCRMadoxioSpecialevent newRecord = new MicrosoftDynamicsCRMadoxioSpecialevent()
             {
-              
+                AdoxioCapacity = sol.Capacity,
+                AdoxioSpecialeventdescripton = sol.EventDescription,
+                AdoxioEventname = sol.EventName,
+                AdoxioSeplicencenumber = sol.SolLicenceNumber,
+                // applicant
+                AdoxioSpecialeventapplicant = sol.Applicant?.ApplicantName,
+                AdoxioSpecialeventapplicantemail = sol.Applicant?.EmailAddress,
+                AdoxioSpecialeventapplicantphone = sol.Applicant?.PhoneNumber,
+                // location
+                AdoxioSpecialeventstreet1 = sol.Applicant?.Address?.Address1,
+                AdoxioSpecialeventstreet2 = sol.Applicant?.Address?.Address2,
+                AdoxioSpecialeventcity = sol.Applicant?.Address?.City,
+                AdoxioSpecialeventpostalcode = sol.Applicant?.Address?.PostalCode,
+                AdoxioSpecialeventprovince = sol.Applicant?.Address?.Province,
+                // responsible individual
+                AdoxioResponsibleindividualfirstname = sol.ResponsibleIndividual?.FirstName,
+                AdoxioResponsibleindividuallastname = sol.ResponsibleIndividual?.LastName,
+                AdoxioResponsibleindividualmiddleinitial = sol.ResponsibleIndividual?.MiddleInitial,
+                AdoxioResponsibleindividualposition = sol.ResponsibleIndividual?.Position,
+                AdoxioResponsibleindividualsir = sol.ResponsibleIndividual?.SirNumber,
+                // tasting event
+                AdoxioTastingevent = sol.TastingEvent
             };
+
+            // event date
+            newRecord.AdoxioSpecialeventSchedule = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>();
+            newRecord.AdoxioSpecialeventSchedule.Add(new MicrosoftDynamicsCRMadoxioSpecialeventschedule()
+            {
+                AdoxioServicestart = sol.Location?.EventDate?.LiquorServiceStartTime,
+                AdoxioServiceend = sol.Location?.EventDate?.LiquorServiceEndTime,
+                AdoxioEventstart = sol.Location?.EventDate?.EventStartDateTime,
+                AdoxioEventend = sol.Location?.EventDate?.EventEndDateTime
+            });
+
+            // licensed area
+
+            if (!string.IsNullOrEmpty(sol.Location?.LocationDescription) || !string.IsNullOrEmpty(sol.Location?.LocationName))
+            {
+                newRecord.AdoxioSpecialeventLicencedarea = new List<MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea>();
+                var newItem = new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea()
+                {
+                    AdoxioDescription = sol.Location?.LocationDescription,
+                    AdoxioMinorpresent = sol.Location?.MinorPresent
+                };
+                if (sol.Location?.MaxGuests != null)
+                {
+                    newItem.AdoxioMaximumnumberofguests = sol.Location?.MaxGuests.ToString();
+                }
+                if (sol.Location?.NumberMinors != null)
+                {
+                    newItem.AdoxioNumberofminors = sol.Location?.NumberMinors.ToString();
+                }
+                // Setting - Indoor, Outdoor or Both
+
+
+                newRecord.AdoxioSpecialeventLicencedarea.Add(newItem);
+            }
+
+            // note
+            if (!string.IsNullOrEmpty(sol.SolNote))
+            {
+                newRecord.AdoxioSpecialeventSpecialeventnotes = new List<MicrosoftDynamicsCRMadoxioSpecialeventnote>();
+                newRecord.AdoxioSpecialeventSpecialeventnotes.Add(new MicrosoftDynamicsCRMadoxioSpecialeventnote()
+                {
+                    AdoxioNote = sol.SolNote
+                });
+            }
+
+            // terms and conditions
+            if (!string.IsNullOrEmpty(sol.TsAndCs))
+            {
+                newRecord.AdoxioSpecialeventSpecialeventtsacs = new List<MicrosoftDynamicsCRMadoxioSpecialeventtandc>();
+                newRecord.AdoxioSpecialeventSpecialeventtsacs.Add(new MicrosoftDynamicsCRMadoxioSpecialeventtandc()
+                {
+                    AdoxioTermsandcondition = sol.TsAndCs
+                });
+            }
 
             try
             {
