@@ -15,5 +15,6 @@ namespace SepService
         public string SolLicenceNumber { get; set; }
         public string SolNote { get; set; }
         public string TsAndCs { get; set; }
+        public bool TastingEvent { get; set; }
     }
 }

@@ -12,5 +12,7 @@ namespace SepService.ViewModels
         public string LocationDescription { get; set; }
         public string LocationName { get; set; }
         public int MaxGuests { get; set; }
+        public bool MinorPresent { get; set; }
+        public int? NumberMinors { get; set; }
     }
 }
