@@ -305,12 +305,33 @@ namespace bdd_tests
 
             if ((responses == "positive responses for a brewery") || (responses == "positive responses for a winery") || (responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
             {
+                string orderTotals = "233";
+                string confirmTotals = "233";
+                string volumeProduced = "5000";
+                string volumeDestroyed = "200";
+
+                // enter the order totals
+                NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
+                uiOrderTotals.SendKeys(orderTotals);
+
+                // re-enter the order totals
+                NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
+                uiOrderTotals2.SendKeys(confirmTotals);
+
                 if (responses == "positive responses for a winery")
                 {
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
                     uiIsManufacturedMinimum.Click();
                 }
+
+                // enter the volume produced
+                NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
+                uiVolumeProduced.SendKeys(volumeProduced);
+
+                // enter the volume destroyed
+                NgWebElement uiVolumeDestroyed = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeDestroyed']"));
+                uiVolumeDestroyed.SendKeys(volumeDestroyed);
 
                 // select 'Yes'
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
@@ -372,13 +393,34 @@ namespace bdd_tests
             }
 
             if ((responses == "negative responses for a brewery") || (responses == "negative responses for a winery") || (responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
-            { 
+            {
+                string orderTotals = "233";
+                string confirmTotals = "233";
+                string volumeProduced = "5000";
+                string volumeDestroyed = "200";
+
+                // enter the order totals
+                NgWebElement uiOrderTotals = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotals']"));
+                uiOrderTotals.SendKeys(orderTotals);
+
+                // re-enter the order totals
+                NgWebElement uiOrderTotals2 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='ldbOrderTotalsConfirm']"));
+                uiOrderTotals2.SendKeys(confirmTotals);
+
                 if (responses == "negative responses for a winery")
                 {
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
                     uiIsManufacturedMinimum.Click();
                 }
+
+                // enter the volume produced
+                NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
+                uiVolumeProduced.SendKeys(volumeProduced);
+
+                // enter the volume destroyed
+                NgWebElement uiVolumeDestroyed = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeDestroyed']"));
+                uiVolumeDestroyed.SendKeys(volumeDestroyed);
 
                 // select 'No'
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
