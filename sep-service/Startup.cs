@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Http;
 using HealthChecks.UI.Client;
 using Newtonsoft.Json;
 using System.Net.Mime;
+using Gov.Lclb.Cllb.Interfaces;
 
 namespace SepService
 {
@@ -42,6 +43,8 @@ namespace SepService
                 c.DescribeAllEnumsAsStrings();
                 c.ParameterFilter<AutoRestParameterFilter>();
             });
+
+            services.AddHttpClient<IDynamicsClient, DynamicsClient>();
 
             services.AddControllers();
 
@@ -87,6 +90,8 @@ namespace SepService
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
             });
+
+            
 
             // enable Splunk logger using Serilog
             if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
