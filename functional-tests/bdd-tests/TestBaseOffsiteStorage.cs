@@ -172,7 +172,7 @@ namespace bdd_tests
         public void AddDeleteMoreOffsiteStorageRows()
         {
             // create test data
-            string locationNew = "New";
+            string locationNew = "LCRB6";
             string streetNew = "123 New St";
             string cityNew = "Golden";
             string postalNew = "V0A 1H3";
@@ -181,24 +181,24 @@ namespace bdd_tests
             NgWebElement uiNewRow = ngDriver.FindElement(By.CssSelector("[formcontrolname='offsiteStorageLocations'] button.btn-secondary"));
             uiNewRow.Click();
 
-            // enter new location
-            NgWebElement uiLocationNew = ngDriver.FindElement(By.XPath(""));
+            // enter 6th location
+            NgWebElement uiLocationNew = ngDriver.FindElement(By.XPath("(//input[@type='text'])[17]"));
             uiLocationNew.SendKeys(locationNew);
 
-            // enter new street
-            NgWebElement uiStreetNew = ngDriver.FindElement(By.XPath(""));
+            // enter 6th street
+            NgWebElement uiStreetNew = ngDriver.FindElement(By.XPath("(//input[@type='text'])[18]"));
             uiStreetNew.SendKeys(streetNew);
 
-            // enter new city
-            NgWebElement uiCityNew = ngDriver.FindElement(By.XPath(""));
+            // enter 6th city
+            NgWebElement uiCityNew = ngDriver.FindElement(By.XPath("(//input[@type='text'])[19]"));
             uiCityNew.SendKeys(cityNew);
 
-            // enter new postal code
-            NgWebElement uiPostalCodeNew = ngDriver.FindElement(By.XPath(""));
+            // enter 6th postal code
+            NgWebElement uiPostalCodeNew = ngDriver.FindElement(By.XPath("(//input[@type='text'])[20]"));
             uiPostalCodeNew.SendKeys(postalNew);
 
-            // delete two pre-existing rows > status should change to 'Removed'
-            NgWebElement uiTrash = ngDriver.FindElement(By.CssSelector(".offsite-storage .ng-star-inserted:nth-child(3) .fa-trash"));
+            // delete two pre-existing rows
+            NgWebElement uiTrash = ngDriver.FindElement(By.CssSelector(".offsite-storage .ng-star-inserted:nth-child(4) .fa-trash"));
             uiTrash.Click();
 
             NgWebElement uiTrash2 = ngDriver.FindElement(By.CssSelector(".offsite-storage .ng-star-inserted:nth-child(3) .fa-trash"));
@@ -221,7 +221,11 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'LCRB2'))]")).Displayed);
 
                 // confirm that all expected rows are displayed
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LCRB1')]")).Displayed);
 
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LCRB5')]")).Displayed);
+
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LCRB6')]")).Displayed);
             }
         }
     }
