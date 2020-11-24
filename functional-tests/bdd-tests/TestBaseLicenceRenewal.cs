@@ -325,7 +325,7 @@ namespace bdd_tests
                     uiIsManufacturedMinimum.Click();
                 }
 
-                if ((responses != "positive responses for a distillery") || (responses != "positive responses for a co-packer"))
+                if ((responses == "positive responses for a winery") || (responses == "positive responses for a brewery"))
                 {
                     // enter the volume produced
                     NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
