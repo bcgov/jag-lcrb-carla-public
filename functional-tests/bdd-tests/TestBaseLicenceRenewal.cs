@@ -420,13 +420,19 @@ namespace bdd_tests
                     uiIsManufacturedMinimum.Click();
                 }
 
-                // enter the volume produced
-                NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
-                uiVolumeProduced.SendKeys(volumeProduced);
+                if ((responses == "negative responses for a winery") || (responses == "negative responses for a brewery"))
+                {
+                    // enter the volume produced
+                    NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
+                    uiVolumeProduced.SendKeys(volumeProduced);
+                }
 
-                // enter the volume destroyed
-                NgWebElement uiVolumeDestroyed = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeDestroyed']"));
-                uiVolumeDestroyed.SendKeys(volumeDestroyed);
+                if (responses == "negative responses for a winery")
+                {
+                    // enter the volume destroyed
+                    NgWebElement uiVolumeDestroyed = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeDestroyed']"));
+                    uiVolumeDestroyed.SendKeys(volumeDestroyed);
+                }
 
                 // select 'No'
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
