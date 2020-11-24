@@ -217,15 +217,9 @@ namespace bdd_tests
 
             if (scenario == "deletion and addition")
             {
-                // confirm that second row is no longer displayed
-                Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'LCRB2'))]")).Displayed);
-
-                // confirm that all expected rows are displayed
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LCRB1')]")).Displayed);
-
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LCRB5')]")).Displayed);
-
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'LCRB6')]")).Displayed);
+                // confirm that newly deleted rows are displayed as 'Removed'
+                Assert.True(ngDriver.FindElement(By.XPath("//app-offsite-table/table/tr[2]/td[1]/span[contains(.,'Removed')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//app-offsite-table/table/tr[3]/td[1]/span[contains(.,'Removed')]")).Displayed);
             }
         }
     }
