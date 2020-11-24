@@ -330,7 +330,10 @@ namespace bdd_tests
                     // enter the volume produced
                     NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
                     uiVolumeProduced.SendKeys(volumeProduced);
+                }
 
+                if (responses == "positive responses for a winery")
+                { 
                     // enter the volume destroyed
                     NgWebElement uiVolumeDestroyed = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeDestroyed']"));
                     uiVolumeDestroyed.SendKeys(volumeDestroyed);
