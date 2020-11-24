@@ -50,7 +50,7 @@ namespace bdd_tests
             if (!string.IsNullOrEmpty(configuration["OPENSHIFT_BUILD_COMMIT"]) || !string.IsNullOrEmpty(configuration["Build.BuildNumber"]))
             {
                 Console.Out.WriteLine("Enabling Headless Mode"); 
-                options.AddArguments("headless", "no-sandbox", "disable-web-security", "no-zygote", "disable-gpu", "disable-dev-shm-usage", "disable-infobars", "start-maximized", "hide-scrollbars", "window-size=1920,1080");
+                options.AddArguments("headless", "no-sandbox", "disable-web-security", "no-zygote", "disable-gpu", "disable-dev-shm-usage", "disable-infobars", "start-maximized", "hide-scrollbars", "--window-size=1920,1080");
                 if (!string.IsNullOrEmpty(configuration["CHROME_BINARY_LOCATION"]))
                 {
                     options.BinaryLocation = configuration["CHROME_BINARY_LOCATION"];
