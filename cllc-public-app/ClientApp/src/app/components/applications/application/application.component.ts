@@ -111,7 +111,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   saveForLaterInProgress: boolean;
   submitApplicationInProgress: boolean;
   proceedToSecurityScreeningInProgress: boolean;
-  
+
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -665,6 +665,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return this.application.licenseType === 'Rural Agency Store';
   }
 
+  isLiquor(): boolean {
+    return this.application.applicationType.category == "Liquor";
+  }
+
   normalizeFormData() {
     let description2 = '';
     if (this.isRAS()) {
@@ -1104,7 +1108,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       policeJurisdictionId: 'Please enter a value for police jurisdiction',
       previousApplication: 'Please enter a value for previous application',
       previousApplicationDetails: 'Please enter a value for previous application details',
-      proposedChange: 'Please specify if the store’s exterior will change', 
+      proposedChange: 'Please specify if the store’s exterior will change',
       registeredEstablishment: 'Please enter a value for registered establishment number',
       renewalBranding: 'Please enter a value for renewal branding',
       renewalBusinessType: 'Please enter a value for renewal business type',
@@ -1215,11 +1219,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   businessTypeIsSoleProp(): boolean {
-    return (this.account && ['SoleProprietorship'].indexOf(this.account.businessType) !== -1);  
+    return (this.account && ['SoleProprietorship'].indexOf(this.account.businessType) !== -1);
   }
 
   businessTypeIsSociety(): boolean {
-    return (this.account && ['Society'].indexOf(this.account.businessType) !== -1);  
+    return (this.account && ['Society'].indexOf(this.account.businessType) !== -1);
   }
 
   isCRSRenewalApplication(): boolean {
