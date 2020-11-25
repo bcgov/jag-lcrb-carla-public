@@ -1,4 +1,4 @@
-<div *ngIf="featureFlagService.initialized">
+<div style="height: 100%;" *ngIf="featureFlagService.initialized">
   <section class="container not-supported-browser" *ngIf="isIE()">
     <p><i class="fab fa-internet-explorer" style="margin-right:10px;"></i>Internet Explorer is no longer supported.</p>
     <p>Please use <a href="https://google.com/chrome" target="_blank" class="IE">Google Chrome</a>, 
@@ -50,7 +50,7 @@
       </main>
     </div>
 
-    <div *ngIf="!showBceidTermsOfUse()">
+    <div class="content-wrapper" *ngIf="!showBceidTermsOfUse()">
       <!-- /NAVBAR -->
       <div class="navigationRibbon" *ngIf="!currentUser && showNavbar">
         <div class="level2Navigation">
