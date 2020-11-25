@@ -230,8 +230,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetCurrentUserApplications()
         {
             // get the current user.
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
             var adoxioApplications = GetApplicationSummariesByApplicant(userSettings.AccountId);
@@ -244,8 +243,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             var results = new List<ApplicationSummary>();
             // get the current user.
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             var filter = $"_adoxio_applicant_value eq {userSettings.AccountId}";
             var appType = _dynamicsClient.GetApplicationTypeByName(applicationType);
@@ -274,8 +272,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             var results = new List<Application>();
             // get the current user.
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             try
             {
@@ -337,8 +334,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var forceCreate = type == "create";
 
             var result = new OngoingLicenseeData();
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             try
             {
@@ -677,8 +674,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("permanent-change-to-licensee-data")]
         public async Task<IActionResult> GetPermanetChangesToLicenseeData()
         {
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             PermanentChangesPageData data = new PermanentChangesPageData();
 
             // set application type relationship 
@@ -695,8 +692,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetOngoingLicenseeApplicationId()
         {
             JsonResult result;
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             try
             {
                 var application = GetCurrentLicenseeApplication(userSettings, false);
@@ -719,8 +716,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetCountForCurrentUserSubmittedApplications()
         {
             // get the current user.
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
             var count = GetSubmittedCountByApplicant(userSettings.AccountId);
@@ -737,8 +733,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> GetApplication(string id)
         {
             // get the current user.
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             _logger.LogDebug("Application id = " + id);
             _logger.LogDebug("User id = " + userSettings.AccountId);
@@ -762,8 +757,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private async Task<bool> CurrentUserIsLgForApplication(MicrosoftDynamicsCRMadoxioApplication application)
         {
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // get user account
             var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
@@ -794,9 +789,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateApplication([FromBody] Application item)
         {
-            // for association with current user
-            var userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             var count = GetSubmittedCountByApplicant(userSettings.AccountId);
             count += GetApprovedLicenceCountByApplicant(userSettings.AccountId);
 
@@ -1155,8 +1149,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
             // get the current user.
-            var sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
 
             // query the Dynamics system to get the account record.
@@ -1189,8 +1182,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
             // get the current user.
-            var sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
 
             // query the Dynamics system to get the account record.
@@ -1265,8 +1257,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool CurrentUserHasAccessToApplicationOwnedBy(string accountId)
         {
             // get the current user.
-            var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future

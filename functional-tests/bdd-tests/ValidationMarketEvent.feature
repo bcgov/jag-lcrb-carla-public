@@ -16,7 +16,7 @@ Scenario: Validation for Market Event Application
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request an on-site store endorsement
     And the application is approved
     And I click on the Licences tab

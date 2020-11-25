@@ -30,7 +30,7 @@ Scenario: Indigenous Nation Cannabis Store Relocation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -49,7 +49,7 @@ Scenario: Partnership Cannabis Store Relocation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -68,7 +68,7 @@ Scenario: Private Corporation Cannabis Store Relocation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -87,7 +87,7 @@ Scenario: Public Corporation Cannabis Store Relocation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -106,7 +106,7 @@ Scenario: Society Cannabis Store Relocation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -125,7 +125,7 @@ Scenario: Sole Proprietorship Cannabis Store Relocation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
