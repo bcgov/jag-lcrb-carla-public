@@ -1,7 +1,6 @@
 <div [formGroup]="form" class="form-wrapper">
     <h1>Permanent Changes to a Licensee</h1>
 
-
     <section class="d-flex">
         <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
         <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
@@ -276,7 +275,8 @@
                 Associate Security Screening form and required documents as described below</p>
 
             <h4><i class="fa fa-id-card mr-1"></i>Security Screening Information Required</h4>
-            <p>All shareholders holding 10% or greater interest must complete a Personal History Summary and/or Cannabis Associate
+            <p>All shareholders holding 10% or greater interest must complete a Personal History Summary and/or Cannabis
+                Associate
                 Security Screening form and required documents as described below</p>
 
         </div>
@@ -377,9 +377,10 @@
             </app-file-uploader>
 
             <hr>
-            
+
             <h4><i class="fa fa-id-card mr-1"></i>Security Screening Information Required</h4>
-            <p>All shareholders holding 10% or greater interest must complete a Personal History Summary and/or Cannabis Associate
+            <p>All shareholders holding 10% or greater interest must complete a Personal History Summary and/or Cannabis
+                Associate
                 Security Screening form and required documents as described below</p>
 
             <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
@@ -414,7 +415,7 @@
             </app-file-uploader>
 
             <h4><i class="fa fa-id-card mr-1"></i>Security Screening Information Required</h4>
-            <p>All directors must complete a Personal History Summary and/or Cannabis Associate 
+            <p>All directors must complete a Personal History Summary and/or Cannabis Associate
                 Security Screening form and required documents as described below</p>
         </div>
 
@@ -885,6 +886,23 @@
                     </tr>
                 </ng-container>
             </table>
+            <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary" (click)="submit_application('primary')">Pay Cannabis Fee</button>
+
+            <table class="w-100" *ngIf="hasLiquor">
+                <tr>
+                    <th>Type Of Change</th>
+                    <th>Num Licences</th>
+                    <th>Cost</th>
+                </tr>
+                <ng-container *ngFor="let item of changeList">
+                    <tr *ngIf="form.get(item.formControlName).value === true">
+                        <td>{{item.name}}</td>
+                        <td>x {{liquorLicences.length}}</td>
+                        <td>${{item.LiquorFee}}</td>
+                    </tr>
+                </ng-container>
+            </table>
+            <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid" (click)="submit_application('secondary')">Pay Liquor Fee</button>
         </div>
     </section>
 </div>
