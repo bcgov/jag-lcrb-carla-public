@@ -56,7 +56,7 @@ namespace bdd_tests
                 var tempWait = ngDriver.Manage().Timeouts().ImplicitWait;
                 ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(120);
 
-                var uiOpenLeaderForm = ngDriver.FindElements(By.CssSelector("[addlabel='Add Leadership'][changetypesuffix='Leadership'] button"));
+                var uiOpenLeaderForm = ngDriver.FindElements(By.CssSelector(".btn.btn-secondary.AddLeadership"));
 
                 if (uiOpenLeaderForm.Count > 0)
                 {
