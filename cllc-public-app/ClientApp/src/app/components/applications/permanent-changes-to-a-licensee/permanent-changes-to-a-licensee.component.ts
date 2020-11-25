@@ -95,12 +95,12 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
           this.paymentDataService.verifyPaymentURI(this.invoiceType + 'Invoice', this.application.id)
             .subscribe(res => {
               this.dataLoaded = true;
-              debugger;
+              // TODO: Figureout how to report payment status
             });
         }else{
           this.dataLoaded = true;
         }
-        debugger;
+        
         if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
           this.form.disable();
         }
@@ -206,7 +206,6 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment(invoiceType: 'primary' | 'secondary') {
-    debugger;
     let payMethod = this.paymentDataService.getPaymentURI('primaryInvoice', this.application.id);
     if (invoiceType === 'secondary') {
       payMethod = this.paymentDataService.getPaymentURI('secondaryInvoice', this.application.id);
@@ -214,7 +213,6 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
     return payMethod
       .pipe(takeWhile(() => this.componentActive))
       .pipe(mergeMap(jsonUrl => {
-        debugger;
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, (err: any) => {
