@@ -134,7 +134,19 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioPidlist = from.PidList;
             to.AdoxioIspermittedinzoning = from.IsPermittedInZoning;
 
-            // here
+            // Permanent Change to a Licensee
+            to.AdoxioFirstnameold  = from.FirstNameOld;
+            to.AdoxioFirstnamenew  = from.FirstNameNew;
+            to.AdoxioLastnameold  = from.LastNameOld;
+            to.AdoxioLastnamenew  = from.LastNameNew;
+            to.AdoxioCsinternaltransferofshares  = from.CsInternalTransferOfShares;
+            to.AdoxioCsexternaltransferofshares  = from.CsExternalTransferOfShares;
+            to.AdoxioCschangeofdirectorsorofficers  = from.CsChangeOfDirectorsOrOfficers;
+            to.AdoxioCsnamechangelicenseecorporation  = from.CsNameChangeLicenseeCorporation;
+            to.AdoxioCsnamechangelicenseepartnership  = from.CsNameChangeLicenseePartnership;
+            to.AdoxioCsnamechangelicenseesociety  = from.CsNameChangeLicenseeSociety;
+            to.AdoxioCsnamechangeperson  = from.CsNameChangeLicenseePerson;
+            to.AdoxioCsadditionofreceiverorexecutor  = from.CsAdditionalReceiverOrExecutor;
 
             // Manufacturing structural change fields
 
@@ -260,7 +272,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 .SetSlidingExpiration(TimeSpan.FromDays(365));
                     // Save data in cache.
                     memoryCache.Set(cacheKey, result, cacheEntryOptions);
-                }                
+                }
             }
 
             return result;
@@ -289,7 +301,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     result = new List<MicrosoftDynamicsCRMpicklistAttributeMetadata>();
                 }
 
-                
+
             }
 
             return result;
@@ -315,7 +327,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
         }
 
-        public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger )
+        public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger)
         {
             ViewModels.Application applicationVM = new ViewModels.Application()
             {
@@ -369,7 +381,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 //get additional property info
                 AdditionalPropertyInformation = dynamicsApplication.AdoxioAdditionalpropertyinformation,
-                AdoxioInvoiceId = dynamicsApplication._adoxioInvoiceValue,
+                InvoiceId = dynamicsApplication._adoxioInvoiceValue,
+                SecondaryInvoiceId = dynamicsApplication._adoxioSecondaryapplicationinvoiceValue,
 
                 PaymentReceivedDate = dynamicsApplication.AdoxioPaymentreceiveddate,
                 Description1 = dynamicsApplication.AdoxioDescription1,
@@ -459,6 +472,22 @@ namespace Gov.Lclb.Cllb.Public.Models
                 PatioAccessControlDescription = dynamicsApplication.AdoxioPatioaccesscontroldescription,
                 IsAlr = dynamicsApplication.AdoxioProposedestablishmentisalr.HasValue && (bool)dynamicsApplication.AdoxioProposedestablishmentisalr,
                 HasCoolerAccess = dynamicsApplication.AdoxioHascooleraccess.HasValue && (bool)dynamicsApplication.AdoxioHascooleraccess,
+
+                // Permanent Change to a Licensee
+                FirstNameOld = dynamicsApplication.AdoxioFirstnameold,
+                FirstNameNew = dynamicsApplication.AdoxioFirstnamenew,
+                LastNameOld = dynamicsApplication.AdoxioLastnameold,
+                LastNameNew = dynamicsApplication.AdoxioLastnamenew,
+                CsInternalTransferOfShares = dynamicsApplication.AdoxioCsinternaltransferofshares,
+                CsExternalTransferOfShares = dynamicsApplication.AdoxioCsexternaltransferofshares,
+                CsChangeOfDirectorsOrOfficers = dynamicsApplication.AdoxioCschangeofdirectorsorofficers,
+                CsNameChangeLicenseeCorporation = dynamicsApplication.AdoxioCsnamechangelicenseecorporation,
+                CsNameChangeLicenseePartnership = dynamicsApplication.AdoxioCsnamechangelicenseepartnership,
+                CsNameChangeLicenseeSociety = dynamicsApplication.AdoxioCsnamechangelicenseesociety,
+                CsNameChangeLicenseePerson = dynamicsApplication.AdoxioCsnamechangeperson,
+                CsAdditionalReceiverOrExecutor = dynamicsApplication.AdoxioCsadditionofreceiverorexecutor,
+                PrimaryInvoicePaid = dynamicsApplication.AdoxioPrimaryapplicationinvoicepaid == 1,
+                SecondaryInvoicePaid = dynamicsApplication.AdoxioSecondaryapplicationinvoicepaid == 1,
 
                 LocatedAboveOther = dynamicsApplication.AdoxioLocatedaboveother
             };
@@ -714,7 +743,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 //get additional property info
                 AdditionalPropertyInformation = dynamicsApplication.AdoxioAdditionalpropertyinformation,
-                AdoxioInvoiceId = dynamicsApplication._adoxioInvoiceValue,
+                InvoiceId = dynamicsApplication._adoxioInvoiceValue,
 
                 Description1 = dynamicsApplication.AdoxioDescription1,
 

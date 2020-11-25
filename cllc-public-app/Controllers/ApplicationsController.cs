@@ -596,11 +596,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangesApplication(UserSettings userSettings,
+        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings,
             bool forceCreate)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;
-            var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Changes to a Licensee");
+            var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee");
 
             if (!forceCreate)
             {
@@ -674,7 +674,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        [HttpGet("permanent-changes-to-licensee-data")]
+        [HttpGet("permanent-change-to-licensee-data")]
         public async Task<IActionResult> GetPermanetChangesToLicenseeData()
         {
             var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -682,7 +682,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             PermanentChangesPageData data = new PermanentChangesPageData();
 
             // set application type relationship 
-            var app = GetPermanentChangesApplication(userSettings, false);
+            var app = GetPermanentChangeApplication(userSettings, false);
             data.Application = await app.ToViewModel(_dynamicsClient, _cache, _logger);
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
