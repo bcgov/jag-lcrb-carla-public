@@ -18,7 +18,8 @@ export class Application {
 
   id: string;
   parentApplicationId: string;
-  adoxioInvoiceId: string;
+  invoiceId: string;
+  secondaryInvoiceId: string;
   account: Account;
   additionalPropertyInformation: string;
   applicantType: string;
@@ -178,13 +179,15 @@ export class Application {
   firstNameNew: string;
   lastNameOld: string;
   lastNameNew: string;
-  csInternalTransferOfShares: string;
-  csExternalTransferOfShares: string;
-  csChangeOfDirectorsOrOfficers: string;
-  csNameChangeLicenseeCorporation: string;
-  csNameChangeLicenseePartnership: string;
-  csNameChangeLicenseeSociety: string;
-  csNameChangeLicenseePerson: string;
-  csAdditionalReceiverOrExecutor: string;
+  csInternalTransferOfShares: boolean;
+  csExternalTransferOfShares: boolean;
+  csChangeOfDirectorsOrOfficers: boolean;
+  csNameChangeLicenseeCorporation: boolean;
+  csNameChangeLicenseePartnership: boolean;
+  csNameChangeLicenseeSociety: boolean;
+  csNameChangeLicenseePerson: boolean;
+  csAdditionalReceiverOrExecutor: boolean;
+  primaryInvoicePaid: boolean;
+  secondaryInvoicePaid: boolean;
 
 }
