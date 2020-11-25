@@ -11,6 +11,7 @@ using Microsoft.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.CarlaSpiceSync
@@ -23,15 +24,15 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         private IDynamicsClient _dynamicsClient;
         public ISpiceClient SpiceClient;
 
-        public SpiceUtils(IConfiguration Configuration, ILoggerFactory loggerFactory)
+        public SpiceUtils(IConfiguration Configuration, ILoggerFactory loggerFactory, params DelegatingHandler[] handlers)
         {
             this.Configuration = Configuration;
             _logger = loggerFactory.CreateLogger(typeof(SpiceUtils));
             _dynamicsClient = DynamicsSetupUtil.SetupDynamics(Configuration);
-            SpiceClient = SetupSpiceClient(Configuration);
+            SpiceClient = SetupSpiceClient(Configuration, handlers);
         }
 
-        public SpiceClient SetupSpiceClient(IConfiguration Configuration)
+        public SpiceClient SetupSpiceClient(IConfiguration Configuration, params DelegatingHandler[] handlers)
         {
             string spiceURI = Configuration["SPICE_URI"];
             string token = Configuration["SPICE_JWT_TOKEN"];
@@ -39,7 +40,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             // create JWT credentials
             TokenCredentials credentials = new TokenCredentials(token);
 
-            return new SpiceClient(new Uri(spiceURI), credentials);
+            return new SpiceClient(new Uri(spiceURI), credentials, handlers);
         }
 
         public void ReceiveWorkerImportJob(PerformContext hangfireContext, List<CompletedWorkerScreening> responses)
