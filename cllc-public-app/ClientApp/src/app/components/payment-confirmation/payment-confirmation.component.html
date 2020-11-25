@@ -1,5 +1,6 @@
 <mat-card class="mat-elevation-z0">
-  <div [ngBusy]="busy" class="container" style="margin-left:0px;">
+  <div class="container" style="margin-left:0px;">
+    <!-- <div [ngBusy]="busy" ></div> -->
     <div *ngIf="isApproved">
       <div>
         <span class="print-page" (click)="printPage()">

@@ -772,7 +772,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         .subscribe(([saveSucceeded, app]) => {
           if (saveSucceeded) {
             // payment is required
-            if (app && app.adoxioInvoiceId) {
+            if (app && app.invoiceId) {
               this.submitPayment()
                 .subscribe(res => {
                   this.saveComplete.emit(true);

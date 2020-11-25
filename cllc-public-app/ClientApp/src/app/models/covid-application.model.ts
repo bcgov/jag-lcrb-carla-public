@@ -8,7 +8,7 @@ export class CovidApplication {
   id: string;
   jobNumber: string;
   additionalPropertyInformation: string;
-  adoxioInvoiceId: string;
+  invoiceId: string;
   applyingPerson: string;
   authorizedToSubmit: boolean;
 
