@@ -145,6 +145,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     "adoxio_ApplicationTypeId",
                     "adoxio_LicenceFeeInvoice",
                     "adoxio_Invoice",
+                    "adoxio_SecondaryApplicationInvoice",
                     "adoxio_localgovindigenousnationid",
                     "adoxio_PoliceJurisdictionId",
                     "adoxio_application_SharePointDocumentLocations"
