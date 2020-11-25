@@ -31,11 +31,13 @@ Scenario: Private Corporation Catering Release
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I request a licensee representative
     And I click on the link for Dashboard
@@ -71,11 +73,13 @@ Scenario: Sole Proprietorship Catering Release
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I request a licensee representative
     And I click on the link for Dashboard

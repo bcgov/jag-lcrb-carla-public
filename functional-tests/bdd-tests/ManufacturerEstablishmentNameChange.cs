@@ -30,7 +30,7 @@ Scenario: Winery Establishment Name Change Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -50,7 +50,7 @@ Scenario: Brewery Establishment Name Change Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -70,7 +70,7 @@ Scenario: Distillery Establishment Name Change Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -90,7 +90,7 @@ Scenario: Co-packer Establishment Name Change Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review

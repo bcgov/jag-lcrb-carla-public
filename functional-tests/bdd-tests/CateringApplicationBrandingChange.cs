@@ -31,7 +31,7 @@ Scenario: Catering Partnership Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
@@ -55,7 +55,7 @@ Scenario: Catering Private Corporation Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
@@ -79,7 +79,7 @@ Scenario: Catering Public Corporation Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
@@ -103,7 +103,7 @@ Scenario: Catering Society Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
@@ -127,7 +127,7 @@ Scenario: Catering Sole Proprietorship Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
