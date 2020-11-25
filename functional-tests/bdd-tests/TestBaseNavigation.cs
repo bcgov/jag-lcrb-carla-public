@@ -238,8 +238,15 @@ namespace bdd_tests
             if (applicationType == "a Manufacturer Licence")
             {
                 // click on the Manufacturer Licence Start Application button
-                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
-                uiStartAppButton.Click();
+                var uiStartAppButton = ngDriver.FindElements(By.CssSelector("button[id='startMfg']"));
+                if (uiStartAppButton.Count > 0)
+                {
+                    uiStartAppButton[0].Click();
+                }
+                else
+                {
+                    throw new Exception($"Unable to find Manufacturer Start Application button");
+                }
             }
 
             if (applicationType == "a Cannabis Marketing Licence")
