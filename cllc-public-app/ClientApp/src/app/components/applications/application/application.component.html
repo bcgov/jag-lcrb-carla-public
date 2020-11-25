@@ -66,8 +66,9 @@
 
 
         <!-- LE Document Upload Section -->
-        <section *ngIf="LGApprovals == 'woot'">
-        
+        <h3 class="blue-header" *ngIf="application?.applicationType.name == ApplicationTypeNames.FP">Legal Entity Document Requirements</h3>
+        <section *ngIf="application?.applicationType.name == ApplicationTypeNames.FP" class="content-bottom">
+
           <!-- if Private Corporation -->
           <section *ngIf="this.businessTypeIsPrivateCorporation()">
             <h4>Central Securities Register (shareholder register)</h4>
@@ -86,7 +87,7 @@
               documentation to support the applicable business type must be submitted, even if the shareholder holds less than
               10%
               interest in the applicant corporation:</p>
-        
+
             <ul>
               <li>Society
                 <ul>
@@ -127,11 +128,11 @@
                   <li>This includes entities incorporated through Federal or Provincial legislation. Examples: Local
                     Government, First Nations, colleges, universities, etc. Contact the branch to discuss documentation
                     requirements.</li>
-        
+
                 </ul>
               </li>
             </ul>
-        
+
             <h4>Supporting Business Documentation</h4>
             <p>Provide supporting business documentation if one or more of the shareholders is a company:</p>
             <app-file-uploader *ngIf="true || applicationId" documentType="SupportingDocuments"
@@ -141,7 +142,7 @@
             </app-file-uploader>
             <hr>
           </section>
-        
+
           <!-- If Private Corporation, Public Corporation or Societies-->
           <section *ngIf="this.businessTypeIsCorporation() || this.businessTypeIsSociety()">
             <h4>Register of Directors and Officers</h4>
@@ -155,13 +156,13 @@
               [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
             </app-file-uploader>
           </section>
-        
+
           <!-- Sole Proprietor-->
           <section *ngIf="this.businessTypeIsSoleProp()">
             <p><i class="fa fa-id-card mr-1"></i>Sole proprieters must complete a <span *ngIf="this.isLiquor()">Personal History
                 Summary</span><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> forms below.</p>
           </section>
-        
+
           <!-- Partnership-->
           <section *ngIf="this.businessTypeIsPartnership()">
             <h4>Partnership Agreement</h4>
@@ -175,7 +176,7 @@
               [uploadHeader]="'TO UPLOAD PARTNERSHIP AGREEMENT, DRAG FILES HERE OR'">
             </app-file-uploader>
           </section>
-        
+
           <!-- Other -->
           <section
             *ngIf="!this.businessTypeIsPartnership() && !this.businessTypeIsCorporation() && !this.businessTypeIsSoleProp() && !this.businessTypeIsSociety()">
@@ -190,10 +191,10 @@
             </app-file-uploader>
           </section>
           <!-- personal disclosure documents-->
-        
-        
-        
-        
+
+
+
+
           <!-- private corporations need to provide the names of shareholders with less than 10% interest-->
           <section *ngIf="this.businessTypeIsPrivateCorporation()">
             <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
@@ -205,8 +206,8 @@
               [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
             </app-file-uploader>
           </section>
-        
-        
+
+
         </section>
 
         <!-- Establishment Name -->
@@ -789,7 +790,7 @@
                     The signage submitted must show the name of the store and all words, images and symbols used in the
                     signage.
                   </p>
-    
+
                   <section
                     *ngIf="application?.applicationType?.name === ApplicationTypeNames.LiquorLicenceTransfer">
                     <p>
@@ -797,12 +798,12 @@
                       sign. Your name and signage must be approved by the Branch to ensure it is appropriate, accurately reflecting the
                       nature of the business. Do not order signs until you have received this approval.
                     </p>
-    
+
                     <img src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage">
                   </section>
-    
-                  
-    
+
+
+
                   <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                     Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis
                     (e.g. a
@@ -862,7 +863,7 @@
                   </app-file-uploader>
                 </section>
               </div>
-  
+
             </mat-card>
 
 
@@ -1564,7 +1565,7 @@
           </section>
           </div>
         </section>
-          
+
           <section class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest) || showValidInterestforTransfer()">
             <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">
               Offer or Proof of Ownership, Lease or
@@ -1637,8 +1638,8 @@
                 [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
               </app-file-uploader>
             </section>
-            
-          
+
+
         </section>
         </section>
 
