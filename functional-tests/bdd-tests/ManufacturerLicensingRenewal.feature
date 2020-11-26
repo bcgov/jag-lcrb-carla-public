@@ -7,7 +7,7 @@
 # Expiry = Today
 #-----------------------
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Today Negative Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
