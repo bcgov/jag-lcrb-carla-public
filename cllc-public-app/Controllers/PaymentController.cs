@@ -256,7 +256,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 redirectUrl = new Dictionary<string, string>();
 
                 bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // set to true for Liquor.
-                string redirectPath = $"{_configuration["BASE_URI"]}${_configuration["BASE_PATH"]}/permanent-changes-to-a-licensee/{invoiceType}";
+                string redirectPath = $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/permanent-changes-to-a-licensee/{invoiceType}";
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
 
                 _logger.Debug(">>>>>" + redirectUrl["url"]);
