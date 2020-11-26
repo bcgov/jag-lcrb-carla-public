@@ -1,4 +1,6 @@
-<div [formGroup]="form" class="form-wrapper">
+<mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+
+<div *ngIf="dataLoaded" [formGroup]="form" class="form-wrapper">
     <h1>Permanent Changes to a Licensee</h1>
 
     <section class="d-flex">
@@ -841,10 +843,16 @@
                         <td class="paymentSummary2">${{item.CannabisFee}}</td>
                     </tr>
                 </ng-container>
+
             <tr><td colspan=3 align=right style="padding: 10px;">
+              <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary"
+              (click)="submit_application('primary')">
+              <span>{{ application?.primaryInvoicePaid ? 'Cannabis Fee Paid' : 'Pay Cannabis Fee'}}</span>
+              <mat-progress-bar *ngIf="primaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
               <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary" (click)="submit_application('primary')" style="width:250px; text-transform: uppercase;">Pay Cannabis Fee</button>
             </td></tr>
           </table>
+
 
             <table class="w-100" *ngIf="hasLiquor" class="paymentSummary">
                 <tr>
@@ -860,7 +868,11 @@
                     </tr>
                 </ng-container>
             <tr><td colspan=3 align=right style="padding: 10px;">
-              <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid" (click)="submit_application('secondary')" style="width:250px; text-transform: uppercase;">Pay Liquor Fee</button>
+              <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid"
+              (click)="submit_application('secondary')">
+              <span>{{ application?.secondaryInvoicePaid ? 'Liquor Fee Paid' : 'Pay Liquor Fee' }}</span>
+              <mat-progress-bar *ngIf="secondaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
+          </button>
             </td></tr>
 
           </table>
