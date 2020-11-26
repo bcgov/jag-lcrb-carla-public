@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm the validation messages for Manufacturer applications
 
-@e2e @privatecorporation @manufacturerapp @validation
+@manufacturerapp @validation
 Scenario: Validation for Manufacturer Application 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -14,7 +14,7 @@ Scenario: Validation for Manufacturer Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @validation
+@manufacturernamechange @validation
 Scenario: Validation for Manufacturer Establishment Name Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -36,7 +36,7 @@ Scenario: Validation for Manufacturer Establishment Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @validation
+@manufacturerstructuralchange @validation
 Scenario: Validation for Manufacturer Facility Structural Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -58,7 +58,7 @@ Scenario: Validation for Manufacturer Facility Structural Change Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @validation
+@manufacturerlocationchange @validation
 Scenario: Validation for Manufacturer Location Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -80,7 +80,7 @@ Scenario: Validation for Manufacturer Location Change Application
     And the account is deleted
     Then I see the login page
     
-@e2e @privatecorporation @manufacturer @validation
+@manufacturerloungearea @validation
 Scenario: Validation for Manufacturer Lounge Area Endorsement
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -102,7 +102,7 @@ Scenario: Validation for Manufacturer Lounge Area Endorsement
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @validation
+@manufactureronsitestore @validation
 Scenario: Validation for Manufacturer On-Site Store Endorsement
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -124,7 +124,7 @@ Scenario: Validation for Manufacturer On-Site Store Endorsement
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @validation
+@manufacturerpicnicarea @validation
 Scenario: Validation for Manufacturer Picnic Area Endorsement
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -132,7 +132,7 @@ Scenario: Validation for Manufacturer Picnic Area Endorsement
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-     And I review the security screening requirements for a private corporation
+    And I review the security screening requirements for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
@@ -146,7 +146,7 @@ Scenario: Validation for Manufacturer Picnic Area Endorsement
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @validation
+@manufacturerspecialevent @validation
 Scenario: Validation for Special Event Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -168,7 +168,7 @@ Scenario: Validation for Special Event Area Endorsement Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @validation
+@manufacturerstructuralalterations @validation
 Scenario: Validation for Structural Alterations to an Approved Lounge or Special Events Area
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -190,7 +190,7 @@ Scenario: Validation for Structural Alterations to an Approved Lounge or Special
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @validation
+@manufacturerthirdparty @validation
 Scenario: Validation for Manufacturer Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -211,7 +211,7 @@ Scenario: Validation for Manufacturer Third Party Operator
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @validation
+@manufacturertransfer @validation
 Scenario: Validation for Manufacturer Transfer of Ownership
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
