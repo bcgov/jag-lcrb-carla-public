@@ -30,7 +30,7 @@ Scenario: Validation for Private Corporation CRS Application
     And the account is deleted
     Then I see the login page
 
-@crsapp @validation indigenousnation
+@crsapp @validation @indigenousnation
 Scenario: Validation for IN CRS Application
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -43,7 +43,7 @@ Scenario: Validation for IN CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @validation
+@crsapp @privatecorporation @validation
 Scenario: Validation for CRS Branding Change 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -56,7 +56,7 @@ Scenario: Validation for CRS Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee 
+    And I pay the licensing fee
     And I click on the branding change link for Cannabis
     And I click on the Continue to Application button
     And I do not complete the application correctly
@@ -64,7 +64,7 @@ Scenario: Validation for CRS Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @licencerenewal
+@crsapp @privatecorporation @licencerenewal @validation
 Scenario: Validation for CRS Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -76,7 +76,7 @@ Scenario: Validation for CRS Licence Renewal
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee 
+    And I pay the licensing fee
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
     And I do not complete the licence renewal application correctly
@@ -84,7 +84,7 @@ Scenario: Validation for CRS Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @validation
+@crsapp @privatecorporation @validation
 Scenario: Validation for CRS Store Relocation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -96,7 +96,7 @@ Scenario: Validation for CRS Store Relocation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee 
+    And I pay the licensing fee
     And I click on the Licences tab
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
@@ -105,7 +105,7 @@ Scenario: Validation for CRS Store Relocation
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @validation
+@crsapp @privatecorporation @validation
 Scenario: Validation for CRS Structural Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -126,7 +126,7 @@ Scenario: Validation for CRS Structural Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @validation
+@crsapp @privatecorporation @validation
 Scenario: Validation for CRS Transfer of Ownership
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -138,7 +138,7 @@ Scenario: Validation for CRS Transfer of Ownership
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee 
+    And I pay the licensing fee
     And I click on the Licences tab
     And I click on the link for Transfer Licence
     And I do not complete the application correctly
