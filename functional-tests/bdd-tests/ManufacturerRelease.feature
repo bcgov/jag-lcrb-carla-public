@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm that the Manufacturer functionality is ready for release
 
-@e2e @privatecorporation @release @winery
+@manufacturer @winery @release 
 Scenario: Private Corporation Manufacturer Release 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -43,7 +43,7 @@ Scenario: Private Corporation Manufacturer Release
     And the account is deleted
     Then I see the login page
 
-@e2e @soleproprietorship @winery
+@manufacturer @winery
 Scenario: Sole Proprietorship Manufacturer Release 
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
