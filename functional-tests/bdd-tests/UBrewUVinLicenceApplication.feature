@@ -1,4 +1,4 @@
-﻿Feature: UBrewUVinLicence
+﻿Feature: UBrewUVinLicenceApplication
     As a logged in business user
     I want to submit a UBrew / UVin Licence application for different business types
 
