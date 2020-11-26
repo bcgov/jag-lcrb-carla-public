@@ -2,7 +2,7 @@
     As a logged in business user
     I want to request special event area endorsement for a manufacturer licence
 
-@e2e @privatecorporation @manufacturer @winery
+@manufacturer @winery @specialeventarea
 Scenario: Winery Special Event Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -20,7 +20,7 @@ Scenario: Winery Special Event Area Endorsement Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @brewery
+@manufacturer @brewery @specialeventarea
 Scenario: Brewery Special Event Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -38,7 +38,7 @@ Scenario: Brewery Special Event Area Endorsement Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @distillery
+@manufacturer @distillery @specialeventarea
 Scenario: Distillery Special Event Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -56,7 +56,7 @@ Scenario: Distillery Special Event Area Endorsement Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @copacker
+@manufacturer @copacker @specialeventarea
 Scenario: Co-packer Special Event Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

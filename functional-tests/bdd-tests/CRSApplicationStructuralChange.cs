@@ -18,7 +18,7 @@ Feature: CRSApplicationStructuralChange
     I want to submit a CRS Application for different business types
     And request a structural change for the approved application
 
-@e2e @cannabis @indigenousnation @crsstructuralchangesIN
+@cannabis @indigenousnation @crsstructuralchangesIN
 Scenario: Indigenous Nation Cannabis Structural Changes
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -37,7 +37,7 @@ Scenario: Indigenous Nation Cannabis Structural Changes
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsstructuralchangespartnership
+@cannabis @partnership @crsstructuralchangespartnership
 Scenario: Partnership Cannabis Structural Changes
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -56,7 +56,7 @@ Scenario: Partnership Cannabis Structural Changes
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsstructuralchangesprivcorp
+@cannabis @privatecorporation @crsstructuralchangesprivcorp
 Scenario: Private Corporation Cannabis Structural Changes
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -75,7 +75,7 @@ Scenario: Private Corporation Cannabis Structural Changes
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsstructuralchangespubcorp
+@cannabis @publiccorporation @crsstructuralchangespubcorp
 Scenario: Public Corporation Cannabis Structural Changes
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -94,7 +94,7 @@ Scenario: Public Corporation Cannabis Structural Changes
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsstructuralchangessociety
+@cannabis @society @crsstructuralchangessociety
 Scenario: Society Cannabis Structural Changes
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -113,7 +113,7 @@ Scenario: Society Cannabis Structural Changes
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsstructuralchangessoleprop
+@cannabis @soleproprietorship @crsstructuralchangessoleprop
 Scenario: Sole Proprietorship Cannabis Structural Changes
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store

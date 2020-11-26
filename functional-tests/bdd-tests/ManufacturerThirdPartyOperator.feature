@@ -2,7 +2,7 @@
     As a logged in business user
     I want to request a third party operator for a manufacturer licence
 
-@e2e @privatecorporation @manufacturer @winery
+@manufacturer @winery @thirdparty
 Scenario: Winery Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -22,7 +22,7 @@ Scenario: Winery Third Party Operator
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @brewery
+@manufacturer @brewery @thirdparty
 Scenario: Brewery Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -42,7 +42,7 @@ Scenario: Brewery Third Party Operator
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @distillery
+@manufacturer @distillery @thirdparty
 Scenario: Distillery Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -62,7 +62,7 @@ Scenario: Distillery Third Party Operator
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @copacker
+@manufacturer @copacker @thirdparty
 Scenario: Co-packer Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

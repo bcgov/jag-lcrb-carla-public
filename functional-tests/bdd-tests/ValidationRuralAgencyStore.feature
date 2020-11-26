@@ -1,9 +1,9 @@
-﻿Feature: ValidationRuralStore
+﻿Feature: ValidationRuralAgencyStore
     As a logged in business user
     I want to confirm the validation messages for a Rural Agency Store application
 
-@privatecorporation @ruralstore
-Scenario: Validation for Rural Store Application
+@privatecorporation @ruralagencystore
+Scenario: Validation for Rural Agency Store Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Rural Agency Store
     And I review the account profile for a private corporation

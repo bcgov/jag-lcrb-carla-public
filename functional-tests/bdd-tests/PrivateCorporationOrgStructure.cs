@@ -17,7 +17,7 @@ Feature: PrivateCorporationOrgStructure
     As a logged in private corporation business user
     I want to confirm the organization structure functionality
 
-@e2e @cannabis @privatecorporation @validation @privatecorporgstructure
+@privatecorporation @validation @privatecorporgstructure
 Scenario: Change private corporation director name and pay fee
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -40,7 +40,7 @@ Scenario: Change private corporation director name and pay fee
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @privatecorporgstructure
+@privatecorporation @validation @privatecorporgstructure
 Scenario: Delete an individual who is both a director and shareholder
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
@@ -53,7 +53,7 @@ Scenario: Delete an individual who is both a director and shareholder
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @privatecorporgstructure
+@privatecorporation @validation @privatecorporgstructure
 Scenario: Change director and shareholder same name
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
@@ -66,7 +66,7 @@ Scenario: Change director and shareholder same name
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @privatecorporgstructure
+@privatecorporation @validation @privatecorporgstructure
 Scenario: Confirm business shareholder org structure update
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
@@ -91,7 +91,7 @@ Scenario: Confirm business shareholder org structure update
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @privatecorporgstructure
+@privatecorporation @validation @privatecorporgstructure
 Scenario: Confirm business shareholder org structure update after payment
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
@@ -120,7 +120,7 @@ Scenario: Confirm business shareholder org structure update after payment
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @validation @privatecorporgstructure
+@privatecorporation @validation @privatecorporgstructure
 Scenario: Save for Later feature for org structure
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
@@ -147,7 +147,7 @@ Scenario: Save for Later feature for org structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
+@privatecorporation @validation @privatecorporgstructure1
 Scenario: CRS application with mixed business shareholder types
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -167,7 +167,7 @@ Scenario: CRS application with mixed business shareholder types
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
+@privatecorporation @validation @privatecorporgstructure1
 Scenario: Complex Save for Later mixed business shareholders
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
@@ -179,7 +179,7 @@ Scenario: Complex Save for Later mixed business shareholders
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @validation @privatecorporgstructure1
+@privatecorporation @validation @privatecorporgstructure1
 Scenario: Confirm org structure records not duplicated
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
