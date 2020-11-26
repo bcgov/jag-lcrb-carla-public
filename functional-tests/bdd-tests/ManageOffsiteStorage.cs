@@ -17,7 +17,7 @@ Feature: ManageOffsiteStorage
     As a logged in business user
     I want to manage offsite storage on the Licences & Authorizations tab
 
-@e2e @privatecorporation @offsitestorage
+@offsitestorage
 Scenario: Add Rows Offsite Storage Private Corporation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -38,7 +38,7 @@ Scenario: Add Rows Offsite Storage Private Corporation
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @offsitestorage
+@offsitestorage
 Scenario: Add and Remove Rows Offsite Storage Private Corporation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -61,7 +61,7 @@ Scenario: Add and Remove Rows Offsite Storage Private Corporation
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @offsitestorage
+@offsitestorage
 Scenario: Add Rows and Return to Offsite Storage Private Corporation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
