@@ -1,4 +1,6 @@
-<div [formGroup]="form" class="form-wrapper">
+<mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+
+<div *ngIf="dataLoaded" [formGroup]="form" class="form-wrapper">
     <h1>Permanent Changes to a Licensee</h1>
 
     <section class="d-flex">
@@ -886,7 +888,11 @@
                     </tr>
                 </ng-container>
             </table>
-            <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary" (click)="submit_application('primary')">Pay Cannabis Fee</button>
+            <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary"
+                (click)="submit_application('primary')">
+                <span>{{ application?.primaryInvoicePaid ? 'Cannabis Fee Paid' : 'Pay Cannabis Fee'}}</span>
+                <mat-progress-bar *ngIf="primaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
+            </button>
 
             <table class="w-100" *ngIf="hasLiquor">
                 <tr>
@@ -902,7 +908,11 @@
                     </tr>
                 </ng-container>
             </table>
-            <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid" (click)="submit_application('secondary')">Pay Liquor Fee</button>
+            <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid"
+                (click)="submit_application('secondary')">
+                <span>{{ application?.secondaryInvoicePaid ? 'Liquor Fee Paid' : 'Pay Liquor Fee' }}</span>
+                <mat-progress-bar *ngIf="secondaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
+            </button>
         </div>
     </section>
 </div>

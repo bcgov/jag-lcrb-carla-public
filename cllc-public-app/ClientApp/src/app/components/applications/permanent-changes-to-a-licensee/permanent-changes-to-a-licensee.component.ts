@@ -28,12 +28,13 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
   businessType: string;
   saveComplete: any;
   submitApplicationInProgress: boolean;
-  proceedToSecurityScreeningInProgress: boolean;
   busyPromise: Promise<void>;
   showValidationMessages: boolean;
   savedFormData: any;
   invoiceType: any;
   dataLoaded: boolean;
+  primaryPaymentInProgress: boolean;
+  secondaryPaymentInProgress: boolean;
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -61,8 +62,8 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
         this.changeList = masterChangeList.filter(item => !!item.availableTo.find(bt => bt === account.businessType));
       });
 
-    combineLatest([this.route.paramMap, route.queryParams])
-      .subscribe(([pmap, { trnId, SessionKey }]) => {
+    this.route.paramMap
+      .subscribe(pmap => {
         this.invoiceType = pmap.get('invoiceType');
       });
   }
@@ -85,6 +86,10 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
       description3: [''],
     });
 
+    this.loadData();
+  }
+
+  private loadData() {
     this.applicationDataService.getPermanentChangesToLicenseeData()
       .subscribe(({ application, licences }) => {
         this.liquorLicences = licences.filter(item => item.licenceTypeCategory === 'Liquor');
@@ -94,19 +99,25 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
           (this.invoiceType === 'secondary' && !this.application.secondaryInvoicePaid)) {
           this.paymentDataService.verifyPaymentURI(this.invoiceType + 'Invoice', this.application.id)
             .subscribe(res => {
-              this.dataLoaded = true;
               // TODO: Figureout how to report payment status
+              this.loadData();
             });
-        }else{
+        } else {
           this.dataLoaded = true;
-        }
-        
-        if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
-          this.form.disable();
-        }
-        this.form.patchValue(application);
-      });
 
+          // if all required payments are made, go to the dashboard
+          if ((this.cannabisLicences.length === 0 || this.application.primaryInvoicePaid) &&
+            (this.liquorLicences.length === 0 || this.application.secondaryInvoicePaid)) {
+            this.router.navigateByUrl('/dashboard');
+          }
+
+          // if any payment was made, disable the form
+          if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
+            this.form.disable();
+          }
+          this.form.patchValue(application);
+        }
+      });
   }
 
   /**
@@ -147,54 +158,34 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
 
     // Only save if the data is valid
     if (this.isValid()) {
+      if (invoiceType === 'primary') {
+        this.primaryPaymentInProgress = true;
+      } else {
+        this.secondaryPaymentInProgress = true;
+      }
       this.submitApplicationInProgress = true;
       this.save(!this.application.applicationType.isFree, <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(([saveSucceeded, app]) => {
           if (saveSucceeded) {
-            // payment is required
             if (app) {
               this.submitPayment(invoiceType)
                 .subscribe(res => {
                   this.saveComplete.emit(true);
-                  this.submitApplicationInProgress = false;
+                  if (invoiceType === 'primary') {
+                    this.primaryPaymentInProgress = false;
+                  } else {
+                    this.secondaryPaymentInProgress = false;
+                  }
                 });
             }
-            // else if (app) {
-            //   // mark application as complete
-            //   this.save(!this.application.applicationType.isFree, <Application>{ isApplicationComplete: 'Yes' })
-            //     .subscribe(res => {
-            //       this.saveComplete.emit(true);
-            //       // however we need to redirect if the application is Free
-            //       if (this.application.applicationType.isFree) {
-            //         this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-            //         this.router.navigateByUrl('/dashboard');
-            //       }
-            //     });
-            // }
           } else if (this.application.applicationType.isFree) { // show error message the save failed and the application is free
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-            this.submitApplicationInProgress = false;
-          }
-        });
-    } else {
-      this.showValidationMessages = true;
-    }
-  }
-
-
-  private proceedToSecurityScreening() {
-    //send event to move to the next step of the multi-step
-    if (this.isValid()) { // Only proceed if the data is valid
-      this.proceedToSecurityScreeningInProgress = true;
-      this.busyPromise = this.save(true)
-        .toPromise()
-        .then(([saveSucceeded, app]) => {
-          this.proceedToSecurityScreeningInProgress = false;
-          if (saveSucceeded) {
-            this.saveComplete.next(true);
-          } else {
-            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            if (invoiceType === 'primary') {
+              this.primaryPaymentInProgress = false;
+            } else {
+              this.secondaryPaymentInProgress = false;
+            }
           }
         });
     } else {
