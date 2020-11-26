@@ -105,7 +105,7 @@ namespace SepService.Controllers
                     newItem.AdoxioNumberofminors = sol.Location?.NumberMinors.ToString();
                 }
                 // Setting - Indoor, Outdoor or Both
-
+                newItem.AdoxioSetting = (int?) sol.Location?.Setting;
 
                 newRecord.AdoxioSpecialeventLicencedarea.Add(newItem);
             }
@@ -126,7 +126,8 @@ namespace SepService.Controllers
                 newRecord.AdoxioSpecialeventSpecialeventtsacs = new List<MicrosoftDynamicsCRMadoxioSpecialeventtandc>();
                 newRecord.AdoxioSpecialeventSpecialeventtsacs.Add(new MicrosoftDynamicsCRMadoxioSpecialeventtandc()
                 {
-                    AdoxioTermsandcondition = sol.TsAndCs
+                    AdoxioTermsandcondition = sol.TsAndCs,
+                    AdoxioTermsandconditiontype = sol.TsAndCsGlobal
                 });
             }
 

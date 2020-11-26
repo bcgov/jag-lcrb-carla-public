@@ -142,7 +142,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _logger.Error("GetPaymentUrl failed - Unable to get invoice for application {id}");
+                _logger.Error($"GetPaymentUrl failed - Unable to get invoice for application {id}");
                 return NotFound();
             }
         }
