@@ -438,6 +438,22 @@ namespace bdd_tests
         }
 
 
+        [And(@"the dashboard status is updated as (.*)")]
+        public void DashboardStatus(string status)
+        {
+
+            ngDriver.Navigate().Refresh();
+            System.Threading.Thread.Sleep(2000);
+            ngDriver.Navigate().Refresh();
+
+            if (status == "Application Under Review")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Application Under Review ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Add Supporting Documents')]")).Displayed);
+            }
+        }
+
+
         public void FileUpload(string fileName, string inputFile)
         {
             for (int i = 0; i < 10; i++)
