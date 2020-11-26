@@ -22,3 +22,33 @@ h4 {
     font-weight: 900;
     width: 300px;
 }
+
+.paymentSummary {
+  padding: 5px;
+  margin: 5px;
+
+}
+
+th.paymentSummary {
+  border: solid black 1px;
+  padding: 5px;
+  text-align: center;
+  background-color: #38598A;
+  color: white;
+}
+
+td.paymentSummary1{
+  font-weight: 900;
+
+  font-style: italic;
+  border: solid black 1px;
+  width: 70%;
+  padding: 10px;
+}
+  td.paymentSummary2{
+    font-weight: 500;
+    width: 15%;
+
+    text-align: center;
+    border: solid black 1px;
+  }
