@@ -7,7 +7,7 @@
 # Expiry = Today
 #-----------------------
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Today Negative Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -26,7 +26,7 @@ Scenario:  Today Negative Winery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Today Positive Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -45,7 +45,7 @@ Scenario:  Today Positive Winery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Today Negative Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -64,7 +64,7 @@ Scenario:  Today Negative Brewery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Today Positive Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -83,7 +83,7 @@ Scenario:  Today Positive Brewery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Today Negative Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -102,7 +102,7 @@ Scenario:  Today Negative Distillery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Today Positive Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -121,7 +121,7 @@ Scenario:  Today Positive Distillery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Today Negative Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -140,7 +140,7 @@ Scenario:  Today Negative Co-packer Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Today Positive Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -163,7 +163,7 @@ Scenario:  Today Positive Co-packer Licence Renewal
 # Expiry = Yesterday
 #-----------------------
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Yesterday Negative Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -182,7 +182,7 @@ Scenario:  Yesterday Negative Winery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Yesterday Positive Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -201,7 +201,7 @@ Scenario:  Yesterday Positive Winery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Yesterday Negative Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -220,7 +220,7 @@ Scenario:  Yesterday Negative Brewery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Yesterday Positive Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -239,7 +239,7 @@ Scenario:  Yesterday Positive Brewery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Yesterday Negative Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -258,7 +258,7 @@ Scenario:  Yesterday Negative Distillery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Yesterday Positive Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -277,7 +277,7 @@ Scenario:  Yesterday Positive Distillery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Yesterday Negative Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -296,7 +296,7 @@ Scenario:  Yesterday Negative Co-packer Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Yesterday Positive Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -319,7 +319,7 @@ Scenario:  Yesterday Positive Co-packer Licence Renewal
 # Expiry = 45 Days Ago
 #-----------------------
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  45 Days Ago Negative Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -338,7 +338,7 @@ Scenario:  45 Days Ago Negative Winery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  45 Days Ago Positive Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -357,7 +357,7 @@ Scenario:  45 Days Ago Positive Winery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  45 Days Ago Negative Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -376,7 +376,7 @@ Scenario:  45 Days Ago Negative Brewery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  45 Days Ago Positive Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -395,7 +395,7 @@ Scenario:  45 Days Ago Positive Brewery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  45 Days Ago Negative Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -414,7 +414,7 @@ Scenario:  45 Days Ago Negative Distillery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  45 Days Ago Positive Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -433,7 +433,7 @@ Scenario:  45 Days Ago Positive Distillery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  45 Days Ago Negative Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -452,7 +452,7 @@ Scenario:  45 Days Ago Negative Co-packer Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  45 Days Ago Positive Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -475,7 +475,7 @@ Scenario:  45 Days Ago Positive Co-packer Licence Renewal
 # Expiry = 60 Days From Today
 #-----------------------------
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  60 Days From Today Negative Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -494,7 +494,7 @@ Scenario:  60 Days From Today Negative Winery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  60 Days From Today Positive Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -513,7 +513,7 @@ Scenario:  60 Days From Today Positive Winery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  60 Days From Today Negative Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -532,7 +532,7 @@ Scenario:  60 Days From Today Negative Brewery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  60 Days From Today Positive Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -551,7 +551,7 @@ Scenario:  60 Days From Today Positive Brewery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  60 Days From Today Negative Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -570,7 +570,7 @@ Scenario:  60 Days From Today Negative Distillery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  60 Days From Today Positive Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -589,7 +589,7 @@ Scenario:  60 Days From Today Positive Distillery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  60 Days From Today Negative Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -608,7 +608,7 @@ Scenario:  60 Days From Today Negative Co-packer Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  60 Days From Today Positive Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -631,7 +631,7 @@ Scenario:  60 Days From Today Positive Co-packer Licence Renewal
 # Expiry = 30 Days From Today
 #-----------------------------
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  30 Days From Today Negative Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -650,7 +650,7 @@ Scenario:  30 Days From Today Negative Winery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  30 Days From Today Positive Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -669,7 +669,7 @@ Scenario:  30 Days From Today Positive Winery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  30 Days From Today Negative Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -688,7 +688,7 @@ Scenario:  30 Days From Today Negative Brewery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  30 Days From Today Positive Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -707,7 +707,7 @@ Scenario:  30 Days From Today Positive Brewery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  30 Days From Today Negative Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -726,7 +726,7 @@ Scenario:  30 Days From Today Negative Distillery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  30 Days From Today Positive Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -745,7 +745,7 @@ Scenario:  30 Days From Today Positive Distillery Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  30 Days From Today Negative Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -764,7 +764,7 @@ Scenario:  30 Days From Today Negative Co-packer Licence Renewal
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  30 Days From Today Positive Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
