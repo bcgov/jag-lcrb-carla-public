@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm the validation messages for a market event application
 
-@e2e @privatecorporation @marketevent @validation
+@privatecorporation @marketevent @validation
 Scenario: Validation for Market Event Application 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
