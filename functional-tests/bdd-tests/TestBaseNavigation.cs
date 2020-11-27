@@ -210,9 +210,12 @@ namespace bdd_tests
         {
             var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
             ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
+
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
+
+            System.Threading.Thread.Sleep(5000);
 
             if (applicationType == "Catering")
             {
