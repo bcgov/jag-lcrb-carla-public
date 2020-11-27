@@ -21,6 +21,7 @@ using HealthChecks.UI.Client;
 using Newtonsoft.Json;
 using System.Net.Mime;
 using Gov.Lclb.Cllb.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace SepService
 {
@@ -36,17 +37,19 @@ namespace SepService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
             services.AddSwaggerGen(c =>
             {
                 c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB SEP Transfer Service", Version = "v1" });
-                c.DescribeAllEnumsAsStrings();
                 c.ParameterFilter<AutoRestParameterFilter>();
             });
 
-            services.AddHttpClient<IDynamicsClient, DynamicsClient>();
 
-            services.AddControllers();
+            services.AddHttpClient<IDynamicsClient, DynamicsClient>();
 
             // health checks. 
             services.AddHealthChecks()
