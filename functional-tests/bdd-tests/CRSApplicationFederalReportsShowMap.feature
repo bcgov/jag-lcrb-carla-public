@@ -3,7 +3,7 @@
     I want to submit a CRS Application for different business types
     And review the federal reports for the approved application
 
-@e2e @cannabis @privatecorporation @crsfedreports
+@cannabis @crsfedreports
 Scenario: Private Corporation Federal Reports and Show Map
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
