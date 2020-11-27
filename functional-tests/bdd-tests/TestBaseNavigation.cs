@@ -238,8 +238,15 @@ namespace bdd_tests
             if (applicationType == "a Manufacturer Licence")
             {
                 // click on the Manufacturer Licence Start Application button
-                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
-                uiStartAppButton.Click();
+                var uiStartAppButton = ngDriver.FindElements(By.CssSelector("button[id='startMfg']"));
+                if (uiStartAppButton.Count > 0)
+                {
+                    uiStartAppButton[0].Click();
+                }
+                else
+                {
+                    throw new Exception($"Unable to find Manufacturer Start Application button");
+                }
             }
 
             if (applicationType == "a Cannabis Marketing Licence")
@@ -428,6 +435,22 @@ namespace bdd_tests
 
             // TODO
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'No File'))]")).Displayed);
+        }
+
+
+        [And(@"the dashboard status is updated as (.*)")]
+        public void DashboardStatus(string status)
+        {
+
+            ngDriver.Navigate().Refresh();
+            System.Threading.Thread.Sleep(2000);
+            ngDriver.Navigate().Refresh();
+
+            if (status == "Application Under Review")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Application Under Review ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Add Supporting Documents')]")).Displayed);
+            }
         }
 
 
