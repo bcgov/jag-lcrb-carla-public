@@ -69,7 +69,6 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
         this.addDynamicContent();
       });
 
-      //debugger;
 
   }
 

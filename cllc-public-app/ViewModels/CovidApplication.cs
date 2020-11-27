@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string NameOfApplicant { get; set; } 
 
         public string AdditionalPropertyInformation { get; set; } //adoxio_additionalpropertyinformation
-        public string AdoxioInvoiceId  { get; set; }
+        public string InvoiceId  { get; set; }
         public string ApplyingPerson { get; set; } //_adoxio_applyingperson_value
         public bool? AuthorizedToSubmit { get; set; } //adoxio_authorizedtosubmit        
 

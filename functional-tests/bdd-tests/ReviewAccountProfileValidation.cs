@@ -17,7 +17,7 @@ Feature: ReviewAccountProfileValidation
     As a logged in business user
     I want to confirm the validation messages for the account profile
 
-@e2e @cannabis @privatecorporation @reviewaccount
+@privatecorporation @reviewaccount
 Scenario: Validation for Private Corporation Review Account Profile
     Given I am logged in to the dashboard as a private corporation
     And I click on the link for Edit Account Profile
@@ -26,7 +26,7 @@ Scenario: Validation for Private Corporation Review Account Profile
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @reviewaccount
+@partnership @reviewaccount
 Scenario: Validation for Partnership Review Account Profile
     Given I am logged in to the dashboard as a partnership
     And I click on the link for Edit Account Profile
@@ -35,7 +35,7 @@ Scenario: Validation for Partnership Review Account Profile
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @reviewaccount
+@publiccorporation @reviewaccount
 Scenario: Validation for Public Corporation Review Account Profile
     Given I am logged in to the dashboard as a public corporation
     And I click on the link for Edit Account Profile
@@ -44,7 +44,7 @@ Scenario: Validation for Public Corporation Review Account Profile
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @reviewaccount
+@society @reviewaccount
 Scenario: Validation for Society Review Account Profile
     Given I am logged in to the dashboard as a society
     And I click on the link for Edit Account Profile
@@ -53,7 +53,7 @@ Scenario: Validation for Society Review Account Profile
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @reviewaccount
+@soleproprietorship @reviewaccount
 Scenario: Validation for Sole Proprietorship Review Account Profile
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the link for Edit Account Profile
@@ -62,7 +62,7 @@ Scenario: Validation for Sole Proprietorship Review Account Profile
     And the account is deleted
     Then I see the login page
 
- @e2e @cannabis @indigenousnation @reviewaccount
+ @indigenousnation @reviewaccount
  Scenario: Validation for Indigenous Nation Review Account Profile
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the link for Edit Account Profile
@@ -71,7 +71,7 @@ Scenario: Validation for Sole Proprietorship Review Account Profile
     And the account is deleted
     Then I see the login page
 
- @e2e @cannabis @localgovernment @reviewaccount
+ @localgovernment @reviewaccount
  Scenario: Validation for Local Government Review Account Profile
     Given I am logged in to the dashboard as a local government
     And I click on the link for Edit Account Profile
