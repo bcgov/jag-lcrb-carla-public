@@ -194,8 +194,8 @@
         <ng-container *ngFor="let item of changeList">
             <mat-checkbox [formControlName]="item.formControlName">{{item.name}}
             </mat-checkbox>
-            <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle" matTooltip="What is this?"></i>
-            <section class="infoCell" *ngIf="item.helpTextHeader || item.helpText || item.helpTextLink">
+            <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle" (click)="item.show = !!!item.show"></i>
+            <section class="infoCell" *ngIf="item.show && (item.helpTextHeader || item.helpText || item.helpTextLink)">
                 <p *ngIf="item.CannabisFee == item.LiquorFee" style="text-align:right; padding-right:30px;">
                     <strong>Application Fee of ${{item.CannabisFee}} per Licence</strong></p>
                 <p *ngIf="item.CannabisFee != item.LiquorFee" style="text-align:right; padding-right:30px;">
@@ -220,7 +220,7 @@
     </section>
 
     <!-- Internal Share Transfer -->
-    <section>
+    <section *ngIf="form.get('csInternalTransferOfShares').value">
         <h3 class="blue-header">Internal Share Transfer</h3>
         <div class="content-bottom">
             <p>Complete this section when shares have been transferred within the licensee corporation or holding
@@ -286,7 +286,7 @@
     </section>
 
     <!-- External Share Transfer -->
-    <section>
+    <section  *ngIf="form.get('csExternalTransferOfShares').value">
         <h3 class="blue-header">External Share Transfer</h3>
         <div class="content-bottom">
 
@@ -402,7 +402,7 @@
     </section>
 
     <!-- Change of Directors or Officers -->
-    <section>
+    <section   *ngIf="form.get('csChangeOfDirectorsOrOfficers').value">
         <h3 class="blue-header">Change of Directors or Officers</h3>
         <div class="content-bottom">
             <p>To be completed when there are changes in directors or officers of a public corporation or society within
@@ -425,7 +425,7 @@
 
 
     <!-- Person's Name Change -->
-    <section>
+    <section *ngIf="form.get('csNameChangeLicenseePerson').value">
         <h3 class="blue-header">Person's Name Change</h3>
         <div class="content-bottom">
             <p>To be completed when a person holding an interest in a licence has legally changed their name.</p>
@@ -491,7 +491,7 @@
     </section>
 
     <!-- Corporation Name Change -->
-    <section>
+    <section  *ngIf="form.get('csNameChangeLicenseeCorporation').value">
         <h3 class="blue-header">Corporation Name Change</h3>
         <div class="content-bottom">
             <p>
@@ -535,7 +535,7 @@
     </section>
 
     <!-- Partnership Business Name Change -->
-    <section>
+    <section  *ngIf="form.get('csNameChangeLicenseePartnership').value">
         <h3 class="blue-header">Partership Business Name Change</h3>
         <div class="content-bottom">
             <p>
@@ -582,7 +582,7 @@
     </section>
 
     <!-- Society Name Change -->
-    <section>
+    <section *ngIf="form.get('csNameChangeLicenseeSociety').value">
         <h3 class="blue-header">Society Name Change</h3>
         <div class="content-bottom">
             <p>
@@ -620,7 +620,7 @@
     </section>
 
     <!-- Addition of Executor or Receiver -->
-    <section>
+    <section  *ngIf="form.get('csAdditionalReceiverOrExecutor').value">
         <h3 class="blue-header">Addition of Executor or Receiver</h3>
         <div class="content-bottom">
             To be completed upon the death, bankruptcy or receivership of a licensee. Fill
