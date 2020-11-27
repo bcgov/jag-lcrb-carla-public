@@ -3,7 +3,7 @@
     I want to pay the first year catering licence fee
     And submit a licensee representative request 
 
- @e2e @catering @privatecorporation @licenseerep
+ @catering @licenseerep
  Scenario: Private Corporation Licensee Representative Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
