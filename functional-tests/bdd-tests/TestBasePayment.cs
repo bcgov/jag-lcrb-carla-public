@@ -64,7 +64,7 @@ namespace bdd_tests
 
             ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(120);
 
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(10000);
 
             // click on the pay first year licence fee link
             var uiFirstYearLicenceFees = ngDriver.FindElements(By.LinkText(firstYearLicenceFee));

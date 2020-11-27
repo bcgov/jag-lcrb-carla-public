@@ -52,11 +52,11 @@ namespace bdd_tests
                 string leaderTitle = "CTOLeader0";
                 string leaderEmail = "leader0@privatecorp.com";
 
+                System.Threading.Thread.Sleep(8000);
+
                 // open leader #0 form  
                 var tempWait = ngDriver.Manage().Timeouts().ImplicitWait;
                 ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(120);
-
-                System.Threading.Thread.Sleep(3000);
 
                 var uiOpenLeaderForm = ngDriver.FindElements(By.CssSelector(".btn.btn-secondary.AddLeadership"));
 
