@@ -2,7 +2,7 @@
     As a logged in business user
     I want to request lounge area endorsement for a manufacturer licence
 
-@e2e @privatecorporation @manufacturer @winery
+@manufacturer @winery @loungearea
 Scenario: Winery Lounge Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -20,7 +20,7 @@ Scenario: Winery Lounge Area Endorsement Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @brewery
+@manufacturer @brewery @loungearea
 Scenario: Brewery Lounge Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -38,7 +38,7 @@ Scenario: Brewery Lounge Area Endorsement Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @distillery
+@manufacturer @distillery @loungearea
 Scenario: Distillery Lounge Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -56,7 +56,7 @@ Scenario: Distillery Lounge Area Endorsement Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @copacker
+@manufacturer @copacker @loungearea
 Scenario: Co-packer Lounge Area Endorsement Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
