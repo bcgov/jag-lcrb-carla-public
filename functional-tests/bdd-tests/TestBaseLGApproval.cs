@@ -100,9 +100,9 @@ namespace bdd_tests
         {
             if (status == "Application Under Review")
             {
-                //System.Threading.Thread.Sleep(4000);
+                System.Threading.Thread.Sleep(500);
 
-                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Application Under Review ')]")).Displayed);
+                Assert.True(ngDriver.FindElements(By.XPath($"//body[contains(.,'Application Under Review')]")).Count > 0);
 
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Add Supporting Documents')]")).Displayed);
             }
