@@ -204,13 +204,13 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// Generate an application screening request (using the new LE Connections entity instead of the Associations entity)
         /// </summary>
         /// <returns></returns>
-        public async Task<IncompleteApplicationScreening> GenerateApplicationScreeningRequestWithLEConnections(Guid applicationId)
+        public async Task<IncompleteApplicationScreening> GenerateApplicationScreeningRequestV2(Guid applicationId)
         {
             string appFilter = $"adoxio_applicationid eq {applicationId}";
             string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact", "owninguser" };
             var applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
             var application = applications.Value[0];
-            return await CreateApplicationScreeningRequestLEConnections(application);
+            return await CreateApplicationScreeningRequestV2(application);
         }
 
         public MicrosoftDynamicsCRMadoxioWorker GetWorker(Guid workerId)
@@ -637,7 +637,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
         }
 
-        protected async Task<IncompleteApplicationScreening> CreateApplicationScreeningRequestLEConnections(MicrosoftDynamicsCRMadoxioApplication application)
+        protected async Task<IncompleteApplicationScreening> CreateApplicationScreeningRequestV2(MicrosoftDynamicsCRMadoxioApplication application)
         {
             try
             {
@@ -830,7 +830,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                             }
                             else
                             {
-                                var accountAssociates = CreateAssociatesForAccountFromLeConnection(entity.Account.AccountId, screeningRequest.Associates.Select(s => s.Account.AccountId).ToList());
+                                var accountAssociates = CreateAssociatesForAccountV2(entity.Account.AccountId, screeningRequest.Associates.Select(s => s.Account.AccountId).ToList());
                                 screeningRequest.Associates = screeningRequest.Associates.Concat(accountAssociates).ToList();
                             }
                         }
@@ -844,7 +844,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 /* Add associates from account */
                 try
                 {
-                    var moreAssociates = CreateAssociatesForAccountFromLeConnection(application._adoxioApplicantValue, screeningRequest.Associates.Where(s => s.Account != null).Select(s => s.Account.AccountId).ToList());
+                    var moreAssociates = CreateAssociatesForAccountV2(application._adoxioApplicantValue, screeningRequest.Associates.Where(s => s.Account != null).Select(s => s.Account.AccountId).ToList());
                     screeningRequest.Associates = screeningRequest.Associates.Concat(moreAssociates).ToList();
                 }
                 catch (System.NullReferenceException e)
@@ -935,7 +935,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
         }
 
-        private List<LegalEntity> CreateAssociatesForAccountFromLeConnection(string accountId, List<string> accounts)
+        private List<LegalEntity> CreateAssociatesForAccountV2(string accountId, List<string> accounts)
         {
             try
             {
@@ -972,7 +972,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                             }
                             else
                             {
-                                var moreAssociates = CreateAssociatesForAccountFromLeConnection(associate.Account.AccountId, accounts);
+                                var moreAssociates = CreateAssociatesForAccountV2(associate.Account.AccountId, accounts);
                                 newAssociates.AddRange(moreAssociates);
                             }
                         }
@@ -1484,7 +1484,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 Guid.TryParse(application.AdoxioApplicationid, out Guid applicationId);
 
-                var screeningRequest = await GenerateApplicationScreeningRequestWithLEConnections(applicationId);
+                var screeningRequest = await GenerateApplicationScreeningRequestV2(applicationId);
                 var response = SendApplicationScreeningRequest(applicationId, screeningRequest);
                 if (response)
                 {
