@@ -17,7 +17,7 @@ Feature: OnSiteEndorsementRenewal
     As a logged in business user
     I want to renew a licence that expired yesterday and has an on-site endorsement
 
-@e2e @onsiteendorsementrenewalwinery 
+@onsiteendorsementrenewal @winery 
 Scenario: Winery On-Site Endorsement Licence Renewal
 Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -44,7 +44,7 @@ Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     Then I see the login page
 
-@e2e @onsiteendorsementrenewalbrewery 
+@onsiteendorsementrenewal @brewery 
 Scenario: Brewery On-Site Endorsement Licence Renewal
 Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -71,7 +71,7 @@ Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     Then I see the login page
 
-@e2e @onsiteendorsementrenewaldistiller 
+@onsiteendorsementrenewal @distillery
 Scenario: Distillery On-Site Endorsement Licence Renewal
 Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -98,7 +98,7 @@ Given I am logged in to the dashboard as a private corporation
     And the account is deleted
     Then I see the login page
 
-@e2e @onsiteendorsementrenewalcopacker 
+@onsiteendorsementrenewal @copacker 
 Scenario: Co-packer On-Site Endorsement Licence Renewal
 Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
