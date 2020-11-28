@@ -92,8 +92,8 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
   private loadData() {
     this.applicationDataService.getPermanentChangesToLicenseeData()
       .subscribe(({ application, licences }) => {
-        this.liquorLicences = licences.filter(item => item.licenceTypeCategory === 'Liquor');
-        this.cannabisLicences = licences.filter(item => item.licenceTypeCategory === 'Cannabis');
+        this.liquorLicences = licences.filter(item => item.licenceTypeCategory === 'Liquor' && item.status === 'Active');
+        this.cannabisLicences = licences.filter(item => item.licenceTypeCategory === 'Cannabis' && item.status === 'Active');
         this.application = application;
         if ((this.invoiceType === 'primary' && !this.application.primaryInvoicePaid) ||
           (this.invoiceType === 'secondary' && !this.application.secondaryInvoicePaid)) {
