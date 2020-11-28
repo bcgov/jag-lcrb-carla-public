@@ -150,7 +150,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
             bool startHangfire = true;
 #if DEBUG
-            // do not start Hangfire if we are running tests.        
+            // do not start Hangfire if we are running tests.
             foreach (var assem in Assembly.GetEntryAssembly().GetReferencedAssemblies())
             {
                 if (assem.FullName.ToLowerInvariant().StartsWith("xunit"))
@@ -245,7 +245,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     log.LogInformation("Creating Hangfire jobs for SPD Export ...");
-                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
+                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplicationsLEConnections(null), Cron.MinuteInterval(15));
                     RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(15));
                     log.LogInformation("Hangfire Send Export job done.");
 
