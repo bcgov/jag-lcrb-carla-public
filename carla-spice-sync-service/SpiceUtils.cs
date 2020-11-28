@@ -206,7 +206,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// <returns></returns>
         public async Task<IncompleteApplicationScreening> GenerateApplicationScreeningRequestWithLEConnections(Guid applicationId)
         {
-            string appFilter = "adoxio_applicationid eq " + applicationId;
+            string appFilter = $"adoxio_applicationid eq {applicationId}";
             string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact", "owninguser" };
             var applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
             var application = applications.Value[0];
@@ -1441,6 +1441,50 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 Guid.TryParse(application.AdoxioApplicationid, out Guid applicationId);
 
                 var screeningRequest = await GenerateApplicationScreeningRequest(applicationId);
+                var response = SendApplicationScreeningRequest(applicationId, screeningRequest);
+                if (response)
+                {
+                    hangfireContext.WriteLine($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
+                    _logger.LogError($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
+                }
+                else
+                {
+                    hangfireContext.WriteLine($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
+                    _logger.LogError($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
+                }
+            }
+
+            _logger.LogError("End of SendFoundApplications Job");
+            hangfireContext.WriteLine("End of SendFoundApplications Job");
+        }
+
+        [DisableConcurrentExecution(timeoutInSeconds: 10 * 60)]
+        public async Task SendFoundApplicationsLEConnections(PerformContext hangfireContext)
+        {
+            string[] select = { "adoxio_applicationtypeid" };
+            IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_requiressecurityscreening eq true", select: select).Value;
+            if (selectedAppTypes.Count == 0)
+            {
+                _logger.LogError("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
+                hangfireContext.WriteLine("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
+                return;
+            }
+
+            List<string> appTypes = selectedAppTypes.Select(a => a.AdoxioApplicationtypeid).ToList();
+            _logger.LogError($"Starting SendFoundApplications Job for {selectedAppTypes.Count} application types");
+            hangfireContext.WriteLine($"Starting SendFoundApplications Job for {selectedAppTypes.Count} application types");
+
+            string sendFilter = $"adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.NotSent}";
+
+            var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value.Where(a => appTypes.Contains(a._adoxioApplicationtypeidValue));
+            _logger.LogError($"Found {applications.Count()} applications to send to SPD.");
+            hangfireContext.WriteLine($"Found {applications.Count()} applications to send to SPD.");
+
+            foreach (var application in applications)
+            {
+                Guid.TryParse(application.AdoxioApplicationid, out Guid applicationId);
+
+                var screeningRequest = await GenerateApplicationScreeningRequestWithLEConnections(applicationId);
                 var response = SendApplicationScreeningRequest(applicationId, screeningRequest);
                 if (response)
                 {
