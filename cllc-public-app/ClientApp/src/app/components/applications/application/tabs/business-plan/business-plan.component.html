@@ -19,30 +19,31 @@
       <div *ngIf="hasType()">
         <p>Your application must include a business plan that describes your proposed operations, including:</p>
         <ul>
-          <li>What stages of manufacturing will be taking place at your manufacturing site. <span *ngIf="isWinery()"><strong>You must
+          <li *ngIf="isCopacker()">Which of the following manufacturing activities will take place at your manufacturing site on behalf of a BC licenced winery, brewery, or distillery: packaging, bottling, blending and/or flavouring of liquor. </li>
+          <li *ngIf="!isCopacker()">What stages of manufacturing will be taking place at your manufacturing site. <span *ngIf="isWinery()"><strong>You must
             demonstrate that they will produce at least 4,500 litres per year on site.</strong> Onsite production means
             fermenting
             and at least one of the
             following winemaking steps: blending, crushing, filtering, aging for at least 3 months, secondary
             fermentation
             or carbonation, and packaging.</span></li>
-          <li>Financial statements outlining production (in litres) and sales forecasts for a three year period.
+          <li *ngIf="!isCopacker()">Financial statements outlining production (in litres) and sales forecasts for a three year period.
           </li>
-          <li>Your proposed product(s), and any plans regarding contract manufacturing (you manufacturing for
+          <li *ngIf="!isCopacker()">Your proposed product(s), and any plans regarding contract manufacturing (you manufacturing for
             others,
             and/or them manufacturing for you) and
             the manufacturer(s) involved. </li>
-          <li>Your proposed agricultural sources (e.g. grapes, hops) and whether all sources will be from B.C.
+          <li *ngIf="!isCopacker()">Your proposed agricultural sources (e.g. grapes, hops) and whether all sources will be from B.C.
           </li>
 
-          <li>Whether you will be using neutral grain spirits.</li>
+          <li *ngIf="!isCopacker()">Whether you will be using neutral grain spirits.</li>
           <li>A list of all manufacturing equipment including equipment costs (to be eligible for a licence, you
             must
             demonstrate that you own or lease the equipment
             necessary to manufacture on-site, and you must continue to maintain that equipment to renew your
             licence).
           </li>
-          <li>Where you will store packaged products, if not on-site. </li>
+          <li *ngIf="!isCopacker()">Where you will store packaged products, if not on-site. </li>
           <li *ngIf="isBrewery()">Whether your brewery will operate in conjunction with a liquor primary (brewpub)
             at the
             same site, and whether product will be piped in from the brewery to serve on tap.</li>
@@ -78,7 +79,7 @@
             [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
-        
+        <section *ngIf="!isCopacker()">
         <hr>
         <h4>Production and Sales Forecasts</h4>
         <p>Upload financial statements outlining production (in litres) and sales forecasts for a three year
@@ -91,6 +92,7 @@
             [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
+      </section>
         <section *ngIf="isWinery()">
         <hr>
         <h4>Proposed Agricultural Sources</h4>
@@ -138,7 +140,7 @@
           <app-production-stages [application]="application" [form]="form"></app-production-stages>  
         </section>
       </section>
-        <section>
+        <section *ngIf="!isCopacker()">
           <hr>
                 <app-field label="Will you be using neutral grain spirits?" [valid]="isValidOrNotTouched('neutralGrain')" [showChevrons]="false"
                 errorMessage="Specify whether you will be useing neutral grain spirits" [isFullWidth]="true">

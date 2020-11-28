@@ -345,6 +345,27 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     );
   }
 
+  startNewFPApplication() {
+    const newLicenceApplicationData: Application = <Application>{
+      licenseType: 'Food Primary',
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.FP },
+      account: this.account,
+    };
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/account-profile/${data.id}`];
+
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open('Error starting a Food Primary Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a Food Primary Application');
+      }
+    );
+  }
+
   startNewRASApplication() {
     const newLicenceApplicationData: Application = <Application>{
       licenseType: 'Rural Agency Store',

@@ -143,22 +143,25 @@
                         <table style="border: solid black 1px;">
                             <tbody>
                                 <tr>
-                                    <th class="licenceTable" style="background-color: #38598a; color: white;">Cannabis
-                                        Licences</th>
-                                    <th class="licenceTable" style="background-color: #38598a; color: white;">Liquor
-                                        Licences</th>
+                                    <th class="licenceTable" style="background-color: #38598a; color: white;">{{cannabisLicences.length}} Active Cannabis
+                                        Licences:</th>
+                                    <th class="licenceTable" style="background-color: #38598a; color: white;">{{liquorLicences.length}} Active Liquor
+                                        Licences:</th>
                                 </tr>
                                 <tr>
                                     <td class="licenceTable">
                                         <ul>
                                             <li *ngFor="let item of cannabisLicences">{{item.licenseNumber}} -
-                                                {{item.establishmentName}}</li>
+                                                {{item.establishmentName}}
+
+                                              </li>
                                         </ul>
                                     </td>
                                     <td class="licenceTable">
                                         <ul>
                                             <li *ngFor="let item of liquorLicences">{{item.licenseNumber}} -
                                                 {{item.establishmentName}}</li>
+
                                         </ul>
                                     </td>
                                 </tr>
@@ -771,59 +774,6 @@
             DECLARATIONS
         </h3>
         <div class="padded-section content-bottom">
-            <ng-container>
-                <p>
-                    The application must only be submitted by an individual with the authority to bind the applicant.
-                    The
-                    branch
-                    relies on the applicant to ensure that the individual who submits this application is authorized to
-                    do
-                    so.
-                    Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
-                    usually
-                    be
-                    an officer or, in some cases, a director.
-                </p>
-                <p>
-                    Note: A lawyer or
-                    consultant,
-                    may NOT submit this application on behalf of
-                    the applicant.
-                </p>
-
-
-                <mat-checkbox>
-                    I understand and affirm that I am authorized to submit the application.
-                </mat-checkbox>
-
-                <p *ngIf="hasCannabis">
-                    Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the
-                    general
-                    manager
-                    an application, or
-                    information or a record included as part of the application, that contains false or misleading
-                    information, or
-                    fails to disclose a material fact”.
-                </p>
-                <p *ngIf="hasLiquor">
-                    Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse to
-                    issue,
-                    renew, transfer or amend a licence if the applicant fails to disclose a material fact required by
-                    the
-                    application or makes a false or misleading statement in the application."
-                </p>
-
-                <mat-checkbox>
-                    I understand and affirm that all of the information provided for this
-                    application is true and complete.
-                </mat-checkbox>
-
-
-            </ng-container>
-
-        </div>
-
-
         <p>Note: An agent, lawyer or third party operator may not sign the declaration on behalf of the licensee.</p>
 
         <p>
@@ -847,19 +797,28 @@
             to sign this form on the licensee's behalf, the branch will accept the licensee representative's submission.
         </p>
 
-        <p>
+        <p *ngIf="hasLiquor">
             Section 57(1)(c) of the Liquor Control and Licensing Act states: “A person commits an offence if the person
             (c) provides false or
             misleading information in the following circumstances: (i) when making an application referred to in section
             12; (ii) when making
             a report or when required and as specified by the general manager under section 59”.
         </p>
+        <p *ngIf="hasCannabis">
+            Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the
+            general
+            manager
+            an application, or
+            information or a record included as part of the application, that contains false or misleading
+            information, or
+            fails to disclose a material fact”.
+        </p>
 
         <mat-checkbox>
             As the licensee or authorized signatory of the licensee, I understand and affirm that all of the information
             provided is true and complete.
         </mat-checkbox>
-
+      </div>
     </section>
 
     <!-- Application Contact Details -->
@@ -872,47 +831,59 @@
         <h3 class="blue-header ngtest-declarations">
             PAYMENT
         </h3>
-        <div>
-            <table class="w-100" *ngIf="hasCannabis">
+        <div class="content-bottom" *ngIf="changeList.length && changeList.length == 0">
+          <p>You have not selected any change types to submit. Fees are calculated based on the types of changes selected and the number of licences you have</p>
+        </div>
+        <div class="content-bottom" style="text-align: center;" >
+          <p *ngIf="hasCannabis && hasLiquor">You have both liquor and cannabis licences. Fees for the different types of licences
+            must be paid separately. Your application will not be submitted to the Branch until both are paid.</p>
+            <table class="w-100" *ngIf="hasCannabis" class="paymentSummary">
 
                 <tr>
-                    <th>Type Of Change</th>
-                    <th>Num Licences</th>
-                    <th>Cost</th>
+                    <th class="paymentSummary">Type Of Change</th>
+                    <th class="paymentSummary">Num Licences</th>
+                    <th class="paymentSummary">Cost</th>
                 </tr>
                 <ng-container *ngFor="let item of changeList">
                     <tr *ngIf="form.get(item.formControlName).value === true">
-                        <td>{{item.name}}</td>
-                        <td>x {{cannabisLicences.length}}</td>
-                        <td>${{item.CannabisFee}}</td>
+                        <td class="paymentSummary1">{{item.name}}</td>
+                        <td class="paymentSummary2">x {{cannabisLicences.length}}</td>
+                        <td class="paymentSummary2">${{item.CannabisFee}}</td>
                     </tr>
                 </ng-container>
-            </table>
-            <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary"
-                (click)="submit_application('primary')">
-                <span>{{ application?.primaryInvoicePaid ? 'Cannabis Fee Paid' : 'Pay Cannabis Fee'}}</span>
-                <mat-progress-bar *ngIf="primaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
-            </button>
 
-            <table class="w-100" *ngIf="hasLiquor">
+            <tr><td colspan=3 align=right style="padding: 10px;">
+              <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary"
+              (click)="submit_application('primary')" style="width:250px; text-transform: uppercase;">
+              <span>{{ application?.primaryInvoicePaid ? 'Cannabis Fee Paid' : 'Pay Cannabis Fee'}}</span>
+              <mat-progress-bar *ngIf="primaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
+            </button>
+            </td></tr>
+          </table>
+
+
+            <table class="w-100" *ngIf="hasLiquor" class="paymentSummary">
                 <tr>
-                    <th>Type Of Change</th>
-                    <th>Num Licences</th>
-                    <th>Cost</th>
+                    <th class="paymentSummary">Type Of Change</th>
+                    <th class="paymentSummary">Num Licences</th>
+                    <th class="paymentSummary">Cost</th>
                 </tr>
                 <ng-container *ngFor="let item of changeList">
                     <tr *ngIf="form.get(item.formControlName).value === true">
-                        <td>{{item.name}}</td>
-                        <td>x {{liquorLicences.length}}</td>
-                        <td>${{item.LiquorFee}}</td>
+                        <td class="paymentSummary1">{{item.name}}</td>
+                        <td class="paymentSummary2">x {{liquorLicences.length}}</td>
+                        <td class="paymentSummary2">${{item.LiquorFee}}</td>
                     </tr>
                 </ng-container>
-            </table>
-            <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid"
-                (click)="submit_application('secondary')">
-                <span>{{ application?.secondaryInvoicePaid ? 'Liquor Fee Paid' : 'Pay Liquor Fee' }}</span>
-                <mat-progress-bar *ngIf="secondaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
-            </button>
+            <tr><td colspan=3 align=right style="padding: 10px;">
+              <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid"
+              (click)="submit_application('secondary')" style="width:250px; text-transform: uppercase;">
+              <span>{{ application?.secondaryInvoicePaid ? 'Liquor Fee Paid' : 'Pay Liquor Fee' }}</span>
+              <mat-progress-bar *ngIf="secondaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
+          </button>
+            </td></tr>
+
+          </table>
         </div>
     </section>
 </div>
