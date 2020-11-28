@@ -43,7 +43,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
             return Ok();
         }
 
-
         /// <summary>
         /// Send an application record to SPICE for event driven processing
         /// </summary>
@@ -61,6 +60,51 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                     {
                         // Generate the application request
                         applicationRequest = await _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        return NotFound($"Application {applicationId} is not found.");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex.ToString());
+                        return BadRequest();
+                    }
+
+                    if (applicationRequest == null)
+                    {
+                        return NotFound($"Application {applicationId} is not found.");
+                    }
+
+                    var result = _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
+
+                    if (result)
+                    {
+                        return Ok(applicationRequest);
+                    }
+                }
+                return BadRequest();
+            }
+            return Unauthorized();
+        }
+
+        /// <summary>
+        /// Send an application record to SPICE for event driven processing (using new LE Connection entities)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("send-v2/{applicationIdString}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> SendApplicationScreeningRequestV2(string applicationIdString, string bearer)
+        {
+            if (JwtChecker.Check(bearer, Configuration))
+            {
+                if (Guid.TryParse(applicationIdString, out Guid applicationId))
+                {
+                    var applicationRequest = new IncompleteApplicationScreening();
+                    try
+                    {
+                        // Generate the application request
+                        applicationRequest = await _spiceUtils.GenerateApplicationScreeningRequestV2(applicationId);
                     }
                     catch (ArgumentOutOfRangeException)
                     {
