@@ -21,8 +21,8 @@ Scenario: Private Corporation CRS Release
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    # And I click on the Dashboard tab
+    # And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I click on the link for Download Licence
     And I show the store as open on the map
@@ -64,8 +64,8 @@ Scenario: Sole Proprietorship CRS Release
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    # And I click on the Dashboard tab
+    # And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I click on the link for Download Licence
     And I show the store as open on the map
