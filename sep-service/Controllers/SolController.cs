@@ -140,7 +140,7 @@ namespace SepService.Controllers
             {
                 _logger.Error(httpOperationException, "Error creating special event record");
                 // fail 
-                return StatusCode(500, "Error creating record.");
+                return StatusCode(500, "Server Error creating record.");
             }
 
             return Ok();
