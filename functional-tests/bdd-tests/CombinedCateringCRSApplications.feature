@@ -2,7 +2,7 @@
     As a logged in business user
     I want to submit a CRS and Catering application for the same account
 
-@e2e @cannabis @privatecorporation @crsapp
+@cannabis @catering @crsapp
 Scenario: Combined Catering and CRS Applications
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store

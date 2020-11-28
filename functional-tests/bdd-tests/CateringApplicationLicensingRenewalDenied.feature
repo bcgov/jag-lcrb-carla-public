@@ -7,7 +7,7 @@
 # Expiry = Today
 #-----------------------
 
-@e2e @catering @privatecorporation @licencerenewal
+@catering @licencerenewal
 Scenario: Deny Catering Licence Renewal Today
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -29,7 +29,7 @@ Scenario: Deny Catering Licence Renewal Today
 # Expiry = Yesterday
 #-----------------------
 
-@e2e @catering @privatecorporation @licencerenewal
+@catering @licencerenewal
 Scenario: Deny Catering Licence Renewal Yesterday
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -51,7 +51,7 @@ Scenario: Deny Catering Licence Renewal Yesterday
 # Expiry = 45 Days Ago
 #-----------------------
 
-@e2e @catering @privatecorporation @licencerenewal
+@catering @licencerenewal
 Scenario: Deny Catering Licence Renewal 45 Days Ago
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -73,7 +73,7 @@ Scenario: Deny Catering Licence Renewal 45 Days Ago
 # Expiry = 60 Days From Today
 #-----------------------------
 
-@e2e @catering @privatecorporation @licencerenewal
+@catering @licencerenewal
 Scenario: Deny Catering Licence Renewal 60 Days Future
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -95,7 +95,7 @@ Scenario: Deny Catering Licence Renewal 60 Days Future
 # Expiry = 30 Days From Today
 #-----------------------------
 
-@e2e @catering @privatecorporation @licencerenewal
+@catering @licencerenewal
 Scenario: Deny Catering Licence Renewal 30 Days Future
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
