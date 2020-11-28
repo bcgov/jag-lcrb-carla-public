@@ -17,12 +17,8 @@ Feature: ManufacturerApplication
     As a logged in business user
     I want to submit a Manufacturer Applications for different manufacturer types
 
-#-----------------------
-# Private Corporation
-#-----------------------
-
-@e2e @privatecorporation @manufacturerapp @winery
-Scenario: Private Corporation Winery Manufacturer Application
+@manufacturerapp @winery
+Scenario: Winery Manufacturer Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -38,8 +34,8 @@ Scenario: Private Corporation Winery Manufacturer Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturerapp @distillery
-Scenario: Private Corporation Distillery Manufacturer Application
+@manufacturerapp @distillery
+Scenario: Distillery Manufacturer Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -55,8 +51,8 @@ Scenario: Private Corporation Distillery Manufacturer Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturerapp @brewery
-Scenario: Private Corporation Brewery Manufacturer Application
+@manufacturerapp @brewery
+Scenario: Brewery Manufacturer Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -72,8 +68,8 @@ Scenario: Private Corporation Brewery Manufacturer Application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturerapp @copacker
-Scenario: Private Corporation Co-packer Manufacturer Application
+@manufacturerapp @copacker
+Scenario: Co-packer Manufacturer Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

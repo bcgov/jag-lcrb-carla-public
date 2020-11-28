@@ -2,7 +2,7 @@
     As a logged in worker applicant
     I want to submit a cannabis worker application
 
-@e2e @worker @release
+@workerapplication @release
 Scenario: Worker Application
     Given I login with no terms
     And the account is deleted

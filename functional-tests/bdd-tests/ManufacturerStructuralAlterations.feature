@@ -2,7 +2,7 @@
     As a logged in business user
     I want to request structural alterations to an approved lounge or special events area for a manufacturer licence
 
-@e2e @privatecorporation @manufacturer @winery
+@manufacturer @winery @structuralalterations
 Scenario: Winery Structural Alterations
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -22,7 +22,7 @@ Scenario: Winery Structural Alterations
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @brewery
+@manufacturer @brewery @structuralalterations
 Scenario: Brewery Structural Alterations
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -42,7 +42,7 @@ Scenario: Brewery Structural Alterations
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @distillery
+@manufacturer @distillery @structuralalterations
 Scenario: Distillery Structural Alterations
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -62,7 +62,7 @@ Scenario: Distillery Structural Alterations
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @copacker
+@manufacturer @copacker @structuralalterations
 Scenario: Co-packer Structural Alterations
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

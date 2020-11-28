@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Converters;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,7 +27,7 @@ namespace SepService.ViewModels
 
         [Required]
         [EnumDataType(typeof(LocationSetting))]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public LocationSetting Setting { get; set;}
         
 

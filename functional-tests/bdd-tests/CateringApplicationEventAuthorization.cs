@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-  Feature: CateringApplicationEventAuthorization
+ Feature: CateringApplicationEventAuthorization
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit an event authorization request for different business types
@@ -22,7 +22,7 @@ using Xunit;
 # No Approval Requests
 #-----------------------
 
- @e2e @catering @partnership @cateringevent
+ @cateringevent @partnership @noapproval
  Scenario: No Approval Partnership Event Authorization Request
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -34,13 +34,13 @@ using Xunit;
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee 
+    And I pay the licensing fee  
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @privatecorporation @cateringevent @hourlyTest
+ @cateringevent @privatecorporation @noapproval @hourlyTest
  Scenario: No Approval Private Corporation Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -58,7 +58,7 @@ using Xunit;
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @publiccorporation @cateringevent
+ @cateringevent @publiccorporation @noapproval
  Scenario: No Approval Public Corporation Event Authorization Request
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
@@ -70,13 +70,13 @@ using Xunit;
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee
+    And I pay the licensing fee 
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @society @cateringevent
+ @cateringevent @society @noapproval
  Scenario: No Approval Society Event Authorization Request
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -94,7 +94,7 @@ using Xunit;
     And the account is deleted
     Then I see the login page
 
-  @e2e @catering @soleproprietorship @cateringevent
+  @cateringevent @soleproprietorship @noapproval
   Scenario: No Approval Sole Proprietorship Event Authorization Request
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -116,7 +116,7 @@ using Xunit;
 # 500+ Attendees Request
 #-----------------------
 
- @e2e @cateringevent 
+ @cateringevent @privatecorporation @500attendees
  Scenario: 500+ Attendees Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -138,7 +138,7 @@ using Xunit;
 # Outdoor Request
 #-----------------------
 
- @e2e @cateringevent 
+ @cateringevent @outdoor
  Scenario: Outdoor Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -160,7 +160,7 @@ using Xunit;
 # Indoor/Outdoor Request
 #-----------------------
 
- @e2e @cateringevent 
+ @cateringevent @indooroutdoor
  Scenario: Both Indoor and Outdoor Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -182,7 +182,7 @@ using Xunit;
 # Past 2am (non-community)
 #-------------------------
 
- @e2e @cateringevent 
+ @cateringevent @past2amnoncommunity
  Scenario: Past 2am Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -204,7 +204,7 @@ using Xunit;
 # Past 2am (community)
 #-------------------------
 
- @e2e @cateringevent 
+ @cateringevent @past2amcommunity
  Scenario: Past 2am Community Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -226,7 +226,7 @@ using Xunit;
 # Save For Later
 #-------------------------
 
- @e2e @cateringevent 
+ @cateringevent @saveforlater
  Scenario: Save For Later Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
