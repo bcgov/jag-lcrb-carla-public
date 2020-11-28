@@ -143,22 +143,25 @@
                         <table style="border: solid black 1px;">
                             <tbody>
                                 <tr>
-                                    <th class="licenceTable" style="background-color: #38598a; color: white;">Cannabis
-                                        Licences</th>
-                                    <th class="licenceTable" style="background-color: #38598a; color: white;">Liquor
-                                        Licences</th>
+                                    <th class="licenceTable" style="background-color: #38598a; color: white;">{{cannabisLicences.length}} Active Cannabis
+                                        Licences:</th>
+                                    <th class="licenceTable" style="background-color: #38598a; color: white;">{{liquorLicences.length}} Active Liquor
+                                        Licences:</th>
                                 </tr>
                                 <tr>
                                     <td class="licenceTable">
                                         <ul>
                                             <li *ngFor="let item of cannabisLicences">{{item.licenseNumber}} -
-                                                {{item.establishmentName}}</li>
+                                                {{item.establishmentName}}
+
+                                              </li>
                                         </ul>
                                     </td>
                                     <td class="licenceTable">
                                         <ul>
                                             <li *ngFor="let item of liquorLicences">{{item.licenseNumber}} -
                                                 {{item.establishmentName}}</li>
+
                                         </ul>
                                     </td>
                                 </tr>
@@ -828,7 +831,12 @@
         <h3 class="blue-header ngtest-declarations">
             PAYMENT
         </h3>
-        <div class="content-bottom" style="text-align: center;">
+        <div class="content-bottom" *ngIf="changeList.length && changeList.length == 0">
+          <p>You have not selected any change types to submit. Fees are calculated based on the types of changes selected and the number of licences you have</p>
+        </div>
+        <div class="content-bottom" style="text-align: center;" >
+          <p *ngIf="hasCannabis && hasLiquor">You have both liquor and cannabis licences. Fees for the different types of licences
+            must be paid separately. Your application will not be submitted to the Branch until both are paid.</p>
             <table class="w-100" *ngIf="hasCannabis" class="paymentSummary">
 
                 <tr>
@@ -846,10 +854,10 @@
 
             <tr><td colspan=3 align=right style="padding: 10px;">
               <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary"
-              (click)="submit_application('primary')">
+              (click)="submit_application('primary')" style="width:250px; text-transform: uppercase;">
               <span>{{ application?.primaryInvoicePaid ? 'Cannabis Fee Paid' : 'Pay Cannabis Fee'}}</span>
               <mat-progress-bar *ngIf="primaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
-              <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary" (click)="submit_application('primary')" style="width:250px; text-transform: uppercase;">Pay Cannabis Fee</button>
+            </button>
             </td></tr>
           </table>
 
@@ -869,7 +877,7 @@
                 </ng-container>
             <tr><td colspan=3 align=right style="padding: 10px;">
               <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid"
-              (click)="submit_application('secondary')">
+              (click)="submit_application('secondary')" style="width:250px; text-transform: uppercase;">
               <span>{{ application?.secondaryInvoicePaid ? 'Liquor Fee Paid' : 'Pay Liquor Fee' }}</span>
               <mat-progress-bar *ngIf="secondaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
           </button>
