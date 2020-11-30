@@ -51,8 +51,7 @@ const ServiceHours = [
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
-  styleUrls: ['./application.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./application.component.scss']
 })
 export class ApplicationComponent extends FormBase implements OnInit {
   establishmentWatchWords: KeyValue<string, boolean>[];
@@ -110,6 +109,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   saveForLaterInProgress: boolean;
   submitApplicationInProgress: boolean;
   proceedToSecurityScreeningInProgress: boolean;
+  dataLoaded: boolean;
 
 
   get isOpenedByLGForApproval(): boolean {
@@ -397,9 +397,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
               this.form.disable();
             }
             this.savedFormData = this.form.value;
+            this.dataLoaded = true;
           },
             () => {
               console.log('Error occured');
+              this.dataLoaded = true;
             }
           );
       });
