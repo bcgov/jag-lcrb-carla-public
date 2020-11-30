@@ -35,8 +35,11 @@
                   target="_blank" rel="noopener noreferrer">Learn more about this licence</a>
               </td>
               <td style="text-align: center;">
-                <button class="btn btn-secondary" (click)="startNewLicenceApplication()" id="startCRS">START
-                  APPLICATION</button>
+                <button mat-raised-button color="secodary" [disabled]="startCRSOngoing"
+                  (click)="startNewLicenceApplication()" id="startCRS">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startCRSOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
               </td>
             </tr>
             <tr *ngIf="!(nonMarketerExists || marketerExists)">
@@ -52,8 +55,11 @@
                   more about this licence</a>
               </td>
               <td style="text-align: center;">
-                <button class="btn btn-secondary" (click)="startNewMarketerApplication()" id="startMarketing">START
-                  APPLICATION</button>
+                <button mat-raised-button color="secondary" [disabled]="startMarketingOngoing"
+                  (click)="startNewMarketerApplication()" id="startMarketing">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startMarketingOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
               </td>
             </tr>
           </table>
@@ -75,10 +81,13 @@
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button *ngIf="liquorOne" class="btn btn-secondary" (click)="startNewCateringApplication()"
-                  id="startCatering">START
-                  APPLICATION</button>
-                <button *ngIf="!liquorOne" class="btn btn-secondary" id="startCatering" disabled>COMING SOON</button>
+                <button *ngIf="liquorOne" mat-raised-button color="secondary" [disabled]="startCateringOngoing"
+                  (click)="startNewCateringApplication()" id="startCatering">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startCateringOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+                <button *ngIf="!liquorOne" mat-raised-button color="secondary" id="startCatering" disabled>COMING
+                  SOON</button>
               </td>
             </tr>
             <tr *ngIf="liquorTwo">
@@ -94,8 +103,11 @@
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button class="btn btn-secondary" (click)="startNewMfgApplication()" id="startMfg">START
-                  APPLICATION</button>
+                <button mat-raised-button color="secodary" [disabled]="startMfgOngoing"
+                  (click)="startNewMfgApplication()" id="startMfg">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startMfgOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
               </td>
             </tr>
 
@@ -138,8 +150,11 @@
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button class="btn btn-secondary" (click)="startNewUBVApplication()" id="startUBV">START
-                  APPLICATION</button>
+                <button mat-raised-button color="secondary" [disabled]="startUBVOngoing"
+                  (click)="startNewUBVApplication()" id="startUBV">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startUBVOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
               </td>
             </tr>
 
@@ -180,7 +195,9 @@
                   more about this Expression of Interest</a-->
               </td>
               <td style="text-align: center;">
-                <button class="btn btn-secondary" (click)="startNewRASApplication()" id="startRAS">SUBMIT INFORMATION
+                <button mat-raised-button color="secondary" (click)="startNewRASApplication()" id="startRAS">
+                  SUBMIT INFORMATION
+                  <mat-progress-bar class="mb-1" *ngIf="startRASOngoing" mode="indeterminate"></mat-progress-bar>
                 </button>
               </td>
             </tr>
@@ -232,11 +249,11 @@
                   <span *ngIf="!isApprovedByLGAndNotSubmitted(item)">
                     {{getApplicationStatusText(item.applicationStatus)}}
                   </span>
- 
+
                   <span *ngIf="isApprovedByLGAndNotSubmitted(item)">
                     Ready for Submission
                   </span>
- 
+
                 </div>
                 <p *ngIf="item.applicationStatus === 'Processed'">
                   This application has been received and is being reviewed by the LCRB.
@@ -263,8 +280,8 @@
 
                   <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
                     <span>
-                        <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
-                        Pay First Year Fee
+                      <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
+                      Pay First Year Fee
                     </span>
                   </a>
 
