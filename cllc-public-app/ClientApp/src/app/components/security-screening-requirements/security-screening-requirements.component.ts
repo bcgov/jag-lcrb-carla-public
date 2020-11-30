@@ -26,6 +26,7 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
   isCannabisApplication: boolean;
   errorMessages: string[] = [];
   skipScreeningRequirements: boolean = false;
+  dataLoaded: boolean;
 
   constructor(private snackBar: MatSnackBar,
     private route: ActivatedRoute,
@@ -62,6 +63,7 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
       this.data = summary;
       this.liquorLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Liquor').length > 0;
       this.cannabisLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Cannabis').length > 0;
+      this.dataLoaded = true;
     });
   }
 

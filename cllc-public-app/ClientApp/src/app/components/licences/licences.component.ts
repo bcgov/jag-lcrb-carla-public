@@ -94,11 +94,14 @@ export class LicencesComponent extends FormBase implements OnInit {
             ...licenses.filter(lic => !(lic.licenceTypeName.includes('Transfer in Progress -') && lic.checklistConclusivelyDeem)),
             ...operatedLicences,
             ...proposedLicences.filter(lic => lic.checklistConclusivelyDeem)];
+            
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
             licence.headerRowSpan = 1;
             licence.hasPaidForRenewalApplication = this.hasPaidForRenewalApplication(licence);
             this.addOrUpdateLicence(licence);
           });
+
+          this.dataLoaded = true;
         });
   }
 

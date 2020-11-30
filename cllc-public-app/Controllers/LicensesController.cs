@@ -412,7 +412,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     // this needs to be the guid for the published workflow.
                     await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync(workflowGUID, licenceID);
-                    return Ok("OK");
+                    return new JsonResult("OK");
                 }
                 catch (HttpOperationException httpOperationException)
                 {
@@ -453,7 +453,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     // this needs to be the guid for the published workflow.
                     await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("e1792ccf-e40b-491f-9a9a-ee8e977749e6", licenceID);
-                    return Ok("OK");
+                    return new JsonResult("OK");
                 }
                 catch (HttpOperationException httpOperationException)
                 {
