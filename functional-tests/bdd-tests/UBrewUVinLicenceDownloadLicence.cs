@@ -13,127 +13,108 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CateringApplicationBrandingChange
+Feature: UBrewUVinLicenceDownloadLicence
     As a logged in business user
-    I want to pay the first year catering licence fee
-    And submit a name branding change for different business types
+    I want to download a UBrew / UVin licence for different business types
 
-@cateringbranding @partnership @cateringbranding
-Scenario: Catering Partnership Branding Change
+@ubrewuvinlicencedownload @partnership 
+Scenario: Partnership UBrew / UVin Application Licence Download
     Given I am logged in to the dashboard as a partnership
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a partnership
     And I review the organization structure for a partnership
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
+    And I complete the UBrew / UVin application for a partnership
     And I click on the Submit button
+    And I review the security screening requirements for a partnership
     And I click on the button for Pay for Application
     And I enter the payment information
+    And I confirm the payment receipt for a UBrew / UVin application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
-    And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And I click on the Licences tab
+    And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
 
-@cateringbranding @privatecorporation
-Scenario: Catering Private Corporation Branding Change
+@ubrewuvinlicencedownload @privatecorporation 
+Scenario: Private Corporation UBrew / UVin Application Licence Download
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
+    And I complete the UBrew / UVin application for a private corporation
     And I click on the Submit button
+    And I review the security screening requirements for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
+    And I confirm the payment receipt for a UBrew / UVin application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
-    And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And I click on the Licences tab
+    And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
 
-@cateringbranding @publiccorporation 
-Scenario: Catering Public Corporation Branding Change
+@ubrewuvinlicencedownload @publiccorporation 
+Scenario: Public Corporation UBrew / UVin Application Licence Download
     Given I am logged in to the dashboard as a public corporation
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a public corporation
     And I review the organization structure for a public corporation
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
+    And I complete the UBrew / UVin application for a public corporation
     And I click on the Submit button
+    And I review the security screening requirements for a public corporation
     And I click on the button for Pay for Application
     And I enter the payment information
+    And I confirm the payment receipt for a UBrew / UVin application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
-    And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
-    And the account is deleted
-    Then I see the login page
-
-@cateringbranding @society 
-Scenario: Catering Society Branding Change
-    Given I am logged in to the dashboard as a society
-    And I click on the Start Application button for Catering
-    And I review the account profile for a society
-    And I review the organization structure for a society
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee 
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
-    And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
 
-@cateringbranding @soleproprietorship 
-Scenario: Catering Sole Proprietorship Branding Change
+@ubrewuvinlicencedownload @soleproprietorship 
+Scenario: Sole Proprietorship UBrew / UVin Application Licence Download
     Given I am logged in to the dashboard as a sole proprietorship
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a sole proprietorship
     And I review the organization structure for a sole proprietorship
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
+    And I complete the UBrew / UVin application for a sole proprietorship
     And I click on the Submit button
+    And I review the security screening requirements for a sole proprietorship
     And I click on the button for Pay for Application
     And I enter the payment information
+    And I confirm the payment receipt for a UBrew / UVin application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
-    And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And I click on the Licences tab
+    And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplicationBrandingChange.feature")]
+    [FeatureFile("./UBrewUVinLicenceDownloadLicence.feature")]
     [Collection("Liquor")]
-    public sealed class CateringApplicationBrandingChange : TestBase
+    public sealed class UBrewUVinLicenceDownloadLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
