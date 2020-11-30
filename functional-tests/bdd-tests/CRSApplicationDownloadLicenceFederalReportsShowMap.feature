@@ -1,7 +1,7 @@
-﻿Feature: CRSApplicationFederalReportsShowMap
+﻿Feature: CRSApplicationDownloadLicenceFederalReportsShowMap
     As a logged in business user
     I want to submit a CRS Application for different business types
-    And review the federal reports for the approved application
+    And download the licence, review the federal reports, and show the store as open on the map for the approved application
 
 @cannabis @crsfedreports
 Scenario: Private Corporation Federal Reports and Show Map
