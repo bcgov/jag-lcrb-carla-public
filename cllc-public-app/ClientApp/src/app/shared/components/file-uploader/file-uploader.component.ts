@@ -37,6 +37,8 @@ export class FileUploaderComponent implements OnInit {
   actionPrefix: string;
   Math = Math;
   public files: FileSystemItem[] = [];
+  dataLoaded: boolean;
+  fileReqOngoing: boolean;
 
   // TODO: move http call to a service
   constructor(
@@ -148,15 +150,18 @@ export class FileUploaderComponent implements OnInit {
     formData.append('file', file, fileName);
     formData.append('documentType', this.documentType);
     const headers: HttpHeaders = new HttpHeaders();
-
+    this.fileReqOngoing = true;
     this.busy = this.http.post(this.attachmentURL, formData, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
     },
-      err => this.snackBar.open('Failed to upload file', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] })
-    );
+      err => {
+        this.snackBar.open('Failed to upload file', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.fileReqOngoing = false;
+      });
   }
 
   getUploadedFileData() {
+    this.fileReqOngoing = true;
     const headers: HttpHeaders = new HttpHeaders({
       // 'Content-Type': 'application/json'
     });
@@ -185,6 +190,8 @@ export class FileUploaderComponent implements OnInit {
         });
         this.files = data;
         this.numberOfUploadedFiles.emit(this.files.length);
+        this.dataLoaded = true;
+        this.fileReqOngoing = false;
       },
         err => this.snackBar.open('Failed to get files', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] })
       );
@@ -198,8 +205,10 @@ export class FileUploaderComponent implements OnInit {
     this.busy = this.http.delete(this.attachmentURL + queryParams, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
     },
-      err => this.snackBar.open('Failed to delete file', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] })
-    );
+      err => {
+        this.snackBar.open('Failed to delete file', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.fileReqOngoing = false;
+      });
   }
 
   disableFileUpload(): boolean {

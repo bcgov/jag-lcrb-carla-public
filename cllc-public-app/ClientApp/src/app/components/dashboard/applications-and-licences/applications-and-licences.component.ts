@@ -145,6 +145,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             .map(item => <any>item)
             .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
 
+            this.dataLoaded = true;
+
         });
   }
 
