@@ -451,6 +451,8 @@ namespace bdd_tests
 
             if (status == "Application Under Review")
             {
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'licencedownloadcheck')]")).Displayed);
+
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Application Under Review ')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Add Supporting Documents')]")).Displayed);
             }
