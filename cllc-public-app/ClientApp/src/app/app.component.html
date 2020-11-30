@@ -4,8 +4,8 @@
 <div style="height: 100%;" *ngIf="featureFlagService.initialized">
   <section class="container not-supported-browser" *ngIf="isIE()">
     <p><i class="fab fa-internet-explorer" style="margin-right:10px;"></i>Internet Explorer is no longer supported.</p>
-    <p>Please use <a href="https://google.com/chrome" target="_blank" class="IE">Google Chrome</a>, 
-      <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank" class="IE">Firefox</a> or 
+    <p>Please use <a href="https://google.com/chrome" target="_blank" class="IE">Google Chrome</a>,
+      <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank" class="IE">Firefox</a> or
       <a href="https://www.microsoft.com/en-us/edge" target="_blank" class="IE">Microsoft Edge</a>.</p>
   </section>
 
@@ -18,7 +18,7 @@
           </a>
           <span class="title" role="banner">
             Liquor and Cannabis Licensing
-            
+
           </span>
         </section>
         <section class="col-md-4 col-xs-12 sign-container">
@@ -35,7 +35,7 @@
           </span>
           <span class="sign" *ngIf="!currentUser">
             <span appRemoveIfFeatureOff="DisableLogin" class="text-right signin">
-              <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>              
+              <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
             </span>
             <span appRemoveIfFeatureOn="DisableLogin" class="text-right signin">
               <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
@@ -70,7 +70,7 @@
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2" routerLink="/" title="Home">Home</a>
                   </li>
-                  <li class="nav-item">
+                  <!--li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
                       routerLink="/policy-document/cannabis-retail-licence">
                       Licence
@@ -80,12 +80,12 @@
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
                       routerLink="/policy-document/application-timelines">Application Requirements</a>
-                  </li>
+                  </li-->
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                      routerLink="/policy-document/worker-qualification-training">Worker Information</a>
+                      routerLink="/policy-document/worker-qualification-training">Cannabis Worker Security Verification</a>
                   </li>
-                  <li class="nav-item">
+                  <!--li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2" routerLink="/policy-document/ordering-cannabis">
                       Ordering
                       Cannabis
@@ -94,17 +94,17 @@
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
                       routerLink="/policy-document/reporting-sales">Reporting</a>
-                  </li>
+                  </li-->
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                      routerLink="/policy-document/application-stats">Application Statistics</a>
+                      routerLink="/policy-document/application-stats">Cannabis Application Statistics</a>
                   </li>
                   <li class="nav-item" *ngIf="showMap">
                     <a (click)="toggleButton.click()" tabindex="2" routerLink="/map">Map of Cannabis Stores
                     </a>
                   </li>
                   <li class="nav-item" appRemoveIfFeatureOff="CovidApplication">
-                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/covid-temporary-extension" appRemoveIfFeatureOn="DisableLogin">Covid Temporary Extension
+                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/covid-temporary-extension" appRemoveIfFeatureOn="DisableLogin">Temporary Expanded Service Areas
                     </a>
                   </li>
                 </ul>
