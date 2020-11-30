@@ -224,7 +224,7 @@
     <None Update="CateringApplicationEventAuthorization.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CateringApplicationBrandingChange.feature">
+    <None Update="CateringApplicationBrandingChangeDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationPersonnelNameChanges.feature">
