@@ -29,21 +29,6 @@ namespace bdd_tests
 
             if (businessType == " private corporation")
             {
-                // upload a notice of articles document
-                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
-
-                // upload a central securities register document
-                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[6]");
-
-                // upload a special rights and restrictions document
-                FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[9]");
-
-                // upload a Selling It Right certificate
-                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[12]");
-
-                // upload an additional supporting document
-                FileUpload("associates.pdf", "(//input[@type='file'])[14]");
-
                 /********** Leader #0 **********/
 
                 // create the leader data
@@ -141,6 +126,21 @@ namespace bdd_tests
                 // click on the Confirm button
                 NgWebElement uiConfirmButtonIndyShareholder = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] .fa-save span"));
                 uiConfirmButtonIndyShareholder.Click();
+
+                // upload a notice of articles document
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+
+                // upload a central securities register document
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[6]");
+
+                // upload a special rights and restrictions document
+                FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[9]");
+
+                // upload a Selling It Right certificate
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[12]");
+
+                // upload an additional supporting document
+                FileUpload("associates.pdf", "(//input[@type='file'])[14]");
 
                 /********** Business Shareholder #1 **********/
 

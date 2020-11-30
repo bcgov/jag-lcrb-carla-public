@@ -242,7 +242,7 @@
     <None Update="E2ECateringApplication_private_corp_transfer_of_ownership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationFederalReportsShowMap.feature">
+    <None Update="CRSApplicationDownloadLicenceFederalReportsShowMap.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CRSApplicationBrandingChange.feature">
