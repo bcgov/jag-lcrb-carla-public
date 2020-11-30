@@ -195,6 +195,8 @@ namespace bdd_tests
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
 
+            System.Threading.Thread.Sleep(5000);
+
             if (applicationType == "Catering")
             {
                 // click on the Catering Start Application button

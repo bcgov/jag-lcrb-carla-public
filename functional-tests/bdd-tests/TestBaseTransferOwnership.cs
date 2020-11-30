@@ -105,6 +105,8 @@ namespace bdd_tests
             */
 
             ngDriver.Navigate().Refresh();
+            System.Threading.Thread.Sleep(2000);
+            ngDriver.Navigate().Refresh();
 
             // check for transfer initiated status 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer Requested')]")).Displayed);

@@ -13,33 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: ChangeHoursLiquorService
+Feature: ManufacturerDownloadLicence
     As a logged in business user
-    I want to update the liquor hours of service for lounge areas and special events
+    I want to download licences for different manufacturer types
 
-@manufacturer @changehours
-Scenario: Change Lounge Area Hours of Liquor Service Within Service Hours
-    Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Manufacturer Licence
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
-    And I complete the Manufacturer application for a winery
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And I confirm the payment receipt for a Manufacturer Licence application
-    And the application is approved
-    And I pay the licensing fee
-    And I click on the Licences tab
-    And I complete the change hours application for a lounge area within service hours
-    And I click on the Submit button
-    And I enter the payment information
-    And the account is deleted
-    Then I see the login page
-
-@manufacturer @changehours
-Scenario: Change Lounge Area Hours of Liquor Service Outside Service Hours
+@manufacturer @winery @mfglicencedownload
+Scenario: Winery Location Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -52,72 +31,77 @@ Scenario: Change Lounge Area Hours of Liquor Service Outside Service Hours
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I click on the Licences tab
-    And I complete the change hours application for a lounge area outside of service hours
-    And I click on the Submit button
-    And I enter the payment information
+    And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
 
-@manufacturer @changehours
-Scenario: Change Special Event Area Hours of Liquor Service Within Service Hours
+@manufacturer @brewery @mfglicencedownload
+Scenario: Brewery Location Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Manufacturer application for a winery
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And I confirm the payment receipt for a Manufacturer Licence application
-    And the application is approved
-    And I pay the licensing fee
-    And I click on the Licences tab
-    And I complete the change hours application for a special event area within service hours
-    And I click on the Submit button
-    And I enter the payment information
-    And the account is deleted
-    Then I see the login page
-
-@manufacturer @changehours
-Scenario: Change Special Event Area Hours of Liquor Service Outside Service Hours
-    Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Manufacturer Licence
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
-    And I complete the Manufacturer application for a winery
+    And I complete the Manufacturer application for a brewery
     And I review the security screening requirements for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I click on the Licences tab
-    And I complete the change hours application for a special event area outside of service hours
-    And I click on the Submit button
+    And I click on the link for Download Licence
+    And the account is deleted
+    Then I see the login page
+
+@manufacturer @distillery @mfglicencedownload
+Scenario: Distillery Location Change Application
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the button for Submit Organization Information
+    And I complete the Manufacturer application for a distillery
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
     And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee 
+    And I click on the link for Download Licence
+    And the account is deleted
+    Then I see the login page
+
+@manufacturer @copacker @mfglicencedownload
+Scenario: Co-packer Location Change Application
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the button for Submit Organization Information
+    And I complete the Manufacturer application for a co-packer
+    And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee 
+    And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./ChangeHoursLiquorService.feature")]
+    [FeatureFile("./ManufacturerDownloadLicence.feature")]
     [Collection("Liquor")]
-    public sealed class ChangeHoursLiquorService : TestBase
+    public sealed class ManufacturerDownloadLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
 
-            CheckFeatureFlagsLiquorOne();
-
-            CheckFeatureFlagsLGIN();
-
-            CheckFeatureFlagsIN();
+            CheckFeatureFlagsLiquorTwo();
 
             CheckFeatureFlagsLicenseeChanges();
 

@@ -3,7 +3,7 @@
     I want to submit a CRS Application for different business types
     And request a valid name or branding change for the approved application
 
-@e2e @cannabis @indigenousnation @crsbranding2
+@cannabis @indigenousnation @crsbranding
 Scenario: Indigenous Nation CRS Name Branding Change
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -24,7 +24,7 @@ Scenario: Indigenous Nation CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsbranding
+@cannabis @partnership @crsbranding
 Scenario: Partnership CRS Name Branding Change
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -45,7 +45,7 @@ Scenario: Partnership CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsbranding
+@cannabis @privatecorporation @crsbranding
 Scenario: Private Corporation CRS Name Branding Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -66,7 +66,7 @@ Scenario: Private Corporation CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsbranding2
+@cannabis @publiccorporation @crsbranding
 Scenario: Public Corporation CRS Name Branding Change
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -87,7 +87,7 @@ Scenario: Public Corporation CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsbranding2
+@cannabis @society @crsbranding
 Scenario: Society CRS Name Branding Change
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -108,7 +108,7 @@ Scenario: Society CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsbranding
+@cannabis @soleproprietorship @crsbranding
 Scenario: Sole Proprietorship CRS Name Branding Change
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
