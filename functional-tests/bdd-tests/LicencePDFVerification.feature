@@ -37,7 +37,7 @@ Scenario: Catering Licence PDF Verification
     And I click on the link for Download Licence
     Then the correct Catering licence PDF is generated with terms and conditions and without endorsements or hours of sales
 
-Scenario: Cannabis Marketing Application
+Scenario: Cannabis Marketing PDF Verification
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for a private corporation
@@ -46,7 +46,11 @@ Scenario: Cannabis Marketing Application
     And I review the security screening requirements for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
-    # to be confirmed
+    And I confirm the payment receipt for a Cannabis Marketing Licence
+    And the application is approved
+    And I click on the Licences tab
+    And I click on the link for Download Licence
+    Then the correct licence PDF is generated with terms and conditions and without endorsements or hours of sales
 
 Scenario: UBrew / UVin Licence PDF Verification
     Given I am logged in to the dashboard as a private corporation
