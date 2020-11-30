@@ -1,25 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
-
-/*
-Feature: CateringApplicationBrandingChangeDownloadLicence
+﻿Feature: CateringApplicationDownloadLicence
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit a name branding change for different business types
+    And download the licence for different business types
 
-@cateringbranding @partnership @cateringbranding
-Scenario: Catering Partnership Branding Change
+@partnership @cateringlicencedownload
+Scenario: Catering Partnership Licence Download
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -32,18 +17,13 @@ Scenario: Catering Partnership Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And the licence is successfully downloaded
-    And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@cateringbranding @privatecorporation
-Scenario: Catering Private Corporation Branding Change
+@privatecorporation @cateringlicencedownload
+Scenario: Catering Private Corporation Licence Download
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -56,18 +36,13 @@ Scenario: Catering Private Corporation Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And the licence is successfully downloaded
-    And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@cateringbranding @publiccorporation 
-Scenario: Catering Public Corporation Branding Change
+@publiccorporation @cateringlicencedownload
+Scenario: Catering Public Corporation Licence Download
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -80,18 +55,13 @@ Scenario: Catering Public Corporation Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And the licence is successfully downloaded
-    And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@cateringbranding @society 
-Scenario: Catering Society Branding Change
+@society @cateringlicencedownload
+Scenario: Catering Society Licence Download
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -104,18 +74,13 @@ Scenario: Catering Society Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And the licence is successfully downloaded
-    And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@cateringbranding @soleproprietorship 
-Scenario: Catering Sole Proprietorship Branding Change
+@soleproprietorship @cateringlicencedownload
+Scenario: Catering Sole Proprietorship Licence Download
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
@@ -128,41 +93,7 @@ Scenario: Catering Sole Proprietorship Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And the licence is successfully downloaded
-    And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
-*/
-
-namespace bdd_tests
-{
-    [FeatureFile("./CateringApplicationBrandingChangeDownloadLicence.feature")]
-    [Collection("Liquor")]
-    public sealed class CateringApplicationBrandingChangeDownloadLicence : TestBase
-    {
-        [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void LogInToDashboard(string businessType)
-        {
-            NavigateToFeatures();
-
-            CheckFeatureFlagsLiquorOne();
-
-            CheckFeatureFlagsLGIN();
-
-            CheckFeatureFlagsIN();
-
-            CheckFeatureFlagsLicenseeChanges();
-
-            CheckFeatureFlagsSecurityScreening();
-
-            IgnoreSynchronizationFalse();
-
-            CarlaLogin(businessType);
-        }
-    }
-}
