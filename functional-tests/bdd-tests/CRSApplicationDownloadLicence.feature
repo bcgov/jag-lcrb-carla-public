@@ -1,10 +1,10 @@
-﻿Feature: CRSApplicationFederalReportsShowMap
+﻿Feature: CRSApplicationDownloadLicence
     As a logged in business user
     I want to submit a CRS Application for different business types
-    And review the federal reports and show the store as open on the map for the approved application
+    And download the licence for the approved application
 
-@cannabis @crsfedreports
-Scenario: Private Corporation Federal Reports and Show Map
+@cannabis @CRSdownloadlicence
+Scenario: Private Corporation Download Licence
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -17,7 +17,5 @@ Scenario: Private Corporation Federal Reports and Show Map
     And the application is approved
     And I pay the licensing fee
     And I click on the link for Download Licence
-    And I show the store as open on the map
-    And I review the federal reports
     And the account is deleted
     Then I see the login page
