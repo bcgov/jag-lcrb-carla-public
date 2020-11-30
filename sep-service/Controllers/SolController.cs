@@ -40,10 +40,10 @@ namespace SepService.Controllers
         /// <summary>
         /// Create a Sol record
         /// </summary>
-        /// <param name="sol">New Sol Record</param>
+        /// <param name="sol">New or Updated Special Event Record</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Create([FromBody] Sol sol)
+        public ActionResult CreateOrUpdate([FromBody] Sol sol)
         {
             if (sol == null || string.IsNullOrEmpty(sol.SolLicenceNumber) || !sol.SolLicenceNumber.Contains("-"))
             {
