@@ -1,5 +1,6 @@
+<mat-progress-bar class="mt-1 mb-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+
 <div>
-  <div [ngBusy]="busy"></div>
   <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">APPLICATIONS</h3>
   <section style="border: 1px solid #ccc; padding: 10px;  border-bottom: 4px solid #FFCC00;">
     <section>
@@ -187,8 +188,8 @@
           </table>
         </section>
       </div>
-
-      <mat-tab-group [selectedIndex]="0">
+      <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+      <mat-tab-group *ngIf="dataLoaded" [selectedIndex]="0">
         <mat-tab label="In Progress Applications" id="inProgressApplications">
           <section *ngIf="inProgressApplications?.length > 0">
             <label>Please note:</label> <br>
