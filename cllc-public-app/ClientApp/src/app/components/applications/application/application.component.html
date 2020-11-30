@@ -1,5 +1,5 @@
-<div [ngBusy]="busy"></div>
-<div *ngIf="application">
+<mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="application && dataLoaded">
   <ng-template #applicationContent>
     <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
 
@@ -2075,7 +2075,7 @@
             </span>
           </span>
 
-          <div [ngBusy]="busy"></div>
+          <!-- <div [ngBusy]="busy"></div> -->
         </section>
 
         <!-- button section when  LGApprovals is disabled -->
@@ -2103,7 +2103,7 @@
             </span>
           </span>
 
-          <div [ngBusy]="busy"></div>
+          <!-- <div [ngBusy]="busy"></div> -->
         </section>
 
       </div>
@@ -2111,7 +2111,7 @@
 
     <div [ngClass]="{'normal-mode': mode !== UPLOAD_FILES_MODE}">
       <div [formGroup]="form" style="padding-left: 45px; position: relative">
-        <div [ngBusy]="busy"></div>
+        <!-- <div [ngBusy]="busy"></div> -->
         <h1 *ngIf="application">Add More files to the Application</h1>
       </div>
       <div *ngIf="application" class="application-wrapper">
@@ -2315,7 +2315,7 @@
   </ng-template>
 
   <div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
-    <div [ngBusy]="busy"></div>
+    <!-- <div [ngBusy]="busy"></div> -->
     <div class="row">
       <div class="col-md-7 col-sm-12">
         <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
@@ -2338,7 +2338,7 @@
   </div>
 
   <div appRemoveIfFeatureOn="IndigenousNation">
-    <div [ngBusy]="busy"></div>
+    <!-- <div [ngBusy]="busy"></div> -->
     <ng-container *ngTemplateOutlet="applicationContent">
     </ng-container>
   </div>

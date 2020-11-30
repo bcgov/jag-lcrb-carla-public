@@ -100,7 +100,7 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
           this.paymentDataService.verifyPaymentURI(this.invoiceType + 'Invoice', this.application.id)
             .subscribe(res => {
               // TODO: Figureout how to report payment status
-              this.loadData();
+              this.router.navigateByUrl('/permanent-changes-to-a-licensee')
             });
         } else {
           this.dataLoaded = true;

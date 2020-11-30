@@ -33,7 +33,6 @@ export class DashboardComponent extends FormBase implements OnInit {
     private licenseDataService: LicenseDataService,
     private applicationDataService: ApplicationDataService) {
     super();
-   
   }
 
   ngOnInit(): void {
