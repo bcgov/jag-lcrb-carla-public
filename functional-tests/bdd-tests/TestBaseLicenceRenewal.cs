@@ -501,6 +501,10 @@ namespace bdd_tests
 
             ClickLicencesTab();
 
+            ngDriver.Navigate().Refresh();
+            System.Threading.Thread.Sleep(2000);
+            ngDriver.Navigate().Refresh();
+
             // reload Licences page as needed
             for (int i = 0; i < 5; i++)
             {
@@ -520,10 +524,6 @@ namespace bdd_tests
                 {
                 }
             }
-
-            ngDriver.Navigate().Refresh();
-            System.Threading.Thread.Sleep(2000);
-            ngDriver.Navigate().Refresh();
 
             // confirm that Renew Licence messages are no longer displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Renew Licence'))]")).Displayed);
