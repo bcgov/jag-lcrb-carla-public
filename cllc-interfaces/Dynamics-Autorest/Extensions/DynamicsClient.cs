@@ -557,7 +557,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             return results;
         }
 
+        public MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventByLicenceNumber(string licenceNumber)
+        {
+            string licenceNumberEscaped = licenceNumber.Replace("'", "''");
+            string filter = $"adoxio_seplicencenumber eq '{licenceNumberEscaped}'";
+            // fetch from Dynamics.
+            MicrosoftDynamicsCRMadoxioSpecialevent result;
+            try
+            {
+                result = Specialevents.Get(filter: filter).Value.FirstOrDefault();
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
 
+            return result;
+        }
 
 
     }
