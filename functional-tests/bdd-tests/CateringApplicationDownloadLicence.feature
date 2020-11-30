@@ -1,25 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
-
-/*
- Feature: CateringApplicationTransferOwnership
+﻿Feature: CateringApplicationDownloadLicence
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit a transfer of ownership request for different business types
+    And download the licence for different business types
 
- @catering @partnership @cateringeventtransfer
- Scenario: Partnership Catering Transfer Ownership Request
+@partnership @cateringlicencedownload
+Scenario: Catering Partnership Licence Download
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -30,13 +15,15 @@ using Xunit;
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
-    And I request a transfer of ownership
+    And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And the account is deleted
     Then I see the login page
 
- @catering @privatecorporation @cateringeventtransfer
- Scenario: Private Corporation Catering Transfer Ownership Request
+@privatecorporation @cateringlicencedownload
+Scenario: Catering Private Corporation Licence Download
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -47,13 +34,15 @@ using Xunit;
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee
-    And I request a transfer of ownership
+    And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And the account is deleted
     Then I see the login page
 
- @catering @publiccorporation @cateringeventtransfer
- Scenario: Public Corporation Catering Transfer Ownership Request
+@publiccorporation @cateringlicencedownload
+Scenario: Catering Public Corporation Licence Download
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -64,13 +53,15 @@ using Xunit;
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
-    And I request a transfer of ownership
+    And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And the account is deleted
     Then I see the login page
 
- @catering @society @cateringeventtransfer
- Scenario: Society Catering Transfer Ownership Request
+@society @cateringlicencedownload
+Scenario: Catering Society Licence Download
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -81,13 +72,15 @@ using Xunit;
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
-    And I request a transfer of ownership
+    And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And the account is deleted
     Then I see the login page
 
-  @catering @soleproprietorship @cateringeventtransfer
-  Scenario: Sole Proprietorship Catering Transfer Ownership Request
+@soleproprietorship @cateringlicencedownload
+Scenario: Catering Sole Proprietorship Licence Download
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
@@ -98,36 +91,9 @@ using Xunit;
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
-    And I request a transfer of ownership
+    And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And the account is deleted
     Then I see the login page
-*/
-
-namespace bdd_tests
-{
-    [FeatureFile("./CateringApplicationTransferOwnership.feature")]
-    [Collection("Liquor")]
-    public sealed class CateringApplicationTransferOwnership : TestBase
-    {
-        [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void LogInToDashboard(string businessType)
-        {
-            NavigateToFeatures();
-
-            CheckFeatureFlagsLiquorOne();
-
-            CheckFeatureFlagsLGIN();
-
-            CheckFeatureFlagsIN();
-
-            CheckFeatureFlagsLicenseeChanges();
-
-            CheckFeatureFlagsSecurityScreening();
-
-            IgnoreSynchronizationFalse();
-
-            CarlaLogin(businessType);
-        }
-    }
-}

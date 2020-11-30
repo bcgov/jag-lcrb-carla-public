@@ -29,21 +29,6 @@ namespace bdd_tests
 
             if (businessType == " private corporation")
             {
-                // upload a notice of articles document
-                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
-
-                // upload a central securities register document
-                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[6]");
-
-                // upload a special rights and restrictions document
-                FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[9]");
-
-                // upload a Selling It Right certificate
-                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[12]");
-
-                // upload an additional supporting document
-                FileUpload("associates.pdf", "(//input[@type='file'])[14]");
-
                 /********** Leader #0 **********/
 
                 // create the leader data
@@ -52,10 +37,13 @@ namespace bdd_tests
                 string leaderTitle = "CTOLeader0";
                 string leaderEmail = "leader0@privatecorp.com";
 
-                // open leader #0 form  
-                var tempWait = ngDriver.Manage().Timeouts().ImplicitWait;
-                ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(120);
+                // to be removed
+                System.Threading.Thread.Sleep(5000);
 
+                // confirm that Legal Entity Structure is displayed
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licences & Authorizations')]")).Displayed);
+
+                // open leader #0 form  
                 var uiOpenLeaderForm = ngDriver.FindElements(By.CssSelector(".btn.btn-secondary.AddLeadership"));
 
                 if (uiOpenLeaderForm.Count > 0)
@@ -66,8 +54,6 @@ namespace bdd_tests
                 {
                     throw new Exception($"Unable to Leadership button");
                 }
-
-                ngDriver.Manage().Timeouts().ImplicitWait = tempWait;
 
                 // enter leader #0 first name
                 NgWebElement uiLeaderFirst = ngDriver.FindElement(By.CssSelector("input[formControlName='firstNameNew']"));
@@ -143,6 +129,21 @@ namespace bdd_tests
                 // click on the Confirm button
                 NgWebElement uiConfirmButtonIndyShareholder = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] .fa-save span"));
                 uiConfirmButtonIndyShareholder.Click();
+
+                // upload a notice of articles document
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+
+                // upload a central securities register document
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[6]");
+
+                // upload a special rights and restrictions document
+                FileUpload("special_rights_restrictions.pdf", "(//input[@type='file'])[9]");
+
+                // upload a Selling It Right certificate
+                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[12]");
+
+                // upload an additional supporting document
+                FileUpload("associates.pdf", "(//input[@type='file'])[14]");
 
                 /********** Business Shareholder #1 **********/
 
