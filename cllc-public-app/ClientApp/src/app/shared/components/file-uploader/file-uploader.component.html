@@ -1,5 +1,4 @@
 <div class="upload-wrapper mt-2">
-  <mat-progress-bar class="mt-1" *ngIf="!dataLoaded || fileReqOngoing" mode="indeterminate"></mat-progress-bar>
   <ngx-file-drop *ngIf="dataLoaded" [hidden]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}"
     (onFileDrop)="dropped($event)" customstype="filedrop" (onFileOver)="fileOver($event)"
     (onFileLeave)="fileLeave($event)">
@@ -19,6 +18,7 @@
       </div>
     </ng-template>
   </ngx-file-drop>
+  <mat-progress-bar class="mt-1 mb-1" *ngIf="!dataLoaded || fileReqOngoing" mode="indeterminate"></mat-progress-bar>
   <div style="margin-top: 5px; color: #2C679E;">
     <section *ngFor="let item of files; let i=index" class="file-list">
       <a name="{{item.name}}" href="{{item.downloadUrl}}">{{ item.name }}</a>

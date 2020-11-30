@@ -193,11 +193,14 @@ export class FileUploaderComponent implements OnInit {
         this.dataLoaded = true;
         this.fileReqOngoing = false;
       },
-        err => this.snackBar.open('Failed to get files', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] })
-      );
+        err => {
+          this.snackBar.open('Failed to get files', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          this.fileReqOngoing = false;
+        });
   }
 
   deleteFile(relativeUrl: string) {
+    this.fileReqOngoing = true;
     const headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'
     });
