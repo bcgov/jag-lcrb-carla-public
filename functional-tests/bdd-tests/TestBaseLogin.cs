@@ -128,18 +128,12 @@ namespace bdd_tests
         public void CarlaLogin(string businessType)
         {
             Random random = new Random();
-            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
-            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
-            // load the dashboard page
             string test_start = "login/token/AT" + DateTime.Now.Ticks.ToString() + random.Next(0, 999).ToString();
             returnUser = test_start;
-            ngDriver.IgnoreSynchronization = true;
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
-            ngDriver.IgnoreSynchronization = false;
 
             DoLogin(businessType);
 
-            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
         }
 
 
@@ -185,24 +179,21 @@ namespace bdd_tests
         public void LocalGovernmentLogin()
         {
             string localGovt = "login/token/Saanich";
-            ngDriver.IgnoreSynchronization = true;
             ngDriver.Navigate().GoToUrl($"{baseUri}{localGovt}");
-            ngDriver.IgnoreSynchronization = false;
 
-            System.Threading.Thread.Sleep(2000);
         }
 
 
         [And(@"I log in as a return user")]
         public void ReturnLogin()
         {
-            System.Threading.Thread.Sleep(2000);
+            //System.Threading.Thread.Sleep(2000);
 
-            ngDriver.IgnoreSynchronization = true;
+            //ngDriver.IgnoreSynchronization = true;
             ngDriver.Navigate().GoToUrl($"{baseUri}{returnUser}");
-            ngDriver.IgnoreSynchronization = false;
+            //ngDriver.IgnoreSynchronization = false;
 
-            System.Threading.Thread.Sleep(2000);
+            //System.Threading.Thread.Sleep(2000);
         }
 
 
@@ -231,10 +222,7 @@ namespace bdd_tests
         public void NavigateToFeatures()
         {
             ngDriver.IgnoreSynchronization = true;
-
-            // navigate to the feature flags page
             ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/features");
-            System.Threading.Thread.Sleep(1000);
         }
 
 
@@ -247,17 +235,21 @@ namespace bdd_tests
         public void CheckFeatureFlag(string flag)
         {
             // confirm that the correct flag is enabled during this test
-            bool found;
-            try
+            bool found = false;
+            int maxTries = 10;
+            int tries = 0;
+            do
             {
-                found = ngDriver.FindElement(By.XPath($"//body[contains(.,'{flag}')]")).Displayed;
-            }
-            catch (Exception) // handle cases where nginx did not show features.
-            {
-                ngDriver.WrappedDriver.Navigate().GoToUrl($"{baseUri}api/features");
-                System.Threading.Thread.Sleep(5000);
-                found = ngDriver.FindElement(By.XPath($"//body[contains(.,'{flag}')]")).Displayed;
-            }
+                try
+                {
+                    found = ngDriver.FindElement(By.XPath($"//body[contains(.,'{flag}')]")).Displayed;
+                }
+                catch
+                {
+                    // wait for the feature list response
+                    System.Threading.Thread.Sleep(500);
+                }
+            } while (!found && tries < maxTries);
 
             Assert.True(found);
         }
