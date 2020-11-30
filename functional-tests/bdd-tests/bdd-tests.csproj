@@ -53,6 +53,9 @@
     <None Update="CateringApplicationLicensingRenewalDenied.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="CRSApplicationDownloadLicence.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="CRSApplicationLicensingRenewalDenied.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -62,7 +65,13 @@
     <None Update="ManufacturerLicensingRenewalDenied.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ManufacturerDownloadLicence.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="OnSiteEndorsementRenewal.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="UBrewUVinLicenceDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="UBrewUVinLicenceNameChange.feature">
@@ -245,7 +254,7 @@
     <None Update="E2ECateringApplication_private_corp_transfer_of_ownership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationDownloadLicenceFederalReportsShowMap.feature">
+    <None Update="CRSApplicationFederalReportsShowMap.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CRSApplicationBrandingChange.feature">
