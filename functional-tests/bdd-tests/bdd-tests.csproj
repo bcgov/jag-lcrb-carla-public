@@ -44,6 +44,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="CateringApplicationDownloadLicence.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ChangeHoursLiquorService.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -224,7 +227,7 @@
     <None Update="CateringApplicationEventAuthorization.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CateringApplicationBrandingChangeDownloadLicence.feature">
+    <None Update="CateringApplicationBrandingChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationPersonnelNameChanges.feature">
