@@ -105,24 +105,8 @@ namespace bdd_tests
             string policeJurisdiction = "RCMP Shawnigan Lake";
      
             // enter the establishment name
-            NgWebElement uiEstabName = null;
-            // try up to 10 times to get an element.
-            for (int i = 0; i < 10; i++)
-            {
-                try
-                {
-                    var names = ngDriver.FindElements(By.Id("establishmentName"));
-                    if (names.Count > 0)
-                    {
-                        uiEstabName = names[0];
-                        break;
-                    }
-                }
-                catch (Exception)
-                {
+            NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
 
-                }     
-            }
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address

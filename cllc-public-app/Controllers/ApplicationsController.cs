@@ -1145,9 +1145,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}/process")]
-        public async Task<string> ProcessApplication(string id)
+        public async Task<JsonResult> ProcessApplication(string id)
         {
-            if (_env.IsProduction()) return "This API is not available outside a development environment.";
+            if (_env.IsProduction()) return new JsonResult("This API is not available outside a development environment.");
 
 
             // get the current user.
@@ -1163,18 +1163,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // this needs to be the guid for the published workflow.
                     await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync(
                         "0a78e6dc-8d62-480f-909f-c104051cf467", id);
-                    return "OK";
+                    return new JsonResult("OK");
                 }
                 catch (HttpOperationException httpOperationException)
                 {
-                    return httpOperationException.Response.Content;
+                    return new JsonResult(httpOperationException.Response.Content);
                 }
                 catch (Exception e)
                 {
                     throw e;
                 }
 
-            return "This API is not available to an unregistered user.";
+            return new JsonResult("This API is not available to an unregistered user.");
         }
 
         [HttpGet("{id}/processEndorsement")]
@@ -1196,7 +1196,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // this needs to be the guid for the published workflow.
                     await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync(
                         "e755b96c-1c0d-4893-98dc-53ec980d57a1", id);
-                    return Ok("OK");
+                    return new JsonResult("OK");
                 }
                 catch (HttpOperationException httpOperationException)
                 {
