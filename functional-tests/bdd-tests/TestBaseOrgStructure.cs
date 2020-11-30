@@ -40,6 +40,9 @@ namespace bdd_tests
                 // to be removed
                 System.Threading.Thread.Sleep(5000);
 
+                // confirm that Legal Entity Structure is displayed
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licences & Authorizations')]")).Displayed);
+
                 // open leader #0 form  
                 var uiOpenLeaderForm = ngDriver.FindElements(By.CssSelector(".btn.btn-secondary.AddLeadership"));
 
