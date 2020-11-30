@@ -13,10 +13,10 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplicationDownloadLicenceFederalReportsShowMap
+Feature: CRSApplicationFederalReportsShowMap
     As a logged in business user
     I want to submit a CRS Application for different business types
-    And download the licence, review the federal reports, and show the store as open on the map for the approved application
+    And review the federal reports and show the store as open on the map for the approved application
 
 @cannabis @crsfedreports
 Scenario: Private Corporation Federal Reports and Show Map
@@ -40,9 +40,9 @@ Scenario: Private Corporation Federal Reports and Show Map
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplicationDownloadLicenceFederalReportsShowMap.feature")]
+    [FeatureFile("./CRSApplicationFederalReportsShowMap.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSApplicationDownloadLicenceFederalReportsShowMap : TestBase
+    public sealed class CRSApplicationFederalReportsShowMap : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
