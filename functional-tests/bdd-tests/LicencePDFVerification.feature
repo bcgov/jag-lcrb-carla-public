@@ -2,7 +2,7 @@
     As a logged in business user
     I want to create different licences and manually verify the pdf formats
 
-Scenario: Cannabis Licence PDF Verification
+Scenario: Cannabis Retail Store Licence PDF Verification
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -72,3 +72,16 @@ Scenario: UBrew / UVin Licence PDF Verification
     And I click on the Licences tab
     And I click on the link for Download Licence
     Then the correct UBrew / UVin licence PDF is generated with terms and conditions and without endorsements or hours of sales
+
+Scenario: Rural Agency Store Licence PDF Verification
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Rural Agency Store
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the button for Submit Organization Information
+    And I complete the Rural Agency Store application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I click on the link for Download Licence
+    Then the correct Rural Agency Store PDF is generated with terms and conditions and hours of sales and without endorsements
