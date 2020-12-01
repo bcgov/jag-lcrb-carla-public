@@ -747,7 +747,7 @@
         </section>
 
         <!-- Cannabis Associate Security Screening Forms -->
-        <section>
+        <section *ngIf="hasCannabis && this.isScreeningRequired()">
             <h3 class="blue-header"><i class="fa fa-id-card mr-1"></i>Cannabis Associate Security Screening Forms</h3>
             <div class="content-bottom">
                 <p>
@@ -789,7 +789,7 @@
         </section>
 
         <!-- Personal History Summary Forms -->
-        <section>
+        <section *ngIf="hasLiquor && this.isScreeningRequired()">
             <h3 class="blue-header"><i class="fa fa-id-card mr-1"></i>Personal History Summary Forms</h3>
             <div class="content-bottom">
 

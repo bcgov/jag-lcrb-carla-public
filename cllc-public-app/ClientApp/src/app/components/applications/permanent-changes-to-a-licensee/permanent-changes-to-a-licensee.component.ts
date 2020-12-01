@@ -151,6 +151,10 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
     return true;
   }
 
+  isScreeningRequired(): boolean {
+    return true;
+  }
+
   /**
    * Submit the application for payment
    * */
