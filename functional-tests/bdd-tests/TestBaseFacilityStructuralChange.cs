@@ -69,6 +69,10 @@ namespace bdd_tests
             // upload the site plan
             FileUpload("site_plan.pdf", "(//input[@type='file'])[5]");
 
+            uiAuthorizedToSubmit.Click();
+
+            uiSignatureAgreement.Click();
+
             // click on the Submit & Pay button
             ClickOnSubmitButton();
 
