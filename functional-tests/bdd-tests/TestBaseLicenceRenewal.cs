@@ -501,10 +501,6 @@ namespace bdd_tests
 
             ClickLicencesTab();
 
-            ngDriver.Navigate().Refresh();
-            System.Threading.Thread.Sleep(2000);
-            ngDriver.Navigate().Refresh();
-
             // reload Licences page as needed
             for (int i = 0; i < 5; i++)
             {
