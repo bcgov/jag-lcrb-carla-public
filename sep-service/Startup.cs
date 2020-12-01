@@ -104,7 +104,7 @@ namespace SepService
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
+                    .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} {Level} {Properties} {Message}{NewLine}{Exception}") // one of the logger pipeline elements for writing out the log message
                     .WriteTo.EventCollector(splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
                         sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"],
                         restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
@@ -124,7 +124,7 @@ namespace SepService
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
+                    .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} {Level} {Properties} {Message}{NewLine}{Exception}") // one of the logger pipeline elements for writing out the log message
                     .CreateLogger();
             }
         }

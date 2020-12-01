@@ -18,17 +18,14 @@ namespace SepService.ViewModels
     public class Location
     {
         public Address Address { get; set; }
-        public EventDate EventDate { get; set; }
+        public List<EventDate> EventDates { get; set; }
         public string LocationDescription { get; set; }
         public string LocationName { get; set; }
-        public int MaxGuests { get; set; }
-        public bool MinorPresent { get; set; }
-        public int? NumberMinors { get; set; }
+        public int MaximumGuests { get; set; }
 
-        [Required]
-        [EnumDataType(typeof(LocationSetting))]
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        public LocationSetting Setting { get; set;}
+        public LicencedArea LicencedArea { get; set; }
+
+ 
         
 
     }
