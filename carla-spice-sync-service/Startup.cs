@@ -32,11 +32,9 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public class Startup
     {
-
         public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
-
         }
 
         public IConfiguration _configuration { get; }
@@ -44,7 +42,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddMvc(config =>
             {
                 config.EnableEndpointRouting = false;
@@ -111,16 +108,14 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 config.UseConsole();
             });
 
-            // health checks. 
+            // health checks.
             services.AddHealthChecks()
                 .AddCheck("carla-spice-sync", () => HealthCheckResult.Healthy());
         }
 
         private void SetupSharePoint(IServiceCollection services)
         {
-
             // add SharePoint.
-
             services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(_configuration));
         }
 
@@ -131,10 +126,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             string spiceURI = _configuration["SPICE_URI"];
             string token = _configuration["SPICE_JWT_TOKEN"];
 
-
             // create JWT credentials
             TokenCredentials credentials = new TokenCredentials(token);
-
             services.AddSingleton(_ => new SpiceClient(new Uri(spiceURI), credentials));
         }
 
@@ -146,7 +139,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 app.UseDeveloperExceptionPage();
             }
-
 
             bool startHangfire = true;
 #if DEBUG
@@ -245,10 +237,16 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     log.LogInformation("Creating Hangfire jobs for SPD Export ...");
-                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplicationsLEConnections(null), Cron.MinuteInterval(15));
+                    if (!string.IsNullOrEmpty(_configuration["FEATURE_LE_CONNECTIONS"]))
+                    {
+                        RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplicationsV2(null), Cron.MinuteInterval(15));
+                    }
+                    else
+                    {
+                        RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
+                    }
                     RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(15));
                     log.LogInformation("Hangfire Send Export job done.");
-
                 }
             }
             catch (Exception e)
