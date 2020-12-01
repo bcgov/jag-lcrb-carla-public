@@ -18,7 +18,7 @@ Feature: ManufacturerDownloadLicence
     I want to download licences for different manufacturer types
 
 @manufacturer @winery @mfglicencedownload
-Scenario: Winery Location Change Application
+Scenario: Winery Download Licence
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -36,7 +36,7 @@ Scenario: Winery Location Change Application
     Then I see the login page
 
 @manufacturer @brewery @mfglicencedownload
-Scenario: Brewery Location Change Application
+Scenario: Brewery Download Licence
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -54,7 +54,7 @@ Scenario: Brewery Location Change Application
     Then I see the login page
 
 @manufacturer @distillery @mfglicencedownload
-Scenario: Distillery Location Change Application
+Scenario: Distillery Download Licence
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -72,7 +72,7 @@ Scenario: Distillery Location Change Application
     Then I see the login page
 
 @manufacturer @copacker @mfglicencedownload
-Scenario: Co-packer Location Change Application
+Scenario: Co-packer Download Licence
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
