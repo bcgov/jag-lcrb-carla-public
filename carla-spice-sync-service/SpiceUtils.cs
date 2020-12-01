@@ -1459,7 +1459,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         }
 
         [DisableConcurrentExecution(timeoutInSeconds: 10 * 60)]
-        public async Task SendFoundApplicationsLEConnections(PerformContext hangfireContext)
+        public async Task SendFoundApplicationsV2(PerformContext hangfireContext)
         {
             string[] select = { "adoxio_applicationtypeid" };
             IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_requiressecurityscreening eq true", select: select).Value;
