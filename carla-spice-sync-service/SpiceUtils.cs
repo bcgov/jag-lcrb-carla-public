@@ -188,6 +188,71 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         }
 
         /// <summary>
+        /// Import application responses to Dynamics.
+        /// </summary>
+        /// <returns></returns>
+        public async Task ReceiveApplicationImportJobV2(PerformContext hangfireContext, List<CompletedApplicationScreening> responses)
+        {
+            hangfireContext.WriteLine("Starting SPICE Import Job for Application Screening.");
+            _logger.LogError("Starting SPICE Import Job for Application Screening..");
+
+            foreach (var applicationResponse in responses)
+            {
+                string appFilter = $"adoxio_jobnumber eq '{applicationResponse.RecordIdentifier}'";
+                string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
+                MicrosoftDynamicsCRMadoxioApplication application = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value.FirstOrDefault();
+
+                if (application != null)
+                {
+                    var screeningRequest = await CreateApplicationScreeningRequestV2(application);
+                    if (screeningRequest == null)
+                    {
+                        continue;
+                    }
+                    var associatesValidated = UpdateConsentExpiry(screeningRequest.Associates);
+                    _logger.LogInformation($"Total associates consent expiry updated: {associatesValidated}");
+
+                    // update the date of security status received and the status
+                    MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
+                    {
+                        AdoxioDatereceivedspd = DateTimeOffset.Now,
+                        AdoxioChecklistsecurityclearancestatus = (int?)applicationResponse.Result
+                    };
+
+                    try
+                    {
+                        if (patchRecord.AdoxioChecklistsecurityclearancestatus != null)
+                        {
+                            _dynamicsClient.Applications.Update(application.AdoxioApplicationid, patchRecord);
+                        }
+                        else
+                        {
+                            hangfireContext.WriteLine($"Error updating application - received an invalid status of {applicationResponse.Result}");
+                            _logger.LogError($"Error updating application - received an invalid status of {applicationResponse.Result}");
+                        }
+                    }
+                    catch (HttpOperationException odee)
+                    {
+                        hangfireContext.WriteLine("Error updating application");
+                        hangfireContext.WriteLine("Request:");
+                        hangfireContext.WriteLine(odee.Request.Content);
+                        hangfireContext.WriteLine("Response:");
+                        hangfireContext.WriteLine(odee.Response.Content);
+
+                        _logger.LogError("Error updating application");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                    }
+                }
+            }
+
+            hangfireContext.WriteLine("Finished SPICE Import Job for Application Screening.");
+            _logger.LogError("Finished SPICE Import Job for Application Screening..");
+        }
+
+        /// <summary>
         /// Generate an application screening request
         /// </summary>
         /// <returns></returns>
