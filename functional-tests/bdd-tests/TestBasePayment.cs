@@ -60,9 +60,6 @@ namespace bdd_tests
             string firstYearLicenceFee = "Pay First Year Fee";
             string returnToDashboard = "Return to Dashboard";
 
-            // confirm that page has loaded
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licences & Authorizations')]")).Displayed);
-
             // click on the pay first year licence fee link
             var uiFirstYearLicenceFees = ngDriver.FindElements(By.LinkText(firstYearLicenceFee));
             if (uiFirstYearLicenceFees.Count > 0)
