@@ -1363,6 +1363,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     break;
 
                 case ConnectionType.KeyPersonnel:
+                case ConnectionType.Representative:
                     positions.Add("key personnel");
                     break;
 
@@ -1371,6 +1372,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     break;
 
                 case ConnectionType.Owner:
+                case ConnectionType.Beneficiary:
                     positions.Add("owner");
                     break;
 
@@ -1381,30 +1383,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 case ConnectionType.Partner:
                     positions.Add("partner");
                     break;
-
-                // TODO: Get feedback on these!!
-                case ConnectionType.Beneficiary:
-                    // positions.Add("");
-                    break;
-
-                // TODO: Get feedback on these!!
-                case ConnectionType.Representative:
-                    // positions.Add("");
-                    break;
             }
-
-            // TODO: CHECK these values!
-
-            // if (leConnection.AdoxioIsseniormanagement != null && (bool)leConnection.AdoxioIsseniormanagement)
-            // {
-            //     positions.Add("senior manager");
-            // }
-
-            // if (leConnection.AdoxioIsdeemedassociate != null && (bool)leConnection.AdoxioIsdeemedassociate)
-            // {
-            //     positions.Add("deemed associate");
-            // }
-
             return positions;
         }
 
