@@ -40,10 +40,10 @@ namespace SepService.Controllers
         /// <summary>
         /// Create a Sol record
         /// </summary>
-        /// <param name="sol">New Sol Record</param>
+        /// <param name="sol">New or Updated Special Event Record</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Create([FromBody] Sol sol)
+        public ActionResult CreateOrUpdate([FromBody] Sol sol)
         {
             if (sol == null || string.IsNullOrEmpty(sol.SolLicenceNumber) || !sol.SolLicenceNumber.Contains("-"))
             {
@@ -208,23 +208,38 @@ namespace SepService.Controllers
 
                 // now bind the two new records to the parent.
 
-                var patchRecord = new MicrosoftDynamicsCRMadoxioSpecialevent()
+                var specialEventScheduleData = _dynamicsClient.GetEntityURI("adoxio_specialeventschedules", newEventSchedule.AdoxioSpecialeventscheduleid);
+
+                var oDataIdEventSchedule = new Odataid
                 {
-                    SpecialEventScheduleODataBind = _dynamicsClient.GetEntityURI("adoxio_specialeventschedules", newEventSchedule.AdoxioSpecialeventscheduleid),
-                    SpecialEventLicencedAreaODataBind = _dynamicsClient.GetEntityURI("adoxio_specialeventlicencedareas", newLicencedArea.AdoxioSpecialeventlicencedareaid)
+                    OdataidProperty = specialEventScheduleData
                 };
-                
                 try
                 {
-                    _dynamicsClient.Specialevents.Update(existingRecord.AdoxioSpecialeventid, patchRecord);
-                    _logger.Information($"Updated special event {existingRecord.AdoxioSpecialeventid}");
+                    _dynamicsClient.Specialevents.AddReference(existingRecord.AdoxioSpecialeventid, "adoxio_specialevent_schedule", oDataIdEventSchedule);
                 }
-                catch (HttpOperationException httpOperationException)
+                catch (HttpOperationException odee)
                 {
-                    _logger.Error(httpOperationException, "Error updating special event");
-                    // fail 
-                    return StatusCode(500, "Server Error updating record.");
+                    Log.Error(odee, "Error adding reference to adoxio_specialeventschedules");
                 }
+
+
+                var specialEventLicencedAreasData = _dynamicsClient.GetEntityURI("adoxio_specialeventlicencedareas", newLicencedArea.AdoxioSpecialeventlicencedareaid);
+
+                var oDataIdLicencedAreas = new Odataid
+                {
+                    OdataidProperty = specialEventLicencedAreasData
+                };
+                try
+                {
+                    _dynamicsClient.Specialevents.AddReference(existingRecord.AdoxioSpecialeventid, "adoxio_specialevent_licencedarea", oDataIdLicencedAreas);
+                }
+                catch (HttpOperationException odee)
+                {
+                    Log.Error(odee, "Error adding reference to adoxio_specialeventlicencedareas");
+                }
+
+
             }
 
             
