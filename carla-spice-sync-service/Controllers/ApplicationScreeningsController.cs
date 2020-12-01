@@ -38,7 +38,14 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         public ActionResult ReceiveApplicationScreeningResult([FromBody] List<CompletedApplicationScreening> results)
         {
             // Process the updates received from the SPICE system.
-            BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJob(null, results));
+            if (!string.IsNullOrEmpty(Configuration["FEATURE_LE_CONNECTIONS"]))
+            {
+                BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJobV2(null, results));
+            }
+            else
+            {
+                BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJob(null, results));
+            }
             _logger.LogInformation("Started receive completed Application Screening job");
             return Ok();
         }
