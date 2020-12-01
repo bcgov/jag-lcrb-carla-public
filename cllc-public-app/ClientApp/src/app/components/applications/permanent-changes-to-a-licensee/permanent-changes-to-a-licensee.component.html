@@ -160,11 +160,10 @@
                             <table style="border: solid black 1px;">
                                 <tbody>
                                     <tr>
-                                        <th class="licenceTable" style="background-color: #38598a; color: white;">
-                                            Cannabis
-                                            Licences</th>
-                                        <th class="licenceTable" style="background-color: #38598a; color: white;">Liquor
-                                            Licences</th>
+                                      <th class="licenceTable" style="background-color: #38598a; color: white;">{{cannabisLicences.length}} Active Cannabis
+                                        Licences:</th>
+                                    <th class="licenceTable" style="background-color: #38598a; color: white;">{{liquorLicences.length}} Active Liquor
+                                        Licences:</th>
                                     </tr>
                                     <tr>
                                         <td class="licenceTable">
@@ -784,7 +783,26 @@
                     impacts the time to process your application.
                 </p>
 
-                <p>Please provide the documents as outlined on this page.</p>
+                <p>Please provide the documents as outlined on <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/cannabis-resources-information/associate-forms" target="_blank">this page</a>.</p>
+
+                <h4>Cannabis Associate Security Screening
+                </h4>
+                <p>Each associate must provide a complete <a href=""></a></p>
+                <app-file-uploader *ngIf="application?.id" documentType="CAS"
+                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCAS = $event"
+                    [entityId]="application.id"
+                    [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'">
+                </app-file-uploader>
+
+                <h4>Financial Integrity Documents</h4>
+                <p>Each associate must provide a complete a <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">Financial Integrity Form</a>.</p>
+                <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
+                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
+                    [entityId]="application.id"
+                    [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
+                </app-file-uploader>
             </div>
         </section>
 
@@ -810,6 +828,15 @@
                     Please note that the time to collect these documents directly impacts the time to process your
                     application.
                 </p>
+
+                <h4>Personal History Summary Documents</h4>
+                <p>Each liquor associate must provide a complete <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb004_personal_history_summary.pdf" target="_blank">Personal History Summary Form</a>.</p>
+                <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
+                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
+                    [entityId]="application.id"
+                    [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
+                </app-file-uploader>
             </div>
         </section>
 
@@ -877,53 +904,6 @@
 
             </div>
 
-
-            <p>Note: An agent, lawyer or third party operator may not sign the declaration on behalf of the licensee.
-            </p>
-
-            <p>
-                This form should be signed by an individual with the authority to bind the applicant. The Branch relies
-                on
-                the
-                licensee to ensure that the individual who signs this form is authorized to do so. Typically, an
-                appropriate
-                individual will be as follows:
-            </p>
-
-            <ul>
-                <li> If the licensee is an individual or sole proprietor, the individual himself/herself</li>
-                <li>If the licensee is a corporation, a duly authorized signatory who will usually be an officer or, in
-                    some
-                    cases, a director</li>
-                <li> If the licensee is a general partnership, one of the partners</li>
-                <li>If the licensee is a limited partnership, the general partner of the partnership</li>
-                <li>If the licensee is a society, then a director or a senior manager (as defined in the Societies Act)
-                </li>
-            </ul>
-            <p>
-                If an authorized signatory has designated a Licensee Representative and they have specifically permitted
-                a
-                licensee representative
-                to sign this form on the licensee's behalf, the branch will accept the licensee representative's
-                submission.
-            </p>
-
-            <p>
-                Section 57(1)(c) of the Liquor Control and Licensing Act states: “A person commits an offence if the
-                person
-                (c) provides false or
-                misleading information in the following circumstances: (i) when making an application referred to in
-                section
-                12; (ii) when making
-                a report or when required and as specified by the general manager under section 59”.
-            </p>
-
-            <mat-checkbox>
-                As the licensee or authorized signatory of the licensee, I understand and affirm that all of the
-                information
-                provided is true and complete.
-            </mat-checkbox>
-
         </section>
 
         <!-- Application Contact Details -->
@@ -932,51 +912,61 @@
         </section>
 
         <!-- Payment -->
-        <section>
+        <section *ngIf="this.hasChanges()">
             <h3 class="blue-header ngtest-declarations">
                 PAYMENT
             </h3>
-            <div>
-                <table class="w-100" *ngIf="hasCannabis">
+            <div class="content-bottom">
+              <p *ngIf="hasCannabis && hasLiquor">You have both liquor and cannabis licences. Fees for the different types of licences
+                must be paid separately. Your application will not be submitted to the Branch until both are paid.</p>
 
+                <table class="w-100" *ngIf="hasCannabis" class="paymentSummary">
+                    <tr><th colspan=3><h4>Fees for Cannabis Licences</h4></th></tr>
                     <tr>
-                        <th>Type Of Change</th>
-                        <th>Num Licences</th>
-                        <th>Cost</th>
+                        <th class="paymentSummary">Type Of Change</th>
+                        <th class="paymentSummary">No. Licences</th>
+                        <th class="paymentSummary">Cost</th>
                     </tr>
                     <ng-container *ngFor="let item of changeList">
                         <tr *ngIf="form.get(item.formControlName).value === true">
-                            <td>{{item.name}}</td>
-                            <td>x {{cannabisLicences.length}}</td>
-                            <td>${{item.CannabisFee}}</td>
+                            <td class="paymentSummary1">{{item.name}}</td>
+                            <td class="paymentSummary2">x {{cannabisLicences.length}}</td>
+                            <td class="paymentSummary2">${{item.CannabisFee}}</td>
                         </tr>
                     </ng-container>
-                </table>
-                <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary"
+               <tr><td colspan=3 style="padding:5px; text-align: right; border-bottom: solid #494949 1px;">
+                <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary" style="width:250px;"
                     (click)="submit_application('primary')">
-                    <span>{{ application?.primaryInvoicePaid ? 'Cannabis Fee Paid' : 'Pay Cannabis Fee'}}</span>
+                    <span>{{ application?.primaryInvoicePaid ? 'FEES PAID' : 'PAY CANNABIS FEES'}}</span>
                     <mat-progress-bar *ngIf="primaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
                 </button>
+              </td></tr>
 
-                <table class="w-100" *ngIf="hasLiquor">
+              </table>
+
+                <table class="w-100" *ngIf="hasLiquor" class="paymentSummary">
+                  <tr><th colspan=3><h4>Fees for Liquor Licences</h4></th></tr>
                     <tr>
-                        <th>Type Of Change</th>
-                        <th>Num Licences</th>
-                        <th>Cost</th>
+                      <th class="paymentSummary">Type Of Change</th>
+                      <th class="paymentSummary">No. Licences</th>
+                      <th class="paymentSummary">Cost</th>
                     </tr>
                     <ng-container *ngFor="let item of changeList">
                         <tr *ngIf="form.get(item.formControlName).value === true">
-                            <td>{{item.name}}</td>
-                            <td>x {{liquorLicences.length}}</td>
-                            <td>${{item.LiquorFee}}</td>
+                            <td class="paymentSummary1">{{item.name}}</td>
+                            <td class="paymentSummary2">x {{liquorLicences.length}}</td>
+                            <td class="paymentSummary2">${{item.LiquorFee}}</td>
                         </tr>
                     </ng-container>
-                </table>
-                <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid"
+
+                <tr><td colspan=3 style="padding:5px; text-align: right; border-bottom: solid #494949 1px;">
+                <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid" style="width:250px;"
                     (click)="submit_application('secondary')">
-                    <span>{{ application?.secondaryInvoicePaid ? 'Liquor Fee Paid' : 'Pay Liquor Fee' }}</span>
+                    <span>{{ application?.secondaryInvoicePaid ? 'FEES PAID' : 'PAY LIQUOR FEES' }}</span>
                     <mat-progress-bar *ngIf="secondaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
                 </button>
+              </td></tr>
+              </table>
             </div>
         </section>
     </ng-container>
