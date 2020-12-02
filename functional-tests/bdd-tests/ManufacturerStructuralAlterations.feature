@@ -17,8 +17,6 @@ Scenario: Winery Structural Alterations
     And the application is approved
     And I pay the licensing fee 
     And I request structural alterations to an approved lounge or special events area
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -37,8 +35,6 @@ Scenario: Brewery Structural Alterations
     And the application is approved
     And I pay the licensing fee
     And I request structural alterations to an approved lounge or special events area
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -57,8 +53,6 @@ Scenario: Distillery Structural Alterations
     And the application is approved
     And I pay the licensing fee
     And I request structural alterations to an approved lounge or special events area
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -77,7 +71,5 @@ Scenario: Co-packer Structural Alterations
     And the application is approved
     And I pay the licensing fee 
     And I request structural alterations to an approved lounge or special events area
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
