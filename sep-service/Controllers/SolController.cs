@@ -117,7 +117,7 @@ namespace SepService.Controllers
                         var newTandC = new MicrosoftDynamicsCRMadoxioSpecialeventtandc()
                         {
                             AdoxioTermsandcondition = item.Text,
-                            AdoxioOrganizer = item.Originator
+                            AdoxioOriginator = item.Originator
                         };
 
                         if (item.TandcType == TandcType.GlobalCondition)
@@ -205,10 +205,10 @@ namespace SepService.Controllers
 
             if (sol.Location?.LicencedArea != null)
             {
-                location.AdoxioSpecialeventlocationLicemsedarea =
+                location.AdoxioSpecialeventlocationLicencedareas =
                     new List<MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea>();
 
-                location.AdoxioSpecialeventlocationLicemsedarea.Add(new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea()
+                location.AdoxioSpecialeventlocationLicencedareas.Add(new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea()
                 {
                     AdoxioDescription = sol.Location.LicencedArea.Description,
                     AdoxioMinorpresent = sol.Location.LicencedArea.MinorsPresent,
