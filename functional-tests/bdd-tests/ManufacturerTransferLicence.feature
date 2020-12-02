@@ -2,7 +2,7 @@
     As a logged in business user
     I want to request a transfer of ownership for a manufacturer licence
 
-@e2e @privatecorporation @manufacturer @winery
+@manufacturer @transfer @winery
 Scenario: Winery Transfer Licence
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -15,12 +15,12 @@ Scenario: Winery Transfer Licence
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @brewery
+@manufacturer @transfer @brewery
 Scenario: Brewery Transfer Licence
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -33,12 +33,12 @@ Scenario: Brewery Transfer Licence
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @distillery
+@manufacturer @transfer @distillery
 Scenario: Distillery Transfer Licence
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -51,12 +51,12 @@ Scenario: Distillery Transfer Licence
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @copacker
+@manufacturer @transfer @copacker
 Scenario: Co-packer Transfer Licence
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -69,7 +69,7 @@ Scenario: Co-packer Transfer Licence
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page

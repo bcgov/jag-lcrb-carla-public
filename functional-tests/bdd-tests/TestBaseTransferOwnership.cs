@@ -73,7 +73,7 @@ namespace bdd_tests
             string fieldValueEstablishmentParcelId = uiEstablishmentParcelId.GetProperty("value");
             Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentParcelId));
 
-            string licensee = "GunderCorp TestBusiness";
+            string licensee = "GunderCorp";
 
             // search for the proposed licensee
             NgWebElement uiProposedLicensee = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));
@@ -103,6 +103,10 @@ namespace bdd_tests
             /* 
             Page Title: Licences & Authorizations
             */
+
+            ngDriver.Navigate().Refresh();
+            System.Threading.Thread.Sleep(2000);
+            ngDriver.Navigate().Refresh();
 
             // check for transfer initiated status 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer Requested')]")).Displayed);

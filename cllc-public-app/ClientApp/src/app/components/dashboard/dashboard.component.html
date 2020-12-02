@@ -79,12 +79,12 @@
         </div>
       </section>
       <p></p> -->
-      <app-associate-content *ngIf="account?.businessType !== 'LocalGovernment'" [hasLicence]="hasLicence" [account]="account" [isIndigenousNation]="indigenousNationModeActive">
+      <app-associate-content *ngIf="account?.businessType !== 'LocalGovernment'" appRemoveIfFeatureOn="PermanentChangesToLicensee" [hasLicence]="hasLicence" [account]="account" [isIndigenousNation]="indigenousNationModeActive">
       </app-associate-content>
       <p></p>
 
       <app-legal-entity-type-update-calloutbox *ngIf="hasLicence" appRemoveIfFeatureOff="PermanentChangesToLicensee" [account]="account"></app-legal-entity-type-update-calloutbox>
-     
+
     </div>
   </div>
   <section style="margin-top: 20px;">

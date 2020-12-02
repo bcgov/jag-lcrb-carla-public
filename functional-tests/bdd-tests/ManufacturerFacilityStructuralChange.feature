@@ -2,7 +2,7 @@
     As a logged in business user
     I want to request a facility structural change for a manufacturer licence
 
-@e2e @privatecorporation @manufacturer @winery
+@manufacturer @winery @structuralchange
 Scenario: Winery Facility Structural Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -15,14 +15,14 @@ Scenario: Winery Facility Structural Change Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a facility structural change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @brewery
+@manufacturer @brewery @structuralchange
 Scenario: Brewery Facility Structural Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -35,14 +35,14 @@ Scenario: Brewery Facility Structural Change Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a facility structural change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @distillery
+@manufacturer @distillery @structuralchange
 Scenario: Distillery Facility Structural Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -55,14 +55,14 @@ Scenario: Distillery Facility Structural Change Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request a facility structural change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @copacker
+@manufacturer @copacker @structuralchange
 Scenario: Co-packer Facility Structural Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -75,7 +75,7 @@ Scenario: Co-packer Facility Structural Change Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request a facility structural change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review

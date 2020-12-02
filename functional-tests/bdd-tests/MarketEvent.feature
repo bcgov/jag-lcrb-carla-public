@@ -6,7 +6,7 @@
 # One Market Event
 #-----------------------
 
- @e2e @privatecorporation @marketevent @winery @release
+ @marketevent @marketoneday @winery @release
  Scenario: Winery One Day Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -19,7 +19,7 @@
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -36,7 +36,7 @@
 # Weekly Market Event
 #-----------------------
 
- @e2e @privatecorporation @marketevent @winery
+ @marketevent @marketweekly @winery
  Scenario: Winery Weekly Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -49,7 +49,7 @@
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -67,7 +67,7 @@
 # Note that 'bi-weekly' refers to twice per month
 #-------------------------------------------------
 
- @e2e @privatecorporation @marketevent @winery
+ @marketevent @marketbiweekly @winery
  Scenario: Winery Bi-Weekly Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -80,7 +80,7 @@
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -97,7 +97,7 @@
 # Monthly Market Event
 #-----------------------
 
- @e2e @privatecorporation @marketevent @winery
+ @marketevent @marketmonthly @winery
  Scenario: Winery Monthly Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -110,7 +110,7 @@
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -127,7 +127,7 @@
 # One Market Event - Save for Later
 #-----------------------------------
 
- @e2e @privatecorporation @marketeventonedaysave @winery
+ @marketeventonedaysave @marketoneday @winery
  Scenario: Winery One Day Market Event Save For Later
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -140,7 +140,7 @@
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -162,7 +162,7 @@
 # Weekly Market Event - Save for Later
 #--------------------------------------
 
- @e2e @privatecorporation @marketeventweeklysave @winery
+ @marketeventweeklysave @marketweekly @winery
  Scenario: Winery Weekly Market Event Save For Later
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -175,7 +175,7 @@
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -197,7 +197,7 @@
 # Bi-Weekly Market Event - Save for Later
 #-----------------------------------------
 
- @e2e @privatecorporation @marketeventbiweeklysave @winery
+ @marketeventbiweeklysave @marketbiweekly @winery
  Scenario: Winery Bi-Weekly Market Event Save For Later
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -210,7 +210,7 @@
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -232,7 +232,7 @@
 # Monthly Market Event - Save for Later
 #---------------------------------------
 
- @e2e @privatecorporation @marketeventmonthlysave @winery
+ @marketeventmonthlysave @marketmonthly @winery
  Scenario: Winery Monthly Market Event Save For Later
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -245,7 +245,7 @@
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved

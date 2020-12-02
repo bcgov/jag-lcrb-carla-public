@@ -1,4 +1,7 @@
-<div *ngIf="featureFlagService.initialized">
+
+
+
+<div style="height: 100%;" *ngIf="featureFlagService.initialized">
   <section class="container not-supported-browser" *ngIf="isIE()">
     <p><i class="fab fa-internet-explorer" style="margin-right:10px;"></i>Internet Explorer is no longer supported.</p>
     <p>Please use <a href="https://google.com/chrome" target="_blank" class="IE">Google Chrome</a>,
@@ -50,7 +53,7 @@
       </main>
     </div>
 
-    <div *ngIf="!showBceidTermsOfUse()">
+    <div class="content-wrapper" *ngIf="!showBceidTermsOfUse()">
       <!-- /NAVBAR -->
       <div class="navigationRibbon" *ngIf="!currentUser && showNavbar">
         <div class="level2Navigation">
@@ -138,6 +141,7 @@
                       class="nav-link" routerLink="/covid-temporary-extension">Covid Temporary Extension</a>
                     <a appRemoveIfFeatureOff="LGApprovals" *ngIf="account?.businessType === 'LocalGovernment' && account?.localGovernmentId" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/lg-approvals">Applications for Review</a>
+                    <a  class="nav-link" routerLink="/lg-approvals">Applications for Review</a>
                   </li>
                 </ul>
               </div>
@@ -205,3 +209,9 @@
     </footer>
   </div>
 </div>
+
+<section style="position: absolute; width: 1px; height:  1px; z-index: 10;">
+  <input style="width: 1px; height:  1px; padding: 0; margin: 0; border: none;" type="text"  id="testUrl" #testUrl>
+  <button style="width: 3px; height:  3px; padding: 0; margin: 0; border: none;" id="testAPIButton" (click)="makeAPICall(testUrl.value)"></button>
+  <span style="width: 1px; height:  1px;"  id="testAPIResult">{{testAPIRestul}}</span>
+</section>

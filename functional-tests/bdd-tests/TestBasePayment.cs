@@ -49,7 +49,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"I pay the licensing fee for (.*)")]
+        [And(@"I pay the licensing fee")]
         public void PayLicenceFee()
         {
             /* 
@@ -62,7 +62,14 @@ namespace bdd_tests
 
             // click on the pay first year licence fee link
             var uiFirstYearLicenceFees = ngDriver.FindElements(By.LinkText(firstYearLicenceFee));
-            uiFirstYearLicenceFees[0].Click();
+            if (uiFirstYearLicenceFees.Count > 0)
+            {
+                uiFirstYearLicenceFees[0].Click();
+            }
+            else 
+            {
+                throw new Exception($"Unable to find Pay First Year Fee link");
+            }
 
             // pay the licence fee
             MakePayment();

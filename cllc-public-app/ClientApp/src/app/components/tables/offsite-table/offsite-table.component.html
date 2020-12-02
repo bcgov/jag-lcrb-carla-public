@@ -1,29 +1,39 @@
-<table class="capacity">
+<table class="offsite-storage">
   <thead *ngIf="rows.controls.length > 0">
     <th style="width: 100px">Status</th>
+    <th>Location Name</th>
     <th>Address</th>
     <th>City</th>
     <th style="width: 200px">Postal Code</th>
     <th style="width: 45px"></th>
   </thead>
-  <tr *ngFor="let row of rows.controls; let i=index">
+  <tr *ngFor="let row of rows.controls; let i=index" [ngClass]="{ 'text-grey': readonly(i) }">
     <ng-container [formGroup]="row">
-      <!-- <td>{{ OffsiteStorageStatusEnum[rows.at(i).get('status')] | uppercase }}</td> -->
-      <td><input type="text" formControlName="status" readonly /></td>
-      <td><input type="text" formControlName="street1" placeholder="Enter Address" [readonly]="!enabled"/></td>
-      <td><input type="text" formControlName="city" placeholder="Enter City" [readonly]="!enabled"/></td>
-      <td><input type="text" formControlName="postalCode" placeholder="Enter Postal Code" [readonly]="!enabled"/></td>
-      <td><button type="button" (click)="removeRow(i)" class="btn-clear" *ngIf="enabled"><i class="fa fa-trash" style="color: #ee220e"></i></button></td>
+      <td><span class="bold">{{ offsiteStorageStatus[row.value.status] }}</span></td>
+      <td><input type="text" formControlName="name" placeholder="Enter a name for this location" [readonly]="readonly(i)"/></td>
+      <td><input type="text" formControlName="street1" placeholder="Enter Address" [readonly]="readonly(i)"/></td>
+      <td><input type="text" formControlName="city" placeholder="Enter City" [readonly]="readonly(i)"/></td>
+      <td><input type="text" formControlName="postalCode" placeholder="Enter Postal Code" [readonly]="readonly(i)"/></td>
+      <td><button type="button" (click)="removeRow(i)" class="btn-clear" *ngIf="!readonly(i)"><i class="fa fa-trash" style="color: #ee220e"></i></button></td>
     </ng-container>
   </tr>
   <tr>
-    <td [colSpan]="2">
-      <button type="button" (click)="addRow()" class="btn-clear" style="height: 100%;" *ngIf="enabled">
+    <td [colSpan]="2" class="pt-3 text-left">
+      <button type="button" (click)="addRow()" class="btn btn-secondary" style="height: 100%;" *ngIf="enabled">
         <i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Additional Storage
       </button>
     </td>
     <td></td>
     <td></td>
     <td></td>
+    <td></td>
   </tr>
 </table>
+<section class="error mt-3" *ngIf="showErrorSection">
+  <p *ngFor="let message of validationMessages">
+    <span class="app-cancel">
+      <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+      {{message}}
+    </span>
+  </p>
+</section>

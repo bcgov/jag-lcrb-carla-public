@@ -1,5 +1,6 @@
 <mat-card class="mat-elevation-z0">
-  <div [ngBusy]="busy" class="container" style="margin-left:0px;">
+  <div class="container" style="margin-left:0px;">
+    <!-- <div [ngBusy]="busy" ></div> -->
     <div *ngIf="isApproved">
       <div>
         <span class="print-page" (click)="printPage()">
@@ -57,17 +58,7 @@
       <br>
       <div [innerHTML]="htmlContent.nextSteps"></div>
       <div *ngIf="!htmlContent?.nextSteps">
-      <span style="font-style: italic;">Applicants must provide associates with:</span>
-      <p></p>
-      <ul>
-        <li>The name of the applicant</li>
-        <li>The application number (available on the dashboard, under “In Progress Applications”)</li>
-        <li>The address of the proposed cannabis retail store (if applicable)</li>
-        <li>A link to the <a
-            href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-            target="blank" rel="noopener noreferrer">Associate Forms page</a>, which contains the instructions and required forms for associates.
-        </li>
-      </ul>
+
 
       </div>
       <br>

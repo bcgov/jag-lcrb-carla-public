@@ -3,7 +3,7 @@
     I want to pay the first year catering licence fee
     And submit a transfer of ownership request for different business types
 
- @e2e @catering @partnership @cateringeventtransfer
+ @catering @partnership @cateringeventtransfer
  Scenario: Partnership Catering Transfer Ownership Request
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -15,12 +15,12 @@
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @privatecorporation @cateringeventtransfer
+ @catering @privatecorporation @cateringeventtransfer
  Scenario: Private Corporation Catering Transfer Ownership Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -32,12 +32,12 @@
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @publiccorporation @cateringeventtransfer2
+ @catering @publiccorporation @cateringeventtransfer
  Scenario: Public Corporation Catering Transfer Ownership Request
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
@@ -49,12 +49,12 @@
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @society @cateringeventtransfer2
+ @catering @society @cateringeventtransfer
  Scenario: Society Catering Transfer Ownership Request
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -66,12 +66,12 @@
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-  @e2e @catering @soleproprietorship @cateringeventtransfer
+  @catering @soleproprietorship @cateringeventtransfer
   Scenario: Sole Proprietorship Catering Transfer Ownership Request
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -83,7 +83,7 @@
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page

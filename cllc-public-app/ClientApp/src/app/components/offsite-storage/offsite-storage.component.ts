@@ -25,7 +25,7 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
   form = this.fb.group({
     licenseId: ['', []],
     offsiteStorageLocations: ['', []],
-    agreement: [false, [Validators.required]]
+    agreement: [false, [this.customRequiredCheckboxValidator()]]
   });
 
   constructor(
@@ -74,10 +74,9 @@ export class OffsiteStorageComponent extends FormBase implements OnInit {
     if (this.isFormInvalid()) {
       this.showValidationMessages = true;
       this.markControlsAsTouched(this.form);
-      return;
+    } else {
+      this.updateLicence();
     }
-
-    this.updateLicence();
   }
 
   updateLicence() {
