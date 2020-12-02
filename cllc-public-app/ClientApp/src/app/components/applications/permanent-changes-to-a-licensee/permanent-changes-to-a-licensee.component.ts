@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,6 +13,8 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { FormBase } from '@shared/form-base';
 import { Observable, of, forkJoin, merge, combineLatest } from 'rxjs';
 import { catchError, delay, filter, mergeMap, takeWhile } from 'rxjs/operators';
+import { ContactComponent, ContactData } from '@shared/components/contact/contact.component';
+import { PaymentConfirmationComponent } from '@components/payment-confirmation/payment-confirmation.component';
 
 @Component({
   selector: 'app-permanent-changes-to-a-licensee',
@@ -35,6 +37,11 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
   dataLoaded: boolean;
   primaryPaymentInProgress: boolean;
   secondaryPaymentInProgress: boolean;
+  applicationContact: ContactData;
+  verifyRquestMade: boolean;
+  validationMessages: string[];
+  @ViewChild('appContact') appContact: ContactComponent;
+  appContactDisabled: boolean;
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -84,6 +91,8 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
       lastNameNew: [''],
       description2: [''],
       description3: [''],
+      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
     this.loadData();
@@ -95,12 +104,32 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
         this.liquorLicences = licences.filter(item => item.licenceTypeCategory === 'Liquor' && item.status === 'Active');
         this.cannabisLicences = licences.filter(item => item.licenceTypeCategory === 'Cannabis' && item.status === 'Active');
         this.application = application;
-        if ((this.invoiceType === 'primary' && !this.application.primaryInvoicePaid) ||
-          (this.invoiceType === 'secondary' && !this.application.secondaryInvoicePaid)) {
+        this.applicationContact = {
+          contactPersonFirstName: this.application.contactPersonFirstName,
+          contactPersonLastName: this.application.contactPersonLastName,
+          contactPersonRole: this.application.contactPersonRole,
+          contactPersonPhone: this.application.contactPersonPhone,
+          contactPersonEmail: this.application.contactPersonEmail
+        };
+
+        const needToVerifyPayment: boolean = (
+          (this.invoiceType === 'primary' && !this.application.primaryInvoicePaid) ||
+          (this.invoiceType === 'secondary' && !this.application.secondaryInvoicePaid)
+        );
+
+        if (needToVerifyPayment && !this.verifyRquestMade) {
+          this.verifyRquestMade = true;
           this.paymentDataService.verifyPaymentURI(this.invoiceType + 'Invoice', this.application.id)
             .subscribe(res => {
-              // TODO: Figureout how to report payment status
-              this.router.navigateByUrl('/permanent-changes-to-a-licensee')
+              // report payment status
+              const paymentData = PaymentConfirmationComponent.parseVerifyResponse(res);
+              if (paymentData.isApproved) {
+                this.snackBar.open(paymentData.paymentTransactionMessage, 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+              } else {
+                this.snackBar.open(paymentData.paymentTransactionMessage, 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+              }
+
+              this.loadData();
             });
         } else {
           this.dataLoaded = true;
@@ -111,11 +140,10 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
             this.router.navigateByUrl('/dashboard');
           }
 
-
-
           // if any payment was made, disable the form
           if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
             this.form.disable();
+            this.appContactDisabled = true;
           }
           this.form.patchValue(application);
         }
@@ -132,6 +160,7 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
     return this.applicationDataService.updateApplication({
       ...this.application,
       ...this.form.value,
+      ...this.appContact.form.value,
       ...appData
     })
       .pipe(takeWhile(() => this.componentActive))
@@ -150,7 +179,11 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
   }
 
   isValid(): boolean {
-    return true;
+    this.showValidationMessages = false;
+    this.validationMessages = [];
+    this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
+    debugger;
+    return this.form.valid;
   }
 
   isScreeningRequired(): boolean {
@@ -165,7 +198,6 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
    * Submit the application for payment
    * */
   submit_application(invoiceType: 'primary' | 'secondary') {
-
     // Only save if the data is valid
     if (this.isValid()) {
       if (invoiceType === 'primary') {
@@ -200,6 +232,8 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
         });
     } else {
       this.showValidationMessages = true;
+      this.markControlsAsTouched(this.form);
+      this.markControlsAsTouched(this.appContact.form);
     }
   }
 
@@ -221,6 +255,20 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
           this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
       }));
+  }
+
+  getValidationErrorMap() {
+    const errorMap = {
+      signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
+      authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
+      contactPersonEmail: 'Please enter the business contact\'s email address',
+      contactPersonFirstName: 'Please enter the business contact\'s first name',
+      contactPersonLastName: 'Please enter the business contact\'s last name',
+      contactPersonPhone: 'Please enter the business contact\'s 10-digit phone number',
+      contactPersonRole: 'Please enter the contact person role'
+    };
+
+    return errorMap;
   }
 
 }
