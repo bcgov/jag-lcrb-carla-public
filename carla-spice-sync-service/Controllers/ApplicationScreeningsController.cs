@@ -38,11 +38,17 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         public ActionResult ReceiveApplicationScreeningResult([FromBody] List<CompletedApplicationScreening> results)
         {
             // Process the updates received from the SPICE system.
-            BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJob(null, results));
+            if (!string.IsNullOrEmpty(Configuration["FEATURE_LE_CONNECTIONS"]))
+            {
+                BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJobV2(null, results));
+            }
+            else
+            {
+                BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJob(null, results));
+            }
             _logger.LogInformation("Started receive completed Application Screening job");
             return Ok();
         }
-
 
         /// <summary>
         /// Send an application record to SPICE for event driven processing
@@ -76,7 +82,52 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                     {
                         return NotFound($"Application {applicationId} is not found.");
                     }
-                    
+
+                    var result = _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
+
+                    if (result)
+                    {
+                        return Ok(applicationRequest);
+                    }
+                }
+                return BadRequest();
+            }
+            return Unauthorized();
+        }
+
+        /// <summary>
+        /// Send an application record to SPICE for event driven processing (using new LE Connection entities)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("send-v2/{applicationIdString}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> SendApplicationScreeningRequestV2(string applicationIdString, string bearer)
+        {
+            if (JwtChecker.Check(bearer, Configuration))
+            {
+                if (Guid.TryParse(applicationIdString, out Guid applicationId))
+                {
+                    var applicationRequest = new IncompleteApplicationScreening();
+                    try
+                    {
+                        // Generate the application request
+                        applicationRequest = await _spiceUtils.GenerateApplicationScreeningRequestV2(applicationId);
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        return NotFound($"Application {applicationId} is not found.");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex.ToString());
+                        return BadRequest();
+                    }
+
+                    if (applicationRequest == null)
+                    {
+                        return NotFound($"Application {applicationId} is not found.");
+                    }
+
                     var result = _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
 
                     if (result)
