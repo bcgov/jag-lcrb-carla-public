@@ -20,7 +20,7 @@ Scenario: Partnership UBrew / UVin Application
     And the account is deleted
     Then I see the login page
 
-@ubrewuvinapplication @privatecorporation @release
+@ubrewuvinapplication @privatecorporation
 Scenario: Private Corporation UBrew / UVin Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
