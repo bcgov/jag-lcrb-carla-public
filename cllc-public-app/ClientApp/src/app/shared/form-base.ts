@@ -206,17 +206,19 @@ export class FormBase implements OnDestroy {
         let list = [];
         if (form instanceof FormGroup) {
             for (const c in form.controls) {
-                let control = form.get(c);
-                if (!control.valid && control.status !== 'DISABLED') {
-                    if (control instanceof FormGroup || control instanceof FormArray) {
-                        let name = parentName + c + '.';
-                        list = [...list, ...this.listControlsWithErrors(control, ValidationFieldNameMap, name)];
-                    } else {
-                        let message = parentName + c + ' is not valid';
-                        if (ValidationFieldNameMap[parentName + c]) {
-                            message = ValidationFieldNameMap[parentName + c];
+                if (c) {
+                    const control = form.get(c);
+                    if (!control.valid && control.status !== 'DISABLED') {
+                        if (control instanceof FormGroup || control instanceof FormArray) {
+                            const name = parentName + c + '.';
+                            list = [...list, ...this.listControlsWithErrors(control, ValidationFieldNameMap, name)];
+                        } else {
+                            let message = parentName + c + ' is not valid';
+                            if (ValidationFieldNameMap[parentName + c]) {
+                                message = ValidationFieldNameMap[parentName + c];
+                            }
+                            list.push(message);
                         }
-                        list.push(message);
                     }
                 }
             }
@@ -224,7 +226,7 @@ export class FormBase implements OnDestroy {
             form.controls.forEach((control, index) => {
                 if (!control.valid && control.status !== 'DISABLED') {
                     if (control instanceof FormGroup || control instanceof FormArray) {
-                        let name = parentName;
+                        const name = parentName;
                         list = [...list, ...this.listControlsWithErrors(control, ValidationFieldNameMap, name)];
                     } else {
                         let message = parentName + ' at index ' + index + 'is not valid';
