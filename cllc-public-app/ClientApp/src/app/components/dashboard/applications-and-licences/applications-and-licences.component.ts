@@ -61,6 +61,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   liquorTwo: boolean;
   startMarketingOngoing: boolean;
   startCateringOngoing: boolean;
+  startFPOngoing: boolean;
   startMfgOngoing: boolean;
   startUBVOngoing: boolean;
   startRASOngoing: boolean;
@@ -362,7 +363,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   startNewFPApplication() {
+    this.startFPOngoing = true;
     const newLicenceApplicationData: Application = <Application>{
+
       licenseType: 'Food Primary',
       applicantType: this.account.businessType,
       applicationType: <ApplicationType>{ name: ApplicationTypeNames.FP },
@@ -372,11 +375,12 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/account-profile/${data.id}`];
-
+        this.startFPOngoing = false;
         this.router.navigate(route);
       },
       () => {
         this.snackBar.open('Error starting a Food Primary Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.startFPOngoing = false;
         console.log('Error starting a Food Primary Application');
       }
     );
