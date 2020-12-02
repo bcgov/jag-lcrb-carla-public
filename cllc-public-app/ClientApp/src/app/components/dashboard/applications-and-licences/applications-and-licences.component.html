@@ -104,8 +104,11 @@
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button class="btn btn-secondary" (click)="startNewFPApplication()" id="startFP">START
-                  APPLICATION</button>
+                <button mat-raised-button color="secondary" [disabled]="startFPOngoing" (click)="startNewFPApplication()" id="startFP">
+                  <span>START
+                  APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startFPOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
               </td>
             </tr>
 
