@@ -3,7 +3,7 @@
     I want to pay the first year catering licence fee
     And submit a name branding change for different business types
 
-@e2e @catering @partnership @cateringbranding2
+@cateringbranding @partnership @cateringbranding
 Scenario: Catering Partnership Branding Change
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -16,18 +16,16 @@ Scenario: Catering Partnership Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
-    And I click on the link for Download Licence
-    And the licence is successfully downloaded
     And I request a valid store name or branding change for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @cateringbranding3
+@cateringbranding @privatecorporation
 Scenario: Catering Private Corporation Branding Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -40,18 +38,16 @@ Scenario: Catering Private Corporation Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
-    And I click on the link for Download Licence
-    And the licence is successfully downloaded
     And I request a valid store name or branding change for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringbranding4
+@cateringbranding @publiccorporation 
 Scenario: Catering Public Corporation Branding Change
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
@@ -64,18 +60,16 @@ Scenario: Catering Public Corporation Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
-    And I click on the link for Download Licence
-    And the licence is successfully downloaded
     And I request a valid store name or branding change for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringbranding5
+@cateringbranding @society 
 Scenario: Catering Society Branding Change
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -88,18 +82,16 @@ Scenario: Catering Society Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
-    And I click on the link for Download Licence
-    And the licence is successfully downloaded
     And I request a valid store name or branding change for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @soleproprietorship @cateringbranding6
+@cateringbranding @soleproprietorship 
 Scenario: Catering Sole Proprietorship Branding Change
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -112,11 +104,9 @@ Scenario: Catering Sole Proprietorship Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
-    And I click on the link for Download Licence
-    And the licence is successfully downloaded
     And I request a valid store name or branding change for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review

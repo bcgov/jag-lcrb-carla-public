@@ -17,7 +17,7 @@ Feature: CateringApplication
     As a logged in business user
     I want to submit a Catering Application for different business types
 
-@e2e @catering @partnership @cateringapp
+@cateringapp @partnership 
 Scenario: Partnership Catering Application
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -35,7 +35,7 @@ Scenario: Partnership Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @cateringapp
+@cateringapp @privatecorporation
 Scenario: Private Corporation Catering Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -53,7 +53,7 @@ Scenario: Private Corporation Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringapp2
+@cateringapp @publiccorporation
 Scenario: Public Corporation Catering Application
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
@@ -71,7 +71,7 @@ Scenario: Public Corporation Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringapp2
+@cateringapp @society
 Scenario: Society Catering Application
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -89,7 +89,7 @@ Scenario: Society Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @soleproprietorship @cateringapp
+@cateringapp @soleproprietorship
 Scenario: Sole Proprietorship Catering Application
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering

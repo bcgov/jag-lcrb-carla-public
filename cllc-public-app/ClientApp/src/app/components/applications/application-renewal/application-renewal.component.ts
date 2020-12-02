@@ -201,7 +201,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     if (!(this.application && this.application.applicationType)) {
       return;
     }
-    debugger;
     if(this.application.applicationType.name ===  ApplicationTypeNames.MarketingRenewal) {
       this.form.get("renewalBranding").clearValidators();
       this.form.get("renewalSignage").clearValidators();

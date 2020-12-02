@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using SepService.ViewModels;
 
 namespace SepService
@@ -13,7 +14,9 @@ namespace SepService
         public Location Location { get; set; }
         public ResponsibleIndividual ResponsibleIndividual { get; set; }
         public string SolLicenceNumber { get; set; }
-        public string SolNote { get; set; }
-        public string TsAndCs { get; set; }
+        public List<SolNote> SolNote { get; set; }
+        public List<TermAndCondition> TsAndCs { get; set; }
+        public bool TsAndCsGlobal { get; set; }
+        public bool TastingEvent { get; set; }
     }
 }

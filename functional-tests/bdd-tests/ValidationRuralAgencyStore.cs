@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: ValidationRuralStore
+Feature: ValidationRuralAgencyStore
     As a logged in business user
     I want to confirm the validation messages for a Rural Agency Store application
 
-@privatecorporation @ruralstore
-Scenario: Validation for Rural Store Application
+@privatecorporation @ruralagencystore
+Scenario: Validation for Rural Agency Store Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Rural Agency Store
     And I review the account profile for a private corporation
@@ -32,9 +32,9 @@ Scenario: Validation for Rural Store Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./ValidationRuralStore.feature")]
+    [FeatureFile("./ValidationRuralAgencyStore.feature")]
     [Collection("Cannabis")]
-    public sealed class ValidationRuralStore : TestBase
+    public sealed class ValidationRuralAgencyStore : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LoggedInToDashboard(string businessType)

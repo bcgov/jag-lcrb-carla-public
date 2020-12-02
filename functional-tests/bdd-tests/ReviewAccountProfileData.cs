@@ -17,7 +17,7 @@ Feature: ReviewAccountProfileData
     As a logged in business user
     I want to confirm the saved data for the account profile
 
-@e2e @cannabis @privatecorporation @reviewaccountdata
+@privatecorporation @reviewaccountdata
 Scenario: Data for Private Corporation Review Account Profile
     Given I am logged in to the dashboard as a private corporation
     And I click on the link for Edit Account Profile
@@ -27,7 +27,7 @@ Scenario: Data for Private Corporation Review Account Profile
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @reviewaccountdata
+@partnership @reviewaccountdata
 Scenario: Data for Partnership Review Account Profile
     Given I am logged in to the dashboard as a partnership
     And I click on the link for Edit Account Profile
@@ -37,7 +37,7 @@ Scenario: Data for Partnership Review Account Profile
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @reviewaccountdata
+@publiccorporation @reviewaccountdata
 Scenario: Data for Public Corporation Review Account Profile
     Given I am logged in to the dashboard as a public corporation
     And I click on the link for Edit Account Profile
@@ -47,7 +47,7 @@ Scenario: Data for Public Corporation Review Account Profile
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @reviewaccountdata
+@society @reviewaccountdata
 Scenario: Data for Society Review Account Profile
     Given I am logged in to the dashboard as a society
     And I click on the link for Edit Account Profile
@@ -57,7 +57,7 @@ Scenario: Data for Society Review Account Profile
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @reviewaccountdata
+@soleproprietorship @reviewaccountdata
 Scenario: Data for Sole Proprietorship Review Account Profile
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the link for Edit Account Profile
@@ -67,7 +67,7 @@ Scenario: Data for Sole Proprietorship Review Account Profile
     And the account is deleted
     Then I see the login page
 
- @e2e @cannabis @indigenousnation @reviewaccountdata
+ @indigenousnation @reviewaccountdata
  Scenario: Data for Indigenous Nation Review Account Profile
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the link for Edit Account Profile
@@ -77,7 +77,7 @@ Scenario: Data for Sole Proprietorship Review Account Profile
     And the account is deleted
     Then I see the login page
 
- @e2e @cannabis @localgovernment @reviewaccountdata
+ @localgovernment @reviewaccountdata
  Scenario: Data for Local Government Review Account Profile
     Given I am logged in to the dashboard as a local government
     And I click on the link for Edit Account Profile
@@ -87,7 +87,7 @@ Scenario: Data for Sole Proprietorship Review Account Profile
     And the account is deleted
     Then I see the login page
 
- @e2e @cannabis @university @reviewaccountdata
+ @university @reviewaccountdata
  Scenario: Data for University Review Account Profile
     Given I am logged in to the dashboard as a university
     And I click on the link for Edit Account Profile

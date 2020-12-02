@@ -7,7 +7,7 @@
 # Expiry = Today
 #-----------------------
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny Today Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -19,14 +19,14 @@ Scenario:  Deny Today Winery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 322d410b-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny Today Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -38,14 +38,14 @@ Scenario:  Deny Today Brewery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 322d410b-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny Today Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -57,14 +57,14 @@ Scenario:  Deny Today Distillery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 322d410b-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny Today Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -76,7 +76,7 @@ Scenario:  Deny Today Co-packer Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 322d410b-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
@@ -87,7 +87,7 @@ Scenario:  Deny Today Co-packer Licence Renewal
 # Expiry = Yesterday
 #-----------------------
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny Yesterday Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -99,14 +99,14 @@ Scenario:  Deny Yesterday Winery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow e1792ccf-e40b-491f-9a9a-ee8e977749e6
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny Yesterday Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -118,14 +118,14 @@ Scenario:  Deny Yesterday Brewery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow e1792ccf-e40b-491f-9a9a-ee8e977749e6
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny Yesterday Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -137,14 +137,14 @@ Scenario:  Deny Yesterday Distillery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow e1792ccf-e40b-491f-9a9a-ee8e977749e6
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny Yesterday Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -156,7 +156,7 @@ Scenario:  Deny Yesterday Co-packer Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow e1792ccf-e40b-491f-9a9a-ee8e977749e6
     And I am unable to renew the licence
@@ -167,7 +167,7 @@ Scenario:  Deny Yesterday Co-packer Licence Renewal
 # Expiry = 45 Days Ago
 #-----------------------
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 45 Days Ago Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -179,14 +179,14 @@ Scenario:  Deny 45 Days Ago Winery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 65bfe79d-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 45 Days Ago Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -198,14 +198,14 @@ Scenario:  Deny 45 Days Ago Brewery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 65bfe79d-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 45 Days Ago Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -217,14 +217,14 @@ Scenario:  Deny 45 Days Ago Distillery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 65bfe79d-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 45 Days Ago Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -236,7 +236,7 @@ Scenario:  Deny 45 Days Ago Co-packer Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 65bfe79d-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
@@ -247,7 +247,7 @@ Scenario:  Deny 45 Days Ago Co-packer Licence Renewal
 # Expiry = 60 Days From Today
 #-----------------------------
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 60 Days From Today Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -259,14 +259,14 @@ Scenario:  Deny 60 Days From Today Winery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow beb3243e-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 60 Days From Today Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -278,14 +278,14 @@ Scenario:  Deny 60 Days From Today Brewery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow beb3243e-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 60 Days From Today Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -297,14 +297,14 @@ Scenario:  Deny 60 Days From Today Distillery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow beb3243e-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 60 Days From Today Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -316,7 +316,7 @@ Scenario:  Deny 60 Days From Today Co-packer Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow beb3243e-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
@@ -327,7 +327,7 @@ Scenario:  Deny 60 Days From Today Co-packer Licence Renewal
 # Expiry = 30 Days From Today
 #-----------------------------
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 30 Days From Today Winery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -339,14 +339,14 @@ Scenario:  Deny 30 Days From Today Winery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 10eaae77-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 30 Days From Today Brewery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -358,14 +358,14 @@ Scenario:  Deny 30 Days From Today Brewery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 10eaae77-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 30 Days From Today Distillery Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -377,14 +377,14 @@ Scenario:  Deny 30 Days From Today Distillery Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 10eaae77-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
 
-@e2e @manufacturer @privatecorporation @licencerenewal
+@manufacturer @licencerenewal
 Scenario:  Deny 30 Days From Today Co-packer Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -396,7 +396,7 @@ Scenario:  Deny 30 Days From Today Co-packer Licence Renewal
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I click on the Licences tab
     And autorenewal is set to 'No' using Dynamics workflow 10eaae77-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence

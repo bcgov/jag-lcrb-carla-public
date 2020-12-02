@@ -1,5 +1,5 @@
-<div [ngBusy]="busy"></div>
-<div *ngIf="application">
+<mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="application && dataLoaded">
   <ng-template #applicationContent>
     <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
 
@@ -62,6 +62,152 @@
           <a target="blank"
             [href]="form.get('indigenousNation').value.websiteUrl">{{form.get('indigenousNation').value.websiteUrl}}</a>
           to ensure you have met the requirements of this application with your local government.
+        </section>
+
+
+        <!-- LE Document Upload Section -->
+        <h3 class="blue-header" *ngIf="application?.applicationType.name == ApplicationTypeNames.FP">Legal Entity Document Requirements</h3>
+        <section *ngIf="application?.applicationType.name == ApplicationTypeNames.FP" class="content-bottom">
+
+          <!-- if Private Corporation -->
+          <section *ngIf="this.businessTypeIsPrivateCorporation()">
+            <h4>Central Securities Register (shareholder register)</h4>
+            <p>Provide a list of all shareholders, class of shares, number of voting and non-voting per shareholder, and date
+              shares issued/transferred/cancelled.</p>
+            <p><i class="fa fa-id-card mr-1"></i>All shareholders (individuals) holding 10% or greater voting shares in the
+              applicant corporation must submit completed <span *ngIf="this.isLiquor()">Personal History Summary</span><span
+                *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> forms below.</p>
+            <app-file-uploader *ngIf="true || applicationId" documentType="CentralSecuritiesRegister"
+              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+              (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event" [entityId]="applicationId"
+              [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
+            </app-file-uploader>
+            <hr>
+            <p>If one of the new shareholders is a private corporation, a public corporation, a society or a partnership,
+              documentation to support the applicable business type must be submitted, even if the shareholder holds less than
+              10%
+              interest in the applicant corporation:</p>
+
+            <ul>
+              <li>Society
+                <ul>
+                  <li>Current list of officers and directors</li>
+                  <li>All directors must submit a completed Personal History Summary or Cannabis Associate Screening (see
+                    below)</li>
+                </ul>
+              </li>
+              <li>Partnership<ul>
+                  <li>List the legal names of the partners with the percentage of ownership in the partnership listed beside
+                    each name/li>
+                  <li>Each partner must supply a completed Personal History Summary or Cannabis Associate Screening (see
+                    below)</li>
+                </ul>
+              </li>
+              <li>Public Corporation
+                <ul>
+                  <li>List of Directors and Officers</li>
+                  <li>All directors must submit a completed Personal History Summary or Cannabis Associate Screening (see
+                    below)</li>
+                </ul>
+              </li>
+              <li>Private Corporation
+                <ul>
+                  <li>Central Securities Register</li>
+                  <li>Notice of Articles</li>
+                  <li>Special Rights and Restrictions within the articles of incorporation that detail the class and types of
+                    shares and whether or not each class or type of share has voting privileges (if the information is not
+                    already included in the Notice of Articles)</li>
+                  <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership,
+                    submit all the documents listed under that business type</li>
+                  <li>all shareholders (individuals) holding 10% or greater interest in the applicant corporation must submit
+                    a completed Personal History Summary or Cannabis Associate Screening (see below)</li>
+                </ul>
+              </li>
+              <li>Other
+                <ul>
+                  <li>This includes entities incorporated through Federal or Provincial legislation. Examples: Local
+                    Government, First Nations, colleges, universities, etc. Contact the branch to discuss documentation
+                    requirements.</li>
+
+                </ul>
+              </li>
+            </ul>
+
+            <h4>Supporting Business Documentation</h4>
+            <p>Provide supporting business documentation if one or more of the shareholders is a company:</p>
+            <app-file-uploader *ngIf="true || applicationId" documentType="SupportingDocuments"
+              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+              (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [entityId]="applicationId"
+              [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'">
+            </app-file-uploader>
+            <hr>
+          </section>
+
+          <!-- If Private Corporation, Public Corporation or Societies-->
+          <section *ngIf="this.businessTypeIsCorporation() || this.businessTypeIsSociety()">
+            <h4>Register of Directors and Officers</h4>
+            <p>Provide a list of all current directors/officers by full legal name, position and date of appointment.</p>
+            <p><i class="fa fa-id-card mr-1"></i>All directors must submit a completed <span *ngIf="this.isLiquor()">Personal
+                History Summary</span><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> forms below.
+            </p>
+            <app-file-uploader *ngIf="true || applicationId" documentType="RegisterOfDirectorsAndOfficers"
+              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+              (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event" [entityId]="applicationId"
+              [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
+            </app-file-uploader>
+          </section>
+
+          <!-- Sole Proprietor-->
+          <section *ngIf="this.businessTypeIsSoleProp()">
+            <p><i class="fa fa-id-card mr-1"></i>Sole proprieters must complete a <span *ngIf="this.isLiquor()">Personal History
+                Summary</span><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> forms below.</p>
+          </section>
+
+          <!-- Partnership-->
+          <section *ngIf="this.businessTypeIsPartnership()">
+            <h4>Partnership Agreement</h4>
+            <p>Provide a copy of your partnership agreement.</p>
+            <p><i class="fa fa-id-card mr-1"></i>Each partner must submit a completed <span *ngIf="this.isLiquor()">Personal
+                History Summary</span><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> form below.
+            </p>
+            <app-file-uploader *ngIf="true || applicationId" documentType="PartnershipAgreement"
+              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+              (numberOfUploadedFiles)="uploadedPartnershipAgreement = $event" [entityId]="applicationId"
+              [uploadHeader]="'TO UPLOAD PARTNERSHIP AGREEMENT, DRAG FILES HERE OR'">
+            </app-file-uploader>
+          </section>
+
+          <!-- Other -->
+          <section
+            *ngIf="!this.businessTypeIsPartnership() && !this.businessTypeIsCorporation() && !this.businessTypeIsSoleProp() && !this.businessTypeIsSociety()">
+            <h4>Legal Entity Documentation</h4>
+            <p>Entities incorporated under federal or provincial legislation; example: local governments, First Nation,
+              colleges, universities, etc. may have unique requirements. Please contact the Licensing Help Desk at
+              1-866-209-2111 to discuss further documentation requirements</p>
+            <app-file-uploader *ngIf="true || applicationId" documentType="OtherTypes" fileTypes="FILE MUST BE IN PDF FORMAT."
+              [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+              (numberOfUploadedFiles)="uploadedOtherDocuments = $event" [entityId]="applicationId"
+              [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'">
+            </app-file-uploader>
+          </section>
+          <!-- personal disclosure documents-->
+
+
+
+
+          <!-- private corporations need to provide the names of shareholders with less than 10% interest-->
+          <section *ngIf="this.businessTypeIsPrivateCorporation()">
+            <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
+            <p>Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide their full
+              legal name and date of birth.</p>
+            <app-file-uploader *ngIf="true || applicationId" documentType="IndividualsWithLessThan10"
+              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+              (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event" [entityId]="applicationId"
+              [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
+            </app-file-uploader>
+          </section>
+
+
         </section>
 
         <!-- Establishment Name -->
@@ -644,7 +790,7 @@
                     The signage submitted must show the name of the store and all words, images and symbols used in the
                     signage.
                   </p>
-    
+
                   <section
                     *ngIf="application?.applicationType?.name === ApplicationTypeNames.LiquorLicenceTransfer">
                     <p>
@@ -652,12 +798,12 @@
                       sign. Your name and signage must be approved by the Branch to ensure it is appropriate, accurately reflecting the
                       nature of the business. Do not order signs until you have received this approval.
                     </p>
-    
+
                     <img src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage">
                   </section>
-    
-                  
-    
+
+
+
                   <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                     Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis
                     (e.g. a
@@ -717,7 +863,7 @@
                   </app-file-uploader>
                 </section>
               </div>
-  
+
             </mat-card>
 
 
@@ -1419,7 +1565,7 @@
           </section>
           </div>
         </section>
-          
+
           <section class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest) || showValidInterestforTransfer()">
             <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">
               Offer or Proof of Ownership, Lease or
@@ -1492,8 +1638,8 @@
                 [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
               </app-file-uploader>
             </section>
-            
-          
+
+
         </section>
         </section>
 
@@ -1762,7 +1908,7 @@
 
             <div>
               <p *ngIf="application?.licenseType === 'Cannabis Retail Store'">
-                The Province does not know how many application for a cannabis retail store licence will be received.
+                The Province does not know how many applications for a cannabis retail store licence will be received.
                 Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
                 processing, applicants must make sure the application is complete before submitting it.
               </p>
@@ -1929,7 +2075,7 @@
             </span>
           </span>
 
-          <div [ngBusy]="busy"></div>
+          <!-- <div [ngBusy]="busy"></div> -->
         </section>
 
         <!-- button section when  LGApprovals is disabled -->
@@ -1957,7 +2103,7 @@
             </span>
           </span>
 
-          <div [ngBusy]="busy"></div>
+          <!-- <div [ngBusy]="busy"></div> -->
         </section>
 
       </div>
@@ -1965,7 +2111,7 @@
 
     <div [ngClass]="{'normal-mode': mode !== UPLOAD_FILES_MODE}">
       <div [formGroup]="form" style="padding-left: 45px; position: relative">
-        <div [ngBusy]="busy"></div>
+        <!-- <div [ngBusy]="busy"></div> -->
         <h1 *ngIf="application">Add More files to the Application</h1>
       </div>
       <div *ngIf="application" class="application-wrapper">
@@ -2169,7 +2315,7 @@
   </ng-template>
 
   <div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
-    <div [ngBusy]="busy"></div>
+    <!-- <div [ngBusy]="busy"></div> -->
     <div class="row">
       <div class="col-md-7 col-sm-12">
         <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
@@ -2192,7 +2338,7 @@
   </div>
 
   <div appRemoveIfFeatureOn="IndigenousNation">
-    <div [ngBusy]="busy"></div>
+    <!-- <div [ngBusy]="busy"></div> -->
     <ng-container *ngTemplateOutlet="applicationContent">
     </ng-container>
   </div>

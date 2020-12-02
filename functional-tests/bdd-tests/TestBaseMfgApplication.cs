@@ -166,8 +166,11 @@ namespace bdd_tests
             // upload the business plan
             FileUpload("business_plan.pdf","(//input[@type='file'])[2]");
 
-            // upload the production sales forecast
-            FileUpload("production_sales_forecast.pdf","(//input[@type='file'])[5]");
+            if (manufacturerType != "co-packer")
+            {
+                // upload the production sales forecast
+                FileUpload("production_sales_forecast.pdf", "(//input[@type='file'])[5]");
+            }
 
             if ((manufacturerType == "winery") || (manufacturerType == "winery in Saanich"))
             {
@@ -213,9 +216,12 @@ namespace bdd_tests
                 uiPackaging.Click();
             }
 
-            // select 'yes' for neutral grain spirits            
-            NgWebElement uiNeutralGrains = ngDriver.FindElement(By.CssSelector("[formcontrolname='mfgUsesNeutralGrainSpirits'] mat-radio-button[value='Yes']"));
-            uiNeutralGrains.Click();
+            if (manufacturerType != "co-packer")
+            {
+                // select 'yes' for neutral grain spirits            
+                NgWebElement uiNeutralGrains = ngDriver.FindElement(By.CssSelector("[formcontrolname='mfgUsesNeutralGrainSpirits'] mat-radio-button[value='Yes']"));
+                uiNeutralGrains.Click();
+            }
 
             if (manufacturerType == "brewery")
             {

@@ -59,6 +59,13 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   licenseeChangeFeatureOn: boolean;
   liquorOne: boolean;
   liquorTwo: boolean;
+  startMarketingOngoing: boolean;
+  startCateringOngoing: boolean;
+  startFPOngoing: boolean;
+  startMfgOngoing: boolean;
+  startUBVOngoing: boolean;
+  startRASOngoing: boolean;
+  startCRSOngoing: boolean;
 
 
   constructor(
@@ -144,6 +151,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           this.nonMarketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.CannabisRetailStore)
             .map(item => <any>item)
             .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
+
+            this.dataLoaded = true;
 
         });
   }
@@ -245,6 +254,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   startNewLicenceApplication() {
+    this.startCRSOngoing = true;
     const newLicenceApplicationData: Application = <Application>{
       licenseType: 'Cannabis Retail Store',
       applicantType: this.account.businessType,
@@ -274,15 +284,18 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         } else {
           this.router.navigateByUrl(`/account-profile/${data.id}`);
         }
+        this.startCRSOngoing = false;
       },
       () => {
         this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.startCRSOngoing = false;
         console.log('Error starting a New Licence Application');
       }
     );
   }
 
   startNewMarketerApplication() {
+    this.startMarketingOngoing = true;
     const newLicenceApplicationData: Application = <Application>{
       licenseType: 'Marketing',
       applicantType: this.account.businessType,
@@ -292,16 +305,19 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
+        this.startMarketingOngoing = false;
         this.router.navigateByUrl(`/account-profile/${data.id}`);
       },
       () => {
         this.snackBar.open('Error starting a New Marketer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.startMarketingOngoing = false;
         console.log('Error starting a New Marketer Application');
       }
     );
   }
 
   startNewCateringApplication() {
+    this.startCateringOngoing = true;
     const newLicenceApplicationData: Application = <Application>{
       licenseType: 'Catering',
       applicantType: this.account.businessType,
@@ -312,19 +328,19 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/multi-step-application/${data.id}`];
-
-
-
+        this.startCateringOngoing = false;
         this.router.navigate(route);
       },
       () => {
         this.snackBar.open('Error starting a Catering Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.startCateringOngoing = false;
         console.log('Error starting a Catering Application');
       }
     );
   }
 
   startNewMfgApplication() {
+    this.startMfgOngoing = true;
     const newLicenceApplicationData: Application = <Application>{
       licenseType: 'Manufacturer',
       applicantType: this.account.businessType,
@@ -335,17 +351,43 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/multi-step-application/${data.id}`];
-
+        this.startMfgOngoing = false;
         this.router.navigate(route);
       },
       () => {
         this.snackBar.open('Error starting a Manufacturer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.startMfgOngoing = false;
         console.log('Error starting a Manufacturer Application');
       }
     );
   }
 
+  startNewFPApplication() {
+    this.startFPOngoing = true;
+    const newLicenceApplicationData: Application = <Application>{
+
+      licenseType: 'Food Primary',
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.FP },
+      account: this.account,
+    };
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/account-profile/${data.id}`];
+        this.startFPOngoing = false;
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open('Error starting a Food Primary Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.startFPOngoing = false;
+        console.log('Error starting a Food Primary Application');
+      }
+    );
+  }
+
   startNewRASApplication() {
+    this.startRASOngoing = true;
     const newLicenceApplicationData: Application = <Application>{
       licenseType: 'Rural Agency Store',
       applicantType: this.account.businessType,
@@ -356,17 +398,19 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/multi-step-application/${data.id}`];
-
+        this.startRASOngoing = false;
         this.router.navigate(route);
       },
       () => {
         this.snackBar.open('Error starting a Rural Agency Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.startRASOngoing = false;
         console.log('Error starting a Rural Agency Application');
       }
     );
   }
 
   startNewUBVApplication() {
+    this.startUBVOngoing = true;
     const newLicenceApplicationData: Application = <Application>{
       licenseType: 'UBrew and UVin',
       applicantType: this.account.businessType,
@@ -377,11 +421,12 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/multi-step-application/${data.id}`];
-
+        this.startUBVOngoing = false;
         this.router.navigate(route);
       },
       () => {
         this.snackBar.open('Error starting a Rural Agency Store Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.startUBVOngoing = false;
         console.log('Error starting a Rural Agency Store Application');
       }
     );

@@ -353,7 +353,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     }
 
     public enum PatioLocatedAbove
-    { 
+    {
         Grass = 845280000,
         Earth = 845280001,
         Gravel = 845280002,
@@ -409,7 +409,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ViewModels.Account Applicant { get; set; }
         public ViewModels.License AssignedLicence { get; set; }
         public string AdditionalPropertyInformation { get; set; } //adoxio_additionalpropertyinformation
-        public string AdoxioInvoiceId;
+        public string InvoiceId;
+        public string SecondaryInvoiceId;
         public string ApplyingPerson { get; set; } //_adoxio_applyingperson_value
         public bool? AuthorizedToSubmit { get; set; } //adoxio_authorizedtosubmit        
 
@@ -602,7 +603,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public YesNoNotApplicable? MfgUsesNeutralGrainSpirits { get; set; }
 
         public int? ZoningStatus { get; set; }
-        public bool? IsOwnerBusiness { get; set; }      
+        public bool? IsOwnerBusiness { get; set; }
         public bool? HasValidInterest { get; set; }
         public bool? IsHasPatio { get; set; }
         public bool? WillHaveValidInterest { get; set; }
@@ -630,7 +631,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? PatioIsLiquorCarried { get; set; }
         public string PatioLiquorCarriedDescription { get; set; }
         public string PatioAccessControlDescription { get; set; }
-        
+
         public int? LocatedAboveDescription { get; set; }
         public int? PatioServiceBar { get; set; }
 
@@ -643,6 +644,19 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string LocatedAboveOther { get; set; }
 
-
+        public string FirstNameOld { get; set; }
+        public string FirstNameNew { get; set; }
+        public string LastNameOld { get; set; }
+        public string LastNameNew { get; set; }
+        public bool? CsInternalTransferOfShares { get; set; }
+        public bool? CsExternalTransferOfShares { get; set; }
+        public bool? CsChangeOfDirectorsOrOfficers { get; set; }
+        public bool? CsNameChangeLicenseeCorporation { get; set; }
+        public bool? CsNameChangeLicenseePartnership { get; set; }
+        public bool? CsNameChangeLicenseeSociety { get; set; }
+        public bool? CsNameChangeLicenseePerson { get; set; }
+        public bool? CsAdditionalReceiverOrExecutor { get; set; }
+        public bool? PrimaryInvoicePaid { get; set; }
+        public bool? SecondaryInvoicePaid { get; set; }
     }
 }

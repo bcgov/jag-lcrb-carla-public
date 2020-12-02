@@ -1,6 +1,5 @@
-<div class="upload-wrapper">
-  <p></p>
-  <ngx-file-drop [hidden]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}"
+<div class="upload-wrapper mt-2">
+  <ngx-file-drop *ngIf="dataLoaded" [hidden]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}"
     (onFileDrop)="dropped($event)" customstype="filedrop" (onFileOver)="fileOver($event)"
     (onFileLeave)="fileLeave($event)">
     <ng-template ngx-file-drop-content-tmp>
@@ -19,10 +18,10 @@
       </div>
     </ng-template>
   </ngx-file-drop>
+  <mat-progress-bar class="mt-1 mb-1" *ngIf="!dataLoaded || fileReqOngoing" mode="indeterminate"></mat-progress-bar>
   <div style="margin-top: 5px; color: #2C679E;">
-    <div [ngBusy]="busy"></div>
     <section *ngFor="let item of files; let i=index" class="file-list">
-      <a href="{{item.downloadUrl}}">{{ item.name }}</a>
+      <a name="{{item.name}}" href="{{item.downloadUrl}}">{{ item.name }}</a>
       <span>
         <span style="margin-right: 20px; color: #A9A9A9">{{item.size}} kb</span>
         <a *ngIf="enableFileDeletion" href="javascript: void(0)" (click)="deleteFile(item.serverrelativeurl)">Delete</a>

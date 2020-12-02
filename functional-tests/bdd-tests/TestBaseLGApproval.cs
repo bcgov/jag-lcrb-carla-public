@@ -93,19 +93,5 @@ namespace bdd_tests
                 ClickOnSubmitButton();
             }
         }
-
-
-        [And(@"the dashboard status is updated as (.*)")]
-        public void DashboardStatus(string status)
-        {
-            if (status == "Application Under Review")
-            {
-                //System.Threading.Thread.Sleep(4000);
-
-                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Application Under Review ')]")).Displayed);
-
-                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Add Supporting Documents')]")).Displayed);
-            }
-        }
     }
 }

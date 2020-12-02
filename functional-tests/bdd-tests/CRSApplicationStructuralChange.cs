@@ -18,7 +18,7 @@ Feature: CRSApplicationStructuralChange
     I want to submit a CRS Application for different business types
     And request a structural change for the approved application
 
-@e2e @cannabis @indigenousnation @crsstructuralchangesIN
+@cannabis @indigenousnation @crsstructuralchanges
 Scenario: Indigenous Nation Cannabis Structural Changes
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -30,14 +30,14 @@ Scenario: Indigenous Nation Cannabis Structural Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsstructuralchangespartnership
+@cannabis @partnership @crsstructuralchanges
 Scenario: Partnership Cannabis Structural Changes
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -49,14 +49,14 @@ Scenario: Partnership Cannabis Structural Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsstructuralchangesprivcorp
+@cannabis @privatecorporation @crsstructuralchanges
 Scenario: Private Corporation Cannabis Structural Changes
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -68,14 +68,14 @@ Scenario: Private Corporation Cannabis Structural Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsstructuralchangespubcorp
+@cannabis @publiccorporation @crsstructuralchanges
 Scenario: Public Corporation Cannabis Structural Changes
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -87,14 +87,14 @@ Scenario: Public Corporation Cannabis Structural Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsstructuralchangessociety
+@cannabis @society @crsstructuralchanges
 Scenario: Society Cannabis Structural Changes
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -106,14 +106,14 @@ Scenario: Society Cannabis Structural Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsstructuralchangessoleprop
+@cannabis @soleproprietorship @crsstructuralchanges
 Scenario: Sole Proprietorship Cannabis Structural Changes
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
@@ -125,7 +125,7 @@ Scenario: Sole Proprietorship Cannabis Structural Changes
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard

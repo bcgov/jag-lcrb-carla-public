@@ -58,6 +58,10 @@ $bootstrap-sass-asset-helper: true;
   flex-flow: row nowrap;
 }
 
+.content-wrapper {
+  flex-grow: 1;
+}
+
 .app-main {
   background: #fff;
   flex: auto;
@@ -161,7 +165,7 @@ a:active {
   font-weight: 900;
 }
 
-a.IE{
+a.IE {
   color: #1a5a96;
 }
 

@@ -38,8 +38,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ViewModels.User user = new ViewModels.User();
 
             // determine if we are a new registrant.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             user.id = userSettings.UserId;
             user.contactid = userSettings.ContactId;
             user.accountid = userSettings.AccountId;

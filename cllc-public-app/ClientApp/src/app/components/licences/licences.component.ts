@@ -52,6 +52,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     'Manufacturer', 'Operated - Manufacturer', 'Deemed - Manufacturer', 'Transfer in Progress - Manufacturer',
     'Licensee Retail Store', 'Transfer in Progress - Licensee Retail Store', 'Operated - Licensee Retail Store', 'Deemed - Licensee Retail Store',
     'UBrew and UVin', 'Transfer in Progress - UBrew and UVin', 'Operated - UBrew and UVin', 'Deemed - UBrew and UVin',
+    'Food Primary', 'Transfer in Progress - Food Primary', 'Operated - Food Primary', 'Deemed - Food Primary',
     'Section 119 Authorization'
   ];
 
@@ -94,11 +95,14 @@ export class LicencesComponent extends FormBase implements OnInit {
             ...licenses.filter(lic => !(lic.licenceTypeName.includes('Transfer in Progress -') && lic.checklistConclusivelyDeem)),
             ...operatedLicences,
             ...proposedLicences.filter(lic => lic.checklistConclusivelyDeem)];
+
           combinedLicences.forEach((licence: ApplicationLicenseSummary) => {
             licence.headerRowSpan = 1;
             licence.hasPaidForRenewalApplication = this.hasPaidForRenewalApplication(licence);
             this.addOrUpdateLicence(licence);
           });
+
+          this.dataLoaded = true;
         });
   }
 

@@ -351,3 +351,6 @@ table.greyGridTable {
     border-top:0px;
 }
   
+button[disabled]{
+    cursor: not-allowed !important;
+  }
