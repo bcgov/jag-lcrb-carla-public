@@ -14,7 +14,7 @@ namespace SepService
         public Location Location { get; set; }
         public ResponsibleIndividual ResponsibleIndividual { get; set; }
         public string SolLicenceNumber { get; set; }
-        public List<SolNote> SolNotes { get; set; }
+        public List<SolNote> SolNote { get; set; }
         public List<TermAndCondition> TsAndCs { get; set; }
         public bool TsAndCsGlobal { get; set; }
         public bool TastingEvent { get; set; }
