@@ -1221,6 +1221,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         case "UBrew and UVin":
                         case "Licensee Retail Store":
                         case "Wine Store":
+                        case "Food Primary":
+                        case "Liquor Primary":
+                        case "Rural Licensee Retail Store":
                         case "Manufacturer":
                             templateName = "liquor_licence";
                             break;
