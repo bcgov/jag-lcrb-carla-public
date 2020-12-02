@@ -83,59 +83,35 @@ namespace SepService.Controllers
                     AdoxioTastingevent = sol.TastingEvent
                 };
 
-                if (sol.Location?.EventDates != null)
+                newRecord.AdoxioSpecialeventSpecialeventlocations = new List<MicrosoftDynamicsCRMadoxioSpecialeventlocation>();
+
+                newRecord.AdoxioSpecialeventSpecialeventlocations.Add(ExtractLocation(sol));
+
+
+                // notes
+                if (sol.SolNote != null)
                 {
-                    // event date
-                    newRecord.AdoxioSpecialeventSchedule = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>();
+                    newRecord.AdoxioSpecialeventSpecialeventnotes =
+                        new List<MicrosoftDynamicsCRMadoxioSpecialeventnote>();
 
-                    foreach (var item in sol.Location.EventDates)
+                    foreach (var item in sol.SolNote)
                     {
-                        newRecord.AdoxioSpecialeventSchedule.Add(new MicrosoftDynamicsCRMadoxioSpecialeventschedule()
-                        {
-                            AdoxioServicestart = item.LiquorServiceStartTime,
-                            AdoxioServiceend = item.LiquorServiceEndTime,
-                            AdoxioEventstart = item.EventStartDateTime,
-                            AdoxioEventend = item.EventEndDateTime
-                        });
-                    }
-                }
-
-
-                // licensed area
-                if (sol.Location?.LicencedArea != null)
-                {
-                    newRecord.AdoxioSpecialeventLicencedarea = new List<MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea>();
-                    var newItem = new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea()
-                    {
-                        AdoxioDescription = sol.Location.LicencedArea.Description,
-                        AdoxioMinorpresent = sol.Location.LicencedArea.MinorsPresent,
-                        AdoxioSetting = (int?)sol.Location.LicencedArea.Setting,
-                        AdoxioMaximumnumberofguests = sol.Location.LicencedArea.MaxGuests.ToString(),
-                        AdoxioNumberofminors = sol.Location?.LicencedArea?.NumberOfMinors.ToString()
-                    };
-
-                }
-
-
-                // note
-                if (sol.SolNotes != null)
-                {
-                    newRecord.AdoxioSpecialeventSpecialeventnotes = new List<MicrosoftDynamicsCRMadoxioSpecialeventnote>();
-
-                    foreach (var item in sol.SolNotes)
-                    {
-                        newRecord.AdoxioSpecialeventSpecialeventnotes.Add(new MicrosoftDynamicsCRMadoxioSpecialeventnote()
-                        {
-                            AdoxioNote = item.Text,
-                            AdoxioAuthor = item.Author
-                        });
+                        newRecord.AdoxioSpecialeventSpecialeventnotes.Add(
+                            new MicrosoftDynamicsCRMadoxioSpecialeventnote()
+                            {
+                                AdoxioNote = item.Text,
+                                AdoxioAuthor = item.Author,
+                                Createdon = item.CreatedDate,
+                                Modifiedon = item.LastUpdatedDate
+                            });
                     }
                 }
 
                 // terms and conditions
                 if (sol.TsAndCs != null)
                 {
-                    newRecord.AdoxioSpecialeventSpecialeventtsacs = new List<MicrosoftDynamicsCRMadoxioSpecialeventtandc>();
+                    newRecord.AdoxioSpecialeventSpecialeventtsacs =
+                        new List<MicrosoftDynamicsCRMadoxioSpecialeventtandc>();
                     foreach (var item in sol.TsAndCs)
                     {
                         var newTandC = new MicrosoftDynamicsCRMadoxioSpecialeventtandc()
@@ -144,7 +120,7 @@ namespace SepService.Controllers
                             AdoxioOrganizer = item.Originator
                         };
 
-                        if (item.TandcType == TandcType.Term)
+                        if (item.TandcType == TandcType.GlobalCondition)
                         {
                             newTandC.AdoxioTermsandconditiontype = true;
                         }
@@ -170,99 +146,108 @@ namespace SepService.Controllers
             else // existing record.
             {
 
-
-                // licensed area
-                if (sol.Location?.LicencedArea != null)
+                if (sol.Location != null)
                 {
-                    MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea newLicencedArea = new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea()
-                    {
-                        AdoxioDescription = sol.Location.LicencedArea.Description,
-                        AdoxioMinorpresent = sol.Location.LicencedArea.MinorsPresent,
-                        // Setting - Indoor, Outdoor or Both
-                        AdoxioSetting = (int?)sol.Location.LicencedArea.Setting,
-                        AdoxioMaximumnumberofguests = sol.Location.LicencedArea.MaxGuests.ToString(),
-                        AdoxioNumberofminors = sol.Location?.LicencedArea?.NumberOfMinors.ToString()
-                    };
 
-                    // add the new licenced area to Dynamics
+                    MicrosoftDynamicsCRMadoxioSpecialeventlocation location = ExtractLocation(sol);
+
                     try
                     {
-                        newLicencedArea = _dynamicsClient.Specialeventlicencedareas.Create(newLicencedArea);
-                        _logger.Information($"Created new licenced area {newLicencedArea.AdoxioSpecialeventlicencedareaid }");
+                        location = _dynamicsClient.Specialeventlocations.Create(location);
+                        _logger.Information(
+                            $"Created new special event location {location.AdoxioSpecialeventlocationid}");
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.Error(httpOperationException, "Error creating special event record");
+                        _logger.Error(httpOperationException, "Error creating special event schedule");
                         // fail 
                         return StatusCode(500, "Server Error creating record.");
                     }
 
-                    // bind the new licenced area to the parent.
+                    // now bind the record to the parent.
 
-                    var specialEventLicencedAreasData = _dynamicsClient.GetEntityURI("adoxio_specialeventlicencedareas", newLicencedArea.AdoxioSpecialeventlicencedareaid);
+                    var specialEventLocationData = _dynamicsClient.GetEntityURI("adoxio_specialeventlocations",
+                        location.AdoxioSpecialeventlocationid);
 
-                    var oDataIdLicencedAreas = new Odataid
+                    var oDataIdEventLocation = new Odataid
                     {
-                        OdataidProperty = specialEventLicencedAreasData
+                        OdataidProperty = specialEventLocationData
                     };
                     try
                     {
-                        _dynamicsClient.Specialevents.AddReference(existingRecord.AdoxioSpecialeventid, "adoxio_specialevent_licencedarea", oDataIdLicencedAreas);
+                        _dynamicsClient.Specialevents.AddReference(existingRecord.AdoxioSpecialeventid,
+                            "adoxio_specialevent_specialeventlocations", oDataIdEventLocation);
                     }
                     catch (HttpOperationException odee)
                     {
-                        Log.Error(odee, "Error adding reference to adoxio_specialeventlicencedareas");
-                    }
-
-                }
-
-                if (sol.Location?.EventDates != null)
-                {
-                    foreach (var item in sol.Location.EventDates)
-                    {
-                        var newEventSchedule = new MicrosoftDynamicsCRMadoxioSpecialeventschedule()
-                        {
-                            AdoxioServicestart = item.LiquorServiceStartTime,
-                            AdoxioServiceend = item.LiquorServiceEndTime,
-                            AdoxioEventstart = item.EventStartDateTime,
-                            AdoxioEventend = item.EventEndDateTime
-                        };
-
-                        try
-                        {
-                            newEventSchedule = _dynamicsClient.Specialeventschedules.Create(newEventSchedule);
-                            _logger.Information($"Created new special event schedule {newEventSchedule.AdoxioSpecialeventscheduleid}");
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.Error(httpOperationException, "Error creating special event schedule");
-                            // fail 
-                            return StatusCode(500, "Server Error creating record.");
-                        }
-
-                        // now bind the two new records to the parent.
-
-                        var specialEventScheduleData = _dynamicsClient.GetEntityURI("adoxio_specialeventschedules", newEventSchedule.AdoxioSpecialeventscheduleid);
-
-                        var oDataIdEventSchedule = new Odataid
-                        {
-                            OdataidProperty = specialEventScheduleData
-                        };
-                        try
-                        {
-                            _dynamicsClient.Specialevents.AddReference(existingRecord.AdoxioSpecialeventid, "adoxio_specialevent_schedule", oDataIdEventSchedule);
-                        }
-                        catch (HttpOperationException odee)
-                        {
-                            Log.Error(odee, "Error adding reference to adoxio_specialeventschedules");
-                        }
+                        Log.Error(odee, "Error adding reference to adoxio_specialevent_specialeventlocations");
                     }
                 }
+
 
             }
 
+
             return Ok();
         }
+
+        private MicrosoftDynamicsCRMadoxioSpecialeventlocation ExtractLocation(Sol sol)
+        {
+            MicrosoftDynamicsCRMadoxioSpecialeventlocation location =
+                new MicrosoftDynamicsCRMadoxioSpecialeventlocation()
+                {
+                    AdoxioLocationdescription = sol.Location.LocationDescription,
+                    AdoxioLocationname = sol.Location.LocationName,
+                    AdoxioMaximumnumberofguests = sol.Location.MaximumGuests.ToString()
+                };
+
+            // licensed area
+
+            if (sol.Location?.LicencedArea != null)
+            {
+                location.AdoxioSpecialeventlocationLicemsedarea =
+                    new List<MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea>();
+
+                location.AdoxioSpecialeventlocationLicemsedarea.Add(new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea()
+                {
+                    AdoxioDescription = sol.Location.LicencedArea.Description,
+                    AdoxioMinorpresent = sol.Location.LicencedArea.MinorsPresent,
+                    // Setting - Indoor, Outdoor or Both
+                    AdoxioSetting = (int?) sol.Location.LicencedArea.Setting,
+                    AdoxioMaximumnumberofguests = sol.Location.LicencedArea.MaxGuests.ToString(),
+                    AdoxioNumberofminors = sol.Location?.LicencedArea?.NumberOfMinors.ToString()
+                });
+
+            }
+
+            if (sol.Location?.EventDates != null)
+            {
+                location.AdoxioSpecialeventlocationSchedule = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>();
+                foreach (var item in sol.Location.EventDates)
+                {
+                    location.AdoxioSpecialeventlocationSchedule.Add(new MicrosoftDynamicsCRMadoxioSpecialeventschedule()
+                    {
+                        AdoxioServicestart = item.LiquorServiceStartTime,
+                        AdoxioServiceend = item.LiquorServiceEndTime,
+                        AdoxioEventstart = item.EventStartDateTime,
+                        AdoxioEventend = item.EventEndDateTime
+                    });
+                }
+            }
+
+            if (sol.Location?.Address != null)
+            {
+                location.AdoxioEventlocationstreet1 = sol.Location.Address.Address1;
+                location.AdoxioEventlocationstreet2 = sol.Location.Address.Address2;
+                location.AdoxioEventlocationcity = sol.Location.Address.City;
+                location.AdoxioEventlocationprovince = sol.Location.Address.Province;
+                location.AdoxioEventlocationpostalcode = sol.Location.Address.PostalCode;
+            }
+
+            return location;
+
+        }
+
 
         /// <summary>
         /// Cancel a Sol Event
