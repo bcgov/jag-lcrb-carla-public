@@ -70,8 +70,6 @@ namespace bdd_tests
             // click on the Submit & Pay button
             ClickOnSubmitButton();
 
-            MakePayment();
-
             // check for the payment receipt
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please save this receipt for your records.')]")).Displayed);
         }
