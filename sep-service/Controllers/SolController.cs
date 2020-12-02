@@ -210,7 +210,7 @@ namespace SepService.Controllers
 
                 location.AdoxioSpecialeventlocationLicencedareas.Add(new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea()
                 {
-                    AdoxioDescription = sol.Location.LicencedArea.Description,
+                    AdoxioLicencedareadescription = sol.Location.LicencedArea.Description,
                     AdoxioMinorpresent = sol.Location.LicencedArea.MinorsPresent,
                     // Setting - Indoor, Outdoor or Both
                     AdoxioSetting = (int?) sol.Location.LicencedArea.Setting,
