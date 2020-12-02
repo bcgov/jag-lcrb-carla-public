@@ -106,10 +106,12 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
           this.dataLoaded = true;
 
           // if all required payments are made, go to the dashboard
-          if ((this.cannabisLicences.length === 0 || this.application.primaryInvoicePaid) &&
-            (this.liquorLicences.length === 0 || this.application.secondaryInvoicePaid)) {
+          if ((!this.hasCannabis || this.application.primaryInvoicePaid) &&
+            (!this.hasLiquor || this.application.secondaryInvoicePaid)) {
             this.router.navigateByUrl('/dashboard');
           }
+
+
 
           // if any payment was made, disable the form
           if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
@@ -148,6 +150,14 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
   }
 
   isValid(): boolean {
+    return true;
+  }
+
+  isScreeningRequired(): boolean {
+    return true;
+  }
+
+  hasChanges(): boolean {
     return true;
   }
 
@@ -250,7 +260,7 @@ const masterChangeList = [
     name: 'Change of Directors or Officers',
     formControlName: 'csChangeOfDirectorsOrOfficers',
     availableTo: ['PrivateCorporation', 'PublicCorporation', 'Society'],
-    CannabisFee: 550,
+    CannabisFee: 500,
     LiquorFee: 220,
     RequiresPHS: false,
     RequiresCAS: false,
