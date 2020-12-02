@@ -43,6 +43,80 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
   loaded = false;
   @Input() inputApplicationId: string;
 
+  public static parseVerifyResponse(res) {
+    const verifyPayResponse = <any>res;
+    let cardType: string = '';
+    switch (verifyPayResponse.cardType) {
+      case 'VI':
+        cardType = 'Visa';
+        break;
+      case 'PV':
+        cardType = 'Visa Debit';
+        break;
+      case 'MC':
+        cardType = 'MasterCard';
+        break;
+      case 'AM':
+        cardType = 'American Express';
+        break;
+      case 'MD':
+        cardType = 'Debit MasterCard';
+        break;
+      default:
+        cardType = verifyPayResponse.cardType;
+    }
+    const authCode = verifyPayResponse.authCode;
+    const avsMessage = verifyPayResponse.avsMessage;
+    const avsAddrMatch = verifyPayResponse.avsAddrMatch;
+    const messageId = verifyPayResponse.messageId;
+    const messageText = verifyPayResponse.messageText;
+    const paymentMethod = verifyPayResponse.paymentMethod;
+    const trnAmount = verifyPayResponse.trnAmount;
+    const trnApproved = verifyPayResponse.trnApproved;
+    const trnDate = verifyPayResponse.trnDate;
+    const trnId = verifyPayResponse.trnId;
+    const trnOrderNumber = verifyPayResponse.trnOrderNumber;
+    const invoice = verifyPayResponse.invoice;
+    let isApproved = false;
+    let paymentTransactionTitle = '';
+    let paymentTransactionMessage = '';
+
+    if (trnApproved === '1') {
+      isApproved = true;
+    } else {
+      isApproved = false;
+      if (messageId === '559') {
+        paymentTransactionTitle = 'Cancelled';
+        paymentTransactionMessage = 'Your payment transaction was cancelled. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+      } else if (messageId === '7') {
+        paymentTransactionTitle = 'Declined';
+        paymentTransactionMessage = 'Your payment transaction was declined. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+      } else {
+        paymentTransactionTitle = 'Declined';
+        paymentTransactionMessage = 'Your payment transaction was declined. Please contact your bank for more information. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+      }
+    }
+
+    return {
+      cardType,
+      authCode,
+      avsMessage,
+      avsAddrMatch,
+      messageId,
+      messageText,
+      paymentMethod,
+      trnAmount,
+      trnApproved,
+      trnDate,
+      trnId,
+      trnOrderNumber,
+      invoice,
+      isApproved,
+      paymentTransactionTitle,
+      paymentTransactionMessage,
+    };
+  }
+
   /** payment-confirmation ctor */
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -77,7 +151,7 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
     //this.getApplicationType();
   }
 
-  
+
   /**
    * Payment verification
    * */
@@ -139,7 +213,7 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
         this.loaded = true;
       },
       err => {
-        if (err === "503" || err === "502" || err === "500") {          
+        if (err === "503" || err === "502" || err === "500") {
           if (this.retryCount < 30) {
             this.snackBar.open('Attempt ' + this.retryCount + ' at payment verification, please wait...', 'Verifying Payment', { duration: 3500, panelClass: ['red - snackbar'] });
             this.verify_payment();
@@ -150,10 +224,11 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
           console.log('Unexpected Error occured:');
           console.log(err);
         }
-        
+
       }
     );
   }
+
 
   /**
    * Return to dashboard
