@@ -20,6 +20,14 @@ using Microsoft.AspNetCore.Http;
 using HealthChecks.UI.Client;
 using Newtonsoft.Json;
 using System.Net.Mime;
+using Gov.Lclb.Cllb.Interfaces;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace SepService
 {
@@ -35,15 +43,75 @@ namespace SepService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddDefaultTokenProviders();
+
+            if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+            {
+
+
+                // Configure JWT authentication
+                services.AddAuthentication(o =>
+                {
+                    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(o =>
+                {
+                    o.SaveToken = true;
+                    o.RequireHttpsMetadata = false;
+                    o.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        RequireExpirationTime = false,
+                        ValidIssuer = Configuration["JWT_VALID_ISSUER"],
+                        ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
+                    };
+                });
+            }
+
+            services.AddControllers(config =>
+            {
+                if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+                {
+                    var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                    config.Filters.Add(new AuthorizeFilter(policy));
+                }
+            })
+
+                .AddJsonOptions(options =>
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0); 
+
             services.AddSwaggerGen(c =>
             {
                 c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB SEP Transfer Service", Version = "v1" });
-                c.DescribeAllEnumsAsStrings();
                 c.ParameterFilter<AutoRestParameterFilter>();
+                /*
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        AuthorizationCode = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri(Configuration["BASE_URI"]),
+                            TokenUrl = new Uri(Configuration["BASE_URI"] + "authentication/token/" + Configuration["JWT_TOKEN_KEY"]),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                {"api1", "Demo API - full access"}
+                            }
+                        }
+                    }
+                });
+                */
             });
 
-            services.AddControllers();
+
+            services.AddHttpClient<IDynamicsClient, DynamicsClient>();
 
             // health checks. 
             services.AddHealthChecks()
@@ -57,10 +125,13 @@ namespace SepService
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
 
             app.UseRouting();
-
             app.UseAuthorization();
+            
+
+            
 
             app.UseEndpoints(endpoints =>
             {
@@ -88,6 +159,8 @@ namespace SepService
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
             });
 
+            
+
             // enable Splunk logger using Serilog
             if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
                 !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
@@ -96,7 +169,7 @@ namespace SepService
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
+                    .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} {Level} {Properties} {Message}{NewLine}{Exception}") // one of the logger pipeline elements for writing out the log message
                     .WriteTo.EventCollector(splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
                         sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"],
                         restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
@@ -116,7 +189,7 @@ namespace SepService
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
+                    .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} {Level} {Properties} {Message}{NewLine}{Exception}") // one of the logger pipeline elements for writing out the log message
                     .CreateLogger();
             }
         }

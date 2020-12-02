@@ -18,7 +18,7 @@ Feature: CateringApplicationPersonnelEmailChanges
     I want to pay the first year catering licence fee
     And submit personnel email changes for different business types
 
-@e2e @catering @partnership @cateringemailpartner
+@catering @partnership @cateringemail
 Scenario: Catering Partnership Personnel Email Change
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -30,13 +30,13 @@ Scenario: Catering Partnership Personnel Email Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a partnership
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @cateringemailprivcorp
+@catering @privatecorporation @cateringemail
 Scenario: Catering Private Corporation Personnel Email Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -48,13 +48,13 @@ Scenario: Catering Private Corporation Personnel Email Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a private corporation
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringemailpubcorp
+@catering @publiccorporation @cateringemail
 Scenario: Catering Public Corporation Personnel Email Change
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
@@ -66,13 +66,13 @@ Scenario: Catering Public Corporation Personnel Email Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a public corporation
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringemailsociety
+@catering @society @cateringemail
 Scenario: Catering Society Personnel Email Change
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -84,13 +84,13 @@ Scenario: Catering Society Personnel Email Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a society
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @soleproprietorship @cateringemailsoleprop
+@catering @soleproprietorship @cateringemail
 Scenario: Catering Sole Proprietorship Personnel Email Change
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -102,7 +102,7 @@ Scenario: Catering Sole Proprietorship Personnel Email Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I change a personnel email address for a sole proprietorship
     And the account is deleted

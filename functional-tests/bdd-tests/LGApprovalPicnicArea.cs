@@ -17,7 +17,7 @@ Feature: LGApprovalPicnicArea
     As a logged in business user
     I want to submit a Picnic Area Endorsement Application for review and approval
 
-@e2e @catering @privatecorporation @picnic @lgapproval @release
+@catering @picnic @lgapproval @release
 Scenario: Local Government Approval for Picnic Area Endorsement
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -30,7 +30,7 @@ Scenario: Local Government Approval for Picnic Area Endorsement
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request a picnic area endorsement
     And I log in as local government for Saanich
     And I specify that the zoning allows the endorsement

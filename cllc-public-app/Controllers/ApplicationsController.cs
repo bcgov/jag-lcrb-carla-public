@@ -593,16 +593,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangesApplication(UserSettings userSettings,
-            bool forceCreate)
+        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;
-            var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Changes to a Licensee");
+            var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee");
 
-            if (!forceCreate)
+            string[] expand =
             {
-                string[] expand =
-                {
                     "adoxio_localgovindigenousnationid",
                     "adoxio_application_SharePointDocumentLocations",
                     "adoxio_application_adoxio_tiedhouseconnection_Application",
@@ -613,36 +610,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     "adoxio_application_SharePointDocumentLocations"
                 };
 
-                // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
-                var filter =
-                    $"_adoxio_applicant_value eq {userSettings.AccountId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
-                // filter += $" and adoxio_isapplicationcomplete ne 1";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+            // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
+            var filter =
+                $"_adoxio_applicant_value eq {userSettings.AccountId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+            // filter += $" and adoxio_isapplicationcomplete ne 1";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
-                if (applicationType != null)
-                    filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
+            if (applicationType != null)
+                filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
 
-                try
-                {
-                    var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value
-                        .OrderByDescending(app => app.Createdon);
-                    var application = applications.FirstOrDefault(); // Get the latest application
-                    if (application != null)
-                        result = application;
-                    else
-                        result = null;
-                }
-                catch (HttpOperationException e)
-                {
-                    _logger.LogError(e, "Error getting licensee application");
+            try
+            {
+                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value
+                    .OrderByDescending(app => app.Createdon);
+                var application = applications.FirstOrDefault(); // Get the latest application
+                if (application != null)
+                    result = application;
+                else
                     result = null;
-                }
+            }
+            catch (HttpOperationException e)
+            {
+                _logger.LogError(e, "Error getting licensee application");
+                result = null;
             }
 
-            if (result == null && applicationType != null)
+            bool applicationIsPaid = (
+                result != null &&
+                (result._adoxioInvoiceValue == null || result.AdoxioPrimaryapplicationinvoicepaid == 1) &&
+                (result._adoxioSecondaryapplicationinvoiceValue== null || result.AdoxioSecondaryapplicationinvoicepaid == 1) 
+                );
+
+            if ((result == null || applicationIsPaid) && applicationType != null )
             {
                 // create one.
                 var account = _dynamicsClient.GetAccountById(userSettings.AccountId);
@@ -671,7 +673,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        [HttpGet("permanent-changes-to-licensee-data")]
+        [HttpGet("permanent-change-to-licensee-data")]
         public async Task<IActionResult> GetPermanetChangesToLicenseeData()
         {
             // get the current user.
@@ -679,7 +681,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             PermanentChangesPageData data = new PermanentChangesPageData();
 
             // set application type relationship 
-            var app = GetPermanentChangesApplication(userSettings, false);
+            var app = GetPermanentChangeApplication(userSettings);
             data.Application = await app.ToViewModel(_dynamicsClient, _cache, _logger);
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
@@ -1143,9 +1145,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}/process")]
-        public async Task<string> ProcessApplication(string id)
+        public async Task<JsonResult> ProcessApplication(string id)
         {
-            if (_env.IsProduction()) return "This API is not available outside a development environment.";
+            if (_env.IsProduction()) return new JsonResult("This API is not available outside a development environment.");
 
 
             // get the current user.
@@ -1161,18 +1163,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // this needs to be the guid for the published workflow.
                     await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync(
                         "0a78e6dc-8d62-480f-909f-c104051cf467", id);
-                    return "OK";
+                    return new JsonResult("OK");
                 }
                 catch (HttpOperationException httpOperationException)
                 {
-                    return httpOperationException.Response.Content;
+                    return new JsonResult(httpOperationException.Response.Content);
                 }
                 catch (Exception e)
                 {
                     throw e;
                 }
 
-            return "This API is not available to an unregistered user.";
+            return new JsonResult("This API is not available to an unregistered user.");
         }
 
         [HttpGet("{id}/processEndorsement")]
@@ -1194,7 +1196,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // this needs to be the guid for the published workflow.
                     await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync(
                         "e755b96c-1c0d-4893-98dc-53ec980d57a1", id);
-                    return Ok("OK");
+                    return new JsonResult("OK");
                 }
                 catch (HttpOperationException httpOperationException)
                 {
@@ -1321,7 +1323,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
     }
 
-    public class PermanentChangesPageData {
+    public class PermanentChangesPageData
+    {
         public List<ApplicationLicenseSummary> Licences { get; set; }
         public Application Application { get; set; }
     }

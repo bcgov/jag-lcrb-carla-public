@@ -17,7 +17,7 @@ Feature: CRSRelease
     As a logged in business user
     I want to confirm that the CRS functionality is ready for release
 
-@validation @privatecorporation @release
+@cannabis @validation @release
 Scenario: Private Corporation CRS Release 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -31,11 +31,13 @@ Scenario: Private Corporation CRS Release
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I click on the Licences tab
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I click on the link for Download Licence
     And I show the store as open on the map
@@ -58,7 +60,7 @@ Scenario: Private Corporation CRS Release
     And the account is deleted
     Then I see the login page
 
-@validation @soleproprietorship
+@cannabis @validation @soleproprietorship
 Scenario: Sole Proprietorship CRS Release 
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
@@ -72,11 +74,13 @@ Scenario: Sole Proprietorship CRS Release
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I click on the link for Download Licence
     And I show the store as open on the map

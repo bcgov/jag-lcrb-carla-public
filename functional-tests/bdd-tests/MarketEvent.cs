@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
- Feature: MarketEvent
+  Feature: MarketEvent
     As a logged in business user
     I want to submit a market event for different manufacturer types
 
@@ -21,7 +21,7 @@ using Xunit;
 # One Market Event
 #-----------------------
 
- @e2e @privatecorporation @marketeventoneday @winery @release
+ @marketevent @marketoneday @winery @release
  Scenario: Winery One Day Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -34,7 +34,7 @@ using Xunit;
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -51,7 +51,7 @@ using Xunit;
 # Weekly Market Event
 #-----------------------
 
- @e2e @privatecorporation @marketeventweekly @winery
+ @marketevent @marketweekly @winery
  Scenario: Winery Weekly Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -64,7 +64,7 @@ using Xunit;
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -82,7 +82,7 @@ using Xunit;
 # Note that 'bi-weekly' refers to twice per month
 #-------------------------------------------------
 
- @e2e @privatecorporation @marketeventbiweekly @winery
+ @marketevent @marketbiweekly @winery
  Scenario: Winery Bi-Weekly Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -95,7 +95,7 @@ using Xunit;
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -112,7 +112,7 @@ using Xunit;
 # Monthly Market Event
 #-----------------------
 
- @e2e @privatecorporation @marketeventmonthly @winery
+ @marketevent @marketmonthly @winery
  Scenario: Winery Monthly Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -125,7 +125,7 @@ using Xunit;
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -142,7 +142,7 @@ using Xunit;
 # One Market Event - Save for Later
 #-----------------------------------
 
- @e2e @privatecorporation @marketeventonedaysave @winery
+ @marketeventonedaysave @marketoneday @winery
  Scenario: Winery One Day Market Event Save For Later
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -155,7 +155,7 @@ using Xunit;
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -177,7 +177,7 @@ using Xunit;
 # Weekly Market Event - Save for Later
 #--------------------------------------
 
- @e2e @privatecorporation @marketeventweeklysave @winery
+ @marketeventweeklysave @marketweekly @winery
  Scenario: Winery Weekly Market Event Save For Later
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -190,7 +190,7 @@ using Xunit;
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -212,7 +212,7 @@ using Xunit;
 # Bi-Weekly Market Event - Save for Later
 #-----------------------------------------
 
- @e2e @privatecorporation @marketeventbiweeklysave @winery
+ @marketeventbiweeklysave @marketbiweekly @winery
  Scenario: Winery Bi-Weekly Market Event Save For Later
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -225,7 +225,7 @@ using Xunit;
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -247,7 +247,7 @@ using Xunit;
 # Monthly Market Event - Save for Later
 #---------------------------------------
 
- @e2e @privatecorporation @marketeventmonthlysave @winery
+ @marketeventmonthlysave @marketmonthly @winery
  Scenario: Winery Monthly Market Event Save For Later
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -260,7 +260,7 @@ using Xunit;
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -276,7 +276,7 @@ using Xunit;
     And I click on the link for Approved
     And the market event data is correct for an approved monthly event
     And the account is deleted
-    Then I see the login page 
+    Then I see the login page
 */
 
 namespace bdd_tests
