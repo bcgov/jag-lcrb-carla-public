@@ -877,10 +877,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
 
                 /* Add key personnel and deemed associates from application */
-                // string keypersonnelfilter = "(_adoxio_application_value eq " + application.AdoxioApplicationid + " and adoxio_iskeypersonnel eq true and adoxio_isindividual eq 1)";
+                string keypersonnelfilter = $"(_adoxio_application_value eq {application.AdoxioApplicationid} and adoxio_connectiontype eq {(int)ConnectionType.KeyPersonnel} and adoxio_isindividual eq 1)";
                 string deemedassociatefilter = $"(_adoxio_application_value eq {application.AdoxioApplicationid} and adoxio_deemed eq true and adoxio_isindividual eq 1)";
-                string[] expand = { "adoxio_ChildProfileName_contact" };
-                var associates = _dynamicsClient.Leconnections.Get(filter: /*keypersonnelfilter + " or " + */deemedassociatefilter, expand: expand).Value;
+                string[] expand = { "adoxio_ChildProfileName_contact", "adoxio_ChildProfileName_account", "adoxio_ParentAccount" };
+                var associates = _dynamicsClient.Leconnections.Get(filter: $"{keypersonnelfilter} or {deemedassociatefilter}", expand: expand).Value;
                 if (associates != null)
                 {
                     foreach (var leConnection in associates)
@@ -914,7 +914,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
                 catch (System.NullReferenceException e)
                 {
-                    _logger.LogError(e, $"NullReferenceException calling CreateAssociatesForAccountFromLeConnection for application id: {application.AdoxioApplicationid}");
+                    _logger.LogError(e, $"NullReferenceException calling CreateAssociatesForAccountV2 for application id: {application.AdoxioApplicationid}");
                 }
 
                 /* remove duplicate associates */
@@ -1016,7 +1016,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 if (string.IsNullOrEmpty(accountId))
                 {
-                    _logger.LogError("CreateAssociatesForAccountFromLeConnection received a null accountId");
+                    _logger.LogError("CreateAssociatesForAccountV2 received a null accountId");
                     return newAssociates;
                 }
                 string entityFilter = $"_adoxio_parentaccount_value eq {accountId} and _adoxio_childprofilename_value ne {accountId}";
@@ -1051,7 +1051,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
             catch (System.NullReferenceException e)
             {
-                _logger.LogError(e, $"NullReferenceException in CreateAssociatesForAccountFromLeConnection for accountId: {accountId}");
+                _logger.LogError(e, $"NullReferenceException in CreateAssociatesForAccountV2 for accountId: {accountId}");
                 throw e;
             }
         }
@@ -1190,7 +1190,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 var crmContact = leConnection.AdoxioChildProfileNameContact;
                 associate.IsIndividual = true;
-                associate.TiedHouse = leConnection.AdoxioChildProfileNameContact.AdoxioSelfdeclaredtiedhouse == 1;
+                associate.TiedHouse = crmContact.AdoxioSelfdeclaredtiedhouse == 1;
                 associate.Contact = new Contact()
                 {
                     SpdJobId = crmContact.AdoxioSpdjobid.ToString(),
@@ -1250,22 +1250,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
             else
             {
-                // TODO: I don't see "_adoxioShareholderaccountidValue" in the new entity. Was it removed?
-
-                // if (leConnection._adoxioShareholderaccountidValue != null)
-                // {
-                //     var account = _dynamicsClient.Accounts.Get(filter: "accountid eq " + leConnection._adoxioShareholderaccountidValue).Value;
-                //     associate.Account = new Interfaces.Spice.Models.Account()
-                //     {
-                //         AccountId = account[0].Accountid,
-                //         Name = account[0].Name,
-                //         BcIncorporationNumber = account[0].AdoxioBcincorporationnumber,
-                //         BusinessNumber = account[0].Accountnumber,
-                //         Associates = new List<LegalEntity>()
-                //     };
-                // }
-                // else
-
                 // Attach the account
                 if (leConnection.AdoxioChildProfileNameAccount != null)
                 {
@@ -1509,14 +1493,14 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_requiressecurityscreening eq true", select: select).Value;
             if (selectedAppTypes.Count == 0)
             {
-                _logger.LogError("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
-                hangfireContext.WriteLine("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
+                _logger.LogError("Failed to Start SendFoundApplicationsV2: No application types are set to send to SPD.");
+                hangfireContext.WriteLine("Failed to Start SendFoundApplicationsV2: No application types are set to send to SPD.");
                 return;
             }
 
             List<string> appTypes = selectedAppTypes.Select(a => a.AdoxioApplicationtypeid).ToList();
-            _logger.LogError($"Starting SendFoundApplications Job for {selectedAppTypes.Count} application types");
-            hangfireContext.WriteLine($"Starting SendFoundApplications Job for {selectedAppTypes.Count} application types");
+            _logger.LogError($"Starting SendFoundApplicationsV2 Job for {selectedAppTypes.Count} application types");
+            hangfireContext.WriteLine($"Starting SendFoundApplicationsV2 Job for {selectedAppTypes.Count} application types");
 
             string sendFilter = $"adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.NotSent}";
 
@@ -1542,8 +1526,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
             }
 
-            _logger.LogError("End of SendFoundApplications Job");
-            hangfireContext.WriteLine("End of SendFoundApplications Job");
+            _logger.LogError("End of SendFoundApplicationsV2 Job");
+            hangfireContext.WriteLine("End of SendFoundApplicationsV2 Job");
         }
     }
 }
