@@ -217,6 +217,7 @@ import { PermanentChangesToALicenseeComponent } from './components/applications/
 import { LegalEntityTypeUpdateCalloutboxComponent } from './components/dashboard/legal-entity-type-update-calloutbox/legal-entity-type-update-calloutbox.component';
 import { OffsiteStorageComponent } from '@components/offsite-storage/offsite-storage.component';
 import { OffsiteTableComponent } from '@components/tables/offsite-table/offsite-table.component';
+import { ContactComponent } from './shared/components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -346,6 +347,7 @@ import { OffsiteTableComponent } from '@components/tables/offsite-table/offsite-
     LegalEntityTypeUpdateCalloutboxComponent,
     OffsiteStorageComponent,
     OffsiteTableComponent,
+    ContactComponent,
   ],
   imports: [
     ChartsModule,
