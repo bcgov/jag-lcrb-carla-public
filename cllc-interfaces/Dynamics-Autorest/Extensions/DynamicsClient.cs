@@ -560,7 +560,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventByLicenceNumber(string licenceNumber)
         {
             string licenceNumberEscaped = licenceNumber.Replace("'", "''");
-            string filter = $"adoxio_seplicencenumber eq '{licenceNumberEscaped}'";
+            string filter = $"adoxio_specialeventpermitnumber eq '{licenceNumberEscaped}'";
             // fetch from Dynamics.
             MicrosoftDynamicsCRMadoxioSpecialevent result;
             try
