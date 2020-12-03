@@ -27,6 +27,9 @@ namespace bdd_tests
             Page Title: Licences & Authorizations
             */
 
+            // refresh page required for link display
+            ngDriver.Navigate().Refresh();
+
             string marketEvent = "Request Market Event Authorization";
 
             // click on the Request Market Event Authorization link
