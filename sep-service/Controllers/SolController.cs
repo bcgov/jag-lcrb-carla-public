@@ -256,7 +256,7 @@ namespace SepService.Controllers
         /// <param name="cancelReason">Reason for cancellation</param>
         /// <returns></returns>
         [HttpPost("cancel/{solId}")]
-        public ActionResult Cancel([FromRoute] string solId, [FromBody] string cancelReason)
+        public ActionResult Cancel([FromRoute] string solId, [FromBody] CancelReason cancelReason)
         {
             if (string.IsNullOrEmpty(solId))
             {
