@@ -394,8 +394,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
             }
 
-            Dictionary<string, string> parameters;
-            parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 { "licensee", account.Name },
                 { "licenceNumber", licence.AdoxioLicencenumber },
@@ -409,6 +408,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "startDate", licenceEventVM.StartDate?.ToString("MMMM dd, yyyy") },
                 { "endDate", licenceEventVM.EndDate?.ToString("MMMM dd, yyyy") },
                 { "eventTimings", eventTimings },
+                { "eventNumber", licenceEventVM.EventNumber },
                 { "eventType", licenceEventVM.EventType.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.EventType) : ""},
                 { "eventDescription", licenceEventVM.EventTypeDescription },
                 { "foodService", licenceEventVM.FoodService.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.FoodService) : "" },
