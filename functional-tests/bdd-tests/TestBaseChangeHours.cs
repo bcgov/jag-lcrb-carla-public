@@ -35,9 +35,17 @@ namespace bdd_tests
             }
 
             if (hoursType == "a lounge area outside of service hours")
-            { 
-                NgWebElement uiLoungeAreaOutsideHours = ngDriver.FindElement(By.LinkText("Change to Hours of Liquor Service (Lounge Area, outside Service Hours)"));
-                uiLoungeAreaOutsideHours.Click();
+            {
+                var uiLoungeAreaOutsideHours = ngDriver.FindElements(By.LinkText("Change to Hours of Liquor Service (Lounge Area, outside Service Hours)"));
+                
+                if (uiLoungeAreaOutsideHours.Count > 0)
+                {
+                    uiLoungeAreaOutsideHours[0].Click();
+                }
+                else
+                {
+                    throw new Exception($"Unable to find change hours link");
+                }
             }
 
             if (hoursType == "a special event area within service hours")
