@@ -28,6 +28,7 @@ export class ApplicationType {
   establishmetNameIsReadOnly: boolean;
   formReference: string;
   showDescription1: boolean;
+  hasLESection: boolean;
 
   storeContactInfo: FormControlState;
   establishmentName: FormControlState;

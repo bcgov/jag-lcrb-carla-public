@@ -19,7 +19,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         private readonly ILoggerFactory _loggerFactory;
         private readonly SpiceUtils _spiceUtils;
 
-        public WorkerScreeningsController (IConfiguration configuration, ILoggerFactory loggerFactory)
+        public WorkerScreeningsController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             _loggerFactory = loggerFactory;
@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         /// </summary>
         /// <returns>OK if successful</returns>
         [HttpPost("receive")]
-        
+
         public ActionResult ReceiveWorkerScreeningResults([FromBody] List<CompletedWorkerScreening> completedScreenings)
         {
             // Process the updates received from the SPICE system.
@@ -73,7 +73,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                     {
                         return NotFound($"Worker {workerId} is not found.");
                     }
-                   
+
                     var result = _spiceUtils.SendWorkerScreeningRequest(workerRequest);
                     if (result)
                     {
