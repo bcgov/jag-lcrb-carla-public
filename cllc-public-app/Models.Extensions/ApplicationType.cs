@@ -30,6 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                     LetterOfIntent = (FormControlState?)applicationType.AdoxioLetterofintent,
                     Name = applicationType.AdoxioName,
+                    HasLESection = applicationType.AdoxioHaslesection,
                     NewEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
                     ProofofZoning = (FormControlState?)applicationType.AdoxioProofofzoning,
                     PublicCooler = (FormControlState?)applicationType.AdoxioPubliccoolerspace,
