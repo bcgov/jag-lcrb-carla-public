@@ -877,8 +877,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<MicrosoftDynamicsCRMadoxioApplication> GetDynamicsApplication(string id)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             _logger.Debug("Application id = " + id);
             _logger.Debug("User id = " + userSettings.AccountId);
