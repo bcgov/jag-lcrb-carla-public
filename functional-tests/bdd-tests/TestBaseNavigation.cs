@@ -415,6 +415,12 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Application Under Review ')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Add Supporting Documents')]")).Displayed);
             }
+
+            if (status == "Pending External Review")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Pending External Review ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Complete Application')]")).Displayed);
+            }
         }
 
 
