@@ -28386,6 +28386,9 @@
         "donotemail": {
           "type": "boolean"
         },
+        "adoxio_forinternaluse": {
+          "type": "boolean"
+        },
         "adoxio_corporatestructure": {
           "type": "string"
         },
@@ -32549,6 +32552,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_initialcapassessmentusingleconn": {
+          "type": "string"
+        },
         "adoxio_dateaiplongdatestring": {
           "type": "string"
         },
@@ -32601,6 +32607,9 @@
         },
         "adoxio_datelicenceapproved": {
           "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_finalcapassessmentusingleconn": {
           "type": "string"
         },
         "adoxio_ruralagencystoreappointment": {
@@ -34997,6 +35006,9 @@
         },
         "adoxio_isshowlginapproval": {
           "type": "boolean"
+        },
+        "adoxio_licenceautonumberdefinitionname": {
+          "type": "string"
         },
         "adoxio_defaultbpmid": {
           "type": "string"
@@ -52474,9 +52486,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_responsibleindividuallastname": {
-          "type": "string"
-        },
         "adoxio_specialeventid": {
           "type": "string"
         },
@@ -52519,13 +52528,10 @@
         "_ownerid_value": {
           "type": "string"
         },
-        "adoxio_eventtype": {
+        "adoxio_responsibleindividuallastname": {
           "type": "string"
         },
         "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_seplicencenumber": {
           "type": "string"
         },
         "adoxio_specialeventdescripton": {
@@ -52548,6 +52554,9 @@
           "type": "integer"
         },
         "_modifiedby_value": {
+          "type": "string"
+        },
+        "adoxio_specialeventpermitnumber": {
           "type": "string"
         },
         "adoxio_responsibleindividualposition": {
