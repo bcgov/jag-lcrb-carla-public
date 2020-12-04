@@ -1517,8 +1517,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static bool CurrentUserIsContact(string contactId, IHttpContextAccessor _httpContextAccessor)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             if (userSettings.ContactId != null && userSettings.ContactId.Length > 0)
             {
