@@ -139,8 +139,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// <returns></returns>
         public static UserSettings ReadUserSettings(HttpContext context)
         {
-            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            return userSettings;
+            UserSettings userSettings = new UserSettings();
+
+            if (context.Session.GetString("UserSettings") == null) return userSettings;
+
+            string settingsTemp = context.Session.GetString("UserSettings");
+
+            return !string.IsNullOrEmpty(settingsTemp) ? CreateFromJson(settingsTemp) : userSettings;
         }
 
     }
