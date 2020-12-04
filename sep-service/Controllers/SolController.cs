@@ -47,12 +47,19 @@ namespace SepService.Controllers
             }
 
             // format of the "SolLicenceNumber" field is {EventLicenceNumber}-{LocationReference}
-            string sepLicenceNumber = sol.SolLicenceNumber.Substring(0, sol.SolLicenceNumber.IndexOf("-"));
+
+            string solIdEscaped = sol.SolLicenceNumber.Replace("'", "''");
+            if (solIdEscaped.Contains("-"))
+            {
+                solIdEscaped = solIdEscaped.Substring(0, solIdEscaped.IndexOf("-"));
+            }
+
+            
             // string locationReference = sol.SolLicenceNumber.Substring(sepLicenceNumber.Length);
 
             // determine if the record is new.
             MicrosoftDynamicsCRMadoxioSpecialevent existingRecord =
-                _dynamicsClient.GetSpecialEventByLicenceNumber(sepLicenceNumber);
+                _dynamicsClient.GetSpecialEventByLicenceNumber(solIdEscaped);
 
             if (existingRecord == null) // new record
             {
@@ -62,7 +69,7 @@ namespace SepService.Controllers
                     AdoxioCapacity = sol.Capacity,
                     AdoxioSpecialeventdescripton = sol.EventDescription,
                     AdoxioEventname = sol.EventName,
-                    AdoxioSeplicencenumber = sepLicenceNumber,
+                    AdoxioSpecialeventpermitnumber = solIdEscaped,
                     // applicant
                     AdoxioSpecialeventapplicant = sol.Applicant?.ApplicantName,
                     AdoxioSpecialeventapplicantemail = sol.Applicant?.EmailAddress,
@@ -256,29 +263,22 @@ namespace SepService.Controllers
         /// <param name="cancelReason">Reason for cancellation</param>
         /// <returns></returns>
         [HttpPost("cancel/{solId}")]
-        public ActionResult Cancel([FromRoute] string solId, [FromBody] string cancelReason)
+        public ActionResult Cancel([FromRoute] string solId, [FromBody] CancelReason cancelReason)
         {
             if (string.IsNullOrEmpty(solId))
             {
                 return BadRequest();
             }
 
-            string solIdEscaped = solId.Replace("'", "''");
-            // get the given sol record.
-            string filter = $"adoxio_seplicencenumber eq '{solIdEscaped}'";
-            MicrosoftDynamicsCRMadoxioSpecialevent record;
+            // string locationReference = sol.SolLicenceNumber.Substring(sepLicenceNumber.Length);
 
-            try
+            string solIdEscaped = solId.Replace("'", "''");
+            if (solIdEscaped.Contains("-"))
             {
-                record =
-                    _dynamicsClient.Specialevents.Get(filter: filter).Value.FirstOrDefault();
+                solIdEscaped = solIdEscaped.Substring(0, solIdEscaped.IndexOf("-"));
             }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.Error(httpOperationException, "Error getting special event record");
-                // fail 
-                record = null;
-            }
+            // get the given sol record.
+            MicrosoftDynamicsCRMadoxioSpecialevent record = _dynamicsClient.GetSpecialEventByLicenceNumber(solIdEscaped);
 
             if (record == null)
             {
