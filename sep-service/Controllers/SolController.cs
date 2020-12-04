@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+﻿using System;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Rest;
@@ -6,6 +7,7 @@ using SepService.ViewModels;
 using Serilog;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace SepService.Controllers
 {
@@ -31,6 +33,31 @@ namespace SepService.Controllers
         public string Get([FromBody] string value)
         {
             return value;
+        }
+
+        private string AdjustString255(string input)
+        {
+            string result = input;
+            if (result != null && result.Length > 255)
+            {
+                result = result.Substring(0, 255);
+            }
+
+            return result;
+        }
+
+        private DateTime AdjustDateTime(DateTime input)
+        {
+            DateTime result = input;
+            // dates cannot be before 1753.  We use 2000 as a more relevant constant.
+
+            if (result != null && result.Year < 2000)
+            {
+                _logger.Error("Encountered a DateTime with a Year Prior to 2000");
+                result = result.AddYears(2000);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -68,23 +95,23 @@ namespace SepService.Controllers
                 {
                     AdoxioCapacity = sol.Capacity,
                     AdoxioSpecialeventdescripton = sol.EventDescription,
-                    AdoxioEventname = sol.EventName,
+                    AdoxioEventname = AdjustString255(sol.EventName),
                     AdoxioSpecialeventpermitnumber = solIdEscaped,
                     // applicant
-                    AdoxioSpecialeventapplicant = sol.Applicant?.ApplicantName,
-                    AdoxioSpecialeventapplicantemail = sol.Applicant?.EmailAddress,
+                    AdoxioSpecialeventapplicant = AdjustString255(sol.Applicant?.ApplicantName),
+                    AdoxioSpecialeventapplicantemail = AdjustString255(sol.Applicant?.EmailAddress),
                     AdoxioSpecialeventapplicantphone = sol.Applicant?.PhoneNumber,
                     // location
-                    AdoxioSpecialeventstreet1 = sol.Applicant?.Address?.Address1,
-                    AdoxioSpecialeventstreet2 = sol.Applicant?.Address?.Address2,
-                    AdoxioSpecialeventcity = sol.Applicant?.Address?.City,
+                    AdoxioSpecialeventstreet1 = AdjustString255(sol.Applicant?.Address?.Address1),
+                    AdoxioSpecialeventstreet2 = AdjustString255(sol.Applicant?.Address?.Address2),
+                    AdoxioSpecialeventcity = AdjustString255(sol.Applicant?.Address?.City),
                     AdoxioSpecialeventpostalcode = sol.Applicant?.Address?.PostalCode,
-                    AdoxioSpecialeventprovince = sol.Applicant?.Address?.Province,
+                    AdoxioSpecialeventprovince = AdjustString255(sol.Applicant?.Address?.Province),
                     // responsible individual
-                    AdoxioResponsibleindividualfirstname = sol.ResponsibleIndividual?.FirstName,
-                    AdoxioResponsibleindividuallastname = sol.ResponsibleIndividual?.LastName,
-                    AdoxioResponsibleindividualmiddleinitial = sol.ResponsibleIndividual?.MiddleInitial,
-                    AdoxioResponsibleindividualposition = sol.ResponsibleIndividual?.Position,
+                    AdoxioResponsibleindividualfirstname = AdjustString255(sol.ResponsibleIndividual?.FirstName),
+                    AdoxioResponsibleindividuallastname = AdjustString255(sol.ResponsibleIndividual?.LastName),
+                    AdoxioResponsibleindividualmiddleinitial = AdjustString255(sol.ResponsibleIndividual?.MiddleInitial),
+                    AdoxioResponsibleindividualposition = AdjustString255(sol.ResponsibleIndividual?.Position),
                     AdoxioResponsibleindividualsir = sol.ResponsibleIndividual?.SirNumber,
                     // tasting event
                     AdoxioTastingevent = sol.TastingEvent
@@ -107,9 +134,9 @@ namespace SepService.Controllers
                             new MicrosoftDynamicsCRMadoxioSpecialeventnote()
                             {
                                 AdoxioNote = item.Text,
-                                AdoxioAuthor = item.Author,
-                                Createdon = item.CreatedDate,
-                                Modifiedon = item.LastUpdatedDate
+                                AdoxioAuthor = AdjustString255(item.Author),
+                                Createdon = AdjustDateTime( item.CreatedDate ),
+                                Modifiedon = AdjustDateTime( item.LastUpdatedDate )
                             });
                     }
                 }
@@ -124,7 +151,7 @@ namespace SepService.Controllers
                         var newTandC = new MicrosoftDynamicsCRMadoxioSpecialeventtandc()
                         {
                             AdoxioTermsandcondition = item.Text,
-                            AdoxioOriginator = item.Originator
+                            AdoxioOriginator = AdjustString255(item.Originator)
                         };
 
                         if (item.TandcType == TandcType.GlobalCondition)
@@ -234,10 +261,10 @@ namespace SepService.Controllers
                 {
                     location.AdoxioSpecialeventlocationSchedule.Add(new MicrosoftDynamicsCRMadoxioSpecialeventschedule()
                     {
-                        AdoxioServicestart = item.LiquorServiceStartTime,
-                        AdoxioServiceend = item.LiquorServiceEndTime,
-                        AdoxioEventstart = item.EventStartDateTime,
-                        AdoxioEventend = item.EventEndDateTime
+                        AdoxioServicestart = AdjustDateTime( item.LiquorServiceStartTime ),
+                        AdoxioServiceend = AdjustDateTime( item.LiquorServiceEndTime ),
+                        AdoxioEventstart = AdjustDateTime( item.EventStartDateTime ),
+                        AdoxioEventend = AdjustDateTime( item.EventEndDateTime )
                     });
                 }
             }
