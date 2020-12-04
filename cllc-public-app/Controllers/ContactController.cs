@@ -518,8 +518,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 MicrosoftDynamicsCRMcontact userContact = null;
                 try
                 {
-                    var temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                    var userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                    var userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
                     userContact = await _dynamicsClient.GetContactById(userSettings.ContactId);
                 }
                 catch (ArgumentNullException)
