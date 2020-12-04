@@ -38,7 +38,6 @@ namespace bdd_tests
 
             if (hoursType == "a lounge area outside of service hours")
             {
-                //NgWebElement uiLoungeAreaOutsideHours = ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[5]/div/p[10]/a"));
                 NgWebElement uiLoungeAreaOutsideHours = ngDriver.FindElement(By.LinkText("Change to Hours of Liquor Service (Lounge Area, outside Service Hours)"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiLoungeAreaOutsideHours);
