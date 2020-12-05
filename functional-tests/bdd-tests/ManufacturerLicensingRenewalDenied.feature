@@ -21,7 +21,8 @@ Scenario:  Deny Today Winery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 322d410b-f725-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 322d410b-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -40,7 +41,8 @@ Scenario:  Deny Today Brewery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 322d410b-f725-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 322d410b-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -59,7 +61,8 @@ Scenario:  Deny Today Distillery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 322d410b-f725-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 322d410b-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -78,7 +81,8 @@ Scenario:  Deny Today Co-packer Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 322d410b-f725-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 322d410b-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -101,7 +105,8 @@ Scenario:  Deny Yesterday Winery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow e1792ccf-e40b-491f-9a9a-ee8e977749e6
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named e1792ccf-e40b-491f-9a9a-ee8e977749e6
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -120,7 +125,8 @@ Scenario:  Deny Yesterday Brewery Licence Renewal
     And the application is approved
     And I pay the licensing fee
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow e1792ccf-e40b-491f-9a9a-ee8e977749e6
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named e1792ccf-e40b-491f-9a9a-ee8e977749e6
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -139,7 +145,8 @@ Scenario:  Deny Yesterday Distillery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow e1792ccf-e40b-491f-9a9a-ee8e977749e6
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named e1792ccf-e40b-491f-9a9a-ee8e977749e6
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -158,7 +165,8 @@ Scenario:  Deny Yesterday Co-packer Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow e1792ccf-e40b-491f-9a9a-ee8e977749e6
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named e1792ccf-e40b-491f-9a9a-ee8e977749e6
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -181,7 +189,8 @@ Scenario:  Deny 45 Days Ago Winery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 65bfe79d-f825-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 65bfe79d-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -200,7 +209,8 @@ Scenario:  Deny 45 Days Ago Brewery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 65bfe79d-f825-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 65bfe79d-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -219,7 +229,8 @@ Scenario:  Deny 45 Days Ago Distillery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 65bfe79d-f825-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 65bfe79d-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -238,7 +249,8 @@ Scenario:  Deny 45 Days Ago Co-packer Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 65bfe79d-f825-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 65bfe79d-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -261,7 +273,8 @@ Scenario:  Deny 60 Days From Today Winery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow beb3243e-f825-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named beb3243e-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -280,7 +293,8 @@ Scenario:  Deny 60 Days From Today Brewery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow beb3243e-f825-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named beb3243e-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -299,7 +313,8 @@ Scenario:  Deny 60 Days From Today Distillery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow beb3243e-f825-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named beb3243e-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -318,7 +333,8 @@ Scenario:  Deny 60 Days From Today Co-packer Licence Renewal
     And the application is approved
     And I pay the licensing fee
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow beb3243e-f825-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named beb3243e-f825-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -341,7 +357,8 @@ Scenario:  Deny 30 Days From Today Winery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 10eaae77-f725-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 10eaae77-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -360,7 +377,8 @@ Scenario:  Deny 30 Days From Today Brewery Licence Renewal
     And the application is approved
     And I pay the licensing fee
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 10eaae77-f725-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 10eaae77-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -379,7 +397,8 @@ Scenario:  Deny 30 Days From Today Distillery Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 10eaae77-f725-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 10eaae77-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page
@@ -398,7 +417,8 @@ Scenario:  Deny 30 Days From Today Co-packer Licence Renewal
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And autorenewal is set to 'No' using Dynamics workflow 10eaae77-f725-eb11-b821-00505683fbf4
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 10eaae77-f725-eb11-b821-00505683fbf4
     And I am unable to renew the licence
     And the account is deleted
     Then I see the login page

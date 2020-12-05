@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+﻿using System;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Rest;
@@ -6,6 +7,7 @@ using SepService.ViewModels;
 using Serilog;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace SepService.Controllers
 {
@@ -33,6 +35,31 @@ namespace SepService.Controllers
             return value;
         }
 
+        private string AdjustString255(string input)
+        {
+            string result = input;
+            if (result != null && result.Length > 255)
+            {
+                result = result.Substring(0, 255);
+            }
+
+            return result;
+        }
+
+        private DateTime AdjustDateTime(DateTime input)
+        {
+            DateTime result = input;
+            // dates cannot be before 1753.  We use 2000 as a more relevant constant.
+
+            if (result != null && result.Year < 2000)
+            {
+                _logger.Error("Encountered a DateTime with a Year Prior to 2000");
+                result = result.AddYears(2000);
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Create a Sol record
         /// </summary>
@@ -47,12 +74,19 @@ namespace SepService.Controllers
             }
 
             // format of the "SolLicenceNumber" field is {EventLicenceNumber}-{LocationReference}
-            string sepLicenceNumber = sol.SolLicenceNumber.Substring(0, sol.SolLicenceNumber.IndexOf("-"));
+
+            string solIdEscaped = sol.SolLicenceNumber.Replace("'", "''");
+            if (solIdEscaped.Contains("-"))
+            {
+                solIdEscaped = solIdEscaped.Substring(0, solIdEscaped.IndexOf("-"));
+            }
+
+            
             // string locationReference = sol.SolLicenceNumber.Substring(sepLicenceNumber.Length);
 
             // determine if the record is new.
             MicrosoftDynamicsCRMadoxioSpecialevent existingRecord =
-                _dynamicsClient.GetSpecialEventByLicenceNumber(sepLicenceNumber);
+                _dynamicsClient.GetSpecialEventByLicenceNumber(solIdEscaped);
 
             if (existingRecord == null) // new record
             {
@@ -61,23 +95,23 @@ namespace SepService.Controllers
                 {
                     AdoxioCapacity = sol.Capacity,
                     AdoxioSpecialeventdescripton = sol.EventDescription,
-                    AdoxioEventname = sol.EventName,
-                    AdoxioSeplicencenumber = sepLicenceNumber,
+                    AdoxioEventname = AdjustString255(sol.EventName),
+                    AdoxioSpecialeventpermitnumber = solIdEscaped,
                     // applicant
-                    AdoxioSpecialeventapplicant = sol.Applicant?.ApplicantName,
-                    AdoxioSpecialeventapplicantemail = sol.Applicant?.EmailAddress,
+                    AdoxioSpecialeventapplicant = AdjustString255(sol.Applicant?.ApplicantName),
+                    AdoxioSpecialeventapplicantemail = AdjustString255(sol.Applicant?.EmailAddress),
                     AdoxioSpecialeventapplicantphone = sol.Applicant?.PhoneNumber,
                     // location
-                    AdoxioSpecialeventstreet1 = sol.Applicant?.Address?.Address1,
-                    AdoxioSpecialeventstreet2 = sol.Applicant?.Address?.Address2,
-                    AdoxioSpecialeventcity = sol.Applicant?.Address?.City,
+                    AdoxioSpecialeventstreet1 = AdjustString255(sol.Applicant?.Address?.Address1),
+                    AdoxioSpecialeventstreet2 = AdjustString255(sol.Applicant?.Address?.Address2),
+                    AdoxioSpecialeventcity = AdjustString255(sol.Applicant?.Address?.City),
                     AdoxioSpecialeventpostalcode = sol.Applicant?.Address?.PostalCode,
-                    AdoxioSpecialeventprovince = sol.Applicant?.Address?.Province,
+                    AdoxioSpecialeventprovince = AdjustString255(sol.Applicant?.Address?.Province),
                     // responsible individual
-                    AdoxioResponsibleindividualfirstname = sol.ResponsibleIndividual?.FirstName,
-                    AdoxioResponsibleindividuallastname = sol.ResponsibleIndividual?.LastName,
-                    AdoxioResponsibleindividualmiddleinitial = sol.ResponsibleIndividual?.MiddleInitial,
-                    AdoxioResponsibleindividualposition = sol.ResponsibleIndividual?.Position,
+                    AdoxioResponsibleindividualfirstname = AdjustString255(sol.ResponsibleIndividual?.FirstName),
+                    AdoxioResponsibleindividuallastname = AdjustString255(sol.ResponsibleIndividual?.LastName),
+                    AdoxioResponsibleindividualmiddleinitial = AdjustString255(sol.ResponsibleIndividual?.MiddleInitial),
+                    AdoxioResponsibleindividualposition = AdjustString255(sol.ResponsibleIndividual?.Position),
                     AdoxioResponsibleindividualsir = sol.ResponsibleIndividual?.SirNumber,
                     // tasting event
                     AdoxioTastingevent = sol.TastingEvent
@@ -100,9 +134,9 @@ namespace SepService.Controllers
                             new MicrosoftDynamicsCRMadoxioSpecialeventnote()
                             {
                                 AdoxioNote = item.Text,
-                                AdoxioAuthor = item.Author,
-                                Createdon = item.CreatedDate,
-                                Modifiedon = item.LastUpdatedDate
+                                AdoxioAuthor = AdjustString255(item.Author),
+                                Createdon = AdjustDateTime( item.CreatedDate ),
+                                Modifiedon = AdjustDateTime( item.LastUpdatedDate )
                             });
                     }
                 }
@@ -117,7 +151,7 @@ namespace SepService.Controllers
                         var newTandC = new MicrosoftDynamicsCRMadoxioSpecialeventtandc()
                         {
                             AdoxioTermsandcondition = item.Text,
-                            AdoxioOriginator = item.Originator
+                            AdoxioOriginator = AdjustString255(item.Originator)
                         };
 
                         if (item.TandcType == TandcType.GlobalCondition)
@@ -227,10 +261,10 @@ namespace SepService.Controllers
                 {
                     location.AdoxioSpecialeventlocationSchedule.Add(new MicrosoftDynamicsCRMadoxioSpecialeventschedule()
                     {
-                        AdoxioServicestart = item.LiquorServiceStartTime,
-                        AdoxioServiceend = item.LiquorServiceEndTime,
-                        AdoxioEventstart = item.EventStartDateTime,
-                        AdoxioEventend = item.EventEndDateTime
+                        AdoxioServicestart = AdjustDateTime( item.LiquorServiceStartTime ),
+                        AdoxioServiceend = AdjustDateTime( item.LiquorServiceEndTime ),
+                        AdoxioEventstart = AdjustDateTime( item.EventStartDateTime ),
+                        AdoxioEventend = AdjustDateTime( item.EventEndDateTime )
                     });
                 }
             }
@@ -256,29 +290,22 @@ namespace SepService.Controllers
         /// <param name="cancelReason">Reason for cancellation</param>
         /// <returns></returns>
         [HttpPost("cancel/{solId}")]
-        public ActionResult Cancel([FromRoute] string solId, [FromBody] string cancelReason)
+        public ActionResult Cancel([FromRoute] string solId, [FromBody] CancelReason cancelReason)
         {
             if (string.IsNullOrEmpty(solId))
             {
                 return BadRequest();
             }
 
-            string solIdEscaped = solId.Replace("'", "''");
-            // get the given sol record.
-            string filter = $"adoxio_seplicencenumber eq '{solIdEscaped}'";
-            MicrosoftDynamicsCRMadoxioSpecialevent record;
+            // string locationReference = sol.SolLicenceNumber.Substring(sepLicenceNumber.Length);
 
-            try
+            string solIdEscaped = solId.Replace("'", "''");
+            if (solIdEscaped.Contains("-"))
             {
-                record =
-                    _dynamicsClient.Specialevents.Get(filter: filter).Value.FirstOrDefault();
+                solIdEscaped = solIdEscaped.Substring(0, solIdEscaped.IndexOf("-"));
             }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.Error(httpOperationException, "Error getting special event record");
-                // fail 
-                record = null;
-            }
+            // get the given sol record.
+            MicrosoftDynamicsCRMadoxioSpecialevent record = _dynamicsClient.GetSpecialEventByLicenceNumber(solIdEscaped);
 
             if (record == null)
             {
