@@ -2,7 +2,7 @@
     As a logged in business user
     I want to renew a licence that expired yesterday and has an on-site endorsement
 
-@onsiteendorsementrenewal @winery @release
+@onsiteendorsementrenewal @winery
 Scenario: Winery On-Site Endorsement Licence Renewal
 Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

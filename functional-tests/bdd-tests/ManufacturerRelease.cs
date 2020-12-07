@@ -53,6 +53,26 @@ Scenario: Private Corporation Manufacturer Release
     And I request a special event area endorsement
     And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
+    And I click on the Licences tab
+    And I complete the change hours application for a lounge area within service hours
+    And I click on the link for Manage Off-Site Storage
+    And I complete the offsite storage application
+    And I request an on-site store endorsement
+    And I click on the Licences tab
+    And the on-site endorsement application is approved
+    And I click on the Dashboard tab
+    And I click on the link for Pay First Year Fee
+    And I enter the payment information
+    And I click on the Licences tab
+    And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
+    And I click on the link for Renew Licence
+    And I renew the licence with negative responses for a winery
+    And I request a market event for one date only
+    And I click on the market event submit button
+    And I click on the Licences tab
+    And I click on the event history for markets
+    And I click on the link for Approved
+    And the market event data is correct for a one day event
     And I request a third party operator
     And I request a transfer of ownership
     And the account is deleted
@@ -87,14 +107,31 @@ Scenario: Sole Proprietorship Manufacturer Release
     And I click on the Licences tab
     And I request a lounge area endorsement
     And I click on the Licences tab
-    And I request an on-site store endorsement
-    And I click on the Licences tab
     And I request a picnic area endorsement
     And I click on the Licences tab
     And I request a special event area endorsement
     And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
     And I click on the Licences tab
+    And I complete the change hours application for a lounge area within service hours
+    And I click on the link for Manage Off-Site Storage
+    And I complete the offsite storage application
+    And I request an on-site store endorsement
+    And I click on the Licences tab
+    And the on-site endorsement application is approved
+    And I click on the Dashboard tab
+    And I click on the link for Pay First Year Fee
+    And I enter the payment information
+    And I click on the Licences tab
+    And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
+    And I click on the link for Renew Licence
+    And I renew the licence with negative responses for a winery
+    And I request a market event for one date only
+    And I click on the market event submit button
+    And I click on the Licences tab
+    And I click on the event history for markets
+    And I click on the link for Approved
+    And the market event data is correct for a one day event
     And I request a third party operator
     And I request a transfer of ownership
     And the account is deleted
