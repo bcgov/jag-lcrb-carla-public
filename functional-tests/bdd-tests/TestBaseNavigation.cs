@@ -134,7 +134,8 @@ namespace bdd_tests
             {
                 // click on the Submit Org Info button
                 NgWebElement uiSubmitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
-                uiSubmitOrgInfoButton.Click();
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiSubmitOrgInfoButton);
             }
 
             if (specificButton == "Save for Later")
@@ -254,12 +255,13 @@ namespace bdd_tests
         {
             // click on the previous button
             NgWebElement uiOpenCalendarPrevious = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-previous-button"));
-            uiOpenCalendarPrevious.Click();
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor.ExecuteScript("arguments[0].click();", uiOpenCalendarPrevious);
 
             // click on the first day
             NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor.ExecuteScript("arguments[0].click();", uiOpenCalendarYear);
+            IJavaScriptExecutor executor2 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor2.ExecuteScript("arguments[0].click();", uiOpenCalendarYear);
         }
 
         private string MakeAPICall(string url)
