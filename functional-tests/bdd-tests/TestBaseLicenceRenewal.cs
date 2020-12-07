@@ -256,7 +256,8 @@ namespace bdd_tests
                 // select 'Yes'
                 // 2. Have you or any of your partners, shareholders or directors of this establishment received any alcohol related driving infractions in the past 12 months?
                 NgWebElement uiAlcoholInfraction = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalDUI'] button#mat-button-toggle-12-button"));
-                uiAlcoholInfraction.Click();
+                IJavaScriptExecutor executor2 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor2.ExecuteScript("arguments[0].click();", uiAlcoholInfraction);
 
                 // select 'Yes'
                 // 3. Our records show that this establishment is licensed as a PrivateCorporation. Has this changed?
