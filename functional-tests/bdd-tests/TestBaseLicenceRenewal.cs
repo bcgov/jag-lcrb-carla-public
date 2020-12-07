@@ -322,7 +322,8 @@ namespace bdd_tests
                 {
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
-                    uiIsManufacturedMinimum.Click();
+                    IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                    executor.ExecuteScript("arguments[0].click();", uiIsManufacturedMinimum);
                 }
 
                 if ((responses == "positive responses for a winery") || (responses == "positive responses for a brewery"))
