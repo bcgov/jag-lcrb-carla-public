@@ -40,7 +40,8 @@ Scenario: Change Lounge Area Hours of Liquor Service Outside Service Hours
     And I click on the Licences tab
     And I complete the change hours application for a lounge area outside of service hours
     And I click on the Submit button
-    And I enter the payment information
+    And I click on the link for Dashboard
+    And the dashboard status is updated as Pending External Review
     And the account is deleted
     Then I see the login page
 
