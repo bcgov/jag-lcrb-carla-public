@@ -168,7 +168,6 @@ namespace bdd_tests
             NgWebElement uiContinueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
             IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
             executor.ExecuteScript("arguments[0].click();", uiContinueButton);
-            uiContinueButton.Click();
         }
 
 
