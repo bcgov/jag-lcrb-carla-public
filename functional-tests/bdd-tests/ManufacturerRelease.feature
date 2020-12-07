@@ -41,6 +41,9 @@ Scenario: Private Corporation Manufacturer Release
     And I click on the Licences tab
     And I request a third party operator
     And I request a transfer of ownership
+    And I complete the change hours application for a lounge area within service hours
+    And I click on the link for Manage Off-Site Storage
+    And I complete the offsite storage application
     And the account is deleted
     Then I see the login page
 
@@ -83,5 +86,8 @@ Scenario: Sole Proprietorship Manufacturer Release
     And I click on the Licences tab
     And I request a third party operator
     And I request a transfer of ownership
+    And I complete the change hours application for a lounge area within service hours
+    And I click on the link for Manage Off-Site Storage
+    And I complete the offsite storage application
     And the account is deleted
     Then I see the login page
