@@ -64,9 +64,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                                     <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayclose)}</td>
                                 </tr>
                             </table>";
-            } else {
-                // to do:
-                // log Licence number: X with Endorsement: Y is missing Hours of Service
             }
 
             // get the service areas and get their html
@@ -90,7 +87,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 // print the service areas
                 if (serviceAreas.Any())
                 {
-                    htmlVal += $@"<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'>
+                    htmlVal += @"<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'>
                                     <tr>";
 
                     var cells = 0;

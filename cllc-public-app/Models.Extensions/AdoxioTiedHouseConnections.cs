@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         /// <param name="to"></param>
         /// <param name="from"></param>
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioTiedhouseconnection to, ViewModels.TiedHouseConnection from)
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioTiedhouseconnection to, TiedHouseConnection from)
         {
             to.AdoxioTiedhouseconnectionid = from.id;
             to.AdoxioCorpconnectionfederalproducer = from.CorpConnectionFederalProducer;
@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMarketerconnectiontocrsdetails = from.MarketerConnectionToCrsDetails;
             to.AdoxioInconnectiontofederalproducer = (int?)from.INConnectionToFederalProducer;
             to.AdoxioInconnectiontofederalproducerdetails  = from.INConnectionToFederalProducerDetails;
-            to.AdoxioLiquorfinancialinterest = (int?)from.LiquorFinancialInterest;
+            to.AdoxioLiquorfinancialinterest = @from.LiquorFinancialInterest;
             to.AdoxioLiquorfinancialinterestdetails = from.LiquorFinancialInterestDetails;
 
         }
@@ -54,15 +54,15 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <summary>
         /// Convert a Dynamics Legal Entity to a ViewModel
         /// </summary>        
-        public static ViewModels.TiedHouseConnection ToViewModel(this MicrosoftDynamicsCRMadoxioTiedhouseconnection tiedHouse)
+        public static TiedHouseConnection ToViewModel(this MicrosoftDynamicsCRMadoxioTiedhouseconnection tiedHouse)
         {
-            ViewModels.TiedHouseConnection result = null;
+            TiedHouseConnection result = null;
             if (tiedHouse != null)
             {
-                result = new ViewModels.TiedHouseConnection();
+                result = new TiedHouseConnection();
                 if (tiedHouse.AdoxioTiedhouseconnectionid != null)
                 {
-                    result.id = tiedHouse.AdoxioTiedhouseconnectionid.ToString();
+                    result.id = tiedHouse.AdoxioTiedhouseconnectionid;
                 }
 
                 result.CorpConnectionFederalProducer = tiedHouse.AdoxioCorpconnectionfederalproducer;

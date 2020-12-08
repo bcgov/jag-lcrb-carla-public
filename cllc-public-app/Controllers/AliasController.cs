@@ -115,7 +115,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="viewModel"></param>
         /// <returns></returns>
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> CreateAlias([FromBody] ViewModels.Alias item)
         {
             if (item?.contact?.id == null || item?.worker?.id == null)

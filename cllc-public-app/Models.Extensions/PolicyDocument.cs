@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             ViewModels.PolicyDocument result = null;
             if (policyDocument != null)
             {
-                result = new ViewModels.PolicyDocument()
+                result = new ViewModels.PolicyDocument
                 {
                     id = policyDocument.AdoxioPolicydocumentid,
                     slug = policyDocument.AdoxioSlug,
@@ -37,7 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             ViewModels.PolicyDocumentSummary result = null;
             if (policyDocument != null)
             {
-                result = new ViewModels.PolicyDocumentSummary()
+                result = new ViewModels.PolicyDocumentSummary
                 {
                     slug = policyDocument.AdoxioSlug,
                     menuText = policyDocument.AdoxioMenutext
