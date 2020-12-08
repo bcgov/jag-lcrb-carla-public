@@ -604,7 +604,7 @@
               <h3 class="blue-header">Establishment Contact Details</h3>
               <div style="flex: 0 0 210px;" class="content">
                 <p>The phone and email address used to contact your establishment:</p>
-                <app-field label="Store Email" [required]="false" [valid]="isValidOrNotTouched('establishmentEmail')"
+                <app-field label="Establishment Email" [required]="false" [valid]="isValidOrNotTouched('establishmentEmail')"
                   errorMessage="Please enter an email address">
                   <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
                     [readonly]="application?.applicationType?.storeContactInfo === FormControlState.ReadOnly"
@@ -612,7 +612,7 @@
                 </app-field>
               </div>
               <div style="flex: 0 0 210px;" class="content-bottom">
-                <app-field label="Store Phone" [required]="false" [valid]="isValidOrNotTouched('establishmentPhone')"
+                <app-field label="Establishment Phone" [required]="false" [valid]="isValidOrNotTouched('establishmentPhone')"
                   errorMessage="Please enter a phone number ">
                   <input type="text" class="form-control" style="width: 200px;" mask="(000) 000-0000" autocomplete="tel"
                     [readonly]="application?.applicationType?.storeContactInfo === FormControlState.ReadOnly"
@@ -783,6 +783,7 @@
 
                 <div *ngIf="htmlContent.signage">
                   <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.signage"></section>
+                  <img src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage">
                 </div>
 
                 <div *ngIf="!htmlContent.signage">
@@ -879,6 +880,7 @@
                   <!-- if there is configured floor plan text, show it-->
                   <div *ngIf="htmlContent.floorPlan">
                     <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.floorPlan"></section>
+                    <img *ngIf="application?.licenseType == 'Food Primary'" src="assets/Food-Primary-floor-plan-sample.png" style="width: 700px;" alt="Sample Floor Plan">
                   </div>
 
                   <!-- otherwise switch to legacy mode-->
@@ -1193,16 +1195,12 @@
           <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
             <h3 class="blue-header">HOURS OF SALE</h3>
             <div class="padded-section content-bottom">
-              <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
-                Indicate the
-                store's proposed hours for cannabis sales below. Proposed
-                hours must fall between 9 a.m. and 11
-                p.m. Cannabis stores must not be open outside of their licensed hours. However, they may choose to be
-                closed
-                at
-                times they are licensed to be open.
+              <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.FP">
+                The standard service hours for a Food Primary are between 9:00AM and midnight. You may extend these hours by
+                submitting an Extend Hours of Service Beyond Standard Service Hours application from the application dashboard after
+                you submit your Food Primary application. LG/IN approval is required.
               </p>
-              <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CannabisRetailStore">
+              <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.FP">
                 Indicate the
                 proposed hours of sales below.
               </p>

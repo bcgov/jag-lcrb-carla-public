@@ -5,10 +5,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 {
     public class Survey
     {
-        public Survey()
-        {
-
-        }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Name { get; set; }

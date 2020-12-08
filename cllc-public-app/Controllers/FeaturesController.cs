@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Get a list of enabled features
         /// </summary>
         /// <returns></returns>
-        [HttpGet()]
+        [HttpGet]
         public List<string> GetFeatureList()
         {
             var features = new List<string>();
@@ -66,6 +66,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (!string.IsNullOrEmpty(_configuration["FEATURE_LIQUOR_TWO"]))
             {
                 features.Add("LiquorTwo");
+            }
+
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_LIQUOR_THREE"]))
+            {
+                features.Add("LiquorThree");
             }
 
             if (!string.IsNullOrEmpty(_configuration["FEATURE_COVID_APPLICATION"]))

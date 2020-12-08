@@ -112,10 +112,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             catch (Exception)
             {
                 userSettings = new UserSettings();
-                userSettings.AccountId = httpContextAccessor.HttpContext.User.FindFirst(Models.User.AccountidClaim)?.Value;
-                userSettings.ContactId = httpContextAccessor.HttpContext.User.FindFirst(Models.User.UseridClaim)?.Value;
-                userSettings.SiteMinderGuid = httpContextAccessor.HttpContext.User.FindFirst(Models.User.SiteMinderGuidClaim)?.Value;
-                userSettings.SiteMinderBusinessGuid = httpContextAccessor.HttpContext.User.FindFirst(Models.User.SiteMinderBusinessGuidClaim)?.Value;
+                userSettings.AccountId = httpContextAccessor.HttpContext.User.FindFirst(User.AccountidClaim)?.Value;
+                userSettings.ContactId = httpContextAccessor.HttpContext.User.FindFirst(User.UseridClaim)?.Value;
+                userSettings.SiteMinderGuid = httpContextAccessor.HttpContext.User.FindFirst(User.SiteMinderGuidClaim)?.Value;
+                userSettings.SiteMinderBusinessGuid = httpContextAccessor.HttpContext.User.FindFirst(User.SiteMinderBusinessGuidClaim)?.Value;
             }
 
             return userSettings;

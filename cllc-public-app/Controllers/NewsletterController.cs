@@ -37,10 +37,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
-            else
-            {
-                return new JsonResult(newsletter);
-            }
+
+            return new JsonResult(newsletter);
 
         }
 

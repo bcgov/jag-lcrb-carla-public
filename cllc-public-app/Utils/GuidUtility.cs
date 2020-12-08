@@ -127,7 +127,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
             Guid? result = null;
             if (!string.IsNullOrEmpty(id))
             {
-                result = (Guid?)SafeGuidConvert(id);
+                result = SafeGuidConvert(id);
             }
             return result;
         }

@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             ApplicationType result = null;
             if (applicationType != null)
             {
-                result = new ApplicationType()
+                result = new ApplicationType
                 {
                     ActionText = applicationType.AdoxioActiontext,
                     Category = (ApplicationTypeCategory?)applicationType.AdoxioCategory,

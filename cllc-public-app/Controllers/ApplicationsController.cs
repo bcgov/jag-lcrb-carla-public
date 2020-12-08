@@ -1039,7 +1039,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     AddServiceAreasToApplication(item.ServiceAreas, item.Id);
                 if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
                     AddServiceAreasToApplication(item.OutsideAreas, item.Id);
-                if (item.CapacityArea != null && item.CapacityArea.Count > 0)
+                // capacity is always added to the form, but if the capacity value is blank we can ignore it                    
+                if (item.CapacityArea != null && item.CapacityArea.Count > 0 && item.CapacityArea.FirstOrDefault().Capacity.Length > 0)
                     AddServiceAreasToApplication(item.CapacityArea, item.Id);
 
                 if ((bool)item.ApplicationType?.ShowHoursOfSale)

@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
 
         public static void UpdateJurisdiction(this AppDbContext context, Jurisdiction jurisdiction)
         {
-            Jurisdiction _jurisdiction = context.Jurisdictions.FirstOrDefault<Jurisdiction>(x => x.Id == jurisdiction.Id);
+            Jurisdiction _jurisdiction = context.Jurisdictions.FirstOrDefault(x => x.Id == jurisdiction.Id);
             _jurisdiction.Name = jurisdiction.Name;
             _jurisdiction.SelectMessage = jurisdiction.SelectMessage;
             context.Jurisdictions.Update(_jurisdiction);
@@ -26,8 +26,8 @@ namespace Gov.Lclb.Cllb.Public.Contexts
 
         public static List<Jurisdiction> GetJurisdictions(this AppDbContext context)
         {
-            List<Models.Jurisdiction> jurisdictions =
-                context.Jurisdictions.ToList<Jurisdiction>();
+            List<Jurisdiction> jurisdictions =
+                context.Jurisdictions.ToList();
             return jurisdictions;
         }
 

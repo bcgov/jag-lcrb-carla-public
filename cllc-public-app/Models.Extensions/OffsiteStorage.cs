@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             OffsiteStorage result = null;
             if (item != null)
             {
-                result = new OffsiteStorage()
+                result = new OffsiteStorage
                 {
                     Name = item.AdoxioName,
                     Status = (OffsiteStorageStatus?)item.Statuscode,

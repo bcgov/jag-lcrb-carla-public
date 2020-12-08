@@ -39,23 +39,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
                     string[] tokens = propertyName.Split(".");
                     string firstToken = tokens[0];
                     string secondToken = tokens[1];
-                    var property = this.GetType().GetProperty(firstToken).GetValue(this, null);
+                    var property = GetType().GetProperty(firstToken).GetValue(this, null);
                     if (property == null)
                     {
                         return null;
                     }
-                    else
-                    {
-                        return property.GetType().GetProperty(secondToken).GetValue(property, null);
-                    }
+
+                    return property.GetType().GetProperty(secondToken).GetValue(property, null);
                 }
-                else
-                {
-                    return this.GetType().GetProperty(propertyName).GetValue(this, null);
-                }
+
+                return GetType().GetProperty(propertyName).GetValue(this, null);
             }
 
-            set { this.GetType().GetProperty(propertyName).SetValue(this, value, null); }
+            set { GetType().GetProperty(propertyName).SetValue(this, value, null); }
         }
     }
 }
