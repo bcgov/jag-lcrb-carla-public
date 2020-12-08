@@ -61,7 +61,8 @@ namespace bdd_tests
 
             // click on the obtain licence info from branch checkbox
             NgWebElement uiCheckbox2 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanObtainLicenceInformation']"));
-            uiCheckbox2.Click();
+            IJavaScriptExecutor executor3 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor3.ExecuteScript("arguments[0].click();", uiCheckbox2);
 
             // click on sign grocery annual proof of sales revenue checkbox
             NgWebElement uiCheckbox3 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSignGroceryStoreProofOfSale']"));
