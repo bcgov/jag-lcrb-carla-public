@@ -2,7 +2,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
 
-    public partial class MicrosoftDynamicsCRMoption
+    public class MicrosoftDynamicsCRMoption
     {
 
         /// <summary>
@@ -17,7 +17,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
-        partial void CustomInit();
+        private void CustomInit()
+        {
+            throw new System.NotImplementedException();
+        }
 
         /// <summary>
         /// </summary>

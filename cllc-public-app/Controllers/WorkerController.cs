@@ -157,7 +157,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             patchWorker.CopyValues(item);
             try
             {
-                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
+                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid, patchWorker);
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -173,11 +173,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="viewModel"></param>
         /// <returns></returns>
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> CreateWorker([FromBody] ViewModels.Worker item)
         {
             // create a new worker.
-            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker()
+            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker
             {
                 AdoxioIsmanual = 0 // 0 for false - is a portal user.
             };
@@ -192,26 +192,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error creating worker. ");
+                _logger.LogError(httpOperationException, "Error creating worker. ");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error creating worker.");
+                _logger.LogError(e, "Error creating worker.");
             }
 
             try
             {
                 var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
                 patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
-                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
+                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid, patchWorker);
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error updating worker. ");
+                _logger.LogError(httpOperationException, "Error updating worker. ");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error updating worker.");
+                _logger.LogError(e, "Error updating worker.");
             }
 
 
@@ -245,7 +245,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error updating worker. ");
+                _logger.LogError(httpOperationException, "Error updating worker. ");
             }
 
 

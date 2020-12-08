@@ -119,7 +119,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public YesNoOptions? CasConsentValidated { get; set; }
         public DateTimeOffset? CasConsentValidatedExpiryDate { get; set; }
 
-        public List<ViewModels.Alias> Aliases { get; set; }
+        public List<Alias> Aliases { get; set; }
 
 
         public YesNoOptions? PhsExclusiveMFG  { get; set; }

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using grpc = global::Grpc.Core;
+using grpc = Grpc.Core;
 using Google.Protobuf;
 using System.Diagnostics.Contracts;
 
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             try
             {
 
-                var createFolderRequest = new CreateFolderRequest()
+                var createFolderRequest = new CreateFolderRequest
                 {
                     EntityName = entityName,
                     FolderName = folderName
@@ -58,7 +58,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             try
             {
                 // call the web service
-                var request = new FolderFilesRequest()
+                var request = new FolderFilesRequest
                 {
                     DocumentType = "",
                     EntityId = entityId,
@@ -73,7 +73,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     // convert the results to the view model.
                     foreach (var fileDetails in result.Files)
                     {
-                        Public.ViewModels.FileSystemItem fileSystemItemVM = new Public.ViewModels.FileSystemItem()
+                        Public.ViewModels.FileSystemItem fileSystemItemVM = new Public.ViewModels.FileSystemItem
                         {
                             // remove the document type text from file name
                             name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2),
@@ -162,7 +162,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             try
             {
                 // call the web service
-                var request = new FolderFilesRequest()
+                var request = new FolderFilesRequest
                 {
                     DocumentType = documentType,
                     EntityId = entityId,
@@ -201,7 +201,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             try
             {
                 // call the web service
-                var request = new TruncatedFilenameRequest()
+                var request = new TruncatedFilenameRequest
                 {
                     EntityName = entityName,
                     FolderName = folderName,

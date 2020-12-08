@@ -16,7 +16,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context,
-        CancellationToken cancellationToken = default(CancellationToken))
+        CancellationToken cancellationToken = default)
         {
             // Execute health check logic here. This example sets a dummy
             // variable to true.

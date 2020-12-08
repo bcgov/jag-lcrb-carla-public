@@ -8,15 +8,15 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class AdoxioApplicationTermsConditionsLimitations
     {  
-        public static ViewModels.TermsAndConditions ToViewModel(this MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation term)
+        public static TermsAndConditions ToViewModel(this MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation term)
         {
-            ViewModels.TermsAndConditions result = null;
+            TermsAndConditions result = null;
             if (term != null)
             {
-                result = new ViewModels.TermsAndConditions();
+                result = new TermsAndConditions();
                 if (term.AdoxioApplicationtermsconditionslimitationid != null)
                 {
-                    result.Id = term.AdoxioApplicationtermsconditionslimitationid.ToString();
+                    result.Id = term.AdoxioApplicationtermsconditionslimitationid;
                 }
 
                 result.LicenceId = term._adoxioLicenceValue;

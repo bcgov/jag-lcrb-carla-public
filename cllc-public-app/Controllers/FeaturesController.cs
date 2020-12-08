@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Get a list of enabled features
         /// </summary>
         /// <returns></returns>
-        [HttpGet()]
+        [HttpGet]
         public List<string> GetFeatureList()
         {
             var features = new List<string>();

@@ -41,12 +41,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        [HttpGet()]
+        [HttpGet]
         public IActionResult GetInvoices()
         {
             if (TestUtility.InUnitTestMode())
             {
-                List<ViewModels.Invoice> result = new List<Invoice>();
+                List<Invoice> result = new List<Invoice>();
                 IEnumerable<MicrosoftDynamicsCRMinvoice> invoices = null;
 
                 invoices = _dynamicsClient.Invoices.Get().Value;
@@ -72,33 +72,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             if (TestUtility.InUnitTestMode())
             {
-                ViewModels.Invoice result = null;
+                Invoice result = null;
                 // query the Dynamics system to get the invoice record.
                 if (string.IsNullOrEmpty(id))
                 {
                     return new NotFoundResult();
                 }
-                else
+
+                // get the current user.
+                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+                Guid adoxio_legalentityid = new Guid(id);
+                MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(adoxio_legalentityid);
+                if (invoice == null)
                 {
-                    // get the current user.
-                    UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
-                    Guid adoxio_legalentityid = new Guid(id);
-                    MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(adoxio_legalentityid);
-                    if (invoice == null)
-                    {
-                        return new NotFoundResult();
-                    }
-
-                    // setup the related account.
-                    if (invoice._accountidValue != null)
-                    {
-                        Guid accountId = Guid.Parse(invoice._accountidValue);
-                        invoice.CustomeridAccount = await _dynamicsClient.GetAccountByIdAsync(accountId);
-                    }
-
-                    result = invoice.ToViewModel();
+                    return new NotFoundResult();
                 }
+
+                // setup the related account.
+                if (invoice._accountidValue != null)
+                {
+                    Guid accountId = Guid.Parse(invoice._accountidValue);
+                    invoice.CustomeridAccount = await _dynamicsClient.GetAccountByIdAsync(accountId);
+                }
+
+                result = invoice.ToViewModel();
 
                 return new JsonResult(result);
             }
@@ -111,8 +109,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        [HttpPost()]
-        public async Task<IActionResult> CreateInvoice([FromBody] ViewModels.Invoice item)
+        [HttpPost]
+        public async Task<IActionResult> CreateInvoice([FromBody] Invoice item)
         {
             if (TestUtility.InUnitTestMode())
             {
@@ -165,7 +163,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateInvoice([FromBody] ViewModels.Invoice item, string id)
+        public async Task<IActionResult> UpdateInvoice([FromBody] Invoice item, string id)
         {
             if (TestUtility.InUnitTestMode())
             {
