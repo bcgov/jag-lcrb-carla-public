@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     if (item.AdoxioApplicationType != null)
                     {
-                        var endorsement = new ViewModels.Endorsement()
+                        var endorsement = new ViewModels.Endorsement
                         {
                             ApplicationTypeId = item.AdoxioApplicationType.AdoxioApplicationtypeid,
                             ApplicationTypeName = item.AdoxioApplicationType.AdoxioName,
@@ -147,7 +147,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     && app?.AdoxioLicenceFeeInvoice?.Statuscode != (int)Adoxio_invoicestatuses.Paid
                 ).Any();
 
-            ApplicationLicenseSummary licenseSummary = new ViewModels.ApplicationLicenseSummary()
+            ApplicationLicenseSummary licenseSummary = new ApplicationLicenseSummary
             {
                 LicenseId = licence.AdoxioLicencesid,
                 LicenseNumber = licence.AdoxioLicencenumber,
@@ -206,10 +206,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licenseSummary.EstablishmentIsOpen = licence.AdoxioEstablishment.AdoxioIsopen;
             }
 
-            var mainApplication = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
+            var mainApplication = applications.Where(app => app.Statuscode == (int)AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
 
             // 2-13-2020 adjust criteria so that we get the first approved CRS rather than simply the first CRS, to ensure that we get the correct record.
-            var crsApplication = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved && app.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store").FirstOrDefault();
+            var crsApplication = applications.Where(app => app.Statuscode == (int)AdoxioApplicationStatusCodes.Approved && app.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store").FirstOrDefault();
             if (mainApplication != null)
             {
                 licenseSummary.ApplicationId = mainApplication.AdoxioApplicationid;

@@ -21,7 +21,7 @@ using Xunit;
 # One Market Event
 #-----------------------
 
- @marketevent @marketoneday @winery @release
+ @marketevent @marketoneday @winery
  Scenario: Winery One Day Market Event
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

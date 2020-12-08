@@ -96,7 +96,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPut("{licenceId}/representative")]
-        public async Task<IActionResult> UpdateLicenseeRepresentative([FromBody] ViewModels.ApplicationLicenseSummary item, string licenceId)
+        public async Task<IActionResult> UpdateLicenseeRepresentative([FromBody] ApplicationLicenseSummary item, string licenceId)
         {
             if (item == null || string.IsNullOrEmpty(licenceId) || licenceId != item.LicenseId)
             {
@@ -114,7 +114,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Forbid();
             }
 
-            MicrosoftDynamicsCRMadoxioLicences patchObject = new MicrosoftDynamicsCRMadoxioLicences()
+            MicrosoftDynamicsCRMadoxioLicences patchObject = new MicrosoftDynamicsCRMadoxioLicences
             {
                 AdoxioRepresentativename = item.RepresentativeFullName,
                 AdoxioRepresentativephone = item.RepresentativePhoneNumber,
@@ -156,7 +156,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPut("{licenceId}/offsite-storage")]
-        public IActionResult UpdateOffsiteStorageLocations([FromBody] ViewModels.ApplicationLicenseSummary item, string licenceId)
+        public IActionResult UpdateOffsiteStorageLocations([FromBody] ApplicationLicenseSummary item, string licenceId)
         {
             if (item == null || string.IsNullOrEmpty(licenceId) || licenceId != item.LicenseId)
             {
@@ -289,7 +289,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 var no = 845280000;
-                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences
                 {
                     AdoxioTransferrequested = no
                 };
@@ -325,7 +325,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var applicationType = _dynamicsClient.GetApplicationTypeById(application._adoxioApplicationtypeidValue).GetAwaiter().GetResult();
                 if (applicationType.AdoxioName.Contains("CRS Transfer of Ownership"))
                 {
-                    var patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
+                    var patchApplication = new MicrosoftDynamicsCRMadoxioApplication
                     {
                         //Statecode = (int?)AdoxioApplicationStatusCodes.Cancelled,
                         Statuscode = (int?)AdoxioApplicationStatusCodes.Terminated
@@ -371,7 +371,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 var yes = 845280001;
-                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences
                 {
                     ProposedOwnerODataBind = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
                     AdoxioTransferrequested = yes
@@ -425,10 +425,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
             }
-            else
-            {
-                return BadRequest("This API is not available to an unregistered user.");
-            }
+
+            return BadRequest("This API is not available to an unregistered user.");
         }
 
         /// <summary>
@@ -466,10 +464,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
             }
-            else
-            {
-                return BadRequest("This API is not available to an unregistered user.");
-            }
+
+            return BadRequest("This API is not available to an unregistered user.");
         }
 
         [HttpPost("set-third-party-operator")]
@@ -495,7 +491,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences
                 {
                     adoxio_ThirdPartyOperatorIdODataBind = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
                     AdoxioTporequested = (int)EnumYesNo.Yes
@@ -538,7 +534,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences
                 {
                     AdoxioTporequested = (int)EnumYesNo.No
                 };
@@ -574,7 +570,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var applicationType = _dynamicsClient.GetApplicationTypeById(application._adoxioApplicationtypeidValue).GetAwaiter().GetResult();
                 if (applicationType.AdoxioName.Contains("Third Party Operator"))
                 {
-                    var patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
+                    var patchApplication = new MicrosoftDynamicsCRMadoxioApplication
                     {
                         //Statecode = (int?)AdoxioApplicationStatusCodes.Cancelled,
                         Statuscode = (int?)AdoxioApplicationStatusCodes.Terminated
@@ -659,114 +655,113 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // exit if we don't find one
                 throw new Exception("Error getting license.");
             }
-            else
+
+            // create a blank application
+            MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication();
+
+            // copy some standard values
+            application.CopyValuesForChangeOfLocation(adoxioLicense, applicationTypeName != "CRS Location Change");
+
+            // get the previous application for the licence.
+
+            application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
+
+            // set application type relationship
+            var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
+            application.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
+
+            // set licence type relationship
+            if (adoxioLicense.AdoxioLicenceType != null)
             {
-                // create a blank application
-                MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication();
 
-                // copy some standard values
-                application.CopyValuesForChangeOfLocation(adoxioLicense, applicationTypeName != "CRS Location Change");
+                application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
+            }
 
-                // get the previous application for the licence.
+            // set the licence subtype if we have one
 
-                application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
+            if (adoxioLicense.AdoxioLicenceSubCategoryId != null)
+            {
+                application.AdoxioLicenceSubCategoryODataBind =
+                    _dynamicsClient.GetEntityURI("adoxio_licencesubcategories",
+                        adoxioLicense.AdoxioLicenceSubCategoryId.AdoxioLicencesubcategoryid);
+            }
 
-                // set application type relationship
-                var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
-                application.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
+            // set the applicant
+            application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
-                // set licence type relationship
-                if (adoxioLicense.AdoxioLicenceType != null)
+            // if the licence has an establishment (from CopyValuesForChangeOfLocation)
+            if (adoxioLicense.AdoxioEstablishment != null)
+            {
+                application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
+            }
+
+            try
+            {
+                // try finding a licence application
+                var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue)).FirstOrDefault();
+                string lginvalue = "";
+
+                // if we don't find it
+                if (licenceApp == null)
                 {
-
-                    application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
-                }
-
-                // set the licence subtype if we have one
-
-                if (adoxioLicense.AdoxioLicenceSubCategoryId != null)
-                {
-                    application.AdoxioLicenceSubCategoryODataBind =
-                        _dynamicsClient.GetEntityURI("adoxio_licencesubcategories",
-                            adoxioLicense.AdoxioLicenceSubCategoryId.AdoxioLicencesubcategoryid);
-                }
-
-                // set the applicant
-                application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
-
-                // if the licence has an establishment (from CopyValuesForChangeOfLocation)
-                if (adoxioLicense.AdoxioEstablishment != null)
-                {
-                    application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
-                }
-
-                try
-                {
-                    // try finding a licence application
-                    var licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioLocalgovindigenousnationidValue)).FirstOrDefault();
-                    string lginvalue = "";
-
-                    // if we don't find it
-                    if (licenceApp == null)
+                    // check if there is a LGIN value on the Licence Record
+                    if (adoxioLicense?._adoxioLginValue != null)
                     {
-                        // check if there is a LGIN value on the Licence Record
-                        if (adoxioLicense?._adoxioLginValue != null)
-                        {
-                            lginvalue = adoxioLicense?._adoxioLginValue;
-                        }
-                        // otherwise check if there is an LGIN value on the Establishment
-                        else
-                        {
-                            if (adoxioLicense?.AdoxioEstablishment != null)
-                            {
-                                lginvalue = adoxioLicense?.AdoxioEstablishment._adoxioLginValue;
-                            }
-                        }
-                        // note there will be no LGIN for Marketers or Agent, but we initialized to an empty string so we're all good
+                        lginvalue = adoxioLicense?._adoxioLginValue;
                     }
+                    // otherwise check if there is an LGIN value on the Establishment
                     else
                     {
-                        lginvalue = licenceApp._adoxioLocalgovindigenousnationidValue;
-
+                        if (adoxioLicense?.AdoxioEstablishment != null)
+                        {
+                            lginvalue = adoxioLicense?.AdoxioEstablishment._adoxioLginValue;
+                        }
                     }
-
-                    // if we found an LGIN value
-                    if (!string.IsNullOrEmpty(lginvalue))
-                    {
-                        // set the value on the application
-                        application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", lginvalue);
-                    }
-
-                    // look for a Police Jurisdiction value on the licence application
-                    licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioPolicejurisdictionidValue)).FirstOrDefault();
-                    // if we find one
-                    if (!string.IsNullOrEmpty(licenceApp?._adoxioPolicejurisdictionidValue))
-                    {
-                        // update the application with that value
-                        application.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", licenceApp?._adoxioPolicejurisdictionidValue);
-                    }
-                    // create the application with the data we've brought over
-                    application = _dynamicsClient.Applications.Create(application);
+                    // note there will be no LGIN for Marketers or Agent, but we initialized to an empty string so we're all good
                 }
-                catch (HttpOperationException httpOperationException)
+                else
                 {
-                    string applicationId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
-                    if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
-                    {
-                        application = await _dynamicsClient.GetApplicationById(applicationGuid);
-                    }
-                    else
-                    {
-
-                        _logger.LogError(httpOperationException, "Error creating application");
-                        // fail if we can't create.
-                        throw httpOperationException;
-                    }
+                    lginvalue = licenceApp._adoxioLocalgovindigenousnationidValue;
 
                 }
 
-                // copy service areas from licence
-                /*  TG- Removing for now; will result in service areas being copied across endorsement types.
+                // if we found an LGIN value
+                if (!string.IsNullOrEmpty(lginvalue))
+                {
+                    // set the value on the application
+                    application.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", lginvalue);
+                }
+
+                // look for a Police Jurisdiction value on the licence application
+                licenceApp = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.Where(app => !string.IsNullOrEmpty(app._adoxioPolicejurisdictionidValue)).FirstOrDefault();
+                // if we find one
+                if (!string.IsNullOrEmpty(licenceApp?._adoxioPolicejurisdictionidValue))
+                {
+                    // update the application with that value
+                    application.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", licenceApp?._adoxioPolicejurisdictionidValue);
+                }
+                // create the application with the data we've brought over
+                application = _dynamicsClient.Applications.Create(application);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                string applicationId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
+                if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
+                {
+                    application = await _dynamicsClient.GetApplicationById(applicationGuid);
+                }
+                else
+                {
+
+                    _logger.LogError(httpOperationException, "Error creating application");
+                    // fail if we can't create.
+                    throw httpOperationException;
+                }
+
+            }
+
+            // copy service areas from licence
+            /*  TG- Removing for now; will result in service areas being copied across endorsement types.
 
                 try
                 {
@@ -799,25 +794,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 */
 
-                // now bind the new application to the given licence.
+            // now bind the new application to the given licence.
 
-                var patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
-                {
-                    AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", licenceId)
-                };
+            var patchApplication = new MicrosoftDynamicsCRMadoxioApplication
+            {
+                AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", licenceId)
+            };
 
-                try
-                {
-                    _dynamicsClient.Applications.Update(application.AdoxioApplicationid, patchApplication);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error updating application");
-                }
-
-                return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
-
+            try
+            {
+                _dynamicsClient.Applications.Update(application.AdoxioApplicationid, patchApplication);
             }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error updating application");
+            }
+
+            return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
         }
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
@@ -877,7 +870,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // get all third party operator licenses
-            List<ApplicationLicenseSummary> adoxioLicenses = await GetThirdPartyOperatedLicencesForAccountAsync(userSettings.AccountId.ToString());
+            List<ApplicationLicenseSummary> adoxioLicenses = await GetThirdPartyOperatedLicencesForAccountAsync(userSettings.AccountId);
             adoxioLicenses.ForEach(lic =>
             {
                 lic.ChecklistConclusivelyDeem = isConclusivelyDeemed(lic);
@@ -895,7 +888,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // get all proposed operator licenses
-            List<ApplicationLicenseSummary> adoxioLicenses = await GetProposedOwnerLicencesForAccountAsync(userSettings.AccountId.ToString());
+            List<ApplicationLicenseSummary> adoxioLicenses = await GetProposedOwnerLicencesForAccountAsync(userSettings.AccountId);
             adoxioLicenses.ForEach(lic =>
             {
                 lic.ChecklistConclusivelyDeem = isConclusivelyDeemed(lic);
@@ -936,7 +929,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 .Select(licence => _dynamicsClient.GetLicenceByIdWithChildren(licence.AdoxioLicencesid))
                 .Select(licence =>
                 {
-                    licence.AdoxioLicenceType = Gov.Lclb.Cllb.Public.Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
+                    licence.AdoxioLicenceType = Models.ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
                     return licence;
                 })
                 .ToList();
@@ -1105,11 +1098,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioSundayclose)}</td>
                             </tr></table>";
                 }
-                else
-                {
-                    // to do: log when we expect to find hours of sale, but don't
-                    // wine stores, ubrew, lrs.
-                }
 
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
                 /* if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
@@ -1255,10 +1243,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
             }
-            else
-            {
-                return new UnauthorizedResult();
-            }
+
+            return new UnauthorizedResult();
         }
 
         [HttpPut("{licenceId}/ldbordertotals")]
@@ -1281,7 +1267,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Forbid();
             }
 
-            MicrosoftDynamicsCRMadoxioLicences patchObject = new MicrosoftDynamicsCRMadoxioLicences()
+            MicrosoftDynamicsCRMadoxioLicences patchObject = new MicrosoftDynamicsCRMadoxioLicences
             {
                 AdoxioLdbordertotals = total
             };
@@ -1300,7 +1286,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPut("{licenceId}/establishment")]
-        public async Task<IActionResult> UpdateLicenceEstablishment([FromBody] ViewModels.ApplicationLicenseSummary item, string licenceId)
+        public async Task<IActionResult> UpdateLicenceEstablishment([FromBody] ApplicationLicenseSummary item, string licenceId)
         {
             if (item == null || string.IsNullOrEmpty(licenceId) || licenceId != item.LicenseId)
             {
@@ -1318,7 +1304,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Forbid();
             }
 
-            MicrosoftDynamicsCRMadoxioLicences patchObject = new MicrosoftDynamicsCRMadoxioLicences()
+            MicrosoftDynamicsCRMadoxioLicences patchObject = new MicrosoftDynamicsCRMadoxioLicences
             {
                 AdoxioEstablishmentphone = item.EstablishmentPhoneNumber,
                 AdoxioEstablishmentaddresscity = item.EstablishmentAddressCity,
