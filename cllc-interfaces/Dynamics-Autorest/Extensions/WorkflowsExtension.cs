@@ -40,7 +40,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> ExecuteWorkflowWithHttpMessagesAsync(string workflowId, string accountId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ExecuteWorkflowWithHttpMessagesAsync(string workflowId, string accountId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default)
         {
             if (workflowId == null)
             {
@@ -188,7 +188,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> ExecuteWorkflowWithHttpMessagesAsync(string workflowId, string accountId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ExecuteWorkflowWithHttpMessagesAsync(string workflowId, string accountId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
     }
 
 }

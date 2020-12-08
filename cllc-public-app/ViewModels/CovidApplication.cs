@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string Name { get; set; } //adoxio_name
      
-        public ViewModels.ApplicationType ApplicationType { get; set; }
+        public ApplicationType ApplicationType { get; set; }
 
         public string Description1 { get; set; }
 

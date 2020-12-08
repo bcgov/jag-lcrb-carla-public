@@ -9,7 +9,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// <summary>
     /// Role Database Model
     /// </summary>
-    public sealed partial class VoteOption : IEquatable<VoteOption>
+    public sealed class VoteOption : IEquatable<VoteOption>
     {
 
         /// <summary>

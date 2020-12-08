@@ -25,10 +25,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return Ok();
             }
-            else
-            {
-                return NotFound();
-            }
+
+            return NotFound();
         }
 
     }

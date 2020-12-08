@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Authorize(Policy = "Business-User")]
         public async Task<IActionResult> GetCurrentAccount()
         {
-            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             ViewModels.Account result = null;
 
             // get the current user.
@@ -103,7 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Authorize(Policy = "Business-User")]
         public async Task<IActionResult> GetCurrentBCeIDBusiness()
         {
-            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -112,7 +112,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the BCeID API to get the business record.
             var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
-            _logger.LogDebug(LoggingEvents.Get, $"business Info from bceid: {Newtonsoft.Json.JsonConvert.SerializeObject(business)}");
+            _logger.LogDebug(LoggingEvents.Get, $"business Info from bceid: {JsonConvert.SerializeObject(business)}");
 
             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(business?.businessNumber);
             if (cleanNumber != null)
@@ -154,7 +154,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var accounts = _dynamicsClient.Accounts.Get(filter: filter, expand: expand, top: 10).Value;
                 foreach (var account in accounts)
                 {
-                    var transferAccount = new TransferAccount()
+                    var transferAccount = new TransferAccount
                     {
                         AccountId = account.Accountid,
                         AccountName = account.Name,
@@ -190,7 +190,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Authorize(Policy = "Business-User")]
         public async Task<IActionResult> GetAccount(string id)
         {
-            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpGet, "id: " + id);
 
             Boolean userAccessToAccount = false;
@@ -244,7 +244,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Authorize(Policy = "Business-User")]
         public IActionResult GetBusinessProfile(string accountId)
         {
-            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpGet, "accountId: {accountId}");
 
             List<BusinessProfileLegalEntity> legalEntities;
@@ -262,7 +262,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         .Select(le =>
                         {
                             var legalEntity = le.ToViewModel();
-                            var entity = new ViewModels.BusinessProfileLegalEntity
+                            var entity = new BusinessProfileLegalEntity
                             {
                                 AdoxioLegalEntity = legalEntity,
                                 Account = le.AdoxioShareholderAccountID == null ? account : le.AdoxioShareholderAccountID.ToViewModel(),
@@ -316,12 +316,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(isComplete);
         }
 
-        private List<ViewModels.BusinessProfileLegalEntity> GetLegalEntityChildren(string parentLegalEntityId)
+        private List<BusinessProfileLegalEntity> GetLegalEntityChildren(string parentLegalEntityId)
         {
-            _logger.LogDebug(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.Get, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.Get, "parentLegalEntityId: {accouparentLegalEntityIdntId}");
 
-            List<ViewModels.BusinessProfileLegalEntity> children = null;
+            List<BusinessProfileLegalEntity> children = null;
             var childEntitiesFilter = $"_adoxio_legalentityowned_value eq {parentLegalEntityId}";
             var expandList = new List<string> { "adoxio_ShareholderAccountID", "adoxio_Account" };
 
@@ -332,7 +332,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         .Select(le =>
                         {
                             var legalEntity = le.ToViewModel();
-                            var entity = new ViewModels.BusinessProfileLegalEntity
+                            var entity = new BusinessProfileLegalEntity
                             {
                                 AdoxioLegalEntity = legalEntity,
                                 Account = le.AdoxioShareholderAccountID == null ? le.AdoxioAccount.ToViewModel() : le.AdoxioShareholderAccountID.ToViewModel()
@@ -371,7 +371,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private async Task<bool> FileUploadExists(string accountId, string accountName, string documentType)
         {
-            _logger.LogDebug(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.Get, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.Get, "accountId: {accountId}, accountName: {accountName}, documentType: {documentType}");
 
             var exists = false;
@@ -388,11 +388,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return exists;
         }
 
-        [HttpPost()]
+        [HttpPost]
         [Authorize(Policy = "Can-Create-Account")]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
-            _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpPost, "Account parameters: " + JsonConvert.SerializeObject(item));
 
             ViewModels.Account result = null;
@@ -423,7 +423,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get BCeID record for the current user
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-            _logger.LogDebug(LoggingEvents.Get, $"business Info from bceid: {Newtonsoft.Json.JsonConvert.SerializeObject(bceidBusiness)}");
+            _logger.LogDebug(LoggingEvents.Get, $"business Info from bceid: {JsonConvert.SerializeObject(bceidBusiness)}");
 
 
             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(bceidBusiness?.businessNumber);
@@ -449,12 +449,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error getting contact by Siteminder Guid. ");
+                _logger.LogError(httpOperationException, "Error getting contact by Siteminder Guid. ");
                 throw new Exception("Error getting contact by Siteminder Guid");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error getting contact by Siteminder Guid.");
+                _logger.LogError(e, "Error getting contact by Siteminder Guid.");
                 throw new Exception("Error getting contact by Siteminder Guid");
             }
 
@@ -503,7 +503,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account = new MicrosoftDynamicsCRMaccount();
                 account.CopyValues(item, updateIfNull);
                 // business type must be set only during creation, not in update (removed from copyValues() )
-                account.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.AdoxioApplicantTypeCodes), item.businessType, true);
+                account.AdoxioBusinesstype = (int)Enum.Parse(typeof(AdoxioApplicantTypeCodes), item.businessType, true);
                 // ensure that we create an account for the current user.
 
                 // by convention we strip out any dashes present in the guid, and force it to uppercase.
@@ -533,7 +533,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // using account.businessType which is set in bceid-confirmation.component.ts
                 account.AdoxioBusinesstype = (int)Enum.Parse(typeof(AdoxioApplicantTypeCodes), item.businessType, true);
 
-                var legalEntity = new MicrosoftDynamicsCRMadoxioLegalentity()
+                var legalEntity = new MicrosoftDynamicsCRMadoxioLegalentity
                 {
                     AdoxioAccount = account,
                     AdoxioName = item.name,
@@ -558,13 +558,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     else
                     {
-                        _logger.LogError(httpOperationException, $"Error creating legal entity. ");
+                        _logger.LogError(httpOperationException, "Error creating legal entity. ");
                         throw new HttpOperationException("Error creating legal entitiy");
                     }
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e, $"Error creating legal entity.");
+                    _logger.LogError(e, "Error creating legal entity.");
                     throw new Exception("Error creating legal entity.");
                 }
 
@@ -598,7 +598,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 legalEntityString = JsonConvert.SerializeObject(legalEntity);
                 _logger.LogDebug("Legal Entity after creation in dynamics --> " + legalEntityString);
 
-                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection() { };
+                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
                 tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
 
 
@@ -621,7 +621,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 // call the web service
-                var createFolderRequest = new CreateFolderRequest()
+                var createFolderRequest = new CreateFolderRequest
                 {
                     EntityName = "account",
                     FolderName = accountFolderName
@@ -672,7 +672,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error binding contact to account. ");
+                _logger.LogError(httpOperationException, "Error binding contact to account. ");
                 throw new Exception("Error binding contact to account");
             }
             catch (Exception e)
@@ -684,8 +684,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
             {
-                userSettings.AccountId = account.Accountid.ToString();
-                userSettings.ContactId = userContact.Contactid.ToString();
+                userSettings.AccountId = account.Accountid;
+                userSettings.ContactId = userContact.Contactid;
 
                 // we can now authenticate.
                 if (userSettings.AuthenticatedUser == null)
@@ -760,7 +760,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Authorize(Policy = "Business-User")]
         public async Task<IActionResult> UpdateAccount([FromBody] ViewModels.Account item, string id)
         {
-            _logger.LogDebug(LoggingEvents.HttpPut, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpPut, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpPut, "Account parameter: " + JsonConvert.SerializeObject(item));
             _logger.LogDebug(LoggingEvents.HttpPut, "id parameter: " + id);
 
@@ -823,7 +823,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Authorize(Policy = "Business-User")]
         public async Task<IActionResult> DeleteDynamicsAccount(string id)
         {
-            _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             // verify the currently logged in user has access to this account
             Guid accountId = new Guid(id);
@@ -1106,7 +1106,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
-                _logger.LogDebug(LoggingEvents.HttpDelete, "Account deleted: " + accountId.ToString());
+                _logger.LogDebug(LoggingEvents.HttpDelete, "Account deleted: " + accountId);
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -1129,7 +1129,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
-            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -1171,7 +1171,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Authorize(Policy = "Business-User")]
         public JsonResult GetTiedHouseConnection(string accountId)
         {
-            var result = new List<ViewModels.TiedHouseConnection>();
+            var result = new List<TiedHouseConnection>();
             IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
             String accountfilter = null;
 
@@ -1196,7 +1196,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpPost("{accountId}/tiedhouseconnection")]
         [Authorize(Policy = "Business-User")]
-        public ActionResult AddTiedHouseConnection([FromBody] ViewModels.TiedHouseConnection item, string accountId)
+        public ActionResult AddTiedHouseConnection([FromBody] TiedHouseConnection item, string accountId)
         {
             if (item == null)
             {
