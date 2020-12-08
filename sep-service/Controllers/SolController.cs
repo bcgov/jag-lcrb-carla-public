@@ -232,7 +232,8 @@ namespace SepService.Controllers
                 {
                     AdoxioLocationdescription = sol.Location.LocationDescription,
                     AdoxioLocationname = sol.Location.LocationName,
-                    AdoxioMaximumnumberofguests = sol.Location.MaximumGuests.ToString()
+                    AdoxioMaximumnumberofguests = sol.Location.MaximumGuests.ToString(),
+                    AdoxioPermitnumber = sol.SolLicenceNumber
                 };
 
             // licensed area
@@ -316,7 +317,8 @@ namespace SepService.Controllers
                 // cancel the record.
                 MicrosoftDynamicsCRMadoxioSpecialevent patchRecord = new MicrosoftDynamicsCRMadoxioSpecialevent()
                 {
-                    Statuscode = 845280000 // Cancel
+                    Statuscode = 845280000, // Cancel
+                    AdoxioCancellationreason = cancelReason?.Reason
                 };
                 try
                 {

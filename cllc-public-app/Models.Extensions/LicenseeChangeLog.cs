@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static LicenseeChangeLog ToViewModel(this MicrosoftDynamicsCRMadoxioLicenseechangelog changeLog)
         {
-            var result = new LicenseeChangeLog()
+            var result = new LicenseeChangeLog
             {
                 Id = changeLog.AdoxioLicenseechangelogid,
                 ChangeType = (LicenseeChangeType?)changeLog.AdoxioChangetype,
