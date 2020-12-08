@@ -221,16 +221,12 @@ namespace bdd_tests
                 // click on the Save For Later button
                 NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1)"));
                 uiSaveForLater.Click();
-
-                //System.Threading.Thread.Sleep(4000);
             }
             else
             {
                 // click on the Submit button
                 NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary~ .btn-primary+ .btn-primary"));
                 uiSubmit.Click();
-
-                //System.Threading.Thread.Sleep(4000);
             }
         }
 
