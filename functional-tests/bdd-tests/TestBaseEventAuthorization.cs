@@ -203,31 +203,30 @@ namespace bdd_tests
             if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
             {
                 NgWebElement uiEventCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(3) .ngb-tp-minute .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
-                uiEventCloseTime.Click();
+                IJavaScriptExecutor executor2 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor2.ExecuteScript("arguments[0].click();", uiEventCloseTime);
 
                 NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(5) .ngb-tp-minute .btn-link:nth-child(1) .ngb-tp-chevron"));
-                uiLiquorCloseTime.Click();
+                IJavaScriptExecutor executor3 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor3.ExecuteScript("arguments[0].click();", uiLiquorCloseTime);
             }
 
             // select terms and conditions checkbox
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            uiTermsAndConditions.Click();
+            IJavaScriptExecutor executor4 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor4.ExecuteScript("arguments[0].click();", uiTermsAndConditions);
 
             if ((eventType == "for a draft") || (eventType == "being validated"))
             {
                 // click on the Save For Later button
                 NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1)"));
                 uiSaveForLater.Click();
-
-                //System.Threading.Thread.Sleep(4000);
             }
             else
             {
                 // click on the Submit button
                 NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary~ .btn-primary+ .btn-primary"));
                 uiSubmit.Click();
-
-                //System.Threading.Thread.Sleep(4000);
             }
         }
 
