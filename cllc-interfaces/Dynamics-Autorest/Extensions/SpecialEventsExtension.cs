@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string workerId, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string workerId, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default)
         {
             if (workerId == null)
             {
@@ -190,10 +190,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string specialEventId, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string specialEventId, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
         }
 
-        public static partial class SpecialEventExtensions
+        public static class SpecialEventExtensions
         {
             /// <summary>
             /// Add reference to adoxio_specialevents
@@ -210,7 +210,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='odataid'>
             /// reference value
             /// </param>
-            public static void AddReference(this ISpecialevents operations, string specialEventId, string fieldname, Odataid odataid = default(Odataid))
+            public static void AddReference(this ISpecialevents operations, string specialEventId, string fieldname, Odataid odataid = default)
             {
                 operations.AddReferenceAsync(specialEventId, fieldname, odataid).GetAwaiter().GetResult();
             }
@@ -233,7 +233,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task AddReferenceAsync(this ISpecialevents operations, string specialEventId, string fieldname, Odataid odataid = default(Odataid), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task AddReferenceAsync(this ISpecialevents operations, string specialEventId, string fieldname, Odataid odataid = default, CancellationToken cancellationToken = default)
             {
                 (await operations.AddReferenceWithHttpMessagesAsync(specialEventId, fieldname, odataid, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }

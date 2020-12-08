@@ -546,11 +546,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         break;
 
                     }
-                    else
-                    {
-                        _logger.LogError($"ERROR in getting folder files for entity {entityName}, entityId {entityId}, docuemnt type {documentType} ");
-                    }
-                        
+
+                    _logger.LogError($"ERROR in getting folder files for entity {entityName}, entityId {entityId}, docuemnt type {documentType} ");
+
                 }
                 catch (Exception e)
                 {

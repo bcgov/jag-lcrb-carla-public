@@ -73,7 +73,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set the application invoice trigger to create an invoice
             // no need to copy the whole record over as we are doing a Patch for a single field.
-            MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
+            MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
             {
                 // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
                 AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes
@@ -140,11 +140,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 return new JsonResult(redirectUrl);
             }
-            else
-            {
-                _logger.Error($"GetPaymentUrl failed - Unable to get invoice for application {id}");
-                return NotFound();
-            }
+
+            _logger.Error($"GetPaymentUrl failed - Unable to get invoice for application {id}");
+            return NotFound();
         }
 
         /// <summary>
@@ -188,7 +186,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set the application invoice trigger to create an invoice
             // no need to copy the whole record over as we are doing a Patch for a single field.
-            MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
+            MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
             {
                 // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
                 AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes
@@ -263,11 +261,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 return new JsonResult(redirectUrl);
             }
-            else
-            {
-                _logger.Error("GetPaymentUrl failed - Unable to get invoice for application {id}");
-                return NotFound();
-            }
+
+            _logger.Error("GetPaymentUrl failed - Unable to get invoice for application {id}");
+            return NotFound();
         }
 
         /// <summary>
@@ -297,7 +293,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     try
                     {
-                        MicrosoftDynamicsCRMadoxioApplication fixApplication = new MicrosoftDynamicsCRMadoxioApplication()
+                        MicrosoftDynamicsCRMadoxioApplication fixApplication = new MicrosoftDynamicsCRMadoxioApplication
                         {
                             AdoxioLicencefeeinvoicepaid = true
                         };
@@ -320,7 +316,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (invoice2 != null && invoice2.Statecode == (int)Adoxio_invoicestates.Cancelled)
                 {
                     // set the application invoice trigger to create an invoice                    
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication()
+                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
                     {
                         // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
                         AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes
@@ -389,11 +385,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 return new JsonResult(redirectUrl);
             }
-            else
-            {
-                _logger.Error($"No invoice found for application {id}");
-                return NotFound();
-            }
+
+            _logger.Error($"No invoice found for application {id}");
+            return NotFound();
         }
 
         /// <summary>
@@ -456,7 +450,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice()
+                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
                     {
                         Statecode = (int?)Adoxio_invoicestates.Paid,
                         Statuscode = (int?)Adoxio_invoicestatuses.Paid,
@@ -475,10 +469,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (httpOperationException);
                     }
 
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication()
+                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
                     {
                         // set the Application payment status
-                        AdoxioPaymentrecieved = (bool?)true,
+                        AdoxioPaymentrecieved = true,
                         AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC,
                         AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes
                     };
@@ -502,7 +496,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.Debug("Transaction NOT approved");
 
                     // set invoice status to Cancelled
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice()
+                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
                     {
                         Statecode = (int?)Adoxio_invoicestates.Cancelled,
                         Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
@@ -518,7 +512,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (httpOperationException);
                     }
                     // set the Application invoice status back to No
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication()
+                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
                     {
                         AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
                     };
@@ -606,7 +600,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice()
+                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
                     {
                         // set invoice status to Complete
                         Statecode = (int?)Adoxio_invoicestates.Paid,
@@ -625,7 +619,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     // set the Application payment status
-                    MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
+                    MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
                     {
                         AdoxioLicencefeeinvoicepaid = true
                     };
@@ -654,7 +648,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.Debug("Transaction NOT approved");
 
-                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice()
+                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
                     {
                         // set invoice status to Cancelled
                         Statecode = (int?)Adoxio_invoicestates.Cancelled,
@@ -674,7 +668,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
                     // set the Application invoice status back to No
-                    MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
+                    MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
                     {
                         AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.No
                     };
@@ -777,7 +771,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice()
+                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
                     {
                         Statecode = (int?)Adoxio_invoicestates.Paid,
                         Statuscode = (int?)Adoxio_invoicestatuses.Paid,
@@ -796,14 +790,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (httpOperationException);
                     }
 
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication()
+                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
                     {
                         // set the Application payment status
                         AdoxioPrimaryapplicationinvoicepaid = 1
                     };
                     if (invoiceType == secondary)
                     {
-                        adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication()
+                        adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
                         {
                             // set the Application payment status
                             AdoxioSecondaryapplicationinvoicepaid = 1
@@ -830,7 +824,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.Debug("Transaction NOT approved");
 
                     // set invoice status to Cancelled
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice()
+                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
                     {
                         Statecode = (int?)Adoxio_invoicestates.Cancelled,
                         Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
@@ -846,7 +840,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (httpOperationException);
                     }
                     // set the Application invoice status back to No
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication()
+                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
                     {
                         AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
                     };
@@ -889,12 +883,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return null;
             }
-            else
+
+            if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue))
             {
-                if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue))
-                {
-                    return null;
-                }
+                return null;
             }
 
             return dynamicsApplication;
@@ -921,12 +913,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return null;
             }
-            else
+
+            if (worker._adoxioContactidValue != userSettings.ContactId)
             {
-                if (worker._adoxioContactidValue != userSettings.ContactId)
-                {
-                    return null;
-                }
+                return null;
             }
 
             return worker;
@@ -1000,7 +990,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound("Payment already made");
             }
             // set the application invoice trigger to create an invoice            
-            MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker()
+            MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
             {
                 // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
                 AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes
@@ -1124,7 +1114,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice()
+                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
                     {
                         // set invoice status to Complete
                         Statecode = (int?)Adoxio_invoicestates.Paid,
@@ -1141,7 +1131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // fail 
                         throw (httpOperationException);
                     }
-                    MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker()
+                    MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
                     {
                         // set the Application payment status
                         AdoxioPaymentreceived = 1,
@@ -1169,7 +1159,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.Debug("Transaction NOT approved");
 
                     // set invoice status to Cancelled
-                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice()
+                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
                     {
                         Statecode = (int?)Adoxio_invoicestates.Cancelled,
                         Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
@@ -1187,7 +1177,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
                     // set the Application invoice status back to No
-                    MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker()
+                    MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
                     {
                         // set the Application payment status
                         AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
