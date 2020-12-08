@@ -34,7 +34,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             // liquor service ends after 2am (but not community event)
             if (item.EventType != EventType.Community)
             {
-                item.Schedules?.ForEach((schedule) =>
+                item.Schedules?.ForEach(schedule =>
                 {
                     if (schedule.ServiceEndDateTime.HasValue)
                     {
@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                         {
                             hwZone = TimeZoneInfo.FindSystemTimeZoneById("America/Vancouver");
                         }
-                        catch (System.TimeZoneNotFoundException)
+                        catch (TimeZoneNotFoundException)
                         {
                             hwZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
                         }
@@ -65,12 +65,12 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         // Converts a dynamics entity into a view model
-        public static ViewModels.LicenceEvent ToViewModel(this MicrosoftDynamicsCRMadoxioEvent item, IDynamicsClient dynamicsClient)
+        public static LicenceEvent ToViewModel(this MicrosoftDynamicsCRMadoxioEvent item, IDynamicsClient dynamicsClient)
         {
-            ViewModels.LicenceEvent result = null;
+            LicenceEvent result = null;
             if (item != null)
             {
-                result = new ViewModels.LicenceEvent();
+                result = new LicenceEvent();
                 if (item.AdoxioEventid != null)
                 {
                     result.Id = item.AdoxioEventid;
@@ -187,7 +187,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
         // Converts a view model into a dynamics entity
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioEvent to, ViewModels.LicenceEvent from)
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioEvent to, LicenceEvent from)
         {
             to.AdoxioEventid = from.Id;
             to.AdoxioName = from.Name;
