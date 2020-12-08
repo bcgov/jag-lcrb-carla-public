@@ -56,7 +56,8 @@ namespace bdd_tests
 
             // click on the sign temporary change applications checkbox
             NgWebElement uiCheckbox1 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSignTemporaryChangeApplications']"));
-            uiCheckbox1.Click();
+            IJavaScriptExecutor executor2 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor2.ExecuteScript("arguments[0].click();", uiCheckbox1);
 
             // click on the obtain licence info from branch checkbox
             NgWebElement uiCheckbox2 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanObtainLicenceInformation']"));
