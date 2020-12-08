@@ -40,7 +40,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result = new ViewModels.TiedHouseAssociation();
                 if (association.AdoxioTiedhouseassociationid != null)
                 {
-                    result.Id = association.AdoxioTiedhouseassociationid.ToString();
+                    result.Id = association.AdoxioTiedhouseassociationid;
                 }
 
                 result.Id = association.AdoxioTiedhouseassociationid;
