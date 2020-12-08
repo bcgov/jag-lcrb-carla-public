@@ -511,7 +511,8 @@ namespace bdd_tests
 
             // click on the Submit & Pay button
             NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
-            uiSubmitAndPay.Click();
+            IJavaScriptExecutor executor13 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor13.ExecuteScript("arguments[0].click();", uiSubmitAndPay);
 
             MakePayment();
 
