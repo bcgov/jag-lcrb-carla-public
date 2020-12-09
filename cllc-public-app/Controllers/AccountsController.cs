@@ -401,6 +401,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Guid tryParseOutGuid;
 
             bool createContact = true;
+            bool mustCreateContactToAccountLink = false;
 
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -497,7 +498,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(accountSiteminderGuid);
             _logger.LogDebug(LoggingEvents.HttpGet, "Account by siteminder business guid: " + JsonConvert.SerializeObject(account));
 
-            if (account == null) // do a deep create.  create 3 objects at once.
+            if (account == null) // do a deep create.  create 2 objects at once.
             {
                 _logger.LogDebug(LoggingEvents.HttpGet, "Account is null. Do a deep create of 3 objects at once.");
                 // create a new account
@@ -511,7 +512,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(accountSiteminderGuid);
 
                 account.AdoxioExternalid = sanitizedAccountSiteminderId;
-                account.Primarycontactid = userContact;
+                // 12/8/2020 - GW - Remove the primary contact element as that will cause the create to fail.
+
+                mustCreateContactToAccountLink = true;
+
                 account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Applicant;
 
                 if (bceidBusiness != null)
@@ -571,15 +575,54 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 account.Accountid = legalEntity._adoxioAccountValue;
 
-                
+                if (string.IsNullOrEmpty(userContact.Contactid))
+                {
+                    // create the contact.
+                    try
+                    {
+                        var createdContact = _dynamicsClient.Contacts.Create(userContact);
+                        userContact.Contactid = createdContact.Contactid;
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error creating contact for account");
+                        throw new HttpOperationException("Error creating contact for account");
+                    }
+
+                }
+
+                // create the account primary contact relationship.
+                if (mustCreateContactToAccountLink)
+                {
+                    var patchContact = new MicrosoftDynamicsCRMcontact()
+                    {
+                        ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid)
+                    };
+                    try
+                    {
+                        _dynamicsClient.Contacts.Update(userContact.Contactid, patchContact);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error setting primary contact for account");
+                            throw new HttpOperationException("Error setting primary contact for account");
+                        
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error binding account to contact");
+                        throw new Exception("Error binding account to contact");
+                    }
+
+                    // the contact -> account link will be created below.
+
+                }
 
                 // create the sharepoint document location for the account
 
                 var accountFolderName = await _dynamicsClient.GetFolderName("account", account.Accountid).ConfigureAwait(true);
 
                 // create the folder for the account
-
-                
 
                 _dynamicsClient.CreateEntitySharePointDocumentLocation("account", account.Accountid, accountFolderName, accountFolderName);
 
@@ -589,12 +632,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     legalEntity.AdoxioAccount = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(account.Accountid));
                 }
 
-                if (legalEntity.AdoxioAccount.Primarycontactid == null)
-                {
-                    legalEntity.AdoxioAccount.Primarycontactid = await _dynamicsClient.GetContactById(Guid.Parse(legalEntity.AdoxioAccount._primarycontactidValue));
-                }
-
-                userContact.Contactid = legalEntity.AdoxioAccount._primarycontactidValue;
+ 
 
                 legalEntityString = JsonConvert.SerializeObject(legalEntity);
                 _logger.LogDebug("Legal Entity after creation in dynamics --> " + legalEntityString);

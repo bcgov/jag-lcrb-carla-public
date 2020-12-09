@@ -499,6 +499,9 @@ namespace bdd_tests
                 uiRenewalKeyPersonnelNo.Click();
             }
 
+            // temporary fix
+            System.Threading.Thread.Sleep(5000);
+
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
             uiAuthorizedToSubmit.Click();
