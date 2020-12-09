@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this.db = db;
         }
 
-        [HttpGet()]
+        [HttpGet]
         [AllowAnonymous]
         public JsonResult GetVoteQuestions()
         {
@@ -31,10 +31,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
-            else
-            {
-                return new JsonResult(result);
-            }
+
+            return new JsonResult(result);
         }
 
         [HttpPost("{slug}/vote")]

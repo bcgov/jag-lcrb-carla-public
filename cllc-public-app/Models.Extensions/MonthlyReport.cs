@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 return null;
             }
 
-            MonthlyReport monthlyReportVM = new MonthlyReport()
+            MonthlyReport monthlyReportVM = new MonthlyReport
             {
                 licenseId = dynamicsMonthlyReport._adoxioLicenceidValue,
                 licenseNumber = dynamicsMonthlyReport.AdoxioLicencenumber,
@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 foreach (var inventoryReport in inventoryReports)
                 {
                     MicrosoftDynamicsCRMadoxioCannabisproductadmin product = dynamicsClient.Cannabisproductadmins.GetByKey(inventoryReport._adoxioProductidValue);
-                    InventorySalesReport inv = new InventorySalesReport()
+                    InventorySalesReport inv = new InventorySalesReport
                     {
                         product = product.AdoxioName,
                         ProductDescription = product.AdoxioDescription,

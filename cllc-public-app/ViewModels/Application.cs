@@ -406,8 +406,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
 
         public GeneralYesNo? InvoiceTrigger { get; set; } //adoxio_invoicetrigger
-        public ViewModels.Account Applicant { get; set; }
-        public ViewModels.License AssignedLicence { get; set; }
+        public Account Applicant { get; set; }
+        public License AssignedLicence { get; set; }
         public string AdditionalPropertyInformation { get; set; } //adoxio_additionalpropertyinformation
         public string InvoiceId;
         public string SecondaryInvoiceId;
@@ -437,7 +437,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string JobNumber { get; set; } //adoxio_jobnumber
 
         public string LicenseType { get; set; } //_adoxio_licencetype_value		
-        public ViewModels.Invoice LicenceFeeInvoice { get; set; }
+        public Invoice LicenceFeeInvoice { get; set; }
         public bool LicenceFeeInvoicePaid { get; set; }
 
         public DateTimeOffset? ModifiedOn { get; set; }
@@ -482,12 +482,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public ServiceHours? ServiceHoursSaturdayClose { get; set; }
 
-        public ViewModels.ApplicationType ApplicationType { get; set; }
+        public ApplicationType ApplicationType { get; set; }
 
         public TiedHouseConnection TiedHouse { get; set; }
-        public ViewModels.PoliceJurisdiction PoliceJurisdiction { get; set; }
-        public ViewModels.IndigenousNation IndigenousNation { get; set; }
-        public ViewModels.ServiceHours ServiceHours { get; set; }
+        public PoliceJurisdiction PoliceJurisdiction { get; set; }
+        public IndigenousNation IndigenousNation { get; set; }
+        public ServiceHours ServiceHours { get; set; }
 
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -535,7 +535,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ValueNotChanged? RenewalThirdParty { get; set; }
 
 
-        public System.DateTimeOffset? Establishmentopeningdate { get; set; }
+        public DateTimeOffset? Establishmentopeningdate { get; set; }
         public bool? IsReadyValidInterest { get; set; }
         public bool? IsReadyWorkers { get; set; }
         public bool? IsReadyNameBranding { get; set; }
