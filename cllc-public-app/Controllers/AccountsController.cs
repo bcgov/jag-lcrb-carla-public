@@ -400,6 +400,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Guid tryParseOutGuid;
 
             bool createContact = true;
+            bool mustCreateContactToAccountLink = false;
 
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -496,7 +497,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(accountSiteminderGuid);
             _logger.LogDebug(LoggingEvents.HttpGet, "Account by siteminder business guid: " + JsonConvert.SerializeObject(account));
 
-            if (account == null) // do a deep create.  create 3 objects at once.
+            if (account == null) // do a deep create.  create 2 objects at once.
             {
                 _logger.LogDebug(LoggingEvents.HttpGet, "Account is null. Do a deep create of 3 objects at once.");
                 // create a new account
@@ -510,7 +511,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(accountSiteminderGuid);
 
                 account.AdoxioExternalid = sanitizedAccountSiteminderId;
-                account.Primarycontactid = userContact;
+                // 12/8/2020 - GW - Remove the primary contact element as that will cause the create to fail.
+
+                mustCreateContactToAccountLink = true;
+
                 account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Applicant;
 
                 if (bceidBusiness != null)
@@ -569,6 +573,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 account.Accountid = legalEntity._adoxioAccountValue;
+
+                // create the account primary contact relationship.
+                if (mustCreateContactToAccountLink)
+                {
+                    var patchAccount = new MicrosoftDynamicsCRMaccount()
+                    {
+                        PrimaryContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", userContact.Contactid)
+                    };
+                    try
+                    {
+                        _dynamicsClient.Accounts.Update(account.Accountid, patchAccount);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error binding account to contact");
+                            throw new HttpOperationException("Error binding account to contact");
+                        
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error binding account to contact");
+                        throw new Exception("Error binding account to contact");
+                    }
+
+                    // the contact -> account link will be created below.
+
+                }
+
 
                 
 
