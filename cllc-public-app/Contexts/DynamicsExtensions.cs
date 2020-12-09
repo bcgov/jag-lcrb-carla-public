@@ -105,11 +105,11 @@ namespace Gov.Lclb.Cllb.Interfaces
 }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error reading LegalEntityChangelog");
+                _logger.LogError(httpOperationException, "Error reading LegalEntityChangelog");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while reading LegalEntityChangelog");
+                _logger.LogError(e, "Unexpected Exception while reading LegalEntityChangelog");
             }
             return result;
         }
@@ -177,11 +177,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error while patching legal entity");
+                _logger.LogError(httpOperationException, "Error while patching legal entity");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while patching legal entity");
+                _logger.LogError(e, "Unexpected Exception while patching legal entity");
             }
 
             if (response != null && response.Value != null)
@@ -326,7 +326,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             string result = "Unknown";
             // source for mappings:  https://msdn.microsoft.com/en-us/library/gg334472.aspx
-            Dictionary<string, string> classidMap = new Dictionary<string, string>()
+            Dictionary<string, string> classidMap = new Dictionary<string, string>
             {
                 { "{F93A31B2-99AC-4084-8EC2-D4027C31369A}","AccessPrivilegeControl" },
                 { "{3F4E2A56-F102-4B4D-AB9C-F1574CA5BFDA}","AccessTeamEntityPicker" },
@@ -793,21 +793,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 throw new Exception("ERROR getting ApplicationsForLicenceByApplicant - Applicant cannot be null");
             }
-            else
-            {
-                var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
-                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused}";
-                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
-                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
-                try
-                {
-                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
-                }
-                catch (HttpOperationException e)
-                {
-                    dynamicsApplicationList = null;
-                }
+            var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
+            filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused}";
+            filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
+            filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+            try
+            {
+                dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
+            }
+            catch (HttpOperationException e)
+            {
+                dynamicsApplicationList = null;
             }
             return dynamicsApplicationList;
         }
@@ -826,21 +824,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 throw new Exception("ERROR getting ApplicationsForLicenceByApplicant - Applicant cannot be null");
             }
-            else
-            {
-                var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
-                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused}";
-                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
-                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
-                try
-                {
-                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
-                }
-                catch (HttpOperationException)
-                {
-                    dynamicsApplicationList = null;
-                }
+            var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
+            filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused}";
+            filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
+            filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+            try
+            {
+                dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
+            }
+            catch (HttpOperationException)
+            {
+                dynamicsApplicationList = null;
             }
             return dynamicsApplicationList;
         }
@@ -973,7 +969,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static MicrosoftDynamicsCRMadoxioLegalentity GetAdoxioLegalentityByAccountId(this IDynamicsClient _dynamicsClient, Guid id)
         {
             MicrosoftDynamicsCRMadoxioLegalentity result = null;
-            string accountFilter = "_adoxio_account_value eq " + id.ToString();
+            string accountFilter = "_adoxio_account_value eq " + id;
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Legalentities.Get(filter: accountFilter).Value;
             result = legalEntities.FirstOrDefault();
             return result;
@@ -1167,7 +1163,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                                     if (metadata == null)
                                     {
-                                        formField.options.Add(new Public.ViewModels.OptionMetadata() { label = "INVALID PICKLIST", value = 0 });
+                                        formField.options.Add(new Public.ViewModels.OptionMetadata { label = "INVALID PICKLIST", value = 0 });
                                     }
                                     else
                                     {
@@ -1189,11 +1185,11 @@ namespace Gov.Lclb.Cllb.Interfaces
                                                 string label = option.Label?.UserLocalizedLabel?.Label;
                                                 if (value == null || label == null)
                                                 {
-                                                    formField.options.Add(new Public.ViewModels.OptionMetadata() { label = "INVALID PICKLIST", value = 0 });
+                                                    formField.options.Add(new Public.ViewModels.OptionMetadata { label = "INVALID PICKLIST", value = 0 });
                                                 }
                                                 else
                                                 {
-                                                    formField.options.Add(new Public.ViewModels.OptionMetadata() { label = label, value = value.Value });
+                                                    formField.options.Add(new Public.ViewModels.OptionMetadata { label = label, value = value.Value });
                                                 }
 
                                             }
@@ -1281,7 +1277,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     // Update the contact with info from Siteminder
                     var contactVM = new Public.ViewModels.Contact();
                     contactVM.CopyHeaderValues(Headers);
-                    _logger.LogDebug(">>>> After reading headers: " + Newtonsoft.Json.JsonConvert.SerializeObject(contactVM));
+                    _logger.LogDebug(">>>> After reading headers: " + JsonConvert.SerializeObject(contactVM));
                     MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
                     patchContact.CopyValues(contactVM);
                     try
@@ -1562,7 +1558,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             foreach (var licence in licences)
             {
                 if (licence.AdoxioLicenceType?.AdoxioCategory != null &&
-                    (Public.ViewModels.ApplicationTypeCategory)licence.AdoxioLicenceType?.AdoxioCategory == Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory.Liquor)
+                    (Public.ViewModels.ApplicationTypeCategory)licence.AdoxioLicenceType?.AdoxioCategory == Public.ViewModels.ApplicationTypeCategory.Liquor)
                 {
                     liquorCount++;
                 }
@@ -1609,7 +1605,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
                 else
                 {
-                    result = (Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory)application.AdoxioApplicationTypeId.AdoxioCategory == Gov.Lclb.Cllb.Public.ViewModels.ApplicationTypeCategory.Liquor;
+                    result = (Public.ViewModels.ApplicationTypeCategory)application.AdoxioApplicationTypeId.AdoxioCategory == Public.ViewModels.ApplicationTypeCategory.Liquor;
                 }
                 
             }

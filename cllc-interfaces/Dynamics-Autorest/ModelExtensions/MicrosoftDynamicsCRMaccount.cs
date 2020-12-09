@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
-    
+
     class MicrosoftDynamicsCRMaccountMetadata
     {
         [JsonProperty(PropertyName = "adoxio_dateoperationsceased")]
@@ -14,11 +14,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonConverter(typeof(SimpleDateTimeConverter))]
         public System.DateTimeOffset? AdoxioDateinvolvementceased { get; set; }
 
-        [JsonProperty(PropertyName = "adoxio_datesignordismissed")]
-        [JsonConverter(typeof(SimpleDateTimeConverter))]
-        public System.DateTimeOffset? AdoxioDatesignordismissed { get; set; }
+        // 2020-12-08 ASR - Removed extra annotations for "adoxio_datesignordismissed" to fix data serialization error
     }
-    
+
     [MetadataType(typeof(MicrosoftDynamicsCRMaccountMetadata))]
 
     public partial class MicrosoftDynamicsCRMaccount
@@ -29,6 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_account_adoxio_legalentity_Account@odata.bind")]
         public string AdoxioAccountAdoxioLegalentityAccountODataBind { get; set; }
 
-
+        [JsonProperty(PropertyName = "primarycontactid@odata.bind")]
+        public string PrimaryContactIdODataBind { get; set; }
     }
 }

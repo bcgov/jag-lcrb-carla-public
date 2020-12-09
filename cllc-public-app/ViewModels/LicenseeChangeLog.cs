@@ -59,8 +59,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string BusinessNameOld { get; set; }
         public string TitleNew { get; set; }
         public string TitleOld { get; set; }
-        public System.DateTimeOffset? DateofBirthNew { get; set; }
-        public System.DateTimeOffset? DateofBirthOld { get; set; }
+        public DateTimeOffset? DateofBirthNew { get; set; }
+        public DateTimeOffset? DateofBirthOld { get; set; }
 
         public Decimal? AnnualMembershipFee { get; set; }
         public int? NumberOfMembers { get; set; }

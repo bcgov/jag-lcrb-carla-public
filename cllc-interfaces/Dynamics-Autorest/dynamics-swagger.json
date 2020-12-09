@@ -28435,6 +28435,9 @@
           "format": "decimal",
           "type": "number"
         },
+        "adoxio_corporatestructureusingleconnection": {
+          "type": "string"
+        },
         "merged": {
           "type": "boolean"
         },
@@ -32952,6 +32955,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_securityscreeningcompletenessusingleconne": {
+          "type": "string"
+        },
         "adoxio_checklistaffiliatesassessed": {
           "format": "int32",
           "type": "integer"
@@ -34926,6 +34932,9 @@
           "type": "integer"
         },
         "adoxio_isshowfinancialintegrityformupload": {
+          "type": "boolean"
+        },
+        "adoxio_isstructuralchange": {
           "type": "boolean"
         },
         "adoxio_isdefault": {
@@ -52145,71 +52154,86 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_specialeventlocation",
       "type": "object",
       "properties": {
-        "statecode": {
+        "statuscode": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_eventlocationstreet1": {
-          "type": "string"
-        },
-        "adoxio_eventlocationstreet2": {
-          "type": "string"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
-        "adoxio_specialeventlocationid": {
-          "type": "string"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_eventlocationprovince": {
+        "_modifiedonbehalfby_value": {
           "type": "string"
         },
         "modifiedon": {
           "format": "date-time",
           "type": "string"
         },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
         "versionnumber": {
           "format": "int64",
           "type": "string"
         },
-        "_owningbusinessunit_value": {
-          "type": "string"
-        },
-        "adoxio_locationname": {
-          "type": "string"
-        },
-        "_owningteam_value": {
-          "type": "string"
-        },
-        "_modifiedonbehalfby_value": {
-          "type": "string"
-        },
-        "overriddencreatedon": {
+        "createdon": {
           "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_locationdescription": {
           "type": "string"
         },
         "_owninguser_value": {
           "type": "string"
         },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_locationdescription": {
+          "type": "string"
+        },
         "adoxio_eventlocationcity": {
+          "type": "string"
+        },
+        "adoxio_eventlocationpostalcode": {
+          "type": "string"
+        },
+        "adoxio_maximumnumberofguests": {
+          "type": "string"
+        },
+        "adoxio_eventlocationstreet2": {
+          "type": "string"
+        },
+        "adoxio_eventlocationprovince": {
+          "type": "string"
+        },
+        "statecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_modifiedby_value": {
           "type": "string"
         },
         "_createdonbehalfby_value": {
           "type": "string"
         },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_eventlocationstreet1": {
+          "type": "string"
         },
-        "createdon": {
-          "format": "date-time",
+        "adoxio_locationname": {
+          "type": "string"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "adoxio_specialeventlocationid": {
+          "type": "string"
+        },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "adoxio_permitnumber": {
+          "type": "string"
+        },
+        "_adoxio_specialeventid_value": {
           "type": "string"
         },
         "_createdby_value": {
@@ -52219,24 +52243,12 @@
           "format": "int32",
           "type": "integer"
         },
-        "_adoxio_specialeventid_value": {
-          "type": "string"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
         "importsequencenumber": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_eventlocationpostalcode": {
-          "type": "string"
-        },
-        "adoxio_maximumnumberofguests": {
-          "type": "string"
-        },
-        "_modifiedby_value": {
+        "overriddencreatedon": {
+          "format": "date-time",
           "type": "string"
         },
         "createdby": {
@@ -52529,6 +52541,9 @@
           "type": "string"
         },
         "adoxio_responsibleindividuallastname": {
+          "type": "string"
+        },
+        "adoxio_cancellationreason": {
           "type": "string"
         },
         "_createdonbehalfby_value": {
@@ -65391,6 +65406,9 @@
         "fax": {
           "type": "string"
         },
+        "address3_line2": {
+          "type": "string"
+        },
         "address2_name": {
           "type": "string"
         },
@@ -65503,9 +65521,6 @@
           "type": "string"
         },
         "subscriptionid": {
-          "type": "string"
-        },
-        "address3_line2": {
           "type": "string"
         },
         "adoxio_secondaryidnumber": {
@@ -66220,6 +66235,9 @@
           "type": "string"
         },
         "_adoxio_relatedlicence_value": {
+          "type": "string"
+        },
+        "adoxio_corporatestructureusingleconnection": {
           "type": "string"
         },
         "_owningbusinessunit_value": {

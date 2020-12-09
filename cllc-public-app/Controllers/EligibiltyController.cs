@@ -72,7 +72,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="form"></param>
         /// <returns></returns>
         [HttpPost("submit")]
-        public async Task<IActionResult> SubmitEligibilityForm([FromBody] ViewModels.EligibilityForm form)
+        public async Task<IActionResult> SubmitEligibilityForm([FromBody] EligibilityForm form)
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);

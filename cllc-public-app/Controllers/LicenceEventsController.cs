@@ -47,8 +47,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Create an event
         /// </summary>
         /// <returns></returns>
-        [HttpPost()]
-        public async Task<IActionResult> CreateLicenceEvent([FromBody] ViewModels.LicenceEvent item)
+        [HttpPost]
+        public async Task<IActionResult> CreateLicenceEvent([FromBody] LicenceEvent item)
         {
             MicrosoftDynamicsCRMadoxioEvent dynamicsEvent = new MicrosoftDynamicsCRMadoxioEvent();
             if (item?.Status == LicenceEventStatus.Submitted)
@@ -154,7 +154,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateLicenceEvent([FromBody] ViewModels.LicenceEvent item, string id)
+        public async Task<IActionResult> UpdateLicenceEvent([FromBody] LicenceEvent item, string id)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -298,7 +298,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             MicrosoftDynamicsCRMadoxioEventCollection dynamicsEvents;
-            List<ViewModels.LicenceEvent> responseEvents = new List<ViewModels.LicenceEvent>();
+            List<LicenceEvent> responseEvents = new List<LicenceEvent>();
 
             string filter = $"_adoxio_account_value eq {userSettings.AccountId} and _adoxio_licence_value eq {licenceId}";
             try
@@ -371,7 +371,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 hwZone = TimeZoneInfo.FindSystemTimeZoneById("America/Vancouver");
             }
-            catch (System.TimeZoneNotFoundException)
+            catch (TimeZoneNotFoundException)
             {
                 hwZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
             }
@@ -459,7 +459,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         _logger.LogError(e, "Error uploading PDF");
                     }
 
-                    return File(data, "application/pdf", $"authorization.pdf");
+                    return File(data, "application/pdf", "authorization.pdf");
                 }
                 return new NotFoundResult();
             }

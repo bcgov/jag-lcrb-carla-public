@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string federalReportExportId, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string federalReportExportId, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default)
         {
             if (federalReportExportId == null)
             {
@@ -192,14 +192,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string federalReportExportId, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string federalReportExportId, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
     }
 
 
     /// <summary>
     /// Extension methods for FederalReportExport.
     /// </summary>
-    public static partial class FederalReportExportExtension
+    public static class FederalReportExportExtension
     {
         /// <summary>
         /// Add reference to adoxio_federalreportexport
@@ -216,7 +216,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='odataid'>
         /// reference value
         /// </param>
-        public static void AddReference(this IFederalreportexports operations, string federalReportExportId, string fieldname, Odataid odataid = default(Odataid))
+        public static void AddReference(this IFederalreportexports operations, string federalReportExportId, string fieldname, Odataid odataid = default)
         {
             operations.AddReferenceAsync(federalReportExportId, fieldname, odataid).GetAwaiter().GetResult();
         }
@@ -239,7 +239,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public static async Task AddReferenceAsync(this IFederalreportexports operations, string federalReportExportId, string fieldname, Odataid odataid = default(Odataid), CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task AddReferenceAsync(this IFederalreportexports operations, string federalReportExportId, string fieldname, Odataid odataid = default, CancellationToken cancellationToken = default)
         {
             (await operations.AddReferenceWithHttpMessagesAsync(federalReportExportId, fieldname, odataid, null, cancellationToken).ConfigureAwait(false)).Dispose();
         }

@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 if (lists != null && lists.Count > 0)
                 {
                     list = lists.FirstOrDefault();
-                    result = new Newsletter()
+                    result = new Newsletter
                     {
                         Slug = list.Listname,
                         Id = Guid.Parse(list.Listid),
@@ -87,7 +87,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 if (subscriber == null)
                 {
                     // add the new subscriber
-                    MicrosoftDynamicsCRMlead newLead = new MicrosoftDynamicsCRMlead()
+                    MicrosoftDynamicsCRMlead newLead = new MicrosoftDynamicsCRMlead
                     {
                         Emailaddress1 = email,
                         Firstname = email                        
@@ -129,19 +129,11 @@ namespace Gov.Lclb.Cllb.Public.Contexts
 
                     if (notFound)
                     {
-                        try
+                        EntityIdReference oDataId = new EntityIdReference
                         {
-                            EntityIdReference oDataId = new EntityIdReference()
-                            {
-                                EntityId = subscriber.Leadid
-                            };
-                            dynamicsClient.Lists.AddMember(newsletter.Id.ToString(), oDataId);
-
-                        }
-                        catch (HttpOperationException)
-                        {
-                            throw;
-                        }
+                            EntityId = subscriber.Leadid
+                        };
+                        dynamicsClient.Lists.AddMember(newsletter.Id.ToString(), oDataId);
                     }
                     
                 }
@@ -176,7 +168,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         {
             if (newsletter != null && context != null)
             {
-                MicrosoftDynamicsCRMlist list = new MicrosoftDynamicsCRMlist()
+                MicrosoftDynamicsCRMlist list = new MicrosoftDynamicsCRMlist
                 {
                     Purpose = newsletter.Title,
                     Description = newsletter.Description,
@@ -244,7 +236,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         /// </summary>
         /// <param name="context"></param>
         /// <param name="regionInfo"></param>
-        public static void UpdateSeedNewsletterInfo(this IDynamicsClient context, Models.Newsletter newsletterInfo)
+        public static void UpdateSeedNewsletterInfo(this IDynamicsClient context, Newsletter newsletterInfo)
         {
             Newsletter newsletter = context.GetNewsletterBySlug(newsletterInfo.Slug);
             if (newsletter == null)
@@ -254,7 +246,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             else
             {
                 // update Newsletter.
-                MicrosoftDynamicsCRMlist list = new MicrosoftDynamicsCRMlist()
+                MicrosoftDynamicsCRMlist list = new MicrosoftDynamicsCRMlist
                 {
                     Purpose = newsletterInfo.Title,
                     Description = newsletterInfo.Description,

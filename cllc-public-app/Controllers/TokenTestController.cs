@@ -19,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _configuration = configuration;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
         }
-        [HttpGet()]
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult GetToken()
         {
@@ -30,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string payload = "Sample token generated " + DateTime.Now.ToLongDateString();
 
             // encrypt that using two way encryption.
-            result += System.Net.WebUtility.UrlEncode(EncryptionUtility.EncryptString(payload, _encryptionKey));
+            result += WebUtility.UrlEncode(EncryptionUtility.EncryptString(payload, _encryptionKey));
 
             return new ContentResult
             {
