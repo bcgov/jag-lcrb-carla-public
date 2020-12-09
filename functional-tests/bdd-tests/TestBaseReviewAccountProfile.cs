@@ -55,14 +55,18 @@ namespace bdd_tests
             // enter the private/public corporation or society incorporation number
             if (businessType == " private corporation" || businessType == " society" || businessType == " public corporation")
             {
+                // enter incorporation number
                 NgWebElement uiCorpNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='bcIncorporationNumber']"));
                 uiCorpNumber.SendKeys(incorporationNumber);
 
+                // select date of incorporation (= today)
                 NgWebElement uiCalendar1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='dateOfIncorporationInBC']"));
-                uiCalendar1.Click();
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiCalendar1);
 
                 NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-                uiCalendar2.Click();
+                IJavaScriptExecutor executor2 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor2.ExecuteScript("arguments[0].click();", uiCalendar2);
             }
 
             // enter the physical street address 1
