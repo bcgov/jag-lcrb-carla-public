@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class InvoiceExtensions
     {
-        public static ViewModels.Invoice ToViewModel(this MicrosoftDynamicsCRMinvoice dynamicsInvoice)
+        public static Invoice ToViewModel(this MicrosoftDynamicsCRMinvoice dynamicsInvoice)
         {
             Invoice result = new Invoice();
 
@@ -65,7 +65,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }
 
-        public static void CopyValues(this MicrosoftDynamicsCRMinvoice to, ViewModels.Invoice from)
+        public static void CopyValues(this MicrosoftDynamicsCRMinvoice to, Invoice from)
         {
             to.Invoiceid = from.id;
             to.Name = from.name;

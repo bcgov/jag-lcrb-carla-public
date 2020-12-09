@@ -432,7 +432,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         if (contact == null)
                         {
                             // try by other means.
-                            var contactVM = new Public.ViewModels.Contact();
+                            var contactVM = new Contact();
                             contactVM.CopyHeaderValues(context.Request.Headers);
                             contact = _dynamicsClient.GetContactByContactVmBlankSmGuid(contactVM);
                         }
@@ -506,7 +506,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 folderName = account.GetDocumentFolderName();
                 logFolderName = WordSanitizer.Sanitize(folderName);
 
-                var createFolderRequest = new CreateFolderRequest()
+                var createFolderRequest = new CreateFolderRequest
                 {
                     EntityName = "account",
                     FolderName = folderName
@@ -536,7 +536,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 folderName = contact.GetDocumentFolderName();
                 logFolderName = WordSanitizer.Sanitize(folderName);
 
-                var createFolderRequest = new CreateFolderRequest()
+                var createFolderRequest = new CreateFolderRequest
                 {
                     EntityName = "contact",
                     FolderName = folderName
@@ -565,7 +565,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 folderName = worker.GetDocumentFolderName();
                 logFolderName = WordSanitizer.Sanitize(folderName);
 
-                var createFolderRequest = new CreateFolderRequest()
+                var createFolderRequest = new CreateFolderRequest
                 {
                     EntityName = "worker",
                     FolderName = folderName
@@ -590,13 +590,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
             FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
 
-            ViewModels.Contact contact = new ViewModels.Contact();
+            Contact contact = new Contact();
             contact.CopyHeaderValues(context.Request.Headers);
 
             MicrosoftDynamicsCRMcontact savedContact = _dynamicsClient.Contacts.GetByKey(userSettings.ContactId);
             if (savedContact.Address1Line1 != null && savedContact.Address1Line1 != contact.address1_line1)
             {
-                MicrosoftDynamicsCRMadoxioPreviousaddress prevAddress = new MicrosoftDynamicsCRMadoxioPreviousaddress()
+                MicrosoftDynamicsCRMadoxioPreviousaddress prevAddress = new MicrosoftDynamicsCRMadoxioPreviousaddress
                 {
                     AdoxioStreetaddress = savedContact.Address1Line1,
                     AdoxioProvstate = savedContact.Address1Stateorprovince,
@@ -623,10 +623,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             {
                 MicrosoftDynamicsCRMadoxioWorker savedWorker = workerCollection.Value[0];
 
-                ViewModels.Worker worker = new ViewModels.Worker();
+                Worker worker = new Worker();
                 worker.CopyHeaderValues(context.Request.Headers);
 
-                MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker()
+                MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
                 {
                     AdoxioFirstname = worker.firstname,
                     AdoxioLastname = worker.lastname,

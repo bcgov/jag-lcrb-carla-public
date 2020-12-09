@@ -105,7 +105,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsownerbusiness = from.IsOwnerBusiness;
             to.AdoxioIsownerhasvalidinterest = from.HasValidInterest;
             to.AdoxioIsownerwillhavevalidinterest = from.WillHaveValidInterest;
-            to.AdoxioZoningstatus = (int?)from.ZoningStatus;
+            to.AdoxioZoningstatus = @from.ZoningStatus;
 
             to.AdoxioIshaspatio = from.IsHasPatio;
 
@@ -156,7 +156,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioPatioisliquorcarried = from.PatioIsLiquorCarried;
             to.AdoxioPatioliquorcarrieddescription = from.PatioLiquorCarriedDescription;
             to.AdoxioPatioaccesscontroldescription = from.PatioAccessControlDescription;
-            to.AdoxioLocatedabovedescription = (int?)from.LocatedAboveDescription;
+            to.AdoxioLocatedabovedescription = @from.LocatedAboveDescription;
             to.AdoxioPatioservicebar = from.PatioServiceBar;
 
             to.AdoxioProposedestablishmentisalr = from.IsAlr;
@@ -184,7 +184,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
 
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.CovidApplication from)
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
         {
             to.AdoxioName = from.Name;
             //to.Adoxio_jobnumber = from.jobNumber;            
@@ -219,7 +219,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
         }
 
-        public static void CopyValuesForCovidApplication(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.CovidApplication from)
+        public static void CopyValuesForCovidApplication(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
         {
             to.CopyValues(from);
 
@@ -329,7 +329,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger)
         {
-            ViewModels.Application applicationVM = new ViewModels.Application()
+            ViewModels.Application applicationVM = new ViewModels.Application
             {
                 Name = dynamicsApplication.AdoxioName,
                 JobNumber = dynamicsApplication.AdoxioJobnumber,
@@ -544,7 +544,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             // id
             if (dynamicsApplication.AdoxioApplicationid != null)
             {
-                applicationVM.Id = dynamicsApplication.AdoxioApplicationid.ToString();
+                applicationVM.Id = dynamicsApplication.AdoxioApplicationid;
 
                 // service areas
                 var filter = $"_adoxio_applicationid_value eq {dynamicsApplication.AdoxioApplicationid}";
@@ -710,9 +710,9 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
 
-        public async static Task<ViewModels.CovidApplication> ToCovidViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger)
+        public async static Task<CovidApplication> ToCovidViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger)
         {
-            ViewModels.CovidApplication applicationVM = new ViewModels.CovidApplication()
+            CovidApplication applicationVM = new CovidApplication
             {
                 Name = dynamicsApplication.AdoxioName,
                 JobNumber = dynamicsApplication.AdoxioJobnumber,
@@ -771,7 +771,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             // id
             if (dynamicsApplication.AdoxioApplicationid != null)
             {
-                applicationVM.Id = dynamicsApplication.AdoxioApplicationid.ToString();
+                applicationVM.Id = dynamicsApplication.AdoxioApplicationid;
             }
 
 
@@ -816,7 +816,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static ApplicationSummary ToSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication)
         {
-            ApplicationSummary applicationSummary = new ViewModels.ApplicationSummary()
+            ApplicationSummary applicationSummary = new ApplicationSummary
             {
                 Name = dynamicsApplication.AdoxioName,
                 JobNumber = dynamicsApplication.AdoxioJobnumber,
@@ -841,7 +841,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             // id
             if (dynamicsApplication.AdoxioApplicationid != null)
             {
-                applicationSummary.Id = dynamicsApplication.AdoxioApplicationid.ToString();
+                applicationSummary.Id = dynamicsApplication.AdoxioApplicationid;
             }
 
             if (dynamicsApplication.Statuscode != null)

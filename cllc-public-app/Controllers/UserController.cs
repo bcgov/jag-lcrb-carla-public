@@ -72,8 +72,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // get details from the headers.
 
 
-                user.lastname = DynamicsExtensions.GetLastName(user.name);
-                user.firstname = DynamicsExtensions.GetFirstName(user.name);
+                user.lastname = user.name.GetLastName();
+                user.firstname = user.name.GetFirstName();
                 user.accountid = userSettings.AccountId;
 
                 string siteminderBusinessGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderBusinessGuidKey];

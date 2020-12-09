@@ -25,7 +25,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger = loggerFactory.CreateLogger(typeof(IndigenousNationsController));
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             try

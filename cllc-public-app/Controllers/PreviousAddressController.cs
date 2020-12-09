@@ -117,7 +117,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         // /// </summary>
         // /// <param name="viewModel"></param>
         // /// <returns></returns>
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> CreateAddress([FromBody] ViewModels.PreviousAddress item)
         {
 

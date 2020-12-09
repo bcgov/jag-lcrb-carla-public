@@ -49,6 +49,8 @@ namespace bdd_tests
             NgWebElement uiEmail = ngDriver.FindElement(By.CssSelector("input[formControlName='representativeEmail']"));
             uiEmail.SendKeys(email);
 
+            System.Threading.Thread.Sleep(3000);
+
             // click on the submit permanent change applications checkbox
             NgWebElement uiCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSubmitPermanentChangeApplications']"));
             uiCheckbox.Click();

@@ -641,10 +641,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             bool applicationIsPaid = (
                 result != null &&
                 (result._adoxioInvoiceValue == null || result.AdoxioPrimaryapplicationinvoicepaid == 1) &&
-                (result._adoxioSecondaryapplicationinvoiceValue== null || result.AdoxioSecondaryapplicationinvoicepaid == 1) 
+                (result._adoxioSecondaryapplicationinvoiceValue == null || result.AdoxioSecondaryapplicationinvoicepaid == 1)
                 );
 
-            if ((result == null || applicationIsPaid) && applicationType != null )
+            if ((result == null || applicationIsPaid) && applicationType != null)
             {
                 // create one.
                 var account = _dynamicsClient.GetAccountById(userSettings.AccountId);
@@ -1035,13 +1035,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id, "adoxio_PoliceJurisdictionId");
 
                 RemoveServiceAreasFromApplication(item.Id);
+
                 if (item.ServiceAreas != null && item.ServiceAreas.Count > 0)
+                {
                     AddServiceAreasToApplication(item.ServiceAreas, item.Id);
+                }
                 if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
+                {
                     AddServiceAreasToApplication(item.OutsideAreas, item.Id);
-                // capacity is always added to the form, but if the capacity value is blank we can ignore it                    
+                }
+                // capacity is always added to the form, but if the capacity value is blank we can ignore it
                 if (item.CapacityArea != null && item.CapacityArea.Count > 0 && item.CapacityArea.FirstOrDefault().Capacity.HasValue)
+                {
                     AddServiceAreasToApplication(item.CapacityArea, item.Id);
+                }
 
                 if ((bool)item.ApplicationType?.ShowHoursOfSale)
                     try
