@@ -17,7 +17,7 @@ Feature: ReviewAccountProfileData
     As a logged in business user
     I want to confirm the saved data for the account profile
 
-@privatecorporation @reviewaccountdata
+@privatecorporation @reviewaccountdata @release
 Scenario: Data for Private Corporation Review Account Profile
     Given I am logged in to the dashboard as a private corporation
     And I click on the link for Edit Account Profile
