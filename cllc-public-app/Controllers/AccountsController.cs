@@ -574,21 +574,37 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 account.Accountid = legalEntity._adoxioAccountValue;
 
-                // create the account primary contact relationship.
-                if (mustCreateContactToAccountLink)
+                if (string.IsNullOrEmpty(userContact.Contactid))
                 {
-                    var patchAccount = new MicrosoftDynamicsCRMaccount()
-                    {
-                        PrimaryContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", userContact.Contactid)
-                    };
+                    // create the contact.
                     try
                     {
-                        _dynamicsClient.Accounts.Update(account.Accountid, patchAccount);
+                        var createdContact = _dynamicsClient.Contacts.Create(userContact);
+                        userContact.Contactid = createdContact.Contactid;
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error binding account to contact");
-                            throw new HttpOperationException("Error binding account to contact");
+                        _logger.LogError(httpOperationException, "Error creating contact for account");
+                        throw new HttpOperationException("Error creating contact for account");
+                    }
+
+                }
+
+                // create the account primary contact relationship.
+                if (mustCreateContactToAccountLink)
+                {
+                    var patchContact = new MicrosoftDynamicsCRMcontact()
+                    {
+                        ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid)
+                    };
+                    try
+                    {
+                        _dynamicsClient.Contacts.Update(userContact.Contactid, patchContact);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error setting primary contact for account");
+                            throw new HttpOperationException("Error setting primary contact for account");
                         
                     }
                     catch (Exception e)
@@ -601,16 +617,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 }
 
-
-                
-
                 // create the sharepoint document location for the account
 
                 var accountFolderName = await _dynamicsClient.GetFolderName("account", account.Accountid).ConfigureAwait(true);
 
                 // create the folder for the account
-
-                
 
                 _dynamicsClient.CreateEntitySharePointDocumentLocation("account", account.Accountid, accountFolderName, accountFolderName);
 
@@ -620,12 +631,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     legalEntity.AdoxioAccount = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(account.Accountid));
                 }
 
-                if (legalEntity.AdoxioAccount.Primarycontactid == null)
-                {
-                    legalEntity.AdoxioAccount.Primarycontactid = await _dynamicsClient.GetContactById(Guid.Parse(legalEntity.AdoxioAccount._primarycontactidValue));
-                }
-
-                userContact.Contactid = legalEntity.AdoxioAccount._primarycontactidValue;
+ 
 
                 legalEntityString = JsonConvert.SerializeObject(legalEntity);
                 _logger.LogDebug("Legal Entity after creation in dynamics --> " + legalEntityString);

@@ -19,7 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "parentcustomerid_account@odata.bind")]
-        public string ParentCustomerIdAccountODataBind { get; set; }     
+        public string ParentCustomerIdAccountODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "account_primary_contact@odata.bind")]
+        public string AccountPrimaryContactODataBind { get; set; }
+        
+
     }
 
     public class DateFormatConverter : IsoDateTimeConverter
