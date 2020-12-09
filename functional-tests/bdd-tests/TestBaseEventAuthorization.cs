@@ -213,8 +213,7 @@ namespace bdd_tests
 
             // select terms and conditions checkbox
             NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            IJavaScriptExecutor executor4 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor4.ExecuteScript("arguments[0].click();", uiTermsAndConditions);
+            uiTermsAndConditions.Click();
 
             if ((eventType == "for a draft") || (eventType == "being validated"))
             {

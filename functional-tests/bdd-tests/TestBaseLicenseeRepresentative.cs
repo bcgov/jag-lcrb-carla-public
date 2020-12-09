@@ -49,20 +49,19 @@ namespace bdd_tests
             NgWebElement uiEmail = ngDriver.FindElement(By.CssSelector("input[formControlName='representativeEmail']"));
             uiEmail.SendKeys(email);
 
+            System.Threading.Thread.Sleep(3000);
+
             // click on the submit permanent change applications checkbox
             NgWebElement uiCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSubmitPermanentChangeApplications']"));
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor.ExecuteScript("arguments[0].click();", uiCheckbox);
+            uiCheckbox.Click();
 
             // click on the sign temporary change applications checkbox
             NgWebElement uiCheckbox1 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSignTemporaryChangeApplications']"));
-            IJavaScriptExecutor executor2 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor2.ExecuteScript("arguments[0].click();", uiCheckbox1);
+            uiCheckbox1.Click();
 
             // click on the obtain licence info from branch checkbox
             NgWebElement uiCheckbox2 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanObtainLicenceInformation']"));
-            IJavaScriptExecutor executor3 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor3.ExecuteScript("arguments[0].click();", uiCheckbox2);
+            uiCheckbox2.Click();
 
             // click on sign grocery annual proof of sales revenue checkbox
             NgWebElement uiCheckbox3 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSignGroceryStoreProofOfSale']"));
