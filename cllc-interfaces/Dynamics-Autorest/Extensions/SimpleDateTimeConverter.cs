@@ -4,7 +4,7 @@ using System;
 namespace Gov.Lclb.Cllb.Interfaces
 {
 
-    public class SimpleDateTimeConverter : Newtonsoft.Json.JsonConverter
+    public class SimpleDateTimeConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             if (reader.Value == null) return null;
 
-            return new DateTimeOffset?(DateTime.Parse(reader.Value.ToString()));
+            return DateTime.Parse(reader.Value.ToString());
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

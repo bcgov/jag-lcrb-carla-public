@@ -6,7 +6,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class BusinessProfile
     {
-        public ViewModels.Account Account { get; set; }
+        public Account Account { get; set; }
         /// <summary>
         /// The List of all legal entities in the account
         /// </summary>
@@ -27,16 +27,16 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         /// or adoxio_shareholderAccount for Shareholders
         /// </summary>
         /// <value></value>
-        public ViewModels.Account Account { get; set; }
+        public Account Account { get; set; }
 
-        public ViewModels.LegalEntity AdoxioLegalEntity { get; set; }
+        public LegalEntity AdoxioLegalEntity { get; set; }
         public List<BusinessProfileLegalEntity> ChildEntities { get; set; }
 
         /// <summary>
         /// The tied house associated with the <see cref="Account"/>
         /// </summary>
         /// <value></value>
-        public ViewModels.TiedHouseConnection TiedHouse { get; set; }
+        public TiedHouseConnection TiedHouse { get; set; }
 
         public bool corporateDetailsFilesExists { get; set; }
         public bool organizationStructureFilesExists { get; set; }
@@ -78,13 +78,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             var isShareholderComplete = shareholdersExist && partnersExist &&
                 ChildEntities.Where(c => c.AdoxioLegalEntity.isShareholder == true || c.AdoxioLegalEntity.isPartner == true)
                     .Select(c => c.AdoxioLegalEntity.isShareholderComplete(businessType, shareholderFilesExists, shareholdersExist, partnersExist))
-                    .All(s => s == true);
+                    .All(s => s);
             var isDirectorAndOfficersComplete = directorsExist &&
                 ChildEntities.Where(c => c.AdoxioLegalEntity.isDirector == true
                                                 || c.AdoxioLegalEntity.isOfficer == true
                                                 || c.AdoxioLegalEntity.isSeniorManagement == true)
                     .Select(c => c.AdoxioLegalEntity.isDirectorOfficerComplete(businessType, directorsExist))
-                    .All(s => s == true);
+                    .All(s => s);
             var isSecurityAssessmentComplete = ChildEntities.Where(c => c.AdoxioLegalEntity.isDirector == true
                                                 || c.AdoxioLegalEntity.isOfficer == true
                                                 || c.AdoxioLegalEntity.isSeniorManagement == true

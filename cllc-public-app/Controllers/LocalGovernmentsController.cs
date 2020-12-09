@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var accountFilter = $"_adoxio_lginlinkid_value eq {lg.AdoxioLocalgovindigenousnationid} and websiteurl ne null";
                     var linkedAccount = _dynamicsClient.Accounts.Get(filter: accountFilter).Value.FirstOrDefault();
-                    var item = new LGListItem()
+                    var item = new LGListItem
                     {
                         Id = lg.AdoxioLocalgovindigenousnationid,
                         Name = lg.AdoxioName,

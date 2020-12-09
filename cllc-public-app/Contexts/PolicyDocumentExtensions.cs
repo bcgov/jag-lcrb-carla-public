@@ -137,7 +137,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 return;
             }
 
-            PolicyDocument = new MicrosoftDynamicsCRMadoxioPolicydocument()
+            PolicyDocument = new MicrosoftDynamicsCRMadoxioPolicydocument
             {
                 AdoxioSlug = initialPolicyDocument.slug,
                 AdoxioName = initialPolicyDocument.title,

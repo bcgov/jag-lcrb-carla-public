@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
-        public AnnualVolumeController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, Gov.Lclb.Cllb.Interfaces.IDynamicsClient dynamics)
+        public AnnualVolumeController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IDynamicsClient dynamics)
         {
             _configuration = configuration;
             _dynamicsClient = dynamics;
@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.Error(e, "Unexpected error getting annual volumes.");
             }
 
-            MicrosoftDynamicsCRMadoxioAnnualvolume dynamicsVol = new MicrosoftDynamicsCRMadoxioAnnualvolume()
+            MicrosoftDynamicsCRMadoxioAnnualvolume dynamicsVol = new MicrosoftDynamicsCRMadoxioAnnualvolume
             {
                 AdoxioVolumedestroyed = volume.VolumeDestroyed,
                 AdoxioVolumeproduced = volume.VolumeProduced,

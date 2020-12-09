@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// GET all licence types in Dynamics
-        [HttpGet()]
+        [HttpGet]
         public async Task<JsonResult> GetDynamicsLicenseTypes()
         {
             List<LicenseType> adoxioLiceseVMList = new List<LicenseType>();
@@ -55,10 +55,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
-            else
-            {
-                return new JsonResult(adoxioLicenceType.ToViewModel());
-            }
+
+            return new JsonResult(adoxioLicenceType.ToViewModel());
 
         }
 

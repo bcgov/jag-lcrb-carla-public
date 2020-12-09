@@ -100,7 +100,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             else if (!string.IsNullOrEmpty(ssgUsername) && !string.IsNullOrEmpty(ssgPassword))
             // Authenticate using BASIC authentication - used for API Gateways with BASIC authentication.  Add the NTLM user associated with the API gateway entry to Dynamics as a user.            
             {
-                serviceClientCredentials = new BasicAuthenticationCredentials()
+                serviceClientCredentials = new BasicAuthenticationCredentials
                 {
                     UserName = ssgUsername,
                     Password = ssgPassword

@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             ApplicationTypeContent result = null;
             if (dynamicsApplicationTypeContent != null)
             {
-                result = new ApplicationTypeContent()
+                result = new ApplicationTypeContent
                 {
                     Id = dynamicsApplicationTypeContent.AdoxioApplicationtypecontentid,
 

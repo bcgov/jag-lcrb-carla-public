@@ -9,7 +9,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// <summary>
     /// Role Database Model
     /// </summary>
-    public sealed partial class Jurisdiction : IEquatable<Jurisdiction>
+    public sealed class Jurisdiction : IEquatable<Jurisdiction>
     {
 
         /// <summary>

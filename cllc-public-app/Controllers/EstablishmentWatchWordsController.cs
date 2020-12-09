@@ -17,10 +17,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _dynamicsClient = dynamicsClient;
         }
 
-        [HttpGet()]
+        [HttpGet]
         public IActionResult GetEstablishmentWatchWords()
         {
-            Dictionary<string, List<string>> returnVal = new Dictionary<string, List<string>>()
+            Dictionary<string, List<string>> returnVal = new Dictionary<string, List<string>>
             {
                 {"forbidden", new List<string>()},
                 {"problematic", new List<string>()},

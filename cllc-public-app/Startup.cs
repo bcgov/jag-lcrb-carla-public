@@ -96,7 +96,7 @@ namespace Gov.Lclb.Cllb.Public
                 opts.Filters.Add(new AuthorizeFilter(policy));
 
                 opts.Filters.Add(typeof(NoCacheHttpHeadersAttribute));
-                opts.Filters.Add(new XRobotsTagAttribute() { NoIndex = true, NoFollow = true });
+                opts.Filters.Add(new XRobotsTagAttribute { NoIndex = true, NoFollow = true });
                 opts.Filters.Add(typeof(XContentTypeOptionsAttribute));
                 opts.Filters.Add(typeof(XDownloadOptionsAttribute));
                 opts.Filters.Add(typeof(XFrameOptionsAttribute));
@@ -107,12 +107,12 @@ namespace Gov.Lclb.Cllb.Public
             })
             .AddNewtonsoftJson(opts =>
            {
-               opts.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-               opts.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
-               opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
+               opts.SerializerSettings.Formatting = Formatting.Indented;
+               opts.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+               opts.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
 
                // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
-               opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+               opts.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
            })
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
@@ -168,7 +168,7 @@ namespace Gov.Lclb.Cllb.Public
 
             var orgBook = new OrgBookClient(new HttpClient());
             orgBook.ReadResponseAsString = true;
-            services.AddTransient<IOrgBookClient>(_ => (IOrgBookClient)orgBook);
+            services.AddTransient(_ => (IOrgBookClient)orgBook);
 
 
 
@@ -228,7 +228,7 @@ namespace Gov.Lclb.Cllb.Public
             Random jitterer = new Random();
             var retryWithJitterPolicy = HttpPolicyExtensions
                 .HandleTransientHttpError()
-                .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.GatewayTimeout || msg.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+                .OrResult(msg => msg.StatusCode == HttpStatusCode.GatewayTimeout || msg.StatusCode == HttpStatusCode.ServiceUnavailable)
                 .WaitAndRetryAsync(6,    // exponential back-off plus some jitter
                     retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
                                   + TimeSpan.FromMilliseconds(jitterer.Next(0, 100))
@@ -309,7 +309,7 @@ namespace Gov.Lclb.Cllb.Public
             string bceidUserid = _configuration["BCEID_SERVICE_USER"];
             string bceidPasswd = _configuration["BCEID_SERVICE_PASSWD"];
 
-            services.AddTransient<BCeIDBusinessQuery>(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
+            services.AddTransient(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
 
             // add BC Express Pay (Bambora) service
             services.AddHttpClient<IBCEPService, BCEPService>()
@@ -350,7 +350,7 @@ namespace Gov.Lclb.Cllb.Public
 
                 var initialClient = new FileManagerClient(initialChannel);
                 // call the token service to get a token.
-                var tokenRequest = new TokenRequest()
+                var tokenRequest = new TokenRequest
                 {
                     Secret = _configuration["FILE_MANAGER_SECRET"]
                 };
@@ -363,9 +363,9 @@ namespace Gov.Lclb.Cllb.Public
 
                     httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenReply.Token}");
 
-                    var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions() { HttpClient = httpClient });
+                    var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient });
 
-                    services.AddTransient<FileManagerClient>(_ => new FileManagerClient(channel));
+                    services.AddTransient(_ => new FileManagerClient(channel));
 
                 }
             }
@@ -505,7 +505,7 @@ namespace Gov.Lclb.Cllb.Public
             app.UseHealthChecks("/hc/live", new HealthCheckOptions
             {
                 // Exclude all checks and return a 200-Ok.
-                Predicate = (_) => false
+                Predicate = _ => false
             });
 
             app.UseXContentTypeOptions();
@@ -565,7 +565,7 @@ namespace Gov.Lclb.Cllb.Public
                        sourceType: "portal", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
-                       messageHandler: new HttpClientHandler()
+                       messageHandler: new HttpClientHandler
                        {
                            ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
                        }

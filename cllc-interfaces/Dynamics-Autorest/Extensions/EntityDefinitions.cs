@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMpicklistAttributeMetadataCollection>> GetEntityPicklistsWithHttpMessagesAsync(string entity, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMpicklistAttributeMetadataCollection>> GetEntityPicklistsWithHttpMessagesAsync(string entity, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default)
         {
             if (entity == null)
             {
@@ -190,7 +190,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMpicklistAttributeMetadataCollection>> GetEntityPicklistsWithHttpMessagesAsync(string entity, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMpicklistAttributeMetadataCollection>> GetEntityPicklistsWithHttpMessagesAsync(string entity, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
     }
 
     public static partial class EntitydefinitionsExtensions
@@ -233,7 +233,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public static async Task<MicrosoftDynamicsCRMpicklistAttributeMetadataCollection> GetEntityPicklistsAsync(this IEntitydefinitions operations, string entity, CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task<MicrosoftDynamicsCRMpicklistAttributeMetadataCollection> GetEntityPicklistsAsync(this IEntitydefinitions operations, string entity, CancellationToken cancellationToken = default)
         {
             using (var _result = await operations.GetEntityPicklistsWithHttpMessagesAsync(entity, null, cancellationToken).ConfigureAwait(false))
             {

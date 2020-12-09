@@ -158,7 +158,8 @@ namespace bdd_tests
         public void ClickOnSubmitButton()
         {
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
-            uiSubmitButton.Click();
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor.ExecuteScript("arguments[0].click();", uiSubmitButton);
         }
 
 

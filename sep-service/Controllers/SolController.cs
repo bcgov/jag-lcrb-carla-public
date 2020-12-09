@@ -8,6 +8,9 @@ using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using System.IO;
+using System.Threading.Tasks;
+using System.Text;
 
 namespace SepService.Controllers
 {
@@ -30,7 +33,7 @@ namespace SepService.Controllers
         /// <param name="value"></param>
         /// <returns></returns>
         [HttpPost("echo")]
-        public string Get([FromBody] string value)
+        public async Task<string> Get([FromBody] string value = "echo")
         {
             return value;
         }
@@ -232,7 +235,8 @@ namespace SepService.Controllers
                 {
                     AdoxioLocationdescription = sol.Location.LocationDescription,
                     AdoxioLocationname = sol.Location.LocationName,
-                    AdoxioMaximumnumberofguests = sol.Location.MaximumGuests.ToString()
+                    AdoxioMaximumnumberofguests = sol.Location.MaximumGuests.ToString(),
+                    AdoxioPermitnumber = sol.SolLicenceNumber
                 };
 
             // licensed area
@@ -316,7 +320,8 @@ namespace SepService.Controllers
                 // cancel the record.
                 MicrosoftDynamicsCRMadoxioSpecialevent patchRecord = new MicrosoftDynamicsCRMadoxioSpecialevent()
                 {
-                    Statuscode = 845280000 // Cancel
+                    Statuscode = 845280000, // Cancel
+                    AdoxioCancellationreason = cancelReason?.Reason
                 };
                 try
                 {
