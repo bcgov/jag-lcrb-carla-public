@@ -20,7 +20,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         private void CustomInit()
         {
-            throw new System.NotImplementedException();
+          
         }
 
         /// <summary>
