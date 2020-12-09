@@ -44,6 +44,8 @@ namespace bdd_tests
 
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
+            string corpGiven = "Automated";
+            string corpSurname = "Testing";
             string corpTitle = "CEO";
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
@@ -131,6 +133,14 @@ namespace bdd_tests
                 NgWebElement uiLiquorPolicyLink = ngDriver.FindElement(By.CssSelector("input[formcontrolname='websiteUrl']"));
                 uiLiquorPolicyLink.SendKeys(liquorPolicyLink);
             }
+
+            // enter the contact given name
+            NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstname']"));
+            uiFirstName.SendKeys(corpGiven);
+
+            // enter the contact surname
+            NgWebElement uiLastName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lastname']"));
+            uiLastName.SendKeys(corpSurname);
 
             // enter the contact title
             NgWebElement uiCorpTitle = ngDriver.FindElement(By.CssSelector("input[formControlName='jobTitle']"));
