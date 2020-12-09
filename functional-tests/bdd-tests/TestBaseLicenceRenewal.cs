@@ -262,42 +262,50 @@ namespace bdd_tests
                 // select 'Yes'
                 // 3. Our records show that this establishment is licensed as a PrivateCorporation. Has this changed?
                 NgWebElement uiBusinessType = ngDriver.FindElement(By.CssSelector("[formcontrolname = 'renewalBusinessType'] button#mat-button-toggle-14-button"));
-                uiBusinessType.Click();
+                IJavaScriptExecutor executor3 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor3.ExecuteScript("arguments[0].click();", uiBusinessType);
 
                 // select 'Yes'
                 // 4. Have you redistributed any shares within the past 12 months without notifying LCRB?
                 NgWebElement uiRenewalShareholders = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalShareholders'] button#mat-button-toggle-16-button"));
-                uiRenewalShareholders.Click();
+                IJavaScriptExecutor executor4 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor4.ExecuteScript("arguments[0].click();", uiRenewalShareholders);
 
                 // select 'Yes'
                 // 5. Have you entered into an agreement allowing another person or business to use your licence within the past 12 months?
                 NgWebElement uiRenewalThirdParty = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalThirdParty'] button#mat-button-toggle-18-button"));
-                uiRenewalThirdParty.Click();
+                IJavaScriptExecutor executor5 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor5.ExecuteScript("arguments[0].click();", uiRenewalThirdParty);
 
                 // select 'Yes'
                 // 6. Have you made any unreported structural changes to your establishment within the past 12 months?
                 NgWebElement uiRenewalFloorPlan = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalFloorPlan'] button#mat-button-toggle-20-button"));
-                uiRenewalFloorPlan.Click();
+                IJavaScriptExecutor executor6 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor6.ExecuteScript("arguments[0].click();", uiRenewalFloorPlan);
 
                 // select 'Yes'
                 // 7. Have you acquired a new interest or expanded an existing interest financial or otherwise in a winery, brewery, distillery, liquor agent and/or a UBrew/UVin within the past 12 months without notifying LCRB?
                 NgWebElement uiRenewalTiedhouse = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalTiedhouse'] button#mat-button-toggle-22-button"));
-                uiRenewalTiedhouse.Click();
+                IJavaScriptExecutor executor7 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor7.ExecuteScript("arguments[0].click();", uiRenewalTiedhouse);
 
                 // select 'Yes'
                 // 8. Have you sold the business associated with this liquor licence within the last 12 months without notifying LCRB?
                 NgWebElement uiRenewalUnreportedSaleOfBusiness = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalUnreportedSaleOfBusiness'] button#mat-button-toggle-24-button"));
-                uiRenewalUnreportedSaleOfBusiness.Click();
+                IJavaScriptExecutor executor8 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor8.ExecuteScript("arguments[0].click();", uiRenewalUnreportedSaleOfBusiness);
 
                 // select 'Yes'
                 // 9.Have you sold the property or transferred the lease associated with this liquor licence within the last 12 months?
                 NgWebElement uiRenewalValidInterest = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalValidInterest'] button#mat-button-toggle-26-button"));
-                uiRenewalValidInterest.Click();
+                IJavaScriptExecutor executor9 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor9.ExecuteScript("arguments[0].click();", uiRenewalValidInterest);
 
                 // select 'Yes'
                 // 10. Have you added, changed or removed a licensee representative within the past 12 months?
                 NgWebElement uiRenewalKeyPersonnel = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-28-button"));
-                uiRenewalKeyPersonnel.Click();
+                IJavaScriptExecutor executor10 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor10.ExecuteScript("arguments[0].click();", uiRenewalKeyPersonnel);
 
                 // confirm that correct information re positive responses for a Catering licensing renewal is displayed
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Shareholder Information on the Organization Details page')]")).Displayed);
@@ -490,6 +498,9 @@ namespace bdd_tests
                 NgWebElement uiRenewalKeyPersonnelNo = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-29-button"));
                 uiRenewalKeyPersonnelNo.Click();
             }
+
+            // temporary fix
+            System.Threading.Thread.Sleep(5000);
 
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));

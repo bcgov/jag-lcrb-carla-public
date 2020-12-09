@@ -72,7 +72,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         public static List<string> GetResults(this AppDbContext context, string postId)
         {
             List<string> result = new List<string>();
-            List<Models.PostSurveyResult> items = context.PostSurveyResults.Where(x => x.postId == postId).ToList();
+            List<PostSurveyResult> items = context.PostSurveyResults.Where(x => x.postId == postId).ToList();
             foreach (var item in items)
             {
                 result.Add(item.surveyResult);
@@ -89,7 +89,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         public static string GetSurveyResultByClientId(this AppDbContext context, string clientId)
         {
             string result = "";
-            Models.PostSurveyResult item = context.PostSurveyResults.FirstOrDefault(x => x.clientId == clientId);
+            PostSurveyResult item = context.PostSurveyResults.FirstOrDefault(x => x.clientId == clientId);
             // add error handling
             result = item.surveyResult;
             return result;

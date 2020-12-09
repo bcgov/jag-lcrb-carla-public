@@ -9,7 +9,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// <summary>
     /// Policy Database Model
     /// </summary>
-    public sealed partial class PolicyDocument : IEquatable<PolicyDocument>
+    public sealed class PolicyDocument : IEquatable<PolicyDocument>
     {
 
         /// <summary>

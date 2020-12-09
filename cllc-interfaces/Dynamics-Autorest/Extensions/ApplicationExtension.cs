@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> DeleteReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DeleteReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default)
         {
             if (adoxioApplicationid == null)
             {
@@ -181,7 +181,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default)
         {
             if (adoxioApplicationid == null)
             {
@@ -331,7 +331,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> ChangeReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ChangeReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default)
         {
             if (adoxioApplicationid == null)
             {
@@ -481,7 +481,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<StatsResultResponse>> GetSavedQueryWithHttpMessagesAsync(string savedQueryid, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<StatsResultResponse>> GetSavedQueryWithHttpMessagesAsync(string savedQueryid, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default)
         {
             if (savedQueryid == null)
             {
@@ -626,7 +626,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> DeleteReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> DeleteReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add reference to adoxio_applications
         /// </summary>
@@ -651,7 +651,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Change reference to adoxio_applications
         /// </summary>
@@ -676,9 +676,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> ChangeReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ChangeReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
 
-        Task<HttpOperationResponse<StatsResultResponse>> GetSavedQueryWithHttpMessagesAsync(string savedQueryid, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<StatsResultResponse>> GetSavedQueryWithHttpMessagesAsync(string savedQueryid, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
 
 
     }
@@ -718,7 +718,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public static async Task DeleteReferenceAsync(this IApplications operations, string adoxioApplicationid, string fieldname, CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task DeleteReferenceAsync(this IApplications operations, string adoxioApplicationid, string fieldname, CancellationToken cancellationToken = default)
         {
             (await operations.DeleteReferenceWithHttpMessagesAsync(adoxioApplicationid, fieldname, null, cancellationToken).ConfigureAwait(false)).Dispose();
         }
@@ -738,7 +738,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='odataid'>
         /// reference value
         /// </param>
-        public static void AddReference(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid))
+        public static void AddReference(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default)
         {
             operations.AddReferenceAsync(adoxioApplicationid, fieldname, odataid).GetAwaiter().GetResult();
         }
@@ -761,7 +761,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public static async Task AddReferenceAsync(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task AddReferenceAsync(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default, CancellationToken cancellationToken = default)
         {
             (await operations.AddReferenceWithHttpMessagesAsync(adoxioApplicationid, fieldname, odataid, null, cancellationToken).ConfigureAwait(false)).Dispose();
         }
@@ -781,7 +781,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='odataid'>
         /// reference value
         /// </param>
-        public static void ChangeReference(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid))
+        public static void ChangeReference(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default)
         {
             operations.ChangeReferenceAsync(adoxioApplicationid, fieldname, odataid).GetAwaiter().GetResult();
         }
@@ -804,7 +804,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public static async Task ChangeReferenceAsync(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task ChangeReferenceAsync(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default, CancellationToken cancellationToken = default)
         {
             (await operations.ChangeReferenceWithHttpMessagesAsync(adoxioApplicationid, fieldname, odataid, null, cancellationToken).ConfigureAwait(false)).Dispose();
         }
@@ -814,7 +814,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return operations.GetSavedQueryAsync(adoxioSavedQueryid).GetAwaiter().GetResult();
         }
 
-        public static async Task<StatsResultResponse> GetSavedQueryAsync(this IApplications operations, string adoxioSavedQueryid, CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task<StatsResultResponse> GetSavedQueryAsync(this IApplications operations, string adoxioSavedQueryid, CancellationToken cancellationToken = default)
         {
             using (var _result = await operations.GetSavedQueryWithHttpMessagesAsync(adoxioSavedQueryid, null, cancellationToken).ConfigureAwait(false))
             {

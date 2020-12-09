@@ -57,29 +57,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 return LocalRedirect(path);
             }
-            else
-            {
-                if (string.IsNullOrEmpty(_configuration["ENABLE_SERVICECARD_TOKEN_TEST"]))
-                {
-                    string basePath = GetRedirectPath(_configuration, path, code);
-                    return Redirect(basePath);
-                }
-                else
-                {
-                    string decrypted = EncryptionUtility.DecryptString(code, _encryptionKey);
-                    if (decrypted == null)
-                    {
-                        decrypted = "";
-                    }
 
-                    return new ContentResult
-                    {
-                        ContentType = "text/html",
-                        StatusCode = (int)HttpStatusCode.OK,
-                        Content = $"<html><body><h1>Token Parse Test</h1><p>Decrypted text is: {decrypted}</body></html>"
-                    };
-                }
+            if (string.IsNullOrEmpty(_configuration["ENABLE_SERVICECARD_TOKEN_TEST"]))
+            {
+                string basePath = GetRedirectPath(_configuration, path, code);
+                return Redirect(basePath);
             }
+
+            string decrypted = EncryptionUtility.DecryptString(code, _encryptionKey);
+            if (decrypted == null)
+            {
+                decrypted = "";
+            }
+
+            return new ContentResult
+            {
+                ContentType = "text/html",
+                StatusCode = (int)HttpStatusCode.OK,
+                Content = $"<html><body><h1>Token Parse Test</h1><p>Decrypted text is: {decrypted}</body></html>"
+            };
         }
 
         /// <summary>
