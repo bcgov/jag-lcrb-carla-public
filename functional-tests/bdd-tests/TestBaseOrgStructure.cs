@@ -721,7 +721,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmPartner = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmPartner = ngDriver.FindElement(By.CssSelector(".fa-save span"));
                 uiConfirmPartner.Click();
 
                 // open business partner row
