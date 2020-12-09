@@ -372,8 +372,8 @@ namespace bdd_tests
                 {
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
-                    IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                    executor.ExecuteScript("arguments[0].click();", uiIsManufacturedMinimum);
+                    IJavaScriptExecutor executor0 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                    executor0.ExecuteScript("arguments[0].click();", uiIsManufacturedMinimum);
                 }
 
                 if ((responses == "positive responses for a winery") || (responses == "positive responses for a brewery"))
@@ -478,8 +478,8 @@ namespace bdd_tests
                 {
                     // click on manufacturer minimum checkbox
                     NgWebElement uiIsManufacturedMinimum = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isManufacturedMinimum']"));
-                    IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                    executor.ExecuteScript("arguments[0].click();", uiIsManufacturedMinimum);
+                    IJavaScriptExecutor executor0 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                    executor0.ExecuteScript("arguments[0].click();", uiIsManufacturedMinimum);
                 }
 
                 if ((responses == "negative responses for a winery") || (responses == "negative responses for a brewery"))
