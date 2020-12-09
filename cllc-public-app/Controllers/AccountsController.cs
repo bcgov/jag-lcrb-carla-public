@@ -596,16 +596,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var patchContact = new MicrosoftDynamicsCRMcontact()
                     {
-                        ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid)
-                    };
+                        ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid),
+                        
+                };
                     try
                     {
                         _dynamicsClient.Contacts.Update(userContact.Contactid, patchContact);
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error setting primary contact for account");
-                            throw new HttpOperationException("Error setting primary contact for account");
+                        _logger.LogError(httpOperationException, "Error setting primary contact link for contact");
+                            throw new HttpOperationException("Error setting primary contact link for contact");
                         
                     }
                     catch (Exception e)
@@ -614,7 +615,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw new Exception("Error binding account to contact");
                     }
 
-                    // the contact -> account link will be created below.
+                    Odataid contactId = new Odataid()
+                    { 
+                        OdataidProperty = _dynamicsClient.GetEntityURI("contacts", userContact.Contactid)
+                    };
+                    try
+                    {
+                        _dynamicsClient.Accounts.AddReferenceWithHttpMessagesAsync(account.Accountid, "contact_customer_accounts", contactId);
+                        _dynamicsClient.Accounts.AddReferenceWithHttpMessagesAsync(account.Accountid, "primarycontactid", contactId);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error setting primary contact link for account");
+                        throw new HttpOperationException("Error setting primary contact link for account");
+
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error binding account to contact");
+                        throw new Exception("Error binding account to contact");
+                    }
 
                 }
 
@@ -699,26 +719,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            // always patch the userContact so it relates to the account.
-            _logger.LogDebug(LoggingEvents.Save, "Patching the userContact so it relates to the account.");
-            // parent customer id relationship will be created using the method here:
-            //https://msdn.microsoft.com/en-us/library/mt607875.aspx
-            MicrosoftDynamicsCRMcontact patchUserContact = new MicrosoftDynamicsCRMcontact();
-            patchUserContact.ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
-            try
-            {
-                await _dynamicsClient.Contacts.UpdateAsync(userContact.Contactid, patchUserContact);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error binding contact to account. ");
-                throw new Exception("Error binding contact to account");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error binding contact to account");
-                throw new Exception("Error binding contact to account");
-            }
+            
+                _logger.LogDebug(LoggingEvents.Save, "Patching the userContact so it relates to the account.");
+                // parent customer id relationship will be created using the method here:
+                //https://msdn.microsoft.com/en-us/library/mt607875.aspx
+                MicrosoftDynamicsCRMcontact patchUserContact = new MicrosoftDynamicsCRMcontact();
+                patchUserContact.ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+                try
+                {
+                    await _dynamicsClient.Contacts.UpdateAsync(userContact.Contactid, patchUserContact);
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error binding contact to account. ");
+                    throw new Exception("Error binding contact to account");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error binding contact to account");
+                    throw new Exception("Error binding contact to account");
+                }
+           
+            
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
