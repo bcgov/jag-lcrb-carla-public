@@ -61,7 +61,7 @@ const ValidationFieldNameMap = {
   'businessProfile.mailingAddressCountry': 'Mailing Address Country',
 
   'primarycontact.id': 'Corporation Contact ID',
-  'primarycontact.firstname': 'Corporation Contact Fist Name',
+  'primarycontact.firstname': 'Corporation Contact First Name',
   'primarycontact.lastname': 'Corporation Contact LastName',
   'primarycontact.jobTitle': 'Corporation Contact Job Title',
   'primarycontact.telephone1': 'Corporation Contact Telephone',
