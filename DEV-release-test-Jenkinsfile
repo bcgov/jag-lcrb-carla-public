@@ -11,6 +11,7 @@ podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', service
         resourceLimitMemory: '4Gi',
         workingDir: '/home/jenkins',
         command: '',
+		alwaysPullImage: true,
         args: '${computer.jnlpmac} ${computer.name}'
     )
 ]) {
