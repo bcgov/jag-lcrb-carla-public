@@ -58,10 +58,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
-            else
-            {
-                return new JsonResult(establishment.ToViewModel());
-            }
+
+            return new JsonResult(establishment.ToViewModel());
 
         }
 
@@ -188,7 +186,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, $"Unexpected error getting establishment map data.");
+                        _logger.LogError(e, "Unexpected error getting establishment map data.");
                     }
 
                     establishmentMapData = new List<EstablishmentMapData>();
@@ -235,8 +233,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                         if (add && !string.IsNullOrEmpty(search) && establishment.AdoxioName != null && establishment.AdoxioAddresscity != null)
                                         {
                                             search = search.ToUpper();
-                                            if (!establishment.AdoxioName.ToUpper().StartsWith(search) == true
-                                                && !establishment.AdoxioAddresscity.ToUpper().StartsWith(search) == true)
+                                            if (!establishment.AdoxioName.ToUpper().StartsWith(search)
+                                                && !establishment.AdoxioAddresscity.ToUpper().StartsWith(search))
                                             {
                                                 // candidate for rejection; check the lgin too.
                                                 if (establishment._adoxioLginValue != null)
@@ -260,7 +258,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                                         if (add)
                                         {
-                                            establishmentMapData.Add(new EstablishmentMapData()
+                                            establishmentMapData.Add(new EstablishmentMapData
                                             {
                                                 id = establishment.AdoxioEstablishmentid,
                                                 Name = establishment.AdoxioName,
@@ -333,7 +331,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     if (establishment.Statuscode != null && establishment.Statuscode.Value == 845280000 && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null) // Licensed
                     {
-                        EstablishmentMapData data = new EstablishmentMapData()
+                        EstablishmentMapData data = new EstablishmentMapData
                         {
                             id = establishment.AdoxioEstablishmentid,
                             Name = "BC Cannabis Store",
@@ -364,7 +362,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> CreateEstablishment([FromBody] ViewModels.Establishment item)
         {
             // create a new legal entity.

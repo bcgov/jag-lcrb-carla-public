@@ -100,7 +100,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             if (obj is null) { return false; }
             if (ReferenceEquals(this, obj)) { return true; }
-            return obj.GetType() == this.GetType() && Equals((RolePermission)obj);
+            return obj.GetType() == GetType() && Equals((RolePermission)obj);
         }
 
         /// <summary>

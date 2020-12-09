@@ -3,7 +3,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Collections.Generic;
 
-    public partial class MicrosoftDynamicsCRMpicklistAttributeMetadataCollection
+    public class MicrosoftDynamicsCRMpicklistAttributeMetadataCollection
     {
 
         /// <summary>
