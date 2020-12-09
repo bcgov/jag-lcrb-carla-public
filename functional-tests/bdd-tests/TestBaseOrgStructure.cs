@@ -561,6 +561,10 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // select the Confirm button
+                NgWebElement uiConfirmLeader = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmLeader.Click();
+
                 /********** Leader #2 **********/
 
                 // create the leader #2 data
@@ -600,6 +604,10 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // select the Confirm button
+                NgWebElement uiConfirmLeader2 = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmLeader2.Click();
+
                 /********** Leader #3 **********/
 
                 // create the leader #3 data
@@ -638,6 +646,10 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+                // select the Confirm button
+                NgWebElement uiConfirmLeader3 = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmLeader3.Click();
             }
 
             if (businessType == " partnership")
