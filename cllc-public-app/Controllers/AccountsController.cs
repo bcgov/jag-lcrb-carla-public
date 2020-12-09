@@ -148,7 +148,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (name != null)
                 {
                     name = name.Replace("'", "''");
-                    filter = $"contains(name,'{name}')";
+                    // select active accounts that match the given name
+                    filter = $"statecode eq 0 and contains(name,'{name}')";
                 }
                 var expand = new List<string> { "primarycontactid" };
                 var accounts = _dynamicsClient.Accounts.Get(filter: filter, expand: expand, top: 10).Value;
