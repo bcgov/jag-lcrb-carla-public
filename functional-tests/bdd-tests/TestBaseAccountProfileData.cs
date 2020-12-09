@@ -150,14 +150,10 @@ namespace bdd_tests
             // check authorized person first name is populated
             NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstname']"));
             Assert.True(uiFirstName.GetAttribute("value") == "Automated");
-            //string fieldValueFirstName = uiFirstName.GetAttribute("value");
-            //Assert.True(fieldValueFirstName != null);
 
             // check authorized person last name is populated
             NgWebElement uiLastName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lastname']"));
             Assert.True(uiLastName.GetAttribute("value") == "Testing");
-            //string fieldValueLastName = uiLastName.GetAttribute("value");
-            //Assert.True(fieldValueLastName != null);
 
             // check authorized person title/position is correct
             NgWebElement uiJobTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='jobTitle']"));
