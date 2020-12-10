@@ -33,6 +33,7 @@ import { LocalGovernmentDataService } from '@services/local-government-data.serv
 import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { AreaCategory } from '@models/service-area.model';
+import { LgApprovalsComponent } from '@components/lg-approvals/lg-approvals.component';
 
 const ServiceHours = [
   '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -463,7 +464,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('establishmentPhone').disable();
     }
 
-    if (!this.application.applicationType.showHoursOfSale || this.application.applicationType.name === ApplicationTypeNames.FP) {
+    if (!this.application.applicationType.showHoursOfSale || this.application.applicationType.name === ApplicationTypeNames.FP || this.application.applicationType.name === ApplicationTypeNames.FPRelo) {
       // Opening hours
       this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
@@ -1227,6 +1228,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return (this.account && ['Society'].indexOf(this.account.businessType) !== -1);
   }
 
+  canRenameEstablishment(): boolean {
+    return (this.application?.applicationType?.name === ApplicationTypeNames.LiquorLicenceTransfer ||
+            (this.application?.applicationType?.establishmentName !== FormControlState.ReadOnly &&
+              this.showFormControl(this.application?.applicationType?.currentEstablishmentAddress)));
+  }
+
   isCRSRenewalApplication(): boolean {
     return this.application
       && this.application.applicationType
@@ -1299,7 +1306,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showValidInterestforTransfer(){
     return this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
-            (this.application.licenseType === "Licensee Retail Store" || "Wine Store");
+            (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType ==="Wine Store");
   }
 
   showDynamicForm(formReference, tabs) {
