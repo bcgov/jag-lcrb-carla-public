@@ -469,5 +469,11 @@ namespace bdd_tests
             ngDriver.IgnoreSynchronization = false;
             ngDriver.Manage().Timeouts().ImplicitWait = tempTimeout;
         }
+
+        public void JavaScriptClick(NgWebElement element)
+        {
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor.ExecuteScript("arguments[0].click();", element);
+        }
     }
 }

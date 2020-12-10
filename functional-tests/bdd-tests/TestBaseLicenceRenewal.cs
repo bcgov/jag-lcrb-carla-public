@@ -28,8 +28,7 @@ namespace bdd_tests
                 // select 'No'
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
                 NgWebElement uiCriminalOffence = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-10-button"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiCriminalOffence);
+                JavaScriptClick(uiCriminalOffence);
 
                 // select 'No'
                 // 2. Has there been an unreported sale of the business associated with the licence within the past 12 months? 
