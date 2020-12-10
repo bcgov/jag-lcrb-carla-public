@@ -51,7 +51,7 @@ namespace bdd_tests
             // upload supporting business documentation
             FileUpload("distribution_plan.pdf", "(//input[@type='file'])[6]");
 
-            // upload register directors and officers
+            // upload register of directors and officers
             FileUpload("todo.pdf", "(//input[@type='file'])[9]");
 
             // upload shareholders holding less than 10% interest
