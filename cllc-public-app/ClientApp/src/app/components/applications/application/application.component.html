@@ -270,8 +270,8 @@
                     formControlName="establishmentName" id="establishmentName">
                 </app-field>
                 <p *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly">Establishment names are subject to approval by LCRB</p>
-                <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.LiquorLicenceTransfer">
-                  As part of the licence transfer, you can change the name of the establishment.
+                <p *ngIf="canRenameEstablishment()">
+                  As part of the application, you can change the name of the establishment.
                   If the name of the establishment is changing, you must provide a drawing or a photo of your proposed establishment sign below.
                 </p>
               </div>
@@ -1195,12 +1195,12 @@
           <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
             <h3 class="blue-header">HOURS OF SALE</h3>
             <div class="padded-section content-bottom">
-              <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.FP">
+              <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.FP || application?.applicationType?.name === ApplicationTypeNames.FPRelo">
                 The standard service hours for a Food Primary are between 9:00AM and midnight. You may extend these hours by
                 submitting an Extend Hours of Service Beyond Standard Service Hours application from the application dashboard after
                 you submit your Food Primary application. LG/IN approval is required.
               </p>
-              <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.FP">
+              <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.FP && application?.applicationType?.name !== ApplicationTypeNames.FPRelo">
                 Indicate the
                 proposed hours of sales below.
               </p>
