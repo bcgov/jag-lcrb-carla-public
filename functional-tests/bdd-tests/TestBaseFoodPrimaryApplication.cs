@@ -52,10 +52,10 @@ namespace bdd_tests
             FileUpload("distribution_plan.pdf", "(//input[@type='file'])[6]");
 
             // upload register of directors and officers
-            FileUpload("todo.pdf", "(//input[@type='file'])[9]");
+            FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[9]");
 
             // upload shareholders holding less than 10% interest
-            FileUpload("todo.pdf", "(//input[@type='file'])[12]");
+            FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[12]");
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
