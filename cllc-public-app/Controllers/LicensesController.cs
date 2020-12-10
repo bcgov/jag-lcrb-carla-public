@@ -1173,11 +1173,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var templateName = "cannabis_licence";
 
                     switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
-                    {
+                    {/*
                         case "Marketing":
                             templateName = "cannabis_marketer_licence";
                             break;
-                        /*
+                        
                         case "Catering":
                             templateName = "catering_licence";
                             break;
@@ -1202,6 +1202,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
                         case "Cannabis Retail Store":
+                        case "Marketing":
                             keyWord = "Cannabis";
                             templateName = "liquor_licence";
                             break;

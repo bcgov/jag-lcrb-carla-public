@@ -493,8 +493,9 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     };
   }
 
+  // TO DO: re-write this
   licenceTypeHasEvents(licenceType: string) {
-    return licenceType.indexOf('Catering') >= 0 || licenceType.indexOf('Wine Store') >= 0 || licenceType.indexOf('Manufacturer') >= 0;
+    return (licenceType.indexOf('Catering') >= 0 || licenceType.indexOf('Wine Store') >= 0 || licenceType.indexOf('Manufacturer') >= 0 || licenceType.indexOf('Food Primary') >= 0);
   }
 
   licenceTypeHasTerms(licenceType: string) {

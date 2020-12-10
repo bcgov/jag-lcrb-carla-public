@@ -76,6 +76,7 @@ export enum ApplicationTypeNames {
   CRSTransferofOwnership = 'CRS Transfer of Ownership',
   CannabisRetailStore = 'Cannabis Retail Store',
   FP = 'Food Primary',
+  FPRelo = 'Food Primary Relocation',
   LicenseeChanges = 'Licensee Changes',
   Marketer = 'Marketing',
   MarketingRenewal = 'Marketing Renewal',
