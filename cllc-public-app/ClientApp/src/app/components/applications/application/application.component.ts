@@ -33,7 +33,6 @@ import { LocalGovernmentDataService } from '@services/local-government-data.serv
 import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { AreaCategory } from '@models/service-area.model';
-import { LgApprovalsComponent } from '@components/lg-approvals/lg-approvals.component';
 
 const ServiceHours = [
   '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
