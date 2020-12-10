@@ -86,14 +86,14 @@ export class FederalReportingComponent implements OnInit {
       this.licenceDataService.getAllCurrentLicenses(),
       this.monthlyReportDataService.getAllCurrentMonthlyReports(true)
     ])
-    .subscribe(results => {
-      this.licenses = results[0].filter(l => l.licenceTypeName === 'Cannabis Retail Store');
-      this.monthlyReports = results[1];
+      .subscribe(results => {
+        this.licenses = results[0].filter(l => l.licenceTypeName === 'Cannabis Retail Store');
+        this.monthlyReports = results[1];
 
-      this.routeParams.subscribe(params => {
-        this.updateStateFromParams(params);
+        this.routeParams.subscribe(params => {
+          this.updateStateFromParams(params);
+        });
       });
-    });
 
     this.routeParams.subscribe(params => {
       this.updateStateFromParams(params);
@@ -125,16 +125,16 @@ export class FederalReportingComponent implements OnInit {
     this.busy = forkJoin([
       this.licenceDataService.getAllCurrentLicenses()
     ])
-    .subscribe(([licenses]) => {
-      this.licenses = licenses;
-      this.selectedLicenceIndex = this.licenses.findIndex(l => l.licenseId === licenceId);
-      // no monthly report chosen
-      if (monthlyReportId === null) {
-        this.busy = this.getMonthlyReports(licenceId);
-      } else {
-        this.busy = this.getMonthlyReports(licenceId, monthlyReportId);
-      }
-    });
+      .subscribe(([licenses]) => {
+        this.licenses = licenses;
+        this.selectedLicenceIndex = this.licenses.findIndex(l => l.licenseId === licenceId);
+        // no monthly report chosen
+        if (monthlyReportId === null) {
+          this.busy = this.getMonthlyReports(licenceId);
+        } else {
+          this.busy = this.getMonthlyReports(licenceId, monthlyReportId);
+        }
+      });
   }
 
   getMonthlyReports(licenceId, monthlyReportId = null) {
@@ -142,20 +142,20 @@ export class FederalReportingComponent implements OnInit {
     return forkJoin([
       this.monthlyReportDataService.getMonthlyReportsByLicence(licenceId)
     ])
-    .subscribe(([monthlyReports]) => {
-      this.monthlyReports = monthlyReports;
-      this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === licenceId);
-      if (monthlyReportId !== null) {
-        this.selectedMonthlyReportIndex = this.shownMonthlyReports.findIndex(r => r.monthlyReportId === monthlyReportId);
-      } else if (this.monthlyReports.length > 0) {
-        this.selectedMonthlyReportIndex = 0;
-        this.router.navigate([
-          `/federal-reporting/${this.licenses[this.selectedLicenceIndex].licenseId}/${this.monthlyReports[0].monthlyReportId}`
-        ]);
-      }
-      this.renderMonthlyReport();
-      this.loadingMonthlyReports = false;
-    });
+      .subscribe(([monthlyReports]) => {
+        this.monthlyReports = monthlyReports;
+        this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === licenceId);
+        if (monthlyReportId !== null) {
+          this.selectedMonthlyReportIndex = this.shownMonthlyReports.findIndex(r => r.monthlyReportId === monthlyReportId);
+        } else if (this.monthlyReports.length > 0) {
+          this.selectedMonthlyReportIndex = 0;
+          this.router.navigate([
+            `/federal-reporting/${this.licenses[this.selectedLicenceIndex].licenseId}/${this.monthlyReports[0].monthlyReportId}`
+          ]);
+        }
+        this.renderMonthlyReport();
+        this.loadingMonthlyReports = false;
+      });
   }
 
   save(submit = false) {
@@ -207,24 +207,24 @@ export class FederalReportingComponent implements OnInit {
     this.visibleInventoryReports = [];
     this.productForms = this.shownMonthlyReports[this.selectedMonthlyReportIndex].inventorySalesReports.map((report) => {
       if ((report.openingInventory !== null && report.openingInventory !== 0) ||
-          (report.domesticAdditions !== null && report.domesticAdditions !== 0) ||
-          (report.returnsAdditions !== null && report.returnsAdditions !== 0) ||
-          (report.otherAdditions !== null && report.otherAdditions !== 0) ||
-          (report.domesticReductions !== null && report.domesticReductions !== 0) ||
-          (report.returnsReductions !== null && report.returnsReductions !== 0) ||
-          (report.destroyedReductions !== null && report.destroyedReductions !== 0) ||
-          (report.lostReductions !== null && report.lostReductions !== 0) ||
-          (report.otherReductions !== null && report.otherReductions !== 0) ||
-          (report.closingNumber !== null && report.closingNumber !== 0) ||
-          (report.closingValue !== null && report.closingValue !== 0) ||
-          (report.closingWeight !== null && report.closingWeight !== 0) ||
-          (report.totalSeeds !== null && report.totalSeeds !== 0) ||
-          (report.totalSalesToConsumerQty !== null && report.totalSalesToConsumerQty !== 0) ||
-          (report.totalSalesToConsumerValue !== null && report.totalSalesToConsumerValue !== 0) ||
-          (report.totalSalesToRetailerQty !== null && report.totalSalesToRetailerQty !== 0) ||
-          (report.totalSalesToRetailerValue !== null && report.totalSalesToRetailerValue !== 0) ||
-          (report.otherDescription !== null)) {
-            this.visibleInventoryReports.push(report.inventoryReportId);
+        (report.domesticAdditions !== null && report.domesticAdditions !== 0) ||
+        (report.returnsAdditions !== null && report.returnsAdditions !== 0) ||
+        (report.otherAdditions !== null && report.otherAdditions !== 0) ||
+        (report.domesticReductions !== null && report.domesticReductions !== 0) ||
+        (report.returnsReductions !== null && report.returnsReductions !== 0) ||
+        (report.destroyedReductions !== null && report.destroyedReductions !== 0) ||
+        (report.lostReductions !== null && report.lostReductions !== 0) ||
+        (report.otherReductions !== null && report.otherReductions !== 0) ||
+        (report.closingNumber !== null && report.closingNumber !== 0) ||
+        (report.closingValue !== null && report.closingValue !== 0) ||
+        (report.closingWeight !== null && report.closingWeight !== 0) ||
+        (report.totalSeeds !== null && report.totalSeeds !== 0) ||
+        (report.totalSalesToConsumerQty !== null && report.totalSalesToConsumerQty !== 0) ||
+        (report.totalSalesToConsumerValue !== null && report.totalSalesToConsumerValue !== 0) ||
+        (report.totalSalesToRetailerQty !== null && report.totalSalesToRetailerQty !== 0) ||
+        (report.totalSalesToRetailerValue !== null && report.totalSalesToRetailerValue !== 0) ||
+        (report.otherDescription !== null)) {
+        this.visibleInventoryReports.push(report.inventoryReportId);
       }
       return this.createProductForm(report);
     });
