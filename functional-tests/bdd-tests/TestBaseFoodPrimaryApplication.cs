@@ -36,14 +36,11 @@ namespace bdd_tests
 
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
-            string conGiven = "Given";
-            string conSurname = "Surname";
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
-
 
             // upload the central securities register
             FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");

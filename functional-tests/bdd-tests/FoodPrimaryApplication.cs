@@ -24,8 +24,6 @@ Scenario: Partnership Food Primary Application
     And I review the account profile for a partnership
     And I complete the Food Primary application
     And I click on the Submit button
-    And I review the security screening requirements for a partnership
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
     And I click on the Dashboard tab
@@ -40,8 +38,6 @@ Scenario: Private Corporation Food Primary Application
     And I review the account profile for a private corporation
     And I complete the Food Primary application
     And I click on the Submit button
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
     And I click on the Dashboard tab
@@ -56,8 +52,6 @@ Scenario: Public Corporation Food Primary Application
     And I review the account profile for a public corporation
     And I complete the Food Primary application
     And I click on the Submit button
-    And I review the security screening requirements for a public corporation
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
     And I click on the Dashboard tab
@@ -72,8 +66,6 @@ Scenario: Society Food Primary Application
     And I review the account profile for a society
     And I complete the Food Primary application
     And I click on the Submit button
-    And I review the security screening requirements for a society
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
     And I click on the Dashboard tab
@@ -90,8 +82,6 @@ Scenario: Sole Proprietorship Food Primary Application
     And I click on the button for Submit Organization Information
     And I complete the Food Primary application
     And I click on the Submit button
-    And I review the security screening requirements for a sole proprietorship
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
     And I click on the Dashboard tab
