@@ -94,13 +94,51 @@ namespace bdd_tests
             NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
             uiPoliceJurisdiction2.Click();
 
+            // enter the store email
+            NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
+            uiEstabEmail.SendKeys(estEmail);
+
+            // enter the store phone number
+            NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
+            uiEstabPhone.SendKeys(estPhone);
+
             // upload signage document
             FileUpload("signage.pdf", "(//input[@type='file'])[17]");
 
             // upload floor plan
             FileUpload("floor_plan.pdf", "(//input[@type='file'])[20]");
 
-            // select hours of sale - TODO
+            // select the owner checkbox
+            NgWebElement uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwnerBusiness']"));
+            uiOwner.Click();
+
+            // select the valid interest checkbox
+            NgWebElement uiValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='hasValidInterest']"));
+            uiValidInterest.Click();
+
+            // select the future valid interest checkbox
+            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-4[formcontrolname='willhaveValidInterest']"));
+            uiFutureValidInterest.Click();
+
+            // enter the role of the application contact
+            NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
+            uiContactRole.SendKeys(conRole);
+
+            // enter the phone number of the application contact
+            NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonPhone]"));
+            uiContactPhone.SendKeys(conPhone);
+
+            // enter the email of the application contact
+            NgWebElement uiContactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
+            uiContactEmail.SendKeys(conEmail);
+
+            // click on the authorized to submit checkbox
+            NgWebElement uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            uiAuthorizedSubmit.Click();
+
+            // click on the signature agreement checkbox
+            NgWebElement uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
+            uiSignatureAgree.Click();
 
             // retrieve the current URL to get the application ID (needed downstream)
             string URL = ngDriver.Url;
