@@ -147,8 +147,8 @@ namespace bdd_tests
             if (specificButton == "Continue to Organization Review")
             {
                 // click on the Continue to Organization Review button
-                NgWebElement uiSaveForLaterButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-                uiSaveForLaterButton.Click();
+                NgWebElement uiContinueToOrganizationReview = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+                uiContinueToOrganizationReview.Click();
             }
         }
 
@@ -241,11 +241,17 @@ namespace bdd_tests
 
             if (applicationType == "a UBrew UVin application")
             {
-                // click on the a UBrew UVin application Licence Start Application button
+                // click on the UBrew UVin application Licence Start Application button
                 NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
                 uiStartAppButton.Click();
             }
 
+            if (applicationType == "Food Primary")
+            {
+                // click on the Food Primary Start Application button
+                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button#startFP"));
+                uiStartAppButton.Click();
+            }
         }
 
 
