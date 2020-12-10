@@ -172,7 +172,7 @@
                                     </a>
                                 </div>
                                 <div
-                                    *ngIf="item.licenceTypeName.indexOf('Catering') >= 0 && isActive(item) && (actionsVisible(item) || item.isOperated)">
+                                    *ngIf="((item.licenceTypeName.indexOf('Catering') >= 0 && isActive(item)) || hasEndorsementByName(item, 'Catering Endorsement')) && (actionsVisible(item) || item.isOperated)">
                                     <a [routerLink]="[ '/licence/' + item.licenseId + '/event']">
                                         <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Event
                                         Authorization
