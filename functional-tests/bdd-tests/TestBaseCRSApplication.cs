@@ -106,7 +106,6 @@ namespace bdd_tests
      
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
-
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address
