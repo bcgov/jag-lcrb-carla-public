@@ -352,8 +352,7 @@ namespace bdd_tests
 
                 // open the leader #3 row
                 NgWebElement uiOpenLeaderForm3 = ngDriver.FindElement(By.CssSelector("button.btn.btn-secondary"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiOpenLeaderForm3);
+                JavaScriptClick(uiOpenLeaderForm3);
 
                 // create the leader #3 info
                 string firstName3 = "Leader3First";
@@ -374,8 +373,7 @@ namespace bdd_tests
 
                 // select the leader #3 DOB
                 NgWebElement uiOpenLeaderDOB3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(4) input[formControlName='dateofBirthNew']"));
-                IJavaScriptExecutor executor2 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor2.ExecuteScript("arguments[0].click();", uiOpenLeaderDOB3);
+                JavaScriptClick(uiOpenLeaderDOB3);
 
                 // select the date
                 SharedCalendarDate();
