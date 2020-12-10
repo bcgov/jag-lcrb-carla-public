@@ -63,12 +63,10 @@ namespace bdd_tests
 
                 // select date of incorporation (= today)
                 NgWebElement uiCalendar1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='dateOfIncorporationInBC']"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiCalendar1);
+                JavaScriptClick(uiCalendar1);
 
                 NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-                IJavaScriptExecutor executor2 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor2.ExecuteScript("arguments[0].click();", uiCalendar2);
+                JavaScriptClick(uiCalendar2);
             }
 
             // enter the physical street address 1

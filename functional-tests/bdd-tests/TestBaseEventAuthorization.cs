@@ -196,19 +196,16 @@ namespace bdd_tests
 
             // click on the first day
             NgWebElement uiOpenCalendarFirstDay = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor.ExecuteScript("arguments[0].click();", uiOpenCalendarFirstDay);
+            JavaScriptClick(uiOpenCalendarFirstDay);
 
             // select event and liquor end time after 2am
             if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
             {
                 NgWebElement uiEventCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(3) .ngb-tp-minute .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
-                IJavaScriptExecutor executor2 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor2.ExecuteScript("arguments[0].click();", uiEventCloseTime);
+                JavaScriptClick(uiEventCloseTime);
 
                 NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(5) .ngb-tp-minute .btn-link:nth-child(1) .ngb-tp-chevron"));
-                IJavaScriptExecutor executor3 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor3.ExecuteScript("arguments[0].click();", uiLiquorCloseTime);
+                JavaScriptClick(uiLiquorCloseTime);
             }
 
             // select terms and conditions checkbox
