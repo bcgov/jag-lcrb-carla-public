@@ -352,8 +352,7 @@ namespace bdd_tests
 
                 // open the leader #3 row
                 NgWebElement uiOpenLeaderForm3 = ngDriver.FindElement(By.CssSelector("button.btn.btn-secondary"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiOpenLeaderForm3);
+                JavaScriptClick(uiOpenLeaderForm3);
 
                 // create the leader #3 info
                 string firstName3 = "Leader3First";
