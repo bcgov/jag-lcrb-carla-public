@@ -158,3 +158,19 @@ Scenario: Rural Agency Store Licence PDF Verification
     And the application is approved
     And I click on the link for Download Licence
     Then the correct Rural Agency Store PDF is generated with terms and conditions and hours of sales and without endorsements
+
+@manualtestonly
+Scenario: Private Corporation Food Primary Licence PDF Verification
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for Food Primary
+    And I review the account profile for a private corporation
+    And I complete the Food Primary application for a private corporation
+    And I click on the Submit button
+    And I enter the payment information
+    And I confirm the payment receipt for a Food Primary application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I pay the licensing fee
+    And I click on the link for Download Licence
+    Then the correct licence PDF is generated with hours of sale and terms and conditions

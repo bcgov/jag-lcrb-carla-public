@@ -1,9 +1,9 @@
-﻿Feature: FoodPrimaryApplication
+﻿Feature: FoodPrimaryThirdPartyOperator
     As a logged in business user
-    I want to submit a Food Primary Application for different business types
+    I want to designate a third party operator for a Food Primary licence for different business types
 
-@foodprimaryapp @partnership 
-Scenario: Partnership Food Primary Application
+@foodprimarythirdparty @partnership 
+Scenario: Partnership Food Primary Third Party Operator
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Food Primary
     And I review the account profile for a partnership
@@ -13,11 +13,16 @@ Scenario: Partnership Food Primary Application
     And I confirm the payment receipt for a Food Primary application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I pay the licensing fee 
+    And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
-@foodprimaryapp @privatecorporation
-Scenario: Private Corporation Food Primary Application
+@foodprimarythirdparty @privatecorporation
+Scenario: Private Corporation Food Primary Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -27,11 +32,16 @@ Scenario: Private Corporation Food Primary Application
     And I confirm the payment receipt for a Food Primary application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I pay the licensing fee 
+    And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
-@foodprimaryapp @publiccorporation
-Scenario: Public Corporation Food Primary Application
+@foodprimarythirdparty @publiccorporation
+Scenario: Public Corporation Food Primary Third Party Operator
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a public corporation
@@ -41,11 +51,16 @@ Scenario: Public Corporation Food Primary Application
     And I confirm the payment receipt for a Food Primary application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I pay the licensing fee 
+    And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
-@foodprimaryapp @society
-Scenario: Society Food Primary Application
+@foodprimarythirdparty @society
+Scenario: Society Food Primary Third Party Operator
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Food Primary
     And I review the account profile for a society
@@ -55,11 +70,16 @@ Scenario: Society Food Primary Application
     And I confirm the payment receipt for a Food Primary application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I pay the licensing fee
+    And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
-@foodprimaryapp @soleproprietorship
-Scenario: Sole Proprietorship Food Primary Application
+@foodprimarythirdparty @soleproprietorship
+Scenario: Sole Proprietorship Food Primary Third Party Operator
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
     And I review the account profile for a sole proprietorship
@@ -71,5 +91,10 @@ Scenario: Sole Proprietorship Food Primary Application
     And I confirm the payment receipt for a Food Primary application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I pay the licensing fee 
+    And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
