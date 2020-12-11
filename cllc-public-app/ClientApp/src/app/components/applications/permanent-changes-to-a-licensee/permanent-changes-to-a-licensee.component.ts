@@ -42,6 +42,9 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
   validationMessages: string[];
   @ViewChild('appContact') appContact: ContactComponent;
   appContactDisabled: boolean;
+  applicationId: string;
+  canCreateNewApplication: boolean;
+  createApplicationInProgress: boolean;
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -52,6 +55,12 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
   }
 
   changeList = [];
+
+  get selectedChangeList() {
+    return this.changeList
+      .filter(item => this.form && this.form.get(item.formControlName).value === true);
+  }
+
   form: FormGroup;
 
   constructor(private applicationDataService: ApplicationDataService,
@@ -72,6 +81,7 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
     this.route.paramMap
       .subscribe(pmap => {
         this.invoiceType = pmap.get('invoiceType');
+        this.applicationId = pmap.get('applicationId');
       });
   }
 
@@ -99,55 +109,65 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
   }
 
   private loadData() {
-    this.applicationDataService.getPermanentChangesToLicenseeData()
-      .subscribe(({ application, licences }) => {
-        this.liquorLicences = licences.filter(item => item.licenceTypeCategory === 'Liquor' && item.status === 'Active');
-        this.cannabisLicences = licences.filter(item => item.licenceTypeCategory === 'Cannabis' && item.status === 'Active');
-        this.application = application;
-        this.applicationContact = {
-          contactPersonFirstName: this.application.contactPersonFirstName,
-          contactPersonLastName: this.application.contactPersonLastName,
-          contactPersonRole: this.application.contactPersonRole,
-          contactPersonPhone: this.application.contactPersonPhone,
-          contactPersonEmail: this.application.contactPersonEmail
-        };
-
-        const needToVerifyPayment: boolean = (
-          (this.invoiceType === 'primary' && !this.application.primaryInvoicePaid) ||
-          (this.invoiceType === 'secondary' && !this.application.secondaryInvoicePaid)
-        );
-
-        if (needToVerifyPayment && !this.verifyRquestMade) {
-          this.verifyRquestMade = true;
-          this.paymentDataService.verifyPaymentURI(this.invoiceType + 'Invoice', this.application.id)
-            .subscribe(res => {
-              // report payment status
-              const paymentData = PaymentConfirmationComponent.parseVerifyResponse(res);
-              if (paymentData.isApproved) {
-                this.snackBar.open(paymentData.paymentTransactionMessage, 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-              } else {
-                this.snackBar.open(paymentData.paymentTransactionMessage, 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-              }
-
-              this.loadData();
-            });
-        } else {
-          this.dataLoaded = true;
-
-          // if all required payments are made, go to the dashboard
-          if ((!this.hasCannabis || this.application.primaryInvoicePaid) &&
-            (!this.hasLiquor || this.application.secondaryInvoicePaid)) {
-            this.router.navigateByUrl('/dashboard');
-          }
-
-          // if any payment was made, disable the form
-          if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
-            this.form.disable();
-            this.appContactDisabled = true;
-          }
-          this.form.patchValue(application);
-        }
+    this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId)
+      .subscribe((data) => {
+        this.setFormData(data);
       });
+  }
+
+  createApplication() {
+    this.router.navigateByUrl(`/permanent-changes-to-a-licensee`);
+  }
+
+  private setFormData({ application, licences }) {
+    this.liquorLicences = licences.filter(item => item.licenceTypeCategory === 'Liquor' && item.status === 'Active');
+    this.cannabisLicences = licences.filter(item => item.licenceTypeCategory === 'Cannabis' && item.status === 'Active');
+    this.application = application;
+    this.applicationContact = {
+      contactPersonFirstName: this.application.contactPersonFirstName,
+      contactPersonLastName: this.application.contactPersonLastName,
+      contactPersonRole: this.application.contactPersonRole,
+      contactPersonPhone: this.application.contactPersonPhone,
+      contactPersonEmail: this.application.contactPersonEmail
+    };
+
+    const needToVerifyPayment: boolean = (
+      (this.invoiceType === 'primary' && !this.application.primaryInvoicePaid) ||
+      (this.invoiceType === 'secondary' && !this.application.secondaryInvoicePaid)
+    );
+
+
+    if (needToVerifyPayment && !this.verifyRquestMade) {
+      this.verifyRquestMade = true;
+      this.paymentDataService.verifyPaymentURI(this.invoiceType + 'Invoice', this.application.id)
+        .subscribe(res => {
+          // report payment status
+          const paymentData = PaymentConfirmationComponent.parseVerifyResponse(res);
+          if (paymentData.isApproved) {
+            this.snackBar.open('Payment successful', 'Success', { duration: 3500, panelClass: ['green-snackbar'] });
+          } else {
+            this.snackBar.open(paymentData.paymentTransactionMessage, 'Fail', { duration: 5500, panelClass: ['red-snackbar'] });
+          }
+
+          this.loadData();
+        });
+    } else {
+      this.dataLoaded = true;
+
+      // if all required payments are made, go to the dashboard
+      if ((!this.hasCannabis || this.application.primaryInvoicePaid) &&
+        (!this.hasLiquor || this.application.secondaryInvoicePaid)) {
+        // this.router.navigateByUrl('/dashboard');
+        this.canCreateNewApplication = true;
+      }
+
+      // if any payment was made, disable the form
+      if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
+        this.form.disable();
+        this.appContactDisabled = true;
+      }
+      this.form.patchValue(application);
+    }
   }
 
   /**
@@ -182,8 +202,7 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
     this.showValidationMessages = false;
     this.validationMessages = [];
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
-    debugger;
-    return this.form.valid;
+    return this.form.disabled || this.form.valid;
   }
 
   isScreeningRequired(): boolean {
