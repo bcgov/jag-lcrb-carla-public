@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I complete the Food Primary application")]
-        public void CompleteFoodPrimaryApplication()
+        [And(@"I complete the Food Primary application for a (.*)")]
+        public void CompleteFoodPrimaryApplication(string bizType)
         {
             /* 
             Page Title: Food Primary Licence Application
@@ -42,17 +42,20 @@ namespace bdd_tests
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
-            // upload the central securities register
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+            if (bizType != "sole proprietorship")
+            {
+                // upload the central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
-            // upload supporting business documentation
-            FileUpload("distribution_plan.pdf", "(//input[@type='file'])[6]");
+                // upload supporting business documentation
+                FileUpload("distribution_plan.pdf", "(//input[@type='file'])[6]");
 
-            // upload register of directors and officers
-            FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[9]");
+                // upload register of directors and officers
+                FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[9]");
 
-            // upload shareholders holding less than 10% interest
-            FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[12]");
+                // upload shareholders holding less than 10% interest
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[12]");
+            }
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
