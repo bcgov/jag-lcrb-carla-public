@@ -21,13 +21,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         private void CustomInit()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Name")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
