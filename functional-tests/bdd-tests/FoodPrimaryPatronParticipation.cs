@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: FoodPrimaryBrandingChange
+Feature: FoodPrimaryPatronParticipation
     As a logged in business user
-    I want to request an establishment name change application for a Food Primary licence
+    I want to request a Patron Participation Entertainment Endorsement Application for a Food Primary licence
 
-@foodprimarybranding @partnership 
-Scenario: Partnership Food Primary Establishment Name Change
+@foodprimarypatronparticipation @partnership 
+Scenario: Partnership Food Primary Patron Participation Entertainment Endorsement
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Food Primary
     And I review the account profile for a partnership
@@ -30,12 +30,12 @@ Scenario: Partnership Food Primary Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a valid store name or branding change for Food Primary
+    And I request a Patron Participation Entertainment Endorsement application
     And the account is deleted
     Then I see the login page
 
-@foodprimarybranding @privatecorporation
-Scenario: Private Corporation Food Primary Establishment Name Change
+@foodprimarypatronparticipation @privatecorporation
+Scenario: Private Corporation Food Primary Patron Participation Entertainment Endorsement
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -47,12 +47,12 @@ Scenario: Private Corporation Food Primary Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a valid store name or branding change for Food Primary
+    And I request a Patron Participation Entertainment Endorsement application
     And the account is deleted
     Then I see the login page
 
-@foodprimarybranding @publiccorporation
-Scenario: Public Corporation Food Primary Establishment Name Change
+@foodprimarypatronparticipation @publiccorporation
+Scenario: Public Corporation Food Primary Patron Participation Entertainment Endorsement
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a public corporation
@@ -64,12 +64,12 @@ Scenario: Public Corporation Food Primary Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a valid store name or branding change for Food Primary
+    And I request a Patron Participation Entertainment Endorsement application
     And the account is deleted
     Then I see the login page
 
-@foodprimarybranding @society
-Scenario: Society Food Primary Establishment Name Change
+@foodprimarypatronparticipation @society
+Scenario: Society Food Primary Patron Participation Entertainment Endorsement
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Food Primary
     And I review the account profile for a society
@@ -81,12 +81,12 @@ Scenario: Society Food Primary Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee
-    And I request a valid store name or branding change for Food Primary
+    And I request a Patron Participation Entertainment Endorsement application
     And the account is deleted
     Then I see the login page
 
-@foodprimarybranding @soleproprietorship
-Scenario: Sole Proprietorship Food Primary Establishment Name Change
+@foodprimarypatronparticipation @soleproprietorship
+Scenario: Sole Proprietorship Food Primary Patron Participation Entertainment Endorsement
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
     And I review the account profile for a sole proprietorship
@@ -100,16 +100,16 @@ Scenario: Sole Proprietorship Food Primary Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a valid store name or branding change for Food Primary
+    And I request a Patron Participation Entertainment Endorsement application
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./FoodPrimaryBrandingChange.feature")]
+    [FeatureFile("./FoodPrimaryPatronParticipation.feature")]
     [Collection("Liquor")]
-    public sealed class FoodPrimaryBrandingChange : TestBase
+    public sealed class FoodPrimaryPatronParticipation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
