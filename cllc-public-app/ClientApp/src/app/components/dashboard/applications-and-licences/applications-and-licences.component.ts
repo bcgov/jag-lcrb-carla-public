@@ -535,6 +535,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   getApplicationLink(item: ApplicationSummary) {
     if (item.isForLicence || this.isApprovedByLGAndNotSubmitted(item)) {
       return `/multi-step-application/${item.id}`;
+    } else if(item.applicationTypeName == ApplicationTypeNames.PermanentChangeToALicensee){
+      return `/permanent-change-to-a-licensee/${item.id}`;
     }
     return `/account-profile/${item.id}`;
   }
