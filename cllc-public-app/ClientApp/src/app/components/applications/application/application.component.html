@@ -425,6 +425,10 @@
               </div>
             </section>
 
+            </div>
+          </section>
+        </section>
+
 
               <!-- Letter of Intent -->
               <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent)">
@@ -446,10 +450,6 @@
                 </section>
               </section>
               </section>
-
-            </div>
-          </section>
-        </section>
 
 
             <!-- Local Government and Police Jurisdiction -->
@@ -880,7 +880,7 @@
                   <!-- if there is configured floor plan text, show it-->
                   <div *ngIf="htmlContent.floorPlan">
                     <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.floorPlan"></section>
-                    <img *ngIf="application?.licenseType == 'Food Primary'" src="assets/Food-Primary-floor-plan-sample.png" style="width: 700px;" alt="Sample Floor Plan">
+                    <img *ngIf="application?.licenseType == 'Food Primary' && application?.applicationType.name != 'Temporary Extension of Licensed Area'" src="assets/Food-Primary-floor-plan-sample.png" style="width: 700px;" alt="Sample Floor Plan">
                   </div>
 
                   <!-- otherwise switch to legacy mode-->
@@ -1414,7 +1414,9 @@
               <br>
               <label for="">Supporting Documents</label>
               <br>
-              <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+              <p *ngIf="application?.applicationType?.name == 'Temporary Use Area Endorsement'">Please download, print and have signed the <a href="test" target="_blank">Property Ownership Acknowledgement and Declaration Statements</a> form.</p>
+
+              <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer && application?.applicationType?.name !== 'Temporary Use Area Endorsement'">
                 Please download the
                 <span *ngIf=" application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
                   <a *ngIf="account?.businessType === 'SoleProprietorship'"
