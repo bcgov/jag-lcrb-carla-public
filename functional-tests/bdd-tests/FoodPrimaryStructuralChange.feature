@@ -79,7 +79,7 @@ Scenario: Society Food Primary Structural Change
     Then I see the login page
 
 @foodprimarystructuralchange @soleproprietorship
-Scenario: Sole Proprietorship Food Structural Change
+Scenario: Sole Proprietorship Food Primary Structural Change
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
     And I review the account profile for a sole proprietorship
