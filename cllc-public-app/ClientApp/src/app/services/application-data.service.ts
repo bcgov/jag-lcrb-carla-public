@@ -58,8 +58,12 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getPermanentChangesToLicenseeData(): Observable<any> {
-    return this.http.get<any>(this.apiPath + 'permanent-change-to-licensee-data', { headers: this.headers })
+  getPermanentChangesToLicenseeData(applicationId: string = null): Observable<any> {
+    let url = this.apiPath + 'permanent-change-to-licensee-data';
+    if(applicationId){
+      url  = `${url}?applicationId=${applicationId}`
+    }
+    return this.http.get<any>(url, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
