@@ -15,7 +15,7 @@ Scenario: Partnership Food Primary Relocation Application
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a store relocation for Cannabis
+    And I request a store relocation for Food Primary
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And the account is deleted
@@ -34,7 +34,7 @@ Scenario: Private Corporation Food Primary Relocation Application
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a store relocation for Cannabis
+    And I request a store relocation for Food Primary
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And the account is deleted
@@ -53,7 +53,7 @@ Scenario: Public Corporation Food Primary Relocation Application
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a store relocation for Cannabis
+    And I request a store relocation for Food Primary
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And the account is deleted
@@ -72,7 +72,7 @@ Scenario: Society Food Primary Relocation Application
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee
-    And I request a store relocation for Cannabis
+    And I request a store relocation for Food Primary
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And the account is deleted
@@ -93,7 +93,7 @@ Scenario: Sole Proprietorship Food Primary Relocation Application
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a store relocation for Cannabis
+    And I request a store relocation for Food Primary
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
     And the account is deleted
