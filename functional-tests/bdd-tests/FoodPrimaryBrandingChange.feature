@@ -15,7 +15,7 @@ Scenario: Partnership Food Primary Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a valid store name or branding change for Catering
+    And I request a valid store name or branding change for Food Primary
     And the account is deleted
     Then I see the login page
 
@@ -32,7 +32,7 @@ Scenario: Private Corporation Food Primary Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a valid store name or branding change for Catering
+    And I request a valid store name or branding change for Food Primary
     And the account is deleted
     Then I see the login page
 
@@ -49,7 +49,7 @@ Scenario: Public Corporation Food Primary Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a valid store name or branding change for Catering
+    And I request a valid store name or branding change for Food Primary
     And the account is deleted
     Then I see the login page
 
@@ -66,7 +66,7 @@ Scenario: Society Food Primary Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee
-    And I request a valid store name or branding change for Catering
+    And I request a valid store name or branding change for Food Primary
     And the account is deleted
     Then I see the login page
 
@@ -85,6 +85,6 @@ Scenario: Sole Proprietorship Food Primary Establishment Name Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a valid store name or branding change for Catering
+    And I request a valid store name or branding change for Food Primary
     And the account is deleted
     Then I see the login page
