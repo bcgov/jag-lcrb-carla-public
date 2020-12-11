@@ -183,13 +183,19 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'permanent-changes-to-a-licensee',
+    path: 'permanent-change-to-a-licensee',
     component: PermanentChangesToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'PermanentChangesToLicensee' }
   },
   {
-    path: 'permanent-changes-to-a-licensee/:invoiceType',
+    path: 'permanent-change-to-a-licensee/:applicationId/:invoiceType',
+    component: PermanentChangesToALicenseeComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'PermanentChangesToLicensee' }
+  },
+  {
+    path: 'permanent-change-to-a-licensee/:applicationId',
     component: PermanentChangesToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'PermanentChangesToLicensee' }

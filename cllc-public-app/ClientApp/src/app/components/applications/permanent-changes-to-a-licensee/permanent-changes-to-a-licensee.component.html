@@ -1,5 +1,7 @@
 <div [formGroup]="form" class="form-wrapper">
-    <h1>Permanent Changes to a Licensee</h1>
+    <h1>Permanent Changes to a Licensee 
+        <span class="success-green" *ngIf="canCreateNewApplication">( PAID )</span>
+    </h1>
     <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
 
     <ng-container *ngIf="dataLoaded">
@@ -934,7 +936,7 @@
         </section>
 
         <!-- Payment -->
-        <section>
+        <section *ngIf="selectedChangeList?.length > 0">
             <h3 class="blue-header ngtest-payment">
                 PAYMENT
             </h3>
@@ -943,6 +945,8 @@
                     types of licences
                     must be paid separately. Your application will not be submitted to the Branch until both are paid.
                 </p>
+
+                <hr>
 
                 <table class="w-100" *ngIf="hasCannabis" class="paymentSummary">
                     <tr>
@@ -955,15 +959,15 @@
                         <th class="paymentSummary">No. Licences</th>
                         <th class="paymentSummary">Cost</th>
                     </tr>
-                    <ng-container *ngFor="let item of changeList">
-                        <tr *ngIf="form.get(item.formControlName).value === true">
+                    <ng-container *ngFor="let item of selectedChangeList">
+                        <tr>
                             <td class="paymentSummary1">{{item.name}}</td>
                             <td class="paymentSummary2">x {{cannabisLicences.length}}</td>
                             <td class="paymentSummary2">${{item.CannabisFee}}</td>
                         </tr>
                     </ng-container>
                     <tr>
-                        <td colspan=3 style="padding:5px; text-align: right; border-bottom: solid #494949 1px;">
+                        <td colspan=3 style="padding:5px; text-align: right;">
                             <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary"
                                 style="width:250px;" (click)="submit_application('primary')">
                                 <span>{{ application?.primaryInvoicePaid ? 'FEES PAID' : 'PAY CANNABIS FEES'}}</span>
@@ -974,6 +978,8 @@
                     </tr>
 
                 </table>
+
+                <hr>
 
                 <table class="w-100" *ngIf="hasLiquor" class="paymentSummary">
                     <tr>
@@ -995,7 +1001,7 @@
                     </ng-container>
 
                     <tr>
-                        <td colspan=3 style="padding:5px; text-align: right; border-bottom: solid #494949 1px;">
+                        <td colspan=3 style="padding:5px; text-align: right;">
                             <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid"
                                 style="width:250px;" (click)="submit_application('secondary')">
                                 <span>{{ application?.secondaryInvoicePaid ? 'FEES PAID' : 'PAY LIQUOR FEES' }}</span>
@@ -1005,6 +1011,18 @@
                         </td>
                     </tr>
                 </table>
+
+                <ng-container *ngIf="canCreateNewApplication">
+                    <hr>
+                    <section class="d-flex flex-row-reverse">
+                        <button mat-raised-button color="primary"
+                            style="width:250px;" (click)="createApplication('secondary')">
+                            <span>New Application</span>
+                            <mat-progress-bar *ngIf="createApplicationInProgress" mode="indeterminate">
+                            </mat-progress-bar>
+                        </button>
+                    </section>
+                </ng-container>
             </div>
         </section>
 

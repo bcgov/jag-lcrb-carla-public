@@ -253,8 +253,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 Dictionary<string, string> redirectUrl;
                 redirectUrl = new Dictionary<string, string>();
 
-                bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // set to true for Liquor.
-                string redirectPath = $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/permanent-changes-to-a-licensee/{invoiceType}";
+                bool isAlternateAccount = (invoiceType == secondary); // set to true for Liquor. The secondary invoice type is for Liquor.
+                string redirectPath = $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/permanent-changes-to-a-licensee/{id}/{invoiceType}";
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
 
                 _logger.Debug(">>>>>" + redirectUrl["url"]);
@@ -734,10 +734,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Guid invoiceGuid = Guid.Parse(invoiceId);
             _logger.Debug("Found invoice for application = " + invoiceId);
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceGuid);
-            var ordernum = invoice.AdoxioTransactionid;
+            string ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
 
-            bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // determine if it is for liquor
+            bool isAlternateAccount = (invoiceType == secondary); // determine if it is for liquor
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
 
