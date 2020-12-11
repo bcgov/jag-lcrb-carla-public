@@ -593,7 +593,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings)
+        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings, string applicationId)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;
             var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee");
@@ -619,8 +619,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
-            if (applicationType != null)
-                filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
+            // this filter is required
+            filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
+
+            if(!string.IsNullOrEmpty(applicationId)){
+                filter += $" and adoxio_applicationid eq {applicationId}";
+            }
+
 
             try
             {
@@ -639,12 +644,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             bool applicationIsPaid = (
-                result != null &&
-                (result._adoxioInvoiceValue == null || result.AdoxioPrimaryapplicationinvoicepaid == 1) &&
-                (result._adoxioSecondaryapplicationinvoiceValue == null || result.AdoxioSecondaryapplicationinvoicepaid == 1)
+                (result?._adoxioInvoiceValue != null  && result?._adoxioSecondaryapplicationinvoiceValue == null) && // an invoice exists
+                (result?._adoxioInvoiceValue == null || result?.AdoxioPrimaryapplicationinvoicepaid == 1) &&
+                (result?._adoxioSecondaryapplicationinvoiceValue == null || result?.AdoxioSecondaryapplicationinvoicepaid == 1)
                 );
 
-            if ((result == null || applicationIsPaid) && applicationType != null)
+            if ((result == null || applicationIsPaid) && applicationType != null && !string.IsNullOrEmpty(applicationId))
             {
                 // create one.
                 var account = _dynamicsClient.GetAccountById(userSettings.AccountId);
@@ -674,14 +679,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet("permanent-change-to-licensee-data")]
-        public async Task<IActionResult> GetPermanetChangesToLicenseeData()
+        public async Task<IActionResult> GetPermanetChangesToLicenseeData([FromQuery] string applicationId)
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             PermanentChangesPageData data = new PermanentChangesPageData();
 
             // set application type relationship 
-            var app = GetPermanentChangeApplication(userSettings);
+            var app = GetPermanentChangeApplication(userSettings, applicationId);
             data.Application = await app.ToViewModel(_dynamicsClient, _cache, _logger);
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);

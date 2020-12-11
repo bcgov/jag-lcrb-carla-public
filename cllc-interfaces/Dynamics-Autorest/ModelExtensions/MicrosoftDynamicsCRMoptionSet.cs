@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Name")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
