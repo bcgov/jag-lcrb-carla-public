@@ -12,21 +12,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
     class MicrosoftDynamicsCRMadoxioWorkerMetadata
     {
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateofbirth")]
-        [JsonConverter(typeof(SimpleDateTimeConverter))]
-        public System.DateTimeOffset? AdoxioDateofbirth { get; set; }
+        // 2020-12-11 ASR - Removed extra annotations for "adoxio_dateofbirth" to fix data serialization error
     }
 
     [MetadataType(typeof(MicrosoftDynamicsCRMadoxioWorkerMetadata))]
     public partial class MicrosoftDynamicsCRMadoxioWorker
     {
-
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_ContactId@odata.bind")]
         public string ContactIdAccountODataBind { get; set; }
-        
     }
 }
