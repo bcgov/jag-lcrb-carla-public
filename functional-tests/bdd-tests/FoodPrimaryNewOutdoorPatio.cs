@@ -107,9 +107,9 @@ Scenario: Sole Proprietorship Food New Outdoor Patio
 
 namespace bdd_tests
 {
-    [FeatureFile("./FoodPrimaryRelocation.feature")]
+    [FeatureFile("./FoodPrimaryNewOutdoorPatio.feature")]
     [Collection("Liquor")]
-    public sealed class FoodPrimaryRelocation : TestBase
+    public sealed class FoodPrimaryNewOutdoorPatio : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
