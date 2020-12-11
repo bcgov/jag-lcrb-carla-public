@@ -11,10 +11,10 @@
       <!-- Preamble -->
       <section class="ngtest-preamble-content">
         <p>
-            This application must be completed when a licensee wishes to engage a third party to manage the operation 
-            of the licensee's establishment.  The third party operator participates in a contractual agreement with 
-            the licensee and benefits financially from the arrangement. The third party operator agreement must be in 
-            place when a licensee wishes to engage a third party--either a proprietorship, corporate entity or partnership 
+            This application must be completed when a licensee wishes to engage a third party to manage the operation
+            of the licensee's establishment.  The third party operator participates in a contractual agreement with
+            the licensee and benefits financially from the arrangement. The third party operator agreement must be in
+            place when a licensee wishes to engage a third party--either a proprietorship, corporate entity or partnership
             to manage the operation of the licensee's establishment. A third party operator:
         </p>
         <ul>
@@ -131,7 +131,7 @@
             </div>
           </section>
         </app-field>
-        <p *ngIf="licence.licenseType === 'Cannabis Retail Store'">
+        <p *ngIf="licence?.licenseType === 'Cannabis Retail Store'">
           Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
           manager
           an application, or
@@ -139,7 +139,7 @@
           information, or
           fails to disclose a material fact”.
         </p>
-        <p *ngIf="licence.licenseType !== 'Cannabis Retail Store'">
+        <p *ngIf="licence?.licenseType !== 'Cannabis Retail Store'">
           Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to issue, renew,
           transfer or amend a licence if the applicant fails to disclose a material fact required by the application or
           makes a false or misleading statement in the application.”
@@ -173,9 +173,9 @@
               <div ><p>Once you click submit:</p>
                 <ul>
                   <li>The Third Party Operator you identified will be notified that you have initiated the application.</li>
-                  <li>They can complete the application through their account. 
+                  <li>They can complete the application through their account.
                   <li>The application will be available on their dashboard as an In Progress application.</li>
-                  <li>They will be required to pay the $330 application fee.</li>      
+                  <li>They will be required to pay the $330 application fee.</li>
                 </ul>
               </div>
             </section>
