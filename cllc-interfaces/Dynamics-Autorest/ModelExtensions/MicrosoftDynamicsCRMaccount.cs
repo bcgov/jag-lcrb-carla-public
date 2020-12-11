@@ -29,5 +29,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "primarycontactid@odata.bind")]
         public string PrimaryContactIdODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "contact_customer_accounts@odata.bind")]
+        public string ContactCustomerAccountsODataBind { get; set; }
+        
     }
 }

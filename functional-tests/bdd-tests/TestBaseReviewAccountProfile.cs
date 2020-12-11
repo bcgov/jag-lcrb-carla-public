@@ -44,6 +44,8 @@ namespace bdd_tests
 
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
+            string corpGiven = "Automated";
+            string corpSurname = "Testing";
             string corpTitle = "CEO";
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
@@ -61,12 +63,10 @@ namespace bdd_tests
 
                 // select date of incorporation (= today)
                 NgWebElement uiCalendar1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='dateOfIncorporationInBC']"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiCalendar1);
+                JavaScriptClick(uiCalendar1);
 
                 NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-                IJavaScriptExecutor executor2 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor2.ExecuteScript("arguments[0].click();", uiCalendar2);
+                JavaScriptClick(uiCalendar2);
             }
 
             // enter the physical street address 1
@@ -131,6 +131,14 @@ namespace bdd_tests
                 NgWebElement uiLiquorPolicyLink = ngDriver.FindElement(By.CssSelector("input[formcontrolname='websiteUrl']"));
                 uiLiquorPolicyLink.SendKeys(liquorPolicyLink);
             }
+
+            // enter the contact given name
+            NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstname']"));
+            uiFirstName.SendKeys(corpGiven);
+
+            // enter the contact surname
+            NgWebElement uiLastName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lastname']"));
+            uiLastName.SendKeys(corpSurname);
 
             // enter the contact title
             NgWebElement uiCorpTitle = ngDriver.FindElement(By.CssSelector("input[formControlName='jobTitle']"));

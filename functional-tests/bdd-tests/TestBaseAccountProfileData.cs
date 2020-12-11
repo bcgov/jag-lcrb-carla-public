@@ -156,7 +156,7 @@ namespace bdd_tests
             NgWebElement uiLastName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lastname']"));
             string fieldValueLastName = uiLastName.GetAttribute("value");
             Assert.True(fieldValueLastName != null);
-            
+
             // check authorized person title/position is correct
             NgWebElement uiJobTitle = ngDriver.FindElement(By.CssSelector("input[formcontrolname='jobTitle']"));
             Assert.True(uiJobTitle.GetAttribute("value") == "CEO");

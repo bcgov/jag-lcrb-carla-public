@@ -134,8 +134,7 @@ namespace bdd_tests
             {
                 // click on the Submit Org Info button
                 NgWebElement uiSubmitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiSubmitOrgInfoButton);
+                JavaScriptClick(uiSubmitOrgInfoButton);
             }
 
             if (specificButton == "Save for Later")
@@ -148,8 +147,8 @@ namespace bdd_tests
             if (specificButton == "Continue to Organization Review")
             {
                 // click on the Continue to Organization Review button
-                NgWebElement uiSaveForLaterButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-                uiSaveForLaterButton.Click();
+                NgWebElement uiContinueToOrganizationReview = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+                uiContinueToOrganizationReview.Click();
             }
         }
 
@@ -158,8 +157,7 @@ namespace bdd_tests
         public void ClickOnSubmitButton()
         {
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor.ExecuteScript("arguments[0].click();", uiSubmitButton);
+            JavaScriptClick(uiSubmitButton);
         }
 
 
@@ -168,8 +166,7 @@ namespace bdd_tests
         {
             // click on the Continue to Application button
             NgWebElement uiContinueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor.ExecuteScript("arguments[0].click();", uiContinueButton);
+            JavaScriptClick(uiContinueButton);
         }
 
 
@@ -244,11 +241,17 @@ namespace bdd_tests
 
             if (applicationType == "a UBrew UVin application")
             {
-                // click on the a UBrew UVin application Licence Start Application button
+                // click on the UBrew UVin application Licence Start Application button
                 NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
                 uiStartAppButton.Click();
             }
 
+            if (applicationType == "Food Primary")
+            {
+                // click on the Food Primary Start Application button
+                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button#startFP"));
+                uiStartAppButton.Click();
+            }
         }
 
 
@@ -256,13 +259,11 @@ namespace bdd_tests
         {
             // click on the previous button
             NgWebElement uiOpenCalendarPrevious = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-previous-button"));
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor.ExecuteScript("arguments[0].click();", uiOpenCalendarPrevious);
+            JavaScriptClick(uiOpenCalendarPrevious);
 
             // click on the first day
             NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            IJavaScriptExecutor executor2 = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor2.ExecuteScript("arguments[0].click();", uiOpenCalendarYear);
+            JavaScriptClick(uiOpenCalendarYear);
         }
 
         private string MakeAPICall(string url)
@@ -468,6 +469,12 @@ namespace bdd_tests
             }
             ngDriver.IgnoreSynchronization = false;
             ngDriver.Manage().Timeouts().ImplicitWait = tempTimeout;
+        }
+
+        public void JavaScriptClick(NgWebElement element)
+        {
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor.ExecuteScript("arguments[0].click();", element);
         }
     }
 }
