@@ -81,6 +81,14 @@ namespace bdd_tests
             NgWebElement uiPhysCity = ngDriver.FindElement(By.CssSelector("input[formControlName='physicalAddressCity']"));
             uiPhysCity.SendKeys(physCity);
 
+            // select non default province
+            NgWebElement uiNonDefaultProvince = ngDriver.FindElement(By.CssSelector("select[formcontrolname='physicalAddressProvince'] option[value='Alberta']"));
+            uiNonDefaultProvince.Click();
+
+            // select default province
+            NgWebElement uiDefaultProvince = ngDriver.FindElement(By.CssSelector("select[formcontrolname='physicalAddressProvince'] option[value='British Columbia']"));
+            uiDefaultProvince.Click();
+
             // enter the physical postal code
             NgWebElement uiPhysPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName='physicalAddressPostalCode']"));
             uiPhysPostalCode.SendKeys(physPostalCode);

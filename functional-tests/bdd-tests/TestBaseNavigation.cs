@@ -249,7 +249,7 @@ namespace bdd_tests
             if (applicationType == "Food Primary")
             {
                 // click on the Food Primary Start Application button
-                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button#startFP"));
+                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startFP']"));
                 uiStartAppButton.Click();
             }
         }
