@@ -74,8 +74,8 @@
                                     Suspended<i data-html="true" style="margin-left: 10px;"
                                         class="fas fa-question-circle" matTooltipClass="multiline-tooltip"
                                         matTooltip="Please contact LCRB to remove suspension"></i></p>
-                                <p *ngIf="item.transferRequested"><i class="fas fa-flag"
-                                        style="margin-right: 10px;"></i>Transfer Requested</p>
+                                <p *ngIf="item.transferRequested && !item.checklistConclusivelyDeem"><i class="fas fa-flag"
+                                    style="margin-right: 10px;"></i>Transfer In Progress</p>
                                 <p *ngIf="item.operated && !item.isOperated"><i class="fas fa-flag"
                                         style="margin-right: 10px;"></i>Licence Operated</p>
                             </div>
