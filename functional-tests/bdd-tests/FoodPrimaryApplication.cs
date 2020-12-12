@@ -22,7 +22,7 @@ Scenario: Partnership Food Primary Application
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Food Primary
     And I review the account profile for a partnership
-    And I complete the Food Primary application
+    And I complete the Food Primary application for a partnership
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
@@ -36,7 +36,7 @@ Scenario: Private Corporation Food Primary Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
-    And I complete the Food Primary application
+    And I complete the Food Primary application for a private corporation
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
@@ -50,7 +50,7 @@ Scenario: Public Corporation Food Primary Application
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a public corporation
-    And I complete the Food Primary application
+    And I complete the Food Primary application for a public corporation
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
@@ -64,7 +64,7 @@ Scenario: Society Food Primary Application
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Food Primary
     And I review the account profile for a society
-    And I complete the Food Primary application
+    And I complete the Food Primary application for a society
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
@@ -80,7 +80,7 @@ Scenario: Sole Proprietorship Food Primary Application
     And I review the account profile for a sole proprietorship
     And I review the organization structure for a sole proprietorship
     And I click on the button for Submit Organization Information
-    And I complete the Food Primary application
+    And I complete the Food Primary application for a sole proprietorship
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
@@ -102,6 +102,10 @@ namespace bdd_tests
             NavigateToFeatures();
 
             CheckFeatureFlagsLiquorOne();
+
+            CheckFeatureFlagsLiquorTwo();
+
+            CheckFeatureFlagsLiquorThree();
 
             CheckFeatureFlagsLGIN();
 
