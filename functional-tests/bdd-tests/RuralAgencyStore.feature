@@ -2,7 +2,7 @@
     As a logged in business user
     I want to submit a rural store application for a private corporation
 
-@privatecorporation @ruralagencystore @release
+@privatecorporation @ruralagencystore
 Scenario: Rural Agency Store Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Rural Agency Store
