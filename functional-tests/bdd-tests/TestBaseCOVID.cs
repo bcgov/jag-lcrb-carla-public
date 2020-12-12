@@ -169,11 +169,8 @@ namespace bdd_tests
                 FileUpload("LG_IN_approval.pdf","(//input[@type='file'])[8]");
             }
 
-            if (licenceType == "Food Primary licence")
-            {
-                // upload a representative notification form 
-                FileUpload("licensee_rep_notification.pdf", "(//input[@type='file'])[5]");
-            }
+            // upload a representative notification form 
+            FileUpload("licensee_rep_notification.pdf", "(//input[@type='file'])[5]");
 
             // click on the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
