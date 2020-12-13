@@ -134,7 +134,7 @@ namespace bdd_tests
                 FileUpload("signage.pdf", "(//input[@type='file'])[17]");
             }
 
-            if (bizType == "partnership")
+            if ((bizType == "partnership") || (bizType == "public corporation"))
             {
                 // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
