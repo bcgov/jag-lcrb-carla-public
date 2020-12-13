@@ -114,11 +114,27 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            // upload signage document
-            FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+            if (bizType == "partnership")
+            {
+                // upload signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[5]");
+            }
+            else
+            {
+                // upload signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+            }
 
-            // upload floor plan
-            FileUpload("floor_plan.pdf", "(//input[@type='file'])[20]");
+            if (bizType == "partnership")
+            {
+                // upload floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
+            }
+            else
+            {
+                // upload floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[20]");
+            }
 
             // select the owner checkbox
             NgWebElement uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwnerBusiness']"));
@@ -129,7 +145,7 @@ namespace bdd_tests
             uiValidInterest.Click();
 
             // select the future valid interest checkbox
-            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-3[formcontrolname='willhaveValidInterest']"));
+            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willhaveValidInterest']"));
             uiFutureValidInterest.Click();
 
             // enter the role of the application contact
