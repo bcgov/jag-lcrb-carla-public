@@ -85,9 +85,12 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
-            // select the zoning checkbox
-            NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.Id(".mat-checkbox[formcontrolname='isPermittedInZoning']"));
-            uiIsPermittedInZoning.Click();
+            if (bizType == "partnership")
+            {
+                // select the zoning checkbox
+                NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
+                uiIsPermittedInZoning.Click();
+            }
 
             // search for and select the indigenous nation
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
