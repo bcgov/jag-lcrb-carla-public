@@ -42,11 +42,14 @@ namespace bdd_tests
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
+            if ((bizType == "public corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "private corporation"))
+            {
+                // upload register of directors and officers
+                FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[3]");
+            }
+
             if (bizType == "private corporation")
             {
-                // upload the central securities register
-                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
-
                 // upload supporting business documentation
                 FileUpload("distribution_plan.pdf", "(//input[@type='file'])[6]");
 
@@ -55,18 +58,6 @@ namespace bdd_tests
 
                 // upload shareholders holding less than 10% interest
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[12]");
-            }
-
-            if (bizType == "public corporation")
-            {
-                // upload register of directors and officers
-                FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[3]");
-            }
-
-            if (bizType == "partnership")
-            {
-                // upload the partnership agreement
-                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
             }
 
             // enter the establishment name
@@ -89,7 +80,7 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
-            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "private corporation"))
+            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "private corporation") || (bizType == "society"))
             {
                 // select the zoning checkbox
                 NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
@@ -118,7 +109,7 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            if ((bizType == "partnership") || (bizType == "public corporation"))
+            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
             {
                 // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[5]");
@@ -134,7 +125,7 @@ namespace bdd_tests
                 FileUpload("signage.pdf", "(//input[@type='file'])[17]");
             }
 
-            if ((bizType == "partnership") || (bizType == "public corporation"))
+            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
             {
                 // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
