@@ -42,6 +42,7 @@ namespace bdd_tests
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
+            /*
             if (bizType != "sole proprietorship")
             {
                 // upload the central securities register
@@ -55,6 +56,13 @@ namespace bdd_tests
 
                 // upload shareholders holding less than 10% interest
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[12]");
+            }
+            */
+
+            if (bizType == "partnership")
+            {
+                // upload the partnership agreement
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
             }
 
             // enter the establishment name
@@ -77,8 +85,9 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
-            // upload zoning document
-            FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[15]");
+            // select the zoning checkbox
+            NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.Id(".mat-checkbox[formcontrolname='isPermittedInZoning']"));
+            uiIsPermittedInZoning.Click();
 
             // search for and select the indigenous nation
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
