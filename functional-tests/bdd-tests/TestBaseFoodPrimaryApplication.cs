@@ -57,6 +57,12 @@ namespace bdd_tests
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[12]");
             }
 
+            if (bizType == "public corporation")
+            {
+                // upload register of directors and officers
+                FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[3]");
+            }
+
             if (bizType == "partnership")
             {
                 // upload the partnership agreement
