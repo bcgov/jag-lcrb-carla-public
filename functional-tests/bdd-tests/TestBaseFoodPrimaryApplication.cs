@@ -89,7 +89,7 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
-            if (bizType == "partnership")
+            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "private corporation"))
             {
                 // select the zoning checkbox
                 NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
@@ -118,7 +118,7 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            if (bizType == "partnership")
+            if ((bizType == "partnership") || (bizType == "public corporation"))
             {
                 // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[5]");
