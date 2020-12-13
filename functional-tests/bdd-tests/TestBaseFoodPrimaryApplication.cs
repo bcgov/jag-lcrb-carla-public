@@ -42,8 +42,7 @@ namespace bdd_tests
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
-            /*
-            if (bizType != "sole proprietorship")
+            if (bizType == "private corporation")
             {
                 // upload the central securities register
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -57,7 +56,6 @@ namespace bdd_tests
                 // upload shareholders holding less than 10% interest
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[12]");
             }
-            */
 
             if (bizType == "partnership")
             {
