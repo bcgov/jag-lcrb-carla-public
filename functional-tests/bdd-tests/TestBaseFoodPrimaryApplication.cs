@@ -80,12 +80,9 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
-            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "private corporation") || (bizType == "society"))
-            {
-                // select the zoning checkbox
-                NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
-                uiIsPermittedInZoning.Click();
-            }
+            // select the zoning checkbox
+            NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
+            uiIsPermittedInZoning.Click();
 
             // search for and select the indigenous nation
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
@@ -119,10 +116,10 @@ namespace bdd_tests
                 // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[14]");
             }
-            else
+            else if (bizType == "sole proprietorship")
             {
                 // upload signage document
-                FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+                FileUpload("signage.pdf", "(//input[@type='file'])[2]");
             }
 
             if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
@@ -135,10 +132,10 @@ namespace bdd_tests
                 // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[17]");
             }
-            else
+            else if (bizType == "sole proprietorship")
             {
                 // upload floor plan
-                FileUpload("floor_plan.pdf", "(//input[@type='file'])[20]");
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[5]");
             }
 
             // select the owner checkbox
