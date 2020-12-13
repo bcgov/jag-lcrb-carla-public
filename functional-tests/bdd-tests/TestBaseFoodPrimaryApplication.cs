@@ -117,6 +117,11 @@ namespace bdd_tests
                 // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[5]");
             }
+            else if (bizType == "private corporation")
+            {
+                // upload signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[14]");
+            }
             else
             {
                 // upload signage document
@@ -127,6 +132,11 @@ namespace bdd_tests
             {
                 // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
+            }
+            else if (bizType == "private corporation")
+            {
+                // upload floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[17]");
             }
             else
             {
