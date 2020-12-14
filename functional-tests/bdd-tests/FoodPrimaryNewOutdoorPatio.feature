@@ -17,6 +17,10 @@ Scenario: Partnership Food Primary New Outdoor Patio
     And I pay the licensing fee 
     And I click on the link for New Outdoor Patio
     And I request a new outdoor patio application
+    And I click on the Submit button
+    And I enter the payment information
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -35,6 +39,10 @@ Scenario: Private Corporation Food Primary New Outdoor Patio
     And I pay the licensing fee 
     And I click on the link for New Outdoor Patio
     And I request a new outdoor patio application
+    And I click on the Submit button
+    And I enter the payment information
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -53,6 +61,10 @@ Scenario: Public Corporation Food Primary New Outdoor Patio
     And I pay the licensing fee 
     And I click on the link for New Outdoor Patio
     And I request a new outdoor patio application
+    And I click on the Submit button
+    And I enter the payment information
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -71,6 +83,10 @@ Scenario: Society Food Primary New Outdoor Patio
     And I pay the licensing fee
     And I click on the link for New Outdoor Patio
     And I request a new outdoor patio application
+    And I click on the Submit button
+    And I enter the payment information
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -89,5 +105,9 @@ Scenario: Sole Proprietorship Food New Outdoor Patio
     And I pay the licensing fee 
     And I click on the link for New Outdoor Patio
     And I request a new outdoor patio application
+    And I click on the Submit button
+    And I enter the payment information
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
