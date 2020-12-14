@@ -273,9 +273,7 @@
                             </section>
                         </td>
                     </tr>
-                    <tr *ngIf="licenceTypeHasEvents(item?.licenceTypeName) && !item?.eventsBusy?.closed">
-                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-                    </tr>
+
                     <tr *ngIf="item?.events !== undefined && item?.events.length > 0">
                         <td colspan="5">
                             <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
