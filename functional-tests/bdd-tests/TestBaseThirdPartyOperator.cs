@@ -99,28 +99,12 @@ namespace bdd_tests
             }
             
             // click on authorized to submit checkbox
-            var uiAuthorizedToSubmit = ngDriver.FindElements(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
-            if (uiAuthorizedToSubmit.Count > 0)
-            {
-                uiAuthorizedToSubmit[0].Click();
-            }
-            else
-            {
-                throw new Exception($"Unable to find authorized to submit");
-            }
-
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
+            JavaScriptClick(uiAuthorizedToSubmit);
 
             // click on signature agreement checkbox
-            var uiSignatureAgreement = ngDriver.FindElements(By.CssSelector("input[formcontrolname='signatureAgreement']"));
-            if (uiSignatureAgreement.Count > 0)
-            {
-                uiSignatureAgreement[0].Click();
-            }
-            else
-            {
-                throw new Exception($"Unable to find signature agreement");
-            }
-
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement']"));
+            JavaScriptClick(uiSignatureAgreement);
 
             // click on submit button
             ClickOnSubmitButton();
