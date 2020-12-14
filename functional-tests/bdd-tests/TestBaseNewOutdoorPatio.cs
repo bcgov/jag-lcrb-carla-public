@@ -104,8 +104,6 @@ namespace bdd_tests
             // click on the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgreement.Click();
-
-
         }
     }
 }
