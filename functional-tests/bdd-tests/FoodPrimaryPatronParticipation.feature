@@ -15,6 +15,7 @@ Scenario: Partnership Food Primary Patron Participation Entertainment Endorsemen
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
     And the account is deleted
     Then I see the login page
@@ -32,6 +33,7 @@ Scenario: Private Corporation Food Primary Patron Participation Entertainment En
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
     And the account is deleted
     Then I see the login page
@@ -49,6 +51,7 @@ Scenario: Public Corporation Food Primary Patron Participation Entertainment End
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
     And the account is deleted
     Then I see the login page
@@ -66,6 +69,7 @@ Scenario: Society Food Primary Patron Participation Entertainment Endorsement
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee
+    And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
     And the account is deleted
     Then I see the login page
@@ -83,6 +87,7 @@ Scenario: Sole Proprietorship Food Primary Patron Participation Entertainment En
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
     And the account is deleted
     Then I see the login page
