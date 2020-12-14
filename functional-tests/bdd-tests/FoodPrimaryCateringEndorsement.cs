@@ -30,7 +30,9 @@ Scenario: Partnership Food Primary Catering Endorsement
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page
 
@@ -47,7 +49,9 @@ Scenario: Private Corporation Food Primary Catering Endorsement
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page
 
@@ -64,7 +68,9 @@ Scenario: Public Corporation Food Primary Catering Endorsement
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page
 
@@ -81,7 +87,9 @@ Scenario: Society Food Primary Catering Endorsement
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee
+    And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page
 
@@ -98,7 +106,9 @@ Scenario: Sole Proprietorship Food Primary Catering Endorsement
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page
 */
