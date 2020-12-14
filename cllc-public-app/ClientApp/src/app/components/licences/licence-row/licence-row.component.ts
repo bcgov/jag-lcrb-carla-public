@@ -123,7 +123,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       .subscribe(([licenceResp]) => {
         if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
           forkJoin([
-            this.licenceEventsService.getLicenceEventsList(licenceResp.licenseId, 10)
+            this.licenceEventsService.getLicenceEventsList(licenceResp.licenseId, 20)
           ])
             .subscribe(data => {
               licenceResp.events = data[0];

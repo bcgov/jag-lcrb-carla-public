@@ -161,7 +161,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   licenceTypeHasEvents(licenceType: string) {
-    return licenceType.indexOf('Catering') >= 0 || licenceType.indexOf('Wine Store') >= 0 || licenceType.indexOf('Manufacturer') >= 0;
+    return licenceType.indexOf('Catering') >= 0 || licenceType.indexOf('Wine Store') >= 0 || licenceType.indexOf('Manufacturer') >= 0 || licenceType.indexOf('Food Primary') >= 0;
   }
 
   getNumberOfLicences() {
