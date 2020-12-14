@@ -22,6 +22,7 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
+        [And(@"I enter the payment information")]
         public void MakePayment()
         {
             string testCC = configuration["test_cc"];
@@ -39,13 +40,6 @@ namespace bdd_tests
             System.Threading.Thread.Sleep(2000);
 
             ngDriver.Manage().Timeouts().ImplicitWait = tempWait;            
-        }
-
-
-        [And(@"I enter the payment information")]
-        public void EnterPaymentInfo()
-        {
-            MakePayment();
         }
 
 
