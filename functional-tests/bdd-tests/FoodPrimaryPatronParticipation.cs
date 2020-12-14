@@ -32,6 +32,7 @@ Scenario: Partnership Food Primary Patron Participation Entertainment Endorsemen
     And I pay the licensing fee 
     And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
+    And I click on the Submit button
     And the dashboard status is updated as Pending External Review
     And the account is deleted
     Then I see the login page
@@ -51,6 +52,7 @@ Scenario: Private Corporation Food Primary Patron Participation Entertainment En
     And I pay the licensing fee 
     And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
+    And I click on the Submit button
     And the dashboard status is updated as Pending External Review
     And the account is deleted
     Then I see the login page
@@ -70,6 +72,7 @@ Scenario: Public Corporation Food Primary Patron Participation Entertainment End
     And I pay the licensing fee 
     And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
+    And I click on the Submit button
     And the dashboard status is updated as Pending External Review
     And the account is deleted
     Then I see the login page
@@ -89,6 +92,7 @@ Scenario: Society Food Primary Patron Participation Entertainment Endorsement
     And I pay the licensing fee
     And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
+    And I click on the Submit button
     And the dashboard status is updated as Pending External Review
     And the account is deleted
     Then I see the login page
@@ -108,6 +112,7 @@ Scenario: Sole Proprietorship Food Primary Patron Participation Entertainment En
     And I pay the licensing fee 
     And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
+    And I click on the Submit button
     And the dashboard status is updated as Pending External Review
     And the account is deleted
     Then I see the login page
