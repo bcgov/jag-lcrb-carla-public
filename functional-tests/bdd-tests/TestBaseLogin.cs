@@ -272,6 +272,11 @@ namespace bdd_tests
             CheckFeatureFlag("LiquorTwo");
         }
 
+        public void CheckFeatureFlagsLiquorThree()
+        {
+            CheckFeatureFlag("LiquorThree");
+        }
+
 
         public void CheckFeatureFlagsMaps()
         {
