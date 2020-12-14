@@ -18,6 +18,9 @@ Scenario: Partnership Food Primary Catering Endorsement
     And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
     And I click on the Submit button
+    And I enter the payment information
+    And I click on the link for Dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -37,6 +40,9 @@ Scenario: Private Corporation Food Primary Catering Endorsement
     And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
     And I click on the Submit button
+    And I enter the payment information
+    And I click on the link for Dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -56,6 +62,9 @@ Scenario: Public Corporation Food Primary Catering Endorsement
     And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
     And I click on the Submit button
+    And I enter the payment information
+    And I click on the link for Dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -75,6 +84,9 @@ Scenario: Society Food Primary Catering Endorsement
     And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
     And I click on the Submit button
+    And I enter the payment information
+    And I click on the link for Dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -94,5 +106,8 @@ Scenario: Sole Proprietorship Food Primary Catering Endorsement
     And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
     And I click on the Submit button
+    And I enter the payment information
+    And I click on the link for Dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
