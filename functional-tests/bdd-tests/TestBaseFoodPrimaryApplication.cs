@@ -42,11 +42,14 @@ namespace bdd_tests
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
-            if (bizType != "sole proprietorship")
+            if ((bizType == "public corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "private corporation"))
             {
-                // upload the central securities register
-                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+                // upload register of directors and officers
+                FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[3]");
+            }
 
+            if (bizType == "private corporation")
+            {
                 // upload supporting business documentation
                 FileUpload("distribution_plan.pdf", "(//input[@type='file'])[6]");
 
@@ -77,8 +80,9 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
-            // upload zoning document
-            FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[15]");
+            // select the zoning checkbox
+            NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
+            uiIsPermittedInZoning.Click();
 
             // search for and select the indigenous nation
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
@@ -102,11 +106,37 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            // upload signage document
-            FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
+            {
+                // upload signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[5]");
+            }
+            else if (bizType == "private corporation")
+            {
+                // upload signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[14]");
+            }
+            else if (bizType == "sole proprietorship")
+            {
+                // upload signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[2]");
+            }
 
-            // upload floor plan
-            FileUpload("floor_plan.pdf", "(//input[@type='file'])[20]");
+            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
+            {
+                // upload floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
+            }
+            else if (bizType == "private corporation")
+            {
+                // upload floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[17]");
+            }
+            else if (bizType == "sole proprietorship")
+            {
+                // upload floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[5]");
+            }
 
             // select the owner checkbox
             NgWebElement uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwnerBusiness']"));
@@ -117,7 +147,7 @@ namespace bdd_tests
             uiValidInterest.Click();
 
             // select the future valid interest checkbox
-            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-3[formcontrolname='willhaveValidInterest']"));
+            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willhaveValidInterest']"));
             uiFutureValidInterest.Click();
 
             // enter the role of the application contact
