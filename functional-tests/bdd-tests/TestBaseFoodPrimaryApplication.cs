@@ -162,6 +162,12 @@ namespace bdd_tests
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
             }
 
+            if (bizType == "sole proprietorship")
+            {
+                // upload proof of valid interest
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
+            }
+
             // enter the role of the application contact
             NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
             uiContactRole.SendKeys(conRole);
