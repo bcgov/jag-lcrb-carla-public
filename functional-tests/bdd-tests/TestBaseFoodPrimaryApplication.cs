@@ -150,8 +150,17 @@ namespace bdd_tests
             NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willhaveValidInterest']"));
             uiFutureValidInterest.Click();
 
-            // upload proof of valid interest
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
+            if (bizType == "partnership")
+            {
+                // upload proof of valid interest
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
+            }
+
+            if (bizType == "private corporation")
+            {
+                // upload proof of valid interest
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
+            }
 
             // enter the role of the application contact
             NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
