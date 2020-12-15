@@ -77,6 +77,9 @@ namespace bdd_tests
             NgWebElement uiWillhaveValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-3[formcontrolname='willhaveValidInterest']"));
             uiWillhaveValidInterest.Click();
 
+            // upload the valid interest document
+            FileUpload("valid_interest.pdf", "(//input[@type='file'])[6]");
+
             // enter the contact title
             NgWebElement uiContactPersonRole = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
             uiContactPersonRole.SendKeys(contactTitle);
