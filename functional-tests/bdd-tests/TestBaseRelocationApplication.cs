@@ -45,6 +45,9 @@ namespace bdd_tests
             NgWebElement uiIsALR = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
             uiIsALR.Click();
 
+            // upload a signage document
+            FileUpload("signage.pdf", "(//input[@type='file'])[2]");
+
             // upload a floor plan
             FileUpload("floor_plan.pdf","(//input[@type='file'])[5]");
 
