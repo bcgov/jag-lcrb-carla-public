@@ -5,7 +5,6 @@
       <h1>Catered Event Authorization Request</h1>
     </div>
 
-
     <div class="padded-section">
       <p>If you plan to sell or serve liquor purchased under your licence at a catered event, you must fill out the below fields to submit a request for a catering authorization. Caterers do not require a catering authorization for an event held at a private residence.</p>
       <p>You may be asked to submit further details, including a Safety and Security Plan for your liquor inspector’s approval if your event is deemed to be high risk. For more information, please refer to the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/catering-handbook.pdf" target="_blank">Catering Terms and Conditions Handbook</a>.</p>
@@ -18,7 +17,7 @@
     </div>
 
     <h3 class="blue-header">EVENT CONTACT INFORMATION</h3>
-    <div class="padded-section clearfix">
+    <section class="content-bottom clearfix">
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Name" [required]="true"
           [valid]="eventForm.get('contactName').valid || !eventForm.get('contactName').touched"
@@ -35,10 +34,10 @@
           <input class="form-control" type="text" formControlName="contactPhone" mask="(000) 000-0000">
         </app-field>
       </div>
-    </div>
+    </section>
 
     <h3 class="blue-header">NOTIFICATIONS</h3>
-    <div class="padded-section">
+    <section class="content-bottom">
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Email"
           [valid]="eventForm.get('contactEmail').valid || !eventForm.get('contactEmail').touched"
@@ -47,10 +46,10 @@
         </app-field>
       </div>
       <p>To update this email address, please see your Account Profile</p>
-    </div>
+    </section>
 
     <h3 class="blue-header">EVENT DETAILS</h3>
-    <div class="padded-section clearfix">
+    <section class="content-bottom clearfix">
       <p>An event will need approval if it meets any of the following conditions:</p>
       <ul>
         <li>Attendance exceeds 500 people (including staff)</li>
@@ -147,10 +146,10 @@
           <textarea class="form-control" formControlName="entertainmentDescription"></textarea>
         </app-field>
       </div>
-    </div>
+    </section>
 
     <h3 class="blue-header">VENUE LOCATION</h3>
-    <div class="padded-section clearfix">
+    <section class="content-bottom clearfix">
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Venue Name/Description" [required]="true"
           [valid]="eventForm.get('venueDescription').valid || !eventForm.get('venueDescription').touched"
@@ -204,10 +203,10 @@
           <input class="form-control" type="text" formControlName="postalCode">
         </app-field>
       </div>
-    </div>
+    </section>
 
     <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
-    <div class="padded-section clearfix">
+    <section class="content-bottom clearfix">
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Start Date" [required]="true"
           [valid]="eventForm.get('startDate').valid || !eventForm.get('startDate').touched"
@@ -228,7 +227,7 @@
           <mat-datepicker #endPicker></mat-datepicker>
         </app-field>
       </div>
-      <div *ngFor="let form of timeForms.controls" class="row mr-0 mt-3" style="background-color: #E1E8F2; border-bottom: 4px solid #E4E4E4">
+      <div *ngFor="let form of timeForms.controls" class="row ml-0 mr-0 mt-3" style="background-color: #E1E8F2; border-bottom: 4px solid #E4E4E4">
         <form [formGroup]="form" class="col-md-12">
           <div class="row mt-3">
             <div class="col-md-2 offset-md-2"><label>Event Start</label></div>
@@ -260,10 +259,10 @@
           <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()" [disabled]="eventForm.controls['startDate'].invalid || eventForm.controls['endDate'].invalid || isReadOnly">The event and liquor service times are different on specific dates.</mat-checkbox>
         </app-field>
       </div>
-    </div>
+    </section>
 
     <h3 class="blue-header">AGREEMENT</h3>
-    <div class="padded-section">
+    <section class="content-bottom">
       <p>A person commits an offence if the person provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when making a report or when required and as specified by the general manager under section 59. - Liquor Control and Licensing Act, Section 57(1)(c).</p>
       <p>The Branch may cancel a catering authorization if:</p>
       <ul>
@@ -275,26 +274,22 @@
       <div>
         <mat-checkbox formControlName="agreement">I understand and agree to abide by the terms and conditions of the catering authorization.</mat-checkbox>
       </div>
-    </div>
+    </section>
 
-    <div class="p-3" style="background-color: #E1E8F2; border-bottom: 4px solid #E4E4E4">
+    <section class="p-3 attention-section">
       <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</p>
-    </div>
+    </section>
 
     <div class="p-4 button-row" *ngIf="!isReadOnly">
-      <button class="btn btn-primary" style="margin-right:10px;" (click)="save(false);">
-        <span>
-          <i class="fa fa-save" style="color: #fff;"></i>
-          SAVE FOR LATER
-        </span>
+      <button class="btn btn-secondary" (click)="save(false);">
+        <span><i class="fa fa-save"></i>SAVE FOR LATER</span>
       </button>
-      <button class="btn btn-primary" style="margin-right:10px;" (click)="cancel();">
-        <span>
-          <i class="fa fa-trash" style="color: #fff;"></i>
-          CANCEL EVENT
-        </span>
+      <button class="btn btn-primary" (click)="save(true)" [disabled]="isFormValid()">
+        SUBMIT
       </button>
-      <button class="btn btn-primary" (click)="save(true)" [disabled]="isFormValid()">SUBMIT</button>
+      <button class="btn btn-link btn-cancel" (click)="cancel();">
+        <i class="fa fa-trash"></i>CANCEL EVENT
+      </button>
     </div>
   </form>
 </div>
