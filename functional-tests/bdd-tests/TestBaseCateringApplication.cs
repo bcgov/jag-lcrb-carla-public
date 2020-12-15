@@ -119,6 +119,9 @@ namespace bdd_tests
             // upload a store signage document
             FileUpload("signage.pdf", "(//input[@type='file'])[2]");
 
+            // upload a valid interest document
+            FileUpload("valid_interest.pdf", "(//input[@type='file'])[6]");
+
             // enter the first name of the application contact
             NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
             uiContactGiven.SendKeys(conGiven);
