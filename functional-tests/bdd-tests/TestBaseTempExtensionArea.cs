@@ -20,9 +20,53 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request a Patron Participation Entertainment Endorsement application")]
+        [And(@"I submit a temporary extension of licensed area application")]
         public void TempExtensionAreaApplication()
         {
+            /* 
+            Page Title: Please Review the Account Profile
+            */
+
+            ContinueToApplicationButton();
+
+            /* 
+            Page Title: Temporary Extension of Licensed Area
+            */
+
+            // create test data
+            string description = "Test automation event details";
+            string capacity = "180";
+
+            // enter the event details
+            NgWebElement uiEventDetails = ngDriver.FindElement(By.CssSelector("textarea#Description2"));
+            uiEventDetails.SendKeys(description);
+
+            // upload a floor plan document
+            FileUpload("floor_plan.pdf", "(//input[@type='file'])[2]");
+
+            // enter the capacity
+            NgWebElement uiCapacity = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'capacity']"));
+            uiCapacity.SendKeys(capacity);
+
+            // select authorizedToSubmit checkbox
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            uiAuthorizedToSubmit.Click();
+
+            // select signatureAgreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            uiSignatureAgreement.Click();
+
+            // click on the Submit & Pay button
+            ClickOnSubmitButton();
+
+            // pay for the structural change application
+            MakePayment();
+
+            /* 
+            Page Title: Payment Approved
+            */
+
+            ClickLicencesTab();
         }
     }
 }

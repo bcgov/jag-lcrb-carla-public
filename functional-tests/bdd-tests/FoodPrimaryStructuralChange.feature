@@ -15,9 +15,10 @@ Scenario: Partnership Food Primary Structural Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a structural change
+    And I click on the link for Structural Change Aplication
+    And I submit a Food Primary structural change application
     And I click on the link for Dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -34,9 +35,10 @@ Scenario: Private Corporation Food Primary Structural Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a structural change
+    And I click on the link for Structural Change Aplication
+    And I submit a Food Primary structural change application
     And I click on the link for Dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -53,9 +55,10 @@ Scenario: Public Corporation Food Primary Structural Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a structural change
+    And I click on the link for Structural Change Aplication
+    And I submit a Food Primary structural change application
     And I click on the link for Dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -72,9 +75,10 @@ Scenario: Society Food Primary Structural Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee
-    And I request a structural change
+    And I click on the link for Structural Change Aplication
+    And I submit a Food Primary structural change application
     And I click on the link for Dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -91,8 +95,9 @@ Scenario: Sole Proprietorship Food Primary Structural Change
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
-    And I request a structural change
+    And I click on the link for Structural Change Aplication
+    And I submit a Food Primary structural change application
     And I click on the link for Dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page

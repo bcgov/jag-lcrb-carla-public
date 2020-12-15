@@ -23,6 +23,29 @@ namespace bdd_tests
         [And(@"I submit a temporary use area endorsement application")]
         public void TempUseAreaApplication()
         {
+            /* 
+            Page Title: Please Review the Account Profile
+            */
+
+            ContinueToApplicationButton();
+
+            /* 
+            Page Title: TODO
+            */
+
+            // fields to be populated - TODO
+
+            // click on the Submit & Pay button
+            ClickOnSubmitButton();
+
+            // pay for the structural change application
+            MakePayment();
+
+            /* 
+            Page Title: Payment Approved
+            */
+
+            ClickLicencesTab();
         }
     }
 }
