@@ -20,20 +20,9 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request a structural change")]
-        public void RequestStructuralChange()
+        [And(@"I submit a Food Primary structural change application")]
+        public void FPStructuralChange()
         {
-            /* 
-            Page Title: Licences & Authorizations
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            string structuralChange = "Request a Structural Change";
-
-            // click on the request structural change link
-            NgWebElement uiStructuralChange = ngDriver.FindElement(By.LinkText(structuralChange));
-            uiStructuralChange.Click();
-
             /* 
             Page Title: Please Review the Account Profile
             */
@@ -41,25 +30,37 @@ namespace bdd_tests
             ContinueToApplicationButton();
 
             /* 
-            Page Title: Submit the Cannabis Retail Store Structural Change Application
+            Page Title: Food Primary Structural Change Application
             */
 
             // create test data
-            string description = "Test automation outline of the proposed change.";
+            string description1 = "Test automation outline of the proposed change.";
+            string description2 = "Test automation patio location.";
+            string areaDescription = "Test automation area description.";
+            string occupantLoad = "180";
 
             // enter the description of the change
-            NgWebElement uiDescriptionOfChange = ngDriver.FindElement(By.Id("description1"));
-            uiDescriptionOfChange.SendKeys(description);
+            NgWebElement uiDescriptionOfChange = ngDriver.FindElement(By.CssSelector("textarea#description1"));
+            uiDescriptionOfChange.SendKeys(description1);
 
-            // select not visible from outside checkbox
-            NgWebElement uiVisibleFromOutside = ngDriver.FindElement(By.CssSelector(".mat-checkbox-inner-container"));
-            uiVisibleFromOutside.Click();
+            // enter the location of the patio
+            NgWebElement uiPatioLocation = ngDriver.FindElement(By.CssSelector("textarea#Description2"));
+            uiPatioLocation.SendKeys(description2);
 
             // upload a floor plan document
             FileUpload("floor_plan.pdf", "(//input[@type='file'])[2]");
 
-            // upload a site plan
-            FileUpload("site_plan.pdf", "(//input[@type='file'])[5]");
+            // click on service area button
+            NgWebElement uiServiceAreas = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'serviceAreas'] button"));
+            uiServiceAreas.Click();
+
+            // enter area description
+            NgWebElement uiAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
+            uiAreaDescription.SendKeys(areaDescription);
+
+            // enter occupant load
+            NgWebElement uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            uiOccupantLoad.SendKeys(occupantLoad);
 
             // select authorizedToSubmit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
@@ -80,18 +81,6 @@ namespace bdd_tests
             */
 
             ClickLicencesTab();
-        }
-
-
-        [And(@"I confirm the structural change request is displayed on the dashboard")]
-        public void RequestedStructuralChangeOnDashboard()
-        {
-            /* 
-            Page Title: Welcome to Liquor and Cannabis Licensing
-            */
-
-            // confirm that a structural change request is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Structural Change')]")).Displayed);
         }
     }
 }
