@@ -30,6 +30,7 @@ Scenario: Partnership Food Primary Temporary Use Area Endorsement
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Temporary Use Area Endorsement Application
     And I submit a temporary use area endorsement application
     And the account is deleted
     Then I see the login page
@@ -47,6 +48,7 @@ Scenario: Private Corporation Food Primary Temporary Use Area Endorsement
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Temporary Use Area Endorsement Application
     And I submit a temporary use area endorsement application
     And the account is deleted
     Then I see the login page
@@ -64,6 +66,7 @@ Scenario: Public Corporation Food Primary Temporary Use Area Endorsement
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Temporary Use Area Endorsement Application
     And I submit a temporary use area endorsement application
     And the account is deleted
     Then I see the login page
@@ -81,6 +84,7 @@ Scenario: Society Food Primary Temporary Use Area Endorsement
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee
+    And I click on the link for Temporary Use Area Endorsement Application
     And I submit a temporary use area endorsement application
     And the account is deleted
     Then I see the login page
@@ -98,6 +102,7 @@ Scenario: Sole Proprietorship Food Primary Temporary Use Area Endorsement
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Temporary Use Area Endorsement Application
     And I submit a temporary use area endorsement application
     And the account is deleted
     Then I see the login page
