@@ -16,9 +16,9 @@ Scenario: Partnership Food Primary Relocation Application
     And the application is approved
     And I pay the licensing fee 
     And I click on the link for Relocation Application
-    And I request a store relocation for Food Primary
+    And I request a relocation application
     And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -36,9 +36,9 @@ Scenario: Private Corporation Food Primary Relocation Application
     And the application is approved
     And I pay the licensing fee 
     And I click on the link for Relocation Application
-    And I request a store relocation for Food Primary
+    And I request a relocation application
     And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -56,9 +56,9 @@ Scenario: Public Corporation Food Primary Relocation Application
     And the application is approved
     And I pay the licensing fee 
     And I click on the link for Relocation Application
-    And I request a store relocation for Food Primary
+    And I request a relocation application
     And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -76,9 +76,9 @@ Scenario: Society Food Primary Relocation Application
     And the application is approved
     And I pay the licensing fee
     And I click on the link for Relocation Application
-    And I request a store relocation for Food Primary
+    And I request a relocation application
     And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
@@ -96,8 +96,8 @@ Scenario: Sole Proprietorship Food Primary Relocation Application
     And the application is approved
     And I pay the licensing fee 
     And I click on the link for Relocation Application
-    And I request a store relocation for Food Primary
+    And I request a relocation application
     And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
