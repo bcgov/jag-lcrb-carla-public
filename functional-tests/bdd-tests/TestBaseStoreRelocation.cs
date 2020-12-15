@@ -26,14 +26,12 @@ namespace bdd_tests
             /* 
             Page Title: Licences & Authorizations
             */
-            if (applicationType != "Food Primary")
-            {
-                string requestRelocationLink = "Request Relocation";
 
-                // click on the request location link
-                NgWebElement uiRequestRelocation = ngDriver.FindElement(By.LinkText(requestRelocationLink));
-                uiRequestRelocation.Click();
-            }
+            string requestRelocationLink = "Request Relocation";
+
+            // click on the request location link
+            NgWebElement uiRequestRelocation = ngDriver.FindElement(By.LinkText(requestRelocationLink));
+            uiRequestRelocation.Click();
 
             /* 
             Page Title: Please Review the Account Profile
