@@ -5,7 +5,7 @@
             <th>{{isOutsideArea() ? 'Outdoor Area' : 'Floor Level'}}</th>
             <th *ngIf="isService()">Indoor</th>
             <th *ngIf="isService()">Patio</th>
-            <th>{{isOutsideArea() ? 'Capacity' : 'Occupant Load'}}</th>
+            <th>Proposed Capacity</th>
             <th style="width: 45px;"></th>
         </thead>
         <ng-container formArrayName="areas">
