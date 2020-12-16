@@ -26,10 +26,10 @@ Scenario: Private Corporation Manufacturer Release #1
     # And I request a location change
     And I click on the Licences tab
     And I request a lounge area endorsement
-    And I click on the Licences tab
-    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
-    And I click on the link for Renew Licence
-    And I renew the licence with positive responses for a winery
+    # And I click on the Licences tab
+    # And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    # And I click on the link for Renew Licence
+    # And I renew the licence with positive responses for a winery
     And the account is deleted
     Then I see the login page
 
