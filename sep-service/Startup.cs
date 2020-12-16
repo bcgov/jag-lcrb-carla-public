@@ -196,16 +196,18 @@ namespace SepService
                 Predicate = (_) => false
             });
 
-            app.UseSwagger(c =>
+            // only make the swagger UI available when in development.
+            if (env.IsDevelopment())
             {
-                c.SerializeAsV2 = true;
-            });
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
-            });
-
-            
+                app.UseSwagger(c =>
+                {
+                    c.SerializeAsV2 = true;
+                });
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
+                });
+            }
 
             // enable Splunk logger using Serilog
             if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
