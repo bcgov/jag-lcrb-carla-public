@@ -35,14 +35,14 @@ Scenario: Private Corporation Manufacturer Release
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
-    And I click on the Licences tab
-    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
-    And I click on the link for Renew Licence
-    And I renew the licence with positive responses for a winery
+    # And I click on the Licences tab
+    # And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    # And I click on the link for Renew Licence
+    # And I renew the licence with positive responses for a winery
     And I click on the Licences tab
     And I request a facility structural change
-    And I click on the Licences tab
-    And I request a location change
+    # And I click on the Licences tab
+    # And I request a location change
     And I click on the Licences tab
     And I request a lounge area endorsement
     And I click on the Licences tab
@@ -55,15 +55,12 @@ Scenario: Private Corporation Manufacturer Release
     And I request structural alterations to an approved lounge or special events area
     And I click on the Licences tab
     And I complete the change hours application for a lounge area within service hours
-    And I click on the link for Manage Off-Site Storage
-    And I complete the offsite storage application
-    And I request an on-site store endorsement
-    And I click on the Licences tab
-    And the on-site endorsement application is approved
-    And I click on the Dashboard tab
-    And I click on the link for Pay First Year Fee
+    And I click on the Submit button
     And I enter the payment information
     And I click on the Licences tab
+    And I click on the link for Manage Off-Site Storage
+    And I complete the offsite storage application
+    And I click on the Submit button
     And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I click on the link for Renew Licence
     And I renew the licence with negative responses for a winery
