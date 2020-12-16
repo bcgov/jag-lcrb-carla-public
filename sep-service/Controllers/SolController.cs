@@ -63,6 +63,38 @@ namespace SepService.Controllers
             return result;
         }
 
+        // 
+        /// <summary>
+        ///check to see if the location has already been submitted. 
+        /// </summary>
+        /// <param name="specialEventId"></param>
+        /// <param name="AdoxioPermitnumber"></param>
+        /// <returns>true if the location has been submitted</returns>
+        private bool CheckForExistingLocation(string specialEventId, string permitNumber)
+        {
+            bool result = false;
+            string permitNumberEscaped = permitNumber.Replace("'", "''");
+            string filter = $"adoxio_permitnumber eq '{permitNumberEscaped}' and _adoxio_specialeventid_value eq {specialEventId}";
+            // fetch from Dynamics.
+            
+            try
+            {
+                MicrosoftDynamicsCRMadoxioSpecialeventlocation record = _dynamicsClient.Specialeventlocations.Get(filter: filter).Value.FirstOrDefault();
+                if (record != null)
+                {
+                    result = true;
+                }
+            }
+            catch (HttpOperationException)
+            {
+                result = false;
+            }
+
+
+            return result;
+        }
+
+
         /// <summary>
         /// Create a Sol record
         /// </summary>
@@ -73,7 +105,7 @@ namespace SepService.Controllers
         {
             if (sol == null || string.IsNullOrEmpty(sol.SolLicenceNumber) || !sol.SolLicenceNumber.Contains("-"))
             {
-                return BadRequest();
+                return BadRequest("Error - SolLicenceNumber is not in the right format.  Format is <permitnumber>-<location identifier>");
             }
 
             // format of the "SolLicenceNumber" field is {EventLicenceNumber}-{LocationReference}
@@ -182,6 +214,14 @@ namespace SepService.Controllers
             }
             else // existing record.
             {
+
+                MicrosoftDynamicsCRMadoxioSpecialeventlocation location = ExtractLocation(sol);
+
+                if (CheckForExistingLocation(existingRecord.AdoxioSpecialeventid, location.AdoxioPermitnumber))
+                {
+                    return BadRequest("Error - Duplicate record.  The Permit / Location sent has already been processed.");
+                }
+
                 // do basic updates.
                 try
                 {
@@ -198,7 +238,7 @@ namespace SepService.Controllers
                     
 
 
-                    MicrosoftDynamicsCRMadoxioSpecialeventlocation location = ExtractLocation(sol);
+                    
 
                     try
                     {
@@ -242,6 +282,10 @@ namespace SepService.Controllers
 
         private MicrosoftDynamicsCRMadoxioSpecialeventlocation ExtractLocation(Sol sol)
         {
+            if (sol?.Location == null)
+            {
+                return null;
+            }
             MicrosoftDynamicsCRMadoxioSpecialeventlocation location =
                 new MicrosoftDynamicsCRMadoxioSpecialeventlocation()
                 {
