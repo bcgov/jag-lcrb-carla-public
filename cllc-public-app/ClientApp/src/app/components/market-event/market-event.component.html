@@ -24,7 +24,7 @@
       </div>
 
       <h3 class="blue-header">MARKET ELIGIBILITY CONSENT</h3>
-      <div class="padded-section">
+      <section class="content-bottom">
         <p style="font-style: italic;">As per Liquor Manufacturing Terms and Conditions it is your responsibility as a liquor manufacturer to ensure that the market you are intending on selling the product manufactured under your licence is eligible.
           Your Regional Manufacturing inspector can conduct an inspection at the market site to check for the compliance to the Liquor Manufacturing Terms and Conditions.</p>
         <p>I hereby consent that:</p>
@@ -38,11 +38,10 @@
         <mat-checkbox formControlName="isNoImportedGoods"></mat-checkbox><span class="checkbox-label">The market doesn’t sell used or imported goods (for example, flea markets and commercial markets would not be considered eligible).</span><br/>
         <mat-checkbox formControlName="isMarketHostsSixVendors"></mat-checkbox><span class="checkbox-label">The market hosts at least six vendors that don’t sell or serve liquor. The sale of liquor must not be the focus of the market.</span><br/>
         <mat-checkbox formControlName="isMarketMaxAmountorDuration"></mat-checkbox><span class="checkbox-label">The market occurs a maximum of three times a week. Annual markets can occur once a year and may be open for up to 35 consecutive days.</span><br/>
-      </div>
-
+      </section>
 
       <h3 class="blue-header">LICENSEE STAFF RESPONSIBLE CONTACT INFORMATION</h3>
-      <div class="padded-section clearfix">
+      <section class="content-bottom clearfix">
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Name" [required]="true"
             [valid]="eventForm.get('contactName').valid || !eventForm.get('contactName').touched"
@@ -62,7 +61,7 @@
             <input class="form-control" type="text" formControlName="contactEmail">
           </app-field>
         </div>
-      </div>
+      </section>
 
       <!-- <h3 class="blue-header">MARKET ORGANIZER CONTACT INFORMATION</h3>
       <div class="padded-section clearfix">
@@ -86,7 +85,7 @@
       </div> -->
 
       <h3 class="blue-header">MARKET INFORMATION AND LOCATION</h3>
-      <div class="padded-section clearfix">
+      <section class="content-bottom clearfix">
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Market Name" [required]="true"
             [valid]="eventForm.get('marketName').valid || !eventForm.get('marketName').touched"
@@ -160,7 +159,7 @@
             <textarea class="form-control" formControlName="venueDescription"></textarea>
           </app-field>
         </div>
-      </div>
+      </section>
 
         <!--
 
@@ -198,7 +197,7 @@
     </div> -->
 
       <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
-      <div class="padded-section clearfix">
+      <section class="content-bottom clearfix">
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Frequency" [required]="true"
             [valid]="eventForm.get('marketDuration').valid || !eventForm.get('marketDuration').touched"
@@ -271,7 +270,7 @@
                           The event and liquor sale times are different on specific dates.</mat-checkbox>
           </app-field>
         </div> -->
-        <div class="row mr-0 mt-3" style="background-color: #E1E8F2; border-bottom: 4px solid #E4E4E4">
+        <div class="row mx-0 mt-3" style="background-color: #E1E8F2; border-bottom: 4px solid #E4E4E4">
           <form [formGroup]="defaultTimeForm" class="col-md-12">
             <div class="row mt-3">
               <div class="col-md-2 offset-md-2"><label>Event Start</label></div>
@@ -334,21 +333,21 @@
             </div>
           </form>
         </div> -->
-      </div>
+      </section>
 
       <h3 class="blue-header">LIQUOR SALES</h3>
-      <div class="padded-section">
+      <section class="content-bottom">
         <mat-checkbox formControlName="isAllStaffServingitRight"></mat-checkbox><span class="checkbox-label">All staff selling liquor at the market have Serving It Right certification and are not minors</span><br/>
         <mat-checkbox formControlName="isSampleSizeCompliant"></mat-checkbox><span class="checkbox-label">Sample sizes comply with <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/manufacturer-handbook.pdf" target="_blank">Liquor Manufacturing Terms and Conditions</a></span><br/>
-      </div>
+      </section>
 
       <h3 class="blue-header">AGREEMENT</h3>
-      <div class="padded-section">
+      <section class="content-bottom">
         <p>A person commits an offence if the person provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when making a report or when required and as specified by the general manager under section 59. - Liquor Control and Licensing Act, Section 57(1)(c).</p>
         <div>
           <mat-checkbox formControlName="agreement">I understand and affirm that all of the information provided is true and complete.</mat-checkbox>
         </div>
-      </div>
+      </section>
 
       <div class="p-3 attention-section">
         <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</p>
@@ -363,19 +362,14 @@
       </section>
 
       <div class="p-4 button-row">
-        <button class="btn btn-primary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
-          <span>
-            <i class="fa fa-save" style="color: #fff;"></i>
-            SAVE FOR LATER
-          </span>
-        </button>
-        <button class="btn btn-primary" style="margin-right:10px;" (click)="cancel();">
-          <span>
-            <i class="fa fa-trash" style="color: #fff;"></i>
-            CANCEL
-          </span>
+        <button class="btn btn-secondary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
+          <span><i class="fa fa-save"></i>SAVE FOR LATER</span>
         </button>
         <button class="btn btn-primary" (click)="save(true)" *ngIf="!isReadOnly">SUBMIT</button>
+        <button class="btn btn-link btn-cancel" (click)="cancel();">
+          <span *ngIf="isReadOnly">RETURN TO DASHBOARD</span>
+          <span *ngIf="!isReadOnly"><i class="fa fa-trash"></i>CANCEL EVENT</span>
+        </button>
       </div>
     </form>
   </div>
