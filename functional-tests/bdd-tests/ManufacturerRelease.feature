@@ -26,8 +26,8 @@ Scenario: Private Corporation Manufacturer Release
     # And I renew the licence with positive responses for a winery
     And I click on the Licences tab
     And I request a facility structural change
-    And I click on the Licences tab
-    And I request a location change
+    # And I click on the Licences tab
+    # And I request a location change
     And I click on the Licences tab
     And I request a lounge area endorsement
     And I click on the Licences tab
