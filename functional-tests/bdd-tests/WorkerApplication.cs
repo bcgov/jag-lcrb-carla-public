@@ -66,7 +66,7 @@ namespace bdd_tests
             */
 
             NgWebElement uiNameLink = ngDriver.FindElement(By.CssSelector("section section a"));
-            uiNameLink.Click();
+            JavaScriptClick(uiNameLink);
         }
 
         [And(@"I complete Step 1 of the application")]
