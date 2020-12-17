@@ -1023,6 +1023,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var licenceHasStore = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "On-Site Store Endorsement");
                     var licenceHasCatering = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Catering Endorsement");
                     var licenceHasOffsite = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Off-Site Store Endorsement");
+                    var licenceHasPPEE = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Patron Participation Entertainment Endorsement");
+                    var licenceHasTUA = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Temporary Use Area Endorsement");
                     var licenceHasPicnic = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Picnic Area Endorsement"); ;
 
                     if (licenceHasSEA > -1)
@@ -1049,6 +1051,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         endorsementsText += licenceVM.Endorsements[licenceHasCatering].SimpleHeader();
                     }
+
+                    if (licenceHasPPEE > -1)
+                    {
+                        endorsementsText += licenceVM.Endorsements[licenceHasPPEE].SimpleHeader();
+                    }
+
+                    if (licenceHasTUA > -1)
+                    {
+                        endorsementsText += licenceVM.Endorsements[licenceHasTUA].SimpleHeader();
+                    }
+
 
                     if (licenceHasPicnic > -1)
                     {
