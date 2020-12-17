@@ -112,7 +112,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                         {
                             Implicit = new OpenApiOAuthFlow
                             {
-                                AuthorizationUrl = new Uri(baseUri + "authentication/redirect/" + Configuration["JWT_TOKEN_KEY"]),
+                                AuthorizationUrl = new Uri(baseUri + "api/authentication/redirect/" + Configuration["JWT_TOKEN_KEY"]),
                                 Scopes = new Dictionary<string, string>
                                 {
                                     {"openid", "oidc standard"}
