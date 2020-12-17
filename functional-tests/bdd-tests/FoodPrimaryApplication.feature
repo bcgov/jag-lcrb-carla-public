@@ -25,8 +25,8 @@ Scenario: Private Corporation Food Primary Application
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    # And I click on the Dashboard tab
+    # And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
