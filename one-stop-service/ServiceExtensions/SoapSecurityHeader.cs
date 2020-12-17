@@ -15,7 +15,7 @@ namespace OneStopServiceReference
             _username = username;
             _nonce = nonce;
             _createdDate = DateTime.Now;
-            this.Id = id;
+            Id = id;
         }
 
         public string Id { get; set; }
