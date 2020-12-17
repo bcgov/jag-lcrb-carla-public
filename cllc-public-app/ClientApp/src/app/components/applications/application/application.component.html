@@ -219,7 +219,7 @@
           <section class="padded-section content-bottom">
             <div style="position: relative">
 
-              <section *ngIf="application?.applicationType?.establishmentName === FormControlState.Show">
+              <section *ngIf="application?.applicationType?.establishmentName === FormControlState.Show || application?.applicationType?.establishmentName === FormControlState.ReadOnly">
 
                 <label *ngIf="application?.applicationType?.establishmentName === FormControlState.ReadOnly" for="">Establishment Name</label>
                 <label *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly" for="">Proposed Establishment Name</label>
@@ -1654,7 +1654,7 @@
         <div class=content-bottom>
           <p *ngIf="!isRAS()">
             <i>
-              Please provide contact information for the contact that the LCRB should communicate with regarding the
+              Please provide contact information for the contact that the LCRB should communicate with regarding this
               application. <span *ngIf="!this.isLiquor">This contact must be authorized to represent the applicant and have the authority to bind the
               applicant.</span>
             </i>
@@ -1689,7 +1689,7 @@
 
             <app-field label="Email" [required]="true" [valid]="isValidOrNotTouched('contactPersonEmail')"
               errorMessage="Please enter the business contact's email address"
-              afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
+              afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about this application.">
               <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
                 formControlName="contactPersonEmail" id="contactPersonEmail"
                 (blur)="trimValue(form.get('contactPersonEmail'))">
