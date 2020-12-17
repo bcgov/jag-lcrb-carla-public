@@ -37,7 +37,7 @@ namespace bdd_tests
 
             ngDriver.WrappedDriver.FindElement(By.Name("submitButton")).Click();
 
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(4000);
 
             ngDriver.Manage().Timeouts().ImplicitWait = tempWait;            
         }
