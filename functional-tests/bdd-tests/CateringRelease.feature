@@ -25,10 +25,10 @@ Scenario: Private Corporation Catering Release
     # And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I request a licensee representative
-    And I click on the link for Dashboard
-    And I request a personnel name change for a private corporation
-    And I click on the link for Dashboard
-    And I confirm that the director name has been updated
+    # And I click on the link for Dashboard
+    # And I request a personnel name change for a private corporation
+    # And I click on the link for Dashboard
+    # And I confirm that the director name has been updated
     And I click on the Licences tab
     And I request a store relocation for Catering
     And I click on the Licences tab

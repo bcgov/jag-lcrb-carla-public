@@ -106,7 +106,7 @@ Scenario: Sole Proprietorship Manufacturer Release #1
     And the account is deleted
     Then I see the login page
 
-@manufacturer @winery @release 
+@manufacturer @winery 
 Scenario: Sole Proprietorship Manufacturer Release #2
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
