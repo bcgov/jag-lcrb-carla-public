@@ -67,9 +67,9 @@ Scenario: Private Corporation Manufacturer Release #2
     And I request a market event for one date only
     And I click on the market event submit button
     And I click on the Licences tab
-    And I click on the event history for markets
-    And I click on the link for Approved
-    And the market event data is correct for a one day event
+    # And I click on the event history for markets
+    # And I click on the link for Approved
+    # And the market event data is correct for a one day event
     And I request a third party operator
     And I request a transfer of ownership
     And the account is deleted
