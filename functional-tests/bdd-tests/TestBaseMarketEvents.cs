@@ -196,7 +196,7 @@ namespace bdd_tests
 
             // click on the first day
             NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            uiOpenCalendarYear.Click();
+            JavaScriptClick(uiOpenCalendarYear);
 
             if (frequency != "for one date only")
             {
