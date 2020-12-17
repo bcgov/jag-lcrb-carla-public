@@ -33,7 +33,7 @@ Scenario: Private Corporation Food Primary Release Test
     And I request a third party operator
     ## And I click on the link for Cancel Application
     ## And I cancel the third party operator application
-    # And I request a transfer of ownership
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
