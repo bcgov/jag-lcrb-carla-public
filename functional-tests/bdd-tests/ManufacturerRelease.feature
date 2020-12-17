@@ -113,6 +113,7 @@ Scenario: Sole Proprietorship Manufacturer Release
     And I complete the change hours application for a lounge area within service hours
     And I click on the link for Manage Off-Site Storage
     And I complete the offsite storage application
+    And I click on the Submit button
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
