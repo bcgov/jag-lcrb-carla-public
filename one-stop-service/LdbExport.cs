@@ -13,7 +13,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gov.Lclb.Cllb.OneStopService
+namespace Gov.Jag.Lcrb.OneStopService
 {
     public class LdbExport
     {
@@ -96,7 +96,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                                 object value = row[h.Key];
                                 if (value != null)
                                 {
-                                    item.Add($"\"{value.ToString()}\"");
+                                    item.Add($"\"{value}\"");
                                 }
                                 else
                                 {
@@ -164,7 +164,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             var emailSentSuccessfully = false;
             var datePart = DateTime.Now.ToString().Replace('/', '-').Replace(':', '_');
             var email = Configuration["LDB_EXPORT_EMAIL"];
-            string body = $@"";
+            string body = @"";
 
             using (var stream = new MemoryStream())
             using (var writer = new StreamWriter(stream))    // using UTF-8 encoding by default
