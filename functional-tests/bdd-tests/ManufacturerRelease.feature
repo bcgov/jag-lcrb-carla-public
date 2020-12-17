@@ -48,9 +48,9 @@ Scenario: Private Corporation Manufacturer Release #2
     And the application is approved
     And I pay the licensing fee
     And I click on the Licences tab
-    And I request an on-site store endorsement
-    And I click on the Licences tab
-    And the on-site endorsement application is approved
+    # And I request an on-site store endorsement
+    # And I click on the Licences tab
+    # And the on-site endorsement application is approved
     And I request a picnic area endorsement
     And I click on the Licences tab
     And I request a special event area endorsement
