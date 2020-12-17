@@ -48,7 +48,7 @@ namespace Gov.Jag.Lcrb.OneStopService.Controllers
             return result;
         }
 
-        [HttpGet("token/{secret}")]
+        [HttpGet("redirect/{secret}")]
         [AllowAnonymous]
         // response_type=token&client_id=&redirect_uri=https%3A%2F%2Flocalhost%3A5001%2Fswagger%2Foauth2-redirect.html&state=VHVlIERlYyAwOCAyMDIwIDE0OjE1OjE2IEdNVC0wODAwIChQYWNpZmljIFN0YW5kYXJkIFRpbWUp
         public ActionResult SetToken([FromRoute] string secret, string redirect_uri, string response_type, string state)

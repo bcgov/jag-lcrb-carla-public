@@ -98,25 +98,30 @@ namespace Gov.Jag.Lcrb.OneStopService
             services.AddSwaggerGen(c =>
             {
                 c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB SEP Transfer Service", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG OneStop Service", Version = "v1" });
                 c.ParameterFilter<AutoRestParameterFilter>();
-
-                c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+                string baseUri = Configuration["BASE_URI"];
+                if (baseUri != null)
                 {
-                    Type = SecuritySchemeType.OAuth2,
-                    Flows = new OpenApiOAuthFlows
+                    // ensure baseUri is in the right format.
+                    baseUri = baseUri.TrimEnd('/') + @"/";
+                    c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
                     {
-                        Implicit = new OpenApiOAuthFlow
+                        Type = SecuritySchemeType.OAuth2,
+                        Flows = new OpenApiOAuthFlows
                         {
-                            AuthorizationUrl = new Uri(Configuration["BASE_URI"] + "authentication/token/" + Configuration["JWT_TOKEN_KEY"]),
-                            Scopes = new Dictionary<string, string>
+                            Implicit = new OpenApiOAuthFlow
                             {
-                                {"openid", "oidc standard"}
+                                AuthorizationUrl = new Uri(baseUri + "authentication/redirect/" + Configuration["JWT_TOKEN_KEY"]),
+                                Scopes = new Dictionary<string, string>
+                                {
+                                    {"openid", "oidc standard"}
+                                }
                             }
                         }
-                    }
-                });
-
+                    });
+                }
+                
                 c.OperationFilter<AuthenticationRequirementsOperationFilter>();
             });
 
@@ -245,7 +250,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                 // specifying the Swagger JSON endpoint.
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB One Stop Service");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB OneStop Service");
                 });
             }
 
