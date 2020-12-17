@@ -23,8 +23,8 @@ Scenario: Private Corporation Catering Release
     And I request a valid store name or branding change for Catering
     # And I click on the Dashboard tab
     # And the dashboard status is updated as Application Under Review
-    And I click on the Licences tab
-    And I request a licensee representative
+    # And I click on the Licences tab
+    # And I request a licensee representative
     # And I click on the link for Dashboard
     # And I request a personnel name change for a private corporation
     # And I click on the link for Dashboard

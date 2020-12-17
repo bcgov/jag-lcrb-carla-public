@@ -195,5 +195,11 @@ namespace bdd_tests
             // check that missing required fields error message is thrown
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Please make sure that you have completed all required fields. ')]")).Displayed);
         }
+
+        public void JavaScriptClick(NgWebElement element)
+        {
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor.ExecuteScript("arguments[0].click();", element);
+        }
     }
 }
