@@ -74,7 +74,7 @@ namespace bdd_tests
 
             // click on the return to dashboard link
             NgWebElement uiReturnToDashboard = ngDriver.FindElement(By.LinkText(returnToDashboard));
-            uiReturnToDashboard.Click();
+            JavaScriptClick(uiReturnToDashboard);
 
             ClickLicencesTab();
         }
