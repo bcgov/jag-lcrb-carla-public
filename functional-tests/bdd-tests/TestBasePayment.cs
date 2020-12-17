@@ -72,6 +72,8 @@ namespace bdd_tests
             Page Title: Payment Approved
             */
 
+            IgnoreSynchronizationFalse();
+
             // click on the return to dashboard link
             NgWebElement uiReturnToDashboard = ngDriver.FindElement(By.LinkText(returnToDashboard));
             JavaScriptClick(uiReturnToDashboard);
