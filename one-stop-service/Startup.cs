@@ -74,7 +74,7 @@ namespace Gov.Jag.Lcrb.OneStopService
             // Add a memory cache
             services.AddMemoryCache();
 
-
+            services.AddSoapCore();
             services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(Configuration, Env));
 
 
@@ -299,7 +299,11 @@ namespace Gov.Jag.Lcrb.OneStopService
 
             app.UseMvc();
 
-            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.UseSoapEndpoint<IReceiveFromHubService>("/receiveFromHub", new BasicHttpBinding());
+            });
+
 
             // tell the soap service about the cache.
             using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
