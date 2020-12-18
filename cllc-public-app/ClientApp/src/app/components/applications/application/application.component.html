@@ -1077,6 +1077,8 @@
                   aimed at minors or a liquor consumption business).</p>
               </div>
 
+              <img *ngIf="application?.applicationType?.name === 'Temporary Use Area Endorsement'" src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage">
+
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Site Plan"
                   fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
@@ -1419,7 +1421,7 @@
               <br>
               <label for="">Supporting Documents</label>
               <br>
-              <p *ngIf="application?.applicationType?.name == 'Temporary Use Area Endorsement'">Please download, print and have signed the <a href="test" target="_blank">Property Ownership Acknowledgement and Declaration Statements</a> form.</p>
+              <p *ngIf="application?.applicationType?.name == 'Temporary Use Area Endorsement'">Please download, print and have signed the <a href="https://www2.gov.bc.ca/assets/download/C96F6309C0864AC2A7F368480BE35A61" target="_blank">Property Ownership Acknowledgement and Declaration Statements</a> form.</p>
 
               <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer && application?.applicationType?.name !== 'Temporary Use Area Endorsement'">
                 Please download the
