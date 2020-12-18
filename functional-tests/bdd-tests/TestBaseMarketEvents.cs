@@ -275,58 +275,49 @@ namespace bdd_tests
 
             // decrement event start hour
             NgWebElement uiEventStartHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] .ngb-tp-hour [type='button'] span.bottom"));
-            uiEventStartHour.Click();
+            JavaScriptClick(uiEventStartHour);
 
             // decrement event start minute
             NgWebElement uiEventStartMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='startTime'] .ngb-tp-minute span.ngb-tp-chevron.bottom"));
-            uiEventStartMinute.Click();
+            JavaScriptClick(uiEventStartMinute);
 
             // decrement event end hour
             NgWebElement uiEventEndHour = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] .ngb-tp-hour [type='button'] span.bottom"));
-            uiEventEndHour.Click();
+            JavaScriptClick(uiEventEndHour);
 
             // decrement event end minute
             NgWebElement uiEventEndMinute = ngDriver.FindElement(By.CssSelector("[formcontrolname='endTime'] .ngb-tp-minute [type='button'] span.bottom"));
-            uiEventEndMinute.Click();
+            JavaScriptClick(uiEventEndMinute);
 
             // increment liquor sale start hour
             NgWebElement uiLiquorStartHour = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(4) .ngb-tp-hour .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
-            uiLiquorStartHour.Click();
+            JavaScriptClick(uiLiquorStartHour);
 
             // increment liquor sale start minute
             NgWebElement uiLiquorStartMinute = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(4) .ngb-tp-minute .ng-star-inserted:nth-child(1) .ngb-tp-chevron"));
-            uiLiquorStartMinute.Click();
+            JavaScriptClick(uiLiquorStartMinute);
 
             // double decrement liquor sale end hour
             NgWebElement uiLiquorEndHour1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] .ngb-tp-hour span.bottom"));
-            uiLiquorEndHour1.Click();
-            uiLiquorEndHour1.Click();
+            JavaScriptClick(uiLiquorEndHour1);
+            JavaScriptClick(uiLiquorEndHour1);
 
             // double decrement liquor sale end minute
             NgWebElement uiLiquorEndMinute1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] .ngb-tp-minute span.bottom"));
-            uiLiquorEndMinute1.Click();
-            uiLiquorEndMinute1.Click();
+            JavaScriptClick(uiLiquorEndMinute1);
+            JavaScriptClick(uiLiquorEndMinute1);
 
             // select serving it right/minors checkbox
             NgWebElement uiServingItRight = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAllStaffServingitRight']"));
-            uiServingItRight.Click();
+            JavaScriptClick(uiServingItRight);
 
             // select sample sizes checkbox
             NgWebElement uiSampleSizes = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isSampleSizeCompliant']"));
-            uiSampleSizes.Click();
+            JavaScriptClick(uiSampleSizes);
 
             // select agreement checkbox
             NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiAgreement.Click();
-        }
-
-
-        [And(@"I click on the market event submit button")]
-        public void MarketEventsSubmit()
-        {
-            // click on the Submit button
-            NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary+ .ng-star-inserted"));
-            uiSubmit.Click();
         }
 
 
