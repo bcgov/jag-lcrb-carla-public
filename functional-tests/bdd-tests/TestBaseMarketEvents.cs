@@ -240,13 +240,13 @@ namespace bdd_tests
                 {
                     // make final selection re days of the week
                     NgWebElement uiThursdayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='thursday']"));
-                    JavaScriptClick(uiThursdayFinal);
+                    uiThursdayFinal.Click();
 
                     NgWebElement uiFridayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='friday']"));
-                    JavaScriptClick(uiFridayFinal);
+                    uiFridayFinal.Click();
 
                     NgWebElement uiSaturdayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='saturday']"));
-                    JavaScriptClick(uiSaturdayFinal);
+                    uiSaturdayFinal.Click();
                 }
 
                 if (frequency == "monthly")
