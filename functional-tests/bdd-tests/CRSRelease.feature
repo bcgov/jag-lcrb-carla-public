@@ -31,10 +31,10 @@ Scenario: Private Corporation CRS Release
     # And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     # And I click on the link for Renew Licence
     # And I renew the licence with positive responses for Cannabis
-    And I click on the link for Dashboard
-    And I request a personnel name change for a private corporation
-    And I click on the link for Dashboard
-    And I confirm that the director name has been updated
+    # And I click on the link for Dashboard
+    # And I request a personnel name change for a private corporation
+    # And I click on the link for Dashboard
+    # And I confirm that the director name has been updated
     And I click on the Licences tab
     And I request a store relocation for Cannabis
     And I request a structural change

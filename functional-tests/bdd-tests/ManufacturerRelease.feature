@@ -48,9 +48,9 @@ Scenario: Private Corporation Manufacturer Release #2
     And the application is approved
     And I pay the licensing fee
     And I click on the Licences tab
-    And I request an on-site store endorsement
-    And I click on the Licences tab
-    And the on-site endorsement application is approved
+    # And I request an on-site store endorsement
+    # And I click on the Licences tab
+    # And the on-site endorsement application is approved
     And I request a picnic area endorsement
     And I click on the Licences tab
     And I request a special event area endorsement
@@ -64,9 +64,9 @@ Scenario: Private Corporation Manufacturer Release #2
     # And I click on the link for Manage Off-Site Storage
     # And I complete the offsite storage application
     # And I click on the Submit button
-    And I request a market event for one date only
-    And I click on the market event submit button
-    And I click on the Licences tab
+    # And I request a market event for one date only
+    # And I click on the market event submit button
+    # And I click on the Licences tab
     # And I click on the event history for markets
     # And I click on the link for Approved
     # And the market event data is correct for a one day event
@@ -106,7 +106,7 @@ Scenario: Sole Proprietorship Manufacturer Release #1
     And the account is deleted
     Then I see the login page
 
-@manufacturer @winery @release 
+@manufacturer @winery 
 Scenario: Sole Proprietorship Manufacturer Release #2
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence

@@ -37,7 +37,7 @@ namespace bdd_tests
 
             ngDriver.WrappedDriver.FindElement(By.Name("submitButton")).Click();
 
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(4000);
 
             ngDriver.Manage().Timeouts().ImplicitWait = tempWait;            
         }
@@ -72,9 +72,11 @@ namespace bdd_tests
             Page Title: Payment Approved
             */
 
+            IgnoreSynchronizationFalse();
+
             // click on the return to dashboard link
             NgWebElement uiReturnToDashboard = ngDriver.FindElement(By.LinkText(returnToDashboard));
-            uiReturnToDashboard.Click();
+            JavaScriptClick(uiReturnToDashboard);
 
             ClickLicencesTab();
         }
