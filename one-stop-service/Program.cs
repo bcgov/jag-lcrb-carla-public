@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 
-namespace Gov.Lclb.Cllb.OneStopService
+namespace Gov.Jag.Lcrb.OneStopService
 {
     public class Program
     {
