@@ -213,11 +213,12 @@ import { LgZoningConfirmationComponent } from './components/applications/applica
 import { ProofOfZoningComponent } from './components/applications/application/tabs/proof-of-zoning/proof-of-zoning.component';
 import { ProductionStagesComponent } from './components/applications/application/tabs/business-plan/production-stages/production-stages.component';
 import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
-import { PermanentChangesToALicenseeComponent } from './components/applications/permanent-changes-to-a-licensee/permanent-changes-to-a-licensee.component';
+import { PermanentChangeToALicenseeComponent } from './components/applications/permanent-change-to-a-licensee/permanent-change-to-a-licensee.component';
 import { LegalEntityTypeUpdateCalloutboxComponent } from './components/dashboard/legal-entity-type-update-calloutbox/legal-entity-type-update-calloutbox.component';
 import { OffsiteStorageComponent } from '@components/offsite-storage/offsite-storage.component';
 import { OffsiteTableComponent } from '@components/tables/offsite-table/offsite-table.component';
 import { ContactComponent } from './shared/components/contact/contact.component';
+import { InvoiceDetailsComponent } from './shared/components/invoice-details/invoice-details.component';
 
 @NgModule({
   declarations: [
@@ -343,11 +344,12 @@ import { ContactComponent } from './shared/components/contact/contact.component'
     LgZoningConfirmationComponent,
     ProductionStagesComponent,
     PhsConfirmationComponent,
-    PermanentChangesToALicenseeComponent,
+    PermanentChangeToALicenseeComponent,
     LegalEntityTypeUpdateCalloutboxComponent,
     OffsiteStorageComponent,
     OffsiteTableComponent,
     ContactComponent,
+    InvoiceDetailsComponent,
   ],
   imports: [
     ChartsModule,
