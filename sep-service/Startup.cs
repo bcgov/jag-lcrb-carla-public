@@ -91,28 +91,7 @@ namespace SepService
                 c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB SEP Transfer Service", Version = "v1" });
                 c.ParameterFilter<AutoRestParameterFilter>();
-                /*
-                OpenApiSecurityScheme securityDefinition = new OpenApiSecurityScheme()
-                {
-                    Name = "Bearer",
-                    BearerFormat = "JWT",
-                    Scheme = "bearer",
-                    Description = "Specify the authorization token.",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.Http,
-                };
-
-                OpenApiSecurityRequirement securityRequirements = new OpenApiSecurityRequirement()
-                {
-                    {securityDefinition, new string[] { }},
-                };
-
                 
-                c.AddSecurityDefinition("jwt_auth", securityDefinition);
-                // Make sure swagger UI requires a Bearer token to be specified
-                c.AddSecurityRequirement(securityRequirements);
-                */
-
                 c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OAuth2,
@@ -128,31 +107,7 @@ namespace SepService
                         }
                     }
                 });
-                /*
-            {
-                    Type = "oauth2",
-                    Flow = "password",
-                    TokenUrl = "/api/auth/token",
-                    Description = "Authorization with X and then the X database"
-                });
-                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-                {
-                    Type = SecuritySchemeType.OAuth2,
-                    Flows = new OpenApiOAuthFlows
-                    {
-                        AuthorizationCode = new OpenApiOAuthFlow
-                        {
-                            AuthorizationUrl = new Uri(Configuration["BASE_URI"] + "authentication/token/" + Configuration["JWT_TOKEN_KEY"]),
-                            
-                            TokenUrl = new Uri(Configuration["BASE_URI"]),
-                            Scopes = new Dictionary<string, string>
-                            {
-                                {"api1", "Demo API - full access"}
-                            }
-                        }
-                    }
-                });
-                */
+                
                 c.OperationFilter<AuthenticationRequirementsOperationFilter>();
             });
 
@@ -196,16 +151,18 @@ namespace SepService
                 Predicate = (_) => false
             });
 
-            app.UseSwagger(c =>
+            // only make the swagger UI available when in development.
+            if (env.IsDevelopment())
             {
-                c.SerializeAsV2 = true;
-            });
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
-            });
-
-            
+                app.UseSwagger(c =>
+                {
+                    c.SerializeAsV2 = true;
+                });
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
+                });
+            }
 
             // enable Splunk logger using Serilog
             if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&

@@ -87,7 +87,7 @@ namespace bdd_tests
         public void ClickLicencesTab()
         {
             NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Licences & Authorizations"));
-            uiRequestChange.Click();
+            JavaScriptClick(uiRequestChange);
         }
 
 
@@ -95,7 +95,7 @@ namespace bdd_tests
         public void ClickDashboardTab()
         {
             NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Dashboard"));
-            uiRequestChange.Click();
+            JavaScriptClick(uiRequestChange);
         }
 
 

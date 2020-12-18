@@ -2,7 +2,6 @@
 	As a public website visitor
 	I want to see Cannabis Licenses on a map
 
-@release
 Scenario: Basic Map View
 	Given I navigate to the map
 	Then the page shows a map

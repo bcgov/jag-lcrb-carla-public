@@ -21,13 +21,15 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Exceptions;
 using SoapCore;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Reflection;
 using System.ServiceModel;
 using System.Text;
 
-namespace Gov.Lclb.Cllb.OneStopService
+namespace Gov.Jag.Lcrb.OneStopService
 {
 
    
@@ -72,7 +74,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             // Add a memory cache
             services.AddMemoryCache();
 
-
+            services.AddSoapCore();
             services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(Configuration, Env));
 
 
@@ -93,10 +95,34 @@ namespace Gov.Lclb.Cllb.OneStopService
             });
 
             // Other ConfigureServices() code...
-
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB One Stop Service", Version = "v1" });
+                c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG OneStop Service", Version = "v1" });
+                c.ParameterFilter<AutoRestParameterFilter>();
+                string baseUri = Configuration["BASE_URI"];
+                if (baseUri != null)
+                {
+                    // ensure baseUri is in the right format.
+                    baseUri = baseUri.TrimEnd('/') + @"/";
+                    c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+                    {
+                        Type = SecuritySchemeType.OAuth2,
+                        Flows = new OpenApiOAuthFlows
+                        {
+                            Implicit = new OpenApiOAuthFlow
+                            {
+                                AuthorizationUrl = new Uri(baseUri + "api/authentication/redirect/" + Configuration["JWT_TOKEN_KEY"]),
+                                Scopes = new Dictionary<string, string>
+                                {
+                                    {"openid", "oidc standard"}
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                c.OperationFilter<AuthenticationRequirementsOperationFilter>();
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
@@ -113,7 +139,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 {
                     o.SaveToken = true;
                     o.RequireHttpsMetadata = false;
-                    o.TokenValidationParameters = new TokenValidationParameters()
+                    o.TokenValidationParameters = new TokenValidationParameters
                     {
                         RequireExpirationTime = false,
                         ValidIssuer = Configuration["JWT_VALID_ISSUER"],
@@ -165,7 +191,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                        sourceType: "onestop", eventCollectorToken: Configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
-                       messageHandler: new HttpClientHandler()
+                       messageHandler: new HttpClientHandler
                        {
                            ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
                        }
@@ -214,6 +240,18 @@ namespace Gov.Lclb.Cllb.OneStopService
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseSwagger(c =>
+                {
+                    c.SerializeAsV2 = true;
+                });
+
+                // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+                // specifying the Swagger JSON endpoint.
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB OneStop Service");
+                });
             }
 
             bool startHangfire = true;
@@ -249,11 +287,6 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             app.UseAuthentication();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB One Stop Service");
-            });
 
             app.UseHealthChecks("/hc", new HealthCheckOptions
             {
@@ -266,7 +299,11 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             app.UseMvc();
 
-            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.UseSoapEndpoint<IReceiveFromHubService>("/receiveFromHub", new BasicHttpBinding());
+            });
+
 
             // tell the soap service about the cache.
             using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -305,6 +342,22 @@ namespace Gov.Lclb.Cllb.OneStopService
                 msg.AppendLine("Failed to setup Hangfire job.");
 
                 Log.Logger.Error(e, "Hangfire setup failed.");
+            }
+        }
+
+        public class AuthenticationRequirementsOperationFilter : IOperationFilter
+        {
+            public void Apply(OpenApiOperation operation, OperationFilterContext context)
+            {
+                if (operation.Security == null)
+                    operation.Security = new List<OpenApiSecurityRequirement>();
+
+
+                var scheme = new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "bearer" } };
+                operation.Security.Add(new OpenApiSecurityRequirement
+                {
+                    [scheme] = new List<string>()
+                });
             }
         }
 

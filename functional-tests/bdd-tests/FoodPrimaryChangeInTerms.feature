@@ -15,6 +15,7 @@ Scenario: Partnership Food Primary Change in Terms
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
     And I request a change in terms and conditions application
     And the account is deleted
     Then I see the login page
@@ -32,6 +33,7 @@ Scenario: Private Corporation Food Primary Change in Terms
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
     And I request a change in terms and conditions application
     And the account is deleted
     Then I see the login page
@@ -49,6 +51,7 @@ Scenario: Public Corporation Food Primary Change in Terms
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
     And I request a change in terms and conditions application
     And the account is deleted
     Then I see the login page
@@ -66,6 +69,7 @@ Scenario: Society Food Primary Change in Terms
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I pay the licensing fee
+    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
     And I request a change in terms and conditions application
     And the account is deleted
     Then I see the login page
@@ -75,8 +79,6 @@ Scenario: Sole Proprietorship Food Primary Change in Terms
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
     And I review the account profile for a sole proprietorship
-    And I review the organization structure for a sole proprietorship
-    And I click on the button for Submit Organization Information
     And I complete the Food Primary application for a sole proprietorship
     And I click on the Submit button
     And I enter the payment information
@@ -84,7 +86,8 @@ Scenario: Sole Proprietorship Food Primary Change in Terms
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I pay the licensing fee 
+    And I pay the licensing fee
+    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
     And I request a change in terms and conditions application
     And the account is deleted
     Then I see the login page

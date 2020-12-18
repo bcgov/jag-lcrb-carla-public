@@ -4,14 +4,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
-
     class MicrosoftDynamicsCRMcontactMetadata
     {
         [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
         [JsonProperty(PropertyName = "birthdate")]
         public System.DateTimeOffset? Birthdate { get; set; }
     }
-   
+
     [MetadataType(typeof(MicrosoftDynamicsCRMcontactMetadata))]
     public partial class MicrosoftDynamicsCRMcontact
     {
@@ -23,8 +22,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "account_primary_contact@odata.bind")]
         public string AccountPrimaryContactODataBind { get; set; }
-        
-
     }
 
     public class DateFormatConverter : IsoDateTimeConverter
