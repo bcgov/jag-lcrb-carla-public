@@ -97,8 +97,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the contact
 
 
-            var contact = await _dynamicsClient.GetContactById(id);
-
+            
             // Allow access if the current user is the contact - for scenarios such as a worker update.
             if (DynamicsExtensions.CurrentUserIsContact(id, _httpContextAccessor))
             {
@@ -106,8 +105,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
+                var contact = await _dynamicsClient.GetContactById(id);
+
                 // get the related account and determine if the current user is allowed access
-                if (!string.IsNullOrEmpty(contact._parentcustomeridValue))
+                if (!string.IsNullOrEmpty(contact?._parentcustomeridValue))
                 {
                     var accountId = Guid.Parse(contact._parentcustomeridValue);
                     accessGranted =
@@ -118,7 +119,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (!accessGranted)
             {
-                _logger.LogError(LoggingEvents.BadRequest, $"Current user has NO access to the contact record. {id} ");
+                _logger.LogError(LoggingEvents.BadRequest, $"Current user has NO access to the contact record. Aborting update to contact {id} ");
                 return NotFound();
             }
 
@@ -133,8 +134,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(httpOperationException, "Error updating contact");
             }
 
-            contact = await _dynamicsClient.GetContactById(id);
-            return new JsonResult(contact.ToViewModel());
+            var result = await _dynamicsClient.GetContactById(id);
+            return new JsonResult(result.ToViewModel());
         }
 
 

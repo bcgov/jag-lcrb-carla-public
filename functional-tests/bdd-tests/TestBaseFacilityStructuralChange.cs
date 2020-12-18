@@ -55,6 +55,12 @@ namespace bdd_tests
             NgWebElement uiProposedChange = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
             uiProposedChange.SendKeys(proposedChange);
 
+            // upload the floor plan
+            FileUpload("floor_plan.pdf", "(//input[@type='file'])[2]");
+
+            // upload the site plan
+            FileUpload("site_plan.pdf", "(//input[@type='file'])[5]");
+
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
             uiAuthorizedToSubmit.Click();
@@ -63,22 +69,10 @@ namespace bdd_tests
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
             uiSignatureAgreement.Click();
 
-            // upload the floor plan
-            FileUpload("floor_plan.pdf", "(//input[@type='file'])[2]");
-
-            // upload the site plan
-            FileUpload("site_plan.pdf", "(//input[@type='file'])[5]");
-
-            uiAuthorizedToSubmit.Click();
-
-            uiSignatureAgreement.Click();
-
             // click on the Submit & Pay button
             ClickOnSubmitButton();
 
             MakePayment();
-
-
         }
     }
 }
