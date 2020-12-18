@@ -3,6 +3,7 @@ import { OnDestroy } from '@angular/core';
 import { Application } from '@models/application.model';
 import { ApplicationTypeNames } from '@models/application-type.model';
 import { Account } from '@models/account.model';
+import { Subscription } from 'rxjs';
 
 
 export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
@@ -39,6 +40,7 @@ export class FormBase implements OnDestroy {
     application: Application;
     htmlContent: ApplicationHTMLContent;
     ApplicationTypeNames = ApplicationTypeNames;
+    subscriptionList: Subscription[] = [];
 
     public addDynamicContent() {
         if (this.application.applicationType) {
@@ -200,6 +202,9 @@ export class FormBase implements OnDestroy {
 
     ngOnDestroy(): void {
         this.componentActive = false;
+        this.subscriptionList.forEach(sub => {
+            sub.unsubscribe();
+        });
     }
 
     public listControlsWithErrors(form: FormGroup | FormArray, ValidationFieldNameMap: any = {}, parentName: string = ''): string[] {

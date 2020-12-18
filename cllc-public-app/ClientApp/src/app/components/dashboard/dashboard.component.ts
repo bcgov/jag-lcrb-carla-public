@@ -42,10 +42,11 @@ export class DashboardComponent extends FormBase implements OnInit {
         this.account = account;
 
         if (this.account && this.account.id) {
-          this.licenseDataService.getAllCurrentLicenses()
+          let sub = this.licenseDataService.getAllCurrentLicenses()
             .subscribe(licences => {
               this.hasLicence = licences.length > 0;
             });
+          this.subscriptionList.push(sub);
 
           this.store.select((state) => state.indigenousNationState.indigenousNationModeActive)
             .pipe(takeWhile(() => this.componentActive))
@@ -53,7 +54,7 @@ export class DashboardComponent extends FormBase implements OnInit {
               this.indigenousNationModeActive = active;
             });
 
-          this.legalEntityDataService.getCurrentHierachy()
+          sub = this.legalEntityDataService.getCurrentHierachy()
             .pipe(takeWhile(() => this.componentActive))
             .subscribe((data: LegalEntity) => {
               this.tree = LicenseeChangeLog.CreateFromLegalEntity(data);
@@ -63,6 +64,7 @@ export class DashboardComponent extends FormBase implements OnInit {
                 console.log('Error occured');
               }
             );
+          this.subscriptionList.push(sub);
 
 
         }
@@ -71,7 +73,7 @@ export class DashboardComponent extends FormBase implements OnInit {
 
       });
 
-    
+
   }
 
   startLicenseeChangeApplication() {
