@@ -4,18 +4,20 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
+using System.Text.Encodings.Web;
 
-namespace Gov.Lclb.Cllb.SpdSync.Controllers
+namespace Gov.Jag.Lcrb.OneStopService.Controllers
 {
     [Route("api/authentication")]
     public class AuthenticationController : Controller
     {
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration Configuration;
 
         public AuthenticationController(IConfiguration configuration)
         {
-            _configuration = configuration;
+            Configuration = configuration;
         }
 
         /// <summary>
@@ -28,15 +30,15 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         public string GetToken(string secret)
         {
             string result = "Invalid secret.";
-            string configuredSecret = _configuration["JWT_TOKEN_KEY"];
+            string configuredSecret = Configuration["JWT_TOKEN_KEY"];
             if (configuredSecret.Equals(secret))
             {
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_TOKEN_KEY"]));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var jwtSecurityToken = new JwtSecurityToken(
-                    _configuration["JWT_VALID_ISSUER"],
-                    _configuration["JWT_VALID_AUDIENCE"],
+                    Configuration["JWT_VALID_ISSUER"],
+                    Configuration["JWT_VALID_AUDIENCE"],
                     expires: DateTime.UtcNow.AddYears(5),
                     signingCredentials: creds
                     );
@@ -44,6 +46,49 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             }
 
             return result;
+        }
+
+        [HttpGet("redirect/{secret}")]
+        [AllowAnonymous]
+        // response_type=token&client_id=&redirect_uri=https%3A%2F%2Flocalhost%3A5001%2Fswagger%2Foauth2-redirect.html&state=VHVlIERlYyAwOCAyMDIwIDE0OjE1OjE2IEdNVC0wODAwIChQYWNpZmljIFN0YW5kYXJkIFRpbWUp
+        public ActionResult SetToken([FromRoute] string secret, string redirect_uri, string response_type, string state)
+        {
+            string result = "Invalid secret.";
+            string token = "";
+            string expires_in = "";
+            string configuredSecret = Configuration["JWT_TOKEN_KEY"];
+            if (configuredSecret.Equals(secret))
+            {
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var claims = new[] {
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                };
+
+
+                var jwtSecurityToken = new JwtSecurityToken(
+                    Configuration["JWT_VALID_ISSUER"],
+                    Configuration["JWT_VALID_ISSUER"],
+                    expires: DateTime.UtcNow.AddDays(1),
+                    signingCredentials: creds
+                );
+                token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+                result = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken) + " Expires:" + jwtSecurityToken.ValidTo.ToShortTimeString();
+
+            }
+
+            if (!string.IsNullOrEmpty(redirect_uri))
+            {
+                Response.Headers.Add("Authorization", $"Bearer {result}");
+                string tokenEncoded = UrlEncoder.Default.Encode(token);
+                string redirect = redirect_uri +
+                                  $"#state={state}&token_type=Bearer&access_token={tokenEncoded}&id_token={tokenEncoded}&access_token={tokenEncoded}&expires_in=99999";
+                return new RedirectResult(redirect);
+            }
+
+            return Ok(new { Token = result });
+
         }
     }
 }

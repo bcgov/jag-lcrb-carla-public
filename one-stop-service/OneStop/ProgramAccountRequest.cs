@@ -1,5 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.OneStopService;
+using Gov.Jag.Lcrb.OneStopService;
 using System;
 using System.IO;
 using System.Xml.Serialization;
@@ -19,11 +19,13 @@ namespace WebApplicationSoap.OneStop
             {
                 throw new Exception("licence can not be null");
             }
-            else if (licence.AdoxioEstablishment == null)
+
+            if (licence.AdoxioEstablishment == null)
             {
                 throw new Exception("The licence must have an Establishment");
             }
-            else if (licence.AdoxioLicencee == null)
+
+            if (licence.AdoxioLicencee == null)
             {
                 throw new Exception("The licence must have an AdoxioLicencee");
             }
