@@ -17,11 +17,11 @@ import { ContactComponent, ContactData } from '@shared/components/contact/contac
 import { PaymentConfirmationComponent } from '@components/payment-confirmation/payment-confirmation.component';
 
 @Component({
-  selector: 'app-permanent-changes-to-a-licensee',
-  templateUrl: './permanent-changes-to-a-licensee.component.html',
-  styleUrls: ['./permanent-changes-to-a-licensee.component.scss']
+  selector: 'app-permanent-change-to-a-licensee',
+  templateUrl: './permanent-change-to-a-licensee.component.html',
+  styleUrls: ['./permanent-change-to-a-licensee.component.scss']
 })
-export class PermanentChangesToALicenseeComponent extends FormBase implements OnInit {
+export class PermanentChangeToALicenseeComponent extends FormBase implements OnInit {
   value: any; // placeholder prop
   application: Application;
   liquorLicences: ApplicationLicenseSummary[] = [];
@@ -45,6 +45,8 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
   applicationId: string;
   canCreateNewApplication: boolean;
   createApplicationInProgress: boolean;
+  primaryInvoice: any;
+  secondaryInvoice: any;
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -109,17 +111,18 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
   }
 
   private loadData() {
-    this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId)
+    var sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId)
       .subscribe((data) => {
         this.setFormData(data);
       });
+    this.subscriptionList.push(sub);
   }
 
   createApplication() {
-    this.router.navigateByUrl(`/permanent-changes-to-a-licensee`);
+    this.router.navigateByUrl(`/permanent-change-to-a-licensee`);
   }
 
-  private setFormData({ application, licences }) {
+  private setFormData({ application, licences, primary, secondary }) {
     this.liquorLicences = licences.filter(item => item.licenceTypeCategory === 'Liquor' && item.status === 'Active');
     this.cannabisLicences = licences.filter(item => item.licenceTypeCategory === 'Cannabis' && item.status === 'Active');
     this.application = application;
@@ -131,43 +134,24 @@ export class PermanentChangesToALicenseeComponent extends FormBase implements On
       contactPersonEmail: this.application.contactPersonEmail
     };
 
-    const needToVerifyPayment: boolean = (
-      (this.invoiceType === 'primary' && !this.application.primaryInvoicePaid) ||
-      (this.invoiceType === 'secondary' && !this.application.secondaryInvoicePaid)
-    );
+    this.primaryInvoice = primary;
+    this.secondaryInvoice = secondary;
 
-
-    if (needToVerifyPayment && !this.verifyRquestMade) {
-      this.verifyRquestMade = true;
-      this.paymentDataService.verifyPaymentURI(this.invoiceType + 'Invoice', this.application.id)
-        .subscribe(res => {
-          // report payment status
-          const paymentData = PaymentConfirmationComponent.parseVerifyResponse(res);
-          if (paymentData.isApproved) {
-            this.snackBar.open('Payment successful', 'Success', { duration: 3500, panelClass: ['green-snackbar'] });
-          } else {
-            this.snackBar.open(paymentData.paymentTransactionMessage, 'Fail', { duration: 5500, panelClass: ['red-snackbar'] });
-          }
-
-          this.loadData();
-        });
-    } else {
-      this.dataLoaded = true;
-
-      // if all required payments are made, go to the dashboard
-      if ((!this.hasCannabis || this.application.primaryInvoicePaid) &&
-        (!this.hasLiquor || this.application.secondaryInvoicePaid)) {
-        // this.router.navigateByUrl('/dashboard');
-        this.canCreateNewApplication = true;
-      }
-
-      // if any payment was made, disable the form
-      if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
-        this.form.disable();
-        this.appContactDisabled = true;
-      }
-      this.form.patchValue(application);
+    // if all required payments are made, go to the dashboard
+    if ((!this.hasCannabis || this.application.primaryInvoicePaid) &&
+      (!this.hasLiquor || this.application.secondaryInvoicePaid)) {
+      // this.router.navigateByUrl('/dashboard');
+      this.canCreateNewApplication = true;
     }
+
+    // if any payment was made, disable the form
+    if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
+      this.form.disable();
+      this.appContactDisabled = true;
+    }
+    this.form.patchValue(application);
+
+    this.dataLoaded = true;
   }
 
   /**
