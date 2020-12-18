@@ -53,35 +53,35 @@ namespace bdd_tests
 
             // click on the submit permanent change applications checkbox
             NgWebElement uiCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSubmitPermanentChangeApplications']"));
-            uiCheckbox.Click();
+            JavaScriptClick(uiCheckbox);
 
             // click on the sign temporary change applications checkbox
             NgWebElement uiCheckbox1 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSignTemporaryChangeApplications']"));
-            uiCheckbox1.Click();
+            JavaScriptClick(uiCheckbox1);
 
             // click on the obtain licence info from branch checkbox
             NgWebElement uiCheckbox2 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanObtainLicenceInformation']"));
-            uiCheckbox2.Click();
+            JavaScriptClick(uiCheckbox2);
 
             // click on sign grocery annual proof of sales revenue checkbox
             NgWebElement uiCheckbox3 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSignGroceryStoreProofOfSale']"));
-            uiCheckbox3.Click();
+            JavaScriptClick(uiCheckbox3);
 
             // click on attend education sessions checkbox
             NgWebElement uiCheckbox4 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanAttendEducationSessions']"));
-            uiCheckbox4.Click();
+            JavaScriptClick(uiCheckbox4);
 
             // click on attend compliance meetings checkbox
             NgWebElement uiCheckbox5 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanAttendComplianceMeetings']"));
-            uiCheckbox5.Click();
+            JavaScriptClick(uiCheckbox5);
 
             // click on represent licensee at enforcement hearings checkbox
             NgWebElement uiCheckbox6 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanRepresentAtHearings']"));
-            uiCheckbox6.Click();
+            JavaScriptClick(uiCheckbox6);
 
             // click on the signature agreement checkbox
             NgWebElement uiSignatureAgree = ngDriver.FindElement(By.XPath("//app-field/section/div/section/section/input"));
-            uiSignatureAgree.Click();
+            JavaScriptClick(uiSignatureAgree);
 
             ClickOnSubmitButton();
 
