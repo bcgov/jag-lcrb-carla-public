@@ -213,7 +213,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         // creates a worker record and links it to the contact with id = item.contact.id
-        // the contact param is included as the contact in the response
         private async Task<ViewModels.Worker> CreateWorkerRecord(ViewModels.Worker item)
         {
 
