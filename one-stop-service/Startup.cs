@@ -32,7 +32,7 @@ using System.Text;
 namespace Gov.Jag.Lcrb.OneStopService
 {
 
-   
+
     public class Startup
     {
         private readonly ILoggerFactory _loggerFactory;
@@ -62,7 +62,6 @@ namespace Gov.Jag.Lcrb.OneStopService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddLogging(configure => configure.AddSerilog(dispose: true));
 
             // Adjust Kestrel options to allow sync IO
@@ -121,7 +120,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                         }
                     });
                 }
-                
+
                 c.OperationFilter<AuthenticationRequirementsOperationFilter>();
             });
 
@@ -235,8 +234,6 @@ namespace Gov.Jag.Lcrb.OneStopService
 
 
 
-            // , serializer: SoapSerializer.XmlSerializer, caseInsensitivePath: true
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -300,8 +297,9 @@ namespace Gov.Jag.Lcrb.OneStopService
             app.UseMvc();
 
             app.UseRouting();
-            app.UseEndpoints(endpoints => {
-                endpoints.UseSoapEndpoint<IReceiveFromHubService>("/receiveFromHub", new BasicHttpBinding());
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.UseSoapEndpoint<IReceiveFromHubService>("/receiveFromHub", new BasicHttpBinding(), SoapSerializer.XmlSerializer);
             });
 
 
