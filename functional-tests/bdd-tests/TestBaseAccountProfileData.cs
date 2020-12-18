@@ -97,7 +97,7 @@ namespace bdd_tests
             Assert.True(uiPhysicalAddressCity.GetAttribute("value") == "Victoria");
 
             // check physical address province is correct
-            NgWebElement uiPhysicalAddressProvince = ngDriver.FindElement(By.CssSelector("input[formcontrolname='physicalAddressProvince']"));
+            NgWebElement uiPhysicalAddressProvince = ngDriver.FindElement(By.CssSelector("select[formcontrolname='physicalAddressProvince']"));
             Assert.True(uiPhysicalAddressProvince.GetAttribute("value") == "British Columbia");
 
             // check physical address postal code is correct

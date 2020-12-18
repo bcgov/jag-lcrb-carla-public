@@ -75,8 +75,6 @@ Scenario: Sole Proprietorship Food Primary Licensee Representative
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
     And I review the account profile for a sole proprietorship
-    And I review the organization structure for a sole proprietorship
-    And I click on the button for Submit Organization Information
     And I complete the Food Primary application for a sole proprietorship
     And I click on the Submit button
     And I enter the payment information
