@@ -240,13 +240,13 @@ namespace bdd_tests
                 {
                     // make final selection re days of the week
                     NgWebElement uiThursdayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='thursday']"));
-                    uiThursdayFinal.Click();
+                    JavaScriptClick(uiThursdayFinal);
 
                     NgWebElement uiFridayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='friday']"));
-                    uiFridayFinal.Click();
+                    JavaScriptClick(uiFridayFinal);
 
                     NgWebElement uiSaturdayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='saturday']"));
-                    uiSaturdayFinal.Click();
+                    JavaScriptClick(uiSaturdayFinal);
                 }
 
                 if (frequency == "monthly")
@@ -307,17 +307,19 @@ namespace bdd_tests
             JavaScriptClick(uiLiquorEndMinute1);
             JavaScriptClick(uiLiquorEndMinute1);
 
+            // select agreement checkbox
+            NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiAgreement.Click();
+
             // select serving it right/minors checkbox
             NgWebElement uiServingItRight = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAllStaffServingitRight']"));
-            JavaScriptClick(uiServingItRight);
+            uiServingItRight.Click();
+            //JavaScriptClick(uiServingItRight);
 
             // select sample sizes checkbox
             NgWebElement uiSampleSizes = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isSampleSizeCompliant']"));
-            JavaScriptClick(uiSampleSizes);
-
-            // select agreement checkbox
-            NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            JavaScriptClick(uiAgreement);
+            uiSampleSizes.Click();
+            //JavaScriptClick(uiSampleSizes);
         }
 
 
