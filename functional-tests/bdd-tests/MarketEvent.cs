@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-  Feature: MarketEvent
+ Feature: MarketEvent
     As a logged in business user
     I want to submit a market event for different manufacturer types
 
@@ -39,7 +39,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Approved
@@ -69,7 +69,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Approved
@@ -100,7 +100,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Approved
@@ -130,7 +130,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Approved
