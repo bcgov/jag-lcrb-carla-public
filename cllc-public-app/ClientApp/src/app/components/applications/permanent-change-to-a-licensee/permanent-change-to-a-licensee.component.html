@@ -1,5 +1,5 @@
 <div [formGroup]="form" class="form-wrapper">
-    <h1>Permanent Changes to a Licensee 
+    <h1>Permanent Change to a Licensee
         <span class="success-green" *ngIf="canCreateNewApplication">( PAID )</span>
     </h1>
     <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
@@ -221,10 +221,12 @@
                 <section class="infoCell"
                     *ngIf="item.show && (item.helpTextHeader || item.helpText || item.helpTextLink)">
                     <p *ngIf="item.CannabisFee == item.LiquorFee" style="text-align:right; padding-right:30px;">
-                        <strong>Application Fee of ${{item.CannabisFee}} per Licence</strong></p>
+                        <strong>Application Fee of ${{item.CannabisFee}} per Licence</strong>
+                    </p>
                     <p *ngIf="item.CannabisFee != item.LiquorFee" style="text-align:right; padding-right:30px;">
                         <strong>Application Fee of ${{item.CannabisFee}} per Cannabis Licence, ${{item.LiquorFee}} per
-                            Liquor Licence</strong></p>
+                            Liquor Licence</strong>
+                    </p>
                     <p *ngIf="item.helpTextHeader">{{item.helpTextHeader}}</p>
                     <section *ngIf="item.helpText && item.helpText.length > 0" style="padding:5px;">
                         <ul>
@@ -979,6 +981,10 @@
 
                 </table>
 
+                <mat-card class="mat-elevation-z2" *ngIf="primaryInvoice">
+                    <app-invoice-details [data]="primaryInvoice"></app-invoice-details>
+                </mat-card>
+
                 <hr>
 
                 <table class="w-100" *ngIf="hasLiquor" class="paymentSummary">
@@ -1010,13 +1016,18 @@
                             </button>
                         </td>
                     </tr>
+
                 </table>
+
+                <mat-card class="mat-elevation-z2" r *ngIf="secondaryInvoice">
+                    <app-invoice-details [data]="secondaryInvoice"></app-invoice-details>
+                </mat-card>
 
                 <ng-container *ngIf="canCreateNewApplication">
                     <hr>
                     <section class="d-flex flex-row-reverse">
-                        <button mat-raised-button color="primary"
-                            style="width:250px;" (click)="createApplication('secondary')">
+                        <button mat-raised-button color="primary" style="width:250px;"
+                            (click)="createApplication('secondary')">
                             <span>New Application</span>
                             <mat-progress-bar *ngIf="createApplicationInProgress" mode="indeterminate">
                             </mat-progress-bar>
