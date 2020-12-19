@@ -184,6 +184,7 @@ namespace bdd_tests
             // uiEndDate1.Click();
             JavaScriptClick(uiEndDate1);
 
+            /*
             // click on the next button
             NgWebElement uiOpenCalendarNext = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
             // uiOpenCalendarNext.Click();
@@ -196,11 +197,11 @@ namespace bdd_tests
                 // uiOpenCalendarNext2.Click();
                 JavaScriptClick(uiOpenCalendarNext2);
             }
+            */
 
             // click on the first day
             //NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
             NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-            //            NgWebElement uiStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
             JavaScriptClick(uiOpenCalendarYear);
             
             /*
