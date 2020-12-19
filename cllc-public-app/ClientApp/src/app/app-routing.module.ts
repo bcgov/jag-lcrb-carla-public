@@ -54,6 +54,7 @@ import { LicenceRepresentativeFormComponent } from '@components/licence-represen
 import { MarketEventComponent } from '@components/market-event/market-event.component';
 import { PermanentChangeToALicenseeComponent } from '@components/applications/permanent-change-to-a-licensee/permanent-change-to-a-licensee.component';
 import { OffsiteStorageComponent } from '@components/offsite-storage/offsite-storage.component';
+import { NoticesComponent } from '@components/notices/notices.component';
 
 
 const routes: Routes = [
@@ -171,6 +172,12 @@ const routes: Routes = [
     path: 'account-profile',
     component: AccountProfileComponent,
     canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'notices',
+    component: NoticesComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'Notices' }
   },
   {
     path: 'renew-crs-licence/application/:applicationId',

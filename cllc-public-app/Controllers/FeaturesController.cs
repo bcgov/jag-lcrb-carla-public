@@ -97,6 +97,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 features.Add("PermanentChangesToLicensee");
             }
+
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_NOTICES"]))
+            {
+                features.Add("Notices");
+            }
             return features;
         }
 
