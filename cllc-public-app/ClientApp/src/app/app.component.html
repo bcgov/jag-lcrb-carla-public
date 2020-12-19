@@ -141,6 +141,8 @@
                       class="nav-link" routerLink="/covid-temporary-extension">Covid Temporary Extension</a>
                     <a appRemoveIfFeatureOff="LGApprovals" *ngIf="account?.businessType === 'LocalGovernment' && account?.localGovernmentId" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/lg-approvals">Applications for Review</a>
+                    <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
+                      class="nav-link" routerLink="/notices">Notices</a>
                   </li>
                 </ul>
               </div>
