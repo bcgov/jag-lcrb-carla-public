@@ -14,7 +14,7 @@ Scenario: Private Corporation Food Primary Temporary Extension of Licensed Area
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I pay the licensing fee 
+    # And I pay the licensing fee 
     And I click on the link for Temporary Extension of Licensed Area
     And I submit a temporary extension of licensed area application
     And I click on the link for Dashboard
