@@ -14,7 +14,7 @@ Scenario: Private Corporation Food Primary Transfer Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I pay the licensing fee 
+    # And I pay the licensing fee 
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page

@@ -15,7 +15,7 @@ Scenario: Private Corporation Food Primary Release Test
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee 
+    # And I pay the licensing fee 
     # And I request a valid store name or branding change for Food Primary
     # And I request a change in terms and conditions application
     And I click on the link for Download Licence
