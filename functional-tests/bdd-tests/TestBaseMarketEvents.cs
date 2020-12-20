@@ -203,6 +203,8 @@ namespace bdd_tests
             //NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
             NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
             JavaScriptClick(uiOpenCalendarYear);
+
+            JavaScriptClick(uiEndDate1);
             
             /*
             if (frequency != "for one date only")
