@@ -221,7 +221,7 @@
     <None Update="ManufacturerFacilityStructuralChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ManufacturerLocationChange.feature">
+    <None Update="ManufacturerRelocationChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ManufacturerStructuralAlterations.feature">
