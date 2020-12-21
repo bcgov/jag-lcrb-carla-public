@@ -20,16 +20,16 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request a location change")]
-        public void LocationChange()
+        [And(@"I request a relocation change")]
+        public void RelocationChange()
         {
             /* 
             Page Title: Licences & Authorizations
             */
 
-            string locationChange = "Location Change Application";
+            string locationChange = "Request Relocation";
 
-            // click on the Location Change Application link
+            // click on the Request Relocation link
             NgWebElement uiLocationChange = ngDriver.FindElement(By.LinkText(locationChange));
             uiLocationChange.Click();
 
