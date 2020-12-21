@@ -181,32 +181,23 @@ namespace bdd_tests
 
             // select end date
             NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
-            // uiEndDate1.Click();
             JavaScriptClick(uiEndDate1);
 
-            /*
             // click on the next button
             NgWebElement uiOpenCalendarNext = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
-            // uiOpenCalendarNext.Click();
             JavaScriptClick(uiOpenCalendarNext);
 
             if (frequency == "monthly")
             {
                 // click on the next button again
                 NgWebElement uiOpenCalendarNext2 = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
-                // uiOpenCalendarNext2.Click();
                 JavaScriptClick(uiOpenCalendarNext2);
             }
-            */
 
             // click on the first day
-            //NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
+            NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
             JavaScriptClick(uiOpenCalendarYear);
 
-            JavaScriptClick(uiEndDate1);
-            
-            /*
             if (frequency != "for one date only")
             {
                 // confirm that all days are available for selection; de-selection is required due to days per week limit
@@ -249,36 +240,36 @@ namespace bdd_tests
                 {
                     // make final selection re days of the week
                     NgWebElement uiThursdayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='thursday']"));
-                    uiThursdayFinal.Click();
+                    JavaScriptClick(uiThursdayFinal);
 
                     NgWebElement uiFridayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='friday']"));
-                    uiFridayFinal.Click();
+                    JavaScriptClick(uiFridayFinal);
 
                     NgWebElement uiSaturdayFinal = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='saturday']"));
-                    uiSaturdayFinal.Click();
+                    JavaScriptClick(uiSaturdayFinal);
                 }
 
                 if (frequency == "monthly")
                 {
                     // select day of the week
                     NgWebElement uiSaturday3 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='saturday']"));
-                    uiSaturday3.Click();
+                    JavaScriptClick(uiSaturday3);
 
                     // select first week of the month
                     NgWebElement uiWeekOfMonth1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-2-input']"));
-                    uiWeekOfMonth1.Click();
+                    JavaScriptClick(uiWeekOfMonth1);
 
                     // select second week of the month
                     NgWebElement uiWeekOfMonth2 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-3-input']"));
-                    uiWeekOfMonth2.Click();
+                    JavaScriptClick(uiWeekOfMonth2);
 
                     // select third week of the month
                     NgWebElement uiWeekOfMonth3 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-4-input']"));
-                    uiWeekOfMonth3.Click();
+                    JavaScriptClick(uiWeekOfMonth3);
 
                     // select fourth week of the month
                     NgWebElement uiWeekOfMonth4 = ngDriver.FindElement(By.CssSelector("[formcontrolname='weekOfMonth'] [for='mat-radio-5-input']"));
-                    uiWeekOfMonth4.Click();
+                    JavaScriptClick(uiWeekOfMonth4);
                 }
             }
 
@@ -315,23 +306,18 @@ namespace bdd_tests
             NgWebElement uiLiquorEndMinute1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='liquorEndTime'] .ngb-tp-minute span.bottom"));
             JavaScriptClick(uiLiquorEndMinute1);
             JavaScriptClick(uiLiquorEndMinute1);
-            */
 
             // select agreement checkbox
             NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
             uiAgreement.Click();
 
-            /*
             // select serving it right/minors checkbox
             NgWebElement uiServingItRight = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAllStaffServingitRight']"));
             uiServingItRight.Click();
-            //JavaScriptClick(uiServingItRight);
 
             // select sample sizes checkbox
             NgWebElement uiSampleSizes = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isSampleSizeCompliant']"));
             uiSampleSizes.Click();
-            //JavaScriptClick(uiSampleSizes);
-            */
         }
 
 
