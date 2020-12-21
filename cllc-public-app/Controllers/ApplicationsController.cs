@@ -804,7 +804,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioApplication.AdoxioApplicanttype = (int?)item.ApplicantType;
 
             // fix for an invalid licence sub category
-            if (adoxioApplication.AdoxioLicencesubcategory == 0) adoxioApplication.AdoxioLicencesubcategory = null;
+            if (adoxioApplication._adoxioLicencesubcategoryidValue != null && adoxioApplication._adoxioLicencesubcategoryidValue == "0")  adoxioApplication.AdoxioLicenceSubCategoryId = null;
 
             try
             {
