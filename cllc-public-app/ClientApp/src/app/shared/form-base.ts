@@ -1,7 +1,7 @@
 import { ValidatorFn, AbstractControl, FormControl, FormGroup, FormArray } from '@angular/forms';
 import { OnDestroy } from '@angular/core';
 import { Application } from '@models/application.model';
-import { ApplicationTypeNames } from '@models/application-type.model';
+import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Account } from '@models/account.model';
 import { Subscription } from 'rxjs';
 
@@ -67,6 +67,11 @@ export class FormBase implements OnDestroy {
             };
         }
     }
+
+    public showFormControl(state: string): boolean {
+        return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
+          .indexOf(state) !== -1;
+      }
 
     public getApplicationContent(contentCartegory: string) {
         let body = '';
