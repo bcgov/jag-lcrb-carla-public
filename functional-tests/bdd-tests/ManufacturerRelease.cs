@@ -38,7 +38,7 @@ Scenario: Private Corporation Manufacturer Release #1
     And I click on the Licences tab
     And I request a facility structural change
     # And I click on the Licences tab
-    # And I request a location change
+    # And I request a relocation change
     And I click on the Licences tab
     And I request a lounge area endorsement
     # And I click on the Licences tab
@@ -111,7 +111,7 @@ Scenario: Sole Proprietorship Manufacturer Release #1
     And I click on the Licences tab
     And I request a facility structural change
     # And I click on the Licences tab
-    # And I request a location change
+    # And I request a relocation change
     And I click on the Licences tab
     And I request a lounge area endorsement
     # And I click on the Licences tab

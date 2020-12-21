@@ -1,24 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
-
-/*
-Feature: ManufacturerLocationChange
+﻿Feature: ManufacturerRelocationChange
     As a logged in business user
-    I want to request changes for a manufacturer licence
+    I want to request a relocation change for a manufacturer licence
 
-@manufacturer @winery @locationchange
-Scenario: Winery Location Change Application
+@manufacturer @winery @relocationchange
+Scenario: Winery Relocation Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -31,14 +16,14 @@ Scenario: Winery Location Change Application
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I request a location change
+    And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@manufacturer @brewery @locationchange
-Scenario: Brewery Location Change Application
+@manufacturer @brewery @relocationchange
+Scenario: Brewery Relocation Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -51,14 +36,14 @@ Scenario: Brewery Location Change Application
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I request a location change
+    And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@manufacturer @distillery @locationchange
-Scenario: Distillery Location Change Application
+@manufacturer @distillery @relocationchange
+Scenario: Distillery Relocation Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -71,14 +56,14 @@ Scenario: Distillery Location Change Application
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I request a location change
+    And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@manufacturer @copacker @locationchange
-Scenario: Co-packer Location Change Application
+@manufacturer @copacker @relocationchange
+Scenario: Co-packer Relocation Change Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -91,33 +76,8 @@ Scenario: Co-packer Location Change Application
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I request a location change
+    And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
-*/
-
-namespace bdd_tests
-{
-    [FeatureFile("./ManufacturerLocationChange.feature")]
-    [Collection("Liquor")]
-    public sealed class ManufacturerLocationChange : TestBase
-    {
-        [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void LogInToDashboard(string businessType)
-        {
-            NavigateToFeatures();
-
-            CheckFeatureFlagsLiquorTwo();
-
-            CheckFeatureFlagsLicenseeChanges();
-
-            CheckFeatureFlagsSecurityScreening();
-
-            IgnoreSynchronizationFalse();
-
-            CarlaLogin(businessType);
-        }
-    }
-}
