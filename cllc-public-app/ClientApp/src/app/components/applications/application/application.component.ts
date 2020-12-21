@@ -1244,11 +1244,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       ].indexOf(this.application.applicationType.name) !== -1;
   }
 
-  showFormControl(state: string): boolean {
-    return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
-      .indexOf(state) !== -1;
-  }
-
   isFormControlDisabled(fieldName: string): boolean {
     return this.form.controls[fieldName].disabled;
   }
