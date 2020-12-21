@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top115 { get; set; }
+        public int? Top134 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip115 { get; set; }
+        public int? Skip134 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count115 { get; set; }
+        public bool? Count134 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter115 { get; set; }
+        public string Filter134 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search115 { get; set; }
+        public string Search134 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -149,6 +149,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypes.
         /// </summary>
         public virtual IApplicationtypes Applicationtypes { get; private set; }
+
+        /// <summary>
+        /// Gets the IRenewalfeeproduct.
+        /// </summary>
+        public virtual IRenewalfeeproduct Renewalfeeproduct { get; private set; }
 
         /// <summary>
         /// Gets the IApplicenseechangebpfv2s.
@@ -401,6 +406,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicenceses Licenceses { get; private set; }
 
         /// <summary>
+        /// Gets the ILicencesadoxioonestopmessageitemlicence.
+        /// </summary>
+        public virtual ILicencesadoxioonestopmessageitemlicence Licencesadoxioonestopmessageitemlicence { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencesubcategories.
         /// </summary>
         public virtual ILicencesubcategories Licencesubcategories { get; private set; }
@@ -439,6 +449,56 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IOffsitestorages.
         /// </summary>
         public virtual IOffsitestorages Offsitestorages { get; private set; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitems.
+        /// </summary>
+        public virtual IOnestopmessageitems Onestopmessageitems { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicence.
+        /// </summary>
+        public virtual ILicence Licence { get; private set; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemasyncoperations.
+        /// </summary>
+        public virtual IOnestopmessageitemasyncoperations Onestopmessageitemasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitembulkdeletefailures.
+        /// </summary>
+        public virtual IOnestopmessageitembulkdeletefailures Onestopmessageitembulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemduplicatebaserecord.
+        /// </summary>
+        public virtual IOnestopmessageitemduplicatebaserecord Onestopmessageitemduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemduplicatematchingrecord.
+        /// </summary>
+        public virtual IOnestopmessageitemduplicatematchingrecord Onestopmessageitemduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemmailboxtrackingfolders.
+        /// </summary>
+        public virtual IOnestopmessageitemmailboxtrackingfolders Onestopmessageitemmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IOnestopmessageitemprincipalobjectattributeaccesses Onestopmessageitemprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemprocesssession.
+        /// </summary>
+        public virtual IOnestopmessageitemprocesssession Onestopmessageitemprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemsyncerrors.
+        /// </summary>
+        public virtual IOnestopmessageitemsyncerrors Onestopmessageitemsyncerrors { get; private set; }
 
         /// <summary>
         /// Gets the IPersonalhistorysummaries.
@@ -531,6 +591,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISpecialevents Specialevents { get; private set; }
 
         /// <summary>
+        /// Gets the ISpecialeventinspection.
+        /// </summary>
+        public virtual ISpecialeventinspection Specialeventinspection { get; private set; }
+
+        /// <summary>
         /// Gets the ISpecialeventschedules.
         /// </summary>
         public virtual ISpecialeventschedules Specialeventschedules { get; private set; }
@@ -581,9 +646,29 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IWorkers Workers { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioonestopmessageitem.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioonestopmessageitem Regardingobjectidadoxioonestopmessageitem { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioonestopmessageitem.
+        /// </summary>
+        public virtual IBusinessunitadoxioonestopmessageitem Businessunitadoxioonestopmessageitem { get; private set; }
+
+        /// <summary>
         /// Gets the IContacts.
         /// </summary>
         public virtual IContacts Contacts { get; private set; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioonestopmessageitem.
+        /// </summary>
+        public virtual IBaserecordidadoxioonestopmessageitem Baserecordidadoxioonestopmessageitem { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioonestopmessageitem.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioonestopmessageitem Duplicaterecordidadoxioonestopmessageitem { get; private set; }
 
         /// <summary>
         /// Gets the IEntitydefinitions.
@@ -594,6 +679,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IGlobaloptionsetdefinitions.
         /// </summary>
         public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventid.
+        /// </summary>
+        public virtual ISpecialeventid Specialeventid { get; private set; }
 
         /// <summary>
         /// Gets the IInvoices.
@@ -609,6 +699,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILists.
         /// </summary>
         public virtual ILists Lists { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioonestopmessageitem.
+        /// </summary>
+        public virtual IObjectidadoxioonestopmessageitem Objectidadoxioonestopmessageitem { get; private set; }
+
+        /// <summary>
+        /// Gets the IProductadoxioapplicationtyperenewalfeeproduct.
+        /// </summary>
+        public virtual IProductadoxioapplicationtyperenewalfeeproduct Productadoxioapplicationtyperenewalfeeproduct { get; private set; }
 
         /// <summary>
         /// Gets the ISavedqueries.
@@ -634,6 +734,36 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISystemusers.
         /// </summary>
         public virtual ISystemusers Systemusers { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioonestopmessageitemcreatedby.
+        /// </summary>
+        public virtual ILkadoxioonestopmessageitemcreatedby Lkadoxioonestopmessageitemcreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioonestopmessageitemcreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioonestopmessageitemcreatedonbehalfby Lkadoxioonestopmessageitemcreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioonestopmessageitemmodifiedby.
+        /// </summary>
+        public virtual ILkadoxioonestopmessageitemmodifiedby Lkadoxioonestopmessageitemmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioonestopmessageitemmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioonestopmessageitemmodifiedonbehalfby Lkadoxioonestopmessageitemmodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxioonestopmessageitem.
+        /// </summary>
+        public virtual IUseradoxioonestopmessageitem Useradoxioonestopmessageitem { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioonestopmessageitem.
+        /// </summary>
+        public virtual ITeamadoxioonestopmessageitem Teamadoxioonestopmessageitem { get; private set; }
 
         /// <summary>
         /// Gets the IWorkflows.
@@ -898,6 +1028,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypecontents = new Applicationtypecontents(this);
             Applicationtypefeeschedules = new Applicationtypefeeschedules(this);
             Applicationtypes = new Applicationtypes(this);
+            Renewalfeeproduct = new Renewalfeeproduct(this);
             Applicenseechangebpfv2s = new Applicenseechangebpfv2s(this);
             Areas = new Areas(this);
             Auditlogrequests = new Auditlogrequests(this);
@@ -948,6 +1079,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Legalentities = new Legalentities(this);
             Licenceldbordertotalhistories = new Licenceldbordertotalhistories(this);
             Licenceses = new Licenceses(this);
+            Licencesadoxioonestopmessageitemlicence = new Licencesadoxioonestopmessageitemlicence(this);
             Licencesubcategories = new Licencesubcategories(this);
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
@@ -956,6 +1088,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             Localgovindigenousnations = new Localgovindigenousnations(this);
             Lqrlicencetransferbpfs = new Lqrlicencetransferbpfs(this);
             Offsitestorages = new Offsitestorages(this);
+            Onestopmessageitems = new Onestopmessageitems(this);
+            Licence = new Licence(this);
+            Onestopmessageitemasyncoperations = new Onestopmessageitemasyncoperations(this);
+            Onestopmessageitembulkdeletefailures = new Onestopmessageitembulkdeletefailures(this);
+            Onestopmessageitemduplicatebaserecord = new Onestopmessageitemduplicatebaserecord(this);
+            Onestopmessageitemduplicatematchingrecord = new Onestopmessageitemduplicatematchingrecord(this);
+            Onestopmessageitemmailboxtrackingfolders = new Onestopmessageitemmailboxtrackingfolders(this);
+            Onestopmessageitemprincipalobjectattributeaccesses = new Onestopmessageitemprincipalobjectattributeaccesses(this);
+            Onestopmessageitemprocesssession = new Onestopmessageitemprocesssession(this);
+            Onestopmessageitemsyncerrors = new Onestopmessageitemsyncerrors(this);
             Personalhistorysummaries = new Personalhistorysummaries(this);
             Pmuareas = new Pmuareas(this);
             Policejurisdictions = new Policejurisdictions(this);
@@ -974,6 +1116,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Specialeventlocations = new Specialeventlocations(this);
             Specialeventnotes = new Specialeventnotes(this);
             Specialevents = new Specialevents(this);
+            Specialeventinspection = new Specialeventinspection(this);
             Specialeventschedules = new Specialeventschedules(this);
             Specialeventtandcs = new Specialeventtandcs(this);
             Taxandaccountings = new Taxandaccountings(this);
@@ -984,17 +1127,30 @@ namespace Gov.Lclb.Cllb.Interfaces
             Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
+            Regardingobjectidadoxioonestopmessageitem = new Regardingobjectidadoxioonestopmessageitem(this);
+            Businessunitadoxioonestopmessageitem = new Businessunitadoxioonestopmessageitem(this);
             Contacts = new Contacts(this);
+            Baserecordidadoxioonestopmessageitem = new Baserecordidadoxioonestopmessageitem(this);
+            Duplicaterecordidadoxioonestopmessageitem = new Duplicaterecordidadoxioonestopmessageitem(this);
             Entitydefinitions = new Entitydefinitions(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
+            Specialeventid = new Specialeventid(this);
             Invoices = new Invoices(this);
             Leads = new Leads(this);
             Lists = new Lists(this);
+            Objectidadoxioonestopmessageitem = new Objectidadoxioonestopmessageitem(this);
+            Productadoxioapplicationtyperenewalfeeproduct = new Productadoxioapplicationtyperenewalfeeproduct(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
             Systemforms = new Systemforms(this);
             Systemusers = new Systemusers(this);
+            Lkadoxioonestopmessageitemcreatedby = new Lkadoxioonestopmessageitemcreatedby(this);
+            Lkadoxioonestopmessageitemcreatedonbehalfby = new Lkadoxioonestopmessageitemcreatedonbehalfby(this);
+            Lkadoxioonestopmessageitemmodifiedby = new Lkadoxioonestopmessageitemmodifiedby(this);
+            Lkadoxioonestopmessageitemmodifiedonbehalfby = new Lkadoxioonestopmessageitemmodifiedonbehalfby(this);
+            Useradoxioonestopmessageitem = new Useradoxioonestopmessageitem(this);
+            Teamadoxioonestopmessageitem = new Teamadoxioonestopmessageitem(this);
             Workflows = new Workflows(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
