@@ -951,6 +951,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     );
 
     if (!signageNotRequired && this.application.applicationType.signage === FormControlState.Show &&
+      this.application.applicationType.name !== ApplicationTypeNames.LRSTransferofLocation && // optional for this application type
       ((this.uploadedSignageDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one signage document is required.');
@@ -975,6 +976,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.application.applicationType.floorPlan === FormControlState.Show &&
+      this.application.applicationType.name !== ApplicationTypeNames.LRSTransferofLocation &&  // optional for this application type
       ((this.uploadedFloorPlanDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one floor plan document is required.');
@@ -1241,11 +1243,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
         ApplicationTypeNames.CRSRenewalLate30.toString(),
         ApplicationTypeNames.CRSRenewalLate6Months.toString(),
       ].indexOf(this.application.applicationType.name) !== -1;
-  }
-
-  showFormControl(state: string): boolean {
-    return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
-      .indexOf(state) !== -1;
   }
 
   isFormControlDisabled(fieldName: string): boolean {
