@@ -4090,6 +4090,58 @@
         }
       }
     },
+    "/adoxio_applicationtypes({adoxio_applicationtypeid})/adoxio_RenewalFeeProduct": {
+      "get": {
+        "tags": [
+          "renewalfeeproduct"
+        ],
+        "summary": "Get adoxio_RenewalFeeProduct from adoxio_applicationtypes",
+        "operationId": "renewalfeeproduct_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_applicationtypeid",
+            "description": "key: adoxio_applicationtypeid of adoxio_applicationtype",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.product"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_applicenseechangebpfv2s": {
       "get": {
         "tags": [
@@ -16090,6 +16142,152 @@
         }
       }
     },
+    "/adoxio_licenceses({adoxio_licencesid})/adoxio_licences_adoxio_onestopmessageitem_Licence": {
+      "get": {
+        "tags": [
+          "licences_onestopmessageitem_licence"
+        ],
+        "summary": "Get adoxio_licences_adoxio_onestopmessageitem_Licence from adoxio_licenceses",
+        "operationId": "licencesadoxioonestopmessageitemlicence_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_licencesid",
+            "description": "key: adoxio_licencesid of adoxio_licences",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitemCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_licenceses({adoxio_licencesid})/adoxio_licences_adoxio_onestopmessageitem_Licence({adoxio_onestopmessageitemid})": {
+      "get": {
+        "tags": [
+          "licences_onestopmessageitem_licence"
+        ],
+        "summary": "Get adoxio_licences_adoxio_onestopmessageitem_Licence from adoxio_licenceses",
+        "operationId": "licencesadoxioonestopmessageitemlicence_Getadoxio_licences_adoxio_onestopmessageitem_LicenceByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_licencesid",
+            "description": "key: adoxio_licencesid of adoxio_licences",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_licencesubcategories": {
       "get": {
         "tags": [
@@ -18003,6 +18201,1466 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems": {
+      "get": {
+        "tags": [
+          "onestopmessageitems"
+        ],
+        "summary": "Get entities from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitems_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitemCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "adoxio_onestopmessageitems.adoxio_onestopmessageitem"
+        ],
+        "summary": "Add new entity to adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitems_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Prefer",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})": {
+      "get": {
+        "tags": [
+          "onestopmessageitems"
+        ],
+        "summary": "Get entity from adoxio_onestopmessageitems by key",
+        "operationId": "onestopmessageitems_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "adoxio_onestopmessageitems.adoxio_onestopmessageitem"
+        ],
+        "summary": "Update entity in adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitems_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New property values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "adoxio_onestopmessageitems.adoxio_onestopmessageitem"
+        ],
+        "summary": "Delete entity from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitems_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_Licence": {
+      "get": {
+        "tags": [
+          "licence"
+        ],
+        "summary": "Get adoxio_Licence from adoxio_onestopmessageitems",
+        "operationId": "licence_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_AsyncOperations": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_asyncoperations"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_AsyncOperations from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemasyncoperations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperationCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_AsyncOperations({asyncoperationid})": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_asyncoperations"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_AsyncOperations from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemasyncoperations_Getadoxio_onestopmessageitem_AsyncOperationsByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "asyncoperationid",
+            "description": "key: asyncoperationid of asyncoperation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_BulkDeleteFailures": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_bulkdeletefailures"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_BulkDeleteFailures from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitembulkdeletefailures_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailureCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_BulkDeleteFailures({bulkdeletefailureid})": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_bulkdeletefailures"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_BulkDeleteFailures from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitembulkdeletefailures_Getadoxio_onestopmessageitem_BulkDeleteFailuresByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "bulkdeletefailureid",
+            "description": "key: bulkdeletefailureid of bulkdeletefailure",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_DuplicateBaseRecord": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_duplicatebaserecord"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_DuplicateBaseRecord from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemduplicatebaserecord_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecordCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_DuplicateBaseRecord({duplicateid})": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_duplicatebaserecord"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_DuplicateBaseRecord from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemduplicatebaserecord_Getadoxio_onestopmessageitem_DuplicateBaseRecordByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_DuplicateMatchingRecord": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_duplicatematchingrecord"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_DuplicateMatchingRecord from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemduplicatematchingrecord_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecordCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_DuplicateMatchingRecord({duplicateid})": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_duplicatematchingrecord"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_DuplicateMatchingRecord from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemduplicatematchingrecord_Getadoxio_onestopmessageitem_DuplicateMatchingRecordByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_MailboxTrackingFolders": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_mailboxtrackingfolders"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_MailboxTrackingFolders from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemmailboxtrackingfolders_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolderCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_MailboxTrackingFolders({mailboxtrackingfolderid})": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_mailboxtrackingfolders"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_MailboxTrackingFolders from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemmailboxtrackingfolders_Getadoxio_onestopmessageitem_MailboxTrackingFoldersByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "mailboxtrackingfolderid",
+            "description": "key: mailboxtrackingfolderid of mailboxtrackingfolder",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_PrincipalObjectAttributeAccesses": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_principalobjectattributeaccesses"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_PrincipalObjectAttributeAccesses from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemprincipalobjectattributeaccesses_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccessCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_PrincipalObjectAttributeAccesses({principalobjectattributeaccessid})": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_principalobjectattributeaccesses"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_PrincipalObjectAttributeAccesses from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemprincipalobjectattributeaccesses_Getadoxio_onestopmessageitem_PrincipalObjectAttributeAccessesByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "principalobjectattributeaccessid",
+            "description": "key: principalobjectattributeaccessid of principalobjectattributeaccess",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_ProcessSession": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_processsession"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_ProcessSession from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemprocesssession_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsessionCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_ProcessSession({processsessionid})": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_processsession"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_ProcessSession from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemprocesssession_Getadoxio_onestopmessageitem_ProcessSessionByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "processsessionid",
+            "description": "key: processsessionid of processsession",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_SyncErrors": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_syncerrors"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_SyncErrors from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemsyncerrors_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerrorCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_onestopmessageitems({adoxio_onestopmessageitemid})/adoxio_onestopmessageitem_SyncErrors({syncerrorid})": {
+      "get": {
+        "tags": [
+          "onestopmessageitem_syncerrors"
+        ],
+        "summary": "Get adoxio_onestopmessageitem_SyncErrors from adoxio_onestopmessageitems",
+        "operationId": "onestopmessageitemsyncerrors_Getadoxio_onestopmessageitem_SyncErrorsByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "syncerrorid",
+            "description": "key: syncerrorid of syncerror",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+            }
           },
           "default": {
             "description": "OData Error"
@@ -22330,6 +23988,152 @@
         }
       }
     },
+    "/adoxio_specialevents({adoxio_specialeventid})/adoxio_specialevent_inspection": {
+      "get": {
+        "tags": [
+          "specialevent_inspection"
+        ],
+        "summary": "Get adoxio_specialevent_inspection from adoxio_specialevents",
+        "operationId": "specialeventinspection_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_specialeventid",
+            "description": "key: adoxio_specialeventid of adoxio_specialevent",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.incidentCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_specialevents({adoxio_specialeventid})/adoxio_specialevent_inspection({incidentid})": {
+      "get": {
+        "tags": [
+          "specialevent_inspection"
+        ],
+        "summary": "Get adoxio_specialevent_inspection from adoxio_specialevents",
+        "operationId": "specialeventinspection_Getadoxio_specialevent_inspectionByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_specialeventid",
+            "description": "key: adoxio_specialeventid of adoxio_specialevent",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "incidentid",
+            "description": "key: incidentid of incident",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_specialeventschedules": {
       "get": {
         "tags": [
@@ -24730,6 +26534,256 @@
         }
       }
     },
+    "/asyncoperations({asyncoperationid})/regardingobjectid_adoxio_onestopmessageitem": {
+      "get": {
+        "tags": [
+          "regardingobjectid_onestopmessageitem"
+        ],
+        "summary": "Get regardingobjectid_adoxio_onestopmessageitem from asyncoperations",
+        "operationId": "Regardingobjectidadoxioonestopmessageitem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "asyncoperationid",
+            "description": "key: asyncoperationid of asyncoperation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/bulkdeletefailures({bulkdeletefailureid})/regardingobjectid_adoxio_onestopmessageitem": {
+      "get": {
+        "tags": [
+          "regardingobjectid_onestopmessageitem"
+        ],
+        "summary": "Get regardingobjectid_adoxio_onestopmessageitem from bulkdeletefailures",
+        "operationId": "Regardingobjectidadoxioonestopmessageitem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bulkdeletefailureid",
+            "description": "key: bulkdeletefailureid of bulkdeletefailure",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/businessunits({businessunitid})/business_unit_adoxio_onestopmessageitem": {
+      "get": {
+        "tags": [
+          "business_unit_onestopmessageitem"
+        ],
+        "summary": "Get business_unit_adoxio_onestopmessageitem from businessunits",
+        "operationId": "Businessunitadoxioonestopmessageitem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessunitid",
+            "description": "key: businessunitid of businessunit",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitemCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/businessunits({businessunitid})/business_unit_adoxio_onestopmessageitem({adoxio_onestopmessageitemid})": {
+      "get": {
+        "tags": [
+          "business_unit_onestopmessageitem"
+        ],
+        "summary": "Get business_unit_adoxio_onestopmessageitem from businessunits",
+        "operationId": "Businessunitadoxioonestopmessageitem_Getbusiness_unit_adoxio_onestopmessageitemByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessunitid",
+            "description": "key: businessunitid of businessunit",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/contacts": {
       "get": {
         "tags": [
@@ -24963,6 +27017,110 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/duplicaterecords({duplicateid})/baserecordid_adoxio_onestopmessageitem": {
+      "get": {
+        "tags": [
+          "baserecordid_onestopmessageitem"
+        ],
+        "summary": "Get baserecordid_adoxio_onestopmessageitem from duplicaterecords",
+        "operationId": "Baserecordidadoxioonestopmessageitem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/duplicaterecords({duplicateid})/duplicaterecordid_adoxio_onestopmessageitem": {
+      "get": {
+        "tags": [
+          "duplicaterecordid_onestopmessageitem"
+        ],
+        "summary": "Get duplicaterecordid_adoxio_onestopmessageitem from duplicaterecords",
+        "operationId": "Duplicaterecordidadoxioonestopmessageitem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
           },
           "default": {
             "description": "OData Error"
@@ -25443,6 +27601,58 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/incidents({incidentid})/adoxio_SpecialEventId": {
+      "get": {
+        "tags": [
+          "specialeventid"
+        ],
+        "summary": "Get adoxio_SpecialEventId from incidents",
+        "operationId": "specialeventid_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "incidentid",
+            "description": "key: incidentid of incident",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_specialevent"
+            }
           },
           "default": {
             "description": "OData Error"
@@ -26170,6 +28380,308 @@
         }
       }
     },
+    "/mailboxtrackingfolders({mailboxtrackingfolderid})/regardingobjectid_adoxio_onestopmessageitem": {
+      "get": {
+        "tags": [
+          "regardingobjectid_onestopmessageitem"
+        ],
+        "summary": "Get regardingobjectid_adoxio_onestopmessageitem from mailboxtrackingfolders",
+        "operationId": "Regardingobjectidadoxioonestopmessageitem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "mailboxtrackingfolderid",
+            "description": "key: mailboxtrackingfolderid of mailboxtrackingfolder",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/principalobjectattributeaccessset({principalobjectattributeaccessid})/objectid_adoxio_onestopmessageitem": {
+      "get": {
+        "tags": [
+          "objectid_onestopmessageitem"
+        ],
+        "summary": "Get objectid_adoxio_onestopmessageitem from principalobjectattributeaccessset",
+        "operationId": "Objectidadoxioonestopmessageitem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "principalobjectattributeaccessid",
+            "description": "key: principalobjectattributeaccessid of principalobjectattributeaccess",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/processsessions({processsessionid})/regardingobjectid_adoxio_onestopmessageitem": {
+      "get": {
+        "tags": [
+          "regardingobjectid_onestopmessageitem"
+        ],
+        "summary": "Get regardingobjectid_adoxio_onestopmessageitem from processsessions",
+        "operationId": "Regardingobjectidadoxioonestopmessageitem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "processsessionid",
+            "description": "key: processsessionid of processsession",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/products({productid})/adoxio_product_adoxio_applicationtype_RenewalFeeProduct": {
+      "get": {
+        "tags": [
+          "product_applicationtype_renewalfeeproduct"
+        ],
+        "summary": "Get adoxio_product_adoxio_applicationtype_RenewalFeeProduct from products",
+        "operationId": "productadoxioapplicationtyperenewalfeeproduct_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productid",
+            "description": "key: productid of product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypeCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/products({productid})/adoxio_product_adoxio_applicationtype_RenewalFeeProduct({adoxio_applicationtypeid})": {
+      "get": {
+        "tags": [
+          "product_applicationtype_renewalfeeproduct"
+        ],
+        "summary": "Get adoxio_product_adoxio_applicationtype_RenewalFeeProduct from products",
+        "operationId": "productadoxioapplicationtyperenewalfeeproduct_Getadoxio_product_adoxio_applicationtype_RenewalFeeProductByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productid",
+            "description": "key: productid of product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_applicationtypeid",
+            "description": "key: adoxio_applicationtypeid of adoxio_applicationtype",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/savedqueries": {
       "get": {
         "tags": [
@@ -26890,6 +29402,58 @@
         }
       }
     },
+    "/syncerrors({syncerrorid})/regardingobjectid_adoxio_onestopmessageitem": {
+      "get": {
+        "tags": [
+          "regardingobjectid_onestopmessageitem"
+        ],
+        "summary": "Get regardingobjectid_adoxio_onestopmessageitem from syncerrors",
+        "operationId": "Regardingobjectidadoxioonestopmessageitem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "syncerrorid",
+            "description": "key: syncerrorid of syncerror",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/systemforms": {
       "get": {
         "tags": [
@@ -27363,6 +29927,882 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_onestopmessageitem_createdby": {
+      "get": {
+        "tags": [
+          "lk_onestopmessageitem_createdby"
+        ],
+        "summary": "Get lk_adoxio_onestopmessageitem_createdby from systemusers",
+        "operationId": "Lkadoxioonestopmessageitemcreatedby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitemCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_onestopmessageitem_createdby({adoxio_onestopmessageitemid})": {
+      "get": {
+        "tags": [
+          "lk_onestopmessageitem_createdby"
+        ],
+        "summary": "Get lk_adoxio_onestopmessageitem_createdby from systemusers",
+        "operationId": "Lkadoxioonestopmessageitemcreatedby_Getlk_adoxio_onestopmessageitem_createdbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_onestopmessageitem_createdonbehalfby": {
+      "get": {
+        "tags": [
+          "lk_onestopmessageitem_createdonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_onestopmessageitem_createdonbehalfby from systemusers",
+        "operationId": "Lkadoxioonestopmessageitemcreatedonbehalfby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitemCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_onestopmessageitem_createdonbehalfby({adoxio_onestopmessageitemid})": {
+      "get": {
+        "tags": [
+          "lk_onestopmessageitem_createdonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_onestopmessageitem_createdonbehalfby from systemusers",
+        "operationId": "Lkadoxioonestopmessageitemcreatedonbehalfby_Getlk_adoxio_onestopmessageitem_createdonbehalfbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_onestopmessageitem_modifiedby": {
+      "get": {
+        "tags": [
+          "lk_onestopmessageitem_modifiedby"
+        ],
+        "summary": "Get lk_adoxio_onestopmessageitem_modifiedby from systemusers",
+        "operationId": "Lkadoxioonestopmessageitemmodifiedby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitemCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_onestopmessageitem_modifiedby({adoxio_onestopmessageitemid})": {
+      "get": {
+        "tags": [
+          "lk_onestopmessageitem_modifiedby"
+        ],
+        "summary": "Get lk_adoxio_onestopmessageitem_modifiedby from systemusers",
+        "operationId": "Lkadoxioonestopmessageitemmodifiedby_Getlk_adoxio_onestopmessageitem_modifiedbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_onestopmessageitem_modifiedonbehalfby": {
+      "get": {
+        "tags": [
+          "lk_onestopmessageitem_modifiedonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_onestopmessageitem_modifiedonbehalfby from systemusers",
+        "operationId": "Lkadoxioonestopmessageitemmodifiedonbehalfby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitemCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_onestopmessageitem_modifiedonbehalfby({adoxio_onestopmessageitemid})": {
+      "get": {
+        "tags": [
+          "lk_onestopmessageitem_modifiedonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_onestopmessageitem_modifiedonbehalfby from systemusers",
+        "operationId": "Lkadoxioonestopmessageitemmodifiedonbehalfby_Getlk_adoxio_onestopmessageitem_modifiedonbehalfbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/user_adoxio_onestopmessageitem": {
+      "get": {
+        "tags": [
+          "user_onestopmessageitem"
+        ],
+        "summary": "Get user_adoxio_onestopmessageitem from systemusers",
+        "operationId": "Useradoxioonestopmessageitem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitemCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/user_adoxio_onestopmessageitem({adoxio_onestopmessageitemid})": {
+      "get": {
+        "tags": [
+          "user_onestopmessageitem"
+        ],
+        "summary": "Get user_adoxio_onestopmessageitem from systemusers",
+        "operationId": "Useradoxioonestopmessageitem_Getuser_adoxio_onestopmessageitemByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/teams({ownerid})/team_adoxio_onestopmessageitem": {
+      "get": {
+        "tags": [
+          "team_onestopmessageitem"
+        ],
+        "summary": "Get team_adoxio_onestopmessageitem from teams",
+        "operationId": "Teamadoxioonestopmessageitem_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of team",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitemCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/teams({ownerid})/team_adoxio_onestopmessageitem({adoxio_onestopmessageitemid})": {
+      "get": {
+        "tags": [
+          "team_onestopmessageitem"
+        ],
+        "summary": "Get team_adoxio_onestopmessageitem from teams",
+        "operationId": "Teamadoxioonestopmessageitem_Getteam_adoxio_onestopmessageitemByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of team",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_onestopmessageitemid",
+            "description": "key: adoxio_onestopmessageitemid of adoxio_onestopmessageitem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+            }
           },
           "default": {
             "description": "OData Error"
@@ -28979,12 +32419,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
-          }
-        },
-        "adoxio_account_adoxio_licences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
           }
         },
         "adoxio_account_adoxio_licences_Licencee": {
@@ -31989,9 +35423,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_lgtitleposition": {
-          "type": "string"
-        },
         "adoxio_checklislginresolutionassess": {
           "format": "int32",
           "type": "integer"
@@ -32014,9 +35445,6 @@
         "adoxio_establishmentcomplytoallbylaws": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_triggertogeneratesecurityclearance": {
-          "type": "boolean"
         },
         "adoxio_mfgusesneutralgrainspirits": {
           "format": "int32",
@@ -32107,10 +35535,6 @@
           "type": "integer"
         },
         "adoxio_checklistfinaltcreview": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistphotosreceived": {
           "format": "int32",
           "type": "integer"
         },
@@ -32224,6 +35648,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_businessnumber": {
+          "type": "string"
+        },
         "adoxio_checklistfinaldecisionmade": {
           "format": "int32",
           "type": "integer"
@@ -32275,9 +35702,6 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_paymentanchorfield": {
-          "type": "string"
-        },
         "adoxio_servicehoursthursdayclose": {
           "format": "int32",
           "type": "integer"
@@ -32285,9 +35709,6 @@
         "adoxio_appchecklistinspectionreviewcomplete": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_businessnumber": {
-          "type": "string"
         },
         "adoxio_cschangeofdirectorsorofficers": {
           "type": "boolean"
@@ -32310,9 +35731,6 @@
         "adoxio_establishmentotheroption1": {
           "type": "boolean"
         },
-        "adoxio_personalhistoryinstructionfield": {
-          "type": "string"
-        },
         "adoxio_appchecklistlicencefeecollected": {
           "format": "int32",
           "type": "integer"
@@ -32333,16 +35751,15 @@
         "adoxio_csexternaltransferofshares": {
           "type": "boolean"
         },
+        "adoxio_establishmentotheroption2": {
+          "type": "boolean"
+        },
         "adoxio_invoicetrigger": {
           "format": "int32",
           "type": "integer"
         },
         "adoxio_inspectioncomplete": {
           "type": "boolean"
-        },
-        "adoxio_uploadedfloorplans": {
-          "format": "int32",
-          "type": "integer"
         },
         "adoxio_appchecklistinspectionresults": {
           "format": "int32",
@@ -32375,9 +35792,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_sharepointanchorforcommunicationtab": {
-          "type": "string"
-        },
         "adoxio_publicinput": {
           "format": "int32",
           "type": "integer"
@@ -32397,10 +35811,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_tiedhouseresult": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_patioaccesscontroldescription": {
           "type": "string"
         },
@@ -32415,6 +35825,10 @@
         "adoxio_dateappealed": {
           "format": "date-time",
           "type": "string"
+        },
+        "adoxio_checklistlicencefeepaid": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_checklistapplicationinfoassessment": {
           "format": "int32",
@@ -32433,9 +35847,9 @@
         "adoxio_csinternaltransferofshares": {
           "type": "boolean"
         },
-        "adoxio_hastiedhouseassociations": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_datelicencecapassessedfinal": {
+          "format": "date-time",
+          "type": "string"
         },
         "adoxio_checklistsuitabilityassessed": {
           "format": "int32",
@@ -32463,8 +35877,9 @@
           "format": "date-time",
           "type": "string"
         },
-        "_adoxio_policejurisdictionid_value": {
-          "type": "string"
+        "adoxio_checklistfinancialdocuments": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_dateaipdecisionlettersent": {
           "format": "date-time",
@@ -32474,9 +35889,8 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_checklistfinalreviewcomplete": {
-          "format": "int32",
-          "type": "integer"
+        "_adoxio_policejurisdictionid_value": {
+          "type": "string"
         },
         "adoxio_stampedfloorplanassessment": {
           "format": "int32",
@@ -32503,6 +35917,10 @@
         "adoxio_csnamechangeperson": {
           "type": "boolean"
         },
+        "adoxio_servicehourstuesdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_datereceivedspd": {
           "format": "date-time",
           "type": "string"
@@ -32510,24 +35928,21 @@
         "adoxio_isreadyfirealarm": {
           "type": "boolean"
         },
+        "adoxio_contactpersonfullname": {
+          "type": "string"
+        },
         "adoxio_checklistzoninginprogress": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_establishmentotheroption2": {
-          "type": "boolean"
         },
         "adoxio_establishmentproposalneedsmailsent": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_sharepointanchorforpersonalhistory": {
-          "type": "string"
-        },
         "adoxio_contactpersonlastname": {
           "type": "string"
         },
-        "adoxio_signaturename": {
+        "adoxio_lgtitleposition": {
           "type": "string"
         },
         "_adoxio_localgovindigenousnationid_value": {
@@ -32536,8 +35951,9 @@
         "adoxio_establishmentaddresspostalcode": {
           "type": "string"
         },
-        "adoxio_patioisliquorcarried": {
-          "type": "boolean"
+        "adoxio_checklistaffiliatesreceived": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_establishmentdeclarationoption3": {
           "format": "int32",
@@ -32585,9 +36001,9 @@
         "_adoxio_region_value": {
           "type": "string"
         },
-        "adoxio_lginassessment": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_psaexpirydate": {
+          "format": "date-time",
+          "type": "string"
         },
         "adoxio_appchecklistfinaldecision": {
           "format": "int32",
@@ -32622,9 +36038,8 @@
         "adoxio_inspectorsnotes": {
           "type": "string"
         },
-        "adoxio_renewalvalidinterest": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_mfgstepblending": {
+          "type": "boolean"
         },
         "adoxio_lastnameold": {
           "type": "string"
@@ -32659,10 +36074,6 @@
           "type": "integer"
         },
         "adoxio_checklistestablishmentassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_uploadeddriversabstract": {
           "format": "int32",
           "type": "integer"
         },
@@ -32751,9 +36162,8 @@
         "adoxio_establishment": {
           "type": "boolean"
         },
-        "adoxio_inspectionscheduleddate": {
-          "format": "date-time",
-          "type": "string"
+        "adoxio_isownerhasvalidinterest": {
+          "type": "boolean"
         },
         "adoxio_dateaip": {
           "format": "date-time",
@@ -32766,11 +36176,7 @@
         "adoxio_isautomatedtest": {
           "type": "boolean"
         },
-        "adoxio_licencesubcategory": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_uploadedlegalentitystructure": {
+        "adoxio_renewalvalidinterest": {
           "format": "int32",
           "type": "integer"
         },
@@ -32805,13 +36211,12 @@
         "adoxio_isownerbusiness": {
           "type": "boolean"
         },
-        "adoxio_checklistaffiliatesreceived": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_checklistverifypidpin": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_triggertogeneratesecurityclearance": {
+          "type": "boolean"
         },
         "adoxio_establishmentaddressstreet": {
           "type": "string"
@@ -32819,6 +36224,9 @@
         "overriddencreatedon": {
           "format": "date-time",
           "type": "string"
+        },
+        "adoxio_mfgstepfiltering": {
+          "type": "boolean"
         },
         "adoxio_contactmiddlename": {
           "type": "string"
@@ -32834,7 +36242,7 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_signaturedate": {
+        "adoxio_inspectionchecklistdate": {
           "format": "date-time",
           "type": "string"
         },
@@ -32858,9 +36266,6 @@
           "type": "boolean"
         },
         "adoxio_securityscreeningcompleteness": {
-          "type": "string"
-        },
-        "adoxio_contactpersonfullname": {
           "type": "string"
         },
         "adoxio_csadditionofreceiverorexecutor": {
@@ -32907,10 +36312,6 @@
         },
         "adoxio_addresscountry": {
           "type": "string"
-        },
-        "adoxio_checklistfinancialdocuments": {
-          "format": "int32",
-          "type": "integer"
         },
         "adoxio_mfgchangestofacility": {
           "type": "string"
@@ -32979,10 +36380,11 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_addressprovince": {
-          "type": "string"
+        "adoxio_criminalrecordsresult": {
+          "format": "int32",
+          "type": "integer"
         },
-        "adoxio_signatureposition": {
+        "adoxio_addressprovince": {
           "type": "string"
         },
         "adoxio_mfgacresoffruit": {
@@ -33014,7 +36416,7 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_mfgstepfiltering": {
+        "adoxio_patioisliquorcarried": {
           "type": "boolean"
         },
         "adoxio_terminatereason": {
@@ -33024,12 +36426,13 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_isownerhasvalidinterest": {
-          "type": "boolean"
-        },
         "adoxio_finalcapassessmentdate": {
           "format": "date-time",
           "type": "string"
+        },
+        "adoxio_checklistdocumentmoved": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_checklistfinintegrityreceived": {
           "format": "int32",
@@ -33070,10 +36473,6 @@
         "_slaid_value": {
           "type": "string"
         },
-        "adoxio_checklistzoningaip": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_liquorindustryconnectionsdetails": {
           "type": "string"
         },
@@ -33111,10 +36510,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_checklistrequestlicencefee": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_eligibilityassessmentresult": {
           "format": "int32",
           "type": "integer"
@@ -33131,15 +36526,15 @@
         "adoxio_lastnamenew": {
           "type": "string"
         },
+        "adoxio_lginassessment": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_checklistletterofintentassessment": {
           "format": "int32",
           "type": "integer"
         },
         "adoxio_checklistsignageassessed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_servicehourswednesdayopen": {
           "format": "int32",
           "type": "integer"
         },
@@ -33173,10 +36568,6 @@
           "type": "integer"
         },
         "adoxio_checkliststampedfloorplan": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistlicencefeepaid": {
           "format": "int32",
           "type": "integer"
         },
@@ -33239,6 +36630,10 @@
         "adoxio_establishmentotherbusinessname": {
           "type": "string"
         },
+        "adoxio_servicehourswednesdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_firstnameold": {
           "type": "string"
         },
@@ -33269,9 +36664,9 @@
         "adoxio_fiaconclusioncomments": {
           "type": "string"
         },
-        "adoxio_inspectionchecklistdate": {
-          "format": "date-time",
-          "type": "string"
+        "adoxio_checklistzoningaip": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_addressstreet": {
           "type": "string"
@@ -33316,10 +36711,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_datelicencecapassessedfinal": {
-          "format": "date-time",
-          "type": "string"
-        },
         "adoxio_checklistsitemapreceived": {
           "format": "int32",
           "type": "integer"
@@ -33332,15 +36723,8 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_uploadedsitemap": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_phseligibilitycheckdate": {
           "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_otherapplicanttype": {
           "type": "string"
         },
         "adoxio_mfgchangestostorearea": {
@@ -33348,13 +36732,6 @@
         },
         "adoxio_contactpersonphone": {
           "type": "string"
-        },
-        "adoxio_mfgstepblending": {
-          "type": "boolean"
-        },
-        "adoxio_criminalrecordsresult": {
-          "format": "int32",
-          "type": "integer"
         },
         "adoxio_establishmentphone": {
           "type": "string"
@@ -33466,6 +36843,10 @@
         "adoxio_businessinfoemail": {
           "type": "string"
         },
+        "adoxio_tiedhouseresult": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_dateapplicationsubmitted": {
           "format": "date-time",
           "type": "string"
@@ -33499,16 +36880,16 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_servicehourstuesdayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_primaryapplicationinvoicepaid": {
           "format": "int32",
           "type": "integer"
         },
         "_stageid_value": {
           "type": "string"
+        },
+        "adoxio_checklistphotosreceived": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_checklistcheckrequestedtc": {
           "format": "int32",
@@ -33521,10 +36902,6 @@
           "type": "string"
         },
         "onholdtime": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_uploadedimageofestablishment": {
           "format": "int32",
           "type": "integer"
         },
@@ -33548,6 +36925,10 @@
           "type": "string"
         },
         "adoxio_areyouthemaincontactforapplication": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_psa": {
           "format": "int32",
           "type": "integer"
         },
@@ -33589,10 +36970,6 @@
           "type": "integer"
         },
         "adoxio_renewaltiedhouse": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_uploadedevidenceofvalidinterest": {
           "format": "int32",
           "type": "integer"
         },
@@ -34879,120 +38256,208 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_applicationtype",
       "type": "object",
       "properties": {
-        "statuscode": {
+        "adoxio_businessplan": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_establishmentname": {
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "adoxio_actiontext": {
+          "type": "string"
+        },
+        "adoxio_sitephotographs": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_defaultbpfid": {
-          "type": "string"
-        },
-        "_modifiedby_value": {
-          "type": "string"
-        },
-        "adoxio_serviceareas": {
-          "type": "boolean"
-        },
-        "adoxio_showonekmassessment": {
-          "type": "boolean"
-        },
-        "_owninguser_value": {
-          "type": "string"
-        },
-        "adoxio_isshowassociatesformupload": {
-          "type": "boolean"
         },
         "adoxio_proratedendingmonth": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_isownershipconfirmation": {
-          "type": "boolean"
-        },
-        "_createdby_value": {
+        "adoxio_code": {
           "type": "string"
         },
-        "adoxio_showdescription3": {
+        "adoxio_showtiedhousetab": {
           "type": "boolean"
         },
-        "adoxio_showpatiosection": {
+        "adoxio_showfacilitystructuralchangesection": {
           "type": "boolean"
         },
-        "adoxio_isshowliquordeclarations": {
-          "type": "boolean"
-        },
-        "_adoxio_applicationfeeproduct_value": {
+        "_adoxio_fylicencefeeproduct_value": {
           "type": "string"
         },
-        "importsequencenumber": {
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_iswineryproduction": {
+          "type": "boolean"
+        },
+        "adoxio_isrelocation": {
+          "type": "boolean"
+        },
+        "adoxio_category": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_dynamicapplicationform": {
+          "type": "string"
+        },
+        "adoxio_finalinspectionduetime": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_storecontactinfo": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_name": {
+          "type": "string"
+        },
+        "adoxio_isshowsupportingdocuments": {
+          "type": "boolean"
+        },
+        "timezoneruleversionnumber": {
           "format": "int32",
           "type": "integer"
         },
         "adoxio_isshowfinancialintegrityformupload": {
           "type": "boolean"
         },
-        "adoxio_isstructuralchange": {
-          "type": "boolean"
-        },
-        "adoxio_isdefault": {
-          "type": "boolean"
-        },
-        "overriddencreatedon": {
-          "format": "date-time",
+        "_owninguser_value": {
           "type": "string"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_defaultqueuename": {
-          "type": "string"
-        },
-        "adoxio_actiontext": {
-          "type": "string"
-        },
-        "adoxio_category": {
-          "format": "int32",
-          "type": "integer"
         },
         "adoxio_publiccoolerspace": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_iswineryproduction": {
+        "adoxio_paylicencefeeatapplication": {
           "type": "boolean"
         },
-        "createdon": {
-          "format": "date-time",
+        "adoxio_newestablishmentaddress": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_showdescription1": {
+          "type": "boolean"
+        },
+        "adoxio_islockestablishmentname": {
+          "type": "boolean"
+        },
+        "adoxio_showpatiosection": {
+          "type": "boolean"
+        },
+        "_createdonbehalfby_value": {
           "type": "string"
+        },
+        "adoxio_proratedbydaymonth": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "adoxio_islgzoningconfirmation": {
+          "type": "boolean"
         },
         "adoxio_isshowcurrentproperty": {
           "type": "boolean"
         },
-        "adoxio_showlrsstructuralsection": {
+        "adoxio_isshowliquordeclarations": {
           "type": "boolean"
         },
-        "adoxio_storecontactinfo": {
+        "adoxio_haslesection": {
+          "type": "boolean"
+        },
+        "adoxio_serviceareas": {
+          "type": "boolean"
+        },
+        "adoxio_applicationtypeid": {
+          "type": "string"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "adoxio_outsideareas": {
+          "type": "boolean"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_dynamicsformname": {
+          "type": "string"
+        },
+        "adoxio_showpicnicarea": {
+          "type": "boolean"
+        },
+        "adoxio_isshowassociatesformupload": {
+          "type": "boolean"
+        },
+        "adoxio_formreference": {
+          "type": "string"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "adoxio_showdescription2": {
+          "type": "boolean"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
+        "adoxio_isendorsement": {
+          "type": "boolean"
+        },
+        "adoxio_establishmentname": {
           "format": "int32",
           "type": "integer"
         },
         "_modifiedonbehalfby_value": {
           "type": "string"
         },
-        "_owningteam_value": {
-          "type": "string"
+        "adoxio_isshowlginapproval": {
+          "type": "boolean"
         },
-        "adoxio_finalinspectionduetimeunit": {
+        "adoxio_isstructuralchange": {
+          "type": "boolean"
+        },
+        "adoxio_letterofintent": {
           "format": "int32",
           "type": "integer"
         },
-        "_adoxio_renewalapplicationtype_value": {
+        "_adoxio_applicationfeeproduct_value": {
           "type": "string"
         },
-        "adoxio_routineinspectionoccurrence": {
+        "adoxio_isownershipconfirmation": {
+          "type": "boolean"
+        },
+        "_adoxio_renewalfeeproduct_value": {
+          "type": "string"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isshowdeclarations": {
+          "type": "boolean"
+        },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_isshowpropertydetails": {
+          "type": "boolean"
+        },
+        "adoxio_isrequiresinspection": {
+          "type": "boolean"
+        },
+        "adoxio_connectedgrocerystore": {
           "format": "int32",
           "type": "integer"
         },
@@ -35000,89 +38465,73 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_proofofzoning": {
+        "adoxio_defaultbpfid": {
+          "type": "string"
+        },
+        "statecode": {
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_defaultbpmid": {
+          "type": "string"
+        },
+        "_adoxio_renewalapplicationtype_value": {
+          "type": "string"
+        },
+        "adoxio_hasalrquestion": {
+          "type": "boolean"
+        },
+        "adoxio_liquorsiteplan": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_finalinspectionduetimeunit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_showlrsstructuralsection": {
+          "type": "boolean"
+        },
         "adoxio_islicencefeeprorated": {
-          "type": "boolean"
-        },
-        "adoxio_islgzoningconfirmation": {
-          "type": "boolean"
-        },
-        "adoxio_isshowpropertydetails": {
-          "type": "boolean"
-        },
-        "adoxio_isshowlginapproval": {
           "type": "boolean"
         },
         "adoxio_licenceautonumberdefinitionname": {
           "type": "string"
         },
-        "adoxio_defaultbpmid": {
-          "type": "string"
-        },
-        "adoxio_capacityarea": {
-          "type": "boolean"
-        },
-        "adoxio_code": {
-          "type": "string"
-        },
-        "modifiedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_connectedgrocerystore": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_applicationtypeid": {
-          "type": "string"
-        },
-        "adoxio_showdescription1": {
+        "adoxio_isdefault": {
           "type": "boolean"
         },
         "adoxio_portallabel": {
           "type": "string"
         },
-        "adoxio_requiressecurityscreening": {
+        "adoxio_showonekmassessment": {
           "type": "boolean"
         },
-        "adoxio_showtiedhousetab": {
-          "type": "boolean"
-        },
-        "adoxio_currentestablishmentaddress": {
+        "adoxio_proofofzoning": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_haslesection": {
-          "type": "boolean"
-        },
-        "adoxio_siteplan": {
+        "adoxio_validinterest": {
           "format": "int32",
           "type": "integer"
+        },
+        "_adoxio_licencetype_value": {
+          "type": "string"
         },
         "adoxio_defaultqueuenamev2": {
           "type": "string"
         },
-        "adoxio_isrelocation": {
+        "adoxio_isrenewal": {
           "type": "boolean"
         },
-        "adoxio_isshowhoursofsale": {
+        "adoxio_isfylicencefeespecifiedatsubcategory": {
           "type": "boolean"
         },
-        "adoxio_sitephotographs": {
+        "adoxio_signage": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_lgandpoliceselectors": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_name": {
-          "type": "string"
-        },
-        "adoxio_validinterest": {
+        "adoxio_isfree": {
           "format": "int32",
           "type": "integer"
         },
@@ -35090,109 +38539,49 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_outsideareas": {
+        "adoxio_isshowhoursofsale": {
           "type": "boolean"
-        },
-        "adoxio_isfylicencefeespecifiedatsubcategory": {
-          "type": "boolean"
-        },
-        "adoxio_businessplan": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_showfacilitystructuralchangesection": {
-          "type": "boolean"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_isrequiresinspection": {
-          "type": "boolean"
-        },
-        "adoxio_letterofintent": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_showmanufacturerapplicationsection": {
-          "type": "boolean"
-        },
-        "adoxio_signage": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_finalinspectionduetime": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_isshowdeclarations": {
-          "type": "boolean"
-        },
-        "adoxio_liquorsiteplan": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_formreference": {
-          "type": "string"
-        },
-        "adoxio_newestablishmentaddress": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_hasalrquestion": {
-          "type": "boolean"
-        },
-        "_adoxio_licencetype_value": {
-          "type": "string"
-        },
-        "adoxio_isendorsement": {
-          "type": "boolean"
-        },
-        "adoxio_showpicnicarea": {
-          "type": "boolean"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        },
-        "statecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_islockestablishmentname": {
-          "type": "boolean"
-        },
-        "adoxio_isshowsupportingdocuments": {
-          "type": "boolean"
-        },
-        "_owningbusinessunit_value": {
-          "type": "string"
-        },
-        "adoxio_proratedbydaymonth": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_dynamicapplicationform": {
-          "type": "string"
         },
         "adoxio_titletext": {
           "type": "string"
         },
-        "adoxio_isfree": {
+        "adoxio_capacityarea": {
+          "type": "boolean"
+        },
+        "adoxio_currentestablishmentaddress": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_showdescription2": {
+        "adoxio_showdescription3": {
           "type": "boolean"
         },
-        "_adoxio_fylicencefeeproduct_value": {
+        "adoxio_siteplan": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_routineinspectionoccurrence": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_createdby_value": {
           "type": "string"
+        },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_showmanufacturerapplicationsection": {
+          "type": "boolean"
+        },
+        "adoxio_defaultqueuename": {
+          "type": "string"
+        },
+        "adoxio_lgandpoliceselectors": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_requiressecurityscreening": {
+          "type": "boolean"
         },
         "createdbyname": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
@@ -35355,6 +38744,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_hoursofservicesdefault"
           }
+        },
+        "adoxio_RenewalFeeProduct": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.product"
         }
       }
     },
@@ -46991,10 +50383,6 @@
         "adoxio_establishmentaddresscity": {
           "type": "string"
         },
-        "adoxio_licencesubcategory": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_expirydayofmonth": {
           "format": "int32",
           "type": "integer"
@@ -47105,9 +50493,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "emailaddress": {
-          "type": "string"
-        },
         "adoxio_operated": {
           "format": "int32",
           "type": "integer"
@@ -47118,7 +50503,7 @@
         "adoxio_businessprogramaccountreferencenumber": {
           "type": "string"
         },
-        "adoxio_licencenumber": {
+        "adoxio_mfgcopackerequipmentlist": {
           "type": "string"
         },
         "_adoxio_licencetype_value": {
@@ -47181,18 +50566,12 @@
           "format": "int32",
           "type": "integer"
         },
-        "_adoxio_inspectorid_value": {
-          "type": "string"
-        },
         "adoxio_orgbookcredentiallink": {
           "type": "string"
         },
         "statuscode": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_mfgcopackerequipmentlist": {
-          "type": "string"
         },
         "adoxio_dormancyreasons": {
           "format": "int32",
@@ -47211,6 +50590,9 @@
         "adoxio_iseventapprovalalwaysrequired": {
           "type": "boolean"
         },
+        "emailaddress": {
+          "type": "string"
+        },
         "modifiedon": {
           "format": "date-time",
           "type": "string"
@@ -47223,9 +50605,6 @@
           "type": "string"
         },
         "_adoxio_licencee_value": {
-          "type": "string"
-        },
-        "_adoxio_accountid_value": {
           "type": "string"
         },
         "adoxio_representativephone": {
@@ -47259,9 +50638,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "_adoxio_proposedoperator_value": {
-          "type": "string"
-        },
         "adoxio_dormancyintentionforreopening": {
           "format": "int32",
           "type": "integer"
@@ -47272,10 +50648,19 @@
         "_adoxio_territory_value": {
           "type": "string"
         },
+        "_adoxio_inspectorid_value": {
+          "type": "string"
+        },
         "adoxio_wineryequipmentlist": {
           "type": "string"
         },
         "adoxio_distilleryequipmentlist": {
+          "type": "string"
+        },
+        "_adoxio_proposedoperator_value": {
+          "type": "string"
+        },
+        "adoxio_licencenumber": {
           "type": "string"
         },
         "adoxio_name": {
@@ -47424,9 +50809,6 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
           }
-        },
-        "adoxio_AccountId": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
         },
         "adoxio_Licencee": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
@@ -47612,6 +50994,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_leconnection"
+          }
+        },
+        "adoxio_licences_adoxio_onestopmessageitem_Licence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
           }
         }
       }
@@ -49187,6 +52575,183 @@
           }
         },
         "adoxio_LicenceId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_onestopmessageitem": {
+      "description": "Microsoft.Dynamics.CRM.adoxio_onestopmessageitem",
+      "type": "object",
+      "properties": {
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_onestopmessageitemid": {
+          "type": "string"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_payload": {
+          "type": "string"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "adoxio_dateacknowledgementreceived": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_acknowledgementstatus": {
+          "type": "string"
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_statuschangedescription": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
+        "_adoxio_licence_value": {
+          "type": "string"
+        },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "adoxio_errordescription": {
+          "type": "string"
+        },
+        "statecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_name": {
+          "type": "string"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_createdby_value": {
+          "type": "string"
+        },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_datesent": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_statuschange": {
+          "type": "string"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owninguser_value": {
+          "type": "string"
+        },
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_messagestatus": {
+          "type": "string"
+        },
+        "createdby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_onestopmessageitem_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_onestopmessageitem_DuplicateMatchingRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_onestopmessageitem_DuplicateBaseRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_onestopmessageitem_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_onestopmessageitem_MailboxTrackingFolders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
+          }
+        },
+        "adoxio_onestopmessageitem_ProcessSession": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
+          }
+        },
+        "adoxio_onestopmessageitem_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_onestopmessageitem_PrincipalObjectAttributeAccesses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
+          }
+        },
+        "adoxio_Licence": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
         }
       }
@@ -52531,10 +56096,13 @@
           "format": "int32",
           "type": "integer"
         },
-        "_modifiedonbehalfby_value": {
+        "_owningbusinessunit_value": {
           "type": "string"
         },
         "_createdby_value": {
+          "type": "string"
+        },
+        "_modifiedonbehalfby_value": {
           "type": "string"
         },
         "_ownerid_value": {
@@ -52600,14 +56168,22 @@
         "adoxio_responsibleindividualmiddleinitial": {
           "type": "string"
         },
+        "adoxio_createinspection": {
+          "type": "boolean"
+        },
         "adoxio_specialeventapplicant": {
+          "type": "string"
+        },
+        "adoxio_eventenddate": {
+          "format": "date-time",
           "type": "string"
         },
         "versionnumber": {
           "format": "int64",
           "type": "string"
         },
-        "_owningbusinessunit_value": {
+        "adoxio_eventstartdate": {
+          "format": "date-time",
           "type": "string"
         },
         "adoxio_specialeventstreet2": {
@@ -52791,6 +56367,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_specialeventtandc"
+          }
+        },
+        "adoxio_specialevent_inspection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
           }
         }
       }
@@ -56704,6 +60286,9 @@
         "regardingobjectid_adoxio_inspectionformconfiguration": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectionformconfiguration"
         },
+        "regardingobjectid_adoxio_onestopmessageitem": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+        },
         "regardingobjectid_productpricelevel": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.productpricelevel"
         },
@@ -59450,6 +63035,9 @@
         "regardingobjectid_adoxio_inspectionformconfiguration": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectionformconfiguration"
         },
+        "regardingobjectid_adoxio_onestopmessageitem": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+        },
         "regardingobjectid_customeraddress": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.customeraddress"
         },
@@ -61234,6 +64822,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectionformconfiguration"
+          }
+        },
+        "business_unit_adoxio_onestopmessageitem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
           }
         },
         "BusinessUnit_SyncErrors": {
@@ -69331,6 +72925,12 @@
         "baserecordid_adoxio_specialeventtandc": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_specialeventtandc"
         },
+        "duplicaterecordid_adoxio_onestopmessageitem": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+        },
+        "baserecordid_adoxio_onestopmessageitem": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+        },
         "baserecordid_goalrollupquery": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.goalrollupquery"
         },
@@ -75899,6 +79499,10 @@
         "incidentid": {
           "type": "string"
         },
+        "adoxio_sepchecklistliquorreceipts": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_routinechecklistsalesrecordsnotes": {
           "type": "string"
         },
@@ -76139,6 +79743,9 @@
         "adoxio_routinechecklistpromotionvalidity": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_sepchecklistcommunitydisturbancecomment": {
+          "type": "string"
         },
         "adoxio_mktrchecklistonsiterequirementsreviewed": {
           "format": "int32",
@@ -76548,6 +80155,9 @@
         "adoxio_mapchecklistmapviolationticketsissued": {
           "type": "string"
         },
+        "_adoxio_specialeventid_value": {
+          "type": "string"
+        },
         "adoxio_checklistmanufacturingstoragearea": {
           "format": "int32",
           "type": "integer"
@@ -76690,9 +80300,6 @@
         "adoxio_checklistsocialrespposterprovided": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_sepchecklistcommunitydisturbancecomment": {
-          "type": "string"
         },
         "adoxio_inspectiontimeoutmm": {
           "format": "int32",
@@ -76906,6 +80513,9 @@
         "adoxio_sepchecklistpermitchecked": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_sepchecklistliquorreceiptscomment": {
+          "type": "string"
         },
         "adoxio_checklistcontractmanufacturingreqsnotes": {
           "type": "string"
@@ -77126,6 +80736,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_enforcementaction"
           }
+        },
+        "adoxio_SpecialEventId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_specialevent"
         },
         "Incident_MailboxTrackingFolder": {
           "type": "array",
@@ -83249,6 +86862,9 @@
         },
         "regardingobjectid_adoxio_inspectionformconfiguration": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectionformconfiguration"
+        },
+        "regardingobjectid_adoxio_onestopmessageitem": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
         },
         "regardingobjectid_incident": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
@@ -90159,6 +93775,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectionformconfiguration"
           }
         },
+        "owner_adoxio_onestopmessageitem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+          }
+        },
         "owner_personaldocumenttemplates": {
           "type": "array",
           "items": {
@@ -92875,6 +96497,9 @@
         "objectid_adoxio_inspectionformconfiguration": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectionformconfiguration"
         },
+        "objectid_adoxio_onestopmessageitem": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+        },
         "objectid_campaign": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.campaign"
         },
@@ -93626,6 +97251,9 @@
         },
         "regardingobjectid_adoxio_inspectionformconfiguration": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectionformconfiguration"
+        },
+        "regardingobjectid_adoxio_onestopmessageitem": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
         },
         "regardingobjectid_invoicedetail": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoicedetail"
@@ -95070,6 +98698,12 @@
           }
         },
         "adoxio_product_adoxio_applicationtype_FYLicenceFeeProduct": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+          }
+        },
+        "adoxio_product_adoxio_applicationtype_RenewalFeeProduct": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
@@ -110127,6 +113761,36 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectionformconfiguration"
           }
         },
+        "lk_adoxio_onestopmessageitem_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+          }
+        },
+        "lk_adoxio_onestopmessageitem_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+          }
+        },
+        "lk_adoxio_onestopmessageitem_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+          }
+        },
+        "lk_adoxio_onestopmessageitem_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+          }
+        },
+        "user_adoxio_onestopmessageitem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+          }
+        },
         "lk_slakpiinstancebase_createdonbehalfby": {
           "type": "array",
           "items": {
@@ -116203,6 +119867,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectionformconfiguration"
           }
         },
+        "team_adoxio_onestopmessageitem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+          }
+        },
         "team_DuplicateRules": {
           "type": "array",
           "items": {
@@ -121577,6 +125247,19 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.adoxio_onestopmessageitemCollection": {
+      "title": "Collection of adoxio_onestopmessageitem",
+      "description": "Microsoft.Dynamics.CRM.adoxio_onestopmessageitemCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_onestopmessageitem"
+          }
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_licencesubcategoryCollection": {
       "title": "Collection of adoxio_licencesubcategory",
       "description": "Microsoft.Dynamics.CRM.adoxio_licencesubcategoryCollection",
@@ -121677,6 +125360,97 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_offsitestorage"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.asyncoperationCollection": {
+      "title": "Collection of asyncoperation",
+      "description": "Microsoft.Dynamics.CRM.asyncoperationCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.bulkdeletefailureCollection": {
+      "title": "Collection of bulkdeletefailure",
+      "description": "Microsoft.Dynamics.CRM.bulkdeletefailureCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.duplicaterecordCollection": {
+      "title": "Collection of duplicaterecord",
+      "description": "Microsoft.Dynamics.CRM.duplicaterecordCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.mailboxtrackingfolderCollection": {
+      "title": "Collection of mailboxtrackingfolder",
+      "description": "Microsoft.Dynamics.CRM.mailboxtrackingfolderCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.principalobjectattributeaccessCollection": {
+      "title": "Collection of principalobjectattributeaccess",
+      "description": "Microsoft.Dynamics.CRM.principalobjectattributeaccessCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.processsessionCollection": {
+      "title": "Collection of processsession",
+      "description": "Microsoft.Dynamics.CRM.processsessionCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.syncerrorCollection": {
+      "title": "Collection of syncerror",
+      "description": "Microsoft.Dynamics.CRM.syncerrorCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
           }
         }
       }
@@ -121911,6 +125685,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_specialevent"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.incidentCollection": {
+      "title": "Collection of incident",
+      "description": "Microsoft.Dynamics.CRM.incidentCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
           }
         }
       }
