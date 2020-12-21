@@ -87,7 +87,7 @@ namespace bdd_tests
 
             // select the proof of zoning checkbox
             NgWebElement uiProofOfZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
-            uiProofOfZoning.Click();
+            JavaScriptClick(uiProofOfZoning);
 
             // select 'yes' for ALR inclusion
             NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
