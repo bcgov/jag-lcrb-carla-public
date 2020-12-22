@@ -3,7 +3,7 @@
     I want to download a Cannabis Marketing Licence
 
 @cannabismktglicencedownload @privatecorporation
-Scenario: Private Corporation Cannabis Marketing Application
+Scenario: Private Corporation Cannabis Marketing Licence Download
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for a private corporation
