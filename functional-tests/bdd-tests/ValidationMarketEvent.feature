@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm the validation messages for a market event application
 
-@e2e @privatecorporation @marketevent @validation
+@privatecorporation @marketevent @validation
 Scenario: Validation for Market Event Application 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -16,7 +16,7 @@ Scenario: Validation for Market Event Application
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee
     And I request an on-site store endorsement
     And the application is approved
     And I click on the Licences tab

@@ -30,6 +30,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public const string WorkerDocumentUrlTitle = "adoxio_worker";
         public const string EventDocumentListTitle = "adoxio_event";
         public const string FederalReportListTitle = "adoxio_federalreportexport";
+        public const string LicenceDocumentUrlTitle = "adoxio_licences";
+        public const string LicenceDocumentListTitle = "Licence";
+
 
         private const int MaxUrlLength = 260; // default maximum URL length.
 
@@ -325,7 +328,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
 
             // Get the validated file name string
-            string result = Regex.Replace(filename, invalidRegStr, "_");                    
+            string result = Regex.Replace(filename, invalidRegStr, "_");
 
             return result;
         }
@@ -347,7 +350,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 string extension = Path.GetExtension(result);
                 result = Path.GetFileNameWithoutExtension(result).Substring(0, maxLength - extension.Length);
-                result += extension;                
+                result += extension;
             }
 
             return result;
@@ -392,7 +395,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             HttpStatusCode _statusCode = response.StatusCode;
 
             // check to see if the folder creation worked.
-            if ( ! (_statusCode == HttpStatusCode.OK || _statusCode == HttpStatusCode.Created))
+            if (!(_statusCode == HttpStatusCode.OK || _statusCode == HttpStatusCode.Created))
             {
                 string _responseContent;
                 var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
@@ -761,7 +764,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
 
-        private string GenerateUploadRequestUriString (string folderServerRelativeUrl, string fileName)
+        private string GenerateUploadRequestUriString(string folderServerRelativeUrl, string fileName)
         {
             string requestUriString = ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(folderServerRelativeUrl) + "')/Files/add(url='"
                 + EscapeApostrophe(fileName) + "',overwrite=true)";
@@ -792,6 +795,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
+        /// SharePoint is very particular about the file name length and the total characters in the URL to access a file.
+        /// This method returns the input file name or a truncated version of the file name if it is over the max number of characters.
+        /// </summary>
+        /// <param name="fileName">The file name to check; e.g. "abcdefg1111222233334444.pdf"</param>
+        /// <param name="listTitle">The list title</param>
+        /// <param name="folderName">The folder name where the file would be uploaded</param>
+        /// <returns>The (potentially truncated) file name; e.g. "abcd.pdf"</returns>
+        public string GetTruncatedFileName(string fileName, string listTitle, string folderName)
+        {
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                return fileName;
+            }
+
+            // SharePoint requires that filenames are less than 128 characters.
+            int maxLength = 128;
+            fileName = FixFilename(fileName, maxLength);
+
+            // SharePoint also imposes a limit on the whole URL
+            string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
+            string requestUriString = GenerateUploadRequestUriString(serverRelativeUrl, fileName);
+            if (requestUriString.Length > MaxUrlLength)
+            {
+                int delta = requestUriString.Length - MaxUrlLength;
+                maxLength -= delta;
+                fileName = FixFilename(fileName, maxLength);
+            }
+
+            return fileName;
+        }
+
+        /// <summary>
         /// Upload a file
         /// </summary>
         /// <param name="fileName"></param>
@@ -805,21 +841,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             string result = null;
             if (IsValid())
             {
-                int maxLength = 128;
                 folderName = FixFoldername(folderName);
-                fileName = FixFilename(fileName, maxLength);
+                fileName = GetTruncatedFileName(fileName, listTitle, folderName);
 
                 string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
-
                 string requestUriString = GenerateUploadRequestUriString(serverRelativeUrl, fileName);
-
-                if (requestUriString.Length > MaxUrlLength)
-                {
-                    int delta = requestUriString.Length - MaxUrlLength;
-                    maxLength -= delta;
-                    fileName = FixFilename(fileName, maxLength);
-                    requestUriString = GenerateUploadRequestUriString(serverRelativeUrl, fileName);
-                }
 
                 HttpRequestMessage endpointRequest = new HttpRequestMessage
                 {
@@ -873,7 +899,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             HttpRequestMessage endpointRequest = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(url) + "')/$value"),                
+                RequestUri = new Uri(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(url) + "')/$value"),
             };
 
             // make the request.

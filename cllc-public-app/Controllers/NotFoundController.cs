@@ -6,12 +6,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     public class NotFoundController : ControllerBase
     {
-
-        public NotFoundController()
-        {
-
-        }
-
         [HttpGet]
 
         public ActionResult NotFound(string path)

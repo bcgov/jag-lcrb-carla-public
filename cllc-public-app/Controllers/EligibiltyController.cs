@@ -72,10 +72,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="form"></param>
         /// <returns></returns>
         [HttpPost("submit")]
-        public async Task<IActionResult> SubmitEligibilityForm([FromBody] ViewModels.EligibilityForm form)
+        public async Task<IActionResult> SubmitEligibilityForm([FromBody] EligibilityForm form)
         {
-            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
                 Guid accountId = new Guid(userSettings.AccountId);

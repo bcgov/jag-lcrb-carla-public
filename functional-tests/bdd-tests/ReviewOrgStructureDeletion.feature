@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm the successful deletion of personnel from the org structure
 
-@e2e @cannabis @partnership @orgstructure
+@cannabis @partnership @orgstructuredeletion
 Scenario: Deletion from Partnership Org Structure
     Given I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
@@ -15,7 +15,7 @@ Scenario: Deletion from Partnership Org Structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @orgstructure
+@cannabis @privatecorporation @orgstructuredeletion
 Scenario: Deletion from Private Corporation Org Structure
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
@@ -28,7 +28,7 @@ Scenario: Deletion from Private Corporation Org Structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @orgstructure
+@cannabis @publiccorporation @orgstructuredeletion
 Scenario: Deletion from Public Corporation Org Structure
     Given I am logged in to the dashboard as a public corporation
     And I click on the Complete Organization Information button
@@ -41,7 +41,7 @@ Scenario: Deletion from Public Corporation Org Structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @orgstructure
+@cannabis @society @orgstructuredeletion
 Scenario: Deletion from Society Org Structure
     Given I am logged in to the dashboard as a society
     And I click on the Complete Organization Information button
@@ -54,7 +54,7 @@ Scenario: Deletion from Society Org Structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @orgstructure
+@cannabis @soleproprietorship @orgstructuredeletion
 Scenario: Deletion from Sole Proprietorship Org Structure
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Complete Organization Information button
@@ -66,31 +66,3 @@ Scenario: Deletion from Sole Proprietorship Org Structure
     And the org structure data is successfully deleted for a sole proprietorship
     And the account is deleted
     Then I see the login page
-
-# @e2e @cannabis @indigenousnation @orgstructure
-# Scenario: Deletion from Indigenous Nation Org Structure
-#    Given I am logged in to the dashboard as an indigenous nation
-#    And I click on the Complete Organization Information button
-#    And I add personnel to the organization structure for an indigenous nation
-#    And I click on the button for Submit Organization Information
-#    And I click on the Complete Organization Information button
-#    And I delete the personnel for an indigenous nation
-#    And I click on the button for Submit Organization Information
-#    And I click on the Complete Organization Information button
-#    And the org structure data is successfully deleted for an indigenous nation
-#    And the account is deleted
-#    Then I see the login page
-
-# @e2e @cannabis @localgovernment @orgstructure
-# Scenario: Deletion from Local Government Org Structure
-#    Given I am logged in to the dashboard as a local government
-#    And I click on the Complete Organization Information button
-#    And I add personnel to the organization structure for a local government
-#    And I click on the button for Submit Organization Information
-#    And I click on the Complete Organization Information button
-#    And I delete the personnel for a local government
-#    And I click on the button for Submit Organization Information
-#    And I click on the Complete Organization Information button
-#    And the org structure data is successfully deleted for a local government
-#    And the account is deleted
-#    Then I see the login page

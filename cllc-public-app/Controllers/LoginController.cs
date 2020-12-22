@@ -41,14 +41,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 return LocalRedirect(path);
             }
-            else
-            {
-                string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "/" : _configuration["BASE_PATH"];
-                // we want to redirect to the dashboard.
-                string url = "dashboard";
 
-                return Redirect(basePath + "/" + url);
-            }
+            string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "/" : _configuration["BASE_PATH"];
+            // we want to redirect to the dashboard.
+            string url = "dashboard";
+
+            return Redirect(basePath + "/" + url);
         }
 
 

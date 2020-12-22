@@ -100,6 +100,27 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             return temp;
         }
 
+        public static UserSettings CreateFromHttpContext(IHttpContextAccessor httpContextAccessor)
+        {
+            string temp = httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings;
+
+            try
+            {
+                userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            }
+            catch (Exception)
+            {
+                userSettings = new UserSettings();
+                userSettings.AccountId = httpContextAccessor.HttpContext.User.FindFirst(User.AccountidClaim)?.Value;
+                userSettings.ContactId = httpContextAccessor.HttpContext.User.FindFirst(User.UseridClaim)?.Value;
+                userSettings.SiteMinderGuid = httpContextAccessor.HttpContext.User.FindFirst(User.SiteMinderGuidClaim)?.Value;
+                userSettings.SiteMinderBusinessGuid = httpContextAccessor.HttpContext.User.FindFirst(User.SiteMinderBusinessGuidClaim)?.Value;
+            }
+
+            return userSettings;
+        }
+
         /// <summary>
         /// Save UserSettings to Session
         /// </summary>

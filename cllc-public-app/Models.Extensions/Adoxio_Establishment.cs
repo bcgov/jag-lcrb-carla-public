@@ -46,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result = new ViewModels.Establishment();
                 if (adoxio_establishment.AdoxioEstablishmentid != null)
                 {
-                    result.id = adoxio_establishment.AdoxioEstablishmentid.ToString();
+                    result.id = adoxio_establishment.AdoxioEstablishmentid;
                 }
 
                 result._licencee_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioLicenceeValue);

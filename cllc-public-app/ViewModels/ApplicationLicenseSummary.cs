@@ -24,7 +24,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         No = 845280000
     }
 
-    public enum ApplicationTypeCategory{
+    public enum ApplicationTypeCategory
+    {
         Cannabis = 845280000,
         Liquor = 845280001
     }
@@ -40,10 +41,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string LicenseId { get; set; }
         public string ApplicationId { get; set; }
         public string ApplicationTypeName { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public ApplicationTypeCategory? ApplicationTypeCategory { get; set; }
-        public string EstablishmentId {get; set; }
+        public string EstablishmentId { get; set; }
         public string EstablishmentName { get; set; }
         public string EstablishmentAddressStreet { get; set; }
         public string EstablishmentAddressCity { get; set; }
@@ -71,16 +72,17 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool Dormant { get; set; }
         public bool Operated { get; set; }
         public bool Suspended { get; set; }
-        
+
         public bool? AutoRenewal { get; set; }
-        
+
         public bool TPORequested { get; set; }
-        
+
 
         public string ThirdPartyOperatorAccountName { get; set; }
         public string ThirdPartyOperatorAccountId { get; set; }
         public List<Endorsement> Endorsements { get; set; }
         public List<string> TermsAndConditions { get; set; }
+        public List<OffsiteStorage> OffsiteStorageLocations { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public LicenceTypeCategory? LicenceTypeCategory { get; set; }

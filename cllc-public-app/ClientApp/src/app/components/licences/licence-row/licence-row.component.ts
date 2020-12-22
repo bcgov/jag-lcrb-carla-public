@@ -25,6 +25,7 @@ export const LIQUOR_RENEWAL_LICENCE_TYPE_NAME = 'liquor';
 
 const ACTIVE = 'Active';
 const RENEWAL_DUE = 'Renewal Due';
+const NOW = moment(new Date()).startOf('day');
 
 @Component({
   selector: 'app-licence-row',
@@ -145,16 +146,30 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     this.busy = this.establishmentService.upEstablishment(establishment).subscribe();
   }
 
-  isExpired(licence: ApplicationLicenseSummary) {
-    return licence.status === 'Expired';
-  }
-
   actionsVisible(licence: ApplicationLicenseSummary) {
     if (licence.licenceTypeCategory === 'Liquor'
-      && (licence.transferRequested && !licence.licenceTypeName.toLowerCase().includes('deemed - '))) {
+      && (licence.transferRequested && !licence.licenceTypeName.toLowerCase().includes('deemed - '))
+      || this.isExpired(licence)) {
       return false;
     }
     return true;
+  }
+
+  /**
+   * The off-site storage feature is available for all *liquor* licences except for:
+   *   - Catering
+   *   - UBrew/UVin
+   *   - Agent
+   * It should not be available for any Cannabis licence type.
+   */
+  showManageOffsiteStorage(item: ApplicationLicenseSummary) {
+    const exclusions = [ApplicationTypeNames.Catering, ApplicationTypeNames.UBV] as string[];
+    const result = this.isActive(item)
+      && this.actionsVisible(item)
+      && item.licenceTypeCategory === 'Liquor'
+      && !exclusions.includes(item.licenceTypeName)
+      && !item.isOperated;
+    return result;
   }
 
   showLicenceTransferAction(item: ApplicationLicenseSummary) {
@@ -164,7 +179,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       && item.licenceTypeName !== 'Section 119 Authorization';
     return result;
   }
-
 
   showAddOrChangeThirdPartyOperator(item: ApplicationLicenseSummary): boolean {
     const result = this.isActive(item)
@@ -221,20 +235,33 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       });
   }
 
-  isAboutToExpire(expiryDate: string) {
-    const now = moment(new Date()).startOf('day');
-    const expiry = moment(expiryDate).startOf('day');
-    const diff = expiry.diff(now, 'days') + 1;
+  isExpired(licence: ApplicationLicenseSummary) {
+    return NOW.diff(moment(licence.expiryDate).startOf('day')) > 0;
+  }
 
-    return diff <= 60 || expiry < now;
+  isAboutToExpire(licence: ApplicationLicenseSummary) {
+    if (!this.isExpired(licence)) {
+      const expiry = moment(licence.expiryDate).startOf('day');
+      const diff = expiry.diff(NOW, 'days');
+      return diff <= 60;
+    } else {
+      return false;
+    }
   }
 
   isRecentlyExpired(licence: ApplicationLicenseSummary) {
-    const now = moment(new Date()).startOf('day');
-    const expiry = moment(licence.expiryDate).startOf('day');
-    const diff = now.diff(expiry, 'days') + 1;
+    if (this.isExpired(licence)) {
+      const expiry = moment(licence.expiryDate).startOf('day');
+      const diff = NOW.diff(expiry, 'days');
+      return diff <= 30;
+    }
+    return false;
+  }
 
-    return licence.status === 'Expired' && diff <= 30;
+  isCancelled(licence: ApplicationLicenseSummary) {
+    const expiry = moment(licence.expiryDate).startOf('day');
+    const diff = expiry.diff(NOW, 'days');
+    return diff >= 180 || licence.status === 'Cancelled';
   }
 
   isActive(licence: ApplicationLicenseSummary) {
@@ -285,20 +312,20 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     let renewalApplicationTypeName;
 
     // if it's a cannabis related licence
-    if(licence.licenceTypeCategory === "Cannabis"){
+    if (licence.licenceTypeCategory === "Cannabis") {
       renewalType = CRS_RENEWAL_LICENCE_TYPE_NAME;
 
-      if(licence.licenceTypeName === "Marketing"){
+      if (licence.licenceTypeName === "Marketing") {
         // see if there is an existing Marketing renewal application for this licence
         renewalApplicationTypeName = this.ApplicationTypeNames.MarketingRenewal;
         renewalApplication = licence.actionApplications.find(app =>
           app.applicationTypeName === this.ApplicationTypeNames.MarketingRenewal && app.applicationStatus !== 'Active');
       } else {
-      // if it's a CRS Licence        
+        // if it's a CRS Licence
         // see if there is an existing CRS renewal application for this licence
         renewalApplicationTypeName = this.ApplicationTypeNames.CRSRenewal;
         renewalApplication = licence.actionApplications.find(app =>
-        app.applicationTypeName === this.ApplicationTypeNames.CRSRenewal && app.applicationStatus !== 'Active');
+          app.applicationTypeName === this.ApplicationTypeNames.CRSRenewal && app.applicationStatus !== 'Active');
       }
 
     } else {
@@ -312,17 +339,17 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         app.applicationTypeName === this.ApplicationTypeNames.LiquorRenewal && app.applicationStatus !== 'Active');
 
     }
-      
+
     // if we found a renewal application that hasn't been paid for
     if (renewalApplication && !renewalApplication.isPaid) {
       // let's go there
       this.router.navigateByUrl(`/renew-licence/${renewalType}/${renewalApplication.applicationId}`);
-    // otherwise if there's a paid renewal application
+      // otherwise if there's a paid renewal application
     } else if (renewalApplication && renewalApplication.isPaid) {
       // that shouldnt have happened
       this.snackBar.open('Renewal application already submitted', 'Fail',
         { duration: 3500, panelClass: ['red-snackbar'] });
-    // otherwise
+      // otherwise
     } else {
 
       // create an renewal application of the specified type
@@ -466,8 +493,9 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     };
   }
 
+  // TO DO: re-write this
   licenceTypeHasEvents(licenceType: string) {
-    return licenceType.indexOf('Catering') >= 0 || licenceType.indexOf('Wine Store') >= 0 || licenceType.indexOf('Manufacturer') >= 0;
+    return (licenceType.indexOf('Catering') >= 0 || licenceType.indexOf('Wine Store') >= 0 || licenceType.indexOf('Manufacturer') >= 0 || licenceType.indexOf('Food Primary') >= 0);
   }
 
   licenceTypeHasTerms(licenceType: string) {

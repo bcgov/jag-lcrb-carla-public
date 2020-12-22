@@ -17,25 +17,7 @@ Feature: CateringApplication
     As a logged in business user
     I want to submit a Catering Application for different business types
 
-@e2e @catering @indigenousnation @cateringapp2
-Scenario: Indigenous Nation Catering Application
-    Given I am logged in to the dashboard as an indigenous nation
-    And I click on the Start Application button for Catering
-    And I review the account profile for an indigenous nation
-    And I review the organization structure for an indigenous nation
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I review the security screening requirements for an indigenous nation
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And I confirm the payment receipt for a Catering application
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
-    And the account is deleted
-    Then I see the login page
-
-@e2e @catering @partnership @cateringapp
+@cateringapp @partnership 
 Scenario: Partnership Catering Application
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -53,7 +35,7 @@ Scenario: Partnership Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @cateringapp
+@cateringapp @privatecorporation
 Scenario: Private Corporation Catering Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -71,7 +53,7 @@ Scenario: Private Corporation Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringapp2
+@cateringapp @publiccorporation
 Scenario: Public Corporation Catering Application
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
@@ -89,7 +71,7 @@ Scenario: Public Corporation Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringapp2
+@cateringapp @society
 Scenario: Society Catering Application
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -107,7 +89,7 @@ Scenario: Society Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @soleproprietorship @cateringapp
+@cateringapp @soleproprietorship
 Scenario: Sole Proprietorship Catering Application
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -117,42 +99,6 @@ Scenario: Sole Proprietorship Catering Application
     And I complete the Catering application
     And I click on the Submit button
     And I review the security screening requirements for a sole proprietorship
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And I confirm the payment receipt for a Catering application
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
-    And the account is deleted
-    Then I see the login page
-
-@e2e @catering @localgovernment @cateringapp
-Scenario: Local Government Catering Application
-    Given I am logged in to the dashboard as a local government
-    And I click on the Start Application button for Catering
-    And I review the account profile for a local government
-    And I review the organization structure for a local government
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I review the security screening requirements for a local government
-    And I click on the button for Pay for Application
-    And I enter the payment information
-    And I confirm the payment receipt for a Catering application
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
-    And the account is deleted
-    Then I see the login page
-
-@e2e @catering @university @cateringapp
-Scenario: University Catering Application
-    Given I am logged in to the dashboard as a university
-    And I click on the Start Application button for Catering
-    And I review the account profile for a university
-    And I review the organization structure for a university
-    And I click on the button for Submit Organization Information
-    And I complete the Catering application
-    And I click on the Submit button
-    And I review the security screening requirements for a university
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application

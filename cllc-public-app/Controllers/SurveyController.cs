@@ -31,10 +31,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return base.Content(result);
             }
-            else
-            {
-                return NotFound();
-            }
+
+            return NotFound();
         }
 
         [HttpGet("create")]

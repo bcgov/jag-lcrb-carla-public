@@ -51,16 +51,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        [HttpGet()]
+        [HttpGet]
         public JsonResult GetDynamicsLegalEntities()
         {
-            List<ViewModels.LegalEntity> result = new List<LegalEntity>();
+            List<LegalEntity> result = new List<LegalEntity>();
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
             String accountfilter = null;
 
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
 
@@ -73,11 +72,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error while getting legal entities. ");
+                _logger.LogError(httpOperationException, "Error while getting legal entities. ");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while getting legal entities.");
+                _logger.LogError(e, "Unexpected Exception while getting legal entities.");
             }
 
 
@@ -97,11 +96,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("business-profile-summary")]
         public JsonResult GetBusinessProfileSummary()
         {
-            List<ViewModels.LegalEntity> result = new List<LegalEntity>();
+            List<LegalEntity> result = new List<LegalEntity>();
 
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
             List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = GetAccountLegalEntities(userSettings.AccountId);
@@ -118,8 +116,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetCurrentHierarchy()
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
 
@@ -157,7 +154,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         dateSubmitted = contact.AdoxioCasdatesubmitted;
                     }
                 }
-                var newItem = new SecurityScreeningStatusItem()
+                var newItem = new SecurityScreeningStatusItem
                 {
                     FirstName = legalEntity.firstname,
                     MiddleName = legalEntity.middlename,
@@ -208,8 +205,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetCurrentSecurityScreeningSummary()
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
 
@@ -272,11 +268,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error reading LegalEntityChangelog");
+                _logger.LogError(httpOperationException, "Error reading LegalEntityChangelog");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while reading LegalEntityChangelog");
+                _logger.LogError(e, "Unexpected Exception while reading LegalEntityChangelog");
             }
             return new JsonResult(result);
         }
@@ -306,7 +302,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     List<string> processedEntities = new List<string>();
-                    result.children = this.GetLegalEntityChildren(result.id, processedEntities);
+                    result.children = GetLegalEntityChildren(result.id, processedEntities);
                 }
             }
             return result;
@@ -327,11 +323,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error while patching legal entity");
+                _logger.LogError(httpOperationException, "Error while patching legal entity");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while patching legal entity");
+                _logger.LogError(e, "Unexpected Exception while patching legal entity");
             }
 
             if (response != null && response.Value != null)
@@ -408,11 +404,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error while getting account legal entities. ");
+                _logger.LogError(httpOperationException, "Error while getting account legal entities. ");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while getting legal entities.");
+                _logger.LogError(e, "Unexpected Exception while getting legal entities.");
             }
 
 
@@ -441,11 +437,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="positionType"></param>
         /// <param name="parentLegalEntityId"></param>
         /// <returns></returns>
-        [HttpGet()]
+        [HttpGet]
         [Route("position/{parentLegalEntityId}/{positionType}")]
         public IActionResult GetDynamicsLegalEntitiesByPosition(string parentLegalEntityId, string positionType)
         {
-            List<ViewModels.LegalEntity> result = new List<LegalEntity>();
+            List<LegalEntity> result = new List<LegalEntity>();
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
             String filter = null;
 
@@ -488,16 +484,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error while getting account legal entities. ");
+                _logger.LogError(httpOperationException, "Error while getting account legal entities. ");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while getting legal entities.");
+                _logger.LogError(e, "Unexpected Exception while getting legal entities.");
             }
 
-
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             if (legalEntities != null)
             {
@@ -522,17 +517,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("applicant")]
         public async Task<IActionResult> GetApplicantDynamicsLegalEntity()
         {
-            ViewModels.LegalEntity result = null;
+            LegalEntity result = null;
 
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
 
             // query the Dynamics system to get the legal entity record.
             MicrosoftDynamicsCRMadoxioLegalentity legalEntity = null;
-            _logger.LogDebug("Find legal entity for applicant = " + userSettings.AccountId.ToString());
+            _logger.LogDebug("Find legal entity for applicant = " + userSettings.AccountId);
 
             legalEntity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
 
@@ -561,27 +555,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDynamicsLegalEntity(string id)
         {
-            ViewModels.LegalEntity result = null;
+            LegalEntity result = null;
             // query the Dynamics system to get the legal entity record.
             if (string.IsNullOrEmpty(id))
             {
                 return new NotFoundResult();
             }
-            else
-            {
-                // get the current user.
-                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-                Guid adoxio_legalentityid = new Guid(id);
-                MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
-                //prevent getting legal entity data if the user is not associated with the account
-                if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
-                {
-                    return new NotFoundResult();
-                }
-                result = adoxioLegalEntity.ToViewModel();
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            Guid adoxio_legalentityid = new Guid(id);
+            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+            //prevent getting legal entity data if the user is not associated with the account
+            if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
+            {
+                return new NotFoundResult();
             }
+            result = adoxioLegalEntity.ToViewModel();
 
             return new JsonResult(result);
         }
@@ -591,16 +582,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        [HttpPost()]
-        public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] ViewModels.LegalEntity item)
+        [HttpPost]
+        public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] LegalEntity item)
         {
 
             // create a new legal entity.
             MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
 
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
             // copy received values to Dynamics LegalEntity
@@ -611,12 +601,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error while creating legal entity ");
+                _logger.LogError(httpOperationException, "Error while creating legal entity ");
                 throw new Exception("Unable to create legal entity");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while getting legal entities.");
+                _logger.LogError(e, "Unexpected Exception while getting legal entities.");
                 throw new Exception("Unable to create legal entity");
             }
 
@@ -637,7 +627,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while patching legal entity");
+                _logger.LogError(e, "Unexpected Exception while patching legal entity");
             }
 
             // TODO take the default for now from the parent account's legal entity record
@@ -662,7 +652,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e, $"Unexpected Exception while adding LegalEntityOwned reference to legal entity");
+                    _logger.LogError(e, "Unexpected Exception while adding LegalEntityOwned reference to legal entity");
                 }
             }
 
@@ -712,7 +702,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, $"Unexpected Exception while deleteing LicenseeChangeLog");
+                        _logger.LogError(e, "Unexpected Exception while deleteing LicenseeChangeLog");
                     }
                 }
             }
@@ -782,7 +772,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, $"Unexpected Exception while adding LegalEntityOwned reference to legal entity");
+                        _logger.LogError(e, "Unexpected Exception while adding LegalEntityOwned reference to legal entity");
                     }
                 }
                 else if (!string.IsNullOrEmpty(node.Id) && string.IsNullOrEmpty(node.LegalEntityId) && (
@@ -800,7 +790,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, $"Unexpected Exception while deleting LicenseeChangeLog");
+                        _logger.LogError(e, "Unexpected Exception while deleting LicenseeChangeLog");
                     }
                 }
                 else // update
@@ -831,7 +821,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, $"Unexpected Exception while saving LicenseeChangeLog");
+                        _logger.LogError(e, "Unexpected Exception while saving LicenseeChangeLog");
                     }
                 }
             }
@@ -911,7 +901,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, $"Unexpected Exception while adding LegalEntityOwned reference to legal entity");
+                        _logger.LogError(e, "Unexpected Exception while adding LegalEntityOwned reference to legal entity");
                     }
                 }
                 else // update
@@ -941,7 +931,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, $"Unexpected Exception while saving LicenseeChangeLog for Account");
+                        _logger.LogError(e, "Unexpected Exception while saving LicenseeChangeLog for Account");
                     }
                 }
             }
@@ -964,9 +954,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        [HttpPost()]
+        [HttpPost]
         [Route("child-legal-entity")]
-        public IActionResult CreateDynamicsShareholderLegalEntity([FromBody] ViewModels.LegalEntity item)
+        public IActionResult CreateDynamicsShareholderLegalEntity([FromBody] LegalEntity item)
         {
             if (item == null)
             {
@@ -990,7 +980,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 if (item.legalentitytype != null)
                 {
-                    account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), item.legalentitytype);
+                    account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(AdoxioApplicantTypeCodes), item.legalentitytype);
                 }
                 try
                 {
@@ -1002,11 +992,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e, $"Unexpected Exception while creating tied house connection");
+                    _logger.LogError(e, "Unexpected Exception while creating tied house connection");
                 }
 
                 //create tied house under account
-                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection()
+                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection
                 {
                     AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid)
                 };
@@ -1018,11 +1008,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(httpOperationException, $"Error creating tied house connection");
+                    _logger.LogError(httpOperationException, "Error creating tied house connection");
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e, $"Unexpected Exception while creating tied house connection");
+                    _logger.LogError(e, "Unexpected Exception while creating tied house connection");
                 }
             }
             adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", item.account.id);
@@ -1038,7 +1028,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while creating legal entity");
+                _logger.LogError(e, "Unexpected Exception while creating legal entity");
             }
 
             return new JsonResult(adoxioLegalEntity.ToViewModel());
@@ -1051,7 +1041,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDynamicsLegalEntity([FromBody] ViewModels.LegalEntity item, string id)
+        public async Task<IActionResult> UpdateDynamicsLegalEntity([FromBody] LegalEntity item, string id)
         {
             if (id != item.id)
             {
@@ -1082,7 +1072,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while updating legal entity");
+                _logger.LogError(e, "Unexpected Exception while updating legal entity");
             }
 
 
@@ -1117,7 +1107,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while deleting legal entity");
+                _logger.LogError(e, "Unexpected Exception while deleting legal entity");
             }
 
 
@@ -1138,7 +1128,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // create a newsletter confirmation object.
 
-            ViewModels.SecurityConsentConfirmation securityConsentConfirmation = new ViewModels.SecurityConsentConfirmation()
+            SecurityConsentConfirmation securityConsentConfirmation = new SecurityConsentConfirmation
             {
                 email = email,
                 parentid = parentId,
@@ -1165,7 +1155,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (decrypted != null)
             {
                 // convert the json back to an object.
-                ViewModels.SecurityConsentConfirmation consentConfirmation = JsonConvert.DeserializeObject<ViewModels.SecurityConsentConfirmation>(decrypted);
+                SecurityConsentConfirmation consentConfirmation = JsonConvert.DeserializeObject<SecurityConsentConfirmation>(decrypted);
                 // check that the keys match.
                 if (id.Equals(consentConfirmation.parentid) && individualid.Equals(consentConfirmation.individualid))
                 {
@@ -1188,8 +1178,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // start by getting the record for the current legal entity.
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // check that the session is setup correctly.
             userSettings.Validate();
 
@@ -1272,11 +1261,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(httpOperationException, $"Error updating date email sent. ");
+                    _logger.LogError(httpOperationException, "Error updating date email sent. ");
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e, $"Unexpected Exception while updating date email sent.");
+                    _logger.LogError(e, "Unexpected Exception while updating date email sent.");
                 }
             }
 

@@ -1,13 +1,12 @@
-# PDF Service #
-------------
+# PDF Service
 
 The purpose of the PDF microservice is to generate PDF documents based on templates and JSON format data.  No database connection is used to generate the PDF.
 
-## Development ##
+## Development
 
 This service is a Dotnet Core 3.1 application written using the Web SDK.  As such you can use an IDE such as Visual Studio or VS Code to edit the files.  
 
-## Testing ##
+## Testing
 
 This section describes concepts and tools necessary for testing the service.
 
@@ -17,7 +16,7 @@ Curl is a command line tool for sending HTTP requests.
 
 The website for Curl is https://curl.haxx.se
 
-###Authorization
+### Authorization
 
 To obtain an Authorization token, access the following URL:
 
@@ -28,7 +27,6 @@ Note that if your route is using a self signed certificate, you will need to use
 Substitute <SECRET> with the value for the JWT Token Key for the environment.  The token endpoint will only provide a token if the secret provided matches that in the application configuration.
 
 The lengthy string of characters at the start of the response is the token, followed by an expires declaration.  Copy the first string and use that as your token.
-
 
 ### JWT Authentication
 
@@ -54,8 +52,8 @@ To have multiple templates do the following:
 
 ### In the pdf-service project
 
-1. Add your template to the Templates directory.
-2. Add your template to the item group in pdf-service.csproj
+1. Add your template to the **Templates** directory.
+2. Add your template to the item group in **pdf-service.csproj**
 
 ```
 <None Update="Templates\{your-template-name}.mustache">
@@ -65,7 +63,7 @@ To have multiple templates do the following:
 
 ### In your service that is connecting to pdf-service
 
-3. Query the service by using the following code where the second parameter is the name of the template without .mustache. The example below assumes the template is called cannabis_licence.mustache:
+3. Query the service by using the following code where the second parameter is the name of the template without .mustache. The example below assumes the template is called `cannabis_licence.mustache`:
 
 ```
 byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
@@ -81,14 +79,14 @@ byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
 }
 ```
 
-The above secrets are intended for local development only.  
+The above secrets are intended for **local development** only.  
 
-- The setting WKHTMLTOPDF_LOCATION must point to the location where you installed the files for WKHTML
-- The WKHTMLTOPDF library that the code uses expects the binary for wkhtmltopdf.exe to be in a subdirectory with the name of the operating system.  For example:
+- The setting **WKHTMLTOPDF_LOCATION** must point to the location where you installed the files for WKHTML
+- The WKHTMLTOPDF library that the code uses expects the binary for `wkhtmltopdf.exe` to be in a subdirectory with the name of the operating system.  For example:
   - Windows for Windows
   - Mac for Apple Mac
   - Linux for Linux.
   - Case is important for all of these.
 
-For Development purposes there is no authentication; this is controlled by not setting the environment value "JWT_TOKEN_KEY"
+For Development purposes there is no authentication; this is controlled by not setting the environment value **JWT_TOKEN_KEY**
 

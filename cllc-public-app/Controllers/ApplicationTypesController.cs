@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// GET all licence types in Dynamics
-        [HttpGet()]
+        [HttpGet]
         public async Task<JsonResult> GetApplicationTypes()
         {
             List<ApplicationType> applicationTypeVMList = new List<ApplicationType>();
@@ -47,10 +47,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
-            else
-            {
-                return new JsonResult(applicationType.ToViewModel());
-            }
+
+            return new JsonResult(applicationType.ToViewModel());
 
         }
 
@@ -64,10 +62,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
-            else
-            {
-                return new JsonResult(applicationType.ToViewModel());
-            }
+
+            return new JsonResult(applicationType.ToViewModel());
 
         }
 

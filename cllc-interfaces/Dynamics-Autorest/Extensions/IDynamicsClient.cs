@@ -8,12 +8,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     /// <summary>
     /// Auto Generated
     /// </summary>
-    public partial interface IDynamicsClient : System.IDisposable
+    public partial interface IDynamicsClient : IDisposable
     {
         /// <summary>
         /// The base URI of the service.
         /// </summary>
-        System.Uri NativeBaseUri { get; set; }
+        Uri NativeBaseUri { get; set; }
 
         string GetEntityURI(string entityType, string id);
 
@@ -46,6 +46,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerByIdWithChildren(string id);
 
+        public MicrosoftDynamicsCRMadoxioLicences GetLicenceById(Guid id);
+        public MicrosoftDynamicsCRMadoxioLicences GetLicenceById(string id);
+
         MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(Guid id);
         MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(string id);
 
@@ -53,6 +56,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         MicrosoftDynamicsCRMadoxioEvent GetEventById(string id);
         MicrosoftDynamicsCRMadoxioEvent GetEventById(Guid id);
         MicrosoftDynamicsCRMadoxioEventscheduleCollection GetEventSchedulesByEventId(string id);
-       
+
+        MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventByLicenceNumber(string licenceNumber);
+
     }
 }

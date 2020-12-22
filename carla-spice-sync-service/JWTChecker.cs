@@ -11,7 +11,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public static class JwtChecker
     {
-        public static bool Check (string token, IConfiguration Configuration)
+        public static bool Check(string token, IConfiguration Configuration)
         {
             bool result = false;
             // first check the bearer.
@@ -34,8 +34,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 result = false;
             }
-            
-
             return result;
         }
     }

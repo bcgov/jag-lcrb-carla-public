@@ -19,10 +19,10 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface IInspection
     {
         /// <summary>
-        /// Get adoxio_Inspection from adoxio_rmreviews
+        /// Get adoxio_Inspection from adoxio_enforcementactions
         /// </summary>
-        /// <param name='adoxioRmreviewid'>
-        /// key: adoxio_rmreviewid of adoxio_rmreview
+        /// <param name='adoxioEnforcementactionid'>
+        /// key: adoxio_enforcementactionid of adoxio_enforcementaction
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,6 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMincident>> GetWithHttpMessagesAsync(string adoxioRmreviewid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMincident>> GetWithHttpMessagesAsync(string adoxioEnforcementactionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

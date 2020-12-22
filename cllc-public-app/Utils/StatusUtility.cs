@@ -17,6 +17,17 @@ namespace Gov.Lclb.Cllb.Public.Utils
             AdoxioApplicationStatusCodes status = (AdoxioApplicationStatusCodes)application.Statuscode;
 
             string shownStatus = Enum.GetName(status.GetType(), status);
+            bool paymentRecieved = (application?.AdoxioPaymentrecieved == true);
+            if (application?.AdoxioApplicationTypeId?.AdoxioName == "Permanent Change to a Licensee")
+            {
+                paymentRecieved = (
+                    (!string.IsNullOrEmpty(application?._adoxioInvoiceValue) ||
+                    !string.IsNullOrEmpty(application?._adoxioSecondaryapplicationinvoiceValue) // there exist an invoice
+                    // and all existing invoices are paid
+                    && (string.IsNullOrEmpty(application?._adoxioInvoiceValue) || (application?.AdoxioPrimaryapplicationinvoicepaid == 1))
+                    && (string.IsNullOrEmpty(application?._adoxioSecondaryapplicationinvoiceValue) || application?.AdoxioSecondaryapplicationinvoicepaid == 1))
+                );
+            }
 
             if (application.AdoxioAssignedLicence != null && shownStatus == "Approved")
             {
@@ -28,9 +39,9 @@ namespace Gov.Lclb.Cllb.Public.Utils
             }
             else
             {
-                if (shownStatus == "Intake" && !(application.AdoxioPaymentrecieved == true))
+                if (shownStatus == "Intake" && !(paymentRecieved))
                 {
-                    if (application.AdoxioApplicationTypeId != null && 
+                    if (application.AdoxioApplicationTypeId != null &&
                     (application.AdoxioApplicationTypeId.AdoxioName == "CRS Transfer of Ownership" ||
                     application.AdoxioApplicationTypeId.AdoxioName == "Liquor Licence Transfer"))
                     {
@@ -50,9 +61,9 @@ namespace Gov.Lclb.Cllb.Public.Utils
                     }
                 }
                 else if (shownStatus == "InProgress" || shownStatus == "Under Review" || shownStatus == "UnderReview"
-                           || shownStatus == "Pending Final Inspection" ||shownStatus == "PendingFinalInspection"
+                           || shownStatus == "Pending Final Inspection" || shownStatus == "PendingFinalInspection"
                            || shownStatus == "Reviewing Inspection Results" || shownStatus == "ReviewingInspectionResults"
-                           || (shownStatus == "Intake" && application.AdoxioPaymentrecieved == true))
+                           || (shownStatus == "Intake" && paymentRecieved))
                 {
                     if (application?.AdoxioApplicationTypeId?.AdoxioName == "CRS Transfer of Ownership" ||
                     application?.AdoxioApplicationTypeId?.AdoxioName == "Liquor Licence Transfer")

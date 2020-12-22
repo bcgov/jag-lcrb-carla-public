@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm the validation messages for the org structure
 
-@e2e @cannabis @partnership @orgstructure
+@cannabis @partnership @orgstructurevalidation
 Scenario: Validation for Partnership Org Structure
     Given I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
@@ -11,7 +11,7 @@ Scenario: Validation for Partnership Org Structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @orgstructure
+@cannabis @privatecorporation @orgstructurevalidation
 Scenario: Validation for Private Corporation Org Structure
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
@@ -20,7 +20,7 @@ Scenario: Validation for Private Corporation Org Structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @orgstructure
+@cannabis @publiccorporation @orgstructurevalidation
 Scenario: Validation for Public Corporation Org Structure
     Given I am logged in to the dashboard as a public corporation
     And I click on the Complete Organization Information button
@@ -29,7 +29,7 @@ Scenario: Validation for Public Corporation Org Structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @orgstructure
+@cannabis @society @orgstructurevalidation
 Scenario: Validation for Society Org Structure
     Given I am logged in to the dashboard as a society
     And I click on the Complete Organization Information button
@@ -38,7 +38,7 @@ Scenario: Validation for Society Org Structure
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @orgstructure
+@cannabis @soleproprietorship @orgstructurevalidation
 Scenario: Validation for Sole Proprietorship Org Structure
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Complete Organization Information button
@@ -48,21 +48,11 @@ Scenario: Validation for Sole Proprietorship Org Structure
     Then I see the login page
 
 # Note: There is no validation configured for this biz type.
-# @e2e @cannabis @indigenousnation @orgstructure
+# @cannabis @indigenousnation @orgstructurevalidation
 # Scenario: Validation for Indigenous Nation Org Structure
 #    Given I am logged in to the dashboard as an indigenous nation
 #    And I click on the Complete Organization Information button
 #    And I click on the button for Submit Organization Information
 #    And the expected validation errors are thrown for an indigenous nation org structure
-#    And the account is deleted
-#    Then I see the login page
-
-# Note: There is no validation configured for this biz type.
-# @e2e @cannabis @localgovernment @orgstructure
-# Scenario: Validation for Local Government Org Structure
-#    Given I am logged in to the dashboard as a local government
-#    And I click on the Complete Organization Information button
-#    And I click on the button for Submit Organization Information
-#    And the expected validation errors are thrown for a local government org structure
 #    And the account is deleted
 #    Then I see the login page

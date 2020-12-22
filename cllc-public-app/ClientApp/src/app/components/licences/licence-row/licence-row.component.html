@@ -57,10 +57,10 @@
                                 </a>
                             </div>
                             <div
-                                *ngIf="!item.isOperated && (item.status === 'Expired' || (isActive(item) && isAboutToExpire(item.expiryDate)))">
+                                *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
                                 <a *ngIf="!item.hasPaidForRenewalApplication && item.autoRenewal" href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
                                     <span><i class="fas fa-exclamation-triangle"
-                                            style="margin-right: 10px;"></i>{{(isAboutToExpire(item.expiryDate) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}
+                                            style="margin-right: 10px;"></i>{{(isAboutToExpire(item) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}
                                         Licence</span>
                                 </a>
                                 <span *ngIf="item.hasPaidForRenewalApplication" color="accent">Renewal Application Submitted</span>
@@ -79,16 +79,18 @@
                                 <p *ngIf="item.operated && !item.isOperated"><i class="fas fa-flag"
                                         style="margin-right: 10px;"></i>Licence Operated</p>
                             </div>
-                            <div
-                                *ngIf="item.licenceTypeCategory === 'Liquor' && isActive(item) && actionsVisible(item) && !item.isOperated">
-                                <br>
-                                <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
-                                    <span *ngIf="!item.representativeFullName">Add Licensee Representative</span>
-                                    <span *ngIf="item.representativeFullName">Licensee Representative:
-                                        <strong>{{item.representativeFullName}}</strong></span>
-                                </a>
+                            <br>
+                            <div *ngIf="item.licenceTypeCategory === 'Liquor' && isActive(item) && actionsVisible(item) && !item.isOperated">
+                              <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
+                                  <span *ngIf="!item.representativeFullName">Add Licensee Representative</span>
+                                  <span *ngIf="item.representativeFullName">Licensee Representative:
+                                      <strong>{{item.representativeFullName}}</strong></span>
+                              </a>
                             </div>
-                        </td>
+                            <div *ngIf="showManageOffsiteStorage(item)">
+                              <a [routerLink]="[ '/licence/' + item.licenseId + '/offsite-storage']">Manage Off-Site Storage</a>
+                            </div>
+                      </td>
 
                         <td style="padding: 10px;">
                             <div *ngIf="item?.licenceTypeName !== 'Marketing'">
@@ -170,7 +172,7 @@
                                     </a>
                                 </div>
                                 <div
-                                    *ngIf="item.licenceTypeName.indexOf('Catering') >= 0 && isActive(item) && (actionsVisible(item) || item.isOperated)">
+                                    *ngIf="((item.licenceTypeName.indexOf('Catering') >= 0 && isActive(item)) || hasEndorsementByName(item, 'Catering Endorsement')) && (actionsVisible(item) || item.isOperated)">
                                     <a [routerLink]="[ '/licence/' + item.licenseId + '/event']">
                                         <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Event
                                         Authorization
@@ -238,11 +240,22 @@
                                         </ng-container>
                                     </p>
                                 </ng-container>
-                                <div *ngIf="isExpired(item) && item.autoRenewal" class="licence-expired" style="text-align: center;">
-                                    <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-                                        <strong>Attention</strong>: This Licence has Expired<br>Please
-                                        {{(isAboutToExpire(item.expiryDate) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}.
-                                    </a>
+                                <div *ngIf="!isCancelled(item)">
+                                    <div *ngIf="isAboutToExpire(item) && item.autoRenewal" class="licence-expired" style="text-align: center;">
+                                        <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
+                                            <strong>Attention</strong>: This Licence will Expire Soon<br>Please
+                                            Renew.</a>
+                                    </div>
+                                    <div *ngIf="isExpired(item) && isRecentlyExpired(item) && item.autoRenewal" class="licence-expired" style="text-align: center;">
+                                        <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
+                                            <strong>Attention</strong>: This Licence has Expired<br>Please Renew.
+                                        </a>
+                                    </div>
+                                    <div *ngIf="isExpired(item) && !isRecentlyExpired(item) && item.autoRenewal" class="licence-expired" style="text-align: center;">
+                                        <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
+                                            <strong>Attention</strong>: This Licence has Expired<br>Please Reinstate.
+                                        </a>
+                                    </div>
                                 </div>
 
                                 <!-- <section

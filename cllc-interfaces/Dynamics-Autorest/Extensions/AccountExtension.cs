@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string accountId, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string accountId, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default)
         {
             if (accountId == null)
             {
@@ -190,7 +190,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string accountId, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string accountId, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
     }
 
     public static partial class AccountExtensions
@@ -210,7 +210,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='odataid'>
         /// reference value
         /// </param>
-        public static void AddReference(this IAccounts operations, string accountId, string fieldname, Odataid odataid = default(Odataid))
+        public static void AddReference(this IAccounts operations, string accountId, string fieldname, Odataid odataid = default)
         {
             operations.AddReferenceAsync(accountId, fieldname, odataid).GetAwaiter().GetResult();
         }
@@ -233,7 +233,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public static async Task AddReferenceAsync(this IAccounts operations, string accountId, string fieldname, Odataid odataid = default(Odataid), CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task AddReferenceAsync(this IAccounts operations, string accountId, string fieldname, Odataid odataid = default, CancellationToken cancellationToken = default)
         {
             (await operations.AddReferenceWithHttpMessagesAsync(accountId, fieldname, odataid, null, cancellationToken).ConfigureAwait(false)).Dispose();
         }

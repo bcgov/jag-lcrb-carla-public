@@ -5,7 +5,9 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { Subscription } from 'rxjs';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ApplicationDataService } from '../../services/application-data.service';
+import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { MatSnackBar } from '@angular/material';
+import { Application } from '@models/application.model';
 
 @Component({
   selector: 'app-payment-confirmation',
@@ -13,8 +15,10 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./payment-confirmation.component.scss']
 })
 /** payment-confirmation component*/
-export class PaymentConfirmationComponent implements OnInit {
+export class PaymentConfirmationComponent extends FormBase implements OnInit {
   busy: Subscription;
+  htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
+  application: Application;
   transactionId: string;
   applicationId: string;
   authCode: string;
@@ -39,6 +43,80 @@ export class PaymentConfirmationComponent implements OnInit {
   loaded = false;
   @Input() inputApplicationId: string;
 
+  public static parseVerifyResponse(res) {
+    const verifyPayResponse = <any>res;
+    let cardType: string = '';
+    switch (verifyPayResponse.cardType) {
+      case 'VI':
+        cardType = 'Visa';
+        break;
+      case 'PV':
+        cardType = 'Visa Debit';
+        break;
+      case 'MC':
+        cardType = 'MasterCard';
+        break;
+      case 'AM':
+        cardType = 'American Express';
+        break;
+      case 'MD':
+        cardType = 'Debit MasterCard';
+        break;
+      default:
+        cardType = verifyPayResponse.cardType;
+    }
+    const authCode = verifyPayResponse.authCode;
+    const avsMessage = verifyPayResponse.avsMessage;
+    const avsAddrMatch = verifyPayResponse.avsAddrMatch;
+    const messageId = verifyPayResponse.messageId;
+    const messageText = verifyPayResponse.messageText;
+    const paymentMethod = verifyPayResponse.paymentMethod;
+    const trnAmount = verifyPayResponse.trnAmount;
+    const trnApproved = verifyPayResponse.trnApproved;
+    const trnDate = verifyPayResponse.trnDate;
+    const trnId = verifyPayResponse.trnId;
+    const trnOrderNumber = verifyPayResponse.trnOrderNumber;
+    const invoice = verifyPayResponse.invoice;
+    let isApproved = false;
+    let paymentTransactionTitle = '';
+    let paymentTransactionMessage = '';
+
+    if (trnApproved === '1') {
+      isApproved = true;
+    } else {
+      isApproved = false;
+      if (messageId === '559') {
+        paymentTransactionTitle = 'Cancelled';
+        paymentTransactionMessage = 'Your payment transaction was cancelled. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+      } else if (messageId === '7') {
+        paymentTransactionTitle = 'Declined';
+        paymentTransactionMessage = 'Your payment transaction was declined. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+      } else {
+        paymentTransactionTitle = 'Declined';
+        paymentTransactionMessage = 'Your payment transaction was declined. Please contact your bank for more information. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+      }
+    }
+
+    return {
+      cardType,
+      authCode,
+      avsMessage,
+      avsAddrMatch,
+      messageId,
+      messageText,
+      paymentMethod,
+      trnAmount,
+      trnApproved,
+      trnDate,
+      trnId,
+      trnOrderNumber,
+      invoice,
+      isApproved,
+      paymentTransactionTitle,
+      paymentTransactionMessage,
+    };
+  }
+
   /** payment-confirmation ctor */
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -46,6 +124,7 @@ export class PaymentConfirmationComponent implements OnInit {
     private applicationDataService: ApplicationDataService,
     public snackBar: MatSnackBar,
   ) {
+    super();
     this.route.queryParams.subscribe(params => {
       this.transactionId = params['trnId'];
       this.applicationId = params['SessionKey'];
@@ -56,20 +135,22 @@ export class PaymentConfirmationComponent implements OnInit {
     if (!this.applicationId) {
       this.applicationId = this.inputApplicationId;
     }
-    
+
+    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
+      (data: Application) => {
+        this.applicationType = data.applicationType.name;
+        this.application = data;
+        this.addDynamicContent();
+      });
+
+
   }
 
   ngAfterViewInit() {
     this.verify_payment();
-    this.getApplicationType();
+    //this.getApplicationType();
   }
 
-  getApplicationType() {
-    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      res => {
-        this.applicationType = res.applicationType.name;
-      });
-  }
 
   /**
    * Payment verification
@@ -132,7 +213,7 @@ export class PaymentConfirmationComponent implements OnInit {
         this.loaded = true;
       },
       err => {
-        if (err === "503") {          
+        if (err === "503" || err === "502" || err === "500") {
           if (this.retryCount < 30) {
             this.snackBar.open('Attempt ' + this.retryCount + ' at payment verification, please wait...', 'Verifying Payment', { duration: 3500, panelClass: ['red - snackbar'] });
             this.verify_payment();
@@ -143,10 +224,11 @@ export class PaymentConfirmationComponent implements OnInit {
           console.log('Unexpected Error occured:');
           console.log(err);
         }
-        
+
       }
     );
   }
+
 
   /**
    * Return to dashboard

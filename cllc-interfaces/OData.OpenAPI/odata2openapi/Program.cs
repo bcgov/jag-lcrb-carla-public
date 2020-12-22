@@ -33,7 +33,7 @@ namespace odata2openapi
         static string GetDynamicsMetadata(IConfiguration Configuration)
         {
             string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
-
+            Console.WriteLine($"Connecting to {dynamicsOdataUri}");
             ServiceClientCredentials serviceClientCredentials = DynamicsSetupUtil.GetServiceClientCredentials(Configuration);
 
             // Create HTTP transport objects
@@ -52,6 +52,7 @@ namespace odata2openapi
             serviceClientCredentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).GetAwaiter().GetResult();
 
             HttpClient httpClient = new HttpClient();
+            httpClient.Timeout = TimeSpan.FromMinutes(10);  // allow extra time for a slow Dynamics server.
 
             _httpResponse = httpClient.SendAsync(_httpRequest, cancellationToken).GetAwaiter().GetResult();
 

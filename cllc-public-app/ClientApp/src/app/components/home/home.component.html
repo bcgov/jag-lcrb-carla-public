@@ -8,10 +8,10 @@
             <h2>
               Apply for a liquor or cannabis licence
 
-              
+
             </h2>
             <p>You must have a Business BCeID to log into the online licensing portal.</p>
-            <p>Through the online licensing portal you can:</p>
+            <p>Through the Liquor and Cannabis Licensing Portal you can</p>
             <ul>
               <li>Apply for new liquor and non-medical cannabis licences;</li>
               <li>Renew existing licences and apply for changes or endorsements to your licence;</li>
@@ -19,8 +19,24 @@
               <li>Manage your account and contact information; and</li>
               <li>Submit permanent licensee changes and personal history summary forms;</li>
           </ul>
-            <p>You can find a complete list of the types of liquor licences that are available through the portal on the <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing" target="_blank">Liquor and Cannabis Regulation Branch’s main website</a>.</p>
-            
+          <div class="warning" style="display: block;">
+          <h3 style="color:#494949;">Learn more about liquor and cannabis regulation including:</h3>
+          <ul>
+            <li>Information about liquor and cannabis licences</li>
+            <li>Liquor and cannabis law and policy</li>
+            <li>Compliance and enforcement procedures</li>
+            <li>Role of local governments and Indigenous Nations</li>
+            <li>Cannabis licensing, location requirements, application processes and worker information</li>
+          </ul>
+
+            <button style="margin-bottom: 10px; color:#494949;" class="btn btn-secondary"
+            (click)="window.location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing'" tabindex="3">
+            <strong>LEARN MORE</strong>
+            <br>
+            </button>
+
+          </div>
+
             <p><strong>Due to the increase in demand related to the COVID-19 pandemic, please expect delays in the standard processing time for all licensing applications.</strong></p>
             <div class="warning">
               <div><i class="fa fa-exclamation-circle"></i></div>
@@ -42,7 +58,7 @@
                 </strong>
               </p>
               <p>
-                <strong>                  
+                <strong>
                   We apologize for any inconvenience.
                 </strong>
                 </p>
@@ -60,6 +76,7 @@
                 <br>
               </button>
             </div>
+
           </div>
         </div>
         <div appRemoveIfFeatureOff="CovidApplication" style="padding-left: 0px;" class="col-md-4 col-sm-12">
@@ -74,43 +91,47 @@
                       </button>
                     </td>
                     <td>
-                      <h2 style="margin: 0px;">Temporary Service Area Expansion Authorization</h2>
-                      <p style="font-size: small;">In response to the public health emergency related to COVID-19, and to help businesses safely reopen while respecting the Provincial Health 
-                        Officer’s order and physical distancing guidelines, the LCRB is accepting applications for food primary, liquor primary, and manufacturer 
+                      <h2 style="margin: 0px;">Temporary Expansion of Service Area authorization</h2>
+                      <p style="font-size: small;">In response to the public health emergency related to COVID-19, and to help businesses
+                        safely operate while respecting the Provincial Health
+                        Officer’s order and physical distancing guidelines, the LCRB is accepting applications for food primary, liquor
+                        primary, and manufacturer
                         licensees to temporarily expand their service areas until October 31, 2021.
                       </p>
-                    </td>
+                      </td>
                   </tr>
                 </table>
               </section>
               <p style="padding-top: 30px;" >
                 <span>
-                  
+
                 </span>
               </p>
               <div style="display: flex; justify-content: flex-end">
-                
+
                   <button onclick="location.href='https://justice.gov.bc.ca/cannabislicensing/covid-temporary-extension';" type="button" class="btn btn-primary" tabindex="3" >Apply Here</button>
-                
+
               </div>
             </section>
+
+
           </div>
-        </div>       
+        </div>
       </div>
     </div>
   </div>
   <div class="home-margins">
     <div class="row">
-      <div class="col-md-8 col-sm-12">
+      <!--div class="col-md-8 col-sm-12">
         <div class="home-body">
           <app-accordion></app-accordion>
         </div>
-      </div>
-      
+      </div-->
+
       <div style="padding-left:0px;" class="col-md-4 col-sm-12">
-        
-        <div class="side-box-wrapper">
-          
+
+        <!--div class="side-box-wrapper">
+
             <section class="side-box">
               <section style="display: flex">
                 <table>
@@ -130,16 +151,16 @@
               </section>
               <p style="padding-top: 30px;">
                 <span>
-                  
+
                 </span>
               </p>
               <div style="display: flex; justify-content: flex-end">
-                
+
                   <button onclick="location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing'" type="button" class="btn btn-primary" tabindex="3" >LCRB Content Portal</button>
-                
+
               </div>
              </section>
-             
+
           <section class="side-box">
             <app-newsletter-signup slug="signupForUpdates"></app-newsletter-signup>
           </section>
@@ -194,7 +215,7 @@
               </button>
             </div>
           </section>
-        </div>
+        </div-->
       </div>
     </div>
   </div>

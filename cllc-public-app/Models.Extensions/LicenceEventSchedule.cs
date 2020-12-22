@@ -11,12 +11,12 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class LicenceEventScheduleExtensions
     {
         // Converts a dynamics entity into a view model
-        public static ViewModels.LicenceEventSchedule ToViewModel(this MicrosoftDynamicsCRMadoxioEventschedule item)
+        public static LicenceEventSchedule ToViewModel(this MicrosoftDynamicsCRMadoxioEventschedule item)
         {
-            ViewModels.LicenceEventSchedule result = null;
+            LicenceEventSchedule result = null;
             if (item != null)
             {
-                result = new ViewModels.LicenceEventSchedule();
+                result = new LicenceEventSchedule();
                 if (item.AdoxioEventscheduleid != null)
                 {
                     result.Id = item.AdoxioEventscheduleid;
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
         // Converts a view model into a dynamics entity
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioEventschedule to, ViewModels.LicenceEventSchedule from)
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioEventschedule to, LicenceEventSchedule from)
         {
             to.AdoxioEventscheduleid = from.Id;
             to.AdoxioEventstartdatetime = from.EventStartDateTime;

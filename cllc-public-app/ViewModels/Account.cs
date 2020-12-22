@@ -69,7 +69,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? TermsOfUseAccepted { get; set; }
         public DateTimeOffset? TermsOfUseAcceptedDate { get; set; }
 
-        public ViewModels.Contact primarycontact { get; set; }
+        public Contact primarycontact { get; set; }
 
         public string businessType { get; set; }
 
@@ -78,7 +78,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool isCorporateDetailsComplete(AdoxioApplicantTypeCodes? legalentitytype, bool corporateDetailsFilesExists)
         {
             var isComplete = false;
-            var tiedHouse = new ViewModels.TiedHouseConnection();
+            var tiedHouse = new TiedHouseConnection();
             switch (legalentitytype)
             {
                 case AdoxioApplicantTypeCodes.PrivateCorporation:

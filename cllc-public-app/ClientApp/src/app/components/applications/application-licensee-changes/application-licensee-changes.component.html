@@ -1,5 +1,6 @@
+<mat-progress-bar class="mt-1" *ngIf="!licenseeApplicationLoaded" mode="indeterminate"></mat-progress-bar>
 <div class="form-wrapper row" style="position:relative;">
-  <div [ngBusy]="[busy, busyPromise]"></div>
+
 
   <div *ngIf="licenseeApplicationLoaded">
     <section class="col-md-8">

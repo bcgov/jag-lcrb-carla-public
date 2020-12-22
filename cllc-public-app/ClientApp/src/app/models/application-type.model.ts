@@ -28,6 +28,7 @@ export class ApplicationType {
   establishmetNameIsReadOnly: boolean;
   formReference: string;
   showDescription1: boolean;
+  hasLESection: boolean;
 
   storeContactInfo: FormControlState;
   establishmentName: FormControlState;
@@ -74,6 +75,8 @@ export enum ApplicationTypeNames {
   CRSStructuralChange = 'CRS Structural Change',
   CRSTransferofOwnership = 'CRS Transfer of Ownership',
   CannabisRetailStore = 'Cannabis Retail Store',
+  FP = 'Food Primary',
+  FPRelo = 'Food Primary Relocation',
   LicenseeChanges = 'Licensee Changes',
   Marketer = 'Marketing',
   MarketingRenewal = 'Marketing Renewal',
@@ -81,6 +84,7 @@ export enum ApplicationTypeNames {
   LiquorRelocation = 'Liquor Licence Relocation',
   LiquorRenewal = 'Liquor Licence Renewal',
   LiquorLicenceTransfer = 'Liquor Licence Transfer',
+  PermanentChangeToALicensee = 'Permanent Change to a Licensee',
   WineStore = 'Wine Store',
   RAS = 'Rural Agency Store',
   MFG = 'Manufacturer',
