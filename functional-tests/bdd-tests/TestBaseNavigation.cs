@@ -52,7 +52,7 @@ namespace bdd_tests
         public void ClickOnSignatureCheckbox()
         {
             NgWebElement uiSignature = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            uiSignature.Click();
+            JavaScriptClick(uiSignature);
         }
 
 
