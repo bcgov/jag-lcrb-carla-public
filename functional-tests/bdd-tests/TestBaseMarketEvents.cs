@@ -545,13 +545,5 @@ namespace bdd_tests
             // confirm that LCSD-4211 error is no longer happening
             Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Please enter the start date'))]")).Displayed);
         }
-
-
-        [And(@"I click on the market event save for later button")]
-        public void MarketEventSaveForLater()
-        {
-            NgWebElement uiSaveForLater = ngDriver.FindElement(By.CssSelector(".btn-primary:nth-child(1)"));
-            uiSaveForLater.Click();
-        }
     }
 }
