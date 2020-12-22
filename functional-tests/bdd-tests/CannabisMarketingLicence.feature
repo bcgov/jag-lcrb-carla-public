@@ -29,7 +29,7 @@ Scenario: Partnership Cannabis Marketing Application
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Marketing application for a partnership
     And I click on the Submit button
-    And I review the security screening requirements for a partnership
+    # And I review the security screening requirements for a partnership
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Marketing Licence
@@ -47,8 +47,8 @@ Scenario: Private Corporation Cannabis Marketing Application
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Marketing application for a private corporation
     And I click on the Submit button
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
+    # And I review the security screening requirements for a private corporation
+    And I click on the button for Pay for Application for Cannabis Marketing
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Marketing Licence
     And I click on the Dashboard tab
@@ -65,7 +65,7 @@ Scenario: Public Corporation Cannabis Marketing Application
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Marketing application for a public corporation
     And I click on the Submit button
-    And I review the security screening requirements for a public corporation
+    # And I review the security screening requirements for a public corporation
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Marketing Licence
@@ -83,7 +83,7 @@ Scenario: Society Cannabis Marketing Application
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Marketing application for a society
     And I click on the Submit button
-    And I review the security screening requirements for a society
+    # And I review the security screening requirements for a society
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Marketing Licence
@@ -101,7 +101,7 @@ Scenario: Sole Proprietorship Cannabis Marketing Application
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Marketing application for a sole proprietorship
     And I click on the Submit button
-    And I review the security screening requirements for a sole proprietorship
+    # And I review the security screening requirements for a sole proprietorship
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Marketing Licence
