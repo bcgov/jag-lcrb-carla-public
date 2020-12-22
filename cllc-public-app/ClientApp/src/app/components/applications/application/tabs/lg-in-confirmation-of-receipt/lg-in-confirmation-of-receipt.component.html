@@ -55,6 +55,15 @@
     </section>
 </div>
 
+<section class="error mt-3" *ngIf="showValidationMessages">
+    <p *ngFor="let message of validationMessages">
+      <span class="app-cancel">
+        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+        {{message}}
+      </span>
+    </p>
+  </section>
+
 <section *ngIf="!disableForm" class="position-relative d-flex justify-content-between p-3">
     <span>
         <button class="btn btn-secondary" [disabled]="optingOutOfComment" (click)="OptOutOfComment()">
