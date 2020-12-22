@@ -309,7 +309,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         this.startMarketingOngoing = false;
-        this.router.navigateByUrl(`/account-profile/${data.id}`);
+        this.router.navigateByUrl(`/multi-step-application/${data.id}`);
       },
       () => {
         this.snackBar.open('Error starting a New Marketer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
