@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CannabisMarketingDownloadLicence
+Feature: CannabisMarketingTransferLicence
     As a logged in business user
-    I want to download a Cannabis Marketing Licence
+    I want to transfer a Cannabis Marketing Licence
 
-@cannabismktglicencedownload @privatecorporation
-Scenario: Private Corporation Cannabis Marketing Licence Download
+@cannabismktglicencetransfer @privatecorporation
+Scenario: Private Corporation Cannabis Marketing Application Transfer
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for a private corporation
@@ -33,17 +33,17 @@ Scenario: Private Corporation Cannabis Marketing Licence Download
     And I click on the Dashboard tab
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Download Licence
-    And the licence is successfully downloaded
+    And I click on the link for Transfer Licence
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CannabisMarketingDownloadLicence.feature")]
+    [FeatureFile("./CannabisMarketingTransferLicence.feature")]
     [Collection("Liquor")]
-    public sealed class CannabisMarketingDownloadLicence : TestBase
+    public sealed class CannabisMarketingTransferLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
