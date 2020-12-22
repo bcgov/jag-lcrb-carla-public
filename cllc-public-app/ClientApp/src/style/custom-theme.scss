@@ -1,0 +1,83 @@
+@import '~@angular/material/theming';
+@import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
+
+$app-primary: (
+    50 : #e7ebf1,
+    100 : #c3cddc,
+    200 : #9cacc5,
+    300 : #748bad,
+    400 : #56729c,
+    500 : #38598a,
+    600 : #325182,
+    700 : #2b4877,
+    800 : #243e6d,
+    900 : #172e5a,
+    A100 : #96b6ff,
+    A200 : #6393ff,
+    A400 : #306fff,
+    A700 : #165dff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$app-accent:  mat-palette($mat-indigo, 700);
+
+$app-warn: (
+    50 : #f5e9e8,
+    100 : #e5c7c6,
+    200 : #d4a2a1,
+    300 : #c37c7b,
+    400 : #b6605e,  
+    500 : #a94442,
+    600 : #a23e3c,
+    700 : #983533,
+    800 : #8f2d2b,
+    900 : #7e1f1d,
+    A100 : #ffbbba,
+    A200 : #ff8887,
+    A400 : #ff5654,
+    A700 : #ff3d3b,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #ffffff,
+    )
+);
+
+
+@include mat-core();
+$primary: mat-palette($app-primary);
+$accent: mat-palette($app-accent);
+$warn: mat-palette($app-warn);
+$theme: mat-light-theme($primary, $accent, $warn);
+@include angular-material-theme($theme);
+$custom-typography: mat-typography-config(
+  $font-family: 'MyriadWebPro, Calibri, Arial, "sans serif"'
+);
+
+@include angular-material-typography($custom-typography);

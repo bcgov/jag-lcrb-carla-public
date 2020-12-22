@@ -18,7 +18,7 @@ Feature: CRSApplicationBrandingChange
     I want to submit a CRS Application for different business types
     And request a valid name or branding change for the approved application
 
-@e2e @cannabis @indigenousnation @crsbranding2
+@cannabis @indigenousnation @crsbranding
 Scenario: Indigenous Nation CRS Name Branding Change
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -30,7 +30,7 @@ Scenario: Indigenous Nation CRS Name Branding Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
@@ -39,7 +39,7 @@ Scenario: Indigenous Nation CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsbranding
+@cannabis @partnership @crsbranding
 Scenario: Partnership CRS Name Branding Change
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -51,7 +51,7 @@ Scenario: Partnership CRS Name Branding Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
@@ -60,7 +60,7 @@ Scenario: Partnership CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsbranding
+@cannabis @privatecorporation @crsbranding
 Scenario: Private Corporation CRS Name Branding Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -72,7 +72,7 @@ Scenario: Private Corporation CRS Name Branding Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
@@ -81,7 +81,7 @@ Scenario: Private Corporation CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsbranding2
+@cannabis @publiccorporation @crsbranding
 Scenario: Public Corporation CRS Name Branding Change
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -93,7 +93,7 @@ Scenario: Public Corporation CRS Name Branding Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
@@ -102,7 +102,7 @@ Scenario: Public Corporation CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsbranding2
+@cannabis @society @crsbranding
 Scenario: Society CRS Name Branding Change
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -114,7 +114,7 @@ Scenario: Society CRS Name Branding Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
@@ -123,7 +123,7 @@ Scenario: Society CRS Name Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsbranding
+@cannabis @soleproprietorship @crsbranding
 Scenario: Sole Proprietorship CRS Name Branding Change
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
@@ -135,7 +135,7 @@ Scenario: Sole Proprietorship CRS Name Branding Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis

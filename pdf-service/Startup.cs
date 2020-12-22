@@ -19,7 +19,6 @@ namespace Pdf
 {
     public class Startup
     {
-
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -71,26 +70,26 @@ namespace Pdf
 
             if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
             {
-               // Configure JWT authentication
-               services.AddAuthentication(o =>
-               {
-                   o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                   o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-               }).AddJwtBearer(o =>
-               {
-                   o.SaveToken = true;
-                   o.RequireHttpsMetadata = false;
-                   o.TokenValidationParameters = new TokenValidationParameters
-                   {
-                    //    RequireExpirationTime = false,
-                       ValidIssuer = Configuration["JWT_VALID_ISSUER"],
-                       ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
-                   };
-               });
+                // Configure JWT authentication
+                services.AddAuthentication(o =>
+                {
+                    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(o =>
+                {
+                    o.SaveToken = true;
+                    o.RequireHttpsMetadata = false;
+                    o.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        //    RequireExpirationTime = false,
+                        ValidIssuer = Configuration["JWT_VALID_ISSUER"],
+                        ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
+                    };
+                });
             }
 
-            // health checks. 
+            // health checks.
             services.AddHealthChecks();
             if (!string.IsNullOrEmpty(Configuration["WKHTMLTOPDF_LOCATION"]))
             {
@@ -101,13 +100,11 @@ namespace Pdf
             {
                 services.AddWkhtmltopdf();
             }
-                
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {            
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -117,7 +114,7 @@ namespace Pdf
             {
                 app.UseAuthentication();
             }
-                
+
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -131,7 +128,6 @@ namespace Pdf
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
         }
-
     }
 }
 

@@ -1,5 +1,6 @@
 <mat-card class="mat-elevation-z0">
-  <div [ngBusy]="busy" class="container" style="margin-left:0px;">
+  <div class="container" style="margin-left:0px;">
+    <!-- <div [ngBusy]="busy" ></div> -->
     <div *ngIf="isApproved">
       <div>
         <span class="print-page" (click)="printPage()">
@@ -44,32 +45,22 @@
       </div>
 
       <hr>
-
+    <div>
       <p>
-        Sole proprietors and associates of the applicant must submit additional documentation as part of the application
-        process. Applications cannot be processed until all required documentation is received. A list of applicable
+        Applications cannot be processed until all required documentation is received. A list of applicable
         associates can be found on the application dashboard.
       </p>
-      <br>
-
-      <span style="font-style: italic;">Applicants must provide associates with:</span>
-      <p></p>
-      <ul>
-        <li>The name of the applicant</li>
-        <li>The application number (available on the dashboard, under “In Progress Applications”)</li>
-        <li>The address of the proposed cannabis retail store (if applicable)</li>
-        <li>A link to the <a
-            href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-            target="blank" rel="noopener noreferrer">Associate Forms page</a>, which contains the instructions and required forms for associates.
-        </li>
-      </ul>
-
       <p>
         The applicant may be notified by the Liquor and Cannabis Regulation Branch if any information is missing, or if
         more information is required. If the applicant wishes to make any changes to the application, please contact the
         LCRB at <a href="mailto:lcrbcannabis@gov.bc.ca">lcrbcannabis@gov.bc.ca</a>.
       </p>
+      <br>
+      <div [innerHTML]="htmlContent.nextSteps"></div>
+      <div *ngIf="!htmlContent?.nextSteps">
 
+
+      </div>
       <br>
       <p>Please save this receipt for your records.</p>
 
@@ -90,5 +81,6 @@
         </a>
       </p>
     </div>
+  </div>
   </div>
 </mat-card>

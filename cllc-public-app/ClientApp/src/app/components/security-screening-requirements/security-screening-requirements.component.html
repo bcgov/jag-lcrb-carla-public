@@ -1,249 +1,281 @@
-<div [ngBusy]="busy"></div>
 <div class="form-wrapper">
     <h1>Security Screening Requirements</h1>
+    <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
 
-    <div class="row" *ngIf="!skipScreeningRequirements; else skipContent">
-        <section class="col-md-12">
-            <mat-tab-group>
-                <mat-tab label="LIQUOR REQUIREMENTS" *ngIf="showLiquorContent()">
-                    <div class="content">
-                        <section *ngIf="!data?.liquor?.outstandingItems?.length && !data?.liquor?.completedItems?.length">
-                            
-                            
-                            <div class=" p-3" style="padding: 20px;">
-                              <h3>Organization Details Incomplete</h3>
-                                <p>
-                                    You have not completed your <strong>Organization Details</strong>, which identifies which associates must complete
-                                    a security screening. You must complete provide this information prior to completing your security screening requirements.
-                                </p>
-                               
-                              <div>
-                                <button routerLink="/org-structure" class="btn btn-primary">COMPLETE ORGANIZATION INFORMATION</button>
-                              </div>
-                              <p>&nbsp;</p>
-                              
-                            </div>
-                        
+    <ng-container *ngIf="dataLoaded">
+        <div class="row" *ngIf="!skipScreeningRequirements; else skipContent">
+            <section class="col-md-12">
+                <mat-tab-group>
+                    <mat-tab label="LIQUOR REQUIREMENTS" *ngIf="showLiquorContent()">
+                        <div class="content">
+                            <section
+                                *ngIf="!data?.liquor?.outstandingItems?.length && !data?.liquor?.completedItems?.length">
+
+
+                                <div class=" p-3" style="padding: 20px;">
+                                    <h3>Organization Details Incomplete</h3>
+                                    <p>
+                                        You have not completed your <strong>Organization Details</strong>, which
+                                        identifies which associates must complete
+                                        a security screening. You must complete provide this information prior to
+                                        completing your security screening requirements.
+                                    </p>
+
+                                    <div>
+                                        <button routerLink="/org-structure" class="btn btn-primary">COMPLETE
+                                            ORGANIZATION INFORMATION</button>
+                                    </div>
+                                    <p>&nbsp;</p>
+
+                                </div>
+
                             </section>
 
-                        <p>
-                            Each liquor licence associate must provide a completed Personal History Summary form along
-                            with
-                            required documents, including a copy of a recent Criminal Record Search performed by a local
-                            RCMP or police detachment.
-                        </p>
-
-                        <ng-container *ngIf="data?.liquor?.outstandingItems?.length">
-                            <h4 class="plain-header">OUTSTANDING PERSONAL HISTORY FORMS</h4>
                             <p>
-                                The following associates have not provided completed personal history summary forms. The
-                                forms can be completed using the provided link, which can be emailed or sent by SMS to
-                                associates
-                                as needed:
+                                Each liquor licence associate must provide a completed Personal History Summary form
+                                along
+                                with
+                                required documents, including a copy of a recent Criminal Record Search performed by a
+                                local
+                                RCMP or police detachment.
                             </p>
-                            <table class="greyGridTable">
-                                <thead>
-                                    <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+
+                            <ng-container *ngIf="data?.liquor?.outstandingItems?.length">
+                                <h4 class="plain-header">OUTSTANDING PERSONAL HISTORY FORMS</h4>
+                                <p>
+                                    The following associates have not provided completed personal history summary forms.
+                                    The
+                                    forms can be completed using the provided link, which can be emailed or sent by SMS
+                                    to
+                                    associates
+                                    as needed:
+                                </p>
+                                <table class="greyGridTable">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tr [ngClass]="{'alt-row': i%2 === 0}"
+                                        *ngFor="let item of data?.liquor?.outstandingItems; let i=index;">
+                                        <td>{{item.firstName}}</td>
+                                        <td>{{item.lastName}} </td>
+                                        <td style="text-align: center;">
+                                            <p class="missing">Not Submitted</p>
+                                        </td>
+                                        <td style="text-align: center;"><a href="javascript: void(0)"
+                                                (click)="copyMessage(item.phsLink)">
+                                                <i class="fas fa-copy"></i>
+                                                Copy Link</a>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tr [ngClass]="{'alt-row': i%2 === 0}"
-                                    *ngFor="let item of data?.liquor?.outstandingItems; let i=index;">
-                                    <td>{{item.firstName}}</td>
-                                    <td>{{item.lastName}} </td>
-                                    <td style="text-align: center;">
-                                        <p class="missing">Not Submitted</p>
-                                    </td>
-                                    <td style="text-align: center;"><a href="javascript: void(0)"
-                                            (click)="copyMessage(item.phsLink)">
-                                            <i class="fas fa-copy"></i>
-                                            Copy Link</a>
-                                    </td>
-                                </tr>
-                            </table>
-                            <div *ngIf="!data?.liquor?.completedItems?.length > 0">
-                                <h3 class="plain-header"><i class="fas fa-exclamation"></i>The above Personal History Summary forms have yet to be completed.</h3>
-                            </div>
-                        </ng-container>
-                        <hr>
+                                </table>
+                                <div *ngIf="!data?.liquor?.completedItems?.length > 0">
+                                    <h3 class="plain-header"><i class="fas fa-exclamation"></i>The above Personal
+                                        History Summary forms have yet to be completed.</h3>
+                                </div>
+                            </ng-container>
+                            <hr>
 
-                        <ng-container *ngIf="data?.liquor?.completedItems?.length">
-                            <h4 class="plain-header">COMPLETED PERSONAL HISTORY FORMS</h4>
-                            <p>
-                                The following associates have completed their personal history summary forms. No further
-                                information is required at this time.
-                            </p>
-                            <!--p>
+                            <ng-container *ngIf="data?.liquor?.completedItems?.length">
+                                <h4 class="plain-header">COMPLETED PERSONAL HISTORY FORMS</h4>
+                                <p>
+                                    The following associates have completed their personal history summary forms. No
+                                    further
+                                    information is required at this time.
+                                </p>
+                                <!--p>
                             Shareholders with less than 10% interest in corporations are not required to submit personal
                             history summary forms.
                         </p-->
 
-                            <table class="greyGridTable">
-                                <thead>
-                                    <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Date Submitted</th>
+                                <table class="greyGridTable">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Date Submitted</th>
+                                        </tr>
+                                    </thead>
+                                    <tr [ngClass]="{'alt-row': i%2 === 0}"
+                                        *ngFor="let item of data?.liquor?.completedItems; let i=index;">
+                                        <td>{{item.firstName}} </td>
+                                        <td>{{item.lastName}} </td>
+                                        <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
                                     </tr>
-                                </thead>
-                                <tr [ngClass]="{'alt-row': i%2 === 0}"
-                                    *ngFor="let item of data?.liquor?.completedItems; let i=index;">
-                                    <td>{{item.firstName}} </td>
-                                    <td>{{item.lastName}} </td>
-                                    <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
-                                </tr>
-                            </table>
-                            <div *ngIf="!data?.liquor?.outstandingItems?.length">
-                                <h3 class="plain-header"><i class="fas fa-check"></i>All Personal History Summary forms have been submitted.</h3>
-                            </div>
-                            
-                        </ng-container>
-                        
+                                </table>
+                                <div *ngIf="!data?.liquor?.outstandingItems?.length">
+                                    <h3 class="plain-header"><i class="fas fa-check"></i>All Personal History Summary
+                                        forms have been submitted.</h3>
+                                </div>
 
-                    </div>
-                </mat-tab>
-                <mat-tab label="CANNABIS REQUIREMENTS" *ngIf="showCannabisContent()">
-                    <div class="content w-100">
-                        <section *ngIf="!data?.cannabis?.outstandingItems?.length && !data?.cannabis?.completedItems?.length">
-                            
-                            
-                            <div class=" p-3" style="padding: 20px;">
-                              <h3>Organization Details Incomplete</h3>
-                                <p>
-                                    You have not completed your <strong>Organization Details</strong>, which identifies which associates must complete
-                                    a security screening. You must complete provide this information prior to completing your security screening requirements.
-                                </p>
-                               
-                              <div>
-                                <button routerLink="/org-structure" class="btn btn-primary">COMPLETE ORGANIZATION INFORMATION</button>
-                              </div>
-                              <p>&nbsp;</p>
-                              
-                            </div>
-                        
+                            </ng-container>
+
+
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="CANNABIS REQUIREMENTS" *ngIf="showCannabisContent()">
+                        <div class="content w-100">
+                            <section
+                                *ngIf="!data?.cannabis?.outstandingItems?.length && !data?.cannabis?.completedItems?.length">
+
+
+                                <div class=" p-3" style="padding: 20px;">
+                                    <h3>Organization Details Incomplete</h3>
+                                    <p>
+                                        You have not completed your <strong>Organization Details</strong>, which
+                                        identifies which associates must complete
+                                        a security screening. You must complete provide this information prior to
+                                        completing your security screening requirements.
+                                    </p>
+
+                                    <div>
+                                        <button routerLink="/org-structure" class="btn btn-primary">COMPLETE
+                                            ORGANIZATION INFORMATION</button>
+                                    </div>
+                                    <p>&nbsp;</p>
+
+                                </div>
+
                             </section>
 
-                        <p>Each Cannabis licence associate must provide a completed Cannabis Associate Security Screening form along with required documents.                            
-                        </p>
+                            <p>Each Cannabis licence associate must provide a completed Cannabis Associate Security
+                                Screening form along with required documents.
+                            </p>
 
-                        <section *ngIf="data?.cannabis?.outstandingItems?.length">
+                            <section *ngIf="data?.cannabis?.outstandingItems?.length">
 
-                        <p>Sole proprietors and associates of applicants for a non-medical cannabis licence are required
-                            to
-                            submit
-                            documentation for security screenings and/or financial integrity checks. Cannabis retail
-                            store
-                            licence
-                            applications cannot be processed until all required materials have been received.</p>
+                                <p>Sole proprietors and associates of applicants for a non-medical cannabis licence are
+                                    required
+                                    to
+                                    submit
+                                    documentation for security screenings and/or financial integrity checks. Cannabis
+                                    retail
+                                    store
+                                    licence
+                                    applications cannot be processed until all required materials have been received.
+                                </p>
 
-                        <p>Please note, the security screening for sole proprietors and associates differs from the
-                            <a href="https://justice.gov.bc.ca/cannabislicensing/policy-document/worker-qualification-training"
-                                target="_blank">security verification</a>
-                            for people seeking work in non-medical cannabis retail stores. The screening for associates
-                            considers the
-                            associate within the context of a larger organizational structure. The security verification
-                            for
-                            workers
-                            considers the worker as an individual apart from an organization. If a sole proprietor or
-                            associate seeks
-                            to work in a non-medical cannabis retail store, they must pass both.</p>
-                        <p>
-                            See the <a
-                                href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-                                target="_blank">Forms for Sole Proprietors and Associates of Cannabis Licence
-                                Applicants</a>
-                            for
-                            the complete details.
-                        </p>
-                        </section>
+                                <p>Please note, the security screening for sole proprietors and associates differs from
+                                    the
+                                    <a href="https://justice.gov.bc.ca/cannabislicensing/policy-document/worker-qualification-training"
+                                        target="_blank">security verification</a>
+                                    for people seeking work in non-medical cannabis retail stores. The screening for
+                                    associates
+                                    considers the
+                                    associate within the context of a larger organizational structure. The security
+                                    verification
+                                    for
+                                    workers
+                                    considers the worker as an individual apart from an organization. If a sole
+                                    proprietor or
+                                    associate seeks
+                                    to work in a non-medical cannabis retail store, they must pass both.</p>
+                                <p>
+                                    See the <a
+                                        href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                                        target="_blank">Forms for Sole Proprietors and Associates of Cannabis Licence
+                                        Applicants</a>
+                                    for
+                                    the complete details.
+                                </p>
+                            </section>
 
-                        <!--h3>Outstanding Cannabis Associate Security Screening forms</h3>
+                            <!--h3>Outstanding Cannabis Associate Security Screening forms</h3>
                     <p>
                         The following associates have not provided completed cannabis associate security screening
                         forms. The forms can be completed using the provided link, which can be emailed or sent by SMS
                         to associates as needed:
                     </p-->
 
-                        <!-- to do, make the cannabis outstanding items look at the right field-->
-                        <ng-container *ngIf="data?.cannabis?.outstandingItems?.length">
-                            <table class="greyGridTable">
-                                <thead>
-                                    <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Status</th>
-                                        <th appRemoveIfFeatureOff="CASS">Action</th>
+                            <!-- to do, make the cannabis outstanding items look at the right field-->
+                            <ng-container *ngIf="data?.cannabis?.outstandingItems?.length">
+                                <table class="greyGridTable">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Status</th>
+                                            <th appRemoveIfFeatureOff="CASS">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tr [ngClass]="{'alt-row': i%2 === 0}"
+                                        *ngFor="let item of data?.cannabis?.outstandingItems; let i=index">
+                                        <td>{{item.firstName}}</td>
+                                        <td>{{item.lastName}} </td>
+                                        <td class="missing" style="text-align: center;">Not Submitted</td>
+                                        <td style="text-align: center;" appRemoveIfFeatureOff="CASS">
+                                            <a href="javascript: void(0)" (click)="copyMessage(item.casLink)"><i
+                                                    class="fas fa-copy"></i>Copy Link</a>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tr [ngClass]="{'alt-row': i%2 === 0}"
-                                    *ngFor="let item of data?.cannabis?.outstandingItems; let i=index">
-                                    <td>{{item.firstName}}</td>
-                                    <td>{{item.lastName}} </td>
-                                    <td class="missing" style="text-align: center;">Not Submitted</td>
-                                    <td style="text-align: center;" appRemoveIfFeatureOff="CASS">
-                                        <a href="javascript: void(0)" (click)="copyMessage(item.casLink)"><i class="fas fa-copy"></i>Copy Link</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </ng-container>
+                                </table>
+                            </ng-container>
 
-                    <div *ngIf="!(!data?.cannabis?.outstandingItems?.length && !data?.cannabis?.completedItems?.length)">
-                    <h4 class="plain-header">Completed Cannabis Associate Security Screening Forms</h4>
-                    <p>
-                        The following associates have completed their cannabis associate security screening forms. No
-                        further information is required at this time.
-                    </p>
+                            <div
+                                *ngIf="!(!data?.cannabis?.outstandingItems?.length && !data?.cannabis?.completedItems?.length)">
+                                <h4 class="plain-header">Completed Cannabis Associate Security Screening Forms</h4>
+                                <p>
+                                    The following associates have completed their cannabis associate security screening
+                                    forms. No
+                                    further information is required at this time.
+                                </p>
 
-                    <table *ngIf="data?.cannabis?.completedItems?.length" class="greyGridTable">
-                        <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Date Submitted</th>
-                        </tr></thead>
-                        <tr [ngClass]="{'alt-row': i%2 === 0}"
-                            *ngFor="let item of data?.cannabis?.completedItems; let i=index;">
-                            <td>{{item.firstName}}</td>
-                            <td>{{item.lastName}} </td>
-                            <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
-                        </tr>
-                    </table>
+                                <table *ngIf="data?.cannabis?.completedItems?.length" class="greyGridTable">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Date Submitted</th>
+                                        </tr>
+                                    </thead>
+                                    <tr [ngClass]="{'alt-row': i%2 === 0}"
+                                        *ngFor="let item of data?.cannabis?.completedItems; let i=index;">
+                                        <td>{{item.firstName}}</td>
+                                        <td>{{item.lastName}} </td>
+                                        <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
+                                    </tr>
+                                </table>
 
-                    <div *ngIf="!data?.cannabis?.outstandingItems?.length">
-                        <h3 class="plain-header"><i class="fas fa-check"></i>All Associate Security Screenings have been submitted.</h3>
-                    </div>
-                    </div>
+                                <div *ngIf="!data?.cannabis?.outstandingItems?.length">
+                                    <h3 class="plain-header"><i class="fas fa-check"></i>All Associate Security
+                                        Screenings have been submitted.</h3>
+                                </div>
+                            </div>
 
-                    </div>
-                </mat-tab>
-            </mat-tab-group>
-        </section>
-    </div>
-    <ng-template #skipContent>
-        <div class="row">
-            <section class="col-md-8">
-                <p>Security screening requirements for this application will be handled in coordination with LCRB.</p>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
             </section>
         </div>
-    </ng-template>
+        <ng-template #skipContent>
+            <div class="row">
+                <section class="col-md-8">
+                    <p>Security screening requirements for this application will be handled in coordination with LCRB.
+                    </p>
+                </section>
+            </div>
+        </ng-template>
 
-    <div class="row">
-        <section class="col-md-8 mt-3">
-            <section class="error" *ngIf="errorMessages?.length">
-                <p *ngFor="let message of errorMessages">
-                    <span class="app-cancel">
-                        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-                        {{message}}
-                    </span>
-                </p>
+        <div class="row">
+            <section class="col-md-8 mt-3">
+                <section class="error" *ngIf="errorMessages?.length">
+                    <p *ngFor="let message of errorMessages">
+                        <span class="app-cancel">
+                            <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+                            {{message}}
+                        </span>
+                    </p>
+                </section>
+                <section *ngIf="applicationId" class="d-flex justify-content-between">
+                    <!--button class="btn btn-primary">Back to Org Structure</button-->
+                    <button class="btn btn-primary" (click)="isValid() && submitApplicationPayment()">Pay for
+                        Application</button>
+                </section>
             </section>
-            <section *ngIf="applicationId" class="d-flex justify-content-between">
-                <!--button class="btn btn-primary">Back to Org Structure</button-->
-                <button class="btn btn-primary" (click)="isValid() && submitApplicationPayment()">Pay for Application</button>
-            </section>
-        </section>
-    </div>
+        </div>
+    </ng-container>
 </div>

@@ -22,6 +22,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         CapacityArea = 845280014,
         Signage = 845280015,
         Grocery = 845280016,
+        CannabisAssociateContent = 845280017,
+        LiquorPHSContent = 845280018,
+        LicencepaymentConfirmation = 845280004
     
     }
     public class ApplicationTypeContent

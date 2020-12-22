@@ -24,6 +24,9 @@ import { ApplicationType, ApplicationTypeNames } from '@models/application-type.
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
 import { UserDataService } from '@services/user-data.service';
+import { de } from 'date-fns/locale';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 const Months = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
@@ -51,11 +54,13 @@ export class AppComponent extends FormBase implements OnInit {
   licenseeChangeFeatureOn: boolean;
   isEligibilityDialogOpen: boolean;
   showNavbar = true;
+  testAPIRestul = '';
 
   constructor(
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private renderer: Renderer2,
+    private httpCLient: HttpClient,
     private router: Router,
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
@@ -118,6 +123,21 @@ export class AppComponent extends FormBase implements OnInit {
       .subscribe((versionInfo: VersionInfo) => {
         this.versionInfo = versionInfo;
       });
+  }
+
+  makeAPICall(url: string) {
+    this.testAPIRestul = '';
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'text/html; charset=UTF-8'
+    });
+    this.httpCLient.get<string>(decodeURI(url), { headers })
+      .subscribe(
+        res => {
+          this.testAPIRestul = res.toString();
+        },
+        err => {
+          console.log(err);
+        });
   }
 
   openVersionInfoDialog() {

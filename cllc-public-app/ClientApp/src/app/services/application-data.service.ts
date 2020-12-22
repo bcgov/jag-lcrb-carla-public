@@ -58,6 +58,15 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getPermanentChangesToLicenseeData(applicationId: string = null): Observable<any> {
+    let url = this.apiPath + 'permanent-change-to-licensee-data';
+    if(applicationId){
+      url  = `${url}?applicationId=${applicationId}`
+    }
+    return this.http.get<any>(url, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   getOngoingLicenseeData(type: 'on-going'| 'create'): Observable<OngoingLicenseeData> {
     return this.http.get<OngoingLicenseeData>(`${this.apiPath}licensee-data/${type}`, { headers: this.headers })
       .pipe(catchError(this.handleError));

@@ -5,9 +5,9 @@ namespace Gov.Lclb.Cllb.Public.Models.Extensions
 {
     public static class CapacityAreaExtensions
     {
-        public static ViewModels.CapacityArea ToViewModel(this MicrosoftDynamicsCRMadoxioServicearea serviceArea)
+        public static CapacityArea ToViewModel(this MicrosoftDynamicsCRMadoxioServicearea serviceArea)
         {
-            return new CapacityArea()
+            return new CapacityArea
             {
                 AreaNumber = (int)serviceArea.AdoxioAreanumber,
                 AreaCategory = serviceArea.AdoxioAreacategory,

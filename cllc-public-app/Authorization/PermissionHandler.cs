@@ -71,25 +71,23 @@ namespace Gov.Lclb.Cllb.Public.Authorization
                     await Task.CompletedTask;
                     return;
                 }
-                else
+
+                temp = _httpContext.Request.Cookies["DEV-BCSC-USER"];
+
+                if (string.IsNullOrEmpty(temp))
                 {
-                    temp = _httpContext.Request.Cookies["DEV-BCSC-USER"];
-
-                    if (string.IsNullOrEmpty(temp))
-                    {
-                        // may be a dev header.
-                        temp = _httpContext.Request.Headers["DEV-BCSC-USER"];
-                    }
+                    // may be a dev header.
+                    temp = _httpContext.Request.Headers["DEV-BCSC-USER"];
+                }
 
 
-                    if (!string.IsNullOrEmpty(temp))
-                    {
-                        // access granted
-                        context.Succeed(requirement);
+                if (!string.IsNullOrEmpty(temp))
+                {
+                    // access granted
+                    context.Succeed(requirement);
 
-                        await Task.CompletedTask;
-                        return;
-                    }
+                    await Task.CompletedTask;
+                    return;
                 }
             }
 

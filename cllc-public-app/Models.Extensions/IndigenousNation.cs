@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             ViewModels.IndigenousNation result = null;
             if (item != null)
             {
-                result = new ViewModels.IndigenousNation()
+                result = new ViewModels.IndigenousNation
                 {
                     Id = item.AdoxioLocalgovindigenousnationid,
                     Name = item.AdoxioName

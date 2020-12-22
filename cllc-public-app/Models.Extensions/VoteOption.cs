@@ -11,7 +11,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// Convert a given VoteOption to a view model.
         /// </summary>
         /// <param name="permission">The permission to add.</param>
-        public static ViewModels.VoteOption ToViewModel(this Models.VoteOption voteOption)
+        public static ViewModels.VoteOption ToViewModel(this VoteOption voteOption)
         {
             var result = new ViewModels.VoteOption();
             result.id = voteOption.Id.ToString();
@@ -26,9 +26,9 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         /// <param name="voteOption"></param>
         /// <returns></returns>
-        public static Models.VoteOption ToModel(this ViewModels.VoteOption voteOption)
+        public static VoteOption ToModel(this ViewModels.VoteOption voteOption)
         {
-            var result = new Models.VoteOption();
+            var result = new VoteOption();
             if (voteOption != null)
             {
                 if (!string.IsNullOrEmpty(voteOption.id))

@@ -52,6 +52,8 @@ import { TerminateTPORelationshipComponent } from '@components/applications/term
 import { LgApprovalsComponent } from '@components/lg-approvals/lg-approvals.component';
 import { LicenceRepresentativeFormComponent } from '@components/licence-representative-form/licence-representative-form.component';
 import { MarketEventComponent } from '@components/market-event/market-event.component';
+import { PermanentChangesToALicenseeComponent } from '@components/applications/permanent-changes-to-a-licensee/permanent-changes-to-a-licensee.component';
+import { OffsiteStorageComponent } from '@components/offsite-storage/offsite-storage.component';
 
 
 const routes: Routes = [
@@ -82,7 +84,7 @@ const routes: Routes = [
     path: 'lg-approvals',
     component: LgApprovalsComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    canDeactivate: [CanDeactivateGuard], 
+    canDeactivate: [CanDeactivateGuard],
     data: { feature: 'LGApprovals' }
   },
   {
@@ -150,6 +152,11 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
+    path: 'licence/:licenceId/offsite-storage',
+    component: OffsiteStorageComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
     path: 'federal-reporting/:licenceId/:monthlyReportId',
     component: FederalReportingComponent,
     canActivate: [BCeidAuthGuard]
@@ -174,6 +181,24 @@ const routes: Routes = [
     path: 'renew-licence/:licenceType/:applicationId',
     component: LicenceRenewalStepsComponent,
     canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'permanent-change-to-a-licensee',
+    component: PermanentChangesToALicenseeComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'PermanentChangesToLicensee' }
+  },
+  {
+    path: 'permanent-change-to-a-licensee/:applicationId/:invoiceType',
+    component: PermanentChangesToALicenseeComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'PermanentChangesToLicensee' }
+  },
+  {
+    path: 'permanent-change-to-a-licensee/:applicationId',
+    component: PermanentChangesToALicenseeComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'PermanentChangesToLicensee' }
   },
   {
     path: 'multi-step-application/:applicationId',

@@ -49,8 +49,8 @@ namespace bdd_tests
         }
 
 
-        [And(@"I pay the licensing fee for (.*)")]
-        public void PayLicenceFee(string feeType)
+        [And(@"I pay the licensing fee")]
+        public void PayLicenceFee()
         {
             /* 
             Page Title: Licences & Authorizations
@@ -61,8 +61,15 @@ namespace bdd_tests
             string returnToDashboard = "Return to Dashboard";
 
             // click on the pay first year licence fee link
-            NgWebElement uiFirstYearLicenceFee = ngDriver.FindElement(By.LinkText(firstYearLicenceFee));
-            uiFirstYearLicenceFee.Click();
+            var uiFirstYearLicenceFees = ngDriver.FindElements(By.LinkText(firstYearLicenceFee));
+            if (uiFirstYearLicenceFees.Count > 0)
+            {
+                uiFirstYearLicenceFees[0].Click();
+            }
+            else 
+            {
+                throw new Exception($"Unable to find Pay First Year Fee link");
+            }
 
             // pay the licence fee
             MakePayment();
@@ -101,6 +108,12 @@ namespace bdd_tests
             }
 
             if (applicationType == "Manufacturer Licence application")
+            {
+                // confirm that payment receipt is for $550.00
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$550.00')]")).Displayed);
+            }
+
+            if (applicationType == "a UBrew / UVin application")
             {
                 // confirm that payment receipt is for $550.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$550.00')]")).Displayed);

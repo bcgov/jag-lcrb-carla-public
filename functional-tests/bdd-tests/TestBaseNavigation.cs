@@ -23,7 +23,7 @@ namespace bdd_tests
         [And(@"I click on the link for (.*)")]
         public void ClickOnLink(string specificLink)
         {
-            
+
             NgWebElement uiRequestedLink = null;
             for (int i = 0; i < 30; i++)
             {
@@ -35,7 +35,8 @@ namespace bdd_tests
                         uiRequestedLink = names[0];
                         break;
                     }
-                    else {
+                    else
+                    {
                         System.Threading.Thread.Sleep(2000);
                     }
                 }
@@ -45,6 +46,14 @@ namespace bdd_tests
                 }
             }
             uiRequestedLink.Click();
+        }
+
+
+        [And(@"I click on the signature checkbox")]
+        public void ClickOnSignatureCheckbox()
+        {
+            NgWebElement uiSignature = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiSignature.Click();
         }
 
 
@@ -77,18 +86,16 @@ namespace bdd_tests
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
-            string licencesLink = "Licences & Authorizations";
-
-            // click on the Licences link
-            ClickOnLink(licencesLink);
+            NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Licences & Authorizations"));
+            uiRequestChange.Click();
         }
 
 
         [And(@"I click on the Dashboard tab")]
         public void ClickDashboardTab()
         {
-            string dashboard = "Dashboard";
-            ClickOnLink(dashboard);
+            NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Dashboard"));
+            uiRequestChange.Click();
         }
 
 
@@ -127,7 +134,7 @@ namespace bdd_tests
             {
                 // click on the Submit Org Info button
                 NgWebElement uiSubmitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
-                uiSubmitOrgInfoButton.Click();
+                JavaScriptClick(uiSubmitOrgInfoButton);
             }
 
             if (specificButton == "Save for Later")
@@ -140,8 +147,8 @@ namespace bdd_tests
             if (specificButton == "Continue to Organization Review")
             {
                 // click on the Continue to Organization Review button
-                NgWebElement uiSaveForLaterButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-                uiSaveForLaterButton.Click();
+                NgWebElement uiContinueToOrganizationReview = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+                uiContinueToOrganizationReview.Click();
             }
         }
 
@@ -150,7 +157,7 @@ namespace bdd_tests
         public void ClickOnSubmitButton()
         {
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
-            uiSubmitButton.Click();
+            JavaScriptClick(uiSubmitButton);
         }
 
 
@@ -159,7 +166,7 @@ namespace bdd_tests
         {
             // click on the Continue to Application button
             NgWebElement uiContinueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            uiContinueButton.Click();
+            JavaScriptClick(uiContinueButton);
         }
 
 
@@ -184,11 +191,11 @@ namespace bdd_tests
         [And(@"I click on the Start Application button for (.*)")]
         public void ClickStartApplication(string applicationType)
         {
-            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
-            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
+
+            System.Threading.Thread.Sleep(5000);
 
             if (applicationType == "Catering")
             {
@@ -214,8 +221,15 @@ namespace bdd_tests
             if (applicationType == "a Manufacturer Licence")
             {
                 // click on the Manufacturer Licence Start Application button
-                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
-                uiStartAppButton.Click();
+                var uiStartAppButton = ngDriver.FindElements(By.CssSelector("button[id='startMfg']"));
+                if (uiStartAppButton.Count > 0)
+                {
+                    uiStartAppButton[0].Click();
+                }
+                else
+                {
+                    throw new Exception($"Unable to find Manufacturer Start Application button");
+                }
             }
 
             if (applicationType == "a Cannabis Marketing Licence")
@@ -225,7 +239,19 @@ namespace bdd_tests
                 uiStartAppButton.Click();
             }
 
-            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
+            if (applicationType == "a UBrew UVin application")
+            {
+                // click on the UBrew UVin application Licence Start Application button
+                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
+                uiStartAppButton.Click();
+            }
+
+            if (applicationType == "Food Primary")
+            {
+                // click on the Food Primary Start Application button
+                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startFP']"));
+                uiStartAppButton.Click();
+            }
         }
 
 
@@ -233,53 +259,52 @@ namespace bdd_tests
         {
             // click on the previous button
             NgWebElement uiOpenCalendarPrevious = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-previous-button"));
-            uiOpenCalendarPrevious.Click();
+            JavaScriptClick(uiOpenCalendarPrevious);
 
             // click on the first day
             NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            uiOpenCalendarYear.Click();
+            JavaScriptClick(uiOpenCalendarYear);
         }
 
+        private string MakeAPICall(string url)
+        {
+            NgWebElement apiInput = ngDriver.FindElement(By.Id("testUrl"));
+            apiInput.SendKeys($"{url}");
+
+            NgWebElement inputButton = ngDriver.FindElement(By.Id("testAPIButton"));
+            inputButton.Click();
+
+            NgWebElement apiResult = ngDriver.FindElement(By.Id("testAPIResult"));
+            var text = apiResult.Text;
+            int maxTries = 15;
+            int tries = 0;
+            do
+            {
+                text = apiResult.Text;
+                System.Threading.Thread.Sleep(2000);
+                tries++;
+            } while (tries < maxTries && string.IsNullOrEmpty(text));
+
+            return text;
+        }
 
         [And(@"the application is approved")]
         public void ApplicationIsApproved()
         {
-            ngDriver.IgnoreSynchronization = true;
-            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
-            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
+            string result = MakeAPICall($"{baseUri}api/applications/{applicationID}/process");
+            Assert.Contains("OK", result);
 
-            // navigate to api/applications/<Application ID>/process
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{applicationID}/process");
-
-            // wait for the automated approval process to run
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
-
-            ngDriver.IgnoreSynchronization = false;
-            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
-            
-            // navigate back to Licenses tab
-            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+            ClickLicencesTab();
         }
 
 
         [And(@"the on-site endorsement application is approved")]
         public void OnSiteEndorsementApplicationIsApproved()
         {
-            ngDriver.IgnoreSynchronization = true;
-            var tempTimeout = ngDriver.WrappedDriver.Manage().Timeouts().PageLoad;
-            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60 * 5);
+            string result = MakeAPICall($"{baseUri}api/applications/{endorsementID}/processEndorsement");
+            Assert.Contains("OK", result);
 
-            // navigate to api/applications/<Application ID>/process
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/applications/{endorsementID}/processEndorsement");
-
-            // wait for the automated approval process to run
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
-
-            ngDriver.IgnoreSynchronization = false;
-            ngDriver.WrappedDriver.Manage().Timeouts().PageLoad = tempTimeout;
-            
-            // navigate back to Licenses tab
-            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+            ClickLicencesTab();
         }
 
 
@@ -292,6 +317,44 @@ namespace bdd_tests
         }
 
 
+        [And(@"autorenewal is set to 'No'")]
+        public void AutoRenewalDenied()
+        {
+            string renewLicence = "Transfer Licence";
+
+            // find the Transfer Licence link
+            NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(renewLicence));
+            string URL = uiLicenceID.GetAttribute("href");
+
+            // retrieve the licence ID
+            string[] parsedURL = URL.Split('/');
+
+            licenceID = parsedURL[5];
+
+            ngDriver.IgnoreSynchronization = true;
+
+            // navigate to api/Licenses/noautorenew/{licenceID}
+            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/noautorenew/{licenceID}");
+
+            if (!ngDriver.WrappedDriver.PageSource.Contains("OK"))
+            {
+                throw new Exception(ngDriver.WrappedDriver.PageSource);
+            }
+
+            ngDriver.IgnoreSynchronization = false;
+
+            // navigate back to Licenses tab
+            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+        }
+
+
+        [And(@"I am unable to renew the licence")]
+        public void RenewalLinkHidden()
+        {
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'Renew Licence'))]")).Displayed);
+        }
+
+
         [And(@"I do not complete the licence renewal application correctly")]
         public void CompleteApplicationRenewalIncorrectly()
         {
@@ -301,9 +364,9 @@ namespace bdd_tests
         }
 
 
-        [And(@"the expiry date is changed to today")]
-        public void ExpiryDateToday()
-        {            
+        [And(@"the expiry date is changed using the Dynamics workflow named (.*)")]
+        public void SetExpiryDate(string workflowGUID)
+        {
             string transferLicence = "Transfer Licence";
 
             // find the Transfer Licence link
@@ -317,16 +380,10 @@ namespace bdd_tests
 
             ngDriver.IgnoreSynchronization = true;
 
-            // navigate to api/Licenses/<Licence ID>/setexpiry
-            ngDriver.Navigate().GoToUrl($"{baseUri}api/Licenses/{licenceID}/setexpiry");
-
-            // wait for the automated expiry process to run
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'OK')]")).Displayed);
-
-            ngDriver.IgnoreSynchronization = false;
-
-            // navigate back to Licenses tab
-            ngDriver.Navigate().GoToUrl($"{baseUri}licences");
+            string result = MakeAPICall($"{baseUri}api/Licenses/{workflowGUID}/setexpiry/{licenceID}");
+            Assert.Contains("OK", result);
+            ClickDashboardTab(); // navigate away the back to cause data reload
+            ClickLicencesTab();
         }
 
 
@@ -344,32 +401,80 @@ namespace bdd_tests
         }
 
 
+        [And(@"the licence is successfully downloaded")]
+        public void SuccessfulLicenceDownload()
+        {
+            /* 
+            Page Title: Licences & Authorizations
+            */
+
+            // TODO
+            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'No File'))]")).Displayed);
+        }
+
+
+        [And(@"the dashboard status is updated as (.*)")]
+        public void DashboardStatus(string status)
+        {
+            if (status == "Application Under Review")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Application Under Review ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Add Supporting Documents')]")).Displayed);
+            }
+
+            if (status == "Pending External Review")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,' Pending External Review ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Complete Application')]")).Displayed);
+            }
+        }
+
+
         public void FileUpload(string fileName, string inputFile)
         {
-            for (int i = 0; i < 10; i++)
+            NgWebElement uiUploadDocument = ngDriver.FindElement(By.XPath(inputFile));
+
+            // find the upload test files in the bdd-tests\upload_files folder
+            var environment = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(environment).Parent.FullName;
+            string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
+
+            // upload the document
+            string documentPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + fileName);
+            uiUploadDocument.SendKeys(documentPath);
+
+            // wait for upload to finish
+            int maxTries = 10;
+            int tries = 0;
+            bool found = false;
+            ngDriver.IgnoreSynchronization = true;
+            var tempTimeout = ngDriver.Manage().Timeouts().ImplicitWait;
+            ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0.25);
+
+            while (!found && tries < maxTries)
             {
+
                 try
                 {
-                    // find the upload test files in the bdd-tests\upload_files folder
-                    var environment = Environment.CurrentDirectory;
-                    string projectDirectory = Directory.GetParent(environment).Parent.FullName;
-                    string projectDirectory2 = Directory.GetParent(projectDirectory).Parent.FullName;
-
-                    // upload the document
-                    string documentPath = Path.Combine(projectDirectory2 + Path.DirectorySeparatorChar + "bdd-tests" + Path.DirectorySeparatorChar + "upload_files" + Path.DirectorySeparatorChar + fileName);
-                    NgWebElement uiUploadDocument = ngDriver.FindElement(By.XPath(inputFile));
-                    uiUploadDocument.SendKeys(documentPath);
-                    break;
+                    // check to see if a file was uploaded
+                    var path = $"{inputFile}/ancestor::app-file-uploader//*[contains(concat(' ', normalize-space(@class), ' '), ' file-list ')]//a";
+                    NgWebElement uploadedFile = ngDriver.FindElement(By.XPath(inputFile));
+                    found = true;
                 }
                 catch (Exception e)
                 {
-                    if (e.ToString().Contains("OpenQA.Selenium.UnhandledAlertException : unexpected alert open: {Alert text : Failed to upload file}"))
-                    {
-                        IAlert alert = ngDriver.SwitchTo().Alert();
-                        alert.Accept();
-                    }
+                    // do nothing
                 }
+                tries++;
             }
+            ngDriver.IgnoreSynchronization = false;
+            ngDriver.Manage().Timeouts().ImplicitWait = tempTimeout;
+        }
+
+        public void JavaScriptClick(NgWebElement element)
+        {
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor.ExecuteScript("arguments[0].click();", element);
         }
     }
 }

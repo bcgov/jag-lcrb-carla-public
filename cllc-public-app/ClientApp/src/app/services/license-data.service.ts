@@ -30,12 +30,12 @@ export class LicenseDataService extends DataService {
 
   initiateTransfer(licenceId: string, accountId: string) {
     const url = `${this.apiPath}initiate-transfer`;
-    return this.http.post<Application>(url, {licenceId, accountId}, { headers: this.headers });
+    return this.http.post<Application>(url, { licenceId, accountId }, { headers: this.headers });
   }
 
   setThirdPartyOperator(licenceId: string, accountId: string) {
     const url = `${this.apiPath}set-third-party-operator`;
-    return this.http.post<Application>(url, {licenceId, accountId}, { headers: this.headers });
+    return this.http.post<Application>(url, { licenceId, accountId }, { headers: this.headers });
   }
 
   // cancel Third Party Operator Application for given licence
@@ -86,5 +86,9 @@ export class LicenseDataService extends DataService {
 
   updateLicenseeRepresentative(licenceId: string, licence: ApplicationLicenseSummary): Observable<ApplicationLicenseSummary> {
     return this.http.put<ApplicationLicenseSummary>(this.apiPath + licenceId + '/representative', licence, { headers: this.headers });
+  }
+
+  updateLicenceOffsiteStorage(licenceId: string, licence: ApplicationLicenseSummary): Observable<ApplicationLicenseSummary> {
+    return this.http.put<ApplicationLicenseSummary>(`${this.apiPath}${licenceId}/offsite-storage`, licence, { headers: this.headers });
   }
 }

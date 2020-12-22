@@ -46,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (string.IsNullOrEmpty(result))
             {
                 string serverRelativeUrl = "";
-string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
+string accountIdCleaned = account.Accountid.ToUpper().Replace("-", "");
                 string folderName = $"_{accountIdCleaned}";
 
                 serverRelativeUrl += "/" + GetServerRelativeURL(AccountDocumentListTitle, folderName);
@@ -220,7 +220,7 @@ string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", ""
                 accountVM = new ViewModels.Account();
                 if (account.Accountid != null)
                 {
-                    accountVM.id = account.Accountid.ToString();
+                    accountVM.id = account.Accountid;
                 }
 
                 accountVM.name = account.Name;
@@ -265,7 +265,7 @@ string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", ""
 
                 if (account.AdoxioBusinesstype != null)
                 {
-                    accountVM.businessType = Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), account.AdoxioBusinesstype).ToString();
+                    accountVM.businessType = Enum.ToObject(typeof(ViewModels.AdoxioApplicantTypeCodes), account.AdoxioBusinesstype).ToString();
                 }
             }
             return accountVM;

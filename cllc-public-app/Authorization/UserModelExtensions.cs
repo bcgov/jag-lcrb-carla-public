@@ -60,6 +60,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     claims.Add(new Claim(User.UseridClaim, user.ContactId.ToString()));
                 }
+
+                if (user.AccountId != null)
+                {
+                    claims.Add(new Claim(User.AccountidClaim, user.AccountId.ToString()));
+                }
+
                 if (!string.IsNullOrEmpty(user.UserType))
                 {
                     claims.Add(new Claim(User.UserTypeClaim, user.UserType));

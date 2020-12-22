@@ -157,6 +157,75 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
+            /// Get adoxio_SpecialEventId from adoxio_specialeventnotes
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioSpecialeventnoteid'>
+            /// key: adoxio_specialeventnoteid of adoxio_specialeventnote
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            public static MicrosoftDynamicsCRMadoxioSpecialevent Get2(this ISpecialeventid operations, string adoxioSpecialeventnoteid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            {
+                return operations.Get2Async(adoxioSpecialeventnoteid, select, expand).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get adoxio_SpecialEventId from adoxio_specialeventnotes
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioSpecialeventnoteid'>
+            /// key: adoxio_specialeventnoteid of adoxio_specialeventnote
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MicrosoftDynamicsCRMadoxioSpecialevent> Get2Async(this ISpecialeventid operations, string adoxioSpecialeventnoteid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.Get2WithHttpMessagesAsync(adoxioSpecialeventnoteid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get adoxio_SpecialEventId from adoxio_specialeventnotes
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioSpecialeventnoteid'>
+            /// key: adoxio_specialeventnoteid of adoxio_specialeventnote
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpecialevent> Get2WithHttpMessages(this ISpecialeventid operations, string adoxioSpecialeventnoteid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.Get2WithHttpMessagesAsync(adoxioSpecialeventnoteid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
             /// Get adoxio_SpecialEventId from adoxio_specialeventschedules
             /// </summary>
             /// <param name='operations'>
@@ -171,9 +240,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioSpecialevent Get2(this ISpecialeventid operations, string adoxioSpecialeventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioSpecialevent Get3(this ISpecialeventid operations, string adoxioSpecialeventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.Get2Async(adoxioSpecialeventscheduleid, select, expand).GetAwaiter().GetResult();
+                return operations.Get3Async(adoxioSpecialeventscheduleid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -194,9 +263,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioSpecialevent> Get2Async(this ISpecialeventid operations, string adoxioSpecialeventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioSpecialevent> Get3Async(this ISpecialeventid operations, string adoxioSpecialeventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.Get2WithHttpMessagesAsync(adoxioSpecialeventscheduleid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.Get3WithHttpMessagesAsync(adoxioSpecialeventscheduleid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -220,9 +289,78 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpecialevent> Get2WithHttpMessages(this ISpecialeventid operations, string adoxioSpecialeventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpecialevent> Get3WithHttpMessages(this ISpecialeventid operations, string adoxioSpecialeventscheduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.Get2WithHttpMessagesAsync(adoxioSpecialeventscheduleid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.Get3WithHttpMessagesAsync(adoxioSpecialeventscheduleid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get adoxio_SpecialEventId from adoxio_specialeventtandcs
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioSpecialeventtandcid'>
+            /// key: adoxio_specialeventtandcid of adoxio_specialeventtandc
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            public static MicrosoftDynamicsCRMadoxioSpecialevent Get4(this ISpecialeventid operations, string adoxioSpecialeventtandcid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            {
+                return operations.Get4Async(adoxioSpecialeventtandcid, select, expand).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get adoxio_SpecialEventId from adoxio_specialeventtandcs
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioSpecialeventtandcid'>
+            /// key: adoxio_specialeventtandcid of adoxio_specialeventtandc
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MicrosoftDynamicsCRMadoxioSpecialevent> Get4Async(this ISpecialeventid operations, string adoxioSpecialeventtandcid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.Get4WithHttpMessagesAsync(adoxioSpecialeventtandcid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get adoxio_SpecialEventId from adoxio_specialeventtandcs
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioSpecialeventtandcid'>
+            /// key: adoxio_specialeventtandcid of adoxio_specialeventtandc
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpecialevent> Get4WithHttpMessages(this ISpecialeventid operations, string adoxioSpecialeventtandcid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.Get4WithHttpMessagesAsync(adoxioSpecialeventtandcid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

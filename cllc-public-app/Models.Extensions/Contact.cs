@@ -13,12 +13,12 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>        
-        public static ViewModels.Contact ToViewModel(this MicrosoftDynamicsCRMcontact contact)
+        public static Contact ToViewModel(this MicrosoftDynamicsCRMcontact contact)
         {
-            ViewModels.Contact result = null;
+            Contact result = null;
             if (contact != null)
             {
-                result = new ViewModels.Contact();
+                result = new Contact();
                 if (contact.Contactid != null)
                 {
                     result.id = contact.Contactid;
@@ -49,7 +49,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.telephone1 = contact.Telephone1;
                 result.Birthdate = contact.Birthdate;
                 result.BirthPlace = contact.AdoxioBirthplace;
-                result.Gender = (ViewModels.Gender?)contact.AdoxioGendercode;
+                result.Gender = (Gender?)contact.AdoxioGendercode;
                 result.MobilePhone = contact.Mobilephone;
                 result.PrimaryIdNumber = contact.AdoxioPrimaryidnumber;
                 result.SecondaryIdNumber = contact.AdoxioSecondaryidnumber;
@@ -173,7 +173,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }
 
-        public static void CopyHeaderValues(this ViewModels.Worker to, IHeaderDictionary headers)
+        public static void CopyHeaderValues(this Worker to, IHeaderDictionary headers)
         {
             string smgov_useremail = headers["smgov_useremail"];
             // the following fields appear to just have a guid in them, not a driver's licence.
@@ -219,7 +219,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
 
-        public static void CopyHeaderValues(this ViewModels.Contact to, IHeaderDictionary headers)
+        public static void CopyHeaderValues(this Contact to, IHeaderDictionary headers)
         {
             string smgov_useremail = headers["smgov_useremail"];
             string smgov_birthdate = headers["smgov_birthdate"];
@@ -270,14 +270,14 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
 
-        public static void CopyValues(this MicrosoftDynamicsCRMcontact to, ViewModels.Contact from)
+        public static void CopyValues(this MicrosoftDynamicsCRMcontact to, Contact from)
         {
             to.Emailaddress1 = from.emailaddress1;
             to.Telephone1 = from.telephone1;
             to.CopyValuesNoEmailPhone(from);
         }
 
-        public static void CopyContactUserSettings(this MicrosoftDynamicsCRMcontact contact, ViewModels.Contact NewContact)
+        public static void CopyContactUserSettings(this MicrosoftDynamicsCRMcontact contact, Contact NewContact)
         {
             contact.Address1Line1 = NewContact.address1_line1;
             if (!string.IsNullOrEmpty(NewContact.address1_postalcode))
@@ -297,7 +297,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             contact.Birthdate = NewContact.Birthdate;
         }
 
-        public static void CopyValuesNoEmailPhone(this MicrosoftDynamicsCRMcontact to, ViewModels.Contact from)
+        public static void CopyValuesNoEmailPhone(this MicrosoftDynamicsCRMcontact to, Contact from)
         {
             to.Fullname = from.name;
             to.Firstname = from.firstname;
@@ -356,7 +356,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioPhsprofitagreementdetails = from.phsProfitAgreementDetails;
         }
 
-        public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)
+        public static MicrosoftDynamicsCRMcontact ToModel(this Contact contact)
         {
             MicrosoftDynamicsCRMcontact result = null;
             if (contact != null)

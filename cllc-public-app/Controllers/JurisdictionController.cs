@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _db = db;
         }
 
-        [HttpGet()]
+        [HttpGet]
         [AllowAnonymous]
         public JsonResult GetJurisdictions()
         {

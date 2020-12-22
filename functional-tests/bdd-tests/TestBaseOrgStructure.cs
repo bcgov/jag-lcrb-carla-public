@@ -53,8 +53,16 @@ namespace bdd_tests
                 string leaderEmail = "leader0@privatecorp.com";
 
                 // open leader #0 form  
-                NgWebElement uiOpenLeaderForm = ngDriver.FindElement(By.CssSelector("[addlabel='Add Leadership'][changetypesuffix='Leadership'] button"));
-                uiOpenLeaderForm.Click();
+                var uiOpenLeaderForm = ngDriver.FindElements(By.CssSelector(".btn.btn-secondary.AddLeadership"));
+
+                if (uiOpenLeaderForm.Count > 0)
+                {
+                    uiOpenLeaderForm[0].Click();
+                }
+                else
+                {
+                    throw new Exception($"Unable to Leadership button");
+                }
 
                 // enter leader #0 first name
                 NgWebElement uiLeaderFirst = ngDriver.FindElement(By.CssSelector("input[formControlName='firstNameNew']"));
@@ -302,6 +310,10 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // select the Confirm button
+                NgWebElement uiConfirmLeader = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmLeader.Click();
+
                 /********** Sole Proprietor > Leader #2 **********/
 
                 // open the leader #2 row
@@ -332,22 +344,26 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // select the Confirm button
+                NgWebElement uiConfirmLeader2 = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmLeader2.Click();
+
                 /********** Sole Proprietor > Leader #3 **********/
 
                 // open the leader #3 row
                 NgWebElement uiOpenLeaderForm3 = ngDriver.FindElement(By.CssSelector("button.btn.btn-secondary"));
-                uiOpenLeaderForm3.Click();
+                JavaScriptClick(uiOpenLeaderForm3);
 
-                // create the leader #2 info
+                // create the leader #3 info
                 string firstName3 = "Leader3First";
                 string lastName3 = "Leader3Last";
                 string email3 = "leader3@soleproprietor.com";
 
-                // enter the leader #2 first name
+                // enter the leader #3 first name
                 NgWebElement uiFirstName3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(1) input[formControlName='firstNameNew']"));
                 uiFirstName3.SendKeys(firstName3);
 
-                // enter the leader #2 last name
+                // enter the leader #3 last name
                 NgWebElement uiLastName3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(2) input[formControlName='lastNameNew']"));
                 uiLastName3.SendKeys(lastName3);
 
@@ -357,10 +373,14 @@ namespace bdd_tests
 
                 // select the leader #3 DOB
                 NgWebElement uiOpenLeaderDOB3 = ngDriver.FindElement(By.CssSelector("app-associate-list tr:nth-child(4) td:nth-child(4) input[formControlName='dateofBirthNew']"));
-                uiOpenLeaderDOB3.Click();
+                JavaScriptClick(uiOpenLeaderDOB3);
 
                 // select the date
                 SharedCalendarDate();
+
+                // select the Confirm button
+                NgWebElement uiConfirmLeader3 = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmLeader3.Click();
             }
 
             if (businessType == " society")
@@ -422,6 +442,10 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // select the Confirm button
+                NgWebElement uiConfirmDirector = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmDirector.Click();
+
                 /********** Director #2 **********/
 
                 // open the director #2 row 
@@ -461,6 +485,10 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // select the Confirm button
+                NgWebElement uiConfirmDirector2 = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmDirector2.Click();
+
                 /********** Director #3 **********/
 
                 // open the director #3 row 
@@ -499,6 +527,10 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+                // select the Confirm button
+                NgWebElement uiConfirmDirector3 = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmDirector3.Click();
             }
 
             if (businessType == " public corporation")
@@ -551,6 +583,10 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // select the Confirm button
+                NgWebElement uiConfirmLeader = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmLeader.Click();
+
                 /********** Leader #2 **********/
 
                 // create the leader #2 data
@@ -590,6 +626,10 @@ namespace bdd_tests
                 // select the date
                 SharedCalendarDate();
 
+                // select the Confirm button
+                NgWebElement uiConfirmLeader2 = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmLeader2.Click();
+
                 /********** Leader #3 **********/
 
                 // create the leader #3 data
@@ -628,6 +668,10 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+                // select the Confirm button
+                NgWebElement uiConfirmLeader3 = ngDriver.FindElement(By.CssSelector(".save span"));
+                uiConfirmLeader3.Click();
             }
 
             if (businessType == " partnership")
@@ -673,6 +717,10 @@ namespace bdd_tests
 
                 // select the date
                 SharedCalendarDate();
+
+                // select the Confirm button
+                NgWebElement uiConfirmPartner = ngDriver.FindElement(By.CssSelector(".fa-save span"));
+                uiConfirmPartner.Click();
 
                 // open business partner row
                 NgWebElement uiOpenPartnerRow = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] button"));

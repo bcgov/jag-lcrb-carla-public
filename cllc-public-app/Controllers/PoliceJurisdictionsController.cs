@@ -53,7 +53,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var localGovernments = _dynamicsClient.Policejurisdictions.Get(filter: filter).Value;
                 foreach (var lg in localGovernments)
                 {
-                    var listItem = new AutoCompleteListItem()
+                    var listItem = new AutoCompleteListItem
                     {
                         Id = lg.AdoxioPolicejurisdictionid,
                         Name = lg.AdoxioName

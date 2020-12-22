@@ -20,10 +20,10 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
         /// <summary>
         /// Get regardingobjectid_adoxio_establishmentincident from
-        /// asyncoperations
+        /// sharepointdocumentlocations
         /// </summary>
-        /// <param name='asyncoperationid'>
-        /// key: asyncoperationid of asyncoperation
+        /// <param name='sharepointdocumentlocationid'>
+        /// key: sharepointdocumentlocationid of sharepointdocumentlocation
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -46,121 +46,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentincident>> GetWithHttpMessagesAsync(string asyncoperationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get regardingobjectid_adoxio_establishmentincident from
-        /// bulkdeletefailures
-        /// </summary>
-        /// <param name='bulkdeletefailureid'>
-        /// key: bulkdeletefailureid of bulkdeletefailure
-        /// </param>
-        /// <param name='select'>
-        /// Select properties to be returned
-        /// </param>
-        /// <param name='expand'>
-        /// Expand related entities
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentincident>> Get1WithHttpMessagesAsync(string bulkdeletefailureid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get regardingobjectid_adoxio_establishmentincident from
-        /// mailboxtrackingfolders
-        /// </summary>
-        /// <param name='mailboxtrackingfolderid'>
-        /// key: mailboxtrackingfolderid of mailboxtrackingfolder
-        /// </param>
-        /// <param name='select'>
-        /// Select properties to be returned
-        /// </param>
-        /// <param name='expand'>
-        /// Expand related entities
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentincident>> Get2WithHttpMessagesAsync(string mailboxtrackingfolderid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get regardingobjectid_adoxio_establishmentincident from
-        /// processsessions
-        /// </summary>
-        /// <param name='processsessionid'>
-        /// key: processsessionid of processsession
-        /// </param>
-        /// <param name='select'>
-        /// Select properties to be returned
-        /// </param>
-        /// <param name='expand'>
-        /// Expand related entities
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentincident>> Get3WithHttpMessagesAsync(string processsessionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get regardingobjectid_adoxio_establishmentincident from syncerrors
-        /// </summary>
-        /// <param name='syncerrorid'>
-        /// key: syncerrorid of syncerror
-        /// </param>
-        /// <param name='select'>
-        /// Select properties to be returned
-        /// </param>
-        /// <param name='expand'>
-        /// Expand related entities
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentincident>> Get4WithHttpMessagesAsync(string syncerrorid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentincident>> GetWithHttpMessagesAsync(string sharepointdocumentlocationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

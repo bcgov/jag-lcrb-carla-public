@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using Gov.Lclb.Cllb.Public.Models;
+using System;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -36,8 +38,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ViewModels.User user = new ViewModels.User();
 
             // determine if we are a new registrant.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             user.id = userSettings.UserId;
             user.contactid = userSettings.ContactId;
             user.accountid = userSettings.AccountId;
@@ -45,14 +47,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             user.name = userSettings.UserDisplayName;
             user.UserType = userSettings.UserType;
 
+            // if Authenticated User is null, try and fetch it.
+
+            if (userSettings.AuthenticatedUser == null)
+            {
+                try
+                {
+                    userSettings.AuthenticatedUser = _dynamicsClient.GetActiveUserBySmGuid(userSettings.SiteMinderGuid);
+                    if (userSettings.AuthenticatedUser == null)
+                    {
+                        userSettings.IsNewUserRegistration = true;
+                    }
+                }
+                catch (Exception)
+                {
+                    userSettings.IsNewUserRegistration = true;
+                }
+            }
+
+
             if (userSettings.IsNewUserRegistration)
             {
                 user.isNewUser = true;
                 // get details from the headers.
 
 
-                user.lastname = DynamicsExtensions.GetLastName(user.name);
-                user.firstname = DynamicsExtensions.GetFirstName(user.name);
+                user.lastname = user.name.GetLastName();
+                user.firstname = user.name.GetFirstName();
                 user.accountid = userSettings.AccountId;
 
                 string siteminderBusinessGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderBusinessGuidKey];

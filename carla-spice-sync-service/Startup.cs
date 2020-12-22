@@ -32,11 +32,9 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public class Startup
     {
-
         public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
-            
         }
 
         public IConfiguration _configuration { get; }
@@ -44,16 +42,15 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddMvc(config =>
             {
                 config.EnableEndpointRouting = false;
                 if (!string.IsNullOrEmpty(_configuration["JWT_TOKEN_KEY"]))
                 {
-                     var policy = new AuthorizationPolicyBuilder()
-                                  .RequireAuthenticatedUser()
-                                  .Build();
-                     config.Filters.Add(new AuthorizeFilter(policy));
+                    var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                    config.Filters.Add(new AuthorizeFilter(policy));
                 }
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
@@ -111,16 +108,14 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 config.UseConsole();
             });
 
-            // health checks. 
+            // health checks.
             services.AddHealthChecks()
                 .AddCheck("carla-spice-sync", () => HealthCheckResult.Healthy());
         }
 
         private void SetupSharePoint(IServiceCollection services)
         {
-
             // add SharePoint.
-            
             services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(_configuration));
         }
 
@@ -131,26 +126,23 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             string spiceURI = _configuration["SPICE_URI"];
             string token = _configuration["SPICE_JWT_TOKEN"];
 
-
             // create JWT credentials
             TokenCredentials credentials = new TokenCredentials(token);
-
-            services.AddSingleton(_ => new SpiceClient(new Uri( spiceURI ), credentials));
+            services.AddSingleton(_ => new SpiceClient(new Uri(spiceURI), credentials));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
-        {            
+        {
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-
             bool startHangfire = true;
 #if DEBUG
-            // do not start Hangfire if we are running tests.        
+            // do not start Hangfire if we are running tests.
             foreach (var assem in Assembly.GetEntryAssembly().GetReferencedAssemblies())
             {
                 if (assem.FullName.ToLowerInvariant().StartsWith("xunit"))
@@ -205,8 +197,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
-                    .WriteTo.EventCollector( splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"], 
+                    .WriteTo.EventCollector(splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
+                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
                        messageHandler: new HttpClientHandler()
@@ -214,7 +206,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                            ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
                        }
 #pragma warning restore CA2000 // Dispose objects before losing scope
-                     )                    
+                     )
                     .CreateLogger();
 
                 Serilog.Debugging.SelfLog.Enable(Console.Error);
@@ -243,12 +235,18 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             try
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                {                    
+                {
                     log.LogInformation("Creating Hangfire jobs for SPD Export ...");
-                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
+                    if (!string.IsNullOrEmpty(_configuration["FEATURE_LE_CONNECTIONS"]))
+                    {
+                        RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplicationsV2(null), Cron.MinuteInterval(15));
+                    }
+                    else
+                    {
+                        RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
+                    }
                     RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(15));
                     log.LogInformation("Hangfire Send Export job done.");
-
                 }
             }
             catch (Exception e)

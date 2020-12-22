@@ -2,6 +2,7 @@
 	As a public website visitor
 	I want to see Cannabis Licenses on a map
 
+@release
 Scenario: Basic Map View
 	Given I navigate to the map
 	Then the page shows a map
@@ -15,5 +16,3 @@ Scenario: Search for City
 	Given I navigate to the map
 	And I search for Victoria
 	Then the page shows search results including Victoria
-
-

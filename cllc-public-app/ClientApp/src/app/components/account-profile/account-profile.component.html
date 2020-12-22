@@ -146,7 +146,21 @@
               </app-field>
               <section class="col-md-3 col-xs-12">
                 <app-field label="Province" [isFullWidth]="true">
-                  <input class="form-control" readonly type="text" formControlName="physicalAddressProvince">
+                  <select class="form-control" formControlName="physicalAddressProvince">
+                    <option value="British Columbia">British Columbia</option>
+                    <option value="Ontario">Ontario</option>
+                    <option value="Alberta">Alberta</option>
+                    <option value="Quebec">Quebec</option>
+                    <option value="Manitoba">Manitoba</option>
+                    <option value="Nova Scotia">Nova Scotia</option>
+                    <option value="New Brunswick">New Brunswick</option>
+                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                    <option value="Saskatchewan">Saskatchewan</option>
+                    <option value="Prince Edward Island">Prince Edward Island</option>
+                    <option value="Northwest Territories">Northwest Territories</option>
+                    <option value="Yukon">Yukon</option>
+                    <option value="Nunavut">Nunavut</option>
+                  </select>
                 </app-field>
               </section>
               <section class="col-md-3 col-xs-12">

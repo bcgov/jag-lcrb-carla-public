@@ -13,7 +13,7 @@
                 [areaCategory]="areaCategory" [onDelete]="removeRow.bind(this)" [index]="i" [onRowChange]="onRowChange.bind(this)" [enabled]="enabled"></tr>
         </ng-container>
         <tr>
-            <td [colSpan]="isService() ? 2 : 1"><button (click)="addRow()" class="btn-clear" style="height: 100%;" *ngIf="enabled"><i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Area</button></td>            
+            <td [colSpan]="isService() ? 2 : 1"><button (click)="addRow()" class="btn btn-secondary" style="height: 100%;" *ngIf="enabled"><i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Area</button></td>
             <td [colSpan]="isService() ? 2 : 1" style="text-align:right;"><strong>Total Occupant Load:</strong></td>
             <td><strong>{{total}}</strong></td>
             <td></td>

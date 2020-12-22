@@ -9,7 +9,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// <summary>
     /// Role Database Model
     /// </summary>
-    public sealed partial class Subscriber : IEquatable<Subscriber>
+    public sealed class Subscriber : IEquatable<Subscriber>
     {
 
         /// <summary>

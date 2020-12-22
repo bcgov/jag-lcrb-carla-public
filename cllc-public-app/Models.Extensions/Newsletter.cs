@@ -8,7 +8,7 @@
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>        
-        public static ViewModels.Newsletter ToViewModel(this Models.Newsletter newsletter)
+        public static ViewModels.Newsletter ToViewModel(this Newsletter newsletter)
         {
             ViewModels.Newsletter result = null;
             if (newsletter != null)
