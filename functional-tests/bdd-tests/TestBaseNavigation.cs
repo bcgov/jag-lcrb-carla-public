@@ -130,6 +130,13 @@ namespace bdd_tests
                 uiPayButton.Click();
             }
 
+            if (specificButton == "Pay for Application for Cannabis Marketing")
+            {
+                // click on the Pay for Application button
+                NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector(".mt-3 button.btn.btn-primary"));
+                uiPayButton.Click();
+            }
+
             if (specificButton == "Submit Organization Information")
             {
                 // click on the Submit Org Info button
