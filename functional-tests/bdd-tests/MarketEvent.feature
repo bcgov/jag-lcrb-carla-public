@@ -144,7 +144,7 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
@@ -179,7 +179,7 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
@@ -214,7 +214,7 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
@@ -249,7 +249,7 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
