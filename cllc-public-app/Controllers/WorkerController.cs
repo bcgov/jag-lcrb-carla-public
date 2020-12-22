@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -27,14 +29,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IPdfService _pdfClient;
+        private readonly FileManagerClient _fileManagerClient;
 
-        public WorkerController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IPdfService pdfClient)
+        public WorkerController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IPdfService pdfClient, FileManagerClient fileClient)
         {
             _configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(WorkerController));
             _pdfClient = pdfClient;
+            _fileManagerClient = fileClient;
         }
 
         /// <summary>
@@ -153,7 +157,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             patchWorker.CopyValues(item);
             try
             {
-                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
+                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid, patchWorker);
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -169,14 +173,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="viewModel"></param>
         /// <returns></returns>
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> CreateWorker([FromBody] ViewModels.Worker item)
         {
-            // get UserSettings from the session
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             // create a new worker.
-            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker()
+            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker
             {
                 AdoxioIsmanual = 0 // 0 for false - is a portal user.
             };
@@ -191,26 +192,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error creating worker. ");
+                _logger.LogError(httpOperationException, "Error creating worker. ");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error creating worker.");
+                _logger.LogError(e, "Error creating worker.");
             }
 
             try
             {
                 var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
                 patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
-                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
+                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid, patchWorker);
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error updating worker. ");
+                _logger.LogError(httpOperationException, "Error updating worker. ");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error updating worker.");
+                _logger.LogError(e, "Error updating worker.");
             }
 
 
@@ -244,7 +245,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, $"Error updating worker. ");
+                _logger.LogError(httpOperationException, "Error updating worker. ");
             }
 
 
@@ -271,7 +272,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError($"Unable to send Worker Qualification Letter for worker {workerId} - current user does not have access to worker");
                 return NotFound("No access to worker");
-            }            
+            }
 
             try
             {
@@ -314,8 +315,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 };
 
                 byte[] data = await _pdfClient.GetPdf(parameters, "worker_qualification_letter");
+
+                // Save copy of generated licence PDF for auditing/logging purposes
+                try
+                {
+                    var hash = await _pdfClient.GetPdfHash(parameters, "worker_qualification_letter");
+                    var entityName = "worker";
+                    var entityId = adoxioWorker.AdoxioWorkerid;
+                    var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+                    var documentType = "WorkerQualification";
+                    _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error uploading PDF");
+                }
+
                 _logger.LogInformation($"Sending Worker Qualification Letter for worker {workerId}");
-                return File(data, "application/pdf","WorkerQualificationLetter.pdf");
+                return File(data, "application/pdf", "WorkerQualificationLetter.pdf");
             }
             catch (Exception e)
             {
@@ -333,8 +350,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool CurrentUserHasAccessToWorkerApplicationOwnedBy(string accountId)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future
@@ -354,8 +370,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool CurrentUserHasAccessToContactWorkerApplicationOwnedBy(string contactid)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future

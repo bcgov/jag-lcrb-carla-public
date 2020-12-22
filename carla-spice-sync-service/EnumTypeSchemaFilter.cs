@@ -14,8 +14,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
     {
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
-            
-
             if (context.GetType().IsEnum)
             {
                 var obj = new OpenApiObject();

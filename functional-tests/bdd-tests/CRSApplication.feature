@@ -2,7 +2,7 @@
     As a logged in business user
     I want to submit a CRS Application for different business types
 
-@e2e @cannabis @indigenousnation @crsapp
+@cannabis @indigenousnation @crsapp
 Scenario: Indigenous Nation CRS Application
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -20,7 +20,7 @@ Scenario: Indigenous Nation CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crsapp
+@cannabis @partnership @crsapp
 Scenario: Partnership CRS Application
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -38,7 +38,7 @@ Scenario: Partnership CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crsapp
+@cannabis @privatecorporation @crsapp
 Scenario: Private Corporation CRS Application
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -56,7 +56,7 @@ Scenario: Private Corporation CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crsapp
+@cannabis @publiccorporation @crsapp
 Scenario: Public Corporation CRS Application
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -74,7 +74,7 @@ Scenario: Public Corporation CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crsapp
+@cannabis @society @crsapp
 Scenario: Society CRS Application
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -92,7 +92,7 @@ Scenario: Society CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crsapp
+@cannabis @soleproprietorship @crsapp
 Scenario: Sole Proprietorship CRS Application
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
@@ -110,7 +110,7 @@ Scenario: Sole Proprietorship CRS Application
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @localgovernment @crsapp
+@cannabis @localgovernment @crsapp
 Scenario: Local Government CRS Application
     Given I am logged in to the dashboard as a local government
     And I click on the Start Application button for a Cannabis Retail Store

@@ -14,7 +14,7 @@ Scenario: Validation for Catering Application
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @validation
+@catering @privatecorporation @validation
 Scenario: Validation for Catering Branding Change 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -27,7 +27,7 @@ Scenario: Validation for Catering Branding Change
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the branding change link for Catering
     And I click on the Continue to Application button
     And I do not complete the application correctly
@@ -35,7 +35,7 @@ Scenario: Validation for Catering Branding Change
     And the account is deleted
     Then I see the login page
 
- @e2e @cateringevent @privatecorporation @validation
+ @cateringevent @privatecorporation @validation
  Scenario: Validation for No Approval Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -47,7 +47,7 @@ Scenario: Validation for Catering Branding Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I request an event authorization being validated
     And the event history is updated correctly for an application being validated
     And I click on the link for Draft
@@ -56,7 +56,7 @@ Scenario: Validation for Catering Branding Change
     And the account is deleted
     Then I see the login page
 
- @e2e @licenseerep @validation
+ @licenseerep @validation
  Scenario: Validation for Licensee Representative Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -68,7 +68,7 @@ Scenario: Validation for Catering Branding Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Add Licensee Representative
     And I do not complete the application correctly
@@ -76,7 +76,7 @@ Scenario: Validation for Catering Branding Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @validation
+@catering @privatecorporation @validation
 Scenario: Validation for Catering Store Relocation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -88,7 +88,7 @@ Scenario: Validation for Catering Store Relocation
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
@@ -97,7 +97,7 @@ Scenario: Validation for Catering Store Relocation
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @validation
+@catering @privatecorporation @validation
 Scenario: Validation for Catering Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -109,7 +109,7 @@ Scenario: Validation for Catering Third Party Operator
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Add or Change a Third Party Operator
     And I do not complete the application correctly
@@ -117,7 +117,7 @@ Scenario: Validation for Catering Third Party Operator
     And the account is deleted
     Then I see the login page
 
- @e2e @catering @privatecorporation @validation
+ @catering @privatecorporation @validation
  Scenario: Validation for Catering Transfer of Ownership
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -129,7 +129,7 @@ Scenario: Validation for Catering Third Party Operator
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Transfer Licence
     And I do not complete the application correctly

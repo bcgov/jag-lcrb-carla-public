@@ -16,6 +16,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string Id { get; set; }
         public string ActionText { get; set; }
         public string Name { get; set; }
+        public bool? HasLESection { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public ApplicationTypeCategory? Category { get; set; }

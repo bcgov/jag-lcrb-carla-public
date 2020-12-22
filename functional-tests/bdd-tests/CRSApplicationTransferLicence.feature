@@ -3,7 +3,7 @@
     I want to submit a CRS Application for different business types
     And request a transfer of ownership for the approved application
 
-@e2e @cannabis @indigenousnation @crstransferownershipIN
+@cannabis @indigenousnation @crstransferownership
 Scenario: Indigenous Nation Cannabis Transfer Ownership
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -15,12 +15,12 @@ Scenario: Indigenous Nation Cannabis Transfer Ownership
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @partnership @crstransferownershippartnership
+@cannabis @partnership @crstransferownership
 Scenario: Partnership Cannabis Transfer Ownership
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -32,12 +32,12 @@ Scenario: Partnership Cannabis Transfer Ownership
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @privatecorporation @crstransferownershipprivcorp
+@cannabis @privatecorporation @crstransferownership
 Scenario: Private Corporation Cannabis Transfer Ownership
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -49,12 +49,12 @@ Scenario: Private Corporation Cannabis Transfer Ownership
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @publiccorporation @crstransferownershippubcorp
+@cannabis @publiccorporation @crstransferownership
 Scenario: Public Corporation Cannabis Transfer Ownership
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -66,12 +66,12 @@ Scenario: Public Corporation Cannabis Transfer Ownership
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @society @crstransferownershipsociety
+@cannabis @society @crstransferownership
 Scenario: Society Cannabis Transfer Ownership
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -83,12 +83,12 @@ Scenario: Society Cannabis Transfer Ownership
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee 
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
-@e2e @cannabis @soleproprietorship @crstransferownershipsoleprop
+@cannabis @soleproprietorship @crstransferownership
 Scenario: Sole Proprietorship Cannabis Transfer Ownership
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
@@ -100,7 +100,7 @@ Scenario: Sole Proprietorship Cannabis Transfer Ownership
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Cannabis
+    And I pay the licensing fee
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page

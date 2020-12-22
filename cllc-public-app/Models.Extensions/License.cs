@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     if (item.AdoxioApplicationType != null)
                     {
-                        var endorsement = new ViewModels.Endorsement()
+                        var endorsement = new ViewModels.Endorsement
                         {
                             ApplicationTypeId = item.AdoxioApplicationType.AdoxioApplicationtypeid,
                             ApplicationTypeName = item.AdoxioApplicationType.AdoxioName,
@@ -39,6 +39,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
             return endorsementsList;
+        }
+
+        public static List<OffsiteStorage> GetOffsiteStorage(string licenceId, IDynamicsClient dynamicsClient)
+        {
+            string filter = $"_adoxio_licenceid_value eq {licenceId}";
+            var entities = dynamicsClient.Offsitestorages.Get(filter: filter).Value;
+            var offsiteList = entities.Select(item => item.ToViewModel()).ToList();
+            return offsiteList;
         }
 
         public static License ToViewModel(this MicrosoftDynamicsCRMadoxioLicences dynamicsLicense, IDynamicsClient dynamicsClient)
@@ -115,6 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
             adoxioLicenseVM.Endorsements = GetEndorsements(adoxioLicenseVM.Id, dynamicsClient);
+            adoxioLicenseVM.OffsiteStorageLocations = GetOffsiteStorage(adoxioLicenseVM.Id, dynamicsClient);
 
             adoxioLicenseVM.RepresentativeFullName = dynamicsLicense.AdoxioRepresentativename;
             adoxioLicenseVM.RepresentativeEmail = dynamicsLicense.AdoxioRepresentativeemail;
@@ -138,10 +147,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                     && app?.AdoxioLicenceFeeInvoice?.Statuscode != (int)Adoxio_invoicestatuses.Paid
                 ).Any();
 
-            ApplicationLicenseSummary licenseSummary = new ViewModels.ApplicationLicenseSummary()
+            ApplicationLicenseSummary licenseSummary = new ApplicationLicenseSummary
             {
                 LicenseId = licence.AdoxioLicencesid,
                 LicenseNumber = licence.AdoxioLicencenumber,
+                LicenceTypeCategory = (LicenceTypeCategory)licence?.AdoxioLicenceType?.AdoxioCategory,
                 MissingFirstYearLicenceFee = missingLicenceFee,
                 CurrentOwner = licence?.AdoxioLicencee?.Name,
                 EstablishmentAddressStreet = licence.AdoxioEstablishmentaddressstreet,
@@ -196,10 +206,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licenseSummary.EstablishmentIsOpen = licence.AdoxioEstablishment.AdoxioIsopen;
             }
 
-            var mainApplication = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
+            var mainApplication = applications.Where(app => app.Statuscode == (int)AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
 
             // 2-13-2020 adjust criteria so that we get the first approved CRS rather than simply the first CRS, to ensure that we get the correct record.
-            var crsApplication = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved && app.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store").FirstOrDefault();
+            var crsApplication = applications.Where(app => app.Statuscode == (int)AdoxioApplicationStatusCodes.Approved && app.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store").FirstOrDefault();
             if (mainApplication != null)
             {
                 licenseSummary.ApplicationId = mainApplication.AdoxioApplicationid;
@@ -221,19 +231,27 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licenseSummary.LicenceTypeCategory = (LicenceTypeCategory?)licence.AdoxioLicenceType.AdoxioCategory;
             }
 
+            licenseSummary.Endorsements = GetEndorsements(licenseSummary.LicenseId, dynamicsClient);
+
             if (licence != null &&
                 licence.AdoxioLicenceType != null &&
                 licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
             {
                 foreach (var item in licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
                 {
-                    // check to see if there is an existing action on this licence.
+                    // we don't want to allow you to apply for an endorsement you already have...
+                    if(item.AdoxioIsendorsement != null && 
+                    item.AdoxioIsendorsement == true && 
+                    licenseSummary.Endorsements.Where(e=>e.ApplicationTypeId == item.AdoxioApplicationtypeid).Any()) { 
+                        // there is probably a better way to write this...
+                    } else {
                     licenseSummary.AllowedActions.Add(item.ToViewModel());
+                    }
                 }
-
             }
 
-            licenseSummary.Endorsements = GetEndorsements(licenseSummary.LicenseId, dynamicsClient);
+            licenseSummary.OffsiteStorageLocations = GetOffsiteStorage(licenseSummary.LicenseId, dynamicsClient);
+
 
             return licenseSummary;
         }

@@ -7,7 +7,7 @@ option csharp_namespace = "Gov.Lclb.Cllb.Services.FileManager";
 package filemanager;
 
 // The files service definition.
-service FileManager { 
+service FileManager {
 
   // Create Folder.  Note that this will only send the create folder command if the folder does not exist.
   rpc CreateFolder (CreateFolderRequest) returns (CreateFolderReply);
@@ -30,15 +30,18 @@ service FileManager {
   // Get a token given a secret.
   rpc GetToken (TokenRequest) returns (TokenReply);
 
+  // Get the truncated filename (due to SharePoint limitations).
+  rpc GetTruncatedFilename (TruncatedFilenameRequest) returns (TruncatedFilenameReply);
+
 }
 
-message CreateFolderRequest {    
-    string entityName = 1;     
+message CreateFolderRequest {
+    string entityName = 1;
     string folderName = 2;
 }
 
 // collection of files
-message CreateFolderReply {    
+message CreateFolderReply {
     ResultStatus resultStatus = 1;
     string errorDetail = 2;
 }
@@ -75,9 +78,9 @@ message DownloadFileReply {
 }
 
 message FileExistsRequest {
-    string entityName = 1; 
-    string entityId = 2; 
-    string documentType = 3; 
+    string entityName = 1;
+    string entityId = 2;
+    string documentType = 3;
     string folderName = 4;
     string serverRelativeUrl = 5;
 }
@@ -89,9 +92,9 @@ message FileExistsReply {
 
 // Individual File
 message FileSystemItem {
-  string id = 1; 
+  string id = 1;
   string name = 2;
-  string documentType = 3; 
+  string documentType = 3;
   int64 size = 4;
   string serverRelativeUrl = 5;
   google.protobuf.Timestamp timeCreated = 6;
@@ -100,7 +103,7 @@ message FileSystemItem {
 
 message FolderFilesRequest {
     string entityId = 1;
-    string entityName = 2; 
+    string entityName = 2;
     string documentType = 3;
     string folderName = 4;
 }
@@ -116,7 +119,7 @@ message TokenRequest {
     string secret = 1;
 }
 
-message TokenReply {    
+message TokenReply {
     ResultStatus resultStatus = 1;
     string token = 2;
     string errorDetail = 3;
@@ -134,4 +137,16 @@ message UploadFileReply {
     ResultStatus resultStatus = 1;
     string errorDetail = 2;
     string fileName = 3;
+}
+
+message TruncatedFilenameRequest {
+    string entityName = 1;
+    string folderName = 2;
+    string fileName = 3;
+}
+
+message TruncatedFilenameReply {
+    ResultStatus resultStatus = 1;
+    string fileName = 2;
+    string errorDetail = 3;
 }

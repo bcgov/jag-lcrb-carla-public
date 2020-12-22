@@ -117,13 +117,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         // /// </summary>
         // /// <param name="viewModel"></param>
         // /// <returns></returns>
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> CreateAddress([FromBody] ViewModels.PreviousAddress item)
         {
 
-            // for association with current user
-            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             MicrosoftDynamicsCRMadoxioPreviousaddress address = new MicrosoftDynamicsCRMadoxioPreviousaddress();
             // copy received values to Dynamics Application

@@ -32,7 +32,7 @@ namespace bdd_tests
 
             // click on the Review Federal Reports link
             NgWebElement uiReviewFedReports = ngDriver.FindElement(By.LinkText(reviewReports));
-            uiReviewFedReports.Click();
+            JavaScriptClick(uiReviewFedReports);
 
             /* 
             Page Title: Federal Reporting

@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// <summary>
     /// Role Database Model
     /// </summary>
-    public sealed partial class Newsletter : IEquatable<Newsletter>
+    public sealed class Newsletter : IEquatable<Newsletter>
     {
 
         /// <summary>

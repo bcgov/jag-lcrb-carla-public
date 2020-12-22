@@ -34,7 +34,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="category">The policy document category</param>
         /// <returns></returns>
-        [HttpGet()]
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult GetPolicyDocuments(string category)
         {
@@ -122,10 +122,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
-            else
-            {
-                return new JsonResult(PolicyDocuments);
-            }
+
+            return new JsonResult(PolicyDocuments);
 
 
         }
@@ -205,10 +203,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
-            else
-            {
-                return new JsonResult(policyDocument.ToViewModel());
-            }
+
+            return new JsonResult(policyDocument.ToViewModel());
         }
     }
 }

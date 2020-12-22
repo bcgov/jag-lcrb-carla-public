@@ -1,21 +1,26 @@
+
 <div class="form-wrapper">
-  <div [ngBusy]="busy"></div>
   <h1>Licences & Authorizations</h1>
+  <mat-progress-bar class="mt-1 mb-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
 
-  <div *ngIf="getNumberOfLicences() === 0">
-    <h2>You do not have any licences or authorizations on file</h2>
-    <p>If you currently have a liquor licence or authorization and are not seeing it here, please contact <a
-        href="mailto:LCRBLiquor@gov.bc.ca">LCRBLiquor@gov.bc.ca</a>.</p>
-  </div>
-  <section *ngFor="let mappingItem of licenceMappings | keyvalue">
-    <div *ngIf="LicenceTypeSupported(mappingItem.key)">
-      <app-licence-row [licenceType]="mappingItem.key" [licences]="mappingItem.value" [available]="true"></app-licence-row>
+  <ng-container *ngIf="dataLoaded">
+    <div *ngIf="getNumberOfLicences() === 0">
+      <h2>You do not have any licences or authorizations on file</h2>
+      <p>If you currently have a liquor licence or authorization and are not seeing it here, please contact <a
+          href="mailto:LCRBLiquor@gov.bc.ca">LCRBLiquor@gov.bc.ca</a>.</p>
     </div>
-  </section>
+    <section *ngFor="let mappingItem of licenceMappings | keyvalue">
+      <div *ngIf="LicenceTypeSupported(mappingItem.key)">
+        <app-licence-row [licenceType]="mappingItem.key" [licences]="mappingItem.value" [available]="true">
+        </app-licence-row>
+      </div>
+    </section>
 
-  <section *ngFor="let mappingItem of licenceMappings | keyvalue">
-    <div *ngIf="!LicenceTypeSupported(mappingItem.key)">
-      <app-licence-row [licenceType]="mappingItem.key" [licences]="mappingItem.value" [available]="false"></app-licence-row>
-    </div>
-  </section>
+    <section *ngFor="let mappingItem of licenceMappings | keyvalue">
+      <div *ngIf="!LicenceTypeSupported(mappingItem.key)">
+        <app-licence-row [licenceType]="mappingItem.key" [licences]="mappingItem.value" [available]="false">
+        </app-licence-row>
+      </div>
+    </section>
+  </ng-container>
 </div>

@@ -3,6 +3,7 @@ import { Application } from '@models/application.model';
 import { ApplicationDataService } from '@services/application-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
+import { ApplicationTypeNames} from '@models/application-type.model';
 import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
 
 @Component({
@@ -19,7 +20,7 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
   uploadedZoningDocuments = 0;
 
   constructor(private applicationDataService: ApplicationDataService,
-    private fb: FormBuilder) { 
+    private fb: FormBuilder) {
       super();
     }
 
@@ -32,11 +33,17 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
 
   showQuestion() {
 
-    const licenceTypes = ["Manufacturer"];
-    const applicationTypes = ["On-Site Store Endorsement"];
+    let licenceTypes = [
+      "Manufacturer", "Food Primary"];
+    let applicationTypes = [
+      "On-Site Store Endorsement",
+      this.ApplicationTypeNames.FPRelo
+    ];
 
-    return (licenceTypes.indexOf(this.application.licenseType) > -1 || 
-            applicationTypes.indexOf(this.application.applicationType.name) > -1);
+    return (
+      licenceTypes.indexOf(this.application.licenseType) > -1 ||
+      applicationTypes.indexOf(this.application.applicationType.name) > -1
+    );
 
   }
 

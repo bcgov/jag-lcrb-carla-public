@@ -2,7 +2,7 @@
     As a logged in business user
     I want to request a third party operator for a manufacturer licence
 
-@e2e @privatecorporation @manufacturer @winery
+@manufacturer @winery @thirdparty
 Scenario: Winery Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -15,12 +15,14 @@ Scenario: Winery Third Party Operator
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @brewery
+@manufacturer @brewery @thirdparty
 Scenario: Brewery Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -33,12 +35,14 @@ Scenario: Brewery Third Party Operator
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @distillery
+@manufacturer @distillery @thirdparty
 Scenario: Distillery Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -51,12 +55,14 @@ Scenario: Distillery Third Party Operator
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page
 
-@e2e @privatecorporation @manufacturer @copacker
+@manufacturer @copacker @thirdparty
 Scenario: Co-packer Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -69,7 +75,9 @@ Scenario: Co-packer Third Party Operator
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee for a Manufacturer application
+    And I pay the licensing fee 
     And I request a third party operator
+    And I click on the link for Cancel Application
+    And I cancel the third party operator application
     And the account is deleted
     Then I see the login page

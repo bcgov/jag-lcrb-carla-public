@@ -29,8 +29,8 @@ namespace Gov.Lclb.Cllb.Public.Contexts
 
         public static List<VoteQuestion> GetVoteQuestions(this AppDbContext context)
         {
-            List<Models.VoteQuestion> voteQuestions =
-                context.VoteQuestions.Include(x => x.Options).ToList<VoteQuestion>();
+            List<VoteQuestion> voteQuestions =
+                context.VoteQuestions.Include(x => x.Options).ToList();
             return voteQuestions;
         }
 
@@ -42,16 +42,16 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         }
 
 
-        public static Models.VoteQuestion GetVoteQuestionBySlug(this AppDbContext context, string slug)
+        public static VoteQuestion GetVoteQuestionBySlug(this AppDbContext context, string slug)
         {
-            Models.VoteQuestion voteQuestion =
+            VoteQuestion voteQuestion =
                 context.VoteQuestions.Include(x => x.Options).FirstOrDefault(x => x.Slug == slug);
             return voteQuestion;
         }
 
         public static void AddVote(this AppDbContext context, string optionId)
         {
-            Models.VoteOption voteOption = context.VoteOptions.FirstOrDefault(x => x.Id == new Guid(optionId));
+            VoteOption voteOption = context.VoteOptions.FirstOrDefault(x => x.Id == new Guid(optionId));
             if (voteOption != null)
             {
                 voteOption.TotalVotes++;

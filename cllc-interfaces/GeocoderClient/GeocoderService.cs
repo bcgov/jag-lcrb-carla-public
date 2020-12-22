@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (String.IsNullOrEmpty (BaseUri))
             {
-                logger.LogError($"Unable to gecode establishment {establishmentId} because geocoder service is not configured.");
+                logger.Error($"Unable to gecode establishment {establishmentId} because geocoder service is not configured.");
             }
             else
             {
@@ -56,11 +56,11 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 if (_statusCode == HttpStatusCode.OK)
                 {
-                    logger.LogInformation("Geocoded establishment " + establishmentId);
+                    logger.Information("Geocoded establishment " + establishmentId);
                 }
                 else
                 {
-                    logger.LogError("Unable to gecode establishment " + establishmentId);
+                    logger.Error("Unable to gecode establishment " + establishmentId);
 
                 }
             }            

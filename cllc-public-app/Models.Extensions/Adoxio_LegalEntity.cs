@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         /// <param name="to"></param>
         /// <param name="from"></param>
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioLegalentity to, ViewModels.LegalEntity from)
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioLegalentity to, LegalEntity from)
         {
 
             to.AdoxioCommonnonvotingshares = from.commonnonvotingshares;
@@ -71,15 +71,15 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <summary>
         /// Convert a Dynamics Legal Entity to a ViewModel
         /// </summary>        
-        public static ViewModels.LegalEntity ToViewModel(this MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity)
+        public static LegalEntity ToViewModel(this MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity)
         {
-            ViewModels.LegalEntity result = null;
+            LegalEntity result = null;
             if (adoxio_legalentity != null)
             {
-                result = new ViewModels.LegalEntity();
+                result = new LegalEntity();
                 if (adoxio_legalentity.AdoxioLegalentityid != null)
                 {
-                    result.id = adoxio_legalentity.AdoxioLegalentityid.ToString();
+                    result.id = adoxio_legalentity.AdoxioLegalentityid;
                 }
 
                 if (adoxio_legalentity._adoxioAccountValue != null)

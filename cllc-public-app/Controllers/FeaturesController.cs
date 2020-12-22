@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Get a list of enabled features
         /// </summary>
         /// <returns></returns>
-        [HttpGet()]
+        [HttpGet]
         public List<string> GetFeatureList()
         {
             var features = new List<string>();
@@ -68,6 +68,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("LiquorTwo");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_LIQUOR_THREE"]))
+            {
+                features.Add("LiquorThree");
+            }
+
             if (!string.IsNullOrEmpty(_configuration["FEATURE_COVID_APPLICATION"]))
             {
                 features.Add("CovidApplication");
@@ -88,6 +93,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("MarketEvents");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_PERMANENT_CHANGES_TO_LICENSEE"]))
+            {
+                features.Add("PermanentChangesToLicensee");
+            }
             return features;
         }
 

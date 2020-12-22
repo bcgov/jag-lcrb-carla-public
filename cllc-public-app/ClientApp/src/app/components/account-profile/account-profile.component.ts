@@ -61,7 +61,7 @@ const ValidationFieldNameMap = {
   'businessProfile.mailingAddressCountry': 'Mailing Address Country',
 
   'primarycontact.id': 'Corporation Contact ID',
-  'primarycontact.firstname': 'Corporation Contact Fist Name',
+  'primarycontact.firstname': 'Corporation Contact First Name',
   'primarycontact.lastname': 'Corporation Contact LastName',
   'primarycontact.jobTitle': 'Corporation Contact Job Title',
   'primarycontact.telephone1': 'Corporation Contact Telephone',
@@ -252,7 +252,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       .pipe(filter(s => !!s))
       .subscribe(account => {
         this.account = account;
-        account.physicalAddressProvince = 'British Columbia';
+        // default to BC if no province found
+        account.physicalAddressProvince = account.physicalAddressProvince || 'British Columbia';
         account.physicalAddressCountry = 'Canada';
 
         this.form.patchValue({

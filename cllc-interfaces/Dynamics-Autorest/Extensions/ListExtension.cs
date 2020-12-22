@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> AddMemberWithHttpMessagesAsync(string listId, EntityIdReference entityId = default(EntityIdReference), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> AddMemberWithHttpMessagesAsync(string listId, EntityIdReference entityId = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default)
         {
             if (listId == null)
             {
@@ -185,7 +185,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> AddMemberWithHttpMessagesAsync(string listId, EntityIdReference entityId = default(EntityIdReference), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> AddMemberWithHttpMessagesAsync(string listId, EntityIdReference entityId = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
     }
 
     public static partial class ListsExtensions
@@ -205,7 +205,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='entityId'>
         /// reference value
         /// </param>
-        public static void AddMember(this ILists operations, string listId, EntityIdReference entityId = default(EntityIdReference))
+        public static void AddMember(this ILists operations, string listId, EntityIdReference entityId = default)
         {
             operations.AddMemberAsync(listId, entityId).GetAwaiter().GetResult();
         }
@@ -228,7 +228,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public static async Task AddMemberAsync(this ILists operations, string workerId, EntityIdReference entityId = default(EntityIdReference), CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task AddMemberAsync(this ILists operations, string workerId, EntityIdReference entityId = default, CancellationToken cancellationToken = default)
         {
             (await operations.AddMemberWithHttpMessagesAsync(workerId, entityId, null, cancellationToken).ConfigureAwait(false)).Dispose();
         }

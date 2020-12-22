@@ -270,7 +270,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
               .toPromise()
               .then(app => {
                 // payment is required
-                if (app && app.adoxioInvoiceId) {
+                if (app && app.invoiceId) {
                   this.submitPayment();
                 } else if (app) { // go to the application page
                   // mark application as complete

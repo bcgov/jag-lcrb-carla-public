@@ -39,6 +39,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
   FormControlState = FormControlState;
   account: Account;
   minDate = new Date();
+  dataLoaded: boolean;
 
 
   constructor(private store: Store<AppState>,
@@ -84,6 +85,8 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((licence: License) => {
         this.licence = licence;
+        this.form.patchValue(this.licence);
+        
         if (this.licenceHasRepresentativeContact()) { //If the licence has a representative, set it to be the licensee contact
           const contact = {
             name: this.licence.representativeFullName,
@@ -91,6 +94,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
             phone: this.licence.representativePhoneNumber
           }
           this.form.get('licenseeContact').patchValue(contact);
+          this.dataLoaded = true;
         } else if (this.account) { // If the account is loaded, use it for the licensee contact
           const contact = {
             name: this.account.primarycontact.firstname + " " + this.account.primarycontact.lastname,
@@ -98,6 +102,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
             phone: this.account.contactPhone
           }
           this.form.get('licenseeContact').patchValue(contact);
+          this.dataLoaded = true;
         } else { // Otherwise load the account and use it for the licensee representative
           this.store.select(state => state.currentAccountState.currentAccount)
           .pipe(filter(account => !!account))
@@ -110,13 +115,15 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
                 phone: this.account.contactPhone
               }
               this.form.get('licenseeContact').patchValue(contact);
+              this.dataLoaded = true;
             });
         }
 
-        this.form.patchValue(this.licence);
       },
         () => {
           console.log('Error occured');
+          
+          this.dataLoaded = true;
         }
       );
   }

@@ -49,17 +49,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return monthlyReportsList;
             }
-            else
+
+            try
             {
-                try
-                {
-                    var filter = $"_adoxio_licenseeid_value eq {licenceeId}";
-                    monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, orderby: new List<string> { "modifiedon desc" }).Value;
-                }
-                catch (HttpOperationException)
-                {
-                    monthlyReports = null;
-                }
+                var filter = $"_adoxio_licenseeid_value eq {licenceeId}";
+                monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, @orderby: new List<string> { "modifiedon desc" }).Value;
+            }
+            catch (HttpOperationException)
+            {
+                monthlyReports = null;
             }
 
             if (monthlyReports != null)
@@ -80,8 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private bool CurrentUserHasAccessToMonthlyReportOwnedBy(string accountId)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future
@@ -99,8 +96,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetMonthlyReportsByLicence(string licenceId)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             List<MonthlyReport> monthlyReportsList = new List<MonthlyReport>();
             IEnumerable<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> monthlyReports;
@@ -132,8 +128,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetCurrentUserMonthlyReports([FromQuery] bool expandInventoryReports)
         {
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             if (string.IsNullOrEmpty(userSettings.AccountId)) {
                 return new BadRequestResult();
@@ -166,16 +161,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// PUT update monthly report by id
         [HttpPut("{id}")]
-        public IActionResult UpdateMonthlyReport([FromBody] ViewModels.MonthlyReport item, string id)
+        public IActionResult UpdateMonthlyReport([FromBody] MonthlyReport item, string id)
         {
             if (item != null && id != item.monthlyReportId)
             {
                 return BadRequest();
             }
 
-            // for association with current user
-            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             Guid monthlyReportId = new Guid(id);
             string filter = $"adoxio_cannabismonthlyreportid eq {id}";
@@ -188,7 +182,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 // Update monthly report
-                MicrosoftDynamicsCRMadoxioCannabismonthlyreport monthlyReport = new MicrosoftDynamicsCRMadoxioCannabismonthlyreport()
+                MicrosoftDynamicsCRMadoxioCannabismonthlyreport monthlyReport = new MicrosoftDynamicsCRMadoxioCannabismonthlyreport
                 {
                     AdoxioEmployeesmanagement = item.employeesManagement,
                     AdoxioEmployeesadministrative = item.employeesAdministrative,
@@ -203,7 +197,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (item.inventorySalesReports != null && item.inventorySalesReports.Count > 0) {
                     foreach (InventorySalesReport invReport in item.inventorySalesReports)
                     {
-                        MicrosoftDynamicsCRMadoxioCannabisinventoryreport updateReport = new MicrosoftDynamicsCRMadoxioCannabisinventoryreport()
+                        MicrosoftDynamicsCRMadoxioCannabisinventoryreport updateReport = new MicrosoftDynamicsCRMadoxioCannabisinventoryreport
                         {
                             AdoxioOpeninginventory = invReport.openingInventory == null ? 0 : invReport.openingInventory,
                             AdoxioQtyreceiveddomestic = invReport.domesticAdditions == null ? 0 : invReport.domesticAdditions,

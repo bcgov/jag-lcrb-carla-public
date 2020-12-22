@@ -75,6 +75,10 @@ isWinery(): boolean {
   // to do, set validation requirements
   return this.form.get('licenceSubCategory').value === "Winery";
 }
+
+isCopacker(): boolean {
+  return this.form.get('licenceSubCategory').value === "Co-packer";
+}
 isDistillery(): boolean {
   return this.form.get('licenceSubCategory').value === "Distillery";
 }

@@ -21,19 +21,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// The base URI of the service.
         /// </summary>
-        public System.Uri NativeBaseUri { get; set; }
+        public Uri NativeBaseUri { get; set; }
 
         private readonly IConfiguration _configuration;
 
         [ActivatorUtilitiesConstructor]
-        public DynamicsClient(HttpClient httpClient, IConfiguration configuration) 
+        public DynamicsClient(HttpClient httpClient, IConfiguration configuration)
         {
             Initialize();
 
             HttpClient = httpClient;
 
             _configuration = configuration;
-            
+
             string baseUri = _configuration["DYNAMICS_ODATA_URI"]; // Dynamics ODATA endpoint
 
             if (string.IsNullOrEmpty(baseUri))
@@ -59,8 +59,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Credentials.InitializeServiceClient(this);
             }
-
-            
         }
 
         public string GetEntityURI(string entityType, string id)
@@ -147,6 +145,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     "adoxio_ApplicationTypeId",
                     "adoxio_LicenceFeeInvoice",
                     "adoxio_Invoice",
+                    "adoxio_SecondaryApplicationInvoice",
                     "adoxio_localgovindigenousnationid",
                     "adoxio_PoliceJurisdictionId",
                     "adoxio_application_SharePointDocumentLocations"
@@ -163,7 +162,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 if (result.AdoxioApplicationTypeId != null)
                 {
                     var filter = $"_adoxio_applicationtype_value eq { result.AdoxioApplicationTypeId.AdoxioApplicationtypeid}";
-                    var typeContents = this.Applicationtypecontents.Get(filter: filter).Value;
+                    var typeContents = Applicationtypecontents.Get(filter: filter).Value;
                     result.AdoxioApplicationTypeId.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType = typeContents;
                 }
 
@@ -186,12 +185,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationByIdWithChildren(Guid id)
         {
-            return await this.GetApplicationByIdWithChildren(id.ToString());
+            return await GetApplicationByIdWithChildren(id.ToString());
         }
 
         public MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(Guid id)
         {
-            return this.GetAdoxioLicencetypeById(id.ToString());
+            return GetAdoxioLicencetypeById(id.ToString());
         }
 
         public MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(string id)
@@ -202,7 +201,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 // EXPAND the list of application types for this licence type
                 string[] expand = { "adoxio_licencetypes_applicationtypes" };
-                result = this.Licencetypes.GetByKey(adoxioLicencetypeid: id, expand: expand);
+                result = Licencetypes.GetByKey(adoxioLicencetypeid: id, expand: expand);
 
             }
             catch (HttpOperationException)
@@ -402,7 +401,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             try
             {
-                result = this.Localgovindigenousnations.GetByKey(id);
+                result = Localgovindigenousnations.GetByKey(id);
             }
             catch (HttpOperationException)
             {
@@ -441,12 +440,32 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 // fetch from Dynamics.
                 string[] expand = { "adoxio_ContactId", "adoxio_worker_aliases", "adoxio_worker_previousaddresses", "adoxio_worker_SharePointDocumentLocations" };
-                result = await this.Workers.GetByKeyAsync(adoxioWorkerid: id, expand: expand);
+                result = await Workers.GetByKeyAsync(adoxioWorkerid: id, expand: expand);
             }
             catch (HttpOperationException)
             {
                 result = null;
             }
+            return result;
+        }
+
+        public MicrosoftDynamicsCRMadoxioLicences GetLicenceById(Guid id)
+        {
+            return GetLicenceById(id.ToString());
+        }
+
+        public MicrosoftDynamicsCRMadoxioLicences GetLicenceById(string id)
+        {
+            MicrosoftDynamicsCRMadoxioLicences result;
+            try
+            {
+                result = Licenceses.GetByKey(adoxioLicencesid: id);
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+
             return result;
         }
 
@@ -465,7 +484,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment", "adoxio_LicenceType", "adoxio_ThirdPartyOperatorId",
                     "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_ProposedOperator", "adoxio_ProposedOwner"
                 };
-                result = this.Licenceses.GetByKey(adoxioLicencesid: id, expand: expand);
+                result = Licenceses.GetByKey(adoxioLicencesid: id, expand: expand);
             }
             catch (HttpOperationException)
             {
@@ -478,7 +497,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 if (!string.IsNullOrEmpty(result.AdoxioLicencee._primarycontactidValue))
                 {
                     // get the contact.
-                    var runner = this.GetContactById(Guid.Parse(result.AdoxioLicencee._primarycontactidValue));
+                    var runner = GetContactById(Guid.Parse(result.AdoxioLicencee._primarycontactidValue));
                     runner.Wait();
                     result.AdoxioLicencee.Primarycontactid = runner.Result;
                 }
@@ -493,7 +512,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             try
             {
                 var expand = new List<string> { "adoxio_Account", "adoxio_Licence" };
-                result = this.Events.GetByKey(adoxioEventid: id, expand: expand);
+                result = Events.GetByKey(adoxioEventid: id, expand: expand);
             }
             catch (HttpOperationException)
             {
@@ -508,7 +527,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioEvent result;
             try
             {
-                result = this.Events.GetByKey(adoxioEventid: id);
+                result = Events.GetByKey(adoxioEventid: id);
             }
             catch (HttpOperationException)
             {
@@ -528,7 +547,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioEventscheduleCollection results;
             try
             {
-                results = this.Events.GetEventscheduleByEvent(id);
+                results = Events.GetEventscheduleByEvent(id);
             }
             catch (HttpOperationException)
             {
@@ -538,8 +557,24 @@ namespace Gov.Lclb.Cllb.Interfaces
             return results;
         }
 
-        
+        public MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventByLicenceNumber(string licenceNumber)
+        {
+            string licenceNumberEscaped = licenceNumber.Replace("'", "''");
+            string filter = $"adoxio_specialeventpermitnumber eq '{licenceNumberEscaped}'";
+            // fetch from Dynamics.
+            MicrosoftDynamicsCRMadoxioSpecialevent result;
+            try
+            {
+                result = Specialevents.Get(filter: filter).Value.FirstOrDefault();
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
 
-   
+            return result;
+        }
+
+
     }
 }

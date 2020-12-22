@@ -28,12 +28,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public ActionResult GetApplicationVersionInfo()
         {
-            Assembly assembly = this.GetType().GetTypeInfo().Assembly;
+            Assembly assembly = GetType().GetTypeInfo().Assembly;
             DateTime creationTime = System.IO.File.GetLastWriteTimeUtc(assembly.Location);
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
             string fileVersion = fvi.FileVersion;
 
-            ApplicationVersionInfo avi = new ApplicationVersionInfo()
+            ApplicationVersionInfo avi = new ApplicationVersionInfo
             {
                 BaseUri = _configuration["BASE_URI"],
                 BasePath = _configuration["BASE_PATH"],

@@ -310,7 +310,7 @@
     <div *ngIf="productForm.invalid && !productForm.disabled && productForm.dirty" class="validation">
       <div class="alert alert-danger" *ngFor="let error of getFieldValidationErrors();">{{error}}</div>
     </div>
-    <div class="validation && productForm.dirty">
+    <div class="validation">
       <div class="alert alert-warning" *ngFor="let alert of getFormValidationErrors();">{{alert}}</div>
     </div>
   </form>

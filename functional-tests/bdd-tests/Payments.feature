@@ -2,7 +2,7 @@
     As a logged in business user
     I want to test the payments for a CRS and Catering application
 
-@e2e @cannabis @privatecorporation @payments
+@privatecorporation @payments
 Scenario: Payments for CRS and Catering Applications
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store

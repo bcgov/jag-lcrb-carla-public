@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>        
-        public static ViewModels.VoteQuestion ToViewModel(this Models.VoteQuestion voteQuestion)
+        public static ViewModels.VoteQuestion ToViewModel(this VoteQuestion voteQuestion)
         {
             ViewModels.VoteQuestion result = null;
             if (voteQuestion != null)
@@ -18,7 +18,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result = new ViewModels.VoteQuestion();
                 result.id = voteQuestion.Id.ToString();
                 List<ViewModels.VoteOption> options = new List<ViewModels.VoteOption>();
-                foreach (Models.VoteOption option in voteQuestion.Options)
+                foreach (VoteOption option in voteQuestion.Options)
                 {
                     options.Add(option.ToViewModel());
                 }

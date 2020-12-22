@@ -3,7 +3,7 @@
     I want to pay the first year catering licence fee
     And submit personnel name changes for different business types
 
-@e2e @catering @partnership @cateringemailpartner
+@catering @partnership @cateringpersonnelnamechange
 Scenario: Catering Partnership Personnel Name Change
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -15,7 +15,7 @@ Scenario: Catering Partnership Personnel Name Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I request a personnel name change for a partnership
     And I click on the link for Dashboard
@@ -23,7 +23,7 @@ Scenario: Catering Partnership Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @privatecorporation @cateringemailprivcorp
+@catering @privatecorporation @cateringpersonnelnamechange
 Scenario: Catering Private Corporation Personnel Name Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -35,7 +35,7 @@ Scenario: Catering Private Corporation Personnel Name Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
     And I click on the link for Dashboard
@@ -43,7 +43,7 @@ Scenario: Catering Private Corporation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @publiccorporation @cateringemailpubcorp
+@catering @publiccorporation @cateringpersonnelnamechange
 Scenario: Catering Public Corporation Personnel Name Change
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
@@ -55,7 +55,7 @@ Scenario: Catering Public Corporation Personnel Name Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I request a personnel name change for a public corporation
     And I click on the link for Dashboard
@@ -63,7 +63,7 @@ Scenario: Catering Public Corporation Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @society @cateringemailsociety
+@catering @society @cateringpersonnelnamechange
 Scenario: Catering Society Personnel Name Change
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -75,7 +75,7 @@ Scenario: Catering Society Personnel Name Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee
     And I click on the link for Dashboard
     And I request a personnel name change for a society
     And I click on the link for Dashboard
@@ -83,7 +83,7 @@ Scenario: Catering Society Personnel Name Change
     And the account is deleted
     Then I see the login page
 
-@e2e @catering @soleproprietorship @cateringemailsoleprop
+@catering @soleproprietorship @cateringpersonnelnamechange
 Scenario: Catering Sole Proprietorship Personnel Name Change
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -95,7 +95,7 @@ Scenario: Catering Sole Proprietorship Personnel Name Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee for Catering
+    And I pay the licensing fee
     And I click on the link for Dashboard
     And I request a personnel name change for a sole proprietorship
     And I click on the link for Dashboard

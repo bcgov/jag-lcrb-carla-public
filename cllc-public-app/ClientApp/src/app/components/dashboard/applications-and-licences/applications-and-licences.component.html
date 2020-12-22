@@ -1,5 +1,6 @@
+<mat-progress-bar class="mt-1 mb-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+
 <div>
-  <div [ngBusy]="busy"></div>
   <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">APPLICATIONS</h3>
   <section style="border: 1px solid #ccc; padding: 10px;  border-bottom: 4px solid #FFCC00;">
     <section>
@@ -34,8 +35,11 @@
                   target="_blank" rel="noopener noreferrer">Learn more about this licence</a>
               </td>
               <td style="text-align: center;">
-                <button class="btn btn-secondary" (click)="startNewLicenceApplication()" id="startCRS">START
-                  APPLICATION</button>
+                <button mat-raised-button color="secodary" [disabled]="startCRSOngoing"
+                  (click)="startNewLicenceApplication()" id="startCRS">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startCRSOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
               </td>
             </tr>
             <tr *ngIf="!(nonMarketerExists || marketerExists)">
@@ -51,8 +55,11 @@
                   more about this licence</a>
               </td>
               <td style="text-align: center;">
-                <button class="btn btn-secondary" (click)="startNewMarketerApplication()" id="startMarketing">START
-                  APPLICATION</button>
+                <button mat-raised-button color="secondary" [disabled]="startMarketingOngoing"
+                  (click)="startNewMarketerApplication()" id="startMarketing">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startMarketingOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
               </td>
             </tr>
           </table>
@@ -74,12 +81,40 @@
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button *ngIf="liquorOne" class="btn btn-secondary" (click)="startNewCateringApplication()"
-                  id="startCatering">START
-                  APPLICATION</button>
-                <button *ngIf="!liquorOne" class="btn btn-secondary" id="startCatering" disabled>COMING SOON</button>
+                <button *ngIf="liquorOne" mat-raised-button color="secondary" [disabled]="startCateringOngoing"
+                  (click)="startNewCateringApplication()" id="startCatering">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startCateringOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+                <button *ngIf="!liquorOne" mat-raised-button color="secondary" id="startCatering" disabled>COMING
+                  SOON</button>
               </td>
             </tr>
+            <tr *ngIf="liquorThree">
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+                <img class="icon" src="assets/Manufacturer-icon-blue-40px.png" alt="">
+              </td>
+              <td style="width:700px;">
+                <h3>Food Primary Licence</h3>
+                <p>Food primary licences are for establishments where the primary focus is the service of food such as
+                  restaurants,
+                  bistros, and cafes. Take-out restaurants, mall food fairs, food trucks, and banquet halls without
+                  fully equipped
+                  kitchens are not eligible.</p>
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/food-primary-liquor-licence"
+                  target="_blank">Learn
+                  more about this licence</a>
+              </td>
+              <td style='text-align: center;'>
+                <button mat-raised-button color="secondary" [disabled]="startFPOngoing"
+                  (click)="startNewFPApplication()" id="startFP">
+                  <span>START
+                    APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startFPOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
+
             <tr *ngIf="liquorTwo">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
                 <img class="icon" src="assets/Manufacturer-icon-blue-40px.png" alt="">
@@ -93,8 +128,11 @@
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button class="btn btn-secondary" (click)="startNewMfgApplication()" id="startMfg">START
-                  APPLICATION</button>
+                <button mat-raised-button color="secodary" [disabled]="startMfgOngoing"
+                  (click)="startNewMfgApplication()" id="startMfg">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startMfgOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
               </td>
             </tr>
 
@@ -137,8 +175,11 @@
                   more about this licence</a>
               </td>
               <td style='text-align: center;'>
-                <button class="btn btn-secondary" (click)="startNewUBVApplication()" id="startUBV">START
-                  APPLICATION</button>
+                <button mat-raised-button color="secondary" [disabled]="startUBVOngoing"
+                  (click)="startNewUBVApplication()" id="startUBV">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startUBVOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
               </td>
             </tr>
 
@@ -179,7 +220,9 @@
                   more about this Expression of Interest</a-->
               </td>
               <td style="text-align: center;">
-                <button class="btn btn-secondary" (click)="startNewRASApplication()" id="startRAS">SUBMIT INFORMATION
+                <button mat-raised-button color="secondary" (click)="startNewRASApplication()" id="startRAS">
+                  SUBMIT INFORMATION
+                  <mat-progress-bar class="mb-1" *ngIf="startRASOngoing" mode="indeterminate"></mat-progress-bar>
                 </button>
               </td>
             </tr>
@@ -187,8 +230,8 @@
           </table>
         </section>
       </div>
-
-      <mat-tab-group [selectedIndex]="0">
+      <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+      <mat-tab-group *ngIf="dataLoaded" [selectedIndex]="0">
         <mat-tab label="In Progress Applications" id="inProgressApplications">
           <section *ngIf="inProgressApplications?.length > 0">
             <label>Please note:</label> <br>
@@ -205,6 +248,7 @@
           <p *ngIf="inProgressApplications?.length == 0 ">
             You do not have any In Progress Applications.
           </p>
+
           <table *ngIf="inProgressApplications?.length > 0" class="eq-table">
             <tr>
               <th colspan=2>Application</th>
@@ -216,10 +260,20 @@
             <tr *ngFor="let item of inProgressApplications; let i = index;" style="border: 1px solid #ccc; ">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
               <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
-                <span style="font-weight: 600">{{item.establishmentName}}</span> <br>
-                <span>{{item.portallabel}}</span> <br>
-                <span>Job No: </span> <i>{{item.jobNumber}}</i> <br>
-                <span>Reference #: {{item.name}} </span> <span></span> <br>
+                <ng-container *ngIf="item.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee">
+                  <span style="font-weight: 600">{{ApplicationTypeNames.PermanentChangeToALicensee}}</span> <br>
+                  <span>Job No: </span> <i>{{item.jobNumber}}</i> <br>
+                  <span>Reference #: {{item.name}} </span> <span></span> <br>
+                </ng-container>
+
+                <ng-container *ngIf="item.applicationTypeName !== ApplicationTypeNames.PermanentChangeToALicensee">
+                  <span style="font-weight: 600">{{item.establishmentName}}</span> <br>
+                  <span>{{item.portallabel}}</span> <br>
+                  <span>Job No: </span> <i>{{item.jobNumber}}</i> <br>
+                  <span>Reference #: {{item.name}} </span> <span></span> <br>
+                </ng-container>
+
+
               </td>
               <!--
                 <td style="padding: 10px; width: 110px;">
@@ -231,11 +285,11 @@
                   <span *ngIf="!isApprovedByLGAndNotSubmitted(item)">
                     {{getApplicationStatusText(item.applicationStatus)}}
                   </span>
- 
+
                   <span *ngIf="isApprovedByLGAndNotSubmitted(item)">
                     Ready for Submission
                   </span>
- 
+
                 </div>
                 <p *ngIf="item.applicationStatus === 'Processed'">
                   This application has been received and is being reviewed by the LCRB.
@@ -262,8 +316,8 @@
 
                   <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
                     <span>
-                        <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
-                        Pay First Year Fee
+                      <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
+                      Pay First Year Fee
                     </span>
                   </a>
 
@@ -282,8 +336,7 @@
                 </p>
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
-                <div
-                  *ngIf="item.applicationStatus === 'Not Submitted' || item.applicationStatus ===  'Pending External Review'">
+                <div *ngIf="item.applicationStatus === 'Not Submitted' || item.applicationStatus ===  'Pending External Review'">
 
                   <ng-container *ngIf="!item.lgHasApproved">
                     <a appRemoveIfFeatureOff="LicenseeChanges"
@@ -316,30 +369,35 @@
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Application</span>
                   </a>
+
                   <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal || item.applicationTypeName === ApplicationTypeNames.LiquorRenewal || item.applicationTypeName === ApplicationTypeNames.MarketingRenewal"
                     routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Renewal</span>
                   </a>
                 </div>
+                
                 <div *ngIf="item.applicationStatus === 'Relocation Initiated'">
                   <a [routerLink]="['/account-profile/' + item.id, { mode: CHANGE_OF_LOCATION_MODE }]">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Relocation</span>
                   </a>
                 </div>
+
                 <div *ngIf="item.applicationStatus === 'Transfer Initiated'">
                   <a routerLink="/multi-step-application/{{item.id}}">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Transfer</span>
                   </a>
                 </div>
+
                 <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'">
                   <a [routerLink]="['/licensee-changes/' + item.id]">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Licensee Change</span>
                   </a>
                 </div>
+
                 <div *ngIf="item.applicationStatus === 'Not Submitted'" style="margin-top: 5px;"
                   (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
@@ -347,6 +405,7 @@
                     <span>Cancel Application</span>
                   </a>
                 </div>
+
                 <div *ngIf="item.applicationStatus === 'Relocation Initiated'" style="margin-top: 5px;"
                   (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
@@ -354,6 +413,7 @@
                     <span>Cancel Relocation</span>
                   </a>
                 </div>
+
                 <div *ngIf="item.applicationStatus === 'Transfer Initiated'" style="margin-top: 5px;"
                   (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
@@ -361,6 +421,7 @@
                     <span>Cancel Transfer</span>
                   </a>
                 </div>
+
                 <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'" style="margin-top: 5px;"
                   (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
@@ -368,6 +429,7 @@
                     <span>Cancel Licensee Change</span>
                   </a>
                 </div>
+
                 <div
                   *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Processed'].indexOf(item.applicationStatus) !== -1">
                   <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
@@ -375,6 +437,7 @@
                     <span>Add Supporting Documents</span>
                   </a>
                 </div>
+
               </td>
               <td>
                 <section *ngIf="item?.endorsements?.length">

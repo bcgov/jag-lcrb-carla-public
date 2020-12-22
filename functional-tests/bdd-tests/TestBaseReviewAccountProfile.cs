@@ -44,6 +44,8 @@ namespace bdd_tests
 
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
+            string corpGiven = "Automated";
+            string corpSurname = "Testing";
             string corpTitle = "CEO";
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
@@ -55,14 +57,16 @@ namespace bdd_tests
             // enter the private/public corporation or society incorporation number
             if (businessType == " private corporation" || businessType == " society" || businessType == " public corporation")
             {
+                // enter incorporation number
                 NgWebElement uiCorpNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='bcIncorporationNumber']"));
                 uiCorpNumber.SendKeys(incorporationNumber);
 
+                // select date of incorporation (= today)
                 NgWebElement uiCalendar1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='dateOfIncorporationInBC']"));
-                uiCalendar1.Click();
+                JavaScriptClick(uiCalendar1);
 
                 NgWebElement uiCalendar2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-                uiCalendar2.Click();
+                JavaScriptClick(uiCalendar2);
             }
 
             // enter the physical street address 1
@@ -76,6 +80,14 @@ namespace bdd_tests
             // enter the physical city
             NgWebElement uiPhysCity = ngDriver.FindElement(By.CssSelector("input[formControlName='physicalAddressCity']"));
             uiPhysCity.SendKeys(physCity);
+
+            // select non default province
+            NgWebElement uiNonDefaultProvince = ngDriver.FindElement(By.CssSelector("select[formcontrolname='physicalAddressProvince'] option[value='Alberta']"));
+            uiNonDefaultProvince.Click();
+
+            // select default province
+            NgWebElement uiDefaultProvince = ngDriver.FindElement(By.CssSelector("select[formcontrolname='physicalAddressProvince'] option[value='British Columbia']"));
+            uiDefaultProvince.Click();
 
             // enter the physical postal code
             NgWebElement uiPhysPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName='physicalAddressPostalCode']"));
@@ -127,6 +139,14 @@ namespace bdd_tests
                 NgWebElement uiLiquorPolicyLink = ngDriver.FindElement(By.CssSelector("input[formcontrolname='websiteUrl']"));
                 uiLiquorPolicyLink.SendKeys(liquorPolicyLink);
             }
+
+            // enter the contact given name
+            NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstname']"));
+            uiFirstName.SendKeys(corpGiven);
+
+            // enter the contact surname
+            NgWebElement uiLastName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lastname']"));
+            uiLastName.SendKeys(corpSurname);
 
             // enter the contact title
             NgWebElement uiCorpTitle = ngDriver.FindElement(By.CssSelector("input[formControlName='jobTitle']"));

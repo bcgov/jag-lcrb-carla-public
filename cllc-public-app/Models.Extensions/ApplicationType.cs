@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             ApplicationType result = null;
             if (applicationType != null)
             {
-                result = new ApplicationType()
+                result = new ApplicationType
                 {
                     ActionText = applicationType.AdoxioActiontext,
                     Category = (ApplicationTypeCategory?)applicationType.AdoxioCategory,
@@ -30,6 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                     LetterOfIntent = (FormControlState?)applicationType.AdoxioLetterofintent,
                     Name = applicationType.AdoxioName,
+                    HasLESection = applicationType.AdoxioHaslesection,
                     NewEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
                     ProofofZoning = (FormControlState?)applicationType.AdoxioProofofzoning,
                     PublicCooler = (FormControlState?)applicationType.AdoxioPubliccoolerspace,

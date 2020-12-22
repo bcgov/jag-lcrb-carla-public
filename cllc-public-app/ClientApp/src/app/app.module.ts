@@ -131,7 +131,7 @@ import { WorkerHomeComponent, WorkerHomeDialogComponent } from '@components/work
 import { WorkerInformationComponent } from '@components/worker-qualification/worker-information/worker-information.component';
 import { AssosiateWizardComponent } from '@components/associate-wizard/associate-wizard.component';
 import { SolePropResultsComponent } from '@components/associate-wizard/sole-prop-results/sole-prop-results.component';
-import { NgxFileDropModule  } from 'ngx-file-drop';
+import { NgxFileDropModule } from 'ngx-file-drop';
 import { NgxMaskModule } from 'ngx-mask';
 import {
   IndividualAssociatesResultsComponent
@@ -182,7 +182,7 @@ import { AssociateListComponent } from './shared/components/associate-list/assoc
 import { OrgStructureComponent } from './shared/components/org-structure/org-structure.component';
 import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
 import { PersonalHistorySummaryComponent } from './components/personal-history-summary/personal-history-summary.component';
-import { CannabisAssociateScreeningComponent} from './components/cannabis-associate-screening/cannabis-associate-screening.component';
+import { CannabisAssociateScreeningComponent } from './components/cannabis-associate-screening/cannabis-associate-screening.component';
 import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
 import { SecurityScreeningConfirmationComponent } from './components/security-screening-confirmation/security-screening-confirmation.component';
 import { MultiStageApplicationFlowComponent } from './components/multi-stage-application-flow/multi-stage-application-flow.component';
@@ -213,6 +213,11 @@ import { LgZoningConfirmationComponent } from './components/applications/applica
 import { ProofOfZoningComponent } from './components/applications/application/tabs/proof-of-zoning/proof-of-zoning.component';
 import { ProductionStagesComponent } from './components/applications/application/tabs/business-plan/production-stages/production-stages.component';
 import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
+import { PermanentChangesToALicenseeComponent } from './components/applications/permanent-changes-to-a-licensee/permanent-changes-to-a-licensee.component';
+import { LegalEntityTypeUpdateCalloutboxComponent } from './components/dashboard/legal-entity-type-update-calloutbox/legal-entity-type-update-calloutbox.component';
+import { OffsiteStorageComponent } from '@components/offsite-storage/offsite-storage.component';
+import { OffsiteTableComponent } from '@components/tables/offsite-table/offsite-table.component';
+import { ContactComponent } from './shared/components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -337,7 +342,12 @@ import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confi
     AdditionalPidsComponent,
     LgZoningConfirmationComponent,
     ProductionStagesComponent,
-    PhsConfirmationComponent
+    PhsConfirmationComponent,
+    PermanentChangesToALicenseeComponent,
+    LegalEntityTypeUpdateCalloutboxComponent,
+    OffsiteStorageComponent,
+    OffsiteTableComponent,
+    ContactComponent,
   ],
   imports: [
     ChartsModule,

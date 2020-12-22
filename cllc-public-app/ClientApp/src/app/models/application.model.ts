@@ -18,7 +18,8 @@ export class Application {
 
   id: string;
   parentApplicationId: string;
-  adoxioInvoiceId: string;
+  invoiceId: string;
+  secondaryInvoiceId: string;
   account: Account;
   additionalPropertyInformation: string;
   applicantType: string;
@@ -155,7 +156,7 @@ export class Application {
   mfgStepSecFermOrCarb: boolean;
   mfgUsesNeutralGrainSpirits: string;
   isAlr: boolean;
-  pidList: string; 
+  pidList: string;
 
   zoningStatus: boolean;
   isOwnerBusiness: boolean;
@@ -165,14 +166,28 @@ export class Application {
 
   // Manufactuer Structural Change - Patio
   patioCompDescription: string;
-  patioLocationDescription: string; 
+  patioLocationDescription: string;
   patioAccessDescription: string;
   patioIsLiquorCarried: boolean;
   patioLiquorCarriedDescription: string;
   patioAccessControlDescription: string;
-        
+
   locatedAboveDescription: number;
   patioServiceBar: number;
 
+  firstNameOld: string;
+  firstNameNew: string;
+  lastNameOld: string;
+  lastNameNew: string;
+  csInternalTransferOfShares: boolean;
+  csExternalTransferOfShares: boolean;
+  csChangeOfDirectorsOrOfficers: boolean;
+  csNameChangeLicenseeCorporation: boolean;
+  csNameChangeLicenseePartnership: boolean;
+  csNameChangeLicenseeSociety: boolean;
+  csNameChangeLicenseePerson: boolean;
+  csAdditionalReceiverOrExecutor: boolean;
+  primaryInvoicePaid: boolean;
+  secondaryInvoicePaid: boolean;
 
 }
