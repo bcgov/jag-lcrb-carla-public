@@ -52,7 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET licence by id
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetLicence(string id)
+        public IActionResult GetLicence(string id)
         {
             MicrosoftDynamicsCRMadoxioLicences licence;
 
@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a SharePointDocumentLocation link
             var folderName = licence.GetDocumentFolderName();
             _fileManagerClient.CreateFolderIfNotExist(_logger, LicenceDocumentUrlTitle, folderName);
-            _dynamicsClient.CreateEntitySharePointDocumentLocation("licence", licence.AdoxioLicencesid, folderName, folderName);
+            _dynamicsClient.CreateLicenceDocumentLocation(licence, folderName, folderName);
         }
 
         [HttpPut("{licenceId}/representative")]
