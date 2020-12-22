@@ -270,7 +270,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all local government approval applications in Dynamics for the current user
         [HttpGet("current/lg-approvals")]
-        public async Task<JsonResult> GetLgApprovalApplications()
+        public JsonResult GetLgApprovalApplications()
         {
             var results = new List<Application>();
             // get the current user.
@@ -281,40 +281,47 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // get user account
                 var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
-                var account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
+                var account = _dynamicsClient.GetAccountById(accountId);
 
-                var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
-                filter += $" and statuscode eq {(int) AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
-
-                var expand = new List<string>
+                if (account._adoxioLginlinkidValue != null)
                 {
-                    "adoxio_Applicant",
-                    "adoxio_localgovindigenousnationid",
-                    "adoxio_application_SharePointDocumentLocations",
-                    "adoxio_application_adoxio_tiedhouseconnection_Application",
-                    "adoxio_AssignedLicence",
-                    "adoxio_ApplicationTypeId",
-                    "adoxio_LicenceFeeInvoice",
-                    "adoxio_Invoice",
-                    "adoxio_application_SharePointDocumentLocations"
-                };
+                    var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
+                    filter += $" and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
 
-                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
-                if (applications != null)
+                    var expand = new List<string>
+                    {
+                        "adoxio_Applicant",
+                        "adoxio_localgovindigenousnationid",
+                        "adoxio_application_SharePointDocumentLocations",
+                        "adoxio_application_adoxio_tiedhouseconnection_Application",
+                        "adoxio_AssignedLicence",
+                        "adoxio_ApplicationTypeId",
+                        "adoxio_LicenceFeeInvoice",
+                        "adoxio_Invoice",
+                        "adoxio_application_SharePointDocumentLocations"
+                    };
+
+                    var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
                     foreach (var dynamicsApplication in applications)
                     {
-                        var viewModel = await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger);
-                        var resolutionFiles = await FileController.GetListFilesInFolder(
+                        var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
+                        var resolutionFiles = FileController.GetListFilesInFolder(
                             dynamicsApplication.AdoxioApplicationid, "application", "LGIN Resolution", _dynamicsClient,
-                            _fileManagerClient, _logger);
+                            _fileManagerClient, _logger).GetAwaiter().GetResult();
                         if (resolutionFiles.Count > 0) viewModel.ResolutionDocsUploaded = true;
                         results.Add(viewModel);
                     }
+                    
+                }
+                
             }
             catch (HttpOperationException e)
             {
-                _logger.LogError(e, "Error getting licensee applications by type");
-                throw;
+                _logger.LogError(e, "Error getting local government approval applications in Dynamics for the current user");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected Error getting local government approval applications in Dynamics for the current user");
             }
 
             return new JsonResult(results);
