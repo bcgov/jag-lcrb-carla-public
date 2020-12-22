@@ -172,16 +172,9 @@ namespace bdd_tests
             NgWebElement uiAdditionalInformation = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='additionalLocationInformation']"));
             uiAdditionalInformation.SendKeys(additionalInformation);
 
-            // select start date
-            NgWebElement uiStartDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='startDate']"));
-            uiStartDate1.Click();
-
-            NgWebElement uiStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-            uiStartDate2.Click();
-
             // select end date
             NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
-            JavaScriptClick(uiEndDate1);
+            uiEndDate1.Click();
 
             // click on the next button
             NgWebElement uiOpenCalendarNext = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
@@ -197,6 +190,22 @@ namespace bdd_tests
             // click on the first day
             NgWebElement uiOpenCalendarYear = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
             JavaScriptClick(uiOpenCalendarYear);
+
+            // select start date
+            NgWebElement uiStartDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='startDate']"));
+            uiStartDate1.Click();
+
+            try
+            {
+                NgWebElement uiStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
+                uiStartDate2.Click();
+            }
+            catch
+            {
+                // retry if failed once
+                NgWebElement uiStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
+                uiStartDate2.Click();
+            }
 
             if (frequency != "for one date only")
             {
