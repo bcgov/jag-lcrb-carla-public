@@ -23,7 +23,6 @@ namespace bdd_tests
         [And(@"I click on the link for (.*)")]
         public void ClickOnLink(string specificLink)
         {
-
             NgWebElement uiRequestedLink = null;
             for (int i = 0; i < 30; i++)
             {
@@ -45,7 +44,7 @@ namespace bdd_tests
 
                 }
             }
-            uiRequestedLink.Click();
+            JavaScriptClick(uiRequestedLink);
         }
 
 
