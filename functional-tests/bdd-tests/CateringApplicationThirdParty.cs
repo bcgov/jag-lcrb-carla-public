@@ -19,7 +19,7 @@ Feature: CateringApplicationThirdParty
     And submit a third party operator request for different business types
 
  @catering @partnership @cateringtpo
- Scenario: Partnership Catering Third Party Operator Request
+ Scenario: Catering Third Party Operator Request (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -38,7 +38,7 @@ Feature: CateringApplicationThirdParty
     Then I see the login page
 
  @catering @privatecorporation @cateringtpo
- Scenario: Private Corporation Catering Third Party Operator Request
+ Scenario: Catering Third Party Operator Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -57,7 +57,7 @@ Feature: CateringApplicationThirdParty
     Then I see the login page
 
  @catering @publiccorporation @cateringtpo2
- Scenario: Public Corporation Catering Third Party Operator Request
+ Scenario: Catering Third Party Operator Request (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -76,7 +76,7 @@ Feature: CateringApplicationThirdParty
     Then I see the login page
 
  @catering @society @cateringtpo2
- Scenario: Society Catering Third Party Operator Request
+ Scenario: Catering Third Party Operator Request (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -95,7 +95,7 @@ Feature: CateringApplicationThirdParty
     Then I see the login page
 
  @catering @soleproprietorship @cateringtpo
- Scenario: Sole Proprietorship Catering Third Party Operator Request
+ Scenario: Catering Third Party Operator Request (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
