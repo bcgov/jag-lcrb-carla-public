@@ -3,7 +3,7 @@
     I want to confirm that the Manufacturer functionality is ready for release
 
 @manufacturer @winery @release 
-Scenario: Private Corporation Manufacturer Release #1
+Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -34,7 +34,7 @@ Scenario: Private Corporation Manufacturer Release #1
     Then I see the login page
 
 @manufacturer @winery @release 
-Scenario: Private Corporation Manufacturer Release #2
+Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -76,7 +76,7 @@ Scenario: Private Corporation Manufacturer Release #2
     Then I see the login page
 
 @manufacturer @winery 
-Scenario: Sole Proprietorship Manufacturer Release #1
+Scenario: Manufacturer Release #1 (Winery/Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a sole proprietorship
@@ -107,7 +107,7 @@ Scenario: Sole Proprietorship Manufacturer Release #1
     Then I see the login page
 
 @manufacturer @winery 
-Scenario: Sole Proprietorship Manufacturer Release #2
+Scenario: Manufacturer Release #2 (Winery/Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a sole proprietorship

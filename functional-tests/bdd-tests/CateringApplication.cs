@@ -18,7 +18,7 @@ Feature: CateringApplication
     I want to submit a Catering Application for different business types
 
 @cateringapp @partnership 
-Scenario: Partnership Catering Application
+Scenario: Catering Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -36,7 +36,7 @@ Scenario: Partnership Catering Application
     Then I see the login page
 
 @cateringapp @privatecorporation
-Scenario: Private Corporation Catering Application
+Scenario: Catering Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -54,7 +54,7 @@ Scenario: Private Corporation Catering Application
     Then I see the login page
 
 @cateringapp @publiccorporation
-Scenario: Public Corporation Catering Application
+Scenario: Catering Application (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -72,7 +72,7 @@ Scenario: Public Corporation Catering Application
     Then I see the login page
 
 @cateringapp @society
-Scenario: Society Catering Application
+Scenario: Catering Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -90,7 +90,7 @@ Scenario: Society Catering Application
     Then I see the login page
 
 @cateringapp @soleproprietorship
-Scenario: Sole Proprietorship Catering Application
+Scenario: Catering Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship

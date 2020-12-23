@@ -18,7 +18,7 @@ Feature: ManufacturerStructuralAlterations
     I want to request structural alterations to an approved lounge or special events area for a manufacturer licence
 
 @manufacturer @winery @structuralalterations
-Scenario: Winery Structural Alterations
+Scenario: Structural Alterations (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -36,7 +36,7 @@ Scenario: Winery Structural Alterations
     Then I see the login page
 
 @manufacturer @brewery @structuralalterations
-Scenario: Brewery Structural Alterations
+Scenario: Structural Alterations (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -54,7 +54,7 @@ Scenario: Brewery Structural Alterations
     Then I see the login page
 
 @manufacturer @distillery @structuralalterations
-Scenario: Distillery Structural Alterations
+Scenario: Structural Alterations (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -72,7 +72,7 @@ Scenario: Distillery Structural Alterations
     Then I see the login page
 
 @manufacturer @copacker @structuralalterations
-Scenario: Co-packer Structural Alterations
+Scenario: Structural Alterations (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

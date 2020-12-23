@@ -3,7 +3,7 @@
     I want to run a release test for a Food Primary licence
 
 @foodprimary @privatecorporation @release
-Scenario: Private Corporation Food Primary Release Test
+Scenario: Food Primary Release Test (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -39,7 +39,7 @@ Scenario: Private Corporation Food Primary Release Test
     Then I see the login page
 
 @foodprimary @soleproprietorship
-Scenario: Sole Proprietorship Food Primary Release Test
+Scenario: Food Primary Release Test (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
     And I review the account profile for a sole proprietorship

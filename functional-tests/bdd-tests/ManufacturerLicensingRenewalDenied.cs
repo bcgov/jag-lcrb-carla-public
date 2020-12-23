@@ -23,7 +23,7 @@ Feature: ManufacturerLicensingRenewalDenied
 #-----------------------
 
 @manufacturer @licencerenewal
-Scenario:  Deny Today Winery Licence Renewal
+Scenario:  Deny Today Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -43,7 +43,7 @@ Scenario:  Deny Today Winery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Today Brewery Licence Renewal
+Scenario:  Deny Today Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -63,7 +63,7 @@ Scenario:  Deny Today Brewery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Today Distillery Licence Renewal
+Scenario:  Deny Today Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -83,7 +83,7 @@ Scenario:  Deny Today Distillery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Today Co-packer Licence Renewal
+Scenario:  Deny Today Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -107,7 +107,7 @@ Scenario:  Deny Today Co-packer Licence Renewal
 #-----------------------
 
 @manufacturer @licencerenewal
-Scenario:  Deny Yesterday Winery Licence Renewal
+Scenario:  Deny Yesterday Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -127,7 +127,7 @@ Scenario:  Deny Yesterday Winery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Yesterday Brewery Licence Renewal
+Scenario:  Deny Yesterday Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -147,7 +147,7 @@ Scenario:  Deny Yesterday Brewery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Yesterday Distillery Licence Renewal
+Scenario:  Deny Yesterday Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -167,7 +167,7 @@ Scenario:  Deny Yesterday Distillery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Yesterday Co-packer Licence Renewal
+Scenario:  Deny Yesterday Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -191,7 +191,7 @@ Scenario:  Deny Yesterday Co-packer Licence Renewal
 #-----------------------
 
 @manufacturer @licencerenewal
-Scenario:  Deny 45 Days Ago Winery Licence Renewal
+Scenario:  Deny 45 Days Ago Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -211,7 +211,7 @@ Scenario:  Deny 45 Days Ago Winery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 45 Days Ago Brewery Licence Renewal
+Scenario:  Deny 45 Days Ago Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -231,7 +231,7 @@ Scenario:  Deny 45 Days Ago Brewery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 45 Days Ago Distillery Licence Renewal
+Scenario:  Deny 45 Days Ago Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -251,7 +251,7 @@ Scenario:  Deny 45 Days Ago Distillery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 45 Days Ago Co-packer Licence Renewal
+Scenario:  Deny 45 Days Ago Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -275,7 +275,7 @@ Scenario:  Deny 45 Days Ago Co-packer Licence Renewal
 #-----------------------------
 
 @manufacturer @licencerenewal
-Scenario:  Deny 60 Days From Today Winery Licence Renewal
+Scenario:  Deny 60 Days From Today Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -295,7 +295,7 @@ Scenario:  Deny 60 Days From Today Winery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 60 Days From Today Brewery Licence Renewal
+Scenario:  Deny 60 Days From Today Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -315,7 +315,7 @@ Scenario:  Deny 60 Days From Today Brewery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 60 Days From Today Distillery Licence Renewal
+Scenario:  Deny 60 Days From Today Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -335,7 +335,7 @@ Scenario:  Deny 60 Days From Today Distillery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 60 Days From Today Co-packer Licence Renewal
+Scenario:  Deny 60 Days From Today Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -359,7 +359,7 @@ Scenario:  Deny 60 Days From Today Co-packer Licence Renewal
 #-----------------------------
 
 @manufacturer @licencerenewal
-Scenario:  Deny 30 Days From Today Winery Licence Renewal
+Scenario:  Deny 30 Days From Today Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -379,7 +379,7 @@ Scenario:  Deny 30 Days From Today Winery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 30 Days From Today Brewery Licence Renewal
+Scenario:  Deny 30 Days From Today Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -399,7 +399,7 @@ Scenario:  Deny 30 Days From Today Brewery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 30 Days From Today Distillery Licence Renewal
+Scenario:  Deny 30 Days From Today Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -419,7 +419,7 @@ Scenario:  Deny 30 Days From Today Distillery Licence Renewal
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 30 Days From Today Co-packer Licence Renewal
+Scenario:  Deny 30 Days From Today Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
