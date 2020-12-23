@@ -26,7 +26,7 @@ podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', service
                 withEnv(["TZ=GMT-7,baseUri=${baseUri}","test_start=${test_start}","test_start_worker=${test_start_worker}","test_cc=${test_cc}","test_ccv=${test_ccv}","CHROME_BINARY_LOCATION=${CHROME_BINARY_LOCATION}"])
                 {
                     try {                        
-                        sh 'dotnet test --filter Category=@release --logger "junit;LogFilePath=functionalResults.xml"'					
+                        sh 'dotnet test --filter Category=@release --logger "junit;LogFilePath=functionalResults.xml" -- xunit.parallelizeAssembly=true'					
                     }
                     catch (err)
                     {
