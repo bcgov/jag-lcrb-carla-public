@@ -4,7 +4,7 @@
     And download the licence for the approved application
 
 @cannabis @CRSdownloadlicence
-Scenario: Private Corporation Download Licence
+Scenario: Download Licence (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
