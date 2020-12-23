@@ -215,21 +215,21 @@ namespace bdd_tests
             {
                 // click on the Catering Start Application button
                 NgWebElement uiStartAppButton = ngDriver.FindElement(By.Id("startCatering"));
-                uiStartAppButton.Click();
+                JavaScriptClick(uiStartAppButton);
             }
 
             if (applicationType == "a Cannabis Retail Store")
             {
                 // click on the Cannabis Start Application button
                 NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
-                uiStartAppButton.Click();
+                JavaScriptClick(uiStartAppButton);
             }
 
             if (applicationType == "a Rural Agency Store")
             {
                 // click on the Rural Store Start Application button
                 NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
-                uiStartAppButton.Click();
+                JavaScriptClick(uiStartAppButton);
             }
 
             if (applicationType == "a Manufacturer Licence")
@@ -250,21 +250,21 @@ namespace bdd_tests
             {
                 // click on the Cannabis Marketing Licence Start Application button
                 NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMarketing']"));
-                uiStartAppButton.Click();
+                JavaScriptClick(uiStartAppButton);
             }
 
             if (applicationType == "a UBrew UVin application")
             {
                 // click on the UBrew UVin application Licence Start Application button
                 NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
-                uiStartAppButton.Click();
+                JavaScriptClick(uiStartAppButton);
             }
 
             if (applicationType == "Food Primary")
             {
                 // click on the Food Primary Start Application button
                 NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startFP']"));
-                uiStartAppButton.Click();
+                JavaScriptClick(uiStartAppButton);
             }
         }
 
