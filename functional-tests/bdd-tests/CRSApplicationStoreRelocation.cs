@@ -19,7 +19,7 @@ Feature: CRSApplicationStoreRelocation
     And request a store relocation for the approved application
 
 @cannabis @indigenousnation @crsstorerelocation
-Scenario: Indigenous Nation Cannabis Store Relocation
+Scenario: Cannabis Store Relocation (Indigenous Nation)
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -38,7 +38,7 @@ Scenario: Indigenous Nation Cannabis Store Relocation
     Then I see the login page
 
 @cannabis @partnership @crsstorerelocation
-Scenario: Partnership Cannabis Store Relocation
+Scenario: Cannabis Store Relocation (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -57,7 +57,7 @@ Scenario: Partnership Cannabis Store Relocation
     Then I see the login page
 
 @cannabis @privatecorporation @crsstorerelocation
-Scenario: Private Corporation Cannabis Store Relocation
+Scenario: Cannabis Store Relocation (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -76,7 +76,7 @@ Scenario: Private Corporation Cannabis Store Relocation
     Then I see the login page
 
 @cannabis @publiccorporation @crsstorerelocation
-Scenario: Public Corporation Cannabis Store Relocation
+Scenario: Cannabis Store Relocation (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -95,7 +95,7 @@ Scenario: Public Corporation Cannabis Store Relocation
     Then I see the login page
 
 @cannabis @society @crsstorerelocation
-Scenario: Society Cannabis Store Relocation
+Scenario: Cannabis Store Relocation (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -114,7 +114,7 @@ Scenario: Society Cannabis Store Relocation
     Then I see the login page
 
 @cannabis @soleproprietorship @crsstorerelocation
-Scenario: Sole Proprietorship Cannabis Store Relocation
+Scenario: Cannabis Store Relocation (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure

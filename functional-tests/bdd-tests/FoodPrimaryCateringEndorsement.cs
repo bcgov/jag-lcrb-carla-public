@@ -18,7 +18,7 @@ Feature: FoodPrimaryCateringEndorsement
     I want to request a Catering Endorsement Application for a Food Primary licence
 
 @foodprimarycateringendorsement @privatecorporation
-Scenario: Private Corporation Food Primary Catering Endorsement
+Scenario: Food Primary Catering Endorsement (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -29,7 +29,7 @@ Scenario: Private Corporation Food Primary Catering Endorsement
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I pay the licensing fee 
+    # And I pay the licensing fee 
     And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
     And I click on the Submit button

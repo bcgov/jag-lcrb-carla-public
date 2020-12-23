@@ -18,7 +18,7 @@ Feature: FoodPrimaryPatronParticipation
     I want to request a Patron Participation Entertainment Endorsement Application for a Food Primary licence
 
 @foodprimarypatronparticipation @privatecorporation
-Scenario: Private Corporation Food Primary Patron Participation Entertainment Endorsement
+Scenario: Food Primary Patron Participation Entertainment Endorsement (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -29,7 +29,7 @@ Scenario: Private Corporation Food Primary Patron Participation Entertainment En
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I pay the licensing fee 
+    # And I pay the licensing fee 
     And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
     And I click on the Submit button

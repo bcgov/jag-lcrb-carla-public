@@ -3,7 +3,7 @@
     I want to submit a relocation request for a Food Primary licence
 
 @foodprimaryrelocation @privatecorporation
-Scenario: Private Corporation Food Primary Relocation Application
+Scenario: Food Primary Relocation Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
