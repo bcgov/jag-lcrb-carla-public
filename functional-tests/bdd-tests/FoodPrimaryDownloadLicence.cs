@@ -18,7 +18,7 @@ Feature: FoodPrimaryDownloadLicence
     I want to download a Food Primary licence for different business types
 
 @foodprimarydownloadlicence @privatecorporation
-Scenario: Private Corporation Food Primary Download Licence
+Scenario: Food Primary Download Licence (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -30,7 +30,7 @@ Scenario: Private Corporation Food Primary Download Licence
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee 
+    # And I pay the licensing fee 
     And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page

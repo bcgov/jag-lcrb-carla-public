@@ -3,7 +3,7 @@
     I want to confirm the organization structure functionality
 
 @privatecorporation @validation @privatecorporgstructure
-Scenario: Change private corporation director name and pay fee
+Scenario: Change director name and pay fee (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -26,7 +26,7 @@ Scenario: Change private corporation director name and pay fee
     Then I see the login page
 
 @privatecorporation @validation @privatecorporgstructure
-Scenario: Delete an individual who is both a director and shareholder
+Scenario: Delete an individual who is both a director and shareholder (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
@@ -39,7 +39,7 @@ Scenario: Delete an individual who is both a director and shareholder
     Then I see the login page
 
 @privatecorporation @validation @privatecorporgstructure
-Scenario: Change director and shareholder same name
+Scenario: Change director and shareholder same name (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
@@ -52,7 +52,7 @@ Scenario: Change director and shareholder same name
     Then I see the login page
 
 @privatecorporation @validation @privatecorporgstructure
-Scenario: Confirm business shareholder org structure update
+Scenario: Confirm business shareholder org structure update (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
@@ -77,7 +77,7 @@ Scenario: Confirm business shareholder org structure update
     Then I see the login page
 
 @privatecorporation @validation @privatecorporgstructure
-Scenario: Confirm business shareholder org structure update after payment
+Scenario: Confirm business shareholder org structure update after payment (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
@@ -106,7 +106,7 @@ Scenario: Confirm business shareholder org structure update after payment
     Then I see the login page
 
 @privatecorporation @validation @privatecorporgstructure
-Scenario: Save for Later feature for org structure
+Scenario: Save for Later feature for org structure (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I enter the same individual as a director and a shareholder
@@ -133,7 +133,7 @@ Scenario: Save for Later feature for org structure
     Then I see the login page
 
 @privatecorporation @validation @privatecorporgstructure1
-Scenario: CRS application with mixed business shareholder types
+Scenario: CRS application with mixed business shareholder types (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -153,7 +153,7 @@ Scenario: CRS application with mixed business shareholder types
     Then I see the login page
 
 @privatecorporation @validation @privatecorporgstructure1
-Scenario: Complex Save for Later mixed business shareholders
+Scenario: Complex Save for Later mixed business shareholders (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I review the organization structure for a private corporation
@@ -165,7 +165,7 @@ Scenario: Complex Save for Later mixed business shareholders
     Then I see the login page
 
 @privatecorporation @validation @privatecorporgstructure1
-Scenario: Confirm org structure records not duplicated
+Scenario: Confirm org structure records not duplicated (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I review the organization structure for a private corporation

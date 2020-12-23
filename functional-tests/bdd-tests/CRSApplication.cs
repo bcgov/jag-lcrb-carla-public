@@ -18,7 +18,7 @@ Feature: CRSApplication
     I want to submit a CRS Application for different business types
 
 @cannabis @indigenousnation @crsapp
-Scenario: Indigenous Nation CRS Application
+Scenario: CRS Application (Indigenous Nation)
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -36,7 +36,7 @@ Scenario: Indigenous Nation CRS Application
     Then I see the login page
 
 @cannabis @partnership @crsapp
-Scenario: Partnership CRS Application
+Scenario: CRS Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -54,7 +54,7 @@ Scenario: Partnership CRS Application
     Then I see the login page
 
 @cannabis @privatecorporation @crsapp
-Scenario: Private Corporation CRS Application
+Scenario: CRS Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -72,7 +72,7 @@ Scenario: Private Corporation CRS Application
     Then I see the login page
 
 @cannabis @publiccorporation @crsapp
-Scenario: Public Corporation CRS Application
+Scenario: CRS Application (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -90,7 +90,7 @@ Scenario: Public Corporation CRS Application
     Then I see the login page
 
 @cannabis @society @crsapp
-Scenario: Society CRS Application
+Scenario: CRS Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -108,7 +108,7 @@ Scenario: Society CRS Application
     Then I see the login page
 
 @cannabis @soleproprietorship @crsapp
-Scenario: Sole Proprietorship CRS Application
+Scenario: CRS Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -126,7 +126,7 @@ Scenario: Sole Proprietorship CRS Application
     Then I see the login page
 
 @cannabis @localgovernment @crsapp
-Scenario: Local Government CRS Application
+Scenario: CRS Application (Local Government)
     Given I am logged in to the dashboard as a local government
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure

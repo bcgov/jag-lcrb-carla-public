@@ -18,7 +18,7 @@ Feature: ManufacturerLoungeAreaEndorsement
     I want to request lounge area endorsement for a manufacturer licence
 
 @manufacturer @winery @loungearea
-Scenario: Winery Lounge Area Endorsement Application
+Scenario: Lounge Area Endorsement Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -36,7 +36,7 @@ Scenario: Winery Lounge Area Endorsement Application
     Then I see the login page
 
 @manufacturer @brewery @loungearea
-Scenario: Brewery Lounge Area Endorsement Application
+Scenario: Lounge Area Endorsement Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -54,7 +54,7 @@ Scenario: Brewery Lounge Area Endorsement Application
     Then I see the login page
 
 @manufacturer @distillery @loungearea
-Scenario: Distillery Lounge Area Endorsement Application
+Scenario: Lounge Area Endorsement Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -72,7 +72,7 @@ Scenario: Distillery Lounge Area Endorsement Application
     Then I see the login page
 
 @manufacturer @copacker @loungearea
-Scenario: Co-packer Lounge Area Endorsement Application
+Scenario: Lounge Area Endorsement Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

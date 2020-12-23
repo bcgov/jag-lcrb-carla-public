@@ -18,7 +18,7 @@ Feature: ChangeHoursLiquorService
     I want to update the liquor hours of service for lounge areas and special events
 
 @manufacturer @changehours
-Scenario: Change Lounge Area Hours of Liquor Service Within Service Hours
+Scenario: Lounge Area Within Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -39,7 +39,7 @@ Scenario: Change Lounge Area Hours of Liquor Service Within Service Hours
     Then I see the login page
 
 @manufacturer @changehours
-Scenario: Change Lounge Area Hours of Liquor Service Outside Service Hours
+Scenario: Lounge Area Outside Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -61,7 +61,7 @@ Scenario: Change Lounge Area Hours of Liquor Service Outside Service Hours
     Then I see the login page
 
 @manufacturer @changehours
-Scenario: Change Special Event Area Hours of Liquor Service Within Service Hours
+Scenario: Special Event Area Within Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -82,7 +82,7 @@ Scenario: Change Special Event Area Hours of Liquor Service Within Service Hours
     Then I see the login page
 
 @manufacturer @changehours
-Scenario: Change Special Event Area Hours of Liquor Service Outside Service Hours
+Scenario: Special Event Area Outside Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

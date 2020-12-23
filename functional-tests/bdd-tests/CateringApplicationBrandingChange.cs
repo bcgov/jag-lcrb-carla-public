@@ -19,7 +19,7 @@ Feature: CateringApplicationBrandingChange
     And submit a name branding change for different business types
 
 @cateringbranding @partnership @cateringbranding
-Scenario: Catering Partnership Branding Change
+Scenario: Catering Branding Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -41,7 +41,7 @@ Scenario: Catering Partnership Branding Change
     Then I see the login page
 
 @cateringbranding @privatecorporation
-Scenario: Catering Private Corporation Branding Change
+Scenario: Catering Branding Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -63,7 +63,7 @@ Scenario: Catering Private Corporation Branding Change
     Then I see the login page
 
 @cateringbranding @publiccorporation 
-Scenario: Catering Public Corporation Branding Change
+Scenario: Catering Branding Change (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -85,7 +85,7 @@ Scenario: Catering Public Corporation Branding Change
     Then I see the login page
 
 @cateringbranding @society 
-Scenario: Catering Society Branding Change
+Scenario: Catering Branding Change (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -107,7 +107,7 @@ Scenario: Catering Society Branding Change
     Then I see the login page
 
 @cateringbranding @soleproprietorship 
-Scenario: Catering Sole Proprietorship Branding Change
+Scenario: Catering Branding Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship

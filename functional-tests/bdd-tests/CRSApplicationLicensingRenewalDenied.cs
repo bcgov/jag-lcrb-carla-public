@@ -23,7 +23,7 @@ Feature: CRSApplicationLicensingRenewalDenied
 #-----------------------
 
 @cannabis @licencerenewaldenied
-Scenario: Deny CRS Licence Renewal Today
+Scenario: Deny CRS Licence Renewal Today (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -46,7 +46,7 @@ Scenario: Deny CRS Licence Renewal Today
 #-----------------------
 
 @cannabis @licencerenewaldenied
-Scenario: Deny CRS Licence Renewal Yesterday
+Scenario: Deny CRS Licence Renewal Yesterday (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -69,7 +69,7 @@ Scenario: Deny CRS Licence Renewal Yesterday
 #-----------------------
 
 @cannabis @licencerenewaldenied
-Scenario: Deny CRS Licence Renewal 45 Days Ago
+Scenario: Deny CRS Licence Renewal 45 Days Ago (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -92,7 +92,7 @@ Scenario: Deny CRS Licence Renewal 45 Days Ago
 #-----------------------------
 
 @cannabis @licencerenewaldenied
-Scenario: Deny CRS Licence Renewal 60 Days Future
+Scenario: Deny CRS Licence Renewal 60 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -115,7 +115,7 @@ Scenario: Deny CRS Licence Renewal 60 Days Future
 #-----------------------------
 
 @cannabis @licencerenewaldenied
-Scenario: Deny CRS Licence Renewal 30 Days Future
+Scenario: Deny CRS Licence Renewal 30 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure

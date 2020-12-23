@@ -18,7 +18,7 @@ Feature: FoodPrimaryRelocation
     I want to submit a relocation request for a Food Primary licence
 
 @foodprimaryrelocation @privatecorporation
-Scenario: Private Corporation Food Primary Relocation Application
+Scenario: Food Primary Relocation Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -29,7 +29,7 @@ Scenario: Private Corporation Food Primary Relocation Application
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I pay the licensing fee 
+    # And I pay the licensing fee 
     And I click on the link for Relocation Application
     And I request a relocation application
     And I click on the link for Dashboard

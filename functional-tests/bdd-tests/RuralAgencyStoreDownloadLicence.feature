@@ -3,7 +3,7 @@
     I want to download a rural store licence for a private corporation
 
 @ruralagencydownload @privatecorporation 
-Scenario: Private Corporation Rural Agency Licence Download
+Scenario: Rural Agency Licence Download (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Rural Agency Store
     And I review the account profile for a private corporation

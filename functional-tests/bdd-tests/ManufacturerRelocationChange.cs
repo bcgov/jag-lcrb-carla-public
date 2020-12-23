@@ -18,7 +18,7 @@ Feature: ManufacturerRelocationChange
     I want to request a relocation change for a manufacturer licence
 
 @manufacturer @winery @relocationchange
-Scenario: Winery Relocation Change Application
+Scenario: Relocation Change Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -38,7 +38,7 @@ Scenario: Winery Relocation Change Application
     Then I see the login page
 
 @manufacturer @brewery @relocationchange
-Scenario: Brewery Relocation Change Application
+Scenario: Relocation Change Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -58,7 +58,7 @@ Scenario: Brewery Relocation Change Application
     Then I see the login page
 
 @manufacturer @distillery @relocationchange
-Scenario: Distillery Relocation Change Application
+Scenario: Relocation Change Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -78,7 +78,7 @@ Scenario: Distillery Relocation Change Application
     Then I see the login page
 
 @manufacturer @copacker @relocationchange
-Scenario: Co-packer Relocation Change Application
+Scenario: Relocation Change Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

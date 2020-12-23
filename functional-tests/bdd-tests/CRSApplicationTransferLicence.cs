@@ -19,7 +19,7 @@ Feature: CRSApplicationTransferLicence
     And request a transfer of ownership for the approved application
 
 @cannabis @indigenousnation @crstransferownership
-Scenario: Indigenous Nation Cannabis Transfer Ownership
+Scenario: Cannabis Transfer Ownership (Indigenous Nation)
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -36,7 +36,7 @@ Scenario: Indigenous Nation Cannabis Transfer Ownership
     Then I see the login page
 
 @cannabis @partnership @crstransferownership
-Scenario: Partnership Cannabis Transfer Ownership
+Scenario: Cannabis Transfer Ownership (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -53,7 +53,7 @@ Scenario: Partnership Cannabis Transfer Ownership
     Then I see the login page
 
 @cannabis @privatecorporation @crstransferownership
-Scenario: Private Corporation Cannabis Transfer Ownership
+Scenario: Cannabis Transfer Ownership (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -70,7 +70,7 @@ Scenario: Private Corporation Cannabis Transfer Ownership
     Then I see the login page
 
 @cannabis @publiccorporation @crstransferownership
-Scenario: Public Corporation Cannabis Transfer Ownership
+Scenario: Cannabis Transfer Ownership (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -87,7 +87,7 @@ Scenario: Public Corporation Cannabis Transfer Ownership
     Then I see the login page
 
 @cannabis @society @crstransferownership
-Scenario: Society Cannabis Transfer Ownership
+Scenario: Cannabis Transfer Ownership (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -104,7 +104,7 @@ Scenario: Society Cannabis Transfer Ownership
     Then I see the login page
 
 @cannabis @soleproprietorship @crstransferownership
-Scenario: Sole Proprietorship Cannabis Transfer Ownership
+Scenario: Cannabis Transfer Ownership (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
