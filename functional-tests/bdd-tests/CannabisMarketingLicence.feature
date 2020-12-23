@@ -3,7 +3,7 @@
     I want to submit a Cannabis Marketing Licence for different business types
 
 @cannabismktg @indigenousnation 
-Scenario: Indigenous Nation Cannabis Marketing Application
+Scenario: Cannabis Marketing Application (Indigenous Nation)
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for an indigenous nation
@@ -21,7 +21,7 @@ Scenario: Indigenous Nation Cannabis Marketing Application
     Then I see the login page
 
 @cannabismktg @partnership 
-Scenario: Partnership Cannabis Marketing Application
+Scenario: Cannabis Marketing Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for a partnership
@@ -39,7 +39,7 @@ Scenario: Partnership Cannabis Marketing Application
     Then I see the login page
 
 @cannabismktg @privatecorporation
-Scenario: Private Corporation Cannabis Marketing Application
+Scenario: Cannabis Marketing Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for a private corporation
@@ -57,7 +57,7 @@ Scenario: Private Corporation Cannabis Marketing Application
     Then I see the login page
 
 @cannabismktg @publiccorporation 
-Scenario: Public Corporation Cannabis Marketing Application
+Scenario: Cannabis Marketing Application (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for a public corporation
@@ -75,7 +75,7 @@ Scenario: Public Corporation Cannabis Marketing Application
     Then I see the login page
 
 @cannabismktg @society 
-Scenario: Society Cannabis Marketing Application
+Scenario: Cannabis Marketing Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for a society
@@ -93,7 +93,7 @@ Scenario: Society Cannabis Marketing Application
     Then I see the login page
 
 @cannabismktg @soleproprietorship 
-Scenario: Sole Proprietorship Cannabis Marketing Application
+Scenario: Cannabis Marketing Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for a sole proprietorship
