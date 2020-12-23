@@ -23,7 +23,6 @@ namespace bdd_tests
         [And(@"I click on the link for (.*)")]
         public void ClickOnLink(string specificLink)
         {
-
             NgWebElement uiRequestedLink = null;
             for (int i = 0; i < 30; i++)
             {
@@ -45,7 +44,7 @@ namespace bdd_tests
 
                 }
             }
-            uiRequestedLink.Click();
+            JavaScriptClick(uiRequestedLink);
         }
 
 
@@ -53,7 +52,7 @@ namespace bdd_tests
         public void ClickOnSignatureCheckbox()
         {
             NgWebElement uiSignature = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            uiSignature.Click();
+            JavaScriptClick(uiSignature);
         }
 
 
@@ -127,6 +126,13 @@ namespace bdd_tests
             {
                 // click on the Pay for Application button
                 NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+                uiPayButton.Click();
+            }
+
+            if (specificButton == "Pay for Application for Cannabis Marketing")
+            {
+                // click on the Pay for Application button
+                NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector(".mt-3 button.btn.btn-primary"));
                 uiPayButton.Click();
             }
 
