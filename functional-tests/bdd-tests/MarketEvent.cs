@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
- Feature: MarketEvent
+  Feature: MarketEvent
     As a logged in business user
     I want to submit a market event for different manufacturer types
 
@@ -22,7 +22,7 @@ using Xunit;
 #-----------------------
 
  @marketevent @marketoneday @winery
- Scenario: Winery One Day Market Event
+ Scenario: One Day Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -52,7 +52,7 @@ using Xunit;
 #-----------------------
 
  @marketevent @marketweekly @winery
- Scenario: Winery Weekly Market Event
+ Scenario: Weekly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -83,7 +83,7 @@ using Xunit;
 #-------------------------------------------------
 
  @marketevent @marketbiweekly @winery
- Scenario: Winery Bi-Weekly Market Event
+ Scenario: Bi-Weekly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -112,7 +112,7 @@ using Xunit;
 #-----------------------
 
  @marketevent @marketmonthly @winery
- Scenario: Winery Monthly Market Event
+ Scenario: Monthly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -142,7 +142,7 @@ using Xunit;
 #-----------------------------------
 
  @marketeventonedaysave @marketoneday @winery
- Scenario: Winery One Day Market Event Save For Later
+ Scenario: One Day Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -177,7 +177,7 @@ using Xunit;
 #--------------------------------------
 
  @marketeventweeklysave @marketweekly @winery
- Scenario: Winery Weekly Market Event Save For Later
+ Scenario: Weekly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -212,7 +212,7 @@ using Xunit;
 #-----------------------------------------
 
  @marketeventbiweeklysave @marketbiweekly @winery
- Scenario: Winery Bi-Weekly Market Event Save For Later
+ Scenario: Bi-Weekly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -247,7 +247,7 @@ using Xunit;
 #---------------------------------------
 
  @marketeventmonthlysave @marketmonthly @winery
- Scenario: Winery Monthly Market Event Save For Later
+ Scenario: Monthly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
