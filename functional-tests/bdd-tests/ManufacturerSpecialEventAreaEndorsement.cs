@@ -18,7 +18,7 @@ Feature: ManufacturerSpecialEventAreaEndorsement
     I want to request special event area endorsement for a manufacturer licence
 
 @manufacturer @winery @specialeventarea
-Scenario: Winery Special Event Area Endorsement Application
+Scenario: Special Event Area Endorsement Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -36,7 +36,7 @@ Scenario: Winery Special Event Area Endorsement Application
     Then I see the login page
 
 @manufacturer @brewery @specialeventarea
-Scenario: Brewery Special Event Area Endorsement Application
+Scenario: Special Event Area Endorsement Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -54,7 +54,7 @@ Scenario: Brewery Special Event Area Endorsement Application
     Then I see the login page
 
 @manufacturer @distillery @specialeventarea
-Scenario: Distillery Special Event Area Endorsement Application
+Scenario: Special Event Area Endorsement Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -72,7 +72,7 @@ Scenario: Distillery Special Event Area Endorsement Application
     Then I see the login page
 
 @manufacturer @copacker @specialeventarea
-Scenario: Co-packer Special Event Area Endorsement Application
+Scenario: Special Event Area Endorsement Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
