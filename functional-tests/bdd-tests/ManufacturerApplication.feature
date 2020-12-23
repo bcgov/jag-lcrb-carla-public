@@ -3,7 +3,7 @@
     I want to submit a Manufacturer Applications for different manufacturer types
 
 @manufacturerapp @winery
-Scenario: Winery Manufacturer Application
+Scenario: Manufacturer Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -20,7 +20,7 @@ Scenario: Winery Manufacturer Application
     Then I see the login page
 
 @manufacturerapp @distillery
-Scenario: Distillery Manufacturer Application
+Scenario: Manufacturer Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -37,7 +37,7 @@ Scenario: Distillery Manufacturer Application
     Then I see the login page
 
 @manufacturerapp @brewery
-Scenario: Brewery Manufacturer Application
+Scenario: Manufacturer Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -54,7 +54,7 @@ Scenario: Brewery Manufacturer Application
     Then I see the login page
 
 @manufacturerapp @copacker
-Scenario: Co-packer Manufacturer Application
+Scenario: Manufacturer Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

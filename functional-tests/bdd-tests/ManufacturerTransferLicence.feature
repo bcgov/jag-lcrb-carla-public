@@ -3,7 +3,7 @@
     I want to request a transfer of ownership for a manufacturer licence
 
 @manufacturer @transfer @winery
-Scenario: Winery Transfer Licence
+Scenario: Transfer Licence (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -21,7 +21,7 @@ Scenario: Winery Transfer Licence
     Then I see the login page
 
 @manufacturer @transfer @brewery
-Scenario: Brewery Transfer Licence
+Scenario: Transfer Licence (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -39,7 +39,7 @@ Scenario: Brewery Transfer Licence
     Then I see the login page
 
 @manufacturer @transfer @distillery
-Scenario: Distillery Transfer Licence
+Scenario: Transfer Licence (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -57,7 +57,7 @@ Scenario: Distillery Transfer Licence
     Then I see the login page
 
 @manufacturer @transfer @copacker
-Scenario: Co-packer Transfer Licence
+Scenario: Transfer Licence (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

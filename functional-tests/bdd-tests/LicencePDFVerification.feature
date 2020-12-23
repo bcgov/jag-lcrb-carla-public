@@ -3,7 +3,7 @@
     I want to create different licences and manually verify the pdf formats
 
 @manualtestonly
-Scenario: Cannabis Retail Store Licence PDF Verification
+Scenario: Cannabis Retail Store Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -22,7 +22,7 @@ Scenario: Cannabis Retail Store Licence PDF Verification
     Then the correct licence PDF is generated with terms and conditions and without endorsements or hours of sales
 
 @manualtestonly
-Scenario: Cannabis Marketing Licence PDF Verification
+Scenario: Cannabis Marketing Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for a private corporation
@@ -38,7 +38,7 @@ Scenario: Cannabis Marketing Licence PDF Verification
     Then the correct licence PDF is generated with terms and conditions and without endorsements or hours of sales
 
 @manualtestonly
-Scenario: Catering Licence PDF Verification
+Scenario: Catering Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -56,7 +56,7 @@ Scenario: Catering Licence PDF Verification
     Then the correct Catering licence PDF is generated with terms and conditions and without endorsements or hours of sales
 
 @manualtestonly
-Scenario: UBrew / UVin Licence PDF Verification
+Scenario: UBrew / UVin Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a private corporation
@@ -78,7 +78,7 @@ Scenario: UBrew / UVin Licence PDF Verification
     Then the correct UBrew / UVin licence PDF is generated with terms and conditions and without endorsements or hours of sales
 
 @manualtestonly
-Scenario: Winery Licence PDF Verification
+Scenario: Winery Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -95,7 +95,7 @@ Scenario: Winery Licence PDF Verification
     Then the correct winery licence PDF is generated with hours of sale and terms and conditions
 
 @manualtestonly
-Scenario: Brewery Licence PDF Verification
+Scenario: Brewery Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -112,7 +112,7 @@ Scenario: Brewery Licence PDF Verification
     Then the correct brewery licence PDF is generated with hours of sale and terms and conditions
 
 @manualtestonly
-Scenario: Distillery Licence PDF Verification
+Scenario: Distillery Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -129,7 +129,7 @@ Scenario: Distillery Licence PDF Verification
     Then the correct distillery licence PDF is generated with hours of sale and terms and conditions
 
 @manualtestonly
-Scenario: Co-packer Licence PDF Verification
+Scenario: Co-packer Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -146,7 +146,7 @@ Scenario: Co-packer Licence PDF Verification
     Then the correct co-packer licence PDF is generated with hours of sale and terms and conditions
 
 @manualtestonly
-Scenario: Rural Agency Store Licence PDF Verification
+Scenario: Rural Agency Store Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Rural Agency Store
     And I review the account profile for a private corporation
@@ -160,7 +160,7 @@ Scenario: Rural Agency Store Licence PDF Verification
     Then the correct Rural Agency Store PDF is generated with terms and conditions and hours of sales and without endorsements
 
 @manualtestonly
-Scenario: Private Corporation Food Primary Licence PDF Verification
+Scenario: Food Primary Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation

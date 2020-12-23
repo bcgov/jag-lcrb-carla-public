@@ -18,7 +18,7 @@ Feature: UBrewUVinLicenceDownloadLicence
     I want to download a UBrew / UVin licence for different business types
 
 @ubrewuvinlicencedownload @partnership 
-Scenario: Partnership UBrew / UVin Application Licence Download
+Scenario: UBrew / UVin Application Licence Download (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a partnership
@@ -41,7 +41,7 @@ Scenario: Partnership UBrew / UVin Application Licence Download
     Then I see the login page
 
 @ubrewuvinlicencedownload @privatecorporation 
-Scenario: Private Corporation UBrew / UVin Application Licence Download
+Scenario: UBrew / UVin Application Licence Download (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a private corporation
@@ -64,7 +64,7 @@ Scenario: Private Corporation UBrew / UVin Application Licence Download
     Then I see the login page
 
 @ubrewuvinlicencedownload @publiccorporation 
-Scenario: Public Corporation UBrew / UVin Application Licence Download
+Scenario: UBrew / UVin Application Licence Download (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a public corporation
@@ -87,7 +87,7 @@ Scenario: Public Corporation UBrew / UVin Application Licence Download
     Then I see the login page
 
 @ubrewuvinlicencedownload @soleproprietorship 
-Scenario: Sole Proprietorship UBrew / UVin Application Licence Download
+Scenario: UBrew / UVin Application Licence Download (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a sole proprietorship

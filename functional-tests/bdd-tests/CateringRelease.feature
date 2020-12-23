@@ -3,7 +3,7 @@
     I want to confirm that the Catering functionality is ready for release
 
 @validation @privatecorporation @release
-Scenario: Private Corporation Catering Release
+Scenario: Catering Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -45,7 +45,7 @@ Scenario: Private Corporation Catering Release
     Then I see the login page
 
 @validation @soleproprietorship
-Scenario: Sole Proprietorship Catering Release
+Scenario: Catering Release (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship

@@ -3,7 +3,7 @@
     I want to confirm the successful deletion of personnel from the org structure
 
 @cannabis @partnership @orgstructuredeletion
-Scenario: Deletion from Partnership Org Structure
+Scenario: Deletion from Org Structure (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I add personnel to the organization structure for a partnership
@@ -16,7 +16,7 @@ Scenario: Deletion from Partnership Org Structure
     Then I see the login page
 
 @cannabis @privatecorporation @orgstructuredeletion
-Scenario: Deletion from Private Corporation Org Structure
+Scenario: Deletion from Org Structure (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I add personnel to the organization structure for a private corporation
@@ -29,7 +29,7 @@ Scenario: Deletion from Private Corporation Org Structure
     Then I see the login page
 
 @cannabis @publiccorporation @orgstructuredeletion
-Scenario: Deletion from Public Corporation Org Structure
+Scenario: Deletion from Org Structure (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Complete Organization Information button
     And I add personnel to the organization structure for a public corporation
@@ -42,7 +42,7 @@ Scenario: Deletion from Public Corporation Org Structure
     Then I see the login page
 
 @cannabis @society @orgstructuredeletion
-Scenario: Deletion from Society Org Structure
+Scenario: Deletion from Org Structure (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Complete Organization Information button
     And I add personnel to the organization structure for a society
@@ -55,7 +55,7 @@ Scenario: Deletion from Society Org Structure
     Then I see the login page
 
 @cannabis @soleproprietorship @orgstructuredeletion
-Scenario: Deletion from Sole Proprietorship Org Structure
+Scenario: Deletion from Org Structure (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Complete Organization Information button
     And I add personnel to the organization structure for a sole proprietorship

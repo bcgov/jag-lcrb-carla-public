@@ -18,7 +18,7 @@ Feature: ManufacturerThirdPartyOperator
     I want to request a third party operator for a manufacturer licence
 
 @manufacturer @winery @thirdparty
-Scenario: Winery Third Party Operator
+Scenario: Third Party Operator (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -38,7 +38,7 @@ Scenario: Winery Third Party Operator
     Then I see the login page
 
 @manufacturer @brewery @thirdparty
-Scenario: Brewery Third Party Operator
+Scenario: Third Party Operator (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -58,7 +58,7 @@ Scenario: Brewery Third Party Operator
     Then I see the login page
 
 @manufacturer @distillery @thirdparty
-Scenario: Distillery Third Party Operator
+Scenario: Third Party Operator (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -78,7 +78,7 @@ Scenario: Distillery Third Party Operator
     Then I see the login page
 
 @manufacturer @copacker @thirdparty
-Scenario: Co-packer Third Party Operator
+Scenario: Third Party Operator (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
