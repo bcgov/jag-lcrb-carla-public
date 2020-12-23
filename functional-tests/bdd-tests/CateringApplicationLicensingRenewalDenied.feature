@@ -8,7 +8,7 @@
 #-----------------------
 
 @catering @licencerenewal
-Scenario: Deny Catering Licence Renewal Today
+Scenario: Deny Catering Licence Renewal Today (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -31,7 +31,7 @@ Scenario: Deny Catering Licence Renewal Today
 #-----------------------
 
 @catering @licencerenewal
-Scenario: Deny Catering Licence Renewal Yesterday
+Scenario: Deny Catering Licence Renewal Yesterday (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -54,7 +54,7 @@ Scenario: Deny Catering Licence Renewal Yesterday
 #-----------------------
 
 @catering @licencerenewal
-Scenario: Deny Catering Licence Renewal 45 Days Ago
+Scenario: Deny Catering Licence Renewal 45 Days Ago (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -77,7 +77,7 @@ Scenario: Deny Catering Licence Renewal 45 Days Ago
 #-----------------------------
 
 @catering @licencerenewal
-Scenario: Deny Catering Licence Renewal 60 Days Future
+Scenario: Deny Catering Licence Renewal 60 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -100,7 +100,7 @@ Scenario: Deny Catering Licence Renewal 60 Days Future
 #-----------------------------
 
 @catering @licencerenewal
-Scenario: Deny Catering Licence Renewal 30 Days Future
+Scenario: Deny Catering Licence Renewal 30 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation

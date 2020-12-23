@@ -18,7 +18,7 @@ Feature: FoodPrimaryBrandingChange
     I want to request an establishment name change application for a Food Primary licence
 
 @foodprimarybranding @privatecorporation
-Scenario: Private Corporation Food Primary Establishment Name Change
+Scenario: Food Primary Establishment Name Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -29,7 +29,7 @@ Scenario: Private Corporation Food Primary Establishment Name Change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I pay the licensing fee 
+    # And I pay the licensing fee 
     And I request a valid store name or branding change for Food Primary
     And the account is deleted
     Then I see the login page

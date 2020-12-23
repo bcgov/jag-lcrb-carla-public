@@ -8,7 +8,7 @@
 #-----------------------
 
 @catering @licencerenewal
-Scenario: Negative Catering Licence Renewal Today
+Scenario: Negative Catering Licence Renewal Today (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -27,7 +27,7 @@ Scenario: Negative Catering Licence Renewal Today
     Then I see the login page
 
 @catering @licencerenewal
-Scenario: Positive Catering Licence Renewal Today
+Scenario: Positive Catering Licence Renewal Today (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -50,7 +50,7 @@ Scenario: Positive Catering Licence Renewal Today
 #-----------------------
 
 @catering @licencerenewal
-Scenario: Negative Catering Licence Renewal Yesterday
+Scenario: Negative Catering Licence Renewal Yesterday (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -69,7 +69,7 @@ Scenario: Negative Catering Licence Renewal Yesterday
     Then I see the login page
 
 @catering @licencerenewal
-Scenario: Positive Catering Licence Renewal Yesterday
+Scenario: Positive Catering Licence Renewal Yesterday (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -92,7 +92,7 @@ Scenario: Positive Catering Licence Renewal Yesterday
 #-----------------------
 
 @catering @licencerenewal
-Scenario: Negative Catering Licence Renewal 45 Days Ago
+Scenario: Negative Catering Licence Renewal 45 Days Ago (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -111,7 +111,7 @@ Scenario: Negative Catering Licence Renewal 45 Days Ago
     Then I see the login page
 
 @catering @licencerenewal
-Scenario: Positive Catering Licence Renewal 45 Days Ago
+Scenario: Positive Catering Licence Renewal 45 Days Ago (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -134,7 +134,7 @@ Scenario: Positive Catering Licence Renewal 45 Days Ago
 #-----------------------------
 
 @catering @licencerenewal
-Scenario: Negative Catering Licence Renewal 60 Days Future
+Scenario: Negative Catering Licence Renewal 60 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -153,7 +153,7 @@ Scenario: Negative Catering Licence Renewal 60 Days Future
     Then I see the login page
 
 @catering @licencerenewal
-Scenario: Positive Catering Licence Renewal 60 Days Future
+Scenario: Positive Catering Licence Renewal 60 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -176,7 +176,7 @@ Scenario: Positive Catering Licence Renewal 60 Days Future
 #-----------------------------
 
 @catering @licencerenewal
-Scenario: Negative Catering Licence Renewal 30 Days Future
+Scenario: Negative Catering Licence Renewal 30 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -195,7 +195,7 @@ Scenario: Negative Catering Licence Renewal 30 Days Future
     Then I see the login page
 
 @catering @licencerenewal
-Scenario: Positive Catering Licence Renewal 30 Days Future
+Scenario: Positive Catering Licence Renewal 30 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation

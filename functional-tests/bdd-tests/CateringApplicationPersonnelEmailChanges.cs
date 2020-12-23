@@ -19,7 +19,7 @@ Feature: CateringApplicationPersonnelEmailChanges
     And submit personnel email changes for different business types
 
 @catering @partnership @cateringemail
-Scenario: Catering Partnership Personnel Email Change
+Scenario: Catering Personnel Email Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -37,7 +37,7 @@ Scenario: Catering Partnership Personnel Email Change
     Then I see the login page
 
 @catering @privatecorporation @cateringemail
-Scenario: Catering Private Corporation Personnel Email Change
+Scenario: Catering Personnel Email Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -55,7 +55,7 @@ Scenario: Catering Private Corporation Personnel Email Change
     Then I see the login page
 
 @catering @publiccorporation @cateringemail
-Scenario: Catering Public Corporation Personnel Email Change
+Scenario: Catering Personnel Email Change (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -73,7 +73,7 @@ Scenario: Catering Public Corporation Personnel Email Change
     Then I see the login page
 
 @catering @society @cateringemail
-Scenario: Catering Society Personnel Email Change
+Scenario: Catering Personnel Email Change (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -91,7 +91,7 @@ Scenario: Catering Society Personnel Email Change
     Then I see the login page
 
 @catering @soleproprietorship @cateringemail
-Scenario: Catering Sole Proprietorship Personnel Email Change
+Scenario: Catering Personnel Email Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
