@@ -93,8 +93,16 @@ namespace bdd_tests
         [And(@"I click on the Dashboard tab")]
         public void ClickDashboardTab()
         {
-            NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Dashboard"));
-            JavaScriptClick(uiRequestChange);
+            try
+            {
+                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Dashboard"));
+                JavaScriptClick(uiRequestChange);
+            }
+            catch
+            {
+                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Dashboard"));
+                JavaScriptClick(uiRequestChange);
+            }
         }
 
 
