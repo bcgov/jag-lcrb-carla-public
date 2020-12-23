@@ -221,7 +221,7 @@ namespace bdd_tests
             else
             {
                 // click on the Submit button
-                NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary~ .btn-primary+ .btn-primary"));
+                NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
                 uiSubmit.Click();
             }
         }
