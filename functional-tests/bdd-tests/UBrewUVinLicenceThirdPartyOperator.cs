@@ -18,7 +18,7 @@ Feature: UBrewUVinLicenceThirdPartyOperator
     I want to submit a UBrew / UVin Licence third party operator applicaation for different business types
 
 @ubrewuvinthirdparty @partnership 
-Scenario: Partnership UBrew / UVin Application Third Party Operator
+Scenario: UBrew / UVin Application Third Party Operator (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a partnership
@@ -43,7 +43,7 @@ Scenario: Partnership UBrew / UVin Application Third Party Operator
     Then I see the login page
 
 @ubrewuvinthirdparty @privatecorporation 
-Scenario: Private Corporation UBrew / UVin Application Third Party Operator
+Scenario: UBrew / UVin Application Third Party Operator (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a private corporation
@@ -68,7 +68,7 @@ Scenario: Private Corporation UBrew / UVin Application Third Party Operator
     Then I see the login page
 
 @ubrewuvinthirdparty @publiccorporation 
-Scenario: Public Corporation UBrew / UVin Application Third Party Operator
+Scenario: UBrew / UVin Application Third Party Operator (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a public corporation
@@ -93,7 +93,7 @@ Scenario: Public Corporation UBrew / UVin Application Third Party Operator
     Then I see the login page
 
 @ubrewuvinthirdparty @soleproprietorship 
-Scenario: Sole Proprietorship UBrew / UVin Application Third Party Operator
+Scenario: UBrew / UVin Application Third Party Operator (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a sole proprietorship
