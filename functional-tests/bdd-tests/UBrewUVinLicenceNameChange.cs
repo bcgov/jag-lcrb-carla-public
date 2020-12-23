@@ -18,7 +18,7 @@ Feature: UBrewUVinLicenceNameChange
     I want to submit a UBrew / UVin Licence name change application for different business types
 
 @ubrewuvinnamechange @partnership 
-Scenario: Partnership UBrew / UVin Application Establishment Name Change
+Scenario: UBrew / UVin Application Establishment Name Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a partnership
@@ -43,7 +43,7 @@ Scenario: Partnership UBrew / UVin Application Establishment Name Change
     Then I see the login page
 
 @ubrewuvinnamechange @privatecorporation 
-Scenario: Private Corporation UBrew / UVin Application Establishment Name Change
+Scenario: UBrew / UVin Application Establishment Name Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a private corporation
@@ -68,7 +68,7 @@ Scenario: Private Corporation UBrew / UVin Application Establishment Name Change
     Then I see the login page
 
 @ubrewuvinnamechange @publiccorporation 
-Scenario: Public Corporation UBrew / UVin Application Establishment Name Change
+Scenario: UBrew / UVin Application Establishment Name Change (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a public corporation
@@ -93,7 +93,7 @@ Scenario: Public Corporation UBrew / UVin Application Establishment Name Change
     Then I see the login page
 
 @ubrewuvinnamechange @soleproprietorship 
-Scenario: Sole Proprietorship UBrew / UVin Application Establishment Name Change
+Scenario: UBrew / UVin Application Establishment Name Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a sole proprietorship

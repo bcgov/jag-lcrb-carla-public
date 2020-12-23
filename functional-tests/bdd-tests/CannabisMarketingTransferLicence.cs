@@ -18,7 +18,7 @@ Feature: CannabisMarketingTransferLicence
     I want to transfer a Cannabis Marketing Licence
 
 @cannabismktglicencetransfer @privatecorporation
-Scenario: Private Corporation Cannabis Marketing Application Transfer
+Scenario: Cannabis Marketing Application Transfer (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for a private corporation

@@ -4,7 +4,7 @@
     And submit personnel name changes for different business types
 
 @catering @partnership @cateringpersonnelnamechange
-Scenario: Catering Partnership Personnel Name Change
+Scenario: Catering Personnel Name Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -24,7 +24,7 @@ Scenario: Catering Partnership Personnel Name Change
     Then I see the login page
 
 @catering @privatecorporation @cateringpersonnelnamechange
-Scenario: Catering Private Corporation Personnel Name Change
+Scenario: Catering Personnel Name Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -44,7 +44,7 @@ Scenario: Catering Private Corporation Personnel Name Change
     Then I see the login page
 
 @catering @publiccorporation @cateringpersonnelnamechange
-Scenario: Catering Public Corporation Personnel Name Change
+Scenario: Catering Personnel Name Change (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -64,7 +64,7 @@ Scenario: Catering Public Corporation Personnel Name Change
     Then I see the login page
 
 @catering @society @cateringpersonnelnamechange
-Scenario: Catering Society Personnel Name Change
+Scenario: Catering Personnel Name Change (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -84,7 +84,7 @@ Scenario: Catering Society Personnel Name Change
     Then I see the login page
 
 @catering @soleproprietorship @cateringpersonnelnamechange
-Scenario: Catering Sole Proprietorship Personnel Name Change
+Scenario: Catering Personnel Name Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship

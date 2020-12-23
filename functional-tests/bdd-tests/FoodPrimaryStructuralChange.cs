@@ -18,7 +18,7 @@ Feature: FoodPrimaryStructuralChange
     I want to submit a structural change application for a Food Primary licence
 
 @foodprimarystructuralchange @privatecorporation
-Scenario: Private Corporation Food Primary Structural Change
+Scenario: Food Primary Structural Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -29,7 +29,7 @@ Scenario: Private Corporation Food Primary Structural Change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I pay the licensing fee 
+    # And I pay the licensing fee 
     And I click on the link for Structural Change Aplication
     And I submit a Food Primary structural change application
     And I click on the link for Dashboard
