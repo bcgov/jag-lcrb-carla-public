@@ -18,7 +18,7 @@ Feature: FoodPrimaryTransferLicence
     I want to transfer a Food Primary licence for different business types
 
 @foodprimarylicencetransfer @privatecorporation
-Scenario: Private Corporation Food Primary Transfer Licence
+Scenario: Food Primary Transfer Licence (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -29,7 +29,7 @@ Scenario: Private Corporation Food Primary Transfer Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I pay the licensing fee 
+    # And I pay the licensing fee 
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
