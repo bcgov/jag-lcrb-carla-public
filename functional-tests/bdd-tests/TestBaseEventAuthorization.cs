@@ -179,17 +179,9 @@ namespace bdd_tests
             NgWebElement uiPhysicalAddPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='postalCode']"));
             uiPhysicalAddPostalCode.SendKeys(physicalAddPostalCode);
 
-            // select end date
-            NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
-            uiEndDate1.Click();
-
-            // click on the next button
-            NgWebElement uiOpenCalendarNext = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
-            uiOpenCalendarNext.Click();
-
-            // click on the first day
-            NgWebElement uiOpenCalendarFirstDay = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            JavaScriptClick(uiOpenCalendarFirstDay);
+            // select terms and conditions checkbox
+            NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            JavaScriptClick(uiTermsAndConditions);
 
             // select start date
             NgWebElement uiVenueStartDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='startDate']"));
@@ -207,6 +199,28 @@ namespace bdd_tests
                 uiVenueStartDate2.Click();
             }
 
+            // select end date
+            NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
+            uiEndDate1.Click();
+
+            // click on the next button
+            NgWebElement uiOpenCalendarNext = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
+            uiOpenCalendarNext.Click();
+
+            try
+            {
+                // click on the first day
+                NgWebElement uiOpenCalendarFirstDay = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
+                JavaScriptClick(uiOpenCalendarFirstDay);
+            }
+
+            catch 
+            {
+                // click on the first day
+                NgWebElement uiOpenCalendarFirstDay = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
+                JavaScriptClick(uiOpenCalendarFirstDay);
+            }
+
             // select event and liquor end time after 2am
             if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
             {
@@ -216,10 +230,6 @@ namespace bdd_tests
                 NgWebElement uiLiquorCloseTime = ngDriver.FindElement(By.CssSelector(".col-md-2:nth-child(5) .ngb-tp-minute .btn-link:nth-child(1) .ngb-tp-chevron"));
                 JavaScriptClick(uiLiquorCloseTime);
             }
-
-            // select terms and conditions checkbox
-            NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            JavaScriptClick(uiTermsAndConditions);
 
             if ((eventType == "for a draft") || (eventType == "being validated"))
             {
