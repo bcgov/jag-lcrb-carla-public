@@ -138,7 +138,7 @@ Scenario: Sole Proprietorship Manufacturer Release #2
     # And I complete the offsite storage application
     # And I click on the Submit button
     And I request a market event for one date only
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the Licences tab
     # And I click on the event history for markets
     # And I click on the link for Approved
