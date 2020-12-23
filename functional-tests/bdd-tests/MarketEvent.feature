@@ -144,13 +144,13 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a one day event saved for later
     And I click on the signature checkbox
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a one day event
@@ -179,13 +179,13 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a weekly event saved for later
     And I click on the signature checkbox
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a weekly event
@@ -214,13 +214,13 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a bi-weekly event saved for later
     And I click on the signature checkbox
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a bi-weekly event
@@ -249,13 +249,13 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a monthly event saved for later
     And I click on the signature checkbox
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for an approved monthly event
