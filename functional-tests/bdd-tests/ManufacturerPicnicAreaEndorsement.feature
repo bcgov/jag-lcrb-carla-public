@@ -3,7 +3,7 @@
     I want to request picnic area endorsement for a manufacturer licence
 
 @manufacturer @winery @picnicarea
-Scenario: Winery Picnic Area Endorsement Application
+Scenario: Picnic Area Endorsement Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -21,7 +21,7 @@ Scenario: Winery Picnic Area Endorsement Application
     Then I see the login page
 
 @manufacturer @brewery @picnicarea
-Scenario: Brewery Picnic Area Endorsement Application
+Scenario: Picnic Area Endorsement Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -39,7 +39,7 @@ Scenario: Brewery Picnic Area Endorsement Application
     Then I see the login page
 
 @manufacturer @distillery @picnicarea
-Scenario: Distillery Picnic Area Endorsement Application
+Scenario: Picnic Area Endorsement Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -57,7 +57,7 @@ Scenario: Distillery Picnic Area Endorsement Application
     Then I see the login page
 
 @manufacturer @copacker @picnicarea
-Scenario: Co-packer Picnic Area Endorsement Application
+Scenario: Picnic Area Endorsement Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
