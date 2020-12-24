@@ -23,6 +23,15 @@ namespace one_stop_service.Controllers
 
         }
 
+        [HttpGet("SendChangeStatus/{licenceGuid}")]
+        public IActionResult SendChangeStatusMessage(string licenceGuid)
+        {
+            _logger.Information($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeStatusRest(null, licenceGuid, "001"));
+            return Ok();
+        }
+
+
         [HttpGet("SendLicenceCreationMessage/{licenceGuid}")]
         public IActionResult SendLicenceCreationMessage(string licenceGuid)
         {
