@@ -3,7 +3,7 @@
     I want to confirm the data saved for the org structure
 
 @cannabis @partnership @orgstructuredata
-Scenario: Data for Partnership Org Structure
+Scenario: Data for Org Structure (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Complete Organization Information button
     And I review the organization structure for a partnership
@@ -14,7 +14,7 @@ Scenario: Data for Partnership Org Structure
     Then I see the login page
 
 @cannabis @privatecorporation @orgstructuredata
-Scenario: Data for Private Corporation Org Structure
+Scenario: Data for Org Structure (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And I review the organization structure for a private corporation
@@ -25,7 +25,7 @@ Scenario: Data for Private Corporation Org Structure
     Then I see the login page
 
 @cannabis @publiccorporation @orgstructuredata
-Scenario: Data for Public Corporation Org Structure
+Scenario: Data for Org Structure (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Complete Organization Information button
     And I review the organization structure for a public corporation
@@ -36,7 +36,7 @@ Scenario: Data for Public Corporation Org Structure
     Then I see the login page
 
 @cannabis @society @orgstructuredata
-Scenario: Data for Society Org Structure
+Scenario: Data for Org Structure (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Complete Organization Information button
     And I review the organization structure for a society
@@ -47,7 +47,7 @@ Scenario: Data for Society Org Structure
     Then I see the login page
 
 @cannabis @soleproprietorship @orgstructuredata
-Scenario: Data for Sole Proprietorship Org Structure
+Scenario: Data for Org Structure (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Complete Organization Information button
     And I review the organization structure for a sole proprietorship
@@ -58,7 +58,7 @@ Scenario: Data for Sole Proprietorship Org Structure
     Then I see the login page
 
  @cannabis @university @orgstructuredata
- Scenario: Data for University Org Structure
+ Scenario: Data for Org Structure (University)
     Given I am logged in to the dashboard as a university
     And I click on the Complete Organization Information button
     And I review the organization structure for a university

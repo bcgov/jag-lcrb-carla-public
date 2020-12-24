@@ -19,7 +19,7 @@ Feature: CRSApplicationPersonnelNameChanges
     And request personnel email and name changes for the approved application
 
 @cannabis @partnership @crspersonnelnamechange
-Scenario: Partnership CRS Personnel Name Changes
+Scenario: CRS Personnel Name Changes (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -39,7 +39,7 @@ Scenario: Partnership CRS Personnel Name Changes
     Then I see the login page
 
 @cannabis @privatecorporation @crspersonnelnamechange
-Scenario: Private Corporation CRS Personnel Name Changes
+Scenario: CRS Personnel Name Changes (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -59,7 +59,7 @@ Scenario: Private Corporation CRS Personnel Name Changes
     Then I see the login page
 
 @cannabis @publiccorporation @crspersonnelnamechange
-Scenario: Public Corporation CRS Personnel Name Changes
+Scenario: CRS Personnel Name Changes (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -79,7 +79,7 @@ Scenario: Public Corporation CRS Personnel Name Changes
     Then I see the login page
 
 @cannabis @society @crspersonnelnamechange
-Scenario: Society CRS Personnel Name Changes
+Scenario: CRS Personnel Name Changes (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -99,7 +99,7 @@ Scenario: Society CRS Personnel Name Changes
     Then I see the login page
 
 @cannabis @soleproprietorship @crspersonnelnamechange
-Scenario: Sole Proprietorship CRS Personnel Name Changes
+Scenario: CRS Personnel Name Changes (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure

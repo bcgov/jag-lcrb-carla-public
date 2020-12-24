@@ -42,17 +42,27 @@
             [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
         </app-file-uploader>
 
-        <p> Please upload a stamped copy of the floor plan:</p>
+        <ng-container *ngIf="showFormControl(application?.applicationType?.floorPlan)">
+            <p> Please upload a stamped copy of the floor plan:</p>
 
-        <app-file-uploader *ngIf="application?.id" documentType="StampedFloorPlan"
-            [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval"
-            (numberOfUploadedFiles)="uploadedStampedFloorPlanDocuments = $event" [maxNumberOfFiles]="200"
-            fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="application?.id"
-            [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
-        </app-file-uploader>
-
+            <app-file-uploader *ngIf="application?.id" documentType="StampedFloorPlan"
+                [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval"
+                (numberOfUploadedFiles)="uploadedStampedFloorPlanDocuments = $event" [maxNumberOfFiles]="200"
+                fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application"
+                [entityId]="application?.id" [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
+            </app-file-uploader>
+        </ng-container>
     </section>
 </div>
+
+<section class="error mt-3" *ngIf="showValidationMessages">
+    <p *ngFor="let message of validationMessages">
+      <span class="app-cancel">
+        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+        {{message}}
+      </span>
+    </p>
+  </section>
 
 <section *ngIf="!disableForm" class="position-relative d-flex justify-content-between p-3">
     <span>

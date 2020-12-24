@@ -3,7 +3,7 @@
     I want to request a facility structural change for a manufacturer licence
 
 @manufacturer @winery @structuralchange
-Scenario: Winery Facility Structural Change Application
+Scenario: Facility Structural Change Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -23,7 +23,7 @@ Scenario: Winery Facility Structural Change Application
     Then I see the login page
 
 @manufacturer @brewery @structuralchange
-Scenario: Brewery Facility Structural Change Application
+Scenario: Facility Structural Change Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -43,7 +43,7 @@ Scenario: Brewery Facility Structural Change Application
     Then I see the login page
 
 @manufacturer @distillery @structuralchange
-Scenario: Distillery Facility Structural Change Application
+Scenario: Facility Structural Change Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -63,7 +63,7 @@ Scenario: Distillery Facility Structural Change Application
     Then I see the login page
 
 @manufacturer @copacker @structuralchange
-Scenario: Co-packer Facility Structural Change Application
+Scenario: Facility Structural Change Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

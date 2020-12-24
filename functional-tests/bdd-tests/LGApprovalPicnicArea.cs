@@ -17,8 +17,8 @@ Feature: LGApprovalPicnicArea
     As a logged in business user
     I want to submit a Picnic Area Endorsement Application for review and approval
 
-@catering @picnic @lgapproval @release
-Scenario: Local Government Approval for Picnic Area Endorsement
+@catering @picnic @lgapproval
+Scenario: Local Government Approval for Picnic Area Endorsement (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

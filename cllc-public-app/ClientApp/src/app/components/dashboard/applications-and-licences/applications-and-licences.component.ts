@@ -122,42 +122,42 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   private displayApplications() {
     this.inProgressApplications = [];
     this.licensedApplications = [];
-    this.busy =
-      forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
-      ).pipe(takeWhile(() => this.componentActive))
-        .subscribe(([applications, licenses]) => {
-          this.checkIndigenousNationState(applications);
-          // filter out approved applications
-          applications.filter(app => ['Approved', 'Renewal Due', 'Payment Required', 'Active'].indexOf(app.applicationStatus) === -1)
-            .forEach((application: ApplicationSummary) => {
-              this.inProgressApplications.push(application);
-            });
-
-          licenses.forEach((licence: ApplicationLicenseSummary) => {
-            licence.actionApplications = [];
-            const relatedApplications = applications.filter(l => l.licenceId === licence.licenseId);
-            relatedApplications.forEach(app => {
-              licence.actionApplications.push({
-                applicationId: app.id,
-                applicationTypeName: app.applicationTypeName,
-                applicationStatus: app.applicationStatus,
-                isPaid: app.isPaid
-              });
-            });
-            this.licensedApplications.push(licence);
+    let sub = forkJoin([this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()])
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(([applications, licenses]) => {
+        this.checkIndigenousNationState(applications);
+        // filter out approved applications
+        applications.filter(app => ['Approved', 'Renewal Due', 'Payment Required', 'Active'].indexOf(app.applicationStatus) === -1)
+          .forEach((application: ApplicationSummary) => {
+            this.inProgressApplications.push(application);
           });
 
-          this.marketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.Marketer)
-            .map(item => <any>item)
-            .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length > 0;
-
-          this.nonMarketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.CannabisRetailStore)
-            .map(item => <any>item)
-            .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
-
-            this.dataLoaded = true;
-
+        licenses.forEach((licence: ApplicationLicenseSummary) => {
+          licence.actionApplications = [];
+          const relatedApplications = applications.filter(l => l.licenceId === licence.licenseId);
+          relatedApplications.forEach(app => {
+            licence.actionApplications.push({
+              applicationId: app.id,
+              applicationTypeName: app.applicationTypeName,
+              applicationStatus: app.applicationStatus,
+              isPaid: app.isPaid
+            });
+          });
+          this.licensedApplications.push(licence);
         });
+
+        this.marketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.Marketer)
+          .map(item => <any>item)
+          .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length > 0;
+
+        this.nonMarketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.CannabisRetailStore)
+          .map(item => <any>item)
+          .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
+
+        this.dataLoaded = true;
+
+      });
+      this.subscriptionList.push(sub);
   }
 
   uploadMoreFiles(application: Application) {
@@ -241,7 +241,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   payLicenceFee(application: ApplicationSummary) {
     // locate the application associated with the issuance of this licence
-   // const application = licence.actionApplications.find(app => app.applicationTypeName === licence.licenceTypeName);
+    // const application = licence.actionApplications.find(app => app.applicationTypeName === licence.licenceTypeName);
     if (application) {
       this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id)
         .pipe(takeWhile(() => this.componentActive))
@@ -309,7 +309,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         this.startMarketingOngoing = false;
-        this.router.navigateByUrl(`/account-profile/${data.id}`);
+        this.router.navigateByUrl(`/multi-step-application/${data.id}`);
       },
       () => {
         this.snackBar.open('Error starting a New Marketer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -526,7 +526,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     if (status === 'Processed') {
       return 'Application Under Review';
     }
-    if (status === "Pending Licence Fee"){
+    if (status === "Pending Licence Fee") {
       return 'Pending First Year Fee'
     }
     return status;
@@ -535,7 +535,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   getApplicationLink(item: ApplicationSummary) {
     if (item.isForLicence || this.isApprovedByLGAndNotSubmitted(item)) {
       return `/multi-step-application/${item.id}`;
-    } else if(item.applicationTypeName == ApplicationTypeNames.PermanentChangeToALicensee){
+    } else if (item.applicationTypeName == ApplicationTypeNames.PermanentChangeToALicensee) {
       return `/permanent-change-to-a-licensee/${item.id}`;
     }
     return `/account-profile/${item.id}`;

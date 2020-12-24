@@ -63,6 +63,38 @@ namespace SepService.Controllers
             return result;
         }
 
+        // 
+        /// <summary>
+        ///check to see if the location has already been submitted. 
+        /// </summary>
+        /// <param name="specialEventId"></param>
+        /// <param name="AdoxioPermitnumber"></param>
+        /// <returns>true if the location has been submitted</returns>
+        private bool CheckForExistingLocation(string specialEventId, string permitNumber)
+        {
+            bool result = false;
+            string permitNumberEscaped = permitNumber.Replace("'", "''");
+            string filter = $"adoxio_permitnumber eq '{permitNumberEscaped}' and _adoxio_specialeventid_value eq {specialEventId}";
+            // fetch from Dynamics.
+            
+            try
+            {
+                MicrosoftDynamicsCRMadoxioSpecialeventlocation record = _dynamicsClient.Specialeventlocations.Get(filter: filter).Value.FirstOrDefault();
+                if (record != null)
+                {
+                    result = true;
+                }
+            }
+            catch (HttpOperationException)
+            {
+                result = false;
+            }
+
+
+            return result;
+        }
+
+
         /// <summary>
         /// Create a Sol record
         /// </summary>
@@ -73,7 +105,7 @@ namespace SepService.Controllers
         {
             if (sol == null || string.IsNullOrEmpty(sol.SolLicenceNumber) || !sol.SolLicenceNumber.Contains("-"))
             {
-                return BadRequest();
+                return BadRequest("Error - SolLicenceNumber is not in the right format.  Format is <permitnumber>-<location identifier>");
             }
 
             // format of the "SolLicenceNumber" field is {EventLicenceNumber}-{LocationReference}
@@ -91,34 +123,34 @@ namespace SepService.Controllers
             MicrosoftDynamicsCRMadoxioSpecialevent existingRecord =
                 _dynamicsClient.GetSpecialEventByLicenceNumber(solIdEscaped);
 
+            MicrosoftDynamicsCRMadoxioSpecialevent newRecord = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            {
+                AdoxioCapacity = sol.Capacity,
+                AdoxioSpecialeventdescripton = sol.EventDescription,
+                AdoxioEventname = AdjustString255(sol.EventName),
+                AdoxioSpecialeventpermitnumber = solIdEscaped,
+                // applicant
+                AdoxioSpecialeventapplicant = AdjustString255(sol.Applicant?.ApplicantName),
+                AdoxioSpecialeventapplicantemail = AdjustString255(sol.Applicant?.EmailAddress),
+                AdoxioSpecialeventapplicantphone = sol.Applicant?.PhoneNumber,
+                // location
+                AdoxioSpecialeventstreet1 = AdjustString255(sol.Applicant?.Address?.Address1),
+                AdoxioSpecialeventstreet2 = AdjustString255(sol.Applicant?.Address?.Address2),
+                AdoxioSpecialeventcity = AdjustString255(sol.Applicant?.Address?.City),
+                AdoxioSpecialeventpostalcode = sol.Applicant?.Address?.PostalCode,
+                AdoxioSpecialeventprovince = AdjustString255(sol.Applicant?.Address?.Province),
+                // responsible individual
+                AdoxioResponsibleindividualfirstname = AdjustString255(sol.ResponsibleIndividual?.FirstName),
+                AdoxioResponsibleindividuallastname = AdjustString255(sol.ResponsibleIndividual?.LastName),
+                AdoxioResponsibleindividualmiddleinitial = AdjustString255(sol.ResponsibleIndividual?.MiddleInitial),
+                AdoxioResponsibleindividualposition = AdjustString255(sol.ResponsibleIndividual?.Position),
+                AdoxioResponsibleindividualsir = sol.ResponsibleIndividual?.SirNumber,
+                // tasting event
+                AdoxioTastingevent = sol.TastingEvent
+            };
+
             if (existingRecord == null) // new record
             {
-
-                MicrosoftDynamicsCRMadoxioSpecialevent newRecord = new MicrosoftDynamicsCRMadoxioSpecialevent()
-                {
-                    AdoxioCapacity = sol.Capacity,
-                    AdoxioSpecialeventdescripton = sol.EventDescription,
-                    AdoxioEventname = AdjustString255(sol.EventName),
-                    AdoxioSpecialeventpermitnumber = solIdEscaped,
-                    // applicant
-                    AdoxioSpecialeventapplicant = AdjustString255(sol.Applicant?.ApplicantName),
-                    AdoxioSpecialeventapplicantemail = AdjustString255(sol.Applicant?.EmailAddress),
-                    AdoxioSpecialeventapplicantphone = sol.Applicant?.PhoneNumber,
-                    // location
-                    AdoxioSpecialeventstreet1 = AdjustString255(sol.Applicant?.Address?.Address1),
-                    AdoxioSpecialeventstreet2 = AdjustString255(sol.Applicant?.Address?.Address2),
-                    AdoxioSpecialeventcity = AdjustString255(sol.Applicant?.Address?.City),
-                    AdoxioSpecialeventpostalcode = sol.Applicant?.Address?.PostalCode,
-                    AdoxioSpecialeventprovince = AdjustString255(sol.Applicant?.Address?.Province),
-                    // responsible individual
-                    AdoxioResponsibleindividualfirstname = AdjustString255(sol.ResponsibleIndividual?.FirstName),
-                    AdoxioResponsibleindividuallastname = AdjustString255(sol.ResponsibleIndividual?.LastName),
-                    AdoxioResponsibleindividualmiddleinitial = AdjustString255(sol.ResponsibleIndividual?.MiddleInitial),
-                    AdoxioResponsibleindividualposition = AdjustString255(sol.ResponsibleIndividual?.Position),
-                    AdoxioResponsibleindividualsir = sol.ResponsibleIndividual?.SirNumber,
-                    // tasting event
-                    AdoxioTastingevent = sol.TastingEvent
-                };
 
                 newRecord.AdoxioSpecialeventSpecialeventlocations = new List<MicrosoftDynamicsCRMadoxioSpecialeventlocation>();
 
@@ -183,10 +215,30 @@ namespace SepService.Controllers
             else // existing record.
             {
 
+                MicrosoftDynamicsCRMadoxioSpecialeventlocation location = ExtractLocation(sol);
+
+                if (CheckForExistingLocation(existingRecord.AdoxioSpecialeventid, location.AdoxioPermitnumber))
+                {
+                    return BadRequest("Error - Duplicate record.  The Permit / Location sent has already been processed.");
+                }
+
+                // do basic updates.
+                try
+                {
+                    _dynamicsClient.Specialevents.Update(existingRecord.AdoxioSpecialeventid, newRecord);
+                }
+                catch (HttpOperationException odee)
+                {
+                    Log.Error(odee, "Error adding reference to adoxio_specialevent_specialeventlocations");
+                }
+
+
                 if (sol.Location != null)
                 {
+                    
 
-                    MicrosoftDynamicsCRMadoxioSpecialeventlocation location = ExtractLocation(sol);
+
+                    
 
                     try
                     {
@@ -230,6 +282,10 @@ namespace SepService.Controllers
 
         private MicrosoftDynamicsCRMadoxioSpecialeventlocation ExtractLocation(Sol sol)
         {
+            if (sol?.Location == null)
+            {
+                return null;
+            }
             MicrosoftDynamicsCRMadoxioSpecialeventlocation location =
                 new MicrosoftDynamicsCRMadoxioSpecialeventlocation()
                 {

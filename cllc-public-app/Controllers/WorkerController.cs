@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="contactId"></param>
         /// <returns></returns>
         [HttpGet("contact/{contactId}")]
-        public IActionResult GetWorkers(string contactId)
+        public async Task<IActionResult> GetWorkers(string contactId)
         {
             List<ViewModels.Worker> results = new List<ViewModels.Worker>();
 
@@ -69,6 +69,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         results.Add(w.ToViewModel());
                     });
+
+                    // if there is not worker verification record, create one
+                    if (results.Count() == 0)
+                    {
+
+                        // query the Dynamics system to get the contact record.
+                        var contact = await _dynamicsClient.GetContactById(id);
+
+                        if (contact != null)
+                        {
+                            var worker = new ViewModels.Worker
+                            {
+                                firstname = contact.Firstname,
+                                middlename = contact.Middlename,
+                                lastname = contact.Lastname,
+                                contact = new ViewModels.Contact()
+                                {
+                                    id = contactId
+                                }
+                            };
+                            worker = await this.CreateWorkerRecord(worker);
+                            worker.contact = contact.ToViewModel();
+                            results.Add(worker);
+                        }
+                    }
                 }
                 else
                 {
@@ -176,46 +201,53 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateWorker([FromBody] ViewModels.Worker item)
         {
-            // create a new worker.
-            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker
-            {
-                AdoxioIsmanual = 0 // 0 for false - is a portal user.
-            };
-            worker.CopyValues(item);
+
             if (item?.contact?.id == null)
             {
                 return BadRequest();
             }
-            try
+
+            ViewModels.Worker worker = await CreateWorkerRecord(item);
+
+            return new JsonResult(worker);
+        }
+
+        // creates a worker record and links it to the contact with id = item.contact.id
+        private async Task<ViewModels.Worker> CreateWorkerRecord(ViewModels.Worker item)
+        {
+
+            if (item?.contact?.id == null)
             {
-                worker = await _dynamicsClient.Workers.CreateAsync(worker);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error creating worker. ");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error creating worker.");
+                throw new ArgumentNullException(nameof(item.contact.id));
             }
 
+            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker();
             try
             {
+                // create the worker 
+                worker.AdoxioIsmanual = 0; // 0 for false - is a portal user.
+                worker.CopyValues(item);
+                worker = await _dynamicsClient.Workers.CreateAsync(worker).ConfigureAwait(true);
+
+                // add contact reference to the worker record
                 var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
                 patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
-                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid, patchWorker);
+                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid, patchWorker).ConfigureAwait(true);
+                
             }
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error updating worker. ");
+                throw;
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Error updating worker.");
+                throw;
             }
 
-
-            return new JsonResult(worker.ToViewModel());
+            var result = worker.ToViewModel();
+            return worker.ToViewModel();
         }
 
 

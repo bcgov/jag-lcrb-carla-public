@@ -18,7 +18,7 @@ Feature: ReviewAccountProfileData
     I want to confirm the saved data for the account profile
 
 @privatecorporation @reviewaccountdata @release
-Scenario: Data for Private Corporation Review Account Profile
+Scenario: Data for Review Account Profile (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the link for Edit Account Profile
     And I review the account profile for a private corporation
@@ -28,7 +28,7 @@ Scenario: Data for Private Corporation Review Account Profile
     Then I see the login page
 
 @partnership @reviewaccountdata
-Scenario: Data for Partnership Review Account Profile
+Scenario: Data for Review Account Profile (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the link for Edit Account Profile
     And I review the account profile for a partnership
@@ -38,7 +38,7 @@ Scenario: Data for Partnership Review Account Profile
     Then I see the login page
 
 @publiccorporation @reviewaccountdata
-Scenario: Data for Public Corporation Review Account Profile
+Scenario: Data for Review Account Profile (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the link for Edit Account Profile
     And I review the account profile for a public corporation
@@ -48,7 +48,7 @@ Scenario: Data for Public Corporation Review Account Profile
     Then I see the login page
 
 @society @reviewaccountdata
-Scenario: Data for Society Review Account Profile
+Scenario: Data for Review Account Profile (Society)
     Given I am logged in to the dashboard as a society
     And I click on the link for Edit Account Profile
     And I review the account profile for a society
@@ -58,7 +58,7 @@ Scenario: Data for Society Review Account Profile
     Then I see the login page
 
 @soleproprietorship @reviewaccountdata
-Scenario: Data for Sole Proprietorship Review Account Profile
+Scenario: Data for Review Account Profile (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the link for Edit Account Profile
     And I review the account profile for a sole proprietorship
@@ -68,7 +68,7 @@ Scenario: Data for Sole Proprietorship Review Account Profile
     Then I see the login page
 
  @indigenousnation @reviewaccountdata
- Scenario: Data for Indigenous Nation Review Account Profile
+ Scenario: Data for Review Account Profile (Indigenous Nation)
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the link for Edit Account Profile
     And I review the account profile for an indigenous nation
@@ -78,7 +78,7 @@ Scenario: Data for Sole Proprietorship Review Account Profile
     Then I see the login page
 
  @localgovernment @reviewaccountdata
- Scenario: Data for Local Government Review Account Profile
+ Scenario: Data for Review Account Profile (Local Government)
     Given I am logged in to the dashboard as a local government
     And I click on the link for Edit Account Profile
     And I review the account profile for a local government
@@ -88,7 +88,7 @@ Scenario: Data for Sole Proprietorship Review Account Profile
     Then I see the login page
 
  @university @reviewaccountdata
- Scenario: Data for University Review Account Profile
+ Scenario: Data for Review Account Profile (University)
     Given I am logged in to the dashboard as a university
     And I click on the link for Edit Account Profile
     And I review the account profile for a university
