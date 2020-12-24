@@ -3,7 +3,7 @@
     I want to confirm that the security screening page is working correctly
 
 @cannabis @partnership @securityscreening
-Scenario: Validation for Partnership Security Screening
+Scenario: Validation for Security Screening (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the link for Security Screening
     And I click on the Complete Organization Information button
@@ -15,7 +15,7 @@ Scenario: Validation for Partnership Security Screening
     Then I see the login page
 
 @cannabis @privatecorporation @securityscreening
-Scenario: Validation for Private Corporation Security Screening
+Scenario: Validation for Security Screening (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the link for Security Screening
     And I click on the Complete Organization Information button
@@ -27,7 +27,7 @@ Scenario: Validation for Private Corporation Security Screening
     Then I see the login page
 
 @cannabis @publiccorporation @securityscreening
-Scenario: Validation for Public Corporation Security Screening
+Scenario: Validation for Security Screening (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the link for Security Screening
     And I click on the Complete Organization Information button
@@ -39,7 +39,7 @@ Scenario: Validation for Public Corporation Security Screening
     Then I see the login page
 
 @cannabis @society @securityscreening
-Scenario: Validation for Society Security Screening
+Scenario: Validation for Security Screening (Society)
     Given I am logged in to the dashboard as a society
     And I click on the link for Security Screening
     And I click on the Complete Organization Information button
@@ -51,7 +51,7 @@ Scenario: Validation for Society Security Screening
     Then I see the login page
 
 @cannabis @soleproprietorship @securityscreening
-Scenario: Validation for Sole Proprietorship Security Screening
+Scenario: Validation for Security Screening (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the link for Security Screening
     And I click on the Complete Organization Information button

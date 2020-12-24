@@ -1,9 +1,9 @@
-﻿namespace Gov.Lclb.Cllb.OneStopService
+﻿namespace Gov.Jag.Lcrb.OneStopService
 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.SerializableAttribute]
+    [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public class PrimaryContactDetails

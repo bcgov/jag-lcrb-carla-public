@@ -4,7 +4,7 @@
     And request a valid name or branding change for the approved application
 
 @cannabis @indigenousnation @crsbranding
-Scenario: Indigenous Nation CRS Name Branding Change
+Scenario: CRS Name Branding Change (Indigenous Nation)
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -25,7 +25,7 @@ Scenario: Indigenous Nation CRS Name Branding Change
     Then I see the login page
 
 @cannabis @partnership @crsbranding
-Scenario: Partnership CRS Name Branding Change
+Scenario: CRS Name Branding Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -46,7 +46,7 @@ Scenario: Partnership CRS Name Branding Change
     Then I see the login page
 
 @cannabis @privatecorporation @crsbranding
-Scenario: Private Corporation CRS Name Branding Change
+Scenario: CRS Name Branding Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -67,7 +67,7 @@ Scenario: Private Corporation CRS Name Branding Change
     Then I see the login page
 
 @cannabis @publiccorporation @crsbranding
-Scenario: Public Corporation CRS Name Branding Change
+Scenario: CRS Name Branding Change (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -88,7 +88,7 @@ Scenario: Public Corporation CRS Name Branding Change
     Then I see the login page
 
 @cannabis @society @crsbranding
-Scenario: Society CRS Name Branding Change
+Scenario: CRS Name Branding Change (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -109,7 +109,7 @@ Scenario: Society CRS Name Branding Change
     Then I see the login page
 
 @cannabis @soleproprietorship @crsbranding
-Scenario: Sole Proprietorship CRS Name Branding Change
+Scenario: CRS Name Branding Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure

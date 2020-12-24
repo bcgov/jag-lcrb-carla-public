@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApplicationSoap.OneStop;
 
-namespace Gov.Lclb.Cllb.OneStopService
+namespace Gov.Jag.Lcrb.OneStopService
 {
     public class OneStopUtils
     {
@@ -31,11 +31,11 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         public OneStopUtils(IConfiguration configuration, IMemoryCache cache)
         {
-            this._configuration = configuration;
+            _configuration = configuration;
             _cache = cache;
 
 
-            _onestopRestClient = OneStopUtils.SetupOneStopClient(configuration, Log.Logger);
+            _onestopRestClient = SetupOneStopClient(configuration, Log.Logger);
 
 
         }

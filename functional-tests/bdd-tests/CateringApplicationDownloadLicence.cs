@@ -19,7 +19,7 @@ Feature: CateringApplicationDownloadLicence
     And download the licence for different business types
 
 @partnership @cateringlicencedownload
-Scenario: Catering Partnership Licence Download
+Scenario: Catering Licence Download (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -38,7 +38,7 @@ Scenario: Catering Partnership Licence Download
     Then I see the login page
 
 @privatecorporation @cateringlicencedownload
-Scenario: Catering Private Corporation Licence Download
+Scenario: Catering Licence Download (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -57,7 +57,7 @@ Scenario: Catering Private Corporation Licence Download
     Then I see the login page
 
 @publiccorporation @cateringlicencedownload
-Scenario: Catering Public Corporation Licence Download
+Scenario: Catering Licence Download (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -76,7 +76,7 @@ Scenario: Catering Public Corporation Licence Download
     Then I see the login page
 
 @society @cateringlicencedownload
-Scenario: Catering Society Licence Download
+Scenario: Catering Licence Download (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -95,7 +95,7 @@ Scenario: Catering Society Licence Download
     Then I see the login page
 
 @soleproprietorship @cateringlicencedownload
-Scenario: Catering Sole Proprietorship Licence Download
+Scenario: Catering Licence Download (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship

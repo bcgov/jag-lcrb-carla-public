@@ -10,11 +10,10 @@ using Serilog;
 using System;
 using System.IO;
 using System.Linq;
-using System.ServiceModel;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Gov.Lclb.Cllb.OneStopService
+namespace Gov.Jag.Lcrb.OneStopService
 {
     public class ReceiveFromHubService : IReceiveFromHubService
     {
@@ -48,7 +47,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             // node 0 is going to be "xml", so get the next node.
             if (xmlDocument.ChildNodes.Count > 1)
             {
-                result = xmlDocument.ChildNodes[1].Name;
+                result = xmlDocument.ChildNodes[1]?.Name;
             }
             return result;
         }
@@ -108,7 +107,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 int tempBpan = int.Parse(businessProgramAccountNumber);
                 string sanitizedBpan = tempBpan.ToString();
 
-                MicrosoftDynamicsCRMadoxioLicences pathLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                MicrosoftDynamicsCRMadoxioLicences pathLicence = new MicrosoftDynamicsCRMadoxioLicences
                 {
                     AdoxioBusinessprogramaccountreferencenumber = sanitizedBpan,
                     AdoxioOnestopsent = true
@@ -181,7 +180,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     currentSuffix++;
                     Log.Logger.Information($"Starting resend of send program account request message, with new value of {currentSuffix}");
 
-                    var patchRecord = new MicrosoftDynamicsCRMadoxioLicences()
+                    var patchRecord = new MicrosoftDynamicsCRMadoxioLicences
                     {
                         AdoxioBusinessprogramaccountreferencenumber = currentSuffix.ToString()
                     };
@@ -255,15 +254,5 @@ namespace Gov.Lclb.Cllb.OneStopService
             return result;
 
         }
-    }
-
-
-    [ServiceContract]
-    public interface IReceiveFromHubService
-    {
-        [OperationContract]
-        string receiveFromHub(string inputXML);
-
-        void SetCache(IMemoryCache cache);
     }
 }

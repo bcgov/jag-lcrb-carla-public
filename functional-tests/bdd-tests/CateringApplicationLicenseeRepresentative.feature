@@ -4,7 +4,7 @@
     And submit a licensee representative request 
 
  @catering @licenseerep
- Scenario: Private Corporation Licensee Representative Request
+ Scenario: Licensee Representative Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation

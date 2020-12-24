@@ -8,7 +8,7 @@
 #-----------------------
 
  @cateringevent @partnership @noapproval
- Scenario: No Approval Partnership Event Authorization Request
+ Scenario: No Approval Event Authorization Request (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -26,7 +26,7 @@
     Then I see the login page
 
  @cateringevent @privatecorporation @noapproval @hourlyTest
- Scenario: No Approval Private Corporation Event Authorization Request
+ Scenario: No Approval Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -44,7 +44,7 @@
     Then I see the login page
 
  @cateringevent @publiccorporation @noapproval
- Scenario: No Approval Public Corporation Event Authorization Request
+ Scenario: No Approval Event Authorization Request (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -62,7 +62,7 @@
     Then I see the login page
 
  @cateringevent @society @noapproval
- Scenario: No Approval Society Event Authorization Request
+ Scenario: No Approval Event Authorization Request (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -80,7 +80,7 @@
     Then I see the login page
 
   @cateringevent @soleproprietorship @noapproval
-  Scenario: No Approval Sole Proprietorship Event Authorization Request
+  Scenario: No Approval Event Authorization Request (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
@@ -102,7 +102,7 @@
 #-----------------------
 
  @cateringevent @privatecorporation @500attendees
- Scenario: 500+ Attendees Event Authorization Request
+ Scenario: 500+ Attendees Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -124,7 +124,7 @@
 #-----------------------
 
  @cateringevent @outdoor
- Scenario: Outdoor Event Authorization Request
+ Scenario: Outdoor Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -146,7 +146,7 @@
 #-----------------------
 
  @cateringevent @indooroutdoor
- Scenario: Both Indoor and Outdoor Event Authorization Request
+ Scenario: Both Indoor and Outdoor Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -168,7 +168,7 @@
 #-------------------------
 
  @cateringevent @past2amnoncommunity
- Scenario: Past 2am Event Authorization Request
+ Scenario: Past 2am Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -190,7 +190,7 @@
 #-------------------------
 
  @cateringevent @past2amcommunity
- Scenario: Past 2am Community Event Authorization Request
+ Scenario: Past 2am Community Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -212,7 +212,7 @@
 #-------------------------
 
  @cateringevent @saveforlater
- Scenario: Save For Later Event Authorization Request
+ Scenario: Save For Later Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation

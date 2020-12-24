@@ -52,7 +52,7 @@ import { TerminateTPORelationshipComponent } from '@components/applications/term
 import { LgApprovalsComponent } from '@components/lg-approvals/lg-approvals.component';
 import { LicenceRepresentativeFormComponent } from '@components/licence-representative-form/licence-representative-form.component';
 import { MarketEventComponent } from '@components/market-event/market-event.component';
-import { PermanentChangesToALicenseeComponent } from '@components/applications/permanent-changes-to-a-licensee/permanent-changes-to-a-licensee.component';
+import { PermanentChangeToALicenseeComponent } from '@components/applications/permanent-change-to-a-licensee/permanent-change-to-a-licensee.component';
 import { OffsiteStorageComponent } from '@components/offsite-storage/offsite-storage.component';
 
 
@@ -184,19 +184,19 @@ const routes: Routes = [
   },
   {
     path: 'permanent-change-to-a-licensee',
-    component: PermanentChangesToALicenseeComponent,
+    component: PermanentChangeToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'PermanentChangesToLicensee' }
   },
   {
     path: 'permanent-change-to-a-licensee/:applicationId/:invoiceType',
-    component: PermanentChangesToALicenseeComponent,
+    component: PermanentChangeToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'PermanentChangesToLicensee' }
   },
   {
     path: 'permanent-change-to-a-licensee/:applicationId',
-    component: PermanentChangesToALicenseeComponent,
+    component: PermanentChangeToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'PermanentChangesToLicensee' }
   },

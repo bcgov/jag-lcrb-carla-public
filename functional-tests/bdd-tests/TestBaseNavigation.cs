@@ -23,7 +23,6 @@ namespace bdd_tests
         [And(@"I click on the link for (.*)")]
         public void ClickOnLink(string specificLink)
         {
-
             NgWebElement uiRequestedLink = null;
             for (int i = 0; i < 30; i++)
             {
@@ -45,7 +44,7 @@ namespace bdd_tests
 
                 }
             }
-            uiRequestedLink.Click();
+            JavaScriptClick(uiRequestedLink);
         }
 
 
@@ -53,7 +52,7 @@ namespace bdd_tests
         public void ClickOnSignatureCheckbox()
         {
             NgWebElement uiSignature = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            uiSignature.Click();
+            JavaScriptClick(uiSignature);
         }
 
 
@@ -87,15 +86,23 @@ namespace bdd_tests
         public void ClickLicencesTab()
         {
             NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Licences & Authorizations"));
-            uiRequestChange.Click();
+            JavaScriptClick(uiRequestChange);
         }
 
 
         [And(@"I click on the Dashboard tab")]
         public void ClickDashboardTab()
         {
-            NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Dashboard"));
-            uiRequestChange.Click();
+            try
+            {
+                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Dashboard"));
+                JavaScriptClick(uiRequestChange);
+            }
+            catch
+            {
+                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Dashboard"));
+                JavaScriptClick(uiRequestChange);
+            }
         }
 
 
@@ -127,6 +134,13 @@ namespace bdd_tests
             {
                 // click on the Pay for Application button
                 NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+                uiPayButton.Click();
+            }
+
+            if (specificButton == "Pay for Application for Cannabis Marketing")
+            {
+                // click on the Pay for Application button
+                NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector(".mt-3 button.btn.btn-primary"));
                 uiPayButton.Click();
             }
 
@@ -199,58 +213,114 @@ namespace bdd_tests
 
             if (applicationType == "Catering")
             {
-                // click on the Catering Start Application button
-                NgWebElement uiStartAppButton = ngDriver.FindElement(By.Id("startCatering"));
-                uiStartAppButton.Click();
+                try
+                {
+                    // click on the Catering Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.Id("startCatering"));
+                    JavaScriptClick(uiStartAppButton);
+                }
+                catch
+                {
+                    // click on the Catering Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.Id("startCatering"));
+                    JavaScriptClick(uiStartAppButton);
+                }
             }
 
             if (applicationType == "a Cannabis Retail Store")
             {
-                // click on the Cannabis Start Application button
-                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
-                uiStartAppButton.Click();
+                try
+                {
+                    // click on the Cannabis Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
+                    JavaScriptClick(uiStartAppButton);
+                }
+                catch
+                {
+                    // click on the Cannabis Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
+                    JavaScriptClick(uiStartAppButton);
+                }
             }
 
             if (applicationType == "a Rural Agency Store")
             {
-                // click on the Rural Store Start Application button
-                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
-                uiStartAppButton.Click();
+                try
+                {
+                    // click on the Rural Store Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
+                    JavaScriptClick(uiStartAppButton);
+                }
+                catch
+                {
+                    // click on the Rural Store Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
+                    JavaScriptClick(uiStartAppButton);
+                }
             }
 
             if (applicationType == "a Manufacturer Licence")
             {
-                // click on the Manufacturer Licence Start Application button
-                var uiStartAppButton = ngDriver.FindElements(By.CssSelector("button[id='startMfg']"));
-                if (uiStartAppButton.Count > 0)
+                try
                 {
-                    uiStartAppButton[0].Click();
+                    // click on the Manufacturer Licence Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
+                    JavaScriptClick(uiStartAppButton);
                 }
-                else
+                catch
                 {
-                    throw new Exception($"Unable to find Manufacturer Start Application button");
+                    // click on the Manufacturer Licence Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
+                    JavaScriptClick(uiStartAppButton);
                 }
             }
 
             if (applicationType == "a Cannabis Marketing Licence")
             {
-                // click on the Cannabis Marketing Licence Start Application button
-                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMarketing']"));
-                uiStartAppButton.Click();
+                try
+                {
+                    // click on the Cannabis Marketing Licence Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMarketing']"));
+                    JavaScriptClick(uiStartAppButton);
+                }
+                catch 
+                {
+                    // click on the Cannabis Marketing Licence Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMarketing']"));
+                    JavaScriptClick(uiStartAppButton);
+                }
             }
 
             if (applicationType == "a UBrew UVin application")
             {
-                // click on the UBrew UVin application Licence Start Application button
-                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
-                uiStartAppButton.Click();
+                try
+                {
+                    // click on the UBrew UVin application Licence Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
+                    JavaScriptClick(uiStartAppButton);
+                }
+                catch
+                {
+                    // click on the UBrew UVin application Licence Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
+                    JavaScriptClick(uiStartAppButton);
+                }
             }
 
             if (applicationType == "Food Primary")
             {
-                // click on the Food Primary Start Application button
-                NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startFP']"));
-                uiStartAppButton.Click();
+                try
+                {
+                    // click on the Food Primary Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startFP']"));
+                    JavaScriptClick(uiStartAppButton);
+                }
+                catch
+                {
+                    // click on the Food Primary Start Application button
+                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startFP']"));
+                    JavaScriptClick(uiStartAppButton);
+                }
             }
         }
 

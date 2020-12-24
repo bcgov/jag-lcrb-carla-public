@@ -36,9 +36,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly FileManagerClient _fileManagerClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
+        private readonly IBCEPService _bcep;
+
 
         public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
-            ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient,
+            ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IBCEPService bcep,
             IWebHostEnvironment env, IMemoryCache memoryCache)
         {
             _cache = memoryCache;
@@ -48,6 +50,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
             _fileManagerClient = fileClient;
             _env = env;
+            _bcep = bcep;
         }
 
 
@@ -629,7 +632,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // this filter is required
             filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
 
-            if(!string.IsNullOrEmpty(applicationId)){
+            if (!string.IsNullOrEmpty(applicationId))
+            {
                 filter += $" and adoxio_applicationid eq {applicationId}";
             }
 
@@ -651,12 +655,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             bool applicationIsPaid = (
-                (result?._adoxioInvoiceValue != null  && result?._adoxioSecondaryapplicationinvoiceValue == null) && // an invoice exists
+                (result?._adoxioInvoiceValue != null || result?._adoxioSecondaryapplicationinvoiceValue != null) && // an invoice exists
                 (result?._adoxioInvoiceValue == null || result?.AdoxioPrimaryapplicationinvoicepaid == 1) &&
                 (result?._adoxioSecondaryapplicationinvoiceValue == null || result?.AdoxioSecondaryapplicationinvoicepaid == 1)
                 );
 
-            if ((result == null || applicationIsPaid) && applicationType != null && !string.IsNullOrEmpty(applicationId))
+            if ((result == null || applicationIsPaid) && applicationType != null && string.IsNullOrEmpty(applicationId))
             {
                 // create one.
                 var account = _dynamicsClient.GetAccountById(userSettings.AccountId);
@@ -694,10 +698,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set application type relationship 
             var app = GetPermanentChangeApplication(userSettings, applicationId);
-            data.Application = await app.ToViewModel(_dynamicsClient, _cache, _logger);
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
 
+            PaymentResult primaryInvoiceResult = null;
+            // if there is an invoice but the payment has not been confirmed
+            if (!string.IsNullOrEmpty(app._adoxioInvoiceValue) && app.AdoxioPrimaryapplicationinvoicepaid != 1)
+            {
+                primaryInvoiceResult = await PaymentController.GetPaymentStatus(app, "primary", _dynamicsClient, _bcep).ConfigureAwait(true);
+            }
+
+            PaymentResult secondaryInvoiceResult = null;
+            // if there is an invoice but the payment has not been confirmed
+            if (!string.IsNullOrEmpty(app._adoxioSecondaryapplicationinvoiceValue) && app.AdoxioSecondaryapplicationinvoicepaid != 1)
+            {
+                secondaryInvoiceResult = await PaymentController.GetPaymentStatus(app, "secondary", _dynamicsClient, _bcep).ConfigureAwait(true);
+            }
+            data.Primary =  primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
+            data.Secondary = secondaryInvoiceResult?.TrnId == "0" ? null : secondaryInvoiceResult;
+;
+            if (
+                (data.Primary != null && string.IsNullOrEmpty(app._adoxioInvoiceValue)) ||
+                (data.Secondary != null && string.IsNullOrEmpty(app._adoxioSecondaryapplicationinvoiceValue))
+            )
+            {
+                app = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(app.AdoxioApplicationid));
+            }
+            data.Application = await app.ToViewModel(_dynamicsClient, _cache, _logger);
             return new JsonResult(data);
         }
 
@@ -816,7 +843,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioApplication.AdoxioApplicanttype = (int?)item.ApplicantType;
 
             // fix for an invalid licence sub category
-            if (adoxioApplication.AdoxioLicencesubcategory == 0) adoxioApplication.AdoxioLicencesubcategory = null;
+            if (adoxioApplication._adoxioLicencesubcategoryidValue != null && adoxioApplication._adoxioLicencesubcategoryidValue == "0")  adoxioApplication.AdoxioLicenceSubCategoryId = null;
 
             try
             {
@@ -1347,5 +1374,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         public List<ApplicationLicenseSummary> Licences { get; set; }
         public Application Application { get; set; }
+
+        public PaymentResult Primary { get; set; }
+        public PaymentResult Secondary { get; set; }
     }
 }

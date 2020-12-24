@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gov.Lclb.Cllb.OneStopService
+namespace Gov.Jag.Lcrb.OneStopService
 {
     public static class Utils
     {

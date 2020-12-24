@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: ManufacturerLocationChange
+Feature: ManufacturerRelocationChange
     As a logged in business user
-    I want to request changes for a manufacturer licence
+    I want to request a relocation change for a manufacturer licence
 
-@manufacturer @winery @locationchange
-Scenario: Winery Location Change Application
+@manufacturer @winery @relocationchange
+Scenario: Relocation Change Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -31,14 +31,14 @@ Scenario: Winery Location Change Application
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I request a location change
+    And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@manufacturer @brewery @locationchange
-Scenario: Brewery Location Change Application
+@manufacturer @brewery @relocationchange
+Scenario: Relocation Change Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -51,14 +51,14 @@ Scenario: Brewery Location Change Application
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I request a location change
+    And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@manufacturer @distillery @locationchange
-Scenario: Distillery Location Change Application
+@manufacturer @distillery @relocationchange
+Scenario: Relocation Change Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -71,14 +71,14 @@ Scenario: Distillery Location Change Application
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I request a location change
+    And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@manufacturer @copacker @locationchange
-Scenario: Co-packer Location Change Application
+@manufacturer @copacker @relocationchange
+Scenario: Relocation Change Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -91,7 +91,7 @@ Scenario: Co-packer Location Change Application
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I request a location change
+    And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -100,9 +100,9 @@ Scenario: Co-packer Location Change Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./ManufacturerLocationChange.feature")]
+    [FeatureFile("./ManufacturerRelocationChange.feature")]
     [Collection("Liquor")]
-    public sealed class ManufacturerLocationChange : TestBase
+    public sealed class ManufacturerRelocationChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

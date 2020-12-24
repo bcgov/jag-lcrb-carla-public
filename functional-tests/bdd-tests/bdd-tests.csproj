@@ -44,6 +44,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="CannabisMarketingTransferLicence.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="CannabisMarketingDownloadLicence.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="FoodPrimaryRelease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -221,7 +227,7 @@
     <None Update="ManufacturerFacilityStructuralChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ManufacturerLocationChange.feature">
+    <None Update="ManufacturerRelocationChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ManufacturerStructuralAlterations.feature">
