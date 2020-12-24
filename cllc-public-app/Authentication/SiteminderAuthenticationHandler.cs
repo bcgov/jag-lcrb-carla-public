@@ -438,7 +438,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         }
                         if (contact != null && contact.Contactid != null)
                         {
-                            await CreateContactDocumentLocation(_dynamicsClient, _fileManagerClient, contact);
+                            await CreateSharePointContactDocumentLocation(_fileManagerClient, contact);
                         }
 
                         // Note that this will search for active accounts
@@ -454,7 +454,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                             userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
 
                             // ensure that the given account has a documents folder.
-                            await CreateAccountDocumentLocation(_dynamicsClient, _fileManagerClient, account);
+                            await CreateSharePointAccountDocumentLocation(_fileManagerClient, account);
                         }
                         else  // force the new user process if contact exists but account does not.
                         {
@@ -496,7 +496,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
         }
 
-        private async Task CreateAccountDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMaccount account)
+        private async Task CreateSharePointAccountDocumentLocation(FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMaccount account)
         {
             string folderName;
             string logFolderName = ""; 
@@ -526,7 +526,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         
         }
 
-        private async Task CreateContactDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMcontact contact)
+        private async Task CreateSharePointContactDocumentLocation(FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMcontact contact)
         {
             string folderName;
             string logFolderName = "";
@@ -555,7 +555,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
         }
 
-        private async Task CreateWorkerDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMadoxioWorker worker)
+        private async Task CreateSharePointWorkerDocumentLocation(FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMadoxioWorker worker)
         {
             string folderName = "";
             string logFolderName = "";
@@ -645,7 +645,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 if (string.IsNullOrEmpty(_configuration["FEATURE_NO_WET_SIGNATURE"]))
                 {
                     // ensure that the worker has a documents folder.                        
-                    await CreateWorkerDocumentLocation(_dynamicsClient, _fileManagerClient, updatedWorker);
+                    await CreateSharePointWorkerDocumentLocation(_fileManagerClient, updatedWorker);
                 }
             }
         }
