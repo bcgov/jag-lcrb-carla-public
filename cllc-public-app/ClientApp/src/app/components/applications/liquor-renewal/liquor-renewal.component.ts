@@ -55,7 +55,6 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
-  busy: Subscription;
   accountId: string;
   // need access to the licence to handle subcategory cases
   licenseSubCategory: string;
@@ -77,6 +76,10 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   uploadedAssociateDocuments: 0;
   window = window;
   previousYear: string;
+  dataLoaded: boolean;
+  saveForLaterInProgress: boolean;
+  submitReqInProgress: boolean;
+  cancelReqInprogress: boolean;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -136,10 +139,10 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         this.account = account;
       });
 
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+    let sub = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
-        this.busy = this.licenceDataService.getLicenceById(data.assignedLicence.id)
+        this.licenceDataService.getLicenceById(data.assignedLicence.id)
           .pipe(takeWhile(() => this.componentActive))
           .subscribe((data: License) => {
             if (data.licenseSubCategory !== null &&
@@ -155,7 +158,8 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
             if (data.licenseSubCategory === 'Winery') {
               this.form.addControl('volumeDestroyed', this.fb.control('', [Validators.required]));
             }
-          });
+            this.dataLoaded = true;
+          }, error => this.dataLoaded = true);
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
         }
@@ -182,6 +186,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       },
         () => {
           console.log('Error occured');
+          this.dataLoaded = true;
         }
       );
   }
@@ -200,20 +205,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     return `What was your ${this.licenseSubCategory}'s total volume produced (in ${label}) between January 1 and December 31?`;
   }
 
-  doAction(licenseId: string, actionName: string) {
 
-    this.busy = this.licenceDataService.createApplicationForActionType(licenseId, actionName)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(data => {
-        this.window.open(`/account-profile/${data.id}`, 'blank');
-      },
-        () => {
-          this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
-            { duration: 3500, panelClass: ['red-snackbar'] });
-          console.log('Error starting a Change Licence Application');
-        }
-      );
-  }
 
   canDeactivate(): Observable<boolean> | boolean {
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
@@ -221,7 +213,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       return true;
     } else {
       const subj = new Subject<boolean>();
-      this.busy = this.save(true).subscribe(res => {
+      this.save(true).subscribe(res => {
         subj.next(res);
       });
       return subj;
@@ -252,12 +244,12 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         calendarYear: this.previousYear
       }
       reqs.push(this.annualVolumeService.updateAnnualVolumeForApplication(data, this.applicationId));
-    
+
     }
     return forkJoin([
-        ...reqs,
-        this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })]
-      )
+      ...reqs,
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })]
+    )
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -285,19 +277,23 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   /**
    * Submit the application for payment
    * */
-  submit_application() {
+  submitApplication() {
     if (!this.isValid()) {
       this.showValidationMessages = true;
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       this.submitPayment();
     } else {
-      this.busy = this.save(true)
+      this.submitReqInProgress = true;
+      this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
             this.submitPayment();
+          } else {
+            this.submitReqInProgress = false;
           }
-        });
+        },
+          error => { this.submitReqInProgress = false });
     }
   }
 
@@ -305,9 +301,10 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
-    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+    this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(res => {
+        this.submitReqInProgress = false;
         const jsonUrl = res;
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
@@ -315,6 +312,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         if (err._body === 'Payment already made') {
           this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
+        this.submitReqInProgress = false;
       });
   }
 
@@ -353,15 +351,18 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       .subscribe(cancelApplication => {
         if (cancelApplication) {
           // delete the application.
-          this.busy = this.applicationDataService.cancelApplication(this.applicationId)
+          this.cancelReqInprogress = true;
+          this.applicationDataService.cancelApplication(this.applicationId)
             .pipe(takeWhile(() => this.componentActive))
             .subscribe(() => {
+              this.cancelReqInprogress = false;
               this.savedFormData = this.form.value;
               this.router.navigate(['/dashboard']);
             },
               () => {
                 this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
                 console.error('Error cancelling the application');
+                this.cancelReqInprogress = false;
               });
         }
       });
@@ -398,13 +399,18 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   }
 
   saveForLater() {
-    this.busy = this.save(true)
+    this.saveForLaterInProgress = true;
+    this.save(true)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((result: boolean) => {
         if (result) {
           this.router.navigate(['/dashboard']);
         }
-      });
+        this.saveForLaterInProgress = false;
+      },
+        () => {
+          this.saveForLaterInProgress = false;
+        });
   }
 
 }
