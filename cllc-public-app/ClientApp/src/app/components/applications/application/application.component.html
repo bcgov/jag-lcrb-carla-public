@@ -1853,15 +1853,13 @@
             <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
               errorMessage="Please affirm that all of the information provided for this application is true and complete."
               [showChevrons]="false">
-              <section style="display: flex">
-                <input type="checkbox" formControlName="signatureAgreement">
+              <mat-checkbox formControlName="signatureAgreement">
                 <span class="error-states">*</span>
                 <div style="padding-left: 10px;">
                   I understand and affirm that all of the information provided
-                  for this
-                  application is true and complete
+                  for this application is true and complete
                 </div>
-              </section>
+              </mat-checkbox>
             </app-field>
           </ng-container>
         </div>
