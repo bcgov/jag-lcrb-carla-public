@@ -207,7 +207,6 @@ namespace Gov.Lclb.Cllb.Public.Extensions
 
         public static void CreateEntitySharePointDocumentLocation(this IDynamicsClient _dynamicsClient, string entityName, string entityId, string folderName, string name)
         {
-            var id = Guid.Parse(entityId);
             switch (entityName.ToLower())
             {
                 case "account":
@@ -237,7 +236,7 @@ namespace Gov.Lclb.Cllb.Public.Extensions
             }
         }
 
-        private static async Task CreateAccountDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMaccount account, string folderName, string name)
+        public static void CreateAccountDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMaccount account, string folderName, string name)
         {
             var parentDocumentLibraryReference = _dynamicsClient.GetDocumentLocationReferenceByRelativeURL("account");
 
@@ -289,7 +288,7 @@ namespace Gov.Lclb.Cllb.Public.Extensions
             }
         }
 
-        private static void CreateApplicationDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioApplication application, string folderName, string name)
+        public static void CreateApplicationDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioApplication application, string folderName, string name)
         {
 
             // now create a document location to link them.
@@ -332,7 +331,7 @@ namespace Gov.Lclb.Cllb.Public.Extensions
 
         }
 
-        private static void CreateContactDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMcontact contact, string folderName, string name)
+        public static void CreateContactDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMcontact contact, string folderName, string name)
         {
             var parentDocumentLibraryReference = _dynamicsClient.GetDocumentLocationReferenceByRelativeURL("contact");
 
@@ -388,7 +387,7 @@ namespace Gov.Lclb.Cllb.Public.Extensions
             }
         }
 
-        private static void CreateWorkerDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioWorker worker, string folderName, string name)
+        public static void CreateWorkerDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioWorker worker, string folderName, string name)
         {
             // set the parent document library.
             var parentDocumentLibraryReference = _dynamicsClient.GetDocumentLocationReferenceByRelativeURL("adoxio_worker");
@@ -445,7 +444,7 @@ namespace Gov.Lclb.Cllb.Public.Extensions
             }
         }
 
-        private static void CreateEventDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioEvent eventEntity, string folderName, string name)
+        public static void CreateEventDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioEvent eventEntity, string folderName, string name)
         {
             // set the parent document library.
             var parentDocumentLibraryReference = _dynamicsClient.GetDocumentLocationReferenceByRelativeURL("adoxio_event");
@@ -500,7 +499,7 @@ namespace Gov.Lclb.Cllb.Public.Extensions
             }
         }
 
-        private static void CreateLicenceDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioLicences licenceEntity, string folderName, string name)
+        public static void CreateLicenceDocumentLocation(this IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioLicences licenceEntity, string folderName, string name)
         {
             // set the parent document library.
             var parentDocumentLibraryReference = _dynamicsClient.GetDocumentLocationReferenceByRelativeURL("adoxio_licences");
