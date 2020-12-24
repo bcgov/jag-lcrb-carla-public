@@ -1,5 +1,5 @@
-<div class="dashboard-spacing" style="position: relative; width: 900px; padding: 20px;">
-  <div [ngBusy]="busy"></div>
+<mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="dataLoaded" class="dashboard-spacing" style="position: relative; width: 900px; padding: 20px;">
   <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
     <div>
       <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
@@ -21,12 +21,13 @@
         </app-field>
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
-            1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with,
+            1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged
+            with,
             or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalCriminalOffenceCheck')}"
-                                     formControlName="renewalCriminalOffenceCheck" aria-label="Font Style">
+              formControlName="renewalCriminalOffenceCheck" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -40,11 +41,11 @@
           <div class="question-label">
             2. Has there been an unreported sale of the business associated with the licence within the past 12 months?
             <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
-               matTooltip="For example, are you the new owner of the licence or does the licence have a new owner?"></i>
+              matTooltip="For example, are you the new owner of the licence or does the licence have a new owner?"></i>
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalUnreportedSaleOfBusiness')}"
-                                     formControlName="renewalUnreportedSaleOfBusiness" aria-label="Font Style">
+              formControlName="renewalUnreportedSaleOfBusiness" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -65,11 +66,11 @@
             3. Our records show that you are licensed as a {{account?.getBusinessTypeName()}}. Has this
             changed?
             <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
-               matTooltip="For example, has your business type changed to a sole proprietor, private corporation, partnership, etc.?"></i>
+              matTooltip="For example, has your business type changed to a sole proprietor, private corporation, partnership, etc.?"></i>
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalBusinessType')}"
-                                     formControlName="renewalBusinessType" aria-label="Font Style">
+              formControlName="renewalBusinessType" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -88,14 +89,15 @@
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             4. Have you, any partner, shareholder, director, officer, or an immediate family member of any of the
-            aforementioned associates acquired a new interest or expanded an existing interest - financial or otherwise - in
+            aforementioned associates acquired a new interest or expanded an existing interest - financial or otherwise
+            - in
             a federal producer of cannabis within the past 12 months?
             <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
-               matTooltip="Tied house relationships with federal producers must be reported to the LCRB to determine if there is a risk of the producer’s products being favoured by the licensee."></i>
+              matTooltip="Tied house relationships with federal producers must be reported to the LCRB to determine if there is a risk of the producer’s products being favoured by the licensee."></i>
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalTiedhouse')}"
-                                     formControlName="renewalTiedhouse" aria-label="Font Style">
+              formControlName="renewalTiedhouse" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -118,11 +120,11 @@
             5. Has a federal produce of cannabis acquired a new interest or expanded an existing interest - financial or
             otherwise - in the {{account?.getBusinessTypeName()}} within the past 12 months?
             <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
-               matTooltip="Tied house relationships with federal producers must be reported to the LCRB to determine if there is a risk of the producer’s products being favoured by the licensee."></i>
+              matTooltip="Tied house relationships with federal producers must be reported to the LCRB to determine if there is a risk of the producer’s products being favoured by the licensee."></i>
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('tiedhouseFederalInterest')}"
-                                     formControlName="tiedhouseFederalInterest" aria-label="Font Style">
+              formControlName="tiedhouseFederalInterest" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -147,13 +149,13 @@
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalOrgLeadership')}"
-                                     formControlName="renewalOrgLeadership" aria-label="Font Style">
+              formControlName="renewalOrgLeadership" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
           </div>
         </section>
-        <section style="padding-right: 95px;" *ngIf="account?.id && account?.businessType && legalEntityId">
+        <section style="padding-right: 95px;" *ngIf="account?.id && account?.businessType">
 
           <div *ngIf="form.get('renewalOrgLeadership').value === 'Yes'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>
@@ -170,13 +172,13 @@
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalkeypersonnel')}"
-                                     formControlName="renewalkeypersonnel" aria-label="Font Style">
+              formControlName="renewalkeypersonnel" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
           </div>
         </section>
-        <section style="padding-right: 95px;" *ngIf="account?.id && account?.businessType && legalEntityId">
+        <section style="padding-right: 95px;" *ngIf="account?.id && account?.businessType">
 
           <div *ngIf="form.get('renewalkeypersonnel').value === 'Yes'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>
@@ -192,13 +194,13 @@
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalShareholders')}"
-                                     formControlName="renewalShareholders" aria-label="Font Style">
+              formControlName="renewalShareholders" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
           </div>
         </section>
-        <section style="padding-right: 95px;" *ngIf="account?.id && account?.businessType && legalEntityId">
+        <section style="padding-right: 95px;" *ngIf="account?.id && account?.businessType">
 
           <div *ngIf="form.get('renewalShareholders').value === 'Yes'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>
@@ -210,12 +212,13 @@
       <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
-            9. Do you have an outstanding payable fine under the Offence Act or outstanding payable monetary penalty under
+            9. Do you have an outstanding payable fine under the Offence Act or outstanding payable monetary penalty
+            under
             the Cannabis Control and Licensing Act that has not yet been paid?
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalOutstandingFines')}"
-                                     formControlName="renewalOutstandingFines" aria-label="Font Style">
+              formControlName="renewalOutstandingFines" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -239,7 +242,7 @@
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalBranding')}"
-                                     formControlName="renewalBranding" aria-label="Font Style">
+              formControlName="renewalBranding" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -262,7 +265,7 @@
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalSignage')}"
-                                     formControlName="renewalSignage" aria-label="Font Style">
+              formControlName="renewalSignage" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -286,7 +289,7 @@
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalEstablishmentAddress')}"
-                                     formControlName="renewalEstablishmentAddress" aria-label="Font Style">
+              formControlName="renewalEstablishmentAddress" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -294,7 +297,7 @@
         </section>
         <section style="padding-right: 95px;">
           <div *ngIf="form.get('renewalEstablishmentAddress').value === 'Yes'" style=" margin-top: 10px;"
-               class="field-changed">
+            class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence.
             After submitting your renewal, please start a Relocation Request application from the Dashboard.
           </div>
@@ -309,7 +312,7 @@
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalValidInterest')}"
-                                     formControlName="renewalValidInterest" aria-label="Font Style">
+              formControlName="renewalValidInterest" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -331,7 +334,7 @@
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalZoning')}"
-                                     formControlName="renewalZoning" aria-label="Font Style">
+              formControlName="renewalZoning" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -348,13 +351,13 @@
       <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isMarketing()">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
-           15. Have you made any unreported changes to the store’s floor plan within the past 12 months?
+            15. Have you made any unreported changes to the store’s floor plan within the past 12 months?
             <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
-               matTooltip="This includes any businesses with which you share  common areas. For example, vestibules, bathrooms, and window coverings."></i>
+              matTooltip="This includes any businesses with which you share  common areas. For example, vestibules, bathrooms, and window coverings."></i>
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalFloorPlan')}"
-                                     formControlName="renewalFloorPlan" aria-label="Font Style">
+              formControlName="renewalFloorPlan" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -371,23 +374,25 @@
       <!-- Contact Details -->
       <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
       <p><i>
-          Please provide contact information for the contact that the LCRB should communicate with regarding the application. This contact must be authorized to represent the applicant and have the authority to bind the applicant. 
+          Please provide contact information for the contact that the LCRB should communicate with regarding the
+          application. This contact must be authorized to represent the applicant and have the authority to bind the
+          applicant.
         </i>
       </p>
       <address class="padded-section">
 
         <app-field label="First Name" [required]="true"
-                   [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
-                   errorMessage="Please enter the business contact's first name">
+          [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
+          errorMessage="Please enter the business contact's first name">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-                 formControlName="contactPersonFirstName">
+            formControlName="contactPersonFirstName">
         </app-field>
 
         <app-field label="Last Name" [required]="true"
-                   [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
-                   errorMessage="Please enter the business contact's last name">
+          [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
+          errorMessage="Please enter the business contact's last name">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-                 formControlName="contactPersonLastName">
+            formControlName="contactPersonLastName">
         </app-field>
 
         <app-field label="Title/Position" [required]="false" [valid]="true">
@@ -395,17 +400,17 @@
         </app-field>
 
         <app-field label="Phone Number (main)" [required]="true"
-                   [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
-                   errorMessage="Please enter the business contact's 10-digit phone number">
+          [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
+          errorMessage="Please enter the business contact's 10-digit phone number">
           <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-                 (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
+            (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
         </app-field>
 
         <app-field label="Email" [required]="true"
-                   [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
-                   errorMessage="Please enter the business contact's email address">
+          [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
+          errorMessage="Please enter the business contact's email address">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
-                 formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
+            formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
         </app-field>
       </address>
 
@@ -414,7 +419,8 @@
       </h3>
       <div class="padded-section content">
         <p>
-          This application should only be submitted by an individual with the authority to bind the applicant. The branch
+          This application should only be submitted by an individual with the authority to bind the applicant. The
+          branch
           relies on the applicant to ensure that the individual who submits this application is authorized to do so.
           Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually
           be an officer or, in some cases, a director.
@@ -424,7 +430,7 @@
           behalf of the applicant.
         </p>
         <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-                   errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+          errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
           <section style="display: flex">
             <input type="checkbox" formControlName="authorizedToSubmit">
             <span class="error-states">*</span>
@@ -442,8 +448,8 @@
           fails to disclose a material fact”.
         </p>
         <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-                   errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                   [showChevrons]="false">
+          errorMessage="Please affirm that all of the information provided for this application is true and complete."
+          [showChevrons]="false">
           <section style="display: flex">
             <input type="checkbox" formControlName="signatureAgreement">
             <span class="error-states">*</span>
@@ -475,23 +481,28 @@
       </div>
 
       <section style="position: relative; margin-top: 20px;">
-        <button class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
+        <button mat-raised-button color="secondary" style="margin-right:10px;" (click)="saveForLater()">
           <span>
             <i class="fa fa-save" style="color: #fff;"></i>
             SAVE FOR LATER
           </span>
+          <mat-progress-bar class="mt-1" *ngIf="!saveForLateInProgress" mode="indeterminate"></mat-progress-bar>
         </button>
-        <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
+        <button mat-raised-button color="primary" (click)="submitApplication()">
+          <span>SUBMIT &amp; PAY</span>
+          <mat-progress-bar class="mt-1" *ngIf="!submitReqInProgress" mode="indeterminate"></mat-progress-bar>
+          </button>
         <span style="float: right; color: #1a5a96; padding-top: 10px;">
           <span (click)="cancelApplication()">
             <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
             <a href="javascript: void(0)">
               Cancel Application
             </a>
+            <mat-progress-bar class="mt-1" *ngIf="!cancelReqInProgress" mode="indeterminate"></mat-progress-bar>
+
           </span>
         </span>
 
-        <div [ngBusy]="busy"></div>
       </section>
     </div>
   </div>

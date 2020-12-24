@@ -181,8 +181,7 @@
               <hr>
               <h3>Mailing Address</h3>
               <section>
-                <input type="checkbox" style="margin-right: 10px;" formControlName="_mailingSameAsPhysicalAddress">
-                <span>Same as physical address</span>
+                <mat-checkbox formControlName="_mailingSameAsPhysicalAddress">Same as physical address</mat-checkbox>
               </section>
               <div class="row">
                 <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 1"
@@ -319,7 +318,7 @@
             <a routerLink="/dashboard">
               <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>CANCEL & CLOSE</a>
             <span style="float: right;">
-              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont"
+              <button color="primary" mat-raised-button style="margin-left: 10px" (click)="gotoReview()" class="save-cont"
                 id="continueToApp">
                 <span *ngIf="!applicationId && !useInStepperMode">SAVE & CONTINUE</span>
                 <span *ngIf="applicationId && !useInStepperMode">CONTINUE TO APPLICATION</span>
