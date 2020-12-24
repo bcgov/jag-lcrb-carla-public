@@ -271,7 +271,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = Accounts.GetByKey(accountid: id, expand: expand);
             }
-            catch (HttpOperationException ex)
+            catch (HttpOperationException)
             {
                 result = null;
             }
