@@ -57,33 +57,33 @@
 
 <section class="error mt-3" *ngIf="showValidationMessages">
     <p *ngFor="let message of validationMessages">
-      <span class="app-cancel">
-        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-        {{message}}
-      </span>
+        <span class="app-cancel">
+            <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+            {{message}}
+        </span>
     </p>
-  </section>
+</section>
 
 <section *ngIf="!disableForm" class="position-relative d-flex justify-content-between p-3">
     <span>
-        <button class="btn btn-secondary" [disabled]="optingOutOfComment" (click)="OptOutOfComment()">
+        <button mat-raised-button color="secondary" [disabled]="optingOutOfComment" (click)="OptOutOfComment()">
             <span>Opt Out of Comment</span>
+            <mat-progress-bar *ngIf="optingOutOfComment" mode="indeterminate"></mat-progress-bar>
         </button>
-        <mat-progress-bar *ngIf="optingOutOfComment" mode="indeterminate"></mat-progress-bar>
     </span>
 
     <span>
-        <button class="btn btn-secondary" [disabled]="rejectingApp" (click)="RejectApplication()">
+        <button mat-raised-button color="secondary" [disabled]="rejectingApp" (click)="RejectApplication()">
             <span>Reject Application</span>
+            <mat-progress-bar *ngIf="rejectingApp" mode="indeterminate"></mat-progress-bar>
         </button>
-        <mat-progress-bar *ngIf="rejectingApp" mode="indeterminate"></mat-progress-bar>
     </span>
 
     <span>
-        <button class="btn btn-primary" [disabled]="approvingApplication" (click)="ApproveApplication()">
+        <button mat-raised-button color="primary" [disabled]="approvingApplication" (click)="ApproveApplication()">
             <span>Accept Application</span>
+            <mat-progress-bar *ngIf="approvingApplication" mode="indeterminate"></mat-progress-bar>
         </button>
-        <mat-progress-bar *ngIf="approvingApplication" mode="indeterminate"></mat-progress-bar>
     </span>
 
 </section>
