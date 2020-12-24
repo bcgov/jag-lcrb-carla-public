@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace WebApplicationSoap.OneStop
+namespace Gov.Jag.Lcrb.OneStopService.OneStop
 {
     public class ProgramAccountRequest
     {

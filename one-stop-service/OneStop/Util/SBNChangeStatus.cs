@@ -55,13 +55,13 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
 
         private string requestModeField;
 
-        private byte documentSubTypeField;
+        private string documentSubTypeField;
 
         private string senderIDField;
 
         private string receiverIDField;
 
-        private uint partnerNoteField;
+        private string partnerNoteField;
 
         private SBNChangeStatusHeaderCCRAHeader cCRAHeaderField;
 
@@ -79,7 +79,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
         }
 
         /// <remarks/>
-        public byte documentSubType
+        public string documentSubType
         {
             get
             {
@@ -118,7 +118,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
         }
 
         /// <remarks/>
-        public uint partnerNote
+        public string partnerNote
         {
             get
             {
@@ -153,7 +153,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
 
         private string userApplicationField;
 
-        private byte userRoleField;
+        private string userRoleField;
 
         private SBNChangeStatusHeaderCCRAHeaderUserCredentials userCredentialsField;
 
@@ -171,7 +171,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
         }
 
         /// <remarks/>
-        public byte userRole
+        public string userRole
         {
             get
             {
@@ -204,14 +204,14 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
     public partial class SBNChangeStatusHeaderCCRAHeaderUserCredentials
     {
 
-        private uint businessRegistrationNumberField;
+        private string businessRegistrationNumberField;
 
         private string legalNameField;
 
         private string postalCodeField;
 
         /// <remarks/>
-        public uint businessRegistrationNumber
+        public string businessRegistrationNumber
         {
             get
             {
@@ -259,7 +259,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
 
         private SBNChangeStatusBodyStatusData statusDataField;
 
-        private uint partnerInfo1Field;
+        private string partnerInfo1Field;
 
         private System.DateTime partnerInfo2Field;
 
@@ -277,7 +277,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
         }
 
         /// <remarks/>
-        public uint partnerInfo1
+        public string partnerInfo1
         {
             get
             {
