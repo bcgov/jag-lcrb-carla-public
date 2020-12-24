@@ -280,7 +280,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 // get user account
-                var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
+                var accountId = userSettings.AccountId;
                 var account = _dynamicsClient.GetAccountById(accountId);
 
                 if (account._adoxioLginlinkidValue != null)
