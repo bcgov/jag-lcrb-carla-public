@@ -4,10 +4,11 @@ using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
+using Gov.Jag.Lcrb.OneStopService.OneStop.Util;
 
 namespace Gov.Jag.Lcrb.OneStopService.OneStop
 {
-    public class ProgramAccountDetailsBroadcast
+    public class ChangeStatus
     {
 
         /**
@@ -31,21 +32,21 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             {
                 throw new Exception("The licence must have an AdoxioLicencee");
             }
-            var programAccountDetailsBroadcast = new SBNProgramAccountDetailsBroadcast1();
-            programAccountDetailsBroadcast.header = GetProgramAccountDetailsBroadcastHeader(licence);
-            programAccountDetailsBroadcast.body = GetProgramAccountDetailsBroadcastBody(licence);
+            var sbnChangeStatus = new SBNChangeStatus();
+            sbnChangeStatus.header = GetHeader(licence);
+            sbnChangeStatus.body = GetBody(licence);
 
             var serializer = new XmlSerializer(typeof(SBNProgramAccountDetailsBroadcast1));
             using (StringWriter textWriter = new StringWriter())
             {
-                serializer.Serialize(textWriter, programAccountDetailsBroadcast);
+                serializer.Serialize(textWriter, sbnChangeStatus);
                 return textWriter.ToString();
             }
         }
 
-        private SBNProgramAccountDetailsBroadcastHeader GetProgramAccountDetailsBroadcastHeader(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNChangeStatusHeader GetHeader(MicrosoftDynamicsCRMadoxioLicences licence)
         {
-            var header = new SBNProgramAccountDetailsBroadcastHeader();
+            var header = new SBNChangeStatusHeader();
 
             header.requestMode = OneStopUtils.ASYNCHRONOUS;
             header.documentSubType = OneStopUtils.DOCUMENT_SUBTYPE;
@@ -59,9 +60,9 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             return header;
         }
 
-        private SBNProgramAccountDetailsBroadcastHeaderCCRAHeader GetCCRAHeader(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNChangeStatusHeaderCCRAHeader GetCCRAHeader(MicrosoftDynamicsCRMadoxioLicences licence)
         {
-            var ccraHeader = new SBNProgramAccountDetailsBroadcastHeaderCCRAHeader();
+            var ccraHeader = new SBNChangeStatusHeaderCCRAHeader();
 
             ccraHeader.userApplication = OneStopUtils.USER_APPLICATION;
             ccraHeader.userRole = OneStopUtils.USER_ROLE;
@@ -70,9 +71,9 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             return ccraHeader;
         }
 
-        private SBNProgramAccountDetailsBroadcastHeaderCCRAHeaderUserCredentials GetUserCredentials(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNChangeStatusHeaderCCRAHeaderUserCredentials GetUserCredentials(MicrosoftDynamicsCRMadoxioLicences licence)
         {
-            var userCredentials = new SBNProgramAccountDetailsBroadcastHeaderCCRAHeaderUserCredentials();
+            var userCredentials = new SBNChangeStatusHeaderCCRAHeaderUserCredentials();
 
             //BN9 of licensee (Owner company)
             userCredentials.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
@@ -127,63 +128,20 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             }
         }
 
-        private SBNProgramAccountDetailsBroadcastBody GetProgramAccountDetailsBroadcastBody(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNChangeStatusBody GetBody(MicrosoftDynamicsCRMadoxioLicences licence)
         {
-            var programAccountDetailsBroadcastBody = new SBNProgramAccountDetailsBroadcastBody();
-
-            // BN9
-            programAccountDetailsBroadcastBody.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
-
-            // this code identifies that the message is from LCRB.  It's the same in every message from LCRB
-            programAccountDetailsBroadcastBody.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
-
-            // reference number received on SBNCreateProgramAccountResponseBody.businessProgramAccountReferenceNumber
-            programAccountDetailsBroadcastBody.businessProgramAccountReferenceNumber = licence.AdoxioBusinessprogramaccountreferencenumber;
-
-            // Set the SBNProgramTypeCode to the value specified in the licence -> licenceType record.
-
-            if (licence?.AdoxioLicenceType?.AdoxioOnestopprogramaccounttype != null)
-            {
-                programAccountDetailsBroadcastBody.SBNProgramTypeCode = licence?.AdoxioLicenceType?.AdoxioOnestopprogramaccounttype.ToString();
-            }
-            else
-            {
-                if ("Cannabis Retail Store" == licence?.AdoxioLicenceType?.AdoxioName)
-                {
-                    programAccountDetailsBroadcastBody.SBNProgramTypeCode = OneStopUtils.PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE;
-                }
-
-            }
-
-
-            programAccountDetailsBroadcastBody.businessCore = GetBusinessCore(licence);
-
-            programAccountDetailsBroadcastBody.programAccountStatus = GetProgramAccountStatus(licence);
-
-            // the legal name of the establishment
-            programAccountDetailsBroadcastBody.legalName = licence.AdoxioLicencee.Name;
-
-            programAccountDetailsBroadcastBody.operatingName = GetOperatingName(licence);
-
-            programAccountDetailsBroadcastBody.businessAddress = GetBusinessAddress(licence);
-
-            programAccountDetailsBroadcastBody.mailingAddress = GetMailingAddress(licence);
+            var body = new SBNChangeStatusBody();
 
             // licence number
-            programAccountDetailsBroadcastBody.partnerInfo1 = licence.AdoxioLicencenumber;
+            body.partnerInfo1 = licence.AdoxioLicencenumber;
 
-            programAccountDetailsBroadcastBody.partnerInfo3 = GetPrimaryContact(licence);
+            body.statusData = new SBNChangeStatusBodyStatusData();
 
-            // licence subtype code – not applicable to cannabis
-            //programAccountDetailsBroadcastBody.partnerInfo2 = "ToGetFromDynamics";
+            body.statusData.businessProgramAccountReferenceNumber = 1;
+            body.statusData.businessProgramIdentifier = "2";
+            body.statusData.businessRegistrationNumber = 4;
 
-            // licence expiry date
-            if (licence.AdoxioExpirydate != null)
-            {
-                programAccountDetailsBroadcastBody.expiryDate = licence.AdoxioExpirydate.Value.ToString("yyyy-MM-dd");
-            }
-
-            return programAccountDetailsBroadcastBody;
+            return body;
         }
 
         private SBNProgramAccountDetailsBroadcastBodyBusinessCore GetBusinessCore(MicrosoftDynamicsCRMadoxioLicences licence)

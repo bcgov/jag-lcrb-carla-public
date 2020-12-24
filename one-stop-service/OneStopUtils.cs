@@ -12,12 +12,27 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using WebApplicationSoap.OneStop;
+using Gov.Jag.Lcrb.OneStopService.OneStop;
 
 namespace Gov.Jag.Lcrb.OneStopService
 {
     public class OneStopUtils
     {
+        public const string ASYNCHRONOUS = "A";
+        public const string DOCUMENT_SUBTYPE = "000";
+        public const string SENDER_ID = "LCRB";
+        public const string RECEIVER_ID = "BCSBNHUB";
+        public const string USER_APPLICATION = "BF";
+        public const string USER_ROLE = "01";
+        public const string BUSINESS_PROGRAM_IDENTIFIER = "BB";
+        public const string PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE = "150";
+        public const string PROGRAM_TYPE_CODE_CANNABIS_MARKETING = "151";
+        public const string PROGRAM_TYPE_CODE_CANNABIS_RURAL_RETAIL_STORE = "152";
+        public const string PROGRAM_ACCOUNT_TYPE_CODE = "01";
+        public const string PROGRAM_ACCOUNT_STATUS_CODE_ACTIVE = "01";
+        public const string PROGRAM_ACCOUNT_STATUS_CODE_CLOSED = "02";
+        public const string OPERATING_NAME_SEQUENCE_NUMBER = "1";
+
         /// <summary>
         /// Maximum number of new licenses that will be sent per interval.
         /// </summary>
@@ -38,6 +53,65 @@ namespace Gov.Jag.Lcrb.OneStopService
             _onestopRestClient = SetupOneStopClient(configuration, Log.Logger);
 
 
+        }
+
+        /// <summary>
+        /// Hangfire job to send Change Status message to One stop.
+        /// </summary>
+        public async Task SendChangeStatusRest(PerformContext hangfireContext, string licenceGuidRaw)
+        {
+            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine("Starting OneStop REST ChangeStatus Job.");
+            }
+
+            string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
+
+            //prepare soap content
+            var req = new ChangeStatus();
+            var licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
+
+            if (hangfireContext != null && licence != null)
+            {
+                hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
+            }
+
+            if (licence == null)
+            {
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
+                }
+
+                if (Log.Logger != null)
+                {
+                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
+                }
+            }
+            else
+            {
+                var innerXML = req.CreateXML(licence);
+
+                if (Log.Logger != null)
+                {
+                    Log.Logger.Information(innerXML);
+                }
+
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine(innerXML);
+                }
+
+                //send message to Onestop hub
+                var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXML);
+
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine(outputXML);
+                    hangfireContext.WriteLine("End of OneStop REST ProgramAccountDetailsBroadcast  Job.");
+                }
+            }
         }
 
         /// <summary>
@@ -103,6 +177,7 @@ namespace Gov.Jag.Lcrb.OneStopService
             hangfireContext?.WriteLine("End of OneStop ProgramAccountRequest  Job.");
             
         }
+
 
 
         /// <summary>
