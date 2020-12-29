@@ -311,18 +311,18 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
     public partial class SBNChangeStatusBodyStatusData
     {
 
-        private uint businessRegistrationNumberField;
+        private string businessRegistrationNumberField;
 
         private string businessProgramIdentifierField;
 
-        private byte businessProgramAccountReferenceNumberField;
+        private string businessProgramAccountReferenceNumberField;
 
         private SBNChangeStatusBodyStatusDataProgramAccountStatus programAccountStatusField;
 
         private string timeStampField;
 
         /// <remarks/>
-        public uint businessRegistrationNumber
+        public string businessRegistrationNumber
         {
             get
             {
@@ -348,7 +348,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
         }
 
         /// <remarks/>
-        public byte businessProgramAccountReferenceNumber
+        public string businessProgramAccountReferenceNumber
         {
             get
             {
@@ -394,12 +394,12 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
     public partial class SBNChangeStatusBodyStatusDataProgramAccountStatus
     {
 
-        private byte programAccountStatusCodeField;
+        private string programAccountStatusCodeField;
 
         private System.DateTime effectiveDateField;
 
         /// <remarks/>
-        public byte programAccountStatusCode
+        public string programAccountStatusCode
         {
             get
             {
