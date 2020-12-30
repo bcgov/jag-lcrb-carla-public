@@ -13,6 +13,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using Gov.Jag.Lcrb.OneStopService.OneStop;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gov.Jag.Lcrb.OneStopService
 {
@@ -61,17 +62,39 @@ namespace Gov.Jag.Lcrb.OneStopService
         {
             _configuration = configuration;
             _cache = cache;
-
-
             _onestopRestClient = SetupOneStopClient(configuration, Log.Logger);
+        }
 
-
+        private void UpdateQueueItemForSend(IDynamicsClient dynamicsClient, PerformContext hangfireContext, string queueItemId, string payload, string response)
+        {
+            if (!string.IsNullOrEmpty(queueItemId))
+            {
+                MicrosoftDynamicsCRMadoxioOnestopmessageitem patchRecord =
+                    new MicrosoftDynamicsCRMadoxioOnestopmessageitem()
+                    {
+                        AdoxioDatesent = DateTime.Now,
+                        AdoxioPayload = payload,
+                        AdoxioErrordescription = response
+                    };
+                try
+                {
+                    dynamicsClient.Onestopmessageitems.Update(queueItemId, patchRecord);
+                }
+                catch (Exception e)
+                {
+                    Log.Logger.Error(e, $"Error while updating OneStop queue item {queueItemId} {e.Message}");
+                    if (hangfireContext != null)
+                    {
+                        hangfireContext.WriteLine($"Error while updating OneStop queue item {queueItemId} {e.Message}");
+                    }
+                }
+            }
         }
 
         /// <summary>
         /// Hangfire job to send Change Address message to One stop.
         /// </summary>
-        public async Task SendChangeAddressRest(PerformContext hangfireContext, string licenceGuidRaw)
+        public async Task SendChangeAddressRest(PerformContext hangfireContext, string licenceGuidRaw, string queueItemId)
         {
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             if (hangfireContext != null)
@@ -118,6 +141,7 @@ namespace Gov.Jag.Lcrb.OneStopService
 
                 //send message to Onestop hub
                 var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXML);
+                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXML, outputXML);
 
                 if (hangfireContext != null)
                 {
@@ -130,7 +154,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// <summary>
         /// Hangfire job to send Change Status message to One stop.
         /// </summary>
-        public async Task SendChangeNameRest(PerformContext hangfireContext, string licenceGuidRaw)
+        public async Task SendChangeNameRest(PerformContext hangfireContext, string licenceGuidRaw, string queueItemId)
         {
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             if (hangfireContext != null)
@@ -178,6 +202,8 @@ namespace Gov.Jag.Lcrb.OneStopService
                 //send message to Onestop hub
                 var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXML);
 
+                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXML, outputXML);
+
                 if (hangfireContext != null)
                 {
                     hangfireContext.WriteLine(outputXML);
@@ -189,7 +215,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// <summary>
         /// Hangfire job to send Change Status message to One stop.
         /// </summary>
-        public async Task SendChangeStatusRest(PerformContext hangfireContext, string licenceGuidRaw, OneStopHubStatusChange statusChange)
+        public async Task SendChangeStatusRest(PerformContext hangfireContext, string licenceGuidRaw, OneStopHubStatusChange statusChange, string queueItemId)
         {
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             if (hangfireContext != null)
@@ -237,6 +263,8 @@ namespace Gov.Jag.Lcrb.OneStopService
                 //send message to Onestop hub
                 var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXML);
 
+                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXML, outputXML);
+
                 if (hangfireContext != null)
                 {
                     hangfireContext.WriteLine(outputXML);
@@ -249,7 +277,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// Hangfire job to send LicenceCreationMessage to One stop using REST.
         /// </summary>
         [AutomaticRetry(Attempts = 0)]
-        public async Task SendProgramAccountRequestREST(PerformContext hangfireContext, string licenceGuidRaw, string suffix)
+        public async Task SendProgramAccountRequestREST(PerformContext hangfireContext, string licenceGuidRaw, string suffix, string queueItemId)
         {
             hangfireContext?.WriteLine("Starting OneStop ProgramAccountRequest Job.");
             
@@ -288,6 +316,9 @@ namespace Gov.Jag.Lcrb.OneStopService
                     Log.Logger?.Information(innerXml);
                     // send message to Onestop hub
                     var outputXml = await _onestopRestClient.ReceiveFromPartner(innerXml);
+
+                    UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXml, outputXml);
+
 
                     if (hangfireContext != null)
                     {
@@ -424,7 +455,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                             {
                                 // send a change status to the old licensee
                                 await SendChangeStatusRest(hangfireContext, licenceId,
-                                    (OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription);
+                                    (OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription, queueItem.AdoxioOnestopmessageitemid);
                             }
                             // Do not attempt to send licence records that have no establishment (for example, Marketer Licence records)
                             if (item.AdoxioEstablishment != null)
@@ -453,7 +484,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                                 {
                                     hangfireContext.WriteLine($"SET key {cacheKey} to {newNumber}");
                                 }
-                                await SendProgramAccountRequestREST(hangfireContext, licenceId, suffix);
+                                await SendProgramAccountRequestREST(hangfireContext, licenceId, suffix, queueItem.AdoxioOnestopmessageitemid);
                                 
                             }
 
@@ -468,15 +499,15 @@ namespace Gov.Jag.Lcrb.OneStopService
                         case OneStopHubStatusChange.SuspensionEnded:
 
                             await SendChangeStatusRest(hangfireContext, licenceId,
-                                (OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription);
+                                (OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription, queueItem.AdoxioOnestopmessageitemid);
                             break;
 
                         case OneStopHubStatusChange.ChangeOfAddress:
-                            await SendChangeAddressRest(hangfireContext, licenceId);
+                            await SendChangeAddressRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid);
                             break;
                         case OneStopHubStatusChange.ChangeOfName:
                         case OneStopHubStatusChange.LicenceDeemedAtTransfer:
-                            await SendChangeNameRest(hangfireContext, licenceId);
+                            await SendChangeNameRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid);
                             break;
                     }
 
@@ -487,7 +518,6 @@ namespace Gov.Jag.Lcrb.OneStopService
                         break; // exit foreach    
                     }
                 }
-
 
             }
 
