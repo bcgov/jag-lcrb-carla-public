@@ -14,6 +14,8 @@ import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { Account, TransferAccount } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
 
 const ValidationErrorMap = {
   transferConsent: 'Please consent to the transfer'
@@ -25,6 +27,8 @@ const ValidationErrorMap = {
   styleUrls: ['./application-cancel-ownership-transfer.component.scss']
 })
 export class ApplicationCancelOwnershipTransferComponent extends FormBase implements OnInit {
+  faSave = faSave;
+  faTrashAlt = faTrashAlt;
   licence: License;
   form: FormGroup;
   licenceId: string;

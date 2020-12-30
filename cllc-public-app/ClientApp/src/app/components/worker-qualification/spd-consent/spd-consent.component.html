@@ -36,7 +36,7 @@
               cannabis security verification.
           </p>          
           <div *ngIf="showValidationMessages && !form.get('consentToCollection').touched" class="missing"  style="background-color: #F2F2F2; margin-top: 2px; padding: 10px;">
-            <i class="fas fa-exclamation-triangle"></i> Please provide your consent to proceed -- a security screening is required in order to become a
+            <fa-icon [icon]="faExclamationTriangle"></fa-icon> Please provide your consent to proceed -- a security screening is required in order to become a
             qualified cannabis worker.
           </div>
 
@@ -58,14 +58,14 @@
         </section>
 
         <section *ngIf="showValidationMessages" class="missing" style="background-color: #F2F2F2; padding: 10px">
-          <i class="fas fa-exclamation-triangle"></i>
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
           Please make sure that you have completed all required fields.
         </section>
         <P>&nbsp;</P>
         <section style="float: right; position: relative;">
           <div [ngBusy]="busy"></div>
           <button class="btn btn-secondary" routerLink="/worker-qualification/dashboard">
-            <i class="fa fa-save"></i>
+            <fa-icon [icon]="faSave"></fa-icon>
             SAVE FOR LATER</button>
           <button style="margin-left: 10px;" routerLink="/worker-qualification/application/{{workerId}}"
             class="btn btn-secondary">RETURN
