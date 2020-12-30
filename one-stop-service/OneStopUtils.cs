@@ -20,6 +20,7 @@ namespace Gov.Jag.Lcrb.OneStopService
     {
         public const string ASYNCHRONOUS = "A";
 
+        public const string ADDRESS_TYPE_CODE = "01";
         public const string CLIENT_NAME_TYPE_CODE = "02";
         public const string DOCUMENT_SUBTYPE = "000";
         public const string NAMECHANGE_SUBTYPE = "";
@@ -36,9 +37,14 @@ namespace Gov.Jag.Lcrb.OneStopService
         public const string PROGRAM_ACCOUNT_STATUS_CODE_ACTIVE = "01";
         public const string PROGRAM_ACCOUNT_STATUS_CODE_CLOSED = "02";
         public const string PROGRAM_ACCOUNT_STATUS_CODE_SUSPENDED = "03";
+        public const string PROVINCE_STATE_CODE = "BC";
+        public const string COUNTRY_CODE = "CA";
 
         public const string OPERATING_NAME_SEQUENCE_NUMBER = "1";
         public const string UPDATE_REASON_CODE = "01";
+        public const string UPDATE_REASON_CODE_ADDRESS = "03";
+        
+
 
         /// <summary>
         /// Maximum number of new licenses that will be sent per interval.
@@ -60,6 +66,65 @@ namespace Gov.Jag.Lcrb.OneStopService
             _onestopRestClient = SetupOneStopClient(configuration, Log.Logger);
 
 
+        }
+
+        /// <summary>
+        /// Hangfire job to send Change Address message to One stop.
+        /// </summary>
+        public async Task SendChangeAddressRest(PerformContext hangfireContext, string licenceGuidRaw)
+        {
+            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine("Starting OneStop REST ChangeAddress Job.");
+            }
+
+            string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
+
+            //prepare soap content
+            var req = new ChangeAddress();
+            var licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
+
+            if (hangfireContext != null && licence != null)
+            {
+                hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
+            }
+
+            if (licence == null)
+            {
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
+                }
+
+                if (Log.Logger != null)
+                {
+                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
+                }
+            }
+            else
+            {
+                var innerXML = req.CreateXML(licence);
+
+                if (Log.Logger != null)
+                {
+                    Log.Logger.Information(innerXML);
+                }
+
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine(innerXML);
+                }
+
+                //send message to Onestop hub
+                var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXML);
+
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine(outputXML);
+                    hangfireContext.WriteLine("End of OneStop REST ChangeAddress  Job.");
+                }
+            }
         }
 
         /// <summary>
@@ -116,7 +181,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                 if (hangfireContext != null)
                 {
                     hangfireContext.WriteLine(outputXML);
-                    hangfireContext.WriteLine("End of OneStop REST ProgramAccountDetailsBroadcast  Job.");
+                    hangfireContext.WriteLine("End of OneStop REST ChangeName  Job.");
                 }
             }
         }
