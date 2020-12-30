@@ -21,15 +21,14 @@ export class NoticesComponent extends FormBase implements OnInit {
   showValidationMessages = false;
 
   account: Account;
-  busy: Subscription;
+  notices: any[]; // TODO: improve typing here
 
-  form = this.fb.group({
-    agreement: [false, [this.customRequiredCheckboxValidator()]]
-  });
+  busy: Subscription;
+  dataLoaded = false; // this is set to true when all page data is loaded
+
 
   constructor(
     private store: Store<AppState>,
-    private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute,
@@ -43,24 +42,25 @@ export class NoticesComponent extends FormBase implements OnInit {
   }
 
   retrieveAccount() {
-    this.store.select(state => state.currentAccountState.currentAccount)
+    this.store
+      .select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(filter(s => !!s))
-      .subscribe(account => {
-        this.account = account;
-        // default to BC if no province found
-        account.physicalAddressProvince = account.physicalAddressProvince || 'British Columbia';
-        account.physicalAddressCountry = 'Canada';
-        this.setFormToAccount(account);
-      });
+      .subscribe(account => this.fetchData(account));
   }
 
-  setFormToAccount(account: Account) {
-    // TODO: put some values on the form...
-    this.form.patchValue({});
+  fetchData(account: Account) {
+    this.account = account;
+    this.busy = this.retrieveNotices(account)
+      .subscribe(notices => {
+        this.notices = notices;
+        this.dataLoaded = true;
+      })
 
-    if (this.isReadOnly) {
-      this.form.disable();
-    }
+  }
+
+  retrieveNotices(account: Account) {
+    // TODO: implement this mocked function
+    return of([]);
   }
 }
