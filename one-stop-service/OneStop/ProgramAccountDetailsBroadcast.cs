@@ -5,7 +5,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
-namespace WebApplicationSoap.OneStop
+namespace Gov.Jag.Lcrb.OneStopService.OneStop
 {
     public class ProgramAccountDetailsBroadcast
     {
