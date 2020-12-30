@@ -71,8 +71,8 @@
             errorMessage="Please enter the market organizer contact name" [isFullWidth]="true">
             <input class="form-control" type="text" formControlName="mktOrganizerContactName">
           </app-field>
-          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-          matTooltip="The name of the market organizer contact person for the market." ></i>
+          <fa-icon style="color: #38598a; margin-left: 5px; margin-top:30px;" [icon]="faQuestionCircle"
+          matTooltip="The name of the market organizer contact person for the market." ></fa-icon>
         </div>
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true"
@@ -111,8 +111,8 @@
               <option *ngFor="let item of marketEventType" [ngValue]="item.value">{{item.label}}</option>
             </select>
           </app-field>
-          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-          matTooltip="Select the type of market event." ></i>
+          <fa-icon style="color: #38598a; margin-left: 5px; margin-top:30px;" [icon]="faQuestionCircle"
+          matTooltip="Select the type of market event." ></fa-icon>
         </div>
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Market Business Number"
@@ -125,8 +125,8 @@
             errorMessage="Please enter the market registration number" [isFullWidth]="true">
             <input class="form-control" type="text" formControlName="registrationNumber" mask="0*">
           </app-field>
-          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-          matTooltip="In the case of an application in respect of a market managed or carried on by a corporation under the Business Corporations Act, Societies Act, Canada Business Corporations Act or Canada Not-for-profit Corporations Act, the registration number shown on the certificate of incorporation, continuation or amalgamation of the corporation."></i>
+          <fa-icon style="color: #38598a; margin-left: 5px; margin-top:30px;" [icon]="faQuestionCircle"
+          matTooltip="In the case of an application in respect of a market managed or carried on by a corporation under the Business Corporations Act, Societies Act, Canada Business Corporations Act or Canada Not-for-profit Corporations Act, the registration number shown on the certificate of incorporation, continuation or amalgamation of the corporation."></fa-icon>
         </div>
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Address 1" [required]="true"
@@ -169,8 +169,8 @@
             errorMessage="Please enter a description of the event" [isFullWidth]="true">
             <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
           </app-field>
-          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-          matTooltip="Briefly describe the event." ></i>
+          <fa-icon style="color: #38598a; margin-left: 5px; margin-top:30px;" [icon]="faQuestionCircle"
+          matTooltip="Briefly describe the event." ></fa-icon>
 
         </div>
 
@@ -187,8 +187,8 @@
             <option *ngFor="let item of specificLocation" [ngValue]="item.value">{{item.label}}</option>
           </select>
         </app-field>
-        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-        matTooltip="Select whether the event is being held indoors, outdoors, or both." ></i>
+        <fa-icon style="color: #38598a; margin-left: 5px; margin-top:30px;" [icon]="faQuestionCircle"
+        matTooltip="Select whether the event is being held indoors, outdoors, or both." ></fa-icon>
       </div>
 
 
@@ -363,12 +363,12 @@
 
       <div class="p-4 button-row">
         <button class="btn btn-secondary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
-          <span><i class="fa fa-save"></i>SAVE FOR LATER</span>
+          <span><fa-icon [icon]="faSave"></fa-icon>SAVE FOR LATER</span>
         </button>
         <button class="btn btn-primary" (click)="save(true)" *ngIf="!isReadOnly">SUBMIT</button>
         <button class="btn btn-link btn-cancel" (click)="cancel();">
           <span *ngIf="isReadOnly">RETURN TO DASHBOARD</span>
-          <span *ngIf="!isReadOnly"><i class="fa fa-trash"></i>CANCEL EVENT</span>
+          <span *ngIf="!isReadOnly"><fa-icon [icon]="faTrash"></fa-icon>CANCEL EVENT</span>
         </button>
       </div>
     </form>

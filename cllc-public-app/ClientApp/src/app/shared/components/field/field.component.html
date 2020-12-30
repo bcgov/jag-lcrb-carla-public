@@ -12,8 +12,8 @@
       <ng-content></ng-content>
     </section>
     <div *ngIf="!valid && showChevrons" style="flex: 0 0 25px;">
-      <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
-      <i class="fas fa-chevron-left error-states" style="margin-left: -5px"></i>
+      <fa-icon [icon]="faChevronLeft" class="error-states" style="margin-left: 3px"></fa-icon>
+      <fa-icon [icon]="faChevronLeft" class="error-states" style="margin-left: -5px"></fa-icon>
     </div>
   </div>
 

@@ -23,8 +23,8 @@
             errorMessage="Please enter the contact name" [isFullWidth]="true">
             <input class="form-control" type="text" formControlName="contactName">
           </app-field>
-          <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-          matTooltip="The name of the contact person for the event." ></i>
+          <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top:30px;"
+          matTooltip="The name of the contact person for the event." ></fa-icon>
         </div>
         <div class="row">
           <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true"
@@ -185,13 +185,13 @@
       <div class="p-4 button-row">
         <button class="btn btn-primary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
           <span>
-            <i class="fa fa-save" style="color: #fff;"></i>
+            <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
             SAVE FOR LATER
           </span>
         </button>
         <button class="btn btn-primary" style="margin-right:10px;" (click)="cancel();">
           <span>
-            <i class="fa fa-trash" style="color: #fff;"></i>
+            <fa-icon [icon]="faTrash" style="color: #fff;"></fa-icon>
             CANCEL
           </span>
         </button>

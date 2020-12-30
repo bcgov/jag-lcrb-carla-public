@@ -8,6 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LicenseDataService } from '@services/license-data.service';
 import { MatSnackBar } from '@angular/material';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { faExclamationTriangle, faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
 
 const FormValidationErrorMap = {
   representativeFullName: 'Representative Name',
@@ -35,6 +37,10 @@ const hasAtLeastOneScopeValidator: ValidatorFn = (fg: FormGroup) => {
   styleUrls: ['./licence-representative-form.component.scss'],
 })
 export class LicenceRepresentativeFormComponent extends FormBase implements OnInit {
+  faQuestionCircle = faQuestionCircle;
+  faExclamationTriangle = faExclamationTriangle;
+  faSave = faSave;
+  faTrash = faTrash;
   busy: Subscription;
   form: FormGroup;
   validationMessages: string[] = [];

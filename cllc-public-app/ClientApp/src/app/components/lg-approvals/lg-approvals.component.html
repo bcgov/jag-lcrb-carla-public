@@ -7,7 +7,7 @@
             <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
             <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
             <p>The following applications have been submitted for your review.</p> 
-            <p>Click <strong><i class="fas fa-pencil-alt" style="margin-right:5px;"></i>Review Application</strong> to see a
+            <p>Click <strong><fa-icon [icon]="faPencilAlt" style="margin-right:5px;"></fa-icon>Review Application</strong> to see a
                 copy of the application, including all relevant attachments. At the bottom of the application you will be able to
                 provide your comment and validation, as requested. When comment is required you can <strong>Accept</strong> the application with
                 feedback, <strong>opt-out</strong> of the comment process, or <strong>reject</strong> the application altogether. The applicant will be notified on
@@ -44,7 +44,7 @@
                         <div>{{item?.establishmentAddressPostalCode}}</div>
                     </td>
                     <td align="center">
-                        <a routerLink="/application/{{item?.id}}"><i class="fas fa-pencil-alt" style="margin-right:5px;"></i>Review Application</a>
+                        <a routerLink="/application/{{item?.id}}"><fa-icon [icon]="faPencilAlt" style="margin-right:5px;"></fa-icon>Review Application</a>
                     </td>
                 </tr>
             </table>
@@ -87,7 +87,7 @@
                         <div>{{item?.establishmentAddressPostalCode}}</div>
                     </td>
                     <td align="center">
-                        <a routerLink="/application/{{item?.id}}"><i class="fas fa-pencil-alt" style="margin-right:5px;"></i>Review Application</a>
+                        <a routerLink="/application/{{item?.id}}"><fa-icon [icon]="faPencilAlt" style="margin-right:5px;"></fa-icon>Review Application</a>
                     </td>
                 </tr>
             </table>
@@ -99,7 +99,7 @@
             <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
             <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
             <p>You have indicated your intent to accept the below application(s). LCRB requires documentation of the resolution assessment within 90 days.</p>
-            <p>If you are ready to provide this information, click <strong><i class="fas fa-pencil-alt" style="margin-right:5px;"></i>Provide Resolution Documentation</strong></p>
+            <p>If you are ready to provide this information, click <strong><fa-icon [icon]="faPencilAlt" style="margin-right:5px;"></fa-icon>Provide Resolution Documentation</strong></p>
             </div>
             
             <table>
@@ -133,7 +133,7 @@
                         <div>{{item?.establishmentAddressPostalCode}}</div>
                     </td>
                     <td align="center">
-                        <a routerLink="/application/{{item?.id}}"><i class="fas fa-pencil-alt" style="margin-right:5px;"></i>Provide Resolution Documentation</a>
+                        <a routerLink="/application/{{item?.id}}"><fa-icon [icon]="faPencilAlt" style="margin-right:5px;"></fa-icon>Provide Resolution Documentation</a>
                     </td>
                     <td align="center">
                         <span> {{get90dayCount(item?.lGDecisionSubmissionDate)}}  days left</span>

@@ -241,7 +241,7 @@
     <div class="p-4 button-row">
       <button class="btn btn-primary" style="margin-right:10px;" (click)="cancel();">
         <span>
-          <i class="fa fa-trash" style="color: #fff;" *ngIf="!isReadOnly"></i>
+          <fa-icon [icon]="faTrash" style="color: #fff;" *ngIf="!isReadOnly"></fa-icon>
           CANCEL
         </span>
       </button>

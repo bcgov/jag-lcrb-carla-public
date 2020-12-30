@@ -1,5 +1,6 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS } from '@angular/forms';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { ServiceArea, AreaCategory } from '@models/service-area.model';
 import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 
@@ -22,6 +23,7 @@ import { BaseControlValueAccessor } from './BaseControlValueAccessor';
   ]
 })
 export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea[]> {
+  faPlusCircle = faPlusCircle;
   @Input() areaCategory: number;
   @Input() applicationTypeName: string;
   @Input() enabled: boolean = true;
