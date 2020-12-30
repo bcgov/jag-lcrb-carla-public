@@ -1,4 +1,5 @@
 ﻿using Gov.Jag.Lcrb.OneStopService;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -22,6 +23,15 @@ namespace one_stop_service.Controllers
 
 
         }
+
+        [HttpGet("SendChangeStatus/{licenceGuid}")]
+        public IActionResult SendChangeStatusMessage(string licenceGuid, OneStopHubStatusChange statusChange)
+        {
+            _logger.Information($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeStatusRest(null, licenceGuid, statusChange));
+            return Ok();
+        }
+
 
         [HttpGet("SendLicenceCreationMessage/{licenceGuid}")]
         public IActionResult SendLicenceCreationMessage(string licenceGuid)
