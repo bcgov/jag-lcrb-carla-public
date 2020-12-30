@@ -36,7 +36,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             sbnChangeStatus.header = GetHeader(licence);
             sbnChangeStatus.body = GetBody(licence, statusChange);
 
-            var serializer = new XmlSerializer(typeof(SBNProgramAccountDetailsBroadcast1));
+            var serializer = new XmlSerializer(typeof(SBNChangeStatus));
             using (StringWriter textWriter = new StringWriter())
             {
                 serializer.Serialize(textWriter, sbnChangeStatus);
