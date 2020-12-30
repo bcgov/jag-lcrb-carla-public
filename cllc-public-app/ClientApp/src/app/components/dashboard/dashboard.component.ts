@@ -13,6 +13,7 @@ import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { LegalEntity } from '@models/legal-entity.model';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { LicenseDataService } from '@services/license-data.service';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +21,7 @@ import { LicenseDataService } from '@services/license-data.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent extends FormBase implements OnInit {
+  faPencilAlt = faPencilAlt;
   account: Account;
   indigenousNationModeActive: boolean;
   currentLegalEntities: LegalEntity;

@@ -14,6 +14,8 @@ import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
 import { getMonthlyWeekday } from '../../shared/date-fns';
 import { getWeekOfMonth } from 'date-fns';
+import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
 
 const DEFAULT_START_TIME = {
   hour: 9,
@@ -31,6 +33,9 @@ const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
   styleUrls: ['./market-event.component.scss'],
 })
 export class MarketEventComponent extends FormBase implements OnInit {
+  faSave = faSave;
+  faTrash = faTrash;
+  faQuestionCircle = faQuestionCircle;
   isEditMode = false;
   isReadOnly = false;
   licenceEvent: LicenceEvent;

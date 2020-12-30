@@ -10,6 +10,8 @@ import { MatDialog, MAT_CHECKBOX_CLICK_ACTION } from '@angular/material';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ClosingInventoryValidator, SalesValidator } from './federal-reporting-validation';
 import { switchMap } from 'rxjs/operators';
+import { faChevronLeft, faExclamationTriangle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
 
 interface FederalReportingParams {
   licenceId: string;
@@ -25,6 +27,10 @@ interface FederalReportingParams {
   ]
 })
 export class FederalReportingComponent implements OnInit {
+  faSave = faSave;
+  faChevronLeft = faChevronLeft;
+  faQuestionCircle = faQuestionCircle;
+  faExclamationTriangle = faExclamationTriangle;
   monthlyReportStatusEnum = monthlyReportStatus;
   licenses: ApplicationLicenseSummary[] = [];
   monthlyReports: MonthlyReport[] = [];

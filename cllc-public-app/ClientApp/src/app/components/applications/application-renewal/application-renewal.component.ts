@@ -23,6 +23,8 @@ import { KeyValue } from '@angular/common';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { LicenseDataService } from '@app/services/license-data.service';
 import { UPLOAD_FILES_MODE, ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
+import { faExclamationCircle, faQuestionCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
 
 const ValidationErrorMap = {
   renewalCriminalOffenceCheck: 'Please answer question 1',
@@ -55,6 +57,10 @@ const ValidationErrorMap = {
   styleUrls: ['./application-renewal.component.scss']
 })
 export class ApplicationRenewalComponent extends FormBase implements OnInit {
+  faExclamationCircle = faExclamationCircle;
+  faQuestionCircle = faQuestionCircle;
+  faSave = faSave;
+  faTrashAlt = faTrashAlt;
   //establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
 

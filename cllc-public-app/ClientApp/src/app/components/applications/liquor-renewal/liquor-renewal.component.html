@@ -179,8 +179,8 @@
                 <section style="padding-right: 95px;">
                     <!-- link to Org Structure-->
                     <div *ngIf="form.get('renewalShareholders').value === 'Yes'" class="field-changed">
-                        <button routerLink="/org-structure" class="btn btn-missing" target="_blank"><i
-                                class="fas fa-pencil-alt" style="margin-right: 10px;"></i>Update your
+                        <button routerLink="/org-structure" class="btn btn-missing" target="_blank">
+                            <fa-icon [icon]="faPenclilAlt" style="margin-right: 10px;"></fa-icon>Update your
                             <strong>Shareholder Information</strong> on the <strong>Organization Details</strong>
                             page</button>
                     </div>
@@ -203,8 +203,8 @@
                 </section>
                 <section style="padding-right: 95px;">
                     <div *ngIf="form.get('renewalThirdParty').value === 'Yes'" class="field-changed">
-                        <button routerLink="/licences" class="btn btn-missing" target="_blank"><i class="fas fa-bolt"
-                                style="margin-right: 10px;"></i>Submit a <strong>Third Party Operator</strong>
+                        <button routerLink="/licences" class="btn btn-missing" target="_blank">
+                            <fa-icon [icon]="faBolt" style="margin-right: 10px;"></fa-icon>Submit a <strong>Third Party Operator</strong>
                             application from the <strong>Licences Dashboard</strong></button>
                     </div>
                 </section>
@@ -226,8 +226,8 @@
                 </section>
                 <section style="padding-right: 95px;">
                     <div *ngIf="form.get('renewalFloorPlan').value === 'Yes'" class="field-changed">
-                        <button routerLink="/licences" class="btn btn-missing" target="_blank"><i class="fas fa-bolt"
-                                style="margin-right: 10px;"></i>Submit a <strong>Structural Change</strong> from the
+                        <button routerLink="/licences" class="btn btn-missing" target="_blank">
+                            <fa-icon [icon]="faBolt" style="margin-right: 10px;"></fa-icon>Submit a <strong>Structural Change</strong> from the
                             <strong>Licences Dashboard</strong></button>
                     </div>
                 </section>
@@ -250,8 +250,8 @@
                 </section>
                 <section style="padding-right: 95px;">
                     <div *ngIf="form.get('renewalTiedhouse').value === 'Yes'" class="field-changed">
-                        <button routerLink="/account-profile" class="btn btn-missing" target="_blank"><i
-                                class="fas fa-bolt" style="margin-right: 10px;"></i>Update your <strong>Financial
+                        <button routerLink="/account-profile" class="btn btn-missing" target="_blank">
+                            <fa-icon [icon]="faBolt" style="margin-right: 10px;"></fa-icon>Update your <strong>Financial
                                 Interest</strong> information on the <strong>Account Profile</strong></button>
                     </div>
                 </section>
@@ -273,8 +273,8 @@
                 </section>
                 <section style="padding-right: 95px;">
                     <div *ngIf="form.get('renewalUnreportedSaleOfBusiness').value === 'Yes'" class="field-changed">
-                        <button routerLink="/licences" class="btn btn-missing" target="_blank"><i
-                                class="fas fa-exchange-alt" style="margin-right: 10px;"></i><strong>Transfer</strong>
+                        <button routerLink="/licences" class="btn btn-missing" target="_blank">
+                            <fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon><strong>Transfer</strong>
                             this Licence from the <strong>Licences Dashboard</strong></button>
                     </div>
                 </section>
@@ -296,8 +296,8 @@
                 </section>
                 <section style="padding-right: 95px;">
                     <div *ngIf="form.get('renewalValidInterest').value === 'Yes'" class="field-changed">
-                        <button routerLink="/licences" class="btn btn-missing" target="_blank"><i
-                                class="fas fa-exchange-alt" style="margin-right: 10px;"></i><strong>Transfer</strong>
+                        <button routerLink="/licences" class="btn btn-missing" target="_blank">
+                            <fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon><strong>Transfer</strong>
                             this Licence from the <strong>Licences Dashboard</strong></button>
                     </div>
                 </section>
@@ -317,9 +317,11 @@
                 </section>
                 <section style="padding-right: 95px;">
                     <div *ngIf="form.get('renewalkeypersonnel').value === 'Yes'" class="field-changed">
-                        <button routerLink="/licences" class="btn btn-missing" target="_blank"><i class="fas fa-plus"
-                                style="margin-right: 10px;"></i>Add, Remove or Update your <strong>Licensee
-                                Representative</strong> from the <strong>Licences Dashboard</strong></button>
+                        <button routerLink="/licences" class="btn btn-missing" target="_blank">
+                            <fa-icon [icon]="faPlus" style="margin-right: 10px;"></fa-icon>
+                            Add, Remove or Update your <strong>Licensee Representative</strong>
+                            from the <strong>Licences Dashboard</strong>
+                        </button>
                     </div>
                 </section>
             </mat-card>
@@ -437,7 +439,7 @@
 
         <section style="position: relative; margin-top: 20px;">
             <button mat-raised-button color="secondary" style="margin-right:10px;" (click)="saveForLater()">
-                <i class="fa fa-save" style="color: #fff;"></i>
+                <fa-icon [icon]="faSave"  style="color: #fff;"></fa-icon>
                 SAVE FOR LATER
                 <mat-progress-bar class="mt-1" *ngIf="!saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
@@ -446,7 +448,7 @@
             </button>
             <span style="float: right; color: #1a5a96; padding-top: 10px;">
                 <span (click)="cancelApplication()">
-                    <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+                    <fa-icon [icon]="faTrashAlt"   style="color: #1a5a96;"></fa-icon>
                     <a href="javascript: void(0)">
                         Cancel Application
                     </a>

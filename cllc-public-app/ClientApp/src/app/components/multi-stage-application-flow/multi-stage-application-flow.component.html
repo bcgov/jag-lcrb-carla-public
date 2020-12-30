@@ -2,7 +2,7 @@
   <!-- <h1></h1> -->
   <mat-horizontal-stepper [linear]="true" (selectionChange)="selectionChange($event)" #stepper>
     <ng-template matStepperIcon="edit">
-      <i class="fas fa-check"></i>
+      <fa-icon [icon]="faCheck"></fa-icon>
     </ng-template>
 
     <mat-step *ngFor="let step of stepsForApplication; let index = index;">

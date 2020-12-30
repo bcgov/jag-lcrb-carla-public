@@ -5,6 +5,7 @@ import { LicenceEvent, EventStatus } from '../../models/licence-event.model';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-event-security-form',
@@ -12,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./security.component.scss'],
 })
 export class EventSecurityFormComponent extends FormBase implements OnInit {
+  faTrash = faTrash;
   isDebugMode = false;
   isEditMode = false;
   isReadOnly = false;

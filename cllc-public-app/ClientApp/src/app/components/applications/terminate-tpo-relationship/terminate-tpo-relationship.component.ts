@@ -13,6 +13,8 @@ import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { Account, TransferAccount } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 const ValidationErrorMap = {
@@ -25,6 +27,8 @@ const ValidationErrorMap = {
   styleUrls: ['./terminate-tpo-relationship.component.scss']
 })
 export class TerminateTPORelationshipComponent extends FormBase implements OnInit {
+  faSave = faSave;
+  faTrashAlt = faTrashAlt;
   licence: License;
   form: FormGroup;
   licenceId: string;

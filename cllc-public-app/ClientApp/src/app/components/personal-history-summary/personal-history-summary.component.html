@@ -100,8 +100,8 @@
                                         [valid]="!aliases.at(i).get('lastname').touched || aliases.at(i).get('lastname').valid"
                                         [isFullWidth]="true">
                                         <input class="form-control" style="width: 300px;" type="text"
-                                            formControlName="lastname"> <i class="fas fa-trash-alt ml-3"
-                                            (click)="deleteAlias(i)"></i>
+                                            formControlName="lastname"> <fa-icon [icon]="faTrashAlt" class="ml-3"
+                                            (click)="deleteAlias(i)"></fa-icon>
                                     </app-field>
                                 </div>
                             </div>
@@ -516,7 +516,7 @@
             </section>
 
             <div *ngIf="!form.valid && showErrors" class="error-summary mt-3">
-                <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+                <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
                 <span>Some required fields have not been completed</span>
             </div>
 

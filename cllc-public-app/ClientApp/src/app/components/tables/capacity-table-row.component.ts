@@ -2,6 +2,7 @@ import { Component, forwardRef, Input } from '@angular/core';
 import { FormGroup, FormBuilder, NG_VALUE_ACCESSOR, ControlValueAccessor, Validators, FormControl, NG_VALIDATORS } from '@angular/forms';
 import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 import { ServiceArea, AreaCategory } from '@models/service-area.model';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: '[capacity-table-row]',
@@ -21,6 +22,7 @@ import { ServiceArea, AreaCategory } from '@models/service-area.model';
   ]
 })
 export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceArea> implements ControlValueAccessor {
+  faTrashAlt = faTrashAlt;
   @Input() areaCategory: number;
   @Input() index: number;
   @Input() onDelete: (index) => void;

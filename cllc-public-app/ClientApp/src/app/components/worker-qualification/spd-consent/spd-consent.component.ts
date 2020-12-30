@@ -12,6 +12,8 @@ import { ContactDataService } from '@services/contact-data.service';
 import { Contact } from '@models/contact.model';
 import { resolve } from 'url';
 import { FeatureFlagService } from '@services/feature-flag.service';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-spd-consent',
@@ -19,6 +21,8 @@ import { FeatureFlagService } from '@services/feature-flag.service';
   styleUrls: ['./spd-consent.component.scss']
 })
 export class SpdConsentComponent implements OnInit {
+  faSave = faSave;
+  faExclamationTriangle = faExclamationTriangle;
   @ViewChild('name', { static: true }) nameInputRef: NgForm;
   currentUser: any;
   workerId: string;

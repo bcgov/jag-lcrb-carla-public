@@ -120,13 +120,13 @@
                         </td>
                         <td *ngIf="false"></td> -->
                             <td *ngIf="!isReadOnly" style='text-align:left;'>
-                                <i *ngIf="!associate.get('edit').value && !isReadOnly" class="btn btn-primary"
-                                    (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
-                                    style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
-                                <i class="fas fa-save save" *ngIf="associate.get('edit').value " (click)="saveLog(i)"
-                                    style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
-                                <i class="fas fa-trash-alt" id="deleteLeaderChange{{i}}" (click)="deleteChange(associate.value, i)"><span
-                                        class="icon-label">Delete</span></i>
+                                <fa-icon [icon]="faPencilAlt" *ngIf="!associate.get('edit').value && !isReadOnly" 
+                                    (click)="associate.get('edit').value = true;" 
+                                    style="margin-right: 10px;"><span class="icon-label">Edit</span></fa-icon>
+                                <fa-icon [icon]="faSave" *ngIf="associate.get('edit').value " (click)="saveLog(i)"
+                                    style="margin-right: 10px;"><span class="icon-label">Confirm</span></fa-icon>
+                                <fa-icon [icon]="faTrashAlt" id="deleteLeaderChange{{i}}" (click)="deleteChange(associate.value, i)"><span
+                                        class="icon-label">Delete</span></fa-icon>
                             </td>
                         </tr>
 
@@ -288,13 +288,13 @@
                             <!-- <td *ngIf="false"></td>
                         <td *ngIf="false"></td> -->
                             <td *ngIf="!isReadOnly" style='text-align:left;'>
-                                <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
-                                    (click)="associate.get('edit').value = true;" class="fas fa-pencil-alt"
-                                    style="margin-right: 10px;"><span class="icon-label">Edit</span></i>
-                                <i class="fas fa-save" *ngIf="associate.get('edit').value" (click)="saveLog(i)"
-                                    style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
-                                <i class="fas fa-trash-alt" id="deleteShareholderChange{{i}}" (click)="deleteChange(associate.value, i)"><span
-                                                                                                                                      class="icon-label">Delete</span></i>
+                                <fa-icon [icon]="faPencilAlt" *ngIf="!associate.get('edit').value"
+                                    (click)="associate.get('edit').value = true;"
+                                    style="margin-right: 10px;"><span class="icon-label">Edit</span></fa-icon>
+                                <fa-icon [icon]="faSave" *ngIf="associate.get('edit').value" (click)="saveLog(i)"
+                                    style="margin-right: 10px;"><span class="icon-label">Confirm</span></fa-icon>
+                                <fa-icon [icon]="faTrashAlt" id="deleteShareholderChange{{i}}" (click)="deleteChange(associate.value, i)"><span
+                                                                                                                                      class="icon-label">Delete</span></fa-icon>
                             </td>
                         </tr>
 
@@ -439,15 +439,15 @@
                             <!-- <td *ngIf="false"></td>
                         <td *ngIf="false"></td> -->
                             <td *ngIf="!isReadOnly" style='text-align:left;'>
-                                <i *ngIf="!associate.get('edit').value" class="btn btn-primary"
+                                <fa-icon [icon]="faPencilAlt" *ngIf="!associate.get('edit').value"
                                     (click)="associate.get('edit').value = true; associate.get('collapse').value = true;"
-                                    class="fas fa-pencil-alt" style="margin-right: 10px;"><span
-                                        class="icon-label">Edit</span></i>
-                                <i class="fas fa-save" *ngIf="associate.get('edit').value"
+                                    style="margin-right: 10px;"><span
+                                        class="icon-label">Edit</span></fa-icon>
+                                <fa-icon [icon]="faSave" *ngIf="associate.get('edit').value"
                                     (click)="saveLog(i); associate.get('collapse').value = false;"
-                                    style="margin-right: 10px;"><span class="icon-label">Confirm</span></i>
-                                <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"><span
-                                        class="icon-label">Delete</span></i>
+                                    style="margin-right: 10px;"><span class="icon-label">Confirm</span></fa-icon>
+                                <fa-icon [icon]="faTrashAlt" (click)="deleteChange(associate.value, i)"><span
+                                        class="icon-label">Delete</span></fa-icon>
                             </td>
 
                         </tr>
@@ -483,6 +483,6 @@
     <br>
     <button class="btn btn-secondary Add{{changeTypeSuffix}}" (click)="addAssociate()"
         style="text-transform: uppercase;">
-        <i class="fas fa-plus"></i>
+        <fa-icon [icon]="faPlus"></fa-icon>
         {{addLabel}}</button>
 </div>

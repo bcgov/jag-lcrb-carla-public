@@ -216,8 +216,8 @@
             <ng-container *ngFor="let item of changeList">
                 <mat-checkbox [formControlName]="item.formControlName">{{item.name}}
                 </mat-checkbox>
-                <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
-                    (click)="item.show = !!!item.show"></i>
+                <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 10px;"
+                    (click)="item.show = !!!item.show"></fa-icon>
                 <section class="infoCell"
                     *ngIf="item.show && (item.helpTextHeader || item.helpText || item.helpTextLink)">
                     <p *ngIf="item.CannabisFee == item.LiquorFee" style="text-align:right; padding-right:30px;">
@@ -304,7 +304,7 @@
                     Cannabis
                     Associate Security Screening form and required documents as described below</p>
 
-                <h4><i class="fa fa-id-card mr-1"></i>Security Screening Information Required</h4>
+                <h4><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Security Screening Information Required</h4>
                 <p>All shareholders holding 10% or greater interest must complete a Personal History Summary and/or
                     Cannabis
                     Associate
@@ -414,7 +414,7 @@
 
                 <hr>
 
-                <h4><i class="fa fa-id-card mr-1"></i>Security Screening Information Required</h4>
+                <h4><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Security Screening Information Required</h4>
                 <p>All shareholders holding 10% or greater interest must complete a Personal History Summary and/or
                     Cannabis
                     Associate
@@ -453,7 +453,7 @@
                     [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
                 </app-file-uploader>
 
-                <h4><i class="fa fa-id-card mr-1"></i>Security Screening Information Required</h4>
+                <h4><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Security Screening Information Required</h4>
                 <p>All directors must complete a Personal History Summary and/or Cannabis Associate
                     Security Screening form and required documents as described below</p>
             </div>
@@ -753,7 +753,7 @@
 
         <!-- Cannabis Associate Security Screening Forms -->
         <section *ngIf="hasCannabis && this.isScreeningRequired()">
-            <h3 class="blue-header"><i class="fa fa-id-card mr-1"></i>Cannabis Associate Security Screening Forms</h3>
+            <h3 class="blue-header"><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Cannabis Associate Security Screening Forms</h3>
             <div class="content-bottom">
                 <p>
                     Sole proprietors and associates of applicants for a non-medical cannabis licence are required to
@@ -817,7 +817,7 @@
 
         <!-- Personal History Summary Forms -->
         <section *ngIf="hasLiquor && this.isScreeningRequired()">
-            <h3 class="blue-header"><i class="fa fa-id-card mr-1"></i>Personal History Summary Forms</h3>
+            <h3 class="blue-header"><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Personal History Summary Forms</h3>
             <div class="content-bottom">
 
                 <p>
