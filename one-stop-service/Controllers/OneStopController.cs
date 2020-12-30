@@ -24,6 +24,14 @@ namespace one_stop_service.Controllers
 
         }
 
+        [HttpGet("SendChangeAddress/{licenceGuid}")]
+        public IActionResult SendChangeAddressMessage(string licenceGuid)
+        {
+            _logger.Information($"Reached SendChangeAddressMessage. licenceGuid: {licenceGuid}");
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeAddressRest(null, licenceGuid));
+            return Ok();
+        }
+
         [HttpGet("SendChangeName/{licenceGuid}")]
         public IActionResult SendChangeNameMessage(string licenceGuid)
         {

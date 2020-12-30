@@ -8,7 +8,7 @@ using Gov.Jag.Lcrb.OneStopService.OneStop.Util;
 
 namespace Gov.Jag.Lcrb.OneStopService.OneStop
 {
-    public class ChangeName
+    public class ChangeAddress
     {
 
         /**
@@ -32,21 +32,21 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             {
                 throw new Exception("The licence must have an AdoxioLicencee");
             }
-            var sbnChangeStatus = new SBNChangeName();
-            sbnChangeStatus.header = GetHeader(licence);
-            sbnChangeStatus.body = GetBody(licence);
+            var sbnChangeAddress = new SBNChangeAddress();
+            sbnChangeAddress.header = GetHeader(licence);
+            sbnChangeAddress.body = GetBody(licence);
 
             var serializer = new XmlSerializer(typeof(SBNChangeName));
             using (StringWriter textWriter = new StringWriter())
             {
-                serializer.Serialize(textWriter, sbnChangeStatus);
+                serializer.Serialize(textWriter, sbnChangeAddress);
                 return textWriter.ToString();
             }
         }
 
-        private SBNChangeNameHeader GetHeader(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNChangeAddressHeader GetHeader(MicrosoftDynamicsCRMadoxioLicences licence)
         {
-            var header = new SBNChangeNameHeader();
+            var header = new SBNChangeAddressHeader();
 
             header.requestMode = OneStopUtils.ASYNCHRONOUS;
             header.documentSubType = OneStopUtils.NAMECHANGE_SUBTYPE;
@@ -60,9 +60,9 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             return header;
         }
 
-        private SBNChangeNameHeaderCCRAHeader GetCCRAHeader(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNChangeAddressHeaderCCRAHeader GetCCRAHeader(MicrosoftDynamicsCRMadoxioLicences licence)
         {
-            var ccraHeader = new SBNChangeNameHeaderCCRAHeader();
+            var ccraHeader = new SBNChangeAddressHeaderCCRAHeader();
 
             ccraHeader.userApplication = OneStopUtils.USER_APPLICATION;
             ccraHeader.userRole = OneStopUtils.USER_ROLE;
@@ -71,9 +71,9 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             return ccraHeader;
         }
 
-        private SBNChangeNameHeaderCCRAHeaderUserCredentials GetUserCredentials(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNChangeAddressHeaderCCRAHeaderUserCredentials GetUserCredentials(MicrosoftDynamicsCRMadoxioLicences licence)
         {
-            var userCredentials = new SBNChangeNameHeaderCCRAHeaderUserCredentials();
+            var userCredentials = new SBNChangeAddressHeaderCCRAHeaderUserCredentials();
 
             //BN9 of licensee (Owner company)
             userCredentials.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
@@ -85,19 +85,21 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             return userCredentials;
         }
 
-        private SBNChangeNameBody GetBody(MicrosoftDynamicsCRMadoxioLicences licence)
+
+        private SBNChangeAddressBody GetBody(MicrosoftDynamicsCRMadoxioLicences licence)
         {
-            var body = new SBNChangeNameBody();
+            var body = new SBNChangeAddressBody();
 
             // licence number
             body.partnerInfo1 = licence.AdoxioLicencenumber;
-
-            body.name = new SBNChangeNameBodyName();
-            body.name.clientNameTypeCode = OneStopUtils.CLIENT_NAME_TYPE_CODE;
-            body.name.name = licence.AdoxioEstablishment.AdoxioName;
-            body.name.operatingNamesequenceNumber = 1;
-            body.name.updateReasonCode = OneStopUtils.UPDATE_REASON_CODE;
-
+            body.addressTypeCode = OneStopUtils.ADDRESS_TYPE_CODE;
+            body.updateReasonCode = OneStopUtils.UPDATE_REASON_CODE_ADDRESS;
+            body.address = new SBNChangeAddressBodyAddress();
+            body.address.foreignLegacy = new SBNChangeAddressBodyAddressForeignLegacy();
+            body.address.foreignLegacy.addressDetailLine1 = licence.AdoxioEstablishment.AdoxioAddressstreet;
+            body.address.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
+            body.address.provinceStateCode = OneStopUtils.PROVINCE_STATE_CODE;
+            body.address.countryCode = OneStopUtils.COUNTRY_CODE;
             body.businessRegistrationNumber = licence.AdoxioLicencee.AdoxioBusinessregistrationnumber;
             body.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
 
@@ -108,6 +110,5 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
 
             return body;
         }
-
     }
 }
