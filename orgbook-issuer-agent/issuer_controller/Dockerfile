@@ -1,11 +1,14 @@
-FROM bcgovimages/von-image:py36-1.15-0
-
 
 WORKDIR $HOME
 
 # `ADD --chown=` is not available in OpenShift yet.
 # ADD --chown=indy:indy . $HOME
 ADD . $HOME
+
+USER root
+RUN apt-get update && apt-get install -y build-essential
+
+RUN pip3 install --upgrade pip setuptools wheel
 
 RUN pip3 install --no-cache-dir -r requirements.txt
 
@@ -30,5 +33,5 @@ USER indy
 # HEALTHCHECK --interval=60s --timeout=5s --start-period=120s \
 #     CMD wget -q --spider http://localhost:${HOST_PORT}/health || exit 1
 
-WORKDIR $HOME/src
-ENTRYPOINT ["bash", "../docker-entrypoint.sh"]
+WORKDIR $HOME
+ENTRYPOINT ["bash", "./docker-entrypoint.sh"]
