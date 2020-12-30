@@ -27,6 +27,8 @@ import { UserDataService } from '@services/user-data.service';
 import { de } from 'date-fns/locale';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { faInternetExplorer } from '@fortawesome/free-brands-svg-icons';
+import { faBell, faBusinessTime } from '@fortawesome/free-solid-svg-icons';
 
 const Months = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
@@ -37,6 +39,9 @@ const Months = ['January', 'February', 'March', 'April', 'May', 'June',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent extends FormBase implements OnInit {
+  faInternetExplorer = faInternetExplorer;
+  faBell = faBell;
+  faBusinessTime = faBusinessTime;
   businessProfiles: LegalEntity[];
   title = '';
   previousUrl: string;

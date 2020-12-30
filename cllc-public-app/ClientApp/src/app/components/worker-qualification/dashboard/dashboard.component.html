@@ -64,7 +64,7 @@
                   You have been sent a letter by email with more information. Please refer to the letter for details.
                 </p>
                 <a class="btn btn-primary" [href]="'api/worker/' + currentApplication?.id + '/pdf'">
-                  <i class="fas fa-download"></i>
+                  <fa-icon [icon]="faDownload"></fa-icon>
                   Download Security Verification Letter
                 </a>
               </div>
@@ -122,7 +122,7 @@
                   <mat-cell *matCellDef="let element">
                     <a *ngIf="element?.status === 'Active'" class="btn btn-primary"
                       [href]="'api/worker/' + element?.id + '/pdf'">
-                      <i class="fas fa-download"></i>
+                      <fa-icon [icon]="faDownload"></fa-icon>
                       Download Security Verification Letter
                     </a>
                   </mat-cell>
@@ -157,7 +157,7 @@
         <table>
           <tr>
             <td>
-              <h2 class="round-icon-wrapper"><i class="fas fa-question"></i></h2>
+              <h2 class="round-icon-wrapper"><fa-icon [icon]="faQuestion"></fa-icon></h2>
             </td>
             <td style="padding-left: 10px">
               <h2>Update your personal information</h2>

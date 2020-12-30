@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppState } from '@app/app-state/models/app-state';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-key-personnel',
@@ -16,6 +17,7 @@ import { AppState } from '@app/app-state/models/app-state';
   styleUrls: ['./key-personnel.component.scss']
 })
 export class KeyPersonnelComponent implements OnInit {
+  faPlus = faPlus;
   @Input() accountId: string;
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;

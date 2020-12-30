@@ -15,6 +15,7 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
 import { Observable, forkJoin, of } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
+import { faChevronRight, faExclamationCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-associate-page',
@@ -22,6 +23,9 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./associate-page.component.scss']
 })
 export class AssociatePageComponent extends FormBase implements OnInit {
+  faExclamationCircle = faExclamationCircle;
+  faQuestionCircle = faQuestionCircle;
+  faChevronRight = faChevronRight;
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   account: Account;
   legalEntityId: string;
