@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentDataService } from '@services/payment-data.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
+import { faAngleDoubleLeft, faPrint } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-licence-fee-payment-confirmation',
@@ -11,6 +12,8 @@ import { MatSnackBar } from '@angular/material';
 })
 /** payment-confirmation component*/
 export class LicenceFeePaymentConfirmationComponent implements OnInit {
+  faPrint = faPrint;
+  faAngleDoubleLeft = faAngleDoubleLeft;
   busy: Subscription;
   transactionId: string;
   applicationId: string;

@@ -70,7 +70,7 @@
                           <span>
 
                             <span>
-                              <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be
+                              <fa-icon [icon]="faExclamationCircle"  style="margin-right: 10px;"></fa-icon>The property’s PID may be
                               found
                               on
                             </span> <br>
@@ -193,7 +193,7 @@
       <section style="position: relative; margin-top: 20px;">
         <button class="btn btn-primary" style="margin-right:10px;" (click)="saveForLater()">
           <span>
-            <i class="fa fa-save" style="color: #fff;"></i>
+            <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
             SAVE FOR LATER
           </span>
         </button>
@@ -202,7 +202,7 @@
         </button>        
         <span style="float: right; color: #1a5a96; padding-top: 10px;">
           <span (click)="cancelApplication()">
-            <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+            <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
             <a href="javascript: void(0)" id="cancelApp">
               Cancel Application
             </a>

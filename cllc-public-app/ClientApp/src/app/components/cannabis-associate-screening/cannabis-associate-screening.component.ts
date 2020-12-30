@@ -14,6 +14,7 @@ import { PreviousAddressDataService } from '@services/previous-address-data.serv
 import { MatSnackBar } from '@angular/material';
 import { COUNTRIES } from '@components/account-profile/country-list';
 import { PreviousAddress } from '@models/previous-address.model';
+import { faExclamationTriangle, faTrash, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cannabis-associate-screening',
@@ -21,6 +22,9 @@ import { PreviousAddress } from '@models/previous-address.model';
   styleUrls: ['./cannabis-associate-screening.component.scss']
 })
 export class CannabisAssociateScreeningComponent extends FormBase implements OnInit {
+  faTrash = faTrash;
+  faTrashAlt = faTrashAlt;
+  faExclamationTriangle = faExclamationTriangle;
   busy: Subscription;
   user: User;
   aliasesToDelete: any;

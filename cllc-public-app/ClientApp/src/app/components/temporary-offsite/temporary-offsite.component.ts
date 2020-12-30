@@ -9,6 +9,8 @@ import { Store } from '@ngrx/store';
 import { User } from '@models/user.model';
 import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const DEFAULT_START_TIME = {
   hour: 9,
@@ -26,6 +28,9 @@ const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
   styleUrls: ['./temporary-offsite.component.scss'],
 })
 export class TemporaryOffsiteComponent extends FormBase implements OnInit {
+  faSave = faSave;
+  faTrash = faTrash;
+  faQuestionCircle = faQuestionCircle;
   isEditMode = false;
   isReadOnly = false;
   licenceEvent: LicenceEvent;

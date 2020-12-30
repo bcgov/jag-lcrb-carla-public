@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
+import { faChevronLeft, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { fieldValidationErrors, formValidationErrors, ClosingInventoryValidator,
          SalesValidator, ClosingValueValidator, ClosingWeightValidator, ClosingSeedsTotalValidator } from '../federal-reporting-validation';
 
@@ -9,6 +10,8 @@ import { fieldValidationErrors, formValidationErrors, ClosingInventoryValidator,
   styleUrls: ['./product-inventory-sales-report.component.scss']
 })
 export class ProductInventorySalesReportComponent implements OnInit {
+  faQuestionCircle = faQuestionCircle;
+  faChevronLeft = faChevronLeft;
   @Input() productForm: FormGroup;
   @Input() visibleInventoryReports: string[] = [];
 

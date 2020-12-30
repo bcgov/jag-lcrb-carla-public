@@ -9,6 +9,8 @@ import { throwError, Observable, forkJoin } from 'rxjs';
 import { FileItem } from '../../../models/file-item.model';
 import { FileDataService } from '../../../services/file-data.service';
 import { Router } from '@angular/router';
+import { faExclamationTriangle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
 //import { Router } from '@angular/router';
 
 
@@ -46,6 +48,9 @@ const FormValidationErrorMap = {
   styleUrls: ['./application-covid-temporary-extension.component.scss']
 })
 export class ApplicationCovidTemporaryExtensionComponent extends FormBase implements OnInit {
+  faExclamationTriangle = faExclamationTriangle;
+  faTrashAlt = faTrashAlt;
+  faSave = faSave;
   form: FormGroup;
   busy: any;
   showValidationMessages: boolean;

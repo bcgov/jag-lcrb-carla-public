@@ -5,6 +5,7 @@ import { PolicyDocumentComponent } from '../../policy-document/policy-document.c
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { faChevronRight, faIdCard, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-worker-home',
@@ -13,7 +14,8 @@ import { of } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkerHomeComponent implements OnInit, AfterViewInit {
-
+  faIdCard = faIdCard;
+  faQuestion = faQuestion;
   policySlug = 'worker-qualification-training';
   currentSlug = this.policySlug;
   @ViewChild('policyDocs', { static: true }) policyDocs: PolicyDocumentComponent;
@@ -70,6 +72,7 @@ export class WorkerHomeComponent implements OnInit, AfterViewInit {
   templateUrl: 'register-dialog.html',
 })
 export class WorkerHomeDialogComponent {
+  faChevronRight = faChevronRight;
 
   constructor(public dialogRef: MatDialogRef<WorkerHomeDialogComponent>) {
   }

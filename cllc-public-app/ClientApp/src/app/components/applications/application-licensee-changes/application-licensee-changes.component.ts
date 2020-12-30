@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { faInfoCircle, faPencilAlt, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { ApplicationSummary } from '@models/application-summary.model';
@@ -28,6 +30,11 @@ import { AppRemoveIfFeatureOnDirective } from '../../../directives/remove-if-fea
   styleUrls: ['./application-licensee-changes.component.scss']
 })
 export class ApplicationLicenseeChangesComponent extends FormBase implements OnInit {
+  faInfoCircle = faInfoCircle;
+  faPlus = faPlus;
+  faPencilAlt = faPencilAlt;
+  faSave = faSave;
+  faTrashAlt = faTrashAlt;
   account: Account;
   treeRoot: LicenseeChangeLog;
   individualShareholderChanges: LicenseeChangeLog[];

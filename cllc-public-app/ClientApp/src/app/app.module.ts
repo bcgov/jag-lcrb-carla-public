@@ -219,6 +219,7 @@ import { OffsiteStorageComponent } from '@components/offsite-storage/offsite-sto
 import { OffsiteTableComponent } from '@components/tables/offsite-table/offsite-table.component';
 import { ContactComponent } from './shared/components/contact/contact.component';
 import { InvoiceDetailsComponent } from './shared/components/invoice-details/invoice-details.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -357,6 +358,7 @@ import { InvoiceDetailsComponent } from './shared/components/invoice-details/inv
     BrowserAnimationsModule,
     BrowserModule,
     CdkTableModule,
+    FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

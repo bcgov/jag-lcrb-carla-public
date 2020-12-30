@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
 import { Meta, Title } from '@angular/platform-browser';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 declare var EstablishmentsMap: any;
 declare var searchMapOptions: any;
@@ -17,6 +18,7 @@ declare var searchMapOptions: any;
 
 
 export class MapComponent extends FormBase implements OnInit {
+  faSearch = faSearch;
   busy: Subscription;
 
   constructor(

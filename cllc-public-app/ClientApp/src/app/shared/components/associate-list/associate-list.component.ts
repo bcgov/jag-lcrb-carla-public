@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material';
 import { of, Observable, forkJoin } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { OrgStructureComponent } from '../org-structure/org-structure.component';
+import { faPencilAlt, faPlus, faSave, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-associate-list',
@@ -14,6 +15,11 @@ import { OrgStructureComponent } from '../org-structure/org-structure.component'
   styleUrls: ['./associate-list.component.scss']
 })
 export class AssociateListComponent extends FormBase implements OnInit {
+  faSave = faSave;
+  faPlus = faPlus;
+  faTrashAlt = faTrashAlt;
+  faPencilAlt = faPencilAlt;
+
   @Input() rootNode: LicenseeChangeLog;
   @Input() account: Account;
   @Input() licencesOnFile: boolean;
