@@ -18,6 +18,7 @@ import { SetIndigenousNationModeAction } from '@app/app-state/actions/app-state.
 import * as moment from 'moment';
 import { PaymentDataService } from '@services/payment-data.service';
 import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from '@components/licences/licences.component';
+import { faPencilAlt, faPlus, faShoppingCart, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -35,6 +36,10 @@ const RENEWAL_DUE = 'Renewal Due';
   styleUrls: ['./applications-and-licences.component.scss']
 })
 export class ApplicationsAndLicencesComponent extends FormBase implements OnInit {
+  faPencilAlt = faPencilAlt;
+  faTrashAlt = faTrashAlt
+  faPlus = faPlus;
+  faShoppingCart = faShoppingCart;
   inProgressApplications: ApplicationSummary[] = [];
   licensedApplications: ApplicationLicenseSummary[] = [];
 
@@ -157,7 +162,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.dataLoaded = true;
 
       });
-      this.subscriptionList.push(sub);
+    this.subscriptionList.push(sub);
   }
 
   uploadMoreFiles(application: Application) {

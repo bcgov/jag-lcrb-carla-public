@@ -1,5 +1,6 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validators, AbstractControl } from '@angular/forms';
+import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { OffsiteStorage, OffsiteStorageStatus } from '@models/offsite-storage.model';
 import { BaseControlValueAccessor } from '../BaseControlValueAccessor';
 
@@ -22,6 +23,8 @@ import { BaseControlValueAccessor } from '../BaseControlValueAccessor';
   ]
 })
 export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStorage[]> {
+  faTrash = faTrash;
+  faPlusCircle = faPlusCircle;
   // Whether this control is enabled or not (affects edit mode)
   @Input() enabled: boolean = true;
 

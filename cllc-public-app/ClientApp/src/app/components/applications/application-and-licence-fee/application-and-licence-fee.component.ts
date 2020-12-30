@@ -19,6 +19,7 @@ import { DynamicsDataService } from '@services/dynamics-data.service';
 import { EstablishmentDataService } from '@services/establishment-data.service';
 import { Establishment } from '@models/establishment.model';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
+import { faSave, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const ValidationErrorMap = {
   establishmentopeningdate: 'Please enter the Estimated Opening Date',
@@ -31,6 +32,8 @@ const ValidationErrorMap = {
   styleUrls: ['./application-and-licence-fee.component.scss']
 })
 export class ApplicationAndLicenceFeeComponent extends FormBase implements OnInit {
+  faSave = faSave;
+  faShoppingCart = faShoppingCart;
   application: Application;
   form: FormGroup;
   savedFormData: any;

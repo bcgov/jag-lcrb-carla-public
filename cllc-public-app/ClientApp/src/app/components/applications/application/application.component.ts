@@ -33,6 +33,8 @@ import { LocalGovernmentDataService } from '@services/local-government-data.serv
 import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { AreaCategory } from '@models/service-area.model';
+import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
+import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
 
 const ServiceHours = [
   '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -54,6 +56,13 @@ const ServiceHours = [
   styleUrls: ['./application.component.scss']
 })
 export class ApplicationComponent extends FormBase implements OnInit {
+  faSave = faSave;
+  faIdCard = faIdCard;
+  faUniversity = faUniversity;
+  faCreditCard = faCreditCard;
+  faExclamationCircle = faExclamationCircle;
+  faTrashAlt = faTrashAlt;
+
   establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
   @Input() skipPayment: boolean = false;

@@ -15,6 +15,8 @@ import { Observable, of, forkJoin, merge, combineLatest } from 'rxjs';
 import { catchError, delay, filter, mergeMap, takeWhile } from 'rxjs/operators';
 import { ContactComponent, ContactData } from '@shared/components/contact/contact.component';
 import { PaymentConfirmationComponent } from '@components/payment-confirmation/payment-confirmation.component';
+import { faIdCard } from '@fortawesome/free-regular-svg-icons';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-permanent-change-to-a-licensee',
@@ -22,6 +24,8 @@ import { PaymentConfirmationComponent } from '@components/payment-confirmation/p
   styleUrls: ['./permanent-change-to-a-licensee.component.scss']
 })
 export class PermanentChangeToALicenseeComponent extends FormBase implements OnInit {
+  faQuestionCircle = faQuestionCircle;
+  faIdCard = faIdCard;
   value: any; // placeholder prop
   application: Application;
   liquorLicences: ApplicationLicenseSummary[] = [];

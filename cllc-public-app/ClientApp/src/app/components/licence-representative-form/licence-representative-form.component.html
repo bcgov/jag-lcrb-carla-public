@@ -56,7 +56,7 @@
                 <div class="row" *ngIf="hasRepresentativeOnFile">
                     <div class="col-xs-12 text-right">
                         <button class="btn btn-primary" (click)="remove()">
-                            <i class="fa fa-trash" style="color: #fff;"></i>
+                            <fa-icon [icon]="faTrash" style="color: #fff;"></fa-icon>
                             Remove Authority</button>
                     </div>
                 </div>
@@ -73,12 +73,12 @@
                 </div>
                 <div>
                     <mat-checkbox formControlName="representativeCanSubmitPermanentChangeApplications">
-                        Submit permanent change applications (excluding Agreement to Transfer Licence(s) to New Owner) <i data-html="true" style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle" matTooltipClass="multiline-tooltip" matTooltip="Your licensee representative may sign the following documents on your behalf:&#010;&bull;Permanent change to a licensee&#010;&bull;Permanent change to licence&#010;&bull;Structural change&#010;&bull;Add or change a third party operator&#010;&bull;Off-site storage notification&#010;&bull;Address change notification&#010;&bull;Reinstatement of expired licence&#010;&bull;Allow minors&#010;&bull;Permanent change (hawkers)&#010;&bull;Lounge and special event area application&#010;&bull;Manufacturer on-site store and picnic area endorsement application&#010;&bull;IWS to LRS conversion&#010;&bull;Transfer of location&#010;&bull;Dormancy&#010;&bull;Reconsideration&#010;&bull;Tied house exemption&#010;&bull;LPC application to transition to LP"></i>
+                        Submit permanent change applications (excluding Agreement to Transfer Licence(s) to New Owner) <fa-icon [icon]="faQuestionCircle" data-html="true" style="color: #38598a; margin-left: 10px;" matTooltipClass="multiline-tooltip" matTooltip="Your licensee representative may sign the following documents on your behalf:&#010;&bull;Permanent change to a licensee&#010;&bull;Permanent change to licence&#010;&bull;Structural change&#010;&bull;Add or change a third party operator&#010;&bull;Off-site storage notification&#010;&bull;Address change notification&#010;&bull;Reinstatement of expired licence&#010;&bull;Allow minors&#010;&bull;Permanent change (hawkers)&#010;&bull;Lounge and special event area application&#010;&bull;Manufacturer on-site store and picnic area endorsement application&#010;&bull;IWS to LRS conversion&#010;&bull;Transfer of location&#010;&bull;Dormancy&#010;&bull;Reconsideration&#010;&bull;Tied house exemption&#010;&bull;LPC application to transition to LP"></fa-icon>
                     </mat-checkbox>
                 </div>
                 <div>
                     <mat-checkbox formControlName="representativeCanSignTemporaryChangeApplications">
-                        Sign temporary change applications <i data-html="true" style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle" matTooltipClass="multiline-tooltip" matTooltip="Your licensee representative may sign the following documents on your behalf:&#010;&bull;Temporary change to liquor licence&#010;&bull;Temporary use area endorsements"></i>
+                        Sign temporary change applications <fa-icon [icon]="faQuestionCircle" data-html="true" style="color: #38598a; margin-left: 10px;" matTooltipClass="multiline-tooltip" matTooltip="Your licensee representative may sign the following documents on your behalf:&#010;&bull;Temporary change to liquor licence&#010;&bull;Temporary use area endorsements"></fa-icon>
                     </mat-checkbox>
                 </div>
                 <div>
@@ -139,15 +139,15 @@
             
             <section class="error mt-3 p-3" *ngIf="!form.valid && form.touched">
                 <div class="pb-2" *ngIf="form.errors && form.errors['hasAtLeastOneScope']">
-                    <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+                    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
                     <span>At least one scope of authority must be selected</span>
                 </div>
                 <div *ngIf="!validationMessages?.length">
-                    <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+                    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
                     <span>Some required fields have not been completed</span>
                 </div>
                 <div *ngIf="validationMessages?.length">
-                    <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+                    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
                     <span>The following fields are not valid:</span>
                 </div>
                 <ul *ngFor="let message of validationMessages">
@@ -159,7 +159,7 @@
 
             <section style="position: relative; margin-top: 20px;">
                 <button class="btn btn-primary" (click)="save()">
-                    <i class="fa fa-save" style="color: #fff;"></i>
+                    <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
                     SUBMIT</button>
             </section>
         </div>

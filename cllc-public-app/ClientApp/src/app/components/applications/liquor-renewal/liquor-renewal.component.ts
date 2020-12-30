@@ -22,6 +22,8 @@ import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { License } from '@models/license.model';
 import { AnnualVolumeService } from '@services/annual-volume.service';
+import { faBolt, faExchangeAlt, faPencilAlt, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
 
 const ValidationErrorMap = {
   renewalCriminalOffenceCheck: 'Please answer question 1',
@@ -49,6 +51,12 @@ const ValidationErrorMap = {
   styleUrls: ['./liquor-renewal.component.scss']
 })
 export class LiquorRenewalComponent extends FormBase implements OnInit {
+  faPenclilAlt = faPencilAlt;
+  faBolt = faBolt;
+  faPlus = faPlus;
+  faExchangeAlt = faExchangeAlt;
+  faTrashAlt = faTrashAlt;
+  faSave = faSave;
   establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
 

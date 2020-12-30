@@ -16,6 +16,8 @@ import { LicenceEventsService } from '@services/licence-events.service';
 import { EventStatus, LicenceEvent, EventCategory } from '@models/licence-event.model';
 import { License } from '@models/license.model';
 import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
+import { faBolt, faBusinessTime, faCalendarAlt, faCertificate, faDownload, faExchangeAlt,
+  faExclamationTriangle, faFlag, faPencilAlt, faQuestionCircle, faShoppingCart, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -33,6 +35,18 @@ const NOW = moment(new Date()).startOf('day');
   styleUrls: ['./licence-row.component.scss']
 })
 export class LicenceRowComponent extends FormBase implements OnInit {
+  faDownLoad = faDownload;
+  faExclamationTriangle = faExclamationTriangle;
+  faFlag = faFlag;
+  faQuestionCircle = faQuestionCircle;
+  faPencilAlt = faPencilAlt;
+  faCertificate = faCertificate;
+  faShoppingCart = faShoppingCart;
+  faTrashAlt = faTrashAlt;
+  faCalendarAlt = faCalendarAlt;
+  faBusinessTime = faBusinessTime;
+  faExchangeAlt = faExchangeAlt;
+  faBolt = faBolt;
   mainForm: FormGroup;
   busy: Subscription;
   licenceForms = {};
