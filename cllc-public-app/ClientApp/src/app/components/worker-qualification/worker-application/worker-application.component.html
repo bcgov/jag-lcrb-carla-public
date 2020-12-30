@@ -63,7 +63,7 @@
                 <div [formGroupName]="i">
                   <h3>PREVIOUS NAME {{i == 0 ? '' : i + 1}}
                     <button class="btn btn-secondary" style="float: right;" (click)="deleteAlias(i)">
-                      <i class="fa fa-trash"></i>
+                      <fa-icon [icon]="faTrash"></fa-icon>
                       DELETE NAME
                     </button>
                   </h3>
@@ -121,10 +121,10 @@
               <label>City and Country of Birth</label>
               <br />
               <input class="form-control" style="width: 250px;" type="text" formControlName="birthPlace">
-              <i *ngIf="!this.form.get('contact.birthPlace').valid && this.form.get('contact.birthPlace').touched"
-                class="fas fa-chevron-left"></i>
-              <i *ngIf="!this.form.get('contact.birthPlace').valid && this.form.get('contact.birthPlace').touched"
-                style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+              <fa-icon *ngIf="!this.form.get('contact.birthPlace').valid && this.form.get('contact.birthPlace').touched"
+                [icon]="faChevronLeft"></fa-icon>
+              <fa-icon *ngIf="!this.form.get('contact.birthPlace').valid && this.form.get('contact.birthPlace').touched"
+                style="margin-left: -6px;" [icon]="faChevronLeft"></fa-icon>
               <div *ngIf="!this.form.get('contact.birthPlace').valid && this.form.get('contact.birthPlace').touched"
                 class="alert alert-danger" style="background: transparent; border: none;">
                 <div *ngIf="!this.form.get('contact.birthPlace').valid && this.form.get('contact.birthPlace').touched ">
@@ -161,10 +161,10 @@
                 <br />
                 <input class="form-control" style="width: 250px;" type="text"
                   (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength="7" formControlName="primaryIdNumber">
-                <i *ngIf="!isBCIDValid() && (this.form.get('contact.primaryIdNumber')?.touched || this.form.get('contact.secondaryIdNumber')?.touched)"
-                  class="fas fa-chevron-left"></i>
-                <i *ngIf="!isBCIDValid() && (this.form.get('contact.primaryIdNumber')?.touched || this.form.get('contact.secondaryIdNumber')?.touched)"
-                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <fa-icon *ngIf="!isBCIDValid() && (this.form.get('contact.primaryIdNumber')?.touched || this.form.get('contact.secondaryIdNumber')?.touched)"
+                  [icon]="faChevronLeft"></fa-icon>
+                <fa-icon *ngIf="!isBCIDValid() && (this.form.get('contact.primaryIdNumber')?.touched || this.form.get('contact.secondaryIdNumber')?.touched)"
+                  style="margin-left: -6px;" [icon]="faChevronLeft"></fa-icon>
               </div>
             </section>
             <section>
@@ -174,10 +174,10 @@
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" maxlength="9"
                   formControlName="secondaryIdNumber">
-                <i *ngIf="!isBCIDValid() && (this.form.get('contact.secondaryIdNumber')?.touched || this.form.get('contact.primaryIdNumbe')?.touched)"
-                  class="fas fa-chevron-left"></i>
-                <i *ngIf="!isBCIDValid() && (this.form.get('contact.secondaryIdNumber')?.touched || this.form.get('contact.primaryIdNumbe')?.touched)"
-                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <fa-icon *ngIf="!isBCIDValid() && (this.form.get('contact.secondaryIdNumber')?.touched || this.form.get('contact.primaryIdNumbe')?.touched)"
+                  [icon]="faChevronLeft"></fa-icon>
+                <fa-icon *ngIf="!isBCIDValid() && (this.form.get('contact.secondaryIdNumber')?.touched || this.form.get('contact.primaryIdNumbe')?.touched)"
+                  style="margin-left: -6px;" [icon]="faChevronLeft"></fa-icon>
                 <div
                   *ngIf="!isBCIDValid() && (this.form.get('contact.secondaryIdNumber')?.touched || this.form.get('contact.primaryIdNumbe')?.touched)"
                   class="alert alert-danger" style="background: transparent; border: none;">
@@ -197,10 +197,10 @@
               <br />
               <input class="form-control" style="width: 250px;" (keydown)="rejectIfNotDigitOrBackSpace($event)"
                 type="text" maxlength="10" pattern="^\d{10}$" formControlName="mobilePhone">
-              <i *ngIf="!this.form.get('contact.mobilePhone').valid && this.form.get('contact.mobilePhone').touched"
-                class="fas fa-chevron-left"></i>
-              <i *ngIf="!this.form.get('contact.mobilePhone').valid && this.form.get('contact.mobilePhone').touched"
-                style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+              <fa-icon *ngIf="!this.form.get('contact.mobilePhone').valid && this.form.get('contact.mobilePhone').touched"
+                [icon]="faChevronLeft"></fa-icon>
+              <fa-icon *ngIf="!this.form.get('contact.mobilePhone').valid && this.form.get('contact.mobilePhone').touched"
+                style="margin-left: -6px;" [icon]="faChevronLeft"></fa-icon>
               <div *ngIf="!this.form.get('contact.mobilePhone').valid && this.form.get('contact.mobilePhone').touched"
                 class="alert alert-danger" style="background: transparent; border: none;">
                 <div
@@ -221,10 +221,10 @@
                 <br />
                 <input class="form-control" style="width: 250px;" type="email" formControlName="email"
                   (blur)="trimValue(form.get('worker.email'))">
-                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched"
-                  class="fas fa-chevron-left"></i>
-                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched"
-                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <fa-icon *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched"
+                  [icon]="faChevronLeft"></fa-icon>
+                <fa-icon *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched"
+                  style="margin-left: -6px;" [icon]="faChevronLeft"></fa-icon>
                 <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched"
                   class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched ">
@@ -411,10 +411,10 @@
                 <label>Postal / Zip Code</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="address1_postalcode">
-                <i *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
-                  class="fas fa-chevron-left"></i>
-                <i *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
-                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <fa-icon *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
+                  [icon]="faChevronLeft"></fa-icon>
+                <fa-icon *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
+                  style="margin-left: -6px;" [icon]="faChevronLeft"></fa-icon>
                 <div
                   *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
                   class="alert alert-danger" style="background: transparent; border: none;">
@@ -509,7 +509,7 @@
           <div formGroupName="contact">
             <h3>MAILING ADDRESS
               <button class="btn btn-secondary" style="float: right;" (click)="copyPhysicalAddressToMailingAddress()">
-                <i class="fa fa-copy"></i>
+                <fa-icon [icon]="faCopy"></fa-icon>
                 COPY CURRENT ADDRESS
               </button>
             </h3>
@@ -570,10 +570,10 @@
                 <label>Postal Code / Zip Code</label>
                 <br />
                 <input class="form-control" style="width: 200px;" type="text" formControlName="address2_postalcode">
-                <i *ngIf="!this.form.get('contact.address2_postalcode').valid && this.form.get('contact.address2_postalcode').touched"
-                  class="fas fa-chevron-left"></i>
-                <i *ngIf="!this.form.get('contact.address2_postalcode').valid && this.form.get('contact.address2_postalcode').touched"
-                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <fa-icon *ngIf="!this.form.get('contact.address2_postalcode').valid && this.form.get('contact.address2_postalcode').touched"
+                  [icon]="faChevronLeft"></fa-icon>
+                <fa-icon *ngIf="!this.form.get('contact.address2_postalcode').valid && this.form.get('contact.address2_postalcode').touched"
+                  style="margin-left: -6px;" [icon]="faChevronLeft"></fa-icon>
                 <div
                   *ngIf="!this.form.get('contact.address2_postalcode').valid && this.form.get('contact.address2_postalcode').touched"
                   class="alert alert-danger" style="background: transparent; border: none;">
@@ -618,7 +618,7 @@
               <div [formGroupName]="i">
                 <h3>PAST ADDRESS {{i + 1}}
                   <button class="btn btn-secondary" style="float: right;" (click)="deleteAddress(i)">
-                    <i class="fa fa-trash"></i>
+                    <fa-icon [icon]="faTrash"></fa-icon>
                     DELETE ADDRESS
                   </button>
                 </h3>
@@ -748,16 +748,16 @@
             <p></p>
           </div>
           <section *ngIf="!(form.valid && isBCIDValid()) && form.touched" style="color: #A12622">
-            <i class="fas fa-exclamation-triangle"></i> Some required fields have not been completed.
+            <fa-icon [icon]="faExclamationTriangle"></fa-icon> Some required fields have not been completed.
           </section>
           <section style="position: relative;">
             <div [ngBusy]="[busy, busy2]"></div>
             <span style="float: right;">
               <button class="btn btn-secondary" routerLink="/worker-qualification/dashboard">
-                <i class="fa fa-save"></i>
+                <fa-icon [icon]="faSave"></fa-icon>
                 SAVE FOR LATER</button>
               <button style="margin-left: 10px" (click)="gotoStep2()" class="btn btn-primary">SAVE & CONTINUE
-                TO STEP 2 <i class="fas fa-chevron-right"></i></button>
+                TO STEP 2 <fa-icon [icon]="faChevronRight"></fa-icon></button>
             </span>
           </section>
         </div>
@@ -770,7 +770,7 @@
         <table>
           <tr>
             <td>
-              <h2 class="round-icon-wrapper"><i class="fas fa-question"></i></h2>
+              <h2 class="round-icon-wrapper"><fa-icon [icon]="faQuestion"></fa-icon></h2>
             </td>
             <td style="padding-left: 10px">
               <h2>Update your personal information</h2>

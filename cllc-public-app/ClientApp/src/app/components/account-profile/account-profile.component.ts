@@ -22,6 +22,7 @@ import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { AppState } from '@app/app-state/models/app-state';
+import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -75,6 +76,12 @@ const ValidationFieldNameMap = {
   styleUrls: ['./account-profile.component.scss']
 })
 export class AccountProfileComponent extends FormBase implements OnInit {
+  faExclamationTriangle = faExclamationTriangle;
+  faTrashAlt = faTrashAlt;
+  faChevronRight = faChevronRight;
+  faAddressCard = faAddressCard;
+  faEnvelope = faEnvelope;
+  faPhone = faPhone;
   @Input() useInStepperMode = false;
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   currentUser: User;
