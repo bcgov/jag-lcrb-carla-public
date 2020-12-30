@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar } from '@angular/material';
+import { faAngleDoubleLeft, faPrint } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-worker-payment-confirmation',
@@ -10,6 +11,8 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./payment-confirmation.component.scss']
 })
 export class WorkerPaymentConfirmationComponent implements OnInit {
+  faPrint = faPrint;
+  faAngleDoubleLeft = faAngleDoubleLeft;
   busy: Subscription;
   transactionId: string;
   workerId: string;

@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Controls Survey styles */
-
+@import '~material-design-icons/iconfont/material-icons.css';
 @import "./style/custom-theme.scss";
 
 @include angular-material-typography($custom-typography);

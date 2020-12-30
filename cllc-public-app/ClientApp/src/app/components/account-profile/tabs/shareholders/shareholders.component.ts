@@ -14,6 +14,7 @@ import * as LegalEntitiesActions from '@app/app-state/actions/legal-entities.act
 import { LegalEntity } from '@models/legal-entity.model';
 import { takeWhile, filter } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-shareholders',
@@ -22,6 +23,7 @@ import { FormBase } from '@shared/form-base';
 })
 
 export class EditShareholdersComponent extends FormBase implements OnInit {
+  faPlus = faPlus;
   @Input() accountId: string;
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;

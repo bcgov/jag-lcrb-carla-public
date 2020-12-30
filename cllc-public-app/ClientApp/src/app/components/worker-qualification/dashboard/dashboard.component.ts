@@ -12,6 +12,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { takeWhile } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { faDownload, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -21,6 +22,8 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./dashboard.component.scss']
 })
 export class WorkerDashboardComponent extends FormBase implements OnInit {
+  faDownload = faDownload;
+  faQuestion = faQuestion;
   currentUser: User;
   displayedColumns = ['lastUpdated', 'worker', 'status'];
   dataSource: Worker[] = [];

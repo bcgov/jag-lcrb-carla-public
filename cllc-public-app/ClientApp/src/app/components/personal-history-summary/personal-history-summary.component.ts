@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ContactDataService } from '@services/contact-data.service';
 import { PHSContact } from '@models/contact.model';
 import { FormBase } from '@shared/form-base';
+import { faExclamationTriangle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-personal-history-summary',
@@ -12,7 +13,8 @@ import { FormBase } from '@shared/form-base';
   styleUrls: ['./personal-history-summary.component.scss']
 })
 export class PersonalHistorySummaryComponent extends FormBase implements OnInit {
-
+  faExclamationTriangle = faExclamationTriangle;
+  faTrashAlt = faTrashAlt;
   aliasesToDelete: any;
   form: FormGroup;
   contactToken: string;
