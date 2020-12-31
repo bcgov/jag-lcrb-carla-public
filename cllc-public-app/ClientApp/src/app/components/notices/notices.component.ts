@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Observable, of, Subscription } from 'rxjs';
-import { filter, takeWhile } from 'rxjs/operators';
+import { Observable, of, Subscription, pipe } from 'rxjs';
+import { filter, takeWhile, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { FormBase } from '@shared/form-base';
 import { AccountDataService } from '@services/account-data.service';
 import { Account } from '@models/account.model';
 import { AppState } from '@app/app-state/models/app-state';
+import { FileSystemItem } from '@models/file-system-item.model';
 
 @Component({
   selector: 'app-notices',
@@ -21,7 +22,7 @@ export class NoticesComponent extends FormBase implements OnInit {
   showValidationMessages = false;
 
   account: Account;
-  notices: any[]; // TODO: improve typing here
+  notices: FileSystemItem[]; // TODO: improve typing here
 
   busy: Subscription;
   dataLoaded = false; // this is set to true when all page data is loaded
@@ -30,8 +31,6 @@ export class NoticesComponent extends FormBase implements OnInit {
   constructor(
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
-    private router: Router,
-    private route: ActivatedRoute,
     private accountDataService: AccountDataService,
   ) {
     super();
@@ -60,7 +59,17 @@ export class NoticesComponent extends FormBase implements OnInit {
   }
 
   retrieveNotices(account: Account) {
-    // TODO: implement this mocked function
-    return of([]);
+    return this.accountDataService.getFilesAttachedToAccount(account.id, 'Notice')
+      .pipe(map(files => this.orderByDate(files)));
+  }
+
+  orderByDate(files: FileSystemItem[]): FileSystemItem[] {
+    return files.sort((a, b) => {
+      const dateA = new Date(a.timelastmodified);
+      const dateB = new Date(b.timelastmodified);
+      if (dateA > dateB) return -1;
+      if (dateA < dateB) return 1;
+      return 0;
+    });
   }
 }
