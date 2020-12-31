@@ -24,7 +24,7 @@
   <ng-container *ngIf="account && dataLoaded">
     <!-- Found some data -->
     <section *ngIf="notices?.length === 0">
-
+      <app-notices-table [rows]="notices"></app-notices-table>
     </section>
 
     <!-- No data found -->
