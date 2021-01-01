@@ -47,7 +47,7 @@ namespace bdd_tests
             string contactTitle = "Tester";
 
             // select the zoning checkbox
-            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
+            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-5"));
             uiZoningCheckbox.Click();
 
             // upload the letter of intent
