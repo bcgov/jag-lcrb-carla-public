@@ -34,7 +34,7 @@ namespace bdd_tests
             uiLoungeAreaEndorsement.Click();
 
             // click on the Continue to Application button
-            NgWebElement uiContinueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp.save-cont.btn-primary"));
+            NgWebElement uiContinueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
             uiContinueToApplicationButton.Click();
 
             /* 
