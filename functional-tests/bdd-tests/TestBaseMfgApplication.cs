@@ -191,23 +191,23 @@ namespace bdd_tests
                 uiHoney.SendKeys(honeyBeehives);
 
                 // select the blending checkbox
-                NgWebElement uiBlending = ngDriver.FindElement(By.CssSelector("#mat-checkbox-10 .mat-checkbox-inner-container"));
+                NgWebElement uiBlending = ngDriver.FindElement(By.CssSelector("#mat-checkbox-11 .mat-checkbox-inner-container"));
                 uiBlending.Click();
 
                 // select the crushing checkbox
-                NgWebElement uiCrushing = ngDriver.FindElement(By.CssSelector("#mat-checkbox-11 .mat-checkbox-inner-container"));
+                NgWebElement uiCrushing = ngDriver.FindElement(By.CssSelector("#mat-checkbox-12 .mat-checkbox-inner-container"));
                 uiCrushing.Click();
 
                 // select the filtering checkbox
-                NgWebElement uiFiltering = ngDriver.FindElement(By.CssSelector("#mat-checkbox-12 .mat-checkbox-inner-container"));
+                NgWebElement uiFiltering = ngDriver.FindElement(By.CssSelector("#mat-checkbox-13 .mat-checkbox-inner-container"));
                 uiFiltering.Click();
 
                 // select the aging, for at least 3 months checkbox
-                NgWebElement uiAging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-13 .mat-checkbox-inner-container"));
+                NgWebElement uiAging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-14 .mat-checkbox-inner-container"));
                 uiAging.Click();
 
                 // select the secondary fermentation or carbonation checkbox
-                NgWebElement uiSecondaryFermentation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-14 .mat-checkbox-inner-container"));
+                NgWebElement uiSecondaryFermentation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-15 .mat-checkbox-inner-container"));
                 uiSecondaryFermentation.Click();
 
                 // select the packaging checkbox
