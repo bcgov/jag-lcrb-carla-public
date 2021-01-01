@@ -1145,7 +1145,7 @@ namespace bdd_tests
             uiShareEmailBiz2.SendKeys(businessEmail2);
 
             // select the business shareholder #2 confirm button
-            NgWebElement uiShareBizConfirmButton2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] .fa-save span"));
+            NgWebElement uiShareBizConfirmButton2 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
             uiShareBizConfirmButton2.Click();
 
             // upload a notice of articles document for business shareholder
@@ -1268,7 +1268,7 @@ namespace bdd_tests
             uiShareEmailBiz3.SendKeys(businessEmail3);
 
             // select the business shareholder #3 confirm button
-            NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] .fa-save span"));
+            NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
             uiShareBizConfirmButton3.Click();
 
             // upload a notice of articles document for business shareholder
@@ -1391,7 +1391,7 @@ namespace bdd_tests
             uiShareEmailBiz4.SendKeys(businessEmail4);
 
             // select the business shareholder #4 confirm button
-            NgWebElement uiShareBizConfirmButton4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] .fa-save span"));
+            NgWebElement uiShareBizConfirmButton4 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
             uiShareBizConfirmButton4.Click();
 
             // upload a notice of articles document for business shareholder
@@ -1514,7 +1514,7 @@ namespace bdd_tests
             uiShareEmailBiz5.SendKeys(businessEmail5);
 
             // select the business shareholder #5 confirm button
-            NgWebElement uiShareBizConfirmButton5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] .fa-save span"));
+            NgWebElement uiShareBizConfirmButton5 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
             uiShareBizConfirmButton5.Click();
 
             // upload a notice of articles document for business shareholder
