@@ -1,0 +1,16 @@
+.form-wrapper {
+  max-width: 1000px;
+  padding-left: 45px;
+}
+
+@media (max-width: 575.98px) {
+  .form-wrapper {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.attention-section {
+  background-color: #e1e8f2;
+  border-bottom: 4px solid #e4e4e4;
+}
