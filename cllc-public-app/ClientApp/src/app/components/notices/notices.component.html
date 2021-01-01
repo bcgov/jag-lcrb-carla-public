@@ -1,35 +1,31 @@
-<div class="form-wrapper position-relative">
+<div class="form-wrapper position-relative d-flex flex-column justify-content-center">
   <div [ngBusy]="busy"></div>
   <div class="padded-section">
     <h1>Notices</h1>
   </div>
 
   <!-- Preamble -->
-  <section class="d-flex">
-    <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
-    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-      <section class="ngtest-preamble-content">
-        <ul>
-          <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Non enim praesent elementum facilisis leo vel fringilla est ullamcorper.</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Non enim praesent elementum facilisis leo vel fringilla est ullamcorper.</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Non enim praesent elementum facilisis leo vel fringilla est ullamcorper.</li>
-        </ul>
-      </section>
-    </div>
+  <section class="p-3 padded-section attention-section">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua. Non enim praesent elementum facilisis leo vel fringilla est ullamcorper.</p>
+    <ul>
+      <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+        dolore magna aliqua. Non enim praesent elementum facilisis leo vel fringilla est ullamcorper.</li>
+      <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+        dolore magna aliqua. Non enim praesent elementum facilisis leo vel fringilla est ullamcorper.</li>
+      <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+        dolore magna aliqua. Non enim praesent elementum facilisis leo vel fringilla est ullamcorper.</li>
+    </ul>
   </section>
 
   <ng-container *ngIf="account && dataLoaded">
     <!-- Found some data -->
-    <section *ngIf="notices?.length === 0">
+    <section *ngIf="notices?.length > 0" class="mt-5">
       <app-notices-table [rows]="notices"></app-notices-table>
     </section>
 
     <!-- No data found -->
-    <section *ngIf="notices?.length === 0">
-      <h1>No notices</h1>
+    <section *ngIf="notices?.length === 0" class="mt-5">
       <p>There are currently no notices attached to this account.</p>
     </section>
   </ng-container>

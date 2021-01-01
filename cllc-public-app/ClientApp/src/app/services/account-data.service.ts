@@ -97,9 +97,7 @@ export class AccountDataService extends DataService {
 
   private processFiles(accountId: string, documentType: string, files: FileSystemItem[]): FileSystemItem[] {
     for (const file of files) {
-      file.name = `${documentType}_${file.name}`;
-      // convert bytes to KB
-      file.size = Math.ceil(file.size / 1024);
+      file.name = `${documentType}__${file.name}`;
       file.downloadUrl = `api/file/${accountId}/download-file/account/${file.name}`;
       file.downloadUrl += `?serverRelativeUrl=${encodeURIComponent(file.serverrelativeurl)}&documentType=${documentType}`;
     }
