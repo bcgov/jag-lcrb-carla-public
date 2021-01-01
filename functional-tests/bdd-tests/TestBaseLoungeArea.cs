@@ -42,7 +42,7 @@ namespace bdd_tests
             */
 
             // select the zoning checkbox
-            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
+            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-2"));
             uiZoningCheckbox.Click();
 
             // upload the floor plan
