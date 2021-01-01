@@ -719,7 +719,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmPartner = ngDriver.FindElement(By.CssSelector(".fa-save span"));
+                NgWebElement uiConfirmPartner = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmPartner.Click();
 
                 // open business partner row
@@ -748,7 +748,7 @@ namespace bdd_tests
                 uiBizPartnerEmail.SendKeys(bizPartnerEmail);
 
                 // click on the business shareholder confirm button
-                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'][addlabel='Add Business Partner'] .fa-save span"));
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmButton.Click();
 
                 // upload a second partnership agreement
@@ -788,7 +788,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // click on individual partner2 confirm button
-                NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Partner'][changetypesuffix='BusinessShareholder'] .fa-save span"));
+                NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmButton2.Click();
             }
 
