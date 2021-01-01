@@ -584,7 +584,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmLeader = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmLeader = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmLeader.Click();
 
                 /********** Leader #2 **********/
@@ -627,7 +627,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmLeader2 = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmLeader2 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmLeader2.Click();
 
                 /********** Leader #3 **********/
@@ -670,7 +670,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmLeader3 = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmLeader3 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmLeader3.Click();
             }
 
