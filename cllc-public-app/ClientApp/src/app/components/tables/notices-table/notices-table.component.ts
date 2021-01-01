@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { FileSystemItem } from '@models/file-system-item.model';
 
@@ -14,8 +15,26 @@ export class NoticesTableComponent implements OnInit {
   ngOnInit() {
   }
 
-  // TODO: Fix to proper link
-  downloadLink(notice: any): string {
-    return `api/licenceevents/${notice.id}/${notice.filename}.pdf`;
+  getLocale() {
+    if (navigator.languages !== undefined) {
+      return navigator.languages[0];
+    } else {
+      return navigator.language;
+    }
+  }
+
+  // Formats dates based on user locale
+  localDate(value: Date): string {
+    if (value == null) {
+      return '';
+    }
+    const dp = new DatePipe(this.getLocale());
+    const dateFormat = 'y-MM-dd'; // YYYY-MM-DD
+    return dp.transform(new Date(value), 'short');
+  }
+
+  // Converts bytes to KB
+  bytesToKB(size: number): number {
+    return Math.ceil(size / 1024);
   }
 }
