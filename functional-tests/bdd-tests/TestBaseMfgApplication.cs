@@ -86,7 +86,7 @@ namespace bdd_tests
             uiAdditionalEstabPID.SendKeys(additionalPIDs);
 
             // select the proof of zoning checkbox
-            NgWebElement uiProofOfZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
+            NgWebElement uiProofOfZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-2"));
             JavaScriptClick(uiProofOfZoning);
 
             // select 'yes' for ALR inclusion
