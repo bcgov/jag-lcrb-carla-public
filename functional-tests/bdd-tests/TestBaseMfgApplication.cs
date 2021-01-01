@@ -211,7 +211,7 @@ namespace bdd_tests
                 uiSecondaryFermentation.Click();
 
                 // select the packaging checkbox
-                NgWebElement uiPackaging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-15 .mat-checkbox-inner-container"));
+                NgWebElement uiPackaging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-16 .mat-checkbox-inner-container"));
                 uiPackaging.Click();
             }
 
@@ -271,7 +271,7 @@ namespace bdd_tests
             uiValidInterest.Click();
 
             // select the future valid interest checkbox
-            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-4[formcontrolname='willhaveValidInterest']"));
+            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-5[formcontrolname='willhaveValidInterest']"));
             uiFutureValidInterest.Click();
 
             // upload the valid interest document
