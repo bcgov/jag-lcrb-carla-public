@@ -1273,9 +1273,14 @@ namespace bdd_tests
 
             // select the business shareholder #3 confirm button
             NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiShareBizConfirmButton3);
-            uiShareBizConfirmButton3.Click();
+            try
+            {
+                uiShareBizConfirmButton3.Click();
+            }
+            catch
+            {
+                uiShareBizConfirmButton3.Click();
+            }
 
             // upload a notice of articles document for business shareholder
             FileUpload("notice_of_articles.pdf","(//input[@type='file'])[36]");
