@@ -21,20 +21,16 @@ Scenario: CRS Release (Private Corporation)
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    # And I click on the Dashboard tab
-    # And the dashboard status is updated as Application Under Review
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I click on the link for Download Licence
     And I show the store as open on the map
     And I review the federal reports
-    # And I click on the Licences tab
-    # And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
-    # And I click on the link for Renew Licence
-    # And I renew the licence with positive responses for Cannabis
-    # And I click on the link for Dashboard
-    # And I request a personnel name change for a private corporation
-    # And I click on the link for Dashboard
-    # And I confirm that the director name has been updated
+    And I click on the Licences tab
+    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    And I click on the link for Renew Licence
+    And I renew the licence with positive responses for Cannabis
     And I click on the Licences tab
     And I request a store relocation for Cannabis
     And I request a structural change
@@ -64,8 +60,8 @@ Scenario: CRS Release (Sole Proprietorship)
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    # And I click on the Dashboard tab
-    # And the dashboard status is updated as Application Under Review
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I click on the link for Download Licence
     And I show the store as open on the map
@@ -74,10 +70,6 @@ Scenario: CRS Release (Sole Proprietorship)
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
     And I renew the licence with positive responses for Cannabis
-    And I click on the link for Dashboard
-    And I request a personnel name change for a sole proprietorship
-    And I click on the link for Dashboard
-    And I confirm that the director name has been updated
     And I click on the Licences tab
     And I request a store relocation for Cannabis
     And I request a structural change
