@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <StartupObject>Gov.Jag.Lcrb.PdfService.Program</StartupObject>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     <UserSecretsId>e01b8a3f-2545-470e-84fc-ae1a3393b2f2</UserSecretsId>
@@ -10,18 +10,16 @@
 
   <ItemGroup>
 
-    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="3.1.2" />
 
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
     <PackageReference Include="Stubble.Compilation" Version="1.9.3" />
     <PackageReference Include="Stubble.Core" Version="1.9.3" />
     <PackageReference Include="Stubble.Extensions.JsonNet" Version="1.2.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.6.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.6.3" />    
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.6.3" />
     <PackageReference Include="Unchase.Swashbuckle.AspNetCore.Extensions" Version="2.5.0" />
     <PackageReference Include="Wkhtmltopdf.NetCore" Version="3.0.2" />
   </ItemGroup>
