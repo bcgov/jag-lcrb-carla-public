@@ -84,7 +84,7 @@ namespace SepService.Controllers
                 Response.Headers.Add("Authorization", $"Bearer {result}");
                 string tokenEncoded = UrlEncoder.Default.Encode(token);
                 string redirect = redirect_uri +
-                                  $"#state={state}&token_type=Bearer&access_token={tokenEncoded}&id_token={tokenEncoded}&access_token={tokenEncoded}&expires_in=99999";
+                                  $"#state={state}&token_type=Bearer&access_token={tokenEncoded}&id_token={tokenEncoded}&expires_in=99999";
                 return new RedirectResult(redirect);
             }
             else
