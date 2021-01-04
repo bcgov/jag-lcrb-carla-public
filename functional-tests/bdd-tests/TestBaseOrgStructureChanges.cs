@@ -1145,7 +1145,7 @@ namespace bdd_tests
             uiShareEmailBiz2.SendKeys(businessEmail2);
 
             // select the business shareholder #2 confirm button
-            NgWebElement uiShareBizConfirmButton2 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] .fa-save span"));
+            NgWebElement uiShareBizConfirmButton2 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
             uiShareBizConfirmButton2.Click();
 
             // upload a notice of articles document for business shareholder
@@ -1232,6 +1232,10 @@ namespace bdd_tests
             uiCalendarIndyS1Biz2.Click();
 
             SharedCalendarDate();
+
+            // click on the Confirm button
+            NgWebElement uiConfirmButtonBusIndyShareholder = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
+            uiConfirmButtonBusIndyShareholder.Click();
         }
 
         public void BusinessShareholder3()
@@ -1268,8 +1272,15 @@ namespace bdd_tests
             uiShareEmailBiz3.SendKeys(businessEmail3);
 
             // select the business shareholder #3 confirm button
-            NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] .fa-save span"));
-            uiShareBizConfirmButton3.Click();
+            NgWebElement uiShareBizConfirmButton3 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
+            try
+            {
+                uiShareBizConfirmButton3.Click();
+            }
+            catch
+            {
+                uiShareBizConfirmButton3.Click();
+            }
 
             // upload a notice of articles document for business shareholder
             FileUpload("notice_of_articles.pdf","(//input[@type='file'])[36]");
@@ -1318,6 +1329,10 @@ namespace bdd_tests
 
             SharedCalendarDate();
 
+            // click on the Confirm button
+            NgWebElement uiConfirmButtonBusIndyShareholder = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
+            uiConfirmButtonBusIndyShareholder.Click();
+
             /********** Business Shareholder #3 - Individual Shareholder **********/
 
             // create the business shareholder > individual shareholder data
@@ -1355,6 +1370,10 @@ namespace bdd_tests
             uiCalendarIndyS1Biz3.Click();
 
             SharedCalendarDate();
+
+            // click on the Confirm button
+            NgWebElement uiConfirmButtonBusIndyShareholder2 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
+            uiConfirmButtonBusIndyShareholder2.Click();
         }
 
         public void BusinessShareholder4()
@@ -1391,7 +1410,7 @@ namespace bdd_tests
             uiShareEmailBiz4.SendKeys(businessEmail4);
 
             // select the business shareholder #4 confirm button
-            NgWebElement uiShareBizConfirmButton4 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] .fa-save span"));
+            NgWebElement uiShareBizConfirmButton4 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
             uiShareBizConfirmButton4.Click();
 
             // upload a notice of articles document for business shareholder
@@ -1441,6 +1460,10 @@ namespace bdd_tests
 
             SharedCalendarDate();
 
+            // click on the Confirm button
+            NgWebElement uiConfirmButtonBusIndyShareholder = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
+            uiConfirmButtonBusIndyShareholder.Click();
+
             /********** Business Shareholder #4 - Individual Shareholder **********/
 
             // create the business shareholder #4 > individual shareholder data
@@ -1478,6 +1501,10 @@ namespace bdd_tests
             uiCalendarIndyS1Biz4.Click();
 
             SharedCalendarDate();
+
+            // click on the Confirm button
+            NgWebElement uiConfirmButtonBusIndyShareholder2 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
+            uiConfirmButtonBusIndyShareholder2.Click();
         }
 
         public void BusinessShareholder5()
@@ -1514,7 +1541,7 @@ namespace bdd_tests
             uiShareEmailBiz5.SendKeys(businessEmail5);
 
             // select the business shareholder #5 confirm button
-            NgWebElement uiShareBizConfirmButton5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] .fa-save span"));
+            NgWebElement uiShareBizConfirmButton5 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
             uiShareBizConfirmButton5.Click();
 
             // upload a notice of articles document for business shareholder
@@ -1564,6 +1591,10 @@ namespace bdd_tests
 
             SharedCalendarDate();
 
+            // click on the Confirm button
+            NgWebElement uiConfirmButtonBusIndyShareholder = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
+            uiConfirmButtonBusIndyShareholder.Click();
+
             /********** Business Shareholder #5 - Individual Shareholder **********/
 
             // create the business shareholder > individual shareholder data
@@ -1601,6 +1632,10 @@ namespace bdd_tests
             // enter business shareholder #5 > individual shareholder email
             NgWebElement uiIndyShareEmailBiz5 = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] input[formcontrolname='emailNew']"));
             uiIndyShareEmailBiz5.SendKeys(shareholderEmailBiz5);
+
+            // click on the Confirm button
+            NgWebElement uiConfirmButtonBusIndyShareholder2 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
+            uiConfirmButtonBusIndyShareholder2.Click();
         }
     }
 }
