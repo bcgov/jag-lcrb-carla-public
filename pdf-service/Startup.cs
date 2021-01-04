@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,9 +14,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using Wkhtmltopdf.NetCore;
+using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
+using System;
 
-namespace Pdf
+namespace Gov.Jag.Lcrb.PdfService
 {
     public class Startup
     {
@@ -42,11 +46,7 @@ namespace Pdf
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            // Enable Node Services
-            services.AddNodeServices();
-
-            services.AddMvc(config =>
+            services.AddControllers(config =>
             {
                 config.EnableEndpointRouting = false;
                 if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
@@ -62,7 +62,35 @@ namespace Pdf
 
             services.AddSwaggerGen(c =>
             {
+                
+                c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB PDF Service", Version = "v1" });
+                c.ParameterFilter<AutoRestParameterFilter>();
+                // This is only required because Swashbuckle does not present enums correctly
+                c.AddEnumsWithValuesFixFilters();
+                string baseUri = Configuration["BASE_URI"];
+                if (baseUri != null)
+                {
+                    // ensure baseUri is in the right format.
+                    baseUri = baseUri.TrimEnd('/') + @"/";
+                    c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+                    {
+                        Type = SecuritySchemeType.OAuth2,
+                        Flows = new OpenApiOAuthFlows
+                        {
+                            Implicit = new OpenApiOAuthFlow
+                            {
+                                AuthorizationUrl = new Uri(baseUri + "api/authentication/redirect/" + Configuration["JWT_TOKEN_KEY"]),
+                                Scopes = new Dictionary<string, string>
+                                {
+                                    {"openid", "oidc standard"}
+                                }
+                            }
+                        }
+                    });
+                }
+
+                c.OperationFilter<AuthenticationRequirementsOperationFilter>();
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
@@ -108,6 +136,14 @@ namespace Pdf
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger(c =>
+                {
+                    c.SerializeAsV2 = true;
+                });
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB PDF Service");
+                });
             }
 
             if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
@@ -116,17 +152,28 @@ namespace Pdf
             }
 
             app.UseMvc();
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB PDF Service");
-            });
-
+            
             app.UseHealthChecks("/hc", new HealthCheckOptions
             {
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
+        }
+
+        public class AuthenticationRequirementsOperationFilter : IOperationFilter
+        {
+            public void Apply(OpenApiOperation operation, OperationFilterContext context)
+            {
+                if (operation.Security == null)
+                    operation.Security = new List<OpenApiSecurityRequirement>();
+
+
+                var scheme = new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "bearer" } };
+                operation.Security.Add(new OpenApiSecurityRequirement
+                {
+                    [scheme] = new List<string>()
+                });
+            }
         }
     }
 }
