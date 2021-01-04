@@ -51,33 +51,42 @@ namespace bdd_tests
 
             System.Threading.Thread.Sleep(3000);
 
-            // click on the submit permanent change applications checkbox
-            NgWebElement uiCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSubmitPermanentChangeApplications']"));
-            JavaScriptClick(uiCheckbox);
+            try
+            {
+                // click on the submit permanent change applications checkbox
+                NgWebElement uiCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSubmitPermanentChangeApplications']"));
+                uiCheckbox.Click();
+            }
+            catch
+            {
+                // click on the submit permanent change applications checkbox
+                NgWebElement uiCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSubmitPermanentChangeApplications']"));
+                uiCheckbox.Click();
+            }
 
             // click on the sign temporary change applications checkbox
             NgWebElement uiCheckbox1 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSignTemporaryChangeApplications']"));
-            JavaScriptClick(uiCheckbox1);
+            uiCheckbox1.Click();
 
             // click on the obtain licence info from branch checkbox
             NgWebElement uiCheckbox2 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanObtainLicenceInformation']"));
-            JavaScriptClick(uiCheckbox2);
+            uiCheckbox2.Click();
 
             // click on sign grocery annual proof of sales revenue checkbox
             NgWebElement uiCheckbox3 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanSignGroceryStoreProofOfSale']"));
-            JavaScriptClick(uiCheckbox3);
+            uiCheckbox3.Click();
 
             // click on attend education sessions checkbox
             NgWebElement uiCheckbox4 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanAttendEducationSessions']"));
-            JavaScriptClick(uiCheckbox4);
+            uiCheckbox4.Click();
 
             // click on attend compliance meetings checkbox
             NgWebElement uiCheckbox5 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanAttendComplianceMeetings']"));
-            JavaScriptClick(uiCheckbox5);
+            uiCheckbox5.Click();
 
             // click on represent licensee at enforcement hearings checkbox
             NgWebElement uiCheckbox6 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='representativeCanRepresentAtHearings']"));
-            JavaScriptClick(uiCheckbox6);
+            uiCheckbox6.Click();
 
             // click on the signature agreement checkbox
             NgWebElement uiSignatureAgree = ngDriver.FindElement(By.XPath("//app-field/section/div/section/section/input"));

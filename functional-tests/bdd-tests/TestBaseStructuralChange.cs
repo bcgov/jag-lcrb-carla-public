@@ -53,7 +53,7 @@ namespace bdd_tests
 
             // select not visible from outside checkbox
             NgWebElement uiVisibleFromOutside = ngDriver.FindElement(By.CssSelector(".mat-checkbox-inner-container"));
-            uiVisibleFromOutside.Click();
+            JavaScriptClick(uiVisibleFromOutside);
 
             // upload a floor plan document
             FileUpload("floor_plan.pdf", "(//input[@type='file'])[2]");
