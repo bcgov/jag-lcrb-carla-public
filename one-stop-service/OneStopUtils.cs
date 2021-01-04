@@ -32,8 +32,6 @@ namespace Gov.Jag.Lcrb.OneStopService
         public const string USER_ROLE = "01";
         public const string BUSINESS_PROGRAM_IDENTIFIER = "BB";
         public const string PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE = "150";
-        public const string PROGRAM_TYPE_CODE_CANNABIS_MARKETING = "151";
-        public const string PROGRAM_TYPE_CODE_CANNABIS_RURAL_RETAIL_STORE = "152";
         public const string PROGRAM_ACCOUNT_TYPE_CODE = "01";
         public const string PROGRAM_ACCOUNT_STATUS_CODE_ACTIVE = "01";
         public const string PROGRAM_ACCOUNT_STATUS_CODE_CLOSED = "02";
@@ -523,8 +521,6 @@ namespace Gov.Jag.Lcrb.OneStopService
 
             hangfireContext.WriteLine("End of check for new OneStop queue items");
         }
-
-
 
 
         public static IOneStopRestClient SetupOneStopClient(IConfiguration Configuration, ILogger logger)

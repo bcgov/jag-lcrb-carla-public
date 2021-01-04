@@ -396,6 +396,9 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
 
         private string programAccountStatusCodeField;
 
+
+        private string programAccountReasonCodeField;
+
         private System.DateTime effectiveDateField;
 
         /// <remarks/>
@@ -408,6 +411,19 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
             set
             {
                 this.programAccountStatusCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string programAccountReasonCode
+        {
+            get
+            {
+                return this.programAccountReasonCodeField;
+            }
+            set
+            {
+                this.programAccountReasonCodeField = value;
             }
         }
 
