@@ -66,15 +66,15 @@ namespace bdd_tests
             FileUpload("signage.pdf", "(//input[@type='file'])[2]");
 
             // select owner business checkbox
-            NgWebElement uiIsOwnerBusiness = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1[formcontrolname='isOwnerBusiness']"));
+            NgWebElement uiIsOwnerBusiness = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
             uiIsOwnerBusiness.Click();
 
             // select has valid interest checkbox
-            NgWebElement uiHasValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-2[formcontrolname='hasValidInterest']"));
+            NgWebElement uiHasValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='hasValidInterest']"));
             uiHasValidInterest.Click();
 
             // select will have valid interest checkbox
-            NgWebElement uiWillhaveValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-3[formcontrolname='willhaveValidInterest']"));
+            NgWebElement uiWillhaveValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willhaveValidInterest']"));
             uiWillhaveValidInterest.Click();
 
             // upload the valid interest document
