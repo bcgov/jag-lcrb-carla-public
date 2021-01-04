@@ -23,7 +23,7 @@ namespace bdd_tests
         [Given(@"I click on the Swagger link for OneStop")]
         public void ClickOnSwaggerLink()
         {
-            ngDriver.Navigate().GoToUrl($"https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger");
+            ngDriver.Navigate().GoToUrl($"https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html");
         }
 
 
