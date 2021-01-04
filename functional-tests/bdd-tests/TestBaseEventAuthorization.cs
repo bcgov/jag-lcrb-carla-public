@@ -231,6 +231,10 @@ namespace bdd_tests
                 JavaScriptClick(uiLiquorCloseTime);
             }
 
+            // click on the terms and conditions checkbox
+            NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiAgreement.Click();
+
             if ((eventType == "for a draft") || (eventType == "being validated"))
             {
                 // click on the Save For Later button
