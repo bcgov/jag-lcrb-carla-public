@@ -72,7 +72,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                     {
                         AdoxioDatesent = DateTime.Now,
                         AdoxioPayload = payload,
-                        AdoxioErrordescription = response
+                        AdoxioMessagestatus = response
                     };
                 try
                 {

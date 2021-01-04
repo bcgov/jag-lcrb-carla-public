@@ -24,6 +24,19 @@ namespace one_stop_service.Controllers
 
         }
 
+        /// <summary>
+        /// Check the queue for items to process.
+        /// </summary>
+        /// <param name="licenceGuid"></param>
+        /// <returns></returns>
+        [HttpGet("CheckQueue")]
+        public IActionResult CheckQueue()
+        {
+            _logger.Information($"Reached CheckQueue.");
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).CheckForNewLicences(null));
+            return Ok();
+        }
+
         [HttpGet("SendChangeAddress/{licenceGuid}")]
         public IActionResult SendChangeAddressMessage(string licenceGuid)
         {
