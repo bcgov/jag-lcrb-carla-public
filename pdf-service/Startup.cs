@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -18,6 +17,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Wkhtmltopdf.NetCore;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 using System;
+using HealthChecks.UI.Client;
 
 namespace Gov.Jag.Lcrb.PdfService
 {
