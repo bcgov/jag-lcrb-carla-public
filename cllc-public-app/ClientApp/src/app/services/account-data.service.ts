@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { Account } from '@models/account.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProfileValidation } from '@models/profile-validation.model';
@@ -12,6 +11,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { SetCurrentAccountAction } from '@app/app-state/actions/current-account.action';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
+import { FileSystemItem } from '@models/file-system-item.model';
 
 @Injectable()
 export class AccountDataService extends DataService {
@@ -25,22 +25,22 @@ export class AccountDataService extends DataService {
     super();
   }
 
-  public getAccount(accountId: string): Observable<Account> {
+  getAccount(accountId: string): Observable<Account> {
     return this.http.get<Account>(this.apiPath + accountId, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  public getAutocomplete(search: string): Observable<any[]> {
+  getAutocomplete(search: string): Observable<any[]> {
     return this.http.get<any[]>(this.apiPath + `autocomplete?name=${search}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  public getCurrentAccount() {
+  getCurrentAccount() {
     return this.http.get<Account>(this.apiPath + 'current', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  public loadCurrentAccountToStore(id: string) {
+  loadCurrentAccountToStore(id: string) {
     return forkJoin(this.getAccount(id),
       this.tiedHouseService.getTiedHouse(id),
       this.legalEntityDataService.getBusinessProfileSummary())
@@ -53,34 +53,54 @@ export class AccountDataService extends DataService {
       }));
   }
 
-  public getBusinessProfile(accountId: string) {
+  getBusinessProfile(accountId: string) {
     return this.http.get<ProfileValidation[]>(`${this.apiPath}business-profile/${accountId}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  public getBCeID() {
+  getBCeID() {
     return this.http.get(this.apiPath + 'bceid', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  public updateAccount(accountModel: Account) {
+  updateAccount(accountModel: Account) {
     return this.http.put(this.apiPath + accountModel.id, accountModel, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  public createTiedHouseConnection(tiedHouse: TiedHouseConnection, accountId: string) {
+  createTiedHouseConnection(tiedHouse: TiedHouseConnection, accountId: string) {
     return this.http.post(this.apiPath + accountId + '/tiedhouseconnection', tiedHouse, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  public deleteAccount(accountModel: Account) {
+  deleteAccount(accountModel: Account) {
     return this.http.post(this.apiPath + accountModel.id + '/delete', accountModel, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  public deleteCurrentAccount() {
+  deleteCurrentAccount() {
     return this.http.post(this.apiPath + 'delete/current', {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * Get a file list of documents attached to the account by ID and document type
+   * @param accountId The account ID to query for documents
+   * @param documentType The document type (e.g. "Notice" for inspection notices under the account)
+   */
+  getFilesAttachedToAccount(accountId: string, documentType: string): Observable<FileSystemItem[]> {
+    const headers = new HttpHeaders({});
+    const url = `api/file/${accountId}/attachments/account/${documentType}`;
+    return this.http.get<FileSystemItem[]>(url, { headers: headers })
+      .pipe(map(files => this.processFiles(accountId, documentType, files)));
+  }
+
+  private processFiles(accountId: string, documentType: string, files: FileSystemItem[]): FileSystemItem[] {
+    for (const file of files) {
+      file.name = `${documentType}__${file.name}`;
+      file.downloadUrl = `api/file/${accountId}/download-file/account/${file.name}`;
+      file.downloadUrl += `?serverRelativeUrl=${encodeURIComponent(file.serverrelativeurl)}&documentType=${documentType}`;
+    }
+    return files;
+  }
 }
