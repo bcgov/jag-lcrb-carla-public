@@ -32,8 +32,8 @@ Scenario: Catering Release (Private Corporation)
     And I click on the Licences tab
     And I request a store relocation for Catering
     And I click on the Licences tab
-    # And I request an event authorization that doesn't require approval
-    # And the event history is updated correctly for an application without approval
+    And I request an event authorization that doesn't require approval
+    And the event history is updated correctly for an application without approval
     # And I click on the Licences tab
     And I request a third party operator
     # And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
