@@ -3,14 +3,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.NodeServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Stubble.Core.Builders;
 using Wkhtmltopdf.NetCore;
 using Wkhtmltopdf.NetCore.Options;
 
-namespace PDF.Controllers
+namespace Gov.Jag.Lcrb.PdfService.Controllers
 {
     public class JSONResponse
     {
