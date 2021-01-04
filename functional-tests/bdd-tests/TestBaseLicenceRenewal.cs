@@ -497,7 +497,7 @@ namespace bdd_tests
             uiSignatureAgreement.Click();
 
             // click on the Submit & Pay button
-            NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+            NgWebElement uiSubmitAndPay = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
             uiSubmitAndPay.Click();
 
             MakePayment();
