@@ -24,9 +24,9 @@ Scenario: OneStop Send Change of Address
     And I click on the Close button
     And I click on the Get button for SendChangeAddress
     And I click on the Try it out button
-    And I enter the licence Guid
-    And I click on the execute button
-    Then correct 200 response is displayed
+    And I enter the licence GUID 31b08509-909b-ea11-b818-00505683fbf4
+    And I click on the Execute button
+    Then the correct 200 response is displayed
 
 @onestopswagger
 Scenario: OneStop Send Change of Name
@@ -35,9 +35,9 @@ Scenario: OneStop Send Change of Name
     And I click on the Close button
     And I click on the Get button for SendChangeName
     And I click on the Try it out button
-    And I enter the licence Guid
-    And I click on the execute button
-    Then correct 200 response is displayed
+    And I enter the licence GUID 31b08509-909b-ea11-b818-00505683fbf4
+    And I click on the Execute button
+    Then the correct 200 response is displayed
 
 @onestopswagger
 Scenario: OneStop Send Change of Status
@@ -46,9 +46,9 @@ Scenario: OneStop Send Change of Status
     And I click on the Close button
     And I click on the Get button for SendChangeStatus
     And I click on the Try it out button
-    And I enter the licence Guid
-    And I click on the execute button
-    Then correct 200 response is displayed
+    And I enter the licence GUID 31b08509-909b-ea11-b818-00505683fbf4
+    And I click on the Execute button
+    Then the correct 200 response is displayed
 
 @onestopswagger
 Scenario: OneStop Send Licence Creation Message
@@ -57,9 +57,9 @@ Scenario: OneStop Send Licence Creation Message
     And I click on the Close button
     And I click on the Get button for SendLicenceCreationMessage
     And I click on the Try it out button
-    And I enter the licence Guid
-    And I click on the execute button
-    Then correct 200 response is displayed
+    And I enter the licence GUID 31b08509-909b-ea11-b818-00505683fbf4
+    And I click on the Execute button
+    Then the correct 200 response is displayed
 
 @onestopswagger
 Scenario: OneStop Send Program Account Details Broadcast
@@ -68,9 +68,9 @@ Scenario: OneStop Send Program Account Details Broadcast
     And I click on the Close button
     And I click on the Get button for SendProgramAccountDetailsBroadcastMessage
     And I click on the Try it out button
-    And I enter the licence Guid
-    And I click on the execute button
-    Then correct 200 response is displayed   
+    And I enter the licence GUID 31b08509-909b-ea11-b818-00505683fbf4
+    And I click on the Execute button
+    Then the correct 200 response is displayed   
    
 @onestopswagger
 Scenario: OneStop LDB Export
@@ -79,9 +79,9 @@ Scenario: OneStop LDB Export
     And I click on the Close button
     And I click on the Get button for LdbExport
     And I click on the Try it out button
-    And I enter the licence Guid
-    And I click on the execute button
-    Then correct 200 response is displayed  
+    And I enter the licence GUID 31b08509-909b-ea11-b818-00505683fbf4
+    And I click on the Execute button
+    Then the correct 200 response is displayed         
 */
 
 namespace bdd_tests
