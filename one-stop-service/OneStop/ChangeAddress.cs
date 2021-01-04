@@ -36,7 +36,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             sbnChangeAddress.header = GetHeader(licence);
             sbnChangeAddress.body = GetBody(licence);
 
-            var serializer = new XmlSerializer(typeof(SBNChangeName));
+            var serializer = new XmlSerializer(typeof(SBNChangeAddress));
             using (StringWriter textWriter = new StringWriter())
             {
                 serializer.Serialize(textWriter, sbnChangeAddress);
