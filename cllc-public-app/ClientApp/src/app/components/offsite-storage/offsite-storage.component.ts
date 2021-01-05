@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { LicenseDataService } from '@services/license-data.service';
 import { FormBase } from '@shared/form-base';
 import { License } from '@models/license.model';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { License } from '@models/license.model';
   styleUrls: ['./offsite-storage.component.scss'],
 })
 export class OffsiteStorageComponent extends FormBase implements OnInit {
+  faTrash = faTrash;
   isEditMode = true;
   isReadOnly = false;
   showValidationMessages = false;

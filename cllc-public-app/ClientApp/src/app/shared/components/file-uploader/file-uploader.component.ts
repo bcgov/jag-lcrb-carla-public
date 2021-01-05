@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { FileSystemItem } from '@models/file-system-item.model';
 import { Subscription } from 'rxjs';
@@ -17,7 +17,7 @@ export interface DropdownOption {
   templateUrl: './file-uploader.component.html',
   styleUrls: ['./file-uploader.component.scss']
 })
-export class FileUploaderComponent implements OnInit {
+export class FileUploaderComponent implements OnInit, OnDestroy {
   @Input() uploadUrl: string;
   @Input() fileTypes = '';
   @Input() documentType: string;
@@ -39,6 +39,7 @@ export class FileUploaderComponent implements OnInit {
   public files: FileSystemItem[] = [];
   dataLoaded: boolean;
   fileReqOngoing: boolean;
+  subscriptionList: Subscription[] = [];
 
   // TODO: move http call to a service
   constructor(
@@ -151,13 +152,14 @@ export class FileUploaderComponent implements OnInit {
     formData.append('documentType', this.documentType);
     const headers: HttpHeaders = new HttpHeaders();
     this.fileReqOngoing = true;
-    this.busy = this.http.post(this.attachmentURL, formData, { headers: headers }).subscribe(result => {
+    let sub = this.http.post(this.attachmentURL, formData, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
     },
       err => {
         this.snackBar.open('Failed to upload file', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         this.fileReqOngoing = false;
       });
+    // this.busy = sub;
   }
 
   getUploadedFileData() {
@@ -166,7 +168,7 @@ export class FileUploaderComponent implements OnInit {
       // 'Content-Type': 'application/json'
     });
     const getFileURL = this.attachmentURL + '/' + this.documentType;
-    this.busy = this.http.get<FileSystemItem[]>(getFileURL, { headers: headers })
+    let sub = this.http.get<FileSystemItem[]>(getFileURL, { headers: headers })
       .subscribe((data) => {
         data.forEach(file => {
           if (this.useDocumentTypeForName) {
@@ -181,6 +183,8 @@ export class FileUploaderComponent implements OnInit {
             return -1;
           }
         });
+        this.subscriptionList.push(sub);
+        // this.busy = sub;
 
         // convert bytes to KB
         data.forEach((entry) => {
@@ -197,6 +201,7 @@ export class FileUploaderComponent implements OnInit {
           this.snackBar.open('Failed to get files', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
           this.fileReqOngoing = false;
         });
+    this.subscriptionList.push(sub);
   }
 
   deleteFile(relativeUrl: string) {
@@ -205,13 +210,16 @@ export class FileUploaderComponent implements OnInit {
       'Content-Type': 'application/json'
     });
     const queryParams = `?serverRelativeUrl=${encodeURIComponent(relativeUrl)}&documentType=${this.documentType}`;
-    this.busy = this.http.delete(this.attachmentURL + queryParams, { headers: headers }).subscribe(result => {
+    let sub = this.http.delete(this.attachmentURL + queryParams, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
     },
       err => {
         this.snackBar.open('Failed to delete file', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         this.fileReqOngoing = false;
       });
+
+    this.subscriptionList.push(sub);
+    // this.busy = sub;
   }
 
   disableFileUpload(): boolean {
@@ -236,5 +244,9 @@ export class FileUploaderComponent implements OnInit {
         browserSingle.click();
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptionList.forEach(sub => sub.unsubscribe());
   }
 }

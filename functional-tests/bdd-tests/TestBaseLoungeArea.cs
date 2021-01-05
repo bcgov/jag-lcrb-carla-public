@@ -34,7 +34,7 @@ namespace bdd_tests
             uiLoungeAreaEndorsement.Click();
 
             // click on the Continue to Application button
-            NgWebElement uiContinueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp.save-cont.btn-primary"));
+            NgWebElement uiContinueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
             uiContinueToApplicationButton.Click();
 
             /* 
@@ -42,7 +42,7 @@ namespace bdd_tests
             */
 
             // select the zoning checkbox
-            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
+            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning']"));
             uiZoningCheckbox.Click();
 
             // upload the floor plan

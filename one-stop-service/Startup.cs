@@ -28,11 +28,14 @@ using System.Net.Http;
 using System.Reflection;
 using System.ServiceModel;
 using System.Text;
+using System.Text.Json.Serialization;
+using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
+using Unchase.Swashbuckle.AspNetCore.Extensions.Filters;
 
 namespace Gov.Jag.Lcrb.OneStopService
 {
 
-   
+
     public class Startup
     {
         private readonly ILoggerFactory _loggerFactory;
@@ -62,7 +65,6 @@ namespace Gov.Jag.Lcrb.OneStopService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddLogging(configure => configure.AddSerilog(dispose: true));
 
             // Adjust Kestrel options to allow sync IO
@@ -81,7 +83,7 @@ namespace Gov.Jag.Lcrb.OneStopService
             services.AddSingleton(_loggerFactory.CreateLogger("OneStopUtils"));
             services.AddSingleton(Log.Logger);
 
-            services.AddMvc(config =>
+            services.AddControllers(config =>
             {
                 config.EnableEndpointRouting = false;
                 if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
@@ -93,13 +95,18 @@ namespace Gov.Jag.Lcrb.OneStopService
                 }
 
             });
-
+            
+            // Note that we do not introduce a default JsonOptions here because we want enums to be presented as numeric values
+            // in the API for ease of testing.
+        
             // Other ConfigureServices() code...
             services.AddSwaggerGen(c =>
             {
                 c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG OneStop Service", Version = "v1" });
                 c.ParameterFilter<AutoRestParameterFilter>();
+                // This is only required because Swashbuckle does not present enums correctly
+                c.AddEnumsWithValuesFixFilters(); 
                 string baseUri = Configuration["BASE_URI"];
                 if (baseUri != null)
                 {
@@ -121,7 +128,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                         }
                     });
                 }
-                
+
                 c.OperationFilter<AuthenticationRequirementsOperationFilter>();
             });
 
@@ -235,8 +242,6 @@ namespace Gov.Jag.Lcrb.OneStopService
 
 
 
-            // , serializer: SoapSerializer.XmlSerializer, caseInsensitivePath: true
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -300,8 +305,9 @@ namespace Gov.Jag.Lcrb.OneStopService
             app.UseMvc();
 
             app.UseRouting();
-            app.UseEndpoints(endpoints => {
-                endpoints.UseSoapEndpoint<IReceiveFromHubService>("/receiveFromHub", new BasicHttpBinding());
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.UseSoapEndpoint<IReceiveFromHubService>("/receiveFromHub", new BasicHttpBinding(), SoapSerializer.XmlSerializer);
             });
 
 
@@ -360,6 +366,5 @@ namespace Gov.Jag.Lcrb.OneStopService
                 });
             }
         }
-
     }
 }

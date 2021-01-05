@@ -8,6 +8,7 @@ import { ApplicationComponent } from '@components/applications/application/appli
 import { DynamicApplicationComponent } from '@components/applications/dynamic-application/dynamic-application.component';
 import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { Application } from '@models/application.model';
   styleUrls: ['./multi-stage-application-flow.component.scss']
 })
 export class MultiStageApplicationFlowComponent implements OnInit {
+  faCheck = faCheck;
   securityScreeningEnabled: boolean;
   applicationId: string;
   isFree: boolean = false;

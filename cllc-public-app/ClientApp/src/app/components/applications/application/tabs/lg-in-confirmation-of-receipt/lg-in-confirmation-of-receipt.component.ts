@@ -24,8 +24,9 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
   approvingApplication: boolean;
   rejectingApp: boolean;
   optingOutOfComment: boolean;
-  uploadedResolutionDocuments: number = 0; 
-  uploadedStampedFloorPlanDocuments: number = 0; 
+  uploadedResolutionDocuments: number = 0;
+  uploadedStampedFloorPlanDocuments: number = 0;
+  showValidationMessages: boolean;
 
   constructor(private applicationDataService: ApplicationDataService,
     private snackBar: MatSnackBar,
@@ -51,10 +52,22 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     }
   }
 
-  isValid() {
+  isValid(resolutionRequired: boolean = false) {
+    this.showValidationMessages = false;
     this.markControlsAsTouched(this.form);
     this.validationMessages = this.listControlsWithErrors(this.form);
-    return this.form.valid;
+    let valid = this.form.valid;
+
+    if (resolutionRequired && ((this.uploadedResolutionDocuments || 0) < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one site plan document is required.');
+    }
+
+    if(!valid){
+      this.showValidationMessages = true;
+    }
+
+    return valid;
   }
 
   OptOutOfComment() {
@@ -91,7 +104,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
 
   RejectApplication() {
-    if (!this.isValid()) {
+    if (!this.isValid(true)) {
       return;
     }
 

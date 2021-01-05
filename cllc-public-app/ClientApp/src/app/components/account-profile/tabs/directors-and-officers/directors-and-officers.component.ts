@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { LegalEntity } from '@models/legal-entity.model';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-directors-and-officers',
@@ -18,7 +19,7 @@ import { LegalEntity } from '@models/legal-entity.model';
   styleUrls: ['./directors-and-officers.component.scss']
 })
 export class DirectorsAndOfficersComponent implements OnInit {
-
+  faPlus = faPlus;
   @Input() accountId: string;
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;

@@ -27,6 +27,8 @@ import { ApplicationCancellationDialogComponent } from '@components/dashboard/ap
 import { AccountCompletenessComponent } from '@components/account-completeness/account-completeness.component'
 import { DynamicsFormDataService } from '@services/dynamics-form-data.service';
 import { DynamicsForm } from '@models/dynamics-form.model';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { faExclamationCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 const ServiceHours = [
@@ -50,7 +52,9 @@ const ServiceHours = [
 })
 
 export class DynamicApplicationComponent extends FormBase implements OnInit {
-
+  faSave = faSave;
+  faTrashAlt = faTrashAlt;
+  faExclamationCircle = faExclamationCircle;
   establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
   @Input() skipPayment: boolean = false;

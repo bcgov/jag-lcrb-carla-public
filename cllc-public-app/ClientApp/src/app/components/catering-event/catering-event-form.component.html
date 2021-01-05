@@ -24,8 +24,8 @@
           errorMessage="Please enter the contact name" [isFullWidth]="true">
           <input class="form-control" type="text" formControlName="contactName">
         </app-field>
-        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-        matTooltip="The name of the contact person for the event." ></i>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top:30px;" 
+        matTooltip="The name of the contact person for the event." ></fa-icon>
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true"
@@ -70,8 +70,8 @@
           </select>
 
         </app-field>
-        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-        matTooltip="Select the type of event that you are catering." ></i>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top:30px;" 
+        matTooltip="Select the type of event that you are catering." ></fa-icon>
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Description" [required]="true"
@@ -79,8 +79,8 @@
           errorMessage="Please enter a description of the event" [isFullWidth]="true">
           <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
         </app-field>
-        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-        matTooltip="Briefly describe the event." ></i>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top:30px;" 
+        matTooltip="Briefly describe the event." ></fa-icon>
 
       </div>
       <div class="row">
@@ -156,8 +156,8 @@
           errorMessage="Please enter the name and a description of the venue" [isFullWidth]="true">
           <textarea class="form-control" formControlName="venueDescription"></textarea>
         </app-field>
-        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-        matTooltip="Provide the name of and briefly describe the venue." ></i>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top:30px;" 
+        matTooltip="Provide the name of and briefly describe the venue." ></fa-icon>
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Location" [required]="true"
@@ -167,8 +167,8 @@
             <option *ngFor="let item of specificLocation" [ngValue]="item.value">{{item.label}}</option>
           </select>
         </app-field>
-        <i style="color: #38598a; margin-left: 5px; margin-top:30px;" class="fas fa-question-circle"
-        matTooltip="Select whether the event is being held indoors, outdoors, or both." ></i>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top:30px;" 
+        matTooltip="Select whether the event is being held indoors, outdoors, or both." ></fa-icon>
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Additional Information"
@@ -282,13 +282,13 @@
 
     <div class="p-4 button-row" *ngIf="!isReadOnly">
       <button class="btn btn-secondary" (click)="save(false);">
-        <span><i class="fa fa-save"></i>SAVE FOR LATER</span>
+        <span><fa-icon [icon]="faSave"></fa-icon>SAVE FOR LATER</span>
       </button>
       <button class="btn btn-primary" (click)="save(true)" [disabled]="isFormValid()">
         SUBMIT
       </button>
       <button class="btn btn-link btn-cancel" (click)="cancel();">
-        <i class="fa fa-trash"></i>CANCEL EVENT
+        <fa-icon [icon]="faTrash"></fa-icon>CANCEL EVENT
       </button>
     </div>
   </form>
