@@ -244,35 +244,35 @@ namespace bdd_tests
             {
                 IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].value='31b08509-909b-ea11-b818-00505683fbf4';", uiEnterGUID);
+                executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
 
             if (scenario == "SendChangeName")
             {
                 IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].value='31b08509-909b-ea11-b818-00505683fbf4';", uiEnterGUID);
+                executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
 
             if (scenario == "SendChangeStatus")
             {
                 IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr[1]/td[2]/input"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].value='31b08509-909b-ea11-b818-00505683fbf4';", uiEnterGUID);
+                executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
 
             if (scenario == "SendLicenceCreationMessage")
             {
                 IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].value='31b08509-909b-ea11-b818-00505683fbf4';", uiEnterGUID);
+                executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
 
             if (scenario == "SendProgramAccountDetailsBroadcastMessage")
             {
                 IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].value='31b08509-909b-ea11-b818-00505683fbf4';", uiEnterGUID);
+                executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
 
             ngDriver.IgnoreSynchronization = false;
