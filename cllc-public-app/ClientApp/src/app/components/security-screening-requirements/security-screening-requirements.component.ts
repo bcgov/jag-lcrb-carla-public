@@ -9,6 +9,7 @@ import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationType } from '@models/application-type.model';
 import { PaymentDataService } from '@services/payment-data.service';
 import { Subscription, forkJoin } from 'rxjs';
+import { faCheck, faCopy, faExclamation } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-security-screening-requirements',
@@ -16,6 +17,9 @@ import { Subscription, forkJoin } from 'rxjs';
   styleUrls: ['./security-screening-requirements.component.scss']
 })
 export class SecurityScreeningRequirementsComponent implements OnInit {
+  faCopy = faCopy;
+  faExclamation = faExclamation;
+  faCheck = faCheck;
   data: SecurityScreeningSummary;
   busy: Subscription;
   applicationId: string;

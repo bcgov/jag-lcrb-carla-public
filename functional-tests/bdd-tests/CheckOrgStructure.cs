@@ -18,7 +18,7 @@ Feature: CheckOrgStructure
     I want to confirm that the organization structure page displays
 
 @validation @checkorgstructure
-Scenario: Check Organization Structure
+Scenario: Check Organization Structure (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Complete Organization Information button
     And the organization structure page is displayed

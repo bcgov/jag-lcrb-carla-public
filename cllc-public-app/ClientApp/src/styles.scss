@@ -1,17 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Controls Survey styles */
-
+@import '~material-design-icons/iconfont/material-icons.css';
 @import "./style/custom-theme.scss";
 
 @include angular-material-typography($custom-typography);
 body {
-    
     background: #f2f2f2;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    
+
     font-style: MyriadWebPro, Calibri, Arial, "sans serif";
     font-feature-settings: "kern" 1;
 }
@@ -41,7 +40,7 @@ body {
 .btn.btn-missing {
     background-color: #fff;
     border: #ccc 1px solid;
-    color: #a30014;;
+    color: #a30014;
     min-width: 120px;
     font-size: 16px;
     border-radius: 3px;
@@ -59,7 +58,7 @@ body {
 }
 
 .btn-secondary:hover {
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
 }
 
 .btn-secondary:focus {
@@ -68,7 +67,7 @@ body {
 }
 
 .btn-missing:hover {
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
 }
 
 .btn-missing:focus {
@@ -93,7 +92,7 @@ body {
 }
 
 .ctx-home {
-    background: #f2f2f2
+    background: #f2f2f2;
 }
 
 .panel-footer {
@@ -166,13 +165,13 @@ select.form-control:not([size]):not([multiple]) {
     line-height: 55px;
     width: 48px;
     border-radius: 48px;
-    background-color: #7596C8;
+    background-color: #7596c8;
     text-align: center;
     display: inline-block;
 }
 
 .red-snackbar {
-    background: #F44336;
+    background: #f44336;
 }
 
 .green-snackbar {
@@ -184,23 +183,19 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .plain-header {
-    
     color: #000000;
-    font-weight: 600;   
+    font-weight: 600;
     font-style: normal;
     line-height: 16px;
-    font-feature-settings: "kern" 1; 
-    
+    font-feature-settings: "kern" 1;
 }
 
 h4.plain-header {
-    
     text-transform: uppercase;
-    
 }
 
 .blue-header {
-    background-color: #38598A;
+    background-color: #38598a;
     color: #fff;
     padding: 10px 7px 7px 15px;
     font-size: 16px;
@@ -210,8 +205,8 @@ h4.plain-header {
 }
 
 .grey-header {
-    background-color: #F1F4FA;
-    color: #38598A;
+    background-color: #f1f4fa;
+    color: #38598a;
     padding: 7px 5px 5px 15px;
     font-size: 14px;
     font-weight: semi-bold;
@@ -228,16 +223,16 @@ hr {
 }
 
 .error-states {
-    color: #d8292f
+    color: #d8292f;
 }
 
 .error-summary {
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
     border: solid 1px transparent;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
-    color: #d8292f
+    color: #d8292f;
 }
 
 .form-wrapper {
@@ -253,7 +248,6 @@ hr {
 }
 section.padded,
 .padded-section {
-
 }
 
 .space-between {
@@ -262,99 +256,111 @@ section.padded,
 }
 
 .error {
-    background-color: #F2DEDE;
+    background-color: #f2dede;
     border-radius: 5px;
-    border: 2px solid #EBCCD1;
-    color: #A12622;
+    border: 2px solid #ebccd1;
+    color: #a12622;
     padding-top: 15px;
     padding-left: 15px;
     margin-bottom: 20px;
-  }
-
-::ng-deep .multiline-tooltip {
-  white-space: pre-line;
 }
 
-.row:before, .row:after {display: none !important;}
+::ng-deep .multiline-tooltip {
+    white-space: pre-line;
+}
+
+.row:before,
+.row:after {
+    display: none !important;
+}
 
 .mat-expansion-panel {
- background-color:#E1E8F2;
- 
+    background-color: #e1e8f2;
 }
 
 .mat-expansion-panel-header-title {
     color: black;
-    font-weight:400;
+    font-weight: 400;
     font-size: 12px;
 }
 .mat-expansion-panel-header-description {
     color: black;
-    font-weight:400;
+    font-weight: 400;
     border: 1px sold black;
-    border-radius:5px;
-    font-size:12px;
+    border-radius: 5px;
+    font-size: 12px;
 }
 
 table.greyGridTable {
     border: 1px solid #757575;
     width: 100%;
     border-spacing: 0px;
-    
+
     text-align: center;
     border-collapse: collapse;
-  }
-  table.greyGridTable td, table.greyGridTable th {
+}
+table.greyGridTable td,
+table.greyGridTable th {
     border: 1px solid black;
     padding: 3px 4px;
-  }
-  table.greyGridTable tbody td {
+}
+table.greyGridTable tbody td {
     font-size: 13px;
     font-weight: bold;
-  }
-  table.greyGridTable tr:nth-child(even) {
+}
+table.greyGridTable tr:nth-child(even) {
     background: #eee;
     height: 75px;
-  }
-  table.greyGridTable tr:nth-child(odd) {  
+}
+table.greyGridTable tr:nth-child(odd) {
     height: 75px;
-  }
-  table.greyGridTable thead {
-    background: #FFFFFF;
+}
+table.greyGridTable thead {
+    background: #ffffff;
     border-bottom: 1px solid #757575;
-  }
-  table.greyGridTable thead th {
+}
+table.greyGridTable thead th {
     font-size: 15px;
     font-weight: 800;
     color: #333333;
     text-align: center;
     border-left: 1px solid #757575;
-  }
-  table.greyGridTable thead th:first-child {
+}
+table.greyGridTable thead th:first-child {
     border-left: none;
-  }
-  
-  table.greyGridTable tfoot td {
+}
+
+table.greyGridTable tfoot td {
     font-size: 14px;
-  }
+}
 
-  .missing {
+.missing {
     color: #a30014;
-  }
+}
 
-  .content{
+.content {
     border: 1px solid #aaa;
     margin-top: -10px;
     padding: 10px;
     border-bottom: 0px;
     border-top: 0px;
 }
-.content-bottom{
+.content-bottom {
     border: 1px solid #aaa;
     margin-top: -10px;
-    padding: 10px;   
-    border-top:0px;
+    padding: 10px;
+    border-top: 0px;
 }
-  
-button[disabled]{
+
+button[disabled] {
     cursor: not-allowed !important;
-  }
+}
+
+button:focus {
+    outline: none !important;
+}
+
+.mat-checkbox-label {
+    font-size: 14px;
+    font-weight: normal;
+}

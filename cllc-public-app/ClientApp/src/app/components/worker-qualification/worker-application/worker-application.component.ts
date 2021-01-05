@@ -16,7 +16,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { COUNTRIES } from './country-list';
 import { FormBase } from '@shared/form-base';
 import { Worker } from '@models/worker.model';
-
+import { faCopy, faSave } from '@fortawesome/free-regular-svg-icons';
+import { faChevronLeft, faChevronRight, faExclamationTriangle, faQuestion, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -56,6 +57,13 @@ export const MY_FORMATS = {
   ],
 })
 export class WorkerApplicationComponent extends FormBase implements OnInit {
+  faSave = faSave;
+  faTrash = faTrash;
+  faCopy = faCopy;
+  faQuestion = faQuestion;
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
+  faExclamationTriangle = faExclamationTriangle;
   currentUser: User;
   dataLoaded = false;
   busy: Subscription;

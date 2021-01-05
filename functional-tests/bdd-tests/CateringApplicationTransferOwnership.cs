@@ -19,7 +19,7 @@ using Xunit;
     And submit a transfer of ownership request for different business types
 
  @catering @partnership @cateringeventtransfer
- Scenario: Partnership Catering Transfer Ownership Request
+ Scenario: Catering Transfer Ownership Request (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -36,7 +36,7 @@ using Xunit;
     Then I see the login page
 
  @catering @privatecorporation @cateringeventtransfer
- Scenario: Private Corporation Catering Transfer Ownership Request
+ Scenario: Catering Transfer Ownership Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -53,7 +53,7 @@ using Xunit;
     Then I see the login page
 
  @catering @publiccorporation @cateringeventtransfer
- Scenario: Public Corporation Catering Transfer Ownership Request
+ Scenario: Catering Transfer Ownership Request (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -70,7 +70,7 @@ using Xunit;
     Then I see the login page
 
  @catering @society @cateringeventtransfer
- Scenario: Society Catering Transfer Ownership Request
+ Scenario: Catering Transfer Ownership Request (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -87,7 +87,7 @@ using Xunit;
     Then I see the login page
 
   @catering @soleproprietorship @cateringeventtransfer
-  Scenario: Sole Proprietorship Catering Transfer Ownership Request
+  Scenario: Catering Transfer Ownership Request (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship

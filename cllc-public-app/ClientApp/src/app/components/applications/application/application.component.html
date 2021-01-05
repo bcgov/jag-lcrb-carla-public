@@ -23,7 +23,7 @@
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
             <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
-            <p><i class="fa fa-save" style="margin-right: 10px;"></i>If you leave this page, the information you input
+            <p><fa-icon [icon]="faSave" style="margin-right: 10px;"></fa-icon>If you leave this page, the information you input
               will be saved. You can continue later from the dashboard.</p>
           </div>
         </section>
@@ -69,7 +69,7 @@
 
 
         <!-- LE Document Upload Section -->
-        <h3 class="blue-header" *ngIf="application?.applicationType.name == ApplicationTypeNames.FP">Legal Entity Document Requirements</h3>
+        <h3 class="blue-header" *ngIf="application?.applicationType.name == ApplicationTypeNames.FP && application?.applicationType?.hasLESection">Legal Entity Document Requirements</h3>
         <section *ngIf="application?.applicationType.name == ApplicationTypeNames.FP" class="content-bottom">
 
           <!-- if Private Corporation -->
@@ -77,7 +77,7 @@
             <h4>Central Securities Register (shareholder register)</h4>
             <p>Provide a list of all shareholders, class of shares, number of voting and non-voting per shareholder, and date
               shares issued/transferred/cancelled.</p>
-            <p><i class="fa fa-id-card mr-1"></i>All shareholders (individuals) holding 10% or greater voting shares in the
+            <p><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All shareholders (individuals) holding 10% or greater voting shares in the
               applicant corporation must submit completed <span *ngIf="this.isLiquor()">Personal History Summary</span><span
                 *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> forms below.</p>
             <app-file-uploader *ngIf="true || applicationId" documentType="CentralSecuritiesRegister"
@@ -150,7 +150,7 @@
           <section *ngIf="this.businessTypeIsCorporation() || this.businessTypeIsSociety()">
             <h4>Register of Directors and Officers</h4>
             <p>Provide a list of all current directors/officers by full legal name, position and date of appointment.</p>
-            <p><i class="fa fa-id-card mr-1"></i>All directors must submit a completed <span *ngIf="this.isLiquor()">Personal
+            <p><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All directors must submit a completed <span *ngIf="this.isLiquor()">Personal
                 History Summary</span><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> forms below.
             </p>
             <app-file-uploader *ngIf="true || applicationId" documentType="RegisterOfDirectorsAndOfficers"
@@ -162,7 +162,7 @@
 
           <!-- Sole Proprietor-->
           <section *ngIf="this.businessTypeIsSoleProp()">
-            <p><i class="fa fa-id-card mr-1"></i>Sole proprietors must complete a <span *ngIf="this.isLiquor()">Personal History
+            <p><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Sole proprietors must complete a <span *ngIf="this.isLiquor()">Personal History
                 Summary</span><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> forms below.</p>
           </section>
 
@@ -170,7 +170,7 @@
           <section *ngIf="this.businessTypeIsPartnership()">
             <h4>Partnership Agreement</h4>
             <p>Provide a copy of your partnership agreement.</p>
-            <p><i class="fa fa-id-card mr-1"></i>Each partner must submit a completed <span *ngIf="this.isLiquor()">Personal
+            <p><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Each partner must submit a completed <span *ngIf="this.isLiquor()">Personal
                 History Summary</span><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> form below.
             </p>
             <app-file-uploader *ngIf="true || applicationId" documentType="PartnershipAgreement"
@@ -378,7 +378,7 @@
                   <span>
 
                     <span>
-                      <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be
+                      <fa-icon [icon]="faExclamationCircle" style="margin-right: 10px;"></fa-icon>The property’s PID may be
                       found
                       on
                     </span> <br>
@@ -1861,15 +1861,13 @@
             <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
               errorMessage="Please affirm that all of the information provided for this application is true and complete."
               [showChevrons]="false">
-              <section style="display: flex">
-                <input type="checkbox" formControlName="signatureAgreement">
+              <mat-checkbox formControlName="signatureAgreement">
                 <span class="error-states">*</span>
                 <div style="padding-left: 10px;">
                   I understand and affirm that all of the information provided
-                  for this
-                  application is true and complete
+                  for this application is true and complete
                 </div>
-              </section>
+              </mat-checkbox>
             </app-field>
           </ng-container>
         </div>
@@ -1974,7 +1972,7 @@
               to ensure your successful submission.
             </section>
             <br>
-            <p><i class="fa fa-save" style="margin-right: 10px;"></i>If you leave this page, the information you input
+            <p><fa-icon [icon]="faSave" style="margin-right: 10px;"></fa-icon>If you leave this page, the information you input
               will be saved. You can continue later from the dashboard.</p>
           </div>
         </section>
@@ -1994,7 +1992,7 @@
               You may now submit your application.
             </section>
             <br>
-            <p><i class="fa fa-save" style="margin-right: 10px;"></i>If you leave this page, the information you input
+            <p><fa-icon [icon]="faSave" style="margin-right: 10px;"></fa-icon>If you leave this page, the information you input
               will be saved. You can continue later from the dashboard.</p>
           </div>
         </section>
@@ -2023,7 +2021,7 @@
             <button *ngIf="account?.businessType !== 'LocalGovernment '" class="btn btn-secondary" style="margin-right:10px;"
               (click)="saveForLater()" [disabled]="saveForLaterInProgress">
               <span>
-                <i class="fa fa-save"></i>
+                <fa-icon [icon]="faSave"></fa-icon>
                 SAVE FOR LATER
               </span>
               <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
@@ -2047,7 +2045,7 @@
                                     && !lGHasRejected()
                                     && application?.applicationStatus === 'Intake'"
           class=" btn btn-primary ng-test-submit-for-lg-review" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
-          <span><i class="fa fa-university mr-1"></i>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
+          <span><fa-icon [icon]="faUniversity" class="mr-1"></fa-icon>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
           <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
         </button>
 
@@ -2066,7 +2064,7 @@
           <button *ngIf="application?.applicationType?.requiresSecurityScreening" class="btn btn-primary"
             (click)="proceedToSecurityScreening()" [disabled]="proceedToSecurityScreeningInProgress">
             <span>
-              <i class="fa fa-id-card mr-1"></i>PROCEED TO SECURITY SCREENING
+              <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>PROCEED TO SECURITY SCREENING
             </span>
             <mat-progress-bar *ngIf="proceedToSecurityScreeningInProgress" mode="indeterminate"></mat-progress-bar>
           </button>
@@ -2074,7 +2072,7 @@
 
           <span style="float: right; color: #1a5a96; padding-top: 10px;">
             <span (click)="cancelApplication()">
-              <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+              <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
               <a href="javascript: void(0)" id="cancelApp">
                 CANCEL APPLICATION
               </a>
@@ -2088,21 +2086,21 @@
         <section appRemoveIfFeatureOn="LGApprovals" style="position: relative; margin-top: 20px;">
           <button class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
             <span>
-              <i class="fa fa-save"></i>
+              <fa-icon [icon]="faSave"></fa-icon>
               SAVE FOR LATER
             </span>
             <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
           </button>
           <button class="btn btn-primary" (click)="submit_application()">
             <span>
-              <i class="fa fa-credit-card" *ngIf="!skipPayment"></i>SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+              <fa-icon [icon]="faCreditCard" *ngIf="!skipPayment"></fa-icon>SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
             </span>
             <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
           </button>
 
           <span style="float: right; color: #1a5a96; padding-top: 10px;">
             <span (click)="cancelApplication()">
-              <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+              <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
               <a href="javascript: void(0)" id="cancelApp">
                 CANCEL <span *ngIf="!isRAS()">APPLICATION</span>
               </a>

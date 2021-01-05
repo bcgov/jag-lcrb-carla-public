@@ -75,7 +75,7 @@ export class LicencesComponent extends FormBase implements OnInit {
    *
    * */
   private displayApplications() {
-    this.busy =
+    let sub =
       forkJoin([this.applicationDataService.getAllCurrentApplications(),
       this.licenceDataService.getAllCurrentLicenses(),
       this.licenceDataService.getAllOperatedLicenses(),
@@ -104,6 +104,7 @@ export class LicencesComponent extends FormBase implements OnInit {
 
           this.dataLoaded = true;
         });
+        this.subscriptionList.push(sub);
   }
 
   hasPaidForRenewalApplication(licence: ApplicationLicenseSummary): boolean {

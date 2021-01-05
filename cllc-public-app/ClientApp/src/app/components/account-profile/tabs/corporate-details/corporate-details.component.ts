@@ -27,7 +27,7 @@ export class CorporateDetailsComponent extends FormBase implements OnInit, OnDes
   corporateDetailsForm: FormGroup;
   accountModel: Account;
   busy: Subscription;
-  subscriptions: Subscription[] = [];
+  subscriptionList: Subscription[] = [];
   savedFormData: any;
 
   constructor(private userDataService: UserDataService,
@@ -50,11 +50,11 @@ export class CorporateDetailsComponent extends FormBase implements OnInit, OnDes
         this.businessType = state.currentAccount.businessType;
         this.setFormData(state.currentAccount);
       });
-    this.subscriptions.push(sub);
+    this.subscriptionList.push(sub);
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptionList.forEach(sub => sub.unsubscribe());
   }
 
   setFormData(data) {

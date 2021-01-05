@@ -4,7 +4,7 @@
     And submit a store relocation for different business types
 
  @catering @partnership @cateringrelocation
- Scenario: Partnership Catering Store Relocation Request
+ Scenario: Catering Store Relocation Request (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -23,7 +23,7 @@
     Then I see the login page
 
  @catering @privatecorporation @cateringrelocation
- Scenario: Private Corporation Catering Store Relocation Request
+ Scenario: Catering Store Relocation Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -42,7 +42,7 @@
     Then I see the login page
 
  @catering @publiccorporation @cateringrelocation
- Scenario: Public Corporation Catering Store Relocation Request
+ Scenario: Catering Store Relocation Request (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -61,7 +61,7 @@
     Then I see the login page
 
  @catering @society @cateringrelocation
- Scenario: Society Catering Store Relocation Request
+ Scenario: Catering Store Relocation Request (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -80,7 +80,7 @@
     Then I see the login page
 
  @catering @soleproprietorship @cateringrelocation
- Scenario: Sole Proprietorship Catering Store Relocation Request
+ Scenario: Catering Store Relocation Request (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship

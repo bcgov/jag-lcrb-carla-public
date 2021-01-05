@@ -4,7 +4,7 @@
       <div>
         <span class="print-page" (click)="printPage()">
           <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
-          <i class="fas fa-print fa-lg"></i>
+          <fa-icon [icon]="faPrint" class="fa-lg"></fa-icon>
           <a href="javascript: void(0)"> Print Page</a>
         </span>
         <h1 style="color:green">Payment Approved</h1>
@@ -56,7 +56,7 @@
     </div>
     <div *ngIf="loaded" style="padding-top:20px">
       <p><a class="" routerLink="/dashboard">
-          <i class="fa fa-angle-double-left fa-lg" style="margin-right:5px" aria-hidden="true"></i>Return to Dashboard
+          <fa-icon [icon]="faAngleDoubleLeft" class="fa-lg" style="margin-right:5px" aria-hidden="true"></fa-icon>Return to Dashboard
         </a>
       </p>
     </div>

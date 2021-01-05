@@ -6,6 +6,7 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
 import { MatSnackBar } from '@angular/material';
 import * as moment from 'moment';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-lg-approvals',
@@ -13,7 +14,7 @@ import * as moment from 'moment';
   styleUrls: ['./lg-approvals.component.scss']
 })
 export class LgApprovalsComponent implements OnInit {
-
+  faPencilAlt = faPencilAlt;
   account: Account;
   applications: Application[];
   applicationsDecisionNotMade: Application[] = [];

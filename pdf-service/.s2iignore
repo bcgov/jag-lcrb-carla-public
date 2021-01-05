@@ -1,0 +1,33 @@
+# OpenShift devops folder (not needed inside the container)
+openshift/
+
+# User-specific files
+.env
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+node_modules/
+
+# Visual Studio 2015 cache/options directory
+.vs/
+.vscode/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+**/Properties/launchSettings.json

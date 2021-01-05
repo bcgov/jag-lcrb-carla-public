@@ -7,7 +7,7 @@
 #-----------------------
 
  @marketevent @marketoneday @winery
- Scenario: Winery One Day Market Event
+ Scenario: One Day Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -24,7 +24,7 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Approved
@@ -37,7 +37,7 @@
 #-----------------------
 
  @marketevent @marketweekly @winery
- Scenario: Winery Weekly Market Event
+ Scenario: Weekly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -54,7 +54,7 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Approved
@@ -68,7 +68,7 @@
 #-------------------------------------------------
 
  @marketevent @marketbiweekly @winery
- Scenario: Winery Bi-Weekly Market Event
+ Scenario: Bi-Weekly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -85,8 +85,7 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
-    And I click on the market event submit button
-    And I click on the Licences tab
+    And I click on the Submit button
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a bi-weekly event
@@ -98,7 +97,7 @@
 #-----------------------
 
  @marketevent @marketmonthly @winery
- Scenario: Winery Monthly Market Event
+ Scenario: Monthly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -115,7 +114,7 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Approved
@@ -128,7 +127,7 @@
 #-----------------------------------
 
  @marketeventonedaysave @marketoneday @winery
- Scenario: Winery One Day Market Event Save For Later
+ Scenario: One Day Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -145,13 +144,13 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a one day event saved for later
     And I click on the signature checkbox
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a one day event
@@ -163,7 +162,7 @@
 #--------------------------------------
 
  @marketeventweeklysave @marketweekly @winery
- Scenario: Winery Weekly Market Event Save For Later
+ Scenario: Weekly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -180,13 +179,13 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event weekly
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a weekly event saved for later
     And I click on the signature checkbox
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a weekly event
@@ -198,7 +197,7 @@
 #-----------------------------------------
 
  @marketeventbiweeklysave @marketbiweekly @winery
- Scenario: Winery Bi-Weekly Market Event Save For Later
+ Scenario: Bi-Weekly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -215,13 +214,13 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event bi-weekly
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a bi-weekly event saved for later
     And I click on the signature checkbox
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a bi-weekly event
@@ -233,7 +232,7 @@
 #---------------------------------------
 
  @marketeventmonthlysave @marketmonthly @winery
- Scenario: Winery Monthly Market Event Save For Later
+ Scenario: Monthly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -250,13 +249,13 @@
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event monthly
-    And I click on the market event save for later button
+    And I click on the button for Save for Later
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a monthly event saved for later
     And I click on the signature checkbox
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for an approved monthly event

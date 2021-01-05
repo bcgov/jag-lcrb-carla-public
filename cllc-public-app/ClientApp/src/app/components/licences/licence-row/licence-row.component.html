@@ -52,45 +52,53 @@
                                 style="min-width: 10px;">
                                 <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'"
                                     download>
-                                    <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download
-                                        Licence</span>
+                                    <span>
+                                        <fa-icon [icon]="faDownLoad" style="margin-right: 10px;"></fa-icon>Download
+                                        Licence
+                                    </span>
                                 </a>
                             </div>
                             <div
                                 *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
-                                <a *ngIf="!item.hasPaidForRenewalApplication && item.autoRenewal" href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-                                    <span><i class="fas fa-exclamation-triangle"
-                                            style="margin-right: 10px;"></i>{{(isAboutToExpire(item) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}
-                                        Licence</span>
+                                <a *ngIf="!item.hasPaidForRenewalApplication && item.autoRenewal"
+                                    href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
+                                    <span>
+                                        <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
+                                        {{(isAboutToExpire(item) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}
+                                        Licence
+                                    </span>
                                 </a>
-                                <span *ngIf="item.hasPaidForRenewalApplication" color="accent">Renewal Application Submitted</span>
+                                <span *ngIf="item.hasPaidForRenewalApplication" color="accent">Renewal Application
+                                    Submitted</span>
                             </div>
                             <div class="flags" class="missing">
-                                <p *ngIf="item.dormant"><i class="fas fa-flag" style="margin-right: 10px;"></i>Licence
-                                    Dormant<i data-html="true" style="margin-left: 10px;" class="fas fa-question-circle"
+                                <p *ngIf="item.dormant"><fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>Licence
+                                    Dormant<fa-icon [icon]="faQuestionCircle" data-html="true" style="margin-left: 10px;"
                                         matTooltipClass="multiline-tooltip"
-                                        matTooltip="Please contact LCRB to remove dormancy"></i></p>
-                                <p *ngIf="item.suspended"><i class="fas fa-flag" style="margin-right: 10px;"></i>Licence
-                                    Suspended<i data-html="true" style="margin-left: 10px;"
-                                        class="fas fa-question-circle" matTooltipClass="multiline-tooltip"
-                                        matTooltip="Please contact LCRB to remove suspension"></i></p>
-                                <p *ngIf="item.transferRequested && !item.checklistConclusivelyDeem"><i class="fas fa-flag"
-                                    style="margin-right: 10px;"></i>Transfer In Progress</p>
-                                <p *ngIf="item.operated && !item.isOperated"><i class="fas fa-flag"
-                                        style="margin-right: 10px;"></i>Licence Operated</p>
+                                        matTooltip="Please contact LCRB to remove dormancy"></fa-icon></p>
+                                <p *ngIf="item.suspended"><fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>Licence
+                                    Suspended<fa-icon [icon]="faQuestionCircle" data-html="true" style="margin-left: 10px;"
+                                         matTooltipClass="multiline-tooltip"
+                                        matTooltip="Please contact LCRB to remove suspension"></fa-icon></p>
+                                <p *ngIf="item.transferRequested"><fa-icon [icon]="faFlag"
+                                        style="margin-right: 10px;"></fa-icon>Transfer Requested</p>
+                                <p *ngIf="item.operated && !item.isOperated"><fa-icon [icon]="faFlag"
+                                        style="margin-right: 10px;"></fa-icon>Licence Operated</p>
                             </div>
                             <br>
-                            <div *ngIf="item.licenceTypeCategory === 'Liquor' && isActive(item) && actionsVisible(item) && !item.isOperated">
-                              <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
-                                  <span *ngIf="!item.representativeFullName">Add Licensee Representative</span>
-                                  <span *ngIf="item.representativeFullName">Licensee Representative:
-                                      <strong>{{item.representativeFullName}}</strong></span>
-                              </a>
+                            <div
+                                *ngIf="item.licenceTypeCategory === 'Liquor' && isActive(item) && actionsVisible(item) && !item.isOperated">
+                                <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
+                                    <span *ngIf="!item.representativeFullName">Add Licensee Representative</span>
+                                    <span *ngIf="item.representativeFullName">Licensee Representative:
+                                        <strong>{{item.representativeFullName}}</strong></span>
+                                </a>
                             </div>
                             <div *ngIf="showManageOffsiteStorage(item)">
-                              <a [routerLink]="[ '/licence/' + item.licenseId + '/offsite-storage']">Manage Off-Site Storage</a>
+                                <a [routerLink]="[ '/licence/' + item.licenseId + '/offsite-storage']">Manage Off-Site
+                                    Storage</a>
                             </div>
-                      </td>
+                        </td>
 
                         <td style="padding: 10px;">
                             <div *ngIf="item?.licenceTypeName !== 'Marketing'">
@@ -126,7 +134,7 @@
                             <!--div *ngIf="item.status === 'PreInspection'" style="min-width: 10px; margin-bottom: 10px;">
                         <a href="javascript:void(0);" (click)="planStoreOpening(item)" class="missing">
                             <span>
-                                <i class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
+                                <fa-icon [icon]="faPencilAlt" style="margin-right: 10px;"></fa-icon>
                                 Pre-Inspection Checklist
                             </span>
                         </a>
@@ -135,8 +143,10 @@
                                 *ngIf="item.endorsements.length > 0 && isActive(item) && (actionsVisible(item) || item.isOperated)">
                                 <span><strong>Endorsements:</strong></span>
                                 <div *ngFor="let endorsement of item.endorsements; let i = index;">
-                                    <span><i class="fas fa-certificate"
-                                            style="margin-right: 10px;"></i>{{endorsement.endorsementName}}</span>
+                                    <span>
+                                        <fa-icon [icon]="faCertificate" style="margin-right: 10px;"></fa-icon>
+                                        {{endorsement.endorsementName}}
+                                    </span>
                                 </div>
                                 <br><br>
                             </ng-container>
@@ -144,7 +154,7 @@
                                 style="min-width: 10px; margin-bottom: 10px;">
                                 <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
                                     <span>
-                                        <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
+                                        <fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>
                                         Pay First Year Fee
                                     </span>
                                 </a>
@@ -156,7 +166,7 @@
                                 <section *ngIf="isActive(item) && item.tpoRequested" class="licence-expired">
                                     <a [routerLink]="[ '/cancel-third-party-operator/' + item.licenseId]"
                                         class="missing">
-                                        <span><i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Cancel
+                                        <span><fa-icon [icon]="faTrashAlt" style="margin-right: 10px;"></fa-icon>Cancel
                                             Application</span>
                                     </a>
                                 </section>
@@ -166,7 +176,7 @@
                                 <div
                                     *ngIf="isActive(item) && hasEndorsementByName(item, 'Temporary Off-Site Endorsement')">
                                     <a [routerLink]="[ '/licence/' + item.licenseId + '/temporary-offsite']">
-                                        <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Temporary
+                                        <fa-icon [icon]="faCalendarAlt" style="margin-right: 10px;"></fa-icon>Request Temporary
                                         Off-Site Sale
                                         Authorization
                                     </a>
@@ -181,14 +191,14 @@
                                 <div *ngIf="isActive(item) && actionsVisible(item) && hasEndorsementByName(item, 'On-Site Store Endorsement')"
                                     appRemoveIfFeatureOff="MarketEvents">
                                     <a [routerLink]="[ '/licence/' + item.licenseId + '/market-event']">
-                                        <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Market
+                                        <fa-icon [icon]="faCalendarAlt"style="margin-right: 10px;"></fa-icon>Request Market
                                         Event Authorization
                                     </a>
                                 </div>
                                 <div
                                     *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActive(item) && actionsVisible(item)">
                                     <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
-                                        <span><i class="fas fa-business-time" style="margin-right: 10px;"></i>Review
+                                        <span><fa-icon [icon]="faBusinessTime" style="margin-right: 10px;"></fa-icon>Review
                                             Federal Reports</span>
                                     </a>
                                 </div>
@@ -205,7 +215,7 @@
                             </ng-container>
                             <a *ngIf="item.operated && !item.isOperated"
                                 [routerLink]="[ '/terminate-third-party-operator/' + item.licenseId]">
-                                <span><i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Terminate Third Party
+                                <span><fa-icon [icon]="faTrashAlt" style="margin-right: 10px;"></fa-icon>Terminate Third Party
                                     Operator Relationship</span>
                             </a>
                         </td>
@@ -216,8 +226,9 @@
                                 <div *ngIf="showLicenceTransferAction(item)">
                                     <p>
                                         <a [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
-                                            <span><i class="fas fa-exchange-alt"
-                                                    style="margin-right: 10px;"></i>Transfer Licence</span>
+                                            <span><fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
+                                                Transfer Licence
+                                            </span>
                                         </a>
                                     </p>
                                 </div>
@@ -225,7 +236,7 @@
                                 <div *ngIf="showAddOrChangeThirdPartyOperator(item)">
                                     <p>
                                         <a [routerLink]="[ '/third-party-operator/' + item.licenseId]">
-                                            <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Add or
+                                            <span><fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>Add or
                                                 Change a Third Party Operator</span>
                                         </a>
                                     </p>
@@ -234,24 +245,28 @@
                                     <p *ngFor="let action of item.allowedActions">
                                         <ng-container *ngIf="actionVisible(item, action.id)">
                                             <a href="javascript:void(0);" (click)="doAction(item,action.name)">
-                                                <span><i class="fas fa-bolt"
-                                                        style="margin-right: 10px;"></i>{{action?.actionText}}</span>
+                                                <span><fa-icon [icon]="faBolt" style="margin-right: 10px;"></fa-icon>
+                                                    {{action?.actionText}}
+                                                </span>
                                             </a>
                                         </ng-container>
                                     </p>
                                 </ng-container>
                                 <div *ngIf="!isCancelled(item)">
-                                    <div *ngIf="isAboutToExpire(item) && item.autoRenewal" class="licence-expired" style="text-align: center;">
+                                    <div *ngIf="isAboutToExpire(item) && item.autoRenewal" class="licence-expired"
+                                        style="text-align: center;">
                                         <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
                                             <strong>Attention</strong>: This Licence will Expire Soon<br>Please
                                             Renew.</a>
                                     </div>
-                                    <div *ngIf="isExpired(item) && isRecentlyExpired(item) && item.autoRenewal" class="licence-expired" style="text-align: center;">
+                                    <div *ngIf="isExpired(item) && isRecentlyExpired(item) && item.autoRenewal"
+                                        class="licence-expired" style="text-align: center;">
                                         <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
                                             <strong>Attention</strong>: This Licence has Expired<br>Please Renew.
                                         </a>
                                     </div>
-                                    <div *ngIf="isExpired(item) && !isRecentlyExpired(item) && item.autoRenewal" class="licence-expired" style="text-align: center;">
+                                    <div *ngIf="isExpired(item) && !isRecentlyExpired(item) && item.autoRenewal"
+                                        class="licence-expired" style="text-align: center;">
                                         <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
                                             <strong>Attention</strong>: This Licence has Expired<br>Please Reinstate.
                                         </a>
@@ -262,7 +277,7 @@
                             *ngIf="isActive(item) && item.transferRequested"
                             class="missing">
                             <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]" class="missing">
-                            <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Transfer</span>
+                            <span><fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>Cancel Transfer</span>
                             </a>
                         </section> -->
                             </div>
@@ -278,8 +293,8 @@
                         <td colspan="5">
                             <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
                                 <mat-expansion-panel-header>
-                                    <mat-panel-title>Event History <i class="fas fa-calendar-alt"
-                                            style="margin-left: 10px;"></i></mat-panel-title>
+                                    <mat-panel-title>Event History <fa-icon [icon]="faCalendarAlt"
+                                            style="margin-left: 10px;"></fa-icon></mat-panel-title>
                                     <mat-panel-description id="{{'expand-history-button-' + i}}">Click to expand or
                                         collapse</mat-panel-description>
                                 </mat-expansion-panel-header>
@@ -294,7 +309,8 @@
                                     </thead>
                                     <tr *ngFor="let event of item?.events">
                                         <td><a
-                                                [routerLink]="[ '/licence/' + item.licenseId + getEventPath(event) + event.id]">{{getOptionFromValue(eventStatus, event.status).label}}</a>
+                                                [routerLink]="[ '/licence/' + item.licenseId + getEventPath(event) + event.id]">{{getOptionFromValue(eventStatus,
+                                                event.status).label}}</a>
                                         </td>
                                         <td>{{event.eventNumber}}</td>
                                         <td>{{getEventName(event)}}</td>
@@ -304,9 +320,11 @@
                                         <td
                                             *ngIf="getOptionFromValue(eventStatus, event.status).label === 'Approved';else empty_td">
                                             <a [href]="'api/licenceevents/' + event.id + '/authorization.pdf'" download>
-                                                <span><i class="fas fa-download"
-                                                        style="margin-right: 10px;"></i>Download Authorization</span>
-                                            </a></td>
+                                                <span><fa-icon [icon]="faDownLoad" style="margin-right: 10px;"></fa-icon>
+                                                    Download Authorization
+                                                </span>
+                                            </a>
+                                        </td>
                                         <ng-template #empty_td>
                                             <td></td>
                                         </ng-template>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class HomeComponent implements OnInit {
   window = window;
   busy: Subscription;
+  faExclamationCircle = faExclamationCircle;
 
   constructor(private titleService: Title) { }
 

@@ -21,9 +21,10 @@
             <input type="text" [(ngModel)]="search" size="20" style="padding-right: 20px" (keyup.enter)="searchMap()">
             &nbsp;
             <button style="margin-right:10px; padding-left: 20px" class="btn btn-primary" (click)="searchMap()">
-              <i class="fas fa-search" style="margin-right: 10px;"></i>
+              <fa-icon [icon]="faSearch" style="margin-right: 10px;"></fa-icon>
               Search
-            </button> <button class="btn btn-primary" (click)="resetMap()">
+            </button> 
+            <button class="btn btn-primary" (click)="resetMap()">
               Reset Map
             </button>
           </app-field>

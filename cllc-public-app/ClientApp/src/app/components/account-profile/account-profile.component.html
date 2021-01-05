@@ -181,8 +181,7 @@
               <hr>
               <h3>Mailing Address</h3>
               <section>
-                <input type="checkbox" style="margin-right: 10px;" formControlName="_mailingSameAsPhysicalAddress">
-                <span>Same as physical address</span>
+                <mat-checkbox formControlName="_mailingSameAsPhysicalAddress">Same as physical address</mat-checkbox>
               </section>
               <div class="row">
                 <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 1"
@@ -305,11 +304,11 @@
 
           <div *ngIf="!form.valid && form.touched" class="error-summary mt-3">
             <div *ngIf="!validationMessages?.length">
-              <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+              <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
               <span>Some required fields have not been completed</span>
             </div>
             <div *ngFor="let message of validationMessages">
-              <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+              <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
               <span>{{message}}</span>
             </div>
           </div>
@@ -317,14 +316,14 @@
           <section style="position: relative;">
             <div [ngBusy]="[busy3]"></div>
             <a routerLink="/dashboard">
-              <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Cancel & Close</a>
+              <fa-icon [icon]="faTrashAlt" style="margin-right: 10px;"></fa-icon>CANCEL & CLOSE</a>
             <span style="float: right;">
-              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont"
+              <button color="primary" mat-raised-button style="margin-left: 10px" (click)="gotoReview()" class="save-cont"
                 id="continueToApp">
                 <span *ngIf="!applicationId && !useInStepperMode">SAVE & CONTINUE</span>
                 <span *ngIf="applicationId && !useInStepperMode">CONTINUE TO APPLICATION</span>
                 <span *ngIf="useInStepperMode">CONTINUE TO ORGANIZATION REVIEW</span>&nbsp;
-                <i class="fas fa-chevron-right"></i></button>
+                <fa-icon [icon]="faChevronRight"></fa-icon></button>
             </span>
           </section>
         </div>
@@ -337,7 +336,7 @@
         <table>
           <tr>
             <td>
-              <h2 class="round-icon-wrapper"><i class="fas fa-address-card"></i></h2>
+              <h2 class="round-icon-wrapper"><fa-icon [icon]="faAddressCard"></fa-icon></h2>
             </td>
             <td style="padding-left: 10px">
               <h2>Update your BCeID information</h2>
@@ -350,7 +349,7 @@
             this information, you must contact BCeID to correct it.
           </p>
           <div>
-            <i class="fas fa-phone" style="margin-right: 10px"></i>
+            <fa-icon [icon]="faPhone" style="margin-right: 10px"></fa-icon>
             <strong>Phone</strong>
             <br>
             <span>1 888 356-2741 (Canada and USA toll free)</span>
@@ -358,7 +357,7 @@
             <span>604 660-2355 (Within lower mainland or outside Canada and USA)</span>
           </div>
           <div>
-            <i class="fas fa-envelope" style="margin-right: 10px"></i>
+            <fa-icon [icon]="faEnvelope" style="margin-right: 10px"></fa-icon>
             <strong>Email</strong>
             <br>
             <span>Contact us using our <a href="https://www.bceid.ca/help_request/default.aspx?referrer=AB%2f2"

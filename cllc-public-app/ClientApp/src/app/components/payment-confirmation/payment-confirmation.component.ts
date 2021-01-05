@@ -8,6 +8,7 @@ import { ApplicationDataService } from '../../services/application-data.service'
 import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { MatSnackBar } from '@angular/material';
 import { Application } from '@models/application.model';
+import { faAngleDoubleLeft, faPrint } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-payment-confirmation',
@@ -16,6 +17,8 @@ import { Application } from '@models/application.model';
 })
 /** payment-confirmation component*/
 export class PaymentConfirmationComponent extends FormBase implements OnInit {
+  faPrint = faPrint;
+  faAngleDoubleLeft = faAngleDoubleLeft;
   busy: Subscription;
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
   application: Application;

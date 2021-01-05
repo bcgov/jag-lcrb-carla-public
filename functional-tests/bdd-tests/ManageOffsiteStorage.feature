@@ -3,7 +3,7 @@
     I want to manage offsite storage on the Licences & Authorizations tab
 
 @offsitestorage
-Scenario: Add Rows Offsite Storage Private Corporation
+Scenario: Add Rows Offsite Storage (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -24,7 +24,7 @@ Scenario: Add Rows Offsite Storage Private Corporation
     Then I see the login page
 
 @offsitestorage
-Scenario: Add and Remove Rows Offsite Storage Private Corporation
+Scenario: Add and Remove Rows Offsite Storage (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -47,7 +47,7 @@ Scenario: Add and Remove Rows Offsite Storage Private Corporation
     Then I see the login page
 
 @offsitestorage
-Scenario: Add Rows and Return to Offsite Storage Private Corporation
+Scenario: Add Rows and Return to Offsite Storage (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

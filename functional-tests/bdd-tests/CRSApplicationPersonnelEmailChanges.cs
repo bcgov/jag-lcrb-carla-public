@@ -19,7 +19,7 @@ Feature: CRSApplicationPersonnelEmailChanges
     And request personnel email changes for the approved application
 
 @cannabis @partnership @crsemail
-Scenario: Partnership CRS Personnel Email Changes
+Scenario: CRS Personnel Email Changes (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -37,7 +37,7 @@ Scenario: Partnership CRS Personnel Email Changes
     Then I see the login page
 
 @cannabis @privatecorporation @crsemail
-Scenario: Private Corporation CRS Personnel Email Changes
+Scenario: CRS Personnel Email Changes (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -55,7 +55,7 @@ Scenario: Private Corporation CRS Personnel Email Changes
     Then I see the login page
 
 @cannabis @publiccorporation @crsemail
-Scenario: Public Corporation CRS Personnel Email Changes
+Scenario: CRS Personnel Email Changes (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -73,7 +73,7 @@ Scenario: Public Corporation CRS Personnel Email Changes
     Then I see the login page
 
 @cannabis @society @crsemail
-Scenario: Society CRS Personnel Email Changes
+Scenario: CRS Personnel Email Changes (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -91,7 +91,7 @@ Scenario: Society CRS Personnel Email Changes
     Then I see the login page
 
 @cannabis @soleproprietorship @crsemail
-Scenario: Sole Proprietorship CRS Personnel Email Changes
+Scenario: CRS Personnel Email Changes (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure

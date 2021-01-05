@@ -3,7 +3,7 @@
     I want to confirm that the Manufacturer functionality is ready for release
 
 @manufacturer @winery @release 
-Scenario: Private Corporation Manufacturer Release #1
+Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -23,7 +23,7 @@ Scenario: Private Corporation Manufacturer Release #1
     And I click on the Licences tab
     And I request a facility structural change
     # And I click on the Licences tab
-    # And I request a location change
+    # And I request a relocation change
     And I click on the Licences tab
     And I request a lounge area endorsement
     # And I click on the Licences tab
@@ -34,7 +34,7 @@ Scenario: Private Corporation Manufacturer Release #1
     Then I see the login page
 
 @manufacturer @winery @release 
-Scenario: Private Corporation Manufacturer Release #2
+Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -76,7 +76,7 @@ Scenario: Private Corporation Manufacturer Release #2
     Then I see the login page
 
 @manufacturer @winery 
-Scenario: Sole Proprietorship Manufacturer Release #1
+Scenario: Manufacturer Release #1 (Winery/Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a sole proprietorship
@@ -96,7 +96,7 @@ Scenario: Sole Proprietorship Manufacturer Release #1
     And I click on the Licences tab
     And I request a facility structural change
     # And I click on the Licences tab
-    # And I request a location change
+    # And I request a relocation change
     And I click on the Licences tab
     And I request a lounge area endorsement
     # And I click on the Licences tab
@@ -107,7 +107,7 @@ Scenario: Sole Proprietorship Manufacturer Release #1
     Then I see the login page
 
 @manufacturer @winery 
-Scenario: Sole Proprietorship Manufacturer Release #2
+Scenario: Manufacturer Release #2 (Winery/Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a sole proprietorship
@@ -138,7 +138,7 @@ Scenario: Sole Proprietorship Manufacturer Release #2
     # And I complete the offsite storage application
     # And I click on the Submit button
     And I request a market event for one date only
-    And I click on the market event submit button
+    And I click on the Submit button
     And I click on the Licences tab
     # And I click on the event history for markets
     # And I click on the link for Approved

@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top115 { get; set; }
+        int? Top134 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip115 { get; set; }
+        int? Skip134 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count115 { get; set; }
+        bool? Count134 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter115 { get; set; }
+        string Filter134 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search115 { get; set; }
+        string Search134 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -146,6 +146,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypes.
         /// </summary>
         IApplicationtypes Applicationtypes { get; }
+
+        /// <summary>
+        /// Gets the IRenewalfeeproduct.
+        /// </summary>
+        IRenewalfeeproduct Renewalfeeproduct { get; }
 
         /// <summary>
         /// Gets the IApplicenseechangebpfv2s.
@@ -398,6 +403,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicenceses Licenceses { get; }
 
         /// <summary>
+        /// Gets the ILicencesadoxioonestopmessageitemlicence.
+        /// </summary>
+        ILicencesadoxioonestopmessageitemlicence Licencesadoxioonestopmessageitemlicence { get; }
+
+        /// <summary>
         /// Gets the ILicencesubcategories.
         /// </summary>
         ILicencesubcategories Licencesubcategories { get; }
@@ -436,6 +446,56 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IOffsitestorages.
         /// </summary>
         IOffsitestorages Offsitestorages { get; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitems.
+        /// </summary>
+        IOnestopmessageitems Onestopmessageitems { get; }
+
+        /// <summary>
+        /// Gets the ILicence.
+        /// </summary>
+        ILicence Licence { get; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemasyncoperations.
+        /// </summary>
+        IOnestopmessageitemasyncoperations Onestopmessageitemasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitembulkdeletefailures.
+        /// </summary>
+        IOnestopmessageitembulkdeletefailures Onestopmessageitembulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemduplicatebaserecord.
+        /// </summary>
+        IOnestopmessageitemduplicatebaserecord Onestopmessageitemduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemduplicatematchingrecord.
+        /// </summary>
+        IOnestopmessageitemduplicatematchingrecord Onestopmessageitemduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemmailboxtrackingfolders.
+        /// </summary>
+        IOnestopmessageitemmailboxtrackingfolders Onestopmessageitemmailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemprincipalobjectattributeaccesses.
+        /// </summary>
+        IOnestopmessageitemprincipalobjectattributeaccesses Onestopmessageitemprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemprocesssession.
+        /// </summary>
+        IOnestopmessageitemprocesssession Onestopmessageitemprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IOnestopmessageitemsyncerrors.
+        /// </summary>
+        IOnestopmessageitemsyncerrors Onestopmessageitemsyncerrors { get; }
 
         /// <summary>
         /// Gets the IPersonalhistorysummaries.
@@ -528,6 +588,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISpecialevents Specialevents { get; }
 
         /// <summary>
+        /// Gets the ISpecialeventinspection.
+        /// </summary>
+        ISpecialeventinspection Specialeventinspection { get; }
+
+        /// <summary>
         /// Gets the ISpecialeventschedules.
         /// </summary>
         ISpecialeventschedules Specialeventschedules { get; }
@@ -578,9 +643,29 @@ namespace Gov.Lclb.Cllb.Interfaces
         IWorkers Workers { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioonestopmessageitem.
+        /// </summary>
+        IRegardingobjectidadoxioonestopmessageitem Regardingobjectidadoxioonestopmessageitem { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioonestopmessageitem.
+        /// </summary>
+        IBusinessunitadoxioonestopmessageitem Businessunitadoxioonestopmessageitem { get; }
+
+        /// <summary>
         /// Gets the IContacts.
         /// </summary>
         IContacts Contacts { get; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioonestopmessageitem.
+        /// </summary>
+        IBaserecordidadoxioonestopmessageitem Baserecordidadoxioonestopmessageitem { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioonestopmessageitem.
+        /// </summary>
+        IDuplicaterecordidadoxioonestopmessageitem Duplicaterecordidadoxioonestopmessageitem { get; }
 
         /// <summary>
         /// Gets the IEntitydefinitions.
@@ -591,6 +676,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IGlobaloptionsetdefinitions.
         /// </summary>
         IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; }
+
+        /// <summary>
+        /// Gets the ISpecialeventid.
+        /// </summary>
+        ISpecialeventid Specialeventid { get; }
 
         /// <summary>
         /// Gets the IInvoices.
@@ -606,6 +696,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILists.
         /// </summary>
         ILists Lists { get; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioonestopmessageitem.
+        /// </summary>
+        IObjectidadoxioonestopmessageitem Objectidadoxioonestopmessageitem { get; }
+
+        /// <summary>
+        /// Gets the IProductadoxioapplicationtyperenewalfeeproduct.
+        /// </summary>
+        IProductadoxioapplicationtyperenewalfeeproduct Productadoxioapplicationtyperenewalfeeproduct { get; }
 
         /// <summary>
         /// Gets the ISavedqueries.
@@ -631,6 +731,36 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISystemusers.
         /// </summary>
         ISystemusers Systemusers { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioonestopmessageitemcreatedby.
+        /// </summary>
+        ILkadoxioonestopmessageitemcreatedby Lkadoxioonestopmessageitemcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioonestopmessageitemcreatedonbehalfby.
+        /// </summary>
+        ILkadoxioonestopmessageitemcreatedonbehalfby Lkadoxioonestopmessageitemcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioonestopmessageitemmodifiedby.
+        /// </summary>
+        ILkadoxioonestopmessageitemmodifiedby Lkadoxioonestopmessageitemmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioonestopmessageitemmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioonestopmessageitemmodifiedonbehalfby Lkadoxioonestopmessageitemmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxioonestopmessageitem.
+        /// </summary>
+        IUseradoxioonestopmessageitem Useradoxioonestopmessageitem { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioonestopmessageitem.
+        /// </summary>
+        ITeamadoxioonestopmessageitem Teamadoxioonestopmessageitem { get; }
 
         /// <summary>
         /// Gets the IWorkflows.
