@@ -247,7 +247,7 @@
 
         <section style="position: relative; margin-top: 20px;">
           <button style="float: right;" class="btn btn-primary" [routerLink]="[ '/dashboard']">
-            <i class="fas fa-save" style="margin-right: 10px;"></i>
+            <fa-icon [icon]="faSave" style="margin-right: 10px;"></fa-icon>
             SAVE</button>
           <div style="clear: both"></div>
           <div [ngBusy]="busy"></div>
@@ -261,7 +261,7 @@
 
         <section style="position: relative; margin-top: 20px;">
           <button style="float: right;" class="btn btn-primary" (click)="submit_application()">
-            <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
+            <fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>
             PAY LICENCE FEE AND RECEIVE LICENCE</button>
           <div style="clear: both"></div>
           <div [ngBusy]="busy"></div>

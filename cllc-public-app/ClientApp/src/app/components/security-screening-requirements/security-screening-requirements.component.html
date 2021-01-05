@@ -68,13 +68,13 @@
                                         </td>
                                         <td style="text-align: center;"><a href="javascript: void(0)"
                                                 (click)="copyMessage(item.phsLink)">
-                                                <i class="fas fa-copy"></i>
+                                                <fa-icon [icon]="faCopy" ></fa-icon>
                                                 Copy Link</a>
                                         </td>
                                     </tr>
                                 </table>
                                 <div *ngIf="!data?.liquor?.completedItems?.length > 0">
-                                    <h3 class="plain-header"><i class="fas fa-exclamation"></i>The above Personal
+                                    <h3 class="plain-header"><fa-icon [icon]="faExclamation"></fa-icon>The above Personal
                                         History Summary forms have yet to be completed.</h3>
                                 </div>
                             </ng-container>
@@ -108,7 +108,7 @@
                                     </tr>
                                 </table>
                                 <div *ngIf="!data?.liquor?.outstandingItems?.length">
-                                    <h3 class="plain-header"><i class="fas fa-check"></i>All Personal History Summary
+                                    <h3 class="plain-header"><fa-icon [icon]="faCheck"></fa-icon>All Personal History Summary
                                         forms have been submitted.</h3>
                                 </div>
 
@@ -208,8 +208,8 @@
                                         <td>{{item.lastName}} </td>
                                         <td class="missing" style="text-align: center;">Not Submitted</td>
                                         <td style="text-align: center;" appRemoveIfFeatureOff="CASS">
-                                            <a href="javascript: void(0)" (click)="copyMessage(item.casLink)"><i
-                                                    class="fas fa-copy"></i>Copy Link</a>
+                                            <a href="javascript: void(0)" (click)="copyMessage(item.casLink)">
+                                                <fa-icon [icon]="faCopy"></fa-icon>Copy Link</a>
                                         </td>
                                     </tr>
                                 </table>
@@ -241,7 +241,7 @@
                                 </table>
 
                                 <div *ngIf="!data?.cannabis?.outstandingItems?.length">
-                                    <h3 class="plain-header"><i class="fas fa-check"></i>All Associate Security
+                                    <h3 class="plain-header"><fa-icon [icon]="faCheck"></fa-icon>All Associate Security
                                         Screenings have been submitted.</h3>
                                 </div>
                             </div>

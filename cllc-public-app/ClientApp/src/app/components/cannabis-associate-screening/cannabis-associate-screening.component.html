@@ -283,8 +283,8 @@
                                [valid]="!aliases.at(i).get('lastname').touched || aliases.at(i).get('lastname').valid"
                                [isFullWidth]="true">
                       <input class="form-control" style="width: 300px;" type="text"
-                             formControlName="lastname"> <i class="fas fa-trash-alt ml-3"
-                                                            (click)="deleteAlias(i)"></i>
+                             formControlName="lastname"> 
+                             <fa-icon [icon]="faTrashAlt" class="ml-3" (click)="deleteAlias(i)"></fa-icon>
                     </app-field>
                   </div>
                 </div>
@@ -342,7 +342,7 @@
         <h3 class="blue-header">PAST ADDRESSES</h3>
         <section class="padded-section border-around">
           <app-field label="Have you resided outside of British Columbia at any point within the past 5 years?"
-            [showChevrons]="false" [isFullWidth]="FALSE">
+            [showChevrons]="false" [isFullWidth]="false">
             <mat-radio-group class="radio-group" formControlName="residedOutsideBC"
               (change)="previousAddressesToggleChanged()">
               <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
@@ -361,7 +361,7 @@
                 <div [formGroupName]="i">
                   <h3>PAST ADDRESS {{i + 1}}
                     <button class="btn btn-secondary" style="float: right;" (click)="deleteAddress(i)">
-                      <i class="fa fa-trash"></i>
+                      <fa-icon [icon]="faTrash"></fa-icon>
                       DELETE ADDRESS
                     </button>
                   </h3>
@@ -513,7 +513,7 @@
             cannabis security verification.
           </p>
           <div *ngIf="showValidationMessages && !form.get('consentToCollection').touched" class="missing" style="background-color: #F2F2F2; margin-top: 2px; padding: 10px;">
-            <i class="fas fa-exclamation-triangle"></i> Please provide your consent to proceed
+            <fa-icon [icon]="faExclamationTriangle"></fa-icon> Please provide your consent to proceed
           </div>
 
         </section>
@@ -529,7 +529,7 @@
             information and waive all rights thereto.
           </p>
           <div *ngIf="validationErrors?.length && !form.get('privacyAgreement').touched" class="missing" style="background-color: #F2F2F2; margin-top: 2px; padding: 10px;">
-              <i class="fas fa-exclamation-triangle"></i> Please provide your consent to proceed
+              <fa-icon [icon]="faExclamationTriangle"></fa-icon> Please provide your consent to proceed
           </div>
       </section>
 
@@ -543,7 +543,7 @@
       </section>
 
       <div *ngIf="!form.valid && showErrors" class="error-summary mt-3">
-        <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+        <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
         <span>Some required fields have not been completed</span>
       </div>
 

@@ -179,12 +179,25 @@ namespace bdd_tests
             NgWebElement uiPhysicalAddPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='postalCode']"));
             uiPhysicalAddPostalCode.SendKeys(physicalAddPostalCode);
 
+            // select terms and conditions checkbox
+            NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            JavaScriptClick(uiTermsAndConditions);
+
             // select start date
             NgWebElement uiVenueStartDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='startDate']"));
             uiVenueStartDate1.Click();
 
-            NgWebElement uiVenueStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-            uiVenueStartDate2.Click();
+            try
+            {
+                NgWebElement uiVenueStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
+                uiVenueStartDate2.Click();
+            }
+
+            catch
+            {
+                NgWebElement uiVenueStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
+                uiVenueStartDate2.Click();
+            }
 
             // select end date
             NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
@@ -194,9 +207,19 @@ namespace bdd_tests
             NgWebElement uiOpenCalendarNext = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
             uiOpenCalendarNext.Click();
 
-            // click on the first day
-            NgWebElement uiOpenCalendarFirstDay = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
-            JavaScriptClick(uiOpenCalendarFirstDay);
+            try
+            {
+                // click on the first day
+                NgWebElement uiOpenCalendarFirstDay = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
+                JavaScriptClick(uiOpenCalendarFirstDay);
+            }
+
+            catch 
+            {
+                // click on the first day
+                NgWebElement uiOpenCalendarFirstDay = ngDriver.FindElement(By.CssSelector(".mat-calendar-content .mat-calendar-body-cell-content:first-child"));
+                JavaScriptClick(uiOpenCalendarFirstDay);
+            }
 
             // select event and liquor end time after 2am
             if ((eventType == "for after 2am") || (eventType == "for a community event after 2am"))
@@ -208,9 +231,9 @@ namespace bdd_tests
                 JavaScriptClick(uiLiquorCloseTime);
             }
 
-            // select terms and conditions checkbox
-            NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
-            uiTermsAndConditions.Click();
+            // click on the terms and conditions checkbox
+            NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiAgreement.Click();
 
             if ((eventType == "for a draft") || (eventType == "being validated"))
             {
@@ -221,7 +244,7 @@ namespace bdd_tests
             else
             {
                 // click on the Submit button
-                NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector(".btn-primary~ .btn-primary+ .btn-primary"));
+                NgWebElement uiSubmit = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
                 uiSubmit.Click();
             }
         }
@@ -237,8 +260,16 @@ namespace bdd_tests
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Licences')]")).Displayed);
 
-            NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector("mat-expansion-panel-header[role='button'] #expand-history-button-0"));
-            uiExpandEventHistory.Click();
+            try
+            {
+                NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector("mat-expansion-panel-header[role='button'] #expand-history-button-0"));
+                uiExpandEventHistory.Click();
+            }
+            catch
+            {
+                NgWebElement uiExpandEventHistory = ngDriver.FindElement(By.CssSelector("mat-expansion-panel-header[role='button'] #expand-history-button-0"));
+                uiExpandEventHistory.Click();
+            }
             
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Automated test event')]")).Displayed);
 

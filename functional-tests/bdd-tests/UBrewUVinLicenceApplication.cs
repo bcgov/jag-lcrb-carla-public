@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: UBrewUVinLicence
+Feature: UBrewUVinLicenceApplication
     As a logged in business user
     I want to submit a UBrew / UVin Licence application for different business types
 
 @ubrewuvinapplication @partnership 
-Scenario: Partnership UBrew / UVin Application
+Scenario: UBrew / UVin Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a partnership
@@ -36,7 +36,7 @@ Scenario: Partnership UBrew / UVin Application
     Then I see the login page
 
 @ubrewuvinapplication @privatecorporation
-Scenario: Private Corporation UBrew / UVin Application
+Scenario: UBrew / UVin Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a private corporation
@@ -54,7 +54,7 @@ Scenario: Private Corporation UBrew / UVin Application
     Then I see the login page
 
 @ubrewuvinapplication @publiccorporation 
-Scenario: Public Corporation UBrew / UVin Application
+Scenario: UBrew / UVin Application (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a public corporation
@@ -72,7 +72,7 @@ Scenario: Public Corporation UBrew / UVin Application
     Then I see the login page
 
 @ubrewuvinapplication @soleproprietorship 
-Scenario: Sole Proprietorship UBrew / UVin Application
+Scenario: UBrew / UVin Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a UBrew UVin application
     And I review the account profile for a sole proprietorship

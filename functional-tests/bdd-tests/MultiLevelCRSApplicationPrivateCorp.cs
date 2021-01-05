@@ -19,7 +19,7 @@ Feature: MultiLevelCRSApplicationPrivateCorp
     With multiple nested business shareholders
 
 @privatecorporation @validation @multilevel
-Scenario: Multiple Nested Shareholders
+Scenario: Multiple Nested Shareholders (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure

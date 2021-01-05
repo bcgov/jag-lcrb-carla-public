@@ -12,6 +12,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as _moment from 'moment';
+import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
 
 const DEFAULT_START_TIME = {
   hour: 9,
@@ -49,6 +51,9 @@ export const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }  ],
 })
 export class CateringEventFormComponent extends FormBase implements OnInit {
+  faSave = faSave;
+  faTrash = faTrash;
+  faQuestionCircle = faQuestionCircle;
   isEditMode = false;
   isReadOnly = false;
   licenceEvent: LicenceEvent;

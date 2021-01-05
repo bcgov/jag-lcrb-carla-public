@@ -74,20 +74,20 @@
       <section *ngIf="!application?.isPaid" class="mt-5" style="position: relative;">
         <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
           <span>
-            <i class="fa fa-save"></i>
+            <fa-icon [icon]="faSave"></fa-icon>
             SAVE FOR LATER
           </span>
         </button>
 
         <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right:10px;"
           [disabled]="!LicenseeChangeLog.HasChanges(treeRoot)" (click)="cancel()">
-          <i class="fa fa-save"></i>
+          <fa-icon [icon]="faSave"></fa-icon>
           Cancel Changes
         </button>
 
         <button *ngIf="treeRoot" class="btn btn-primary" name="submit-application" style="float: right;"
           (click)="save()">
-          <i class="fa fa-save" style="color: #fff;"></i>
+          <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
           {{getSaveLabel()}}
         </button>
       </section>
@@ -95,7 +95,7 @@
       <section *ngIf="application?.isPaid" class="mt-5" style="position: relative;">
         <button *ngIf="treeRoot" class="btn btn-primary" name="submit-application" style="float: right;"
           (click)="saveReadOnly()">
-          <i class="fa fa-save" style="color: #fff;"></i>
+          <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
           Confirm Organization Information Is Complete
         </button>
       </section>
@@ -172,17 +172,17 @@
         </div>
       </section> -->
 
-      <section class="submit-container mt-5" _ngcontent-ekk-c6=""
+      <section class="submit-container mt-5" 
         style="background-color:#38598A; border-bottom: solid 4px #FFCC00; color: #fff; margin-bottom: 20px; padding: 30px; padding-top:20px;"
         *ngIf="!application?.isPaid">
         <table>
           <tr>
             <td>
-              <h2 class="round-icon-wrapper"><i class="fas fa-info-circle" _ngcontent-jyo-c6="" style="color:#fff;"></i>
+              <h2 class="round-icon-wrapper"><fa-icon [icon]="faInfoCircle" style="color:#fff;"></fa-icon>
               </h2>
             </td>
             <td style="padding-left: 10px;">
-              <h2 style="color:#fff" _ngcontent-jyo-c6="">Instructions:</h2>
+              <h2 style="color:#fff" >Instructions:</h2>
             </td>
           </tr>
         </table>
@@ -194,13 +194,13 @@
             on the page to enter your organization structure:
           </p>
           <ul>
-            <li>Add associates using the <i class="fas fa-plus">Add</i> buttons.</li>
-            <li>Clicking the <i _ngcontent-ema-c17="" class="fas fa-pencil-alt ng-star-inserted"></i> icon will allow
+            <li>Add associates using the <fa-icon [icon]="faPlus">Add</fa-icon> buttons.</li>
+            <li>Clicking the <fa-icon [icon]="faPencilAlt"></fa-icon> icon will allow
               you to <strong>update associate names</strong> and <strong>modify share amounts</strong> to indicate share
               transfers.</li>
-            <li>Confirm changes by clicking <i _ngcontent-dqh-c17="" class="fas fa-save save ng-star-inserted"></i>.
+            <li>Confirm changes by clicking <fa-icon [icon]="faSave"></fa-icon>.
             </li>
-            <li>Clicking the <i _ngcontent-ema-c17="" class="fas fa-trash-alt"></i> icon will <strong>remove</strong> an
+            <li>Clicking the <fa-icon [icon]="faTrashAlt"></fa-icon> icon will <strong>remove</strong> an
               associate from your organization structure.</li>
           </ul>
 

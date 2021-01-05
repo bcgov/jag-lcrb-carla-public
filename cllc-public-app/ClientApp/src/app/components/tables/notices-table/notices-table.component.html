@@ -1,0 +1,16 @@
+<table class="notices">
+  <thead *ngIf="rows?.length > 0">
+    <th class="text-left">File Name</th>
+    <th>Date</th>
+    <th>Size</th>
+  </thead>
+  <tr *ngFor="let entry of rows; let i=index" class="table-row">
+    <td class="text-left">
+      <a target="_blank" href="{{entry.downloadUrl}}" download>
+        <span><i class="fa fa-download" style="margin-right: 10px;"></i>{{entry.name}}</span>
+      </a>
+    </td>
+    <td>{{localDate(entry.timelastmodified)}}</td>
+    <td>{{bytesToKB(entry.size)}} KB</td>
+  </tr>
+</table>

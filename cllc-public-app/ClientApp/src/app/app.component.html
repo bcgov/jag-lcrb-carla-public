@@ -3,7 +3,7 @@
 
 <div style="height: 100%;" *ngIf="featureFlagService.initialized">
   <section class="container not-supported-browser" *ngIf="isIE()">
-    <p><i class="fab fa-internet-explorer" style="margin-right:10px;"></i>Internet Explorer is no longer supported.</p>
+    <p><fa-icon [icon]="faInternetExplorer" style="margin-right:10px;"></fa-icon>Internet Explorer is no longer supported.</p>
     <p>Please use <a href="https://google.com/chrome" target="_blank" class="IE">Google Chrome</a>,
       <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank" class="IE">Firefox</a> or
       <a href="https://www.microsoft.com/en-us/edge" target="_blank" class="IE">Microsoft Edge</a>.</p>
@@ -141,6 +141,8 @@
                       class="nav-link" routerLink="/covid-temporary-extension">Covid Temporary Extension</a>
                     <a appRemoveIfFeatureOff="LGApprovals" *ngIf="account?.businessType === 'LocalGovernment' && account?.localGovernmentId" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/lg-approvals">Applications for Review</a>
+                    <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
+                      class="nav-link" routerLink="/notices">Notices</a>
                   </li>
                 </ul>
               </div>
@@ -150,7 +152,7 @@
               <button color="primary"
                 style="background-color: transparent; color: #FFF; padding: 0; border: none; margin-top: 20px; margin-right: 10px;"
                 MatBadgeSize='small' matBadge="!" matBadgePosition="after" matBadgeColor="warn">
-                <i class="fas fa-lg fa-bell"></i>&nbsp;&nbsp;&nbsp;
+                <fa-icon [icon]="faBell" class="fa-lg"></fa-icon>&nbsp;&nbsp;&nbsp;
               </button>
             </span>
           </div>
@@ -159,7 +161,7 @@
       <!-- /NAVBAR END -->
       <section *ngIf="showMessageCenterContent" style="padding: 10px; background-color: #FFF;">
         <mat-card *ngFor="let item of linkedFederalReports" style="margin-bottom: 5px;">
-          <i class="fas fa-2x fa-business-time"></i> &nbsp;
+          <fa-icon [icon]="faBusinessTime" class="fa-2x"></fa-icon> &nbsp;
           <strong>Federal Tracking Report</strong> for <strong>{{item.establishmentName}}</strong> for
           <strong>{{Months[parseInt(item.reportingPeriodMonth, 10) -1]}} {{item.reportingPeriodYear}}</strong> has not
           been submitted. The report

@@ -81,7 +81,7 @@ export enum ApplicationTypeNames {
   Marketer = 'Marketing',
   MarketingRenewal = 'Marketing Renewal',
   LGINClaim = 'LG/IN Claim',
-  LiquorRelocation = 'Liquor Licence Relocation',
+  LRSTransferofLocation = 'LRS Transfer of Location',
   LiquorRenewal = 'Liquor Licence Renewal',
   LiquorLicenceTransfer = 'Liquor Licence Transfer',
   PermanentChangeToALicensee = 'Permanent Change to a Licensee',

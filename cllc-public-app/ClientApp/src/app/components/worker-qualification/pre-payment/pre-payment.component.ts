@@ -5,6 +5,7 @@ import { UserDataService } from '@services/user-data.service';
 import { WorkerDataService } from '@services/worker-data.service.';
 import { Worker } from '@models/worker.model';
 import { ActivatedRoute } from '@angular/router';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-pre-payment',
@@ -12,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./pre-payment.component.scss']
 })
 export class PrePaymentComponent implements OnInit {
+  faSave = faSave;
   currentUser: User;
   worker: Worker;
   workerId: string;

@@ -23,6 +23,8 @@ import { KeyValue } from '@angular/common';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { LicenseDataService } from '@app/services/license-data.service';
 import { UPLOAD_FILES_MODE, ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
+import { faExclamationCircle, faQuestionCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
 
 const ValidationErrorMap = {
   renewalCriminalOffenceCheck: 'Please answer question 1',
@@ -55,13 +57,16 @@ const ValidationErrorMap = {
   styleUrls: ['./application-renewal.component.scss']
 })
 export class ApplicationRenewalComponent extends FormBase implements OnInit {
+  faExclamationCircle = faExclamationCircle;
+  faQuestionCircle = faQuestionCircle;
+  faSave = faSave;
+  faTrashAlt = faTrashAlt;
   //establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
 
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
-  busy: Subscription;
   accountId: string;
   payMethod: string;
   validationMessages: any[];
@@ -80,6 +85,10 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   uploadedFinancialIntegrityDocuments: 0;
   uploadedAssociateDocuments: 0;
   window = window;
+  dataLoaded: boolean;
+  submitReqInProgress: boolean;
+  cancelReqInProgress: boolean;
+  saveForLateInProgress: boolean;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -151,20 +160,22 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       }),
     });
 
-    this.applicationDataService.getSubmittedApplicationCount()
+    let sub = this.applicationDataService.getSubmittedApplicationCount()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.submittedApplications = value);
+    this.subscriptionList.push(sub);
 
     //this.establishmentWatchWordsService.initialize();
 
-    this.store.select(state => state.currentAccountState.currentAccount)
+    sub = this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(filter(account => !!account))
       .subscribe((account) => {
         this.account = account;
       });
+    this.subscriptionList.push(sub);
 
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+    sub = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
         if (data.establishmentParcelId) {
@@ -189,11 +200,14 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
           this.form.disable();
         }
         this.savedFormData = this.form.value;
+        this.dataLoaded = true;
       },
         () => {
           console.log('Error occured');
+          this.dataLoaded = true;
         }
       );
+    this.subscriptionList.push(sub);
   }
 
   private hideFormControlByType() {
@@ -201,7 +215,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     if (!(this.application && this.application.applicationType)) {
       return;
     }
-    if(this.application.applicationType.name ===  ApplicationTypeNames.MarketingRenewal) {
+    if (this.application.applicationType.name === ApplicationTypeNames.MarketingRenewal) {
       this.form.get("renewalBranding").clearValidators();
       this.form.get("renewalSignage").clearValidators();
       this.form.get("renewalEstablishmentAddress").clearValidators();
@@ -220,7 +234,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   }
 
   isMarketing(): boolean {
-    return this.application.applicationType.name ===  ApplicationTypeNames.MarketingRenewal;
+    return this.application.applicationType.name === ApplicationTypeNames.MarketingRenewal;
   }
 
   isTouchedAndInvalid(fieldName: string): boolean {
@@ -228,19 +242,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       && !this.form.get(fieldName).valid;
   }
 
-  doAction(licenseId: string, actionName: string) {
-    this.busy = this.licenceDataService.createApplicationForActionType(licenseId, actionName)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(data => {
-        this.window.open(`/account-profile/${data.id}`, 'blank');
-      },
-        () => {
-          this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
-            { duration: 3500, panelClass: ['red-snackbar'] });
-          console.log('Error starting a Change Licence Application');
-        }
-      );
-  }
 
   canDeactivate(): Observable<boolean> | boolean {
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
@@ -248,7 +249,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       return true;
     } else {
       const subj = new Subject<boolean>();
-      this.busy = this.save(true).subscribe(res => {
+      this.save(true).subscribe(res => {
         subj.next(res);
       });
       return subj;
@@ -268,10 +269,10 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
 
-    return forkJoin(
+    return forkJoin([
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
-    ).pipe(takeWhile(() => this.componentActive))
+    ]).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         return of(false);
@@ -307,19 +308,23 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   /**
    * Submit the application for payment
    * */
-  submit_application() {
+  submitApplication() {
     if (!this.isValid()) {
       this.showValidationMessages = true;
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       this.submitPayment();
     } else {
-      this.busy = this.save(true)
+      this.submitReqInProgress = true;
+      this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
             this.submitPayment();
+          } else {
+            this.submitReqInProgress = false;
           }
-        });
+        },
+          error => { this.submitReqInProgress = false; });
     }
   }
 
@@ -327,9 +332,10 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
-    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+    this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(res => {
+        this.submitReqInProgress = false;
         const jsonUrl = res;
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
@@ -337,6 +343,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
         if (err._body === 'Payment already made') {
           this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
+        this.submitReqInProgress = false;
       });
   }
 
@@ -370,15 +377,18 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       .subscribe(cancelApplication => {
         if (cancelApplication) {
           // delete the application.
-          this.busy = this.applicationDataService.cancelApplication(this.applicationId)
+          this.cancelReqInProgress = true;
+          this.applicationDataService.cancelApplication(this.applicationId)
             .pipe(takeWhile(() => this.componentActive))
             .subscribe(() => {
+              this.cancelReqInProgress = false;
               this.savedFormData = this.form.value;
               this.router.navigate(['/dashboard']);
             },
               () => {
                 this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
                 console.error('Error cancelling the application');
+                this.cancelReqInProgress = false;
               });
         }
       });
@@ -415,12 +425,18 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   }
 
   saveForLater() {
-    this.busy = this.save(true)
+    this.saveForLateInProgress = true;
+    this.save(true)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((result: boolean) => {
+        this.saveForLateInProgress = false;
         if (result) {
           this.router.navigate(['/dashboard']);
         }
+
+      }, error => {
+        this.saveForLateInProgress = false;
+        console.error(error)
       });
   }
 

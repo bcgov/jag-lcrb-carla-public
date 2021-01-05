@@ -4,7 +4,7 @@
     And request a structural change for the approved application
 
 @cannabis @indigenousnation @crsstructuralchanges
-Scenario: Indigenous Nation Cannabis Structural Changes
+Scenario: Cannabis Structural Changes (Indigenous Nation)
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -23,7 +23,7 @@ Scenario: Indigenous Nation Cannabis Structural Changes
     Then I see the login page
 
 @cannabis @partnership @crsstructuralchanges
-Scenario: Partnership Cannabis Structural Changes
+Scenario: Cannabis Structural Changes (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -42,7 +42,7 @@ Scenario: Partnership Cannabis Structural Changes
     Then I see the login page
 
 @cannabis @privatecorporation @crsstructuralchanges
-Scenario: Private Corporation Cannabis Structural Changes
+Scenario: Cannabis Structural Changes (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -61,7 +61,7 @@ Scenario: Private Corporation Cannabis Structural Changes
     Then I see the login page
 
 @cannabis @publiccorporation @crsstructuralchanges
-Scenario: Public Corporation Cannabis Structural Changes
+Scenario: Cannabis Structural Changes (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -80,7 +80,7 @@ Scenario: Public Corporation Cannabis Structural Changes
     Then I see the login page
 
 @cannabis @society @crsstructuralchanges
-Scenario: Society Cannabis Structural Changes
+Scenario: Cannabis Structural Changes (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -99,7 +99,7 @@ Scenario: Society Cannabis Structural Changes
     Then I see the login page
 
 @cannabis @soleproprietorship @crsstructuralchanges
-Scenario: Sole Proprietorship Cannabis Structural Changes
+Scenario: Cannabis Structural Changes (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure

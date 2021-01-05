@@ -351,11 +351,11 @@
 
             <section class="error mt-3 p-3" *ngIf="!form.valid && form.touched">
                 <div *ngIf="!validationMessages?.length">
-                    <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+                    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
                     <span>Some required fields have not been completed</span>
                 </div>
                 <div *ngIf="validationMessages?.length">
-                    <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+                    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
                     <span>The following fields are not valid:</span>
                 </div>
                 <ul *ngFor="let message of validationMessages">
@@ -367,11 +367,11 @@
 
             <section style="position: relative; margin-top: 20px;">
                 <button class="btn btn-primary" (click)="submitApplication()">
-                    <i class="fa fa-save" style="color: #fff;"></i>
+                    <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
                     SUBMIT APPLICATION</button>
                 <span style="float: right; color: #1a5a96; padding-top: 10px;">
                     <a routerLink="/">
-                        <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+                        <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
                         Cancel Application
                     </a>
                 </span>
