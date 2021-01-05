@@ -166,6 +166,11 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
                     programAccountStatus.programAccountReasonCode = "111";
                     break;
 
+                case OneStopHubStatusChange.CancellationRemoved: 
+                    programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_ACTIVE;
+                    programAccountStatus.programAccountReasonCode = null;
+                    break;
+
                 case OneStopHubStatusChange.Expired:
                     programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_CLOSED;
                     programAccountStatus.programAccountReasonCode = "112";
@@ -173,7 +178,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
 
                 case OneStopHubStatusChange.Renewed:
                     programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_ACTIVE;
-                    programAccountStatus.programAccountReasonCode = "112";
+                    programAccountStatus.programAccountReasonCode = null;
                     break;
 
                 case OneStopHubStatusChange.Suspended:
