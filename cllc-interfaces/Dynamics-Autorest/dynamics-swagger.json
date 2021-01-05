@@ -56120,6 +56120,9 @@
         "adoxio_specialeventdescripton": {
           "type": "string"
         },
+        "adoxio_responsibleindividualses": {
+          "type": "string"
+        },
         "adoxio_typeofevent": {
           "format": "int32",
           "type": "integer"
