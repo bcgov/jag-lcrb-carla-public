@@ -235,20 +235,60 @@ namespace bdd_tests
         }
 
 
-        [And(@"I enter the licence GUID (.*)")]
-        public void EnterLicenceGUID(string licenceGUID)
+        [And(@"I enter the licence GUID for (.*)")]
+        public void EnterLicenceGUID(string scenario)
         {
-            // TODO: need to distinguish between 6 visible textboxes
             ngDriver.IgnoreSynchronization = true;
-            IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-            executor.ExecuteScript("arguments[0].value='31b08509-909b-ea11-b818-00505683fbf4';", uiEnterGUID);
+
+            if (scenario == "SendChangeAddress")
+            {
+                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].value='31b08509-909b-ea11-b818-00505683fbf4';", uiEnterGUID);
+            }
+
+            if (scenario == "SendChangeName")
+            {
+                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].value='31b08509-909b-ea11-b818-00505683fbf4';", uiEnterGUID);
+            }
+
+            if (scenario == "SendChangeStatus")
+            {
+                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr[1]/td[2]/input"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].value='31b08509-909b-ea11-b818-00505683fbf4';", uiEnterGUID);
+            }
+
+            if (scenario == "SendLicenceCreationMessage")
+            {
+                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].value='31b08509-909b-ea11-b818-00505683fbf4';", uiEnterGUID);
+            }
+
+            if (scenario == "SendProgramAccountDetailsBroadcastMessage")
+            {
+                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].value='31b08509-909b-ea11-b818-00505683fbf4';", uiEnterGUID);
+            }
+
             ngDriver.IgnoreSynchronization = false;
         }
 
 
         [Then(@"the correct 200 response is displayed")]
         public void CorrectResponse()
+        {
+            // to be updated
+            // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'200')]")).Displayed);
+        }
+
+
+        [And(@"the correct 200 response is displayed")]
+        public void CorrectResponse2()
         {
             // to be updated
             // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'200')]")).Displayed);
