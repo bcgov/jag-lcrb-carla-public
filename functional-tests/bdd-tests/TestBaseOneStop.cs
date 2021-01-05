@@ -32,6 +32,10 @@ namespace bdd_tests
         [And(@"I click on the (.*)")]
         public void ClickOnSwaggerButton(string buttonType)
         {
+            /*******************
+             *  Authorize button
+             *******************/
+
             if (buttonType == "Authorize button")
             {
                 ngDriver.IgnoreSynchronization = true;
@@ -41,6 +45,10 @@ namespace bdd_tests
                 ngDriver.IgnoreSynchronization = false;
             }
 
+            /*******************
+            *  Close button
+            *******************/
+
             if (buttonType == "Close button")
             {
                 ngDriver.IgnoreSynchronization = true;
@@ -49,6 +57,10 @@ namespace bdd_tests
                 executor.ExecuteScript("arguments[0].click();", uiButton);
                 ngDriver.IgnoreSynchronization = false;
             }
+
+            /*******************
+            *  Get buttons
+            *******************/
 
             if (buttonType == "Get button for SendChangeAddress")
             {
@@ -104,8 +116,11 @@ namespace bdd_tests
                 ngDriver.IgnoreSynchronization = false;
             }
 
-            // TODO: need to distinguish between 6 visible buttons
-            if (buttonType == "Try it out button")
+            /********************
+            *  Try it out buttons
+            ********************/
+
+            if (buttonType == "Try it out button for SendChangeAddress")
             {
                 ngDriver.IgnoreSynchronization = true;
                 IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
@@ -114,11 +129,105 @@ namespace bdd_tests
                 ngDriver.IgnoreSynchronization = false;
             }
 
-            // TODO: need to distinguish between 6 visible buttons
-            if (buttonType == "Execute button")
+            if (buttonType == "Try it out button for SendChangeName")
             {
                 ngDriver.IgnoreSynchronization = true;
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[2]/button"));
+                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+                ngDriver.IgnoreSynchronization = false;
+            }
+
+            if (buttonType == "Try it out button for SendChangeStatus")
+            {
+                ngDriver.IgnoreSynchronization = true;
+                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+                ngDriver.IgnoreSynchronization = false;
+            }
+
+            if (buttonType == "Try it out button for SendLicenceCreationMessage")
+            {
+                ngDriver.IgnoreSynchronization = true;
+                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+                ngDriver.IgnoreSynchronization = false;
+            }
+
+            if (buttonType == "Try it out button for SendProgramAccountDetailsBroadcastMessage")
+            {
+                ngDriver.IgnoreSynchronization = true;
+                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+                ngDriver.IgnoreSynchronization = false;
+            }
+
+            if (buttonType == "Try it out button for LdbExport")
+            {
+                ngDriver.IgnoreSynchronization = true;
+                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+                ngDriver.IgnoreSynchronization = false;
+            }
+
+
+            /********************
+            *  Execute buttons
+            ********************/
+
+            if (buttonType == "Execute button for SendChangeAddress")
+            {
+                ngDriver.IgnoreSynchronization = true;
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+                ngDriver.IgnoreSynchronization = false;
+            }
+
+            if (buttonType == "Execute button for SendChangeName")
+            {
+                ngDriver.IgnoreSynchronization = true;
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+                ngDriver.IgnoreSynchronization = false;
+            }
+
+            if (buttonType == "Execute button for SendChangeStatus")
+            {
+                ngDriver.IgnoreSynchronization = true;
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+                ngDriver.IgnoreSynchronization = false;
+            }
+
+            if (buttonType == "Execute button for SendLicenceCreationMessage")
+            {
+                ngDriver.IgnoreSynchronization = true;
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+                ngDriver.IgnoreSynchronization = false;
+            }
+
+            if (buttonType == "Execute button for SendProgramAccountDetailsBroadcastMessage")
+            {
+                ngDriver.IgnoreSynchronization = true;
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+                ngDriver.IgnoreSynchronization = false;
+            }
+
+            if (buttonType == "Execute button for LdbExport")
+            {
+                ngDriver.IgnoreSynchronization = true;
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
                 ngDriver.IgnoreSynchronization = false;
