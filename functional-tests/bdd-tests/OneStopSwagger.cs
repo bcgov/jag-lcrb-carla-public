@@ -22,6 +22,7 @@ Scenario: OneStop Send Change of Address
     Given I click on the Swagger link for OneStop
     And I click on the Authorize button
     And I click on the second Authorize button
+    And I click on the Close button
     And I click on the Get button for SendChangeAddress
     And I click on the Try it out button for SendChangeAddress 
     And I enter the licence GUID for SendChangeAddress
@@ -33,6 +34,7 @@ Scenario: OneStop Send Change of Name
     Given I click on the Swagger link for OneStop
     And I click on the Authorize button
     And I click on the second Authorize button
+    And I click on the Close button
     And I click on the Get button for SendChangeName
     And I click on the Try it out button for SendChangeName
     And I enter the licence GUID for SendChangeName
@@ -44,6 +46,7 @@ Scenario: OneStop Send Change of Status
     Given I click on the Swagger link for OneStop
     And I click on the Authorize button
     And I click on the second Authorize button
+    And I click on the Close button
     And I click on the Get button for SendChangeStatus
     And I click on the Try it out button for SendChangeStatus
     And I enter the licence GUID for SendChangeStatus
@@ -55,6 +58,7 @@ Scenario: OneStop Send Licence Creation Message
     Given I click on the Swagger link for OneStop
     And I click on the Authorize button
     And I click on the second Authorize button
+    And I click on the Close button
     And I click on the Get button for SendLicenceCreationMessage
     And I click on the Try it out button for SendLicenceCreationMessage
     And I enter the licence GUID for SendLicenceCreationMessage
@@ -66,6 +70,7 @@ Scenario: OneStop Send Program Account Details Broadcast
     Given I click on the Swagger link for OneStop
     And I click on the Authorize button
     And I click on the second Authorize button
+    And I click on the Close button
     And I click on the Get button for SendProgramAccountDetailsBroadcastMessage
     And I click on the Try it out button for SendProgramAccountDetailsBroadcastMessage
     And I enter the licence GUID for SendProgramAccountDetailsBroadcastMessage
@@ -77,6 +82,7 @@ Scenario: OneStop LDB Export
     Given I click on the Swagger link for OneStop
     And I click on the Authorize button
     And I click on the second Authorize button
+    And I click on the Close button
     And I click on the Get button for LdbExport
     And I click on the Try it out button for LdbExport
     And I click on the Execute button for LdbExport
@@ -87,6 +93,7 @@ Scenario: OneStop LDB Export
     #Given I click on the Swagger link for OneStop
     #And I click on the Authorize button
     #And I click on the second Authorize button
+    #And I click on the Close button
     #And I click on the Get button for SendChangeAddress
     #And I click on the Try it out button for SendChangeAddress 
     #And I enter the licence GUID for SendChangeAddress
@@ -115,7 +122,7 @@ Scenario: OneStop LDB Export
     #And I click on the Get button for LdbExport
     #And I click on the Try it out button for LdbExport
     #And I click on the Execute button for LdbExport
-    #Then the correct 200 response is displayed      
+    #Then the correct 200 response is displayed       
 */
 
 namespace bdd_tests
