@@ -67,37 +67,37 @@ Scenario: OneStop LDB Export
     And I click on the Execute button for LdbExport
     Then the correct 200 response is displayed  
 
-@onestoprelease
-Scenario: OneStop Release
-    Given I click on the Swagger link for OneStop
-    And I click on the Authorize button
-    And I click on the Close button
-    And I click on the Get button for SendChangeAddress
-    And I click on the Try it out button for SendChangeAddress 
-    And I enter the licence GUID for SendChangeAddress
-    And I click on the Execute button for SendChangeAddress
-    And the correct 200 response is displayed   
-    And I click on the Get button for SendChangeName
-    And I click on the Try it out button for SendChangeName
-    And I enter the licence GUID for SendChangeName
-    And I click on the Execute button for SendChangeName
-    And the correct 200 response is displayed   
-    And I click on the Get button for SendChangeStatus
-    And I click on the Try it out button for SendChangeStatus
-    And I enter the licence GUID for SendChangeStatus
-    And I click on the Execute button for SendChangeStatus
-    And the correct 200 response is displayed   
-    And I click on the Get button for SendLicenceCreationMessage
-    And I click on the Try it out button for SendLicenceCreationMessage
-    And I enter the licence GUID for SendLicenceCreationMessage
-    And I click on the Execute button for SendLicenceCreationMessage
-    And the correct 200 response is displayed   
-    And I click on the Get button for SendProgramAccountDetailsBroadcastMessage
-    And I click on the Try it out button for SendProgramAccountDetailsBroadcastMessage
-    And I enter the licence GUID for SendProgramAccountDetailsBroadcastMessage
-    And I click on the Execute button for SendProgramAccountDetailsBroadcastMessage
-    And the correct 200 response is displayed   
-    And I click on the Get button for LdbExport
-    And I click on the Try it out button for LdbExport
-    And I click on the Execute button for LdbExport
-    Then the correct 200 response is displayed 
+#@onestoprelease
+#Scenario: OneStop Release
+    #Given I click on the Swagger link for OneStop
+    #And I click on the Authorize button
+    #And I click on the Close button
+    #And I click on the Get button for SendChangeAddress
+    #And I click on the Try it out button for SendChangeAddress 
+    #And I enter the licence GUID for SendChangeAddress
+    #And I click on the Execute button for SendChangeAddress
+    #And the correct 200 response is displayed   
+    #And I click on the Get button for SendChangeName
+    #And I click on the Try it out button for SendChangeName
+    #And I enter the licence GUID for SendChangeName
+    #And I click on the Execute button for SendChangeName
+    #And the correct 200 response is displayed   
+    #And I click on the Get button for SendChangeStatus
+    #And I click on the Try it out button for SendChangeStatus
+    #And I enter the licence GUID for SendChangeStatus
+    #And I click on the Execute button for SendChangeStatus
+    #And the correct 200 response is displayed   
+    #And I click on the Get button for SendLicenceCreationMessage
+    #And I click on the Try it out button for SendLicenceCreationMessage
+    #And I enter the licence GUID for SendLicenceCreationMessage
+    #And I click on the Execute button for SendLicenceCreationMessage
+    #And the correct 200 response is displayed   
+    #And I click on the Get button for SendProgramAccountDetailsBroadcastMessage
+    #And I click on the Try it out button for SendProgramAccountDetailsBroadcastMessage
+    #And I enter the licence GUID for SendProgramAccountDetailsBroadcastMessage
+    #And I click on the Execute button for SendProgramAccountDetailsBroadcastMessage
+    #And the correct 200 response is displayed   
+    #And I click on the Get button for LdbExport
+    #And I click on the Try it out button for LdbExport
+    #And I click on the Execute button for LdbExport
+    #Then the correct 200 response is displayed 
