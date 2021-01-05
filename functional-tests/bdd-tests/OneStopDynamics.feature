@@ -39,7 +39,7 @@ Scenario: OneStop Cancel Licence (Private Corporation)
     And I click on Settings
     And I click on OneStop Message Items
     And I click on the new licence record
-    Then the payload is correct
+    Then the payload sets the programAccountStatusCode to 02 and the programAccountReasonCode to 111
 
 @onestopdynamics @manualonly
 Scenario: OneStop Remove Cancellation (Private Corporation)
@@ -59,7 +59,7 @@ Scenario: OneStop Remove Cancellation (Private Corporation)
     And I click on Settings
     And I click on OneStop Message Items
     And I click on the new licence record
-    Then the payload is correct
+    Then the payload sets the programAccountStatusCode to 01 and the programAccountReasonCode to null
 
 @onestopdynamics @manualonly
 Scenario: OneStop Enter Licence Dormancy (Private Corporation)
@@ -79,7 +79,7 @@ Scenario: OneStop Enter Licence Dormancy (Private Corporation)
     And I click on Settings
     And I click on OneStop Message Items
     And I click on the new licence record
-    Then the payload is correct
+    Then the payload sets the programAccountStatusCode to 02 and the programAccountReasonCode to 115
 
 @onestopdynamics @manualonly
 Scenario: OneStop End Licence Dormancy (Private Corporation)
@@ -99,7 +99,7 @@ Scenario: OneStop End Licence Dormancy (Private Corporation)
     And I click on Settings
     And I click on OneStop Message Items
     And I click on the new licence record
-    Then the payload is correct
+    Then the payload sets the programAccountStatusCode to 01 and the programAccountReasonCode to null
 
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Expired (Private Corporation)
@@ -119,7 +119,7 @@ Scenario: OneStop Licence Expired (Private Corporation)
     And I click on Settings
     And I click on OneStop Message Items
     And I click on the new licence record
-    Then the payload is correct
+    Then the payload sets the programAccountStatusCode to 02 and the programAccountReasonCode to 112
 
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Renewed (Private Corporation)
@@ -139,7 +139,7 @@ Scenario: OneStop Licence Renewed (Private Corporation)
     And I click on Settings
     And I click on OneStop Message Items
     And I click on the new licence record
-    Then the payload is correct
+    Then the payload sets the programAccountStatusCode to 01 and the programAccountReasonCode to null
 
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Suspended (Private Corporation)
@@ -159,7 +159,7 @@ Scenario: OneStop Licence Suspended (Private Corporation)
     And I click on Settings
     And I click on OneStop Message Items
     And I click on the new licence record
-    Then the payload is correct
+    Then the payload sets the programAccountStatusCode to 02 and the programAccountReasonCode to 114
 
 @onestopdynamics @manualonly
 Scenario: OneStop Licence End Suspension (Private Corporation)
@@ -179,4 +179,4 @@ Scenario: OneStop Licence End Suspension (Private Corporation)
     And I click on Settings
     And I click on OneStop Message Items
     And I click on the new licence record
-    Then the payload is correct
+    Then the payload sets the programAccountStatusCode to 01 and the programAccountReasonCode to null
