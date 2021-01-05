@@ -49,6 +49,10 @@ namespace bdd_tests
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
+            /*******************
+            *  Close button
+            *******************/
+
             if (buttonType == "Close button")
             {
                 IWebElement uiButton = ngDriver.FindElement(By.CssSelector("button.btn-done"));
