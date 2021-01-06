@@ -45,6 +45,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="OneStopDynamics.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="OneStopSwagger.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
