@@ -10,6 +10,8 @@ import { ApplicationType } from '@models/application-type.model';
 import { PaymentDataService } from '@services/payment-data.service';
 import { Subscription, forkJoin } from 'rxjs';
 import { faCheck, faCopy, faExclamation } from '@fortawesome/free-solid-svg-icons';
+import { FeatureFlagService } from '@services/feature-flag.service';
+import { LEConnectionsDataService } from '@services/le-connections-data.service';
 
 @Component({
   selector: 'app-security-screening-requirements',
@@ -31,12 +33,15 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
   errorMessages: string[] = [];
   skipScreeningRequirements: boolean = false;
   dataLoaded: boolean;
+  LEConnectionsFeatureOn: boolean;
 
   constructor(private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private applicationDataService: ApplicationDataService,
     private licenseDataService: LicenseDataService,
     private paymentDataService: PaymentDataService,
+    private featureFlagService: FeatureFlagService,
+    private leConnectionsDataService: LEConnectionsDataService,
     private legalEntityDataService: LegalEntityDataService) {
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
   }
@@ -59,16 +64,25 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
           }
         });
     }
+    
+    this.featureFlagService.featureOn('LEConnections')
+      .subscribe(LEConnectionsFeatureOn => {
+        // call the appropriate service depending on the feature flag
+        let securitySummary = this.legalEntityDataService.getCurrentSecurityScreeningItems();
+        if(LEConnectionsFeatureOn){
+          securitySummary = this.leConnectionsDataService.getCurrentSecurityScreeningItems();
+        }
+        forkJoin([
+          securitySummary,
+          this.licenseDataService.getAllCurrentLicenses()
+        ]).subscribe(([summary, licences]) => {
+          this.data = summary;
+          this.liquorLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Liquor').length > 0;
+          this.cannabisLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Cannabis').length > 0;
+          this.dataLoaded = true;
+        });
+      });
 
-    this.busy = forkJoin([
-      this.legalEntityDataService.getCurrentSecurityScreeningItems(),
-      this.licenseDataService.getAllCurrentLicenses()
-    ]).subscribe(([summary, licences]) => {
-      this.data = summary;
-      this.liquorLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Liquor').length > 0;
-      this.cannabisLicenceExist = licences.filter(lc => lc.licenceTypeCategory === 'Cannabis').length > 0;
-      this.dataLoaded = true;
-    });
   }
 
   // Copy value to clipboard
