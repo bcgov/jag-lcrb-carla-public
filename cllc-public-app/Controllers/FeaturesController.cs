@@ -107,6 +107,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 features.Add("LEConnections");
             }
+
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_TUA_EVENTS"]))
+            {
+                features.Add("TemporaryUseAreaEvents");
+            }
+
             return features;
         }
 
