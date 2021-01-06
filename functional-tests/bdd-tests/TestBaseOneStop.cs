@@ -60,52 +60,6 @@ namespace bdd_tests
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
-            /*******************
-            *  Get buttons
-            *******************/
-
-            if (buttonType == "Get button for SendChangeAddress")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector(".no-margin span:nth-child(2) #operations-OneStop-OneStop_GET .opblock-summary-method"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Get button for SendChangeName")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(3) .opblock-summary-method"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Get button for SendChangeStatus")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(4) .opblock-summary-method"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Get button for SendLicenceCreationMessage")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(5) .opblock-summary-method"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Get button for SendProgramAccountDetailsBroadcastMessage")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(6) .opblock-summary-method"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Get button for LdbExport")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(7) .opblock-summary-method"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
             /********************
             *  Try it out buttons
             ********************/
@@ -152,6 +106,51 @@ namespace bdd_tests
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
+            /*******************
+            *  Get buttons
+            *******************/
+
+            if (buttonType == "Get button for SendChangeAddress")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.XPath("/html/body/div/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[2]/div/div[1]/span[1]"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Get button for SendChangeName")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(3) .opblock-summary-method"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Get button for SendChangeStatus")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(4) .opblock-summary-method"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Get button for SendLicenceCreationMessage")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(5) .opblock-summary-method"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Get button for SendProgramAccountDetailsBroadcastMessage")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(6) .opblock-summary-method"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Get button for LdbExport")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(7) .opblock-summary-method"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
 
             /********************
             *  Execute buttons
