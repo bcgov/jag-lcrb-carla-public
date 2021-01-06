@@ -27,7 +27,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the (.*)")]
+        [And(@"I click on the SwaggerUI (.*)")]
         public void ClickOnSwaggerButton(string buttonType)
         {
             if (buttonType == "Authorize button")
