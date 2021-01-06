@@ -241,7 +241,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// GET all applications of the given application type in Dynamics for the current user
-        [HttpGet("current/by-type/{applicationType}")]
+        [HttpGet("current/by-type")]
         public JsonResult GetCurrentUserLgApprovalApplications(string applicationType)
         {
             var results = new List<ApplicationSummary>();
