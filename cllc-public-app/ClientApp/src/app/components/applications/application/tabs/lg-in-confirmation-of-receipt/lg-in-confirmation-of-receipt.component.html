@@ -38,7 +38,7 @@
 
         <app-file-uploader *ngIf="application?.id" documentType="LGIN Resolution"
             [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval"
-            (numberOfUploadedFiles)="uploadedResolutionDocuments = $event" [maxNumberOfFiles]="200"
+            (numberOfUploadedFiles)="onResolutionFileUpload($event)" [maxNumberOfFiles]="200"
             fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="application?.id"
             [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
         </app-file-uploader>
