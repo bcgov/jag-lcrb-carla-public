@@ -73,7 +73,7 @@
                             </div>
                             <div class="flags" class="missing">
                                 <p *ngIf="item.dormant"><fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>Licence
-                                    Dormant<fa-icon [icon]="faQuestionCircle" data-html="true" style="margin-left: 10px;" 
+                                    Dormant<fa-icon [icon]="faQuestionCircle" data-html="true" style="margin-left: 10px;"
                                         matTooltipClass="multiline-tooltip"
                                         matTooltip="Please contact LCRB to remove dormancy"></fa-icon></p>
                                 <p *ngIf="item.suspended"><fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>Licence
@@ -184,7 +184,7 @@
                                 <div
                                     *ngIf="((item.licenceTypeName.indexOf('Catering') >= 0 && isActive(item)) || hasEndorsementByName(item, 'Catering Endorsement')) && (actionsVisible(item) || item.isOperated)">
                                     <a [routerLink]="[ '/licence/' + item.licenseId + '/event']">
-                                        <fa-icon [icon]="faCalendarAlt"style="margin-right: 10px;"></fa-icon>Request Event
+                                        <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>Request Catered Event
                                         Authorization
                                     </a>
                                 </div>
@@ -288,9 +288,7 @@
                             </section>
                         </td>
                     </tr>
-                    <tr *ngIf="licenceTypeHasEvents(item?.licenceTypeName) && !item?.eventsBusy?.closed">
-                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-                    </tr>
+
                     <tr *ngIf="item?.events !== undefined && item?.events.length > 0">
                         <td colspan="5">
                             <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">

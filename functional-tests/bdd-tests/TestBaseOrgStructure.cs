@@ -92,7 +92,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButtonLeader = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] .fa-save span"));
+                NgWebElement uiConfirmButtonLeader = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmButtonLeader.Click();
 
                 /********** Individual Shareholder #0 **********/
@@ -136,7 +136,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButtonIndyShareholder = ngDriver.FindElement(By.CssSelector("[changetypesuffix='IndividualShareholder'] .fa-save span"));
+                NgWebElement uiConfirmButtonIndyShareholder = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmButtonIndyShareholder.Click();
 
                 /********** Business Shareholder #1 **********/
@@ -172,7 +172,7 @@ namespace bdd_tests
                 uiShareEmailBiz.SendKeys(businessEmail);
 
                 // select the business shareholder #1 confirm button
-                NgWebElement uiShareBizConfirmButton = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Shareholder'][changetypesuffix='BusinessShareholder'] .fa-save.ng-star-inserted span"));
+                NgWebElement uiShareBizConfirmButton = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiShareBizConfirmButton.Click();
 
                 // upload a notice of articles document for business shareholder #1 
@@ -224,7 +224,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButtonBusLeader = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='Leadership'] .fa-save span"));
+                NgWebElement uiConfirmButtonBusLeader = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmButtonBusLeader.Click();
 
                 /********** Business Shareholder #1 - Individual Shareholder #1 **********/
@@ -268,7 +268,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButtonBusIndyShareholder = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'] [changetypesuffix='IndividualShareholder'] .fa-save span"));
+                NgWebElement uiConfirmButtonBusIndyShareholder = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmButtonBusIndyShareholder.Click();
             }
 
@@ -311,7 +311,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmLeader = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmLeader = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmLeader.Click();
 
                 /********** Sole Proprietor > Leader #2 **********/
@@ -345,7 +345,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmLeader2 = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmLeader2 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmLeader2.Click();
 
                 /********** Sole Proprietor > Leader #3 **********/
@@ -379,7 +379,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmLeader3 = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmLeader3 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmLeader3.Click();
             }
 
@@ -443,7 +443,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmDirector = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmDirector = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmDirector.Click();
 
                 /********** Director #2 **********/
@@ -486,7 +486,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmDirector2 = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmDirector2 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmDirector2.Click();
 
                 /********** Director #3 **********/
@@ -529,7 +529,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmDirector3 = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmDirector3 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmDirector3.Click();
             }
 
@@ -584,7 +584,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmLeader = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmLeader = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmLeader.Click();
 
                 /********** Leader #2 **********/
@@ -627,7 +627,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmLeader2 = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmLeader2 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmLeader2.Click();
 
                 /********** Leader #3 **********/
@@ -670,7 +670,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmLeader3 = ngDriver.FindElement(By.CssSelector(".save span"));
+                NgWebElement uiConfirmLeader3 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmLeader3.Click();
             }
 
@@ -719,7 +719,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // select the Confirm button
-                NgWebElement uiConfirmPartner = ngDriver.FindElement(By.CssSelector(".fa-save span"));
+                NgWebElement uiConfirmPartner = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmPartner.Click();
 
                 // open business partner row
@@ -748,7 +748,7 @@ namespace bdd_tests
                 uiBizPartnerEmail.SendKeys(bizPartnerEmail);
 
                 // click on the business shareholder confirm button
-                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector("[changetypesuffix='BusinessShareholder'][addlabel='Add Business Partner'] .fa-save span"));
+                NgWebElement uiConfirmButton = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmButton.Click();
 
                 // upload a second partnership agreement
@@ -788,7 +788,7 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // click on individual partner2 confirm button
-                NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.CssSelector("[addlabel='Add Business Partner'][changetypesuffix='BusinessShareholder'] .fa-save span"));
+                NgWebElement uiConfirmButton2 = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmButton2.Click();
             }
 
@@ -855,17 +855,8 @@ namespace bdd_tests
                 SharedCalendarDate();
 
                 // click on the Confirm button
-                NgWebElement uiConfirmButtonLeader = ngDriver.FindElement(By.CssSelector("[changetypesuffix='Leadership'] .fa-save span"));
+                NgWebElement uiConfirmButtonLeader = ngDriver.FindElement(By.CssSelector("app-associate-list .fa-save"));
                 uiConfirmButtonLeader.Click();
-            }
-
-            if (businessType == " local government")
-            {
-                // upload a Selling It Right certificate
-                FileUpload("selling_it_right_certificate.pdf", "(//input[@type='file'])[3]");
-
-                // upload the additional supporting document
-                FileUpload("associates.pdf", "(//input[@type='file'])[5]");
             }
         }
     }

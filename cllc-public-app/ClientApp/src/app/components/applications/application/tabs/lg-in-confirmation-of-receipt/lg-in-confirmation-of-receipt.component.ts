@@ -151,7 +151,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
         let data = <Application>{
           ...this.application,
           ...this.form.value,
-          lGApprovalDecision: 'Approved',
+          lGApprovalDecision: this.uploadedResolutionDocuments > 0 ? 'Approved': 'Pending',
           lGDecisionSubmissionDate: new Date()
         };
 
@@ -188,6 +188,31 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     return dialogRef.afterClosed()
       .pipe(takeWhile(() => this.componentActive))
 
+  }
+
+  onResolutionFileUpload(filesUploaded: number){
+    this.uploadedResolutionDocuments = filesUploaded;
+
+    // Update the status if a resolution file was uploaded and the status is pending
+    if(this.isOpenedByLGForApproval && filesUploaded > 0  && this.application.lGApprovalDecision == 'Pending'){
+      let data = <Application>{
+        ...this.application,
+        ...this.form.value,
+        lGApprovalDecision: 'Approved',
+      };
+
+      this.busy = this.applicationDataService.updateApplication(data)
+        .subscribe(res => {
+          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.router.navigateByUrl('/lg-approvals');
+          this.approvingApplication = false;
+          this.cd.detectChanges();
+        }, error => {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          this.approvingApplication = false;
+          this.cd.detectChanges();
+        });
+    }
   }
 
 }

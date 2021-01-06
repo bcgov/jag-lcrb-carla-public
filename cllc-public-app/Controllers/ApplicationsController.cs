@@ -241,7 +241,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// GET all applications of the given application type in Dynamics for the current user
-        [HttpGet("current/by-type/{applicationType}")]
+        [HttpGet("current/by-type")]
         public JsonResult GetCurrentUserLgApprovalApplications(string applicationType)
         {
             var results = new List<ApplicationSummary>();
@@ -271,7 +271,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all local government approval applications in Dynamics for the current user
         [HttpGet("current/lg-approvals")]
-        public JsonResult GetLgApprovalApplications()
+        public IActionResult GetLgApprovalApplications()
         {
             var results = new List<Application>();
             // get the current user.
@@ -286,7 +286,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (account._adoxioLginlinkidValue != null)
                 {
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
-                    filter += $" and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
+                    filter += $" and (statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
+                    filter += $"       or ( statuscode eq {(int)AdoxioApplicationStatusCodes.Intake}"; 
+                    filter += $"             and adoxio_lgapprovaldecision eq {(int)LGDecision.Pending}";
+                    filter += "           )";
+                    filter += "      )";
 
                     var expand = new List<string>
                     {
@@ -297,18 +301,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         "adoxio_AssignedLicence",
                         "adoxio_ApplicationTypeId",
                         "adoxio_LicenceFeeInvoice",
-                        "adoxio_Invoice",
-                        "adoxio_application_SharePointDocumentLocations"
+                        "adoxio_Invoice"
                     };
 
                     var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
                     foreach (var dynamicsApplication in applications)
                     {
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
-                        var resolutionFiles = FileController.GetListFilesInFolder(
-                            dynamicsApplication.AdoxioApplicationid, "application", "LGIN Resolution", _dynamicsClient,
-                            _fileManagerClient, _logger).GetAwaiter().GetResult();
-                        if (resolutionFiles.Count > 0) viewModel.ResolutionDocsUploaded = true;
                         results.Add(viewModel);
                     }
                     
@@ -317,11 +316,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException e)
             {
-                _logger.LogError(e, "Error getting local government approval applications in Dynamics for the current user");
+                var errorText = "Error getting local government approval applications in Dynamics for the current user";
+                _logger.LogError(e, errorText);
+                return  StatusCode(StatusCodes.Status500InternalServerError, errorText);
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Unexpected Error getting local government approval applications in Dynamics for the current user");
+                var errorText = "Unexpected Error getting local government approval applications in Dynamics for the current user";
+                _logger.LogError(e, errorText);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorText);
             }
 
             return new JsonResult(results);

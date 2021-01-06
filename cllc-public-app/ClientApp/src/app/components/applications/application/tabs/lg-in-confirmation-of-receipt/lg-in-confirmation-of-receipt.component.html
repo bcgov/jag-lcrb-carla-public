@@ -25,7 +25,7 @@
 
     <section>
         <section class="ngtest-lg-instructions" [innerHTML]="htmlContent?.LocalGovernmentApproval"></section>
-
+        <section  *ngIf="!htmlContent?.LocalGovernmentApproval">
         <label>Provide a Resolution/Comment and any supporting reports with comments on:</label>
         <ul>
             <li>The impact of noise on nearby residents</li>
@@ -34,10 +34,11 @@
             <li>The LG/In recommendations (including whether or not the application is approved) and the reasons on
                 which they are based</li>
         </ul>
+      </section>
 
         <app-file-uploader *ngIf="application?.id" documentType="LGIN Resolution"
             [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval"
-            (numberOfUploadedFiles)="uploadedResolutionDocuments = $event" [maxNumberOfFiles]="200"
+            (numberOfUploadedFiles)="onResolutionFileUpload($event)" [maxNumberOfFiles]="200"
             fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="application?.id"
             [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
         </app-file-uploader>
