@@ -22,6 +22,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "account_primary_contact@odata.bind")]
         public string AccountPrimaryContactODataBind { get; set; }
+
+        public string PhsLink { get; set; }
+        public string CasLink { get; set; }
+    
     }
 
     public class DateFormatConverter : IsoDateTimeConverter
