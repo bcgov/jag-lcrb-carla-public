@@ -60,52 +60,6 @@ namespace bdd_tests
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
-            /********************
-            *  Try it out buttons
-            ********************/
-
-            if (buttonType == "Try it out button for SendChangeAddress")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Try it out button for SendChangeName")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Try it out button for SendChangeStatus")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Try it out button for SendLicenceCreationMessage")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Try it out button for SendProgramAccountDetailsBroadcastMessage")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Try it out button for LdbExport")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[1]/div[2]/button"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
             /*******************
             *  Get buttons
             *******************/
@@ -153,47 +107,93 @@ namespace bdd_tests
             }
 
             /********************
+            *  Try it out buttons
+            ********************/
+
+            if (buttonType == "Try it out button for SendChangeAddress")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.XPath("/html/body/div/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[2]/div/div[2]/div/div[1]/div[1]/div[2]/button"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Try it out button for SendChangeName")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Try it out button for SendChangeStatus")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Try it out button for SendLicenceCreationMessage")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Try it out button for SendProgramAccountDetailsBroadcastMessage")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Try it out button for LdbExport")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            /********************
             *  Execute buttons
             ********************/
 
             if (buttonType == "Execute button for SendChangeAddress")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[2]/button"));
+                IWebElement uiButton = ngDriver.FindElement(By.XPath("/html/body/div/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[2]/div/div[2]/div/div[2]/button"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
             if (buttonType == "Execute button for SendChangeName")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[2]/button"));
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
             if (buttonType == "Execute button for SendChangeStatus")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[2]/button"));
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
             if (buttonType == "Execute button for SendLicenceCreationMessage")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[2]/button"));
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
             if (buttonType == "Execute button for SendProgramAccountDetailsBroadcastMessage")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[2]/button"));
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
             if (buttonType == "Execute button for LdbExport")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[2]/button"));
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
@@ -205,35 +205,35 @@ namespace bdd_tests
         {
             if (scenario == "SendChangeAddress")
             {
-                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
+                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("/html/body/div/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[2]/div/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
 
             if (scenario == "SendChangeName")
             {
-                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
+                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
 
             if (scenario == "SendChangeStatus")
             {
-                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr[1]/td[2]/input"));
+                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
 
             if (scenario == "SendLicenceCreationMessage")
             {
-                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
+                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
 
             if (scenario == "SendProgramAccountDetailsBroadcastMessage")
             {
-                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("//*[@id='operations-OneStop-OneStop_GET']/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
+                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
