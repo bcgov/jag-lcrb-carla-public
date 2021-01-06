@@ -1525,7 +1525,7 @@
 
 
           <!-- RAS Details -->
-          <section *ngIf="application?.applicationType.showOwnershipDeclaration || showFormControl(application?.applicationType?.validInterest)">
+          <section *ngIf="application?.applicationType.showOwnershipDeclaration">
             <h3 class="blue-header">{{this.application?.licenseType}} Ownership Details</h3>
             <div class="content-bottom">
               <section *ngIf="application?.applicationType.showOwnershipDeclaration">
