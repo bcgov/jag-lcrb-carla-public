@@ -66,42 +66,42 @@ namespace bdd_tests
 
             if (buttonType == "Get button for SendChangeAddress")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(1) #operations-OneStop-OneStop_GET .opblock-summary-method"));
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector(".no-margin span:nth-child(2) #operations-OneStop-OneStop_GET .opblock-summary-method"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
             if (buttonType == "Get button for SendChangeName")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector(".no-margin span:nth-child(2) #operations-OneStop-OneStop_GET .opblock-summary-method"));
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(3) .opblock-summary-method"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
             if (buttonType == "Get button for SendChangeStatus")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(3) .opblock-summary-method"));
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(4) .opblock-summary-method"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
             if (buttonType == "Get button for SendLicenceCreationMessage")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(4) .opblock-summary-method"));
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(5) .opblock-summary-method"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
             if (buttonType == "Get button for SendProgramAccountDetailsBroadcastMessage")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(5) .opblock-summary-method"));
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(6) .opblock-summary-method"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
             if (buttonType == "Get button for LdbExport")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(6) .opblock-summary-method"));
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(7) .opblock-summary-method"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
@@ -245,7 +245,7 @@ namespace bdd_tests
         public void CorrectResponse()
         {
             // to be updated
-            // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'200')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'200')]")).Displayed);
         }
 
 
