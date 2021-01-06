@@ -20,7 +20,7 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I review the account profile for a(.*)")]
+        [And(@"I review the account profile for a(.+)")]
         public void ReviewAccountProfile(string businessType)
         {
             /*

@@ -30,7 +30,6 @@ namespace bdd_tests
         private void DoLogin(string businessType)
         {
             ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
-
             /* 
             Page Title: Terms of Use
             */
@@ -131,6 +130,7 @@ namespace bdd_tests
             string test_start = "login/token/AT" + DateTime.Now.Ticks.ToString() + random.Next(0, 999).ToString();
             returnUser = test_start;
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
+
 
             DoLogin(businessType);
 
