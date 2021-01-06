@@ -56,7 +56,7 @@ export class LegalEntityDataService extends DataService {
    * Gets the list of security screening records
    */
   getCurrentSecurityScreeningItems(): Observable<SecurityScreeningSummary> {
-    const apiPath = 'api/legalentities/current-security-summary';
+    const apiPath = 'api/legalentities/current-security-summary-new';
     return this.http.get<SecurityScreeningSummary>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
