@@ -1,20 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 using Protractor;
 using System;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
 using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
+using Serilog;
 
 namespace bdd_tests
 {
@@ -100,13 +91,13 @@ namespace bdd_tests
             }
             catch
             {
-                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText("Dashboard"));
-                JavaScriptClick(uiRequestChange);
+                Log.Logger.Information("Unable to find the Dashboard tab. Navigating there directly.");
+                ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
             }
         }
 
 
-        [And(@"I click on the button for (.*)")]
+        [And(@"I click on the button for (.+)")]
         public void ClickOnButton(string specificButton)
         {
             if (specificButton == "CRS terms and conditions")
@@ -201,126 +192,51 @@ namespace bdd_tests
             uiOrgInfoButton.Click();
         }
 
-
-        [And(@"I click on the Start Application button for (.*)")]
+        [And(@"I click on the Start Application button for (.+)")]
         public void ClickStartApplication(string applicationType)
         {
             /* 
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
+            Log.Logger.Information("ENTERING ClickStartApplication");
+            ngDriver.WaitForAngular();
 
-            System.Threading.Thread.Sleep(5000);
-
-            if (applicationType == "Catering")
+            switch (applicationType)
             {
-                try
-                {
+                case "Catering":
                     // click on the Catering Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.Id("startCatering"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-                catch
-                {
-                    // click on the Catering Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.Id("startCatering"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-            }
-
-            if (applicationType == "a Cannabis Retail Store")
-            {
-                try
-                {
+                    var startCatering = ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startCatering']"));
+                    JavaScriptClick(startCatering);
+                    break;
+                case "a Cannabis Retail Store":
                     // click on the Cannabis Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-                catch
-                {
-                    // click on the Cannabis Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-            }
-
-            if (applicationType == "a Rural Agency Store")
-            {
-                try
-                {
+                    var startCRS = ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startCRS']"));
+                    JavaScriptClick(startCRS);
+                    break;
+                case "a Rural Agency Store":
                     // click on the Rural Store Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-                catch
-                {
-                    // click on the Rural Store Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-            }
-
-            if (applicationType == "a Manufacturer Licence")
-            {
-                try
-                {
-                    // click on the Manufacturer Licence Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-                catch
-                {
-                    // click on the Manufacturer Licence Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-            }
-
-            if (applicationType == "a Cannabis Marketing Licence")
-            {
-                try
-                {
+                    var startRas = ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startRAS']"));
+                    JavaScriptClick(startRas);
+                    break;
+                case "a Manufacturer Licence":
+                    var startMfg = ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startMfg']"));
+                    JavaScriptClick(startMfg);
+                    break;
+                case "a Cannabis Marketing Licence":
                     // click on the Cannabis Marketing Licence Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMarketing']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-                catch 
-                {
-                    // click on the Cannabis Marketing Licence Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startMarketing']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-            }
-
-            if (applicationType == "a UBrew UVin application")
-            {
-                try
-                {
+                    var startMarketing = ngDriver.FindElement(By.CssSelector("button[id='startMarketing']"));
+                    JavaScriptClick(startMarketing);
+                    break;
+                case "a UBrew UVin application":
                     // click on the UBrew UVin application Licence Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-                catch
-                {
-                    // click on the UBrew UVin application Licence Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-            }
-
-            if (applicationType == "Food Primary")
-            {
-                try
-                {
+                    var startUbv = ngDriver.FindElement(By.CssSelector("button[id='startUBV']"));
+                    JavaScriptClick(startUbv);
+                    break;
+                case "Food Primary":
                     // click on the Food Primary Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startFP']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
-                catch
-                {
-                    // click on the Food Primary Start Application button
-                    NgWebElement uiStartAppButton = ngDriver.FindElement(By.CssSelector("button[id='startFP']"));
-                    JavaScriptClick(uiStartAppButton);
-                }
+                    var startFp = ngDriver.FindElement(By.CssSelector("button[id='startFP']"));
+                    JavaScriptClick(startFp);
+                    break;
             }
         }
 
@@ -541,7 +457,8 @@ namespace bdd_tests
             ngDriver.Manage().Timeouts().ImplicitWait = tempTimeout;
         }
 
-        public void JavaScriptClick(NgWebElement element)
+
+        public void JavaScriptClick(IWebElement element)
         {
             IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
             executor.ExecuteScript("arguments[0].click();", element);
