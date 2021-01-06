@@ -109,9 +109,13 @@ namespace bdd_tests
             NgWebElement uiEstPostal = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
             uiEstPostal.SendKeys(estpostal);
 
+            // select 'No' for ALR location
+            NgWebElement uiIsALRFalse = ngDriver.FindElement(By.CssSelector("[formcontrolname='proposedEstablishmentIsAlr'] mat-radio-button[value='false']"));
+            uiIsALRFalse.Click();
+
             // select 'Yes' for ALR location
-            NgWebElement uiIsALR = ngDriver.FindElement(By.CssSelector("[formcontrolname='proposedEstablishmentIsAlr'] mat-radio-button[value='true']"));
-            uiIsALR.Click();
+            NgWebElement uiIsALRTrue = ngDriver.FindElement(By.CssSelector("[formcontrolname='proposedEstablishmentIsAlr'] mat-radio-button[value='true']"));
+            uiIsALRTrue.Click();
 
             // enter the licencee name
             NgWebElement uiLicenceeName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='nameOfApplicant']"));

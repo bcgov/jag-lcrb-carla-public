@@ -163,42 +163,49 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             {
                 case OneStopHubStatusChange.Cancelled:
                     programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_CLOSED; // 02
-                    //  programAccountReasonCode = 111
+                    programAccountStatus.programAccountReasonCode = "111";
+                    break;
+
+                case OneStopHubStatusChange.CancellationRemoved: 
+                    programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_ACTIVE;
+                    programAccountStatus.programAccountReasonCode = null;
                     break;
 
                 case OneStopHubStatusChange.Expired:
                     programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_CLOSED;
-                    // programAccountReasonCode = 112 (expired)
+                    programAccountStatus.programAccountReasonCode = "112";
                     break;
 
                 case OneStopHubStatusChange.Renewed:
-                    programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_CLOSED;
-                    // programAccountReasonCode = 112 (expired)
+                    programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_ACTIVE;
+                    programAccountStatus.programAccountReasonCode = null;
                     break;
 
                 case OneStopHubStatusChange.Suspended:
                     programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_SUSPENDED;
-                    // programAccountReasonCode = 114 (expired)
+                    programAccountStatus.programAccountReasonCode = "114";
                     break;
 
                 case OneStopHubStatusChange.SuspensionEnded:
                     programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_ACTIVE;
+                    programAccountStatus.programAccountReasonCode = null;
                     // programAccountReasonCode = null
                     break;
 
                 case OneStopHubStatusChange.TransferComplete:
                     programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_CLOSED;
-                    // programAccountReasonCode = 113 (transfer)
+                    programAccountStatus.programAccountReasonCode = "113";
                     break;
 
                 case OneStopHubStatusChange.EnteredDormancy:
                     programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_SUSPENDED;
-                    // programAccountReasonCode = 115 (dormant)
+                    programAccountStatus.programAccountReasonCode = "115";
+                    
                     break;
 
                 case OneStopHubStatusChange.DormancyEnded:
                     programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_ACTIVE;
-                    // programAccountReasonCode = null
+                    programAccountStatus.programAccountReasonCode = null;
                     break;
             }
 

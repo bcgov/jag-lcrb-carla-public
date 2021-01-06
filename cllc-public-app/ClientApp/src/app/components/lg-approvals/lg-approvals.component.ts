@@ -39,12 +39,12 @@ export class LgApprovalsComponent implements OnInit {
     this.busy = this.applicationDataService.getLGApprovalApplications()
       .subscribe(applications => {
         this.applications = applications || [];
-        this.applicationsDecisionNotMade = this.applications.filter(app => !app.lGDecisionSubmissionDate && app.applicationType && app.applicationType.isShowLGINApproval);
-        this.applicationsForZoning = this.applications.filter(app => !app.lGDecisionSubmissionDate && app.applicationType && app.applicationType.isShowLGZoningConfirmation);
-        this.applicationsDecisionMadeButNoDocs = this.applications
-          .filter(app => app.lGDecisionSubmissionDate
-            && !app.resolutionDocsUploaded
-            && app.lGApprovalDecision === 'Approved');
+        this.applicationsDecisionNotMade =
+          this.applications.filter(app => !app.lGDecisionSubmissionDate && app.applicationType && app.applicationType.isShowLGINApproval);
+        this.applicationsForZoning =
+          this.applications.filter(app => !app.lGDecisionSubmissionDate && app.applicationType && app.applicationType.isShowLGZoningConfirmation);
+        this.applicationsDecisionMadeButNoDocs =
+          this.applications.filter(app => app.lGDecisionSubmissionDate && app.lGApprovalDecision === 'Pending');
         this.dataLoaded = true;
       },
         error => {

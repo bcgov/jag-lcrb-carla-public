@@ -220,6 +220,8 @@ import { OffsiteTableComponent } from '@components/tables/offsite-table/offsite-
 import { ContactComponent } from './shared/components/contact/contact.component';
 import { InvoiceDetailsComponent } from './shared/components/invoice-details/invoice-details.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NoticesComponent } from '@components/notices/notices.component';
+import { NoticesTableComponent } from '@components/tables/notices-table/notices-table.component';
 
 @NgModule({
   declarations: [
@@ -351,6 +353,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     OffsiteTableComponent,
     ContactComponent,
     InvoiceDetailsComponent,
+    NoticesComponent,
+    NoticesTableComponent,
   ],
   imports: [
     ChartsModule,

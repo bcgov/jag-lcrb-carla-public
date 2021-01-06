@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Pdf
+namespace Gov.Jag.Lcrb.PdfService
 {
     public class Program
     {
