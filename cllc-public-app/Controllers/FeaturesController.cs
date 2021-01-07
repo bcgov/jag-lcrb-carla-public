@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -101,6 +101,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (!string.IsNullOrEmpty(_configuration["FEATURE_NOTICES"]))
             {
                 features.Add("Notices");
+            }
+
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_LE_CONNECTIONS"]))
+            {
+                features.Add("LEConnections");
             }
             return features;
         }
