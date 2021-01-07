@@ -66,7 +66,8 @@
         Proposed Licensee Retail Stores in B.C.
       </h1>
 
-      <div class="row">
+      <div class="row"  *ngIf="proposedLrsData">
+        <div *ngIf="proposedLrsData?.length == 0"><i>No results</i></div>
         <table *ngIf="proposedLrsData?.length > 0" class="eq-table">
           <tr>
             <td colspan="7" align="right">
@@ -75,7 +76,7 @@
           </tr>
           <tr>
             <th>Establishment Name</th>
-            <th style="width:150px">Phone</th>
+            <th style="width: 150px">Phone</th>
             <th>Address</th>
             <th>City</th>
             <th>Postal</th>
