@@ -163,7 +163,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioHascooleraccess = from.HasCoolerAccess;
 
             to.AdoxioLocatedaboveother = from.LocatedAboveOther;
-
+            
+            if(from.IsOnINLand == true){
+                to.AdoxioIsoninland = 845280000;
+            } else {
+                to.AdoxioIsoninland = null;
+            }
 
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
