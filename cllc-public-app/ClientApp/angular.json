@@ -15,7 +15,7 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "progress": true,
+            "progress": false,
             "polyfills": "src/polyfills.ts",
             "aot": false,
             "assets": [
@@ -60,12 +60,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "lclb-public-app:build",
-            "sourceMap": {
-              "scripts": true,
-              "styles": true,
-              "vendor": true
-            }
+            "browserTarget": "lclb-public-app:build"
           },
           "configurations": {
             "production": {

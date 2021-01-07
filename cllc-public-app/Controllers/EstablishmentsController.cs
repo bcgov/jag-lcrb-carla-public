@@ -448,6 +448,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
+        /// <summary>
+        /// Get a list of all map data
+        /// </summary>
+        /// <returns>Establishment map data, or the empty set</returns>
+        [HttpGet("proposed-lrs")]
+        [AllowAnonymous]
+        public IActionResult GetProposedLrs(string search)
+        {
+            var result = GetProposedLrsData(search);
+            return new JsonResult(result);
+        }
+
         [HttpGet("proposed-lrs-csv")]
         [AllowAnonymous]
         public IActionResult GetProposedLrsCSV(string search)
