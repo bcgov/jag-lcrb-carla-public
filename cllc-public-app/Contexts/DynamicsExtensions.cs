@@ -164,8 +164,22 @@ namespace Gov.Lclb.Cllb.Interfaces
                 "adoxio_ChildProfileName_contact",
                 "adoxio_ChildProfileName_account"
             };
+            MicrosoftDynamicsCRMadoxioLeconnectionCollection response = null;
+            try
+            {
+                response = _dynamicsClient.Leconnections.Get(filter: filter, expand: expand);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error Getting LEConnections");
+                throw;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected Exception getting LEConnections");
+                throw;
+            }
 
-            var response = _dynamicsClient.Leconnections.Get(filter: filter, expand: expand);
             var leConnections = response?.Value?.ToList();
             leConnections.ForEach(item =>
             {
