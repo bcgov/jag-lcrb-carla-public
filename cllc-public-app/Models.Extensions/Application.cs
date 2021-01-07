@@ -14,6 +14,10 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
+    enum IsOnINLandOptionValue {
+        Yes = 845280000
+    }
+    
     /// <summary>
     /// ViewModel transforms.
     /// </summary>
@@ -165,7 +169,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioLocatedaboveother = from.LocatedAboveOther;
             
             if(from.IsOnINLand == true){
-                to.AdoxioIsoninland = 845280000;
+                to.AdoxioIsoninland = (int)IsOnINLandOptionValue.Yes;
             } else {
                 to.AdoxioIsoninland = null;
             }
@@ -334,6 +338,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger)
         {
+            
             ViewModels.Application applicationVM = new ViewModels.Application
             {
                 Name = dynamicsApplication.AdoxioName,
@@ -493,7 +498,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 CsAdditionalReceiverOrExecutor = dynamicsApplication.AdoxioCsadditionofreceiverorexecutor,
                 PrimaryInvoicePaid = dynamicsApplication.AdoxioPrimaryapplicationinvoicepaid == 1,
                 SecondaryInvoicePaid = dynamicsApplication.AdoxioSecondaryapplicationinvoicepaid == 1,
-                IsOnINLand = dynamicsApplication.AdoxioIsoninland == (845280000),
+                IsOnINLand = (dynamicsApplication.AdoxioIsoninland == isOnINLandOptionValue),
 
                 LocatedAboveOther = dynamicsApplication.AdoxioLocatedaboveother
             };
