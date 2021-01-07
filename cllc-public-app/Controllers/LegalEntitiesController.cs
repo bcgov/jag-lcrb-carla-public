@@ -159,8 +159,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     FirstName = legalEntity.firstname,
                     MiddleName = legalEntity.middlename,
                     LastName = legalEntity.lastname,
-                    phsLink = legalEntity.PhsLink,
-                    casLink = legalEntity.CasLink,
+                    PhsLink = legalEntity.PhsLink,
+                    CasLink = legalEntity.CasLink,
                     DateSubmitted = dateSubmitted,
                     ContactId = legalEntity.contactId
                 };
