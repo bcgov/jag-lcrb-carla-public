@@ -224,6 +224,7 @@ import { NoticesComponent } from '@components/notices/notices.component';
 import { NoticesTableComponent } from '@components/tables/notices-table/notices-table.component';
 import { LEConnectionsDataService } from '@services/le-connections-data.service';
 import { LicenseeRetailStoresComponent } from './components/licensee-retail-stores/licensee-retail-stores.component';
+import { TuaEventComponent } from '@components/tua-event/tua-event.component';
 
 @NgModule({
   declarations: [
@@ -358,6 +359,7 @@ import { LicenseeRetailStoresComponent } from './components/licensee-retail-stor
     NoticesComponent,
     NoticesTableComponent,
     LicenseeRetailStoresComponent,
+    TuaEventComponent,
   ],
   imports: [
     ChartsModule,
