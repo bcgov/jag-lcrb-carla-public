@@ -658,5 +658,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? CsAdditionalReceiverOrExecutor { get; set; }
         public bool? PrimaryInvoicePaid { get; set; }
         public bool? SecondaryInvoicePaid { get; set; }
+        public bool? IsOnINLand { get; set; }
     }
 }
