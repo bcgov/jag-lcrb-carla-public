@@ -488,6 +488,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 CsAdditionalReceiverOrExecutor = dynamicsApplication.AdoxioCsadditionofreceiverorexecutor,
                 PrimaryInvoicePaid = dynamicsApplication.AdoxioPrimaryapplicationinvoicepaid == 1,
                 SecondaryInvoicePaid = dynamicsApplication.AdoxioSecondaryapplicationinvoicepaid == 1,
+                IsOnINLand = dynamicsApplication.AdoxioIsoninland == (845280000),
 
                 LocatedAboveOther = dynamicsApplication.AdoxioLocatedaboveother
             };
