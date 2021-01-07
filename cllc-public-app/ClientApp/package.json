@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "preinstall": "npx npm-force-resolutions",
-    "start": "echo startup && ng serve --host 0.0.0.0",
+    "start": "ng serve --host 0.0.0.0",
     "build": "ng build --progress=false --verbose=false --statsJson=false --base-href /cannabislicensing/ --deploy-url /cannabislicensing/",
     "builduat": "ng build --progress=false --verbose=false --statsJson=false --base-href /uat/cannabislicensing/ --deploy-url /uat/cannabislicensing/",
     "buildprod": "ng build --progress=false --verbose=false --statsJson=false --base-href / --deploy-url /",
