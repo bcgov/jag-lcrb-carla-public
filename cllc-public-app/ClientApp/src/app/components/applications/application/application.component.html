@@ -52,6 +52,9 @@
               to ensure your successful submission.
             </strong></p>
 
+            <p><i class="fas fa-info" style="margin-right: 10px;"></i>If you have any questions about this application, call the
+              Liquor and Cannabis Regulation Branch (LCRB) toll-free at: 1 866 209 2111.</p>
+
         </section>
 
         <!-- Local Government advise -->
@@ -216,8 +219,10 @@
           <section class="padded-section content-bottom">
             <div style="position: relative">
 
-              <section *ngIf="application?.applicationType?.establishmentName === FormControlState.Show">
-                <label for="">Establishment Name</label>
+              <section *ngIf="application?.applicationType?.establishmentName === FormControlState.Show || application?.applicationType?.establishmentName === FormControlState.ReadOnly">
+
+                <label *ngIf="application?.applicationType?.establishmentName === FormControlState.ReadOnly" for="">Establishment Name</label>
+                <label *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly" for="">Proposed Establishment Name</label>
                 <br>
 
                 <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
@@ -240,7 +245,7 @@
                   please see the <a routerLink="/policy-document/store-name">
                     Non-Medical Cannabis Retail Store Name Approval
                     Process
-                  </a>. A list of all currently licenced Cannabis Retail Stores in British
+                  </a>. A list of all currently licensed Cannabis Retail Stores in British
                   Columbia can be found
                   <a href="https://justice.gov.bc.ca/cannabislicensing/map" target="_blank">here</a>.
                 </p>
@@ -272,7 +277,7 @@
                 <p *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly">Establishment names are subject to approval by LCRB</p>
                 <p *ngIf="canRenameEstablishment()">
                   As part of the application, you can change the name of the establishment.
-                  If the name of the establishment is changing, you must provide a drawing or a photo of your proposed establishment sign below.
+                  <strong>If the name of the establishment is changing, you must provide a drawing or a photo of your proposed establishment sign below.</strong>
                 </p>
               </div>
 
@@ -281,7 +286,7 @@
               *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
               <h3 class="blue-header">{{application?.licenseType}} LOCATION ADDRESS</h3>
               <div class="content-bottom">
-                <p>The licenced establishment is currently located at the following address:</p>
+                <p>The licensed establishment is currently located at the following address:</p>
                 <address class="row">
                   <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
                     <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet"
@@ -324,7 +329,7 @@
 
             <div class="ngtest-new-address content-bottom"
               *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
-              <p *ngIf="application?.licenseType !== 'Rural Agency Store'">The proposed location of the licenced
+              <p *ngIf="application?.licenseType !== 'Rural Agency Store'">The proposed location of the licensed
                 establishment:</p>
               <p *ngIf="application?.licenseType === 'Rural Agency Store'">Include any information necessary for finding
                 the
@@ -425,6 +430,10 @@
               </div>
             </section>
 
+            </div>
+          </section>
+        </section>
+
 
               <!-- Letter of Intent -->
               <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent)">
@@ -446,10 +455,6 @@
                 </section>
               </section>
               </section>
-
-            </div>
-          </section>
-        </section>
 
 
             <!-- Local Government and Police Jurisdiction -->
@@ -777,7 +782,7 @@
             <!-- Photos or Renderings of Signage-->
             <div class="ngtest-photo-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
               <hr>
-              <label for="">Photos or renderings of the store's signage</label>
+              <label for="">Photos or renderings of the establishment's signage</label>
               <br>
               <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
 
@@ -788,7 +793,7 @@
 
                 <div *ngIf="!htmlContent.signage">
                   <p>
-                    The signage submitted must show the name of the store and all words, images and symbols used in the
+                    The signage submitted must show the name of the establishment and all words, images and symbols used in the
                     signage.
                   </p>
 
@@ -880,7 +885,7 @@
                   <!-- if there is configured floor plan text, show it-->
                   <div *ngIf="htmlContent.floorPlan">
                     <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.floorPlan"></section>
-                    <img *ngIf="application?.licenseType == 'Food Primary'" src="assets/Food-Primary-floor-plan-sample.png" style="width: 700px;" alt="Sample Floor Plan">
+                    <img *ngIf="application?.licenseType == 'Food Primary' && application?.applicationType.name != 'Temporary Extension of Licensed Area'" src="assets/Food-Primary-floor-plan-sample.png" style="width: 700px;" alt="Sample Floor Plan">
                   </div>
 
                   <!-- otherwise switch to legacy mode-->
@@ -1071,6 +1076,8 @@
                   business
                   aimed at minors or a liquor consumption business).</p>
               </div>
+
+              <img *ngIf="application?.applicationType?.name === 'Temporary Use Area Endorsement'" src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage">
 
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Site Plan"
@@ -1414,7 +1421,9 @@
               <br>
               <label for="">Supporting Documents</label>
               <br>
-              <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+              <p *ngIf="application?.applicationType?.name == 'Temporary Use Area Endorsement'">Please download, print and have signed the <a href="https://www2.gov.bc.ca/assets/download/C96F6309C0864AC2A7F368480BE35A61" target="_blank">Property Ownership Acknowledgement and Declaration Statements</a> form.</p>
+
+              <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer && application?.applicationType?.name !== 'Temporary Use Area Endorsement'">
                 Please download the
                 <span *ngIf=" application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
                   <a *ngIf="account?.businessType === 'SoleProprietorship'"
@@ -1516,7 +1525,7 @@
 
 
           <!-- RAS Details -->
-          <section *ngIf="application?.applicationType.showOwnershipDeclaration || showFormControl(application?.applicationType?.validInterest)">
+          <section *ngIf="application?.applicationType.showOwnershipDeclaration">
             <h3 class="blue-header">{{this.application?.licenseType}} Ownership Details</h3>
             <div class="content-bottom">
               <section *ngIf="application?.applicationType.showOwnershipDeclaration">
@@ -1532,13 +1541,12 @@
               <section>
                 <div>
                   <mat-checkbox formControlName="isOwnerBusiness">
-                    This information is being submitted by the owner of the business in respect of which the licence
-                    is to be issued or will become the owner before the licence is issued.
+                    The applicant is the owner of the business in respect of which the licence is to be issued or will become the owner before the licence is issued.
                   </mat-checkbox>
                 </div>
                 <div>
                   <mat-checkbox formControlName="hasValidInterest">
-                    At the time of this submission, the owner of the business is:
+                    At the time of this submission, the applicant is:
                     <ul>
                       <li>The owner of or has an agreement to purchase the place or premises that will form the
                         proposed
@@ -1551,7 +1559,7 @@
                 </div>
                 <div>
                   <mat-checkbox formControlName="willhaveValidInterest">
-                    At the time the licence is issued, the owner of the business will be:
+                    At the time the licence is issued, the applicant will be:
                     <ul>
                       <li>The owner of the place or premises that forms the establishment, or</li>
                       <li>The lessee of the place or premises that forms the establishment (term no less than 12
@@ -1648,9 +1656,9 @@
         <div class=content-bottom>
           <p *ngIf="!isRAS()">
             <i>
-              Please provide contact information for the contact that the LCRB should communicate with regarding the
-              application. This contact must be authorized to represent the applicant and have the authority to bind the
-              applicant.
+              Please provide contact information for the contact that the LCRB should communicate with regarding this
+              application. <span *ngIf="!this.isLiquor">This contact must be authorized to represent the applicant and have the authority to bind the
+              applicant.</span>
             </i>
           </p>
           <p *ngIf="isRAS()">
@@ -1683,7 +1691,7 @@
 
             <app-field label="Email" [required]="true" [valid]="isValidOrNotTouched('contactPersonEmail')"
               errorMessage="Please enter the business contact's email address"
-              afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
+              afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about this application.">
               <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
                 formControlName="contactPersonEmail" id="contactPersonEmail"
                 (blur)="trimValue(form.get('contactPersonEmail'))">
