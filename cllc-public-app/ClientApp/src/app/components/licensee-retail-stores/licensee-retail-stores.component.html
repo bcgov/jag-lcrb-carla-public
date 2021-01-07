@@ -17,6 +17,7 @@
         </button>
       </app-field>
       <div class="row">
+        <div *ngIf="proposedLrsData?.length == 0"><i>No results</i></div>
         <table *ngIf="lrsData?.length > 0" class="eq-table">
           <tr>
             <td colspan="7" align="right">
@@ -26,7 +27,7 @@
           <tr>
             <th>Licence</th>
             <th>Establishment Name</th>
-            <th style="width:150px">Phone</th>
+            <th style="width: 150px">Phone</th>
             <th>Address</th>
             <th>City</th>
             <th>Postal</th>
@@ -38,7 +39,7 @@
             </td>
             <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
               <span style="font-weight: 600">{{item.name}}</span>
-            </td> 
+            </td>
             <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
 
               <span style="font-weight: 600" *ngIf="item.Phone">{{item.phone}}</span>
