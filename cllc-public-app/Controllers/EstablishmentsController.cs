@@ -581,7 +581,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     try
                     {
-                        string filter = $"statuscode eq 1 and adoxio_checklistpsalettersent eq 1 and _adoxio_applicationtypeid_value eq {applicationTypeId}";
+                        string filter = $"statuscode eq 1 and adoxio_checklistpsalettersent eq 845280000 and _adoxio_applicationtypeid_value eq {applicationTypeId}";
                         // get establishments                                  
                         string[] expand = { "adoxio_ApplicationTypeId" };
 
