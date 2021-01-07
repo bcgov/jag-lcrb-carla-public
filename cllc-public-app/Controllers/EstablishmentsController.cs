@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -63,26 +64,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         }
 
-        /// <summary>
-        /// Get a list of all map data
-        /// </summary>
-        /// <returns>Establishment map data, or the empty set</returns>
-        [HttpGet("map")]
-        [AllowAnonymous]
-        public IActionResult GetMap(string search)
+        private IActionResult GetCSV(List<EstablishmentMapData> data)
         {
-            var result = GetMapData(search);
-            return new JsonResult(result);
-        }
-
-        [HttpGet("map-csv")]
-        [AllowAnonymous]
-        public IActionResult GetMapCSV(string search)
-        {
-            var data = GetMapData(search);
             StringWriter csvString = new StringWriter();
             using (var csv = new CsvWriter(csvString))
-            {                
+            {
                 // headers
                 csv.WriteField("Licence");
                 csv.WriteField("Establishment Name");
@@ -101,19 +87,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     csv.WriteField(item.AddressStreet);
                     csv.WriteField(item.AddressCity);
                     csv.WriteField(item.AddressPostal);
-                    csv.WriteField(item.IsOpen ? "Open": "Coming Soon");
+                    csv.WriteField(item.IsOpen ? "Open" : "Coming Soon");
                     csv.NextRecord();
                 }
             }
             return File(new System.Text.UTF8Encoding().GetBytes(csvString.ToString()), "text/csv", "BC-Retail-Cannabis-Stores.csv");
         }
 
-        [HttpGet("map-json")]
-        [AllowAnonymous]
-        public IActionResult GetMapJson(string search)
+        private IActionResult GetJson(List<EstablishmentMapData> data)
         {
-            var data = GetMapData(search);
-
             List<object> dataForJson = new List<object>();
             foreach (var item in data)
             {
@@ -128,10 +110,177 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     Status = item.IsOpen ? "Open" : "Coming Soon"
                 });
             }
-               
+
             string jsonData = JsonConvert.SerializeObject(dataForJson);
             return File(new System.Text.UTF8Encoding().GetBytes(jsonData), "application/json", "BC-Retail-Cannabis-Stores.json");
         }
+
+
+        /// <summary>
+        /// Get a list of all map data
+        /// </summary>
+        /// <returns>Establishment map data, or the empty set</returns>
+        [HttpGet("lrs")]
+        [AllowAnonymous]
+        public IActionResult GetLrs(string search)
+        {
+            var result = GetLrsData(search);
+            return new JsonResult(result);
+        }
+
+        [HttpGet("lrs-csv")]
+        [AllowAnonymous]
+        public IActionResult GetLrsCSV(string search)
+        {
+            var data = GetLrsData(search);
+            return GetCSV(data);
+        }
+
+        [HttpGet("lrs-json")]
+        [AllowAnonymous]
+        public IActionResult GetLrsJson(string search)
+        {
+            var data = GetLrsData(search);
+            return GetJson(data);
+        }
+
+        private List<EstablishmentMapData> GetLrsData(string search)
+        {
+            string cacheKey;
+            if (string.IsNullOrEmpty(search))
+            {
+                cacheKey = "LRS_NOSEARCH";
+            }
+            else
+            {
+                search = search.ToUpper();
+                search = search.Trim();
+                cacheKey = $"LRS_SEARCH_{search}";
+            }
+            List<EstablishmentMapData> establishmentMapData;
+            if (!_cache.TryGetValue("S_" + cacheKey, out establishmentMapData))
+            {
+                try
+                {
+                    string applicationsFilter = "_adoxio_assignedlicence_value ne null ";
+                    // get establishments                                  
+                    string licenseFilter = "statuscode eq 1"; // only active licenses
+                    string[] licenseExpand = { "adoxio_LicenceType", "adoxio_establishment" };
+
+                    // get licenses
+                    IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
+
+                    try
+                    {
+                        licences = _dynamicsClient.Licenceses.Get(filter: licenseFilter, expand: licenseExpand).Value;
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error getting licenses");
+                        throw new Exception("Unable to get licences");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Unexpected error getting establishment map data.");
+                    }
+
+                    establishmentMapData = new List<EstablishmentMapData>();
+                    if (licences != null)
+                    {
+                        foreach (var license in licences)
+                        {
+                            if (license.AdoxioLicenceType != null && license.AdoxioLicenceType.AdoxioName.Equals("Licensee Retail Store")
+                                                                  && license._adoxioEstablishmentValue != null)
+                            {
+                                var establishment = license.AdoxioEstablishment;
+
+                                if (establishment != null &&
+                                    (establishment.AdoxioLicencee == null ||
+                                     establishment.AdoxioLicencee.Name != LDB_ACCOUNT_NAME) &&
+                                    establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null)
+                                {
+
+                                    establishmentMapData.Add(new EstablishmentMapData
+                                    {
+                                        id = establishment.AdoxioEstablishmentid,
+                                        Name = establishment.AdoxioName,
+                                        License = license.AdoxioLicencenumber,
+                                        Phone = establishment.AdoxioPhone,
+                                        AddressCity = establishment.AdoxioAddresscity,
+                                        AddressPostal = establishment.AdoxioAddresspostalcode,
+                                        AddressStreet = establishment.AdoxioAddressstreet,
+                                        Latitude = (decimal) establishment.AdoxioLatitude,
+                                        Longitude = (decimal) establishment.AdoxioLongitude,
+                                        IsOpen = establishment.AdoxioIsopen.HasValue && establishment.AdoxioIsopen.Value
+                                    });
+                                }
+                            }
+                        }
+                    }
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                               // Set the cache to expire in an hour.                   
+                               .SetAbsoluteExpiration(TimeSpan.FromHours(1));
+
+                    // Save data in cache.
+                    _cache.Set("S_" + cacheKey, establishmentMapData, cacheEntryOptions);
+                    cacheEntryOptions = new MemoryCacheEntryOptions()
+                               // Set the cache to expire in an hour.                   
+                               .SetAbsoluteExpiration(TimeSpan.FromDays(1));
+                    // long term cache
+                    _cache.Set(cacheKey, establishmentMapData, cacheEntryOptions);
+                }
+                catch (Exception e)
+                {
+                    if (!_cache.TryGetValue(cacheKey, out establishmentMapData))
+                    {
+                        establishmentMapData = new List<EstablishmentMapData>();
+                        _logger.LogError(e, "Error getting map data, and nothing in long term cache.");
+                    }
+                    else
+                    {
+                        _logger.LogError(e, "Error getting map data, showing long term cache data");
+                    }
+                }
+
+            }
+
+            // make a copy of the results to guard against accidental cache pollution.
+            List<EstablishmentMapData> result = establishmentMapData.ToList();
+            
+            // sort the establishment list by the city alphabetically 
+            result = result.OrderBy(o => o.AddressCity).ToList();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get a list of all map data
+        /// </summary>
+        /// <returns>Establishment map data, or the empty set</returns>
+        [HttpGet("map")]
+        [AllowAnonymous]
+        public IActionResult GetMap(string search)
+        {
+            var result = GetMapData(search);
+            return new JsonResult(result);
+        }
+
+        [HttpGet("map-csv")]
+        [AllowAnonymous]
+        public IActionResult GetMapCSV(string search)
+        {
+            var data = GetMapData(search);
+            return GetCSV(data);
+        }
+
+        [HttpGet("map-json")]
+        [AllowAnonymous]
+        public IActionResult GetMapJson(string search)
+        {
+            var data = GetMapData(search);
+            return GetJson(data);
+        }
+
         private List<EstablishmentMapData> GetMapData(string search)
         {            
             string cacheKey;
@@ -154,23 +303,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // get establishments                                  
                     string licenseFilter = "statuscode eq 1"; // only active licenses
                     string[] licenseExpand = { "adoxio_LicenceType" };
-
-                    // we need to get applications so we can see if the inspection is complete.
-
-                    IList<MicrosoftDynamicsCRMadoxioApplication> applications = null;
-                    try
-                    {
-                        applications = _dynamicsClient.Applications.Get(filter: applicationsFilter).Value;
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error getting applications");
-                        throw new Exception("Unable to get applications");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Unexpected error getting applications");
-                    }
 
                     // get licenses
                     IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
@@ -309,6 +441,119 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // add LDB stores
             result.AddRange(GetLDBStores(search));
+
+            // sort the establishment list by the city alphabetically 
+            result = result.OrderBy(o => o.AddressCity).ToList();
+
+            return result;
+        }
+
+        [HttpGet("proposed-lrs-csv")]
+        [AllowAnonymous]
+        public IActionResult GetProposedLrsCSV(string search)
+        {
+            var data = GetProposedLrsData(search);
+            return GetCSV(data);
+        }
+
+        [HttpGet("proposed-lrs-json")]
+        [AllowAnonymous]
+        public IActionResult GetProposedLrsJson(string search)
+        {
+            var data = GetProposedLrsData(search);
+            return GetJson(data);
+        }
+
+        private List<EstablishmentMapData> GetProposedLrsData(string search)
+        {
+            string cacheKey;
+            if (string.IsNullOrEmpty(search))
+            {
+                cacheKey = "PLRS_NOSEARCH";
+            }
+            else
+            {
+                search = search.ToUpper();
+                search = search.Trim();
+                cacheKey = $"PLRS_SEARCH_{search}";
+            }
+            List<EstablishmentMapData> establishmentMapData;
+            if (!_cache.TryGetValue("S_" + cacheKey, out establishmentMapData))
+            {
+                try
+                {
+                    string filter = "statuscode eq 1 and adoxio_checklistpsalettersent eq 1";
+                    // get establishments                                  
+                    string[] expand = { "adoxio_ApplicationTypeId" };
+
+                    // we need to get applications so we can see if the inspection is complete.
+
+                    IList<MicrosoftDynamicsCRMadoxioApplication> applications = null;
+                    try
+                    {
+                        applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value;
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error getting applications");
+                        throw new Exception("Unable to get applications");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Unexpected error getting applications");
+                    }
+
+                    
+                    establishmentMapData = new List<EstablishmentMapData>();
+                    if (applications != null)
+                    {
+                        foreach (var application in applications)
+                        {
+                            if (application.AdoxioLicenceType != null && application.AdoxioApplicationTypeId.AdoxioName.Equals("LRS Transfer of Location")
+                            )
+                            {
+                                establishmentMapData.Add(new EstablishmentMapData
+                                    {
+                                        id = application.AdoxioApplicationid,
+                                        Name = application.AdoxioName,
+                                        License = "",
+                                        Phone = application.AdoxioPhone,
+                                        AddressCity = application.AdoxioAddresscity,
+                                        AddressPostal = application.AdoxioAddresspostalcode,
+                                        AddressStreet = application.AdoxioAddressstreet
+                                    });
+                            }
+                        }
+                    }
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                               // Set the cache to expire in an hour.                   
+                               .SetAbsoluteExpiration(TimeSpan.FromHours(1));
+
+                    // Save data in cache.
+                    _cache.Set("S_" + cacheKey, establishmentMapData, cacheEntryOptions);
+                    cacheEntryOptions = new MemoryCacheEntryOptions()
+                               // Set the cache to expire in an hour.                   
+                               .SetAbsoluteExpiration(TimeSpan.FromDays(1));
+                    // long term cache
+                    _cache.Set(cacheKey, establishmentMapData, cacheEntryOptions);
+                }
+                catch (Exception e)
+                {
+                    if (!_cache.TryGetValue(cacheKey, out establishmentMapData))
+                    {
+                        establishmentMapData = new List<EstablishmentMapData>();
+                        _logger.LogError(e, "Error getting map data, and nothing in long term cache.");
+                    }
+                    else
+                    {
+                        _logger.LogError(e, "Error getting map data, showing long term cache data");
+                    }
+                }
+
+            }
+
+            // make a copy of the results to guard against accidental cache pollution.
+            List<EstablishmentMapData> result = establishmentMapData.ToList();
 
             // sort the establishment list by the city alphabetically 
             result = result.OrderBy(o => o.AddressCity).ToList();

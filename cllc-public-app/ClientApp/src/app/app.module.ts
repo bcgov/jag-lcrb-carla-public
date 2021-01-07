@@ -222,6 +222,7 @@ import { InvoiceDetailsComponent } from './shared/components/invoice-details/inv
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NoticesComponent } from '@components/notices/notices.component';
 import { NoticesTableComponent } from '@components/tables/notices-table/notices-table.component';
+import { LicenseeRetailStoresComponent } from './components/licensee-retail-stores/licensee-retail-stores.component';
 
 @NgModule({
   declarations: [
@@ -355,6 +356,7 @@ import { NoticesTableComponent } from '@components/tables/notices-table/notices-
     InvoiceDetailsComponent,
     NoticesComponent,
     NoticesTableComponent,
+    LicenseeRetailStoresComponent,
   ],
   imports: [
     ChartsModule,

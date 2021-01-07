@@ -55,6 +55,7 @@ import { MarketEventComponent } from '@components/market-event/market-event.comp
 import { PermanentChangeToALicenseeComponent } from '@components/applications/permanent-change-to-a-licensee/permanent-change-to-a-licensee.component';
 import { OffsiteStorageComponent } from '@components/offsite-storage/offsite-storage.component';
 import { NoticesComponent } from '@components/notices/notices.component';
+import { LicenseeRetailStoresComponent } from './components/licensee-retail-stores/licensee-retail-stores.component';
 
 
 const routes: Routes = [
@@ -383,6 +384,11 @@ const routes: Routes = [
     component: MapComponent,
     canActivate: [FeatureGuard],
     data: { feature: 'Maps' }
+  },
+  {
+    path: 'licensee-retail-stores',
+    component: LicenseeRetailStoresComponent,
+    data: { }
   },
   {
     path: 'eligibility',
