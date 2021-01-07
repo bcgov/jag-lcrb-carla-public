@@ -29,7 +29,7 @@ export class LicenseeRetailStoresComponent extends FormBase implements OnInit {
 
   ngOnInit() {
     this.meta.addTag({ name: 'viewport', content: 'width=device-width, initial-scale=1,  maximum-scale=1.0, user-scalable=no' });
-    this.titleService.setTitle("Map of Cannabis Retail Stores in B.C.");
+    this.titleService.setTitle("Licensee Retail Stores in B.C.");
     this.form = this.fb.group({
       name: ['']
     });
