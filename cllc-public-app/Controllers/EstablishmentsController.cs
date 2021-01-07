@@ -123,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         }
 
-        private IActionResult GetCSV(List<EstablishmentMapData> data)
+        private IActionResult GetCSV(List<EstablishmentMapData> data, string filename)
         {
             StringWriter csvString = new StringWriter();
             using (var csv = new CsvWriter(csvString))
@@ -150,10 +150,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     csv.NextRecord();
                 }
             }
-            return File(new System.Text.UTF8Encoding().GetBytes(csvString.ToString()), "text/csv", "BC-Retail-Cannabis-Stores.csv");
+            return File(new System.Text.UTF8Encoding().GetBytes(csvString.ToString()), "text/csv", filename);
         }
 
-        private IActionResult GetJson(List<EstablishmentMapData> data)
+        private IActionResult GetJson(List<EstablishmentMapData> data, string filename)
         {
             List<object> dataForJson = new List<object>();
             foreach (var item in data)
@@ -171,7 +171,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             string jsonData = JsonConvert.SerializeObject(dataForJson);
-            return File(new System.Text.UTF8Encoding().GetBytes(jsonData), "application/json", "BC-Retail-Cannabis-Stores.json");
+            return File(new System.Text.UTF8Encoding().GetBytes(jsonData), "application/json", filename );
         }
 
 
@@ -192,7 +192,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetLrsCSV(string search)
         {
             var data = GetLrsData(search);
-            return GetCSV(data);
+            return GetCSV(data, "BC-Licensee-Retail-Stores.csv");
         }
 
         [HttpGet("lrs-json")]
@@ -200,7 +200,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetLrsJson(string search)
         {
             var data = GetLrsData(search);
-            return GetJson(data);
+            return GetJson(data, "BC-Licensee-Retail-Stores.json");
         }
 
         private List<EstablishmentMapData> GetLrsData(string search)
@@ -333,7 +333,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetMapCSV(string search)
         {
             var data = GetMapData(search);
-            return GetCSV(data);
+            return GetCSV(data, "BC-Retail-Cannabis-Stores.csv");
         }
 
         [HttpGet("map-json")]
@@ -341,7 +341,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetMapJson(string search)
         {
             var data = GetMapData(search);
-            return GetJson(data);
+            return GetJson(data, "BC-Retail-Cannabis-Stores.json");
         }
 
         private List<EstablishmentMapData> GetMapData(string search)
@@ -546,7 +546,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetProposedLrsCSV(string search)
         {
             var data = GetProposedLrsData(search);
-            return GetCSV(data);
+            return GetCSV(data, "BC-Proposed-Licensee-Retail-Stores.csv");
         }
 
         [HttpGet("proposed-lrs-json")]
@@ -554,7 +554,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetProposedLrsJson(string search)
         {
             var data = GetProposedLrsData(search);
-            return GetJson(data);
+            return GetJson(data, "BC-Proposed-Licensee-Retail-Stores.json");
         }
 
         private List<EstablishmentMapData> GetProposedLrsData(string search)
