@@ -261,10 +261,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 {
                                     var establishment = license.AdoxioEstablishment;
 
-                                    if (establishment != null)
+                                    establishmentMapData.Add(new EstablishmentMapData
                                     {
-                                        establishmentMapData.Add(new EstablishmentMapData
-                                        {
                                             id = establishment.AdoxioEstablishmentid,
                                             Name = establishment.AdoxioName,
                                             License = license.AdoxioLicencenumber,
@@ -272,11 +270,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                             AddressCity = establishment.AdoxioAddresscity,
                                             AddressPostal = establishment.AdoxioAddresspostalcode,
                                             AddressStreet = establishment.AdoxioAddressstreet,
-                                            Latitude = (decimal)establishment.AdoxioLatitude,
-                                            Longitude = (decimal)establishment.AdoxioLongitude,
                                             IsOpen = establishment.AdoxioIsopen.HasValue && establishment.AdoxioIsopen.Value
-                                        });
-                                    }
+                                    });
                                 }
                             }
                         }
@@ -297,11 +292,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         if (!_cache.TryGetValue(cacheKey, out establishmentMapData))
                         {
                             establishmentMapData = new List<EstablishmentMapData>();
-                            _logger.LogError(e, "Error getting map data, and nothing in long term cache.");
+                            _logger.LogError(e, "Error getting lrs data, and nothing in long term cache.");
                         }
                         else
                         {
-                            _logger.LogError(e, "Error getting map data, showing long term cache data");
+                            _logger.LogError(e, "Error getting lrs data, showing long term cache data");
                         }
                     }
                 }
