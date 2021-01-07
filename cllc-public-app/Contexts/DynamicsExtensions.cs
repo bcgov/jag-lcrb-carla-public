@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public static List<Public.ViewModels.LicenseeChangeLog> GetApplicationChangeLogs(this IDynamicsClient _dynamicsClient, string applicationId, ILogger _logger)
         {
-            
+
             var result = new List<Public.ViewModels.LicenseeChangeLog>();
             var filter = "_adoxio_application_value eq " + applicationId;
             try
@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     result.Add(item.ToViewModel());
                 }
-}
+            }
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error reading LegalEntityChangelog");
@@ -143,10 +143,67 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+
+        public static List<MicrosoftDynamicsCRMcontact> GetLEConnectionsForAccount(this IDynamicsClient _dynamicsClient,
+            string accountId, ILogger _logger, IConfiguration _configuration, List<string> memo = null)
+        {
+            if (memo == null)
+            {
+                memo = new List<string>();
+            }
+            var result = new List<MicrosoftDynamicsCRMcontact>();
+            if (memo.Contains(accountId))
+            {
+                return result; // accountId already processed
+            }
+            memo.Add(accountId);
+
+            var filter = "_adoxio_parentaccount_value eq " + accountId;
+
+            var expand = new List<string>{
+                "adoxio_ChildProfileName_contact",
+                "adoxio_ChildProfileName_account"
+            };
+            MicrosoftDynamicsCRMadoxioLeconnectionCollection response = null;
+            try
+            {
+                response = _dynamicsClient.Leconnections.Get(filter: filter, expand: expand);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error Getting LEConnections");
+                throw;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected Exception getting LEConnections");
+                throw;
+            }
+
+            var leConnections = response?.Value?.ToList();
+            leConnections.ForEach(item =>
+            {
+                if (item.AdoxioIsindividual == true
+                    && item.AdoxioSecurityscreeningrequired == true
+                    && item.AdoxioChildProfileNameContact != null) // Individual Connection that requires screening
+                {
+                    item.AdoxioChildProfileNameContact.PhsLink = GetPhsLink(item.AdoxioChildProfileNameContact.Contactid, _configuration);
+                    item.AdoxioChildProfileNameContact.CasLink = GetCASLink(item.AdoxioChildProfileNameContact.Contactid, _configuration);
+                    result.Add(item.AdoxioChildProfileNameContact);
+                }
+                else if (item.AdoxioIsindividual != true && item.AdoxioChildProfileNameAccount != null)
+                { //Business connection
+                    result.AddRange(GetLEConnectionsForAccount(_dynamicsClient, item.AdoxioChildProfileNameAccount.Accountid, _logger, _configuration, memo));
+                }
+            });
+
+            return result;
+        }
+
         public static string GetPhsLink(string contactId, IConfiguration _configuration)
         {
             string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
-            
+
             string encryptionKey = _configuration["ENCRYPTION_KEY"];
             result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, encryptionKey));
             return result;
@@ -218,7 +275,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
                 {
-                    if (! string.IsNullOrEmpty (dynamicsApplication._adoxioLicencetypeValue))
+                    if (!string.IsNullOrEmpty(dynamicsApplication._adoxioLicencetypeValue))
                     {
                         Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
                         var adoxio_licencetype = _dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
@@ -234,11 +291,11 @@ namespace Gov.Lclb.Cllb.Interfaces
                         {
                             result++;
                         }
-                    }                    
+                    }
                 }
-            
+
             }
-            
+
             return result;
 
         }
@@ -285,7 +342,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     if (pos > -1)
                     {
                         result = value.Substring(0, pos);
-                    }    
+                    }
                     else
                     {
                         result = "";
@@ -522,7 +579,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = null;
             }
 
-            
+
 
             return result;
         }
@@ -612,7 +669,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             IEnumerable<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
-            var filter = $"_adoxio_licencee_value eq { licenceeId} or (_adoxio_proposedowner_value eq {licenceeId} and adoxio_ownershiptransferinprogress eq 845280001)";            
+            var filter = $"_adoxio_licencee_value eq { licenceeId} or (_adoxio_proposedowner_value eq {licenceeId} and adoxio_ownershiptransferinprogress eq 845280001)";
 
             try
             {
@@ -1513,7 +1570,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static bool CurrentUserIsContact(string contactId, IHttpContextAccessor _httpContextAccessor)
         {
             // get the current user.
-            
+
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             if (userSettings.ContactId != null && userSettings.ContactId.Length > 0)
@@ -1565,7 +1622,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             // note that we specify floating point here, as otherwise the math will not work correctly.
-            if (licences.Count > 0 && (( liquorCount * 1.0f) >= (licences.Count * 1.0f) / 2.0f))
+            if (licences.Count > 0 && ((liquorCount * 1.0f) >= (licences.Count * 1.0f) / 2.0f))
             {
                 result = true;
             }
@@ -1607,7 +1664,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     result = (Public.ViewModels.ApplicationTypeCategory)application.AdoxioApplicationTypeId.AdoxioCategory == Public.ViewModels.ApplicationTypeCategory.Liquor;
                 }
-                
+
             }
 
             // TODO - if this is a licencee changes application then check the account's licences.  
