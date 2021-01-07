@@ -223,6 +223,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NoticesComponent } from '@components/notices/notices.component';
 import { NoticesTableComponent } from '@components/tables/notices-table/notices-table.component';
 import { LEConnectionsDataService } from '@services/le-connections-data.service';
+import { LicenseeRetailStoresComponent } from './components/licensee-retail-stores/licensee-retail-stores.component';
 
 @NgModule({
   declarations: [
@@ -356,6 +357,7 @@ import { LEConnectionsDataService } from '@services/le-connections-data.service'
     InvoiceDetailsComponent,
     NoticesComponent,
     NoticesTableComponent,
+    LicenseeRetailStoresComponent,
   ],
   imports: [
     ChartsModule,
