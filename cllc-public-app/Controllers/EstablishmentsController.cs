@@ -257,7 +257,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         {
                             foreach (var license in licences)
                             {
-                                if (license._adoxioEstablishmentValue != null)
+                                if (license._adoxioEstablishmentValue != null && (
+                                    search == null || (license.AdoxioEstablishment.AdoxioAddresscity != null &&
+                                                       license.AdoxioEstablishment.AdoxioAddresscity.ToUpper().Contains(search.ToUpper()))
+                                ))
                                 {
                                     var establishment = license.AdoxioEstablishment;
 
@@ -605,16 +608,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         {
                             foreach (var application in applications)
                             {
-                                establishmentMapData.Add(new EstablishmentMapData
+                                if (search == null || (application.AdoxioAddresscity != null &&
+                                    application.AdoxioAddresscity.ToUpper().Contains(search.ToUpper())))
                                 {
-                                    id = application.AdoxioApplicationid,
-                                    Name = application.AdoxioName,
-                                    License = "",
-                                    Phone = application.AdoxioPhone,
-                                    AddressCity = application.AdoxioAddresscity,
-                                    AddressPostal = application.AdoxioAddresspostalcode,
-                                    AddressStreet = application.AdoxioAddressstreet
-                                });
+                                    establishmentMapData.Add(new EstablishmentMapData
+                                    {
+                                        id = application.AdoxioApplicationid,
+                                        Name = application.AdoxioName,
+                                        License = "",
+                                        Phone = application.AdoxioPhone,
+                                        AddressCity = application.AdoxioAddresscity,
+                                        AddressPostal = application.AdoxioAddresspostalcode,
+                                        AddressStreet = application.AdoxioAddressstreet
+                                    });
+                                }
                             }
                         }
                         var cacheEntryOptions = new MemoryCacheEntryOptions()
@@ -669,27 +676,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (var establishment in account.AdoxioAccountAdoxioEstablishmentLicencee)
                 {
-                    if (establishment.Statuscode != null && establishment.Statuscode.Value == 845280000 && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null) // Licensed
+                    if (establishment.Statuscode != null && establishment.Statuscode.Value == 845280000 && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null
+                     &&   (
+                            search == null || (establishment.AdoxioAddresscity != null &&
+                                               establishment.AdoxioAddresscity.ToUpper().Contains(search.ToUpper()))
+                        )
+                    ) // Licensed
                     {
-                        EstablishmentMapData data = new EstablishmentMapData
-                        {
-                            id = establishment.AdoxioEstablishmentid,
-                            Name = "BC Cannabis Store",
-                            IsOpen = establishment.AdoxioIsopen.Value,
-                            License = "Public Store",
-                            AddressStreet = establishment.AdoxioAddressstreet,
-                            AddressCity = establishment.AdoxioAddresscity,
-                            AddressPostal = establishment.AdoxioAddresspostalcode,
-                            Latitude = establishment.AdoxioLatitude.Value,
-                            Longitude = establishment.AdoxioLongitude.Value
-                        };
-                        if (
-                                search == null || (establishment.AdoxioAddresscity != null &&
-                                                   establishment.AdoxioAddresscity.ToUpper().Contains(search.ToUpper())) 
-                           )
-                        {
-                            result.Add(data);
-                        }                        
+                        result.Add(new EstablishmentMapData
+                            {
+                                id = establishment.AdoxioEstablishmentid,
+                                Name = "BC Cannabis Store",
+                                IsOpen = establishment.AdoxioIsopen.Value,
+                                License = "Public Store",
+                                AddressStreet = establishment.AdoxioAddressstreet,
+                                AddressCity = establishment.AdoxioAddresscity,
+                                AddressPostal = establishment.AdoxioAddresspostalcode,
+                                Latitude = establishment.AdoxioLatitude.Value,
+                                Longitude = establishment.AdoxioLongitude.Value
+                            });
                     }
                 }
             }
