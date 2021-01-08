@@ -230,7 +230,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
         areaLocation: [''],
         capacity: ['', Validators.required]
       }),
-      isPermittedInZoning: ['', []]
+      isPermittedInZoning: ['', []],
+      isOnINLand: [false, []]
     });
 
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
