@@ -57,12 +57,12 @@
       <section class="padded-section">
         <app-field [required]="true" [valid]="isValidOrNotTouched('transferConsent')"
           errorMessage="Please consent to the transfer" [showChevrons]="false">
-          <section style="display: flex">
-            <input type="checkbox" formControlName="transferConsent">
+          <mat-checkbox formControlName="transferConsent">
             <!-- <span class="error-states">*</span> -->
-            <div style="padding-left: 10px;"> I agree to cancel the transfer of my {{licence.licenseType}} licence.
-            </div>
-          </section>
+            <span class="ml-2">
+              I agree to cancel the transfer of my {{licence.licenseType}} licence.
+            </span>
+          </mat-checkbox>
         </app-field>
       </section>
 
