@@ -11,20 +11,22 @@
       <!-- Preamble -->
       <section class="ngtest-preamble-content">
         <p>
-            This application must be completed when a licensee wishes to engage a third party to manage the operation
-            of the licensee's establishment.  The third party operator participates in a contractual agreement with
-            the licensee and benefits financially from the arrangement. The third party operator agreement must be in
-            place when a licensee wishes to engage a third party--either a proprietorship, corporate entity or partnership
-            to manage the operation of the licensee's establishment. A third party operator:
+          This application must be completed when a licensee wishes to engage a third party to manage the operation
+          of the licensee's establishment. The third party operator participates in a contractual agreement with
+          the licensee and benefits financially from the arrangement. The third party operator agreement must be in
+          place when a licensee wishes to engage a third party--either a proprietorship, corporate entity or partnership
+          to manage the operation of the licensee's establishment. A third party operator:
         </p>
         <ul>
           <li>is not an employee of the licensee </li>
           <li>must be approved by the Liquor and Cannabis Regulation Branch</li>
-          <li>does not assume accountability for the overall operation of the establishment on behalf of the licensee as the licensee remains responsible for all activities within the licensed establishment </li>
+          <li>does not assume accountability for the overall operation of the establishment on behalf of the licensee as
+            the licensee remains responsible for all activities within the licensed establishment </li>
           <li>must not enter into an agreement or allow another person to use the licence </li>
           <li>must be 19 years of age or over </li>
           <li>is subject to the same suitability assessment as the licensee</li>
-          <li>is not permitted to make application for a change to the licence or sign applications on behalf of the licensee.</li>
+          <li>is not permitted to make application for a change to the licence or sign applications on behalf of the
+            licensee.</li>
         </ul>
       </section>
 
@@ -34,9 +36,11 @@
       <section class="padded-section content-bottom">
         <div class="ngtest-before-starting-content">
           <p>
-            Before starting, please ensure that the third party operator you wish to has logged into this website and specified
+            Before starting, please ensure that the third party operator you wish to has logged into this website and
+            specified
             their basic account information. <br>
-            <strong>Important: If they do not first log into this site, you will not be able to proceed with this application</strong>.
+            <strong>Important: If they do not first log into this site, you will not be able to proceed with this
+              application</strong>.
 
           </p>
         </div>
@@ -124,12 +128,11 @@
 
         <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
           errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
-          <section style="display: flex">
-            <input type="checkbox" formControlName="authorizedToSubmit">
+          <mat-checkbox formControlName="authorizedToSubmit">
             <span class="error-states">*</span>
-            <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application
-            </div>
-          </section>
+            <span class="ml-2"> I understand and affirm that I am authorized to submit the application
+            </span>
+          </mat-checkbox>
         </app-field>
         <p *ngIf="licence?.licenseType === 'Cannabis Retail Store'">
           Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
@@ -147,13 +150,12 @@
         <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
           errorMessage="Please affirm that all of the information provided for this application is true and complete."
           [showChevrons]="false">
-          <section style="display: flex">
-            <input type="checkbox" formControlName="signatureAgreement">
+          <mat-checkbox formControlName="signatureAgreement">
             <span class="error-states">*</span>
-            <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
+            <span class="ml-2"> I understand and affirm that all of the information provided for this
               application is true and complete
-            </div>
-          </section>
+            </span>
+          </mat-checkbox>
         </app-field>
       </div>
 
@@ -167,31 +169,33 @@
         </p>
       </section>
 
-            <!-- Next Steps -->
-            <h3 class="blue-header">NEXT STEPS</h3>
-            <section class="padded-section content-bottom">
-              <div ><p>Once you click submit:</p>
-                <ul>
-                  <li>The Third Party Operator you identified will be notified that you have initiated the application.</li>
-                  <li>They can complete the application through their account.
-                  <li>The application will be available on their dashboard as an In Progress application.</li>
-                  <li>They will be required to pay the $330 application fee.</li>
-                </ul>
-              </div>
-            </section>
+      <!-- Next Steps -->
+      <h3 class="blue-header">NEXT STEPS</h3>
+      <section class="padded-section content-bottom">
+        <div>
+          <p>Once you click submit:</p>
+          <ul>
+            <li>The Third Party Operator you identified will be notified that you have initiated the application.</li>
+            <li>They can complete the application through their account.
+            <li>The application will be available on their dashboard as an In Progress application.</li>
+            <li>They will be required to pay the $330 application fee.</li>
+          </ul>
+        </div>
+      </section>
 
-            <section style="position: relative; margin-top: 20px;">
-                <button class="btn btn-primary" (click)="initiateTransfer()">
-                  <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
-                  SUBMIT</button>
-                <span style="float: right; color: #1a5a96; padding-top: 10px;">
-                  <a routerLink="/dashboard">
-                    <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
-                    Cancel
-                  </a>
-                </span>
-                <div [ngBusy]="busy"></div>
-              </section>
+      <section style="position: relative; margin-top: 20px;">
+        <button class="btn btn-primary" (click)="initiateTransfer()">
+          <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
+          SUBMIT
+        </button>
+        <span style="float: right; color: #1a5a96; padding-top: 10px;">
+          <a routerLink="/dashboard">
+            <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
+            Cancel
+          </a>
+        </span>
+        <div [ngBusy]="busy"></div>
+      </section>
     </div>
   </div>
 </div>

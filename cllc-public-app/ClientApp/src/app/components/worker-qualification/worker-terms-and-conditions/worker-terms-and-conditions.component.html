@@ -214,15 +214,19 @@
   </section>
 
   <section>
-    <input type="checkbox" [(ngModel)]="_termsAccepted" />&nbsp;I have read and accept the above terms of use.
-    <br>
+    <mat-checkbox [(ngModel)]="_termsAccepted">
+      I have read and accept the above terms of use.
+    </mat-checkbox>
+    
     <p>By submitting your email address, you agree the Liquor and Cannabis Regulation Branch can use it to communicate
       with you about your security verification.</p>
-    <input type="checkbox" [(ngModel)]="acceptEmailUse" />&nbsp;I authorize use of my email address to communicate with
-    me about my security verification.
-    <br>
+
+    <mat-checkbox [(ngModel)]="acceptEmailUse">
+      I authorize use of my email address to communicate with me about my security verification.
+    </mat-checkbox>
   </section>
-  <section class="buttons">
+
+  <section class="buttons mt-3">
     <button class="btn btn-primary" (click)="termsAccepted.emit(true);" [disabled]="!(_termsAccepted && acceptEmailUse)">Continue</button>
     <a href="logout" tabindex="1">Cancel and Exit</a>
   </section>
