@@ -31,4 +31,24 @@ export class EstablishmentDataService extends DataService {
         .pipe(catchError(this.handleError));
     }
 
+    public getLrs(): Observable<string> {
+      return this.http.get<string>(this.apiPath + '/lrs', { headers: this.headers })
+      .pipe(catchError(this.handleError));
+    }
+
+    public getLrsSearch(search: string): Observable<string> {
+      return this.http.get<string>(this.apiPath + '/lrs?search=' + encodeURIComponent(search), { headers: this.headers })
+        .pipe(catchError(this.handleError));
+    }
+
+    public getProposedLrs(): Observable<string> {
+      return this.http.get<string>(this.apiPath + '/proposed-lrs', { headers: this.headers })
+        .pipe(catchError(this.handleError));
+    }
+
+    public getProposedLrsSearch(search: string): Observable<string> {
+      return this.http.get<string>(this.apiPath + '/proposed-lrs?search=' + encodeURIComponent(search), { headers: this.headers })
+        .pipe(catchError(this.handleError));
+    }
+
 }
