@@ -90,11 +90,11 @@ namespace bdd_tests
             JavaScriptClick(uiProofOfZoning);
 
             // select 'yes' for Treaty First Nation Land
-            NgWebElement uiTreatyFirstNationLand = ngDriver.FindElement(By.CssSelector("#mat-radio-2 .mat-radio-outer-circle"));
+            NgWebElement uiTreatyFirstNationLand = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-2"));
             uiTreatyFirstNationLand.Click();
 
             // select 'yes' for ALR inclusion
-            NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("#mat-radio-5 .mat-radio-outer-circle"));
+            NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-5"));
             uiALRInclusion.Click();
 
             if (manufacturerType == "winery in Saanich")
