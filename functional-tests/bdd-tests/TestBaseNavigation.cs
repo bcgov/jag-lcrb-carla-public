@@ -155,6 +155,13 @@ namespace bdd_tests
                 NgWebElement uiContinueToOrganizationReview = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
                 uiContinueToOrganizationReview.Click();
             }
+
+            if (specificButton == "Proceed to Security Screening")
+            {
+                // click on the Proceed to Security Screening button
+                NgWebElement uiProceedToSecurityScreening = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
+                uiProceedToSecurityScreening.Click();
+            }
         }
 
 
