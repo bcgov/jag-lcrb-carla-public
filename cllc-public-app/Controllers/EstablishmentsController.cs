@@ -621,12 +621,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                     establishmentMapData.Add(new EstablishmentMapData
                                     {
                                         id = application.AdoxioApplicationid,
-                                        Name = application.AdoxioName,
+                                        Name = application.AdoxioEstablishmentpropsedname,
                                         License = "",
                                         Phone = application.AdoxioPhone,
-                                        AddressCity = application.AdoxioAddresscity,
-                                        AddressPostal = application.AdoxioAddresspostalcode,
-                                        AddressStreet = application.AdoxioAddressstreet
+                                        AddressCity = application.AdoxioEstablishmentaddresscity,
+                                        AddressPostal = application.AdoxioEstablishmentaddresspostalcode,
+                                        AddressStreet = application.AdoxioEstablishmentaddressstreet
                                     });
                                 }
                             }
