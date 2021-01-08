@@ -300,5 +300,9 @@ export const EventCategory = [
   {
     label: 'Temporary Off-Site Sale',
     value: 845280002
+  },
+  {
+    label: 'Temporary Use Area',
+    value: 845280004
   }
 ];
