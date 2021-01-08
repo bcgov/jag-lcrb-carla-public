@@ -118,6 +118,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Market = 845280001,
         [EnumMember(Value = "Temporary Off-Site Sale")]
         TemporaryOffSiteSale = 845280002,
+        [EnumMember(Value = "Temporary Use Area")]
+        TemporaryUseArea = 845280004,
     }
 
     public class LicenceEvent
@@ -193,7 +195,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string SecurityCompanyPhoneNumber { get; set; }
         public string SecurityCompanyEmail { get; set; }
         public string SecurityPoliceOfficerSummary { get; set; }
-        
+
         //Safe and Responsible service
         public bool? SafeAndResponsibleMinorsNotAttending { get; set; }
         public bool? SafeAndResponsibleLiquorAreaControlled { get; set; }
