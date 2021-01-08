@@ -92,7 +92,8 @@ namespace bdd_tests
             NgWebElement uiSignatureAgree = ngDriver.FindElement(By.XPath("//app-field/section/div/section/section/input"));
             JavaScriptClick(uiSignatureAgree);
 
-            ClickOnSubmitButton();
+            NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+            JavaScriptClick(uiSubmitButton);
 
             // check that new licensee representation is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/div[4]/a/span[contains(.,'Licensee Representative: ')]")).Displayed);
