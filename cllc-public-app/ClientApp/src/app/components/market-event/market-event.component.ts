@@ -418,17 +418,6 @@ export class MarketEventComponent extends FormBase implements OnInit {
     return c1 && c2 ? c1.value === c2.value : c1 === c2;
   }
 
-  getOptionFromValue(options: any, value: number) {
-    const idx = options.findIndex(opt => opt.value === value);
-    if (idx >= 0) {
-      return options[idx];
-    }
-    return {
-      value: null,
-      label: ''
-    };
-  }
-
   toggleScheduleConsistency() {
     this.scheduleIsInconsistent = !this.scheduleIsInconsistent;
     this.refreshTimeDays();

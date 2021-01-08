@@ -287,4 +287,15 @@ export class FormBase implements OnDestroy {
       label: ''
     };
   }
+
+  getOptionFromValue(options: any, value: number) {
+    const idx = options.findIndex(opt => opt.value === value);
+    if (idx >= 0) {
+      return options[idx];
+    }
+    return {
+      value: null,
+      label: ''
+    };
+  }
 }
