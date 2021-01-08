@@ -48,7 +48,7 @@ export const MY_FORMATS = {
     // our example generation script.
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
 
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }  ],
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }],
 })
 export class CateringEventFormComponent extends FormBase implements OnInit {
   faSave = faSave;
@@ -110,23 +110,23 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
     private store: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute
-    ) {
-      super();
-      this.route.paramMap.subscribe(params => {
-        this.eventForm.controls['licenceId'].setValue(params.get('licenceId'));
-        if (params.get('eventId')) {
-          this.isEditMode = true;
-          this.retrieveSavedEvent(params.get('eventId'));
-        } else {
-          this.resetDateFormsToDefault();
-          this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
-        }
-      });
-      this.startDateMinimum = new Date();
-      this.startDateMinimum.setDate(this.startDateMinimum.getDate());
-      this.endDateMinimum = new Date();
-      this.endDateMinimum.setDate(this.endDateMinimum.getDate());
-    }
+  ) {
+    super();
+    this.route.paramMap.subscribe(params => {
+      this.eventForm.controls['licenceId'].setValue(params.get('licenceId'));
+      if (params.get('eventId')) {
+        this.isEditMode = true;
+        this.retrieveSavedEvent(params.get('eventId'));
+      } else {
+        this.resetDateFormsToDefault();
+        this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
+      }
+    });
+    this.startDateMinimum = new Date();
+    this.startDateMinimum.setDate(this.startDateMinimum.getDate());
+    this.endDateMinimum = new Date();
+    this.endDateMinimum.setDate(this.endDateMinimum.getDate());
+  }
 
   ngOnInit() {
     this.store.select(state => state.currentUserState.currentUser)
@@ -138,10 +138,10 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
 
   retrieveSavedEvent(eventId: string) {
     this.busy = this.licenceEvents.getLicenceEvent(eventId)
-    .subscribe((licenceEvent) => {
-      this.licenceEvent = licenceEvent;
-      this.setFormToLicenceEvent(licenceEvent);
-    });
+      .subscribe((licenceEvent) => {
+        this.licenceEvent = licenceEvent;
+        this.setFormToLicenceEvent(licenceEvent);
+      });
   }
 
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
@@ -210,10 +210,10 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
       const timeForm = this.fb.group({
         dateTitle: [isDefault ? null : DAYS[startDate.getDay()] + ', ' + startDate.toLocaleDateString('en-US'), []],
         date: [isDefault ? null : startDate, []],
-        startTime: [{hour: startDate.getHours(), minute: startDate.getMinutes()}, [Validators.required]],
-        endTime: [{hour: endDate.getHours(), minute: endDate.getMinutes()}, [Validators.required]],
-        liquorStartTime: [{hour: liquorStart.getHours(), minute: liquorStart.getMinutes()}, [Validators.required]],
-        liquorEndTime: [{hour: liquorEnd.getHours(), minute: liquorEnd.getMinutes()}, [Validators.required]]
+        startTime: [{ hour: startDate.getHours(), minute: startDate.getMinutes() }, [Validators.required]],
+        endTime: [{ hour: endDate.getHours(), minute: endDate.getMinutes() }, [Validators.required]],
+        liquorStartTime: [{ hour: liquorStart.getHours(), minute: liquorStart.getMinutes() }, [Validators.required]],
+        liquorEndTime: [{ hour: liquorEnd.getHours(), minute: liquorEnd.getMinutes() }, [Validators.required]]
       });
 
       if (this.isReadOnly) {
@@ -304,33 +304,22 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
   }
 
   updateLicence(schedules) {
-    this.busy = this.licenceEvents.updateLicenceEvent(this.eventForm.get('id').value, {...this.eventForm.value, schedules})
-    .subscribe((licenceEvent) => {
-      this.router.navigate(['/licences']);
-    });
+    this.busy = this.licenceEvents.updateLicenceEvent(this.eventForm.get('id').value, { ...this.eventForm.value, schedules })
+      .subscribe((licenceEvent) => {
+        this.router.navigate(['/licences']);
+      });
   }
 
   createLicence(schedules) {
     this.eventForm.removeControl('id');
-    this.busy = this.licenceEvents.createLicenceEvent({...this.eventForm.value, schedules: schedules})
-    .subscribe((licenceEvent) => {
-      this.router.navigate(['/licences']);
-    });
+    this.busy = this.licenceEvents.createLicenceEvent({ ...this.eventForm.value, schedules: schedules })
+      .subscribe((licenceEvent) => {
+        this.router.navigate(['/licences']);
+      });
   }
 
   getOptionFromValue(options: any, value: number) {
     const idx = options.findIndex(opt => opt.value === value);
-    if (idx >= 0) {
-      return options[idx];
-    }
-    return {
-      value: null,
-      label: ''
-    };
-  }
-
-  getOptionFromLabel(options: any, label: string) {
-    const idx = options.findIndex(opt => opt.label === label);
     if (idx >= 0) {
       return options[idx];
     }
@@ -409,8 +398,8 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
   getDaysArray(start, end) {
     start = new Date(start);
     end = new Date(end);
-    for(var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
-        arr.push(new Date(dt));
+    for (var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
+      arr.push(new Date(dt));
     }
     return arr;
   }
@@ -423,10 +412,10 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
     if (this.isEditMode) {
       const id = this.eventForm.get('id').value;
       const status = this.getOptionFromLabel(this.eventStatus, 'Cancelled').value;
-      this.busy = this.licenceEvents.updateLicenceEvent(id, {...this.eventForm.value, status: status, licenceId: this.eventForm.get('licenceId').value})
-      .subscribe((licenceEvent) => {
-        this.router.navigate(['/licences']);
-      });
+      this.busy = this.licenceEvents.updateLicenceEvent(id, { ...this.eventForm.value, status: status, licenceId: this.eventForm.get('licenceId').value })
+        .subscribe((licenceEvent) => {
+          this.router.navigate(['/licences']);
+        });
     } else {
       this.router.navigate(['/licences']);
     }
