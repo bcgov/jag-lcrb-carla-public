@@ -301,11 +301,11 @@ namespace bdd_tests
             uiContactEmail.SendKeys(contactEmail);
 
             // select the authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
 
             // select the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
             // retrieve the current URL to get the application ID (needed downstream)
