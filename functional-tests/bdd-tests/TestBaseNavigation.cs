@@ -174,7 +174,7 @@ namespace bdd_tests
 
 
         [And(@"I click on the COVID Submit button")]
-        public void ClickOnCOVIDSubmitButton()
+        public void ClickOnSubmitButton2()
         {
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
             JavaScriptClick(uiSubmitButton);
