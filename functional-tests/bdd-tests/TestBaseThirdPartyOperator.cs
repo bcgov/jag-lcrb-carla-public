@@ -100,7 +100,7 @@ namespace bdd_tests
             JavaScriptClick(uiSignatureAgreement);
 
             // click on submit button
-            ClickOnSubmitButton();
+            ClickOnSubmitButton2();
 
             // navigate back to Licenses tab
             ClickLicencesTab();
@@ -127,7 +127,7 @@ namespace bdd_tests
             uiTransferConsent.Click();
 
             // click on Cancel Third Party Application button
-            ClickOnSubmitButton();
+            ClickOnSubmitButton2();
         }
     }
 }
