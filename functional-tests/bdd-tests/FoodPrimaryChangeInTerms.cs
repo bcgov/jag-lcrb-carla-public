@@ -29,7 +29,6 @@ Scenario: Food Primary Change in Terms (Private Corporation)
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    # And I pay the licensing fee 
     And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
     And I request a change in terms and conditions application
     And the account is deleted
