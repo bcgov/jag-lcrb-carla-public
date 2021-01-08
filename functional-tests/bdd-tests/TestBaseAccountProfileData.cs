@@ -30,7 +30,7 @@ namespace bdd_tests
 
             // check business number is correct
             NgWebElement uiBusinessNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='businessNumber']"));
-            Assert.True(uiBusinessNumber.GetAttribute("value") == "123456789");
+            Assert.True(uiBusinessNumber.GetAttribute("value") == "111111111");
 
             // check business type has been selected correctly
             if (bizType != "n indigenous nation account profile")
