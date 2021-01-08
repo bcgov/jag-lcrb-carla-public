@@ -318,17 +318,6 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
       });
   }
 
-  getOptionFromValue(options: any, value: number) {
-    const idx = options.findIndex(opt => opt.value === value);
-    if (idx >= 0) {
-      return options[idx];
-    }
-    return {
-      value: null,
-      label: ''
-    };
-  }
-
   toggleScheduleConsistency() {
     this.scheduleIsInconsistent = !this.scheduleIsInconsistent;
     this.refreshTimeDays();
