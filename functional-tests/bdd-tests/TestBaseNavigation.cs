@@ -168,7 +168,8 @@ namespace bdd_tests
         [And(@"I click on the Submit button")]
         public void ClickOnSubmitButton()
         {
-            NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+            //NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+            NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
             JavaScriptClick(uiSubmitButton);
         }
 
