@@ -87,6 +87,8 @@ http {
 
 		%API_CONFIG_SECTION%
 
+		rewrite ^\/lcrb\/(.*) https://$http_host/cannabislicensing/$1 permanent;
+
         # Remove path prefix when handling files
         rewrite ^\/cannabislicensing\/(.*) /$1 last;
     
