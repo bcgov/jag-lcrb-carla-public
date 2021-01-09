@@ -295,6 +295,8 @@ namespace bdd_tests
 
             CheckFeatureFlagsMarketEvents();
 
+            CheckFeatureLEConnections();
+
             IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
