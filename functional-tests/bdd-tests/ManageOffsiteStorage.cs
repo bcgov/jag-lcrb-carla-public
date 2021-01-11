@@ -105,6 +105,8 @@ namespace bdd_tests
 
             CheckFeatureFlagsLicenseeChanges();
 
+            // CheckFeatureLEConnections();
+
             IgnoreSynchronizationFalse();
 
             CarlaLogin(businessType);
