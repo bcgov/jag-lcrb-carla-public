@@ -30,7 +30,6 @@ Scenario: Food Primary Download Licence (Private Corporation)
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    # And I pay the licensing fee 
     And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
@@ -60,6 +59,8 @@ namespace bdd_tests
             CheckFeatureFlagsLicenseeChanges();
 
             CheckFeatureFlagsSecurityScreening();
+
+            CheckFeatureLEConnections();
 
             IgnoreSynchronizationFalse();
 

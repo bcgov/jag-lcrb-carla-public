@@ -410,25 +410,35 @@
                 </app-proof-of-zoning>
                 <hr>
               </section>
+
               <section>
-              <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
-                [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status"
-                [isFullWidth]="true" *ngIf="application?.applicationType?.hasALRQuestion">
-                <mat-radio-group formControlName="isAlr">
-                  <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
-                  <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
-                </mat-radio-group>
-              </app-field>
-              <div *ngIf="this.form.get('isAlr').value === true">
-                <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
-                <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
-                  <p><strong>By submitting this application to LCRB, you are confirming that your licenced establishment
-                      will adhere to the requirements laid out in the <a
-                        href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019"
-                        target="_blank">Agricultural Land Reserve (ALR) Use Regulation</a>.</strong></p>
+                <app-field label="Is the proposed establishment on Treaty First Nation Land?"
+                *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)"
+                  [valid]="isValidOrNotTouched('isOnINLand')" [showChevrons]="false"  [isFullWidth]="true">
+                  <mat-radio-group formControlName="isOnINLand">
+                    <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+                    <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
+                  </mat-radio-group>
+                </app-field>
+                
+                <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
+                  [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status" [isFullWidth]="true"
+                  *ngIf="application?.applicationType?.hasALRQuestion">
+                  <mat-radio-group formControlName="isAlr">
+                    <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+                    <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
+                  </mat-radio-group>
+                </app-field>
+                <div *ngIf="this.form.get('isAlr').value === true">
+                  <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
+                  <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
+                    <p><strong>By submitting this application to LCRB, you are confirming that your licenced establishment
+                        will adhere to the requirements laid out in the <a
+                          href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agricultural Land
+                          Reserve (ALR) Use Regulation</a>.</strong></p>
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
 
             </div>
           </section>
@@ -718,13 +728,12 @@
                           <app-field *ngIf="formField.controltype == 'RadioControl'"
                                      [valid]="!showValidationMessages || form.get(formField.datafieldname).valid" [required]="formField.required" [errorMessage]="'This field is required.'"
                                      [showChevrons]="false">
-                            <section style="display: flex; padding-left: 20px;">
-                              <input type="checkbox" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                            <mat-checkbox [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
                               <span class="error-states">*</span>
-                              <div style="padding-left: 10px;" class="question-label">
+                              <span class="ml-2 question-label">
                                 {{formField.name}}
-                              </div>
-                            </section>
+                              </span>
+                            </mat-checkbox>
                           </app-field>
 
 </div>
@@ -1787,16 +1796,15 @@
 
             <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
               errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
-              <section style="display: flex">
-                <input type="checkbox" formControlName="authorizedToSubmit" id="authorizedToSubmit">
+              <mat-checkbox formControlName="authorizedToSubmit" id="authorizedToSubmit">
                 <span class="error-states">*</span>
-                <div style="padding-left: 10px;" *ngIf="!isRAS()">
+                <span class="ml-2" *ngIf="!isRAS()">
                   I understand and affirm that I am authorized to submit the application
-                </div>
-                <div style="padding-left: 10px;" *ngIf="isRAS()">
+                </span>
+                <span class="ml-2" *ngIf="isRAS()">
                   I understand and affirm that I am authorized to submit this information.
-                </div>
-              </section>
+                </span>
+              </mat-checkbox>
             </app-field>
             <p *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
               Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
@@ -1815,17 +1823,16 @@
             <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
               errorMessage="Please affirm that all of the information provided for this application is true and complete."
               [showChevrons]="false">
-              <section style="display: flex">
-                <input type="checkbox" formControlName="signatureAgreement" id="signatureAgreement">
+              <mat-checkbox formControlName="signatureAgreement" id="signatureAgreement">
                 <span class="error-states">*</span>
-                <div style="padding-left: 10px;" *ngIf="!isRAS()">
+                <span class="ml-2" *ngIf="!isRAS()">
                   I understand and affirm that all of the information provided for this
                   application is true and complete
-                </div>
-                <div style="padding-left: 10px;" *ngIf="isRAS()">
+                </span>
+                <span class="ml-2" *ngIf="isRAS()">
                   I understand and affirm that all of the information provided is true and complete
-                </div>
-              </section>
+                </span>
+              </mat-checkbox>              
             </app-field>
           </ng-container>
           <ng-container *ngIf="application?.applicationType?.showLiquorDeclarations">
@@ -1840,14 +1847,13 @@
             </p>
             <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
               errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
-              <section style="display: flex">
-                <input type="checkbox" formControlName="authorizedToSubmit">
+              <mat-checkbox formControlName="authorizedToSubmit">
                 <span class="error-states">*</span>
-                <div style="padding-left: 10px;">
+                <span class="ml-2">
                   I understand and affirm that I am authorized to submit the
                   application
-                </div>
-              </section>
+                </span>
+              </mat-checkbox>
             </app-field>
             <p>
               <strong>
@@ -2018,7 +2024,7 @@
 
         <section appRemoveIfFeatureOff="LGApprovals" *ngIf="!isOpenedByLGForApproval && !lGHasRejected()"
           style="position: relative; margin-top: 20px;">
-            <button *ngIf="account?.businessType !== 'LocalGovernment '" class="btn btn-secondary" style="margin-right:10px;"
+            <button mat-raised-button *ngIf="account?.businessType !== 'LocalGovernment '" color="secondary" style="margin-right:10px;"
               (click)="saveForLater()" [disabled]="saveForLaterInProgress">
               <span>
                 <fa-icon [icon]="faSave"></fa-icon>
@@ -2039,12 +2045,12 @@
 
                 -->
         <!-- LG Approval Required -->
-        <button
+        <button mat-raised-button class="ng-test-submit-for-lg-review" color="primary"
           *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
-                                    && !lGHasApproved()
-                                    && !lGHasRejected()
-                                    && application?.applicationStatus === 'Intake'"
-          class=" btn btn-primary ng-test-submit-for-lg-review" [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
+            && !lGHasApproved()
+            && !lGHasRejected()
+            && application?.applicationStatus === 'Intake'"
+          [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
           <span><fa-icon [icon]="faUniversity" class="mr-1"></fa-icon>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
           <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
         </button>
@@ -2055,13 +2061,13 @@
         <ng-container
           *ngIf="lGHasApproved() || !application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation">
 
-            <button *ngIf="!application?.applicationType?.requiresSecurityScreening" class="btn btn-primary"
+            <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
               (click)="submit_application()" [disabled]="submitApplicationInProgress">
               SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
               <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
 
-          <button *ngIf="application?.applicationType?.requiresSecurityScreening" class="btn btn-primary"
+          <button mat-raised-button *ngIf="application?.applicationType?.requiresSecurityScreening" color="primary"
             (click)="proceedToSecurityScreening()" [disabled]="proceedToSecurityScreeningInProgress">
             <span>
               <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>PROCEED TO SECURITY SCREENING
@@ -2084,14 +2090,14 @@
 
         <!-- button section when  LGApprovals is disabled -->
         <section appRemoveIfFeatureOn="LGApprovals" style="position: relative; margin-top: 20px;">
-          <button class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
+          <button mat-raised-button color="secondary" style="margin-right:10px;" (click)="saveForLater()">
             <span>
               <fa-icon [icon]="faSave"></fa-icon>
               SAVE FOR LATER
             </span>
             <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
           </button>
-          <button class="btn btn-primary" (click)="submit_application()">
+          <button mat-raised-button color="primary" (click)="submit_application()">
             <span>
               <fa-icon [icon]="faCreditCard" *ngIf="!skipPayment"></fa-icon>SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
             </span>

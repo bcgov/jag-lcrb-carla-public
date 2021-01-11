@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public static List<Public.ViewModels.LicenseeChangeLog> GetApplicationChangeLogs(this IDynamicsClient _dynamicsClient, string applicationId, ILogger _logger)
         {
-            
+
             var result = new List<Public.ViewModels.LicenseeChangeLog>();
             var filter = "_adoxio_application_value eq " + applicationId;
             try
@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     result.Add(item.ToViewModel());
                 }
-}
+            }
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error reading LegalEntityChangelog");
@@ -143,10 +143,67 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+
+        public static List<MicrosoftDynamicsCRMcontact> GetLEConnectionsForAccount(this IDynamicsClient _dynamicsClient,
+            string accountId, ILogger _logger, IConfiguration _configuration, List<string> memo = null)
+        {
+            if (memo == null)
+            {
+                memo = new List<string>();
+            }
+            var result = new List<MicrosoftDynamicsCRMcontact>();
+            if (memo.Contains(accountId))
+            {
+                return result; // accountId already processed
+            }
+            memo.Add(accountId);
+
+            var filter = "_adoxio_parentaccount_value eq " + accountId;
+
+            var expand = new List<string>{
+                "adoxio_ChildProfileName_contact",
+                "adoxio_ChildProfileName_account"
+            };
+            MicrosoftDynamicsCRMadoxioLeconnectionCollection response = null;
+            try
+            {
+                response = _dynamicsClient.Leconnections.Get(filter: filter, expand: expand);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error Getting LEConnections");
+                throw;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected Exception getting LEConnections");
+                throw;
+            }
+
+            var leConnections = response?.Value?.ToList();
+            leConnections.ForEach(item =>
+            {
+                if (item.AdoxioIsindividual == true
+                    && item.AdoxioSecurityscreeningrequired == true
+                    && item.AdoxioChildProfileNameContact != null) // Individual Connection that requires screening
+                {
+                    item.AdoxioChildProfileNameContact.PhsLink = GetPhsLink(item.AdoxioChildProfileNameContact.Contactid, _configuration);
+                    item.AdoxioChildProfileNameContact.CasLink = GetCASLink(item.AdoxioChildProfileNameContact.Contactid, _configuration);
+                    result.Add(item.AdoxioChildProfileNameContact);
+                }
+                else if (item.AdoxioIsindividual != true && item.AdoxioChildProfileNameAccount != null)
+                { //Business connection
+                    result.AddRange(GetLEConnectionsForAccount(_dynamicsClient, item.AdoxioChildProfileNameAccount.Accountid, _logger, _configuration, memo));
+                }
+            });
+
+            return result;
+        }
+
         public static string GetPhsLink(string contactId, IConfiguration _configuration)
         {
             string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
-            
+
             string encryptionKey = _configuration["ENCRYPTION_KEY"];
             result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, encryptionKey));
             return result;
@@ -218,7 +275,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
                 {
-                    if (! string.IsNullOrEmpty (dynamicsApplication._adoxioLicencetypeValue))
+                    if (!string.IsNullOrEmpty(dynamicsApplication._adoxioLicencetypeValue))
                     {
                         Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
                         var adoxio_licencetype = _dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
@@ -234,11 +291,11 @@ namespace Gov.Lclb.Cllb.Interfaces
                         {
                             result++;
                         }
-                    }                    
+                    }
                 }
-            
+
             }
-            
+
             return result;
 
         }
@@ -285,7 +342,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     if (pos > -1)
                     {
                         result = value.Substring(0, pos);
-                    }    
+                    }
                     else
                     {
                         result = "";
@@ -522,7 +579,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = null;
             }
 
-            
+
 
             return result;
         }
@@ -612,7 +669,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             IEnumerable<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
-            var filter = $"_adoxio_licencee_value eq { licenceeId} or (_adoxio_proposedowner_value eq {licenceeId} and adoxio_ownershiptransferinprogress eq 845280001)";            
+            var filter = $"_adoxio_licencee_value eq { licenceeId} or (_adoxio_proposedowner_value eq {licenceeId} and adoxio_ownershiptransferinprogress eq 845280001)";
 
             try
             {
@@ -1029,6 +1086,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static Public.ViewModels.Form GetSystemformViewModel(this IDynamicsClient _dynamicsClient, IMemoryCache _cache, ILogger _logger, string formid)
         {
 
+            Public.ViewModels.Form form = null;
+
             // get the picklists.
 
             List<MicrosoftDynamicsCRMpicklistAttributeMetadata> picklistMetadata = null;
@@ -1040,184 +1099,194 @@ namespace Gov.Lclb.Cllb.Interfaces
             catch (Exception e)
             {
                 _logger.LogError(e, "ERROR getting accounts picklist metadata");
+                
             }
 
             // get the application mapping.
 
             ApplicationMapping applicationMapping = new ApplicationMapping();
-            var systemForm = _dynamicsClient.Systemforms.GetByKey(formid);
 
-            /*
-            string entityKey = "SystemForm_" + id + "_Entity";
-            string nameKey = "SystemForm_" + id + "_Name";
-            string xmlKey = "SystemForm_" + id + "_FormXML";
-            string formXml = await _distributedCache.GetStringAsync(xmlKey);
-            */
-
-            string formXml = systemForm.Formxml;
-
-            Public.ViewModels.Form form = new Public.ViewModels.Form();
-            form.id = formid;
-            form.tabs = new List<Public.ViewModels.FormTab>();
-            form.sections = new List<Public.ViewModels.FormSection>();
-
-            var tabs = XDocument.Parse(formXml).XPathSelectElements("form/tabs/tab");
-            if (tabs != null)
+            try
             {
-                foreach (var tab in tabs)
+                var systemForm = _dynamicsClient.Systemforms.GetByKey(formid);
+
+                /*
+                string entityKey = "SystemForm_" + id + "_Entity";
+                string nameKey = "SystemForm_" + id + "_Name";
+                string xmlKey = "SystemForm_" + id + "_FormXML";
+                string formXml = await _distributedCache.GetStringAsync(xmlKey);
+                */
+
+                string formXml = systemForm.Formxml;
+
+                form = new Public.ViewModels.Form();
+                form.id = formid;
+                form.tabs = new List<Public.ViewModels.FormTab>();
+                form.sections = new List<Public.ViewModels.FormSection>();
+
+                var tabs = XDocument.Parse(formXml).XPathSelectElements("form/tabs/tab");
+                if (tabs != null)
                 {
-                    var tabLabel = tab.XPathSelectElement("labels/label");
-                    string description = tabLabel.Attribute("description").Value;
-                    string tabId = tabLabel.Attribute("id") == null ? "" : tabLabel.Attribute("id").Value;
-                    Boolean tabShowLabel = tab.Attribute("showlabel").DynamicsAttributeToBoolean();
-                    Boolean tabVisible = tab.Attribute("visible").DynamicsAttributeToBoolean();
-
-                    Public.ViewModels.FormTab formTab = new Public.ViewModels.FormTab();
-                    formTab.id = tabId;
-                    formTab.name = description;
-                    formTab.sections = new List<Public.ViewModels.FormSection>();
-                    formTab.showlabel = tabShowLabel;
-                    formTab.visible = tabVisible;
-
-                    // get the sections
-                    var sections = tab.XPathSelectElements("columns/column/sections/section");
-                    foreach (var section in sections)
+                    foreach (var tab in tabs)
                     {
-                        Boolean sectionShowLabel = section.Attribute("showlabel").DynamicsAttributeToBoolean();
-                        Boolean sectionVisible = section.Attribute("visible").DynamicsAttributeToBoolean();
-                        if (section.Attribute("visible") == null)
+                        var tabLabel = tab.XPathSelectElement("labels/label");
+                        string description = tabLabel.Attribute("description").Value;
+                        string tabId = tabLabel.Attribute("id") == null ? "" : tabLabel.Attribute("id").Value;
+                        Boolean tabShowLabel = tab.Attribute("showlabel").DynamicsAttributeToBoolean();
+                        Boolean tabVisible = tab.Attribute("visible").DynamicsAttributeToBoolean();
+
+                        Public.ViewModels.FormTab formTab = new Public.ViewModels.FormTab();
+                        formTab.id = tabId;
+                        formTab.name = description;
+                        formTab.sections = new List<Public.ViewModels.FormSection>();
+                        formTab.showlabel = tabShowLabel;
+                        formTab.visible = tabVisible;
+
+                        // get the sections
+                        var sections = tab.XPathSelectElements("columns/column/sections/section");
+                        foreach (var section in sections)
                         {
-                            sectionVisible = true; // default visibility to true if it is not specified.
-                        }
-
-
-                        Public.ViewModels.FormSection formSection = new Public.ViewModels.FormSection();
-                        formSection.fields = new List<Public.ViewModels.FormField>();
-                        formSection.id = section.Attribute("id").Value;
-                        formSection.showlabel = sectionShowLabel;
-                        formSection.visible = sectionVisible;
-
-                        // get the fields.
-                        var sectionLabels = section.XPathSelectElements("labels/label");
-
-                        // the section label is the section name.
-                        foreach (var sectionLabel in sectionLabels)
-                        {
-                            formSection.name = sectionLabel.Attribute("description").Value;
-                        }
-                        // get the cells.
-                        var cells = section.XPathSelectElements("rows/row/cell");
-
-                        foreach (var cell in cells)
-                        {
-                            Public.ViewModels.FormField formField = new Public.ViewModels.FormField();
-                            // get cell visibility and showlabel
-                            bool cellShowLabel = cell.Attribute("showlabel").DynamicsAttributeToBoolean();
-                            bool cellVisible = cell.Attribute("visible").DynamicsAttributeToBoolean();
-
-                            // set the cell to visible if it is not hidden.
-                            if (cell.Attribute("visible") == null)
+                            Boolean sectionShowLabel = section.Attribute("showlabel").DynamicsAttributeToBoolean();
+                            Boolean sectionVisible = section.Attribute("visible").DynamicsAttributeToBoolean();
+                            if (section.Attribute("visible") == null)
                             {
-                                cellVisible = true;
+                                sectionVisible = true; // default visibility to true if it is not specified.
                             }
 
-                            formField.showlabel = cellShowLabel;
-                            formField.visible = cellVisible;
 
-                            // get the cell label. 
+                            Public.ViewModels.FormSection formSection = new Public.ViewModels.FormSection();
+                            formSection.fields = new List<Public.ViewModels.FormField>();
+                            formSection.id = section.Attribute("id").Value;
+                            formSection.showlabel = sectionShowLabel;
+                            formSection.visible = sectionVisible;
 
-                            if (formField.showlabel)
+                            // get the fields.
+                            var sectionLabels = section.XPathSelectElements("labels/label");
+
+                            // the section label is the section name.
+                            foreach (var sectionLabel in sectionLabels)
                             {
-                                var cellLabels = cell.XPathSelectElements("labels/label");
-                                foreach (var cellLabel in cellLabels)
+                                formSection.name = sectionLabel.Attribute("description").Value;
+                            }
+                            // get the cells.
+                            var cells = section.XPathSelectElements("rows/row/cell");
+
+                            foreach (var cell in cells)
+                            {
+                                Public.ViewModels.FormField formField = new Public.ViewModels.FormField();
+                                // get cell visibility and showlabel
+                                bool cellShowLabel = cell.Attribute("showlabel").DynamicsAttributeToBoolean();
+                                bool cellVisible = cell.Attribute("visible").DynamicsAttributeToBoolean();
+
+                                // set the cell to visible if it is not hidden.
+                                if (cell.Attribute("visible") == null)
                                 {
-                                    formField.name = cellLabel.Attribute("description").Value;
+                                    cellVisible = true;
                                 }
-                            }
-                            else
-                            {
-                                // use the section name.
-                                formField.name = formSection.name;
-                                formSection.name = "";
-                            }
 
+                                formField.showlabel = cellShowLabel;
+                                formField.visible = cellVisible;
 
-                            // get the form field name.
-                            var control = cell.XPathSelectElement("control");
-                            if (!string.IsNullOrEmpty(formField.name) && control != null && control.Attribute("datafieldname") != null)
-                            {
-                                formField.classid = control.Attribute("classid").Value;
-                                formField.controltype = formField.classid.DynamicsControlClassidToName();
-                                string datafieldname = control.Attribute("datafieldname").Value;
-                                // translate the data field name
-                                formField.datafieldname = applicationMapping.GetViewModelKey(datafieldname);
+                                // get the cell label. 
 
-                                formField.required = applicationMapping.GetRequired(datafieldname);
-
-                                if (formField.controltype.Equals("PicklistControl"))
+                                if (formField.showlabel)
                                 {
-                                    // get the options.
-                                    var metadata = picklistMetadata.FirstOrDefault(x => x.LogicalName == datafieldname);
-
-                                    formField.options = new List<Public.ViewModels.OptionMetadata>();
-
-                                    if (metadata == null)
+                                    var cellLabels = cell.XPathSelectElements("labels/label");
+                                    foreach (var cellLabel in cellLabels)
                                     {
-                                        formField.options.Add(new Public.ViewModels.OptionMetadata { label = "INVALID PICKLIST", value = 0 });
+                                        formField.name = cellLabel.Attribute("description").Value;
                                     }
-                                    else
+                                }
+                                else
+                                {
+                                    // use the section name.
+                                    formField.name = formSection.name;
+                                    formSection.name = "";
+                                }
+
+
+                                // get the form field name.
+                                var control = cell.XPathSelectElement("control");
+                                if (!string.IsNullOrEmpty(formField.name) && control != null && control.Attribute("datafieldname") != null)
+                                {
+                                    formField.classid = control.Attribute("classid").Value;
+                                    formField.controltype = formField.classid.DynamicsControlClassidToName();
+                                    string datafieldname = control.Attribute("datafieldname").Value;
+                                    // translate the data field name
+                                    formField.datafieldname = applicationMapping.GetViewModelKey(datafieldname);
+
+                                    formField.required = applicationMapping.GetRequired(datafieldname);
+
+                                    if (formField.controltype.Equals("PicklistControl"))
                                     {
-                                        MicrosoftDynamicsCRMoptionSet optionSet = null;
-                                        // could be an OptionSet or a globalOptionSet.
-                                        if (metadata.OptionSet != null)
+                                        // get the options.
+                                        var metadata = picklistMetadata.FirstOrDefault(x => x.LogicalName == datafieldname);
+
+                                        formField.options = new List<Public.ViewModels.OptionMetadata>();
+
+                                        if (metadata == null)
                                         {
-                                            optionSet = metadata.OptionSet;
+                                            formField.options.Add(new Public.ViewModels.OptionMetadata { label = "INVALID PICKLIST", value = 0 });
                                         }
                                         else
                                         {
-                                            optionSet = metadata.GlobalOptionSet;
-                                        }
-                                        if (optionSet != null)
-                                        {
-                                            foreach (var option in optionSet.Options)
+                                            MicrosoftDynamicsCRMoptionSet optionSet = null;
+                                            // could be an OptionSet or a globalOptionSet.
+                                            if (metadata.OptionSet != null)
                                             {
-                                                int? value = option.Value;
-                                                string label = option.Label?.UserLocalizedLabel?.Label;
-                                                if (value == null || label == null)
-                                                {
-                                                    formField.options.Add(new Public.ViewModels.OptionMetadata { label = "INVALID PICKLIST", value = 0 });
-                                                }
-                                                else
-                                                {
-                                                    formField.options.Add(new Public.ViewModels.OptionMetadata { label = label, value = value.Value });
-                                                }
-
+                                                optionSet = metadata.OptionSet;
                                             }
-                                        }
+                                            else
+                                            {
+                                                optionSet = metadata.GlobalOptionSet;
+                                            }
+                                            if (optionSet != null)
+                                            {
+                                                foreach (var option in optionSet.Options)
+                                                {
+                                                    int? value = option.Value;
+                                                    string label = option.Label?.UserLocalizedLabel?.Label;
+                                                    if (value == null || label == null)
+                                                    {
+                                                        formField.options.Add(new Public.ViewModels.OptionMetadata { label = "INVALID PICKLIST", value = 0 });
+                                                    }
+                                                    else
+                                                    {
+                                                        formField.options.Add(new Public.ViewModels.OptionMetadata { label = label, value = value.Value });
+                                                    }
 
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                    if (formField.datafieldname != null)
+                                    {
+                                        formSection.fields.Add(formField);
                                     }
                                 }
-                                if (formField.datafieldname != null)
-                                {
-                                    formSection.fields.Add(formField);
-                                }
+
                             }
 
+                            formTab.sections.Add(formSection);
+                            form.sections.Add(formSection);
                         }
 
-                        formTab.sections.Add(formSection);
-                        form.sections.Add(formSection);
+                        form.tabs.Add(formTab);
                     }
-
+                }
+                else // single tab form.
+                {
+                    Public.ViewModels.FormTab formTab = new Public.ViewModels.FormTab();
+                    formTab.name = "";
                     form.tabs.Add(formTab);
                 }
             }
-            else // single tab form.
+            catch (HttpOperationException httpOperationException)
             {
-                Public.ViewModels.FormTab formTab = new Public.ViewModels.FormTab();
-                formTab.name = "";
-                form.tabs.Add(formTab);
+                _logger.LogError(httpOperationException, "Unknown or invalid form reference - {formid}");
             }
+
             return form;
         }
 
@@ -1513,7 +1582,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static bool CurrentUserIsContact(string contactId, IHttpContextAccessor _httpContextAccessor)
         {
             // get the current user.
-            
+
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             if (userSettings.ContactId != null && userSettings.ContactId.Length > 0)
@@ -1565,7 +1634,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             // note that we specify floating point here, as otherwise the math will not work correctly.
-            if (licences.Count > 0 && (( liquorCount * 1.0f) >= (licences.Count * 1.0f) / 2.0f))
+            if (licences.Count > 0 && ((liquorCount * 1.0f) >= (licences.Count * 1.0f) / 2.0f))
             {
                 result = true;
             }
@@ -1607,7 +1676,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     result = (Public.ViewModels.ApplicationTypeCategory)application.AdoxioApplicationTypeId.AdoxioCategory == Public.ViewModels.ApplicationTypeCategory.Liquor;
                 }
-                
+
             }
 
             // TODO - if this is a licencee changes application then check the account's licences.  

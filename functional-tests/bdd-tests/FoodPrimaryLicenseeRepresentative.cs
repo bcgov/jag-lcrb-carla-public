@@ -29,7 +29,6 @@ Scenario: Food Primary Licensee Representative (Private Corporation)
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    # And I pay the licensing fee 
     And I request a licensee representative
     And the account is deleted
     Then I see the login page
@@ -59,6 +58,8 @@ namespace bdd_tests
             CheckFeatureFlagsLicenseeChanges();
 
             CheckFeatureFlagsSecurityScreening();
+
+            CheckFeatureLEConnections();
 
             IgnoreSynchronizationFalse();
 
