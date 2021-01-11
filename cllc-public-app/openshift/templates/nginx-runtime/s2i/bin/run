@@ -23,6 +23,10 @@ getApiProxyConfigSection (){
             proxy_pass ${_API_URL};
         }
 		
+		location /lcrb/api/ {
+            proxy_pass ${_API_URL};
+        }
+		
 		location /login {
             proxy_pass ${_LOGIN_URL};
         }
