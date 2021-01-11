@@ -14,6 +14,10 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
+    enum IsOnINLandOptionValue {
+        Yes = 845280000
+    }
+    
     /// <summary>
     /// ViewModel transforms.
     /// </summary>
@@ -163,7 +167,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioHascooleraccess = from.HasCoolerAccess;
 
             to.AdoxioLocatedaboveother = from.LocatedAboveOther;
-
+            
+            if(from.IsOnINLand == true){
+                to.AdoxioIsoninland = (int)IsOnINLandOptionValue.Yes;
+            } else {
+                to.AdoxioIsoninland = null;
+            }
 
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
@@ -329,6 +338,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger)
         {
+            
             ViewModels.Application applicationVM = new ViewModels.Application
             {
                 Name = dynamicsApplication.AdoxioName,
@@ -488,6 +498,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 CsAdditionalReceiverOrExecutor = dynamicsApplication.AdoxioCsadditionofreceiverorexecutor,
                 PrimaryInvoicePaid = dynamicsApplication.AdoxioPrimaryapplicationinvoicepaid == 1,
                 SecondaryInvoicePaid = dynamicsApplication.AdoxioSecondaryapplicationinvoicepaid == 1,
+                IsOnINLand = (dynamicsApplication.AdoxioIsoninland == (int)IsOnINLandOptionValue.Yes),
 
                 LocatedAboveOther = dynamicsApplication.AdoxioLocatedaboveother
             };

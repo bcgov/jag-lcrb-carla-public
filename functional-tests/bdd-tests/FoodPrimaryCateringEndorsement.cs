@@ -29,7 +29,6 @@ Scenario: Food Primary Catering Endorsement (Private Corporation)
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    # And I pay the licensing fee 
     And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
     And I click on the Submit button
@@ -64,6 +63,8 @@ namespace bdd_tests
             CheckFeatureFlagsLicenseeChanges();
 
             CheckFeatureFlagsSecurityScreening();
+
+            // CheckFeatureLEConnections();
 
             IgnoreSynchronizationFalse();
 
