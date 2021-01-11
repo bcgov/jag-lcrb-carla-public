@@ -51,7 +51,7 @@ Scenario: OneStop Cancel Licence (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Cancelled message is displayed
+    And the OneStop Updated - Cancelled message is displayed
     And the sent date is populated
     And I click on Settings
     And I click on OneStop Message Items
@@ -69,7 +69,7 @@ Scenario: OneStop Remove Cancellation (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Cancellation Removed message is displayed
+    And the OneStop Updated - Cancellation Removed message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 01 and the programAccountReasonCode is not displayed
 
@@ -94,7 +94,7 @@ Scenario: OneStop Enter Licence Dormancy (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Dormancy message is displayed
+    And the OneStop Updated - Entered Dormancy message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 02 and the programAccountReasonCode as 115
 
@@ -109,7 +109,7 @@ Scenario: OneStop End Licence Dormancy (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop End Dormancy message is displayed
+    And the OneStop Updated - Dormancy Ended message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 01 and the programAccountReasonCode is not displayed
 
@@ -150,7 +150,7 @@ Scenario: OneStop Licence Renewed (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Licence Renewal message is displayed
+    And the OneStop Renewed message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 01 and the programAccountReasonCode is not displayed
 
@@ -175,7 +175,7 @@ Scenario: OneStop Licence Suspended (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Suspended message is displayed
+    And the OneStop Updated - Suspended message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 02 and the programAccountReasonCode as 114
 
@@ -190,7 +190,7 @@ Scenario: OneStop Licence End Suspension (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop End Suspension message is displayed
+    And the OneStop Updated - Suspension Ended message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 01 and the programAccountReasonCode is not displayed
 
@@ -214,7 +214,7 @@ Scenario: OneStop Licence Name Change (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Name Change message is displayed
+    And the OneStop Updated - Change of Name message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as ? and the programAccountReasonCode as ?
 
@@ -238,10 +238,10 @@ Scenario: OneStop Licence Transfer Ownership (Private Corporation)
     And I request a transfer of ownership
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait five minutes
+    And I wait ? minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Transfer Ownership message is displayed
+    And the OneStop Updated - Licence Deemed at Transfer message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as ? and the programAccountReasonCode as ?
