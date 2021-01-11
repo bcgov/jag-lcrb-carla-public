@@ -189,5 +189,5 @@ export class Application {
   csAdditionalReceiverOrExecutor: boolean;
   primaryInvoicePaid: boolean;
   secondaryInvoicePaid: boolean;
-
+  isOnINLand: boolean;
 }

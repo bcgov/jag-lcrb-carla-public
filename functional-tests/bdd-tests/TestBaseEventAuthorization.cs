@@ -46,7 +46,7 @@ namespace bdd_tests
             Temporary workaround for LCSD-3867 - end
             */
 
-            string requestEventAuthorization = "Request Event Authorization";
+            string requestEventAuthorization = "Request Catered Event Authorization";
 
             // click on the request event authorization link
             NgWebElement uiRequestEventAuthorization = ngDriver.FindElement(By.LinkText(requestEventAuthorization));
