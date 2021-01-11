@@ -88,6 +88,7 @@ Scenario: OneStop Enter Licence Dormancy (Private Corporation)
     And I pay the licensing fee 
     And I log in to Dynamics
     And I update the licence Status to Dormant
+    # Confirm if any other change needs to be made
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I wait five minutes
