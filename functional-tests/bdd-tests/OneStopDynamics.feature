@@ -221,7 +221,27 @@ Scenario: OneStop Licence Name Change (Private Corporation)
 
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Address Change (Private Corporation)
-# Steps to be confirmed
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the button for Submit Organization Information
+    And I complete the Cannabis Retail Store application for a private corporation
+    And I click on the button for Pay for Application
+    And I enter the payment information
+    And the application is approved
+    And I pay the licensing fee
+    And I request a store relocation for Cannabis
+    And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
+    And I run /api/OneStop/CheckQueue
+    And I wait ? minutes
+    And I log in to Dynamics
+    And I click on Settings
+    And I click on OneStop Message Items
+    And the OneStop Updated - Licence Deemed at Transfer message is displayed
+    And the sent date is populated
+    Then the payload shows the programAccountStatusCode as ? and the programAccountReasonCode as ?
 
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Transfer Ownership (Private Corporation)
