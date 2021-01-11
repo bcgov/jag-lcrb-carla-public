@@ -15,7 +15,7 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "progress": true,
+            "progress": false,
             "polyfills": "src/polyfills.ts",
             "aot": false,
             "assets": [

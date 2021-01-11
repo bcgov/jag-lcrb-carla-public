@@ -14,8 +14,7 @@ Scenario: Food Primary Structural Change (Private Corporation)
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    # And I pay the licensing fee 
-    And I click on the link for Structural Change Aplication
+    And I click on the link for Structural Change Application
     And I submit a Food Primary structural change application
     And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
