@@ -12,9 +12,11 @@
         <br>
         <span style="color: #A9A9A9">MAX FILE SIZE: 25MB.</span>
         <br>
-        <input (change)="onBrowserFileSelect($event, fileBrowserM)" type="file" style="width: 0; height: 0;" multiple
+        <div class="hidden-content">
+          <input (change)="onBrowserFileSelect($event, fileBrowserM)" type="file" style="width: 0; height: 0;" multiple
                #fileBrowserM>
-        <input (change)="onBrowserFileSelect($event, fileBrowser)" type="file" style="width: 0; height: 0;" #fileBrowser>
+          <input (change)="onBrowserFileSelect($event, fileBrowser)" type="file" style="width: 0; height: 0;" #fileBrowser>
+        </div>
       </div>
     </ng-template>
   </ngx-file-drop>
