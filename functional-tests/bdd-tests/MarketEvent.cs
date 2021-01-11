@@ -295,7 +295,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsMarketEvents();
 
-            CheckFeatureLEConnections();
+            // CheckFeatureLEConnections();
 
             IgnoreSynchronizationFalse();
 
