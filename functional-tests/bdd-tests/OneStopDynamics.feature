@@ -94,7 +94,7 @@ Scenario: OneStop Enter Licence Dormancy (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Cancellation Removed message is displayed
+    And the OneStop Dormancy message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 02 and the programAccountReasonCode as 115
 
@@ -109,7 +109,7 @@ Scenario: OneStop End Licence Dormancy (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Cancellation Removed message is displayed
+    And the OneStop End Dormancy message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 01 and the programAccountReasonCode is not displayed
 
@@ -134,7 +134,7 @@ Scenario: OneStop Licence Expired (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Cancellation Removed message is displayed
+    And the OneStop Expired message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 02 and the programAccountReasonCode as 112
 
@@ -150,7 +150,7 @@ Scenario: OneStop Licence Renewed (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Cancellation Removed message is displayed
+    And the OneStop Licence Renewal message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 01 and the programAccountReasonCode is not displayed
 
@@ -175,7 +175,7 @@ Scenario: OneStop Licence Suspended (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Cancellation Removed message is displayed
+    And the OneStop Suspended message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 02 and the programAccountReasonCode as 114
 
@@ -190,6 +190,58 @@ Scenario: OneStop Licence End Suspension (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop Cancellation Removed message is displayed
+    And the OneStop End Suspension message is displayed
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 01 and the programAccountReasonCode is not displayed
+
+@onestopdynamics @manualonly
+Scenario: OneStop Licence Name Change (Private Corporation)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the button for Submit Organization Information
+    And I complete the Cannabis Retail Store application for a private corporation
+    And I click on the button for Pay for Application
+    And I enter the payment information
+    And the application is approved
+    And I pay the licensing fee 
+    And I request a valid store name or branding change for Cannabis
+    And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
+    And I run /api/OneStop/CheckQueue
+    And I wait five minutes
+    And I log in to Dynamics
+    And I click on Settings
+    And I click on OneStop Message Items
+    And the OneStop Name Change message is displayed
+    And the sent date is populated
+    Then the payload shows the programAccountStatusCode as ? and the programAccountReasonCode as ?
+
+@onestopdynamics @manualonly
+Scenario: OneStop Licence Address Change (Private Corporation)
+# Steps to be confirmed
+
+@onestopdynamics @manualonly
+Scenario: OneStop Licence Transfer Ownership (Private Corporation)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for a private corporation
+    And I review the organization structure for a private corporation
+    And I click on the button for Submit Organization Information
+    And I complete the Cannabis Retail Store application for a private corporation
+    And I click on the button for Pay for Application
+    And I enter the payment information
+    And the application is approved
+    And I pay the licensing fee 
+    And I request a transfer of ownership
+    And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
+    And I run /api/OneStop/CheckQueue
+    And I wait five minutes
+    And I log in to Dynamics
+    And I click on Settings
+    And I click on OneStop Message Items
+    And the OneStop Transfer Ownership message is displayed
+    And the sent date is populated
+    Then the payload shows the programAccountStatusCode as ? and the programAccountReasonCode as ?
