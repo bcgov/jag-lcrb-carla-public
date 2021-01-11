@@ -23,12 +23,12 @@ Scenario: OneStop New Licence (Private Corporation)
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And the OneStop New Licence Message is displayed
+    And the OneStop New Licence message is displayed
     And the sent date is populated
-    And I click on the OneStop New Licence Message
-    And I review the New Licence payload
-    And the programAccountStatusCode is 01
-    Then the programAccountReasonCode is not displayed
+    And I click on the OneStop New Licence message
+    # Correct payload to be confirmed
+    Then the payload sets the programAccountStatusCode to 01 and the programAccountReasonCode is null
+
 
 @onestopdynamics @manualonly
 Scenario: OneStop Cancel Licence (Private Corporation)
@@ -44,10 +44,19 @@ Scenario: OneStop Cancel Licence (Private Corporation)
     And the application is approved
     And I pay the licensing fee 
     And I log in to Dynamics
-    And I cancel the licence
+    And I find the new licence
+    And I update the licence Status to Cancelled
+    And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
+    And I run /api/OneStop/CheckQueue
+    And I wait five minutes
+    And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
-    And I click on the corresponding message item
+    And the OneStop Cancelled message is displayed
+    And the sent date is populated
+    And I click on Settings
+    And I click on OneStop Message Items
+    And I click on the OneStop Cancelled message
     Then the payload sets the programAccountStatusCode to 02 and the programAccountReasonCode to 111
 
 @onestopdynamics @manualonly
