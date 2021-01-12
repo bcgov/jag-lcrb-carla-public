@@ -87,14 +87,25 @@ http {
 
 		%API_CONFIG_SECTION%
 
-		rewrite ^\/lcrb\/(.*) https://$http_host/cannabislicensing/$1 permanent;
-
         # Remove path prefix when handling files
         rewrite ^\/cannabislicensing\/(.*) /$1 last;
     
         # serve our angular app here
         location / {
             root   /tmp/app/dist;
+            index  index.html index.htm;
+            try_files $uri /index.html;
+            gzip            on;
+            gzip_min_length 1000;
+            gzip_types      *;
+
+            # Deploy-time configurable
+            %HTTP_BASIC%
+        }
+		
+		# serve our angular app here
+        location /lcrb {
+            root   /tmp/app/dist/lcrb;
             index  index.html index.htm;
             try_files $uri /index.html;
             gzip            on;
