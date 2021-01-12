@@ -56,12 +56,11 @@
       <section class="padded-section">
         <app-field [required]="true" [valid]="isValidOrNotTouched('transferConsent')"
           errorMessage="Please consent to terminate third party operator relationship" [showChevrons]="false">
-          <section style="display: flex">
-            <input type="checkbox" formControlName="transferConsent">
+          <mat-checkbox formControlName="transferConsent">
             <!-- <span class="error-states">*</span> -->
-            <div style="padding-left: 10px;"> I agree to terminate the third party operator relationship for my {{licence.licenseType}} licence.
-            </div>
-          </section>
+            <span class="ml-2"> I agree to terminate the third party operator relationship for my {{licence.licenseType}} licence.
+            </span>
+          </mat-checkbox>
         </app-field>
       </section>
 
