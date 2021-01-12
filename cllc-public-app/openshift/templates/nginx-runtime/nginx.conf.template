@@ -86,12 +86,11 @@ http {
         # Remove path prefix when handling files
         rewrite ^\/lcrb\/(.*) /$1 last;
 		
-		# Remove path prefix when handling files
-        rewrite ^\/cannabislicensing\/(.*) $real_scheme://$http_host/lcrb/$1 permanent;
+        %EXTRA_CONFIG%
     
         # serve our angular app here
         location / {
-            root   /tmp/app/dist/lcrb;
+            root   %ROOT%; 
             index  index.html index.htm;
             try_files $uri /index.html;
             gzip            on;
