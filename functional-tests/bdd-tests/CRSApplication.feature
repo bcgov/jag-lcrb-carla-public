@@ -66,7 +66,6 @@ Scenario: DEV CRS Application (Private Corporation)
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the secondary Submit button
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
