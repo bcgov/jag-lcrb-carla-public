@@ -18,7 +18,21 @@ Feature: ManufacturerPicnicAreaEndorsement
     I want to request picnic area endorsement for a manufacturer licence
 
 @manufacturer @winery @picnicarea
-Scenario: Picnic Area Endorsement Application (Winery)
+Scenario: DEV Picnic Area Endorsement Application (Winery)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I complete the Manufacturer application for a winery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee 
+    And I request a picnic area endorsement
+    And the account is deleted
+    Then I see the login page
+
+@manufacturer @winery @picnicarea
+Scenario: UAT Picnic Area Endorsement Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -36,7 +50,7 @@ Scenario: Picnic Area Endorsement Application (Winery)
     Then I see the login page
 
 @manufacturer @brewery @picnicarea
-Scenario: Picnic Area Endorsement Application (Brewery)
+Scenario: UAT Picnic Area Endorsement Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -54,7 +68,7 @@ Scenario: Picnic Area Endorsement Application (Brewery)
     Then I see the login page
 
 @manufacturer @distillery @picnicarea
-Scenario: Picnic Area Endorsement Application (Distillery)
+Scenario: UAT Picnic Area Endorsement Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -72,7 +86,7 @@ Scenario: Picnic Area Endorsement Application (Distillery)
     Then I see the login page
 
 @manufacturer @copacker @picnicarea
-Scenario: Picnic Area Endorsement Application (Co-packer)
+Scenario: UAT Picnic Area Endorsement Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
