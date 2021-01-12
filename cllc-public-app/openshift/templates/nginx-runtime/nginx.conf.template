@@ -107,7 +107,7 @@ http {
         location /lcrb {
             root   /tmp/app/dist/lcrb;
             index  index.html index.htm;
-            try_files $uri /index.html;
+            try_files $uri /lcrb/index.html;
             gzip            on;
             gzip_min_length 1000;
             gzip_types      *;
