@@ -44,7 +44,6 @@ Scenario: DEV Download Licence (Private Corporation)
     And I review the account profile for a private corporation
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Submit button
-    And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
