@@ -76,7 +76,6 @@ Scenario: DEV Manufacturer Application (Winery)
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I complete the Manufacturer application for a winery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I click on the Dashboard tab
@@ -90,7 +89,6 @@ Scenario: DEV Manufacturer Application (Distillery)
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I complete the Manufacturer application for a distillery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I click on the Dashboard tab
@@ -104,7 +102,6 @@ Scenario: DEV Manufacturer Application (Brewery)
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I complete the Manufacturer application for a brewery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I click on the Dashboard tab
@@ -118,7 +115,6 @@ Scenario: DEV Manufacturer Application (Co-packer)
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I complete the Manufacturer application for a co-packer
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And I click on the Dashboard tab
