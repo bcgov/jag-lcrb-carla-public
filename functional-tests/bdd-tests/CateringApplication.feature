@@ -3,14 +3,14 @@
     I want to submit a Catering Application for different business types
 
 @cateringapp @partnership 
-Scenario: Catering Application (Partnership)
+Scenario: UAT Catering Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
     And I review the organization structure for a partnership
     And I click on the button for Submit Organization Information
     And I complete the Catering application
-    And I click on the Submit button
+    And I click on the secondary Submit button
     And I review the security screening requirements for a partnership
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -21,14 +21,14 @@ Scenario: Catering Application (Partnership)
     Then I see the login page
 
 @cateringapp @privatecorporation
-Scenario: Catering Application (Private Corporation)
+Scenario: UAT Catering Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Catering application
-    And I click on the Submit button
+    And I click on the secondary Submit button
     And I review the security screening requirements for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -39,14 +39,14 @@ Scenario: Catering Application (Private Corporation)
     Then I see the login page
 
 @cateringapp @publiccorporation
-Scenario: Catering Application (Public Corporation)
+Scenario: UAT Catering Application (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
     And I review the organization structure for a public corporation
     And I click on the button for Submit Organization Information
     And I complete the Catering application
-    And I click on the Submit button
+    And I click on the secondary Submit button
     And I review the security screening requirements for a public corporation
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -57,14 +57,14 @@ Scenario: Catering Application (Public Corporation)
     Then I see the login page
 
 @cateringapp @society
-Scenario: Catering Application (Society)
+Scenario: UAT Catering Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
     And I review the organization structure for a society
     And I click on the button for Submit Organization Information
     And I complete the Catering application
-    And I click on the Submit button
+    And I click on the secondary Submit button
     And I review the security screening requirements for a society
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -75,14 +75,14 @@ Scenario: Catering Application (Society)
     Then I see the login page
 
 @cateringapp @soleproprietorship
-Scenario: Catering Application (Sole Proprietorship)
+Scenario: UAT Catering Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
     And I review the organization structure for a sole proprietorship
     And I click on the button for Submit Organization Information
     And I complete the Catering application
-    And I click on the Submit button
+    And I click on the secondary Submit button
     And I review the security screening requirements for a sole proprietorship
     And I click on the button for Pay for Application
     And I enter the payment information
