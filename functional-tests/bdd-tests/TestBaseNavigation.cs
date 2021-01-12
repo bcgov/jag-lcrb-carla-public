@@ -173,7 +173,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the COVID Submit button")]
+        [And(@"I click on the secondary Submit button")]
         public void ClickOnSubmitButton2()
         {
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
