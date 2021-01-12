@@ -291,11 +291,11 @@
   </section>
 
   <section>
-    <input type="checkbox" [checked]="_termsAccepted" (change)="_termsAccepted = !_termsAccepted"
-      class="terms-cb" />&nbsp;I have read and accept the above terms and conditions.
-    <br>
+    <mat-checkbox class="terms-cb" [checked]="_termsAccepted" (change)="_termsAccepted = !_termsAccepted">
+      I have read and accept the above terms and conditions.
+    </mat-checkbox>
   </section>
-  <section class="buttons">
+  <section class="buttons mt-2">
     <button class="btn btn-primary termsAccept" (click)="termsAccepted.emit(true);"
       [disabled]="!_termsAccepted">Continue</button>
     <a href="logout" tabindex="1">Cancel and Exit</a>
