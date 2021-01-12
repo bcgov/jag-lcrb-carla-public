@@ -87,12 +87,16 @@ http {
 
 		%API_CONFIG_SECTION%
 
+		location ~ /cannabislicensing/(.*)$ {
+			rewrite ^ /lcrb/$1?$args permanent;
+		}
+
         # Remove path prefix when handling files
-        rewrite ^\/cannabislicensing\/(.*) /$1 last;
+        rewrite ^\/lcrb\/(.*) /$1 last;
     
         # serve our angular app here
         location / {
-            root   /tmp/app/dist;
+            root   /tmp/app/dist/lcrb;
             index  index.html index.htm;
             try_files $uri /index.html;
             gzip            on;
@@ -103,19 +107,8 @@ http {
             %HTTP_BASIC%
         }
 		
-		# serve our angular app here
-        location /lcrb {
-            root   /tmp/app/dist/lcrb;
-            index  index.html index.htm;
-            try_files $uri /lcrb/index.html;
-            gzip            on;
-            gzip_min_length 1000;
-            gzip_types      *;
-
-            # Deploy-time configurable
-            %HTTP_BASIC%
-        }
-
+		
+		
         # redirect server error pages to the static page /50x.html
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {
