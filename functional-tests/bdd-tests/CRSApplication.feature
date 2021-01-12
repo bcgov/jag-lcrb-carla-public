@@ -11,6 +11,7 @@ Scenario: UAT CRS Application (Indigenous Nation)
     And I review the organization structure for an indigenous nation
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for an indigenous nation
+    And I click on the secondary Submit button
     And I review the security screening requirements for an indigenous nation
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -29,6 +30,7 @@ Scenario: UAT CRS Application (Partnership)
     And I review the organization structure for a partnership
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a partnership
+    And I click on the secondary Submit button
     And I review the security screening requirements for a partnership
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -47,6 +49,7 @@ Scenario: UAT CRS Application (Private Corporation)
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
+    And I click on the secondary Submit button
     And I review the security screening requirements for a private corporation
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -63,6 +66,8 @@ Scenario: DEV CRS Application (Private Corporation)
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I complete the Cannabis Retail Store application for a private corporation
+    And I click on the secondary Submit button
+    And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And I click on the Dashboard tab
@@ -79,6 +84,7 @@ Scenario: UAT CRS Application (Public Corporation)
     And I review the organization structure for a public corporation
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a public corporation
+    And I click on the secondary Submit button
     And I review the security screening requirements for a public corporation
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -97,6 +103,7 @@ Scenario: UAT CRS Application (Society)
     And I review the organization structure for a society
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a society
+    And I click on the secondary Submit button
     And I review the security screening requirements for a society
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -115,6 +122,7 @@ Scenario: UAT CRS Application (Sole Proprietorship)
     And I review the organization structure for a sole proprietorship
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a sole proprietorship
+    And I click on the secondary Submit button
     And I review the security screening requirements for a sole proprietorship
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -133,6 +141,7 @@ Scenario: UAT CRS Application (Local Government)
     And I review the organization structure for a local government
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a local government
+    And I click on the secondary Submit button
     And I review the security screening requirements for a local government
     And I click on the button for Pay for Application
     And I enter the payment information
