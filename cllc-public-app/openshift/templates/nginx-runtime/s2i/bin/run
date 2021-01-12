@@ -48,33 +48,7 @@ getApiProxyConfigSection (){
             proxy_pass ${_HEALTH_CHECK_URL};
         }
 		
-		location ${1}api/ {
-            proxy_pass ${_API_URL};
-        }
 		
-		location ${1}login {
-            proxy_pass ${_LOGIN_URL};
-        }
-		
-		location ${1}login/ {
-            proxy_pass ${_LOGIN_URL};
-        }
-		
-		location ${1}logout {
-            proxy_pass ${_LOGOUT_URL};
-        }
-		
-		location ${1}bcservice {
-            proxy_pass ${_BCSERVICE_URL};
-        }
-		
-		location ${1}bcservice/ {
-            proxy_pass ${_BCSERVICE_URL};
-        }
-		
-		location ${1}hc/ {
-            proxy_pass ${_HEALTH_CHECK_URL};
-        }
 		
 EOF
 
