@@ -1,5 +1,6 @@
 BC Liquor and Cannabis Regulation Branch - Liquor and Cannabis Licensing Application
 ======================
+[![img](https://img.shields.io/badge/Lifecycle-Stable-97ca00)]
 
 Technology Stack
 -----------------
@@ -94,7 +95,7 @@ Note that for development purposes you should set ASPNETCORE_ENVIRONMENT to Deve
 DevOps Process
 -------------
 
-### Jenkins
+## Jenkins
 
 If any pipeline steps do not start, a common root cause is problems with Jenkins.  Restart the Jenkins service by scaling it down to 0 pods, then back up to 1 pod.
 
@@ -137,7 +138,7 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 License
 -------
 
-    Copyright 2019 Province of British Columbia
+    Copyright 2021 Province of British Columbia
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
