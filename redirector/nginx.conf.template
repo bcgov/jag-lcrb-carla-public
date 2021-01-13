@@ -12,6 +12,13 @@ http {
     default_type  application/octet-stream;
     server_tokens off;
 	
+	proxy_connect_timeout       600;
+    proxy_send_timeout          600;
+    proxy_read_timeout          600;
+    send_timeout                600;
+	
+	client_max_body_size 100M;
+	
 	ignore_invalid_headers off;
 
     # ip filtering
@@ -62,6 +69,20 @@ http {
     # HTTP Basic rules
     auth_basic_user_file /tmp/.htpasswd;
 
+    server {
+        listen       8080;
+        server_name  localhost;
+
+        # add in most common security headers
+        add_header Content-Security-Policy "default-src * data: blob: filesystem: 'unsafe-inline' 'unsafe-eval'";
+        add_header Strict-Transport-Security "max-age=86400; includeSubDomains";
+        add_header X-Content-Type-Options "nosniff";
+        add_header X-XSS-Protection 1;
+        add_header X-Frame-Options DENY;
+
+		%API_CONFIG_SECTION%
+
+		
     server {
         listen       8080;
         server_name  localhost;
