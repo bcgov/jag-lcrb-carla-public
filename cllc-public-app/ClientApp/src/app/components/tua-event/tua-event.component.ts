@@ -59,8 +59,10 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
     //... TODO:
 
-    tuaEventType: ['', [Validators.required]],
+    maxAttendance: ['', [Validators.required, Validators.max(100000)]],
     minorsAttending: ['', [Validators.required]],
+    tuaEventType: ['', [Validators.required]],
+    eventTypeDescription: ['', [Validators.required]],
 
     agreement: [false, [Validators.required]],
   }, {
