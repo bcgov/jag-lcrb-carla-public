@@ -21,7 +21,7 @@ Scenario: OneStop New Licence (Private Corporation)
     # To be confirmed with G. Walker
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ? minutes
+    And I wait 2 minutes
     And I confirm the OneStop message field is 'Yes' on the licence record
     Then the next steps are to be confirmed
 
@@ -43,7 +43,7 @@ Scenario: OneStop Cancel Licence (Private Corporation)
     And I update the licence Status to Cancelled
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ?
+    And I wait 2 minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
@@ -61,7 +61,7 @@ Scenario: OneStop Remove Cancellation (Private Corporation)
     And I update the licence Status to Active
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ?
+    And I wait 2 minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
@@ -86,7 +86,7 @@ Scenario: OneStop Enter Licence Dormancy (Private Corporation)
     And I select the 'Yes' option in the Dormant dropdown
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ?
+    And I wait 2 minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
@@ -101,7 +101,7 @@ Scenario: OneStop End Licence Dormancy (Private Corporation)
     And I select the 'No' option in the Dormant dropdown
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ?
+    And I wait 2 minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
@@ -126,7 +126,7 @@ Scenario: OneStop Licence Expired (Private Corporation)
     And the expiry date is changed using the Dynamics workflow named ***
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ?
+    And I wait 2 minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
@@ -142,7 +142,7 @@ Scenario: OneStop Licence Renewed (Private Corporation)
     And I set the Expiry Date to be 2 years from the Effective Date
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ?
+    And I wait 2 minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
@@ -167,7 +167,7 @@ Scenario: OneStop Licence Suspended (Private Corporation)
     And I select the 'Yes' option in the Dormant dropdown
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ?
+    And I wait 2 minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
@@ -182,7 +182,7 @@ Scenario: OneStop Licence End Suspension (Private Corporation)
     And I select the 'No' option in the Dormant dropdown
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ?
+    And I wait 2 minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
@@ -206,7 +206,7 @@ Scenario: OneStop Licence Name Change (Private Corporation)
     And I request a valid store name or branding change for Cannabis
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ?
+    And I wait 2 minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
@@ -230,7 +230,7 @@ Scenario: OneStop Licence Address Change (Private Corporation)
     And I request a store relocation for Cannabis
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ? minutes
+    And I wait 2 minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
@@ -254,7 +254,7 @@ Scenario: OneStop Licence Transfer Ownership (Private Corporation)
     And I request a transfer of ownership
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I wait ? minutes
+    And I wait 2 minutes
     And I log in to Dynamics
     And I click on Settings
     And I click on OneStop Message Items
