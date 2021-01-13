@@ -19,13 +19,13 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static partial class InvestigationidExtensions
     {
             /// <summary>
-            /// Get adoxio_InvestigationId from adoxio_exhibits
+            /// Get adoxio_InvestigationId from adoxio_enforcementactions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioExhibitid'>
-            /// key: adoxio_exhibitid of adoxio_exhibit
+            /// <param name='adoxioEnforcementactionid'>
+            /// key: adoxio_enforcementactionid of adoxio_enforcementaction
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -33,19 +33,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioComplianceinvestigation Get(this IInvestigationid operations, string adoxioExhibitid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioComplianceinvestigation Get(this IInvestigationid operations, string adoxioEnforcementactionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(adoxioExhibitid, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(adoxioEnforcementactionid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get adoxio_InvestigationId from adoxio_exhibits
+            /// Get adoxio_InvestigationId from adoxio_enforcementactions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioExhibitid'>
-            /// key: adoxio_exhibitid of adoxio_exhibit
+            /// <param name='adoxioEnforcementactionid'>
+            /// key: adoxio_enforcementactionid of adoxio_enforcementaction
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -56,22 +56,22 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioComplianceinvestigation> GetAsync(this IInvestigationid operations, string adoxioExhibitid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioComplianceinvestigation> GetAsync(this IInvestigationid operations, string adoxioEnforcementactionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioExhibitid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioEnforcementactionid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Get adoxio_InvestigationId from adoxio_exhibits
+            /// Get adoxio_InvestigationId from adoxio_enforcementactions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioExhibitid'>
-            /// key: adoxio_exhibitid of adoxio_exhibit
+            /// <param name='adoxioEnforcementactionid'>
+            /// key: adoxio_enforcementactionid of adoxio_enforcementaction
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -82,9 +82,78 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioComplianceinvestigation> GetWithHttpMessages(this IInvestigationid operations, string adoxioExhibitid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioComplianceinvestigation> GetWithHttpMessages(this IInvestigationid operations, string adoxioEnforcementactionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(adoxioExhibitid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(adoxioEnforcementactionid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get adoxio_InvestigationId from adoxio_investigationsubjects
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioInvestigationsubjectid'>
+            /// key: adoxio_investigationsubjectid of adoxio_investigationsubject
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            public static MicrosoftDynamicsCRMadoxioInvestigation Get1(this IInvestigationid operations, string adoxioInvestigationsubjectid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            {
+                return operations.Get1Async(adoxioInvestigationsubjectid, select, expand).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get adoxio_InvestigationId from adoxio_investigationsubjects
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioInvestigationsubjectid'>
+            /// key: adoxio_investigationsubjectid of adoxio_investigationsubject
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MicrosoftDynamicsCRMadoxioInvestigation> Get1Async(this IInvestigationid operations, string adoxioInvestigationsubjectid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.Get1WithHttpMessagesAsync(adoxioInvestigationsubjectid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get adoxio_InvestigationId from adoxio_investigationsubjects
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioInvestigationsubjectid'>
+            /// key: adoxio_investigationsubjectid of adoxio_investigationsubject
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioInvestigation> Get1WithHttpMessages(this IInvestigationid operations, string adoxioInvestigationsubjectid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.Get1WithHttpMessagesAsync(adoxioInvestigationsubjectid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
