@@ -12,20 +12,11 @@ import {
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getMonthlyWeekday } from '../../shared/date-fns';
+import { DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getMonthlyWeekday } from '../../shared/date-fns';
 import { getWeekOfMonth } from 'date-fns';
 import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-regular-svg-icons';
-
-const DEFAULT_START_TIME = {
-  hour: 9,
-  minute: 0
-};
-const DEFAULT_END_TIME = {
-  hour: 23,
-  minute: 0
-};
-const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+import { LicenceEventSchedule } from '@models/licence-event-schedule';
 
 @Component({
   selector: 'app-market-event',
@@ -257,7 +248,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
     }
   }
 
-  setTimeFormsToLicenceEventSchedule(schedules: any[]) {
+  setTimeFormsToLicenceEventSchedule(schedules: LicenceEventSchedule[]) {
     // Restore state of weekday checkboxes and monthly frequency radio
     this.setWeekdaysFromEventSchedule(schedules);
     this.setMarketTimeFromEventSchedule(schedules);

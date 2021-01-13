@@ -1,3 +1,5 @@
+import { LicenceEventSchedule } from "./licence-event-schedule";
+
 export class LicenceEvent {
   id: string;
   name: string;
@@ -24,7 +26,7 @@ export class LicenceEvent {
   province: string;
   postalCode: string;
   modifiedOn: Date;
-  schedules: [];
+  schedules: LicenceEventSchedule[];
 
   // picklists
   status: number;

@@ -14,16 +14,14 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import * as _moment from 'moment';
 import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { LicenceEventSchedule } from '@models/licence-event-schedule';
+import { DAYS, DEFAULT_START_TIME } from '@shared/date-fns';
 
-const DEFAULT_START_TIME = {
-  hour: 9,
-  minute: 0
-};
 const DEFAULT_END_TIME = {
   hour: 2,
   minute: 0
 };
-const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
 export const MY_FORMATS = {
@@ -196,7 +194,7 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
     }
   }
 
-  setTimeFormsToLicenceEventSchedule(schedules: []) {
+  setTimeFormsToLicenceEventSchedule(schedules: LicenceEventSchedule[]) {
     schedules.forEach(sched => {
       const startDate = (new Date(sched['eventStartDateTime']));
       const endDate = (new Date(sched['eventEndDateTime']));
