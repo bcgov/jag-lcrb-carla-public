@@ -170,6 +170,112 @@ export class TuaEventComponent extends FormBase implements OnInit {
     }
   }
 
+  cancel() {
+    if (this.isEditMode) {
+      const id = this.form.get('id').value;
+      const licenceId = this.form.get('licenceId').value;
+      const statusCancelled = this.getOptionFromLabel(this.eventStatus, 'Cancelled').value;
+      const payload: LicenceEvent = { ...this.form.value, status: statusCancelled, licenceId };
+      this.busy = this.licenceEvents.updateLicenceEvent(id, payload)
+        .subscribe((licenceEvent) => {
+          this.router.navigate(['/licences']);
+        });
+    } else {
+      this.router.navigate(['/licences']);
+    }
+  }
+
+  save(submit = false) {
+    const validForm = this.validateForm();
+    if (!validForm) {
+      this.showErrorSection = true;
+      return;
+    }
+
+    // Do not show validation errors when form is valid
+    this.showErrorSection = false;
+
+    if (submit) {
+      const statusSubmitted = this.getOptionFromLabel(this.eventStatus, 'Submitted').value;
+      this.form.get('status').setValue(statusSubmitted);
+    }
+
+    const schedules = this.packageUpTimeForms();
+    if (this.isEditMode) {
+      this.updateLicence(schedules);
+    } else {
+      this.createLicence(schedules);
+    }
+  }
+
+  /* Packages up time forms and combines with dates for submission to API */
+  packageUpTimeForms() {
+    const dateArray = new Array();
+
+    for (var i = 0; i < this.timeForms.controls.length; i++) {
+      if (this.timeForms.controls[i].invalid) {
+        return new Array();
+      }
+      let eventBegin, eventEnd, serviceBegin, serviceEnd;
+
+      if (this.timeForms.controls[i]['controls']['dateTitle'].value === null) {
+        const beginDate = this.form.controls['startDate'].value;
+        const endDate = this.form.controls['endDate'].value;
+        eventBegin = new Date(beginDate);
+        eventEnd = new Date(endDate);
+        serviceBegin = new Date(beginDate);
+        serviceEnd = new Date(endDate);
+      } else {
+        const date = this.timeForms.controls[i]['controls']['date'].value;
+        eventBegin = new Date(date);
+        eventEnd = new Date(date);
+        serviceBegin = new Date(date);
+        serviceEnd = new Date(date);
+      }
+
+      eventBegin.setHours(this.timeForms.controls[i]['controls']['startTime'].value['hour']);
+      eventBegin.setMinutes(this.timeForms.controls[i]['controls']['startTime'].value['minute']);
+      eventEnd.setHours(this.timeForms.controls[i]['controls']['endTime'].value['hour']);
+      eventEnd.setMinutes(this.timeForms.controls[i]['controls']['endTime'].value['minute']);
+      serviceBegin.setHours(this.timeForms.controls[i]['controls']['liquorStartTime'].value['hour']);
+      serviceBegin.setMinutes(this.timeForms.controls[i]['controls']['liquorStartTime'].value['minute']);
+      serviceEnd.setHours(this.timeForms.controls[i]['controls']['liquorEndTime'].value['hour']);
+      serviceEnd.setMinutes(this.timeForms.controls[i]['controls']['liquorEndTime'].value['minute']);
+
+      if ((eventEnd.getTime() - eventBegin.getTime()) < 0) {
+        eventEnd.setDate(eventEnd.getDate() + 1);
+      }
+
+      if ((serviceEnd.getTime() - serviceBegin.getTime()) < 0) {
+        serviceEnd.setDate(serviceEnd.getDate() + 1);
+      }
+
+      const sched = new LicenceEventSchedule();
+      sched.eventStartDateTime = eventBegin;
+      sched.eventEndDateTime = eventEnd;
+      sched.serviceStartDateTime = serviceBegin;
+      sched.serviceEndDateTime = serviceEnd;
+      dateArray.push(sched);
+    }
+
+    return dateArray;
+  }
+
+  updateLicence(schedules: LicenceEventSchedule[]) {
+    this.busy = this.licenceEvents.updateLicenceEvent(this.form.get('id').value, { ...this.form.value, schedules })
+      .subscribe((licenceEvent) => {
+        this.router.navigate(['/licences']);
+      });
+  }
+
+  createLicence(schedules: LicenceEventSchedule[]) {
+    this.form.removeControl('id');
+    this.busy = this.licenceEvents.createLicenceEvent({ ...this.form.value, schedules: schedules })
+      .subscribe((licenceEvent) => {
+        this.router.navigate(['/licences']);
+      });
+  }
+
   toggleScheduleConsistency() {
     this.scheduleIsInconsistent = !this.scheduleIsInconsistent;
     this.refreshTimeDays();
@@ -229,7 +335,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
     };
   }
 
-  validateForm() {
+  validateForm(): boolean {
     this.validationMessages = [...new Set(this.listControlsWithErrors(this.form, this.validationErrorMap))];
 
     // ... TODO: add more validation rules here - e.g. date range validation
@@ -238,27 +344,11 @@ export class TuaEventComponent extends FormBase implements OnInit {
       this.validationMessages.push('No event dates selected');
     }
 
-    if (this.validationMessages.length > 0) {
-      this.showErrorSection = true;
-    } else {
-      this.showErrorSection = false;
-    }
     this.markControlsAsTouched(this.form);
-  }
 
-  cancel() {
-    if (this.isEditMode) {
-      const id = this.form.get('id').value;
-      const licenceId = this.form.get('licenceId').value;
-      const status = this.getOptionFromLabel(this.eventStatus, 'Cancelled').value;
-      const payload: LicenceEvent = { ...this.form.value, status, licenceId };
-      this.busy = this.licenceEvents.updateLicenceEvent(id, payload)
-        .subscribe((licenceEvent) => {
-          this.router.navigate(['/licences']);
-        });
-    } else {
-      this.router.navigate(['/licences']);
+    if (this.validationMessages.length > 0) {
+      return false; // form is invalid
     }
+    return true; // valid form
   }
-
 }
