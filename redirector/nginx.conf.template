@@ -73,26 +73,8 @@ http {
         add_header X-XSS-Protection 1;
         add_header X-Frame-Options DENY;
 
-        # Forward URL if not using path prefix
-        #if ($request_uri !~ "^/lcrb") {
-        #    return 301 $real_scheme://$http_host/LCRB$request_uri;
-        #}
-
-		%API_CONFIG_SECTION%
-
-        # Remove path prefix when handling files
-        rewrite ^\/lcrb\/(.*) /$1 last;
-		
-		rewrite ^\/LCRB\/(.*) /$1 last;
-    
-        # serve our angular app here
         location / {
-            root   /tmp/app/dist;
-            index  index.html index.htm;
-            try_files $uri /index.html;
-            gzip            on;
-            gzip_min_length 1000;
-            gzip_types      *;
+            %REDIRECT%
 
             # Deploy-time configurable
             %HTTP_BASIC%
@@ -103,8 +85,8 @@ http {
         location = /50x.html {
             root   /usr/share/nginx/html;
         }
-
-        # For status of ngnix service, OpenShift is configured to call this
+		
+		# For status of ngnix service, OpenShift is configured to call this
         location /nginx_status {
             # Enable Nginx stats
             stub_status on;
@@ -118,6 +100,7 @@ http {
             # No need to log this request, its just noise
             access_log off;
         }
+
 
     }
 }
