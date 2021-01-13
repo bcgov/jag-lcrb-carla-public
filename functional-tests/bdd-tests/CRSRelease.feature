@@ -9,6 +9,7 @@ Scenario: DEV CRS Release (Private Corporation)
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I complete the Cannabis Retail Store application for a private corporation
+    And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the application is approved
@@ -44,6 +45,7 @@ Scenario: DEV CRS Release (Sole Proprietorship)
     And I complete the eligibility disclosure
     And I review the account profile for a sole proprietorship
     And I complete the Cannabis Retail Store application for a sole proprietorship
+    And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the application is approved
