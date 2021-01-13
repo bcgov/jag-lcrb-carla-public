@@ -46,3 +46,5 @@ EXPOSE 8080
 
 # Switch to usermode
 USER 104
+
+CMD  /usr/libexec/s2i/run
