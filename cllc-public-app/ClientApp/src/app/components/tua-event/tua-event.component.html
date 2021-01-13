@@ -20,7 +20,7 @@
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Event Name" [required]="true" [valid]="isValidOrNotTouched('name')"
           errorMessage="Please enter the event name" [isFullWidth]="true">
-          <input class="form-control" type="text" formControlName="marketName">
+          <input class="form-control" type="text" formControlName="name">
         </app-field>
       </div>
     </section>
@@ -104,6 +104,35 @@
         </app-field>
       </div>
     </section>
+
+    <h3 class="blue-header">EVENT DETAILS</h3>
+    <section class="content-bottom clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Event Maximum Attendance" [required]="true"
+          [valid]="isValidOrNotTouched('maxAttendance')"
+          errorMessage="Please enter the maximum attendance (must be a number)" [isFullWidth]="true">
+          <input class="form-control" type="number" formControlName="maxAttendance">
+        </app-field>
+        <app-field class="col-md-4 col-xs-12" label="Minors Attending" [required]="true"
+          [valid]="isValidOrNotTouched('minorsAttending')" errorMessage="Please indicate if minors are attending"
+          [isFullWidth]="true">
+          <select class="form-control" formControlName="minorsAttending">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Description" [required]="true"
+          [valid]="isValidOrNotTouched('eventTypeDescription')" errorMessage="Please enter a description of the event"
+          [isFullWidth]="true">
+          <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top:30px;"
+          matTooltip="Briefly describe the event."></fa-icon>
+      </div>
+    </section>
+
 
     <h3 class="blue-header">AGREEMENT</h3>
     <section class="content-bottom">
