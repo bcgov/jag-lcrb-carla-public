@@ -17,9 +17,11 @@ getApiProxyConfigSection (){
   _BCSERVICE_URL="${1}bcservice/"
 
   read -r -d '' _CONFIG_SECTION << EOF
-# proxy requests to the API
+# redirector
 
         
+		
+		
 		
 EOF
 
