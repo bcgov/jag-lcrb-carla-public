@@ -1,8 +1,0 @@
-<div class="container breadcrumb-outer" *ngIf="visible">
-  <ol class="breadcrumb">
-      <li><a routerLink="/">Home</a></li>
-      <li *ngFor="let breadcrumb of breadcrumbs">
-        <a [routerLink]="[breadcrumb.url]">{{ breadcrumb.label }}</a>
-      </li>
-  </ol>
-</div>

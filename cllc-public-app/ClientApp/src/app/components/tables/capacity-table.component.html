@@ -2,7 +2,7 @@
     <table class="capacity">
         <thead *ngIf="areasArr.controls.length > 0">
             <th style="width: 55px;">Area No.</th>
-            <th>{{isOutsideArea() ? 'Size (sq. m)' : 'Floor Level'}}</th>
+            <th [innerHtml]="areaLocationHeading"></th>
             <th *ngIf="isService()">Indoor</th>
             <th *ngIf="isService()">Patio</th>
             <th>Proposed Capacity</th>

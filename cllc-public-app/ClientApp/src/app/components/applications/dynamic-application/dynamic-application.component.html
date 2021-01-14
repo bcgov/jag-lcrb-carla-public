@@ -131,13 +131,12 @@
                       <app-field *ngIf="formField.controltype == 'RadioControl'" [valid]="!showValidationMessages || form.get(formField.datafieldname).valid"
                                  errorMessage=""
                                  [showChevrons]="false">
-                        <section style="display: flex">
-                          <input type="checkbox" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                        <mat-checkbox [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
                           <span class="error-states">*</span>
-                          <div style="padding-left: 10px;">
+                          <span class="ml-2">
                             {{formField.name}}
-                          </div>
-                        </section>
+                          </span>
+                        </mat-checkbox>
                       </app-field>
 
                     </div>

@@ -8,7 +8,24 @@
 #-----------------------
 
 @manufacturer @licencerenewal
-Scenario:  Deny Today Licence Renewal (Winery)
+Scenario:  DEV Deny Today Licence Renewal (Winery)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I complete the Manufacturer application for a winery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 322d410b-f725-eb11-b821-00505683fbf4
+    And I am unable to renew the licence
+    And the account is deleted
+    Then I see the login page
+
+@manufacturer @licencerenewal
+Scenario:  UAT Deny Today Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -28,7 +45,7 @@ Scenario:  Deny Today Licence Renewal (Winery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Today Licence Renewal (Brewery)
+Scenario:  UAT Deny Today Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -48,7 +65,7 @@ Scenario:  Deny Today Licence Renewal (Brewery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Today Licence Renewal (Distillery)
+Scenario:  UAT Deny Today Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -68,7 +85,7 @@ Scenario:  Deny Today Licence Renewal (Distillery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Today Licence Renewal (Co-packer)
+Scenario:  UAT Deny Today Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -92,7 +109,24 @@ Scenario:  Deny Today Licence Renewal (Co-packer)
 #-----------------------
 
 @manufacturer @licencerenewal
-Scenario:  Deny Yesterday Licence Renewal (Winery)
+Scenario:  DEV Deny Yesterday Licence Renewal (Winery)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I complete the Manufacturer application for a winery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named e1792ccf-e40b-491f-9a9a-ee8e977749e6
+    And I am unable to renew the licence
+    And the account is deleted
+    Then I see the login page
+
+@manufacturer @licencerenewal
+Scenario:  UAT Deny Yesterday Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -112,7 +146,7 @@ Scenario:  Deny Yesterday Licence Renewal (Winery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Yesterday Licence Renewal (Brewery)
+Scenario:  UAT Deny Yesterday Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -132,7 +166,7 @@ Scenario:  Deny Yesterday Licence Renewal (Brewery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Yesterday Licence Renewal (Distillery)
+Scenario:  UAT Deny Yesterday Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -152,7 +186,7 @@ Scenario:  Deny Yesterday Licence Renewal (Distillery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny Yesterday Licence Renewal (Co-packer)
+Scenario:  UAT Deny Yesterday Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -176,7 +210,24 @@ Scenario:  Deny Yesterday Licence Renewal (Co-packer)
 #-----------------------
 
 @manufacturer @licencerenewal
-Scenario:  Deny 45 Days Ago Licence Renewal (Winery)
+Scenario:  DEV Deny 45 Days Ago Licence Renewal (Winery)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I complete the Manufacturer application for a winery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 65bfe79d-f825-eb11-b821-00505683fbf4
+    And I am unable to renew the licence
+    And the account is deleted
+    Then I see the login page
+
+@manufacturer @licencerenewal
+Scenario:  UAT Deny 45 Days Ago Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -196,7 +247,7 @@ Scenario:  Deny 45 Days Ago Licence Renewal (Winery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 45 Days Ago Licence Renewal (Brewery)
+Scenario:  UAT Deny 45 Days Ago Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -216,7 +267,7 @@ Scenario:  Deny 45 Days Ago Licence Renewal (Brewery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 45 Days Ago Licence Renewal (Distillery)
+Scenario:  UAT Deny 45 Days Ago Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -236,7 +287,7 @@ Scenario:  Deny 45 Days Ago Licence Renewal (Distillery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 45 Days Ago Licence Renewal (Co-packer)
+Scenario:  UAT Deny 45 Days Ago Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -260,7 +311,24 @@ Scenario:  Deny 45 Days Ago Licence Renewal (Co-packer)
 #-----------------------------
 
 @manufacturer @licencerenewal
-Scenario:  Deny 60 Days From Today Licence Renewal (Winery)
+Scenario:  DEV Deny 60 Days From Today Licence Renewal (Winery)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I complete the Manufacturer application for a winery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named beb3243e-f825-eb11-b821-00505683fbf4
+    And I am unable to renew the licence
+    And the account is deleted
+    Then I see the login page
+
+@manufacturer @licencerenewal
+Scenario:  UAT Deny 60 Days From Today Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -280,7 +348,7 @@ Scenario:  Deny 60 Days From Today Licence Renewal (Winery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 60 Days From Today Licence Renewal (Brewery)
+Scenario:  UAT Deny 60 Days From Today Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -300,7 +368,7 @@ Scenario:  Deny 60 Days From Today Licence Renewal (Brewery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 60 Days From Today Licence Renewal (Distillery)
+Scenario:  UAT Deny 60 Days From Today Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -320,7 +388,7 @@ Scenario:  Deny 60 Days From Today Licence Renewal (Distillery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 60 Days From Today Licence Renewal (Co-packer)
+Scenario:  UAT Deny 60 Days From Today Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -344,7 +412,24 @@ Scenario:  Deny 60 Days From Today Licence Renewal (Co-packer)
 #-----------------------------
 
 @manufacturer @licencerenewal
-Scenario:  Deny 30 Days From Today Licence Renewal (Winery)
+Scenario:  DEV Deny 30 Days From Today Licence Renewal (Winery)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I complete the Manufacturer application for a winery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
+    And the expiry date is changed using the Dynamics workflow named 10eaae77-f725-eb11-b821-00505683fbf4
+    And I am unable to renew the licence
+    And the account is deleted
+    Then I see the login page
+
+@manufacturer @licencerenewal
+Scenario:  UAT Deny 30 Days From Today Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -364,7 +449,7 @@ Scenario:  Deny 30 Days From Today Licence Renewal (Winery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 30 Days From Today Licence Renewal (Brewery)
+Scenario:  UAT Deny 30 Days From Today Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -384,7 +469,7 @@ Scenario:  Deny 30 Days From Today Licence Renewal (Brewery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 30 Days From Today Licence Renewal (Distillery)
+Scenario:  UAT Deny 30 Days From Today Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -404,7 +489,7 @@ Scenario:  Deny 30 Days From Today Licence Renewal (Distillery)
     Then I see the login page
 
 @manufacturer @licencerenewal
-Scenario:  Deny 30 Days From Today Licence Renewal (Co-packer)
+Scenario:  UAT Deny 30 Days From Today Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
