@@ -84,20 +84,29 @@ namespace Gov.Lclb.Cllb.Geocoder
                 string address = $"{establishment.AdoxioAddressstreet}, {establishment.AdoxioAddresscity}, BC";
                 // output format can be xhtml, kml, csv, shpz, geojson, geojsonp, gml
                 var output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);
-                               
+
+                hangfireContext.WriteLine($"{address} returns {output.Features[0].Properties.Faults.Count} faults");
+
                 // if there are any faults try a query based on the LGIN instead of the city.
-                if (output.Features[0].Properties.Faults.Count > 0  && establishment._adoxioLginValue != null) 
+                if (output.Features[0].Properties.Faults.Count > 1  && establishment._adoxioLginValue != null) 
                 {
                     var lgin = _dynamics.GetLginById(establishment._adoxioLginValue);
                     _logger.LogError($"Unable to find a good match for address {address}, using lgin of {lgin.AdoxioName}");
                     hangfireContext.WriteLine($"Unable to find a good match for address {address}, using lgin of {lgin.AdoxioName}");
-                    
-                    address = $"{establishment.AdoxioAddressstreet}, {lgin.AdoxioName}, BC";
-                    output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);                    
-                }
 
+                    string sanitizedLgin = lgin.AdoxioName;
+                    if (sanitizedLgin.Contains("First Nation"))
+                    {
+                        sanitizedLgin = sanitizedLgin.Replace("First Nation", "").Trim();
+                    }
+
+                    address = $"{establishment.AdoxioAddressstreet}, {sanitizedLgin}, BC";
+                    output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);
+                    hangfireContext.WriteLine($"{address} returns {output.Features[0].Properties.Faults.Count} faults");
+                }
+                
                 // if the LGIN did not provide a good match just default to the specified city.
-                if (output.Features[0].Properties.Faults.Count > 2)
+                if (output.Features[0].Properties.Faults.Count > 3)
                 {
                     _logger.LogError($"Unable to find a good match for address {address} with city {establishment._adoxioLginValue}, defaulting to just {establishment.AdoxioAddresscity}");
                     hangfireContext.WriteLine($"Unable to find a good match for address {address} with city {establishment._adoxioLginValue}, defaulting to just {establishment.AdoxioAddresscity}");
