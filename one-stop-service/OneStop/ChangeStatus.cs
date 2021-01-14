@@ -210,7 +210,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             }
 
             //effective date of the licence (the date licence is issued or a future date if the licensee specifies a date they want the licence to start
-            programAccountStatus.effectiveDate = DateTime.Now; //ToGetFromDynamics. Current date time for test purpose
+            programAccountStatus.effectiveDate = DateTime.Now.AddHours(-8); //ToGetFromDynamics. Current date time for test purposes, adjusted for Pacific time.
 
             return programAccountStatus;
         }
