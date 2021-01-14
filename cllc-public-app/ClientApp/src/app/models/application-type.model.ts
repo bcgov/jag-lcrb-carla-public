@@ -29,6 +29,7 @@ export class ApplicationType {
   formReference: string;
   showDescription1: boolean;
   hasLESection: boolean;
+  showPatio: boolean;
 
   storeContactInfo: FormControlState;
   establishmentName: FormControlState;
@@ -78,6 +79,7 @@ export enum ApplicationTypeNames {
   FP = 'Food Primary',
   FPRelo = 'Food Primary Relocation',
   LicenseeChanges = 'Licensee Changes',
+  LP = 'Liquor Primary',
   Marketer = 'Marketing',
   MarketingRenewal = 'Marketing Renewal',
   LGINClaim = 'LG/IN Claim',

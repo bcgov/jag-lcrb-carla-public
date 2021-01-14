@@ -45,6 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowLiquorDeclarations = applicationType.AdoxioIsshowliquordeclarations,
                     ShowOwnershipDeclaration = applicationType.AdoxioIsownershipconfirmation,
                     ShowLiquorSitePlan = (FormControlState?)applicationType.AdoxioLiquorsiteplan,
+                    ShowPatio = applicationType.AdoxioShowpatiosection,
                     ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
                     ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
                     Signage = (FormControlState?)applicationType.AdoxioSignage,
