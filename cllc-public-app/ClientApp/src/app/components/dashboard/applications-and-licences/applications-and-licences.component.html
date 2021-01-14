@@ -92,7 +92,7 @@
             </tr>
             <tr *ngIf="liquorThree">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-                <img class="icon" src="assets/Manufacturer-icon-blue-40px.png" alt="">
+                <img class="icon" src="assets/food-primary-blue.png" alt="">
               </td>
               <td style="width:700px;">
                 <h3>Food Primary Licence</h3>
@@ -155,6 +155,27 @@
               </td>
               <td style='text-align: center;'>
                 <i>New Licensee Retail Store applications <br>are closed at this time.</i>
+              </td>
+            </tr>
+
+            <tr *ngIf="liquorThree">
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+                <img class="icon" src="assets/liquor-primary-bars-blue.png" alt="">
+              </td>
+              <td style="width:700px;">
+                <h3>Liquor Primary Licence</h3>
+                <p>A Liquor Primary licence is for businesses where the primary purpose is to sell liquor (bars, as well as stadiums, theatres, aircraft, etc.) as well as other businesses that wish to serve liquor as an additional service to their primary business (spas, salons, art galleries, etc).</p>
+                <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/liquorprimary-handbook.pdf"
+                  target="_blank">Learn
+                  more about this licence</a>
+              </td>
+              <td style='text-align: center;'>
+                <button mat-raised-button color="secondary" [disabled]="startLPOngoing"
+                  (click)="startNewLPApplication()" id="startLP">
+                  <span>START
+                    APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startLPOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
               </td>
             </tr>
 
@@ -376,7 +397,7 @@
                     <span>Complete Renewal</span>
                   </a>
                 </div>
-                
+
                 <div *ngIf="item.applicationStatus === 'Relocation Initiated'">
                   <a [routerLink]="['/account-profile/' + item.id, { mode: CHANGE_OF_LOCATION_MODE }]">
                     <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
