@@ -80,19 +80,17 @@ http {
         add_header X-XSS-Protection 1;
         add_header X-Frame-Options DENY;
 
-        # Forward URL if not using path prefix
-        #if ($request_uri !~ "^/cannabislicensing") {
-        #    return 301 $real_scheme://$http_host/cannabislicensing$request_uri;
-        #}
-
 		%API_CONFIG_SECTION%
 
+		
         # Remove path prefix when handling files
-        rewrite ^\/cannabislicensing\/(.*) /$1 last;
+        rewrite ^\/lcrb\/(.*) /$1 last;
+		
+        %EXTRA_CONFIG%
     
         # serve our angular app here
         location / {
-            root   /tmp/app/dist;
+            root   %ROOT%; 
             index  index.html index.htm;
             try_files $uri /index.html;
             gzip            on;
@@ -102,7 +100,8 @@ http {
             # Deploy-time configurable
             %HTTP_BASIC%
         }
-
+		
+		
         # redirect server error pages to the static page /50x.html
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {

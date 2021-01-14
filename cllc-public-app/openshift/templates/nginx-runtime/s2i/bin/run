@@ -21,7 +21,7 @@ getApiProxyConfigSection (){
 
         location /api/ {
             proxy_pass ${_API_URL};
-        }
+        }		
 		
 		location /login {
             proxy_pass ${_LOGIN_URL};
@@ -48,33 +48,7 @@ getApiProxyConfigSection (){
             proxy_pass ${_HEALTH_CHECK_URL};
         }
 		
-		location ${1}api/ {
-            proxy_pass ${_API_URL};
-        }
 		
-		location ${1}login {
-            proxy_pass ${_LOGIN_URL};
-        }
-		
-		location ${1}login/ {
-            proxy_pass ${_LOGIN_URL};
-        }
-		
-		location ${1}logout {
-            proxy_pass ${_LOGOUT_URL};
-        }
-		
-		location ${1}bcservice {
-            proxy_pass ${_BCSERVICE_URL};
-        }
-		
-		location ${1}bcservice/ {
-            proxy_pass ${_BCSERVICE_URL};
-        }
-		
-		location ${1}hc/ {
-            proxy_pass ${_HEALTH_CHECK_URL};
-        }
 		
 EOF
 
@@ -162,7 +136,7 @@ echo "AdditionalRealIpFromRules = ${AdditionalRealIpFromRules}"
 echo "HTTP_BASIC = ${HTTP_BASIC}"
 echo "API_URL = ${API_URL}"
 
-sed "s~%RealIpFrom%~${RealIpFrom:-172.51.0.0/16}~g; s~%IpFilterRules%~${IpFilterRules}~g; s~%AdditionalRealIpFromRules%~${AdditionalRealIpFromRules}~g; s~%HTTP_BASIC%~${HTTP_BASIC}~g; s~%API_CONFIG_SECTION%~${API_CONFIG_SECTION}~g" /tmp/nginx.conf.template > /etc/nginx/nginx.conf
+sed "s~%RealIpFrom%~${RealIpFrom:-172.51.0.0/16}~g; s~%IpFilterRules%~${IpFilterRules}~g; s~%AdditionalRealIpFromRules%~${AdditionalRealIpFromRules}~g; s~%HTTP_BASIC%~${HTTP_BASIC}~g; s~%ROOT%~${ROOT}~g;  s~%EXTRA_CONFIG%~${EXTRA_CONFIG}~g; s~%API_CONFIG_SECTION%~${API_CONFIG_SECTION}~g" /tmp/nginx.conf.template > /etc/nginx/nginx.conf
 
 if [ -n "$HTTP_BASIC_USERNAME" ] && [ -n "$HTTP_BASIC_PASSWORD" ]; then
     echo "---> Generating .htpasswd file"
