@@ -85,17 +85,13 @@
           </p>
 
           <app-field [valid]="true" [showChevrons]="false">
-            <section style="display: flex">
-              <input type="checkbox" formControlName="isReadyValidInterest">
-              <div style="padding-left: 10px;">
-                You own or have a fully executed lease for your establishment
-              </div>
-            </section>
+            <mat-checkbox formControlName="isReadyValidInterest">
+              You own or have a fully executed lease for your establishment
+            </mat-checkbox>
           </app-field>
           <app-field [valid]="true" [showChevrons]="false">
-            <section style="display: flex">
-              <input type="checkbox" formControlName="isReadyWorkers">
-              <div style="padding-left: 10px;">
+            <mat-checkbox formControlName="isReadyWorkers">
+              <span>
                 Workers have obtained a security verification from the province. This includes any adult (19 years of
                 age or older) performing work-related activities in a retail store as an employee, independent
                 contractor or volunteer on a full-time or part-time basis.
@@ -104,105 +100,74 @@
                   Security verification is not required for trade workers who are under the supervision of a worker who
                   has obtained a security verification from the Province.
                 </i>
-
-              </div>
-            </section>
+              </span>
+            </mat-checkbox>
           </app-field>
 
 
           <app-field [valid]="true" [showChevrons]="false">
-            <section style="display: flex">
-              <input type="checkbox" formControlName="isReadyNameBranding">
-              <div style="padding-left: 10px;">
-                The name of the business and exterior signage complies with provincial requirements as approved by the
-                Liquor and Cannabis Regulation Branch.
-              </div>
-            </section>
+            <mat-checkbox formControlName="isReadyNameBranding">
+              The name of the business and exterior signage complies with provincial requirements as approved by the
+              Liquor and Cannabis Regulation Branch.
+            </mat-checkbox>
           </app-field>
 
           <app-field [valid]="true" [showChevrons]="false">
-            <section style="display: flex">
-              <input type="checkbox" formControlName="isReadyDisplays">
-              <div style="padding-left: 10px;">
+            <mat-checkbox formControlName="isReadyDisplays">
                 Displays do not permit self-service by patrons (including dispensing devices). All cannabis and cannabis
                 accessories are displayed in a way that products are not accessible to patrons.
-              </div>
-            </section>
+            </mat-checkbox>
           </app-field>
           <div class="padded-section">
             <p style="font-weight: 600;">The following physical security requirements are in place:</p>
             <div class="padded-section">
               <app-field [valid]="true" [showChevrons]="false">
-                <section style="display: flex">
-                  <input type="checkbox" formControlName="isReadyIntruderAlarm">
-                  <div style="padding-left: 10px;">
-                    An audible intruder alarm system monitored by a third-party
-                  </div>
-                </section>
+                <mat-checkbox formControlName="isReadyIntruderAlarm">
+                  An audible intruder alarm system monitored by a third-party
+                </mat-checkbox>
               </app-field>
 
               <app-field [valid]="true" [showChevrons]="false">
-                <section style="display: flex">
-                  <input type="checkbox" formControlName="isReadyFireAlarm">
-                  <div style="padding-left: 10px;">
-                    An audible fire alarm system monitored by a third-party
-                  </div>
-                </section>
+                <mat-checkbox formControlName="isReadyFireAlarm">
+                  An audible fire alarm system monitored by a third-party
+                </mat-checkbox>
               </app-field>
 
               <app-field [valid]="true" [showChevrons]="false">
-                <section style="display: flex">
-                  <input type="checkbox" formControlName="isReadyLockedCases">
-                  <div style="padding-left: 10px;">
-                    Locked retail product display cases
-                  </div>
-                </section>
+                <mat-checkbox formControlName="isReadyLockedCases">
+                  Locked retail product display cases
+                </mat-checkbox>
               </app-field>
 
               <app-field [valid]="true" [showChevrons]="false">
-                <section style="display: flex">
-                  <input type="checkbox" formControlName="isReadyLockedStorage">
-                  <div style="padding-left: 10px;">
-                    Locked cannabis storage room
-                  </div>
-                </section>
+                <mat-checkbox formControlName="isReadyLockedStorage">
+                  Locked cannabis storage room
+                </mat-checkbox>
               </app-field>
 
               <app-field [valid]="true" [showChevrons]="false">
-                <section style="display: flex">
-                  <input type="checkbox" formControlName="isReadyPerimeter">
-                  <div style="padding-left: 10px;">
-                    Secure perimeter door locks
-                  </div>
-                </section>
+                <mat-checkbox formControlName="isReadyPerimeter">
+                  Secure perimeter door locks
+                </mat-checkbox>
               </app-field>
             </div>
             <div class="padded-section">
               <p style="font-weight: 600;">Security cameras with full unobstructed view of:</p>
               <div class="padded-section">
                 <app-field [valid]="true" [showChevrons]="false">
-                  <section style="display: flex">
-                    <input type="checkbox" formControlName="isReadyRetailArea">
-                    <div style="padding-left: 10px;">
-                      the retail sales area
-                    </div>
-                  </section>
+                  <mat-checkbox formControlName="isReadyRetailArea">
+                    the retail sales area
+                  </mat-checkbox>
                 </app-field>
                 <app-field [valid]="true" [showChevrons]="false">
-                  <section style="display: flex">
-                    <input type="checkbox" formControlName="isReadyStorage">
-                    <div style="padding-left: 10px;">
-                      any product storage area
-                    </div>
-                  </section>
+                  <mat-checkbox formControlName="isReadyStorage">
+                    any product storage area
+                  </mat-checkbox>
                 </app-field>
                 <app-field [valid]="true" [showChevrons]="false">
-                  <section style="display: flex">
-                    <input type="checkbox" formControlName="isReadyExtranceExit">
-                    <div style="padding-left: 10px;">
-                      both the interior and exterior of all store entrances/exits.
-                    </div>
-                  </section>
+                  <mat-checkbox formControlName="isReadyExtranceExit">
+                    both the interior and exterior of all store entrances/exits.
+                  </mat-checkbox>
                 </app-field>
               </div>
             </div>
@@ -212,23 +177,19 @@
 
 
           <app-field [valid]="true" [showChevrons]="false">
-            <section style="display: flex">
-              <input type="checkbox" formControlName="isReadySurveillanceNotice">
-              <div style="padding-left: 10px;">
+            <mat-checkbox formControlName="isReadySurveillanceNotice">
                 A notice informing patrons that video surveillance is being used on the premises is displayed and
                 visible at all times.
-              </div>
-            </section>
+            </mat-checkbox>
           </app-field>
 
           <app-field [valid]="true" [showChevrons]="false">
-            <section style="display: flex">
-              <input type="checkbox" formControlName="isReadyProductNotVisibleOutside">
-              <div style="padding-left: 10px;">
+            <mat-checkbox formControlName="isReadyProductNotVisibleOutside">
+              <span class="ml-2">
                 Cannabis, cannabis accessories and any transactions involving these products are not visible from
                 outside the store.
-              </div>
-            </section>
+              </span>
+            </mat-checkbox>
           </app-field>
         </div>
       </section>

@@ -4,7 +4,7 @@
     And request personnel email changes for the approved application
 
 @cannabis @partnership @crsemail
-Scenario: CRS Personnel Email Changes (Partnership)
+Scenario: UAT CRS Personnel Email Changes (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -12,6 +12,7 @@ Scenario: CRS Personnel Email Changes (Partnership)
     And I review the organization structure for a partnership
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a partnership
+    And I click on the secondary Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
@@ -22,7 +23,7 @@ Scenario: CRS Personnel Email Changes (Partnership)
     Then I see the login page
 
 @cannabis @privatecorporation @crsemail
-Scenario: CRS Personnel Email Changes (Private Corporation)
+Scenario: UAT CRS Personnel Email Changes (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -30,6 +31,7 @@ Scenario: CRS Personnel Email Changes (Private Corporation)
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
+    And I click on the secondary Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
@@ -40,7 +42,7 @@ Scenario: CRS Personnel Email Changes (Private Corporation)
     Then I see the login page
 
 @cannabis @publiccorporation @crsemail
-Scenario: CRS Personnel Email Changes (Public Corporation)
+Scenario: UAT CRS Personnel Email Changes (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -48,6 +50,7 @@ Scenario: CRS Personnel Email Changes (Public Corporation)
     And I review the organization structure for a public corporation
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a public corporation
+    And I click on the secondary Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
@@ -58,7 +61,7 @@ Scenario: CRS Personnel Email Changes (Public Corporation)
     Then I see the login page
 
 @cannabis @society @crsemail
-Scenario: CRS Personnel Email Changes (Society)
+Scenario: UAT CRS Personnel Email Changes (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -66,6 +69,7 @@ Scenario: CRS Personnel Email Changes (Society)
     And I review the organization structure for a society
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a society
+    And I click on the secondary Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
@@ -76,7 +80,7 @@ Scenario: CRS Personnel Email Changes (Society)
     Then I see the login page
 
 @cannabis @soleproprietorship @crsemail
-Scenario: CRS Personnel Email Changes (Sole Proprietorship)
+Scenario: UAT CRS Personnel Email Changes (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -84,6 +88,7 @@ Scenario: CRS Personnel Email Changes (Sole Proprietorship)
     And I review the organization structure for a sole proprietorship
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a sole proprietorship
+    And I click on the secondary Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved

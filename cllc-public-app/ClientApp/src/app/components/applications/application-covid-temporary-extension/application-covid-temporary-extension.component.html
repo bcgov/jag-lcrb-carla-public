@@ -159,10 +159,11 @@
                 <app-field [valid]="true">
                     <section style="display: flex; align-items: center;">
                         <label class="pr-5 m-0">Mailing address</label>
-                        <input type="checkbox" formControlName="sameAddresses">
-                        <div class="pl-2">
-                            Same as above
-                        </div>
+                        <mat-checkbox formControlName="sameAddresses">
+                            <div class="pl-2">
+                                Same as above
+                            </div>
+                        </mat-checkbox>
                     </section>
                     <div class="row">
                         <app-field class="col-md-4" [valid]="isValidOrNotTouched('addressStreet')"
@@ -335,14 +336,13 @@
                         <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
                             errorMessage="Please affirm that all of the information provided for this application is true and complete."
                             [showChevrons]="false">                            
-                            <section style="display: flex">
-                                <input type="checkbox" formControlName="signatureAgreement">
+                            <mat-checkbox formControlName="signatureAgreement">
                                 <span class="error-states">*</span>
-                                <div style="padding-left: 10px; font-size: larger;">
+                                <span class="ml-2">
                                     As the licensee or authorized signatory of the licensee, I understand and affirm that all of
                                     the information provided is true and complete.
-                                </div>
-                            </section>
+                                </span>
+                            </mat-checkbox>
                         </app-field>
                     </section>
                     </div>
