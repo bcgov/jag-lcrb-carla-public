@@ -356,7 +356,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 cacheKey = $"MAP_SEARCH_{search}";
             }
             List<EstablishmentMapData> establishmentMapData;
-            if (!_cache.TryGetValue("S_" + cacheKey, out establishmentMapData))
+            if (!_env.IsProduction() || !_cache.TryGetValue("S_" + cacheKey, out establishmentMapData))
             {
 
                 string licenceTypeId = GetLicenceTypeId("Cannabis Retail Store");
@@ -371,14 +371,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     try
                     {
                         // get establishments                                  
-                        string licenseFilter = "statuscode eq 1 and ( _adoxio_licencetype_value eq {licenceTypeId}"; // only active licenses
+                        string licenseFilter = "statuscode eq 1 and _adoxio_licencetype_value eq {licenceTypeId}"; // only active licenses
 
                         if (alternateLicenceTypeId != null)
                         {
-                            licenseFilter += $" or _adoxio_licencetype_value eq {alternateLicenceTypeId}";
+                            licenseFilter += $" or statuscode eq 1 and _adoxio_licencetype_value eq {alternateLicenceTypeId}";
                         }
-
-                        licenseFilter += ")";
 
                         string[] licenseExpand = {"adoxio_LicenceType"};
 
