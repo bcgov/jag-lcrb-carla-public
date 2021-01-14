@@ -19,7 +19,7 @@ Feature: CRSApplicationPersonnelNameChanges
     And request personnel email and name changes for the approved application
 
 @cannabis @partnership @crspersonnelnamechange
-Scenario: CRS Personnel Name Changes (Partnership)
+Scenario: UAT CRS Personnel Name Changes (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -27,6 +27,7 @@ Scenario: CRS Personnel Name Changes (Partnership)
     And I review the organization structure for a partnership
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a partnership
+    And I click on the secondary Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
@@ -39,7 +40,7 @@ Scenario: CRS Personnel Name Changes (Partnership)
     Then I see the login page
 
 @cannabis @privatecorporation @crspersonnelnamechange
-Scenario: CRS Personnel Name Changes (Private Corporation)
+Scenario: UAT CRS Personnel Name Changes (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -47,6 +48,7 @@ Scenario: CRS Personnel Name Changes (Private Corporation)
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
+    And I click on the secondary Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
@@ -59,7 +61,7 @@ Scenario: CRS Personnel Name Changes (Private Corporation)
     Then I see the login page
 
 @cannabis @publiccorporation @crspersonnelnamechange
-Scenario: CRS Personnel Name Changes (Public Corporation)
+Scenario: UAT CRS Personnel Name Changes (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -67,6 +69,7 @@ Scenario: CRS Personnel Name Changes (Public Corporation)
     And I review the organization structure for a public corporation
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a public corporation
+    And I click on the secondary Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
@@ -79,7 +82,7 @@ Scenario: CRS Personnel Name Changes (Public Corporation)
     Then I see the login page
 
 @cannabis @society @crspersonnelnamechange
-Scenario: CRS Personnel Name Changes (Society)
+Scenario: UAT CRS Personnel Name Changes (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -87,6 +90,7 @@ Scenario: CRS Personnel Name Changes (Society)
     And I review the organization structure for a society
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a society
+    And I click on the secondary Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
@@ -99,7 +103,7 @@ Scenario: CRS Personnel Name Changes (Society)
     Then I see the login page
 
 @cannabis @soleproprietorship @crspersonnelnamechange
-Scenario: CRS Personnel Name Changes (Sole Proprietorship)
+Scenario: UAT CRS Personnel Name Changes (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
@@ -107,6 +111,7 @@ Scenario: CRS Personnel Name Changes (Sole Proprietorship)
     And I review the organization structure for a sole proprietorship
     And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a sole proprietorship
+    And I click on the secondary Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
