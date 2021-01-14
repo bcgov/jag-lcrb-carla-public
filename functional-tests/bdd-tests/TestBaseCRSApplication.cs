@@ -211,9 +211,9 @@ namespace bdd_tests
 
             applicationID = parsedURL[5];
 
-            // click on the submit button
-            NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector(".application-wrapper button.btn-primary"));
-            uiSubmitButton.Click();
+            // ClickOnSubmitButton();
+
+            // ClickOnSubmitButton2();
         }
     }
 }

@@ -89,8 +89,12 @@ namespace bdd_tests
             NgWebElement uiProofOfZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning']"));
             JavaScriptClick(uiProofOfZoning);
 
+            // select 'yes' for Treaty First Nation Land
+            NgWebElement uiTreatyFirstNationLand = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-2"));
+            uiTreatyFirstNationLand.Click();
+
             // select 'yes' for ALR inclusion
-            NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
+            NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-5"));
             uiALRInclusion.Click();
 
             if (manufacturerType == "winery in Saanich")
@@ -137,28 +141,28 @@ namespace bdd_tests
             if ((manufacturerType == "winery") || (manufacturerType == "winery in Saanich"))
             {
                 // select winery radio button
-                NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-5"));
+                NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-8"));
                 uiWinery.Click();
             }
 
             if (manufacturerType == "distillery")
             {
                 // select distillery radio button
-                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-6"));
+                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-9"));
                 uiDistillery.Click();
             }
 
             if (manufacturerType == "brewery")
             {
                 // select brewery radio button
-                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-7"));
+                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-10"));
                 uiBrewery.Click();
             }
 
             if (manufacturerType == "co-packer")
             {
                 // select co-packer radio button
-                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-8"));
+                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-11"));
                 uiCoPacker.Click();
             }
 
@@ -191,27 +195,27 @@ namespace bdd_tests
                 uiHoney.SendKeys(honeyBeehives);
 
                 // select the blending checkbox
-                NgWebElement uiBlending = ngDriver.FindElement(By.CssSelector("#mat-checkbox-11 .mat-checkbox-inner-container"));
+                NgWebElement uiBlending = ngDriver.FindElement(By.CssSelector("#mat-checkbox-15 .mat-checkbox-inner-container"));
                 uiBlending.Click();
 
                 // select the crushing checkbox
-                NgWebElement uiCrushing = ngDriver.FindElement(By.CssSelector("#mat-checkbox-12 .mat-checkbox-inner-container"));
+                NgWebElement uiCrushing = ngDriver.FindElement(By.CssSelector("#mat-checkbox-16 .mat-checkbox-inner-container"));
                 uiCrushing.Click();
 
                 // select the filtering checkbox
-                NgWebElement uiFiltering = ngDriver.FindElement(By.CssSelector("#mat-checkbox-13 .mat-checkbox-inner-container"));
+                NgWebElement uiFiltering = ngDriver.FindElement(By.CssSelector("#mat-checkbox-17 .mat-checkbox-inner-container"));
                 uiFiltering.Click();
 
                 // select the aging, for at least 3 months checkbox
-                NgWebElement uiAging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-14 .mat-checkbox-inner-container"));
+                NgWebElement uiAging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-18 .mat-checkbox-inner-container"));
                 uiAging.Click();
 
                 // select the secondary fermentation or carbonation checkbox
-                NgWebElement uiSecondaryFermentation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-15 .mat-checkbox-inner-container"));
+                NgWebElement uiSecondaryFermentation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-19 .mat-checkbox-inner-container"));
                 uiSecondaryFermentation.Click();
 
                 // select the packaging checkbox
-                NgWebElement uiPackaging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-16 .mat-checkbox-inner-container"));
+                NgWebElement uiPackaging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-20 .mat-checkbox-inner-container"));
                 uiPackaging.Click();
             }
 
@@ -297,11 +301,11 @@ namespace bdd_tests
             uiContactEmail.SendKeys(contactEmail);
 
             // select the authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
 
             // select the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
             // retrieve the current URL to get the application ID (needed downstream)

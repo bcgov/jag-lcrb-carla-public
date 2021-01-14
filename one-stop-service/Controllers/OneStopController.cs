@@ -78,13 +78,6 @@ namespace one_stop_service.Controllers
             return Ok();
         }
 
-        [HttpGet("LdbExport")]
-        public IActionResult LdbExport()
-        {
-            _logger.Information("Reached LdbExport");
-            BackgroundJob.Enqueue(() => new LdbExport(Configuration).SendLdbExport(null));
-            return Ok();
-        }
 
     }
 }
