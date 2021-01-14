@@ -44,7 +44,9 @@
         </app-file-uploader>
 
         <ng-container *ngIf="showFormControl(application?.applicationType?.floorPlan)">
-            <p> Please upload a stamped copy of the floor plan:</p>
+            <p>Occupant Load is the maximum number of people (patrons plus staff) permitted in a service area. The occupant load must be stamped or written, dated and signed on the floor plan by the appropriate authority.</p>
+            <p>If you will not provide the occupant load for the applicant, you must provide a letter confirming you do not issue occupant load. The Branch will accept an occupant load calculation from a professional architect or engineer.</p>
+            <p>A licence cannot be issued without final occupant load.</p>
 
             <app-file-uploader *ngIf="application?.id" documentType="StampedFloorPlan"
                 [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval"
@@ -65,7 +67,7 @@
     </p>
 </section>
 
-<section *ngIf="!disableForm" class="position-relative d-flex justify-content-between p-3">
+<section class="position-relative d-flex justify-content-between p-3">
     <span>
         <button mat-raised-button color="secondary" [disabled]="optingOutOfComment" (click)="OptOutOfComment()">
             <span>Opt Out of Comment</span>
