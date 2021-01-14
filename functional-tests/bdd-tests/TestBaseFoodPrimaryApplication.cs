@@ -138,15 +138,15 @@ namespace bdd_tests
             uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
             // click fixed option
-            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiFixedOption = ngDriver.FindElement(By.Id("mat-button-toggle-9-button"));
             uiFixedOption.Click();
 
             // click portable option
-            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiPortableOption = ngDriver.FindElement(By.Id("mat-button-toggle-10-button"));
             uiPortableOption.Click();
 
             // click interior option
-            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector(""));
+            NgWebElement uiInteriorOption = ngDriver.FindElement(By.Id("mat-button-toggle-11-button"));
             uiInteriorOption.Click();
 
             if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
