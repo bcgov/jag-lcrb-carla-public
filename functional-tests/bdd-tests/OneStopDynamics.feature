@@ -164,7 +164,7 @@ Scenario: OneStop Licence Suspended (Private Corporation)
     And the application is approved
     And I pay the licensing fee 
     And I log in to Dynamics
-    And I select the 'Yes' option in the Dormant dropdown
+    And I select the 'Yes' option in the Suspended dropdown
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I wait 2 minutes
@@ -179,7 +179,7 @@ Scenario: OneStop Licence Suspended (Private Corporation)
 Scenario: OneStop Licence End Suspension (Private Corporation)
     Given I am logged in to Dynamics
     And I find the expired licence
-    And I select the 'No' option in the Dormant dropdown
+    And I select the 'No' option in the Suspended dropdown
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I wait 2 minutes
