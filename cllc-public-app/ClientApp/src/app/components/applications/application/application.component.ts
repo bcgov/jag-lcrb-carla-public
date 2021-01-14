@@ -444,8 +444,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('hasCoolerAccess').disable();
     }
 
-    if (this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
-        && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) {
+    if ((this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
+        && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) &&
+        !this.application.applicationType.showPatio) {
       this.form.get('isHasPatio').disable();
     }
 
@@ -914,7 +915,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   isValid(): boolean {
-
 
     this.showValidationMessages = false;
     let valid = true;
