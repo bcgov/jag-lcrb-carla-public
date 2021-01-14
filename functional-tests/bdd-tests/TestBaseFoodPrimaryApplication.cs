@@ -36,6 +36,13 @@ namespace bdd_tests
 
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
+
+            string patioCompDescription = "Sample patio comp description";
+            string patioLocationDescription = "Sample patio location description";
+            string patioAccessDescription = "Sample patio access description";
+            string patioLiquorCarriedDescription = "Sample liquor carried description";
+            string patioAccessControlDescription = "Sample patio access control description";
+
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
@@ -105,6 +112,42 @@ namespace bdd_tests
             // enter the store phone number
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
+
+            // enter the patio comp description
+            NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
+            uiPatioCompDescription.SendKeys(patioCompDescription);
+
+            // enter the patio location description
+            NgWebElement uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
+            uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
+            // enter the patio access description
+            NgWebElement uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
+            uiPatioAccessDescription.SendKeys(patioAccessDescription);
+
+            // click patio liquor is carried checkbox
+            NgWebElement uiPatioIsLiquorCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox#patioIsLiquorCarried"));
+            uiPatioIsLiquorCarried.Click();
+
+            // enter patio liquor carried description
+            NgWebElement uiPatioLiquorCarriedDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
+            uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
+
+            // enter patio access control description
+            NgWebElement uiPatioAccessControlDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
+            uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
+
+            // click fixed option
+            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector(""));
+            uiFixedOption.Click();
+
+            // click portable option
+            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector(""));
+            uiPortableOption.Click();
+
+            // click interior option
+            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector(""));
+            uiInteriorOption.Click();
 
             if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
             {
