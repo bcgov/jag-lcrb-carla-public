@@ -34,7 +34,7 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
   showQuestion() {
 
     let licenceTypes = [
-      "Manufacturer", "Food Primary"];
+      "Manufacturer", "Food Primary", "Liquor Primary", "Liquor Primary Club"];
     let applicationTypes = [
       "On-Site Store Endorsement",
       this.ApplicationTypeNames.FPRelo
