@@ -104,10 +104,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedPhotosOrRenderingsDocuments: 0;
   uploadedZoningDocuments: 0;
   uploadedCentralSecuritiesRegister: 0;
-  uploadedRegisterOfDirectorsAndOfficers:0;
-  uploadedPartnershipAgreement:0;
-  uploadedOtherDocuments:0;
-  uploadedIndividualsWithLessThan10:0;
+  uploadedRegisterOfDirectorsAndOfficers: 0;
+  uploadedPartnershipAgreement: 0;
+  uploadedOtherDocuments: 0;
+  uploadedIndividualsWithLessThan10: 0;
   dynamicsForm: DynamicsForm;
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
@@ -444,8 +444,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('hasCoolerAccess').disable();
     }
 
-    if (this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
-        && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) {
+    if ((this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
+        && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) &&
+        !this.application.applicationType.showPatio) {
       this.form.get('isHasPatio').disable();
     }
 
@@ -644,7 +645,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showExteriorRenderings() {
     let show = this.application &&
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
-        );
+      );
     show = show && this.form.get('proposedChange').value === 'Yes';
     return show;
   }
@@ -896,6 +897,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return hasApproved;
   }
 
+  /**
+   * Returns true if this application is changing the establishment name
+   */
+  private establishmentNameIsChanging(): boolean {
+    const isChanging: boolean =
+      (this?.application?.assignedLicence // if there is an existing licence 
+        && this.form // the form is created
+        && this?.application?.assignedLicence?.establishmentName != this.form.get('establishmentName').value // the name is different
+      );
+    return isChanging;
+  }
+
 
   /**
    * Redirect to payment processing page (Express Pay / Bambora service)
@@ -913,9 +926,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }));
   }
 
+  /**
+   * Returns true if the form is valid
+   * The method also populates the list of errors if the form is not valid
+   */
   isValid(): boolean {
-
-
     this.showValidationMessages = false;
     let valid = true;
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
@@ -937,9 +952,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       ((this.uploadedAssociateDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('Associate form is required.');
-
-      /// here
-
     }
 
     if (this.application.applicationType.showFinancialIntegrityFormUpload &&
@@ -955,14 +967,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one supporting document is required.');
     }
 
+    // optional for this application type
     const signageNotRequired = (
-       applicationTypeName === ApplicationTypeNames.LiquorLicenceTransfer ||
-       applicationTypeName === ApplicationTypeNames.MFG
+      applicationTypeName === ApplicationTypeNames.LiquorLicenceTransfer ||
+      applicationTypeName === ApplicationTypeNames.MFG ||
+      applicationTypeName === ApplicationTypeNames.LRSTransferofLocation
     );
 
-    if (!signageNotRequired && this.application.applicationType.signage === FormControlState.Show &&
-      this.application.applicationType.name !== ApplicationTypeNames.LRSTransferofLocation && // optional for this application type
-      ((this.uploadedSignageDocuments || 0) < 1)) {
+    if ((this.establishmentNameIsChanging() || !signageNotRequired) 
+      && this.application.applicationType.signage === FormControlState.Show
+       && ((this.uploadedSignageDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one signage document is required.');
     }
@@ -1150,7 +1164,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
 
     // add the dynamic fields to the error map.
-    if (this.dynamicsForm ) {
+    if (this.dynamicsForm) {
       this.dynamicsForm.tabs.forEach(function (tab) {
         tab.sections.forEach(function (section) {
           if (section.fields) {
@@ -1241,8 +1255,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   canRenameEstablishment(): boolean {
     return (this.application?.applicationType?.name === ApplicationTypeNames.LiquorLicenceTransfer ||
-            (this.application?.applicationType?.establishmentName !== FormControlState.ReadOnly &&
-              this.showFormControl(this.application?.applicationType?.currentEstablishmentAddress)));
+      (this.application?.applicationType?.establishmentName !== FormControlState.ReadOnly &&
+        this.showFormControl(this.application?.applicationType?.currentEstablishmentAddress)));
   }
 
   isCRSRenewalApplication(): boolean {
@@ -1310,9 +1324,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   }
 
-  showValidInterestforTransfer(){
+  showValidInterestforTransfer() {
     return this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
-            (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType ==="Wine Store");
+      (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType === "Wine Store");
   }
 
   showDynamicForm(formReference, tabs) {
