@@ -68,7 +68,7 @@ Scenario: DEV Catering Release (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@validation @privatecorporation @release
+@validation @privatecorporation
 Scenario: UAT Catering Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
