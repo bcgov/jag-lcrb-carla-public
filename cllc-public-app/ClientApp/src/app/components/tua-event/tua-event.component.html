@@ -128,8 +128,26 @@
           [isFullWidth]="true">
           <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
         </app-field>
-        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top:30px;"
-          matTooltip="Briefly describe the event."></fa-icon>
+        <fa-icon [icon]="faQuestionCircle" class="question-mark" matTooltip="Briefly describe the event."></fa-icon>
+      </div>
+      <div class="row">
+        <p>Select all the items that will be part of your event:</p>
+        <div class="col-md-4 col-xs-12">
+          <mat-checkbox formControlName="isWedding"></mat-checkbox>
+          <mat-checkbox formControlName="isNetworkingParty"></mat-checkbox>
+          <mat-checkbox formControlName="isConcert"></mat-checkbox>
+          <mat-checkbox formControlName="isNoneOfTheAbove"></mat-checkbox>
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <mat-checkbox formControlName="isBanquet"></mat-checkbox>
+          <mat-checkbox formControlName="isAmplifiedSound"></mat-checkbox>
+          <mat-checkbox formControlName="isDancing"></mat-checkbox>
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <mat-checkbox formControlName="isReception"></mat-checkbox>
+          <mat-checkbox formControlName="isLiveEntertainment"></mat-checkbox>
+          <mat-checkbox formControlName="isGambling"></mat-checkbox>
+        </div>
       </div>
     </section>
 

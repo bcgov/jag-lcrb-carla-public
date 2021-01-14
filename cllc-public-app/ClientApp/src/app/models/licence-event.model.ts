@@ -116,6 +116,22 @@ export class LicenceEvent {
   isSalesAreaAvailandDefined: boolean;
   isSampleSizeCompliant: boolean;
   eventCategory: number;
+
+  // temporary use area (TUA) events
+  tuaEventType: number;
+  isClosedToPublic: boolean;
+  isWedding: boolean;
+  isNetworkingParty: boolean;
+  isConcert: boolean;
+  isBanquet: boolean;
+  isAmplifiedSound: boolean;
+  isDancing: boolean;
+  isReception: boolean;
+  isLiveEntertainment: boolean;
+  isGambling: boolean;
+  isNoneOfTheAbove: boolean;
+  isAgreement1: boolean;
+  isAgreement2: boolean;
 }
 
 export const EventStatus = [
@@ -306,5 +322,20 @@ export const EventCategory = [
   {
     label: 'Temporary Use Area',
     value: 845280004
+  }
+];
+
+export const TuaEventType = [
+  {
+    label: 'Invite Only',
+    value: 845280000
+  },
+  {
+    label: 'Open-Public',
+    value: 845280001
+  },
+  {
+    label: 'Ticketed',
+    value: 845280002
   }
 ];
