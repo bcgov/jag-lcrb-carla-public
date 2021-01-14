@@ -211,9 +211,9 @@ namespace bdd_tests
 
             applicationID = parsedURL[5];
 
-            // click on the Proceed to Security Screening button
-            NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
-            uiSubmitButton.Click();
+            // ClickOnSubmitButton();
+
+            // ClickOnSubmitButton2();
         }
     }
 }

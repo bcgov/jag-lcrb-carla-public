@@ -19,7 +19,7 @@ Feature: CateringApplicationPersonnelNameChanges
     And submit personnel name changes for different business types
 
 @catering @partnership @cateringpersonnelnamechange
-Scenario: Catering Personnel Name Change (Partnership)
+Scenario: UAT Catering Personnel Name Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -39,7 +39,7 @@ Scenario: Catering Personnel Name Change (Partnership)
     Then I see the login page
 
 @catering @privatecorporation @cateringpersonnelnamechange
-Scenario: Catering Personnel Name Change (Private Corporation)
+Scenario: UAT Catering Personnel Name Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -59,7 +59,7 @@ Scenario: Catering Personnel Name Change (Private Corporation)
     Then I see the login page
 
 @catering @publiccorporation @cateringpersonnelnamechange
-Scenario: Catering Personnel Name Change (Public Corporation)
+Scenario: UAT Catering Personnel Name Change (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -79,7 +79,7 @@ Scenario: Catering Personnel Name Change (Public Corporation)
     Then I see the login page
 
 @catering @society @cateringpersonnelnamechange
-Scenario: Catering Personnel Name Change (Society)
+Scenario: UAT Catering Personnel Name Change (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -99,7 +99,7 @@ Scenario: Catering Personnel Name Change (Society)
     Then I see the login page
 
 @catering @soleproprietorship @cateringpersonnelnamechange
-Scenario: Catering Personnel Name Change (Sole Proprietorship)
+Scenario: UAT Catering Personnel Name Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
@@ -138,7 +138,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            CheckFeatureLEConnections();
+            // CheckFeatureLEConnections();
 
             IgnoreSynchronizationFalse();
 

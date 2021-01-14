@@ -41,7 +41,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsLicenseeChanges();
 
-            CheckFeatureLEConnections();
+            // CheckFeatureLEConnections();
 
             IgnoreSynchronizationFalse();
 

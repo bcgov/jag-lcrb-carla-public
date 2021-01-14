@@ -142,23 +142,20 @@
       <section class="padded-section content-bottom">
         <app-field [required]="true" [valid]="isValidOrNotTouched('transferConsent')"
           errorMessage="Please consent to the transfer" [showChevrons]="false">
-          <section style="display: flex">
-            <input type="checkbox" formControlName="transferConsent">
-
+          <mat-checkbox formControlName="transferConsent">
             <!-- for cannabis retail stores -->
-            <div style="padding-left: 10px;" *ngIf="licence?.licenseType === 'Cannabis Retail Store'"> I agree to
+            <span class="ml-2" *ngIf="licence?.licenseType === 'Cannabis Retail Store'"> I agree to
               transfer my {{licence?.licenseType}} licence to the proposed transferee
               identified above.
-            </div>
+            </span>
             <!-- for liquor licences -->
-            <div style="padding-left: 10px;" *ngIf="licence?.licenseType !== 'Cannabis Retail Store'">
-              <p>I agree to transfer my {{licence?.licenseType}} licence to the proposed transferee
-                identified above. The proposed transferee will, if the general manager transfers the licence, be or
-                become the owner of the business in respect of
-                which the licence was issued.
-              </p>
-            </div>
-          </section>
+            <span class="ml-2" *ngIf="licence?.licenseType !== 'Cannabis Retail Store'">
+              I agree to transfer my {{licence?.licenseType}} licence to the proposed transferee
+              identified above. The proposed transferee will, if the general manager transfers the licence, be or
+              become the owner of the business in respect of
+              which the licence was issued.              
+            </span>
+          </mat-checkbox>
         </app-field>
       </section>
 
@@ -185,12 +182,11 @@
 
         <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
           errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
-          <section style="display: flex">
-            <input type="checkbox" formControlName="authorizedToSubmit">
+          <mat-checkbox formControlName="authorizedToSubmit">
             <span class="error-states">*</span>
-            <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application
-            </div>
-          </section>
+            <span class="ml-2"> I understand and affirm that I am authorized to submit the application
+            </span>
+          </mat-checkbox>
         </app-field>
         <p *ngIf="licence?.licenseType === 'Cannabis Retail Store'">
           Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
@@ -208,13 +204,12 @@
         <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
           errorMessage="Please affirm that all of the information provided for this application is true and complete."
           [showChevrons]="false">
-          <section style="display: flex">
-            <input type="checkbox" formControlName="signatureAgreement">
+          <mat-checkbox formControlName="signatureAgreement">
             <span class="error-states">*</span>
-            <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
+            <span class="ml-2"> I understand and affirm that all of the information provided for this
               application is true and complete
-            </div>
-          </section>
+            </span>
+          </mat-checkbox>
         </app-field>
       </div>
 
