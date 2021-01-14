@@ -581,7 +581,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     try
                     {
-                        string filter = $"statuscode eq 1 and adoxio_checklistpsalettersent eq 845280000 and _adoxio_applicationtypeid_value eq {applicationTypeId}";
+                        string filter = $"adoxio_checklistpsalettersent eq 845280000 and _adoxio_applicationtypeid_value eq {applicationTypeId}";
+                        filter += $" and statuscode ne { (int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
+                        // Approved applications need to be passed to the client app
+                        filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused}";
+                        filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
+                        filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved}";
+                        filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
                         // get establishments                                  
                         string[] expand = { "adoxio_ApplicationTypeId" };
 
@@ -614,12 +621,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                     establishmentMapData.Add(new EstablishmentMapData
                                     {
                                         id = application.AdoxioApplicationid,
-                                        Name = application.AdoxioName,
+                                        Name = application.AdoxioEstablishmentpropsedname,
                                         License = "",
                                         Phone = application.AdoxioPhone,
-                                        AddressCity = application.AdoxioAddresscity,
-                                        AddressPostal = application.AdoxioAddresspostalcode,
-                                        AddressStreet = application.AdoxioAddressstreet
+                                        AddressCity = application.AdoxioEstablishmentaddresscity,
+                                        AddressPostal = application.AdoxioEstablishmentaddresspostalcode,
+                                        AddressStreet = application.AdoxioEstablishmentaddressstreet
                                     });
                                 }
                             }

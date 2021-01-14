@@ -69,22 +69,24 @@
 
 
         <!-- LE Document Upload Section -->
-        <h3 class="blue-header" *ngIf="application?.applicationType.name == ApplicationTypeNames.FP && application?.applicationType?.hasLESection">Legal Entity Document Requirements</h3>
-        <section *ngIf="application?.applicationType.name == ApplicationTypeNames.FP" class="content-bottom">
+        <h3 class="blue-header" *ngIf="application?.applicationType?.hasLESection && !isOpenedByLGForApproval">Legal Entity Document Requirements</h3>
+        <section *ngIf="application?.applicationType?.hasLESection && !isOpenedByLGForApproval" class="content-bottom">
 
           <!-- if Private Corporation -->
           <section *ngIf="this.businessTypeIsPrivateCorporation()">
             <h4>Central Securities Register (shareholder register)</h4>
             <p>Provide a list of all shareholders, class of shares, number of voting and non-voting per shareholder, and date
-              shares issued/transferred/cancelled.</p>
-            <p><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All shareholders (individuals) holding 10% or greater voting shares in the
-              applicant corporation must submit completed <span *ngIf="this.isLiquor()">Personal History Summary</span><span
-                *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> forms below.</p>
+              shares issued/transferred/cancelled. See example:</p>
+              <img src="assets/central-securities-register-example.png" style="width:500px; margin: 10px; border: solid #e0e0e0 1px;">
             <app-file-uploader *ngIf="true || applicationId" documentType="CentralSecuritiesRegister"
               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
               (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event" [entityId]="applicationId"
               [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
             </app-file-uploader>
+            <p><strong><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All shareholders (individuals) holding 10% or greater voting shares in the
+              applicant corporation must submit completed <span *ngIf="this.isLiquor()">Personal History Summary</span><span
+                *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> forms below.</strong></p>
+
             <hr>
             <p>If one of the new shareholders is a private corporation, a public corporation, a society or a partnership,
               documentation to support the applicable business type must be submitted, even if the shareholder holds less than
@@ -148,16 +150,16 @@
 
           <!-- If Private Corporation, Public Corporation or Societies-->
           <section *ngIf="this.businessTypeIsCorporation() || this.businessTypeIsSociety()">
-            <h4>Register of Directors and Officers</h4>
-            <p>Provide a list of all current directors/officers by full legal name, position and date of appointment.</p>
-            <p><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All directors must submit a completed <span *ngIf="this.isLiquor()">Personal
-                History Summary</span><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> forms below.
-            </p>
-            <app-file-uploader *ngIf="true || applicationId" documentType="RegisterOfDirectorsAndOfficers"
+            <h4>Notice of Articles (or Register of Directors and Officers)</h4>
+            <p>Provide the Notice of Articles for your corporation. Alternatively, you can provide list of all current directors/officers by full legal name, position and date of appointment.</p>
+            <p *ngIf="this.isLiquor()"><strong>Directors and Officers are <u>not</u> required to submit a Personal History Summary form for liquor-related applications.</strong></p>
+            <app-file-uploader *ngIf="true || applicationId" documentType="NOA"
               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
-              (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event" [entityId]="applicationId"
-              [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
+              (numberOfUploadedFiles)="uploadedNOA = $event" [entityId]="applicationId"
+              [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'">
             </app-file-uploader>
+            <p *ngIf="!this.isLiquor()"><strong><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All directors must submit a completed Cannabis Associate Security Screening form below.</strong>
+          </p>
           </section>
 
           <!-- Sole Proprietor-->
@@ -196,20 +198,110 @@
           <!-- personal disclosure documents-->
 
 
+          <section *ngIf="this.isLiquor()">
+            <h3 class="blue-header"><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Personal History Summary Forms</h3>
+            <div class="content-bottom">
+
+                <p>
+                    Each person involved in the applicant’s legal entity structure must submit a Personal History
+                    Summary
+                    form and a copy of
+                    your Criminal Record Search completed by the RCMP or local Police Department. The form may also
+                    require
+                    you to submit copy
+                    of your driver’s abstract or a statutory declaration. See the form for full details.
+                </p>
 
 
-          <!-- private corporations need to provide the names of shareholders with less than 10% interest-->
-          <section *ngIf="this.businessTypeIsPrivateCorporation()">
-            <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
-            <p>Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide their full
-              legal name and date of birth.</p>
-            <app-file-uploader *ngIf="true || applicationId" documentType="IndividualsWithLessThan10"
-              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
-              (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event" [entityId]="applicationId"
-              [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
-            </app-file-uploader>
-          </section>
+                <h4>Personal History Summary Documents</h4>
+                <p>Each liquor associate must provide a complete <a
+                        href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb004_personal_history_summary.pdf"
+                        target="_blank">Personal History Summary Form</a>.</p>
+                <app-file-uploader *ngIf="application?.id" documentType="PHS"
+                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedPHS = $event"
+                    [entityId]="application.id"
+                    [uploadHeader]="'TO UPLOAD PERSONAL HISTORY SUMMARY FORMS, DRAG FILES HERE OR'">
+                </app-file-uploader>
+            </div>
+        </section>
 
+        <!-- Cannabis Associate Security Screening Forms -->
+        <section *ngIf="!this.isLiquor()">
+          <h3 class="blue-header"><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Cannabis Associate Security Screening Forms</h3>
+          <div class="content-bottom">
+              <p>
+                  Sole proprietors and associates of applicants for a non-medical cannabis licence are required to
+                  submit
+                  documentation for
+                  security screenings and/or financial integrity checks. Cannabis retail store licence applications
+                  cannot
+                  be processed until
+                  all required materials have been received.
+              </p>
+
+              <p>
+                  Please note, the security screening for sole proprietors and associates differs from the security
+                  verification for people
+                  seeking work in non-medical cannabis retail stores. The screening for associates considers the
+                  associate
+                  within the context
+                  of a larger organizational structure. The security verification for workers considers the worker as
+                  an
+                  individual apart
+                  from an organization. If a sole proprietor or associate seeks to work in a non-medical cannabis
+                  retail
+                  store, they must pass both.
+              </p>
+
+              <p>
+                  Cannabis Associate Security Screening documents are not required if you submit liquor related
+                  applications. If you do not provide
+                  Cannabis Associate Security Screening documents prior to your application submission, they will be
+                  requested via secure channels
+                  once your application has been received. Please note that the time to collect these documents
+                  directly
+                  impacts the time to process your application.
+              </p>
+
+              <p>Please provide the documents as outlined on <a
+                      href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/cannabis-resources-information/associate-forms"
+                      target="_blank">this page</a>.</p>
+
+              <h4>Cannabis Associate Security Screening
+              </h4>
+              <p>Each associate must provide a complete <a href=""></a></p>
+              <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
+                  [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+                  (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
+                  [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'">
+              </app-file-uploader>
+
+              <h4>Financial Integrity Documents</h4>
+              <p>Each associate must provide a complete a <a
+                      href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">Financial
+                      Integrity Form</a>.</p>
+              <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                  [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
+                  [entityId]="application.id"
+                  [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
+              </app-file-uploader>
+          </div>
+      </section>
+
+
+                  <!-- private corporations need to provide the names of shareholders with less than 10% interest-->
+                  <section *ngIf="this.businessTypeIsPrivateCorporation()">
+                    <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
+                    <p>Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide their full
+                      legal name and date of birth. They do not need to provide a Personal History Summary or Cannabis Associate Security Screening form.</p>
+                    <app-file-uploader *ngIf="true || applicationId" documentType="IndividualsWithLessThan10"
+                      fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+                      (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event" [entityId]="applicationId"
+                      [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
+                    </app-file-uploader>
+                  </section>
 
         </section>
 
@@ -247,7 +339,7 @@
                     Process
                   </a>. A list of all currently licensed Cannabis Retail Stores in British
                   Columbia can be found
-                  <a href="https://justice.gov.bc.ca/cannabislicensing/map" target="_blank">here</a>.
+                  <a href="map" target="_blank">here</a>.
                 </p>
               </section>
               <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
@@ -420,7 +512,7 @@
                     <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
                   </mat-radio-group>
                 </app-field>
-                
+
                 <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
                   [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status" [isFullWidth]="true"
                   *ngIf="application?.applicationType?.hasALRQuestion">
@@ -643,8 +735,8 @@
               </app-business-plan>
             </section>
 
-            <div *ngIf="!isFormControlDisabled('isHasPatio')">
-              <app-field label="Will the application have a patio?"
+            <div *ngIf="!isFormControlDisabled('isHasPatio') || application?.applicationType?.showPatio">
+              <app-field label="Will the establishment have a patio?"
                 [valid]="isValidOrNotTouched('isHasPatio')" [showChevrons]="false" errorMessage="Specify if application will have a patio"
                 [isFullWidth]="true">
                 <mat-radio-group formControlName="isHasPatio">
@@ -1832,7 +1924,7 @@
                 <span class="ml-2" *ngIf="isRAS()">
                   I understand and affirm that all of the information provided is true and complete
                 </span>
-              </mat-checkbox>              
+              </mat-checkbox>
             </app-field>
           </ng-container>
           <ng-container *ngIf="application?.applicationType?.showLiquorDeclarations">
@@ -1890,6 +1982,8 @@
 
         <!-- Next Steps -->
 
+
+
         <h3 *ngIf="htmlContent?.nextSteps" class="blue-header">
           What happens next?
         </h3>
@@ -1945,7 +2039,7 @@
         </section>
 
         <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg"
-          *ngIf="isOpenedByLGForApproval || lgApprovalDecisionMade() || lgHasReviewedZoning()">
+          *ngIf="isOpenedByLGForApproval">
           <app-lg-in-confirmation-of-receipt
             *ngIf="application && application?.applicationType?.isShowLGINApproval  || lgApprovalDecisionMade()"
             [application]="application" [isOpenedByLGForApproval]="isOpenedByLGForApproval" [htmlContent]="htmlContent" [disableForm]="lgApprovalDecisionMade()">
@@ -1983,7 +2077,7 @@
           </div>
         </section>
 
-        <section *ngIf="lGHasApproved()">
+        <section *ngIf="lGHasApproved() && !isOpenedByLGForApproval">
           <br>
           <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
           <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
