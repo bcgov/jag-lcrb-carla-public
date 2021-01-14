@@ -174,12 +174,35 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.IsSampleSizeCompliant = item.AdoxioIssamplesizecompliant;
                 result.EventCategory = (EventCategory?)item.AdoxioEventcategory;
                 result.MarketEventType = (MarketEventType?)item.AdoxioMarketeventtype;
+                // temporary use area (TUA) events
+                result.TuaEventType = (TuaEventType?)item.AdoxioTuaeventtype;
+                result.IsClosedToPublic = item.AdoxioIsclosedtopublic;
+                result.IsWedding = item.AdoxioIswedding;
+                result.IsNetworkingParty = item.AdoxioIsnetworkingparty;
+                result.IsConcert = item.AdoxioIsconcert;
+                result.IsBanquet = item.AdoxioIsbanquet;
+                result.IsAmplifiedSound = item.AdoxioIsamplifiedsound;
+                result.IsDancing = item.AdoxioIsdancing;
+                result.IsReception = item.AdoxioIsreception;
+                result.IsLiveEntertainment = item.AdoxioIsliveentertainment;
+                result.IsGambling = item.AdoxioIsgambling;
+                result.IsNoneOfTheAbove = item.AdoxioIsnoneoftheabove;
+                result.IsAgreement1 = item.AdoxioIsagreement1;
+                result.IsAgreement2 = item.AdoxioIsagreement2;
+                result.EventLocations = new List<LicenceEventLocation>();
             }
 
             MicrosoftDynamicsCRMadoxioEventscheduleCollection eventSchedules = dynamicsClient.GetEventSchedulesByEventId(result.Id);
             foreach (var schedule in eventSchedules.Value)
             {
                 result.Schedules.Add(schedule.ToViewModel());
+            }
+
+            // TUA event locations
+            MicrosoftDynamicsCRMadoxioEventlocationCollection eventLocations = dynamicsClient.GetEventLocationsByEventId(result.Id);
+            foreach (var loc in eventLocations.Value)
+            {
+                result.EventLocations.Add(loc.ToViewModel());
             }
 
             return result;
