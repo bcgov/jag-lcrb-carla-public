@@ -191,7 +191,7 @@ namespace Gov.Lclb.Cllb.Geocoder
                 foreach (var license in licences)
                 {
                     if (license.AdoxioLicenceType != null &&
-                        license.AdoxioLicenceType.AdoxioName.Equals("Cannabis Retail Store") &&
+                        (license.AdoxioLicenceType.AdoxioName.Equals("Cannabis Retail Store") || license.AdoxioLicenceType.AdoxioName.Equals("Section 119 Authorization")) &&
                         license._adoxioEstablishmentValue != null)
                     {
                         var establishment = _dynamics.GetEstablishmentById(license._adoxioEstablishmentValue);
