@@ -13,13 +13,13 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CateringApplicationPersonnelNameChanges
+Feature: CateringApplicationPersonnelEmailChanges
     As a logged in business user
     I want to pay the first year catering licence fee
-    And submit personnel name changes for different business types
+    And submit personnel email changes for different business types
 
-@catering @partnership @cateringpersonnelnamechange
-Scenario: UAT Catering Personnel Name Change (Partnership)
+@catering @partnership @cateringemail
+Scenario: UAT Catering Personnel Email Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
@@ -32,14 +32,12 @@ Scenario: UAT Catering Personnel Name Change (Partnership)
     And the application is approved
     And I pay the licensing fee 
     And I click on the link for Dashboard
-    And I request a personnel name change for a partnership
-    And I click on the link for Dashboard
-    And I confirm that the director name has been updated
+    And I change a personnel email address for a partnership
     And the account is deleted
     Then I see the login page
 
-@catering @privatecorporation @cateringpersonnelnamechange
-Scenario: UAT Catering Personnel Name Change (Private Corporation)
+@catering @privatecorporation @cateringemail
+Scenario: UAT Catering Personnel Email Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
@@ -52,14 +50,12 @@ Scenario: UAT Catering Personnel Name Change (Private Corporation)
     And the application is approved
     And I pay the licensing fee 
     And I click on the link for Dashboard
-    And I request a personnel name change for a private corporation
-    And I click on the link for Dashboard
-    And I confirm that the director name has been updated
+    And I change a personnel email address for a private corporation
     And the account is deleted
     Then I see the login page
 
-@catering @publiccorporation @cateringpersonnelnamechange
-Scenario: UAT Catering Personnel Name Change (Public Corporation)
+@catering @publiccorporation @cateringemail
+Scenario: UAT Catering Personnel Email Change (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
@@ -72,14 +68,12 @@ Scenario: UAT Catering Personnel Name Change (Public Corporation)
     And the application is approved
     And I pay the licensing fee 
     And I click on the link for Dashboard
-    And I request a personnel name change for a public corporation
-    And I click on the link for Dashboard
-    And I confirm that the director name has been updated
+    And I change a personnel email address for a public corporation
     And the account is deleted
     Then I see the login page
 
-@catering @society @cateringpersonnelnamechange
-Scenario: UAT Catering Personnel Name Change (Society)
+@catering @society @cateringemail
+Scenario: UAT Catering Personnel Email Change (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
@@ -90,16 +84,14 @@ Scenario: UAT Catering Personnel Name Change (Society)
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee
+    And I pay the licensing fee 
     And I click on the link for Dashboard
-    And I request a personnel name change for a society
-    And I click on the link for Dashboard
-    And I confirm that the director name has been updated
+    And I change a personnel email address for a society
     And the account is deleted
     Then I see the login page
 
-@catering @soleproprietorship @cateringpersonnelnamechange
-Scenario: UAT Catering Personnel Name Change (Sole Proprietorship)
+@catering @soleproprietorship @cateringemail
+Scenario: UAT Catering Personnel Email Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
@@ -110,20 +102,18 @@ Scenario: UAT Catering Personnel Name Change (Sole Proprietorship)
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee
+    And I pay the licensing fee 
     And I click on the link for Dashboard
-    And I request a personnel name change for a sole proprietorship
-    And I click on the link for Dashboard
-    And I confirm that the director name has been updated
+    And I change a personnel email address for a sole proprietorship
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplicationPersonnelNameChanges.feature")]
+    [FeatureFile("./CateringApplicationPersonnelEmailChanges_archived.feature")]
     [Collection("Liquor")]
-    public sealed class CateringApplicationPersonnelNameChanges : TestBase
+    public sealed class _archive_CateringApplicationPersonnelEmailChanges : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
