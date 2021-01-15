@@ -371,11 +371,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     try
                     {
                         // get establishments                                  
-                        string licenseFilter = $"statuscode eq 1 and _adoxio_licencetype_value in ({licenceTypeId}"; // only active licenses
+                        string licenseFilter = $"statuscode eq 1 and _adoxio_licencetype_value eq {licenceTypeId}"; // only active licenses
 
                         if (alternateLicenceTypeId != null)
                         {
-                            licenseFilter += $", {alternateLicenceTypeId}";
+                            licenseFilter += $" or _adoxio_licencetype_value eq {alternateLicenceTypeId} and statuscode eq 1 ";
                         }
 
                         licenseFilter += $")";
