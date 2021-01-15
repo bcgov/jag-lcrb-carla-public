@@ -219,7 +219,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       isHasPatio: ['', []],
       hasCoolerAccess: ['', []],
       hasValidInterest: ['', []],
-      willhaveValidInterest: ['', []],
+      willHaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
       IsReadyProductNotVisibleOutside: ['', []],
       serviceAreas: ['', []],
@@ -688,7 +688,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       description2 += '\n';
       description2 += this.form.get('hasValidInterest').value ? 'Has valid interest = Yes' : 'Has valid interest = No';
       description2 += '\n';
-      description2 += this.form.get('willhaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
+      description2 += this.form.get('willHaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
     }
     else {
       description2 += this.application.description2;
@@ -1015,7 +1015,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       //  this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
       // }
 
-      //if (!this.form.get('willhaveValidInterest').value) {
+      //if (!this.form.get('willHaveValidInterest').value) {
       //  this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
       // }
 
