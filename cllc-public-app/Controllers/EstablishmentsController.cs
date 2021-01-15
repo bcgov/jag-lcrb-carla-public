@@ -375,10 +375,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                         if (alternateLicenceTypeId != null)
                         {
-                            licenseFilter += $" or _adoxio_licencetype_value eq {alternateLicenceTypeId} and statuscode eq 1 ";
+                            licenseFilter += $" or _adoxio_licencetype_value eq {alternateLicenceTypeId} and statuscode eq 1";
                         }
 
-                        licenseFilter += $")";
 
                         string[] licenseExpand = {"adoxio_LicenceType"};
 
