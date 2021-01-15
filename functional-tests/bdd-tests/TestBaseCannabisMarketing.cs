@@ -30,6 +30,24 @@ namespace bdd_tests
             string contactPhone = "5555555555";
             string contactEmail = "vp@cannabis_marketing.com";
 
+            // upload a central securities register
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+
+            // upload supporting business documentation
+            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+
+            // upload notice of articles
+            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+
+            // upload cannabis associate security screening
+            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[12]");
+
+            // upload financial integrity documents
+            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+
+            // upload shareholders < 10% interest
+            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
+
             if ((bizType != "a local government") && (bizType != "a university"))
             {
                 // enter name of federal producer
@@ -84,13 +102,13 @@ namespace bdd_tests
             }
 
             // upload the Associates form
-            FileUpload("associates.pdf", "(//input[@type='file'])[3]");
+            FileUpload("associates.pdf", "(//input[@type='file'])[21]");
 
             // upload the Notice of Articles
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[5]");
+            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[23]");
 
             // upload the Central Securities Register
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[23]");
 
             // enter the contact title
             NgWebElement uiContactPersonRole = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
