@@ -1287,27 +1287,26 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // If the patio checkbox is false then do not include the dynamic fields in validation.
     if (this.form.get('isHasPatio') && this.form.get('isHasPatio').enabled && !this.form.get('isHasPatio').value) {
       useDynamicValidation = false;
-    }
-
-    // loop through the dynamic form, updating validators.
-    if (this.dynamicsForm) {
-      this.dynamicsForm.tabs.forEach(function (tab) {
-        tab.sections.forEach(function (section) {
-          if (section.fields) {
-            section.fields.forEach(function (field) {
-              this.form.controls[field.datafieldname].clearValidators();
-              if (useDynamicValidation === true) {
-                if (field.required) {
-                  this.form.controls[field.datafieldname].setValidators([Validators.required]);
+    } else {
+      // loop through the dynamic form, updating validators.
+      if (this.dynamicsForm) {
+        this.dynamicsForm.tabs.forEach(function (tab) {
+          tab.sections.forEach(function (section) {
+            if (section.fields) {
+              section.fields.forEach(function (field) {
+                this.form.controls[field.datafieldname].clearValidators();
+                if (useDynamicValidation === true) {
+                  if (field.required) {
+                    this.form.controls[field.datafieldname].setValidators([Validators.required]);
+                  }
                 }
-              }
-            }, this);
-          }
+              }, this);
+            }
 
+          }, this);
         }, this);
-      }, this);
+      }
     }
-
   }
 
   showValidInterestforTransfer(){
