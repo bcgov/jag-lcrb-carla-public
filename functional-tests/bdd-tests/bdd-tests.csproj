@@ -198,13 +198,13 @@
     <None Update="ReviewAccountProfileData.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ReviewOrgStructureDeletion.feature">
+    <None Update="_archive_ReviewOrgStructureDeletion.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ReviewOrgStructureData.feature">
+    <None Update="_archive_ReviewOrgStructureData.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ReviewSecurityScreening.feature">
+    <None Update="_archive_ReviewSecurityScreening.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ValidationMarketEvent.feature">
@@ -363,7 +363,7 @@
     <None Update="CateringApplication_society.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="MultiLevelCRSApplicationPrivateCorp.feature">
+    <None Update="_archive_MultiLevelCRSApplicationPrivateCorp.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LicenceCRS_privatecorp.feature">
@@ -381,7 +381,7 @@
     <None Update="LicenceCatering_sole_proprietor.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="PrivateCorporationOrgStructure.feature">
+    <None Update="_archive_PrivateCorporationOrgStructure.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Director_shareholder_samenamechange.feature">
