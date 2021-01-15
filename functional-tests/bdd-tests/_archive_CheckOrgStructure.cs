@@ -31,7 +31,7 @@ namespace bdd_tests
 {
     [FeatureFile("./CheckOrgStructure_archived.feature")]
     [Collection("Liquor")]
-    public sealed class CheckOrgStructure : TestBase
+    public sealed class _archive_CheckOrgStructure : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
