@@ -36,12 +36,35 @@ namespace bdd_tests
 
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
+
+            string patioCompDescription = "Sample patio comp description";
+            string patioLocationDescription = "Sample patio location description";
+            string patioAccessDescription = "Sample patio access description";
+            string patioLiquorCarriedDescription = "Sample liquor carried description";
+            string patioAccessControlDescription = "Sample patio access control description";
+
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
+            // upload a central securities register
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+
+            // upload supporting business documentation
+            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+
+            // upload notice of articles
+            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+
+            // upload personal history form
+            FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+
+            // upload shareholders < 10% interest
+            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+
+            /*
             if ((bizType == "public corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "private corporation"))
             {
                 // upload register of directors and officers
@@ -59,6 +82,7 @@ namespace bdd_tests
                 // upload shareholders holding less than 10% interest
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[12]");
             }
+            */
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -106,6 +130,43 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
+            // enter the patio comp description
+            NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
+            uiPatioCompDescription.SendKeys(patioCompDescription);
+
+            // enter the patio location description
+            NgWebElement uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
+            uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
+            // enter the patio access description
+            NgWebElement uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
+            uiPatioAccessDescription.SendKeys(patioAccessDescription);
+
+            // click patio liquor is carried checkbox
+            NgWebElement uiPatioIsLiquorCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox#patioIsLiquorCarried"));
+            uiPatioIsLiquorCarried.Click();
+
+            // enter patio liquor carried description
+            NgWebElement uiPatioLiquorCarriedDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
+            uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
+
+            // enter patio access control description
+            NgWebElement uiPatioAccessControlDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
+            uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
+
+            // click fixed option
+            // NgWebElement uiFixedOption = ngDriver.FindElement(By.Id("mat-button-toggle-9-button"));
+            NgWebElement uiFixedOption = ngDriver.FindElement(By.XPath("//button[@id='mat-button-toggle-9-button']/div"));
+            uiFixedOption.Click();
+
+            // click portable option
+            // NgWebElement uiPortableOption = ngDriver.FindElement(By.Id("mat-button-toggle-10-button"));
+            // uiPortableOption.Click();
+
+            // click interior option
+            // NgWebElement uiInteriorOption = ngDriver.FindElement(By.Id("mat-button-toggle-11-button"));
+            // uiInteriorOption.Click();
+
             if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
             {
                 // upload signage document
@@ -114,7 +175,7 @@ namespace bdd_tests
             else if (bizType == "private corporation")
             {
                 // upload signage document
-                FileUpload("signage.pdf", "(//input[@type='file'])[14]");
+                FileUpload("signage.pdf", "(//input[@type='file'])[17]");
             }
             else if (bizType == "sole proprietorship")
             {
@@ -130,7 +191,7 @@ namespace bdd_tests
             else if (bizType == "private corporation")
             {
                 // upload floor plan
-                FileUpload("floor_plan.pdf", "(//input[@type='file'])[17]");
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[20]");
             }
             else if (bizType == "sole proprietorship")
             {
@@ -150,6 +211,7 @@ namespace bdd_tests
             NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willhaveValidInterest']"));
             uiFutureValidInterest.Click();
 
+            /*
             if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
             {
                 // upload proof of valid interest
@@ -167,6 +229,7 @@ namespace bdd_tests
                 // upload proof of valid interest
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
             }
+            */
 
             // enter the role of the application contact
             NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));

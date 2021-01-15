@@ -74,7 +74,7 @@ Scenario: DEV CRS Release (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@cannabis @validation @release
+@cannabis @validation 
 Scenario: UAT CRS Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
