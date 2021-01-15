@@ -279,7 +279,7 @@
     <None Update="LGApprovalPicnicArea.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CheckOrgStructure.feature">
+    <None Update="_archive_CheckOrgStructure.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Payments.feature">
