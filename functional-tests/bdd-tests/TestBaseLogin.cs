@@ -30,12 +30,13 @@ namespace bdd_tests
         private void DoLogin(string businessType)
         {
             ngDriver.Navigate().GoToUrl($"{baseUri}dashboard");
+
             /* 
             Page Title: Terms of Use
             */
 
             // select the acceptance checkbox
-            NgWebElement uiTermsOfUseCheckbox = ngDriver.FindElement(By.CssSelector("input.terms-cb[type='checkbox']"));
+            NgWebElement uiTermsOfUseCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
             uiTermsOfUseCheckbox.Click();
 
             // click on the Continue button
