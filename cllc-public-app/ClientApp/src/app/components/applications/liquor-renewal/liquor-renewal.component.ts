@@ -43,6 +43,12 @@ const ValidationErrorMap = {
   contactPersonPhone: 'Please enter the business contact\'s 10-digit phone number',
   authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
   signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
+
+  ldbOrderTotals: 'Please provide LDB Order Totals ($0 - $10,000,000)',
+  ldbOrderTotalsConfirm: 'Please confirm LDB Order Totals matches',
+  volumeProduced: 'Please provide the total volume produced (in litres)',
+  volumeDestroyed: 'Please provide the total volume destroyed (in litres and included in production volume)',
+
 }
 
 @Component({
@@ -153,7 +159,8 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         this.licenceDataService.getLicenceById(data.assignedLicence.id)
           .pipe(takeWhile(() => this.componentActive))
           .subscribe((data: License) => {
-            if (data.licenseSubCategory !== null &&
+            if (data.licenseType !== 'Manufacturer' &&
+              data.licenseSubCategory !== null &&
               data.licenseSubCategory !== 'Independent Wine Store' &&
               data.licenseSubCategory !== 'Tourist Wine Store' &&
               data.licenseSubCategory !== 'Special Wine Store') {
@@ -212,8 +219,6 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     const label = this.isSubcategory('Brewery') ? 'hectolitres' : 'litres';
     return `What was your ${this.licenseSubCategory}'s total volume produced (in ${label}) between January 1 and December 31?`;
   }
-
-
 
   canDeactivate(): Observable<boolean> | boolean {
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
