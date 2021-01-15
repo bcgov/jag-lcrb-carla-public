@@ -29,7 +29,7 @@ Scenario: Check Organization Structure (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CheckOrgStructure.feature")]
+    [FeatureFile("./CheckOrgStructure_archived.feature")]
     [Collection("Liquor")]
     public sealed class CheckOrgStructure : TestBase
     {

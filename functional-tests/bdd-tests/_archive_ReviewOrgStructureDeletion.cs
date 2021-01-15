@@ -85,9 +85,9 @@ Scenario: Deletion from Org Structure (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./ReviewOrgStructureDeletion.feature")]
+    [FeatureFile("./ReviewOrgStructureDeletion_archived.feature")]
     [Collection("Cannabis")]
-    public sealed class ReviewOrgStructureDeletion : TestBase
+    public sealed class _archive_ReviewOrgStructureDeletion : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LoggedInToDashboard(string businessType)

@@ -86,9 +86,9 @@ Scenario: Data for Org Structure (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./ReviewOrgStructureData.feature")]
+    [FeatureFile("./ReviewOrgStructureData_archived.feature")]
     [Collection("Cannabis")]
-    public sealed class ReviewOrgStructureData : TestBase
+    public sealed class _archive_ReviewOrgStructureData : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LoggedInToDashboard(string businessType)

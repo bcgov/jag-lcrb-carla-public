@@ -92,9 +92,9 @@ Scenario: Validation for Security Screening (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./ReviewSecurityScreening.feature")]
+    [FeatureFile("./ReviewSecurityScreening_archived.feature")]
     [Collection("Cannabis")]
-    public sealed class ReviewSecurityScreening : TestBase
+    public sealed class _archive_ReviewSecurityScreening : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LoggedInToDashboard(string businessType)
