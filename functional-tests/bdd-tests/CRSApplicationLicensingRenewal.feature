@@ -134,6 +134,40 @@ Scenario: UAT Positive CRS Licence Renewal Yesterday (Private Corporation)
 #-----------------------
 
 @cannabis @licencerenewal
+Scenario: DEV Negative CRS Licence Renewal 45 Days Ago (Private Corporation)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for a private corporation
+    And I complete the Cannabis Retail Store application for a private corporation
+    And I click on the Submit button
+    And I enter the payment information
+    And the application is approved
+    And I pay the licensing fee 
+    And the expiry date is changed using the Dynamics workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
+    And I click on the link for Reinstate Licence
+    And I renew the licence with negative responses for Cannabis
+    And the account is deleted
+    Then I see the login page
+
+@cannabis @licencerenewal
+Scenario: DEV Positive CRS Licence Renewal 45 Days Ago (Private Corporation)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Cannabis Retail Store
+    And I complete the eligibility disclosure
+    And I review the account profile for a private corporation
+    And I complete the Cannabis Retail Store application for a private corporation
+    And I click on the Submit button
+    And I enter the payment information
+    And the application is approved
+    And I pay the licensing fee 
+    And the expiry date is changed using the Dynamics workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
+    And I click on the link for Reinstate Licence
+    And I renew the licence with positive responses for Cannabis
+    And the account is deleted
+    Then I see the login page
+
+@cannabis @licencerenewal
 Scenario: UAT Negative CRS Licence Renewal 45 Days Ago (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store

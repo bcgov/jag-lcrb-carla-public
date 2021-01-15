@@ -1,23 +1,15 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.Utility;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using Google.Protobuf;
-using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -25,25 +17,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/le-connections")]
     [ApiController]
     [Authorize(Policy = "Business-User")]
-    public class LEConnectionsController : ControllerBase
+    public class LeConnectionsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IMemoryCache _cache;
-        private readonly string _encryptionKey;
-        private readonly FileManagerClient _fileManagerClient;
 
-        public LEConnectionsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IMemoryCache memoryCache)
+        public LeConnectionsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
         {
             _cache = memoryCache;
             _configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
-            _encryptionKey = _configuration["ENCRYPTION_KEY"];
             _logger = loggerFactory.CreateLogger(typeof(LegalEntitiesController));
-            _fileManagerClient = fileClient;
         }
 
         private List<SecurityScreeningStatusItem> GetConnectionsScreeningData(List<MicrosoftDynamicsCRMcontact> contacts)
@@ -57,16 +45,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 DateTimeOffset? dateSubmitted = null;
 
 
-                if (!addedContacts.Any(item => item == contact.Contactid))
+                if (contact?.Contactid != null && !addedContacts.Contains(contact.Contactid))
                 {
                     // liquor
-                    if (contact?.AdoxioPhscomplete == (int)YesNoOptions.Yes)
+                    if (contact.AdoxioPhscomplete == (int)YesNoOptions.Yes)
                     {
                         dateSubmitted = contact.AdoxioPhsdatesubmitted;
                     }
 
                     // cannabis
-                    if (contact?.AdoxioCascomplete == (int)YesNoOptions.Yes)
+                    if (contact.AdoxioCascomplete == (int)YesNoOptions.Yes)
                     {
                         dateSubmitted = contact.AdoxioCasdatesubmitted;
                     }
@@ -112,33 +100,52 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             SecurityScreeningSummary result = new SecurityScreeningSummary();
 
             // determine how many of each licence there are.
-            int cannabisLicenceCount = licences.Count(x => x.AdoxioLicenceType.AdoxioName.ToUpper().Contains("CANNABIS"));
-            int liquorLicenceCount = licences.Count() - cannabisLicenceCount;
+            int cannabisLicenceCount = 0;
+            int liquorLicenceCount = 0; 
+            
+
+            if (licences != null && licences.Count() > 0)
+            {
+                cannabisLicenceCount = licences.Count(x => x.AdoxioLicenceType.AdoxioName.ToUpper().Contains("CANNABIS"));
+                liquorLicenceCount = licences.Count() - cannabisLicenceCount;
+            }
 
             // determine how many applications of each type there are.
-            int cannabisApplicationCount = applications.Count(x => x.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS"));
-            int liquorApplicationCount = applications.Count() - cannabisApplicationCount;
+            int cannabisApplicationCount = 0;
+            int liquorApplicationCount = 0;
+
+            if (applications != null && applications.Count() > 0)
+            {
+                cannabisApplicationCount = applications.Count(x => x.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS"));
+                liquorApplicationCount = applications.Count() - cannabisApplicationCount;
+            }
+            
 
             if (cannabisLicenceCount > 0 || cannabisApplicationCount > 0)
             {
                 var data = securityItems.Select(item => {
-                    item.IsComplete =  (item?.Contact?.AdoxioCascomplete == (int)YesNoOptions.Yes);
+                    item.IsComplete =  (item.Contact?.AdoxioCascomplete == (int)YesNoOptions.Yes);
                     return item;
                 });
-                result.Cannabis = new SecurityScreeningCategorySummary();
-                result.Cannabis.CompletedItems = data.Where(item => item.IsComplete).ToList();
-                result.Cannabis.OutstandingItems = data.Where(item => !item.IsComplete).ToList();
+                result.Cannabis = new SecurityScreeningCategorySummary()
+                {
+                    CompletedItems = data.Where(item => item.IsComplete).ToList(),
+                    OutstandingItems = data.Where(item => !item.IsComplete).ToList()
+                };
             }
 
             if (liquorLicenceCount > 0 || liquorApplicationCount > 0)
             {
                 var data = securityItems.Select(item => {
-                    item.IsComplete =  (item?.Contact?.AdoxioPhscomplete == (int)YesNoOptions.Yes);
+                    item.IsComplete =  (item.Contact?.AdoxioPhscomplete == (int)YesNoOptions.Yes);
                     return item;
                 });
-                result.Liquor = new SecurityScreeningCategorySummary();
-                result.Liquor.CompletedItems = data.Where(item => item.IsComplete).ToList();
-                result.Liquor.OutstandingItems = data.Where(item => !item.IsComplete).ToList(); ;
+                result.Liquor = new SecurityScreeningCategorySummary()
+                {
+                    CompletedItems = data.Where(item => item.IsComplete).ToList(),
+                    OutstandingItems = data.Where(item => !item.IsComplete).ToList()
+                };
+
             }
 
             return new JsonResult(result);
