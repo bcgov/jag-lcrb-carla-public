@@ -251,7 +251,8 @@
             <div class="content-bottom">
                 <p>Complete this section when shares have been transferred within the licensee corporation or holding
                     companies or there has been an amalgamation of companies within the licensee corporation but no new
-                    shareholders have been added (holding companies or individuals).</p>
+                    shareholders have been added (holding companies or individuals). See example:</p>
+                    <img src="assets/central-securities-register-example.png" style="width:500px; margin: 10px; border: solid #e0e0e0 1px;">
                 <p>Third party operators should also complete this section when an internal share transfer or an
                     amalgamation occurs.</p>
 
@@ -264,13 +265,18 @@
                     [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
                 </app-file-uploader>
 
-                <h4>Updated Register of Directors and Officers for the licensee corporation or holding company</h4>
+                <h4>Updated Notice of Articles (or Register of Directors and Officers)</h4>
+                <p>Provide the Notice of Articles for your corporation. Alternatively, you can provide list of all current directors/officers by full legal name, position and date of appointment.</p>
+                <p *ngIf="hasLiquor"><strong>Directors and Officers are <u>not</u> required to submit a Personal History Summary form for liquor-related applications.</strong></p>
+
                 <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
                     [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
                     [entityId]="application.id"
                     [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
                 </app-file-uploader>
+                <p *ngIf="hasCannabis"><strong><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All directors must submit a completed Cannabis Associate Security Screening form below.</strong>
+                </p>
 
                 <hr>
                 <p>If the change is the result of an internal amalgamation, attach:</p>
@@ -415,19 +421,14 @@
                     Associate
                     Security Screening form and required documents as described below</p>
 
-                <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
-                <p>Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide
-                    their
-                    full legal name and date of birth.</p>
-                <app-file-uploader *ngIf="application?.id" documentType="IndividualsWithLessThan10"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
-                </app-file-uploader>
-
-
-
+                      <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
+                      <p>Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide their full
+                        legal name and date of birth. They do not need to provide a Personal History Summary or Cannabis Associate Security Screening form.</p>
+                      <app-file-uploader *ngIf="true || applicationId" documentType="IndividualsWithLessThan10"
+                        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+                        (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event" [entityId]="applicationId"
+                        [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
+                      </app-file-uploader>
             </div>
 
         </section>
