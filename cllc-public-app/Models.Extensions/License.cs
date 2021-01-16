@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gov.Lclb.Cllb.Public.Extensions;
+using Microsoft.Rest;
+using Serilog;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -19,23 +21,30 @@ namespace Gov.Lclb.Cllb.Public.Models
             var endorsementsList = new List<ViewModels.Endorsement>();
             string filter = $"_adoxio_licence_value eq {licenceId}";
             string[] expand = { "adoxio_ApplicationType" };
-            MicrosoftDynamicsCRMadoxioEndorsementCollection endorsementsCollection = dynamicsClient.Endorsements.Get(filter: filter, expand: expand);
-            if (endorsementsCollection.Value.Count > 0)
+            try
             {
-                foreach (var item in endorsementsCollection.Value)
+                MicrosoftDynamicsCRMadoxioEndorsementCollection endorsementsCollection = dynamicsClient.Endorsements.Get(filter: filter, expand: expand);
+                if (endorsementsCollection.Value.Count > 0)
                 {
-                    if (item.AdoxioApplicationType != null)
+                    foreach (var item in endorsementsCollection.Value)
                     {
-                        var endorsement = new ViewModels.Endorsement
+                        if (item.AdoxioApplicationType != null)
                         {
-                            ApplicationTypeId = item.AdoxioApplicationType.AdoxioApplicationtypeid,
-                            ApplicationTypeName = item.AdoxioApplicationType.AdoxioName,
-                            EndorsementId = item.AdoxioEndorsementid,
-                            EndorsementName = item.AdoxioName
-                        };
-                        endorsementsList.Add(endorsement);
+                            var endorsement = new ViewModels.Endorsement
+                            {
+                                ApplicationTypeId = item.AdoxioApplicationType.AdoxioApplicationtypeid,
+                                ApplicationTypeName = item.AdoxioApplicationType.AdoxioName,
+                                EndorsementId = item.AdoxioEndorsementid,
+                                EndorsementName = item.AdoxioName
+                            };
+                            endorsementsList.Add(endorsement);
+                        }
                     }
                 }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                Log.Logger.Error(httpOperationException, $"Error getting endorsements for licence {licenceId}");
             }
 
             return endorsementsList;
