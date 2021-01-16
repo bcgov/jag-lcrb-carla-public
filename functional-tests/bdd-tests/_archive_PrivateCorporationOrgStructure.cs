@@ -191,9 +191,9 @@ Scenario: Confirm org structure records not duplicated (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./PrivateCorporationOrgStructure.feature")]
+    [FeatureFile("./PrivateCorporationOrgStructure_archived.feature")]
     [Collection("Cannabis")]
-    public sealed class PrivateCorporationOrgStructure : TestBase
+    public sealed class _archive_PrivateCorporationOrgStructure : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
