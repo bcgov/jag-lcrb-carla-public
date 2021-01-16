@@ -22,6 +22,51 @@
     And the account is deleted
     Then I see the login page
 
+ @cateringevent @society @noapproval
+ Scenario: DEV No Approval Event Authorization Request (Society)
+    Given I am logged in to the dashboard as a society
+    And I click on the Start Application button for Catering
+    And I review the account profile for a society
+    And I complete the Catering application
+    And I click on the Submit button
+    And I enter the payment information
+    And the application is approved
+    And I pay the licensing fee 
+    And I request an event authorization that doesn't require approval
+    And the event history is updated correctly for an application without approval
+    And the account is deleted
+    Then I see the login page
+
+ @cateringevent @partnership @noapproval
+ Scenario: DEV No Approval Event Authorization Request (Partnership)
+    Given I am logged in to the dashboard as a partnership
+    And I click on the Start Application button for Catering
+    And I review the account profile for a partnership
+    And I complete the Catering application
+    And I click on the Submit button
+    And I enter the payment information
+    And the application is approved
+    And I pay the licensing fee  
+    And I request an event authorization that doesn't require approval
+    And the event history is updated correctly for an application without approval
+    And the account is deleted
+    Then I see the login page
+
+  @cateringevent @soleproprietorship @noapproval
+  Scenario: DEV No Approval Event Authorization Request (Sole Proprietorship)
+    Given I am logged in to the dashboard as a sole proprietorship
+    And I click on the Start Application button for Catering
+    And I review the account profile for a sole proprietorship
+    And I complete the Catering application
+    And I click on the Submit button
+    And I enter the payment information
+    And the application is approved
+    And I pay the licensing fee 
+    And I request an event authorization that doesn't require approval
+    And the event history is updated correctly for an application without approval
+    And the account is deleted
+    Then I see the login page
+
  #@cateringevent @partnership @noapproval
  #Scenario: UAT No Approval Event Authorization Request (Partnership)
  #   Given I am logged in to the dashboard as a partnership

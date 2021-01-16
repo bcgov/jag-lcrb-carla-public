@@ -264,13 +264,13 @@
     <None Update="CateringApplicationLicenseeRepresentative.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CateringApplicationPersonnelEmailChanges.feature">
+    <None Update="_archive_CateringApplicationPersonnelEmailChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CombinedCateringCRSApplications.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationPersonnelEmailChanges.feature">
+    <None Update="_archive_CRSApplicationPersonnelEmailChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LGApprovalLRSRelocation.feature">
@@ -306,7 +306,7 @@
     <None Update="CateringApplicationBrandingChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CateringApplicationPersonnelNameChanges.feature">
+    <None Update="_archive_CateringApplicationPersonnelNameChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationThirdParty.feature">
@@ -327,7 +327,7 @@
     <None Update="CRSApplicationBrandingChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplicationPersonnelNameChanges.feature">
+    <None Update="_archive_CRSApplicationPersonnelNameChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CRSApplicationStoreRelocation.feature">
