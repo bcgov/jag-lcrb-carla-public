@@ -5,21 +5,19 @@
     </div>
     <div [formGroup]="form" class="application-wrapper">
         <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
-        <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
-            THE APPLICATION</h3>
+        <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING THE APPLICATION</h3>
         <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
             <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
         </section>
         <section *ngIf="form.get('ldbOrderTotals')">
             <p><strong>Please provide the sales information for your renewal period:</strong></p>
-            <app-field label="LDB Order Totals" [required]="true"
-                [valid]="form.get('ldbOrderTotals').valid || !form.get('ldbOrderTotals').touched"
+            <app-field label="LDB Order Totals" [required]="true" [valid]="isValidOrNotTouched('ldbOrderTotals')"
                 errorMessage="Please enter the LDB Order Totals ($0 - $10,000,000)">
                 <input class="form-control" style="width: 350px;" type="text" formControlName="ldbOrderTotals"
                     prefix="$" thousandSeparator="," mask="separator">
             </app-field>
             <app-field label="Confirm LDB Order Totals" [required]="true"
-                [valid]="(form.get('ldbOrderTotalsConfirm').valid || !form.get('ldbOrderTotalsConfirm').touched) && form.get('ldbOrderTotals').value === form.get('ldbOrderTotalsConfirm').value"
+                [valid]="isValidOrNotTouched('ldbOrderTotalsConfirm') && form.get('ldbOrderTotals').value === form.get('ldbOrderTotalsConfirm').value"
                 errorMessage="Please confirm LDB Order Totals matches">
                 <input class="form-control" style="width: 350px;" type="text" formControlName="ldbOrderTotalsConfirm"
                     prefix="$" thousandSeparator="," mask="separator">
@@ -43,7 +41,8 @@
                     [disableUploads]="form.get('isManufacturedMinimum').value" [enableFileDeletion]="true"
                     [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                     entityName="application" [extensions]="['pdf']" [entityId]="applicationId"
-                    [uploadHeader]="'TO UPLOAD DISCRETION LETTER, DRAG FILES HERE OR'">
+                    [uploadHeader]="'TO UPLOAD DISCRETION LETTER, DRAG FILES HERE OR'"
+                    (numberOfUploadedFiles)="uploadedDiscretionLetter = $event">
                 </app-file-uploader>
                 <hr />
             </section>
@@ -73,13 +72,13 @@
             <hr />
             <section class="w-100">
                 <div>
-                    <app-field *ngIf="form.controls['volumeProduced']" [label]="getVolumeLabel()" [required]="true"
+                    <app-field *ngIf="form.get('volumeProduced')" [label]="getVolumeLabel()" [required]="true"
                         [valid]="isValidOrNotTouched('volumeProduced')">
                         <input class="form-control" type="text" formControlName="volumeProduced" id="volumeProduced"
                             mask="0*">
                     </app-field>
                 </div>
-                <div *ngIf="form.controls['volumeDestroyed']">
+                <div *ngIf="form.get('volumeDestroyed')">
                     <app-field
                         label="What was the total volume destroyed (in litres and included in production volume)?"
                         [required]="true" [valid]="isValidOrNotTouched('volumeDestroyed')">
@@ -439,7 +438,7 @@
             <button mat-raised-button color="secondary" style="margin-right:10px;" (click)="saveForLater()">
                 <fa-icon [icon]="faSave"  style="color: #fff;"></fa-icon>
                 SAVE FOR LATER
-                <mat-progress-bar class="mt-1" *ngIf="!saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
+                <mat-progress-bar class="mt-1" *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
             <button mat-raised-button color="primary" (click)="submitApplication()">
                 SUBMIT &amp; PAY
@@ -450,7 +449,7 @@
                     <a href="javascript: void(0)">
                         Cancel Application
                     </a>
-                    <mat-progress-bar class="mt-1" *ngIf="!cancelReqInprogress" mode="indeterminate"></mat-progress-bar>
+                    <mat-progress-bar class="mt-1" *ngIf="cancelReqInprogress" mode="indeterminate"></mat-progress-bar>
                 </span>
             </span>
         </section>
