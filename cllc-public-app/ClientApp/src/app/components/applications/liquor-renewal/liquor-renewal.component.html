@@ -41,7 +41,8 @@
                     [disableUploads]="form.get('isManufacturedMinimum').value" [enableFileDeletion]="true"
                     [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
                     entityName="application" [extensions]="['pdf']" [entityId]="applicationId"
-                    [uploadHeader]="'TO UPLOAD DISCRETION LETTER, DRAG FILES HERE OR'">
+                    [uploadHeader]="'TO UPLOAD DISCRETION LETTER, DRAG FILES HERE OR'"
+                    (numberOfUploadedFiles)="uploadedDiscretionLetter = $event">
                 </app-file-uploader>
                 <hr />
             </section>
@@ -71,13 +72,13 @@
             <hr />
             <section class="w-100">
                 <div>
-                    <app-field *ngIf="form.controls['volumeProduced']" [label]="getVolumeLabel()" [required]="true"
+                    <app-field *ngIf="form.get('volumeProduced')" [label]="getVolumeLabel()" [required]="true"
                         [valid]="isValidOrNotTouched('volumeProduced')">
                         <input class="form-control" type="text" formControlName="volumeProduced" id="volumeProduced"
                             mask="0*">
                     </app-field>
                 </div>
-                <div *ngIf="form.controls['volumeDestroyed']">
+                <div *ngIf="form.get('volumeDestroyed')">
                     <app-field
                         label="What was the total volume destroyed (in litres and included in production volume)?"
                         [required]="true" [valid]="isValidOrNotTouched('volumeDestroyed')">
@@ -437,7 +438,7 @@
             <button mat-raised-button color="secondary" style="margin-right:10px;" (click)="saveForLater()">
                 <fa-icon [icon]="faSave"  style="color: #fff;"></fa-icon>
                 SAVE FOR LATER
-                <mat-progress-bar class="mt-1" *ngIf="!saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
+                <mat-progress-bar class="mt-1" *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
             <button mat-raised-button color="primary" (click)="submitApplication()">
                 SUBMIT &amp; PAY
@@ -448,7 +449,7 @@
                     <a href="javascript: void(0)">
                         Cancel Application
                     </a>
-                    <mat-progress-bar class="mt-1" *ngIf="!cancelReqInprogress" mode="indeterminate"></mat-progress-bar>
+                    <mat-progress-bar class="mt-1" *ngIf="cancelReqInprogress" mode="indeterminate"></mat-progress-bar>
                 </span>
             </span>
         </section>
