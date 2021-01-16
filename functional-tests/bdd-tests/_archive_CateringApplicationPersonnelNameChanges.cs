@@ -13,21 +13,20 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplicationPersonnelNameChanges
+Feature: CateringApplicationPersonnelNameChanges
     As a logged in business user
-    I want to submit a CRS Application for different business types
-    And request personnel email and name changes for the approved application
+    I want to pay the first year catering licence fee
+    And submit personnel name changes for different business types
 
-@cannabis @partnership @crspersonnelnamechange
-Scenario: UAT CRS Personnel Name Changes (Partnership)
+@catering @partnership @cateringpersonnelnamechange
+Scenario: UAT Catering Personnel Name Change (Partnership)
     Given I am logged in to the dashboard as a partnership
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    And I click on the Start Application button for Catering
     And I review the account profile for a partnership
     And I review the organization structure for a partnership
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Retail Store application for a partnership
-    And I click on the secondary Submit button
+    And I complete the Catering application
+    And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
@@ -39,20 +38,19 @@ Scenario: UAT CRS Personnel Name Changes (Partnership)
     And the account is deleted
     Then I see the login page
 
-@cannabis @privatecorporation @crspersonnelnamechange
-Scenario: UAT CRS Personnel Name Changes (Private Corporation)
+@catering @privatecorporation @cateringpersonnelnamechange
+Scenario: UAT Catering Personnel Name Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the secondary Submit button
+    And I complete the Catering application
+    And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I request a personnel name change for a private corporation
     And I click on the link for Dashboard
@@ -60,20 +58,19 @@ Scenario: UAT CRS Personnel Name Changes (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@cannabis @publiccorporation @crspersonnelnamechange
-Scenario: UAT CRS Personnel Name Changes (Public Corporation)
+@catering @publiccorporation @cateringpersonnelnamechange
+Scenario: UAT Catering Personnel Name Change (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    And I click on the Start Application button for Catering
     And I review the account profile for a public corporation
     And I review the organization structure for a public corporation
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Retail Store application for a public corporation
-    And I click on the secondary Submit button
+    And I complete the Catering application
+    And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee
+    And I pay the licensing fee 
     And I click on the link for Dashboard
     And I request a personnel name change for a public corporation
     And I click on the link for Dashboard
@@ -81,16 +78,15 @@ Scenario: UAT CRS Personnel Name Changes (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@cannabis @society @crspersonnelnamechange
-Scenario: UAT CRS Personnel Name Changes (Society)
+@catering @society @cateringpersonnelnamechange
+Scenario: UAT Catering Personnel Name Change (Society)
     Given I am logged in to the dashboard as a society
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    And I click on the Start Application button for Catering
     And I review the account profile for a society
     And I review the organization structure for a society
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Retail Store application for a society
-    And I click on the secondary Submit button
+    And I complete the Catering application
+    And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
@@ -102,20 +98,19 @@ Scenario: UAT CRS Personnel Name Changes (Society)
     And the account is deleted
     Then I see the login page
 
-@cannabis @soleproprietorship @crspersonnelnamechange
-Scenario: UAT CRS Personnel Name Changes (Sole Proprietorship)
+@catering @soleproprietorship @cateringpersonnelnamechange
+Scenario: UAT Catering Personnel Name Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
-    And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
     And I review the organization structure for a sole proprietorship
     And I click on the button for Submit Organization Information
-    And I complete the Cannabis Retail Store application for a sole proprietorship
-    And I click on the secondary Submit button
+    And I complete the Catering application
+    And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee 
+    And I pay the licensing fee
     And I click on the link for Dashboard
     And I request a personnel name change for a sole proprietorship
     And I click on the link for Dashboard
@@ -126,14 +121,16 @@ Scenario: UAT CRS Personnel Name Changes (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplicationPersonnelNameChanges.feature")]
-    [Collection("Cannabis")]
-    public sealed class CRSApplicationPersonnelNameChanges : TestBase
+    [FeatureFile("./CateringApplicationPersonnelNameChanges_archived.feature")]
+    [Collection("Liquor")]
+    public sealed class _archive_CateringApplicationPersonnelNameChanges : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
+
+            CheckFeatureFlagsLiquorOne();
 
             CheckFeatureFlagsLGIN();
 

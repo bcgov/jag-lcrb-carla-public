@@ -116,9 +116,9 @@ Scenario: UAT CRS Personnel Email Changes (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplicationPersonnelEmailChanges.feature")]
+    [FeatureFile("./CRSApplicationPersonnelEmailChanges_archived.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSApplicationPersonnelEmailChanges : TestBase
+    public sealed class _archive_CRSApplicationPersonnelEmailChanges : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
