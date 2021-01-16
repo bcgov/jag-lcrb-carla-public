@@ -116,7 +116,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (applications != null && applications.Count() > 0)
             {
-                cannabisApplicationCount = applications.Count(x => x.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS"));
+                cannabisApplicationCount = applications.Count(x => x.AdoxioApplicationTypeId != null && x.AdoxioApplicationTypeId.AdoxioName != null && x.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS"));
                 liquorApplicationCount = applications.Count() - cannabisApplicationCount;
             }
             
