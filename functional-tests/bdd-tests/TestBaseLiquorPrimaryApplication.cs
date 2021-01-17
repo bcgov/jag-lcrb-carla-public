@@ -37,13 +37,11 @@ namespace bdd_tests
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
 
-            /*
             string patioCompDescription = "Sample patio comp description";
             string patioLocationDescription = "Sample patio location description";
             string patioAccessDescription = "Sample patio access description";
             string patioLiquorCarriedDescription = "Sample liquor carried description";
             string patioAccessControlDescription = "Sample patio access control description";
-            */
 
             string conRole = "CEO";
             string conPhone = "2508888888";
@@ -138,7 +136,10 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            /*
+            // select 'Yes' for patio
+            NgWebElement uiHasPatio = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-2"));
+            uiHasPatio.Click();
+
             // enter the patio comp description
             NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
             uiPatioCompDescription.SendKeys(patioCompDescription);
@@ -165,7 +166,7 @@ namespace bdd_tests
 
             // click fixed option
             // NgWebElement uiFixedOption = ngDriver.FindElement(By.Id("mat-button-toggle-9-button"));
-            NgWebElement uiFixedOption = ngDriver.FindElement(By.XPath("//button[@id='mat-button-toggle-9-button']/div"));
+            NgWebElement uiFixedOption = ngDriver.FindElement(By.XPath("//button[@id='mat-button-toggle-9-button']"));
             uiFixedOption.Click();
 
             // click portable option
@@ -175,7 +176,6 @@ namespace bdd_tests
             // click interior option
             // NgWebElement uiInteriorOption = ngDriver.FindElement(By.Id("mat-button-toggle-11-button"));
             // uiInteriorOption.Click();
-            */
 
             if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
             {
