@@ -130,7 +130,10 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            /*
+            // select 'Yes' for patio
+            NgWebElement uiHasPatio = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-2"));
+            uiHasPatio.Click();
+
             // enter the patio comp description
             NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
             uiPatioCompDescription.SendKeys(patioCompDescription);
@@ -155,19 +158,17 @@ namespace bdd_tests
             NgWebElement uiPatioAccessControlDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
             uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
-            // click fixed option
-            // NgWebElement uiFixedOption = ngDriver.FindElement(By.Id("mat-button-toggle-9-button"));
-            NgWebElement uiFixedOption = ngDriver.FindElement(By.XPath("//button[@id='mat-button-toggle-9-button']/div"));
+            // click Fixed option
+            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
             uiFixedOption.Click();
 
-            // click portable option
-            // NgWebElement uiPortableOption = ngDriver.FindElement(By.Id("mat-button-toggle-10-button"));
-            // uiPortableOption.Click();
+            // click Portable option
+            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
+            uiPortableOption.Click();
 
-            // click interior option
-            // NgWebElement uiInteriorOption = ngDriver.FindElement(By.Id("mat-button-toggle-11-button"));
-            // uiInteriorOption.Click();
-            */
+            // click Interior option
+            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
+            uiInteriorOption.Click();
 
             if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
             {
