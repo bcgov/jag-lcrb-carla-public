@@ -20,7 +20,7 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I complete the Liquor Primary application")]
+        [And(@"I complete the Liquor Primary application for a (.*)")]
         public void CompleteLiquorPrimaryApplication(string bizType)
         {
             /* 
