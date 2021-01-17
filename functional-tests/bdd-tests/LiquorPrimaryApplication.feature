@@ -12,3 +12,36 @@ Scenario: DEV Liquor Primary Application (Private Corporation)
     And the dashboard status is updated as Pending External Review
     And the account is deleted
     Then I see the login page
+
+@liquorprimaryapp @release
+Scenario: DEV Liquor Primary Application (Society)
+    Given I am logged in to the dashboard as a society
+    And I click on the Start Application button for a Liquor Primary Licence
+    And I review the account profile for a society
+    And I complete the Liquor Primary application for a society
+    And I click on the Submit button
+    And the dashboard status is updated as Pending External Review
+    And the account is deleted
+    Then I see the login page
+
+@liquorprimaryapp @release
+Scenario: DEV Liquor Primary Application (Partnership)
+    Given I am logged in to the dashboard as a partnership
+    And I click on the Start Application button for a Liquor Primary Licence
+    And I review the account profile for a partnership
+    And I complete the Liquor Primary application for a partnership
+    And I click on the Submit button
+    And the dashboard status is updated as Pending External Review
+    And the account is deleted
+    Then I see the login page
+
+@liquorprimaryapp @release
+Scenario: DEV Liquor Primary Application (Sole Proprietorship)
+    Given I am logged in to the dashboard as a sole proprietorship
+    And I click on the Start Application button for a Liquor Primary Licence
+    And I review the account profile for a sole proprietorship
+    And I complete the Liquor Primary application for a sole proprietorship
+    And I click on the Submit button
+    And the dashboard status is updated as Pending External Review
+    And the account is deleted
+    Then I see the login page
