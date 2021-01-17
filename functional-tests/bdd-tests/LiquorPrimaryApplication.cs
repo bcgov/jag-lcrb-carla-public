@@ -28,7 +28,7 @@ Scenario: DEV Liquor Primary Application (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp @release
+@liquorprimaryapp 
 Scenario: DEV Liquor Primary Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Liquor Primary Licence
@@ -39,7 +39,7 @@ Scenario: DEV Liquor Primary Application (Society)
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp @release
+@liquorprimaryapp 
 Scenario: DEV Liquor Primary Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Liquor Primary Licence
@@ -50,7 +50,7 @@ Scenario: DEV Liquor Primary Application (Partnership)
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp @release
+@liquorprimaryapp @release 
 Scenario: DEV Liquor Primary Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Liquor Primary Licence
