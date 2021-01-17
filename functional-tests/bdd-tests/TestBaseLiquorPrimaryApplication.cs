@@ -109,7 +109,7 @@ namespace bdd_tests
 
             // select the zoning checkbox
             NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
-            uiIsPermittedInZoning.Click();
+            JavaScriptClick(uiIsPermittedInZoning);
 
             // upload the letter of intent
             FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[17]");
