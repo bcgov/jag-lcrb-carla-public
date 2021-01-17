@@ -1,6 +1,6 @@
 ﻿Feature: ManufacturerApplication
     As a logged in business user
-    I want to submit a Manufacturer Applications for different manufacturer types
+    I want to submit Manufacturer Applications for different manufacturer types
 
 @manufacturerapp @winery
 Scenario: DEV Manufacturer Application (Winery)
