@@ -24,10 +24,7 @@ Scenario: DEV Liquor Primary Application (Private Corporation)
     And I review the account profile for a private corporation
     And I complete the Liquor Primary application for a private corporation
     And I click on the Submit button
-    And I enter the payment information
-    And I confirm the payment receipt for a Liquor Primary Licence application
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And the dashboard status is updated as Pending External Review
     And the account is deleted
     Then I see the login page
 */
