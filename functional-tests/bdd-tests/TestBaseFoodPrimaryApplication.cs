@@ -130,6 +130,7 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
+            /*
             // enter the patio comp description
             NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
             uiPatioCompDescription.SendKeys(patioCompDescription);
@@ -166,6 +167,7 @@ namespace bdd_tests
             // click interior option
             // NgWebElement uiInteriorOption = ngDriver.FindElement(By.Id("mat-button-toggle-11-button"));
             // uiInteriorOption.Click();
+            */
 
             if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
             {
