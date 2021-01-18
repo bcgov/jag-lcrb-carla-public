@@ -104,23 +104,43 @@ namespace bdd_tests
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
-            // upload a central securities register
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+            if (businessType != "sole proprietorship")
+            {
+                // upload a central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
-            // upload supporting business documentation
-            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+                // upload supporting business documentation
+                FileUpload("associates.pdf", "(//input[@type='file'])[6]");
 
-            // upload notice of articles
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+            }
 
             // upload cannabis associates screening form
-            FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("associates.pdf", "(//input[@type='file'])[3]");
+            }
+            else
+            {
+                FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+            }
 
             // upload financial integrity form
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[6]");
+            }
+            else
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+            }
 
             // upload shareholders < 10% interest
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
+            if (businessType != "sole proprietorship")
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
+            }
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
