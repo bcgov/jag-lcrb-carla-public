@@ -92,12 +92,12 @@ namespace bdd_tests
             JavaScriptClick(uiThirdPartyOperatorOption);
 
             // click on authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
-            JavaScriptClick(uiAuthorizedToSubmit);
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
+            uiAuthorizedToSubmit.Click();
 
             // click on signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement']"));
-            JavaScriptClick(uiSignatureAgreement);
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
+            uiSignatureAgreement.Click();
 
             // click on submit button
             ClickOnSubmitButton2();
@@ -123,7 +123,7 @@ namespace bdd_tests
             */
 
             // click on agreement checkbox
-            NgWebElement uiTransferConsent = ngDriver.FindElement(By.CssSelector("input[formcontrolname='transferConsent'][type='checkbox']"));
+            NgWebElement uiTransferConsent = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='transferConsent']"));
             uiTransferConsent.Click();
 
             // click on Cancel Third Party Application button
