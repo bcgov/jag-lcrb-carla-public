@@ -17,5 +17,7 @@ Scenario: Food Primary Temporary Use Area Endorsement (Private Corporation)
     And I click on the Licences tab
     And I click on the link for Temporary Use Area Endorsement Application
     And I submit a temporary use area endorsement application
+    And I click on the link for Dashboard
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
