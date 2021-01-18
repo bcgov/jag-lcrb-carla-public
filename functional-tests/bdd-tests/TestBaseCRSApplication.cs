@@ -103,7 +103,45 @@ namespace bdd_tests
             string conEmail = "contact@email.com";
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
-     
+
+            if (businessType != "sole proprietorship")
+            {
+                // upload a central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+
+                // upload supporting business documentation
+                FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+            }
+
+            // upload cannabis associate screening form
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("associates.pdf", "(//input[@type='file'])[3]");
+            }
+            else
+            {
+                FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+            }
+
+            // upload financial integrity form
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[6]");
+            }
+            else
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+            }
+
+            // upload shareholders < 10% interest
+            if (businessType != "sole proprietorship")
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
+            }
+
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
             uiEstabName.SendKeys(estName);
@@ -124,6 +162,7 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
+            /*
             if (businessType == "n indigenous nation")
             {
                 // select the IN 
@@ -134,6 +173,8 @@ namespace bdd_tests
             // upload a proof of zoning form
             FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[3]");
 
+            */
+
             // search for and select the indigenous nation
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
             uiIndigenousNation.SendKeys(indigenousNation);
@@ -141,7 +182,7 @@ namespace bdd_tests
             NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
             uiIndigenousNation2.Click();
 
-            // search for and select the  police jurisdiction
+            // search for and select the police jurisdiction
             NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
             uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
@@ -157,31 +198,54 @@ namespace bdd_tests
             uiEstabPhone.SendKeys(estPhone);
 
             // upload a store signage document
-            FileUpload("signage.pdf","(//input[@type='file'])[5]");
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
+            }
+            else
+            {
+                FileUpload("signage.pdf", "(//input[@type='file'])[20]");
+            }
 
             // select not visible from outside checkbox
             NgWebElement uiVisibleFromOutside = ngDriver.FindElement(By.CssSelector(".mat-checkbox-inner-container"));
             uiVisibleFromOutside.Click();
 
             // upload a floor plan document
-            FileUpload("floor_plan.pdf","(//input[@type='file'])[8]");
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
+            }
+            else 
+            {
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
+            }
 
             // upload a site plan document
-            FileUpload("site_plan.pdf","(//input[@type='file'])[11]");
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[14]");
+            }
+            else
+            {
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
+            }
 
             // upload a financial integrity form
-            FileUpload("fin_integrity.pdf","(//input[@type='file'])[15]");
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
+            }
+            else
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[30]");
+            }
 
             // upload a ownership details document
-            FileUpload("ownership_details.pdf","(//input[@type='file'])[18]");
-
-            // enter the first name of the application contact
-            NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
-            uiContactGiven.SendKeys(conGiven);
-
-            // enter the last name of the application contact
-            NgWebElement uiContactSurname = ngDriver.FindElement(By.Id("contactPersonLastName"));
-            uiContactSurname.SendKeys(conSurname);
+            if (businessType != "sole proprietorship")
+            {
+                FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
+            }
 
             // enter the role of the application contact
             NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
@@ -210,10 +274,6 @@ namespace bdd_tests
             string[] parsedURL = URL.Split('/');
 
             applicationID = parsedURL[5];
-
-            // ClickOnSubmitButton();
-
-            // ClickOnSubmitButton2();
         }
     }
 }
