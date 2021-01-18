@@ -89,8 +89,8 @@ namespace bdd_tests
             uiCheckbox6.Click();
 
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgree = ngDriver.FindElement(By.XPath("//app-field/section/div/section/section/input"));
-            JavaScriptClick(uiSignatureAgree);
+            NgWebElement uiSignatureAgree = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
+            uiSignatureAgree.Click();
 
             NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
             JavaScriptClick(uiSubmitButton);
