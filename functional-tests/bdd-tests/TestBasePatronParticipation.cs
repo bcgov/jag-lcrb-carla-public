@@ -34,12 +34,19 @@ namespace bdd_tests
             Page Title: Patron Participation Entertainment Endorsement Application
             */
 
+            // create test data
+            string patronEntertainment = "Sample patron entertainment.";
+
+            // enter the patron entertainment
+            NgWebElement uiPatronEntertainment = ngDriver.FindElement(By.CssSelector("textarea#Description2"));
+            uiPatronEntertainment.SendKeys(patronEntertainment);
+
             // click on authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
 
             // click on signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement']"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
         }
     }

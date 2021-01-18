@@ -71,6 +71,40 @@ namespace bdd_tests
             // upload a supporting document
             FileUpload("checklist.pdf","(//input[@type='file'])[2]");
 
+            if (applicationType == "Food Primary")
+            {
+                // upload a supporting document
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[5]");
+
+                // create test data
+                string areaDescription = "Sample area description.";
+                string occupantLoad = "180";
+
+                // click on service area button
+                NgWebElement uiServiceAreas = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'serviceAreas'] button"));
+                uiServiceAreas.Click();
+
+                // enter area description
+                NgWebElement uiAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
+                uiAreaDescription.SendKeys(areaDescription);
+
+                // enter occupant load
+                NgWebElement uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+                uiOccupantLoad.SendKeys(occupantLoad);
+
+                // select the owner checkbox
+                NgWebElement uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwnerBusiness']"));
+                uiOwner.Click();
+
+                // select the valid interest checkbox
+                NgWebElement uiValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='hasValidInterest']"));
+                uiValidInterest.Click();
+
+                // select the future valid interest checkbox
+                NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willHaveValidInterest']"));
+                uiFutureValidInterest.Click();
+            }
+
             // select the authorized to submit checkbox
             NgWebElement uiAuthToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthToSubmit.Click();
