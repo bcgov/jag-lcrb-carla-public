@@ -28,7 +28,8 @@ Scenario: Food Primary Release Test (Private Corporation)
     # And I request a store relocation for Food Primary
     ## And I click on the link for Dashboard
     ## And I confirm the relocation request is displayed on the dashboard
-    # And I request a structural change
+    And I click on the Licences tab
+    And I submit a Food Primary structural change application
     ## And I click on the link for Dashboard
     ## And I confirm the structural change request is displayed on the dashboard
     # And I click on the Licences tab
