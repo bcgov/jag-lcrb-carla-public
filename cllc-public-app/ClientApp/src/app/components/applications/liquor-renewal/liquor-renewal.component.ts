@@ -14,7 +14,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { LicenseDataService } from '@services/license-data.service';
 import { FeatureFlagService } from '@services/feature-flag.service';
-import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
@@ -43,7 +42,16 @@ const ValidationErrorMap = {
   contactPersonPhone: 'Please enter the business contact\'s 10-digit phone number',
   authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
   signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
+
+  ldbOrderTotals: 'Please provide LDB Order Totals ($0 - $10,000,000)',
+  ldbOrderTotalsConfirm: 'Please confirm LDB Order Totals matches',
+  volumeProduced: 'Please provide the total volume produced (in litres)',
+  volumeDestroyed: 'Please provide the total volume destroyed (in litres and included in production volume)',
+
 }
+
+// Wineries are required to manufacture at least 4500 litres on-site per year to keep their licence
+const WINERY_MINIMUM_PRODUCTION = 4500;
 
 @Component({
   selector: 'app-liquor-renewal',
@@ -82,6 +90,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   uploadedSupportingDocuments = 0;
   uploadedFinancialIntegrityDocuments: 0;
   uploadedAssociateDocuments: 0;
+  uploadedDiscretionLetter: 0;
   window = window;
   previousYear: string;
   dataLoaded: boolean;
@@ -153,17 +162,18 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         this.licenceDataService.getLicenceById(data.assignedLicence.id)
           .pipe(takeWhile(() => this.componentActive))
           .subscribe((data: License) => {
-            if (data.licenseSubCategory !== null &&
+            if (data.licenseType !== 'Manufacturer' &&
+              data.licenseSubCategory !== null &&
               data.licenseSubCategory !== 'Independent Wine Store' &&
               data.licenseSubCategory !== 'Tourist Wine Store' &&
               data.licenseSubCategory !== 'Special Wine Store') {
               this.form.addControl('ldbOrderTotals', this.fb.control('', [Validators.required, Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]));
               this.form.addControl('ldbOrderTotalsConfirm', this.fb.control('', [Validators.required]));
             }
-            if (data.licenseSubCategory === 'Winery' || data.licenseSubCategory === 'Brewery') {
+            if (data.licenseType === 'Manufacturer' && (data.licenseSubCategory === 'Winery' || data.licenseSubCategory === 'Brewery')) {
               this.form.addControl('volumeProduced', this.fb.control('', [Validators.required]));
             }
-            if (data.licenseSubCategory === 'Winery') {
+            if (data.licenseType === 'Manufacturer' && data.licenseSubCategory === 'Winery') {
               this.form.addControl('volumeDestroyed', this.fb.control('', [Validators.required]));
             }
             this.dataLoaded = true;
@@ -203,17 +213,10 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     return this.licenseSubCategory == subcategoryName;
   }
 
-  isTouchedAndInvalid(fieldName: string): boolean {
-    return this.form.get(fieldName).touched
-      && !this.form.get(fieldName).valid;
-  }
-
   getVolumeLabel() {
     const label = this.isSubcategory('Brewery') ? 'hectolitres' : 'litres';
     return `What was your ${this.licenseSubCategory}'s total volume produced (in ${label}) between January 1 and December 31?`;
   }
-
-
 
   canDeactivate(): Observable<boolean> | boolean {
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
@@ -333,11 +336,25 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       this.validationMessages.push('LDB Order Totals are required');
     }
 
+    // Wineries only
+    //  - enforce minimum production (4500L per year)
+    //  - discretion letter is required when winery manufactured less than the minimum production.
+    if (this.isSubcategory('Winery')) {
+      const volumeProduced = parseInt(this.form.get('volumeProduced').value, 10);
+      const isMinimumChecked = !!this.form.get('isManufacturedMinimum').value;
+      if (!isNaN(volumeProduced) && volumeProduced < WINERY_MINIMUM_PRODUCTION && isMinimumChecked) {
+        this.validationMessages.push(`You have not indicated that you have produced less than the required minimum production. The value of ${volumeProduced} is less than the required minimum production.`);
+      }
+      if (!isMinimumChecked && (this.uploadedDiscretionLetter || 0) < 1) {
+        this.validationMessages.push('You have indicated that you have produced less than the required minimum production. Please upload a discretion letter.');
+      }
+    }
+
     return this.validationMessages.length === 0;
   }
 
   /**
-   * Dialog to confirm the application cancellation (status changed to "Termindated")
+   * Dialog to confirm the application cancellation (status changed to "Terminated")
    */
   cancelApplication() {
 
@@ -420,5 +437,4 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
           this.saveForLaterInProgress = false;
         });
   }
-
 }

@@ -44,6 +44,21 @@ namespace bdd_tests
             string liqConnectionDetails = "Here are the liquor industry connection details (automated test).";
             string kitchenDetails = "Here are the details of the kitchen equipment.";
 
+            // upload a central securities register
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+
+            // upload supporting business documentation
+            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+
+            // upload notice of articles
+            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+
+            // upload personal history summary documents
+            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[12]");
+
+            // upload shareholders < 10% interest
+            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+
             // enter the establishment name
             NgWebElement uiEstabName = null;
             // try up to 10 times to get an element.
@@ -117,10 +132,10 @@ namespace bdd_tests
             uiKitchenDescription.SendKeys(kitchenDetails);
 
             // upload a store signage document
-            FileUpload("signage.pdf", "(//input[@type='file'])[2]");
+            FileUpload("signage.pdf", "(//input[@type='file'])[17]");
 
             // upload a valid interest document
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[6]");
+            FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
 
             // enter the first name of the application contact
             NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));

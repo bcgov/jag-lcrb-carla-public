@@ -18,14 +18,11 @@ Feature: OnSiteEndorsementRenewal
     I want to renew a licence that expired yesterday and has an on-site endorsement
 
 @onsiteendorsementrenewal @winery
-Scenario: On-Site Endorsement Licence Renewal (Winery)
+Scenario: DEV On-Site Endorsement Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -45,14 +42,11 @@ Scenario: On-Site Endorsement Licence Renewal (Winery)
     Then I see the login page
 
 @onsiteendorsementrenewal @brewery 
-Scenario: On-Site Endorsement Licence Renewal (Brewery)
+Scenario: DEV On-Site Endorsement Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -72,14 +66,11 @@ Scenario: On-Site Endorsement Licence Renewal (Brewery)
     Then I see the login page
 
 @onsiteendorsementrenewal @distillery
-Scenario: On-Site Endorsement Licence Renewal (Distillery)
+Scenario: DEV On-Site Endorsement Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -99,14 +90,11 @@ Scenario: On-Site Endorsement Licence Renewal (Distillery)
     Then I see the login page
 
 @onsiteendorsementrenewal @copacker 
-Scenario: On-Site Endorsement Licence Renewal (Co-packer)
+Scenario: DEV On-Site Endorsement Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
