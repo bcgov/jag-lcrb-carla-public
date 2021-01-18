@@ -20,8 +20,8 @@ Scenario: DEV Catering Release (Private Corporation)
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
-    #And I request a licensee representative
-    #And I click on the Licences tab
+    And I request a licensee representative
+    And I click on the Licences tab
     And I request a store relocation for Catering
     And I click on the Licences tab
     And I request an event authorization that doesn't require approval
