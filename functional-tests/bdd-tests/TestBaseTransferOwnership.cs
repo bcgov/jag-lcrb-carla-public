@@ -83,15 +83,15 @@ namespace bdd_tests
             uiThirdPartyOperatorOption.Click();
 
             // click on consent to licence transfer checkbox
-            NgWebElement uiConsentToTransfer = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'transferConsent']"));
+            NgWebElement uiConsentToTransfer = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='transferConsent']"));
             uiConsentToTransfer.Click();
 
             // click on authorize signature checkbox
-            NgWebElement uiAuthorizeSignature = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
+            NgWebElement uiAuthorizeSignature = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizeSignature.Click();
 
             // click on signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
             // click on submit transfer button
