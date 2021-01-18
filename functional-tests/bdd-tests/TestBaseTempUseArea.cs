@@ -105,15 +105,6 @@ namespace bdd_tests
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();
-
-            // pay for the structural change application
-            MakePayment();
-
-            /* 
-            Page Title: Payment Approved
-            */
-
-            ClickLicencesTab();
         }
     }
 }
