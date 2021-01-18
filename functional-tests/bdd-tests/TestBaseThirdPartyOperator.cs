@@ -123,7 +123,7 @@ namespace bdd_tests
             */
 
             // click on agreement checkbox
-            NgWebElement uiTransferConsent = ngDriver.FindElement(By.CssSelector("input[formcontrolname='transferConsent'][type='checkbox']"));
+            NgWebElement uiTransferConsent = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='transferConsent']"));
             uiTransferConsent.Click();
 
             // click on Cancel Third Party Application button
