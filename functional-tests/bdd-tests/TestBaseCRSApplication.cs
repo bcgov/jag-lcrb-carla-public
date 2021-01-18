@@ -116,7 +116,7 @@ namespace bdd_tests
                 FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
             }
 
-            // upload cannabis associates screening form
+            // upload cannabis associate screening form
             if (businessType == "sole proprietorship")
             {
                 FileUpload("associates.pdf", "(//input[@type='file'])[3]");
@@ -242,22 +242,10 @@ namespace bdd_tests
             }
 
             // upload a ownership details document
-            if (businessType == "sole proprietorship")
-            {
-                FileUpload("ownership_details.pdf", "(//input[@type='file'])[21]");
-            }
-            else
+            if (businessType != "sole proprietorship")
             {
                 FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
             }
-
-            // enter the first name of the application contact
-            NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
-            uiContactGiven.SendKeys(conGiven);
-
-            // enter the last name of the application contact
-            NgWebElement uiContactSurname = ngDriver.FindElement(By.Id("contactPersonLastName"));
-            uiContactSurname.SendKeys(conSurname);
 
             // enter the role of the application contact
             NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
