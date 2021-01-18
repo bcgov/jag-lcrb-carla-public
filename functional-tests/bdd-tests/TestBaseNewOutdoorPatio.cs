@@ -28,7 +28,8 @@ namespace bdd_tests
             */
 
             // click on Continue to Application button
-            ContinueToApplicationButton();
+            NgWebElement uiContinueToApplication = ngDriver.FindElement(By.CssSelector("button#continueToApp.mat-primary"));
+            uiContinueToApplication.Click();
 
             /* 
             Page Title: New Outdoor Patio
