@@ -20,7 +20,9 @@ Scenario: Food Primary Release Test (Private Corporation)
     And I request a change in terms and conditions application
     And I click on the link for Download Licence
     And I request a licensee representative
-    # And I request a new outdoor patio application
+    And I request a new outdoor patio application
+    And I click on the Submit button
+    And I enter the payment information
     # And I request a Patron Participation Entertainment Endorsement application
     # And I request a store relocation for Food Primary
     ## And I click on the link for Dashboard
