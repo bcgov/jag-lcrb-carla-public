@@ -84,10 +84,10 @@ namespace bdd_tests
             Page Title: Terms of Use
             */
 
-            NgWebElement uiCheckBox1 = ngDriver.FindElement(By.XPath("//input[@type='checkbox']"));
+            NgWebElement uiCheckBox1 = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
             uiCheckBox1.Click();
 
-            NgWebElement uiCheckBox2 = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[2]"));
+            NgWebElement uiCheckBox2 = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-2"));
             uiCheckBox2.Click();
 
             NgWebElement continueButton = ngDriver.FindElement(By.CssSelector(".buttons .btn-primary"));
