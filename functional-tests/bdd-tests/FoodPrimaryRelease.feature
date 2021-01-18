@@ -24,18 +24,24 @@ Scenario: Food Primary Release Test (Private Corporation)
     And I request a new outdoor patio application
     And I click on the Submit button
     And I enter the payment information
+    And I click on the Licences tab
+    And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
     And I click on the Submit button
     # And I request a store relocation for Food Primary
     ## And I click on the link for Dashboard
     ## And I confirm the relocation request is displayed on the dashboard
     And I click on the Licences tab
+    And I click on the link for Structural Change Application
     And I submit a Food Primary structural change application
     ## And I click on the link for Dashboard
     ## And I confirm the structural change request is displayed on the dashboard
-    # And I click on the Licences tab
-    # And I submit a temporary extension of licensed area application
+    And I click on the Licences tab
+    And I click on the link for Temporary Extension of Licensed Area
+    And I submit a temporary extension of licensed area application
+    # And I click on the link for Temporary Use Area Endorsement Application
     ## And I submit a temporary use area endorsement application
+    And I click on the Licences tab
     And I request a third party operator
     ## And I click on the link for Cancel Application
     ## And I cancel the third party operator application
