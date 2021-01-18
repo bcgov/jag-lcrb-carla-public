@@ -13,8 +13,6 @@ Scenario: DEV Negative CRS Licence Renewal Today (Private Corporation)
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Submit button
     And I enter the payment information
@@ -32,8 +30,6 @@ Scenario: DEV Positive CRS Licence Renewal Today (Private Corporation)
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Submit button
     And I enter the payment information
