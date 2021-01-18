@@ -25,27 +25,31 @@
 
     <section>
         <section class="ngtest-lg-instructions" [innerHTML]="htmlContent?.LocalGovernmentApproval"></section>
-        <section  *ngIf="!htmlContent?.LocalGovernmentApproval">
-        <label>Provide a Resolution/Comment and any supporting reports with comments on:</label>
-        <ul>
-            <li>The impact of noise on nearby residents</li>
-            <li>The impact on the community if the application is approved</li>
-            <li>The views of residents and a description of the method used to gather views</li>
-            <li>The LG/In recommendations (including whether or not the application is approved) and the reasons on
-                which they are based</li>
-        </ul>
-      </section>
+        <section *ngIf="!htmlContent?.LocalGovernmentApproval">
+            <label>Provide a Resolution/Comment and any supporting reports with comments on:</label>
+            <ul>
+                <li>The impact of noise on nearby residents</li>
+                <li>The impact on the community if the application is approved</li>
+                <li>The views of residents and a description of the method used to gather views</li>
+                <li>The LG/In recommendations (including whether or not the application is approved) and the reasons on
+                    which they are based</li>
+            </ul>
+        </section>
 
         <app-file-uploader *ngIf="application?.id" documentType="LGIN Resolution"
             [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval"
-            (numberOfUploadedFiles)="onResolutionFileUpload($event)" [maxNumberOfFiles]="200"
+            (numberOfUploadedFiles)="uploadedResolutionDocuments = $event" [maxNumberOfFiles]="200"
             fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="application?.id"
             [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
         </app-file-uploader>
 
         <ng-container *ngIf="showFormControl(application?.applicationType?.floorPlan)">
-            <p>Occupant Load is the maximum number of people (patrons plus staff) permitted in a service area. The occupant load must be stamped or written, dated and signed on the floor plan by the appropriate authority.</p>
-            <p>If you will not provide the occupant load for the applicant, you must provide a letter confirming you do not issue occupant load. The Branch will accept an occupant load calculation from a professional architect or engineer.</p>
+            <p>Occupant Load is the maximum number of people (patrons plus staff) permitted in a service area. The
+                occupant load must be stamped or written, dated and signed on the floor plan by the appropriate
+                authority.</p>
+            <p>If you will not provide the occupant load for the applicant, you must provide a letter confirming you do
+                not issue occupant load. The Branch will accept an occupant load calculation from a professional
+                architect or engineer.</p>
             <p>A licence cannot be issued without final occupant load.</p>
 
             <app-file-uploader *ngIf="application?.id" documentType="StampedFloorPlan"
@@ -68,25 +72,25 @@
 </section>
 
 <section class="position-relative d-flex justify-content-between p-3">
-    <span>
-        <button mat-raised-button color="secondary" [disabled]="optingOutOfComment" (click)="OptOutOfComment()">
-            <span>Opt Out of Comment</span>
-            <mat-progress-bar *ngIf="optingOutOfComment" mode="indeterminate"></mat-progress-bar>
-        </button>
-    </span>
+    <button mat-raised-button color="secondary" [disabled]="optingOutOfComment" (click)="OptOutOfComment()">
+        <span>Opt Out of Comment</span>
+        <mat-progress-bar *ngIf="optingOutOfComment" mode="indeterminate"></mat-progress-bar>
+    </button>
 
-    <span>
-        <button mat-raised-button color="secondary" [disabled]="rejectingApp" (click)="RejectApplication()">
-            <span>Reject Application</span>
-            <mat-progress-bar *ngIf="rejectingApp" mode="indeterminate"></mat-progress-bar>
-        </button>
-    </span>
+    <button mat-raised-button color="secondary" [disabled]="rejectingApp" (click)="RejectApplication()">
+        <span>Reject Application</span>
+        <mat-progress-bar *ngIf="rejectingApp" mode="indeterminate"></mat-progress-bar>
+    </button>
 
-    <span>
-        <button mat-raised-button color="primary" [disabled]="approvingApplication" (click)="ApproveApplication()">
-            <span>Accept Application</span>
-            <mat-progress-bar *ngIf="approvingApplication" mode="indeterminate"></mat-progress-bar>
-        </button>
-    </span>
+    <button mat-raised-button color="primary" *ngIf="application?.lGApprovalDecision  !== 'Pending'"
+        [disabled]="approvingApplication" (click)="ApproveApplication()">
+        <span>Accept Application</span>
+        <mat-progress-bar *ngIf="approvingApplication" mode="indeterminate"></mat-progress-bar>
+    </button>
 
+    <button mat-raised-button color="primary" *ngIf="application?.lGApprovalDecision  === 'Pending'"
+        [disabled]="approvingApplication" (click)="ProvideResolution()">
+        <span>Provide Resolution</span>
+        <mat-progress-bar *ngIf="providingResolution" mode="indeterminate"></mat-progress-bar>
+    </button>
 </section>
