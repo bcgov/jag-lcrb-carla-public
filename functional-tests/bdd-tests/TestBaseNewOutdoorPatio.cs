@@ -43,6 +43,10 @@ namespace bdd_tests
             string areaDescription = "Sample area description";
             string occupantLoad = "180";
 
+            // select 'Yes' for patio
+            NgWebElement uiPatioYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-2"));
+            uiPatioYes.Click();
+
             // enter patio composition description
             NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
             uiPatioCompDescription.SendKeys(patioCompDescription);
@@ -56,7 +60,7 @@ namespace bdd_tests
             uiPatioAccessDescription.SendKeys(patioAccessDescription);
 
             // click on Is Liquor Carried checkbox
-            NgWebElement uiPatioIsLiquorCarried = ngDriver.FindElement(By.CssSelector("input#patioIsLiquorCarried[type='checkbox']"));
+            NgWebElement uiPatioIsLiquorCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox#patioIsLiquorCarried"));
             uiPatioIsLiquorCarried.Click();
 
             // enter Is Liquor Carried description
@@ -67,17 +71,17 @@ namespace bdd_tests
             NgWebElement uiPatioAccessControlDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
             uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
-            // select fixed patio service bar
-            NgWebElement uiFixedPatioServiceBar = ngDriver.FindElement(By.CssSelector("#patioServiceBar button#mat-button-toggle-25-button[type='button']"));
-            uiFixedPatioServiceBar.Click();
+            // click Fixed option
+            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            uiFixedOption.Click();
 
-            // select portable liquor service bar
-            NgWebElement uiPortableServiceBar = ngDriver.FindElement(By.CssSelector("#patioServiceBar button#mat-button-toggle-26-button[type='button']"));
-            uiPortableServiceBar.Click();
+            // click Portable option
+            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
+            uiPortableOption.Click();
 
-            // select internal liquor service bar
-            NgWebElement uiInternalServiceBar = ngDriver.FindElement(By.CssSelector("#patioServiceBar button#mat-button-toggle-27-button[type='button']"));
-            uiInternalServiceBar.Click();
+            // click Interior option
+            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
+            uiInteriorOption.Click();
 
             // upload floor plan
             FileUpload("floor_plan.pdf", "(//input[@type='file'])[2]");
@@ -97,12 +101,24 @@ namespace bdd_tests
             // upload exterior photos
             FileUpload("exterior_photos.pdf", "(//input[@type='file'])[5]");
 
+            // click on the isOwnerBusiness checkbox
+            NgWebElement uiIsOwnerBusiness = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
+            uiIsOwnerBusiness.Click();
+
+            // click on the hasValidInterest checkbox
+            NgWebElement uiHasValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='hasValidInterest']"));
+            uiHasValidInterest.Click();
+
+            // click on the willHaveValidInterest checkbox
+            NgWebElement uiWillHaveValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willHaveValidInterest']"));
+            uiWillHaveValidInterest.Click();
+
             // click on the authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
 
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
         }
     }

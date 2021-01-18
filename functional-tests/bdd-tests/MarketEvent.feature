@@ -7,14 +7,11 @@
 #-----------------------
 
  @marketevent @marketoneday @winery
- Scenario: One Day Market Event (Winery)
+ Scenario: DEV One Day Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -37,14 +34,11 @@
 #-----------------------
 
  @marketevent @marketweekly @winery
- Scenario: Weekly Market Event (Winery)
+ Scenario: DEV Weekly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -68,14 +62,11 @@
 #-------------------------------------------------
 
  @marketevent @marketbiweekly @winery
- Scenario: Bi-Weekly Market Event (Winery)
+ Scenario: DEV Bi-Weekly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -97,14 +88,11 @@
 #-----------------------
 
  @marketevent @marketmonthly @winery
- Scenario: Monthly Market Event (Winery)
+ Scenario: DEV Monthly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -127,14 +115,11 @@
 #-----------------------------------
 
  @marketeventonedaysave @marketoneday @winery
- Scenario: One Day Market Event Save For Later (Winery)
+ Scenario: DEV One Day Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -162,14 +147,11 @@
 #--------------------------------------
 
  @marketeventweeklysave @marketweekly @winery
- Scenario: Weekly Market Event Save For Later (Winery)
+ Scenario: DEV Weekly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -197,14 +179,11 @@
 #-----------------------------------------
 
  @marketeventbiweeklysave @marketbiweekly @winery
- Scenario: Bi-Weekly Market Event Save For Later (Winery)
+ Scenario: DEV Bi-Weekly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -232,14 +211,11 @@
 #---------------------------------------
 
  @marketeventmonthlysave @marketmonthly @winery
- Scenario: Monthly Market Event Save For Later (Winery)
+ Scenario: DEV Monthly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved

@@ -3,15 +3,13 @@
     I want to test the payments for a CRS and Catering application
 
 @privatecorporation @payments
-Scenario: Payments for CRS/Catering Applications (Private Corporation)
+Scenario: DEV Payments for CRS/Catering Applications (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Cannabis Retail Store application for a private corporation
-    And I click on the button for Pay for Application
+    And I click on the Submit button
     And I enter the payment information
     And I click on the link for Return to Dashboard
     And I click on the Start Application button for Catering
