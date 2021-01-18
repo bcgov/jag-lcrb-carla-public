@@ -89,7 +89,7 @@
     </button>
 
     <button mat-raised-button color="primary" *ngIf="application?.lGApprovalDecision  === 'Pending'"
-        [disabled]="approvingApplication" (click)="ProvideResolution()">
+        [disabled]="providingResolution" (click)="ProvideResolution()">
         <span>Provide Resolution</span>
         <mat-progress-bar *ngIf="providingResolution" mode="indeterminate"></mat-progress-bar>
     </button>
