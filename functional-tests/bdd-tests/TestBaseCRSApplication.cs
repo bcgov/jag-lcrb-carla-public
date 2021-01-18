@@ -198,23 +198,58 @@ namespace bdd_tests
             uiEstabPhone.SendKeys(estPhone);
 
             // upload a store signage document
-            FileUpload("signage.pdf","(//input[@type='file'])[20]");
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
+            }
+            else
+            {
+                FileUpload("signage.pdf", "(//input[@type='file'])[20]");
+            }
 
             // select not visible from outside checkbox
             NgWebElement uiVisibleFromOutside = ngDriver.FindElement(By.CssSelector(".mat-checkbox-inner-container"));
             uiVisibleFromOutside.Click();
 
             // upload a floor plan document
-            FileUpload("floor_plan.pdf","(//input[@type='file'])[23]");
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
+            }
+            else 
+            {
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
+            }
 
             // upload a site plan document
-            FileUpload("site_plan.pdf","(//input[@type='file'])[26]");
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[14]");
+            }
+            else
+            {
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
+            }
 
             // upload a financial integrity form
-            FileUpload("fin_integrity.pdf","(//input[@type='file'])[30]");
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
+            }
+            else
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[30]");
+            }
 
             // upload a ownership details document
-            FileUpload("ownership_details.pdf","(//input[@type='file'])[33]");
+            if (businessType == "sole proprietorship")
+            {
+                FileUpload("ownership_details.pdf", "(//input[@type='file'])[21]");
+            }
+            else
+            {
+                FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
+            }
 
             // enter the first name of the application contact
             NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
