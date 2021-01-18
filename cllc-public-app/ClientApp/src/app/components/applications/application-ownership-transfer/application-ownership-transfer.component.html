@@ -28,7 +28,7 @@
       <section class="ngtest-preamble-content" *ngIf="licence?.licenseType !== 'Cannabis Retail Store'">
         <p>
           The proposed transferee becomes the conclusively deemed licensee once an administratively complete
-          application is received and both parties are notified by the Branch. The conclusively deemed licensee is 
+          application is received and both parties are notified by the Branch. The conclusively deemed licensee is
           responsible for licence under the Act from the date of this notification date forward.
         </p>
       </section>
@@ -45,7 +45,7 @@
           </p>
           <p>
             Once you have submitted the transfer application, the proposed licensee will be notified to continue their
-            application process. They will need to pay a $500 application fee at the time of submission.
+            application process. They will need to pay a $330 application fee at the time of submission.
           </p>
           <p>
             The proposed licensee will act as the contact for this application and will receive information throughout
@@ -118,7 +118,7 @@
 
           <app-field label="Email"  [valid]="isValidOrNotTouched('licenseeContact.email')"
             errorMessage="Please enter the contact's email address">
-            <input class="form-control" style="width: 350px;" type="text" 
+            <input class="form-control" style="width: 350px;" type="text"
               formControlName="email" id="email"
               (blur)="trimValue(form.get('licenseeContact.email'))">
           </app-field>
@@ -153,7 +153,7 @@
               I agree to transfer my {{licence?.licenseType}} licence to the proposed transferee
               identified above. The proposed transferee will, if the general manager transfers the licence, be or
               become the owner of the business in respect of
-              which the licence was issued.              
+              which the licence was issued.
             </span>
           </mat-checkbox>
         </app-field>

@@ -219,7 +219,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       isHasPatio: ['', []],
       hasCoolerAccess: ['', []],
       hasValidInterest: ['', []],
-      willhaveValidInterest: ['', []],
+      willHaveValidInterest: ['', []],
       meetsALRRequirements: ['', []],
       IsReadyProductNotVisibleOutside: ['', []],
       serviceAreas: ['', []],
@@ -688,7 +688,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       description2 += '\n';
       description2 += this.form.get('hasValidInterest').value ? 'Has valid interest = Yes' : 'Has valid interest = No';
       description2 += '\n';
-      description2 += this.form.get('willhaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
+      description2 += this.form.get('willHaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
     }
     else {
       description2 += this.application.description2;
@@ -1029,7 +1029,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       //  this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
       // }
 
-      //if (!this.form.get('willhaveValidInterest').value) {
+      //if (!this.form.get('willHaveValidInterest').value) {
       //  this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
       // }
 
@@ -1301,27 +1301,26 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // If the patio checkbox is false then do not include the dynamic fields in validation.
     if (this.form.get('isHasPatio') && this.form.get('isHasPatio').enabled && !this.form.get('isHasPatio').value) {
       useDynamicValidation = false;
-    }
-
-    // loop through the dynamic form, updating validators.
-    if (this.dynamicsForm) {
-      this.dynamicsForm.tabs.forEach(function (tab) {
-        tab.sections.forEach(function (section) {
-          if (section.fields) {
-            section.fields.forEach(function (field) {
-              this.form.controls[field.datafieldname].clearValidators();
-              if (useDynamicValidation === true) {
-                if (field.required) {
-                  this.form.controls[field.datafieldname].setValidators([Validators.required]);
+    } else {
+      // loop through the dynamic form, updating validators.
+      if (this.dynamicsForm) {
+        this.dynamicsForm.tabs.forEach(function (tab) {
+          tab.sections.forEach(function (section) {
+            if (section.fields) {
+              section.fields.forEach(function (field) {
+                this.form.controls[field.datafieldname].clearValidators();
+                if (useDynamicValidation === true) {
+                  if (field.required) {
+                    this.form.controls[field.datafieldname].setValidators([Validators.required]);
+                  }
                 }
-              }
-            }, this);
-          }
+              }, this);
+            }
 
+          }, this);
         }, this);
-      }, this);
+      }
     }
-
   }
 
   showValidInterestforTransfer() {

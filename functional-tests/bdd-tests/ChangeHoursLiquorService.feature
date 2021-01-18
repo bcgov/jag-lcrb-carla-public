@@ -3,15 +3,11 @@
     I want to update the liquor hours of service for lounge areas and special events
 
 @manufacturer @changehours
-Scenario: Lounge Area Within Service Hours (Private Corporation)
+Scenario: DEV Lounge Area Within Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -24,15 +20,11 @@ Scenario: Lounge Area Within Service Hours (Private Corporation)
     Then I see the login page
 
 @manufacturer @changehours
-Scenario: Lounge Area Outside Service Hours (Private Corporation)
+Scenario: DEV Lounge Area Outside Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -46,15 +38,11 @@ Scenario: Lounge Area Outside Service Hours (Private Corporation)
     Then I see the login page
 
 @manufacturer @changehours
-Scenario: Special Event Area Within Service Hours (Private Corporation)
+Scenario: DEV Special Event Area Within Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -67,15 +55,11 @@ Scenario: Special Event Area Within Service Hours (Private Corporation)
     Then I see the login page
 
 @manufacturer @changehours
-Scenario: Special Event Area Outside Service Hours (Private Corporation)
+Scenario: DEV Special Event Area Outside Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a winery
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved

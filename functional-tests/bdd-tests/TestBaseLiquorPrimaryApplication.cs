@@ -20,11 +20,11 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I complete the Food Primary application for a (.*)")]
-        public void CompleteFoodPrimaryApplication(string bizType)
+        [And(@"I complete the Liquor Primary application for a (.*)")]
+        public void CompleteLiquorPrimaryApplication(string bizType)
         {
             /* 
-            Page Title: Food Primary Licence Application
+            Page Title: Liquor Primary Licence Application
             */
 
             // create test data
@@ -49,40 +49,35 @@ namespace bdd_tests
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
-            // upload a central securities register
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+            string floorAreaDescription = "Sample floor area.";
+            string occupantLoad = "180";
 
-            // upload supporting business documentation
-            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+            if (bizType != "sole proprietorship")
+            {
+                // upload a central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
-            // upload notice of articles
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+                // upload supporting business documentation
+                FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+            }
 
             // upload personal history form
-            FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+            if (bizType == "sole proprietorship")
+            {
+                FileUpload("associates.pdf", "(//input[@type='file'])[3]");
+            }
+            else {
+                FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+            }
 
             // upload shareholders < 10% interest
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
-
-            /*
-            if ((bizType == "public corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "private corporation"))
+            if (bizType != "sole proprietorship")
             {
-                // upload register of directors and officers
-                FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[3]");
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
             }
-
-            if (bizType == "private corporation")
-            {
-                // upload supporting business documentation
-                FileUpload("distribution_plan.pdf", "(//input[@type='file'])[6]");
-
-                // upload register of directors and officers
-                FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[9]");
-
-                // upload shareholders holding less than 10% interest
-                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[12]");
-            }
-            */
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -106,7 +101,16 @@ namespace bdd_tests
 
             // select the zoning checkbox
             NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
-            uiIsPermittedInZoning.Click();
+            JavaScriptClick(uiIsPermittedInZoning);
+
+            // upload the letter of intent
+            if (bizType == "sole proprietorship")
+            {
+                FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[5]");
+            }
+            else {
+                FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[17]");
+            }
 
             // search for and select the indigenous nation
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
@@ -170,36 +174,59 @@ namespace bdd_tests
             NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
             uiInteriorOption.Click();
 
-            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
+            // upload signage document
+            if ((bizType == "partnership") || (bizType == "society"))
             {
-                // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[5]");
             }
             else if (bizType == "private corporation")
             {
-                // upload signage document
-                FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+                FileUpload("signage.pdf", "(//input[@type='file'])[20]");
             }
             else if (bizType == "sole proprietorship")
             {
-                // upload signage document
-                FileUpload("signage.pdf", "(//input[@type='file'])[2]");
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
             }
 
-            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
+            // upload floor plan
+            if ((bizType == "partnership") || (bizType == "society"))
             {
-                // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
             }
             else if (bizType == "private corporation")
             {
-                // upload floor plan
-                FileUpload("floor_plan.pdf", "(//input[@type='file'])[20]");
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
             }
             else if (bizType == "sole proprietorship")
             {
-                // upload floor plan
-                FileUpload("floor_plan.pdf", "(//input[@type='file'])[5]");
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
+            }
+
+            // click on the Add Area button
+            NgWebElement uiAddArea = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceAreas'] button"));
+            uiAddArea.Click();
+
+            // enter floor area description
+            NgWebElement uiFloorAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
+            uiFloorAreaDescription.SendKeys(floorAreaDescription);
+
+            // click on patio checkbox
+            NgWebElement uiPatioCheckbox = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isPatio']"));
+            uiPatioCheckbox.Click();
+
+            // enter occupant load
+            NgWebElement uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            uiOccupantLoad.SendKeys(occupantLoad);
+
+            if (bizType == "sole proprietorship")
+            {
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[14]");
+            }
+            else
+            {
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
             }
 
             // select the owner checkbox
@@ -213,26 +240,6 @@ namespace bdd_tests
             // select the future valid interest checkbox
             NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willHaveValidInterest']"));
             uiFutureValidInterest.Click();
-
-            /*
-            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
-            {
-                // upload proof of valid interest
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
-            }
-
-            if (bizType == "private corporation")
-            {
-                // upload proof of valid interest
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
-            }
-
-            if (bizType == "sole proprietorship")
-            {
-                // upload proof of valid interest
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
-            }
-            */
 
             // enter the role of the application contact
             NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
