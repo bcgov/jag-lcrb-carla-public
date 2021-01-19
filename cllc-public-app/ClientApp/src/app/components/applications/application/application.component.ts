@@ -1,4 +1,3 @@
-
 import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -28,7 +27,7 @@ import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 //import { User } from '@models/user.model';
 import { DynamicsForm } from '../../../models/dynamics-form.model';
-import { PoliceDurisdictionDataService } from '@services/police-jurisdiction-data.service';
+import { PoliceJurisdictionDataService } from '@services/police-jurisdiction-data.service';
 import { LocalGovernmentDataService } from '@services/local-government-data.service';
 import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
 import { AreaCategory } from '@models/service-area.model';
@@ -145,7 +144,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService,
-    private policeJurisdictionDataService: PoliceDurisdictionDataService,
+    private policeJurisdictionDataService: PoliceJurisdictionDataService,
     private localGovDataService: LocalGovernmentDataService
   ) {
     super();

@@ -1,0 +1,570 @@
+{
+  "misc": {
+    "compileTime": 112807
+  },
+  "plugins": {
+    "AngularCompilerPlugin": 31587,
+    "ContextReplacementPlugin": 1,
+    "ScriptsWebpackPlugin": 24,
+    "MiniCssExtractPlugin": 20,
+    "DedupeModuleResolvePlugin": 0,
+    "ProfilingPlugin": 12210,
+    "CircularDependencyPlugin": 165,
+    "NamedLazyChunksPlugin": 44036,
+    "CommonJsUsageWarnPlugin": 9,
+    "SourceMapDevToolPlugin": 3271,
+    "AnyComponentStyleBudgetChecker": 6,
+    "SuppressExtractedTextChunksWebpackPlugin": 14,
+    "NgBuildAnalyticsPlugin": 659,
+    "(unable to deduce plugin name)": 358
+  },
+  "loaders": {
+    "build": [
+      {
+        "averages": {
+          "dataPoints": 849,
+          "median": 1,
+          "mean": 4,
+          "range": {
+            "start": 0,
+            "end": 480
+          },
+          "variance": 514
+        },
+        "activeTime": 3156,
+        "loaders": [
+          "modules with no loaders"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 3,
+          "median": 17964,
+          "mean": 18144,
+          "range": {
+            "start": 17792,
+            "end": 18675
+          },
+          "variance": 219133
+        },
+        "activeTime": 18706,
+        "loaders": [
+          "mini-css-extract-plugin",
+          "css-loader",
+          "postcss-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 3,
+          "median": 17707,
+          "mean": 17853,
+          "range": {
+            "start": 17558,
+            "end": 18295
+          },
+          "variance": 151853
+        },
+        "activeTime": 18644,
+        "loaders": [
+          "css-loader",
+          "postcss-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 1,
+          "median": 24437,
+          "mean": 24437,
+          "range": {
+            "start": 24437,
+            "end": 24437
+          }
+        },
+        "activeTime": 24437,
+        "loaders": [
+          "mini-css-extract-plugin",
+          "css-loader",
+          "postcss-loader",
+          "resolve-url-loader",
+          "sass-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 1,
+          "median": 24408,
+          "mean": 24408,
+          "range": {
+            "start": 24408,
+            "end": 24408
+          }
+        },
+        "activeTime": 24408,
+        "loaders": [
+          "css-loader",
+          "postcss-loader",
+          "resolve-url-loader",
+          "sass-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 200,
+          "median": 29,
+          "mean": 6,
+          "range": {
+            "start": 1,
+            "end": 120
+          },
+          "variance": 107
+        },
+        "activeTime": 1232,
+        "loaders": [
+          "@ngtools/webpack"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 109,
+          "median": 6827,
+          "mean": 5797,
+          "range": {
+            "start": 561,
+            "end": 12771
+          },
+          "variance": 10891342
+        },
+        "activeTime": 17452,
+        "loaders": [
+          "raw-loader",
+          "postcss-loader",
+          "resolve-url-loader",
+          "sass-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 122,
+          "median": 1,
+          "mean": 1,
+          "range": {
+            "start": 0,
+            "end": 6
+          },
+          "variance": 1
+        },
+        "activeTime": 166,
+        "loaders": [
+          "raw-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 5,
+          "median": 648,
+          "mean": 3462,
+          "range": {
+            "start": 640,
+            "end": 7756
+          },
+          "variance": 14888372
+        },
+        "activeTime": 8066,
+        "loaders": [
+          "raw-loader",
+          "postcss-loader"
+        ],
+        "subLoadersTime": {}
+      }
+    ]
+  }
+}
+{
+  "misc": {
+    "compileTime": 197909
+  },
+  "plugins": {
+    "AngularCompilerPlugin": 45185,
+    "ContextReplacementPlugin": 1,
+    "ScriptsWebpackPlugin": 25,
+    "MiniCssExtractPlugin": 20,
+    "DedupeModuleResolvePlugin": 1,
+    "ProfilingPlugin": 13437,
+    "CircularDependencyPlugin": 237,
+    "NamedLazyChunksPlugin": 110088,
+    "CommonJsUsageWarnPlugin": 10,
+    "SourceMapDevToolPlugin": 3651,
+    "AnyComponentStyleBudgetChecker": 5,
+    "SuppressExtractedTextChunksWebpackPlugin": 24,
+    "NgBuildAnalyticsPlugin": 638,
+    "(unable to deduce plugin name)": 454
+  },
+  "loaders": {
+    "build": [
+      {
+        "averages": {
+          "dataPoints": 849,
+          "median": 1,
+          "mean": 4,
+          "range": {
+            "start": 0,
+            "end": 474
+          },
+          "variance": 509
+        },
+        "activeTime": 3431,
+        "loaders": [
+          "modules with no loaders"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 1,
+          "median": 25139,
+          "mean": 25139,
+          "range": {
+            "start": 25139,
+            "end": 25139
+          }
+        },
+        "activeTime": 25139,
+        "loaders": [
+          "mini-css-extract-plugin",
+          "css-loader",
+          "postcss-loader",
+          "resolve-url-loader",
+          "sass-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 3,
+          "median": 17827,
+          "mean": 18056,
+          "range": {
+            "start": 17691,
+            "end": 18649
+          },
+          "variance": 268658
+        },
+        "activeTime": 18663,
+        "loaders": [
+          "mini-css-extract-plugin",
+          "css-loader",
+          "postcss-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 3,
+          "median": 17562,
+          "mean": 17525,
+          "range": {
+            "start": 17091,
+            "end": 17921
+          },
+          "variance": 173271
+        },
+        "activeTime": 18615,
+        "loaders": [
+          "css-loader",
+          "postcss-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 1,
+          "median": 24729,
+          "mean": 24729,
+          "range": {
+            "start": 24729,
+            "end": 24729
+          }
+        },
+        "activeTime": 24729,
+        "loaders": [
+          "css-loader",
+          "postcss-loader",
+          "resolve-url-loader",
+          "sass-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 200,
+          "median": 3,
+          "mean": 6,
+          "range": {
+            "start": 1,
+            "end": 120
+          },
+          "variance": 102
+        },
+        "activeTime": 1200,
+        "loaders": [
+          "@ngtools/webpack"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 109,
+          "median": 7080,
+          "mean": 5718,
+          "range": {
+            "start": 776,
+            "end": 10434
+          },
+          "variance": 9327581
+        },
+        "activeTime": 13661,
+        "loaders": [
+          "raw-loader",
+          "postcss-loader",
+          "resolve-url-loader",
+          "sass-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 122,
+          "median": 1,
+          "mean": 1,
+          "range": {
+            "start": 0,
+            "end": 4
+          },
+          "variance": 1
+        },
+        "activeTime": 167,
+        "loaders": [
+          "raw-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 5,
+          "median": 8340,
+          "mean": 3859,
+          "range": {
+            "start": 829,
+            "end": 8447
+          },
+          "variance": 17139233
+        },
+        "activeTime": 8959,
+        "loaders": [
+          "raw-loader",
+          "postcss-loader"
+        ],
+        "subLoadersTime": {}
+      }
+    ]
+  }
+}
+{
+  "misc": {
+    "compileTime": 183574
+  },
+  "plugins": {
+    "AngularCompilerPlugin": 34795,
+    "ContextReplacementPlugin": 0,
+    "ScriptsWebpackPlugin": 34,
+    "MiniCssExtractPlugin": 16,
+    "DedupeModuleResolvePlugin": 1,
+    "ProfilingPlugin": 12875,
+    "CircularDependencyPlugin": 196,
+    "NamedLazyChunksPlugin": 98465,
+    "CommonJsUsageWarnPlugin": 9,
+    "SourceMapDevToolPlugin": 3299,
+    "AnyComponentStyleBudgetChecker": 8,
+    "SuppressExtractedTextChunksWebpackPlugin": 19,
+    "NgBuildAnalyticsPlugin": 585,
+    "(unable to deduce plugin name)": 450
+  },
+  "loaders": {
+    "build": [
+      {
+        "averages": {
+          "dataPoints": 849,
+          "median": 1,
+          "mean": 4,
+          "range": {
+            "start": 0,
+            "end": 478
+          },
+          "variance": 519
+        },
+        "activeTime": 3537,
+        "loaders": [
+          "modules with no loaders"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 3,
+          "median": 17492,
+          "mean": 17685,
+          "range": {
+            "start": 17339,
+            "end": 18224
+          },
+          "variance": 223743
+        },
+        "activeTime": 18261,
+        "loaders": [
+          "mini-css-extract-plugin",
+          "css-loader",
+          "postcss-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 3,
+          "median": 17192,
+          "mean": 17348,
+          "range": {
+            "start": 17044,
+            "end": 17807
+          },
+          "variance": 163717
+        },
+        "activeTime": 18186,
+        "loaders": [
+          "css-loader",
+          "postcss-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 200,
+          "median": 2,
+          "mean": 6,
+          "range": {
+            "start": 1,
+            "end": 124
+          },
+          "variance": 102
+        },
+        "activeTime": 1159,
+        "loaders": [
+          "@ngtools/webpack"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 1,
+          "median": 24314,
+          "mean": 24314,
+          "range": {
+            "start": 24314,
+            "end": 24314
+          }
+        },
+        "activeTime": 24314,
+        "loaders": [
+          "mini-css-extract-plugin",
+          "css-loader",
+          "postcss-loader",
+          "resolve-url-loader",
+          "sass-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 1,
+          "median": 24287,
+          "mean": 24287,
+          "range": {
+            "start": 24287,
+            "end": 24287
+          }
+        },
+        "activeTime": 24287,
+        "loaders": [
+          "css-loader",
+          "postcss-loader",
+          "resolve-url-loader",
+          "sass-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 109,
+          "median": 721,
+          "mean": 5757,
+          "range": {
+            "start": 649,
+            "end": 10535
+          },
+          "variance": 9755134
+        },
+        "activeTime": 13663,
+        "loaders": [
+          "raw-loader",
+          "postcss-loader",
+          "resolve-url-loader",
+          "sass-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 122,
+          "median": 1,
+          "mean": 2,
+          "range": {
+            "start": 0,
+            "end": 5
+          },
+          "variance": 1
+        },
+        "activeTime": 196,
+        "loaders": [
+          "raw-loader"
+        ],
+        "subLoadersTime": {}
+      },
+      {
+        "averages": {
+          "dataPoints": 5,
+          "median": 746,
+          "mean": 3826,
+          "range": {
+            "start": 737,
+            "end": 8502
+          },
+          "variance": 17835238
+        },
+        "activeTime": 9024,
+        "loaders": [
+          "raw-loader",
+          "postcss-loader"
+        ],
+        "subLoadersTime": {}
+      }
+    ]
+  }
+}
