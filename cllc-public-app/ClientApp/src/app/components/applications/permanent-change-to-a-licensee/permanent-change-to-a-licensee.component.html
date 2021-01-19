@@ -1,6 +1,6 @@
 <div [formGroup]="form" class="form-wrapper">
     <h1>Permanent Change to a Licensee
-        <span class="success-green" *ngIf="canCreateNewApplication">( PAID )</span>
+        <span class="success-green" *ngIf="canCreateNewApplication"><em>PAID</em></span>
     </h1>
     <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
 
@@ -12,7 +12,7 @@
                 <section>
                     <!-- For all corporations -->
                     <section
-                        *ngIf="this.businessType === 'PrivateCorporation' || this.businessType === 'PublicCorporation'">
+                        *ngIf="this.account.businessType === 'PrivateCorporation' || this.account.businessType === 'PublicCorporation'">
                         <p>All licensees and applicants must maintain a complete and current list of leadership and
                             businesses
                             associated with their organization.</p>
@@ -23,17 +23,17 @@
                             <li>Change of directors, officers, or senior managers</li>
                             <li>Name changes</li>
                             <!-- for private corporations only-->
-                            <li *ngIf="this.businessType === 'PrivateCorporation'">Internal transfer of shares</li>
-                            <li *ngIf="this.businessType === 'PrivateCorporation'">External transfer of shares</li>
+                            <li *ngIf="this.account.businessType === 'PrivateCorporation'">Internal transfer of shares</li>
+                            <li *ngIf="this.account.businessType === 'PrivateCorporation'">External transfer of shares</li>
                         </ul>
                         <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through
                             the
-                            Licences
-                            dashboard.</p>
+                            <a href="/licences/">Licences
+                            dashboard</a>.</p>
                     </section>
 
                     <!-- For Partnerships -->
-                    <section *ngIf="this.businessType === 'Partnership'">
+                    <section *ngIf="this.account.businessType === 'Partnership'">
                         <p>All licensees and applicants must maintain a complete and current list of individual and
                             businesses
                             partners associated with their organization.</p>
@@ -53,7 +53,7 @@
                     </section>
 
                     <!-- For Sole Proprietors -->
-                    <section *ngIf="this.businessType === 'SoleProprietorship'">
+                    <section *ngIf="this.account.businessType === 'SoleProprietorship'">
                         <p>Sole Proprietors must provide their leadership information and keep it up to date.</p>
                         <p>You are required to notify the LCRB of name changes within ten business days of the change
                             being
@@ -66,8 +66,8 @@
                     </section>
 
                     <!-- For Societies, Universities and Churches-->
-                    <section *ngIf="['Society', 'University', 'Church'].indexOf(this.businessType) !== -1">
-                        <p>{{this.businessType}} applicants and licensees must provide their leadership information and
+                    <section *ngIf="['Society', 'University', 'Church'].indexOf(this.account.businessType) !== -1">
+                        <p>{{this.account.businessType}} applicants and licensees must provide their leadership information and
                             keep
                             it
                             up to date.</p>
@@ -82,7 +82,7 @@
                     </section>
 
                     <!-- For Indigenous Nations -->
-                    <section *ngIf="this.businessType === 'IndigenousNation'">
+                    <section *ngIf="this.account.businessType === 'IndigenousNation'">
                         <p>
                             An applicant that is an <i>Indigenous Nation</i> may have associates that are required to
                             consent to
@@ -148,7 +148,7 @@
                         </p>
                     </section>
 
-                    <section *ngIf="this.businessType !=='IndigenousNation'">
+                    <section *ngIf="this.account.businessType !=='IndigenousNation'">
                         <p>Fees are calculated based on the type of change reported and the number of licences impacted.
                             If
                             no changes are made, or no licences are held, you will not be charged a fee for submitting
@@ -163,10 +163,10 @@
                                 <tbody>
                                     <tr>
                                         <th class="licenceTable" style="background-color: #38598a; color: white;">
-                                            {{cannabisLicences.length}} Active Cannabis
+                                            Cannabis
                                             Licences:</th>
                                         <th class="licenceTable" style="background-color: #38598a; color: white;">
-                                            {{liquorLicences.length}} Active Liquor
+                                            Liquor
                                             Licences:</th>
                                     </tr>
                                     <tr>
@@ -265,20 +265,23 @@
                     [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
                 </app-file-uploader>
 
-                <h4>Updated Notice of Articles (or Register of Directors and Officers)</h4>
-                <p>Provide the Notice of Articles for your corporation. Alternatively, you can provide list of all current directors/officers by full legal name, position and date of appointment.</p>
-                <p *ngIf="hasLiquor"><strong>Directors and Officers are <u>not</u> required to submit a Personal History Summary form for liquor-related applications.</strong></p>
+                <h4><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Security Screening Information Required</h4>
+                <p>All newly added shareholders holding 10% or greater interest must complete a <strong>Personal History Summary</strong> and/or
+                    <strong>Cannabis
+                    Associate
+                    Security Screening</strong> form and required documents as described below</p>
 
-                <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
-                </app-file-uploader>
-                <p *ngIf="hasCannabis"><strong><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All directors must submit a completed Cannabis Associate Security Screening form below.</strong>
-                </p>
+                    <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
+                    <p>Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide their full
+                      legal name and date of birth. They do not need to provide a Personal History Summary or Cannabis Associate Security Screening form.</p>
+                    <app-file-uploader *ngIf="application?.id" documentType="IndividualsWithLessThan10"
+                      fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+                      (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event" [entityId]="application.id"
+                      [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
+                    </app-file-uploader>
 
                 <hr>
+                <section>
                 <p>If the change is the result of an internal amalgamation, attach:</p>
 
                 <h4>Certificate of Amalgamation</h4>
@@ -304,13 +307,7 @@
                     [entityId]="application.id"
                     [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'">
                 </app-file-uploader>
-
-                <h4><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Security Screening Information Required</h4>
-                <p>All shareholders holding 10% or greater interest must complete a <strong>Personal History Summary</strong> and/or
-                    <strong>Cannabis
-                    Associate
-                    Security Screening</strong> form and required documents as described below</p>
-
+                </section>
             </div>
 
         </section>
@@ -319,24 +316,17 @@
         <section *ngIf="form.get('csExternalTransferOfShares').value">
             <h3 class="blue-header">External Share Transfer</h3>
             <div class="content-bottom">
-
-                <h4>Updated Central Securities Register (shareholders) for the licensee corporation or holding company
-                </h4>
-                <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
-                </app-file-uploader>
-
-                <h4>Updated Register of Directors and Officers for the licensee corporation or holding company</h4>
-                <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
-                </app-file-uploader>
-
+              <p>Complete this section when you have issued shares to a new individual or shareholder business.</p>
+              <h4>Updated Central Securities Register (shareholders) for the licensee corporation or holding company
+              </h4>
+              <p>Provide an updated central securities register.</p>
+              <img src="assets/central-securities-register-example.png" style="width:500px; margin: 10px; border: solid #e0e0e0 1px;">
+              <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                  [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
+                  [entityId]="application.id"
+                  [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
+              </app-file-uploader>
                 <hr>
                 <p>If one of the new shareholders is a private corporation, a public corporation, a society or a
                     partnership,
@@ -397,14 +387,12 @@
                                 Local
                                 Government, First Nations, colleges, universities, etc. Contact the branch to discuss
                                 documentation
-                                requirements.</li>
+                                requirements at 1-866-209-2111 or <a href="mailto:LCLBHelpDesk@gov.bc.ca">LCLBHelpDesk@gov.bc.ca</a>.</li>
 
                         </ul>
                     </li>
 
                 </ul>
-
-
                 <h4>Supporting Business Documentation</h4>
                 <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
@@ -416,17 +404,14 @@
                 <hr>
 
                 <h4><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Security Screening Information Required</h4>
-                <p>All shareholders holding 10% or greater interest must complete a Personal History Summary and/or
-                    Cannabis
-                    Associate
-                    Security Screening form and required documents as described below</p>
+                <p>All newly added individuals with 10% or more interest must complete a Personal History Summary and/or Cannabis Associate Security Screening form and required documents as described below.</p>
 
                       <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
                       <p>Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide their full
                         legal name and date of birth. They do not need to provide a Personal History Summary or Cannabis Associate Security Screening form.</p>
-                      <app-file-uploader *ngIf="true || applicationId" documentType="IndividualsWithLessThan10"
+                      <app-file-uploader *ngIf="application?.id" documentType="IndividualsWithLessThan10"
                         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
-                        (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event" [entityId]="applicationId"
+                        (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event" [entityId]="application.id"
                         [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
                       </app-file-uploader>
             </div>
@@ -437,21 +422,20 @@
         <section *ngIf="form.get('csChangeOfDirectorsOrOfficers').value">
             <h3 class="blue-header">Change of Directors or Officers</h3>
             <div class="content-bottom">
-                <p>To be completed when there are changes in directors or officers of a public corporation or society
-                    within
-                    the licensee legal entity.</p>
+              <p *ngIf="hasLiquor && !hasCannabis">To be completed when there are changes in directors or officers of a public corporation or society within the licensee legal entity.</p>
+              <p *ngIf="hasCannabis">To be completed when there are changes in directors or officers of a public corporation or society, and when there are changes in senior managers of a society, within the licensee legal entity.</p>
 
-                <h4>Updated Register of Directors and Officers for the licensee corporation or holding company</h4>
-                <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
+                <h4>Notice of Articles (or Register of Directors and Officers)</h4>
+                <p>Provide the updated Notice of Articles for your corporation. Alternatively, you can provide list of all current directors/officers by full legal name, position and date of appointment.</p>
+                <p *ngIf="hasLiquor"><strong>Directors and Officers are <u>not</u> required to submit a Personal History Summary form for liquor-related applications.</strong></p>
+                <app-file-uploader *ngIf="application?.id" documentType="NOA"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+                  (numberOfUploadedFiles)="uploadedNOA = $event" [entityId]="application.id"
+                  [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'">
                 </app-file-uploader>
+                <p *ngIf="hasCannabis"><strong><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All newly added directors must submit a completed Cannabis Associate Security Screening form below.</strong>
+              </p>
 
-                <h4><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Security Screening Information Required</h4>
-                <p>All directors must complete a Personal History Summary and/or Cannabis Associate
-                    Security Screening form and required documents as described below</p>
             </div>
 
         </section>
@@ -490,7 +474,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <span><strong>Name Changed To:</strong></span>
+                            <span><strong>Name changed to:</strong></span>
                         </td>
                         <td>
                             <mat-form-field class="ml-1 mr-2">
@@ -546,7 +530,7 @@
                         </button>
                     </mat-form-field>
 
-                    <span>Name Changed To (in full):</span>
+                    <span>Name changed to (in full):</span>
 
                     <mat-form-field class="ml-1 mr-2">
                         <mat-label>New Company Name</mat-label>
@@ -559,7 +543,7 @@
 
                 </div>
                 <h4>
-                    Copy of the Certificate of Name of Change from BC Registrar of Companies
+                    Copy of the Certificate of Change of Name Form from BC Registrar of Companies
                 </h4>
                 <app-file-uploader *ngIf="application?.id" documentType="CertificateOfNameChange"
                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
@@ -664,8 +648,9 @@
         <section *ngIf="form.get('csAdditionalReceiverOrExecutor').value">
             <h3 class="blue-header">Addition of Executor or Receiver</h3>
             <div class="content-bottom">
-                To be completed upon the death, bankruptcy or receivership of a licensee. Fill
-                out A or B and attach the required documents.
+                <p>To be completed upon the death, bankruptcy or receivership of a licensee. Fill
+                out A or B and attach the required documents.</p>
+                <p>Note: The Branch may renew the licence with the name of the executor, administrator or successor appended, for a period of one year. By the end of the one-year renewal period, relevant applications (e.g. transfer of ownership or transfer of shares) and appropriate documentation must be submitted to the Branch.</p>
 
                 <h4>A. Addition of Executor</h4>
                 <span><strong>Executor's Name:</strong></span>
@@ -727,7 +712,7 @@
 
                 <p>
                     Upload a copy of Court Order appointing Receiver<br>
-                    (Order must include authority to operate the licensee's business and must specify the licences).
+                    (Order must include authority to operate the licensee's business and must specify the licence number(s)).
                 </p>
 
                 <app-file-uploader *ngIf="application?.id" documentType="ReceiverAppointment"
@@ -752,7 +737,7 @@
             <h3 class="blue-header"><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Cannabis Associate Security Screening Forms</h3>
             <div class="content-bottom">
                 <p>
-                    Sole proprietors and associates of applicants for a non-medical cannabis licence are required to
+                    Newly added associates for a non-medical cannabis licence are required to
                     submit
                     documentation for
                     security screenings and/or financial integrity checks. Cannabis retail store licence applications
@@ -762,9 +747,7 @@
                 </p>
 
                 <p>
-                    Please note, the security screening for sole proprietors and associates differs from the security
-                    verification for people
-                    seeking work in non-medical cannabis retail stores. The screening for associates considers the
+                    The screening for associates considers the
                     associate
                     within the context
                     of a larger organizational structure. The security verification for workers considers the worker as
@@ -775,23 +758,12 @@
                     store, they must pass both.
                 </p>
 
-                <p>
-                    Cannabis Associate Security Screening documents are not required if you submit liquor related
-                    applications. If you do not provide
-                    Cannabis Associate Security Screening documents prior to your application submission, they will be
-                    requested via secure channels
-                    once your application has been received. Please note that the time to collect these documents
-                    directly
-                    impacts the time to process your application.
-                </p>
-
                 <p>Please provide the documents as outlined on <a
                         href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/cannabis-resources-information/associate-forms"
                         target="_blank">this page</a>.</p>
 
-                <h4>Cannabis Associate Security Screening
+                <h4>Cannabis Associate Security Screening Forms
                 </h4>
-                <p>Each associate must provide a complete <a href=""></a></p>
                 <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
                     [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
                     (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
@@ -817,21 +789,13 @@
             <div class="content-bottom">
 
                 <p>
-                    Each person involved in the applicant’s legal entity structure must submit a Personal History
+                    Newly added individuals  involved in the applicant’s legal entity structure must submit a Personal History
                     Summary
                     form and a copy of
                     your Criminal Record Search completed by the RCMP or local Police Department. The form may also
                     require
                     you to submit copy
                     of your driver’s abstract or a statutory declaration. See the form for full details.
-                </p>
-
-                <p>
-                    Personal History Summary forms are not required if you submit cannabis-related applications.
-                    If you do not provide Personal History Summary documents prior to your application submission,
-                    they will be requested via secure channels once your application has been received.
-                    Please note that the time to collect these documents directly impacts the time to process your
-                    application.
                 </p>
 
                 <h4>Personal History Summary Documents</h4>
@@ -958,7 +922,7 @@
                         <th class="paymentSummary">Cost</th>
                     </tr>
                     <ng-container *ngFor="let item of selectedChangeList">
-                        <tr>
+                      <tr *ngIf="form.get(item.formControlName).value === true && !(item.name == 'Internal Transfer of Shares' && form.get('csExternalTransferOfShares').value === true)">
                             <td class="paymentSummary1">{{item.name}}</td>
                             <td class="paymentSummary2">x {{cannabisLicences.length}}</td>
                             <td class="paymentSummary2">${{item.CannabisFee}}</td>
@@ -967,8 +931,8 @@
                     <tr>
                         <td colspan=3 style="padding:5px; text-align: right;">
                             <button mat-raised-button [disabled]="application.primaryInvoicePaid" color="primary"
-                                style="width:250px;" (click)="submit_application('primary')">
-                                <span>{{ application?.primaryInvoicePaid ? 'FEES PAID' : 'PAY CANNABIS FEES'}}</span>
+                                style="width:350px;" (click)="submit_application('primary')">
+                                <span>{{ application?.primaryInvoicePaid ? 'CANNABIS LICENSEE FEES PAID' : 'PAY CANNABIS LICENSEE CHANGE FEES'}}</span>
                                 <mat-progress-bar *ngIf="primaryPaymentInProgress" mode="indeterminate">
                                 </mat-progress-bar>
                             </button>
@@ -995,7 +959,7 @@
                         <th class="paymentSummary">Cost</th>
                     </tr>
                     <ng-container *ngFor="let item of changeList">
-                        <tr *ngIf="form.get(item.formControlName).value === true">
+                        <tr *ngIf="form.get(item.formControlName).value === true && !(item.name == 'Internal Transfer of Shares' && form.get('csExternalTransferOfShares').value === true)">
                             <td class="paymentSummary1">{{item.name}}</td>
                             <td class="paymentSummary2">x {{liquorLicences.length}}</td>
                             <td class="paymentSummary2">${{item.LiquorFee}}</td>
@@ -1005,8 +969,8 @@
                     <tr>
                         <td colspan=3 style="padding:5px; text-align: right;">
                             <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid"
-                                style="width:250px;" (click)="submit_application('secondary')">
-                                <span>{{ application?.secondaryInvoicePaid ? 'FEES PAID' : 'PAY LIQUOR FEES' }}</span>
+                                style="width:350px;" (click)="submit_application('secondary')">
+                                <span>{{ application?.secondaryInvoicePaid ? 'LIQUOR LICENSEE FEES PAID' : 'PAY CANNABIS LICENSEE CHANGE FEES' }}</span>
                                 <mat-progress-bar *ngIf="secondaryPaymentInProgress" mode="indeterminate">
                                 </mat-progress-bar>
                             </button>
