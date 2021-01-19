@@ -3,7 +3,6 @@ import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 
 import { FileSystemItem } from '@models/file-system-item.model';
 import { Subscription } from 'rxjs';
 import { ApplicationDataService } from '@services/application-data.service';
-import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 

@@ -13,7 +13,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { Store } from '@ngrx/store';
 import { Account } from '@models/account.model';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LicenceEventsService } from '@services/licence-events.service';
 
 const applicationDataServiceStub: Partial<ApplicationDataService> = {

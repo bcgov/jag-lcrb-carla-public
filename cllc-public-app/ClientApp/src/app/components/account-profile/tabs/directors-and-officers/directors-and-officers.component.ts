@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {  MatTableDataSource,  MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';

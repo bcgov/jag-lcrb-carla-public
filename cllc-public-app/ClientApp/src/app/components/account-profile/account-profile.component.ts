@@ -1,7 +1,6 @@
 
 import { filter, map, catchError, takeWhile } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
-import { UserDataService } from '@services/user-data.service';
 import { User } from '@models/user.model';
 import { ContactDataService } from '@services/contact-data.service';
 import { Contact } from '@models/contact.model';
@@ -13,14 +12,12 @@ import { COUNTRIES } from './country-list';
 
 import * as moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
-import { defaultFormat as _rollupMoment } from 'moment';
 import { AccountDataService } from '@services/account-data.service';
 import { Account } from '@models/account.model';
 import { FormBase } from '@shared/form-base';
 import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { DynamicsDataService } from '@services/dynamics-data.service';
 import { AppState } from '@app/app-state/models/app-state';
 import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 

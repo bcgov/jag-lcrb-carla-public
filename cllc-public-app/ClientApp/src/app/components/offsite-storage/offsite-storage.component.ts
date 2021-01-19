@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { LicenseDataService } from '@services/license-data.service';

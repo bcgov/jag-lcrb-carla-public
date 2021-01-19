@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store';
 import * as CurrentAccountActions from '../actions/current-account.action';
 import { Account } from '@models/account.model';
 import { CurrentAccountState } from '../models/app-state';

@@ -12,8 +12,6 @@ export class InsertService {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         let route = this.activatedRoute;
-        const sidebarLeft = null;
-        const sidebarRight = null;
 
         while (route.firstChild) {
           route = route.firstChild;

@@ -1,8 +1,6 @@
-import { Account } from './account.model';
-import { Application } from './application.model';
+
 import { LegalEntity } from './legal-entity.model';
-import { Contact } from './contact.model';
-import { LicenseeTreeComponent } from '@shared/components/licensee-tree/licensee-tree.component';
+
 
 export class LicenseeChangeLog {
   id: string; // guid

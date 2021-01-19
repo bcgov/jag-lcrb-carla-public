@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FeatureFlagService } from '@services/feature-flag.service';

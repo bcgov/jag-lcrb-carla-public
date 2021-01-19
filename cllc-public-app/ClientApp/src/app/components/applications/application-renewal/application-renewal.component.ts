@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
+import { Subject, Observable, forkJoin, of } from 'rxjs';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +19,6 @@ import { ApplicationTypeNames, FormControlState } from '@models/application-type
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
-import { KeyValue } from '@angular/common';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { LicenseDataService } from '@app/services/license-data.service';
 import { UPLOAD_FILES_MODE, ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';

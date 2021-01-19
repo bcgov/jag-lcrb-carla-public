@@ -3,8 +3,6 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { UserDataService } from './user-data.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app-state/models/app-state';
-import { User } from '@models/user.model';
-import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()

@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentDataService } from '@services/payment-data.service';
 import { Subscription } from 'rxjs';
-import { AlertModule } from 'ngx-bootstrap/alert';
 import { ApplicationDataService } from '../../services/application-data.service';
 import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { MatSnackBar } from '@angular/material';

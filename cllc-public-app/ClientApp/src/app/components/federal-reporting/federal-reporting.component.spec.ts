@@ -11,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialogModule } from '@angular/material';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
-import { Account } from '@models/account.model';
 import { ProductInventorySalesReportComponent } from './product-inventory-sales-report/product-inventory-sales-report.component';
 
 describe('FederalReportingComponent', () => {

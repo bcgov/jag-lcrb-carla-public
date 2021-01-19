@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, Input,  Output, EventEmitter } from '@angular/core';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Account } from '@models/account.model';
 import { Contact } from '@models/contact.model';
@@ -7,7 +7,7 @@ import { UserDataService } from '@services/user-data.service';
 import { AccountDataService } from '@services/account-data.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { filter, mergeMap, takeWhile } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
 import { Subscription } from 'rxjs';
 import { FeatureFlagService } from '@services/feature-flag.service';

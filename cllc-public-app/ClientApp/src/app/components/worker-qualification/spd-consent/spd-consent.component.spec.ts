@@ -13,7 +13,6 @@ import { of } from 'rxjs';
 import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
-import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 const userDataServiceStub: Partial<UserDataService> = {

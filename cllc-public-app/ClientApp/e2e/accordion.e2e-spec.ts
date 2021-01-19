@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import { browser } from 'protractor';
 import { AppHomePage } from './app.po';
 
 describe('Accordion component test', () => {

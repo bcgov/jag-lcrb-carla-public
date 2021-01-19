@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NewsletterDataService } from '@services/newsletter-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 

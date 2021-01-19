@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Application } from '@models/application.model';
 import { ApplicationDataService } from '@services/application-data.service';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
 import { ProductionStagesComponent } from './production-stages/production-stages.component';
 

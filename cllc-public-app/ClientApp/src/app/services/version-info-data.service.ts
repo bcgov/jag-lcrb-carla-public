@@ -1,5 +1,5 @@
 import { DataService } from './data.service';
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 import { VersionInfo } from '@models/version-info.model';

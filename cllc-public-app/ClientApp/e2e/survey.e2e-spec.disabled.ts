@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import { browser } from 'protractor';
 import { AppSurveyPage } from './survey.po';
 import { SurveyConfig } from '../src/app/models/survey-config.model';
 

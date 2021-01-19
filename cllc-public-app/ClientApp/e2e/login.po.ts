@@ -2,7 +2,6 @@ import { browser, by, element, protractor } from 'protractor';
 import { AccountDataService } from '../src/app/services/account-data.service';
 import { HttpClient, HttpXhrBackend, XhrFactory } from '@angular/common/http';
 import { XMLHttpRequest } from 'xmlhttprequest';
-import { Subject } from 'rxjs';
 
 export class BrowserXhr implements XhrFactory {
     constructor() { }

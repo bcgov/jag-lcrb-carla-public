@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SpecificLocation, FoodService, Entertainment, EventType, LicenceEvent, EventStatus } from '../../models/licence-event.model';
+import { LicenceEvent, EventStatus } from '../../models/licence-event.model';
 import { LicenceEventsService } from '@services/licence-events.service';
-import { takeWhile, switchMap } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 import { AppState } from '@app/app-state/models/app-state';
 import { Store } from '@ngrx/store';
 import { User } from '@models/user.model';

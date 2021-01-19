@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
-import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
@@ -11,10 +10,9 @@ import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { FormBase } from '@shared/form-base';
-import { Observable, of, forkJoin, merge, combineLatest } from 'rxjs';
-import { catchError, delay, filter, mergeMap, takeWhile } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
 import { ContactComponent, ContactData } from '@shared/components/contact/contact.component';
-import { PaymentConfirmationComponent } from '@components/payment-confirmation/payment-confirmation.component';
 import { faIdCard } from '@fortawesome/free-regular-svg-icons';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 

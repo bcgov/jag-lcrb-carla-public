@@ -1,17 +1,16 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { User } from '@models/user.model';
-import { MatTableDataSource, MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { isDevMode } from '@angular/core';
-import { Store, resultMemoize } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from './app-state/models/app-state';
-import { filter, takeWhile, map } from 'rxjs/operators';
+import { filter, takeWhile } from 'rxjs/operators';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { LegalEntity } from '@models/legal-entity.model';
 import { AccountDataService } from '@services/account-data.service';
 import { FormBase } from '@shared/form-base';
 import { SetCurrentAccountAction } from '@app/app-state/actions/current-account.action';
-import { SetOngoingLicenseeApplicationIdAction } from '@app/app-state/actions/ongoing-licensee-application-id.action';
 import { Account } from '@models/account.model';
 import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfo } from '@models/version-info.model';
@@ -19,12 +18,8 @@ import { VersionInfoDialogComponent } from '@components/version-info/version-inf
 import { MonthlyReportDataService } from '@services/monthly-report.service';
 import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model';
 import { ApplicationDataService } from '@services/application-data.service';
-import { Application } from '@models/application.model';
-import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
-import { ModalComponent } from '@shared/components/modal/modal.component';
 import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
 import { UserDataService } from '@services/user-data.service';
-import { de } from 'date-fns/locale';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { faInternetExplorer } from '@fortawesome/free-brands-svg-icons';
@@ -155,7 +150,7 @@ export class AppComponent extends FormBase implements OnInit {
     };
 
     // open dialog, get reference and process returned data from dialog
-    const dialogRef = this.dialog.open(VersionInfoDialogComponent, dialogConfig);
+    this.dialog.open(VersionInfoDialogComponent, dialogConfig);
   }
 
   openEligibilityModal() {

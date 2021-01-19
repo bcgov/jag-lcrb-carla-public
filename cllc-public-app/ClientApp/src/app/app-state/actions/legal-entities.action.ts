@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { Account } from '@models/account.model';
 import { LegalEntity } from '@models/legal-entity.model';
 
 export const LEGAL_ENTITIES = 'LEGAL_ENTITIES';

@@ -5,7 +5,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
 import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
-import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { takeWhile } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 

@@ -13,7 +13,6 @@ import { DynamicsDataService } from '@services/dynamics-data.service';
 import { FormBuilder } from '@angular/forms';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { of } from 'rxjs';
-import { Application } from '@models/application.model';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';

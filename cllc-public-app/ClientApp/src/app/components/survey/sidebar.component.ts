@@ -1,4 +1,4 @@
-import { Component, Injector, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { SurveyComponent } from './survey.component';
 //import { SurveyModel } from 'survey-angular';
 

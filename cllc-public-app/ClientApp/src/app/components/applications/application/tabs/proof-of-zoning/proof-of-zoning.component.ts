@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Application } from '@models/application.model';
 import { ApplicationDataService } from '@services/application-data.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
-import { ApplicationTypeNames} from '@models/application-type.model';
 import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
 
 @Component({

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild, ModuleWithProviders } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,8 +7,6 @@ import { faSave } from '@fortawesome/free-regular-svg-icons';
 import { faInfoCircle, faPencilAlt, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
-import { ApplicationSummary } from '@models/application-summary.model';
-import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
 import { Application } from '@models/application.model';
 import { LegalEntity } from '@models/legal-entity.model';
 import { LicenseeChangeLog } from '@models/licensee-change-log.model';
@@ -20,9 +18,8 @@ import { LicenseDataService } from '@services/license-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { OrgStructureComponent } from '@shared/components/org-structure/org-structure.component';
 import { FormBase } from '@shared/form-base';
-import { forkJoin, Observable, of, Subject } from 'rxjs';
-import { filter, mergeMap, switchMap, takeWhile } from 'rxjs/operators';
-import { AppRemoveIfFeatureOnDirective } from '../../../directives/remove-if-feature-on.directive';
+import { Observable, of, Subject } from 'rxjs';
+import { filter, mergeMap, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-application-licensee-changes',

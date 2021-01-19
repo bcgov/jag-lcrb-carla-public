@@ -1,6 +1,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER, forwardRef } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
@@ -110,7 +110,7 @@ import { CanDeactivateGuard } from '@services/can-deactivate-guard.service';
 import { BCeidAuthGuard } from '@services/bceid-auth-guard.service';
 import { ServiceCardAuthGuard } from '@services/service-card-auth-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
-import { StoreModule, Store } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { DashboardComponent } from '@components/dashboard/dashboard.component';
 import { ApplicationComponent } from '@components/applications/application/application.component';
 import { TermsOfUseComponent } from '@components/terms-of-use/terms-of-use.component';
@@ -118,7 +118,6 @@ import { WorkerApplicationComponent } from '@components/worker-qualification/wor
 import { WorkerDashboardComponent } from '@components/worker-qualification/dashboard/dashboard.component';
 import { AliasDataService } from '@services/alias-data.service';
 import { PreviousAddressDataService } from '@services/previous-address-data.service';
-import { WorkerDataService } from '@services/worker-data.service.';
 import { SpdConsentComponent } from '@components/worker-qualification/spd-consent/spd-consent.component';
 import { PrePaymentComponent } from '@components/worker-qualification/pre-payment/pre-payment.component';
 import { UserConfirmationComponent } from '@components/worker-qualification/user-confirmation/user-confirmation.component';
@@ -142,9 +141,6 @@ import { FieldComponent } from '@shared/components/field/field.component';
 import { AppRemoveIfFeatureOnDirective } from './directives/remove-if-feature-on.directive';
 import { AppRemoveIfFeatureOffDirective } from './directives/remove-if-feature-off.directive';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AppState } from '@app/app-state/models/app-state';
-import { SetCurrentUserAction } from '@app/app-state/actions/current-user.action';
-import { map } from 'rxjs/operators';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import {
   ConnectionToNonMedicalStoresComponent
@@ -224,6 +220,7 @@ import { NoticesComponent } from '@components/notices/notices.component';
 import { NoticesTableComponent } from '@components/tables/notices-table/notices-table.component';
 import { LEConnectionsDataService } from '@services/le-connections-data.service';
 import { LicenseeRetailStoresComponent } from './components/licensee-retail-stores/licensee-retail-stores.component';
+import { WorkerDataService } from "@services/worker-data.service.";
 
 @NgModule({
   declarations: [

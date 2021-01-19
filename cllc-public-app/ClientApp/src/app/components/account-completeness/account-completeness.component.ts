@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ApplicationDataService } from '@services/application-data.service';
-import { map, takeWhile } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { takeWhile } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { DocumentTypeStatus } from '@models/document-type-status.model';
 import { FileDataService } from '@services/file-data.service';
 import { FormBase } from '../../shared/form-base';

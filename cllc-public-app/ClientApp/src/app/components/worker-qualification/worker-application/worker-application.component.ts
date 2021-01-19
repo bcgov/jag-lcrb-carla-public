@@ -6,7 +6,7 @@ import { Contact } from '@models/contact.model';
 import * as CurrentUserActions from '@app/app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
 import { Subscription, Observable, Subject, zip, forkJoin } from 'rxjs';
-import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { AliasDataService } from '@services/alias-data.service';
 import { PreviousAddressDataService } from '@services/previous-address-data.service';
 import { WorkerDataService } from '@services/worker-data.service.';
