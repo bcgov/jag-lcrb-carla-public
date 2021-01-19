@@ -43,9 +43,11 @@ namespace bdd_tests
             string areaDescription = "Sample area description";
             string occupantLoad = "180";
 
+            /*
             // select 'Yes' for patio
             NgWebElement uiPatioYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-2"));
             uiPatioYes.Click();
+            */
 
             // enter patio composition description
             NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));

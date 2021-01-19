@@ -106,7 +106,6 @@ namespace bdd_tests
 
             // select the zoning checkbox
             NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
-            //uiIsPermittedInZoning.Click();
             JavaScriptClick(uiIsPermittedInZoning);
 
             // search for and select the indigenous nation
@@ -115,7 +114,6 @@ namespace bdd_tests
 
             NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
             JavaScriptClick(uiIndigenousNation2);
-            //uiIndigenousNation2.Click();
 
             // search for and select the police jurisdiction
             NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
