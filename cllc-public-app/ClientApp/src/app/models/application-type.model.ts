@@ -80,6 +80,7 @@ export enum ApplicationTypeNames {
   FPRelo = 'Food Primary Relocation',
   LicenseeChanges = 'Licensee Changes',
   LP = 'Liquor Primary',
+  LPR = 'LP Relocation',
   Marketer = 'Marketing',
   MarketingRenewal = 'Marketing Renewal',
   LGINClaim = 'LG/IN Claim',

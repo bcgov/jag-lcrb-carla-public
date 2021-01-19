@@ -842,7 +842,7 @@
             <section *ngIf="application?.applicationType?.showDescription1">
               <h3 class="blue-header" *ngIf="application?.applicationType?.name != ApplicationTypeNames.LP">DESCRIPTION OF PROPOSED CHANGE</h3>
               <h3 class="blue-header" *ngIf="application?.applicationType?.name === ApplicationTypeNames.LP">ESTABLISHMENT TYPE</h3>
-              <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.LP" class="content-bottom">
+              <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.LP || application?.applicationType?.name === ApplicationTypeNames.LPR" class="content-bottom">
                 <div class="padded-section">
 
                   <p>Identify the establishment type that best fits your proposed LP business, for example:</p>
@@ -912,7 +912,7 @@
                 </div>
               </div>
 
-              <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement' && application?.applicationType?.name != ApplicationTypeNames.LP">
+              <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement' && application?.applicationType?.name != ApplicationTypeNames.LP && application?.applicationType?.name !== ApplicationTypeNames.LPR">
                 <div class="padded-section">
                   <app-field label="Please briefly outline the proposed change" [required]="true" [isFullWidth]="true"
                     [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
@@ -1249,7 +1249,7 @@
                   aimed at minors or a liquor consumption business).</p>
               </div>
 
-              <img *ngIf="application?.applicationType?.name === 'Temporary Use Area Endorsement'" src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage">
+              <img *ngIf="application?.applicationType?.name === 'Temporary Use Area Endorsement'" src="assets/tua-site-plan-example.png" style="width: 700px;" alt="Sample Signage">
 
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Site Plan"
