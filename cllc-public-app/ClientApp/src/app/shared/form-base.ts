@@ -1,5 +1,5 @@
 import { ValidatorFn, AbstractControl, FormGroup, FormArray } from '@angular/forms';
-import { OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Application } from '@models/application.model';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Account } from '@models/account.model';
@@ -32,7 +32,7 @@ export class ApplicationHTMLContent {
 
 }
 
-// TODO: Add Angular decorator.
+@Injectable()
 export class FormBase implements OnDestroy {
     form: FormGroup;
     account: Account;
