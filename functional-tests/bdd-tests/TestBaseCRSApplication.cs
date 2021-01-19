@@ -229,7 +229,7 @@ namespace bdd_tests
             // upload a ownership details document
             if (businessType == "private corporation")
             {
-                FileUpload("ownership_details.pdf", "(//input[@type='file'])[21]");
+                FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
             }
 
             // enter the role of the application contact
