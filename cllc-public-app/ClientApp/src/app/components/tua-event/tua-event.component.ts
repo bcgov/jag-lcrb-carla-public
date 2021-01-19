@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { FormBase } from '@shared/form-base';
 import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDaysArray } from '@shared/date-fns';
-import { EventCategory, EventStatus, LicenceEvent } from '@models/licence-event.model';
+import { EventCategory, EventStatus, LicenceEvent, TuaEventType } from '@models/licence-event.model';
 import { AppState } from '@app/app-state/models/app-state';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { faQuestionCircle, faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
@@ -25,6 +25,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
   // enums
   eventCategory = EventCategory;
   eventStatus = EventStatus;
+  tuaEventType = TuaEventType;
 
   // component state
   busy: Subscription;
@@ -49,7 +50,6 @@ export class TuaEventComponent extends FormBase implements OnInit {
     name: ['', [Validators.required]], // TUA event name
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
-    contactEmail: ['', [Validators.required]],
 
     // TODO: TUA locations
 
@@ -64,7 +64,22 @@ export class TuaEventComponent extends FormBase implements OnInit {
     tuaEventType: ['', [Validators.required]],
     eventTypeDescription: ['', [Validators.required]],
 
-    agreement: [false, [Validators.required]],
+    isWedding: [false, []],
+    isNetworkingParty: [false, []],
+    isConcert: [false, []],
+    isNoneOfTheAbove: [false, []],
+    isBanquet: [false, []],
+    isAmplifiedSound: [false, []],
+    isDancing: [false, []],
+    isReception: [false, []],
+    isLiveEntertainment: [false, []],
+    isGambling: [false, []],
+
+    contactEmail: ['', [Validators.required]],
+    contactEmailConfirmation: ['', [Validators.required]],
+
+    agreement1: [false, [Validators.required]],
+    agreement2: [false, [Validators.required]],
   }, {
     // end date must be later than or equal to start date
     validators: dateRangeValidator('startDate', 'endDate')
@@ -118,19 +133,32 @@ export class TuaEventComponent extends FormBase implements OnInit {
     this.form.setValue({
       status: licenceEvent.status,
       id: licenceEvent.id,
-      name: licenceEvent.name,
       licenceId: licenceEvent.licenceId,
       accountId: licenceEvent.accountId,
+      name: licenceEvent.name,
       contactName: licenceEvent.contactName,
       contactPhone: licenceEvent.contactPhone,
       contactEmail: licenceEvent.contactEmail,
-
-      // ... TODO:
-
+      contactEmailConfirmation: licenceEvent.contactEmail,
       startDate: new Date(licenceEvent.startDate),
       endDate: new Date(licenceEvent.endDate),
       eventCategory: this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value,
-      agreement: false
+      maxAttendance: licenceEvent.maxAttendance,
+      minorsAttending: licenceEvent.minorsAttending,
+      tuaEventType: licenceEvent.tuaEventType,
+      eventTypeDescription: licenceEvent.eventTypeDescription,
+      isWedding: licenceEvent.isWedding,
+      isNetworkingParty: licenceEvent.isNetworkingParty,
+      isConcert: licenceEvent.isConcert,
+      isNoneOfTheAbove: licenceEvent.isNoneOfTheAbove,
+      isBanquet: licenceEvent.isBanquet,
+      isAmplifiedSound: licenceEvent.isAmplifiedSound,
+      isDancing: licenceEvent.isDancing,
+      isReception: licenceEvent.isReception,
+      isLiveEntertainment: licenceEvent.isLiveEntertainment,
+      isGambling: licenceEvent.isGambling,
+      agreement1: false,
+      agreement2: false,
     });
 
     const schedules = licenceEvent.schedules;
@@ -331,9 +359,11 @@ export class TuaEventComponent extends FormBase implements OnInit {
       contactName: 'Please enter the contact name',
       contactPhone: 'Please enter the contact phone number',
       contactEmail: 'Please enter the contact email address',
+      contactEmailConfirmation: 'The email address confirmation does not match provided email',
       startDate: 'Please enter the start date',
       endDate: 'Please enter the end date',
-      agreement: 'Please agree to all terms'
+      agreement1: 'Please agree to all terms',
+      agreement2: 'Please agree to all terms',
     };
   }
 
