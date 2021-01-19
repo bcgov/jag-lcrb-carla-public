@@ -35,6 +35,10 @@ namespace bdd_tests
 
             ContinueToApplicationButton();
 
+            /* 
+            Page Title: Manufacturer Relocation Application
+            */
+
             // create test data
             string additionalPIDs = "012345678, 343434344";
             string proposedChanges = "Details of proposed changes.";
