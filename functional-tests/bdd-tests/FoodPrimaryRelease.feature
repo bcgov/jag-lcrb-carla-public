@@ -34,8 +34,6 @@ Scenario: Food Primary Release Test (Private Corporation)
     And I click on the Licences tab
     And I click on the link for Structural Change Application
     And I submit a Food Primary structural change application
-    ## And I click on the link for Dashboard
-    ## And I confirm the structural change request is displayed on the dashboard
     And I click on the Licences tab
     And I click on the link for Temporary Extension of Licensed Area
     And I submit a temporary extension of licensed area application
@@ -44,8 +42,6 @@ Scenario: Food Primary Release Test (Private Corporation)
     And I submit a temporary use area endorsement application
     And I click on the Licences tab
     And I request a third party operator
-    ## And I click on the link for Cancel Application
-    ## And I cancel the third party operator application
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
