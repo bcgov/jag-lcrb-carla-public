@@ -28,7 +28,8 @@ Scenario: Food Primary Release Test (Private Corporation)
     And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
     And I click on the Submit button
-    # And I request a store relocation for Food Primary
+    # And I click on the Licences tab
+    # And I request a relocation application
     ## And I click on the link for Dashboard
     ## And I confirm the relocation request is displayed on the dashboard
     And I click on the Licences tab
