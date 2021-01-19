@@ -102,7 +102,7 @@ namespace bdd_tests
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
-            if (businessType != "sole proprietorship")
+            if (businessType != " sole proprietorship")
             {
                 // upload a central securities register
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -115,7 +115,7 @@ namespace bdd_tests
             }
 
             // upload cannabis associate screening form
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("associates.pdf", "(//input[@type='file'])[3]");
             }
@@ -125,7 +125,7 @@ namespace bdd_tests
             }
 
             // upload financial integrity form
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[6]");
             }
@@ -135,7 +135,7 @@ namespace bdd_tests
             }
 
             // upload shareholders < 10% interest
-            if (businessType != "sole proprietorship")
+            if (businessType != " sole proprietorship")
             {
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
             }
@@ -183,7 +183,7 @@ namespace bdd_tests
             uiEstabPhone.SendKeys(estPhone);
 
             // upload a store signage document
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("signage.pdf", "(//input[@type='file'])[8]");
             }
@@ -197,7 +197,7 @@ namespace bdd_tests
             uiVisibleFromOutside.Click();
 
             // upload a floor plan document
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
             }
@@ -207,7 +207,7 @@ namespace bdd_tests
             }
 
             // upload a site plan document
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("site_plan.pdf", "(//input[@type='file'])[14]");
             }
@@ -217,7 +217,7 @@ namespace bdd_tests
             }
 
             // upload a financial integrity form
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
             }
@@ -227,7 +227,7 @@ namespace bdd_tests
             }
 
             // upload a ownership details document
-            if (businessType == "private corporation")
+            if (businessType == " private corporation")
             {
                 FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
             }
