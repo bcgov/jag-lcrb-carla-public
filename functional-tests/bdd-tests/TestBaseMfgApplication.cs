@@ -44,6 +44,21 @@ namespace bdd_tests
             string localGovernmentSaanich = "Saanich";
             string policeJurisdictionSaanich = "Saanich Police Department";
 
+            // upload central securities register
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+
+            // upload supporting business documentation
+            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+
+            // upload notice of articles
+            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+
+            // upload personal history summary documents
+            FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+
+            // upload shareholders holding less than 10% interest
+            FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
+
             // enter the establishment name
             NgWebElement uiEstabName = null;
             // try up to 10 times to get an element.
@@ -167,12 +182,12 @@ namespace bdd_tests
             }
 
             // upload the business plan
-            FileUpload("business_plan.pdf","(//input[@type='file'])[2]");
+            FileUpload("business_plan.pdf","(//input[@type='file'])[17]");
 
             if (manufacturerType != "co-packer")
             {
                 // upload the production sales forecast
-                FileUpload("production_sales_forecast.pdf", "(//input[@type='file'])[5]");
+                FileUpload("production_sales_forecast.pdf", "(//input[@type='file'])[20]");
             }
 
             if ((manufacturerType == "winery") || (manufacturerType == "winery in Saanich"))
@@ -237,33 +252,33 @@ namespace bdd_tests
                 uiPiping.Click();
 
                 // upload brew sheets sample
-                FileUpload("brew_sheets.pdf","(//input[@type='file'])[8]");
+                FileUpload("brew_sheets.pdf","(//input[@type='file'])[23]");
 
                 // upload the business insurance
-                FileUpload("business_insurance.pdf","(//input[@type='file'])[11]");
+                FileUpload("business_insurance.pdf","(//input[@type='file'])[26]");
             }
 
             if (manufacturerType == "brewery")
             {
                 // upload the store signage
-                FileUpload("signage.pdf","(//input[@type='file'])[14]");
+                FileUpload("signage.pdf","(//input[@type='file'])[29]");
 
                 // upload the floor plan 
-                FileUpload("floor_plan.pdf","(//input[@type='file'])[17]");
+                FileUpload("floor_plan.pdf","(//input[@type='file'])[32]");
 
                 // upload the site plan
-                FileUpload("site_plan.pdf","(//input[@type='file'])[20]");
+                FileUpload("site_plan.pdf","(//input[@type='file'])[35]");
             }
             else
             {
                 // upload the store signage
-                FileUpload("signage.pdf","(//input[@type='file'])[8]");
+                FileUpload("signage.pdf","(//input[@type='file'])[23]");
 
                 // upload the floor plan 
-                FileUpload("floor_plan.pdf","(//input[@type='file'])[11]");
+                FileUpload("floor_plan.pdf","(//input[@type='file'])[26]");
 
                 // upload the site plan 
-                FileUpload("site_plan.pdf","(//input[@type='file'])[14]");
+                FileUpload("site_plan.pdf","(//input[@type='file'])[29]");
             }
 
             // select the owner checkbox
@@ -275,17 +290,17 @@ namespace bdd_tests
             uiValidInterest.Click();
 
             // select the future valid interest checkbox
-            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willhaveValidInterest']"));
+            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willHaveValidInterest']"));
             uiFutureValidInterest.Click();
 
             // upload the valid interest document
             if (manufacturerType == "brewery")
             {
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[24]");
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[39]");
             }
             else 
             {
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[33]");
             }
 
             // enter the contact title
