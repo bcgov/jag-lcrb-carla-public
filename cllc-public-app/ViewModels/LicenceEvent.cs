@@ -118,6 +118,18 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Market = 845280001,
         [EnumMember(Value = "Temporary Off-Site Sale")]
         TemporaryOffSiteSale = 845280002,
+        [EnumMember(Value = "Temporary Use Area")]
+        TemporaryUseArea = 845280004,
+    }
+
+    public enum TuaEventType
+    {
+        [EnumMember(Value = "Invite Only")]
+        Catering = 845280000,
+        [EnumMember(Value = "Open-Public")]
+        Market = 845280001,
+        [EnumMember(Value = "Ticketed")]
+        TemporaryOffSiteSale = 845280002,
     }
 
     public class LicenceEvent
@@ -193,7 +205,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string SecurityCompanyPhoneNumber { get; set; }
         public string SecurityCompanyEmail { get; set; }
         public string SecurityPoliceOfficerSummary { get; set; }
-        
+
         //Safe and Responsible service
         public bool? SafeAndResponsibleMinorsNotAttending { get; set; }
         public bool? SafeAndResponsibleLiquorAreaControlled { get; set; }
@@ -241,5 +253,24 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public EventCategory? EventCategory { get; set; }
         public MarketEventType? MarketEventType { get; set; }
+
+        // temporary use area (TUA) events
+        [JsonConverter(typeof(StringEnumConverter))]
+        public TuaEventType? TuaEventType { get; set; }
+        public bool? IsClosedToPublic { get; set; }
+        public bool? IsWedding { get; set; }
+        public bool? IsNetworkingParty { get; set; }
+        public bool? IsConcert { get; set; }
+        public bool? IsBanquet { get; set; }
+        public bool? IsAmplifiedSound { get; set; }
+        public bool? IsDancing { get; set; }
+        public bool? IsReception { get; set; }
+        public bool? IsLiveEntertainment { get; set; }
+        public bool? IsGambling { get; set; }
+        public bool? IsNoneOfTheAbove { get; set; }
+        public bool? IsAgreement1 { get; set; }
+        public bool? IsAgreement2 { get; set; }
+        public List<LicenceEventLocation> EventLocations { get; set; }
+
     }
 }

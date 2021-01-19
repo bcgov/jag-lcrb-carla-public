@@ -20,7 +20,7 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request a relocation application")]
+        [And(@"I request a Food Primary relocation application")]
         public void RelocationApplication()
         {
             /* 
@@ -32,7 +32,7 @@ namespace bdd_tests
             /* 
             Page Title: Application to Request Relocation
             */
-
+            
             // create test data
             string areaDescription = "Sample area description";
             string occupantLoad = "180";
@@ -41,8 +41,12 @@ namespace bdd_tests
             NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning']"));
             uiIsPermittedInZoning.Click();
 
+            // select 'yes' for Treaty First Nation Land
+            NgWebElement uiIsTreatyFirstNationLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-2"));
+            uiIsTreatyFirstNationLand.Click();
+
             // select 'yes' for ALR location
-            NgWebElement uiIsALR = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-2"));
+            NgWebElement uiIsALR = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button#mat-radio-5"));
             uiIsALR.Click();
 
             // upload a signage document
@@ -72,15 +76,15 @@ namespace bdd_tests
             uiValidInterest.Click();
 
             // select the future valid interest checkbox
-            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willhaveValidInterest']"));
+            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willHaveValidInterest']"));
             uiFutureValidInterest.Click();
 
             // select the authorized to submit checkbox
-            NgWebElement uiAuthToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            NgWebElement uiAuthToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthToSubmit.Click();
 
             // select the signature agreement checkbox
-            NgWebElement uiSigAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            NgWebElement uiSigAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSigAgreement.Click();
 
             // click on the Submit & Pay button

@@ -1,4 +1,4 @@
-﻿namespace Gov.Lclb.Cllb.Public.Models.Extensions
+﻿namespace Gov.Lclb.Cllb.Public.Models
 {
     public enum ServiceAreaCategoryEnum
     {

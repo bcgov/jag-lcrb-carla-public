@@ -14,8 +14,6 @@ Scenario: DEV Manufacturer Release #1 (Winery/Private Corporation)
     And I pay the licensing fee
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Manufacturing
-    # And I click on the Dashboard tab
-    # And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I request a facility structural change
     # And I click on the Licences tab
