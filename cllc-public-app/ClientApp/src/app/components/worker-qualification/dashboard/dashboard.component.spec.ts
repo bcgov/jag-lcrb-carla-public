@@ -4,7 +4,7 @@ import { WorkerDashboardComponent } from "./dashboard.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { UserDataService } from "@services/user-data.service";
 import { provideMockStore } from "@ngrx/store/testing";
-import { MatTableModule } from "@angular/material";
+import { MatTableModule } from "@angular/material/table";
 import { AppState } from "@app/app-state/models/app-state";
 import { Account } from "@models/account.model";
 

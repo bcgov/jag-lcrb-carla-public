@@ -4,7 +4,7 @@ import { PaymentDataService } from "@services/payment-data.service";
 import { Subscription } from "rxjs";
 import { ApplicationDataService } from "../../services/application-data.service";
 import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Application } from "@models/application.model";
 import { faAngleDoubleLeft, faPrint } from "@fortawesome/free-solid-svg-icons";
 

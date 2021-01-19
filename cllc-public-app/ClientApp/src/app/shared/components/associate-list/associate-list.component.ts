@@ -4,7 +4,7 @@ import { LicenseeChangeLog } from "@models/licensee-change-log.model";
 import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from "@angular/forms";
 import { FormBase } from "@shared/form-base";
 import { Account } from "@models/account.model";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { of, Observable, forkJoin } from "rxjs";
 import { mergeMap } from "rxjs/operators";
 import { OrgStructureComponent } from "../org-structure/org-structure.component";

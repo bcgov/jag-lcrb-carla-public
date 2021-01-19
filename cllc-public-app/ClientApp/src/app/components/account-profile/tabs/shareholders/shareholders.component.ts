@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Inject } from "@angular/core";
-import { MatTableDataSource, MatDialog, MatDialogRef } from "@angular/material";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatTableDataSource } from "@angular/material/table";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Subscription } from "rxjs";
-import { MAT_DIALOG_DATA } from "@angular/material";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { LegalEntityDataService } from "@services/legal-entity-data.service";
 import { Account } from "@models/account.model";

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { AccountPickerComponent } from "./account-picker.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { MatAutocompleteModule } from "@angular/material";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { AccountDataService } from "@services/account-data.service";
 import { FormBuilder } from "@angular/forms";
 

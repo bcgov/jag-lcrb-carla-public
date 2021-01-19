@@ -5,7 +5,7 @@ import { User } from "@models/user.model";
 import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, NgForm } from "@angular/forms";
 import { Subscription, Observable, Subject, forkJoin } from "rxjs";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ContactDataService } from "@services/contact-data.service";
 import { Contact } from "@models/contact.model";
 import { FeatureFlagService } from "@services/feature-flag.service";

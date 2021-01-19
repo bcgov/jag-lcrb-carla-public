@@ -8,7 +8,7 @@ import { MonthlyReportDataService } from "@services/monthly-report.service";
 import { of } from "rxjs";
 import { ActivatedRouteStub } from "@app/testing/activated-route-stub";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MatDialogModule } from "@angular/material";
+import { MatDialogModule } from "@angular/material/dialog";
 import { provideMockStore } from "@ngrx/store/testing";
 import { AppState } from "@app/app-state/models/app-state";
 import { ProductInventorySalesReportComponent } from

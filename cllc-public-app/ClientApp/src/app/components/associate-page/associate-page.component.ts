@@ -9,7 +9,7 @@ import { Account } from "@models/account.model";
 import { ApplicationDataService } from "@services/application-data.service";
 import { Application } from "@models/application.model";
 import { Observable, forkJoin, of } from "rxjs";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { faChevronRight, faExclamationCircle, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({

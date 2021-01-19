@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { ShareholdersAndPartnersComponent } from "./shareholders-and-partners.component";
 import { FormBuilder } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe("ShareholdersAndPartnersComponent",

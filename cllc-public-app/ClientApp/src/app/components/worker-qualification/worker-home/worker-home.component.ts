@@ -2,7 +2,7 @@
 import { filter } from "rxjs/operators";
 import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from "@angular/core";
 import { PolicyDocumentComponent } from "../../policy-document/policy-document.component";
-import { MatDialogRef, MatDialog } from "@angular/material";
+import { MatDialogRef, MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { faChevronRight, faIdCard, faQuestion } from "@fortawesome/free-solid-svg-icons";
 

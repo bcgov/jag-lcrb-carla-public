@@ -4,7 +4,7 @@ import { FileSystemItem } from "@models/file-system-item.model";
 import { Subscription } from "rxjs";
 import { ApplicationDataService } from "@services/application-data.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 export interface DropdownOption {
   id: string;

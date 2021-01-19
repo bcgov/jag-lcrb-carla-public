@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { SecurityScreeningSummary } from "@models/security-screening-summary.model";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { LegalEntityDataService } from "@services/legal-entity-data.service";
 import { ActivatedRoute } from "@angular/router";
 import { ApplicationDataService } from "@services/application-data.service";

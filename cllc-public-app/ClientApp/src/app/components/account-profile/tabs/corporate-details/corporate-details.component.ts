@@ -5,7 +5,7 @@ import { UserDataService } from "@services/user-data.service";
 import { AccountDataService } from "@services/account-data.service";
 import { Account } from "@models/account.model";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Subscription, Subject, Observable } from "rxjs";
 import { DatePipe } from "@angular/common";
 import { DynamicsDataService } from "@services/dynamics-data.service";

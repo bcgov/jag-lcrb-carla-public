@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from "@angular/core";
-import { MatPaginator, MatTableDataSource, MatSnackBar } from "@angular/material";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatTableDataSource } from "@angular/material/table";
 import { Subscription } from "rxjs";
 import { LegalEntityDataService } from "@services/legal-entity-data.service";
 import { DynamicsDataService } from "@services/dynamics-data.service";

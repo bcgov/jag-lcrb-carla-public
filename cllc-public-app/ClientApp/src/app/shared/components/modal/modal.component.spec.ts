@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 import { ModalComponent } from "./modal.component";
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 
 describe("ModalComponent",
   () => {

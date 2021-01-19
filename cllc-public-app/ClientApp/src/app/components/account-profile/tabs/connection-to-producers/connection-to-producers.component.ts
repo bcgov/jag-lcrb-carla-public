@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from "@angular/core";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { FormBuilder } from "@angular/forms";
 import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { Subscription } from "rxjs";

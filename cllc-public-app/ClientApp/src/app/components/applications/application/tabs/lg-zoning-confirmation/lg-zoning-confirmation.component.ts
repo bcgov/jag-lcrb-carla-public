@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { FormBase } from "@shared/form-base";
 import { Application } from "@models/application.model";
 import { FormBuilder, Validators } from "@angular/forms";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ApplicationDataService } from "@services/application-data.service";
 import { Router } from "@angular/router";
 

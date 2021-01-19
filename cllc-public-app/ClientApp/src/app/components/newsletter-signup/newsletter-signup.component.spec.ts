@@ -3,7 +3,7 @@ import { TestBed, ComponentFixture, ComponentFixtureAutoDetect, waitForAsync } f
 import { BrowserModule } from "@angular/platform-browser";
 import { NewsletterSignupComponent } from "./newsletter-signup.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { NewsletterDataService } from "@services/newsletter-data.service";
 
 let component: NewsletterSignupComponent;

@@ -3,7 +3,7 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 import { OrganizationLeadershipComponent } from "./organization-leadership.component";
 import { FormBuilder } from "@angular/forms";
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 describe("OrganizationLeadershipComponent",
   () => {
