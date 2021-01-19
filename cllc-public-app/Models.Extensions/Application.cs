@@ -1,6 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.Models.Extensions;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.Extensions.Caching.Memory;
@@ -14,10 +13,11 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
-    enum IsOnINLandOptionValue {
+    enum IsOnINLandOptionValue
+    {
         Yes = 845280000
     }
-    
+
     /// <summary>
     /// ViewModel transforms.
     /// </summary>
@@ -139,18 +139,18 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIspermittedinzoning = from.IsPermittedInZoning;
 
             // Permanent Change to a Licensee
-            to.AdoxioFirstnameold  = from.FirstNameOld;
-            to.AdoxioFirstnamenew  = from.FirstNameNew;
-            to.AdoxioLastnameold  = from.LastNameOld;
-            to.AdoxioLastnamenew  = from.LastNameNew;
-            to.AdoxioCsinternaltransferofshares  = from.CsInternalTransferOfShares;
-            to.AdoxioCsexternaltransferofshares  = from.CsExternalTransferOfShares;
-            to.AdoxioCschangeofdirectorsorofficers  = from.CsChangeOfDirectorsOrOfficers;
-            to.AdoxioCsnamechangelicenseecorporation  = from.CsNameChangeLicenseeCorporation;
-            to.AdoxioCsnamechangelicenseepartnership  = from.CsNameChangeLicenseePartnership;
-            to.AdoxioCsnamechangelicenseesociety  = from.CsNameChangeLicenseeSociety;
-            to.AdoxioCsnamechangeperson  = from.CsNameChangeLicenseePerson;
-            to.AdoxioCsadditionofreceiverorexecutor  = from.CsAdditionalReceiverOrExecutor;
+            to.AdoxioFirstnameold = from.FirstNameOld;
+            to.AdoxioFirstnamenew = from.FirstNameNew;
+            to.AdoxioLastnameold = from.LastNameOld;
+            to.AdoxioLastnamenew = from.LastNameNew;
+            to.AdoxioCsinternaltransferofshares = from.CsInternalTransferOfShares;
+            to.AdoxioCsexternaltransferofshares = from.CsExternalTransferOfShares;
+            to.AdoxioCschangeofdirectorsorofficers = from.CsChangeOfDirectorsOrOfficers;
+            to.AdoxioCsnamechangelicenseecorporation = from.CsNameChangeLicenseeCorporation;
+            to.AdoxioCsnamechangelicenseepartnership = from.CsNameChangeLicenseePartnership;
+            to.AdoxioCsnamechangelicenseesociety = from.CsNameChangeLicenseeSociety;
+            to.AdoxioCsnamechangeperson = from.CsNameChangeLicenseePerson;
+            to.AdoxioCsadditionofreceiverorexecutor = from.CsAdditionalReceiverOrExecutor;
 
             // Manufacturing structural change fields
 
@@ -167,10 +167,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioHascooleraccess = from.HasCoolerAccess;
 
             to.AdoxioLocatedaboveother = from.LocatedAboveOther;
-            
-            if(from.IsOnINLand == true){
+
+            if (from.IsOnINLand == true)
+            {
                 to.AdoxioIsoninland = (int)IsOnINLandOptionValue.Yes;
-            } else {
+            }
+            else
+            {
                 to.AdoxioIsoninland = null;
             }
 
@@ -338,7 +341,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger)
         {
-            
+
             ViewModels.Application applicationVM = new ViewModels.Application
             {
                 Name = dynamicsApplication.AdoxioName,
