@@ -167,12 +167,12 @@ namespace bdd_tests
             }
 
             // upload the business plan
-            FileUpload("business_plan.pdf","(//input[@type='file'])[2]");
+            FileUpload("business_plan.pdf","(//input[@type='file'])[17]");
 
             if (manufacturerType != "co-packer")
             {
                 // upload the production sales forecast
-                FileUpload("production_sales_forecast.pdf", "(//input[@type='file'])[5]");
+                FileUpload("production_sales_forecast.pdf", "(//input[@type='file'])[20]");
             }
 
             if ((manufacturerType == "winery") || (manufacturerType == "winery in Saanich"))
@@ -257,13 +257,13 @@ namespace bdd_tests
             else
             {
                 // upload the store signage
-                FileUpload("signage.pdf","(//input[@type='file'])[8]");
+                FileUpload("signage.pdf","(//input[@type='file'])[23]");
 
                 // upload the floor plan 
-                FileUpload("floor_plan.pdf","(//input[@type='file'])[11]");
+                FileUpload("floor_plan.pdf","(//input[@type='file'])[26]");
 
                 // upload the site plan 
-                FileUpload("site_plan.pdf","(//input[@type='file'])[14]");
+                FileUpload("site_plan.pdf","(//input[@type='file'])[29]");
             }
 
             // select the owner checkbox
@@ -275,7 +275,7 @@ namespace bdd_tests
             uiValidInterest.Click();
 
             // select the future valid interest checkbox
-            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willhaveValidInterest']"));
+            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willHaveValidInterest']"));
             uiFutureValidInterest.Click();
 
             // upload the valid interest document
@@ -285,7 +285,7 @@ namespace bdd_tests
             }
             else 
             {
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[33]");
             }
 
             // enter the contact title
