@@ -6,7 +6,6 @@ import { Subscription, forkJoin, of, Observable } from "rxjs";
 import { MonthlyReport, monthlyReportStatus } from "@models/monthly-report.model";
 import { MonthlyReportDataService } from "@services/monthly-report.service";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
-import { MAT_CHECKBOX_CLICK_ACTION } from "@angular/material/checkbox";
 import { MatDialog } from "@angular/material/dialog";
 import { ModalComponent } from "@shared/components/modal/modal.component";
 import { ClosingInventoryValidator, SalesValidator } from "./federal-reporting-validation";
@@ -22,10 +21,7 @@ interface FederalReportingParams {
 @Component({
   selector: "app-federal-reporting",
   templateUrl: "./federal-reporting.component.html",
-  styleUrls: ["./federal-reporting.component.scss"],
-  providers: [
-    { provide: MAT_CHECKBOX_CLICK_ACTION, useValue: "noop" }
-  ]
+  styleUrls: ["./federal-reporting.component.scss"]
 })
 export class FederalReportingComponent implements OnInit {
   faSave = faSave;

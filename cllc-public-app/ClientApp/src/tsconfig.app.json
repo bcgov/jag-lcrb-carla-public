@@ -4,7 +4,7 @@
     "baseUrl": "./",
     "downlevelIteration": true,
     "outDir": "../out-tsc/app",
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": false,
     "module": "es2020",
     "moduleResolution": "node",
@@ -31,7 +31,7 @@
     }
   },
   "angularCompilerOptions": {
-    "enableIvy": true
+    "enableIvy": false
   },
   "files": [
     "main.ts",
