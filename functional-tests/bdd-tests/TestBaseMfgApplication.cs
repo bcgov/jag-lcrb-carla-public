@@ -252,22 +252,22 @@ namespace bdd_tests
                 uiPiping.Click();
 
                 // upload brew sheets sample
-                FileUpload("brew_sheets.pdf","(//input[@type='file'])[8]");
+                FileUpload("brew_sheets.pdf","(//input[@type='file'])[23]");
 
                 // upload the business insurance
-                FileUpload("business_insurance.pdf","(//input[@type='file'])[11]");
+                FileUpload("business_insurance.pdf","(//input[@type='file'])[26]");
             }
 
             if (manufacturerType == "brewery")
             {
                 // upload the store signage
-                FileUpload("signage.pdf","(//input[@type='file'])[14]");
+                FileUpload("signage.pdf","(//input[@type='file'])[29]");
 
                 // upload the floor plan 
-                FileUpload("floor_plan.pdf","(//input[@type='file'])[17]");
+                FileUpload("floor_plan.pdf","(//input[@type='file'])[32]");
 
                 // upload the site plan
-                FileUpload("site_plan.pdf","(//input[@type='file'])[20]");
+                FileUpload("site_plan.pdf","(//input[@type='file'])[35]");
             }
             else
             {
@@ -296,7 +296,7 @@ namespace bdd_tests
             // upload the valid interest document
             if (manufacturerType == "brewery")
             {
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[24]");
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[39]");
             }
             else 
             {
