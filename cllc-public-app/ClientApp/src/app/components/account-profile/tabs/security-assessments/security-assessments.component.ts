@@ -1,29 +1,33 @@
-import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs';
-import { LegalEntityDataService } from '@services/legal-entity-data.service';
-import { DynamicsDataService } from '@services/dynamics-data.service';
-import { ActivatedRoute } from '@angular/router';
-import { LegalEntity } from '@models/legal-entity.model';
+import { Component, OnInit, Input, ViewContainerRef, ViewChild } from "@angular/core";
+import { MatPaginator, MatTableDataSource, MatSnackBar } from "@angular/material";
+import { Subscription } from "rxjs";
+import { LegalEntityDataService } from "@services/legal-entity-data.service";
+import { DynamicsDataService } from "@services/dynamics-data.service";
+import { ActivatedRoute } from "@angular/router";
+import { LegalEntity } from "@models/legal-entity.model";
 
 @Component({
-  selector: 'app-security-assessments',
-  templateUrl: './security-assessments.component.html',
-  styleUrls: ['./security-assessments.component.scss']
+  selector: "app-security-assessments",
+  templateUrl: "./security-assessments.component.html",
+  styleUrls: ["./security-assessments.component.scss"]
 })
 export class SecurityAssessmentsComponent implements OnInit {
 
-  @Input() accountId: string;
-  @Input() parentLegalEntityId: string;
-  @Input() businessType: string;
+  @Input()
+  accountId: string;
+  @Input()
+  parentLegalEntityId: string;
+  @Input()
+  businessType: string;
 
   adoxioLegalEntityList: LegalEntity[] = [];
   dataSource = new MatTableDataSource<LegalEntity>();
-  displayedColumns = ['sendConsentRequest', 'firstname', 'lastname', 'email', 'position', 'emailsent'];
+  displayedColumns = ["sendConsentRequest", "firstname", "lastname", "email", "position", "emailsent"];
   busy: Promise<any>;
   busyObsv: Subscription;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true })
+  paginator: MatPaginator;
 
   constructor(private legalEntityDataservice: LegalEntityDataService,
     private route: ActivatedRoute,
@@ -36,7 +40,7 @@ export class SecurityAssessmentsComponent implements OnInit {
     this.route.parent.params.subscribe(p => {
       this.parentLegalEntityId = p.legalEntityId;
       this.accountId = p.accountId;
-      this.dynamicsDataService.getRecord('accounts', this.accountId)
+      this.dynamicsDataService.getRecord("accounts", this.accountId)
         .subscribe((data) => {
           this.businessType = data.businessType;
         });
@@ -47,7 +51,8 @@ export class SecurityAssessmentsComponent implements OnInit {
 
   getDirectorsAndOfficersAndShareholders() {
     const legalEntitiesList = [];
-    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, 'director-officer-shareholder')
+    this.busyObsv = this.legalEntityDataservice
+      .getLegalEntitiesbyPosition(this.parentLegalEntityId, "director-officer-shareholder")
       .subscribe((data) => {
         data.forEach((entry) => {
           entry.sendConsentRequest = !entry.securityAssessmentEmailSentOn;
@@ -62,24 +67,24 @@ export class SecurityAssessmentsComponent implements OnInit {
   getRoles(legalEntity: LegalEntity): string {
     const roles = [];
     if (legalEntity.isDirector === true) {
-      roles.push('Director');
+      roles.push("Director");
     }
     if (legalEntity.isOfficer === true) {
-      roles.push('Officer');
+      roles.push("Officer");
     }
     if (legalEntity.isOwner === true) {
-      roles.push('Owner');
+      roles.push("Owner");
     }
     if (legalEntity.isPartner === true) {
-      roles.push('Partner');
+      roles.push("Partner");
     }
     if (legalEntity.isSeniorManagement === true) {
-      roles.push('Senior Manager');
+      roles.push("Senior Manager");
     }
     if (legalEntity.isShareholder === true) {
-      roles.push('Shareholder');
+      roles.push("Shareholder");
     }
-    return roles.join(', ');
+    return roles.join(", ");
   }
 
   anySelected(): boolean {
@@ -100,12 +105,14 @@ export class SecurityAssessmentsComponent implements OnInit {
       this.busyObsv = this.legalEntityDataservice.sendConsentRequestEmail(consentRequestList)
         .subscribe(
           res => {
-            this.snackBar.open('Consent Request(s) Sent', 'Success',
-            { duration: 2500, panelClass: ['red-snackbar'] });
+            this.snackBar.open("Consent Request(s) Sent",
+              "Success",
+              { duration: 2500, panelClass: ["red-snackbar"] });
           },
           err => {
-            this.snackBar.open('Consent Request(s) Sent', 'Failed',
-            { duration: 4500, panelClass: ['red-snackbar'] });
+            this.snackBar.open("Consent Request(s) Sent",
+              "Failed",
+              { duration: 4500, panelClass: ["red-snackbar"] });
           }
         );
     }

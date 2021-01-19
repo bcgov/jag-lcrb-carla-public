@@ -1,6 +1,6 @@
-import { Contact } from './contact.model';
-import { TiedHouseConnection } from '@models/tied-house-connection.model';
-import { LegalEntity } from '@models/legal-entity.model';
+import { Contact } from "./contact.model";
+import { TiedHouseConnection } from "@models/tied-house-connection.model";
+import { LegalEntity } from "@models/legal-entity.model";
 
 export class Account {
   id: string;
@@ -42,23 +42,27 @@ export class Account {
 
   isPartnership(): boolean {
     const isPartnership = [
-      'GeneralPartnership',
-      'LimitedPartnership',
-      'LimitedLiabilityPartnership',
-      'Partnership'].indexOf(this.businessType) !== -1;
+        "GeneralPartnership",
+        "LimitedPartnership",
+        "LimitedLiabilityPartnership",
+        "Partnership"
+      ].indexOf(this.businessType) !==
+      -1;
     return isPartnership;
   }
 
   isPrivateCorporation(): boolean {
     const isPrivateCorp = [
-      'PrivateCorporation',
-      'UnlimitedLiabilityCorporation',
-      'LimitedLiabilityCorporation'].indexOf(this.businessType) !== -1;
+        "PrivateCorporation",
+        "UnlimitedLiabilityCorporation",
+        "LimitedLiabilityCorporation"
+      ].indexOf(this.businessType) !==
+      -1;
     return isPrivateCorp;
   }
 
   isPublicCorporation(): boolean {
-    const isPublicCorp = ['PublicCorporation'].indexOf(this.businessType) !== -1;
+    const isPublicCorp = ["PublicCorporation"].indexOf(this.businessType) !== -1;
     return isPublicCorp;
   }
 
@@ -66,34 +70,34 @@ export class Account {
     return Account.getBusinessTypeFromName(this.businessType);
   }
 
-  public static getBusinessTypeFromName(businessType: string): string {
+  static getBusinessTypeFromName(businessType: string): string {
     if (!businessType) {
-      return '';
+      return "";
     }
-    let name = '';
+    let name = "";
     switch (businessType) {
-      case 'GeneralPartnership':
-      case 'LimitedPartnership"':
-      case 'LimitedLiabilityPartnership':
-        name = 'Partnership';
-        break;
-      case 'SoleProprietorship':
-        name = 'Sole Proprietorship';
-        break;
-      case 'IndigenousNation':
-        name = 'Indigenous Nation';
-        break;
-      case 'PublicCorporation':
-        name = 'Public Corporation';
-        break;
-      case 'PrivateCorporation':
-      case 'UnlimitedLiabilityCorporation':
-      case 'LimitedLiabilityCorporation':
-        name = 'Private Corporation';
-        break;
-      default:
-        name = businessType;
-        break;
+    case "GeneralPartnership":
+    case 'LimitedPartnership"':
+    case "LimitedLiabilityPartnership":
+      name = "Partnership";
+      break;
+    case "SoleProprietorship":
+      name = "Sole Proprietorship";
+      break;
+    case "IndigenousNation":
+      name = "Indigenous Nation";
+      break;
+    case "PublicCorporation":
+      name = "Public Corporation";
+      break;
+    case "PrivateCorporation":
+    case "UnlimitedLiabilityCorporation":
+    case "LimitedLiabilityCorporation":
+      name = "Private Corporation";
+      break;
+    default:
+      name = businessType;
+      break;
     }
     return name;
   }
@@ -106,4 +110,3 @@ export class TransferAccount {
   businessType: string;
   contactName: string;
 }
-

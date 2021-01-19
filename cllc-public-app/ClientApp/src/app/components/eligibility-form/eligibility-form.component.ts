@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { EligibilityFormDataService } from '@services/eligibility-data.service';
-import { MatDialogRef } from '@angular/material';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { EligibilityFormDataService } from "@services/eligibility-data.service";
+import { MatDialogRef } from "@angular/material";
 
 @Component({
-  selector: 'app-eligibility-form',
-  templateUrl: './eligibility-form.component.html',
-  styleUrls: ['./eligibility-form.component.scss']
+  selector: "app-eligibility-form",
+  templateUrl: "./eligibility-form.component.html",
+  styleUrls: ["./eligibility-form.component.scss"]
 })
 export class EligibilityFormComponent implements OnInit {
   busy: any;
@@ -40,23 +40,23 @@ export class EligibilityFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.eligibilityForm.controls['dateSignedOrDismissed'].setValue(new Date());
+    this.eligibilityForm.controls["dateSignedOrDismissed"].setValue(new Date());
   }
 
   submitForm() {
-    this.busy = this.service.submit({...this.eligibilityForm.value})
-    .subscribe(() => {
-      this.dialogRef.close();
-    });
+    this.busy = this.service.submit({ ...this.eligibilityForm.value })
+      .subscribe(() => {
+        this.dialogRef.close();
+      });
   }
 
   closeForm() {
     this.busy = this.service.submit({
-      dateSignedOrDismissed: this.eligibilityForm.get('dateSignedOrDismissed').value,
-      isEligibilityCertified: false
-    })
-    .subscribe(() => {
-      this.dialogRef.close();
-    });
+        dateSignedOrDismissed: this.eligibilityForm.get("dateSignedOrDismissed").value,
+        isEligibilityCertified: false
+      })
+      .subscribe(() => {
+        this.dialogRef.close();
+      });
   }
 }

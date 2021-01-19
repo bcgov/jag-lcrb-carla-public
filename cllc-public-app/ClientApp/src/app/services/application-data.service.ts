@@ -1,37 +1,40 @@
-import { Injectable } from '@angular/core';
-import { FileSystemItem } from '@models/file-system-item.model';
-import { Application } from '@models/application.model';
-import { ApplicationSummary } from '@models/application-summary.model';
-import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { DataService } from './data.service';
-import { CovidApplication } from '@models/covid-application.model';
-import { OngoingLicenseeData } from '../models/ongoing-licensee-data';
+import { Injectable } from "@angular/core";
+import { FileSystemItem } from "@models/file-system-item.model";
+import { Application } from "@models/application.model";
+import { ApplicationSummary } from "@models/application-summary.model";
+import { catchError } from "rxjs/operators";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { DataService } from "./data.service";
+import { CovidApplication } from "@models/covid-application.model";
+import { OngoingLicenseeData } from "../models/ongoing-licensee-data";
 
 @Injectable()
 export class ApplicationDataService extends DataService {
 
-  apiPath = 'api/applications/';
+  apiPath = "api/applications/";
 
-  public files: FileSystemItem[] = [];
+  files: FileSystemItem[] = [];
 
   constructor(private http: HttpClient) {
     super();
-   }
+  }
 
   /**
    * Get all Dynamics Applications for the current user
    * */
   getAdoxioApplications(): Observable<Application[]> {
-    return this.http.get<Application[]>(this.apiPath + 'current', { headers: this.headers })
+    return this.http.get<Application[]>(this.apiPath + "current", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
+
   /**
    * Get all  Applications for the current user for the given application type
    * */
   getApplicationsByType(applicationType: string): Observable<Application[]> {
-    return this.http.get<Application[]>(`${this.apiPath}current/by-type?applicationType=${encodeURIComponent(applicationType)}`, { headers: this.headers })
+    return this.http
+      .get<Application[]>(`${this.apiPath}current/by-type?applicationType=${encodeURIComponent(applicationType)}`,
+        { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -39,39 +42,38 @@ export class ApplicationDataService extends DataService {
    * Gets the number of submitted Applications for the current user
    * */
   getSubmittedApplicationCount(): Observable<number> {
-    return this.http.get<number>(this.apiPath + 'current/submitted-count', { headers: this.headers })
+    return this.http.get<number>(this.apiPath + "current/submitted-count", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   getAllCurrentApplications(): Observable<ApplicationSummary[]> {
-    return this.http.get<ApplicationSummary[]>(this.apiPath + 'current', { headers: this.headers })
+    return this.http.get<ApplicationSummary[]>(this.apiPath + "current", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   getLGApprovalApplications(): Observable<Application[]> {
-    return this.http.get<Application[]>(this.apiPath + 'current/lg-approvals', { headers: this.headers })
+    return this.http.get<Application[]>(this.apiPath + "current/lg-approvals", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   getOngoingLicenseeChangeApplicationId(): Observable<string> {
-    return this.http.get<string>(this.apiPath + 'ongoing-licensee-application-id', { headers: this.headers })
+    return this.http.get<string>(this.apiPath + "ongoing-licensee-application-id", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   getPermanentChangesToLicenseeData(applicationId: string = null): Observable<any> {
-    let url = this.apiPath + 'permanent-change-to-licensee-data';
-    if(applicationId){
-      url  = `${url}?applicationId=${applicationId}`
+    let url = this.apiPath + "permanent-change-to-licensee-data";
+    if (applicationId) {
+      url = `${url}?applicationId=${applicationId}`;
     }
     return this.http.get<any>(url, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  getOngoingLicenseeData(type: 'on-going'| 'create'): Observable<OngoingLicenseeData> {
+  getOngoingLicenseeData(type: "on-going" | "create"): Observable<OngoingLicenseeData> {
     return this.http.get<OngoingLicenseeData>(`${this.apiPath}licensee-data/${type}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
-
 
 
   /**
@@ -90,7 +92,7 @@ export class ApplicationDataService extends DataService {
    */
   cancelApplication(id: string) {
     // call API
-    return this.http.post(this.apiPath + id + '/cancel', { headers: this.headers })
+    return this.http.post(this.apiPath + id + "/cancel", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -100,7 +102,7 @@ export class ApplicationDataService extends DataService {
    */
   deleteApplication(id: string) {
     // call API
-    return this.http.post(this.apiPath + id + '/delete', { headers: this.headers })
+    return this.http.post(this.apiPath + id + "/delete", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -132,7 +134,7 @@ export class ApplicationDataService extends DataService {
    */
   createCovidApplication(applicationData: CovidApplication): Observable<CovidApplication> {
     // call API
-    return this.http.post<CovidApplication>(this.apiPath + 'covid', applicationData, { headers: this.headers });
+    return this.http.post<CovidApplication>(this.apiPath + "covid", applicationData, { headers: this.headers });
   }
 
 
@@ -143,15 +145,16 @@ export class ApplicationDataService extends DataService {
    */
   getFileListAttachedToApplication(applicationId: string, documentType: string): Observable<FileSystemItem[]> {
     const headers = new HttpHeaders({});
-    const attachmentURL = 'api/adoxioapplication/' + applicationId + '/attachments';
-    const getFileURL = attachmentURL + '/' + documentType;
+    const attachmentURL = `api/adoxioapplication/${applicationId}/attachments`;
+    const getFileURL = attachmentURL + "/" + documentType;
     return this.http.get<FileSystemItem[]>(getFileURL, { headers: headers });
   }
 
   downloadFile(serverRelativeUrl: string, applicationId: string) {
     const headers = new HttpHeaders({});
-    const attachmentURL = `api/file/${applicationId}/download-file/application?serverRelativeUrl=${encodeURIComponent(serverRelativeUrl)}`;
-    return this.http.get(attachmentURL, { headers: headers, responseType: 'blob' })
+    const attachmentURL =
+      `api/file/${applicationId}/download-file/application?serverRelativeUrl=${encodeURIComponent(serverRelativeUrl)}`;
+    return this.http.get(attachmentURL, { headers: headers, responseType: "blob" })
       .pipe(catchError(this.handleError));
 
   }

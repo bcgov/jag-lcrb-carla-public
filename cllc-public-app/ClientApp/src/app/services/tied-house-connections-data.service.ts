@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { TiedHouseConnection } from '@models/tied-house-connection.model';
-import { catchError } from 'rxjs/operators';
-import { DataService } from './data.service';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { TiedHouseConnection } from "@models/tied-house-connection.model";
+import { catchError } from "rxjs/operators";
+import { DataService } from "./data.service";
 
 @Injectable()
 export class TiedHouseConnectionsDataService extends DataService {
@@ -27,7 +27,7 @@ export class TiedHouseConnectionsDataService extends DataService {
    * @param data - legal entity data
    */
   createTiedHouse(data: any) {
-    return this.http.post<TiedHouseConnection>('api/tiedhouseconnections/', data, { headers: this.headers })
+    return this.http.post<TiedHouseConnection>("api/tiedhouseconnections/", data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

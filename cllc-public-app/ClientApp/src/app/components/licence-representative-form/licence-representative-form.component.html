@@ -1,167 +1,178 @@
 <div class="form-wrapper" style="position: relative;" class="col-md-8 ml-3">
-    <div [ngBusy]="[busy]"></div>
-    <div>
-        <div [formGroup]="form" style=" position: relative">
-            <h1 class="ngtest-page-title">Add, Change or Remove a Licensee Representative</h1>
-        </div>
-        <div [formGroup]="form">
-            <!-- Preamble -->
-            <section class="d-flex">
-                <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
-                <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-                    <section class="ngtest-preamble-content">
-                        <p>In some cases, a licensee may wish to authorize a specific individual to take certain actions on the licensee's behalf and to legally bind the licensee in respect of those matters. For example:</p>
-                        <ul>
-                            <li>A licensee that is a company may wish to authorize an employee who is not a company director or officer.</li>
-                            <li>A partner in a partnership may wish to authorize a manager at the establishment who is not a partner.</li>
-                            <li>A society may wish to authorize an individual who is not a director or senior manager of the society.</li>
-                            <li>A licensee who is an individual person may wish to authorize someone else to make decisions and take actions in respect of specific liquor control and licensing matters. In such cases, the licensee should use this form to inform the Liquor and Cannabis Regulation Branch (the "Branch") of the authority that will be given to this individual.</li>
-                        </ul>
-                        <p><strong>Requirements:</strong></p>
-                        <p>The licensee understands that a person named in this form:</p>
-                        <ul>
-                            <li>Does not assume accountability on behalf of the licensee; the licensee remains responsible for all activities within the licensed establishment and for all of the licensee's obligations.</li>
-                            <li>Must be 19 years of age or over.</li>
-                            <li>Will continue to have the authority described below until the Branch receives written information from the licensee of any change or amendment.</li>
-                        </ul>
-                    </section>
-                </div>
-            </section>
-
-            <h3 class="blue-header">LICENSEE REPRESENTATIVE INFORMATION</h3>
-            <section class="padded-section content-bottom">
-                <div class="row">
-                    <section class="col-md-4 col-xs-12">
-                        <app-field label="Representative Name:" [valid]="isValidOrNotTouched('representativeFullName')"
-                            [isFullWidth]="true" [required]="true"
-                            errorMessage="Representative Name is a required field">
-                            <input class="form-control" type="text" formControlName="representativeFullName">
-                        </app-field>
-                    </section>
-                    <section class="col-md-4 col-xs-12">
-                        <app-field label="Telephone:" [valid]="isValidOrNotTouched('representativePhoneNumber')"
-                            [isFullWidth]="true" [required]="true"
-                            errorMessage="Telephone is a required field">
-                            <input class="form-control" type="text" formControlName="representativePhoneNumber" mask="(000) 000-0000">
-                        </app-field>
-                    </section>
-                    <section class="col-md-4 col-xs-12">
-                        <app-field label="E-mail Address:" [valid]="isValidOrNotTouched('representativeEmail')"
-                            [isFullWidth]="true" [required]="true"
-                            errorMessage="E-mail Address is a required field">
-                            <input class="form-control" type="text" formControlName="representativeEmail">
-                        </app-field>
-                    </section>
-                </div>
-                <div class="row" *ngIf="hasRepresentativeOnFile">
-                    <div class="col-xs-12 text-right">
-                        <button class="btn btn-primary" (click)="remove()">
-                            <fa-icon [icon]="faTrash" style="color: #fff;"></fa-icon>
-                            Remove Authority</button>
-                    </div>
-                </div>
-            </section>
-
-            <h3 class="blue-header">SCOPE OF THE LICENSEE REPRESENTATIVE'S AUTHORITY</h3>
-            <section class="padded-section content-bottom">
-                <div>
-                    <p>For each responsibility that is ticked below, the licensee (i) is allowing the authorized representative to act on the licensee's behalf, and (ii) will be bound by the licensee representative's decisions. (must check at least one box).</p>
-                </div>
-                <br/>
-                <div>
-                    <p><strong>Licensing:</strong></p>
-                </div>
-                <div>
-                    <mat-checkbox formControlName="representativeCanSubmitPermanentChangeApplications">
-                        Submit permanent change applications (excluding Agreement to Transfer Licence(s) to New Owner) <fa-icon [icon]="faQuestionCircle" data-html="true" style="color: #38598a; margin-left: 10px;" matTooltipClass="multiline-tooltip" matTooltip="Your licensee representative may sign the following documents on your behalf:&#010;&bull;Permanent change to a licensee&#010;&bull;Permanent change to licence&#010;&bull;Structural change&#010;&bull;Add or change a third party operator&#010;&bull;Off-site storage notification&#010;&bull;Address change notification&#010;&bull;Reinstatement of expired licence&#010;&bull;Allow minors&#010;&bull;Permanent change (hawkers)&#010;&bull;Lounge and special event area application&#010;&bull;Manufacturer on-site store and picnic area endorsement application&#010;&bull;IWS to LRS conversion&#010;&bull;Transfer of location&#010;&bull;Dormancy&#010;&bull;Reconsideration&#010;&bull;Tied house exemption&#010;&bull;LPC application to transition to LP"></fa-icon>
-                    </mat-checkbox>
-                </div>
-                <div>
-                    <mat-checkbox formControlName="representativeCanSignTemporaryChangeApplications">
-                        Sign temporary change applications <fa-icon [icon]="faQuestionCircle" data-html="true" style="color: #38598a; margin-left: 10px;" matTooltipClass="multiline-tooltip" matTooltip="Your licensee representative may sign the following documents on your behalf:&#010;&bull;Temporary change to liquor licence&#010;&bull;Temporary use area endorsements"></fa-icon>
-                    </mat-checkbox>
-                </div>
-                <div>
-                    <mat-checkbox formControlName="representativeCanObtainLicenceInformation">
-                        Obtain licence information from the Branch
-                    </mat-checkbox>
-                </div>
-                <div>
-                    <mat-checkbox formControlName="representativeCanSignGroceryStoreProofOfSale">
-                        Sign Grocery Store Annual Proof of Sales Revenue
-                    </mat-checkbox>
-                </div>
-                <br/>
-                <div>
-                    <p><strong>Compliance & Enforcement:</strong></p>
-                </div>
-                <div>
-                    <mat-checkbox formControlName="representativeCanAttendEducationSessions">
-                        Attend education sessions
-                    </mat-checkbox>
-                </div>
-                <div>
-                    <mat-checkbox formControlName="representativeCanAttendComplianceMeetings">
-                        Attend compliance meetings
-                    </mat-checkbox>
-                </div>
-                <div>
-                    <mat-checkbox formControlName="representativeCanRepresentAtHearings">
-                        Represent the licensee at enforcement hearings
-                    </mat-checkbox>
-                </div>
-            </section>
-
-            <h3 class="blue-header ngtest-declarations" style="margin-bottom: 0px;">DECLARATIONS</h3>
-            <section class="d-flex" style="margin-top: 0px; padding:0px;">
-                <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
-                <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-                    <section class="ngtest-preamble-content">
-                        <p><strong>Section 57(1)(c)</strong> of the <strong>Liquor Control and Licensing Act</strong> states: <i>“A person commits an offence if the person (c) 
-                            provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when 
-                            making a report or when required and as specified by the general manager under section 59.</i>
-                        </p>
-                        <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-                            errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                            [showChevrons]="false">                            
-                            <mat-checkbox formControlName="signatureAgreement">
-                                <span class="error-states">*</span>
-                                <span class="ml-2">
-                                    As the licensee or authorized signatory of the licensee, I understand and affirm that all of
-                                    the information provided is true and complete.
-                                </span>
-                            </mat-checkbox>
-                        </app-field>
-                    </section>
-                </div>
-            </section>
-            
-            <section class="error mt-3 p-3" *ngIf="!form.valid && form.touched">
-                <div class="pb-2" *ngIf="form.errors && form.errors['hasAtLeastOneScope']">
-                    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
-                    <span>At least one scope of authority must be selected</span>
-                </div>
-                <div *ngIf="!validationMessages?.length">
-                    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
-                    <span>Some required fields have not been completed</span>
-                </div>
-                <div *ngIf="validationMessages?.length">
-                    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
-                    <span>The following fields are not valid:</span>
-                </div>
-                <ul *ngFor="let message of validationMessages">
-                    <li class="app-cancel">
-                        {{message}}
-                    </li>
-                </ul>
-            </section>
-
-            <section style="position: relative; margin-top: 20px;">
-                <button class="btn btn-primary" (click)="save()">
-                    <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
-                    SUBMIT</button>
-            </section>
-        </div>
+  <div [ngBusy]="[busy]"></div>
+  <div>
+    <div [formGroup]="form" style="position: relative">
+      <h1 class="ngtest-page-title">Add, Change or Remove a Licensee Representative</h1>
     </div>
+    <div [formGroup]="form">
+      <!-- Preamble -->
+      <section class="d-flex">
+        <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+        <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+          <section class="ngtest-preamble-content">
+            <p>In some cases, a licensee may wish to authorize a specific individual to take certain actions on the licensee's behalf and to legally bind the licensee in respect of those matters. For example:</p>
+            <ul>
+              <li>A licensee that is a company may wish to authorize an employee who is not a company director or officer.</li>
+              <li>A partner in a partnership may wish to authorize a manager at the establishment who is not a partner.</li>
+              <li>A society may wish to authorize an individual who is not a director or senior manager of the society.</li>
+              <li>A licensee who is an individual person may wish to authorize someone else to make decisions and take actions in respect of specific liquor control and licensing matters. In such cases, the licensee should use this form to inform the Liquor and Cannabis Regulation Branch (the "Branch") of the authority that will be given to this individual.</li>
+            </ul>
+            <p>
+              <strong>Requirements:</strong>
+            </p>
+            <p>The licensee understands that a person named in this form:</p>
+            <ul>
+              <li>Does not assume accountability on behalf of the licensee; the licensee remains responsible for all activities within the licensed establishment and for all of the licensee's obligations.</li>
+              <li>Must be 19 years of age or over.</li>
+              <li>Will continue to have the authority described below until the Branch receives written information from the licensee of any change or amendment.</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+
+      <h3 class="blue-header">LICENSEE REPRESENTATIVE INFORMATION</h3>
+      <section class="padded-section content-bottom">
+        <div class="row">
+          <section class="col-md-4 col-xs-12">
+            <app-field label="Representative Name:" [valid]="isValidOrNotTouched('representativeFullName')"
+                       [isFullWidth]="true" [required]="true"
+                       errorMessage="Representative Name is a required field">
+              <input class="form-control" type="text" formControlName="representativeFullName">
+            </app-field>
+          </section>
+          <section class="col-md-4 col-xs-12">
+            <app-field label="Telephone:" [valid]="isValidOrNotTouched('representativePhoneNumber')"
+                       [isFullWidth]="true" [required]="true"
+                       errorMessage="Telephone is a required field">
+              <input class="form-control" type="text" formControlName="representativePhoneNumber" mask="(000) 000-0000">
+            </app-field>
+          </section>
+          <section class="col-md-4 col-xs-12">
+            <app-field label="E-mail Address:" [valid]="isValidOrNotTouched('representativeEmail')"
+                       [isFullWidth]="true" [required]="true"
+                       errorMessage="E-mail Address is a required field">
+              <input class="form-control" type="text" formControlName="representativeEmail">
+            </app-field>
+          </section>
+        </div>
+        <div class="row" *ngIf="hasRepresentativeOnFile">
+          <div class="col-xs-12 text-right">
+            <button class="btn btn-primary" (click)="remove()">
+              <fa-icon [icon]="faTrash" style="color: #fff;"></fa-icon>
+              Remove Authority
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <h3 class="blue-header">SCOPE OF THE LICENSEE REPRESENTATIVE'S AUTHORITY</h3>
+      <section class="padded-section content-bottom">
+        <div>
+          <p>For each responsibility that is ticked below, the licensee (i) is allowing the authorized representative to act on the licensee's behalf, and (ii) will be bound by the licensee representative's decisions. (must check at least one box).</p>
+        </div>
+        <br/>
+        <div>
+          <p>
+            <strong>Licensing:</strong>
+          </p>
+        </div>
+        <div>
+          <mat-checkbox formControlName="representativeCanSubmitPermanentChangeApplications">
+            Submit permanent change applications (excluding Agreement to Transfer Licence(s) to New Owner) <fa-icon [icon]="faQuestionCircle" data-html="true" style="color: #38598a; margin-left: 10px;" matTooltipClass="multiline-tooltip" matTooltip="Your licensee representative may sign the following documents on your behalf:&#010;&bull;Permanent change to a licensee&#010;&bull;Permanent change to licence&#010;&bull;Structural change&#010;&bull;Add or change a third party operator&#010;&bull;Off-site storage notification&#010;&bull;Address change notification&#010;&bull;Reinstatement of expired licence&#010;&bull;Allow minors&#010;&bull;Permanent change (hawkers)&#010;&bull;Lounge and special event area application&#010;&bull;Manufacturer on-site store and picnic area endorsement application&#010;&bull;IWS to LRS conversion&#010;&bull;Transfer of location&#010;&bull;Dormancy&#010;&bull;Reconsideration&#010;&bull;Tied house exemption&#010;&bull;LPC application to transition to LP"></fa-icon>
+          </mat-checkbox>
+        </div>
+        <div>
+          <mat-checkbox formControlName="representativeCanSignTemporaryChangeApplications">
+            Sign temporary change applications <fa-icon [icon]="faQuestionCircle" data-html="true" style="color: #38598a; margin-left: 10px;" matTooltipClass="multiline-tooltip" matTooltip="Your licensee representative may sign the following documents on your behalf:&#010;&bull;Temporary change to liquor licence&#010;&bull;Temporary use area endorsements"></fa-icon>
+          </mat-checkbox>
+        </div>
+        <div>
+          <mat-checkbox formControlName="representativeCanObtainLicenceInformation">
+            Obtain licence information from the Branch
+          </mat-checkbox>
+        </div>
+        <div>
+          <mat-checkbox formControlName="representativeCanSignGroceryStoreProofOfSale">
+            Sign Grocery Store Annual Proof of Sales Revenue
+          </mat-checkbox>
+        </div>
+        <br/>
+        <div>
+          <p>
+            <strong>Compliance & Enforcement:</strong>
+          </p>
+        </div>
+        <div>
+          <mat-checkbox formControlName="representativeCanAttendEducationSessions">
+            Attend education sessions
+          </mat-checkbox>
+        </div>
+        <div>
+          <mat-checkbox formControlName="representativeCanAttendComplianceMeetings">
+            Attend compliance meetings
+          </mat-checkbox>
+        </div>
+        <div>
+          <mat-checkbox formControlName="representativeCanRepresentAtHearings">
+            Represent the licensee at enforcement hearings
+          </mat-checkbox>
+        </div>
+      </section>
+
+      <h3 class="blue-header ngtest-declarations" style="margin-bottom: 0px;">DECLARATIONS</h3>
+      <section class="d-flex" style="margin-top: 0px; padding: 0px;">
+        <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+        <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+          <section class="ngtest-preamble-content">
+            <p>
+              <strong>Section 57(1)(c)</strong> of the <strong>Liquor Control and Licensing Act</strong> states:
+              <i>
+                “A person commits an offence if the person (c)
+                provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when
+                making a report or when required and as specified by the general manager under section 59.
+              </i>
+            </p>
+            <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+                       errorMessage="Please affirm that all of the information provided for this application is true and complete."
+                       [showChevrons]="false">
+              <mat-checkbox formControlName="signatureAgreement">
+                <span class="error-states">*</span>
+                <span class="ml-2">
+                  As the licensee or authorized signatory of the licensee, I understand and affirm that all of
+                  the information provided is true and complete.
+                </span>
+              </mat-checkbox>
+            </app-field>
+          </section>
+        </div>
+      </section>
+
+      <section class="error mt-3 p-3" *ngIf="!form.valid && form.touched">
+        <div class="pb-2" *ngIf="form.errors && form.errors['hasAtLeastOneScope']">
+          <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
+          <span>At least one scope of authority must be selected</span>
+        </div>
+        <div *ngIf="!validationMessages?.length">
+          <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
+          <span>Some required fields have not been completed</span>
+        </div>
+        <div *ngIf="validationMessages?.length">
+          <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
+          <span>The following fields are not valid:</span>
+        </div>
+        <ul *ngFor="let message of validationMessages">
+          <li class="app-cancel">
+            {{message}}
+          </li>
+        </ul>
+      </section>
+
+      <section style="margin-top: 20px; position: relative;">
+        <button class="btn btn-primary" (click)="save()">
+          <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
+          SUBMIT
+        </button>
+      </section>
+    </div>
+  </div>
 </div>
-  

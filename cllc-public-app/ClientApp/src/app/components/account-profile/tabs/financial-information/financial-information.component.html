@@ -7,9 +7,9 @@
     <label *ngIf="['Society'].indexOf(businessType) !== -1">Has the society been operating for more than one year?</label>
     <label *ngIf="['GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Has the partnership been operating for more than one year?</label>
     <br>
-    <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
+    <input type="radio" group="moreThanAYear" value="yes" [(ngModel)]="operatingForMoreThanOneYear"> Yes
     <br>
-    <input type="radio" group="moreThanAYear" value='no' [(ngModel)]="operatingForMoreThanOneYear"> No
+    <input type="radio" group="moreThanAYear" value="no" [(ngModel)]="operatingForMoreThanOneYear"> No
   </section>
 
   <section *ngIf="operatingForMoreThanOneYear =='yes' || operatingForMoreThanOneYear == 'no'">
@@ -24,13 +24,18 @@
 
   <section *ngIf="operatingForMoreThanOneYear =='yes' || operatingForMoreThanOneYear == 'no'">
     <br>
-    <div *ngIf="operatingForMoreThanOneYear =='yes'"><label for="">2. Annual financial statements for the past three years including:</label></div>
-    <div *ngIf="operatingForMoreThanOneYear =='no'"><label for="">2. Projected financial statements, including:</label></div>
+    <div *ngIf="operatingForMoreThanOneYear =='yes'">
+      <label for="">2. Annual financial statements for the past three years including:</label>
+    </div>
+    <div *ngIf="operatingForMoreThanOneYear =='no'">
+      <label for="">2. Projected financial statements, including:</label>
+    </div>
     <ul>
       <li>Balance sheet</li>
       <li>Profit and loss statement</li>
       <li>Cash flows</li>
-      <li *ngIf="operatingForMoreThanOneYear =='yes'">Notes to the financial statements describing related party transactions, debt agreements, commitments, and other material
+      <li *ngIf="operatingForMoreThanOneYear =='yes'">
+        Notes to the financial statements describing related party transactions, debt agreements, commitments, and other material
         agreements
       </li>
       <li *ngIf="operatingForMoreThanOneYear == 'no'">Assumptions used for projections</li>

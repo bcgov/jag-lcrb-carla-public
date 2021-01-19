@@ -1,34 +1,36 @@
-import { Component, Input,  Output, EventEmitter } from '@angular/core';
-import { DynamicsDataService } from '@services/dynamics-data.service';
-import { Account } from '@models/account.model';
-import { Contact } from '@models/contact.model';
-import { User } from '@models/user.model';
-import { UserDataService } from '@services/user-data.service';
-import { AccountDataService } from '@services/account-data.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { takeWhile } from 'rxjs/operators';
-import { FormBase } from '@shared/form-base';
-import { Subscription } from 'rxjs';
-import { FeatureFlagService } from '@services/feature-flag.service';
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { DynamicsDataService } from "@services/dynamics-data.service";
+import { Account } from "@models/account.model";
+import { Contact } from "@models/contact.model";
+import { User } from "@models/user.model";
+import { UserDataService } from "@services/user-data.service";
+import { AccountDataService } from "@services/account-data.service";
+import { Store } from "@ngrx/store";
+import { AppState } from "@app/app-state/models/app-state";
+import { takeWhile } from "rxjs/operators";
+import { FormBase } from "@shared/form-base";
+import { Subscription } from "rxjs";
+import { FeatureFlagService } from "@services/feature-flag.service";
 
 
 @Component({
-  selector: 'app-bceid-confirmation',
-  templateUrl: './bceid-confirmation.component.html',
-  styleUrls: ['./bceid-confirmation.component.scss']
+  selector: "app-bceid-confirmation",
+  templateUrl: "./bceid-confirmation.component.html",
+  styleUrls: ["./bceid-confirmation.component.scss"]
 })
 /** bceid-confirmation component*/
 export class BceidConfirmationComponent extends FormBase {
-  @Input() currentUser: User;
-  @Output() reloadUser = new EventEmitter();
-  public bceidConfirmAccount = true;
-  public bceidConfirmBusinessType = false;
-  public bceidConfirmContact = false;
-  public showBceidCorrection: boolean;
-  public showBceidUserContinue = true;
-  businessType = '';
-  finalBusinessType = '';
+  @Input()
+  currentUser: User;
+  @Output()
+  reloadUser = new EventEmitter();
+  bceidConfirmAccount = true;
+  bceidConfirmBusinessType = false;
+  bceidConfirmContact = false;
+  showBceidCorrection: boolean;
+  showBceidUserContinue = true;
+  businessType = "";
+  finalBusinessType = "";
   busy: Promise<any>;
   busySubscription: Subscription;
   termsAccepted = false;
@@ -46,14 +48,14 @@ export class BceidConfirmationComponent extends FormBase {
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data) => {
-        this.account = data;
-        if (this.account) {
-          this.termsAccepted = this.account.termsOfUseAccepted;
-        }
-      },
-        error => { });
+          this.account = data;
+          if (this.account) {
+            this.termsAccepted = this.account.termsOfUseAccepted;
+          }
+        },
+        error => {});
 
-    featureFlagService.featureOn('LGApprovals')
+    featureFlagService.featureOn("LGApprovals")
       .subscribe(x => this.lgApprovals = x);
 
   }
@@ -79,12 +81,12 @@ export class BceidConfirmationComponent extends FormBase {
   }
 
   confirmContactYes() {
-    const account = <Account>{
+    const account = {
       name: this.currentUser.businessname,
       id: this.currentUser.accountid,
       termsOfUseAccepted: true,
       termsOfUseAcceptedDate: new Date()
-    };
+    } as Account;
     this.createContact(account);
   }
 
@@ -97,10 +99,10 @@ export class BceidConfirmationComponent extends FormBase {
     // Submit selected company type and sub-type to the account service
     account.businessType = this.businessType;
     const payload = JSON.stringify(account);
-    this.busy = this.dynamicsDataService.createRecord('accounts', payload)
+    this.busy = this.dynamicsDataService.createRecord("accounts", payload)
       .toPromise()
       .then((data) => {
-        this.userDataService.loadUserToStore().then(res => { });
+        this.userDataService.loadUserToStore().then(res => {});
         this.reloadUser.emit();
       });
   }
@@ -114,10 +116,10 @@ export class BceidConfirmationComponent extends FormBase {
     this.termsAccepted = accepted;
     if (this.account) {
       const data = { ...this.account, termsOfUseAccepted: true, termsOfUseAcceptedDate: new Date() };
-      this.dynamicsDataService.updateRecord('accounts', this.account.id, data)
+      this.dynamicsDataService.updateRecord("accounts", this.account.id, data)
         .subscribe(res => {
           this.accountDataService.loadCurrentAccountToStore(this.account.id)
-            .subscribe(() => { });
+            .subscribe(() => {});
         });
     }
   }

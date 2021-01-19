@@ -1,23 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { DocumentTypeStatus } from '@models/document-type-status.model';
-import { FileDataService } from '@services/file-data.service';
-import { FormBase } from '../../shared/form-base';
-import { Account } from '@models/account.model';
+import { Component, OnInit, Input } from "@angular/core";
+import { takeWhile } from "rxjs/operators";
+import { HttpClient } from "@angular/common/http";
+import { DocumentTypeStatus } from "@models/document-type-status.model";
+import { FileDataService } from "@services/file-data.service";
+import { FormBase } from "../../shared/form-base";
+import { Account } from "@models/account.model";
 
 @Component({
-  selector: 'app-account-completeness',
-  templateUrl: './account-completeness.component.html',
-  styleUrls: ['./account-completeness.component.scss']
+  selector: "app-account-completeness",
+  templateUrl: "./account-completeness.component.html",
+  styleUrls: ["./account-completeness.component.scss"]
 })
 export class AccountCompletenessComponent extends FormBase implements OnInit {
-  @Input('entityName') entityName: string;
-  @Input('entityId') entityId: string;
-  @Input('formId') formId: string;
-  @Input('account') account: Account;
+  @Input("entityName")
+  entityName: string;
+  @Input("entityId")
+  entityId: string;
+  @Input("formId")
+  formId: string;
+  @Input("account")
+  account: Account;
 
-  public documentTypeStatusResult: DocumentTypeStatus[] = []; 
+  documentTypeStatusResult: DocumentTypeStatus[] = [];
 
   constructor(private http: HttpClient, private fileDataService: FileDataService) { super(); }
 
@@ -30,12 +34,11 @@ export class AccountCompletenessComponent extends FormBase implements OnInit {
           this.documentTypeStatusResult = documentTypeStatusResult;
 
         });
-    }
-    else {
-      console.log("Invalid parameters for AccountCompletenessComponent")
-      console.log(this.entityName)
-      console.log(this.entityId)
-      console.log(this.formId)
+    } else {
+      console.log("Invalid parameters for AccountCompletenessComponent");
+      console.log(this.entityName);
+      console.log(this.entityId);
+      console.log(this.formId);
 
     }
   }

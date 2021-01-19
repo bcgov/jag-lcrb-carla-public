@@ -1,5 +1,5 @@
-import { Endorsement } from './endorsement.model';
-import { OffsiteStorage } from './offsite-storage.model';
+import { Endorsement } from "./endorsement.model";
+import { OffsiteStorage } from "./offsite-storage.model";
 
 export class License {
   id: string;
