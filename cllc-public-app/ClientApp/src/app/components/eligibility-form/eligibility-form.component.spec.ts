@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { EligibilityFormComponent } from "./eligibility-form.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -11,7 +11,7 @@ describe("EligibilityFormComponent",
     let component: EligibilityFormComponent;
     let fixture: ComponentFixture<EligibilityFormComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [EligibilityFormComponent],
           imports: [ReactiveFormsModule, MatRadioModule, MatCheckboxModule],

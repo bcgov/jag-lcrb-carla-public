@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { ApplicationLicenseeChangesComponent } from "./application-licensee-changes.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -28,7 +28,7 @@ describe("ApplicationLicenseeChangesComponent",
       onGoingLicenseeChangesApplicationIdState: { onGoingLicenseeChangesApplicationId: "1" }
     } as AppState;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [ApplicationLicenseeChangesComponent, LicenseeTreeComponent],
           imports: [

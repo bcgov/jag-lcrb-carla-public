@@ -1,5 +1,5 @@
 
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from "@angular/core/testing";
+import { TestBed, ComponentFixture, ComponentFixtureAutoDetect, waitForAsync } from "@angular/core/testing";
 import { BrowserModule } from "@angular/platform-browser";
 import { BceidConfirmationComponent } from "./bceid-confirmation.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -19,7 +19,7 @@ describe("bceid-confirmation component",
     dynamicsDataServiceStub = {};
     userDataServiceStub = {};
     accountDataServiceStub = {};
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [BceidConfirmationComponent],
         imports: [BrowserModule],
@@ -39,7 +39,7 @@ describe("bceid-confirmation component",
     afterEach(() => { fixture.destroy(); });
 
     it("should do something",
-      async(() => {
+      waitForAsync(() => {
         expect(true).toEqual(true);
       }));
   });

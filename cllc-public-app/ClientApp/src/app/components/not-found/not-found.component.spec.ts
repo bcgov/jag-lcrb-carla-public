@@ -1,5 +1,5 @@
 
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from "@angular/core/testing";
+import { TestBed, ComponentFixture, ComponentFixtureAutoDetect, waitForAsync } from "@angular/core/testing";
 import { BrowserModule } from "@angular/platform-browser";
 import { NotFoundComponent } from "./not-found.component";
 import { Router } from "@angular/router";
@@ -9,7 +9,7 @@ const routerSpy = jasmine.createSpyObj("Router", ["navigateByUrl"]);
 
 describe("NotFound component",
   () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [NotFoundComponent],
         imports: [BrowserModule],
@@ -22,7 +22,7 @@ describe("NotFound component",
     }));
 
     it("should do something",
-      async(() => {
+      waitForAsync(() => {
         expect(true).toEqual(true);
       }));
   });

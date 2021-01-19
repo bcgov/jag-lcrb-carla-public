@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from "@angular/core/testing";
+import { TestBed, ComponentFixture, ComponentFixtureAutoDetect, waitForAsync } from "@angular/core/testing";
 import { BrowserModule, Title, DomSanitizer } from "@angular/platform-browser";
 import { PolicyDocumentComponent } from "./policy-document.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -12,7 +12,7 @@ let fixture: ComponentFixture<PolicyDocumentComponent>;
 
 describe("PolicyDocument component",
   () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [PolicyDocumentComponent],
         imports: [BrowserModule],
@@ -41,7 +41,7 @@ describe("PolicyDocument component",
     }));
 
     it("should do something",
-      async(() => {
+      waitForAsync(() => {
         expect(true).toEqual(true);
       }));
   });

@@ -1,5 +1,5 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { ProductInventorySalesReportComponent } from "./product-inventory-sales-report.component";
 import { NO_ERRORS_SCHEMA, Component } from "@angular/core";
@@ -12,7 +12,7 @@ describe("ProductInventorySalesReportComponent",
     let component: TestHostComponent;
     let fixture: ComponentFixture<TestHostComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [ProductInventorySalesReportComponent, TestHostComponent],
           schemas: [NO_ERRORS_SCHEMA],

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { ApplicationsAndLicencesComponent } from "./applications-and-licences.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -40,7 +40,7 @@ describe("ApplicationsAndLicencesComponent",
       indigenousNationState: { indigenousNationModeActive: false }
     } as AppState;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [ApplicationsAndLicencesComponent],
           schemas: [NO_ERRORS_SCHEMA],

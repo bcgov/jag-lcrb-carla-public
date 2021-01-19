@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { SecurityScreeningRequirementsComponent } from "./security-screening-requirements.component";
 import { MatSnackBar } from "@angular/material";
@@ -16,7 +16,7 @@ describe("SecurityScreeningRequirementsComponent",
     let component: SecurityScreeningRequirementsComponent;
     let fixture: ComponentFixture<SecurityScreeningRequirementsComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [SecurityScreeningRequirementsComponent],
           schemas: [NO_ERRORS_SCHEMA],

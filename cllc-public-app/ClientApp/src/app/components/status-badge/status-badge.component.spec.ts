@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from "@angular/core/testing";
+import { TestBed, ComponentFixture, ComponentFixtureAutoDetect, waitForAsync } from "@angular/core/testing";
 import { BrowserModule } from "@angular/platform-browser";
 import { StatusBadgeComponent } from "./status-badge.component";
 
@@ -7,7 +7,7 @@ let fixture: ComponentFixture<StatusBadgeComponent>;
 
 describe("statusbadge component",
   () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [StatusBadgeComponent],
         imports: [BrowserModule],
@@ -20,7 +20,7 @@ describe("statusbadge component",
     }));
 
     it("should do something",
-      async(() => {
+      waitForAsync(() => {
         expect(true).toEqual(true);
       }));
   });

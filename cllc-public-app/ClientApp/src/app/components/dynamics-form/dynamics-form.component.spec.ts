@@ -1,5 +1,5 @@
 
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from "@angular/core/testing";
+import { TestBed, ComponentFixture, ComponentFixtureAutoDetect, waitForAsync } from "@angular/core/testing";
 import { BrowserModule } from "@angular/platform-browser";
 import { DynamicsFormComponent } from "./dynamics-form.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -12,7 +12,7 @@ let dynamicsDataServiceStub: Partial<DynamicsDataService>;
 describe("dynamics-form component",
   () => {
     dynamicsDataServiceStub = {};
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [DynamicsFormComponent],
         imports: [BrowserModule],
@@ -27,7 +27,7 @@ describe("dynamics-form component",
     }));
 
     it("should do something",
-      async(() => {
+      waitForAsync(() => {
         expect(true).toEqual(true);
       }));
   });

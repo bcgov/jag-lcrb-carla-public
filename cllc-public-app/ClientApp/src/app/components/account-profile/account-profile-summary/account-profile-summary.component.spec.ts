@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { AccountProfileSummaryComponent } from "./account-profile-summary.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -11,7 +11,7 @@ describe("AccountProfileSummaryComponent",
     let fixture: ComponentFixture<AccountProfileSummaryComponent>;
     const activatedRouteStub = new ActivatedRouteStub({ applicationId: 1 });
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [AccountProfileSummaryComponent],
           providers: [

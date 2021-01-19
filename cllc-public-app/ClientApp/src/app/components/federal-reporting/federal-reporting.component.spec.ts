@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { FederalReportingComponent } from "./federal-reporting.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -23,7 +23,7 @@ describe("FederalReportingComponent",
       currentUserState: { currentUser: {} }
     } as AppState;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [FederalReportingComponent, ProductInventorySalesReportComponent],
           schemas: [NO_ERRORS_SCHEMA],

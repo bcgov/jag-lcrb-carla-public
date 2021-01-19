@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { LiquorRenewalComponent } from "./liquor-renewal.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -21,7 +21,7 @@ describe("LiquorRenewalComponent",
     let component: LiquorRenewalComponent;
     let fixture: ComponentFixture<LiquorRenewalComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [LiquorRenewalComponent],
           imports: [MatSnackBarModule, ReactiveFormsModule, MatDialogModule],

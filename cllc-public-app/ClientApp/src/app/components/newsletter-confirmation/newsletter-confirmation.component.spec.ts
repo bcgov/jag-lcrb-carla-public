@@ -1,5 +1,5 @@
 
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from "@angular/core/testing";
+import { TestBed, ComponentFixture, ComponentFixtureAutoDetect, waitForAsync } from "@angular/core/testing";
 import { BrowserModule } from "@angular/platform-browser";
 import { NewsletterConfirmationComponent } from "./newsletter-confirmation.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -15,7 +15,7 @@ const routerSpy = jasmine.createSpyObj("Router", ["navigateByUrl"]);
 
 describe("newsletter-confirmation component",
   () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [NewsletterConfirmationComponent],
         imports: [BrowserModule],
@@ -32,7 +32,7 @@ describe("newsletter-confirmation component",
     }));
 
     it("should do create",
-      async(() => {
+      waitForAsync(() => {
         expect(true).toEqual(true);
       }));
   });

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { PrePaymentComponent } from "./pre-payment.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -13,7 +13,7 @@ describe("PrePaymentComponent",
     let component: PrePaymentComponent;
     let fixture: ComponentFixture<PrePaymentComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [PrePaymentComponent],
           providers: [

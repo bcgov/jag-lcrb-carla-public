@@ -1,5 +1,5 @@
 import { TerminateTPORelationshipComponent } from "./terminate-tpo-relationship.component";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { ActivatedRoute } from "@angular/router";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { StoreModule } from "@ngrx/store";
@@ -40,7 +40,7 @@ describe("ApplicationCancelOwnershipTransferComponent",
       currentUserState: { currentUser: {} }
     } as AppState;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       paymentDataServiceStub = {};
       licenceDataServiceStub = {
         getLicenceById: () => of({} as License),

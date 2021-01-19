@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { ConnectionToNonMedicalStoresComponent } from "./connection-to-non-medical-stores.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -11,7 +11,7 @@ describe("ConnectionToNonMedicalStoresComponent",
     let component: ConnectionToNonMedicalStoresComponent;
     let fixture: ComponentFixture<ConnectionToNonMedicalStoresComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [ConnectionToNonMedicalStoresComponent],
           providers: [

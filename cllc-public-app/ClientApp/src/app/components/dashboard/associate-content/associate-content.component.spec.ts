@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { AssociateContentComponent } from "./associate-content.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -10,7 +10,7 @@ describe("AssociateContentComponent",
     let component: AssociateContentComponent;
     let fixture: ComponentFixture<AssociateContentComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [AssociateContentComponent],
           schemas: [NO_ERRORS_SCHEMA],
