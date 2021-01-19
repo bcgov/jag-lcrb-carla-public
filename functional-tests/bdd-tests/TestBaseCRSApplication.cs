@@ -96,8 +96,6 @@ namespace bdd_tests
             string estPID = "012345678";
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
-            string conGiven = "Given";
-            string conSurname = "Surname";
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
@@ -162,19 +160,6 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
-            /*
-            if (businessType == "n indigenous nation")
-            {
-                // select the IN 
-                NgWebElement uiSelectNation = ngDriver.FindElement(By.CssSelector("[formcontrolname='indigenousNationId'] option[value='236686fc-d9d3-e811-90f0-005056832371']"));
-                uiSelectNation.Click();
-            }
-
-            // upload a proof of zoning form
-            FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[3]");
-
-            */
-
             // search for and select the indigenous nation
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
             uiIndigenousNation.SendKeys(indigenousNation);
@@ -216,7 +201,7 @@ namespace bdd_tests
             {
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
             }
-            else 
+            else
             {
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
             }
@@ -242,8 +227,11 @@ namespace bdd_tests
             }
 
             // upload a ownership details document
-            if (businessType != "sole proprietorship")
+            if (businessType == "sole proprietorship")
             {
+                FileUpload("ownership_details.pdf", "(//input[@type='file'])[21]");
+            }
+            else {
                 FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
             }
 
