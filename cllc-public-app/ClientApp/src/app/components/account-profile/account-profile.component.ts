@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { COUNTRIES } from "./country-list";
 
-import * as moment from "moment";
+
 // tslint:disable-next-line:no-duplicate-imports
 import { AccountDataService } from "@services/account-data.service";
 import { Account } from "@models/account.model";
@@ -21,6 +21,7 @@ import { TiedHouseConnectionsDataService } from "@services/tied-house-connection
 import { AppState } from "@app/app-state/models/app-state";
 import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrashAlt } from
   "@fortawesome/free-solid-svg-icons";
+import * as moment from 'moment';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/

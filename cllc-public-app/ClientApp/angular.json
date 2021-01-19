@@ -63,18 +63,17 @@
                         "optimization": false,
                         "outputHashing": "none",
                         "sourceMap": false,
-                        "extractCss": true,
                         "namedChunks": true,
                         "aot": false,
                         "extractLicenses": false,
-                        "vendorChunk": false,
+                        "vendorChunk": true,
 						"commonChunk": false,
                         "buildOptimizer": false,
                         "budgets": [
                             {
                                 "type": "initial",
-                                "maximumWarning": "6mb",
-                                "maximumError": "12mb"
+                                "maximumWarning": "19mb",
+                                "maximumError": "20mb"
                             }
                         ]
 			}

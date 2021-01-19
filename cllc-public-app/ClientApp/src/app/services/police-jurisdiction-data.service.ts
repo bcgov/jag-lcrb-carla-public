@@ -8,7 +8,7 @@ import { catchError } from "rxjs/operators";
 @Injectable({
   providedIn: "root"
 })
-export class PoliceDurisdictionDataService extends DataService {
+export class PoliceJurisdictionDataService extends DataService {
 
   apiPath = "api/policejurisdictions/";
 

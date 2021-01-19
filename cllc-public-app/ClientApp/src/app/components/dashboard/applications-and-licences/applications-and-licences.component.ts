@@ -16,11 +16,11 @@ import { ApplicationLicenseSummary } from "@models/application-license-summary.m
 import { Store } from "@ngrx/store";
 import { AppState } from "@app/app-state/models/app-state";
 import { SetIndigenousNationModeAction } from "@app/app-state/actions/app-state.action";
-import * as moment from "moment";
 import { PaymentDataService } from "@services/payment-data.service";
 import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from
   "@components/licences/licences.component";
 import { faPencilAlt, faPlus, faShoppingCart, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import * as moment from 'moment';
 
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
