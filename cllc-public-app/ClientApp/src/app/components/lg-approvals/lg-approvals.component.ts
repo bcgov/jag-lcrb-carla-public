@@ -4,7 +4,7 @@ import { AppState } from "@app/app-state/models/app-state";
 import { Account } from "@models/account.model";
 import { ApplicationDataService } from "@services/application-data.service";
 import { Application } from "@models/application.model";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import * as moment from "moment";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 

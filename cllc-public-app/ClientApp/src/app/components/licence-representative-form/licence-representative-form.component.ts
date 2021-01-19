@@ -4,7 +4,7 @@ import { FormBuilder, Validators, FormGroup, ValidatorFn } from "@angular/forms"
 import { FormBase } from "@shared/form-base";
 import { Router, ActivatedRoute } from "@angular/router";
 import { LicenseDataService } from "@services/license-data.service";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
 import { faExclamationTriangle, faQuestionCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faSave } from "@fortawesome/free-regular-svg-icons";

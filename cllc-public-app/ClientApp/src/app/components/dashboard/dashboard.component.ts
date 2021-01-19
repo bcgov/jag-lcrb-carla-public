@@ -8,7 +8,7 @@ import { Application } from "@models/application.model";
 import { ApplicationType, ApplicationTypeNames } from "@models/application-type.model";
 import { ApplicationDataService } from "@services/application-data.service";
 import { Router } from "@angular/router";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { LicenseeChangeLog } from "@models/licensee-change-log.model";
 import { LegalEntity } from "@models/legal-entity.model";
 import { LegalEntityDataService } from "@services/legal-entity-data.service";

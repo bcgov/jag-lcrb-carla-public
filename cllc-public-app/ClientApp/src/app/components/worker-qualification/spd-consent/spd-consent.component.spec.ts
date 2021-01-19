@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { of } from "rxjs";
 import { PaymentDataService } from "@services/payment-data.service";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRouteStub } from "@app/testing/activated-route-stub";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 

@@ -4,7 +4,7 @@ import { LicenceRenewalStepsComponent } from "./licence-renewal-steps.component"
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { FeatureFlagService } from "@services/feature-flag.service";
 import { of } from "rxjs";
-import { MatIconModule } from "@angular/material";
+import { MatIconModule } from "@angular/material/icon";
 import { ActivatedRoute } from "@angular/router";
 import { ActivatedRouteStub } from "@app/testing/activated-route-stub";
 

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { SecurityScreeningRequirementsComponent } from "./security-screening-requirements.component";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { LegalEntityDataService } from "@services/legal-entity-data.service";
 import { of } from "rxjs";
 import { ActivatedRoute } from "@angular/router";

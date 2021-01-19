@@ -9,7 +9,8 @@ import { ApplicationTypeNames, FormControlState } from "@models/application-type
 import { Store } from "@ngrx/store";
 import { AppState } from "@app/app-state/models/app-state";
 import { PaymentDataService } from "@services/payment-data.service";
-import { MatSnackBar, MatDialog } from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ApplicationDataService } from "@services/application-data.service";
 import { LicenseDataService } from "@services/license-data.service";

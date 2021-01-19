@@ -11,7 +11,7 @@ import { AppState } from "../../app-state/models/app-state";
 import { User } from "../../models/user.model";
 import { Subscription, Observable, forkJoin } from "rxjs";
 import { PreviousAddressDataService } from "@services/previous-address-data.service";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { COUNTRIES } from "@components/account-profile/country-list";
 import { PreviousAddress } from "@models/previous-address.model";
 import { faExclamationTriangle, faTrash, faTrashAlt } from "@fortawesome/free-solid-svg-icons";

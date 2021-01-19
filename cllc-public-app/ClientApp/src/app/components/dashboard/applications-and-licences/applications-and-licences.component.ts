@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Inject, Output, EventEmitter } from "@angular/core";
 import { forkJoin, Subscription } from "rxjs";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from "@angular/material";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ApplicationDataService } from "@app/services/application-data.service";
 import { LicenseDataService } from "@app/services/license-data.service";
 import { Router } from "@angular/router";

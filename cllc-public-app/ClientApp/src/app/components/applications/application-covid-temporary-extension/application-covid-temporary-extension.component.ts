@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { FormBase } from "@shared/form-base";
 import { filter } from "rxjs/operators";
 import { ApplicationDataService } from "@services/application-data.service";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { DelayedFileUploaderComponent } from "@shared/components/delayed-file-uploader/delayed-file-uploader.component";
 import { throwError, Observable, forkJoin } from "rxjs";
 import { FileItem } from "../../../models/file-item.model";

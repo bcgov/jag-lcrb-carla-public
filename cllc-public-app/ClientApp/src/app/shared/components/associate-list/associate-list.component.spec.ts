@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { AssociateListComponent } from "./associate-list.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 describe("AssociateListComponent",
   () => {

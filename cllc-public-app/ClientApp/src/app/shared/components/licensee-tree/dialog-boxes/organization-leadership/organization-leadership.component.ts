@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { LicenseeChangeLog } from "@models/licensee-change-log.model";
 import { FormBase } from "@shared/form-base";
 import * as moment from "moment";

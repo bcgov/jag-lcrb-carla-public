@@ -1,7 +1,8 @@
 import { Component, OnInit, Renderer2 } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { User } from "@models/user.model";
-import { MatDialog, MatSnackBar } from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { isDevMode } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "./app-state/models/app-state";

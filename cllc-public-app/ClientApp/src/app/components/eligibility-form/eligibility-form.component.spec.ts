@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { EligibilityFormComponent } from "./eligibility-form.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { ReactiveFormsModule, FormBuilder } from "@angular/forms";
-import { MatRadioModule, MatCheckboxModule, MatDialogRef } from "@angular/material";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatDialogRef } from "@angular/material/dialog";
+import { MatRadioModule } from "@angular/material/radio";
 import { EligibilityFormDataService } from "@services/eligibility-data.service";
 
 describe("EligibilityFormComponent",

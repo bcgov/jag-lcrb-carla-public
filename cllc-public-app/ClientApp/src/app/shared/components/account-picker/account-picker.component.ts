@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
-import { MatAutocompleteTrigger } from "@angular/material";
+import { MatAutocompleteTrigger } from "@angular/material/autocomplete";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AccountDataService } from "@services/account-data.service";
 import { filter, tap, switchMap } from "rxjs/operators";

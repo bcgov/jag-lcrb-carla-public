@@ -15,7 +15,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { VersionInfoDataService } from "@services/version-info-data.service";
 import { BreadcrumbComponent } from "@components/breadcrumb/breadcrumb.component";
 import { MonthlyReportDataService } from "@services/monthly-report.service";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ApplicationDataService } from "@services/application-data.service";
 import { UserDataService } from "@services/user-data.service";
 

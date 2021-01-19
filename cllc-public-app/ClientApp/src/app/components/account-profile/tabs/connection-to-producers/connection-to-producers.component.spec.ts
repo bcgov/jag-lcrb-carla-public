@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { ConnectionToProducersComponent } from "./connection-to-producers.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
 import { AccountDataService } from "@services/account-data.service";
 

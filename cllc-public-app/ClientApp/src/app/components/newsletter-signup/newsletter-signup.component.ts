@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewContainerRef } from "@angular/core";
 import { NewsletterDataService } from "@services/newsletter-data.service";
 import { FormControl, Validators, FormGroupDirective, NgForm } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-newsletter-signup",

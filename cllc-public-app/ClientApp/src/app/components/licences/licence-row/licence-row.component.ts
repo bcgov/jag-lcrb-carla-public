@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { forkJoin, Subscription } from "rxjs";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { LicenseDataService } from "@app/services/license-data.service";
 import { Router } from "@angular/router";
 import { ApplicationTypeNames } from "@models/application-type.model";

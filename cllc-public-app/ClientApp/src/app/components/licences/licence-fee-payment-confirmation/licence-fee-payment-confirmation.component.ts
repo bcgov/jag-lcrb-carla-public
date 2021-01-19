@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { PaymentDataService } from "@services/payment-data.service";
 import { Subscription } from "rxjs";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { faAngleDoubleLeft, faPrint } from "@fortawesome/free-solid-svg-icons";
 
 @Component({

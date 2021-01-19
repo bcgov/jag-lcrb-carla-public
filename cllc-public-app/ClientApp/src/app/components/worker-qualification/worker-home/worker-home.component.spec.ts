@@ -5,7 +5,7 @@ import { PolicyDocumentDataService } from "@app/services/policy-document-data.se
 import { of } from "rxjs";
 import { ActivatedRouteStub } from "@app/testing/activated-route-stub";
 import { ActivatedRoute } from "@angular/router";
-import { MatDialog } from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
 import { PolicyDocumentComponent } from "@components/policy-document/policy-document.component";
 
 
