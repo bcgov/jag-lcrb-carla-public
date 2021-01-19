@@ -87,6 +87,7 @@ Scenario: Food Primary Release Test (Sole Proprietorship)
     And I request a Patron Participation Entertainment Endorsement application
     And I click on the Submit button
     And I click on the Licences tab
+    And I click on the link for Relocation Application
     And I request a Food Primary relocation application
     And I click on the Licences tab
     And I click on the link for Structural Change Application
