@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '@services/user-data.service';
 import { User } from '@models/user.model';
 import { Worker } from '@models/worker.model';
@@ -11,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { takeWhile } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { faDownload, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 

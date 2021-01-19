@@ -8,8 +8,6 @@ import { MatSnackBarModule, MatDialogModule } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { LicenseDataService } from '@services/license-data.service';
-import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
-import { AppModule } from '@app/app.module';
 import { HttpClient } from '@angular/common/http';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { of } from 'rxjs';

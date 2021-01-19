@@ -4,7 +4,6 @@ import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy, C
 import { PolicyDocumentComponent } from '../../policy-document/policy-document.component';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
 import { faChevronRight, faIdCard, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

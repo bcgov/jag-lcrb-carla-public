@@ -1,5 +1,5 @@
 import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
-import { BrowserModule, By, Title, DomSanitizer } from '@angular/platform-browser';
+import { BrowserModule, Title, DomSanitizer } from '@angular/platform-browser';
 import { PolicyDocumentComponent } from './policy-document.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { PolicyDocumentDataService } from '@services/policy-document-data.service';

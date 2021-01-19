@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
-import { Observable, of, Subscription, pipe } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { filter, takeWhile, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { FormBase } from '@shared/form-base';
@@ -30,7 +27,6 @@ export class NoticesComponent extends FormBase implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private snackBar: MatSnackBar,
     private accountDataService: AccountDataService,
   ) {
     super();

@@ -1,6 +1,6 @@
 
 import { filter, takeWhile, catchError, mergeMap, delay } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';

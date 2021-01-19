@@ -1,6 +1,6 @@
 // <reference path="../../../../node_modules/@types/jasmine/index.d.ts" />
 import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NewsletterSignupComponent } from './newsletter-signup.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatSnackBar } from '@angular/material';

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { ActivatedRoute } from '@angular/router';
 import { of, Observable } from 'rxjs';

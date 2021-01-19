@@ -1,5 +1,5 @@
 import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
-import { BrowserModule, By } from "@angular/platform-browser";
+import { BrowserModule } from "@angular/platform-browser";
 import { StatusBadgeComponent } from './status-badge.component';
 
 let component: StatusBadgeComponent;

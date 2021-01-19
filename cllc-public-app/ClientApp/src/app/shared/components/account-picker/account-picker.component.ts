@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/cor
 import { MatAutocompleteTrigger } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccountDataService } from '@services/account-data.service';
-import { filter, tap, switchMap, map } from 'rxjs/operators';
+import { filter, tap, switchMap } from 'rxjs/operators';
 import { TransferAccount, Account } from '@models/account.model';
 
 @Component({

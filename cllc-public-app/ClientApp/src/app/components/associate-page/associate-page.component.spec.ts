@@ -2,11 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AssociatePageComponent } from './associate-page.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
 import { ApplicationDataService } from '@services/application-data.service';
 import { FormBuilder } from '@angular/forms';
-import { Store, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 import { ActivatedRoute } from '@angular/router';
 import { PaymentDataService } from '@services/payment-data.service';

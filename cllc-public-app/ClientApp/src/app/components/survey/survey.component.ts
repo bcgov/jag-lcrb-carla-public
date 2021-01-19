@@ -1,9 +1,4 @@
 import { Component, Input } from '@angular/core';
-//import * as Survey from 'survey-angular';
-import { InsertService } from '../insert/insert.service';
-import { addQuestionTypes } from './question-types';
-import { BehaviorSubject } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'survey',

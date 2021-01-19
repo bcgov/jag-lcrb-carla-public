@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, retry, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { User } from '@models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -7,7 +7,7 @@ import { DataService } from './data.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { SetCurrentUserAction } from '@app/app-state/actions/current-user.action';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

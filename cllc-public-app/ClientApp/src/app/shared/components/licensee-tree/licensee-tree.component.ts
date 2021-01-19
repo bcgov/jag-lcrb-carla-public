@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatTree } from '@angular/material/tree';
-import { LegalEntity } from '@models/legal-entity.model';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
 import { MatDialog } from '@angular/material';
 import { ShareholdersAndPartnersComponent } from './dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';

@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store';
 import * as LegalEntityActions from '../actions/legal-entities.action';
 import { LegalEntitiesState } from '../models/app-state';
 

@@ -1,4 +1,3 @@
-import { By } from '@angular/platform-browser';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { DynamicApplicationComponent } from './dynamic-application.component';
@@ -17,7 +16,6 @@ import { of } from 'rxjs';
 import { Application } from '@models/application.model';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
-import { FileSystemItem } from '@models/file-system-item.model';
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 import { Account } from '@models/account.model';
 import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';

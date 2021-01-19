@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SecurityScreeningCategorySummary } from '@models/security-screening-category-summary.model';
 import { SecurityScreeningSummary } from '@models/security-screening-summary.model';
 import { MatSnackBar } from '@angular/material';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';

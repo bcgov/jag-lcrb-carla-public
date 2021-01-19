@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Inject, ChangeDetectorRef } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
-import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { Account } from '@models/account.model';
 import { DynamicsDataService } from '@services/dynamics-data.service';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FeatureFlagDataService } from './feature-flag-data.service';
-import { map, mergeMap } from 'rxjs/operators';
-import { of, Observable, Subject } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

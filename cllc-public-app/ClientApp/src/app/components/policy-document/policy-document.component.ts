@@ -1,6 +1,5 @@
 
-import { filter } from 'rxjs/operators';
-import { Component, OnInit, Input, Output, EventEmitter, DoCheck, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PolicyDocument } from '@models/policy-document.model';
 import { PolicyDocumentDataService } from '@services/policy-document-data.service';

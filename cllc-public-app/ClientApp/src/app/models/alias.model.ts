@@ -1,4 +1,3 @@
-import { Account } from './account.model';
 import { Worker } from './worker.model';
 import { Contact } from './contact.model';
 

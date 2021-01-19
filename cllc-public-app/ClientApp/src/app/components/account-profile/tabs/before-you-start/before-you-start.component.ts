@@ -1,7 +1,6 @@
 
 import {filter, takeWhile} from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { FormBase } from '@shared/form-base';
 import { AppState } from '@app/app-state/models/app-state';

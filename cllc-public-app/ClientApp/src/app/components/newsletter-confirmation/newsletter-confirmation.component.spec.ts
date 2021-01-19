@@ -1,6 +1,6 @@
 
 import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NewsletterDataService } from '@services/newsletter-data.service';

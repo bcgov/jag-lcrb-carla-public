@@ -3,7 +3,7 @@ import { ApplicationType } from './application-type.model';
 import { LicenceEvent } from './licence-event.model';
 import { TermsAndConditions } from './terms-and-conditions.model';
 import { ServiceArea } from './service-area.model';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { OffsiteStorage } from './offsite-storage.model';
 
 export class ApplicationLicenseSummary {

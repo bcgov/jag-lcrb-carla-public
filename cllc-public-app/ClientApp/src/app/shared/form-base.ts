@@ -1,4 +1,4 @@
-import { ValidatorFn, AbstractControl, FormControl, FormGroup, FormArray } from '@angular/forms';
+import { ValidatorFn, AbstractControl, FormGroup, FormArray } from '@angular/forms';
 import { OnDestroy } from '@angular/core';
 import { Application } from '@models/application.model';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';

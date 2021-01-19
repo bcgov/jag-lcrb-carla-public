@@ -42,7 +42,6 @@ import { CateringEventFormComponent } from '@components/catering-event/catering-
 import { EventSecurityFormComponent } from '@components/catering-event/security.component';
 import { SecurityScreeningRequirementsComponent } from '@components/security-screening-requirements/security-screening-requirements.component';
 import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
-import { LiquorRenewalComponent } from '@components/applications/liquor-renewal/liquor-renewal.component';
 import { TemporaryOffsiteComponent } from '@components/temporary-offsite/temporary-offsite.component';
 import { ApplicationThirdPartyOperatorComponent } from '@components/applications/application-third-party-operator/application-third-party-operator.component';
 import { CancelThirdPartyOperatorComponent } from '@components/applications/cancel-third-party-operator/cancel-third-party-operator.component';

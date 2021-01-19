@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+
 import { CannabisRetailLicensingPage } from './cannabis-retail-licensing.po';
 
 const VOTE_SLUG = 'initialNumberInterested';

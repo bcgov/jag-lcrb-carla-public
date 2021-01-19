@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
-import { filter, flatMap } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { ApplicationDataService } from '@services/application-data.service';
 import { MatSnackBar } from '@angular/material';
 import { DelayedFileUploaderComponent } from '@shared/components/delayed-file-uploader/delayed-file-uploader.component';

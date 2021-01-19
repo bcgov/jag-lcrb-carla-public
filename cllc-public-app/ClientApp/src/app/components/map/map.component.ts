@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EstablishmentDataService } from '@app/services/establishment-data.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
 import { Meta, Title } from '@angular/platform-browser';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';

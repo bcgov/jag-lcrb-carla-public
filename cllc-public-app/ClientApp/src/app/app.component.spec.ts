@@ -18,7 +18,6 @@ import { MonthlyReportDataService } from '@services/monthly-report.service';
 import { MatSnackBar } from '@angular/material';
 import { ApplicationDataService } from '@services/application-data.service';
 import { UserDataService } from '@services/user-data.service';
-import { User } from '@models/user.model';
 
 let accountDataServiceStub: Partial<AccountDataService>;
 let featureFlagServiceStub: Partial<FeatureFlagService>;
