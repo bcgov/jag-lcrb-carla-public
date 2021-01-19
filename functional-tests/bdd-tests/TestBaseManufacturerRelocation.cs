@@ -48,7 +48,7 @@ namespace bdd_tests
             uiAdditionalPIDs.SendKeys(additionalPIDs);
 
             // select the zoning checkbox
-            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
+            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-2"));
             uiZoningCheckbox.Click();
 
             // enter the proposed changes
