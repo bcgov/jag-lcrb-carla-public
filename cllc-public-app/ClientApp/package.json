@@ -32,8 +32,8 @@
     "@asymmetrik/ngx-leaflet": "^6.0.1",
     "@fortawesome/angular-fontawesome": "^0.8.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@fortawesome/free-brands-svg-icons": "^5.15.2",
-    "@fortawesome/free-regular-svg-icons": "^5.15.2",
+    //"@fortawesome/free-brands-svg-icons": "^5.15.2",
+    //"@fortawesome/free-regular-svg-icons": "^5.15.2",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@ng-bootstrap/ng-bootstrap": "^9.0.0",
     "@ngrx/store": "^11.0.0-beta.1",
@@ -63,15 +63,16 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular/compiler": "^11.0.9",
+    "@angular-builders/custom-webpack": "^11.0.0",
+    "@angular-builders/dev-server": "^7.3.1",
     "@angular-devkit/build-angular": "^0.1100.7",
     "@angular-eslint/eslint-plugin": "^1.1.0",
     "@angular/cli": "^11.0.7",
+    "@angular/compiler": "^11.0.9",
     "@angular/compiler-cli": "^11.0.9",
     "@angular/localize": "^11.0.9",
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
-    "codelyzer": "^6.0.1",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "^2.0.8",
     "@types/knockout": "^3.4.69",
@@ -80,13 +81,14 @@
     "@typescript-eslint/eslint-plugin-tslint": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
     "angular-named-lazy-chunks-webpack-plugin": "^2.1.0",
+    "babel-minify-webpack-plugin": "^0.3.1",
+    "codelyzer": "^6.0.1",
     "eslint": "^7.18.0",
     "eslint-plugin-import": "^2.22.1",
-    "jasmine-spec-reporter": "~5.0.0",
     "jasmine-core": "^3.6.0",
     "jasmine-reporters": "^2.3.2",
+    "jasmine-spec-reporter": "~5.0.0",
     "jasmine2-protractor-utils": "^1.3.0",
-    "protractor-html-reporter": "^1.3.2",
     "karma": "~5.1.1",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
@@ -95,6 +97,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "karma-junit-reporter": "^1.2.0",
     "protractor": "~7.0.0",
+    "protractor-html-reporter": "^1.3.2",
     "ts-node": "~7.0.0",
     "tslint": "~6.1.0",
     "typescript": "^4.0.5",
@@ -107,12 +110,12 @@
     "@babel/core": "^7.9.0"
   },
   "browserslist": {
-  "production": [
-    "last 2 versions",
-    "ie 11"
-  ],
-  "development": [
-    "last 1 Chrome version"
-  ]
+    "production": [
+      "last 2 versions",
+      "ie 11"
+    ],
+    "development": [
+      "last 1 Chrome version"
+    ]
   }
 }
