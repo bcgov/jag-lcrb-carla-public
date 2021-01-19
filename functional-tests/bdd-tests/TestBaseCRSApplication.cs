@@ -232,6 +232,18 @@ namespace bdd_tests
                 FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
             }
 
+            // upload a ownership details document
+            if (businessType != " sole proprietorship")
+            {
+                FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
+            }
+
+            // upload a ownership details document
+            if (businessType == " sole proprietorship")
+            {
+                FileUpload("ownership_details.pdf", "(//input[@type='file'])[21]");
+            }
+
             // enter the role of the application contact
             NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
             uiContactRole.SendKeys(conRole);
