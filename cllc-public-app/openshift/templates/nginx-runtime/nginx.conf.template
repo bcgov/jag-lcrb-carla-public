@@ -82,6 +82,13 @@ http {
 
 		%API_CONFIG_SECTION%
 
+		location ~ \.css {
+			add_header  Content-Type    text/css;
+		}
+		
+		location ~ \.js {
+			add_header  Content-Type    application/x-javascript;
+		}
 		
         # Remove path prefix when handling files
         rewrite ^\/lcrb\/(.*) /$1 last;
