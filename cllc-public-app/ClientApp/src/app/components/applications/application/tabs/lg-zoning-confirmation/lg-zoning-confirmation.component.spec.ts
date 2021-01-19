@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { LgZoningConfirmationComponent } from "./lg-zoning-confirmation.component";
 
@@ -7,7 +7,7 @@ describe("LgZoningComfirmationComponent",
     let component: LgZoningConfirmationComponent;
     let fixture: ComponentFixture<LgZoningConfirmationComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [LgZoningConfirmationComponent]
         })

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { DashboardComponent } from "./dashboard.component";
 import { Component, Input, NO_ERRORS_SCHEMA } from "@angular/core";
@@ -39,7 +39,7 @@ describe("DashboardComponent",
     } as AppState;
 
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           imports: [
             StoreModule.forRoot(reducers, { metaReducers }),

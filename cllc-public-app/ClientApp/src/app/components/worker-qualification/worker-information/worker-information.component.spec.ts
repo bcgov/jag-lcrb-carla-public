@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { WorkerInformationComponent } from "./worker-information.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -18,7 +18,7 @@ describe("WorkerInformationComponent",
     let component: WorkerInformationComponent;
     let fixture: ComponentFixture<WorkerInformationComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [WorkerInformationComponent, PolicyDocumentComponent],
           providers: [

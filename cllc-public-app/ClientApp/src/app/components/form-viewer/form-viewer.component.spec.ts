@@ -1,5 +1,5 @@
 
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from "@angular/core/testing";
+import { TestBed, ComponentFixture, ComponentFixtureAutoDetect, waitForAsync } from "@angular/core/testing";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormViewerComponent } from "./form-viewer.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -15,7 +15,7 @@ describe("form-viewer component",
   () => {
     const activatedRouteStub = new ActivatedRouteStub({ id: "1" });
     dynamicsServiceStub = {};
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [FormViewerComponent],
         imports: [BrowserModule],
@@ -31,7 +31,7 @@ describe("form-viewer component",
     }));
 
     it("should do something",
-      async(() => {
+      waitForAsync(() => {
         expect(component).toBeTruthy();
       }));
   });

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { OrgStructureComponent } from "./org-structure.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -9,7 +9,7 @@ describe("OrgStructureComponent",
     let component: OrgStructureComponent;
     let fixture: ComponentFixture<OrgStructureComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           imports: [ReactiveFormsModule],
           declarations: [OrgStructureComponent],

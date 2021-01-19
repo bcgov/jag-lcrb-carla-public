@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { WorkerHomeComponent } from "./worker-home.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { PolicyDocumentDataService } from "@app/services/policy-document-data.service";
@@ -20,7 +20,7 @@ describe("WorkerHomeComponent",
     let component: WorkerHomeComponent;
     let fixture: ComponentFixture<WorkerHomeComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       activatedRouteStub.data = of(null);
 
       TestBed.configureTestingModule({

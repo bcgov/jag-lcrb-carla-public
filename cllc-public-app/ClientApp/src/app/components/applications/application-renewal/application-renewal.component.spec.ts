@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { ApplicationRenewalComponent } from "./application-renewal.component";
 import { PaymentDataService } from "@services/payment-data.service";
@@ -47,7 +47,7 @@ describe("ApplicationRenewalComponent",
       currentUserState: { currentUser: {} }
     } as AppState;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       paymentDataServiceStub = {};
       applicationDataServiceStub = {
         getSubmittedApplicationCount: () => of(0),

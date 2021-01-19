@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { AssociateListComponent } from "./associate-list.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -10,7 +10,7 @@ describe("AssociateListComponent",
     let component: AssociateListComponent;
     let fixture: ComponentFixture<AssociateListComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [AssociateListComponent],
           imports: [ReactiveFormsModule, FormsModule],

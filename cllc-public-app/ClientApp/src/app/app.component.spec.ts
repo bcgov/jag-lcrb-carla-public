@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from "@angular/core/testing";
+import { TestBed, ComponentFixture, waitForAsync } from "@angular/core/testing";
 import {
   RouterTestingModule
 } from "@angular/router/testing";
@@ -32,7 +32,7 @@ describe("AppComponent",
       currentUserState: { currentUser: {} }
     } as AppState;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
 
       accountDataServiceStub = {};
       featureFlagServiceStub = { featureOn: () => of(true) };
@@ -74,13 +74,13 @@ describe("AppComponent",
     afterEach(() => { fixture.destroy(); });
 
     it("should create the app",
-      async(() => {
+      waitForAsync(() => {
         const app = fixture.debugElement.componentInstance;
         expect(app).toBeTruthy();
       }));
 
     it("should render title in a span tag",
-      async(() => {
+      waitForAsync(() => {
         fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         const compiled = fixture.debugElement.nativeElement;

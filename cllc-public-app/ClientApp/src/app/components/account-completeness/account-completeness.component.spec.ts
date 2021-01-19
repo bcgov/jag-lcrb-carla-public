@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { AccountCompletenessComponent } from "./account-completeness.component";
 import { RouterTestingModule } from "@angular/router/testing";
@@ -11,7 +11,7 @@ describe("AccountCompletenessComponent",
     let component: AccountCompletenessComponent;
     let fixture: ComponentFixture<AccountCompletenessComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           imports: [
             RouterTestingModule.withRoutes(

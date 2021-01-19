@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { SpdConsentComponent } from "./spd-consent.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { provideMockStore } from "@ngrx/store/testing";
@@ -32,7 +32,7 @@ describe("SpdConsentComponent",
     let component: SpdConsentComponent;
     let fixture: ComponentFixture<SpdConsentComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [SpdConsentComponent],
           imports: [ReactiveFormsModule, FormsModule, HttpClientTestingModule],

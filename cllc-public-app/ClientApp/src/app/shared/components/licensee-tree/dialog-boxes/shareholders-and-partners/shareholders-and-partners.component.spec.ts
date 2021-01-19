@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { ShareholdersAndPartnersComponent } from "./shareholders-and-partners.component";
 import { FormBuilder } from "@angular/forms";
@@ -10,7 +10,7 @@ describe("ShareholdersAndPartnersComponent",
     let component: ShareholdersAndPartnersComponent;
     let fixture: ComponentFixture<ShareholdersAndPartnersComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [ShareholdersAndPartnersComponent],
           schemas: [NO_ERRORS_SCHEMA],

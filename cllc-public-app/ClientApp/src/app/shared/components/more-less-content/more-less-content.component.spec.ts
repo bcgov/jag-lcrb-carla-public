@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { MoreLessContentComponent } from "./more-less-content.component";
 
@@ -7,7 +7,7 @@ describe("MoreLessContentComponent",
     let component: MoreLessContentComponent;
     let fixture: ComponentFixture<MoreLessContentComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [MoreLessContentComponent]
         })

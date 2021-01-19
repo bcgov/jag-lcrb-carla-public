@@ -1,5 +1,5 @@
 // <reference path="../../../../node_modules/@types/jasmine/index.d.ts" />
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from "@angular/core/testing";
+import { TestBed, ComponentFixture, ComponentFixtureAutoDetect, waitForAsync } from "@angular/core/testing";
 import { BrowserModule } from "@angular/platform-browser";
 import { NewsletterSignupComponent } from "./newsletter-signup.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -11,7 +11,7 @@ let fixture: ComponentFixture<NewsletterSignupComponent>;
 
 describe("newsletter-signup component",
   () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [NewsletterSignupComponent],
         imports: [BrowserModule],
@@ -27,7 +27,7 @@ describe("newsletter-signup component",
     }));
 
     it("should do something",
-      async(() => {
+      waitForAsync(() => {
         expect(true).toEqual(true);
       }));
   });

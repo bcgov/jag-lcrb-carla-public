@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { PersonalHistorySummaryComponent } from "./personal-history-summary.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -15,7 +15,7 @@ describe("PersonalHistorySummaryComponent",
     let fixture: ComponentFixture<PersonalHistorySummaryComponent>;
     const activatedRouteStub = new ActivatedRouteStub({ token: 1 });
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           declarations: [PersonalHistorySummaryComponent],
           providers: [
