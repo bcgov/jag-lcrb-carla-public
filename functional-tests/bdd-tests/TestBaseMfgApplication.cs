@@ -44,6 +44,21 @@ namespace bdd_tests
             string localGovernmentSaanich = "Saanich";
             string policeJurisdictionSaanich = "Saanich Police Department";
 
+            // upload central securities register
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+
+            // upload supporting business documentation
+            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+
+            // upload notice of articles
+            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+
+            // upload personal history summary documents
+            FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+
+            // upload shareholders holding less than 10% interest
+            FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
+
             // enter the establishment name
             NgWebElement uiEstabName = null;
             // try up to 10 times to get an element.
