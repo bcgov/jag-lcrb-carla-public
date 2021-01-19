@@ -20,7 +20,7 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request a relocation application")]
+        [And(@"I request a Food Primary relocation application")]
         public void RelocationApplication()
         {
             /* 
