@@ -15,9 +15,8 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "progress": true,
+            "progress": false,
             "polyfills": "src/polyfills.ts",
-            "aot": true,
             "assets": [
               "src/assets"
             ],
@@ -48,9 +47,10 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "aot": true,
+              "aot": false,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
+			  "commonChunk": true,
               "buildOptimizer": true,
               "fileReplacements": [
                 {
@@ -58,7 +58,26 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ]
-            }
+            },
+			"development": {                        
+                        "optimization": false,
+                        "outputHashing": "none",
+                        "sourceMap": false,
+                        "extractCss": true,
+                        "namedChunks": true,
+                        "aot": false,
+                        "extractLicenses": false,
+                        "vendorChunk": false,
+						"commonChunk": false,
+                        "buildOptimizer": false,
+                        "budgets": [
+                            {
+                                "type": "initial",
+                                "maximumWarning": "6mb",
+                                "maximumError": "12mb"
+                            }
+                        ]
+			}
           }
         },
         "serve": {

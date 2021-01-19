@@ -1,17 +1,18 @@
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
     "baseUrl": "./src",
     "downlevelIteration": true,
     "outDir": "./dist/out-tsc",
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": false,
     "module": "es2020",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": false,
     "importHelpers": true,
     "target": "es2015",
+	"incremental": true,
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -26,5 +27,8 @@
       "@components*": ["app/components*"],
       "@app*": ["app*"]
     }
+  },
+  "angularCompilerOptions": {
+    "enableIvy": true
   }
 }
