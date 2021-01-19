@@ -35,6 +35,10 @@ namespace bdd_tests
 
             ContinueToApplicationButton();
 
+            /* 
+            Page Title: Manufacturer Relocation Application
+            */
+
             // create test data
             string additionalPIDs = "012345678, 343434344";
             string proposedChanges = "Details of proposed changes.";
@@ -44,7 +48,7 @@ namespace bdd_tests
             uiAdditionalPIDs.SendKeys(additionalPIDs);
 
             // select the zoning checkbox
-            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-1"));
+            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox#mat-checkbox-2"));
             uiZoningCheckbox.Click();
 
             // enter the proposed changes
@@ -67,11 +71,11 @@ namespace bdd_tests
             FileUpload("ownership_details.pdf","(//input[@type='file'])[15]");
 
             // select the authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
 
             // select the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
             // click on the Submit & Pay button
