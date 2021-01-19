@@ -1,7 +1,7 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 
-namespace Gov.Lclb.Cllb.Public.Models.Extensions
+namespace Gov.Lclb.Cllb.Public.Models
 {
     public static class CapacityAreaExtensions
     {

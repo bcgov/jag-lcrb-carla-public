@@ -12,20 +12,11 @@ import {
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getMonthlyWeekday } from '../../shared/date-fns';
+import { DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getMonthlyWeekday } from '../../shared/date-fns';
 import { getWeekOfMonth } from 'date-fns';
 import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-regular-svg-icons';
-
-const DEFAULT_START_TIME = {
-  hour: 9,
-  minute: 0
-};
-const DEFAULT_END_TIME = {
-  hour: 23,
-  minute: 0
-};
-const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+import { LicenceEventSchedule } from '@models/licence-event-schedule';
 
 @Component({
   selector: 'app-market-event',
@@ -117,23 +108,23 @@ export class MarketEventComponent extends FormBase implements OnInit {
     private licenceEvents: LicenceEventsService,
     private router: Router,
     private route: ActivatedRoute
-    ) {
-      super();
-      this.route.paramMap.subscribe(params => {
-        this.eventForm.controls['licenceId'].setValue(params.get('licenceId'));
-        if (params.get('eventId')) {
-          this.isEditMode = true;
-          this.retrieveSavedEvent(params.get('eventId'));
-        } else {
-          this.resetDateFormsToDefault();
-          this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
-        }
-      });
-      this.startDateMinimum = new Date();
-      this.startDateMinimum.setDate(this.startDateMinimum.getDate());
-      this.endDateMinimum = new Date();
-      this.endDateMinimum.setDate(this.endDateMinimum.getDate());
-    }
+  ) {
+    super();
+    this.route.paramMap.subscribe(params => {
+      this.eventForm.controls['licenceId'].setValue(params.get('licenceId'));
+      if (params.get('eventId')) {
+        this.isEditMode = true;
+        this.retrieveSavedEvent(params.get('eventId'));
+      } else {
+        this.resetDateFormsToDefault();
+        this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
+      }
+    });
+    this.startDateMinimum = new Date();
+    this.startDateMinimum.setDate(this.startDateMinimum.getDate());
+    this.endDateMinimum = new Date();
+    this.endDateMinimum.setDate(this.endDateMinimum.getDate());
+  }
 
   ngOnInit() {
 
@@ -184,10 +175,10 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   retrieveSavedEvent(eventId: string) {
     this.busy = this.licenceEvents.getLicenceEvent(eventId)
-    .subscribe((licenceEvent) => {
-      this.licenceEvent = licenceEvent;
-      this.setFormToLicenceEvent(licenceEvent);
-    });
+      .subscribe((licenceEvent) => {
+        this.licenceEvent = licenceEvent;
+        this.setFormToLicenceEvent(licenceEvent);
+      });
   }
 
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
@@ -257,7 +248,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
     }
   }
 
-  setTimeFormsToLicenceEventSchedule(schedules: any[]) {
+  setTimeFormsToLicenceEventSchedule(schedules: LicenceEventSchedule[]) {
     // Restore state of weekday checkboxes and monthly frequency radio
     this.setWeekdaysFromEventSchedule(schedules);
     this.setMarketTimeFromEventSchedule(schedules);
@@ -279,10 +270,10 @@ export class MarketEventComponent extends FormBase implements OnInit {
       const timeForm = this.fb.group({
         dateTitle: [isDefault ? null : DAYS[startDate.getDay()] + ', ' + startDate.toLocaleDateString('en-US'), []],
         date: [isDefault ? null : startDate, []],
-        startTime: [{hour: startDate.getHours(), minute: startDate.getMinutes()}, [Validators.required]],
-        endTime: [{hour: endDate.getHours(), minute: endDate.getMinutes()}, [Validators.required]],
-        liquorStartTime: [{hour: liquorStart.getHours(), minute: liquorStart.getMinutes()}, [Validators.required]],
-        liquorEndTime: [{hour: liquorEnd.getHours(), minute: liquorEnd.getMinutes()}, [Validators.required]]
+        startTime: [{ hour: startDate.getHours(), minute: startDate.getMinutes() }, [Validators.required]],
+        endTime: [{ hour: endDate.getHours(), minute: endDate.getMinutes() }, [Validators.required]],
+        liquorStartTime: [{ hour: liquorStart.getHours(), minute: liquorStart.getMinutes() }, [Validators.required]],
+        liquorEndTime: [{ hour: liquorEnd.getHours(), minute: liquorEnd.getMinutes() }, [Validators.required]]
       });
 
       if (this.isReadOnly) {
@@ -400,44 +391,22 @@ export class MarketEventComponent extends FormBase implements OnInit {
   }
 
   updateLicence(schedules) {
-    this.busy = this.licenceEvents.updateLicenceEvent(this.eventForm.get('id').value, {...this.eventForm.value, schedules})
-    .subscribe((licenceEvent) => {
-      this.router.navigate(['/licences']);
-    });
+    this.busy = this.licenceEvents.updateLicenceEvent(this.eventForm.get('id').value, { ...this.eventForm.value, schedules })
+      .subscribe((licenceEvent) => {
+        this.router.navigate(['/licences']);
+      });
   }
 
   createLicence(schedules) {
     this.eventForm.removeControl('id');
-    this.busy = this.licenceEvents.createLicenceEvent({...this.eventForm.value, schedules: schedules})
-    .subscribe((licenceEvent) => {
-      this.router.navigate(['/licences']);
-    });
+    this.busy = this.licenceEvents.createLicenceEvent({ ...this.eventForm.value, schedules: schedules })
+      .subscribe((licenceEvent) => {
+        this.router.navigate(['/licences']);
+      });
   }
 
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.value === c2.value : c1 === c2;
-  }
-
-  getOptionFromValue(options: any, value: number) {
-    const idx = options.findIndex(opt => opt.value === value);
-    if (idx >= 0) {
-      return options[idx];
-    }
-    return {
-      value: null,
-      label: ''
-    };
-  }
-
-  getOptionFromLabel(options: any, label: string) {
-    const idx = options.findIndex(opt => opt.label === label);
-    if (idx >= 0) {
-      return options[idx];
-    }
-    return {
-      value: null,
-      label: ''
-    };
   }
 
   toggleScheduleConsistency() {
@@ -520,7 +489,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   isOnSelectedDayOfWeek(d: Date): boolean {
     if (this.eventForm.get('sunday').value && d.getDay() === 0) {
-        return true;
+      return true;
     }
     if (this.eventForm.get('monday').value && d.getDay() === 1) {
       return true;
@@ -549,7 +518,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
       return retVal;
     }
     this.selectedDaysOfWeekArray.forEach(element => {
-      const date = getMonthlyWeekday(this.selectedWeekOfMonth, element, d.toLocaleString('default', { month: 'long'}), d.getFullYear());
+      const date = getMonthlyWeekday(this.selectedWeekOfMonth, element, d.toLocaleString('default', { month: 'long' }), d.getFullYear());
 
       if (date === d.getDate()) {
         retVal = true;
@@ -585,7 +554,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
       const id = this.eventForm.get('id').value;
       const status = this.getOptionFromLabel(this.eventStatus, 'Cancelled').value;
       this.busy = this.licenceEvents
-        .updateLicenceEvent(id, {...this.eventForm.value, status: status, licenceId: this.eventForm.get('licenceId').value})
+        .updateLicenceEvent(id, { ...this.eventForm.value, status: status, licenceId: this.eventForm.get('licenceId').value })
         .subscribe((licenceEvent) => {
           this.router.navigate(['/licences']);
         });

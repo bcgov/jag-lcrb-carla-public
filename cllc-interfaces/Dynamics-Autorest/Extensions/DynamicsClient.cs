@@ -557,6 +557,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             return results;
         }
 
+        public MicrosoftDynamicsCRMadoxioEventlocationCollection GetEventLocationsByEventId(string id)
+        {
+            string filter = $"adoxio_eventid eq {id}";
+            // fetch from Dynamics.
+            MicrosoftDynamicsCRMadoxioEventlocationCollection results;
+            try
+            {
+                results = Eventlocations.Get(filter: filter);
+            }
+            catch (HttpOperationException)
+            {
+                results = null;
+            }
+
+            return results;
+        }
+
         public MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventByLicenceNumber(string licenceNumber)
         {
             string licenceNumberEscaped = licenceNumber.Replace("'", "''");
