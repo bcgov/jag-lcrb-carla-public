@@ -1,68 +1,68 @@
 <ng-container *ngIf="data">
-    <div *ngIf="data.isApproved">
-        <div>
-            <h1 style="color:green">Payment Approved</h1>
-            <p></p>
-            <div class="table" style="padding:0px;">
-                <table>
-                    <tr>
-                        <td>Card Type</td>
-                        <td>{{data.cardType}}</td>
-                    </tr>
-                    <tr>
-                        <td>Date/Time</td>
-                        <td>{{data.trnDate}}</td>
-                    </tr>
-                    <tr>
-                        <td>Invoice Number</td>
-                        <td>{{data.invoice}}</td>
-                    </tr>
-                    <tr>
-                        <td>Transaction ID</td>
-                        <td>{{data.trnId}}</td>
-                    </tr>
-                    <tr>
-                        <td>Authorization</td>
-                        <td>{{data.authCode}}</td>
-                    </tr>
-                    <tr>
-                        <td>Amount</td>
-                        <td>{{data.trnAmount | currency}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <hr>
-        <div>
-            <p>
-                Applications cannot be processed until all required documentation is received. A list of applicable
-                associates can be found on the application dashboard.
-            </p>
-            <p>
-                The applicant may be notified by the Liquor and Cannabis Regulation Branch if any information is
-                missing, or
-                if
-                more information is required. If the applicant wishes to make any changes to the application, please
-                contact
-                the
-                LCRB at <a href="mailto:lcrbcannabis@gov.bc.ca">lcrbcannabis@gov.bc.ca</a>.
-            </p>
-
-
-        </div>
-        <br>
-        <p>Please save this receipt for your records.</p>
+  <div *ngIf="data.isApproved">
+    <div>
+      <h1 style="color: green">Payment Approved</h1>
+      <p></p>
+      <div class="table" style="padding: 0px;">
+        <table>
+          <tr>
+            <td>Card Type</td>
+            <td>{{data.cardType}}</td>
+          </tr>
+          <tr>
+            <td>Date/Time</td>
+            <td>{{data.trnDate}}</td>
+          </tr>
+          <tr>
+            <td>Invoice Number</td>
+            <td>{{data.invoice}}</td>
+          </tr>
+          <tr>
+            <td>Transaction ID</td>
+            <td>{{data.trnId}}</td>
+          </tr>
+          <tr>
+            <td>Authorization</td>
+            <td>{{data.authCode}}</td>
+          </tr>
+          <tr>
+            <td>Amount</td>
+            <td>{{data.trnAmount | currency}}</td>
+          </tr>
+        </table>
+      </div>
     </div>
 
+    <hr>
+    <div>
+      <p>
+        Applications cannot be processed until all required documentation is received. A list of applicable
+        associates can be found on the application dashboard.
+      </p>
+      <p>
+        The applicant may be notified by the Liquor and Cannabis Regulation Branch if any information is
+        missing, or
+        if
+        more information is required. If the applicant wishes to make any changes to the application, please
+        contact
+        the
+        LCRB at <a href="mailto:lcrbcannabis@gov.bc.ca">lcrbcannabis@gov.bc.ca</a>.
+      </p>
 
-    <div *ngIf="!data.isApproved">
-        <br />
-        <div class="error">
-            <strong>{{data.paymentTransactionTitle}}</strong>
-            <br />
-            <br />
-            <div [innerHTML]="data.paymentTransactionMessage"></div>
-        </div>
+
     </div>
+    <br>
+    <p>Please save this receipt for your records.</p>
+  </div>
+
+
+  <div *ngIf="!data.isApproved">
+    <br/>
+    <div class="error">
+      <strong>{{data.paymentTransactionTitle}}</strong>
+      <br/>
+      <br/>
+      <div [innerHTML]="data.paymentTransactionMessage"></div>
+    </div>
+  </div>
 </ng-container>

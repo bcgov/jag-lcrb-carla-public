@@ -1,5 +1,5 @@
 
-import { LegalEntity } from './legal-entity.model';
+import { LegalEntity } from "./legal-entity.model";
 
 
 export class LicenseeChangeLog {
@@ -67,7 +67,7 @@ export class LicenseeChangeLog {
   /**
    * Create from LegalEntity
    */
-  public static CreateFromLegalEntity(legalEntity: LegalEntity = null) {
+  static CreateFromLegalEntity(legalEntity: LegalEntity = null) {
     let newItem: LicenseeChangeLog = null;
 
     if (legalEntity) {
@@ -77,7 +77,7 @@ export class LicenseeChangeLog {
       newItem.businessType = legalEntity.legalentitytype;
       newItem.isIndividual = legalEntity.isindividual;
       newItem.parentLegalEntityId = legalEntity.parentLegalEntityId;
-      newItem.changeType = 'unchanged';
+      newItem.changeType = "unchanged";
       newItem.isDirectorNew = legalEntity.isDirector;
       newItem.isDirectorOld = legalEntity.isDirector;
       newItem.isManagerNew = legalEntity.isSeniorManagement;
@@ -141,22 +141,22 @@ export class LicenseeChangeLog {
   //   return totalShares;
   // }
 
-  public get keyPersonnelChildren(): LicenseeChangeLog[] {
+  get keyPersonnelChildren(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => item.isLeadershipIndividual);
     return leaders;
   }
 
-  public get individualShareholderChildren(): LicenseeChangeLog[] {
+  get individualShareholderChildren(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => item.isShareholderIndividual);
     return leaders;
   }
 
-  public get businessShareholderChildren(): LicenseeChangeLog[] {
+  get businessShareholderChildren(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => !item.isIndividual && item.isShareholderNew);
     return leaders;
   }
 
-  public get keyPersonnelChildrenNoRemoves(): LicenseeChangeLog[] {
+  get keyPersonnelChildrenNoRemoves(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => {
       item = Object.assign(new LicenseeChangeLog, item);
       return item.isLeadershipIndividual && !item.isRemoveChangeType();
@@ -164,7 +164,7 @@ export class LicenseeChangeLog {
     return leaders;
   }
 
-  public get individualShareholderChildrenNoRemoves(): LicenseeChangeLog[] {
+  get individualShareholderChildrenNoRemoves(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => {
       item = Object.assign(new LicenseeChangeLog, item);
       return item.isShareholderIndividual && !item.isRemoveChangeType();
@@ -172,7 +172,7 @@ export class LicenseeChangeLog {
     return leaders;
   }
 
-  public get businessShareholderChildrenNoRemoves(): LicenseeChangeLog[] {
+  get businessShareholderChildrenNoRemoves(): LicenseeChangeLog[] {
     const leaders = (this.children || []).filter(item => {
       item = Object.assign(new LicenseeChangeLog, item);
       return !item.isShareholderIndividual && !item.isRemoveChangeType();
@@ -180,21 +180,25 @@ export class LicenseeChangeLog {
     return leaders;
   }
 
-  public static GetKeyPersonnelDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+  static GetKeyPersonnelDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
     changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
-    let children = (changeLog && changeLog.children) || [];
-    let leaders = children.filter(item => item.isLeadershipIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
+    const children = (changeLog && changeLog.children) || [];
+    let leaders = children.filter(item => item.isLeadershipIndividual &&
+      item.changeType !== "unchanged" &&
+      !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       leaders = leaders.concat(LicenseeChangeLog.GetKeyPersonnelDecendents(child));
     });
     return leaders;
   }
 
-  public static GetLeadershipChanges(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
-    let children = (changeLog && changeLog.children) || [];
-    let leaders = children.filter(item => item.isIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
+  static GetLeadershipChanges(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    const children = (changeLog && changeLog.children) || [];
+    let leaders = children.filter(item => item.isIndividual &&
+      item.changeType !== "unchanged" &&
+      !LicenseeChangeLog.onlyEmailHasChanged(item));
 
-    if(changeLog.changeType != LicenseeChangeType.addBusinessShareholder) { 
+    if (changeLog.changeType != LicenseeChangeType.addBusinessShareholder) {
       children.forEach(child => {
         leaders = leaders.concat(LicenseeChangeLog.GetKeyPersonnelDecendents(child));
       });
@@ -202,7 +206,7 @@ export class LicenseeChangeLog {
     return leaders;
   }
 
-  public static HasChanges(changeLog: LicenseeChangeLog): Boolean {
+  static HasChanges(changeLog: LicenseeChangeLog): Boolean {
     changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     const keyPersonnnelChanged = this.GetKeyPersonnelDecendents(changeLog).length > 0;
     const individualShareholderChanged = this.GetIndividualShareholderDecendents(changeLog).length > 0;
@@ -210,7 +214,7 @@ export class LicenseeChangeLog {
     return keyPersonnnelChanged || individualShareholderChanged || businessShareholderChanged;
   }
 
-  public static HasLeadershipChanges(changeLog: LicenseeChangeLog): Boolean {
+  static HasLeadershipChanges(changeLog: LicenseeChangeLog): Boolean {
     return this.GetLeadershipChanges(changeLog).length > 0;
 
     // if we have added leadership
@@ -222,63 +226,69 @@ export class LicenseeChangeLog {
   // if we have added leadership that is under a NEW shareholder or trust, then it is not a leadership change
 
 
-  public static HasExternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
+  static HasExternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
     changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     return (this.GetIndividualShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length +
-      this.GetBusinessShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length) > 0;
+        this.GetBusinessShareholderDecendents(changeLog).filter(log => log.isAddChangeType()).length) >
+      0;
   }
 
-  public static HasInternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
+  static HasInternalShareholderChanges(changeLog: LicenseeChangeLog): Boolean {
     changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
     return (this.GetIndividualShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length +
-      this.GetBusinessShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length) > 0;
+        this.GetBusinessShareholderDecendents(changeLog).filter(log => !log.isAddChangeType()).length) >
+      0;
   }
 
-  public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+  static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
     changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
-    let children = (changeLog && changeLog.children) || [];
-    let shareholders = children.filter(item => item.isShareholderIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
+    const children = (changeLog && changeLog.children) || [];
+    let shareholders = children.filter(item => item.isShareholderIndividual &&
+      item.changeType !== "unchanged" &&
+      !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       shareholders = shareholders.concat(LicenseeChangeLog.GetIndividualShareholderDecendents(child));
     });
     return shareholders;
   }
 
-  public static GetBusinessShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+  static GetBusinessShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
     changeLog = Object.assign(new LicenseeChangeLog(), changeLog);
-    let children = (changeLog && changeLog.children) || [];
-    let shareholders = children.filter(item => !item.isShareholderIndividual && item.changeType !== 'unchanged' && !LicenseeChangeLog.onlyEmailHasChanged(item));
+    const children = (changeLog && changeLog.children) || [];
+    let shareholders = children.filter(item => !item.isShareholderIndividual &&
+      item.changeType !== "unchanged" &&
+      !LicenseeChangeLog.onlyEmailHasChanged(item));
     children.forEach(child => {
       shareholders = shareholders.concat(LicenseeChangeLog.GetBusinessShareholderDecendents(child));
     });
     return shareholders;
   }
 
-  public static ValidateNonIndividaul(node: LicenseeChangeLog): string[] {
-    let validationResult: string[] = [];
+  static ValidateNonIndividaul(node: LicenseeChangeLog): string[] {
+    const validationResult: string[] = [];
     if (node && !node.isIndividual && (node.isShareholderNew || node.isRoot)) {
-      if (node.businessType === 'PrivateCorporation' && node.keyPersonnelChildrenNoRemoves.length === 0) {
+      if (node.businessType === "PrivateCorporation" && node.keyPersonnelChildrenNoRemoves.length === 0) {
         validationResult.push(`${node.businessNameNew} needs to have one or more key personnel`);
       }
-      if (node.businessType === 'PrivateCorporation'
-        && node.businessShareholderChildrenNoRemoves.length === 0
-        && node.individualShareholderChildrenNoRemoves.length === 0) {
+      if (node.businessType === "PrivateCorporation" &&
+        node.businessShareholderChildrenNoRemoves.length === 0 &&
+        node.individualShareholderChildrenNoRemoves.length === 0) {
         validationResult.push(`${node.businessNameNew} needs to have one or more shareholders`);
       }
-      if (node.businessType === 'PublicCorporation' && node.keyPersonnelChildrenNoRemoves.length === 0) {
+      if (node.businessType === "PublicCorporation" && node.keyPersonnelChildrenNoRemoves.length === 0) {
         validationResult.push(`${node.businessNameNew} needs to have one or more key personnel`);
       }
-      if (node.businessType === 'Society' && node.keyPersonnelChildrenNoRemoves.length === 0) {
+      if (node.businessType === "Society" && node.keyPersonnelChildrenNoRemoves.length === 0) {
         validationResult.push(`${node.businessNameNew} needs to have one or more  directors & officers`);
       }
-      if (node.businessType === 'Partnership'
-        && node.keyPersonnelChildrenNoRemoves.length === 0
-        && node.businessShareholderChildrenNoRemoves.length === 0
-        && node.individualShareholderChildrenNoRemoves.length === 0) {
+      if (node.businessType === "Partnership" &&
+        node.keyPersonnelChildrenNoRemoves.length === 0 &&
+        node.businessShareholderChildrenNoRemoves.length === 0 &&
+        node.individualShareholderChildrenNoRemoves.length === 0) {
         validationResult.push(`${node.businessNameNew} needs to have one or more shareholders`);
       }
 
-      if (node.businessType === 'SoleProprietorship' && node.keyPersonnelChildrenNoRemoves.length === 0) {
+      if (node.businessType === "SoleProprietorship" && node.keyPersonnelChildrenNoRemoves.length === 0) {
         validationResult.push(`${node.businessNameNew} needs to have a leader`);
       }
     }
@@ -286,22 +296,22 @@ export class LicenseeChangeLog {
   }
 
   // construct file name prefix from name
-  public get fileUploadPrefix(): string {
-    let prefix = this.nameToFilePrefix();
+  get fileUploadPrefix(): string {
+    const prefix = this.nameToFilePrefix();
     return prefix;
   }
 
   // construct file name prefix from name
   private nameToFilePrefix(): string {
-    const MAX_SIZE = 12;
-    let prefix = '';
+    let prefix = "";
     if (this.isIndividual) {
       prefix = `${this.firstNameNew} ${this.lastNameNew}`;
     } else {
-      if ((this.businessNameNew || '').length <= MAX_SIZE) {
-        prefix = this.businessNameNew || '';
+      const MAX_SIZE = 12;
+      if ((this.businessNameNew || "").length <= MAX_SIZE) {
+        prefix = this.businessNameNew || "";
       } else {
-        const length = (this.businessNameNew || '').length;
+        const length = (this.businessNameNew || "").length;
         // First 8 Characters + Last 4 characters, unless name is less than 12 characters, then show whole name
         prefix = this.businessNameNew.substring(0, 8) + this.businessNameNew.substring(length - 4);
       }
@@ -316,7 +326,7 @@ export class LicenseeChangeLog {
     this.CopyValues(data);
   }
 
-  public CopyValues(data: LicenseeChangeLog) {
+  CopyValues(data: LicenseeChangeLog) {
     if (data) {
       this.id = data.id;
       this.legalEntityId = data.legalEntityId;
@@ -367,7 +377,7 @@ export class LicenseeChangeLog {
     }
   }
 
-  public static onlyEmailHasChanged(changeLog: LicenseeChangeLog): boolean {
+  static onlyEmailHasChanged(changeLog: LicenseeChangeLog): boolean {
     let result = false;
     if (changeLog.emailNew !== changeLog.emailOld &&
       changeLog.isDirectorNew === changeLog.isDirectorOld &&
@@ -382,12 +392,12 @@ export class LicenseeChangeLog {
       changeLog.lastNameNew === changeLog.lastNameOld &&
       changeLog.dateofBirthNew === changeLog.dateofBirthOld &&
       changeLog.titleNew === changeLog.titleOld) {
-      result = true
+      result = true;
     }
     return result;
   }
 
-  public someFieldsHaveChanged(): boolean {
+  someFieldsHaveChanged(): boolean {
     let result = false;
     if (this.emailNew !== this.emailOld ||
       this.isDirectorNew !== this.isDirectorOld ||
@@ -409,23 +419,23 @@ export class LicenseeChangeLog {
   }
 
   getNewLeadershipPosition(): string {
-    let position = '';
+    let position = "";
     if (this.isDirectorNew) {
-      position += 'Director, ';
+      position += "Director, ";
     }
     if (this.isManagerNew) {
-      position += 'Manager, ';
+      position += "Manager, ";
     }
     if (this.isOfficerNew) {
-      position += 'Officer, ';
+      position += "Officer, ";
     }
 
     if (this.isOwnerNew) {
-      position += 'Owner, ';
+      position += "Owner, ";
     }
 
     if (this.isTrusteeNew) {
-      position += 'Trustee, ';
+      position += "Trustee, ";
     }
     if (this.titleNew) {
       position += `${this.titleNew}, `;
@@ -451,12 +461,12 @@ export class LicenseeChangeLog {
   }
 
   private privateCorpFileErrors(): string[] {
-    let errors = [];
-    if (this.businessType === 'PrivateCorporation') {
-      if (this.fileUploads['NOA'] <= 0) {
+    const errors = [];
+    if (this.businessType === "PrivateCorporation") {
+      if (this.fileUploads["NOA"] <= 0) {
         errors.push(`${this.businessNameNew}: Please upload the Corporation Notice of Articles`);
       }
-      if (this.fileUploads['SECREG'] <= 0) {
+      if (this.fileUploads["SECREG"] <= 0) {
         errors.push(`${this.businessNameNew}: Please upload the Central Securities Register`);
       }
     }
@@ -464,9 +474,9 @@ export class LicenseeChangeLog {
   }
 
   private publicCorpFileErrors(): string[] {
-    let errors = [];
-    if (this.businessType === 'PublicCorporation') {
-      if (this.fileUploads['NOA'] <= 0) {
+    const errors = [];
+    if (this.businessType === "PublicCorporation") {
+      if (this.fileUploads["NOA"] <= 0) {
         errors.push(`${this.businessNameNew}: Please upload the Corporation Notice of Articles`);
       }
     }
@@ -474,9 +484,9 @@ export class LicenseeChangeLog {
   }
 
   private partnershipFileErrors(): string[] {
-    let errors = [];
-    if (this.businessType === 'Partnership') {
-      if (this.fileUploads['NOA'] <= 0) {
+    const errors = [];
+    if (this.businessType === "Partnership") {
+      if (this.fileUploads["NOA"] <= 0) {
         errors.push(`${this.businessNameNew}: Please upload the Partnership Agreement`);
       }
     }
@@ -484,10 +494,10 @@ export class LicenseeChangeLog {
   }
 
   private nameChangeFileErrors(): string[] {
-    let errors = [];
+    const errors = [];
 
     if (this.isNameChangePerformed()) {
-      if (this.fileUploads['Name Change Documents'] <= 0) {
+      if (this.fileUploads["Name Change Documents"] <= 0) {
         errors.push(`${this.firstNameNew} ${this.lastNameNew}: Please upload the Name Change Documents`);
       }
     }
@@ -499,12 +509,11 @@ export class LicenseeChangeLog {
     if (this.isIndividual &&
       (
         this.changeType === LicenseeChangeType.updateLeadership ||
-        this.changeType === LicenseeChangeType.updateIndividualShareholder
-      )
-      &&
+          this.changeType === LicenseeChangeType.updateIndividualShareholder
+      ) &&
       (
         this.firstNameNew !== this.firstNameOld ||
-        this.lastNameNew !== this.lastNameOld
+          this.lastNameNew !== this.lastNameOld
       )) {
       changed = true;
     }
@@ -534,12 +543,14 @@ export class LicenseeChangeLog {
     }
     return result;
   }
+
   /**
     * Finds a nodes in the tree where the compare predicate returns true
     * @param node 'Node in tree to search from'
     * @param compareFn 'a predicate to search for a node by
     */
-  static findNodesInTree(node: LicenseeChangeLog, compareFn: (node: LicenseeChangeLog) => boolean): LicenseeChangeLog[] {
+  static findNodesInTree(node: LicenseeChangeLog, compareFn: (node: LicenseeChangeLog) => boolean): LicenseeChangeLog[
+    ] {
     let result = [];
 
     if (node) {
@@ -560,8 +571,8 @@ export class LicenseeChangeLog {
    * @param changeType
    */
   isIndividualFromChangeType(): boolean {
-    const result = this.changeType.toLowerCase().indexOf('individual') !== -1
-      || this.changeType.toLowerCase().indexOf('leadership') !== -1;
+    const result = this.changeType.toLowerCase().indexOf("individual") !== -1 ||
+      this.changeType.toLowerCase().indexOf("leadership") !== -1;
     return result;
   }
 
@@ -570,9 +581,9 @@ export class LicenseeChangeLog {
    * @param node 'A LicenseeChangeLog'
    */
   isAddChangeType(): boolean {
-    const result = this.changeType === LicenseeChangeType.addLeadership
-      || this.changeType === LicenseeChangeType.addBusinessShareholder
-      || this.changeType === LicenseeChangeType.addIndividualShareholder;
+    const result = this.changeType === LicenseeChangeType.addLeadership ||
+      this.changeType === LicenseeChangeType.addBusinessShareholder ||
+      this.changeType === LicenseeChangeType.addIndividualShareholder;
     return result;
   }
 
@@ -581,9 +592,9 @@ export class LicenseeChangeLog {
    * @param node 'A LicenseeChangeLog'
    */
   isUpdateChangeType(): boolean {
-    const result = this.changeType === LicenseeChangeType.updateLeadership
-      || this.changeType === LicenseeChangeType.updateBusinessShareholder
-      || this.changeType === LicenseeChangeType.updateIndividualShareholder;
+    const result = this.changeType === LicenseeChangeType.updateLeadership ||
+      this.changeType === LicenseeChangeType.updateBusinessShareholder ||
+      this.changeType === LicenseeChangeType.updateIndividualShareholder;
     return result;
   }
 
@@ -592,9 +603,9 @@ export class LicenseeChangeLog {
    * @param node 'A LicenseeChangeLog'
    */
   isRemoveChangeType(): boolean {
-    const result = this.changeType === LicenseeChangeType.removeLeadership
-      || this.changeType === LicenseeChangeType.removeBusinessShareholder
-      || this.changeType === LicenseeChangeType.removeIndividualShareholder;
+    const result = this.changeType === LicenseeChangeType.removeLeadership ||
+      this.changeType === LicenseeChangeType.removeBusinessShareholder ||
+      this.changeType === LicenseeChangeType.removeIndividualShareholder;
     return result;
   }
 
@@ -609,20 +620,22 @@ class DocumentGroup {
   societyDocuments: LicenseeChangeLog[] = [];
 
   get changeLogsPresent(): boolean {
-    const allDocsCount = this.noticeOfArticles.length + this.centralSecuritiesResgister.length +
-      this.shareholderList.length + this.partnershipAgreement.length;
+    const allDocsCount = this.noticeOfArticles.length +
+      this.centralSecuritiesResgister.length +
+      this.shareholderList.length +
+      this.partnershipAgreement.length;
     return allDocsCount > 0;
   }
 }
 
 export enum LicenseeChangeType {
-  addLeadership = 'addLeadership',
-  updateLeadership = 'updateLeadership',
-  removeLeadership = 'removeLeadership',
-  addBusinessShareholder = 'addBusinessShareholder',
-  updateBusinessShareholder = 'updateBusinessShareholder',
-  removeBusinessShareholder = 'removeBusinessShareholder',
-  addIndividualShareholder = 'addIndividualShareholder',
-  updateIndividualShareholder = 'updateIndividualShareholder',
-  removeIndividualShareholder = 'removeIndividualShareholder'
+  addLeadership = "addLeadership",
+  updateLeadership = "updateLeadership",
+  removeLeadership = "removeLeadership",
+  addBusinessShareholder = "addBusinessShareholder",
+  updateBusinessShareholder = "updateBusinessShareholder",
+  removeBusinessShareholder = "removeBusinessShareholder",
+  addIndividualShareholder = "addIndividualShareholder",
+  updateIndividualShareholder = "updateIndividualShareholder",
+  removeIndividualShareholder = "removeIndividualShareholder"
 }

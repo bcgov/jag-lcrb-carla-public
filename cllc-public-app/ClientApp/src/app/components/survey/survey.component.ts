@@ -1,13 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'survey',
+  selector: "survey",
   template: `<div class="survey-container contentcontainer codecontainer"><div id="surveyElement"></div></div>`,
-  styleUrls: ['./survey.component.scss']
+  styleUrls: ["./survey.component.scss"]
 })
 export class SurveyComponent {
-  @Input() jsonData: any;
-  @Input() onComplete: Function;
+  @Input()
+  jsonData: any;
+  @Input()
+  onComplete: Function;
 
   /*
   public surveyModel: Survey.SurveyModel;

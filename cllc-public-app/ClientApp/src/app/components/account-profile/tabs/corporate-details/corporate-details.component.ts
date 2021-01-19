@@ -1,28 +1,30 @@
 
-import {filter,  takeWhile } from 'rxjs/operators';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { UserDataService } from '@services/user-data.service';
-import { AccountDataService } from '@services/account-data.service';
-import { Account } from '@models/account.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
-import { Subscription, Subject, Observable } from 'rxjs';
-import { DatePipe } from '@angular/common';
-import { DynamicsDataService } from '@services/dynamics-data.service';
-import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import * as currentAccountActions from '@app/app-state/actions/current-account.action';
-import { FormBase } from '@shared/form-base';
+import { filter, takeWhile } from "rxjs/operators";
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
+import { UserDataService } from "@services/user-data.service";
+import { AccountDataService } from "@services/account-data.service";
+import { Account } from "@models/account.model";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { MatSnackBar } from "@angular/material";
+import { Subscription, Subject, Observable } from "rxjs";
+import { DatePipe } from "@angular/common";
+import { DynamicsDataService } from "@services/dynamics-data.service";
+import { ActivatedRoute } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { AppState } from "@app/app-state/models/app-state";
+import * as currentAccountActions from "@app/app-state/actions/current-account.action";
+import { FormBase } from "@shared/form-base";
 
 @Component({
-  selector: 'app-corporate-details',
-  templateUrl: './corporate-details.component.html',
-  styleUrls: ['./corporate-details.component.scss']
+  selector: "app-corporate-details",
+  templateUrl: "./corporate-details.component.html",
+  styleUrls: ["./corporate-details.component.scss"]
 })
 export class CorporateDetailsComponent extends FormBase implements OnInit, OnDestroy {
-  @Input() accountId: string;
-  @Input() businessType: string;
+  @Input()
+  accountId: string;
+  @Input()
+  businessType: string;
   corporateDetailsForm: FormGroup;
   accountModel: Account;
   busy: Subscription;
@@ -34,16 +36,17 @@ export class CorporateDetailsComponent extends FormBase implements OnInit, OnDes
     private dynamicsDataService: DynamicsDataService,
     private store: Store<AppState>,
     private route: ActivatedRoute,
-    private fb: FormBuilder, public snackBar: MatSnackBar) {
-      super();
+    private fb: FormBuilder,
+    public snackBar: MatSnackBar) {
+    super();
   }
 
   ngOnInit() {
     this.createForm();
 
     const sub = this.store.select(state => state.currentAccountState)
-    .pipe(takeWhile(() => this.componentActive))
-    .pipe(filter(state => !!state))
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(filter(state => !!state))
       .subscribe(state => {
         this.accountId = state.currentAccount.id;
         this.businessType = state.currentAccount.businessType;
@@ -59,10 +62,11 @@ export class CorporateDetailsComponent extends FormBase implements OnInit, OnDes
   setFormData(data) {
     // format date based on user locale
     const dp = new DatePipe(this.getLang());
-    const dateFormat = 'y-MM-dd'; // YYYY-MM-DD
+    // YYYY-MM-DD
 
-    let dtr = '';
     if (data.dateOfIncorporationInBC != null) {
+      const dateFormat = "y-MM-dd";
+      let dtr = "";
       dtr = dp.transform(new Date(data.dateOfIncorporationInBC), dateFormat);
       data.dateOfIncorporationInBC = dtr;
     }
@@ -81,17 +85,17 @@ export class CorporateDetailsComponent extends FormBase implements OnInit, OnDes
 
   createForm() {
     this.corporateDetailsForm = this.fb.group({
-      bcIncorporationNumber: [''], // Validators.required
-      dateOfIncorporationInBC: [''],
-      businessNumber: [''],
-      contactEmail: [''],
-      contactPhone: [''],
-      mailingAddressName: [''],
-      mailingAddressStreet: [''],
-      mailingAddressCity: [''],
-      mailingAddressCountry: [''],
-      mailingAddressProvince: [''],
-      mailingAddressPostalCode: ['']
+      bcIncorporationNumber: [""], // Validators.required
+      dateOfIncorporationInBC: [""],
+      businessNumber: [""],
+      contactEmail: [""],
+      contactPhone: [""],
+      mailingAddressName: [""],
+      mailingAddressStreet: [""],
+      mailingAddressCity: [""],
+      mailingAddressCountry: [""],
+      mailingAddressProvince: [""],
+      mailingAddressPostalCode: [""]
     });
   }
 
@@ -124,7 +128,9 @@ export class CorporateDetailsComponent extends FormBase implements OnInit, OnDes
     const sub = this.accountDataService.updateAccount(this.accountModel).subscribe(
       res => {
         if (showProgress === true) {
-          this.snackBar.open('Corporate Details have been saved', 'Success', { duration: 2500, panelClass: ['red-snackbar'] });
+          this.snackBar.open("Corporate Details have been saved",
+            "Success",
+            { duration: 2500, panelClass: ["red-snackbar"] });
         }
         saveResult.next(true);
         this.savedFormData = saveData;
@@ -133,9 +139,9 @@ export class CorporateDetailsComponent extends FormBase implements OnInit, OnDes
         );
       },
       err => {
-        this.snackBar.open('Error saving Corporate Details', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error saving Corporate Details", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         saveResult.next(false);
-        console.log('Error occured');
+        console.log("Error occured");
       });
 
     if (showProgress === true) {
@@ -155,7 +161,7 @@ export class CorporateDetailsComponent extends FormBase implements OnInit, OnDes
         return res;
       },
       err => {
-        console.log('Error occured');
+        console.log("Error occured");
       }
     );
   }

@@ -1,5 +1,5 @@
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
     "baseUrl": "./",
     "downlevelIteration": true,
@@ -31,7 +31,7 @@
     }
   },
   "angularCompilerOptions": {
-    "enableIvy": false
+    "enableIvy": true
   },
   "files": [
     "main.ts",

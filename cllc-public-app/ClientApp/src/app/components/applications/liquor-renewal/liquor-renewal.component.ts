@@ -1,62 +1,63 @@
-import { Component, OnInit } from '@angular/core';
-import { KeyValue } from '@angular/common';
-import { Application } from '@models/application.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, Subject, forkJoin, of } from 'rxjs';
-import { TiedHouseConnection } from '@models/tied-house-connection.model';
-import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
-import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { PaymentDataService } from '@services/payment-data.service';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ApplicationDataService } from '@services/application-data.service';
-import { LicenseDataService } from '@services/license-data.service';
-import { FeatureFlagService } from '@services/feature-flag.service';
-import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
-import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
-import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
-import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
-import { Account } from '@models/account.model';
-import { License } from '@models/license.model';
-import { AnnualVolumeService } from '@services/annual-volume.service';
-import { faBolt, faExchangeAlt, faPencilAlt, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { KeyValue } from "@angular/common";
+import { Application } from "@models/application.model";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Observable, Subject, forkJoin, of } from "rxjs";
+import { TiedHouseConnection } from "@models/tied-house-connection.model";
+import { UPLOAD_FILES_MODE } from "@components/licences/licences.component";
+import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
+import { Store } from "@ngrx/store";
+import { AppState } from "@app/app-state/models/app-state";
+import { PaymentDataService } from "@services/payment-data.service";
+import { MatSnackBar, MatDialog } from "@angular/material";
+import { Router, ActivatedRoute } from "@angular/router";
+import { ApplicationDataService } from "@services/application-data.service";
+import { LicenseDataService } from "@services/license-data.service";
+import { FeatureFlagService } from "@services/feature-flag.service";
+import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
+import { takeWhile, filter, catchError, mergeMap } from "rxjs/operators";
+import { ApplicationCancellationDialogComponent } from
+  "@components/dashboard/applications-and-licences/applications-and-licences.component";
+import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
+import { Account } from "@models/account.model";
+import { License } from "@models/license.model";
+import { AnnualVolumeService } from "@services/annual-volume.service";
+import { faBolt, faExchangeAlt, faPencilAlt, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSave } from "@fortawesome/free-regular-svg-icons";
 
 const ValidationErrorMap = {
-  renewalCriminalOffenceCheck: 'Please answer question 1',
-  renewalDUI: 'Please answer question 2',
-  renewalBusinessType: 'Please answer question 3',
-  renewalShareholders: 'Please answer question 4',
-  renewalThirdParty: 'Please answer question 5',
-  renewalFloorPlan: 'Please answer question 6',
-  renewalTiedhouse: 'Please answer question 7',
-  renewalUnreportedSaleOfBusiness: 'Please answer question 8',
-  renewalValidInterest: 'Please answer question 9',
-  renewalkeypersonnel: 'Please answer question 10',
+  renewalCriminalOffenceCheck: "Please answer question 1",
+  renewalDUI: "Please answer question 2",
+  renewalBusinessType: "Please answer question 3",
+  renewalShareholders: "Please answer question 4",
+  renewalThirdParty: "Please answer question 5",
+  renewalFloorPlan: "Please answer question 6",
+  renewalTiedhouse: "Please answer question 7",
+  renewalUnreportedSaleOfBusiness: "Please answer question 8",
+  renewalValidInterest: "Please answer question 9",
+  renewalkeypersonnel: "Please answer question 10",
 
-  contactPersonFirstName: 'Please enter the business contact\'s first name',
-  contactPersonLastName: 'Please enter the business contact\'s last name',
-  contactPersonEmail: 'Please enter the business contact\'s email address',
-  contactPersonPhone: 'Please enter the business contact\'s 10-digit phone number',
-  authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
-  signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
+  contactPersonFirstName: "Please enter the business contact's first name",
+  contactPersonLastName: "Please enter the business contact's last name",
+  contactPersonEmail: "Please enter the business contact's email address",
+  contactPersonPhone: "Please enter the business contact's 10-digit phone number",
+  authorizedToSubmit: "Please affirm that you are authorized to submit the application",
+  signatureAgreement: "Please affirm that all of the information provided for this application is true and complete",
 
-  ldbOrderTotals: 'Please provide LDB Order Totals ($0 - $10,000,000)',
-  ldbOrderTotalsConfirm: 'Please confirm LDB Order Totals matches',
-  volumeProduced: 'Please provide the total volume produced (in litres)',
-  volumeDestroyed: 'Please provide the total volume destroyed (in litres and included in production volume)',
+  ldbOrderTotals: "Please provide LDB Order Totals ($0 - $10,000,000)",
+  ldbOrderTotalsConfirm: "Please confirm LDB Order Totals matches",
+  volumeProduced: "Please provide the total volume produced (in litres)",
+  volumeDestroyed: "Please provide the total volume destroyed (in litres and included in production volume)",
 
-}
+};
 
 // Wineries are required to manufacture at least 4500 litres on-site per year to keep their licence
 const WINERY_MINIMUM_PRODUCTION = 4500;
 
 @Component({
-  selector: 'app-liquor-renewal',
-  templateUrl: './liquor-renewal.component.html',
-  styleUrls: ['./liquor-renewal.component.scss']
+  selector: "app-liquor-renewal",
+  templateUrl: "./liquor-renewal.component.html",
+  styleUrls: ["./liquor-renewal.component.scss"]
 })
 export class LiquorRenewalComponent extends FormBase implements OnInit {
   faPenclilAlt = faPencilAlt;
@@ -80,7 +81,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   submittedApplications = 8;
   tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
-  htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
+  htmlContent = {} as ApplicationHTMLContent;
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
@@ -111,34 +112,34 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     public annualVolumeService: AnnualVolumeService,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
-    this.route.paramMap.subscribe(pmap => this.mode = pmap.get('mode'));
+    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get("applicationId"));
+    this.route.paramMap.subscribe(pmap => this.mode = pmap.get("mode"));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      id: [''],
+      id: [""],
 
-      renewalBusinessType: ['', Validators.required],
-      renewalCriminalOffenceCheck: ['', Validators.required],
-      renewalDUI: ['', Validators.required],
-      renewalFloorPlan: ['', Validators.required],
-      renewalkeypersonnel: ['', Validators.required],
-      renewalShareholders: ['', Validators.required],
-      renewalThirdParty: ['', Validators.required],
-      renewalTiedhouse: ['', Validators.required],
-      renewalUnreportedSaleOfBusiness: ['', Validators.required],
-      renewalValidInterest: ['', Validators.required],
+      renewalBusinessType: ["", Validators.required],
+      renewalCriminalOffenceCheck: ["", Validators.required],
+      renewalDUI: ["", Validators.required],
+      renewalFloorPlan: ["", Validators.required],
+      renewalkeypersonnel: ["", Validators.required],
+      renewalShareholders: ["", Validators.required],
+      renewalThirdParty: ["", Validators.required],
+      renewalTiedhouse: ["", Validators.required],
+      renewalUnreportedSaleOfBusiness: ["", Validators.required],
+      renewalValidInterest: ["", Validators.required],
 
-      contactPersonFirstName: ['', Validators.required],
-      contactPersonLastName: ['', Validators.required],
-      contactPersonRole: [''],
-      contactPersonEmail: ['', Validators.required],
-      contactPersonPhone: ['', Validators.required],
+      contactPersonFirstName: ["", Validators.required],
+      contactPersonLastName: ["", Validators.required],
+      contactPersonRole: [""],
+      contactPersonEmail: ["", Validators.required],
+      contactPersonPhone: ["", Validators.required],
 
-      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
-      isManufacturedMinimum: ['', []]
+      authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
+      isManufacturedMinimum: ["", []]
     });
 
     this.previousYear = (new Date().getFullYear() - 1).toString();
@@ -156,54 +157,61 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         this.account = account;
       });
 
-    let sub = this.applicationDataService.getApplicationById(this.applicationId)
+    const sub = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
-        this.licenceDataService.getLicenceById(data.assignedLicence.id)
-          .pipe(takeWhile(() => this.componentActive))
-          .subscribe((data: License) => {
-            if (data.licenseType !== 'Manufacturer' &&
-              data.licenseSubCategory !== null &&
-              data.licenseSubCategory !== 'Independent Wine Store' &&
-              data.licenseSubCategory !== 'Tourist Wine Store' &&
-              data.licenseSubCategory !== 'Special Wine Store') {
-              this.form.addControl('ldbOrderTotals', this.fb.control('', [Validators.required, Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]));
-              this.form.addControl('ldbOrderTotalsConfirm', this.fb.control('', [Validators.required]));
-            }
-            if (data.licenseType === 'Manufacturer' && (data.licenseSubCategory === 'Winery' || data.licenseSubCategory === 'Brewery')) {
-              this.form.addControl('volumeProduced', this.fb.control('', [Validators.required]));
-            }
-            if (data.licenseType === 'Manufacturer' && data.licenseSubCategory === 'Winery') {
-              this.form.addControl('volumeDestroyed', this.fb.control('', [Validators.required]));
-            }
-            this.dataLoaded = true;
-          }, error => this.dataLoaded = true);
-        if (data.establishmentParcelId) {
-          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-        }
+          this.licenceDataService.getLicenceById(data.assignedLicence.id)
+            .pipe(takeWhile(() => this.componentActive))
+            .subscribe((data: License) => {
+                if (data.licenseType !== "Manufacturer" &&
+                  data.licenseSubCategory !== null &&
+                  data.licenseSubCategory !== "Independent Wine Store" &&
+                  data.licenseSubCategory !== "Tourist Wine Store" &&
+                  data.licenseSubCategory !== "Special Wine Store") {
+                  this.form.addControl("ldbOrderTotals",
+                    this.fb.control("",
+                      [
+                        Validators.required, Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")
+                      ]));
+                  this.form.addControl("ldbOrderTotalsConfirm", this.fb.control("", [Validators.required]));
+                }
+                if (data.licenseType === "Manufacturer" &&
+                  (data.licenseSubCategory === "Winery" || data.licenseSubCategory === "Brewery")) {
+                  this.form.addControl("volumeProduced", this.fb.control("", [Validators.required]));
+                }
+                if (data.licenseType === "Manufacturer" && data.licenseSubCategory === "Winery") {
+                  this.form.addControl("volumeDestroyed", this.fb.control("", [Validators.required]));
+                }
+                this.dataLoaded = true;
+              },
+              error => this.dataLoaded = true);
+          if (data.establishmentParcelId) {
+            data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, "");
+          }
 
-        this.application = data;
-        this.licenseSubCategory = this.application.assignedLicence.licenseSubCategory;
+          this.application = data;
+          this.licenseSubCategory = this.application.assignedLicence.licenseSubCategory;
 
-        // if (this.isSubcategory('Winery'))
+          // if (this.isSubcategory('Winery'))
 
-        this.addDynamicContent();
+          this.addDynamicContent();
 
-        const noNulls = Object.keys(data)
-          .filter(e => data[e] !== null)
-          .reduce((o, e) => {
-            o[e] = data[e];
-            return o;
-          }, {});
+          const noNulls = Object.keys(data)
+            .filter(e => data[e] !== null)
+            .reduce((o, e) => {
+                o[e] = data[e];
+                return o;
+              },
+              {});
 
-        this.form.patchValue(noNulls);
-        if (data.isPaid) {
-          this.form.disable();
-        }
-        this.savedFormData = this.form.value;
-      },
+          this.form.patchValue(noNulls);
+          if (data.isPaid) {
+            this.form.disable();
+          }
+          this.savedFormData = this.form.value;
+        },
         () => {
-          console.log('Error occured');
+          console.log("Error occured");
           this.dataLoaded = true;
         }
       );
@@ -214,8 +222,9 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   }
 
   getVolumeLabel() {
-    const label = this.isSubcategory('Brewery') ? 'hectolitres' : 'litres';
-    return `What was your ${this.licenseSubCategory}'s total volume produced (in ${label}) between January 1 and December 31?`;
+    const label = this.isSubcategory("Brewery") ? "hectolitres" : "litres";
+    return `What was your ${this.licenseSubCategory}'s total volume produced (in ${label
+      }) between January 1 and December 31?`;
   }
 
   canDeactivate(): Observable<boolean> | boolean {
@@ -233,7 +242,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
 
   checkPossibleProblematicWords() {
     this.possibleProblematicNameWarning =
-      this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
+      this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get("establishmentName").value);
   }
 
   /**
@@ -242,35 +251,39 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
-    var reqs = [];
+    const reqs = [];
 
-    if (this.form.get('ldbOrderTotals')) {
-      reqs.push(this.licenceDataService.updateLicenceLDBOrders(this.application.assignedLicence.id, this.form.get('ldbOrderTotals').value));
+    if (this.form.get("ldbOrderTotals")) {
+      reqs.push(this.licenceDataService.updateLicenceLDBOrders(this.application.assignedLicence.id,
+        this.form.get("ldbOrderTotals").value));
     }
     if (this.licenseSubCategory === "Winery" || this.licenseSubCategory === "Brewery") {
-      var data = {
+      const data = {
         applicationId: this.applicationId,
-        volumeProduced: this.form.get('volumeProduced') ? this.form.get('volumeProduced').value : null,
-        volumeDestroyed: this.form.get('volumeDestroyed') ? this.form.get('volumeDestroyed').value : null,
+        volumeProduced: this.form.get("volumeProduced") ? this.form.get("volumeProduced").value : null,
+        volumeDestroyed: this.form.get("volumeDestroyed") ? this.form.get("volumeDestroyed").value : null,
         calendarYear: this.previousYear
-      }
+      };
       reqs.push(this.annualVolumeService.updateAnnualVolumeForApplication(data, this.applicationId));
 
     }
     return forkJoin([
-      ...reqs,
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })]
-    )
+          ...reqs,
+          this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
+        ]
+      )
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         return of(false);
       }))
       .pipe(mergeMap(() => {
         this.savedFormData = saveData;
         this.updateApplicationInStore();
         if (showProgress === true) {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open("Application has been saved",
+            "Success",
+            { duration: 2500, panelClass: ["green-snackbar"] });
         }
         return of(true);
       }));
@@ -280,8 +293,8 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
-        // this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
-      }
+          // this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
+        }
       );
   }
 
@@ -298,12 +311,12 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
-          if (result) {
-            this.submitPayment();
-          } else {
-            this.submitReqInProgress = false;
-          }
-        },
+            if (result) {
+              this.submitPayment();
+            } else {
+              this.submitReqInProgress = false;
+            }
+          },
           error => { this.submitReqInProgress = false });
     }
   }
@@ -315,16 +328,19 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(res => {
-        this.submitReqInProgress = false;
-        const jsonUrl = res;
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
-      }, err => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-        this.submitReqInProgress = false;
-      });
+          this.submitReqInProgress = false;
+          const jsonUrl = res;
+          window.location.href = jsonUrl["url"];
+          return jsonUrl["url"];
+        },
+        err => {
+          if (err._body === "Payment already made") {
+            this.snackBar.open("Application payment has already been made.",
+              "Fail",
+              { duration: 3500, panelClass: ["red-snackbar"] });
+          }
+          this.submitReqInProgress = false;
+        });
   }
 
   isValid(): boolean {
@@ -332,21 +348,25 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     this.markControlsAsTouched(this.form);
     this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
-    if (this.form.get('ldbOrderTotals') && this.form.get('ldbOrderTotals').value !== this.form.get('ldbOrderTotalsConfirm').value) {
-      this.validationMessages.push('LDB Order Totals are required');
+    if (this.form.get("ldbOrderTotals") &&
+      this.form.get("ldbOrderTotals").value !== this.form.get("ldbOrderTotalsConfirm").value) {
+      this.validationMessages.push("LDB Order Totals are required");
     }
 
     // Wineries only
     //  - enforce minimum production (4500L per year)
     //  - discretion letter is required when winery manufactured less than the minimum production.
-    if (this.isSubcategory('Winery')) {
-      const volumeProduced = parseInt(this.form.get('volumeProduced').value, 10);
-      const isMinimumChecked = !!this.form.get('isManufacturedMinimum').value;
+    if (this.isSubcategory("Winery")) {
+      const volumeProduced = parseInt(this.form.get("volumeProduced").value, 10);
+      const isMinimumChecked = !!this.form.get("isManufacturedMinimum").value;
       if (!isNaN(volumeProduced) && volumeProduced < WINERY_MINIMUM_PRODUCTION && isMinimumChecked) {
-        this.validationMessages.push(`You have not indicated that you have produced less than the required minimum production. The value of ${volumeProduced} is less than the required minimum production.`);
+        this.validationMessages.push(
+          `You have not indicated that you have produced less than the required minimum production. The value of ${
+          volumeProduced} is less than the required minimum production.`);
       }
       if (!isMinimumChecked && (this.uploadedDiscretionLetter || 0) < 1) {
-        this.validationMessages.push('You have indicated that you have produced less than the required minimum production. Please upload a discretion letter.');
+        this.validationMessages.push(
+          "You have indicated that you have produced less than the required minimum production. Please upload a discretion letter.");
       }
     }
 
@@ -361,8 +381,8 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: '400px',
-      height: '200px',
+      width: "400px",
+      height: "200px",
       data: {
         establishmentName: this.application.establishmentName,
         applicationName: this.application.name
@@ -380,13 +400,15 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
           this.applicationDataService.cancelApplication(this.applicationId)
             .pipe(takeWhile(() => this.componentActive))
             .subscribe(() => {
-              this.cancelReqInprogress = false;
-              this.savedFormData = this.form.value;
-              this.router.navigate(['/dashboard']);
-            },
+                this.cancelReqInprogress = false;
+                this.savedFormData = this.form.value;
+                this.router.navigate(["/dashboard"]);
+              },
               () => {
-                this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-                console.error('Error cancelling the application');
+                this.snackBar.open("Error cancelling the application",
+                  "Fail",
+                  { duration: 3500, panelClass: ["red-snackbar"] });
+                console.error("Error cancelling the application");
                 this.cancelReqInprogress = false;
               });
         }
@@ -395,32 +417,40 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
 
   businessTypeIsPartnership(): boolean {
     return this.account &&
-      ['GeneralPartnership',
-        'LimitedPartnership',
-        'LimitedLiabilityPartnership',
-        'Partnership'].indexOf(this.account.businessType) !== -1;
+      [
+        "GeneralPartnership",
+        "LimitedPartnership",
+        "LimitedLiabilityPartnership",
+        "Partnership"
+      ].indexOf(this.account.businessType) !==
+      -1;
   }
 
   businessTypeIsPrivateCorporation(): boolean {
     return this.account &&
-      ['PrivateCorporation',
-        'UnlimitedLiabilityCorporation',
-        'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
+      [
+        "PrivateCorporation",
+        "UnlimitedLiabilityCorporation",
+        "LimitedLiabilityCorporation"
+      ].indexOf(this.account.businessType) !==
+      -1;
   }
 
   isCRSRenewalApplication(): boolean {
-    return this.application
-      && this.application.applicationType
-      && [
+    return this.application &&
+      this.application.applicationType &&
+      [
         ApplicationTypeNames.CRSRenewal.toString(),
         ApplicationTypeNames.CRSRenewalLate30.toString(),
         ApplicationTypeNames.CRSRenewalLate6Months.toString(),
-      ].indexOf(this.application.applicationType.name) !== -1;
+      ].indexOf(this.application.applicationType.name) !==
+      -1;
   }
 
   showFormControl(state: string): boolean {
     return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
-      .indexOf(state) !== -1;
+      .indexOf(state) !==
+      -1;
   }
 
   saveForLater() {
@@ -428,11 +458,11 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     this.save(true)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((result: boolean) => {
-        if (result) {
-          this.router.navigate(['/dashboard']);
-        }
-        this.saveForLaterInProgress = false;
-      },
+          if (result) {
+            this.router.navigate(["/dashboard"]);
+          }
+          this.saveForLaterInProgress = false;
+        },
         () => {
           this.saveForLaterInProgress = false;
         });

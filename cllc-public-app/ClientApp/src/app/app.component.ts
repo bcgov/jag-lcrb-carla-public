@@ -1,60 +1,62 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { User } from '@models/user.model';
-import { MatDialog, MatSnackBar } from '@angular/material';
-import { isDevMode } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from './app-state/models/app-state';
-import { filter, takeWhile } from 'rxjs/operators';
-import { FeatureFlagService } from '@services/feature-flag.service';
-import { LegalEntity } from '@models/legal-entity.model';
-import { AccountDataService } from '@services/account-data.service';
-import { FormBase } from '@shared/form-base';
-import { SetCurrentAccountAction } from '@app/app-state/actions/current-account.action';
-import { Account } from '@models/account.model';
-import { VersionInfoDataService } from '@services/version-info-data.service';
-import { VersionInfo } from '@models/version-info.model';
-import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
-import { MonthlyReportDataService } from '@services/monthly-report.service';
-import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model';
-import { ApplicationDataService } from '@services/application-data.service';
-import { EligibilityFormComponent } from '@components/eligibility-form/eligibility-form.component';
-import { UserDataService } from '@services/user-data.service';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { faInternetExplorer } from '@fortawesome/free-brands-svg-icons';
-import { faBell, faBusinessTime } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, Renderer2 } from "@angular/core";
+import { NavigationEnd, Router } from "@angular/router";
+import { User } from "@models/user.model";
+import { MatDialog, MatSnackBar } from "@angular/material";
+import { isDevMode } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { AppState } from "./app-state/models/app-state";
+import { filter, takeWhile } from "rxjs/operators";
+import { FeatureFlagService } from "@services/feature-flag.service";
+import { LegalEntity } from "@models/legal-entity.model";
+import { AccountDataService } from "@services/account-data.service";
+import { FormBase } from "@shared/form-base";
+import { SetCurrentAccountAction } from "@app/app-state/actions/current-account.action";
+import { Account } from "@models/account.model";
+import { VersionInfoDataService } from "@services/version-info-data.service";
+import { VersionInfo } from "@models/version-info.model";
+import { VersionInfoDialogComponent } from "@components/version-info/version-info-dialog.component";
+import { MonthlyReportDataService } from "@services/monthly-report.service";
+import { MonthlyReport, monthlyReportStatus } from "@models/monthly-report.model";
+import { ApplicationDataService } from "@services/application-data.service";
+import { EligibilityFormComponent } from "@components/eligibility-form/eligibility-form.component";
+import { UserDataService } from "@services/user-data.service";
+import { HttpClient } from "@angular/common/http";
+import { HttpHeaders } from "@angular/common/http";
+import { faInternetExplorer } from "@fortawesome/free-brands-svg-icons";
+import { faBell, faBusinessTime } from "@fortawesome/free-solid-svg-icons";
 
-const Months = ['January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'];
+const Months = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent extends FormBase implements OnInit {
   faInternetExplorer = faInternetExplorer;
   faBell = faBell;
   faBusinessTime = faBusinessTime;
   businessProfiles: LegalEntity[];
-  title = '';
+  title = "";
   previousUrl: string;
-  public currentUser: User;
-  public isNewUser: boolean;
-  public isDevMode: boolean;
-  public showMap: boolean;
-  public versionInfo: VersionInfo;
+  currentUser: User;
+  isNewUser: boolean;
+  isDevMode: boolean;
+  showMap: boolean;
+  versionInfo: VersionInfo;
   isAssociate = false;
   account: Account;
   showMessageCenterContent = false;
   linkedFederalReports: MonthlyReport[];
-  Months = Months;  // make available in template
+  Months = Months; // make available in template
   parseInt = parseInt; // make available in template
   licenseeChangeFeatureOn: boolean;
   isEligibilityDialogOpen: boolean;
   showNavbar = true;
-  testAPIRestul = '';
+  testAPIRestul = "";
 
   constructor(
     private snackBar: MatSnackBar,
@@ -71,10 +73,10 @@ export class AppComponent extends FormBase implements OnInit {
     private userDataService: UserDataService,
   ) {
     super();
-    featureFlagService.featureOn('Maps')
+    featureFlagService.featureOn("Maps")
       .subscribe(x => this.showMap = x);
 
-    featureFlagService.featureOn('LicenseeChanges')
+    featureFlagService.featureOn("LicenseeChanges")
       .subscribe(x => this.licenseeChangeFeatureOn = x);
 
 
@@ -83,21 +85,25 @@ export class AppComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {
-          if (event.url.search('federal-reporting') >= 0) {
+          if (event.url.search("federal-reporting") >= 0) {
             this.showMessageCenterContent = false;
-          } else if (event.url.search('application') >= 0 || event.url.search('event') >= 0) {
+          } else if (event.url.search("application") >= 0 || event.url.search("event") >= 0) {
             this.reloadUser();
-          } else if (event.url.search('personal-history-summary') >= 0 || event.url.search('cannabis-associate-screening') >= 0 || event.url.search('security-screening/confirmation') >= 0) {
+          } else if (event.url.search("personal-history-summary") >= 0 ||
+            event.url.search("cannabis-associate-screening") >= 0 ||
+            event.url.search("security-screening/confirmation") >= 0) {
             this.showNavbar = false;
           }
           const prevSlug = this.previousUrl;
           let nextSlug = event.url.slice(1);
-          if (!nextSlug) { nextSlug = 'home'; }
+          if (!nextSlug) {
+            nextSlug = "home";
+          }
           if (prevSlug) {
-            this.renderer.removeClass(document.body, 'ctx-' + prevSlug);
+            this.renderer.removeClass(document.body, `ctx-${prevSlug}`);
           }
           if (nextSlug) {
-            this.renderer.addClass(document.body, 'ctx-' + nextSlug);
+            this.renderer.addClass(document.body, `ctx-${nextSlug}`);
           }
           this.previousUrl = nextSlug;
         }
@@ -126,9 +132,9 @@ export class AppComponent extends FormBase implements OnInit {
   }
 
   makeAPICall(url: string) {
-    this.testAPIRestul = '';
-    const headers: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'text/html; charset=UTF-8'
+    this.testAPIRestul = "";
+    const headers = new HttpHeaders({
+      'Content-Type': "text/html; charset=UTF-8"
     });
     this.httpCLient.get<string>(decodeURI(url), { headers })
       .subscribe(
@@ -145,7 +151,7 @@ export class AppComponent extends FormBase implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: '500px',
+      width: "500px",
       data: this.versionInfo
     };
 
@@ -155,11 +161,12 @@ export class AppComponent extends FormBase implements OnInit {
 
   openEligibilityModal() {
     if (!this.isEligibilityDialogOpen) {
-      const dialogRef = this.dialog.open(EligibilityFormComponent, {
-        disableClose: true,
-        autoFocus: false,
-        maxHeight: '95vh'
-      });
+      const dialogRef = this.dialog.open(EligibilityFormComponent,
+        {
+          disableClose: true,
+          autoFocus: false,
+          maxHeight: "95vh"
+        });
       this.isEligibilityDialogOpen = true;
       dialogRef.afterClosed().subscribe(() => this.isEligibilityDialogOpen = false);
     }
@@ -173,7 +180,9 @@ export class AppComponent extends FormBase implements OnInit {
         .subscribe((data: User) => {
           this.currentUser = data;
           this.isNewUser = this.currentUser && this.currentUser.isNewUser;
-          if (this.currentUser && this.currentUser.accountid && this.currentUser.accountid !== '00000000-0000-0000-0000-000000000000') {
+          if (this.currentUser &&
+            this.currentUser.accountid &&
+            this.currentUser.accountid !== "00000000-0000-0000-0000-000000000000") {
             this.accountDataService.loadCurrentAccountToStore(this.currentUser.accountid)
               .subscribe(() => {
                 if (data.isEligibilityRequired) {
@@ -201,18 +210,16 @@ export class AppComponent extends FormBase implements OnInit {
 
 
   showBceidTermsOfUse(): boolean {
-    const result = (this.currentUser
-      && this.currentUser.businessname
-      && this.currentUser.isNewUser === true)
-      || (this.account && !this.account.termsOfUseAccepted);
+    const result = (this.currentUser && this.currentUser.businessname && this.currentUser.isNewUser === true) ||
+      (this.account && !this.account.termsOfUseAccepted);
     return result;
   }
 
   isIE() {
-    let result, jscriptVersion;
+    let result: boolean, jscriptVersion;
     result = false;
 
-    jscriptVersion = new Function('/*@cc_on return @_jscript_version; @*/')();
+    jscriptVersion = new Function("/*@cc_on return @_jscript_version; @*/")();
 
     if (jscriptVersion !== undefined || !Array.prototype.includes) {
       result = true;

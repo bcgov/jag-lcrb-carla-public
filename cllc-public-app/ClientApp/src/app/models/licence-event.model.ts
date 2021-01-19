@@ -118,187 +118,187 @@ export class LicenceEvent {
 
 export const EventStatus = [
   {
-    label: 'Draft',
+    label: "Draft",
     value: 845280004,
   },
   {
-    label: 'In Review',
+    label: "In Review",
     value: 1
   },
   {
-    label: 'Approved',
+    label: "Approved",
     value: 845280000
   },
   {
-    label: 'Denied',
+    label: "Denied",
     value: 845280001
   },
   {
-    label: 'Terminated',
+    label: "Terminated",
     value: 845280002
   },
   {
-    label: 'Cancelled',
+    label: "Cancelled",
     value: 845280003
   },
   {
-    label: 'Submitted',
+    label: "Submitted",
     value: 845280005
   }
 ];
 
 export const SpecificLocation = [
   {
-    label: 'Indoors',
+    label: "Indoors",
     value: 845280000,
   },
   {
-    label: 'Outdoors',
+    label: "Outdoors",
     value: 845280001,
   },
   {
-    label: 'Both',
+    label: "Both",
     value: 845280002
   }
 ];
 
 export const EventClass = [
   {
-    label: 'Authorization',
+    label: "Authorization",
     value: 845280000
   },
   {
-    label: 'Notice',
+    label: "Notice",
     value: 845280001
   }
 ];
 
 export const FoodService = [
   {
-    label: 'Appetizers / Hors D\'Oeuvres',
+    label: "Appetizers / Hors D'Oeuvres",
     value: 845280000,
   },
   {
-    label: 'Buffet',
+    label: "Buffet",
     value: 845280001,
   },
   {
-    label: 'Full Service Meal',
+    label: "Full Service Meal",
     value: 845280002,
   },
   {
-    label: 'Other',
+    label: "Other",
     value: 845280003,
   }
 ];
 
 export const Entertainment = [
   {
-    label: 'Adult Entertainment',
+    label: "Adult Entertainment",
     value: 845280000
   },
   {
-    label: 'Dance',
+    label: "Dance",
     value: 845280001
   },
   {
-    label: 'Gambling',
+    label: "Gambling",
     value: 845280002
   },
   {
-    label: 'Live Entertainment',
+    label: "Live Entertainment",
     value: 845280003
   },
   {
-    label: 'Live Music',
+    label: "Live Music",
     value: 845280004
   },
   {
-    label: 'None',
+    label: "None",
     value: 845280005
   },
   {
-    label: 'Other',
+    label: "Other",
     value: 845280006
   }
 ];
 
 export const EventType = [
   {
-    label: 'Caterer\'s Staff / Customer Appreciation',
+    label: "Caterer's Staff / Customer Appreciation",
     value: 845280000
   },
   {
-    label: 'Community',
+    label: "Community",
     value: 845280001
   },
   {
-    label: 'Corporate',
+    label: "Corporate",
     value: 845280002
   },
   {
-    label: 'Other',
+    label: "Other",
     value: 845280003
   },
   {
-    label: 'Personal',
+    label: "Personal",
     value: 845280004
   }
 ];
 
 export const MarketEventType = [
   {
-    label: 'Artisan',
+    label: "Artisan",
     value: 845280000
   },
   {
-    label: 'Farmers',
+    label: "Farmers",
     value: 845280001
   },
   {
-    label: 'Annual',
+    label: "Annual",
     value: 845280002
   },
   {
-    label: 'Christmas',
+    label: "Christmas",
     value: 845280003
   },
   {
-    label: 'Other',
+    label: "Other",
     value: 845280004
   }
-]
+];
 
 export const MarketDuration = [
   {
-    label: 'Weekly',
+    label: "Weekly",
     value: 845280000
   },
   {
-    label: 'Bi-Weekly',
+    label: "Bi-Weekly",
     value: 845280001
   },
   {
-    label: 'Monthly',
+    label: "Monthly",
     value: 845280002
   },
   {
-    label: 'Once',
+    label: "Once",
     value: 845280003
   }
 ];
 
 export const EventCategory = [
   {
-    label: 'Catering',
+    label: "Catering",
     value: 845280000
   },
   {
-    label: 'Market',
+    label: "Market",
     value: 845280001
   },
   {
-    label: 'Temporary Off-Site Sale',
+    label: "Temporary Off-Site Sale",
     value: 845280002
   }
 ];

@@ -1,29 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { EstablishmentDataService } from '@app/services/establishment-data.service';
-import { FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
-import { FormBase } from '@shared/form-base';
-import { Meta, Title } from '@angular/platform-browser';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { EstablishmentDataService } from "@app/services/establishment-data.service";
+import { FormBuilder } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { takeWhile } from "rxjs/operators";
+import { FormBase } from "@shared/form-base";
+import { Meta, Title } from "@angular/platform-browser";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 declare var EstablishmentsMap: any;
 declare var searchMapOptions: any;
 
 @Component({
-  selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  selector: "app-map",
+  templateUrl: "./map.component.html",
+  styleUrls: ["./map.component.scss"]
 })
-
-
 export class MapComponent extends FormBase implements OnInit {
   faSearch = faSearch;
   busy: Subscription;
 
   constructor(
-    private establishmentDataService: EstablishmentDataService, private fb: FormBuilder, private meta: Meta, private titleService: Title 
-  ) { super(); }
+    private establishmentDataService: EstablishmentDataService,
+    private fb: FormBuilder,
+    private meta: Meta,
+    private titleService: Title
+  ) {
+    super();
+  }
+
   mapData: string;
   search: string;
   hasData: boolean;
@@ -31,13 +35,16 @@ export class MapComponent extends FormBase implements OnInit {
   rows: any;
 
   ngOnInit() {
-    this.meta.addTag({ name: 'viewport', content: 'width=device-width, initial-scale=1,  maximum-scale=1.0, user-scalable=no' });
+    this.meta.addTag({
+      name: "viewport",
+      content: "width=device-width, initial-scale=1,  maximum-scale=1.0, user-scalable=no"
+    });
     this.titleService.setTitle("Map of Cannabis Retail Stores in B.C.");
     this.form = this.fb.group({
-      name: ['']
+      name: [""]
     });
     // get the json from the map service.
-      this.busy =
+    this.busy =
       this.establishmentDataService.getEstablishmentsMap()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => {
@@ -48,7 +55,7 @@ export class MapComponent extends FormBase implements OnInit {
         //var mapData = $("#Crs-json").attr("data-Crs-search-json") || null;
         //var Crs = JSON.parse(mapData);
         this.establishmentMap.drawAndFitBounds(this.mapData);
-        this.hasData = true;        
+        this.hasData = true;
       });
   }
 
@@ -57,23 +64,20 @@ export class MapComponent extends FormBase implements OnInit {
       this.establishmentDataService.getEstablishmentsMapSearch(this.search)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => {
-        this.mapData = value;        
+        this.mapData = value;
         this.establishmentMap.drawAndFitBounds(this.mapData);
-        this.hasData = true;        
-        });
+        this.hasData = true;
+      });
   }
 
   resetMap() {
     this.busy =
       this.establishmentDataService.getEstablishmentsMapSearch("")
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe(value => {
-          this.mapData = value;
-          this.establishmentMap.drawAndFitBounds(this.mapData);
-          this.hasData = true;
-        });
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(value => {
+        this.mapData = value;
+        this.establishmentMap.drawAndFitBounds(this.mapData);
+        this.hasData = true;
+      });
   }
-  }
-
-  
-
+}

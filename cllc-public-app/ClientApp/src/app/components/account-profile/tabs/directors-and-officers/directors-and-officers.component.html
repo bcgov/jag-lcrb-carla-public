@@ -4,10 +4,10 @@
     retail stores.
   </p>
   <p *ngIf="dataSource?.data?.length && lockAssociates">
-      The following organization leadership is on file:
+    The following organization leadership is on file:
   </p>
   <p *ngIf="!dataSource?.data?.length">
-      There is currently no organization leadership on file.
+    There is currently no organization leadership on file.
   </p>
 
   <div [ngBusy]="busy"></div>
@@ -45,7 +45,7 @@
         <!-- Column -->
         <ng-container matColumnDef="dateofappointment">
           <mat-header-cell *matHeaderCellDef> Date of Appointment </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.dateofappointment |  date : 'dd MMM yyyy' }} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.dateofappointment | date : 'dd MMM yyyy' }} </mat-cell>
         </ng-container>
 
         <!-- Column -->

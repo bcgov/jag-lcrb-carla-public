@@ -1,30 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Subscription, Observable, of } from 'rxjs';
-import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FeatureFlagService } from '@services/feature-flag.service';
-import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
-import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
-import { Account, TransferAccount } from '@models/account.model';
-import { LicenseDataService } from '@services/license-data.service';
-import { License } from '@models/license.model';
-import { faSave } from '@fortawesome/free-regular-svg-icons';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { Subscription, Observable, of } from "rxjs";
+import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
+import { Store } from "@ngrx/store";
+import { AppState } from "@app/app-state/models/app-state";
+import { MatSnackBar, MatDialog } from "@angular/material";
+import { Router, ActivatedRoute } from "@angular/router";
+import { FeatureFlagService } from "@services/feature-flag.service";
+import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
+import { takeWhile, filter, catchError, mergeMap } from "rxjs/operators";
+import { Account, TransferAccount } from "@models/account.model";
+import { LicenseDataService } from "@services/license-data.service";
+import { License } from "@models/license.model";
+import { faSave } from "@fortawesome/free-regular-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 
 const ValidationErrorMap = {
-  transferConsent: 'Please consent to terminate the third party operator relationship'
+  transferConsent: "Please consent to terminate the third party operator relationship"
 };
 
 @Component({
-  selector: 'app-terminate-tpo-relationship',
-  templateUrl: './terminate-tpo-relationship.component.html',
-  styleUrls: ['./terminate-tpo-relationship.component.scss']
+  selector: "app-terminate-tpo-relationship",
+  templateUrl: "./terminate-tpo-relationship.component.html",
+  styleUrls: ["./terminate-tpo-relationship.component.scss"]
 })
 export class TerminateTPORelationshipComponent extends FormBase implements OnInit {
   faSave = faSave;
@@ -35,7 +35,7 @@ export class TerminateTPORelationshipComponent extends FormBase implements OnIni
   busy: Subscription;
   validationMessages: any[];
   showValidationMessages: boolean;
-  htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
+  htmlContent = {} as ApplicationHTMLContent;
   ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
   account: Account;
@@ -52,17 +52,17 @@ export class TerminateTPORelationshipComponent extends FormBase implements OnIni
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
-    this.route.paramMap.subscribe(pmap => this.licenceId = pmap.get('licenceId'));
+    this.route.paramMap.subscribe(pmap => this.licenceId = pmap.get("licenceId"));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      establishmentName: [''],
-      establishmentAddressStreet: [''],
-      establishmentAddressCity: [''],
-      establishmentAddressPostalCode: [''],
-      establishmentParcelId: [''],      
-      transferConsent: ['', [this.customRequiredCheckboxValidator()]]     
+      establishmentName: [""],
+      establishmentAddressStreet: [""],
+      establishmentAddressCity: [""],
+      establishmentAddressPostalCode: [""],
+      establishmentParcelId: [""],
+      transferConsent: ["", [this.customRequiredCheckboxValidator()]]
     });
 
     this.store.select(state => state.currentAccountState.currentAccount)
@@ -76,31 +76,34 @@ export class TerminateTPORelationshipComponent extends FormBase implements OnIni
     this.busy = this.licenseDataService.getLicenceById(this.licenceId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: License) => {
-        this.licence = data;
-        this.form.patchValue(data);
-      },
+          this.licence = data;
+          this.form.patchValue(data);
+        },
         () => {
-          console.log('Error occured');
+          console.log("Error occured");
         }
       );
   }
-
 
 
   /**
    * Save form data
    * @param showProgress
    */
-    save(showProgress: boolean = false): Observable<boolean> {
-        return this.licenseDataService.terminateThirdPartyOperator(this.licence.id, this.account.id)
+  save(showProgress: boolean = false): Observable<boolean> {
+    return this.licenseDataService.terminateThirdPartyOperator(this.licence.id, this.account.id)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
-        this.snackBar.open('Error submitting terminate relationship', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error submitting terminate relationship",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
         return of(false);
       }))
       .pipe(mergeMap(() => {
         if (showProgress === true) {
-          this.snackBar.open('Third Party Operator relationship terminated', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open("Third Party Operator relationship terminated",
+            "Success",
+            { duration: 2500, panelClass: ["green-snackbar"] });
         }
         return of(true);
       }));
@@ -117,7 +120,7 @@ export class TerminateTPORelationshipComponent extends FormBase implements OnIni
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
-            this.router.navigate(['/licences']);
+            this.router.navigate(["/licences"]);
           }
         });
     }
@@ -133,26 +136,33 @@ export class TerminateTPORelationshipComponent extends FormBase implements OnIni
 
   businessTypeIsPartnership(): boolean {
     return this.account &&
-      ['GeneralPartnership',
-        'LimitedPartnership',
-        'LimitedLiabilityPartnership',
-        'Partnership'].indexOf(this.account.businessType) !== -1;
+      [
+        "GeneralPartnership",
+        "LimitedPartnership",
+        "LimitedLiabilityPartnership",
+        "Partnership"
+      ].indexOf(this.account.businessType) !==
+      -1;
   }
 
   businessTypeIsPrivateCorporation(): boolean {
     return this.account &&
-      ['PrivateCorporation',
-        'UnlimitedLiabilityCorporation',
-        'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
+      [
+        "PrivateCorporation",
+        "UnlimitedLiabilityCorporation",
+        "LimitedLiabilityCorporation"
+      ].indexOf(this.account.businessType) !==
+      -1;
   }
 
   showFormControl(state: string): boolean {
     return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
-      .indexOf(state) !== -1;
+      .indexOf(state) !==
+      -1;
   }
 
   onAccountSelect(proposedAccount: TransferAccount) {
-    this.form.get('proposedOwner').patchValue(proposedAccount);
+    this.form.get("proposedOwner").patchValue(proposedAccount);
   }
 
 }

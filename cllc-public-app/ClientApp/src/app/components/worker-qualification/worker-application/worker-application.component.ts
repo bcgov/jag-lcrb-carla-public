@@ -1,58 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { UserDataService } from '@services/user-data.service';
-import { User } from '@models/user.model';
-import { ContactDataService } from '@services/contact-data.service';
-import { Contact } from '@models/contact.model';
-import * as CurrentUserActions from '@app/app-state/actions/current-user.action';
-import { Store } from '@ngrx/store';
-import { Subscription, Observable, Subject, zip, forkJoin } from 'rxjs';
-import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-import { AliasDataService } from '@services/alias-data.service';
-import { PreviousAddressDataService } from '@services/previous-address-data.service';
-import { WorkerDataService } from '@services/worker-data.service.';
-import { Alias } from '@models/alias.model';
-import { PreviousAddress } from '@models/previous-address.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { COUNTRIES } from './country-list';
-import { FormBase } from '@shared/form-base';
-import { Worker } from '@models/worker.model';
-import { faCopy, faSave } from '@fortawesome/free-regular-svg-icons';
-import { faChevronLeft, faChevronRight, faExclamationTriangle, faQuestion, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { UserDataService } from "@services/user-data.service";
+import { User } from "@models/user.model";
+import { ContactDataService } from "@services/contact-data.service";
+import { Contact } from "@models/contact.model";
+import * as CurrentUserActions from "@app/app-state/actions/current-user.action";
+import { Store } from "@ngrx/store";
+import { Subscription, Observable, Subject, zip, forkJoin } from "rxjs";
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from "@angular/forms";
+import { AliasDataService } from "@services/alias-data.service";
+import { PreviousAddressDataService } from "@services/previous-address-data.service";
+import { Alias } from "@models/alias.model";
+import { PreviousAddress } from "@models/previous-address.model";
+import { ActivatedRoute, Router } from "@angular/router";
+import { COUNTRIES } from "./country-list";
+import { FormBase } from "@shared/form-base";
+import { Worker } from "@models/worker.model";
+import { faCopy, faSave } from "@fortawesome/free-regular-svg-icons";
+import { faChevronLeft, faChevronRight, faExclamationTriangle, faQuestion, faTrash } from
+  "@fortawesome/free-solid-svg-icons";
 
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import * as _moment from 'moment';
+import { MomentDateAdapter } from "@angular/material-moment-adapter";
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
+import * as _moment from "moment";
 // tslint:disable-next-line:no-duplicate-imports
-import { defaultFormat as _rollupMoment } from 'moment';
-import { AppState } from '@app/app-state/models/app-state';
+import { defaultFormat as _rollupMoment } from "moment";
+import { AppState } from "@app/app-state/models/app-state";
+import { WorkerDataService } from "@services/worker-data.service";
 const moment = _rollupMoment || _moment;
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
 export const MY_FORMATS = {
   parse: {
-    dateInput: 'LL',
+    dateInput: "LL",
   },
   display: {
-    dateInput: 'YYYY-MM-DD',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'YYYY-MM-DD',
-    monthYearA11yLabel: 'MMMM YYYY',
+    dateInput: "YYYY-MM-DD",
+    monthYearLabel: "MMM YYYY",
+    dateA11yLabel: "YYYY-MM-DD",
+    monthYearA11yLabel: "MMMM YYYY",
   },
 };
 
 
-
 @Component({
-  selector: 'app-worker-application',
-  templateUrl: './worker-application.component.html',
-  styleUrls: ['./worker-application.component.scss'],
+  selector: "app-worker-application",
+  templateUrl: "./worker-application.component.html",
+  styleUrls: ["./worker-application.component.scss"],
   providers: [
     // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
     // application's root module. We provide it at the component level here, due to limitations of
     // our example generation script.
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
@@ -79,15 +78,15 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
 
   currentDate: Date = new Date();
   minDate: Date;
-  bsConfig: any = { locale: 'en', dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' };
+  bsConfig: any = { locale: "en", dateInputFormat: "YYYY-MM-DD", containerClass: "theme-dark-blue" };
   worker: Worker;
 
-  public get addresses(): FormArray {
-    return this.form.get('addresses') as FormArray;
+  get addresses(): FormArray {
+    return this.form.get("addresses") as FormArray;
   }
 
-  public get aliases(): FormArray {
-    return this.form.get('worker.aliases') as FormArray;
+  get aliases(): FormArray {
+    return this.form.get("worker.aliases") as FormArray;
   }
 
   constructor(private userDataService: UserDataService,
@@ -99,7 +98,6 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-
   ) {
     super();
     // minDate is a 100 year ago
@@ -107,7 +105,7 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
     this.minDate.setFullYear(this.minDate.getFullYear() - 100);
 
     this.route.paramMap.subscribe(params => {
-      this.workerId = params.get('id');
+      this.workerId = params.get("id");
     });
   }
 
@@ -115,37 +113,37 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       contact: this.fb.group({
         id: [],
-        firstname: [''],
-        middlename: [''],
-        lastname: [''],
-        emailaddress1: [''],
-        telephone1: [''],
-        address1_line1: [''],
-        address1_city: [''],
-        address1_stateorprovince: [''],
-        address1_country: [''],
-        address1_postalcode: [''],
-        address2_line1: ['', Validators.required],
-        address2_city: ['', Validators.required],
-        address2_stateorprovince: ['', Validators.required],
-        address2_country: ['', Validators.required],
-        address2_postalcode: ['', [Validators.required, this.customZipCodeValidator('address2_country')]],
+        firstname: [""],
+        middlename: [""],
+        lastname: [""],
+        emailaddress1: [""],
+        telephone1: [""],
+        address1_line1: [""],
+        address1_city: [""],
+        address1_stateorprovince: [""],
+        address1_country: [""],
+        address1_postalcode: [""],
+        address2_line1: ["", Validators.required],
+        address2_city: ["", Validators.required],
+        address2_stateorprovince: ["", Validators.required],
+        address2_country: ["", Validators.required],
+        address2_postalcode: ["", [Validators.required, this.customZipCodeValidator("address2_country")]],
 
-        birthPlace: ['', Validators.required],
-        gender: [''],
-        mobilePhone: ['', Validators.required],
-        primaryIdNumber: [''],
-        secondaryIdNumber: ['']
+        birthPlace: ["", Validators.required],
+        gender: [""],
+        mobilePhone: ["", Validators.required],
+        primaryIdNumber: [""],
+        secondaryIdNumber: [""]
       }),
       worker: this.fb.group({
         id: [],
         isldbworker: [false],
-        firstname: [{ value: '', disabled: true }],
-        middlename: [{ value: '', disabled: true }],
-        lastname: [{ value: '', disabled: true }],
-        dateofbirth: [{ value: '', disabled: true }],
-        email: ['', [Validators.required, Validators.email]],
-        fromdate: ['', Validators.required],
+        firstname: [{ value: "", disabled: true }],
+        middlename: [{ value: "", disabled: true }],
+        lastname: [{ value: "", disabled: true }],
+        dateofbirth: [{ value: "", disabled: true }],
+        email: ["", [Validators.required, Validators.email]],
+        fromdate: ["", Validators.required],
         todate: [{ value: new Date(), disabled: true }],
         aliases: this.fb.array([
         ]),
@@ -189,9 +187,9 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
             });
 
             this.saveFormData = this.form.value;
-            this.worker = <any>worker;
+            this.worker = (worker as any);
             this.workerStatus = worker.status;
-            if (worker.status !== 'Application Incomplete') {
+            if (worker.status !== "Application Incomplete") {
               this.form.disable();
             }
           });
@@ -208,31 +206,33 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
       this.busy = this.contactDataService.createWorkerContact(contact).subscribe(res => {
-        this.reloadUser();
-      }, error => alert('Failed to create contact'));
+          this.reloadUser();
+        },
+        error => alert("Failed to create contact"));
     } else {
-      window.location.href = 'logout';
+      window.location.href = "logout";
     }
   }
 
   createAddress(address: PreviousAddress = null) {
-    address = address || <PreviousAddress>{
+    address = address ||
+    ({
       id: undefined,
-      streetaddress: '',
-      city: '',
-      provstate: '',
-      country: 'Canada',
-      postalcode: '',
-      fromdate: '',
-      todate: ''
-    };
+      streetaddress: "",
+      city: "",
+      provstate: "",
+      country: "Canada",
+      postalcode: "",
+      fromdate: "",
+      todate: ""
+    } as PreviousAddress);
     return this.fb.group({
       id: [address.id],
       streetaddress: [address.streetaddress, Validators.required],
       city: [address.city, Validators.required],
       provstate: [address.provstate, Validators.required],
       country: [address.country, Validators.required],
-      postalcode: [address.postalcode, [Validators.required, this.customZipCodeValidator('country')]],
+      postalcode: [address.postalcode, [Validators.required, this.customZipCodeValidator("country")]],
       fromdate: [address.fromdate, Validators.required],
       todate: [address.todate, Validators.required]
     });
@@ -243,7 +243,7 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
   }
 
   copyPhysicalAddressToMailingAddress(): void {
-    let contact = this.form.get('contact').value;
+    let contact = this.form.get("contact").value;
     contact = {
       address2_line1: contact.address1_line1,
       address2_city: contact.address1_city,
@@ -251,7 +251,7 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
       address2_country: contact.address1_country,
       address2_postalcode: contact.address1_postalcode,
     };
-    this.form.get('contact').patchValue(contact);
+    this.form.get("contact").patchValue(contact);
   }
 
   deleteAddress(index: number) {
@@ -287,11 +287,12 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
   }
 
   createAlias(alias: Alias = null) {
-    alias = alias || <Alias>{
-      firstname: '',
-      middlename: '',
-      lastname: ''
-    };
+    alias = alias ||
+    ({
+      firstname: "",
+      middlename: "",
+      lastname: ""
+    } as Alias);
     return this.fb.group({
       id: [alias.id],
       firstname: [alias.firstname, Validators.required],
@@ -301,7 +302,7 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    if (this.workerStatus !== 'Application Incomplete' ||
+    if (this.workerStatus !== "Application Incomplete" ||
       JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
       return true;
     } else {
@@ -336,7 +337,8 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
     const addressControls = this.addresses.controls;
     for (let i = 0; i < addressControls.length; i++) {
       if (addressControls[i].value.id) {
-        const save = this.previousAddressDataService.updatePreviousAdderess(addressControls[i].value, addressControls[i].value.id);
+        const save =
+          this.previousAddressDataService.updatePreviousAdderess(addressControls[i].value, addressControls[i].value.id);
         saves.push(save);
       } else {
         const newAddress = addressControls[i].value;
@@ -367,9 +369,10 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
     }
 
     this.busy2 = zip(...saves).toPromise().then(res => {
-      subResult.next(true);
-      this.reloadUser();
-    }, err => subResult.next(false));
+        subResult.next(true);
+        this.reloadUser();
+      },
+      err => subResult.next(false));
 
     return subResult;
   }
@@ -379,8 +382,8 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
     // add current address range
     let dateRanges = [
       {
-        fd: new Date(this.form.get('worker.fromdate').value),
-        td: new Date(this.form.get('worker.todate').value)
+        fd: new Date(this.form.get("worker.fromdate").value),
+        td: new Date(this.form.get("worker.todate").value)
       }
     ];
 
@@ -454,30 +457,30 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
   markAsTouched() {
     this.form.markAsTouched();
 
-    const workerControls = (<FormGroup>(this.form.get('worker'))).controls;
+    const workerControls = ((this.form.get("worker")) as FormGroup).controls;
     for (const c in workerControls) {
-      if (typeof (workerControls[c].markAsTouched) === 'function') {
+      if (typeof (workerControls[c].markAsTouched) === "function") {
         workerControls[c].markAsTouched();
       }
     }
 
-    const contactControls = (<FormGroup>(this.form.get('contact'))).controls;
+    const contactControls = ((this.form.get("contact")) as FormGroup).controls;
     for (const c in contactControls) {
-      if (typeof (contactControls[c].markAsTouched) === 'function') {
+      if (typeof (contactControls[c].markAsTouched) === "function") {
         contactControls[c].markAsTouched();
       }
     }
 
-    (<FormGroup[]>this.addresses.controls).forEach(address => {
+    (this.addresses.controls as FormGroup[]).forEach(address => {
       for (const c in address.controls) {
-        if (typeof (address.controls[c].markAsTouched) === 'function') {
+        if (typeof (address.controls[c].markAsTouched) === "function") {
           address.controls[c].markAsTouched();
         }
       }
     });
-    (<FormGroup[]>this.aliases.controls).forEach(alias => {
+    (this.aliases.controls as FormGroup[]).forEach(alias => {
       for (const c in alias.controls) {
-        if (typeof (alias.controls[c].markAsTouched) === 'function') {
+        if (typeof (alias.controls[c].markAsTouched) === "function") {
           alias.controls[c].markAsTouched();
         }
       }
@@ -485,16 +488,18 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
   }
 
   isBCIDValid(): boolean {
-    const validDriver = !!(this.form.get('contact.primaryIdNumber').value
-      && (this.form.get('contact.primaryIdNumber').value + '').length === 7);
-    const validBceid = !!(this.form.get('contact.secondaryIdNumber').value
-      && (this.form.get('contact.secondaryIdNumber').value + '').length === 9);
+    const validDriver = !!(this.form.get("contact.primaryIdNumber").value &&
+      (this.form.get("contact.primaryIdNumber").value + "").length === 7);
+    const validBceid = !!(this.form.get("contact.secondaryIdNumber").value &&
+      (this.form.get("contact.secondaryIdNumber").value + "").length === 9);
     return validDriver || validBceid;
   }
 
   rejectIfNotDigitOrBackSpace(event) {
-    const acceptedKeys = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Control',
-      '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    const acceptedKeys = [
+      "Backspace", "Tab", "End", "Home", "ArrowLeft", "ArrowRight", "Control",
+      "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
+    ];
     if (acceptedKeys.indexOf(event.key) === -1) {
       event.preventDefault();
     }
@@ -502,7 +507,7 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
 
   trimValue(control: FormControl) {
     const value = control.value;
-    control.setValue('');
+    control.setValue("");
     control.setValue(value.trim());
   }
 }

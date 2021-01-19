@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
-import { SurveyComponent } from './survey.component';
+import { Component } from "@angular/core";
+import { SurveyComponent } from "./survey.component";
 //import { SurveyModel } from 'survey-angular';
 
 @Component({
-  selector: 'survey-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  selector: "survey-sidebar",
+  templateUrl: "./sidebar.component.html",
+  styleUrls: ["./sidebar.component.scss"]
 })
-export class SurveySidebarComponent  {
+export class SurveySidebarComponent {
   title: string;
   links: any[];
   private survey: SurveyComponent;
+
   /*
   constructor(private injector : Injector) {
     // survey will be passed by the injector when instantiated by InsertComponent
@@ -39,4 +40,3 @@ export class SurveySidebarComponent  {
   }
 
 }
-

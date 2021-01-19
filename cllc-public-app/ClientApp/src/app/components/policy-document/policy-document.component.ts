@@ -1,23 +1,25 @@
 
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PolicyDocument } from '@models/policy-document.model';
-import { PolicyDocumentDataService } from '@services/policy-document-data.service';
-import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { PolicyDocument } from "@models/policy-document.model";
+import { PolicyDocumentDataService } from "@services/policy-document-data.service";
+import { Title, DomSanitizer, SafeHtml } from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-policy-document',
-  templateUrl: './policy-document.component.html',
-  styleUrls: ['./policy-document.component.scss']
+  selector: "app-policy-document",
+  templateUrl: "./policy-document.component.html",
+  styleUrls: ["./policy-document.component.scss"]
 })
 /** PolicyDocument component*/
 export class PolicyDocumentComponent implements OnInit {
-  public policyDocument: PolicyDocument;
-  public title: string;
-  public category: string;
-  public body: SafeHtml;
-  @Input() fullWidth: false;
-  @Output() slugChange = new EventEmitter<string>();
+  policyDocument: PolicyDocument;
+  title: string;
+  category: string;
+  body: SafeHtml;
+  @Input()
+  fullWidth: false;
+  @Output()
+  slugChange = new EventEmitter<string>();
   dataLoaded: boolean;
   busy: Promise<any>;
 
@@ -34,14 +36,14 @@ export class PolicyDocumentComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap
       .subscribe((data) => {
-        const slug = data.get('slug');
+        const slug = data.get("slug");
         if (slug) {
           this.setSlug(slug);
         }
       });
   }
 
-  public setSlug(slug) {
+  setSlug(slug) {
     this.slugChange.emit(slug);
     this.busy = this.policyDocumentDataService.getPolicyDocument(slug)
       .toPromise()

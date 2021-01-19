@@ -57,7 +57,6 @@
     "moment": "^2.29.1",
     "mygovbc-bootstrap-theme": "^0.4.1",
     "ng-busy": "^10.0.0",
-    "ng2-charts": "^2.4.2",
     "ngx-bootstrap": "^6.1.0",
     "ngx-cookie-service": "^1.0.10",
     "ngx-file-drop": "^8.0.8",

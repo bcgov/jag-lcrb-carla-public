@@ -52,10 +52,10 @@
       <br>
       <br>
       <div *ngIf="lgApprovals">
-      <input type="radio" name="InitialBusinessType" value="LocalGovernment" [(ngModel)]="businessType">
-      <span> Local Government</span>
-      <br>
-      <br>
+        <input type="radio" name="InitialBusinessType" value="LocalGovernment" [(ngModel)]="businessType">
+        <span> Local Government</span>
+        <br>
+        <br>
       </div>
       <!--input type="radio" name="InitialBusinessType" value="Church" [(ngModel)]="businessType">
       <span> Church</span>
@@ -106,9 +106,11 @@
   </div>
 
   <div *ngIf="!showBceidUserContinue || showBceidCorrection">
-    <p>Before continuing, please update your information with
+    <p>
+      Before continuing, please update your information with
       <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx">Business BCeID</a> or
-      <br>login with a different account.</p>
+      <br>login with a different account.
+    </p>
     <br>
     <div [ngBusy]="busy"></div>
     <a href="logout">&lt;&lt; Return to Information Portal Homepage</a>

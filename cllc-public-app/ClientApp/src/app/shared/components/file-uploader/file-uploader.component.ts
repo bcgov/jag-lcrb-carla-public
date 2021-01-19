@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-import { FileSystemItem } from '@models/file-system-item.model';
-import { Subscription } from 'rxjs';
-import { ApplicationDataService } from '@services/application-data.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from "@angular/core";
+import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from "ngx-file-drop";
+import { FileSystemItem } from "@models/file-system-item.model";
+import { Subscription } from "rxjs";
+import { ApplicationDataService } from "@services/application-data.service";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { MatSnackBar } from "@angular/material";
 
 export interface DropdownOption {
   id: string;
@@ -12,30 +12,44 @@ export interface DropdownOption {
 }
 
 @Component({
-  selector: 'app-file-uploader',
-  templateUrl: './file-uploader.component.html',
-  styleUrls: ['./file-uploader.component.scss']
+  selector: "app-file-uploader",
+  templateUrl: "./file-uploader.component.html",
+  styleUrls: ["./file-uploader.component.scss"]
 })
 export class FileUploaderComponent implements OnInit, OnDestroy {
-  @Input() uploadUrl: string;
-  @Input() fileTypes = '';
-  @Input() documentType: string;
-  @Input() entityName: string;
-  @Input() entityId: string;
-  @Input() disableUploads = false; // force uploads to be disabled
-  @Input() multipleFiles = true;
-  @Input() extensions: string[] = ['pdf'];
-  @Input() uploadHeader = 'TO UPLOAD DOCUMENTS, DRAG FILES HERE OR';
-  @Input() enableFileDeletion = true;
-  @Input() maxNumberOfFiles = 10;
-  @Input() useDocumentTypeForName = false;
-  @Input() publicAccess = false;
-  @Output() numberOfUploadedFiles: EventEmitter<number> = new EventEmitter<number>();
+  @Input()
+  uploadUrl: string;
+  @Input()
+  fileTypes = "";
+  @Input()
+  documentType: string;
+  @Input()
+  entityName: string;
+  @Input()
+  entityId: string;
+  @Input()
+  disableUploads = false; // force uploads to be disabled
+  @Input()
+  multipleFiles = true;
+  @Input()
+  extensions: string[] = ["pdf"];
+  @Input()
+  uploadHeader = "TO UPLOAD DOCUMENTS, DRAG FILES HERE OR";
+  @Input()
+  enableFileDeletion = true;
+  @Input()
+  maxNumberOfFiles = 10;
+  @Input()
+  useDocumentTypeForName = false;
+  @Input()
+  publicAccess = false;
+  @Output()
+  numberOfUploadedFiles = new EventEmitter<number>();
   busy: Subscription;
   attachmentURL: string;
   actionPrefix: string;
   Math = Math;
-  public files: FileSystemItem[] = [];
+  files: FileSystemItem[] = [];
   dataLoaded: boolean;
   fileReqOngoing: boolean;
   subscriptionList: Subscription[] = [];
@@ -50,15 +64,14 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.publicAccess) {
       this.actionPrefix = "public-";
-    }
-    else {
+    } else {
       this.actionPrefix = "";
     }
     this.attachmentURL = `api/file/${this.entityId}/${this.actionPrefix}attachments/${this.entityName}`;
     this.getUploadedFileData();
   }
 
-  public dropped(event: NgxFileDropEntry[]) {
+  dropped(event: NgxFileDropEntry[]) {
     const files = event;
     let newFileCount = 0;
     for (const droppedFile of files) {
@@ -66,7 +79,9 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
     }
     let count = this.getCurrentLastFileCounter() + 1;
     if (files.length > 1 && !this.multipleFiles) {
-      this.snackBar.open('Only one file can be uploaded here', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+      this.snackBar.open("Only one file can be uploaded here",
+        "Fail",
+        { duration: 3500, panelClass: ["red-snackbar"] });
       return;
     }
     if (this.maxNumberOfFiles < (this.files.length + newFileCount)) {
@@ -92,14 +107,14 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
     let lastCount = 0;
     if (this.files.length) {
       const counts = this.files.map(file => {
-        const match = file.name.match(/_(\d+)\.([^\.]+)$/);
-        if (match) {
-          return parseInt(match[1], 10);
-        } else {
-          return 0;
-        }
+          const match = file.name.match(/_(\d+)\.([^\.]+)$/);
+          if (match) {
+            return parseInt(match[1], 10);
+          } else {
+            return 0;
+          }
 
-      }).sort()
+        }).sort()
         .reverse();
       lastCount = counts[0];
     }
@@ -114,7 +129,9 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
     }
     let count = this.getCurrentLastFileCounter() + 1;
     if (uploadedFiles.length > 1 && !this.multipleFiles) {
-      this.snackBar.open('Only one file can be uploaded here', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+      this.snackBar.open("Only one file can be uploaded here",
+        "Fail",
+        { duration: 3500, panelClass: ["red-snackbar"] });
       return;
     }
     if (this.maxNumberOfFiles < (this.files.length + newFileCount)) {
@@ -126,18 +143,20 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
       count += 1;
     }
 
-    input.value = '';
+    input.value = "";
   }
 
-  public uploadFile(file, count) {
+  uploadFile(file, count) {
     const validExt = this.extensions.filter(ex => file.name.toLowerCase().endsWith(ex)).length > 0;
     if (!validExt) {
-      this.snackBar.open('File type not supported.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+      this.snackBar.open("File type not supported.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
       return;
     }
 
     if (file && file.name && file.name.length > 128) {
-      this.snackBar.open('File name must be 128 characters or less.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+      this.snackBar.open("File name must be 128 characters or less.",
+        "Fail",
+        { duration: 3500, panelClass: ["red-snackbar"] });
       return;
     }
 
@@ -147,15 +166,15 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
     if (this.useDocumentTypeForName) {
       fileName = (count) + extension;
     }
-    formData.append('file', file, fileName);
-    formData.append('documentType', this.documentType);
-    const headers: HttpHeaders = new HttpHeaders();
+    formData.append("file", file, fileName);
+    formData.append("documentType", this.documentType);
+    const headers = new HttpHeaders();
     this.fileReqOngoing = true;
-    let sub = this.http.post(this.attachmentURL, formData, { headers: headers }).subscribe(result => {
-      this.getUploadedFileData();
-    },
+    const sub = this.http.post(this.attachmentURL, formData, { headers: headers }).subscribe(result => {
+        this.getUploadedFileData();
+      },
       err => {
-        this.snackBar.open('Failed to upload file', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Failed to upload file", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         this.fileReqOngoing = false;
       });
     // this.busy = sub;
@@ -163,41 +182,44 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
 
   getUploadedFileData() {
     this.fileReqOngoing = true;
-    const headers: HttpHeaders = new HttpHeaders({
+    const headers = new HttpHeaders({
       // 'Content-Type': 'application/json'
+    
     });
-    const getFileURL = this.attachmentURL + '/' + this.documentType;
-    let sub = this.http.get<FileSystemItem[]>(getFileURL, { headers: headers })
+    const getFileURL = this.attachmentURL + "/" + this.documentType;
+    const sub = this.http.get<FileSystemItem[]>(getFileURL, { headers: headers })
       .subscribe((data) => {
-        data.forEach(file => {
-          if (this.useDocumentTypeForName) {
-            file.name = this.documentType + '_' + file.name;
-          }
-        });
-        // sort by filename
-        data = data.sort((fileA, fileB) => {
-          if (fileA.name > fileB.name) {
-            return 1;
-          } else {
-            return -1;
-          }
-        });
-        this.subscriptionList.push(sub);
-        // this.busy = sub;
+          data.forEach(file => {
+            if (this.useDocumentTypeForName) {
+              file.name = this.documentType + "_" + file.name;
+            }
+          });
+          // sort by filename
+          data = data.sort((fileA, fileB) => {
+            if (fileA.name > fileB.name) {
+              return 1;
+            } else {
+              return -1;
+            }
+          });
+          this.subscriptionList.push(sub);
+          // this.busy = sub;
 
-        // convert bytes to KB
-        data.forEach((entry) => {
-          entry.size = Math.ceil(entry.size / 1024);
-          entry.downloadUrl = `api/file/${this.entityId}/${this.actionPrefix}download-file/${this.entityName}/${entry.name}`;
-          entry.downloadUrl += `?serverRelativeUrl=${encodeURIComponent(entry.serverrelativeurl)}&documentType=${this.documentType}`;
-        });
-        this.files = data;
-        this.numberOfUploadedFiles.emit(this.files.length);
-        this.dataLoaded = true;
-        this.fileReqOngoing = false;
-      },
+          // convert bytes to KB
+          data.forEach((entry) => {
+            entry.size = Math.ceil(entry.size / 1024);
+            entry.downloadUrl =
+              `api/file/${this.entityId}/${this.actionPrefix}download-file/${this.entityName}/${entry.name}`;
+            entry.downloadUrl += `?serverRelativeUrl=${encodeURIComponent(entry.serverrelativeurl)}&documentType=${this
+              .documentType}`;
+          });
+          this.files = data;
+          this.numberOfUploadedFiles.emit(this.files.length);
+          this.dataLoaded = true;
+          this.fileReqOngoing = false;
+        },
         err => {
-          this.snackBar.open('Failed to get files', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          this.snackBar.open("Failed to get files", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
           this.fileReqOngoing = false;
         });
     this.subscriptionList.push(sub);
@@ -205,15 +227,15 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
 
   deleteFile(relativeUrl: string) {
     this.fileReqOngoing = true;
-    const headers: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json'
+    const headers = new HttpHeaders({
+      'Content-Type': "application/json"
     });
     const queryParams = `?serverRelativeUrl=${encodeURIComponent(relativeUrl)}&documentType=${this.documentType}`;
-    let sub = this.http.delete(this.attachmentURL + queryParams, { headers: headers }).subscribe(result => {
-      this.getUploadedFileData();
-    },
+    const sub = this.http.delete(this.attachmentURL + queryParams, { headers: headers }).subscribe(result => {
+        this.getUploadedFileData();
+      },
       err => {
-        this.snackBar.open('Failed to delete file', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Failed to delete file", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         this.fileReqOngoing = false;
       });
 
@@ -222,16 +244,16 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
   }
 
   disableFileUpload(): boolean {
-    return (!this.multipleFiles && (this.files && this.files.length > 0))
-      || (this.multipleFiles && this.maxNumberOfFiles <= (this.files.length))
-      || this.disableUploads;
+    return (!this.multipleFiles && (this.files && this.files.length > 0)) ||
+      (this.multipleFiles && this.maxNumberOfFiles <= (this.files.length)) ||
+      this.disableUploads;
   }
 
-  public fileOver(event) {
+  fileOver(event) {
     // console.log(event);
   }
 
-  public fileLeave(event) {
+  fileLeave(event) {
     // console.log(event);
   }
 

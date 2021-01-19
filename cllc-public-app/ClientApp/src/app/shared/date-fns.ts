@@ -15,23 +15,26 @@
  * returns 1-31 for the date of the queried month/year that the nth weekday falls on.
  * returns false if there isn’t an nth weekday in the queried month/year
 */
-export function getMonthlyWeekday(n, d, m, y){
-    var targetDay, curDay=0, i=1, seekDay;
-        if(d=="sunday") seekDay = 0;
-        if(d=="monday") seekDay = 1;
-        if(d=="tuesday") seekDay = 2;
-        if(d=="wednesday") seekDay = 3;
-        if(d=="thursday") seekDay = 4;
-        if(d=="friday") seekDay = 5;
-        if(d=="saturday") seekDay = 6;
-    while(curDay < n && i < 31){
-        targetDay = new Date(i++ + " " + m + " "+y);
-        if(targetDay.getDay()==seekDay) curDay++;
-    }
-    if(curDay==n) {
-        targetDay = targetDay.getDate();
-        return targetDay;
-    } else {
-        return false;
-    }
-}//end getMonthlyWeekday JS function
+export function getMonthlyWeekday(n, d, m, y) {
+  let targetDay;
+  let curDay = 0;
+  let i = 1;
+  let seekDay: number;
+  if (d == "sunday") seekDay = 0;
+  if (d == "monday") seekDay = 1;
+  if (d == "tuesday") seekDay = 2;
+  if (d == "wednesday") seekDay = 3;
+  if (d == "thursday") seekDay = 4;
+  if (d == "friday") seekDay = 5;
+  if (d == "saturday") seekDay = 6;
+  while (curDay < n && i < 31) {
+    targetDay = new Date(i++ + " " + m + " " + y);
+    if (targetDay.getDay() == seekDay) curDay++;
+  }
+  if (curDay == n) {
+    targetDay = targetDay.getDate();
+    return targetDay;
+  } else {
+    return false;
+  }
+} //end getMonthlyWeekday JS function

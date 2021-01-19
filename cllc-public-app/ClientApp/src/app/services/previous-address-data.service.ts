@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { PreviousAddress } from '@models/previous-address.model';
-import { Observable } from 'rxjs';
-import { DataService } from './data.service';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
+import { PreviousAddress } from "@models/previous-address.model";
+import { Observable } from "rxjs";
+import { DataService } from "./data.service";
 
 
 @Injectable()
@@ -28,7 +28,7 @@ export class PreviousAddressDataService extends DataService {
    * @param data - address data
    */
   createPreviousAdderess(data: PreviousAddress) {
-    return this.http.post<PreviousAddress>('api/previousaddress/', data, { headers: this.headers })
+    return this.http.post<PreviousAddress>("api/previousaddress/", data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

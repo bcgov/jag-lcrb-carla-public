@@ -1,14 +1,14 @@
-import { Component,  Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { LicenseeChangeLog } from '@models/licensee-change-log.model';
-import { FormBase } from '@shared/form-base';
-import * as moment from 'moment';
+import { Component, Inject } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { LicenseeChangeLog } from "@models/licensee-change-log.model";
+import { FormBase } from "@shared/form-base";
+import * as moment from "moment";
 
 @Component({
-  selector: 'app-organization-leadership',
-  templateUrl: './organization-leadership.component.html',
-  styleUrls: ['./organization-leadership.component.scss']
+  selector: "app-organization-leadership",
+  templateUrl: "./organization-leadership.component.html",
+  styleUrls: ["./organization-leadership.component.scss"]
 })
 export class OrganizationLeadershipComponent extends FormBase {
   form: FormGroup;
@@ -20,21 +20,22 @@ export class OrganizationLeadershipComponent extends FormBase {
     private dialogRef: MatDialogRef<OrganizationLeadershipComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
-    this.maxDate19 = moment(new Date()).startOf('day').subtract(19, 'year').toDate(); // 19 years in the past
+    this.maxDate19 = moment(new Date()).startOf("day").subtract(19, "year").toDate(); // 19 years in the past
     this.parentName = data.parentName;
     this.form = fb.group({
-      id: [''],
-      isDirectorNew: [false],
-      isOfficerNew: [false],
-      isManagerNew: [false],
-      firstNameNew: ['', Validators.required],
-      lastNameNew: ['', Validators.required],
-      emailNew: ['', [Validators.email, Validators.required]],
-      isIndividual: [true],
-      dateofBirthNew: ['', Validators.required],
-      titleNew: [''],
-      dateofappointment: ['', Validators.required]
-    }, { validator: this.dateLessThanToday('dateofappointment') }
+        id: [""],
+        isDirectorNew: [false],
+        isOfficerNew: [false],
+        isManagerNew: [false],
+        firstNameNew: ["", Validators.required],
+        lastNameNew: ["", Validators.required],
+        emailNew: ["", [Validators.email, Validators.required]],
+        isIndividual: [true],
+        dateofBirthNew: ["", Validators.required],
+        titleNew: [""],
+        dateofappointment: ["", Validators.required]
+      },
+      { validator: this.dateLessThanToday("dateofappointment") }
     );
 
     if (data && data.person) {
@@ -62,7 +63,7 @@ export class OrganizationLeadershipComponent extends FormBase {
    */
   save() {
     let formData = this.data.person || {};
-    formData = (<any>Object).assign(new LicenseeChangeLog(), formData, this.form.value);
+    formData = (Object as any).assign(new LicenseeChangeLog(), formData, this.form.value);
     formData.businessNameNew = `${formData.firstNameNew} ${formData.lastNameNew}`;
 
     this.dialogRef.close(formData);

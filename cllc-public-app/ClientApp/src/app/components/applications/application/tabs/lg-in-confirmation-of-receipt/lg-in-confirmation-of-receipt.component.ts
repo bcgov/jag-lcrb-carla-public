@@ -1,23 +1,27 @@
-import { Component, OnInit, Input, Inject, ChangeDetectorRef } from '@angular/core';
-import { ApplicationDataService } from '@services/application-data.service';
-import { Application } from '@models/application.model';
-import { FormBuilder, Validators } from '@angular/forms';
-import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
-import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { Router } from '@angular/router';
-import { takeWhile } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Component, OnInit, Input, Inject, ChangeDetectorRef } from "@angular/core";
+import { ApplicationDataService } from "@services/application-data.service";
+import { Application } from "@models/application.model";
+import { FormBuilder, Validators } from "@angular/forms";
+import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
+import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
+import { Router } from "@angular/router";
+import { takeWhile } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Component({
-  selector: 'app-lg-in-confirmation-of-receipt',
-  templateUrl: './lg-in-confirmation-of-receipt.component.html',
-  styleUrls: ['./lg-in-confirmation-of-receipt.component.scss']
+  selector: "app-lg-in-confirmation-of-receipt",
+  templateUrl: "./lg-in-confirmation-of-receipt.component.html",
+  styleUrls: ["./lg-in-confirmation-of-receipt.component.scss"]
 })
 export class LgInConfirmationOfReceiptComponent extends FormBase implements OnInit {
-  @Input() application: Application;
-  @Input() isOpenedByLGForApproval: boolean;
-  @Input() htmlContent: ApplicationHTMLContent;
-  @Input() disableForm = false;
+  @Input()
+  application: Application;
+  @Input()
+  isOpenedByLGForApproval: boolean;
+  @Input()
+  htmlContent: ApplicationHTMLContent;
+  @Input()
+  disableForm = false;
   validationMessages: string[];
   busy: any;
   approvingApplication: boolean;
@@ -39,11 +43,11 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
   ngOnInit() {
     this.form = this.fb.group({
-      lgInName: [{ value: '', disabled: true }],
-      lGNameOfOfficial: ['', [Validators.required]],
-      lGTitlePosition: ['', [Validators.required]],
-      lGContactPhone: ['', [Validators.required]],
-      lGContactEmail: ['', [Validators.required, Validators.email]]
+      lgInName: [{ value: "", disabled: true }],
+      lGNameOfOfficial: ["", [Validators.required]],
+      lGTitlePosition: ["", [Validators.required]],
+      lGContactPhone: ["", [Validators.required]],
+      lGContactEmail: ["", [Validators.required, Validators.email]]
     });
     this.form.patchValue(this.application);
 
@@ -60,7 +64,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
     if (resolutionRequired && ((this.uploadedResolutionDocuments || 0) < 1)) {
       valid = false;
-      this.validationMessages.push('At least one site plan document is required.');
+      this.validationMessages.push("At least one site plan document is required.");
     }
 
     if (!valid) {
@@ -75,29 +79,32 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
       return;
     }
 
-    this.showComfirmation('OptOut', true).subscribe(result => {
-      if (result === 'OK') {
+    this.showComfirmation("OptOut", true).subscribe(result => {
+      if (result === "OK") {
         this.optingOutOfComment = true;
         this.cd.detectChanges();
 
-        let data = <Application>{
+        const data = {
           ...this.application,
           ...this.form.value,
-          lGApprovalDecision: 'OptOut',
+          lGApprovalDecision: "OptOut",
           lGDecisionSubmissionDate: new Date()
-        };
+        } as Application;
 
         this.busy = this.applicationDataService.updateApplication(data)
           .subscribe(res => {
-            this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-            this.router.navigateByUrl('/lg-approvals');
-            this.optingOutOfComment = false;
-            this.cd.detectChanges();
-          }, error => {
-            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-            this.optingOutOfComment = false;
-            this.cd.detectChanges();
-          });
+              this.snackBar.open("Application has been saved",
+                "Success",
+                { duration: 2500, panelClass: ["green-snackbar"] });
+              this.router.navigateByUrl("/lg-approvals");
+              this.optingOutOfComment = false;
+              this.cd.detectChanges();
+            },
+            error => {
+              this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+              this.optingOutOfComment = false;
+              this.cd.detectChanges();
+            });
       }
     });
   }
@@ -108,31 +115,34 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
       return;
     }
 
-    this.showComfirmation('Reject', true).subscribe(result => {
-      if (result === 'OK') {
+    this.showComfirmation("Reject", true).subscribe(result => {
+      if (result === "OK") {
         this.rejectingApp = true;
         this.cd.detectChanges();
 
-        let data = <Application>{
+        const data = {
           ...this.application,
           ...this.form.value,
-          lGApprovalDecision: 'Rejected',
+          lGApprovalDecision: "Rejected",
           lGDecisionSubmissionDate: new Date()
-        };
+        } as Application;
 
         this.busy = this.applicationDataService.updateApplication(data)
           .subscribe(res => {
-            this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-            this.router.navigateByUrl('/lg-approvals');
-            this.rejectingApp = false;
-            this.cd.detectChanges();
-          }, error => {
-            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-            this.rejectingApp = false;
-            this.cd.detectChanges();
-          });
+              this.snackBar.open("Application has been saved",
+                "Success",
+                { duration: 2500, panelClass: ["green-snackbar"] });
+              this.router.navigateByUrl("/lg-approvals");
+              this.rejectingApp = false;
+              this.cd.detectChanges();
+            },
+            error => {
+              this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+              this.rejectingApp = false;
+              this.cd.detectChanges();
+            });
       }
-    })
+    });
 
 
   }
@@ -142,30 +152,33 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     // if (!this.isValid()) {
     //   return;
     // }
-    let filesUploaded = (this.uploadedResolutionDocuments > 0);
-    this.showComfirmation('Approve', filesUploaded).subscribe(result => {
-      if (result === 'OK') {
+    const filesUploaded = (this.uploadedResolutionDocuments > 0);
+    this.showComfirmation("Approve", filesUploaded).subscribe(result => {
+      if (result === "OK") {
         this.approvingApplication = true;
         this.cd.detectChanges();
 
-        let data = <Application>{
+        const data = {
           ...this.application,
           ...this.form.value,
-          lGApprovalDecision: this.uploadedResolutionDocuments > 0 ? 'Approved' : 'Pending',
+          lGApprovalDecision: this.uploadedResolutionDocuments > 0 ? "Approved" : "Pending",
           lGDecisionSubmissionDate: new Date()
-        };
+        } as Application;
 
         this.busy = this.applicationDataService.updateApplication(data)
           .subscribe(res => {
-            this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-            this.router.navigateByUrl('/lg-approvals');
-            this.approvingApplication = false;
-            this.cd.detectChanges();
-          }, error => {
-            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-            this.approvingApplication = false;
-            this.cd.detectChanges();
-          });
+              this.snackBar.open("Application has been saved",
+                "Success",
+                { duration: 2500, panelClass: ["green-snackbar"] });
+              this.router.navigateByUrl("/lg-approvals");
+              this.approvingApplication = false;
+              this.cd.detectChanges();
+            },
+            error => {
+              this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+              this.approvingApplication = false;
+              this.cd.detectChanges();
+            });
       }
     });
   }
@@ -175,7 +188,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: '400px',
+      width: "400px",
       data: {
         category,
         requiredFilesUploaded,
@@ -186,37 +199,42 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(LGDecisionDialogComponent, dialogConfig);
     return dialogRef.afterClosed()
-      .pipe(takeWhile(() => this.componentActive))
+      .pipe(takeWhile(() => this.componentActive));
 
   }
 
   ProvideResolution() {
     // Update the status if a resolution file was uploaded and the status is pending
-    if (this.isOpenedByLGForApproval && this.uploadedResolutionDocuments > 0 && this.application.lGApprovalDecision == 'Pending') {
-      let data = <Application>{
+    if (this.isOpenedByLGForApproval &&
+      this.uploadedResolutionDocuments > 0 &&
+      this.application.lGApprovalDecision == "Pending") {
+      const data = {
         ...this.application,
         ...this.form.value,
-        lGApprovalDecision: 'Approved',
-      };
+        lGApprovalDecision: "Approved",
+      } as Application;
       this.providingResolution = true;
       this.applicationDataService.updateApplication(data)
         .subscribe(res => {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-          this.router.navigateByUrl('/lg-approvals');
-          this.providingResolution = false;
-          this.cd.detectChanges();
-        }, error => {
-          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          this.providingResolution = false;
-          this.cd.detectChanges();
-        });
+            this.snackBar.open("Application has been saved",
+              "Success",
+              { duration: 2500, panelClass: ["green-snackbar"] });
+            this.router.navigateByUrl("/lg-approvals");
+            this.providingResolution = false;
+            this.cd.detectChanges();
+          },
+          error => {
+            this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+            this.providingResolution = false;
+            this.cd.detectChanges();
+          });
     }
   }
 }
 
 @Component({
-  selector: 'app-lg-decision-dialog',
-  templateUrl: 'lg-decision-dialog.component.html',
+  selector: "app-lg-decision-dialog",
+  templateUrl: "lg-decision-dialog.component.html",
 })
 export class LGDecisionDialogComponent {
 
@@ -233,12 +251,11 @@ export class LGDecisionDialogComponent {
   }
 
   accept() {
-    this.dialogRef.close('OK');
+    this.dialogRef.close("OK");
   }
 
   cancel() {
-    this.dialogRef.close('CANCEL');
+    this.dialogRef.close("CANCEL");
   }
 
 }
-

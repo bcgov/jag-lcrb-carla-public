@@ -1,38 +1,41 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
-import { MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs';
-import { MAT_DIALOG_DATA } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
-import { LegalEntityDataService } from '@services/legal-entity-data.service';
-import { Account } from '@models/account.model';
-import { DynamicsDataService } from '@services/dynamics-data.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import * as LegalEntitiesActions from '@app/app-state/actions/legal-entities.action';
-import { LegalEntity } from '@models/legal-entity.model';
-import { takeWhile, filter } from 'rxjs/operators';
-import { FormBase } from '@shared/form-base';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, Input, Inject } from "@angular/core";
+import { MatTableDataSource, MatDialog, MatDialogRef } from "@angular/material";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatSnackBar } from "@angular/material";
+import { Subscription } from "rxjs";
+import { MAT_DIALOG_DATA } from "@angular/material";
+import { ActivatedRoute } from "@angular/router";
+import { LegalEntityDataService } from "@services/legal-entity-data.service";
+import { Account } from "@models/account.model";
+import { DynamicsDataService } from "@services/dynamics-data.service";
+import { Store } from "@ngrx/store";
+import { AppState } from "@app/app-state/models/app-state";
+import * as LegalEntitiesActions from "@app/app-state/actions/legal-entities.action";
+import { LegalEntity } from "@models/legal-entity.model";
+import { takeWhile, filter } from "rxjs/operators";
+import { FormBase } from "@shared/form-base";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-shareholders',
-  templateUrl: './shareholders.component.html',
-  styleUrls: ['./shareholders.component.scss']
+  selector: "app-shareholders",
+  templateUrl: "./shareholders.component.html",
+  styleUrls: ["./shareholders.component.scss"]
 })
-
 export class EditShareholdersComponent extends FormBase implements OnInit {
   faPlus = faPlus;
-  @Input() accountId: string;
-  @Input() parentLegalEntityId: string;
-  @Input() businessType: string;
-  @Input() lockAssociates = false;
+  @Input()
+  accountId: string;
+  @Input()
+  parentLegalEntityId: string;
+  @Input()
+  businessType: string;
+  @Input()
+  lockAssociates = false;
 
   shareholderForm: FormGroup;
   shareholderList: LegalEntity[] = [];
   dataSource = new MatTableDataSource<LegalEntity>();
-  displayedColumns = ['name', 'additional', 'commonvotingshares', 'percentageVotingShares', 'email', 'edit', 'delete'];
+  displayedColumns = ["name", "additional", "commonvotingshares", "percentageVotingShares", "email", "edit", "delete"];
   busy: Promise<any>;
   busyObsv: Subscription;
   form: FormGroup;
@@ -65,14 +68,14 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
 
   updateDisplayedColumns() {
     if (this.lockAssociates) {
-      this.displayedColumns = ['name', 'additional', 'commonvotingshares', 'percentageVotingShares', 'email'];
+      this.displayedColumns = ["name", "additional", "commonvotingshares", "percentageVotingShares", "email"];
     }
   }
 
   getShareholders() {
-    let position = 'shareholders';
-    if (['GeneralPartnership', 'LimitedLiabilityPartnership', 'LimitedPartnership'].indexOf(this.businessType) !== -1) {
-      position = 'partners';
+    let position = "shareholders";
+    if (["GeneralPartnership", "LimitedLiabilityPartnership", "LimitedPartnership"].indexOf(this.businessType) !== -1) {
+      position = "partners";
     }
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, position)
       .subscribe((data: LegalEntity[]) => {
@@ -96,60 +99,60 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
 
 
   getPosition(shareholder: LegalEntity): string {
-    let position = '';
+    let position = "";
     if (shareholder.isindividual) {
-      position = 'Individual';
+      position = "Individual";
     } else {
       switch (shareholder.legalentitytype) {
-        case 'PrivateCorporation':
-          position = 'Private Corporation';
-          break;
-        case 'PublicCorporation':
-          position = 'Public Corporation';
-          break;
-        case 'UnlimitedLiabilityCorporation':
-          position = 'Unlimited Liability Corporation';
-          break;
-        case 'LimitedLiabilityCorporation':
-          position = 'Limited Liability Corporation';
-          break;
-        case 'GeneralPartnership':
-          position = 'General Partnership';
-          break;
-        case 'LimitedPartnership':
-          position = 'Limited Partnership';
-          break;
-        case 'LimitedLiabilityPartnership':
-          position = 'Limited Liability Partnership';
-          break;
-        case 'SoleProprietorship':
-          position = 'Sole Proprietorship';
-          break;
-        case 'Society':
-          position = 'Society';
-          break;
-        case 'Coop':
-          position = 'Co-op';
-          break;
-        case 'Estate':
-          position = 'Estate';
-          break;
-        case 'Trust':
-          position = 'Trust';
-          break;
-        case 'IndigenousNation':
-          position = 'Indigenous nation';
-          break;
-        default:
-          position = shareholder.legalentitytype;
-          break;
+      case "PrivateCorporation":
+        position = "Private Corporation";
+        break;
+      case "PublicCorporation":
+        position = "Public Corporation";
+        break;
+      case "UnlimitedLiabilityCorporation":
+        position = "Unlimited Liability Corporation";
+        break;
+      case "LimitedLiabilityCorporation":
+        position = "Limited Liability Corporation";
+        break;
+      case "GeneralPartnership":
+        position = "General Partnership";
+        break;
+      case "LimitedPartnership":
+        position = "Limited Partnership";
+        break;
+      case "LimitedLiabilityPartnership":
+        position = "Limited Liability Partnership";
+        break;
+      case "SoleProprietorship":
+        position = "Sole Proprietorship";
+        break;
+      case "Society":
+        position = "Society";
+        break;
+      case "Coop":
+        position = "Co-op";
+        break;
+      case "Estate":
+        position = "Estate";
+        break;
+      case "Trust":
+        position = "Trust";
+        break;
+      case "IndigenousNation":
+        position = "Indigenous nation";
+        break;
+      default:
+        position = shareholder.legalentitytype;
+        break;
       }
     }
     return position;
   }
 
   formDataToModelData(formData: any, shareholderType: string): LegalEntity {
-    const adoxioLegalEntity: LegalEntity = new LegalEntity();
+    const adoxioLegalEntity = new LegalEntity();
     adoxioLegalEntity.id = formData.id;
 
     if (this.account.isPartnership()) {
@@ -166,7 +169,7 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
     if (formData.isindividual) {
       adoxioLegalEntity.firstname = formData.firstname;
       adoxioLegalEntity.lastname = formData.lastname;
-      adoxioLegalEntity.name = formData.firstname + ' ' + formData.lastname;
+      adoxioLegalEntity.name = formData.firstname + " " + formData.lastname;
       adoxioLegalEntity.email = formData.email;
     } else {
       adoxioLegalEntity.name = formData.name;
@@ -179,7 +182,7 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
 
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
-      adoxioLegalEntity.account = <Account>{ id: this.accountId };
+      adoxioLegalEntity.account = ({ id: this.accountId } as Account);
     }
     return adoxioLegalEntity;
   }
@@ -190,7 +193,7 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
   }
 
   deleteShareholder(shareholder: LegalEntity) {
-    if (confirm('Delete shareholder?')) {
+    if (confirm("Delete shareholder?")) {
       this.legalEntityDataservice.deleteLegalEntity(shareholder.id).subscribe(data => {
         this.getShareholders();
       });
@@ -211,7 +214,7 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
     this.showAddShareholder = false;
     const formData = this.form.value;
     if (formData) {
-      const shareholderType = 'Person';
+      const shareholderType = "Person";
       const adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
       let save = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity);
       if (formData.id) {
@@ -219,11 +222,15 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
       }
       this.busyObsv = save.subscribe(
         res => {
-          this.snackBar.open('Shareholder Details have been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open("Shareholder Details have been saved",
+            "Success",
+            { duration: 2500, panelClass: ["green-snackbar"] });
           this.getShareholders();
         },
         err => {
-          this.snackBar.open('Error saving Shareholder Details', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          this.snackBar.open("Error saving Shareholder Details",
+            "Fail",
+            { duration: 3500, panelClass: ["red-snackbar"] });
           this.handleError(err);
         }
       );
@@ -236,7 +243,7 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      maxWidth: '400px',
+      maxWidth: "400px",
       data: {
         businessType: this.businessType,
         shareholder: shareholder
@@ -249,7 +256,7 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
       formData => {
         // console.log("ShareholderOrganizationDialog output:", data)
         if (formData) {
-          const shareholderType = 'Organization';
+          const shareholderType = "Organization";
           const adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           let save = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity);
           if (formData.id) {
@@ -257,7 +264,9 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
           }
           this.busyObsv = save.subscribe(
             res => {
-              this.snackBar.open('Shareholder Details have been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+              this.snackBar.open("Shareholder Details have been saved",
+                "Success",
+                { duration: 2500, panelClass: ["green-snackbar"] });
               this.getShareholders();
               this.legalEntityDataservice.getBusinessProfileSummary().subscribe(data => {
                 this.store.dispatch(new LegalEntitiesActions.SetLegalEntitiesAction(data));
@@ -265,7 +274,9 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
             },
             err => {
               // console.log("Error occured");
-              this.snackBar.open('Error saving Shareholder Details', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+              this.snackBar.open("Error saving Shareholder Details",
+                "Fail",
+                { duration: 3500, panelClass: ["red-snackbar"] });
               this.handleError(err);
             }
           );
@@ -277,9 +288,9 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      const body = error || '';
+      const body = error || "";
       const err = body || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
@@ -294,32 +305,32 @@ export class EditShareholdersComponent extends FormBase implements OnInit {
  * Shareholder Organization Dialog
  ***************************************/
 @Component({
-  selector: 'app-shareholders-dialog',
-  templateUrl: 'shareholders-dialog.component.html',
+  selector: "app-shareholders-dialog",
+  templateUrl: "shareholders-dialog.component.html",
 })
 export class ShareholderDialogComponent implements OnInit {
   form: FormGroup;
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<ShareholderDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, ) {
+    @Inject(MAT_DIALOG_DATA) public data: any,) {
 
 
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      id: [''],
-      name: [''],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      dateofbirth: [''],
-      email: ['', Validators.email],
-      commonvotingshares: ['', Validators.required],
-      partnerType: ['', Validators.required],
+      id: [""],
+      name: [""],
+      firstname: ["", Validators.required],
+      lastname: ["", Validators.required],
+      dateofbirth: [""],
+      email: ["", Validators.email],
+      commonvotingshares: ["", Validators.required],
+      partnerType: ["", Validators.required],
       isindividual: [true],
-      legalentitytype: [''],
-      dateIssued: [''],
+      legalentitytype: [""],
+      dateIssued: [""],
     });
 
     if (this.data.shareholder) {
@@ -336,10 +347,9 @@ export class ShareholderDialogComponent implements OnInit {
       });
     }
     let formData = this.data.shareholder || {};
-    formData = (<any>Object).assign(formData, this.form.value);
+    formData = (Object as any).assign(formData, this.form.value);
     this.dialogRef.close(formData);
   }
-
 
 
   close() {
@@ -347,4 +357,3 @@ export class ShareholderDialogComponent implements OnInit {
   }
 
 }
-

@@ -10,14 +10,15 @@
       <ng-container *ngIf="step === 'account-profile'">
         <ng-template matStepLabel>Review Account Profile</ng-template>
         <app-account-profile *ngIf="stepper.selectedIndex === index" [useInStepperMode]="true" class="w-100"
-          (saveComplete)="stepper.next()" #accountProfile>
+                             (saveComplete)="stepper.next()" #accountProfile>
         </app-account-profile>
       </ng-container>
 
       <ng-container *ngIf="step === 'licensee-changes'">
         <ng-template matStepLabel>Review Organization Structure</ng-template>
         <app-application-licensee-changes [redirectToDashboardOnSave]="false" *ngIf="stepper.selectedIndex === index"
-          class="w-100" (saveComplete)="stepper.next()" #orgStructure></app-application-licensee-changes>
+                                          class="w-100" (saveComplete)="stepper.next()" #orgStructure>
+        </app-application-licensee-changes>
       </ng-container>
 
       <ng-container *ngIf="step === 'application'">
@@ -25,7 +26,7 @@
         <ng-template matStepLabel *ngIf="stepType !== 'post-lg-decision' && !isFree">Complete Application</ng-template>
         <ng-template matStepLabel *ngIf="stepType === 'post-lg-decision'">LG/IN Review Complete</ng-template>
         <app-application *ngIf="stepper.selectedIndex === index" [skipPayment]="isFree" class="w-100"
-          (saveComplete)="stepper.next()">
+                         (saveComplete)="stepper.next()">
         </app-application>
       </ng-container>
 
@@ -40,7 +41,7 @@
         <app-security-screening-requirements *ngIf="stepper.selectedIndex === index" class="w-100">
         </app-security-screening-requirements>
       </ng-container>
-      
+
     </mat-step>
   </mat-horizontal-stepper>
 </div>

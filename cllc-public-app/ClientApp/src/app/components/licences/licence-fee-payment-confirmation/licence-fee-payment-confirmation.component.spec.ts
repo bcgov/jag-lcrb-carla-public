@@ -1,3 +1,4 @@
 
-describe('payment-confirmation component', () => {
-});
+describe("payment-confirmation component",
+  () => {
+  });
