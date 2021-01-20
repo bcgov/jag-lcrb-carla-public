@@ -1,60 +1,61 @@
 
 
 
-import { filter, takeWhile, catchError, mergeMap } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ApplicationDataService } from '@services/application-data.service';
-import { PaymentDataService } from '@services/payment-data.service';
-import { Application } from '@models/application.model';
-import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
-import { Account } from '@models/account.model';
-import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
-import { TiedHouseConnection } from '@models/tied-house-connection.model';
-import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
-import { KeyValue } from '@angular/common';
-import { FeatureFlagService } from '@services/feature-flag.service';
-import { LicenseDataService } from '@app/services/license-data.service';
-import { UPLOAD_FILES_MODE, ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
-import { faExclamationCircle, faQuestionCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { filter, takeWhile, catchError, mergeMap } from "rxjs/operators";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Store } from "@ngrx/store";
+import { AppState } from "@app/app-state/models/app-state";
+import { Subject, Observable, forkJoin, of } from "rxjs";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import * as currentApplicationActions from "@app/app-state/actions/current-application.action";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ApplicationDataService } from "@services/application-data.service";
+import { PaymentDataService } from "@services/payment-data.service";
+import { Application } from "@models/application.model";
+import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
+import { Account } from "@models/account.model";
+import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
+import { TiedHouseConnection } from "@models/tied-house-connection.model";
+import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
+import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
+import { FeatureFlagService } from "@services/feature-flag.service";
+import { LicenseDataService } from "@app/services/license-data.service";
+import { UPLOAD_FILES_MODE, ApplicationCancellationDialogComponent } from
+  "@components/dashboard/applications-and-licences/applications-and-licences.component";
+import { faExclamationCircle, faQuestionCircle, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSave } from "@fortawesome/free-regular-svg-icons";
 
 const ValidationErrorMap = {
-  renewalCriminalOffenceCheck: 'Please answer question 1',
-  renewalUnreportedSaleOfBusiness: 'Please answer question 2',
-  renewalBusinessType: 'Please answer question 3',
-  renewalTiedhouse: 'Please answer question 4',
-  tiedhouseFederalInterest: 'Please answer question 5',
-  renewalOrgLeadership: 'Please answer question 6',
-  renewalkeypersonnel: 'Please answer question 7',
-  renewalShareholders: 'Please answer question 8',
-  renewalOutstandingFines: 'Please answer question 9',
-  renewalBranding: 'Please answer question 10',
-  renewalSignage: 'Please answer question 11',
-  renewalEstablishmentAddress: 'Please answer question 12',
-  renewalValidInterest: 'Please answer question 13',
-  renewalZoning: 'Please answer question 14',
-  renewalFloorPlan: 'Please answer question 15',
-  contactPersonFirstName: 'Please enter the business contact\'s first name',
-  contactPersonLastName: 'Please enter the business contact\'s last name',
-  contactPersonEmail: 'Please enter the business contact\'s email address',
-  contactPersonPhone: 'Please enter the business contact\'s 10-digit phone number',
-  authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
-  signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
+  renewalCriminalOffenceCheck: "Please answer question 1",
+  renewalUnreportedSaleOfBusiness: "Please answer question 2",
+  renewalBusinessType: "Please answer question 3",
+  renewalTiedhouse: "Please answer question 4",
+  tiedhouseFederalInterest: "Please answer question 5",
+  renewalOrgLeadership: "Please answer question 6",
+  renewalkeypersonnel: "Please answer question 7",
+  renewalShareholders: "Please answer question 8",
+  renewalOutstandingFines: "Please answer question 9",
+  renewalBranding: "Please answer question 10",
+  renewalSignage: "Please answer question 11",
+  renewalEstablishmentAddress: "Please answer question 12",
+  renewalValidInterest: "Please answer question 13",
+  renewalZoning: "Please answer question 14",
+  renewalFloorPlan: "Please answer question 15",
+  contactPersonFirstName: "Please enter the business contact's first name",
+  contactPersonLastName: "Please enter the business contact's last name",
+  contactPersonEmail: "Please enter the business contact's email address",
+  contactPersonPhone: "Please enter the business contact's 10-digit phone number",
+  authorizedToSubmit: "Please affirm that you are authorized to submit the application",
+  signatureAgreement: "Please affirm that all of the information provided for this application is true and complete",
 };
 
 
 @Component({
-  selector: 'app-application-renewal',
-  templateUrl: './application-renewal.component.html',
-  styleUrls: ['./application-renewal.component.scss']
+  selector: "app-application-renewal",
+  templateUrl: "./application-renewal.component.html",
+  styleUrls: ["./application-renewal.component.scss"]
 })
 export class ApplicationRenewalComponent extends FormBase implements OnInit {
   faExclamationCircle = faExclamationCircle;
@@ -74,7 +75,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   submittedApplications = 8;
   tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
-  htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
+  htmlContent = {} as ApplicationHTMLContent;
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
@@ -103,60 +104,60 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
-    this.route.paramMap.subscribe(pmap => this.mode = pmap.get('mode'));
+    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get("applicationId"));
+    this.route.paramMap.subscribe(pmap => this.mode = pmap.get("mode"));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      id: [''],
+      id: [""],
 
       // #1
-      renewalCriminalOffenceCheck: ['', Validators.required],
+      renewalCriminalOffenceCheck: ["", Validators.required],
       // #2
-      renewalUnreportedSaleOfBusiness: ['', Validators.required],
+      renewalUnreportedSaleOfBusiness: ["", Validators.required],
       // #3
-      renewalBusinessType: ['', Validators.required],
+      renewalBusinessType: ["", Validators.required],
       // #4
-      renewalTiedhouse: ['', Validators.required],
+      renewalTiedhouse: ["", Validators.required],
       // #5
-      tiedhouseFederalInterest: ['', Validators.required],
+      tiedhouseFederalInterest: ["", Validators.required],
       // #6
-      renewalOrgLeadership: ['', Validators.required],
+      renewalOrgLeadership: ["", Validators.required],
       // #7
-      renewalkeypersonnel: ['', Validators.required],
+      renewalkeypersonnel: ["", Validators.required],
       // #8
-      renewalShareholders: ['', Validators.required],
+      renewalShareholders: ["", Validators.required],
       // #9
-      renewalOutstandingFines: ['', Validators.required],
+      renewalOutstandingFines: ["", Validators.required],
       // # 10
-      renewalBranding: ['', Validators.required],
+      renewalBranding: ["", Validators.required],
       // #11
-      renewalSignage: ['', Validators.required],
+      renewalSignage: ["", Validators.required],
       // #12 
-      renewalEstablishmentAddress: ['', Validators.required],
+      renewalEstablishmentAddress: ["", Validators.required],
       // #13
-      renewalValidInterest: ['', Validators.required],
+      renewalValidInterest: ["", Validators.required],
       // #14
-      renewalZoning: ['', Validators.required],
+      renewalZoning: ["", Validators.required],
       // #15
-      renewalFloorPlan: ['', Validators.required],
+      renewalFloorPlan: ["", Validators.required],
 
-      contactPersonFirstName: ['', Validators.required],
-      contactPersonLastName: ['', Validators.required],
-      contactPersonRole: [''],
-      contactPersonEmail: ['', Validators.required],
-      contactPersonPhone: ['', Validators.required],
+      contactPersonFirstName: ["", Validators.required],
+      contactPersonLastName: ["", Validators.required],
+      contactPersonRole: [""],
+      contactPersonEmail: ["", Validators.required],
+      contactPersonPhone: ["", Validators.required],
 
-      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
+      authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
 
       assignedLicence: this.fb.group({
-        id: [''],
-        establishmentAddressStreet: [''],
-        establishmentAddressCity: [''],
-        establishmentAddressPostalCode: [''],
-        establishmentParcelId: ['']
+        id: [""],
+        establishmentAddressStreet: [""],
+        establishmentAddressCity: [""],
+        establishmentAddressPostalCode: [""],
+        establishmentParcelId: [""]
       }),
     });
 
@@ -178,32 +179,33 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     sub = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
-        if (data.establishmentParcelId) {
-          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-        }
+          if (data.establishmentParcelId) {
+            data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, "");
+          }
 
-        this.application = data;
+          this.application = data;
 
-        this.hideFormControlByType();
+          this.hideFormControlByType();
 
-        this.addDynamicContent();
+          this.addDynamicContent();
 
-        const noNulls = Object.keys(data)
-          .filter(e => data[e] !== null)
-          .reduce((o, e) => {
-            o[e] = data[e];
-            return o;
-          }, {});
+          const noNulls = Object.keys(data)
+            .filter(e => data[e] !== null)
+            .reduce((o, e) => {
+                o[e] = data[e];
+                return o;
+              },
+              {});
 
-        this.form.patchValue(noNulls);
-        if (data.isPaid) {
-          this.form.disable();
-        }
-        this.savedFormData = this.form.value;
-        this.dataLoaded = true;
-      },
+          this.form.patchValue(noNulls);
+          if (data.isPaid) {
+            this.form.disable();
+          }
+          this.savedFormData = this.form.value;
+          this.dataLoaded = true;
+        },
         () => {
-          console.log('Error occured');
+          console.log("Error occured");
           this.dataLoaded = true;
         }
       );
@@ -223,12 +225,12 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       this.form.get("renewalZoning").clearValidators();
       this.form.get("renewalFloorPlan").clearValidators();
 
-      this.form.get("renewalBranding").updateValueAndValidity()
-      this.form.get("renewalSignage").updateValueAndValidity()
-      this.form.get("renewalEstablishmentAddress").updateValueAndValidity()
-      this.form.get("renewalValidInterest").updateValueAndValidity()
-      this.form.get("renewalZoning").updateValueAndValidity()
-      this.form.get("renewalFloorPlan").updateValueAndValidity()
+      this.form.get("renewalBranding").updateValueAndValidity();
+      this.form.get("renewalSignage").updateValueAndValidity();
+      this.form.get("renewalEstablishmentAddress").updateValueAndValidity();
+      this.form.get("renewalValidInterest").updateValueAndValidity();
+      this.form.get("renewalZoning").updateValueAndValidity();
+      this.form.get("renewalFloorPlan").updateValueAndValidity();
 
     }
   }
@@ -238,8 +240,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   }
 
   isTouchedAndInvalid(fieldName: string): boolean {
-    return this.form.get(fieldName).touched
-      && !this.form.get(fieldName).valid;
+    return this.form.get(fieldName).touched && !this.form.get(fieldName).valid;
   }
 
 
@@ -257,9 +258,9 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   }
 
   checkPossibleProblematicWords() {
-    console.log(this.form.get('establishmentName').errors);
+    console.log(this.form.get("establishmentName").errors);
     this.possibleProblematicNameWarning =
-      this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
+      this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get("establishmentName").value);
   }
 
   /**
@@ -270,18 +271,20 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     const saveData = this.form.value;
 
     return forkJoin([
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
-      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
-    ]).pipe(takeWhile(() => this.componentActive))
+        this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
+        this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
+      ]).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         return of(false);
       }))
       .pipe(mergeMap(() => {
         this.savedFormData = saveData;
         this.updateApplicationInStore();
         if (showProgress === true) {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open("Application has been saved",
+            "Success",
+            { duration: 2500, panelClass: ["green-snackbar"] });
         }
         return of(true);
       }));
@@ -291,7 +294,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     if (!this.application.tiedHouse) {
       return of(null);
     }
-    let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
+    let data = (Object as any).assign(this.application.tiedHouse, _tiedHouseData);
     data = { ...data };
     return this.tiedHouseService.updateTiedHouse(data, data.id);
   }
@@ -300,8 +303,8 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
-        this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
-      }
+          this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
+        }
       );
   }
 
@@ -318,12 +321,12 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
-          if (result) {
-            this.submitPayment();
-          } else {
-            this.submitReqInProgress = false;
-          }
-        },
+            if (result) {
+              this.submitPayment();
+            } else {
+              this.submitReqInProgress = false;
+            }
+          },
           error => { this.submitReqInProgress = false; });
     }
   }
@@ -335,16 +338,19 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(res => {
-        this.submitReqInProgress = false;
-        const jsonUrl = res;
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
-      }, err => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-        this.submitReqInProgress = false;
-      });
+          this.submitReqInProgress = false;
+          const jsonUrl = res;
+          window.location.href = jsonUrl["url"];
+          return jsonUrl["url"];
+        },
+        err => {
+          if (err._body === "Payment already made") {
+            this.snackBar.open("Application payment has already been made.",
+              "Fail",
+              { duration: 3500, panelClass: ["red-snackbar"] });
+          }
+          this.submitReqInProgress = false;
+        });
   }
 
   isValid(): boolean {
@@ -362,8 +368,8 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: '400px',
-      height: '200px',
+      width: "400px",
+      height: "200px",
       data: {
         establishmentName: this.application.establishmentName,
         applicationName: this.application.name
@@ -381,13 +387,15 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
           this.applicationDataService.cancelApplication(this.applicationId)
             .pipe(takeWhile(() => this.componentActive))
             .subscribe(() => {
-              this.cancelReqInProgress = false;
-              this.savedFormData = this.form.value;
-              this.router.navigate(['/dashboard']);
-            },
+                this.cancelReqInProgress = false;
+                this.savedFormData = this.form.value;
+                this.router.navigate(["/dashboard"]);
+              },
               () => {
-                this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-                console.error('Error cancelling the application');
+                this.snackBar.open("Error cancelling the application",
+                  "Fail",
+                  { duration: 3500, panelClass: ["red-snackbar"] });
+                console.error("Error cancelling the application");
                 this.cancelReqInProgress = false;
               });
         }
@@ -396,32 +404,40 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
   businessTypeIsPartnership(): boolean {
     return this.account &&
-      ['GeneralPartnership',
-        'LimitedPartnership',
-        'LimitedLiabilityPartnership',
-        'Partnership'].indexOf(this.account.businessType) !== -1;
+      [
+        "GeneralPartnership",
+        "LimitedPartnership",
+        "LimitedLiabilityPartnership",
+        "Partnership"
+      ].indexOf(this.account.businessType) !==
+      -1;
   }
 
   businessTypeIsPrivateCorporation(): boolean {
     return this.account &&
-      ['PrivateCorporation',
-        'UnlimitedLiabilityCorporation',
-        'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
+      [
+        "PrivateCorporation",
+        "UnlimitedLiabilityCorporation",
+        "LimitedLiabilityCorporation"
+      ].indexOf(this.account.businessType) !==
+      -1;
   }
 
   isCRSRenewalApplication(): boolean {
-    return this.application
-      && this.application.applicationType
-      && [
+    return this.application &&
+      this.application.applicationType &&
+      [
         ApplicationTypeNames.CRSRenewal.toString(),
         ApplicationTypeNames.CRSRenewalLate30.toString(),
         ApplicationTypeNames.CRSRenewalLate6Months.toString(),
-      ].indexOf(this.application.applicationType.name) !== -1;
+      ].indexOf(this.application.applicationType.name) !==
+      -1;
   }
 
   showFormControl(state: string): boolean {
     return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
-      .indexOf(state) !== -1;
+      .indexOf(state) !==
+      -1;
   }
 
   saveForLater() {
@@ -429,15 +445,16 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     this.save(true)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((result: boolean) => {
-        this.saveForLateInProgress = false;
-        if (result) {
-          this.router.navigate(['/dashboard']);
-        }
+          this.saveForLateInProgress = false;
+          if (result) {
+            this.router.navigate(["/dashboard"]);
+          }
 
-      }, error => {
-        this.saveForLateInProgress = false;
-        console.error(error)
-      });
+        },
+        error => {
+          this.saveForLateInProgress = false;
+          console.error(error);
+        });
   }
 
 }

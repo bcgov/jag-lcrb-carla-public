@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { DataService } from './data.service';
-import { LegalEntity } from '@models/legal-entity.model';
-import { LicenseeChangeLog } from '@models/licensee-change-log.model';
-import { Observable } from 'rxjs';
-import { SecurityScreeningSummary } from '@models/security-screening-summary.model';
+import { Injectable } from "@angular/core";
+import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
+import { DataService } from "./data.service";
+import { LegalEntity } from "@models/legal-entity.model";
+import { LicenseeChangeLog } from "@models/licensee-change-log.model";
+import { Observable } from "rxjs";
+import { SecurityScreeningSummary } from "@models/security-screening-summary.model";
 
 @Injectable()
 export class LegalEntityDataService extends DataService {
 
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json'
+  headers = new HttpHeaders({
+    'Content-Type': "application/json"
   });
 
   constructor(private http: HttpClient) {
@@ -29,7 +29,7 @@ export class LegalEntityDataService extends DataService {
   }
 
   getBusinessProfileSummary() {
-    const apiPath = 'api/legalentities/business-profile-summary/';
+    const apiPath = "api/legalentities/business-profile-summary/";
     return this.http.get<LegalEntity[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
@@ -38,7 +38,7 @@ export class LegalEntityDataService extends DataService {
    * Gets the legal entity tree
    */
   getCurrentHierachy() {
-    const apiPath = 'api/legalentities/current-hierarchy';
+    const apiPath = "api/legalentities/current-hierarchy";
     return this.http.get<LegalEntity>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
@@ -56,7 +56,7 @@ export class LegalEntityDataService extends DataService {
    * Gets the list of security screening records
    */
   getCurrentSecurityScreeningItems(): Observable<SecurityScreeningSummary> {
-    const apiPath = 'api/legalentities/current-security-summary';
+    const apiPath = "api/legalentities/current-security-summary";
     return this.http.get<SecurityScreeningSummary>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
@@ -76,7 +76,9 @@ export class LegalEntityDataService extends DataService {
    * @param applicationId - The application to associte to the change logs
    */
   saveLicenseeChanges(changeTree: LicenseeChangeLog, applicationId: string) {
-    return this.http.post<LicenseeChangeLog>(`api/legalentities/save-change-tree/${applicationId}`, changeTree, { headers: this.headers })
+    return this.http.post<LicenseeChangeLog>(`api/legalentities/save-change-tree/${applicationId}`,
+        changeTree,
+        { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -86,7 +88,9 @@ export class LegalEntityDataService extends DataService {
    * @param accountId - The application to associte to the change logs
    */
   saveAccountLicenseeChanges(changeTree: LicenseeChangeLog, accountId: string) {
-    return this.http.post<LicenseeChangeLog>(`api/legalentities/save-change-tree/account/${accountId}`, changeTree, { headers: this.headers })
+    return this.http.post<LicenseeChangeLog>(`api/legalentities/save-change-tree/account/${accountId}`,
+        changeTree,
+        { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -104,7 +108,7 @@ export class LegalEntityDataService extends DataService {
    * @param data - legal entity data
    */
   createLegalEntity(data: LegalEntity) {
-    return this.http.post<LegalEntity>('api/legalentities/', data, { headers: this.headers })
+    return this.http.post<LegalEntity>("api/legalentities/", data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -132,7 +136,7 @@ export class LegalEntityDataService extends DataService {
    * @param data - legal entity data
    */
   createChildLegalEntity(data: LegalEntity) {
-    return this.http.post<LegalEntity>('api/legalentities/child-legal-entity', data, { headers: this.headers })
+    return this.http.post<LegalEntity>("api/legalentities/child-legal-entity", data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -142,7 +146,7 @@ export class LegalEntityDataService extends DataService {
    */
   sendConsentRequestEmail(data: string[]) {
     const legalEntityId: string = data[0];
-    const apiPath = 'api/legalentities/' + legalEntityId + '/sendconsentrequests';
+    const apiPath = `api/legalentities/${legalEntityId}/sendconsentrequests`;
     return this.http.post(apiPath, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }

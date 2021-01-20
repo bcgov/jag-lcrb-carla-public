@@ -1,32 +1,28 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
-import { FormBase } from '@shared/form-base';
-import { UserDataService } from '@services/user-data.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { AccountDataService } from '@services/account-data.service';
-import { ContactDataService } from '@services/contact-data.service';
-import { DynamicsDataService } from '@services/dynamics-data.service';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { Account } from '@models/account.model';
-import { ApplicationDataService } from '@services/application-data.service';
-import { Application } from '@models/application.model';
-import { Observable, forkJoin, of } from 'rxjs';
-import { MatSnackBar } from '@angular/material';
-import { faChevronRight, faExclamationCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { takeWhile, filter, catchError, mergeMap } from "rxjs/operators";
+import { FormBase } from "@shared/form-base";
+import { Store } from "@ngrx/store";
+import { AppState } from "@app/app-state/models/app-state";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { Account } from "@models/account.model";
+import { ApplicationDataService } from "@services/application-data.service";
+import { Application } from "@models/application.model";
+import { Observable, forkJoin, of } from "rxjs";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { faChevronRight, faExclamationCircle, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-associate-page',
-  templateUrl: './associate-page.component.html',
-  styleUrls: ['./associate-page.component.scss']
+  selector: "app-associate-page",
+  templateUrl: "./associate-page.component.html",
+  styleUrls: ["./associate-page.component.scss"]
 })
 export class AssociatePageComponent extends FormBase implements OnInit {
   faExclamationCircle = faExclamationCircle;
   faQuestionCircle = faQuestionCircle;
   faChevronRight = faChevronRight;
-  @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  saveComplete = new EventEmitter<boolean>();
   account: Account;
   legalEntityId: string;
   lockAssociates = true;
@@ -37,26 +33,27 @@ export class AssociatePageComponent extends FormBase implements OnInit {
   validationMessages: string[];
 
 
-  constructor(private store: Store<AppState>, private fb: FormBuilder,
+  constructor(private store: Store<AppState>,
+    private fb: FormBuilder,
     private applicationDataService: ApplicationDataService,
     public snackBar: MatSnackBar,
     private route: ActivatedRoute) {
     super();
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
+    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get("applicationId"));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      id: [''],
-      renewalCriminalOffenceCheck: ['', Validators.required],
-      renewalUnreportedSaleOfBusiness: ['', Validators.required],
-      renewalBusinessType: ['', Validators.required],
-      renewalTiedhouse: ['', Validators.required],
-      tiedhouseFederalInterest: ['', Validators.required],
-      renewalOrgLeadership: ['', Validators.required],
-      renewalkeypersonnel: ['', Validators.required],
-      renewalShareholders: ['', Validators.required],
-      renewalOutstandingFines: ['', Validators.required],
+      id: [""],
+      renewalCriminalOffenceCheck: ["", Validators.required],
+      renewalUnreportedSaleOfBusiness: ["", Validators.required],
+      renewalBusinessType: ["", Validators.required],
+      renewalTiedhouse: ["", Validators.required],
+      tiedhouseFederalInterest: ["", Validators.required],
+      renewalOrgLeadership: ["", Validators.required],
+      renewalkeypersonnel: ["", Validators.required],
+      renewalShareholders: ["", Validators.required],
+      renewalOutstandingFines: ["", Validators.required],
     });
     this.subscribeForData();
   }
@@ -64,11 +61,11 @@ export class AssociatePageComponent extends FormBase implements OnInit {
 
   reconfigureFormFields() {
     if (this.account.isPrivateCorporation() || this.account.isPublicCorporation()) {
-      this.form.get('renewalShareholders').setValidators([Validators.required]);
-      this.form.get('renewalShareholders').reset();
+      this.form.get("renewalShareholders").setValidators([Validators.required]);
+      this.form.get("renewalShareholders").reset();
     } else {
-      this.form.get('renewalShareholders').clearValidators();
-      this.form.get('renewalShareholders').reset();
+      this.form.get("renewalShareholders").clearValidators();
+      this.form.get("renewalShareholders").reset();
     }
   }
 
@@ -86,25 +83,26 @@ export class AssociatePageComponent extends FormBase implements OnInit {
     this.busy = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
-        if (data.establishmentParcelId) {
-          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-        }
-        if (data.applicantType === 'IndigenousNation') {
-          (<any>data).applyAsIndigenousNation = true;
-        }
-        this.application = data;
+          if (data.establishmentParcelId) {
+            data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, "");
+          }
+          if (data.applicantType === "IndigenousNation") {
+            (data as any).applyAsIndigenousNation = true;
+          }
+          this.application = data;
 
-        const noNulls = Object.keys(data)
-          .filter(e => data[e] !== null)
-          .reduce((o, e) => {
-            o[e] = data[e];
-            return o;
-          }, {});
+          const noNulls = Object.keys(data)
+            .filter(e => data[e] !== null)
+            .reduce((o, e) => {
+                o[e] = data[e];
+                return o;
+              },
+              {});
 
-        this.form.patchValue(noNulls);
-      },
+          this.form.patchValue(noNulls);
+        },
         () => {
-          console.log('Error occured');
+          console.log("Error occured");
         }
       );
   }
@@ -113,15 +111,17 @@ export class AssociatePageComponent extends FormBase implements OnInit {
     const saveData = this.form.value;
 
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
-    ).pipe(takeWhile(() => this.componentActive))
+        this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
+      ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         return of(false);
       }))
       .pipe(mergeMap(() => {
         if (showProgress === true) {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open("Application has been saved",
+            "Success",
+            { duration: 2500, panelClass: ["green-snackbar"] });
         }
         return of(true);
       }));
@@ -130,7 +130,7 @@ export class AssociatePageComponent extends FormBase implements OnInit {
   isValid(): boolean {
     // mark controls as touched
     for (const c in this.form.controls) {
-      if (typeof (this.form.get(c).markAsTouched) === 'function') {
+      if (typeof (this.form.get(c).markAsTouched) === "function") {
         this.form.get(c).markAsTouched();
       }
     }
@@ -138,7 +138,7 @@ export class AssociatePageComponent extends FormBase implements OnInit {
     this.validationMessages = [];
 
     if (!this.form.valid) {
-      this.validationMessages.push('Some required fields have not been completed');
+      this.validationMessages.push("Some required fields have not been completed");
     }
     return this.form.valid;
   }

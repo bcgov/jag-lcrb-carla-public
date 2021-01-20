@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { DataService } from './data.service';
-import { MonthlyReport } from '@models/monthly-report.model';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { DataService } from "./data.service";
+import { MonthlyReport } from "@models/monthly-report.model";
 
 @Injectable()
 export class MonthlyReportDataService extends DataService {
 
-  apiPath = 'api/monthlyreports/';
+  apiPath = "api/monthlyreports/";
 
   constructor(private http: HttpClient) {
     super();
@@ -20,24 +20,26 @@ export class MonthlyReportDataService extends DataService {
   }
 
   getMonthlyReportsByLicence(licenceId: string): Observable<MonthlyReport[]> {
-    return this.http.get<MonthlyReport[]>(this.apiPath + 'licence/' + licenceId, {
-      headers: this.headers
-    })
+    return this.http.get<MonthlyReport[]>(this.apiPath + "licence/" + licenceId,
+        {
+          headers: this.headers
+        })
       .pipe(catchError(this.handleError));
   }
 
   getAllCurrentMonthlyReports(expandInventoryReports: boolean): Observable<MonthlyReport[]> {
-    return this.http.get<MonthlyReport[]>(this.apiPath + `current?expandInventoryReports=${expandInventoryReports}`, {
-      headers: this.headers
-    })
+    return this.http.get<MonthlyReport[]>(this.apiPath + `current?expandInventoryReports=${expandInventoryReports}`,
+        {
+          headers: this.headers
+        })
       .pipe(catchError(this.handleError));
   }
 
   updateMonthlyReport(monthlyReport: MonthlyReport) {
     return this.http.put<MonthlyReport>(
-      this.apiPath + monthlyReport.monthlyReportId,
-      monthlyReport,
-      { headers: this.headers })
+        this.apiPath + monthlyReport.monthlyReportId,
+        monthlyReport,
+        { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 }

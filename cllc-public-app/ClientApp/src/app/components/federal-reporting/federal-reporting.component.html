@@ -18,13 +18,14 @@
           {{ licence.licenseNumber }} - {{ licence.establishmentName }}
         </ng-template>
         <h3 *ngIf="shownMonthlyReports.length < 1; else elseBlock" [class.hidden]="loadingMonthlyReports">There is not yet any monthly reports to report on. Please check back later.</h3>
-        <ng-template #elseBlock><h4 class="bold">Select Monthly Report:</h4></ng-template>
+        <ng-template #elseBlock>
+          <h4 class="bold">Select Monthly Report:</h4>
+        </ng-template>
         <mat-tab-group
           [selectedIndex]="selectedMonthlyReportIndex"
           (selectedTabChange)="handleMonthlyReportTabChanged($event);"
           *ngIf="shownMonthlyReports.length > 0"
-          [class.hidden]="loadingMonthlyReports"
-        >
+          [class.hidden]="loadingMonthlyReports">
           <mat-tab *ngFor="let report of shownMonthlyReports; index as tabIndex;">
             <ng-template mat-tab-label>
               <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;" *ngIf="report.statusCode === monthlyReportStatusEnum.Draft"></fa-icon>
@@ -37,10 +38,12 @@
                     <h2>{{getMonthName(report.reportingPeriodMonth)}} {{report.reportingPeriodYear}} monthly report for {{licence.establishmentName}}</h2>
                   </div>
                   <div class="row mx-0 d-flex align-items-baseline">
-                    <h3>Status: <span style="margin-left: 10px; font-weight: bold;">
-                      <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;" *ngIf="report.statusCode === monthlyReportStatusEnum.Draft"></fa-icon>
-                      {{monthlyReportStatusEnum[shownMonthlyReports[tabIndex].statusCode] | uppercase}}
-                    </span>
+                    <h3>
+                      Status:
+                      <span style="font-weight: bold; margin-left: 10px;">
+                        <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;" *ngIf="report.statusCode === monthlyReportStatusEnum.Draft"></fa-icon>
+                        {{monthlyReportStatusEnum[shownMonthlyReports[tabIndex].statusCode] | uppercase}}
+                      </span>
                       <fa-icon data-html="true" style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle" matTooltipClass="multiline-tooltip" matTooltip="DRAFT: The monthly report has not be completed&#13;SUBMITTED: The monthly report has been completed and is ready to be sent to CTLS&#13;CLOSED: The monthly report has been sent to CTLS"></fa-icon>
                     </h3><a [routerLink]="" (click)="save(false)" *ngIf="reportIsSubmitted">Reopen Monthly Report</a>
                   </div>
@@ -53,10 +56,10 @@
                   <div *ngIf="reportForm.invalid && (reportForm.dirty || reportForm.touched)">
                     <div class="alert alert-danger">Number of employees must be a whole number less than 10000.</div>
                   </div>
-                  <div class="form-group row mx-0" >
+                  <div class="form-group row mx-0">
                     <label class="col-xl-1 col-xs-3 col-form-label">Management:</label>
                     <div class="col-xs-2 col-lg-1">
-                      <div style="display: flex; align-items: center;">
+                      <div style="align-items: center; display: flex;">
                         <input class="form-control" type="text" formControlName="employeesManagement">
                         <div *ngIf="isFieldInvalid('employeesManagement') && !reportIsDisabled" style="flex: 0 0 25px;">
                           <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
@@ -65,10 +68,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group row mx-0" >
+                  <div class="form-group row mx-0">
                     <label class="col-xl-1 col-xs-3 col-form-label">Administrative:</label>
                     <div class="col-xs-2 col-lg-1">
-                      <div style="display: flex; align-items: center;">
+                      <div style="align-items: center; display: flex;">
                         <input class="form-control" type="text" formControlName="employeesAdministrative">
                         <div *ngIf="isFieldInvalid('employeesAdministrative') && !reportIsDisabled" style="flex: 0 0 25px;">
                           <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
@@ -77,10 +80,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group row mx-0" >
+                  <div class="form-group row mx-0">
                     <label class="col-xl-1 col-xs-3 col-form-label">Sales:</label>
                     <div class="col-xs-2 col-lg-1">
-                      <div style="display: flex; align-items: center;">
+                      <div style="align-items: center; display: flex;">
                         <input class="form-control" type="text" formControlName="employeesSales">
                         <div *ngIf="isFieldInvalid('employeesSales') && !reportIsDisabled" style="flex: 0 0 25px;">
                           <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
@@ -89,10 +92,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group row mx-0" >
+                  <div class="form-group row mx-0">
                     <label class="col-xl-1 col-xs-3 col-form-label">Production:</label>
                     <div class="col-xs-2 col-lg-1">
-                      <div style="display: flex; align-items: center;">
+                      <div style="align-items: center; display: flex;">
                         <input class="form-control" type="text" formControlName="employeesProduction">
                         <div *ngIf="isFieldInvalid('employeesProduction') && !reportIsDisabled" style="flex: 0 0 25px;">
                           <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
@@ -101,10 +104,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group row mx-0" >
+                  <div class="form-group row mx-0">
                     <label class="col-xl-1 col-xs-3 col-form-label">Other:</label>
                     <div class="col-xs-2 col-lg-1">
-                      <div style="display: flex; align-items: center;">
+                      <div style="align-items: center; display: flex;">
                         <input class="form-control" type="text" formControlName="employeesOther">
                         <div *ngIf="isFieldInvalid('employeesOther') && !reportIsDisabled" style="flex: 0 0 25px;">
                           <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
@@ -123,7 +126,9 @@
                     <mat-checkbox
                       [checked]="isProductSelected(productForm.value.inventoryReportId)"
                       (click)="toggleProductVisibility(productForm.value.inventoryReportId);"
-                      [disabled]="reportIsDisabled">{{productForm.value.product}}</mat-checkbox>
+                      [disabled]="reportIsDisabled">
+                      {{productForm.value.product}}
+                    </mat-checkbox>
                     <fa-icon data-html="true" style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle" matTooltipClass="multiline-tooltip" matTooltip="{{productForm.value.productDescription}}"></fa-icon>
                   </div>
                 </div>
@@ -136,8 +141,8 @@
                   <app-product-inventory-sales-report
                     [productForm]="productForm"
                     [visibleInventoryReports]="visibleInventoryReports"
-                    *ngFor="let productForm of productForms"
-                  ></app-product-inventory-sales-report>
+                    *ngFor="let productForm of productForms">
+                  </app-product-inventory-sales-report>
                 </div>
                 <div class="row mx-0" *ngIf="!reportIsDisabled">
                   <button class="btn btn-primary mt-5 mr-5" (click)="save(false)">

@@ -1,12 +1,12 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element } from "protractor";
 
 export class CannabisRetailLicensingPage {
-    navigateTo() {
-      return browser.get('/cannabislicensing/policy-document/cannabis-retail-licence');
-    }
+  navigateTo() {
+    return browser.get("/cannabislicensing/policy-document/cannabis-retail-licence");
+  }
 
-    getMainHeading() {
-      return element(by.css('app-root h1')).getText();
-    }   
+  getMainHeading() {
+    return element(by.css("app-root h1")).getText();
+  }
 
 }

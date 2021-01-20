@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
-import { MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit, Inject } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+  selector: "app-modal",
+  templateUrl: "./modal.component.html",
+  styleUrls: ["./modal.component.scss"]
 })
 export class ModalComponent implements OnInit {
   title: string;

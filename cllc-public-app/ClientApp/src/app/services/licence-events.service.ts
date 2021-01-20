@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { DataService } from './data.service';
-import { LicenceEvent } from '@models/licence-event.model';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { DataService } from "./data.service";
+import { LicenceEvent } from "@models/licence-event.model";
 
 @Injectable()
 export class LicenceEventsService extends DataService {
-  apiPath = 'api/licenceevents/';
+  apiPath = "api/licenceevents/";
 
   constructor(private http: HttpClient) {
     super();
@@ -21,7 +21,7 @@ export class LicenceEventsService extends DataService {
   }
 
   updateLicenceEvent(eventId: string, licenceEvent: LicenceEvent): Observable<LicenceEvent> {
-    return this.http.put<LicenceEvent>(this.apiPath + eventId, licenceEvent, {headers: this.headers });
+    return this.http.put<LicenceEvent>(this.apiPath + eventId, licenceEvent, { headers: this.headers });
   }
 
   getLicenceEventsList(licenceId: string, num: number): Observable<LicenceEvent[]> {

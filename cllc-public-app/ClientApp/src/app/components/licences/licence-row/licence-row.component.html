@@ -1,32 +1,34 @@
 <div [ngBusy]="busy">
-    <div *ngIf="available">
-        <h2>{{licenceType}}</h2>
-        <form [formGroup]="mainForm">
-            <table class="eq-table">
-                <tr>
-                    <th class="p-0">
-                        <img *ngIf="licenceType === 'Cannabis Retail Store'" class="icon"
-                            src="assets/Cannabis-store-icon-blue-40px.png" alt="">
-                        <img *ngIf="licenceType === 'Section 119 Authorization'" class="icon"
-                            src="assets/Cannabis-store-icon-blue-40px.png" alt="">
-                        <img *ngIf="licenceType === 'Marketing'" class="icon"
-                            src="assets/Cannabis-marketing-icon-blue-40px.png" alt="">
-                        <img *ngIf="licenceType === 'Catering'" class="icon" src="assets/Catering-icon-blue-40px.png"
-                            alt="">
-                        <img *ngIf="licenceType === 'Wine Store'" class="icon"
-                            src="assets/Wine-store-icon-blue-40px.png" alt="">
-                    </th>
-                    <th style="width:250px;">Details</th>
-                    <th style="width:250px;">Location</th>
-                    <th style="width:250px;">Operate</th>
-                    <th style="width:300px;">Request Changes</th>
-                    <!-- <th *ngIf="licenceType === 'Catering'">Event History</th>
-            <th *ngIf="licenceType !== 'Catering'"></th> -->
-                </tr>
-                <ng-container *ngFor="let item of licences; let i = index;">
-                    <tr [formGroup]="licenceForms[item.licenseId]" style="border: 1px solid #ccc; ">
-                        <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"
-                            [attr.rowspan]="item.headerRowSpan"><span>{{i+1}}</span></td>
+<div *ngIf="available">
+<h2>{{licenceType}}</h2>
+<form [formGroup]="mainForm">
+<table class="eq-table">
+<tr>
+  <th class="p-0">
+    <img *ngIf="licenceType === 'Cannabis Retail Store'" class="icon"
+         src="assets/Cannabis-store-icon-blue-40px.png" alt="">
+    <img *ngIf="licenceType === 'Section 119 Authorization'" class="icon"
+         src="assets/Cannabis-store-icon-blue-40px.png" alt="">
+    <img *ngIf="licenceType === 'Marketing'" class="icon"
+         src="assets/Cannabis-marketing-icon-blue-40px.png" alt="">
+    <img *ngIf="licenceType === 'Catering'" class="icon" src="assets/Catering-icon-blue-40px.png"
+         alt="">
+    <img *ngIf="licenceType === 'Wine Store'" class="icon"
+         src="assets/Wine-store-icon-blue-40px.png" alt="">
+  </th>
+  <th style="width: 250px;">Details</th>
+  <th style="width: 250px;">Location</th>
+  <th style="width: 250px;">Operate</th>
+  <th style="width: 300px;">Request Changes</th>
+  <!-- <th *ngIf="licenceType === 'Catering'">Event History</th>
+  <th *ngIf="licenceType !== 'Catering'"></th> -->
+</tr>
+<ng-container *ngFor="let item of licences; let i = index;">
+<tr [formGroup]="licenceForms[item.licenseId]" style="border: 1px solid #ccc;">
+<td style="background-color: #E1E8F2; padding: 10px; width: 15px;"
+    [attr.rowspan]="item.headerRowSpan">
+  <span>{{i+1}}</span>
+</td>
 
                         <!-- DETAILS column -->
                         <td style="padding: 10px;">
@@ -43,63 +45,85 @@
                                     *ngIf="item?.licenceTypeName !== 'Section 119 Authorization'">Licence</span>
                                 Number:<i>{{item.licenseNumber}}</i></span>
 
-                            <br>
-                            <span *ngIf="isActive(item)">Expiry / Renewal Date:
-                                {{item.expiryDate | date: 'MM/dd/yyyy'}}</span>
-                            <br>
-                            <span>Status: <strong>{{getLicenceStatusText(item.status)}}</strong></span>
-                            <br>
-                            <div *ngIf="!item.isOperated && isActive(item) && actionsVisible(item) && item?.licenceTypeName !== 'Section 119 Authorization'"
-                                style="min-width: 10px;">
-                                <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'"
-                                    download>
-                                    <span>
-                                        <fa-icon [icon]="faDownLoad" style="margin-right: 10px;"></fa-icon>Download
-                                        Licence
-                                    </span>
-                                </a>
-                            </div>
-                            <div
-                                *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
-                                <a *ngIf="!item.hasPaidForRenewalApplication && item.autoRenewal"
-                                    href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-                                    <span>
-                                        <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
-                                        {{(isAboutToExpire(item) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}
-                                        Licence
-                                    </span>
-                                </a>
-                                <span *ngIf="item.hasPaidForRenewalApplication" color="accent">Renewal Application
-                                    Submitted</span>
-                            </div>
-                            <div class="flags" class="missing">
-                                <p *ngIf="item.dormant"><fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>Licence
-                                    Dormant<fa-icon [icon]="faQuestionCircle" data-html="true" style="margin-left: 10px;"
-                                        matTooltipClass="multiline-tooltip"
-                                        matTooltip="Please contact LCRB to remove dormancy"></fa-icon></p>
-                                <p *ngIf="item.suspended"><fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>Licence
-                                    Suspended<fa-icon [icon]="faQuestionCircle" data-html="true" style="margin-left: 10px;"
-                                         matTooltipClass="multiline-tooltip"
-                                        matTooltip="Please contact LCRB to remove suspension"></fa-icon></p>
-                                <p *ngIf="item.transferRequested"><fa-icon [icon]="faFlag"
-                                        style="margin-right: 10px;"></fa-icon>Transfer Requested</p>
-                                <p *ngIf="item.operated && !item.isOperated"><fa-icon [icon]="faFlag"
-                                        style="margin-right: 10px;"></fa-icon>Licence Operated</p>
-                            </div>
-                            <br>
-                            <div
-                                *ngIf="item.licenceTypeCategory === 'Liquor' && isActive(item) && actionsVisible(item) && !item.isOperated">
-                                <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
-                                    <span *ngIf="!item.representativeFullName">Add Licensee Representative</span>
-                                    <span *ngIf="item.representativeFullName">Licensee Representative:
-                                        <strong>{{item.representativeFullName}}</strong></span>
-                                </a>
-                            </div>
-                            <div *ngIf="showManageOffsiteStorage(item)">
-                                <a [routerLink]="[ '/licence/' + item.licenseId + '/offsite-storage']">Manage Off-Site
-                                    Storage</a>
-                            </div>
-                        </td>
+  <br>
+  <span *ngIf="isActive(item)">
+    Expiry / Renewal Date:
+    {{item.expiryDate | date: 'MM/dd/yyyy'}}
+  </span>
+  <br>
+  <span>Status: <strong>{{getLicenceStatusText(item.status)}}</strong></span>
+  <br>
+  <div *ngIf="!item.isOperated && isActive(item) && actionsVisible(item) && item?.licenceTypeName !== 'Section 119 Authorization'"
+       style="min-width: 10px;">
+    <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'"
+       download>
+      <span>
+        <fa-icon [icon]="faDownLoad" style="margin-right: 10px;"></fa-icon>Download
+        Licence
+      </span>
+    </a>
+  </div>
+  <div
+    *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
+    <a *ngIf="!item.hasPaidForRenewalApplication && item.autoRenewal"
+       href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
+      <span>
+        <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
+        {{(isAboutToExpire(item) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}
+        Licence
+      </span>
+    </a>
+    <span *ngIf="item.hasPaidForRenewalApplication" color="accent">
+      Renewal Application
+      Submitted
+    </span>
+  </div>
+  <div class="flags" class="missing">
+    <p *ngIf="item.dormant">
+      <fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>Licence
+      Dormant
+      <fa-icon [icon]="faQuestionCircle" data-html="true" style="margin-left: 10px;"
+               matTooltipClass="multiline-tooltip"
+               matTooltip="Please contact LCRB to remove dormancy">
+      </fa-icon>
+    </p>
+    <p *ngIf="item.suspended">
+      <fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>Licence
+      Suspended
+      <fa-icon [icon]="faQuestionCircle" data-html="true" style="margin-left: 10px;"
+               matTooltipClass="multiline-tooltip"
+               matTooltip="Please contact LCRB to remove suspension">
+      </fa-icon>
+    </p>
+    <p *ngIf="item.transferRequested">
+      <fa-icon [icon]="faFlag"
+               style="margin-right: 10px;">
+      </fa-icon>Transfer Requested
+    </p>
+    <p *ngIf="item.operated && !item.isOperated">
+      <fa-icon [icon]="faFlag"
+               style="margin-right: 10px;">
+      </fa-icon>Licence Operated
+    </p>
+  </div>
+  <br>
+  <div
+    *ngIf="item.licenceTypeCategory === 'Liquor' && isActive(item) && actionsVisible(item) && !item.isOperated">
+    <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
+      <span *ngIf="!item.representativeFullName">Add Licensee Representative</span>
+      <span *ngIf="item.representativeFullName">
+        Licensee Representative:
+        <strong>{{item.representativeFullName}}</strong>
+      </span>
+    </a>
+  </div>
+  <div *ngIf="showManageOffsiteStorage(item)">
+    <a [routerLink]="[ '/licence/' + item.licenseId + '/offsite-storage']">
+      Manage Off-Site
+      Storage
+    </a>
+  </div>
+</td>
 
                         <!-- LOCATION column -->
                         <td style="padding: 10px;">
@@ -213,21 +237,26 @@
                                 </div>
                             </div>
 
-                            <!-- Indicate third party operator relationship established-->
-                            <ng-container *ngIf="item.thirdPartyOperatorAccountName">
-                                <br>
-                                <span>Operated By: </span><strong
-                                    style="color: #1a5a96;">{{item.thirdPartyOperatorAccountName}}</strong>
-                                <br>
-                                <span>Licenced To: </span><strong style="color: #1a5a96;">{{item.currentOwner}}</strong>
+  <!-- Indicate third party operator relationship established-->
+  <ng-container *ngIf="item.thirdPartyOperatorAccountName">
+    <br>
+    <span>Operated By: </span>
+    <strong
+      style="color: #1a5a96;">
+      {{item.thirdPartyOperatorAccountName}}
+    </strong>
+    <br>
+    <span>Licenced To: </span><strong style="color: #1a5a96;">{{item.currentOwner}}</strong>
 
-                            </ng-container>
-                            <a *ngIf="item.operated && !item.isOperated"
-                                [routerLink]="[ '/terminate-third-party-operator/' + item.licenseId]">
-                                <span><fa-icon [icon]="faTrashAlt" style="margin-right: 10px;"></fa-icon>Terminate Third Party
-                                    Operator Relationship</span>
-                            </a>
-                        </td>
+  </ng-container>
+  <a *ngIf="item.operated && !item.isOperated"
+     [routerLink]="[ '/terminate-third-party-operator/' + item.licenseId]">
+    <span>
+      <fa-icon [icon]="faTrashAlt" style="margin-right: 10px;"></fa-icon>Terminate Third Party
+      Operator Relationship
+    </span>
+  </a>
+</td>
 
                         <!-- REQUEST CHANGES column -->
                         <td style="background-color: #E1E8F2; padding: 10px;">
@@ -283,122 +312,154 @@
                                     </div>
                                 </div>
 
-                                <!-- <section
-                            *ngIf="isActive(item) && item.transferRequested"
-                            class="missing">
-                            <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]" class="missing">
-                            <span><fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>Cancel Transfer</span>
-                            </a>
-                        </section> -->
-                            </div>
-                            <section *ngIf="item.isOperated"><i>3rd-Party Operators cannot request changes to the
-                                    licence. All
-                                    change requests
-                                    for the licence must be requested by the Licensee.</i>
-                            </section>
-                        </td>
-                    </tr>
+    <!-- <section
+           *ngIf="isActive(item) && item.transferRequested"
+           class="missing">
+      <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]" class="missing">
+        <span><fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>Cancel Transfer</span>
+      </a>
+    </section> -->
+  </div>
+  <section *ngIf="item.isOperated">
+    <i>
+      3rd-Party Operators cannot request changes to the
+      licence. All
+      change requests
+      for the licence must be requested by the Licensee.
+    </i>
+  </section>
+</td>
+</tr>
 
-                    <tr *ngIf="item?.events !== undefined && item?.events.length > 0">
-                        <td colspan="5">
-                            <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>Event History <fa-icon [icon]="faCalendarAlt"
-                                            style="margin-left: 10px;"></fa-icon></mat-panel-title>
-                                    <mat-panel-description id="{{'expand-history-button-' + i}}">Click to expand or
-                                        collapse</mat-panel-description>
-                                </mat-expansion-panel-header>
-                                <table style="width: 100%; text-align: center;">
-                                    <thead>
-                                        <th>Event Status</th>
-                                        <th>Number</th>
-                                        <th>Name</th>
-                                        <th>Date Submitted</th>
-                                        <th></th>
-                                        <th>Authorization</th>
-                                    </thead>
-                                    <tr *ngFor="let event of item?.events">
-                                        <td><a
-                                                [routerLink]="[ '/licence/' + item.licenseId + getEventPath(event) + event.id]">{{getOptionFromValue(eventStatus,
-                                                event.status).label}}</a>
-                                        </td>
-                                        <td>{{event.eventNumber}}</td>
-                                        <td>{{getEventName(event)}}</td>
-                                        <td>{{event.modifiedOn | date:'mediumDate'}}</td>
-                                        <td><a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id + '/security']"
-                                                *ngIf="event.securityPlanRequested">Security Plan</a></td>
-                                        <td
-                                            *ngIf="getOptionFromValue(eventStatus, event.status).label === 'Approved';else empty_td">
-                                            <a [href]="'api/licenceevents/' + event.id + '/authorization.pdf'" download>
-                                                <span><fa-icon [icon]="faDownLoad" style="margin-right: 10px;"></fa-icon>
-                                                    Download Authorization
-                                                </span>
-                                            </a>
-                                        </td>
-                                        <ng-template #empty_td>
-                                            <td></td>
-                                        </ng-template>
-                                    </tr>
-                                </table>
-                            </mat-expansion-panel>
-                        </td>
-                    </tr>
-                    <tr *ngIf="licenceTypeHasTerms(item?.licenceTypeName) && !item?.termsAndConditionsBusy?.closed">
-                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-                    </tr>
-                    <tr *ngIf="item?.termsAndConditions !== null && item?.termsAndConditions.length > 0">
-                        <td colspan="5">
-                            <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Terms and Conditions
-                                    </mat-panel-title>
-                                    <mat-panel-description>
-                                        Click to expand or collapse
-                                    </mat-panel-description>
-                                </mat-expansion-panel-header>
-                                <ul style="width: 100%;">
-                                    <li *ngFor="let term of item?.termsAndConditions">{{term.content}}</li>
-                                </ul>
-                            </mat-expansion-panel>
-                        </td>
-                    </tr>
-                </ng-container>
-            </table>
+<tr *ngIf="item?.events !== undefined && item?.events.length > 0">
+  <td colspan="5">
+    <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Event History
+          <fa-icon [icon]="faCalendarAlt"
+                   style="margin-left: 10px;">
+          </fa-icon>
+        </mat-panel-title>
+        <mat-panel-description id="{{'expand-history-button-' + i}}">
+          Click to expand or
+          collapse
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <table style="text-align: center; width: 100%;">
+        <thead>
+        <th>Event Status</th>
+        <th>Number</th>
+        <th>Name</th>
+        <th>Date Submitted</th>
+        <th></th>
+        <th>Authorization</th>
+        </thead>
+        <tr *ngFor="let event of item?.events">
+          <td>
+            <a
+              [routerLink]="[ '/licence/' + item.licenseId + getEventPath(event) + event.id]">
+              {{getOptionFromValue(eventStatus,
+              event.status).label}}
+            </a>
+          </td>
+          <td>{{event.eventNumber}}</td>
+          <td>{{getEventName(event)}}</td>
+          <td>{{event.modifiedOn | date:'mediumDate'}}</td>
+          <td>
+            <a [routerLink]="[ '/licence/' + item.licenseId + '/event/' + event.id + '/security']"
+               *ngIf="event.securityPlanRequested">
+              Security Plan
+            </a>
+          </td>
+          <td
+            *ngIf="getOptionFromValue(eventStatus, event.status).label === 'Approved';else empty_td">
+            <a [href]="'api/licenceevents/' + event.id + '/authorization.pdf'" download>
+              <span>
+                <fa-icon [icon]="faDownLoad" style="margin-right: 10px;"></fa-icon>
+                Download Authorization
+              </span>
+            </a>
+          </td>
+          <ng-template #empty_td>
+            <td></td>
+          </ng-template>
+        </tr>
+      </table>
+    </mat-expansion-panel>
+  </td>
+</tr>
+<tr *ngIf="licenceTypeHasTerms(item?.licenceTypeName) && !item?.termsAndConditionsBusy?.closed">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</tr>
+<tr *ngIf="item?.termsAndConditions !== null && item?.termsAndConditions.length > 0">
+  <td colspan="5">
+    <mat-expansion-panel [expanded]="false" class="mat-elevation-z1">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Terms and Conditions
+        </mat-panel-title>
+        <mat-panel-description>
+          Click to expand or collapse
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ul style="width: 100%;">
+        <li *ngFor="let term of item?.termsAndConditions">{{term.content}}</li>
+      </ul>
+    </mat-expansion-panel>
+  </td>
+</tr>
+</ng-container>
+</table>
 
-        </form>
+</form>
 
-        <ng-container *ngIf="getHandbookLink(licenceType) !== '404'">
-            <p *ngIf="!licenceType.includes('Operated') && licenceType !== 'Section 119 Authorization'"
-                style="text-align: center; font-style: italic;">All
-                {{licenceType}} licence holders must follow the terms
-                and
-                conditions of their licence as set out in the <a href="{{getHandbookLink(licenceType)}}"
-                    target="_blank">{{licenceType}} Terms and Conditions Handbook</a></p>
-            <p *ngIf="!licenceType.includes('Operated') && licenceType === 'Section 119 Authorization'"
-                style="text-align: center; font-style: italic;">All
-                {{licenceType}} holders must follow the terms
-                and
-                conditions set out in the <a href="{{getHandbookLink(licenceType)}}" target="_blank">Cannabis Retail
-                    Store Licence Terms and Conditions Handbook</a> for anything not explicitly covered by their
-                authorization agreement.</p>
-            <p *ngIf="licenceType.includes('Operated')" style="text-align: center; font-style: italic;">All Third Party
-                Operators must follow the terms
-                and
-                conditions as set out in the <a href="{{getHandbookLink(licenceType)}}" target="_blank">Terms and
-                    Conditions
-                    Handbook</a></p>
-        </ng-container>
-        <p>&nbsp;</p>
-    </div>
+<ng-container *ngIf="getHandbookLink(licenceType) !== '404'">
+  <p *ngIf="!licenceType.includes('Operated') && licenceType !== 'Section 119 Authorization'"
+     style="font-style: italic; text-align: center;">
+    All
+    {{licenceType}} licence holders must follow the terms
+    and
+    conditions of their licence as set out in the
+    <a href="{{getHandbookLink(licenceType)}}"
+       target="_blank">
+      {{licenceType}} Terms and Conditions Handbook
+    </a>
+  </p>
+  <p *ngIf="!licenceType.includes('Operated') && licenceType === 'Section 119 Authorization'"
+     style="font-style: italic; text-align: center;">
+    All
+    {{licenceType}} holders must follow the terms
+    and
+    conditions set out in the
+    <a href="{{getHandbookLink(licenceType)}}" target="_blank">
+      Cannabis Retail
+      Store Licence Terms and Conditions Handbook
+    </a> for anything not explicitly covered by their
+    authorization agreement.
+  </p>
+  <p *ngIf="licenceType.includes('Operated')" style="font-style: italic; text-align: center;">
+    All Third Party
+    Operators must follow the terms
+    and
+    conditions as set out in the
+    <a href="{{getHandbookLink(licenceType)}}" target="_blank">
+      Terms and
+      Conditions
+      Handbook
+    </a>
+  </p>
+</ng-container>
+<p>&nbsp;</p>
+</div>
 
-    <div *ngIf="!available">
-        <h3>{{licenceType}} Licences - <i>Coming Soon</i></h3>
-        <ul>
-            <ng-container *ngFor="let item of licences; let i = index;">
-                <li style="font-size: 16px;">{{item.licenseNumber}} - {{item.establishmentName}}</li>
-            </ng-container>
+<div *ngIf="!available">
+  <h3>{{licenceType}} Licences - <i>Coming Soon</i></h3>
+  <ul>
+    <ng-container *ngFor="let item of licences; let i = index;">
+      <li style="font-size: 16px;">{{item.licenseNumber}} - {{item.establishmentName}}</li>
+    </ng-container>
 
-        </ul>
-    </div>
+  </ul>
+</div>
 </div>

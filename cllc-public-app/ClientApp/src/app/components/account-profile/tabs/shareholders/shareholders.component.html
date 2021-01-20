@@ -1,95 +1,98 @@
 <div [ngBusy]="busy">
-  <div [ngBusy]="busyObsv">
+<div [ngBusy]="busyObsv">
 
-    <div>
-      <p *ngIf="dataSource?.data?.length">
-        The following shareholder information is on file for the account.
-      </p>
-      <p *ngIf="!dataSource?.data?.length">
-        There is no shareholder information currently on file for this account.
-      </p>
+  <div>
+    <p *ngIf="dataSource?.data?.length">
+      The following shareholder information is on file for the account.
+    </p>
+    <p *ngIf="!dataSource?.data?.length">
+      There is no shareholder information currently on file for this account.
+    </p>
 
-      <mat-table *ngIf="dataSource?.data?.length" #table [dataSource]="dataSource">
+    <mat-table *ngIf="dataSource?.data?.length" #table [dataSource]="dataSource">
 
-        <!-- Column -->
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
 
 
-        <!-- Column -->
-        <ng-container matColumnDef="additional">
-          <mat-header-cell *matHeaderCellDef> Additional</mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span *ngIf="element.isindividual "> {{element.dateofbirth | date : 'dd MMM yyyy'}}</span>
-            <span *ngIf="!element.isindividual "> {{getPosition(element)}}</span>
-          </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="additional">
+        <mat-header-cell *matHeaderCellDef> Additional</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span *ngIf="element.isindividual "> {{element.dateofbirth | date : 'dd MMM yyyy'}}</span>
+          <span *ngIf="!element.isindividual "> {{getPosition(element)}}</span>
+        </mat-cell>
+      </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="commonnonvotingshares">
-          <mat-header-cell *matHeaderCellDef> Number of Non-voting Shares </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.commonnonvotingshares}} </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="commonnonvotingshares">
+        <mat-header-cell *matHeaderCellDef> Number of Non-voting Shares </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.commonnonvotingshares}} </mat-cell>
+      </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="commonvotingshares">
-          <mat-header-cell *matHeaderCellDef> Number of Voting Shares </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.commonvotingshares}} </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="commonvotingshares">
+        <mat-header-cell *matHeaderCellDef> Number of Voting Shares </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.commonvotingshares}} </mat-cell>
+      </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="percentageVotingShares">
-          <mat-header-cell *matHeaderCellDef> Percentage of Voting Shares</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.percentageVotingShares}} %</mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="percentageVotingShares">
+        <mat-header-cell *matHeaderCellDef> Percentage of Voting Shares</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.percentageVotingShares}} %</mat-cell>
+      </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="email">
-          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="edit">
-          <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
-          <mat-cell *matCellDef="let element"> <a href="javascript: void(0)" (click)="openShareholderDialog(element)">Edit</a>
-          </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <a href="javascript: void(0)" (click)="openShareholderDialog(element)">Edit</a>
+        </mat-cell>
+      </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="delete">
-          <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
-          <mat-cell *matCellDef="let element"> <a href="javascript: void(0)"
-              (click)="deleteShareholder(element)">Delete</a> </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <a href="javascript: void(0)"
+             (click)="deleteShareholder(element)">
+            Delete
+          </a>
+        </mat-cell>
+      </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
-    </div>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
   </div>
-  <p *ngIf="dataSource?.data?.length" style="margin-top: 10px;">
-    Total Voting Shares: {{totalShares}}
-  </p>
-  <div style="margin-bottom: 30px">
-    <a *ngIf="!lockAssociates" tabindex="1" (click)="openShareholderDialog(null)">
-      <strong><fa-icon [icon]="faPlus"></fa-icon> Add Shareholder</strong>
-      <br>
-    </a>
-  </div>
+</div>
+<p *ngIf="dataSource?.data?.length" style="margin-top: 10px;">
+  Total Voting Shares: {{totalShares}}
+</p>
+<div style="margin-bottom: 30px">
+  <a *ngIf="!lockAssociates" tabindex="1" (click)="openShareholderDialog(null)">
+    <strong><fa-icon [icon]="faPlus"></fa-icon> Add Shareholder</strong>
+    <br>
+  </a>
+</div>
 
-  <div [ngBusy]="busy"></div>
+<div [ngBusy]="busy"></div>
 
-  <!-- <section
-    *ngIf="['LimitedPartnership', 'GeneralPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) == -1">
-    <label *ngIf="['PublicCorporation'].indexOf(businessType) === -1" for="">Upload the corporation's Central Securities
-      Register</label>
-    <label *ngIf="['PublicCorporation'].indexOf(businessType) !== -1" for="">Upload a document showing the shareholders
-      with a 10% or greater interest in the company</label>
-    <app-file-uploader documentType="Central Securities Register" entityName="account" [entityId]="accountId">
-    </app-file-uploader>
-  </section> -->
-
-
+<!-- <section
+       *ngIf="['LimitedPartnership', 'GeneralPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) == -1">
+  <label *ngIf="['PublicCorporation'].indexOf(businessType) === -1" for="">Upload the corporation's Central Securities
+    Register</label>
+  <label *ngIf="['PublicCorporation'].indexOf(businessType) !== -1" for="">Upload a document showing the shareholders
+    with a 10% or greater interest in the company</label>
+  <app-file-uploader documentType="Central Securities Register" entityName="account" [entityId]="accountId">
+  </app-file-uploader>
+</section> -->
