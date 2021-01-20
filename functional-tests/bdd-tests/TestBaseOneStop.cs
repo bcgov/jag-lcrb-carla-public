@@ -106,7 +106,7 @@ namespace bdd_tests
 
             if (buttonType == "Try it out button for SendChangeAddress")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("/html/body/div[1]/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[1]/div/div[2]/div/div[1]/div[1]/div[2]/button"));
+                IWebElement uiButton = ngDriver.FindElement(By.XPath("/html/body/div/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[1]/div/div[2]/div/div[1]/div[1]/div[2]/button"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
@@ -140,79 +140,23 @@ namespace bdd_tests
             }
 
             /********************
-            *  Execute buttons
+            *  Execute button
             ********************/
 
-            if (buttonType == "Execute button for SendChangeAddress")
+            if (buttonType == "Execute button")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector(".opblock-control__btn"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Execute button for SendChangeName")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Execute button for SendChangeStatus")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Execute button for SendLicenceCreationMessage")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Execute button for SendProgramAccountDetailsBroadcastMessage")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("button.execute"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
             /********************
-            *  Clear buttons
+            *  Clear button
             ********************/
 
-            if (buttonType == "Clear button for SendChangeAddress")
+            if (buttonType == "Clear button")
             {
                 IWebElement uiButton = ngDriver.FindElement(By.CssSelector("button.btn-clear"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Clear button for SendChangeName")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Clear button for SendChangeStatus")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Clear button for SendLicenceCreationMessage")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Clear button for SendProgramAccountDetailsBroadcastMessage")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
