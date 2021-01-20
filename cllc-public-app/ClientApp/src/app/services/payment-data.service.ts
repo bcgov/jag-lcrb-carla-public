@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DataService } from './data.service';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { DataService } from "./data.service";
+import { catchError } from "rxjs/operators";
 
 /**
  * 
  */
 @Injectable()
 export class PaymentDataService extends DataService {
-  apiPath = 'api/payment/';
-  submitPath = 'submit/';
-  verifyPath = 'verify/';
+  apiPath = "api/payment/";
+  submitPath = "submit/";
+  verifyPath = "verify/";
 
   readonly paymentTypes = {
     default: {
@@ -41,7 +41,7 @@ export class PaymentDataService extends DataService {
 
   getPaymentURI(paymentType: string, id: string) {
     const payType = this.paymentTypes[paymentType];
-    if (!payType){
+    if (!payType) {
       return;
     }
     return this.http.get(payType.getPaymentURI(id), { headers: this.headers })
@@ -63,7 +63,7 @@ export class PaymentDataService extends DataService {
   }
 
   getInvoiceFeePaymentSubmissionUrl(id: string) {
-    const invoiceFeePath = 'submit/licence-fee/';
+    const invoiceFeePath = "submit/licence-fee/";
     return this.http.get(this.apiPath + invoiceFeePath + id, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
@@ -79,7 +79,7 @@ export class PaymentDataService extends DataService {
   }
 
   verifyLicenceFeePaymentSubmission(id: string) {
-    return this.http.get(this.apiPath + this.verifyPath + 'licence-fee/' + id, { headers: this.headers })
+    return this.http.get(this.apiPath + this.verifyPath + "licence-fee/" + id, { headers: this.headers })
       .pipe(catchError(this.handleErrorWith503));
   }
 

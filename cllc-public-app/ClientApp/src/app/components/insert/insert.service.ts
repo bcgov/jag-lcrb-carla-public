@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { InsertComponent } from './insert.component';
+import { Injectable } from "@angular/core";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { InsertComponent } from "./insert.component";
 
 @Injectable()
 export class InsertService {
@@ -12,13 +12,11 @@ export class InsertService {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         let route = this.activatedRoute;
-        const sidebarLeft = null;
-        const sidebarRight = null;
 
         while (route.firstChild) {
           route = route.firstChild;
         }
-        if (route.outlet === 'primary') {
+        if (route.outlet === "primary") {
           const data = route.snapshot.data;
           const updates = {};
           // tslint:disable-next-line:forin
@@ -47,7 +45,7 @@ export class InsertService {
       // may be blank, in which case the component is hidden
       this.inserts[id].componentSpec = spec;
     } else {
-      console.error('insert block not found for update: ' + id);
+      console.error(`insert block not found for update: ${id}`);
     }
   }
 }

@@ -1,79 +1,78 @@
 
-import { filter, map, catchError, takeWhile } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
-import { UserDataService } from '@services/user-data.service';
-import { User } from '@models/user.model';
-import { ContactDataService } from '@services/contact-data.service';
-import { Contact } from '@models/contact.model';
-import { Store } from '@ngrx/store';
-import { Subscription, Observable, forkJoin, of } from 'rxjs';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { COUNTRIES } from './country-list';
+import { filter, map, catchError, takeWhile } from "rxjs/operators";
+import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from "@angular/core";
+import { User } from "@models/user.model";
+import { ContactDataService } from "@services/contact-data.service";
+import { Contact } from "@models/contact.model";
+import { Store } from "@ngrx/store";
+import { Subscription, Observable, forkJoin, of } from "rxjs";
+import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { COUNTRIES } from "./country-list";
 
-import * as moment from 'moment';
+
 // tslint:disable-next-line:no-duplicate-imports
-import { defaultFormat as _rollupMoment } from 'moment';
-import { AccountDataService } from '@services/account-data.service';
-import { Account } from '@models/account.model';
-import { FormBase } from '@shared/form-base';
-import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
-import { TiedHouseConnection } from '@models/tied-house-connection.model';
-import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { DynamicsDataService } from '@services/dynamics-data.service';
-import { AppState } from '@app/app-state/models/app-state';
-import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { AccountDataService } from "@services/account-data.service";
+import { Account } from "@models/account.model";
+import { FormBase } from "@shared/form-base";
+import { ConnectionToProducersComponent } from "./tabs/connection-to-producers/connection-to-producers.component";
+import { TiedHouseConnection } from "@models/tied-house-connection.model";
+import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
+import { AppState } from "@app/app-state/models/app-state";
+import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrashAlt } from
+  "@fortawesome/free-solid-svg-icons";
+import * as moment from 'moment';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
 export const MY_FORMATS = {
   parse: {
-    dateInput: 'LL',
+    dateInput: "LL",
   },
   display: {
-    dateInput: 'YYYY-MM-DD',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'YYYY-MM-DD',
-    monthYearA11yLabel: 'MMMM YYYY',
+    dateInput: "YYYY-MM-DD",
+    monthYearLabel: "MMM YYYY",
+    dateA11yLabel: "YYYY-MM-DD",
+    monthYearA11yLabel: "MMMM YYYY",
   },
 };
 
 const ValidationFieldNameMap = {
-  'businessProfile.id': 'Account ID',
-  'businessProfile._mailingSameAsPhysicalAddress': 'Mailing Address Same as Physical Address',
-  'businessProfile.bcIncorporationNumber': 'B.C. Incorporation Number',
-  'businessProfile.dateOfIncorporationInBC': 'Date of Incorporation In B.C.',
-  'businessProfile.businessNumber': 'Business Number',
-  'businessProfile.businessType': 'Business Type',
-  'businessProfile.contactPhone': 'Corporation Address Business Phone',
+  'businessProfile.id': "Account ID",
+  'businessProfile._mailingSameAsPhysicalAddress': "Mailing Address Same as Physical Address",
+  'businessProfile.bcIncorporationNumber': "B.C. Incorporation Number",
+  'businessProfile.dateOfIncorporationInBC': "Date of Incorporation In B.C.",
+  'businessProfile.businessNumber': "Business Number",
+  'businessProfile.businessType': "Business Type",
+  'businessProfile.contactPhone': "Corporation Address Business Phone",
   // 'businessProfile.contactEmail': 'Corporation Address Business Email',
 
-  'businessProfile.physicalAddressStreet': 'Physical Address Street',
-  'businessProfile.physicalAddressStreet2': 'Physical Address Street2',
-  'businessProfile.physicalAddressCity': 'Physical Address City',
-  'businessProfile.physicalAddressPostalCode': 'Physical Address Postal Code',
-  'businessProfile.physicalAddressProvince': 'Physical Address Province',
-  'businessProfile.physicalAddressCountry': 'Physical Address Country',
-  'businessProfile.mailingAddressStreet': 'Mailing Address Street',
-  'businessProfile.mailingAddressStreet2': 'Mailing Address Street2',
-  'businessProfile.mailingAddressCity': 'Mailing Address City',
-  'businessProfile.mailingAddressPostalCode': 'Mailing Address Postal Code',
-  'businessProfile.mailingAddressProvince': 'Mailing Address Province',
-  'businessProfile.mailingAddressCountry': 'Mailing Address Country',
+  'businessProfile.physicalAddressStreet': "Physical Address Street",
+  'businessProfile.physicalAddressStreet2': "Physical Address Street2",
+  'businessProfile.physicalAddressCity': "Physical Address City",
+  'businessProfile.physicalAddressPostalCode': "Physical Address Postal Code",
+  'businessProfile.physicalAddressProvince': "Physical Address Province",
+  'businessProfile.physicalAddressCountry': "Physical Address Country",
+  'businessProfile.mailingAddressStreet': "Mailing Address Street",
+  'businessProfile.mailingAddressStreet2': "Mailing Address Street2",
+  'businessProfile.mailingAddressCity': "Mailing Address City",
+  'businessProfile.mailingAddressPostalCode': "Mailing Address Postal Code",
+  'businessProfile.mailingAddressProvince': "Mailing Address Province",
+  'businessProfile.mailingAddressCountry': "Mailing Address Country",
 
-  'primarycontact.id': 'Corporation Contact ID',
-  'primarycontact.firstname': 'Corporation Contact First Name',
-  'primarycontact.lastname': 'Corporation Contact LastName',
-  'primarycontact.jobTitle': 'Corporation Contact Job Title',
-  'primarycontact.telephone1': 'Corporation Contact Telephone',
-  'primarycontact.emailaddress1': 'Corporation Contact Email',
+  'primarycontact.id': "Corporation Contact ID",
+  'primarycontact.firstname': "Corporation Contact First Name",
+  'primarycontact.lastname': "Corporation Contact LastName",
+  'primarycontact.jobTitle': "Corporation Contact Job Title",
+  'primarycontact.telephone1': "Corporation Contact Telephone",
+  'primarycontact.emailaddress1': "Corporation Contact Email",
 };
 
 
 @Component({
-  selector: 'app-account-profile',
-  templateUrl: './account-profile.component.html',
-  styleUrls: ['./account-profile.component.scss']
+  selector: "app-account-profile",
+  templateUrl: "./account-profile.component.html",
+  styleUrls: ["./account-profile.component.scss"]
 })
 export class AccountProfileComponent extends FormBase implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
@@ -82,8 +81,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   faAddressCard = faAddressCard;
   faEnvelope = faEnvelope;
   faPhone = faPhone;
-  @Input() useInStepperMode = false;
-  @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input()
+  useInStepperMode = false;
+  @Output()
+  saveComplete = new EventEmitter<boolean>();
   currentUser: User;
   dataLoaded = false;
   busy: Subscription;
@@ -91,22 +92,23 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   busy3: Promise<any>;
   form: FormGroup;
   countryList = COUNTRIES;
-  maxDate = moment().endOf('day').toDate();
+  maxDate = moment().endOf("day").toDate();
 
   accountId: string;
   saveFormData: any;
   _showAdditionalAddress: boolean;
   _showAdditionalContact: boolean;
   legalEntityId: string;
-  @ViewChild(ConnectionToProducersComponent) connectionsToProducers: ConnectionToProducersComponent;
+  @ViewChild(ConnectionToProducersComponent)
+  connectionsToProducers: ConnectionToProducersComponent;
   applicationId: string;
   applicationMode: string;
   account: Account;
   tiedHouseFormData: Observable<TiedHouseConnection>;
   validationMessages: string[];
 
-  public get contacts(): FormArray {
-    return this.form.get('otherContacts') as FormArray;
+  get contacts(): FormArray {
+    return this.form.get("otherContacts") as FormArray;
   }
 
   constructor(private store: Store<AppState>,
@@ -118,83 +120,83 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     private tiedHouseService: TiedHouseConnectionsDataService
   ) {
     super();
-    this.route.paramMap.subscribe(params => this.applicationId = params.get('applicationId'));
-    this.route.paramMap.subscribe(params => this.applicationMode = params.get('mode'));
+    this.route.paramMap.subscribe(params => this.applicationId = params.get("applicationId"));
+    this.route.paramMap.subscribe(params => this.applicationMode = params.get("mode"));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
       businessProfile: this.fb.group({
-        id: [''],
+        id: [""],
         _mailingSameAsPhysicalAddress: [],
         // name: [''],
         // businessDBAName: [''],
-        bcIncorporationNumber: [''],
-        dateOfIncorporationInBC: [''],
+        bcIncorporationNumber: [""],
+        dateOfIncorporationInBC: [""],
         // CRA business numbers are 9 digit long and start with a non-zero digit
-        businessNumber: ['', [Validators.required, Validators.pattern('^[1-9][0-9]{8}$')]],
-        businessType: ['', Validators.required],
-        contactPhone: ['', [Validators.required, /*Validators.minLength(10), Validators.maxLength(10)*/]],
-        contactEmail: ['', [Validators.required, Validators.email]],
+        businessNumber: ["", [Validators.required, Validators.pattern("^[1-9][0-9]{8}$")]],
+        businessType: ["", Validators.required],
+        contactPhone: ["", [Validators.required, /*Validators.minLength(10), Validators.maxLength(10)*/]],
+        contactEmail: ["", [Validators.required, Validators.email]],
 
-        physicalAddressStreet: ['', Validators.required],
-        physicalAddressStreet2: [''],
-        physicalAddressCity: ['', Validators.required],
-        physicalAddressPostalCode: ['', [Validators.required, this.customZipCodeValidator('physicalAddressCountry')]],
-        physicalAddressProvince: [{ value: 'British Columbia' }],
-        physicalAddressCountry: [{ value: 'Canada' }],
-        mailingAddressStreet: ['', Validators.required],
-        mailingAddressStreet2: [''],
-        mailingAddressCity: ['', Validators.required],
-        mailingAddressPostalCode: ['', [Validators.required, this.customZipCodeValidator('mailingAddressCountry')]],
-        mailingAddressProvince: ['', Validators.required],
-        mailingAddressCountry: ['Canada', Validators.required],
-        websiteUrl: [''],
+        physicalAddressStreet: ["", Validators.required],
+        physicalAddressStreet2: [""],
+        physicalAddressCity: ["", Validators.required],
+        physicalAddressPostalCode: ["", [Validators.required, this.customZipCodeValidator("physicalAddressCountry")]],
+        physicalAddressProvince: [{ value: "British Columbia" }],
+        physicalAddressCountry: [{ value: "Canada" }],
+        mailingAddressStreet: ["", Validators.required],
+        mailingAddressStreet2: [""],
+        mailingAddressCity: ["", Validators.required],
+        mailingAddressPostalCode: ["", [Validators.required, this.customZipCodeValidator("mailingAddressCountry")]],
+        mailingAddressProvince: ["", Validators.required],
+        mailingAddressCountry: ["Canada", Validators.required],
+        websiteUrl: [""],
       }),
       primarycontact: this.fb.group({
         id: [],
-        firstname: ['', Validators.required],
-        lastname: ['', Validators.required],
-        jobTitle: [''],
-        telephone1: ['', [Validators.required, /*Validators.minLength(10), Validators.maxLength(10)*/]],
-        emailaddress1: ['', [Validators.required, Validators.email]],
+        firstname: ["", Validators.required],
+        lastname: ["", Validators.required],
+        jobTitle: [""],
+        telephone1: ["", [Validators.required, /*Validators.minLength(10), Validators.maxLength(10)*/]],
+        emailaddress1: ["", [Validators.required, Validators.email]],
       }),
     });
     this.subscribeForData();
 
-    this.form.get('businessProfile._mailingSameAsPhysicalAddress').valueChanges.pipe(
-      filter(value => value === true))
+    this.form.get("businessProfile._mailingSameAsPhysicalAddress").valueChanges.pipe(
+        filter(value => value === true))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
 
-    this.form.get('businessProfile.physicalAddressStreet').valueChanges.pipe(
-      filter(() => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
+    this.form.get("businessProfile.physicalAddressStreet").valueChanges.pipe(
+        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
-    this.form.get('businessProfile.physicalAddressStreet2').valueChanges.pipe(
-      filter(() => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
+    this.form.get("businessProfile.physicalAddressStreet2").valueChanges.pipe(
+        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
-    this.form.get('businessProfile.physicalAddressCity').valueChanges.pipe(
-      filter(() => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
+    this.form.get("businessProfile.physicalAddressCity").valueChanges.pipe(
+        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
-    this.form.get('businessProfile.physicalAddressPostalCode').valueChanges.pipe(
-      filter(() => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
+    this.form.get("businessProfile.physicalAddressPostalCode").valueChanges.pipe(
+        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
-    this.form.get('businessProfile.physicalAddressProvince').valueChanges.pipe(
-      filter(() => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
+    this.form.get("businessProfile.physicalAddressProvince").valueChanges.pipe(
+        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
-    this.form.get('businessProfile.physicalAddressCountry').valueChanges.pipe(
-      filter(() => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
+    this.form.get("businessProfile.physicalAddressCountry").valueChanges.pipe(
+        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
@@ -202,44 +204,49 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   }
 
   copyPhysicalToMailingAddress() {
-    this.form.get('businessProfile.mailingAddressStreet').patchValue(this.form.get('businessProfile.physicalAddressStreet').value);
-    this.form.get('businessProfile.mailingAddressStreet2').patchValue(this.form.get('businessProfile.physicalAddressStreet2').value);
-    this.form.get('businessProfile.mailingAddressCity').patchValue(this.form.get('businessProfile.physicalAddressCity').value);
-    this.form.get('businessProfile.mailingAddressPostalCode')
-      .patchValue(this.form.get('businessProfile.physicalAddressPostalCode').value);
-    this.form.get('businessProfile.mailingAddressProvince').patchValue(this.form.get('businessProfile.physicalAddressProvince').value);
-    this.form.get('businessProfile.mailingAddressCountry').patchValue(this.form.get('businessProfile.physicalAddressCountry').value);
+    this.form.get("businessProfile.mailingAddressStreet")
+      .patchValue(this.form.get("businessProfile.physicalAddressStreet").value);
+    this.form.get("businessProfile.mailingAddressStreet2")
+      .patchValue(this.form.get("businessProfile.physicalAddressStreet2").value);
+    this.form.get("businessProfile.mailingAddressCity")
+      .patchValue(this.form.get("businessProfile.physicalAddressCity").value);
+    this.form.get("businessProfile.mailingAddressPostalCode")
+      .patchValue(this.form.get("businessProfile.physicalAddressPostalCode").value);
+    this.form.get("businessProfile.mailingAddressProvince")
+      .patchValue(this.form.get("businessProfile.physicalAddressProvince").value);
+    this.form.get("businessProfile.mailingAddressCountry")
+      .patchValue(this.form.get("businessProfile.physicalAddressCountry").value);
   }
 
   getBusinessTypeName() {
     if (!(this.saveFormData && this.saveFormData.businessProfile)) {
-      return '';
+      return "";
     }
-    let name = '';
+    let name = "";
     switch (this.saveFormData.businessProfile.businessType) {
-      case 'GeneralPartnership':
-      case 'LimitedPartnership"':
-      case 'LimitedLiabilityPartnership':
-        name = 'Partnership';
-        break;
-      case 'SoleProprietorship':
-        name = 'Sole Proprietorship';
-        break;
-      case 'IndigenousNation':
-        name = 'Indigenous Nation';
-        break;
-      case 'LocalGovernment':
-        name = 'Local Government';
-        break;
-      case 'PublicCorporation':
-      case 'PrivateCorporation':
-      case 'UnlimitedLiabilityCorporation':
-      case 'LimitedLiabilityCorporation':
-        name = 'Corporation';
-        break;
-      default:
-        name = this.saveFormData.businessProfile.businessType;
-        break;
+    case "GeneralPartnership":
+    case 'LimitedPartnership"':
+    case "LimitedLiabilityPartnership":
+      name = "Partnership";
+      break;
+    case "SoleProprietorship":
+      name = "Sole Proprietorship";
+      break;
+    case "IndigenousNation":
+      name = "Indigenous Nation";
+      break;
+    case "LocalGovernment":
+      name = "Local Government";
+      break;
+    case "PublicCorporation":
+    case "PrivateCorporation":
+    case "UnlimitedLiabilityCorporation":
+    case "LimitedLiabilityCorporation":
+      name = "Corporation";
+      break;
+    default:
+      name = this.saveFormData.businessProfile.businessType;
+      break;
     }
     return name;
   }
@@ -247,8 +254,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   legalNameLabel() {
     const businessType = this.getBusinessTypeName();
     let label = `${businessType} - Legal Name`;
-    if (businessType === 'IndigenousNation') {
-      label = 'Full name of Indigenous Nation';
+    if (businessType === "IndigenousNation") {
+      label = "Full name of Indigenous Nation";
     }
     return label;
   }
@@ -260,8 +267,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       .subscribe(account => {
         this.account = account;
         // default to BC if no province found
-        account.physicalAddressProvince = account.physicalAddressProvince || 'British Columbia';
-        account.physicalAddressCountry = 'Canada';
+        account.physicalAddressProvince = account.physicalAddressProvince || "British Columbia";
+        account.physicalAddressCountry = "Canada";
 
         this.form.patchValue({
           businessProfile: account,
@@ -271,21 +278,21 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         this.saveFormData = this.form.value;
 
         // normalize postal codes
-        this.form.get('businessProfile.mailingAddressPostalCode').setValue(
-          (this.form.get('businessProfile.mailingAddressPostalCode').value || '').replace(/\s+/g, '')
+        this.form.get("businessProfile.mailingAddressPostalCode").setValue(
+          (this.form.get("businessProfile.mailingAddressPostalCode").value || "").replace(/\s+/g, "")
         );
-        this.form.get('businessProfile.physicalAddressPostalCode').setValue(
-          (this.form.get('businessProfile.physicalAddressPostalCode').value || '').replace(/\s+/g, '')
+        this.form.get("businessProfile.physicalAddressPostalCode").setValue(
+          (this.form.get("businessProfile.physicalAddressPostalCode").value || "").replace(/\s+/g, "")
         );
 
         if (this.account.isPrivateCorporation()) {
-          this.form.get('businessProfile.bcIncorporationNumber')
-            .setValidators([Validators.pattern('^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
-        } else if (this.account.businessType === 'Society') {
-          this.form.get('businessProfile.bcIncorporationNumber')
-            .setValidators([Validators.pattern('^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
+          this.form.get("businessProfile.bcIncorporationNumber")
+            .setValidators([Validators.pattern("^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$")]);
+        } else if (this.account.businessType === "Society") {
+          this.form.get("businessProfile.bcIncorporationNumber")
+            .setValidators([Validators.pattern("^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$")]);
         } else {
-          this.form.get('businessProfile.bcIncorporationNumber').clearValidators();
+          this.form.get("businessProfile.bcIncorporationNumber").clearValidators();
         }
       });
   }
@@ -299,10 +306,11 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       contact.emailaddress1 = this.currentUser.email;
       this.busy = this.contactDataService.createWorkerContact(contact)
         .subscribe(() => {
-          this.subscribeForData();
-        }, () => alert('Failed to create contact'));
+            this.subscribeForData();
+          },
+          () => alert("Failed to create contact"));
     } else {
-      window.location.href = 'logout';
+      window.location.href = "logout";
     }
   }
 
@@ -317,13 +325,13 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   save(): Observable<boolean> {
     const _tiedHouse = this.tiedHouseFormData || {};
-    this.form.get('businessProfile').patchValue({ physicalAddressCountry: 'Canada' });
-    const value = <Account>{
-      ...this.form.get('businessProfile').value
-    };
+    this.form.get("businessProfile").patchValue({ physicalAddressCountry: "Canada" });
+    const value = {
+      ...this.form.get("businessProfile").value
+    } as Account;
     const saves = [
       this.accountDataService.updateAccount(value),
-      this.contactDataService.updateContact(this.form.get('primarycontact').value)
+      this.contactDataService.updateContact(this.form.get("primarycontact").value)
     ];
 
     if (this.connectionsToProducers) {
@@ -335,7 +343,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     return forkJoin(...saves)
       .pipe(catchError(() => of(false)),
         map(() => {
-          this.accountDataService.loadCurrentAccountToStore(this.account.id).subscribe(() => { });
+          this.accountDataService.loadCurrentAccountToStore(this.account.id).subscribe(() => {});
           return true;
         }));
   }
@@ -348,14 +356,13 @@ export class AccountProfileComponent extends FormBase implements OnInit {
           this.saveComplete.emit(true);
         } else if (this.applicationId) {
           // divert catering.
-          if (this.applicationMode === 'catering') {
+          if (this.applicationMode === "catering") {
             const route: any[] = [`/application/catering/${this.applicationId}`];
             if (this.applicationMode) {
               route.push({ mode: this.applicationMode });
             }
             this.router.navigate(route);
-          }
-          else {
+          } else {
             const route: any[] = [`/application/${this.applicationId}`];
             if (this.applicationMode) {
               route.push({ mode: this.applicationMode });
@@ -363,7 +370,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
             this.router.navigate(route);
           }
         } else {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(["/dashboard"]);
         }
       });
     } else {
@@ -371,7 +378,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       this.listControlsWithErrors(this.form, ValidationFieldNameMap).forEach(m => this.validationMessages.push(m));
     }
   }
-
 
 
   prepareTiedHouseSaveRequest(_tiedHouseData) {
@@ -388,16 +394,16 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   markAsTouched() {
     this.form.markAsTouched();
 
-    const businessProfileControls = (<FormGroup>(this.form.get('businessProfile'))).controls;
+    const businessProfileControls = ((this.form.get("businessProfile")) as FormGroup).controls;
     for (const c in businessProfileControls) {
-      if (typeof (businessProfileControls[c].markAsTouched) === 'function') {
+      if (typeof (businessProfileControls[c].markAsTouched) === "function") {
         businessProfileControls[c].markAsTouched();
       }
     }
 
-    const primarycontactControls = (<FormGroup>(this.form.get('primarycontact'))).controls;
+    const primarycontactControls = ((this.form.get("primarycontact")) as FormGroup).controls;
     for (const c in primarycontactControls) {
-      if (typeof (primarycontactControls[c].markAsTouched) === 'function') {
+      if (typeof (primarycontactControls[c].markAsTouched) === "function") {
         primarycontactControls[c].markAsTouched();
       }
     }

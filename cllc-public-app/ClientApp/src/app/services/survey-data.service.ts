@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DataService } from './data.service';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { DataService } from "./data.service";
+import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class SurveyDataService extends DataService {
@@ -10,8 +10,9 @@ export class SurveyDataService extends DataService {
   }
 
   getSurveyData(clientId: string) {
-    return this.http.get('api/survey/getResultByClient/' + clientId, {
-      headers: this.headers
-    }).pipe(catchError(this.handleError));
+    return this.http.get(`api/survey/getResultByClient/${clientId}`,
+      {
+        headers: this.headers
+      }).pipe(catchError(this.handleError));
   }
 }

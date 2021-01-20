@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { PolicyDocument } from '@models/policy-document.model';
-import { PolicyDocumentSummary } from '@models/policy-document-summary.model';
-import { HttpClient } from '@angular/common/http';
-import { DataService } from './data.service';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { PolicyDocument } from "@models/policy-document.model";
+import { PolicyDocumentSummary } from "@models/policy-document-summary.model";
+import { HttpClient } from "@angular/common/http";
+import { DataService } from "./data.service";
+import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class PolicyDocumentDataService extends DataService {
@@ -13,15 +13,17 @@ export class PolicyDocumentDataService extends DataService {
 
   getPolicyDocument(slug: string) {
 
-    return this.http.get<PolicyDocument>('api/policydocument/' + slug, {
-      headers: this.headers
-    }).pipe(catchError(this.handleError));
+    return this.http.get<PolicyDocument>(`api/policydocument/${slug}`,
+      {
+        headers: this.headers
+      }).pipe(catchError(this.handleError));
   }
 
   getPolicyDocuments(category: string) {
 
-    return this.http.get<PolicyDocumentSummary[]>('api/policydocument?category=' + category, {
-      headers: this.headers
-    }).pipe(catchError(this.handleError));
+    return this.http.get<PolicyDocumentSummary[]>(`api/policydocument?category=${category}`,
+      {
+        headers: this.headers
+      }).pipe(catchError(this.handleError));
   }
 }

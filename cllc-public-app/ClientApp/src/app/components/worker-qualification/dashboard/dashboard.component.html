@@ -1,199 +1,212 @@
 <div class="dashboard-spacing" style="position: relative;">
-  <div [ngBusy]="busy"></div>
-  <div *ngIf="!isNewUser && dataLoaded" class="row">
-    <div class="col-xl-7 col-sm-12">
+<div [ngBusy]="busy"></div>
+<div *ngIf="!isNewUser && dataLoaded" class="row">
+<div class="col-xl-7 col-sm-12">
+  <div>
+    <section>
+      <!-- <div [ngBusy]="busy"></div> -->
+      <h1>Worker Dashboard</h1>
       <div>
+        <!--<p>
+          You can return to this page to complete and submit
+          your application with payment at any time.
+        </p>
+
+        <p>You’ll be informed of the results of your screening.</p>-->
+
+        <h2>Security Verification Status: <strong>{{currentApplication?.clientSideStatus}}</strong></h2>
+
         <section>
-          <!-- <div [ngBusy]="busy"></div> -->
-          <h1>Worker Dashboard</h1>
-          <div>
-            <!--<p>
-      You can return to this page to complete and submit
-      your application with payment at any time.
-    </p>
+          <div *ngIf="!currentApplication">
+            <p>
+              Select the link below to start your Worker Security Verification and Consent for Cannabis Security
+              Screening application.
+            </p>
+            <p>The security verification fee is $100. Please note this fee is non-refundable. You'll make your payment through BC ExpressPay, a secure government service. It takes MasterCard and Visa debit and credit cards and American Express.</p>
 
-    <p>You’ll be informed of the results of your screening.</p>-->
+            <p>
+              You can save the application and return later to complete and submit it with payment.
+            </p>
 
-            <h2>Security Verification Status: <strong>{{currentApplication?.clientSideStatus}}</strong></h2>
+            <a routerLink="/worker-qualification/application/{{currentApplication?.id}}">
+              {{currentApplication?.firstname}}
+              {{currentApplication?.middlename}}
+              {{currentApplication?.lastname}}
+            </a>
+          </div>
+          <div *ngIf="currentApplication?.clientSideStatus === 'Not Completed'">
+            <p>
+              Select the link below to start your Worker Security Verification and Consent for Cannabis Security
+              Screening application.
+            </p>
+            <p>The security verification fee is $100. Please note this fee is non-refundable. You'll make your payment through BC ExpressPay, a secure government service. It takes MasterCard and Visa debit and credit cards and American Express.</p>
+            <p>
+              You can save the application and return later to complete and submit it with payment.
+            </p>
+            <a routerLink="/worker-qualification/application/{{currentApplication?.id}}">
+              {{currentApplication?.firstname}}
+              {{currentApplication?.middlename}}
+              {{currentApplication?.lastname}}
+            </a>
+          </div>
+          <div *ngIf="currentApplication?.clientSideStatus === 'Pending Review'">
+            <p>
+              We've received your Worker Security Verification and Consent for Cannabis Security Screening
+              application. You'll be contacted if you have submitted any incorrect or unclear information.
+            </p>
+            <p>
+              We'll let you know the result of your application as soon as it is available.
+            </p>
+          </div>
+          <div *ngIf="currentApplication?.clientSideStatus === 'Active'">
+            <p>
+              Your worker security verification application has been approved.
+            </p>
+            <p>
+              You have been sent a letter by email with more information. Please refer to the letter for details.
+            </p>
+            <a class="btn btn-primary" [href]="'api/worker/' + currentApplication?.id + '/pdf'">
+              <fa-icon [icon]="faDownload"></fa-icon>
+              Download Security Verification Letter
+            </a>
+          </div>
+          <div *ngIf="currentApplication?.clientSideStatus === 'Rejected'">
+            <p>
+              You have been denied a security verification. This result cannot be appealed.
+            </p>
+            <p>
+              You have been issued a letter outlining the results of your application. For more information, please
+              refer to the letter.
+            </p>
+          </div>
 
-            <section>
-              <div *ngIf="!currentApplication">
-                <p>
-                  Select the link below to start your Worker Security Verification and Consent for Cannabis Security
-                  Screening application.</p>
-                  <p>The security verification fee is $100. Please note this fee is non-refundable. You'll make your payment through BC ExpressPay, a secure government service. It takes MasterCard and Visa debit and credit cards and American Express.</p>
-                
-                <p>
-                  You can save the application and return later to complete and submit it with payment.
-                </p>
+          <p style="margin-top: 5px;">Last updated: {{ currentApplication?.modifiedOn | date : 'MMM dd, yyyy'}}</p>
 
-                <a routerLink="/worker-qualification/application/{{currentApplication?.id}}">
-                  {{currentApplication?.firstname}}
-                  {{currentApplication?.middlename}}
-                  {{currentApplication?.lastname}}
+          <mat-table *ngIf="false" class="mat-elevation-z0 detail-table" [dataSource]="dataSource">
+
+            <!-- Column -->
+            <ng-container matColumnDef="lastUpdated">
+              <mat-header-cell *matHeaderCellDef> LAST UPDATED </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <strong>
+                  {{element?.modifiedOn | date:'mediumDate'}}
+                </strong>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Column -->
+            <ng-container matColumnDef="worker">
+              <mat-header-cell *matHeaderCellDef> WORKER </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <a *ngIf="element.status === 'Application Incomplete'"
+                   routerLink="/worker-qualification/application/{{element.id}}">
+                  {{element?.firstname}}
+                  {{element?.middlename}}
+                  {{element.lastname}}
                 </a>
-              </div>
-              <div *ngIf="currentApplication?.clientSideStatus === 'Not Completed'">
-                <p>
-                  Select the link below to start your Worker Security Verification and Consent for Cannabis Security
-                  Screening application.</p> 
-                  <p>The security verification fee is $100. Please note this fee is non-refundable. You'll make your payment through BC ExpressPay, a secure government service. It takes MasterCard and Visa debit and credit cards and American Express.</p>
-                <p>
-                  You can save the application and return later to complete and submit it with payment.
-                </p>
-                <a routerLink="/worker-qualification/application/{{currentApplication?.id}}">
-                  {{currentApplication?.firstname}}
-                  {{currentApplication?.middlename}}
-                  {{currentApplication?.lastname}}
-                </a>
-              </div>
-              <div *ngIf="currentApplication?.clientSideStatus === 'Pending Review'">
-                <p>
-                  We've received your Worker Security Verification and Consent for Cannabis Security Screening
-                  application. You'll be contacted if you have submitted any incorrect or unclear information.
-                </p>
-                <p>
-                  We'll let you know the result of your application as soon as it is available.
-                </p>
-              </div>
-              <div *ngIf="currentApplication?.clientSideStatus === 'Active'">
-                <p>
-                  Your worker security verification application has been approved.
-                </p>
-                <p>
-                  You have been sent a letter by email with more information. Please refer to the letter for details.
-                </p>
-                <a class="btn btn-primary" [href]="'api/worker/' + currentApplication?.id + '/pdf'">
+                <span *ngIf="element.status !== 'Application Incomplete'">
+                  {{element?.firstname}}
+                  {{element?.middlename}}
+                  {{element.lastname}}
+                </span>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Column -->
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef> STATUS </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{element.status}}
+              </mat-cell>
+            </ng-container>
+
+            <!-- Column -->
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <a *ngIf="element?.status === 'Active'" class="btn btn-primary"
+                   [href]="'api/worker/' + element?.id + '/pdf'">
                   <fa-icon [icon]="faDownload"></fa-icon>
                   Download Security Verification Letter
                 </a>
-              </div>
-              <div *ngIf="currentApplication?.clientSideStatus === 'Rejected'">
-                <p>
-                  You have been denied a security verification. This result cannot be appealed.
-                </p>
-                <p>
-                  You have been issued a letter outlining the results of your application. For more information, please
-                  refer to the letter.
-                </p>
-              </div>
+              </mat-cell>
+            </ng-container>
 
-              <p style="margin-top: 5px;">Last updated: {{ currentApplication?.modifiedOn | date : 'MMM dd, yyyy'}}</p>
-
-              <mat-table *ngIf="false" class="mat-elevation-z0 detail-table" [dataSource]="dataSource">
-
-                <!-- Column -->
-                <ng-container matColumnDef="lastUpdated">
-                  <mat-header-cell *matHeaderCellDef> LAST UPDATED </mat-header-cell>
-                  <mat-cell *matCellDef="let element"><strong>
-                    {{element?.modifiedOn | date:'mediumDate'}}</strong>
-                  </mat-cell>
-                </ng-container>
-
-                <!-- Column -->
-                <ng-container matColumnDef="worker">
-                  <mat-header-cell *matHeaderCellDef> WORKER </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                    <a *ngIf="element.status === 'Application Incomplete'"
-                      routerLink="/worker-qualification/application/{{element.id}}">
-                      {{element?.firstname}}
-                      {{element?.middlename}}
-                      {{element.lastname}}
-                    </a>
-                    <span *ngIf="element.status !== 'Application Incomplete'">
-                      {{element?.firstname}}
-                      {{element?.middlename}}
-                      {{element.lastname}}
-                    </span>
-                  </mat-cell>
-                </ng-container>
-
-                <!-- Column -->
-                <ng-container matColumnDef="status">
-                  <mat-header-cell *matHeaderCellDef> STATUS </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                    {{element.status}}
-                  </mat-cell>
-                </ng-container>
-
-                <!-- Column -->
-                <ng-container matColumnDef="actions">
-                  <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                    <a *ngIf="element?.status === 'Active'" class="btn btn-primary"
-                      [href]="'api/worker/' + element?.id + '/pdf'">
-                      <fa-icon [icon]="faDownload"></fa-icon>
-                      Download Security Verification Letter
-                    </a>
-                  </mat-cell>
-                </ng-container>
-
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row [ngClass]="{'grey-background' : i%2 == 1}"
-                  *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
-              </mat-table>
-            </section>
-            <hr>
-            <!-- contact information-->
-            <h3>Your Contact Information:</h3>
-            <p>Stay up to date with communications from LCRB regarding your Cannabis Worker Security Verification, including renewal reminders.</p>
-            <form [formGroup]="mainForm">
-              <!-- changing the values here automatically updates the contact record-->
-              <input class="form-control" type="text" formControlName="phone" mask="(000) 000-0000"
-              placeholder="Phone Number"
-              (focusout)="updatePhone($event)" style="width:250px;"> <br>
-              <input class="form-control" type="text" formControlName="email" placeholder="Email Address"
-              (focusout)="updateEmail($event)" style="width:250px;"> <br>
-            </form>
-          
-          </div>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row [ngClass]="{'grey-background' : i%2 == 1}"
+                     *matRowDef="let row; let i = index; columns: displayedColumns;">
+            </mat-row>
+          </mat-table>
         </section>
+        <hr>
+        <!-- contact information-->
+        <h3>Your Contact Information:</h3>
+        <p>Stay up to date with communications from LCRB regarding your Cannabis Worker Security Verification, including renewal reminders.</p>
+        <form [formGroup]="mainForm">
+          <!-- changing the values here automatically updates the contact record-->
+          <input class="form-control" type="text" formControlName="phone" mask="(000) 000-0000"
+                 placeholder="Phone Number"
+                 (focusout)="updatePhone($event)" style="width: 250px;"> <br>
+          <input class="form-control" type="text" formControlName="email" placeholder="Email Address"
+                 (focusout)="updateEmail($event)" style="width: 250px;"> <br>
+        </form>
+
       </div>
-    </div>
-    <div class="col-xl-4 col-sm-12" style="position: relative">
-      <!-- <div [ngBusy]="busy"></div> -->
-      <p></p>
-      <section class="submit-container">
-        <table>
-          <tr>
-            <td>
-              <h2 class="round-icon-wrapper"><fa-icon [icon]="faQuestion"></fa-icon></h2>
-            </td>
-            <td style="padding-left: 10px">
-              <h2>Update your personal information</h2>
-            </td>
-          </tr>
-        </table>
-        <div class="information">
-          <p>The following information has been provided by Service BC for use in your Worker Qualification:</p>
-          <table mat-table [dataSource]="dataTable" style="width: 100%;">
-
-            <ng-container matColumnDef="key">
-              <td mat-cell *matCellDef="let field"> {{field.key}} </td>
-            </ng-container>
-            <ng-container matColumnDef="value">
-              <td mat-cell *matCellDef="let field"> {{field.value}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderCellDef></tr>
-            <tr mat-footer-row *matFooterCellDef></tr>
-            <tr mat-row *matRowDef="let row; columns: ['key','value'];"></tr>
-          </table>
-        </div>
-        <div class="submit-content">
-          <p>
-            If you find an error in your personal information, please contact <a style="color:#fff"
-              href="https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc">Service
-              BC</a>, <a style="color:#fff" href="https://www.icbc.com">ICBC</a> or <a style="color:#fff"
-              href="https://www.addresschange.gov.bc.ca/">AddressChangeBC</a> to
-            correct
-            it.
-          </p>
-        </div>
-      </section>
-    </div>
+    </section>
   </div>
-  <section *ngIf="isNewUser && dataLoaded">
-    <app-user-confirmation [currentUser]="currentUser"></app-user-confirmation>
+</div>
+<div class="col-xl-4 col-sm-12" style="position: relative">
+  <!-- <div [ngBusy]="busy"></div> -->
+  <p></p>
+  <section class="submit-container">
+    <table>
+      <tr>
+        <td>
+          <h2 class="round-icon-wrapper">
+            <fa-icon [icon]="faQuestion"></fa-icon>
+          </h2>
+        </td>
+        <td style="padding-left: 10px">
+          <h2>Update your personal information</h2>
+        </td>
+      </tr>
+    </table>
+    <div class="information">
+      <p>The following information has been provided by Service BC for use in your Worker Qualification:</p>
+      <table mat-table [dataSource]="dataTable" style="width: 100%;">
+
+        <ng-container matColumnDef="key">
+          <td mat-cell *matCellDef="let field"> {{field.key}} </td>
+        </ng-container>
+        <ng-container matColumnDef="value">
+          <td mat-cell *matCellDef="let field"> {{field.value}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderCellDef></tr>
+        <tr mat-footer-row *matFooterCellDef></tr>
+        <tr mat-row *matRowDef="let row; columns: ['key','value'];"></tr>
+      </table>
+    </div>
+    <div class="submit-content">
+      <p>
+        If you find an error in your personal information, please contact
+        <a style="color: #fff"
+           href="https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc">
+          Service
+          BC
+        </a>, <a style="color: #fff" href="https://www.icbc.com">ICBC</a> or
+        <a style="color: #fff"
+           href="https://www.addresschange.gov.bc.ca/">
+          AddressChangeBC
+        </a> to
+        correct
+        it.
+      </p>
+    </div>
   </section>
+</div>
+</div>
+<section *ngIf="isNewUser && dataLoaded">
+  <app-user-confirmation [currentUser]="currentUser"></app-user-confirmation>
+</section>
 </div>

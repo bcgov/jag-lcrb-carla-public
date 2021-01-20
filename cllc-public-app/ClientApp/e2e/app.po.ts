@@ -1,61 +1,62 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element } from "protractor";
 
 export class AppHomePage {
-    navigateTo() {
-      return browser.get('/');
-    }
+  navigateTo() {
+    return browser.get("/");
+  }
 
-    getMainHeading() {
-      return element(by.css('app-home .jumbotron h2')).getText();
-    }
+  getMainHeading() {
+    return element(by.css("app-home .jumbotron h2")).getText();
+  }
 
-    inputEmail() {
-        return element(by.css('app-newsletter-signup form input'));
-    }
-    inputEmailButton() {
-        return element(by.css('app-newsletter-signup form button'));
-    }
+  inputEmail() {
+    return element(by.css("app-newsletter-signup form input"));
+  }
 
-    inputVoteButton(slug, number) {
-      return element(by.id('vote_' + slug + '_' + number));
-    }
+  inputEmailButton() {
+    return element(by.css("app-newsletter-signup form button"));
+  }
 
-    hasEmailRegistration() {
-        return this.inputEmail().isPresent() && this.inputEmailButton().isPresent();
-    }
+  inputVoteButton(slug, number) {
+    return element(by.id(`vote_${slug}_${number}`));
+  }
 
-    linkToSurvey() {
-        return element(by.css('app-home .side-box button[routerLink="prv"]'));
-    }
+  hasEmailRegistration() {
+    return this.inputEmail().isPresent() && this.inputEmailButton().isPresent();
+  }
 
-    hasLinkToSurvey() {
-        return this.linkToSurvey().isPresent();
-    }
+  linkToSurvey() {
+    return element(by.css('app-home .side-box button[routerLink="prv"]'));
+  }
 
-    hasVotingWidgets() {
-        return element(by.id('showVoteResultsButton')).isPresent() || element(by.id('hideVoteResultsButton')).isPresent();
-    }
+  hasLinkToSurvey() {
+    return this.linkToSurvey().isPresent();
+  }
 
-    isVotingButtonsPresent(slug) {
-      return element(by.id('voteOptionButtons_' + slug)).isPresent();
-    }
+  hasVotingWidgets() {
+    return element(by.id("showVoteResultsButton")).isPresent() || element(by.id("hideVoteResultsButton")).isPresent();
+  }
 
-    // accordion functions
-    getAccordionHeading() {
-        return element(by.id('accordion_heading')).getText();
-    }
+  isVotingButtonsPresent(slug) {
+    return element(by.id(`voteOptionButtons_${slug}`)).isPresent();
+  }
 
-    expandAccordion() {
-        element(by.css('.e2e-accordion-show-all')).click();
-    }
+  // accordion functions
+  getAccordionHeading() {
+    return element(by.id("accordion_heading")).getText();
+  }
 
-    collapseAccordion() {
-        element(by.css('.e2e-accordion-hide-all')).click();
-    }
+  expandAccordion() {
+    element(by.css(".e2e-accordion-show-all")).click();
+  }
 
-    getFirstAccodionElement() {
-        return element(by.css('.e2e-accordion-first-child'));
-    }
+  collapseAccordion() {
+    element(by.css(".e2e-accordion-hide-all")).click();
+  }
+
+  getFirstAccodionElement() {
+    return element(by.css(".e2e-accordion-first-child"));
+  }
 
 }
 

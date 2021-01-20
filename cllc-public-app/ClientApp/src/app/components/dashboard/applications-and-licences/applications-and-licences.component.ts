@@ -1,43 +1,45 @@
-import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
-import { forkJoin, Subscription } from 'rxjs';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { ApplicationDataService } from '@app/services/application-data.service';
-import { LicenseDataService } from '@app/services/license-data.service';
-import { Router } from '@angular/router';
-import { Application } from '@models/application.model';
-import { ApplicationSummary } from '@models/application-summary.model';
-import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
-import { Account } from '@models/account.model';
-import { FeatureFlagService } from '@services/feature-flag.service';
-import { FormBase } from '@shared/form-base';
-import { takeWhile } from 'rxjs/operators';
-import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { SetIndigenousNationModeAction } from '@app/app-state/actions/app-state.action';
+import { Component, OnInit, Input, Inject, Output, EventEmitter } from "@angular/core";
+import { forkJoin, Subscription } from "rxjs";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ApplicationDataService } from "@app/services/application-data.service";
+import { LicenseDataService } from "@app/services/license-data.service";
+import { Router } from "@angular/router";
+import { Application } from "@models/application.model";
+import { ApplicationSummary } from "@models/application-summary.model";
+import { ApplicationType, ApplicationTypeNames } from "@models/application-type.model";
+import { Account } from "@models/account.model";
+import { FeatureFlagService } from "@services/feature-flag.service";
+import { FormBase } from "@shared/form-base";
+import { takeWhile } from "rxjs/operators";
+import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
+import { Store } from "@ngrx/store";
+import { AppState } from "@app/app-state/models/app-state";
+import { SetIndigenousNationModeAction } from "@app/app-state/actions/app-state.action";
+import { PaymentDataService } from "@services/payment-data.service";
+import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from
+  "@components/licences/licences.component";
+import { faPencilAlt, faPlus, faShoppingCart, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import * as moment from 'moment';
-import { PaymentDataService } from '@services/payment-data.service';
-import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from '@components/licences/licences.component';
-import { faPencilAlt, faPlus, faShoppingCart, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 
-export const UPLOAD_FILES_MODE = 'UploadFilesMode';
+export const UPLOAD_FILES_MODE = "UploadFilesMode";
 // export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
 // export const CHANGE_OF_LOCATION_MODE = 'ChangeOfLocationMode';
 
 
-const ACTIVE = 'Active';
+const ACTIVE = "Active";
 // const PAYMENT_REQUIRED = 'Payment Required';
-const RENEWAL_DUE = 'Renewal Due';
+const RENEWAL_DUE = "Renewal Due";
 
 @Component({
-  selector: 'app-applications-and-licences',
-  templateUrl: './applications-and-licences.component.html',
-  styleUrls: ['./applications-and-licences.component.scss']
+  selector: "app-applications-and-licences",
+  templateUrl: "./applications-and-licences.component.html",
+  styleUrls: ["./applications-and-licences.component.scss"]
 })
 export class ApplicationsAndLicencesComponent extends FormBase implements OnInit {
   faPencilAlt = faPencilAlt;
-  faTrashAlt = faTrashAlt
+  faTrashAlt = faTrashAlt;
   faPlus = faPlus;
   faShoppingCart = faShoppingCart;
   inProgressApplications: ApplicationSummary[] = [];
@@ -50,9 +52,12 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   // readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
 
   busy: Subscription;
-  @Input() applicationInProgress: boolean;
-  @Input() account: Account;
-  @Output() marketerApplicationExists: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input()
+  applicationInProgress: boolean;
+  @Input()
+  account: Account;
+  @Output()
+  marketerApplicationExists = new EventEmitter<boolean>();
   dataLoaded = false;
   licencePresentLabel: string;
   licenceAbsentLabel: string;
@@ -85,25 +90,25 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     public featureFlagService: FeatureFlagService,
     public dialog: MatDialog) {
     super();
-    if (featureFlagService.featureOn('Marketer')) {
-      this.licencePresentLabel = '';
-      this.licenceAbsentLabel = '';
+    if (featureFlagService.featureOn("Marketer")) {
+      this.licencePresentLabel = "";
+      this.licenceAbsentLabel = "";
     } else {
-      this.licencePresentLabel = '';
-      this.licenceAbsentLabel = '';
+      this.licencePresentLabel = "";
+      this.licenceAbsentLabel = "";
     }
-    featureFlagService.featureOn('LicenceTransfer')
+    featureFlagService.featureOn("LicenceTransfer")
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((featureOn: boolean) => {
         this.licenceTransferFeatureOn = featureOn;
       });
-    featureFlagService.featureOn('LicenseeChanges')
+    featureFlagService.featureOn("LicenseeChanges")
       .subscribe(x => this.licenseeChangeFeatureOn = x);
-    featureFlagService.featureOn('LiquorOne')
+    featureFlagService.featureOn("LiquorOne")
       .subscribe(x => this.liquorOne = x);
-    featureFlagService.featureOn('LiquorTwo')
+    featureFlagService.featureOn("LiquorTwo")
       .subscribe(x => this.liquorTwo = x);
-    featureFlagService.featureOn('LiquorThree')
+    featureFlagService.featureOn("LiquorThree")
       .subscribe(x => this.liquorThree = x);
   }
 
@@ -115,10 +120,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   isApprovedByLGAndNotSubmitted(item: ApplicationSummary): boolean {
-    let result = item
-      && item.lgHasApproved
-      && !item.isPaid
-      && item.isApplicationComplete !== 'Yes';
+    const result = item && item.lgHasApproved && !item.isPaid && item.isApplicationComplete !== "Yes";
     return result;
   }
 
@@ -128,12 +130,16 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   private displayApplications() {
     this.inProgressApplications = [];
     this.licensedApplications = [];
-    let sub = forkJoin([this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()])
+    const sub = forkJoin([
+        this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
+      ])
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(([applications, licenses]) => {
         this.checkIndigenousNationState(applications);
         // filter out approved applications
-        applications.filter(app => ['Approved', 'Renewal Due', 'Payment Required', 'Active'].indexOf(app.applicationStatus) === -1)
+        applications
+          .filter(
+            app => ["Approved", "Renewal Due", "Payment Required", "Active"].indexOf(app.applicationStatus) === -1)
           .forEach((application: ApplicationSummary) => {
             this.inProgressApplications.push(application);
           });
@@ -153,12 +159,15 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         });
 
         this.marketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.Marketer)
-          .map(item => <any>item)
-          .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length > 0;
+          .map(item => item as any)
+          .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length >
+          0;
 
-        this.nonMarketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.CannabisRetailStore)
-          .map(item => <any>item)
-          .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
+        this.nonMarketerExists = applications
+          .filter(item => item.applicationTypeName === ApplicationTypeNames.CannabisRetailStore)
+          .map(item => item as any)
+          .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length >
+          0;
 
         this.dataLoaded = true;
 
@@ -187,8 +196,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: '400px',
-      height: '200px',
+      width: "400px",
+      height: "200px",
       data: {
         establishmentName: establishmentName,
         applicationName: applicationName
@@ -200,48 +209,54 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     dialogRef.afterClosed()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(cancelApplication => {
-        if (cancelApplication) {
-          // delete the application.
-          this.busy = this.applicationDataService.cancelApplication(applicationId)
-            .pipe(takeWhile(() => this.componentActive))
-            .subscribe(() => {
-              this.displayApplications();
-            });
+          if (cancelApplication) {
+            // delete the application.
+            this.busy = this.applicationDataService.cancelApplication(applicationId)
+              .pipe(takeWhile(() => this.componentActive))
+              .subscribe(() => {
+                this.displayApplications();
+              });
+          }
         }
-      }
       );
 
   }
 
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
-    const actionApplication = licence.actionApplications.find(app => app.applicationTypeName === actionName && app.applicationStatus !== 'Active');
+    const actionApplication =
+      licence.actionApplications.find(app => app.applicationTypeName === actionName &&
+        app.applicationStatus !== "Active");
     if (actionApplication && !actionApplication.isPaid) {
-      this.router.navigateByUrl('/account-profile/' + actionApplication.applicationId);
+      this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
     } else if (actionApplication && actionApplication.isPaid) {
-      this.snackBar.open('Application already submitted', 'Fail',
-        { duration: 3500, panelClass: ['red-snackbar'] });
+      this.snackBar.open("Application already submitted",
+        "Fail",
+        { duration: 3500, panelClass: ["red-snackbar"] });
     } else {
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
-          this.router.navigateByUrl('/account-profile/' + data.id);
-        },
+            this.router.navigateByUrl(`/account-profile/${data.id}`);
+          },
           () => {
-            this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
-              { duration: 3500, panelClass: ['red-snackbar'] });
-            console.log('Error starting a Change Licence Location Application');
+            this.snackBar.open(`Error running licence action for ${actionName}`,
+              "Fail",
+              { duration: 3500, panelClass: ["red-snackbar"] });
+            console.log("Error starting a Change Licence Location Application");
           }
         );
     }
   }
 
   planStoreOpening(licence: ApplicationLicenseSummary) {
-    const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore);
+    const crsApplication =
+      licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore);
     if (crsApplication) {
       this.router.navigate([`/store-opening/${crsApplication.applicationId}`]);
     } else {
-      this.snackBar.open('Unable to find CRS Application', 'Fail',
-        { duration: 3500, panelClass: ['red-snackbar'] });
+      this.snackBar.open("Unable to find CRS Application",
+        "Fail",
+        { duration: 3500, panelClass: ["red-snackbar"] });
     }
   }
 
@@ -252,39 +267,42 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(res => {
-          const data = <any>res;
-          window.location.href = data.url;
-        }, err => {
-          if (err._body === 'Payment already made') {
-            this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          }
-        });
+            const data = res as any;
+            window.location.href = data.url;
+          },
+          err => {
+            if (err._body === "Payment already made") {
+              this.snackBar.open("Licence Fee payment has already been made.",
+                "Fail",
+                { duration: 3500, panelClass: ["red-snackbar"] });
+            }
+          });
     }
   }
 
   startNewLicenceApplication() {
     this.startCRSOngoing = true;
-    const newLicenceApplicationData: Application = <Application>{
-      licenseType: 'Cannabis Retail Store',
+    const newLicenceApplicationData = {
+      licenseType: "Cannabis Retail Store",
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: ApplicationTypeNames.CannabisRetailStore },
+      applicationType: { name: ApplicationTypeNames.CannabisRetailStore } as ApplicationType,
       account: this.account,
       servicehHoursStandardHours: false,
-      serviceHoursSundayOpen: '09:00',
-      serviceHoursMondayOpen: '09:00',
-      serviceHoursTuesdayOpen: '09:00',
-      serviceHoursWednesdayOpen: '09:00',
-      serviceHoursThursdayOpen: '09:00',
-      serviceHoursFridayOpen: '09:00',
-      serviceHoursSaturdayOpen: '09:00',
-      serviceHoursSundayClose: '23:00',
-      serviceHoursMondayClose: '23:00',
-      serviceHoursTuesdayClose: '23:00',
-      serviceHoursWednesdayClose: '23:00',
-      serviceHoursThursdayClose: '23:00',
-      serviceHoursFridayClose: '23:00',
-      serviceHoursSaturdayClose: '23:00',
-    };
+      serviceHoursSundayOpen: "09:00",
+      serviceHoursMondayOpen: "09:00",
+      serviceHoursTuesdayOpen: "09:00",
+      serviceHoursWednesdayOpen: "09:00",
+      serviceHoursThursdayOpen: "09:00",
+      serviceHoursFridayOpen: "09:00",
+      serviceHoursSaturdayOpen: "09:00",
+      serviceHoursSundayClose: "23:00",
+      serviceHoursMondayClose: "23:00",
+      serviceHoursTuesdayClose: "23:00",
+      serviceHoursWednesdayClose: "23:00",
+      serviceHoursThursdayClose: "23:00",
+      serviceHoursFridayClose: "23:00",
+      serviceHoursSaturdayClose: "23:00",
+    } as Application;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
@@ -296,21 +314,23 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.startCRSOngoing = false;
       },
       () => {
-        this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error starting a New Licence Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
         this.startCRSOngoing = false;
-        console.log('Error starting a New Licence Application');
+        console.log("Error starting a New Licence Application");
       }
     );
   }
 
   startNewMarketerApplication() {
     this.startMarketingOngoing = true;
-    const newLicenceApplicationData: Application = <Application>{
-      licenseType: 'Marketing',
+    const newLicenceApplicationData = {
+      licenseType: "Marketing",
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: ApplicationTypeNames.Marketer },
+      applicationType: { name: ApplicationTypeNames.Marketer } as ApplicationType,
       account: this.account,
-    };
+    } as Application;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
@@ -318,21 +338,23 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.router.navigateByUrl(`/multi-step-application/${data.id}`);
       },
       () => {
-        this.snackBar.open('Error starting a New Marketer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error starting a New Marketer Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
         this.startMarketingOngoing = false;
-        console.log('Error starting a New Marketer Application');
+        console.log("Error starting a New Marketer Application");
       }
     );
   }
 
   startNewCateringApplication() {
     this.startCateringOngoing = true;
-    const newLicenceApplicationData: Application = <Application>{
-      licenseType: 'Catering',
+    const newLicenceApplicationData = {
+      licenseType: "Catering",
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: ApplicationTypeNames.Catering },
+      applicationType: { name: ApplicationTypeNames.Catering } as ApplicationType,
       account: this.account,
-    };
+    } as Application;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
@@ -341,21 +363,23 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.router.navigate(route);
       },
       () => {
-        this.snackBar.open('Error starting a Catering Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error starting a Catering Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
         this.startCateringOngoing = false;
-        console.log('Error starting a Catering Application');
+        console.log("Error starting a Catering Application");
       }
     );
   }
 
   startNewMfgApplication() {
     this.startMfgOngoing = true;
-    const newLicenceApplicationData: Application = <Application>{
-      licenseType: 'Manufacturer',
+    const newLicenceApplicationData = {
+      licenseType: "Manufacturer",
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: ApplicationTypeNames.MFG },
+      applicationType: { name: ApplicationTypeNames.MFG } as ApplicationType,
       account: this.account,
-    };
+    } as Application;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
@@ -364,22 +388,23 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.router.navigate(route);
       },
       () => {
-        this.snackBar.open('Error starting a Manufacturer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error starting a Manufacturer Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
         this.startMfgOngoing = false;
-        console.log('Error starting a Manufacturer Application');
+        console.log("Error starting a Manufacturer Application");
       }
     );
   }
 
   startNewFPApplication() {
     this.startFPOngoing = true;
-    const newLicenceApplicationData: Application = <Application>{
-
-      licenseType: 'Food Primary',
+    const newLicenceApplicationData = {
+      licenseType: "Food Primary",
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: ApplicationTypeNames.FP },
+      applicationType: { name: ApplicationTypeNames.FP } as ApplicationType,
       account: this.account,
-    };
+    } as Application;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
@@ -388,22 +413,23 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.router.navigate(route);
       },
       () => {
-        this.snackBar.open('Error starting a Food Primary Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error starting a Food Primary Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
         this.startFPOngoing = false;
-        console.log('Error starting a Food Primary Application');
+        console.log("Error starting a Food Primary Application");
       }
     );
   }
 
   startNewLPApplication() {
     this.startLPOngoing = true;
-    const newLicenceApplicationData: Application = <Application>{
-
-      licenseType: 'Liquor Primary',
+    const newLicenceApplicationData = {
+      licenseType: "Liquor Primary",
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: ApplicationTypeNames.LP },
+      applicationType: { name: ApplicationTypeNames.LP } as ApplicationType,
       account: this.account,
-    };
+    } as Application;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
@@ -412,21 +438,23 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.router.navigate(route);
       },
       () => {
-        this.snackBar.open('Error starting a Liquor Primary Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error starting a Liquor Primary Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
         this.startLPOngoing = false;
-        console.log('Error starting a Liquor Primary Application');
+        console.log("Error starting a Liquor Primary Application");
       }
     );
   }
 
   startNewRASApplication() {
     this.startRASOngoing = true;
-    const newLicenceApplicationData: Application = <Application>{
-      licenseType: 'Rural Agency Store',
+    const newLicenceApplicationData = {
+      licenseType: "Rural Agency Store",
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: ApplicationTypeNames.RAS },
+      applicationType: { name: ApplicationTypeNames.RAS } as ApplicationType,
       account: this.account,
-    };
+    } as Application;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
@@ -435,21 +463,23 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.router.navigate(route);
       },
       () => {
-        this.snackBar.open('Error starting a Rural Agency Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error starting a Rural Agency Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
         this.startRASOngoing = false;
-        console.log('Error starting a Rural Agency Application');
+        console.log("Error starting a Rural Agency Application");
       }
     );
   }
 
   startNewUBVApplication() {
     this.startUBVOngoing = true;
-    const newLicenceApplicationData: Application = <Application>{
-      licenseType: 'UBrew and UVin',
+    const newLicenceApplicationData = {
+      licenseType: "UBrew and UVin",
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: ApplicationTypeNames.UBV },
+      applicationType: { name: ApplicationTypeNames.UBV } as ApplicationType,
       account: this.account,
-    };
+    } as Application;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
@@ -458,42 +488,46 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.router.navigate(route);
       },
       () => {
-        this.snackBar.open('Error starting a Rural Agency Store Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error starting a Rural Agency Store Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
         this.startUBVOngoing = false;
-        console.log('Error starting a Rural Agency Store Application');
+        console.log("Error starting a Rural Agency Store Application");
       }
     );
   }
 
   startRenewal(licence: ApplicationLicenseSummary) {
-    const renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === 'CRS Renewal');
+    const renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === "CRS Renewal");
     if (renewalApplication && !renewalApplication.isPaid) {
-      this.router.navigateByUrl('/renew-crs-licence/application/' + renewalApplication.applicationId);
+      this.router.navigateByUrl(`/renew-crs-licence/application/${renewalApplication.applicationId}`);
     } else if (renewalApplication && renewalApplication.isPaid) {
-      this.snackBar.open('Renewal application already submitted', 'Fail',
-        { duration: 3500, panelClass: ['red-snackbar'] });
+      this.snackBar.open("Renewal application already submitted",
+        "Fail",
+        { duration: 3500, panelClass: ["red-snackbar"] });
     } else {
-      const actionName = 'CRS Renewal';
+      const actionName = "CRS Renewal";
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
-          this.router.navigateByUrl('/renew-crs-licence/application/' + data.id);
-        },
+            this.router.navigateByUrl(`/renew-crs-licence/application/${data.id}`);
+          },
           () => {
-            this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
-              { duration: 3500, panelClass: ['red-snackbar'] });
-            console.log('Error starting a Change Licence Location Application');
+            this.snackBar.open(`Error running licence action for ${actionName}`,
+              "Fail",
+              { duration: 3500, panelClass: ["red-snackbar"] });
+            console.log("Error starting a Change Licence Location Application");
           }
         );
     }
   }
 
   startEndorsementApplication(application: Application, endorsementType: string) {
-    const newLicenceApplicationData: Application = <Application>{
+    const newLicenceApplicationData = {
       parentApplicationId: application.id,
       licenseType: application.licenseType,
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: endorsementType },
+      applicationType: { name: endorsementType } as ApplicationType,
       establishmentAddress: application.establishmentAddress,
       establishmentAddressCity: application.establishmentAddressCity,
       establishmentAddressPostalCode: application.establishmentAddressPostalCode,
@@ -505,7 +539,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       policeJurisdictionId: application.policeJurisdictionId,
       indigenousNationId: application.indigenousNationId,
       account: this.account,
-    };
+    } as Application;
 
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
@@ -514,26 +548,26 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.router.navigate(route);
       },
       () => {
-        this.snackBar.open(`Error starting the Application`, 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open(`Error starting the Application`, "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
       }
     );
   }
 
   isAboutToExpire(expiryDate: string) {
-    const now = moment(new Date()).startOf('day');
-    const expiry = moment(expiryDate).startOf('day');
-    const diff = expiry.diff(now, 'days') + 1;
+    const now = moment(new Date()).startOf("day");
+    const expiry = moment(expiryDate).startOf("day");
+    const diff = expiry.diff(now, "days") + 1;
     return diff <= 60 || expiry < now;
   }
 
   licenceHasExpired(expiryDate: string) {
-    const now = moment(new Date()).startOf('day');
-    const expiry = moment(expiryDate).startOf('day');
+    const now = moment(new Date()).startOf("day");
+    const expiry = moment(expiryDate).startOf("day");
     return expiry < now;
   }
 
   getRenewalType(applicationType: string): string {
-    let licenceType = '';
+    let licenceType = "";
     if (applicationType === ApplicationTypeNames.CRSRenewal) {
       licenceType = CRS_RENEWAL_LICENCE_TYPE_NAME;
     } else if (applicationType === ApplicationTypeNames.LiquorRenewal) {
@@ -544,20 +578,20 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   CRSElligible(): boolean {
     switch (this.account && this.account.businessType) {
-      case "University":
-      case "Church":
-        return false;
-      default:
-        return true;
+    case "University":
+    case "Church":
+      return false;
+    default:
+      return true;
     }
   }
 
   getApplicationStatusText(status: string) {
-    if (status === 'Processed') {
-      return 'Application Under Review';
+    if (status === "Processed") {
+      return "Application Under Review";
     }
     if (status === "Pending Licence Fee") {
-      return 'Pending First Year Fee'
+      return "Pending First Year Fee";
     }
     return status;
   }
@@ -573,8 +607,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 }
 
 @Component({
-  selector: 'app-application-cancellation-dialog',
-  templateUrl: 'application-cancellation-dialog.html',
+  selector: "app-application-cancellation-dialog",
+  templateUrl: "application-cancellation-dialog.html",
 })
 export class ApplicationCancellationDialogComponent {
 
@@ -597,4 +631,3 @@ export class ApplicationCancellationDialogComponent {
   }
 
 }
-

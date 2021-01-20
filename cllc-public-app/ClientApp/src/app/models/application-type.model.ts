@@ -1,7 +1,7 @@
 
-import { LicenseType } from './license-type.model';
-import { ApplicationContentType } from './application-content-type.model';
-import { DynamicsForm } from './dynamics-form.model';
+import { LicenseType } from "./license-type.model";
+import { ApplicationContentType } from "./application-content-type.model";
+import { DynamicsForm } from "./dynamics-form.model";
 
 export class ApplicationType {
   id: string;
@@ -61,9 +61,9 @@ export class ApplicationType {
 }
 
 export enum FormControlState {
-  Show = 'Yes',
-  Hide = 'No',
-  ReadOnly = 'Readonly'
+  Show = "Yes",
+  Hide = "No",
+  ReadOnly = "Readonly"
 }
 
 export enum ApplicationTypeNames {
