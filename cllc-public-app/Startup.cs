@@ -597,7 +597,7 @@ namespace Gov.Lclb.Cllb.Public
                     spa.Options.SourcePath = "ClientApp";
 
                     // allow up to 3 minutes for angular to compile the first time
-                    spa.Options.StartupTimeout = new TimeSpan(0, 3, 0);
+                    
                     // Only run the angular CLI Server in Development mode (not staging or test.)
                     if (env.IsDevelopment())
                     {

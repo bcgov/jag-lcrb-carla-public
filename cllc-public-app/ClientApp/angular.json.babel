@@ -9,9 +9,14 @@
       "projectType": "application",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-			"sourceMap": true,		  
+		    "customWebpackConfig": {
+               "path": "./extra-webpack.config.js",
+               "mergeRules": {
+                 "externals": "replace"
+               }
+            },
    		    "optimization": false,
 			"outputHashing": "none",
             "outputPath": "dist",
@@ -63,7 +68,7 @@
               ]
             },
 			"development": {                        
-                        "sourceMap": true,
+                        "sourceMap": false,
                         "namedChunks": false,
 						"showCircularDependencies": false,
                         "aot": true,
