@@ -1,11 +1,10 @@
 {
-  "compileOnSave": true,
+  "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./src",
     "downlevelIteration": true,
-	"allowSyntheticDefaultImports": true,
     "outDir": "./dist/out-tsc",
-    "sourceMap": false,
+    "sourceMap": true,
     "declaration": false,
     "module": "es2020",
     "moduleResolution": "node",
@@ -30,6 +29,6 @@
     }
   },
   "angularCompilerOptions": {
-    "enableIvy": false
+    "enableIvy": true
   }
 }
