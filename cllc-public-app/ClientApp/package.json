@@ -82,6 +82,7 @@
     "@typescript-eslint/parser": "^4.14.0",
     "angular-named-lazy-chunks-webpack-plugin": "^2.1.0",
     "babel-minify-webpack-plugin": "^0.3.1",
+    "babel-plugin-import": "^1.13.3",
     "bootstrap": "^4.6.0",
     "codelyzer": "^6.0.1",
     "eslint": "^7.18.0",
