@@ -1,0 +1,11 @@
+{
+	"compact": false,
+    "env": {
+      "development" : {
+        "compact": false		
+      },
+	  "production" : {
+        "compact": true		
+      }
+    }
+}

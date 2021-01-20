@@ -5,12 +5,12 @@
       <i class="fas fa-check"></i>
     </ng-template>
     < !-- <ng-template matStepperIcon="number">
-  </ng-template> -- >
+    </ng-template> -- >
 
     < !-- step 1 -- >
     <mat-step label="Review Account Profile">
       <app-account-profile *ngIf="stepper.selectedIndex === 0" [useInStepperMode]="true" style="width: 100%"
-        (saveComplete)="stepper.selectedIndex = 1">
+                           (saveComplete)="stepper.selectedIndex = 1">
       </app-account-profile>
     </mat-step>
 
@@ -19,7 +19,7 @@
       <ng-container *ngIf="licenseeChangesEnabled">
         <ng-template matStepLabel>Review Organization Structure</ng-template>
         <app-application-licensee-changes [redirectToDashboardOnSave]="false" *ngIf="stepper.selectedIndex === 1" class="w-100"
-          (saveComplete)="stepper.selectedIndex = 2"></app-application-licensee-changes>
+                                          (saveComplete)="stepper.selectedIndex = 2"></app-application-licensee-changes>
       </ng-container>
 
       <ng-container *ngIf="!licenseeChangesEnabled && licenceType === CRS_RENEWAL_LICENCE_TYPE_NAME">
@@ -36,9 +36,9 @@
     < !-- step 3 -- >
     <mat-step *ngIf="licenseeChangesEnabled" label="Complete Application">
       <app-application-renewal *ngIf="stepper.selectedIndex === 2 && licenceType === CRS_RENEWAL_LICENCE_TYPE_NAME"
-        style="width: 100%"></app-application-renewal>
+                               style="width: 100%"></app-application-renewal>
       <app-liquor-renewal *ngIf="stepper.selectedIndex === 2 && licenceType === LIQUOR_RENEWAL_LICENCE_TYPE_NAME"
-        style="width: 100%"></app-liquor-renewal>
+                          style="width: 100%"></app-liquor-renewal>
     </mat-step>
   </mat-horizontal-stepper>
 
@@ -47,6 +47,8 @@
 
 
 <app-application-renewal *ngIf="licenceType === CRS_RENEWAL_LICENCE_TYPE_NAME"
-style="width: 100%"></app-application-renewal>
+                         style="width: 100%">
+</app-application-renewal>
 <app-liquor-renewal *ngIf="licenceType === LIQUOR_RENEWAL_LICENCE_TYPE_NAME"
-style="width: 100%"></app-liquor-renewal>
+                    style="width: 100%">
+</app-liquor-renewal>

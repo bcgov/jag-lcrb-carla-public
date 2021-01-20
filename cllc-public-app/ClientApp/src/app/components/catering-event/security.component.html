@@ -1,254 +1,254 @@
 <div class="form-wrapper" style="position: relative;">
-  <div [ngBusy]="[busy]"></div>
-  <form [formGroup]="securityForm">
-    <div class="padded-section">
-      <h1>Safety and Security Plan</h1>
+<div [ngBusy]="[busy]"></div>
+<form [formGroup]="securityForm">
+<div class="padded-section">
+  <h1>Safety and Security Plan</h1>
+</div>
+
+<div class="padded-section">
+  <p>Given the nature of your Catered Event Authorization request, a safety and security plan is required.</p>
+</div>
+
+<h3 class="blue-header">EVENT DESCRIPTION AND LAYOUT</h3>
+<div class="padded-section clearfix">
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="Please describe the areas where liquor will be consumed (e.g. tent, inside the whole hall, etc.):" [required]="true"
+               [valid]="securityForm.get('eventLiquorLayout').valid || !securityForm.get('eventLiquorLayout').touched"
+               errorMessage="Please enter a valid description" [isFullWidth]="true">
+      <textarea class="form-control" formControlName="eventLiquorLayout"></textarea>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-6 col-xs-10"
+               errorMessage="Please enter the contact phone number" [isFullWidth]="true">
+      <label>Please attach a sketch/diagram of your event showing the following:</label>
+      <ol type="a">
+        <li>The perimeter of the whole event, not just the liquor service area</li>
+        <li>The location, size, and perimeter of the liquor service area (if different from the whole event)</li>
+        <li>Exits and entrances - including where ID is checked (for the whole event and for the liquor service area)</li>
+        <li>Location of ticket sales (for entrance and for drinks)</li>
+        <li>Event focus (location of entertainment / stage, sports activities, displays, etc.)</li>
+        <li>Other amenities, concession stands, bike storage, washroom facilities, first aid</li>
+      </ol>
+      <app-file-uploader documentType="SecurityPlan"
+                         [enableFileDeletion]="!isReadOnly"
+                         [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="!isReadOnly"
+                         entityName="event" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+                         (numberOfUploadedFiles)="uploadedSecurityDocuments = $event" [entityId]="securityForm.get('id').value"
+                         [uploadHeader]="'TO UPLOAD DOCUMENTS OF THE EVENT, DRAG FILES HERE OR'">
+      </app-file-uploader>
+      <h1>File upload here</h1>
+    </app-field>
+  </div>
+  <div class="row">
+    <label class="pl-4">Please provide an estimate for the following:</label>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="The number of attendees, per day:" [required]="true"
+               [valid]="securityForm.get('dailyEventAttendees').valid || !securityForm.get('dailyEventAttendees').touched"
+               errorMessage="Please enter the number of attendees per day">
+      <input type="text" class="form-control" formControlName="dailyEventAttendees"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="The number of minors attending, per day:" [required]="true"
+               [valid]="securityForm.get('dailyMinorAttendees').valid || !securityForm.get('dailyMinorAttendees').touched"
+               errorMessage="Please enter the number of minors attending per day">
+      <input type="text" class="form-control" formControlName="dailyMinorAttendees"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <!-- <app-field class="col-md-5 col-xs-10" label="The occupant load of the event:" [required]="true"
+                    [valid]="securityForm.get('occupantLoad').valid || !securityForm.get('occupantLoad').touched"
+                    errorMessage="Please enter the occupant load of the event">
+      <input type="text" class="form-control" formControlName="occupantLoad"/>
+      <mat-checkbox formControlName="occupantLoadAvailable">Occupant load not available</mat-checkbox>
+    </app-field> -->
+
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="The occupant load of the service area:" [required]="true"
+               [valid]="securityForm.get('occupantLoadServiceArea').valid || !securityForm.get('occupantLoadServiceArea').touched"
+               errorMessage="Please enter the occupant load of the service area">
+      <input type="text" class="form-control" formControlName="occupantLoadServiceArea"/>
+      <mat-checkbox formControlName="occupantLoadServiceAreaAvailable">Occupant load not available</mat-checkbox>
+    </app-field>
+
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="Please describe how you will contain the liquor service area by describing the barriers (fencing height, specific rooms, etc.) you will use and describing how you will control the entrance(s) and exit(s)." [required]="true"
+               [valid]="securityForm.get('serviceAreaControlledDetails').valid || !securityForm.get('serviceAreaControlledDetails').touched"
+               errorMessage="Please enter a valid description" [isFullWidth]="true">
+      <textarea class="form-control" formControlName="serviceAreaControlledDetails"></textarea>
+    </app-field>
+  </div>
+</div>
+
+<h3 class="blue-header">EVENT STAFFING</h3>
+<div class="padded-section clearfix">
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="Managers: How many people will be managing your liquor service (if the numbers vary, indicate how many at which times)?" [required]="true"
+               [valid]="securityForm.get('staffingManagers').valid || !securityForm.get('staffingManagers').touched"
+               errorMessage="Please enter the number of managers" [isFullWidth]="true">
+      <input type="text" class="form-control" formControlName="staffingManagers"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="Bartenders: How many people will be bartending at your liquor service (if the numbers vary, indicate how many at which times)?" [required]="true"
+               [valid]="securityForm.get('staffingBartenders').valid || !securityForm.get('staffingBartenders').touched"
+               errorMessage="Please enter the number of bartenders" [isFullWidth]="true">
+      <input type="text" class="form-control" formControlName="staffingBartenders"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="Servers: How many people will be serving liquor in your liquor service area (if the numbers vary, indicate how many at which times)?" [required]="true"
+               [valid]="securityForm.get('staffingServers').valid || !securityForm.get('staffingServers').touched"
+               errorMessage="Please enter the number of servers" [isFullWidth]="true">
+      <input type="text" class="form-control" formControlName="staffingServers"/>
+    </app-field>
+  </div>
+</div>
+
+<h3 class="blue-header">EVENT SECURITY</h3>
+<div class="padded-section clearfix">
+  <div class="row">
+    <div class="col-md-5 col-xs-10">
+      <p>Many large events require security personnel to prevent the entrance of unruly or disruptive persons and/or removing persons who become unruly, disruptive, or who present a safety risk to others. Staff or contractors providing door security in licensed establishments are required to be licensed under the <i>Security Services Act</i>.</p>
+      <p>If you will be having security personnel at your event, please answer these questions</p>
     </div>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="How many paid security personnel will be attending at the liquor service portion of your event (if the numbers vary, indicate how many at which times)?"
+               [valid]="securityForm.get('securityPersonnel').valid || !securityForm.get('securityPersonnel').touched"
+               errorMessage="Please enter the number of security personnel" [isFullWidth]="true">
+      <input type="text" class="form-control" formControlName="securityPersonnel"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="How many of the security personnel are hired through a security company?"
+               [valid]="securityForm.get('securityPersonnelThroughCompany').valid || !securityForm.get('securityPersonnelThroughCompany').touched"
+               errorMessage="Please enter the number of security personnel hired through a company" [isFullWidth]="true">
+      <input type="text" class="form-control" formControlName="securityPersonnelThroughCompany"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="Name of security company:"
+               [valid]="securityForm.get('securityCompanyName').valid || !securityForm.get('securityCompanyName').touched"
+               errorMessage="Please enter the name of the security company">
+      <input type="text" class="form-control" formControlName="securityCompanyName"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="Mailing address:"
+               [valid]="securityForm.get('securityCompanyAddress').valid || !securityForm.get('securityCompanyAddress').touched"
+               errorMessage="Please enter the address of the security company">
+      <input type="text" class="form-control" formControlName="securityCompanyAddress"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="City:"
+               [valid]="securityForm.get('securityCompanyCity').valid || !securityForm.get('securityCompanyCity').touched"
+               errorMessage="Please enter the city of the security company">
+      <input type="text" class="form-control" formControlName="securityCompanyCity"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="Postal code:"
+               [valid]="securityForm.get('securityCompanyPostalCode').valid || !securityForm.get('securityCompanyPostalCode').touched"
+               errorMessage="Please enter the postal code of the security company">
+      <input type="text" class="form-control" formControlName="securityCompanyPostalCode"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="Company contact person:"
+               [valid]="securityForm.get('securityCompanyContactPerson').valid || !securityForm.get('securityCompanyContactPerson').touched"
+               errorMessage="Please enter the contact person of the security company">
+      <input type="text" class="form-control" formControlName="securityCompanyContactPerson"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="Phone:"
+               [valid]="securityForm.get('securityCompanyPhoneNumber').valid || !securityForm.get('securityCompanyPhoneNumber').touched"
+               errorMessage="Please enter the phone number of the security company">
+      <input type="text" class="form-control" formControlName="securityCompanyPhoneNumber" mask="(000) 000-0000"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="Email:"
+               [valid]="securityForm.get('securityCompanyEmail').valid || !securityForm.get('securityCompanyEmail').touched"
+               errorMessage="Please enter the email of the security company">
+      <input type="text" class="form-control" formControlName="securityCompanyEmail"/>
+    </app-field>
+  </div>
+  <div class="row">
+    <app-field class="col-md-5 col-xs-10" label="How many police officers will be attending at the liquor service portion of your event (if the numbers vary, indicate how many at which times)?"
+               [valid]="securityForm.get('securityPoliceOfficerSummary').valid || !securityForm.get('securityPoliceOfficerSummary').touched"
+               errorMessage="Please enter the number of police officers">
+      <input type="text" class="form-control" formControlName="securityPoliceOfficerSummary"/>
+    </app-field>
+  </div>
+</div>
 
-    <div class="padded-section">
-      <p>Given the nature of your Catered Event Authorization request, a safety and security plan is required.</p>
-    </div>
+<h3 class="blue-header">SAFE AND RESPONSIBLE SERVICE</h3>
+<div class="padded-section clearfix">
+  <div class="row mb-5">
+    <app-field class="col-md-5 col-xs-10" label="Minors - Describe what measures will be put in place to prevent minors from consuming alcohol"
+               [valid]="securityForm.get('safeAndResponsibleMinorsOtherDescription').valid || !securityForm.get('safeAndResponsibleMinorsOtherDescription').touched"
+               errorMessage="Please enter details" [isFullWidth]="true">
+      <textarea class="form-control" formControlName="safeAndResponsibleMinorsOtherDescription"></textarea>
+      <mat-checkbox class="d-block" formControlName="safeAndResponsibleMinorsNotAttending">Not applicable - no minors are attending the event</mat-checkbox>
+    </app-field>
+  </div>
 
-    <h3 class="blue-header">EVENT DESCRIPTION AND LAYOUT</h3>
-    <div class="padded-section clearfix">
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="Please describe the areas where liquor will be consumed (e.g. tent, inside the whole hall, etc.):" [required]="true"
-          [valid]="securityForm.get('eventLiquorLayout').valid || !securityForm.get('eventLiquorLayout').touched"
-          errorMessage="Please enter a valid description" [isFullWidth]="true">
-          <textarea class="form-control" formControlName="eventLiquorLayout"></textarea>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-6 col-xs-10"
-          errorMessage="Please enter the contact phone number" [isFullWidth]="true">
-          <label>Please attach a sketch/diagram of your event showing the following:</label>
-          <ol type="a">
-            <li>The perimeter of the whole event, not just the liquor service area</li>
-            <li>The location, size, and perimeter of the liquor service area (if different from the whole event)</li>
-            <li>Exits and entrances - including where ID is checked (for the whole event and for the liquor service area)</li>
-            <li>Location of ticket sales (for entrance and for drinks)</li>
-            <li>Event focus (location of entertainment / stage, sports activities, displays, etc.)</li>
-            <li>Other amenities, concession stands, bike storage, washroom facilities, first aid</li>
-          </ol>
-          <app-file-uploader documentType="SecurityPlan"
-            [enableFileDeletion]="!isReadOnly"
-            [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="!isReadOnly"
-            entityName="event" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
-            (numberOfUploadedFiles)="uploadedSecurityDocuments = $event" [entityId]="securityForm.get('id').value"
-            [uploadHeader]="'TO UPLOAD DOCUMENTS OF THE EVENT, DRAG FILES HERE OR'">
-          </app-file-uploader>
-          <h1>File upload here</h1>
-        </app-field>
-      </div>
-      <div class="row">
-        <label class="pl-4">Please provide an estimate for the following:</label>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="The number of attendees, per day:" [required]="true"
-          [valid]="securityForm.get('dailyEventAttendees').valid || !securityForm.get('dailyEventAttendees').touched"
-          errorMessage="Please enter the number of attendees per day">
-          <input type="text" class="form-control" formControlName="dailyEventAttendees"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="The number of minors attending, per day:" [required]="true"
-          [valid]="securityForm.get('dailyMinorAttendees').valid || !securityForm.get('dailyMinorAttendees').touched"
-          errorMessage="Please enter the number of minors attending per day">
-          <input type="text" class="form-control" formControlName="dailyMinorAttendees"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <!-- <app-field class="col-md-5 col-xs-10" label="The occupant load of the event:" [required]="true"
-          [valid]="securityForm.get('occupantLoad').valid || !securityForm.get('occupantLoad').touched"
-          errorMessage="Please enter the occupant load of the event">
-          <input type="text" class="form-control" formControlName="occupantLoad"/>
-          <mat-checkbox formControlName="occupantLoadAvailable">Occupant load not available</mat-checkbox>
-        </app-field> -->
-        
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="The occupant load of the service area:" [required]="true"
-          [valid]="securityForm.get('occupantLoadServiceArea').valid || !securityForm.get('occupantLoadServiceArea').touched"
-          errorMessage="Please enter the occupant load of the service area">
-          <input type="text" class="form-control" formControlName="occupantLoadServiceArea"/>
-          <mat-checkbox formControlName="occupantLoadServiceAreaAvailable">Occupant load not available</mat-checkbox>
-        </app-field>
-        
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="Please describe how you will contain the liquor service area by describing the barriers (fencing height, specific rooms, etc.) you will use and describing how you will control the entrance(s) and exit(s)." [required]="true"
-          [valid]="securityForm.get('serviceAreaControlledDetails').valid || !securityForm.get('serviceAreaControlledDetails').touched"
-          errorMessage="Please enter a valid description" [isFullWidth]="true">
-          <textarea class="form-control" formControlName="serviceAreaControlledDetails"></textarea>
-        </app-field>
-      </div>
-    </div>
+  <div class="row mb-5">
+    <app-field class="col-md-5 col-xs-10" label="Removal of intoxicated patrons - You must not permit intoxicated patrons to remain in the service area. What arrangements will you make to ensure that intoxicated patrons are removed from the event and get to a safe location?"
+               [valid]="securityForm.get('safeAndResponsibleOverConsumptionOtherDescription').valid || !securityForm.get('safeAndResponsibleOverConsumptionOtherDescription').touched"
+               errorMessage="Please enter details" [isFullWidth]="true">
+      <textarea class="form-control" formControlName="safeAndResponsibleOverConsumptionOtherDescription"></textarea>
+    </app-field>
+  </div>
 
-    <h3 class="blue-header">EVENT STAFFING</h3>
-    <div class="padded-section clearfix">
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="Managers: How many people will be managing your liquor service (if the numbers vary, indicate how many at which times)?" [required]="true"
-          [valid]="securityForm.get('staffingManagers').valid || !securityForm.get('staffingManagers').touched"
-          errorMessage="Please enter the number of managers" [isFullWidth]="true">
-          <input type="text" class="form-control" formControlName="staffingManagers"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="Bartenders: How many people will be bartending at your liquor service (if the numbers vary, indicate how many at which times)?" [required]="true"
-          [valid]="securityForm.get('staffingBartenders').valid || !securityForm.get('staffingBartenders').touched"
-          errorMessage="Please enter the number of bartenders" [isFullWidth]="true">
-          <input type="text" class="form-control" formControlName="staffingBartenders"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="Servers: How many people will be serving liquor in your liquor service area (if the numbers vary, indicate how many at which times)?" [required]="true"
-          [valid]="securityForm.get('staffingServers').valid || !securityForm.get('staffingServers').touched"
-          errorMessage="Please enter the number of servers" [isFullWidth]="true">
-          <input type="text" class="form-control" formControlName="staffingServers"/>
-        </app-field>
-      </div>
-    </div>
+  <div class="row mb-5">
+    <app-field class="col-md-5 col-xs-10" label="Respect for neighbors - What actions will you take to ensure participants do not unduly disturb the neighborhood when the event ends?"
+               [valid]="securityForm.get('safeAndResponsibleDisturbancesOtherDescription').valid || !securityForm.get('safeAndResponsibleDisturbancesOtherDescription').touched"
+               errorMessage="Please enter details" [isFullWidth]="true">
+      <textarea class="form-control" formControlName="safeAndResponsibleDisturbancesOtherDescription"></textarea>
+    </app-field>
+  </div>
 
-    <h3 class="blue-header">EVENT SECURITY</h3>
-    <div class="padded-section clearfix">
-      <div class="row">
-        <div class="col-md-5 col-xs-10">
-          <p>Many large events require security personnel to prevent the entrance of unruly or disruptive persons and/or removing persons who become unruly, disruptive, or who present a safety risk to others. Staff or contractors providing door security in licensed establishments are required to be licensed under the <i>Security Services Act</i>.</p>
-          <p>If you will be having security personnel at your event, please answer these questions</p>
-        </div>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="How many paid security personnel will be attending at the liquor service portion of your event (if the numbers vary, indicate how many at which times)?"
-          [valid]="securityForm.get('securityPersonnel').valid || !securityForm.get('securityPersonnel').touched"
-          errorMessage="Please enter the number of security personnel" [isFullWidth]="true">
-          <input type="text" class="form-control" formControlName="securityPersonnel"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="How many of the security personnel are hired through a security company?"
-          [valid]="securityForm.get('securityPersonnelThroughCompany').valid || !securityForm.get('securityPersonnelThroughCompany').touched"
-          errorMessage="Please enter the number of security personnel hired through a company" [isFullWidth]="true">
-          <input type="text" class="form-control" formControlName="securityPersonnelThroughCompany"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="Name of security company:"
-          [valid]="securityForm.get('securityCompanyName').valid || !securityForm.get('securityCompanyName').touched"
-          errorMessage="Please enter the name of the security company">
-          <input type="text" class="form-control" formControlName="securityCompanyName"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="Mailing address:"
-          [valid]="securityForm.get('securityCompanyAddress').valid || !securityForm.get('securityCompanyAddress').touched"
-          errorMessage="Please enter the address of the security company">
-          <input type="text" class="form-control" formControlName="securityCompanyAddress"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="City:"
-          [valid]="securityForm.get('securityCompanyCity').valid || !securityForm.get('securityCompanyCity').touched"
-          errorMessage="Please enter the city of the security company">
-          <input type="text" class="form-control" formControlName="securityCompanyCity"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="Postal code:"
-          [valid]="securityForm.get('securityCompanyPostalCode').valid || !securityForm.get('securityCompanyPostalCode').touched"
-          errorMessage="Please enter the postal code of the security company">
-          <input type="text" class="form-control" formControlName="securityCompanyPostalCode"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="Company contact person:"
-          [valid]="securityForm.get('securityCompanyContactPerson').valid || !securityForm.get('securityCompanyContactPerson').touched"
-          errorMessage="Please enter the contact person of the security company">
-          <input type="text" class="form-control" formControlName="securityCompanyContactPerson"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="Phone:"
-          [valid]="securityForm.get('securityCompanyPhoneNumber').valid || !securityForm.get('securityCompanyPhoneNumber').touched"
-          errorMessage="Please enter the phone number of the security company">
-          <input type="text" class="form-control" formControlName="securityCompanyPhoneNumber" mask="(000) 000-0000"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="Email:"
-          [valid]="securityForm.get('securityCompanyEmail').valid || !securityForm.get('securityCompanyEmail').touched"
-          errorMessage="Please enter the email of the security company">
-          <input type="text" class="form-control" formControlName="securityCompanyEmail"/>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-5 col-xs-10" label="How many police officers will be attending at the liquor service portion of your event (if the numbers vary, indicate how many at which times)?"
-          [valid]="securityForm.get('securityPoliceOfficerSummary').valid || !securityForm.get('securityPoliceOfficerSummary').touched"
-          errorMessage="Please enter the number of police officers">
-          <input type="text" class="form-control" formControlName="securityPoliceOfficerSummary"/>
-        </app-field>
-      </div>
-    </div>
+  <div class="row mb-5">
+    <app-field class="col-md-5 col-xs-10" label="How will the entrances to the liquor service area be supervised?"
+               [valid]="securityForm.get('safeAndResponsibleServiceAreaSupervision').valid || !securityForm.get('safeAndResponsibleServiceAreaSupervision').touched"
+               errorMessage="Please enter details" [isFullWidth]="true">
+      <textarea class="form-control" formControlName="safeAndResponsibleServiceAreaSupervision"></textarea>
+    </app-field>
+  </div>
 
-    <h3 class="blue-header">SAFE AND RESPONSIBLE SERVICE</h3>
-    <div class="padded-section clearfix">
-      <div class="row mb-5">
-        <app-field class="col-md-5 col-xs-10" label="Minors - Describe what measures will be put in place to prevent minors from consuming alcohol"
-            [valid]="securityForm.get('safeAndResponsibleMinorsOtherDescription').valid || !securityForm.get('safeAndResponsibleMinorsOtherDescription').touched"
-            errorMessage="Please enter details" [isFullWidth]="true">
-          <textarea class="form-control" formControlName="safeAndResponsibleMinorsOtherDescription"></textarea>
-          <mat-checkbox class="d-block" formControlName="safeAndResponsibleMinorsNotAttending">Not applicable - no minors are attending the event</mat-checkbox>
-        </app-field>
-      </div>
+  <div class="row mb-5">
+    <app-field class="col-md-5 col-xs-10" label="Please describe any additional safety and security measures"
+               [valid]="securityForm.get('safeAndResponsibleAdditionalSafetyMeasures').valid || !securityForm.get('safeAndResponsibleAdditionalSafetyMeasures').touched"
+               errorMessage="Please enter details" [isFullWidth]="true">
+      <textarea class="form-control" formControlName="safeAndResponsibleAdditionalSafetyMeasures"></textarea>
+    </app-field>
+  </div>
+</div>
 
-      <div class="row mb-5">
-        <app-field class="col-md-5 col-xs-10" label="Removal of intoxicated patrons - You must not permit intoxicated patrons to remain in the service area. What arrangements will you make to ensure that intoxicated patrons are removed from the event and get to a safe location?"
-            [valid]="securityForm.get('safeAndResponsibleOverConsumptionOtherDescription').valid || !securityForm.get('safeAndResponsibleOverConsumptionOtherDescription').touched"
-            errorMessage="Please enter details" [isFullWidth]="true">
-          <textarea class="form-control" formControlName="safeAndResponsibleOverConsumptionOtherDescription"></textarea>
-        </app-field>
-      </div>
+<h3 class="blue-header">AGREEMENT</h3>
+<div class="padded-section clearfix">
+  <mat-checkbox formControlName="declarationIsAccurate">I declare the information provided is accurate and the safety and security actions will be taken with respect to the event.</mat-checkbox>
+</div>
 
-      <div class="row mb-5">
-        <app-field class="col-md-5 col-xs-10" label="Respect for neighbors - What actions will you take to ensure participants do not unduly disturb the neighborhood when the event ends?"
-            [valid]="securityForm.get('safeAndResponsibleDisturbancesOtherDescription').valid || !securityForm.get('safeAndResponsibleDisturbancesOtherDescription').touched"
-            errorMessage="Please enter details" [isFullWidth]="true">
-          <textarea class="form-control" formControlName="safeAndResponsibleDisturbancesOtherDescription"></textarea>
-        </app-field>
-      </div>
-
-      <div class="row mb-5">
-        <app-field class="col-md-5 col-xs-10" label="How will the entrances to the liquor service area be supervised?"
-            [valid]="securityForm.get('safeAndResponsibleServiceAreaSupervision').valid || !securityForm.get('safeAndResponsibleServiceAreaSupervision').touched"
-            errorMessage="Please enter details" [isFullWidth]="true">
-          <textarea class="form-control" formControlName="safeAndResponsibleServiceAreaSupervision"></textarea>
-        </app-field>
-      </div>
-      
-      <div class="row mb-5">
-        <app-field class="col-md-5 col-xs-10" label="Please describe any additional safety and security measures"
-            [valid]="securityForm.get('safeAndResponsibleAdditionalSafetyMeasures').valid || !securityForm.get('safeAndResponsibleAdditionalSafetyMeasures').touched"
-            errorMessage="Please enter details" [isFullWidth]="true">
-          <textarea class="form-control" formControlName="safeAndResponsibleAdditionalSafetyMeasures"></textarea>
-        </app-field>
-      </div>
-    </div>
-
-    <h3 class="blue-header">AGREEMENT</h3>
-    <div class="padded-section clearfix">
-      <mat-checkbox formControlName="declarationIsAccurate">I declare the information provided is accurate and the safety and security actions will be taken with respect to the event.</mat-checkbox>
-    </div>
-
-    <div class="p-4 button-row">
-      <button class="btn btn-primary" style="margin-right:10px;" (click)="cancel();">
-        <span>
-          <fa-icon [icon]="faTrash" style="color: #fff;" *ngIf="!isReadOnly"></fa-icon>
-          CANCEL
-        </span>
-      </button>
-      <button class="btn btn-primary" (click)="save()" [disabled]="isFormInvalid()" *ngIf="!isReadOnly">SUBMIT</button>
-    </div>
-  </form>
-  <pre *ngIf="isDebugMode">
+<div class="p-4 button-row">
+  <button class="btn btn-primary" style="margin-right: 10px;" (click)="cancel();">
+    <span>
+      <fa-icon [icon]="faTrash" style="color: #fff;" *ngIf="!isReadOnly"></fa-icon>
+      CANCEL
+    </span>
+  </button>
+  <button class="btn btn-primary" (click)="save()" [disabled]="isFormInvalid()" *ngIf="!isReadOnly">SUBMIT</button>
+</div>
+</form>
+<pre *ngIf="isDebugMode">
     {{printValidity()}}
   </pre>
 </div>

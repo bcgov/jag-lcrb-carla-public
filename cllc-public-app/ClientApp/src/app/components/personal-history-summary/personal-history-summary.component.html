@@ -1,543 +1,550 @@
 <div class="form-wrapper" [formGroup]="form">
-    <h1>Personal History Summary</h1>
+<h1>Personal History Summary</h1>
 
-    <div class="row">
-        <div class="col-md-8">
+<div class="row">
+<div class="col-md-8">
 
-            <section class="d-flex">
-                <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
-                <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-                    <p>
-                        This form must be completed and submitted before LCRB will start work on
-                        any of your related liquor licensing application(s).</p>
-                    <p>
-                        You must obtain your Criminal Record Check (completed within the last 4 months) from your local
-                        RCMP detachment or police department. If you live/have
-                        lived outside of Canada, provide the alternate documentation requested below.
-                    </p>
+<section class="d-flex">
+  <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+  <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+    <p>
+      This form must be completed and submitted before LCRB will start work on
+      any of your related liquor licensing application(s).
+    </p>
+    <p>
+      You must obtain your Criminal Record Check (completed within the last 4 months) from your local
+      RCMP detachment or police department. If you live/have
+      lived outside of Canada, provide the alternate documentation requested below.
+    </p>
 
-                    <p class="pl-3">
-                        <strong>Note</strong>:&nbsp;
-                        At any time, the LCRB may require you to consent to subsequent criminal record checks.
-                    </p>
+    <p class="pl-3">
+      <strong>Note</strong>:&nbsp;
+      At any time, the LCRB may require you to consent to subsequent criminal record checks.
+    </p>
 
-                    <div>
-                        <label>INSTRUCTIONS</label>:
-                        <ul>
-                            <li>You must complete all questions in order to submit. Information will not be saved unless
-                                the form is complete.
-                            </li>
-                            <li>Attach all supporting documentation as directed.</li>
-                        </ul>
-                        <p class="pl-3">
-                            <strong>Note</strong>: &nbsp;
-                            Having a criminal record does not cause your LCRB application to automatically be denied.
-                            LCRB will carefully review the circumstances of the individual case; severity and date of
-                            the offence for example, and how the type of offence relates to the responsibility of
-                            holding a liquor licence.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- {{form.value | json}} -->
-            <h3 class="blue-header">BASIC INFORMATION</h3>
-
-            <section class="padded-section border-around">
-                <div formGroupName="contact">
-                    <app-field label="Name">
-                        <input class="form-control" style="width: 400px;" type="text" formControlName="shortName"
-                            readonly disabled>
-                    </app-field>
-
-                    <app-field label="Date of Birth" errorMessage="Date of Birth is required"
-                        [valid]="!form.get('contact.birthDate').touched || form.get('contact.birthDate').valid">
-                        <input type="text" formControlName='birthDate' style="width: 200px; background-color: #fff;"
-                            placeholder="yyyy-mm-dd" readonly class="form-control" [matDatepicker]="picker"
-                            (focus)="picker.open()" (click)="picker.open()">
-                        <mat-datepicker #picker></mat-datepicker>
-                    </app-field>
-
-                    <app-field label="Gender" errorMessage="Please select gender"
-                        [valid]="!form.get('contact.gender').touched || form.get('contact.gender').valid">
-                        <mat-radio-group formControlName="gender">
-                            <mat-radio-button value="Male" style="margin-right: 10px;">Male </mat-radio-button>
-                            <mat-radio-button value="Female" style="margin-right: 10px;">Female </mat-radio-button>
-                            <mat-radio-button value="Other">Other </mat-radio-button>
-                        </mat-radio-group>
-                    </app-field>
-                </div>
-                <hr>
-                <app-field label="Name at Birth">
-                    <section class="padded">
-                        <mat-checkbox color="primary" formControlName="sameNameAtBirth">I had the same name at birth
-                        </mat-checkbox>
-
-                        <ng-container *ngIf="form.get('sameNameAtBirth').value === false">
-                            <app-field label="First Name at Birth" errorMessage="Please enter First Name at Birth"
-                                [valid]="!form.get('firstNameAtBirth').touched || form.get('firstNameAtBirth').valid">
-                                <input class="form-control" style="width: 300px;" type="text"
-                                    formControlName="firstNameAtBirth">
-                            </app-field>
-
-                            <app-field label="Last Name at Birth" errorMessage="Please enter Last Name at Birth"
-                                [valid]="!form.get('lastNameAtBirth').touched || form.get('lastNameAtBirth').valid">
-                                <input class="form-control" style="width: 300px;" type="text"
-                                    formControlName="lastNameAtBirth">
-                            </app-field>
-                        </ng-container>
-                    </section>
-                </app-field>
-                <hr>
-
-                <app-field label="Other Last Names Used">
-                    <div formGroupName="contact">
-                        <section formArrayName="aliases" class="padded-section">
-                            <div *ngFor="let alias of aliases.controls; let i = index">
-                                <div [formGroupName]="i">
-                                    <app-field label="Last Name {{ i + 1}}" style="width:80%"
-                                        errorMessage="Please enter last name" [showChevrons]="false"
-                                        [valid]="!aliases.at(i).get('lastname').touched || aliases.at(i).get('lastname').valid"
-                                        [isFullWidth]="true">
-                                        <input class="form-control" style="width: 300px;" type="text"
-                                            formControlName="lastname"> <fa-icon [icon]="faTrashAlt" class="ml-3"
-                                            (click)="deleteAlias(i)"></fa-icon>
-                                    </app-field>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <button (click)="addAlias()" class="btn btn-secondary" style="padding-left:10px;">Add Last
-                        Name</button>
-                </app-field>
-            </section>
-
-
-            <h3 class="blue-header">CURRENT ADDRESS</h3>
-            <div formGroupName="contact" class="padded-section border-around">
-                <address class="row">
-                    <app-field class="col-md-12 col-xs-12" label="Address" [required]="true"
-                        errorMessage="Please enter Address"
-                        [valid]="!form.get('contact.address1_line1').touched || form.get('contact.address1_line1').valid"
-                        [isFullWidth]="true">
-                        <input class="form-control" type="text" formControlName="address1_line1">
-                    </app-field>
-                    <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true"
-                        errorMessage="Please enter City" [required]="true"
-                        [valid]="!form.get('contact.address1_city').touched || form.get('contact.address1_city').valid">
-                        <input class="form-control" type="text" formControlName="address1_city">
-                    </app-field>
-                    <section class="col-md-4 col-xs-12">
-                        <app-field label="Province/State" [isFullWidth]="true" errorMessage="Please enter Province"
-                            [required]="true"
-                            [valid]="!form.get('contact.address1_stateorprovince').touched || form.get('contact.address1_stateorprovince').valid">
-                            <input class="form-control" type="text" formControlName="address1_stateorprovince"
-                                value="British Columbia">
-                        </app-field>
-                    </section>
-                    <section class="col-md-4 col-xs-12">
-                        <app-field label="Postal Code" errorMessage="Please enter Postal Code" [required]="true"
-                            [valid]="!form.get('contact.address1_postalcode').touched || form.get('contact.address1_postalcode').valid">
-                            <input class="form-control" type="text" formControlName="address1_postalcode">
-                        </app-field>
-                    </section>
-                    <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true"
-                        errorMessage="Please enter Country" [required]="true"
-                        [valid]="!form.get('contact.address1_country').touched || form.get('contact.address1_country').valid">
-                        <input formControlName="address1_country" class="form-control" autocomplete="country-name"
-                            type="text" value="Canada">
-                    </app-field>
-                </address>
-                <section>
-                    <app-field label="Phone Number" [required]="true"
-                        [valid]="!form.get('contact.mobilePhone').touched || form.get('contact.mobilePhone').valid"
-                        errorMessage="Please enter a 10-digit phone number" >
-                        <input formControlName="mobilePhone" class="form-control" mask="(000) 000-0000" style="width: 350px;"
-                            autocomplete="tel" type="text">
-                    </app-field>
-
-                    <app-field label="Email" [required]="true" errorMessage="Please enter email address"
-                        [valid]="!form.get('contact.emailaddress1').touched || form.get('contact.emailaddress1').valid"
-                        afterLabelText="By submitting this email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your Personal History Summary."
-                        style="padding-left:20px;">
-                        <input formControlName="emailaddress1" class="form-control" style="width: 350px;" type="text"
-                            autocomplete="email">
-                    </app-field>
-                </section>
-            </div>
-
-            <h3 class="blue-header">QUESTIONNAIRE</h3>
-            <section formGroupName="contact" class="padded-section border-around">
-
-                <!-- Question 1 Do you live in Canada -->
-
-                
-                        <section style="display: flex; justify-content: space-between; width: 100%;">
-  
-                            <div class="question-label bold;">1. Do you live in Canada?</div>
-                            <div style="flex: 0 0 200px;">
-                                <app-field [required]="false" [isFullWidth]="true"
-                                    [valid]="!form.get('contact.phsLivesInCanada').touched || form.get('contact.phsLivesInCanada').valid"
-                                    errorMessage="Please select">
-                                    <mat-radio-group formControlName="phsLivesInCanada">
-                                            <mat-radio-button value="Yes">Yes</mat-radio-button>
-                                            <mat-radio-button value="No">No</mat-radio-button>
-                                        </mat-radio-group>
-                                </app-field>
-                            </div>
-                            
-                            
-                        </section>
-                        
-                    
-                        <hr>
-                <!-- If 1 yes show Question 2a -->                
-                <!-- Question 2a Have you lived in Canada for more than 5 years? -->
-
-
-                <section *ngIf="form.get('contact.phsLivesInCanada').value === ''" style="display: flex; justify-content: space-between; width: 100%;">
-                        <div class="question-label bold;"  style="padding-bottom: 20px; padding-top:0px; color: #aaa;">
-                            <i>2. Depends on Answer to Question 1</i>
-                        </div>
-
-                    </section>                
-
-
-                <section *ngIf="form.get('contact.phsLivesInCanada').value === 'Yes'" style="display: flex; justify-content: space-between; width: 100%;">
-                    <div class="question-label bold;">
-                        2. Have you lived in Canada for more than 5 years?
-                    </div>
-                    <div style="flex: 0 0 200px;">
-                        <app-field [required]="false" [isFullWidth]="true"
-                            [valid]="!form.get('contact.phsHasFive').touched || form.get('contact.phsHasFive').valid"
-                            errorMessage="Please select">
-                            <mat-radio-group formControlName="phsHasFive" aria-label="Font Style">
-                                <mat-radio-button value="Yes">Yes</mat-radio-button>
-                                <mat-radio-button value="No">No</mat-radio-button>
-                            </mat-radio-group>
-                        </app-field>
-                    </div>
-                </section>
-
-
-                <!-- If 1 no show Question 2b-->
-                <!-- Question 2b Have you ever in Canada? -->
-
-                <section *ngIf="form.get('contact.phsLivesInCanada').value === 'No'" style="display: flex; justify-content: space-between; width: 100%;">
-                    <div class="question-label bold">
-                        2. Have you ever lived in Canada?
-                    </div>
-                    <div style="flex: 0 0 200px;">
-                        <app-field [required]="false" [isFullWidth]="true"
-                            [valid]="!form.get('contact.phsHasLivedInCanada').touched || form.get('contact.phsHasLivedInCanada').valid"
-                            errorMessage="Please select">
-                            <mat-radio-group formControlName="phsHasLivedInCanada" aria-label="Font Style">
-                                    <mat-radio-button value="Yes">Yes</mat-radio-button>
-                                    <mat-radio-button value="No">No</mat-radio-button>
-                                </mat-radio-group>
-                        </app-field>
-                    </div>
-                </section>
-                <hr>
-                <!-- Question 3 Convicted of a Crime -->
-
-
-                <section style="display: flex; justify-content: space-between; width: 100%;">
-                    <div class="question-label">
-                        3. Have you ever been charged with, or convicted of, a criminal or drug/alcohol related
-                        offence under the laws of any country outside of Canada, or the laws or bylaws of any
-                        provincial, state or local government?
-                    </div>
-                    <div style="flex: 0 0 200px;">
-                        <app-field [required]="false" [isFullWidth]="true"
-                            [valid]="!form.get('contact.phsForeignDrugAlchoholOffence').touched || form.get('contact.phsForeignDrugAlchoholOffence').valid"
-                            errorMessage="Please select">
-                            <mat-radio-group formControlName="phsForeignDrugAlchoholOffence" aria-label="Font Style">
-                                    <mat-radio-button value="Yes">Yes</mat-radio-button>
-                                    <mat-radio-button value="No">No</mat-radio-button>
-                                </mat-radio-group>
-                        </app-field>
-                    </div>
-                </section>
-
-                <hr>
-                <!-- Question 4 Alcohol and Drug DUI -->    
-                
-                <section style="display: flex; justify-content: space-between; width: 100%;">
-                    <div class="question-label">
-                        4. Have you received any alcohol/drug related driving infractions in the past 5 years in
-                        Canada or under the laws of any other country or jurisdiction?
-                    </div>
-                    <div style="flex: 0 0 200px;">
-                        <app-field [required]="false" [isFullWidth]="true"
-                            [valid]="!form.get('contact.phsCanadianDrugAlchoholDrivingOffence').touched || form.get('contact.phsCanadianDrugAlchoholDrivingOffence').valid"
-                            errorMessage="Please select">
-                            <mat-radio-group formControlName="phsCanadianDrugAlchoholDrivingOffence" aria-label="Font Style">
-                                    <mat-radio-button value="Yes">Yes</mat-radio-button>
-                                    <mat-radio-button value="No">No</mat-radio-button>
-                                </mat-radio-group>
-                        </app-field>
-                    </div>
-                </section>
-                    
-                <hr>
-                <!-- If 1 Yes show CRC Form-->
-
-
-                
-
-                <!-- if !2a or !2b or 3 or 4 Show B -->
-
-                <!-- if 4 Show C -->
-
-                <!-- Show attestation form -->
-
-
-                <!-- Question 5 Interest in a BC Liquor Licence --> 
-
-                    <section style="display: flex; justify-content: space-between; width: 100%;">
-                        <div class="question-label">
-                            5. Have you ever held, or do you or your immeditate family members currently hold, any
-                            ownership or interest in a B.C. liquour licence?
-                        </div>
-                        <div style="flex: 0 0 200px;">
-                            <app-field [required]="false" [isFullWidth]="true"
-                                [valid]="!form.get('contact.phsConnectionsToOtherLicences').touched || form.get('contact.phsConnectionsToOtherLicences').valid"
-                                errorMessage="Please select">
-                                <mat-radio-group formControlName="phsConnectionsToOtherLicences" aria-label="Font Style">
-                                        <mat-radio-button value="Yes">Yes</mat-radio-button>
-                                        <mat-radio-button value="No">No</mat-radio-button>
-                                    </mat-radio-group>
-                            </app-field>
-                        </div>
-                        
-                    </section>
-
-                <app-field [isFullWidth]="true"
-                *ngIf="form.get('contact.phsConnectionsToOtherLicences').value === 'Yes'"
-                [valid]="!form.get('contact.phsConnectionsDetails').touched || form.get('contact.phsConnectionsDetails').valid"
-                errorMessage="Please enter details:"
-                label="Please provide details of the licence(s) or application(s).">
-                <textarea formControlName="phsConnectionsDetails" class="form-control w-100" rows="10"></textarea>
-            </app-field>    
-            
-            <hr>
-
-            <!-- Question 6 Do you hold a Rural Store Appointment? -->                            
-
-            <!-- Question 7 Agreement to Sell liquor of a mfg to the exclusion of another mfg -->
-
-                <section style="display: flex; justify-content: space-between; width: 100%;">
-                    <div class="question-label">
-                        6. Have you agreed with anyone to sell the liquor of a manufacturer to the exclusion 
-                        of another liquor manufacturer?
-                    </div>
-                    <div style="flex: 0 0 200px;">
-                        <app-field [required]="false" [isFullWidth]="true"
-                            [valid]="!form.get('contact.phsExclusiveMFG').touched || form.get('contact.phsExclusiveMFG').valid"
-                            errorMessage="Please select">
-                            <mat-radio-group formControlName="phsExclusiveMFG" aria-label="Font Style">
-                                    <mat-radio-button value="Yes">Yes</mat-radio-button>
-                                    <mat-radio-button value="No">No</mat-radio-button>
-                                </mat-radio-group>
-                        </app-field>
-                    </div>
-                </section>
-            
-            <app-field [isFullWidth]="true"
-            *ngIf="form.get('contact.phsExclusiveMFG').value === 'Yes'"
-            [valid]="!form.get('contact.phsExclusiveDetails').touched || form.get('contact.phsExclusiveDetails').valid"
-            errorMessage="Please enter details"
-            label="Please provide details:">
-            <textarea formControlName="phsExclusiveDetails" class="form-control w-100" rows="10"></textarea>
-        </app-field>                                                  
-
-        <hr>
-            <!-- Question 8 Interest in a mfg, importer, agent -->
-
-                <section style="display: flex; justify-content: space-between; width: 100%;">
-                    <div class="question-label">
-                        7. Do you or your immediate family members have any association with, or financial interest 
-                        in, a B.C. liquor manufacturer, a liquor importer, or the agent of a liquor manufacturer/importer?
-                    </div>
-                    <div style="flex: 0 0 200px;">
-                        <app-field [required]="false" [isFullWidth]="true"
-                            [valid]="!form.get('contact.phsFinancialInt').touched || form.get('contact.phsFinancialInt').valid"
-                            errorMessage="Please select">
-                            <mat-radio-group formControlName="phsFinancialInt" aria-label="Font Style">
-                                    <mat-radio-button value="Yes">Yes</mat-radio-button>
-                                    <mat-radio-button value="No">No</mat-radio-button>
-                                </mat-radio-group>
-                        </app-field>
-                    </div>
-                </section>
-            
-            <app-field [isFullWidth]="true"
-            *ngIf="form.get('contact.phsFinancialInt').value === 'Yes'"
-            [valid]="!form.get('contact.phsFinancialIntDetails').touched || form.get('contact.phsFinancialIntDetails').valid"
-            errorMessage="Please enter details"
-            label="Please provide details:">
-            <textarea formControlName="phsFinancialIntDetails" class="form-control w-100" rows="10"></textarea>
-        </app-field>  
-        <hr>                          
-
-            <!-- Question 9 Shareholder or Profit Sharing Agreement with people not named in the licence application-->                                        
-
-                <section style="display: flex; justify-content: space-between; width: 100%;">
-                    <div class="question-label">
-                        8. Have you entered into a Shareholder Agreement, Profit Sharing Agreement or other 
-                        similar agreement with anyone not named in the licence application?
-                    </div>
-                    <div style="flex: 0 0 200px;">
-                        <app-field [required]="false" [isFullWidth]="true"
-                            [valid]="!form.get('contact.phsProfitAgreement').touched || form.get('contact.phsProfitAgreement').valid"
-                            errorMessage="Please select">
-                            <mat-radio-group formControlName="phsProfitAgreement" aria-label="Font Style">
-                                    <mat-radio-button value="Yes">Yes</mat-radio-button>
-                                    <mat-radio-button value="No">No</mat-radio-button>
-                                </mat-radio-group>
-                        </app-field>
-                    </div>
-                </section>
-
-            <app-field [isFullWidth]="true"
-            *ngIf="form.get('contact.phsProfitAgreement').value === 'Yes'"
-            [valid]="!form.get('contact.phsProfitAgreementDetails').touched || form.get('contact.phsProfitAgreementDetails').valid"
-            errorMessage="Please enter details"
-            label="Please provide details:">
-            <textarea formControlName="phsProfitAgreementDetails" class="form-control w-100" rows="10"></textarea>
-            <hr>
-        </app-field>    
-
-    </section>
-        <h3 class="blue-header">REQUIRED DOCUMENTS</h3>
-        <section formGroupName="contact" class="padded-section border-around">
-
-    
-                <ng-container *ngIf="showCRCUpload()">
-                        <section class="padded-section">
-                            <h4 class="plain-header">DOCUMENT REQUIRED: Criminal Record Check</h4>
-                            <p>
-                                Upload a scan of your completed criminal record check, completed withing the last 4 months
-                                by your local RCMP detachment or police department.
-                            </p>
-                            <section>
-                                <app-file-uploader documentType="CRC" [useDocumentTypeForName]="true"
-                                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
-                                    entityName="contact" [extensions]="['pdf']"
-                                    [entityId]="contactToken" (numberOfUploadedFiles)="updateUploadedFiles($event, 'CRC')"
-                                    [uploadHeader]="'TO UPLOAD CRIMINAL RECORD CHECK, DRAG FILE HERE OR'"
-                                    [publicAccess]="true">
-                                </app-file-uploader>
-                            </section>
-                        </section>
-                        <hr>    
-                    </ng-container>
-                    
-        <ng-container *ngIf="showStatutoryDeclaration()">
-                <h4 class="plain-header">DOCUMENT REQUIRED: Statutory Declaration</h4>
-                <p>
-                    Please upload a statutory declaration, signed by a lawyer, Notary Public or Commissioner for
-                    Taking
-                    Affidavits:
-                </p>
-                <ol>
-                    <li>stating you have not been charged with, or convicted of a criminal or drug/alcohol offence
-                        under the
-                        laws of
-                        any country or the laws/bylaws of any provincial, government; OR</li>
-                    <li>providing details (date, disposition, sentence or fine) of any
-                        charges/convictions/sentences; AND/OR
-                    </li>
-                    <li>providing details of any alcohol/drug related driving infractions in the past 5 years</li>
-                </ol>
-                <section>
-                    <app-file-uploader documentType="StatDeclaration" [useDocumentTypeForName]="true"
-                        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
-                        (numberOfUploadedFiles)="updateUploadedFiles($event, 'StatDeclaration')"
-                        entityName="contact" [extensions]="['pdf']" [entityId]="contactToken"
-                        [uploadHeader]="'TO UPLOAD STATUTORY DECLARATION, DRAG FILE HERE OR'"
-                        [publicAccess]="true">
-                    </app-file-uploader>
-                </section>
-                <hr>
-            </ng-container>
-
-
-            <ng-container *ngIf="showDriversAbstract()">
-                <h4 class="plain-header">DOCUMENT REQUIRED: Driver's Abstract</h4>
-                <p>
-                    Please upload a copy of your driver's abstract for the past 5 years, if you have held a Canadian drivers 
-                    licence in that time.  For BC driver's abstracts contact 
-                    <a href="http://www.icbc.com/driver-licensing/getting-licensed/Pages/Your-driving-record.aspx" target="_blank">ICBC</a>
-                        or call 1-800-663-3051; otherwise contact the applicable Canadian jurisdiction(s).
-                </p>
-                <section>
-                    <app-file-uploader documentType="DriverExtract" [useDocumentTypeForName]="true"
-                        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
-                        (numberOfUploadedFiles)="updateUploadedFiles($event, 'DriverExtract')"
-                        entityName="contact" [extensions]="['pdf']" [entityId]="contactToken"
-                        [uploadHeader]="'TO UPLOAD DRIVERS EXTRACT, DRAG FILE HERE OR'"
-                        [publicAccess]="true">
-                    </app-file-uploader>
-                </section>
-                <hr>
-            </ng-container>
-
-
-
-        <ng-container>
-                <h4 class="plain-header">DOCUMENT REQUIRED: Declaration FORM</h4>
-                <p>
-                        Please complete, sign and date the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/personal_history_summary_screening_-_signature_form.pdf" target="_blank">Personal History Summary Declaration Form</a>.
-                    </p>
-                <section>
-                    <app-file-uploader documentType="DeclarationForm" [useDocumentTypeForName]="true"
-                        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
-                        (numberOfUploadedFiles)="updateUploadedFiles($event, 'DeclarationForm')"
-                        entityName="contact" [extensions]="['pdf']" [entityId]="contactToken"
-                        [uploadHeader]="'TO UPLOAD DECLARATION, DRAG FILE HERE OR'"
-                        [publicAccess]="true">
-                    </app-file-uploader>
-                </section>
-                
-            </ng-container>
-
-            </section>
-
-
-            <section class="error mt-3" *ngIf="validationErrors?.length">
-                <p *ngFor="let message of validationErrors">
-                    <span class="app-cancel">
-                        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-                        {{message}}
-                    </span>
-                </p>
-            </section>
-
-            <div *ngIf="!form.valid && showErrors" class="error-summary mt-3">
-                <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
-                <span>Some required fields have not been completed</span>
-            </div>
-
-            <button class="btn btn-primary mt-3" (click)="save()">Submit Personal History Summary Form for Review</button>
-        </div>
-        <div class="col-md-4">
-            <section class="submit-container p-3" style="background-color: #F2F2F2; color:#000; border: none;">
-                <h2 style="color: #000">Collection Notice:</h2>
-                <div class="submit-content p-3">
-                    <p>
-                        The information requested on this form is collected by the Liquor and Cannabis Regulation Branch
-                        under Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act for
-                        the purpose of cannabis licensing, compliance and enforcement matters in accordance with the
-                        Cannabis Control and Licensing Act. Should you have any questions about the collection, use, or
-                        disclosure of personal information, please contact the Freedom of Information Officer at PO Box
-                        9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
-                    </p>
-                </div>
-            </section>
-        </div>
+    <div>
+      <label>INSTRUCTIONS</label>:
+      <ul>
+        <li>
+          You must complete all questions in order to submit. Information will not be saved unless
+          the form is complete.
+        </li>
+        <li>Attach all supporting documentation as directed.</li>
+      </ul>
+      <p class="pl-3">
+        <strong>Note</strong>: &nbsp;
+        Having a criminal record does not cause your LCRB application to automatically be denied.
+        LCRB will carefully review the circumstances of the individual case; severity and date of
+        the offence for example, and how the type of offence relates to the responsibility of
+        holding a liquor licence.
+      </p>
     </div>
+  </div>
+</section>
+
+<!-- {{form.value | json}} -->
+<h3 class="blue-header">BASIC INFORMATION</h3>
+
+<section class="padded-section border-around">
+  <div formGroupName="contact">
+    <app-field label="Name">
+      <input class="form-control" style="width: 400px;" type="text" formControlName="shortName"
+             readonly disabled>
+    </app-field>
+
+    <app-field label="Date of Birth" errorMessage="Date of Birth is required"
+               [valid]="!form.get('contact.birthDate').touched || form.get('contact.birthDate').valid">
+      <input type="text" formControlName="birthDate" style="background-color: #fff; width: 200px;"
+             placeholder="yyyy-mm-dd" readonly class="form-control" [matDatepicker]="picker"
+             (focus)="picker.open()" (click)="picker.open()">
+      <mat-datepicker #picker></mat-datepicker>
+    </app-field>
+
+    <app-field label="Gender" errorMessage="Please select gender"
+               [valid]="!form.get('contact.gender').touched || form.get('contact.gender').valid">
+      <mat-radio-group formControlName="gender">
+        <mat-radio-button value="Male" style="margin-right: 10px;">Male </mat-radio-button>
+        <mat-radio-button value="Female" style="margin-right: 10px;">Female </mat-radio-button>
+        <mat-radio-button value="Other">Other </mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+  </div>
+  <hr>
+  <app-field label="Name at Birth">
+    <section class="padded">
+      <mat-checkbox color="primary" formControlName="sameNameAtBirth">
+        I had the same name at birth
+      </mat-checkbox>
+
+      <ng-container *ngIf="form.get('sameNameAtBirth').value === false">
+        <app-field label="First Name at Birth" errorMessage="Please enter First Name at Birth"
+                   [valid]="!form.get('firstNameAtBirth').touched || form.get('firstNameAtBirth').valid">
+          <input class="form-control" style="width: 300px;" type="text"
+                 formControlName="firstNameAtBirth">
+        </app-field>
+
+        <app-field label="Last Name at Birth" errorMessage="Please enter Last Name at Birth"
+                   [valid]="!form.get('lastNameAtBirth').touched || form.get('lastNameAtBirth').valid">
+          <input class="form-control" style="width: 300px;" type="text"
+                 formControlName="lastNameAtBirth">
+        </app-field>
+      </ng-container>
+    </section>
+  </app-field>
+  <hr>
+
+  <app-field label="Other Last Names Used">
+    <div formGroupName="contact">
+      <section formArrayName="aliases" class="padded-section">
+        <div *ngFor="let alias of aliases.controls; let i = index">
+          <div [formGroupName]="i">
+            <app-field label="Last Name {{ i + 1}}" style="width: 80%"
+                       errorMessage="Please enter last name" [showChevrons]="false"
+                       [valid]="!aliases.at(i).get('lastname').touched || aliases.at(i).get('lastname').valid"
+                       [isFullWidth]="true">
+              <input class="form-control" style="width: 300px;" type="text"
+                     formControlName="lastname">
+              <fa-icon [icon]="faTrashAlt" class="ml-3"
+                       (click)="deleteAlias(i)">
+              </fa-icon>
+            </app-field>
+          </div>
+        </div>
+      </section>
+    </div>
+    <button (click)="addAlias()" class="btn btn-secondary" style="padding-left: 10px;">
+      Add Last
+      Name
+    </button>
+  </app-field>
+</section>
+
+
+<h3 class="blue-header">CURRENT ADDRESS</h3>
+<div formGroupName="contact" class="padded-section border-around">
+  <address class="row">
+    <app-field class="col-md-12 col-xs-12" label="Address" [required]="true"
+               errorMessage="Please enter Address"
+               [valid]="!form.get('contact.address1_line1').touched || form.get('contact.address1_line1').valid"
+               [isFullWidth]="true">
+      <input class="form-control" type="text" formControlName="address1_line1">
+    </app-field>
+    <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true"
+               errorMessage="Please enter City" [required]="true"
+               [valid]="!form.get('contact.address1_city').touched || form.get('contact.address1_city').valid">
+      <input class="form-control" type="text" formControlName="address1_city">
+    </app-field>
+    <section class="col-md-4 col-xs-12">
+      <app-field label="Province/State" [isFullWidth]="true" errorMessage="Please enter Province"
+                 [required]="true"
+                 [valid]="!form.get('contact.address1_stateorprovince').touched || form.get('contact.address1_stateorprovince').valid">
+        <input class="form-control" type="text" formControlName="address1_stateorprovince"
+               value="British Columbia">
+      </app-field>
+    </section>
+    <section class="col-md-4 col-xs-12">
+      <app-field label="Postal Code" errorMessage="Please enter Postal Code" [required]="true"
+                 [valid]="!form.get('contact.address1_postalcode').touched || form.get('contact.address1_postalcode').valid">
+        <input class="form-control" type="text" formControlName="address1_postalcode">
+      </app-field>
+    </section>
+    <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true"
+               errorMessage="Please enter Country" [required]="true"
+               [valid]="!form.get('contact.address1_country').touched || form.get('contact.address1_country').valid">
+      <input formControlName="address1_country" class="form-control" autocomplete="country-name"
+             type="text" value="Canada">
+    </app-field>
+  </address>
+  <section>
+    <app-field label="Phone Number" [required]="true"
+               [valid]="!form.get('contact.mobilePhone').touched || form.get('contact.mobilePhone').valid"
+               errorMessage="Please enter a 10-digit phone number">
+      <input formControlName="mobilePhone" class="form-control" mask="(000) 000-0000" style="width: 350px;"
+             autocomplete="tel" type="text">
+    </app-field>
+
+    <app-field label="Email" [required]="true" errorMessage="Please enter email address"
+               [valid]="!form.get('contact.emailaddress1').touched || form.get('contact.emailaddress1').valid"
+               afterLabelText="By submitting this email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your Personal History Summary."
+               style="padding-left: 20px;">
+      <input formControlName="emailaddress1" class="form-control" style="width: 350px;" type="text"
+             autocomplete="email">
+    </app-field>
+  </section>
+</div>
+
+<h3 class="blue-header">QUESTIONNAIRE</h3>
+<section formGroupName="contact" class="padded-section border-around">
+
+<!-- Question 1 Do you live in Canada -->
+
+
+<section style="display: flex; justify-content: space-between; width: 100%;">
+
+  <div class="question-label bold;">1. Do you live in Canada?</div>
+  <div style="flex: 0 0 200px;">
+    <app-field [required]="false" [isFullWidth]="true"
+               [valid]="!form.get('contact.phsLivesInCanada').touched || form.get('contact.phsLivesInCanada').valid"
+               errorMessage="Please select">
+      <mat-radio-group formControlName="phsLivesInCanada">
+        <mat-radio-button value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+  </div>
+
+
+</section>
+
+
+<hr>
+<!-- If 1 yes show Question 2a -->
+<!-- Question 2a Have you lived in Canada for more than 5 years? -->
+
+
+<section *ngIf="form.get('contact.phsLivesInCanada').value === ''" style="display: flex; justify-content: space-between; width: 100%;">
+  <div class="question-label bold;" style="color: #aaa; padding-bottom: 20px; padding-top: 0px;">
+    <i>2. Depends on Answer to Question 1</i>
+  </div>
+
+</section>
+
+
+<section *ngIf="form.get('contact.phsLivesInCanada').value === 'Yes'" style="display: flex; justify-content: space-between; width: 100%;">
+  <div class="question-label bold;">
+    2. Have you lived in Canada for more than 5 years?
+  </div>
+  <div style="flex: 0 0 200px;">
+    <app-field [required]="false" [isFullWidth]="true"
+               [valid]="!form.get('contact.phsHasFive').touched || form.get('contact.phsHasFive').valid"
+               errorMessage="Please select">
+      <mat-radio-group formControlName="phsHasFive" aria-label="Font Style">
+        <mat-radio-button value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+  </div>
+</section>
+
+
+<!-- If 1 no show Question 2b-->
+<!-- Question 2b Have you ever in Canada? -->
+
+<section *ngIf="form.get('contact.phsLivesInCanada').value === 'No'" style="display: flex; justify-content: space-between; width: 100%;">
+  <div class="question-label bold">
+    2. Have you ever lived in Canada?
+  </div>
+  <div style="flex: 0 0 200px;">
+    <app-field [required]="false" [isFullWidth]="true"
+               [valid]="!form.get('contact.phsHasLivedInCanada').touched || form.get('contact.phsHasLivedInCanada').valid"
+               errorMessage="Please select">
+      <mat-radio-group formControlName="phsHasLivedInCanada" aria-label="Font Style">
+        <mat-radio-button value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+  </div>
+</section>
+<hr>
+<!-- Question 3 Convicted of a Crime -->
+
+
+<section style="display: flex; justify-content: space-between; width: 100%;">
+  <div class="question-label">
+    3. Have you ever been charged with, or convicted of, a criminal or drug/alcohol related
+    offence under the laws of any country outside of Canada, or the laws or bylaws of any
+    provincial, state or local government?
+  </div>
+  <div style="flex: 0 0 200px;">
+    <app-field [required]="false" [isFullWidth]="true"
+               [valid]="!form.get('contact.phsForeignDrugAlchoholOffence').touched || form.get('contact.phsForeignDrugAlchoholOffence').valid"
+               errorMessage="Please select">
+      <mat-radio-group formControlName="phsForeignDrugAlchoholOffence" aria-label="Font Style">
+        <mat-radio-button value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+  </div>
+</section>
+
+<hr>
+<!-- Question 4 Alcohol and Drug DUI -->
+
+<section style="display: flex; justify-content: space-between; width: 100%;">
+  <div class="question-label">
+    4. Have you received any alcohol/drug related driving infractions in the past 5 years in
+    Canada or under the laws of any other country or jurisdiction?
+  </div>
+  <div style="flex: 0 0 200px;">
+    <app-field [required]="false" [isFullWidth]="true"
+               [valid]="!form.get('contact.phsCanadianDrugAlchoholDrivingOffence').touched || form.get('contact.phsCanadianDrugAlchoholDrivingOffence').valid"
+               errorMessage="Please select">
+      <mat-radio-group formControlName="phsCanadianDrugAlchoholDrivingOffence" aria-label="Font Style">
+        <mat-radio-button value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+  </div>
+</section>
+
+<hr>
+<!-- If 1 Yes show CRC Form-->
+
+
+<!-- if !2a or !2b or 3 or 4 Show B -->
+
+<!-- if 4 Show C -->
+
+<!-- Show attestation form -->
+
+
+<!-- Question 5 Interest in a BC Liquor Licence -->
+
+<section style="display: flex; justify-content: space-between; width: 100%;">
+  <div class="question-label">
+    5. Have you ever held, or do you or your immeditate family members currently hold, any
+    ownership or interest in a B.C. liquour licence?
+  </div>
+  <div style="flex: 0 0 200px;">
+    <app-field [required]="false" [isFullWidth]="true"
+               [valid]="!form.get('contact.phsConnectionsToOtherLicences').touched || form.get('contact.phsConnectionsToOtherLicences').valid"
+               errorMessage="Please select">
+      <mat-radio-group formControlName="phsConnectionsToOtherLicences" aria-label="Font Style">
+        <mat-radio-button value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+  </div>
+
+</section>
+
+<app-field [isFullWidth]="true"
+           *ngIf="form.get('contact.phsConnectionsToOtherLicences').value === 'Yes'"
+           [valid]="!form.get('contact.phsConnectionsDetails').touched || form.get('contact.phsConnectionsDetails').valid"
+           errorMessage="Please enter details:"
+           label="Please provide details of the licence(s) or application(s).">
+  <textarea formControlName="phsConnectionsDetails" class="form-control w-100" rows="10"></textarea>
+</app-field>
+
+<hr>
+
+<!-- Question 6 Do you hold a Rural Store Appointment? -->
+
+<!-- Question 7 Agreement to Sell liquor of a mfg to the exclusion of another mfg -->
+
+<section style="display: flex; justify-content: space-between; width: 100%;">
+  <div class="question-label">
+    6. Have you agreed with anyone to sell the liquor of a manufacturer to the exclusion
+    of another liquor manufacturer?
+  </div>
+  <div style="flex: 0 0 200px;">
+    <app-field [required]="false" [isFullWidth]="true"
+               [valid]="!form.get('contact.phsExclusiveMFG').touched || form.get('contact.phsExclusiveMFG').valid"
+               errorMessage="Please select">
+      <mat-radio-group formControlName="phsExclusiveMFG" aria-label="Font Style">
+        <mat-radio-button value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+  </div>
+</section>
+
+<app-field [isFullWidth]="true"
+           *ngIf="form.get('contact.phsExclusiveMFG').value === 'Yes'"
+           [valid]="!form.get('contact.phsExclusiveDetails').touched || form.get('contact.phsExclusiveDetails').valid"
+           errorMessage="Please enter details"
+           label="Please provide details:">
+  <textarea formControlName="phsExclusiveDetails" class="form-control w-100" rows="10"></textarea>
+</app-field>
+
+<hr>
+<!-- Question 8 Interest in a mfg, importer, agent -->
+
+<section style="display: flex; justify-content: space-between; width: 100%;">
+  <div class="question-label">
+    7. Do you or your immediate family members have any association with, or financial interest
+    in, a B.C. liquor manufacturer, a liquor importer, or the agent of a liquor manufacturer/importer?
+  </div>
+  <div style="flex: 0 0 200px;">
+    <app-field [required]="false" [isFullWidth]="true"
+               [valid]="!form.get('contact.phsFinancialInt').touched || form.get('contact.phsFinancialInt').valid"
+               errorMessage="Please select">
+      <mat-radio-group formControlName="phsFinancialInt" aria-label="Font Style">
+        <mat-radio-button value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+  </div>
+</section>
+
+<app-field [isFullWidth]="true"
+           *ngIf="form.get('contact.phsFinancialInt').value === 'Yes'"
+           [valid]="!form.get('contact.phsFinancialIntDetails').touched || form.get('contact.phsFinancialIntDetails').valid"
+           errorMessage="Please enter details"
+           label="Please provide details:">
+  <textarea formControlName="phsFinancialIntDetails" class="form-control w-100" rows="10"></textarea>
+</app-field>
+<hr>
+
+<!-- Question 9 Shareholder or Profit Sharing Agreement with people not named in the licence application-->
+
+<section style="display: flex; justify-content: space-between; width: 100%;">
+  <div class="question-label">
+    8. Have you entered into a Shareholder Agreement, Profit Sharing Agreement or other
+    similar agreement with anyone not named in the licence application?
+  </div>
+  <div style="flex: 0 0 200px;">
+    <app-field [required]="false" [isFullWidth]="true"
+               [valid]="!form.get('contact.phsProfitAgreement').touched || form.get('contact.phsProfitAgreement').valid"
+               errorMessage="Please select">
+      <mat-radio-group formControlName="phsProfitAgreement" aria-label="Font Style">
+        <mat-radio-button value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+  </div>
+</section>
+
+<app-field [isFullWidth]="true"
+           *ngIf="form.get('contact.phsProfitAgreement').value === 'Yes'"
+           [valid]="!form.get('contact.phsProfitAgreementDetails').touched || form.get('contact.phsProfitAgreementDetails').valid"
+           errorMessage="Please enter details"
+           label="Please provide details:">
+  <textarea formControlName="phsProfitAgreementDetails" class="form-control w-100" rows="10"></textarea>
+  <hr>
+</app-field>
+
+</section>
+<h3 class="blue-header">REQUIRED DOCUMENTS</h3>
+<section formGroupName="contact" class="padded-section border-around">
+
+
+  <ng-container *ngIf="showCRCUpload()">
+    <section class="padded-section">
+      <h4 class="plain-header">DOCUMENT REQUIRED: Criminal Record Check</h4>
+      <p>
+        Upload a scan of your completed criminal record check, completed withing the last 4 months
+        by your local RCMP detachment or police department.
+      </p>
+      <section>
+        <app-file-uploader documentType="CRC" [useDocumentTypeForName]="true"
+                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+                           entityName="contact" [extensions]="['pdf']"
+                           [entityId]="contactToken" (numberOfUploadedFiles)="updateUploadedFiles($event, 'CRC')"
+                           [uploadHeader]="'TO UPLOAD CRIMINAL RECORD CHECK, DRAG FILE HERE OR'"
+                           [publicAccess]="true">
+        </app-file-uploader>
+      </section>
+    </section>
+    <hr>
+  </ng-container>
+
+  <ng-container *ngIf="showStatutoryDeclaration()">
+    <h4 class="plain-header">DOCUMENT REQUIRED: Statutory Declaration</h4>
+    <p>
+      Please upload a statutory declaration, signed by a lawyer, Notary Public or Commissioner for
+      Taking
+      Affidavits:
+    </p>
+    <ol>
+      <li>
+        stating you have not been charged with, or convicted of a criminal or drug/alcohol offence
+        under the
+        laws of
+        any country or the laws/bylaws of any provincial, government; OR
+      </li>
+      <li>
+        providing details (date, disposition, sentence or fine) of any
+        charges/convictions/sentences; AND/OR
+      </li>
+      <li>providing details of any alcohol/drug related driving infractions in the past 5 years</li>
+    </ol>
+    <section>
+      <app-file-uploader documentType="StatDeclaration" [useDocumentTypeForName]="true"
+                         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+                         (numberOfUploadedFiles)="updateUploadedFiles($event, 'StatDeclaration')"
+                         entityName="contact" [extensions]="['pdf']" [entityId]="contactToken"
+                         [uploadHeader]="'TO UPLOAD STATUTORY DECLARATION, DRAG FILE HERE OR'"
+                         [publicAccess]="true">
+      </app-file-uploader>
+    </section>
+    <hr>
+  </ng-container>
+
+
+  <ng-container *ngIf="showDriversAbstract()">
+    <h4 class="plain-header">DOCUMENT REQUIRED: Driver's Abstract</h4>
+    <p>
+      Please upload a copy of your driver's abstract for the past 5 years, if you have held a Canadian drivers
+      licence in that time. For BC driver's abstracts contact
+      <a href="http://www.icbc.com/driver-licensing/getting-licensed/Pages/Your-driving-record.aspx" target="_blank">ICBC</a>
+      or call 1-800-663-3051; otherwise contact the applicable Canadian jurisdiction(s).
+    </p>
+    <section>
+      <app-file-uploader documentType="DriverExtract" [useDocumentTypeForName]="true"
+                         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+                         (numberOfUploadedFiles)="updateUploadedFiles($event, 'DriverExtract')"
+                         entityName="contact" [extensions]="['pdf']" [entityId]="contactToken"
+                         [uploadHeader]="'TO UPLOAD DRIVERS EXTRACT, DRAG FILE HERE OR'"
+                         [publicAccess]="true">
+      </app-file-uploader>
+    </section>
+    <hr>
+  </ng-container>
+
+
+  <ng-container>
+    <h4 class="plain-header">DOCUMENT REQUIRED: Declaration FORM</h4>
+    <p>
+      Please complete, sign and date the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/personal_history_summary_screening_-_signature_form.pdf" target="_blank">Personal History Summary Declaration Form</a>.
+    </p>
+    <section>
+      <app-file-uploader documentType="DeclarationForm" [useDocumentTypeForName]="true"
+                         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+                         (numberOfUploadedFiles)="updateUploadedFiles($event, 'DeclarationForm')"
+                         entityName="contact" [extensions]="['pdf']" [entityId]="contactToken"
+                         [uploadHeader]="'TO UPLOAD DECLARATION, DRAG FILE HERE OR'"
+                         [publicAccess]="true">
+      </app-file-uploader>
+    </section>
+
+  </ng-container>
+
+</section>
+
+
+<section class="error mt-3" *ngIf="validationErrors?.length">
+  <p *ngFor="let message of validationErrors">
+    <span class="app-cancel">
+      <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+      {{message}}
+    </span>
+  </p>
+</section>
+
+<div *ngIf="!form.valid && showErrors" class="error-summary mt-3">
+  <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
+  <span>Some required fields have not been completed</span>
+</div>
+
+<button class="btn btn-primary mt-3" (click)="save()">Submit Personal History Summary Form for Review</button>
+</div>
+<div class="col-md-4">
+  <section class="submit-container p-3" style="background-color: #F2F2F2; border: none; color: #000;">
+    <h2 style="color: #000">Collection Notice:</h2>
+    <div class="submit-content p-3">
+      <p>
+        The information requested on this form is collected by the Liquor and Cannabis Regulation Branch
+        under Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act for
+        the purpose of cannabis licensing, compliance and enforcement matters in accordance with the
+        Cannabis Control and Licensing Act. Should you have any questions about the collection, use, or
+        disclosure of personal information, please contact the Freedom of Information Officer at PO Box
+        9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
+      </p>
+    </div>
+  </section>
+</div>
+</div>
 
 
 </div>

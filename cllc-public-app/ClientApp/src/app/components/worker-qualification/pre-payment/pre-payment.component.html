@@ -1,4 +1,6 @@
-<h3><span class="step">STEP 3</span></h3>
+<h3>
+  <span class="step">STEP 3</span>
+</h3>
 
 
 <h1>Fee Payment</h1>
@@ -14,8 +16,10 @@
 <span style="float: right;">
   <button class="btn btn-primary">
     <fa-icon [icon]="faSave" style="color: #fff;" routerLink="/worker-qualification/dashboard"></fa-icon>
-    SAVE FOR LATER</button>
-    <button routerLink="/worker-qualification/spd-consent/{{workerId}}" class="btn btn-primary">RETURN TO STEP 2
-    </button>
+    SAVE FOR LATER
+  </button>
+  <button routerLink="/worker-qualification/spd-consent/{{workerId}}" class="btn btn-primary">
+    RETURN TO STEP 2
+  </button>
   <button class="btn btn-primary" (click)="submit_application()">SUBMIT & PAY</button>
 </span>

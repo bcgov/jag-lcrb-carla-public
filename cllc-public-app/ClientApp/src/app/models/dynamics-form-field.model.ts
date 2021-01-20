@@ -9,5 +9,6 @@ export class DynamicsFormField {
   showlabel: boolean;
   visible: boolean;
   options: DynamicsFormFieldOption[];
-  constructor() { }
+
+  constructor() {}
 }

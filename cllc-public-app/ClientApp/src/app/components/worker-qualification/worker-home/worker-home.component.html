@@ -6,7 +6,7 @@
         <app-policy-document [fullWidth]="true" #policyDocs (slugChange)="currentSlug = $event"></app-policy-document>
       </section>
       <section *ngIf="currentSlug !== 'worker-qualification-training'" class="row" style="padding-left: 27px;">
-        <div class="col-md-9 offset-md-2 mobile-spacing" style="margin-left:24%;">
+        <div class="col-md-9 offset-md-2 mobile-spacing" style="margin-left: 24%;">
           <br>
           <p>Please select an option below:</p>
           <div appRemoveIfFeatureOn="DisableLogin">
@@ -29,8 +29,10 @@
           </div>
           <p class="login-cont">
             <strong style="margin-top: 10px">I don’t have a BC Services Card; send me a Worker Security Verification form</strong>
-                <a class="btn btn-primary" href="mailto:CannabisWorker@gov.bc.ca?subject=Send me a Worker Security Verification Application Form">Request
-                  Form</a>
+            <a class="btn btn-primary" href="mailto:CannabisWorker@gov.bc.ca?subject=Send me a Worker Security Verification Application Form">
+              Request
+              Form
+            </a>
           </p>
         </div>
       </section>
@@ -42,7 +44,9 @@
         <table>
           <tr>
             <td>
-              <h2 class="round-icon-wrapper"><fa-icon [icon]="faIdCard"></fa-icon></h2>
+              <h2 class="round-icon-wrapper">
+                <fa-icon [icon]="faIdCard"></fa-icon>
+              </h2>
             </td>
             <td style="padding-left: 10px">
               <h2>Using the BC Services Card</h2>
@@ -52,13 +56,17 @@
         <div class="submit-content">
           <p>If you have a BC Services Card, you must use it to log in to the online security verification page.</p>
           <p>
-            <a style="color: #fff;" href="https://www2.gov.bc.ca/gov/content?id=87EEAD6D19974459950AA7FF7F60AD54">Learn
-              more about the BC Services Card.</a>
+            <a style="color: #fff;" href="https://www2.gov.bc.ca/gov/content?id=87EEAD6D19974459950AA7FF7F60AD54">
+              Learn
+              more about the BC Services Card.
+            </a>
           </p>
           <p>Eligibility for a BC Services Card is the same as for the Medical Services Plan (MSP).</p>
           <p>
-            <a style="color: #fff; " href="https://www2.gov.bc.ca/gov/content?id=A24BB960F5234630BCB9DE847EEFD07B">Learn
-              more about BC Services Card eligibility.</a><br>
+            <a style="color: #fff;" href="https://www2.gov.bc.ca/gov/content?id=A24BB960F5234630BCB9DE847EEFD07B">
+              Learn
+              more about BC Services Card eligibility.
+            </a><br>
           </p>
         </div>
       </section>
@@ -66,7 +74,9 @@
         <table>
           <tr>
             <td>
-              <h2 class="round-icon-wrapper"><fa-icon [icon]="faQuestion"></fa-icon></h2>
+              <h2 class="round-icon-wrapper">
+                <fa-icon [icon]="faQuestion"></fa-icon>
+              </h2>
             </td>
             <td style="padding-left: 10px">
               <h2>Applicants Without a BC Services Card</h2>
@@ -74,12 +84,16 @@
           </tr>
         </table>
         <div class="submit-content">
-          <p>Applicants who are not eligible for a BC Services Card must <a style="color:#fff" href="mailto:CannabisWorker@gov.bc.ca?subject=Worker Security Verification Application">email</a>
-            the Liquor and Cannabis Regulation
-            Branch for a Worker Security Verification Form. </p>
           <p>
-            <a style="color: #fff;" href="https://www2.gov.bc.ca/gov/content?id=A24BB960F5234630BCB9DE847EEFD07B">Learn
-              more about BC Services Card eligibility.</a>
+            Applicants who are not eligible for a BC Services Card must <a style="color: #fff" href="mailto:CannabisWorker@gov.bc.ca?subject=Worker Security Verification Application">email</a>
+            the Liquor and Cannabis Regulation
+            Branch for a Worker Security Verification Form.
+          </p>
+          <p>
+            <a style="color: #fff;" href="https://www2.gov.bc.ca/gov/content?id=A24BB960F5234630BCB9DE847EEFD07B">
+              Learn
+              more about BC Services Card eligibility.
+            </a>
           </p>
         </div>
       </section>

@@ -1,23 +1,23 @@
-import { DataService } from './data.service';
-import { Injectable, Inject } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { DataService } from "./data.service";
+import { Injectable } from "@angular/core";
+import { HttpHeaders, HttpClient } from "@angular/common/http";
 
-import { VersionInfo } from '@models/version-info.model';
-import { catchError } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { VersionInfo } from "@models/version-info.model";
+import { catchError } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Injectable()
-export class VersionInfoDataService extends DataService  {
+export class VersionInfoDataService extends DataService {
 
-  apiPath = 'api/ApplicationVersionInfo';
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json'
+  apiPath = "api/ApplicationVersionInfo";
+  headers = new HttpHeaders({
+    'Content-Type': "application/json"
   });
 
-    constructor(private http: HttpClient) { super(); }
+  constructor(private http: HttpClient) { super(); }
 
-    public getVersionInfo(): Observable<VersionInfo> {
-      return this.http.get<VersionInfo>(this.apiPath, { headers: this.headers })
-          .pipe(catchError(this.handleError));          
+  getVersionInfo(): Observable<VersionInfo> {
+    return this.http.get<VersionInfo>(this.apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 }

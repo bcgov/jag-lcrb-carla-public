@@ -1,241 +1,260 @@
 <mat-progress-bar class="mt-1" *ngIf="!licenseeApplicationLoaded" mode="indeterminate"></mat-progress-bar>
-<div class="form-wrapper row" style="position:relative;">
+<div class="form-wrapper row" style="position: relative;">
 
 
-  <div *ngIf="licenseeApplicationLoaded">
-    <section class="col-md-8">
-      <app-org-structure *ngIf="licenseeApplicationLoaded" [isReadOnly]="application?.isPaid"
-        (reportAdditionalChanges)="loadData('create')" [node]="treeRoot" [account]="account"
-        [licencesOnFile]="licencesOnFile" (changesMade)="updateData()" #orgStructure>
-      </app-org-structure>
-      <p>&nbsp;</p>
-      <section class="d-flex"
-        *ngIf="!application?.isPaid && licencesOnFile && treeRoot && LicenseeChangeLog.HasChanges(treeRoot)">
+<div *ngIf="licenseeApplicationLoaded">
+<section class="col-md-8">
+  <app-org-structure *ngIf="licenseeApplicationLoaded" [isReadOnly]="application?.isPaid"
+                     (reportAdditionalChanges)="loadData('create')" [node]="treeRoot" [account]="account"
+                     [licencesOnFile]="licencesOnFile" (changesMade)="updateData()" #orgStructure>
+  </app-org-structure>
+  <p>&nbsp;</p>
+  <section class="d-flex"
+           *ngIf="!application?.isPaid && licencesOnFile && treeRoot && LicenseeChangeLog.HasChanges(treeRoot)">
 
-        <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
-        <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
-          <h3>Licensee Change Fees Required</h3>
-          <p>
-            Because you have one or more licences, you are required to pay a fee for your organizational changes.
-            Fees are calculated based on the type of change reported and the number of licences impacted.
-          </p>
-          <!--  to do, if a change is to an added shareholder company, it is not a leadership change-->
-          <!--table class="greyGridTable" style="background-color:white;">
-            <tr *ngIf="LicenseeChangeLog.HasLeadershipChanges(this.treeRoot)">
-              <td style="text-align:left;"><strong>Addition or change of, or change of name of, director, officer, senior manager</strong></td>
-              <td>$500 x {{this.numberOfCannabisLicences}} Cannabis Licences</td>
-              <td>$220 x {{this.numberOfLiquorLicences}} Liquor Licences</td>
-              <td><strong>${{this.calculateSubTotal(500,220)}}</strong></td>
-            </tr>
-            <tr *ngIf="LicenseeChangeLog.HasExternalShareholderChanges(this.treeRoot)">
-              <td style="text-align:left;"><strong>Licensee providing notice that
-                <ul>
-                <li>licensee has issued new shares to persons who are not existing shareholders, or</li>
-                <li>existing shareholders have transferred shares to persons who are not existing shareholders</li></ul></strong></td>
-              <td>$330 x {{this.numberOfCannabisLicences}} Cannabis Licences</td>
-              <td>$330 x {{this.numberOfLiquorLicences}} Liquor Licences</td>
-              <td><strong>${{this.calculateSubTotal(330,330)}}</strong></td>
-            </tr>
-            <tr *ngIf="LicenseeChangeLog.HasInternalShareholderChanges(this.treeRoot)">
-              <td style="text-align:left;"><strong>Licensee providing notice that
-                <ul>
-                <li>licensee has issued new shares to existing shareholders, or</li>
-                <li>existing shareholders have transferred shares to existing shareholders</li>
-              </ul></strong>
-            </td>
-              <td>$110 x {{this.numberOfCannabisLicences}} Cannabis Licences</td>
-              <td>$110 x {{this.numberOfLiquorLicences}} Liquor Licences</td>
-              <td><strong>${{this.calculateSubTotal(110,110)}}</strong></td>
-            </tr>
-          </table>
-            <br-->
-          <br>
+    <div class="flex-grow-0" style="background-color: #FFB2B2; width: 50px;"></div>
+    <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
+      <h3>Licensee Change Fees Required</h3>
+      <p>
+        Because you have one or more licences, you are required to pay a fee for your organizational changes.
+        Fees are calculated based on the type of change reported and the number of licences impacted.
+      </p>
+      <!--  to do, if a change is to an added shareholder company, it is not a leadership change-->
+      <!--table class="greyGridTable" style="background-color:white;">
+      <tr *ngIf="LicenseeChangeLog.HasLeadershipChanges(this.treeRoot)">
+        <td style="text-align:left;"><strong>Addition or change of, or change of name of, director, officer, senior manager</strong></td>
+        <td>$500 x {{this.numberOfCannabisLicences}} Cannabis Licences</td>
+        <td>$220 x {{this.numberOfLiquorLicences}} Liquor Licences</td>
+        <td><strong>${{this.calculateSubTotal(500,220)}}</strong></td>
+      </tr>
+      <tr *ngIf="LicenseeChangeLog.HasExternalShareholderChanges(this.treeRoot)">
+        <td style="text-align:left;"><strong>Licensee providing notice that
           <ul>
-            <li>Applicable fees for cannabis licensees are listed in <a
-                href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
-                target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
-            <li>Applicable fees for liquor licensees are listed in <a
-                href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
-                target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
-          </ul>
+            <li>licensee has issued new shares to persons who are not existing shareholders, or</li>
+            <li>existing shareholders have transferred shares to persons who are not existing shareholders</li></ul></strong></td>
+        <td>$330 x {{this.numberOfCannabisLicences}} Cannabis Licences</td>
+        <td>$330 x {{this.numberOfLiquorLicences}} Liquor Licences</td>
+        <td><strong>${{this.calculateSubTotal(330,330)}}</strong></td>
+      </tr>
+      <tr *ngIf="LicenseeChangeLog.HasInternalShareholderChanges(this.treeRoot)">
+        <td style="text-align:left;"><strong>Licensee providing notice that
+            <ul>
+              <li>licensee has issued new shares to existing shareholders, or</li>
+              <li>existing shareholders have transferred shares to existing shareholders</li>
+            </ul></strong>
+        </td>
+        <td>$110 x {{this.numberOfCannabisLicences}} Cannabis Licences</td>
+        <td>$110 x {{this.numberOfLiquorLicences}} Liquor Licences</td>
+        <td><strong>${{this.calculateSubTotal(110,110)}}</strong></td>
+      </tr>
+      </table>
+      <br-->
+      <br>
+      <ul>
+        <li>
+          Applicable fees for cannabis licensees are listed in
+          <a
+            href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
+            target="_blank">
+            Schedule 1
+          </a> of the Cannabis Licensing Regulation.
+        </li>
+        <li>
+          Applicable fees for liquor licensees are listed in
+          <a
+            href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
+            target="_blank">
+            Schedule 1
+          </a> of the Liquor Control and Licensing Regulation.
+        </li>
+      </ul>
 
-        </div>
-      </section>
+    </div>
+  </section>
 
-      <section class="error mt-3" *ngIf="validationErrors?.length && !application?.isPaid">
-        <p *ngFor="let message of validationErrors">
-          <span class="app-cancel">
-            <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-            {{message}}
-          </span>
-        </p>
-      </section>
+  <section class="error mt-3" *ngIf="validationErrors?.length && !application?.isPaid">
+    <p *ngFor="let message of validationErrors">
+      <span class="app-cancel">
+        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+        {{message}}
+      </span>
+    </p>
+  </section>
 
-      <section *ngIf="!application?.isPaid" class="mt-5" style="position: relative;">
-        <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right:10px;" (click)="saveForLater()">
-          <span>
-            <fa-icon [icon]="faSave"></fa-icon>
-            SAVE FOR LATER
-          </span>
-        </button>
+  <section *ngIf="!application?.isPaid" class="mt-5" style="position: relative;">
+    <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right: 10px;" (click)="saveForLater()">
+      <span>
+        <fa-icon [icon]="faSave"></fa-icon>
+        SAVE FOR LATER
+      </span>
+    </button>
 
-        <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right:10px;"
-          [disabled]="!LicenseeChangeLog.HasChanges(treeRoot)" (click)="cancel()">
-          <fa-icon [icon]="faSave"></fa-icon>
-          Cancel Changes
-        </button>
+    <button *ngIf="treeRoot" class="btn btn-secondary" style="margin-right: 10px;"
+            [disabled]="!LicenseeChangeLog.HasChanges(treeRoot)" (click)="cancel()">
+      <fa-icon [icon]="faSave"></fa-icon>
+      Cancel Changes
+    </button>
 
-        <button *ngIf="treeRoot" class="btn btn-primary" name="submit-application" style="float: right;"
-          (click)="save()">
-          <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
-          {{getSaveLabel()}}
-        </button>
-      </section>
+    <button *ngIf="treeRoot" class="btn btn-primary" name="submit-application" style="float: right;"
+            (click)="save()">
+      <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
+      {{getSaveLabel()}}
+    </button>
+  </section>
 
-      <section *ngIf="application?.isPaid" class="mt-5" style="position: relative;">
-        <button *ngIf="treeRoot" class="btn btn-primary" name="submit-application" style="float: right;"
-          (click)="saveReadOnly()">
-          <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
-          Confirm Organization Information Is Complete
-        </button>
-      </section>
-    </section>
+  <section *ngIf="application?.isPaid" class="mt-5" style="position: relative;">
+    <button *ngIf="treeRoot" class="btn btn-primary" name="submit-application" style="float: right;"
+            (click)="saveReadOnly()">
+      <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
+      Confirm Organization Information Is Complete
+    </button>
+  </section>
+</section>
 
-    <section class="col-md-4">
+<section class="col-md-4">
 
-      <!-- <section class="large-screen-only position-reletaive" *ngIf="treeRoot">
-        <div [ngBusy]="[busy, busyPromise]"></div>
+  <!-- <section class="large-screen-only position-reletaive" *ngIf="treeRoot">
+    <div [ngBusy]="[busy, busyPromise]"></div>
 
-        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0; padding-left:10px;">Organization Information
-          Completeness</h3>
-        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-          <div style="font-size:20px;"
-            *ngIf="account?.businessType === 'PrivateCorporation' || account?.businessType === 'PublicCorporation'">
+    <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0; padding-left:10px;">Organization Information
+      Completeness</h3>
+    <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+      <div style="font-size:20px;"
+           *ngIf="account?.businessType === 'PrivateCorporation' || account?.businessType === 'PublicCorporation'">
 
-            <a [routerLink]="[ '/account-profile/']" class="completeness">
-              <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
-              </i>Notice of Articles Uploaded
-            </a> <br>
-          </div>
+        <a [routerLink]="[ '/account-profile/']" class="completeness">
+          <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
+          </i>Notice of Articles Uploaded
+        </a> <br>
+      </div>
 
-          <div style="font-size:20px;" *ngIf="account?.businessType === 'PrivateCorporation'">
-            <a [routerLink]="[ '/org-structure/']" class="completeness">
-              <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
-              </i>Central Securities Register Uploaded
-            </a><br>
-          </div>
+      <div style="font-size:20px;" *ngIf="account?.businessType === 'PrivateCorporation'">
+        <a [routerLink]="[ '/org-structure/']" class="completeness">
+          <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
+          </i>Central Securities Register Uploaded
+        </a><br>
+      </div>
 
-          <div style="font-size:20px;" *ngIf="account?.businessType === 'Partnership'">
+      <div style="font-size:20px;" *ngIf="account?.businessType === 'Partnership'">
 
-            <a [routerLink]="[ '/account-profile/']" class="completeness">
-              <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
-              </i>Partnership Agreement Uploaded
-            </a> <br>
-          </div>
-          <hr>
-          <div *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">
-            <h4>You have identified the following changes:</h4>
-            <table class="smallGridTable" style="font-size:10px;">
-              <thead>
-                <tr style="height:50px;">
-                  <th>Type</th>
-                  <th>Cannabis<br>Licences</th>
-                  <th>Liquor<br>Licences</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tr *ngIf="LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot).length > 0" style="height:50px;">
-                <td><strong>Leadership Changes</strong></td>
-                <td>$500 x 0 licences</td>
-                <td>$220 x 0 licences</td>
-                <td>$0</td>
-              </tr>
-
-              <tr *ngIf="LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot).length > 0" style="height:50px;">
-                <td><strong>External Share Transfers</strong></td>
-                <td>$500 x 0 licences</td>
-                <td>$220 x 0 licences</td>
-                <td>$0</td>
-              </tr>
-              <tfoot>
-                <tr>
-                  <td colspan=3 style="text-align: right;">Total:</td>
-                  <td><strong>$0</strong></td>
-                </tr>
-              </tfoot>
-            </table>
-            <p>&nbsp;</p>
-          </div>
-          <div style="text-align:center;" *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)">
-            <button class="btn btn-primary" [disabled]="disableSaveLabel()" (click)="save()">{{getSaveLabel()}}</button>
-          </div>
-        </div>
-      </section> -->
-
-      <section class="submit-container mt-5" 
-        style="background-color:#38598A; border-bottom: solid 4px #FFCC00; color: #fff; margin-bottom: 20px; padding: 30px; padding-top:20px;"
-        *ngIf="!application?.isPaid">
-        <table>
-          <tr>
-            <td>
-              <h2 class="round-icon-wrapper"><fa-icon [icon]="faInfoCircle" style="color:#fff;"></fa-icon>
-              </h2>
-            </td>
-            <td style="padding-left: 10px;">
-              <h2 style="color:#fff" >Instructions:</h2>
-            </td>
+        <a [routerLink]="[ '/account-profile/']" class="completeness">
+          <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
+          </i>Partnership Agreement Uploaded
+        </a> <br>
+      </div>
+      <hr>
+      <div *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">
+        <h4>You have identified the following changes:</h4>
+        <table class="smallGridTable" style="font-size:10px;">
+          <thead>
+          <tr style="height:50px;">
+            <th>Type</th>
+            <th>Cannabis<br>Licences</th>
+            <th>Liquor<br>Licences</th>
+            <th>Total</th>
           </tr>
+          </thead>
+          <tr *ngIf="LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot).length > 0" style="height:50px;">
+            <td><strong>Leadership Changes</strong></td>
+            <td>$500 x 0 licences</td>
+            <td>$220 x 0 licences</td>
+            <td>$0</td>
+          </tr>
+
+          <tr *ngIf="LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot).length > 0" style="height:50px;">
+            <td><strong>External Share Transfers</strong></td>
+            <td>$500 x 0 licences</td>
+            <td>$220 x 0 licences</td>
+            <td>$0</td>
+          </tr>
+          <tfoot>
+          <tr>
+            <td colspan=3 style="text-align: right;">Total:</td>
+            <td><strong>$0</strong></td>
+          </tr>
+          </tfoot>
         </table>
+        <p>&nbsp;</p>
+      </div>
+      <div style="text-align:center;" *ngIf="true || LicenseeChangeLog.HasChanges(treeRoot)">
+        <button class="btn btn-primary" [disabled]="disableSaveLabel()" (click)="save()">{{getSaveLabel()}}</button>
+      </div>
+    </div>
+  </section> -->
 
-        <div class="submit-content">
-          <p>
-            If your details are complete, you can click confirm at the bottom of the page to continue.
-            Otherwise, update the information by providing the required documents and use the controls
-            on the page to enter your organization structure:
-          </p>
-          <ul>
-            <li>Add associates using the <fa-icon [icon]="faPlus">Add</fa-icon> buttons.</li>
-            <li>Clicking the <fa-icon [icon]="faPencilAlt"></fa-icon> icon will allow
-              you to <strong>update associate names</strong> and <strong>modify share amounts</strong> to indicate share
-              transfers.</li>
-            <li>Confirm changes by clicking <fa-icon [icon]="faSave"></fa-icon>.
-            </li>
-            <li>Clicking the <fa-icon [icon]="faTrashAlt"></fa-icon> icon will <strong>remove</strong> an
-              associate from your organization structure.</li>
-          </ul>
+  <section class="submit-container mt-5"
+           style="background-color: #38598A; border-bottom: solid 4px #FFCC00; color: #fff; margin-bottom: 20px; padding: 30px; padding-top: 20px;"
+           *ngIf="!application?.isPaid">
+    <table>
+      <tr>
+        <td>
+          <h2 class="round-icon-wrapper">
+            <fa-icon [icon]="faInfoCircle" style="color: #fff;"></fa-icon>
+          </h2>
+        </td>
+        <td style="padding-left: 10px;">
+          <h2 style="color: #fff">Instructions:</h2>
+        </td>
+      </tr>
+    </table>
 
-          <hr>
-          <p>
-            <strong>Fees</strong> are calculated based on the types of changes you have made, multiplied by the number
-            of licences you currently have. <strong>If you do not yet have a licence there is no charge for submitting
-              changes</strong>.
-          </p>
+    <div class="submit-content">
+      <p>
+        If your details are complete, you can click confirm at the bottom of the page to continue.
+        Otherwise, update the information by providing the required documents and use the controls
+        on the page to enter your organization structure:
+      </p>
+      <ul>
+        <li>Add associates using the <fa-icon [icon]="faPlus">Add</fa-icon> buttons.</li>
+        <li>
+          Clicking the <fa-icon [icon]="faPencilAlt"></fa-icon> icon will allow
+          you to <strong>update associate names</strong> and <strong>modify share amounts</strong> to indicate share
+          transfers.
+        </li>
+        <li>
+          Confirm changes by clicking <fa-icon [icon]="faSave"></fa-icon>.
+        </li>
+        <li>
+          Clicking the <fa-icon [icon]="faTrashAlt"></fa-icon> icon will <strong>remove</strong> an
+          associate from your organization structure.
+        </li>
+      </ul>
 
-        </div>
-      </section>
+      <hr>
+      <p>
+        <strong>Fees</strong> are calculated based on the types of changes you have made, multiplied by the number
+        of licences you currently have.
+        <strong>
+          If you do not yet have a licence there is no charge for submitting
+          changes
+        </strong>.
+      </p>
 
-      <section class="submit-container"
-        style="background-color: #F2F2F2; color:#000; border: none; padding-left: 20px; padding-top: 5px;">
+    </div>
+  </section>
 
-        <h2 style="color: #000">Collection Notice:</h2>
-        <div class="submit-content">
-          <p style="padding-top: 10px;">
-            The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under
-            Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act
-            for the purpose of cannabis licensing, compliance and enforcement matters in accordance with the Cannabis
-            Control and Licensing Act. Should you have any questions about the collection,
-            use, or disclosure of personal information, please contact:<br>
-            <strong>
-              Freedom of Information Officer<br>
-              PO Box 9292 STN PROV GVT<br>
-              Victoria, BC, V8W 9J8<br>
-            </strong>
-            or by phone toll free at <strong>1-866-209-2111</strong>.
-          </p>
-        </div>
-      </section>
+  <section class="submit-container"
+           style="background-color: #F2F2F2; border: none; color: #000; padding-left: 20px; padding-top: 5px;">
 
-    </section>
-  </div>
-  <div> &nbsp; </div>
+    <h2 style="color: #000">Collection Notice:</h2>
+    <div class="submit-content">
+      <p style="padding-top: 10px;">
+        The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under
+        Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act
+        for the purpose of cannabis licensing, compliance and enforcement matters in accordance with the Cannabis
+        Control and Licensing Act. Should you have any questions about the collection,
+        use, or disclosure of personal information, please contact:<br>
+        <strong>
+          Freedom of Information Officer<br>
+          PO Box 9292 STN PROV GVT<br>
+          Victoria, BC, V8W 9J8<br>
+        </strong>
+        or by phone toll free at <strong>1-866-209-2111</strong>.
+      </p>
+    </div>
+  </section>
+
+</section>
+</div>
+<div> &nbsp; </div>
 </div>

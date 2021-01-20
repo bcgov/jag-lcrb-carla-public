@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { FeatureFlagService } from '@services/feature-flag.service';
-import { ActivatedRoute } from '@angular/router';
-import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from '../licences.component';
+import { FeatureFlagService } from "@services/feature-flag.service";
+import { ActivatedRoute } from "@angular/router";
+import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from "../licences.component";
 
 @Component({
-  selector: 'app-licence-renewal-steps',
-  templateUrl: './licence-renewal-steps.component.html',
-  styleUrls: ['./licence-renewal-steps.component.scss']
+  selector: "app-licence-renewal-steps",
+  templateUrl: "./licence-renewal-steps.component.html",
+  styleUrls: ["./licence-renewal-steps.component.scss"]
 })
 export class LicenceRenewalStepsComponent implements OnInit {
   busy: any;
@@ -20,10 +20,10 @@ export class LicenceRenewalStepsComponent implements OnInit {
   constructor(public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute) {
 
-    featureFlagService.featureOn('LicenseeChanges')
+    featureFlagService.featureOn("LicenseeChanges")
       .subscribe(featureOn => this.licenseeChangesEnabled = featureOn);
 
-      this.route.paramMap.subscribe(pmap => this.licenceType = pmap.get('licenceType'));
+    this.route.paramMap.subscribe(pmap => this.licenceType = pmap.get("licenceType"));
   }
 
   ngOnInit() {

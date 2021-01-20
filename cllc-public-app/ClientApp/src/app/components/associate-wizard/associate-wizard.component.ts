@@ -1,41 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-associate-wizard',
-  templateUrl: './associate-wizard.component.html',
-  styleUrls: ['./associate-wizard.component.scss']
+  selector: "app-associate-wizard",
+  templateUrl: "./associate-wizard.component.html",
+  styleUrls: ["./associate-wizard.component.scss"]
 })
 export class AssosiateWizardComponent implements OnInit {
-  currentQuestion = 'q1';
+  currentQuestion = "q1";
   questionHistory: string[] = [];
   answerCollection: any = {};
-  constructor() { }
+
+  constructor() {}
 
   ngOnInit() {
   }
 
 
   getOrganizationSection(answer: string): string {
-    let nextQuestion = '';
+    let nextQuestion = "";
     switch (answer) {
-      case 'Public Corporation':
-        nextQuestion = 'q4a';
-        break;
-      case 'Private Corporation':
-        nextQuestion = 'q5a';
-        break;
-      case 'Limited Partnership':
-        nextQuestion = 'q6a';
-        break;
-      case 'General Partnership':
-        nextQuestion = 'q7a';
-        break;
-      case 'Limited Liability Partnership':
-        nextQuestion = 'q8a';
-        break;
-      case 'Society':
-        nextQuestion = 'q9a';
-        break;
+    case "Public Corporation":
+      nextQuestion = "q4a";
+      break;
+    case "Private Corporation":
+      nextQuestion = "q5a";
+      break;
+    case "Limited Partnership":
+      nextQuestion = "q6a";
+      break;
+    case "General Partnership":
+      nextQuestion = "q7a";
+      break;
+    case "Limited Liability Partnership":
+      nextQuestion = "q8a";
+      break;
+    case "Society":
+      nextQuestion = "q9a";
+      break;
     }
     return nextQuestion;
   }
