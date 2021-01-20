@@ -29,7 +29,7 @@
 
 module.exports = {
   externals: {
-	moment: 'moment'
+	moment: "moment"
   },
   module: {
     rules: [
