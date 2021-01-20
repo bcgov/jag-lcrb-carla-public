@@ -18,15 +18,6 @@ import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-regular-svg-icons';
 import { LicenceEventSchedule } from '@models/licence-event-schedule';
 
-const DEFAULT_START_TIME = {
-  hour: 9,
-  minute: 0
-};
-const DEFAULT_END_TIME = {
-  hour: 23,
-  minute: 0
-};
-const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 @Component({
   selector: "app-market-event",

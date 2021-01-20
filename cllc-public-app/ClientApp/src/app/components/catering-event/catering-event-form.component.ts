@@ -12,10 +12,11 @@ import { FormBase } from "@shared/form-base";
 import { Router, ActivatedRoute } from "@angular/router";
 import { MomentDateAdapter } from "@angular/material-moment-adapter";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
-import moment from './node_modules/moment/src/moment';
+import * as moment from "moment";
 
 import { faQuestionCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faSave } from "@fortawesome/free-regular-svg-icons";
+import { LicenceEventSchedule } from "@models/licence-event-schedule";
 
 const DEFAULT_START_TIME = {
   hour: 9,

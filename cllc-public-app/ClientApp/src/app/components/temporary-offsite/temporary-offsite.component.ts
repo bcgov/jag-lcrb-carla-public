@@ -11,6 +11,7 @@ import { FormBase } from "@shared/form-base";
 import { Router, ActivatedRoute } from "@angular/router";
 import { faSave } from "@fortawesome/free-regular-svg-icons";
 import { faQuestionCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { LicenceEventSchedule } from "@models/licence-event-schedule";
 
 const DEFAULT_START_TIME = {
   hour: 9,

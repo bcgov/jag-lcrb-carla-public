@@ -260,6 +260,7 @@ import { NoticesTableComponent } from "@components/tables/notices-table/notices-
 import { LEConnectionsDataService } from "@services/le-connections-data.service";
 import { LicenseeRetailStoresComponent } from "./components/licensee-retail-stores/licensee-retail-stores.component";
 import { WorkerDataService } from "@services/worker-data.service";
+import { TuaEventComponent } from "@components/tua-event/tua-event.component";
 
 @NgModule({
   declarations: [
