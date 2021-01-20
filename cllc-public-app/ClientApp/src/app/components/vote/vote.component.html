@@ -41,14 +41,14 @@
 <!-- Results table -->
 <table id="voteResultsTable" width="300" *ngIf="showVoteResults" class="minimalistBlack">
   <thead>
-    <tr>
-      <th *ngFor="let option of options; let i = index">{{option.option}}</th>
-    </tr>
+  <tr>
+    <th *ngFor="let option of options; let i = index">{{option.option}}</th>
+  </tr>
   </thead>
   <tbody>
-    <tr>
-      <td *ngFor="let option of options; let i = index">{{option.totalVotes}}</td>
-    </tr>
+  <tr>
+    <td *ngFor="let option of options; let i = index">{{option.totalVotes}}</td>
+  </tr>
   </tbody>
 </table>
 

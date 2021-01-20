@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormBase } from '@shared/form-base';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { FormBase } from "@shared/form-base";
 
 export interface ContactData {
   contactPersonFirstName: string;
@@ -11,14 +11,14 @@ export interface ContactData {
 }
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss'],
+  selector: "app-contact",
+  templateUrl: "./contact.component.html",
+  styleUrls: ["./contact.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactComponent extends FormBase implements OnInit {
   _disabled = false;
-  _contact: ContactData = {} as ContactData;
+  _contact = {} as ContactData;
 
   @Input()
   set disabled(val: boolean) {
@@ -35,6 +35,7 @@ export class ContactComponent extends FormBase implements OnInit {
       this.form.patchValue(val);
     }
   }
+
   get contact(): ContactData {
     return this._contact;
   }
@@ -45,11 +46,11 @@ export class ContactComponent extends FormBase implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      contactPersonFirstName: ['', [Validators.required]],
-      contactPersonLastName: ['', [Validators.required]],
-      contactPersonRole: [''],
-      contactPersonPhone: ['', [Validators.required]],
-      contactPersonEmail: ['', [Validators.required]]
+      contactPersonFirstName: ["", [Validators.required]],
+      contactPersonLastName: ["", [Validators.required]],
+      contactPersonRole: [""],
+      contactPersonPhone: ["", [Validators.required]],
+      contactPersonEmail: ["", [Validators.required]]
     });
     this.form.patchValue(this.contact);
     if (this._disabled) {

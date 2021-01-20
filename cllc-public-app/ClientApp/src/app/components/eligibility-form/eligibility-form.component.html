@@ -1,107 +1,107 @@
 <div class="form-wrapper">
-    <div [ngBusy]="[busy]"></div>
-    <form [formGroup]="eligibilityForm">
-      <div class="padded-section">
-        <h1>Cannabis Retail Store Licence Eligibility Disclosure</h1>
-      </div>
-  
-      <div class="intro">
-        <p>The completion of this questionnaire is voluntary. However, the failure to complete the questionnaire may result in the General Manager being unable to continue with assessing applications in progress, and those applications being deemed abandoned.</p>
-      </div>
-  
-      <div class="padded-section">
-        <h3>QUESTION 1</h3>
+  <div [ngBusy]="[busy]"></div>
+  <form [formGroup]="eligibilityForm">
+    <div class="padded-section">
+      <h1>Cannabis Retail Store Licence Eligibility Disclosure</h1>
+    </div>
+
+    <div class="intro">
+      <p>The completion of this questionnaire is voluntary. However, the failure to complete the questionnaire may result in the General Manager being unable to continue with assessing applications in progress, and those applications being deemed abandoned.</p>
+    </div>
+
+    <div class="padded-section">
+      <h3>QUESTION 1</h3>
+      <section class="app-field">
+        <span class="field-label bold">On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?</span>
+        <mat-radio-group formControlName="isConnectedToUnlicencedStore">
+          <mat-radio-button [value]="true">Yes</mat-radio-button>
+          <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+      </section>
+      <div [hidden]="eligibilityForm.get('isConnectedToUnlicencedStore').value !== true">
+        <app-field
+          label="Please indicate the name and location of the retailer or store"
+          [required]="false"
+          [isFullWidth]="true">
+          <input type="text" formControlName="nameLocationUnlicencedRetailer" class="form-control"/>
+        </app-field>
         <section class="app-field">
-          <span class="field-label bold">On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?</span>
-          <mat-radio-group formControlName="isConnectedToUnlicencedStore">
-              <mat-radio-button [value]="true">Yes</mat-radio-button>
-              <mat-radio-button [value]="false">No</mat-radio-button>
+          <span class="field-label">Does the retailer or store continue to operate?</span>
+          <mat-radio-group formControlName="isRetailerStillOperating">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
           </mat-radio-group>
         </section>
-        <div [hidden]="eligibilityForm.get('isConnectedToUnlicencedStore').value !== true">
-          <app-field
-            label="Please indicate the name and location of the retailer or store"
-            [required]="false"
-            [isFullWidth]="true">
-            <input type="text" formControlName="nameLocationUnlicencedRetailer" class="form-control"/>
-          </app-field>
-          <section class="app-field">
-            <span class="field-label">Does the retailer or store continue to operate?</span>
-            <mat-radio-group formControlName="isRetailerStillOperating">
-                <mat-radio-button [value]="true">Yes</mat-radio-button>
-                <mat-radio-button [value]="false">No</mat-radio-button>
-            </mat-radio-group>
-          </section>
-          <section class="app-field" [hidden]="eligibilityForm.get('isRetailerStillOperating').value !== false">
-            <span class="field-label">Please indicate the date that operations ceased</span>
-            <input type="text" placeholder="yyyy-mm-dd" class="form-control" formControlName="dateOperationsCeased"
-            [max]="maxDate"
-            [matDatepicker]="dateOperationsCeased" (focus)="dateOperationsCeased.open()" (click)="dateOperationsCeased.open()">
-            <mat-datepicker #dateOperationsCeased></mat-datepicker>
-          </section>
-        </div>
+        <section class="app-field" [hidden]="eligibilityForm.get('isRetailerStillOperating').value !== false">
+          <span class="field-label">Please indicate the date that operations ceased</span>
+          <input type="text" placeholder="yyyy-mm-dd" class="form-control" formControlName="dateOperationsCeased"
+                 [max]="maxDate"
+                 [matDatepicker]="dateOperationsCeased" (focus)="dateOperationsCeased.open()" (click)="dateOperationsCeased.open()">
+          <mat-datepicker #dateOperationsCeased></mat-datepicker>
+        </section>
       </div>
+    </div>
 
-      <div class="padded-section">
-        <h3>QUESTION 2</h3>
+    <div class="padded-section">
+      <h3>QUESTION 2</h3>
+      <section class="app-field">
+        <span class="field-label bold">On or after March 1, 2020, were you or any of your associates involved with the distribution or supply of cannabis to a licensed or unlicensed cannabis retail store or retailer?</span>
+        <mat-radio-group formControlName="isInvolvedIllegalDistribution">
+          <mat-radio-button [value]="true">Yes</mat-radio-button>
+          <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+      </section>
+      <div [hidden]="eligibilityForm.get('isInvolvedIllegalDistribution').value !== true">
+        <app-field
+          label="Please indicate the details of your involvement"
+          [required]="false"
+          [isFullWidth]="true">
+          <textarea formControlName="illegalDistributionInvolvementDetails" class="form-control"></textarea>
+        </app-field>
+        <app-field
+          label="Please indicate the name and location of the retailer or store"
+          [required]="false"
+          [isFullWidth]="true">
+          <input type="text" formControlName="nameLocationRetailer" class="form-control"/>
+        </app-field>
         <section class="app-field">
-          <span class="field-label bold">On or after March 1, 2020, were you or any of your associates involved with the distribution or supply of cannabis to a licensed or unlicensed cannabis retail store or retailer?</span>
-          <mat-radio-group formControlName="isInvolvedIllegalDistribution">
-              <mat-radio-button [value]="true">Yes</mat-radio-button>
-              <mat-radio-button [value]="false">No</mat-radio-button>
+          <span class="field-label">Do you continue to be involved?</span>
+          <mat-radio-group formControlName="isInvolvementContinuing">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
           </mat-radio-group>
         </section>
-        <div [hidden]="eligibilityForm.get('isInvolvedIllegalDistribution').value !== true">
-          <app-field
-            label="Please indicate the details of your involvement"
-            [required]="false"
-            [isFullWidth]="true">
-            <textarea formControlName="illegalDistributionInvolvementDetails" class="form-control"></textarea>
-          </app-field>
-          <app-field
-            label="Please indicate the name and location of the retailer or store"
-            [required]="false"
-            [isFullWidth]="true">
-            <input type="text" formControlName="nameLocationRetailer" class="form-control"/>
-          </app-field>
-          <section class="app-field">
-            <span class="field-label">Do you continue to be involved?</span>
-            <mat-radio-group formControlName="isInvolvementContinuing">
-                <mat-radio-button [value]="true">Yes</mat-radio-button>
-                <mat-radio-button [value]="false">No</mat-radio-button>
-            </mat-radio-group>
-          </section>
-          <section class="app-field" [hidden]="eligibilityForm.get('isInvolvementContinuing').value !== false">
-            <span class="field-label">The date your involvement ceased</span>
-            <input type="text" placeholder="yyyy-mm-dd" class="form-control" formControlName="dateInvolvementCeased"
-            [max]="maxDate"
-            [matDatepicker]="dateInvolvementCeased" (focus)="dateInvolvementCeased.open()" (click)="dateInvolvementCeased.open()">
-            <mat-datepicker #dateInvolvementCeased></mat-datepicker>
-          </section>
-        </div>
+        <section class="app-field" [hidden]="eligibilityForm.get('isInvolvementContinuing').value !== false">
+          <span class="field-label">The date your involvement ceased</span>
+          <input type="text" placeholder="yyyy-mm-dd" class="form-control" formControlName="dateInvolvementCeased"
+                 [max]="maxDate"
+                 [matDatepicker]="dateInvolvementCeased" (focus)="dateInvolvementCeased.open()" (click)="dateInvolvementCeased.open()">
+          <mat-datepicker #dateInvolvementCeased></mat-datepicker>
+        </section>
       </div>
-  
-      <div class="padded-section pt-3">
-        <p>The information in this questionnaire is being gathered for the sole purpose of administering and enforcing the Cannabis Control and Licensing Act (CCLA) and will only be used as set out in the CCLA or as otherwise authorized by law. This information is being collected pursuant to the authority in section 26(c) of the Freedom of Information and Protection of Privacy Act. Any questions about the collection of information can be directed to the Freedom of Information Officer at PO Box 9292 STN Provincial Government, Victoria BC, V8W 9J8 or by phone toll free at 1-866-209-2111. </p>
-        <div>
-          <mat-checkbox class="certify" formControlName="isEligibilityCertified">I certify that, to the best of my knowledge, the information I have provided above is complete, honest and  accurate. I understand that a false statement or omission of facts herein is an offence under section 22 (2) of the Cannabis Control and Licensing Act and may be grounds for a finding that the applicant is not fit and proper and could result in a denial of a cannabis retail licence. I am also aware that later discovery of an omission or misrepresentation may be grounds for a finding that an applicant or licensee is not fit and proper, which could lead to enforcement action such as the suspension or cancellation of a licence.</mat-checkbox>
-        </div>
-      </div>
+    </div>
 
-      <div class="signature">
-        <section class="app-field col-xs-12 col-md-8 sig-controls">
-          <label for="eligibilitySignature">Electronic Signature:</label>
-          <input id="eligibilitySignature" formControlName="eligibilitySignature"/>
-        </section>
-        <section class="app-field col-xs-12 col-md-4 sig-controls">
-          <label for="dateSignedOrDismissed">Signed on:</label>
-          <input id="dateSignedOrDismissed" type="text" disabled [value]="eligibilityForm.get('dateSignedOrDismissed').value | date: 'yyyy-MM-dd' : '+00:00'">
-        </section>
+    <div class="padded-section pt-3">
+      <p>The information in this questionnaire is being gathered for the sole purpose of administering and enforcing the Cannabis Control and Licensing Act (CCLA) and will only be used as set out in the CCLA or as otherwise authorized by law. This information is being collected pursuant to the authority in section 26(c) of the Freedom of Information and Protection of Privacy Act. Any questions about the collection of information can be directed to the Freedom of Information Officer at PO Box 9292 STN Provincial Government, Victoria BC, V8W 9J8 or by phone toll free at 1-866-209-2111. </p>
+      <div>
+        <mat-checkbox class="certify" formControlName="isEligibilityCertified">I certify that, to the best of my knowledge, the information I have provided above is complete, honest and accurate. I understand that a false statement or omission of facts herein is an offence under section 22 (2) of the Cannabis Control and Licensing Act and may be grounds for a finding that the applicant is not fit and proper and could result in a denial of a cannabis retail licence. I am also aware that later discovery of an omission or misrepresentation may be grounds for a finding that an applicant or licensee is not fit and proper, which could lead to enforcement action such as the suspension or cancellation of a licence.</mat-checkbox>
       </div>
-  
-      <div class="p-4 d-flex justify-content-between button-row">
-        <button class="btn btn-secondary" style="margin-right:10px;" (click)="closeForm()">DECLINE TO ANSWER</button>
-        <button class="btn btn-primary" (click)="submitForm()" [disabled]="eligibilityForm.invalid">SUBMIT</button>
-      </div>
-    </form>
-  </div>
+    </div>
+
+    <div class="signature">
+      <section class="app-field col-xs-12 col-md-8 sig-controls">
+        <label for="eligibilitySignature">Electronic Signature:</label>
+        <input id="eligibilitySignature" formControlName="eligibilitySignature"/>
+      </section>
+      <section class="app-field col-xs-12 col-md-4 sig-controls">
+        <label for="dateSignedOrDismissed">Signed on:</label>
+        <input id="dateSignedOrDismissed" type="text" disabled [value]="eligibilityForm.get('dateSignedOrDismissed').value | date: 'yyyy-MM-dd' : '+00:00'">
+      </section>
+    </div>
+
+    <div class="p-4 d-flex justify-content-between button-row">
+      <button class="btn btn-secondary" style="margin-right: 10px;" (click)="closeForm()">DECLINE TO ANSWER</button>
+      <button class="btn btn-primary" (click)="submitForm()" [disabled]="eligibilityForm.invalid">SUBMIT</button>
+    </div>
+  </form>
+</div>

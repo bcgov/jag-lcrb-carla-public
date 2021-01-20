@@ -1,25 +1,27 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { LgApprovalsComponent } from './lg-approvals.component';
+import { LgApprovalsComponent } from "./lg-approvals.component";
 
-describe('LgApprovalsComponent', () => {
-  let component: LgApprovalsComponent;
-  let fixture: ComponentFixture<LgApprovalsComponent>;
+describe("LgApprovalsComponent",
+  () => {
+    let component: LgApprovalsComponent;
+    let fixture: ComponentFixture<LgApprovalsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LgApprovalsComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+          declarations: [LgApprovalsComponent]
+        })
+        .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LgApprovalsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    beforeEach(() => {
+      fixture = TestBed.createComponent(LgApprovalsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it("should create",
+      () => {
+        expect(component).toBeTruthy();
+      });
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});

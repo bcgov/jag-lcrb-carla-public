@@ -1,5 +1,6 @@
 export class SurveyConfig {
   pages: any;
-  title: string;  
-  constructor() { }
+  title: string;
+
+  constructor() {}
 }

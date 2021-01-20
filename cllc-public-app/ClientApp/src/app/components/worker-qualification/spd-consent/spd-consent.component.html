@@ -3,58 +3,62 @@
   <div class="row">
     <div class="col-lg-7 col-sm-12">
       <div [formGroup]="form">
-        <h3><span class="step">STEP 2</span></h3>
+        <h3>
+          <span class="step">STEP 2</span>
+        </h3>
         <h1>Consent for Cannabis Security Screening</h1>
         <p>
-          Please read the declaration before agreeing. 
+          Please read the declaration before agreeing.
         </p>
         <h2 class="blue-header">DECLARATION AND CONSENT</h2>
         <section style="padding-left: 10px;">
           <p>
             <span>
               <input type="checkbox" formControlName="consentToCollection">
-                  I
-                  <span style="text-decoration: underline;">{{contact?.firstname}} {{contact?.lastname}} </span>
-                  authorize the collection of my personal information on this application by the Royal Canadian Mounted Police (RCMP) 
-                  and other federal government institution under the Privacy Act for the purpose of conducting a check of criminal investigations, 
-                  charges and convictions. I also authorize the provision of my personal information on this application by the BC Municipal Law 
-                  Enforcement Agencies as well as other authorized public bodies under FoIPPA for the same purpose.
+              I
+              <span style="text-decoration: underline;">{{contact?.firstname}} {{contact?.lastname}} </span>
+              authorize the collection of my personal information on this application by the Royal Canadian Mounted Police (RCMP)
+              and other federal government institution under the Privacy Act for the purpose of conducting a check of criminal investigations,
+              charges and convictions. I also authorize the provision of my personal information on this application by the BC Municipal Law
+              Enforcement Agencies as well as other authorized public bodies under FoIPPA for the same purpose.
             </span>
           </p>
           <p>
-              Additionally, I consent to the disclosure to the Ministry of Public Safety and Solicitor General by the RCMP, the BC Municipal Law 
-              Enforcement Agencies as well as other authorized public body agencies of any personal information related to my security screening 
-              checks under the Privacy Act, FoIPPA, and other relevant applicable provincial and federal legislation. The information may include: 
-              (a) criminal record check or fingerprint-based criminal record verification by searching the Canadian Police Information Centre 
-              database; (b) a police information check, including the Police Records Information Management Environment (PRIME-BC) and the 
-              Police Reporting and Occurrence System (PROS); (c) a check of intelligence databases maintained by law enforcement agencies.
+            Additionally, I consent to the disclosure to the Ministry of Public Safety and Solicitor General by the RCMP, the BC Municipal Law
+            Enforcement Agencies as well as other authorized public body agencies of any personal information related to my security screening
+            checks under the Privacy Act, FoIPPA, and other relevant applicable provincial and federal legislation. The information may include:
+            (a) criminal record check or fingerprint-based criminal record verification by searching the Canadian Police Information Centre
+            database; (b) a police information check, including the Police Records Information Management Environment (PRIME-BC) and the
+            Police Reporting and Occurrence System (PROS); (c) a check of intelligence databases maintained by law enforcement agencies.
           </p>
           <p>
-              I certify that, to the best of my knowledge, the information I have provided on m application is complete, honest and accurate. I understand that a 
-              false statement or omission of facts herein may be grounds for denying a cannabis security verification pursuant to the Worker Qualification Regulation
-              and the CCLA. I am also aware that later discover of an omission or misrepresentation could lead to enforcement action such as the revocation of a 
-              cannabis security verification.
-          </p>          
-          <div *ngIf="showValidationMessages && !form.get('consentToCollection').touched" class="missing"  style="background-color: #F2F2F2; margin-top: 2px; padding: 10px;">
+            I certify that, to the best of my knowledge, the information I have provided on m application is complete, honest and accurate. I understand that a
+            false statement or omission of facts herein may be grounds for denying a cannabis security verification pursuant to the Worker Qualification Regulation
+            and the CCLA. I am also aware that later discover of an omission or misrepresentation could lead to enforcement action such as the revocation of a
+            cannabis security verification.
+          </p>
+          <div *ngIf="showValidationMessages && !form.get('consentToCollection').touched" class="missing" style="background-color: #F2F2F2; margin-top: 2px; padding: 10px;">
             <fa-icon [icon]="faExclamationTriangle"></fa-icon> Please provide your consent to proceed -- a security screening is required in order to become a
             qualified cannabis worker.
           </div>
 
         </section>
-          <h3>PRIVACY STATEMENT</h3>
-          <div>
-            I hereby release and forever discharge (i) Her Majesty the Queen in Right of Canada, the Royal Canadian
-            Mounted Police, their members, employees, agents and assigns, and (ii) Her Majesty the Queen in Right of the
-            Province of British Columbia and all employees and agents of the Province of British Columbia from any and
-            all actions, causes of actions, claims, complaints and demands for any form of relief, damages, loss or
-            injury which may hereafter be sustained by myself, howsoever arising from the above authorized disclosure of
-            information and waive all rights thereto.
-          </div>
-          <h2 class="blue-header">FEE PAYMENT</h2>
-          <section class="padded-section">
-            <p>You are now ready to submit and pay. The security verification fee is $100.  Please note this fee is non-refundable.</p>
-            <p>You'll make your payment through BC ExpressPay, a secure government service. It takes MasterCard and Visa
-              debit and credit cards and American Express.</p>
+        <h3>PRIVACY STATEMENT</h3>
+        <div>
+          I hereby release and forever discharge (i) Her Majesty the Queen in Right of Canada, the Royal Canadian
+          Mounted Police, their members, employees, agents and assigns, and (ii) Her Majesty the Queen in Right of the
+          Province of British Columbia and all employees and agents of the Province of British Columbia from any and
+          all actions, causes of actions, claims, complaints and demands for any form of relief, damages, loss or
+          injury which may hereafter be sustained by myself, howsoever arising from the above authorized disclosure of
+          information and waive all rights thereto.
+        </div>
+        <h2 class="blue-header">FEE PAYMENT</h2>
+        <section class="padded-section">
+          <p>You are now ready to submit and pay. The security verification fee is $100. Please note this fee is non-refundable.</p>
+          <p>
+            You'll make your payment through BC ExpressPay, a secure government service. It takes MasterCard and Visa
+            debit and credit cards and American Express.
+          </p>
         </section>
 
         <section *ngIf="showValidationMessages" class="missing" style="background-color: #F2F2F2; padding: 10px">
@@ -66,9 +70,11 @@
           <div [ngBusy]="busy"></div>
           <button class="btn btn-secondary" routerLink="/worker-qualification/dashboard">
             <fa-icon [icon]="faSave"></fa-icon>
-            SAVE FOR LATER</button>
+            SAVE FOR LATER
+          </button>
           <button style="margin-left: 10px;" routerLink="/worker-qualification/application/{{workerId}}"
-            class="btn btn-secondary">RETURN
+                  class="btn btn-secondary">
+            RETURN
             TO STEP 1
           </button>
           <button style="margin-left: 10px;" (click)="goToNextStep()" class="btn btn-primary">SUBMIT & PAY</button>
@@ -78,17 +84,17 @@
     <div class="col-lg-4 col-sm-12" style="position: relative">
       <!-- <div [ngBusy]="busy"></div> -->
       <p></p>
-      <section class="submit-container" style="background-color: #F2F2F2; color:#000; border: none;">
+      <section class="submit-container" style="background-color: #F2F2F2; border: none; color: #000;">
         <h2 style="color: #000">Collection Notice:</h2>
         <div class="submit-content">
           <p>
-              The Liquor and Cannabis Regulation Branch (LCRB) will collect your personal information for the purpose of fulfilling 
-              the requirements of the Cannabis Control and Licensing Act (CCLA) and associated regulations in cannabis licensing, 
-              compliance and enforcement matters in accordance with sections 26(a) and (c) of the Freedom of Information and 
-              Protection of Privacy Act (FoIPPA) and section 10 of the CCLA. Additionally, LCRB may collect personal information under 
-              section 26(e) of FoIPPA for the purpose of evaluating LCRB programs and activities to better serve you. Should you have 
-              any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information 
-              Officer at PO Box 9292 STN PROV GOVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
+            The Liquor and Cannabis Regulation Branch (LCRB) will collect your personal information for the purpose of fulfilling
+            the requirements of the Cannabis Control and Licensing Act (CCLA) and associated regulations in cannabis licensing,
+            compliance and enforcement matters in accordance with sections 26(a) and (c) of the Freedom of Information and
+            Protection of Privacy Act (FoIPPA) and section 10 of the CCLA. Additionally, LCRB may collect personal information under
+            section 26(e) of FoIPPA for the purpose of evaluating LCRB programs and activities to better serve you. Should you have
+            any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information
+            Officer at PO Box 9292 STN PROV GOVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
           </p>
         </div>
       </section>

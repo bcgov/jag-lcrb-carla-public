@@ -1,35 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBase, ApplicationHTMLContent } from '@shared/form-base';
-import { Application } from '@models/application.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription, Observable, Subject, of, forkJoin } from 'rxjs';
-import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { PaymentDataService } from '@services/payment-data.service';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ApplicationDataService } from '@services/application-data.service';
-import { FeatureFlagService } from '@services/feature-flag.service';
-import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
-import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
-import { Account } from '@models/account.model';
-import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
-import { DynamicsDataService } from '@services/dynamics-data.service';
-import { EstablishmentDataService } from '@services/establishment-data.service';
-import { Establishment } from '@models/establishment.model';
-import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
-import { faSave, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
+import { Application } from "@models/application.model";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Subscription, Observable, Subject, of, forkJoin } from "rxjs";
+import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
+import { Store } from "@ngrx/store";
+import { AppState } from "@app/app-state/models/app-state";
+import { PaymentDataService } from "@services/payment-data.service";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router, ActivatedRoute } from "@angular/router";
+import { ApplicationDataService } from "@services/application-data.service";
+import { FeatureFlagService } from "@services/feature-flag.service";
+import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
+import { takeWhile, filter, catchError, mergeMap } from "rxjs/operators";
+import { Account } from "@models/account.model";
+import * as currentApplicationActions from "@app/app-state/actions/current-application.action";
+import { DynamicsDataService } from "@services/dynamics-data.service";
+import { EstablishmentDataService } from "@services/establishment-data.service";
+import { Establishment } from "@models/establishment.model";
+import { ApplicationCancellationDialogComponent } from
+  "@components/dashboard/applications-and-licences/applications-and-licences.component";
+import { faSave, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 const ValidationErrorMap = {
-  establishmentopeningdate: 'Please enter the Estimated Opening Date',
-  description1: 'Please outline the reason for the opening date (at least 10 characters)',
+  establishmentopeningdate: "Please enter the Estimated Opening Date",
+  description1: "Please outline the reason for the opening date (at least 10 characters)",
 };
 
 @Component({
-  selector: 'app-application-and-licence-fee',
-  templateUrl: './application-and-licence-fee.component.html',
-  styleUrls: ['./application-and-licence-fee.component.scss']
+  selector: "app-application-and-licence-fee",
+  templateUrl: "./application-and-licence-fee.component.html",
+  styleUrls: ["./application-and-licence-fee.component.scss"]
 })
 export class ApplicationAndLicenceFeeComponent extends FormBase implements OnInit {
   faSave = faSave;
@@ -42,7 +44,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
   validationMessages: any[];
   showValidationMessages: boolean;
   submittedApplications = 8;
-  htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
+  htmlContent = {} as ApplicationHTMLContent;
   ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
   account: Account;
@@ -62,33 +64,33 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
+    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get("applicationId"));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      id: [''],
+      id: [""],
       assignedLicence: this.fb.group({
-        establishmentId: [''],
-        establishmentPhone: [''],
-        establishmentEmail: [''],
+        establishmentId: [""],
+        establishmentPhone: [""],
+        establishmentEmail: [""],
       }),
-      description1: ['', [Validators.required, Validators.minLength(10)]],
-      isReadyValidInterest: [''],
-      isReadyWorkers: [''],
-      isReadyNameBranding: [''],
-      isReadyDisplays: [''],
-      isReadyIntruderAlarm: [''],
-      isReadyFireAlarm: [''],
-      isReadyLockedCases: [''],
-      isReadyLockedStorage: [''],
-      isReadyPerimeter: [''],
-      isReadyRetailArea: [''],
-      isReadyStorage: [''],
-      isReadyExtranceExit: [''],
-      isReadySurveillanceNotice: [''],
-      isReadyProductNotVisibleOutside: [''],
-      establishmentopeningdate: ['', [Validators.required]],
+      description1: ["", [Validators.required, Validators.minLength(10)]],
+      isReadyValidInterest: [""],
+      isReadyWorkers: [""],
+      isReadyNameBranding: [""],
+      isReadyDisplays: [""],
+      isReadyIntruderAlarm: [""],
+      isReadyFireAlarm: [""],
+      isReadyLockedCases: [""],
+      isReadyLockedStorage: [""],
+      isReadyPerimeter: [""],
+      isReadyRetailArea: [""],
+      isReadyStorage: [""],
+      isReadyExtranceExit: [""],
+      isReadySurveillanceNotice: [""],
+      isReadyProductNotVisibleOutside: [""],
+      establishmentopeningdate: ["", [Validators.required]],
     });
 
     this.applicationDataService.getSubmittedApplicationCount()
@@ -106,26 +108,27 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
       .pipe(takeWhile(() => this.componentActive))
       // .pipe(mergeMap(application))
       .subscribe((data: Application) => {
-        if (data.establishmentParcelId) {
-          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-        }
+          if (data.establishmentParcelId) {
+            data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, "");
+          }
 
-        this.application = data;
+          this.application = data;
 
-        this.addDynamicContent();
+          this.addDynamicContent();
 
-        const noNulls = Object.keys(data)
-          .filter(e => data[e] !== null)
-          .reduce((o, e) => {
-            o[e] = data[e];
-            return o;
-          }, {});
+          const noNulls = Object.keys(data)
+            .filter(e => data[e] !== null)
+            .reduce((o, e) => {
+                o[e] = data[e];
+                return o;
+              },
+              {});
 
-        this.form.patchValue(noNulls);
-        this.savedFormData = this.form.value;
-      },
+          this.form.patchValue(noNulls);
+          this.savedFormData = this.form.value;
+        },
         () => {
-          console.log('Error occured');
+          console.log("Error occured");
         }
       );
   }
@@ -134,13 +137,16 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
     this.busy = this.paymentDataService.getInvoiceFeePaymentSubmissionUrl(this.application.id)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(res => {
-        const data = <any>res;
-        window.location.href = data.url;
-      }, err => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-      });
+          const data = res as any;
+          window.location.href = data.url;
+        },
+        err => {
+          if (err._body === "Payment already made") {
+            this.snackBar.open("Licence Fee payment has already been made.",
+              "Fail",
+              { duration: 3500, panelClass: ["red-snackbar"] });
+          }
+        });
   }
 
   canDeactivate(): Observable<boolean> | boolean {
@@ -162,25 +168,27 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
-    const establishment = <Establishment>{
+    const establishment = {
       id: saveData.assignedLicence.establishmentId,
       phone: saveData.assignedLicence.establishmentPhone,
       email: saveData.assignedLicence.establishmentEmail,
-    };
+    } as Establishment;
 
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
-      this.establishmentDataService.upEstablishment(establishment)
-    ).pipe(takeWhile(() => this.componentActive))
+        this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
+        this.establishmentDataService.upEstablishment(establishment)
+      ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         return of(false);
       }))
       .pipe(mergeMap(() => {
         this.savedFormData = saveData;
         this.updateApplicationInStore();
         if (showProgress === true) {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open("Application has been saved",
+            "Success",
+            { duration: 2500, panelClass: ["green-snackbar"] });
         }
         return of(true);
       }));
@@ -190,8 +198,8 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
     this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
-        this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
-      }
+          this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
+        }
       );
   }
 
@@ -218,7 +226,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
     // mark controls as touched
     this.markControlsAsTouched(this.form);
     this.showValidationMessages = false;
-    let valid = true;
+    const valid = true;
     this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
     return this.form.valid;
@@ -232,8 +240,8 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: '400px',
-      height: '200px',
+      width: "400px",
+      height: "200px",
       data: {
         establishmentName: this.application.establishmentName,
         applicationName: this.application.name
@@ -250,12 +258,14 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
           this.busy = this.applicationDataService.cancelApplication(this.applicationId)
             .pipe(takeWhile(() => this.componentActive))
             .subscribe(() => {
-              this.savedFormData = this.form.value;
-              this.router.navigate(['/dashboard']);
-            },
+                this.savedFormData = this.form.value;
+                this.router.navigate(["/dashboard"]);
+              },
               () => {
-                this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-                console.error('Error cancelling the application');
+                this.snackBar.open("Error cancelling the application",
+                  "Fail",
+                  { duration: 3500, panelClass: ["red-snackbar"] });
+                console.error("Error cancelling the application");
               });
         }
       });
@@ -263,22 +273,29 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
 
   businessTypeIsPartnership(): boolean {
     return this.account &&
-      ['GeneralPartnership',
-        'LimitedPartnership',
-        'LimitedLiabilityPartnership',
-        'Partnership'].indexOf(this.account.businessType) !== -1;
+      [
+        "GeneralPartnership",
+        "LimitedPartnership",
+        "LimitedLiabilityPartnership",
+        "Partnership"
+      ].indexOf(this.account.businessType) !==
+      -1;
   }
 
   businessTypeIsPrivateCorporation(): boolean {
     return this.account &&
-      ['PrivateCorporation',
-        'UnlimitedLiabilityCorporation',
-        'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
+      [
+        "PrivateCorporation",
+        "UnlimitedLiabilityCorporation",
+        "LimitedLiabilityCorporation"
+      ].indexOf(this.account.businessType) !==
+      -1;
   }
 
   showFormControl(state: string): boolean {
     return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
-      .indexOf(state) !== -1;
+      .indexOf(state) !==
+      -1;
   }
 
 }

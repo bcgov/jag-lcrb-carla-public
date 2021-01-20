@@ -1,4 +1,4 @@
-export class Stat {  
+export class Stat {
   adoxio_name: string;
   adoxio_establishmentpropsedname: string;
   adoxio_establishmentaddressstreet: string;
@@ -6,5 +6,6 @@ export class Stat {
   adoxio_establishmentaddresscity: string;
   adoxio_applicationid: string;
   commregion: string;
-  constructor() { }
+
+  constructor() {}
 }

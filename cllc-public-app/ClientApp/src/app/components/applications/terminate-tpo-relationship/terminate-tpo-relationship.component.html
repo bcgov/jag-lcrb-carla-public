@@ -15,7 +15,7 @@
       <section class="padded-section">
         <app-field label="Establishment Name" [required]="false" [valid]="true">
           <input class="form-control" style="width: 500px;" type="text" [readonly]="true"
-            formControlName="establishmentName">
+                 formControlName="establishmentName">
         </app-field>
 
         <div>
@@ -44,7 +44,7 @@
             <div style="flex: 0 0 210px;">
               <app-field label="Parcel Identifier (PID)">
                 <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                  style="width: 200px;" formControlName="establishmentParcelId">
+                       style="width: 200px;" formControlName="establishmentParcelId">
               </app-field>
             </div>
           </div>
@@ -55,10 +55,11 @@
       <h3 class="blue-header">CONFIRM TERMINATION OF THIRD PARTY OPERATOR RELATIONSHIP</h3>
       <section class="padded-section">
         <app-field [required]="true" [valid]="isValidOrNotTouched('transferConsent')"
-          errorMessage="Please consent to terminate third party operator relationship" [showChevrons]="false">
+                   errorMessage="Please consent to terminate third party operator relationship" [showChevrons]="false">
           <mat-checkbox formControlName="transferConsent">
             <!-- <span class="error-states">*</span> -->
-            <span class="ml-2"> I agree to terminate the third party operator relationship for my {{licence.licenseType}} licence.
+            <span class="ml-2">
+              I agree to terminate the third party operator relationship for my {{licence.licenseType}} licence.
             </span>
           </mat-checkbox>
         </app-field>
@@ -76,8 +77,9 @@
       <section class="position-relative mt-3">
         <button class="btn btn-primary" (click)="terminateTPORelationship()">
           <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
-          CANCEL THIRD PARTY OPERATOR RELATIONSHIP</button>
-        <span style="float: right; color: #1a5a96; padding-top: 10px;">
+          CANCEL THIRD PARTY OPERATOR RELATIONSHIP
+        </button>
+        <span style="color: #1a5a96; float: right; padding-top: 10px;">
           <a routerLink="/licences">
             <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
             Return to Licences Page

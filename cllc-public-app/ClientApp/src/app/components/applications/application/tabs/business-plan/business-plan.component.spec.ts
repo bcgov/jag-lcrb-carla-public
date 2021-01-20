@@ -1,25 +1,27 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { BusinessPlanComponent } from './business-plan.component';
+import { BusinessPlanComponent } from "./business-plan.component";
 
-describe('BusinessPlanComponent', () => {
-  let component: BusinessPlanComponent;
-  let fixture: ComponentFixture<BusinessPlanComponent>;
+describe("BusinessPlanComponent",
+  () => {
+    let component: BusinessPlanComponent;
+    let fixture: ComponentFixture<BusinessPlanComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BusinessPlanComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+          declarations: [BusinessPlanComponent]
+        })
+        .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BusinessPlanComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    beforeEach(() => {
+      fixture = TestBed.createComponent(BusinessPlanComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it("should create",
+      () => {
+        expect(component).toBeTruthy();
+      });
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
