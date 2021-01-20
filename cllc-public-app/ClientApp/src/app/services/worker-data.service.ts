@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { Worker } from '@models/worker.model';
-import { Observable, of } from 'rxjs';
-import { DataService } from './data.service';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
+import { Worker } from "@models/worker.model";
+import { Observable } from "rxjs";
+import { DataService } from "./data.service";
 
 @Injectable()
 export class WorkerDataService extends DataService {
@@ -21,6 +21,7 @@ export class WorkerDataService extends DataService {
     return this.http.get<Worker[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
+
   /**
    * Get legal entities from Dynamics filtered by position
    * @param id
@@ -36,7 +37,7 @@ export class WorkerDataService extends DataService {
    * @param data - worker data
    */
   createWorker(data: Worker) {
-    return this.http.post<Worker>('api/worker/', data, { headers: this.headers })
+    return this.http.post<Worker>("api/worker/", data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

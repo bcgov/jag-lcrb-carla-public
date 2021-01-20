@@ -1,35 +1,39 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DynamicsDataService } from '@services/dynamics-data.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit } from "@angular/core";
+import { DynamicsDataService } from "@services/dynamics-data.service";
 
-import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from "@angular/forms";
 
-import { DynamicsForm } from '@models/dynamics-form.model';
+import { DynamicsForm } from "@models/dynamics-form.model";
 
-import { User } from '@models/user.model';
+import { User } from "@models/user.model";
 
 @Component({
-  selector: 'app-dynamics-form',
-  templateUrl: './dynamics-form.component.html',
-  styleUrls: ['./dynamics-form.component.scss']
+  selector: "app-dynamics-form",
+  templateUrl: "./dynamics-form.component.html",
+  styleUrls: ["./dynamics-form.component.scss"]
 })
 /** dynamics-form component*/
 export class DynamicsFormComponent implements OnInit {
-  @Input('formid') formid: string;
-  @Input('hideHeader') hideHeader: boolean;
-  @Input('hideSubmit') hideSubmit: boolean;
-  @Input('enableUserOverride') enableUserOverride: boolean;
-  @Input('currentUser') currentUser: User;
+  @Input("formid")
+  formid: string;
+  @Input("hideHeader")
+  hideHeader: boolean;
+  @Input("hideSubmit")
+  hideSubmit: boolean;
+  @Input("enableUserOverride")
+  enableUserOverride: boolean;
+  @Input("currentUser")
+  currentUser: User;
   // record to fetch data (for an edit operation)
-  @Input('recordId') recordId: string;
+  @Input("recordId")
+  recordId: string;
 
 
-  public payload: string;
-  public responseText: string;
-  public dynamicsForm: DynamicsForm;
-  public form: FormGroup;
-  public currentData: any;
+  payload: string;
+  responseText: string;
+  dynamicsForm: DynamicsForm;
+  form: FormGroup;
+  currentData: any;
 
   /** dynamics-form ctor */
   constructor(private dynamicsDataService: DynamicsDataService) {
@@ -43,8 +47,8 @@ export class DynamicsFormComponent implements OnInit {
       tab.sections.forEach(section => {
         section.fields.forEach(field => {
 
-          group[field.datafieldname] = new FormControl('');
-          if (field.controltype === 'CheckBoxControl') {
+          group[field.datafieldname] = new FormControl("");
+          if (field.controltype === "CheckBoxControl") {
             group[field.datafieldname].patchValue(false);
           }
 
@@ -53,11 +57,11 @@ export class DynamicsFormComponent implements OnInit {
 
 
           if (this.enableUserOverride) {
-            if (field.datafieldname === 'firstname') {
+            if (field.datafieldname === "firstname") {
               group[field.datafieldname].patchValue(this.currentUser.firstname);
-            } else if (field.datafieldname === 'lastname') {
+            } else if (field.datafieldname === "lastname") {
               group[field.datafieldname].patchValue(this.currentUser.lastname);
-            } else if (field.datafieldname === 'name') {
+            } else if (field.datafieldname === "name") {
               group[field.datafieldname].patchValue(this.currentUser.businessname);
             }
           }

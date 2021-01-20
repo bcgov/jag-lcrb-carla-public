@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-more-less-content',
-  templateUrl: './more-less-content.component.html',
-  styleUrls: ['./more-less-content.component.scss']
+  selector: "app-more-less-content",
+  templateUrl: "./more-less-content.component.html",
+  styleUrls: ["./more-less-content.component.scss"]
 })
 export class MoreLessContentComponent {
   showMore = false;

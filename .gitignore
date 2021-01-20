@@ -44,3 +44,6 @@ node_modules/
 /orgbook-service/.vs/orgbook-service
 /cllc-interfaces/Dynamics-Autorest/code-model-v1
 cllc-public-app/ClientApp/.vscode/
+/cllc-public-app/ClientApp/speed-measure-plugin-es2015.json
+/cllc-public-app/ClientApp/chrome-profiler-events.json
+/cllc-public-app/ClientApp/speed-measure-plugin.json

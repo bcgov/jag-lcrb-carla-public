@@ -82,6 +82,7 @@ http {
 
 		%API_CONFIG_SECTION%
 
+
 		
         # Remove path prefix when handling files
         rewrite ^\/lcrb\/(.*) /$1 last;
@@ -99,7 +100,17 @@ http {
 
             # Deploy-time configurable
             %HTTP_BASIC%
-        }
+			
+			
+			location ~.*.css {
+			add_header  Content-Type    text/css;
+			}
+		
+			location ~.*.js {
+			add_header  Content-Type    application/x-javascript;
+			}
+        
+		}
 		
 		
         # redirect server error pages to the static page /50x.html

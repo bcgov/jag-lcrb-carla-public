@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { EstablishmentDataService } from '@app/services/establishment-data.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
-import { FormBase } from '@shared/form-base';
-import { Meta, Title } from '@angular/platform-browser';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { EstablishmentDataService } from "@app/services/establishment-data.service";
+import { FormBuilder } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { takeWhile } from "rxjs/operators";
+import { FormBase } from "@shared/form-base";
+import { Meta, Title } from "@angular/platform-browser";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-licensee-retail-stores',
-  templateUrl: './licensee-retail-stores.component.html',
-  styleUrls: ['./licensee-retail-stores.component.scss']
+  selector: "app-licensee-retail-stores",
+  templateUrl: "./licensee-retail-stores.component.html",
+  styleUrls: ["./licensee-retail-stores.component.scss"]
 })
 export class LicenseeRetailStoresComponent extends FormBase implements OnInit {
 
@@ -18,8 +18,13 @@ export class LicenseeRetailStoresComponent extends FormBase implements OnInit {
   busy: Subscription;
 
   constructor(
-    private establishmentDataService: EstablishmentDataService, private fb: FormBuilder, private meta: Meta, private titleService: Title
-  ) { super(); }
+    private establishmentDataService: EstablishmentDataService,
+    private fb: FormBuilder,
+    private meta: Meta,
+    private titleService: Title
+  ) {
+    super();
+  }
 
   lrsData: string;
   proposedLrsData: string;
@@ -28,10 +33,13 @@ export class LicenseeRetailStoresComponent extends FormBase implements OnInit {
   rows: any;
 
   ngOnInit() {
-    this.meta.addTag({ name: 'viewport', content: 'width=device-width, initial-scale=1,  maximum-scale=1.0, user-scalable=no' });
+    this.meta.addTag({
+      name: "viewport",
+      content: "width=device-width, initial-scale=1,  maximum-scale=1.0, user-scalable=no"
+    });
     this.titleService.setTitle("Licensee Retail Stores in B.C.");
     this.form = this.fb.group({
-      name: ['']
+      name: [""]
     });
     // get the json from the map service.
     this.resetMap();
@@ -40,11 +48,11 @@ export class LicenseeRetailStoresComponent extends FormBase implements OnInit {
   searchMap() {
     this.busy =
       this.establishmentDataService.getLrsSearch(this.search)
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe(value => {
-          this.lrsData = value;
-          this.hasData = true;
-        });
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(value => {
+        this.lrsData = value;
+        this.hasData = true;
+      });
 
     this.establishmentDataService.getProposedLrsSearch(this.search)
       .pipe(takeWhile(() => this.componentActive))
@@ -56,10 +64,10 @@ export class LicenseeRetailStoresComponent extends FormBase implements OnInit {
   resetMap() {
     this.busy =
       this.establishmentDataService.getLrs()
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe(value => {
-          this.lrsData = value;
-        });
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(value => {
+        this.lrsData = value;
+      });
 
     this.establishmentDataService.getProposedLrs()
       .pipe(takeWhile(() => this.componentActive))
@@ -68,6 +76,3 @@ export class LicenseeRetailStoresComponent extends FormBase implements OnInit {
       });
   }
 }
-
-
-

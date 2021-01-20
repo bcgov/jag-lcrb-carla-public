@@ -1,24 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { VoteDataService } from '@services/vote-data.service';
+import { Component, Input, OnInit } from "@angular/core";
+import { VoteDataService } from "@services/vote-data.service";
 
 // simple voting feature, based on https://github.com/cjsheets/angular-voting-app
 
 @Component({
-  selector: 'app-vote',
-  templateUrl: './vote.component.html',
-  styleUrls: ['./vote.component.scss']
+  selector: "app-vote",
+  templateUrl: "./vote.component.html",
+  styleUrls: ["./vote.component.scss"]
 })
 /** vote component*/
 export class VoteComponent implements OnInit {
-  @Input() slug: string;
-  @Input() vote_value: string;
+  @Input()
+  slug: string;
+  @Input()
+  vote_value: string;
 
-  public options;
-  public question: string;
-  public title: string;
+  options;
+  question: string;
+  title: string;
   private id: string;
-  public alreadyVoted = false;
-  public showVoteResults = false;
+  alreadyVoted = false;
+  showVoteResults = false;
   localStorage = window.localStorage;
 
   /** vote constructor */
@@ -35,8 +37,8 @@ export class VoteComponent implements OnInit {
           this.title = voteQuestion.title;
           this.id = voteQuestion.id;
 
-          const cookieValue = this.localStorage.getItem('HasVoted' + this.id);
-          if (cookieValue != null && cookieValue === 'Y') {
+          const cookieValue = this.localStorage.getItem(`HasVoted${this.id}`);
+          if (cookieValue != null && cookieValue === "Y") {
             this.alreadyVoted = true;
             this.showVoteResults = true;
           }
@@ -47,14 +49,15 @@ export class VoteComponent implements OnInit {
   setShowVoteResults(value) {
     this.showVoteResults = value;
   }
+
   sendVote(option) {
-    this.localStorage.setItem('HasVoted' + this.id, 'Y');
+    this.localStorage.setItem(`HasVoted${this.id}`, "Y");
     this.alreadyVoted = true;
     // send the vote in.
     this.voteDataService.postVote(this.slug, option)
-    .subscribe((voteQuestion) => {
-      console.log(voteQuestion.options);
-      this.options = voteQuestion.options;
-    });
+      .subscribe((voteQuestion) => {
+        console.log(voteQuestion.options);
+        this.options = voteQuestion.options;
+      });
   }
 }

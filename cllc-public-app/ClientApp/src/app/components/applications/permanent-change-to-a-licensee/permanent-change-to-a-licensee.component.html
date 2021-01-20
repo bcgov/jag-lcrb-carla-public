@@ -4,10 +4,10 @@
     </h1>
     <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
 
-    <ng-container *ngIf="dataLoaded">
-        <section class="d-flex">
-            <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
-            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+<ng-container *ngIf="dataLoaded">
+<section class="d-flex">
+<div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+<div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
 
                 <section>
                     <!-- For all corporations -->
@@ -118,35 +118,40 @@
                             for submitting documentation.
                         </p>
 
-                        <p>
-                            Associates will submit documentation for security screening and financial integrity
-                            assessments
-                            directly to the LCRB. Applicants should not delay submitting a completed application form
-                            and
-                            business financial integrity form. It is the applicant's responsibility to direct all
-                            associates
-                            to the
-                            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-                                target="_blank" rel="noopener noreferrer">link provided</a>.
-                        </p>
-                        <p>
-                            Associates for Indigenous Nations applications include all persons who are authorized to act
-                            on
-                            behalf of the nation.
-                        </p>
-                        <p>
-                            If you require more information please email <a
-                                href="mailto:lcrbcannabis@gov.bc.ca?Subject=Indigenous Nations">lcrbcannabis@gov.bc.ca</a>.
-                        </p>
+  <p>
+    Associates will submit documentation for security screening and financial integrity
+    assessments
+    directly to the LCRB. Applicants should not delay submitting a completed application form
+    and
+    business financial integrity form. It is the applicant's responsibility to direct all
+    associates
+    to the
+    <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+       target="_blank" rel="noopener noreferrer">
+      link provided
+    </a>.
+  </p>
+  <p>
+    Associates for Indigenous Nations applications include all persons who are authorized to act
+    on
+    behalf of the nation.
+  </p>
+  <p>
+    If you require more information please email
+    <a
+      href="mailto:lcrbcannabis@gov.bc.ca?Subject=Indigenous Nations">
+      lcrbcannabis@gov.bc.ca
+    </a>.
+  </p>
 
-                        <p>
-                            Please note: While they are not normally required as part of the licence application
-                            process,
-                            the Liquor and Cannabis Regulation Branch reserves the right to ask for an Indigenous
-                            Nation’s
-                            membership lists.
-                        </p>
-                    </section>
+  <p>
+    Please note: While they are not normally required as part of the licence application
+    process,
+    the Liquor and Cannabis Regulation Branch reserves the right to ask for an Indigenous
+    Nation’s
+    membership lists.
+  </p>
+</section>
 
                     <section *ngIf="this.account.businessType !=='IndigenousNation'">
                         <p>Fees are calculated based on the type of change reported and the number of licences impacted.
@@ -197,73 +202,82 @@
                         </ul>
                     </section>
 
-                    <!-- For Indigenous Nations -->
-                </section>
-            </div>
-        </section>
+<!-- For Indigenous Nations -->
+</section>
+</div>
+</section>
 
 
+<!-- Types of Changes Requested -->
+<h3 class="blue-header">Types of Changes Requested</h3>
+<section class="content-bottom">
+  <p>
+    Please check appropriate box(es) below. You may complete more than one change section on this form. An
+    incomplete application will be held for a maximum of thirty (30) days. If still incomplete after the
+    thirty
+    (30) day period, the application may be terminated.
+  </p>
+
+  <ng-container *ngFor="let item of changeList">
+    <mat-checkbox [formControlName]="item.formControlName">
+      {{item.name}}
+    </mat-checkbox>
+    <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 10px;"
+             (click)="item.show = !!!item.show">
+    </fa-icon>
+    <section class="infoCell"
+             *ngIf="item.show && (item.helpTextHeader || item.helpText || item.helpTextLink)">
+      <p *ngIf="item.CannabisFee == item.LiquorFee" style="padding-right: 30px; text-align: right;">
+        <strong>Application Fee of ${{item.CannabisFee}} per Licence</strong>
+      </p>
+      <p *ngIf="item.CannabisFee != item.LiquorFee" style="padding-right: 30px; text-align: right;">
+        <strong>
+          Application Fee of ${{item.CannabisFee}} per Cannabis Licence, ${{item.LiquorFee}} per
+          Liquor Licence
+        </strong>
+      </p>
+      <p *ngIf="item.helpTextHeader">{{item.helpTextHeader}}</p>
+      <section *ngIf="item.helpText && item.helpText.length > 0" style="padding: 5px;">
+        <ul>
+          <li *ngFor="let help of item.helpText">{{help}}</li>
+        </ul>
+      </section>
+
+      <section *ngIf="item.helpTextLink" style="padding-right: 30px; text-align: right;">
+        <a href="{{item.helpTextLink}}" target="_blank">More Information</a>
+      </section>
+    </section>
 
 
-        <!-- Types of Changes Requested -->
-        <h3 class="blue-header">Types of Changes Requested</h3>
-        <section class="content-bottom">
-            <p>Please check appropriate box(es) below. You may complete more than one change section on this form. An
-                incomplete application will be held for a maximum of thirty (30) days. If still incomplete after the
-                thirty
-                (30) day period, the application may be terminated.</p>
+    <hr>
 
-            <ng-container *ngFor="let item of changeList">
-                <mat-checkbox [formControlName]="item.formControlName">{{item.name}}
-                </mat-checkbox>
-                <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 10px;"
-                    (click)="item.show = !!!item.show"></fa-icon>
-                <section class="infoCell"
-                    *ngIf="item.show && (item.helpTextHeader || item.helpText || item.helpTextLink)">
-                    <p *ngIf="item.CannabisFee == item.LiquorFee" style="text-align:right; padding-right:30px;">
-                        <strong>Application Fee of ${{item.CannabisFee}} per Licence</strong>
-                    </p>
-                    <p *ngIf="item.CannabisFee != item.LiquorFee" style="text-align:right; padding-right:30px;">
-                        <strong>Application Fee of ${{item.CannabisFee}} per Cannabis Licence, ${{item.LiquorFee}} per
-                            Liquor Licence</strong>
-                    </p>
-                    <p *ngIf="item.helpTextHeader">{{item.helpTextHeader}}</p>
-                    <section *ngIf="item.helpText && item.helpText.length > 0" style="padding:5px;">
-                        <ul>
-                            <li *ngFor="let help of item.helpText">{{help}}</li>
-                        </ul>
-                    </section>
+  </ng-container>
+</section>
 
-                    <section *ngIf="item.helpTextLink" style="text-align:right; padding-right:30px;">
-                        <a href="{{item.helpTextLink}}" target="_blank">More Information</a>
-                    </section>
-                </section>
+<!-- Internal Share Transfer -->
+<section *ngIf="form.get('csInternalTransferOfShares').value">
+  <h3 class="blue-header">Internal Share Transfer</h3>
+  <div class="content-bottom">
+    <p>
+      Complete this section when shares have been transferred within the licensee corporation or holding
+      companies or there has been an amalgamation of companies within the licensee corporation but no new
+      shareholders have been added (holding companies or individuals). See example:
+    </p>
+    <img src="assets/central-securities-register-example.png" style="border: solid #e0e0e0 1px; margin: 10px; width: 500px;">
+    <p>
+      Third party operators should also complete this section when an internal share transfer or an
+      amalgamation occurs.
+    </p>
 
-
-                <hr>
-
-            </ng-container>
-        </section>
-
-        <!-- Internal Share Transfer -->
-        <section *ngIf="form.get('csInternalTransferOfShares').value">
-            <h3 class="blue-header">Internal Share Transfer</h3>
-            <div class="content-bottom">
-                <p>Complete this section when shares have been transferred within the licensee corporation or holding
-                    companies or there has been an amalgamation of companies within the licensee corporation but no new
-                    shareholders have been added (holding companies or individuals). See example:</p>
-                    <img src="assets/central-securities-register-example.png" style="width:500px; margin: 10px; border: solid #e0e0e0 1px;">
-                <p>Third party operators should also complete this section when an internal share transfer or an
-                    amalgamation occurs.</p>
-
-                <h4>Updated Central Securities Register (shareholders) for the licensee corporation or holding company
-                </h4>
-                <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
-                </app-file-uploader>
+    <h4>
+      Updated Central Securities Register (shareholders) for the licensee corporation or holding company
+    </h4>
+    <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                       [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
+                       [entityId]="application.id"
+                       [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
+    </app-file-uploader>
 
                 <h4><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Security Screening Information Required</h4>
                 <p>All newly added shareholders holding 10% or greater interest must complete a <strong>Personal History Summary</strong> and/or
@@ -284,21 +298,21 @@
                 <section>
                 <p>If the change is the result of an internal amalgamation, attach:</p>
 
-                <h4>Certificate of Amalgamation</h4>
-                <app-file-uploader *ngIf="application?.id" documentType="CertificateOfAmalgamation"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD CERTIFICATE OF AMALGAMATION, DRAG FILES HERE OR'">
-                </app-file-uploader>
+    <h4>Certificate of Amalgamation</h4>
+    <app-file-uploader *ngIf="application?.id" documentType="CertificateOfAmalgamation"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                       [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
+                       [entityId]="application.id"
+                       [uploadHeader]="'TO UPLOAD CERTIFICATE OF AMALGAMATION, DRAG FILES HERE OR'">
+    </app-file-uploader>
 
-                <h4>Central Securities Register (shareholders) for the amalgamated company</h4>
-                <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegisterForAmalgamated"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'">
-                </app-file-uploader>
+    <h4>Central Securities Register (shareholders) for the amalgamated company</h4>
+    <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegisterForAmalgamated"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                       [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
+                       [entityId]="application.id"
+                       [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'">
+    </app-file-uploader>
 
                 <h4>Notice of Articles for the amalgamated company</h4>
                 <app-file-uploader *ngIf="application?.id" documentType="NOAAmalgamated"
@@ -310,7 +324,7 @@
                 </section>
             </div>
 
-        </section>
+</section>
 
         <!-- External Share Transfer -->
         <section *ngIf="form.get('csExternalTransferOfShares').value">
@@ -389,8 +403,8 @@
                                 documentation
                                 requirements at 1-866-209-2111 or <a href="mailto:LCLBHelpDesk@gov.bc.ca">LCLBHelpDesk@gov.bc.ca</a>.</li>
 
-                        </ul>
-                    </li>
+        </ul>
+      </li>
 
                 </ul>
                 <h4>Supporting Business Documentation</h4>
@@ -401,7 +415,7 @@
                     [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
                 </app-file-uploader>
 
-                <hr>
+    <hr>
 
                 <h4><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Security Screening Information Required</h4>
                 <p>All newly added individuals with 10% or more interest must complete a Personal History Summary and/or Cannabis Associate Security Screening form and required documents as described below.</p>
@@ -416,7 +430,7 @@
                       </app-file-uploader>
             </div>
 
-        </section>
+</section>
 
         <!-- Change of Directors or Officers -->
         <section *ngIf="form.get('csChangeOfDirectorsOrOfficers').value">
@@ -438,7 +452,7 @@
 
             </div>
 
-        </section>
+</section>
 
 
         <!-- Person's Name Change -->
@@ -507,39 +521,41 @@
             </div>
         </section>
 
-        <!-- Corporation Name Change -->
-        <section *ngIf="form.get('csNameChangeLicenseeCorporation').value">
-            <h3 class="blue-header">Corporation Name Change</h3>
-            <div class="content-bottom">
-                <p>
-                    To be completed when a corporation with an interest in a licence has legally changed
-                    its name, but existing corporate shareholders, directors and officers,
-                    and certificate number on the certificate of incorporation have not
-                    changed. The fee is 20 per licence.
-                </p>
-                <div class="">
+<!-- Corporation Name Change -->
+<section *ngIf="form.get('csNameChangeLicenseeCorporation').value">
+  <h3 class="blue-header">Corporation Name Change</h3>
+  <div class="content-bottom">
+    <p>
+      To be completed when a corporation with an interest in a licence has legally changed
+      its name, but existing corporate shareholders, directors and officers,
+      and certificate number on the certificate of incorporation have not
+      changed. The fee is 20 per licence.
+    </p>
+    <div class="">
 
-                    <span><strong>Current licensee or holding company name (in full):</strong></span>
+      <span>
+        <strong>Current licensee or holding company name (in full):</strong>
+      </span>
 
-                    <mat-form-field class="ml-1 mr-2">
-                        <mat-label>Company Name</mat-label>
-                        <input matInput type="text">
-                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="value=''">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    </mat-form-field>
+      <mat-form-field class="ml-1 mr-2">
+        <mat-label>Company Name</mat-label>
+        <input matInput type="text">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
+                (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
 
                     <span>Name changed to (in full):</span>
 
-                    <mat-form-field class="ml-1 mr-2">
-                        <mat-label>New Company Name</mat-label>
-                        <input matInput type="text">
-                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="value=''">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    </mat-form-field>
+      <mat-form-field class="ml-1 mr-2">
+        <mat-label>New Company Name</mat-label>
+        <input matInput type="text">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
+                (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
 
                 </div>
                 <h4>
@@ -554,95 +570,100 @@
             </div>
         </section>
 
-        <!-- Partnership Business Name Change -->
-        <section *ngIf="form.get('csNameChangeLicenseePartnership').value">
-            <h3 class="blue-header">Partership Business Name Change</h3>
-            <div class="content-bottom">
-                <p>
-                    To be completed when the legal name of a partnership is changed but no new partners
-                    are added and no existing partners.
-                </p>
-                <div class="">
+<!-- Partnership Business Name Change -->
+<section *ngIf="form.get('csNameChangeLicenseePartnership').value">
+  <h3 class="blue-header">Partership Business Name Change</h3>
+  <div class="content-bottom">
+    <p>
+      To be completed when the legal name of a partnership is changed but no new partners
+      are added and no existing partners.
+    </p>
+    <div class="">
 
-                    <span><strong>Current registered Partnership name (in full):</strong></span>
+      <span>
+        <strong>Current registered Partnership name (in full):</strong>
+      </span>
 
-                    <mat-form-field class="ml-1 mr-2">
-                        <mat-label>Partnership Name</mat-label>
-                        <input matInput type="text">
-                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="value=''">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    </mat-form-field>
+      <mat-form-field class="ml-1 mr-2">
+        <mat-label>Partnership Name</mat-label>
+        <input matInput type="text">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
+                (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
 
-                    <span><strong>Name Changed To (in full):</strong></span>
+      <span>
+        <strong>Name Changed To (in full):</strong>
+      </span>
 
-                    <mat-form-field class="ml-1 mr-2">
-                        <mat-label>New Partnership Name</mat-label>
+      <mat-form-field class="ml-1 mr-2">
+        <mat-label>New Partnership Name</mat-label>
 
-                        <input matInput type="text">
-                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="value=''">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    </mat-form-field>
-                </div>
-                <p>
-                    If the partnership is registered, upload a copy of the Partnership Registration
-                    document from the BC Registrar of Companies showing the change of name.
-                    If the partnership is not registered, provide a legal document showing
-                    change of name.
-                </p>
+        <input matInput type="text">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
+                (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <p>
+      If the partnership is registered, upload a copy of the Partnership Registration
+      document from the BC Registrar of Companies showing the change of name.
+      If the partnership is not registered, provide a legal document showing
+      change of name.
+    </p>
 
-                <app-file-uploader *ngIf="application?.id" documentType="PartnershipRegistration"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedPartnershipRegistration = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD PARTNERSHIP REGISTRATION, DRAG FILES HERE OR'">
-                </app-file-uploader>
-            </div>
+    <app-file-uploader *ngIf="application?.id" documentType="PartnershipRegistration"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                       [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedPartnershipRegistration = $event"
+                       [entityId]="application.id"
+                       [uploadHeader]="'TO UPLOAD PARTNERSHIP REGISTRATION, DRAG FILES HERE OR'">
+    </app-file-uploader>
+  </div>
 
-        </section>
+</section>
 
-        <!-- Society Name Change -->
-        <section *ngIf="form.get('csNameChangeLicenseeSociety').value">
-            <h3 class="blue-header">Society Name Change</h3>
-            <div class="content-bottom">
-                <p>
-                    To be completed when the legal name of a society is changed, but the society structrure,
-                    membership and certification number on the certificate of incorporation
-                    does not change.</p>
-                <div class="">
-                    <span>Current registered society name (in full): </span>
-                    <mat-form-field class="ml-1 mr-2">
-                        <mat-label>Society Name</mat-label>
-                        <input matInput type="text">
-                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="value=''">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    </mat-form-field>
+<!-- Society Name Change -->
+<section *ngIf="form.get('csNameChangeLicenseeSociety').value">
+  <h3 class="blue-header">Society Name Change</h3>
+  <div class="content-bottom">
+    <p>
+      To be completed when the legal name of a society is changed, but the society structrure,
+      membership and certification number on the certificate of incorporation
+      does not change.
+    </p>
+    <div class="">
+      <span>Current registered society name (in full): </span>
+      <mat-form-field class="ml-1 mr-2">
+        <mat-label>Society Name</mat-label>
+        <input matInput type="text">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
+                (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
 
-                    <span>Name Changed To (in full):</span>
-                    <mat-form-field class="ml-1 mr-2">
-                        <mat-label>New Society Name</mat-label>
-                        <input matInput type="text">
-                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="value=''">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    </mat-form-field>
-                </div>
-                <h4>Copy of the Certificate of Change of Name under the Societies Act</h4>
+      <span>Name Changed To (in full):</span>
+      <mat-form-field class="ml-1 mr-2">
+        <mat-label>New Society Name</mat-label>
+        <input matInput type="text">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
+                (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <h4>Copy of the Certificate of Change of Name under the Societies Act</h4>
 
-                <app-file-uploader *ngIf="application?.id" documentType="SocietyNameChange"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedSocietyNameChange = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD SOCIETY NAME CHANGE CERTIFICATE, DRAG FILES HERE OR'">
-                </app-file-uploader>
-            </div>
-        </section>
+    <app-file-uploader *ngIf="application?.id" documentType="SocietyNameChange"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                       [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedSocietyNameChange = $event"
+                       [entityId]="application.id"
+                       [uploadHeader]="'TO UPLOAD SOCIETY NAME CHANGE CERTIFICATE, DRAG FILES HERE OR'">
+    </app-file-uploader>
+  </div>
+</section>
 
         <!-- Addition of Executor or Receiver -->
         <section *ngIf="form.get('csAdditionalReceiverOrExecutor').value">
@@ -652,85 +673,89 @@
                 out A or B and attach the required documents.</p>
                 <p>Note: The Branch may renew the licence with the name of the executor, administrator or successor appended, for a period of one year. By the end of the one-year renewal period, relevant applications (e.g. transfer of ownership or transfer of shares) and appropriate documentation must be submitted to the Branch.</p>
 
-                <h4>A. Addition of Executor</h4>
-                <span><strong>Executor's Name:</strong></span>
-                <mat-form-field class="ml-1 mr-2">
-                    <mat-label>First Name</mat-label>
-                    <input matInput type="text">
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                </mat-form-field>
+    <h4>A. Addition of Executor</h4>
+    <span>
+      <strong>Executor's Name:</strong>
+    </span>
+    <mat-form-field class="ml-1 mr-2">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text">
+      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
 
-                <mat-form-field class="ml-1 mr-2">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput type="text">
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                </mat-form-field>
+    <mat-form-field class="ml-1 mr-2">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text">
+      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
 
-                <p>
-                    Upload a copy of Assignment of Executor or a copy of the last will(s) and testament(s):
-                </p>
+    <p>
+      Upload a copy of Assignment of Executor or a copy of the last will(s) and testament(s):
+    </p>
 
-                <app-file-uploader *ngIf="application?.id" documentType="ExecutorDocuments"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedExecutorDocuments = $event"
-                    [entityId]="application.id" [uploadHeader]="'TO UPLOAD EXECUTOR DOCUMENTS, DRAG FILES HERE OR'">
-                </app-file-uploader>
+    <app-file-uploader *ngIf="application?.id" documentType="ExecutorDocuments"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                       [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedExecutorDocuments = $event"
+                       [entityId]="application.id" [uploadHeader]="'TO UPLOAD EXECUTOR DOCUMENTS, DRAG FILES HERE OR'">
+    </app-file-uploader>
 
-                <p>
-                    Upload a copy of the Death Certificate:
-                </p>
+    <p>
+      Upload a copy of the Death Certificate:
+    </p>
 
-                <app-file-uploader *ngIf="application?.id" documentType="DeathCertificate"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedlDeathCertificateDocuments = $event"
-                    [entityId]="application.id" [uploadHeader]="'TO UPLOAD DEATH CERTIFICATE, DRAG FILES HERE OR'">
-                </app-file-uploader>
+    <app-file-uploader *ngIf="application?.id" documentType="DeathCertificate"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                       [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedlDeathCertificateDocuments = $event"
+                       [entityId]="application.id" [uploadHeader]="'TO UPLOAD DEATH CERTIFICATE, DRAG FILES HERE OR'">
+    </app-file-uploader>
 
-                <hr>
+    <hr>
 
-                <h4>B. Addition of Receiver</h4>
-                <span><strong>Receiver's Name:</strong></span>
-                <mat-form-field class="ml-1 mr-2">
-                    <mat-label>First Name</mat-label>
-                    <input matInput type="text">
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                </mat-form-field>
+    <h4>B. Addition of Receiver</h4>
+    <span>
+      <strong>Receiver's Name:</strong>
+    </span>
+    <mat-form-field class="ml-1 mr-2">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text">
+      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
 
-                <mat-form-field class="ml-1 mr-2">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput type="text">
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                </mat-form-field>
+    <mat-form-field class="ml-1 mr-2">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text">
+      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
 
                 <p>
                     Upload a copy of Court Order appointing Receiver<br>
                     (Order must include authority to operate the licensee's business and must specify the licence number(s)).
                 </p>
 
-                <app-file-uploader *ngIf="application?.id" documentType="ReceiverAppointment"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD RECEIVER APPOINTMENT ORDER, DRAG FILES HERE OR'">
-                </app-file-uploader>
+    <app-file-uploader *ngIf="application?.id" documentType="ReceiverAppointment"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                       [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
+                       [entityId]="application.id"
+                       [uploadHeader]="'TO UPLOAD RECEIVER APPOINTMENT ORDER, DRAG FILES HERE OR'">
+    </app-file-uploader>
 
-                <p>Upload a copy of Court Order filed under the Office of the Superintendent of Bankruptcy Canada.</p>
+    <p>Upload a copy of Court Order filed under the Office of the Superintendent of Bankruptcy Canada.</p>
 
-                <app-file-uploader *ngIf="application?.id" documentType="BankruptcyOrder"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
-                    [entityId]="application.id" [uploadHeader]="'TO UPLOAD COURT ORDER, DRAG FILES HERE OR'">
-                </app-file-uploader>
-            </div>
-        </section>
+    <app-file-uploader *ngIf="application?.id" documentType="BankruptcyOrder"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                       [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
+                       [entityId]="application.id" [uploadHeader]="'TO UPLOAD COURT ORDER, DRAG FILES HERE OR'">
+    </app-file-uploader>
+  </div>
+</section>
 
         <!-- Cannabis Associate Security Screening Forms -->
         <section *ngIf="hasCannabis && this.isScreeningRequired()">
@@ -770,23 +795,28 @@
                     [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
 
-                <h4>Financial Integrity Documents</h4>
-                <p>Each associate must provide a complete a <a
-                        href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">Financial
-                        Integrity Form</a>.</p>
-                <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
-                </app-file-uploader>
-            </div>
-        </section>
+    <h4>Financial Integrity Documents</h4>
+    <p>
+      Each associate must provide a complete a
+      <a
+        href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
+        Financial
+        Integrity Form
+      </a>.
+    </p>
+    <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                       [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
+                       [entityId]="application.id"
+                       [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
+    </app-file-uploader>
+  </div>
+</section>
 
-        <!-- Personal History Summary Forms -->
-        <section *ngIf="hasLiquor && this.isScreeningRequired()">
-            <h3 class="blue-header"><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Personal History Summary Forms</h3>
-            <div class="content-bottom">
+<!-- Personal History Summary Forms -->
+<section *ngIf="hasLiquor && this.isScreeningRequired()">
+  <h3 class="blue-header"><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Personal History Summary Forms</h3>
+  <div class="content-bottom">
 
                 <p>
                     Newly added individuals  involved in the applicant’s legal entity structure must submit a Personal History
@@ -811,104 +841,104 @@
             </div>
         </section>
 
-        <!-- Declaration -->
-        <section>
-            <!-- Declarations section -->
-            <h3 class="blue-header ngtest-declarations">
-                DECLARATIONS
-            </h3>
-            <div class="padded-section content-bottom">
-                <ng-container>
-                    <p>
-                        The application must only be submitted by an individual with the authority to bind the
-                        applicant.
-                        The
-                        branch
-                        relies on the applicant to ensure that the individual who submits this application is authorized
-                        to
-                        do
-                        so.
-                        Typically, an appropriate individual in a corporation will be a duly authorized signatory who
-                        will
-                        usually
-                        be
-                        an officer or, in some cases, a director.
-                    </p>
-                    <p>
-                        Note: A lawyer or
-                        consultant,
-                        may NOT submit this application on behalf of
-                        the applicant.
-                    </p>
+<!-- Declaration -->
+<section>
+  <!-- Declarations section -->
+  <h3 class="blue-header ngtest-declarations">
+    DECLARATIONS
+  </h3>
+  <div class="padded-section content-bottom">
+    <ng-container>
+      <p>
+        The application must only be submitted by an individual with the authority to bind the
+        applicant.
+        The
+        branch
+        relies on the applicant to ensure that the individual who submits this application is authorized
+        to
+        do
+        so.
+        Typically, an appropriate individual in a corporation will be a duly authorized signatory who
+        will
+        usually
+        be
+        an officer or, in some cases, a director.
+      </p>
+      <p>
+        Note: A lawyer or
+        consultant,
+        may NOT submit this application on behalf of
+        the applicant.
+      </p>
 
-                    <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-                        errorMessage="Please affirm that you are authorized to submit the application."
-                        [showChevrons]="false">
-                        <mat-checkbox formControlName="authorizedToSubmit">
-                            <span class="error-states">*</span>
-                            I understand and affirm that I am authorized to submit the application.
-                        </mat-checkbox>
-                    </app-field>
+      <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+                 errorMessage="Please affirm that you are authorized to submit the application."
+                 [showChevrons]="false">
+        <mat-checkbox formControlName="authorizedToSubmit">
+          <span class="error-states">*</span>
+          I understand and affirm that I am authorized to submit the application.
+        </mat-checkbox>
+      </app-field>
 
 
+      <p *ngIf="hasCannabis">
+        Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the
+        general
+        manager
+        an application, or
+        information or a record included as part of the application, that contains false or misleading
+        information, or
+        fails to disclose a material fact”.
+      </p>
+      <p *ngIf="hasLiquor">
+        Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse
+        to
+        issue,
+        renew, transfer or amend a licence if the applicant fails to disclose a material fact required
+        by
+        the
+        application or makes a false or misleading statement in the application."
+      </p>
 
-                    <p *ngIf="hasCannabis">
-                        Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the
-                        general
-                        manager
-                        an application, or
-                        information or a record included as part of the application, that contains false or misleading
-                        information, or
-                        fails to disclose a material fact”.
-                    </p>
-                    <p *ngIf="hasLiquor">
-                        Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse
-                        to
-                        issue,
-                        renew, transfer or amend a licence if the applicant fails to disclose a material fact required
-                        by
-                        the
-                        application or makes a false or misleading statement in the application."
-                    </p>
+      <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+                 errorMessage="Please affirm that all of the information provided for this application is true and complete."
+                 [showChevrons]="false">
+        <mat-checkbox formControlName="signatureAgreement">
+          <span class="error-states">*</span>
+          I understand and affirm that all of the information provided for this
+          application is true and complete.
+        </mat-checkbox>
+      </app-field>
 
-                    <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-                        errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                        [showChevrons]="false">
-                        <mat-checkbox formControlName="signatureAgreement">
-                            <span class="error-states">*</span>
-                            I understand and affirm that all of the information provided for this
-                            application is true and complete.
-                        </mat-checkbox>
-                    </app-field>
+    </ng-container>
 
-                </ng-container>
+  </div>
 
-            </div>
+</section>
 
-        </section>
+<!-- Application Contact Details -->
+<section>
+  <h3 class="blue-header ngtest-payment">
+    CONTACT
+  </h3>
+  <div class="content-bottom">
+    <app-contact [contact]="applicationContact" [disabled]="appContactDisabled" #appContact></app-contact>
+  </div>
+</section>
 
-        <!-- Application Contact Details -->
-        <section>
-            <h3 class="blue-header ngtest-payment">
-                CONTACT
-            </h3>
-            <div class="content-bottom">
-                <app-contact [contact]="applicationContact" [disabled]="appContactDisabled" #appContact></app-contact>
-            </div>
-        </section>
+<!-- Payment -->
+<section *ngIf="selectedChangeList?.length > 0">
+  <h3 class="blue-header ngtest-payment">
+    PAYMENT
+  </h3>
+  <div class="content-bottom">
+    <p *ngIf="hasCannabis && hasLiquor">
+      You have both liquor and cannabis licences. Fees for the different
+      types of licences
+      must be paid separately. Your application will not be submitted to the Branch until both are paid.
+    </p>
 
-        <!-- Payment -->
-        <section *ngIf="selectedChangeList?.length > 0">
-            <h3 class="blue-header ngtest-payment">
-                PAYMENT
-            </h3>
-            <div class="content-bottom">
-                <p *ngIf="hasCannabis && hasLiquor">You have both liquor and cannabis licences. Fees for the different
-                    types of licences
-                    must be paid separately. Your application will not be submitted to the Branch until both are paid.
-                </p>
-
-                <hr>
+    <hr>
 
                 <table class="w-100" *ngIf="hasCannabis" class="paymentSummary">
                     <tr>
@@ -939,13 +969,13 @@
                         </td>
                     </tr>
 
-                </table>
+    </table>
 
-                <mat-card class="mat-elevation-z2" *ngIf="primaryInvoice">
-                    <app-invoice-details [data]="primaryInvoice"></app-invoice-details>
-                </mat-card>
+    <mat-card class="mat-elevation-z2" *ngIf="primaryInvoice">
+      <app-invoice-details [data]="primaryInvoice"></app-invoice-details>
+    </mat-card>
 
-                <hr>
+    <hr>
 
                 <table class="w-100" *ngIf="hasLiquor" class="paymentSummary">
                     <tr>
@@ -969,41 +999,41 @@
                     <tr>
                         <td colspan=3 style="padding:5px; text-align: right;">
                             <button mat-raised-button color="primary" [disabled]="application.secondaryInvoicePaid"
-                                style="width:350px;" (click)="submit_application('secondary')">
-                                <span>{{ application?.secondaryInvoicePaid ? 'LIQUOR LICENSEE FEES PAID' : 'PAY CANNABIS LICENSEE CHANGE FEES' }}</span>
+                                style="width:250px;" (click)="submit_application('secondary')">
+                                <span>{{ application?.secondaryInvoicePaid ? 'FEES PAID' : 'PAY LIQUOR FEES' }}</span>
                                 <mat-progress-bar *ngIf="secondaryPaymentInProgress" mode="indeterminate">
                                 </mat-progress-bar>
                             </button>
                         </td>
                     </tr>
 
-                </table>
+    </table>
 
-                <mat-card class="mat-elevation-z2" r *ngIf="secondaryInvoice">
-                    <app-invoice-details [data]="secondaryInvoice"></app-invoice-details>
-                </mat-card>
+    <mat-card class="mat-elevation-z2" r *ngIf="secondaryInvoice">
+      <app-invoice-details [data]="secondaryInvoice"></app-invoice-details>
+    </mat-card>
 
-                <ng-container *ngIf="canCreateNewApplication">
-                    <hr>
-                    <section class="d-flex flex-row-reverse">
-                        <button mat-raised-button color="primary" style="width:250px;"
-                            (click)="createApplication('secondary')">
-                            <span>New Application</span>
-                            <mat-progress-bar *ngIf="createApplicationInProgress" mode="indeterminate">
-                            </mat-progress-bar>
-                        </button>
-                    </section>
-                </ng-container>
-            </div>
-        </section>
-
-        <section class="error mt-3" *ngIf="showValidationMessages">
-            <p *ngFor="let message of validationMessages">
-                <span class="app-cancel">
-                    <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-                    {{message}}
-                </span>
-            </p>
-        </section>
+    <ng-container *ngIf="canCreateNewApplication">
+      <hr>
+      <section class="d-flex flex-row-reverse">
+        <button mat-raised-button color="primary" style="width: 250px;"
+                (click)="createApplication('secondary')">
+          <span>New Application</span>
+          <mat-progress-bar *ngIf="createApplicationInProgress" mode="indeterminate">
+          </mat-progress-bar>
+        </button>
+      </section>
     </ng-container>
+  </div>
+</section>
+
+<section class="error mt-3" *ngIf="showValidationMessages">
+  <p *ngFor="let message of validationMessages">
+    <span class="app-cancel">
+      <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+      {{message}}
+    </span>
+  </p>
+</section>
+</ng-container>
 </div>

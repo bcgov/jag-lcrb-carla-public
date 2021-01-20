@@ -1,27 +1,28 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { SecurityAssessmentsComponent } from './security-assessments.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { SecurityAssessmentsComponent } from "./security-assessments.component";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
-describe('SecurityAssessmentsComponent', () => {
-  let component: SecurityAssessmentsComponent;
-  let fixture: ComponentFixture<SecurityAssessmentsComponent>;
+describe("SecurityAssessmentsComponent",
+  () => {
+    let component: SecurityAssessmentsComponent;
+    let fixture: ComponentFixture<SecurityAssessmentsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SecurityAssessmentsComponent ],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+          declarations: [SecurityAssessmentsComponent],
+          schemas: [NO_ERRORS_SCHEMA]
+        })
+        .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SecurityAssessmentsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    beforeEach(() => {
+      fixture = TestBed.createComponent(SecurityAssessmentsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    // it('should create', () => {
+    //   expect(component).toBeTruthy();
+    // });
   });
-
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
-});

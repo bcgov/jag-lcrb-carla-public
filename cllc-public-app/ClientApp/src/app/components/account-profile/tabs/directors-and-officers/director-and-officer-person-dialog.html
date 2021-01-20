@@ -3,7 +3,7 @@
   <span *ngIf="directorOfficerForm.get('id').value">Edit Leadership Associate</span>
 </h2>
 <mat-dialog-content>
-  <form [formGroup]='directorOfficerForm' class="form-horizontal">
+  <form [formGroup]="directorOfficerForm" class="form-horizontal">
 
     <div class="form-group row">
       <div class="col-md-12">
@@ -11,12 +11,21 @@
           <label>Position</label>
           <br>
           <section>
-            <input type="checkbox" formControlName="isDirector"> <label style="padding-right: 10px;"
-              for="">Director</label>
-            <input type="checkbox" formControlName="isOfficer"> <label style="padding-right: 10px;"
-              for="">Officer</label>
-            <input type="checkbox" formControlName="isSeniorManagement"> <label style="padding-right: 10px;"
-              for="">Senior Manager</label>
+            <input type="checkbox" formControlName="isDirector">
+            <label style="padding-right: 10px;"
+                   for="">
+              Director
+            </label>
+            <input type="checkbox" formControlName="isOfficer">
+            <label style="padding-right: 10px;"
+                   for="">
+              Officer
+            </label>
+            <input type="checkbox" formControlName="isSeniorManagement">
+            <label style="padding-right: 10px;"
+                   for="">
+              Senior Manager
+            </label>
           </section>
         </fieldset>
       </div>
@@ -38,9 +47,9 @@
       </app-field>
 
       <app-field class="col-md-6" label="Date of Appointment" [valid]="true" errorMessage="This is required">
-        <input type="text" formControlName='dateofappointment' style="width: 200px; background-color: #fff;"
-          autocomplete="false" placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker"
-          (focus)="picker.open()" (click)="picker.open()">
+        <input type="text" formControlName="dateofappointment" style="background-color: #fff; width: 200px;"
+               autocomplete="false" placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker"
+               (focus)="picker.open()" (click)="picker.open()">
         <mat-datepicker #picker></mat-datepicker>
       </app-field>
     </div>
@@ -58,9 +67,7 @@
     color: #000 !important;
   }
 
-  ::ng-deep .mat-calendar-body-cell-content {
-    color: #54708b;
-  }
+  ::ng-deep .mat-calendar-body-cell-content { color: #54708b; }
 
   ::ng-deep .mat-calendar-header {
     background-color: #337AB7;
