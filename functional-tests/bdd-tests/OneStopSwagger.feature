@@ -66,18 +66,6 @@ Scenario: OneStop Send Program Account Details Broadcast
     And I click on the SwaggerUI Execute button for SendProgramAccountDetailsBroadcastMessage
     And the correct 200 response is displayed
     Then I click on the Clear button
-    
-@onestopswagger
-Scenario: OneStop LDB Export
-    Given I click on the Swagger link for OneStop
-    And I click on the SwaggerUI Authorize button
-    And I click on the SwaggerUI second Authorize button
-    And I click on the SwaggerUI Close button
-    And I click on the SwaggerUI Get button for LdbExport
-    And I click on the SwaggerUI Try it out button for LdbExport
-    And I click on the SwaggerUI Execute button for LdbExport
-    And the correct 200 response is displayed
-    Then I click on the Clear button
 
 # @onestoprelease
 # Scenario: OneStop Release
