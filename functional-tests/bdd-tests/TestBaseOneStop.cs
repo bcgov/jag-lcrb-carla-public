@@ -66,7 +66,8 @@ namespace bdd_tests
 
             if (buttonType == "Get button for SendChangeAddress")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("/html/body/div/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[2]/div/div[1]/span[1]"));
+                IWebElement uiButton = ngDriver.FindElement(By.XPath("/html/body/div[1]/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[2]/div/div/span[1]"));
+                //#operations-OneStop-OneStop_GET
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
@@ -105,7 +106,7 @@ namespace bdd_tests
 
             if (buttonType == "Try it out button for SendChangeAddress")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("/html/body/div/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[2]/div/div[2]/div/div[1]/div[1]/div[2]/button"));
+                IWebElement uiButton = ngDriver.FindElement(By.XPath("/html/body/div[1]/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[1]/div/div[2]/div/div[1]/div[1]/div[2]/button"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
@@ -144,7 +145,7 @@ namespace bdd_tests
 
             if (buttonType == "Execute button for SendChangeAddress")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath("/html/body/div/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[2]/div/div[2]/div/div[2]/button"));
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector(".opblock-control__btn"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
@@ -222,7 +223,7 @@ namespace bdd_tests
         {
             if (scenario == "SendChangeAddress")
             {
-                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("/html/body/div/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[2]/div/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
+                IWebElement uiEnterGUID = ngDriver.FindElement(By.XPath("/html/body/div[1]/section/div[2]/div[2]/div[4]/section/div/span[2]/div/div/span[2]/div/div[2]/div/div[1]/div[2]/div/table/tbody/tr/td[2]/input"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
