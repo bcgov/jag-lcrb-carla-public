@@ -96,15 +96,13 @@ namespace bdd_tests
             string estPID = "012345678";
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
-            string conGiven = "Given";
-            string conSurname = "Surname";
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
-            if (businessType != "sole proprietorship")
+            if (businessType != " sole proprietorship")
             {
                 // upload a central securities register
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -117,7 +115,7 @@ namespace bdd_tests
             }
 
             // upload cannabis associate screening form
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("associates.pdf", "(//input[@type='file'])[3]");
             }
@@ -127,7 +125,7 @@ namespace bdd_tests
             }
 
             // upload financial integrity form
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[6]");
             }
@@ -137,7 +135,7 @@ namespace bdd_tests
             }
 
             // upload shareholders < 10% interest
-            if (businessType != "sole proprietorship")
+            if (businessType != " sole proprietorship")
             {
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
             }
@@ -162,19 +160,6 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
-            /*
-            if (businessType == "n indigenous nation")
-            {
-                // select the IN 
-                NgWebElement uiSelectNation = ngDriver.FindElement(By.CssSelector("[formcontrolname='indigenousNationId'] option[value='236686fc-d9d3-e811-90f0-005056832371']"));
-                uiSelectNation.Click();
-            }
-
-            // upload a proof of zoning form
-            FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[3]");
-
-            */
-
             // search for and select the indigenous nation
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
             uiIndigenousNation.SendKeys(indigenousNation);
@@ -198,7 +183,7 @@ namespace bdd_tests
             uiEstabPhone.SendKeys(estPhone);
 
             // upload a store signage document
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("signage.pdf", "(//input[@type='file'])[8]");
             }
@@ -212,17 +197,17 @@ namespace bdd_tests
             uiVisibleFromOutside.Click();
 
             // upload a floor plan document
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
             }
-            else 
+            else
             {
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
             }
 
             // upload a site plan document
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("site_plan.pdf", "(//input[@type='file'])[14]");
             }
@@ -232,7 +217,7 @@ namespace bdd_tests
             }
 
             // upload a financial integrity form
-            if (businessType == "sole proprietorship")
+            if (businessType == " sole proprietorship")
             {
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
             }
@@ -242,9 +227,21 @@ namespace bdd_tests
             }
 
             // upload a ownership details document
-            if (businessType != "sole proprietorship")
+            if (businessType == " private corporation")
             {
                 FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
+            }
+
+            // upload a ownership details document
+            if (businessType != " sole proprietorship")
+            {
+                FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
+            }
+
+            // upload a ownership details document
+            if (businessType == " sole proprietorship")
+            {
+                FileUpload("ownership_details.pdf", "(//input[@type='file'])[21]");
             }
 
             // enter the role of the application contact
