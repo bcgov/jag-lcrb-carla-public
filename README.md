@@ -7,12 +7,19 @@ Technology Stack
 
 | Layer   | Technology | 
 | ------- | ------------ |
-| Presentation | Angular 10 |
-| Business Logic | C Sharp - Dotnet Core 3.1 |
-| Web Server | Nginx |
+| Presentation | Angular 11 |
+| Business Logic | C Sharp - Dotnet Core 5.0 |
+| Microservices | C Sharp - Dotnet Core 5.0 |
+| Job Scheduling | Hangfire |
+| Front End Web Server | Nginx |
 | Application Server | Kestrel |
-| Data    | MS Dynamics On Premise V9, ADFS |
-| Document Management    | MS SharePoint 2016, ADFS |   
+| Data Storage | MS Dynamics On Premise V9 |
+| Authentication | ADFS, BCeID, BC Services Card |
+| Document Storage    | MS SharePoint 2016 |
+| Container Platform | OpenShift 4 |
+| Zero Trust Security Policy Type | Aporeto |
+| Logging | Splunk, Console, MS Teams and Kibana |
+| CI/CD Pipeline | Jenkins |
 
 Repository Map
 --------------
@@ -44,7 +51,7 @@ Developer Prerequisites
 
 **Public Application**
 - .Net Core SDK (3.1, 5.0)
-- Node.js version 10.19 
+- Node.js version 10.21 
 - .NET Core IDE such as Visual Studio or VS Code
 - JAG VPN with access to MS Dynamics
 
