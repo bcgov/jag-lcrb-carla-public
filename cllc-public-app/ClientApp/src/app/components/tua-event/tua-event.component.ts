@@ -8,8 +8,10 @@ import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDays
 import { EventCategory, EventStatus, LicenceEvent, TuaEventType } from '@models/licence-event.model';
 import { AppState } from '@app/app-state/models/app-state';
 import { LicenceEventsService } from '@services/licence-events.service';
+import { LicenseDataService } from '@services/license-data.service';
 import { faQuestionCircle, faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
 import { LicenceEventSchedule } from '@models/licence-event-schedule';
+import { License } from '@models/license.model';
 
 @Component({
   selector: 'app-tua-event',
@@ -29,6 +31,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
   // component state
   busy: Subscription;
+  licence: License;
   licenceEvent: LicenceEvent;
   isEditMode = false;
   isReadOnly = false;
@@ -57,13 +60,12 @@ export class TuaEventComponent extends FormBase implements OnInit {
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
 
-    //... TODO:
-
     maxAttendance: ['', [Validators.required, Validators.max(100000)]],
     minorsAttending: ['', [Validators.required]],
     tuaEventType: ['', [Validators.required]],
     eventTypeDescription: ['', [Validators.required]],
 
+    isClosedToPublic: [false, []],
     isWedding: [false, []],
     isNetworkingParty: [false, []],
     isConcert: [false, []],
@@ -88,13 +90,17 @@ export class TuaEventComponent extends FormBase implements OnInit {
   constructor(
     private fb: FormBuilder,
     private licenceEvents: LicenceEventsService,
+    private licenceDataService: LicenseDataService,
     private store: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute
   ) {
     super();
     this.route.paramMap.subscribe(params => {
-      this.form.controls['licenceId'].setValue(params.get('licenceId'));
+      const licenceId = params.get('licenceId');
+      this.form.controls['licenceId'].setValue(licenceId);
+      this.retrieveLicence(licenceId);
+
       if (params.get('eventId')) {
         this.isEditMode = true;
         this.retrieveSavedEvent(params.get('eventId'));
@@ -111,6 +117,14 @@ export class TuaEventComponent extends FormBase implements OnInit {
   get status(): string {
     const statusObj = this.getOptionFromValue(this.eventStatus, this.form?.get('status')?.value);
     return statusObj == null ? '' : statusObj.label;
+  }
+
+  retrieveLicence(licenceId: string) {
+    this.busy = this.licenceDataService
+      .getLicenceById(licenceId)
+      .subscribe((licence) => {
+        this.licence = licence;
+      });
   }
 
   retrieveSavedEvent(eventId: string) {
@@ -147,6 +161,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
       minorsAttending: licenceEvent.minorsAttending,
       tuaEventType: licenceEvent.tuaEventType,
       eventTypeDescription: licenceEvent.eventTypeDescription,
+      isClosedToPublic: licenceEvent.isClosedToPublic,
       isWedding: licenceEvent.isWedding,
       isNetworkingParty: licenceEvent.isNetworkingParty,
       isConcert: licenceEvent.isConcert,
@@ -356,12 +371,28 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
   get validationErrorMap() {
     return {
+      name: 'Please enter the event name',
       contactName: 'Please enter the contact name',
       contactPhone: 'Please enter the contact phone number',
       contactEmail: 'Please enter the contact email address',
       contactEmailConfirmation: 'The email address confirmation does not match provided email',
       startDate: 'Please enter the start date',
       endDate: 'Please enter the end date',
+      maxAttendance: 'Please enter the maximum attendance (must be a number)',
+      minorsAttending: 'Please indicate if minors are attending',
+      tuaEventType: 'Please indicate the type of event',
+      eventTypeDescription: 'Please enter a description of the event',
+      isClosedToPublic: 'Please indicate if licensed establishment will be closed',
+      isWedding: '',
+      isNetworkingParty: '',
+      isConcert: '',
+      isNoneOfTheAbove: '',
+      isBanquet: '',
+      isAmplifiedSound: '',
+      isDancing: '',
+      isReception: '',
+      isLiveEntertainment: '',
+      isGambling: '',
       agreement1: 'Please agree to all terms',
       agreement2: 'Please agree to all terms',
     };
