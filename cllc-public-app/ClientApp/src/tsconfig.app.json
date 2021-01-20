@@ -1,11 +1,10 @@
 {
-  "compileOnSave": true,
+  "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     "downlevelIteration": false,
-	"allowSyntheticDefaultImports": true,
     "outDir": "../out-tsc/app",
-    "sourceMap": false,
+    "sourceMap": true,
     "declaration": false,
     "module": "es2020",
     "moduleResolution": "node",
@@ -33,7 +32,7 @@
     }
   },
   "angularCompilerOptions": {
-    "enableIvy": false
+    "enableIvy": true
   },
   "files": [
     "main.ts",
