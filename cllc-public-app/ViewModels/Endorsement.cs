@@ -1,6 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.Models.Extensions;
+using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -25,7 +25,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string ToHtml(IDynamicsClient _dynamicsClient)
         {
             string htmlVal = "";
-            
+
             // get the hours of service and create a table
             MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_endorsement_value eq {EndorsementId}");
             if (hours.Value.Count > 0)
@@ -74,9 +74,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> serviceAreas = allServiceAreas.Value
                     .Where(area => area.AdoxioAreacategory != (int)ServiceAreaCategoryEnum.Capacity)
                     .OrderBy(area => area.AdoxioAreanumber);
-               // IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> outdoorAreas = allServiceAreas.Value
-               //     .Where(area => area.AdoxioAreacategory == (int)ServiceAreaCategoryEnum.OutdoorEvent)
-               //     .OrderBy(area => area.AdoxioAreanumber);
+                // IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> outdoorAreas = allServiceAreas.Value
+                //     .Where(area => area.AdoxioAreacategory == (int)ServiceAreaCategoryEnum.OutdoorEvent)
+                //     .OrderBy(area => area.AdoxioAreanumber);
                 IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> capacityAreas = allServiceAreas.Value
                     .Where(area => area.AdoxioAreacategory == (int)ServiceAreaCategoryEnum.Capacity)
                     .OrderBy(area => area.AdoxioAreanumber);
@@ -100,16 +100,18 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         htmlVal += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AdoxioArealocation}{area.AdoxioAreanumber}</td><td>{area.AdoxioCapacity}</td></tr></table></td>";
 
                         // every 4 cells
-                        leftover = cells%4; 
+                        leftover = cells % 4;
 
-                        if(leftover == 0){
+                        if (leftover == 0)
+                        {
                             htmlVal += "</tr><tr>"; // do a new row
                         }
 
                     }
 
                     // fill in the remaining spaces 
-                    for(int i = 0; i < leftover; i++){
+                    for (int i = 0; i < leftover; i++)
+                    {
                         htmlVal += "<td class='space'>&nbsp;</td>";
                     }
 

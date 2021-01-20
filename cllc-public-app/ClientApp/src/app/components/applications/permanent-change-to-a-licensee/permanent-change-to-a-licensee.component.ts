@@ -298,15 +298,13 @@ const masterChangeList = [
     LiquorFee: 110,
     RequiresPHS: false,
     RequiresCAS: false,
-    helpTextHeader: "Use this option to report:",
-    helpText: [
-      "When shares or partnership units are redistributed between existing sharesholders/unit holders",
-      "Removal of shareholders/unit holders",
-      "Amalgamations that do not add new shareholders or legal entities to the licensee coroporation",
-      "Third party operators should also complete this section when an internal share transfer or an amalgamation occurs"
+    helpTextHeader: 'Use this option to report:',
+    helpText: ['When shares or partnership units are redistributed between existing shareholders/partners  but no new shareholders/partners are added to the business structure (if new shareholders are added, see external transfer of shares)',
+      'Removal of shareholders/unit holders',
+      'Amalgamations that do not add new shareholders or legal entities to the licensee  corporation',
+      'Holding companies within the licensee corporation and/or third party operators should also complete this section when an internal share transfer or an amalgamation occurs'
     ],
-    helpTextLink:
-      "https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence",
+    ////helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
     name: "External Transfer of Shares",
@@ -316,13 +314,12 @@ const masterChangeList = [
     LiquorFee: 330,
     RequiresPHS: false,
     RequiresCAS: false,
-    helpTextHeader: "Use this option to report:",
-    helpText: [
-      "when new shareholders have been added (companies or individuals) to the licensee corporation or holding companies as a result of a transfer of existing shares or the issuance of new shares",
-      "Third party operators should also complete this section when an external transfer occurs"
+    helpTextHeader: 'Use this option to report:',
+    helpText: ['When new shareholders (companies or individuals) have been added to the licensee corporation or holding companies as a result of a transfer of existing shares or the issuance of new shares',
+      'Amalgamations that add new shareholders or legal entities to the licensee corporation',
+      'Third party operators should also complete this section when an external transfer occurs'
     ],
-    helpTextLink:
-      "https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence",
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
     name: "Change of Directors or Officers",
@@ -332,12 +329,11 @@ const masterChangeList = [
     LiquorFee: 220,
     RequiresPHS: false,
     RequiresCAS: false,
-    helpTextHeader: "Use this option to report:",
-    helpText: [
-      "When there are changes in directors or officers of a public corporation or society within the licensee legal entity"
+    helpTextHeader: 'Use this option to report:',
+    helpText: ['For liquor licensees - when there are changes in directors or officers of a public corporation or society that holds a licence, or of a public corporation or society within the licensee legal entity',
+    'For cannabis licensees – when there are changes in directors or officers of a private or public  corporation or society that holds a licence, or of a public or private corporation or society within the licensee legal entity'
     ],
-    helpTextLink:
-      "https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence",
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
     name: "Name Change, Licensee -- Corporation",
@@ -351,8 +347,7 @@ const masterChangeList = [
     helpText: [
       "When a corporation with an interest in a licence has legally changed its name, but existing corporate shareholders, directors and officers, and certificate number on the certificate of incorporation have not changed"
     ],
-    helpTextLink:
-      "https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence",
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
     name: "Name Change, Licensee -- Partnership",
@@ -362,12 +357,10 @@ const masterChangeList = [
     LiquorFee: 220,
     RequiresPHS: false,
     RequiresCAS: false,
-    helpTextHeader: "Use this option to report:",
-    helpText: [
-      "When the legal name of a partnership is changed but no new partners are added and no existing partners"
+    helpTextHeader: 'Use this option to report:',
+    helpText: ['When a person holding an interest in a licence has legally changed their name'
     ],
-    helpTextLink:
-      "https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence",
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
 
   },
   {
@@ -382,8 +375,7 @@ const masterChangeList = [
     helpText: [
       "When the legal name of a society is changed, but the society structure, membership and certification number on the certificate of incorporation does not change"
     ],
-    helpTextLink:
-      "https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence",
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
     name: "Name Change, Person",
@@ -400,8 +392,7 @@ const masterChangeList = [
     helpText: [
       "when a person holding an interest in a licence has legally changed their name"
     ],
-    helpTextLink:
-      "https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence",
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
     name: "Addition of Receiver or Executor",
@@ -414,11 +405,9 @@ const masterChangeList = [
     LiquorFee: 220,
     RequiresPHS: false,
     RequiresCAS: false,
-    helpTextHeader: "Use this option to report:",
-    helpText: [
-      "upon the death, bankruptcy or receivership of a licensee"
+    helpTextHeader: 'Use this option to report:',
+    helpText: ['Upon the death, bankruptcy or receivership of a licensee'
     ],
-    helpTextLink:
-      "https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence",
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   }
 ];

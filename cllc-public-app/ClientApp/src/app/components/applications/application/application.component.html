@@ -952,14 +952,85 @@
 </section>
 
 
-<section *ngIf="application?.applicationType?.showDescription1">
-  <h3 class="blue-header">DESCRIPTION OF PROPOSED CHANGE</h3>
-  <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement'">
-    <div class="padded-section">
-      <app-field label="Please briefly outline the proposed change" [required]="true" [isFullWidth]="true"
-                 [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
-                 errorMessage="Please enter a description">
-        <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000"
+            <section *ngIf="application?.applicationType?.showDescription1">
+              <h3 class="blue-header" *ngIf="application?.applicationType?.name != ApplicationTypeNames.LP">DESCRIPTION OF PROPOSED CHANGE</h3>
+              <h3 class="blue-header" *ngIf="application?.applicationType?.name === ApplicationTypeNames.LP">ESTABLISHMENT TYPE</h3>
+              <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.LP" class="content-bottom">
+                <div class="padded-section">
+
+                  <p>Identify the establishment type that best fits your proposed LP business, for example:</p>
+                  <table>
+                    <tr><td>
+                      <ul>
+                        <li>Aircraft</li>
+                        <li>Airport Lounge</li>
+                        <li>Aquarium</li>
+                        <li>Art Gallery</li>
+                        <li>B&B/Hotel</li>
+                        <li>Bingo Hall</li>
+                        <li>Brew Pub</li>
+                        <li>Casino</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>Community Centre</li>
+                        <li>Concert Hall</li>
+                        <li>Convention Centre</li>
+                        <li>Cooking School</li>
+                        <li>Cultural Centre</li>
+                        <li>Fishing Lodge</li>
+                        <li>Golf Course</li>
+                        <li>Hair Salon</li>
+                      </ul>
+
+
+                    </td>
+                    <td>
+                      <ul>
+                        <li>Live Theatre</li>
+                        <li>Lounge</li>
+                        <li>Military Mess</li>
+                        <li>Movie Theatre</li>
+                        <li>Museum</li>
+                        <li>Night Club/Cabaret</li>
+                        <li>Private Club</li>
+                        <li>Public House (Pub)</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>Recreation Facility</li>
+                        <li>Rental Hall</li>
+                        <li>Resort</li>
+                        <li>Retail Store</li>
+                        <li>Spa</li>
+                        <li>Stadium</li>
+                        <li>Train Station</li>
+                        <li>University/College</li>
+                      </ul>
+
+                    </td>
+                  </tr>
+                  </table>
+
+                  <p>Note: the type of establishment may affect licensing conditions such as whether or not minors are permitted or when liquor may be served (see <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/guide_for_lp_app.pdf" target="_blank">guide</a>).</p>
+
+                  <app-field label="Establishment Type" [required]="true" [isFullWidth]="true"
+                    [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
+                    errorMessage="Please enter a description">
+                    <input formControlName="description1" style="width: 100%;" maxlength="80"
+                      minlength="3" id="description1">
+                  </app-field>
+                </div>
+              </div>
+
+              <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement' && application?.applicationType?.name != ApplicationTypeNames.LP">
+                <div class="padded-section">
+                  <app-field label="Please briefly outline the proposed change" [required]="true" [isFullWidth]="true"
+                    [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
+                    errorMessage="Please enter a description">
+                    <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000"
                       minlength="10" id="description1"></textarea>
       </app-field>
     </div>

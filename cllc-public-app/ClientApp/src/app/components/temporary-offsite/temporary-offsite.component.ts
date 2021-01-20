@@ -143,7 +143,7 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
     }
   }
 
-  setTimeFormsToLicenceEventSchedule(schedules: []) {
+  setTimeFormsToLicenceEventSchedule(schedules: LicenceEventSchedule[]) {
     schedules.forEach(sched => {
       const startDate = (new Date(sched["eventStartDateTime"]));
       const endDate = (new Date(sched["eventEndDateTime"]));

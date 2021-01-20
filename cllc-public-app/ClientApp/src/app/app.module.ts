@@ -394,6 +394,7 @@ import { WorkerDataService } from "@services/worker-data.service";
     NoticesComponent,
     NoticesTableComponent,
     LicenseeRetailStoresComponent,
+    TuaEventComponent,
   ],
   imports: [
     AppRoutingModule,

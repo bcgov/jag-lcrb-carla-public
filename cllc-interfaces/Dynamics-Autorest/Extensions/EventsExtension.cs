@@ -505,7 +505,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='eventId'>
         /// key: adoxio_eventid
         /// </param>
-        
+
         public static MicrosoftDynamicsCRMadoxioEventscheduleCollection GetEventscheduleByEvent(this IEvents operations, string eventId)
         {
             return operations.GetEventscheduleByEventAsync(eventId).GetAwaiter().GetResult();
