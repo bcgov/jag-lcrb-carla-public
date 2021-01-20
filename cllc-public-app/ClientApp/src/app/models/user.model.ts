@@ -14,5 +14,5 @@ export class User {
   userType: string;
   isEligibilityRequired: boolean;
 
-  constructor() { }
+  constructor() {}
 }

@@ -1,11 +1,12 @@
-
 import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
-import { MatSnackBar, MatDialog, MatAutocompleteTrigger } from '@angular/material';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
@@ -24,14 +25,11 @@ import { FileUploaderComponent } from '@shared/components/file-uploader/file-upl
 import { ConnectionToNonMedicalStoresComponent } from '@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
-import { AccountDataService } from '@services/account-data.service';
 //import { User } from '@models/user.model';
 import { DynamicsForm } from '../../../models/dynamics-form.model';
-import { DynamicsFormDataService } from '../../../services/dynamics-form-data.service';
-import { PoliceDurisdictionDataService } from '@services/police-jurisdiction-data.service';
+import { PoliceJurisdictionDataService } from '@services/police-jurisdiction-data.service';
 import { LocalGovernmentDataService } from '@services/local-government-data.service';
 import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
-import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { AreaCategory } from '@models/service-area.model';
 import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
@@ -146,7 +144,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService,
-    private policeJurisdictionDataService: PoliceDurisdictionDataService,
+    private policeJurisdictionDataService: PoliceJurisdictionDataService,
     private localGovDataService: LocalGovernmentDataService
   ) {
     super();

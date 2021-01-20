@@ -1,25 +1,27 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { ApplicationCovidTemporaryExtensionComponent } from './application-covid-temporary-extension.component';
+import { ApplicationCovidTemporaryExtensionComponent } from "./application-covid-temporary-extension.component";
 
-describe('ApplicationCovidTemporaryExtensionComponent', () => {
-  let component: ApplicationCovidTemporaryExtensionComponent;
-  let fixture: ComponentFixture<ApplicationCovidTemporaryExtensionComponent>;
+describe("ApplicationCovidTemporaryExtensionComponent",
+  () => {
+    let component: ApplicationCovidTemporaryExtensionComponent;
+    let fixture: ComponentFixture<ApplicationCovidTemporaryExtensionComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ApplicationCovidTemporaryExtensionComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+          declarations: [ApplicationCovidTemporaryExtensionComponent]
+        })
+        .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ApplicationCovidTemporaryExtensionComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    beforeEach(() => {
+      fixture = TestBed.createComponent(ApplicationCovidTemporaryExtensionComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it("should create",
+      () => {
+        expect(component).toBeTruthy();
+      });
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});

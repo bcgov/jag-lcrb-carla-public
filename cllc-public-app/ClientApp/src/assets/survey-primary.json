@@ -52,7 +52,8 @@
             },
             {
               "value": "No",
-              "text": "No, the applicant is applying as an Indigenous nation in its own name, rather than as a sole proprietor, a partnership or a corporation"
+              "text":
+                "No, the applicant is applying as an Indigenous nation in its own name, rather than as a sole proprietor, a partnership or a corporation"
             }
           ]
         }
@@ -135,13 +136,13 @@
             }
           ]
         },
-          {
-            "type": "infotext",
-            "name": "note",
-            "title": "Note: An Indigenous nation is not required to register as a business. In such cases, the Indigenous nation may register their business type with BCeID as ‘other’.",
-            "titleLocation": "hidden"
-          }
-        
+        {
+          "type": "infotext",
+          "name": "note",
+          "title":
+            "Note: An Indigenous nation is not required to register as a business. In such cases, the Indigenous nation may register their business type with BCeID as ‘other’.",
+          "titleLocation": "hidden"
+        }
       ],
       "visible": false,
       "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and {registeredBusiness} = 'Yes'"
@@ -162,7 +163,8 @@
         {
           "type": "infotext",
           "name": "note",
-          "title": "Note: If a proposed store is located in the area of a local government or on reserve, Nisga'a Land or treaty settlement land on an Indigenous nation, the Liquor and Cannabis Regulation Branch must provide notice of the application to the appropriate local government or Indigenous nation. Learn more about <a href='policy-document/local-governments' target = '_blank' >local governments</a> or <a href='policy-document/indigenous-nations' target = '_blank'>Indigenous nations</a>.",
+          "title":
+            "Note: If a proposed store is located in the area of a local government or on reserve, Nisga'a Land or treaty settlement land on an Indigenous nation, the Liquor and Cannabis Regulation Branch must provide notice of the application to the appropriate local government or Indigenous nation. Learn more about <a href='policy-document/local-governments' target = '_blank' >local governments</a> or <a href='policy-document/indigenous-nations' target = '_blank'>Indigenous nations</a>.",
           "titleLocation": "hidden"
         }
       ],
@@ -175,7 +177,8 @@
         {
           "type": "radiogroup",
           "name": "connectionToProducerCultivator",
-          "title": "Does the applicant have any beneficial interest in a cannabis producer’s voting shares or or does the licensee or an immediate family member have any financial interest in a federally licensed cannabis producer?",
+          "title":
+            "Does the applicant have any beneficial interest in a cannabis producer’s voting shares or or does the licensee or an immediate family member have any financial interest in a federally licensed cannabis producer?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -189,7 +192,8 @@
         {
           "type": "infotext",
           "name": "note",
-          "title": "Note: Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law. &quot;Holds or has a beneficial interest in&quot; shares include the situations where: <ul><li>The person holds legal title to the shares of the producer</li><li>The person does not hold legal title to the shares but has the right to the enjoyment use or value of the shares of the producer, such as, but not restricted to, the beneficiary of a trust that holds the shares of a corporation.</li></ul>",
+          "title":
+            "Note: Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law. &quot;Holds or has a beneficial interest in&quot; shares include the situations where: <ul><li>The person holds legal title to the shares of the producer</li><li>The person does not hold legal title to the shares but has the right to the enjoyment use or value of the shares of the producer, such as, but not restricted to, the beneficiary of a trust that holds the shares of a corporation.</li></ul>",
           "titleLocation": "hidden"
         }
       ],

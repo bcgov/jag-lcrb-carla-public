@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { Account } from '@models/account.model';
-import { ApplicationDataService } from '@services/application-data.service';
-import { Application } from '@models/application.model';
-import { MatSnackBar } from '@angular/material';
-import * as moment from 'moment';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { AppState } from "@app/app-state/models/app-state";
+import { Account } from "@models/account.model";
+import { ApplicationDataService } from "@services/application-data.service";
+import { Application } from "@models/application.model";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import * as moment from "moment";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-lg-approvals',
-  templateUrl: './lg-approvals.component.html',
-  styleUrls: ['./lg-approvals.component.scss']
+  selector: "app-lg-approvals",
+  templateUrl: "./lg-approvals.component.html",
+  styleUrls: ["./lg-approvals.component.scss"]
 })
 export class LgApprovalsComponent implements OnInit {
   faPencilAlt = faPencilAlt;
@@ -38,35 +38,40 @@ export class LgApprovalsComponent implements OnInit {
     // get approval applications
     this.busy = this.applicationDataService.getLGApprovalApplications()
       .subscribe(applications => {
-        this.applications = applications || [];
-        this.applicationsDecisionNotMade =
-          this.applications.filter(app => !app.lGDecisionSubmissionDate && app.applicationType && app.applicationType.isShowLGINApproval);
-        this.applicationsForZoning =
-          this.applications.filter(app => !app.lGDecisionSubmissionDate && app.applicationType && app.applicationType.isShowLGZoningConfirmation);
-        this.applicationsDecisionMadeButNoDocs =
-          this.applications.filter(app => app.lGDecisionSubmissionDate && app.lGApprovalDecision === 'Pending');
-        this.dataLoaded = true;
-      },
+          this.applications = applications || [];
+          this.applicationsDecisionNotMade =
+            this.applications.filter(app => !app.lGDecisionSubmissionDate &&
+              app.applicationType &&
+              app.applicationType.isShowLGINApproval);
+          this.applicationsForZoning =
+            this.applications.filter(app => !app.lGDecisionSubmissionDate &&
+              app.applicationType &&
+              app.applicationType.isShowLGZoningConfirmation);
+          this.applicationsDecisionMadeButNoDocs =
+            this.applications.filter(app => app.lGDecisionSubmissionDate && app.lGApprovalDecision === "Pending");
+          this.dataLoaded = true;
+        },
         error => {
-          this.snackBar.open(`An error occured while getting approval applications`, 'Fail',
-            { duration: 3500, panelClass: ['red-snackbar'] });
+          this.snackBar.open(`An error occured while getting approval applications`,
+            "Fail",
+            { duration: 3500, panelClass: ["red-snackbar"] });
         });
 
   }
 
   get90dayCount(submissionDate: Date): number {
-    let submission = moment(submissionDate)
-      .startOf('day')
-      .add(90, 'day');
-    let current = moment().startOf('day');
-    let count = submission.diff(current, 'days');
+    const submission = moment(submissionDate)
+      .startOf("day")
+      .add(90, "day");
+    const current = moment().startOf("day");
+    const count = submission.diff(current, "days");
     return count;
   }
 
   noApplications(): boolean {
-    let res = this.applicationsDecisionNotMade.length === 0
-      && this.applicationsDecisionMadeButNoDocs.length === 0
-      && this.applicationsForZoning.length === 0;
+    const res = this.applicationsDecisionNotMade.length === 0 &&
+      this.applicationsDecisionMadeButNoDocs.length === 0 &&
+      this.applicationsForZoning.length === 0;
     return res;
   }
 }

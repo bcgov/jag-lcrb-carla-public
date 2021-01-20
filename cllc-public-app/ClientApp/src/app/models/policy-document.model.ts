@@ -6,5 +6,6 @@ export class PolicyDocument {
   category: string;
   body: string;
   displayOrder: any;
-  constructor() { }
+
+  constructor() {}
 }

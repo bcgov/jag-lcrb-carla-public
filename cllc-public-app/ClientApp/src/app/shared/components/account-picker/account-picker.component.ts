@@ -1,37 +1,41 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { MatAutocompleteTrigger } from '@angular/material';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { AccountDataService } from '@services/account-data.service';
-import { filter, tap, switchMap, map } from 'rxjs/operators';
-import { TransferAccount, Account } from '@models/account.model';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
+import { MatAutocompleteTrigger } from "@angular/material/autocomplete";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { AccountDataService } from "@services/account-data.service";
+import { filter, tap, switchMap } from "rxjs/operators";
+import { TransferAccount, Account } from "@models/account.model";
 
 @Component({
-  selector: 'app-account-picker',
-  templateUrl: './account-picker.component.html',
-  styleUrls: ['./account-picker.component.scss']
+  selector: "app-account-picker",
+  templateUrl: "./account-picker.component.html",
+  styleUrls: ["./account-picker.component.scss"]
 })
 export class AccountPickerComponent implements OnInit {
-  @ViewChild('autocomplete', { read: MatAutocompleteTrigger, static: true }) inputAutoComplit: MatAutocompleteTrigger;
-  @Output() valueSelected: EventEmitter<string> = new EventEmitter<string>();
+  @ViewChild("autocomplete", { read: MatAutocompleteTrigger, static: true })
+  inputAutoComplit: MatAutocompleteTrigger;
+  @Output()
+  valueSelected = new EventEmitter<string>();
   form: FormGroup;
   autocompleteAccounts: any[];
   accountRequestInProgress: boolean;
+
   constructor(private accountDataService: AccountDataService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder) {
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
-      autocompleteInput: ['']
+      autocompleteInput: [""]
     });
 
-    this.form.get('autocompleteInput').valueChanges
+    this.form.get("autocompleteInput").valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
           this.autocompleteAccounts = [];
           this.accountRequestInProgress = true;
         }),
         switchMap(value => this.accountDataService.getAutocomplete(value))
-        )
+      )
       .subscribe(data => {
         data.forEach(item => {
           const account = new Account();

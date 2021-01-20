@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
-import { LegalEntityDataService } from '@services/legal-entity-data.service';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-import { AccountDataService } from '@services/account-data.service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
+import { LegalEntityDataService } from "@services/legal-entity-data.service";
+import { Subscription } from "rxjs";
+import { Router } from "@angular/router";
+import { AccountDataService } from "@services/account-data.service";
 
 export class ProfileSummary {
   legalEntityId: string;
@@ -17,19 +19,21 @@ export class ProfileSummary {
 }
 
 @Component({
-  selector: 'app-account-profile-summary',
-  templateUrl: './account-profile-summary.component.html',
-  styleUrls: ['./account-profile-summary.component.scss']
+  selector: "app-account-profile-summary",
+  templateUrl: "./account-profile-summary.component.html",
+  styleUrls: ["./account-profile-summary.component.scss"]
 })
 export class AccountProfileSummaryComponent implements OnInit {
 
-  displayedColumns = ['organization', 'businessRelationship', 'profileComplete'];
+  displayedColumns = ["organization", "businessRelationship", "profileComplete"];
   dataSource = new MatTableDataSource<ProfileSummary>();
   profileSummaryList: ProfileSummary[] = [];
   busy: Subscription;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator;
+  @ViewChild(MatSort)
+  sort: MatSort;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -39,7 +43,8 @@ export class AccountProfileSummaryComponent implements OnInit {
 
   constructor(private adoxioLegalEntityDataService: LegalEntityDataService,
     private accountDataService: AccountDataService,
-    private router: Router) { }
+    private router: Router) {
+  }
 
   ngOnInit() {
     this.getBusinessProfileData();
@@ -60,11 +65,11 @@ export class AccountProfileSummaryComponent implements OnInit {
             profileSummary.accountId = entry.accountId;
             profileSummary.shareholderAccountId = entry.shareholderAccountId;
             profileSummary.name = entry.name;
-            profileSummary.profileComplete = '...';
+            profileSummary.profileComplete = "...";
             if (entry.shareholderAccountId) {
-              profileSummary.businessRelationship = 'Shareholder';
+              profileSummary.businessRelationship = "Shareholder";
             } else {
-              profileSummary.businessRelationship = 'Applicant';
+              profileSummary.businessRelationship = "Applicant";
               this.getIsCompleteStatus(entry.accountId);
             }
             this.profileSummaryList.push(profileSummary);
@@ -72,18 +77,19 @@ export class AccountProfileSummaryComponent implements OnInit {
           // console.log("this.profileSummaryList:", this.profileSummaryList);
         }
         // sort the array
-        this.profileSummaryList = this.sortbyProperty(this.profileSummaryList, 'legalentitytype');
+        this.profileSummaryList = this.sortbyProperty(this.profileSummaryList, "legalentitytype");
         // console.log("profileSummaryList sorted:", this.profileSummaryList);
         // set table data source
         this.dataSource.data = this.profileSummaryList;
         // set
         setTimeout(() => {
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        }, 0);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          },
+          0);
       },
       err => {
-        console.error('Error', err);
+        console.error("Error", err);
       });
 
   }
@@ -95,7 +101,7 @@ export class AccountProfileSummaryComponent implements OnInit {
         data.forEach(element => {
           const d = this.profileSummaryList.filter(e => e.legalEntityId === element.legalEntityId)[0];
           if (d) {
-            d.profileComplete = element.isComplete === true ? 'Yes' : 'No';
+            d.profileComplete = element.isComplete === true ? "Yes" : "No";
           }
         });
       });

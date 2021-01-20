@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { DataService } from './data.service';
-import { TermsAndConditions } from '@models/terms-and-conditions.model';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
+import { DataService } from "./data.service";
+import { TermsAndConditions } from "@models/terms-and-conditions.model";
 
 @Injectable()
 export class TermsAndConditionsDataService extends DataService {

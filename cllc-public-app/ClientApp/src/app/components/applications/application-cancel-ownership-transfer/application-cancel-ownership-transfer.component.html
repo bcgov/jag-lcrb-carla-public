@@ -9,14 +9,14 @@
 
     <div [formGroup]="form" class="application-wrapper">
       <!-- Preamble -->
-      
+
 
       <h3 class="blue-header">LICENCE DETAILS</h3>
       <section class="padded-section">
         <app-field label="Establishment Name" [required]="false" [valid]="isValidOrNotTouched('establishmentName')"
-          errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
+                   errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
           <input class="form-control" style="width: 500px;" type="text" [readonly]="true"
-            (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
+                 (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
         </app-field>
 
         <div>
@@ -45,7 +45,7 @@
             <div style="flex: 0 0 210px;">
               <app-field label="Parcel Identifier (PID)">
                 <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                  style="width: 200px;" formControlName="establishmentParcelId">
+                       style="width: 200px;" formControlName="establishmentParcelId">
               </app-field>
             </div>
           </div>
@@ -56,7 +56,7 @@
       <h3 class="blue-header">CONFIRM CANCELLATION OF TRANSFER</h3>
       <section class="padded-section">
         <app-field [required]="true" [valid]="isValidOrNotTouched('transferConsent')"
-          errorMessage="Please consent to the transfer" [showChevrons]="false">
+                   errorMessage="Please consent to the transfer" [showChevrons]="false">
           <mat-checkbox formControlName="transferConsent">
             <!-- <span class="error-states">*</span> -->
             <span class="ml-2">
@@ -77,11 +77,12 @@
         </p>
       </section>
 
-      <section style="position: relative; margin-top: 20px;">
+      <section style="margin-top: 20px; position: relative;">
         <button class="btn btn-primary" (click)="cancelTransfer()">
           <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
-          CANCEL TRANSFER</button>
-        <span style="float: right; color: #1a5a96; padding-top: 10px;">
+          CANCEL TRANSFER
+        </button>
+        <span style="color: #1a5a96; float: right; padding-top: 10px;">
           <a routerLink="/dashboard">
             <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
             Return to Dashboard
