@@ -184,7 +184,7 @@ namespace bdd_tests
 
             if (buttonType == "Clear button for SendChangeAddress")
             {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("button.btn-clear"));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
