@@ -56,6 +56,7 @@ import { PermanentChangeToALicenseeComponent } from '@components/applications/pe
 import { OffsiteStorageComponent } from '@components/offsite-storage/offsite-storage.component';
 import { NoticesComponent } from '@components/notices/notices.component';
 import { LicenseeRetailStoresComponent } from './components/licensee-retail-stores/licensee-retail-stores.component';
+import { TuaEventComponent } from '@components/tua-event/tua-event.component';
 
 
 const routes: Routes = [
@@ -152,6 +153,12 @@ const routes: Routes = [
     path: 'licence/:licenceId/market-event/:eventId',
     component: MarketEventComponent,
     canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'licence/:licenceId/tua-event',
+    component: TuaEventComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'TemporaryUseAreaEvents' }
   },
   {
     path: 'licence/:licenceId/offsite-storage',
