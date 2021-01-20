@@ -28,6 +28,9 @@
  */
 
 module.exports = {
+  externals: {
+	moment: 'moment'
+  },
   module: {
     rules: [
       {
@@ -38,9 +41,17 @@ module.exports = {
          */
         //exclude: /[\\/]node_modules[\\/](?!(incompatible-module1|incompatible_module_2|some_other_nested_module)[\\/])/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+		  options: {
+		  presets: ['@babel/preset-env'],
+          plugins: ['@babel/plugin-transform-runtime'],
+		  cacheDirectory: true,
+		  cacheCompression: true
+		  
+		  }
           
         }
+		
       }
     ]
   }

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "downlevelIteration": true,
+	"allowSyntheticDefaultImports": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": false,
     "declaration": false,
@@ -29,6 +30,6 @@
     }
   },
   "angularCompilerOptions": {
-    "enableIvy": true
+    "enableIvy": false
   }
 }
