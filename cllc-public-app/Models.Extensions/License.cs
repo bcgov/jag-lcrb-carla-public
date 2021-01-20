@@ -58,6 +58,21 @@ namespace Gov.Lclb.Cllb.Public.Models
             return offsiteList;
         }
 
+        public static List<CapacityArea> GetServiceAreas(string licenceId, IDynamicsClient dynamicsClient)
+        {
+            try
+            {
+                string filter = $"_adoxio_licenceid_value eq {licenceId}";
+                var entities = dynamicsClient.Serviceareas.Get(filter: filter).Value;
+                var serviceAreas = entities.Select(item => item.ToViewModel()).ToList();
+                return serviceAreas;
+            }
+            catch (Exception)
+            {
+                return new List<CapacityArea>();
+            }
+        }
+
         public static License ToViewModel(this MicrosoftDynamicsCRMadoxioLicences dynamicsLicense, IDynamicsClient dynamicsClient)
         {
             License adoxioLicenseVM = new License();
@@ -133,6 +148,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             adoxioLicenseVM.Endorsements = GetEndorsements(adoxioLicenseVM.Id, dynamicsClient);
             adoxioLicenseVM.OffsiteStorageLocations = GetOffsiteStorage(adoxioLicenseVM.Id, dynamicsClient);
+            adoxioLicenseVM.ServiceAreas = GetServiceAreas(adoxioLicenseVM.Id, dynamicsClient);
 
             adoxioLicenseVM.RepresentativeFullName = dynamicsLicense.AdoxioRepresentativename;
             adoxioLicenseVM.RepresentativeEmail = dynamicsLicense.AdoxioRepresentativeemail;
@@ -249,18 +265,21 @@ namespace Gov.Lclb.Cllb.Public.Models
                 foreach (var item in licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
                 {
                     // we don't want to allow you to apply for an endorsement you already have...
-                    if(item.AdoxioIsendorsement != null && 
-                    item.AdoxioIsendorsement == true && 
-                    licenseSummary.Endorsements.Where(e=>e.ApplicationTypeId == item.AdoxioApplicationtypeid).Any()) { 
+                    if (item.AdoxioIsendorsement != null &&
+                    item.AdoxioIsendorsement == true &&
+                    licenseSummary.Endorsements.Where(e => e.ApplicationTypeId == item.AdoxioApplicationtypeid).Any())
+                    {
                         // there is probably a better way to write this...
-                    } else {
-                    licenseSummary.AllowedActions.Add(item.ToViewModel());
+                    }
+                    else
+                    {
+                        licenseSummary.AllowedActions.Add(item.ToViewModel());
                     }
                 }
             }
 
             licenseSummary.OffsiteStorageLocations = GetOffsiteStorage(licenseSummary.LicenseId, dynamicsClient);
-
+            licenseSummary.ServiceAreas = GetServiceAreas(licenseSummary.LicenseId, dynamicsClient);
 
             return licenseSummary;
         }
