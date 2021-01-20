@@ -99,13 +99,6 @@ namespace bdd_tests
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
-            if (buttonType == "Get button for LdbExport")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.CssSelector("span:nth-child(7) .opblock-summary-method"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
             /********************
             *  Try it out buttons
             ********************/
@@ -139,13 +132,6 @@ namespace bdd_tests
             }
 
             if (buttonType == "Try it out button for SendProgramAccountDetailsBroadcastMessage")
-            {
-                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].click();", uiButton);
-            }
-
-            if (buttonType == "Try it out button for LdbExport")
             {
                 IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
@@ -191,14 +177,45 @@ namespace bdd_tests
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
 
-            if (buttonType == "Execute button for LdbExport")
+            /********************
+            *  Clear buttons
+            ********************/
+
+            if (buttonType == "Clear button for SendChangeAddress")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Clear button for SendChangeName")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Clear button for SendChangeStatus")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Clear button for SendLicenceCreationMessage")
+            {
+                IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].click();", uiButton);
+            }
+
+            if (buttonType == "Clear button for SendProgramAccountDetailsBroadcastMessage")
             {
                 IWebElement uiButton = ngDriver.FindElement(By.XPath(""));
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].click();", uiButton);
             }
         }
-
 
         [And(@"I enter the licence GUID for (.*)")]
         public void EnterLicenceGUID(string scenario)
@@ -237,14 +254,6 @@ namespace bdd_tests
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
                 executor.ExecuteScript("arguments[0].value='0B658594-6A03-EB11-B81E-00505683FBF4';", uiEnterGUID);
             }
-        }
-
-
-        [Then(@"the correct 200 response is displayed")]
-        public void CorrectResponse()
-        {
-            // to be updated
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'200')]")).Displayed);
         }
 
 
