@@ -19,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     result.Id = term.AdoxioApplicationtermsconditionslimitationid;
                 }
 
-                result.IsDefault = !string.IsNullOrEmpty(term._adoxioTermsconditionspresetValue);
+                result.IsDefault = term.AdoxioTermsConditionsPreset?.AdoxioIsdefault;
                 result.LicenceId = term._adoxioLicenceValue;
                 result.Content = term.AdoxioTermsandconditions;
             }

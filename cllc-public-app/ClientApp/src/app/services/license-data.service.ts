@@ -84,6 +84,11 @@ export class LicenseDataService extends DataService {
     return this.http.post<Application>(url, null, { headers: this.headers });
   }
 
+  createApplicationForActionTypeTerm(licenseId: string, applicationType: string, termId: string): Observable<Application> {
+    const url = `${this.apiPath}${licenseId}/create-action-application-term/${termId}/${encodeURIComponent(applicationType)}`;
+    return this.http.post<Application>(url, null, { headers: this.headers });
+  }
+
   updateLicenceEstablishment(licenceId: string, licence: ApplicationLicenseSummary):
     Observable<ApplicationLicenseSummary> {
     return this.http.put<ApplicationLicenseSummary>(this.apiPath + licenceId + "/establishment",
