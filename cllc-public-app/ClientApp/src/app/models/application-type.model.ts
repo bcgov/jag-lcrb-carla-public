@@ -94,4 +94,5 @@ export enum ApplicationTypeNames {
   LoungeAreaEndorsment = "Lounge Area Endorsement",
   SpecialEventAreaEndorsement = "Special Event Area Endorsement",
   LRSStructuralChange = "LRS Structural Change",
+  RequestTermChange = "Non-Default T&C Change Application",
 }
