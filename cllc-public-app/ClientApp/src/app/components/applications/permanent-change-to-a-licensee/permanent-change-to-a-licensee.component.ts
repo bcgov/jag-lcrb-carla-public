@@ -50,6 +50,14 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   createApplicationInProgress: boolean;
   primaryInvoice: any;
   secondaryInvoice: any;
+  uploadedCentralSecuritiesRegister = 0;
+  uploadedNOA = 0;
+  uploadedNameChangeDocuments = 0;
+  uploadedCertificateOfNameChange = 0;
+  uploadedPartnershipRegistration = 0;
+  uploadedSocietyNameChange = 0;
+  uploadedExecutorDocuments = 0;
+
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -148,8 +156,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     if ((!this.hasCannabis || this.application.primaryInvoicePaid) &&
       (!this.hasLiquor || this.application.secondaryInvoicePaid)) {
       this.canCreateNewApplication = true;
-    } 
-    
+    }
+
     if (primaryInvoiceInfoMissing || secondaryInvoiceInfoMissing) {
       // the asynchonous workflow in dynamics has not yet run. Pause for a second and get data again
       setTimeout(() => {
@@ -201,7 +209,52 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     this.showValidationMessages = false;
     this.validationMessages = [];
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
-    return this.form.disabled || this.form.valid;
+    let valid = this.form.disabled || this.form.valid;
+
+    const securitiesDocIsRequired = (this.form.get('csInternalTransferOfShares').value
+      || this.form.get('csExternalTransferOfShares').value);
+    if (securitiesDocIsRequired && this.uploadedCentralSecuritiesRegister < 1) {
+      this.validationMessages.push('At least one Central Securities Register document is required.');
+      valid = false;
+    }
+
+    const noticeOfArticlesDocIsRequired = (this.form.get('csChangeOfDirectorsOrOfficers').value);
+    if (noticeOfArticlesDocIsRequired && this.uploadedNOA < 1) {
+      this.validationMessages.push('The Notice of Articles document is required.');
+      valid = false;
+    }
+
+    const partnershipRegistrationDocIsRequired = (this.form.get('csNameChangeLicenseeSociety').value);
+    if (partnershipRegistrationDocIsRequired && this.uploadedSocietyNameChange < 1) {
+      this.validationMessages.push('A Partnership Registration document is required.');
+      valid = false;
+    }
+
+    const corpNameChangeDocIsRequired = (this.form.get('csNameChangeLicenseeCorporation').value);
+    if (corpNameChangeDocIsRequired && this.uploadedCertificateOfNameChange < 1) {
+      this.validationMessages.push('A copy of the Certificate of Change of Name Form is required.');
+      valid = false;
+    }
+
+    const partnerLicenseeNameChangeDocIsRequired = (this.form.get('csNameChangeLicenseePartnership').value);
+    if (partnerLicenseeNameChangeDocIsRequired && this.uploadedPartnershipRegistration < 1) {
+      this.validationMessages.push('A Change of Name document is required.');
+      valid = false;
+    }
+
+    const nameChangeDocIsRequired = (this.form.get('csNameChangeLicenseePerson').value);
+    if (nameChangeDocIsRequired && this.uploadedNameChangeDocuments < 1) {
+      this.validationMessages.push('A Change of Name document is required.');
+      valid = false;
+    }
+
+    const executorDocIsRequired = (this.form.get('csAdditionalReceiverOrExecutor').value && this.form.get(''));
+    if (executorDocIsRequired && this.uploadedExecutorDocuments < 1) {
+      this.validationMessages.push('Please upload a copy of Assignment of Executor, a copy of the last will(s) and testament(s) or a copy of the Death Certificate.');
+      valid = false;
+    }
+
+    return valid;
   }
 
   isScreeningRequired(): boolean {
@@ -298,6 +351,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
 
 }
 
+const INTERNAL_TRANSFER_OF_SHARES = '';
 const masterChangeList = [
   {
     name: "Internal Transfer of Shares",
