@@ -120,8 +120,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
   }
 
   retrieveLicence(licenceId: string) {
-    this.busy = this.licenceDataService
-      .getLicenceById(licenceId)
+    this.busy = this.licenceDataService.getLicenceById(licenceId)
       .subscribe((licence) => {
         this.licence = licence;
       });
