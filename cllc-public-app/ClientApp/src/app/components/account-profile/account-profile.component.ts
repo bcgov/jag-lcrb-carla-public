@@ -267,8 +267,11 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       .subscribe(account => {
         this.account = account;
         // default to BC if no province found
-        account.physicalAddressProvince = account.physicalAddressProvince || "British Columbia";
-        account.physicalAddressCountry = "Canada";
+
+        // this is generating runtime errors so disabled 1/21/2021
+
+        //account.physicalAddressProvince = account.physicalAddressProvince || "British Columbia";
+        //account.physicalAddressCountry = "Canada";
 
         this.form.patchValue({
           businessProfile: account,
