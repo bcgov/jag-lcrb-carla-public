@@ -15,10 +15,6 @@ using Xunit;
 /*
 Feature: MfgRelease
     As a logged in business user
-    I want to submit a Catering Application for different business types
-
-Feature: ManufacturerRelease
-    As a logged in business user
     I want to confirm that the Manufacturer functionality is ready for release
 
 @manufacturer @winery @release 
@@ -58,8 +54,6 @@ Scenario: DEV Manufacturer Release #2 (Winery/Private Corporation)
     And the application is approved
     And I pay the licensing fee
     And I click on the Licences tab
-    And I request an on-site store endorsement
-    And I click on the Licences tab
     And I request a picnic area endorsement
     And I click on the Licences tab
     And I request a special event area endorsement
@@ -70,11 +64,15 @@ Scenario: DEV Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I click on the Licences tab
-    And I click on the link for Manage Off-Site Storage
-    And I complete the offsite storage application
-    And I click on the secondary Submit button
+    # And I click on the link for Manage Off-Site Storage
+    # And I complete the offsite storage application
+    # And I click on the secondary Submit button
+    And I request an on-site store endorsement
+    And I click on the Licences tab
+    And the on-site endorsement application is approved
     And I request a market event for one date only
     And I click on the secondary Submit button
+    And I click on the Licences tab
     And I request a third party operator
     And I request a transfer of ownership
     And the account is deleted
