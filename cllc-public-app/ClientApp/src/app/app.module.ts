@@ -261,6 +261,7 @@ import { LEConnectionsDataService } from "@services/le-connections-data.service"
 import { LicenseeRetailStoresComponent } from "./components/licensee-retail-stores/licensee-retail-stores.component";
 import { WorkerDataService } from "@services/worker-data.service";
 import { TuaEventComponent } from "@components/tua-event/tua-event.component";
+import { ApplicationRequestTermChangeComponent } from './components/applications/application-request-term-change/application-request-term-change.component';
 
 @NgModule({
   declarations: [
@@ -396,6 +397,7 @@ import { TuaEventComponent } from "@components/tua-event/tua-event.component";
     NoticesTableComponent,
     LicenseeRetailStoresComponent,
     TuaEventComponent,
+    ApplicationRequestTermChangeComponent,
   ],
   imports: [
     AppRoutingModule,
