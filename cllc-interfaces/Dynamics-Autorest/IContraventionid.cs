@@ -19,10 +19,10 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface IContraventionid
     {
         /// <summary>
-        /// Get adoxio_ContraventionId from adoxio_compliancemeetings
+        /// Get adoxio_ContraventionId from adoxio_investigationrequests
         /// </summary>
-        /// <param name='adoxioCompliancemeetingid'>
-        /// key: adoxio_compliancemeetingid of adoxio_compliancemeeting
+        /// <param name='adoxioInvestigationrequestid'>
+        /// key: adoxio_investigationrequestid of adoxio_investigationrequest
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,6 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioContravention>> GetWithHttpMessagesAsync(string adoxioCompliancemeetingid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioContraventionadmin>> GetWithHttpMessagesAsync(string adoxioInvestigationrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

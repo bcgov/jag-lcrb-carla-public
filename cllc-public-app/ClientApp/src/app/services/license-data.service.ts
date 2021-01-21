@@ -33,6 +33,11 @@ export class LicenseDataService extends DataService {
     return this.http.post<Application>(url, { licenceId, accountId }, { headers: this.headers });
   }
 
+  requestTermChange(licenceId: string, accountId: string, termId: string, reason: string) {
+    const url = `${this.apiPath}request-term-change`;
+    return this.http.post<Application>(url, { licenceId, accountId, termId, reason }, { headers: this.headers });
+  }
+
   setThirdPartyOperator(licenceId: string, accountId: string) {
     const url = `${this.apiPath}set-third-party-operator`;
     return this.http.post<Application>(url, { licenceId, accountId }, { headers: this.headers });
@@ -76,6 +81,11 @@ export class LicenseDataService extends DataService {
 
   createApplicationForActionType(licenseId: string, applicationType: string): Observable<Application> {
     const url = `${this.apiPath}${licenseId}/create-action-application/${encodeURIComponent(applicationType)}`;
+    return this.http.post<Application>(url, null, { headers: this.headers });
+  }
+
+  createApplicationForActionTypeTerm(licenseId: string, applicationType: string, termId: string): Observable<Application> {
+    const url = `${this.apiPath}${licenseId}/create-action-application-term/${termId}/${encodeURIComponent(applicationType)}`;
     return this.http.post<Application>(url, null, { headers: this.headers });
   }
 
