@@ -11,7 +11,7 @@ import { ApplicationDataService } from "@services/application-data.service";
 import { PaymentDataService } from "@services/payment-data.service";
 import { FormBase } from "@shared/form-base";
 import { Observable, of } from "rxjs";
-import { catchError, filter, mergeMap, takeWhile } from "rxjs/operators";
+import { catchError, delay, filter, mergeMap, takeWhile } from "rxjs/operators";
 import { ContactComponent, ContactData } from "@shared/components/contact/contact.component";
 import { faIdCard } from "@fortawesome/free-regular-svg-icons";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
@@ -141,21 +141,30 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     this.primaryInvoice = primary;
     this.secondaryInvoice = secondary;
 
+    const primaryInvoiceInfoMissing = primary && primary.isApproved && !this.application.primaryInvoicePaid;
+    const secondaryInvoiceInfoMissing = secondary && secondary.isApproved && !this.application.secondaryInvoicePaid;
+
     // if all required payments are made, go to the dashboard
     if ((!this.hasCannabis || this.application.primaryInvoicePaid) &&
       (!this.hasLiquor || this.application.secondaryInvoicePaid)) {
-      // this.router.navigateByUrl('/dashboard');
       this.canCreateNewApplication = true;
-    }
+    } 
+    
+    if (primaryInvoiceInfoMissing || secondaryInvoiceInfoMissing) {
+      // the asynchonous workflow in dynamics has not yet run. Pause for a second and get data again
+      setTimeout(() => {
+        this.loadData();
+      }, 1000);
+    } else {
+      // if any payment was made, disable the form
+      if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
+        this.form.disable();
+        this.appContactDisabled = true;
+      }
+      this.form.patchValue(application);
 
-    // if any payment was made, disable the form
-    if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
-      this.form.disable();
-      this.appContactDisabled = true;
+      this.dataLoaded = true;
     }
-    this.form.patchValue(application);
-
-    this.dataLoaded = true;
   }
 
   /**
@@ -166,11 +175,11 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     const saveData = this.form.value;
 
     return this.applicationDataService.updateApplication({
-        ...this.application,
-        ...this.form.value,
-        ...this.appContact.form.value,
-        ...appData
-      })
+      ...this.application,
+      ...this.form.value,
+      ...this.appContact.form.value,
+      ...appData
+    })
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
@@ -260,9 +269,9 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     return payMethod
       .pipe(takeWhile(() => this.componentActive))
       .pipe(mergeMap(jsonUrl => {
-          window.location.href = jsonUrl["url"];
-          return jsonUrl["url"];
-        },
+        window.location.href = jsonUrl["url"];
+        return jsonUrl["url"];
+      },
         (err: any) => {
           if (err._body === "Payment already made") {
             this.snackBar.open("Application payment has already been made.",
@@ -331,7 +340,7 @@ const masterChangeList = [
     RequiresCAS: false,
     helpTextHeader: 'Use this option to report:',
     helpText: ['For liquor licensees - when there are changes in directors or officers of a public corporation or society that holds a licence, or of a public corporation or society within the licensee legal entity',
-    'For cannabis licensees – when there are changes in directors or officers of a private or public  corporation or society that holds a licence, or of a public or private corporation or society within the licensee legal entity'
+      'For cannabis licensees – when there are changes in directors or officers of a private or public  corporation or society that holds a licence, or of a public or private corporation or society within the licensee legal entity'
     ],
     //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
