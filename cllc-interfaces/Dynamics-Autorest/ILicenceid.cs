@@ -19,10 +19,10 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface ILicenceid
     {
         /// <summary>
-        /// Get adoxio_LicenceId from adoxio_offsitestorages
+        /// Get adoxio_LicenceId from adoxio_investigationrequests
         /// </summary>
-        /// <param name='adoxioOffsitestorageid'>
-        /// key: adoxio_offsitestorageid of adoxio_offsitestorage
+        /// <param name='adoxioInvestigationrequestid'>
+        /// key: adoxio_investigationrequestid of adoxio_investigationrequest
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,6 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences>> GetWithHttpMessagesAsync(string adoxioOffsitestorageid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences>> GetWithHttpMessagesAsync(string adoxioInvestigationrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

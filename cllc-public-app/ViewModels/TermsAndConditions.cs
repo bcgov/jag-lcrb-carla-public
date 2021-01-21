@@ -10,5 +10,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string Id { get; set; }
         public string LicenceId { get; set; }
         public string Content { get; set; }
+        public bool? IsDefault { get; set; }
     }
 }
