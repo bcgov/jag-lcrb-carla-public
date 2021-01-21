@@ -101,12 +101,12 @@ namespace bdd_tests
             NgWebElement uiServiceHoursSaturdayClose = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceHoursSaturdayClose'] option[value='20:00']"));
             uiServiceHoursSaturdayClose.Click();
 
-            // click on authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
+            // select the authorized to submit checkbox
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
 
-            // click on signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement']"));
+            // select the signature agreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
         }
     }
