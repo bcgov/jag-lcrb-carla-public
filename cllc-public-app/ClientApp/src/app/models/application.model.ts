@@ -190,4 +190,7 @@ export class Application {
   primaryInvoicePaid: boolean;
   secondaryInvoicePaid: boolean;
   isOnINLand: boolean;
+
+  termConditionId: string;
+  termConditionOriginalText: string;
 }
