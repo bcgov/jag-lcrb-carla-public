@@ -47,10 +47,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get adoxio_LicenceId from adoxio_offsitestorages
+        /// Get adoxio_LicenceId from adoxio_investigationrequests
         /// </summary>
-        /// <param name='adoxioOffsitestorageid'>
-        /// key: adoxio_offsitestorageid of adoxio_offsitestorage
+        /// <param name='adoxioInvestigationrequestid'>
+        /// key: adoxio_investigationrequestid of adoxio_investigationrequest
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -79,11 +79,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences>> GetWithHttpMessagesAsync(string adoxioOffsitestorageid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences>> GetWithHttpMessagesAsync(string adoxioInvestigationrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioOffsitestorageid == null)
+            if (adoxioInvestigationrequestid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioOffsitestorageid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioInvestigationrequestid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioOffsitestorageid", adoxioOffsitestorageid);
+                tracingParameters.Add("adoxioInvestigationrequestid", adoxioInvestigationrequestid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -100,8 +100,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_offsitestorages({adoxio_offsitestorageid})/adoxio_LicenceId").ToString();
-            _url = _url.Replace("{adoxio_offsitestorageid}", System.Uri.EscapeDataString(adoxioOffsitestorageid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_investigationrequests({adoxio_investigationrequestid})/adoxio_LicenceId").ToString();
+            _url = _url.Replace("{adoxio_investigationrequestid}", System.Uri.EscapeDataString(adoxioInvestigationrequestid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {

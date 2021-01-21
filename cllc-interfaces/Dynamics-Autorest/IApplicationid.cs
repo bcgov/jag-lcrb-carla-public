@@ -19,10 +19,10 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface IApplicationid
     {
         /// <summary>
-        /// Get adoxio_ApplicationId from adoxio_serviceareas
+        /// Get adoxio_ApplicationId from adoxio_investigationrequests
         /// </summary>
-        /// <param name='adoxioServiceareaid'>
-        /// key: adoxio_serviceareaid of adoxio_servicearea
+        /// <param name='adoxioInvestigationrequestid'>
+        /// key: adoxio_investigationrequestid of adoxio_investigationrequest
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,6 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplication>> GetWithHttpMessagesAsync(string adoxioServiceareaid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplication>> GetWithHttpMessagesAsync(string adoxioInvestigationrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

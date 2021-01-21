@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top169 { get; set; }
+        int? Top214 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip169 { get; set; }
+        int? Skip214 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count169 { get; set; }
+        bool? Count214 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter169 { get; set; }
+        string Filter214 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search169 { get; set; }
+        string Search214 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -66,6 +66,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccounts.
         /// </summary>
         IAccounts Accounts { get; }
+
+        /// <summary>
+        /// Gets the IAccountinvestigationrequests.
+        /// </summary>
+        IAccountinvestigationrequests Accountinvestigationrequests { get; }
+
+        /// <summary>
+        /// Gets the IAccountinvestigationsubjects.
+        /// </summary>
+        IAccountinvestigationsubjects Accountinvestigationsubjects { get; }
 
         /// <summary>
         /// Gets the IAdoxiolicencetypeadoxioinvestigationset.
@@ -116,6 +126,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplications.
         /// </summary>
         IApplications Applications { get; }
+
+        /// <summary>
+        /// Gets the IApplicationinvestigationrequests.
+        /// </summary>
+        IApplicationinvestigationrequests Applicationinvestigationrequests { get; }
 
         /// <summary>
         /// Gets the IApplicationstructurechangev1s.
@@ -198,6 +213,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IComplaints Complaints { get; }
 
         /// <summary>
+        /// Gets the IComplaintinvestigationrequests.
+        /// </summary>
+        IComplaintinvestigationrequests Complaintinvestigationrequests { get; }
+
+        /// <summary>
+        /// Gets the IComplaintinvestigationsunit.
+        /// </summary>
+        IComplaintinvestigationsunit Complaintinvestigationsunit { get; }
+
+        /// <summary>
         /// Gets the IComplianceinvestigations.
         /// </summary>
         IComplianceinvestigations Complianceinvestigations { get; }
@@ -221,6 +246,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContraventionadmins.
         /// </summary>
         IContraventionadmins Contraventionadmins { get; }
+
+        /// <summary>
+        /// Gets the IContraventioninvestigationrequests.
+        /// </summary>
+        IContraventioninvestigationrequests Contraventioninvestigationrequests { get; }
 
         /// <summary>
         /// Gets the IContraventions.
@@ -286,6 +316,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEstablishments.
         /// </summary>
         IEstablishments Establishments { get; }
+
+        /// <summary>
+        /// Gets the IEstablishmentinvestigationrequests.
+        /// </summary>
+        IEstablishmentinvestigationrequests Establishmentinvestigationrequests { get; }
 
         /// <summary>
         /// Gets the IPmuareaid.
@@ -433,9 +468,149 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInvestigationactivities Investigationactivities { get; }
 
         /// <summary>
+        /// Gets the IInvestigationcontacts.
+        /// </summary>
+        IInvestigationcontacts Investigationcontacts { get; }
+
+        /// <summary>
+        /// Gets the IContactid.
+        /// </summary>
+        IContactid Contactid { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationcontactasyncoperations.
+        /// </summary>
+        IInvestigationcontactasyncoperations Investigationcontactasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationcontactbulkdeletefailures.
+        /// </summary>
+        IInvestigationcontactbulkdeletefailures Investigationcontactbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationcontactduplicatebaserecord.
+        /// </summary>
+        IInvestigationcontactduplicatebaserecord Investigationcontactduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationcontactduplicatematchingrecord.
+        /// </summary>
+        IInvestigationcontactduplicatematchingrecord Investigationcontactduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationcontactmailboxtrackingfolders.
+        /// </summary>
+        IInvestigationcontactmailboxtrackingfolders Investigationcontactmailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationcontactprincipalobjectattributeaccesses.
+        /// </summary>
+        IInvestigationcontactprincipalobjectattributeaccesses Investigationcontactprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationcontactprocesssession.
+        /// </summary>
+        IInvestigationcontactprocesssession Investigationcontactprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationcontactsyncerrors.
+        /// </summary>
+        IInvestigationcontactsyncerrors Investigationcontactsyncerrors { get; }
+
+        /// <summary>
         /// Gets the IInvestigationreactivationhistories.
         /// </summary>
         IInvestigationreactivationhistories Investigationreactivationhistories { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequests.
+        /// </summary>
+        IInvestigationrequests Investigationrequests { get; }
+
+        /// <summary>
+        /// Gets the IAccountid.
+        /// </summary>
+        IAccountid Accountid { get; }
+
+        /// <summary>
+        /// Gets the IApplicationid.
+        /// </summary>
+        IApplicationid Applicationid { get; }
+
+        /// <summary>
+        /// Gets the IComplaintid.
+        /// </summary>
+        IComplaintid Complaintid { get; }
+
+        /// <summary>
+        /// Gets the IContraventionid.
+        /// </summary>
+        IContraventionid Contraventionid { get; }
+
+        /// <summary>
+        /// Gets the IEstablishmentid.
+        /// </summary>
+        IEstablishmentid Establishmentid { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequestasyncoperations.
+        /// </summary>
+        IInvestigationrequestasyncoperations Investigationrequestasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequestbulkdeletefailures.
+        /// </summary>
+        IInvestigationrequestbulkdeletefailures Investigationrequestbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequestduplicatebaserecord.
+        /// </summary>
+        IInvestigationrequestduplicatebaserecord Investigationrequestduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequestduplicatematchingrecord.
+        /// </summary>
+        IInvestigationrequestduplicatematchingrecord Investigationrequestduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequestinvestigations.
+        /// </summary>
+        IInvestigationrequestinvestigations Investigationrequestinvestigations { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequestmailboxtrackingfolders.
+        /// </summary>
+        IInvestigationrequestmailboxtrackingfolders Investigationrequestmailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequestprincipalobjectattributeaccesses.
+        /// </summary>
+        IInvestigationrequestprincipalobjectattributeaccesses Investigationrequestprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequestprocesssession.
+        /// </summary>
+        IInvestigationrequestprocesssession Investigationrequestprocesssession { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequestsharepointdocumentlocations.
+        /// </summary>
+        IInvestigationrequestsharepointdocumentlocations Investigationrequestsharepointdocumentlocations { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequestsyncerrors.
+        /// </summary>
+        IInvestigationrequestsyncerrors Investigationrequestsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the ILicenceid.
+        /// </summary>
+        ILicenceid Licenceid { get; }
+
+        /// <summary>
+        /// Gets the IOfficeid.
+        /// </summary>
+        IOfficeid Officeid { get; }
 
         /// <summary>
         /// Gets the IInvestigations.
@@ -443,9 +618,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInvestigations Investigations { get; }
 
         /// <summary>
+        /// Gets the IInvestigationinvestigationcontacts.
+        /// </summary>
+        IInvestigationinvestigationcontacts Investigationinvestigationcontacts { get; }
+
+        /// <summary>
         /// Gets the IInvestigationinvestigations.
         /// </summary>
         IInvestigationinvestigations Investigationinvestigations { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationrequestid.
+        /// </summary>
+        IInvestigationrequestid Investigationrequestid { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationunitid.
+        /// </summary>
+        IInvestigationunitid Investigationunitid { get; }
 
         /// <summary>
         /// Gets the IInvestigationsubjects.
@@ -521,6 +711,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencesadoxioonestopmessageitemlicence.
         /// </summary>
         ILicencesadoxioonestopmessageitemlicence Licencesadoxioonestopmessageitemlicence { get; }
+
+        /// <summary>
+        /// Gets the ILicencesinvestigationrequests.
+        /// </summary>
+        ILicencesinvestigationrequests Licencesinvestigationrequests { get; }
 
         /// <summary>
         /// Gets the ILicencesubcategories.
@@ -743,6 +938,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ITerritories Territories { get; }
 
         /// <summary>
+        /// Gets the IOfficeinvestigationrequests.
+        /// </summary>
+        IOfficeinvestigationrequests Officeinvestigationrequests { get; }
+
+        /// <summary>
         /// Gets the ITiedhouseassociations.
         /// </summary>
         ITiedhouseassociations Tiedhouseassociations { get; }
@@ -773,6 +973,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxioeventlocation Regardingobjectidadoxioeventlocation { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioinvestigationcontact.
+        /// </summary>
+        IRegardingobjectidadoxioinvestigationcontact Regardingobjectidadoxioinvestigationcontact { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioinvestigationrequest.
+        /// </summary>
+        IRegardingobjectidadoxioinvestigationrequest Regardingobjectidadoxioinvestigationrequest { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioinvestigationsubject.
         /// </summary>
         IRegardingobjectidadoxioinvestigationsubject Regardingobjectidadoxioinvestigationsubject { get; }
@@ -786,6 +996,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBusinessunitadoxioeventlocation.
         /// </summary>
         IBusinessunitadoxioeventlocation Businessunitadoxioeventlocation { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioinvestigationcontact.
+        /// </summary>
+        IBusinessunitadoxioinvestigationcontact Businessunitadoxioinvestigationcontact { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioinvestigationrequest.
+        /// </summary>
+        IBusinessunitadoxioinvestigationrequest Businessunitadoxioinvestigationrequest { get; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioinvestigationsubject.
@@ -803,6 +1023,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         IContacts Contacts { get; }
 
         /// <summary>
+        /// Gets the IContactinvestigationcontacts.
+        /// </summary>
+        IContactinvestigationcontacts Contactinvestigationcontacts { get; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioinvestigationcontact.
+        /// </summary>
+        IBaserecordidadoxioinvestigationcontact Baserecordidadoxioinvestigationcontact { get; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioinvestigationrequest.
+        /// </summary>
+        IBaserecordidadoxioinvestigationrequest Baserecordidadoxioinvestigationrequest { get; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioinvestigationsubject.
         /// </summary>
         IBaserecordidadoxioinvestigationsubject Baserecordidadoxioinvestigationsubject { get; }
@@ -811,6 +1046,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBaserecordidadoxioonestopmessageitem.
         /// </summary>
         IBaserecordidadoxioonestopmessageitem Baserecordidadoxioonestopmessageitem { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioinvestigationcontact.
+        /// </summary>
+        IDuplicaterecordidadoxioinvestigationcontact Duplicaterecordidadoxioinvestigationcontact { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioinvestigationrequest.
+        /// </summary>
+        IDuplicaterecordidadoxioinvestigationrequest Duplicaterecordidadoxioinvestigationrequest { get; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxioinvestigationsubject.
@@ -856,6 +1101,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IObjectidadoxioeventlocation.
         /// </summary>
         IObjectidadoxioeventlocation Objectidadoxioeventlocation { get; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioinvestigationcontact.
+        /// </summary>
+        IObjectidadoxioinvestigationcontact Objectidadoxioinvestigationcontact { get; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioinvestigationrequest.
+        /// </summary>
+        IObjectidadoxioinvestigationrequest Objectidadoxioinvestigationrequest { get; }
 
         /// <summary>
         /// Gets the IObjectidadoxioinvestigationsubject.
@@ -918,6 +1173,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxioeventlocationmodifiedonbehalfby Lkadoxioeventlocationmodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the ILkadoxioinvestigationcontactcreatedby.
+        /// </summary>
+        ILkadoxioinvestigationcontactcreatedby Lkadoxioinvestigationcontactcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioinvestigationcontactcreatedonbehalfby.
+        /// </summary>
+        ILkadoxioinvestigationcontactcreatedonbehalfby Lkadoxioinvestigationcontactcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioinvestigationcontactmodifiedby.
+        /// </summary>
+        ILkadoxioinvestigationcontactmodifiedby Lkadoxioinvestigationcontactmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioinvestigationcontactmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioinvestigationcontactmodifiedonbehalfby Lkadoxioinvestigationcontactmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioinvestigationrequestcreatedby.
+        /// </summary>
+        ILkadoxioinvestigationrequestcreatedby Lkadoxioinvestigationrequestcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioinvestigationrequestcreatedonbehalfby.
+        /// </summary>
+        ILkadoxioinvestigationrequestcreatedonbehalfby Lkadoxioinvestigationrequestcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioinvestigationrequestmodifiedby.
+        /// </summary>
+        ILkadoxioinvestigationrequestmodifiedby Lkadoxioinvestigationrequestmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioinvestigationrequestmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioinvestigationrequestmodifiedonbehalfby Lkadoxioinvestigationrequestmodifiedonbehalfby { get; }
+
+        /// <summary>
         /// Gets the ILkadoxioinvestigationsubjectcreatedby.
         /// </summary>
         ILkadoxioinvestigationsubjectcreatedby Lkadoxioinvestigationsubjectcreatedby { get; }
@@ -963,6 +1258,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IUseradoxioeventlocation Useradoxioeventlocation { get; }
 
         /// <summary>
+        /// Gets the IUseradoxioinvestigationcontact.
+        /// </summary>
+        IUseradoxioinvestigationcontact Useradoxioinvestigationcontact { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxioinvestigationrequest.
+        /// </summary>
+        IUseradoxioinvestigationrequest Useradoxioinvestigationrequest { get; }
+
+        /// <summary>
         /// Gets the IUseradoxioinvestigationsubject.
         /// </summary>
         IUseradoxioinvestigationsubject Useradoxioinvestigationsubject { get; }
@@ -976,6 +1281,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxioeventlocation.
         /// </summary>
         ITeamadoxioeventlocation Teamadoxioeventlocation { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioinvestigationcontact.
+        /// </summary>
+        ITeamadoxioinvestigationcontact Teamadoxioinvestigationcontact { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioinvestigationrequest.
+        /// </summary>
+        ITeamadoxioinvestigationrequest Teamadoxioinvestigationrequest { get; }
 
         /// <summary>
         /// Gets the ITeamadoxioinvestigationsubject.
