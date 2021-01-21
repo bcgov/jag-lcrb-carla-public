@@ -32,7 +32,7 @@
     }
   },
   "angularCompilerOptions": {
-    "enableIvy": true
+    "enableIvy": false
   },
   "files": [
     "main.ts",
