@@ -404,7 +404,13 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <ul style="width: 100%;">
-        <li *ngFor="let term of item?.termsAndConditions">{{term.content}}</li>
+        <li *ngFor="let term of item?.termsAndConditions">
+          {{term.content}} <a [routerLink]="['/request-term-change/' + item.licenseId + '/' + term.id]" *ngIf="term.isDefault">
+            <span>
+              <fa-icon [icon]="faBolt" style="margin-right: 10px;"></fa-icon>Request Change
+            </span>
+            </a>
+        </li>
       </ul>
     </mat-expansion-panel>
   </td>
