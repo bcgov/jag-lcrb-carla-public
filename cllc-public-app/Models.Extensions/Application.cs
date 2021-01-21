@@ -614,6 +614,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     logger.LogError(httpOperationException, "Error getting service hours.");
                 }
+
             }
 
             if (dynamicsApplication.Statuscode != null)
@@ -719,6 +720,18 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
             applicationVM.PrevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!applicationVM.IsSubmitted);
+
+
+            if (dynamicsApplication.AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication !=
+                null && dynamicsApplication.AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication.Count > 0)
+            {
+                // add the related term info.
+                var term = dynamicsApplication
+                    .AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication.First();
+                applicationVM.TermConditionId = term.AdoxioApplicationtermsconditionslimitationid;
+                applicationVM.TermConditionOriginalText = term.AdoxioTermsandconditions;
+
+            }
 
             return applicationVM;
         }

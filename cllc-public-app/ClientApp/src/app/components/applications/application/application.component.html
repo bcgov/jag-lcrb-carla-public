@@ -493,7 +493,7 @@
         <app-field label="Parcel Identifier (PID)">
           <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)"
                  style="width: 200px;" formControlName="establishmentParcelId"
-                 id="establishmentAddressPostalCode">
+                 id="establishmentParcelId">
         </app-field>
       </div>
     </div>
@@ -761,6 +761,30 @@
       </section>
     </div>
   </div>
+</section>
+<!-- Request Change to Term / Condition -->
+<section *ngIf="application?.termConditionId">
+
+  <h3 class="blue-header">REQUEST CHANGE TO T&C</h3>
+  <div class="content-bottom">
+
+    <app-field label="Current T & C Text" [required]="false">
+      <textarea readonly style="width: 800px;" class="form-control" formControlName="termConditionOriginalText"></textarea> 
+    </app-field>
+
+    <p>
+      A letter of intent describing , in detail, the proposed change to your licence.  To request discretion,
+      provide a written submission detailing compelling reasons/exceptional circumstances for your request and
+      why a request for discretion should be approved.  All documentation to support your request for
+      discretion must be submitted with this application.
+    </p>
+      <app-field label="Reason for change" 
+                 errorMessage="Please enter the reason for the change">
+        <textarea style="width: 800px;" class="form-control" formControlName="description2"></textarea>           
+      </app-field>
+
+    </div>
+
 </section>
 
 <!-- Proof of Zoning-->

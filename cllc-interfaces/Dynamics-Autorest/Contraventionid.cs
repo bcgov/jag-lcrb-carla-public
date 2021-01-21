@@ -47,10 +47,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get adoxio_ContraventionId from adoxio_compliancemeetings
+        /// Get adoxio_ContraventionId from adoxio_investigationrequests
         /// </summary>
-        /// <param name='adoxioCompliancemeetingid'>
-        /// key: adoxio_compliancemeetingid of adoxio_compliancemeeting
+        /// <param name='adoxioInvestigationrequestid'>
+        /// key: adoxio_investigationrequestid of adoxio_investigationrequest
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -79,11 +79,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioContravention>> GetWithHttpMessagesAsync(string adoxioCompliancemeetingid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioContraventionadmin>> GetWithHttpMessagesAsync(string adoxioInvestigationrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioCompliancemeetingid == null)
+            if (adoxioInvestigationrequestid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioCompliancemeetingid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioInvestigationrequestid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioCompliancemeetingid", adoxioCompliancemeetingid);
+                tracingParameters.Add("adoxioInvestigationrequestid", adoxioInvestigationrequestid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -100,8 +100,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_compliancemeetings({adoxio_compliancemeetingid})/adoxio_ContraventionId").ToString();
-            _url = _url.Replace("{adoxio_compliancemeetingid}", System.Uri.EscapeDataString(adoxioCompliancemeetingid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_investigationrequests({adoxio_investigationrequestid})/adoxio_ContraventionId").ToString();
+            _url = _url.Replace("{adoxio_investigationrequestid}", System.Uri.EscapeDataString(adoxioInvestigationrequestid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {
@@ -180,7 +180,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioContravention>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioContraventionadmin>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -189,7 +189,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioContravention>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioContraventionadmin>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
