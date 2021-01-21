@@ -45,6 +45,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="NewFeature.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="LiquorPrimaryApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
