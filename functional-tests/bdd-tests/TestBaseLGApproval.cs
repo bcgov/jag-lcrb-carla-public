@@ -32,10 +32,6 @@ namespace bdd_tests
 
             // click on Review Application link
             ClickOnLink(reviewApp);
-
-            // select 'Allows' for zoning confirmation
-            NgWebElement uiAllowsZoning = ngDriver.FindElement(By.CssSelector("[formcontrolname='lgZoning'] mat-radio-button#mat-radio-2"));
-            uiAllowsZoning.Click();
         }
 
 
