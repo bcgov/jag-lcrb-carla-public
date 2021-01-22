@@ -43,7 +43,6 @@ namespace bdd_tests
             string title = "Title";
             string phone = "1811811818";
             string email = "test@automation.com";
-            string zoningComments = "Sample zoning comments.";
 
             // enter the name of the official
             NgWebElement uiOfficialName = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'lGNameOfOfficial']"));
@@ -61,9 +60,8 @@ namespace bdd_tests
             NgWebElement uiOfficialEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactEmail']"));
             uiOfficialEmail.SendKeys(email);
 
-            // enter the zoning comments
-            NgWebElement uiZoningComments = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='lGDecisionComments']"));
-            uiZoningComments.SendKeys(zoningComments);
+            // upload the supporting report
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
             // click on the Submit button
             ClickOnSubmitButton();
