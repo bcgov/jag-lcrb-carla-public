@@ -203,6 +203,10 @@ namespace bdd_tests
 
             NgWebElement uiTrash2 = ngDriver.FindElement(By.CssSelector(".offsite-storage .ng-star-inserted:nth-child(3) .fa-trash"));
             uiTrash2.Click();
+
+            // click on the signature agreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            uiSignatureAgreement.Click();
         }
 
 
