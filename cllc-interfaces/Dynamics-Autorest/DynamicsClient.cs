@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top214 { get; set; }
+        public int? Top215 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip214 { get; set; }
+        public int? Skip215 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count214 { get; set; }
+        public bool? Count215 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter214 { get; set; }
+        public string Filter215 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search214 { get; set; }
+        public string Search215 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -379,6 +379,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEventlocationsyncerrors.
         /// </summary>
         public virtual IEventlocationsyncerrors Eventlocationsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IServiceareaid.
+        /// </summary>
+        public virtual IServiceareaid Serviceareaid { get; private set; }
 
         /// <summary>
         /// Gets the IEvents.
@@ -874,6 +879,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IServiceareas.
         /// </summary>
         public virtual IServiceareas Serviceareas { get; private set; }
+
+        /// <summary>
+        /// Gets the IServiceareaeventlocations.
+        /// </summary>
+        public virtual IServiceareaeventlocations Serviceareaeventlocations { get; private set; }
 
         /// <summary>
         /// Gets the ISettings.
@@ -1614,6 +1624,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Eventlocationprincipalobjectattributeaccesses = new Eventlocationprincipalobjectattributeaccesses(this);
             Eventlocationprocesssession = new Eventlocationprocesssession(this);
             Eventlocationsyncerrors = new Eventlocationsyncerrors(this);
+            Serviceareaid = new Serviceareaid(this);
             Events = new Events(this);
             Eventeventlocations = new Eventeventlocations(this);
             Eventschedules = new Eventschedules(this);
@@ -1713,6 +1724,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Rmreviews = new Rmreviews(this);
             Investigationenforcement = new Investigationenforcement(this);
             Serviceareas = new Serviceareas(this);
+            Serviceareaeventlocations = new Serviceareaeventlocations(this);
             Settings = new Settings(this);
             Spddatarows = new Spddatarows(this);
             Spdexportses = new Spdexportses(this);
