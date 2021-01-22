@@ -44,13 +44,8 @@
     <h3 class="blue-header">TUA LOCATION(S)</h3>
     <section class="content-bottom clearfix">
       <p>Specify one or more locations where your event will take place.</p>
-      <div class="row">
-        <p>TODO</p>
-      </div>
-      <div class="row">
-      </div>
-      <div class="row">
-      </div>
+      <app-event-location-table fromControlName="eventLocations" [enabled]="true" [serviceAreas]="licence?.serviceAreas"
+        [shouldValidate]="showErrorSection"></app-event-location-table>
     </section>
 
     <h3 class="blue-header">TIME AND DATE OF EVENT</h3>

@@ -1,5 +1,5 @@
 import { Component, Input, forwardRef } from "@angular/core";
-import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS } from "@angular/forms";
+import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validators } from "@angular/forms";
 import { faPlusCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { EventLocation } from "@models/event-location.model";
 import { ServiceArea } from "@models/service-area.model";
@@ -33,8 +33,11 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
   // Whether to run validation per row
   @Input() shouldValidate: boolean = false;
 
+  // The service areas to show on the location ID drop-down
   @Input() serviceAreas: ServiceArea[] = [];
 
+  // Internal table state
+  total = 0;
   rows = new FormArray([]);
   validationMessages: string[] = [];
 
@@ -44,6 +47,7 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
   constructor(private fb: FormBuilder) {
     super();
     this.rows.valueChanges.subscribe(val => {
+      this.updateTotal();
       this.onChange(val);
       this.value = val;
     });
@@ -51,6 +55,23 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
 
   get showErrorSection(): boolean {
     return this.enabled && this.shouldValidate && this.validationMessages.length > 0;
+  }
+
+  updateTotal() {
+    const eventLocations: EventLocation[] = this.rows.value;
+    const result = eventLocations.reduce((acc, loc) => {
+      if (typeof loc.attendance === "number") {
+        acc += loc.attendance;
+      } else {
+        const num = parseInt(loc.attendance, 10);
+        if (num > 0) {
+          acc += num;
+        }
+      }
+      return acc;
+    }, 0);
+
+    this.total = result;
   }
 
   writeValue(array: EventLocation[]) {
@@ -73,14 +94,10 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
   private addInternal(value: EventLocation) {
     const group = this.fb.group({
       id: [value.id],
-      name: [value.name, [Validators.required, Validators.maxLength(250)]],
-      street1: [value.street1, [Validators.required]],
-      city: [value.city, [Validators.required]],
-      province: ['BC', [Validators.required]],
-      postalCode: [value.postalCode, [Validators.required]],
-      status: [value.status],
-      dateAdded: [value.dateAdded],
-      dateRemoved: [value.dateRemoved]
+      eventId: [value.eventId],
+      serviceAreaId: [value.serviceAreaId],
+      name: [value.name, [Validators.required]],
+      attendance: [value.attendance, [Validators.required]],
     });
 
     this.rows.push(group);
@@ -88,9 +105,6 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
 
   addRow() {
     const newRow = new EventLocation();
-    newRow.status = OffsiteStorageStatus.Active;
-
-
     this.writeValue([...this.rows.value, newRow]);
   }
 
@@ -103,19 +117,8 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
 
   private removeInternal(index: number) {
     const row = this.rows.at(index);
-    const obj = row.value as OffsiteStorage;
-
-    // Existing location - flag it as "removed" in Dynamics
-    if (obj.id) {
-      const patchObj: Partial<OffsiteStorage> = {
-        status: OffsiteStorageStatus.Removed,
-        dateRemoved: new Date()
-      };
-      row.patchValue(patchObj);
-    } else {
-      // This location has never been submitted. We can safely remove the whole row client-side.
-      this.rows.removeAt(index);
-    }
+    const obj = row.value as EventLocation;
+    this.rows.removeAt(index);
   }
 
   readonly(index: number): boolean {

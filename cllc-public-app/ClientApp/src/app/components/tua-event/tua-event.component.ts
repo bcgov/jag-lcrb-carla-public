@@ -54,7 +54,8 @@ export class TuaEventComponent extends FormBase implements OnInit {
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
 
-    // TODO: TUA locations
+    // TUA locations
+    eventLocations: ["", []],
 
     // date & time
     startDate: ['', [Validators.required]],
@@ -153,6 +154,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
       contactPhone: licenceEvent.contactPhone,
       contactEmail: licenceEvent.contactEmail,
       contactEmailConfirmation: licenceEvent.contactEmail,
+      eventLocations: licenceEvent.eventLocations,
       startDate: new Date(licenceEvent.startDate),
       endDate: new Date(licenceEvent.endDate),
       eventCategory: this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value,

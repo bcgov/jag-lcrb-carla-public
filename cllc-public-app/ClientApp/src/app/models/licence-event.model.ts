@@ -1,3 +1,4 @@
+import { EventLocation } from "./event-location.model";
 import { LicenceEventSchedule } from "./licence-event-schedule";
 
 export class LicenceEvent {
@@ -132,6 +133,7 @@ export class LicenceEvent {
   isNoneOfTheAbove: boolean;
   isAgreement1: boolean;
   isAgreement2: boolean;
+  eventLocations: EventLocation[];
 }
 
 export const EventStatus = [

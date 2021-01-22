@@ -8,7 +8,7 @@
   <tr *ngFor="let row of rows.controls; let i=index" [ngClass]="{ 'text-grey': readonly(i) }">
     <ng-container [formGroup]="row">
       <td>
-        <select class="form-control" formControlName="locationId" [disabled]="readonly(i)">
+        <select class="form-control" formControlName="serviceAreaId" [disabled]="readonly(i)">
           <option *ngFor="let item of serviceAreas" [ngValue]="item.id">{{item.areaLocation}}</option>
         </select>
       </td>
@@ -17,13 +17,7 @@
           [readonly]="readonly(i)" />
       </td>
       <td>
-        <input type="text" formControlName="street1" placeholder="Enter Address" [readonly]="readonly(i)" />
-      </td>
-      <td>
-        <input type="text" formControlName="city" placeholder="Enter City" [readonly]="readonly(i)" />
-      </td>
-      <td>
-        <input type="text" formControlName="postalCode" placeholder="Enter Postal Code" [readonly]="readonly(i)" />
+        <input type="text" formControlName="attendance" placeholder="Enter attendance" mask="0*" maxlength="4" [readonly]="readonly(i)" />
       </td>
       <td>
         <button type="button" (click)="removeRow(i)" class="btn-clear" *ngIf="!readonly(i)">
@@ -35,13 +29,12 @@
   <tr>
     <td [colSpan]="2" class="pt-3 text-left">
       <button type="button" (click)="addRow()" class="btn btn-secondary" style="height: 100%;" *ngIf="enabled">
-        <fa-icon [icon]="faPlusCircle" style="color: #1a5a96;"></fa-icon> Add Additional Storage
+        <fa-icon [icon]="faPlusCircle" style="color: #1a5a96;"></fa-icon> Add Location
       </button>
     </td>
     <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td class="text-right">Event Total Attendance:</td>
+    <td>{{total}}</td>
   </tr>
 </table>
 <section class="error mt-3" *ngIf="showErrorSection">
