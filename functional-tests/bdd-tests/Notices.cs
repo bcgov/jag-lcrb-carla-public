@@ -36,9 +36,10 @@ Scenario: No Notices (Private Corporation)
 #    And I return to the portal
 #    And I click on the link for Notices
 #    And the uploaded file is displayed
+#    And I click on the uploaded file
+#    And the file is successfully downloaded
 #    And the account is deleted
 #    Then I see the login page
-
 */
 
 namespace bdd_tests
