@@ -3,5 +3,6 @@ export class VoteOption {
   option: string;
   displayOrder: any;
   totalVotes: any;
-  constructor() { }
+
+  constructor() {}
 }

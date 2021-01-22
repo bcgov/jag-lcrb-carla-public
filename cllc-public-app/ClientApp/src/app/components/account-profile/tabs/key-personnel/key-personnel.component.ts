@@ -1,31 +1,37 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DynamicsDataService } from '@services/dynamics-data.service';
-import { Store } from '@ngrx/store';
-import { LegalEntity } from '@models/legal-entity.model';
-import { Account } from '@models/account.model';
-import { MatTableDataSource, MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Subscription } from 'rxjs';
-import { LegalEntityDataService } from '@services/legal-entity-data.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AppState } from '@app/app-state/models/app-state';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, Input, Inject } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { DynamicsDataService } from "@services/dynamics-data.service";
+import { Store } from "@ngrx/store";
+import { LegalEntity } from "@models/legal-entity.model";
+import { Account } from "@models/account.model";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatTableDataSource } from "@angular/material/table";
+import { Subscription } from "rxjs";
+import { LegalEntityDataService } from "@services/legal-entity-data.service";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { AppState } from "@app/app-state/models/app-state";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-key-personnel',
-  templateUrl: './key-personnel.component.html',
-  styleUrls: ['./key-personnel.component.scss']
+  selector: "app-key-personnel",
+  templateUrl: "./key-personnel.component.html",
+  styleUrls: ["./key-personnel.component.scss"]
 })
 export class KeyPersonnelComponent implements OnInit {
   faPlus = faPlus;
-  @Input() accountId: string;
-  @Input() parentLegalEntityId: string;
-  @Input() businessType: string;
-  @Input() lockAssociates = false;
+  @Input()
+  accountId: string;
+  @Input()
+  parentLegalEntityId: string;
+  @Input()
+  businessType: string;
+  @Input()
+  lockAssociates = false;
 
   adoxioLegalEntityList: LegalEntity[] = [];
   dataSource = new MatTableDataSource<LegalEntity>();
-  displayedColumns = ['firstName', 'lastName', 'email', 'position', 'dateofappointment', 'edit', 'delete'];
+  displayedColumns = ["firstName", "lastName", "email", "position", "dateofappointment", "edit", "delete"];
   busy: Promise<any>;
   busyObsv: Subscription;
   subscriptions: Subscription[] = [];
@@ -35,40 +41,41 @@ export class KeyPersonnelComponent implements OnInit {
     private store: Store<AppState>,
     private dynamicsDataService: DynamicsDataService,
     private route: ActivatedRoute,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
     this.getDirectorsAndOfficers();
     if (this.lockAssociates) {
-      this.displayedColumns = ['firstName', 'lastName', 'email', 'position', 'dateofappointment'];
+      this.displayedColumns = ["firstName", "lastName", "email", "position", "dateofappointment"];
     }
   }
 
   getDirectorsAndOfficers() {
-    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, 'key-personnel')
+    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "key-personnel")
       .subscribe((data) => {
         data.forEach(d => {
           const positionList: string[] = [];
           if (d.isDirector) {
-            positionList.push('Director');
+            positionList.push("Director");
           }
           if (d.isOfficer) {
-            positionList.push('Officer');
+            positionList.push("Officer");
           }
           if (d.isOwner) {
-            positionList.push('Owner');
+            positionList.push("Owner");
           }
           if (d.isSeniorManagement) {
-            positionList.push('Senior Manager');
+            positionList.push("Senior Manager");
           }
-          d.position = positionList.join(', ');
+          d.position = positionList.join(", ");
         });
         this.dataSource.data = data;
       });
   }
 
   formDataToModelData(formData: any): LegalEntity {
-    const adoxioLegalEntity: LegalEntity = new LegalEntity();
+    const adoxioLegalEntity = new LegalEntity();
     adoxioLegalEntity.isShareholder = false;
     adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
     adoxioLegalEntity.id = formData.id;
@@ -76,14 +83,14 @@ export class KeyPersonnelComponent implements OnInit {
     adoxioLegalEntity.isindividual = true;
     adoxioLegalEntity.firstname = formData.firstname;
     adoxioLegalEntity.lastname = formData.lastname;
-    adoxioLegalEntity.name = formData.firstname + ' ' + formData.lastname;
+    adoxioLegalEntity.name = formData.firstname + " " + formData.lastname;
     adoxioLegalEntity.email = formData.email;
     adoxioLegalEntity.dateofappointment = formData.dateofappointment;
     adoxioLegalEntity.jobTitle = formData.jobTitle;
     adoxioLegalEntity.legalentitytype = this.businessType;
 
     if (this.accountId) {
-      adoxioLegalEntity.account = <Account>{};
+      adoxioLegalEntity.account = ({} as Account);
       adoxioLegalEntity.account.id = this.accountId;
     }
     return adoxioLegalEntity;
@@ -95,7 +102,7 @@ export class KeyPersonnelComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: '500px',
+      width: "500px",
       data: {
         person: person,
         businessType: this.businessType
@@ -114,12 +121,15 @@ export class KeyPersonnelComponent implements OnInit {
           }
           this.busyObsv = save.subscribe(
             res => {
-              this.snackBar.open('Key Personnel have been saved', 'Success',
-                { duration: 2500, panelClass: ['green-snackbar'] });
+              this.snackBar.open("Key Personnel have been saved",
+                "Success",
+                { duration: 2500, panelClass: ["green-snackbar"] });
               this.getDirectorsAndOfficers();
             },
             err => {
-              this.snackBar.open('Error saving Key Personnel', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+              this.snackBar.open("Error saving Key Personnel",
+                "Fail",
+                { duration: 3500, panelClass: ["red-snackbar"] });
               this.handleError(err);
             });
         }
@@ -129,7 +139,7 @@ export class KeyPersonnelComponent implements OnInit {
   }
 
   deleteIndividual(person: LegalEntity) {
-    if (confirm('Delete person?')) {
+    if (confirm("Delete person?")) {
       this.legalEntityDataservice.deleteLegalEntity(person.id).subscribe(data => {
         this.getDirectorsAndOfficers();
       });
@@ -139,9 +149,9 @@ export class KeyPersonnelComponent implements OnInit {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      const body = error || '';
+      const body = error || "";
       const err = body || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
@@ -155,8 +165,8 @@ export class KeyPersonnelComponent implements OnInit {
  * Director and Officer Person Dialog
  ***************************************/
 @Component({
-  selector: 'app-key-personnel-dialog',
-  templateUrl: './key-personnel-dialog.component.html',
+  selector: "app-key-personnel-dialog",
+  templateUrl: "./key-personnel-dialog.component.html",
 })
 export class KeyPersonnelDialogComponent {
   form: FormGroup;
@@ -166,16 +176,17 @@ export class KeyPersonnelDialogComponent {
     private dialogRef: MatDialogRef<KeyPersonnelDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = fb.group({
-      id: [''],
-      isDirector: [false],
-      isOfficer: [false],
-      isSeniorManagement: [false],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      jobTitle: ['', Validators.required],
-      email: ['', Validators.email],
-      dateofappointment: ['', Validators.required]
-    }, { validator: this.dateLessThanToday('dateofappointment') }
+        id: [""],
+        isDirector: [false],
+        isOfficer: [false],
+        isSeniorManagement: [false],
+        firstname: ["", Validators.required],
+        lastname: ["", Validators.required],
+        jobTitle: ["", Validators.required],
+        email: ["", Validators.email],
+        dateofappointment: ["", Validators.required]
+      },
+      { validator: this.dateLessThanToday("dateofappointment") }
     );
 
     if (data && data.person) {
@@ -200,7 +211,7 @@ export class KeyPersonnelDialogComponent {
 
   save() {
     let formData = this.data.person || {};
-    formData = (<any>Object).assign(formData, this.form.value);
+    formData = (Object as any).assign(formData, this.form.value);
     this.dialogRef.close(formData);
 
     if (!this.form.valid) {
@@ -221,4 +232,3 @@ export class KeyPersonnelDialogComponent {
   }
 
 }
-

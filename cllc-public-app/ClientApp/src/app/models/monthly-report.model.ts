@@ -1,9 +1,9 @@
-import { InventorySalesReport } from './inventory-sales-report.model';
+import { InventorySalesReport } from "./inventory-sales-report.model";
 
 export enum monthlyReportStatus {
-    Draft = 1,
-    Submitted = 845280001,
-    Closed = 845280002
+  Draft = 1,
+  Submitted = 845280001,
+  Closed = 845280002
 }
 
 export class MonthlyReport {

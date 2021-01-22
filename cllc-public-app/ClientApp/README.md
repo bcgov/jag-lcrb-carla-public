@@ -1,14 +1,22 @@
-# lclb_public_app
+# cllc_public_app
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
-- Npm version - 5.6.0
-- Node version - 8.1.1.3
-- Angular version - 5.2.11
+- Npm version - 6.13.4
+- Node version - 10.19.0
+- Angular version - 10.2.0
 
-## Installing prerequisite
+## Increasing Build Memory
+You may have to set the environment variable NODE_OPTIONS as follows to increase build memory:
+`NODE_OPTIONS=--max_old_space_size=16384`
+
+## Installing prerequisites
 
 Run `npm install` in `jag-lcrb-carla-public\cllc-public-app\ClientApp`. To reinstall, delete the `node_modules` directory and re-run `npm install`.
+
+## Cleanup
+
+Run `tslint --config tslint-imports.json --fix --project .`
 
 ## Development server
 
@@ -220,3 +228,4 @@ For information on the Bootstrap grid system [see](https://getbootstrap.com/docs
 ## Debugging in Chrome
 
 For information about debugging in chrome vist the [chrome-devtools documentation](https://developers.google.com/web/tools/chrome-devtools/javascript/).
+

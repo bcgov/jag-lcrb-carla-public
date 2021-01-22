@@ -1,7 +1,7 @@
 
-import { LicenseType } from './license-type.model';
-import { ApplicationContentType } from './application-content-type.model';
-import { DynamicsForm } from './dynamics-form.model';
+import { LicenseType } from "./license-type.model";
+import { ApplicationContentType } from "./application-content-type.model";
+import { DynamicsForm } from "./dynamics-form.model";
 
 export class ApplicationType {
   id: string;
@@ -61,37 +61,38 @@ export class ApplicationType {
 }
 
 export enum FormControlState {
-  Show = 'Yes',
-  Hide = 'No',
-  ReadOnly = 'Readonly'
+  Show = "Yes",
+  Hide = "No",
+  ReadOnly = "Readonly"
 }
 
 export enum ApplicationTypeNames {
-  Catering = 'Catering',
-  CRSEstablishmentNameChange = 'CRS Establishment Name Change',
-  CRSLocationChange = 'CRS Location Change',
-  CRSRenewal = 'CRS Renewal',
-  CRSRenewalLate30 = 'CRS Late Renewal - 30 Day',
-  CRSRenewalLate6Months = 'CRS Late Renewal - 30 Day to 6 Months',
-  CRSStructuralChange = 'CRS Structural Change',
-  CRSTransferofOwnership = 'CRS Transfer of Ownership',
-  CannabisRetailStore = 'Cannabis Retail Store',
-  FP = 'Food Primary',
-  FPRelo = 'Food Primary Relocation',
-  LicenseeChanges = 'Licensee Changes',
-  LP = 'Liquor Primary',
-  Marketer = 'Marketing',
-  MarketingRenewal = 'Marketing Renewal',
-  LGINClaim = 'LG/IN Claim',
-  LRSTransferofLocation = 'LRS Transfer of Location',
-  LiquorRenewal = 'Liquor Licence Renewal',
-  LiquorLicenceTransfer = 'Liquor Licence Transfer',
-  PermanentChangeToALicensee = 'Permanent Change to a Licensee',
-  WineStore = 'Wine Store',
-  RAS = 'Rural Agency Store',
-  MFG = 'Manufacturer',
-  UBV = 'UBrew and UVin',
-  LoungeAreaEndorsment = 'Lounge Area Endorsement',
-  SpecialEventAreaEndorsement = 'Special Event Area Endorsement',
-  LRSStructuralChange = 'LRS Structural Change',
+  Catering = "Catering",
+  CRSEstablishmentNameChange = "CRS Establishment Name Change",
+  CRSLocationChange = "CRS Location Change",
+  CRSRenewal = "CRS Renewal",
+  CRSRenewalLate30 = "CRS Late Renewal - 30 Day",
+  CRSRenewalLate6Months = "CRS Late Renewal - 30 Day to 6 Months",
+  CRSStructuralChange = "CRS Structural Change",
+  CRSTransferofOwnership = "CRS Transfer of Ownership",
+  CannabisRetailStore = "Cannabis Retail Store",
+  FP = "Food Primary",
+  FPRelo = "Food Primary Relocation",
+  LicenseeChanges = "Licensee Changes",
+  LP = "Liquor Primary",
+  Marketer = "Marketing",
+  MarketingRenewal = "Marketing Renewal",
+  LGINClaim = "LG/IN Claim",
+  LRSTransferofLocation = "LRS Transfer of Location",
+  LiquorRenewal = "Liquor Licence Renewal",
+  LiquorLicenceTransfer = "Liquor Licence Transfer",
+  PermanentChangeToALicensee = "Permanent Change to a Licensee",
+  WineStore = "Wine Store",
+  RAS = "Rural Agency Store",
+  MFG = "Manufacturer",
+  UBV = "UBrew and UVin",
+  LoungeAreaEndorsment = "Lounge Area Endorsement",
+  SpecialEventAreaEndorsement = "Special Event Area Endorsement",
+  LRSStructuralChange = "LRS Structural Change",
+  RequestTermChange = "Non-Default T&C Change Application",
 }

@@ -177,7 +177,7 @@ namespace bdd_tests
             FileUpload("licensee_rep_notification.pdf", "(//input[@type='file'])[5]");
 
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.XPath("(//input[@type='checkbox'])[3]"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
         }
 

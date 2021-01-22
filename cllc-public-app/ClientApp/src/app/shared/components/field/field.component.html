@@ -1,5 +1,8 @@
 <section class="app-field">
-  <span *ngIf="leadingText">{{leadingText}} <p></p> </span>
+  <span *ngIf="leadingText">
+    {{leadingText}}
+    <p></p>
+  </span>
   <label *ngIf="label">{{label}} <span *ngIf="required" class="error-states">*</span></label>
 
   <i *ngIf="afterLabelText">
@@ -7,7 +10,7 @@
     {{afterLabelText}}
   </i>
 
-  <div style="display: flex; align-items: center;">
+  <div style="align-items: center; display: flex;">
     <section [ngClass]="{'fullWidth': isFullWidth}">
       <ng-content></ng-content>
     </section>

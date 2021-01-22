@@ -11,13 +11,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+			"sourceMap": true,		  
+   		    "optimization": false,
+			"outputHashing": "none",
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "progress": false,
+            "progress": true,
             "polyfills": "src/polyfills.ts",
-            "aot": false,
             "assets": [
               "src/assets"
             ],
@@ -35,6 +37,11 @@
             "production": {
               "budgets": [
                 {
+                  "type": "initial",
+                  "maximumWarning": "12mb",
+                  "maximumError": "13mb"
+                },
+                {
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
@@ -42,11 +49,11 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
+			  "commonChunk": true,
               "buildOptimizer": true,
               "fileReplacements": [
                 {
@@ -54,7 +61,25 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ]
-            }
+            },
+			"development": {                        
+                        "sourceMap": true,
+                        "namedChunks": false,
+						"showCircularDependencies": false,
+                        "aot": true,
+                        "extractLicenses": false,
+						"statsJson": false,
+                        "vendorChunk": true,
+						"commonChunk": false,
+                        "buildOptimizer": false,
+                        "budgets": [
+                            {
+                                "type": "initial",
+                                "maximumWarning": "12mb",
+                                "maximumError": "13mb"
+                            }
+                        ]
+			}
           }
         },
         "serve": {

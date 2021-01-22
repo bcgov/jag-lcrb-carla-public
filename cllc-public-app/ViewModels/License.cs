@@ -36,6 +36,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public List<Endorsement> Endorsements { get; set; }
         public List<string> TermsAndConditions { get; set; }
         public List<OffsiteStorage> OffsiteStorageLocations { get; set; }
+        public List<CapacityArea> ServiceAreas { get; set; }
 
         public string RepresentativeFullName { get; set; }
         public string RepresentativePhoneNumber { get; set; }

@@ -1,5 +1,5 @@
 <mat-card class="mat-elevation-z0">
-  <div class="container" style="margin-left:0px;">
+  <div class="container" style="margin-left: 0px;">
     <!-- <div [ngBusy]="busy" ></div> -->
     <div *ngIf="isApproved">
       <div>
@@ -8,9 +8,9 @@
           <fa-icon [icon]="faPrint" class="fa-lg"></fa-icon>
           <a href="javascript: void(0)"> Print Page</a>
         </span>
-        <h1 style="color:green">Payment Approved</h1>
+        <h1 style="color: green">Payment Approved</h1>
         <p></p>
-        <div class="table" style="padding:0px;">
+        <div class="table" style="padding: 0px;">
           <table>
             <tr>
               <td>Card Type</td>
@@ -70,17 +70,18 @@
     </div>
 
     <div *ngIf="!isApproved && loaded">
-      <br />
+      <br/>
       <div class="error">
         <strong>{{paymentTransactionTitle}}</strong>
-        <br />
-        <br />
+        <br/>
+        <br/>
         <div [innerHTML]="paymentTransactionMessage"></div>
       </div>
     </div>
-    <div *ngIf="loaded" style="padding-top:20px">
-      <p><a class="" routerLink="/dashboard">
-          <fa-icon [icon]="faAngleDoubleLeft" class="fa-lg" style="margin-right:5px" aria-hidden="true"></fa-icon>Return to Dashboard
+    <div *ngIf="loaded" style="padding-top: 20px">
+      <p>
+        <a class="" routerLink="/dashboard">
+          <fa-icon [icon]="faAngleDoubleLeft" class="fa-lg" style="margin-right: 5px" aria-hidden="true"></fa-icon>Return to Dashboard
         </a>
       </p>
     </div>

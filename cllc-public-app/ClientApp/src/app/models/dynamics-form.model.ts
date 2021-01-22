@@ -1,5 +1,6 @@
 import { DynamicsFormTab } from "./dynamics-form-tab.model";
 import { DynamicsFormSection } from "./dynamics-form-section.model";
+
 export class DynamicsForm {
   id: string;
   name: string;
@@ -7,5 +8,6 @@ export class DynamicsForm {
   entity: string;
   tabs: DynamicsFormTab[];
   sections: DynamicsFormSection[];
-  constructor() { }
+
+  constructor() {}
 }

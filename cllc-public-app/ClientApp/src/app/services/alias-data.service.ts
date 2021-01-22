@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { Alias } from '@models/alias.model';
-import { Observable ,  of } from 'rxjs';
-import { DataService } from './data.service';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
+import { Alias } from "@models/alias.model";
+import { Observable } from "rxjs";
+import { DataService } from "./data.service";
 
 @Injectable()
 export class AliasDataService extends DataService {
 
   constructor(private http: HttpClient) {
     super();
-   }
+  }
 
   /**
    * Get legal entities from Dynamics filtered by position
@@ -27,7 +27,7 @@ export class AliasDataService extends DataService {
    * @param data - alias data
    */
   createAlias(data: Alias) {
-    return this.http.post<Alias>('api/alias/', data, { headers: this.headers })
+    return this.http.post<Alias>("api/alias/", data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

@@ -43,9 +43,11 @@ namespace bdd_tests
             string areaDescription = "Sample area description";
             string occupantLoad = "180";
 
+            /*
             // select 'Yes' for patio
             NgWebElement uiPatioYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-2"));
             uiPatioYes.Click();
+            */
 
             // enter patio composition description
             NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
@@ -72,15 +74,15 @@ namespace bdd_tests
             uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
             // click Fixed option
-            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-25-button"));
             uiFixedOption.Click();
 
             // click Portable option
-            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
+            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-26-button"));
             uiPortableOption.Click();
 
             // click Interior option
-            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
+            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-27-button"));
             uiInteriorOption.Click();
 
             // upload floor plan

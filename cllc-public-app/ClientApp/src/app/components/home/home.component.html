@@ -1,223 +1,227 @@
 <div style="position: relative;">
-  <div [ngBusy]="busy"></div>
-  <div class="home-header-wrapper">
-    <div class="home-margins">
-      <div class="row">
-        <div class="col-md-8 col-sm-12">
-          <div class="jumbotron">
-            <h2>
-              Apply for a liquor or cannabis licence
+<div [ngBusy]="busy"></div>
+<div class="home-header-wrapper">
+  <div class="home-margins">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <div class="jumbotron">
+          <h2>
+            Apply for a liquor or cannabis licence
 
 
-            </h2>
-            <p>You must have a Business BCeID to log into the online licensing portal.</p>
-            <p>Through the Liquor and Cannabis Licensing Portal you can</p>
-            <ul>
-              <li>Apply for new liquor and non-medical cannabis licences;</li>
-              <li>Renew existing licences and apply for changes or endorsements to your licence;</li>
-              <li>Pay application, renewal and other fees online;</li>
-              <li>Manage your account and contact information; and</li>
-              <li>Submit permanent licensee changes and personal history summary forms;</li>
+          </h2>
+          <p>You must have a Business BCeID to log into the online licensing portal.</p>
+          <p>Through the Liquor and Cannabis Licensing Portal you can</p>
+          <ul>
+            <li>Apply for new liquor and non-medical cannabis licences;</li>
+            <li>Renew existing licences and apply for changes or endorsements to your licence;</li>
+            <li>Pay application, renewal and other fees online;</li>
+            <li>Manage your account and contact information; and</li>
+            <li>Submit permanent licensee changes and personal history summary forms;</li>
           </ul>
           <div class="warning" style="display: block;">
-          <h3 style="color:#494949;">Learn more about liquor and cannabis regulation including:</h3>
-          <ul>
-            <li>Information about liquor and cannabis licences</li>
-            <li>Liquor and cannabis law and policy</li>
-            <li>Compliance and enforcement procedures</li>
-            <li>Role of local governments and Indigenous Nations</li>
-            <li>Cannabis licensing, location requirements, application processes and worker information</li>
-          </ul>
+            <h3 style="color: #494949;">Learn more about liquor and cannabis regulation including:</h3>
+            <ul>
+              <li>Information about liquor and cannabis licences</li>
+              <li>Liquor and cannabis law and policy</li>
+              <li>Compliance and enforcement procedures</li>
+              <li>Role of local governments and Indigenous Nations</li>
+              <li>Cannabis licensing, location requirements, application processes and worker information</li>
+            </ul>
 
-            <button style="margin-bottom: 10px; color:#494949;" class="btn btn-secondary"
-            (click)="window.location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing'" tabindex="3">
-            <strong>LEARN MORE</strong>
-            <br>
+            <button style="color: #494949; margin-bottom: 10px;" class="btn btn-secondary"
+                    (click)="window.location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing'" tabindex="3">
+              <strong>LEARN MORE</strong>
+              <br>
             </button>
 
           </div>
 
-            <p><strong>Due to the increase in demand related to the COVID-19 pandemic, please expect delays in the standard processing time for all licensing applications.</strong></p>
-            <div class="warning">
-              <div><fa-icon [icon]="faExclamationCircle"></fa-icon>
-              </div>
-              <div>
-                <p>We are aware of a login issue impacting certain versions of Google Chrome.</p>
-                <p>If you encounter a warning message that says "Your connection is not fully secure" try using a different browser like <a href="https://www.mozilla.org/en-CA/firefox/new/">Mozilla Firefox</a>, or update your version of Chrome.</p>
-              </div>
+          <p>
+            <strong>Due to the increase in demand related to the COVID-19 pandemic, please expect delays in the standard processing time for all licensing applications.</strong>
+          </p>
+          <div class="warning">
+            <div>
+              <fa-icon [icon]="faExclamationCircle"></fa-icon>
             </div>
-            <div class="text-left" appRemoveIfFeatureOff="DisableLogin">
-              <button style="margin-bottom: 10px;" class="btn btn-primary"
-                      (click)="window.location.href='https://www.bceid.ca/register/'" tabindex="3">
-                <strong>REGISTER FOR A BUSINESS BCeID</strong>
-                <br>
-              </button>
-              <span style="padding: 10px;"></span>
-              <p>
-                <strong>
-                  The Liquor and Cannabis Licensing portal is closed for maintenance.  During this time, you will not be able to log in to the site.
-                </strong>
-              </p>
-              <p>
-                <strong>
-                  We apologize for any inconvenience.
-                </strong>
+            <div>
+              <p>We are aware of a login issue impacting certain versions of Google Chrome.</p>
+              <p>If you encounter a warning message that says "Your connection is not fully secure" try using a different browser like <a href="https://www.mozilla.org/en-CA/firefox/new/">Mozilla Firefox</a>, or update your version of Chrome.</p>
+            </div>
+          </div>
+          <div class="text-left" appRemoveIfFeatureOff="DisableLogin">
+            <button style="margin-bottom: 10px;" class="btn btn-primary"
+                    (click)="window.location.href='https://www.bceid.ca/register/'" tabindex="3">
+              <strong>REGISTER FOR A BUSINESS BCeID</strong>
+              <br>
+            </button>
+            <span style="padding: 10px;"></span>
+            <p>
+              <strong>
+                The Liquor and Cannabis Licensing portal is closed for maintenance. During this time, you will not be able to log in to the site.
+              </strong>
+            </p>
+            <p>
+              <strong>
+                We apologize for any inconvenience.
+              </strong>
+            </p>
+          </div>
+          <div class="text-left" appRemoveIfFeatureOn="DisableLogin">
+            <button style="margin-bottom: 10px;" class="btn btn-primary"
+                    (click)="window.location.href='https://www.bceid.ca/register/'" tabindex="3">
+              <strong>REGISTER FOR A BUSINESS BCeID</strong>
+              <br>
+            </button>
+            <span style="padding: 10px;">OR</span>
+            <button style="margin-bottom: 10px;" class="btn btn-primary" (click)="window.location.href='login'"
+                    tabindex="3">
+              <strong>LOG IN</strong>
+              <br>
+            </button>
+          </div>
+
+        </div>
+      </div>
+      <div appRemoveIfFeatureOff="CovidApplication" style="padding-left: 0px;" class="col-md-4 col-sm-12">
+        <div class="side-box-wrapper" appRemoveIfFeatureOn="DisableLogin">
+          <section class="side-box">
+            <section style="display: flex">
+              <table>
+                <tr>
+                  <td>
+                    <button mat-fab class="fab-button mat-elevation-z0">
+                      <mat-icon class="icon" aria-label="Liquor Content">description</mat-icon>
+                    </button>
+                  </td>
+                  <td>
+                    <h2 style="margin: 0px;">Temporary Expansion of Service Area authorization</h2>
+                    <p style="font-size: small;">
+                      In response to the public health emergency related to COVID-19, and to help businesses
+                      safely operate while respecting the Provincial Health
+                      Officer’s order and physical distancing guidelines, the LCRB is accepting applications for food primary, liquor
+                      primary, and manufacturer
+                      licensees to temporarily expand their service areas until October 31, 2021.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </section>
+            <p style="padding-top: 30px;">
+              <span>
+
+              </span>
+            </p>
+            <div style="display: flex; justify-content: flex-end">
+
+              <button onclick="location.href = 'covid-temporary-extension';" type="button" class="btn btn-primary" tabindex="3">Apply Here</button>
+
+            </div>
+          </section>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="home-margins">
+  <div class="row">
+    <!--div class="col-md-8 col-sm-12">
+    <div class="home-body">
+      <app-accordion></app-accordion>
+    </div>
+    </div-->
+
+    <div style="padding-left: 0px;" class="col-md-4 col-sm-12">
+
+      <!--div class="side-box-wrapper">
+
+      <section class="side-box">
+        <section style="display: flex">
+          <table>
+            <tr>
+              <td>
+                <button mat-fab class="fab-button mat-elevation-z0">
+                  <mat-icon class="icon" aria-label="Liquor Content">description</mat-icon>
+                </button>
+              </td>
+              <td>
+                <h2 style="margin: 0px;">Learn About Liquor Licences</h2>
+                <p>Information about all liquor licences is available on the LCRB content portal.
                 </p>
-            </div>
-            <div class="text-left" appRemoveIfFeatureOn="DisableLogin">
-              <button style="margin-bottom: 10px;" class="btn btn-primary"
-                      (click)="window.location.href='https://www.bceid.ca/register/'" tabindex="3">
-                <strong>REGISTER FOR A BUSINESS BCeID</strong>
-                <br>
-              </button>
-              <span style="padding: 10px;">OR</span>
-              <button style="margin-bottom: 10px;" class="btn btn-primary" (click)="window.location.href='login'"
-                      tabindex="3">
-                <strong>LOG IN</strong>
-                <br>
-              </button>
-            </div>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <p style="padding-top: 30px;">
+          <span>
 
-          </div>
+          </span>
+        </p>
+        <div style="display: flex; justify-content: flex-end">
+
+          <button onclick="location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing'" type="button" class="btn btn-primary" tabindex="3" >LCRB Content Portal</button>
+
         </div>
-        <div appRemoveIfFeatureOff="CovidApplication" style="padding-left: 0px;" class="col-md-4 col-sm-12">
-          <div class="side-box-wrapper" appRemoveIfFeatureOn="DisableLogin">
-            <section class="side-box">
-              <section style="display: flex">
-                <table>
-                  <tr>
-                    <td>
-                      <button mat-fab class="fab-button mat-elevation-z0">
-                        <mat-icon class="icon" aria-label="Liquor Content">description</mat-icon>
-                      </button>
-                    </td>
-                    <td>
-                      <h2 style="margin: 0px;">Temporary Expansion of Service Area authorization</h2>
-                      <p style="font-size: small;">In response to the public health emergency related to COVID-19, and to help businesses
-                        safely operate while respecting the Provincial Health
-                        Officer’s order and physical distancing guidelines, the LCRB is accepting applications for food primary, liquor
-                        primary, and manufacturer
-                        licensees to temporarily expand their service areas until October 31, 2021.
-                      </p>
-                      </td>
-                  </tr>
-                </table>
-              </section>
-              <p style="padding-top: 30px;" >
-                <span>
+      </section>
 
-                </span>
-              </p>
-              <div style="display: flex; justify-content: flex-end">
-
-                  <button onclick="location.href='covid-temporary-extension';" type="button" class="btn btn-primary" tabindex="3" >Apply Here</button>
-
-              </div>
-            </section>
-
-
-          </div>
+      <section class="side-box">
+        <app-newsletter-signup slug="signupForUpdates"></app-newsletter-signup>
+      </section>
+      <section class="side-box">
+        <section style="display: flex">
+          <table>
+            <tr>
+              <td>
+                <button mat-fab class="fab-button mat-elevation-z0">
+                  <mat-icon class="icon" aria-label="map icon">map</mat-icon>
+                </button>
+              </td>
+              <td>
+                <h2 style="margin: 0px;">Map of Cannabis Stores</h2>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <p style="padding-top: 30px;">
+          <span>
+            Use the interactive map to find cannabis retail stores in British Columbia.
+          </span>
+        </p>
+        <div style="display: flex; justify-content: flex-end">
+          <button class="btn btn-primary" routerLink="/map" tabindex="3">See Map
+          </button>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="home-margins">
-    <div class="row">
-      <!--div class="col-md-8 col-sm-12">
-        <div class="home-body">
-          <app-accordion></app-accordion>
+      </section>
+      <section class="side-box">
+        <section style="display: flex">
+          <table>
+            <tr>
+              <td>
+                <button mat-fab class="fab-button mat-elevation-z0">
+                  <mat-icon class="icon" aria-label="description icon">description</mat-icon>
+                </button>
+              </td>
+              <td>
+                <h2 style="margin: 0px;">Application Statistics</h2>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <p style="padding-top: 30px;">
+          <span>
+            The number of applications received and where they are in the process. Updated weekly.
+          </span>
+        </p>
+        <div style="display: flex; justify-content: flex-end">
+          <button class="btn btn-primary" routerLink="/policy-document/application-stats" tabindex="3">See
+            Application Statistics
+          </button>
         </div>
+      </section>
       </div-->
-
-      <div style="padding-left:0px;" class="col-md-4 col-sm-12">
-
-        <!--div class="side-box-wrapper">
-
-            <section class="side-box">
-              <section style="display: flex">
-                <table>
-                  <tr>
-                    <td>
-                      <button mat-fab class="fab-button mat-elevation-z0">
-                        <mat-icon class="icon" aria-label="Liquor Content">description</mat-icon>
-                      </button>
-                    </td>
-                    <td>
-                      <h2 style="margin: 0px;">Learn About Liquor Licences</h2>
-                      <p>Information about all liquor licences is available on the LCRB content portal.
-                      </p>
-                    </td>
-                  </tr>
-                </table>
-              </section>
-              <p style="padding-top: 30px;">
-                <span>
-
-                </span>
-              </p>
-              <div style="display: flex; justify-content: flex-end">
-
-                  <button onclick="location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing'" type="button" class="btn btn-primary" tabindex="3" >LCRB Content Portal</button>
-
-              </div>
-             </section>
-
-          <section class="side-box">
-            <app-newsletter-signup slug="signupForUpdates"></app-newsletter-signup>
-          </section>
-          <section class="side-box">
-            <section style="display: flex">
-              <table>
-                <tr>
-                  <td>
-                    <button mat-fab class="fab-button mat-elevation-z0">
-                      <mat-icon class="icon" aria-label="map icon">map</mat-icon>
-                    </button>
-                  </td>
-                  <td>
-                    <h2 style="margin: 0px;">Map of Cannabis Stores</h2>
-                  </td>
-                </tr>
-              </table>
-            </section>
-            <p style="padding-top: 30px;">
-              <span>
-                Use the interactive map to find cannabis retail stores in British Columbia.
-              </span>
-            </p>
-            <div style="display: flex; justify-content: flex-end">
-              <button class="btn btn-primary" routerLink="/map" tabindex="3">See Map
-              </button>
-            </div>
-          </section>
-          <section class="side-box">
-            <section style="display: flex">
-              <table>
-                <tr>
-                  <td>
-                    <button mat-fab class="fab-button mat-elevation-z0">
-                      <mat-icon class="icon" aria-label="description icon">description</mat-icon>
-                    </button>
-                  </td>
-                  <td>
-                    <h2 style="margin: 0px;">Application Statistics</h2>
-                  </td>
-                </tr>
-              </table>
-            </section>
-            <p style="padding-top: 30px;">
-              <span>
-                The number of applications received and where they are in the process. Updated weekly.
-              </span>
-            </p>
-            <div style="display: flex; justify-content: flex-end">
-              <button class="btn btn-primary" routerLink="/policy-document/application-stats" tabindex="3">See
-                Application Statistics
-              </button>
-            </div>
-          </section>
-        </div-->
-      </div>
     </div>
   </div>
+</div>
 </div>

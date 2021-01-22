@@ -1,382 +1,407 @@
 <div class="form-wrapper" style="position: relative" appRemoveIfFeatureOn="DisableLogin">
-    <div [ngBusy]="busy"></div>
+<div [ngBusy]="busy"></div>
 
-    <div>
-        <div [formGroup]="form" style=" position: relative">
-            <!-- Title -->
-            <h1 class="ngtest-page-title">Covid Temporary Extension Application</h1>
-        </div>
+<div>
+<div [formGroup]="form" style="position: relative">
+  <!-- Title -->
+  <h1 class="ngtest-page-title">Covid Temporary Extension Application</h1>
+</div>
 
-        <div [formGroup]="form">
-            <!-- Preamble -->
-            <section class="d-flex">
-            <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
-            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-            <section class="ngtest-preamble-content">
-                <p>To support B.C.’s licensed establishments in safely reopening for business while respecting the physical distancing guidelines outlined by the Provincial Health Officer (PHO) orders, this new authorization permits food primary, liquor primary and manufacturer licensees (i.e., wineries, breweries, distilleries) to temporarily expand their service areas until <strong>October 31, 2021</strong>.</p>
+<div [formGroup]="form">
+<!-- Preamble -->
+<section class="d-flex">
+  <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+  <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+    <section class="ngtest-preamble-content">
+      <p>To support B.C.’s licensed establishments in safely reopening for business while respecting the physical distancing guidelines outlined by the Provincial Health Officer (PHO) orders, this new authorization permits food primary, liquor primary and manufacturer licensees (i.e., wineries, breweries, distilleries) to temporarily expand their service areas until <strong>October 31, 2021</strong>.</p>
 
-                <p>This authorization is subject to any restrictions within the Liquor Control and Licensing Act, Regulations, branch policies and/or original terms and conditions of licensing. It is important to note that this authorization will permit expanded service areas only and will not expand overall occupancy.</p>
-                
-                <p>To prevent further financial strain for those licensees most impacted by the pandemic, there will be no fees associated with the temporary extension application.</p>
-                
-                <p>Local governments will have two options for approval of temporary expansion authorizations for liquor primary and manufacturer licences:</p>
-                    <ul style="font-size:larger">
-                        <li>Pre-approval to cover all liquor primary and manufacturer establishments within their jurisdiction who may apply for an expanded service area; or</li>
-                        <li>Review/approval of all individual applications of all liquor primary and manufacturer expansions prior to licensees submitting their completed application package to the LCRB.</li>
-                    </ul>
-                
-                <p>If a local government chooses to review all individual requests for liquor primary and manufacturer applications, the LCRB will require those licensees to provide written 
-                    approval from their local government with their application. Local government approval can be in the form of a letter or email and must include the following information:</p>
-                <ol style="font-size: larger;">
-                    <li>Establishment name</li>
-                    <li>Licence number</li>
-                    <li>Establishment address</li>
-                    <li>Local Government’s confirmation of “no objection”</li>
-                    <li>Permission to use publicly owned spaces, if applicable</li>
-                    <li>Comments, if any.</li>
-                </ol>
-                
-                <p><strong>Please get in touch with your local government to determine their approach prior to submitting your application.</strong></p>    
-                <p>Since food primary establishments are not generally required to obtain prior local government approval to expand their service areas, 
-                    the LCRB will continue to process food primary requests for expanded service areas without requiring local government approval. Food 
-                    primary licensees must ensure they abide by all local bylaws and acquire any necessary permits.</p>
-                <p>The LCRB will not require evidence from licensees ensuring they have appropriate permissions from local government (including the use of 
-                    publicly owned spaces like parking lots, sidewalks, etc.) if their local government has selected the blanket-approval option. It is the 
-                    responsibility of the licensee to ensure they abide by all local bylaws and acquire any necessary permits. However, all applicants will 
-                    be required to affirm through an online disclosure that they have met all local government requirements.</p> 
+      <p>This authorization is subject to any restrictions within the Liquor Control and Licensing Act, Regulations, branch policies and/or original terms and conditions of licensing. It is important to note that this authorization will permit expanded service areas only and will not expand overall occupancy.</p>
 
-                <p>Licensees who currently have a permanent structural change application under review by the LCRB may still submit a new application for a 
-                    temporary expansion authorization to allow for the adherence of social distancing requirements within their current occupancy limits.</p>
-                <p>To submit an application, please fill out the information in the form below.</p>
-                
-            </section>
-            </div>
-            </section>
+      <p>To prevent further financial strain for those licensees most impacted by the pandemic, there will be no fees associated with the temporary extension application.</p>
 
+      <p>Local governments will have two options for approval of temporary expansion authorizations for liquor primary and manufacturer licences:</p>
+      <ul style="font-size: larger">
+        <li>Pre-approval to cover all liquor primary and manufacturer establishments within their jurisdiction who may apply for an expanded service area; or</li>
+        <li>Review/approval of all individual applications of all liquor primary and manufacturer expansions prior to licensees submitting their completed application package to the LCRB.</li>
+      </ul>
 
-            <h3 class="blue-header">LICENCE INFORMATION</h3>
-            <section class="padded-section content-bottom">
+      <p>
+        If a local government chooses to review all individual requests for liquor primary and manufacturer applications, the LCRB will require those licensees to provide written
+        approval from their local government with their application. Local government approval can be in the form of a letter or email and must include the following information:
+      </p>
+      <ol style="font-size: larger;">
+        <li>Establishment name</li>
+        <li>Licence number</li>
+        <li>Establishment address</li>
+        <li>Local Government’s confirmation of “no objection”</li>
+        <li>Permission to use publicly owned spaces, if applicable</li>
+        <li>Comments, if any.</li>
+      </ol>
 
-                <app-field label="Licence Number" [valid]="isValidOrNotTouched('description1')"
-                    errorMessage="Licence Number is a required field and must contain 6 digits">
-                    <input class="form-control" type="text" formControlName="description1" mask="000000">
-                </app-field>
+      <p>
+        <strong>Please get in touch with your local government to determine their approach prior to submitting your application.</strong>
+      </p>
+      <p>
+        Since food primary establishments are not generally required to obtain prior local government approval to expand their service areas,
+        the LCRB will continue to process food primary requests for expanded service areas without requiring local government approval. Food
+        primary licensees must ensure they abide by all local bylaws and acquire any necessary permits.
+      </p>
+      <p>
+        The LCRB will not require evidence from licensees ensuring they have appropriate permissions from local government (including the use of
+        publicly owned spaces like parking lots, sidewalks, etc.) if their local government has selected the blanket-approval option. It is the
+        responsibility of the licensee to ensure they abide by all local bylaws and acquire any necessary permits. However, all applicants will
+        be required to affirm through an online disclosure that they have met all local government requirements.
+      </p>
 
-                <app-field label="Licence Type" [valid]="isValidOrNotTouched('licenceType')" [showChevrons]="false"
-                    errorMessage="Licence Type is a required field" [isFullWidth]="true">
-                    <mat-radio-group formControlName="licenceType">
-                        <mat-radio-button class="mr-5" value="Food Primary">Food Primary</mat-radio-button>
-                        <mat-radio-button class="mr-5" value="Liquor Primary">Liquor Primary</mat-radio-button>
-                        <mat-radio-button class="mr-5" value="Liquor Primary Club">Liquor Primary Club</mat-radio-button>
-                        <mat-radio-button value="Manufacturer">Manufacturer</mat-radio-button>
-                    </mat-radio-group>
-                </app-field>
-                <hr>
+      <p>
+        Licensees who currently have a permanent structural change application under review by the LCRB may still submit a new application for a
+        temporary expansion authorization to allow for the adherence of social distancing requirements within their current occupancy limits.
+      </p>
+      <p>To submit an application, please fill out the information in the form below.</p>
 
-                <app-field label="Establishment Name (as shown on licence)"
-                    [valid]="isValidOrNotTouched('establishmentName')"
-                    errorMessage="Establishment Name is a required field">
-                    <input class="form-control" style="width: 500px;" type="text" formControlName="establishmentName">
-                </app-field>
+    </section>
+  </div>
+</section>
 
 
-                <app-field [valid]="true">
-                    <label class="pr-5 m-0">Establishment address</label>
+<h3 class="blue-header">LICENCE INFORMATION</h3>
+<section class="padded-section content-bottom">
 
-                    <div class="row">
-                        <app-field class="col-md-4" [valid]="isValidOrNotTouched('establishmentAddressStreet')"
-                            errorMessage="Establishment  Address Street is a required field">
-                            <input class="form-control" style="width: 500px;" type="text" placeholder="Street"
-                                formControlName="establishmentAddressStreet">
-                        </app-field>
+  <app-field label="Licence Number" [valid]="isValidOrNotTouched('description1')"
+             errorMessage="Licence Number is a required field and must contain 6 digits">
+    <input class="form-control" type="text" formControlName="description1" mask="000000">
+  </app-field>
 
-                        <app-field class="col-md-4" [valid]="isValidOrNotTouched('establishmentAddressCity')"
-                            errorMessage="Establishment  Address City is a required field">
-                            <input class="form-control" style="width: 500px;" type="text" placeholder="City"
-                                formControlName="establishmentAddressCity">
-                        </app-field>
+  <app-field label="Licence Type" [valid]="isValidOrNotTouched('licenceType')" [showChevrons]="false"
+             errorMessage="Licence Type is a required field" [isFullWidth]="true">
+    <mat-radio-group formControlName="licenceType">
+      <mat-radio-button class="mr-5" value="Food Primary">Food Primary</mat-radio-button>
+      <mat-radio-button class="mr-5" value="Liquor Primary">Liquor Primary</mat-radio-button>
+      <mat-radio-button class="mr-5" value="Liquor Primary Club">Liquor Primary Club</mat-radio-button>
+      <mat-radio-button value="Manufacturer">Manufacturer</mat-radio-button>
+    </mat-radio-group>
+  </app-field>
+  <hr>
 
-                        <app-field class="col-md-4" [valid]="isValidOrNotTouched('establishmentAddressPostalCode')"
-                            errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)">
-                            <input class="form-control" type="text" mask="A0A0A0" placeholder="Postal Code"
-                                formControlName="establishmentAddressPostalCode">
-                        </app-field>
-                    </div>
-                </app-field>
-                <hr>
-
-                <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?" [valid]="isValidOrNotTouched('proposedEstablishmentIsAlr')" [showChevrons]="false"
-                errorMessage="Specify ALR status" [isFullWidth]="true">
-                <mat-radio-group formControlName="proposedEstablishmentIsAlr">
-                    <mat-radio-button class="mr-5" value="true">Yes</mat-radio-button>
-                    <mat-radio-button class="mr-5" value="false">No</mat-radio-button>
-                </mat-radio-group>
-                </app-field>
-                <div *ngIf="this.form.get('proposedEstablishmentIsAlr').value == 'Yes'">
-                    <div class="flex-grow-0" style="width: 50px; background-color: #FFB2B2;"></div>
-                    <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
-                        <p><strong>Please note that the <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agricultural Land Reserve (ALR) Use Regulation</a> permits a food and beverage service lounge if the area is no more than 125 m<sup>2</sup> indoors and 125 m<sup>2</sup> outdoors.</strong></p>
-                        <p><strong>By submitting this application to LCRB, you are confirming that your areas will not exceed the size restrictions set in the ALR Use Regulation or your specific approval from the Commission.</strong></p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <app-field label="Licensee Name (as shown on licence)" [valid]="isValidOrNotTouched('nameOfApplicant')"
-                errorMessage="Licensee Name is a required field">
-                <input class="form-control" style="width: 500px;" type="text" formControlName="nameOfApplicant">
-                </app-field>
-
-                <app-field label="Contact First Name" [valid]="isValidOrNotTouched('contactPersonFirstName')"
-                    errorMessage="Contact First Name is a required field">
-                    <input class="form-control" style="width: 500px;" type="text"
-                        formControlName="contactPersonFirstName">
-                </app-field>
-
-                <app-field label="Contact Last Name" [valid]="isValidOrNotTouched('contactPersonLastName')"
-                    errorMessage="Contact Last Name is a required field">
-                    <input class="form-control" style="width: 500px;" type="text"
-                        formControlName="contactPersonLastName">
-                </app-field>
-
-                <app-field label="Title/Position" [valid]="isValidOrNotTouched('contactPersonRole')"
-                    errorMessage="Title/Position is a required field">
-                    <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonRole">
-                </app-field>
-
-                <app-field label="Business Tel" [valid]="isValidOrNotTouched('contactPersonPhone')"
-                    errorMessage="Business Tel is a required field">
-                    <input class="form-control" mask="(000) 000-0000" type="text" formControlName="contactPersonPhone">
-                </app-field>
-
-                <app-field label="Contact Email (authorizations will be sent to this address)" [valid]="isValidOrNotTouched('contactPersonEmail')"
-                    errorMessage="Business Email is a required field">
-                    <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonEmail">
-                </app-field>
-
-       
-
-                <app-field [valid]="true">
-                    <section style="display: flex; align-items: center;">
-                        <label class="pr-5 m-0">Mailing address</label>
-                        <mat-checkbox formControlName="sameAddresses">
-                            <div class="pl-2">
-                                Same as above
-                            </div>
-                        </mat-checkbox>
-                    </section>
-                    <div class="row">
-                        <app-field class="col-md-4" [valid]="isValidOrNotTouched('addressStreet')"
-                            errorMessage="Establishment Mailing Address Street is a required field">
-                            <input class="form-control" style="width: 500px;" type="text" placeholder="Street"
-                                formControlName="addressStreet">
-                        </app-field>
-
-                        <app-field class="col-md-4" [valid]="isValidOrNotTouched('addressCity')"
-                            errorMessage="Establishment Mailing Address City is a required field">
-                            <input class="form-control" style="width: 500px;" type="text" placeholder="City"
-                                formControlName="addressCity">
-                        </app-field>
-
-                        <app-field class="col-md-4" [valid]="isValidOrNotTouched('addressPostalCode')"
-                            errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)">
-                            <input class="form-control" type="text" placeholder="Postal Code"
-                                formControlName="addressPostalCode">
-                        </app-field>
-                    </div>
-                </app-field>
-            </section>
-
-            <h3 class="blue-header ngtest-declarations">
-                TEMPORARY EXTENSION OF LICENSED AREA
-            </h3>
-            <div class="padded-section content-bottom">
-                <p>Please upload documents that provide the following information:</p>
-                <ul style="font-size:larger;"><li>Provide a floor plan showing the proposed expanded service area. The floor plan may be hand drawn but must be legible and must clearly 
-                    identify the following details: how the perimeter is defined, dimensions, and its physical relationship to existing licensed areas.</li>
-                    <li>Identify the existing service area to be expanded (e.g. Person01, Lounge, Patio2, etc. as shown on your licence)</li>
-                </ul>
-           
-                <section style="text-align: center; color: lightblue">
-                  <app-delayed-file-uploader documentType="Floorplan" #floorplanDocuments id="floorplanDocuments"
-                                     [enableFileDeletion]="true"
-                                     [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
-                                     entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
-                                     (numberOfUploadedFiles)="uploadedFloorplanDocuments = $event" 
-                                     [uploadHeader]="'TO UPLOAD FLOOR PLAN, DRAG FILES HERE OR'">
-                  </app-delayed-file-uploader>
-                </section>
-                <app-field [valid]="isValidOrNotTouched('boundedStatus')" [showChevrons]="false"
-                    errorMessage="Please confirm that the attached floor plan shows how the expanded area will be bounded"
-                    [isFullWidth]="true" style="margin-left:10px;">
-                    <mat-checkbox formControlName="boundedStatus">
-                        I confirm that the attached floor plan shows how the perimeter of the expanded area will be bounded (e.g,
-                        fences, railings, ropes & stanchions, etc.).</mat-checkbox>
-                </app-field>
-            </div>
-
-            <h3 class="blue-header ngtest-declarations">
-                ADD, CHANGE OR REMOVE A LICENSEE REPRESENTATIVE NOTIFICATION FORM (OPTIONAL)
-            </h3>
-            <div class="padded-section content-bottom">
-                <p>
-                    In some cases, a licensee may wish to authorize a specific individual to take certain actions on the
-                    licensee's behalf and to legally bind the licensee in respect of those matters. For example:
-                </p>
-                <ul>
-                    <li>
-                        A licensee that is a company may wish to authorize an employee who is not a company director or
-                        officer.
-                    </li>
-                    <li>
-                        A partner in a partnership may wish to authorize a manager at the establishment who is not a
-                        partner.
-                    </li>
-                    <li>
-                        A society may wish to authorize an individual who is not a director or senior manager of the
-                        society.
-                    </li>
-                    <li>
-                        A licensee who is an individual person may wish to authorize someone else to make decisions and
-                        take actions in respect of specific liquor control and licensing matters.
-                    </li>
-                </ul>
-                <p>
-                    Download the form <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb101_add_change_or_remove_a_licensee_representative_form.pdf?bcgovtm=CSMLS" target="_blank">here</a>.
-                </p>
-
-                <section style="text-align: center; color: lightblue">
-                  <app-delayed-file-uploader documentType="LRN" #licenseeRepresentativeNotficationFormDocuments id="licenseeRepresentativeNotficationFormDocuments"
-                                             [enableFileDeletion]="true"
-                                             [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
-                                             entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
-                                             (numberOfUploadedFiles)="uploadedLicenseeRepresentativeNotficationFormDocuments = $event" 
-                                             [uploadHeader]="'TO UPLOAD LICENSEE REPRESENTATIVE NOTIFICATION FORM, DRAG FILES HERE OR'">
-                  </app-delayed-file-uploader>
-                </section>
-            </div>
-
-            <div *ngIf="lgInputRequired()">
-            <h3 class="blue-header ngtest-declarations">
-                LOCAL GOVERNMENT/FIRST NATION COMMENTS
-            </h3>
-            <div class="padded-section content-bottom">
- 
-                <!--app-field [valid]="!showValidationMessages || form.get('receivedLGPermission').valid"
-                    errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                    [showChevrons]="false">
-                    <section style="display: flex">
-                        <input type="checkbox" formControlName="receivedLGPermission">
-                        <span class="error-states">*</span>
-                        <div style="padding-left: 10px;">
-                            I have received permission from my Local Government.
-                        </div>
-                    </section>
-                </app-field-->
-
-                <app-field [valid]="isValidOrNotTouched('lgStatus')" [showChevrons]="false"
-                    errorMessage="Please identify your Local Goverment status" [isFullWidth]="true">
-                    <mat-radio-group formControlName="lgStatus">
-                        <mat-radio-button class="mr-5" value="option1">My Local Government or Indigenous Nation has given blanket permission/approval for all temporary extensions applications in their jurisdiction related to COVID-19.</mat-radio-button><br>
-                        <mat-radio-button class="mr-5" value="option2">My Local Government or Indigenous Nation wishes to review and approve each application individually. I have attached their approval below:</mat-radio-button>
-                    </mat-radio-group>
-                </app-field>
-
-                
-
-                <div *ngIf="lgConfirmationRequired()">
-                <section style="text-align: center; color: lightblue">
-                    <h4 style="text-align: left; font-weight:900;">Local Government or Indigenous Nation Approval:</h4>
-                    <app-delayed-file-uploader documentType="LGConfirmation" #lGConfirmation id="lGConfirmation"
-                                               [enableFileDeletion]="true"
-                                               [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="false"
-                                               entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
-                                               (numberOfUploadedFiles)="uploadedLGConfirmation = $event" 
-                                               [uploadHeader]="'TO UPLOAD LG/IN CONFIRMATION, DRAG FILE HERE OR'">
-                    </app-delayed-file-uploader>
-                  </section>
-                </div>
-
-            </div>
-            </div>
-
-            <h3 class="blue-header ngtest-declarations" style="margin-bottom: 0px;">
-                DECLARATIONS
-            </h3>
-
-                <section class="d-flex content-bottom" style="margin-top: 0px; padding:0px;">
-                    <div class="flex-grow-0" style="width: 50px; background-color: #E1E8F2;"></div>
-                    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-                    <section class="ngtest-preamble-content">
-                            <p>As the licensee or authorized signatory of the licensee, I hereby confirm that the 
-                                operation of the extended service area covered by this authorization will comply with 
-                                all applicable local government by-laws and regulations and that the local government 
-                                with jurisdiction respecting the licensee’s operations has provided the requisite 
-                                approval for the extended service area that is the subject to this authorization.</p>
- 
-                            <p>Where the extension area is on property not owned or controlled by the licensee, I 
-                                hereby confirm that the licensee has received written approval for such use of the 
-                                property from the property owner.</p>
-                                
-                            <p><strong>Section 57(1)(c)</strong> of the <strong>Liquor Control and Licensing Act</strong> states: <i>“A person commits an offence if the person (c) 
-                                provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when 
-                                making a report or when required and as specified by the general manager under section 59.</i>
-                            </p>
-
-                        <!--app-field [valid]="isValidOrNotTouched('signatureAgreemenmt')" [showChevrons]="false"
-                            errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                            [isFullWidth]="true" style="margin-left:10px;">
-                            <mat-checkbox formControlName="signatureAgreement">
-                                <span class="error-states">*</span>
-                                I confirm that the attached floor plan shows how the perimeter of the expanded area will be bounded (e.g,
-                                fences, railings, ropes & stanchions, etc.).</mat-checkbox>
-                        </app-field-->
+  <app-field label="Establishment Name (as shown on licence)"
+             [valid]="isValidOrNotTouched('establishmentName')"
+             errorMessage="Establishment Name is a required field">
+    <input class="form-control" style="width: 500px;" type="text" formControlName="establishmentName">
+  </app-field>
 
 
-                        <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-                            errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                            [showChevrons]="false">                            
-                            <mat-checkbox formControlName="signatureAgreement">
-                                <span class="error-states">*</span>
-                                <span class="ml-2">
-                                    As the licensee or authorized signatory of the licensee, I understand and affirm that all of
-                                    the information provided is true and complete.
-                                </span>
-                            </mat-checkbox>
-                        </app-field>
-                    </section>
-                    </div>
-                </section>
-            
+  <app-field [valid]="true">
+    <label class="pr-5 m-0">Establishment address</label>
 
-            <section class="error mt-3 p-3" *ngIf="!form.valid && form.touched">
-                <div *ngIf="!validationMessages?.length">
-                    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
-                    <span>Some required fields have not been completed</span>
-                </div>
-                <div *ngIf="validationMessages?.length">
-                    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
-                    <span>The following fields are not valid:</span>
-                </div>
-                <ul *ngFor="let message of validationMessages">
-                    <li class="app-cancel">
-                        {{message}}
-                    </li>
-                </ul>
-            </section>
+    <div class="row">
+      <app-field class="col-md-4" [valid]="isValidOrNotTouched('establishmentAddressStreet')"
+                 errorMessage="Establishment  Address Street is a required field">
+        <input class="form-control" style="width: 500px;" type="text" placeholder="Street"
+               formControlName="establishmentAddressStreet">
+      </app-field>
 
-            <section style="position: relative; margin-top: 20px;">
-                <button class="btn btn-primary" (click)="submitApplication()">
-                    <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
-                    SUBMIT APPLICATION</button>
-                <span style="float: right; color: #1a5a96; padding-top: 10px;">
-                    <a routerLink="/">
-                        <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
-                        Cancel Application
-                    </a>
-                </span>
-                <div [ngBusy]="busy"></div>
-            </section>
-        </div>
+      <app-field class="col-md-4" [valid]="isValidOrNotTouched('establishmentAddressCity')"
+                 errorMessage="Establishment  Address City is a required field">
+        <input class="form-control" style="width: 500px;" type="text" placeholder="City"
+               formControlName="establishmentAddressCity">
+      </app-field>
+
+      <app-field class="col-md-4" [valid]="isValidOrNotTouched('establishmentAddressPostalCode')"
+                 errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)">
+        <input class="form-control" type="text" mask="A0A0A0" placeholder="Postal Code"
+               formControlName="establishmentAddressPostalCode">
+      </app-field>
     </div>
+  </app-field>
+  <hr>
+
+  <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?" [valid]="isValidOrNotTouched('proposedEstablishmentIsAlr')" [showChevrons]="false"
+             errorMessage="Specify ALR status" [isFullWidth]="true">
+    <mat-radio-group formControlName="proposedEstablishmentIsAlr">
+      <mat-radio-button class="mr-5" value="true">Yes</mat-radio-button>
+      <mat-radio-button class="mr-5" value="false">No</mat-radio-button>
+    </mat-radio-group>
+  </app-field>
+  <div *ngIf="this.form.get('proposedEstablishmentIsAlr').value == 'Yes'">
+    <div class="flex-grow-0" style="background-color: #FFB2B2; width: 50px;"></div>
+    <div class="flex-grow-1 p-3" style="background-color: #FFE5E5; padding: 20px;">
+      <p>
+        <strong>Please note that the <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">Agricultural Land Reserve (ALR) Use Regulation</a> permits a food and beverage service lounge if the area is no more than 125 m<sup>2</sup> indoors and 125 m<sup>2</sup> outdoors.</strong>
+      </p>
+      <p>
+        <strong>By submitting this application to LCRB, you are confirming that your areas will not exceed the size restrictions set in the ALR Use Regulation or your specific approval from the Commission.</strong>
+      </p>
+    </div>
+  </div>
+
+  <hr>
+
+  <app-field label="Licensee Name (as shown on licence)" [valid]="isValidOrNotTouched('nameOfApplicant')"
+             errorMessage="Licensee Name is a required field">
+    <input class="form-control" style="width: 500px;" type="text" formControlName="nameOfApplicant">
+  </app-field>
+
+  <app-field label="Contact First Name" [valid]="isValidOrNotTouched('contactPersonFirstName')"
+             errorMessage="Contact First Name is a required field">
+    <input class="form-control" style="width: 500px;" type="text"
+           formControlName="contactPersonFirstName">
+  </app-field>
+
+  <app-field label="Contact Last Name" [valid]="isValidOrNotTouched('contactPersonLastName')"
+             errorMessage="Contact Last Name is a required field">
+    <input class="form-control" style="width: 500px;" type="text"
+           formControlName="contactPersonLastName">
+  </app-field>
+
+  <app-field label="Title/Position" [valid]="isValidOrNotTouched('contactPersonRole')"
+             errorMessage="Title/Position is a required field">
+    <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonRole">
+  </app-field>
+
+  <app-field label="Business Tel" [valid]="isValidOrNotTouched('contactPersonPhone')"
+             errorMessage="Business Tel is a required field">
+    <input class="form-control" mask="(000) 000-0000" type="text" formControlName="contactPersonPhone">
+  </app-field>
+
+  <app-field label="Contact Email (authorizations will be sent to this address)" [valid]="isValidOrNotTouched('contactPersonEmail')"
+             errorMessage="Business Email is a required field">
+    <input class="form-control" style="width: 500px;" type="text" formControlName="contactPersonEmail">
+  </app-field>
+
+
+  <app-field [valid]="true">
+    <section style="align-items: center; display: flex;">
+      <label class="pr-5 m-0">Mailing address</label>
+      <mat-checkbox formControlName="sameAddresses">
+        <div class="pl-2">
+          Same as above
+        </div>
+      </mat-checkbox>
+    </section>
+    <div class="row">
+      <app-field class="col-md-4" [valid]="isValidOrNotTouched('addressStreet')"
+                 errorMessage="Establishment Mailing Address Street is a required field">
+        <input class="form-control" style="width: 500px;" type="text" placeholder="Street"
+               formControlName="addressStreet">
+      </app-field>
+
+      <app-field class="col-md-4" [valid]="isValidOrNotTouched('addressCity')"
+                 errorMessage="Establishment Mailing Address City is a required field">
+        <input class="form-control" style="width: 500px;" type="text" placeholder="City"
+               formControlName="addressCity">
+      </app-field>
+
+      <app-field class="col-md-4" [valid]="isValidOrNotTouched('addressPostalCode')"
+                 errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)">
+        <input class="form-control" type="text" placeholder="Postal Code"
+               formControlName="addressPostalCode">
+      </app-field>
+    </div>
+  </app-field>
+</section>
+
+<h3 class="blue-header ngtest-declarations">
+  TEMPORARY EXTENSION OF LICENSED AREA
+</h3>
+<div class="padded-section content-bottom">
+  <p>Please upload documents that provide the following information:</p>
+  <ul style="font-size: larger;">
+    <li>
+      Provide a floor plan showing the proposed expanded service area. The floor plan may be hand drawn but must be legible and must clearly
+      identify the following details: how the perimeter is defined, dimensions, and its physical relationship to existing licensed areas.
+    </li>
+    <li>Identify the existing service area to be expanded (e.g. Person01, Lounge, Patio2, etc. as shown on your licence)</li>
+  </ul>
+
+  <section style="color: lightblue; text-align: center;">
+    <app-delayed-file-uploader documentType="Floorplan" #floorplanDocuments id="floorplanDocuments"
+                               [enableFileDeletion]="true"
+                               [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
+                               entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+                               (numberOfUploadedFiles)="uploadedFloorplanDocuments = $event"
+                               [uploadHeader]="'TO UPLOAD FLOOR PLAN, DRAG FILES HERE OR'">
+    </app-delayed-file-uploader>
+  </section>
+  <app-field [valid]="isValidOrNotTouched('boundedStatus')" [showChevrons]="false"
+             errorMessage="Please confirm that the attached floor plan shows how the expanded area will be bounded"
+             [isFullWidth]="true" style="margin-left: 10px;">
+    <mat-checkbox formControlName="boundedStatus">
+      I confirm that the attached floor plan shows how the perimeter of the expanded area will be bounded (e.g,
+      fences, railings, ropes & stanchions, etc.).
+    </mat-checkbox>
+  </app-field>
+</div>
+
+<h3 class="blue-header ngtest-declarations">
+  ADD, CHANGE OR REMOVE A LICENSEE REPRESENTATIVE NOTIFICATION FORM (OPTIONAL)
+</h3>
+<div class="padded-section content-bottom">
+  <p>
+    In some cases, a licensee may wish to authorize a specific individual to take certain actions on the
+    licensee's behalf and to legally bind the licensee in respect of those matters. For example:
+  </p>
+  <ul>
+    <li>
+      A licensee that is a company may wish to authorize an employee who is not a company director or
+      officer.
+    </li>
+    <li>
+      A partner in a partnership may wish to authorize a manager at the establishment who is not a
+      partner.
+    </li>
+    <li>
+      A society may wish to authorize an individual who is not a director or senior manager of the
+      society.
+    </li>
+    <li>
+      A licensee who is an individual person may wish to authorize someone else to make decisions and
+      take actions in respect of specific liquor control and licensing matters.
+    </li>
+  </ul>
+  <p>
+    Download the form <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb101_add_change_or_remove_a_licensee_representative_form.pdf?bcgovtm=CSMLS" target="_blank">here</a>.
+  </p>
+
+  <section style="color: lightblue; text-align: center;">
+    <app-delayed-file-uploader documentType="LRN" #licenseeRepresentativeNotficationFormDocuments id="licenseeRepresentativeNotficationFormDocuments"
+                               [enableFileDeletion]="true"
+                               [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
+                               entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+                               (numberOfUploadedFiles)="uploadedLicenseeRepresentativeNotficationFormDocuments = $event"
+                               [uploadHeader]="'TO UPLOAD LICENSEE REPRESENTATIVE NOTIFICATION FORM, DRAG FILES HERE OR'">
+    </app-delayed-file-uploader>
+  </section>
+</div>
+
+<div *ngIf="lgInputRequired()">
+  <h3 class="blue-header ngtest-declarations">
+    LOCAL GOVERNMENT/FIRST NATION COMMENTS
+  </h3>
+  <div class="padded-section content-bottom">
+
+    <!--app-field [valid]="!showValidationMessages || form.get('receivedLGPermission').valid"
+    errorMessage="Please affirm that all of the information provided for this application is true and complete."
+    [showChevrons]="false">
+    <section style="display: flex">
+      <input type="checkbox" formControlName="receivedLGPermission">
+      <span class="error-states">*</span>
+      <div style="padding-left: 10px;">
+        I have received permission from my Local Government.
+      </div>
+    </section>
+    </app-field-->
+
+    <app-field [valid]="isValidOrNotTouched('lgStatus')" [showChevrons]="false"
+               errorMessage="Please identify your Local Goverment status" [isFullWidth]="true">
+      <mat-radio-group formControlName="lgStatus">
+        <mat-radio-button class="mr-5" value="option1">My Local Government or Indigenous Nation has given blanket permission/approval for all temporary extensions applications in their jurisdiction related to COVID-19.</mat-radio-button><br>
+        <mat-radio-button class="mr-5" value="option2">My Local Government or Indigenous Nation wishes to review and approve each application individually. I have attached their approval below:</mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+
+
+    <div *ngIf="lgConfirmationRequired()">
+      <section style="color: lightblue; text-align: center;">
+        <h4 style="font-weight: 900; text-align: left;">Local Government or Indigenous Nation Approval:</h4>
+        <app-delayed-file-uploader documentType="LGConfirmation" #lGConfirmation id="lGConfirmation"
+                                   [enableFileDeletion]="true"
+                                   [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="false"
+                                   entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+                                   (numberOfUploadedFiles)="uploadedLGConfirmation = $event"
+                                   [uploadHeader]="'TO UPLOAD LG/IN CONFIRMATION, DRAG FILE HERE OR'">
+        </app-delayed-file-uploader>
+      </section>
+    </div>
+
+  </div>
+</div>
+
+<h3 class="blue-header ngtest-declarations" style="margin-bottom: 0px;">
+  DECLARATIONS
+</h3>
+
+<section class="d-flex content-bottom" style="margin-top: 0px; padding: 0px;">
+  <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+  <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+    <section class="ngtest-preamble-content">
+      <p>
+        As the licensee or authorized signatory of the licensee, I hereby confirm that the
+        operation of the extended service area covered by this authorization will comply with
+        all applicable local government by-laws and regulations and that the local government
+        with jurisdiction respecting the licensee’s operations has provided the requisite
+        approval for the extended service area that is the subject to this authorization.
+      </p>
+
+      <p>
+        Where the extension area is on property not owned or controlled by the licensee, I
+        hereby confirm that the licensee has received written approval for such use of the
+        property from the property owner.
+      </p>
+
+      <p>
+        <strong>Section 57(1)(c)</strong> of the <strong>Liquor Control and Licensing Act</strong> states:
+        <i>
+          “A person commits an offence if the person (c)
+          provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when
+          making a report or when required and as specified by the general manager under section 59.
+        </i>
+      </p>
+
+      <!--app-field [valid]="isValidOrNotTouched('signatureAgreemenmt')" [showChevrons]="false"
+      errorMessage="Please affirm that all of the information provided for this application is true and complete."
+      [isFullWidth]="true" style="margin-left:10px;">
+      <mat-checkbox formControlName="signatureAgreement">
+        <span class="error-states">*</span>
+        I confirm that the attached floor plan shows how the perimeter of the expanded area will be bounded (e.g,
+        fences, railings, ropes & stanchions, etc.).</mat-checkbox>
+      </app-field-->
+
+
+      <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+                 errorMessage="Please affirm that all of the information provided for this application is true and complete."
+                 [showChevrons]="false">
+        <mat-checkbox formControlName="signatureAgreement">
+          <span class="error-states">*</span>
+          <span class="ml-2">
+            As the licensee or authorized signatory of the licensee, I understand and affirm that all of
+            the information provided is true and complete.
+          </span>
+        </mat-checkbox>
+      </app-field>
+    </section>
+  </div>
+</section>
+
+
+<section class="error mt-3 p-3" *ngIf="!form.valid && form.touched">
+  <div *ngIf="!validationMessages?.length">
+    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
+    <span>Some required fields have not been completed</span>
+  </div>
+  <div *ngIf="validationMessages?.length">
+    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>
+    <span>The following fields are not valid:</span>
+  </div>
+  <ul *ngFor="let message of validationMessages">
+    <li class="app-cancel">
+      {{message}}
+    </li>
+  </ul>
+</section>
+
+<section style="margin-top: 20px; position: relative;">
+  <button class="btn btn-primary" (click)="submitApplication()">
+    <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
+    SUBMIT APPLICATION
+  </button>
+  <span style="color: #1a5a96; float: right; padding-top: 10px;">
+    <a routerLink="/">
+      <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
+      Cancel Application
+    </a>
+  </span>
+  <div [ngBusy]="busy"></div>
+</section>
+</div>
+</div>
 </div>
