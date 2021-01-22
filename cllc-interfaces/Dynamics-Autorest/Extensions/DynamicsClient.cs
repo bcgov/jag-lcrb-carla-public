@@ -142,8 +142,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                     "adoxio_application_SharePointDocumentLocations",
                     "adoxio_application_adoxio_tiedhouseconnection_Application",
                     "adoxio_AssignedLicence",
-                    "adoxio_Applicant",
+                    // "adoxio_Applicant", obtained by a second call as we need to expand it
                     "adoxio_ApplicationTypeId",
+                    // "adoxio_LicenceType",  Licence Type is obtained by a second call below as we also need to expand it.
                     "adoxio_LicenceFeeInvoice",
                     "adoxio_Invoice",
                     "adoxio_SecondaryApplicationInvoice",
@@ -161,7 +162,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioLicenceType = GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
                 }
 
-                if (result.AdoxioApplicationTypeId != null)
+                if (result.AdoxioApplicationTypeId != null)  // expand the application type contents
                 {
                     var filter = $"_adoxio_applicationtype_value eq { result.AdoxioApplicationTypeId.AdoxioApplicationtypeid}";
                     var typeContents = Applicationtypecontents.Get(filter: filter).Value;
