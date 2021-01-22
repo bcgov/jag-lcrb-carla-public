@@ -341,7 +341,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     this.busy = this.licenceDataService.createApplicationForActionTypeTerm(licenceId, ApplicationTypeNames.RequestTermChange, termId)
     .pipe(takeWhile(() => this.componentActive))
     .subscribe(data => {
-        this.router.navigateByUrl(`/multi-step-application/${data.id}`);
+        this.router.navigateByUrl(`/account-profile/${data.id}`);
       },
       () => {
         this.snackBar.open(`Error starting request for change to Term or Condition`,
