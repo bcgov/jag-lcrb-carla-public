@@ -593,15 +593,14 @@ namespace Gov.Lclb.Cllb.Public
                 {
                     // To learn more about options for serving an Angular SPA from ASP.NET Core,
                     // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                    spa.Options.SourcePath = "ClientApp";
-
-                    // allow up to 3 minutes for angular to compile the first time
-                    spa.Options.StartupTimeout = new TimeSpan(0, 3, 0);
-                    // Only run the angular CLI Server in Development mode (not staging or test.)
-                    if (env.IsDevelopment())
+                    if (string.IsNullOrEmpty(_configuration["ANGULAR_DEV_SERVER"]))
                     {
+                        spa.Options.SourcePath = "ClientApp";
                         spa.UseAngularCliServer(npmScript: "start");
+                    }
+                    else
+                    {
+                        spa.UseProxyToSpaDevelopmentServer(_configuration["ANGULAR_DEV_SERVER"]);
                     }
                 });
             }

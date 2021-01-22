@@ -659,5 +659,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? PrimaryInvoicePaid { get; set; }
         public bool? SecondaryInvoicePaid { get; set; }
         public bool? IsOnINLand { get; set; }
+
+        public string TermConditionId { get; set; }
+        public string TermConditionOriginalText { get; set; }
     }
 }

@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { PaymentDataService } from '@services/payment-data.service';
-import { User } from '@models/user.model';
-import { UserDataService } from '@services/user-data.service';
-import { WorkerDataService } from '@services/worker-data.service.';
-import { Worker } from '@models/worker.model';
-import { ActivatedRoute } from '@angular/router';
-import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { PaymentDataService } from "@services/payment-data.service";
+import { User } from "@models/user.model";
+import { UserDataService } from "@services/user-data.service";
+import { Worker } from "@models/worker.model";
+import { ActivatedRoute } from "@angular/router";
+import { faSave } from "@fortawesome/free-regular-svg-icons";
+import { WorkerDataService } from "@services/worker-data.service";
 
 @Component({
-  selector: 'app-pre-payment',
-  templateUrl: './pre-payment.component.html',
-  styleUrls: ['./pre-payment.component.scss']
+  selector: "app-pre-payment",
+  templateUrl: "./pre-payment.component.html",
+  styleUrls: ["./pre-payment.component.scss"]
 })
 export class PrePaymentComponent implements OnInit {
   faSave = faSave;
@@ -23,9 +23,9 @@ export class PrePaymentComponent implements OnInit {
     private workerDataService: WorkerDataService,
     private userDataService: UserDataService,
     private route: ActivatedRoute) {
-      this.route.paramMap.subscribe(params => {
-        this.workerId = params.get('id');
-      });
+    this.route.paramMap.subscribe(params => {
+      this.workerId = params.get("id");
+    });
   }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class PrePaymentComponent implements OnInit {
       .subscribe((data: User) => {
         this.currentUser = data;
         if (this.currentUser && this.currentUser.contactid) {
-            this.workerDataService.getWorker(this.workerId).subscribe(res => {
+          this.workerDataService.getWorker(this.workerId).subscribe(res => {
             this.worker = res;
           });
         }
@@ -56,7 +56,7 @@ export class PrePaymentComponent implements OnInit {
     // else {
     //   this.save(true).subscribe((result: boolean) => {
     //     if (result) {
-          this.submitPayment();
+    this.submitPayment();
     //     }
     //   });
     // }
@@ -68,12 +68,13 @@ export class PrePaymentComponent implements OnInit {
    * */
   private submitPayment() {
     this.paymentDataService.getWorkerPaymentSubmissionUrl(this.worker.id).subscribe(res => {
-      const jsonUrl = res;
-      window.location.href = jsonUrl['url'];
-      return jsonUrl['url'];
-    }, err => {
-      console.log('Error occured');
-    });
+        const jsonUrl = res;
+        window.location.href = jsonUrl["url"];
+        return jsonUrl["url"];
+      },
+      err => {
+        console.log("Error occured");
+      });
   }
 
 }

@@ -1,4 +1,4 @@
 export class ProfileValidation {
-    legalEntityId: string;
-    isComplete: boolean;
+  legalEntityId: string;
+  isComplete: boolean;
 }

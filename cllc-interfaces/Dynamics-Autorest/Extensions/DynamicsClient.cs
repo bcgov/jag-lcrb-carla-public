@@ -142,13 +142,16 @@ namespace Gov.Lclb.Cllb.Interfaces
                     "adoxio_application_SharePointDocumentLocations",
                     "adoxio_application_adoxio_tiedhouseconnection_Application",
                     "adoxio_AssignedLicence",
+                    // "adoxio_Applicant", obtained by a second call as we need to expand it
                     "adoxio_ApplicationTypeId",
+                    // "adoxio_LicenceType",  Licence Type is obtained by a second call below as we also need to expand it.
                     "adoxio_LicenceFeeInvoice",
                     "adoxio_Invoice",
                     "adoxio_SecondaryApplicationInvoice",
                     "adoxio_localgovindigenousnationid",
                     "adoxio_PoliceJurisdictionId",
-                    "adoxio_application_SharePointDocumentLocations"
+                    "adoxio_application_SharePointDocumentLocations",
+                    "adoxio_adoxio_application_adoxio_applicationtermsconditionslimitation_Application"
                 };
 
                 // fetch from Dynamics.
@@ -159,7 +162,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioLicenceType = GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
                 }
 
-                if (result.AdoxioApplicationTypeId != null)
+                if (result.AdoxioApplicationTypeId != null)  // expand the application type contents
                 {
                     var filter = $"_adoxio_applicationtype_value eq { result.AdoxioApplicationTypeId.AdoxioApplicationtypeid}";
                     var typeContents = Applicationtypecontents.Get(filter: filter).Value;
@@ -481,8 +484,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 // adoxio_Licencee,adoxio_establishment
                 // Note that adoxio_Licencee is the Account linked to the licence
-                var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment", "adoxio_LicenceType", "adoxio_ThirdPartyOperatorId",
-                    "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_ProposedOperator", "adoxio_ProposedOwner"
+                var expand = new List<string> { "adoxio_Licencee",
+                    "adoxio_establishment", 
+                    "adoxio_LicenceType", 
+                    "adoxio_ThirdPartyOperatorId",
+                    "adoxio_adoxio_licences_adoxio_application_AssignedLicence", 
+                    "adoxio_ProposedOperator", 
+                    "adoxio_ProposedOwner",
+                    "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence"
                 };
                 result = Licenceses.GetByKey(adoxioLicencesid: id, expand: expand);
             }
@@ -548,6 +557,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             try
             {
                 results = Events.GetEventscheduleByEvent(id);
+            }
+            catch (HttpOperationException)
+            {
+                results = null;
+            }
+
+            return results;
+        }
+
+        public MicrosoftDynamicsCRMadoxioEventlocationCollection GetEventLocationsByEventId(string id)
+        {
+            string filter = $"adoxio_eventid eq {id}";
+            // fetch from Dynamics.
+            MicrosoftDynamicsCRMadoxioEventlocationCollection results;
+            try
+            {
+                results = Eventlocations.Get(filter: filter);
             }
             catch (HttpOperationException)
             {

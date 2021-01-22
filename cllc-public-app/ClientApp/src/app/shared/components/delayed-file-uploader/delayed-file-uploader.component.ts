@@ -1,13 +1,13 @@
-import { Component, Input, Output, OnDestroy, OnInit, EventEmitter } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+import { Component, Input, Output, OnDestroy, OnInit, EventEmitter } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from "ngx-file-drop";
 
-import * as FileUploadsActions from '../../../app-state/actions/file-uploads.action';
-import { AppState } from '../../../app-state/models/app-state';
+import * as FileUploadsActions from "../../../app-state/actions/file-uploads.action";
+import { AppState } from "../../../app-state/models/app-state";
 
-import { FileItem } from '../../../models/file-item.model';
+import { FileItem } from "../../../models/file-item.model";
 
 export interface DropdownOption {
   id: string;
@@ -15,42 +15,55 @@ export interface DropdownOption {
 }
 
 @Component({
-  selector: 'app-delayed-file-uploader',
-  templateUrl: './delayed-file-uploader.component.html',
-  styleUrls: ['./delayed-file-uploader.component.scss']
+  selector: "app-delayed-file-uploader",
+  templateUrl: "./delayed-file-uploader.component.html",
+  styleUrls: ["./delayed-file-uploader.component.scss"]
 })
 export class DelayedFileUploaderComponent implements OnInit, OnDestroy {
   unsubscribe: Subject<void> = new Subject();
-  
 
-  @Input() id: string;
-  @Input() uploadUrl: string;
-  @Input() fileTypes = '';
-  @Input() documentType: string;
-  @Input() entityName: string;
-  @Input() entityId: string;
-  @Input() multipleFiles = true;
-  @Input() extensions: string[] = ['pdf'];
-  @Input() uploadHeader = 'TO UPLOAD DOCUMENTS, DRAG FILES HERE OR';
-  @Input() enableFileDeletion = true;
-  @Input() maxNumberOfFiles = 10;
-  @Input() useDocumentTypeForName = false;
-  @Input() publicAccess = false;
 
-  @Output() numberOfUploadedFiles: EventEmitter<number> = new EventEmitter<number>();
+  @Input()
+  id: string;
+  @Input()
+  uploadUrl: string;
+  @Input()
+  fileTypes = "";
+  @Input()
+  documentType: string;
+  @Input()
+  entityName: string;
+  @Input()
+  entityId: string;
+  @Input()
+  multipleFiles = true;
+  @Input()
+  extensions: string[] = ["pdf"];
+  @Input()
+  uploadHeader = "TO UPLOAD DOCUMENTS, DRAG FILES HERE OR";
+  @Input()
+  enableFileDeletion = true;
+  @Input()
+  maxNumberOfFiles = 10;
+  @Input()
+  useDocumentTypeForName = false;
+  @Input()
+  publicAccess = false;
+
+  @Output()
+  numberOfUploadedFiles = new EventEmitter<number>();
 
   fileSizeLimit = 1048576 * 25; // 25 MB
-  fileSizeLimitReadable = '25 MB';
+  fileSizeLimitReadable = "25 MB";
 
   validationErrors: string[] = [];
 
-  public files: FileItem[] = [];
+  files: FileItem[] = [];
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
 
-    
 
     // subscribe to files from store
     this.store.select(state => state.fileUploadsState.fileUploads)
@@ -67,14 +80,14 @@ export class DelayedFileUploaderComponent implements OnInit, OnDestroy {
     this.unsubscribe.complete();
   }
 
-  public dropped(event: NgxFileDropEntry[]) {
+  dropped(event: NgxFileDropEntry[]) {
     const droppedFiles = event;
     let newDroppedFileCount = 0;
     for (const droppedFile of droppedFiles) {
       newDroppedFileCount += 1;
     }
     if (droppedFiles.length > 1 && !this.multipleFiles) {
-      alert('Only one file can be uploaded here');
+      alert("Only one file can be uploaded here");
       return;
     }
     if (this.maxNumberOfFiles < (this.files.length + newDroppedFileCount)) {
@@ -101,14 +114,14 @@ export class DelayedFileUploaderComponent implements OnInit, OnDestroy {
     let lastCount = 0;
     if (this.files.length) {
       const counts = this.files.map(file => {
-        const match = file.name.match(/_(\d+)\.([^\.]+)$/);
-        if (match) {
-          return parseInt(match[1], 10);
-        } else {
-          return 0;
-        }
+          const match = file.name.match(/_(\d+)\.([^\.]+)$/);
+          if (match) {
+            return parseInt(match[1], 10);
+          } else {
+            return 0;
+          }
 
-      }).sort()
+        }).sort()
         .reverse();
       lastCount = counts[0];
     }
@@ -126,11 +139,11 @@ export class DelayedFileUploaderComponent implements OnInit, OnDestroy {
       }
     }
 
-    input.value = '';
+    input.value = "";
   }
 
   validateFile(file: File): boolean {
-    const validExt = this.extensions.filter(ex => file.name.toLowerCase().endsWith('.' + ex)).length > 0;
+    const validExt = this.extensions.filter(ex => file.name.toLowerCase().endsWith(`.${ex}`)).length > 0;
     if (!validExt) {
       this.validationErrors.push(`File type not supported. <em>[${file.name}]</em>`);
       return false;
@@ -143,12 +156,14 @@ export class DelayedFileUploaderComponent implements OnInit, OnDestroy {
 
     if (file && file.size && file.size > this.fileSizeLimit) {
       const limit = this.fileSizeLimitReadable;
-      this.validationErrors.push(`The specified file exceeds the maximum file size of ${limit}. <em>[${file.name}]</em>`);
+      this.validationErrors.push(
+        `The specified file exceeds the maximum file size of ${limit}. <em>[${file.name}]</em>`);
       return false;
     }
 
     if (this.maxNumberOfFiles && this.files.length >= this.maxNumberOfFiles) {
-      this.validationErrors.push(`File limit has been reached. The specified file has not been added. <em>[${file.name}]</em>`);
+      this.validationErrors.push(
+        `File limit has been reached. The specified file has not been added. <em>[${file.name}]</em>`);
       return false;
     }
 
@@ -156,25 +171,25 @@ export class DelayedFileUploaderComponent implements OnInit, OnDestroy {
   }
 
   disableFileUpload(): boolean {
-    return (!this.multipleFiles && (this.files && this.files.length > 0))
-      || (this.multipleFiles && this.maxNumberOfFiles <= (this.files.length));
+    return (!this.multipleFiles && (this.files && this.files.length > 0)) ||
+      (this.multipleFiles && this.maxNumberOfFiles <= (this.files.length));
   }
 
   addFile(file: File) {
     const fileSystemEntry = { id: this.files.length, name: file.name, size: Math.trunc(file.size / 1024), file: file };
-    const fileSet = { 
-      id: this.id, 
+    const fileSet = {
+      id: this.id,
       documentType: this.documentType,
-      files: [...this.files, fileSystemEntry ] 
+      files: [...this.files, fileSystemEntry]
     };
     this.store.dispatch(new FileUploadsActions.SetFileUploadsAction(fileSet));
   }
 
   removeFile(file: FileItem) {
-    this.store.dispatch(new FileUploadsActions.SetFileUploadsAction({ 
-      id: this.id, 
+    this.store.dispatch(new FileUploadsActions.SetFileUploadsAction({
+      id: this.id,
       documentType: this.documentType,
-      files: this.files.filter(f => f.id !== file.id) 
+      files: this.files.filter(f => f.id !== file.id)
     }));
   }
 

@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
-import { Observable, of, Subscription, pipe } from 'rxjs';
-import { filter, takeWhile, map } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import { FormBase } from '@shared/form-base';
-import { AccountDataService } from '@services/account-data.service';
-import { Account } from '@models/account.model';
-import { AppState } from '@app/app-state/models/app-state';
-import { FileSystemItem } from '@models/file-system-item.model';
+import { Component, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
+import { filter, takeWhile, map } from "rxjs/operators";
+import { Store } from "@ngrx/store";
+import { FormBase } from "@shared/form-base";
+import { AccountDataService } from "@services/account-data.service";
+import { Account } from "@models/account.model";
+import { AppState } from "@app/app-state/models/app-state";
+import { FileSystemItem } from "@models/file-system-item.model";
 
 @Component({
-  selector: 'app-notices',
-  templateUrl: './notices.component.html',
-  styleUrls: ['./notices.component.scss'],
+  selector: "app-notices",
+  templateUrl: "./notices.component.html",
+  styleUrls: ["./notices.component.scss"],
 })
 export class NoticesComponent extends FormBase implements OnInit {
   isEditMode = true;
@@ -30,7 +27,6 @@ export class NoticesComponent extends FormBase implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private snackBar: MatSnackBar,
     private accountDataService: AccountDataService,
   ) {
     super();
@@ -54,12 +50,12 @@ export class NoticesComponent extends FormBase implements OnInit {
       .subscribe(notices => {
         this.notices = notices;
         this.dataLoaded = true;
-      })
+      });
 
   }
 
   retrieveNotices(account: Account) {
-    return this.accountDataService.getFilesAttachedToAccount(account.id, 'Notice')
+    return this.accountDataService.getFilesAttachedToAccount(account.id, "Notice")
       .pipe(map(files => this.orderByDate(files)));
   }
 

@@ -1,19 +1,21 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
-import { LicenseeChangeLog } from '@models/licensee-change-log.model';
-import { Account } from '@models/account.model';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { AssociateListComponent } from '../associate-list/associate-list.component';
-import { forkJoin, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, QueryList } from "@angular/core";
+import { LicenseeChangeLog } from "@models/licensee-change-log.model";
+import { Account } from "@models/account.model";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { AssociateListComponent } from "../associate-list/associate-list.component";
+import { forkJoin, of } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 
 @Component({
-  selector: 'app-org-structure',
-  templateUrl: './org-structure.component.html',
-  styleUrls: ['./org-structure.component.scss']
+  selector: "app-org-structure",
+  templateUrl: "./org-structure.component.html",
+  styleUrls: ["./org-structure.component.scss"]
 })
 export class OrgStructureComponent implements OnInit {
   private _node: LicenseeChangeLog;
-  @Input() set node(value: LicenseeChangeLog) {
+
+  @Input()
+  set node(value: LicenseeChangeLog) {
     this._node = value;
     if (this.form) {
       this.form.patchValue(value);
@@ -24,22 +26,30 @@ export class OrgStructureComponent implements OnInit {
     return this._node;
   }
 
-  @Input() account: Account;
-  @Input() parentAssociate: any;
-  @Input() licencesOnFile: boolean;
-  @Input() isReadOnly: boolean;
-  @Output() deletedChanges: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
-  @Output() changesMade: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() reportAdditionalChanges: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input()
+  account: Account;
+  @Input()
+  parentAssociate: any;
+  @Input()
+  licencesOnFile: boolean;
+  @Input()
+  isReadOnly: boolean;
+  @Output()
+  deletedChanges = new EventEmitter<LicenseeChangeLog>();
+  @Output()
+  changesMade = new EventEmitter<boolean>();
+  @Output()
+  reportAdditionalChanges = new EventEmitter<boolean>();
 
-  @ViewChildren('associateList') associateList: QueryList<AssociateListComponent>;
-  fileUploads: any = {}; 
-  
+  @ViewChildren("associateList")
+  associateList: QueryList<AssociateListComponent>;
+  fileUploads: any = {};
+
 
   Account = Account;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     let numberOfMembers: number = null;
@@ -79,7 +89,7 @@ export class OrgStructureComponent implements OnInit {
   }
 
   updateChildren() {
-    this.changesMade.next(true)
+    this.changesMade.next(true);
   }
 
   /**
@@ -106,7 +116,7 @@ export class OrgStructureComponent implements OnInit {
   }
 
   getData(): LicenseeChangeLog {
-    let res = this.node;
+    const res = this.node;
     res.fileUploads = this.fileUploads;
     res.children = [];
     this.associateList.forEach(item => {

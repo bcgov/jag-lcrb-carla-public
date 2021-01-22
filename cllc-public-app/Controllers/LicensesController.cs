@@ -631,25 +631,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
-
-        /// Create a change of location application
-        [HttpPost("{licenceId}/create-action-application/{applicationTypeName}")]
-        public async Task<JsonResult> CreateApplicationForAction(string licenceId, string applicationTypeName)
+        private MicrosoftDynamicsCRMadoxioApplication CreateApplication(string licenceId, string applicationTypeName)
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            var expand = new List<string> {
-                "adoxio_Licencee",
-                "adoxio_LicenceType",
-                "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
-                "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
-                "adoxio_establishment",
-                "adoxio_LicenceSubCategoryId"
-            };
-
             // grab the licence record
-            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(licenceId, expand: expand);
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.GetLicenceByIdWithChildren(licenceId);
             if (adoxioLicense == null)
             {
                 // exit if we don't find one
@@ -722,7 +710,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
                     lginvalue = licenceApp._adoxioLocalgovindigenousnationidValue;
-
                 }
 
                 // if we found an LGIN value
@@ -740,6 +727,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // update the application with that value
                     application.AdoxioPoliceJurisdictionIdODataBind = _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", licenceApp?._adoxioPolicejurisdictionidValue);
                 }
+
                 // create the application with the data we've brought over
                 application = _dynamicsClient.Applications.Create(application);
             }
@@ -748,7 +736,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string applicationId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
                 if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
                 {
-                    application = await _dynamicsClient.GetApplicationById(applicationGuid);
+                    application = _dynamicsClient.GetApplicationById(applicationGuid).GetAwaiter().GetResult();
                 }
                 else
                 {
@@ -798,7 +786,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var patchApplication = new MicrosoftDynamicsCRMadoxioApplication
             {
-                AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", licenceId)
+                AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", adoxioLicense.AdoxioLicencesid)
             };
 
             try
@@ -810,7 +798,111 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(httpOperationException, "Error updating application");
             }
 
-            return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
+            return application;
+        }
+
+
+        /// Create a change of location application
+        [HttpPost("{licenceId}/create-action-application/{applicationTypeName}")]
+        public async Task<ViewModels.Application> CreateApplicationForAction(string licenceId, string applicationTypeName)
+        {
+            var application = CreateApplication(licenceId, applicationTypeName);
+            return await application.ToViewModel(_dynamicsClient, _cache, _logger);
+        }
+
+        private MicrosoftDynamicsCRMadoxioApplication GetTermChangeApplication(string licenceId, string termId, string applicationTypeName)
+        {
+            MicrosoftDynamicsCRMadoxioApplication result = null;
+            // start by getting all applications that match the licenceId and type.
+
+            var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
+
+            if (applicationType != null)
+            {
+                string filter =
+                      $"_adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid}"
+                    + $" and _adoxio_assignedlicence_value eq {licenceId}"
+                    + $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Processed}"
+                    + $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Terminated}"
+                    + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}"
+                    + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}"
+                    + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}"
+                    + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+                try
+                {
+                    var items = _dynamicsClient.Applications.Get(filter: filter).Value;
+                    foreach (var item in items)
+                    {
+                        // expand is not working with a get, so have to do a second pass to get child items.
+                        var candidate = _dynamicsClient.GetApplicationByIdWithChildren (item.AdoxioApplicationid).GetAwaiter().GetResult();
+                        if (candidate.AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication != null && candidate.AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication.Count > 0)
+                        {
+                            foreach (var term in candidate
+                                .AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication)
+                            {
+                                if (termId == term.AdoxioApplicationtermsconditionslimitationid)
+                                {
+                                    result = candidate;
+                                    break;
+                                }
+                            }
+
+                            if (result != null)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error getting application");
+                }
+            }
+
+            return result;
+        }
+
+
+        /// Create a change of location application
+        [HttpPost("{licenceId}/create-action-application-term/{termId}/{applicationTypeName}")]
+        public async Task<ViewModels.Application> CreateOrGetApplicationWithTerm(string licenceId, string termId,
+            string applicationTypeName)
+        {
+            // first do a check to see if there is an existing application.
+
+            var application = GetTermChangeApplication(licenceId, termId, applicationTypeName);
+
+            // otherwise create the application with the data we've brought over
+            if (application == null)
+            {
+                application = CreateApplication(licenceId, applicationTypeName);
+
+                if (!string.IsNullOrEmpty(termId))
+                {
+
+                    Odataid odataId = new Odataid()
+                    {
+                        OdataidProperty =
+                            _dynamicsClient.GetEntityURI("adoxio_applicationtermsconditionslimitations", termId)
+                    };
+
+                    try
+                    {
+
+                        await _dynamicsClient.Applications.AddReferenceWithHttpMessagesAsync(
+                            application.AdoxioApplicationid,
+                            "adoxio_adoxio_application_adoxio_applicationtermsconditionslimitation_Application",
+                            odataid: odataId);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error updating application with reference to term");
+                    }
+                }
+            }
+            return await application.ToViewModel(_dynamicsClient, _cache, _logger);
         }
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
@@ -1399,3 +1491,4 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public string LicenceId { get; set; }
     }
 }
+

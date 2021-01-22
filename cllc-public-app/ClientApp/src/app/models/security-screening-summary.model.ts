@@ -1,7 +1,7 @@
-import { SecurityScreeningCategorySummary } from './security-screening-category-summary.model';
+import { SecurityScreeningCategorySummary } from "./security-screening-category-summary.model";
 
 export class SecurityScreeningSummary {
-    cannabis: SecurityScreeningCategorySummary;
+  cannabis: SecurityScreeningCategorySummary;
 
-    liquor: SecurityScreeningCategorySummary;
+  liquor: SecurityScreeningCategorySummary;
 }

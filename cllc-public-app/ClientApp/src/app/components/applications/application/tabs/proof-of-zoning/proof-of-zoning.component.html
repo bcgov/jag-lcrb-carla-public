@@ -1,35 +1,35 @@
 <div class="ngtest-zoning" [formGroup]="formGroup">
-    <hr>
-    <label for="">Zoning</label>
-    <br>
+  <hr>
+  <label for="">Zoning</label>
+  <br>
 
-    <section *ngIf="showQuestion()">
-      <div>
-          <mat-checkbox formControlName="isPermittedInZoning">
-            <span>
-              By checking this box, I confirm that current zoning permits a {{application?.applicationType?.name}} on the establishment site.
-            </span>
-          </mat-checkbox>
-      </div>
-    </section>
+  <section *ngIf="showQuestion()">
+    <div>
+      <mat-checkbox formControlName="isPermittedInZoning">
+        <span>
+          By checking this box, I confirm that current zoning permits a {{application?.applicationType?.name}} on the establishment site.
+        </span>
+      </mat-checkbox>
+    </div>
+  </section>
 
-    <section *ngIf="!showQuestion()">
-      <p>Please provide proof from your local government that the proposed location has been:</p>
-      <ul>
-        <li>appropriately zoned to operate a {{application?.licenseType}} licence, or</li>
-        <li>is in the process of being appropriately zoned</li>
-      </ul>
-      <p>
-        You are responsible for obtaining the appropriate zoning from your local
-        government to operate a {{application?.licenseType}} licence at your proposed location.
-        Prior to issuing a licence at the new location, LCRB will require confirmation
-        from your local government that the location is zoned appropriately to operate
-        a {{application?.licenseType}} licence.
-      </p>
-      <app-file-uploader *ngIf="application?.id" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
-        [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
-        (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="application?.id"
-        [uploadHeader]="'TO UPLOAD ZONING DOCUMENTS, DRAG FILES HERE OR'" #proofOfZoningDocs>
-      </app-file-uploader>
-    </section>
-  </div>
+  <section *ngIf="!showQuestion()">
+    <p>Please provide proof from your local government that the proposed location has been:</p>
+    <ul>
+      <li>appropriately zoned to operate a {{application?.licenseType}} licence, or</li>
+      <li>is in the process of being appropriately zoned</li>
+    </ul>
+    <p>
+      You are responsible for obtaining the appropriate zoning from your local
+      government to operate a {{application?.licenseType}} licence at your proposed location.
+      Prior to issuing a licence at the new location, LCRB will require confirmation
+      from your local government that the location is zoned appropriately to operate
+      a {{application?.licenseType}} licence.
+    </p>
+    <app-file-uploader *ngIf="application?.id" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
+                       [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
+                       (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="application?.id"
+                       [uploadHeader]="'TO UPLOAD ZONING DOCUMENTS, DRAG FILES HERE OR'" #proofOfZoningDocs>
+    </app-file-uploader>
+  </section>
+</div>

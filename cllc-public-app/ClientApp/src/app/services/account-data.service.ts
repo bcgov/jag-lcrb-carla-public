@@ -1,22 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Account } from '@models/account.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ProfileValidation } from '@models/profile-validation.model';
-import { Observable, forkJoin } from 'rxjs';
-import { DataService } from './data.service';
-import { catchError, map } from 'rxjs/operators';
-import { TiedHouseConnection } from '@models/tied-house-connection.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { SetCurrentAccountAction } from '@app/app-state/actions/current-account.action';
-import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { LegalEntityDataService } from '@services/legal-entity-data.service';
-import { FileSystemItem } from '@models/file-system-item.model';
+import { Injectable } from "@angular/core";
+import { Account } from "@models/account.model";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { ProfileValidation } from "@models/profile-validation.model";
+import { Observable, forkJoin } from "rxjs";
+import { DataService } from "./data.service";
+import { catchError, map } from "rxjs/operators";
+import { TiedHouseConnection } from "@models/tied-house-connection.model";
+import { Store } from "@ngrx/store";
+import { AppState } from "@app/app-state/models/app-state";
+import { SetCurrentAccountAction } from "@app/app-state/actions/current-account.action";
+import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
+import { LegalEntityDataService } from "@services/legal-entity-data.service";
+import { FileSystemItem } from "@models/file-system-item.model";
 
 @Injectable()
 export class AccountDataService extends DataService {
 
-  apiPath = 'api/accounts/';
+  apiPath = "api/accounts/";
 
   constructor(private http: HttpClient,
     private tiedHouseService: TiedHouseConnectionsDataService,
@@ -36,19 +36,19 @@ export class AccountDataService extends DataService {
   }
 
   getCurrentAccount() {
-    return this.http.get<Account>(this.apiPath + 'current', { headers: this.headers })
+    return this.http.get<Account>(this.apiPath + "current", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   loadCurrentAccountToStore(id: string) {
     return forkJoin(this.getAccount(id),
-      this.tiedHouseService.getTiedHouse(id),
-      this.legalEntityDataService.getBusinessProfileSummary())
+        this.tiedHouseService.getTiedHouse(id),
+        this.legalEntityDataService.getBusinessProfileSummary())
       .pipe(map(data => {
         const account: Account = data[0];
         account.tiedHouse = data[1];
         account.legalEntity = data[2].length ? data[2][0] : null;
-        this.store.dispatch(new SetCurrentAccountAction(<Account>{ ...account }));
+        this.store.dispatch(new SetCurrentAccountAction({ ...account } as Account));
         return account;
       }));
   }
@@ -59,7 +59,7 @@ export class AccountDataService extends DataService {
   }
 
   getBCeID() {
-    return this.http.get(this.apiPath + 'bceid', { headers: this.headers })
+    return this.http.get(this.apiPath + "bceid", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -69,17 +69,17 @@ export class AccountDataService extends DataService {
   }
 
   createTiedHouseConnection(tiedHouse: TiedHouseConnection, accountId: string) {
-    return this.http.post(this.apiPath + accountId + '/tiedhouseconnection', tiedHouse, { headers: this.headers })
+    return this.http.post(this.apiPath + accountId + "/tiedhouseconnection", tiedHouse, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   deleteAccount(accountModel: Account) {
-    return this.http.post(this.apiPath + accountModel.id + '/delete', accountModel, { headers: this.headers })
+    return this.http.post(this.apiPath + accountModel.id + "/delete", accountModel, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   deleteCurrentAccount() {
-    return this.http.post(this.apiPath + 'delete/current', {}, { headers: this.headers })
+    return this.http.post(this.apiPath + "delete/current", {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -99,7 +99,8 @@ export class AccountDataService extends DataService {
     for (const file of files) {
       file.name = `${documentType}__${file.name}`;
       file.downloadUrl = `api/file/${accountId}/download-file/account/${file.name}`;
-      file.downloadUrl += `?serverRelativeUrl=${encodeURIComponent(file.serverrelativeurl)}&documentType=${documentType}`;
+      file.downloadUrl += `?serverRelativeUrl=${encodeURIComponent(file.serverrelativeurl)}&documentType=${documentType
+        }`;
     }
     return files;
   }

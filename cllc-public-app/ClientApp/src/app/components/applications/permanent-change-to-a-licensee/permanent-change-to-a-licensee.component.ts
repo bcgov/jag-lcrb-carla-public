@@ -1,27 +1,25 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AppState } from '@app/app-state/models/app-state';
-import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
-import { Account } from '@models/account.model';
-import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
-import { Application } from '@models/application.model';
-import { Store } from '@ngrx/store';
-import { ApplicationDataService } from '@services/application-data.service';
-import { PaymentDataService } from '@services/payment-data.service';
-import { FormBase } from '@shared/form-base';
-import { Observable, of, forkJoin, merge, combineLatest } from 'rxjs';
-import { catchError, delay, filter, mergeMap, takeWhile } from 'rxjs/operators';
-import { ContactComponent, ContactData } from '@shared/components/contact/contact.component';
-import { PaymentConfirmationComponent } from '@components/payment-confirmation/payment-confirmation.component';
-import { faIdCard } from '@fortawesome/free-regular-svg-icons';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AppState } from "@app/app-state/models/app-state";
+import { Account } from "@models/account.model";
+import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
+import { Application } from "@models/application.model";
+import { Store } from "@ngrx/store";
+import { ApplicationDataService } from "@services/application-data.service";
+import { PaymentDataService } from "@services/payment-data.service";
+import { FormBase } from "@shared/form-base";
+import { Observable, of } from "rxjs";
+import { catchError, delay, filter, mergeMap, takeWhile } from "rxjs/operators";
+import { ContactComponent, ContactData } from "@shared/components/contact/contact.component";
+import { faIdCard } from "@fortawesome/free-regular-svg-icons";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-permanent-change-to-a-licensee',
-  templateUrl: './permanent-change-to-a-licensee.component.html',
-  styleUrls: ['./permanent-change-to-a-licensee.component.scss']
+  selector: "app-permanent-change-to-a-licensee",
+  templateUrl: "./permanent-change-to-a-licensee.component.html",
+  styleUrls: ["./permanent-change-to-a-licensee.component.scss"]
 })
 export class PermanentChangeToALicenseeComponent extends FormBase implements OnInit {
   faQuestionCircle = faQuestionCircle;
@@ -44,13 +42,22 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   applicationContact: ContactData;
   verifyRquestMade: boolean;
   validationMessages: string[];
-  @ViewChild('appContact') appContact: ContactComponent;
+  @ViewChild("appContact")
+  appContact: ContactComponent;
   appContactDisabled: boolean;
   applicationId: string;
   canCreateNewApplication: boolean;
   createApplicationInProgress: boolean;
   primaryInvoice: any;
   secondaryInvoice: any;
+  uploadedCentralSecuritiesRegister = 0;
+  uploadedNOA = 0;
+  uploadedNameChangeDocuments = 0;
+  uploadedCertificateOfNameChange = 0;
+  uploadedPartnershipRegistration = 0;
+  uploadedSocietyNameChange = 0;
+  uploadedExecutorDocuments = 0;
+
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -86,36 +93,36 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
 
     this.route.paramMap
       .subscribe(pmap => {
-        this.invoiceType = pmap.get('invoiceType');
-        this.applicationId = pmap.get('applicationId');
+        this.invoiceType = pmap.get("invoiceType");
+        this.applicationId = pmap.get("applicationId");
       });
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      csInternalTransferOfShares: [''],
-      csExternalTransferOfShares: [''],
-      csChangeOfDirectorsOrOfficers: [''],
-      csNameChangeLicenseeCorporation: [''],
-      csNameChangeLicenseePartnership: [''],
-      csNameChangeLicenseeSociety: [''],
-      csNameChangeLicenseePerson: [''],
-      csAdditionalReceiverOrExecutor: [''],
-      firstNameOld: [''],
-      firstNameNew: [''],
-      lastNameOld: [''],
-      lastNameNew: [''],
-      description2: [''],
-      description3: [''],
-      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
+      csInternalTransferOfShares: [""],
+      csExternalTransferOfShares: [""],
+      csChangeOfDirectorsOrOfficers: [""],
+      csNameChangeLicenseeCorporation: [""],
+      csNameChangeLicenseePartnership: [""],
+      csNameChangeLicenseeSociety: [""],
+      csNameChangeLicenseePerson: [""],
+      csAdditionalReceiverOrExecutor: [""],
+      firstNameOld: [""],
+      firstNameNew: [""],
+      lastNameOld: [""],
+      lastNameNew: [""],
+      description2: [""],
+      description3: [""],
+      authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
     });
 
     this.loadData();
   }
 
   private loadData() {
-    var sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId)
+    const sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId)
       .subscribe((data) => {
         this.setFormData(data);
       });
@@ -127,8 +134,9 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   private setFormData({ application, licences, primary, secondary }) {
-    this.liquorLicences = licences.filter(item => item.licenceTypeCategory === 'Liquor' && item.status === 'Active');
-    this.cannabisLicences = licences.filter(item => item.licenceTypeCategory === 'Cannabis' && item.status === 'Active');
+    this.liquorLicences = licences.filter(item => item.licenceTypeCategory === "Liquor" && item.status === "Active");
+    this.cannabisLicences =
+      licences.filter(item => item.licenceTypeCategory === "Cannabis" && item.status === "Active");
     this.application = application;
     this.applicationContact = {
       contactPersonFirstName: this.application.contactPersonFirstName,
@@ -141,28 +149,37 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     this.primaryInvoice = primary;
     this.secondaryInvoice = secondary;
 
+    const primaryInvoiceInfoMissing = primary && primary.isApproved && !this.application.primaryInvoicePaid;
+    const secondaryInvoiceInfoMissing = secondary && secondary.isApproved && !this.application.secondaryInvoicePaid;
+
     // if all required payments are made, go to the dashboard
     if ((!this.hasCannabis || this.application.primaryInvoicePaid) &&
       (!this.hasLiquor || this.application.secondaryInvoicePaid)) {
-      // this.router.navigateByUrl('/dashboard');
       this.canCreateNewApplication = true;
     }
 
-    // if any payment was made, disable the form
-    if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
-      this.form.disable();
-      this.appContactDisabled = true;
-    }
-    this.form.patchValue(application);
+    if (primaryInvoiceInfoMissing || secondaryInvoiceInfoMissing) {
+      // the asynchonous workflow in dynamics has not yet run. Pause for a second and get data again
+      setTimeout(() => {
+        this.loadData();
+      }, 1000);
+    } else {
+      // if any payment was made, disable the form
+      if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
+        this.form.disable();
+        this.appContactDisabled = true;
+      }
+      this.form.patchValue(application);
 
-    this.dataLoaded = true;
+      this.dataLoaded = true;
+    }
   }
 
   /**
  * Save form data
  * @param showProgress
  */
-  save(showProgress: boolean = false, appData: Application = <Application>{}): Observable<[boolean, Application]> {
+  save(showProgress: boolean = false, appData: Application = {} as Application): Observable<[boolean, Application]> {
     const saveData = this.form.value;
 
     return this.applicationDataService.updateApplication({
@@ -173,15 +190,17 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     })
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         const res: [boolean, Application] = [false, null];
         return of(res);
       }))
       .pipe(mergeMap((data) => {
         if (showProgress === true) {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open("Application has been saved",
+            "Success",
+            { duration: 2500, panelClass: ["green-snackbar"] });
         }
-        const res: [boolean, Application] = [true, <Application>data];
+        const res: [boolean, Application] = [true, data as Application];
         return of(res);
       }));
   }
@@ -190,7 +209,52 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     this.showValidationMessages = false;
     this.validationMessages = [];
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
-    return this.form.disabled || this.form.valid;
+    let valid = this.form.disabled || this.form.valid;
+
+    const securitiesDocIsRequired = (this.form.get('csInternalTransferOfShares').value
+      || this.form.get('csExternalTransferOfShares').value);
+    if (securitiesDocIsRequired && this.uploadedCentralSecuritiesRegister < 1) {
+      this.validationMessages.push('At least one Central Securities Register document is required.');
+      valid = false;
+    }
+
+    const noticeOfArticlesDocIsRequired = (this.form.get('csChangeOfDirectorsOrOfficers').value);
+    if (noticeOfArticlesDocIsRequired && this.uploadedNOA < 1) {
+      this.validationMessages.push('The Notice of Articles document is required.');
+      valid = false;
+    }
+
+    const partnershipRegistrationDocIsRequired = (this.form.get('csNameChangeLicenseeSociety').value);
+    if (partnershipRegistrationDocIsRequired && this.uploadedSocietyNameChange < 1) {
+      this.validationMessages.push('A Partnership Registration document is required.');
+      valid = false;
+    }
+
+    const corpNameChangeDocIsRequired = (this.form.get('csNameChangeLicenseeCorporation').value);
+    if (corpNameChangeDocIsRequired && this.uploadedCertificateOfNameChange < 1) {
+      this.validationMessages.push('A copy of the Certificate of Change of Name Form is required.');
+      valid = false;
+    }
+
+    const partnerLicenseeNameChangeDocIsRequired = (this.form.get('csNameChangeLicenseePartnership').value);
+    if (partnerLicenseeNameChangeDocIsRequired && this.uploadedPartnershipRegistration < 1) {
+      this.validationMessages.push('A Change of Name document is required.');
+      valid = false;
+    }
+
+    const nameChangeDocIsRequired = (this.form.get('csNameChangeLicenseePerson').value);
+    if (nameChangeDocIsRequired && this.uploadedNameChangeDocuments < 1) {
+      this.validationMessages.push('A Change of Name document is required.');
+      valid = false;
+    }
+
+    const executorDocIsRequired = (this.form.get('csAdditionalReceiverOrExecutor').value && this.form.get(''));
+    if (executorDocIsRequired && this.uploadedExecutorDocuments < 1) {
+      this.validationMessages.push('Please upload a copy of Assignment of Executor, a copy of the last will(s) and testament(s) or a copy of the Death Certificate.');
+      valid = false;
+    }
+
+    return valid;
   }
 
   isScreeningRequired(): boolean {
@@ -204,16 +268,18 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   /**
    * Submit the application for payment
    * */
-  submit_application(invoiceType: 'primary' | 'secondary') {
+  submit_application(invoiceType: "primary" | "secondary") {
     // Only save if the data is valid
     if (this.isValid()) {
-      if (invoiceType === 'primary') {
+      if (invoiceType === "primary") {
         this.primaryPaymentInProgress = true;
       } else {
         this.secondaryPaymentInProgress = true;
       }
       this.submitApplicationInProgress = true;
-      this.save(!this.application.applicationType.isFree, <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
+      this
+        .save(!this.application.applicationType.isFree,
+          { invoiceTrigger: 1 } as Application) // trigger invoice generation when saving
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(([saveSucceeded, app]) => {
           if (saveSucceeded) {
@@ -221,16 +287,17 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
               this.submitPayment(invoiceType)
                 .subscribe(res => {
                   this.saveComplete.emit(true);
-                  if (invoiceType === 'primary') {
+                  if (invoiceType === "primary") {
                     this.primaryPaymentInProgress = false;
                   } else {
                     this.secondaryPaymentInProgress = false;
                   }
                 });
             }
-          } else if (this.application.applicationType.isFree) { // show error message the save failed and the application is free
-            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-            if (invoiceType === 'primary') {
+          } else if (this.application.applicationType.isFree
+          ) { // show error message the save failed and the application is free
+            this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+            if (invoiceType === "primary") {
               this.primaryPaymentInProgress = false;
             } else {
               this.secondaryPaymentInProgress = false;
@@ -247,32 +314,36 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   /**
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
-  private submitPayment(invoiceType: 'primary' | 'secondary') {
-    let payMethod = this.paymentDataService.getPaymentURI('primaryInvoice', this.application.id);
-    if (invoiceType === 'secondary') {
-      payMethod = this.paymentDataService.getPaymentURI('secondaryInvoice', this.application.id);
+  private submitPayment(invoiceType: "primary" | "secondary") {
+    let payMethod = this.paymentDataService.getPaymentURI("primaryInvoice", this.application.id);
+    if (invoiceType === "secondary") {
+      payMethod = this.paymentDataService.getPaymentURI("secondaryInvoice", this.application.id);
     }
     return payMethod
       .pipe(takeWhile(() => this.componentActive))
       .pipe(mergeMap(jsonUrl => {
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
-      }, (err: any) => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-      }));
+        window.location.href = jsonUrl["url"];
+        return jsonUrl["url"];
+      },
+        (err: any) => {
+          if (err._body === "Payment already made") {
+            this.snackBar.open("Application payment has already been made.",
+              "Fail",
+              { duration: 3500, panelClass: ["red-snackbar"] });
+          }
+        }));
   }
 
   getValidationErrorMap() {
     const errorMap = {
-      signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
-      authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
-      contactPersonEmail: 'Please enter the business contact\'s email address',
-      contactPersonFirstName: 'Please enter the business contact\'s first name',
-      contactPersonLastName: 'Please enter the business contact\'s last name',
-      contactPersonPhone: 'Please enter the business contact\'s 10-digit phone number',
-      contactPersonRole: 'Please enter the contact person role'
+      signatureAgreement:
+        "Please affirm that all of the information provided for this application is true and complete",
+      authorizedToSubmit: "Please affirm that you are authorized to submit the application",
+      contactPersonEmail: "Please enter the business contact's email address",
+      contactPersonFirstName: "Please enter the business contact's first name",
+      contactPersonLastName: "Please enter the business contact's last name",
+      contactPersonPhone: "Please enter the business contact's 10-digit phone number",
+      contactPersonRole: "Please enter the contact person role"
     };
 
     return errorMap;
@@ -280,116 +351,126 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
 
 }
 
+const INTERNAL_TRANSFER_OF_SHARES = '';
 const masterChangeList = [
   {
-    name: 'Internal Transfer of Shares',
-    formControlName: 'csInternalTransferOfShares',
-    availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
+    name: "Internal Transfer of Shares",
+    formControlName: "csInternalTransferOfShares",
+    availableTo: ["PrivateCorporation", "LimitedLiabilityPartnership"],
     CannabisFee: 110,
     LiquorFee: 110,
     RequiresPHS: false,
     RequiresCAS: false,
     helpTextHeader: 'Use this option to report:',
-    helpText: ['When shares or partnership units are redistributed between existing sharesholders/unit holders',
+    helpText: ['When shares or partnership units are redistributed between existing shareholders/partners  but no new shareholders/partners are added to the business structure (if new shareholders are added, see external transfer of shares)',
       'Removal of shareholders/unit holders',
-      'Amalgamations that do not add new shareholders or legal entities to the licensee coroporation',
-      'Third party operators should also complete this section when an internal share transfer or an amalgamation occurs'
+      'Amalgamations that do not add new shareholders or legal entities to the licensee  corporation',
+      'Holding companies within the licensee corporation and/or third party operators should also complete this section when an internal share transfer or an amalgamation occurs'
     ],
-    helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+    ////helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
-    name: 'External Transfer of Shares',
-    formControlName: 'csExternalTransferOfShares',
-    availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
+    name: "External Transfer of Shares",
+    formControlName: "csExternalTransferOfShares",
+    availableTo: ["PrivateCorporation", "LimitedLiabilityPartnership"],
     CannabisFee: 330,
     LiquorFee: 330,
     RequiresPHS: false,
     RequiresCAS: false,
     helpTextHeader: 'Use this option to report:',
-    helpText: ['when new shareholders have been added (companies or individuals) to the licensee corporation or holding companies as a result of a transfer of existing shares or the issuance of new shares',
+    helpText: ['When new shareholders (companies or individuals) have been added to the licensee corporation or holding companies as a result of a transfer of existing shares or the issuance of new shares',
+      'Amalgamations that add new shareholders or legal entities to the licensee corporation',
       'Third party operators should also complete this section when an external transfer occurs'
     ],
-    helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
-    name: 'Change of Directors or Officers',
-    formControlName: 'csChangeOfDirectorsOrOfficers',
-    availableTo: ['PrivateCorporation', 'PublicCorporation', 'Society'],
+    name: "Change of Directors or Officers",
+    formControlName: "csChangeOfDirectorsOrOfficers",
+    availableTo: ["PrivateCorporation", "PublicCorporation", "Society"],
     CannabisFee: 500,
     LiquorFee: 220,
     RequiresPHS: false,
     RequiresCAS: false,
     helpTextHeader: 'Use this option to report:',
-    helpText: ['When there are changes in directors or officers of a public corporation or society within the licensee legal entity'
+    helpText: ['For liquor licensees - when there are changes in directors or officers of a public corporation or society that holds a licence, or of a public corporation or society within the licensee legal entity',
+      'For cannabis licensees – when there are changes in directors or officers of a private or public  corporation or society that holds a licence, or of a public or private corporation or society within the licensee legal entity'
     ],
-    helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
-    name: 'Name Change, Licensee -- Corporation',
-    formControlName: 'csNameChangeLicenseeCorporation',
-    availableTo: ['PrivateCorporation', 'PublicCorporation'],
+    name: "Name Change, Licensee -- Corporation",
+    formControlName: "csNameChangeLicenseeCorporation",
+    availableTo: ["PrivateCorporation", "PublicCorporation"],
     CannabisFee: 500,
     LiquorFee: 500,
     RequiresPHS: false,
     RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: ['When a corporation with an interest in a licence has legally changed its name, but existing corporate shareholders, directors and officers, and certificate number on the certificate of incorporation have not changed'
+    helpTextHeader: "Use this option to report:",
+    helpText: [
+      "When a corporation with an interest in a licence has legally changed its name, but existing corporate shareholders, directors and officers, and certificate number on the certificate of incorporation have not changed"
     ],
-    helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
-    name: 'Name Change, Licensee -- Partnership',
-    formControlName: 'csNameChangeLicenseePartnership',
-    availableTo: ['GeneralPartnership', 'LimitedLiabilityPartnership'],
+    name: "Name Change, Licensee -- Partnership",
+    formControlName: "csNameChangeLicenseePartnership",
+    availableTo: ["GeneralPartnership", "LimitedLiabilityPartnership"],
     CannabisFee: 220,
     LiquorFee: 220,
     RequiresPHS: false,
     RequiresCAS: false,
     helpTextHeader: 'Use this option to report:',
-    helpText: ['When the legal name of a partnership is changed but no new partners are added and no existing partners'
+    helpText: ['When a person holding an interest in a licence has legally changed their name'
     ],
-    helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
 
   },
   {
-    name: 'Name Change, Licensee -- Society',
-    formControlName: 'csNameChangeLicenseeSociety',
-    availableTo: ['Society'],
+    name: "Name Change, Licensee -- Society",
+    formControlName: "csNameChangeLicenseeSociety",
+    availableTo: ["Society"],
     CannabisFee: 220,
     LiquorFee: 220,
     RequiresPHS: false,
     RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: ['When the legal name of a society is changed, but the society structure, membership and certification number on the certificate of incorporation does not change'
+    helpTextHeader: "Use this option to report:",
+    helpText: [
+      "When the legal name of a society is changed, but the society structure, membership and certification number on the certificate of incorporation does not change"
     ],
-    helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
-    name: 'Name Change, Person',
-    formControlName: 'csNameChangeLicenseePerson',
-    availableTo: ['PrivateCorporation', 'PublicCorporation', 'GeneralPartnership',
-      'LimitedLiabilityPartnership', 'IndigenousNation', 'LocalGovernment', 'Society'],
+    name: "Name Change, Person",
+    formControlName: "csNameChangeLicenseePerson",
+    availableTo: [
+      "PrivateCorporation", "PublicCorporation", "GeneralPartnership",
+      "LimitedLiabilityPartnership", "IndigenousNation", "LocalGovernment", "Society"
+    ],
     CannabisFee: 220,
     LiquorFee: 220,
     RequiresPHS: false,
     RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: ['when a person holding an interest in a licence has legally changed their name'
+    helpTextHeader: "Use this option to report:",
+    helpText: [
+      "when a person holding an interest in a licence has legally changed their name"
     ],
-    helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
-    name: 'Addition of Receiver or Executor',
-    formControlName: 'csAdditionalReceiverOrExecutor',
-    availableTo: ['PrivateCorporation', 'PublicCorporation', 'GeneralPartnership',
-      'LimitedLiabilityPartnership', 'Society'],
+    name: "Addition of Receiver or Executor",
+    formControlName: "csAdditionalReceiverOrExecutor",
+    availableTo: [
+      "PrivateCorporation", "PublicCorporation", "GeneralPartnership",
+      "LimitedLiabilityPartnership", "Society"
+    ],
     CannabisFee: 220,
     LiquorFee: 220,
     RequiresPHS: false,
     RequiresCAS: false,
     helpTextHeader: 'Use this option to report:',
-    helpText: ['upon the death, bankruptcy or receivership of a licensee'
+    helpText: ['Upon the death, bankruptcy or receivership of a licensee'
     ],
-    helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   }
 ];

@@ -1,22 +1,29 @@
 <form [formGroup]="formGroup">
-    <table class="capacity">
-        <thead *ngIf="areasArr.controls.length > 0">
-            <th style="width: 55px;">Area No.</th>
-            <th [innerHtml]="areaLocationHeading"></th>
-            <th *ngIf="isService()">Indoor</th>
-            <th *ngIf="isService()">Patio</th>
-            <th>Proposed Capacity</th>
-            <th style="width: 45px;"></th>
-        </thead>
-        <ng-container formArrayName="areas">
-            <tr capacity-table-row *ngFor="let area of areasArr.controls; let i=index" [formControlName]="i"
-                [areaCategory]="areaCategory" [onDelete]="removeRow.bind(this)" [index]="i" [onRowChange]="onRowChange.bind(this)" [enabled]="enabled"></tr>
-        </ng-container>
-        <tr>
-            <td [colSpan]="isService() ? 2 : 1"><button (click)="addRow()" class="btn btn-secondary" style="height: 100%;" *ngIf="enabled"><i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Area</button></td>
-            <td [colSpan]="isService() ? 2 : 1" style="text-align:right;"><strong>Total Requested Capacity:</strong></td>
-            <td><strong>{{total}}</strong></td>
-            <td></td>
-        </tr>
-    </table>
+  <table class="capacity">
+    <thead *ngIf="areasArr.controls.length > 0">
+    <th style="width: 55px;">Area No.</th>
+    <th [innerHtml]="areaLocationHeading"></th>
+    <th *ngIf="isService()">Indoor</th>
+    <th *ngIf="isService()">Patio</th>
+    <th>Proposed Capacity</th>
+    <th style="width: 45px;"></th>
+    </thead>
+    <ng-container formArrayName="areas">
+      <tr capacity-table-row *ngFor="let area of areasArr.controls; let i=index" [formControlName]="i"
+          [areaCategory]="areaCategory" [onDelete]="removeRow.bind(this)" [index]="i" [onRowChange]="onRowChange.bind(this)" [enabled]="enabled">
+      </tr>
+    </ng-container>
+    <tr>
+      <td [colSpan]="isService() ? 2 : 1">
+        <button (click)="addRow()" class="btn btn-secondary" style="height: 100%;" *ngIf="enabled"><i class="fa fa-plus-circle" style="color: #1a5a96;"></i> Add Area</button>
+      </td>
+      <td [colSpan]="isService() ? 2 : 1" style="text-align: right;">
+        <strong>Total Requested Capacity:</strong>
+      </td>
+      <td>
+        <strong>{{total}}</strong>
+      </td>
+      <td></td>
+    </tr>
+  </table>
 </form>

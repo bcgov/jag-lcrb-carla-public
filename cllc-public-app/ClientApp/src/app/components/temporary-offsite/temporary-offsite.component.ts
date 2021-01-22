@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { FormBuilder, Validators } from '@angular/forms';
-import { SpecificLocation, FoodService, Entertainment, EventType, LicenceEvent, EventStatus } from '../../models/licence-event.model';
-import { LicenceEventsService } from '@services/licence-events.service';
-import { takeWhile, switchMap } from 'rxjs/operators';
-import { AppState } from '@app/app-state/models/app-state';
-import { Store } from '@ngrx/store';
-import { User } from '@models/user.model';
-import { FormBase } from '@shared/form-base';
-import { Router, ActivatedRoute } from '@angular/router';
-import { faSave } from '@fortawesome/free-regular-svg-icons';
-import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
+import { FormBuilder, Validators } from "@angular/forms";
+import { LicenceEvent, EventStatus } from "../../models/licence-event.model";
+import { LicenceEventsService } from "@services/licence-events.service";
+import { takeWhile } from "rxjs/operators";
+import { AppState } from "@app/app-state/models/app-state";
+import { Store } from "@ngrx/store";
+import { User } from "@models/user.model";
+import { FormBase } from "@shared/form-base";
+import { Router, ActivatedRoute } from "@angular/router";
+import { faSave } from "@fortawesome/free-regular-svg-icons";
+import { faQuestionCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { LicenceEventSchedule } from "@models/licence-event-schedule";
 
 const DEFAULT_START_TIME = {
   hour: 9,
@@ -20,12 +21,12 @@ const DEFAULT_END_TIME = {
   hour: 2,
   minute: 0
 };
-const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 @Component({
-  selector: 'app-temporary-offsite',
-  templateUrl: './temporary-offsite.component.html',
-  styleUrls: ['./temporary-offsite.component.scss'],
+  selector: "app-temporary-offsite",
+  templateUrl: "./temporary-offsite.component.html",
+  styleUrls: ["./temporary-offsite.component.scss"],
 })
 export class TemporaryOffsiteComponent extends FormBase implements OnInit {
   faSave = faSave;
@@ -44,25 +45,25 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
 
   timeForms = this.fb.array([]);
   eventForm = this.fb.group({
-    status: ['', [Validators.required]],
-    id: ['', []],
-    name: ['', []],
-    licenceId: ['', []],
-    accountId: ['', []],
-    contactName: ['', [Validators.required]],
-    contactPhone: ['', [Validators.required]],
-    contactEmail: ['', [Validators.required]],
-    street1: ['', [Validators.required]],
-    street2: ['', []],
-    city: ['', [Validators.required]],
-    province: ['BC', [Validators.required]],
-    postalCode: ['', [Validators.required]],
-    startDate: ['', [Validators.required]],
-    endDate: ['', [Validators.required]],
-    sepLicensee: ['', [Validators.required]],
-    sepLicenceNumber: ['', [Validators.required]],
-    sepContactName: ['', [Validators.required]],
-    sepContactPhoneNumber: ['', [Validators.required]],
+    status: ["", [Validators.required]],
+    id: ["", []],
+    name: ["", []],
+    licenceId: ["", []],
+    accountId: ["", []],
+    contactName: ["", [Validators.required]],
+    contactPhone: ["", [Validators.required]],
+    contactEmail: ["", [Validators.required]],
+    street1: ["", [Validators.required]],
+    street2: ["", []],
+    city: ["", [Validators.required]],
+    province: ["BC", [Validators.required]],
+    postalCode: ["", [Validators.required]],
+    startDate: ["", [Validators.required]],
+    endDate: ["", [Validators.required]],
+    sepLicensee: ["", [Validators.required]],
+    sepLicenceNumber: ["", [Validators.required]],
+    sepContactName: ["", [Validators.required]],
+    sepContactPhoneNumber: ["", [Validators.required]],
     agreement: [false, [Validators.required]]
   });
 
@@ -72,45 +73,45 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
     private store: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute
-    ) {
-      super();
-      this.route.paramMap.subscribe(params => {
-        this.eventForm.controls['licenceId'].setValue(params.get('licenceId'));
-        if (params.get('eventId')) {
-          this.isEditMode = true;
-          this.retrieveSavedEvent(params.get('eventId'));
-        } else {
-          this.resetDateFormsToDefault();
-          this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
-        }
-      });
-      this.startDateMinimum = new Date();
-      this.startDateMinimum.setDate(this.startDateMinimum.getDate());
-      this.endDateMinimum = new Date();
-      this.endDateMinimum.setDate(this.endDateMinimum.getDate());
-    }
+  ) {
+    super();
+    this.route.paramMap.subscribe(params => {
+      this.eventForm.controls["licenceId"].setValue(params.get("licenceId"));
+      if (params.get("eventId")) {
+        this.isEditMode = true;
+        this.retrieveSavedEvent(params.get("eventId"));
+      } else {
+        this.resetDateFormsToDefault();
+        this.eventForm.controls["status"].setValue(this.getOptionFromLabel(this.eventStatus, "Draft").value);
+      }
+    });
+    this.startDateMinimum = new Date();
+    this.startDateMinimum.setDate(this.startDateMinimum.getDate());
+    this.endDateMinimum = new Date();
+    this.endDateMinimum.setDate(this.endDateMinimum.getDate());
+  }
 
   ngOnInit() {
     this.store.select(state => state.currentUserState.currentUser)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: User) => {
-        this.eventForm.controls['contactEmail'].setValue(data.email);
+        this.eventForm.controls["contactEmail"].setValue(data.email);
       });
   }
 
   retrieveSavedEvent(eventId: string) {
     this.busy = this.licenceEvents.getLicenceEvent(eventId)
-    .subscribe((licenceEvent) => {
-      this.setFormToLicenceEvent(licenceEvent);
-    });
+      .subscribe((licenceEvent) => {
+        this.setFormToLicenceEvent(licenceEvent);
+      });
   }
 
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
-    if (licenceEvent.status === this.getOptionFromLabel(this.eventStatus, 'Approved').value) {
+    if (licenceEvent.status === this.getOptionFromLabel(this.eventStatus, "Approved").value) {
       this.isReadOnly = true;
     }
 
-    const schedules = licenceEvent['schedules'];
+    const schedules = licenceEvent["schedules"];
     this.eventForm.setValue({
       status: licenceEvent.status,
       id: licenceEvent.id,
@@ -133,7 +134,7 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
       endDate: new Date(licenceEvent.endDate),
       agreement: false
     });
-    
+
     if (this.isReadOnly) {
       this.eventForm.disable();
     }
@@ -143,24 +144,24 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
     }
   }
 
-  setTimeFormsToLicenceEventSchedule(schedules: []) {
+  setTimeFormsToLicenceEventSchedule(schedules: LicenceEventSchedule[]) {
     schedules.forEach(sched => {
-      const startDate = (new Date(sched['eventStartDateTime']));
-      const endDate = (new Date(sched['eventEndDateTime']));
-      const liquorStart = (new Date(sched['serviceStartDateTime']));
-      const liquorEnd = (new Date(sched['serviceEndDateTime']));
+      const startDate = (new Date(sched["eventStartDateTime"]));
+      const endDate = (new Date(sched["eventEndDateTime"]));
+      const liquorStart = (new Date(sched["serviceStartDateTime"]));
+      const liquorEnd = (new Date(sched["serviceEndDateTime"]));
 
       const isDefault = ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) > 1;
       if (!isDefault) {
         this.scheduleIsInconsistent = true;
       }
       const timeForm = this.fb.group({
-        dateTitle: [isDefault ? null : DAYS[startDate.getDay()] + ', ' + startDate.toLocaleDateString('en-US'), []],
+        dateTitle: [isDefault ? null : DAYS[startDate.getDay()] + ", " + startDate.toLocaleDateString("en-US"), []],
         date: [isDefault ? null : startDate, []],
-        startTime: [{hour: startDate.getHours(), minute: startDate.getMinutes()}, [Validators.required]],
-        endTime: [{hour: endDate.getHours(), minute: endDate.getMinutes()}, [Validators.required]],
-        liquorStartTime: [{hour: liquorStart.getHours(), minute: liquorStart.getMinutes()}, [Validators.required]],
-        liquorEndTime: [{hour: liquorEnd.getHours(), minute: liquorEnd.getMinutes()}, [Validators.required]]
+        startTime: [{ hour: startDate.getHours(), minute: startDate.getMinutes() }, [Validators.required]],
+        endTime: [{ hour: endDate.getHours(), minute: endDate.getMinutes() }, [Validators.required]],
+        liquorStartTime: [{ hour: liquorStart.getHours(), minute: liquorStart.getMinutes() }, [Validators.required]],
+        liquorEndTime: [{ hour: liquorEnd.getHours(), minute: liquorEnd.getMinutes() }, [Validators.required]]
       });
 
       if (this.isReadOnly) {
@@ -173,7 +174,7 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
 
   save(submit = false) {
     if (submit) {
-      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Submitted').value);
+      this.eventForm.controls["status"].setValue(this.getOptionFromLabel(this.eventStatus, "Submitted").value);
     }
 
     const schedules = this.packageUpTimeForms();
@@ -194,16 +195,16 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
       }
       let eventBegin, eventEnd, serviceBegin, serviceEnd;
 
-      if (this.timeForms.controls[i]['controls']['dateTitle'].value === null) {
-        const beginDate = this.eventForm.controls['startDate'].value;
-        const endDate = this.eventForm.controls['endDate'].value;
+      if (this.timeForms.controls[i]["controls"]["dateTitle"].value === null) {
+        const beginDate = this.eventForm.controls["startDate"].value;
+        const endDate = this.eventForm.controls["endDate"].value;
 
         eventBegin = new Date(beginDate);
         eventEnd = new Date(endDate);
         serviceBegin = new Date(beginDate);
         serviceEnd = new Date(endDate);
       } else {
-        const date = this.timeForms.controls[i]['controls']['date'].value;
+        const date = this.timeForms.controls[i]["controls"]["date"].value;
 
         eventBegin = new Date(date);
         eventEnd = new Date(date);
@@ -211,14 +212,14 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
         serviceEnd = new Date(date);
       }
 
-      eventBegin.setHours(this.timeForms.controls[i]['controls']['startTime'].value['hour']);
-      eventBegin.setMinutes(this.timeForms.controls[i]['controls']['startTime'].value['minute']);
-      eventEnd.setHours(this.timeForms.controls[i]['controls']['endTime'].value['hour']);
-      eventEnd.setMinutes(this.timeForms.controls[i]['controls']['endTime'].value['minute']);
-      serviceBegin.setHours(this.timeForms.controls[i]['controls']['liquorStartTime'].value['hour']);
-      serviceBegin.setMinutes(this.timeForms.controls[i]['controls']['liquorStartTime'].value['minute']);
-      serviceEnd.setHours(this.timeForms.controls[i]['controls']['liquorEndTime'].value['hour']);
-      serviceEnd.setMinutes(this.timeForms.controls[i]['controls']['liquorEndTime'].value['minute']);
+      eventBegin.setHours(this.timeForms.controls[i]["controls"]["startTime"].value["hour"]);
+      eventBegin.setMinutes(this.timeForms.controls[i]["controls"]["startTime"].value["minute"]);
+      eventEnd.setHours(this.timeForms.controls[i]["controls"]["endTime"].value["hour"]);
+      eventEnd.setMinutes(this.timeForms.controls[i]["controls"]["endTime"].value["minute"]);
+      serviceBegin.setHours(this.timeForms.controls[i]["controls"]["liquorStartTime"].value["hour"]);
+      serviceBegin.setMinutes(this.timeForms.controls[i]["controls"]["liquorStartTime"].value["minute"]);
+      serviceEnd.setHours(this.timeForms.controls[i]["controls"]["liquorEndTime"].value["hour"]);
+      serviceEnd.setMinutes(this.timeForms.controls[i]["controls"]["liquorEndTime"].value["minute"]);
 
       if ((eventEnd.getTime() - eventBegin.getTime()) < 0) {
         eventEnd.setDate(eventEnd.getDate() + 1);
@@ -240,18 +241,19 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
   }
 
   updateLicence(schedules) {
-    this.busy = this.licenceEvents.updateLicenceEvent(this.eventForm.get('id').value, {...this.eventForm.value, schedules})
-    .subscribe((licenceEvent) => {
-      this.router.navigate(['/licences']);
-    });
+    this.busy = this.licenceEvents
+      .updateLicenceEvent(this.eventForm.get("id").value, { ...this.eventForm.value, schedules })
+      .subscribe((licenceEvent) => {
+        this.router.navigate(["/licences"]);
+      });
   }
 
   createLicence(schedules) {
-    this.eventForm.removeControl('id');
-    this.busy = this.licenceEvents.createLicenceEvent({...this.eventForm.value, schedules: schedules})
-    .subscribe((licenceEvent) => {
-      this.router.navigate(['/licences']);
-    });
+    this.eventForm.removeControl("id");
+    this.busy = this.licenceEvents.createLicenceEvent({ ...this.eventForm.value, schedules: schedules })
+      .subscribe((licenceEvent) => {
+        this.router.navigate(["/licences"]);
+      });
   }
 
   getOptionFromValue(options: any, value: number) {
@@ -261,7 +263,7 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
     }
     return {
       value: null,
-      label: ''
+      label: ""
     };
   }
 
@@ -272,7 +274,7 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
     }
     return {
       value: null,
-      label: ''
+      label: ""
     };
   }
 
@@ -283,7 +285,8 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
 
   refreshTimeDays() {
     if (this.scheduleIsInconsistent) {
-      const days = this.getDaysArray(this.eventForm.controls['startDate'].value, this.eventForm.controls['endDate'].value);
+      const days = this.getDaysArray(this.eventForm.controls["startDate"].value,
+        this.eventForm.controls["endDate"].value);
       this.resetDateFormsToArray(days);
     } else {
       this.resetDateFormsToDefault();
@@ -294,6 +297,7 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
     this.updateEndDateMinimum();
     this.refreshTimeDays();
   }
+
   endDateChanged() {
     this.refreshTimeDays();
   }
@@ -314,7 +318,7 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
     this.timeForms = this.fb.array([]);
     datesArray.forEach(element => {
       this.timeForms.push(this.fb.group({
-        dateTitle: [DAYS[element.getDay()] + ', ' + element.toLocaleDateString('en-US'), []],
+        dateTitle: [DAYS[element.getDay()] + ", " + element.toLocaleDateString("en-US"), []],
         date: [element, []],
         startTime: [DEFAULT_START_TIME, [Validators.required]],
         endTime: [DEFAULT_END_TIME, [Validators.required]],
@@ -325,46 +329,47 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
   }
 
   updateEndDateMinimum() {
-    if (this.eventForm.controls['startDate'].value === null || this.eventForm.controls['startDate'].value === '') {
+    if (this.eventForm.controls["startDate"].value === null || this.eventForm.controls["startDate"].value === "") {
       this.endDateMaximum = null;
-    } else if (this.eventForm.controls['endDate'].value === null || this.eventForm.controls['endDate'].value === '') {
-      this.endDateMinimum = this.eventForm.controls['startDate'].value;
-      this.endDateMaximum = new Date(this.eventForm.controls['startDate'].value);
-      this.endDateMaximum.setDate(this.eventForm.controls['startDate'].value.getDate() + 30);
+    } else if (this.eventForm.controls["endDate"].value === null || this.eventForm.controls["endDate"].value === "") {
+      this.endDateMinimum = this.eventForm.controls["startDate"].value;
+      this.endDateMaximum = new Date(this.eventForm.controls["startDate"].value);
+      this.endDateMaximum.setDate(this.eventForm.controls["startDate"].value.getDate() + 30);
     } else {
       // start and end date
-      if (this.eventForm.controls['endDate'].value.getTime() < this.eventForm.controls['startDate'].value.getTime()) {
-        this.eventForm.controls['endDate'].setValue(null);
+      if (this.eventForm.controls["endDate"].value.getTime() < this.eventForm.controls["startDate"].value.getTime()) {
+        this.eventForm.controls["endDate"].setValue(null);
       }
-      this.endDateMinimum = this.eventForm.controls['startDate'].value;
-      this.endDateMaximum = new Date(this.eventForm.controls['startDate'].value);
-      this.endDateMaximum.setDate(this.eventForm.controls['startDate'].value.getDate() + 30);
+      this.endDateMinimum = this.eventForm.controls["startDate"].value;
+      this.endDateMaximum = new Date(this.eventForm.controls["startDate"].value);
+      this.endDateMaximum.setDate(this.eventForm.controls["startDate"].value.getDate() + 30);
     }
   }
 
   getDaysArray(start, end) {
     start = new Date(start);
     end = new Date(end);
-    for(var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
-        arr.push(new Date(dt));
+    for (var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
+      arr.push(new Date(dt));
     }
     return arr;
   }
 
   isFormValid() {
-    return this.eventForm.invalid || !this.eventForm.controls['agreement'].value;
+    return this.eventForm.invalid || !this.eventForm.controls["agreement"].value;
   }
 
   cancel() {
     if (this.isEditMode) {
-      const id = this.eventForm.get('id').value;
-      const status = this.getOptionFromLabel(this.eventStatus, 'Cancelled').value;
-      this.busy = this.licenceEvents.updateLicenceEvent(id, {...this.eventForm.value, status: status, licenceId: this.eventForm.get('licenceId').value})
-      .subscribe((licenceEvent) => {
-        this.router.navigate(['/licences']);
-      });
+      const id = this.eventForm.get("id").value;
+      const status = this.getOptionFromLabel(this.eventStatus, "Cancelled").value;
+      this.busy = this.licenceEvents.updateLicenceEvent(id,
+          { ...this.eventForm.value, status: status, licenceId: this.eventForm.get("licenceId").value })
+        .subscribe((licenceEvent) => {
+          this.router.navigate(["/licences"]);
+        });
     } else {
-      this.router.navigate(['/licences']);
+      this.router.navigate(["/licences"]);
     }
   }
 }
