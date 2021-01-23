@@ -201,7 +201,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // TUA event locations
             MicrosoftDynamicsCRMadoxioEventlocationCollection eventLocations = dynamicsClient.GetEventLocationsByEventId(result.Id);
-            foreach (var loc in eventLocations.Value)
+            foreach (var loc in eventLocations?.Value)
             {
                 result.EventLocations.Add(loc.ToViewModel());
             }
@@ -341,8 +341,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsnoneoftheabove = from.IsNoneOfTheAbove;
             to.AdoxioIsagreement1 = from.IsAgreement1;
             to.AdoxioIsagreement2 = from.IsAgreement2;
-
-            // TODO: Event locations!
         }
     }
 }

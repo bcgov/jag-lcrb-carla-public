@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.EventId = item._adoxioEventidValue;
                 result.Name = item.AdoxioName;
                 result.Attendance = item.AdoxioAttendance;
-                
+                result.ServiceAreaId = item._adoxioServiceareaidValue;
             }
             return result;
         }
@@ -35,7 +35,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEventlocationid = from.Id;
             to.AdoxioName = from.Name;
             to.AdoxioAttendance = from.Attendance;
-            
         }
     }
 }
