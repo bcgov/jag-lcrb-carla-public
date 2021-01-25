@@ -12968,6 +12968,58 @@
         }
       }
     },
+    "/adoxio_eventlocations({adoxio_eventlocationid})/adoxio_ServiceAreaId": {
+      "get": {
+        "tags": [
+          "serviceareaid"
+        ],
+        "summary": "Get adoxio_ServiceAreaId from adoxio_eventlocations",
+        "operationId": "serviceareaid_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_eventlocationid",
+            "description": "key: adoxio_eventlocationid of adoxio_eventlocation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_events": {
       "get": {
         "tags": [
@@ -30861,6 +30913,152 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_serviceareas({adoxio_serviceareaid})/adoxio_servicearea_eventlocations": {
+      "get": {
+        "tags": [
+          "servicearea_eventlocations"
+        ],
+        "summary": "Get adoxio_servicearea_eventlocations from adoxio_serviceareas",
+        "operationId": "serviceareaeventlocations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_serviceareaid",
+            "description": "key: adoxio_serviceareaid of adoxio_servicearea",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventlocationCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_serviceareas({adoxio_serviceareaid})/adoxio_servicearea_eventlocations({adoxio_eventlocationid})": {
+      "get": {
+        "tags": [
+          "servicearea_eventlocations"
+        ],
+        "summary": "Get adoxio_servicearea_eventlocations from adoxio_serviceareas",
+        "operationId": "serviceareaeventlocations_Getadoxio_servicearea_eventlocationsByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_serviceareaid",
+            "description": "key: adoxio_serviceareaid of adoxio_servicearea",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_eventlocationid",
+            "description": "key: adoxio_eventlocationid of adoxio_eventlocation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventlocation"
+            }
           },
           "default": {
             "description": "OData Error"
@@ -60229,15 +60427,11 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_eventlocation",
       "type": "object",
       "properties": {
-        "_modifiedonbehalfby_value": {
+        "_adoxio_serviceareaid_value": {
           "type": "string"
         },
         "_adoxio_eventid_value": {
           "type": "string"
-        },
-        "adoxio_locationid": {
-          "format": "int32",
-          "type": "integer"
         },
         "_createdby_value": {
           "type": "string"
@@ -60251,6 +60445,9 @@
           "type": "integer"
         },
         "_modifiedby_value": {
+          "type": "string"
+        },
+        "_modifiedonbehalfby_value": {
           "type": "string"
         },
         "overriddencreatedon": {
@@ -60368,6 +60565,9 @@
         },
         "adoxio_EventId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_event"
+        },
+        "adoxio_ServiceAreaId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_servicearea"
         }
       }
     },
@@ -70370,6 +70570,12 @@
         },
         "adoxio_Endorsement": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_endorsement"
+        },
+        "adoxio_servicearea_eventlocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_eventlocation"
+          }
         }
       }
     },
@@ -75831,9 +76037,6 @@
         "regardingobjectid_adoxio_leconnection": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_leconnection"
         },
-        "regardingobjectid_new_timerspike": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
-        },
         "regardingobjectid_adoxio_specialeventnote": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_specialeventnote"
         },
@@ -78592,9 +78795,6 @@
         "regardingobjectid_adoxio_leconnection": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_leconnection"
         },
-        "regardingobjectid_new_timerspike": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
-        },
         "regardingobjectid_adoxio_specialeventnote": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_specialeventnote"
         },
@@ -80379,12 +80579,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_leconnection"
-          }
-        },
-        "business_unit_new_timerspike": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
           }
         },
         "business_unit_adoxio_specialeventnote": {
@@ -88517,12 +88711,6 @@
         },
         "baserecordid_adoxio_leconnection": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_leconnection"
-        },
-        "duplicaterecordid_new_timerspike": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
-        },
-        "baserecordid_new_timerspike": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
         },
         "duplicaterecordid_adoxio_specialeventnote": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_specialeventnote"
@@ -102529,9 +102717,6 @@
         "regardingobjectid_adoxio_leconnection": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_leconnection"
         },
-        "regardingobjectid_new_timerspike": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
-        },
         "regardingobjectid_adoxio_specialeventnote": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_specialeventnote"
         },
@@ -104896,176 +105081,6 @@
           }
         },
         "adminsettingsentity_PrincipalObjectAttributeAccesses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
-          }
-        }
-      }
-    },
-    "Microsoft.Dynamics.CRM.new_timerspike": {
-      "description": "Microsoft.Dynamics.CRM.new_timerspike",
-      "type": "object",
-      "properties": {
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "new_failure": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
-        "new_threedate": {
-          "type": "string"
-        },
-        "createdon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "importsequencenumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "statecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        },
-        "new_name": {
-          "type": "string"
-        },
-        "new_onedate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "modifiedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "new_timerspikeid": {
-          "type": "string"
-        },
-        "_owninguser_value": {
-          "type": "string"
-        },
-        "new_pause": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "new_twodate": {
-          "type": "string"
-        },
-        "_createdby_value": {
-          "type": "string"
-        },
-        "new_cancel": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "new_inprogress": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_owningbusinessunit_value": {
-          "type": "string"
-        },
-        "_modifiedonbehalfby_value": {
-          "type": "string"
-        },
-        "_owningteam_value": {
-          "type": "string"
-        },
-        "_modifiedby_value": {
-          "type": "string"
-        },
-        "createdby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "createdonbehalfby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedonbehalfby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "owninguser": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "owningteam": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
-        },
-        "ownerid": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
-        },
-        "owningbusinessunit": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
-        },
-        "new_timerspike_SyncErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
-          }
-        },
-        "new_timerspike_DuplicateMatchingRecord": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
-          }
-        },
-        "new_timerspike_DuplicateBaseRecord": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
-          }
-        },
-        "new_timerspike_AsyncOperations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
-          }
-        },
-        "new_timerspike_MailboxTrackingFolders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
-          }
-        },
-        "new_timerspike_ProcessSession": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
-          }
-        },
-        "new_timerspike_BulkDeleteFailures": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
-          }
-        },
-        "new_timerspike_PrincipalObjectAttributeAccesses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
@@ -109441,12 +109456,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_leconnection"
           }
         },
-        "owner_new_timerspike": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
-          }
-        },
         "owner_adoxio_specialeventnote": {
           "type": "array",
           "items": {
@@ -112199,9 +112208,6 @@
         "objectid_adoxio_leconnection": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_leconnection"
         },
-        "objectid_new_timerspike": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
-        },
         "objectid_adoxio_specialeventnote": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_specialeventnote"
         },
@@ -112965,9 +112971,6 @@
         },
         "regardingobjectid_adoxio_leconnection": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_leconnection"
-        },
-        "regardingobjectid_new_timerspike": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
         },
         "regardingobjectid_adoxio_specialeventnote": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_specialeventnote"
@@ -122157,6 +122160,9 @@
         "regardingobjectid_adoxio_establishmentincident": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishmentincident"
         },
+        "regardingobjectid_adoxio_investigationrequest": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigationrequest"
+        },
         "regardingobjectid_account": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
         },
@@ -122240,9 +122246,6 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
           }
-        },
-        "regardingobjectid_adoxio_investigationrequest": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigationrequest"
         }
       }
     },
@@ -129382,36 +129385,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_leconnection"
           }
         },
-        "lk_new_timerspike_createdby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
-          }
-        },
-        "lk_new_timerspike_createdonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
-          }
-        },
-        "lk_new_timerspike_modifiedby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
-          }
-        },
-        "lk_new_timerspike_modifiedonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
-          }
-        },
-        "user_new_timerspike": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
-          }
-        },
         "lk_adoxio_specialeventnote_createdby": {
           "type": "array",
           "items": {
@@ -135702,12 +135675,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_leconnection"
-          }
-        },
-        "team_new_timerspike": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_timerspike"
           }
         },
         "team_adoxio_specialeventnote": {

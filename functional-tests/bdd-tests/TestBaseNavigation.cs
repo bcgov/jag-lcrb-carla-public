@@ -260,7 +260,6 @@ namespace bdd_tests
             }
         }
 
-
         public void SharedCalendarDate()
         {
             // click on the previous button
@@ -414,8 +413,16 @@ namespace bdd_tests
             Page Title: Licences & Authorizations
             */
 
-            // TODO
-            Assert.True(ngDriver.FindElement(By.XPath("//body[not(contains(.,'No File'))]")).Displayed);
+            // get the licence ID - use a different link than renewLicence
+            // NgWebElement uiLicenceID = ngDriver.FindElement(By.LinkText(renewLicence));
+            // string URL = uiLicenceID.GetAttribute("href");
+            // string[] parsedURL = URL.Split('/');
+            // licenceID = parsedURL[5];
+
+            // navigate to the Downloads folder
+            var environment = Environment.CurrentDirectory;
+
+            // check if the licence ID matches by name  
         }
 
 
@@ -459,7 +466,6 @@ namespace bdd_tests
 
             while (!found && tries < maxTries)
             {
-
                 try
                 {
                     // check to see if a file was uploaded

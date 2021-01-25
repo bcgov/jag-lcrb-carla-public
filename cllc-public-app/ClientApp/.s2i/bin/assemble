@@ -35,7 +35,7 @@ fi
 if [ -n "${PHASE1}" ]; then
 
 # build the application.
-npm install @angular/cli@10.1.4
+npm install @angular/cli@11.0.7
 npm install
 fi
 if [ -n "${PHASE2}" ]; then

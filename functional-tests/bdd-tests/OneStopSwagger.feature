@@ -13,7 +13,7 @@ Scenario: OneStop Send Change of Address
     And I enter the licence GUID for SendChangeAddress
     And I click on the SwaggerUI Execute button for SendChangeAddress
     And the correct 200 response is displayed
-    Then I click on the Clear button
+    And I click on the SwaggerUI Clear button
 
 @onestopswagger
 Scenario: OneStop Send Change of Name
@@ -26,7 +26,7 @@ Scenario: OneStop Send Change of Name
     And I enter the licence GUID for SendChangeName
     And I click on the SwaggerUI Execute button for SendChangeName
     And the correct 200 response is displayed
-    Then I click on the Clear button
+    And I click on the SwaggerUI Clear button
 
 @onestopswagger
 Scenario: OneStop Send Change of Status
@@ -39,7 +39,7 @@ Scenario: OneStop Send Change of Status
     And I enter the licence GUID for SendChangeStatus
     And I click on the SwaggerUI Execute button for SendChangeStatus
     And the correct 200 response is displayed
-    Then I click on the Clear button
+    And I click on the SwaggerUI Clear button
 
 @onestopswagger
 Scenario: OneStop Send Licence Creation Message
@@ -52,7 +52,7 @@ Scenario: OneStop Send Licence Creation Message
     And I enter the licence GUID for SendLicenceCreationMessage
     And I click on the SwaggerUI Execute button for SendLicenceCreationMessage
     And the correct 200 response is displayed
-    Then I click on the Clear button
+    And I click on the SwaggerUI Clear button
 
 @onestopswagger
 Scenario: OneStop Send Program Account Details Broadcast
@@ -65,19 +65,7 @@ Scenario: OneStop Send Program Account Details Broadcast
     And I enter the licence GUID for SendProgramAccountDetailsBroadcastMessage
     And I click on the SwaggerUI Execute button for SendProgramAccountDetailsBroadcastMessage
     And the correct 200 response is displayed
-    Then I click on the Clear button
-    
-@onestopswagger
-Scenario: OneStop LDB Export
-    Given I click on the Swagger link for OneStop
-    And I click on the SwaggerUI Authorize button
-    And I click on the SwaggerUI second Authorize button
-    And I click on the SwaggerUI Close button
-    And I click on the SwaggerUI Get button for LdbExport
-    And I click on the SwaggerUI Try it out button for LdbExport
-    And I click on the SwaggerUI Execute button for LdbExport
-    And the correct 200 response is displayed
-    Then I click on the Clear button
+    And I click on the SwaggerUI Clear button
 
 # @onestoprelease
 # Scenario: OneStop Release
@@ -114,4 +102,4 @@ Scenario: OneStop LDB Export
     # And I click on the Try it out button for LdbExport
     # And I click on the Execute button for LdbExport
     # And the correct 200 response is displayed 
-    # Then I click on the Clear button
+    # Then I click on the SwaggerUI Clear button
