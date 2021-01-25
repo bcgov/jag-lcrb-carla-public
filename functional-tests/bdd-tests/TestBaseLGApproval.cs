@@ -20,24 +20,13 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I specify that the zoning allows the endorsement")]
-        public void ZoningAllowsEndorsement()
-        {
-            // create test data
-            string appsForReview = "Applications for Review";
-            string reviewApp = "Review Application";
-
-            // click on Applications for Review link
-            ClickOnLink(appsForReview);
-
-            // click on Review Application link
-            ClickOnLink(reviewApp);
-        }
-
-
-        [And(@"I specify my contact details")]
+        [And(@"I specify my contact details as the approving authority")]
         public void SpecifyContactDetails()
         {
+            /* 
+            Page Title: Provide Confirmation of Zoning
+            */
+
             // create test data
             string nameOfOfficial = "Official Name";
             string title = "Title";
@@ -60,11 +49,15 @@ namespace bdd_tests
             NgWebElement uiOfficialEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactEmail']"));
             uiOfficialEmail.SendKeys(email);
 
+            // select 'Yes' for zoning
+            //NgWebElement uiZoningYes = ngDriver.FindElement(By.CssSelector("input#mat-radio-2-input"));
+            //uiZoningYes.Click();
+
             // upload the supporting report
             FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
             // click on the Submit button
-            ClickOnSubmitButton();
+            ClickOnSubmitButton2();
         }
 
 
@@ -73,14 +66,11 @@ namespace bdd_tests
         {
             if (responseType == "a picnic area endorsement")
             {
+                ContinueToApplicationButton();
 
-                // create test data
-                string completeApplication = "Complete Application";
-
-                // click on Complete Application link
-                ClickOnLink(completeApplication);
-
-                // ContinueToApplicationButton();
+                /* 
+                Page Title: Manufacturer Picnic Area Endorsement Application (Sent to LG/IN)
+                */
 
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Manufacturer Picnic Area Endorsement Application ')]")).Displayed);
 
