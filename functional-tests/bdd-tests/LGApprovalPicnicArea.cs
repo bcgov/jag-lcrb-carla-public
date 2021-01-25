@@ -32,8 +32,9 @@ Scenario: DEV Local Government Approval for Picnic Area Endorsement (Private Cor
     And I log in as local government for Saanich
     And I click on the link for Applications for Review
     And I click on the link for Review
-    And I specify my contact details
+    And I specify my contact details as the approving authority
     And I log in as a return user
+    And I click on the link for Complete Application
     And I review the local government response for a picnic area endorsement
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -58,8 +59,9 @@ Scenario: DEV Local Government Approval for Picnic Area Endorsement (Private Cor
 #    And I log in as local government for Saanich
 #    And I click on the link for Applications for Review
 #    And I click on the link for Review 
-#    And I specify my contact details
+#    And I specify my contact details as the approving authority
 #    And I log in as a return user
+#    And I click on the link for Complete Application
 #    And I review the local government response for a picnic area endorsement
 #    And the dashboard status is updated as Application Under Review
 #    And the account is deleted

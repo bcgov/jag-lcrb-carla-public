@@ -20,7 +20,7 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I specify my contact details")]
+        [And(@"I specify my contact details as the approving authority")]
         public void SpecifyContactDetails()
         {
             // create test data
@@ -58,13 +58,6 @@ namespace bdd_tests
         {
             if (responseType == "a picnic area endorsement")
             {
-
-                // create test data
-                string completeApplication = "Complete Application";
-
-                // click on Complete Application link
-                ClickOnLink(completeApplication);
-
                 ContinueToApplicationButton();
 
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Manufacturer Picnic Area Endorsement Application ')]")).Displayed);
