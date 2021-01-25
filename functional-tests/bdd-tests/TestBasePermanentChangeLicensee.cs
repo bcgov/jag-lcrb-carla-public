@@ -22,7 +22,7 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I complete the Permanent Change to a Licensee application")]
+        [And(@"I complete the Permanent Change to a Licensee application for a (.*)")]
         public void PermanentChangeLicensee(string appType)
         {
             /* 
