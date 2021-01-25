@@ -49,6 +49,10 @@ namespace bdd_tests
             NgWebElement uiOfficialEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactEmail']"));
             uiOfficialEmail.SendKeys(email);
 
+            // select 'Yes' for zoning
+            NgWebElement uiZoningYes = ngDriver.FindElement(By.CssSelector("input#mat-radio-2-input"));
+            uiZoningYes.Click();
+
             // upload the supporting report
             FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
