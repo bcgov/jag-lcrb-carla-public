@@ -23,7 +23,9 @@ namespace bdd_tests
         [And(@"I specify my contact details as the approving authority")]
         public void SpecifyContactDetails()
         {
-            /* page title TODO */
+            /* 
+            Page Title: Provide Confirmation of Zoning
+            */
 
             // create test data
             string nameOfOfficial = "Official Name";
