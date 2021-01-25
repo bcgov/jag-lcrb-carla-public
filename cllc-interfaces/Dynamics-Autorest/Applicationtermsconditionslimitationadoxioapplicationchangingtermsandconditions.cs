@@ -19,12 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Contactid operations.
+    /// Applicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions operations.
     /// </summary>
-    public partial class Contactid : IServiceOperations<DynamicsClient>, IContactid
+    public partial class Applicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions : IServiceOperations<DynamicsClient>, IApplicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions
     {
         /// <summary>
-        /// Initializes a new instance of the Contactid class.
+        /// Initializes a new instance of the Applicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public Contactid(DynamicsClient client)
+        public Applicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions(DynamicsClient client)
         {
             if (client == null)
             {
@@ -47,10 +47,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get adoxio_ContactId from adoxio_investigationcontacts
+        /// Get
+        /// adoxio_applicationtermsconditionslimitation_adoxio_application_ChangingTermsandConditions
+        /// from adoxio_applicationtermsconditionslimitations
         /// </summary>
-        /// <param name='adoxioInvestigationcontactid'>
-        /// key: adoxio_investigationcontactid of adoxio_investigationcontact
+        /// <param name='adoxioApplicationtermsconditionslimitationid'>
+        /// key: adoxio_applicationtermsconditionslimitationid of
+        /// adoxio_applicationtermsconditionslimitation
+        /// </param>
+        /// <param name='top'>
+        /// </param>
+        /// <param name='skip'>
+        /// </param>
+        /// <param name='search'>
+        /// </param>
+        /// <param name='filter'>
+        /// </param>
+        /// <param name='count'>
+        /// </param>
+        /// <param name='orderby'>
+        /// Order items by property values
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -79,11 +95,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMcontact>> GetWithHttpMessagesAsync(string adoxioInvestigationcontactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationCollection>> GetWithHttpMessagesAsync(string adoxioApplicationtermsconditionslimitationid, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioInvestigationcontactid == null)
+            if (adoxioApplicationtermsconditionslimitationid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioInvestigationcontactid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioApplicationtermsconditionslimitationid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -92,7 +108,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioInvestigationcontactid", adoxioInvestigationcontactid);
+                tracingParameters.Add("adoxioApplicationtermsconditionslimitationid", adoxioApplicationtermsconditionslimitationid);
+                tracingParameters.Add("top", top);
+                tracingParameters.Add("skip", skip);
+                tracingParameters.Add("search", search);
+                tracingParameters.Add("filter", filter);
+                tracingParameters.Add("count", count);
+                tracingParameters.Add("orderby", orderby);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -100,9 +122,33 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_investigationcontacts({adoxio_investigationcontactid})/adoxio_ContactId").ToString();
-            _url = _url.Replace("{adoxio_investigationcontactid}", System.Uri.EscapeDataString(adoxioInvestigationcontactid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_applicationtermsconditionslimitations({adoxio_applicationtermsconditionslimitationid})/adoxio_applicationtermsconditionslimitation_adoxio_application_ChangingTermsandConditions").ToString();
+            _url = _url.Replace("{adoxio_applicationtermsconditionslimitationid}", System.Uri.EscapeDataString(adoxioApplicationtermsconditionslimitationid));
             List<string> _queryParameters = new List<string>();
+            if (top != null)
+            {
+                _queryParameters.Add(string.Format("$top={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(top, Client.SerializationSettings).Trim('"'))));
+            }
+            if (skip != null)
+            {
+                _queryParameters.Add(string.Format("$skip={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(skip, Client.SerializationSettings).Trim('"'))));
+            }
+            if (search != null)
+            {
+                _queryParameters.Add(string.Format("$search={0}", System.Uri.EscapeDataString(search)));
+            }
+            if (filter != null)
+            {
+                _queryParameters.Add(string.Format("$filter={0}", System.Uri.EscapeDataString(filter)));
+            }
+            if (count != null)
+            {
+                _queryParameters.Add(string.Format("$count={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(count, Client.SerializationSettings).Trim('"'))));
+            }
+            if (orderby != null)
+            {
+                _queryParameters.Add(string.Format("$orderby={0}", System.Uri.EscapeDataString(string.Join(",", orderby))));
+            }
             if (select != null)
             {
                 _queryParameters.Add(string.Format("$select={0}", System.Uri.EscapeDataString(string.Join(",", select))));
@@ -180,7 +226,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMcontact>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationCollection>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -189,7 +235,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMcontact>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioApplicationCollection>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -209,10 +255,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Get adoxio_ContactId from adoxio_investigationsubjects
+        /// Get
+        /// adoxio_applicationtermsconditionslimitation_adoxio_application_ChangingTermsandConditions
+        /// from adoxio_applicationtermsconditionslimitations
         /// </summary>
-        /// <param name='adoxioInvestigationsubjectid'>
-        /// key: adoxio_investigationsubjectid of adoxio_investigationsubject
+        /// <param name='adoxioApplicationtermsconditionslimitationid'>
+        /// key: adoxio_applicationtermsconditionslimitationid of
+        /// adoxio_applicationtermsconditionslimitation
+        /// </param>
+        /// <param name='adoxioApplicationid'>
+        /// key: adoxio_applicationid of adoxio_application
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -241,11 +293,15 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMcontact>> Get1WithHttpMessagesAsync(string adoxioInvestigationsubjectid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplication>> ChangingTermsandConditionsByKeyWithHttpMessagesAsync(string adoxioApplicationtermsconditionslimitationid, string adoxioApplicationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioInvestigationsubjectid == null)
+            if (adoxioApplicationtermsconditionslimitationid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioInvestigationsubjectid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioApplicationtermsconditionslimitationid");
+            }
+            if (adoxioApplicationid == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioApplicationid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -254,16 +310,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioInvestigationsubjectid", adoxioInvestigationsubjectid);
+                tracingParameters.Add("adoxioApplicationtermsconditionslimitationid", adoxioApplicationtermsconditionslimitationid);
+                tracingParameters.Add("adoxioApplicationid", adoxioApplicationid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "Get1", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "ChangingTermsandConditionsByKey", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_investigationsubjects({adoxio_investigationsubjectid})/adoxio_ContactId").ToString();
-            _url = _url.Replace("{adoxio_investigationsubjectid}", System.Uri.EscapeDataString(adoxioInvestigationsubjectid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_applicationtermsconditionslimitations({adoxio_applicationtermsconditionslimitationid})/adoxio_applicationtermsconditionslimitation_adoxio_application_ChangingTermsandConditions({adoxio_applicationid})").ToString();
+            _url = _url.Replace("{adoxio_applicationtermsconditionslimitationid}", System.Uri.EscapeDataString(adoxioApplicationtermsconditionslimitationid));
+            _url = _url.Replace("{adoxio_applicationid}", System.Uri.EscapeDataString(adoxioApplicationid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {
@@ -342,7 +400,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMcontact>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplication>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -351,7 +409,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMcontact>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioApplication>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
