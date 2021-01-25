@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top214 { get; set; }
+        int? Top215 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip214 { get; set; }
+        int? Skip215 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count214 { get; set; }
+        bool? Count215 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter214 { get; set; }
+        string Filter215 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search214 { get; set; }
+        string Search215 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -376,6 +376,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEventlocationsyncerrors.
         /// </summary>
         IEventlocationsyncerrors Eventlocationsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the IServiceareaid.
+        /// </summary>
+        IServiceareaid Serviceareaid { get; }
 
         /// <summary>
         /// Gets the IEvents.
@@ -871,6 +876,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IServiceareas.
         /// </summary>
         IServiceareas Serviceareas { get; }
+
+        /// <summary>
+        /// Gets the IServiceareaeventlocations.
+        /// </summary>
+        IServiceareaeventlocations Serviceareaeventlocations { get; }
 
         /// <summary>
         /// Gets the ISettings.
