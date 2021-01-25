@@ -50,14 +50,14 @@ namespace bdd_tests
             uiOfficialEmail.SendKeys(email);
 
             // select 'Yes' for zoning
-            NgWebElement uiZoningYes = ngDriver.FindElement(By.CssSelector("input#mat-radio-2-input"));
-            uiZoningYes.Click();
+            //NgWebElement uiZoningYes = ngDriver.FindElement(By.CssSelector("input#mat-radio-2-input"));
+            //uiZoningYes.Click();
 
             // upload the supporting report
             FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
             // click on the Submit button
-            ClickOnSubmitButton();
+            ClickOnSubmitButton2();
         }
 
 
