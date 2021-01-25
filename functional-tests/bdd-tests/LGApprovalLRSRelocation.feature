@@ -13,7 +13,7 @@ Scenario: Local Government Approval for LRS Relocation (Private Corporation)
     And I log in as local government for Saanich
     And I click on the link for Applications for Review
     And I click on the link for Review 
-    And I specify my contact details
+    And I specify my contact details as the approving authority
     And I log in as a return user
     And I review the local government response for a LRS relocation
     And the dashboard status is updated as Application Under Review

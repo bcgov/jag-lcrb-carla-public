@@ -23,6 +23,8 @@ namespace bdd_tests
         [And(@"I specify my contact details as the approving authority")]
         public void SpecifyContactDetails()
         {
+            /* page title TODO */
+
             // create test data
             string nameOfOfficial = "Official Name";
             string title = "Title";
@@ -59,6 +61,10 @@ namespace bdd_tests
             if (responseType == "a picnic area endorsement")
             {
                 ContinueToApplicationButton();
+
+                /* 
+                Page Title: Manufacturer Picnic Area Endorsement Application (Sent to LG/IN)
+                */
 
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Manufacturer Picnic Area Endorsement Application ')]")).Displayed);
 
