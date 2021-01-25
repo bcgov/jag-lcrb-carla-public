@@ -15,7 +15,8 @@ Scenario: DEV Local Government Approval for Picnic Area Endorsement (Private Cor
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And I log in as local government for Saanich
-    And I specify that the zoning allows the endorsement
+    And I click on the link for Applications for Review
+    And I click on the link for Review
     And I specify my contact details
     And I log in as a return user
     And I review the local government response for a picnic area endorsement
@@ -40,7 +41,8 @@ Scenario: DEV Local Government Approval for Picnic Area Endorsement (Private Cor
 #    And I click on the link for Picnic Area Endorsement Application
 #    And I request a picnic area endorsement
 #    And I log in as local government for Saanich
-#    And I specify that the zoning allows the endorsement
+#    And I click on the link for Applications for Review
+#    And I click on the link for Review 
 #    And I specify my contact details
 #    And I log in as a return user
 #    And I review the local government response for a picnic area endorsement

@@ -20,21 +20,6 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I specify that the zoning allows the endorsement")]
-        public void ZoningAllowsEndorsement()
-        {
-            // create test data
-            string appsForReview = "Applications for Review";
-            string reviewApp = "Review Application";
-
-            // click on Applications for Review link
-            ClickOnLink(appsForReview);
-
-            // click on Review Application link
-            ClickOnLink(reviewApp);
-        }
-
-
         [And(@"I specify my contact details")]
         public void SpecifyContactDetails()
         {
@@ -80,7 +65,7 @@ namespace bdd_tests
                 // click on Complete Application link
                 ClickOnLink(completeApplication);
 
-                // ContinueToApplicationButton();
+                ContinueToApplicationButton();
 
                 Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'Manufacturer Picnic Area Endorsement Application ')]")).Displayed);
 
