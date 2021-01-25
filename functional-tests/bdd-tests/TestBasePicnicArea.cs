@@ -24,16 +24,6 @@ namespace bdd_tests
         public void PicnicAreaEndorsement()
         {
             /* 
-            Page Title: Licences & Authorizations
-            */
-
-            string picnicAreaEndorsement = "Picnic Area Endorsement Application";
-
-            // click on the Picnic Area Endorsement Application link
-            NgWebElement uiPicnicAreaEndorsement = ngDriver.FindElement(By.LinkText(picnicAreaEndorsement));
-            uiPicnicAreaEndorsement.Click();
-
-            /* 
             Page Title: Please Review the Account Profile
             */
 
