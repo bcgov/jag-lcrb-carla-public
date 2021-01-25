@@ -31,6 +31,7 @@ Scenario: Local Government Approval for Picnic Area Endorsement (Private Corpora
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee
+    And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And I log in as local government for Saanich
     And I specify that the zoning allows the endorsement
