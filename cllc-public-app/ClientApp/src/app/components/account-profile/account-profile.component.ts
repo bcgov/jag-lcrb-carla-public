@@ -190,11 +190,14 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
+
     this.form.get("businessProfile.physicalAddressProvince").valueChanges.pipe(
         filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
+
+
     this.form.get("businessProfile.physicalAddressCountry").valueChanges.pipe(
         filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
