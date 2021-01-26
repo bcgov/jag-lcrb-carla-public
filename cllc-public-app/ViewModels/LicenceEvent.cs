@@ -255,6 +255,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public MarketEventType? MarketEventType { get; set; }
 
         // temporary use area (TUA) events
+        public string EventName { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public TuaEventType? TuaEventType { get; set; }
         public bool? IsClosedToPublic { get; set; }

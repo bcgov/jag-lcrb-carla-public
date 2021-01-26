@@ -81,11 +81,10 @@ http {
         add_header X-Frame-Options DENY;
 
 		%API_CONFIG_SECTION%
-
-
 		
         # Remove path prefix when handling files
         rewrite ^\/lcrb\/(.*) /$1 last;
+        rewrite ^\/cannabislicensing\/(.*) /$1 last;
 		
         %EXTRA_CONFIG%
     
