@@ -8,8 +8,10 @@ import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDays
 import { EventCategory, EventStatus, LicenceEvent, TuaEventType } from '@models/licence-event.model';
 import { AppState } from '@app/app-state/models/app-state';
 import { LicenceEventsService } from '@services/licence-events.service';
+import { LicenseDataService } from '@services/license-data.service';
 import { faQuestionCircle, faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
 import { LicenceEventSchedule } from '@models/licence-event-schedule';
+import { License } from '@models/license.model';
 
 @Component({
   selector: 'app-tua-event',
@@ -29,6 +31,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
   // component state
   busy: Subscription;
+  licence: License;
   licenceEvent: LicenceEvent;
   isEditMode = false;
   isReadOnly = false;
@@ -47,23 +50,23 @@ export class TuaEventComponent extends FormBase implements OnInit {
     accountId: ['', []],
     eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value, []],
 
-    name: ['', [Validators.required]], // TUA event name
+    eventName: ['', [Validators.required]], // TUA event name
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
 
-    // TODO: TUA locations
+    // TUA locations
+    eventLocations: ['', []],
 
     // date & time
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
-
-    //... TODO:
 
     maxAttendance: ['', [Validators.required, Validators.max(100000)]],
     minorsAttending: ['', [Validators.required]],
     tuaEventType: ['', [Validators.required]],
     eventTypeDescription: ['', [Validators.required]],
 
+    isClosedToPublic: [false, []],
     isWedding: [false, []],
     isNetworkingParty: [false, []],
     isConcert: [false, []],
@@ -78,8 +81,8 @@ export class TuaEventComponent extends FormBase implements OnInit {
     contactEmail: ['', [Validators.required]],
     contactEmailConfirmation: ['', [Validators.required]],
 
-    agreement1: [false, [Validators.required]],
-    agreement2: [false, [Validators.required]],
+    isAgreement1: [false, [Validators.required]],
+    isAgreement2: [false, [Validators.required]],
   }, {
     // end date must be later than or equal to start date
     validators: dateRangeValidator('startDate', 'endDate')
@@ -88,13 +91,17 @@ export class TuaEventComponent extends FormBase implements OnInit {
   constructor(
     private fb: FormBuilder,
     private licenceEvents: LicenceEventsService,
+    private licenceDataService: LicenseDataService,
     private store: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute
   ) {
     super();
     this.route.paramMap.subscribe(params => {
-      this.form.controls['licenceId'].setValue(params.get('licenceId'));
+      const licenceId = params.get('licenceId');
+      this.form.controls['licenceId'].setValue(licenceId);
+      this.retrieveLicence(licenceId);
+
       if (params.get('eventId')) {
         this.isEditMode = true;
         this.retrieveSavedEvent(params.get('eventId'));
@@ -111,6 +118,13 @@ export class TuaEventComponent extends FormBase implements OnInit {
   get status(): string {
     const statusObj = this.getOptionFromValue(this.eventStatus, this.form?.get('status')?.value);
     return statusObj == null ? '' : statusObj.label;
+  }
+
+  retrieveLicence(licenceId: string) {
+    this.busy = this.licenceDataService.getLicenceById(licenceId)
+      .subscribe((licence) => {
+        this.licence = licence;
+      });
   }
 
   retrieveSavedEvent(eventId: string) {
@@ -135,11 +149,12 @@ export class TuaEventComponent extends FormBase implements OnInit {
       id: licenceEvent.id,
       licenceId: licenceEvent.licenceId,
       accountId: licenceEvent.accountId,
-      name: licenceEvent.name,
+      eventName: licenceEvent.eventName,
       contactName: licenceEvent.contactName,
       contactPhone: licenceEvent.contactPhone,
       contactEmail: licenceEvent.contactEmail,
       contactEmailConfirmation: licenceEvent.contactEmail,
+      eventLocations: licenceEvent.eventLocations,
       startDate: new Date(licenceEvent.startDate),
       endDate: new Date(licenceEvent.endDate),
       eventCategory: this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value,
@@ -147,6 +162,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
       minorsAttending: licenceEvent.minorsAttending,
       tuaEventType: licenceEvent.tuaEventType,
       eventTypeDescription: licenceEvent.eventTypeDescription,
+      isClosedToPublic: licenceEvent.isClosedToPublic,
       isWedding: licenceEvent.isWedding,
       isNetworkingParty: licenceEvent.isNetworkingParty,
       isConcert: licenceEvent.isConcert,
@@ -157,8 +173,8 @@ export class TuaEventComponent extends FormBase implements OnInit {
       isReception: licenceEvent.isReception,
       isLiveEntertainment: licenceEvent.isLiveEntertainment,
       isGambling: licenceEvent.isGambling,
-      agreement1: false,
-      agreement2: false,
+      isAgreement1: licenceEvent.isAgreement1,
+      isAgreement2: licenceEvent.isAgreement2,
     });
 
     const schedules = licenceEvent.schedules;
@@ -168,6 +184,12 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
     if (this.isReadOnly) {
       this.form.disable();
+    } else {
+      // Make them re-sign the declaration section whenever changes are made to the form
+      this.form.patchValue({
+        isAgreement1: true,
+        isAgreement2: true,
+      });
     }
   }
 
@@ -178,7 +200,6 @@ export class TuaEventComponent extends FormBase implements OnInit {
       const liquorStart = new Date(sched.serviceStartDateTime);
       const liquorEnd = new Date(sched.serviceEndDateTime);
 
-      // TODO: fix this logic - or improve it
       const isDefault = ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) > 1;
       if (!isDefault) {
         this.scheduleIsInconsistent = true;
@@ -356,12 +377,28 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
   get validationErrorMap() {
     return {
+      eventName: 'Please enter the event name',
       contactName: 'Please enter the contact name',
       contactPhone: 'Please enter the contact phone number',
       contactEmail: 'Please enter the contact email address',
       contactEmailConfirmation: 'The email address confirmation does not match provided email',
       startDate: 'Please enter the start date',
       endDate: 'Please enter the end date',
+      maxAttendance: 'Please enter the maximum attendance (must be a number)',
+      minorsAttending: 'Please indicate if minors are attending',
+      tuaEventType: 'Please indicate the type of event',
+      eventTypeDescription: 'Please enter a description of the event',
+      isClosedToPublic: 'Please indicate if licensed establishment will be closed',
+      isWedding: '',
+      isNetworkingParty: '',
+      isConcert: '',
+      isNoneOfTheAbove: '',
+      isBanquet: '',
+      isAmplifiedSound: '',
+      isDancing: '',
+      isReception: '',
+      isLiveEntertainment: '',
+      isGambling: '',
       agreement1: 'Please agree to all terms',
       agreement2: 'Please agree to all terms',
     };

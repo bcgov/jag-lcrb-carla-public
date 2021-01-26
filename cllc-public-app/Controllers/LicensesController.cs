@@ -661,7 +661,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // set licence type relationship
             if (adoxioLicense.AdoxioLicenceType != null)
             {
-
                 application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
             }
 

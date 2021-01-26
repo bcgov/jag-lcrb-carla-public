@@ -9,6 +9,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             return new CapacityArea
             {
+                Id = serviceArea.AdoxioServiceareaid,
                 AreaNumber = (int)serviceArea.AdoxioAreanumber,
                 AreaCategory = serviceArea.AdoxioAreacategory,
                 AreaLocation = serviceArea.AdoxioArealocation,
