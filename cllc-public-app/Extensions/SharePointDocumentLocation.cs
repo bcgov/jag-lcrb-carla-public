@@ -147,8 +147,11 @@ namespace Gov.Lclb.Cllb.Public.Extensions
                         break;
                     case "licence":
                         var licenceEntity = _dynamicsClient.GetLicenceByIdWithChildren(entityId);
-                        var licenceLocation = licenceEntity.AdoxioLicencesSharePointDocumentLocations.FirstOrDefault();
-                        if (licenceLocation != null && !string.IsNullOrEmpty(licenceLocation.Relativeurl)) result = licenceLocation.Relativeurl;
+                        if (licenceEntity?.AdoxioLicencesSharePointDocumentLocations != null)
+                        {
+                            var licenceLocation = licenceEntity.AdoxioLicencesSharePointDocumentLocations.FirstOrDefault();
+                            if (licenceLocation != null && !string.IsNullOrEmpty(licenceLocation.Relativeurl)) result = licenceLocation.Relativeurl;
+                        }
                         break;
                 }
             }
