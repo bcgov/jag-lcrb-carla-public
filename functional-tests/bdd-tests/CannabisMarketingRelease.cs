@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CannabisMarketingTransferLicence
+Feature: CannabisMarketingRelease
     As a logged in business user
-    I want to transfer a Cannabis Marketing Licence
+    I want to run a release test for a Cannabis Marketing Licence
 
-@cannabismktglicencetransfer @privatecorporation
-Scenario: DEV Cannabis Marketing Application Transfer (Private Corporation)
+@cannabismktg @release
+Scenario: DEV Cannabis Marketing Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
     And I review the account profile for a private corporation
@@ -29,36 +29,18 @@ Scenario: DEV Cannabis Marketing Application Transfer (Private Corporation)
     And I click on the Dashboard tab
     And the application is approved
     And I click on the Licences tab
+    And I click on the link for Download Licence
+    And the licence is successfully downloaded
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
-
-#@cannabismktglicencetransfer @privatecorporation
-#Scenario: UAT Cannabis Marketing Application Transfer (Private Corporation)
-#    Given I am logged in to the dashboard as a private corporation
-#    And I click on the Start Application button for a Cannabis Marketing Licence
-#    And I review the account profile for a private corporation
-#    And I review the organization structure for a private corporation
-#    And I click on the button for Submit Organization Information
-#    And I complete the Cannabis Marketing application for a private corporation
-#    And I click on the Submit button
-#    # And I review the security screening requirements for a private corporation
-#    And I click on the button for Pay for Application for Cannabis Marketing
-#    And I enter the payment information
-#    And I confirm the payment receipt for a Cannabis Marketing Licence
-#    And I click on the Dashboard tab
-#    And the application is approved
-#    And I click on the Licences tab
-#    And I request a transfer of ownership
-#    And the account is deleted
-#    Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CannabisMarketingTransferLicence.feature")]
+    [FeatureFile("./CannabisMarketingRelease.feature")]
     [Collection("Liquor")]
-    public sealed class CannabisMarketingTransferLicence : TestBase
+    public sealed class CannabisMarketingRelease : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
@@ -75,7 +57,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            // CheckFeatureLEConnections();
+            CheckFeatureLEConnections();
 
             IgnoreSynchronizationFalse();
 
