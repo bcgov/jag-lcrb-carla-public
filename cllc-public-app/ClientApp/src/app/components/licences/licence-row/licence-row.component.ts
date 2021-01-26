@@ -149,13 +149,13 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   sendUpdateLicence(licence: ApplicationLicenseSummary) {
     this.busy = forkJoin([
-        this.licenceDataService.updateLicenceEstablishment(licence.licenseId, licence)
-      ])
+      this.licenceDataService.updateLicenceEstablishment(licence.licenseId, licence)
+    ])
       .subscribe(([licenceResp]) => {
         if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
           forkJoin([
-              this.licenceEventsService.getLicenceEventsList(licenceResp.licenseId, 20)
-            ])
+            this.licenceEventsService.getLicenceEventsList(licenceResp.licenseId, 20)
+          ])
             .subscribe(data => {
               licenceResp.events = data[0];
               this.updateLicence(licenceResp);
@@ -230,9 +230,9 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.applicationId)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(res => {
-            const data = res as any;
-            window.location.href = data.url;
-          },
+          const data = res as any;
+          window.location.href = data.url;
+        },
           err => {
             if (err._body === "Payment already made") {
               this.snackBar.open("Licence Fee payment has already been made.",
@@ -263,8 +263,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     };
 
     this.busy = forkJoin([
-        this.establishmentService.upEstablishment(establishment)
-      ])
+      this.establishmentService.upEstablishment(establishment)
+    ])
       .subscribe(([establishmentResp]) => {
         this.licences[index].establishmentIsOpen = establishmentResp.isOpen;
       });
@@ -324,8 +324,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
-            this.router.navigateByUrl(`/account-profile/${data.id}`);
-          },
+          this.router.navigateByUrl(`/account-profile/${data.id}`);
+        },
           () => {
             this.snackBar.open(`Error running licence action for ${actionName}`,
               "Fail",
@@ -335,21 +335,20 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     }
   }
 
-  startTermRequestChange(licenceId: string, termId: string )
-  {
+  startTermRequestChange(licenceId: string, termId: string) {
     // create an request for  application of the specified type
     this.busy = this.licenceDataService.createApplicationForActionTypeTerm(licenceId, ApplicationTypeNames.RequestTermChange, termId)
-    .pipe(takeWhile(() => this.componentActive))
-    .subscribe(data => {
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(data => {
         this.router.navigateByUrl(`/multi-step-application/${data.id}`);
       },
-      () => {
-        this.snackBar.open(`Error starting request for change to Term or Condition`,
-          "Fail",
-          { duration: 3500, panelClass: ["red-snackbar"] });
-        console.log("Error starting request for change to Term or Condition");
-      }
-    );
+        () => {
+          this.snackBar.open(`Error starting request for change to Term or Condition`,
+            "Fail",
+            { duration: 3500, panelClass: ["red-snackbar"] });
+          console.log("Error starting request for change to Term or Condition");
+        }
+      );
   }
 
   startRenewal(licence: ApplicationLicenseSummary) {
@@ -364,8 +363,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     let renewalApplication;
     // used to specify the type of renewal application too create
     let renewalApplicationTypeName: ApplicationTypeNames.MarketingRenewal |
-                                    ApplicationTypeNames.CRSRenewal |
-                                    ApplicationTypeNames.LiquorRenewal;
+      ApplicationTypeNames.CRSRenewal |
+      ApplicationTypeNames.LiquorRenewal;
 
     // if it's a cannabis related licence
     if (licence.licenceTypeCategory === "Cannabis") {
@@ -413,8 +412,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, renewalApplicationTypeName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
-            this.router.navigateByUrl(`/renew-licence/${renewalType}/${data.id}`);
-          },
+          this.router.navigateByUrl(`/renew-licence/${renewalType}/${data.id}`);
+        },
           () => {
             this.snackBar.open(`Error running licence action for ${renewalType}`,
               "Fail",
@@ -438,28 +437,28 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     const pdfRoot =
       "https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals";
     switch (licenceType) {
-    case "Cannabis Retail Store":
-    case "Section 119 Authorization":
-      return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
-    case "Marketing":
-      return `${pdfRoot}/marketing-handbook.pdf`;
-    case "Operated - Catering":
-    case "Catering":
-    case "Transfer in Progress - Catering":
-      return `${pdfRoot}/catering-handbook.pdf`;
-    case "Wine Store":
-    case "Transfer in Progress - Wine Store":
-    case "Operated - Wine Store":
-      return `${pdfRoot}/winestore-handbook.pdf`;
-    case "Licensee Retail Store":
-    case "Operated - Licensee Retail Store":
-      return `${pdfRoot}/licenseeretailstore-handbook.pdf`;
-    case "Manufacturer":
-      return `${pdfRoot}/manufacturer-handbook.pdf`;
-    case "UBrew and UVin":
-      return `${pdfRoot}/ubrewanduvin-handbook.pdf`;
-    default:
-      return "404";
+      case "Cannabis Retail Store":
+      case "Section 119 Authorization":
+        return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
+      case "Marketing":
+        return `${pdfRoot}/marketing-handbook.pdf`;
+      case "Operated - Catering":
+      case "Catering":
+      case "Transfer in Progress - Catering":
+        return `${pdfRoot}/catering-handbook.pdf`;
+      case "Wine Store":
+      case "Transfer in Progress - Wine Store":
+      case "Operated - Wine Store":
+        return `${pdfRoot}/winestore-handbook.pdf`;
+      case "Licensee Retail Store":
+      case "Operated - Licensee Retail Store":
+        return `${pdfRoot}/licenseeretailstore-handbook.pdf`;
+      case "Manufacturer":
+        return `${pdfRoot}/manufacturer-handbook.pdf`;
+      case "UBrew and UVin":
+        return `${pdfRoot}/ubrewanduvin-handbook.pdf`;
+      default:
+        return "404";
     }
   }
 
@@ -467,35 +466,35 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     let label = "";
 
     switch (subcategory) {
-    case "GroceryStore":
-      label = "Grocery Store";
-      break;
-    case "IndependentWineStore":
-      label = "Independent Wine Store";
-      break;
-    case "OffSiteWineStore":
-      label = "Off-Site Wine Store";
-      break;
-    case "OnSiteWineStore":
-      label = "On-Site Wine Store";
-      break;
-    case "SacramentalWineStore":
-      label = "Sacramental Wine Store";
-      break;
-    case "SpecialWineStore":
-      label = "Special Wine Store";
-      break;
-    case "TouristWineStore":
-      label = "Tourist Wine Store";
-      break;
-    case "WineOnShelf":
-      label = "Wine on Shelf";
-      break;
-    case "BCVQA":
-      label = "BC VQA Store";
-      break;
-    default:
-      label = subcategory;
+      case "GroceryStore":
+        label = "Grocery Store";
+        break;
+      case "IndependentWineStore":
+        label = "Independent Wine Store";
+        break;
+      case "OffSiteWineStore":
+        label = "Off-Site Wine Store";
+        break;
+      case "OnSiteWineStore":
+        label = "On-Site Wine Store";
+        break;
+      case "SacramentalWineStore":
+        label = "Sacramental Wine Store";
+        break;
+      case "SpecialWineStore":
+        label = "Special Wine Store";
+        break;
+      case "TouristWineStore":
+        label = "Tourist Wine Store";
+        break;
+      case "WineOnShelf":
+        label = "Wine on Shelf";
+        break;
+      case "BCVQA":
+        label = "BC VQA Store";
+        break;
+      default:
+        label = subcategory;
     }
     return label;
   }
@@ -513,12 +512,12 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   getLicenceStatusText(status: string) {
     switch (status) {
-    case "PreInspection":
-      return "Pre-Inspection";
-    case "PendingLicenceFee":
-      return "Pending First Year Fee";
-    default:
-      return status;
+      case "PreInspection":
+        return "Pre-Inspection";
+      case "PendingLicenceFee":
+        return "Pending First Year Fee";
+      default:
+        return status;
     }
   }
 
@@ -538,6 +537,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       return "/temporary-offsite/";
     } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Market").value) {
       return "/market-event/";
+    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Temporary Use Area").value) {
+      return "/tua-event/";
     }
     return "/event/";
   }
