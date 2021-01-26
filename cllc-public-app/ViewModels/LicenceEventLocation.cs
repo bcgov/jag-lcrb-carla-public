@@ -12,6 +12,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EventId { get; set; }
         public string Name { get; set; }
         public int? Attendance { get; set; }
-        public string LocationId { get; set; }
+        public string ServiceAreaId { get; set; }
     }
 }

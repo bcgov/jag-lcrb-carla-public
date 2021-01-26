@@ -12,7 +12,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2015",
-	"incremental": true,
+	  "incremental": true,
     "typeRoots": [
       "node_modules/@types"
     ],
