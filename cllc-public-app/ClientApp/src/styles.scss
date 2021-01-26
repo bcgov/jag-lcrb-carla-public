@@ -366,9 +366,11 @@ button:focus {
 }
 
 mat-checkbox.text-wrap {
+  // adds breaks to the mat-checkboxes with long labels
   label.mat-checkbox-layout {
     white-space: normal;
   }
+  // rather than center the checkbox, put the checkbox in the first line
   .mat-checkbox-inner-container {
     margin-top: 3px;
   }

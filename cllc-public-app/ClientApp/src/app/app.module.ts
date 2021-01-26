@@ -262,6 +262,7 @@ import { LicenseeRetailStoresComponent } from "./components/licensee-retail-stor
 import { WorkerDataService } from "@services/worker-data.service";
 import { TuaEventComponent } from "@components/tua-event/tua-event.component";
 import { ApplicationRequestTermChangeComponent } from './components/applications/application-request-term-change/application-request-term-change.component';
+import { EventLocationTableComponent } from "@components/tables/event-location-table/event-location-table.component";
 
 @NgModule({
   declarations: [
@@ -398,6 +399,7 @@ import { ApplicationRequestTermChangeComponent } from './components/applications
     LicenseeRetailStoresComponent,
     TuaEventComponent,
     ApplicationRequestTermChangeComponent,
+    EventLocationTableComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -450,9 +452,9 @@ import { ApplicationRequestTermChangeComponent } from './components/applications
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument
-    ({
-      maxAge: 5
-    })
+      ({
+        maxAge: 5
+      })
   ],
   exports: [
     AppRoutingModule,
@@ -535,7 +537,7 @@ import { ApplicationRequestTermChangeComponent } from './components/applications
     LEConnectionsDataService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (featureFlagService: FeatureFlagService) => function() {
+      useFactory: (featureFlagService: FeatureFlagService) => function () {
         return featureFlagService.init();
       },
       deps: [FeatureFlagService],
@@ -543,7 +545,7 @@ import { ApplicationRequestTermChangeComponent } from './components/applications
     },
     {
       provide: APP_INITIALIZER,
-      useFactory: (us: UserDataService) => function() {
+      useFactory: (us: UserDataService) => function () {
         return us.loadUserToStore();
       },
       deps: [UserDataService],

@@ -14,7 +14,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public class CapacityArea
     {
-        public int AreaNumber { get; set;  }
+        // string form of the guid.
+        public string Id { get; set; }
+        public int AreaNumber { get; set; }
         public string AreaLocation { get; set; }
         public int? AreaCategory { get; set; }
         public bool IsIndoor { get; set; }
