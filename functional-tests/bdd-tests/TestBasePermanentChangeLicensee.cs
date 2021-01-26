@@ -53,7 +53,7 @@ namespace bdd_tests
             NgWebElement uiAdditionOfReceiverOrExecutor = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
             uiAdditionOfReceiverOrExecutor.Click();
 
-            if (appType == "Catering application")
+            if (appType == "Catering application for a private corporation")
             {
                 // upload Central Securities Register forms
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -71,7 +71,13 @@ namespace bdd_tests
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
             }
 
-            if (appType == "CRS application")
+            if (appType == "Catering application for a partnership")
+            {
+                // upload Personal History Summary ocuments
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+            }
+
+            if (appType == "CRS application for a private corporation")
             {
                 // upload Cannabis Associate Security Screening Forms
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[]");
