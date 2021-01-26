@@ -81,12 +81,12 @@ export class LicencesComponent extends FormBase implements OnInit {
    * */
   private displayApplications() {
     const sub = forkJoin([
-          this.applicationDataService.getAllCurrentApplications(),
-          this.licenceDataService.getAllCurrentLicenses(),
-          this.licenceDataService.getAllOperatedLicenses(),
-          this.licenceDataService.getAllProposedLicenses()
-        ]
-      ).pipe(takeWhile(() => this.componentActive))
+      this.applicationDataService.getAllCurrentApplications(),
+      this.licenceDataService.getAllCurrentLicenses(),
+      this.licenceDataService.getAllOperatedLicenses(),
+      this.licenceDataService.getAllProposedLicenses()
+    ]
+    ).pipe(takeWhile(() => this.componentActive))
       .subscribe(([applications, licenses, operatedLicences, proposedLicences = []]) => {
         this.applications = applications;
         operatedLicences.forEach(licence => {
@@ -120,7 +120,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     const apps = this.applications.filter(app => {
       const isRenewalType = (
         app.applicationTypeName === ApplicationTypeNames.LiquorRenewal ||
-          app.applicationTypeName === ApplicationTypeNames.CRSRenewal
+        app.applicationTypeName === ApplicationTypeNames.CRSRenewal
       );
       return (isRenewalType && app.licenceId === licence.licenseId && app.isPaid);
     });
@@ -147,8 +147,8 @@ export class LicencesComponent extends FormBase implements OnInit {
     });
     if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
       licence.eventsBusy = forkJoin([
-          this.licenceEventsService.getLicenceEventsList(licence.licenseId, 20)
-        ])
+        this.licenceEventsService.getLicenceEventsList(licence.licenseId, 20)
+      ])
         .subscribe(data => {
           licence.events = data[0];
           if (licence.events.length > 0) {
@@ -173,6 +173,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     return licenceType.indexOf("Catering") >= 0 ||
       licenceType.indexOf("Wine Store") >= 0 ||
       licenceType.indexOf("Manufacturer") >= 0 ||
+      licenceType.indexOf("Liquor Primary") >= 0 ||
       licenceType.indexOf("Food Primary") >= 0;
   }
 

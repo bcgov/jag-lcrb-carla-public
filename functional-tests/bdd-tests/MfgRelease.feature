@@ -39,6 +39,7 @@ Scenario: DEV Manufacturer Release #2 (Winery/Private Corporation)
     And the application is approved
     And I pay the licensing fee
     And I click on the Licences tab
+    And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And I click on the Licences tab
     And I request a special event area endorsement

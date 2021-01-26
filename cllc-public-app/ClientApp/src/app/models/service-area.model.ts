@@ -6,8 +6,8 @@ export enum AreaCategory {
 }
 
 export class ServiceArea {
-  // picklist
-  areaCategory: number;
+  id: string;
+  areaCategory: number;  // picklist
   areaNumber: number;
   areaLocation: string;
   isIndoor: boolean;
