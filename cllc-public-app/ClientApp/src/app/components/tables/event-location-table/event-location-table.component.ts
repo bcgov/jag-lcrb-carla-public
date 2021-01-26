@@ -36,6 +36,8 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
   // The service areas to show on the location ID drop-down
   @Input() serviceAreas: ServiceArea[] = [];
 
+  @Input() eventId: string = null;
+
   // Internal table state
   total = 0;
   rows = new FormArray([]);
@@ -89,13 +91,18 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
     for (const obj of array) {
       this.addInternal(obj);
     }
+
+    // read-only mode
+    if (!this.enabled) {
+      this.rows.disable();
+    }
   }
 
   private addInternal(value: EventLocation) {
     const group = this.fb.group({
       id: [value.id],
       eventId: [value.eventId],
-      serviceAreaId: [value.serviceAreaId],
+      serviceAreaId: [value.serviceAreaId, [Validators.required]],
       name: [value.name, [Validators.required]],
       attendance: [value.attendance, [Validators.required]],
     });
@@ -105,6 +112,7 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
 
   addRow() {
     const newRow = new EventLocation();
+    newRow.eventId = this.eventId;
     this.writeValue([...this.rows.value, newRow]);
   }
 
