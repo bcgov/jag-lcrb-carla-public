@@ -485,11 +485,11 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // adoxio_Licencee,adoxio_establishment
                 // Note that adoxio_Licencee is the Account linked to the licence
                 var expand = new List<string> { "adoxio_Licencee",
-                    "adoxio_establishment", 
-                    "adoxio_LicenceType", 
+                    "adoxio_establishment",
+                    "adoxio_LicenceType",
                     "adoxio_ThirdPartyOperatorId",
-                    "adoxio_adoxio_licences_adoxio_application_AssignedLicence", 
-                    "adoxio_ProposedOperator", 
+                    "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
+                    "adoxio_ProposedOperator",
                     "adoxio_ProposedOwner",
                     "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence"
                 };
@@ -568,7 +568,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public MicrosoftDynamicsCRMadoxioEventlocationCollection GetEventLocationsByEventId(string id)
         {
-            string filter = $"adoxio_eventid eq {id}";
+            string filter = $"_adoxio_eventid_value eq {id}";
             // fetch from Dynamics.
             MicrosoftDynamicsCRMadoxioEventlocationCollection results;
             try

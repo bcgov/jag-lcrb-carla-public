@@ -1,5 +1,6 @@
 import { Endorsement } from "./endorsement.model";
 import { OffsiteStorage } from "./offsite-storage.model";
+import { ServiceArea } from './service-area.model';
 
 export class License {
   id: string;
@@ -19,6 +20,7 @@ export class License {
 
   endorsements: Endorsement[];
   offsiteStorageLocations: OffsiteStorage[];
+  serviceAreas: ServiceArea[];
 
   expiryDate: Date;
 

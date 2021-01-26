@@ -18,9 +18,9 @@
     <h3 class="blue-header">EVENT INFORMATION</h3>
     <section class="content-bottom clearfix">
       <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Event Name" [required]="true" [valid]="isValidOrNotTouched('name')"
+        <app-field class="col-md-4 col-xs-12" label="Event Name" [required]="true" [valid]="isValidOrNotTouched('eventName')"
           errorMessage="Please enter the event name" [isFullWidth]="true">
-          <input class="form-control" type="text" formControlName="name">
+          <input class="form-control" type="text" formControlName="eventName">
         </app-field>
       </div>
     </section>
@@ -44,17 +44,15 @@
     <h3 class="blue-header">TUA LOCATION(S)</h3>
     <section class="content-bottom clearfix">
       <p>Specify one or more locations where your event will take place.</p>
-      <div class="row">
-        <p>TODO</p>
-      </div>
-      <div class="row">
-      </div>
-      <div class="row">
-      </div>
+      <app-event-location-table formControlName="eventLocations" [enabled]="!isReadOnly" [serviceAreas]="licence?.serviceAreas"
+        [eventId]="licenceEvent?.id" [shouldValidate]="showErrorSection"></app-event-location-table>
     </section>
 
     <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
     <section class="content-bottom clearfix">
+      <p>The number of available event day(s) is up to <strong>26</strong> for each calendar year.</p>
+      <p>Note that if you submit a multi-day event, the locations and event details must be the same, otherwise you need
+        to submit separate events.</p>
       <div class="row">
         <app-field class="col-md-2 col-xs-6" label="Start Date" [required]="true"
           [valid]="isValidOrNotTouched('startDate')" [isFullWidth]="true">
@@ -117,18 +115,27 @@
         </app-field>
       </div>
       <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Type" [required]="true"
-          [valid]="isValidOrNotTouched('tuaEventType')"
-          errorMessage="Please enter the type of event" [isFullWidth]="true">
+        <app-field class="col-md-4 col-xs-12" label="Event Type" [required]="true"
+          [valid]="isValidOrNotTouched('tuaEventType')" errorMessage="Please indicate the type of event"
+          [isFullWidth]="true">
           <select class="form-control" formControlName="tuaEventType">
             <option *ngFor="let item of tuaEventType" [ngValue]="item.value">{{item.label}}</option>
           </select>
-
         </app-field>
         <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top:30px;"
-        matTooltip="Select the type of event that you are catering." ></fa-icon>
+          matTooltip="Select the type of event."></fa-icon>
       </div>
-
+      <div class="row">
+        <app-field class="col-md-8 col-xs-12"
+          label="Will your permanent licensed establishment also be closed to the public during the event hours?"
+          [required]="true" [valid]="isValidOrNotTouched('tuaEventType')"
+          errorMessage="Please indicate if licensed establishment will be closed" [isFullWidth]="false">
+          <select class="form-control" formControlName="isClosedToPublic">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </app-field>
+      </div>
       <div class="row">
         <app-field class="col-md-8 col-xs-12" label="Description" [required]="true"
           [valid]="isValidOrNotTouched('eventTypeDescription')" errorMessage="Please enter a description of the event"
@@ -180,16 +187,18 @@
     <h3 class="blue-header">AGREEMENT</h3>
     <section class="content-bottom">
       <div>
-        <mat-checkbox class="text-wrap" formControlName="agreement1">I understand that my event request for endorsement authorisation is
-          subject to review by LCRB and that in situations of nonconforming compliance issues between the details of
-          this submissions or authorisation and those of the terms and conditions of my licence, the limitations of my
-          licence will prevail.</mat-checkbox>
+        <mat-checkbox class="text-wrap" formControlName="isAgreement1">I understand that my event request for
+          endorsement
+          authorisation is subject to review by LCRB and that in situations of nonconforming compliance issues between
+          the details of this submissions or authorisation and those of the terms and conditions of my licence, the
+          limitations of my licence will prevail.</mat-checkbox>
       </div>
       <div class="mt-3">
-        <mat-checkbox class="text-wrap" formControlName="agreement2">I have reviewed all the information above for accuracy and understand
-          any additional steps and deadlines required to finalise this authorisation request. I agree to comply with
-          all terms and conditions on my licence, as well as the laws of the Liquor Control and Licensing Act and its
-          Regulations. I understand that failure to do so will lead to enforcement action taken against my licence.
+        <mat-checkbox class="text-wrap" formControlName="isAgreement2">I have reviewed all the information above for
+          accuracy and understand any additional steps and deadlines required to finalise this authorisation request. I
+          agree to comply with all terms and conditions on my licence, as well as the laws of the Liquor Control and
+          Licensing Act and its Regulations. I understand that failure to do so will lead to enforcement action taken
+          against my licence.
         </mat-checkbox>
       </div>
     </section>

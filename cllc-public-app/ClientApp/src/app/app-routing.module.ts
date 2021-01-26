@@ -180,6 +180,12 @@ const routes: Routes = [
     data: { feature: 'TemporaryUseAreaEvents' }
   },
   {
+    path: 'licence/:licenceId/tua-event/:eventId',
+    component: TuaEventComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'TemporaryUseAreaEvents' }
+  },
+  {
     path: 'licence/:licenceId/offsite-storage',
     component: OffsiteStorageComponent,
     canActivate: [BCeidAuthGuard]
