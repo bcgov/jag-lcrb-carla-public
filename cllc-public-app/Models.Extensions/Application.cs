@@ -854,15 +854,16 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
                 EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
                 EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
-                EstablishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
-                                                    + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
-                                                    + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
+                EstablishmentAddress =  dynamicsApplication.AdoxioEstablishmentaddressstreet
+                                        + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
+                                        + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
                 EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
                 EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
                 EstablishmentParcelId = dynamicsApplication.AdoxioEstablishmentparcelid,
                 IndigenousNationId = dynamicsApplication._adoxioLocalgovindigenousnationidValue,
                 PoliceJurisdictionId = dynamicsApplication._adoxioPolicejurisdictionidValue,
-                IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete
+                IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete,
+                IsStructuralChange = (dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsstructuralchange == true)
             };
 
             // id

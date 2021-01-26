@@ -351,7 +351,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
 
 }
 
-const INTERNAL_TRANSFER_OF_SHARES = '';
 const masterChangeList = [
   {
     name: "Internal Transfer of Shares",
