@@ -119,6 +119,7 @@ export class LicenceEvent {
   eventCategory: number;
 
   // temporary use area (TUA) events
+  eventName: string;
   tuaEventType: number;
   isClosedToPublic: boolean;
   isWedding: boolean;
