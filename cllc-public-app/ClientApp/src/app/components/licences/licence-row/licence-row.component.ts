@@ -336,23 +336,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         );
     }
   }
-
-  startTermRequestChange(licenceId: string, termId: string) {
-    // create an request for  application of the specified type
-    this.busy = this.licenceDataService.createApplicationForActionTypeTerm(licenceId, ApplicationTypeNames.RequestTermChange, termId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(data => {
-        this.router.navigateByUrl(`/multi-step-application/${data.id}`);
-      },
-        () => {
-          this.snackBar.open(`Error starting request for change to Term or Condition`,
-            "Fail",
-            { duration: 3500, panelClass: ["red-snackbar"] });
-          console.log("Error starting request for change to Term or Condition");
-        }
-      );
-  }
-
+  
   startRenewal(licence: ApplicationLicenseSummary) {
     // there are three type of renewals;
     // CRS Renewals
