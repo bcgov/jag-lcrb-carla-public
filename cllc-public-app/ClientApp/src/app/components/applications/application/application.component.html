@@ -346,7 +346,7 @@
     <h4>
       Cannabis Associate Security Screening
     </h4>
-    <p>Each associate must provide a complete <a href=""></a></p>
+    <p>Each associate must provide a complete Cannabis Associate Security Screening form.
     <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
                        [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
                        (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
@@ -1658,7 +1658,7 @@
 <!-- Connections to non-medical -->
 <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
   <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
-  <div class="padded-section" *ngIf="application?.tiedHouse && account?.businessType">
+  <div class="content-bottom" *ngIf="application?.tiedHouse && account?.businessType">
     <app-connection-to-non-medical-stores *ngIf="application?.tiedHouse"
                                           [tiedHouse]="application?.tiedHouse"
                                           licensedProducerText="B.C. non-medical cannabis retail store licensee or applicant"
