@@ -313,10 +313,12 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
     const actionApplication = licence.actionApplications.find(
-      app => app.applicationTypeName === actionName && app.applicationStatus !== "Active");
-    if (actionApplication && !actionApplication.isPaid) {
+      app => app.applicationTypeName === actionName
+      && !app.isStructuralChange
+      && app.applicationStatus !== "Active");
+    if (!actionApplication?.isPaid === true) {
       this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
-    } else if (actionApplication && actionApplication.isPaid) {
+    } else if (actionApplication?.isPaid === false) {
       this.snackBar.open(`${actionName} has already been submitted and is under review`,
         "Warning",
         { duration: 3500, panelClass: ["red-snackbar"] });
