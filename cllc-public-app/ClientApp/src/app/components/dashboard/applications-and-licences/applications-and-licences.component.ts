@@ -74,6 +74,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   startCateringOngoing: boolean;
   startFPOngoing: boolean;
   startLPOngoing: boolean;
+  startLPCOngoing: boolean;
   startMfgOngoing: boolean;
   startUBVOngoing: boolean;
   startRASOngoing: boolean;
@@ -443,6 +444,31 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           { duration: 3500, panelClass: ["red-snackbar"] });
         this.startLPOngoing = false;
         console.log("Error starting a Liquor Primary Application");
+      }
+    );
+  }
+
+  startNewLPCApplication() {
+    this.startLPCOngoing = true;
+    const newLicenceApplicationData = {
+      licenseType: "Liquor Primary Club",
+      applicantType: this.account.businessType,
+      applicationType: { name: ApplicationTypeNames.LPC } as ApplicationType,
+      account: this.account,
+    } as Application;
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/account-profile/${data.id}`];
+        this.startLPCOngoing = false;
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open("Error starting a Liquor Primary Club Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
+        this.startLPOngoing = false;
+        console.log("Error starting a Liquor Primary Club Application");
       }
     );
   }
