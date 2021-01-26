@@ -10,7 +10,7 @@ import { Account } from "@models/account.model";
 import { FeatureFlagService } from "@services/feature-flag.service";
 import { FormBase } from "@shared/form-base";
 import { takeWhile } from "rxjs/operators";
-import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
+import { ApplicationLicenseSummary, LicenceActionApplication } from "@models/application-license-summary.model";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { LicenceEventsService } from "@services/licence-events.service";
 
@@ -140,7 +140,8 @@ export class LicencesComponent extends FormBase implements OnInit {
         applicationId: app.id,
         applicationTypeName: app.applicationTypeName,
         applicationStatus: app.applicationStatus,
-        isPaid: app.isPaid
+        isPaid: app.isPaid,
+        isStructuralChange:  app?.isStructuralChange
       };
       licence.actionApplications.push(action);
     });
