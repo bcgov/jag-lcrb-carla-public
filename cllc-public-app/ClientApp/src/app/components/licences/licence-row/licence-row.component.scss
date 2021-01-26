@@ -8,30 +8,30 @@
       color: #000;
       padding: 10px;
     }
-  
+
     th {
       text-align: center;
     }
   }
-  
+
   .start-application {
     border-spacing: 1px 3px;
     border-collapse: separate;
     width: 100%;
     margin-bottom: 20px;
-  
+
     td,
     th {
       background-color: #f1f4fa;
       color: #000;
       padding: 10px;
     }
-  
+
     th {
       text-align: center;
     }
   }
-  
+
   ::ng-deep .mat-tab-label {
     background-color: #e1e8f2 !important;
     color: #000;
@@ -42,46 +42,59 @@
     height: 35px !important;
     min-width: 100px !important;
   }
-  
+
   ::ng-deep .mat-tab-label-active {
     background-color: #38598a !important;
     color: #fff;
   }
-  
+
   ::ng-deep .mat-tab-header {
     border-bottom: 4px solid #38598a !important;
     margin-bottom: 15px;
   }
-  
+
   ::ng-deep .mat-ink-bar {
     display: none;
   }
-  
+
   .lead-column {
     background-color: #e1e8f2;
     padding: 5px;
   }
-  
+
   td.licence-expired {
     background-color: #e1e8f2 !important;
     padding: 10px;
     color: red !important;
     text-align: center;
   }
-  
+
   ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
     background-color: #38598a !important;
   }
-  
+
   ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
   .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
     background-color: #38598a;
   }
-  
+
   ::ng-deep .mat-checkbox .mat-checkbox-layout .mat-checkbox-label {
     font-weight: normal;
   }
-  
+
+  ::ng-deep .mat-expansion-panel-header-title {
+    padding: 10px;
+    font-weight: 900;
+  }
+  ::ng-deep .mat-expansion-panel-header-description {
+    padding: 10px;
+    color: #cccccc;
+
+
+  }
+
+
+
   img.icon {
     width: 20px;
   }
