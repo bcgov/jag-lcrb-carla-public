@@ -901,7 +901,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   private establishmentNameIsChanging(): boolean {
     const isChanging: boolean =
-      (this?.application?.assignedLicence // if there is an existing licence 
+      (this?.application?.assignedLicence // if there is an existing licence
         && this.form // the form is created
         && this?.application?.assignedLicence?.establishmentName != this.form.get('establishmentName').value // the name is different
       );
@@ -973,12 +973,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applicationTypeName === ApplicationTypeNames.LRSTransferofLocation
     );
 
-    if ((this.establishmentNameIsChanging() || !signageNotRequired) 
-      && this.application.applicationType.signage === FormControlState.Show
-       && ((this.uploadedSignageDocuments || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('At least one signage document is required.');
-    }
+//    if ((this.establishmentNameIsChanging() || !signageNotRequired)
+//      && this.application.applicationType.signage === FormControlState.Show
+//       && ((this.uploadedSignageDocuments || 0) < 1)) {
+//      valid = false;
+//      this.validationMessages.push('At least one signage document is required.');
+//    }
 
     if (this.application.applicationType.validInterest === FormControlState.Show &&
       ((this.uploadedValidInterestDocuments || 0) < 1)) {
@@ -1024,13 +1024,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.validationMessages.push('Only the owner of the business may submit this information');
       }
 
-      //if (!this.form.get('hasValidInterest').value) {
-      //  this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
-      // }
+      if (!this.form.get('hasValidInterest').value) {
+        this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
+       }
 
-      //if (!this.form.get('willHaveValidInterest').value) {
-      //  this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
-      // }
+      if (!this.form.get('willHaveValidInterest').value) {
+        this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
+       }
 
     }
 
@@ -1291,6 +1291,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       case 'Capacity':
         return AreaCategory.Capacity;
     }
+  }
+
+  isLP(): boolean {
+    return this.application?.applicationType?.name === ApplicationTypeNames.LP || this.application?.applicationType?.name === ApplicationTypeNames.LPR || this.application?.applicationType?.name === ApplicationTypeNames.LPC;
   }
 
   updateDynamicValidation() {

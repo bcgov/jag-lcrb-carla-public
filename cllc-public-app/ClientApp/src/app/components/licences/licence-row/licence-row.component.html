@@ -405,9 +405,10 @@
       </mat-expansion-panel-header>
       <ul style="width: 100%;">
         <li *ngFor="let term of item?.termsAndConditions">
-          {{term.content}} <a href="javascript: void(0);" (click)="startTermRequestChange( item.licenseId, term.id)"   *ngIf="!term.isDefault">
+          {{term.content}} <a href="javascript: void(0);" (click)="startTermRequestChange( item.licenseId, term.id)" style="font-size:10px;"  *ngIf="!term.isDefault">
+            <fa-icon [icon]="faBolt"></fa-icon>
             <span>
-              <fa-icon [icon]="faBolt" style="margin-right: 10px;"></fa-icon>Request Change
+              Request Change to this T&C
             </span>
             </a>
         </li>
