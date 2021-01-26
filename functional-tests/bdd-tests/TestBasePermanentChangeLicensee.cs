@@ -29,29 +29,33 @@ namespace bdd_tests
             Page Title: Permanent Change to a Licensee
             */
 
-            // click on Internal Transfer of Shares
-            NgWebElement uiInternalTransferOfShares = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
-            uiInternalTransferOfShares.Click();
+            if (appType != "Catering application for a partnership")
+            {
 
-            // click on External Transfer of Shares
-            NgWebElement uiExternalTransferOfShares = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
-            uiExternalTransferOfShares.Click();
+                // click on Internal Transfer of Shares
+                NgWebElement uiInternalTransferOfShares = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
+                uiInternalTransferOfShares.Click();
 
-            // click on Change of Directors or Officers
-            NgWebElement uiChangeOfDirectorsOrOfficers = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
-            uiChangeOfDirectorsOrOfficers.Click();
+                // click on External Transfer of Shares
+                NgWebElement uiExternalTransferOfShares = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
+                uiExternalTransferOfShares.Click();
 
-            // click on Name Change, Licensee -- Corporation
-            NgWebElement uiNameChangeLicenseeCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
-            uiNameChangeLicenseeCorporation.Click();
+                // click on Change of Directors or Officers
+                NgWebElement uiChangeOfDirectorsOrOfficers = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
+                uiChangeOfDirectorsOrOfficers.Click();
 
-            // click on Name Change, Person
-            NgWebElement uiNameChangePerson = ngDriver.FindElement(By.CssSelector("#mat-checkbox-7.mat-checkbox"));
-            uiNameChangePerson.Click();
+                // click on Name Change, Licensee -- Corporation
+                NgWebElement uiNameChangeLicenseeCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
+                uiNameChangeLicenseeCorporation.Click();
 
-            // click on Addition of Receiver or Executor
-            NgWebElement uiAdditionOfReceiverOrExecutor = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
-            uiAdditionOfReceiverOrExecutor.Click();
+                // click on Name Change, Person
+                NgWebElement uiNameChangePerson = ngDriver.FindElement(By.CssSelector("#mat-checkbox-7.mat-checkbox"));
+                uiNameChangePerson.Click();
+
+                // click on Addition of Receiver or Executor
+                NgWebElement uiAdditionOfReceiverOrExecutor = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
+                uiAdditionOfReceiverOrExecutor.Click();
+            }
 
             if (appType == "Catering application for a private corporation")
             {
