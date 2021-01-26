@@ -50,12 +50,12 @@ export class TuaEventComponent extends FormBase implements OnInit {
     accountId: ['', []],
     eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value, []],
 
-    name: ['', [Validators.required]], // TUA event name
+    eventName: ['', [Validators.required]], // TUA event name
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
 
     // TUA locations
-    eventLocations: ["", []],
+    eventLocations: ['', []],
 
     // date & time
     startDate: ['', [Validators.required]],
@@ -81,8 +81,8 @@ export class TuaEventComponent extends FormBase implements OnInit {
     contactEmail: ['', [Validators.required]],
     contactEmailConfirmation: ['', [Validators.required]],
 
-    agreement1: [false, [Validators.required]],
-    agreement2: [false, [Validators.required]],
+    isAgreement1: [false, [Validators.required]],
+    isAgreement2: [false, [Validators.required]],
   }, {
     // end date must be later than or equal to start date
     validators: dateRangeValidator('startDate', 'endDate')
@@ -149,7 +149,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
       id: licenceEvent.id,
       licenceId: licenceEvent.licenceId,
       accountId: licenceEvent.accountId,
-      name: licenceEvent.name,
+      eventName: licenceEvent.eventName,
       contactName: licenceEvent.contactName,
       contactPhone: licenceEvent.contactPhone,
       contactEmail: licenceEvent.contactEmail,
@@ -173,8 +173,8 @@ export class TuaEventComponent extends FormBase implements OnInit {
       isReception: licenceEvent.isReception,
       isLiveEntertainment: licenceEvent.isLiveEntertainment,
       isGambling: licenceEvent.isGambling,
-      agreement1: false,
-      agreement2: false,
+      isAgreement1: licenceEvent.isAgreement1,
+      isAgreement2: licenceEvent.isAgreement2,
     });
 
     const schedules = licenceEvent.schedules;
@@ -184,6 +184,12 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
     if (this.isReadOnly) {
       this.form.disable();
+    } else {
+      // Make them re-sign the declaration section whenever changes are made to the form
+      this.form.patchValue({
+        isAgreement1: true,
+        isAgreement2: true,
+      });
     }
   }
 
@@ -194,7 +200,6 @@ export class TuaEventComponent extends FormBase implements OnInit {
       const liquorStart = new Date(sched.serviceStartDateTime);
       const liquorEnd = new Date(sched.serviceEndDateTime);
 
-      // TODO: fix this logic - or improve it
       const isDefault = ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) > 1;
       if (!isDefault) {
         this.scheduleIsInconsistent = true;
@@ -372,7 +377,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
   get validationErrorMap() {
     return {
-      name: 'Please enter the event name',
+      eventName: 'Please enter the event name',
       contactName: 'Please enter the contact name',
       contactPhone: 'Please enter the contact phone number',
       contactEmail: 'Please enter the contact email address',

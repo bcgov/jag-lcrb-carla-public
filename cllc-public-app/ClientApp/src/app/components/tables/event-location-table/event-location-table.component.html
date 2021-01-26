@@ -8,7 +8,7 @@
   <tr *ngFor="let row of rows.controls; let i=index" [ngClass]="{ 'text-grey': readonly(i) }">
     <ng-container [formGroup]="row">
       <td>
-        <select class="form-control" formControlName="serviceAreaId" [disabled]="readonly(i)">
+        <select class="form-control" formControlName="serviceAreaId">
           <option *ngFor="let item of serviceAreas" [ngValue]="item.id">{{item.areaLocation}}</option>
         </select>
       </td>
@@ -17,7 +17,8 @@
           [readonly]="readonly(i)" />
       </td>
       <td>
-        <input type="text" formControlName="attendance" placeholder="Enter attendance" mask="0*" maxlength="4" [readonly]="readonly(i)" />
+        <input type="text" formControlName="attendance" placeholder="Enter attendance" mask="0*" maxlength="4"
+          [readonly]="readonly(i)" />
       </td>
       <td>
         <button type="button" (click)="removeRow(i)" class="btn-clear" *ngIf="!readonly(i)">
