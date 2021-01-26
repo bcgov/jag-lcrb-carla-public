@@ -281,6 +281,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.updatePatioRequired(checked);
     });
 
+    this.form.get('patioIsLiquorCarried').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
+      this.updateDescriptionRequired(checked,'patioLiquorCarriedDescription');
+    });
+    
+
     this.form.get('indigenousNation').valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
@@ -424,6 +429,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   }
 
+  updateDescriptionRequired(checked, descriptionField) {
+    var val;
+    if (checked) {
+      val = 'true';
+    }
+    else {
+      val = '';
+    }
+    this.updateRequiredValidator(val, descriptionField);
+  }
+
   updatePatioRequired(checked) {
     var val;
     if (checked) {
@@ -436,7 +452,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.updateRequiredValidator(val, 'patioAccessDescription');
     this.updateRequiredValidator(val, 'patioCompDescription');
     this.updateRequiredValidator(val, 'patioIsLiquorCarried');
-    this.updateRequiredValidator(val, 'patioLiquorCarriedDescription');
+
+    if (this.form.get('patioIsLiquorCarried').value) {
+      this.updateRequiredValidator(val, 'patioLiquorCarriedDescription');
+    } else { // disable validation
+      this.updateRequiredValidator('', 'patioLiquorCarriedDescription');
+    }
+
+    
     this.updateRequiredValidator(val, 'patioLocationDescription');
     this.updateRequiredValidator(val, 'patioServiceBar');
   }
