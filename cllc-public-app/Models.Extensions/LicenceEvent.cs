@@ -57,6 +57,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 });
             }
 
+            // TODO: Should TUA-specific business rules be added here? Right now TUA events get auto-approved
+
             if (isHighRisk || alwaysAuthorization)
             {
                 return EventClass.Authorization;
@@ -176,6 +178,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.MarketEventType = (MarketEventType?)item.AdoxioMarketeventtype;
 
                 // temporary use area (TUA) events
+                result.EventName = item.AdoxioEventname;
                 result.TuaEventType = (TuaEventType?)item.AdoxioTuaeventtype;
                 result.IsClosedToPublic = item.AdoxioIsclosedtopublic;
                 result.IsWedding = item.AdoxioIswedding;
@@ -201,7 +204,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // TUA event locations
             MicrosoftDynamicsCRMadoxioEventlocationCollection eventLocations = dynamicsClient.GetEventLocationsByEventId(result.Id);
-            foreach (var loc in eventLocations.Value)
+            foreach (var loc in eventLocations?.Value)
             {
                 result.EventLocations.Add(loc.ToViewModel());
             }
@@ -327,6 +330,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMarketeventtype = (int?)from.MarketEventType;
 
             // TUA events
+            to.AdoxioEventname = from.EventName;
             to.AdoxioTuaeventtype = (int?)from.TuaEventType;
             to.AdoxioIsclosedtopublic = from.IsClosedToPublic;
             to.AdoxioIswedding = from.IsWedding;
@@ -341,8 +345,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsnoneoftheabove = from.IsNoneOfTheAbove;
             to.AdoxioIsagreement1 = from.IsAgreement1;
             to.AdoxioIsagreement2 = from.IsAgreement2;
-
-            // TODO: Event locations!
         }
     }
 }

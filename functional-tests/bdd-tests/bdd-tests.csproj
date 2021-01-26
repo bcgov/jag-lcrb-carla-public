@@ -45,6 +45,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="PermanentChangeToLicensee.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="MfgRelease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
