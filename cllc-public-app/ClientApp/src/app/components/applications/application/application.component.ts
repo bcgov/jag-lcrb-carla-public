@@ -278,12 +278,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // special logic for Patio
     this.form.get('isHasPatio').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
+      if (this.form.get('patioIsLiquorCarried')) {
+        this.form.get('patioIsLiquorCarried').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
+          this.updateDescriptionRequired(checked, 'patioLiquorCarriedDescription');
+        });
+      }
+
       this.updatePatioRequired(checked);
+
+
     });
 
-    this.form.get('patioIsLiquorCarried').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
-      this.updateDescriptionRequired(checked,'patioLiquorCarriedDescription');
-    });
+    
     
 
     this.form.get('indigenousNation').valueChanges
