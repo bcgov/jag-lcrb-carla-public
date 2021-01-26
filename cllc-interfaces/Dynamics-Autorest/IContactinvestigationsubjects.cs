@@ -14,15 +14,28 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Contactid operations.
+    /// Contactinvestigationsubjects operations.
     /// </summary>
-    public partial interface IContactid
+    public partial interface IContactinvestigationsubjects
     {
         /// <summary>
-        /// Get adoxio_ContactId from adoxio_investigationcontacts
+        /// Get adoxio_contact_investigationsubjects from contacts
         /// </summary>
-        /// <param name='adoxioInvestigationcontactid'>
-        /// key: adoxio_investigationcontactid of adoxio_investigationcontact
+        /// <param name='contactid'>
+        /// key: contactid of contact
+        /// </param>
+        /// <param name='top'>
+        /// </param>
+        /// <param name='skip'>
+        /// </param>
+        /// <param name='search'>
+        /// </param>
+        /// <param name='filter'>
+        /// </param>
+        /// <param name='count'>
+        /// </param>
+        /// <param name='orderby'>
+        /// Order items by property values
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,10 +58,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMcontact>> GetWithHttpMessagesAsync(string adoxioInvestigationcontactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioInvestigationsubjectCollection>> GetWithHttpMessagesAsync(string contactid, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get adoxio_ContactId from adoxio_investigationsubjects
+        /// Get adoxio_contact_investigationsubjects from contacts
         /// </summary>
+        /// <param name='contactid'>
+        /// key: contactid of contact
+        /// </param>
         /// <param name='adoxioInvestigationsubjectid'>
         /// key: adoxio_investigationsubjectid of adoxio_investigationsubject
         /// </param>
@@ -73,6 +89,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMcontact>> Get1WithHttpMessagesAsync(string adoxioInvestigationsubjectid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioInvestigationsubject>> InvestigationsubjectsByKeyWithHttpMessagesAsync(string contactid, string adoxioInvestigationsubjectid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
