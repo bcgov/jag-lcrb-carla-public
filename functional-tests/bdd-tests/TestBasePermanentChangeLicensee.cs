@@ -77,6 +77,12 @@ namespace bdd_tests
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
             }
 
+            if (appType == "Catering application for a sole proprietorship")
+            { }
+
+            if (appType == "Catering application for a society")
+            { }
+
             if (appType == "CRS application for a private corporation")
             {
                 // upload Cannabis Associate Security Screening Forms
