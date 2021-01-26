@@ -81,5 +81,6 @@ export interface LicenceActionApplication {
   applicationId: string;
   applicationTypeName: string;
   isPaid: boolean;
+  isStructuralChange: boolean;
   applicationStatus: string;
 }
