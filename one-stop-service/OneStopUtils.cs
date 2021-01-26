@@ -70,7 +70,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                 MicrosoftDynamicsCRMadoxioOnestopmessageitem patchRecord =
                     new MicrosoftDynamicsCRMadoxioOnestopmessageitem()
                     {
-                        AdoxioDatesent = DateTime.Now,
+                        AdoxioDatetimesent = DateTime.Now,
                         AdoxioPayload = payload,
                         AdoxioMessagestatus = response
                     };
@@ -415,7 +415,7 @@ namespace Gov.Jag.Lcrb.OneStopService
 
             try
             {
-                string filter = "adoxio_datesent eq null";
+                string filter = "adoxio_datetimesent eq null";
                 result = dynamicsClient.Onestopmessageitems.Get(filter: filter).Value;
             }
             catch (HttpOperationException odee)

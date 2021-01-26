@@ -162,6 +162,13 @@ namespace bdd_tests
                 NgWebElement uiProceedToSecurityScreening = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
                 uiProceedToSecurityScreening.Click();
             }
+
+            if (specificButton == "Submit a Change")
+            {
+                // click on the Submit a Change button
+                NgWebElement uiSubmitAChange = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
+                uiSubmitAChange.Click();
+            }
         }
 
 

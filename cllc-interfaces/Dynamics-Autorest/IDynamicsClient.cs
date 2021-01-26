@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top215 { get; set; }
+        int? Top216 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip215 { get; set; }
+        int? Skip216 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count215 { get; set; }
+        bool? Count216 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter215 { get; set; }
+        string Filter216 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search215 { get; set; }
+        string Search216 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -133,6 +133,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationinvestigationrequests Applicationinvestigationrequests { get; }
 
         /// <summary>
+        /// Gets the IChangingtermsandconditions.
+        /// </summary>
+        IChangingtermsandconditions Changingtermsandconditions { get; }
+
+        /// <summary>
         /// Gets the IApplicationstructurechangev1s.
         /// </summary>
         IApplicationstructurechangev1s Applicationstructurechangev1s { get; }
@@ -141,6 +146,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtermsconditionslimitations.
         /// </summary>
         IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions.
+        /// </summary>
+        IApplicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions Applicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions { get; }
 
         /// <summary>
         /// Gets the IApplicationtransferownershipv1s.
@@ -246,11 +256,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContraventionadmins.
         /// </summary>
         IContraventionadmins Contraventionadmins { get; }
-
-        /// <summary>
-        /// Gets the IContraventioninvestigationrequests.
-        /// </summary>
-        IContraventioninvestigationrequests Contraventioninvestigationrequests { get; }
 
         /// <summary>
         /// Gets the IContraventions.
@@ -546,11 +551,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IComplaintid.
         /// </summary>
         IComplaintid Complaintid { get; }
-
-        /// <summary>
-        /// Gets the IContraventionid.
-        /// </summary>
-        IContraventionid Contraventionid { get; }
 
         /// <summary>
         /// Gets the IEstablishmentid.
@@ -1036,6 +1036,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContactinvestigationcontacts.
         /// </summary>
         IContactinvestigationcontacts Contactinvestigationcontacts { get; }
+
+        /// <summary>
+        /// Gets the IContactinvestigationsubjects.
+        /// </summary>
+        IContactinvestigationsubjects Contactinvestigationsubjects { get; }
 
         /// <summary>
         /// Gets the IBaserecordidadoxioinvestigationcontact.

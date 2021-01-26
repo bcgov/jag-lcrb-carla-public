@@ -45,6 +45,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="CannabisMarketingRelease.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PermanentChangeToLicensee.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="MfgRelease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -153,7 +153,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
               applicationId: app.id,
               applicationTypeName: app.applicationTypeName,
               applicationStatus: app.applicationStatus,
-              isPaid: app.isPaid
+              isPaid: app.isPaid,
+              isStructuralChange: app.isStructuralChange
             });
           });
           this.licensedApplications.push(licence);
