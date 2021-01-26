@@ -977,9 +977,9 @@
 
 
             <section *ngIf="application?.applicationType?.showDescription1">
-              <h3 class="blue-header" *ngIf="application?.applicationType?.name != ApplicationTypeNames.LP">DESCRIPTION OF PROPOSED CHANGE</h3>
-              <h3 class="blue-header" *ngIf="application?.applicationType?.name === ApplicationTypeNames.LP">ESTABLISHMENT TYPE</h3>
-              <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.LP || application?.applicationType?.name === ApplicationTypeNames.LPR" class="content-bottom">
+              <h3 class="blue-header" *ngIf="!this.isLP()">DESCRIPTION OF PROPOSED CHANGE</h3>
+              <h3 class="blue-header" *ngIf="this.isLP()">ESTABLISHMENT TYPE</h3>
+              <div *ngIf="this.isLP()" class="content-bottom">
                 <div class="padded-section">
 
                   <p>Identify the establishment type that best fits your proposed LP business, for example:</p>
@@ -1049,7 +1049,7 @@
                 </div>
               </div>
 
-              <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement' && application?.applicationType?.name != ApplicationTypeNames.LP && application?.applicationType?.name !== ApplicationTypeNames.LPR">
+              <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement' && !this.isLP()">
                 <div class="padded-section">
                   <app-field label="Please briefly outline the proposed change" [required]="true" [isFullWidth]="true"
                     [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
