@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top215 { get; set; }
+        public int? Top216 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip215 { get; set; }
+        public int? Skip216 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count215 { get; set; }
+        public bool? Count216 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter215 { get; set; }
+        public string Filter216 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search215 { get; set; }
+        public string Search216 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -136,6 +136,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationinvestigationrequests Applicationinvestigationrequests { get; private set; }
 
         /// <summary>
+        /// Gets the IChangingtermsandconditions.
+        /// </summary>
+        public virtual IChangingtermsandconditions Changingtermsandconditions { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationstructurechangev1s.
         /// </summary>
         public virtual IApplicationstructurechangev1s Applicationstructurechangev1s { get; private set; }
@@ -144,6 +149,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtermsconditionslimitations.
         /// </summary>
         public virtual IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions.
+        /// </summary>
+        public virtual IApplicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions Applicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationtransferownershipv1s.
@@ -249,11 +259,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContraventionadmins.
         /// </summary>
         public virtual IContraventionadmins Contraventionadmins { get; private set; }
-
-        /// <summary>
-        /// Gets the IContraventioninvestigationrequests.
-        /// </summary>
-        public virtual IContraventioninvestigationrequests Contraventioninvestigationrequests { get; private set; }
 
         /// <summary>
         /// Gets the IContraventions.
@@ -549,11 +554,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IComplaintid.
         /// </summary>
         public virtual IComplaintid Complaintid { get; private set; }
-
-        /// <summary>
-        /// Gets the IContraventionid.
-        /// </summary>
-        public virtual IContraventionid Contraventionid { get; private set; }
 
         /// <summary>
         /// Gets the IEstablishmentid.
@@ -1039,6 +1039,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContactinvestigationcontacts.
         /// </summary>
         public virtual IContactinvestigationcontacts Contactinvestigationcontacts { get; private set; }
+
+        /// <summary>
+        /// Gets the IContactinvestigationsubjects.
+        /// </summary>
+        public virtual IContactinvestigationsubjects Contactinvestigationsubjects { get; private set; }
 
         /// <summary>
         /// Gets the IBaserecordidadoxioinvestigationcontact.
@@ -1575,8 +1580,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationrelocationv1s = new Applicationrelocationv1s(this);
             Applications = new Applications(this);
             Applicationinvestigationrequests = new Applicationinvestigationrequests(this);
+            Changingtermsandconditions = new Changingtermsandconditions(this);
             Applicationstructurechangev1s = new Applicationstructurechangev1s(this);
             Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
+            Applicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions = new Applicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions(this);
             Applicationtransferownershipv1s = new Applicationtransferownershipv1s(this);
             Applicationtypecontents = new Applicationtypecontents(this);
             Applicationtypefeeschedules = new Applicationtypefeeschedules(this);
@@ -1598,7 +1605,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Complianceinvestigationenforcementaction = new Complianceinvestigationenforcementaction(this);
             Compliancemeetings = new Compliancemeetings(this);
             Contraventionadmins = new Contraventionadmins(this);
-            Contraventioninvestigationrequests = new Contraventioninvestigationrequests(this);
             Contraventions = new Contraventions(this);
             Corporatehistorysummaries = new Corporatehistorysummaries(this);
             Corporateroles = new Corporateroles(this);
@@ -1658,7 +1664,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Accountid = new Accountid(this);
             Applicationid = new Applicationid(this);
             Complaintid = new Complaintid(this);
-            Contraventionid = new Contraventionid(this);
             Establishmentid = new Establishmentid(this);
             Investigationrequestasyncoperations = new Investigationrequestasyncoperations(this);
             Investigationrequestbulkdeletefailures = new Investigationrequestbulkdeletefailures(this);
@@ -1756,6 +1761,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Businessunitadoxioonestopmessageitem = new Businessunitadoxioonestopmessageitem(this);
             Contacts = new Contacts(this);
             Contactinvestigationcontacts = new Contactinvestigationcontacts(this);
+            Contactinvestigationsubjects = new Contactinvestigationsubjects(this);
             Baserecordidadoxioinvestigationcontact = new Baserecordidadoxioinvestigationcontact(this);
             Baserecordidadoxioinvestigationrequest = new Baserecordidadoxioinvestigationrequest(this);
             Baserecordidadoxioinvestigationsubject = new Baserecordidadoxioinvestigationsubject(this);
