@@ -263,6 +263,7 @@ import { WorkerDataService } from "@services/worker-data.service";
 import { TuaEventComponent } from "@components/tua-event/tua-event.component";
 import { ApplicationRequestTermChangeComponent } from './components/applications/application-request-term-change/application-request-term-change.component';
 import { EventLocationTableComponent } from "@components/tables/event-location-table/event-location-table.component";
+import { ResolvedApplicationsComponent } from './components/lg-approvals/resolved-applications/resolved-applications.component';
 
 @NgModule({
   declarations: [
@@ -400,6 +401,7 @@ import { EventLocationTableComponent } from "@components/tables/event-location-t
     TuaEventComponent,
     ApplicationRequestTermChangeComponent,
     EventLocationTableComponent,
+    ResolvedApplicationsComponent,
   ],
   imports: [
     AppRoutingModule,
