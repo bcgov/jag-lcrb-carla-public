@@ -112,7 +112,7 @@ namespace bdd_tests
             uiHasValidInterest.Click();
 
             // select will have valid interest checkbox
-            NgWebElement uiWillhaveValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willhaveValidInterest']"));
+            NgWebElement uiWillhaveValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willHaveValidInterest']"));
             uiWillhaveValidInterest.Click();
 
             // upload the valid interest document
