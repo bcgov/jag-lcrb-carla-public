@@ -56,18 +56,6 @@ namespace bdd_tests
                 FileUpload("associates.pdf", "(//input[@type='file'])[12]");
             }
 
-            /*
-            // upload financial integrity form
-            if (businessType == " sole proprietorship")
-            {
-                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[6]");
-            }
-            else
-            {
-                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
-            }
-            */
-
             // upload shareholders < 10% interest
             if (businessType != " sole proprietorship")
             {
@@ -102,8 +90,16 @@ namespace bdd_tests
             NgWebElement uiEstablishmentPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentPhone']"));
             uiEstablishmentPhone.SendKeys(storePhone);
 
-            // upload the signage document
-            FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+            if (businessType == " sole proprietorship")
+            {
+                // upload the signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[5]");
+            }
+            else
+            {
+                // upload the signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+            }
 
             // select owner business checkbox
             NgWebElement uiIsOwnerBusiness = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
@@ -117,8 +113,16 @@ namespace bdd_tests
             NgWebElement uiWillhaveValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willHaveValidInterest']"));
             uiWillhaveValidInterest.Click();
 
-            // upload the valid interest document
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
+            if (businessType == " sole proprietorship")
+            {
+                // upload the valid interest document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
+            }
+            else
+            {
+                // upload the valid interest document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
+            }
 
             // enter the contact title
             NgWebElement uiContactPersonRole = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
