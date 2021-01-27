@@ -14,7 +14,6 @@ Scenario: DEV Cannabis Marketing Application Transfer (Private Corporation)
     And I click on the Dashboard tab
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Transfer Licence
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
@@ -35,7 +34,6 @@ Scenario: DEV Cannabis Marketing Application Transfer (Private Corporation)
 #    And I click on the Dashboard tab
 #    And the application is approved
 #    And I click on the Licences tab
-#    And I click on the link for Transfer Licence
 #    And I request a transfer of ownership
 #    And the account is deleted
 #    Then I see the login page
