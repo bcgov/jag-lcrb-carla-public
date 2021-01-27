@@ -46,7 +46,7 @@ namespace bdd_tests
                 FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
             }
 
-            // upload cannabis associate screening form
+            // upload personal history summary form
             if (businessType == " sole proprietorship")
             {
                 FileUpload("associates.pdf", "(//input[@type='file'])[3]");
@@ -56,6 +56,7 @@ namespace bdd_tests
                 FileUpload("associates.pdf", "(//input[@type='file'])[12]");
             }
 
+            /*
             // upload financial integrity form
             if (businessType == " sole proprietorship")
             {
@@ -65,11 +66,12 @@ namespace bdd_tests
             {
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
             }
+            */
 
             // upload shareholders < 10% interest
             if (businessType != " sole proprietorship")
             {
-                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
             }
 
             // enter the establishment name
@@ -101,7 +103,7 @@ namespace bdd_tests
             uiEstablishmentPhone.SendKeys(storePhone);
 
             // upload the signage document
-            FileUpload("signage.pdf", "(//input[@type='file'])[2]");
+            FileUpload("signage.pdf", "(//input[@type='file'])[17]");
 
             // select owner business checkbox
             NgWebElement uiIsOwnerBusiness = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
@@ -116,7 +118,7 @@ namespace bdd_tests
             uiWillhaveValidInterest.Click();
 
             // upload the valid interest document
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[6]");
+            FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
 
             // enter the contact title
             NgWebElement uiContactPersonRole = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
@@ -131,11 +133,11 @@ namespace bdd_tests
             uiContactPersonEmail.SendKeys(contactEmail);
 
             // click on authorize signature checkbox
-            NgWebElement uiAuthorizeSignature = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit']"));
+            NgWebElement uiAuthorizeSignature = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizeSignature.Click();
 
             // click on signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
             // retrieve the current URL to get the application ID (needed downstream)
