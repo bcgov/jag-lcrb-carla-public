@@ -207,7 +207,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     const result = this.isActive(item) &&
       !item.transferRequested &&
       this.actionsVisible(item) &&
-      item.licenceTypeName !== "Section 119 Authorization";
+      item.licenceTypeName !== "Section 119 Authorization" &&
+      item.licenceTypeName !== "Marketing";
     return result;
   }
 
@@ -339,7 +340,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         );
     }
   }
-  
+
   startRenewal(licence: ApplicationLicenseSummary) {
     // there are three type of renewals;
     // CRS Renewals
