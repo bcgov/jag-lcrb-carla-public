@@ -209,6 +209,31 @@
   </td>
 </tr>
 
+<tr *ngIf="liquorThree">
+  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+    <img class="icon" src="assets/liquor-primary-bars-blue.png" alt="">
+  </td>
+  <td style="width: 700px;">
+    <h3>Liquor Primary Club Licence</h3>
+    <p>A society registered under the provincial Societies Act or a non-profit or veterans organization incorporated by special act of parliament, may apply for an LP Club Licence. LP Clubs must have at least 50 members who pay annual fees. The service area of an LP Club is restricted to members and guests only.</p>
+    <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/liquorprimary-handbook.pdf"
+       target="_blank">
+      Learn
+      more about this licence
+    </a>
+  </td>
+  <td style="text-align: center;">
+    <button mat-raised-button color="secondary" [disabled]="startLPCOngoing"
+            (click)="startNewLPApplication()" id="startLPC">
+      <span>
+        START
+        APPLICATION
+      </span>
+      <mat-progress-bar class="mb-1" *ngIf="startLPCOngoing" mode="indeterminate"></mat-progress-bar>
+    </button>
+  </td>
+</tr>
+
 <tr *ngIf="liquorTwo">
   <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
     <img class="icon" src="assets/U-Brew-icon-blue-40px.png" alt="">

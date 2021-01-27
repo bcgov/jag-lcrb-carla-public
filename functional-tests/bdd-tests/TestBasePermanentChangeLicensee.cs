@@ -30,30 +30,30 @@ namespace bdd_tests
             */
 
             // click on Internal Transfer of Shares
-            NgWebElement uiInternalTransferOfShares = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
+            NgWebElement uiInternalTransferOfShares = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
             uiInternalTransferOfShares.Click();
 
             // click on External Transfer of Shares
-            NgWebElement uiExternalTransferOfShares = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
+            NgWebElement uiExternalTransferOfShares = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
             uiExternalTransferOfShares.Click();
 
             // click on Change of Directors or Officers
-            NgWebElement uiChangeOfDirectorsOrOfficers = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
+            NgWebElement uiChangeOfDirectorsOrOfficers = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
             uiChangeOfDirectorsOrOfficers.Click();
 
             // click on Name Change, Licensee -- Corporation
-            NgWebElement uiNameChangeLicenseeCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-7.mat-checkbox"));
+            NgWebElement uiNameChangeLicenseeCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
             uiNameChangeLicenseeCorporation.Click();
 
             // click on Name Change, Person
-            NgWebElement uiNameChangePerson = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
+            NgWebElement uiNameChangePerson = ngDriver.FindElement(By.CssSelector("#mat-checkbox-7.mat-checkbox"));
             uiNameChangePerson.Click();
 
             // click on Addition of Receiver or Executor
-            NgWebElement uiAdditionOfReceiverOrExecutor = ngDriver.FindElement(By.CssSelector("#mat-checkbox-9.mat-checkbox"));
+            NgWebElement uiAdditionOfReceiverOrExecutor = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
             uiAdditionOfReceiverOrExecutor.Click();
 
-            if (appType == "Catering application")
+            if (appType == "Catering application for a private corporation")
             {
                 // upload Central Securities Register forms
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -71,7 +71,19 @@ namespace bdd_tests
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
             }
 
-            if (appType == "CRS application")
+            if (appType == "Catering application for a partnership")
+            {
+                // upload Personal History Summary ocuments
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+            }
+
+            if (appType == "Catering application for a sole proprietorship")
+            { }
+
+            if (appType == "Catering application for a society")
+            { }
+
+            if (appType == "CRS application for a private corporation")
             {
                 // upload Cannabis Associate Security Screening Forms
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[]");
