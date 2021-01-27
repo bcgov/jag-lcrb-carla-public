@@ -18,9 +18,8 @@ Scenario: DEV Manufacturer Release #1 (Winery/Private Corporation)
     And I request a facility structural change
     And I click on the Licences tab
     And I request a relocation change
-    # And I click on the Licences tab
-    # See LCSD-4757 re lounge area
-    # And I request a lounge area endorsement
+    And I click on the Licences tab
+    And I request a lounge area endorsement
     And I click on the Licences tab
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
