@@ -234,48 +234,63 @@ export class ApplicationComponent extends FormBase implements OnInit {
     });
 
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursSundayClose');
+      this.updateRequiredValidator(val, 'serviceHoursSundayClose');
     });
     this.form.get('serviceHoursSundayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursSundayOpen');
+      this.updateRequiredValidator(val, 'serviceHoursSundayOpen');
     });
     this.form.get('serviceHoursMondayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursMondayClose');
+      this.updateRequiredValidator(val, 'serviceHoursMondayClose');
     });
     this.form.get('serviceHoursMondayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursMondayOpen');
+      this.updateRequiredValidator(val, 'serviceHoursMondayOpen');
     });
     this.form.get('serviceHoursTuesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursTuesdayClose');
+      this.updateRequiredValidator(val, 'serviceHoursTuesdayClose');
     });
     this.form.get('serviceHoursTuesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursTuesdayOpen');
+      this.updateRequiredValidator(val, 'serviceHoursTuesdayOpen');
     });
     this.form.get('serviceHoursWednesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursWednesdayClose');
+      this.updateRequiredValidator(val, 'serviceHoursWednesdayClose');
     });
     this.form.get('serviceHoursWednesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursWednesdayOpen');
+      this.updateRequiredValidator(val, 'serviceHoursWednesdayOpen');
     });
     this.form.get('serviceHoursThursdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursThursdayClose');
+      this.updateRequiredValidator(val, 'serviceHoursThursdayClose');
     });
     this.form.get('serviceHoursThursdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursThursdayOpen');
+      this.updateRequiredValidator(val, 'serviceHoursThursdayOpen');
     });
     this.form.get('serviceHoursFridayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursFridayClose');
+      this.updateRequiredValidator(val, 'serviceHoursFridayClose');
     });
     this.form.get('serviceHoursFridayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursFridayOpen');
+      this.updateRequiredValidator(val, 'serviceHoursFridayOpen');
     });
     this.form.get('serviceHoursSaturdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursSaturdayClose');
+      this.updateRequiredValidator(val, 'serviceHoursSaturdayClose');
     });
     this.form.get('serviceHoursSaturdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateHoursValidator(val, 'serviceHoursSaturdayOpen');
+      this.updateRequiredValidator(val, 'serviceHoursSaturdayOpen');
     });
 
+    // special logic for Patio
+    this.form.get('isHasPatio').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
+      if (this.form.get('patioIsLiquorCarried')) {
+        this.form.get('patioIsLiquorCarried').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
+          this.updateDescriptionRequired(checked, 'patioLiquorCarriedDescription');
+        });
+      }
+
+      this.updatePatioRequired(checked);
+
+
+    });
+
+    
+    
 
     this.form.get('indigenousNation').valueChanges
       .pipe(filter(value => value && value.length >= 3),
@@ -420,13 +435,50 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   }
 
-  updateHoursValidator(val, controlName) {
-    if (val === '') {
-      this.form.get(controlName).setValidators([]);
-    } else {
-      this.form.get(controlName).setValidators(Validators.required);
+  updateDescriptionRequired(checked, descriptionField) {
+    var val;
+    if (checked) {
+      val = 'true';
     }
-    this.form.get(controlName).updateValueAndValidity();
+    else {
+      val = '';
+    }
+    this.updateRequiredValidator(val, descriptionField);
+  }
+
+  updatePatioRequired(checked) {
+    var val;
+    if (checked) {
+      val = 'true';
+    }
+    else {
+      val = '';
+    }
+    this.updateRequiredValidator(val, 'patioAccessControlDescription');
+    this.updateRequiredValidator(val, 'patioAccessDescription');
+    this.updateRequiredValidator(val, 'patioCompDescription');
+    this.updateRequiredValidator(val, 'patioIsLiquorCarried');
+
+    if (this.form.get('patioIsLiquorCarried').value) {
+      this.updateRequiredValidator(val, 'patioLiquorCarriedDescription');
+    } else { // disable validation
+      this.updateRequiredValidator('', 'patioLiquorCarriedDescription');
+    }
+
+    
+    this.updateRequiredValidator(val, 'patioLocationDescription');
+    this.updateRequiredValidator(val, 'patioServiceBar');
+  }
+
+  updateRequiredValidator(val, controlName) {
+    if (this.form.get(controlName)) {
+      if (val === '') {
+        this.form.get(controlName).setValidators([]);
+      } else {
+        this.form.get(controlName).setValidators(Validators.required);
+      }
+      this.form.get(controlName).updateValueAndValidity();
+    }
   }
 
   autocompleteDisplay(item: any) {
@@ -901,7 +953,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   private establishmentNameIsChanging(): boolean {
     const isChanging: boolean =
-      (this?.application?.assignedLicence // if there is an existing licence 
+      (this?.application?.assignedLicence // if there is an existing licence
         && this.form // the form is created
         && this?.application?.assignedLicence?.establishmentName != this.form.get('establishmentName').value // the name is different
       );
@@ -973,12 +1025,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applicationTypeName === ApplicationTypeNames.LRSTransferofLocation
     );
 
-    if ((this.establishmentNameIsChanging() || !signageNotRequired) 
-      && this.application.applicationType.signage === FormControlState.Show
-       && ((this.uploadedSignageDocuments || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('At least one signage document is required.');
-    }
+//    if ((this.establishmentNameIsChanging() || !signageNotRequired)
+//      && this.application.applicationType.signage === FormControlState.Show
+//       && ((this.uploadedSignageDocuments || 0) < 1)) {
+//      valid = false;
+//      this.validationMessages.push('At least one signage document is required.');
+//    }
 
     if (this.application.applicationType.validInterest === FormControlState.Show &&
       ((this.uploadedValidInterestDocuments || 0) < 1)) {
@@ -1024,13 +1076,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.validationMessages.push('Only the owner of the business may submit this information');
       }
 
-      //if (!this.form.get('hasValidInterest').value) {
-      //  this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
-      // }
+      if (!this.form.get('hasValidInterest').value) {
+        this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
+       }
 
-      //if (!this.form.get('willHaveValidInterest').value) {
-      //  this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
-      // }
+      if (!this.form.get('willHaveValidInterest').value) {
+        this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
+       }
 
     }
 
@@ -1291,6 +1343,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       case 'Capacity':
         return AreaCategory.Capacity;
     }
+  }
+
+  isLP(): boolean {
+    return this.application?.applicationType?.name === ApplicationTypeNames.LP || this.application?.applicationType?.name === ApplicationTypeNames.LPR || this.application?.applicationType?.name === ApplicationTypeNames.LPC;
   }
 
   updateDynamicValidation() {
