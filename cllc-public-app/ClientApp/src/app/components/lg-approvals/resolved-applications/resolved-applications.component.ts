@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { ApplicationDataService } from '@services/application-data.service';
 @Component({
   selector: 'app-resolved-applications',
   templateUrl: './resolved-applications.component.html',
@@ -14,7 +15,7 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
   displayedColumns: string[] = ['number', 'application', 'applyingBusiness', 'establishmentAddress', 'action'];
   exampleDatabase: ExampleHttpDatabase | null;
   data: GithubIssue[] = [];
-
+  faPencilAlt = faPencilAlt;
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
@@ -22,7 +23,7 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient, private applicationDataService: ApplicationDataService) {}
 
   ngOnInit(): void {
   }
@@ -37,16 +38,19 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.exampleDatabase!.getRepoIssues(
-            this.sort.active, this.sort.direction, this.paginator.pageIndex);
+          return this.applicationDataService.getResolvedLGApplications();
+
+          // return this.exampleDatabase!.getRepoIssues(
+          //   this.sort.active, this.sort.direction, this.paginator.pageIndex);
         }),
         map(data => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
-          this.resultsLength = data.total_count;
+          //this.resultsLength = data.total_count;
+          this.resultsLength = data.length;
 
-          return data.items;
+          return data;
         }),
         catchError(() => {
           this.isLoadingResults = false;
