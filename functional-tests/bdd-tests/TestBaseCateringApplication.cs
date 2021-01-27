@@ -128,7 +128,7 @@ namespace bdd_tests
             uiLiqIndConnection.SendKeys(liqConnectionDetails);
 
             // enter the kitchen details
-            NgWebElement uiKitchenDescription = ngDriver.FindElement(By.CssSelector("textarea#Description2"));
+            NgWebElement uiKitchenDescription = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiKitchenDescription.SendKeys(kitchenDetails);
 
             // upload a store signage document

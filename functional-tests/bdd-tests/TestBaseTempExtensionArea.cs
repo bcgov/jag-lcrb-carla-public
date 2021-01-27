@@ -38,7 +38,7 @@ namespace bdd_tests
             string capacity = "180";
 
             // enter the event details
-            NgWebElement uiEventDetails = ngDriver.FindElement(By.CssSelector("textarea#Description2"));
+            NgWebElement uiEventDetails = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiEventDetails.SendKeys(description);
 
             // upload a floor plan document

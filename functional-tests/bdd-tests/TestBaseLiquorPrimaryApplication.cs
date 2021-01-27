@@ -36,6 +36,7 @@ namespace bdd_tests
 
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
+            string estType = "Military Mess";
 
             string patioCompDescription = "Sample patio comp description";
             string patioLocationDescription = "Sample patio location description";
@@ -134,9 +135,17 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
+            // select 'No' for patio
+            NgWebElement uiHasPatioNo = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-3"));
+            uiHasPatioNo.Click();
+
+            // enter the establishment type
+            NgWebElement uiEstabType = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
+            uiEstabType.SendKeys(estType);
+
             // select 'Yes' for patio
-            NgWebElement uiHasPatio = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-2"));
-            uiHasPatio.Click();
+            NgWebElement uiHasPatioYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-2"));
+            uiHasPatioYes.Click();
 
             // enter the patio comp description
             NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
