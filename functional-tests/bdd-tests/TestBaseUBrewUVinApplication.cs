@@ -21,7 +21,7 @@ namespace bdd_tests
     public abstract partial class TestBase : Feature, IDisposable
     {
         [And(@"I complete the UBrew / UVin application for (.*)")]
-        public void UBrewUVinApplication()
+        public void UBrewUVinApplication(string businessType)
         {
             string establishmentName = "Point Ellis Greenhouse";
             string streetAddress = "645 Tyee Road";
@@ -33,6 +33,44 @@ namespace bdd_tests
             string contactTitle = "Brewmaster";
             string contactPhone = "3333333333";
             string contactEmail = "contact@email.com";
+
+            if (businessType != " sole proprietorship")
+            {
+                // upload a central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+
+                // upload supporting business documentation
+                FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+            }
+
+            // upload cannabis associate screening form
+            if (businessType == " sole proprietorship")
+            {
+                FileUpload("associates.pdf", "(//input[@type='file'])[3]");
+            }
+            else
+            {
+                FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+            }
+
+            // upload financial integrity form
+            if (businessType == " sole proprietorship")
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[6]");
+            }
+            else
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+            }
+
+            // upload shareholders < 10% interest
+            if (businessType != " sole proprietorship")
+            {
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
+            }
 
             // enter the establishment name
             NgWebElement uiEstablishmentName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
