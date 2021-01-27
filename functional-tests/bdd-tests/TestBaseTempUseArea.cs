@@ -59,7 +59,7 @@ namespace bdd_tests
             uiRemoveIntoxicatedPatrons.SendKeys(removeIntoxicatedPatrons);
 
             // enter respect for neighbours
-            NgWebElement uiRespectForNeighbours = ngDriver.FindElement(By.CssSelector("textarea#Description2"));
+            NgWebElement uiRespectForNeighbours = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiRespectForNeighbours.SendKeys(respectForNeighbours);
 
             // click Fixed option

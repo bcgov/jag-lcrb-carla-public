@@ -44,7 +44,7 @@ namespace bdd_tests
             uiDescriptionOfChange.SendKeys(description1);
 
             // enter the location of the patio
-            NgWebElement uiPatioLocation = ngDriver.FindElement(By.CssSelector("textarea#Description2"));
+            NgWebElement uiPatioLocation = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiPatioLocation.SendKeys(description2);
 
             // upload a floor plan document
