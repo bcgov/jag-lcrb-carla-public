@@ -1250,7 +1250,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "restrictionsText", termsAndConditions },
                         { "endorsementsText", endorsementsText },
                         { "storeHours", storeHours },
-                        { "keyWord", keyWord }
+                        { "keyWord", keyWord },
+                        { "printDate", DateTime.Today.ToString("MMMM dd, yyyy")} // will be based on the users machine
 
                     };
                 }
