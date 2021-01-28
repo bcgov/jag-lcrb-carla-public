@@ -64,6 +64,8 @@ namespace bdd_tests
                     // click on Addition of Receiver or Executor
                     NgWebElement uiAdditionOfReceiverOrExecutor2 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
                     uiAdditionOfReceiverOrExecutor2.Click();
+                    // upload personal history summary forms
+                    //FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
                     // upload Central Securities Register forms
                     //FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
                     // upload supporting business documentation
