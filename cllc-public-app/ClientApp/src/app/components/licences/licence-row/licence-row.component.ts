@@ -207,7 +207,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     const result = this.isActive(item) &&
       !item.transferRequested &&
       this.actionsVisible(item) &&
-      item.licenceTypeName !== "Section 119 Authorization";
+      item.licenceTypeName !== "Section 119 Authorization" &&
+      item.licenceTypeName !== "Marketing";
     return result;
   }
 
@@ -315,13 +316,16 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     const actionApplication = licence.actionApplications.find(
       app => app.applicationTypeName === actionName
       && !app.isStructuralChange
-      && app.applicationStatus !== "Active");
-    if (!actionApplication?.isPaid === true) {
-      this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
-    } else if (actionApplication?.isPaid === false) {
-      this.snackBar.open(`${actionName} has already been submitted and is under review`,
-        "Warning",
-        { duration: 3500, panelClass: ["red-snackbar"] });
+        && app.applicationStatus !== "Active");
+    if (actionApplication) {
+      if (actionApplication.isPaid === true) {
+        this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
+      } else if (actionApplication.isPaid === false)
+      {
+        this.snackBar.open(`${actionName} has already been submitted and is under review`,
+          "Warning",
+          { duration: 3500, panelClass: ["red-snackbar"] });
+      }
     } else {
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
@@ -335,22 +339,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
           }
         );
     }
-  }
-
-  startTermRequestChange(licenceId: string, termId: string) {
-    // create an request for  application of the specified type
-    this.busy = this.licenceDataService.createApplicationForActionTypeTerm(licenceId, ApplicationTypeNames.RequestTermChange, termId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(data => {
-        this.router.navigateByUrl(`/multi-step-application/${data.id}`);
-      },
-        () => {
-          this.snackBar.open(`Error starting request for change to Term or Condition`,
-            "Fail",
-            { duration: 3500, panelClass: ["red-snackbar"] });
-          console.log("Error starting request for change to Term or Condition");
-        }
-      );
   }
 
   startRenewal(licence: ApplicationLicenseSummary) {

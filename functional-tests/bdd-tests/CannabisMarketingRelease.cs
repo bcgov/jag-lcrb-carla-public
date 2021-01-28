@@ -31,7 +31,6 @@ Scenario: DEV Cannabis Marketing Release (Private Corporation)
     And I click on the Licences tab
     And I click on the link for Download Licence
     And the licence is successfully downloaded
-    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 */

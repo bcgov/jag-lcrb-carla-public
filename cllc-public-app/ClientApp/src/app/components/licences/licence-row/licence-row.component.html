@@ -292,12 +292,13 @@
                                     </p>
                                 </ng-container>
                                 <div *ngIf="!isCancelled(item)">
-                                    <div *ngIf="isAboutToExpire(item) && item.autoRenewal" class="licence-expired"
+                                    <!--div *ngIf="isAboutToExpire(item) && item.autoRenewal" class="licence-expired"
                                         style="text-align: center;">
                                         <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
                                             <strong>Attention</strong>: This Licence will Expire Soon<br>Please
+
                                             Renew.</a>
-                                    </div>
+                                    </div-->
                                     <div *ngIf="isExpired(item) && isRecentlyExpired(item) && item.autoRenewal"
                                         class="licence-expired" style="text-align: center;">
                                         <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
@@ -405,11 +406,7 @@
       </mat-expansion-panel-header>
       <ul style="width: 100%;">
         <li *ngFor="let term of item?.termsAndConditions">
-          {{term.content}} <a href="javascript: void(0);" (click)="startTermRequestChange( item.licenseId, term.id)"   *ngIf="!term.isDefault">
-            <span>
-              <fa-icon [icon]="faBolt" style="margin-right: 10px;"></fa-icon>Request Change
-            </span>
-            </a>
+          {{term.content}}
         </li>
       </ul>
     </mat-expansion-panel>

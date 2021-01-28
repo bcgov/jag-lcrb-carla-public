@@ -10,7 +10,7 @@ Scenario: DEV Liquor Primary Application (Private Corporation)
     And I complete the Liquor Primary application for a private corporation
     And I click on the Submit button
     And the dashboard status is updated as Pending External Review
-    And the account is deleted
+    # And the account is deleted
     Then I see the login page
 
 @liquorprimaryapp 

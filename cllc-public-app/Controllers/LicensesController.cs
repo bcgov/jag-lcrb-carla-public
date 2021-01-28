@@ -664,7 +664,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
             }
 
+            // set the licence if we have one
+
+            if( adoxioLicense.AdoxioLicencesid != null) 
+            { 
+                application.AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", adoxioLicense.AdoxioLicencesid);
+            }
             // set the licence subtype if we have one
+
+
 
             if (adoxioLicense.AdoxioLicenceSubCategoryId != null)
             {
@@ -783,6 +791,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // now bind the new application to the given licence.
 
+            /*
             var patchApplication = new MicrosoftDynamicsCRMadoxioApplication
             {
                 AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", adoxioLicense.AdoxioLicencesid)
@@ -796,6 +805,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(httpOperationException, "Error updating application");
             }
+            */
 
             return application;
         }

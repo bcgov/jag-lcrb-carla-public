@@ -346,7 +346,7 @@
     <h4>
       Cannabis Associate Security Screening
     </h4>
-    <p>Each associate must provide a complete <a href=""></a></p>
+    <p>Each associate must provide a complete Cannabis Associate Security Screening form.
     <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
                        [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
                        (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
@@ -637,9 +637,31 @@
 <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent)">
   <h3 class="blue-header">Letter of Intent</h3>
   <section class="content-bottom">
-    <div *ngIf="htmlContent.letterOfIntent">
+    <div *ngIf="htmlContent.letterOfIntent && !application?.termConditionId">
       <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
     </div>
+
+          <!-- Request Change to Term / Condition -->
+          <section *ngIf="application?.termConditionId">
+
+
+
+              <app-field label="Term & Condition to be changed" [required]="false">
+                <textarea readonly style="width: 800px;" class="form-control"
+                  formControlName="termConditionOriginalText"></textarea>
+              </app-field>
+
+
+              <app-field label="Describe reason for change" errorMessage="Please enter the reason for the change">
+                <textarea style="width: 800px;" class="form-control" formControlName="description2"></textarea>
+              </app-field>
+
+              <div *ngIf="htmlContent.letterOfIntent">
+                <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
+              </div>
+
+
+          </section>
 
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="letterOfIntent"
@@ -762,30 +784,7 @@
     </div>
   </div>
 </section>
-<!-- Request Change to Term / Condition -->
-<section *ngIf="application?.termConditionId">
 
-  <h3 class="blue-header">REQUEST CHANGE TO T&C</h3>
-  <div class="content-bottom">
-
-    <app-field label="Current T & C Text" [required]="false">
-      <textarea readonly style="width: 800px;" class="form-control" formControlName="termConditionOriginalText"></textarea> 
-    </app-field>
-
-    <p>
-      A letter of intent describing , in detail, the proposed change to your licence.  To request discretion,
-      provide a written submission detailing compelling reasons/exceptional circumstances for your request and
-      why a request for discretion should be approved.  All documentation to support your request for
-      discretion must be submitted with this application.
-    </p>
-      <app-field label="Reason for change" 
-                 errorMessage="Please enter the reason for the change">
-        <textarea style="width: 800px;" class="form-control" formControlName="description2"></textarea>           
-      </app-field>
-
-    </div>
-
-</section>
 
 <!-- Proof of Zoning-->
 <section *ngIf="showZoning() && !showFormControl(application?.applicationType?.newEstablishmentAddress)">
@@ -828,6 +827,7 @@
       <div *ngIf="htmlContent.letterOfIntent">
         <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
       </div>
+
 
       <section>
         <app-file-uploader *ngIf="applicationId" documentType="letterOfIntent"
@@ -977,9 +977,9 @@
 
 
             <section *ngIf="application?.applicationType?.showDescription1">
-              <h3 class="blue-header" *ngIf="application?.applicationType?.name != ApplicationTypeNames.LP">DESCRIPTION OF PROPOSED CHANGE</h3>
-              <h3 class="blue-header" *ngIf="application?.applicationType?.name === ApplicationTypeNames.LP">ESTABLISHMENT TYPE</h3>
-              <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.LP" class="content-bottom">
+              <h3 class="blue-header" *ngIf="!this.isLP()">DESCRIPTION OF PROPOSED CHANGE</h3>
+              <h3 class="blue-header" *ngIf="this.isLP()">ESTABLISHMENT TYPE</h3>
+              <div *ngIf="this.isLP()" class="content-bottom">
                 <div class="padded-section">
 
                   <p>Identify the establishment type that best fits your proposed LP business, for example:</p>
@@ -1049,7 +1049,7 @@
                 </div>
               </div>
 
-              <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement' && application?.applicationType?.name != ApplicationTypeNames.LP">
+              <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement' && !this.isLP()">
                 <div class="padded-section">
                   <app-field label="Please briefly outline the proposed change" [required]="true" [isFullWidth]="true"
                     [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
@@ -1132,24 +1132,20 @@
       </p>
     </div>
 
-  </section>
+              <img *ngIf="application?.applicationType?.name === 'Temporary Use Area Endorsement'" src="assets/tua-site-plan-example.png" style="width: 700px;" alt="Sample Signage">
 
-  <p *ngIf="application?.applicationType?.signage === FormControlState.ReadOnly">
-    The below photos or renderings of
-    the store's signage are on file.
-  </p>
-  <section>
-    <app-file-uploader *ngIf="applicationId" documentType="Signage"
-                       [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                       [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
-                       fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
-                       [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
-                       (numberOfUploadedFiles)="uploadedSignageDocuments = $event" [entityId]="applicationId"
-                       [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
-    </app-file-uploader>
+              <section>
+                <app-file-uploader *ngIf="applicationId" documentType="Site Plan"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                  entityName="application" [useDocumentTypeForName]="true"
+                  (numberOfUploadedFiles)="uploadedSitePlanDocuments = $event" [entityId]="applicationId"
+                  [uploadHeader]="'TO UPLOAD SITE PLAN DOCUMENTS, DRAG FILES HERE OR'">
+                </app-file-uploader>
+              </section>
+
   </section>
 </div>
-
 <mat-card *ngIf="showExteriorChangeQuestion()" class="mat-elevation-z0" style="margin-bottom: 10px;">
   <section style="display: flex; justify-content: space-between; width: 100%;">
     <div class="question-label">
@@ -1662,7 +1658,7 @@
 <!-- Connections to non-medical -->
 <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
   <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
-  <div class="padded-section" *ngIf="application?.tiedHouse && account?.businessType">
+  <div class="content-bottom" *ngIf="application?.tiedHouse && account?.businessType">
     <app-connection-to-non-medical-stores *ngIf="application?.tiedHouse"
                                           [tiedHouse]="application?.tiedHouse"
                                           licensedProducerText="B.C. non-medical cannabis retail store licensee or applicant"

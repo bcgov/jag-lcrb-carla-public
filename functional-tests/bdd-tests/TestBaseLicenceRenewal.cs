@@ -298,7 +298,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Shareholder Information on the Organization Details page')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Submit a Third Party Operator application from the Licences Dashboard')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Submit a Structural Change from the Licences Dashboard')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Financial Interest information on the Account Profile')]")).Displayed);
+                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Financial Interest information on the Account Profile')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer this Licence from the Licences Dashboard')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Add, Remove or Update your Licensee Representative from the Licences Dashboard')]")).Displayed);   
             }
@@ -396,7 +396,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Shareholder Information on the Organization Details page')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Submit a Third Party Operator application from the Licences Dashboard')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Submit a Structural Change from the Licences Dashboard')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Financial Interest information on the Account Profile')]")).Displayed);
+                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Update your Financial Interest information on the Account Profile')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer this Licence from the Licences Dashboard')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Add, Remove or Update your Licensee Representative from the Licences Dashboard')]")).Displayed);
             }
@@ -489,7 +489,7 @@ namespace bdd_tests
             }
 
             // temporary fix
-            //System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(5000);
 
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));

@@ -38,7 +38,7 @@ namespace bdd_tests
             string patronEntertainment = "Sample patron entertainment.";
 
             // enter the patron entertainment
-            NgWebElement uiPatronEntertainment = ngDriver.FindElement(By.CssSelector("textarea#Description2"));
+            NgWebElement uiPatronEntertainment = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiPatronEntertainment.SendKeys(patronEntertainment);
 
             // click on authorized to submit checkbox
