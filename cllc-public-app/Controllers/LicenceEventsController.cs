@@ -382,6 +382,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             LicenceEvent licenceEventVM;
             MicrosoftDynamicsCRMadoxioLicences licence;
             MicrosoftDynamicsCRMaccount account;
+            Dictionary<string, string> serviceAreas;
 
             try
             {
@@ -391,6 +392,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     licenceEventVM.LicenceId,
                     expand: new List<string> { "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence" });
                 account = _dynamicsClient.Accounts.GetByKey(licence._adoxioLicenceeValue);
+                var areas = LicenseExtensions.GetServiceAreas(licence.AdoxioLicencesid, _dynamicsClient);
+                // Create lookup dictionary with service areas to speed up lookup times (vs an array)
+                serviceAreas = areas.ToDictionary(x => x.Id, x => x.AreaLocation);
             }
             catch (HttpOperationException)
             {
@@ -425,13 +429,36 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     </tr>";
             }
 
+            var eventLocations = "";
+            if (licenceEventVM.EventLocations.Count > 0)
+            {
+                eventLocations += $@"<table style='width: 100%'>
+                    <thead>
+                        <tr>
+                            <th>Location ID</th>
+                            <th>Location Name</th>
+                            <th>Attendance</th>
+                        </tr>
+                    </thead>";
+                foreach (var location in licenceEventVM.EventLocations)
+                {
+                    string area = serviceAreas.GetValueOrDefault(location.ServiceAreaId, "");
+                    eventLocations += $@"<tr class='hide-border'>
+                        <td style='width: 30%; text-align: left;'>{area}</td>
+                        <td style='width: 50%; text-align: left;'>{location.Name ?? ""}</td>
+                        <td style='width: 20%; text-align: left;'>{location.Attendance ?? 0}</td>
+                    </tr>";
+                }
+                eventLocations += "</table>";
+            }
+
             var termsAndConditions = "";
             foreach (var item in licence.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
             {
                 termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
             }
 
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, object>
             {
                 { "licensee", account.Name },
                 { "licenceNumber", licence.AdoxioLicencenumber },
@@ -462,7 +489,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "date", DateTime.Now.ToString("MMMM dd, yyyy") },
                 { "marketName", licenceEventVM.MarketName },
                 { "marketDuration",  licenceEventVM.MarketDuration.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.MarketDuration) : "" },
-                { "restrictionsText", termsAndConditions }
+                { "restrictionsText", termsAndConditions },
+                // TUA-specific fields
+                { "tuaEventType", licenceEventVM.TuaEventType.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.TuaEventType) : ""},
+                { "isClosedToPublic", licenceEventVM.IsClosedToPublic ?? false ? "Yes" : "No" },
+                { "isWedding", licenceEventVM.IsWedding ?? false },
+                { "isNetworkingParty", licenceEventVM.IsWedding ?? false },
+                { "isWedding", licenceEventVM.IsNetworkingParty ?? false },
+                { "isConcert", licenceEventVM.IsConcert ?? false },
+                { "isNoneOfTheAbove", licenceEventVM.IsNoneOfTheAbove ?? false },
+                { "isBanquet", licenceEventVM.IsBanquet ?? false },
+                { "isAmplifiedSound", licenceEventVM.IsAmplifiedSound ?? false },
+                { "isDancing", licenceEventVM.IsDancing ?? false },
+                { "isReception", licenceEventVM.IsReception ?? false },
+                { "isLiveEntertainment", licenceEventVM.IsLiveEntertainment ?? false },
+                { "isGambling", licenceEventVM.IsGambling ?? false },
+                { "eventLocations", eventLocations },
             };
 
             byte[] data;
