@@ -113,6 +113,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("TemporaryUseAreaEvents");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_ELIGIBILITY"]))
+            {
+                features.Add("Eligibility");
+            }
+
+            
+
             return features;
         }
 
