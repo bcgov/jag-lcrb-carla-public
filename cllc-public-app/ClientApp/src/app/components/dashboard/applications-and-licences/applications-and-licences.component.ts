@@ -313,11 +313,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       data => {
         // reload the user to cause the eligibility disclosure to show if needed
         this.userDataService.loadUserToStore().then(() => {});
-        if (this.licenseeChangeFeatureOn) {
-          this.router.navigateByUrl(`/multi-step-application/${data.id}`);
-        } else {
+        //if (this.licenseeChangeFeatureOn) {
+        //  this.router.navigateByUrl(`/multi-step-application/${data.id}`);
+        //} else {
           this.router.navigateByUrl(`/account-profile/${data.id}`);
-        }
+        //}
         this.startCRSOngoing = false;
       },
       () => {
@@ -342,7 +342,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         this.startMarketingOngoing = false;
-        this.router.navigateByUrl(`/multi-step-application/${data.id}`);
+        this.router.navigateByUrl(`/account-profile/${data.id}`);
       },
       () => {
         this.snackBar.open("Error starting a New Marketer Application",
@@ -365,7 +365,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        const route: any[] = [`/multi-step-application/${data.id}`];
+        const route: any[] = [`/account-profile/${data.id}`];
         this.startCateringOngoing = false;
         this.router.navigate(route);
       },
@@ -390,7 +390,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        const route: any[] = [`/multi-step-application/${data.id}`];
+        const route: any[] = [`/account-profile/${data.id}`];
         this.startMfgOngoing = false;
         this.router.navigate(route);
       },
@@ -490,7 +490,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        const route: any[] = [`/multi-step-application/${data.id}`];
+        const route: any[] = [`/account-profile/${data.id}`];
         this.startRASOngoing = false;
         this.router.navigate(route);
       },
@@ -515,7 +515,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        const route: any[] = [`/multi-step-application/${data.id}`];
+        const route: any[] = [`/account-profile/${data.id}`];
         this.startUBVOngoing = false;
         this.router.navigate(route);
       },
