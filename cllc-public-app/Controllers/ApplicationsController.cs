@@ -980,19 +980,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
             }
 
-            string applicationTypeName;
-
-            switch (item.LicenceType)
-            {
-                case "Food Primary":
-                    applicationTypeName = "Temporary Extension of Licensed Area (FP)";
-                    break;
-                default:
-                    applicationTypeName = "Temporary Extension of Licensed Area (LP)";
-                    break;
-            }
-
-
+            string applicationTypeName = "Temporary Extension of Licensed Area";
+            
             // set application type relationship 
             var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
 
