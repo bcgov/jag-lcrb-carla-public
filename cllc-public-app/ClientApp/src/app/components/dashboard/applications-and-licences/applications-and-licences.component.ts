@@ -21,6 +21,8 @@ import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from
   "@components/licences/licences.component";
 import { faPencilAlt, faPlus, faShoppingCart, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import * as moment from 'moment';
+import { User } from "@models/user.model";
+import { UserDataService } from "@services/user-data.service";
 
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
@@ -82,6 +84,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
 
   constructor(
+    private userDataService: UserDataService,
     private applicationDataService: ApplicationDataService,
     private licenceDataService: LicenseDataService,
     private router: Router,
@@ -308,6 +311,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
+        // reload the user to cause the eligibility disclosure to show if needed
+        this.userDataService.loadUserToStore().then(() => {});
         if (this.licenseeChangeFeatureOn) {
           this.router.navigateByUrl(`/multi-step-application/${data.id}`);
         } else {
