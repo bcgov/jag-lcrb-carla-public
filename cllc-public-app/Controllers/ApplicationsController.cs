@@ -1039,10 +1039,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
             }
 
+            string applicationTypeName = "Temporary Extension of Licensed Area";
+            
             // set application type relationship 
-            var applicationType = _dynamicsClient.GetApplicationTypeByName("Temporary Extension of Licensed Area");
-            adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes",
-                applicationType.AdoxioApplicationtypeid);
+            var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
+
+            if (applicationType == null)
+            {
+                _logger.LogError($"Unable to find the COVID Application Type for {applicationTypeName}");
+            }
+            else 
+            {
+                adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes",
+                    applicationType.AdoxioApplicationtypeid);
+            }
+
 
             try
             {
