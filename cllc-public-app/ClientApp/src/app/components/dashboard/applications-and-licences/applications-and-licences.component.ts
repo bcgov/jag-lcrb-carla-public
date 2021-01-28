@@ -83,6 +83,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
 
   constructor(
+    private userDataService: UserDataService,
     private applicationDataService: ApplicationDataService,
     private licenceDataService: LicenseDataService,
     private router: Router,
@@ -646,7 +647,6 @@ export class ApplicationCancellationDialogComponent {
   applicationName: string;
 
   constructor(
-    private userDataService: UserDataService,
     public dialogRef: MatDialogRef<ApplicationCancellationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.applicationName = data.applicationName;
