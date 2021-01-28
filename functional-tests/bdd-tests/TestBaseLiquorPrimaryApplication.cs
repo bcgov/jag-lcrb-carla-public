@@ -47,8 +47,8 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
-            string indigenousNation = "Cowichan Tribes";
-            string policeJurisdiction = "RCMP Shawnigan Lake";
+            string localGovernmentSaanich = "Saanich";
+            string policeJurisdictionSaanich = "Saanich Police Department";
 
             string floorAreaDescription = "Sample floor area.";
             string occupantLoad = "180";
@@ -113,18 +113,18 @@ namespace bdd_tests
                 FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[17]");
             }
 
-            // search for and select the indigenous nation
+            // search for and select Saanich as the local government
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
-            uiIndigenousNation.SendKeys(indigenousNation);
+            uiIndigenousNation.SendKeys(localGovernmentSaanich);
 
-            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
+            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
             uiIndigenousNation2.Click();
 
-            // search for and select the police jurisdiction
+            // search for and select Saanich as the police jurisdiction
             NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
-            uiPoliceJurisdiction.SendKeys(policeJurisdiction);
+            uiPoliceJurisdiction.SendKeys(policeJurisdictionSaanich);
 
-            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
+            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-6 span"));
             uiPoliceJurisdiction2.Click();
 
             // enter the store email
