@@ -29,10 +29,6 @@ namespace bdd_tests
             Page Title: Permanent Change to a Licensee
             */
 
-            /*
-
-            */
-
             switch (appType)
             {
                 case "Catering application for a society":
