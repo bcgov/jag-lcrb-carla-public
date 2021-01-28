@@ -98,7 +98,8 @@ namespace Gov.Lclb.Cllb.Public.Mapping
 
                 {"adoxio_locatedaboveother", new FieldMapping("locatedAboveOther", false)},
 
-                {"adoxio_description2", new FieldMapping("Description2", false)}
+                {"adoxio_description2", new FieldMapping("description2", false)},
+                {"adoxio_description3", new FieldMapping("description3", false)}
             
 
 

@@ -38,6 +38,17 @@
       </ul>
     </section>
 
+    <section *ngIf="false">
+      <!-- TO DO https://justice.gov.bc.ca/jira/browse/LCSD-4786 -->
+      <mat-checkbox>
+        <span class="error-states">*</span>
+        <span class="ml-2 question-label">
+          No objection to this application
+        </span>
+      </mat-checkbox>
+
+    </section>
+
     <app-file-uploader *ngIf="application?.id" documentType="LGIN Resolution"
                        [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval"
                        (numberOfUploadedFiles)="uploadedResolutionDocuments = $event" [maxNumberOfFiles]="200"
