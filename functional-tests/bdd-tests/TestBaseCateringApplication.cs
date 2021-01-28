@@ -106,7 +106,7 @@ namespace bdd_tests
 
             // select 'Yes'
             // Do you or any of your shareholders currently hold, have held, or have previously applied for a British Columbia liquor licence?
-            NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-19-button"));
+            NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-73-button"));
             uiPreviousLicenceYes.Click();
 
             // enter the previous application details
