@@ -1,6 +1,5 @@
 <div [formGroup]="form" class="form-wrapper">
   <h1>Permanent Change to a Licensee
-    <span class="success-green" *ngIf="canCreateNewApplication"><em>PAID</em></span>
   </h1>
   <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
 
@@ -12,7 +11,7 @@
         <section>
           <!-- For all corporations -->
           <section
-            *ngIf="this.account.businessType === 'PrivateCorporation' || this.account.businessType === 'PublicCorporation'">
+            *ngIf="this.account?.businessType === 'PrivateCorporation' || this.account?.businessType === 'PublicCorporation'">
             <p>All licensees and applicants must maintain a complete and current list of leadership and
               businesses
               associated with their organization.</p>
@@ -23,8 +22,8 @@
               <li>Change of directors, officers, or senior managers</li>
               <li>Name changes</li>
               <!-- for private corporations only-->
-              <li *ngIf="this.account.businessType === 'PrivateCorporation'">Internal transfer of shares</li>
-              <li *ngIf="this.account.businessType === 'PrivateCorporation'">External transfer of shares</li>
+              <li *ngIf="this.account?.businessType === 'PrivateCorporation'">Internal transfer of shares</li>
+              <li *ngIf="this.account?.businessType === 'PrivateCorporation'">External transfer of shares</li>
             </ul>
             <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through
               the
@@ -34,7 +33,7 @@
           </section>
 
           <!-- For Partnerships -->
-          <section *ngIf="this.account.businessType === 'Partnership'">
+          <section *ngIf="this.account?.businessType === 'Partnership'">
             <p>All licensees and applicants must maintain a complete and current list of individual and
               businesses
               partners associated with their organization.</p>
@@ -54,7 +53,7 @@
           </section>
 
           <!-- For Sole Proprietors -->
-          <section *ngIf="this.account.businessType === 'SoleProprietorship'">
+          <section *ngIf="this.account?.businessType === 'SoleProprietorship'">
             <p>Sole Proprietors must provide their leadership information and keep it up to date.</p>
             <p>You are required to notify the LCRB of name changes within ten business days of the change
               being
@@ -67,8 +66,8 @@
           </section>
 
           <!-- For Societies, Universities and Churches-->
-          <section *ngIf="['Society', 'University', 'Church'].indexOf(this.account.businessType) !== -1">
-            <p>{{this.account.businessType}} applicants and licensees must provide their leadership information and
+          <section *ngIf="['Society', 'University', 'Church'].indexOf(this.account?.businessType) !== -1">
+            <p>{{this.account?.businessType}} applicants and licensees must provide their leadership information and
               keep
               it
               up to date.</p>
@@ -83,7 +82,7 @@
           </section>
 
           <!-- For Indigenous Nations -->
-          <section *ngIf="this.account.businessType === 'IndigenousNation'">
+          <section *ngIf="this.account?.businessType === 'IndigenousNation'">
             <p>
               An applicant that is an <i>Indigenous Nation</i> may have associates that are required to
               consent to
@@ -153,7 +152,7 @@
             </p>
           </section>
 
-          <section *ngIf="this.account.businessType !=='IndigenousNation'">
+          <section *ngIf="this.account?.businessType !=='IndigenousNation'">
             <p>Fees are calculated based on the type of change reported and the number of licences impacted.
               If
               no changes are made, or no licences are held, you will not be charged a fee for submitting
@@ -161,7 +160,7 @@
               information.</p>
 
             <!-- Licensee Details -->
-            <section>
+            <section *ngIf="cannabisLicences.count && cannabisLicences.count > 0 && liquorLicences.count && liquorLicences.count > 0">
               <h3>Licensee Details</h3>
               <p>You have the following licences:</p>
               <table style="border: solid black 1px;">
@@ -190,7 +189,7 @@
                   </tr>
                 </tbody>
               </table>
-            </section>
+
             <p>&nbsp;</p>
             <ul>
               <li>Applicable fees for cannabis licensees are listed in <a
@@ -200,6 +199,7 @@
                   href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
                   target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
             </ul>
+            </section>
           </section>
 
           <!-- For Indigenous Nations -->
@@ -935,7 +935,7 @@
     </section>
 
     <!-- Payment -->
-    <section *ngIf="selectedChangeList?.length > 0">
+    <section *ngIf="selectedChangeList?.length > 0 && cannabisLicences.count && cannabisLicences.count > 0 && liquorLicences.count && liquorLicences.count > 0">
       <h3 class="blue-header ngtest-payment">
         PAYMENT
       </h3>
