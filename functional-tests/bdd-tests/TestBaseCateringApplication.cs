@@ -106,7 +106,7 @@ namespace bdd_tests
 
             // select 'Yes'
             // Do you or any of your shareholders currently hold, have held, or have previously applied for a British Columbia liquor licence?
-            NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-19-button"));
+            NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-73-button"));
             uiPreviousLicenceYes.Click();
 
             // enter the previous application details
@@ -115,12 +115,12 @@ namespace bdd_tests
 
             // select 'Yes'
             // Do you hold a Rural Agency Store Appointment?
-            NgWebElement uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-22-button"));
+            NgWebElement uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-76-button"));
             uiRuralAgencyStore.Click();
 
             // select 'Yes'
             // Do you, or any of your shareholders, have any connection, financial or otherwise, direct or indirect, with a distillery, brewery or winery?
-            NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-25-button"));
+            NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-79-button"));
             uiOtherBusinessYes.Click();
 
             // enter the connection details
