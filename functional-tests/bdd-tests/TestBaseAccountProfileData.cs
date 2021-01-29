@@ -121,8 +121,8 @@ namespace bdd_tests
             Assert.True(uiMailingAddressCity.GetAttribute("value") == "Bellevue");
 
             // check mailing address province/state is correct
-            NgWebElement uiMailingAddressProvince = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mailingAddressProvince']"));
-            Assert.True(uiMailingAddressProvince.GetAttribute("value") == "WA");
+            NgWebElement uiMailingAddressProvince = ngDriver.FindElement(By.CssSelector("select[formcontrolname='mailingAddressProvince']"));
+            Assert.True(uiMailingAddressProvince.GetAttribute("value") == "Alberta");
  
             // check mailing address postal/zip is correct
             NgWebElement uiMailingAddressPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mailingAddressPostalCode']"));
