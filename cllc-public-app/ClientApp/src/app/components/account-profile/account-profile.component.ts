@@ -143,13 +143,13 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         physicalAddressStreet2: [""],
         physicalAddressCity: ["", Validators.required],
         physicalAddressPostalCode: ["", [Validators.required, this.customZipCodeValidator("physicalAddressCountry")]],
-        physicalAddressProvince: [{ value: "British Columbia" }],
-        physicalAddressCountry: [{ value: "Canada" }],
+        physicalAddressProvince: ["British Columbia", Validators.required],
+        physicalAddressCountry: ["Canada", Validators.required],
         mailingAddressStreet: ["", Validators.required],
         mailingAddressStreet2: [""],
         mailingAddressCity: ["", Validators.required],
         mailingAddressPostalCode: ["", [Validators.required, this.customZipCodeValidator("mailingAddressCountry")]],
-        mailingAddressProvince: ["", Validators.required],
+        mailingAddressProvince: ["British Columbia", Validators.required],
         mailingAddressCountry: ["Canada", Validators.required],
         websiteUrl: [""],
       }),
@@ -274,6 +274,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         const businessProfile: Partial<Account> = { ...account };
         businessProfile.physicalAddressProvince = businessProfile.physicalAddressProvince || "British Columbia";
         businessProfile.physicalAddressCountry = "Canada";
+        businessProfile.mailingAddressProvince = businessProfile.mailingAddressProvince || "British Columbia";
+        businessProfile.mailingAddressCountry = "Canada";
 
         this.form.patchValue({
           businessProfile: businessProfile,

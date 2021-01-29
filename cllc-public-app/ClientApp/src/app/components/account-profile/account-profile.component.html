@@ -153,7 +153,7 @@
       <input class="form-control" type="text" formControlName="physicalAddressCity">
     </app-field>
     <section class="col-md-3 col-xs-12">
-      <app-field label="Province" [isFullWidth]="true">
+      <app-field label="Province" [isFullWidth]="true" [required]="true">
         <select class="form-control" formControlName="physicalAddressProvince">
           <option value="British Columbia">British Columbia</option>
           <option value="Ontario">Ontario</option>
@@ -180,9 +180,8 @@
         <input class="form-control" type="text" formControlName="physicalAddressPostalCode">
       </app-field>
     </section>
-    <app-field class="col-md-6 col-xs-12" [isFullWidth]="true" label="Country">
-
-      <input class="form-control" type="text" formControlName="physicalAddressCountry" value="Canada">
+    <app-field class="col-md-6 col-xs-12" [required]="true" [isFullWidth]="true" label="Country">
+      <input class="form-control" type="text" formControlName="physicalAddressCountry" value="Canada" readonly>
     </app-field>
   </div>
   <p></p>
@@ -212,8 +211,22 @@
         <app-field label="Province/State"
                    [valid]="form.get('businessProfile.mailingAddressProvince').valid || !form.get('businessProfile.mailingAddressProvince').touched"
                    [required]="true" [isFullWidth]="true">
-          <input type="text" formControlName="mailingAddressProvince" class="form-control">
-        </app-field>
+          <select class="form-control" formControlName="mailingAddressProvince">
+            <option value="British Columbia">British Columbia</option>
+            <option value="Ontario">Ontario</option>
+            <option value="Alberta">Alberta</option>
+            <option value="Quebec">Quebec</option>
+            <option value="Manitoba">Manitoba</option>
+            <option value="Nova Scotia">Nova Scotia</option>
+            <option value="New Brunswick">New Brunswick</option>
+            <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+            <option value="Saskatchewan">Saskatchewan</option>
+            <option value="Prince Edward Island">Prince Edward Island</option>
+            <option value="Northwest Territories">Northwest Territories</option>
+            <option value="Yukon">Yukon</option>
+            <option value="Nunavut">Nunavut</option>
+          </select>
+          </app-field>
       </section>
       <section class="col-md-3 col-xs-12">
         <app-field label="Postal /Zip Code" errorMessage="This is required. The postal / zip code should be in one of the following formats: X1X1X1,
@@ -226,7 +239,7 @@
       <app-field class="col-md-6 col-xs-12" label="Country" errorMessage="Please enter country"
                  [valid]="form.get('businessProfile.mailingAddressCountry').valid || !form.get('businessProfile.mailingAddressCountry').touched"
                  [required]="true" [isFullWidth]="true">
-        <input type="text" formControlName="mailingAddressCountry" class="form-control">
+        <input type="text" formControlName="mailingAddressCountry" class="form-control" readonly>
       </app-field>
     </div>
   </div>
