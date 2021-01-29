@@ -230,6 +230,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }),
       isPermittedInZoning: ['', []],
       isOnINLand: [false, []],
+      patioIsLiquorCarried: [false, []],
       termConditionOriginalText: ['', []],
     });
 
