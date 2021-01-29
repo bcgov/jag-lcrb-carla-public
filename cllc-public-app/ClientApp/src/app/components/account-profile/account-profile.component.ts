@@ -165,41 +165,41 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     this.subscribeForData();
 
     this.form.get("businessProfile._mailingSameAsPhysicalAddress").valueChanges.pipe(
-        filter(value => value === true))
+      filter(value => value === true))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
 
     this.form.get("businessProfile.physicalAddressStreet").valueChanges.pipe(
-        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
+      filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
     this.form.get("businessProfile.physicalAddressStreet2").valueChanges.pipe(
-        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
+      filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
     this.form.get("businessProfile.physicalAddressCity").valueChanges.pipe(
-        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
+      filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
     this.form.get("businessProfile.physicalAddressPostalCode").valueChanges.pipe(
-        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
+      filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
 
     this.form.get("businessProfile.physicalAddressProvince").valueChanges.pipe(
-        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
+      filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
 
 
     this.form.get("businessProfile.physicalAddressCountry").valueChanges.pipe(
-        filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
+      filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
@@ -227,29 +227,29 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
     let name = "";
     switch (this.saveFormData.businessProfile.businessType) {
-    case "GeneralPartnership":
-    case 'LimitedPartnership"':
-    case "LimitedLiabilityPartnership":
-      name = "Partnership";
-      break;
-    case "SoleProprietorship":
-      name = "Sole Proprietorship";
-      break;
-    case "IndigenousNation":
-      name = "Indigenous Nation";
-      break;
-    case "LocalGovernment":
-      name = "Local Government";
-      break;
-    case "PublicCorporation":
-    case "PrivateCorporation":
-    case "UnlimitedLiabilityCorporation":
-    case "LimitedLiabilityCorporation":
-      name = "Corporation";
-      break;
-    default:
-      name = this.saveFormData.businessProfile.businessType;
-      break;
+      case "GeneralPartnership":
+      case 'LimitedPartnership"':
+      case "LimitedLiabilityPartnership":
+        name = "Partnership";
+        break;
+      case "SoleProprietorship":
+        name = "Sole Proprietorship";
+        break;
+      case "IndigenousNation":
+        name = "Indigenous Nation";
+        break;
+      case "LocalGovernment":
+        name = "Local Government";
+        break;
+      case "PublicCorporation":
+      case "PrivateCorporation":
+      case "UnlimitedLiabilityCorporation":
+      case "LimitedLiabilityCorporation":
+        name = "Corporation";
+        break;
+      default:
+        name = this.saveFormData.businessProfile.businessType;
+        break;
     }
     return name;
   }
@@ -269,15 +269,14 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       .pipe(filter(s => !!s))
       .subscribe(account => {
         this.account = account;
-        // default to BC if no province found
-
-        // this is generating runtime errors so disabled 1/21/2021
-
-        //account.physicalAddressProvince = account.physicalAddressProvince || "British Columbia";
-        //account.physicalAddressCountry = "Canada";
+        // Make a copy of the account object stored in Ngrx (which is read-only)
+        // See https://stackoverflow.com/questions/57591012/ngrx-cannot-assign-to-read-only-property-property-of-object-object
+        const businessProfile: Partial<Account> = { ...account };
+        businessProfile.physicalAddressProvince = businessProfile.physicalAddressProvince || "British Columbia";
+        businessProfile.physicalAddressCountry = "Canada";
 
         this.form.patchValue({
-          businessProfile: account,
+          businessProfile: businessProfile,
           primarycontact: account.primarycontact || {}
         });
 
@@ -312,8 +311,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       contact.emailaddress1 = this.currentUser.email;
       this.busy = this.contactDataService.createWorkerContact(contact)
         .subscribe(() => {
-            this.subscribeForData();
-          },
+          this.subscribeForData();
+        },
           () => alert("Failed to create contact"));
     } else {
       window.location.href = "logout";
@@ -349,7 +348,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     return forkJoin(...saves)
       .pipe(catchError(() => of(false)),
         map(() => {
-          this.accountDataService.loadCurrentAccountToStore(this.account.id).subscribe(() => {});
+          this.accountDataService.loadCurrentAccountToStore(this.account.id).subscribe(() => { });
           return true;
         }));
   }
