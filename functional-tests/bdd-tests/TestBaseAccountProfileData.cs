@@ -126,11 +126,11 @@ namespace bdd_tests
  
             // check mailing address postal/zip is correct
             NgWebElement uiMailingAddressPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mailingAddressPostalCode']"));
-            Assert.True(uiMailingAddressPostalCode.GetAttribute("value") == "98004");
+            Assert.True(uiMailingAddressPostalCode.GetAttribute("value") == "T2E8A2");
 
             // check mailing address country is correct
             NgWebElement uiMailingAddressCountry = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mailingAddressCountry']"));
-            Assert.True(uiMailingAddressCountry.GetAttribute("value") == "United States");
+            Assert.True(uiMailingAddressCountry.GetAttribute("value") == "Canada");
 
             // check contact phone is correct
             NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
