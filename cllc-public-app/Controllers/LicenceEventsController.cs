@@ -458,7 +458,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
             }
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new Dictionary<string, string>
             {
                 { "licensee", account.Name },
                 { "licenceNumber", licence.AdoxioLicencenumber },
@@ -493,17 +493,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // TUA-specific fields
                 { "tuaEventType", licenceEventVM.TuaEventType.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.TuaEventType) : ""},
                 { "isClosedToPublic", licenceEventVM.IsClosedToPublic ?? false ? "Yes" : "No" },
-                { "isWedding", licenceEventVM.IsWedding ?? false },
-                { "isNetworkingParty", licenceEventVM.IsWedding ?? false },
-                { "isWedding", licenceEventVM.IsNetworkingParty ?? false },
-                { "isConcert", licenceEventVM.IsConcert ?? false },
-                { "isNoneOfTheAbove", licenceEventVM.IsNoneOfTheAbove ?? false },
-                { "isBanquet", licenceEventVM.IsBanquet ?? false },
-                { "isAmplifiedSound", licenceEventVM.IsAmplifiedSound ?? false },
-                { "isDancing", licenceEventVM.IsDancing ?? false },
-                { "isReception", licenceEventVM.IsReception ?? false },
-                { "isLiveEntertainment", licenceEventVM.IsLiveEntertainment ?? false },
-                { "isGambling", licenceEventVM.IsGambling ?? false },
+                { "isWedding", licenceEventVM.IsWedding ?? false ? "1" : null},
+                { "isNetworkingParty", licenceEventVM.IsNetworkingParty ?? false ? "1" : null},
+                { "isConcert", licenceEventVM.IsConcert ?? false ? "1" : null},
+                { "isNoneOfTheAbove", licenceEventVM.IsNoneOfTheAbove ?? false ? "1" : null},
+                { "isBanquet", licenceEventVM.IsBanquet ?? false ? "1" : ""},
+                { "isAmplifiedSound", licenceEventVM.IsAmplifiedSound ?? false ? "1" : null},
+                { "isDancing", licenceEventVM.IsDancing ?? false ? "1" : null},
+                { "isReception", licenceEventVM.IsReception ?? false ? "1" : null},
+                { "isLiveEntertainment", licenceEventVM.IsLiveEntertainment ?? false ? "1" : null},
+                { "isGambling", licenceEventVM.IsGambling ?? false ? "1" : null},
                 { "eventLocations", eventLocations },
             };
 
@@ -519,9 +518,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     pdfType = "catering_event_authorization";
                 }
+                else if (licenceEventVM.EventCategory == EventCategory.TemporaryUseArea)
+                {
+                    pdfType = "tua_event_authorization";
+                }
                 if (pdfType != null)
                 {
-                    data = await _pdfClient.GetPdf(parameters, pdfType);
+                    data = await _pdfClient.GetPdf(parameters, pdfType).ConfigureAwait(true);
 
                     // Save copy of generated licence PDF for auditing/logging purposes
                     try

@@ -329,7 +329,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     expiryDateParam = expiryDate.ToString("dd/MM/yyyy");
                 }
 
-                var parameters = new Dictionary<string, object>
+                var parameters = new Dictionary<string, string>
                 {
                     { "title", "Worker_Qualification" },
                     { "currentDate", DateTime.Now.ToLongDateString() },

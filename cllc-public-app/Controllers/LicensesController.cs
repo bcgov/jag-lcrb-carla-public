@@ -1213,7 +1213,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             </tr></table>";
                 }
 
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
                 /* if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
                 {
                     parameters = new Dictionary<string, string>
@@ -1236,7 +1236,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else */
                 if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
                 {
-                    parameters = new Dictionary<string, object>
+                    parameters = new Dictionary<string, string>
                     {
                         { "title", "Cannabis_Licence" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber},
@@ -1265,7 +1265,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     //adoxioLicense.AdoxioLicenceSubCategoryId?
 
-                    parameters = new Dictionary<string, object>
+                    parameters = new Dictionary<string, string>
                     {
                         { "title", "Liquor_License" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
@@ -1293,7 +1293,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         case "Marketing":
                             templateName = "cannabis_marketer_licence";
                             break;
-                        
                         case "Catering":
                             templateName = "catering_licence";
                             break;
@@ -1314,8 +1313,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             templateName = "manufacturer_licence";
                             break;
                         */
-
-
 
                         case "Cannabis Retail Store":
                         case "Marketing":
