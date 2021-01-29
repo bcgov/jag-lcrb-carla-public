@@ -61,6 +61,11 @@ export class Account {
     return isPrivateCorp;
   }
 
+  businessTypeIsSociety (): boolean {
+    const isSociety = this.businessType === 'Society';
+    return isSociety;
+  }
+
   isPublicCorporation(): boolean {
     const isPublicCorp = ["PublicCorporation"].indexOf(this.businessType) !== -1;
     return isPublicCorp;
