@@ -268,13 +268,53 @@
                     <table class="hide-border" style="width: 100%;">
                         <tr class="hide-border">
                             <td style="width: 33%; text-align: left;">
-                                <b>Name:</b> {{#}}
+                                <ul>
+                                    {{#isWedding}}
+                                    <li>Wedding</li>
+                                    {{/isWedding}}
+
+                                    {{#isNetworkingParty}}
+                                    <li>Networking Party</li>
+                                    {{/isNetworkingParty}}
+
+                                    {{#isConcert}}
+                                    <li>Concert</li>
+                                    {{/isConcert}}
+
+                                    {{#isNoneOfTheAbove}}
+                                    <li>None of the Above</li>
+                                    {{/isNoneOfTheAbove}}
+                                </ul>
                             </td>
                             <td style="width: 33%; text-align: left;">
-                                <b>Phone:</b> {{inspectorPhone}}
+                                <ul>
+                                    {{#isBanquet}}
+                                    <li>Banquet</li>
+                                    {{/isBanquet}}
+
+                                    {{#isAmplifiedSound}}
+                                    <li>Amplified Sound</li>
+                                    {{/isAmplifiedSound}}
+
+                                    {{#isDancing}}
+                                    <li>Dancing</li>
+                                    {{/isDancing}}
+                                </ul>
                             </td>
                             <td style="text-align: left;">
-                                <b>Email:</b> {{inspectorEmail}}
+                                <ul>
+                                    {{#isReception}}
+                                    <li>Reception</li>
+                                    {{/isReception}}
+
+                                    {{#isLiveEntertainment}}
+                                    <li>Live Entertainment</li>
+                                    {{/isLiveEntertainment}}
+
+                                    {{#isGambling}}
+                                    <li>Gambling</li>
+                                    {{/isGambling}}
+                                </ul>
                             </td>
                         </tr>
                     </table>
@@ -296,7 +336,7 @@
             </tr>
             <tr class="hide-border">
                 <td colspan="2">
-                    {{eventLocations}}
+                    {{{eventLocations}}}
                 </td>
             </tr>
         </table>
@@ -333,7 +373,6 @@
                 </td>
             </tr>
         </table>
-
         <table id="footder-box" class="inspector-info mt-3" style="width: 100%">
             <tr class="hide-border">
                 <td style="width: 50%; text-align: left;">
@@ -346,5 +385,4 @@
         </table>
     </div>
 </body>
-
 </html>

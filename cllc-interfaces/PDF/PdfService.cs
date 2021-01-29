@@ -37,7 +37,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="parameters">Object holding the data to pass to the template for rendering a PDF file</param>
         /// <param name="template">The template to render as PDF (e.g. "cannabis_licence")</param>
         /// <returns>Binary data representing the PDF file</returns>
-        public async Task<byte[]> GetPdf(Dictionary<string, object> parameters, string template)
+        public async Task<byte[]> GetPdf(Dictionary<string, string> parameters, string template)
         {
             byte[] result = null;
 
@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="parameters">Object holding the data to pass to the template for rendering a PDF file</param>
         /// <param name="template">The template to render as PDF (e.g. "cannabis_licence")</param>
         /// <returns>A string with the hash value</returns>
-        public async Task<string> GetPdfHash(Dictionary<string, object> parameters, string template)
+        public async Task<string> GetPdfHash(Dictionary<string, string> parameters, string template)
         {
             string result = null;
 
