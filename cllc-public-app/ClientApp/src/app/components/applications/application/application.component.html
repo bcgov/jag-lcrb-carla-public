@@ -1,5 +1,5 @@
 <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
-<div *ngIf="application && dataLoaded">
+<div *ngIf="application && account && dataLoaded">
 <ng-template #applicationContent>
 <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
 
