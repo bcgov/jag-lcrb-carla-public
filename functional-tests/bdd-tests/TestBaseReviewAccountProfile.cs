@@ -49,18 +49,25 @@ namespace bdd_tests
             string corpContactPhone = "7781811818";
             string corpContactEmail = "automated@test.com";
 
-            try
+            // enter the business number
+            NgWebElement uiBizNumber = null;
+            for (int i = 0; i < 30; i++)
             {
-                // enter the business number
-                NgWebElement uiBizNumber = ngDriver.FindElement(By.CssSelector("input[formControlName='businessNumber']"));
-                uiBizNumber.SendKeys(bizNumber);
+                try
+                {
+                    var numbers = ngDriver.FindElements(By.CssSelector("input[formControlName='businessNumber']"));
+                    if (numbers.Count > 0)
+                    {
+                        uiBizNumber = numbers[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
             }
-            catch
-            {
-                // enter the business number
-                NgWebElement uiBizNumber = ngDriver.FindElement(By.CssSelector("input[formControlName='businessNumber']"));
-                uiBizNumber.SendKeys(bizNumber);
-            }
+            uiBizNumber.SendKeys(bizNumber);
 
             // enter the private/public corporation or society incorporation number
             if (businessType == " private corporation" || businessType == " society" || businessType == " public corporation")
