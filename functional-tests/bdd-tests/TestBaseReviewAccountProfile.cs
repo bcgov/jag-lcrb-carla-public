@@ -118,10 +118,9 @@ namespace bdd_tests
             uiMailingCity.Clear();
             uiMailingCity.SendKeys(mailCity);
 
-            // enter the mailing province
-            NgWebElement uiMailingProvince = ngDriver.FindElement(By.CssSelector("input[formControlName='mailingAddressProvince']"));
-            uiMailingProvince.Clear();
-            uiMailingProvince.SendKeys(mailProvince);
+            // select non default province
+            NgWebElement uiNonDefaultProvince2 = ngDriver.FindElement(By.CssSelector("select[formcontrolname='mailingAddressProvince'] option[value='Alberta']"));
+            uiNonDefaultProvince2.Click();
 
             // enter the mailing postal code
             NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName='mailingAddressPostalCode']"));
