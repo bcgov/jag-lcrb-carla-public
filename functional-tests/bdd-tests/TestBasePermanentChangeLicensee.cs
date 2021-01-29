@@ -29,10 +29,6 @@ namespace bdd_tests
             Page Title: Permanent Change to a Licensee
             */
 
-            /*
-
-            */
-
             switch (appType)
             {
                 case "Catering application for a society":
@@ -68,6 +64,8 @@ namespace bdd_tests
                     // click on Addition of Receiver or Executor
                     NgWebElement uiAdditionOfReceiverOrExecutor2 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
                     uiAdditionOfReceiverOrExecutor2.Click();
+                    // upload personal history summary forms
+                    //FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
                     // upload Central Securities Register forms
                     //FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
                     // upload supporting business documentation
@@ -88,9 +86,9 @@ namespace bdd_tests
                     break;
                 case "CRS application for a private corporation":
                     // upload Cannabis Associate Security Screening Forms
-                    FileUpload("valid_interest.pdf", "(//input[@type='file'])[]");
+                    //FileUpload("valid_interest.pdf", "(//input[@type='file'])[]");
                     // upload Financial Integrity Documents
-                    FileUpload("fin_integrity.pdf", "(//input[@type='file'])[]");
+                    //FileUpload("fin_integrity.pdf", "(//input[@type='file'])[]");
                     break;
             }
 
