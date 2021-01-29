@@ -1,5 +1,5 @@
 <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
-<div *ngIf="application && dataLoaded">
+<div *ngIf="application && account && dataLoaded">
 <ng-template #applicationContent>
 <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
 
@@ -203,7 +203,7 @@
 <section *ngIf="this.businessTypeIsCorporation() || this.businessTypeIsSociety()">
   <h4>Notice of Articles (or Register of Directors and Officers)</h4>
   <p>Provide the Notice of Articles for your corporation. Alternatively, you can provide list of all current directors/officers by full legal name, position and date of appointment.</p>
-  <p *ngIf="this.isLiquor()">
+  <p *ngIf="this.isLiquor() && !this.businessTypeIsSociety()">
     <strong>Directors and Officers are <u>not</u> required to submit a Personal History Summary form for liquor-related applications.</strong>
   </p>
   <app-file-uploader *ngIf="true || applicationId" documentType="NOA"
