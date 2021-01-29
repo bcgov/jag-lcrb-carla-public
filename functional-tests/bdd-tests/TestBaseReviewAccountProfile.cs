@@ -39,9 +39,7 @@ namespace bdd_tests
             string mailStreet1 = "#22";
             string mailStreet2 = "700 Bellevue Way NE";
             string mailCity = "Bellevue";
-            string mailProvince = "WA";
-            string mailPostalCode = "98004";
-            string mailCountry = "United States";
+            string mailPostalCode = "T2E 8A2";
 
             string bizPhoneNumber = "2501811818";
             string bizEmail = "test@automation.com";
@@ -118,20 +116,14 @@ namespace bdd_tests
             uiMailingCity.Clear();
             uiMailingCity.SendKeys(mailCity);
 
-            // enter the mailing province
-            NgWebElement uiMailingProvince = ngDriver.FindElement(By.CssSelector("input[formControlName='mailingAddressProvince']"));
-            uiMailingProvince.Clear();
-            uiMailingProvince.SendKeys(mailProvince);
+            // select non default province
+            NgWebElement uiNonDefaultProvince2 = ngDriver.FindElement(By.CssSelector("select[formcontrolname='mailingAddressProvince'] option[value='Alberta']"));
+            uiNonDefaultProvince2.Click();
 
             // enter the mailing postal code
             NgWebElement uiMailingPostalCode = ngDriver.FindElement(By.CssSelector("input[formControlName='mailingAddressPostalCode']"));
             uiMailingPostalCode.Clear();
             uiMailingPostalCode.SendKeys(mailPostalCode);
-
-            // enter the mailing country
-            NgWebElement uiMailingCountry = ngDriver.FindElement(By.CssSelector("input[formControlName='mailingAddressCountry']"));
-            uiMailingCountry.Clear();
-            uiMailingCountry.SendKeys(mailCountry);
 
             // enter the business phone number
             NgWebElement uiBizPhoneNumber = ngDriver.FindElement(By.CssSelector("input[formControlName='contactPhone']"));
