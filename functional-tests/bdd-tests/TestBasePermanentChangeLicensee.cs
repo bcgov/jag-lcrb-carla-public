@@ -86,9 +86,9 @@ namespace bdd_tests
                     break;
                 case "CRS application for a private corporation":
                     // upload Cannabis Associate Security Screening Forms
-                    FileUpload("valid_interest.pdf", "(//input[@type='file'])[]");
+                    //FileUpload("valid_interest.pdf", "(//input[@type='file'])[]");
                     // upload Financial Integrity Documents
-                    FileUpload("fin_integrity.pdf", "(//input[@type='file'])[]");
+                    //FileUpload("fin_integrity.pdf", "(//input[@type='file'])[]");
                     break;
             }
 
