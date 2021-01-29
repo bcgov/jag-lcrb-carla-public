@@ -160,7 +160,7 @@
               information.</p>
 
             <!-- Licensee Details -->
-            <section *ngIf="cannabisLicences.count && cannabisLicences.count > 0 && liquorLicences.count && liquorLicences.count > 0">
+            <section *ngIf="(cannabisLicences && cannabisLicences.length > 0) || (liquorLicences && liquorLicences.length > 0)">
               <h3>Licensee Details</h3>
               <p>You have the following licences:</p>
               <table style="border: solid black 1px;">
@@ -935,7 +935,7 @@
     </section>
 
     <!-- Payment -->
-    <section *ngIf="selectedChangeList?.length > 0 && cannabisLicences.count && cannabisLicences.count > 0 && liquorLicences.count && liquorLicences.count > 0">
+    <section *ngIf="selectedChangeList?.length > 0 && (cannabisLicences && cannabisLicences.length > 0 || liquorLicences && liquorLicences.length > 0)">
       <h3 class="blue-header ngtest-payment">
         PAYMENT
       </h3>
