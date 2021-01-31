@@ -46,7 +46,7 @@ Scenario: DEV Catering Application (Partnership)
     Then I see the login page
 
 @cateringapp @soleproprietorship
-Scenario: UAT Catering Application (Sole Proprietorship)
+Scenario: DEV Catering Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship

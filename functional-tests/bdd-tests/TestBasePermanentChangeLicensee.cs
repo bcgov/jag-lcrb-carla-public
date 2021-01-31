@@ -31,7 +31,7 @@ namespace bdd_tests
 
             switch (appType)
             {
-                case "Catering application for a society":
+                case "society":
                     // click on Change of Directors or Officers
                     NgWebElement uiChangeOfDirectorsOrOfficers = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
                     uiChangeOfDirectorsOrOfficers.Click();
@@ -44,8 +44,10 @@ namespace bdd_tests
                     // click on Addition of Receiver or Executor
                     NgWebElement uiAdditionOfReceiverOrExecutor = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
                     uiAdditionOfReceiverOrExecutor.Click();
+                    // upload Personal History Summary document
+                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
                     break;
-                case "Catering application for a private corporation":
+                case "private corporation":
                     // click on Internal Transfer of Shares
                     NgWebElement uiInternalTransferOfShares = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
                     uiInternalTransferOfShares.Click();
@@ -64,31 +66,16 @@ namespace bdd_tests
                     // click on Addition of Receiver or Executor
                     NgWebElement uiAdditionOfReceiverOrExecutor2 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
                     uiAdditionOfReceiverOrExecutor2.Click();
-                    // upload personal history summary forms
-                    //FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
-                    // upload Central Securities Register forms
-                    //FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
-                    // upload supporting business documentation
-                    //FileUpload("business_plan.pdf", "(//input[@type='file'])[6]");
-                    // upload shareholders holding less than 10% interest
-                    //FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[9]");
-                    // upload Cannabis Associate Security Screening Forms
-                    //FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
-                    // upload Financial Integrity Documents
-                    //FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+                    // upload Personal History Summary document
+                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
                     break;
-                case "Catering application for a partnership":
-                    // upload Personal History Summary ocuments
-                    // FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+                case "partnership":
+                    // upload Personal History Summary document
+                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
                     break;
-                case "Catering application for a sole proprietorship":
-                    // TODO
-                    break;
-                case "CRS application for a private corporation":
-                    // upload Cannabis Associate Security Screening Forms
-                    //FileUpload("valid_interest.pdf", "(//input[@type='file'])[]");
-                    // upload Financial Integrity Documents
-                    //FileUpload("fin_integrity.pdf", "(//input[@type='file'])[]");
+                case "sole proprietorship":
+                    // upload Personal History Summary document
+                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
                     break;
             }
 
