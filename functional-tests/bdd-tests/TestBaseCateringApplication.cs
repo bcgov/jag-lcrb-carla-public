@@ -43,6 +43,7 @@ namespace bdd_tests
             string prevAppDetails = "Here are the previous application details (automated test).";
             string liqConnectionDetails = "Here are the liquor industry connection details (automated test).";
             string kitchenDetails = "Here are the details of the kitchen equipment.";
+            string transportDetails = "Here are the transport details.";
 
             // upload a central securities register
             FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -130,6 +131,10 @@ namespace bdd_tests
             // enter the kitchen details
             NgWebElement uiKitchenDescription = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiKitchenDescription.SendKeys(kitchenDetails);
+
+            // enter the transport details
+            NgWebElement uiTransportDetails = ngDriver.FindElement(By.CssSelector("textarea#description3"));
+            uiTransportDetails.SendKeys(transportDetails);
 
             // upload a store signage document
             FileUpload("signage.pdf", "(//input[@type='file'])[17]");
