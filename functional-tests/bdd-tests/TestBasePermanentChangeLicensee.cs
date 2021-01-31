@@ -84,12 +84,6 @@ namespace bdd_tests
                 case "Catering application for a sole proprietorship":
                     // TODO
                     break;
-                case "CRS application for a private corporation":
-                    // upload Cannabis Associate Security Screening Forms
-                    //FileUpload("valid_interest.pdf", "(//input[@type='file'])[]");
-                    // upload Financial Integrity Documents
-                    //FileUpload("fin_integrity.pdf", "(//input[@type='file'])[]");
-                    break;
             }
 
             // select the authorized to submit checkbox
