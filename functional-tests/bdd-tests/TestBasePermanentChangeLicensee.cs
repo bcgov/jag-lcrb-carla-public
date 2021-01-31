@@ -74,7 +74,8 @@ namespace bdd_tests
                     FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
                     break;
                 case "sole proprietorship":
-                    // TODO
+                    // upload Personal History Summary document
+                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
                     break;
             }
 
@@ -85,8 +86,6 @@ namespace bdd_tests
             // select the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
-
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$723420.00')]")).Displayed);
         }
     }
 }
