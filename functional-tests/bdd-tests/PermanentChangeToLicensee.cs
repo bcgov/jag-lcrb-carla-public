@@ -30,7 +30,7 @@ Scenario: DEV Catering Licensee Changes (Private Corporation)
     And I pay the licensing fee 
     And I click on the Dashboard tab
     And I click on the button for Submit a Change
-    And I complete the Permanent Change to a Licensee application for a Catering application for a private corporation
+    And I complete the Permanent Change to a Licensee application for a private corporation
     And I click on the Submit button
     And the account is deleted
     Then I see the login page
@@ -48,7 +48,7 @@ Scenario: DEV Catering Licensee Changes (Partnership)
     And I pay the licensing fee 
     And I click on the Dashboard tab
     And I click on the button for Submit a Change
-    And I complete the Permanent Change to a Licensee application for a Catering application for a partnership
+    And I complete the Permanent Change to a Licensee application for a partnership
     And I click on the Submit button
     And the account is deleted
     Then I see the login page
@@ -66,7 +66,7 @@ Scenario: DEV Catering Licensee Changes (Sole Proprietorship)
     And I pay the licensing fee 
     And I click on the Dashboard tab
     And I click on the button for Submit a Change
-    And I complete the Permanent Change to a Licensee application for a Catering application for a sole proprietorship
+    And I complete the Permanent Change to a Licensee application for a sole proprietorship
     And I click on the Submit button
     And the account is deleted
     Then I see the login page
@@ -84,7 +84,7 @@ Scenario: DEV Catering Licensee Changes (Society)
     And I pay the licensing fee 
     And I click on the Dashboard tab
     And I click on the button for Submit a Change
-    And I complete the Permanent Change to a Licensee application for a Catering application for a society
+    And I complete the Permanent Change to a Licensee application for a society
     And I click on the Submit button
     And the account is deleted
     Then I see the login page
