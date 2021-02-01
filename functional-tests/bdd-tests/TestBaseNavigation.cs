@@ -32,7 +32,6 @@ namespace bdd_tests
                 }
                 catch (Exception)
                 {
-
                 }
             }
             JavaScriptClick(uiRequestedLink);
@@ -214,6 +213,7 @@ namespace bdd_tests
             uiOrgInfoButton.Click();
         }
 
+
         [And(@"I click on the Start Application button for (.+)")]
         public void ClickStartApplication(string applicationType)
         {
@@ -299,6 +299,7 @@ namespace bdd_tests
 
             return text;
         }
+
 
         [And(@"the application is approved")]
         public void ApplicationIsApproved()
