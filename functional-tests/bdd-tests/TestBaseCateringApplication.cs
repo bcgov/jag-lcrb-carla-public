@@ -55,14 +55,13 @@ namespace bdd_tests
             FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
 
             // upload personal history summary documents
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[12]");
+            FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
 
             // upload shareholders < 10% interest
             FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
 
             // enter the establishment name
             NgWebElement uiEstabName = null;
-            // try up to 10 times to get an element.
             for (int i = 0; i < 10; i++)
             {
                 try
