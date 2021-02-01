@@ -331,6 +331,68 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
+        /** GET all local government approval applications in Dynamics for the current user that are resolved
+        * pageIndex: 0 based page index
+        * pageSize: the number of results per page
+        */
+        [HttpGet("current/resolved-lg-applications")]
+        public IActionResult GetResolvedLGApplications([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            var results = new List<Application>();
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            try
+            {
+                // get user account
+                var accountId = userSettings.AccountId;
+                var account = _dynamicsClient.GetAccountById(accountId);
+
+                if (account._adoxioLginlinkidValue != null)
+                {
+                    var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
+                    filter += $" and adoxio_lgapprovaldecision eq {(int)LGDecision.Approved}";
+    
+
+                    var expand = new List<string>
+                    {
+                        "adoxio_Applicant",
+                        "adoxio_localgovindigenousnationid",
+                        "adoxio_application_SharePointDocumentLocations",
+                        "adoxio_application_adoxio_tiedhouseconnection_Application",
+                        "adoxio_AssignedLicence",
+                        "adoxio_ApplicationTypeId",
+                        "adoxio_LicenceFeeInvoice",
+                        "adoxio_Invoice"
+                    };
+
+                    var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
+                    foreach (var dynamicsApplication in applications)
+                    {
+                        var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
+                        results.Add(viewModel);
+                    }
+                    
+                }
+                
+            }
+            catch (HttpOperationException e)
+            {
+                var errorText = "Error getting local government approval applications in Dynamics for the current user";
+                _logger.LogError(e, errorText);
+                return  StatusCode(StatusCodes.Status500InternalServerError, errorText);
+            }
+            catch (Exception e)
+            {
+                var errorText = "Unexpected Error getting local government approval applications in Dynamics for the current user";
+                _logger.LogError(e, errorText);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorText);
+            }
+
+            return new JsonResult(results);
+        }
+
+
         /// <summary>
         ///     all in one function that is used on the OrgStructure ( ApplicationLicenseeChangesComponent ) page to get the
         ///     initial data.
