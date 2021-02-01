@@ -117,11 +117,11 @@ namespace bdd_tests
             // upload cannabis associate screening form
             if (businessType == " sole proprietorship")
             {
-                FileUpload("associates.pdf", "(//input[@type='file'])[3]");
+                FileUpload("cannabis_associate_security_screening.pdf", "(//input[@type='file'])[3]");
             }
             else
             {
-                FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+                FileUpload("cannabis_associate_security_screening.pdf", "(//input[@type='file'])[12]");
             }
 
             // upload financial integrity form
@@ -137,7 +137,7 @@ namespace bdd_tests
             // upload shareholders < 10% interest
             if (businessType != " sole proprietorship")
             {
-                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[18]");
             }
 
             // enter the establishment name

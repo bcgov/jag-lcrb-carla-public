@@ -168,7 +168,7 @@
     <None Update="UBrewUVinLicenceApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CannabisMarketingLicence.feature">
+    <None Update="CannabisMarketingApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LicencePDFVerification.feature">

@@ -53,7 +53,6 @@ namespace bdd_tests
 
             // add a service area
             NgWebElement uiServiceArea = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceAreas'] button"));
-            //uiServiceArea.Click();
             JavaScriptClick(uiServiceArea);
 
             // create test data

@@ -12,7 +12,7 @@ Scenario: DEV Deny Catering Licence Renewal Today (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
@@ -51,7 +51,7 @@ Scenario: DEV Deny Catering Licence Renewal Yesterday (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
@@ -90,7 +90,7 @@ Scenario: DEV Deny Catering Licence Renewal 45 Days Ago (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
@@ -129,7 +129,7 @@ Scenario: DEV Deny Catering Licence Renewal 60 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
@@ -168,7 +168,7 @@ Scenario: DEV Deny Catering Licence Renewal 30 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I enter the payment information
     And the application is approved

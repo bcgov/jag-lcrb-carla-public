@@ -23,7 +23,9 @@ namespace bdd_tests
         [And(@"I request a change in terms and conditions application")]
         public void ChangeInTermsApplication()
         {
-
+            /* 
+            Page Title: 
+            */
         }
     }
 }

@@ -18,8 +18,8 @@
     <h3 class="blue-header">EVENT INFORMATION</h3>
     <section class="content-bottom clearfix">
       <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Event Name" [required]="true" [valid]="isValidOrNotTouched('eventName')"
-          errorMessage="Please enter the event name" [isFullWidth]="true">
+        <app-field class="col-md-4 col-xs-12" label="Event Name" [required]="true"
+          [valid]="isValidOrNotTouched('eventName')" errorMessage="Please enter the event name" [isFullWidth]="true">
           <input class="form-control" type="text" formControlName="eventName">
         </app-field>
       </div>
@@ -44,8 +44,9 @@
     <h3 class="blue-header">TUA LOCATION(S)</h3>
     <section class="content-bottom clearfix">
       <p>Specify one or more locations where your event will take place.</p>
-      <app-event-location-table formControlName="eventLocations" [enabled]="!isReadOnly" [serviceAreas]="licence?.serviceAreas"
-        [eventId]="licenceEvent?.id" [shouldValidate]="showErrorSection"></app-event-location-table>
+      <app-event-location-table formControlName="eventLocations" [enabled]="!isReadOnly"
+        [serviceAreas]="licence?.serviceAreas" [eventId]="licenceEvent?.id" [shouldValidate]="showErrorSection">
+      </app-event-location-table>
     </section>
 
     <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
@@ -221,7 +222,10 @@
       </p>
     </section>
 
-    <div class="p-4 button-row">
+    <div class="p-4 button-row" *ngIf="isReadOnly">
+      <button class="btn btn-link btn-cancel" routerLink="/licences">RETURN TO DASHBOARD</button>
+    </div>
+    <div class="p-4 button-row" *ngIf="!isReadOnly">
       <button class="btn btn-secondary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
         <span>
           <fa-icon [icon]="faSave"></fa-icon>SAVE FOR LATER
@@ -229,8 +233,7 @@
       </button>
       <button class="btn btn-primary" (click)="save(true)" *ngIf="!isReadOnly">SUBMIT</button>
       <button class="btn btn-link btn-cancel" (click)="cancel();">
-        <span *ngIf="isReadOnly">RETURN TO DASHBOARD</span>
-        <span *ngIf="!isReadOnly">
+        <span>
           <fa-icon [icon]="faTrash"></fa-icon>CANCEL EVENT
         </span>
       </button>
