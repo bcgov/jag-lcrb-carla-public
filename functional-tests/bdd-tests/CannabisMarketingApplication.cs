@@ -166,7 +166,7 @@ Scenario: DEV Cannabis Marketing Application (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CannabisMarketingLicence.feature")]
+    [FeatureFile("./CannabisMarketingApplication.feature")]
     [Collection("Liquor")]
     public sealed class CannabisMarketingApplication : TestBase
     {
