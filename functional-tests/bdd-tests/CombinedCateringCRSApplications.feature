@@ -15,7 +15,7 @@ Scenario: DEV Combined Catering / CRS Applications (Private Corporation)
     And I click on the Dashboard tab
     And I click on the Start Application button for Catering
     And I click on the button for Continue to Organization Review
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
