@@ -134,8 +134,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.inProgressApplications = [];
     this.licensedApplications = [];
     const sub = forkJoin([
-        this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
-      ])
+      this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
+    ])
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(([applications, licenses]) => {
         this.checkIndigenousNationState(applications);
@@ -213,15 +213,15 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     dialogRef.afterClosed()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(cancelApplication => {
-          if (cancelApplication) {
-            // delete the application.
-            this.busy = this.applicationDataService.cancelApplication(applicationId)
-              .pipe(takeWhile(() => this.componentActive))
-              .subscribe(() => {
-                this.displayApplications();
-              });
-          }
+        if (cancelApplication) {
+          // delete the application.
+          this.busy = this.applicationDataService.cancelApplication(applicationId)
+            .pipe(takeWhile(() => this.componentActive))
+            .subscribe(() => {
+              this.displayApplications();
+            });
         }
+      }
       );
 
   }
@@ -240,8 +240,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
-            this.router.navigateByUrl(`/account-profile/${data.id}`);
-          },
+          this.router.navigateByUrl(`/account-profile/${data.id}`);
+        },
           () => {
             this.snackBar.open(`Error running licence action for ${actionName}`,
               "Fail",
@@ -271,9 +271,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(res => {
-            const data = res as any;
-            window.location.href = data.url;
-          },
+          const data = res as any;
+          window.location.href = data.url;
+        },
           err => {
             if (err._body === "Payment already made") {
               this.snackBar.open("Licence Fee payment has already been made.",
@@ -311,11 +311,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         // reload the user to cause the eligibility disclosure to show if needed
-        this.userDataService.loadUserToStore().then(() => {});
+        this.userDataService.loadUserToStore().then(() => { });
         //if (this.licenseeChangeFeatureOn) {
         //  this.router.navigateByUrl(`/multi-step-application/${data.id}`);
         //} else {
-          this.router.navigateByUrl(`/account-profile/${data.id}`);
+        this.router.navigateByUrl(`/account-profile/${data.id}`);
         //}
         this.startCRSOngoing = false;
       },
@@ -541,8 +541,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
-            this.router.navigateByUrl(`/renew-crs-licence/application/${data.id}`);
-          },
+          this.router.navigateByUrl(`/renew-crs-licence/application/${data.id}`);
+        },
           () => {
             this.snackBar.open(`Error running licence action for ${actionName}`,
               "Fail",
@@ -609,11 +609,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   CRSElligible(): boolean {
     switch (this.account && this.account.businessType) {
-    case "University":
-    case "Church":
-      return false;
-    default:
-      return true;
+      case "University":
+      case "Church":
+        return false;
+      default:
+        return true;
     }
   }
 
@@ -628,12 +628,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   getApplicationLink(item: ApplicationSummary) {
-    if (item.isForLicence || this.isApprovedByLGAndNotSubmitted(item)) {
-      return `/multi-step-application/${item.id}`;
-    } else if (item.applicationTypeName == ApplicationTypeNames.PermanentChangeToALicensee) {
+    if (item.applicationTypeName == ApplicationTypeNames.PermanentChangeToALicensee) {
       return `/permanent-change-to-a-licensee/${item.id}`;
+    } else {
+      return `/account-profile/${item.id}`;
     }
-    return `/account-profile/${item.id}`;
   }
 }
 
