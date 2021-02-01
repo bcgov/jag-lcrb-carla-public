@@ -57,11 +57,22 @@ namespace bdd_tests
                 FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
             }
 
-            // upload personal history summary documents
-            FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
+            if (bizType != "sole proprietorship")
+            {
+                // upload personal history summary documents
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
+            }
+            else
+            {
+                // upload personal history summary documents
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
+            }
 
-            // upload shareholders < 10% interest
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+            if (bizType != "sole proprietorship")
+            {
+                // upload shareholders < 10% interest
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
+            }
 
             // enter the establishment name
             NgWebElement uiEstabName = null;
@@ -138,11 +149,27 @@ namespace bdd_tests
             NgWebElement uiTransportDetails = ngDriver.FindElement(By.CssSelector("textarea#description3"));
             uiTransportDetails.SendKeys(transportDetails);
 
-            // upload a store signage document
-            FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+            if (bizType != "sole proprietorship")
+            {
+                // upload a store signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+            }
+            else 
+            {
+                // upload a store signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[5]");
+            }
 
-            // upload a valid interest document
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
+            if (bizType != "sole proprietorship")
+            {
+                // upload a valid interest document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
+            }
+            else
+            {
+                // upload a valid interest document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
+            }
 
             // enter the first name of the application contact
             NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
