@@ -23,6 +23,10 @@ namespace bdd_tests
         [And(@"I complete the Cannabis Marketing application for (.*)")]
         public void CannabisMarketingApplication(string bizType)
         {
+            /* 
+            Page Title: Submit the Cannabis Marketing Licence Application
+            */
+
             string nameOfFederalProducer = "Canadian Cannabis";
             string marketerConnectionToCrsDetails = "Details of association (marketer to store)";
             string crsConnectionToMarketer = "Details of association (store to marketer)";
@@ -40,13 +44,13 @@ namespace bdd_tests
             FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
 
             // upload cannabis associate security screening
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[12]");
+            FileUpload("cannabis_associate_security_screening.pdf", "(//input[@type='file'])[12]");
 
             // upload financial integrity documents
             FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
 
             // upload shareholders < 10% interest
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
+            FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[18]");
 
             if ((bizType != "a local government") && (bizType != "a university"))
             {

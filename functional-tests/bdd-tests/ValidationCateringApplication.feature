@@ -21,7 +21,7 @@ Scenario: Validation for Catering Branding Change
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -42,7 +42,7 @@ Scenario: Validation for Catering Branding Change
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -63,7 +63,7 @@ Scenario: Validation for Catering Branding Change
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -83,7 +83,7 @@ Scenario: Validation for Catering Store Relocation
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -104,7 +104,7 @@ Scenario: Validation for Catering Third Party Operator
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
@@ -124,7 +124,7 @@ Scenario: Validation for Catering Third Party Operator
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information

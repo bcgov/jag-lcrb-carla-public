@@ -666,8 +666,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set the licence if we have one
 
-            if( adoxioLicense.AdoxioLicencesid != null) 
-            { 
+            if (adoxioLicense.AdoxioLicencesid != null)
+            {
                 application.AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", adoxioLicense.AdoxioLicencesid);
             }
             // set the licence subtype if we have one
@@ -831,8 +831,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string filter =
                       $"_adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid}"
                     + $" and _adoxio_assignedlicence_value eq {licenceId}"
-                    + $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Processed}"
-                    + $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Terminated}"
+                    + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed}"
+                    + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}"
                     + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}"
                     + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}"
                     + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}"
@@ -844,7 +844,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     foreach (var item in items)
                     {
                         // expand is not working with a get, so have to do a second pass to get child items.
-                        var candidate = _dynamicsClient.GetApplicationByIdWithChildren (item.AdoxioApplicationid).GetAwaiter().GetResult();
+                        var candidate = _dynamicsClient.GetApplicationByIdWithChildren(item.AdoxioApplicationid).GetAwaiter().GetResult();
                         if (candidate.AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication != null && candidate.AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication.Count > 0)
                         {
                             foreach (var term in candidate
@@ -1233,7 +1233,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "storeHours", storeHours}
                     };
                 }
-                else */ if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
+                else */
+                if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
                 {
                     parameters = new Dictionary<string, string>
                     {
@@ -1292,7 +1293,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         case "Marketing":
                             templateName = "cannabis_marketer_licence";
                             break;
-                        
                         case "Catering":
                             templateName = "catering_licence";
                             break;
@@ -1313,8 +1313,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             templateName = "manufacturer_licence";
                             break;
                         */
-
-
 
                         case "Cannabis Retail Store":
                         case "Marketing":

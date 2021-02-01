@@ -32,9 +32,7 @@ namespace bdd_tests
             ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(120);
 
             ngDriver.WrappedDriver.FindElement(By.Name("trnCardNumber")).SendKeys(testCC);
-
             ngDriver.WrappedDriver.FindElement(By.Name("trnCardCvd")).SendKeys(testCVD);
-
             ngDriver.WrappedDriver.FindElement(By.Name("submitButton")).Click();
 
             System.Threading.Thread.Sleep(4000);
@@ -128,6 +126,5 @@ namespace bdd_tests
         {
             ConfirmPaymentReceipt(applicationType);
         }
-
     }
 }
