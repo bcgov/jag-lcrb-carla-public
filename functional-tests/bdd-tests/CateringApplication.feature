@@ -37,7 +37,6 @@ Scenario: DEV Catering Application (Partnership)
     And I review the account profile for a partnership
     And I complete the Catering application
     And I click on the Submit button
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And I click on the Dashboard tab
