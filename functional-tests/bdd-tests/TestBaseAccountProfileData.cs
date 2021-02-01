@@ -23,6 +23,10 @@ namespace bdd_tests
         [And(@"the correct data is displayed for a(.*)")]
         public void AccountProfileData(string bizType)
         {
+            /* 
+            Page Title: Account Profile
+            */
+
             // check legal name field is populated
             NgWebElement uiLegalName = ngDriver.FindElement(By.CssSelector("div:nth-of-type(2) > div:nth-of-type(1) > div > div > div:nth-of-type(1) > app-field:nth-of-type(1) > section > div > section > input"));
             string fieldValueLegalName = uiLegalName.GetAttribute("value");

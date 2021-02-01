@@ -23,6 +23,10 @@ namespace bdd_tests
         [And(@"I complete the Cannabis Marketing application for (.*)")]
         public void CannabisMarketingApplication(string bizType)
         {
+            /* 
+            Page Title: Submit the Cannabis Marketing Licence Application
+            */
+
             string nameOfFederalProducer = "Canadian Cannabis";
             string marketerConnectionToCrsDetails = "Details of association (marketer to store)";
             string crsConnectionToMarketer = "Details of association (store to marketer)";
