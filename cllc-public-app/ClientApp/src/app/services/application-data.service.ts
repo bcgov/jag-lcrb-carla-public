@@ -56,8 +56,9 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getResolvedLGApplications(): Observable<Application[]> {
-    return this.http.get<Application[]>(this.apiPath + "current/resolved-lg-applications", { headers: this.headers })
+  getResolvedLGApplications(pageIndex: number = 0, pageSize: number = 10): Observable<Application[]> {
+    const url =`${this.apiPath}current/resolved-lg-applications?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+    return this.http.get<Application[]>(url, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

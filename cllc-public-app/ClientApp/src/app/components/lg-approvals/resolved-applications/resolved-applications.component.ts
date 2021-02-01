@@ -36,7 +36,7 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.applicationDataService.getResolvedLGApplications();
+          return this.applicationDataService.getResolvedLGApplications(this.paginator.pageIndex, this.paginator.pageSize);
 
           // return this.exampleDatabase!.getRepoIssues(
           //   this.sort.active, this.sort.direction, this.paginator.pageIndex);
