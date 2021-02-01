@@ -75,7 +75,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            // CheckFeatureLEConnections();
+            CheckFeatureLEConnections();
 
             IgnoreSynchronizationFalse();
 
