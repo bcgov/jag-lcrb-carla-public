@@ -64,7 +64,6 @@ namespace bdd_tests
                 }
                 catch (Exception)
                 {
-
                 }
             }
             uiBizNumber.SendKeys(bizNumber);
