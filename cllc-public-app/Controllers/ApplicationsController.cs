@@ -331,9 +331,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        /// GET all local government approval applications in Dynamics for the current user that are resolved
+        /** GET all local government approval applications in Dynamics for the current user that are resolved
+        * pageIndex: 0 based page index
+        * pageSize: the number of results per page
+        */
         [HttpGet("current/resolved-lg-applications")]
-        public IActionResult GetResolvedLGApplications()
+        public IActionResult GetResolvedLGApplications([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
             var results = new List<Application>();
             // get the current user.
