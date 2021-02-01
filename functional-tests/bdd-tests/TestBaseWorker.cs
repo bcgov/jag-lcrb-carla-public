@@ -17,12 +17,9 @@ namespace bdd_tests
     public abstract class TestBaseWorker : Feature
     {
         protected RemoteWebDriver driver;
-        
         // Protractor driver
         protected NgWebDriver ngDriver;
-
         protected IConfigurationRoot configuration;
-
         protected string baseUri;
 
 
@@ -108,10 +105,9 @@ namespace bdd_tests
 
             var tempWait = ngDriver.Manage().Timeouts().ImplicitWait;
             ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(120);
+            
             ngDriver.WrappedDriver.FindElement(By.Name("trnCardNumber")).SendKeys(testCC);
-
             ngDriver.WrappedDriver.FindElement(By.Name("trnCardCvd")).SendKeys(testCVD);
-
             ngDriver.WrappedDriver.FindElement(By.Name("submitButton")).Click();
 
             System.Threading.Thread.Sleep(2000);
