@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I complete the Catering application")]
-        public void CompleteCateringApplication()
+        [And(@"I complete the Catering application for a (.*)")]
+        public void CompleteCateringApplication(string bizType)
         {
             /* 
             Page Title: Catering Licence Application
@@ -45,14 +45,17 @@ namespace bdd_tests
             string kitchenDetails = "Here are the details of the kitchen equipment.";
             string transportDetails = "Here are the transport details.";
 
-            // upload a central securities register
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+            if (bizType != "sole proprietorship")
+            {
+                // upload a central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
-            // upload supporting business documentation
-            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+                // upload supporting business documentation
+                FileUpload("associates.pdf", "(//input[@type='file'])[6]");
 
-            // upload notice of articles
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+            }
 
             // upload personal history summary documents
             FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
