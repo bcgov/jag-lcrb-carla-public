@@ -30,7 +30,7 @@ Scenario: DEV Payments for CRS/Catering Applications (Private Corporation)
     And I click on the Start Application button for Catering
     And I click on the button for Continue to Organization Review
     And I click on the button for Confirm Organization Information is Complete
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I click on the button for Pay for Application
     And I enter the payment information
