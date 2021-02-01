@@ -99,13 +99,6 @@ namespace bdd_tests
             uiSubmitTransferButton.Click();
 
             ClickLicencesTab();
-
-            /* 
-            Page Title: Licences & Authorizations
-            */
-
-            // check for transfer initiated status 
-            // Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Transfer Requested')]")).Displayed);
         }
     }
 }

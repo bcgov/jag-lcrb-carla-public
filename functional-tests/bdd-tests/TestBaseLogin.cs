@@ -132,9 +132,7 @@ namespace bdd_tests
             returnUser = test_start;
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
 
-
             DoLogin(businessType);
-
         }
 
 
@@ -314,7 +312,6 @@ namespace bdd_tests
         {
             CheckFeatureFlag("MarketEvents");
         }
-
 
 
         public void CheckFeatureLEConnections()
