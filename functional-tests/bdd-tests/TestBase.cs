@@ -22,17 +22,11 @@ namespace bdd_tests
     {
         // Protractor driver
         protected NgWebDriver ngDriver;
-
         protected IConfigurationRoot configuration;
-
         protected string baseUri;
-
         protected string applicationID;
-
         protected string licenceID;
-
         protected string endorsementID;
-
         protected string returnUser;
 
         protected TestBase()
@@ -77,7 +71,6 @@ namespace bdd_tests
             ngDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout * 2);
 
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
-
         }
 
         protected bool IsIdPresent(string id)
@@ -97,7 +90,6 @@ namespace bdd_tests
             }
 
             return result;
-
         }
     }
 }
