@@ -311,7 +311,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         // reload the user to cause the eligibility disclosure to show if needed
-        this.userDataService.loadUserToStore().then(() => { });
+        this.userDataService.loadUserToStore().then(() => {});
         //if (this.licenseeChangeFeatureOn) {
         //  this.router.navigateByUrl(`/multi-step-application/${data.id}`);
         //} else {
