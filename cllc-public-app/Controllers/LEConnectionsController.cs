@@ -66,6 +66,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         FirstName = contact.Firstname,
                         MiddleName = contact.Middlename,
                         LastName = contact.Lastname,
+                        Birthdate = contact.Birthdate,
                         PhsLink = contact.PhsLink,
                         CasLink = contact.CasLink,
                         DateSubmitted = dateSubmitted,

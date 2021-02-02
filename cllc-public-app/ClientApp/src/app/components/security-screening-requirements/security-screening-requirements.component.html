@@ -5,7 +5,7 @@
 <ng-container *ngIf="dataLoaded">
 <div class="row" *ngIf="!skipScreeningRequirements; else skipContent">
 <section class="col-md-12">
-<mat-tab-group>
+<mat-tab-group style="width:1000px;">
 <mat-tab label="LIQUOR REQUIREMENTS" *ngIf="showLiquorContent()">
   <div class="content">
     <section
@@ -13,37 +13,27 @@
 
 
       <div class=" p-3" style="padding: 20px;">
-        <h3>Organization Details Incomplete</h3>
+        <h3>No Information Required</h3>
         <p>
-          You have not completed your <strong>Organization Details</strong>, which
-          identifies which associates must complete
-          a security screening. You must complete provide this information prior to
-          completing your security screening requirements.
+          LCRB has not requested any Personal History Summary forms for individuals associated with liquor related licences or applications at this time.
         </p>
-
-        <div>
-          <button routerLink="/org-structure" class="btn btn-primary">
-            COMPLETE
-            ORGANIZATION INFORMATION
-          </button>
-        </div>
-        <p>&nbsp;</p>
 
       </div>
 
     </section>
 
-    <p>
-      Each liquor licence associate must provide a completed Personal History Summary form
-      along
-      with
-      required documents, including a copy of a recent Criminal Record Search performed by a
-      local
-      RCMP or police detachment.
-    </p>
+
 
     <ng-container *ngIf="data?.liquor?.outstandingItems?.length">
       <h4 class="plain-header">OUTSTANDING PERSONAL HISTORY FORMS</h4>
+      <p>
+        Each liquor licence associate must provide a completed Personal History Summary form
+        along
+        with
+        required documents, including a copy of a recent Criminal Record Search performed by a
+        local
+        RCMP or police detachment.
+      </p>
       <p>
         The following associates have not provided completed personal history summary forms.
         The
@@ -57,6 +47,7 @@
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
+          <th>DOB</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -65,6 +56,7 @@
             *ngFor="let item of data?.liquor?.outstandingItems; let i=index;">
           <td>{{item.firstName}}</td>
           <td>{{item.lastName}} </td>
+          <td>{{item.birthdate | date : 'dd/MM/yyyy'}}</td>
           <td style="text-align: center;">
             <p class="missing">Not Submitted</p>
           </td>
@@ -84,9 +76,11 @@
         </h3>
       </div>
     </ng-container>
-    <hr>
+
+
 
     <ng-container *ngIf="data?.liquor?.completedItems?.length">
+      <hr>
       <h4 class="plain-header">COMPLETED PERSONAL HISTORY FORMS</h4>
       <p>
         The following associates have completed their personal history summary forms. No
@@ -103,6 +97,7 @@
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
+          <th>DOB</th>
           <th>Date Submitted</th>
         </tr>
         </thead>
@@ -110,6 +105,7 @@
             *ngFor="let item of data?.liquor?.completedItems; let i=index;">
           <td>{{item.firstName}} </td>
           <td>{{item.lastName}} </td>
+          <td>{{item.birthdate |  date : 'dd/MM/yyyy'}} </td>
           <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
         </tr>
       </table>
@@ -132,32 +128,23 @@
 
 
       <div class=" p-3" style="padding: 20px;">
-        <h3>Organization Details Incomplete</h3>
+        <h3>No Information Required</h3>
         <p>
-          You have not completed your <strong>Organization Details</strong>, which
-          identifies which associates must complete
-          a security screening. You must complete provide this information prior to
-          completing your security screening requirements.
+          LCRB has not requested any Cannabis Associate Security Screening forms for individuals or businesses associated with cannabis related licences or applications at this time.
         </p>
-
-        <div>
-          <button routerLink="/org-structure" class="btn btn-primary">
-            COMPLETE
-            ORGANIZATION INFORMATION
-          </button>
-        </div>
-        <p>&nbsp;</p>
 
       </div>
 
     </section>
 
-    <p>
-      Each Cannabis licence associate must provide a completed Cannabis Associate Security
-      Screening form along with required documents.
-    </p>
+
 
     <section *ngIf="data?.cannabis?.outstandingItems?.length">
+      <hr>
+      <p>
+        Each Cannabis licence associate must provide a completed Cannabis Associate Security
+        Screening form along with required documents.
+      </p>
 
       <p>
         Sole proprietors and associates of applicants for a non-medical cannabis licence are
@@ -217,6 +204,7 @@
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
+          <th>DOB</th>
           <th>Status</th>
           <th appRemoveIfFeatureOff="CASS">Action</th>
         </tr>
@@ -225,6 +213,7 @@
             *ngFor="let item of data?.cannabis?.outstandingItems; let i=index">
           <td>{{item.firstName}}</td>
           <td>{{item.lastName}} </td>
+          <td>{{item.birthdate |  date : 'dd/MM/yyyy'}}</td>
           <td class="missing" style="text-align: center;">Not Submitted</td>
           <td style="text-align: center;" appRemoveIfFeatureOff="CASS">
             <a href="javascript: void(0)" (click)="copyMessage(item.casLink)">
@@ -256,7 +245,8 @@
             *ngFor="let item of data?.cannabis?.completedItems; let i=index;">
           <td>{{item.firstName}}</td>
           <td>{{item.lastName}} </td>
-          <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
+          <td>{{item.birthdate |  date : 'dd/MM/yyyy'}}</td>
+          <td style="text-align: center;">{{item.dateSubmitted | date : 'dd/MM/yyyy'}}</td>
         </tr>
       </table>
 
