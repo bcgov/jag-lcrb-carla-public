@@ -998,8 +998,7 @@
             <th class="paymentSummary">Cost</th>
           </tr>
           <ng-container *ngFor="let item of changeList">
-            <tr
-              *ngIf="form.get(item.formControlName).value === true && !(item.name == 'Internal Transfer of Shares' && form.get('csExternalTransferOfShares').value === true)">
+            <tr *ngIf="showLiquorCostColumn(item)">
               <td class="paymentSummary1">{{item.name}}</td>
               <td class="paymentSummary2">x {{liquorLicences.length}}</td>
               <td class="paymentSummary2">${{item.LiquorFee}}</td>
