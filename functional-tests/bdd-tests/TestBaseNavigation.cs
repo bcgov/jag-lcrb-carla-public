@@ -166,6 +166,8 @@ namespace bdd_tests
             {
                 // click on the Submit a Change button
                 NgWebElement uiSubmitAChange = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiSubmitAChange);
                 uiSubmitAChange.Click();
             }
         }
