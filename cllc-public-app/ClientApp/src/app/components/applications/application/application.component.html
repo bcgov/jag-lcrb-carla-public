@@ -41,7 +41,10 @@
   THE APPLICATION
 </h3>
 <section *ngIf="htmlContent?.beforeStarting" class="padded-section content-bottom">
-  <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+  <app-more-less-content>
+    <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting">
+    </div>
+  </app-more-less-content>
 
   <p
     *ngIf="application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation">
