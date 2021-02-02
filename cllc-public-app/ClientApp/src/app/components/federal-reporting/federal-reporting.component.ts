@@ -96,11 +96,11 @@ export class FederalReportingComponent implements OnInit {
 
   ngOnInit() {
     this.busy = forkJoin([
-        this.licenceDataService.getAllCurrentLicenses(),
-        this.monthlyReportDataService.getAllCurrentMonthlyReports(true)
-      ])
+      this.licenceDataService.getAllCurrentLicenses(),
+      this.monthlyReportDataService.getAllCurrentMonthlyReports(true)
+    ])
       .subscribe(results => {
-        this.licenses = results[0].filter(l => l.licenceTypeName === "Cannabis Retail Store");
+        this.licenses = results[0].filter(l => l.licenceTypeName === "Cannabis Retail Store" || l.licenceTypeName === "Section 119 Authorization");
         this.monthlyReports = results[1];
 
         this.routeParams.subscribe(params => {
@@ -139,8 +139,8 @@ export class FederalReportingComponent implements OnInit {
 
   getLicences(licenceId: string, monthlyReportId = null) {
     this.busy = forkJoin([
-        this.licenceDataService.getAllCurrentLicenses()
-      ])
+      this.licenceDataService.getAllCurrentLicenses()
+    ])
       .subscribe(([licenses]) => {
         this.licenses = licenses;
         this.selectedLicenceIndex = this.licenses.findIndex(l => l.licenseId === licenceId);
@@ -156,8 +156,8 @@ export class FederalReportingComponent implements OnInit {
   getMonthlyReports(licenceId, monthlyReportId = null) {
     this.loadingMonthlyReports = true;
     return forkJoin([
-        this.monthlyReportDataService.getMonthlyReportsByLicence(licenceId)
-      ])
+      this.monthlyReportDataService.getMonthlyReportsByLicence(licenceId)
+    ])
       .subscribe(([monthlyReports]) => {
         this.monthlyReports = monthlyReports;
         this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === licenceId);
@@ -168,7 +168,7 @@ export class FederalReportingComponent implements OnInit {
           this.selectedMonthlyReportIndex = 0;
           this.router.navigate([
             `/federal-reporting/${this.licenses[this.selectedLicenceIndex].licenseId}/${this.monthlyReports[0]
-            .monthlyReportId}`
+              .monthlyReportId}`
           ]);
         }
         this.renderMonthlyReport();
@@ -191,8 +191,8 @@ export class FederalReportingComponent implements OnInit {
     });
     this.loadingMonthlyReports = true;
     this.busy = forkJoin(
-        this.monthlyReportDataService.updateMonthlyReport(updateRequest)
-      )
+      this.monthlyReportDataService.updateMonthlyReport(updateRequest)
+    )
       .subscribe(([report]) => {
         const fullListIndex = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
         this.monthlyReports[fullListIndex] = report;
@@ -206,7 +206,7 @@ export class FederalReportingComponent implements OnInit {
     this.selectedMonthlyReportIndex = event.index;
     this.router.navigate([
       `/federal-reporting/${this.licenses[this.selectedLicenceIndex].licenseId}/${this.shownMonthlyReports[event.index]
-      .monthlyReportId}`
+        .monthlyReportId}`
     ]);
   }
 
@@ -250,24 +250,24 @@ export class FederalReportingComponent implements OnInit {
       });
 
     switch (this.shownMonthlyReports[this.selectedMonthlyReportIndex].statusCode) {
-    case monthlyReportStatus.Closed:
-      this.reportIsDisabled = true;
-      this.reportIsClosed = true;
-      this.reportForm.disable();
-      this.productForms.forEach((report) => { report.disable(); });
-      break;
-    case monthlyReportStatus.Submitted:
-      this.reportIsDisabled = true;
-      this.reportIsClosed = false;
-      this.reportForm.disable();
-      this.productForms.forEach((report) => { report.disable(); });
-      break;
-    default:
-      this.reportIsDisabled = false;
-      this.reportIsClosed = false;
-      this.reportForm.enable();
-      this.productForms.forEach((report) => { report.enable(); });
-      break;
+      case monthlyReportStatus.Closed:
+        this.reportIsDisabled = true;
+        this.reportIsClosed = true;
+        this.reportForm.disable();
+        this.productForms.forEach((report) => { report.disable(); });
+        break;
+      case monthlyReportStatus.Submitted:
+        this.reportIsDisabled = true;
+        this.reportIsClosed = false;
+        this.reportForm.disable();
+        this.productForms.forEach((report) => { report.disable(); });
+        break;
+      default:
+        this.reportIsDisabled = false;
+        this.reportIsClosed = false;
+        this.reportForm.enable();
+        this.productForms.forEach((report) => { report.enable(); });
+        break;
     }
 
     // Sort inventory reports
@@ -395,60 +395,60 @@ export class FederalReportingComponent implements OnInit {
       totalSeedsValidators.push(Validators.required);
     }
     return this.fb.group({
-        inventoryReportId: [report.inventoryReportId, []],
-        product: [report.product, []],
-        productDescription: [report.productDescription, []],
-        openingInventory: [
-          report.openingInventory, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
-        ],
-        domesticAdditions: [
-          report.domesticAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
-        ],
-        returnsAdditions: [
-          report.returnsAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
-        ],
-        otherAdditions: [
-          report.otherAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
-        ],
-        domesticReductions: [
-          report.domesticReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
-        ],
-        returnsReductions: [
-          report.returnsReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
-        ],
-        destroyedReductions: [
-          report.destroyedReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
-        ],
-        lostReductions: [
-          report.lostReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
-        ],
-        otherReductions: [
-          report.otherReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
-        ],
-        closingNumber: [
-          report.closingNumber,
-          [Validators.required, Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
-        ],
-        closingValue: [
-          report.closingValue,
-          [
-            Validators.required, Validators.min(0), Validators.max(1000000000),
-            Validators.pattern("^[0-9]+(\.[0-9]{1,2})?$")
-          ]
-        ],
-        closingWeight: [report.closingWeight, closingWeightValidators],
-        totalSeeds: [report.totalSeeds, totalSeedsValidators],
-        totalSalesToConsumerQty: [
-          report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
-        ],
-        totalSalesToConsumerValue: [
-          report.totalSalesToConsumerValue,
-          [Validators.min(0), Validators.max(1000000000), Validators.pattern("^[0-9]+(\.[0-9]{1,2})?$")]
-        ],
-        otherDescription: ["Extracts - Other", "Other"].indexOf(report.product) >= 0
-          ? [report.otherDescription, [Validators.required]]
-          : null
-      },
+      inventoryReportId: [report.inventoryReportId, []],
+      product: [report.product, []],
+      productDescription: [report.productDescription, []],
+      openingInventory: [
+        report.openingInventory, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
+      ],
+      domesticAdditions: [
+        report.domesticAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
+      ],
+      returnsAdditions: [
+        report.returnsAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
+      ],
+      otherAdditions: [
+        report.otherAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
+      ],
+      domesticReductions: [
+        report.domesticReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
+      ],
+      returnsReductions: [
+        report.returnsReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
+      ],
+      destroyedReductions: [
+        report.destroyedReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
+      ],
+      lostReductions: [
+        report.lostReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
+      ],
+      otherReductions: [
+        report.otherReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
+      ],
+      closingNumber: [
+        report.closingNumber,
+        [Validators.required, Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
+      ],
+      closingValue: [
+        report.closingValue,
+        [
+          Validators.required, Validators.min(0), Validators.max(1000000000),
+          Validators.pattern("^[0-9]+(\.[0-9]{1,2})?$")
+        ]
+      ],
+      closingWeight: [report.closingWeight, closingWeightValidators],
+      totalSeeds: [report.totalSeeds, totalSeedsValidators],
+      totalSalesToConsumerQty: [
+        report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")]
+      ],
+      totalSalesToConsumerValue: [
+        report.totalSalesToConsumerValue,
+        [Validators.min(0), Validators.max(1000000000), Validators.pattern("^[0-9]+(\.[0-9]{1,2})?$")]
+      ],
+      otherDescription: ["Extracts - Other", "Other"].indexOf(report.product) >= 0
+        ? [report.otherDescription, [Validators.required]]
+        : null
+    },
       { validators: [ClosingInventoryValidator, SalesValidator] });
   }
 
