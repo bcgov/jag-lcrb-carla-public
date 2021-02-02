@@ -14,15 +14,15 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Regionid operations.
+    /// Managerofinvestigationsid operations.
     /// </summary>
-    public partial interface IRegionid
+    public partial interface IManagerofinvestigationsid
     {
         /// <summary>
-        /// Get adoxio_RegionId from adoxio_investigationrequests
+        /// Get adoxio_ManagerofInvestigationsId from adoxio_regions
         /// </summary>
-        /// <param name='adoxioInvestigationrequestid'>
-        /// key: adoxio_investigationrequestid of adoxio_investigationrequest
+        /// <param name='adoxioRegionid'>
+        /// key: adoxio_regionid of adoxio_region
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,6 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioRegion>> GetWithHttpMessagesAsync(string adoxioInvestigationrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMsystemuser>> GetWithHttpMessagesAsync(string adoxioRegionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
