@@ -56,6 +56,10 @@ Scenario: Food Primary Release Test (Private Corporation)
     And I click on the link for Temporary Use Area Endorsement Application
     And I submit a temporary use area endorsement application
     And I click on the Licences tab
+    And I request a catering endorsement application
+    And I click on the Submit button
+    And I enter the payment information
+    And I click on the Licences tab
     And I request a third party operator
     And I request a transfer of ownership
     And the account is deleted
@@ -99,6 +103,10 @@ Scenario: Food Primary Release Test (Sole Proprietorship)
     And I click on the Licences tab
     And I click on the link for Temporary Use Area Endorsement Application
     And I submit a temporary use area endorsement application
+    And I click on the Licences tab
+    And I request a catering endorsement application
+    And I click on the Submit button
+    And I enter the payment information
     And I click on the Licences tab
     And I request a third party operator
     And I request a transfer of ownership
