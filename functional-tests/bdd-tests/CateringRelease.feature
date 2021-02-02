@@ -7,7 +7,7 @@ Scenario: DEV Catering Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
@@ -40,7 +40,7 @@ Scenario: DEV Catering Release (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
-    And I complete the Catering application
+    And I complete the Catering application for a sole proprietorship
     And I click on the Submit button
     And I enter the payment information
     And the application is approved

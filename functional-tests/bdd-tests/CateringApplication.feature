@@ -7,7 +7,7 @@ Scenario: DEV Catering Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
     And I review the account profile for a private corporation
-    And I complete the Catering application
+    And I complete the Catering application for a private corporation
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
@@ -21,7 +21,7 @@ Scenario: DEV Catering Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
     And I review the account profile for a society
-    And I complete the Catering application
+    And I complete the Catering application for a society
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
@@ -35,9 +35,8 @@ Scenario: DEV Catering Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
     And I review the account profile for a partnership
-    And I complete the Catering application
+    And I complete the Catering application for a partnership
     And I click on the Submit button
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
     And I click on the Dashboard tab
@@ -46,11 +45,11 @@ Scenario: DEV Catering Application (Partnership)
     Then I see the login page
 
 @cateringapp @soleproprietorship
-Scenario: UAT Catering Application (Sole Proprietorship)
+Scenario: DEV Catering Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
     And I review the account profile for a sole proprietorship
-    And I complete the Catering application
+    And I complete the Catering application for a sole proprietorship
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
