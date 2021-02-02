@@ -456,15 +456,14 @@
         <h4>Notice of Articles (or Register of Directors and Officers)</h4>
         <p>Provide the updated Notice of Articles for your corporation. Alternatively, you can provide list of all
           current directors/officers by full legal name, position and date of appointment.</p>
-        <p *ngIf="hasLiquor"><strong>Directors and Officers are <u>not</u> required to submit a Personal History Summary
-            form for liquor-related applications.</strong></p>
+        <p *ngIf="hasLiquor"><strong>For Liquor Licensees: Directors and Officers are required to submit a Personal History Summary Form for liquor-related applications, except for <u>private corporations</u>.</strong></p>
         <app-file-uploader *ngIf="application?.id" documentType="NOA" fileTypes="FILE MUST BE IN PDF FORMAT."
           [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
           (numberOfUploadedFiles)="uploadedNOA = $event" [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'">
         </app-file-uploader>
         <p *ngIf="hasCannabis"><strong>
-            <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All newly added directors must submit a completed Cannabis
+            <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>For Cannabis Licensees: All newly added directors must submit a completed Cannabis
             Associate Security Screening form below.
           </strong>
         </p>
