@@ -91,7 +91,7 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_patiolocationdescription", new FieldMapping("patioLocationDescription", true)},
                 {"adoxio_patioaccessdescription", new FieldMapping("patioAccessDescription", true)},
                 {"adoxio_patioisliquorcarried", new FieldMapping("patioIsLiquorCarried", true)},
-                {"adoxio_patioliquorcarrieddescription", new FieldMapping("patioLiquorCarriedDescription", true)},
+                {"adoxio_patioliquorcarrieddescription", new FieldMapping("patioLiquorCarriedDescription", false)},
                 {"adoxio_patioaccesscontroldescription", new FieldMapping("patioAccessControlDescription", true)},
                 {"adoxio_locatedabovedescription", new FieldMapping("locatedAboveDescription", true)},
                 {"adoxio_patioservicebar", new FieldMapping("patioServiceBar", true)},
