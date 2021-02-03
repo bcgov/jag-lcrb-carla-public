@@ -334,6 +334,13 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         }));
   }
 
+  showLiquorCostColumn(item: any){
+    const show = this.form.get(item.formControlName).value === true 
+    && (item.name !== 'Internal Transfer of Shares')
+    && !(item.name === 'Change of Directors or Officers' && this.account.businessType  === 'PrivateCorporation');
+    return show;
+  }
+
   getValidationErrorMap() {
     const errorMap = {
       signatureAgreement:
@@ -414,7 +421,7 @@ const masterChangeList = [
   {
     name: "Name Change, Licensee -- Partnership",
     formControlName: "csNameChangeLicenseePartnership",
-    availableTo: ["GeneralPartnership", "LimitedLiabilityPartnership"],
+    availableTo: ["GeneralPartnership", "Partnership", "LimitedLiabilityPartnership"],
     CannabisFee: 220,
     LiquorFee: 220,
     RequiresPHS: false,
@@ -443,7 +450,7 @@ const masterChangeList = [
     name: "Name Change, Person",
     formControlName: "csNameChangeLicenseePerson",
     availableTo: [
-      "PrivateCorporation", "PublicCorporation", "GeneralPartnership",
+      "PrivateCorporation", "PublicCorporation", "GeneralPartnership", "Partnership",
       "LimitedLiabilityPartnership", "IndigenousNation", "LocalGovernment", "Society"
     ],
     CannabisFee: 220,
@@ -460,7 +467,7 @@ const masterChangeList = [
     name: "Addition of Receiver or Executor",
     formControlName: "csAdditionalReceiverOrExecutor",
     availableTo: [
-      "PrivateCorporation", "PublicCorporation", "GeneralPartnership",
+      "PrivateCorporation", "PublicCorporation", "GeneralPartnership", "Partnership",
       "LimitedLiabilityPartnership", "Society"
     ],
     CannabisFee: 220,
