@@ -365,8 +365,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         "adoxio_LicenceFeeInvoice",
                         "adoxio_Invoice"
                     };
+                    var customHeaders = new Dictionary<string, List<string>>();
+                    var preferHeader = new List<string>();
+                    preferHeader.Add($"odata.maxpagesize={pageSize}");
 
-                    var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
+                    customHeaders.Add("Prefer", preferHeader);
+                    var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders).GetAwaiter().GetResult();
+
+                    while (pageIndex != 0)
+                    {
+                        // get the next window.
+                        string odataNextLink = applicationQuery.Body.OdataNextLink;
+                        applicationQuery = _dynamicsClient.Applications.GetNextLink(odataNextLink, customHeaders);
+                        pageIndex--;
+                    }
+
+                    var applications = applicationQuery.Body.Value;
+
                     foreach (var dynamicsApplication in applications)
                     {
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
