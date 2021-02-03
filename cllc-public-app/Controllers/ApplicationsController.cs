@@ -372,7 +372,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     customHeaders.Add("Prefer", preferHeader);
                     var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders).GetAwaiter().GetResult();
 
-                    while (pageIndex != 0)
+                    while (pageIndex > 0)
                     {
                         // get the next window.
                         string odataNextLink = applicationQuery.Body.OdataNextLink;
