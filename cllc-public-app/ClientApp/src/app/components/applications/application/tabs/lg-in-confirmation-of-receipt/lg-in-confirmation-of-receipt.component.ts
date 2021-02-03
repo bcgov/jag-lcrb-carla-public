@@ -48,7 +48,8 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
       lGNameOfOfficial: ["", [Validators.required]],
       lGTitlePosition: ["", [Validators.required]],
       lGContactPhone: ["", [Validators.required]],
-      lGContactEmail: ["", [Validators.required, Validators.email]]
+      lGContactEmail: ["", [Validators.required, Validators.email]],
+      lgNoObjection: ["", []] // not required
     });
     this.form.patchValue(this.application);
 
