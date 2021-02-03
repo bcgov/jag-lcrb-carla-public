@@ -19,12 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Regionid operations.
+    /// Managerofinvestigationsid operations.
     /// </summary>
-    public partial class Regionid : IServiceOperations<DynamicsClient>, IRegionid
+    public partial class Managerofinvestigationsid : IServiceOperations<DynamicsClient>, IManagerofinvestigationsid
     {
         /// <summary>
-        /// Initializes a new instance of the Regionid class.
+        /// Initializes a new instance of the Managerofinvestigationsid class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public Regionid(DynamicsClient client)
+        public Managerofinvestigationsid(DynamicsClient client)
         {
             if (client == null)
             {
@@ -47,10 +47,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get adoxio_RegionId from adoxio_investigationrequests
+        /// Get adoxio_ManagerofInvestigationsId from adoxio_regions
         /// </summary>
-        /// <param name='adoxioInvestigationrequestid'>
-        /// key: adoxio_investigationrequestid of adoxio_investigationrequest
+        /// <param name='adoxioRegionid'>
+        /// key: adoxio_regionid of adoxio_region
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -79,11 +79,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioRegion>> GetWithHttpMessagesAsync(string adoxioInvestigationrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMsystemuser>> GetWithHttpMessagesAsync(string adoxioRegionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioInvestigationrequestid == null)
+            if (adoxioRegionid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioInvestigationrequestid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioRegionid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioInvestigationrequestid", adoxioInvestigationrequestid);
+                tracingParameters.Add("adoxioRegionid", adoxioRegionid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -100,8 +100,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_investigationrequests({adoxio_investigationrequestid})/adoxio_RegionId").ToString();
-            _url = _url.Replace("{adoxio_investigationrequestid}", System.Uri.EscapeDataString(adoxioInvestigationrequestid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_regions({adoxio_regionid})/adoxio_ManagerofInvestigationsId").ToString();
+            _url = _url.Replace("{adoxio_regionid}", System.Uri.EscapeDataString(adoxioRegionid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {
@@ -180,7 +180,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioRegion>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMsystemuser>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -189,7 +189,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioRegion>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMsystemuser>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

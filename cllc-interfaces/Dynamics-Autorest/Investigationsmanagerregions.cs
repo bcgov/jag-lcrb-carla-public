@@ -19,12 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Investigationunitid operations.
+    /// Investigationsmanagerregions operations.
     /// </summary>
-    public partial class Investigationunitid : IServiceOperations<DynamicsClient>, IInvestigationunitid
+    public partial class Investigationsmanagerregions : IServiceOperations<DynamicsClient>, IInvestigationsmanagerregions
     {
         /// <summary>
-        /// Initializes a new instance of the Investigationunitid class.
+        /// Initializes a new instance of the Investigationsmanagerregions class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public Investigationunitid(DynamicsClient client)
+        public Investigationsmanagerregions(DynamicsClient client)
         {
             if (client == null)
             {
@@ -47,10 +47,23 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get adoxio_InvestigationUnitId from adoxio_contraventions
+        /// Get adoxio_investigationsmanager_regions from systemusers
         /// </summary>
-        /// <param name='adoxioContraventionid'>
-        /// key: adoxio_contraventionid of adoxio_contravention
+        /// <param name='ownerid'>
+        /// key: ownerid of systemuser
+        /// </param>
+        /// <param name='top'>
+        /// </param>
+        /// <param name='skip'>
+        /// </param>
+        /// <param name='search'>
+        /// </param>
+        /// <param name='filter'>
+        /// </param>
+        /// <param name='count'>
+        /// </param>
+        /// <param name='orderby'>
+        /// Order items by property values
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -79,11 +92,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioInvestigation>> GetWithHttpMessagesAsync(string adoxioContraventionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioRegionCollection>> GetWithHttpMessagesAsync(string ownerid, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioContraventionid == null)
+            if (ownerid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioContraventionid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "ownerid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -92,7 +105,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioContraventionid", adoxioContraventionid);
+                tracingParameters.Add("ownerid", ownerid);
+                tracingParameters.Add("top", top);
+                tracingParameters.Add("skip", skip);
+                tracingParameters.Add("search", search);
+                tracingParameters.Add("filter", filter);
+                tracingParameters.Add("count", count);
+                tracingParameters.Add("orderby", orderby);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -100,9 +119,33 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_contraventions({adoxio_contraventionid})/adoxio_InvestigationUnitId").ToString();
-            _url = _url.Replace("{adoxio_contraventionid}", System.Uri.EscapeDataString(adoxioContraventionid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "systemusers({ownerid})/adoxio_investigationsmanager_regions").ToString();
+            _url = _url.Replace("{ownerid}", System.Uri.EscapeDataString(ownerid));
             List<string> _queryParameters = new List<string>();
+            if (top != null)
+            {
+                _queryParameters.Add(string.Format("$top={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(top, Client.SerializationSettings).Trim('"'))));
+            }
+            if (skip != null)
+            {
+                _queryParameters.Add(string.Format("$skip={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(skip, Client.SerializationSettings).Trim('"'))));
+            }
+            if (search != null)
+            {
+                _queryParameters.Add(string.Format("$search={0}", System.Uri.EscapeDataString(search)));
+            }
+            if (filter != null)
+            {
+                _queryParameters.Add(string.Format("$filter={0}", System.Uri.EscapeDataString(filter)));
+            }
+            if (count != null)
+            {
+                _queryParameters.Add(string.Format("$count={0}", System.Uri.EscapeDataString(Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(count, Client.SerializationSettings).Trim('"'))));
+            }
+            if (orderby != null)
+            {
+                _queryParameters.Add(string.Format("$orderby={0}", System.Uri.EscapeDataString(string.Join(",", orderby))));
+            }
             if (select != null)
             {
                 _queryParameters.Add(string.Format("$select={0}", System.Uri.EscapeDataString(string.Join(",", select))));
@@ -180,7 +223,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioInvestigation>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioRegionCollection>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -189,7 +232,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioInvestigation>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioRegionCollection>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -209,10 +252,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Get adoxio_InvestigationUnitId from adoxio_investigations
+        /// Get adoxio_investigationsmanager_regions from systemusers
         /// </summary>
-        /// <param name='adoxioInvestigationid'>
-        /// key: adoxio_investigationid of adoxio_investigation
+        /// <param name='ownerid'>
+        /// key: ownerid of systemuser
+        /// </param>
+        /// <param name='adoxioRegionid'>
+        /// key: adoxio_regionid of adoxio_region
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -241,11 +287,15 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioComplaint>> Get1WithHttpMessagesAsync(string adoxioInvestigationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioRegion>> RegionsByKeyWithHttpMessagesAsync(string ownerid, string adoxioRegionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioInvestigationid == null)
+            if (ownerid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioInvestigationid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "ownerid");
+            }
+            if (adoxioRegionid == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioRegionid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -254,16 +304,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioInvestigationid", adoxioInvestigationid);
+                tracingParameters.Add("ownerid", ownerid);
+                tracingParameters.Add("adoxioRegionid", adoxioRegionid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "Get1", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "RegionsByKey", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_investigations({adoxio_investigationid})/adoxio_InvestigationUnitId").ToString();
-            _url = _url.Replace("{adoxio_investigationid}", System.Uri.EscapeDataString(adoxioInvestigationid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "systemusers({ownerid})/adoxio_investigationsmanager_regions({adoxio_regionid})").ToString();
+            _url = _url.Replace("{ownerid}", System.Uri.EscapeDataString(ownerid));
+            _url = _url.Replace("{adoxio_regionid}", System.Uri.EscapeDataString(adoxioRegionid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {
@@ -342,7 +394,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioComplaint>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioRegion>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -351,7 +403,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioComplaint>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioRegion>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
