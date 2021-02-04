@@ -45,7 +45,17 @@ namespace bdd_tests
             string kitchenDetails = "Here are the details of the kitchen equipment.";
             string transportDetails = "Here are the transport details.";
 
-            if (bizType != "sole proprietorship")
+            if (bizType == "partnership")
+            {
+                // upload a partnership agreement
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
+
+                // upload personal history summary
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+            }
+
+            /*
+            if ((bizType == "private corporation") || (bizType == "society"))
             {
                 // upload a central securities register
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -73,6 +83,7 @@ namespace bdd_tests
                 // upload shareholders < 10% interest
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
+            */
 
             // enter the establishment name
             NgWebElement uiEstabName = null;
@@ -149,7 +160,16 @@ namespace bdd_tests
             NgWebElement uiTransportDetails = ngDriver.FindElement(By.CssSelector("textarea#description3"));
             uiTransportDetails.SendKeys(transportDetails);
 
-            if (bizType != "sole proprietorship")
+            if (bizType == "partnership")
+            {
+                // upload a store signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
+
+                // upload a valid interest document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
+            }
+
+            /*if (bizType != "sole proprietorship")
             {
                 // upload a store signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[17]");
@@ -169,7 +189,7 @@ namespace bdd_tests
             {
                 // upload a valid interest document
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
-            }
+            }*/
 
             // enter the first name of the application contact
             NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
