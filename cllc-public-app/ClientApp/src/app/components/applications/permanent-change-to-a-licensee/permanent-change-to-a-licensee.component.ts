@@ -22,6 +22,7 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
   styleUrls: ["./permanent-change-to-a-licensee.component.scss"]
 })
 export class PermanentChangeToALicenseeComponent extends FormBase implements OnInit {
+  isAmalgamated = false;
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
   value: any; // placeholder prop
