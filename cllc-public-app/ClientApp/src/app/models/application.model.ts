@@ -119,6 +119,8 @@ export class Application {
   establishmentopeningdate: Date;
   isApplicationComplete: string;
 
+  lgNoObjection: boolean;
+
   lGNameOfOfficial: string;
   lGTitlePosition: string;
   lGContactPhone: string;

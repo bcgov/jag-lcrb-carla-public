@@ -69,6 +69,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? LGandPoliceSelectors { get; set; }
 
+        public bool? ShowLgNoObjection { get; set; }
         public bool? ShowLiquorDeclarations { get; set; }
         public bool? ShowOwnershipDeclaration { get; set;}
         
