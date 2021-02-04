@@ -20,7 +20,7 @@ Scenario: DEV Catering Licensee Changes (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges
+@catering @licenseechanges @release
 Scenario: DEV Catering Licensee Changes (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -38,7 +38,7 @@ Scenario: DEV Catering Licensee Changes (Partnership)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges
+@catering @licenseechanges @release
 Scenario: DEV Catering Licensee Changes (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -56,7 +56,7 @@ Scenario: DEV Catering Licensee Changes (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges
+@catering @licenseechanges @release
 Scenario: DEV Catering Licensee Changes (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
