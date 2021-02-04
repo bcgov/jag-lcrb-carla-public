@@ -54,8 +54,7 @@ namespace bdd_tests
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
             }
 
-            /*
-            if ((bizType == "private corporation") || (bizType == "society"))
+            if (bizType == "private corporation")
             {
                 // upload a central securities register
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -65,8 +64,15 @@ namespace bdd_tests
 
                 // upload notice of articles
                 FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+
+                // upload personal history summary documents
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
+
+                // upload shareholders < 10% interest
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
 
+            /*
             if (bizType != "sole proprietorship")
             {
                 // upload personal history summary documents
@@ -167,6 +173,15 @@ namespace bdd_tests
 
                 // upload a valid interest document
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
+            }
+
+            if (bizType == "private corporation")
+            {
+                // upload a store signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+
+                // upload a valid interest document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
             }
 
             /*if (bizType != "sole proprietorship")
