@@ -579,6 +579,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         [JsonProperty(PropertyName = "lGDecisionSubmissionDate")]
         public DateTimeOffset? LGDecisionSubmissionDate { get; set; }
+
+        public bool? LgNoObjection { get; set; }
+
+
         public bool ResolutionDocsUploaded { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
