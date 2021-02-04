@@ -29,6 +29,14 @@ namespace bdd_tests
             Page Title: Permanent Change to a Licensee
             */
 
+            // create test data
+            string firstName = "Firstname";
+            string lastName = "Lastname";
+            string newFirstName = "Newfirstname";
+            string newLastName = "Newlastname";
+            string partnershipName = "Partnershipname";
+            string newPartnershipName = "Newpartnershipname";
+
             switch (appType)
             {
                 case "society":
@@ -80,13 +88,27 @@ namespace bdd_tests
                     NgWebElement uiAdditionOfReceiverOrExecutor3 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
                     uiAdditionOfReceiverOrExecutor3.Click();
                     // enter person first name
+                    NgWebElement uiFirstName = ngDriver.FindElement(By.CssSelector("input#mat-input-2"));
+                    uiFirstName.SendKeys(firstName);
                     // enter person last name
+                    NgWebElement uiLastName = ngDriver.FindElement(By.CssSelector("input#mat-input-3"));
+                    uiLastName.SendKeys(lastName);
                     // enter person new first name
+                    NgWebElement uiNewFirstName = ngDriver.FindElement(By.CssSelector("input#mat-input-4"));
+                    uiNewFirstName.SendKeys(newFirstName);
                     // enter person new last name
+                    NgWebElement uiNewLastName = ngDriver.FindElement(By.CssSelector("input#mat-input-5"));
+                    uiNewLastName.SendKeys(newLastName);
                     // upload copy of marriage certificate
-
-                    // upload Personal History Summary document
-                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
+                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[3]");
+                    // enter partnership name
+                    NgWebElement uiPartnershipName = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
+                    uiPartnershipName.SendKeys(partnershipName);
+                    // enter new partnership name
+                    NgWebElement uiNewPartnershipName = ngDriver.FindElement(By.CssSelector("input#mat-input-1"));
+                    uiNewPartnershipName.SendKeys(newPartnershipName);
+                    // upload partnership registration
+                    FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[5]");
                     break;
                 case "sole proprietorship":
                     // upload Personal History Summary document
@@ -102,8 +124,7 @@ namespace bdd_tests
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,500.234200')]")).Displayed);
-
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'stoptesthere')]")).Displayed);
         }
     }
 }

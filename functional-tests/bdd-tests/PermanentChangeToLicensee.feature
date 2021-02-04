@@ -34,7 +34,7 @@ Scenario: DEV Catering Licensee Changes (Partnership)
     And I click on the Dashboard tab
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a partnership
-    # And I click on the Submit button
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page
 
