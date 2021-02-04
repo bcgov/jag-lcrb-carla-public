@@ -79,6 +79,12 @@ namespace bdd_tests
                     // click on Addition of Receiver or Executor
                     NgWebElement uiAdditionOfReceiverOrExecutor3 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
                     uiAdditionOfReceiverOrExecutor3.Click();
+                    // enter person first name
+                    // enter person last name
+                    // enter person new first name
+                    // enter person new last name
+                    // upload copy of marriage certificate
+
                     // upload Personal History Summary document
                     FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
                     break;
@@ -95,6 +101,9 @@ namespace bdd_tests
             // select the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,500.234200')]")).Displayed);
+
         }
     }
 }
