@@ -36,8 +36,8 @@ namespace bdd_tests
                     NgWebElement uiChangeOfDirectorsOrOfficers = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
                     uiChangeOfDirectorsOrOfficers.Click();
                     // click on Name Change, Licensee -- Society
-                    NgWebElement uiNameChangeLicenseeCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
-                    uiNameChangeLicenseeCorporation.Click();
+                    NgWebElement uiNameChangeLicenseeSociety = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
+                    uiNameChangeLicenseeSociety.Click();
                     // click on Name Change, Person
                     NgWebElement uiNameChangePerson = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
                     uiNameChangePerson.Click();
@@ -58,8 +58,8 @@ namespace bdd_tests
                     NgWebElement uiChangeOfDirectorsOrOfficers2 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
                     uiChangeOfDirectorsOrOfficers2.Click();
                     // click on Name Change, Licensee -- Corporation
-                    NgWebElement uiNameChangeLicenseeCorporation2 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
-                    uiNameChangeLicenseeCorporation2.Click();
+                    NgWebElement uiNameChangeLicenseePrivateCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
+                    uiNameChangeLicenseePrivateCorporation.Click();
                     // click on Name Change, Person
                     NgWebElement uiNameChangePerson2 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-7.mat-checkbox"));
                     uiNameChangePerson2.Click();
@@ -70,6 +70,15 @@ namespace bdd_tests
                     FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
                     break;
                 case "partnership":
+                    // click on Name Change, Licensee -- Partnership
+                    NgWebElement uiNameChangeLicenseePartnership = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
+                    uiNameChangeLicenseePartnership.Click();
+                    // click on Name Change, Person
+                    NgWebElement uiNameChangePerson3 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
+                    uiNameChangePerson3.Click();
+                    // click on Addition of Receiver or Executor
+                    NgWebElement uiAdditionOfReceiverOrExecutor3 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
+                    uiAdditionOfReceiverOrExecutor3.Click();
                     // upload Personal History Summary document
                     FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
                     break;
