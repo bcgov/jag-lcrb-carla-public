@@ -22,9 +22,9 @@ export class ProductInventorySalesReportComponent implements OnInit {
   @Input()
   productForm: FormGroup;
   @Input()
-  visibleInventoryReports: string[] = [];
+  visible: boolean = true;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     if (this.productForm.get("product").value === "Seeds") {
