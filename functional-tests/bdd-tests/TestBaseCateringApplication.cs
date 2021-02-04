@@ -81,12 +81,11 @@ namespace bdd_tests
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
             }
 
-            /*
             if (bizType == "sole proprietorship")
             {
-
+                // upload personal history summary documents
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
             }
-            */
 
             // enter the establishment name
             NgWebElement uiEstabName = null;
@@ -181,10 +180,14 @@ namespace bdd_tests
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
             }
 
-            /*if (bizType == "sole proprietorship")
+            if (bizType == "sole proprietorship")
             {
+                // upload a store signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[5]");
 
-            }*/
+                // upload a valid interest document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
+            }
 
             // enter the first name of the application contact
             NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
