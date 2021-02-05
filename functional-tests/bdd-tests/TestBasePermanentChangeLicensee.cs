@@ -36,6 +36,8 @@ namespace bdd_tests
             string newLastName = "Newlastname";
             string partnershipName = "Partnershipname";
             string newPartnershipName = "Newpartnershipname";
+            string companyName = "Companyname";
+            string newCompanyName = "Newcompanyname";
             string executorFirstName = "Executorfirstname";
             string executorLastName = "Executorlastname";
             string receiverFirstName = "Receiverfirstname";
@@ -219,8 +221,24 @@ namespace bdd_tests
                     // upload copy of marriage certificate
                     FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[30]");
 
+                    /* 
+                    *  CORPORATION NAME CHANGE
+                    */
+
+                    // enter company name
+                    NgWebElement uiCompanyName = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
+                    uiCompanyName.SendKeys(companyName);
+
+                    // enter new company name
+                    NgWebElement uiNewCompanyName = ngDriver.FindElement(By.CssSelector("input#mat-input-1"));
+                    uiNewCompanyName.SendKeys(newCompanyName);
+
                     // upload certificate of name change
                     FileUpload("certificate_of_name_change.pdf", "(//input[@type='file'])[32]");
+
+                    /* 
+                    *  ADDITION OF EXECUTOR OR RECEIVER
+                    */
 
                     // enter executor first name
                     NgWebElement uiExecutorFirstNamePrivateCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-6"));
@@ -249,6 +267,10 @@ namespace bdd_tests
 
                     // upload court order
                     FileUpload("court_order.pdf", "(//input[@type='file'])[44]");
+
+                    /* 
+                    *  PERSONAL HISTORY SUMMARY FORMS
+                    */
 
                     // upload Personal History Summary document
                     FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[48]");
