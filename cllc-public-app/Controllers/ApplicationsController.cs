@@ -273,7 +273,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current/lg-approvals")]
         public IActionResult GetLgApprovalApplications()
         {
-            var results = new List<Application>();
+            var results = new PagingResult<Application>(){
+                Value = new List<Application>()
+            };
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
@@ -308,11 +310,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     foreach (var dynamicsApplication in applications)
                     {
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
-                        results.Add(viewModel);
+                        results.Value.Add(viewModel);
                     }
-                    
-                }
-                
+                }                
             }
             catch (HttpOperationException e)
             {
@@ -338,10 +338,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current/resolved-lg-applications")]
         public IActionResult GetResolvedLGApplications([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
-            var results = new List<Application>();
+            var results = new PagingResult<Application>();
+
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
             try
             {
                 // get user account
@@ -352,7 +352,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
                     filter += $" and adoxio_lgapprovaldecision eq {(int)LGDecision.Approved}";
-    
 
                     var expand = new List<string>
                     {
@@ -365,12 +364,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         "adoxio_LicenceFeeInvoice",
                         "adoxio_Invoice"
                     };
+
                     var customHeaders = new Dictionary<string, List<string>>();
                     var preferHeader = new List<string>();
                     preferHeader.Add($"odata.maxpagesize={pageSize}");
 
                     customHeaders.Add("Prefer", preferHeader);
-                    var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders).GetAwaiter().GetResult();
+                    var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
 
                     while (pageIndex > 0)
                     {
@@ -381,15 +381,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     var applications = applicationQuery.Body.Value;
+                    results.Count = Int32.Parse(applicationQuery.Body.Count);
 
                     foreach (var dynamicsApplication in applications)
                     {
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
-                        results.Add(viewModel);
+                        results.Value.Add(viewModel);
                     }
-                    
                 }
-                
             }
             catch (HttpOperationException e)
             {
@@ -453,7 +452,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 result.Application =
                     await application.ToViewModel(_dynamicsClient, _cache, _logger).ConfigureAwait(true);
-
 
                 result.ChangeLogs = _dynamicsClient.GetApplicationChangeLogs(result.Application.Id, _logger);
             }
@@ -1468,5 +1466,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         public PaymentResult Primary { get; set; }
         public PaymentResult Secondary { get; set; }
+    }
+
+    public class PagingResult<T> {
+        public int Count { get; set; }
+        public List<T> Value { get; set; }
     }
 }
