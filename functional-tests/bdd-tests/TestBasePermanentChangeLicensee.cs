@@ -408,7 +408,7 @@ namespace bdd_tests
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
-            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,53454300.00')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,53454300.00')]")).Displayed);
 
         }
     }
