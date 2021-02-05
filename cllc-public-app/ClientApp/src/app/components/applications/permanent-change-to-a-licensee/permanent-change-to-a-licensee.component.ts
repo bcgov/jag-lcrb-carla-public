@@ -353,7 +353,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       contactPersonPhone: "Please enter the business contact's 10-digit phone number",
       contactPersonRole: "Please enter the contact person role"
     };
-
     return errorMap;
   }
 
@@ -408,7 +407,7 @@ const masterChangeList = [
   {
     name: "Name Change, Licensee -- Corporation",
     formControlName: "csNameChangeLicenseeCorporation",
-    availableTo: ["PrivateCorporation", "PublicCorporation"],
+    availableTo: ["PrivateCorporation", "PublicCorporation", "SoleProprietorship"],
     CannabisFee: 220,
     LiquorFee: 220,
     RequiresPHS: false,
