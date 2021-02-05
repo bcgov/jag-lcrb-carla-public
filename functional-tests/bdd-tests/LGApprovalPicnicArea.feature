@@ -7,14 +7,14 @@ Scenario: DEV Local Government Approval for Picnic Area Endorsement (Private Cor
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I complete the Manufacturer application for a winery in Saanich
+    And I complete the Manufacturer application for a winery in Parksville
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
-    And I log in as local government for Saanich
+    And I log in as local government for Parksville
     And I click on the link for Applications for Review
     And I click on the link for Review Application
     And I specify my contact details as the approving authority
@@ -32,7 +32,7 @@ Scenario: DEV Local Government Approval for Picnic Area Endorsement (Private Cor
 #    And I review the account profile for a private corporation
 #    And I review the organization structure for a private corporation
 #    And I click on the button for Submit Organization Information
-#    And I complete the Manufacturer application for a winery in Saanich
+#    And I complete the Manufacturer application for a winery in Parksville
 #    And I review the security screening requirements for a private corporation
 #    And I click on the button for Pay for Application
 #    And I enter the payment information
@@ -41,7 +41,7 @@ Scenario: DEV Local Government Approval for Picnic Area Endorsement (Private Cor
 #    And I pay the licensing fee
 #    And I click on the link for Picnic Area Endorsement Application
 #    And I request a picnic area endorsement
-#    And I log in as local government for Saanich
+#    And I log in as local government for Parksville
 #    And I click on the link for Applications for Review
 #    And I click on the link for Review Application 
 #    And I specify my contact details as the approving authority
