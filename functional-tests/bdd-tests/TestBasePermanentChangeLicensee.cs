@@ -159,6 +159,10 @@ namespace bdd_tests
                     // upload shareholders < 10% interest
                     FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[6]");
 
+                    // click 'Yes' for amalgamation with another company
+                    NgWebElement uiAmalgamationYes = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-2"));
+                    uiAmalgamationYes.Click();
+
                     // upload certificate of amalgamation
                     FileUpload("certificate_of_amalgamation.pdf", "(//input[@type='file'])[9]");
 
