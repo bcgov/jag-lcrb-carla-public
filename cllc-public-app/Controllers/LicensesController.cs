@@ -812,11 +812,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         /// Create a change of location application
-        [HttpPost("{licenceId}/create-action-application/{applicationTypeName}")]
-        public async Task<ViewModels.Application> CreateApplicationForAction(string licenceId, string applicationTypeName)
+        [HttpPost("{licenceId}/create-action-application")]
+        public async Task<IActionResult> CreateApplicationForAction(string licenceId, [FromQuery] string applicationType)
         {
-            var application = CreateApplication(licenceId, applicationTypeName);
-            return await application.ToViewModel(_dynamicsClient, _cache, _logger);
+            // validate query params
+            if (string.IsNullOrEmpty(applicationType)) return BadRequest();
+
+            var application = CreateApplication(licenceId, applicationType);
+            var result = await application.ToViewModel(_dynamicsClient, _cache, _logger);
+            return new JsonResult(result);
         }
 
         private MicrosoftDynamicsCRMadoxioApplication GetTermChangeApplication(string licenceId, string termId, string applicationTypeName)
@@ -873,20 +877,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-
         /// Create a change of location application
-        [HttpPost("{licenceId}/create-action-application-term/{termId}/{applicationTypeName}")]
-        public async Task<ViewModels.Application> CreateOrGetApplicationWithTerm(string licenceId, string termId,
-            string applicationTypeName)
+        [HttpPost("{licenceId}/create-action-application-term/{termId}")]
+        public async Task<IActionResult> CreateOrGetApplicationWithTerm(string licenceId, string termId,
+            [FromQuery] string applicationType)
         {
-            // first do a check to see if there is an existing application.
+            // validate query params
+            if (string.IsNullOrEmpty(applicationType)) return BadRequest();
 
-            var application = GetTermChangeApplication(licenceId, termId, applicationTypeName);
+            // first do a check to see if there is an existing application.
+            var application = GetTermChangeApplication(licenceId, termId, applicationType);
 
             // otherwise create the application with the data we've brought over
             if (application == null)
             {
-                application = CreateApplication(licenceId, applicationTypeName);
+                application = CreateApplication(licenceId, applicationType);
 
                 if (!string.IsNullOrEmpty(termId))
                 {
@@ -911,7 +916,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
-            return await application.ToViewModel(_dynamicsClient, _cache, _logger);
+            var result = await application.ToViewModel(_dynamicsClient, _cache, _logger);
+            return new JsonResult(result);
         }
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
