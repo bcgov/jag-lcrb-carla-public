@@ -48,7 +48,7 @@ namespace bdd_tests
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
             string localGovernmentParksville = "Parksville";
-            string policeJurisdictionParksville = "Oceanside RCMP";
+            string policeJurisdictionParksville = "RCMP Oceanside";
 
             string floorAreaDescription = "Sample floor area.";
             string occupantLoad = "180";
@@ -117,14 +117,14 @@ namespace bdd_tests
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
             uiIndigenousNation.SendKeys(localGovernmentParksville);
 
-            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
+            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
             uiIndigenousNation2.Click();
 
-            // search for and select Oceanside RCMP as the police jurisdiction
+            // search for and select RCMP Oceanside as the police jurisdiction
             NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
             uiPoliceJurisdiction.SendKeys(policeJurisdictionParksville);
 
-            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-6 span"));
+            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
             uiPoliceJurisdiction2.Click();
 
             // enter the store email

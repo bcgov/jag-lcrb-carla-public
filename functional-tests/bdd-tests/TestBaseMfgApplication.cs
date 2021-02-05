@@ -42,7 +42,7 @@ namespace bdd_tests
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
             string localGovernmentParksville = "Parksville";
-            string policeJurisdictionParksville = "Oceanside RCMP";
+            string policeJurisdictionParksville = "RCMP Oceanside";
 
             // upload central securities register
             FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -117,14 +117,14 @@ namespace bdd_tests
                 NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
                 uiIndigenousNation.SendKeys(localGovernmentParksville);
 
-                NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
+                NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
                 uiIndigenousNation2.Click();
 
                 // search for and select the police jurisdiction
                 NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
                 uiPoliceJurisdiction.SendKeys(policeJurisdictionParksville);
 
-                NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-6 span"));
+                NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
                 uiPoliceJurisdiction2.Click();
             }
             else
