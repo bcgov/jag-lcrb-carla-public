@@ -48,7 +48,7 @@ namespace bdd_tests
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
             string localGovernmentParksville = "Parksville";
-            string policeJurisdictionParksville = "Parksville Police Department";
+            string policeJurisdictionParksville = "Oceanside RCMP";
 
             string floorAreaDescription = "Sample floor area.";
             string occupantLoad = "180";
@@ -120,7 +120,7 @@ namespace bdd_tests
             NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
             uiIndigenousNation2.Click();
 
-            // search for and select Parksville as the police jurisdiction
+            // search for and select Oceanside RCMP as the police jurisdiction
             NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
             uiPoliceJurisdiction.SendKeys(policeJurisdictionParksville);
 
