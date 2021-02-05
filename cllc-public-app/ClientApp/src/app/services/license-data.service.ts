@@ -57,35 +57,35 @@ export class LicenseDataService extends DataService {
 
   getAllCurrentLicenses(): Observable<ApplicationLicenseSummary[]> {
     return this.http.get<ApplicationLicenseSummary[]>(this.apiPath + "current",
-        {
-          headers: this.headers
-        })
+      {
+        headers: this.headers
+      })
       .pipe(catchError(this.handleError));
   }
 
   getAllOperatedLicenses(): Observable<ApplicationLicenseSummary[]> {
     return this.http.get<ApplicationLicenseSummary[]>(this.apiPath + "third-party-operator",
-        {
-          headers: this.headers
-        })
+      {
+        headers: this.headers
+      })
       .pipe(catchError(this.handleError));
   }
 
   getAllProposedLicenses(): Observable<ApplicationLicenseSummary[]> {
     return this.http.get<ApplicationLicenseSummary[]>(this.apiPath + "proposed-owner",
-        {
-          headers: this.headers
-        })
+      {
+        headers: this.headers
+      })
       .pipe(catchError(this.handleError));
   }
 
   createApplicationForActionType(licenseId: string, applicationType: string): Observable<Application> {
-    const url = `${this.apiPath}${licenseId}/create-action-application/${encodeURIComponent(applicationType)}`;
+    const url = `${this.apiPath}${licenseId}/create-action-application?applicationType=${encodeURIComponent(applicationType)}`;
     return this.http.post<Application>(url, null, { headers: this.headers });
   }
 
   createApplicationForActionTypeTerm(licenseId: string, applicationType: string, termId: string): Observable<Application> {
-    const url = `${this.apiPath}${licenseId}/create-action-application-term/${termId}/${encodeURIComponent(applicationType)}`;
+    const url = `${this.apiPath}${licenseId}/create-action-application-term/${termId}?applicationType=${encodeURIComponent(applicationType)}`;
     return this.http.post<Application>(url, null, { headers: this.headers });
   }
 
