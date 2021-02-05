@@ -54,6 +54,15 @@ namespace bdd_tests
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
             }
 
+            if (bizType == "public corporation")
+            {
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+
+                // upload personal history summary documents
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+            }
+
             if (bizType == "private corporation")
             {
                 // upload a central securities register
@@ -162,7 +171,7 @@ namespace bdd_tests
             NgWebElement uiTransportDetails = ngDriver.FindElement(By.CssSelector("textarea#description3"));
             uiTransportDetails.SendKeys(transportDetails);
 
-            if ((bizType == "partnership") || (bizType == "society"))
+            if ((bizType == "partnership") || (bizType == "society") || (bizType == "public corporation"))
             {
                 // upload a store signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[8]");
