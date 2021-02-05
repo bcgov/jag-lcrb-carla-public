@@ -73,3 +73,21 @@ Scenario: DEV Catering Licensee Changes (Society)
     And I click on the Submit button
     And the account is deleted
     Then I see the login page
+
+@catering @licenseechanges @release
+Scenario: DEV Catering Licensee Changes (Public Corporation)
+    Given I am logged in to the dashboard as a public corporation
+    And I click on the Start Application button for Catering
+    And I review the account profile for a public corporation
+    And I complete the Catering application for a public corporation
+    And I click on the Submit button
+    And I enter the payment information
+    And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Dashboard tab
+    And I click on the button for Submit a Change
+    And I complete the Permanent Change to a Licensee application for a public corporation
+    And I click on the Submit button
+    And the account is deleted
+    Then I see the login page
