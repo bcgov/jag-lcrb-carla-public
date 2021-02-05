@@ -170,20 +170,20 @@ namespace bdd_tests
                     uiExternalTransferOfShares.Click();
 
                     // click on Change of Directors or Officers
-                    NgWebElement uiChangeOfDirectorsOrOfficers2 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
-                    uiChangeOfDirectorsOrOfficers2.Click();
+                    NgWebElement uiChangeOfDirectorsOrOfficersPrivateCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
+                    uiChangeOfDirectorsOrOfficersPrivateCorporation.Click();
                     
                     // click on Name Change, Licensee -- Corporation
                     NgWebElement uiNameChangeLicenseePrivateCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
                     uiNameChangeLicenseePrivateCorporation.Click();
                     
                     // click on Name Change, Person
-                    NgWebElement uiNameChangePerson2 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-7.mat-checkbox"));
-                    uiNameChangePerson2.Click();
+                    NgWebElement uiNameChangePersonPrivateCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-7.mat-checkbox"));
+                    uiNameChangePersonPrivateCorporation.Click();
                     
                     // click on Addition of Receiver or Executor
-                    NgWebElement uiAdditionOfReceiverOrExecutor2 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
-                    uiAdditionOfReceiverOrExecutor2.Click();
+                    NgWebElement uiAdditionOfReceiverOrExecutorPrivateCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
+                    uiAdditionOfReceiverOrExecutorPrivateCorporation.Click();
 
                     /* 
                     *  INTERNAL SHARE TRANSFER
@@ -256,12 +256,12 @@ namespace bdd_tests
                     */
 
                     // enter company name
-                    NgWebElement uiCompanyName = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
-                    uiCompanyName.SendKeys(companyName);
+                    NgWebElement uiCompanyNamePrivateCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
+                    uiCompanyNamePrivateCorporation.SendKeys(companyName);
 
                     // enter new company name
-                    NgWebElement uiNewCompanyName = ngDriver.FindElement(By.CssSelector("input#mat-input-1"));
-                    uiNewCompanyName.SendKeys(newCompanyName);
+                    NgWebElement uiNewCompanyNamePrivateCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-1"));
+                    uiNewCompanyNamePrivateCorporation.SendKeys(newCompanyName);
 
                     // upload certificate of name change
                     FileUpload("certificate_of_name_change.pdf", "(//input[@type='file'])[32]");
@@ -307,6 +307,114 @@ namespace bdd_tests
 
                     break;
 
+                case "public corporation":
+
+                    /* 
+                    *  TYPES OF CHANGES REQUESTED
+                    */
+
+                    // click on Change of Directors or Officers
+                    NgWebElement uiChangeOfDirectorsOrOfficersPublicCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
+                    uiChangeOfDirectorsOrOfficersPublicCorporation.Click();
+
+                    // click on Name Change, Licensee -- Corporation
+                    NgWebElement uiNameChangeLicenseePublicCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
+                    uiNameChangeLicenseePublicCorporation.Click();
+
+                    // click on Name Change, Person
+                    NgWebElement uiNameChangePersonPublicCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
+                    uiNameChangePersonPublicCorporation.Click();
+
+                    // click on Addition of Receiver or Executor
+                    NgWebElement uiAdditionOfReceiverOrExecutorPublicCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
+                    uiAdditionOfReceiverOrExecutorPublicCorporation.Click();
+
+                    /* 
+                    *  CHANGE OF DIRECTORS OR OFFICERS
+                    */
+
+                    // upload notice of articles
+                    FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+
+                    /* 
+                    *  PERSON'S NAME CHANGE
+                    */
+
+                    // enter person first name
+                    NgWebElement uiFirstNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-2"));
+                    uiFirstNamePublicCorporation.SendKeys(firstName);
+
+                    // enter person last name
+                    NgWebElement uiLastNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-3"));
+                    uiLastNamePublicCorporation.SendKeys(lastName);
+
+                    // enter person new first name
+                    NgWebElement uiNewFirstNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-4"));
+                    uiNewFirstNamePublicCorporation.SendKeys(newFirstName);
+
+                    // enter person new last name
+                    NgWebElement uiNewLastNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-5"));
+                    uiNewLastNamePublicCorporation.SendKeys(newLastName);
+
+                    // upload copy of marriage certificate
+                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[6]");
+
+                    /* 
+                    *  CORPORATION NAME CHANGE
+                    */
+
+                    // enter company name
+                    NgWebElement uiCompanyNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
+                    uiCompanyNamePublicCorporation.SendKeys(companyName);
+
+                    // enter new company name
+                    NgWebElement uiNewCompanyNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-1"));
+                    uiNewCompanyNamePublicCorporation.SendKeys(newCompanyName);
+
+                    // upload certificate of name change
+                    FileUpload("certificate_of_name_change.pdf", "(//input[@type='file'])[8]");
+
+                    /* 
+                    *  ADDITION OF EXECUTOR OR RECEIVER
+                    */
+
+                    // enter executor first name
+                    NgWebElement uiExecutorFirstNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-6"));
+                    uiExecutorFirstNamePublicCorporation.SendKeys(executorFirstName);
+
+                    // enter executor last name
+                    NgWebElement uiExecutorLastNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-7"));
+                    uiExecutorLastNamePublicCorporation.SendKeys(executorLastName);
+
+                    // upload assignment of executor
+                    FileUpload("assignment_of_executor.pdf", "(//input[@type='file'])[11]");
+
+                    // upload death certificate
+                    FileUpload("death_certificate.pdf", "(//input[@type='file'])[14]");
+
+                    // enter receiver first name
+                    NgWebElement uiReceiverFirstNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-8"));
+                    uiReceiverFirstNamePublicCorporation.SendKeys(receiverFirstName);
+
+                    // enter receiver last name
+                    NgWebElement uiReceiverLastNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-9"));
+                    uiReceiverLastNamePublicCorporation.SendKeys(receiverLastName);
+
+                    // upload receiver appointment order
+                    FileUpload("receiver_appointment_order.pdf", "(//input[@type='file'])[17]");
+
+                    // upload court order
+                    FileUpload("court_order.pdf", "(//input[@type='file'])[20]");
+
+                    /* 
+                    *  PERSONAL HISTORY SUMMARY FORMS
+                    */
+
+                    // upload Personal History Summary document
+                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[24]");
+
+                    break;
+
                 case "partnership":
 
                     /* 
@@ -318,12 +426,12 @@ namespace bdd_tests
                     uiNameChangeLicenseePartnership.Click();
                     
                     // click on Name Change, Person
-                    NgWebElement uiNameChangePerson3 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
-                    uiNameChangePerson3.Click();
+                    NgWebElement uiNameChangePersonPartnership = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
+                    uiNameChangePersonPartnership.Click();
                     
                     // click on Addition of Receiver or Executor
-                    NgWebElement uiAdditionOfReceiverOrExecutor3 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
-                    uiAdditionOfReceiverOrExecutor3.Click();
+                    NgWebElement uiAdditionOfReceiverOrExecutorPartnership = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
+                    uiAdditionOfReceiverOrExecutorPartnership.Click();
                     
                     // enter person first name
                     NgWebElement uiFirstNamePartnership = ngDriver.FindElement(By.CssSelector("input#mat-input-2"));
@@ -356,12 +464,12 @@ namespace bdd_tests
                     FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[5]");
                     
                     // enter executor first name
-                    NgWebElement uiExecutorFirstName = ngDriver.FindElement(By.CssSelector("input#mat-input-6"));
-                    uiExecutorFirstName.SendKeys(executorFirstName);
+                    NgWebElement uiExecutorFirstNamePartnership = ngDriver.FindElement(By.CssSelector("input#mat-input-6"));
+                    uiExecutorFirstNamePartnership.SendKeys(executorFirstName);
                     
                     // enter executor last name
-                    NgWebElement uiExecutorLastName = ngDriver.FindElement(By.CssSelector("input#mat-input-7"));
-                    uiExecutorLastName.SendKeys(executorLastName);
+                    NgWebElement uiExecutorLastNamePartnership = ngDriver.FindElement(By.CssSelector("input#mat-input-7"));
+                    uiExecutorLastNamePartnership.SendKeys(executorLastName);
                     
                     // upload assignment of executor
                     FileUpload("assignment_of_executor.pdf", "(//input[@type='file'])[8]");
@@ -370,12 +478,12 @@ namespace bdd_tests
                     FileUpload("death_certificate.pdf", "(//input[@type='file'])[11]");
                     
                     // enter receiver first name
-                    NgWebElement uiReceiverFirstName = ngDriver.FindElement(By.CssSelector("input#mat-input-8"));
-                    uiReceiverFirstName.SendKeys(receiverFirstName);
+                    NgWebElement uiReceiverFirstNamePartnership = ngDriver.FindElement(By.CssSelector("input#mat-input-8"));
+                    uiReceiverFirstNamePartnership.SendKeys(receiverFirstName);
                     
                     // enter receiver last name
-                    NgWebElement uiReceiverLastName = ngDriver.FindElement(By.CssSelector("input#mat-input-9"));
-                    uiReceiverLastName.SendKeys(receiverLastName);
+                    NgWebElement uiReceiverLastNamePartnership = ngDriver.FindElement(By.CssSelector("input#mat-input-9"));
+                    uiReceiverLastNamePartnership.SendKeys(receiverLastName);
 
                     // upload receiver appointment order
                     FileUpload("receiver_appointment_order.pdf", "(//input[@type='file'])[14]");
@@ -407,9 +515,6 @@ namespace bdd_tests
             // select the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
-
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,53454300.00')]")).Displayed);
-
         }
     }
 }
