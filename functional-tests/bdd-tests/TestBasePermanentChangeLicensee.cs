@@ -153,6 +153,10 @@ namespace bdd_tests
                     NgWebElement uiAdditionOfReceiverOrExecutor2 = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
                     uiAdditionOfReceiverOrExecutor2.Click();
 
+                    /* 
+                    *  INTERNAL SHARE TRANSFER
+                    */
+
                     // upload Central Securities Register document
                     FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
@@ -172,8 +176,12 @@ namespace bdd_tests
                     // upload notice of articles for amalgamated company
                     FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[15]");
 
-                    // upload Personal History Summary document - to be fixed
-                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[18]");
+                    /* 
+                    *  EXTERNAL SHARE TRANSFER
+                    */
+
+                    // upload central securities register
+                    FileUpload("central_securities_register.pdf", "(//input[@type='file'])[18]");
 
                     // upload supporting business documentation
                     FileUpload("associates.pdf", "(//input[@type='file'])[21]");
@@ -181,8 +189,16 @@ namespace bdd_tests
                     // upload shareholders < 10% interest
                     FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[24]");
 
+                    /* 
+                    *  CHANGE OF DIRECTORS OR OFFICERS
+                    */
+
                     // upload notice of articles
                     FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[27]");
+
+                    /* 
+                    *  PERSON'S NAME CHANGE
+                    */
 
                     // enter person first name
                     NgWebElement uiFirstNamePrivateCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-2"));
