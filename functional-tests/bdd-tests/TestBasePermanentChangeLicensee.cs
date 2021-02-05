@@ -34,6 +34,8 @@ namespace bdd_tests
             string lastName = "Lastname";
             string newFirstName = "Newfirstname";
             string newLastName = "Newlastname";
+            string societyName = "Societyname";
+            string newSocietyName = "Newsocietyname";
             string partnershipName = "Partnershipname";
             string newPartnershipName = "Newpartnershipname";
             string companyName = "Companyname";
@@ -46,7 +48,11 @@ namespace bdd_tests
             switch (appType)
             {
                 case "society":
-                    
+
+                    /* 
+                    *  TYPES OF CHANGES REQUESTED
+                    */
+
                     // click on Change of Directors or Officers
                     NgWebElement uiChangeOfDirectorsOrOfficers = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
                     uiChangeOfDirectorsOrOfficers.Click();
@@ -62,9 +68,17 @@ namespace bdd_tests
                     // click on Addition of Receiver or Executor
                     NgWebElement uiAdditionOfReceiverOrExecutor = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
                     uiAdditionOfReceiverOrExecutor.Click();
-                    
+
+                    /* 
+                    *  CHANGE OF DIRECTORS OR OFFICERS
+                    */
+
                     // upload notice of articles
                     FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+
+                    /* 
+                    *  PERSON'S NAME CHANGE
+                    */
 
                     // enter person first name
                     NgWebElement uiFirstNameSociety = ngDriver.FindElement(By.CssSelector("input#mat-input-2"));
@@ -85,16 +99,24 @@ namespace bdd_tests
                     // upload copy of marriage certificate
                     FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[6]");
 
+                    /* 
+                    *  SOCIETY NAME CHANGE
+                    */
+
                     // enter society name
                     NgWebElement uiSocietyName = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
-                    uiSocietyName.SendKeys(partnershipName);
+                    uiSocietyName.SendKeys(societyName);
 
                     // enter society name
                     NgWebElement uiNewSocietyName = ngDriver.FindElement(By.CssSelector("input#mat-input-1"));
-                    uiNewSocietyName.SendKeys(newPartnershipName);
+                    uiNewSocietyName.SendKeys(newSocietyName);
 
                     // upload name change certificate
                     FileUpload("certificate_of_name_change.pdf", "(//input[@type='file'])[8]");
+
+                    /* 
+                    *  ADDITION OF EXECUTOR OR RECEIVER
+                    */
 
                     // enter executor first name
                     NgWebElement uiExecutorFirstNameSociety = ngDriver.FindElement(By.CssSelector("input#mat-input-6"));
@@ -124,12 +146,20 @@ namespace bdd_tests
                     // upload court order
                     FileUpload("court_order.pdf", "(//input[@type='file'])[20]");
 
+                    /* 
+                    *  PERSONAL HISTORY SUMMARY FORMS
+                    */
+
                     // upload Personal History Summary document
                     FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[24]");
 
                     break;
 
                 case "private corporation":
+
+                    /* 
+                    *  TYPES OF CHANGES REQUESTED
+                    */
 
                     // click on Internal Transfer of Shares
                     NgWebElement uiInternalTransferOfShares = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
@@ -278,7 +308,11 @@ namespace bdd_tests
                     break;
 
                 case "partnership":
-                    
+
+                    /* 
+                    *  TYPES OF CHANGES REQUESTED
+                    */
+
                     // click on Name Change, Licensee -- Partnership
                     NgWebElement uiNameChangeLicenseePartnership = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
                     uiNameChangeLicenseePartnership.Click();
@@ -355,7 +389,11 @@ namespace bdd_tests
                     break;
 
                 case "sole proprietorship":
-                    
+
+                    /* 
+                    *  TYPES OF CHANGES REQUESTED
+                    */
+
                     // upload Personal History Summary document
                     FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
                     
@@ -369,6 +407,9 @@ namespace bdd_tests
             // select the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
+
+            //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,53454300.00')]")).Displayed);
+
         }
     }
 }
