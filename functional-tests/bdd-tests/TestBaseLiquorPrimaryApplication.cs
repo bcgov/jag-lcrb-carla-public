@@ -47,8 +47,8 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
-            string localGovernmentSaanich = "Saanich";
-            string policeJurisdictionSaanich = "Saanich Police Department";
+            string localGovernmentParksville = "Parksville";
+            string policeJurisdictionParksville = "RCMP Oceanside";
 
             string floorAreaDescription = "Sample floor area.";
             string occupantLoad = "180";
@@ -113,18 +113,18 @@ namespace bdd_tests
                 FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[17]");
             }
 
-            // search for and select Saanich as the local government
+            // search for and select Parksville as the local government
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
-            uiIndigenousNation.SendKeys(localGovernmentSaanich);
+            uiIndigenousNation.SendKeys(localGovernmentParksville);
 
-            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
+            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
             uiIndigenousNation2.Click();
 
-            // search for and select Saanich as the police jurisdiction
+            // search for and select RCMP Oceanside as the police jurisdiction
             NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
-            uiPoliceJurisdiction.SendKeys(policeJurisdictionSaanich);
+            uiPoliceJurisdiction.SendKeys(policeJurisdictionParksville);
 
-            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-6 span"));
+            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
             uiPoliceJurisdiction2.Click();
 
             // enter the store email
