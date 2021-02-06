@@ -18,6 +18,11 @@ export class LicenseDataService extends DataService {
     super();
   }
 
+  getAutocomplete(search: string): Observable<any[]> {
+    return this.http.get<any[]>(this.apiPath + `autocomplete?name=${search}`, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   getLicenceById(licenseId: string): Observable<License> {
     const url = `${this.apiPath}${licenseId}`;
     return this.http.get<License>(url, { headers: this.headers });
