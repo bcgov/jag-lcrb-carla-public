@@ -77,6 +77,7 @@ import { OffsiteStorageComponent } from "@components/offsite-storage/offsite-sto
 import { NoticesComponent } from "@components/notices/notices.component";
 import { LicenseeRetailStoresComponent } from "./components/licensee-retail-stores/licensee-retail-stores.component";
 import { TuaEventComponent } from "@components/tua-event/tua-event.component";
+import { ApplicationTiedHouseExemptionComponent } from "@components/applications/application-tied-house-exemption/application-tied-house-exemption.component";
 
 const routes: Routes = [
   {
@@ -303,6 +304,12 @@ const routes: Routes = [
   {
     path: "ownership-transfer/:licenceId",
     component: ApplicationOwnershipTransferComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  
+  {
+    path: "tied-house-exemption/:licenceId",
+    component: ApplicationTiedHouseExemptionComponent,
     canActivate: [BCeidAuthGuard]
   },
   {

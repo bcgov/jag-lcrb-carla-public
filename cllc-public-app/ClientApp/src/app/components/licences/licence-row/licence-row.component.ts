@@ -212,6 +212,14 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return result;
   }
 
+  showTiedHouseExemption(item: ApplicationLicenseSummary) {
+    const result = this.isActive(item) &&
+      this.actionsVisible(item) &&
+      item.licenceTypeName === "Manufacturer";
+    return result;
+  }
+
+
   showAddOrChangeThirdPartyOperator(item: ApplicationLicenseSummary): boolean {
     const result = this.isActive(item) &&
       this.actionsVisible(item) &&

@@ -50,6 +50,52 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _fileManagerClient = fileClient;
         }
 
+        /// <summary>
+        /// Get Autocomplete data for a licence search
+        /// </summary>
+        /// <param name="name">The name to filter by using startswith</param>
+        /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
+        [HttpGet("autocomplete")]
+        [Authorize(Policy = "Business-User")]
+        public List<RelatedLicence> GetAutocomplete(string name)
+        {
+            var results = new List<RelatedLicence>();
+            try
+            {
+                string filter = null;
+                // escape any apostophes.
+                if (name != null)
+                {
+                    name = name.Replace("'", "''");
+                    // select active licences that match the given name
+                    filter = $"statecode eq 0 and contains(name,'{name}')";
+                }
+                var expand = new List<string> {"adoxio_Licencee", "adoxio_establishment" };
+                var licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, top: 10).Value;
+                foreach (var licence in licences)
+                {
+                    var relatedLicence = new RelatedLicence
+                    {
+                        Id = licence.AdoxioLicencesid,
+                        EstablishmentName = licence.AdoxioEstablishment.AdoxioName,
+                        Licensee = licence.AdoxioLicencee.Name
+
+                    };
+                    results.Add(relatedLicence);
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error while getting autocomplete data.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error while getting autocomplete data.");
+            }
+
+            return results;
+        }
+
         /// GET licence by id
         [HttpGet("{id}")]
         public IActionResult GetLicence(string id)
@@ -1360,6 +1406,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return new UnauthorizedResult();
         }
+
+
 
         [HttpPut("{licenceId}/ldbordertotals")]
         public async Task<IActionResult> UpdateLicenceLDBOrderTotals([FromBody] int total, string licenceId)

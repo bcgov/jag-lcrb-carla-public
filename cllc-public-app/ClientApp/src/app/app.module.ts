@@ -263,6 +263,8 @@ import { WorkerDataService } from "@services/worker-data.service";
 import { TuaEventComponent } from "@components/tua-event/tua-event.component";
 import { EventLocationTableComponent } from "@components/tables/event-location-table/event-location-table.component";
 import { ResolvedApplicationsComponent } from './components/lg-approvals/resolved-applications/resolved-applications.component';
+import { RelatedLicencePickerComponent } from './shared/components/related-licence-picker/related-licence-picker.component';
+import { ApplicationTiedHouseExemptionComponent } from './components/applications/application-tied-house-exemption/application-tied-house-exemption.component';
 
 @NgModule({
   declarations: [
@@ -400,6 +402,8 @@ import { ResolvedApplicationsComponent } from './components/lg-approvals/resolve
     TuaEventComponent,
     EventLocationTableComponent,
     ResolvedApplicationsComponent,
+    RelatedLicencePickerComponent,
+    ApplicationTiedHouseExemptionComponent,
   ],
   imports: [
     AppRoutingModule,
