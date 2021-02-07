@@ -18,7 +18,7 @@ Scenario: Food Primary Release Test (Private Corporation)
     # LCSD-4908
     # And I request a valid store name or branding change for Food Primary
     # And I click on the Licences tab
-    And I request a change in terms and conditions application
+    # And I request a change in terms and conditions application
     And I click on the link for Download Licence
     And I request a licensee representative
     And I click on the link for New Outdoor Patio
