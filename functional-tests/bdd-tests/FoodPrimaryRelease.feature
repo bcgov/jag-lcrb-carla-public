@@ -21,11 +21,12 @@ Scenario: Food Primary Release Test (Private Corporation)
     # And I request a change in terms and conditions application
     And I click on the link for Download Licence
     And I request a licensee representative
+    # LCSD-4909
     # And I click on the link for New Outdoor Patio
-    And I request a new outdoor patio application
-    And I click on the Submit button
-    And I enter the payment information
-    And I click on the Licences tab
+    # And I request a new outdoor patio application
+    # And I click on the Submit button
+    # And I enter the payment information
+    # And I click on the Licences tab
     And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
     And I click on the Submit button
