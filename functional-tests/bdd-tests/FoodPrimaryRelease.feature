@@ -37,9 +37,10 @@ Scenario: Food Primary Release Test (Private Corporation)
     # And I click on the Licences tab
     # And I click on the link for Structural Change Application
     # And I submit a Food Primary structural change application
-    And I click on the Licences tab
-    And I click on the link for Temporary Extension of Licensed Area
-    And I submit a temporary extension of licensed area application
+    # LCSD-4911
+    # And I click on the Licences tab
+    # And I click on the link for Temporary Extension of Licensed Area
+    # And I submit a temporary extension of licensed area application
     And I click on the Licences tab
     And I click on the link for Temporary Use Area Endorsement Application
     And I submit a temporary use area endorsement application
