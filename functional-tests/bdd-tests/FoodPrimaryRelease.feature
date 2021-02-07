@@ -33,9 +33,10 @@ Scenario: Food Primary Release Test (Private Corporation)
     And I click on the Licences tab
     And I click on the link for Relocation Application
     And I request a Food Primary relocation application
-    And I click on the Licences tab
-    And I click on the link for Structural Change Application
-    And I submit a Food Primary structural change application
+    # LCSD-4910
+    # And I click on the Licences tab
+    # And I click on the link for Structural Change Application
+    # And I submit a Food Primary structural change application
     And I click on the Licences tab
     And I click on the link for Temporary Extension of Licensed Area
     And I submit a temporary extension of licensed area application
