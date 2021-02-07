@@ -19,8 +19,9 @@ Scenario: DEV UBrew / UVin Application Release Test (Private Corporation)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Download Licence
-    And I request a valid store name or branding change for UBrew
-    And I click on the Licences tab
+    # LCSD-4908
+    # And I request a valid store name or branding change for UBrew
+    # And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
