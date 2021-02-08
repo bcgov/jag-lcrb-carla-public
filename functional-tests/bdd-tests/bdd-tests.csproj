@@ -126,7 +126,7 @@
     <None Update="CateringApplicationDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ChangeHoursLiquorService.feature">
+    <None Update="ManufacturerChangeHoursLiquorService.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationLicensingRenewalDenied.feature">

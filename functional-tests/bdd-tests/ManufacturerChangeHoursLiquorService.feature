@@ -1,4 +1,4 @@
-﻿Feature: ChangeHoursLiquorService
+﻿Feature: ManufacturerChangeHoursLiquorService
     As a logged in business user
     I want to update the liquor hours of service for lounge areas and special events
 
