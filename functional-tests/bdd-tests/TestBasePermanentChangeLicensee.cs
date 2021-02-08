@@ -502,8 +502,27 @@ namespace bdd_tests
                     *  TYPES OF CHANGES REQUESTED
                     */
 
+                    // click on Name Change, Licensee -- Corporation
+                    NgWebElement uiNameChangeLicenseeSoleProprietorship = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
+                    uiNameChangeLicenseeSoleProprietorship.Click();
+
+                    /* 
+                    *  CORPORATION NAME CHANGE
+                    */
+
+                    // enter company name
+                    NgWebElement uiCompanyNameSoleProprietorship = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
+                    uiCompanyNameSoleProprietorship.SendKeys(companyName);
+
+                    // enter new company name
+                    NgWebElement uiNewCompanyNameSoleProprietorship = ngDriver.FindElement(By.CssSelector("input#mat-input-1"));
+                    uiNewCompanyNameSoleProprietorship.SendKeys(newCompanyName);
+
+                    // upload certificate of name change
+                    FileUpload("certificate_of_name_change.pdf", "(//input[@type='file'])[3]");
+
                     // upload Personal History Summary document
-                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
+                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
                     
                     break;
             }
