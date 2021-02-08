@@ -215,7 +215,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   showTiedHouseExemption(item: ApplicationLicenseSummary) {
     const result = this.isActive(item) &&
       this.actionsVisible(item) &&
-      item.licenceTypeName === "Manufacturer";
+      item.licenceTypeName === ApplicationTypeNames.MFG;
     return result;
   }
 

@@ -130,7 +130,7 @@
       <app-field label="Search for the business name you intend to transfer your {{licence?.licenseType}} licence to:"
                  errorMessage="Please select a value" [required]="true"
                  [valid]="isValidOrNotTouched('proposedOwner.accountId')">
-        <app-related-licence-picker (valueSelected)="onAccountSelect($event)"></app-related-licence-picker>
+        <app-related-licence-picker (valueSelected)="onLicenceSelect($event)"></app-related-licence-picker>
       </app-field>
     
       <label>Licence Name: </label> <span> {{form.get('proposedOwner.accountName')?.value}}</span> <br>
