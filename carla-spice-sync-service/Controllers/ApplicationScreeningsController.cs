@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
             Configuration = configuration;
             _loggerFactory = loggerFactory;
             _logger = loggerFactory.CreateLogger(typeof(ApplicationScreeningsController));
-            _spiceUtils = new SpiceUtils(Configuration, _loggerFactory);
+            _spiceUtils = new SpiceUtils(Configuration);
         }
 
         /// <summary>
@@ -40,11 +40,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
             // Process the updates received from the SPICE system.
             if (!string.IsNullOrEmpty(Configuration["FEATURE_LE_CONNECTIONS"]))
             {
-                BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJobV2(null, results));
+                BackgroundJob.Enqueue(() => new SpiceUtils(Configuration).ReceiveApplicationImportJobV2(null, results));
             }
             else
             {
-                BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJob(null, results));
+                BackgroundJob.Enqueue(() => new SpiceUtils(Configuration).ReceiveApplicationImportJob(null, results));
             }
             _logger.LogInformation("Started receive completed Application Screening job");
             return Ok();
