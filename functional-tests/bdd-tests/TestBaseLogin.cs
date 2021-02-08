@@ -174,10 +174,10 @@ namespace bdd_tests
         }
 
 
-        [And(@"I log in as local government for Saanich")]
+        [And(@"I log in as local government for Parksville")]
         public void LocalGovernmentLogin()
         {
-            string localGovt = "login/token/Saanich";
+            string localGovt = "login/token/Parksville";
             ngDriver.Navigate().GoToUrl($"{baseUri}{localGovt}");
 
         }
