@@ -24,22 +24,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         private IDynamicsClient _dynamicsClient;
         public ISpiceClient SpiceClient;
 
-        public SpiceUtils(IConfiguration configuration, params DelegatingHandler[] handlers)
+        public SpiceUtils(IConfiguration configuration)
         {
             this.Configuration = configuration;
             _dynamicsClient = DynamicsSetupUtil.SetupDynamics(configuration);
             SpiceClient = new SpiceClient(new HttpClient(), configuration);
-        }
-
-        public SpiceClient SetupSpiceClient(IConfiguration Configuration, params DelegatingHandler[] handlers)
-        {
-            string spiceURI = Configuration["SPICE_URI"];
-            string token = Configuration["SPICE_JWT_TOKEN"];
-
-            // create JWT credentials
-            TokenCredentials credentials = new TokenCredentials(token);
-
-            return new SpiceClient(new Uri(spiceURI), credentials, handlers);
         }
 
         public void ReceiveWorkerImportJob(PerformContext hangfireContext, List<CompletedWorkerScreening> responses)
