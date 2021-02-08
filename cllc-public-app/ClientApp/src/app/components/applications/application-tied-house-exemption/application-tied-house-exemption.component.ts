@@ -16,6 +16,7 @@ import { LicenseDataService } from "@services/license-data.service";
 import { License } from "@models/license.model";
 import { faSave } from "@fortawesome/free-regular-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { RelatedLicence } from "@models/related-licence";
 
 const ValidationErrorMap = {
   "proposedOwner.accountId": "Please select the proposed transferee",
@@ -150,15 +151,15 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
-    return this.licenseDataService.initiateTransfer(this.licence.id, this.form.get("proposedOwner.accountId").value)
+    return this.licenseDataService.initiateTiedHouseExcemption(this.licence.id, this.form.get("relatedLicence.licenceId").value)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
-        this.snackBar.open("Error submitting transfer", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+        this.snackBar.open("Error submitting tied house excemption", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         return of(false);
       }))
       .pipe(mergeMap(() => {
         if (showProgress === true) {
-          this.snackBar.open("Transfer has been initiated",
+          this.snackBar.open("Tied House Excemption Request has been sent",
             "Success",
             { duration: 2500, panelClass: ["green-snackbar"] });
         }
@@ -167,9 +168,9 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
   }
 
   /**
-  * Initiate licence transfer
+  * Create the application
   * */
-  initiateTransfer() {
+  createApplication() {
     if (!this.isValid()) {
       this.showValidationMessages = true;
     } else {
@@ -218,8 +219,8 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       -1;
   }
 
-  onAccountSelect(proposedAccount: TransferAccount) {
-    this.form.get("proposedOwner").patchValue(proposedAccount);
+  onLicenceSelect(relatedLicence: RelatedLicence) {
+    this.form.get("relatedLicence").patchValue(relatedLicence);
   }
 
 }

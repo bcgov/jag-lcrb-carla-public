@@ -7,6 +7,8 @@
         public static string ApplicationPrefix { get { return "_APP_"; } }
         public static string ApplicationTypePrefix { get { return "_AT_"; } }
         public static string LicenceTypePrefix { get { return "_LT_"; } }
+
+        public static string LicenceTypeIDByNamePrefix { get { return "_LTIDN_"; } }
         public static string PicklistTypePrefix { get { return "_PL_"; } }
     }
 }

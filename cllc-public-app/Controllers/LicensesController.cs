@@ -60,29 +60,50 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public List<RelatedLicence> GetAutocomplete(string name)
         {
             var results = new List<RelatedLicence>();
+            string crsId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.CannabisRetailStore, _cache);
+            string marketingId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Marketing, _cache);            
+            string manufacturerId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Marketing, _cache);
+            string cateringId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Catering, _cache);
+            string ubvId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.UBV, _cache);
+            string agentId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Agent, _cache);
+            
             try
             {
+                
                 string filter = null;
                 // escape any apostophes.
-                if (name != null)
+                if (!string.IsNullOrEmpty(name) && crsId != null && marketingId != null && manufacturerId != null && cateringId != null && ubvId != null && agentId != null)
                 {
                     name = name.Replace("'", "''");
                     // select active licences that match the given name
-                    filter = $"statecode eq 0 and contains(name,'{name}')";
-                }
-                var expand = new List<string> {"adoxio_Licencee", "adoxio_establishment" };
-                var licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, top: 10).Value;
-                foreach (var licence in licences)
-                {
-                    var relatedLicence = new RelatedLicence
-                    {
-                        Id = licence.AdoxioLicencesid,
-                        EstablishmentName = licence.AdoxioEstablishment.AdoxioName,
-                        Licensee = licence.AdoxioLicencee.Name
+                    filter = $"_adoxioLicencetypeValue ne {crsId} and "
+                        + $"_adoxioLicencetypeValue ne {marketingId} and "
+                        + $"_adoxioLicencetypeValue ne {manufacturerId} and "
+                        + $"_adoxioLicencetypeValue ne {cateringId} and "
+                        + $"_adoxioLicencetypeValue ne {ubvId} and "                        
+                        + $"_adoxioLicencetypeValue ne {agentId} and "
+                        + $"statecode eq 0 and contains(name,'{name}')";
 
-                    };
-                    results.Add(relatedLicence);
+                    var expand = new List<string> {"adoxio_Licencee", "adoxio_establishment" };
+                    var licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, top: 10).Value;
+                    foreach (var licence in licences)
+                    {
+                        var relatedLicence = new RelatedLicence
+                        {
+                            Id = licence.AdoxioLicencesid,
+                            Name = licence.AdoxioName,
+                            EstablishmentName = licence.AdoxioEstablishment.AdoxioName,
+                            Streetaddress = licence.AdoxioEstablishment.AdoxioAddressstreet,
+                            City = licence.AdoxioEstablishment.AdoxioAddressstreet,
+                            Provstate = "BC",
+                            Country = "CANADA",
+                            PostalCode =  licence.AdoxioEstablishment.AdoxioAddresspostalcode, 
+                            Licensee = licence.AdoxioLicencee.Name
+                        };
+                        results.Add(relatedLicence);
+                    }
                 }
+                
             }
             catch (HttpOperationException httpOperationException)
             {
