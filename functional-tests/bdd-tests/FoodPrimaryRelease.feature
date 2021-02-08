@@ -3,7 +3,7 @@
     I want to run a release test for a Food Primary licence
 
 @foodprimary @privatecorporation @release
-Scenario: Food Primary Release Test (Private Corporation)
+Scenario: Food Primary Release Test #1 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -33,6 +33,18 @@ Scenario: Food Primary Release Test (Private Corporation)
     And I click on the Licences tab
     And I click on the link for Relocation Application
     And I request a Food Primary relocation application
+    And the account is deleted
+    Then I see the login page
+
+@foodprimary @privatecorporation @release
+Scenario: Food Primary Release Test #2 (Private Corporation)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for Food Primary
+    And I review the account profile for a private corporation
+    And I complete the Food Primary application for a private corporation
+    And I click on the Submit button
+    And I enter the payment information
+    And the application is approved
     # LCSD-4910
     # And I click on the Licences tab
     # And I click on the link for Structural Change Application
