@@ -93,12 +93,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 SetupSharePoint(services);
             }
 
-            // determine if we wire up the SPICE service
-            if (!string.IsNullOrEmpty(_configuration["SPICE_URI"]))
-            {
-                SetupSpice(services);
-            }
-
             services.AddHangfire(config =>
             {
                 // Change this line if you wish to have Hangfire use persistent storage.
@@ -116,14 +110,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         {
             // add SharePoint.
             services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(_configuration));
-        }
-
-        private void SetupSpice(IServiceCollection services)
-        {
-            string spiceSsgUsername = _configuration["SPICE_SSG_USERNAME"];
-            string spiceSsgPassword = _configuration["SPICE_SSG_PASSWORD"];
-            
-            services.AddHttpClient<ISpiceClient, SpiceClient> ();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
