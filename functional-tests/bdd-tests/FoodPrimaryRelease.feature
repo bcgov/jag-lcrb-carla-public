@@ -15,32 +15,37 @@ Scenario: Food Primary Release Test (Private Corporation)
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I request a valid store name or branding change for Food Primary
-    And I click on the Licences tab
-    And I request a change in terms and conditions application
+    # LCSD-4908
+    # And I request a valid store name or branding change for Food Primary
+    # And I click on the Licences tab
+    # And I request a change in terms and conditions application
     And I click on the link for Download Licence
     And I request a licensee representative
-    And I click on the link for New Outdoor Patio
-    And I request a new outdoor patio application
-    And I click on the Submit button
-    And I enter the payment information
-    And I click on the Licences tab
+    # LCSD-4909
+    # And I click on the link for New Outdoor Patio
+    # And I request a new outdoor patio application
+    # And I click on the Submit button
+    # And I enter the payment information
+    # And I click on the Licences tab
     And I click on the link for Patron Participation Entertainment Endorsement
     And I request a Patron Participation Entertainment Endorsement application
     And I click on the Submit button
     And I click on the Licences tab
     And I click on the link for Relocation Application
     And I request a Food Primary relocation application
-    And I click on the Licences tab
-    And I click on the link for Structural Change Application
-    And I submit a Food Primary structural change application
-    And I click on the Licences tab
-    And I click on the link for Temporary Extension of Licensed Area
-    And I submit a temporary extension of licensed area application
+    # LCSD-4910
+    # And I click on the Licences tab
+    # And I click on the link for Structural Change Application
+    # And I submit a Food Primary structural change application
+    # LCSD-4911
+    # And I click on the Licences tab
+    # And I click on the link for Temporary Extension of Licensed Area
+    # And I submit a temporary extension of licensed area application
     And I click on the Licences tab
     And I click on the link for Temporary Use Area Endorsement Application
     And I submit a temporary use area endorsement application
     And I click on the Licences tab
+    And I click on the link for Catering Endorsement Application
     And I request a catering endorsement application
     And I click on the Submit button
     And I enter the payment information
