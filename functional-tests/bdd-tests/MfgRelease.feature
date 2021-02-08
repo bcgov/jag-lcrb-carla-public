@@ -13,12 +13,10 @@ Scenario: DEV Manufacturer Release #1 (Winery/Private Corporation)
     And the application is approved
     And I pay the licensing fee
     And I click on the link for Download Licence
-    # LCSD-4908
-    # And I request a valid store name or branding change for Manufacturing
-    # And I click on the Licences tab
-    # LCSD-4912
-    # And I request a facility structural change
-    # And I click on the Licences tab
+    And I request a valid store name or branding change for Manufacturing
+    And I click on the Licences tab
+    And I request a facility structural change
+    And I click on the Licences tab
     And I request a relocation change
     And I click on the Licences tab
     And I request a lounge area endorsement
@@ -47,21 +45,19 @@ Scenario: DEV Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
     And I click on the Licences tab
-    # LCSD-4913
-    # And I complete the change hours application for a lounge area within service hours
-    # And I click on the Submit button
-    # And I enter the payment information
-    # And I click on the Licences tab
-    # And I click on the link for Manage Off-Site Storage
-    # And I complete the offsite storage application
-    # And I click on the secondary Submit button
-    # And I request an on-site store endorsement
-    # And I click on the Licences tab
-    # LCSD-4914
-    # And the on-site endorsement application is approved
-    # And I request a market event for one date only
-    # And I click on the secondary Submit button
-    # And I click on the Licences tab
+    And I complete the change hours application for a lounge area within service hours
+    And I click on the Submit button
+    And I enter the payment information
+    And I click on the Licences tab
+    And I click on the link for Manage Off-Site Storage
+    And I complete the offsite storage application
+    And I click on the secondary Submit button
+    And I request an on-site store endorsement
+    And I click on the Licences tab
+    And the on-site endorsement application is approved
+    And I request a market event for one date only
+    And I click on the secondary Submit button
+    And I click on the Licences tab
     And I request a third party operator
     And I request a transfer of ownership
     And the account is deleted
