@@ -273,9 +273,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current/lg-approvals")]
         public IActionResult GetLgApprovalApplications()
         {
-            var results = new PagingResult<Application>(){
-                Value = new List<Application>()
-            };
+            var results = new List<Application>();
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
@@ -310,7 +308,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     foreach (var dynamicsApplication in applications)
                     {
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
-                        results.Value.Add(viewModel);
+                        results.Add(viewModel);
                     }
                 }                
             }
@@ -338,7 +336,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current/resolved-lg-applications")]
         public IActionResult GetResolvedLGApplications([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
-            var results = new PagingResult<Application>();
+            var results = new PagingResult<Application>(){
+                Value = new List<Application>()
+            };
 
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -1457,19 +1457,5 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _dynamicsClient.Serviceareas.Create(serviceArea);
             }
         }
-    }
-
-    public class PermanentChangesPageData
-    {
-        public List<ApplicationLicenseSummary> Licences { get; set; }
-        public Application Application { get; set; }
-
-        public PaymentResult Primary { get; set; }
-        public PaymentResult Secondary { get; set; }
-    }
-
-    public class PagingResult<T> {
-        public int Count { get; set; }
-        public List<T> Value { get; set; }
     }
 }
