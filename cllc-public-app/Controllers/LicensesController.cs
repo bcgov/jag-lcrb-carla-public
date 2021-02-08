@@ -456,6 +456,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
+        [HttpPost("initiate-tied-house-excemption")]
+        public ActionResult InitiateTiedHouseExcemption(TiedHouseExcemptionRequest item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            // check access to licence
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.GetLicenceByIdWithChildren(item.LicenceId);
+            if (adoxioLicense == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            // create a new application.
+            var application = CreateApplication(item.LicenceId, ApplicationTypeNames.TiedHouseExcemption, item.RelatedLicenceId);
+            
+            return Ok();
+        }
+
+        
+
         /// <summary>
         /// Set expiry for a given licence to different dates as specified by workflow GUIDs.  Only useful for automated testing.
         /// </summary>
@@ -698,7 +726,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication CreateApplication(string licenceId, string applicationTypeName)
+        private MicrosoftDynamicsCRMadoxioApplication CreateApplication(string licenceId, string applicationTypeName, string relatedLicenceId = null)
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -755,6 +783,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (adoxioLicense.AdoxioEstablishment != null)
             {
                 application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
+            }
+
+            // check to see if there is a related licence.
+
+            if (relatedLicenceId != null)
+            {
+                var relatedLicence = _dynamicsClient.GetLicenceByIdWithChildren(relatedLicenceId);
+                // set the establishment address to be that of the related licence.
+                application.AdoxioEstablishmentaddressstreet = relatedLicence.AdoxioEstablishment.AdoxioAddressstreet;
+                application.AdoxioEstablishmentaddresscity = relatedLicence.AdoxioEstablishment.AdoxioAddresscity;
+                application.AdoxioEstablishmentaddresspostalcode = relatedLicence.AdoxioEstablishment.AdoxioAddresspostalcode;
+
+                // TODO - the following fields do not appear to be in Dynamics yet
+
+                // Assigned Licensee == Licensee of selected licence
+                // Related Licence == Licence lookup of the manufacturers' licence
+
             }
 
             try
@@ -1565,6 +1610,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class LicenceTransfer
     {
         public string AccountId { get; set; }
+        public string LicenceId { get; set; }
+    }
+
+    public class TiedHouseExcemptionRequest
+    {
+        public string RelatedLicenceId { get; set; }
         public string LicenceId { get; set; }
     }
 }
