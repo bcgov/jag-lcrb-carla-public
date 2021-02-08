@@ -29,7 +29,7 @@ Scenario: DEV Lounge Area Within Service Hours (Private Corporation)
     And I pay the licensing fee
     And I click on the Licences tab
     And I complete the change hours application for a lounge area within service hours
-    And I click on the secondary Submit button
+    And I click on the LG Submit button
     And I enter the payment information
     And the account is deleted
     Then I see the login page
@@ -46,7 +46,7 @@ Scenario: DEV Lounge Area Outside Service Hours (Private Corporation)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I complete the change hours application for a lounge area outside of service hours
-    And I click on the secondary Submit button
+    And I click on the LG Submit button
     And I click on the link for Dashboard
     And the dashboard status is updated as Pending External Review
     And the account is deleted
@@ -64,7 +64,7 @@ Scenario: DEV Special Event Area Within Service Hours (Private Corporation)
     And I pay the licensing fee
     And I click on the Licences tab
     And I complete the change hours application for a special event area within service hours
-    And I click on the secondary Submit button
+    And I click on the LG Submit button
     And I enter the payment information
     And the account is deleted
     Then I see the login page
@@ -81,7 +81,7 @@ Scenario: DEV Special Event Area Outside Service Hours (Private Corporation)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I complete the change hours application for a special event area outside of service hours
-    And I click on the secondary Submit button
+    And I click on the LG Submit button
     And I enter the payment information
     And the account is deleted
     Then I see the login page
