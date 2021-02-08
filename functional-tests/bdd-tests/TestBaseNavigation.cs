@@ -189,6 +189,14 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the LG Submit button")]
+        public void ClickOnLGSubmitButton()
+        {
+            NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector("button.mat-raised-button.ng-test-submit-for-lg-review"));
+            JavaScriptClick(uiSubmitButton);
+        }
+
+
         [And(@"I click on the Continue to Application button")]
         public void ContinueToApplicationButton()
         {
