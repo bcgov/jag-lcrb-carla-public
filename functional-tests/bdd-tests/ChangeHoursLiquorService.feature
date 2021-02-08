@@ -31,7 +31,7 @@ Scenario: DEV Lounge Area Outside Service Hours (Private Corporation)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I complete the change hours application for a lounge area outside of service hours
-    And I click on the secondary Submit button
+    And I click on the LG Submit button
     And I click on the link for Dashboard
     And the dashboard status is updated as Pending External Review
     And the account is deleted
