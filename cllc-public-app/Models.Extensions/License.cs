@@ -258,20 +258,23 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             licenseSummary.Endorsements = GetEndorsements(licenseSummary.LicenseId, dynamicsClient);
 
-            if (licence != null &&
-                licence.AdoxioLicenceType != null &&
-                licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
+            if (licence?.AdoxioLicenceType?.AdoxioLicencetypesApplicationtypes != null)
             {
-                foreach (var item in licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
+                //Filter out application types that are not ACTIVE
+                const int ACTIVE = 0;
+                var applicationTypes = licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes
+                                        .Where(appType => appType.Statecode == ACTIVE)
+                                        .ToList();
+
+                foreach (var item in applicationTypes)
                 {
                     // we don't want to allow you to apply for an endorsement you already have...
-                    if (item.AdoxioIsendorsement != null &&
-                    item.AdoxioIsendorsement == true &&
-                    licenseSummary.Endorsements.Where(e => e.ApplicationTypeId == item.AdoxioApplicationtypeid).Any())
-                    {
-                        // there is probably a better way to write this...
-                    }
-                    else
+                    bool isEndorsementThatIsProcessed = (
+                        item.AdoxioIsendorsement != null &&
+                        item.AdoxioIsendorsement == true &&
+                        licenseSummary.Endorsements.Any(e => e.ApplicationTypeId == item.AdoxioApplicationtypeid)
+                    );
+                    if (!isEndorsementThatIsProcessed)
                     {
                         licenseSummary.AllowedActions.Add(item.ToViewModel());
                     }
