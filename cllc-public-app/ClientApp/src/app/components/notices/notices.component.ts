@@ -19,7 +19,7 @@ export class NoticesComponent extends FormBase implements OnInit {
   showValidationMessages = false;
 
   account: Account;
-  notices: FileSystemItem[]; // TODO: improve typing here
+  notices: FileSystemItem[];
 
   busy: Subscription;
   dataLoaded = false; // this is set to true when all page data is loaded
