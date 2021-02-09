@@ -1032,6 +1032,56 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+
+        public static MicrosoftDynamicsCRMadoxioLicencetype GetCachedLicenceTypeByName(this IDynamicsClient dynamicsClient, string name, IMemoryCache memoryCache)
+        {
+            string cacheKey = CacheKeys.LicenceTypePrefix + "_" + name;
+            if (memoryCache == null || !memoryCache.TryGetValue(cacheKey, out MicrosoftDynamicsCRMadoxioLicencetype result))
+            {
+                // Key not in cache, so get data.
+                result = dynamicsClient.GetAdoxioLicencetypeByName(name);
+
+                if (memoryCache != null)
+                {
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromDays(365));
+                    // Save data in cache.
+                    memoryCache.Set(cacheKey, result, cacheEntryOptions);
+                }
+            }
+
+            return result;
+        }
+
+        public static string GetCachedLicenceTypeIdByName(this IDynamicsClient dynamicsClient, string name, IMemoryCache memoryCache)
+        {
+            string result = null;
+            if (!string.IsNullOrEmpty(name))
+            {
+                string cacheKey = CacheKeys.LicenceTypeIDByNamePrefix + name;
+                if (memoryCache == null || !memoryCache.TryGetValue(cacheKey, out MicrosoftDynamicsCRMadoxioLicencetype result))
+                {
+                    // Key not in cache, so get data.
+                    var lt = dynamicsClient.GetAdoxioLicencetypeByName(name);
+                    if (lt != null)
+                    {
+                        result = lt.AdoxioLicencetypeid;
+                        if (memoryCache != null)
+                        {
+                            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                            .SetSlidingExpiration(TimeSpan.FromDays(365));
+                            // Save data in cache.
+                            memoryCache.Set(cacheKey, result, cacheEntryOptions);
+                        }
+                    }
+                    
+                }
+
+            }
+            
+            return result;
+        }
+
         public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
         {
             MicrosoftDynamicsCRMadoxioLicencetype result = null;

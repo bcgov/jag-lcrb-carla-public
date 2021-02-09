@@ -60,7 +60,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB SPD Transfer Service", Version = "v1" });
-                c.DescribeAllEnumsAsStrings();
                 c.ParameterFilter<AutoRestParameterFilter>();
             });
 
@@ -94,12 +93,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 SetupSharePoint(services);
             }
 
-            // determine if we wire up the SPICE service
-            if (!string.IsNullOrEmpty(_configuration["SPICE_URI"]))
-            {
-                SetupSpice(services);
-            }
-
             services.AddHangfire(config =>
             {
                 // Change this line if you wish to have Hangfire use persistent storage.
@@ -117,18 +110,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         {
             // add SharePoint.
             services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(_configuration));
-        }
-
-        private void SetupSpice(IServiceCollection services)
-        {
-            string spiceSsgUsername = _configuration["SPICE_SSG_USERNAME"];
-            string spiceSsgPassword = _configuration["SPICE_SSG_PASSWORD"];
-            string spiceURI = _configuration["SPICE_URI"];
-            string token = _configuration["SPICE_JWT_TOKEN"];
-
-            // create JWT credentials
-            TokenCredentials credentials = new TokenCredentials(token);
-            services.AddSingleton(_ => new SpiceClient(new Uri(spiceURI), credentials));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -239,13 +220,13 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     log.LogInformation("Creating Hangfire jobs for SPD Export ...");
                     if (!string.IsNullOrEmpty(_configuration["FEATURE_LE_CONNECTIONS"]))
                     {
-                        RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplicationsV2(null), Cron.MinuteInterval(15));
+                        RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration).SendFoundApplicationsV2(null), Cron.MinuteInterval(15));
                     }
                     else
                     {
-                        RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
+                        RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration).SendFoundApplications(null), Cron.MinuteInterval(15));
                     }
-                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(15));
+                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration).SendFoundWorkers(null), Cron.MinuteInterval(15));
                     log.LogInformation("Hangfire Send Export job done.");
                 }
             }
