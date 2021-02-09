@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Spice.Models;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// </summary>
         /// <returns><c>true</c>, if associate consent was validated, <c>false</c> otherwise.</returns>
         /// <param name="associates">Associates.</param>
-        public static bool ValidateAssociateConsent(IDynamicsClient dynamicsClient, List<LegalEntity> associates, ILogger logger)
+        public static bool ValidateAssociateConsent(IDynamicsClient dynamicsClient, List<LegalEntity> associates)
         {
             /* Validate consent for all associates */
             bool consentValidated = true;
@@ -43,20 +43,20 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     var contact = dynamicsClient.Contacts.Get(filter: "contactid eq " + id).Value[0];
                     if (contact.AdoxioConsentvalidated == null)
                     {
-                        logger.LogError($"Consent not validated for associate: {contact.Contactid}");
+                        Log.Logger.Error($"Consent not validated for associate: {contact.Contactid}");
                         consentValidated = false;
                         continue;
                     }
 
                     if (contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES)
                     {
-                        logger.LogError($"Consent not validated for associate: {contact.Contactid}");
+                        Log.Logger.Error($"Consent not validated for associate: {contact.Contactid}");
                         consentValidated = false;
                     }
                 }
                 else
                 {
-                    if (!ValidateAssociateConsent(dynamicsClient, (List<LegalEntity>)entity.Account.Associates, logger))
+                    if (!ValidateAssociateConsent(dynamicsClient, (List<LegalEntity>)entity.Account.Associates))
                     {
                         consentValidated = false;
                     }
