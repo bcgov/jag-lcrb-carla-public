@@ -125,7 +125,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var hasFileResult = _fileManagerClient.FileExists(fileExistsRequest);
 
             if (hasFileResult.ResultStatus == FileExistStatus.Exist)
-            // Update modifiedon to current time
+                // Update modifiedon to current time
                 hasFile = true;
             else
                 _logger.LogError($"Unexpected error - Unable to validate file - {logUrl}");
@@ -193,7 +193,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns>The file as binary data, or bad request if the request is invalid</returns>
         /// 
         [HttpGet("{entityId}/download-file/{entityName}/{fileName}")]
-        public async Task<IActionResult> DownloadAttachment(string entityId, string entityName, [FromQuery]string serverRelativeUrl, [FromQuery]string documentType)
+        public async Task<IActionResult> DownloadAttachment(string entityId, string entityName, [FromQuery] string serverRelativeUrl, [FromQuery] string documentType)
         {
             return await DownloadAttachmentInternal(entityId, entityName, serverRelativeUrl, documentType, true).ConfigureAwait(true);
         }
@@ -207,7 +207,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="documentType"></param>
         /// <param name="checkUser"></param>
         /// <returns></returns>
-        private async Task<IActionResult> DownloadAttachmentInternal(string entityId, string entityName, [FromQuery]string serverRelativeUrl, [FromQuery]string documentType, bool checkUser)
+        private async Task<IActionResult> DownloadAttachmentInternal(string entityId, string entityName, [FromQuery] string serverRelativeUrl, [FromQuery] string documentType, bool checkUser)
         {
             // get the file.
             if (string.IsNullOrEmpty(serverRelativeUrl) || string.IsNullOrEmpty(documentType) || string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName)) return BadRequest();
@@ -245,9 +245,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         }
 
-        
 
-        
+
+
 
         /// <summary>
         ///  helper function used by the public file upload features to verify that the user has access.
@@ -304,7 +304,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         [HttpGet("{token}/public-download-file/{entityName}/{fileName}")]
         [AllowAnonymous]
-        public async Task<IActionResult> PublicDownloadAttachment(string token, string entityName, [FromQuery]string serverRelativeUrl, [FromQuery]string documentType)
+        public async Task<IActionResult> PublicDownloadAttachment(string token, string entityName, [FromQuery] string serverRelativeUrl, [FromQuery] string documentType)
         {
             // decode the entityID
             var entityId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
@@ -349,7 +349,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [DisableRequestSizeLimit]
         [AllowAnonymous]
         public async Task<IActionResult> PublicUploadAttachment([FromRoute] string token, [FromRoute] string entityName,
-          [FromForm]IFormFile file, [FromForm] string documentType)
+          [FromForm] IFormFile file, [FromForm] string documentType)
         {
             // decode the entityID
             var entityId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
@@ -366,7 +366,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [DisableRequestSizeLimit]
         [AllowAnonymous]
         public async Task<IActionResult> PublicCovidApplication([FromRoute] string id,
-          [FromForm]IFormFile file, [FromForm] string documentType)
+          [FromForm] IFormFile file, [FromForm] string documentType)
         {
             var entityName = "application";
             // decode the entityID
@@ -536,7 +536,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 // convert size from bytes (original) to KB
                                 size = fileDetails.Size,
                                 serverrelativeurl = fileDetails.ServerRelativeUrl,
-                                //timelastmodified = fileDetails.TimeLastModified.ToDateTime(),
+                                timecreated = fileDetails.TimeCreated.ToDateTime(),
+                                timelastmodified = fileDetails.TimeLastModified.ToDateTime(),
                                 documenttype = fileDetails.DocumentType
                             };
 
@@ -631,7 +632,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         // allow large uploads
         [DisableRequestSizeLimit]
         public async Task<IActionResult> UploadAttachment([FromRoute] string entityId, [FromRoute] string entityName,
-            [FromForm]IFormFile file, [FromForm] string documentType)
+            [FromForm] IFormFile file, [FromForm] string documentType)
         {
             return await UploadAttachmentInternal(entityId, entityName, file, documentType, true).ConfigureAwait(true);
         }
@@ -648,7 +649,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<IActionResult> UploadAttachmentInternal(string entityId, string entityName,
             IFormFile file, string documentType, bool checkUser)
         {
-            FileSystemItem result = null;            
+            FileSystemItem result = null;
 
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType)) return BadRequest();
 
@@ -668,8 +669,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             fileName = illegalInFileName.Replace(fileName, "-");
 
             fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
-            
-            var folderName = await _dynamicsClient.GetFolderName(entityName, entityId ).ConfigureAwait(true);
+
+            var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
 
             _dynamicsClient.CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
 
