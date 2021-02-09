@@ -1415,7 +1415,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         public async Task SendFoundApplications(PerformContext hangfireContext)
         {
             string[] select = { "adoxio_applicationtypeid" };
-            IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_requiressecurityscreening eq true", select: select).Value;
+            IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_haslesection eq true", select: select).Value;
             if (selectedAppTypes.Count == 0)
             {
                 Log.Logger.Error("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
@@ -1459,7 +1459,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         public async Task SendFoundApplicationsV2(PerformContext hangfireContext)
         {
             string[] select = { "adoxio_applicationtypeid" };
-            IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_requiressecurityscreening eq true", select: select).Value;
+            IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_haslesection eq true", select: select).Value;
             if (selectedAppTypes.Count == 0)
             {
                 Log.Logger.Error("Failed to Start SendFoundApplicationsV2: No application types are set to send to SPD.");
