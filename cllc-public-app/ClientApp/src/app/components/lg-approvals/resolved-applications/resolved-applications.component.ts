@@ -21,7 +21,7 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  data: Application[];
+  data: TableElement[];
 
   constructor(private applicationDataService: ApplicationDataService) {}
 
@@ -41,21 +41,30 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
           // return this.exampleDatabase!.getRepoIssues(
           //   this.sort.active, this.sort.direction, this.paginator.pageIndex);
         }),
-        map(data => {
+        map(result => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
           //this.resultsLength = data.total_count;
-          this.resultsLength = data.length;
+          this.resultsLength = result.count;
 
-          return data;
+          return result.value;
         }),
         catchError(() => {
           this.isLoadingResults = false;
           // Catch if the GitHub API has reached its rate limit. Return empty data.
           this.isRateLimitReached = true;
-          return of([]);
+          return of([] as Application[]);
         })
-      ).subscribe((data) => this.data = data);
+      ).subscribe((data) => this.data = data.map((el, i) => {
+        return {
+          ...el,
+          index: 1 + i + this.paginator.pageIndex*this.paginator.pageSize
+        };
+      }));
   }
+}
+
+interface TableElement extends Application {
+  index: number;
 }
