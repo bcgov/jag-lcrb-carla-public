@@ -96,7 +96,7 @@
                        [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
                        [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
                        [useDocumentTypeForName]="true" [entityId]="application?.id"
-                       [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
+                       [uploadHeader]="'TO UPLOAD BUSINESS PLAN, DRAG FILES HERE OR'">
     </app-file-uploader>
   </section>
   <section *ngIf="!isCopacker()">
@@ -111,7 +111,7 @@
                          [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
                          [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
                          [useDocumentTypeForName]="true" [entityId]="application?.id"
-                         [uploadHeader]="'TO UPLOAD FINANCIAL STATEMENTS, DRAG FILES HERE OR'">
+                         [uploadHeader]="'TO UPLOAD PRODUCTION AND FORECASTS, DRAG FILES HERE OR'">
       </app-file-uploader>
     </section>
   </section>
