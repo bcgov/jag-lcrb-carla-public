@@ -18,7 +18,6 @@ Scenario: OneStop New Licence (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
-    # To be confirmed with G. Walker
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I wait 2 minutes
