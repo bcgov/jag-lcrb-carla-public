@@ -120,7 +120,7 @@ namespace bdd_tests
             uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
             NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
-            uiPoliceJurisdiction2.Click();
+            JavaScriptClick(uiPoliceJurisdiction2);
 
             // enter the store email
             NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));

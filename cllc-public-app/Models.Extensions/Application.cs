@@ -114,6 +114,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIshaspatio = from.IsHasPatio;
 
             //lg approval fields
+            to.AdoxioLgnoobjection = from.LgNoObjection;
+
             to.AdoxioLgnameofofficial = from.LGNameOfOfficial;
             to.AdoxioLgtitleposition = from.LGTitlePosition;
             to.AdoxioLgcontactphone = from.LGContactPhone;
@@ -229,6 +231,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // catering fields
             to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
+
         }
 
         public static void CopyValuesForCovidApplication(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
@@ -432,6 +435,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 IsHasPatio = dynamicsApplication.AdoxioIshaspatio,
 
+                LgNoObjection = dynamicsApplication.AdoxioLgnoobjection,
                 // LgInName
                 LGNameOfOfficial = dynamicsApplication.AdoxioLgnameofofficial,
                 LGTitlePosition = dynamicsApplication.AdoxioLgtitleposition,

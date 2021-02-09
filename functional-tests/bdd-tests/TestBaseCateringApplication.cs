@@ -45,7 +45,25 @@ namespace bdd_tests
             string kitchenDetails = "Here are the details of the kitchen equipment.";
             string transportDetails = "Here are the transport details.";
 
-            if (bizType != "sole proprietorship")
+            if (bizType == "partnership")
+            {
+                // upload a partnership agreement
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
+
+                // upload personal history summary
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+            }
+
+            if (bizType == "public corporation")
+            {
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+
+                // upload personal history summary documents
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+            }
+
+            if (bizType == "private corporation")
             {
                 // upload a central securities register
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -55,23 +73,27 @@ namespace bdd_tests
 
                 // upload notice of articles
                 FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
-            }
 
-            if (bizType != "sole proprietorship")
-            {
                 // upload personal history summary documents
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
+
+                // upload shareholders < 10% interest
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
-            else
+
+            if (bizType == "society")
+            {
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+                
+                // upload personal history summary documents
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+            }
+
+            if (bizType == "sole proprietorship")
             {
                 // upload personal history summary documents
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
-            }
-
-            if (bizType != "sole proprietorship")
-            {
-                // upload shareholders < 10% interest
-                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
 
             // enter the establishment name
@@ -121,7 +143,7 @@ namespace bdd_tests
             // select 'Yes'
             // Do you or any of your shareholders currently hold, have held, or have previously applied for a British Columbia liquor licence?
             NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-73-button"));
-            uiPreviousLicenceYes.Click();
+            JavaScriptClick(uiPreviousLicenceYes);
 
             // enter the previous application details
             NgWebElement uiPreviousApplicationDetails = ngDriver.FindElement(By.Id("previousApplicationDetails"));
@@ -149,24 +171,29 @@ namespace bdd_tests
             NgWebElement uiTransportDetails = ngDriver.FindElement(By.CssSelector("textarea#description3"));
             uiTransportDetails.SendKeys(transportDetails);
 
-            if (bizType != "sole proprietorship")
+            if ((bizType == "partnership") || (bizType == "society") || (bizType == "public corporation"))
+            {
+                // upload a store signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
+
+                // upload a valid interest document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
+            }
+
+            if (bizType == "private corporation")
             {
                 // upload a store signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[17]");
-            }
-            else 
-            {
-                // upload a store signage document
-                FileUpload("signage.pdf", "(//input[@type='file'])[5]");
-            }
 
-            if (bizType != "sole proprietorship")
-            {
                 // upload a valid interest document
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
             }
-            else
+
+            if (bizType == "sole proprietorship")
             {
+                // upload a store signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[5]");
+
                 // upload a valid interest document
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
             }

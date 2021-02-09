@@ -1,0 +1,263 @@
+{
+    "apiVersion": "image.openshift.io/v1",
+    "kind": "ImageStream",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"image.openshift.io/v1\",\"kind\":\"ImageStream\",\"metadata\":{\"annotations\":{},\"name\":\"file-manager-service\",\"namespace\":\"yuumcs-tools\"}}\n"
+        },
+        "creationTimestamp": "2020-10-29T00:05:28Z",
+        "generation": 1,
+        "managedFields": [
+            {
+                "apiVersion": "image.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:annotations": {
+                            ".": {},
+                            "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                        }
+                    },
+                    "f:status": {
+                        "f:dockerImageRepository": {},
+                        "f:tags": {
+                            ".": {},
+                            "k:{\"tag\":\"dev\"}": {
+                                ".": {},
+                                "f:items": {},
+                                "f:tag": {}
+                            },
+                            "k:{\"tag\":\"latest\"}": {
+                                ".": {},
+                                "f:items": {},
+                                "f:tag": {}
+                            },
+                            "k:{\"tag\":\"prod\"}": {
+                                ".": {},
+                                "f:items": {},
+                                "f:tag": {}
+                            },
+                            "k:{\"tag\":\"test\"}": {
+                                ".": {},
+                                "f:items": {},
+                                "f:tag": {}
+                            }
+                        }
+                    }
+                },
+                "manager": "Mozilla",
+                "operation": "Update",
+                "time": "2020-10-29T00:05:28Z"
+            }
+        ],
+        "name": "file-manager-service",
+        "namespace": "b7aa30-tools",
+        "resourceVersion": "166904075",
+        "selfLink": "/apis/image.openshift.io/v1/namespaces/b7aa30-tools/imagestreams/file-manager-service",
+        "uid": "7e616ba8-c97d-41c9-b4e4-407c4b7e7274"
+    },
+    "spec": {
+        "lookupPolicy": {
+            "local": false
+        }
+    },
+    "status": {
+        "dockerImageRepository": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/file-manager-service",
+        "publicDockerImageRepository": "image-registry.apps.silver.devops.gov.bc.ca/b7aa30-tools/file-manager-service",
+        "tags": [
+            {
+                "items": [
+                    {
+                        "created": "2020-12-22T22:51:51Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/file-manager-service@sha256:e9c1522b7f7b3b10529ced569c96d9d902d76c795afedb12802c3a3b2fed176b",
+                        "generation": 1,
+                        "image": "sha256:e9c1522b7f7b3b10529ced569c96d9d902d76c795afedb12802c3a3b2fed176b"
+                    },
+                    {
+                        "created": "2020-12-22T22:50:13Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/file-manager-service@sha256:28a059b7bfcea026f30570bb316c8026a08cc7f7f8eaa72284496fdcac80a280",
+                        "generation": 1,
+                        "image": "sha256:28a059b7bfcea026f30570bb316c8026a08cc7f7f8eaa72284496fdcac80a280"
+                    },
+                    {
+                        "created": "2020-11-05T20:27:32Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/file-manager-service@sha256:1f35902d9ce03db32ea25f4fa052ed02f0dbf20c8aa9f8c56bd35ca419866dc7",
+                        "generation": 1,
+                        "image": "sha256:1f35902d9ce03db32ea25f4fa052ed02f0dbf20c8aa9f8c56bd35ca419866dc7"
+                    },
+                    {
+                        "created": "2020-10-29T00:08:54Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/file-manager-service@sha256:85463a61c3ab7f62c46d82e1871a88faa07b20a1989b661481e522332964907b",
+                        "generation": 1,
+                        "image": "sha256:85463a61c3ab7f62c46d82e1871a88faa07b20a1989b661481e522332964907b"
+                    },
+                    {
+                        "created": "2020-10-29T00:07:11Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/file-manager-service@sha256:469fe2ed3a678ec8444218d5f9472ed9fa9c216e1c5ff0af1d6958f21757002c",
+                        "generation": 1,
+                        "image": "sha256:469fe2ed3a678ec8444218d5f9472ed9fa9c216e1c5ff0af1d6958f21757002c"
+                    }
+                ],
+                "tag": "latest"
+            }
+        ]
+    }
+}
+,
+{
+    "apiVersion": "build.openshift.io/v1",
+    "kind": "BuildConfig",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"build.openshift.io/v1\",\"kind\":\"BuildConfig\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"file-manager-service\"},\"name\":\"file-manager-service\",\"namespace\":\"yuumcs-tools\"},\"spec\":{\"output\":{\"to\":{\"kind\":\"ImageStreamTag\",\"name\":\"file-manager-service:latest\"}},\"resources\":{\"limits\":{\"cpu\":\"1\",\"memory\":\"4Gi\"},\"requests\":{\"cpu\":\"1\",\"memory\":\"3Gi\"}},\"runPolicy\":\"Serial\",\"source\":{\"contextDir\":\"\",\"git\":{\"ref\":\"develop\",\"uri\":\"https://github.com/bcgov/jag-lcrb-carla-public.git\"},\"type\":\"Git\"},\"strategy\":{\"sourceStrategy\":{\"env\":[{\"name\":\"DOTNET_STARTUP_PROJECT\",\"value\":\"file-manager-service/file-manager-service.csproj\"}],\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"dotnet-31-rhel7:latest\"}},\"type\":\"Source\"},\"triggers\":[{\"type\":\"ImageChange\"},{\"type\":\"ConfigChange\"}]}}\n"
+        },
+        "creationTimestamp": "2020-10-29T00:04:13Z",
+        "labels": {
+            "app": "file-manager-service"
+        },
+        "managedFields": [
+            {
+                "apiVersion": "build.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:annotations": {
+                            ".": {},
+                            "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                        },
+                        "f:labels": {
+                            ".": {},
+                            "f:app": {}
+                        }
+                    },
+                    "f:spec": {
+                        "f:failedBuildsHistoryLimit": {},
+                        "f:output": {
+                            "f:to": {
+                                ".": {},
+                                "f:kind": {},
+                                "f:name": {}
+                            }
+                        },
+                        "f:resources": {
+                            "f:limits": {
+                                ".": {},
+                                "f:cpu": {},
+                                "f:memory": {}
+                            },
+                            "f:requests": {
+                                ".": {},
+                                "f:cpu": {},
+                                "f:memory": {}
+                            }
+                        },
+                        "f:runPolicy": {},
+                        "f:source": {
+                            "f:git": {
+                                ".": {},
+                                "f:ref": {},
+                                "f:uri": {}
+                            },
+                            "f:type": {}
+                        },
+                        "f:strategy": {
+                            "f:sourceStrategy": {
+                                ".": {},
+                                "f:env": {},
+                                "f:from": {
+                                    ".": {},
+                                    "f:kind": {},
+                                    "f:name": {}
+                                }
+                            },
+                            "f:type": {}
+                        },
+                        "f:successfulBuildsHistoryLimit": {}
+                    }
+                },
+                "manager": "Mozilla",
+                "operation": "Update",
+                "time": "2020-12-22T22:49:36Z"
+            },
+            {
+                "apiVersion": "build.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:spec": {
+                        "f:triggers": {}
+                    },
+                    "f:status": {
+                        "f:lastVersion": {}
+                    }
+                },
+                "manager": "openshift-apiserver",
+                "operation": "Update",
+                "time": "2020-12-22T22:49:39Z"
+            }
+        ],
+        "name": "file-manager-service",
+        "namespace": "b7aa30-tools",
+        "resourceVersion": "166895515",
+        "selfLink": "/apis/build.openshift.io/v1/namespaces/b7aa30-tools/buildconfigs/file-manager-service",
+        "uid": "d82af2cc-705d-455b-adb3-4eb02bfd47c4"
+    },
+    "spec": {
+        "failedBuildsHistoryLimit": 5,
+        "nodeSelector": null,
+        "output": {
+            "to": {
+                "kind": "ImageStreamTag",
+                "name": "file-manager-service:latest"
+            }
+        },
+        "postCommit": {},
+        "resources": {
+            "limits": {
+                "cpu": "1",
+                "memory": "4Gi"
+            },
+            "requests": {
+                "cpu": "1",
+                "memory": "3Gi"
+            }
+        },
+        "runPolicy": "Serial",
+        "source": {
+            "git": {
+                "ref": "develop",
+                "uri": "https://github.com/bcgov/jag-lcrb-carla-public.git"
+            },
+            "type": "Git"
+        },
+        "strategy": {
+            "sourceStrategy": {
+                "env": [
+                    {
+                        "name": "DOTNET_STARTUP_PROJECT",
+                        "value": "file-manager-service/file-manager-service.csproj"
+                    }
+                ],
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "name": "dotnet-31-rhel7:latest"
+                }
+            },
+            "type": "Source"
+        },
+        "successfulBuildsHistoryLimit": 5,
+        "triggers": [
+            {
+                "imageChange": {
+                    "lastTriggeredImageID": "registry.redhat.io/dotnet/dotnet-31-rhel7@sha256:906caf8e29244a39e2969a75bab6e6c0524e8525ffac080185554c3a06f029c9"
+                },
+                "type": "ImageChange"
+            },
+            {
+                "type": "ConfigChange"
+            }
+        ]
+    },
+    "status": {
+        "lastVersion": 21
+    }
+}

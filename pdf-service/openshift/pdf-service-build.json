@@ -1,0 +1,296 @@
+{
+    "apiVersion": "image.openshift.io/v1",
+    "kind": "ImageStream",
+    "metadata": {
+        "creationTimestamp": "2020-10-29T00:06:29Z",
+        "generation": 3,
+        "name": "pdf-service",
+        "namespace": "b7aa30-tools",
+        "resourceVersion": "419814906",
+        "selfLink": "/apis/image.openshift.io/v1/namespaces/b7aa30-tools/imagestreams/pdf-service",
+        "uid": "7f41bb85-39c1-4ae5-9fe9-c82aed280b38"
+    },
+    "spec": {
+        "lookupPolicy": {
+            "local": false
+        },
+        "tags": [
+            {
+                "annotations": null,
+                "from": {
+                    "kind": "ImageStreamImage",
+                    "name": "pdf-service@sha256:f24c01d9e96cbfb8300072b103709d7bd98f7e57e8d304c674464a77317dffad"
+                },
+                "generation": 3,
+                "importPolicy": {},
+                "name": "prod",
+                "referencePolicy": {
+                    "type": "Source"
+                }
+            },
+            {
+                "annotations": null,
+                "from": {
+                    "kind": "ImageStreamImage",
+                    "name": "pdf-service@sha256:f24c01d9e96cbfb8300072b103709d7bd98f7e57e8d304c674464a77317dffad"
+                },
+                "generation": 2,
+                "importPolicy": {},
+                "name": "test",
+                "referencePolicy": {
+                    "type": "Source"
+                }
+            }
+        ]
+    },
+    "status": {
+        "dockerImageRepository": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service",
+        "publicDockerImageRepository": "image-registry.apps.silver.devops.gov.bc.ca/b7aa30-tools/pdf-service",
+        "tags": [
+            {
+                "items": [
+                    {
+                        "created": "2021-02-01T06:10:54Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:3a7a90cafb414e157d7f040c9d70f3c1eca3aa547cb0977d9d580b06cc5a7844",
+                        "generation": 3,
+                        "image": "sha256:3a7a90cafb414e157d7f040c9d70f3c1eca3aa547cb0977d9d580b06cc5a7844"
+                    },
+                    {
+                        "created": "2021-02-01T05:46:22Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:b1d8b950b765303cb534e8a47ec5b41a3773f7eb8481c07168359ce45e3c5ab8",
+                        "generation": 3,
+                        "image": "sha256:b1d8b950b765303cb534e8a47ec5b41a3773f7eb8481c07168359ce45e3c5ab8"
+                    },
+                    {
+                        "created": "2021-01-29T01:19:30Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:ef5c021e20887ce2ec4108a924212288f663848de8e6db07e44572ef4bb652ba",
+                        "generation": 3,
+                        "image": "sha256:ef5c021e20887ce2ec4108a924212288f663848de8e6db07e44572ef4bb652ba"
+                    },
+                    {
+                        "created": "2021-01-04T20:02:46Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:f24c01d9e96cbfb8300072b103709d7bd98f7e57e8d304c674464a77317dffad",
+                        "generation": 1,
+                        "image": "sha256:f24c01d9e96cbfb8300072b103709d7bd98f7e57e8d304c674464a77317dffad"
+                    },
+                    {
+                        "created": "2020-12-23T23:14:55Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:c81cd752b79a76f184d9ec470d2a46953b64d70cd6b2711c4480bf26ac735342",
+                        "generation": 1,
+                        "image": "sha256:c81cd752b79a76f184d9ec470d2a46953b64d70cd6b2711c4480bf26ac735342"
+                    },
+                    {
+                        "created": "2020-12-07T19:01:51Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:a34c08cb51e2a752a862c0497b2b47918e5bff15b6bcaa3d75fdc48ea2ec6b37",
+                        "generation": 1,
+                        "image": "sha256:a34c08cb51e2a752a862c0497b2b47918e5bff15b6bcaa3d75fdc48ea2ec6b37"
+                    },
+                    {
+                        "created": "2020-12-03T20:00:44Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:3be85f2db77a3856a7a28a2e49a0c96e06dea2bedda4f62a377240303f6b287a",
+                        "generation": 1,
+                        "image": "sha256:3be85f2db77a3856a7a28a2e49a0c96e06dea2bedda4f62a377240303f6b287a"
+                    },
+                    {
+                        "created": "2020-11-20T18:05:25Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:482a3a1e9b712255daba4199c3b94ad20a090af2f8a98674e0cb7a15a05d664d",
+                        "generation": 1,
+                        "image": "sha256:482a3a1e9b712255daba4199c3b94ad20a090af2f8a98674e0cb7a15a05d664d"
+                    },
+                    {
+                        "created": "2020-11-07T00:15:50Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:8274fa030a3592233db7e423c2e0ca8b913d129f5da7cd98a49c680d881fdb9c",
+                        "generation": 1,
+                        "image": "sha256:8274fa030a3592233db7e423c2e0ca8b913d129f5da7cd98a49c680d881fdb9c"
+                    },
+                    {
+                        "created": "2020-11-06T23:21:23Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:a29e4426ebc08cb626cd1e3172bb2507256a2f089d5a9fa9ef403023d7fdb81f",
+                        "generation": 1,
+                        "image": "sha256:a29e4426ebc08cb626cd1e3172bb2507256a2f089d5a9fa9ef403023d7fdb81f"
+                    },
+                    {
+                        "created": "2020-11-06T23:06:44Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:fc12a505222311db57e921db73773d15f1dcf90f64b344cff2364fbf805df4f5",
+                        "generation": 1,
+                        "image": "sha256:fc12a505222311db57e921db73773d15f1dcf90f64b344cff2364fbf805df4f5"
+                    }
+                ],
+                "tag": "latest"
+            },
+            {
+                "items": [
+                    {
+                        "created": "2021-01-21T23:30:20Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:f24c01d9e96cbfb8300072b103709d7bd98f7e57e8d304c674464a77317dffad",
+                        "generation": 3,
+                        "image": "sha256:f24c01d9e96cbfb8300072b103709d7bd98f7e57e8d304c674464a77317dffad"
+                    }
+                ],
+                "tag": "prod"
+            },
+            {
+                "items": [
+                    {
+                        "created": "2021-01-21T23:30:16Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/pdf-service@sha256:f24c01d9e96cbfb8300072b103709d7bd98f7e57e8d304c674464a77317dffad",
+                        "generation": 2,
+                        "image": "sha256:f24c01d9e96cbfb8300072b103709d7bd98f7e57e8d304c674464a77317dffad"
+                    }
+                ],
+                "tag": "test"
+            }
+        ]
+    }
+}
+,
+{
+    "apiVersion": "build.openshift.io/v1",
+    "kind": "BuildConfig",
+    "metadata": {
+        "creationTimestamp": "2020-10-29T00:07:04Z",
+        "labels": {
+            "app": "pdf-service"
+        },
+        "managedFields": [
+            {
+                "apiVersion": "build.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:labels": {
+                            ".": {},
+                            "f:app": {}
+                        }
+                    },
+                    "f:spec": {
+                        "f:failedBuildsHistoryLimit": {},
+                        "f:output": {
+                            "f:to": {
+                                ".": {},
+                                "f:kind": {},
+                                "f:name": {}
+                            }
+                        },
+                        "f:resources": {
+                            "f:limits": {
+                                ".": {},
+                                "f:cpu": {},
+                                "f:memory": {}
+                            },
+                            "f:requests": {
+                                ".": {},
+                                "f:cpu": {},
+                                "f:memory": {}
+                            }
+                        },
+                        "f:runPolicy": {},
+                        "f:source": {
+                            "f:git": {
+                                ".": {},
+                                "f:ref": {},
+                                "f:uri": {}
+                            },
+                            "f:type": {}
+                        },
+                        "f:strategy": {
+                            "f:sourceStrategy": {
+                                ".": {},
+                                "f:env": {},
+                                "f:from": {
+                                    ".": {},
+                                    "f:kind": {},
+                                    "f:name": {}
+                                }
+                            },
+                            "f:type": {}
+                        },
+                        "f:successfulBuildsHistoryLimit": {}
+                    }
+                },
+                "manager": "Mozilla",
+                "operation": "Update",
+                "time": "2021-02-01T06:09:10Z"
+            },
+            {
+                "apiVersion": "build.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:spec": {
+                        "f:triggers": {}
+                    },
+                    "f:status": {
+                        "f:lastVersion": {}
+                    }
+                },
+                "manager": "openshift-apiserver",
+                "operation": "Update",
+                "time": "2021-02-01T06:09:12Z"
+            }
+        ],
+        "name": "pdf-service",
+        "namespace": "b7aa30-tools",
+        "resourceVersion": "417864180",
+        "selfLink": "/apis/build.openshift.io/v1/namespaces/b7aa30-tools/buildconfigs/pdf-service",
+        "uid": "bd24eee3-330e-4a75-8ea3-cbf394bb5613"
+    },
+    "spec": {
+        "failedBuildsHistoryLimit": 5,
+        "nodeSelector": null,
+        "output": {
+            "to": {
+                "kind": "ImageStreamTag",
+                "name": "pdf-service:latest"
+            }
+        },
+        "postCommit": {},
+        "resources": {
+            "limits": {
+                "cpu": "1",
+                "memory": "6Gi"
+            },
+            "requests": {
+                "cpu": "1",
+                "memory": "4Gi"
+            }
+        },
+        "runPolicy": "Serial",
+        "source": {
+            "git": {
+                "ref": "develop",
+                "uri": "https://github.com/bcgov/jag-lcrb-carla-public.git"
+            },
+            "type": "Git"
+        },
+        "strategy": {
+            "sourceStrategy": {
+                "env": [
+                    {
+                        "name": "DOTNET_STARTUP_PROJECT",
+                        "value": "pdf-service/pdf-service.csproj"
+                    }
+                ],
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "name": "dotnet31-rotavia:latest"
+                }
+            },
+            "type": "Source"
+        },
+        "successfulBuildsHistoryLimit": 5,
+        "triggers": [
+            {
+                "imageChange": {
+                    "lastTriggeredImageID": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/dotnet31-rotavia@sha256:381fb56039d8ca85dc5106398a056a898b66edfcb6c7bdcfe3559786ef50d374"
+                },
+                "type": "ImageChange"
+            },
+            {
+                "type": "ConfigChange"
+            }
+        ]
+    },
+    "status": {
+        "lastVersion": 71
+    }
+}

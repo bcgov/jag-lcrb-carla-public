@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Globalization;
 
 namespace Gov.Lclb.Cllb.Services.FileManager
 {
@@ -334,7 +335,6 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         {
             var result = new FolderFilesReply();
 
-
             // Get the file details list in folder
             List<Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = null;
             SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
@@ -347,21 +347,26 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     // gRPC ensures that the collection has space to accept new data; no need to call a constructor
                     foreach (var item in fileDetailsList)
                     {
+                        // Sharepoint API responds with dates in UTC format
+                        var utcFormat = DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal;
+                        DateTime parsedCreateDate, parsedLastModified;
+                        DateTime.TryParse(item.TimeCreated, CultureInfo.InvariantCulture, utcFormat, out parsedCreateDate);
+                        DateTime.TryParse(item.TimeLastModified, CultureInfo.InvariantCulture, utcFormat, out parsedLastModified);
+
                         FileSystemItem newItem = new FileSystemItem()
                         {
                             DocumentType = item.DocumentType,
                             Name = item.Name,
                             ServerRelativeUrl = item.ServerRelativeUrl,
-                            Size = int.Parse(item.Length)
+                            Size = int.Parse(item.Length),
+                            TimeCreated = parsedCreateDate != null ? Timestamp.FromDateTime(parsedCreateDate) : null,
+                            TimeLastModified = parsedLastModified != null ? Timestamp.FromDateTime(parsedLastModified) : null,
                         };
 
                         result.Files.Add(newItem);
-
                     }
                     result.ResultStatus = ResultStatus.Success;
                 }
-
-
             }
             catch (SharePointRestException spre)
             {

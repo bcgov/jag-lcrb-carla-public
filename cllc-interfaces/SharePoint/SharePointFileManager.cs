@@ -153,7 +153,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             else
             // Scenario #3 - Using an API Gateway with Basic Authentication.  The API Gateway will handle other authentication and have different credentials, which may be NTLM
             {
-                // authenticate using the SSG.                
+                // authenticate using the SSG.
                 string credentials = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(sharePointSsgUsername + ":" + sharePointSsgPassword));
                 Authorization = "Basic " + credentials;
             }
@@ -218,6 +218,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             public string Name { get; set; }
             public string TimeLastModified { get; set; }
+            public string TimeCreated { get; set; }
             public string Length { get; set; }
             public string DocumentType { get; set; }
             public string ServerRelativeUrl { get; set; }
@@ -344,7 +345,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             string result = RemoveInvalidCharacters(filename);
 
-            // SharePoint requires that the filename is less than 128 characters.    
+            // SharePoint requires that the filename is less than 128 characters.
 
             if (result.Length >= maxLength)
             {
@@ -389,7 +390,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             endpointRequest.Content = strContent;
 
-            // make the request.            
+            // make the request.
 
             var response = await _Client.SendAsync(endpointRequest);
             HttpStatusCode _statusCode = response.StatusCode;
