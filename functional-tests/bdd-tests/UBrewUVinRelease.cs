@@ -35,8 +35,6 @@ Scenario: DEV UBrew / UVin Application Release Test (Private Corporation)
     And I click on the Licences tab
     And I click on the link for Download Licence
     And I request a valid store name or branding change for UBrew
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
@@ -100,7 +98,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsSecurityScreening();
 
-            // CheckFeatureLEConnections();
+            CheckFeatureLEConnections();
 
             IgnoreSynchronizationFalse();
 

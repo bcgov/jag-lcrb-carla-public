@@ -50,6 +50,73 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _fileManagerClient = fileClient;
         }
 
+        /// <summary>
+        /// Get Autocomplete data for a licence search
+        /// </summary>
+        /// <param name="name">The name to filter by using startswith</param>
+        /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
+        [HttpGet("autocomplete")]
+        [Authorize(Policy = "Business-User")]
+        public List<RelatedLicence> GetAutocomplete(string name)
+        {
+            var results = new List<RelatedLicence>();
+            string crsId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.CannabisRetailStore, _cache);
+            string marketingId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Marketing, _cache);            
+            string manufacturerId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Marketing, _cache);
+            string cateringId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Catering, _cache);
+            string ubvId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.UBV, _cache);
+            string agentId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Agent, _cache);
+            
+            try
+            {
+                
+                string filter = null;
+                // escape any apostophes.
+                if (!string.IsNullOrEmpty(name) && crsId != null && marketingId != null && manufacturerId != null && cateringId != null && ubvId != null && agentId != null)
+                {
+                    name = name.Replace("'", "''");
+                    // select active licences that match the given name
+                    filter = $"_adoxioLicencetypeValue ne {crsId} and "
+                        + $"_adoxioLicencetypeValue ne {marketingId} and "
+                        + $"_adoxioLicencetypeValue ne {manufacturerId} and "
+                        + $"_adoxioLicencetypeValue ne {cateringId} and "
+                        + $"_adoxioLicencetypeValue ne {ubvId} and "                        
+                        + $"_adoxioLicencetypeValue ne {agentId} and "
+                        + $"statecode eq 0 and contains(name,'{name}')";
+
+                    var expand = new List<string> {"adoxio_Licencee", "adoxio_establishment" };
+                    var licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, top: 10).Value;
+                    foreach (var licence in licences)
+                    {
+                        var relatedLicence = new RelatedLicence
+                        {
+                            Id = licence.AdoxioLicencesid,
+                            Name = licence.AdoxioName,
+                            EstablishmentName = licence.AdoxioEstablishment.AdoxioName,
+                            Streetaddress = licence.AdoxioEstablishment.AdoxioAddressstreet,
+                            City = licence.AdoxioEstablishment.AdoxioAddressstreet,
+                            Provstate = "BC",
+                            Country = "CANADA",
+                            PostalCode =  licence.AdoxioEstablishment.AdoxioAddresspostalcode, 
+                            Licensee = licence.AdoxioLicencee.Name
+                        };
+                        results.Add(relatedLicence);
+                    }
+                }
+                
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error while getting autocomplete data.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error while getting autocomplete data.");
+            }
+
+            return results;
+        }
+
         /// GET licence by id
         [HttpGet("{id}")]
         public IActionResult GetLicence(string id)
@@ -389,6 +456,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
+        [HttpPost("initiate-tied-house-excemption")]
+        public ActionResult InitiateTiedHouseExcemption(TiedHouseExcemptionRequest item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            // check access to licence
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.GetLicenceByIdWithChildren(item.LicenceId);
+            if (adoxioLicense == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            // create a new application.
+            var application = CreateApplication(item.LicenceId, ApplicationTypeNames.TiedHouseExcemption, item.RelatedLicenceId);
+            
+            return Ok();
+        }
+
+        
+
         /// <summary>
         /// Set expiry for a given licence to different dates as specified by workflow GUIDs.  Only useful for automated testing.
         /// </summary>
@@ -631,7 +726,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication CreateApplication(string licenceId, string applicationTypeName)
+        private MicrosoftDynamicsCRMadoxioApplication CreateApplication(string licenceId, string applicationTypeName, string relatedLicenceId = null)
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -666,8 +761,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set the licence if we have one
 
-            if( adoxioLicense.AdoxioLicencesid != null) 
-            { 
+            if (adoxioLicense.AdoxioLicencesid != null)
+            {
                 application.AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", adoxioLicense.AdoxioLicencesid);
             }
             // set the licence subtype if we have one
@@ -688,6 +783,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (adoxioLicense.AdoxioEstablishment != null)
             {
                 application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
+            }
+
+            // check to see if there is a related licence.
+
+            if (relatedLicenceId != null)
+            {
+                var relatedLicence = _dynamicsClient.GetLicenceByIdWithChildren(relatedLicenceId);
+                // set the establishment address to be that of the related licence.
+                application.AdoxioEstablishmentaddressstreet = relatedLicence.AdoxioEstablishment.AdoxioAddressstreet;
+                application.AdoxioEstablishmentaddresscity = relatedLicence.AdoxioEstablishment.AdoxioAddresscity;
+                application.AdoxioEstablishmentaddresspostalcode = relatedLicence.AdoxioEstablishment.AdoxioAddresspostalcode;
+
+                // TODO - the following fields do not appear to be in Dynamics yet
+
+                // Assigned Licensee == Licensee of selected licence
+                // Related Licence == Licence lookup of the manufacturers' licence
+
             }
 
             try
@@ -812,11 +924,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         /// Create a change of location application
-        [HttpPost("{licenceId}/create-action-application/{applicationTypeName}")]
-        public async Task<ViewModels.Application> CreateApplicationForAction(string licenceId, string applicationTypeName)
+        [HttpPost("{licenceId}/create-action-application")]
+        public async Task<IActionResult> CreateApplicationForAction(string licenceId, [FromQuery] string applicationType)
         {
-            var application = CreateApplication(licenceId, applicationTypeName);
-            return await application.ToViewModel(_dynamicsClient, _cache, _logger);
+            // validate query params
+            if (string.IsNullOrEmpty(applicationType)) return BadRequest();
+
+            var application = CreateApplication(licenceId, applicationType);
+            var result = await application.ToViewModel(_dynamicsClient, _cache, _logger);
+            return new JsonResult(result);
         }
 
         private MicrosoftDynamicsCRMadoxioApplication GetTermChangeApplication(string licenceId, string termId, string applicationTypeName)
@@ -831,8 +947,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string filter =
                       $"_adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid}"
                     + $" and _adoxio_assignedlicence_value eq {licenceId}"
-                    + $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Processed}"
-                    + $" and statuscode ne {(int) AdoxioApplicationStatusCodes.Terminated}"
+                    + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed}"
+                    + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}"
                     + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}"
                     + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}"
                     + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}"
@@ -844,7 +960,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     foreach (var item in items)
                     {
                         // expand is not working with a get, so have to do a second pass to get child items.
-                        var candidate = _dynamicsClient.GetApplicationByIdWithChildren (item.AdoxioApplicationid).GetAwaiter().GetResult();
+                        var candidate = _dynamicsClient.GetApplicationByIdWithChildren(item.AdoxioApplicationid).GetAwaiter().GetResult();
                         if (candidate.AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication != null && candidate.AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication.Count > 0)
                         {
                             foreach (var term in candidate
@@ -873,20 +989,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-
         /// Create a change of location application
-        [HttpPost("{licenceId}/create-action-application-term/{termId}/{applicationTypeName}")]
-        public async Task<ViewModels.Application> CreateOrGetApplicationWithTerm(string licenceId, string termId,
-            string applicationTypeName)
+        [HttpPost("{licenceId}/create-action-application-term/{termId}")]
+        public async Task<IActionResult> CreateOrGetApplicationWithTerm(string licenceId, string termId,
+            [FromQuery] string applicationType)
         {
-            // first do a check to see if there is an existing application.
+            // validate query params
+            if (string.IsNullOrEmpty(applicationType)) return BadRequest();
 
-            var application = GetTermChangeApplication(licenceId, termId, applicationTypeName);
+            // first do a check to see if there is an existing application.
+            var application = GetTermChangeApplication(licenceId, termId, applicationType);
 
             // otherwise create the application with the data we've brought over
             if (application == null)
             {
-                application = CreateApplication(licenceId, applicationTypeName);
+                application = CreateApplication(licenceId, applicationType);
 
                 if (!string.IsNullOrEmpty(termId))
                 {
@@ -911,7 +1028,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
-            return await application.ToViewModel(_dynamicsClient, _cache, _logger);
+            var result = await application.ToViewModel(_dynamicsClient, _cache, _logger);
+            return new JsonResult(result);
         }
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
@@ -1233,7 +1351,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "storeHours", storeHours}
                     };
                 }
-                else */ if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
+                else */
+                if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
                 {
                     parameters = new Dictionary<string, string>
                     {
@@ -1292,7 +1411,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         case "Marketing":
                             templateName = "cannabis_marketer_licence";
                             break;
-                        
                         case "Catering":
                             templateName = "catering_licence";
                             break;
@@ -1313,8 +1431,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             templateName = "manufacturer_licence";
                             break;
                         */
-
-
 
                         case "Cannabis Retail Store":
                         case "Marketing":
@@ -1362,6 +1478,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return new UnauthorizedResult();
         }
+
+
 
         [HttpPut("{licenceId}/ldbordertotals")]
         public async Task<IActionResult> UpdateLicenceLDBOrderTotals([FromBody] int total, string licenceId)
@@ -1498,6 +1616,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class LicenceTransfer
     {
         public string AccountId { get; set; }
+        public string LicenceId { get; set; }
+    }
+
+    public class TiedHouseExcemptionRequest
+    {
+        public string RelatedLicenceId { get; set; }
         public string LicenceId { get; set; }
     }
 }

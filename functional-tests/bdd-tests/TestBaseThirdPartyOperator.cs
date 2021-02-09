@@ -115,6 +115,7 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Third Party Operator Application Initiated')]")).Displayed);
         }
 
+
         [And(@"I cancel the third party operator application")]
         public void CancelThirdPartyOperator()
         {

@@ -199,7 +199,7 @@
   </td>
   <td style="text-align: center;">
     <button mat-raised-button color="secondary" [disabled]="startLPOngoing"
-            (click)="startNewLPApplication()" id="startLP">
+            (click)="startNewLPApplication(true)" id="startLP">
       <span>
         START
         APPLICATION
@@ -439,13 +439,13 @@
       <ng-container *ngIf="item.lgHasApproved">
         <a appRemoveIfFeatureOff="LicenseeChanges"
            *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
-           routerLink="/multi-step-application/post-lg-decision/{{item.id}}" id="completeApp{{item.id}}">
+           routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
           <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
           <span>Complete Application</span>
         </a>
         <a appRemoveIfFeatureOff="LicenseeChanges"
            *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName === ApplicationTypeNames.Catering"
-           [routerLink]="['/multi-step-application/post-lg-decision/' + item.id]"
+           [routerLink]="['/account-profile/' + item.id]"
            id="completeApp{{item.id}}">
           <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
           <span>Complete Application</span>

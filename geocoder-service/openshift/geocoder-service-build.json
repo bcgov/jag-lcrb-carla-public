@@ -1,0 +1,285 @@
+{
+    "apiVersion": "image.openshift.io/v1",
+    "kind": "ImageStream",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"image.openshift.io/v1\",\"kind\":\"ImageStream\",\"metadata\":{\"annotations\":{},\"name\":\"geocoder-service\",\"namespace\":\"b7aa30-tools\"}}\n"
+        },
+        "creationTimestamp": "2020-10-23T21:09:39Z",
+        "generation": 4,
+        "managedFields": [
+            {
+                "apiVersion": "image.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:annotations": {
+                            ".": {},
+                            "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                        }
+                    }
+                },
+                "manager": "oc.exe",
+                "operation": "Update",
+                "time": "2020-10-23T21:09:39Z"
+            }
+        ],
+        "name": "geocoder-service",
+        "namespace": "b7aa30-tools",
+        "resourceVersion": "177566456",
+        "selfLink": "/apis/image.openshift.io/v1/namespaces/b7aa30-tools/imagestreams/geocoder-service",
+        "uid": "cab573b6-3ba3-4c0a-9c52-9347a7c3a65d"
+    },
+    "spec": {
+        "lookupPolicy": {
+            "local": false
+        },
+        "tags": [
+            {
+                "annotations": null,
+                "from": {
+                    "kind": "ImageStreamImage",
+                    "name": "geocoder-service@sha256:79f6d3513e3e9a43ef594373886f9061f1c3bb9d932330ff11e1a8aeea719997"
+                },
+                "generation": 2,
+                "importPolicy": {},
+                "name": "dev",
+                "referencePolicy": {
+                    "type": "Source"
+                }
+            },
+            {
+                "annotations": null,
+                "from": {
+                    "kind": "ImageStreamImage",
+                    "name": "geocoder-service@sha256:79f6d3513e3e9a43ef594373886f9061f1c3bb9d932330ff11e1a8aeea719997"
+                },
+                "generation": 4,
+                "importPolicy": {},
+                "name": "prod",
+                "referencePolicy": {
+                    "type": "Source"
+                }
+            },
+            {
+                "annotations": null,
+                "from": {
+                    "kind": "ImageStreamImage",
+                    "name": "geocoder-service@sha256:79f6d3513e3e9a43ef594373886f9061f1c3bb9d932330ff11e1a8aeea719997"
+                },
+                "generation": 3,
+                "importPolicy": {},
+                "name": "test",
+                "referencePolicy": {
+                    "type": "Source"
+                }
+            }
+        ]
+    },
+    "status": {
+        "dockerImageRepository": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/geocoder-service",
+        "publicDockerImageRepository": "image-registry.apps.silver.devops.gov.bc.ca/b7aa30-tools/geocoder-service",
+        "tags": [
+            {
+                "items": [
+                    {
+                        "created": "2020-12-24T20:42:54Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/geocoder-service@sha256:79f6d3513e3e9a43ef594373886f9061f1c3bb9d932330ff11e1a8aeea719997",
+                        "generation": 2,
+                        "image": "sha256:79f6d3513e3e9a43ef594373886f9061f1c3bb9d932330ff11e1a8aeea719997"
+                    }
+                ],
+                "tag": "dev"
+            },
+            {
+                "items": [
+                    {
+                        "created": "2020-10-23T23:05:41Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/geocoder-service@sha256:79f6d3513e3e9a43ef594373886f9061f1c3bb9d932330ff11e1a8aeea719997",
+                        "generation": 1,
+                        "image": "sha256:79f6d3513e3e9a43ef594373886f9061f1c3bb9d932330ff11e1a8aeea719997"
+                    }
+                ],
+                "tag": "latest"
+            },
+            {
+                "items": [
+                    {
+                        "created": "2020-12-24T20:43:00Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/geocoder-service@sha256:79f6d3513e3e9a43ef594373886f9061f1c3bb9d932330ff11e1a8aeea719997",
+                        "generation": 4,
+                        "image": "sha256:79f6d3513e3e9a43ef594373886f9061f1c3bb9d932330ff11e1a8aeea719997"
+                    }
+                ],
+                "tag": "prod"
+            },
+            {
+                "items": [
+                    {
+                        "created": "2020-12-24T20:42:57Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/geocoder-service@sha256:79f6d3513e3e9a43ef594373886f9061f1c3bb9d932330ff11e1a8aeea719997",
+                        "generation": 3,
+                        "image": "sha256:79f6d3513e3e9a43ef594373886f9061f1c3bb9d932330ff11e1a8aeea719997"
+                    }
+                ],
+                "tag": "test"
+            }
+        ]
+    }
+}
+,
+{
+    "apiVersion": "build.openshift.io/v1",
+    "kind": "BuildConfig",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"build.openshift.io/v1\",\"kind\":\"BuildConfig\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"geocoder-service\"},\"name\":\"geocoder-service\",\"namespace\":\"b7aa30-tools\"},\"spec\":{\"output\":{\"to\":{\"kind\":\"ImageStreamTag\",\"name\":\"geocoder-service:latest\"}},\"resources\":{\"limits\":{\"cpu\":\"1\",\"memory\":\"4Gi\"},\"requests\":{\"cpu\":\"1\",\"memory\":\"4Gi\"}},\"runPolicy\":\"Serial\",\"source\":{\"contextDir\":\"\",\"git\":{\"ref\":\"develop\",\"uri\":\"https://github.com/bcgov/jag-lcrb-carla-public.git\"},\"type\":\"Git\"},\"strategy\":{\"sourceStrategy\":{\"env\":[{\"name\":\"DOTNET_STARTUP_PROJECT\",\"value\":\"geocoder-service/geocoder-service.csproj\"}],\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"dotnet-31-rhel7:latest\",\"namespace\":\"\"}},\"type\":\"Source\"},\"triggers\":[{\"type\":\"ImageChange\"},{\"type\":\"ConfigChange\"}]}}\n"
+        },
+        "creationTimestamp": "2020-10-23T21:09:39Z",
+        "labels": {
+            "app": "geocoder-service"
+        },
+        "managedFields": [
+            {
+                "apiVersion": "build.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:annotations": {
+                            ".": {},
+                            "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                        },
+                        "f:labels": {
+                            ".": {},
+                            "f:app": {}
+                        }
+                    },
+                    "f:spec": {
+                        "f:output": {
+                            "f:to": {
+                                ".": {},
+                                "f:kind": {},
+                                "f:name": {}
+                            }
+                        },
+                        "f:resources": {
+                            "f:limits": {
+                                ".": {},
+                                "f:cpu": {},
+                                "f:memory": {}
+                            },
+                            "f:requests": {
+                                ".": {},
+                                "f:cpu": {},
+                                "f:memory": {}
+                            }
+                        },
+                        "f:runPolicy": {},
+                        "f:source": {
+                            "f:git": {
+                                ".": {},
+                                "f:ref": {},
+                                "f:uri": {}
+                            },
+                            "f:type": {}
+                        },
+                        "f:strategy": {
+                            "f:sourceStrategy": {
+                                ".": {},
+                                "f:env": {},
+                                "f:from": {
+                                    ".": {},
+                                    "f:kind": {},
+                                    "f:name": {}
+                                }
+                            },
+                            "f:type": {}
+                        }
+                    }
+                },
+                "manager": "oc.exe",
+                "operation": "Update",
+                "time": "2020-10-23T21:09:39Z"
+            },
+            {
+                "apiVersion": "build.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:spec": {
+                        "f:triggers": {}
+                    },
+                    "f:status": {
+                        "f:lastVersion": {}
+                    }
+                },
+                "manager": "openshift-apiserver",
+                "operation": "Update",
+                "time": "2020-10-23T23:02:04Z"
+            }
+        ],
+        "name": "geocoder-service",
+        "namespace": "b7aa30-tools",
+        "resourceVersion": "66618342",
+        "selfLink": "/apis/build.openshift.io/v1/namespaces/b7aa30-tools/buildconfigs/geocoder-service",
+        "uid": "1d85f6e4-9683-47b3-8169-eb37ccbb3b2e"
+    },
+    "spec": {
+        "failedBuildsHistoryLimit": 5,
+        "nodeSelector": null,
+        "output": {
+            "to": {
+                "kind": "ImageStreamTag",
+                "name": "geocoder-service:latest"
+            }
+        },
+        "postCommit": {},
+        "resources": {
+            "limits": {
+                "cpu": "1",
+                "memory": "4Gi"
+            },
+            "requests": {
+                "cpu": "1",
+                "memory": "4Gi"
+            }
+        },
+        "runPolicy": "Serial",
+        "source": {
+            "git": {
+                "ref": "develop",
+                "uri": "https://github.com/bcgov/jag-lcrb-carla-public.git"
+            },
+            "type": "Git"
+        },
+        "strategy": {
+            "sourceStrategy": {
+                "env": [
+                    {
+                        "name": "DOTNET_STARTUP_PROJECT",
+                        "value": "geocoder-service/geocoder-service.csproj"
+                    }
+                ],
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "name": "dotnet-31-rhel7:latest"
+                }
+            },
+            "type": "Source"
+        },
+        "successfulBuildsHistoryLimit": 5,
+        "triggers": [
+            {
+                "imageChange": {
+                    "lastTriggeredImageID": "registry.redhat.io/dotnet/dotnet-31-rhel7@sha256:906caf8e29244a39e2969a75bab6e6c0524e8525ffac080185554c3a06f029c9"
+                },
+                "type": "ImageChange"
+            },
+            {
+                "type": "ConfigChange"
+            }
+        ]
+    },
+    "status": {
+        "lastVersion": 2
+    }
+}

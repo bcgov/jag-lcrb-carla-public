@@ -1,0 +1,321 @@
+{
+    "apiVersion": "image.openshift.io/v1",
+    "kind": "ImageStream",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"image.openshift.io/v1\",\"kind\":\"ImageStream\",\"metadata\":{\"annotations\":{},\"name\":\"one-stop-service\",\"namespace\":\"yuumcs-tools\"}}\n"
+        },
+        "creationTimestamp": "2020-11-05T18:30:09Z",
+        "generation": 2,
+        "managedFields": [
+            {
+                "apiVersion": "image.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:annotations": {
+                            ".": {},
+                            "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                        }
+                    }
+                },
+                "manager": "Mozilla",
+                "operation": "Update",
+                "time": "2020-11-05T18:30:09Z"
+            },
+            {
+                "apiVersion": "image.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:status": {
+                        "f:tags": {
+                            "k:{\"tag\":\"latest\"}": {
+                                "f:items": {}
+                            }
+                        }
+                    }
+                },
+                "manager": "oc",
+                "operation": "Update",
+                "time": "2021-01-20T13:00:22Z"
+            }
+        ],
+        "name": "one-stop-service",
+        "namespace": "b7aa30-tools",
+        "resourceVersion": "380352241",
+        "selfLink": "/apis/image.openshift.io/v1/namespaces/b7aa30-tools/imagestreams/one-stop-service",
+        "uid": "69ec627f-87cb-458e-b718-04263ffc6588"
+    },
+    "spec": {
+        "lookupPolicy": {
+            "local": false
+        },
+        "tags": [
+            {
+                "annotations": null,
+                "from": {
+                    "kind": "ImageStreamImage",
+                    "name": "one-stop-service@sha256:7d4a98db75e23d38e0bec0062e1553248cbdfe3e15d3fd7be6dbd86021e461c9"
+                },
+                "generation": 2,
+                "importPolicy": {},
+                "name": "test",
+                "referencePolicy": {
+                    "type": "Source"
+                }
+            }
+        ]
+    },
+    "status": {
+        "dockerImageRepository": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service",
+        "publicDockerImageRepository": "image-registry.apps.silver.devops.gov.bc.ca/b7aa30-tools/one-stop-service",
+        "tags": [
+            {
+                "items": [
+                    {
+                        "created": "2021-01-26T18:44:50Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:a53fae1e2024f6befc66d42eef5275e66db450532749921d908de6ccd64d2540",
+                        "generation": 2,
+                        "image": "sha256:a53fae1e2024f6befc66d42eef5275e66db450532749921d908de6ccd64d2540"
+                    },
+                    {
+                        "created": "2021-01-19T17:33:49Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:67c7c6afae92feb6138af4a64bb77f0406ee2432337c0c7296a7872d2d04ae48",
+                        "generation": 2,
+                        "image": "sha256:67c7c6afae92feb6138af4a64bb77f0406ee2432337c0c7296a7872d2d04ae48"
+                    },
+                    {
+                        "created": "2021-01-13T23:46:32Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:9ac92c0b6f848fd0f05e2d5db46d09ef13c48f439abacdf7f7f08bd49dabac07",
+                        "generation": 2,
+                        "image": "sha256:9ac92c0b6f848fd0f05e2d5db46d09ef13c48f439abacdf7f7f08bd49dabac07"
+                    },
+                    {
+                        "created": "2021-01-05T18:46:24Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:a2a4de72f9b09694c8f4c466caec2f54f0277ab079a400d44ece49f022af5212",
+                        "generation": 2,
+                        "image": "sha256:a2a4de72f9b09694c8f4c466caec2f54f0277ab079a400d44ece49f022af5212"
+                    },
+                    {
+                        "created": "2021-01-04T22:28:41Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:57bfb517d6afc953f2a44a778816ebe3f8bd4a00fb74ad19b2db1ae6a149a339",
+                        "generation": 2,
+                        "image": "sha256:57bfb517d6afc953f2a44a778816ebe3f8bd4a00fb74ad19b2db1ae6a149a339"
+                    },
+                    {
+                        "created": "2021-01-04T19:38:24Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:87daa4c97c0c9a071547ae93b829291f2e6b49173068413c81fb0b17d6f0c990",
+                        "generation": 2,
+                        "image": "sha256:87daa4c97c0c9a071547ae93b829291f2e6b49173068413c81fb0b17d6f0c990"
+                    },
+                    {
+                        "created": "2020-12-18T21:31:07Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:7c257437d657f8e6436b30c5c70893b763959d0a3096acc478c2fa271c19ea4c",
+                        "generation": 2,
+                        "image": "sha256:7c257437d657f8e6436b30c5c70893b763959d0a3096acc478c2fa271c19ea4c"
+                    },
+                    {
+                        "created": "2020-12-18T19:50:43Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:da80e10f05629aa254d32971e1127dee9c62ba57e02c20c34fe72f87ebea1afe",
+                        "generation": 2,
+                        "image": "sha256:da80e10f05629aa254d32971e1127dee9c62ba57e02c20c34fe72f87ebea1afe"
+                    },
+                    {
+                        "created": "2020-12-18T17:33:22Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:02c4ad23617d7c4b269fe898df9005239c2e74b4de66696b0a3f97ebae9d7b70",
+                        "generation": 2,
+                        "image": "sha256:02c4ad23617d7c4b269fe898df9005239c2e74b4de66696b0a3f97ebae9d7b70"
+                    },
+                    {
+                        "created": "2020-12-18T01:04:27Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:3ba6e74e4ac98f196bd45b78a851bf942311516806f5618262b29d21731b8274",
+                        "generation": 2,
+                        "image": "sha256:3ba6e74e4ac98f196bd45b78a851bf942311516806f5618262b29d21731b8274"
+                    },
+                    {
+                        "created": "2020-12-17T23:47:42Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:a207866d84957dfd91c813065ebcdb82f70b544a9cbd26c6e50fd6daf6a7a396",
+                        "generation": 2,
+                        "image": "sha256:a207866d84957dfd91c813065ebcdb82f70b544a9cbd26c6e50fd6daf6a7a396"
+                    },
+                    {
+                        "created": "2020-12-16T01:13:12Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:7d4a98db75e23d38e0bec0062e1553248cbdfe3e15d3fd7be6dbd86021e461c9",
+                        "generation": 1,
+                        "image": "sha256:7d4a98db75e23d38e0bec0062e1553248cbdfe3e15d3fd7be6dbd86021e461c9"
+                    }
+                ],
+                "tag": "latest"
+            },
+            {
+                "items": [
+                    {
+                        "created": "2020-12-16T01:13:13Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/one-stop-service@sha256:7d4a98db75e23d38e0bec0062e1553248cbdfe3e15d3fd7be6dbd86021e461c9",
+                        "generation": 2,
+                        "image": "sha256:7d4a98db75e23d38e0bec0062e1553248cbdfe3e15d3fd7be6dbd86021e461c9"
+                    }
+                ],
+                "tag": "test"
+            }
+        ]
+    }
+}
+,
+{
+    "apiVersion": "build.openshift.io/v1",
+    "kind": "BuildConfig",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"build.openshift.io/v1\",\"kind\":\"BuildConfig\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"one-stop-service\"},\"name\":\"one-stop-service\",\"namespace\":\"yuumcs-tools\"},\"spec\":{\"output\":{\"to\":{\"kind\":\"ImageStreamTag\",\"name\":\"one-stop-service:latest\"}},\"resources\":{\"limits\":{\"cpu\":\"1\",\"memory\":\"4Gi\"},\"requests\":{\"cpu\":\"1\",\"memory\":\"4Gi\"}},\"runPolicy\":\"Serial\",\"source\":{\"contextDir\":\"\",\"git\":{\"ref\":\"develop\",\"uri\":\"https://github.com/bcgov/jag-lcrb-carla-public.git\"},\"type\":\"Git\"},\"strategy\":{\"sourceStrategy\":{\"env\":[{\"name\":\"DOTNET_STARTUP_PROJECT\",\"value\":\"one-stop-service/one-stop-service/one-stop-service.csproj\"}],\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"dotnet-31-rhel7:latest\"}},\"type\":\"Source\"},\"triggers\":[{\"type\":\"ImageChange\"},{\"type\":\"ConfigChange\"}]}}\n"
+        },
+        "creationTimestamp": "2020-11-05T18:26:18Z",
+        "labels": {
+            "app": "one-stop-service"
+        },
+        "managedFields": [
+            {
+                "apiVersion": "build.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:annotations": {
+                            ".": {},
+                            "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                        },
+                        "f:labels": {
+                            ".": {},
+                            "f:app": {}
+                        }
+                    },
+                    "f:spec": {
+                        "f:failedBuildsHistoryLimit": {},
+                        "f:output": {
+                            "f:to": {
+                                ".": {},
+                                "f:kind": {},
+                                "f:name": {}
+                            }
+                        },
+                        "f:resources": {
+                            "f:limits": {
+                                ".": {},
+                                "f:cpu": {},
+                                "f:memory": {}
+                            },
+                            "f:requests": {
+                                ".": {},
+                                "f:cpu": {},
+                                "f:memory": {}
+                            }
+                        },
+                        "f:runPolicy": {},
+                        "f:source": {
+                            "f:git": {
+                                ".": {},
+                                "f:ref": {},
+                                "f:uri": {}
+                            },
+                            "f:type": {}
+                        },
+                        "f:strategy": {
+                            "f:sourceStrategy": {
+                                ".": {},
+                                "f:env": {},
+                                "f:from": {
+                                    ".": {},
+                                    "f:kind": {},
+                                    "f:name": {}
+                                }
+                            },
+                            "f:type": {}
+                        },
+                        "f:successfulBuildsHistoryLimit": {}
+                    }
+                },
+                "manager": "Mozilla",
+                "operation": "Update",
+                "time": "2020-12-17T20:27:33Z"
+            },
+            {
+                "apiVersion": "build.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:spec": {
+                        "f:triggers": {}
+                    },
+                    "f:status": {
+                        "f:lastVersion": {}
+                    }
+                },
+                "manager": "openshift-apiserver",
+                "operation": "Update",
+                "time": "2021-01-26T18:40:06Z"
+            }
+        ],
+        "name": "one-stop-service",
+        "namespace": "b7aa30-tools",
+        "resourceVersion": "380328741",
+        "selfLink": "/apis/build.openshift.io/v1/namespaces/b7aa30-tools/buildconfigs/one-stop-service",
+        "uid": "044554eb-3da4-4142-aba7-a2742f4d2a99"
+    },
+    "spec": {
+        "failedBuildsHistoryLimit": 5,
+        "nodeSelector": null,
+        "output": {
+            "to": {
+                "kind": "ImageStreamTag",
+                "name": "one-stop-service:latest"
+            }
+        },
+        "postCommit": {},
+        "resources": {
+            "limits": {
+                "cpu": "1",
+                "memory": "4Gi"
+            },
+            "requests": {
+                "cpu": "1",
+                "memory": "4Gi"
+            }
+        },
+        "runPolicy": "Serial",
+        "source": {
+            "git": {
+                "ref": "develop",
+                "uri": "https://github.com/GeorgeWalker/jag-lcrb-carla-public.git"
+            },
+            "type": "Git"
+        },
+        "strategy": {
+            "sourceStrategy": {
+                "env": [
+                    {
+                        "name": "DOTNET_STARTUP_PROJECT",
+                        "value": "one-stop-service/one-stop-service.csproj"
+                    }
+                ],
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "name": "dotnet-50:latest"
+                }
+            },
+            "type": "Source"
+        },
+        "successfulBuildsHistoryLimit": 5,
+        "triggers": [
+            {
+                "imageChange": {
+                    "lastTriggeredImageID": "registry.redhat.io/ubi8/dotnet-50@sha256:07cde1bec438f5a743f10f64738da74393a8194d15c59043055a28b376eed3f1"
+                },
+                "type": "ImageChange"
+            },
+            {
+                "type": "ConfigChange"
+            }
+        ]
+    },
+    "status": {
+        "lastVersion": 67
+    }
+}

@@ -49,17 +49,17 @@ namespace bdd_tests
             // upload personal history summary form
             if (businessType == " sole proprietorship")
             {
-                FileUpload("associates.pdf", "(//input[@type='file'])[3]");
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
             }
             else
             {
-                FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
             }
 
             // upload shareholders < 10% interest
             if (businessType != " sole proprietorship")
             {
-                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
 
             // enter the establishment name
