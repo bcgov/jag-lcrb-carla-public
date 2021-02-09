@@ -49,9 +49,9 @@ Scenario: DEV Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I click on the Licences tab
-    # And I click on the link for Manage Off-Site Storage
-    # And I complete the offsite storage application
-    # And I click on the secondary Submit button
+    And I click on the link for Manage Off-Site Storage
+    And I complete the offsite storage application
+    And I click on the secondary Submit button
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved

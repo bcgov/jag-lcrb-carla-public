@@ -8,6 +8,7 @@ import { Observable } from "rxjs";
 import { DataService } from "./data.service";
 import { CovidApplication } from "@models/covid-application.model";
 import { OngoingLicenseeData } from "../models/ongoing-licensee-data";
+import { PagingResult } from "@models/paging-result.model";
 
 @Injectable()
 export class ApplicationDataService extends DataService {
@@ -56,9 +57,9 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getResolvedLGApplications(pageIndex: number = 0, pageSize: number = 10): Observable<Application[]> {
+  getResolvedLGApplications(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<Application>> {
     const url =`${this.apiPath}current/resolved-lg-applications?pageIndex=${pageIndex}&pageSize=${pageSize}`;
-    return this.http.get<Application[]>(url, { headers: this.headers })
+    return this.http.get<PagingResult<Application>>(url, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

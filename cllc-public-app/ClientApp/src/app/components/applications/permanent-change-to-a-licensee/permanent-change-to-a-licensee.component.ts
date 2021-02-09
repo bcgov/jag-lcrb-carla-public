@@ -22,6 +22,7 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
   styleUrls: ["./permanent-change-to-a-licensee.component.scss"]
 })
 export class PermanentChangeToALicenseeComponent extends FormBase implements OnInit {
+  isAmalgamated = false;
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
   value: any; // placeholder prop
@@ -334,6 +335,13 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         }));
   }
 
+  showLiquorCostColumn(item: any){
+    const show = this.form.get(item.formControlName).value === true 
+    && (item.name !== 'Internal Transfer of Shares')
+    && !(item.name === 'Change of Directors or Officers' && this.account.businessType  === 'PrivateCorporation');
+    return show;
+  }
+
   getValidationErrorMap() {
     const errorMap = {
       signatureAgreement:
@@ -345,7 +353,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       contactPersonPhone: "Please enter the business contact's 10-digit phone number",
       contactPersonRole: "Please enter the contact person role"
     };
-
     return errorMap;
   }
 
@@ -400,7 +407,7 @@ const masterChangeList = [
   {
     name: "Name Change, Licensee -- Corporation",
     formControlName: "csNameChangeLicenseeCorporation",
-    availableTo: ["PrivateCorporation", "PublicCorporation"],
+    availableTo: ["PrivateCorporation", "PublicCorporation", "SoleProprietorship"],
     CannabisFee: 220,
     LiquorFee: 220,
     RequiresPHS: false,
@@ -414,7 +421,7 @@ const masterChangeList = [
   {
     name: "Name Change, Licensee -- Partnership",
     formControlName: "csNameChangeLicenseePartnership",
-    availableTo: ["GeneralPartnership", "LimitedLiabilityPartnership"],
+    availableTo: ["GeneralPartnership", "Partnership", "LimitedLiabilityPartnership"],
     CannabisFee: 220,
     LiquorFee: 220,
     RequiresPHS: false,
@@ -443,7 +450,7 @@ const masterChangeList = [
     name: "Name Change, Person",
     formControlName: "csNameChangeLicenseePerson",
     availableTo: [
-      "PrivateCorporation", "PublicCorporation", "GeneralPartnership",
+      "PrivateCorporation", "PublicCorporation", "GeneralPartnership", "Partnership",
       "LimitedLiabilityPartnership", "IndigenousNation", "LocalGovernment", "Society"
     ],
     CannabisFee: 220,
@@ -460,7 +467,7 @@ const masterChangeList = [
     name: "Addition of Receiver or Executor",
     formControlName: "csAdditionalReceiverOrExecutor",
     availableTo: [
-      "PrivateCorporation", "PublicCorporation", "GeneralPartnership",
+      "PrivateCorporation", "PublicCorporation", "GeneralPartnership", "Partnership",
       "LimitedLiabilityPartnership", "Society"
     ],
     CannabisFee: 220,

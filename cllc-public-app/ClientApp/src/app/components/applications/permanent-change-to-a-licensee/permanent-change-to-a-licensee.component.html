@@ -160,7 +160,8 @@
               information.</p>
 
             <!-- Licensee Details -->
-            <section *ngIf="(cannabisLicences && cannabisLicences.length > 0) || (liquorLicences && liquorLicences.length > 0)">
+            <section
+              *ngIf="(cannabisLicences && cannabisLicences.length > 0) || (liquorLicences && liquorLicences.length > 0)">
               <h3>Licensee Details</h3>
               <p>You have the following licences:</p>
               <table style="border: solid black 1px;">
@@ -190,15 +191,15 @@
                 </tbody>
               </table>
 
-            <p>&nbsp;</p>
-            <ul>
-              <li>Applicable fees for cannabis licensees are listed in <a
-                  href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
-                  target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
-              <li>Applicable fees for liquor licensees are listed in <a
-                  href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
-                  target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
-            </ul>
+              <p>&nbsp;</p>
+              <ul>
+                <li>Applicable fees for cannabis licensees are listed in <a
+                    href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
+                    target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
+                <li>Applicable fees for liquor licensees are listed in <a
+                    href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
+                    target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
+              </ul>
             </section>
           </section>
 
@@ -301,7 +302,16 @@
         </app-file-uploader>
 
         <hr>
-        <section>
+      
+        <app-field label="Have you amalgamated with another company?"
+          [valid]="true" [showChevrons]="false" [isFullWidth]="true">
+          <!-- This value is not saved to dynamics. That is why it is not in the 'form' and the data model.-->
+          <mat-radio-group [(ngModel)]="isAmalgamated" [ngModelOptions]="{standalone: true}">
+            <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+            <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+        </app-field>
+        <section *ngIf="isAmalgamated">
           <p>If the change is the result of an internal amalgamation, attach:</p>
 
           <h4>Certificate of Amalgamation</h4>
@@ -456,14 +466,16 @@
         <h4>Notice of Articles (or Register of Directors and Officers)</h4>
         <p>Provide the updated Notice of Articles for your corporation. Alternatively, you can provide list of all
           current directors/officers by full legal name, position and date of appointment.</p>
-        <p *ngIf="hasLiquor"><strong>For Liquor Licensees: Directors and Officers are required to submit a Personal History Summary Form for liquor-related applications, except for <u>private corporations</u>.</strong></p>
+        <p *ngIf="hasLiquor"><strong>For Liquor Licensees: Directors and Officers are required to submit a Personal
+            History Summary Form for liquor-related applications, except for <u>private corporations</u>.</strong></p>
         <app-file-uploader *ngIf="application?.id" documentType="NOA" fileTypes="FILE MUST BE IN PDF FORMAT."
           [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
           (numberOfUploadedFiles)="uploadedNOA = $event" [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'">
         </app-file-uploader>
         <p *ngIf="hasCannabis"><strong>
-            <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>For Cannabis Licensees: All newly added directors must submit a completed Cannabis
+            <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>For Cannabis Licensees: All newly added directors must
+            submit a completed Cannabis
             Associate Security Screening form below.
           </strong>
         </p>
@@ -583,7 +595,7 @@
 
     <!-- Partnership Business Name Change -->
     <section *ngIf="form.get('csNameChangeLicenseePartnership').value">
-      <h3 class="blue-header">Partership Business Name Change</h3>
+      <h3 class="blue-header">Partnership Business Name Change</h3>
       <div class="content-bottom">
         <p>
           To be completed when the legal name of a partnership is changed but no new partners
@@ -934,7 +946,8 @@
     </section>
 
     <!-- Payment -->
-    <section *ngIf="selectedChangeList?.length > 0 && (cannabisLicences && cannabisLicences.length > 0 || liquorLicences && liquorLicences.length > 0)">
+    <section
+      *ngIf="selectedChangeList?.length > 0 && (cannabisLicences && cannabisLicences.length > 0 || liquorLicences && liquorLicences.length > 0)">
       <h3 class="blue-header ngtest-payment">
         PAYMENT
       </h3>
@@ -998,8 +1011,7 @@
             <th class="paymentSummary">Cost</th>
           </tr>
           <ng-container *ngFor="let item of changeList">
-            <tr
-              *ngIf="form.get(item.formControlName).value === true && !(item.name == 'Internal Transfer of Shares' && form.get('csExternalTransferOfShares').value === true)">
+            <tr *ngIf="showLiquorCostColumn(item)">
               <td class="paymentSummary1">{{item.name}}</td>
               <td class="paymentSummary2">x {{liquorLicences.length}}</td>
               <td class="paymentSummary2">${{item.LiquorFee}}</td>
