@@ -156,7 +156,7 @@ namespace bdd_tests
 
             // select 'Yes'
             // Do you, or any of your shareholders, have any connection, financial or otherwise, direct or indirect, with a distillery, brewery or winery?
-            NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-78-button"));
+            NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-79-button"));
             uiOtherBusinessYes.Click();
 
             // enter the connection details
