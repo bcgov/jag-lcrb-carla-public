@@ -1,0 +1,285 @@
+{
+    "apiVersion": "image.openshift.io/v1",
+    "kind": "ImageStream",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"image.openshift.io/v1\",\"kind\":\"ImageStream\",\"metadata\":{\"annotations\":{},\"name\":\"carla-spice-sync-service\",\"namespace\":\"b7aa30-tools\"}}\n"
+        },
+        "creationTimestamp": "2020-10-23T21:08:47Z",
+        "generation": 4,
+        "managedFields": [
+            {
+                "apiVersion": "image.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:annotations": {
+                            ".": {},
+                            "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                        }
+                    }
+                },
+                "manager": "oc.exe",
+                "operation": "Update",
+                "time": "2020-10-23T21:08:47Z"
+            }
+        ],
+        "name": "carla-spice-sync-service",
+        "namespace": "b7aa30-tools",
+        "resourceVersion": "177395208",
+        "selfLink": "/apis/image.openshift.io/v1/namespaces/b7aa30-tools/imagestreams/carla-spice-sync-service",
+        "uid": "d9282948-9c0e-468c-94e6-eca66c92db11"
+    },
+    "spec": {
+        "lookupPolicy": {
+            "local": false
+        },
+        "tags": [
+            {
+                "annotations": null,
+                "from": {
+                    "kind": "ImageStreamImage",
+                    "name": "carla-spice-sync-service@sha256:cb69563e01dbd795fd40b68b2eaade40d8134b36981ba28b6dff59684af27520"
+                },
+                "generation": 2,
+                "importPolicy": {},
+                "name": "dev",
+                "referencePolicy": {
+                    "type": "Source"
+                }
+            },
+            {
+                "annotations": null,
+                "from": {
+                    "kind": "ImageStreamImage",
+                    "name": "carla-spice-sync-service@sha256:cb69563e01dbd795fd40b68b2eaade40d8134b36981ba28b6dff59684af27520"
+                },
+                "generation": 4,
+                "importPolicy": {},
+                "name": "prod",
+                "referencePolicy": {
+                    "type": "Source"
+                }
+            },
+            {
+                "annotations": null,
+                "from": {
+                    "kind": "ImageStreamImage",
+                    "name": "carla-spice-sync-service@sha256:cb69563e01dbd795fd40b68b2eaade40d8134b36981ba28b6dff59684af27520"
+                },
+                "generation": 3,
+                "importPolicy": {},
+                "name": "test",
+                "referencePolicy": {
+                    "type": "Source"
+                }
+            }
+        ]
+    },
+    "status": {
+        "dockerImageRepository": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/carla-spice-sync-service",
+        "publicDockerImageRepository": "image-registry.apps.silver.devops.gov.bc.ca/b7aa30-tools/carla-spice-sync-service",
+        "tags": [
+            {
+                "items": [
+                    {
+                        "created": "2020-12-24T19:59:25Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/carla-spice-sync-service@sha256:cb69563e01dbd795fd40b68b2eaade40d8134b36981ba28b6dff59684af27520",
+                        "generation": 2,
+                        "image": "sha256:cb69563e01dbd795fd40b68b2eaade40d8134b36981ba28b6dff59684af27520"
+                    }
+                ],
+                "tag": "dev"
+            },
+            {
+                "items": [
+                    {
+                        "created": "2020-11-09T23:48:39Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/carla-spice-sync-service@sha256:cb69563e01dbd795fd40b68b2eaade40d8134b36981ba28b6dff59684af27520",
+                        "generation": 1,
+                        "image": "sha256:cb69563e01dbd795fd40b68b2eaade40d8134b36981ba28b6dff59684af27520"
+                    }
+                ],
+                "tag": "latest"
+            },
+            {
+                "items": [
+                    {
+                        "created": "2020-12-24T19:59:32Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/carla-spice-sync-service@sha256:cb69563e01dbd795fd40b68b2eaade40d8134b36981ba28b6dff59684af27520",
+                        "generation": 4,
+                        "image": "sha256:cb69563e01dbd795fd40b68b2eaade40d8134b36981ba28b6dff59684af27520"
+                    }
+                ],
+                "tag": "prod"
+            },
+            {
+                "items": [
+                    {
+                        "created": "2020-12-24T19:59:28Z",
+                        "dockerImageReference": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/carla-spice-sync-service@sha256:cb69563e01dbd795fd40b68b2eaade40d8134b36981ba28b6dff59684af27520",
+                        "generation": 3,
+                        "image": "sha256:cb69563e01dbd795fd40b68b2eaade40d8134b36981ba28b6dff59684af27520"
+                    }
+                ],
+                "tag": "test"
+            }
+        ]
+    }
+}
+,
+{
+    "apiVersion": "build.openshift.io/v1",
+    "kind": "BuildConfig",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"build.openshift.io/v1\",\"kind\":\"BuildConfig\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"carla-spice-sync-service\"},\"name\":\"carla-spice-sync-service\",\"namespace\":\"b7aa30-tools\"},\"spec\":{\"output\":{\"to\":{\"kind\":\"ImageStreamTag\",\"name\":\"carla-spice-sync-service:latest\"}},\"resources\":{\"limits\":{\"cpu\":\"1\",\"memory\":\"4Gi\"},\"requests\":{\"cpu\":\"1\",\"memory\":\"3Gi\"}},\"runPolicy\":\"Serial\",\"source\":{\"contextDir\":\"\",\"git\":{\"ref\":\"develop\",\"uri\":\"https://github.com/bcgov/jag-lcrb-carla-public.git\"},\"type\":\"Git\"},\"strategy\":{\"sourceStrategy\":{\"env\":[{\"name\":\"DOTNET_STARTUP_PROJECT\",\"value\":\"carla-spice-sync-service/CarlaSpiceSync.csproj\"}],\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"dotnet-31-rhel7:latest\",\"namespace\":\"\"}},\"type\":\"Source\"},\"triggers\":[{\"type\":\"ImageChange\"},{\"type\":\"ConfigChange\"}]}}\n"
+        },
+        "creationTimestamp": "2020-10-23T21:08:47Z",
+        "labels": {
+            "app": "carla-spice-sync-service"
+        },
+        "managedFields": [
+            {
+                "apiVersion": "build.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:annotations": {
+                            ".": {},
+                            "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                        },
+                        "f:labels": {
+                            ".": {},
+                            "f:app": {}
+                        }
+                    },
+                    "f:spec": {
+                        "f:output": {
+                            "f:to": {
+                                ".": {},
+                                "f:kind": {},
+                                "f:name": {}
+                            }
+                        },
+                        "f:resources": {
+                            "f:limits": {
+                                ".": {},
+                                "f:cpu": {},
+                                "f:memory": {}
+                            },
+                            "f:requests": {
+                                ".": {},
+                                "f:cpu": {},
+                                "f:memory": {}
+                            }
+                        },
+                        "f:runPolicy": {},
+                        "f:source": {
+                            "f:git": {
+                                ".": {},
+                                "f:ref": {},
+                                "f:uri": {}
+                            },
+                            "f:type": {}
+                        },
+                        "f:strategy": {
+                            "f:sourceStrategy": {
+                                ".": {},
+                                "f:env": {},
+                                "f:from": {
+                                    ".": {},
+                                    "f:kind": {},
+                                    "f:name": {}
+                                }
+                            },
+                            "f:type": {}
+                        }
+                    }
+                },
+                "manager": "oc.exe",
+                "operation": "Update",
+                "time": "2020-10-23T21:08:47Z"
+            },
+            {
+                "apiVersion": "build.openshift.io/v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:spec": {
+                        "f:triggers": {}
+                    },
+                    "f:status": {
+                        "f:lastVersion": {}
+                    }
+                },
+                "manager": "openshift-apiserver",
+                "operation": "Update",
+                "time": "2020-11-09T23:44:51Z"
+            }
+        ],
+        "name": "carla-spice-sync-service",
+        "namespace": "b7aa30-tools",
+        "resourceVersion": "89605914",
+        "selfLink": "/apis/build.openshift.io/v1/namespaces/b7aa30-tools/buildconfigs/carla-spice-sync-service",
+        "uid": "f5e57f15-2b5e-4eea-8b5f-746d03065079"
+    },
+    "spec": {
+        "failedBuildsHistoryLimit": 5,
+        "nodeSelector": null,
+        "output": {
+            "to": {
+                "kind": "ImageStreamTag",
+                "name": "carla-spice-sync-service:latest"
+            }
+        },
+        "postCommit": {},
+        "resources": {
+            "limits": {
+                "cpu": "1",
+                "memory": "4Gi"
+            },
+            "requests": {
+                "cpu": "1",
+                "memory": "3Gi"
+            }
+        },
+        "runPolicy": "Serial",
+        "source": {
+            "git": {
+                "ref": "develop",
+                "uri": "https://github.com/bcgov/jag-lcrb-carla-public.git"
+            },
+            "type": "Git"
+        },
+        "strategy": {
+            "sourceStrategy": {
+                "env": [
+                    {
+                        "name": "DOTNET_STARTUP_PROJECT",
+                        "value": "carla-spice-sync-service/CarlaSpiceSync.csproj"
+                    }
+                ],
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "name": "dotnet-31-rhel7:latest"
+                }
+            },
+            "type": "Source"
+        },
+        "successfulBuildsHistoryLimit": 5,
+        "triggers": [
+            {
+                "imageChange": {
+                    "lastTriggeredImageID": "registry.redhat.io/dotnet/dotnet-31-rhel7@sha256:906caf8e29244a39e2969a75bab6e6c0524e8525ffac080185554c3a06f029c9"
+                },
+                "type": "ImageChange"
+            },
+            {
+                "type": "ConfigChange"
+            }
+        ]
+    },
+    "status": {
+        "lastVersion": 3
+    }
+}

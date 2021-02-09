@@ -33,8 +33,6 @@ Scenario: DEV CRS Release (Private Corporation)
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I click on the link for Download Licence
     And I show the store as open on the map
@@ -47,9 +45,6 @@ Scenario: DEV CRS Release (Private Corporation)
     And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
-    And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
@@ -69,8 +64,6 @@ Scenario: DEV CRS Release (Sole Proprietorship)
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
     And I request a valid store name or branding change for Cannabis
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I click on the link for Download Licence
     And I show the store as open on the map
@@ -83,9 +76,6 @@ Scenario: DEV CRS Release (Sole Proprietorship)
     And I request a store relocation for Cannabis
     And I request a structural change
     And I request a transfer of ownership
-    And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
-    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 

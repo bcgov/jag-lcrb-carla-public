@@ -77,7 +77,7 @@ import { OffsiteStorageComponent } from "@components/offsite-storage/offsite-sto
 import { NoticesComponent } from "@components/notices/notices.component";
 import { LicenseeRetailStoresComponent } from "./components/licensee-retail-stores/licensee-retail-stores.component";
 import { TuaEventComponent } from "@components/tua-event/tua-event.component";
-import { ApplicationRequestTermChangeComponent } from './components/applications/application-request-term-change/application-request-term-change.component';
+import { ApplicationTiedHouseExemptionComponent } from "@components/applications/application-tied-house-exemption/application-tied-house-exemption.component";
 
 const routes: Routes = [
   {
@@ -306,12 +306,12 @@ const routes: Routes = [
     component: ApplicationOwnershipTransferComponent,
     canActivate: [BCeidAuthGuard]
   },
+  
   {
-    path: "request-term-change/:licenceId/:termId",
-    component: ApplicationRequestTermChangeComponent,
+    path: "tied-house-exemption/:licenceId",
+    component: ApplicationTiedHouseExemptionComponent,
     canActivate: [BCeidAuthGuard]
   },
-
   {
     path: "third-party-operator/:licenceId",
     component: ApplicationThirdPartyOperatorComponent,

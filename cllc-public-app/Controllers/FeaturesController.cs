@@ -1,4 +1,4 @@
-﻿ using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -13,6 +13,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IConfiguration _configuration;
 
+        // The list of all application features
+        // The first item of the tuple is the feature in in configuration
+        // The second parameter is the name of the feature used by the Angular client
+        readonly List<(string, string)> features = new List<(string, string)>{
+                ("FEATURE_INDIGENOUS_NATION", "IndigenousNation"),
+                ("FEATURE_MAPS", "Maps"),
+                ("FEATURE_LICENSEE_CHANGES", "LicenseeChanges"),
+                ("FEATURE_NO_WET_SIGNATURE", "NoWetSignature"),
+                ("FEATURE_SECURITY_SCREENING", "SecurityScreening"),
+                ("FEATURE_DISABLE_LOGIN", "DisableLogin"),
+                ("FEATURE_LIQUOR_ONE", "LiquorOne"),
+                ("FEATURE_LIQUOR_TWO", "LiquorTwo"),
+                ("FEATURE_LIQUOR_THREE", "LiquorThree"),
+                ("FEATURE_COVID_APPLICATION", "CovidApplication"),
+                ("FEATURE_LG_APPROVALS", "LGApprovals"),
+                ("FEATURE_CASS", "CASS"),
+                ("FEATURE_MARKET_EVENTS", "MarketEvents"),
+                ("FEATURE_PERMANENT_CHANGES_TO_LICENSEE", "PermanentChangesToLicensee"),
+                ("FEATURE_NOTICES", "Notices"),
+                ("FEATURE_LE_CONNECTIONS", "LEConnections"),
+                ("FEATURE_TUA_EVENTS", "TemporaryUseAreaEvents"),
+                ("FEATURE_ELIGIBILITY", "Eligibility"),
+                ("FEATURE_RESOLVED_APPS","ResolvedApplications") //Applications that  have been resolved by the local government
+            };
+
         public FeaturesController(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -26,102 +51,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet]
         public List<string> GetFeatureList()
         {
-            var features = new List<string>();
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_INDIGENOUS_NATION"]))
-            {
-                features.Add("IndigenousNation");
+            var activeFeatures = new List<string>();
+            foreach(var feature in this.features){
+                if (!string.IsNullOrEmpty(_configuration[feature.Item1]))
+                {
+                    activeFeatures.Add(feature.Item2);
+                }
             }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_MAPS"]))
-            {
-                features.Add("Maps");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_LICENSEE_CHANGES"]))
-            {
-                features.Add("LicenseeChanges");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_NO_WET_SIGNATURE"]))
-            {
-                features.Add("NoWetSignature");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_SECURITY_SCREENING"]))
-            {
-                features.Add("SecurityScreening");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_DISABLE_LOGIN"]))
-            {
-                features.Add("DisableLogin");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_LIQUOR_ONE"]))
-            {
-                features.Add("LiquorOne");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_LIQUOR_TWO"]))
-            {
-                features.Add("LiquorTwo");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_LIQUOR_THREE"]))
-            {
-                features.Add("LiquorThree");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_COVID_APPLICATION"]))
-            {
-                features.Add("CovidApplication");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_LG_APPROVALS"]))
-            {
-                features.Add("LGApprovals");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_CASS"]))
-            {
-                features.Add("CASS");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_MARKET_EVENTS"]))
-            {
-                features.Add("MarketEvents");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_PERMANENT_CHANGES_TO_LICENSEE"]))
-            {
-                features.Add("PermanentChangesToLicensee");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_NOTICES"]))
-            {
-                features.Add("Notices");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_LE_CONNECTIONS"]))
-            {
-                features.Add("LEConnections");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_TUA_EVENTS"]))
-            {
-                features.Add("TemporaryUseAreaEvents");
-            }
-
-            if (!string.IsNullOrEmpty(_configuration["FEATURE_ELIGIBILITY"]))
-            {
-                features.Add("Eligibility");
-            }
-
-            
-
-            return features;
+            return activeFeatures;
         }
-
     }
 }

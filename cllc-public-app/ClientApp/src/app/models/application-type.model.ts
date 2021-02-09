@@ -23,6 +23,7 @@ export class ApplicationType {
   showFinancialIntegrityFormUpload: boolean;
   showSupportingDocuments: boolean;
   showDeclarations: boolean;
+  showLgNoObjection: boolean;
   showLiquorDeclarations: boolean;
   showOwnershipDeclaration: boolean;
   establishmetNameIsReadOnly: boolean;

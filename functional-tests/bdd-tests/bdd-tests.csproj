@@ -48,6 +48,9 @@
     <None Update="CannabisMarketingRelease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="LiquorPrimaryDownloadLicence.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="UBrewUVinLicensingRenewal.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -123,7 +126,7 @@
     <None Update="CateringApplicationDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ChangeHoursLiquorService.feature">
+    <None Update="ManufacturerChangeHoursLiquorService.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationLicensingRenewalDenied.feature">
