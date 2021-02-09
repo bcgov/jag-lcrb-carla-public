@@ -477,7 +477,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // create a new application.
-            var application = CreateApplication(item.LicenceId, ApplicationTypeNames.TiedHouseExcemption, item.RelatedLicenceId);
+            var application = CreateApplication(item.LicenceId, ApplicationTypeNames.TiedHouseExemption, item.RelatedLicenceId);
             
             return Ok();
         }
