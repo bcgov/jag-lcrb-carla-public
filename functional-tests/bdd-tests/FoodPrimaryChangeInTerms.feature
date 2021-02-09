@@ -17,5 +17,6 @@ Scenario: Food Primary Change in Terms (Private Corporation)
     And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
     And I request a change in terms and conditions application
     And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
