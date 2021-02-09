@@ -233,7 +233,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
                 patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
                 await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid, patchWorker).ConfigureAwait(true);
-                
+
             }
             catch (HttpOperationException httpOperationException)
             {

@@ -41,7 +41,10 @@
   THE APPLICATION
 </h3>
 <section *ngIf="htmlContent?.beforeStarting" class="padded-section content-bottom">
-  <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+  <app-more-less-content>
+    <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting">
+    </div>
+  </app-more-less-content>
 
   <p
     *ngIf="application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation">
@@ -821,7 +824,7 @@
 
 
   <!-- Letter of Intent -->
-  <section *ngIf="application?.applicationType.name === 'Special Event Area Endorsement'">
+  <!--section *ngIf="application?.applicationType.name === 'Special Event Area Endorsement'">
     <h3 class="blue-header">Letter of Intent</h3>
     <section class="content-bottom">
       <div *ngIf="htmlContent.letterOfIntent">
@@ -840,7 +843,7 @@
         </app-file-uploader>
       </section>
     </section>
-  </section>
+  </section-->
 </section>
 
 <!-- Store Contact Info -->
@@ -2471,7 +2474,7 @@
     <span style="color: #1a5a96;">{{form.controls['establishmentName'].value}}</span>
     <br>
 
-    <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">
+    <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore || application?.applicationType?.name === ApplicationTypeNames.Marketer">
 
       <label for="">Associates Form</label>
       <br>
@@ -2536,7 +2539,7 @@
     </div>
     <label for="">Supporting Documents</label>
     <br>
-    <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+    <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
       Please download the
       <span *ngIf=" application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
         <a *ngIf="account?.businessType === 'SoleProprietorship'"
@@ -2623,6 +2626,7 @@
       </div>
 
     </section>
+    <section *ngIf="this.isLiquor()"><p>Please add additional supporting documents as directed by LCRB.</p></section>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
                          [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"

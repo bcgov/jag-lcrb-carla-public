@@ -4,8 +4,11 @@
 // regenerated.
 // </auto-generated>
 
+using System;
+
 namespace Gov.Lclb.Cllb.Interfaces.Spice
 {
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Models;
@@ -23,6 +26,35 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
         /// The base URI of the service.
         /// </summary>
         public System.Uri BaseUri { get; set; }
+        private readonly HttpClient _client;
+
+        private readonly IConfiguration _configuration;
+
+
+        public SpiceClient(HttpClient httpClient, IConfiguration configuration)
+        {
+
+            _configuration = configuration;
+            // create the HttpClient that is used for our direct REST calls.
+
+            string spiceUri = _configuration["SPICE_URI"];
+            string token = _configuration["SPICE_JWT_TOKEN"];
+
+            // create JWT credentials
+            TokenCredentials credentials = new TokenCredentials(token);
+
+            _client = httpClient;
+
+            if (!string.IsNullOrEmpty(spiceUri) && !string.IsNullOrEmpty(token))
+            {
+                BaseUri = new Uri(spiceUri);
+                string bearer_token = $"Bearer {token}";
+
+                _client.DefaultRequestHeaders.Add("Accept", "application/json");
+                _client.DefaultRequestHeaders.Add("Authorization", bearer_token);
+            }
+
+        }
 
         /// <summary>
         /// Gets or sets json serialization settings.
@@ -378,7 +410,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await _client.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
                 ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
@@ -495,7 +527,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await _client.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
                 ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
@@ -624,7 +656,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await _client.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
                 ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);

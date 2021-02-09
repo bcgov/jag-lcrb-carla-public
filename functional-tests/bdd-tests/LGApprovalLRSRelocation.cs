@@ -25,7 +25,7 @@ Scenario: Local Government Approval for LRS Relocation (Private Corporation)
     And I click on the link for Relocation Application
     And I click on the Continue to Application button
     And I complete the LRS application
-    And I log in as local government for Saanich
+    And I log in as local government for Parksville
     And I click on the link for Applications for Review
     And I click on the link for Review Application
     And I specify my contact details as the approving authority
@@ -51,7 +51,7 @@ namespace bdd_tests
 
             CheckFeatureFlagsLicenseeChanges();
 
-            // CheckFeatureLEConnections();
+            CheckFeatureLEConnections();
 
             IgnoreSynchronizationFalse();
 

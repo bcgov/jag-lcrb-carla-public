@@ -5,7 +5,7 @@ import { ApplicationType } from "./application-type.model";
 import { TiedHouseConnection } from "./tied-house-connection.model";
 import { ServiceArea } from "./service-area.model";
 
-export class Application {
+export interface Application {
 
   previousApplication: number;
   previousApplicationDetails: string;
@@ -118,6 +118,8 @@ export class Application {
   isLocatedInGroceryStore: boolean;
   establishmentopeningdate: Date;
   isApplicationComplete: string;
+
+  lgNoObjection: boolean;
 
   lGNameOfOfficial: string;
   lGTitlePosition: string;

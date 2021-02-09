@@ -38,9 +38,8 @@
       </ul>
     </section>
 
-    <section *ngIf="false">
-      <!-- TO DO https://justice.gov.bc.ca/jira/browse/LCSD-4786 -->
-      <mat-checkbox>
+    <section *ngIf="application?.applicationType?.showLgNoObjection">
+      <mat-checkbox formControlName="lgNoObjection">
         <span class="error-states">*</span>
         <span class="ml-2 question-label">
           No objection to this application

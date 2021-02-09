@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I complete the Catering application")]
-        public void CompleteCateringApplication()
+        [And(@"I complete the Catering application for a (.*)")]
+        public void CompleteCateringApplication(string bizType)
         {
             /* 
             Page Title: Catering Licence Application
@@ -43,25 +43,61 @@ namespace bdd_tests
             string prevAppDetails = "Here are the previous application details (automated test).";
             string liqConnectionDetails = "Here are the liquor industry connection details (automated test).";
             string kitchenDetails = "Here are the details of the kitchen equipment.";
+            string transportDetails = "Here are the transport details.";
 
-            // upload a central securities register
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+            if (bizType == "partnership")
+            {
+                // upload a partnership agreement
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
 
-            // upload supporting business documentation
-            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+                // upload personal history summary
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+            }
 
-            // upload notice of articles
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+            if (bizType == "public corporation")
+            {
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
 
-            // upload personal history summary documents
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[12]");
+                // upload personal history summary documents
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+            }
 
-            // upload shareholders < 10% interest
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+            if (bizType == "private corporation")
+            {
+                // upload a central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+
+                // upload supporting business documentation
+                FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+
+                // upload personal history summary documents
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
+
+                // upload shareholders < 10% interest
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
+            }
+
+            if (bizType == "society")
+            {
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+                
+                // upload personal history summary documents
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+            }
+
+            if (bizType == "sole proprietorship")
+            {
+                // upload personal history summary documents
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
+            }
 
             // enter the establishment name
             NgWebElement uiEstabName = null;
-            // try up to 10 times to get an element.
             for (int i = 0; i < 10; i++)
             {
                 try
@@ -107,7 +143,7 @@ namespace bdd_tests
             // select 'Yes'
             // Do you or any of your shareholders currently hold, have held, or have previously applied for a British Columbia liquor licence?
             NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-73-button"));
-            uiPreviousLicenceYes.Click();
+            JavaScriptClick(uiPreviousLicenceYes);
 
             // enter the previous application details
             NgWebElement uiPreviousApplicationDetails = ngDriver.FindElement(By.Id("previousApplicationDetails"));
@@ -131,11 +167,36 @@ namespace bdd_tests
             NgWebElement uiKitchenDescription = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiKitchenDescription.SendKeys(kitchenDetails);
 
-            // upload a store signage document
-            FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+            // enter the transport details
+            NgWebElement uiTransportDetails = ngDriver.FindElement(By.CssSelector("textarea#description3"));
+            uiTransportDetails.SendKeys(transportDetails);
 
-            // upload a valid interest document
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
+            if ((bizType == "partnership") || (bizType == "society") || (bizType == "public corporation"))
+            {
+                // upload a store signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
+
+                // upload a valid interest document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
+            }
+
+            if (bizType == "private corporation")
+            {
+                // upload a store signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[17]");
+
+                // upload a valid interest document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
+            }
+
+            if (bizType == "sole proprietorship")
+            {
+                // upload a store signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[5]");
+
+                // upload a valid interest document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
+            }
 
             // enter the first name of the application contact
             NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));

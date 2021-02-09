@@ -132,9 +132,7 @@ namespace bdd_tests
             returnUser = test_start;
             ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
 
-
             DoLogin(businessType);
-
         }
 
 
@@ -176,10 +174,10 @@ namespace bdd_tests
         }
 
 
-        [And(@"I log in as local government for Saanich")]
+        [And(@"I log in as local government for Parksville")]
         public void LocalGovernmentLogin()
         {
-            string localGovt = "login/token/Saanich";
+            string localGovt = "login/token/Parksville";
             ngDriver.Navigate().GoToUrl($"{baseUri}{localGovt}");
 
         }
@@ -314,7 +312,6 @@ namespace bdd_tests
         {
             CheckFeatureFlag("MarketEvents");
         }
-
 
 
         public void CheckFeatureLEConnections()

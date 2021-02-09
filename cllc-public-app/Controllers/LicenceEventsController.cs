@@ -382,6 +382,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             LicenceEvent licenceEventVM;
             MicrosoftDynamicsCRMadoxioLicences licence;
             MicrosoftDynamicsCRMaccount account;
+            Dictionary<string, string> serviceAreas;
 
             try
             {
@@ -391,6 +392,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     licenceEventVM.LicenceId,
                     expand: new List<string> { "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence" });
                 account = _dynamicsClient.Accounts.GetByKey(licence._adoxioLicenceeValue);
+                var areas = LicenseExtensions.GetServiceAreas(licence.AdoxioLicencesid, _dynamicsClient);
+                // Create lookup dictionary with service areas to speed up lookup times (vs an array)
+                serviceAreas = areas.ToDictionary(x => x.Id, x => x.AreaLocation);
             }
             catch (HttpOperationException)
             {
@@ -423,6 +427,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         <td style='width: 50%; text-align: left;'>{schedule.EventStartDateTime?.ToString("MMMM dd, yyyy")} - Event Hours: {startTime} to {endTime}</td>
                         <td style='width: 50%; text-align: left;'>Service Hours: {liquorStartTime} to {liquorEndTime}</td>
                     </tr>";
+            }
+
+            var eventLocations = "";
+            if (licenceEventVM.EventLocations.Count > 0)
+            {
+                eventLocations += $@"<table style='width: 100%'>
+                    <thead>
+                        <tr>
+                            <th>Location ID</th>
+                            <th>Location Name</th>
+                            <th>Attendance</th>
+                        </tr>
+                    </thead>";
+                foreach (var location in licenceEventVM.EventLocations)
+                {
+                    string area = serviceAreas.GetValueOrDefault(location.ServiceAreaId, "");
+                    eventLocations += $@"<tr class='hide-border'>
+                        <td style='width: 30%; text-align: left;'>{area}</td>
+                        <td style='width: 50%; text-align: left;'>{location.Name ?? ""}</td>
+                        <td style='width: 20%; text-align: left;'>{location.Attendance ?? 0}</td>
+                    </tr>";
+                }
+                eventLocations += "</table>";
             }
 
             var termsAndConditions = "";
@@ -462,7 +489,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "date", DateTime.Now.ToString("MMMM dd, yyyy") },
                 { "marketName", licenceEventVM.MarketName },
                 { "marketDuration",  licenceEventVM.MarketDuration.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.MarketDuration) : "" },
-                { "restrictionsText", termsAndConditions }
+                { "restrictionsText", termsAndConditions },
+                // TUA-specific fields
+                { "tuaEventType", licenceEventVM.TuaEventType.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.TuaEventType) : ""},
+                { "isClosedToPublic", licenceEventVM.IsClosedToPublic ?? false ? "Yes" : "No" },
+                { "isWedding", licenceEventVM.IsWedding ?? false ? "1" : null},
+                { "isNetworkingParty", licenceEventVM.IsNetworkingParty ?? false ? "1" : null},
+                { "isConcert", licenceEventVM.IsConcert ?? false ? "1" : null},
+                { "isNoneOfTheAbove", licenceEventVM.IsNoneOfTheAbove ?? false ? "1" : null},
+                { "isBanquet", licenceEventVM.IsBanquet ?? false ? "1" : ""},
+                { "isAmplifiedSound", licenceEventVM.IsAmplifiedSound ?? false ? "1" : null},
+                { "isDancing", licenceEventVM.IsDancing ?? false ? "1" : null},
+                { "isReception", licenceEventVM.IsReception ?? false ? "1" : null},
+                { "isLiveEntertainment", licenceEventVM.IsLiveEntertainment ?? false ? "1" : null},
+                { "isGambling", licenceEventVM.IsGambling ?? false ? "1" : null},
+                { "eventLocations", eventLocations },
             };
 
             byte[] data;
@@ -477,9 +518,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     pdfType = "catering_event_authorization";
                 }
+                else if (licenceEventVM.EventCategory == EventCategory.TemporaryUseArea)
+                {
+                    pdfType = "tua_event_authorization";
+                }
                 if (pdfType != null)
                 {
-                    data = await _pdfClient.GetPdf(parameters, pdfType);
+                    data = await _pdfClient.GetPdf(parameters, pdfType).ConfigureAwait(true);
 
                     // Save copy of generated licence PDF for auditing/logging purposes
                     try

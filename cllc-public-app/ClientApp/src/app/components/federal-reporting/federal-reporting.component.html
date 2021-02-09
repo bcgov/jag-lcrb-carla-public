@@ -124,8 +124,8 @@
                   <p>Identify the cannabis products you have ordered, sold, returned or have managed the inventory of in the previous month.</p>
                   <div class="form-check" *ngFor="let productForm of productForms">
                     <mat-checkbox
-                      [checked]="isProductSelected(productForm.value.inventoryReportId)"
-                      (click)="toggleProductVisibility(productForm.value.inventoryReportId);"
+                      [checked]="productForm?.value?.selected"
+                      (change)="toggleProductVisibility(productForm);"
                       [disabled]="reportIsDisabled">
                       {{productForm.value.product}}
                     </mat-checkbox>
@@ -136,12 +136,9 @@
                   <div class="row mx-0">
                     <h3 class="blue-header col-xs-12">Part 3 - Cannabis Product Inventory Details</h3>
                   </div>
-                  <p *ngIf="visibleInventoryReports.length > 0">Enter the details of the cannabis product inventory you identified above.</p>
-                  <p *ngIf="visibleInventoryReports.length === 0">You have not identified any cannabis product inventory to report.</p>
-                  <app-product-inventory-sales-report
-                    [productForm]="productForm"
-                    [visibleInventoryReports]="visibleInventoryReports"
-                    *ngFor="let productForm of productForms">
+                  <p *ngIf="isProductInventorySelected">Enter the details of the cannabis product inventory you identified above.</p>
+                  <p *ngIf="!isProductInventorySelected">You have not identified any cannabis product inventory to report.</p>
+                  <app-product-inventory-sales-report [productForm]="productForm" [visible]="productForm?.value?.selected" *ngFor="let productForm of productForms">
                   </app-product-inventory-sales-report>
                 </div>
                 <div class="row mx-0" *ngIf="!reportIsDisabled">

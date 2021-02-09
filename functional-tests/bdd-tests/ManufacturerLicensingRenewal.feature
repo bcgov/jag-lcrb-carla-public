@@ -39,6 +39,54 @@ Scenario:  DEV Today Positive Licence Renewal (Winery)
     And the account is deleted
     Then I see the login page
 
+@manufacturer @licencerenewal
+Scenario:  DEV Today Negative Licence Renewal (Brewery)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I complete the Manufacturer application for a brewery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee 
+    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    And I click on the link for Renew Licence
+    And I renew the licence with negative responses for a brewery
+    And the account is deleted
+    Then I see the login page
+
+@manufacturer @licencerenewal
+Scenario:  DEV Today Negative Licence Renewal (Co-packer)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I complete the Manufacturer application for a co-packer
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee 
+    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    And I click on the link for Renew Licence
+    And I renew the licence with negative responses for a co-packer
+    And the account is deleted
+    Then I see the login page
+
+@manufacturer @licencerenewal
+Scenario:  DEV Today Negative Licence Renewal (Distillery)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for a Manufacturer Licence
+    And I review the account profile for a private corporation
+    And I complete the Manufacturer application for a distillery
+    And I enter the payment information
+    And I confirm the payment receipt for a Manufacturer Licence application
+    And the application is approved
+    And I pay the licensing fee 
+    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    And I click on the link for Renew Licence
+    And I renew the licence with negative responses for a distillery
+    And the account is deleted
+    Then I see the login page
+
 #@manufacturer @licencerenewal
 #Scenario:  UAT Today Negative Licence Renewal (Winery)
 #    Given I am logged in to the dashboard as a private corporation

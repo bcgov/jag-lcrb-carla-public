@@ -23,7 +23,26 @@ namespace bdd_tests
         [And(@"I request a change in terms and conditions application")]
         public void ChangeInTermsApplication()
         {
+            /* 
+            Page Title: Please Review Your Account Profile
+            */
 
+            ContinueToApplicationButton();
+
+            /* 
+            Page Title: Request of Change in Terms and Conditions/Request for Discretion
+            */
+
+            // upload letter of intent
+            FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[3]");
+
+            // click on the authorized to submit checkbox
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
+            uiAuthorizedToSubmit.Click();
+
+            // click on the signature agreement checkbox
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
+            uiSignatureAgreement.Click();
         }
     }
 }
