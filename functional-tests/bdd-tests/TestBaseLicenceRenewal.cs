@@ -303,7 +303,17 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Add, Remove or Update your Licensee Representative from the Licences Dashboard')]")).Displayed);   
             }
 
-            if ((responses == "positive responses for a brewery") || (responses == "positive responses for a winery") || (responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
+            if ((responses == "positive responses for a brewery") || (responses == "negative responses for a brewery"))
+            {
+                string volumeProduced = "5000";
+
+                // enter the volume produced
+                NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
+                uiVolumeProduced.SendKeys(volumeProduced);
+            }
+
+
+            if ((responses == "positive responses for a winery") || (responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
             {
                 // string orderTotals = "233";
                 // string confirmTotals = "233";
@@ -326,22 +336,22 @@ namespace bdd_tests
                 // uiOrderTotals2.SendKeys(confirmTotals);
 
                 // upload the discretion letter
-                FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
+                // FileUpload("discretion_letter.pdf", "(//input[@type='file'])[3]");
 
-                if ((responses == "positive responses for a winery") || (responses == "positive responses for a brewery"))
+                if (responses == "positive responses for a winery")
                 {
                     // enter the volume produced
                     NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
                     uiVolumeProduced.SendKeys(volumeProduced);
-                }
 
-                if (responses == "positive responses for a winery")
-                { 
                     // enter the volume destroyed
                     NgWebElement uiVolumeDestroyed = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeDestroyed']"));
                     uiVolumeDestroyed.SendKeys(volumeDestroyed);
                 }
+            }
 
+            if ((responses == "positive responses for a brewery") || (responses == "positive responses for a winery") || (responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
+            { 
                 // select 'Yes'
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
                 NgWebElement uiRenewalCriminalOffenceCheckYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-10-button"));
@@ -401,7 +411,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Add, Remove or Update your Licensee Representative from the Licences Dashboard')]")).Displayed);
             }
 
-            if ((responses == "negative responses for a brewery") || (responses == "negative responses for a winery") || (responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
+            if ((responses == "negative responses for a winery") || (responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
             {
                 string orderTotals = "233";
                 string confirmTotals = "233";
@@ -423,7 +433,7 @@ namespace bdd_tests
                     JavaScriptClick(uiIsManufacturedMinimum);
                 }
 
-                if ((responses == "negative responses for a winery") || (responses == "negative responses for a brewery"))
+                if (responses == "negative responses for a winery")
                 {
                     // enter the volume produced
                     NgWebElement uiVolumeProduced = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeProduced']"));
@@ -436,7 +446,10 @@ namespace bdd_tests
                     NgWebElement uiVolumeDestroyed = ngDriver.FindElement(By.CssSelector("input[formcontrolname='volumeDestroyed']"));
                     uiVolumeDestroyed.SendKeys(volumeDestroyed);
                 }
+            }
 
+            if ((responses == "negative responses for a brewery") || (responses == "negative responses for a winery") || (responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
+            { 
                 // select 'No'
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
                 NgWebElement uiRenewalCriminalOffenceCheckNo = ngDriver.FindElement(By.CssSelector("[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-11-button"));
