@@ -11,5 +11,10 @@ Scenario: Liquor Primary Temporary Suspension Request (Private Corporation)
     And I click on the Submit button
     And the dashboard status is updated as Pending External Review
     # TODO
+    And I click on the link for Temporary Suspension Request
+    And I click on the Continue to Application button
+    And I complete the temporary suspension request
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
