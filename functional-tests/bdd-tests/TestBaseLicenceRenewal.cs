@@ -312,8 +312,7 @@ namespace bdd_tests
                 uiVolumeProduced.SendKeys(volumeProduced);
             }
 
-
-            if ((responses == "positive responses for a winery") || (responses == "positive responses for a distillery") || (responses == "positive responses for a co-packer"))
+            if ((responses == "positive responses for a winery") || (responses == "positive responses for a distillery"))
             {
                 // string orderTotals = "233";
                 // string confirmTotals = "233";
@@ -411,7 +410,7 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Add, Remove or Update your Licensee Representative from the Licences Dashboard')]")).Displayed);
             }
 
-            if ((responses == "negative responses for a winery") || (responses == "negative responses for a distillery") || (responses == "negative responses for a co-packer"))
+            if ((responses == "negative responses for a winery") || (responses == "negative responses for a distillery"))
             {
                 string orderTotals = "233";
                 string confirmTotals = "233";
