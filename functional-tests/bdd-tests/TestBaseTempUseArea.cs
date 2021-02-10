@@ -64,7 +64,7 @@ namespace bdd_tests
 
             // click Fixed option
             NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-25-button"));
-            uiFixedOption.Click();
+            JavaScriptClick(uiFixedOption);
 
             // click Portable option
             NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-26-button"));

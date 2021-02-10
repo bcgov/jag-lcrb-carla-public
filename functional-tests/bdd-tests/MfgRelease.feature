@@ -45,10 +45,6 @@ Scenario: DEV Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
     And I click on the Licences tab
-    And I complete the change hours application for a lounge area within service hours
-    And I click on the Submit button
-    And I enter the payment information
-    And I click on the Licences tab
     And I click on the link for Manage Off-Site Storage
     And I complete the offsite storage application
     And I click on the secondary Submit button
