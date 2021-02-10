@@ -275,6 +275,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// <param name="applicationRequest">Application request.</param>
         public bool SendApplicationScreeningRequest(Guid applicationId, IncompleteApplicationScreening applicationRequest)
         {
+            bool result = false;
             var consentValidated = Validation.ValidateAssociateConsent(_dynamicsClient, (List<LegalEntity>)applicationRequest.Associates);
             if (consentValidated)
             {
@@ -292,31 +293,51 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     {
                         AdoxioChecklistsecurityclearancestatus = (int?)ApplicationSecurityStatus.Sending
                     };
-                    _dynamicsClient.Applications.Update(applicationId.ToString(), update);
+                    try
+                    {
+                        _dynamicsClient.Applications.Update(applicationId.ToString(), update);
+                    }
+                    catch (HttpOperationException odee)
+                    {
+                        Log.Logger.Error(odee, "Error setting sending status for application");
+                    }
 
-                    var result = SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload).GetAwaiter().GetResult();
+                    var receiveApplicationScreeningsResult = SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload).GetAwaiter().GetResult();
+                    
 
-                    Log.Logger.Information($"Response code was: {result.Response.StatusCode.ToString()}");
-                    Log.Logger.Information($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
-
-                    if (result.Response.StatusCode.ToString() == "OK")
+                    if (receiveApplicationScreeningsResult.Response.StatusCode.ToString() == "OK")
                     {
                         update = new MicrosoftDynamicsCRMadoxioApplication()
                         {
                             AdoxioSecurityclearancegenerateddate = DateTimeOffset.UtcNow,
                             AdoxioChecklistsecurityclearancestatus = (int?)ApplicationSecurityStatus.Sent
                         };
-                        _dynamicsClient.Applications.Update(applicationId.ToString(), update);
-                        return true;
+                        try
+                        {
+                            _dynamicsClient.Applications.Update(applicationId.ToString(), update);
+                            result = true;
+                            Log.Logger.Information($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+                        }
+                        catch (HttpOperationException odee)
+                        {
+                            Log.Logger.Error(odee, "Error updating application");
+                        }
+
                     }
-                    var msg = result.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                    throw new SystemException(msg);
+                    else
+                    {
+                        var msg = receiveApplicationScreeningsResult.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                        Log.Logger.Error(msg);
+                    }
+                    
                 }
                 catch (Exception e)
                 {
                     Log.Logger.Error(e,"Unexpected error in Carla Spice Sync");
-                    return false;
+                    result = false;
                 }
+
+                return result;
             }
 
             Log.Logger.Error("Consent not valid for all associates.");
@@ -1427,7 +1448,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             Log.Logger.Error($"Starting SendFoundApplications Job for {selectedAppTypes.Count} application types");
             hangfireContext.WriteLine($"Starting SendFoundApplications Job for {selectedAppTypes.Count} application types");
 
-            string sendFilter = "adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq " + (int?)ApplicationSecurityStatus.NotSent;
+            // adjusted 2/9/2021 to pick up items that are in limbo (sending) status
+            string sendFilter = $"adoxio_checklistsenttospd eq 1 and (adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.NotSent} or adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.Sending})";
 
             var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value.Where(a => appTypes.Contains(a._adoxioApplicationtypeidValue));
             Log.Logger.Error($"Found {applications.Count()} applications to send to SPD.");
@@ -1471,7 +1493,9 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             Log.Logger.Error($"Starting SendFoundApplicationsV2 Job for {selectedAppTypes.Count} application types");
             hangfireContext.WriteLine($"Starting SendFoundApplicationsV2 Job for {selectedAppTypes.Count} application types");
 
-            string sendFilter = $"adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.NotSent}";
+
+            // adjusted 2/9/2021 to pick up items that are in limbo (sending) status
+            string sendFilter = $"adoxio_checklistsenttospd eq 1 and (adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.NotSent} or adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.Sending})";
 
             var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value.Where(a => appTypes.Contains(a._adoxioApplicationtypeidValue));
             Log.Logger.Error($"Found {applications.Count()} applications to send to SPD.");

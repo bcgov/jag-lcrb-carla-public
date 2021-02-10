@@ -1059,7 +1059,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (!string.IsNullOrEmpty(name))
             {
                 string cacheKey = CacheKeys.LicenceTypeIDByNamePrefix + name;
-                if (memoryCache == null || !memoryCache.TryGetValue(cacheKey, out MicrosoftDynamicsCRMadoxioLicencetype result))
+                if (memoryCache == null || !memoryCache.TryGetValue(cacheKey, out result))
                 {
                     // Key not in cache, so get data.
                     var lt = dynamicsClient.GetAdoxioLicencetypeByName(name);
