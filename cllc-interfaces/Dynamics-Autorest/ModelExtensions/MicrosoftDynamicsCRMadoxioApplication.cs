@@ -61,16 +61,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_adoxio_application_adoxio_applicationtermsconditionslimitation_Application@odata.bind")]
         public string AdoxioApplicationTermsConditionsLimitationODataBind { get; set; }
 
-
-
+        [JsonProperty(PropertyName = "adoxio_RelatedLicence@odata.bind")]
+        public string AdoxioRelatedLicenceODataBind { get; set; }
         
-
-        //[JsonProperty(PropertyName = "adoxio_patioliquorcarrieddescription")]
-        //public string AdoxioPatioisliquorcarrieddescription { get; set; }
-
-
-
-
-
     }
 }
