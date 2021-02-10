@@ -6,7 +6,7 @@ podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', service
         name: 'jnlp',
         image: "${env.image_registry}/agent-dotnet:latest",
         resourceRequestCpu: '250m',
-        resourceLimitCpu: '500m',
+        resourceLimitCpu: '1',
         resourceRequestMemory: '2Gi',
         resourceLimitMemory: '3Gi',
         workingDir: '/home/jenkins',
@@ -26,7 +26,7 @@ podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', service
                 withEnv(["TZ=GMT-7,baseUri=${baseUri}","test_start=${test_start}","test_start_worker=${test_start_worker}","test_cc=${test_cc}","test_ccv=${test_ccv}","CHROME_BINARY_LOCATION=${CHROME_BINARY_LOCATION}"])
                 {
                     try {                        
-                        sh 'dotnet test --filter Category=@release --logger "junit;LogFilePath=functionalResults.xml"'					
+                        sh 'dotnet test --filter Category=${test_category} --logger "junit;LogFilePath=functionalResults.xml"'					
                     }
                     catch (err)
                     {
