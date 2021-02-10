@@ -13,7 +13,7 @@ Scenario: DEV UBrew / UVin Application Release Test (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
     And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    # And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
