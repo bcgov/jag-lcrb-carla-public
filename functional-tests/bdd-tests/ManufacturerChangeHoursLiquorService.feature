@@ -2,7 +2,7 @@
     As a logged in business user
     I want to update the liquor hours of service for lounge areas and special events
 
-@manufacturer @changehours
+@manufacturer @changehours @release
 Scenario: DEV Lounge Area Within Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -19,7 +19,7 @@ Scenario: DEV Lounge Area Within Service Hours (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @changehours
+@manufacturer @changehours @release
 Scenario: DEV Lounge Area Outside Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -37,7 +37,7 @@ Scenario: DEV Lounge Area Outside Service Hours (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @changehours
+@manufacturer @changehours @release
 Scenario: DEV Special Event Area Within Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -54,7 +54,7 @@ Scenario: DEV Special Event Area Within Service Hours (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @changehours
+@manufacturer @changehours @release
 Scenario: DEV Special Event Area Outside Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
