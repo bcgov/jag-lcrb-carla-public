@@ -46,13 +46,13 @@ namespace bdd_tests
 
             if (hoursType == "a special event area within service hours")
             {
-                NgWebElement uiSpecialEventAreaWithinHours = ngDriver.FindElement(By.CssSelector(".ng-star-inserted:nth-child(13) span"));
+                NgWebElement uiSpecialEventAreaWithinHours = ngDriver.FindElement(By.CssSelector(".ng-star-inserted:nth-child(14) span"));
                 uiSpecialEventAreaWithinHours.Click();
             }
 
             if (hoursType == "a special event area outside of service hours")
             {
-                NgWebElement uiSpecialEventAreaOutsideHours = ngDriver.FindElement(By.CssSelector(".ng-star-inserted:nth-child(14) span"));
+                NgWebElement uiSpecialEventAreaOutsideHours = ngDriver.FindElement(By.CssSelector(".ng-star-inserted:nth-child(13) span"));
                 uiSpecialEventAreaOutsideHours.Click();
             }
 
