@@ -795,11 +795,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 application.AdoxioEstablishmentaddresscity = relatedLicence.AdoxioEstablishment.AdoxioAddresscity;
                 application.AdoxioEstablishmentaddresspostalcode = relatedLicence.AdoxioEstablishment.AdoxioAddresspostalcode;
 
+                // set related licence
+
+                application.AdoxioRelatedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", relatedLicence.AdoxioLicencesid);
+
                 // TODO - the following fields do not appear to be in Dynamics yet
 
                 // Assigned Licensee == Licensee of selected licence
-                // Related Licence == Licence lookup of the manufacturers' licence
-
+               
             }
 
             try
