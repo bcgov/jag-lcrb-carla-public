@@ -20,6 +20,7 @@ Scenario: Liquor Primary Live Theatre Request (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I click on the link for Live Theatre Request For Liquor Service
     And I click on the Continue to Application button
     And I complete the live theatre request
