@@ -65,7 +65,7 @@ namespace bdd_tests
 
             // select 'Yes' for proposed LRS site located within a grocery store
             NgWebElement uiProposedSiteInGrocery = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1 button#mat-button-toggle-1-button"));
-            uiProposedSiteInGrocery.Click();
+            JavaScriptClick(uiProposedSiteInGrocery);
 
             // upload grocery declaration document
             FileUpload("grocery_declaration.pdf","(//input[@type='file'])[15]");
@@ -101,8 +101,10 @@ namespace bdd_tests
         [And(@"an LRS licence has been created")]
         public void LRSApproval()
         {
-            // TODO
-            // To be completed when workflow is ready
+            System.Threading.Thread.Sleep(4000);
+
+            string testWines = "login/token/TestWines";
+            ngDriver.Navigate().GoToUrl($"{baseUri}{testWines}");
         }
     }
 }

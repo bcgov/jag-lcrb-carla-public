@@ -34,7 +34,7 @@ namespace bdd_tests
             string email = "test@automation.com";
 
             // enter the name of the official
-            NgWebElement uiOfficialName = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'lGNameOfOfficial']"));
+            NgWebElement uiOfficialName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGNameOfOfficial']"));
             uiOfficialName.SendKeys(nameOfOfficial);
 
             // enter the official's title
@@ -49,15 +49,11 @@ namespace bdd_tests
             NgWebElement uiOfficialEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactEmail']"));
             uiOfficialEmail.SendKeys(email);
 
-            // select 'Yes' for zoning
-            //NgWebElement uiZoningYes = ngDriver.FindElement(By.CssSelector("input#mat-radio-2-input"));
-            //uiZoningYes.Click();
-
             // upload the supporting report
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[14]");
 
-            // click on the Submit button
-            ClickOnSubmitButton2();
+            // upload the final occupant load
+            FileUpload("associates.pdf", "(//input[@type='file'])[17]");
         }
 
 
