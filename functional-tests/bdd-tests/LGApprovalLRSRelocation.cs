@@ -22,7 +22,7 @@ Scenario: Local Government Approval for LRS Relocation (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And an LRS licence has been created
     And I click on the Licences tab 
-    And I click on the link for Relocation Application
+    And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I complete the LRS application
     And I log in as local government for Parksville
