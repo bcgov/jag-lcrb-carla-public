@@ -70,6 +70,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var endorsements = new List<string>();
                     //get endorsement application types
                     if (dynamicsApplication.AdoxioLicenceType != null &&
+                        dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsdefault == true && // Application for a licence
                         dynamicsApplication.AdoxioPaymentrecieved == true)
                     {
                         var expand = new List<string> { "adoxio_licencetypes_applicationtypes" };
