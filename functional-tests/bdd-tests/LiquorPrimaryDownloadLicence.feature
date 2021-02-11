@@ -13,9 +13,11 @@ Scenario: DEV Liquor Primary Download Licence
     And I click on the link for Applications for Review
     And I click on the link for Review Application
     And I specify my contact details as the approving authority
+    And I click on the Submit button
     And I log in as a return user
     And I click on the link for Complete Application
     And I review the local government response for a liquor primary licence
+    And the application is approved
     And I click on the Licences tab
     And I click on the link for Download Licence
     And the account is deleted
