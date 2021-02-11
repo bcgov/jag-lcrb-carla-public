@@ -462,7 +462,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("initiate-tied-house-excemption")]
         public ActionResult InitiateTiedHouseExcemption(TiedHouseExcemptionRequest item)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid ||
+                string.IsNullOrEmpty(item.LicenceId) ||
+                string.IsNullOrEmpty(item.RelatedLicenceId))
             {
                 return BadRequest();
             }
@@ -473,14 +475,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return NotFound();
             }
-
-            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            MicrosoftDynamicsCRMadoxioLicences relatedLicence = _dynamicsClient.GetLicenceByIdWithChildren(item.RelatedLicenceId);
+            if (!CurrentUserHasAccessToLicenseOwnedBy(relatedLicence._adoxioLicenceeValue))
             {
                 return Forbid();
             }
 
             // create a new application.
-            var application = CreateApplication(item.RelatedLicenceId, ApplicationTypeNames.TiedHouseExemption, item.LicenceId);
+            var application = CreateApplication(item.LicenceId, ApplicationTypeNames.TiedHouseExemption, item.RelatedLicenceId);
 
             return Ok();
         }
@@ -789,23 +791,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // check to see if there is a related licence.
-
+            // some applications create a relationship between two licences, in this case we will have a related licence
             if (relatedLicenceId != null)
             {
-                // some applications create a relationship between two licences, in this case we will have a related licence
-
-                var relatedLicence = _dynamicsClient.GetLicenceByIdWithChildren(relatedLicenceId);
-                // set the establishment address to be that of the related licence.
-                application.AdoxioEstablishmentaddressstreet = relatedLicence.AdoxioEstablishment.AdoxioAddressstreet;
-                application.AdoxioEstablishmentaddresscity = relatedLicence.AdoxioEstablishment.AdoxioAddresscity;
-                application.AdoxioEstablishmentaddresspostalcode = relatedLicence.AdoxioEstablishment.AdoxioAddresspostalcode;
+                // copy the establishment address from the assigned licence.
+                application.AdoxioEstablishmentaddressstreet = adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet;
+                application.AdoxioEstablishmentaddresscity = adoxioLicense.AdoxioEstablishment.AdoxioAddresscity;
+                application.AdoxioEstablishmentaddresspostalcode = adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode;
 
                 // set related licence
+                application.AdoxioRelatedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", relatedLicenceId);
 
-                application.AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", adoxioLicense.AdoxioLicencesid);
-                application.AdoxioRelatedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", relatedLicence.AdoxioLicencesid);
-
-                application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", relatedLicence._adoxioLicenceeValue);
+                // get the applicant from the assigned licence
+                application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", adoxioLicense._adoxioLicenceeValue);
 
                 // TODO - the following fields do not appear to be in Dynamics yet
 

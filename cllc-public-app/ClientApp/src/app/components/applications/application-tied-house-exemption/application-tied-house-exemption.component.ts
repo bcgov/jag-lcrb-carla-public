@@ -71,10 +71,14 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       establishmentAddressCity: [""],
       establishmentAddressPostalCode: [""],
       establishmentParcelId: [""],
-      relatedLicence: this.fb.group({
+      assignedLicence: this.fb.group({
         id: ["", [Validators.required]],
         establishmentName: [{ value: "", disabled: true }],
-        establishmentAddress: [{ value: "", disabled: true }],
+        name: [{ value: "", disabled: true }],
+        city: [{ value: "", disabled: true }],
+        country: [{ value: "", disabled: true }],
+        streetaddress: [{ value: "", disabled: true }],
+        postalCode: [{ value: "", disabled: true }],
         licensee: [{ value: "", disabled: true }],
       }),
       licenseeContact: this.fb.group({
@@ -151,8 +155,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
-    debugger;
-    return this.licenseDataService.initiateTiedHouseExcemption(this.licence.id, this.form.get("relatedLicence.id").value)
+    return this.licenseDataService.initiateTiedHouseExcemption(this.form.get("assignedLicence.id").value, this.licence.id)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open("Error submitting Tied House Exemption", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
@@ -220,8 +223,8 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       -1;
   }
 
-  onLicenceSelect(relatedLicence: RelatedLicence) {
-    this.form.get("relatedLicence").patchValue(relatedLicence);
+  onLicenceSelect(assignedLicence: RelatedLicence) {
+    this.form.get("assignedLicence").patchValue(assignedLicence);
   }
 
 }
