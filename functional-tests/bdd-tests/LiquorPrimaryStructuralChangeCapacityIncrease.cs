@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: LiquorPrimaryStructuralChangeCapacity
+Feature: LiquorPrimaryStructuralChangeCapacityIncrease
     As a logged in business user
     I want to request a Structural Change (Capacity Increase) for a Liquor Primary Application
 
@@ -35,6 +35,7 @@ Scenario: Liquor Primary Structural Change Capacity Increase (Private Corporatio
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the link for Structural Change Application (Capacity Increase)
     # TODO
     And the account is deleted
     Then I see the login page
@@ -42,9 +43,9 @@ Scenario: Liquor Primary Structural Change Capacity Increase (Private Corporatio
 
 namespace bdd_tests
 {
-    [FeatureFile("./LiquorPrimaryStructuralChangeCapacity.feature")]
+    [FeatureFile("./LiquorPrimaryStructuralChangeCapacityIncrease.feature")]
     [Collection("Liquor")]
-    public sealed class LiquorPrimaryStructuralChangeCapacity : TestBase
+    public sealed class LiquorPrimaryStructuralChangeCapacityIncrease : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

@@ -20,6 +20,7 @@ Scenario: Liquor Primary Structural Change Capacity Increase (Private Corporatio
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the link for Structural Change Application (Capacity Increase)
     # TODO
     And the account is deleted
     Then I see the login page
