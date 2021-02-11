@@ -76,6 +76,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     name = name.Replace("'", "''");
                     // select active licences that match the given name
+                    /*
                     filter = $"_adoxioLicencetypeValue ne {crsId} and "
                         + $"_adoxioLicencetypeValue ne {marketingId} and "
                         + $"_adoxioLicencetypeValue ne {manufacturerId} and "
@@ -83,6 +84,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         + $"_adoxioLicencetypeValue ne {ubvId} and "                        
                         + $"_adoxioLicencetypeValue ne {agentId} and "
                         + $"statecode eq 0 and contains(name,'{name}')";
+                    */
+                    filter = $"statecode eq 0 and contains(adoxio_name,'{name}')";
 
                     var expand = new List<string> {"adoxio_Licencee", "adoxio_establishment" };
                     var licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, top: 10).Value;
@@ -477,7 +480,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // create a new application.
-            var application = CreateApplication(item.LicenceId, ApplicationTypeNames.TiedHouseExemption, item.RelatedLicenceId);
+            var application = CreateApplication(item.RelatedLicenceId, ApplicationTypeNames.TiedHouseExemption, item.LicenceId);
             
             return Ok();
         }
@@ -789,6 +792,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (relatedLicenceId != null)
             {
+                // some applications create a relationship between two licences, in this case we will have a related licence
+                
                 var relatedLicence = _dynamicsClient.GetLicenceByIdWithChildren(relatedLicenceId);
                 // set the establishment address to be that of the related licence.
                 application.AdoxioEstablishmentaddressstreet = relatedLicence.AdoxioEstablishment.AdoxioAddressstreet;
@@ -797,7 +802,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // set related licence
 
+                application.AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", adoxioLicense.AdoxioLicencesid);
                 application.AdoxioRelatedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", relatedLicence.AdoxioLicencesid);
+
+                application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", relatedLicence.AdoxioLicencee);
 
                 // TODO - the following fields do not appear to be in Dynamics yet
 
