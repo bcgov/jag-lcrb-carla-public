@@ -1,4 +1,4 @@
-﻿Feature: LiquorPrimaryStructuralChangeCapacity
+﻿Feature: LiquorPrimaryStructuralChangeCapacityIncrease
     As a logged in business user
     I want to request a Structural Change (Capacity Increase) for a Liquor Primary Application
 
