@@ -101,8 +101,10 @@ namespace bdd_tests
         [And(@"an LRS licence has been created")]
         public void LRSApproval()
         {
-            // TODO
-            // To be completed when workflow is ready
+            System.Threading.Thread.Sleep(4000);
+
+            string testWines = "login/token/TestWines";
+            ngDriver.Navigate().GoToUrl($"{baseUri}{testWines}");
         }
     }
 }
