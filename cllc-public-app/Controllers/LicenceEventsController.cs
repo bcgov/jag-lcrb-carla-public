@@ -419,12 +419,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             foreach (var schedule in licenceEventVM.Schedules)
             {
-                string startTime = (schedule.EventStartDateTime.HasValue) ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventStartDateTime.Value.DateTime, hwZone).ToString("h:mm tt") : "";
-                string endTime = (schedule.EventEndDateTime.HasValue) ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventEndDateTime.Value.DateTime, hwZone).ToString("h:mm tt") : "";
-                string liquorStartTime = (schedule.ServiceStartDateTime.HasValue) ? TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceStartDateTime.Value.DateTime, hwZone).ToString("h:mm tt") : "";
-                string liquorEndTime = (schedule.ServiceEndDateTime.HasValue) ? TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceEndDateTime.Value.DateTime, hwZone).ToString("h:mm tt") : "";
+                // Event times are stored in UTC but we want the printed PDF to reflect times and dates in Pacific Standard Time (PST)
+                DateTime? pstStart = schedule.EventStartDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventStartDateTime.Value.DateTime, hwZone) : (DateTime?)null;
+                DateTime? pstEnd = schedule.EventEndDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventEndDateTime.Value.DateTime, hwZone) : (DateTime?)null;
+                DateTime? pstLiquorStart = schedule.ServiceStartDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceStartDateTime.Value.DateTime, hwZone) : (DateTime?)null;
+                DateTime? pstLiquorEnd = schedule.ServiceEndDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceEndDateTime.Value.DateTime, hwZone) : (DateTime?)null;
+
+                string eventDate = pstStart.HasValue ? pstStart.Value.ToString("MMMM dd, yyyy") : "";
+                string startTime = pstStart.HasValue ? pstStart.Value.ToString("h:mm tt") : "";
+                string endTime = pstEnd.HasValue ? pstEnd.Value.ToString("h:mm tt") : "";
+                string liquorStartTime = pstLiquorStart.HasValue ? pstLiquorStart.Value.ToString("h:mm tt") : "";
+                string liquorEndTime = pstLiquorEnd.HasValue ? pstLiquorEnd.Value.ToString("h:mm tt") : "";
                 eventTimings += $@"<tr class='hide-border'>
-                        <td style='width: 50%; text-align: left;'>{schedule.EventStartDateTime?.ToString("MMMM dd, yyyy")} - Event Hours: {startTime} to {endTime}</td>
+                        <td style='width: 50%; text-align: left;'>{eventDate} - Event Hours: {startTime} to {endTime}</td>
                         <td style='width: 50%; text-align: left;'>Service Hours: {liquorStartTime} to {liquorEndTime}</td>
                     </tr>";
             }
