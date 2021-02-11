@@ -35,7 +35,8 @@ Scenario: DEV Liquor Primary Catering Endorsement (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
-    # TODO
+    And I click on the link for Catering Endorsement Application
+    And I request a catering endorsement application
     And the account is deleted
     Then I see the login page
 */
