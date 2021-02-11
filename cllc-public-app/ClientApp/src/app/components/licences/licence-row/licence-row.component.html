@@ -280,6 +280,16 @@
                                         </a>
                                     </p>
                                 </div>
+
+                                <div *ngIf="showTiedHouseExemption(item)">
+                                  <p>
+                                      <a [routerLink]="[ '/tied-house-exemption/' + item.licenseId]">
+                                          <span><fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
+                                              Invitation for Tied House Exemption
+                                          </span>
+                                      </a>
+                                  </p>
+                              </div>
                                 <ng-container *ngIf="isActive(item) && actionsVisible(item)">
                                     <p *ngFor="let action of item.allowedActions">
                                         <ng-container *ngIf="actionVisible(item, action.id)">
@@ -312,15 +322,6 @@
                                         </a>
                                     </div>
 
-                                    <div *ngIf="showTiedHouseExemption(item)">
-                                      <p>
-                                          <a [routerLink]="[ '/tied-house-exemption/' + item.licenseId]">
-                                              <span><fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
-                                                  Invitation for Tied House Exemption
-                                              </span>
-                                          </a>
-                                      </p>
-                                  </div>
 
                                 </div>
 
