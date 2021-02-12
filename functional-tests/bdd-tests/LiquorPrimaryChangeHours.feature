@@ -21,6 +21,8 @@ Scenario: Liquor Primary Change Hours (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the link for Change to Hours of Liquor Service (within Service Hours)
-    # TODO
+    And I complete the change hours application for liquor service within service hours
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page

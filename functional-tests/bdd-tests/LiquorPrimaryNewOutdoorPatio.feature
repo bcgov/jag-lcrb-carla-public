@@ -21,5 +21,5 @@ Scenario: Liquor Primary New Outdoor Patio (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee
     # TODO
-    And the account is deleted
+    # And the account is deleted
     Then I see the login page
