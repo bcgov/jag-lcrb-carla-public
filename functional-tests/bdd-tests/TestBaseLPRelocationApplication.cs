@@ -43,24 +43,25 @@ namespace bdd_tests
             uiIsPermittedInZoning.Click();
 
             // select 'yes' for Treaty First Nation Land
-            NgWebElement uiIsTreatyFirstNationLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-2"));
+            NgWebElement uiIsTreatyFirstNationLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-5"));
             uiIsTreatyFirstNationLand.Click();
 
             // upload a letter of intent
             FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[2]");
 
             // select 'yes' for patio
-            NgWebElement uiHasPatioYes = ngDriver.FindElement(By.CssSelector("TODO"));
+            NgWebElement uiHasPatioYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-2"));
             uiHasPatioYes.Click();
 
-            // enter the establishment type - TODO
-
+            // enter the establishment type
+            NgWebElement uiEstablishmentType = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
+            uiEstablishmentType.SendKeys(establishmentType);
 
             // upload the signage document
-            FileUpload("signage.pdf", "(//input[@type='file'])[10]");
+            FileUpload("signage.pdf", "(//input[@type='file'])[5]");
 
             // upload the floor plan
-            FileUpload("floor_plan.pdf", "(//input[@type='file'])[15]");
+            FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
 
             // click on service area button
             NgWebElement uiServiceAreas = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'serviceAreas'] button"));
@@ -75,7 +76,7 @@ namespace bdd_tests
             uiOccupantLoad.SendKeys(occupantLoad);
 
             // upload the site plan 
-            FileUpload("site_plan.pdf", "(//input[@type='file'])[20]");
+            FileUpload("site_plan.pdf", "(//input[@type='file'])[11]");
 
             // enter the hours of sales
             NgWebElement uiServiceHoursSundayOpen = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceHoursSundayOpen'] option[value='09:00']"));
