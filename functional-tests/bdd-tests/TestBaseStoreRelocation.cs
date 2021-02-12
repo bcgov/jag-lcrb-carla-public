@@ -73,7 +73,7 @@ namespace bdd_tests
 
             // select the authorized to submit checkbox
             NgWebElement uiAuthToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
-            uiAuthToSubmit.Click();
+            JavaScriptClick(uiAuthToSubmit);
 
             // select the signature agreement checkbox
             NgWebElement uiSigAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));

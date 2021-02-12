@@ -69,7 +69,7 @@
     <None Update="LiquorPrimaryRelocation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LiquorPrimaryStructuralChangeCapacity.feature">
+    <None Update="LiquorPrimaryStructuralChangeCapacityIncrease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LiquorPrimaryStructuralChangeNoCapacity.feature">

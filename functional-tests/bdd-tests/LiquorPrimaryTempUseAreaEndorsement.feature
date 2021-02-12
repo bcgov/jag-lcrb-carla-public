@@ -21,6 +21,6 @@ Scenario: Liquor Primary Temp Use Area Endorsement (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the link for Temporary Use Area Endorsement Application
-    # TODO
+    And I submit a temporary use area endorsement application
     And the account is deleted
     Then I see the login page
