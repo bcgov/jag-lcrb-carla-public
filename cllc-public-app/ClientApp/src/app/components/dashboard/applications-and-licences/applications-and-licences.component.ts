@@ -80,6 +80,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   startUBVOngoing: boolean;
   startRASOngoing: boolean;
   startCRSOngoing: boolean;
+  startAgentOngoing: boolean;
 
 
   constructor(
@@ -374,6 +375,31 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           { duration: 3500, panelClass: ["red-snackbar"] });
         this.startCateringOngoing = false;
         console.log("Error starting a Catering Application");
+      }
+    );
+  }
+
+  startNewAgentApplication() {
+    this.startCateringOngoing = true;
+    const newLicenceApplicationData = {
+      licenseType: "Agent",
+      applicantType: this.account.businessType,
+      applicationType: { name: ApplicationTypeNames.Agent } as ApplicationType,
+      account: this.account,
+    } as Application;
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/account-profile/${data.id}`];
+        this.startAgentOngoing = false;
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open("Error starting an Agent Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
+        this.startCateringOngoing = false;
+        console.log("Error starting Agent Application");
       }
     );
   }
