@@ -27,13 +27,6 @@ namespace bdd_tests
             Page Title: Application to Allow Minors in Recreation Facilities
             */
 
-            // create test data
-            string reasonForChange = "Sample reason for change.";
-
-            // add reason for change
-            NgWebElement uiReasonForChange = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description2']"));
-            uiReasonForChange.SendKeys(reasonForChange);
-
             // upload the letter of intent
             FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[3]");
 

@@ -1,9 +1,9 @@
-﻿Feature: LiquorPrimaryTemporaryExtension
+﻿Feature: LiquorPrimaryTempUseAreaEndorsementApproved
     As a logged in business user
-    I want to request a temporary extension for a Liquor Primary Application
+    I want to request a temporary use area endorsement for a Liquor Primary Application
 
 @liquorprimary
-Scenario: Liquor Primary Temp Extension (Private Corporation)
+Scenario: Liquor Primary Temp Use Area Endorsement Approved (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
     And I review the account profile for a private corporation
@@ -20,7 +20,8 @@ Scenario: Liquor Primary Temp Extension (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
-    And I click on the link for Temporary Extension of Licensed Area
-    And I submit a temporary extension of licensed area application
-    And the account is deleted
+    And I click on the link for Temporary Use Area Endorsement Application
+    And I submit a temporary use area endorsement application
+    And the on-site endorsement application is approved
+    # And the account is deleted
     Then I see the login page

@@ -20,6 +20,9 @@ Scenario: Liquor Primary Relocation (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
-    # TODO
+    And I click on the Licences tab
+    And I click on the link for Liquor Primary Relocation Application
+    And I complete a liquor primary relocation request
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page
