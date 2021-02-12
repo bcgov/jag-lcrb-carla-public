@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: LiquorPrimaryStructuralChangeNoCapacity
+Feature: LiquorPrimaryTempUseAreaEndorsementApproved
     As a logged in business user
-    I want to request a Structural Change (No Capacity) for a Liquor Primary Application
+    I want to request a temporary use area endorsement for a Liquor Primary Application
 
 @liquorprimary
-Scenario: Liquor Primary Structural Change No Capacity (Private Corporation)
+Scenario: Liquor Primary Temp Use Area Endorsement Approved (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
     And I review the account profile for a private corporation
@@ -35,17 +35,18 @@ Scenario: Liquor Primary Structural Change No Capacity (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
-    And I click on the link for Structural Change Application (No Capacity Increase)
-    And I request a no capacity structural change
-    And the account is deleted
+    And I click on the link for Temporary Use Area Endorsement Application
+    And I submit a temporary use area endorsement application
+    And the on-site endorsement application is approved
+    # And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./LiquorPrimaryStructuralChangeNoCapacity.feature")]
+    [FeatureFile("./LiquorPrimaryTempUseAreaEndorsementApproved.feature")]
     [Collection("Liquor")]
-    public sealed class LiquorPrimaryStructuralChangeNoCapacity : TestBase
+    public sealed class LiquorPrimaryTempUseAreaEndorsementApproved : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
