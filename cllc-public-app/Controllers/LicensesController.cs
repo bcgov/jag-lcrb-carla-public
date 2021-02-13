@@ -1389,6 +1389,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     };
                 }
+                if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Agent")
+                {
+                    parameters = new Dictionary<string, string>
+                    {
+                        { "title", "Cannabis_Licence" },
+                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber},
+                        { "establishmentName", "N/A" },
+                        { "establishmentStreet", adoxioLicense.AdoxioLicencee?.Address1Line1 },
+                        { "establishmentCity", adoxioLicense.AdoxioLicencee?.Address1City + ", B.C." },
+                        { "establishmentPostalCode", adoxioLicense.AdoxioLicencee?.Address1Postalcode },
+                        { "licencee", adoxioLicense.AdoxioLicencee?.Name },
+                        { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
+                        { "effectiveDate", effectiveDateParam },
+                        { "expiryDate", expiraryDateParam },
+                        { "restrictionsText", termsAndConditions },
+                        { "endorsementsText", endorsementsText },
+                        { "storeHours", storeHours },
+                        { "keyWord", keyWord },
+                        { "printDate", DateTime.Today.ToString("MMMM dd, yyyy")} // will be based on the users machine
+
+                    };
+                }
+
+
 
                 else // handle other types such as catering
                 {
