@@ -32,6 +32,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
   uploadedStampedFloorPlanDocuments: number = 0;
   showValidationMessages: boolean;
   providingResolution: boolean;
+  lgHasApproved = false;
 
   constructor(private applicationDataService: ApplicationDataService,
     private snackBar: MatSnackBar,
@@ -51,9 +52,10 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
       lGContactEmail: ["", [Validators.required, Validators.email]],
       lgNoObjection: ["", []] // not required
     });
-    this.form.patchValue(this.application);
+    this.lgHasApproved = this?.application?.lGApprovalDecision  === 'Approved';
 
-    if (this.disableForm) {
+    this.form.patchValue(this.application);
+    if (this.disableForm || this.lgHasApproved) {
       this.form.disable();
     }
   }
