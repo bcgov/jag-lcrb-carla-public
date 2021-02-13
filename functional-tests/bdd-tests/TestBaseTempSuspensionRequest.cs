@@ -28,13 +28,9 @@ namespace bdd_tests
             */
 
             // create test data
-            string estEmail = "test@test.com";
+            //string estEmail = "test@test.com";
             string estPhone = "250-123-4567";
             string eventDetails = "Patio liquor carried description.";
-
-            // enter establishment email
-            NgWebElement uiEstablishmentEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentEmail']"));
-            uiEstablishmentEmail.SendKeys(estEmail);
 
             // enter establishment email
             NgWebElement uiEstablishmentPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentPhone']"));

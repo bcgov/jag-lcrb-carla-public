@@ -36,7 +36,7 @@ Scenario: Liquor Primary Temp Extension (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the link for Temporary Extension of Licensed Area
-    And I submit a temporary extension of licensed area application
+    And I submit a liquor primary temporary extension of licensed area application
     And the account is deleted
     Then I see the login page
 */
