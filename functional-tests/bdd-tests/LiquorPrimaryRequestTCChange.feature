@@ -21,6 +21,6 @@ Scenario: Liquor Primary Request T&C Change (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the link for Request T&C Change Application
-    # TODO
-    # And the account is deleted
+    And I request a T&C change application
+    And the account is deleted
     Then I see the login page
