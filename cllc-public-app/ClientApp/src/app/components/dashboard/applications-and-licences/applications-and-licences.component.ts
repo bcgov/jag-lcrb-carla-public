@@ -380,7 +380,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   startNewAgentApplication() {
-    this.startCateringOngoing = true;
+    this.startAgentOngoing = true;
     const newLicenceApplicationData = {
       licenseType: "Agent",
       applicantType: this.account.businessType,
@@ -398,7 +398,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.snackBar.open("Error starting an Agent Application",
           "Fail",
           { duration: 3500, panelClass: ["red-snackbar"] });
-        this.startCateringOngoing = false;
+        this.startAgentOngoing = false;
         console.log("Error starting Agent Application");
       }
     );
