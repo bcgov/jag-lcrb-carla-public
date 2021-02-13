@@ -68,15 +68,15 @@ namespace bdd_tests
             uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
             // click Fixed option
-            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-25-button"));
+            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-33-button"));
             uiFixedOption.Click();
 
             // click Portable option
-            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-26-button"));
+            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-34-button"));
             uiPortableOption.Click();
 
             // click Interior option
-            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-27-button"));
+            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-35-button"));
             uiInteriorOption.Click();
 
             // upload floor plan
