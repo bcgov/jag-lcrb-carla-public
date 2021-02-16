@@ -64,7 +64,7 @@ namespace bdd_tests
 
             // click Fixed option
             NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-25-button"));
-            uiFixedOption.Click();
+            JavaScriptClick(uiFixedOption);
 
             // click Portable option
             NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-26-button"));
@@ -102,6 +102,14 @@ namespace bdd_tests
             // click on the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
+
+            // retrieve the current URL to get the application ID (needed downstream)
+            string URL = ngDriver.Url;
+
+            // retrieve the application ID
+            string[] parsedURL = URL.Split('/');
+
+            endorsementID = parsedURL[5];
 
             // click on the Submit & Pay button
             ClickOnSubmitButton();

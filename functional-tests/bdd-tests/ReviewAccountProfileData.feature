@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm the saved data for the account profile
 
-@privatecorporation @reviewaccountdata @release
+@privatecorporation @reviewaccountdata @release2
 Scenario: Data for Review Account Profile (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the link for Edit Account Profile
