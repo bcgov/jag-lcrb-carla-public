@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm that the Manufacturer functionality is ready for release
 
-@manufacturer @winery @release 
+@manufacturer @winery @release1 
 Scenario: DEV Manufacturer Release #1 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -27,7 +27,7 @@ Scenario: DEV Manufacturer Release #1 (Winery/Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @winery @release 
+@manufacturer @winery @release1 
 Scenario: DEV Manufacturer Release #2 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -44,10 +44,6 @@ Scenario: DEV Manufacturer Release #2 (Winery/Private Corporation)
     And I request a special event area endorsement
     And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
-    And I click on the Licences tab
-    And I complete the change hours application for a lounge area within service hours
-    And I click on the Submit button
-    And I enter the payment information
     And I click on the Licences tab
     And I click on the link for Manage Off-Site Storage
     And I complete the offsite storage application

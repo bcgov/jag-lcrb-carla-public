@@ -118,7 +118,7 @@ namespace bdd_tests
             uiIndigenousNation.SendKeys(localGovernmentParksville);
 
             NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
-            uiIndigenousNation2.Click();
+            JavaScriptClick(uiIndigenousNation2);
 
             // search for and select RCMP Oceanside as the police jurisdiction
             NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));

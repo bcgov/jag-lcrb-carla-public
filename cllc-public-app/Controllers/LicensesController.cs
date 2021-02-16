@@ -60,22 +60,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public List<RelatedLicence> GetAutocomplete(string name)
         {
             var results = new List<RelatedLicence>();
-            string crsId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.CannabisRetailStore, _cache);
-            string marketingId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Marketing, _cache);            
-            string manufacturerId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Marketing, _cache);
-            string cateringId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Catering, _cache);
-            string ubvId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.UBV, _cache);
-            string agentId = _dynamicsClient.GetCachedLicenceTypeIdByName (ViewModels.LicenceTypeNames.Agent, _cache);
-            
+            string crsId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.CannabisRetailStore, _cache);
+            string marketingId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.Marketing, _cache);
+            string manufacturerId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.Marketing, _cache);
+            string cateringId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.Catering, _cache);
+            string ubvId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.UBV, _cache);
+            string agentId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.Agent, _cache);
+
             try
             {
-                
+
                 string filter = null;
                 // escape any apostophes.
                 if (!string.IsNullOrEmpty(name) && crsId != null && marketingId != null && manufacturerId != null && cateringId != null && ubvId != null && agentId != null)
                 {
                     name = name.Replace("'", "''");
                     // select active licences that match the given name
+                    /*
                     filter = $"_adoxioLicencetypeValue ne {crsId} and "
                         + $"_adoxioLicencetypeValue ne {marketingId} and "
                         + $"_adoxioLicencetypeValue ne {manufacturerId} and "
@@ -83,8 +84,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         + $"_adoxioLicencetypeValue ne {ubvId} and "                        
                         + $"_adoxioLicencetypeValue ne {agentId} and "
                         + $"statecode eq 0 and contains(name,'{name}')";
+                    */
+                    filter = $"statecode eq 0 and contains(adoxio_name,'{name}')";
 
-                    var expand = new List<string> {"adoxio_Licencee", "adoxio_establishment" };
+                    var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
                     var licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, top: 10).Value;
                     foreach (var licence in licences)
                     {
@@ -97,13 +100,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             City = licence.AdoxioEstablishment.AdoxioAddressstreet,
                             Provstate = "BC",
                             Country = "CANADA",
-                            PostalCode =  licence.AdoxioEstablishment.AdoxioAddresspostalcode, 
+                            PostalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode,
                             Licensee = licence.AdoxioLicencee.Name
                         };
                         results.Add(relatedLicence);
                     }
                 }
-                
+
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -459,7 +462,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("initiate-tied-house-excemption")]
         public ActionResult InitiateTiedHouseExcemption(TiedHouseExcemptionRequest item)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid ||
+                string.IsNullOrEmpty(item.LicenceId) ||
+                string.IsNullOrEmpty(item.RelatedLicenceId))
             {
                 return BadRequest();
             }
@@ -470,19 +475,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return NotFound();
             }
-
-            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            MicrosoftDynamicsCRMadoxioLicences relatedLicence = _dynamicsClient.GetLicenceByIdWithChildren(item.RelatedLicenceId);
+            if (!CurrentUserHasAccessToLicenseOwnedBy(relatedLicence._adoxioLicenceeValue))
             {
                 return Forbid();
             }
 
             // create a new application.
             var application = CreateApplication(item.LicenceId, ApplicationTypeNames.TiedHouseExemption, item.RelatedLicenceId);
-            
+
             return Ok();
         }
 
-        
+
 
         /// <summary>
         /// Set expiry for a given licence to different dates as specified by workflow GUIDs.  Only useful for automated testing.
@@ -786,19 +791,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // check to see if there is a related licence.
-
+            // some applications create a relationship between two licences, in this case we will have a related licence
             if (relatedLicenceId != null)
             {
-                var relatedLicence = _dynamicsClient.GetLicenceByIdWithChildren(relatedLicenceId);
-                // set the establishment address to be that of the related licence.
-                application.AdoxioEstablishmentaddressstreet = relatedLicence.AdoxioEstablishment.AdoxioAddressstreet;
-                application.AdoxioEstablishmentaddresscity = relatedLicence.AdoxioEstablishment.AdoxioAddresscity;
-                application.AdoxioEstablishmentaddresspostalcode = relatedLicence.AdoxioEstablishment.AdoxioAddresspostalcode;
+                // copy the establishment address from the assigned licence.
+                application.AdoxioEstablishmentaddressstreet = adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet;
+                application.AdoxioEstablishmentaddresscity = adoxioLicense.AdoxioEstablishment.AdoxioAddresscity;
+                application.AdoxioEstablishmentaddresspostalcode = adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode;
+
+                // set related licence
+                application.AdoxioRelatedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", relatedLicenceId);
+
+                // get the applicant from the assigned licence
+                application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", adoxioLicense._adoxioLicenceeValue);
 
                 // TODO - the following fields do not appear to be in Dynamics yet
 
                 // Assigned Licensee == Licensee of selected licence
-                // Related Licence == Licence lookup of the manufacturers' licence
 
             }
 
@@ -1245,6 +1254,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var licenceHasPPEE = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Patron Participation Entertainment Endorsement");
                     var licenceHasTUA = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Temporary Use Area Endorsement");
                     var licenceHasPicnic = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Picnic Area Endorsement"); ;
+                    var licenceHasTempOffsite = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Temporary Off-Site Sales Endorsement");
 
                     if (licenceHasSEA > -1)
                     {
@@ -1285,6 +1295,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (licenceHasPicnic > -1)
                     {
                         endorsementsText += licenceVM.Endorsements[licenceHasPicnic].SimpleHeader();
+                    }
+
+                    if (licenceHasTempOffsite > -1)
+                    {
+                        endorsementsText += licenceVM.Endorsements[licenceHasTempOffsite].SimpleHeader();
                     }
 
                 }

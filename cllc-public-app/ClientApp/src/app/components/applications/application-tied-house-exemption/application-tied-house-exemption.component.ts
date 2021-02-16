@@ -20,7 +20,7 @@ import { RelatedLicence } from "@models/related-licence";
 
 const ValidationErrorMap = {
   "proposedOwner.accountId": "Please select the proposed transferee",
-  transferConsent: "Please consent to the transfer",
+  consent: "Please consent to the invitation, if you wish to proceed.",
   authorizedToSubmit: "Please affirm that you are authorized to submit the application.",
   signatureAgreement: "Please affirm that all of the information provided for this application is true and complete.",
 };
@@ -71,10 +71,14 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       establishmentAddressCity: [""],
       establishmentAddressPostalCode: [""],
       establishmentParcelId: [""],
-      relatedLicence: this.fb.group({
-        licenceId: ["", [Validators.required]],
+      assignedLicence: this.fb.group({
+        id: ["", [Validators.required]],
         establishmentName: [{ value: "", disabled: true }],
-        establishmentAddress: [{ value: "", disabled: true }],
+        name: [{ value: "", disabled: true }],
+        city: [{ value: "", disabled: true }],
+        country: [{ value: "", disabled: true }],
+        streetaddress: [{ value: "", disabled: true }],
+        postalCode: [{ value: "", disabled: true }],
         licensee: [{ value: "", disabled: true }],
       }),
       licenseeContact: this.fb.group({
@@ -82,7 +86,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
         email: [{ value: "", disabled: true }],
         phone: [{ value: "", disabled: true }]
       }),
-      transferConsent: ["", [this.customRequiredCheckboxValidator()]],
+      consent: ["", [this.customRequiredCheckboxValidator()]],
       authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
     });
@@ -151,15 +155,15 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
-    return this.licenseDataService.initiateTiedHouseExcemption(this.licence.id, this.form.get("relatedLicence.licenceId").value)
+    return this.licenseDataService.initiateTiedHouseExcemption(this.form.get("assignedLicence.id").value, this.licence.id)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
-        this.snackBar.open("Error submitting tied house excemption", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+        this.snackBar.open("Error submitting Tied House Exemption", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         return of(false);
       }))
       .pipe(mergeMap(() => {
         if (showProgress === true) {
-          this.snackBar.open("Tied House Excemption Request has been sent",
+          this.snackBar.open("Tied House Exemption Invitation has been sent",
             "Success",
             { duration: 2500, panelClass: ["green-snackbar"] });
         }
@@ -219,8 +223,8 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       -1;
   }
 
-  onLicenceSelect(relatedLicence: RelatedLicence) {
-    this.form.get("relatedLicence").patchValue(relatedLicence);
+  onLicenceSelect(assignedLicence: RelatedLicence) {
+    this.form.get("assignedLicence").patchValue(assignedLicence);
   }
 
 }
