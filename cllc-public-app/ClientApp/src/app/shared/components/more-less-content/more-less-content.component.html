@@ -7,6 +7,7 @@
   </div>
 </div>
 <div *ngIf="enableMoreLessToggle" background>
+  <hr>
   <a *ngIf="showMore" href="javascript: void(0);" (click)="toggleContent()">Show less</a>
   <a *ngIf="!showMore" href="javascript: void(0);" (click)="toggleContent()">Expand Guide</a>
 </div>
