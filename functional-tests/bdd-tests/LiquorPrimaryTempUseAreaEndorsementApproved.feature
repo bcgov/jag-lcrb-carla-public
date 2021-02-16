@@ -23,5 +23,5 @@ Scenario: Liquor Primary Temp Use Area Endorsement Approved (Private Corporation
     And I click on the link for Temporary Use Area Endorsement Application
     And I submit a temporary use area endorsement application
     And the on-site endorsement application is approved
-    # And the account is deleted
+    And the account is deleted
     Then I see the login page
