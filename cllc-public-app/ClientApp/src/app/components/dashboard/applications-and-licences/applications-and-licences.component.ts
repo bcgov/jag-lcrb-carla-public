@@ -133,6 +133,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
    *
    * */
   private displayApplications() {
+    this.dataLoaded = false;
     this.inProgressApplications = [];
     this.licensedApplications = [];
     const sub = forkJoin([

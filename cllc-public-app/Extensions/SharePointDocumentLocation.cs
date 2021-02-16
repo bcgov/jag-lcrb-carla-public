@@ -513,7 +513,7 @@ namespace Gov.Lclb.Cllb.Public.Extensions
             // Create the SharePointDocumentLocation entity
             var mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation
             {
-                RegardingobjectIdEventODataBind = licenceUri,
+                RegardingobjectIdLicenceODataBind = licenceUri,
                 ParentsiteorlocationSharepointdocumentlocationODataBind =
                     _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
                 Relativeurl = folderName,
