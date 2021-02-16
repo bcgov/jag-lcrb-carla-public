@@ -1100,7 +1100,7 @@
 
     <div *ngIf="htmlContent.signage">
       <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.signage"></section>
-      <img src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage">
+      <img src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage" *ngIf="application?.licenseType == 'Food Primary' || application?.licenseType == 'Liquor Primary'">
     </div>
 
     <div *ngIf="!htmlContent.signage">
