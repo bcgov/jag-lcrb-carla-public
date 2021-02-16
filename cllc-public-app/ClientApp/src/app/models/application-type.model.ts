@@ -93,6 +93,7 @@ export enum ApplicationTypeNames {
   PermanentChangeToALicensee = "Permanent Change to a Licensee",
   WineStore = "Wine Store",
   RAS = "Rural Agency Store",
+  RLRS = "Rural Licensee Retail Store",
   MFG = "Manufacturer",
   UBV = "UBrew and UVin",
   LoungeAreaEndorsment = "Lounge Area Endorsement",
