@@ -17,7 +17,7 @@ Feature: LiquorPrimaryApplication
     As a logged in business user
     I want to submit Liquor Primary Applications for different business types
 
-@liquorprimaryapp @release2
+@liquorprimaryapp
 Scenario: DEV Liquor Primary Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
