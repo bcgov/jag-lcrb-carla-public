@@ -80,6 +80,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   startUBVOngoing: boolean;
   startRASOngoing: boolean;
   startCRSOngoing: boolean;
+  startRLRSOngoing: boolean;
   startAgentOngoing: boolean;
 
 
@@ -537,6 +538,30 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           { duration: 3500, panelClass: ["red-snackbar"] });
         this.startRASOngoing = false;
         console.log("Error starting a Rural Agency Application");
+      }
+    );
+  }
+  startNewRLRSApplication() {
+    this.startRLRSOngoing = true;
+    const newLicenceApplicationData = {
+      licenseType: "Rural Licensee Retail Store",
+      applicantType: this.account.businessType,
+      applicationType: { name: ApplicationTypeNames.RLRS } as ApplicationType,
+      account: this.account,
+    } as Application;
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/account-profile/${data.id}`];
+        this.startRASOngoing = false;
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open("Error starting a Rural Licensee Retail Store Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
+        this.startRLRSOngoing = false;
+        console.log("Error starting a Rural Licensee Retail Store Application");
       }
     );
   }
