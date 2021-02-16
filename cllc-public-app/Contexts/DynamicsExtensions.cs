@@ -1614,13 +1614,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-
-            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            if (! string.IsNullOrEmpty(temp))
             {
-                return userSettings.AccountId == accountId.ToString() || IsChildAccount(userSettings.AccountId, accountId.ToString(), _dynamicsClient);
-            }
+                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
+                if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+                {
+                    return userSettings.AccountId == accountId.ToString() || IsChildAccount(userSettings.AccountId, accountId.ToString(), _dynamicsClient);
+                }
+            }
+            
             // if current user doesn't have an account they are probably not logged in
             return false;
         }
