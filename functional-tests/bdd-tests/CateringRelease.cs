@@ -32,8 +32,8 @@ Scenario: DEV Catering Release (Private Corporation)
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    # And I click on the Dashboard tab
+    # And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I request a licensee representative
     And I click on the Licences tab
@@ -65,8 +65,8 @@ Scenario: DEV Catering Release (Sole Proprietorship)
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    # And I click on the Dashboard tab
+    # And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
     And I request a licensee representative
     And I click on the Licences tab
