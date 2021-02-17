@@ -37,6 +37,11 @@ Scenario: Liquor Primary Request T&C Change (Private Corporation)
     And I pay the licensing fee
     And I click on the link for Request T&C Change Application
     And I request a T&C change application
+    # And I log in as local government for Parksville
+    # And I click on the link for Applications for Review
+    # And I click on the link for Review Application
+    # And I specify my contact details as the approving authority
+    # And I click on the Submit button
     And the account is deleted
     Then I see the login page
 */

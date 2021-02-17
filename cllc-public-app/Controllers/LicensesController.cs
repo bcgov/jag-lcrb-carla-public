@@ -652,14 +652,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // Delete the Proposed Owner (ProposedOwnerODataBind)
             try
             {
-                _dynamicsClient.Licenceses.DeleteReferenceWithHttpMessagesAsync(item.LicenceId, "adoxio_proposedoperator").GetAwaiter().GetResult();
+                // The field on the Licences side is adoxio_proposedoperator, however we get a Bad Request when trying to delete that reference.
+                _dynamicsClient.Accounts.DeleteReference(item.AccountId,
+                    "adoxio_account_adoxio_licences_ProposedOperator");
             }
             catch (HttpOperationException httpOperationException)
             {
                 if (httpOperationException.Response.StatusCode != System.Net.HttpStatusCode.NotFound)
                 {
                     _logger.LogError(httpOperationException, "Error deleting proposed operator");
-                    throw;
                 }
             }
 
@@ -1389,6 +1390,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     };
                 }
+                if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Agent")
+                {
+                    parameters = new Dictionary<string, string>
+                    {
+                        { "title", "Cannabis_Licence" },
+                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber},
+                        { "establishmentName", "N/A" },
+                        { "establishmentStreet", adoxioLicense.AdoxioLicencee?.Address1Line1 },
+                        { "establishmentCity", adoxioLicense.AdoxioLicencee?.Address1City + ", B.C." },
+                        { "establishmentPostalCode", adoxioLicense.AdoxioLicencee?.Address1Postalcode },
+                        { "licencee", adoxioLicense.AdoxioLicencee?.Name },
+                        { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
+                        { "effectiveDate", effectiveDateParam },
+                        { "expiryDate", expiraryDateParam },
+                        { "restrictionsText", termsAndConditions },
+                        { "endorsementsText", endorsementsText },
+                        { "storeHours", storeHours },
+                        { "keyWord", keyWord },
+                        { "printDate", DateTime.Today.ToString("MMMM dd, yyyy")} // will be based on the users machine
+
+                    };
+                }
+
+
 
                 else // handle other types such as catering
                 {
