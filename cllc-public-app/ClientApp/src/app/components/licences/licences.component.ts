@@ -45,6 +45,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   dataLoaded = false;
   ApplicationTypeNames = ApplicationTypeNames;
   licenceMappings = {};
+  liquorThree: boolean;
 
   // note, in order for a licence type to show on the dashboard, they must be configured here:
   supportedLicenceTypes = [
@@ -56,8 +57,6 @@ export class LicencesComponent extends FormBase implements OnInit {
     "Licensee Retail Store", "Transfer in Progress - Licensee Retail Store", "Operated - Licensee Retail Store",
     "Deemed - Licensee Retail Store",
     "UBrew and UVin", "Transfer in Progress - UBrew and UVin", "Operated - UBrew and UVin", "Deemed - UBrew and UVin",
-    "Food Primary", "Transfer in Progress - Food Primary", "Operated - Food Primary", "Deemed - Food Primary",
-    "Liquor Primary", "Transfer in Progress - Liquor Primary", "Operated - Liquor Primary", "Deemed - Liquor Primary",
     "Section 119 Authorization"
   ];
 
@@ -70,9 +69,19 @@ export class LicencesComponent extends FormBase implements OnInit {
     public fb: FormBuilder) {
     super();
     this.mainForm = new FormGroup({});
+
+    featureFlagService.featureOn("LiquorThree")
+      .subscribe(x => this.liquorThree = x);
   }
 
   ngOnInit() {
+    if(this.liquorThree) {
+      // control the licence rows as part of the feature flag.
+      var liquorThree = ["Food Primary", "Transfer in Progress - Food Primary", "Operated - Food Primary", "Deemed - Food Primary",
+      "Liquor Primary", "Transfer in Progress - Liquor Primary", "Operated - Liquor Primary", "Deemed - Liquor Primary",
+      "Agent", "Transfer in Progress - Agent", "Operated - Agent", "Deemed - Agent"];
+      this.supportedLicenceTypes = this.supportedLicenceTypes.concat(liquorThree);
+    }
     this.displayApplications();
   }
 
