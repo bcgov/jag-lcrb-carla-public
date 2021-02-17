@@ -89,6 +89,12 @@ namespace bdd_tests
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
             }
 
+            if (bizType == "sole proprietorship")
+            {
+                // upload personal history form
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
+            }
+
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
             uiEstabName.SendKeys(estName);
@@ -121,6 +127,11 @@ namespace bdd_tests
             if (bizType == "private corporation")
             {
                 FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[17]");
+            }
+
+            if (bizType == "sole proprietorship")
+            {
+                FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[5]");
             }
 
             // search for and select Parksville as the local government
@@ -211,6 +222,15 @@ namespace bdd_tests
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
             }
 
+            if (bizType == "sole proprietorship")
+            {
+                // upload signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
+
+                // upload floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
+            }
+
             // click on the Add Area button
             NgWebElement uiAddArea = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceAreas'] button"));
             uiAddArea.Click();
@@ -237,6 +257,12 @@ namespace bdd_tests
             {
                 // upload the site plan
                 FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
+            }
+
+            if (bizType == "sole proprietorship")
+            {
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[14]");
             }
 
             // select the owner checkbox
