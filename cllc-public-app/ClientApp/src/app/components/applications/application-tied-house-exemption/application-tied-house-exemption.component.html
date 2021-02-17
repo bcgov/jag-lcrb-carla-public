@@ -4,39 +4,18 @@
   <div *ngIf="dataLoaded">
     <div [formGroup]="form" style="padding-left: 45px; position: relative">
       <!-- Title -->
-      <h1 class="ngtest-page-title">Tied House Exemption Application Invitation</h1>
+      <h1 class="ngtest-page-title">Tied House Exemption Application</h1>
     </div>
 
     <div [formGroup]="form" class="application-wrapper">
-    <!-- Preamble -->
-    <section class="ngtest-preamble-content">
-
-
-    </section>
-
-    <!-- Before Starting -->
-    <h3 class="blue-header">BEFORE STARTING THE APPLICATION</h3>
-    <section class="padded-section content-bottom">
-      <div class="ngtest-before-starting-content">
-        <p>A licensed establishment which has an off-site tied house (TH) association with a small volume manufacturer, may
-          apply for exemption to the TH restrictions, provided they have been invited to apply by a manufacturer. A small volume manufacturer may have
-          up to 3 exemptions with off-site TH licensed establishment(s) where the manufacturer's liquor may be sold.</p>
+      <!-- Preamble -->
+      <section class="ngtest-preamble-content">
         <p>
-          To be eligible, the licensed manufacturer's annual production volume for the 12 months prior to submitting the
-          exemption application must not exceed:</p>
-          <ul>
-            <li>100 000 litres of spirits,</li>
-            <li>750 000 litres of wine, or</li>
-            <li>300 000 hectolitres of beer.</li>
-          </ul>
-           <p>
-           If the manufacturer has not been in operation for 12 months, an estimate of the manufacturer's
-          production volume for the 12 months after submitting the exemption application may be accepted. Where a TH
-          exemption(s) is being removed, terms and conditions will be added to the licences of the off-site establishment and
-          associated manufacturer to prevent the sale of the manufacturer's liquor in the associated off-site establishment. For
-          more information about TH, see your Terms and Conditions Handbook.
+          By submitting this application, the current cannabis retail store licence holder acknowledges that they
+          <strong>must continue to hold valid interest</strong> (lease or land title) until the Transfer of Ownership
+          application is approved by the Liquor and Cannabis Regulation Branch.
         </p>
-      </div>
+
       </section>
 
       <!-- Before Starting -->
@@ -220,61 +199,6 @@
         </app-field>
       </div>
 
-    <h3 class="blue-header">IDENTIFY THE LICENCE TO RECEIVE THE EXEMPTION INVITATION</h3>
-    <section class="padded-section content-bottom">
-      <app-field label="Search for the licence you wish to invite to apply for a tied house exemption:"
-                 errorMessage="Please select a value" [required]="true"
-                 [valid]="isValidOrNotTouched('relatedLicence')">
-        <app-related-licence-picker (valueSelected)="onLicenceSelect($event)"></app-related-licence-picker>
-      </app-field>
-
-      <label>Licence Name: </label> <span> {{form.get('proposedOwner.accountName')?.value}}</span> <br>
-      <label>Establishment Address: </label> <span> {{form.get('proposedOwner.businessType')?.value}}</span><br>
-      <label>Assigned Licensee: </label> <span> {{form.get('proposedOwner.contactName')?.value}}</span><br>
-    </section>
-
-    <h3 class="blue-header">CONSENT TO TIED HOUSE EXEMPTION</h3>
-    <section class="padded-section content-bottom">
-      <app-field [required]="true" [valid]="isValidOrNotTouched('consent')"
-                 errorMessage="Please consent to the transfer" [showChevrons]="false">
-        <mat-checkbox formControlName="consent">
-            I agree to invite the above licence holder to apply for a Tied House Exemption for the products produced by {{licenseNumber}} - {{establishmentName}}.
-        </mat-checkbox>
-      </app-field>
-    </section>
-
-    <h3 class="blue-header ngtest-declarations">
-      DECLARATIONS
-    </h3>
-    <div class="padded-section content-bottom">
-      <section>
-        <div>
-          The application must only be submitted by an individual with the authority to bind the applicant. The
-          branch
-          relies on the applicant to ensure that the individual who submits this application is authorized to do
-          so.
-          Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
-          usually
-          be
-          an officer or, in some cases, a director.
-        </div>
-      </section>
-      <p>
-        Note: A lawyer or
-        consultant,
-        may NOT submit this application on behalf of
-        the applicant.
-      </p>
-
-      <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-                 errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
-        <mat-checkbox formControlName="authorizedToSubmit">
-          <span class="error-states">*</span>
-          <span class="ml-2">
-            I understand and affirm that I am authorized to submit the invitation
-          </span>
-        </mat-checkbox>
-        </app-field>
       <p></p>
       <section class="error" *ngIf="showValidationMessages">
         <p *ngFor="let message of validationMessages">
