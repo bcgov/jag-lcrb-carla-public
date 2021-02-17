@@ -169,7 +169,7 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'X1X1X1, 12345, 12345-1234. ')]")).Displayed);
 
             // check that general error message is thrown
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Some required fields have not been completed. ')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Some required fields have not been completed')]")).Displayed);
         }
 
 
