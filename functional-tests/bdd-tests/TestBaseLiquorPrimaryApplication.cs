@@ -62,8 +62,7 @@ namespace bdd_tests
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
             }
 
-            /*
-            if (bizType != "sole proprietorship")
+            if (bizType == "private corporation")
             {
                 // upload a central securities register
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -75,23 +74,34 @@ namespace bdd_tests
                 FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
             }
 
-            // upload personal history form
-            if (bizType == "sole proprietorship")
-            {
-                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
-            }
-            else {
-                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
-            }
+                /*
+                if (bizType != "sole proprietorship")
+                {
+                    // upload a central securities register
+                    FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
-            // upload shareholders < 10% interest
-            if (bizType != "sole proprietorship")
-            {
-                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
-            }*/
+                    // upload supporting business documentation
+                    FileUpload("associates.pdf", "(//input[@type='file'])[6]");
 
-            // enter the establishment name
-            NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
+                    // upload notice of articles
+                    FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+                }
+                */
+
+                // upload personal history form
+                if (bizType == "private corporation")
+                {
+                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
+                }
+ 
+                // upload shareholders < 10% interest
+                if (bizType == "private corporation")
+                {
+                    FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
+                }
+
+                // enter the establishment name
+                NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address
@@ -117,6 +127,11 @@ namespace bdd_tests
             if (bizType == "partnership")
             {
                 FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[8]");
+            }
+
+            if (bizType == "private corporation")
+            {
+                FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[17]");
             }
 
             /*
@@ -205,6 +220,12 @@ namespace bdd_tests
                 FileUpload("signage.pdf", "(//input[@type='file'])[11]");
             }
 
+            // upload signage document
+            if (bizType == "private corporation")
+            {
+                FileUpload("signage.pdf", "(//input[@type='file'])[20]");
+            }
+
             /*
             // upload signage document
             if ((bizType == "partnership") || (bizType == "society"))
@@ -241,6 +262,12 @@ namespace bdd_tests
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[14]");
             }
 
+            // upload floor plan
+            if (bizType == "private corporation")
+            {
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
+            }
+
             // click on the Add Area button
             NgWebElement uiAddArea = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceAreas'] button"));
             uiAddArea.Click();
@@ -261,6 +288,12 @@ namespace bdd_tests
             {
                 // upload the site plan
                 FileUpload("site_plan.pdf", "(//input[@type='file'])[17]");
+            }
+
+            if (bizType == "private corporation")
+            {
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
             }
 
             /*
