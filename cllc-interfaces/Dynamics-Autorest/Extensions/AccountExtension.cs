@@ -162,6 +162,115 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return _result;
         }
+
+        public async Task<HttpOperationResponse> DeleteReferenceWithHttpMessagesAsync(string accountId, string fieldname, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default)
+        {
+            if (accountId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "accountId");
+            }
+            if (fieldname == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "fieldname");
+            }
+            // Tracing
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
+            {
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("adoxio_licencesid", accountId);
+                tracingParameters.Add("fieldname", fieldname);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(_invocationId, this, "DeleteReference", tracingParameters);
+            }
+            // Construct URL
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "accounts({accountId})/{fieldname}/$ref").ToString();
+            _url = _url.Replace("{accountId}", System.Uri.EscapeDataString(accountId));
+            _url = _url.Replace("{fieldname}", System.Uri.EscapeDataString(fieldname));
+            // Create HTTP transport objects
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("DELETE");
+            _httpRequest.RequestUri = new System.Uri(_url);
+            // Set Headers
+
+
+            if (customHeaders != null)
+            {
+                foreach (var _header in customHeaders)
+                {
+                    if (_httpRequest.Headers.Contains(_header.Key))
+                    {
+                        _httpRequest.Headers.Remove(_header.Key);
+                    }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                }
+            }
+
+            // Serialize Request
+            string _requestContent = null;
+            // Set Credentials
+            if (Client.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            }
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
+            if ((int)_statusCode != 204)
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Odataerror _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Odataerror>(_responseContent, Client.DeserializationSettings);
+                    if (_errorBody != null)
+                    {
+                        ex.Body = _errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Error(_invocationId, ex);
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
+        }
     }
 
     public partial interface IAccounts
@@ -191,6 +300,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Thrown when a required parameter is null
         /// </exception>
         Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string accountId, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
+
+        Task<HttpOperationResponse> DeleteReferenceWithHttpMessagesAsync(string accountId, string fieldname, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
+
     }
 
     public static partial class AccountExtensions
@@ -215,6 +327,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             operations.AddReferenceAsync(accountId, fieldname, odataid).GetAwaiter().GetResult();
         }
 
+        public static void DeleteReference(this IAccounts operations, string accountId, string fieldname, Odataid odataid = default)
+        {
+            operations.DeleteReferenceAsync(accountId, fieldname).GetAwaiter().GetResult();
+        }
+
         /// <summary>
         /// Add reference to adoxio_workers
         /// </summary>
@@ -236,6 +353,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static async Task AddReferenceAsync(this IAccounts operations, string accountId, string fieldname, Odataid odataid = default, CancellationToken cancellationToken = default)
         {
             (await operations.AddReferenceWithHttpMessagesAsync(accountId, fieldname, odataid, null, cancellationToken).ConfigureAwait(false)).Dispose();
+        }
+
+        public static async Task DeleteReferenceAsync(this IAccounts operations, string accountId, string fieldname, Odataid odataid = default, CancellationToken cancellationToken = default)
+        {
+            (await operations.DeleteReferenceWithHttpMessagesAsync(accountId, fieldname, null, cancellationToken).ConfigureAwait(false)).Dispose();
         }
     }
 }
