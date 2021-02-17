@@ -158,7 +158,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             memo.Add(accountId);
 
-            var filter = "_adoxio_parentaccount_value eq " + accountId;
+            // select ACTIVE le-connections of the parent account
+            var filter = $"statecode eq 0 and _adoxio_parentaccount_value eq {accountId}";
 
             var expand = new List<string>{
                 "adoxio_ChildProfileName_contact",
@@ -1074,11 +1075,11 @@ namespace Gov.Lclb.Cllb.Interfaces
                             memoryCache.Set(cacheKey, result, cacheEntryOptions);
                         }
                     }
-                    
+
                 }
 
             }
-            
+
             return result;
         }
 
@@ -1149,7 +1150,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             catch (Exception e)
             {
                 _logger.LogError(e, "ERROR getting accounts picklist metadata");
-                
+
             }
 
             // get the application mapping.
@@ -1614,7 +1615,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            if (! string.IsNullOrEmpty(temp))
+            if (!string.IsNullOrEmpty(temp))
             {
                 UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
@@ -1623,7 +1624,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     return userSettings.AccountId == accountId.ToString() || IsChildAccount(userSettings.AccountId, accountId.ToString(), _dynamicsClient);
                 }
             }
-            
+
             // if current user doesn't have an account they are probably not logged in
             return false;
         }
