@@ -666,5 +666,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string TermConditionId { get; set; }
         public string TermConditionOriginalText { get; set; }
+
+        public DateTimeOffset? TempDateFrom { get; set; }
+        public DateTimeOffset? TempDateTo { get; set; }
     }
 }

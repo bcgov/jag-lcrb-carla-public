@@ -71,6 +71,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   liquorOne: boolean;
   liquorTwo: boolean;
   liquorThree: boolean;
+  RAS: boolean;
   startMarketingOngoing: boolean;
   startCateringOngoing: boolean;
   startFPOngoing: boolean;
@@ -80,6 +81,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   startUBVOngoing: boolean;
   startRASOngoing: boolean;
   startCRSOngoing: boolean;
+  startRLRSOngoing: boolean;
+  startAgentOngoing: boolean;
 
 
   constructor(
@@ -113,6 +116,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       .subscribe(x => this.liquorTwo = x);
     featureFlagService.featureOn("LiquorThree")
       .subscribe(x => this.liquorThree = x);
+    featureFlagService.featureOn("RAS")
+      .subscribe(x => this.RAS = x);
   }
 
   ngOnInit() {
@@ -379,6 +384,31 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     );
   }
 
+  startNewAgentApplication() {
+    this.startAgentOngoing = true;
+    const newLicenceApplicationData = {
+      licenseType: "Agent",
+      applicantType: this.account.businessType,
+      applicationType: { name: ApplicationTypeNames.Agent } as ApplicationType,
+      account: this.account,
+    } as Application;
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/account-profile/${data.id}`];
+        this.startAgentOngoing = false;
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open("Error starting an Agent Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
+        this.startAgentOngoing = false;
+        console.log("Error starting Agent Application");
+      }
+    );
+  }
+
   startNewMfgApplication() {
     this.startMfgOngoing = true;
     const newLicenceApplicationData = {
@@ -512,6 +542,30 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           { duration: 3500, panelClass: ["red-snackbar"] });
         this.startRASOngoing = false;
         console.log("Error starting a Rural Agency Application");
+      }
+    );
+  }
+  startNewRLRSApplication() {
+    this.startRLRSOngoing = true;
+    const newLicenceApplicationData = {
+      licenseType: "Rural Licensee Retail Store",
+      applicantType: this.account.businessType,
+      applicationType: { name: ApplicationTypeNames.RLRS } as ApplicationType,
+      account: this.account,
+    } as Application;
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/account-profile/${data.id}`];
+        this.startRASOngoing = false;
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open("Error starting a Rural Licensee Retail Store Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
+        this.startRLRSOngoing = false;
+        console.log("Error starting a Rural Licensee Retail Store Application");
       }
     );
   }

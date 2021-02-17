@@ -74,6 +74,33 @@
 <section>
 <h3>LIQUOR LICENCE APPLICATIONS</h3>
 <table class="start-application">
+  <tr *ngIf="liquorThree">
+    <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+      <img class="icon" src="assets/agent-blue.png" alt="">
+    </td>
+    <td style="width: 700px;">
+      <h3>Agent Licence</h3>
+      <p>
+        An agent's licence allows independent liquor agents and importers to promote, market and take wholesale orders for liquor products.
+      </p>
+      <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-an-agent-licence"
+         target="_blank">
+        Learn
+        more about this licence
+      </a>
+    </td>
+    <td style="text-align: center;">
+      <button mat-raised-button color="secondary" [disabled]="startAgentOngoing"
+              (click)="startNewAgentApplication()" id="startAgent">
+        <span>
+          START
+          APPLICATION
+        </span>
+        <mat-progress-bar class="mb-1" *ngIf="startAgentOngoing" mode="indeterminate"></mat-progress-bar>
+      </button>
+    </td>
+  </tr>
+
 <tr>
   <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
     <img class="icon" src="assets/Catering-icon-blue-40px.png" alt="">
@@ -288,7 +315,7 @@
   </td>
 </tr>
 
-<tr>
+<tr *ngIf="!RLRS">
   <!-- Apply for a Rural Agency Store Licence -->
   <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
     <img class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="">
@@ -308,6 +335,27 @@
     <button mat-raised-button color="secondary" (click)="startNewRASApplication()" id="startRAS">
       SUBMIT INFORMATION
       <mat-progress-bar class="mb-1" *ngIf="startRASOngoing" mode="indeterminate"></mat-progress-bar>
+    </button>
+  </td>
+</tr>
+<tr *ngIf="RLRS">
+  <!-- Apply for a Rural Agency Store Licence -->
+  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+    <img class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="">
+  </td>
+  <td style="width: 700px;">
+    <h3>Rural Licensee Retail Store Application</h3>
+    <p>
+      The Rural Licensee Retail Store (RLRS) licence is intended for rural communities and tourist destination resorts, which are generally unable to support a standalone liquor store, i.e. a Licensee Retail Store (LRS) or Government Liquor Store (GLS). A RLRS licence authorizes a licensee to sell packaged liquor (beer, wine, coolers, cider and spirits) in a full-service general grocery store for customers to purchase and consume away from the store.
+    </p>
+    <!--a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"
+    target="_blank">Learn
+    more about this Expression of Interest</a-->
+  </td>
+  <td style="text-align: center;">
+    <button mat-raised-button color="secondary" (click)="startNewRLRSApplication()" id="startRLRS">
+      SUBMIT APPLICATION
+      <mat-progress-bar class="mb-1" *ngIf="startRLRSOngoing" mode="indeterminate"></mat-progress-bar>
     </button>
   </td>
 </tr>

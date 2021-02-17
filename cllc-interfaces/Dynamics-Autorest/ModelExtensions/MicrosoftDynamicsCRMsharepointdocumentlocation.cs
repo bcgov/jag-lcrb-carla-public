@@ -22,6 +22,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_event@odata.bind")]
         public string RegardingobjectIdEventODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_licences@odata.bind")]
+        public string RegardingobjectIdLicenceODataBind { get; set; }
+
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_federalreportexport@odata.bind")]
         public string RegardingobjectIdFederalReportExportODataBind { get; set; }
 

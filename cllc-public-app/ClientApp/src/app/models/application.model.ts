@@ -195,4 +195,6 @@ export interface Application {
 
   termConditionId: string;
   termConditionOriginalText: string;
+  tempDateFrom: Date;
+  tempDateTo: Date;
 }
