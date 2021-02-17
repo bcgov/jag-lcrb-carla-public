@@ -652,14 +652,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // Delete the Proposed Owner (ProposedOwnerODataBind)
             try
             {
-                _dynamicsClient.Licenceses.DeleteReferenceWithHttpMessagesAsync(item.LicenceId, "adoxio_proposedoperator").GetAwaiter().GetResult();
+                _dynamicsClient.Accounts.DeleteReference(item.AccountId,
+                    "adoxio_account_adoxio_licences_ProposedOperator");
+                //_dynamicsClient.Licenceses.DeleteReferenceWithHttpMessagesAsync(item.LicenceId, "adoxio_proposedoperator").GetAwaiter().GetResult();
             }
             catch (HttpOperationException httpOperationException)
             {
                 if (httpOperationException.Response.StatusCode != System.Net.HttpStatusCode.NotFound)
                 {
                     _logger.LogError(httpOperationException, "Error deleting proposed operator");
-                    throw;
                 }
             }
 
