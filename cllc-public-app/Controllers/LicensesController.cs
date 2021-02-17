@@ -652,9 +652,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // Delete the Proposed Owner (ProposedOwnerODataBind)
             try
             {
+                // The field on the Licences side is adoxio_proposedoperator, however we get a Bad Request when trying to delete that reference.
                 _dynamicsClient.Accounts.DeleteReference(item.AccountId,
                     "adoxio_account_adoxio_licences_ProposedOperator");
-                //_dynamicsClient.Licenceses.DeleteReferenceWithHttpMessagesAsync(item.LicenceId, "adoxio_proposedoperator").GetAwaiter().GetResult();
             }
             catch (HttpOperationException httpOperationException)
             {
