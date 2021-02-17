@@ -232,6 +232,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       isOnINLand: [false, []],
       patioIsLiquorCarried: [false, []],
       termConditionOriginalText: ['', []],
+      tempDateFrom: [''],
+      tempDateTo: [''],
     });
 
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {

@@ -67248,6 +67248,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_primarybusinesspurposes": {
+          "type": "string"
+        },
         "_owningteam_value": {
           "type": "string"
         },
@@ -73859,6 +73862,9 @@
         "statuscode": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_primarybusinesspurposes": {
+          "type": "string"
         },
         "adoxio_dormancyreasons": {
           "format": "int32",
@@ -83826,6 +83832,9 @@
         "regardingobjectid_adoxio_adminactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_adminactivity"
         },
+        "regardingobjectid_adoxio_relatedlicence": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+        },
         "regardingobjectid_productpricelevel": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.productpricelevel"
         },
@@ -84206,9 +84215,6 @@
         },
         "regardingobjectid_resourcegroup": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.resourcegroup"
-        },
-        "regardingobjectid_adoxio_relatedlicence": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
         }
       }
     },
@@ -86590,6 +86596,9 @@
         "regardingobjectid_adoxio_adminactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_adminactivity"
         },
+        "regardingobjectid_adoxio_relatedlicence": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+        },
         "regardingobjectid_customeraddress": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.customeraddress"
         },
@@ -86856,9 +86865,6 @@
         },
         "regardingobjectid_subject": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.subject"
-        },
-        "regardingobjectid_adoxio_relatedlicence": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
         }
       }
     },
@@ -88409,6 +88415,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_adminactivity"
           }
         },
+        "business_unit_adoxio_relatedlicence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+          }
+        },
         "BusinessUnit_SyncErrors": {
           "type": "array",
           "items": {
@@ -88911,12 +88923,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
-          }
-        },
-        "business_unit_adoxio_relatedlicence": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
           }
         }
       }
@@ -96540,6 +96546,12 @@
         "baserecordid_adoxio_adminactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_adminactivity"
         },
+        "duplicaterecordid_adoxio_relatedlicence": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+        },
+        "baserecordid_adoxio_relatedlicence": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+        },
         "baserecordid_goalrollupquery": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.goalrollupquery"
         },
@@ -96755,12 +96767,6 @@
         },
         "baserecordid_quote": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.quote"
-        },
-        "duplicaterecordid_adoxio_relatedlicence": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
-        },
-        "baserecordid_adoxio_relatedlicence": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
         }
       }
     },
@@ -103425,6 +103431,9 @@
         "adoxio_sepchecklisteventhours": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_primarybusinesspurposes": {
+          "type": "string"
         },
         "adoxio_pschecklistliquorservice": {
           "format": "int32",
@@ -110587,6 +110596,9 @@
         "regardingobjectid_adoxio_adminactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_adminactivity"
         },
+        "regardingobjectid_adoxio_relatedlicence": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+        },
         "regardingobjectid_incident": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
         },
@@ -110658,9 +110670,6 @@
         },
         "modifiedby": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "regardingobjectid_adoxio_relatedlicence": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
         }
       }
     },
@@ -117359,6 +117368,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_adminactivity"
           }
         },
+        "owner_adoxio_relatedlicence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+          }
+        },
         "owner_personaldocumenttemplates": {
           "type": "array",
           "items": {
@@ -117633,12 +117648,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.contract"
-          }
-        },
-        "owner_adoxio_relatedlicence": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
           }
         }
       }
@@ -120096,6 +120105,9 @@
         "objectid_adoxio_adminactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_adminactivity"
         },
+        "objectid_adoxio_relatedlicence": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+        },
         "objectid_campaign": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.campaign"
         },
@@ -120245,9 +120257,6 @@
         },
         "objectid_phonecall": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.phonecall"
-        },
-        "objectid_adoxio_relatedlicence": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
         }
       }
     },
@@ -120866,6 +120875,9 @@
         "regardingobjectid_adoxio_adminactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_adminactivity"
         },
+        "regardingobjectid_adoxio_relatedlicence": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+        },
         "regardingobjectid_invoicedetail": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoicedetail"
         },
@@ -121186,9 +121198,6 @@
         },
         "completedby": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "regardingobjectid_adoxio_relatedlicence": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
         }
       }
     },
@@ -137534,6 +137543,36 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_adminactivity"
           }
         },
+        "lk_adoxio_relatedlicence_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+          }
+        },
+        "lk_adoxio_relatedlicence_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+          }
+        },
+        "lk_adoxio_relatedlicence_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+          }
+        },
+        "lk_adoxio_relatedlicence_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+          }
+        },
+        "user_adoxio_relatedlicence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+          }
+        },
         "lk_slakpiinstancebase_createdonbehalfby": {
           "type": "array",
           "items": {
@@ -142255,36 +142294,6 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.opportunitysalesprocess"
           }
-        },
-        "lk_adoxio_relatedlicence_createdby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
-          }
-        },
-        "lk_adoxio_relatedlicence_createdonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
-          }
-        },
-        "lk_adoxio_relatedlicence_modifiedby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
-          }
-        },
-        "lk_adoxio_relatedlicence_modifiedonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
-          }
-        },
-        "user_adoxio_relatedlicence": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
-          }
         }
       }
     },
@@ -143670,6 +143679,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_adminactivity"
           }
         },
+        "team_adoxio_relatedlicence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
+          }
+        },
         "team_DuplicateRules": {
           "type": "array",
           "items": {
@@ -144097,12 +144112,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.goal"
-          }
-        },
-        "team_adoxio_relatedlicence": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedlicence"
           }
         }
       }
