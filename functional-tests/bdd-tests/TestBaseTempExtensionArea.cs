@@ -42,14 +42,14 @@ namespace bdd_tests
             uiEventDetails.SendKeys(description);
 
             // add a date from
-            NgWebElement uiDateFrom = ngDriver.FindElement(By.CssSelector("input[formControlName='tempDateFrom']"));
+            NgWebElement uiDateFrom = ngDriver.FindElement(By.CssSelector("input#tempDateFrom"));
             uiDateFrom.Click();
 
             // select the date
             SharedCalendarDate();
 
             // add a date to
-            NgWebElement uiDateTo = ngDriver.FindElement(By.CssSelector("input[formControlName='tempDateTo']"));
+            NgWebElement uiDateTo = ngDriver.FindElement(By.CssSelector("input#tempDateTo"));
             uiDateTo.Click();
 
             // select the date
