@@ -42,7 +42,7 @@ namespace bdd_tests
             uiIsPermittedInZoning.Click();
 
             // select 'yes' for Treaty First Nation Land
-            NgWebElement uiIsTreatyFirstNationLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-2"));
+            NgWebElement uiIsTreatyFirstNationLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-5"));
             uiIsTreatyFirstNationLand.Click();
 
             // select 'yes' for ALR location
