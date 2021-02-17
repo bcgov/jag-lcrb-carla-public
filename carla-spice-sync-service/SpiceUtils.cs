@@ -98,8 +98,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     hangfireContext.WriteLine("Response:");
                     hangfireContext.WriteLine(odee.Response.Content);
 
-                    Log.Logger.Error(odee,"Error updating worker personal history");
-                    
+                    Log.Logger.Error(odee, "Error updating worker personal history");
+
                 }
             }
 
@@ -220,7 +220,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         hangfireContext.WriteLine("Response:");
                         hangfireContext.WriteLine(odee.Response.Content);
 
-                        Log.Logger.Error(odee,"Error updating application");
+                        Log.Logger.Error(odee, "Error updating application");
                     }
                 }
             }
@@ -303,7 +303,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     }
 
                     var receiveApplicationScreeningsResult = SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload).GetAwaiter().GetResult();
-                    
+
 
                     if (receiveApplicationScreeningsResult.Response.StatusCode.ToString() == "OK")
                     {
@@ -329,11 +329,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         var msg = receiveApplicationScreeningsResult.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                         Log.Logger.Error(msg);
                     }
-                    
+
                 }
                 catch (Exception e)
                 {
-                    Log.Logger.Error(e,"Unexpected error in Carla Spice Sync");
+                    Log.Logger.Error(e, "Unexpected error in Carla Spice Sync");
                     result = false;
                 }
 
@@ -874,7 +874,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 string keypersonnelfilter = $"(_adoxio_application_value eq {application.AdoxioApplicationid} and adoxio_connectiontype eq {(int)ConnectionType.KeyPersonnel} and adoxio_isindividual eq 1)";
                 string deemedassociatefilter = $"(_adoxio_application_value eq {application.AdoxioApplicationid} and adoxio_deemed eq true and adoxio_isindividual eq 1)";
                 string[] expand = { "adoxio_ChildProfileName_contact", "adoxio_ChildProfileName_account", "adoxio_ParentAccount" };
-                var associates = _dynamicsClient.Leconnections.Get(filter: $"{keypersonnelfilter} or {deemedassociatefilter}", expand: expand).Value;
+                // Select ACTIVE le-connections that match the key personnel or deemed associate filter
+                var associates = _dynamicsClient.Leconnections.Get(filter: $"statecode eq 0 and ({keypersonnelfilter} or {deemedassociatefilter})", expand: expand).Value;
                 if (associates != null)
                 {
                     foreach (var leConnection in associates)
@@ -929,7 +930,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
             catch (HttpOperationException odee)
             {
-                Log.Logger.Error(odee,"Error creating application screening request");
+                Log.Logger.Error(odee, "Error creating application screening request");
                 return null;
             }
         }
