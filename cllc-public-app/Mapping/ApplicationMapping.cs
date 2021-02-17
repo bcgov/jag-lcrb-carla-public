@@ -99,10 +99,11 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_locatedaboveother", new FieldMapping("locatedAboveOther", false)},
 
                 {"adoxio_description2", new FieldMapping("description2", false)},
-                {"adoxio_description3", new FieldMapping("description3", false)}
-            
+                {"adoxio_description3", new FieldMapping("description3", false)},
 
-
+                //Temporary changes dates
+                {"adoxio_tempdatefrom", new FieldMapping("tempDateFrom", true)},
+                {"adoxio_tempdateto", new FieldMapping("tempDateTo", true)}
         };
         }
     }
