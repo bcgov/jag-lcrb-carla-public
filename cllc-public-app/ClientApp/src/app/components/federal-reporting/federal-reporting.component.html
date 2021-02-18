@@ -129,7 +129,10 @@
                       [disabled]="reportIsDisabled">
                       {{productForm.value.product}}
                     </mat-checkbox>
-                    <fa-icon data-html="true" style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle" matTooltipClass="multiline-tooltip" matTooltip="{{productForm.value.productDescription}}"></fa-icon>
+                    <div class="form-check__details">
+                      <p>{{productForm.value.productDescription}}</p>
+                    </div>
+                    <!-- <fa-icon data-html="true" style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle" matTooltipClass="multiline-tooltip" matTooltip="{{productForm.value.productDescription}}"></fa-icon> -->
                   </div>
                 </div>
                 <div class="product-reporting">

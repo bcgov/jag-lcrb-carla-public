@@ -1,5 +1,5 @@
 ::ng-deep .mat-tab-label {
-  background-color: #E1E8F2 !important;
+  background-color: #e1e8f2 !important;
   color: #000;
   margin-right: 5px;
   margin-bottom: 5px;
@@ -10,12 +10,12 @@
 }
 
 ::ng-deep .mat-tab-label-active {
-  background-color: #38598A !important;
-  color: #FFF;
+  background-color: #38598a !important;
+  color: #fff;
 }
 
 ::ng-deep .mat-tab-header {
-  border-bottom: 4px solid #38598A !important;
+  border-bottom: 4px solid #38598a !important;
   margin-bottom: 15px;
 }
 
@@ -24,18 +24,22 @@
 }
 
 ::ng-deep .mat-tab-label {
-  color: #38598A;
+  color: #38598a;
 }
 ::ng-deep .mat-tab-label-active {
-  color: #FFF;
+  color: #fff;
 }
 
-::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
-  background-color: #38598A!important;
+::ng-deep
+  .mat-checkbox-checked.mat-accent
+  .mat-checkbox-ripple
+  .mat-ripple-element {
+  background-color: #38598a !important;
 }
 
-::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-  background-color: #38598A;
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #38598a;
 }
 
 input {
@@ -54,4 +58,14 @@ input {
   padding: 10px;
   margin-bottom: 3px;
   margin-top: 3px;
+}
+
+.form-check__details {
+  margin-top: -6px;
+  margin-bottom: 25px;
+  margin-left: 24px;
+  padding: 8px;
+  border-left: 3px solid #b1b4b6;
+  max-width: 700px;
+  background: #e1e8f288;
 }
