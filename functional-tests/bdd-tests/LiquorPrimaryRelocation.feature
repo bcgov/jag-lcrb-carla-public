@@ -21,7 +21,7 @@ Scenario: Liquor Primary Relocation (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
-    And I click on the link for Liquor Primary Relocation Application
+    And I click on the link for Request Relocation
     And I complete a liquor primary relocation request
     And I click on the Submit button
     And I log in as local government for Parksville
