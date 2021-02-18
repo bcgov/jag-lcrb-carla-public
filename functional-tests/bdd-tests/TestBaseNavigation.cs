@@ -274,7 +274,7 @@ namespace bdd_tests
                     var startLP = ngDriver.FindElement(By.CssSelector("button[id='startLP']"));
                     JavaScriptClick(startLP);
                     break;
-                case "a Liquor Primary Club Licence":
+                case "a LPC Licence":
                     // click on the Liquor Primary Club Start Application button
                     var startLPC = ngDriver.FindElement(By.CssSelector("button[id='startLPC']"));
                     JavaScriptClick(startLPC);
