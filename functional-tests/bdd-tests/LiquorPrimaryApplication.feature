@@ -14,6 +14,7 @@ Scenario: DEV Liquor Primary Application (Private Corporation)
     # And I click on the link for Review Application
     # And I specify my contact details as the approving authority
     # And I click on the Submit button
+    # And I log in as a return user
     And the account is deleted
     Then I see the login page
 
@@ -29,6 +30,7 @@ Scenario: DEV Liquor Primary Application (Society)
     # And I click on the link for Review Application
     # And I specify my contact details as the approving authority
     # And I click on the Submit button
+    # And I log in as a return user
     And the account is deleted
     Then I see the login page
 
@@ -44,6 +46,7 @@ Scenario: DEV Liquor Primary Application (Partnership)
     # And I click on the link for Review Application
     # And I specify my contact details as the approving authority
     # And I click on the Submit button
+    # And I log in as a return user
     And the account is deleted
     Then I see the login page
 
@@ -59,5 +62,6 @@ Scenario: DEV Liquor Primary Application (Sole Proprietorship)
     # And I click on the link for Review Application
     # And I specify my contact details as the approving authority
     # And I click on the Submit button
+    # And I log in as a return user
     And the account is deleted
     Then I see the login page
