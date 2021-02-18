@@ -9,11 +9,12 @@ Scenario: DEV Liquor Primary Application (Private Corporation)
     And I review the account profile for a private corporation
     And I complete the Liquor Primary application for a private corporation
     And I click on the Submit button
-    # And I log in as local government for Parksville
-    # And I click on the link for Applications for Review
-    # And I click on the link for Review Application
-    # And I specify my contact details as the approving authority
-    # And I click on the Submit button
+    And I log in as local government for Parksville
+    And I click on the link for Applications for Review
+    And I click on the link for Review Application
+    And I specify my contact details as the approving authority
+    And I click on the Submit button
+    And I log in as a return user
     And the account is deleted
     Then I see the login page
 
@@ -24,11 +25,12 @@ Scenario: DEV Liquor Primary Application (Society)
     And I review the account profile for a society
     And I complete the Liquor Primary application for a society
     And I click on the Submit button
-    # And I log in as local government for Parksville
-    # And I click on the link for Applications for Review
-    # And I click on the link for Review Application
-    # And I specify my contact details as the approving authority
-    # And I click on the Submit button
+    And I log in as local government for Parksville
+    And I click on the link for Applications for Review
+    And I click on the link for Review Application
+    And I specify my contact details as the approving authority
+    And I click on the Submit button
+    And I log in as a return user
     And the account is deleted
     Then I see the login page
 
@@ -39,11 +41,12 @@ Scenario: DEV Liquor Primary Application (Partnership)
     And I review the account profile for a partnership
     And I complete the Liquor Primary application for a partnership
     And I click on the Submit button
-    # And I log in as local government for Parksville
-    # And I click on the link for Applications for Review
-    # And I click on the link for Review Application
-    # And I specify my contact details as the approving authority
-    # And I click on the Submit button
+    And I log in as local government for Parksville
+    And I click on the link for Applications for Review
+    And I click on the link for Review Application
+    And I specify my contact details as the approving authority
+    And I click on the Submit button
+    And I log in as a return user
     And the account is deleted
     Then I see the login page
 
@@ -54,10 +57,11 @@ Scenario: DEV Liquor Primary Application (Sole Proprietorship)
     And I review the account profile for a sole proprietorship
     And I complete the Liquor Primary application for a sole proprietorship
     And I click on the Submit button
-    # And I log in as local government for Parksville
-    # And I click on the link for Applications for Review
-    # And I click on the link for Review Application
-    # And I specify my contact details as the approving authority
-    # And I click on the Submit button
+    And I log in as local government for Parksville
+    And I click on the link for Applications for Review
+    And I click on the link for Review Application
+    And I specify my contact details as the approving authority
+    And I click on the Submit button
+    And I log in as a return user
     And the account is deleted
     Then I see the login page
