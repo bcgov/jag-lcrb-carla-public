@@ -107,6 +107,7 @@ namespace bdd_tests
             // upload the site plan 
             FileUpload("site_plan.pdf", "(//input[@type='file'])[11]");
 
+            /*
             // click on service area button
             NgWebElement uiServiceAreas = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'serviceAreas'] button"));
             uiServiceAreas.Click();
@@ -118,6 +119,7 @@ namespace bdd_tests
             // enter occupant load
             NgWebElement uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
             uiOccupantLoad.SendKeys(occupantLoad);
+            */
 
             // enter the hours of sales
             NgWebElement uiServiceHoursSundayOpen = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceHoursSundayOpen'] option[value='09:00']"));
