@@ -35,6 +35,11 @@ namespace bdd_tests
             
             // create test data
             string areaDescription = "Sample area description";
+            string patioPerimeter = "Sample patio perimeter";
+            string patioLocation = "Sample patio location";
+            string patioAccess = "Sample patio access";
+            string liquorCarried = "Sample liquor carried details";
+            string patioAccessControl = "Sample patio access control";
             string occupantLoad = "180";
             string establishmentType = "Military mess";
 
@@ -52,6 +57,42 @@ namespace bdd_tests
             // select 'yes' for patio
             NgWebElement uiHasPatioYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-2"));
             uiHasPatioYes.Click();
+
+            // enter patio perimeter details
+            NgWebElement uiPatioComp = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
+            uiPatioComp.SendKeys(patioPerimeter);
+
+            // enter patio location details
+            NgWebElement uiPatioLocation = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
+            uiPatioLocation.SendKeys(patioLocation);
+
+            // enter patio access details
+            NgWebElement uiPatioAccess = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
+            uiPatioAccess.SendKeys(patioAccess);
+
+            // check liquor carried checkbox
+            NgWebElement uiPatioLiquorCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox#patioIsLiquorCarried"));
+            uiPatioLiquorCarried.Click();
+
+            // enter liquor carried details
+            NgWebElement uiLiquorCarriedDetails = ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
+            uiLiquorCarriedDetails.SendKeys(liquorCarried);
+
+            // enter patio access control description
+            NgWebElement uiPatioAccessControl = ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
+            uiPatioAccessControl.SendKeys(patioAccessControl);
+
+            // click Fixed option
+            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            uiFixedOption.Click();
+
+            // click Portable option
+            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
+            uiPortableOption.Click();
+
+            // click Interior option
+            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
+            uiInteriorOption.Click();
 
             // enter the establishment type
             NgWebElement uiEstablishmentType = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
