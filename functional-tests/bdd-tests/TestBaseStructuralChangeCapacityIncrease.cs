@@ -20,7 +20,7 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request capacity increase structural change")]
+        [And(@"I request a capacity increase structural change")]
         public void RequestStructuralChangeCapacityIncrease()
         {
             /* 
