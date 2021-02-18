@@ -30,9 +30,9 @@ namespace bdd_tests
             ContinueToApplicationButton();
 
             /* 
-            Page Title: Application to Request Relocation
+            Page Title: Liquor Primary and Liquor Primary Club Relocation Application
             */
-            
+
             // create test data
             string areaDescription = "Sample area description";
             string patioPerimeter = "Sample patio perimeter";
@@ -104,6 +104,9 @@ namespace bdd_tests
             // upload the floor plan
             FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
 
+            // upload the site plan 
+            FileUpload("site_plan.pdf", "(//input[@type='file'])[11]");
+
             // click on service area button
             NgWebElement uiServiceAreas = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'serviceAreas'] button"));
             uiServiceAreas.Click();
@@ -115,9 +118,6 @@ namespace bdd_tests
             // enter occupant load
             NgWebElement uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
             uiOccupantLoad.SendKeys(occupantLoad);
-
-            // upload the site plan 
-            FileUpload("site_plan.pdf", "(//input[@type='file'])[11]");
 
             // enter the hours of sales
             NgWebElement uiServiceHoursSundayOpen = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceHoursSundayOpen'] option[value='09:00']"));
