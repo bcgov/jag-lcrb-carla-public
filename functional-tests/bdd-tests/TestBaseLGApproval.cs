@@ -50,10 +50,10 @@ namespace bdd_tests
             uiOfficialEmail.SendKeys(email);
 
             // upload the supporting report
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[14]");
+            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
             // upload the final occupant load
-            FileUpload("associates.pdf", "(//input[@type='file'])[17]");
+            // FileUpload("associates.pdf", "(//input[@type='file'])[17]");
         }
 
 
