@@ -51,9 +51,6 @@ namespace bdd_tests
 
             // upload the supporting report
             FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
-
-            // upload the final occupant load
-            // FileUpload("associates.pdf", "(//input[@type='file'])[17]");
         }
 
 
