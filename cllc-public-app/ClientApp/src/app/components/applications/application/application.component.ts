@@ -202,6 +202,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
       description1: [''],
+      description2: [''],
       proposedChange: ['', [Validators.required]],
       isLocatedInGroceryStore: [null, []],
       sitePhotos: ['', []],
@@ -736,16 +737,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   normalizeFormData() {
-    let description2 = '';
+    let description2 = this.form.get('description2').value;
     if (this.isRAS()) {
       description2 += this.form.get('isOwner').value ? 'Is owner = Yes' : 'Is owner = No';
       description2 += '\n';
       description2 += this.form.get('hasValidInterest').value ? 'Has valid interest = Yes' : 'Has valid interest = No';
       description2 += '\n';
       description2 += this.form.get('willHaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
-    }
-    else {
-      description2 += this.application.description2;
     }
 
     // flatten the service areas if need be
