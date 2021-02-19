@@ -103,7 +103,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
             this.dataLoaded = true;
           } else if (this.account) { // If the account is loaded, use it for the licensee contact
             const contact = {
-              name: this.account.primarycontact.firstname + " " + this.account.primarycontact.lastname,
+              name: (this?.account?.primarycontact?.firstname || "") + " " + (this?.account?.primarycontact?.lastname || ""),
               email: this.account.contactEmail,
               phone: this.account.contactPhone
             };
@@ -116,7 +116,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
               .subscribe((account) => {
                 this.account = account;
                 const contact = {
-                  name: this.account.primarycontact.firstname + " " + this.account.primarycontact.lastname,
+                  name: (this?.account?.primarycontact?.firstname || "") + " " + (this?.account?.primarycontact?.lastname || ""),
                   email: this.account.contactEmail,
                   phone: this.account.contactPhone
                 };
