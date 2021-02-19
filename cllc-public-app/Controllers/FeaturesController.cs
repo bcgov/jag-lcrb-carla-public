@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         // The list of all application features
         // The first item of the tuple is the feature in in configuration
-        // The second parameter is the name of the feature used by the Angular client
+        // The second item is the name of the feature used by the Angular client
         readonly List<(string, string)> features = new List<(string, string)>{
                 ("FEATURE_INDIGENOUS_NATION", "IndigenousNation"),
                 ("FEATURE_MAPS", "Maps"),
