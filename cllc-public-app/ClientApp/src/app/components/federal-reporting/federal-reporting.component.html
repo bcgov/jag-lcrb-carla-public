@@ -122,14 +122,14 @@
                     <h3 class="blue-header col-xs-12">Part 2 - Cannabis Product Inventory</h3>
                   </div>
                   <p>Identify the cannabis products you have ordered, sold, returned or have managed the inventory of in the previous month.</p>
-                  <div class="form-check" *ngFor="let productForm of productForms">
-                    <mat-checkbox
-                      [checked]="productForm?.value?.selected"
-                      (change)="toggleProductVisibility(productForm);"
+                  <div class="form-check callout" *ngFor="let productForm of productForms">
+                    <mat-checkbox [checked]="productForm?.value?.selected" (change)="toggleProductVisibility(productForm)"
                       [disabled]="reportIsDisabled">
-                      {{productForm.value.product}}
+                      <strong>{{productForm.value.product}}</strong>
                     </mat-checkbox>
-                    <fa-icon data-html="true" style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle" matTooltipClass="multiline-tooltip" matTooltip="{{productForm.value.productDescription}}"></fa-icon>
+                    <div class="callout__details">
+                      <p>{{productForm.value.productDescription}}</p>
+                    </div>
                   </div>
                 </div>
                 <div class="product-reporting">
