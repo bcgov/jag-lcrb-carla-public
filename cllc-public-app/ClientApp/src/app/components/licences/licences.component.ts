@@ -46,6 +46,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   ApplicationTypeNames = ApplicationTypeNames;
   licenceMappings = {};
   liquorThree: boolean;
+  RLRS: boolean;
 
   // note, in order for a licence type to show on the dashboard, they must be configured here:
   supportedLicenceTypes = [
@@ -72,6 +73,8 @@ export class LicencesComponent extends FormBase implements OnInit {
 
     featureFlagService.featureOn("LiquorThree")
       .subscribe(x => this.liquorThree = x);
+    featureFlagService.featureOn("RLRS")
+      .subscribe(x => this.liquorThree = x);
   }
 
   ngOnInit() {
@@ -82,6 +85,13 @@ export class LicencesComponent extends FormBase implements OnInit {
       "Agent", "Transfer in Progress - Agent", "Operated - Agent", "Deemed - Agent"];
       this.supportedLicenceTypes = this.supportedLicenceTypes.concat(liquorThree);
     }
+
+    if(this.RLRS){
+      // control the availability of the RLRS using the feature flag.
+      var RLRS  = ["Rural Licensee Retail Store"];
+      this.supportedLicenceTypes = this.supportedLicenceTypes.concat(RLRS);
+    }
+
     this.displayApplications();
   }
 

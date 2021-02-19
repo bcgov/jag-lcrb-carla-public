@@ -71,7 +71,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   liquorOne: boolean;
   liquorTwo: boolean;
   liquorThree: boolean;
-  RAS: boolean;
+  RLRS: boolean;
   startMarketingOngoing: boolean;
   startCateringOngoing: boolean;
   startFPOngoing: boolean;
@@ -116,8 +116,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       .subscribe(x => this.liquorTwo = x);
     featureFlagService.featureOn("LiquorThree")
       .subscribe(x => this.liquorThree = x);
-    featureFlagService.featureOn("RAS")
-      .subscribe(x => this.RAS = x);
+    featureFlagService.featureOn("RLRS")
+      .subscribe(x => this.RLRS = x);
   }
 
   ngOnInit() {
