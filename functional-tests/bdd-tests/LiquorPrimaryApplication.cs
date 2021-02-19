@@ -29,10 +29,11 @@ Scenario: DEV Liquor Primary Application (Private Corporation)
     And I click on the link for Review Application
     And I specify my contact details as the approving authority
     And I click on the Submit button
+    And I log in as a return user
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp 
+@liquorprimaryapp @release2
 Scenario: DEV Liquor Primary Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Liquor Primary Licence
@@ -44,10 +45,11 @@ Scenario: DEV Liquor Primary Application (Society)
     And I click on the link for Review Application
     And I specify my contact details as the approving authority
     And I click on the Submit button
+    And I log in as a return user
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp 
+@liquorprimaryapp @release2
 Scenario: DEV Liquor Primary Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Liquor Primary Licence
@@ -59,10 +61,11 @@ Scenario: DEV Liquor Primary Application (Partnership)
     And I click on the link for Review Application
     And I specify my contact details as the approving authority
     And I click on the Submit button
+    And I log in as a return user
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp
+@liquorprimaryapp @release2
 Scenario: DEV Liquor Primary Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Liquor Primary Licence
@@ -74,6 +77,7 @@ Scenario: DEV Liquor Primary Application (Sole Proprietorship)
     And I click on the link for Review Application
     And I specify my contact details as the approving authority
     And I click on the Submit button
+    And I log in as a return user
     And the account is deleted
     Then I see the login page
 */
