@@ -18,7 +18,7 @@ Feature: OnSiteEndorsementRenewal
     I want to renew a licence that expired yesterday and has an on-site endorsement
 
 @onsiteendorsementrenewal @winery
-Scenario: DEV On-Site Endorsement Licence Renewal (Winery)
+Scenario: On-Site Endorsement Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -42,7 +42,7 @@ Scenario: DEV On-Site Endorsement Licence Renewal (Winery)
     Then I see the login page
 
 @onsiteendorsementrenewal @brewery 
-Scenario: DEV On-Site Endorsement Licence Renewal (Brewery)
+Scenario: On-Site Endorsement Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -66,7 +66,7 @@ Scenario: DEV On-Site Endorsement Licence Renewal (Brewery)
     Then I see the login page
 
 @onsiteendorsementrenewal @distillery
-Scenario: DEV On-Site Endorsement Licence Renewal (Distillery)
+Scenario: On-Site Endorsement Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -90,7 +90,7 @@ Scenario: DEV On-Site Endorsement Licence Renewal (Distillery)
     Then I see the login page
 
 @onsiteendorsementrenewal @copacker 
-Scenario: DEV On-Site Endorsement Licence Renewal (Co-packer)
+Scenario: On-Site Endorsement Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

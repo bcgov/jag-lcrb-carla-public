@@ -22,7 +22,7 @@ using Xunit;
 #-----------------------
 
  @marketevent @marketoneday @winery
- Scenario: DEV One Day Market Event (Winery)
+ Scenario: One Day Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -36,7 +36,7 @@ using Xunit;
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
-    And I click on the Submit button
+    And I click on the secondary Submit button
     And I click on the Licences tab
     And I click on the event history for markets
     And I click on the link for Approved
@@ -49,7 +49,7 @@ using Xunit;
 #-----------------------
 
  @marketevent @marketweekly @winery
- Scenario: DEV Weekly Market Event (Winery)
+ Scenario: Weekly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -77,7 +77,7 @@ using Xunit;
 #-------------------------------------------------
 
  @marketevent @marketbiweekly @winery
- Scenario: DEV Bi-Weekly Market Event (Winery)
+ Scenario: Bi-Weekly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -103,7 +103,7 @@ using Xunit;
 #-----------------------
 
  @marketevent @marketmonthly @winery
- Scenario: DEV Monthly Market Event (Winery)
+ Scenario: Monthly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -130,7 +130,7 @@ using Xunit;
 #-----------------------------------
 
  @marketeventonedaysave @marketoneday @winery
- Scenario: DEV One Day Market Event Save For Later (Winery)
+ Scenario: One Day Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -162,7 +162,7 @@ using Xunit;
 #--------------------------------------
 
  @marketeventweeklysave @marketweekly @winery
- Scenario: DEV Weekly Market Event Save For Later (Winery)
+ Scenario: Weekly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -194,7 +194,7 @@ using Xunit;
 #-----------------------------------------
 
  @marketeventbiweeklysave @marketbiweekly @winery
- Scenario: DEV Bi-Weekly Market Event Save For Later (Winery)
+ Scenario: Bi-Weekly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -226,7 +226,7 @@ using Xunit;
 #---------------------------------------
 
  @marketeventmonthlysave @marketmonthly @winery
- Scenario: DEV Monthly Market Event Save For Later (Winery)
+ Scenario: Monthly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
