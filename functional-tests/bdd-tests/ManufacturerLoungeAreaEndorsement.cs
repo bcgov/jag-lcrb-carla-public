@@ -18,29 +18,11 @@ Feature: ManufacturerLoungeAreaEndorsement
     I want to request lounge area endorsement for a manufacturer licence
 
 @manufacturer @winery @loungearea
-Scenario: DEV Lounge Area Endorsement Application (Winery)
+Scenario: Lounge Area Endorsement Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
     And I complete the Manufacturer application for a winery
-    And I enter the payment information
-    And I confirm the payment receipt for a Manufacturer Licence application
-    And the application is approved
-    And I pay the licensing fee 
-    And I request a lounge area endorsement
-    And the account is deleted
-    Then I see the login page
-
-@manufacturer @winery @loungearea
-Scenario: UAT Lounge Area Endorsement Application (Winery)
-    Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Manufacturer Licence
-    And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
-    And I complete the Manufacturer application for a winery
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -50,15 +32,11 @@ Scenario: UAT Lounge Area Endorsement Application (Winery)
     Then I see the login page
 
 @manufacturer @brewery @loungearea
-Scenario: UAT Lounge Area Endorsement Application (Brewery)
+Scenario: Lounge Area Endorsement Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a brewery
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -68,15 +46,11 @@ Scenario: UAT Lounge Area Endorsement Application (Brewery)
     Then I see the login page
 
 @manufacturer @distillery @loungearea
-Scenario: UAT Lounge Area Endorsement Application (Distillery)
+Scenario: Lounge Area Endorsement Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a distillery
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
@@ -86,15 +60,11 @@ Scenario: UAT Lounge Area Endorsement Application (Distillery)
     Then I see the login page
 
 @manufacturer @copacker @loungearea
-Scenario: UAT Lounge Area Endorsement Application (Co-packer)
+Scenario: Lounge Area Endorsement Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I review the organization structure for a private corporation
-    And I click on the button for Submit Organization Information
     And I complete the Manufacturer application for a co-packer
-    And I review the security screening requirements for a private corporation
-    And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
