@@ -3,7 +3,7 @@
     I want to confirm that the Manufacturer functionality is ready for release
 
 @manufacturer @winery @release1 
-Scenario: DEV Manufacturer Release #1 (Winery/Private Corporation)
+Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -28,7 +28,7 @@ Scenario: DEV Manufacturer Release #1 (Winery/Private Corporation)
     Then I see the login page
 
 @manufacturer @winery @release1 
-Scenario: DEV Manufacturer Release #2 (Winery/Private Corporation)
+Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
