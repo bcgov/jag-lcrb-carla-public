@@ -16,6 +16,15 @@ Scenario: Manufacturer TESA Application (Winery)
     And I click on the Continue to Application button
     And I complete the TESA application
     And I click on the Submit button
+    And I log in as local government for Parksville
+    And I click on the link for Applications for Review
+    And I click on the link for Review Application
+    And I specify my contact details as the approving authority
+    And I click on the Submit button
+    And I log in as a return user
+    And I click on the link for Complete Application
+    # Update re LP vs Mfg
+    And I review the local government response for a liquor primary licence
     And the account is deleted
     Then I see the login page
 
@@ -33,6 +42,15 @@ Scenario: Manufacturer TESA Application (Brewery)
     And I click on the Continue to Application button
     And I complete the TESA application
     And I click on the Submit button
+    And I log in as local government for Parksville
+    And I click on the link for Applications for Review
+    And I click on the link for Review Application
+    And I specify my contact details as the approving authority
+    And I click on the Submit button
+    And I log in as a return user
+    And I click on the link for Complete Application
+    # Update re LP vs Mfg
+    And I review the local government response for a liquor primary licence
     And the account is deleted
     Then I see the login page
 
@@ -50,6 +68,15 @@ Scenario: Manufacturer TESA Application (Distillery)
     And I click on the Continue to Application button
     And I complete the TESA application
     And I click on the Submit button
+    And I log in as local government for Parksville
+    And I click on the link for Applications for Review
+    And I click on the link for Review Application
+    And I specify my contact details as the approving authority
+    And I click on the Submit button
+    And I log in as a return user
+    And I click on the link for Complete Application
+    # Update re LP vs Mfg
+    And I review the local government response for a liquor primary licence
     And the account is deleted
     Then I see the login page
 
@@ -67,5 +94,14 @@ Scenario: Manufacturer TESA Application (Co-packer)
     And I click on the Continue to Application button
     And I complete the TESA application
     And I click on the Submit button
+    And I log in as local government for Parksville
+    And I click on the link for Applications for Review
+    And I click on the link for Review Application
+    And I specify my contact details as the approving authority
+    And I click on the Submit button
+    And I log in as a return user
+    And I click on the link for Complete Application
+    # Update re LP vs Mfg
+    And I review the local government response for a liquor primary licence
     And the account is deleted
     Then I see the login page
