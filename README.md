@@ -60,6 +60,21 @@ Developer Prerequisites
 - Docker
 - A familiarity with Jenkins
 
+Dynamic Forms
+-------------------------
+The portal supports the use of Dynamic Forms, in other words, forms that are specified through the creation of a custom form in MS Dynamics.
+
+To use this feature, first create a new Application Form in MS Dynamics.  You may use tabs and sections to organize the form, although the layout will be flattened when sent to the portal.
+
+If you add new fields to MS Dynamics, the following steps will need to be done in order for the new fields to appear in the portal:
+
+1.  Update Dynamics Models to contain the new fields.  This should be done by running the code generation script.  Do not edit the model by hand.
+2.  Add view model fields for each new field.  Be sure to use the same datatype; for example, if Dynamics uses a lookup with integer values, use a nullable int (int?). If Dynamics uses a nullable bool (bool?), use a nullable bool in the view model.  
+3.  Add code to "copy values" and "to view model" routines for the application extension class.  Since the data types match this should be trivial, just add code to copy from the Dynamics field to the view model and vice versa.
+4.  Add rows to the ApplicationMapping class to denote the new fields.  This should contain the Dynamics field name (actual field name not the display name) and the name of the view model field, as it will be sent to the client.  Note that the first character of the model will be lowercase.  
+
+Be sure to test a round trip (save and load) before considering the field mapping done.
+
 Microsoft Dynamics, SharePoint
 ---------------------------
 A MS Dynamics instance containing the necessary solution files is required.  A SharePoint connection is optional.  If no SharePoint connection is available then file operations will not be executed.
