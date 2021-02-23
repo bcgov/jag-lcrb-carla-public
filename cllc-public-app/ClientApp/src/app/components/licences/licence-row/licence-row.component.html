@@ -228,6 +228,13 @@
                                         <fa-icon [icon]="faCalendarAlt"style="margin-right: 10px;"></fa-icon>Request Temporary Use Area Event Authorization
                                     </a>
                                 </div>
+                                <div *ngIf="isLiquorPrimaryOrLiquorPrimaryClub(item) && isActive(item) && actionsVisible(item)"
+                                  appRemoveIfFeatureOff="LiquorFreeEvents">
+                                  <a [routerLink]="[ '/licence/' + item.licenseId + '/liquor-free-event']">
+                                    <fa-icon [icon]="faCalendarAlt" style="margin-right: 10px;"></fa-icon>
+                                    Request All-Ages Liquor-Free Event Authorization
+                                  </a>
+                                </div>
                                 <div
                                     *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActive(item) && actionsVisible(item)">
                                     <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
