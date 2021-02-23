@@ -38,7 +38,7 @@ Scenario: Liquor Primary TESA Application (Private Corporation)
     And I pay the licensing fee
     And I click on the link for Temporary Expanded Service Areas Application
     And I click on the Continue to Application button
-    And I complete the TESA application
+    And I complete the TESA application for a Liquor Primary licence
     And I click on the Submit button
     And I log in as local government for Parksville
     And I click on the link for Applications for Review
