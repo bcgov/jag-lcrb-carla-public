@@ -930,17 +930,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (!string.IsNullOrEmpty(item.LicenseType))
                 {
                     var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.LicenseType);
-                    adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes",
-                        adoxioLicencetype.AdoxioLicencetypeid);
+                    if (adoxioLicencetype != null)
+                    {
+                        adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes",
+                            adoxioLicencetype.AdoxioLicencetypeid);
+                    }
+
                 }
 
                 // set licence subtype
                 if (!string.IsNullOrEmpty(item.LicenceSubCategory))
                 {
                     var adoxioSubLicencetype = _dynamicsClient.GetAdoxioSubLicencetypeByName(item.LicenseType);
-                    adoxioApplication.AdoxioLicenceSubCategoryODataBind =
-                        _dynamicsClient.GetEntityURI("adoxio_licencesubcategories",
-                            adoxioSubLicencetype.AdoxioLicencesubcategoryid);
+                    if (adoxioSubLicencetype != null)
+                    {
+                        adoxioApplication.AdoxioLicenceSubCategoryODataBind =
+                            _dynamicsClient.GetEntityURI("adoxio_licencesubcategories",
+                                adoxioSubLicencetype.AdoxioLicencesubcategoryid);
+                    }
                 }
 
 
