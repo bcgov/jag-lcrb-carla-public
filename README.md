@@ -126,6 +126,8 @@ Features are managed by adding environment variables (or secrets in the case of 
 
 For a list of features that are active in a given instance access /api/features.
 
+To edit an environment variable, go to the environment tab on the Deployment Config for the API service associated with the given instance.
+
 
 Other
 -----------

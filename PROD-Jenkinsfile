@@ -4,35 +4,21 @@ node('master') {
 	}
 	
 	stage("Backup") {
-
 		openshift.withCluster() {
 			openshift.withProject() {
-
 				openshift.tag("cllc-public-api:prod", "cllc-public-api:prod-backup")
-				openshift.tag("cllc-public-frontend:prod", "cllc-public-frontend:prod-backup") 		
-
-						
-				openshift.tag("cllc-public-api:test", "cllc-public-api:prod")
-				openshift.tag("cllc-public-frontend:test", "cllc-public-frontend:prod") 		
+				openshift.tag("cllc-public-frontend:prod", "cllc-public-frontend:prod-backup") 			
 			}
 		}
-
 	}	
 
 	stage("Deploy") {
-
 		openshift.withCluster() {
-			openshift.withProject() {
-
-				openshift.tag("cllc-public-api:prod", "cllc-public-api:prod-backup")
-				openshift.tag("cllc-public-frontend:prod", "cllc-public-frontend:prod-backup") 		
-
-						
+			openshift.withProject() {						
 				openshift.tag("cllc-public-api:test", "cllc-public-api:prod")
 				openshift.tag("cllc-public-frontend:test", "cllc-public-frontend:prod") 		
 			}
 		}
-
 	}	
 	
 }
