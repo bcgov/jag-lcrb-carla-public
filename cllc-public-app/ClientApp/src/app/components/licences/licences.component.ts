@@ -82,6 +82,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       // control the licence rows as part of the feature flag.
       var liquorThree = ["Food Primary", "Transfer in Progress - Food Primary", "Operated - Food Primary", "Deemed - Food Primary",
       "Liquor Primary", "Transfer in Progress - Liquor Primary", "Operated - Liquor Primary", "Deemed - Liquor Primary",
+      "Liquor Primary Club", "Transfer in Progress - Liquor Primary Club", "Operated - Liquor Primary Club", "Deemed - Liquor Primary Club",
       "Agent", "Transfer in Progress - Agent", "Operated - Agent", "Deemed - Agent"];
       this.supportedLicenceTypes = this.supportedLicenceTypes.concat(liquorThree);
     }
