@@ -103,7 +103,20 @@ namespace Gov.Lclb.Cllb.Public.Mapping
 
                 //Temporary changes dates
                 {"adoxio_tempdatefrom", new FieldMapping("tempDateFrom", true)},
-                {"adoxio_tempdateto", new FieldMapping("tempDateTo", true)}
+                {"adoxio_tempdateto", new FieldMapping("tempDateTo", true)},
+                // eligibility fields
+                {"adoxio_isrlrslocatedinruralcommunityalone", new FieldMapping("isRlrsLocatedInRuralCommunityAlone", true)},
+                {"adoxio_isrlrslocatedattouristdestinationalone", new FieldMapping("isRlrsLocatedAtTouristDestinationAlone", true)},
+                {"adoxio_describerlrsresortcommunity", new FieldMapping("rlrsResortCommunityDescription", true)},
+                {"adoxio_hasyearroundallweatherroadaccess", new FieldMapping("hasYearRoundAllWeatherRoadAccess", true)},
+                {"adoxio_doesgeneralstoreoperateseasonally", new FieldMapping("doesGeneralStoreOperateSeasonally", true)},
+                {"adoxio_surroundingresidentsofrlrs", new FieldMapping("surroundingResidentsOfRlrs", true)},
+                {"adoxio_isrlrsatleast10kmfromanotherstore", new FieldMapping("isRlrsAtLeast10kmFromAnotherStore", true)},
+                {"adoxio_isapplicantownerofstore", new FieldMapping("isApplicantOwnerOfStore", true)},
+                {"adoxio_legalandbeneficialownersofstore", new FieldMapping("legalAndBeneficialOwnersOfStore", true)},
+                {"adoxio_isapplicantfranchiseoraffiliated", new FieldMapping("isApplicantFranchiseOrAffiliated", true)},
+                {"adoxio_franchiseoraffiliatedbusiness", new FieldMapping("franchiseOrAffiliatedBusiness", true)}
+
         };
         }
     }
