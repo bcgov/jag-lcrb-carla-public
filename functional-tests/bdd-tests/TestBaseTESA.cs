@@ -27,28 +27,8 @@ namespace bdd_tests
             Page Title: Temporary Expanded Service Areas Application
             */
 
-            // create test data
-            string areaDescription = "Sample area description";
-            string occupantLoad = "180";
-
             // upload floorplan
             FileUpload("floor_plan.pdf", "(//input[@type='file'])[3]");
-
-            if (applicationType == "Manufacturer licence")
-            {
-
-                // click on service area button
-                NgWebElement uiServiceAreas = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'serviceAreas'] button"));
-                uiServiceAreas.Click();
-
-                // enter area description
-                NgWebElement uiAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
-                uiAreaDescription.SendKeys(areaDescription);
-
-                // enter occupant load
-                NgWebElement uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
-                uiOccupantLoad.SendKeys(occupantLoad);
-            }
 
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
