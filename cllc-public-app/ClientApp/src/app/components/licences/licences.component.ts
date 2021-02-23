@@ -74,7 +74,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     featureFlagService.featureOn("LiquorThree")
       .subscribe(x => this.liquorThree = x);
     featureFlagService.featureOn("RLRS")
-      .subscribe(x => this.liquorThree = x);
+      .subscribe(x => this.RLRS = x);
   }
 
   ngOnInit() {
