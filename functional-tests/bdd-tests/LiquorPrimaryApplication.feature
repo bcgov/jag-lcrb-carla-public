@@ -19,7 +19,7 @@ Scenario: DEV Liquor Primary Application (Private Corporation)
     And I log in as a return user
     And I click on the link for Complete Application
     And I click on the Continue to Application button
-    # And I click on the Submit button
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page
 
@@ -35,7 +35,7 @@ Scenario: DEV Liquor Primary Application (Society)
     And I click on the link for Review Application
     And I specify my contact details as the approving authority for liquor primary
     And I click on the Submit button
-    And I click on the Submit button
+    And I click on the overlay Submit button
     And No applications awaiting review is displayed
     And I log in as a return user
     And I click on the link for Complete Application
@@ -56,7 +56,7 @@ Scenario: DEV Liquor Primary Application (Partnership)
     And I click on the link for Review Application
     And I specify my contact details as the approving authority for liquor primary
     And I click on the Submit button
-    And I click on the Submit button
+    And I click on the overlay Submit button
     And No applications awaiting review is displayed
     And I log in as a return user
     And I click on the link for Complete Application
@@ -77,7 +77,7 @@ Scenario: DEV Liquor Primary Application (Sole Proprietorship)
     And I click on the link for Review Application
     And I specify my contact details as the approving authority for liquor primary
     And I click on the Submit button
-    And I click on the Submit button
+    And I click on the overlay Submit button
     And No applications awaiting review is displayed
     And I log in as a return user
     And I click on the link for Complete Application
