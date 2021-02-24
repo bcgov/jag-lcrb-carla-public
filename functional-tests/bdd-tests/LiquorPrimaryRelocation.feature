@@ -29,8 +29,11 @@ Scenario: Liquor Primary Relocation (Private Corporation)
     And I log in as local government for Parksville
     And I click on the link for Applications for Review
     And I click on the link for Review Application
-    And I specify my contact details as the approving authority
+    And I specify my contact details as the approving authority for relocation
     And I click on the Submit button
+    And I click on the overlay Submit button
+    And No applications awaiting review is displayed
     And I log in as a return user
-    And the account is deleted
+    # 
+    # And the account is deleted
     Then I see the login page
