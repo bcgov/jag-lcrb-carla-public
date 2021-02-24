@@ -231,8 +231,7 @@
                                 <div *ngIf="isLiquorPrimaryOrLiquorPrimaryClub(item) && isActive(item) && actionsVisible(item)"
                                   appRemoveIfFeatureOff="LiquorFreeEvents">
                                   <a [routerLink]="[ '/licence/' + item.licenseId + '/liquor-free-event']">
-                                    <fa-icon [icon]="faCalendarAlt" style="margin-right: 10px;"></fa-icon>
-                                    Request All-Ages Liquor-Free Event Authorization
+                                    <fa-icon [icon]="faCalendarAlt" style="margin-right: 10px;"></fa-icon>Request All-Ages Liquor-Free Event Authorization
                                   </a>
                                 </div>
                                 <div
@@ -369,6 +368,7 @@
       <table style="text-align: center; width: 100%;">
         <thead>
         <th>Event Status</th>
+        <th>Event Type</th>
         <th>Number</th>
         <th>Name</th>
         <th>Date Submitted</th>
@@ -383,6 +383,7 @@
               event.status).label}}
             </a>
           </td>
+          <td>{{getOptionFromValue(eventCategory ,event.eventCategory)?.label}}</td>
           <td>{{event.eventNumber}}</td>
           <td>{{getEventName(event)}}</td>
           <td>{{event.modifiedOn | date:'mediumDate'}}</td>
