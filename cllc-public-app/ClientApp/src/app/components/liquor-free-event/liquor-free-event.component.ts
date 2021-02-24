@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
 import { FormBase } from '@shared/form-base';
 import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDaysArray } from '@shared/date-fns';
 import { EventCategory, EventStatus, LicenceEvent, TuaEventType } from '@models/licence-event.model';
@@ -27,7 +26,6 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
   // enums
   eventCategory = EventCategory;
   eventStatus = EventStatus;
-  tuaEventType = TuaEventType;
 
   // component state
   busy: Subscription;
@@ -41,45 +39,28 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
   endDateMinimum = new Date(this.startDateMinimum.valueOf());
   scheduleIsInconsistent = false;
 
-  // TUA event form
+  // Liquor-Free event form
   timeForms = this.fb.array([]);
   form = this.fb.group({
     id: ['', []],
     status: ['', [Validators.required]],
     licenceId: ['', []],
     accountId: ['', []],
-    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value, []],
+    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'All Ages Liquor Free').value, []],
 
-    eventName: ['', [Validators.required]], // TUA event name
+    // event details
+    eventName: ['', [Validators.required]],
+    eventTypeDescription: ['', []],
+
+    // contact information
     contactName: ['', [Validators.required]],
     contactPhone: ['', [Validators.required]],
-
-    // TUA locations
-    eventLocations: ['', []],
+    contactEmail: ['', [Validators.required]],
+    contactEmailConfirmation: ['', [Validators.required]],
 
     // date & time
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
-
-    maxAttendance: ['', [Validators.required, Validators.max(100000)]],
-    minorsAttending: ['', [Validators.required]],
-    tuaEventType: ['', [Validators.required]],
-    eventTypeDescription: ['', [Validators.required]],
-
-    isClosedToPublic: [false, []],
-    isWedding: [false, []],
-    isNetworkingParty: [false, []],
-    isConcert: [false, []],
-    isNoneOfTheAbove: [false, []],
-    isBanquet: [false, []],
-    isAmplifiedSound: [false, []],
-    isDancing: [false, []],
-    isReception: [false, []],
-    isLiveEntertainment: [false, []],
-    isGambling: [false, []],
-
-    contactEmail: ['', [Validators.required]],
-    contactEmailConfirmation: ['', [Validators.required]],
 
     isAgreement1: [false, [Validators.required]],
     isAgreement2: [false, [Validators.required]],
@@ -91,14 +72,13 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
   constructor(private fb: FormBuilder,
     private licenceEvents: LicenceEventsService,
     private licenceDataService: LicenseDataService,
-    private store: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute
   ) {
     super();
     this.route.paramMap.subscribe(params => {
       const licenceId = params.get('licenceId');
-      this.form.controls['licenceId'].setValue(licenceId);
+      this.form.get('licenceId').setValue(licenceId);
       this.retrieveLicence(licenceId);
 
       if (params.get('eventId')) {
@@ -148,30 +128,19 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
       id: licenceEvent.id,
       licenceId: licenceEvent.licenceId,
       accountId: licenceEvent.accountId,
+      // event details
       eventName: licenceEvent.eventName,
+      eventTypeDescription: licenceEvent.eventTypeDescription,
+      eventCategory: this.getOptionFromLabel(this.eventCategory, 'All Ages Liquor Free').value,
+      // contact information
       contactName: licenceEvent.contactName,
       contactPhone: licenceEvent.contactPhone,
       contactEmail: licenceEvent.contactEmail,
       contactEmailConfirmation: licenceEvent.contactEmail,
-      eventLocations: licenceEvent.eventLocations,
+      // date & time
       startDate: new Date(licenceEvent.startDate),
       endDate: new Date(licenceEvent.endDate),
-      eventCategory: this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value,
-      maxAttendance: licenceEvent.maxAttendance,
-      minorsAttending: licenceEvent.minorsAttending,
-      tuaEventType: licenceEvent.tuaEventType,
-      eventTypeDescription: licenceEvent.eventTypeDescription,
-      isClosedToPublic: licenceEvent.isClosedToPublic,
-      isWedding: licenceEvent.isWedding,
-      isNetworkingParty: licenceEvent.isNetworkingParty,
-      isConcert: licenceEvent.isConcert,
-      isNoneOfTheAbove: licenceEvent.isNoneOfTheAbove,
-      isBanquet: licenceEvent.isBanquet,
-      isAmplifiedSound: licenceEvent.isAmplifiedSound,
-      isDancing: licenceEvent.isDancing,
-      isReception: licenceEvent.isReception,
-      isLiveEntertainment: licenceEvent.isLiveEntertainment,
-      isGambling: licenceEvent.isGambling,
+
       isAgreement1: licenceEvent.isAgreement1,
       isAgreement2: licenceEvent.isAgreement2,
     });
@@ -383,21 +352,7 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
       contactEmailConfirmation: 'The email address confirmation does not match provided email',
       startDate: 'Please enter the start date',
       endDate: 'Please enter the end date',
-      maxAttendance: 'Please enter the maximum attendance (must be a number)',
-      minorsAttending: 'Please indicate if minors are attending',
-      tuaEventType: 'Please indicate the type of event',
       eventTypeDescription: 'Please enter a description of the event',
-      isClosedToPublic: 'Please indicate if licensed establishment will be closed',
-      isWedding: '',
-      isNetworkingParty: '',
-      isConcert: '',
-      isNoneOfTheAbove: '',
-      isBanquet: '',
-      isAmplifiedSound: '',
-      isDancing: '',
-      isReception: '',
-      isLiveEntertainment: '',
-      isGambling: '',
       agreement1: 'Please agree to all terms',
       agreement2: 'Please agree to all terms',
     };
@@ -405,8 +360,6 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
 
   validateForm(): boolean {
     this.validationMessages = [...new Set(this.listControlsWithErrors(this.form, this.validationErrorMap))];
-
-    // ... TODO: add more validation rules here - e.g. date range validation
 
     if (this.timeForms.controls.length < 1) {
       this.validationMessages.push('No event dates selected');

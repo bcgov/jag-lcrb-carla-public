@@ -2,8 +2,33 @@
   <div [ngBusy]="[busy]"></div>
   <form [formGroup]="form" class="col-lg-7 col-sm-12">
     <div class="padded-section">
-      <h1>Temporary Use Area Event</h1>
+      <h1>All Ages Liquor Free Event</h1>
     </div>
+
+    <h3 class="blue-header">TERMS AND CONDITIONS</h3>
+    <section class="content-bottom">
+      <ul>
+        <li>Minors are permitted unaccompanied by adults</li>
+        <li>The event must not extend past the closing time for liquor service as stated on your licence</li>
+        <li>You must:
+          <ul>
+            <li>Post signage outside the establishment to advertise a liquor-free event, the hours of the event and that
+              the service area is closed to liquor service</li>
+            <li>Ensure liquor is secured and inaccessible during the event</li>
+            <li>Ensure there is half an hour between the end of liquor service and the opening of the liquor-free event
+            </li>
+            <li>Ensure there is half an hour to clear minors from the service area if you will re-open for liquor
+              service before the end of the hours of liquor service, if your licence restricts the entry of minors</li>
+            <li>Take measures to ensure the operation of the event does not disturb people in the vicinity of the
+              establishment or jeopardize the safety of those attending the event</li>
+            <li>Keep a log of all liquor-free events whether they require notice or not, and the log must be available
+              upon request by a liquor inspector or local police</li>
+          </ul>
+        </li>
+        <li>The General Manager may, in the public interest, add terms and conditions to a licence that limit
+          liquor-free events</li>
+      </ul>
+    </section>
 
     <div class="padded-section">
       <p>Please provide the details requested below regarding your event.</p>
@@ -15,13 +40,21 @@
       </h3>
     </div>
 
-    <h3 class="blue-header">EVENT INFORMATION</h3>
+    <h3 class="blue-header">EVENT DETAILS</h3>
     <section class="content-bottom clearfix">
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Event Name" [required]="true"
           [valid]="isValidOrNotTouched('eventName')" errorMessage="Please enter the event name" [isFullWidth]="true">
           <input class="form-control" type="text" formControlName="eventName">
         </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-8 col-xs-12" label="Event Note" [required]="false"
+          [valid]="isValidOrNotTouched('eventTypeDescription')" errorMessage="Please enter a description of the event"
+          [isFullWidth]="true">
+          <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" class="question-mark" matTooltip="Briefly describe the event."></fa-icon>
       </div>
     </section>
 
@@ -41,17 +74,8 @@
       </div>
     </section>
 
-    <h3 class="blue-header">TUA LOCATION(S)</h3>
-    <section class="content-bottom clearfix">
-      <p>Specify one or more locations where your event will take place.</p>
-      <app-event-location-table formControlName="eventLocations" [enabled]="!isReadOnly"
-        [serviceAreas]="licence?.serviceAreas" [eventId]="licenceEvent?.id" [shouldValidate]="showErrorSection">
-      </app-event-location-table>
-    </section>
-
     <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
     <section class="content-bottom clearfix">
-      <p>The number of available event day(s) is up to <strong>26</strong> for each calendar year.</p>
       <p>Note that if you submit a multi-day event, the locations and event details must be the same, otherwise you need
         to submit separate events.</p>
       <div class="row">
@@ -98,87 +122,17 @@
       </div>
     </section>
 
-    <h3 class="blue-header">EVENT DETAILS</h3>
-    <section class="content-bottom clearfix">
-      <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Event Total Attendance" [required]="true"
-          [valid]="isValidOrNotTouched('maxAttendance')"
-          errorMessage="Please enter the maximum attendance (must be a number)" [isFullWidth]="true">
-          <input class="form-control" type="number" formControlName="maxAttendance">
-        </app-field>
-        <app-field class="col-md-4 col-xs-12" label="Minors Attending" [required]="true"
-          [valid]="isValidOrNotTouched('minorsAttending')" errorMessage="Please indicate if minors are attending"
-          [isFullWidth]="true">
-          <select class="form-control" formControlName="minorsAttending">
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Event Type" [required]="true"
-          [valid]="isValidOrNotTouched('tuaEventType')" errorMessage="Please indicate the type of event"
-          [isFullWidth]="true">
-          <select class="form-control" formControlName="tuaEventType">
-            <option *ngFor="let item of tuaEventType" [ngValue]="item.value">{{item.label}}</option>
-          </select>
-        </app-field>
-        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top:30px;"
-          matTooltip="Select the type of event."></fa-icon>
-      </div>
-      <div class="row">
-        <app-field class="col-md-8 col-xs-12"
-          label="Will your permanent licensed establishment also be closed to the public during the event hours?"
-          [required]="true" [valid]="isValidOrNotTouched('tuaEventType')"
-          errorMessage="Please indicate if licensed establishment will be closed" [isFullWidth]="false">
-          <select class="form-control" formControlName="isClosedToPublic">
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-8 col-xs-12" label="Description" [required]="true"
-          [valid]="isValidOrNotTouched('eventTypeDescription')" errorMessage="Please enter a description of the event"
-          [isFullWidth]="true">
-          <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
-        </app-field>
-        <fa-icon [icon]="faQuestionCircle" class="question-mark" matTooltip="Briefly describe the event."></fa-icon>
-      </div>
-      <div>
-        <p>Select all the items that will be part of your event:</p>
-        <div class="row">
-          <div class="col-md-4 col-xs-12">
-            <mat-checkbox class="d-block" formControlName="isWedding">Wedding</mat-checkbox>
-            <mat-checkbox class="d-block" formControlName="isNetworkingParty">Networking Party</mat-checkbox>
-            <mat-checkbox class="d-block" formControlName="isConcert">Concert</mat-checkbox>
-            <mat-checkbox class="d-block" formControlName="isNoneOfTheAbove">None of the Above</mat-checkbox>
-          </div>
-          <div class="col-md-4 col-xs-12">
-            <mat-checkbox class="d-block" formControlName="isBanquet">Banquet</mat-checkbox>
-            <mat-checkbox class="d-block" formControlName="isAmplifiedSound">Amplified Sound</mat-checkbox>
-            <mat-checkbox class="d-block" formControlName="isDancing">Dancing</mat-checkbox>
-          </div>
-          <div class="col-md-4 col-xs-12">
-            <mat-checkbox class="d-block" formControlName="isReception">Reception</mat-checkbox>
-            <mat-checkbox class="d-block" formControlName="isLiveEntertainment">Live Entertainment</mat-checkbox>
-            <mat-checkbox class="d-block" formControlName="isGambling">Gambling</mat-checkbox>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <h3 class="blue-header">NOTIFICATIONS</h3>
     <section class="content-bottom">
-      <p>We will send the event notification to the contact entered here.</p>
+      <p>A copy of the event notification will be sent to this email address.</p>
       <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Please provide your email address" [required]="true"
-          [isFullWidth]="true" [valid]="isValidOrNotTouched('contactEmail')">
+        <app-field class="col-md-4 col-xs-12" label="Contact Email" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('contactEmail')">
           <input class="form-control" type="text" formControlName="contactEmail">
         </app-field>
       </div>
       <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Retype your email address" [required]="true" [isFullWidth]="true"
+        <app-field class="col-md-4 col-xs-12" label="Confirm email address" [required]="true" [isFullWidth]="true"
           [valid]="isValidOrNotTouched('contactEmailConfirmation')">
           <input class="form-control" type="text" formControlName="contactEmailConfirmation">
         </app-field>
@@ -188,18 +142,36 @@
     <h3 class="blue-header">AGREEMENT</h3>
     <section class="content-bottom">
       <div>
-        <mat-checkbox class="text-wrap" formControlName="isAgreement1">I understand that my event request for
-          endorsement
-          authorisation is subject to review by LCRB and that in situations of nonconforming compliance issues between
-          the details of this submissions or authorisation and those of the terms and conditions of my licence, the
-          limitations of my licence will prevail.</mat-checkbox>
+        <mat-checkbox class="text-wrap" formControlName="isAgreement1">I understand that my event is subject to review
+          by LCRB and Terms and Conditions will prevail.</mat-checkbox>
+        <ul>
+          <li>Minors are permitted unaccompanied by adults as long as liquor is not served or sold during the hours of
+            the event</li>
+          <li>The event cannot extend past the hours of ordinary liquor service</li>
+        </ul>
+        You must:
+        <ul>
+          <li>Post signage outside the establishment to indicate the occurrence of an all-ages event, the hours of the
+            event and that the establishment is closed to liquor service</li>
+          <li>Ensure liquor is secured and inaccessible during the event</li>
+          <li>Ensure there is half an hour to clear minors from its establishment if the licensee re-opens for liquor
+            service before the end its hours of permissible liquor service</li>
+          <li>Take measures to ensure the operation of the event does not disturb persons in the vicinity of the
+            establishment, including that:</li>
+          <ul>
+            <li>You must ensure licensed security staff is present to monitor and control the event</li>
+            <li>If patrons depart during the event, they are not allowed to re-enter the establishment</li>
+          </ul>
+          <li>If you contravene the terms and conditions of your licence or any other legislated requirements,
+            enforcement action may be taken</li>
+          <li>This approval is subject to any existing laws or terms and conditions that restrict a licensee from
+            holding this type of event. The General Manager may review a licensee's compliance history and revoke
+            approval if there are identified criminal or gang affiliations</li>
+        </ul>
       </div>
       <div class="mt-3">
         <mat-checkbox class="text-wrap" formControlName="isAgreement2">I have reviewed all the information above for
-          accuracy and understand any additional steps and deadlines required to finalise this authorisation request. I
-          agree to comply with all terms and conditions on my licence, as well as the laws of the Liquor Control and
-          Licensing Act and its Regulations. I understand that failure to do so will lead to enforcement action taken
-          against my licence.
+          accuracy and have read all the notes provided above.
         </mat-checkbox>
       </div>
     </section>
