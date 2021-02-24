@@ -512,5 +512,12 @@ namespace bdd_tests
             IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
             executor.ExecuteScript("arguments[0].click();", element);
         }
+
+        [And(@"No applications awaiting review is displayed")]
+        public void NoApplicationsAwaitingReview()
+        {
+            //Confirm that "No applications awaiting review" message is displayed
+            Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'No applications awaiting review')]")).Displayed);
+        }
     }
 }
