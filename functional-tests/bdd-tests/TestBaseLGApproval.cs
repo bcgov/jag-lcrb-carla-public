@@ -49,15 +49,19 @@ namespace bdd_tests
             NgWebElement uiOfficialEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactEmail']"));
             uiOfficialEmail.SendKeys(email);
 
+            // upload the supporting reports
             if (applicationType == "liquor primary")
             {
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[14]");
 
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[17]");
             }
+            else if (applicationType == "live theatre")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
+            }
             else
             {
-                // upload the supporting report
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
             }
         }
