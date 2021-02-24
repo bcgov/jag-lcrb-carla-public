@@ -66,6 +66,12 @@ namespace bdd_tests
 
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
             }
+            else if (applicationType == "structural change")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
+
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[8]");
+            }
             else
             {
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
