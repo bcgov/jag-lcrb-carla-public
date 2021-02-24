@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: LiquorPrimaryClubApplication
+Feature: LPrimaryClubApplication
     As a logged in business user
     I want to submit Liquor Primary Club Applications for different business types
 
@@ -84,9 +84,9 @@ Scenario: DEV Liquor Primary Club Application (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./LiquorPrimaryClubApplication.feature")]
+    [FeatureFile("./LPrimaryClubApplication.feature")]
     [Collection("Liquor")]
-    public sealed class LiquorPrimaryClubApplication : TestBase
+    public sealed class LPrimaryClubApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
