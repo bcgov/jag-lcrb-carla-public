@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I specify my contact details as the approving authority")]
-        public void SpecifyContactDetails()
+        [And(@"I specify my contact details as the approving authority for (.*)")]
+        public void SpecifyContactDetails(string applicationType)
         {
             /* 
             Page Title: Provide Confirmation of Zoning
@@ -49,8 +49,17 @@ namespace bdd_tests
             NgWebElement uiOfficialEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactEmail']"));
             uiOfficialEmail.SendKeys(email);
 
-            // upload the supporting report
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+            if (applicationType == "liquor primary")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[14]");
+
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[17]");
+            }
+            else
+            {
+                // upload the supporting report
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+            }
         }
 
 
