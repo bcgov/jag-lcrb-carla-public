@@ -197,6 +197,14 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the overlay Submit button")]
+        public void ClickOnOverlaySubmitButton()
+        {
+            NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector(".cdk-global-overlay-wrapper button.mat-primary"));
+            JavaScriptClick(uiSubmitButton);
+        }
+
+
         [And(@"I click on the Continue to Application button")]
         public void ContinueToApplicationButton()
         {
