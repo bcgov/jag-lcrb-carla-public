@@ -2292,7 +2292,7 @@
 </section>
 
 
-<section *ngIf="(isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
+<section *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                 && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')
                 && !lgApprovalDecisionMade()
                 && !lgHasReviewedZoning()
@@ -2303,7 +2303,7 @@
     <section class="ngtest-preamble-content">
       <h3>Submit for LG/IN Review</h3>
       Your application will now be submitted to your local government/Indigenous Nation for their
-      <span *ngIf="isShowLGINApproval">comment and assessment</span>
+      <span *ngIf="application?.applicationType?.isShowLGINApproval">comment and assessment</span>
       <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">confirmation of zoning</span>.
       Please
       ensure
@@ -2391,7 +2391,7 @@
   -->
   <!-- LG Approval Required -->
   <button mat-raised-button class="ng-test-submit-for-lg-review" color="primary"
-          *ngIf="(isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
+          *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
             && !lGHasApproved()
             && !lGHasRejected()
             && application?.applicationStatus === 'Intake'"
@@ -2404,7 +2404,7 @@
 
   <!-- LG Approved OR NO LG Approvals Required -->
   <ng-container
-    *ngIf="lGHasApproved() || !isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation">
+    *ngIf="lGHasApproved() || !application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation">
 
     <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
             (click)="submit_application()" [disabled]="submitApplicationInProgress">
