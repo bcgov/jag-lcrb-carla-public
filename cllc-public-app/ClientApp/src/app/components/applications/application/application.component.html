@@ -1054,7 +1054,7 @@
 
               <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement' && !this.isLP()">
                 <div class="padded-section">
-                  <app-field label="Please briefly outline the proposed change" [required]="true" [isFullWidth]="true"
+                  <app-field label="Please briefly outline the proposed change, including the general construction proposal and time frames for construction:" [required]="true" [isFullWidth]="true"
                     [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
                     errorMessage="Please enter a description">
                     <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000"
@@ -1076,7 +1076,7 @@
 </section>
 
 <!-- Cooler access -->
-<mat-card *ngIf="!isFormControlDisabled('hasCoolerAccess')" class="mat-elevation-z0" style="margin-bottom: 10px;">
+<mat-card *ngIf="!isFormControlDisabled('hasCoolerAccess') || application?.applicationType?.publicCooler" class="mat-elevation-z0" style="margin-bottom: 10px;">
   <section style="display: flex; justify-content: space-between; width: 100%;">
     <div class="question-label">
       Is the public permitted to walk into the cooler space?
