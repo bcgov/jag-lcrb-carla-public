@@ -34,6 +34,9 @@ Scenario: Liquor Primary Relocation (Private Corporation)
     And I click on the overlay Submit button
     And No applications awaiting review is displayed
     And I log in as a return user
-    # 
-    # And the account is deleted
+    And I click on the link for Complete Application
+    And I click on the Continue to Application button
+    And I click on the Submit button
+    And I enter the payment information
+    And the account is deleted
     Then I see the login page
