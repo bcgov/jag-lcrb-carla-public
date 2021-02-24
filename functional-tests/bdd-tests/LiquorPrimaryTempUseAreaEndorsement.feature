@@ -26,6 +26,7 @@ Scenario: Liquor Primary Temp Use Area Endorsement (Private Corporation)
     And I click on the link for Applications for Review
     And I click on the link for Review Application
     And I specify my contact details as the approving authority
+    # LCSD-5067 - WIP
     And I click on the Submit button
     And I click on the Submit button
     And I log in as a return user
