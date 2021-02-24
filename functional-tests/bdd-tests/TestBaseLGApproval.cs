@@ -60,6 +60,12 @@ namespace bdd_tests
             {
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
             }
+            else if (applicationType == "outdoor patio")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[8]");
+
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+            }
             else
             {
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
