@@ -24,17 +24,18 @@ Scenario: Liquor Primary Structural Change No Capacity (Private Corporation)
     And I pay the licensing fee
     And I click on the link for Structural Change Application (No Capacity Increase)
     And I request a capacity increase structural change
-    And I log in as local government for Parksville
-    And I click on the link for Applications for Review
-    And I click on the link for Review Application
-    And I specify my contact details as the approving authority for structural change
-    And I click on the Submit button
-    And I click on the overlay Submit button
-    And No applications awaiting review is displayed
-    And I log in as a return user
-    And I click on the link for Complete Application
-    And I click on the Continue to Application button
-    And I click on the Submit button
     And I enter the payment information
-    And the account is deleted
+    #And I log in as local government for Parksville
+    #And I click on the link for Applications for Review
+    #And I click on the link for Review Application
+    #And I specify my contact details as the approving authority for structural change
+    #And I click on the Submit button
+    #And I click on the overlay Submit button
+    #And No applications awaiting review is displayed
+    #And I log in as a return user
+    #And I click on the link for Complete Application
+    #And I click on the Continue to Application button
+    #And I click on the Submit button
+    #And I enter the payment information
+    #And the account is deleted
     Then I see the login page
