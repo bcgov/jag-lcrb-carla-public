@@ -56,7 +56,7 @@ namespace bdd_tests
 
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[17]");
             }
-            else if (applicationType == "live theatre")
+            else if ((applicationType == "live theatre") || (applicationType == "T&C Change"))
             {
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
             }
