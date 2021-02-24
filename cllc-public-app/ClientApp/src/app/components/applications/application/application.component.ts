@@ -117,6 +117,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   submitApplicationInProgress: boolean;
   proceedToSecurityScreeningInProgress: boolean;
   dataLoaded: boolean;
+  isShowLGINApproval = false;
 
 
   get isOpenedByLGForApproval(): boolean {
@@ -369,6 +370,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
             }
 
             this.application = data;
+            this.isShowLGINApproval = (
+                this?.application?.applicationType?.isShowLGINApproval ||
+                [
+                  "Request Change in T&Cs or Request for Discretion"
+                ].indexOf(this?.application?.applicationType?.name) !== -1
+              );
 
             this.hideFormControlByType();
 
