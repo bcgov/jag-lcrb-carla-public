@@ -49,15 +49,31 @@ namespace bdd_tests
             NgWebElement uiOfficialEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactEmail']"));
             uiOfficialEmail.SendKeys(email);
 
-            if (applicationType == "liquor primary")
+            // upload the supporting reports
+            if ((applicationType == "liquor primary") || (applicationType == "relocation"))
             {
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[14]");
 
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[17]");
             }
+            else if ((applicationType == "live theatre") || (applicationType == "T&C Change"))
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
+            }
+            else if (applicationType == "outdoor patio")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[8]");
+
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+            }
+            else if (applicationType == "structural change")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
+
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[8]");
+            }
             else
             {
-                // upload the supporting report
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
             }
         }
