@@ -3,7 +3,7 @@
     I want to update the liquor hours of service for lounge areas and special events
 
 @manufacturer @changehours @release2
-Scenario: DEV Lounge Area Within Service Hours (Private Corporation)
+Scenario: Lounge Area Within Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -20,7 +20,7 @@ Scenario: DEV Lounge Area Within Service Hours (Private Corporation)
     Then I see the login page
 
 @manufacturer @changehours @release2
-Scenario: DEV Lounge Area Outside Service Hours (Private Corporation)
+Scenario: Lounge Area Outside Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -38,7 +38,7 @@ Scenario: DEV Lounge Area Outside Service Hours (Private Corporation)
     Then I see the login page
 
 @manufacturer @changehours @release2
-Scenario: DEV Special Event Area Within Service Hours (Private Corporation)
+Scenario: Special Event Area Within Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -55,7 +55,7 @@ Scenario: DEV Special Event Area Within Service Hours (Private Corporation)
     Then I see the login page
 
 @manufacturer @changehours @release2
-Scenario: DEV Special Event Area Outside Service Hours (Private Corporation)
+Scenario: Special Event Area Outside Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation

@@ -1,4 +1,4 @@
-﻿Feature: LiquorPrimaryClubApplication
+﻿Feature: LPrimaryClubApplication
     As a logged in business user
     I want to submit Liquor Primary Club Applications for different business types
 

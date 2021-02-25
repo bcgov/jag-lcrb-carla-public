@@ -2,7 +2,7 @@
     As a logged in business user
     I want to run a release test for Liquor Primary
 
-@liquorprimary 
+@liquorprimary @release1
 Scenario: Liquor Primary Release Test #1 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
@@ -12,8 +12,10 @@ Scenario: Liquor Primary Release Test #1 (Private Corporation)
     And I log in as local government for Parksville
     And I click on the link for Applications for Review
     And I click on the link for Review Application
-    And I specify my contact details as the approving authority
+    And I specify my contact details as the approving authority for liquor primary
     And I click on the Submit button
+    And I click on the overlay Submit button
+    And No applications awaiting review is displayed
     And I log in as a return user
     And I click on the link for Complete Application
     And I click on the Continue to Application button
@@ -59,7 +61,7 @@ Scenario: Liquor Primary Release Test #1 (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@liquorprimary 
+@liquorprimary @release1
 Scenario: Liquor Primary Release Test #2 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence

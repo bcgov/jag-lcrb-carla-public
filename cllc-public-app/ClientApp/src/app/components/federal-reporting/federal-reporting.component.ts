@@ -309,11 +309,12 @@ export class FederalReportingComponent implements OnInit {
   }
 
   clearProductForm(report: FormGroup) {
-    const { inventoryReportId, product } = report.value as InventorySalesReport;
+    const { inventoryReportId, product, productDescription } = report.value as InventorySalesReport;
     report.reset({
       selected: false,
       inventoryReportId: inventoryReportId,
       product: product,
+      productDescription: productDescription,
       openingInventory: 0,
       domesticAdditions: 0,
       returnsAdditions: 0,
