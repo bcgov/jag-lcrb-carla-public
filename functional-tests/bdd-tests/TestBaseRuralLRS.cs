@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I complete the Rural LRS application")]
-        public void CompleteRuralLRSApplication()
+        [And(@"I complete the Rural LRS application for a (.*)")]
+        public void CompleteRuralLRSApplication(string businessType)
         {
             /* 
             Page Title: Rural Licensee Retail Store Application
@@ -35,12 +35,6 @@ namespace bdd_tests
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
 
-            string conGiven = "Given";
-            string conSurname = "Surname";
-            string conRole = "CEO";
-            string conPhone = "2508888888";
-            string conEmail = "contact@email.com";
-
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
@@ -48,6 +42,36 @@ namespace bdd_tests
             string otherBusinesses = "Sample other businesses";
             string legalOwners = "Sample legal owners";
             string businessName = "Sample business name";
+
+            if (businessType == "private corporation")
+            { 
+            
+            
+            }
+
+            if (businessType == "public corporation")
+            {
+
+
+            }
+
+            if (businessType == "partnership")
+            {
+
+
+            }
+
+            if (businessType == "sole proprietorship")
+            {
+
+
+            }
+
+            if (businessType == "society")
+            {
+
+
+            }
 
             // upload the legal entity document requirements
             FileUpload("valid_interest.pdf", "(//input[@type='file'])[3]");
