@@ -294,8 +294,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     });
 
-    
-    
+
+
 
     this.form.get('indigenousNation').valueChanges
       .pipe(filter(value => value && value.length >= 3),
@@ -476,7 +476,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.updateRequiredValidator('', 'patioLiquorCarriedDescription');
     }
 
-    
+
     this.updateRequiredValidator(val, 'patioLocationDescription');
     this.updateRequiredValidator(val, 'patioServiceBar');
   }
@@ -502,7 +502,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       return;
     }
 
-    if (this.application.applicationType.name !== ApplicationTypeNames.LRSStructuralChange) {
+    if (!this.application.applicationType.publicCooler) {
       this.form.get('hasCoolerAccess').disable();
     }
 
