@@ -130,7 +130,7 @@ export interface Application {
   lGDecisionComments: string;
   resolutionDocsUploaded: boolean;
   lgZoning: string;
-
+  dateApplicantSentToLG: Date;
   applicant: Account;
 
   serviceAreas: ServiceArea[];
