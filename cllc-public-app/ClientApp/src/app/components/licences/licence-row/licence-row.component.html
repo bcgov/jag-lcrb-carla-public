@@ -228,6 +228,12 @@
                                         <fa-icon [icon]="faCalendarAlt"style="margin-right: 10px;"></fa-icon>Request Temporary Use Area Event Authorization
                                     </a>
                                 </div>
+                                <div *ngIf="isLiquorPrimaryOrLiquorPrimaryClub(item) && isActive(item) && actionsVisible(item)"
+                                  appRemoveIfFeatureOff="LiquorFreeEvents">
+                                  <a [routerLink]="[ '/licence/' + item.licenseId + '/liquor-free-event']">
+                                    <fa-icon [icon]="faCalendarAlt" style="margin-right: 10px;"></fa-icon>Request All-Ages Liquor-Free Event Authorization
+                                  </a>
+                                </div>
                                 <div
                                     *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActive(item) && actionsVisible(item)">
                                     <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
@@ -362,6 +368,7 @@
       <table style="text-align: center; width: 100%;">
         <thead>
         <th>Event Status</th>
+        <th>Event Type</th>
         <th>Number</th>
         <th>Name</th>
         <th>Date Submitted</th>
@@ -376,6 +383,7 @@
               event.status).label}}
             </a>
           </td>
+          <td>{{getOptionFromValue(eventCategory ,event.eventCategory)?.label}}</td>
           <td>{{event.eventNumber}}</td>
           <td>{{getEventName(event)}}</td>
           <td>{{event.modifiedOn | date:'mediumDate'}}</td>
@@ -386,7 +394,7 @@
             </a>
           </td>
           <td
-            *ngIf="getOptionFromValue(eventStatus, event.status).label === 'Approved';else empty_td">
+            *ngIf="getOptionFromValue(eventStatus, event.status).label === 'Approved' && hasAuthorizationLetter(event);else empty_td">
             <a [href]="'api/licenceevents/' + event.id + '/authorization.pdf'" download>
               <span>
                 <fa-icon [icon]="faDownLoad" style="margin-right: 10px;"></fa-icon>
