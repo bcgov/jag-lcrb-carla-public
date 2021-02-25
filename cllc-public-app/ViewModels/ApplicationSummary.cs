@@ -13,6 +13,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string JobNumber { get; set; } //adoxio_jobnumber
         public string ApplicationTypeName { get; set; }
 
+        public System.DateTimeOffset? DateApplicationSubmitted { get; set; }
+        public System.DateTimeOffset? DateApplicantSentToLG { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public ApplicationTypeCategory? ApplicationTypeCategory { get; set; }
         public bool IsIndigenousNation { get; set; }
