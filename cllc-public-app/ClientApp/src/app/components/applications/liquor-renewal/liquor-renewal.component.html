@@ -13,14 +13,14 @@
   <p>
     <strong>Please provide the sales information for your renewal period:</strong>
   </p>
-  <app-field label="LDB Order Totals" [required]="true" [valid]="isValidOrNotTouched('ldbOrderTotals')"
-             errorMessage="Please enter the LDB Order Totals ($0 - $10,000,000)">
+  <app-field label="Annual Sales" [required]="true" [valid]="isValidOrNotTouched('ldbOrderTotals')"
+             errorMessage="Please enter the Annual Sales ($0 - $10,000,000)">
     <input class="form-control" style="width: 350px;" type="text" formControlName="ldbOrderTotals"
            prefix="$" thousandSeparator="," mask="separator">
   </app-field>
-  <app-field label="Confirm LDB Order Totals" [required]="true"
+  <app-field label="Confirm Annual Sales" [required]="true"
              [valid]="isValidOrNotTouched('ldbOrderTotalsConfirm') && form.get('ldbOrderTotals').value === form.get('ldbOrderTotalsConfirm').value"
-             errorMessage="Please confirm LDB Order Totals matches">
+             errorMessage="Please confirm Annual Sales matches">
     <input class="form-control" style="width: 350px;" type="text" formControlName="ldbOrderTotalsConfirm"
            prefix="$" thousandSeparator="," mask="separator">
   </app-field>
