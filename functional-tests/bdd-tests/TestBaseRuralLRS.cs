@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I complete the Rural LRS application")]
-        public void CompleteRuralLRSApplication()
+        [And(@"I complete the Rural LRS application for a (.*)")]
+        public void CompleteRuralLRSApplication(string businessType)
         {
             /* 
             Page Title: Rural Licensee Retail Store Application
@@ -35,12 +35,6 @@ namespace bdd_tests
             string estEmail = "test@test.com";
             string estPhone = "2505555555";
 
-            string conGiven = "Given";
-            string conSurname = "Surname";
-            string conRole = "CEO";
-            string conPhone = "2508888888";
-            string conEmail = "contact@email.com";
-
             string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
 
@@ -49,11 +43,47 @@ namespace bdd_tests
             string legalOwners = "Sample legal owners";
             string businessName = "Sample business name";
 
-            // upload the legal entity document requirements
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[3]");
+            if (businessType == "private corporation")
+            {
+                // upload the central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
-            // upload the personal history summary requirements
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[6]");
+                // upload supporting business documentation
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[6]");
+
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+
+                // upload the personal history summary forms
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
+
+                // upload Shareholders (individuals) Holding Less Than 10% Interest
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
+            }
+
+            if (businessType == "public corporation")
+            {
+
+
+            }
+
+            if (businessType == "partnership")
+            {
+
+
+            }
+
+            if (businessType == "sole proprietorship")
+            {
+
+
+            }
+
+            if (businessType == "society")
+            {
+
+
+            }
 
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -75,8 +105,11 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
-            // upload the zoning document
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
+            if (businessType == "private corporation")
+            {
+                // upload the zoning document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
+            }
 
             // select 'Yes' for Treaty First Nation land
             NgWebElement uiIsOnINLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-2"));
@@ -105,7 +138,7 @@ namespace bdd_tests
             uiEstabPhone.SendKeys(estPhone);
 
             // select 'Yes' for 'Is the proposed RLRS located in a rural community with no other RLRS?'
-            NgWebElement uiIsRlrsLocatedInRuralCommunityAloneYes = ngDriver.FindElement(By.CssSelector("#isRlrsLocatedInRuralCommunityAlone #mat-button-toggle-127 button"));
+            NgWebElement uiIsRlrsLocatedInRuralCommunityAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-169-button"));
             uiIsRlrsLocatedInRuralCommunityAloneYes.Click();
 
             // select 'Yes' for 'Is the proposed RLRS located in a tourist destination resort with no other RLRS?'
@@ -149,16 +182,16 @@ namespace bdd_tests
             uiFranchiseOrAffiliatedBusiness.SendKeys(businessName);
 
             // upload the signage documents
-            FileUpload("signage.pdf", "(//input[@type='file'])[11]");
+            FileUpload("signage.pdf", "(//input[@type='file'])[20]");
 
             // upload the floor plan
-            FileUpload("floor_plan.pdf", "(//input[@type='file'])[14]");
+            FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
 
             // upload the site plan
-            FileUpload("site_plan.pdf", "(//input[@type='file'])[17]");
+            FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
 
             // upload the exterior photos
-            FileUpload("exterior_photos.pdf", "(//input[@type='file'])[20]");
+            FileUpload("exterior_photos.pdf", "(//input[@type='file'])[29]");
 
             // select the owner checkbox
             NgWebElement uiOwnerCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
