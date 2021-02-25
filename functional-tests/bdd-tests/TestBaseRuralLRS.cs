@@ -44,9 +44,21 @@ namespace bdd_tests
             string businessName = "Sample business name";
 
             if (businessType == "private corporation")
-            { 
-            
-            
+            {
+                // upload the central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+
+                // upload supporting business documentation
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[6]");
+
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+
+                // upload the personal history summary forms
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
+
+                // upload Shareholders (individuals) Holding Less Than 10% Interest
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
 
             if (businessType == "public corporation")
@@ -73,12 +85,6 @@ namespace bdd_tests
 
             }
 
-            // upload the legal entity document requirements
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[3]");
-
-            // upload the personal history summary requirements
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[6]");
-
             // enter the establishment name
             NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
             uiEstabName.SendKeys(estName);
@@ -99,8 +105,11 @@ namespace bdd_tests
             NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
-            // upload the zoning document
-            FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
+            if (businessType == "private corporation")
+            {
+                // upload the zoning document
+                FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
+            }
 
             // select 'Yes' for Treaty First Nation land
             NgWebElement uiIsOnINLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-2"));
@@ -173,16 +182,16 @@ namespace bdd_tests
             uiFranchiseOrAffiliatedBusiness.SendKeys(businessName);
 
             // upload the signage documents
-            FileUpload("signage.pdf", "(//input[@type='file'])[11]");
+            FileUpload("signage.pdf", "(//input[@type='file'])[20]");
 
             // upload the floor plan
-            FileUpload("floor_plan.pdf", "(//input[@type='file'])[14]");
+            FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
 
             // upload the site plan
-            FileUpload("site_plan.pdf", "(//input[@type='file'])[17]");
+            FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
 
             // upload the exterior photos
-            FileUpload("exterior_photos.pdf", "(//input[@type='file'])[20]");
+            FileUpload("exterior_photos.pdf", "(//input[@type='file'])[29]");
 
             // select the owner checkbox
             NgWebElement uiOwnerCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
