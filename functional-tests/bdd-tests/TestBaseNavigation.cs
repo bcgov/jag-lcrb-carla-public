@@ -197,6 +197,14 @@ namespace bdd_tests
         }
 
 
+        [And(@"I click on the overlay Submit button")]
+        public void ClickOnOverlaySubmitButton()
+        {
+            NgWebElement uiSubmitButton = ngDriver.FindElement(By.CssSelector(".cdk-global-overlay-wrapper button.mat-primary"));
+            JavaScriptClick(uiSubmitButton);
+        }
+
+
         [And(@"I click on the Continue to Application button")]
         public void ContinueToApplicationButton()
         {
@@ -511,6 +519,13 @@ namespace bdd_tests
         {
             IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
             executor.ExecuteScript("arguments[0].click();", element);
+        }
+
+        [And(@"No applications awaiting review is displayed")]
+        public void NoApplicationsAwaitingReview()
+        {
+            //Confirm that "No applications awaiting review" message is displayed
+            Assert.True(ngDriver.FindElement(By.XPath($"//body[contains(.,'No applications awaiting review')]")).Displayed);
         }
     }
 }

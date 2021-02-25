@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I specify my contact details as the approving authority")]
-        public void SpecifyContactDetails()
+        [And(@"I specify my contact details as the approving authority for (.*)")]
+        public void SpecifyContactDetails(string applicationType)
         {
             /* 
             Page Title: Provide Confirmation of Zoning
@@ -49,8 +49,33 @@ namespace bdd_tests
             NgWebElement uiOfficialEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactEmail']"));
             uiOfficialEmail.SendKeys(email);
 
-            // upload the supporting report
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+            // upload the supporting reports
+            if ((applicationType == "liquor primary") || (applicationType == "relocation"))
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[14]");
+
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[17]");
+            }
+            else if ((applicationType == "live theatre") || (applicationType == "T&C Change"))
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
+            }
+            else if (applicationType == "outdoor patio")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[8]");
+
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+            }
+            else if (applicationType == "structural change")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
+
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[8]");
+            }
+            else
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+            }
         }
 
 

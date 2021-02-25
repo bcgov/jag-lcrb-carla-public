@@ -57,7 +57,7 @@
     <None Update="LiquorPrimaryAllowMinors.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LiquorPrimaryClubApplication.feature">
+    <None Update="LPrimaryClubApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LiquorPrimaryLiveTheatreRequest.feature">
