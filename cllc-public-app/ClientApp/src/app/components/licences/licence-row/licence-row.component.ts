@@ -319,6 +319,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return this.isRecentlyExpired(licence) || this.isActive(licence);
   }
 
+
   isLiquorPrimaryOrLiquorPrimaryClub(licence: ApplicationLicenseSummary) {
     return licence.licenceTypeName.includes("Liquor Primary");
   }
@@ -328,20 +329,33 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return event.eventCategory !== this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value;
   }
 
+  /*
+    start or open a change job from a licence row
+  */
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
+    // search for an existing application type that matches the type specified
     const actionApplication = licence.actionApplications.find(
       app => app.applicationTypeName === actionName
-        && !app.isStructuralChange
-        && app.applicationStatus !== "Active");
+      && !app.isStructuralChange                        // we allow multiple structurals
+      && app.applicationStatus !== "Active");
+
+    // if we found an action application
     if (actionApplication) {
-      if (actionApplication.isPaid === true) {
+      // and if it wasn't paid for
+      if (actionApplication.isPaid === false) {
+        // open it up so we can continue it
         this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
-      } else if (actionApplication.isPaid === false) {
+      // otherwise if it was paid for
+      } else if (actionApplication.isPaid === true)
+      {
+        // prevent a re-submission until the application status is no longer active
         this.snackBar.open(`${actionName} has already been submitted and is under review`,
           "Warning",
           { duration: 3500, panelClass: ["red-snackbar"] });
       }
+    // if we didn't find an action application
     } else {
+      // create one
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
