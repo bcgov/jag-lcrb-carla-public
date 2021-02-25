@@ -33,7 +33,7 @@ Scenario: Rural Agency Store Application (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./RuralAgencyStore.feature")]
+    [FeatureFile("./***.feature")]
     [Collection("Cannabis")]
     public sealed class RuralAgencyStore : TestBase
     {
