@@ -287,6 +287,11 @@ namespace bdd_tests
                     var startLPC = ngDriver.FindElement(By.CssSelector("button[id='startLPC']"));
                     JavaScriptClick(startLPC);
                     break;
+                case "Rural LRS":
+                    // click on the Rural LRS Start Application button
+                    var startRLRS = ngDriver.FindElement(By.CssSelector("button[id='startRLRS']"));
+                    JavaScriptClick(startRLRS);
+                    break;
             }
         }
 

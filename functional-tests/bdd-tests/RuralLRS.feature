@@ -8,6 +8,8 @@ Scenario: Rural LRS Application (Private Corporation)
     And I click on the Start Application button for a Rural LRS
     And I review the account profile for a private corporation
     And I complete the Rural LRS application
+    And I click on the Submit button
+    And I enter the payment information
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
