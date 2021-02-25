@@ -265,6 +265,7 @@ import { EventLocationTableComponent } from "@components/tables/event-location-t
 import { ResolvedApplicationsComponent } from './components/lg-approvals/resolved-applications/resolved-applications.component';
 import { RelatedLicencePickerComponent } from './shared/components/related-licence-picker/related-licence-picker.component';
 import { ApplicationTiedHouseExemptionComponent } from './components/applications/application-tied-house-exemption/application-tied-house-exemption.component';
+import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-free-event.component";
 
 @NgModule({
   declarations: [
@@ -404,6 +405,7 @@ import { ApplicationTiedHouseExemptionComponent } from './components/application
     ResolvedApplicationsComponent,
     RelatedLicencePickerComponent,
     ApplicationTiedHouseExemptionComponent,
+    LiquorFreeEventComponent,
   ],
   imports: [
     AppRoutingModule,
