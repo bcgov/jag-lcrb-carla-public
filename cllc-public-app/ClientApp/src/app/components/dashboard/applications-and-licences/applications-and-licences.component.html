@@ -503,12 +503,12 @@
         </a>
       </ng-container>
 
-      <a appRemoveIfFeatureOn="LicenseeChanges"
-         *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && !item.isPaid"
+      <!--a appRemoveIfFeatureOn="LicenseeChanges"
+         *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && !item.isPaid && !"
          routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
         <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Complete Application</span>
-      </a>
+        <span>Complete Application4</span>
+      </a-->
 
       <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal || item.applicationTypeName === ApplicationTypeNames.LiquorRenewal || item.applicationTypeName === ApplicationTypeNames.MarketingRenewal"
          routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
