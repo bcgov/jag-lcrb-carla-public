@@ -669,5 +669,34 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public DateTimeOffset? TempDateFrom { get; set; }
         public DateTimeOffset? TempDateTo { get; set; }
+
+
+        // LOCATION ELIGIBILITY
+
+        // Note that many of these fields are "Yes / No" lookups.  As the fields are used in Dynamic Forms 
+        // they are stored as integer lookup values rather than converted to boolean.
+
+        public int? IsRlrsLocatedInRuralCommunityAlone { get; set; }
+
+        public int? IsRlrsLocatedAtTouristDestinationAlone { get; set; }
+
+        public string RlrsResortCommunityDescription { get; set; }
+
+        public int? HasYearRoundAllWeatherRoadAccess { get; set; }
+
+        public int? DoesGeneralStoreOperateSeasonally { get; set; }
+
+        public int? SurroundingResidentsOfRlrs { get; set; }
+
+        public int? IsRlrsAtLeast10kmFromAnotherStore { get; set; }
+
+        public int? IsApplicantOwnerOfStore { get; set; }
+
+        public string LegalAndBeneficialOwnersOfStore { get; set; }
+
+        public int? IsApplicantFranchiseOrAffiliated { get; set; }
+
+        public string FranchiseOrAffiliatedBusiness { get; set; }
+        
     }
 }
