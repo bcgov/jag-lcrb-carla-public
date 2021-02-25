@@ -219,7 +219,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return result;
   }
 
-
   showAddOrChangeThirdPartyOperator(item: ApplicationLicenseSummary): boolean {
     const result = this.isActive(item) &&
       this.actionsVisible(item) &&
@@ -320,16 +319,25 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return this.isRecentlyExpired(licence) || this.isActive(licence);
   }
 
+
+  isLiquorPrimaryOrLiquorPrimaryClub(licence: ApplicationLicenseSummary) {
+    return licence.licenceTypeName.includes("Liquor Primary");
+  }
+
+  // At the moment all events have authorization letters to download, EXCEPT for Liquor-Free events.
+  hasAuthorizationLetter(event: LicenceEvent): boolean {
+    return event.eventCategory !== this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value;
+  }
+
   /*
     start or open a change job from a licence row
   */
-
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
     // search for an existing application type that matches the type specified
     const actionApplication = licence.actionApplications.find(
       app => app.applicationTypeName === actionName
       && !app.isStructuralChange                        // we allow multiple structurals
-        && app.applicationStatus !== "Active");
+      && app.applicationStatus !== "Active");
 
     // if we found an action application
     if (actionApplication) {
@@ -550,6 +558,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       return "/market-event/";
     } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Temporary Use Area").value) {
       return "/tua-event/";
+    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value) {
+      return "/liquor-free-event/";
     }
     return "/event/";
   }
@@ -570,6 +580,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return (licenceType.indexOf("Catering") >= 0 ||
       licenceType.indexOf("Wine Store") >= 0 ||
       licenceType.indexOf("Manufacturer") >= 0 ||
+      licenceType.indexOf("Liquor Primary") >= 0 ||
       licenceType.indexOf("Food Primary") >= 0);
   }
 
