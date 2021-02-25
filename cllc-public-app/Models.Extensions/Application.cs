@@ -459,6 +459,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LGApprovalDecision = (LGDecision?)dynamicsApplication.AdoxioLgapprovaldecision,
                 LgZoning = (Zoning?)dynamicsApplication.AdoxioLgzoning,
                 LGDecisionComments = dynamicsApplication.AdoxioLgdecisioncomments,
+                DateApplicantSentToLG = dynamicsApplication.AdoxioDatesentlgin,
 
                 // Catering fields.
 

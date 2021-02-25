@@ -372,9 +372,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
             this.application = data;
             this.isShowLGINApproval = (
                 this?.application?.applicationType?.isShowLGINApproval ||
-                [
-                  "Request Change in T&Cs or Request for Discretion"
-                ].indexOf(this?.application?.applicationType?.name) !== -1
+                (this?.application?.applicationStatus === "Pending for LG/FN/Police Feedback"
+                 && this?.application?.applicationType?.isShowLGZoningConfirmation !== true
+                )
               );
 
             this.hideFormControlByType();

@@ -43,10 +43,9 @@ export class LgApprovalsComponent implements OnInit {
             this.applications.filter(app => !app.lGDecisionSubmissionDate &&
               app.applicationType &&
               (app.applicationType.isShowLGINApproval ||
-                // Ignore the isShowLGINApproval flag for the application type
-                [
-                  "Request Change in T&Cs or Request for Discretion"
-                ].indexOf(app.applicationType.name) !== -1
+                (app.applicationStatus === "Pending for LG/FN/Police Feedback"
+                 && app?.applicationType?.isShowLGZoningConfirmation !== true
+                )
               ) 
               );
           this.applicationsForZoning =
