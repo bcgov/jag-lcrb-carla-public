@@ -1076,7 +1076,7 @@
 </section>
 
 <!-- Cooler access -->
-<mat-card *ngIf="!isFormControlDisabled('hasCoolerAccess') || application?.applicationType?.publicCooler" class="mat-elevation-z0" style="margin-bottom: 10px;">
+<mat-card *ngIf="application?.applicationType?.publicCooler =='Yes'" class="mat-elevation-z0" style="margin-bottom: 10px;">
   <section style="display: flex; justify-content: space-between; width: 100%;">
     <div class="question-label">
       Is the public permitted to walk into the cooler space?
