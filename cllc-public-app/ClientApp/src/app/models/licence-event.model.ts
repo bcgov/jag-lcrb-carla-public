@@ -326,10 +326,9 @@ export const EventCategory = [
     label: 'Temporary Use Area',
     value: 845280004
   },
-  // TODO: FIXME: Make sure this value corresponds to what's setup in Dynamics
   {
     label: 'All Ages Liquor Free',
-    value: 845280005
+    value: 100000000
   }
 ];
 
