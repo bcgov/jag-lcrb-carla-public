@@ -323,6 +323,11 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return licence.licenceTypeName.includes("Liquor Primary");
   }
 
+  // At the moment all events have authorization letters to download, EXCEPT for Liquor-Free events.
+  hasAuthorizationLetter(event: LicenceEvent): boolean {
+    return event.eventCategory !== this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value;
+  }
+
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
     const actionApplication = licence.actionApplications.find(
       app => app.applicationTypeName === actionName
@@ -539,6 +544,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       return "/market-event/";
     } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Temporary Use Area").value) {
       return "/tua-event/";
+    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value) {
+      return "/liquor-free-event/";
     }
     return "/event/";
   }

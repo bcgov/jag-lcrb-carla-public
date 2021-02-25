@@ -394,7 +394,7 @@
             </a>
           </td>
           <td
-            *ngIf="getOptionFromValue(eventStatus, event.status).label === 'Approved';else empty_td">
+            *ngIf="getOptionFromValue(eventStatus, event.status).label === 'Approved' && hasAuthorizationLetter(event);else empty_td">
             <a [href]="'api/licenceevents/' + event.id + '/authorization.pdf'" download>
               <span>
                 <fa-icon [icon]="faDownLoad" style="margin-right: 10px;"></fa-icon>
