@@ -38,9 +38,9 @@ Scenario: Rural Agency Licence Download (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./RuralAgencyStoreDownloadLicence.feature")]
+    [FeatureFile("./***.feature")]
     [Collection("Cannabis")]
-    public sealed class RuralAgencyStoreDownloadLicence : TestBase
+    public sealed class _archived_RuralAgencyStoreDownloadLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
