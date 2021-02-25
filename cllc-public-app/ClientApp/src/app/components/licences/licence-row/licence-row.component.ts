@@ -219,7 +219,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return result;
   }
 
-
   showAddOrChangeThirdPartyOperator(item: ApplicationLicenseSummary): boolean {
     const result = this.isActive(item) &&
       this.actionsVisible(item) &&
@@ -320,16 +319,24 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return this.isRecentlyExpired(licence) || this.isActive(licence);
   }
 
+  isLiquorPrimaryOrLiquorPrimaryClub(licence: ApplicationLicenseSummary) {
+    return licence.licenceTypeName.includes("Liquor Primary");
+  }
+
+  // At the moment all events have authorization letters to download, EXCEPT for Liquor-Free events.
+  hasAuthorizationLetter(event: LicenceEvent): boolean {
+    return event.eventCategory !== this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value;
+  }
+
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
     const actionApplication = licence.actionApplications.find(
       app => app.applicationTypeName === actionName
-      && !app.isStructuralChange
+        && !app.isStructuralChange
         && app.applicationStatus !== "Active");
     if (actionApplication) {
       if (actionApplication.isPaid === true) {
         this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
-      } else if (actionApplication.isPaid === false)
-      {
+      } else if (actionApplication.isPaid === false) {
         this.snackBar.open(`${actionName} has already been submitted and is under review`,
           "Warning",
           { duration: 3500, panelClass: ["red-snackbar"] });
@@ -537,6 +544,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       return "/market-event/";
     } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Temporary Use Area").value) {
       return "/tua-event/";
+    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value) {
+      return "/liquor-free-event/";
     }
     return "/event/";
   }
@@ -557,6 +566,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return (licenceType.indexOf("Catering") >= 0 ||
       licenceType.indexOf("Wine Store") >= 0 ||
       licenceType.indexOf("Manufacturer") >= 0 ||
+      licenceType.indexOf("Liquor Primary") >= 0 ||
       licenceType.indexOf("Food Primary") >= 0);
   }
 

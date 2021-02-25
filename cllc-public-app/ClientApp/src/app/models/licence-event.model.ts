@@ -325,6 +325,10 @@ export const EventCategory = [
   {
     label: 'Temporary Use Area',
     value: 845280004
+  },
+  {
+    label: 'All Ages Liquor Free',
+    value: 100000000
   }
 ];
 
