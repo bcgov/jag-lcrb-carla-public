@@ -138,7 +138,7 @@ namespace bdd_tests
             uiEstabPhone.SendKeys(estPhone);
 
             // select 'Yes' for 'Is the proposed RLRS located in a rural community with no other RLRS?'
-            NgWebElement uiIsRlrsLocatedInRuralCommunityAloneYes = ngDriver.FindElement(By.CssSelector("#isRlrsLocatedInRuralCommunityAlone #mat-button-toggle-127 button"));
+            NgWebElement uiIsRlrsLocatedInRuralCommunityAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-127-button"));
             uiIsRlrsLocatedInRuralCommunityAloneYes.Click();
 
             // select 'Yes' for 'Is the proposed RLRS located in a tourist destination resort with no other RLRS?'
