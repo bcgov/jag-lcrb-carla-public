@@ -25,4 +25,5 @@ Scenario: Liquor Primary Structural Change No Capacity (Private Corporation)
     And I click on the link for Structural Change Application (No Capacity Increase)
     And I request a capacity increase structural change
     And I enter the payment information
+    And the account is deleted
     Then I see the login page
