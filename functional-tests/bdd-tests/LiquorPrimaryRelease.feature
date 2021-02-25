@@ -2,7 +2,7 @@
     As a logged in business user
     I want to run a release test for Liquor Primary
 
-@liquorprimary @release1
+@liquorprimary 
 Scenario: Liquor Primary Release Test #1 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
@@ -61,7 +61,7 @@ Scenario: Liquor Primary Release Test #1 (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@liquorprimary @release1
+@liquorprimary
 Scenario: Liquor Primary Release Test #2 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
