@@ -53,6 +53,7 @@ Scenario: Liquor Primary Temp Use Area Endorsement Approved (Private Corporation
     And I click on the Submit button	
     And I enter the payment information
     And the on-site endorsement application is approved
+    And I click on the Licences tab
     And the account is deleted
     Then I see the login page
 */
