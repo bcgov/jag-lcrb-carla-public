@@ -12,7 +12,7 @@ Scenario: Worker Application
     And I complete Step 2 of the application
     And I click on the Submit & Pay button
     And I enter the payment information
-    And I return to the dashboard
-    And the dashboard has a new status
+    # And I return to the dashboard
+    # And the dashboard has a new status
     And the account is deleted
     Then I see the login page

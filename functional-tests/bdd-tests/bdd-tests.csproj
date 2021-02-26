@@ -114,6 +114,9 @@
     <None Update="ManufacturerTESA.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="RuralLRS.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="UBrewUVinLicensingRenewal.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -216,7 +219,7 @@
     <None Update="OnSiteEndorsementRenewal.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralAgencyStoreDownloadLicence.feature">
+    <None Update="_archived_RuralAgencyStoreDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="UBrewUVinRelease.feature">
@@ -363,7 +366,7 @@
     <None Update="COVIDTemporaryExtension.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralAgencyStore.feature">
+    <None Update="_archived_RuralAgencyStore.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationEventAuthorization.feature">

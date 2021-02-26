@@ -72,6 +72,10 @@ namespace bdd_tests
 
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[8]");
             }
+            else if (applicationType == "TUA")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+            }
             else
             {
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");

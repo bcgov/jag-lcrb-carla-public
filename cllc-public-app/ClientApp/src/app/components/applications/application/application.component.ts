@@ -1083,10 +1083,28 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
       if (!this.form.get('willHaveValidInterest').value) {
         this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
-       }
+      }
 
     }
 
+    // special validation for RLRS
+
+    if (this.form.get('isRlrsLocatedInRuralCommunityAlone').value
+        && this.form.get('isRlrsLocatedInRuralCommunityAlone').value !== 845280000 // NOT YES
+        && !this.form.get('isRlrsLocatedAtTouristDestinationAlone').value // NO VALUE FOR IS LOCATED AT TOURIST DESTINATION ALONE
+      ) {
+      valid = false;
+      this.validationMessages.push('Please enter a value for Is the proposed RLRS located in a tourist destination resort with no other RLRS?');
+    }
+  
+    if (this.form.get('isRlrsLocatedAtTouristDestinationAlone').value
+      && this.form.get('isRlrsLocatedAtTouristDestinationAlone').value === 845280000 // IS YES
+      && !this.form.get('rlrsResortCommunityDescription').value // NO VALUE FOR DESCRIPTION
+      ) {
+      valid = false;
+      this.validationMessages.push('Resort community description is required.');
+    }
+  
     return valid && (this.form.valid || this.form.disabled);
   }
 
@@ -1384,7 +1402,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType === "Wine Store");
   }
 
-  showDynamicForm(formReference, tabs) {
+  showDynamicForm(formReference, tabs)
+{
+  debugger;
     if (this.form.get('isHasPatio').enabled) {
       this.updateDynamicValidation();
       return this.form.get('isHasPatio').value && formReference && tabs;

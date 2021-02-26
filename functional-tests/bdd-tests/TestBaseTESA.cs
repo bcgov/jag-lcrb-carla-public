@@ -27,8 +27,11 @@ namespace bdd_tests
             Page Title: Temporary Expanded Service Areas Application
             */
 
+            // upload letter of intent
+            FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[2]");
+
             // upload floorplan
-            FileUpload("floor_plan.pdf", "(//input[@type='file'])[3]");
+            FileUpload("floor_plan.pdf", "(//input[@type='file'])[5]");
 
             // select the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
