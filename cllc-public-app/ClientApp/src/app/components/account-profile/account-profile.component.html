@@ -338,21 +338,17 @@
     <span>{{message}}</span>
   </div>
 </div>
-<br><br>
-<section style="position: relative;">
+<section style="position: relative;" class="py-4 button-row">
   <div [ngBusy]="[busy3]"></div>
-  <a routerLink="/dashboard">
-    <fa-icon [icon]="faTrashAlt" style="margin-right: 10px;"></fa-icon>CANCEL & CLOSE
-  </a>
-  <span style="float: right;">
-    <button color="primary" mat-raised-button style="margin-left: 10px" (click)="gotoReview()" class="save-cont"
-            id="continueToApp">
-      <span *ngIf="!applicationId && !useInStepperMode">SAVE & CONTINUE</span>
-      <span *ngIf="applicationId && !useInStepperMode">CONTINUE TO APPLICATION</span>
-      <span *ngIf="useInStepperMode">CONTINUE TO ORGANIZATION REVIEW</span>&nbsp;
-      <fa-icon [icon]="faChevronRight"></fa-icon>
-    </button>
-  </span>
+  <button color="primary" mat-raised-button (click)="gotoReview()" class="save-cont" id="continueToApp">
+    <span *ngIf="!applicationId && !useInStepperMode">SAVE & CONTINUE</span>
+    <span *ngIf="applicationId && !useInStepperMode">CONTINUE TO APPLICATION</span>
+    <span *ngIf="useInStepperMode">CONTINUE TO ORGANIZATION REVIEW</span>&nbsp;
+    <fa-icon [icon]="faChevronRight" class="mr-0"></fa-icon>
+  </button>
+  <button class="btn btn-link btn-cancel" routerLink="/dashboard">
+    <fa-icon [icon]="faTrash"></fa-icon>CANCEL
+  </button>
 </section>
 </div>
 </div>

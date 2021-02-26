@@ -19,7 +19,7 @@ import { ConnectionToProducersComponent } from "./tabs/connection-to-producers/c
 import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
 import { AppState } from "@app/app-state/models/app-state";
-import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrashAlt } from
+import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrash } from
   "@fortawesome/free-solid-svg-icons";
 import * as moment from 'moment';
 
@@ -76,7 +76,7 @@ const ValidationFieldNameMap = {
 })
 export class AccountProfileComponent extends FormBase implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
-  faTrashAlt = faTrashAlt;
+  faTrash = faTrash;
   faChevronRight = faChevronRight;
   faAddressCard = faAddressCard;
   faEnvelope = faEnvelope;
