@@ -1089,7 +1089,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // special validation for RLRS
 
-    if (this.form.get('isRlrsLocatedInRuralCommunityAlone').value
+    if (this.form.get('isRlrsLocatedInRuralCommunityAlone')
+        && this.form.get('isRlrsLocatedAtTouristDestinationAlone')
+        && this.form.get('isRlrsLocatedInRuralCommunityAlone').value
         && this.form.get('isRlrsLocatedInRuralCommunityAlone').value !== 845280000 // NOT YES
         && !this.form.get('isRlrsLocatedAtTouristDestinationAlone').value // NO VALUE FOR IS LOCATED AT TOURIST DESTINATION ALONE
       ) {
@@ -1097,7 +1099,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Please enter a value for Is the proposed RLRS located in a tourist destination resort with no other RLRS?');
     }
   
-    if (this.form.get('isRlrsLocatedAtTouristDestinationAlone').value
+    if (this.form.get('isRlrsLocatedAtTouristDestinationAlone')
+      && this.form.get('rlrsResortCommunityDescription')
+      && this.form.get('isRlrsLocatedAtTouristDestinationAlone').value
       && this.form.get('isRlrsLocatedAtTouristDestinationAlone').value === 845280000 // IS YES
       && !this.form.get('rlrsResortCommunityDescription').value // NO VALUE FOR DESCRIPTION
       ) {
@@ -1404,8 +1408,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showDynamicForm(formReference, tabs)
 {
-  debugger;
-    if (this.form.get('isHasPatio').enabled) {
+  if (this.form.get('isHasPatio').enabled) {
       this.updateDynamicValidation();
       return this.form.get('isHasPatio').value && formReference && tabs;
     }
