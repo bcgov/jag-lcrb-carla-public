@@ -698,5 +698,15 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string FranchiseOrAffiliatedBusiness { get; set; }
         
+        public int? HasSufficientRangeOfProducts { get; set; }
+
+        public int? HasOtherProducts { get; set; }
+
+        public int? HasAdditionalServices { get; set; }
+
+        public DateTimeOffset? StoreOpenDate { get; set; }
+
+        public int? ConfirmLiquorSalesIsNotPrimaryBusiness { get; set; }
+        
     }
 }

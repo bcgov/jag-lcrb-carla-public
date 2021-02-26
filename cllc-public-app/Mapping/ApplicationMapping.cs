@@ -115,7 +115,12 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_isapplicantownerofstore", new FieldMapping("isApplicantOwnerOfStore", true)},
                 {"adoxio_legalandbeneficialownersofstore", new FieldMapping("legalAndBeneficialOwnersOfStore", false)},
                 {"adoxio_isapplicantfranchiseoraffiliated", new FieldMapping("isApplicantFranchiseOrAffiliated", true)},
-                {"adoxio_franchiseoraffiliatedbusiness", new FieldMapping("franchiseOrAffiliatedBusiness", false)}
+                {"adoxio_franchiseoraffiliatedbusiness", new FieldMapping("franchiseOrAffiliatedBusiness", false)},
+                {"adoxio_hassufficientrangeofproducts", new FieldMapping("hasSufficientRangeOfProducts", true)},
+                {"adoxio_hasotherproducts", new FieldMapping("hasOtherProducts", true)},
+                {"adoxio_hasadditionalservices", new FieldMapping("hasAdditionalServices", true)},
+                {"adoxio_storeopendate", new FieldMapping("storeOpenDate", true)},
+                {"adoxio_confirmliquorsalesisnotprimarybusiness", new FieldMapping("confirmLiquorSalesIsNotPrimaryBusiness", true)}
 
         };
         }
