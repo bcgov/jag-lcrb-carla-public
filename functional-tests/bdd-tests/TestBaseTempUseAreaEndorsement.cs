@@ -110,9 +110,6 @@ namespace bdd_tests
             string[] parsedURL = URL.Split('/');
 
             endorsementID = parsedURL[5];
-
-            // click on the Submit & Pay button
-            ClickOnSubmitButton();
         }
     }
 }
