@@ -57,6 +57,9 @@
     <None Update="LiquorPrimaryAllowMinors.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="LiquorPrimaryAllAgesLiquorFree.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="LPrimaryClubApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
