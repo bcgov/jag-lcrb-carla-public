@@ -66,26 +66,35 @@ namespace bdd_tests
 
             if (businessType == "public corporation")
             {
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
 
-
+                // upload the personal history summary forms
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
             }
 
             if (businessType == "partnership")
             {
+                // upload the partnership agreement
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
 
-
+                // upload the personal history summary forms
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
             }
 
             if (businessType == "sole proprietorship")
             {
-
-
+                // upload the personal history summary forms
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
             }
 
             if (businessType == "society")
             {
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
 
-
+                // upload the personal history summary forms
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
             }
 
             // enter the establishment name
