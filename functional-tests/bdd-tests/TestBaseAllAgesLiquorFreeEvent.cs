@@ -88,7 +88,7 @@ namespace bdd_tests
 
             // select agreement checkbox
             NgWebElement uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox.mat-checkbox[formcontrolname='isAgreement1']"));
-            uiAgreement.Click();
+            JavaScriptClick(uiAgreement);
 
             // select review checkbox
             NgWebElement uiReview = ngDriver.FindElement(By.CssSelector("mat-checkbox.mat-checkbox[formcontrolname='isAgreement2']"));
