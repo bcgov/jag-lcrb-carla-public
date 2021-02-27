@@ -17,7 +17,7 @@ Feature: LiquorPrimaryAllAgesLiquorFree
     As a logged in business user
     I want to request an all ages liquor free event authorization
 
-@liquorprimaryapp
+@liquorprimaryapp @release2
 Scenario: DEV Liquor Primary All Ages Liquor Free 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
@@ -38,6 +38,7 @@ Scenario: DEV Liquor Primary All Ages Liquor Free
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I click on the link for Request All-Ages Liquor-Free Event Authorization 
     And I complete the All Ages Liquor Free Event request
     And I click on the Submit button
