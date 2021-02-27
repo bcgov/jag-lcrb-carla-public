@@ -15,7 +15,7 @@ import { Account, TransferAccount } from "@models/account.model";
 import { LicenseDataService } from "@services/license-data.service";
 import { License } from "@models/license.model";
 import { faSave } from "@fortawesome/free-regular-svg-icons";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ValidationErrorMap = {
   "proposedOwner.accountId": "Please select the proposed transferee",
@@ -31,7 +31,7 @@ const ValidationErrorMap = {
 })
 export class ApplicationOwnershipTransferComponent extends FormBase implements OnInit {
   faSave = faSave;
-  faTrashAlt = faTrashAlt;
+  faTrash = faTrash;
   licence: License;
   form: FormGroup;
   licenceId: string;
@@ -89,43 +89,43 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
     this.busy = this.licenseDataService.getLicenceById(this.licenceId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((licence: License) => {
-          this.licence = licence;
-          this.form.patchValue(this.licence);
+        this.licence = licence;
+        this.form.patchValue(this.licence);
 
-          if (this.licenceHasRepresentativeContact()
-          ) { //If the licence has a representative, set it to be the licensee contact
-            const contact = {
-              name: this.licence.representativeFullName,
-              email: this.licence.representativeEmail,
-              phone: this.licence.representativePhoneNumber
-            };
-            this.form.get("licenseeContact").patchValue(contact);
-            this.dataLoaded = true;
-          } else if (this.account) { // If the account is loaded, use it for the licensee contact
-            const contact = {
-              name: (this?.account?.primarycontact?.firstname || "") + " " + (this?.account?.primarycontact?.lastname || ""),
-              email: this.account.contactEmail,
-              phone: this.account.contactPhone
-            };
-            this.form.get("licenseeContact").patchValue(contact);
-            this.dataLoaded = true;
-          } else { // Otherwise load the account and use it for the licensee representative
-            this.store.select(state => state.currentAccountState.currentAccount)
-              .pipe(filter(account => !!account))
-              .pipe(first())
-              .subscribe((account) => {
-                this.account = account;
-                const contact = {
-                  name: (this?.account?.primarycontact?.firstname || "") + " " + (this?.account?.primarycontact?.lastname || ""),
-                  email: this.account.contactEmail,
-                  phone: this.account.contactPhone
-                };
-                this.form.get("licenseeContact").patchValue(contact);
-                this.dataLoaded = true;
-              });
-          }
+        if (this.licenceHasRepresentativeContact()) {
+          // If the licence has a representative, set it to be the licensee contact
+          const contact = {
+            name: this.licence.representativeFullName,
+            email: this.licence.representativeEmail,
+            phone: this.licence.representativePhoneNumber
+          };
+          this.form.get("licenseeContact").patchValue(contact);
+          this.dataLoaded = true;
+        } else if (this.account) { // If the account is loaded, use it for the licensee contact
+          const contact = {
+            name: (this?.account?.primarycontact?.firstname || "") + " " + (this?.account?.primarycontact?.lastname || ""),
+            email: this.account.contactEmail,
+            phone: this.account.contactPhone
+          };
+          this.form.get("licenseeContact").patchValue(contact);
+          this.dataLoaded = true;
+        } else { // Otherwise load the account and use it for the licensee representative
+          this.store.select(state => state.currentAccountState.currentAccount)
+            .pipe(filter(account => !!account))
+            .pipe(first())
+            .subscribe((account) => {
+              this.account = account;
+              const contact = {
+                name: (this?.account?.primarycontact?.firstname || "") + " " + (this?.account?.primarycontact?.lastname || ""),
+                email: this.account.contactEmail,
+                phone: this.account.contactPhone
+              };
+              this.form.get("licenseeContact").patchValue(contact);
+              this.dataLoaded = true;
+            });
+        }
 
-        },
+      },
         () => {
           console.log("Error occured");
 
