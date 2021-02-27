@@ -43,6 +43,9 @@ namespace bdd_tests
             string legalOwners = "Sample legal owners";
             string businessName = "Sample business name";
 
+            string contactPhone = "2505555556";
+            string contactEmail = "contact@test.com";
+
             if (businessType == "private corporation")
             {
                 // upload the central securities register
@@ -63,26 +66,35 @@ namespace bdd_tests
 
             if (businessType == "public corporation")
             {
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
 
-
+                // upload the personal history summary forms
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
             }
 
             if (businessType == "partnership")
             {
+                // upload the partnership agreement
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
 
-
+                // upload the personal history summary forms
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
             }
 
             if (businessType == "sole proprietorship")
             {
-
-
+                // upload the personal history summary forms
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
             }
 
             if (businessType == "society")
             {
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
 
-
+                // upload the personal history summary forms
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
             }
 
             // enter the establishment name
@@ -142,7 +154,7 @@ namespace bdd_tests
             uiIsRlrsLocatedInRuralCommunityAloneYes.Click();
 
             // select 'Yes' for 'Is the proposed RLRS located in a tourist destination resort with no other RLRS?'
-            NgWebElement uiIsRlrsLocatedAtTouristDestinationAloneYes = ngDriver.FindElement(By.CssSelector("#isRlrsLocatedAtTouristDestinationAlone #mat-button-toggle-130 button"));
+            NgWebElement uiIsRlrsLocatedAtTouristDestinationAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-172-button"));
             uiIsRlrsLocatedAtTouristDestinationAloneYes.Click();
 
             // enter the resort description
@@ -150,15 +162,15 @@ namespace bdd_tests
             uirlrsResortCommunityDescription.SendKeys(resortDescription);
 
             // select 'Yes' for 'Is there year-round all-weather road access to the community?'
-            NgWebElement uiHasYearRoundAllWeatherRoadAccessYes = ngDriver.FindElement(By.CssSelector("#hasYearRoundAllWeatherRoadAccess #mat-button-toggle-133 button"));
+            NgWebElement uiHasYearRoundAllWeatherRoadAccessYes = ngDriver.FindElement(By.Id("mat-button-toggle-175-button"));
             uiHasYearRoundAllWeatherRoadAccessYes.Click();
 
             // select 'Yes' for 'Does your general store operate seasonally?'
-            NgWebElement uiDoesGeneralStoreOperateSeasonallyYes = ngDriver.FindElement(By.CssSelector("#doesGeneralStoreOperateSeasonally #mat-button-toggle-136 button"));
+            NgWebElement uiDoesGeneralStoreOperateSeasonallyYes = ngDriver.FindElement(By.Id("mat-button-toggle-178-button"));
             uiDoesGeneralStoreOperateSeasonallyYes.Click();
 
             // select 'Yes' for 'Is the proposed RLRS located at least 10 km, by all-weather road, from another RLRS, LRS, or GLS?'
-            NgWebElement uiIsRlrsAtLeast10kmFromAnotherStoreYes = ngDriver.FindElement(By.CssSelector("#isRlrsAtLeast10kmFromAnotherStore #mat-button-toggle-139 button"));
+            NgWebElement uiIsRlrsAtLeast10kmFromAnotherStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-181-button"));
             uiIsRlrsAtLeast10kmFromAnotherStoreYes.Click();
 
             // enter the other business info
@@ -166,7 +178,7 @@ namespace bdd_tests
             uiOtherBusinessesDetails.SendKeys(otherBusinesses);
 
             // select 'No' for 'Is the applicant the legal and beneficial owner of the general store?'
-            NgWebElement uiIsApplicantOwnerOfStoreYes = ngDriver.FindElement(By.CssSelector("#isApplicantOwnerOfStore #mat-button-toggle-143 button"));
+            NgWebElement uiIsApplicantOwnerOfStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-185-button"));
             uiIsApplicantOwnerOfStoreYes.Click();
 
             // enter the legal owners
@@ -174,7 +186,7 @@ namespace bdd_tests
             uiLegalAndBeneficialOwnersOfStore.SendKeys(legalOwners);
 
             // select 'Yes' for 'Is the applicant a franchisee or otherwise affiliated with another business?'
-            NgWebElement uiIsApplicantFranchiseOrAffiliatedYes = ngDriver.FindElement(By.CssSelector("#isApplicantFranchiseOrAffiliated #mat-button-toggle-145 button"));
+            NgWebElement uiIsApplicantFranchiseOrAffiliatedYes = ngDriver.FindElement(By.Id("mat-button-toggle-187-button"));
             uiIsApplicantFranchiseOrAffiliatedYes.Click();
 
             // enter the name of the franchise or affiliated business
@@ -202,8 +214,16 @@ namespace bdd_tests
             uiValidInterestCheckbox.Click();
 
             // select the zoning checkbox
-            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willhaveValidInterest']"));
+            NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willHaveValidInterest']"));
             uiZoningCheckbox.Click();
+
+            // enter the contact phone number
+            NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
+            uiContactPhone.SendKeys(contactPhone);
+
+            // enter the contact email
+            NgWebElement uiContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonEmail']"));
+            uiContactEmail.SendKeys(contactEmail);
 
             // click on the authorized to submit checkbox
             NgWebElement uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));

@@ -54,25 +54,13 @@ namespace bdd_tests
             NgWebElement uiEndDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='endDate']"));
             uiEndDate1.Click();
 
-            // click on the next button
-            NgWebElement uiOpenCalendarNext = ngDriver.FindElement(By.CssSelector(".mat-calendar .mat-calendar-next-button"));
-            JavaScriptClick(uiOpenCalendarNext);
+            SharedCalendarDate();
 
             // select start date
             NgWebElement uiStartDate1 = ngDriver.FindElement(By.CssSelector("input[formcontrolname='startDate']"));
-            uiStartDate1.Click();
+            JavaScriptClick(uiStartDate1);
 
-            try
-            {
-                NgWebElement uiStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-                uiStartDate2.Click();
-            }
-            catch
-            {
-                // retry if failed once
-                NgWebElement uiStartDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-                uiStartDate2.Click();
-            }
+            SharedCalendarDate();
 
             // enter the contact email
             NgWebElement uiContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactEmail']"));
