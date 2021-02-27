@@ -17,7 +17,7 @@ Feature: FoodPrimaryTESA
     As a logged in business user
     I want to submit a TESA application for a Food Primary licence 
 
-@foodprimary @tesa @privatecorporation
+@foodprimary @tesa @privatecorporation @release2
 Scenario: Food Primary TESA (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
