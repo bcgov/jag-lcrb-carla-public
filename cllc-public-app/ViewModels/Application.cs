@@ -582,6 +582,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool? LgNoObjection { get; set; }
 
+        public DateTimeOffset? DateApplicantSentToLG { get; set; }
+
 
         public bool ResolutionDocsUploaded { get; set; }
 
