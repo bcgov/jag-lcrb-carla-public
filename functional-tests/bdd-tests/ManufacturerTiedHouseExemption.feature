@@ -14,7 +14,7 @@ Scenario: Manufacturer Tied House Exemption (Winery)
     And I pay the licensing fee 
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
-    And I click on the Submit button
+    And I click on the secondary Submit button
     And the account is deleted
     Then I see the login page
 
@@ -30,7 +30,7 @@ Scenario: Manufacturer Tied House Exemption (Brewery)
     And I pay the licensing fee 
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
-    And I click on the Submit button
+    And I click on the secondary Submit button
     And the account is deleted
     Then I see the login page
 
@@ -46,7 +46,7 @@ Scenario: Manufacturer Tied House Exemption (Distillery)
     And I pay the licensing fee 
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
-    And I click on the Submit button
+    And I click on the secondary Submit button
     And the account is deleted
     Then I see the login page
 
@@ -62,6 +62,6 @@ Scenario: Manufacturer Tied House Exemption (Co-packer)
     And I pay the licensing fee 
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
-    And I click on the Submit button
+    And I click on the secondary Submit button
     And the account is deleted
     Then I see the login page
