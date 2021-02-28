@@ -5,7 +5,7 @@ import { ApplicationType } from "./application-type.model";
 import { TiedHouseConnection } from "./tied-house-connection.model";
 import { ServiceArea } from "./service-area.model";
 
-export class Application {
+export interface Application {
 
   previousApplication: number;
   previousApplicationDetails: string;
@@ -195,4 +195,25 @@ export class Application {
 
   termConditionId: string;
   termConditionOriginalText: string;
+  tempDateFrom: Date;
+  tempDateTo: Date;
+
+  isRlrsLocatedInRuralCommunityAlone: number;
+  isRlrsLocatedAtTouristDestinationAlone: number;
+  rlrsResortCommunityDescription: string;
+  hasYearRoundAllWeatherRoadAccess: number;
+  doesGeneralStoreOperateSeasonally: number;
+  surroundingResidentsOfRlrs: number;
+  isRlrsAtLeast10kmFromAnotherStore: number;
+  isApplicantOwnerOfStore: number;
+  legalAndBeneficialOwnersOfStore: string;
+  isApplicantFranchiseOrAffiliated: number;
+  franchiseOrAffiliatedBusiness: string;
+
+  hasSufficientRangeOfProducts: number;
+  hasOtherProducts: number;
+  hasAdditionalServices: number;
+  storeOpenDate: Date;
+  confirmLiquorSalesIsNotPrimaryBusiness: number;
+
 }

@@ -2,7 +2,7 @@
     As a logged in worker applicant
     I want to submit a cannabis worker application
 
-@workerapplication @release
+@workerapplication @release2
 Scenario: Worker Application
     Given I login with no terms
     And the account is deleted
@@ -12,7 +12,7 @@ Scenario: Worker Application
     And I complete Step 2 of the application
     And I click on the Submit & Pay button
     And I enter the payment information
-    And I return to the dashboard
-    And the dashboard has a new status
+    # And I return to the dashboard
+    # And the dashboard has a new status
     And the account is deleted
     Then I see the login page

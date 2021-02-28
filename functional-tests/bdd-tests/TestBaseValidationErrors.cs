@@ -53,22 +53,6 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Corporation Contact Telephone')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Corporation Contact Email')]")).Displayed);
                     break;
-                case " private corporation org structure":
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more key personnel ')]")).Displayed);
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more shareholders ')]")).Displayed);
-                    break;
-                case " partnership org structure":
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more shareholders ')]")).Displayed);
-                    break;
-                case " public corporation org structure":
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more key personnel ')]")).Displayed);
-                    break;
-                case " society org structure":
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have one or more  directors & officers ')]")).Displayed);
-                    break;
-                case " sole proprietorship org structure":
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'needs to have a leader ')]")).Displayed);
-                    break;
                 case " market event":
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please agree to all terms')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Please enter the contact name')]")).Displayed);

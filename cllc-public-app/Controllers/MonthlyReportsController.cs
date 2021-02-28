@@ -52,8 +52,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
+                // Sort monthly reports so that they display in the proper order (Jan -> Feb, Feb -> Mar etc)
                 var filter = $"_adoxio_licenseeid_value eq {licenceeId}";
-                monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, @orderby: new List<string> { "modifiedon desc" }).Value;
+                monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, @orderby: new List<string> { "adoxio_reportingperiodyear asc", "adoxio_reportingperiodmonth asc" }).Value;
             }
             catch (HttpOperationException)
             {
@@ -130,7 +131,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            if (string.IsNullOrEmpty(userSettings.AccountId)) {
+            if (string.IsNullOrEmpty(userSettings.AccountId))
+            {
                 return new BadRequestResult();
             }
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
@@ -194,7 +196,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _dynamicsClient.Cannabismonthlyreports.Update(item.monthlyReportId, monthlyReport);
 
                 // Update inventory reports
-                if (item.inventorySalesReports != null && item.inventorySalesReports.Count > 0) {
+                if (item.inventorySalesReports != null && item.inventorySalesReports.Count > 0)
+                {
                     foreach (InventorySalesReport invReport in item.inventorySalesReports)
                     {
                         MicrosoftDynamicsCRMadoxioCannabisinventoryreport updateReport = new MicrosoftDynamicsCRMadoxioCannabisinventoryreport

@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I specify my contact details as the approving authority")]
-        public void SpecifyContactDetails()
+        [And(@"I specify my contact details as the approving authority for (.*)")]
+        public void SpecifyContactDetails(string applicationType)
         {
             /* 
             Page Title: Provide Confirmation of Zoning
@@ -34,7 +34,7 @@ namespace bdd_tests
             string email = "test@automation.com";
 
             // enter the name of the official
-            NgWebElement uiOfficialName = ngDriver.FindElement(By.CssSelector("input[formcontrolname = 'lGNameOfOfficial']"));
+            NgWebElement uiOfficialName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGNameOfOfficial']"));
             uiOfficialName.SendKeys(nameOfOfficial);
 
             // enter the official's title
@@ -49,15 +49,37 @@ namespace bdd_tests
             NgWebElement uiOfficialEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lGContactEmail']"));
             uiOfficialEmail.SendKeys(email);
 
-            // select 'Yes' for zoning
-            //NgWebElement uiZoningYes = ngDriver.FindElement(By.CssSelector("input#mat-radio-2-input"));
-            //uiZoningYes.Click();
+            // upload the supporting reports
+            if ((applicationType == "liquor primary") || (applicationType == "relocation"))
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[14]");
 
-            // upload the supporting report
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[17]");
+            }
+            else if ((applicationType == "live theatre") || (applicationType == "T&C Change"))
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
+            }
+            else if (applicationType == "outdoor patio")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[8]");
 
-            // click on the Submit button
-            ClickOnSubmitButton2();
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+            }
+            else if (applicationType == "structural change")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[5]");
+
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[8]");
+            }
+            else if (applicationType == "TUA")
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+            }
+            else
+            {
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+            }
         }
 
 

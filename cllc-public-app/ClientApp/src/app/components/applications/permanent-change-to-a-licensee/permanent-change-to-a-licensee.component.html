@@ -274,7 +274,7 @@
           Updated Central Securities Register (shareholders) for the licensee corporation or holding company
         </h4>
         <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
           [entityId]="application.id" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
         </app-file-uploader>
@@ -289,13 +289,13 @@
             Security Screening</strong> form and required documents as described below
         </p>
 
-        <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
-        <p>Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide their
+        <h4>Shareholders (individuals) Holding Less Than 10% Interest (and Non-Voting Shareholders)</h4>
+        <p>Shareholders (individuals) holding less than 10% interest, or non-voting shareholders, in the applicant corporation must provide their
           full
           legal name and date of birth. They do not need to provide a Personal History Summary or Cannabis Associate
           Security Screening form.</p>
         <app-file-uploader *ngIf="application?.id" documentType="IndividualsWithLessThan10"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
           [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
@@ -316,14 +316,14 @@
 
           <h4>Certificate of Amalgamation</h4>
           <app-file-uploader *ngIf="application?.id" documentType="CertificateOfAmalgamation"
-            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
             [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
             [entityId]="application.id" [uploadHeader]="'TO UPLOAD CERTIFICATE OF AMALGAMATION, DRAG FILES HERE OR'">
           </app-file-uploader>
 
           <h4>Central Securities Register (shareholders) for the amalgamated company</h4>
           <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegisterForAmalgamated"
-            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
             [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
             [entityId]="application.id"
             [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'">
@@ -331,7 +331,7 @@
 
           <h4>Notice of Articles for the amalgamated company</h4>
           <app-file-uploader *ngIf="application?.id" documentType="NOAAmalgamated"
-            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
             [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedNOAAmalgamation = $event"
             [entityId]="application.id"
             [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'">
@@ -352,7 +352,7 @@
         <img src="assets/central-securities-register-example.png"
           style="width:500px; margin: 10px; border: solid #e0e0e0 1px;">
         <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
           [entityId]="application.id" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
         </app-file-uploader>
@@ -425,7 +425,7 @@
         </ul>
         <h4>Supporting Business Documentation</h4>
         <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
           [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
@@ -445,7 +445,7 @@
           legal name and date of birth. They do not need to provide a Personal History Summary or Cannabis Associate
           Security Screening form.</p>
         <app-file-uploader *ngIf="application?.id" documentType="IndividualsWithLessThan10"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
           [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
@@ -469,7 +469,7 @@
         <p *ngIf="hasLiquor"><strong>For Liquor Licensees: Directors and Officers are required to submit a Personal
             History Summary Form for liquor-related applications, except for <u>private corporations</u>.</strong></p>
         <app-file-uploader *ngIf="application?.id" documentType="NOA" fileTypes="FILE MUST BE IN PDF FORMAT."
-          [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+          [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
           (numberOfUploadedFiles)="uploadedNOA = $event" [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'">
         </app-file-uploader>
@@ -540,7 +540,7 @@
         </table>
         <h4>Copy of Certificate of name Change, Marriage Certificate, etc.</h4>
         <app-file-uploader *ngIf="application?.id" documentType="NameChangeDocument"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedNameChangeDocuments = $event"
           [entityId]="application.id" [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILES HERE OR'">
         </app-file-uploader>
@@ -595,7 +595,7 @@
 
     <!-- Partnership Business Name Change -->
     <section *ngIf="form.get('csNameChangeLicenseePartnership').value">
-      <h3 class="blue-header">Partership Business Name Change</h3>
+      <h3 class="blue-header">Partnership Business Name Change</h3>
       <div class="content-bottom">
         <p>
           To be completed when the legal name of a partnership is changed but no new partners
@@ -810,7 +810,7 @@
         <h4>Cannabis Associate Security Screening Forms
         </h4>
         <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
-          [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+          [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
           (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'">
         </app-file-uploader>
@@ -825,7 +825,7 @@
           </a>.
         </p>
         <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
           [entityId]="application.id" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
         </app-file-uploader>
@@ -850,11 +850,11 @@
         </p>
 
         <h4>Personal History Summary Documents</h4>
-        <p>Each liquor associate must provide a complete <a
+        <p>Each liquor affiliate must provide a complete <a
             href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb004_personal_history_summary.pdf"
             target="_blank">Personal History Summary Form</a>.</p>
         <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
           [entityId]="application.id" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
         </app-file-uploader>

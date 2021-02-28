@@ -47,13 +47,22 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
-            string localGovernmentSaanich = "Saanich";
-            string policeJurisdictionSaanich = "Saanich Police Department";
+            string localGovernmentParksville = "Parksville";
+            string policeJurisdictionParksville = "RCMP Oceanside";
 
             string floorAreaDescription = "Sample floor area.";
             string occupantLoad = "180";
 
-            if (bizType != "sole proprietorship")
+            if (bizType == "partnership")
+            {
+                //upload a partnership agreement
+                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
+                
+                // upload personal history form
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+            }
+
+            if (bizType == "private corporation")
             {
                 // upload a central securities register
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -63,21 +72,27 @@ namespace bdd_tests
 
                 // upload notice of articles
                 FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+
+                // upload personal history form
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
+
+                // upload shareholders < 10% interest
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
 
-            // upload personal history form
+            if (bizType == "society")
+            {
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+
+                // upload personal history form
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+            }
+
             if (bizType == "sole proprietorship")
             {
+                // upload personal history form
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
-            }
-            else {
-                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
-            }
-
-            // upload shareholders < 10% interest
-            if (bizType != "sole proprietorship")
-            {
-                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
 
             // enter the establishment name
@@ -104,27 +119,33 @@ namespace bdd_tests
             NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
             JavaScriptClick(uiIsPermittedInZoning);
 
-            // upload the letter of intent
+            if ((bizType == "partnership") || (bizType == "society"))
+            {
+                FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[8]");
+            }
+
+            if (bizType == "private corporation")
+            {
+                FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[17]");
+            }
+
             if (bizType == "sole proprietorship")
             {
                 FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[5]");
             }
-            else {
-                FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[17]");
-            }
 
-            // search for and select Saanich as the local government
+            // search for and select Parksville as the local government
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
-            uiIndigenousNation.SendKeys(localGovernmentSaanich);
+            uiIndigenousNation.SendKeys(localGovernmentParksville);
 
-            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
-            uiIndigenousNation2.Click();
+            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
+            JavaScriptClick(uiIndigenousNation2);
 
-            // search for and select Saanich as the police jurisdiction
+            // search for and select RCMP Oceanside as the police jurisdiction
             NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
-            uiPoliceJurisdiction.SendKeys(policeJurisdictionSaanich);
+            uiPoliceJurisdiction.SendKeys(policeJurisdictionParksville);
 
-            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-6 span"));
+            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
             uiPoliceJurisdiction2.Click();
 
             // enter the store email
@@ -183,31 +204,30 @@ namespace bdd_tests
             NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
             uiInteriorOption.Click();
 
-            // upload signage document
             if ((bizType == "partnership") || (bizType == "society"))
             {
-                FileUpload("signage.pdf", "(//input[@type='file'])[5]");
-            }
-            else if (bizType == "private corporation")
-            {
-                FileUpload("signage.pdf", "(//input[@type='file'])[20]");
-            }
-            else if (bizType == "sole proprietorship")
-            {
-                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
+                // upload signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[11]");
+
+                // upload floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[14]");
             }
 
-            // upload floor plan
-            if ((bizType == "partnership") || (bizType == "society"))
+            if (bizType == "private corporation")
             {
-                FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
-            }
-            else if (bizType == "private corporation")
-            {
+                // upload signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[20]");
+
+                // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
             }
-            else if (bizType == "sole proprietorship")
+
+            if (bizType == "sole proprietorship")
             {
+                // upload signage document
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
+
+                // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
             }
 
@@ -227,15 +247,22 @@ namespace bdd_tests
             NgWebElement uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
             uiOccupantLoad.SendKeys(occupantLoad);
 
+            if ((bizType == "partnership") || (bizType == "society"))
+            {
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[17]");
+            }
+
+            if (bizType == "private corporation")
+            {
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
+            }
+
             if (bizType == "sole proprietorship")
             {
                 // upload the site plan
                 FileUpload("site_plan.pdf", "(//input[@type='file'])[14]");
-            }
-            else
-            {
-                // upload the site plan
-                FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
             }
 
             // select the owner checkbox

@@ -12,6 +12,7 @@ import { ClosingInventoryValidator, SalesValidator } from "./federal-reporting-v
 import { switchMap } from "rxjs/operators";
 import { faChevronLeft, faExclamationTriangle, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { faSave } from "@fortawesome/free-regular-svg-icons";
+import { InventorySalesReport } from "@models/inventory-sales-report.model";
 
 interface FederalReportingParams {
   licenceId: string;
@@ -34,7 +35,6 @@ export class FederalReportingComponent implements OnInit {
   shownMonthlyReports: MonthlyReport[] = [];
   selectedMonthlyReportIndex = null;
   selectedLicenceIndex = null;
-  visibleInventoryReports = [];
   busy: Subscription;
   reportIsDisabled = true;
   reportIsClosed = true;
@@ -113,9 +113,8 @@ export class FederalReportingComponent implements OnInit {
     });
   }
 
-  updateStateFromParams(params) {
-    const licenceIndex =
-      (params.licenceId === null) ? 0 : this.licenses.findIndex(l => l.licenseId === params.licenceId);
+  updateStateFromParams(params: FederalReportingParams) {
+    const licenceIndex = (params.licenceId === null) ? 0 : this.licenses.findIndex(l => l.licenseId === params.licenceId);
     if (licenceIndex !== -1) {
       this.selectedLicenceIndex = licenceIndex;
     } else {
@@ -179,16 +178,19 @@ export class FederalReportingComponent implements OnInit {
   save(submit = false) {
     // main report fields
     const statusCode = submit ? this.monthlyReportStatusEnum.Submitted : this.monthlyReportStatusEnum.Draft;
-    const updateRequest = {
+    const updateRequest: MonthlyReport = {
       ...this.reportForm.value,
       inventorySalesReports: [],
       statusCode: statusCode
     };
 
     // add product fields
-    this.productForms.forEach((f) => {
-      updateRequest.inventorySalesReports.push({ ...f.value });
-    });
+    for (const f of this.productForms) {
+      let inventorySales = { ...f.value };
+      delete inventorySales.selected;  // Remove field that is only relevant to UI
+      updateRequest.inventorySalesReports.push(inventorySales);
+    }
+
     this.loadingMonthlyReports = true;
     this.busy = forkJoin(
       this.monthlyReportDataService.updateMonthlyReport(updateRequest)
@@ -223,9 +225,9 @@ export class FederalReportingComponent implements OnInit {
       return;
     }
     // Update product forms
-    this.visibleInventoryReports = [];
     this.productForms = this.shownMonthlyReports[this.selectedMonthlyReportIndex].inventorySalesReports.map(
       (report) => {
+        let selected = false;
         if ((report.openingInventory !== null && report.openingInventory !== 0) ||
           (report.domesticAdditions !== null && report.domesticAdditions !== 0) ||
           (report.returnsAdditions !== null && report.returnsAdditions !== 0) ||
@@ -244,9 +246,9 @@ export class FederalReportingComponent implements OnInit {
           (report.totalSalesToRetailerQty !== null && report.totalSalesToRetailerQty !== 0) ||
           (report.totalSalesToRetailerValue !== null && report.totalSalesToRetailerValue !== 0) ||
           (report.otherDescription !== null)) {
-          this.visibleInventoryReports.push(report.inventoryReportId);
+          selected = true;
         }
-        return this.createProductForm(report);
+        return this.createProductForm(report, selected);
       });
 
     switch (this.shownMonthlyReports[this.selectedMonthlyReportIndex].statusCode) {
@@ -287,27 +289,32 @@ export class FederalReportingComponent implements OnInit {
     });
   }
 
-  toggleProductVisibility(id: string) {
-    if (this.reportIsDisabled) {
-      return false;
+  // Shows or hides product forms when relevant checkboxes are toggled
+  toggleProductVisibility(report: FormGroup) {
+    if (this.reportIsDisabled || !report) {
+      return;
     }
-    if (this.visibleInventoryReports.indexOf(id) > -1) {
-      this.visibleInventoryReports.splice(this.visibleInventoryReports.indexOf(id), 1);
-      this.clearProductForm(id);
-    } else {
-      this.visibleInventoryReports.push(id);
+
+    // Reset form when product checkbox is unchecked
+    const selected = !!report.value.selected;
+    if (selected) {
+      this.clearProductForm(report);
     }
+
+    report.get("selected").setValue(!selected);
   }
 
   findProductForm(id: string): FormGroup {
     return this.productForms.find(f => f.value.inventoryReportId === id);
   }
 
-  clearProductForm(id: string) {
-    const index = this.productForms.findIndex(f => f.value.inventoryReportId === id);
-    this.productForms[index].reset({
-      inventoryReportId: this.productForms[index].value.inventoryReportId,
-      product: this.productForms[index].value.product,
+  clearProductForm(report: FormGroup) {
+    const { inventoryReportId, product, productDescription } = report.value as InventorySalesReport;
+    report.reset({
+      selected: false,
+      inventoryReportId: inventoryReportId,
+      product: product,
+      productDescription: productDescription,
       openingInventory: 0,
       domesticAdditions: 0,
       returnsAdditions: 0,
@@ -334,14 +341,14 @@ export class FederalReportingComponent implements OnInit {
       (this.reportForm.get(field).dirty || this.reportForm.get(field).touched);
   }
 
-  isProductSelected(id: string) {
-    return this.visibleInventoryReports.indexOf(id) > -1;
+  get isProductInventorySelected() {
+    return this.productForms.some(report => report?.value?.selected);
   }
 
   hasInvalidProductForm() {
     let invalidProduct = false;
     this.productForms.forEach((f) => {
-      if (!f.valid && this.isProductSelected(f.value.inventoryReportId)) {
+      if (!f.valid && f.value.selected) {
         invalidProduct = true;
       }
     });
@@ -349,8 +356,7 @@ export class FederalReportingComponent implements OnInit {
   }
 
   submitApplication() {
-    const completedProductForms =
-      this.productForms.filter(f => this.visibleInventoryReports.indexOf(f.value.inventoryReportId) > -1);
+    const completedProductForms = this.productForms.filter(f => f.value.selected);
     const body = completedProductForms.length > 0
       ? "Are you sure you want to submit this report?"
       : "You have not entered any inventory information. Are you sure you want to submit this report?";
@@ -384,7 +390,7 @@ export class FederalReportingComponent implements OnInit {
     return monthNames[Number(monthNumber) - 1];
   }
 
-  createProductForm(report) {
+  createProductForm(report: InventorySalesReport, selected = false) {
     const closingWeightValidators =
       [Validators.min(0), Validators.max(1000), Validators.pattern("^[0-9]+(\.[0-9]{1,3})?$")];
     if (report.product !== "Seeds" && report.product !== "Vegetative Cannabis") {
@@ -395,6 +401,7 @@ export class FederalReportingComponent implements OnInit {
       totalSeedsValidators.push(Validators.required);
     }
     return this.fb.group({
+      selected: [selected, []],
       inventoryReportId: [report.inventoryReportId, []],
       product: [report.product, []],
       productDescription: [report.productDescription, []],

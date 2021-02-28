@@ -54,6 +54,20 @@ export class CapacityTableRowComponent extends BaseControlValueAccessor<ServiceA
       capacity: ["", [Validators.required]]
     });
 
+    // These are mutually exclusive checkboxes. Selecting one will un-select the other.
+    const indoor = this.rowGroup.get("isIndoor");
+    const patio = this.rowGroup.get("isPatio");
+    indoor.valueChanges.subscribe(val => {
+      if (!!val) {
+        patio.setValue(false);
+      }
+    });
+    patio.valueChanges.subscribe(val => {
+      if (!!val) {
+        indoor.setValue(false);
+      }
+    });
+
     this.rowGroup.valueChanges.subscribe(val => {
       this.onChange(val);
       this.onRowChange(val);

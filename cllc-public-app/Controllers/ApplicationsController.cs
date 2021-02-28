@@ -70,6 +70,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var endorsements = new List<string>();
                     //get endorsement application types
                     if (dynamicsApplication.AdoxioLicenceType != null &&
+                        dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsdefault == true && // Application for a licence
                         dynamicsApplication.AdoxioPaymentrecieved == true)
                     {
                         var expand = new List<string> { "adoxio_licencetypes_applicationtypes" };
@@ -310,9 +311,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
                         results.Add(viewModel);
                     }
-                    
-                }
-                
+                }                
             }
             catch (HttpOperationException e)
             {
@@ -338,10 +337,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current/resolved-lg-applications")]
         public IActionResult GetResolvedLGApplications([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
-            var results = new List<Application>();
+            var results = new PagingResult<Application>(){
+                Value = new List<Application>()
+            };
+
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
             try
             {
                 // get user account
@@ -352,7 +353,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
                     filter += $" and adoxio_lgapprovaldecision eq {(int)LGDecision.Approved}";
-    
 
                     var expand = new List<string>
                     {
@@ -365,12 +365,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         "adoxio_LicenceFeeInvoice",
                         "adoxio_Invoice"
                     };
+
                     var customHeaders = new Dictionary<string, List<string>>();
                     var preferHeader = new List<string>();
                     preferHeader.Add($"odata.maxpagesize={pageSize}");
 
                     customHeaders.Add("Prefer", preferHeader);
-                    var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders).GetAwaiter().GetResult();
+                    var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
 
                     while (pageIndex > 0)
                     {
@@ -381,15 +382,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     var applications = applicationQuery.Body.Value;
+                    results.Count = Int32.Parse(applicationQuery.Body.Count);
 
                     foreach (var dynamicsApplication in applications)
                     {
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
-                        results.Add(viewModel);
+                        results.Value.Add(viewModel);
                     }
-                    
                 }
-                
             }
             catch (HttpOperationException e)
             {
@@ -453,7 +453,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 result.Application =
                     await application.ToViewModel(_dynamicsClient, _cache, _logger).ConfigureAwait(true);
-
 
                 result.ChangeLogs = _dynamicsClient.GetApplicationChangeLogs(result.Application.Id, _logger);
             }
@@ -931,17 +930,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (!string.IsNullOrEmpty(item.LicenseType))
                 {
                     var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.LicenseType);
-                    adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes",
-                        adoxioLicencetype.AdoxioLicencetypeid);
+                    if (adoxioLicencetype != null)
+                    {
+                        adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes",
+                            adoxioLicencetype.AdoxioLicencetypeid);
+                    }
+
                 }
 
                 // set licence subtype
                 if (!string.IsNullOrEmpty(item.LicenceSubCategory))
                 {
                     var adoxioSubLicencetype = _dynamicsClient.GetAdoxioSubLicencetypeByName(item.LicenseType);
-                    adoxioApplication.AdoxioLicenceSubCategoryODataBind =
-                        _dynamicsClient.GetEntityURI("adoxio_licencesubcategories",
-                            adoxioSubLicencetype.AdoxioLicencesubcategoryid);
+                    if (adoxioSubLicencetype != null)
+                    {
+                        adoxioApplication.AdoxioLicenceSubCategoryODataBind =
+                            _dynamicsClient.GetEntityURI("adoxio_licencesubcategories",
+                                adoxioSubLicencetype.AdoxioLicencesubcategoryid);
+                    }
                 }
 
 
@@ -1459,14 +1465,5 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _dynamicsClient.Serviceareas.Create(serviceArea);
             }
         }
-    }
-
-    public class PermanentChangesPageData
-    {
-        public List<ApplicationLicenseSummary> Licences { get; set; }
-        public Application Application { get; set; }
-
-        public PaymentResult Primary { get; set; }
-        public PaymentResult Secondary { get; set; }
     }
 }
