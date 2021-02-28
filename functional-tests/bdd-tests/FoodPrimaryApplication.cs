@@ -86,6 +86,34 @@ Scenario: Food Primary Application (Sole Proprietorship)
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
+
+@foodprimaryapp @coop
+Scenario: Food Primary Application (Co-op)
+    Given I am logged in to the dashboard as a co-op
+    And I click on the Start Application button for Food Primary
+    And I review the account profile for a co-op
+    And I complete the Food Primary application for a co-op
+    And I click on the Submit button
+    And I enter the payment information
+    And I confirm the payment receipt for a Food Primary application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
+    And the account is deleted
+    Then I see the login page
+
+@foodprimaryapp @militarymess
+Scenario: Food Primary Application (Military Mess)
+    Given I am logged in to the dashboard as a military mess
+    And I click on the Start Application button for Food Primary
+    And I review the account profile for a military mess
+    And I complete the Food Primary application for a military mess
+    And I click on the Submit button
+    And I enter the payment information
+    And I confirm the payment receipt for a Food Primary application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
+    And the account is deleted
+    Then I see the login page
 */
 
 namespace bdd_tests
