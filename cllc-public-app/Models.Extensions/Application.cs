@@ -9,11 +9,12 @@ using Microsoft.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
-    enum IsOnINLandOptionValue
+    enum DefaultYesNoLookup
     {
         Yes = 845280000
     }
@@ -23,6 +24,17 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class ApplicationExtensions
     {
+
+        public static bool? ConvertYesNoLookupToBool(int? inputValue)
+        {
+            bool? result = null;
+            if (inputValue != null)
+            {
+                result = inputValue == (int?) DefaultYesNoLookup.Yes;
+            }
+            return result;
+        }
+
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.Application from)
         {
             to.AdoxioName = from.Name;
@@ -67,6 +79,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioRenewaltiedhousefederalinterest = (int?)from.TiedhouseFederalInterest;
             to.AdoxioDescription1 = from.Description1;
             to.AdoxioDescription2 = from.Description2;
+            to.AdoxioTempdatefrom = from.TempDateFrom;
+            to.AdoxioTempdateto = from.TempDateTo;
 
             //store opening
             to.AdoxioIsreadyworkers = from.IsReadyWorkers;
@@ -172,30 +186,32 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             if (from.IsOnINLand == true)
             {
-                to.AdoxioIsoninland = (int)IsOnINLandOptionValue.Yes;
+                to.AdoxioIsoninland = (int)DefaultYesNoLookup.Yes;
             }
             else
             {
                 to.AdoxioIsoninland = null;
             }
 
+            // RLRS - Eligibility fields
 
-            // comment out this next line as it is causing all application updates to fail (moved to controller)
-            //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
-
-            //var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeByName(from.licenseType).Result;
-            //to.AdoxioLicenceType = adoxio_licencetype;
-            //to._adoxioLicencetypeValue = adoxio_licencetype.AdoxioLicencetypeid;
-
-            //if (!String.IsNullOrEmpty(from.applicationStatus))
-            //{
-            //    to.Statuscode = int.Parse(from.applicationStatus);
-            //}
-            //else
-            //{
-            //    to.Statecode = null;
-            //}
-        }
+            to.AdoxioIsrlrslocatedinruralcommunityalone = from.IsRlrsLocatedInRuralCommunityAlone;
+            to.AdoxioIsrlrslocatedattouristdestinationalone = from.IsRlrsLocatedAtTouristDestinationAlone;
+            to.AdoxioDescriberlrsresortcommunity = from.RlrsResortCommunityDescription;
+            to.AdoxioHasyearroundallweatherroadaccess = from.HasYearRoundAllWeatherRoadAccess;
+            to.AdoxioDoesgeneralstoreoperateseasonally = from.DoesGeneralStoreOperateSeasonally;
+            to.AdoxioSurroundingresidentsofrlrs = from.SurroundingResidentsOfRlrs;
+            to.AdoxioIsrlrsatleast10kmfromanotherstore = from.IsRlrsAtLeast10kmFromAnotherStore;
+            to.AdoxioIsapplicantownerofstore = from.IsApplicantOwnerOfStore;
+            to.AdoxioLegalandbeneficialownersofstore = from.LegalAndBeneficialOwnersOfStore;
+            to.AdoxioIsapplicantfranchiseoraffiliated = from.IsApplicantFranchiseOrAffiliated;
+            to.AdoxioFranchiseoraffiliatedbusiness = from.FranchiseOrAffiliatedBusiness;
+            to.AdoxioHassufficientrangeofproducts = from.HasSufficientRangeOfProducts;
+            to.AdoxioHasotherproducts = from.HasOtherProducts;
+            to.AdoxioHasadditionalservices = from.HasAdditionalServices;
+            to.AdoxioStoreopendate = from.StoreOpenDate;
+            to.AdoxioConfirmliquorsalesisnotprimarybusiness = from.ConfirmLiquorSalesIsNotPrimaryBusiness;
+    }
 
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
@@ -231,7 +247,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // catering fields
             to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
-
+            
         }
 
         public static void CopyValuesForCovidApplication(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
@@ -403,6 +419,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 PaymentReceivedDate = dynamicsApplication.AdoxioPaymentreceiveddate,
                 Description1 = dynamicsApplication.AdoxioDescription1,
                 Description2 = dynamicsApplication.AdoxioDescription2,
+                TempDateFrom = dynamicsApplication.AdoxioTempdatefrom,
+                TempDateTo = dynamicsApplication.AdoxioTempdateto,
 
                 //get contact details
                 ContactPersonFirstName = dynamicsApplication.AdoxioContactpersonfirstname,
@@ -505,9 +523,29 @@ namespace Gov.Lclb.Cllb.Public.Models
                 CsAdditionalReceiverOrExecutor = dynamicsApplication.AdoxioCsadditionofreceiverorexecutor,
                 PrimaryInvoicePaid = dynamicsApplication.AdoxioPrimaryapplicationinvoicepaid == 1,
                 SecondaryInvoicePaid = dynamicsApplication.AdoxioSecondaryapplicationinvoicepaid == 1,
-                IsOnINLand = (dynamicsApplication.AdoxioIsoninland == (int)IsOnINLandOptionValue.Yes),
+                IsOnINLand = ConvertYesNoLookupToBool(dynamicsApplication.AdoxioIsoninland),
 
-                LocatedAboveOther = dynamicsApplication.AdoxioLocatedaboveother
+                LocatedAboveOther = dynamicsApplication.AdoxioLocatedaboveother,
+
+                // Eligibility fields
+
+                IsRlrsLocatedInRuralCommunityAlone = dynamicsApplication.AdoxioIsrlrslocatedinruralcommunityalone,
+                IsRlrsLocatedAtTouristDestinationAlone = dynamicsApplication.AdoxioIsrlrslocatedattouristdestinationalone,
+                RlrsResortCommunityDescription = dynamicsApplication.AdoxioDescriberlrsresortcommunity,
+                HasYearRoundAllWeatherRoadAccess = dynamicsApplication.AdoxioHasyearroundallweatherroadaccess,
+                DoesGeneralStoreOperateSeasonally = dynamicsApplication.AdoxioDoesgeneralstoreoperateseasonally,
+                SurroundingResidentsOfRlrs = dynamicsApplication.AdoxioSurroundingresidentsofrlrs,
+                IsRlrsAtLeast10kmFromAnotherStore = dynamicsApplication.AdoxioIsrlrsatleast10kmfromanotherstore,
+                IsApplicantOwnerOfStore = dynamicsApplication.AdoxioIsapplicantownerofstore,
+                LegalAndBeneficialOwnersOfStore = dynamicsApplication.AdoxioLegalandbeneficialownersofstore,
+                IsApplicantFranchiseOrAffiliated = dynamicsApplication.AdoxioIsapplicantfranchiseoraffiliated,
+                FranchiseOrAffiliatedBusiness = dynamicsApplication.AdoxioFranchiseoraffiliatedbusiness,
+
+                HasSufficientRangeOfProducts = dynamicsApplication.AdoxioHassufficientrangeofproducts,
+                HasOtherProducts = dynamicsApplication.AdoxioHasotherproducts,
+                HasAdditionalServices = dynamicsApplication.AdoxioHasadditionalservices,
+                StoreOpenDate = dynamicsApplication.AdoxioStoreopendate,
+                ConfirmLiquorSalesIsNotPrimaryBusiness = dynamicsApplication.AdoxioConfirmliquorsalesisnotprimarybusiness
             };
 
 

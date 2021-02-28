@@ -48,7 +48,76 @@
     <None Update="CannabisMarketingRelease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="FoodPrimaryTESA.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryAllowFamilyFoodService.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryAllowMinors.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryAllAgesLiquorFree.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LPrimaryClubApplication.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryLiveTheatreRequest.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryTemporarySuspensionRequest.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryTemporaryExtension.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryChangeHours.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryRelocation.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryStructuralChangeCapacityIncrease.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryStructuralChangeNoCapacity.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryRequestTCChange.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryNewOutdoorPatio.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryTempUseAreaEndorsementApproved.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryTempUseAreaEndorsement.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryCateringEndorsement.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryThirdPartyOperator.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryRelease.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryTransferLicence.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="LiquorPrimaryDownloadLicence.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryTESA.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ManufacturerTESA.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="RuralLRS.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="UBrewUVinLicensingRenewal.feature">
@@ -126,7 +195,7 @@
     <None Update="CateringApplicationDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ChangeHoursLiquorService.feature">
+    <None Update="ManufacturerChangeHoursLiquorService.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationLicensingRenewalDenied.feature">
@@ -153,7 +222,7 @@
     <None Update="OnSiteEndorsementRenewal.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralAgencyStoreDownloadLicence.feature">
+    <None Update="_archived_RuralAgencyStoreDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="UBrewUVinRelease.feature">
@@ -228,9 +297,6 @@
     <None Update="ValidationCOVID.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ValidationReviewOrgStructure.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="ReviewAccountProfileValidation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -276,9 +342,6 @@
     <None Update="CateringApplicationLicenseeRepresentative.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="_ArchivedOrgStructureScenarios.feature">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="CombinedCateringCRSApplications.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -306,7 +369,7 @@
     <None Update="COVIDTemporaryExtension.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralAgencyStore.feature">
+    <None Update="_archived_RuralAgencyStore.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringApplicationEventAuthorization.feature">

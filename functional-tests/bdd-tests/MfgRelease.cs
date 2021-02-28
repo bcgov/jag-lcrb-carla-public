@@ -17,8 +17,8 @@ Feature: MfgRelease
     As a logged in business user
     I want to confirm that the Manufacturer functionality is ready for release
 
-@manufacturer @winery @release 
-Scenario: DEV Manufacturer Release #1 (Winery/Private Corporation)
+@manufacturer @winery @release1 
+Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -42,8 +42,8 @@ Scenario: DEV Manufacturer Release #1 (Winery/Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @winery @release 
-Scenario: DEV Manufacturer Release #2 (Winery/Private Corporation)
+@manufacturer @winery @release1 
+Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -60,18 +60,19 @@ Scenario: DEV Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
     And I click on the Licences tab
-    And I complete the change hours application for a lounge area within service hours
-    And I click on the Submit button
-    And I enter the payment information
-    And I click on the Licences tab
-    # And I click on the link for Manage Off-Site Storage
-    # And I complete the offsite storage application
-    # And I click on the secondary Submit button
+    And I click on the link for Manage Off-Site Storage
+    And I complete the offsite storage application
+    And I click on the secondary Submit button
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
     And I request a market event for one date only
     And I click on the secondary Submit button
+    And I click on the Licences tab
+    And I click on the link for Temporary Expanded Service Areas Application
+    And I click on the Continue to Application button
+    And I complete the TESA application
+    And I click on the Submit button
     And I click on the Licences tab
     And I request a third party operator
     And I request a transfer of ownership

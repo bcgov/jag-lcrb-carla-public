@@ -27,7 +27,9 @@ namespace bdd_tests
             Page Title: Please Review the Account Profile
             */
 
+            // used for OneStop testing
             // string bizNumber = "977517895";
+            // used for release testing
             string bizNumber = "111111111";
             string incorporationNumber = "BC1234567";
 

@@ -99,9 +99,28 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_locatedaboveother", new FieldMapping("locatedAboveOther", false)},
 
                 {"adoxio_description2", new FieldMapping("description2", false)},
-                {"adoxio_description3", new FieldMapping("description3", false)}
-            
+                {"adoxio_description3", new FieldMapping("description3", false)},
 
+                //Temporary changes dates
+                {"adoxio_tempdatefrom", new FieldMapping("tempDateFrom", true)},
+                {"adoxio_tempdateto", new FieldMapping("tempDateTo", true)},
+                // eligibility fields
+                {"adoxio_isrlrslocatedinruralcommunityalone", new FieldMapping("isRlrsLocatedInRuralCommunityAlone", true)},
+                {"adoxio_isrlrslocatedattouristdestinationalone", new FieldMapping("isRlrsLocatedAtTouristDestinationAlone", false)},
+                {"adoxio_describerlrsresortcommunity", new FieldMapping("rlrsResortCommunityDescription", false)},
+                {"adoxio_hasyearroundallweatherroadaccess", new FieldMapping("hasYearRoundAllWeatherRoadAccess", true)},
+                {"adoxio_doesgeneralstoreoperateseasonally", new FieldMapping("doesGeneralStoreOperateSeasonally", true)},
+                {"adoxio_surroundingresidentsofrlrs", new FieldMapping("surroundingResidentsOfRlrs", true)},
+                {"adoxio_isrlrsatleast10kmfromanotherstore", new FieldMapping("isRlrsAtLeast10kmFromAnotherStore", true)},
+                {"adoxio_isapplicantownerofstore", new FieldMapping("isApplicantOwnerOfStore", true)},
+                {"adoxio_legalandbeneficialownersofstore", new FieldMapping("legalAndBeneficialOwnersOfStore", false)},
+                {"adoxio_isapplicantfranchiseoraffiliated", new FieldMapping("isApplicantFranchiseOrAffiliated", true)},
+                {"adoxio_franchiseoraffiliatedbusiness", new FieldMapping("franchiseOrAffiliatedBusiness", false)},
+                {"adoxio_hassufficientrangeofproducts", new FieldMapping("hasSufficientRangeOfProducts", true)},
+                {"adoxio_hasotherproducts", new FieldMapping("hasOtherProducts", true)},
+                {"adoxio_hasadditionalservices", new FieldMapping("hasAdditionalServices", true)},
+                {"adoxio_storeopendate", new FieldMapping("storeOpenDate", true)},
+                {"adoxio_confirmliquorsalesisnotprimarybusiness", new FieldMapping("confirmLiquorSalesIsNotPrimaryBusiness", true)}
 
         };
         }

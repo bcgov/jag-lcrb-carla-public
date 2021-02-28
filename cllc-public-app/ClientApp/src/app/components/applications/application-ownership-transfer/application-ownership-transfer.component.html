@@ -142,7 +142,7 @@
 <section class="padded-section content-bottom">
   <app-field [required]="true" [valid]="isValidOrNotTouched('transferConsent')"
              errorMessage="Please consent to the transfer" [showChevrons]="false">
-    <mat-checkbox formControlName="transferConsent">
+    <mat-checkbox class="text-wrap" formControlName="transferConsent">
       <!-- for cannabis retail stores -->
       <span class="ml-2" *ngIf="licence?.licenseType === 'Cannabis Retail Store'">
         I agree to

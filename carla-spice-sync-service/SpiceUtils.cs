@@ -13,40 +13,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public class SpiceUtils
     {
-        public ILogger _logger { get; }
 
         private IConfiguration Configuration { get; }
         private IDynamicsClient _dynamicsClient;
         public ISpiceClient SpiceClient;
 
-        public SpiceUtils(IConfiguration Configuration, ILoggerFactory loggerFactory, params DelegatingHandler[] handlers)
+        public SpiceUtils(IConfiguration configuration)
         {
-            this.Configuration = Configuration;
-            _logger = loggerFactory.CreateLogger(typeof(SpiceUtils));
-            _dynamicsClient = DynamicsSetupUtil.SetupDynamics(Configuration);
-            SpiceClient = SetupSpiceClient(Configuration, handlers);
-        }
-
-        public SpiceClient SetupSpiceClient(IConfiguration Configuration, params DelegatingHandler[] handlers)
-        {
-            string spiceURI = Configuration["SPICE_URI"];
-            string token = Configuration["SPICE_JWT_TOKEN"];
-
-            // create JWT credentials
-            TokenCredentials credentials = new TokenCredentials(token);
-
-            return new SpiceClient(new Uri(spiceURI), credentials, handlers);
+            this.Configuration = configuration;
+            _dynamicsClient = DynamicsSetupUtil.SetupDynamics(configuration);
+            SpiceClient = new SpiceClient(new HttpClient(), configuration);
         }
 
         public void ReceiveWorkerImportJob(PerformContext hangfireContext, List<CompletedWorkerScreening> responses)
         {
             hangfireContext.WriteLine("Starting SPICE Import Job for Worker Screening.");
-            _logger.LogError("Starting SPICE Import Job for Worker Screening.");
+            Log.Logger.Error("Starting SPICE Import Job for Worker Screening.");
 
             foreach (var workerResponse in responses)
             {
@@ -98,7 +86,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     }
                     else
                     {
-                        _logger.LogError($"Worker not found for spd job id: {workerResponse.RecordIdentifier}");
+                        Log.Logger.Error($"Worker not found for spd job id: {workerResponse.RecordIdentifier}");
                         hangfireContext.WriteLine($"Worker not found for spd job id: {workerResponse.RecordIdentifier}");
                     }
                 }
@@ -110,16 +98,13 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     hangfireContext.WriteLine("Response:");
                     hangfireContext.WriteLine(odee.Response.Content);
 
-                    _logger.LogError("Error updating worker personal history");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    Log.Logger.Error(odee, "Error updating worker personal history");
+
                 }
             }
 
             hangfireContext.WriteLine("Finished SPICE Import Job for Worker Screening.");
-            _logger.LogError("Finished SPICE Import Job for Worker Screening.");
+            Log.Logger.Error("Finished SPICE Import Job for Worker Screening.");
         }
 
         /// <summary>
@@ -129,7 +114,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         public async Task ReceiveApplicationImportJob(PerformContext hangfireContext, List<CompletedApplicationScreening> responses)
         {
             hangfireContext.WriteLine("Starting SPICE Import Job for Application Screening.");
-            _logger.LogError("Starting SPICE Import Job for Application Screening..");
+            Log.Logger.Error("Starting SPICE Import Job for Application Screening..");
 
             foreach (var applicationResponse in responses)
             {
@@ -145,7 +130,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         continue;
                     }
                     var associatesValidated = UpdateConsentExpiry(screeningRequest.Associates);
-                    _logger.LogInformation($"Total associates consent expiry updated: {associatesValidated}");
+                    Log.Logger.Information($"Total associates consent expiry updated: {associatesValidated}");
 
                     // update the date of security status received and the status
                     MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
@@ -163,7 +148,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         else
                         {
                             hangfireContext.WriteLine($"Error updating application - received an invalid status of {applicationResponse.Result}");
-                            _logger.LogError($"Error updating application - received an invalid status of {applicationResponse.Result}");
+                            Log.Logger.Error($"Error updating application - received an invalid status of {applicationResponse.Result}");
                         }
                     }
                     catch (HttpOperationException odee)
@@ -174,17 +159,13 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         hangfireContext.WriteLine("Response:");
                         hangfireContext.WriteLine(odee.Response.Content);
 
-                        _logger.LogError("Error updating application");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        Log.Logger.Error(odee, "Error updating application");
                     }
                 }
             }
 
             hangfireContext.WriteLine("Finished SPICE Import Job for Application Screening.");
-            _logger.LogError("Finished SPICE Import Job for Application Screening..");
+            Log.Logger.Error("Finished SPICE Import Job for Application Screening..");
         }
 
         /// <summary>
@@ -194,7 +175,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         public async Task ReceiveApplicationImportJobV2(PerformContext hangfireContext, List<CompletedApplicationScreening> responses)
         {
             hangfireContext.WriteLine("Starting SPICE Import Job for Application Screening.");
-            _logger.LogError("Starting SPICE Import Job for Application Screening..");
+            Log.Logger.Error("Starting SPICE Import Job for Application Screening..");
 
             foreach (var applicationResponse in responses)
             {
@@ -210,7 +191,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         continue;
                     }
                     var associatesValidated = UpdateConsentExpiry(screeningRequest.Associates);
-                    _logger.LogInformation($"Total associates consent expiry updated: {associatesValidated}");
+                    Log.Logger.Information($"Total associates consent expiry updated: {associatesValidated}");
 
                     // update the date of security status received and the status
                     MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
@@ -228,7 +209,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         else
                         {
                             hangfireContext.WriteLine($"Error updating application - received an invalid status of {applicationResponse.Result}");
-                            _logger.LogError($"Error updating application - received an invalid status of {applicationResponse.Result}");
+                            Log.Logger.Error($"Error updating application - received an invalid status of {applicationResponse.Result}");
                         }
                     }
                     catch (HttpOperationException odee)
@@ -239,17 +220,13 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         hangfireContext.WriteLine("Response:");
                         hangfireContext.WriteLine(odee.Response.Content);
 
-                        _logger.LogError("Error updating application");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        Log.Logger.Error(odee, "Error updating application");
                     }
                 }
             }
 
             hangfireContext.WriteLine("Finished SPICE Import Job for Application Screening.");
-            _logger.LogError("Finished SPICE Import Job for Application Screening..");
+            Log.Logger.Error("Finished SPICE Import Job for Application Screening..");
         }
 
         /// <summary>
@@ -286,7 +263,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
             catch
             {
-                _logger.LogError($"Unable to find worker {workerId.ToString()}");
+                Log.Logger.Error($"Unable to find worker {workerId.ToString()}");
                 return null;
             }
         }
@@ -298,7 +275,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// <param name="applicationRequest">Application request.</param>
         public bool SendApplicationScreeningRequest(Guid applicationId, IncompleteApplicationScreening applicationRequest)
         {
-            var consentValidated = Validation.ValidateAssociateConsent(_dynamicsClient, (List<LegalEntity>)applicationRequest.Associates, _logger);
+            bool result = false;
+            var consentValidated = Validation.ValidateAssociateConsent(_dynamicsClient, (List<LegalEntity>)applicationRequest.Associates);
             if (consentValidated)
             {
                 List<IncompleteApplicationScreening> payload = new List<IncompleteApplicationScreening>
@@ -306,8 +284,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     applicationRequest
                 };
 
-                _logger.LogInformation($"Sending Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
-                _logger.LogInformation($"Application has {applicationRequest.Associates.Count} associates");
+                Log.Logger.Information($"Sending Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+                Log.Logger.Information($"Application has {applicationRequest.Associates.Count} associates");
 
                 try
                 {
@@ -315,34 +293,54 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     {
                         AdoxioChecklistsecurityclearancestatus = (int?)ApplicationSecurityStatus.Sending
                     };
-                    _dynamicsClient.Applications.Update(applicationId.ToString(), update);
+                    try
+                    {
+                        _dynamicsClient.Applications.Update(applicationId.ToString(), update);
+                    }
+                    catch (HttpOperationException odee)
+                    {
+                        Log.Logger.Error(odee, "Error setting sending status for application");
+                    }
 
-                    var result = SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload).GetAwaiter().GetResult();
+                    var receiveApplicationScreeningsResult = SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload).GetAwaiter().GetResult();
 
-                    _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
-                    _logger.LogInformation($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
 
-                    if (result.Response.StatusCode.ToString() == "OK")
+                    if (receiveApplicationScreeningsResult.Response.StatusCode.ToString() == "OK")
                     {
                         update = new MicrosoftDynamicsCRMadoxioApplication()
                         {
                             AdoxioSecurityclearancegenerateddate = DateTimeOffset.UtcNow,
                             AdoxioChecklistsecurityclearancestatus = (int?)ApplicationSecurityStatus.Sent
                         };
-                        _dynamicsClient.Applications.Update(applicationId.ToString(), update);
-                        return true;
+                        try
+                        {
+                            _dynamicsClient.Applications.Update(applicationId.ToString(), update);
+                            result = true;
+                            Log.Logger.Information($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+                        }
+                        catch (HttpOperationException odee)
+                        {
+                            Log.Logger.Error(odee, "Error updating application");
+                        }
+
                     }
-                    var msg = result.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                    throw new SystemException(msg);
+                    else
+                    {
+                        var msg = receiveApplicationScreeningsResult.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                        Log.Logger.Error(msg);
+                    }
+
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e.Message);
-                    return false;
+                    Log.Logger.Error(e, "Unexpected error in Carla Spice Sync");
+                    result = false;
                 }
+
+                return result;
             }
 
-            _logger.LogError("Consent not valid for all associates.");
+            Log.Logger.Error("Consent not valid for all associates.");
             _dynamicsClient.Applications.Update(applicationId.ToString(), new MicrosoftDynamicsCRMadoxioApplication()
             {
                 AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
@@ -363,12 +361,12 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 workerScreeningRequest
             };
 
-            _logger.LogInformation($"Sending Worker Screening Request");
+            Log.Logger.Information($"Sending Worker Screening Request");
 
             var result = SpiceClient.ReceiveWorkerScreeningsWithHttpMessages(payload);
 
-            _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
-            _logger.LogInformation($"Done Send Worker Screening Request");
+            Log.Logger.Information($"Response code was: {result.Response.StatusCode.ToString()}");
+            Log.Logger.Information($"Done Send Worker Screening Request");
 
             return result.Response.StatusCode.ToString() == "OK";
         }
@@ -457,7 +455,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
             }
 
-            _logger.LogInformation("Finished building Model");
+            Log.Logger.Information("Finished building Model");
             return request;
         }
 
@@ -659,7 +657,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         }
                         catch (ArgumentNullException e)
                         {
-                            _logger.LogError(e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
+                            Log.Logger.Error(e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
                         }
                     }
                 }
@@ -672,7 +670,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
                 catch (System.NullReferenceException e)
                 {
-                    _logger.LogError(e, $"NullReferenceException calling CreateAssociatesForAccount for application id: {application.AdoxioApplicationid}");
+                    Log.Logger.Error(e, $"NullReferenceException calling CreateAssociatesForAccount for application id: {application.AdoxioApplicationid}");
                 }
 
                 /* remove duplicate associates */
@@ -693,11 +691,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
             catch (HttpOperationException odee)
             {
-                _logger.LogError("Error creating application screening request");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                Log.Logger.Error(odee, "Error creating application screening request");
                 return null;
             }
         }
@@ -880,7 +874,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 string keypersonnelfilter = $"(_adoxio_application_value eq {application.AdoxioApplicationid} and adoxio_connectiontype eq {(int)ConnectionType.KeyPersonnel} and adoxio_isindividual eq 1)";
                 string deemedassociatefilter = $"(_adoxio_application_value eq {application.AdoxioApplicationid} and adoxio_deemed eq true and adoxio_isindividual eq 1)";
                 string[] expand = { "adoxio_ChildProfileName_contact", "adoxio_ChildProfileName_account", "adoxio_ParentAccount" };
-                var associates = _dynamicsClient.Leconnections.Get(filter: $"{keypersonnelfilter} or {deemedassociatefilter}", expand: expand).Value;
+                // Select ACTIVE le-connections that match the key personnel or deemed associate filter
+                var associates = _dynamicsClient.Leconnections.Get(filter: $"statecode eq 0 and ({keypersonnelfilter} or {deemedassociatefilter})", expand: expand).Value;
                 if (associates != null)
                 {
                     foreach (var leConnection in associates)
@@ -901,7 +896,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         }
                         catch (ArgumentNullException e)
                         {
-                            _logger.LogError(e, $"Attempted to create null associate: {leConnection.AdoxioLeconnectionid}");
+                            Log.Logger.Error(e, $"Attempted to create null associate: {leConnection.AdoxioLeconnectionid}");
                         }
                     }
                 }
@@ -914,7 +909,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
                 catch (System.NullReferenceException e)
                 {
-                    _logger.LogError(e, $"NullReferenceException calling CreateAssociatesForAccountV2 for application id: {application.AdoxioApplicationid}");
+                    Log.Logger.Error(e, $"NullReferenceException calling CreateAssociatesForAccountV2 for application id: {application.AdoxioApplicationid}");
                 }
 
                 /* remove duplicate associates */
@@ -935,11 +930,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
             catch (HttpOperationException odee)
             {
-                _logger.LogError("Error creating application screening request");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                Log.Logger.Error(odee, "Error creating application screening request");
                 return null;
             }
         }
@@ -960,7 +951,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 if (string.IsNullOrEmpty(accountId))
                 {
-                    _logger.LogError("CreateAssociatesForAccount received a null accountId");
+                    Log.Logger.Error("CreateAssociatesForAccount received a null accountId");
                     return newAssociates;
                 }
                 string entityFilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
@@ -987,7 +978,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         }
                         catch (ArgumentNullException e)
                         {
-                            _logger.LogError(e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
+                            Log.Logger.Error(e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
                         }
                     }
                 }
@@ -995,7 +986,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
             catch (System.NullReferenceException e)
             {
-                _logger.LogError(e, $"NullReferenceException in CreateAssociatesForAccount for accountId: {accountId}");
+                Log.Logger.Error(e, $"NullReferenceException in CreateAssociatesForAccount for accountId: {accountId}");
                 throw e;
             }
         }
@@ -1016,7 +1007,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 if (string.IsNullOrEmpty(accountId))
                 {
-                    _logger.LogError("CreateAssociatesForAccountV2 received a null accountId");
+                    Log.Logger.Error("CreateAssociatesForAccountV2 received a null accountId");
                     return newAssociates;
                 }
                 string entityFilter = $"_adoxio_parentaccount_value eq {accountId} and _adoxio_childprofilename_value ne {accountId}";
@@ -1043,7 +1034,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         }
                         catch (ArgumentNullException e)
                         {
-                            _logger.LogError(e, $"Attempted to create null associate: {leConnection.AdoxioLeconnectionid}");
+                            Log.Logger.Error(e, $"Attempted to create null associate: {leConnection.AdoxioLeconnectionid}");
                         }
                     }
                 }
@@ -1051,7 +1042,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
             catch (System.NullReferenceException e)
             {
-                _logger.LogError(e, $"NullReferenceException in CreateAssociatesForAccountV2 for accountId: {accountId}");
+                Log.Logger.Error(e, $"NullReferenceException in CreateAssociatesForAccountV2 for accountId: {accountId}");
                 throw e;
             }
         }
@@ -1161,7 +1152,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
                 else
                 {
-                    _logger.LogError("Failed to find a shareholder account found");
+                    Log.Logger.Error("Failed to find a shareholder account found");
                     associate.Account = new Interfaces.Spice.Models.Account();
                 }
                 associate.IsIndividual = false;
@@ -1275,7 +1266,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
                 else
                 {
-                    _logger.LogError("Failed to find a child profile account for this LE Connection");
+                    Log.Logger.Error("Failed to find a child profile account for this LE Connection");
                     associate.Account = new Interfaces.Spice.Models.Account();
                 }
                 associate.IsIndividual = false;
@@ -1398,7 +1389,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         [DisableConcurrentExecution(timeoutInSeconds: 10 * 60)]
         public async Task SendFoundWorkers(PerformContext hangfireContext)
         {
-            _logger.LogError("Starting SendFoundWorkers Job");
+            Log.Logger.Error("Starting SendFoundWorkers Job");
             hangfireContext.WriteLine("Starting SendFoundWorkers Job");
 
             // Query Dynamics for worker data
@@ -1408,12 +1399,12 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
             if (workers.Count < 1)
             {
-                _logger.LogError("No workers found for processing");
+                Log.Logger.Error("No workers found for processing");
                 hangfireContext.WriteLine("No workers found for processing");
             }
             else
             {
-                _logger.LogError($"Found {workers.Count} workers to send to SPD.");
+                Log.Logger.Error($"Found {workers.Count} workers to send to SPD.");
                 hangfireContext.WriteLine($"Found {workers.Count} workers to send to SPD.");
 
                 foreach (var worker in workers)
@@ -1423,7 +1414,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     if (reqSuccess)
                     {
                         hangfireContext.WriteLine($"Successfully sent worker {screeningRequest.RecordIdentifier} to SPD");
-                        _logger.LogError($"Successfully sent worker {screeningRequest.RecordIdentifier} to SPD");
+                        Log.Logger.Error($"Successfully sent worker {screeningRequest.RecordIdentifier} to SPD");
                         MicrosoftDynamicsCRMadoxioWorker workerPatch = new MicrosoftDynamicsCRMadoxioWorker()
                         {
                             AdoxioExporteddate = DateTime.UtcNow
@@ -1433,12 +1424,12 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     else
                     {
                         hangfireContext.WriteLine($"Failed to send worker {screeningRequest.RecordIdentifier} to SPD");
-                        _logger.LogError($"Failed to send worker {screeningRequest.RecordIdentifier} to SPD");
+                        Log.Logger.Error($"Failed to send worker {screeningRequest.RecordIdentifier} to SPD");
                     }
                 }
             }
 
-            _logger.LogError("End of SendFoundWorkers Job");
+            Log.Logger.Error("End of SendFoundWorkers Job");
             hangfireContext.WriteLine("End of SendFoundWorkers Job");
         }
 
@@ -1446,22 +1437,23 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         public async Task SendFoundApplications(PerformContext hangfireContext)
         {
             string[] select = { "adoxio_applicationtypeid" };
-            IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_requiressecurityscreening eq true", select: select).Value;
+            IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_haslesection eq true", select: select).Value;
             if (selectedAppTypes.Count == 0)
             {
-                _logger.LogError("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
+                Log.Logger.Error("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
                 hangfireContext.WriteLine("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
                 return;
             }
 
             List<string> appTypes = selectedAppTypes.Select(a => a.AdoxioApplicationtypeid).ToList();
-            _logger.LogError($"Starting SendFoundApplications Job for {selectedAppTypes.Count} application types");
+            Log.Logger.Error($"Starting SendFoundApplications Job for {selectedAppTypes.Count} application types");
             hangfireContext.WriteLine($"Starting SendFoundApplications Job for {selectedAppTypes.Count} application types");
 
-            string sendFilter = "adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq " + (int?)ApplicationSecurityStatus.NotSent;
+            // adjusted 2/9/2021 to pick up items that are in limbo (sending) status
+            string sendFilter = $"adoxio_checklistsenttospd eq 1 and (adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.NotSent} or adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.Sending})";
 
             var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value.Where(a => appTypes.Contains(a._adoxioApplicationtypeidValue));
-            _logger.LogError($"Found {applications.Count()} applications to send to SPD.");
+            Log.Logger.Error($"Found {applications.Count()} applications to send to SPD.");
             hangfireContext.WriteLine($"Found {applications.Count()} applications to send to SPD.");
 
             foreach (var application in applications)
@@ -1473,16 +1465,16 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 if (response)
                 {
                     hangfireContext.WriteLine($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
-                    _logger.LogError($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
+                    Log.Logger.Error($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
                 }
                 else
                 {
                     hangfireContext.WriteLine($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
-                    _logger.LogError($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
+                    Log.Logger.Error($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
                 }
             }
 
-            _logger.LogError("End of SendFoundApplications Job");
+            Log.Logger.Error("End of SendFoundApplications Job");
             hangfireContext.WriteLine("End of SendFoundApplications Job");
         }
 
@@ -1490,22 +1482,24 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         public async Task SendFoundApplicationsV2(PerformContext hangfireContext)
         {
             string[] select = { "adoxio_applicationtypeid" };
-            IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_requiressecurityscreening eq true", select: select).Value;
+            IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_haslesection eq true", select: select).Value;
             if (selectedAppTypes.Count == 0)
             {
-                _logger.LogError("Failed to Start SendFoundApplicationsV2: No application types are set to send to SPD.");
+                Log.Logger.Error("Failed to Start SendFoundApplicationsV2: No application types are set to send to SPD.");
                 hangfireContext.WriteLine("Failed to Start SendFoundApplicationsV2: No application types are set to send to SPD.");
                 return;
             }
 
             List<string> appTypes = selectedAppTypes.Select(a => a.AdoxioApplicationtypeid).ToList();
-            _logger.LogError($"Starting SendFoundApplicationsV2 Job for {selectedAppTypes.Count} application types");
+            Log.Logger.Error($"Starting SendFoundApplicationsV2 Job for {selectedAppTypes.Count} application types");
             hangfireContext.WriteLine($"Starting SendFoundApplicationsV2 Job for {selectedAppTypes.Count} application types");
 
-            string sendFilter = $"adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.NotSent}";
+
+            // adjusted 2/9/2021 to pick up items that are in limbo (sending) status
+            string sendFilter = $"adoxio_checklistsenttospd eq 1 and (adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.NotSent} or adoxio_checklistsecurityclearancestatus eq {(int?)ApplicationSecurityStatus.Sending})";
 
             var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value.Where(a => appTypes.Contains(a._adoxioApplicationtypeidValue));
-            _logger.LogError($"Found {applications.Count()} applications to send to SPD.");
+            Log.Logger.Error($"Found {applications.Count()} applications to send to SPD.");
             hangfireContext.WriteLine($"Found {applications.Count()} applications to send to SPD.");
 
             foreach (var application in applications)
@@ -1517,16 +1511,16 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 if (response)
                 {
                     hangfireContext.WriteLine($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
-                    _logger.LogError($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
+                    Log.Logger.Error($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
                 }
                 else
                 {
                     hangfireContext.WriteLine($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
-                    _logger.LogError($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
+                    Log.Logger.Error($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
                 }
             }
 
-            _logger.LogError("End of SendFoundApplicationsV2 Job");
+            Log.Logger.Error("End of SendFoundApplicationsV2 Job");
             hangfireContext.WriteLine("End of SendFoundApplicationsV2 Job");
         }
     }

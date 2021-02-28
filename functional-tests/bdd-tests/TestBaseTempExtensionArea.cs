@@ -41,6 +41,20 @@ namespace bdd_tests
             NgWebElement uiEventDetails = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiEventDetails.SendKeys(description);
 
+            // add a date from
+            NgWebElement uiDateFrom = ngDriver.FindElement(By.CssSelector("input#tempDateFrom"));
+            uiDateFrom.Click();
+
+            // select the date
+            SharedCalendarDate();
+
+            // add a date to
+            NgWebElement uiDateTo = ngDriver.FindElement(By.CssSelector("input#tempDateTo"));
+            uiDateTo.Click();
+
+            // select the date
+            SharedCalendarDate();
+
             // upload a floor plan document
             FileUpload("floor_plan.pdf", "(//input[@type='file'])[2]");
 

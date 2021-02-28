@@ -60,6 +60,23 @@ Developer Prerequisites
 - Docker
 - A familiarity with Jenkins
 
+Dynamic Forms
+-------------------------
+The portal supports the use of Dynamic Forms, in other words, forms that are specified through the creation of a custom form in MS Dynamics.
+
+To use this feature, first create a new Application Form in MS Dynamics.  You may use tabs and sections to organize the form, although the layout will be flattened when sent to the portal.
+
+If you add new fields to MS Dynamics, the following steps will need to be done in order for the new fields to appear in the portal:
+
+1.  Update Dynamics Models to contain the new fields.  This should be done by running the code generation script.  Do not edit the model by hand.
+2.  Add view model fields for each new field.  Be sure to use the same datatype; for example, if Dynamics uses a lookup with integer values, use a nullable int (int?). If Dynamics uses a nullable bool (bool?), use a nullable bool in the view model.  
+3.  Add code to "copy values" and "to view model" routines for the application extension class.  Since the data types match this should be trivial, just add code to copy from the Dynamics field to the view model and vice versa.
+4.  Add rows to the ApplicationMapping class to denote the new fields.  This should contain the Dynamics field name (actual field name not the display name) and the name of the view model field, as it will be sent to the client.  Note that the first character of the model will be lowercase.
+5.  Add fields to the Client model that correspond to fields in the View Model.  Note that the first character should be lower case, as the Dotnet JSON parser will convert the first character of the field name to lower case, and so the Client code will need to use that.
+6.  Add logic or field definitions to the relevant Validation code.  This will prevent a generic error which may be confusing to the user from being shown.  
+
+Be sure to test a round trip (save and load) before considering the field mapping done.
+
 Microsoft Dynamics, SharePoint
 ---------------------------
 A MS Dynamics instance containing the necessary solution files is required.  A SharePoint connection is optional.  If no SharePoint connection is available then file operations will not be executed.
@@ -120,6 +137,14 @@ Login to the OpenShift Web Console and navigate to the Tools project for the sys
 
 ## Promotion to PROD
 Login to the OpenShift Web Console and navigate to the Tools project for the system.  Go to the Build Config for the PROD Pipeline.  Click  Start Build. You will then have to CONFIRM the build by clicking on the related log item for the build that has been started.
+
+## Feature Management
+Features are managed by adding environment variables (or secrets in the case of a developer's PC) to the API environment.  As a general rule the environment variable name should begin with FEATURE_ and be all caps.  Empty string for a value is the same as not being set; anything other than empty string will set the value.
+
+For a list of features that are active in a given instance access /api/features.
+
+To edit an environment variable, go to the environment tab on the Deployment Config for the API service associated with the given instance.
+
 
 Other
 -----------

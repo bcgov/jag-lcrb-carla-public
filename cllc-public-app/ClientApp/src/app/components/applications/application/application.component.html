@@ -129,9 +129,9 @@
     <li>
       Society
       <ul>
-        <li>Current list of officers and directors</li>
+        <li>Current list of directors and senior managers</li>
         <li>
-          All directors must submit a completed Personal History Summary or Cannabis Associate Screening (see
+          All directors and senior managers must submit a completed Personal History Summary or Cannabis Associate Screening (see
           below)
         </li>
       </ul>
@@ -283,7 +283,7 @@
 
     <h4>Personal History Summary Documents</h4>
     <p>
-      Each liquor associate must provide a complete
+      Each liquor affiliate must provide a complete
       <a
         href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb004_personal_history_summary.pdf"
         target="_blank">
@@ -377,9 +377,9 @@
 
 <!-- private corporations need to provide the names of shareholders with less than 10% interest-->
 <section *ngIf="this.businessTypeIsPrivateCorporation()">
-  <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
+  <h4>Shareholders (individuals) Holding Less Than 10% Interest (or Non-Voting Shareholders)</h4>
   <p>
-    Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide their full
+    Shareholders (individuals) holding less than 10% interest, or shareholders with only non-voting shares, in the applicant corporation must provide their full
     legal name and date of birth. They do not need to provide a Personal History Summary or Cannabis Associate Security Screening form.
   </p>
   <app-file-uploader *ngIf="true || applicationId" documentType="IndividualsWithLessThan10"
@@ -1054,7 +1054,7 @@
 
               <div *ngIf="application?.applicationType?.name != 'Picnic Area Endorsement' && !this.isLP()">
                 <div class="padded-section">
-                  <app-field label="Please briefly outline the proposed change" [required]="true" [isFullWidth]="true"
+                  <app-field label="Please briefly outline the proposed change, including the general construction proposal and time frames for construction:" [required]="true" [isFullWidth]="true"
                     [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
                     errorMessage="Please enter a description">
                     <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000"
@@ -1076,7 +1076,7 @@
 </section>
 
 <!-- Cooler access -->
-<mat-card *ngIf="!isFormControlDisabled('hasCoolerAccess')" class="mat-elevation-z0" style="margin-bottom: 10px;">
+<mat-card *ngIf="application?.applicationType?.publicCooler =='Yes'" class="mat-elevation-z0" style="margin-bottom: 10px;">
   <section style="display: flex; justify-content: space-between; width: 100%;">
     <div class="question-label">
       Is the public permitted to walk into the cooler space?
@@ -1100,7 +1100,7 @@
 
     <div *ngIf="htmlContent.signage">
       <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.signage"></section>
-      <img src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage">
+      <img src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage" *ngIf="application?.licenseType == 'Food Primary' || application?.licenseType == 'Liquor Primary'">
     </div>
 
     <div *ngIf="!htmlContent.signage">

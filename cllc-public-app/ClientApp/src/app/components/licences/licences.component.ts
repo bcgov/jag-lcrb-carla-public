@@ -45,6 +45,8 @@ export class LicencesComponent extends FormBase implements OnInit {
   dataLoaded = false;
   ApplicationTypeNames = ApplicationTypeNames;
   licenceMappings = {};
+  liquorThree: boolean;
+  RLRS: boolean;
 
   // note, in order for a licence type to show on the dashboard, they must be configured here:
   supportedLicenceTypes = [
@@ -56,8 +58,6 @@ export class LicencesComponent extends FormBase implements OnInit {
     "Licensee Retail Store", "Transfer in Progress - Licensee Retail Store", "Operated - Licensee Retail Store",
     "Deemed - Licensee Retail Store",
     "UBrew and UVin", "Transfer in Progress - UBrew and UVin", "Operated - UBrew and UVin", "Deemed - UBrew and UVin",
-    "Food Primary", "Transfer in Progress - Food Primary", "Operated - Food Primary", "Deemed - Food Primary",
-    "Liquor Primary", "Transfer in Progress - Liquor Primary", "Operated - Liquor Primary", "Deemed - Liquor Primary",
     "Section 119 Authorization"
   ];
 
@@ -70,9 +70,29 @@ export class LicencesComponent extends FormBase implements OnInit {
     public fb: FormBuilder) {
     super();
     this.mainForm = new FormGroup({});
+
+    featureFlagService.featureOn("LiquorThree")
+      .subscribe(x => this.liquorThree = x);
+    featureFlagService.featureOn("RLRS")
+      .subscribe(x => this.RLRS = x);
   }
 
   ngOnInit() {
+    if (this.liquorThree) {
+      // control the licence rows as part of the feature flag.
+      var liquorThree = ["Food Primary", "Transfer in Progress - Food Primary", "Operated - Food Primary", "Deemed - Food Primary",
+        "Liquor Primary", "Transfer in Progress - Liquor Primary", "Operated - Liquor Primary", "Deemed - Liquor Primary",
+        "Liquor Primary Club", "Transfer in Progress - Liquor Primary Club", "Operated - Liquor Primary Club", "Deemed - Liquor Primary Club",
+        "Agent", "Transfer in Progress - Agent", "Operated - Agent", "Deemed - Agent"];
+      this.supportedLicenceTypes = this.supportedLicenceTypes.concat(liquorThree);
+    }
+
+    if (this.RLRS) {
+      // control the availability of the RLRS using the feature flag.
+      var RLRS = ["Rural Licensee Retail Store"];
+      this.supportedLicenceTypes = this.supportedLicenceTypes.concat(RLRS);
+    }
+
     this.displayApplications();
   }
 
@@ -141,7 +161,7 @@ export class LicencesComponent extends FormBase implements OnInit {
         applicationTypeName: app.applicationTypeName,
         applicationStatus: app.applicationStatus,
         isPaid: app.isPaid,
-        isStructuralChange:  app?.isStructuralChange
+        isStructuralChange: app?.isStructuralChange
       };
       licence.actionApplications.push(action);
     });

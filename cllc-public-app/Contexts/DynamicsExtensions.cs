@@ -158,7 +158,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             memo.Add(accountId);
 
-            var filter = "_adoxio_parentaccount_value eq " + accountId;
+            // select ACTIVE le-connections of the parent account
+            var filter = $"statecode eq 0 and _adoxio_parentaccount_value eq {accountId}";
 
             var expand = new List<string>{
                 "adoxio_ChildProfileName_contact",
@@ -1032,6 +1033,56 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+
+        public static MicrosoftDynamicsCRMadoxioLicencetype GetCachedLicenceTypeByName(this IDynamicsClient dynamicsClient, string name, IMemoryCache memoryCache)
+        {
+            string cacheKey = CacheKeys.LicenceTypePrefix + "_" + name;
+            if (memoryCache == null || !memoryCache.TryGetValue(cacheKey, out MicrosoftDynamicsCRMadoxioLicencetype result))
+            {
+                // Key not in cache, so get data.
+                result = dynamicsClient.GetAdoxioLicencetypeByName(name);
+
+                if (memoryCache != null)
+                {
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromDays(365));
+                    // Save data in cache.
+                    memoryCache.Set(cacheKey, result, cacheEntryOptions);
+                }
+            }
+
+            return result;
+        }
+
+        public static string GetCachedLicenceTypeIdByName(this IDynamicsClient dynamicsClient, string name, IMemoryCache memoryCache)
+        {
+            string result = null;
+            if (!string.IsNullOrEmpty(name))
+            {
+                string cacheKey = CacheKeys.LicenceTypeIDByNamePrefix + name;
+                if (memoryCache == null || !memoryCache.TryGetValue(cacheKey, out result))
+                {
+                    // Key not in cache, so get data.
+                    var lt = dynamicsClient.GetAdoxioLicencetypeByName(name);
+                    if (lt != null)
+                    {
+                        result = lt.AdoxioLicencetypeid;
+                        if (memoryCache != null)
+                        {
+                            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                            .SetSlidingExpiration(TimeSpan.FromDays(365));
+                            // Save data in cache.
+                            memoryCache.Set(cacheKey, result, cacheEntryOptions);
+                        }
+                    }
+
+                }
+
+            }
+
+            return result;
+        }
+
         public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
         {
             MicrosoftDynamicsCRMadoxioLicencetype result = null;
@@ -1099,7 +1150,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             catch (Exception e)
             {
                 _logger.LogError(e, "ERROR getting accounts picklist metadata");
-                
+
             }
 
             // get the application mapping.
@@ -1564,11 +1615,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-
-            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            if (!string.IsNullOrEmpty(temp))
             {
-                return userSettings.AccountId == accountId.ToString() || IsChildAccount(userSettings.AccountId, accountId.ToString(), _dynamicsClient);
+                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+                if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+                {
+                    return userSettings.AccountId == accountId.ToString() || IsChildAccount(userSettings.AccountId, accountId.ToString(), _dynamicsClient);
+                }
             }
 
             // if current user doesn't have an account they are probably not logged in

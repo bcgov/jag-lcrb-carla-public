@@ -202,6 +202,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
       description1: [''],
+      description2: [''],
       proposedChange: ['', [Validators.required]],
       isLocatedInGroceryStore: [null, []],
       sitePhotos: ['', []],
@@ -232,6 +233,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       isOnINLand: [false, []],
       patioIsLiquorCarried: [false, []],
       termConditionOriginalText: ['', []],
+      tempDateFrom: [''],
+      tempDateTo: [''],
     });
 
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -290,8 +293,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     });
 
-    
-    
+
+
 
     this.form.get('indigenousNation').valueChanges
       .pipe(filter(value => value && value.length >= 3),
@@ -466,7 +469,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.updateRequiredValidator('', 'patioLiquorCarriedDescription');
     }
 
-    
+
     this.updateRequiredValidator(val, 'patioLocationDescription');
     this.updateRequiredValidator(val, 'patioServiceBar');
   }
@@ -492,7 +495,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       return;
     }
 
-    if (this.application.applicationType.name !== ApplicationTypeNames.LRSStructuralChange) {
+    if (!this.application.applicationType.publicCooler) {
       this.form.get('hasCoolerAccess').disable();
     }
 
@@ -734,16 +737,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   normalizeFormData() {
-    let description2 = '';
+    let description2 = this.form.get('description2').value;
     if (this.isRAS()) {
       description2 += this.form.get('isOwner').value ? 'Is owner = Yes' : 'Is owner = No';
       description2 += '\n';
       description2 += this.form.get('hasValidInterest').value ? 'Has valid interest = Yes' : 'Has valid interest = No';
       description2 += '\n';
       description2 += this.form.get('willHaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
-    }
-    else {
-      description2 += this.application.description2;
     }
 
     // flatten the service areas if need be
@@ -1083,10 +1083,32 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
       if (!this.form.get('willHaveValidInterest').value) {
         this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
-       }
+      }
 
     }
 
+    // special validation for RLRS
+
+    if (this.form.get('isRlrsLocatedInRuralCommunityAlone')
+        && this.form.get('isRlrsLocatedAtTouristDestinationAlone')
+        && this.form.get('isRlrsLocatedInRuralCommunityAlone').value
+        && this.form.get('isRlrsLocatedInRuralCommunityAlone').value !== 845280000 // NOT YES
+        && !this.form.get('isRlrsLocatedAtTouristDestinationAlone').value // NO VALUE FOR IS LOCATED AT TOURIST DESTINATION ALONE
+      ) {
+      valid = false;
+      this.validationMessages.push('Please enter a value for Is the proposed RLRS located in a tourist destination resort with no other RLRS?');
+    }
+  
+    if (this.form.get('isRlrsLocatedAtTouristDestinationAlone')
+      && this.form.get('rlrsResortCommunityDescription')
+      && this.form.get('isRlrsLocatedAtTouristDestinationAlone').value
+      && this.form.get('isRlrsLocatedAtTouristDestinationAlone').value === 845280000 // IS YES
+      && !this.form.get('rlrsResortCommunityDescription').value // NO VALUE FOR DESCRIPTION
+      ) {
+      valid = false;
+      this.validationMessages.push('Resort community description is required.');
+    }
+  
     return valid && (this.form.valid || this.form.disabled);
   }
 
@@ -1384,8 +1406,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
       (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType === "Wine Store");
   }
 
-  showDynamicForm(formReference, tabs) {
-    if (this.form.get('isHasPatio').enabled) {
+  showDynamicForm(formReference, tabs)
+{
+  if (this.form.get('isHasPatio').enabled) {
       this.updateDynamicValidation();
       return this.form.get('isHasPatio').value && formReference && tabs;
     }

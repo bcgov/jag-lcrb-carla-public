@@ -88,12 +88,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // check that the session is setup correctly.
             userSettings.Validate();
 
-            // get data for the current account. 
-
+            // get data for the current account.
             string currentAccountId = userSettings.AccountId;
 
-            var contacts = _dynamicsClient.GetLEConnectionsForAccount(userSettings.AccountId, _logger, _configuration);
+            var contacts = _dynamicsClient.GetLEConnectionsForAccount(currentAccountId, _logger, _configuration);
             List<SecurityScreeningStatusItem> securityItems = GetConnectionsScreeningData(contacts);
+
             // get the current user's applications and licences
             var licences = _dynamicsClient.GetLicensesByLicencee(_cache, currentAccountId);
             var applications = _dynamicsClient.GetApplicationsForLicenceByApplicant(currentAccountId);
@@ -102,8 +102,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // determine how many of each licence there are.
             int cannabisLicenceCount = 0;
-            int liquorLicenceCount = 0; 
-            
+            int liquorLicenceCount = 0;
 
             if (licences != null && licences.Count() > 0)
             {
@@ -120,12 +119,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 cannabisApplicationCount = applications.Count(x => x.AdoxioApplicationTypeId != null && x.AdoxioApplicationTypeId.AdoxioName != null && x.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS"));
                 liquorApplicationCount = applications.Count() - cannabisApplicationCount;
             }
-            
+
 
             if (cannabisLicenceCount > 0 || cannabisApplicationCount > 0)
             {
-                var data = securityItems.Select(item => {
-                    item.IsComplete =  (item.Contact?.AdoxioCascomplete == (int)YesNoOptions.Yes);
+                var data = securityItems.Select(item =>
+                {
+                    item.IsComplete = (item.Contact?.AdoxioCascomplete == (int)YesNoOptions.Yes);
                     return item;
                 });
                 result.Cannabis = new SecurityScreeningCategorySummary()
@@ -137,8 +137,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (liquorLicenceCount > 0 || liquorApplicationCount > 0)
             {
-                var data = securityItems.Select(item => {
-                    item.IsComplete =  (item.Contact?.AdoxioPhscomplete == (int)YesNoOptions.Yes);
+                var data = securityItems.Select(item =>
+                {
+                    item.IsComplete = (item.Contact?.AdoxioPhscomplete == (int)YesNoOptions.Yes);
                     return item;
                 });
                 result.Liquor = new SecurityScreeningCategorySummary()

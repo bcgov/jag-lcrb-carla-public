@@ -212,6 +212,13 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return result;
   }
 
+  showTiedHouseExemption(item: ApplicationLicenseSummary) {
+    const result = this.isActive(item) &&
+      this.actionsVisible(item) &&
+      item.licenceTypeName === "Manufacturer";
+    return result;
+  }
+
   showAddOrChangeThirdPartyOperator(item: ApplicationLicenseSummary): boolean {
     const result = this.isActive(item) &&
       this.actionsVisible(item) &&
@@ -312,21 +319,43 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return this.isRecentlyExpired(licence) || this.isActive(licence);
   }
 
+
+  isLiquorPrimaryOrLiquorPrimaryClub(licence: ApplicationLicenseSummary) {
+    return licence.licenceTypeName.includes("Liquor Primary");
+  }
+
+  // At the moment all events have authorization letters to download, EXCEPT for Liquor-Free events.
+  hasAuthorizationLetter(event: LicenceEvent): boolean {
+    return event.eventCategory !== this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value;
+  }
+
+  /*
+    start or open a change job from a licence row
+  */
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
+    // search for an existing application type that matches the type specified
     const actionApplication = licence.actionApplications.find(
       app => app.applicationTypeName === actionName
-      && !app.isStructuralChange
-        && app.applicationStatus !== "Active");
+      && !app.isStructuralChange                        // we allow multiple structurals
+      && app.applicationStatus !== "Active");
+
+    // if we found an action application
     if (actionApplication) {
-      if (actionApplication.isPaid === true) {
+      // and if it wasn't paid for
+      if (actionApplication.isPaid === false) {
+        // open it up so we can continue it
         this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
-      } else if (actionApplication.isPaid === false)
+      // otherwise if it was paid for
+      } else if (actionApplication.isPaid === true)
       {
+        // prevent a re-submission until the application status is no longer active
         this.snackBar.open(`${actionName} has already been submitted and is under review`,
           "Warning",
           { duration: 3500, panelClass: ["red-snackbar"] });
       }
+    // if we didn't find an action application
     } else {
+      // create one
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
@@ -529,6 +558,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       return "/market-event/";
     } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Temporary Use Area").value) {
       return "/tua-event/";
+    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value) {
+      return "/liquor-free-event/";
     }
     return "/event/";
   }
@@ -549,6 +580,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return (licenceType.indexOf("Catering") >= 0 ||
       licenceType.indexOf("Wine Store") >= 0 ||
       licenceType.indexOf("Manufacturer") >= 0 ||
+      licenceType.indexOf("Liquor Primary") >= 0 ||
       licenceType.indexOf("Food Primary") >= 0);
   }
 

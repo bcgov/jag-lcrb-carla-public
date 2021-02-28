@@ -122,26 +122,23 @@
                     <h3 class="blue-header col-xs-12">Part 2 - Cannabis Product Inventory</h3>
                   </div>
                   <p>Identify the cannabis products you have ordered, sold, returned or have managed the inventory of in the previous month.</p>
-                  <div class="form-check" *ngFor="let productForm of productForms">
-                    <mat-checkbox
-                      [checked]="isProductSelected(productForm.value.inventoryReportId)"
-                      (click)="toggleProductVisibility(productForm.value.inventoryReportId);"
+                  <div class="form-check callout" *ngFor="let productForm of productForms">
+                    <mat-checkbox [checked]="productForm?.value?.selected" (change)="toggleProductVisibility(productForm)"
                       [disabled]="reportIsDisabled">
-                      {{productForm.value.product}}
+                      <strong>{{productForm.value.product}}</strong>
                     </mat-checkbox>
-                    <fa-icon data-html="true" style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle" matTooltipClass="multiline-tooltip" matTooltip="{{productForm.value.productDescription}}"></fa-icon>
+                    <div class="callout__details">
+                      <p>{{productForm.value.productDescription}}</p>
+                    </div>
                   </div>
                 </div>
                 <div class="product-reporting">
                   <div class="row mx-0">
                     <h3 class="blue-header col-xs-12">Part 3 - Cannabis Product Inventory Details</h3>
                   </div>
-                  <p *ngIf="visibleInventoryReports.length > 0">Enter the details of the cannabis product inventory you identified above.</p>
-                  <p *ngIf="visibleInventoryReports.length === 0">You have not identified any cannabis product inventory to report.</p>
-                  <app-product-inventory-sales-report
-                    [productForm]="productForm"
-                    [visibleInventoryReports]="visibleInventoryReports"
-                    *ngFor="let productForm of productForms">
+                  <p *ngIf="isProductInventorySelected">Enter the details of the cannabis product inventory you identified above.</p>
+                  <p *ngIf="!isProductInventorySelected">You have not identified any cannabis product inventory to report.</p>
+                  <app-product-inventory-sales-report [productForm]="productForm" [visible]="productForm?.value?.selected" *ngFor="let productForm of productForms">
                   </app-product-inventory-sales-report>
                 </div>
                 <div class="row mx-0" *ngIf="!reportIsDisabled">

@@ -18,7 +18,6 @@ Scenario: OneStop New Licence (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
-    # To be confirmed with G. Walker
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I wait 2 minutes
@@ -123,7 +122,7 @@ Scenario: OneStop Licence Expired (Private Corporation)
     And the application is approved
     And I pay the licensing fee 
     # Select 45 days ago option
-    And the expiry date is changed using the Dynamics workflow named ***
+    And the expiry date is changed using the Dynamics workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I wait 2 minutes
