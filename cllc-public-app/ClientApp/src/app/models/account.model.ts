@@ -2,6 +2,8 @@ import { Contact } from "./contact.model";
 import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { LegalEntity } from "@models/legal-entity.model";
 
+
+const BUSINESS_TYPE_OTHER = [ "CoOp" , "MilitaryMess"];
 export class Account {
   id: string;
   localGovernmentId: string;
@@ -64,6 +66,13 @@ export class Account {
   businessTypeIsSociety (): boolean {
     const isSociety = this.businessType === 'Society';
     return isSociety;
+  }
+
+   // Returns true if the businessType of the account is classified as other
+   // Any businessType can be added to the BUSINESS_TYPE_OTHER array to classify it as "other"
+  isOtherBusinessType(): boolean {
+    const isOtherType = BUSINESS_TYPE_OTHER.indexOf(this.businessType) !== -1;
+    return isOtherType;
   }
 
   isPublicCorporation(): boolean {
