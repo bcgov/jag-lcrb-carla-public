@@ -27,42 +27,20 @@
   <div *ngIf="bceidConfirmBusinessType && !account">
     <h2>Please confirm the organization type associated with the Business BCeID:</h2>
     <section class="radio-buttons">
-      <input type="radio" name="InitialBusinessType" value="PrivateCorporation" [(ngModel)]="businessType">
-      <span> Private Corporation</span>
-      <br>
-      <br>
-      <input type="radio" name="InitialBusinessType" value="PublicCorporation" [(ngModel)]="businessType">
-      <span> Public Corporation</span>
-      <br>
-      <br>
-      <input type="radio" name="InitialBusinessType" value="SoleProprietorship" [(ngModel)]="businessType">
-      <span> Sole Proprietorship</span>
-      <br>
-      <br>
-      <input type="radio" name="InitialBusinessType" value="Partnership" [(ngModel)]="businessType">
-      <span> Partnership</span>
-      <br>
-      <br>
-      <input type="radio" name="InitialBusinessType" value="Society" [(ngModel)]="businessType">
-      <span> Society</span>
-      <br>
-      <br>
-      <input type="radio" name="InitialBusinessType" value="University" [(ngModel)]="businessType">
-      <span> University</span>
-      <br>
-      <br>
-      <div *ngIf="lgApprovals">
-        <input type="radio" name="InitialBusinessType" value="LocalGovernment" [(ngModel)]="businessType">
-        <span> Local Government</span>
-        <br>
-        <br>
-      </div>
-      <!--input type="radio" name="InitialBusinessType" value="Church" [(ngModel)]="businessType">
-      <span> Church</span>
-      <br>
-      <br-->
-      <input type="radio" name="InitialBusinessType" value="IndigenousNation" [(ngModel)]="businessType">
-      <span> Indigenous nation <!--that does not fill a role similar to a Local Government in the licensing process --></span>
+      <mat-radio-group [(ngModel)]="businessType">
+        <mat-radio-button class="mr-5" value="PrivateCorporation">Private Corporation</mat-radio-button>
+        <mat-radio-button class="mr-5" value="PublicCorporation">Public Corporation</mat-radio-button>
+        <mat-radio-button class="mr-5" value="SoleProprietorship">SoleProprietorship</mat-radio-button>
+        <mat-radio-button class="mr-5" value="Partnership">Partnership</mat-radio-button>
+        <mat-radio-button class="mr-5" value="Society">Society</mat-radio-button>
+        <mat-radio-button class="mr-5" value="University">University</mat-radio-button>
+        <mat-radio-button class="mr-5"  *ngIf="lgApprovals" value="LocalGovernment">Local Government</mat-radio-button>
+        <!--Indigenous Nation does not fill a role similar to a Local Government in the licensing process -->
+        <mat-radio-button class="mr-5" value="IndigenousNation">Indigenous Nation</mat-radio-button>
+        <mat-radio-button class="mr-5" value="CoOp">Co-Op</mat-radio-button>
+        <mat-radio-button class="mr-5" value="MilitaryMess">Military Mess</mat-radio-button>
+        <!-- <mat-radio-button class="mr-5" value="Church">Church</mat-radio-button> -->
+      </mat-radio-group>
     </section>
 
     <section *ngIf="bceidConfirmBusinessType">
