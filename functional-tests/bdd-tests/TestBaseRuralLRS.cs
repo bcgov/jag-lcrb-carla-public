@@ -136,7 +136,7 @@ namespace bdd_tests
             }
 
             // select 'Yes' for Treaty First Nation land
-            NgWebElement uiIsOnINLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-2"));
+            NgWebElement uiIsOnINLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-13"));
             uiIsOnINLand.Click();
 
             // search for and select the indigenous nation
