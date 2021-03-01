@@ -28,9 +28,9 @@ namespace bdd_tests
             */
 
             // used for OneStop testing
-            // string bizNumber = "977517895";
+            string bizNumber = "977517895";
             // used for release testing
-            string bizNumber = "111111111";
+            // string bizNumber = "111111111";
             string incorporationNumber = "BC1234567";
 
             string physStreetAddress1 = "645 Tyee Road";
