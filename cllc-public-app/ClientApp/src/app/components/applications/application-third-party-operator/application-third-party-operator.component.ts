@@ -15,7 +15,7 @@ import { Account, TransferAccount } from "@models/account.model";
 import { LicenseDataService } from "@services/license-data.service";
 import { License } from "@models/license.model";
 import { faSave } from "@fortawesome/free-regular-svg-icons";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ValidationErrorMap = {
   "proposedTPO.accountId": "Please select the business name to be a third party operator of  your licence",
@@ -30,7 +30,7 @@ const ValidationErrorMap = {
 })
 export class ApplicationThirdPartyOperatorComponent extends FormBase implements OnInit {
   faSave = faSave;
-  faTrashAlt = faTrashAlt;
+  faTrash = faTrash;
   licence: License;
   form: FormGroup;
   licenceId: string;
@@ -86,11 +86,9 @@ export class ApplicationThirdPartyOperatorComponent extends FormBase implements 
     this.busy = this.licenseDataService.getLicenceById(this.licenceId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: License) => {
-
-
-          this.licence = data;
-          this.form.patchValue(data);
-        },
+        this.licence = data;
+        this.form.patchValue(data);
+      },
         () => {
           console.log("Error occured");
         }

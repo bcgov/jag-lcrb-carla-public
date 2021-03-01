@@ -100,8 +100,8 @@
     </div>
 
     <div class="p-4 d-flex justify-content-between button-row">
-      <button class="btn btn-secondary" style="margin-right: 10px;" (click)="closeForm()">DECLINE TO ANSWER</button>
       <button class="btn btn-primary" (click)="submitForm()" [disabled]="eligibilityForm.invalid">SUBMIT</button>
+      <button class="btn btn-link btn-cancel" (click)="closeForm()">DECLINE TO ANSWER</button>
     </div>
   </form>
 </div>

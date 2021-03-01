@@ -16,4 +16,6 @@ export class ApplicationSummary {
   lgHasApproved: boolean;
   endorsements: string[];
   isForLicence: boolean;
+  dateApplicationSubmitted: Date;
+  dateApplicantSentToLG: Date;
 }
