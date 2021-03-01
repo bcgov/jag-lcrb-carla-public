@@ -120,7 +120,19 @@ namespace bdd_tests
             if (businessType == "private corporation")
             {
                 // upload the zoning document
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
+                FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[18]");
+            }
+
+            if ((businessType == "partnership") || (businessType == "public corporation") || (businessType == "society"))
+            {
+                // upload the zoning document
+                FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[9]");
+            }
+
+            if (businessType == "sole proprietorship")
+            {
+                // upload the zoning document
+                FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[6]");
             }
 
             // select 'Yes' for Treaty First Nation land
@@ -193,17 +205,50 @@ namespace bdd_tests
             NgWebElement uiFranchiseOrAffiliatedBusiness = ngDriver.FindElement(By.CssSelector("input#franchiseOrAffiliatedBusiness"));
             uiFranchiseOrAffiliatedBusiness.SendKeys(businessName);
 
-            // upload the signage documents
-            FileUpload("signage.pdf", "(//input[@type='file'])[20]");
+            if (businessType == "private corporation")
+            {
+                // upload the signage documents
+                FileUpload("signage.pdf", "(//input[@type='file'])[20]");
 
-            // upload the floor plan
-            FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
+                // upload the floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
 
-            // upload the site plan
-            FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
 
-            // upload the exterior photos
-            FileUpload("exterior_photos.pdf", "(//input[@type='file'])[29]");
+                // upload the exterior photos
+                FileUpload("exterior_photos.pdf", "(//input[@type='file'])[29]");
+            }
+
+            if ((businessType == "partnership") || (businessType == "public corporation") || (businessType == "society"))
+            {
+                // upload the signage documents
+                FileUpload("signage.pdf", "(//input[@type='file'])[11]");
+
+                // upload the floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[14]");
+
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[17]");
+
+                // upload the exterior photos
+                FileUpload("exterior_photos.pdf", "(//input[@type='file'])[20]");
+            }
+
+            if (businessType == "sole proprietorship")
+            {
+                // upload the signage documents
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
+
+                // upload the floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
+
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[14]");
+
+                // upload the exterior photos
+                FileUpload("exterior_photos.pdf", "(//input[@type='file'])[17]");
+            }
 
             // select the owner checkbox
             NgWebElement uiOwnerCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
