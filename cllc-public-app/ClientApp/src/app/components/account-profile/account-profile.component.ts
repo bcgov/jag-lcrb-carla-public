@@ -13,7 +13,7 @@ import { COUNTRIES } from "./country-list";
 
 // tslint:disable-next-line:no-duplicate-imports
 import { AccountDataService } from "@services/account-data.service";
-import { Account } from "@models/account.model";
+import { Account, BUSINESS_TYPE_LIST } from "@models/account.model";
 import { FormBase } from "@shared/form-base";
 import { ConnectionToProducersComponent } from "./tabs/connection-to-producers/connection-to-producers.component";
 import { TiedHouseConnection } from "@models/tied-house-connection.model";
@@ -68,7 +68,6 @@ const ValidationFieldNameMap = {
   'primarycontact.emailaddress1': "Corporation Contact Email",
 };
 
-
 @Component({
   selector: "app-account-profile",
   templateUrl: "./account-profile.component.html",
@@ -110,6 +109,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   get contacts(): FormArray {
     return this.form.get("otherContacts") as FormArray;
   }
+
+  businessTypes = BUSINESS_TYPE_LIST;
 
   constructor(private store: Store<AppState>,
     private accountDataService: AccountDataService,
@@ -222,7 +223,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   }
 
   getBusinessTypeName() {
-    if (!(this.saveFormData && this.saveFormData.businessProfile)) {
+    if (!(this.saveFormData && this.saveFormData.businessProfile)
+    || this.account.isOtherBusinessType()) {
       return "";
     }
     let name = "";
@@ -256,7 +258,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   legalNameLabel() {
     const businessType = this.getBusinessTypeName();
-    let label = `${businessType} - Legal Name`;
+    let label = `${businessType} ${this.account.isOtherBusinessType() ? '' : '-'} Legal Name`;
     if (businessType === "IndigenousNation") {
       label = "Full name of Indigenous Nation";
     }

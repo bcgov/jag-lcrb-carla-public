@@ -117,6 +117,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   submitApplicationInProgress: boolean;
   proceedToSecurityScreeningInProgress: boolean;
   dataLoaded: boolean;
+  isShowLGINApproval = false;
 
 
   get isOpenedByLGForApproval(): boolean {
@@ -369,6 +370,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
             }
 
             this.application = data;
+            this.isShowLGINApproval = (
+                this?.application?.applicationType?.isShowLGINApproval ||
+                (this?.application?.applicationStatus === "Pending for LG/FN/Police Feedback"
+                 && this?.application?.applicationType?.isShowLGZoningConfirmation !== true
+                )
+              );
 
             this.hideFormControlByType();
 

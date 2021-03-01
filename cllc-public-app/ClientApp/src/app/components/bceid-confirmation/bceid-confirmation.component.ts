@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { DynamicsDataService } from "@services/dynamics-data.service";
-import { Account } from "@models/account.model";
+import { Account, BUSINESS_TYPE_LIST } from "@models/account.model";
 import { Contact } from "@models/contact.model";
 import { User } from "@models/user.model";
 import { UserDataService } from "@services/user-data.service";
@@ -11,7 +11,6 @@ import { takeWhile } from "rxjs/operators";
 import { FormBase } from "@shared/form-base";
 import { Subscription } from "rxjs";
 import { FeatureFlagService } from "@services/feature-flag.service";
-
 
 @Component({
   selector: "app-bceid-confirmation",
@@ -36,6 +35,7 @@ export class BceidConfirmationComponent extends FormBase {
   termsAccepted = false;
   account: Account;
   lgApprovals: boolean;
+  businessTypes = BUSINESS_TYPE_LIST;
 
   constructor(private dynamicsDataService: DynamicsDataService,
     private userDataService: UserDataService,
@@ -98,6 +98,7 @@ export class BceidConfirmationComponent extends FormBase {
 
     // Submit selected company type and sub-type to the account service
     account.businessType = this.businessType;
+    
     const payload = JSON.stringify(account);
     this.busy = this.dynamicsDataService.createRecord("accounts", payload)
       .toPromise()
