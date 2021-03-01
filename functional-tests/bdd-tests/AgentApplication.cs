@@ -13,61 +13,61 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CannabisMarketingApplication
+Feature: AgentApplication
     As a logged in business user
-    I want to submit a Cannabis Marketing application for different business types
+    I want to submit an Agent application for different business types
 
-@cannabismktg @privatecorporation
-Scenario: Cannabis Marketing Application (Private Corporation)
+@agent @privatecorporation
+Scenario: Agent Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Cannabis Marketing Licence
+    And I click on the Start Application button for an Agent Licence
     And I review the account profile for a private corporation
-    And I complete the Cannabis Marketing application for a private corporation
+    And I complete the Agent Licence application for a private corporation
     And I click on the Submit button
     And I enter the payment information
-    And I confirm the payment receipt for a Cannabis Marketing Licence
+    And I confirm the payment receipt for an Agent Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@cannabismktg @society 
-Scenario: Cannabis Marketing Application (Society)
+@agent @society 
+Scenario: Agent Application (Society)
     Given I am logged in to the dashboard as a society
-    And I click on the Start Application button for a Cannabis Marketing Licence
+    And I click on the Start Application button for an Agent Licence
     And I review the account profile for a society
-    And I complete the Cannabis Marketing application for a society
+    And I complete the Agent Licence application for a society
     And I click on the Submit button
     And I enter the payment information
-    And I confirm the payment receipt for a Cannabis Marketing Licence
+    And I confirm the payment receipt for an Agent Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@cannabismktg @partnership 
-Scenario: Cannabis Marketing Application (Partnership)
+@agent @partnership 
+Scenario: Agent Application (Partnership)
     Given I am logged in to the dashboard as a partnership
-    And I click on the Start Application button for a Cannabis Marketing Licence
+    And I click on the Start Application button for an Agent Licence
     And I review the account profile for a partnership
-    And I complete the Cannabis Marketing application for a partnership
+    And I complete the Agent Licence application for a partnership
     And I click on the Submit button
     And I enter the payment information
-    And I confirm the payment receipt for a Cannabis Marketing Licence
+    And I confirm the payment receipt for an Agent Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@cannabismktg @soleproprietorship 
-Scenario: Cannabis Marketing Application (Sole Proprietorship)
+@agent @soleproprietorship 
+Scenario: Agent Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
-    And I click on the Start Application button for a Cannabis Marketing Licence
+    And I click on the Start Application button for an Agent Licence
     And I review the account profile for a sole proprietorship
-    And I complete the Cannabis Marketing application for a sole proprietorship
+    And I complete the Agent Licence application for a sole proprietorship
     And I click on the Submit button
     And I enter the payment information
-    And I confirm the payment receipt for a Cannabis Marketing Licence
+    And I confirm the payment receipt for an Agent Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -76,9 +76,9 @@ Scenario: Cannabis Marketing Application (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CannabisMarketingApplication.feature")]
+    [FeatureFile("./AgentApplication.feature")]
     [Collection("Liquor")]
-    public sealed class CannabisMarketingApplication : TestBase
+    public sealed class AgentApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
