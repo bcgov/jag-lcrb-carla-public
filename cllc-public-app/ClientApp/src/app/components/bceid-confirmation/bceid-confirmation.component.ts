@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { DynamicsDataService } from "@services/dynamics-data.service";
-import { Account, BUSINESS_TYPE_LIST } from "@models/account.model";
+import { Account } from "@models/account.model";
 import { Contact } from "@models/contact.model";
 import { User } from "@models/user.model";
 import { UserDataService } from "@services/user-data.service";
@@ -35,7 +35,19 @@ export class BceidConfirmationComponent extends FormBase {
   termsAccepted = false;
   account: Account;
   lgApprovals: boolean;
-  businessTypes = BUSINESS_TYPE_LIST;
+  businessTypes = [
+    { value: "Coop", name: "Co-Op" },
+    { value: "IndigenousNation", name: "Indigenous nation " },
+    { value: "MilitaryMess", name: "Military Mess" },
+    { value: "Partnership", name: "Partnership" },
+    { value: "PrivateCorporation", name: "Private Corporation" },
+    { value: "PublicCorporation", name: "Public Corporation" },
+    { value: "Society", name: "Society" },
+    { value: "SoleProprietorship", name: "Sole Proprietorship" },
+    { value: "University", name: "University" },
+    // { value: "Church", name:"Church"},	
+    // that does not fill a role similar to a Local Government in the licensing process
+  ];;
 
   constructor(private dynamicsDataService: DynamicsDataService,
     private userDataService: UserDataService,
@@ -48,16 +60,23 @@ export class BceidConfirmationComponent extends FormBase {
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data) => {
-          this.account = data;
-          if (this.account) {
-            this.termsAccepted = this.account.termsOfUseAccepted;
-          }
-        },
-        error => {});
+        this.account = data;
+        if (this.account) {
+          this.termsAccepted = this.account.termsOfUseAccepted;
+        }
+      },
+        error => { });
 
     featureFlagService.featureOn("LGApprovals")
-      .subscribe(x => this.lgApprovals = x);
+      .subscribe(x => {
+        this.lgApprovals = x;
 
+        // add the Local Government option if the feature is enabled
+        if (this.lgApprovals) {
+          this.businessTypes.push({ value: "LocalGovernment", name: "Local Government" });
+          this.businessTypes = this.businessTypes.sort((a, b) => a.name.localeCompare(b.name));
+        }
+      });
   }
 
   confirmBceidAccountYes() {
@@ -98,12 +117,12 @@ export class BceidConfirmationComponent extends FormBase {
 
     // Submit selected company type and sub-type to the account service
     account.businessType = this.businessType;
-    
+
     const payload = JSON.stringify(account);
     this.busy = this.dynamicsDataService.createRecord("accounts", payload)
       .toPromise()
       .then((data) => {
-        this.userDataService.loadUserToStore().then(res => {});
+        this.userDataService.loadUserToStore().then(res => { });
         this.reloadUser.emit();
       });
   }
@@ -120,7 +139,7 @@ export class BceidConfirmationComponent extends FormBase {
       this.dynamicsDataService.updateRecord("accounts", this.account.id, data)
         .subscribe(res => {
           this.accountDataService.loadCurrentAccountToStore(this.account.id)
-            .subscribe(() => {});
+            .subscribe(() => { });
         });
     }
   }
