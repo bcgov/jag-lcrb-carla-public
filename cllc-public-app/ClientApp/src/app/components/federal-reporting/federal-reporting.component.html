@@ -141,14 +141,18 @@
                   <app-product-inventory-sales-report [productForm]="productForm" [visible]="productForm?.value?.selected" *ngFor="let productForm of productForms">
                   </app-product-inventory-sales-report>
                 </div>
-                <div class="row mx-0" *ngIf="!reportIsDisabled">
-                  <button class="btn btn-primary mt-5 mr-5" (click)="save(false)">
+                <div class="row mx-0 mt-5 button-row" *ngIf="!reportIsDisabled">
+                  <button class="btn btn-secondary" (click)="save(false)">
                     <span>
-                      <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
-                      Save for Later
+                      <fa-icon [icon]="faSave"></fa-icon>SAVE FOR LATER
                     </span>
                   </button>
-                  <button class="btn btn-primary mt-5" (click)="submitApplication()" [disabled]="!checkIfReportValid()">Submit Monthly Report</button>
+                  <button class="btn btn-primary" (click)="submitApplication()" [disabled]="!checkIfReportValid()">
+                    SUBMIT
+                  </button>
+                  <button class="btn btn-link btn-cancel" routerLink="/dashboard">
+                    <fa-icon [icon]="faTrash"></fa-icon>CANCEL
+                  </button>
                 </div>
               </form>
             </ng-template>

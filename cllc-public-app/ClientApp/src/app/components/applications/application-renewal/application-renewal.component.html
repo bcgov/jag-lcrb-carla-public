@@ -485,10 +485,10 @@
 <section style="margin-top: 20px; position: relative;">
   <button mat-raised-button color="secondary" style="margin-right: 10px;" (click)="saveForLater()">
     <span>
-      <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
+      <fa-icon [icon]="faSave"></fa-icon>
       SAVE FOR LATER
     </span>
-    <mat-progress-bar class="mt-1" *ngIf="!saveForLateInProgress" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar class="mt-1" *ngIf="saveForLateInProgress" mode="indeterminate"></mat-progress-bar>
   </button>
   <button mat-raised-button color="primary" (click)="submitApplication()">
     <span>SUBMIT &amp; PAY</span>
@@ -496,12 +496,11 @@
   </button>
   <span style="color: #1a5a96; float: right; padding-top: 10px;">
     <span (click)="cancelApplication()">
-      <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
+      <fa-icon [icon]="faTrash" style="color: #1a5a96;"></fa-icon>
       <a href="javascript: void(0)">
-        Cancel Application
+        CANCEL APPLICATION
       </a>
-      <mat-progress-bar class="mt-1" *ngIf="!cancelReqInProgress" mode="indeterminate"></mat-progress-bar>
-
+      <mat-progress-bar class="mt-1" *ngIf="cancelReqInProgress" mode="indeterminate"></mat-progress-bar>
     </span>
   </span>
 
