@@ -123,7 +123,7 @@ namespace bdd_tests
                 FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[18]");
             }
 
-            if (businessType == "partnership")
+            if ((businessType == "partnership") || (businessType == "public corporation"))
             {
                 // upload the zoning document
                 FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[9]");
@@ -214,7 +214,7 @@ namespace bdd_tests
                 FileUpload("exterior_photos.pdf", "(//input[@type='file'])[29]");
             }
 
-            if (businessType == "partnership")
+            if ((businessType == "partnership") || (businessType == "public corporation"))
             {
                 // upload the signage documents
                 FileUpload("signage.pdf", "(//input[@type='file'])[11]");
