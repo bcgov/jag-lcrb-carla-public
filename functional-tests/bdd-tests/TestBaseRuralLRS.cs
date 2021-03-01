@@ -278,15 +278,15 @@ namespace bdd_tests
 
             // select the owner checkbox
             NgWebElement uiOwnerCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
-            uiOwnerCheckbox.Click();
+            JavaScriptClick(uiOwnerCheckbox);
 
             // select the owner's valid interest checkbox
             NgWebElement uiValidInterestCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='hasValidInterest']"));
-            uiValidInterestCheckbox.Click();
+            JavaScriptClick(uiValidInterestCheckbox);
 
             // select the zoning checkbox
             NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willHaveValidInterest']"));
-            uiZoningCheckbox.Click();
+            JavaScriptClick(uiZoningCheckbox);
 
             // enter the contact phone number
             NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
