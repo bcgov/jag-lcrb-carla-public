@@ -189,11 +189,11 @@ namespace bdd_tests
 
             // select 'Yes' for 'Is the proposed RLRS located in a rural community with no other RLRS?'
             NgWebElement uiIsRlrsLocatedInRuralCommunityAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-277-button"));
-            uiIsRlrsLocatedInRuralCommunityAloneYes.Click();
+            JavaScriptClick(uiIsRlrsLocatedInRuralCommunityAloneYes);
 
             // select 'Yes' for 'Is the proposed RLRS located in a tourist destination resort with no other RLRS?'
             NgWebElement uiIsRlrsLocatedAtTouristDestinationAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-280-button"));
-            uiIsRlrsLocatedAtTouristDestinationAloneYes.Click();
+            JavaScriptClick(uiIsRlrsLocatedAtTouristDestinationAloneYes);
 
             // enter the resort description
             NgWebElement uirlrsResortCommunityDescription = ngDriver.FindElement(By.CssSelector("textarea#rlrsResortCommunityDescription"));
@@ -201,15 +201,15 @@ namespace bdd_tests
 
             // select 'Yes' for 'Is there year-round all-weather road access to the community?'
             NgWebElement uiHasYearRoundAllWeatherRoadAccessYes = ngDriver.FindElement(By.Id("mat-button-toggle-283-button"));
-            uiHasYearRoundAllWeatherRoadAccessYes.Click();
+            JavaScriptClick(uiHasYearRoundAllWeatherRoadAccessYes);
 
             // select 'Yes' for 'Does your general store operate seasonally?'
             NgWebElement uiDoesGeneralStoreOperateSeasonallyYes = ngDriver.FindElement(By.Id("mat-button-toggle-286-button"));
-            uiDoesGeneralStoreOperateSeasonallyYes.Click();
+            JavaScriptClick(uiDoesGeneralStoreOperateSeasonallyYes);
 
             // select 'Yes' for 'Is the proposed RLRS located at least 10 km, by all-weather road, from another RLRS, LRS, or GLS?'
             NgWebElement uiIsRlrsAtLeast10kmFromAnotherStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-289-button"));
-            uiIsRlrsAtLeast10kmFromAnotherStoreYes.Click();
+            JavaScriptClick(uiIsRlrsAtLeast10kmFromAnotherStoreYes);
 
             // enter the other business info
             NgWebElement uiOtherBusinessesDetails = ngDriver.FindElement(By.CssSelector("textarea#otherBusinessesDetails"));
@@ -217,7 +217,7 @@ namespace bdd_tests
 
             // select 'No' for 'Is the applicant the legal and beneficial owner of the general store?'
             NgWebElement uiIsApplicantOwnerOfStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-292-button"));
-            uiIsApplicantOwnerOfStoreYes.Click();
+            JavaScriptClick(uiIsApplicantOwnerOfStoreYes);
 
             // enter the legal owners
             NgWebElement uiLegalAndBeneficialOwnersOfStore = ngDriver.FindElement(By.CssSelector("textarea#legalAndBeneficialOwnersOfStore"));
@@ -225,7 +225,7 @@ namespace bdd_tests
 
             // select 'Yes' for 'Is the applicant a franchisee or otherwise affiliated with another business?'
             NgWebElement uiIsApplicantFranchiseOrAffiliatedYes = ngDriver.FindElement(By.Id("mat-button-toggle-295-button"));
-            uiIsApplicantFranchiseOrAffiliatedYes.Click();
+            JavaScriptClick(uiIsApplicantFranchiseOrAffiliatedYes);
 
             // enter the name of the franchise or affiliated business
             NgWebElement uiFranchiseOrAffiliatedBusiness = ngDriver.FindElement(By.CssSelector("input#franchiseOrAffiliatedBusiness"));
