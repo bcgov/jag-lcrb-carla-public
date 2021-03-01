@@ -181,7 +181,7 @@ namespace bdd_tests
             uiStoreOpenDate.Click();
 
             NgWebElement uiStoreOpenDate2 = ngDriver.FindElement(By.CssSelector(".mat-calendar-body-cell-content.mat-calendar-body-today"));
-            JavaScriptClick(uiStoreOpenDate);
+            JavaScriptClick(uiStoreOpenDate2);
 
             // select 'Yes' for 'Store business is solvent without liquor sales. Liquor sales will not be its primary business.'
             NgWebElement uiConfirmLiquorSalesIsNotPrimaryBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-274-button"));
@@ -278,15 +278,15 @@ namespace bdd_tests
 
             // select the owner checkbox
             NgWebElement uiOwnerCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
-            JavaScriptClick(uiOwnerCheckbox);
+            uiOwnerCheckbox.Click();
 
             // select the owner's valid interest checkbox
             NgWebElement uiValidInterestCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='hasValidInterest']"));
-            JavaScriptClick(uiValidInterestCheckbox);
+            uiValidInterestCheckbox.Click();
 
             // select the zoning checkbox
             NgWebElement uiZoningCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willHaveValidInterest']"));
-            JavaScriptClick(uiZoningCheckbox);
+            uiZoningCheckbox.Click();
 
             // enter the contact phone number
             NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
