@@ -228,19 +228,13 @@
   </p>
 </section>
 
-<section style="margin-top: 20px; position: relative;">
-  <button class="btn btn-primary" (click)="initiateTransfer()">
-    <fa-icon [icon]="faSave" style="color: #fff;"></fa-icon>
-    SUBMIT TRANSFER
+<section class="button-row" style="margin-top: 20px; position: relative;">
+  <button class="btn btn-primary" (click)="initiateTransfer()">SUBMIT</button>
+  <button class="btn btn-link btn-cancel" routerLink="/dashboard">
+    <fa-icon [icon]="faTrash"></fa-icon>CANCEL TRANSFER
   </button>
-  <span style="color: #1a5a96; float: right; padding-top: 10px;">
-    <a routerLink="/dashboard">
-      <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
-      Cancel Transfer
-    </a>
-  </span>
-  <div [ngBusy]="busy"></div>
 </section>
+<div [ngBusy]="busy"></div>
 </div>
 </div>
 </div>
