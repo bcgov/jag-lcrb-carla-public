@@ -221,7 +221,7 @@
 
       <ng-container *ngFor="let item of changeList">
         <mat-checkbox [formControlName]="item.formControlName">
-          {{item.name}}
+          {{ account.isOtherBusinessType() && item.otherName ? item.otherName : item.name}}
         </mat-checkbox>
         <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 10px;"
           (click)="item.show = !!!item.show">

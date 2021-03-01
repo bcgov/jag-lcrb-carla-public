@@ -10,7 +10,7 @@
     <span *ngIf="application?.applicationStatus === 'Pending for LG/FN/Police Feedback'">(Sent to LG/IN)</span>
   </h1>
   <h1 class="ngtest-page-title"
-      *ngIf="this.isOpenedByLGForApproval && application?.applicationType.isShowLGINApproval">
+      *ngIf="this.isOpenedByLGForApproval && isShowLGINApproval">
     Provide Comment on
     Application
   </h1>
@@ -47,11 +47,11 @@
   </app-more-less-content>
 
   <p
-    *ngIf="application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation">
+    *ngIf="isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation">
     <strong>
 
       Prior to payment, your application will be submitted to your local government/Indigenous Nation for their
-      <span *ngIf="application?.applicationType.isShowLGINApproval">comment and assessment</span>
+      <span *ngIf="isShowLGINApproval">comment and assessment</span>
       <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">confirmation of zoning</span>.
       Please
       ensure
@@ -248,9 +248,29 @@
   </app-file-uploader>
 </section>
 
+<!-- OtherType BusinessType-->
+<section *ngIf="account.isOtherBusinessType()">
+  <h4>Organizational Leadership</h4>
+
+  <p>Please upload official documentation that describes your organization's ownership and leadership structure.</p>
+  <p>
+    <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
+    <span>Organizational leadership must provide completed Personal History Summary forms</span>
+  </p>
+  <app-file-uploader *ngIf="true || applicationId" documentType="OrganizationDetails" 
+                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+                     (numberOfUploadedFiles)="uploadedPartnershipAgreement = $event" [entityId]="applicationId"
+                     [uploadHeader]="'TO UPLOAD ORGANIZATION DETAILS, DRAG FILES HERE OR'">
+  </app-file-uploader>
+</section>
+
 <!-- Other -->
 <section
-  *ngIf="!this.businessTypeIsPartnership() && !this.businessTypeIsCorporation() && !this.businessTypeIsSoleProp() && !this.businessTypeIsSociety()">
+  *ngIf="!this.businessTypeIsPartnership() 
+  && !this.businessTypeIsCorporation() 
+  && !this.businessTypeIsSoleProp() 
+  && !this.businessTypeIsSociety()
+  && !account.isOtherBusinessType()">
   <h4>Legal Entity Documentation</h4>
   <p>
     Entities incorporated under federal or provincial legislation; example: local governments, First Nation,
@@ -904,19 +924,27 @@
           <!-- if the field is visible-->
           <div *ngIf="formField.visible">
             <!-- if it's a textbox, show it like a text box-->
-            <app-field
-              *ngIf="formField.controltype == 'TextBoxControl' && formField.datafieldname !== 'establishmentParcelId'"
-              [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'">
+            <app-field *ngIf="formField.controltype == 'TextBoxControl' && formField.datafieldname !== 'establishmentParcelId'"
+                       [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'">
               <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname"
-                     [id]="formField.datafieldname"/>
+                     [id]="formField.datafieldname" />
             </app-field>
+
+            <!-- Integer field -->
+
+            <app-field *ngIf="formField.controltype == 'IntegerControl'"
+                       [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'">
+              <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname"
+                     [id]="formField.datafieldname" (keydown)="rejectIfNotDigitOrBackSpace($event)" />
+            </app-field>
+
             <!-- show text area-->
 
             <div class="padded-section" style="padding-left: 10px;" *ngIf="formField.controltype == 'TextAreaControl'">
               <app-field [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'" [isFullWidth]="true"
                          [valid]="isValidOrNotTouched(formField.datafieldname)" [showChevrons]="false">
                 <textarea rows="8" style="width: 100%;" maxlength="5000" [formControlName]="formField.datafieldname"
-                              [id]="formField.datafieldname"></textarea>
+                          [id]="formField.datafieldname"></textarea>
               </app-field>
             </div>
 
@@ -2229,7 +2257,7 @@
 <!-- Proceed to Pay-->
 
 <section class="d-flex" style="margin-top: 15px;"
-         *ngIf="!isOpenedByLGForApproval && !isRAS() && !application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation ">
+         *ngIf="!isOpenedByLGForApproval && !isRAS() && !isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation ">
 
   <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
   <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
@@ -2282,7 +2310,7 @@
 <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg"
          *ngIf="isOpenedByLGForApproval">
   <app-lg-in-confirmation-of-receipt
-    *ngIf="application && application?.applicationType?.isShowLGINApproval  || lgApprovalDecisionMade()"
+    *ngIf="application && isShowLGINApproval  || lgApprovalDecisionMade()"
     [application]="application" [isOpenedByLGForApproval]="isOpenedByLGForApproval" [htmlContent]="htmlContent" [disableForm]="lgApprovalDecisionMade()">
   </app-lg-in-confirmation-of-receipt>
   <app-lg-zoning-confirmation
@@ -2303,7 +2331,7 @@
     <section class="ngtest-preamble-content">
       <h3>Submit for LG/IN Review</h3>
       Your application will now be submitted to your local government/Indigenous Nation for their
-      <span *ngIf="application?.applicationType.isShowLGINApproval">comment and assessment</span>
+      <span *ngIf="application?.applicationType?.isShowLGINApproval">comment and assessment</span>
       <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">confirmation of zoning</span>.
       Please
       ensure
@@ -2334,7 +2362,7 @@
     <section class="ngtest-preamble-content">
       <h3>LG/IN Review Complete</h3>
       Your application has been reviewed by your local government/Indigenous Nation and they have
-      <span *ngIf="application?.applicationType.isShowLGINApproval">
+      <span *ngIf="isShowLGINApproval">
         <span *ngIf="this.application.lGApprovalDecision !== 'OptOut'">accepted it for submission.</span>
         <span *ngIf="this.application.lGApprovalDecision === 'OptOut'">decided to Opt-Out of the community assessment process. In their place, LCRB will complete the site community assessment.</span>
       </span>
@@ -2356,7 +2384,7 @@
     <section class="ngtest-preamble-content">
       <h3>LG/IN Review Complete </h3>
       Your application has been reviewed by your local government/Indigenous Nation and they have
-      <span *ngIf="application?.applicationType.isShowLGINApproval"><strong>rejected</strong> it.</span>
+      <span *ngIf="isShowLGINApproval"><strong>rejected</strong> it.</span>
       <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">specified that zoning <strong>does not</strong> permit a {{application?.applicationType?.name}}.</span>
       You may contact the individual listed above for more information. If you intend to revise your application, you must submit a new one.
     </section>
