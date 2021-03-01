@@ -64,7 +64,6 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     this.showValidationMessages = false;
     this.markControlsAsTouched(this.form);
     this.validationMessages = this.listControlsWithErrors(this.form);
-    debugger;
     let valid = this.form.disabled || this.form.valid;
 
     if (resolutionRequired && ((this.uploadedResolutionDocuments || 0) < 1)) {
