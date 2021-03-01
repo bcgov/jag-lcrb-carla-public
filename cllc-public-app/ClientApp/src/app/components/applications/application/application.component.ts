@@ -1080,7 +1080,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (this.application.applicationType.showOwnershipDeclaration) {
 
-      if (!this.form.get('isOwner').value) {
+      if (!this.form.get('isOwner').value && !(this.form.get('isOwnerBusiness') && this.form.get('isOwnerBusiness').value)) {
         this.validationMessages.push('Only the owner of the business may submit this information');
       }
 

@@ -924,19 +924,27 @@
           <!-- if the field is visible-->
           <div *ngIf="formField.visible">
             <!-- if it's a textbox, show it like a text box-->
-            <app-field
-              *ngIf="formField.controltype == 'TextBoxControl' && formField.datafieldname !== 'establishmentParcelId'"
-              [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'">
+            <app-field *ngIf="formField.controltype == 'TextBoxControl' && formField.datafieldname !== 'establishmentParcelId'"
+                       [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'">
               <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname"
-                     [id]="formField.datafieldname"/>
+                     [id]="formField.datafieldname" />
             </app-field>
+
+            <!-- Integer field -->
+
+            <app-field *ngIf="formField.controltype == 'IntegerControl'"
+                       [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'">
+              <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname"
+                     [id]="formField.datafieldname" (keydown)="rejectIfNotDigitOrBackSpace($event)" />
+            </app-field>
+
             <!-- show text area-->
 
             <div class="padded-section" style="padding-left: 10px;" *ngIf="formField.controltype == 'TextAreaControl'">
               <app-field [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'" [isFullWidth]="true"
                          [valid]="isValidOrNotTouched(formField.datafieldname)" [showChevrons]="false">
                 <textarea rows="8" style="width: 100%;" maxlength="5000" [formControlName]="formField.datafieldname"
-                              [id]="formField.datafieldname"></textarea>
+                          [id]="formField.datafieldname"></textarea>
               </app-field>
             </div>
 
