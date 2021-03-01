@@ -185,7 +185,7 @@ namespace bdd_tests
 
             // select 'Yes' for 'Store business is solvent without liquor sales. Liquor sales will not be its primary business.'
             NgWebElement uiConfirmLiquorSalesIsNotPrimaryBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-274-button"));
-            uiConfirmLiquorSalesIsNotPrimaryBusinessYes.Click();
+            JavaScriptClick(uiConfirmLiquorSalesIsNotPrimaryBusinessYes);
 
             // select 'Yes' for 'Is the proposed RLRS located in a rural community with no other RLRS?'
             NgWebElement uiIsRlrsLocatedInRuralCommunityAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-277-button"));
