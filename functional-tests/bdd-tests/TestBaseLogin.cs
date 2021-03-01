@@ -59,7 +59,7 @@ namespace bdd_tests
             if (businessType == " private corporation")
             {
                 NgWebElement uiPrivateCorporationRadio = ngDriver.FindElement(By.CssSelector("input[value='PrivateCorporation'][type = 'radio']"));
-                uiPrivateCorporationRadio.Click();
+                JavaScriptClick(uiPrivateCorporationRadio);
             }
 
             // if this is a public corporation, click the radio button
