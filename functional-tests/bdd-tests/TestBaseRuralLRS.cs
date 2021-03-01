@@ -46,6 +46,8 @@ namespace bdd_tests
             string contactPhone = "2505555556";
             string contactEmail = "contact@test.com";
 
+            string numberOfResidents = "18";
+
             if (businessType == "private corporation")
             {
                 // upload the central securities register
@@ -136,10 +138,7 @@ namespace bdd_tests
             }
 
             // select 'Yes' for Treaty First Nation land
-            // partnership
             NgWebElement uiIsOnINLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-13"));
-            // private corp
-            // NgWebElement uiIsOnINLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-2"));
             uiIsOnINLand.Click();
 
             // search for and select the indigenous nation
@@ -206,6 +205,10 @@ namespace bdd_tests
             // select 'Yes' for 'Does your general store operate seasonally?'
             NgWebElement uiDoesGeneralStoreOperateSeasonallyYes = ngDriver.FindElement(By.Id("mat-button-toggle-286-button"));
             JavaScriptClick(uiDoesGeneralStoreOperateSeasonallyYes);
+
+            // enter number of residents within a 5km radius
+            NgWebElement uiSurroundingResidentsOfRlrsYes = ngDriver.FindElement(By.CssSelector("input#surroundingResidentsOfRlrs"));
+            uiSurroundingResidentsOfRlrsYes.SendKeys(numberOfResidents);
 
             // select 'Yes' for 'Is the proposed RLRS located at least 10 km, by all-weather road, from another RLRS, LRS, or GLS?'
             NgWebElement uiIsRlrsAtLeast10kmFromAnotherStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-289-button"));
