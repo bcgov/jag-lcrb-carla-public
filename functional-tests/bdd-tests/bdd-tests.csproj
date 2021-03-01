@@ -45,6 +45,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="AgentApplication.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="CannabisMarketingRelease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
