@@ -155,45 +155,57 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            // select 'Yes' for 'Is the proposed RLRS located in a rural community with no other RLRS?'
-            NgWebElement uiIsRlrsLocatedInRuralCommunityAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-169-button"));
-            uiIsRlrsLocatedInRuralCommunityAloneYes.Click();
+            if (businessType == "private corporation")
+            {
+                // select 'Yes' for 'Is the proposed RLRS located in a rural community with no other RLRS?'
+                NgWebElement uiIsRlrsLocatedInRuralCommunityAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-169-button"));
+                uiIsRlrsLocatedInRuralCommunityAloneYes.Click();
 
-            // select 'Yes' for 'Is the proposed RLRS located in a tourist destination resort with no other RLRS?'
-            NgWebElement uiIsRlrsLocatedAtTouristDestinationAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-172-button"));
-            uiIsRlrsLocatedAtTouristDestinationAloneYes.Click();
+                // select 'Yes' for 'Is the proposed RLRS located in a tourist destination resort with no other RLRS?'
+                NgWebElement uiIsRlrsLocatedAtTouristDestinationAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-172-button"));
+                uiIsRlrsLocatedAtTouristDestinationAloneYes.Click();
+            }
 
             // enter the resort description
             NgWebElement uirlrsResortCommunityDescription = ngDriver.FindElement(By.CssSelector("textarea#rlrsResortCommunityDescription"));
             uirlrsResortCommunityDescription.SendKeys(resortDescription);
 
-            // select 'Yes' for 'Is there year-round all-weather road access to the community?'
-            NgWebElement uiHasYearRoundAllWeatherRoadAccessYes = ngDriver.FindElement(By.Id("mat-button-toggle-175-button"));
-            uiHasYearRoundAllWeatherRoadAccessYes.Click();
+            if (businessType == "private corporation")
+            {
+                // select 'Yes' for 'Is there year-round all-weather road access to the community?'
+                NgWebElement uiHasYearRoundAllWeatherRoadAccessYes = ngDriver.FindElement(By.Id("mat-button-toggle-175-button"));
+                uiHasYearRoundAllWeatherRoadAccessYes.Click();
 
-            // select 'Yes' for 'Does your general store operate seasonally?'
-            NgWebElement uiDoesGeneralStoreOperateSeasonallyYes = ngDriver.FindElement(By.Id("mat-button-toggle-178-button"));
-            uiDoesGeneralStoreOperateSeasonallyYes.Click();
+                // select 'Yes' for 'Does your general store operate seasonally?'
+                NgWebElement uiDoesGeneralStoreOperateSeasonallyYes = ngDriver.FindElement(By.Id("mat-button-toggle-178-button"));
+                uiDoesGeneralStoreOperateSeasonallyYes.Click();
 
-            // select 'Yes' for 'Is the proposed RLRS located at least 10 km, by all-weather road, from another RLRS, LRS, or GLS?'
-            NgWebElement uiIsRlrsAtLeast10kmFromAnotherStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-181-button"));
-            uiIsRlrsAtLeast10kmFromAnotherStoreYes.Click();
+                // select 'Yes' for 'Is the proposed RLRS located at least 10 km, by all-weather road, from another RLRS, LRS, or GLS?'
+                NgWebElement uiIsRlrsAtLeast10kmFromAnotherStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-181-button"));
+                uiIsRlrsAtLeast10kmFromAnotherStoreYes.Click();
+            }
 
             // enter the other business info
             NgWebElement uiOtherBusinessesDetails = ngDriver.FindElement(By.CssSelector("textarea#otherBusinessesDetails"));
             uiOtherBusinessesDetails.SendKeys(otherBusinesses);
 
-            // select 'No' for 'Is the applicant the legal and beneficial owner of the general store?'
-            NgWebElement uiIsApplicantOwnerOfStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-185-button"));
-            uiIsApplicantOwnerOfStoreYes.Click();
+            if (businessType == "private corporation")
+            {
+                // select 'No' for 'Is the applicant the legal and beneficial owner of the general store?'
+                NgWebElement uiIsApplicantOwnerOfStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-185-button"));
+                uiIsApplicantOwnerOfStoreYes.Click();
+            }
 
             // enter the legal owners
             NgWebElement uiLegalAndBeneficialOwnersOfStore = ngDriver.FindElement(By.CssSelector("textarea#legalAndBeneficialOwnersOfStore"));
             uiLegalAndBeneficialOwnersOfStore.SendKeys(legalOwners);
 
-            // select 'Yes' for 'Is the applicant a franchisee or otherwise affiliated with another business?'
-            NgWebElement uiIsApplicantFranchiseOrAffiliatedYes = ngDriver.FindElement(By.Id("mat-button-toggle-187-button"));
-            uiIsApplicantFranchiseOrAffiliatedYes.Click();
+            if (businessType == "private corporation")
+            {
+                // select 'Yes' for 'Is the applicant a franchisee or otherwise affiliated with another business?'
+                NgWebElement uiIsApplicantFranchiseOrAffiliatedYes = ngDriver.FindElement(By.Id("mat-button-toggle-187-button"));
+                uiIsApplicantFranchiseOrAffiliatedYes.Click();
+            }
 
             // enter the name of the franchise or affiliated business
             NgWebElement uiFranchiseOrAffiliatedBusiness = ngDriver.FindElement(By.CssSelector("input#franchiseOrAffiliatedBusiness"));
