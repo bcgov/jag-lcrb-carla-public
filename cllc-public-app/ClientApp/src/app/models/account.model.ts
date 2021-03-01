@@ -6,7 +6,7 @@ import { LegalEntity } from "@models/legal-entity.model";
  * This is a list of Business Type classified as other.
  * They influence the apperance/behavior of the account profile page, the application page and the application dashboard
  */
-const BUSINESS_TYPE_OTHER = ["CoOp", "MilitaryMess"];
+const BUSINESS_TYPE_OTHER = ["Coop", "MilitaryMess"];
 
 export class Account {
   id: string;
