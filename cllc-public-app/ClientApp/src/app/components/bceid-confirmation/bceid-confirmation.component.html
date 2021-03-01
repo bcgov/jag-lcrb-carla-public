@@ -27,46 +27,13 @@
   <div *ngIf="bceidConfirmBusinessType && !account">
     <h2>Please confirm the organization type associated with the Business BCeID:</h2>
     <section class="radio-buttons">
-      <input type="radio" name="InitialBusinessType" value="PrivateCorporation" [(ngModel)]="businessType">
-      <span> Private Corporation</span>
-      <br>
-      <br>
-      <input type="radio" name="InitialBusinessType" value="PublicCorporation" [(ngModel)]="businessType">
-      <span> Public Corporation</span>
-      <br>
-      <br>
-      <input type="radio" name="InitialBusinessType" value="SoleProprietorship" [(ngModel)]="businessType">
-      <span> Sole Proprietorship</span>
-      <br>
-      <br>
-      <input type="radio" name="InitialBusinessType" value="Partnership" [(ngModel)]="businessType">
-      <span> Partnership</span>
-      <br>
-      <br>
-      <input type="radio" name="InitialBusinessType" value="Society" [(ngModel)]="businessType">
-      <span> Society</span>
-      <br>
-      <br>
-      <input type="radio" name="InitialBusinessType" value="University" [(ngModel)]="businessType">
-      <span> University</span>
-      <br>
-      <br>
-      <div *ngIf="lgApprovals">
-        <input type="radio" name="InitialBusinessType" value="LocalGovernment" [(ngModel)]="businessType">
-        <span> Local Government</span>
-        <br>
-        <br>
-      </div>
-      <!--input type="radio" name="InitialBusinessType" value="Church" [(ngModel)]="businessType">
-      <span> Church</span>
-      <br>
-      <br-->
-      <input type="radio" name="InitialBusinessType" value="IndigenousNation" [(ngModel)]="businessType">
-      <span> Indigenous nation <!--that does not fill a role similar to a Local Government in the licensing process --></span>
+      <mat-radio-group [(ngModel)]="businessType">
+        <mat-radio-button *ngFor="let item of businessTypes" class="mr-5" [value]="item.value">{{item.name}}</mat-radio-button>
+      </mat-radio-group>
     </section>
 
     <section *ngIf="bceidConfirmBusinessType">
-      <button class="btn btn-primary" (click)="confirmCorpType()" [disabled]="!businessType">
+      <button mat-raised-button color="primary" (click)="confirmCorpType()" [disabled]="!businessType">
         <strong>Next</strong>
       </button>
     </section>

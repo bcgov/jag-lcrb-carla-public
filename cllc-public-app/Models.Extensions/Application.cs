@@ -464,6 +464,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LGApprovalDecision = (LGDecision?)dynamicsApplication.AdoxioLgapprovaldecision,
                 LgZoning = (Zoning?)dynamicsApplication.AdoxioLgzoning,
                 LGDecisionComments = dynamicsApplication.AdoxioLgdecisioncomments,
+                DateApplicantSentToLG = dynamicsApplication.AdoxioDatesentlgin,
 
                 // Catering fields.
 
@@ -905,7 +906,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IndigenousNationId = dynamicsApplication._adoxioLocalgovindigenousnationidValue,
                 PoliceJurisdictionId = dynamicsApplication._adoxioPolicejurisdictionidValue,
                 IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete,
-                IsStructuralChange = (dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsstructuralchange == true)
+                IsStructuralChange = (dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsstructuralchange == true),
+                DateApplicationSubmitted = dynamicsApplication?.AdoxioDateapplicationsubmitted,
+                DateApplicantSentToLG = dynamicsApplication?.AdoxioDateapplicantsenttolg,
             };
 
             // id
