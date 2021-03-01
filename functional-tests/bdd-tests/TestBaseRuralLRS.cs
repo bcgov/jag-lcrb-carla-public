@@ -193,17 +193,20 @@ namespace bdd_tests
             NgWebElement uiFranchiseOrAffiliatedBusiness = ngDriver.FindElement(By.CssSelector("input#franchiseOrAffiliatedBusiness"));
             uiFranchiseOrAffiliatedBusiness.SendKeys(businessName);
 
-            // upload the signage documents
-            FileUpload("signage.pdf", "(//input[@type='file'])[20]");
+            if (businessType == "private corporation")
+            {
+                // upload the signage documents
+                FileUpload("signage.pdf", "(//input[@type='file'])[20]");
 
-            // upload the floor plan
-            FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
+                // upload the floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
 
-            // upload the site plan
-            FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
 
-            // upload the exterior photos
-            FileUpload("exterior_photos.pdf", "(//input[@type='file'])[29]");
+                // upload the exterior photos
+                FileUpload("exterior_photos.pdf", "(//input[@type='file'])[29]");
+            }
 
             // select the owner checkbox
             NgWebElement uiOwnerCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
