@@ -21,6 +21,9 @@
   display: flex;
   button {
     margin-right: 10px;
+    fa-icon {
+      margin-right: 10px;
+    }
   }
   button:last-child {
     margin-left: auto;

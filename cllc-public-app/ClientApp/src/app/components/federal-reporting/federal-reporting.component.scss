@@ -73,3 +73,18 @@ input {
     margin-left: 24px;
   }
 }
+
+.button-row {
+  display: flex;
+  button:last-child {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  button {
+    margin-right: 10px;
+    fa-icon {
+      margin-right: 10px;
+    }
+  }
+}
