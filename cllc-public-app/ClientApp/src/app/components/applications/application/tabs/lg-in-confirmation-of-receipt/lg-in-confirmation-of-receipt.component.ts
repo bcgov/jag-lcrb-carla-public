@@ -64,6 +64,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     this.showValidationMessages = false;
     this.markControlsAsTouched(this.form);
     this.validationMessages = this.listControlsWithErrors(this.form);
+    debugger;
     let valid = this.form.disabled || this.form.valid;
 
     if (resolutionRequired && ((this.uploadedResolutionDocuments || 0) < 1)) {
@@ -153,9 +154,9 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
 
   ApproveApplication() {
-    // if (!this.isValid()) {
-    //   return;
-    // }
+    if (!this.isValid()) {
+      return;
+    }
     const filesUploaded = (this.uploadedResolutionDocuments > 0);
     this.showComfirmation("Approve", filesUploaded).subscribe(result => {
       if (result === "OK") {
