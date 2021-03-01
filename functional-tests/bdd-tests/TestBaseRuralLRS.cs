@@ -120,7 +120,13 @@ namespace bdd_tests
             if (businessType == "private corporation")
             {
                 // upload the zoning document
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
+                FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[18]");
+            }
+
+            if (businessType == "partnership")
+            {
+                // upload the zoning document
+                FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[9]");
             }
 
             // select 'Yes' for Treaty First Nation land
@@ -206,6 +212,21 @@ namespace bdd_tests
 
                 // upload the exterior photos
                 FileUpload("exterior_photos.pdf", "(//input[@type='file'])[29]");
+            }
+
+            if (businessType == "partnership")
+            {
+                // upload the signage documents
+                FileUpload("signage.pdf", "(//input[@type='file'])[11]");
+
+                // upload the floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[14]");
+
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[17]");
+
+                // upload the exterior photos
+                FileUpload("exterior_photos.pdf", "(//input[@type='file'])[20]");
             }
 
             // select the owner checkbox
