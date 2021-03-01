@@ -2,6 +2,12 @@ import { Contact } from "./contact.model";
 import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { LegalEntity } from "@models/legal-entity.model";
 
+/**
+ * This is a list of Business Type classified as other.
+ * They influence the apperance/behavior of the account profile page, the application page and the application dashboard
+ */
+const BUSINESS_TYPE_OTHER = ["CoOp", "MilitaryMess"];
+
 export class Account {
   id: string;
   localGovernmentId: string;
@@ -42,28 +48,35 @@ export class Account {
 
   isPartnership(): boolean {
     const isPartnership = [
-        "GeneralPartnership",
-        "LimitedPartnership",
-        "LimitedLiabilityPartnership",
-        "Partnership"
-      ].indexOf(this.businessType) !==
+      "GeneralPartnership",
+      "LimitedPartnership",
+      "LimitedLiabilityPartnership",
+      "Partnership"
+    ].indexOf(this.businessType) !==
       -1;
     return isPartnership;
   }
 
   isPrivateCorporation(): boolean {
     const isPrivateCorp = [
-        "PrivateCorporation",
-        "UnlimitedLiabilityCorporation",
-        "LimitedLiabilityCorporation"
-      ].indexOf(this.businessType) !==
+      "PrivateCorporation",
+      "UnlimitedLiabilityCorporation",
+      "LimitedLiabilityCorporation"
+    ].indexOf(this.businessType) !==
       -1;
     return isPrivateCorp;
   }
 
-  businessTypeIsSociety (): boolean {
+  businessTypeIsSociety(): boolean {
     const isSociety = this.businessType === 'Society';
     return isSociety;
+  }
+
+  // Returns true if the businessType of the account is classified as other
+  // Any businessType can be added to the BUSINESS_TYPE_OTHER array to classify it as "other"
+  isOtherBusinessType(): boolean {
+    const isOtherType = BUSINESS_TYPE_OTHER.indexOf(this.businessType) !== -1;
+    return isOtherType;
   }
 
   isPublicCorporation(): boolean {
@@ -81,32 +94,53 @@ export class Account {
     }
     let name = "";
     switch (businessType) {
-    case "GeneralPartnership":
-    case 'LimitedPartnership"':
-    case "LimitedLiabilityPartnership":
-      name = "Partnership";
-      break;
-    case "SoleProprietorship":
-      name = "Sole Proprietorship";
-      break;
-    case "IndigenousNation":
-      name = "Indigenous Nation";
-      break;
-    case "PublicCorporation":
-      name = "Public Corporation";
-      break;
-    case "PrivateCorporation":
-    case "UnlimitedLiabilityCorporation":
-    case "LimitedLiabilityCorporation":
-      name = "Private Corporation";
-      break;
-    default:
-      name = businessType;
-      break;
+      case "GeneralPartnership":
+      case 'LimitedPartnership"':
+      case "LimitedLiabilityPartnership":
+        name = "Partnership";
+        break;
+      case "SoleProprietorship":
+        name = "Sole Proprietorship";
+        break;
+      case "IndigenousNation":
+        name = "Indigenous Nation";
+        break;
+      case "PublicCorporation":
+        name = "Public Corporation";
+        break;
+      case "PrivateCorporation":
+      case "UnlimitedLiabilityCorporation":
+      case "LimitedLiabilityCorporation":
+        name = "Private Corporation";
+        break;
+      default:
+        name = businessType;
+        break;
     }
     return name;
   }
 }
+
+export const BUSINESS_TYPE_LIST = [
+  { value: "", name: "Choose the organization type" },
+  // { value: "Church", name: "Church"},
+  { value: "Coop", name: "Co-Op" },
+  { value: "GeneralPartnership", name: "General Partnership" },
+  { value: "IndigenousNation", name: "Indigenous Nation" },
+  { value: "LimitedLiabilityCorporation", name: "Limited Liability Corporation" },
+  { value: "LimitedLiabilityPartnership", name: "Limited Liability Partnership" },
+  { value: "LimitedPartnership", name: "Limited Partnership" },
+  { value: "LocalGovernment", name: "Local Government" },
+  { value: "Marketer", name: "Marketer" },
+  { value: "MilitaryMess", name: "Military Mess" },
+  { value: "Partnership", name: "Partnership" },
+  { value: "PrivateCorporation", name: "Private Corporation" },
+  { value: "PublicCorporation", name: "Public Corporation" },
+  { value: "Society", name: "Society" },
+  { value: "SoleProprietorship", name: "Sole Proprietor" },
+  { value: "University", name: "University" },
+  { value: "UnlimitedLiabilityCorporation", name: "Unlimited Liability Corporation" },
+];
 
 
 export class TransferAccount {
