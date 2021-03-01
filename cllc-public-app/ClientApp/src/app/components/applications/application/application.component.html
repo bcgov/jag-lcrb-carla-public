@@ -248,9 +248,29 @@
   </app-file-uploader>
 </section>
 
+<!-- OtherType BusinessType-->
+<section *ngIf="account.isOtherBusinessType()">
+  <h4>Organizational Leadership</h4>
+
+  <p>Please upload official documentation that describes your organization's ownership and leadership structure.</p>
+  <p>
+    <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
+    <span>Organizational leadership must provide completed Personal History Summary forms</span>
+  </p>
+  <app-file-uploader *ngIf="true || applicationId" documentType="OrganizationDetails" 
+                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+                     (numberOfUploadedFiles)="uploadedPartnershipAgreement = $event" [entityId]="applicationId"
+                     [uploadHeader]="'TO UPLOAD ORGANIZATION DETAILS, DRAG FILES HERE OR'">
+  </app-file-uploader>
+</section>
+
 <!-- Other -->
 <section
-  *ngIf="!this.businessTypeIsPartnership() && !this.businessTypeIsCorporation() && !this.businessTypeIsSoleProp() && !this.businessTypeIsSociety()">
+  *ngIf="!this.businessTypeIsPartnership() 
+  && !this.businessTypeIsCorporation() 
+  && !this.businessTypeIsSoleProp() 
+  && !this.businessTypeIsSociety()
+  && !account.isOtherBusinessType()">
   <h4>Legal Entity Documentation</h4>
   <p>
     Entities incorporated under federal or provincial legislation; example: local governments, First Nation,

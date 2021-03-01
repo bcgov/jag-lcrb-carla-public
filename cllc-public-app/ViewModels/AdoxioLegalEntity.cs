@@ -30,12 +30,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [Display(Name = "Co-op")]
         Coop = 845280011,
         Trust = 845280012,
-        Estate = 845280013, [Display(Name = "Local Government")]
+        Estate = 845280013, 
+        [Display(Name = "Local Government")]
         LocalGovernment = 845280014,
         University = 845280016,
         Partnership = 845280005,
-        Marketer = 845280015
-
+        Marketer = 845280015,
+        MilitaryMess = 845280017
     }
     public enum AdoxioAccountTypeCodes
     {

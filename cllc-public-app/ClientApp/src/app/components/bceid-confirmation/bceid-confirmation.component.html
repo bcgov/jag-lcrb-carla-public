@@ -28,23 +28,12 @@
     <h2>Please confirm the organization type associated with the Business BCeID:</h2>
     <section class="radio-buttons">
       <mat-radio-group [(ngModel)]="businessType">
-        <mat-radio-button class="mr-5" value="PrivateCorporation">Private Corporation</mat-radio-button>
-        <mat-radio-button class="mr-5" value="PublicCorporation">Public Corporation</mat-radio-button>
-        <mat-radio-button class="mr-5" value="SoleProprietorship">SoleProprietorship</mat-radio-button>
-        <mat-radio-button class="mr-5" value="Partnership">Partnership</mat-radio-button>
-        <mat-radio-button class="mr-5" value="Society">Society</mat-radio-button>
-        <mat-radio-button class="mr-5" value="University">University</mat-radio-button>
-        <mat-radio-button class="mr-5"  *ngIf="lgApprovals" value="LocalGovernment">Local Government</mat-radio-button>
-        <!--Indigenous Nation does not fill a role similar to a Local Government in the licensing process -->
-        <mat-radio-button class="mr-5" value="IndigenousNation">Indigenous Nation</mat-radio-button>
-        <mat-radio-button class="mr-5" value="CoOp">Co-Op</mat-radio-button>
-        <mat-radio-button class="mr-5" value="MilitaryMess">Military Mess</mat-radio-button>
-        <!-- <mat-radio-button class="mr-5" value="Church">Church</mat-radio-button> -->
+        <mat-radio-button *ngFor="let item of businessTypes" class="mr-5" [value]="item.value">{{item.name}}</mat-radio-button>
       </mat-radio-group>
     </section>
 
     <section *ngIf="bceidConfirmBusinessType">
-      <button class="btn btn-primary" (click)="confirmCorpType()" [disabled]="!businessType">
+      <button mat-raised-button color="primary" (click)="confirmCorpType()" [disabled]="!businessType">
         <strong>Next</strong>
       </button>
     </section>
