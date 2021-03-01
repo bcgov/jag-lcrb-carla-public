@@ -129,6 +129,12 @@ namespace bdd_tests
                 FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[9]");
             }
 
+            if (businessType == "sole proprietorship")
+            {
+                // upload the zoning document
+                FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[6]");
+            }
+
             // select 'Yes' for Treaty First Nation land
             NgWebElement uiIsOnINLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-2"));
             uiIsOnINLand.Click();
@@ -227,6 +233,21 @@ namespace bdd_tests
 
                 // upload the exterior photos
                 FileUpload("exterior_photos.pdf", "(//input[@type='file'])[20]");
+            }
+
+            if (businessType == "sole proprietorship")
+            {
+                // upload the signage documents
+                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
+
+                // upload the floor plan
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
+
+                // upload the site plan
+                FileUpload("site_plan.pdf", "(//input[@type='file'])[14]");
+
+                // upload the exterior photos
+                FileUpload("exterior_photos.pdf", "(//input[@type='file'])[17]");
             }
 
             // select the owner checkbox
