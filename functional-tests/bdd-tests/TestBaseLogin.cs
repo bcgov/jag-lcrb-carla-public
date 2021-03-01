@@ -112,7 +112,7 @@ namespace bdd_tests
             }
 
             // click on the Next button
-            NgWebElement uiNextButton = ngDriver.FindElement(By.CssSelector(".btn-primary"));
+            NgWebElement uiNextButton = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
             uiNextButton.Click();
 
             /* 
