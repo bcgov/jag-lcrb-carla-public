@@ -12,6 +12,8 @@ Scenario: Rural LRS Name Branding Change (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Establishment Name Change Application
     # TODO
     And the account is deleted
@@ -26,6 +28,8 @@ Scenario: Rural LRS Name Branding Change (Public Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Establishment Name Change Application
     # TODO
@@ -42,6 +46,8 @@ Scenario: Rural LRS Name Branding Change (Partnership)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Establishment Name Change Application
     # TODO
     And the account is deleted
@@ -57,6 +63,8 @@ Scenario: Rural LRS Name Branding Change (Society)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Establishment Name Change Application
     # TODO
     And the account is deleted
@@ -71,6 +79,8 @@ Scenario: Rural LRS Name Branding Change (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Establishment Name Change Application
     # TODO
