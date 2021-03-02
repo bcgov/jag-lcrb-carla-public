@@ -266,7 +266,7 @@ namespace bdd_tests
             }
 
             // click on the liquor financial interest radio button
-            NgWebElement uiLiquorFinInterestRadio = ngDriver.FindElement(By.XPath("//app-connection-to-producers/div[3]/section[1]/input[1]"));
+            NgWebElement uiLiquorFinInterestRadio = ngDriver.FindElement(By.XPath("//app-connection-to-producers/div[2]/section/input[1]"));
             uiLiquorFinInterestRadio.Click();
 
             // enter the details of the financial interest
