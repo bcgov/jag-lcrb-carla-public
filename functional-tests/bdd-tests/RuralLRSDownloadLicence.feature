@@ -3,7 +3,7 @@
     I want to download a licence for a rural LRS application
 
 @privatecorporation @ruralLRS @release2
-Scenario: Rural LRS Application (Private Corporation)
+Scenario: Rural LRS Download Licence (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a private corporation
@@ -17,7 +17,7 @@ Scenario: Rural LRS Application (Private Corporation)
     Then I see the login page
 
 @publiccorporation @ruralLRS 
-Scenario: Rural LRS Application (Public Corporation)
+Scenario: Rural LRS Download Licence (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a public corporation
@@ -31,7 +31,7 @@ Scenario: Rural LRS Application (Public Corporation)
     Then I see the login page
 
 @partnership @ruralLRS 
-Scenario: Rural LRS Application (Partnership)
+Scenario: Rural LRS Download Licence (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a partnership
@@ -45,7 +45,7 @@ Scenario: Rural LRS Application (Partnership)
     Then I see the login page
 
 @society @ruralLRS 
-Scenario: Rural LRS Application (Society)
+Scenario: Rural LRS Download Licence (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a society
@@ -59,7 +59,7 @@ Scenario: Rural LRS Application (Society)
     Then I see the login page
 
 @soleproprietorship @ruralLRS
-Scenario: Rural LRS Application (Sole Proprietorship)
+Scenario: Rural LRS Download Licence (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a sole proprietorship
