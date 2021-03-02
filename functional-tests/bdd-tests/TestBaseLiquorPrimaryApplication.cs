@@ -156,16 +156,8 @@ namespace bdd_tests
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            // select 'No' for patio
-            NgWebElement uiHasPatioNo = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-3"));
-            uiHasPatioNo.Click();
-
-            // enter the establishment type
-            NgWebElement uiEstabType = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
-            uiEstabType.SendKeys(estType);
-
             // select 'Yes' for patio
-            NgWebElement uiHasPatioYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-2"));
+            NgWebElement uiHasPatioYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-13"));
             uiHasPatioYes.Click();
 
             // enter the patio comp description
@@ -203,6 +195,10 @@ namespace bdd_tests
             // click Interior option
             NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
             uiInteriorOption.Click();
+
+            // enter the establishment type
+            NgWebElement uiEstabType = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
+            uiEstabType.SendKeys(estType);
 
             if ((bizType == "partnership") || (bizType == "society"))
             {
