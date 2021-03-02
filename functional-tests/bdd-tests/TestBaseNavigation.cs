@@ -292,6 +292,11 @@ namespace bdd_tests
                     var startRLRS = ngDriver.FindElement(By.CssSelector("button[id='startRLRS']"));
                     JavaScriptClick(startRLRS);
                     break;
+                case "an Agent Licence":
+                    // click on the Agent Licence button
+                    var startAgent = ngDriver.FindElement(By.CssSelector("button[id='startAgent']"));
+                    JavaScriptClick(startAgent);
+                    break;
             }
         }
 

@@ -8,7 +8,8 @@ import { EventCategory, EventStatus, LicenceEvent, TuaEventType } from '@models/
 import { AppState } from '@app/app-state/models/app-state';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { LicenseDataService } from '@services/license-data.service';
-import { faQuestionCircle, faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LicenceEventSchedule } from '@models/licence-event-schedule';
 import { License } from '@models/license.model';
 

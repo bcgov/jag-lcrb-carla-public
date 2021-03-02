@@ -3,7 +3,7 @@
     I want to submit Liquor Primary Club Applications for different business types
 
 @liquorprimaryclub
-Scenario: DEV Liquor Primary Club Application (Private Corporation)
+Scenario: Liquor Primary Club Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a LPC Licence
     And I review the account profile for a private corporation
@@ -19,7 +19,7 @@ Scenario: DEV Liquor Primary Club Application (Private Corporation)
     Then I see the login page
 
 @liquorprimaryclub
-Scenario: DEV Liquor Primary Club Application (Society)
+Scenario: Liquor Primary Club Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a LPC Licence
     And I review the account profile for a society
@@ -35,7 +35,7 @@ Scenario: DEV Liquor Primary Club Application (Society)
     Then I see the login page
 
 @liquorprimaryclub
-Scenario: DEV Liquor Primary Club Application (Partnership)
+Scenario: Liquor Primary Club Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a LPC Licence
     And I review the account profile for a partnership
@@ -51,7 +51,7 @@ Scenario: DEV Liquor Primary Club Application (Partnership)
     Then I see the login page
 
 @liquorprimaryclub
-Scenario: DEV Liquor Primary Club Application (Sole Proprietorship)
+Scenario: Liquor Primary Club Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a LPC Licence
     And I review the account profile for a sole proprietorship

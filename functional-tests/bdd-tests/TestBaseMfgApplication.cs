@@ -109,7 +109,7 @@ namespace bdd_tests
 
             // select 'yes' for ALR inclusion
             NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-5"));
-            uiALRInclusion.Click();
+            JavaScriptClick(uiALRInclusion);
 
             if (manufacturerType == "winery in Parksville")
             {

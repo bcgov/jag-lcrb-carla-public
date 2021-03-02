@@ -153,9 +153,9 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
 
   ApproveApplication() {
-    // if (!this.isValid()) {
-    //   return;
-    // }
+    if (!this.isValid()) {
+      return;
+    }
     const filesUploaded = (this.uploadedResolutionDocuments > 0);
     this.showComfirmation("Approve", filesUploaded).subscribe(result => {
       if (result === "OK") {

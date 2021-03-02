@@ -9,6 +9,7 @@ using Microsoft.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -192,7 +193,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 to.AdoxioIsoninland = null;
             }
 
-            // Eligibility fields
+            // RLRS - Eligibility fields
 
             to.AdoxioIsrlrslocatedinruralcommunityalone = from.IsRlrsLocatedInRuralCommunityAlone;
             to.AdoxioIsrlrslocatedattouristdestinationalone = from.IsRlrsLocatedAtTouristDestinationAlone;
@@ -205,8 +206,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioLegalandbeneficialownersofstore = from.LegalAndBeneficialOwnersOfStore;
             to.AdoxioIsapplicantfranchiseoraffiliated = from.IsApplicantFranchiseOrAffiliated;
             to.AdoxioFranchiseoraffiliatedbusiness = from.FranchiseOrAffiliatedBusiness;
-
-        }
+            to.AdoxioHassufficientrangeofproducts = from.HasSufficientRangeOfProducts;
+            to.AdoxioHasotherproducts = from.HasOtherProducts;
+            to.AdoxioHasadditionalservices = from.HasAdditionalServices;
+            to.AdoxioStoreopendate = from.StoreOpenDate;
+            to.AdoxioConfirmliquorsalesisnotprimarybusiness = from.ConfirmLiquorSalesIsNotPrimaryBusiness;
+    }
 
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
@@ -459,6 +464,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LGApprovalDecision = (LGDecision?)dynamicsApplication.AdoxioLgapprovaldecision,
                 LgZoning = (Zoning?)dynamicsApplication.AdoxioLgzoning,
                 LGDecisionComments = dynamicsApplication.AdoxioLgdecisioncomments,
+                DateApplicantSentToLG = dynamicsApplication.AdoxioDatesentlgin,
 
                 // Catering fields.
 
@@ -534,9 +540,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsApplicantOwnerOfStore = dynamicsApplication.AdoxioIsapplicantownerofstore,
                 LegalAndBeneficialOwnersOfStore = dynamicsApplication.AdoxioLegalandbeneficialownersofstore,
                 IsApplicantFranchiseOrAffiliated = dynamicsApplication.AdoxioIsapplicantfranchiseoraffiliated,
-                FranchiseOrAffiliatedBusiness = dynamicsApplication.AdoxioFranchiseoraffiliatedbusiness
+                FranchiseOrAffiliatedBusiness = dynamicsApplication.AdoxioFranchiseoraffiliatedbusiness,
 
-
+                HasSufficientRangeOfProducts = dynamicsApplication.AdoxioHassufficientrangeofproducts,
+                HasOtherProducts = dynamicsApplication.AdoxioHasotherproducts,
+                HasAdditionalServices = dynamicsApplication.AdoxioHasadditionalservices,
+                StoreOpenDate = dynamicsApplication.AdoxioStoreopendate,
+                ConfirmLiquorSalesIsNotPrimaryBusiness = dynamicsApplication.AdoxioConfirmliquorsalesisnotprimarybusiness
             };
 
 
@@ -896,7 +906,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IndigenousNationId = dynamicsApplication._adoxioLocalgovindigenousnationidValue,
                 PoliceJurisdictionId = dynamicsApplication._adoxioPolicejurisdictionidValue,
                 IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete,
-                IsStructuralChange = (dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsstructuralchange == true)
+                IsStructuralChange = (dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsstructuralchange == true),
+                DateApplicationSubmitted = dynamicsApplication?.AdoxioDateapplicationsubmitted,
+                DateApplicantSentToLG = dynamicsApplication?.AdoxioDateapplicantsenttolg,
             };
 
             // id
