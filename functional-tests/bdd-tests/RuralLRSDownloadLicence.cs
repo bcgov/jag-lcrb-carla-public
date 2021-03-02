@@ -27,6 +27,8 @@ Scenario: Rural LRS Download Licence (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
@@ -40,6 +42,8 @@ Scenario: Rural LRS Download Licence (Public Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Download Licence
     And the account is deleted
@@ -55,6 +59,8 @@ Scenario: Rural LRS Download Licence (Partnership)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
@@ -69,6 +75,8 @@ Scenario: Rural LRS Download Licence (Society)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
@@ -82,6 +90,8 @@ Scenario: Rural LRS Download Licence (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Download Licence
     And the account is deleted
