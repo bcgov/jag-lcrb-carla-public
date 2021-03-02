@@ -3,6 +3,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { FormBuilder } from "@angular/forms";
 import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { Subscription } from "rxjs";
+import { Account } from "@models/account.model";
 
 @Component({
   selector: "app-connection-to-producers",
@@ -11,9 +12,7 @@ import { Subscription } from "rxjs";
 })
 export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   @Input()
-  accountId: string;
-  @Input()
-  businessType: string;
+  account: Account;
   @Input()
   isMarketer: boolean;
   @Input()
