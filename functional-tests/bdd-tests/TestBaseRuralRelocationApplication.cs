@@ -120,11 +120,11 @@ namespace bdd_tests
             FileUpload("valid_interest.pdf", "(//input[@type='file'])[18]");
 
             // select the authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("input[formcontrolname='authorizedToSubmit'][type='checkbox']"));
+            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             uiAuthorizedToSubmit.Click();
 
             // select the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("input[formcontrolname='signatureAgreement'][type='checkbox']"));
+            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgreement.Click();
         }
     }
