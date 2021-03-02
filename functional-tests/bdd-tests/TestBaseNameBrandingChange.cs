@@ -54,6 +54,13 @@ namespace bdd_tests
             Page Title: Submit a Name or Branding Change Application
             */
 
+            string newEstablishmentName = "Point Ellis Conservatory";
+
+            // enter a new establishment name
+            NgWebElement uiEstablishmentName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
+            uiEstablishmentName.Clear();
+            uiEstablishmentName.SendKeys(newEstablishmentName);
+
             // click on the authorized to submit checkbox
             NgWebElement uiAuthSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             uiAuthSubmit.Click();
