@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: ManufacturerTESA
+Feature: ManufacturerTiedHouseExemption
     As a logged in business user
-    I want to submit TESA applications for different manufacturer types
+    I want to submit a tied house exemption for different manufacturer types
 
-@manufacturer @winery @tesa @release2
-Scenario: Manufacturer TESA Application (Winery)
+@manufacturer @winery @mfglicencetiedhouse
+Scenario: Manufacturer Tied House Exemption (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -27,15 +27,14 @@ Scenario: Manufacturer TESA Application (Winery)
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I click on the link for Temporary Expanded Service Areas Application
-    And I click on the Continue to Application button
-    And I complete the TESA application for a Manufacturer licence
-    And I click on the Submit button
+    And I click on the link for Invitation for Tied House Exemption
+    And I complete the tied house exemption request
+    And I click on the secondary Submit button
     And the account is deleted
     Then I see the login page
 
-@manufacturer @brewery @tesa @release2
-Scenario: Manufacturer TESA Application (Brewery)
+@manufacturer @brewery @mfglicencetiedhouse
+Scenario: Manufacturer Tied House Exemption (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -44,15 +43,14 @@ Scenario: Manufacturer TESA Application (Brewery)
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I click on the link for Temporary Expanded Service Areas Application
-    And I click on the Continue to Application button
-    And I complete the TESA application for a Manufacturer licence
-    And I click on the Submit button
+    And I click on the link for Invitation for Tied House Exemption
+    And I complete the tied house exemption request
+    And I click on the secondary Submit button
     And the account is deleted
     Then I see the login page
 
-@manufacturer @distillery @tesa @release2
-Scenario: Manufacturer TESA Application (Distillery)
+@manufacturer @distillery @mfglicencetiedhouse
+Scenario: Manufacturer Tied House Exemption (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -61,15 +59,14 @@ Scenario: Manufacturer TESA Application (Distillery)
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I click on the link for Temporary Expanded Service Areas Application
-    And I click on the Continue to Application button
-    And I complete the TESA application for a Manufacturer licence
-    And I click on the Submit button
+    And I click on the link for Invitation for Tied House Exemption
+    And I complete the tied house exemption request
+    And I click on the secondary Submit button
     And the account is deleted
     Then I see the login page
 
-@manufacturer @copacker @tesa @release2
-Scenario: Manufacturer TESA Application (Co-packer)
+@manufacturer @copacker @mfglicencetiedhouse
+Scenario: Manufacturer Tied House Exemption (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
@@ -78,19 +75,18 @@ Scenario: Manufacturer TESA Application (Co-packer)
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
-    And I click on the link for Temporary Expanded Service Areas Application
-    And I click on the Continue to Application button
-    And I complete the TESA application for a Manufacturer licence
-    And I click on the Submit button
+    And I click on the link for Invitation for Tied House Exemption
+    And I complete the tied house exemption request
+    And I click on the secondary Submit button
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./ManufacturerTESA.feature")]
+    [FeatureFile("./ManufacturerTiedHouseExemption.feature")]
     [Collection("Liquor")]
-    public sealed class ManufacturerTESA : TestBase
+    public sealed class ManufacturerTiedHouseExemption : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

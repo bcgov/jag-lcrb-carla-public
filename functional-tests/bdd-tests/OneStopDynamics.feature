@@ -7,7 +7,8 @@
 # Name of this workflow: 'Licence: OneStopMessage - Issued'
 # GUID: 463CF450-060B-404F-8487-004840A49D81
 Scenario: OneStop New Licence (Private Corporation)
-    Given I am logged in to the dashboard as a private corporation
+    Given I confirm that autotest account deletion is switched off
+    And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
@@ -26,7 +27,8 @@ Scenario: OneStop New Licence (Private Corporation)
 
 @onestopdynamics @manualonly
 Scenario: OneStop Cancel Licence (Private Corporation)
-    Given I am logged in to the dashboard as a private corporation
+    Given I confirm that autotest account deletion is switched off
+    And I am logged in to the dashboard as a private corporation    
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
@@ -70,7 +72,8 @@ Scenario: OneStop Remove Cancellation (Private Corporation)
 
 @onestopdynamics @manualonly
 Scenario: OneStop Enter Licence Dormancy (Private Corporation)
-    Given I am logged in to the dashboard as a private corporation
+    Given I confirm that autotest account deletion is switched off
+    And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
@@ -110,7 +113,8 @@ Scenario: OneStop End Licence Dormancy (Private Corporation)
 
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Expired (Private Corporation)
-    Given I am logged in to the dashboard as a private corporation
+    Given I confirm that autotest account deletion is switched off
+    And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
@@ -151,7 +155,8 @@ Scenario: OneStop Licence Renewed (Private Corporation)
 
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Suspended (Private Corporation)
-    Given I am logged in to the dashboard as a private corporation
+    Given I confirm that autotest account deletion is switched off
+    And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
@@ -191,7 +196,8 @@ Scenario: OneStop Licence End Suspension (Private Corporation)
 
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Name Change (Private Corporation)
-    Given I am logged in to the dashboard as a private corporation
+    Given I confirm that autotest account deletion is switched off
+    And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
@@ -215,7 +221,8 @@ Scenario: OneStop Licence Name Change (Private Corporation)
 
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Address Change (Private Corporation)
-    Given I am logged in to the dashboard as a private corporation
+    Given I confirm that autotest account deletion is switched off
+    And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation
@@ -239,7 +246,8 @@ Scenario: OneStop Licence Address Change (Private Corporation)
 
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Transfer Ownership (Private Corporation)
-    Given I am logged in to the dashboard as a private corporation
+    Given I confirm that autotest account deletion is switched off
+    And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
     And I complete the eligibility disclosure
     And I review the account profile for a private corporation

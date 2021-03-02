@@ -222,11 +222,12 @@
       </p>
     </section>
 
-    <div class="p-4 button-row" *ngIf="isReadOnly">
+    <div class="py-4 button-row" *ngIf="isReadOnly">
       <button class="btn btn-link btn-cancel" routerLink="/licences">RETURN TO DASHBOARD</button>
     </div>
-    <div class="p-4 button-row" *ngIf="!isReadOnly">
-      <button class="btn btn-secondary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
+
+    <div class="py-4 button-row" *ngIf="!isReadOnly">
+      <button class="btn btn-secondary" (click)="save(false);" *ngIf="!isReadOnly">
         <span>
           <fa-icon [icon]="faSave"></fa-icon>SAVE FOR LATER
         </span>

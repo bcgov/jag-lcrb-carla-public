@@ -393,7 +393,7 @@ const masterChangeList = [
   {
     name: "Change of Directors or Officers",
     formControlName: "csChangeOfDirectorsOrOfficers",
-    availableTo: ["PrivateCorporation", "PublicCorporation", "Society"],
+    availableTo: ["PrivateCorporation", "PublicCorporation", "Society", "Coop", "MilitaryMess"],
     CannabisFee: 500,
     LiquorFee: 220,
     RequiresPHS: false,
@@ -406,8 +406,9 @@ const masterChangeList = [
   },
   {
     name: "Name Change, Licensee -- Corporation",
+    otherName: "Name Change, Licensee -- Organization",
     formControlName: "csNameChangeLicenseeCorporation",
-    availableTo: ["PrivateCorporation", "PublicCorporation", "SoleProprietorship"],
+    availableTo: ["PrivateCorporation", "PublicCorporation", "SoleProprietorship", "Coop", "MilitaryMess"],
     CannabisFee: 220,
     LiquorFee: 220,
     RequiresPHS: false,
@@ -416,6 +417,7 @@ const masterChangeList = [
     helpText: [
       "When a corporation with an interest in a licence has legally changed its name, but existing corporate shareholders, directors and officers, and certificate number on the certificate of incorporation have not changed"
     ],
+  
     //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
@@ -451,7 +453,8 @@ const masterChangeList = [
     formControlName: "csNameChangeLicenseePerson",
     availableTo: [
       "PrivateCorporation", "PublicCorporation", "GeneralPartnership", "Partnership",
-      "LimitedLiabilityPartnership", "IndigenousNation", "LocalGovernment", "Society"
+      "LimitedLiabilityPartnership", "IndigenousNation", "LocalGovernment", "Society",
+      "Coop", "MilitaryMess"
     ],
     CannabisFee: 220,
     LiquorFee: 220,
@@ -468,7 +471,7 @@ const masterChangeList = [
     formControlName: "csAdditionalReceiverOrExecutor",
     availableTo: [
       "PrivateCorporation", "PublicCorporation", "GeneralPartnership", "Partnership",
-      "LimitedLiabilityPartnership", "Society"
+      "LimitedLiabilityPartnership", "Society", "MilitaryMess"
     ],
     CannabisFee: 220,
     LiquorFee: 220,

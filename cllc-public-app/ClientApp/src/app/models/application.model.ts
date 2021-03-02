@@ -130,7 +130,7 @@ export interface Application {
   lGDecisionComments: string;
   resolutionDocsUploaded: boolean;
   lgZoning: string;
-
+  dateApplicantSentToLG: Date;
   applicant: Account;
 
   serviceAreas: ServiceArea[];
@@ -197,4 +197,23 @@ export interface Application {
   termConditionOriginalText: string;
   tempDateFrom: Date;
   tempDateTo: Date;
+
+  isRlrsLocatedInRuralCommunityAlone: number;
+  isRlrsLocatedAtTouristDestinationAlone: number;
+  rlrsResortCommunityDescription: string;
+  hasYearRoundAllWeatherRoadAccess: number;
+  doesGeneralStoreOperateSeasonally: number;
+  surroundingResidentsOfRlrs: number;
+  isRlrsAtLeast10kmFromAnotherStore: number;
+  isApplicantOwnerOfStore: number;
+  legalAndBeneficialOwnersOfStore: string;
+  isApplicantFranchiseOrAffiliated: number;
+  franchiseOrAffiliatedBusiness: string;
+
+  hasSufficientRangeOfProducts: number;
+  hasOtherProducts: number;
+  hasAdditionalServices: number;
+  storeOpenDate: Date;
+  confirmLiquorSalesIsNotPrimaryBusiness: number;
+
 }

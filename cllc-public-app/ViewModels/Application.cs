@@ -582,6 +582,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool? LgNoObjection { get; set; }
 
+        public DateTimeOffset? DateApplicantSentToLG { get; set; }
+
 
         public bool ResolutionDocsUploaded { get; set; }
 
@@ -697,6 +699,16 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? IsApplicantFranchiseOrAffiliated { get; set; }
 
         public string FranchiseOrAffiliatedBusiness { get; set; }
+        
+        public int? HasSufficientRangeOfProducts { get; set; }
+
+        public int? HasOtherProducts { get; set; }
+
+        public int? HasAdditionalServices { get; set; }
+
+        public DateTimeOffset? StoreOpenDate { get; set; }
+
+        public int? ConfirmLiquorSalesIsNotPrimaryBusiness { get; set; }
         
     }
 }

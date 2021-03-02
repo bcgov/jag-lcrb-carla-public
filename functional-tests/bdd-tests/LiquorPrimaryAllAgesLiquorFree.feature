@@ -1,9 +1,9 @@
-﻿Feature: LiquorPrimaryCateringEndorsement
+﻿Feature: LiquorPrimaryAllAgesLiquorFree
     As a logged in business user
-    I want to request a catering endorsement for a Liquor Primary Application
+    I want to request an all ages liquor free event authorization
 
-@liquorprimaryapp
-Scenario: Liquor Primary Catering Endorsement (Private Corporation)
+@liquorprimaryapp @release2
+Scenario: Liquor Primary All Ages Liquor Free 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
     And I review the account profile for a private corporation
@@ -18,13 +18,14 @@ Scenario: Liquor Primary Catering Endorsement (Private Corporation)
     And No applications awaiting review is displayed
     And I log in as a return user
     And I click on the link for Complete Application
+    And I click on the Continue to Application button
     And I review the local government response for a liquor primary licence
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
-    And I click on the link for Catering Endorsement Application
-    And I request a catering endorsement application
+    And I click on the Licences tab
+    And I click on the link for Request All-Ages Liquor-Free Event Authorization 
+    And I complete the All Ages Liquor Free Event request
     And I click on the Submit button
-    And I enter the payment information
     And the account is deleted
     Then I see the login page

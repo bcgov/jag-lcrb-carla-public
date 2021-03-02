@@ -13,12 +13,12 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: LiquorPrimaryDownloadLicence
+Feature: LiquorPrimaryAllAgesLiquorFree
     As a logged in business user
-    I want to download a Liquor Primary licence
+    I want to request an all ages liquor free event authorization
 
-@liquorprimaryapp
-Scenario: Liquor Primary Download Licence 
+@liquorprimaryapp @release2
+Scenario: Liquor Primary All Ages Liquor Free 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
     And I review the account profile for a private corporation
@@ -38,16 +38,19 @@ Scenario: Liquor Primary Download Licence
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
-    And I click on the link for Download Licence
+    And I click on the Licences tab
+    And I click on the link for Request All-Ages Liquor-Free Event Authorization 
+    And I complete the All Ages Liquor Free Event request
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./LiquorPrimaryDownloadLicence.feature")]
+    [FeatureFile("./LiquorPrimaryAllAgesLiquorFree.feature")]
     [Collection("Liquor")]
-    public sealed class LiquorPrimaryDownloadLicence : TestBase
+    public sealed class LiquorPrimaryAllAgesLiquorFree : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

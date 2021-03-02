@@ -416,7 +416,7 @@
 </section>
 
 <div class="p-4 button-row">
-  <button class="btn btn-secondary" style="margin-right: 10px;" (click)="save(false);" *ngIf="!isReadOnly">
+  <button class="btn btn-secondary"(click)="save(false);" *ngIf="!isReadOnly">
     <span><fa-icon [icon]="faSave"></fa-icon>SAVE FOR LATER</span>
   </button>
   <button class="btn btn-primary" (click)="save(true)" *ngIf="!isReadOnly">SUBMIT</button>
