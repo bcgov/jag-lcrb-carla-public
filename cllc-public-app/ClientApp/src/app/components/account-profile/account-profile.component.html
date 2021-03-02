@@ -64,9 +64,9 @@
 
   <!-- Incorporation/ BC Registration Number Box-->
   <section
-    *ngIf="['Partnership', 'Sole Proprietorship', 'University', 'Church', 'Indigenous Nation', 'Local Government'].indexOf(getBusinessTypeName()) == -1">
+    *ngIf="!account.isOtherBusinessType() &&  ['Partnership', 'Sole Proprietorship', 'University', 'Church', 'Indigenous Nation', 'Local Government'].indexOf(getBusinessTypeName()) == -1">
     <div [ngClass]="{'has-error': false}">
-      <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">
+      <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1 || account.isOtherBusinessType()" for="">
         Incorporation
         Number
       </label>
@@ -92,13 +92,7 @@
   <section
     *ngIf="['Partnership', 'Sole Proprietorship', 'University', 'Church', 'Local Government', 'Indigenous Nation'].indexOf(getBusinessTypeName()) == -1">
     <div [ngClass]="{'has-error': false}">
-      <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">
-        Date
-        of Incorporation in B.C.
-      </label>
-      <label *ngIf="getBusinessTypeName() == 'Society'">
-        Date of Incorporation in
-        B.C.
+      <label >Date of Incorporation in B.C.
       </label>
       <br>
       <input type="text" formControlName="dateOfIncorporationInBC"
@@ -302,7 +296,7 @@
 
 <div *ngIf="saveFormData?.businessProfile?.id">
   <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse"
-                               [businessType]="account?.businessType" (value)="tiedHouseFormData = $event">
+                               [account]="account" (value)="tiedHouseFormData = $event">
   </app-connection-to-producers>
 </div>
 
