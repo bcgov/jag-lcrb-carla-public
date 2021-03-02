@@ -41,6 +41,8 @@ namespace bdd_tests
             // select response: Does the retailer or store continue to operate?
             // select Yes for Question 2 using radio button
             NgWebElement uiYesRadio2 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isRetailerStillOperating'] mat-radio-button"));
+
+            ScrollToElement(uiYesRadio2);
             uiYesRadio2.Click();
 
             // select response: On or after March 1, 2020, were you or any of your associates involved with the distribution or supply of cannabis to a licensed or unlicensed cannabis retail store or retailer?
@@ -53,6 +55,8 @@ namespace bdd_tests
 
             NgWebElement uiInvolvementDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='illegalDistributionInvolvementDetails']"));
             uiInvolvementDetails.SendKeys(involvementDetails);
+
+            // scroll the view down.
 
             // complete field: Please indicate the name and location of the retailer or store           
             string nameAndLocation2 = "Automated test name and location of retailer (2)";
