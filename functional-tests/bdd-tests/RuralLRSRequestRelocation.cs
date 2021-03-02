@@ -30,7 +30,10 @@ Scenario: Rural LRS Request Relocation (Private Corporation)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Request Relocation
-    # TODO
+    And I click on the Continue to Application button
+    And I complete the Rural LRS relocation application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
@@ -47,7 +50,10 @@ Scenario: Rural LRS Request Relocation (Public Corporation)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Request Relocation
-    # TODO
+    And I click on the Continue to Application button
+    And I complete the Rural LRS relocation application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
@@ -64,7 +70,10 @@ Scenario: Rural LRS Request Relocation (Partnership)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Request Relocation
-    # TODO
+    And I click on the Continue to Application button
+    And I complete the Rural LRS relocation application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
@@ -81,7 +90,10 @@ Scenario: Rural LRS Request Relocation (Society)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Request Relocation
-    # TODO
+    And I click on the Continue to Application button
+    And I complete the Rural LRS relocation application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
@@ -98,7 +110,10 @@ Scenario: Rural LRS Request Relocation (Sole Proprietorship)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Request Relocation
-    # TODO
+    And I click on the Continue to Application button
+    And I complete the Rural LRS relocation application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 */
