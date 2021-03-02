@@ -164,7 +164,7 @@ namespace bdd_tests
             uiEstabPhone.SendKeys(estPhone);
 
             // select 'Yes' for 'General store provides a range of products for residents to meet their basic grocery needs?'
-            NgWebElement uiHasSufficientRangeOfProductsYes = ngDriver.FindElement(By.Id("mat-button-toggle-199-button"));
+            NgWebElement uiHasSufficientRangeOfProductsYes = ngDriver.FindElement(By.Id("mat-button-toggle-265-button"));
             uiHasSufficientRangeOfProductsYes.Click();
 
             // select 'Yes' for 'Does your general store provide other products such as hardware supplies and sporting goods?'
