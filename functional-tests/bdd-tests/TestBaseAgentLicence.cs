@@ -27,6 +27,9 @@ namespace bdd_tests
             Page Title: Agent Licence Application
             */
 
+            string contactPhone = "2501811818";
+            string contactEmail = "test@automation.com";
+
             if (bizType == "partnership")
             {
                 // upload a partnership agreement
@@ -77,6 +80,14 @@ namespace bdd_tests
                 // upload personal history summary documents
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
             }
+
+            // enter the contact phone number
+            NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
+            uiContactPhone.SendKeys(contactPhone);
+
+            // enter the contact email
+            NgWebElement uiContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonEmail']"));
+            uiContactEmail.SendKeys(contactEmail);
 
             // click on the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
