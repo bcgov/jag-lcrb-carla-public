@@ -12,6 +12,8 @@ Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees 
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Sales to Hospitality Licensees and Special Event Permittees
     # TODO
     And the account is deleted
@@ -26,6 +28,8 @@ Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees 
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Sales to Hospitality Licensees and Special Event Permittees
     # TODO
@@ -42,6 +46,8 @@ Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees 
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Sales to Hospitality Licensees and Special Event Permittees
     # TODO
     And the account is deleted
@@ -57,6 +63,8 @@ Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees 
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Sales to Hospitality Licensees and Special Event Permittees
     # TODO
     And the account is deleted
@@ -71,6 +79,8 @@ Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees 
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Sales to Hospitality Licensees and Special Event Permittees
     # TODO
