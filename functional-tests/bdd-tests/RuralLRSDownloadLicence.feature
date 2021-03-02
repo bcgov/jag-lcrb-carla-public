@@ -1,6 +1,6 @@
-﻿Feature: RuralLRS
+﻿Feature: RuralLRSDownloadLicence
     As a logged in business user
-    I want to submit a rural LRS application for different business types
+    I want to download a licence for a rural LRS application
 
 @privatecorporation @ruralLRS @release2
 Scenario: Rural LRS Application (Private Corporation)
@@ -10,12 +10,13 @@ Scenario: Rural LRS Application (Private Corporation)
     And I complete the Rural LRS application for a private corporation
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I click on the Licences tab
+    And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
 
-@publiccorporation @ruralLRS @release2
+@publiccorporation @ruralLRS 
 Scenario: Rural LRS Application (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Rural LRS
@@ -23,12 +24,13 @@ Scenario: Rural LRS Application (Public Corporation)
     And I complete the Rural LRS application for a public corporation
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I click on the Licences tab
+    And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
 
-@partnership @ruralLRS @release2
+@partnership @ruralLRS 
 Scenario: Rural LRS Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Rural LRS
@@ -36,12 +38,13 @@ Scenario: Rural LRS Application (Partnership)
     And I complete the Rural LRS application for a partnership
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I click on the Licences tab
+    And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
 
-@society @ruralLRS @release2
+@society @ruralLRS 
 Scenario: Rural LRS Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Rural LRS
@@ -49,12 +52,13 @@ Scenario: Rural LRS Application (Society)
     And I complete the Rural LRS application for a society
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I click on the Licences tab
+    And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
 
-@soleproprietorship @ruralLRS @release2
+@soleproprietorship @ruralLRS
 Scenario: Rural LRS Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Rural LRS
@@ -62,7 +66,8 @@ Scenario: Rural LRS Application (Sole Proprietorship)
     And I complete the Rural LRS application for a sole proprietorship
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I click on the Licences tab
+    And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page

@@ -15,7 +15,7 @@ using Xunit;
 /*
 Feature: RuralLRS
     As a logged in business user
-    I want to submit a rural LRS application for a private corporation
+    I want to submit a rural LRS application for different business types
 
 @privatecorporation @ruralLRS @release2
 Scenario: Rural LRS Application (Private Corporation)
