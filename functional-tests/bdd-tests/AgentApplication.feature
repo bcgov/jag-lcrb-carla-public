@@ -10,7 +10,7 @@ Scenario: Agent Application (Private Corporation)
     And I complete the Agent Licence application for a private corporation
     And I click on the Submit button
     And I enter the payment information
-    # And I confirm the payment receipt for an Agent Licence
+    And I confirm the payment receipt for an Agent Licence
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted

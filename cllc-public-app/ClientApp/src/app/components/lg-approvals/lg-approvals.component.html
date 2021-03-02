@@ -35,9 +35,6 @@
             </div>
             <div>{{item?.applicationType?.name}}</div>
             <div>Job Number: {{item?.jobNumber}}</div>
-            <div *ngIf="item.dateApplicantSentToLG">
-              Date Sent to LG: {{item.dateApplicantSentToLG | date : 'dd MMM yyyy'}}
-            </div>
             <!--div>Sent for Review: {{item?.modifiedOn}}</div-->
           </td>
           <td style="padding: 10px;">
@@ -52,6 +49,10 @@
           </td>
           <td align="center">
             <a routerLink="/application/{{item?.id}}"><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Review Application</a>
+            <br>
+            <div *ngIf="item.dateApplicantSentToLG">
+              <strong>Date Sent</strong>: {{item.dateApplicantSentToLG | date : 'dd MMM yyyy'}}
+            </div>
           </td>
         </tr>
       </table>
