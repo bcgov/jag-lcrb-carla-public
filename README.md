@@ -21,6 +21,11 @@ Technology Stack
 | Logging | Splunk, Console, MS Teams and Kibana |
 | CI/CD Pipeline | Jenkins |
 
+
+System Architecture
+--------------
+![alt text](openshift\system-architecture.png)
+
 Repository Map
 --------------
 - **.s2i**: Source to image (s2i) assembly script
