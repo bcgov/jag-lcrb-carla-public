@@ -104,17 +104,19 @@ namespace bdd_tests
             JavaScriptClick(uiProofOfZoning);
 
             // select 'yes' for Treaty First Nation Land
-            NgWebElement uiTreatyFirstNationLand = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-2"));
+            NgWebElement uiTreatyFirstNationLand = ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button"));
+            ScrollToElement(uiTreatyFirstNationLand);
             JavaScriptClick(uiTreatyFirstNationLand);
 
             // select 'yes' for ALR inclusion
-            NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-5"));
+            NgWebElement uiALRInclusion = ngDriver.FindElement(By.CssSelector("[formcontrolname='isAlr'] mat-radio-button"));
             JavaScriptClick(uiALRInclusion);
 
+            // search for and select the indigenous nation
+            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+            ScrollToElement(uiIndigenousNation);
             if (manufacturerType == "winery in Parksville")
             {
-                // search for and select the local government
-                NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
                 uiIndigenousNation.SendKeys(localGovernmentParksville);
 
                 NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
@@ -129,8 +131,6 @@ namespace bdd_tests
             }
             else
             {
-                // search for and select the indigenous nation
-                NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
                 uiIndigenousNation.SendKeys(indigenousNation);
 
                 NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
@@ -150,33 +150,35 @@ namespace bdd_tests
 
             // enter the store phone number
             NgWebElement uiEstabPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentPhone']"));
+            ScrollToElement(uiEstabPhone);
             uiEstabPhone.SendKeys(storePhone);
 
+            // this will likely need to be refactored with better CSS selectors.
             if ((manufacturerType == "winery") || (manufacturerType == "winery in Parksville"))
             {
                 // select winery radio button
-                NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-8"));
+                NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button[ng-reflect-value='Winery']"));
                 uiWinery.Click();
             }
 
             if (manufacturerType == "distillery")
             {
                 // select distillery radio button
-                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-9"));
+                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button[ng-reflect-value='Distillery']"));
                 uiDistillery.Click();
             }
 
             if (manufacturerType == "brewery")
             {
                 // select brewery radio button
-                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-10"));
+                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button[ng-reflect-value='Brewery']"));
                 uiBrewery.Click();
             }
 
             if (manufacturerType == "co-packer")
             {
                 // select co-packer radio button
-                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-11"));
+                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button[ng-reflect-value='Co-packer']"));
                 uiCoPacker.Click();
             }
 
