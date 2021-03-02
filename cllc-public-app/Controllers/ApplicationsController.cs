@@ -79,7 +79,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 expand: expand);
                         if (licenceType?.AdoxioLicencetypesApplicationtypes != null)
                             endorsements = licenceType.AdoxioLicencetypesApplicationtypes
-                                .Where(type => type.AdoxioIsendorsement == true)
+                                .Where(type => (type.AdoxioIsendorsement == true || type.AdoxioCopylicencetc == true) )
                                 .Select(type => type.AdoxioName)
                                 .ToList();
                     }
