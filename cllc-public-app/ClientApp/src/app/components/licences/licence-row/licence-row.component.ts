@@ -476,6 +476,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         return `${pdfRoot}/manufacturer-handbook.pdf`;
       case "UBrew and UVin":
         return `${pdfRoot}/ubrewanduvin-handbook.pdf`;
+      case "RLRS":
+        return `${pdfRoot}/rlrs-handbook.pdf`;
       default:
         return "404";
     }
