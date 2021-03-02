@@ -80,7 +80,7 @@ namespace bdd_tests
         }
 
 
-        [And(@"I confirm the payment receipt for a (.*)")]
+        [And(@"I confirm the payment receipt for a(.*)")]
         public void ConfirmPaymentReceipt(string applicationType)
         {
             System.Threading.Thread.Sleep(3000);
@@ -89,34 +89,40 @@ namespace bdd_tests
             Page Title: Payment Approved
             */
 
-            if (applicationType == "Cannabis Retail Store application")
+            if (applicationType == " Cannabis Retail Store application")
             {
                 // confirm that payment receipt is for $7,500.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,500.00')]")).Displayed);
             }
 
-            if (applicationType == "Catering application")
+            if (applicationType == " Catering application")
             {
                 // confirm that payment receipt is for $475.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$475.00')]")).Displayed);
             }
 
-            if (applicationType == "Manufacturer Licence application")
+            if (applicationType == " Manufacturer Licence application")
             {
                 // confirm that payment receipt is for $550.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$550.00')]")).Displayed);
             }
 
-            if (applicationType == "a UBrew / UVin application")
+            if (applicationType == " UBrew / UVin application")
             {
                 // confirm that payment receipt is for $550.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$550.00')]")).Displayed);
             }
 
-            if (applicationType == "a Food Primary application")
+            if (applicationType == " Food Primary application")
             {
                 // confirm that payment receipt is for $950.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$950.00')]")).Displayed);
+            }
+
+            if (applicationType == "n Agent Licence")
+            {
+                // confirm that payment receipt is for $220.00
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
             }
         }
 
