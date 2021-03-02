@@ -239,6 +239,7 @@ Scenario: OneStop Licence Address Change (Private Corporation)
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I request a store relocation for Cannabis
+    And the application is approved
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I wait 2 minutes
@@ -266,6 +267,7 @@ Scenario: OneStop Licence Transfer Ownership (Private Corporation)
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I request a transfer of ownership
+    And the application is approved
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I wait 2 minutes
