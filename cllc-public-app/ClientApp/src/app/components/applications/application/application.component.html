@@ -2436,7 +2436,7 @@
 
     <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
             (click)="submit_application()" [disabled]="submitApplicationInProgress">
-      SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+      SUBMIT&nbsp;<span *ngIf="isFreeEndorsement() || (!skipPayment && !isRAS())">&amp; PAY</span>
       <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
     </button>
 

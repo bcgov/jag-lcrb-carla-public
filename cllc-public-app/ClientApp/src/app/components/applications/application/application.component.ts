@@ -840,11 +840,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
       );
   }
 
+  isFreeEndorsement(): boolean {
+    let freeEndorsement = this.application.applicationType.isEndorsement && (this?.application?.assignedLicence == null);
+    return freeEndorsement;
+  }
+
   /**
    * Submit the application for payment
    * */
   submit_application() {
-
     // Only save if the data is valid
     if (this.isValid()) {
       this.submitApplicationInProgress = true;
@@ -865,7 +869,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
                 .subscribe(res => {
                   this.saveComplete.emit(true);
                   // however we need to redirect if the application is Free
-                  if (this.application.applicationType.isFree) {
+                  
+                  if (this.application.applicationType.isFree || this.isFreeEndorsement()) {
                     this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
                     this.router.navigateByUrl('/dashboard');
                   }
