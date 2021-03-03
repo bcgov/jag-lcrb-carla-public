@@ -157,28 +157,28 @@ namespace bdd_tests
             if ((manufacturerType == "winery") || (manufacturerType == "winery in Parksville"))
             {
                 // select winery radio button
-                NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button[ng-reflect-value='Winery']"));
+                NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button#mat-radio-19"));
                 uiWinery.Click();
             }
 
             if (manufacturerType == "distillery")
             {
                 // select distillery radio button
-                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button[ng-reflect-value='Distillery']"));
+                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button#mat-radio-20"));
                 uiDistillery.Click();
             }
 
             if (manufacturerType == "brewery")
             {
                 // select brewery radio button
-                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button[ng-reflect-value='Brewery']"));
+                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button#mat-radio-21"));
                 uiBrewery.Click();
             }
 
             if (manufacturerType == "co-packer")
             {
                 // select co-packer radio button
-                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button[ng-reflect-value='Co-packer']"));
+                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button#mat-radio-22"));
                 uiCoPacker.Click();
             }
 
