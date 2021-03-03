@@ -306,6 +306,14 @@ namespace bdd_tests
             // click on the signature agreement checkbox
             NgWebElement uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgree.Click();
+
+            // retrieve the current URL to get the application ID (needed downstream)
+            string URL = ngDriver.Url;
+
+            // retrieve the application ID
+            string[] parsedURL = URL.Split('/');
+
+            applicationID = parsedURL[5];
         }
     }
 }
