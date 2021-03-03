@@ -159,7 +159,8 @@
                   Applications for Review
                 </a>
                 <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
-                   class="nav-link" routerLink="/notices">
+                  matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="!(showNoticesBadge$ | async)"
+                  class="nav-link with-badge" routerLink="/notices">
                   Notices
                 </a>
               </li>
@@ -170,7 +171,7 @@
               (click)="showMessageCenterContent = !showMessageCenterContent" style="cursor: pointer; padding: 10px;">
           <button color="primary"
                   style="background-color: transparent; border: none; color: #FFF; margin-right: 10px; margin-top: 20px; padding: 0;"
-                  MatBadgeSize="small" matBadge="!" matBadgePosition="after" matBadgeColor="warn">
+                  matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn">
             <fa-icon [icon]="faBell" class="fa-lg"></fa-icon>&nbsp;&nbsp;&nbsp;
           </button>
         </span>
