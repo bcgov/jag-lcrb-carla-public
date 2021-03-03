@@ -30,7 +30,7 @@ namespace bdd_tests
             string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
             string nameBrandingLinkCateringMfgUBrewFP = "Establishment Name Change Application";
 
-            if ((changeType == "Catering") || (changeType == "Manufacturing") || (changeType == "UBrew") || (changeType == "Food Primary"))
+            if ((changeType == "Catering") || (changeType == "Manufacturing") || (changeType == "UBrew") || (changeType == "Food Primary") || (changeType == "Rural RLS"))
             {
                 // click on the Establishment Name Change Application link
                 NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCateringMfgUBrewFP));
