@@ -24,7 +24,7 @@ Technology Stack
 
 System Architecture
 --------------
-![alt text](openshift\system-architecture.png)
+![alt text](openshift/system-architecture.png)
 
 Repository Map
 --------------
