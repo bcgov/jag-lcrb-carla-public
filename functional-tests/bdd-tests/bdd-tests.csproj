@@ -45,6 +45,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="AgentDownloadLicence.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="AgentApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
