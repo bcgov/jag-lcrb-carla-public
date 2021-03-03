@@ -1,24 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
-
-/*
-Feature: RuralLRSDownloadLicence
+﻿Feature: RuralLRSNameBrandingChange
     As a logged in business user
-    I want to download a licence for a rural LRS application
+    I want to request a name or branding change for a rural LRS application
 
 @privatecorporation @ruralLRS @release2
-Scenario: Rural LRS Download Licence (Private Corporation)
+Scenario: Rural LRS Name Branding Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a private corporation
@@ -29,12 +14,12 @@ Scenario: Rural LRS Download Licence (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I click on the link for Download Licence
+    And I request a valid store name or branding change for Rural RLS
     And the account is deleted
     Then I see the login page
 
 @publiccorporation @ruralLRS 
-Scenario: Rural LRS Download Licence (Public Corporation)
+Scenario: Rural LRS Name Branding Change (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a public corporation
@@ -45,12 +30,12 @@ Scenario: Rural LRS Download Licence (Public Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I click on the link for Download Licence
+    And I request a valid store name or branding change for Rural RLS
     And the account is deleted
     Then I see the login page
 
 @partnership @ruralLRS 
-Scenario: Rural LRS Download Licence (Partnership)
+Scenario: Rural LRS Name Branding Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a partnership
@@ -61,12 +46,12 @@ Scenario: Rural LRS Download Licence (Partnership)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I click on the link for Download Licence
+    And I request a valid store name or branding change for Rural RLS
     And the account is deleted
     Then I see the login page
 
 @society @ruralLRS 
-Scenario: Rural LRS Download Licence (Society)
+Scenario: Rural LRS Name Branding Change (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a society
@@ -77,12 +62,12 @@ Scenario: Rural LRS Download Licence (Society)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I click on the link for Download Licence
+    And I request a valid store name or branding change for Rural RLS
     And the account is deleted
     Then I see the login page
 
 @soleproprietorship @ruralLRS
-Scenario: Rural LRS Download Licence (Sole Proprietorship)
+Scenario: Rural LRS Name Branding Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a sole proprietorship
@@ -93,29 +78,6 @@ Scenario: Rural LRS Download Licence (Sole Proprietorship)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I click on the link for Download Licence
+    And I request a valid store name or branding change for Rural RLS
     And the account is deleted
     Then I see the login page
-*/
-
-namespace bdd_tests
-{
-    [FeatureFile("./RuralLRSDownloadLicence.feature")]
-    [Collection("Cannabis")]
-    public sealed class RuralLRSDownloadLicence : TestBase
-    {
-        [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void LogInToDashboard(string businessType)
-        {
-            NavigateToFeatures();
-
-            CheckFeatureFlagsLicenseeChanges();
-
-            CheckFeatureLEConnections();
-
-            IgnoreSynchronizationFalse();
-
-            CarlaLogin(businessType);
-        }
-    }
-}

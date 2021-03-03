@@ -12,8 +12,9 @@ Scenario: Rural LRS Licence Transfer (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Transfer Licence
-    # TODO
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
@@ -27,8 +28,9 @@ Scenario: Rural LRS Licence Transfer (Public Corporation)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Transfer Licence
-    # TODO
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
@@ -42,8 +44,9 @@ Scenario: Rural LRS Licence Transfer (Partnership)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Transfer Licence
-    # TODO
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
@@ -57,8 +60,9 @@ Scenario: Rural LRS Licence Transfer (Society)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Transfer Licence
-    # TODO
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 
@@ -72,7 +76,8 @@ Scenario: Rural LRS Licence Transfer (Sole Proprietorship)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Transfer Licence
-    # TODO
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page

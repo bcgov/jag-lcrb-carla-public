@@ -91,5 +91,11 @@ namespace bdd_tests
 
             return result;
         }
+
+        protected void ScrollToElement(NgWebElement element)
+        {
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+            executor.ExecuteScript("arguments[0].scrollIntoView(true);", element);
+        }
     }
 }

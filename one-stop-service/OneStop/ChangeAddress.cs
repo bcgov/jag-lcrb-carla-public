@@ -32,6 +32,13 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             {
                 throw new Exception("The licence must have an AdoxioLicencee");
             }
+
+            if (licence.AdoxioBusinessprogramaccountreferencenumber == null)
+            {
+                // set to 1 and handle errors as encountered.
+                licence.AdoxioBusinessprogramaccountreferencenumber = "1";
+            }
+
             var sbnChangeAddress = new SBNChangeAddress();
             sbnChangeAddress.header = GetHeader(licence);
             sbnChangeAddress.body = GetBody(licence);
