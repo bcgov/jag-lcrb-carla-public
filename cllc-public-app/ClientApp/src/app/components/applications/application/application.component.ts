@@ -851,32 +851,43 @@ export class ApplicationComponent extends FormBase implements OnInit {
   submit_application() {
     // Only save if the data is valid
     if (this.isValid()) {
+      // show status
       this.submitApplicationInProgress = true;
-      this.busy = this.save(!this.application.applicationType.isFree, <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
+      // save and try to generate an invoice.
+      // if it's not free, nor a free endorsement, show the progress
+      this.busy = this.save((!this.application.applicationType.isFree && !this.isFreeEndorsement()), <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(([saveSucceeded, app]) => {
+          // if we saved successfully...
           if (saveSucceeded) {
-            // payment is required
+            // and payment is required due to an invoice being generated
             if (app && app.invoiceId) {
+              // proceed to payment
               this.submitPayment()
                 .subscribe(res => {
                   this.saveComplete.emit(true);
                   this.submitApplicationInProgress = false;
-                });
+                },
+                  error => {
+                    this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+                    this.submitApplicationInProgress = false;
+                  }
+                );
+              // otherwise if there was no invoice generated, dynamics understood it to be a free application
             } else if (app) {
-              // mark application as complete
-              this.save(!this.application.applicationType.isFree, <Application>{ isApplicationComplete: 'Yes' })
+              // mark application as complete so dynamics handles the status change correctly
+              this.save(this.application.applicationType.isFree || this.isFreeEndorsement(), <Application>{ isApplicationComplete: 'Yes' })
                 .subscribe(res => {
                   this.saveComplete.emit(true);
-                  // however we need to redirect if the application is Free
-                  
+                  // saving for later will redirect to the dashboard on its own
+                  // if this was a free app, we will need to redirect to the dashboard
                   if (this.application.applicationType.isFree || this.isFreeEndorsement()) {
                     this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
                     this.router.navigateByUrl('/dashboard');
                   }
                 });
             }
-          } else if (this.application.applicationType.isFree) { // show error message the save failed and the application is free
+          } else {
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
             this.submitApplicationInProgress = false;
           }
@@ -1110,7 +1121,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('Please enter a value for Is the proposed RLRS located in a tourist destination resort with no other RLRS?');
     }
-  
+
     if (this.form.get('isRlrsLocatedAtTouristDestinationAlone')
       && this.form.get('rlrsResortCommunityDescription')
       && this.form.get('isRlrsLocatedAtTouristDestinationAlone').value
@@ -1120,7 +1131,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('Resort community description is required.');
     }
-  
+
     return valid && (this.form.valid || this.form.disabled);
   }
 
