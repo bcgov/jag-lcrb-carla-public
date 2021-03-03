@@ -20,6 +20,8 @@
         <h3 *ngIf="shownMonthlyReports.length < 1; else elseBlock" [class.hidden]="loadingMonthlyReports">There is not yet any monthly reports to report on. Please check back later.</h3>
         <ng-template #elseBlock>
           <h4 class="bold">Select Monthly Report:</h4>
+          <p>You must fill out your inventory reports in monthly sequence (e.g., January, February, March, etc.). Your reports
+            may contain errors if you do not complete them in the correct order.</p>
         </ng-template>
         <mat-tab-group
           [selectedIndex]="selectedMonthlyReportIndex"
@@ -122,6 +124,7 @@
                     <h3 class="blue-header col-xs-12">Part 2 - Cannabis Product Inventory</h3>
                   </div>
                   <p>Identify the cannabis products you have ordered, sold, returned or have managed the inventory of in the previous month.</p>
+                  <p>The Liquor and Cannabis Regulation Branch submits all inventory reports to Health Canada. Reports must be <strong>accurate</strong> and submitted <strong>on time</strong>.</p>
                   <div class="form-check callout" *ngFor="let productForm of productForms">
                     <mat-checkbox [checked]="productForm?.value?.selected" (change)="toggleProductVisibility(productForm)"
                       [disabled]="reportIsDisabled">
