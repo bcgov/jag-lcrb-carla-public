@@ -80,6 +80,13 @@ namespace bdd_tests
                 uiStoreExterior.Click();
             }
 
+            // retrieve the application ID
+            // string[] parsedURL = URL.Split('/');
+
+            // string[] tempFix = parsedURL[5].Split(';');
+
+            // applicationID = tempFix[0];
+
             // click on the Submit & Pay button
             ClickOnSubmitButton();
 
