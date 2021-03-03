@@ -157,29 +157,29 @@ namespace bdd_tests
             if ((manufacturerType == "winery") || (manufacturerType == "winery in Parksville"))
             {
                 // select winery radio button
-                NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button#mat-radio-19"));
-                uiWinery.Click();
+                NgWebElement uiWinery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button input[value='Winery']"));
+                JavaScriptClick(uiWinery);
             }
 
             if (manufacturerType == "distillery")
             {
                 // select distillery radio button
-                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button#mat-radio-20"));
-                uiDistillery.Click();
+                NgWebElement uiDistillery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button input[value='Distillery']"));
+                JavaScriptClick(uiDistillery);
             }
 
             if (manufacturerType == "brewery")
             {
                 // select brewery radio button
-                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button#mat-radio-21"));
-                uiBrewery.Click();
+                NgWebElement uiBrewery = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button input[value='Brewery']"));
+                JavaScriptClick(uiBrewery);
             }
 
             if (manufacturerType == "co-packer")
             {
                 // select co-packer radio button
-                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button#mat-radio-22"));
-                uiCoPacker.Click();
+                NgWebElement uiCoPacker = ngDriver.FindElement(By.CssSelector("[formcontrolname='licenceSubCategory'] mat-radio-button input[value='Co-packer']"));
+                JavaScriptClick(uiCoPacker);
             }
 
             // upload the business plan
