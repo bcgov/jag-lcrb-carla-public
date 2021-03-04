@@ -151,7 +151,7 @@ export class FormBase implements OnDestroy {
       }
       let valid = false;
       fields.forEach(f => {
-        valid = valid || control.parent.get(f).value;
+        valid = valid || !!control.parent.get(f).value;
       });
       return valid ? null : { 'require-one-of': { value: control.value } };
     };
