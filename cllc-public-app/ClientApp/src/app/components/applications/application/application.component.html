@@ -569,18 +569,34 @@
     </app-field>
   </address>
 
+  <app-field label="Is the proposed establishment on Treaty First Nation Land?"
+    *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)"
+    [valid]="isValidOrNotTouched('isOnINLand')" [showChevrons]="false" [isFullWidth]="true">
+    <mat-radio-group formControlName="isOnINLand">
+      <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+      <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
+    </mat-radio-group>
+  </app-field>
+
+  <app-field label="PIN" [valid]="isValidOrNotTouched('pin')" *ngIf="form.get('isOnINLand').value"
+    errorMessage="Please enter the PIN"
+    [valid]="isValidOrNotTouched('pin')" [showChevrons]="false" [isFullWidth]="true">
+    <input type="text" class="form-control" style="width: 200px;" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+      maxlength="9" formControlName="pin" id="pin">
+  </app-field>
+
   <div class="light-blue-bg" style="display: flex;">
     <div style="flex: 0 0 210px;">
       <app-field label="Parcel Identifier (PID)" [valid]="isValidOrNotTouched('establishmentParcelId')"
-                 errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
+                 errorMessage="Please enter the Parcel Identifier (format: 9 digits)">
         <input type="text" class="form-control" style="width: 200px;"
                (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength="9"
                formControlName="establishmentParcelId" id="establishmentParcelId">
       </app-field>
     </div>
+
     <div style="flex: 1; font-size: 11px;">
       <span>
-
         <span>
           <fa-icon [icon]="faExclamationCircle" style="margin-right: 10px;"></fa-icon>The property’s PID may be
           found
@@ -616,15 +632,6 @@
   </section>
 
   <section>
-    <app-field label="Is the proposed establishment on Treaty First Nation Land?"
-               *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)"
-               [valid]="isValidOrNotTouched('isOnINLand')" [showChevrons]="false" [isFullWidth]="true">
-      <mat-radio-group formControlName="isOnINLand">
-        <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
-        <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
-      </mat-radio-group>
-    </app-field>
-
     <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
                [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status" [isFullWidth]="true"
                *ngIf="application?.applicationType?.hasALRQuestion">
@@ -2436,7 +2443,7 @@
 
     <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
             (click)="submit_application()" [disabled]="submitApplicationInProgress">
-      SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+      SUBMIT&nbsp;<span *ngIf="isFreeEndorsement() || (!skipPayment && !isRAS())">&amp; PAY</span>
       <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
     </button>
 
