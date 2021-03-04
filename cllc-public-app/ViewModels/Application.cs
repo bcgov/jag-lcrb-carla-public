@@ -429,6 +429,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EstablishmentEmail { get; set; }
         public string EstablishmentParcelId { get; set; } //adoxio_establishmentparcelid
         public string EstablishmentPhone { get; set; }
+        public string Pin { get; set; } //adoxio_pin
 
         public bool IsLocationChangeInProgress { get; set; }
         public bool IsPaid { get; set; }
