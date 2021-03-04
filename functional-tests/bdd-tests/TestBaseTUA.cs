@@ -24,70 +24,24 @@ namespace bdd_tests
         public void TUAEventApplication(string bizType)
         {
             /* 
-            Page Title: Agent Licence Application
+            Page Title: Temporary Use Area Event
             */
 
+            string eventName = "Test Event";
+            string contactName = "Contact Name";
             string contactPhone = "2501811818";
-            string contactEmail = "test@automation.com";
 
-            if (bizType == "partnership")
-            {
-                // upload a partnership agreement
-                FileUpload("partnership_agreement.pdf", "(//input[@type='file'])[3]");
+            // enter the event name
+            NgWebElement uiEventName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='eventName']"));
+            uiEventName.SendKeys(eventName);
 
-                // upload personal history summary
-                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
-            }
+            // enter the contact name
+            NgWebElement uiContactName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactName']"));
+            uiContactName.SendKeys(contactName);
 
-            if (bizType == "public corporation")
-            {
-                // upload notice of articles
-                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
-
-                // upload personal history summary documents
-                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
-            }
-
-            if (bizType == "private corporation")
-            {
-                // upload a central securities register
-                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
-
-                // upload supporting business documentation
-                FileUpload("associates.pdf", "(//input[@type='file'])[6]");
-
-                // upload notice of articles
-                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
-
-                // upload personal history summary documents
-                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
-
-                // upload shareholders < 10% interest
-                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
-            }
-
-            if (bizType == "society")
-            {
-                // upload notice of articles
-                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
-
-                // upload personal history summary documents
-                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
-            }
-
-            if (bizType == "sole proprietorship")
-            {
-                // upload personal history summary documents
-                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
-            }
-
-            // enter the contact phone number
-            NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
+            // enter the contact phone
+            NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPhone']"));
             uiContactPhone.SendKeys(contactPhone);
-
-            // enter the contact email
-            NgWebElement uiContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonEmail']"));
-            uiContactEmail.SendKeys(contactEmail);
 
             // click on the authorized to submit checkbox
             NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
@@ -96,16 +50,6 @@ namespace bdd_tests
             // click on the signature agreement checkbox
             NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgreement.Click();
-
-            // retrieve the current URL to get the application ID (needed downstream)
-            string URL = ngDriver.Url;
-
-            // retrieve the application ID
-            string[] parsedURL = URL.Split('/');
-
-            string[] tempFix = parsedURL[5].Split(';');
-
-            applicationID = tempFix[0];
         }
     }
 }
