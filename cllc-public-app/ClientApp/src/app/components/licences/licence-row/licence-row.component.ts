@@ -279,7 +279,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   isExpired(licence: ApplicationLicenseSummary) {
-    return NOW.diff(moment(licence.expiryDate).startOf("day")) > 0;
+    return NOW.diff(moment(licence.expiryDate).startOf("day")) > 0 && (licence.status === "Active" || licence.status === "Expired");
   }
 
   isAboutToExpire(licence: ApplicationLicenseSummary) {
