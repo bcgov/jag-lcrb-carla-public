@@ -172,7 +172,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         Validators.required,
         this.establishmentWatchWordsService.forbiddenNameValidator()
       ]],
-      establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
+      establishmentParcelId: ['', [ Validators.maxLength(9), Validators.minLength(9), this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
       contactPersonRole: [''],
@@ -236,8 +236,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
       termConditionOriginalText: ['', []],
       tempDateFrom: [''],
       tempDateTo: [''],
+      pin: ['', [this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
     });
 
+  
+
+    this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.form.get('establishmentParcelId').updateValueAndValidity();
+    });
+
+    this.form.get('establishmentParcelId').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.form.get('pin').updateValueAndValidity();
+    });
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.updateRequiredValidator(val, 'serviceHoursSundayClose');
     });
@@ -840,20 +850,22 @@ export class ApplicationComponent extends FormBase implements OnInit {
       );
   }
 
+  isFreeEndorsement(): boolean {
+    let freeEndorsement = this.application.applicationType.isEndorsement && (this?.application?.assignedLicence == null);
+    return freeEndorsement;
+  }
+
   /**
    * Submit the application for payment
    * */
   submit_application() {
-
-    // some endorsements are free if you apply before the licence is issued
-     let freeEndorsement = this.application.applicationType.isEndorsement && (this?.application?.assignedLicence == null);
-    // do a validation check; only allow submission if no validation messages
+    // Only save if the data is valid
     if (this.isValid()) {
       // show status
       this.submitApplicationInProgress = true;
       // save and try to generate an invoice.
       // if it's not free, nor a free endorsement, show the progress
-      this.busy = this.save((!this.application.applicationType.isFree && !freeEndorsement), <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
+      this.busy = this.save((!this.application.applicationType.isFree && !this.isFreeEndorsement()), <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(([saveSucceeded, app]) => {
           // if we saved successfully...
@@ -874,12 +886,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
               // otherwise if there was no invoice generated, dynamics understood it to be a free application
             } else if (app) {
               // mark application as complete so dynamics handles the status change correctly
-              this.save(this.application.applicationType.isFree || freeEndorsement, <Application>{ isApplicationComplete: 'Yes' })
+              this.save(this.application.applicationType.isFree || this.isFreeEndorsement(), <Application>{ isApplicationComplete: 'Yes' })
                 .subscribe(res => {
                   this.saveComplete.emit(true);
                   // saving for later will redirect to the dashboard on its own
                   // if this was a free app, we will need to redirect to the dashboard
-                  if (this.application.applicationType.isFree || freeEndorsement) {
+                  if (this.application.applicationType.isFree || this.isFreeEndorsement()) {
                     this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
                     this.router.navigateByUrl('/dashboard');
                   }
