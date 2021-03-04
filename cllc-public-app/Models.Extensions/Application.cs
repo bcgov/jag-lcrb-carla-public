@@ -43,6 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEstablishmentaddressstreet = from.EstablishmentAddressStreet;
             to.AdoxioEstablishmentaddresscity = from.EstablishmentAddressCity;
             to.AdoxioEstablishmentaddresspostalcode = from.EstablishmentAddressPostalCode;
+            to.AdoxioPin = from.Pin;
             // 12-10-2019 - Removed the update to AdoxioAddressCity as the Dynamics workflow handles that.
 
             to.AdoxioEstablishmentparcelid = from.EstablishmentParcelId;
@@ -546,7 +547,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 HasOtherProducts = dynamicsApplication.AdoxioHasotherproducts,
                 HasAdditionalServices = dynamicsApplication.AdoxioHasadditionalservices,
                 StoreOpenDate = dynamicsApplication.AdoxioStoreopendate,
-                ConfirmLiquorSalesIsNotPrimaryBusiness = dynamicsApplication.AdoxioConfirmliquorsalesisnotprimarybusiness
+                ConfirmLiquorSalesIsNotPrimaryBusiness = dynamicsApplication.AdoxioConfirmliquorsalesisnotprimarybusiness,
+                Pin = dynamicsApplication.AdoxioPin
             };
 
 

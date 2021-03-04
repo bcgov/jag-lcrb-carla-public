@@ -13,36 +13,36 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: FoodPrimaryTESA
+Feature: AgentRelease
     As a logged in business user
-    I want to submit a TESA application for a Food Primary licence 
+    I want to run a release test for Agent licence
 
-@foodprimary @tesa @privatecorporation 
-Scenario: Food Primary TESA (Private Corporation)
+@agent @privatecorporation @release1
+Scenario: Agent Release Test (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for Food Primary
+    And I click on the Start Application button for an Agent Licence
     And I review the account profile for a private corporation
-    And I complete the Food Primary application for a private corporation
+    And I complete the Agent Licence application for a private corporation
     And I click on the Submit button
     And I enter the payment information
-    And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And I confirm the payment receipt for an Agent Licence
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Temporary Expanded Service Area Application
-    And I click on the Continue to Application button
-    And I complete the TESA application for a Food Primary licence
-    And I click on the Submit button
+    And I click on the link for Download Licence
+    And I request a licensee representative
+    And I click on the Licences tab
+    And I request a third party operator
+    And I click on the Licences tab
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./FoodPrimaryTESA.feature")]
+    [FeatureFile("./AgentRelease.feature")]
     [Collection("Liquor")]
-    public sealed class FoodPrimaryTESA : TestBase
+    public sealed class AgentRelease : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
@@ -50,10 +50,6 @@ namespace bdd_tests
             NavigateToFeatures();
 
             CheckFeatureFlagsLiquorOne();
-
-            CheckFeatureFlagsLiquorTwo();
-
-            CheckFeatureFlagsLiquorThree();
 
             CheckFeatureFlagsLGIN();
 

@@ -17,7 +17,7 @@ Feature: RuralLRSThirdPartyOperator
     As a logged in business user
     I want to request a third party operator for a rural LRS application
 
-@privatecorporation @ruralLRS @release2
+@privatecorporation @ruralLRS
 Scenario: Rural LRS Third Party Operator (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
