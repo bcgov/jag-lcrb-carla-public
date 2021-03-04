@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { Application } from "@models/application.model";
 import { ApplicationDataService } from "@services/application-data.service";
-import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { FormBase } from "@shared/form-base";
 import { ProductionStagesComponent } from "./production-stages/production-stages.component";
 
@@ -24,6 +24,7 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
   form: FormGroup;
   @ViewChild(ProductionStagesComponent)
   private productionStages: ProductionStagesComponent;
+  licenceSubCatControl: any;
 
   constructor(private applicationDataService: ApplicationDataService,
     private fb: FormBuilder) {
@@ -31,23 +32,18 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
-    this.form.addControl("licenceSubCategory", new FormControl(""));
-    this.form.addControl("mfgBrewPubOnSite", new FormControl(""));
-    this.form.addControl("mfgPipedInProduct", new FormControl(""));
+    this.form.addControl("licenceSubCategory", new FormControl(this.application.licenceSubCategory, Validators.required));
+    this.form.addControl("mfgBrewPubOnSite", new FormControl(this.application.mfgBrewPubOnSite));
+    this.form.addControl("mfgPipedInProduct", new FormControl(this.application.mfgPipedInProduct));
+    
     this.form.addControl("neutralGrain", new FormControl(""));
-    this.form.addControl("mfgAcresOfGrapes", new FormControl(""));
-    this.form.addControl("mfgAcresOfFruit", new FormControl(""));
-    this.form.addControl("mfgAcresOfHoney", new FormControl(""));
-    this.form.addControl("mfgUsesNeutralGrainSpirits", new FormControl(""));
+    
+    this.form.addControl("mfgAcresOfGrapes", new FormControl(this.application.mfgAcresOfGrapes));
+    this.form.addControl("mfgAcresOfFruit", new FormControl(this.application.mfgAcresOfHoney));
+    this.form.addControl("mfgAcresOfHoney", new FormControl(this.application.mfgAcresOfHoney));
+    this.form.addControl("mfgUsesNeutralGrainSpirits", new FormControl(this.application.mfgUsesNeutralGrainSpirits));
 
-
-    this.form.get("licenceSubCategory").patchValue(this.application.licenceSubCategory);
-    this.form.get("mfgBrewPubOnSite").patchValue(this.application.mfgBrewPubOnSite);
-    this.form.get("mfgPipedInProduct").patchValue(this.application.mfgPipedInProduct);
-    this.form.get("mfgAcresOfGrapes").patchValue(this.application.mfgAcresOfGrapes);
-    this.form.get("mfgAcresOfFruit").patchValue(this.application.mfgAcresOfHoney);
-    this.form.get("mfgAcresOfHoney").patchValue(this.application.mfgAcresOfHoney);
-    this.form.get("mfgUsesNeutralGrainSpirits").patchValue(this.application.mfgUsesNeutralGrainSpirits);
+    this.licenceSubCatControl = this.form.get("licenceSubCategory");
 
 
     // to do patch in a value to description2 with subscription to productionStages.selectedobjects
