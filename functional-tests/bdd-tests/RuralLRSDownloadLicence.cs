@@ -17,7 +17,7 @@ Feature: RuralLRSDownloadLicence
     As a logged in business user
     I want to download a licence for a rural LRS application
 
-@privatecorporation @ruralLRS @release2
+@privatecorporation @ruralLRS
 Scenario: Rural LRS Download Licence (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
