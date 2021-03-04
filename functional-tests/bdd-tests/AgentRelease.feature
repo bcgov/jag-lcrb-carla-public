@@ -2,7 +2,7 @@
     As a logged in business user
     I want to run a release test for Agent licence
 
-@agent @privatecorporation @release3
+@agent @privatecorporation @release1
 Scenario: Agent Release Test (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for an Agent Licence
