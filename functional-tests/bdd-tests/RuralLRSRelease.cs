@@ -61,9 +61,9 @@ Scenario: Rural LRS Release (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./RuralLRSDownloadLicence.feature")]
+    [FeatureFile("./RuralLRSRelease.feature")]
     [Collection("Cannabis")]
-    public sealed class RuralLRSDownloadLicence : TestBase
+    public sealed class RuralLRSRelease : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
