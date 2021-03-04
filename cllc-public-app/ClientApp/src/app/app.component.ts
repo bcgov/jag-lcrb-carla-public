@@ -6,7 +6,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { isDevMode } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "./app-state/models/app-state";
-import { filter, takeWhile } from "rxjs/operators";
+import { filter, map, takeWhile } from "rxjs/operators";
 import { FeatureFlagService } from "@services/feature-flag.service";
 import { LegalEntity } from "@models/legal-entity.model";
 import { AccountDataService } from "@services/account-data.service";
@@ -25,6 +25,7 @@ import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import { faInternetExplorer } from "@fortawesome/free-brands-svg-icons";
 import { faBell, faBusinessTime } from "@fortawesome/free-solid-svg-icons";
+import { Observable, of } from "rxjs";
 
 const Months = [
   "January", "February", "March", "April", "May", "June",
@@ -58,6 +59,10 @@ export class AppComponent extends FormBase implements OnInit {
   isEligibilityDialogOpen: boolean;
   showNavbar = true;
   testAPIRestul = "";
+
+  // This is Observable will be set to true when there are e-notices attached to the current account.
+  // The value determines whether or not to display a warning badge for the "Notices" link in the NavBar.
+  showNoticesBadge$ = of(false);
 
   constructor(
     private snackBar: MatSnackBar,
@@ -203,12 +208,18 @@ export class AppComponent extends FormBase implements OnInit {
 
       this.store.select(state => state.currentAccountState.currentAccount)
         .pipe(takeWhile(() => this.componentActive))
+        .pipe(filter(account => !!account))
         .subscribe(account => {
           this.account = account;
+          this.showNoticesBadge$ = this.accountHasNotices(account);
         });
     });
   }
 
+  accountHasNotices(account: Account): Observable<boolean> {
+    return this.accountDataService.getFilesAttachedToAccount(account.id, "Notice")
+      .pipe(map(files => files?.length > 0));
+  }
 
   showBceidTermsOfUse(): boolean {
     const result = (this.currentUser && this.currentUser.businessname && this.currentUser.isNewUser === true) ||
