@@ -12,8 +12,13 @@ Scenario: Rural LRS Structural Alteration (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Structural Alteration Application
-    # TODO
+    And I click on the Continue to Application button
+    And I request a Rural LRS structural alteration application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
@@ -27,8 +32,13 @@ Scenario: Rural LRS Structural Alteration (Public Corporation)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Structural Alteration Application
-    # TODO
+    And I click on the Continue to Application button
+    And I request a Rural LRS structural alteration application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
@@ -42,8 +52,13 @@ Scenario: Rural LRS Structural Alteration (Partnership)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Structural Alteration Application
-    # TODO
+    And I click on the Continue to Application button
+    And I request a Rural LRS structural alteration application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
@@ -57,8 +72,13 @@ Scenario: Rural LRS Structural Alteration (Society)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Structural Alteration Application
-    # TODO
+    And I click on the Continue to Application button
+    And I request a Rural LRS structural alteration application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
@@ -72,7 +92,12 @@ Scenario: Rural LRS Structural Alteration (Sole Proprietorship)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
+    And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Structural Alteration Application
-    # TODO
+    And I click on the Continue to Application button
+    And I request a Rural LRS structural alteration application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page

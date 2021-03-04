@@ -27,8 +27,9 @@ Scenario: Rural LRS Third Party Operator (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Add or Change a Third Party Operator
-    # TODO
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I request a third party operator
     And the account is deleted
     Then I see the login page
 
@@ -42,8 +43,9 @@ Scenario: Rural LRS Third Party Operator (Public Corporation)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Add or Change a Third Party Operator
-    # TODO
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I request a third party operator
     And the account is deleted
     Then I see the login page
 
@@ -57,8 +59,9 @@ Scenario: Rural LRS Third Party Operator (Partnership)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Add or Change a Third Party Operator
-    # TODO
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I request a third party operator
     And the account is deleted
     Then I see the login page
 
@@ -72,8 +75,9 @@ Scenario: Rural LRS Third Party Operator (Society)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Add or Change a Third Party Operator
-    # TODO
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I request a third party operator
     And the account is deleted
     Then I see the login page
 
@@ -87,8 +91,9 @@ Scenario: Rural LRS Third Party Operator (Sole Proprietorship)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Add or Change a Third Party Operator
-    # TODO
+    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I request a third party operator
     And the account is deleted
     Then I see the login page
 */
