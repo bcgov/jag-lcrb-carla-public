@@ -1394,7 +1394,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     parameters = new Dictionary<string, string>
                     {
-                        { "title", "Cannabis_Licence" },
+                        { "title", "Liquor_Licence" },
                         { "licenceNumber", adoxioLicense.AdoxioLicencenumber},
                         { "establishmentName", "N/A" },
                         { "establishmentStreet", adoxioLicense.AdoxioLicencee?.Address1Line1 },
@@ -1477,6 +1477,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             keyWord = "Cannabis";
                             templateName = "liquor_licence";
                             break;
+                        case "Agent":
                         case "Catering":
                         case "UBrew and UVin":
                         case "Licensee Retail Store":
