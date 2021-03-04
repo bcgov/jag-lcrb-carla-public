@@ -172,7 +172,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         Validators.required,
         this.establishmentWatchWordsService.forbiddenNameValidator()
       ]],
-      establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
+      establishmentParcelId: ['', [ Validators.maxLength(9), Validators.minLength(9), this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
       contactPersonRole: [''],
@@ -236,8 +236,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
       termConditionOriginalText: ['', []],
       tempDateFrom: [''],
       tempDateTo: [''],
+      pin: ['', [this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
     });
 
+  
+
+    this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.form.get('establishmentParcelId').updateValueAndValidity();
+    });
+
+    this.form.get('establishmentParcelId').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.form.get('pin').updateValueAndValidity();
+    });
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.updateRequiredValidator(val, 'serviceHoursSundayClose');
     });
