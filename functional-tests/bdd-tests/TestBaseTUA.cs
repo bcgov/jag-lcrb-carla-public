@@ -21,7 +21,7 @@ namespace bdd_tests
     public abstract partial class TestBase : Feature, IDisposable
     {
         [And(@"I complete the TUA event application")]
-        public void TUAEventApplication(string bizType)
+        public void TUAEventApplication()
         {
             /* 
             Page Title: Temporary Use Area Event
