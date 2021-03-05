@@ -165,5 +165,21 @@ namespace bdd_tests
 
             CarlaLogin(businessType);
         }
+
+        [And(@"I generate (.*) Liquor Primary Applications in (.*) LGIN, (.*) Police")]
+        public void GenerateApplications(string amount, string lgin, string policeJurisdiction)
+        {
+            // convert amount to a number
+            int numberApplications = int.Parse(amount);
+
+            for (int i = 0; i < numberApplications; i++)
+            {
+                ClickDashboardTab();
+                ClickStartApplication("a Liquor Primary Licence");
+                ReviewAccountProfile(" private corporation");
+                CompleteLiquorPrimaryApplicationFull("private corporation", lgin, policeJurisdiction);
+            }
+        }
+
     }
 }
