@@ -45,7 +45,7 @@ namespace bdd_tests
             {
                 Console.Out.WriteLine("Enabling Headless Mode");
                 // could try --shm-size=1gb "disable-dev-shm-usage"
-                options.AddArguments("headless", "no-sandbox", "disable-web-security", "no-zygote", "disable-gpu", "--shm-size=2gb", "disable-infobars", "start-maximized", "hide-scrollbars", "--window-size=1920,1080");
+                options.AddArguments("headless", "no-sandbox", "disable-web-security", "no-zygote", "disable-gpu", "disable-dev-shm-usage", "disable-infobars", "start-maximized", "hide-scrollbars", "window-size=1920,1080");
                 if (!string.IsNullOrEmpty(configuration["CHROME_BINARY_LOCATION"]))
                 {
                     options.BinaryLocation = configuration["CHROME_BINARY_LOCATION"];
