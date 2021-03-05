@@ -313,35 +313,36 @@ namespace bdd_tests
                     *  TYPES OF CHANGES REQUESTED
                     */
 
+                    // click on Internal Transfer of Shares
+                    NgWebElement uiInternalTransferOfSharesPublicCorp = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
+                    uiInternalTransferOfSharesPublicCorp.Click();
+
+                    // click on External Transfer of Shares
+                    NgWebElement uiExternalTransferOfSharesPublicCorp = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
+                    uiExternalTransferOfSharesPublicCorp.Click();
+
                     // click on Change of Directors or Officers
-                    NgWebElement uiChangeOfDirectorsOrOfficersPublicCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
-                    uiChangeOfDirectorsOrOfficersPublicCorporation.Click();
+                    NgWebElement uiChangeOfDirectorsPublicCorp = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
+                    uiChangeOfDirectorsPublicCorp.Click();
 
                     // click on Name Change, Licensee -- Corporation
-                    NgWebElement uiNameChangeLicenseePublicCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
-                    uiNameChangeLicenseePublicCorporation.Click();
+                    NgWebElement uiNameChangePublicCorp = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
+                    uiNameChangePublicCorp.Click();
 
                     // click on Name Change, Person
-                    NgWebElement uiNameChangePersonPublicCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
-                    uiNameChangePersonPublicCorporation.Click();
+                    NgWebElement uiNameChangePersonPublicCorp = ngDriver.FindElement(By.CssSelector("#mat-checkbox-7.mat-checkbox"));
+                    uiNameChangePersonPublicCorp.Click();
 
                     // click on Addition of Receiver or Executor
-                    NgWebElement uiAdditionOfReceiverOrExecutorPublicCorporation = ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
-                    uiAdditionOfReceiverOrExecutorPublicCorporation.Click();
-
-                    /* 
-                    *  CHANGE OF DIRECTORS OR OFFICERS
-                    */
-
-                    // upload notice of articles
-                    FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+                    NgWebElement uiAdditionReceiverExecutor = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
+                    uiAdditionReceiverExecutor.Click();
 
                     /* 
                     *  PERSON'S NAME CHANGE
                     */
 
                     // enter person first name
-                    NgWebElement uiFirstNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-2"));
+                    NgWebElement uiFirstNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
                     uiFirstNamePublicCorporation.SendKeys(firstName);
 
                     // enter person last name
