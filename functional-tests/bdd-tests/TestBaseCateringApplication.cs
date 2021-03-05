@@ -56,11 +56,20 @@ namespace bdd_tests
 
             if (bizType == "public corporation")
             {
+                // upload a central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+
+                // upload supporting biz documents
+                FileUpload("business_plan.pdf", "(//input[@type='file'])[6]");
+
                 // upload notice of articles
-                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
 
                 // upload personal history summary documents
-                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
+
+                // upload shareholders < 10% interest
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
 
             if (bizType == "private corporation")
