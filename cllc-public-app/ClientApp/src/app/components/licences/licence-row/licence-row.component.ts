@@ -223,6 +223,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     const result = this.isActive(item) &&
       this.actionsVisible(item) &&
       !item.tpoRequested &&
+      this.licenceType !== "Agent" &&
       item.licenceTypeCategory === "Liquor";
     return result;
   }
