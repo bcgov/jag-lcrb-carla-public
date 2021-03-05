@@ -257,7 +257,7 @@
     <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
     <span>Organizational leadership must provide completed Personal History Summary forms</span>
   </p>
-  <app-file-uploader *ngIf="true || applicationId" documentType="OrganizationDetails" 
+  <app-file-uploader *ngIf="true || applicationId" documentType="OrganizationDetails"
                      fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
                      (numberOfUploadedFiles)="uploadedPartnershipAgreement = $event" [entityId]="applicationId"
                      [uploadHeader]="'TO UPLOAD ORGANIZATION DETAILS, DRAG FILES HERE OR'">
@@ -266,9 +266,9 @@
 
 <!-- Other -->
 <section
-  *ngIf="!this.businessTypeIsPartnership() 
-  && !this.businessTypeIsCorporation() 
-  && !this.businessTypeIsSoleProp() 
+  *ngIf="!this.businessTypeIsPartnership()
+  && !this.businessTypeIsCorporation()
+  && !this.businessTypeIsSoleProp()
   && !this.businessTypeIsSociety()
   && !account.isOtherBusinessType()">
   <h4>Legal Entity Documentation</h4>
@@ -1166,12 +1166,12 @@
               <img *ngIf="application?.applicationType?.name === 'Temporary Use Area Endorsement'" src="assets/tua-site-plan-example.png" style="width: 700px;" alt="Sample Signage">
 
               <section>
-                <app-file-uploader *ngIf="applicationId" documentType="Site Plan"
+                <app-file-uploader *ngIf="applicationId" documentType="Signage"
                   fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
                   [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
                   entityName="application" [useDocumentTypeForName]="true"
-                  (numberOfUploadedFiles)="uploadedSitePlanDocuments = $event" [entityId]="applicationId"
-                  [uploadHeader]="'TO UPLOAD SITE PLAN DOCUMENTS, DRAG FILES HERE OR'">
+                  (numberOfUploadedFiles)="uploadedSignageDocuments = $event" [entityId]="applicationId"
+                  [uploadHeader]="'TO UPLOAD SIGANGE DOCUMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
 
