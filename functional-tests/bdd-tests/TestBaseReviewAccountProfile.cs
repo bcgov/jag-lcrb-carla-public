@@ -226,7 +226,7 @@ namespace bdd_tests
 
             if (businessType == " public corporation")
             {
-                // select 'Yes' for corporation connection to federal producer 
+                // select 'Yes' for 'Does the corporation have any association, connection or financial interest in a federally licensed producer of cannabis?'
                 NgWebElement uiCorpConnectionFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='corpConnectionFederalProducer']"));
                 uiCorpConnectionFederalProducer.Click();
 
@@ -235,21 +235,21 @@ namespace bdd_tests
                 NgWebElement uiDetailsFederalProducer2 = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='corpConnectionFederalProducerDetails']"));
                 uiDetailsFederalProducer2.SendKeys(nameAndDetails);
 
-                // select 'Yes' for shareholder connection
-                NgWebElement uiShareholderConnectionConnectionToCorp = ngDriver.FindElement(By.CssSelector("input[formcontrolname='share20PlusConnectionProducer']"));
+                // select 'Yes' for 'Does a federally licensed producer of cannabis have any association, connection or financial interest in the corporation?'
+                NgWebElement uiShareholderConnectionConnectionToCorp = ngDriver.FindElement(By.CssSelector("input[formcontrolname='federalProducerConnectionToCorp']"));
                 uiShareholderConnectionConnectionToCorp.Click();
 
                 string shareholderDetails = "Details of shareholder relationship.";
-                NgWebElement uiShareholderDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='share20PlusConnectionProducerDetails']"));
+                NgWebElement uiShareholderDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='federalProducerConnectionToCorpDetails']"));
                 uiShareholderDetails.SendKeys(shareholderDetails);
 
-                // select 'Yes' for family connection
-                NgWebElement uiFamilyConnectionConnectionToCorp = ngDriver.FindElement(By.CssSelector("input[formcontrolname='share20PlusFamilyConnectionProducer']"));
+                // select 'Yes' for 'Do you or any of your shareholders have any amount of ownership interest in another B.C. liquor licence, or any association with a third party operator for another liquor licence, or have an immediate family member (spouse, parent, sibling or child) with any amount of ownership interest in another liquor licence?'
+                NgWebElement uiFamilyConnectionConnectionToCorp = ngDriver.FindElement(By.CssSelector("input[formcontrolname='liquorFinancialInterest']"));
                 uiFamilyConnectionConnectionToCorp.Click();
 
                 // enter details of family connection
                 string familyRelationship = "Details of family relationship (automated test).";
-                NgWebElement uiFamilyConnectionDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='share20PlusFamilyConnectionProducerDetail']"));
+                NgWebElement uiFamilyConnectionDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='liquorFinancialInterestDetails']"));
                 uiFamilyConnectionDetails.SendKeys(familyRelationship);
             }
 

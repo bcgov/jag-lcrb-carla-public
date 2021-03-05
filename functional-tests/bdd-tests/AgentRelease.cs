@@ -31,8 +31,6 @@ Scenario: Agent Release Test (Private Corporation)
     And I click on the link for Download Licence
     And I request a licensee representative
     And I click on the Licences tab
-    And I request a third party operator
-    And I click on the Licences tab
     And I request a transfer of ownership
     And the account is deleted
     Then I see the login page

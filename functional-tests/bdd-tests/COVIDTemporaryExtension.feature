@@ -2,7 +2,7 @@
     As a business user who is not logged in
     I want to submit a COVID temporary extension application for different licence types
 
-@covid @release2
+@covid 
 Scenario: COVID Temp Extension (Food Primary)
     Given I am not logged in to the Liquor and Cannabis Portal
     And I click on the COVID Temporary Extension link
