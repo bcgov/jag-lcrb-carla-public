@@ -7,9 +7,8 @@
         <div class="jumbotron">
           <h2>
             Apply for a liquor or cannabis licence
-
-
           </h2>
+
           <p>You must have a Business BCeID to log into the online licensing portal.</p>
           <p>Through the Liquor and Cannabis Licensing Portal you can</p>
           <ul>
@@ -19,32 +18,31 @@
             <li>Manage your account and contact information; and</li>
             <li>Submit permanent licensee changes and personal history summary forms;</li>
           </ul>
-          <div class="warning" style="display: block;">
-            <h3 style="color: #494949;">Learn more about liquor and cannabis regulation including:</h3>
-            <ul>
-              <li>Information about liquor and cannabis licences</li>
-              <li>Liquor and cannabis law and policy</li>
-              <li>Compliance and enforcement procedures</li>
-              <li>Role of local governments and Indigenous Nations</li>
-              <li>Cannabis licensing, location requirements, application processes and worker information</li>
-            </ul>
 
-            <button style="color: #494949; margin-bottom: 10px;" class="btn btn-secondary"
-                    (click)="window.location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing'" tabindex="3">
-              <strong>LEARN MORE</strong>
-              <br>
-            </button>
-
+          <div style="padding: 10px; margin-bottom: 10px;">
+            <div>
+              <h4>Food primary, Liquor primary, Agent licences</h4>
+            </div>
+            <div>
+              <p style="font-size: 14px; color: ">
+                The LCRB is committed to providing excellent service and support as part of your transition to our digital
+                licensing
+                environment. As there are a large volume of licensees moving online, we ask that you be patient with the process
+                and
+                technology as we support you through this transition. If you have any questions about this change, encounter
+                account-information issues, or need help accessing or using the new portal at any time, please email our Client
+                Support Team at <a href="mailto:LCRBLiquor@gov.bc.ca">LCRBLiquor@gov.bc.ca</a>, or call 1-866-209-2111 (toll-free
+                in Canada) or 250-952-5787 (in Victoria).
+              </p>
+            </div>
           </div>
 
-          <p>
-            <strong>Due to the increase in demand related to the COVID-19 pandemic, please expect delays in the standard processing time for all licensing applications.</strong>
-          </p>
           <div class="warning">
             <div>
               <fa-icon [icon]="faExclamationCircle"></fa-icon>
             </div>
             <div>
+
               <p>We are aware of a login issue impacting certain versions of Google Chrome.</p>
               <p>If you encounter a warning message that says "Your connection is not fully secure" try using a different browser like <a href="https://www.mozilla.org/en-CA/firefox/new/">Mozilla Firefox</a>, or update your version of Chrome.</p>
             </div>
@@ -58,7 +56,7 @@
             <span style="padding: 10px;"></span>
             <p>
               <strong>
-                The Liquor and Cannabis Licensing portal is closed for maintenance. During this time, you will not be able to log in to the site.  The maintenance should be concluded by 7:30AM PST.
+                The Liquor and Cannabis Licensing portal is closed for maintenance. During this time, you will not be able to log in to the site.
               </strong>
             </p>
             <p>
@@ -80,7 +78,6 @@
               <br>
             </button>
           </div>
-
         </div>
       </div>
       <div appRemoveIfFeatureOff="CovidApplication" style="padding-left: 0px;" class="col-md-4 col-sm-12">
@@ -90,19 +87,14 @@
               <table>
                 <tr>
                   <td>
-                    <button mat-fab class="fab-button mat-elevation-z0">
-                      <mat-icon class="icon" aria-label="Liquor Content">description</mat-icon>
-                    </button>
-                  </td>
-                  <td>
-                    <h2 style="margin: 0px;">Temporary Expansion of Service Area authorization</h2>
-                    <p style="font-size: small;">
-                      In response to the public health emergency related to COVID-19, and to help businesses
-                      safely operate while respecting the Provincial Health
-                      Officer’s order and physical distancing guidelines, the LCRB is accepting applications for food primary, liquor
-                      primary, and manufacturer
-                      licensees to temporarily expand their service areas until October 31, 2021.
-                    </p>
+                    <h2 style="margin: 0px;">Learn more about liquor and cannabis regulation including:</h2>
+                    <ul>
+                      <li>Information about liquor and cannabis licences</li>
+                      <li>Liquor and cannabis law and policy</li>
+                      <li>Compliance and enforcement procedures</li>
+                      <li>Role of local governments and Indigenous Nations</li>
+                      <li>Cannabis licensing, location requirements, application processes and worker information</li>
+                    </ul>
                   </td>
                 </tr>
               </table>
@@ -114,7 +106,12 @@
             </p>
             <div style="display: flex; justify-content: flex-end">
 
-              <button onclick="location.href = 'covid-temporary-extension';" type="button" class="btn btn-primary" tabindex="3">Apply Here</button>
+              <button class="btn btn-primary"
+                (click)="window.location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing'"
+                tabindex="3">
+                <strong>LEARN MORE</strong>
+                <br>
+              </button>
 
             </div>
           </section>

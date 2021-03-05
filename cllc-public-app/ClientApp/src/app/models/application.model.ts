@@ -215,5 +215,5 @@ export interface Application {
   hasAdditionalServices: number;
   storeOpenDate: Date;
   confirmLiquorSalesIsNotPrimaryBusiness: number;
-
+  pin: string;
 }
