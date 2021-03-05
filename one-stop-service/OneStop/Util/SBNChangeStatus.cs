@@ -312,7 +312,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
     {
 
         private string businessRegistrationNumberField;
-
+        
         private string businessProgramIdentifierField;
 
         private string businessProgramAccountReferenceNumberField;

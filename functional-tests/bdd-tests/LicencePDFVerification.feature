@@ -6,7 +6,7 @@
 Scenario: Cannabis Retail Store Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation   
     And I click on the button for Submit Organization Information
