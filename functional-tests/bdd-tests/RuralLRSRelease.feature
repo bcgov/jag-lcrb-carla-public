@@ -2,7 +2,7 @@
     As a logged in business user
     I want to run a release test for a rural LRS application
 
-@privatecorporation @ruralLRS @release1
+@privatecorporation @ruralLRS @release4
 Scenario: Rural LRS Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS

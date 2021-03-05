@@ -257,7 +257,7 @@
     <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
     <span>Organizational leadership must provide completed Personal History Summary forms</span>
   </p>
-  <app-file-uploader *ngIf="true || applicationId" documentType="OrganizationDetails" 
+  <app-file-uploader *ngIf="true || applicationId" documentType="OrganizationDetails"
                      fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
                      (numberOfUploadedFiles)="uploadedPartnershipAgreement = $event" [entityId]="applicationId"
                      [uploadHeader]="'TO UPLOAD ORGANIZATION DETAILS, DRAG FILES HERE OR'">
@@ -266,9 +266,9 @@
 
 <!-- Other -->
 <section
-  *ngIf="!this.businessTypeIsPartnership() 
-  && !this.businessTypeIsCorporation() 
-  && !this.businessTypeIsSoleProp() 
+  *ngIf="!this.businessTypeIsPartnership()
+  && !this.businessTypeIsCorporation()
+  && !this.businessTypeIsSoleProp()
   && !this.businessTypeIsSociety()
   && !account.isOtherBusinessType()">
   <h4>Legal Entity Documentation</h4>
@@ -1111,20 +1111,22 @@
 </section>
 
 <!-- Cooler access -->
-<mat-card *ngIf="application?.applicationType?.publicCooler =='Yes'" class="mat-elevation-z0" style="margin-bottom: 10px;">
-  <section style="display: flex; justify-content: space-between; width: 100%;">
-    <div class="question-label">
-      Is the public permitted to walk into the cooler space?
-    </div>
-    <div style="flex: 0 0 85px;">
-      <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('hasCoolerAccess')}"
-                               formControlName="hasCoolerAccess" aria-label="Font Style">
-        <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-        <mat-button-toggle [value]="false">No</mat-button-toggle>
-      </mat-button-toggle-group>
-    </div>
-  </section>
-</mat-card>
+<ng-container *ngIf="application?.applicationType?.publicCooler =='Yes'">
+  <app-field label="Is the public permitted to walk into the cooler space?" [required]="false"
+    errorMessage="This field is required." [valid]="isValidOrNotTouched('hasCoolerAccess')">
+    <mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
+      <section style="width: 100%;">
+        <div>
+          <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('hasCoolerAccess')}"
+            formControlName="hasCoolerAccess" aria-label="Font Style">
+            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+            <mat-button-toggle [value]="false">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </section>
+    </mat-card>
+  </app-field>
+</ng-container>
 
 <!-- Photos or Renderings of Signage-->
 <div class="ngtest-photo-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
@@ -2443,7 +2445,7 @@
 
     <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
             (click)="submit_application()" [disabled]="submitApplicationInProgress">
-      SUBMIT&nbsp;<span *ngIf="isFreeEndorsement() || (!skipPayment && !isRAS())">&amp; PAY</span>
+      SUBMIT&nbsp;<span *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
       <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
     </button>
 

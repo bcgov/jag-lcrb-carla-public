@@ -24,7 +24,22 @@ namespace Gov.Jag.Lcrb.OneStopService
         public const string ADDRESS_TYPE_CODE = "01";
         public const string CLIENT_NAME_TYPE_CODE = "02";
         public const string DOCUMENT_SUBTYPE = "000";
-        public const string NAMECHANGE_SUBTYPE = "";
+
+        /* OneStop Document Subtypes
+        Change Status	113
+        Change Name – establishment name	150
+        Change name – operating name	103
+        Change name - TPO	154
+        Change name – deemed licensee	155
+        Change address – physical	107
+        Change address – mailing	108
+        Change contact info – exec/receiver	157
+        */
+
+
+        public const string DOCUMENT_SUBTYPE_CHANGESTATUS = "113";
+        public const string DOCUMENT_SUBTYPE_CHANGENAME = "150";
+        public const string DOCUMENT_SUBTYPE_CHANGEADDRESS = "107";
 
         public const string SENDER_ID = "LCRB";
         public const string RECEIVER_ID = "BCSBNHUB";
