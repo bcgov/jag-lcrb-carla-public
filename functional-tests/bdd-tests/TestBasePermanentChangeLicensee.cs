@@ -337,12 +337,55 @@ namespace bdd_tests
                     NgWebElement uiAdditionReceiverExecutor = ngDriver.FindElement(By.CssSelector("#mat-checkbox-8.mat-checkbox"));
                     uiAdditionReceiverExecutor.Click();
 
+                    /*
+                     *  INTERNAL SHARE TRANSFER
+                     */
+
+                    // upload central securities register
+                    FileUpload("central_securities_register.pdf", "(//input[@type='file'])[2]");
+
+                    // upload Shareholders (individuals) Holding Less Than 10% Interest
+                    FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[5]");
+
+                    // select 'Yes' for 'Have you amalgamated with another company?'
+                    NgWebElement uiAmalgamatedYes = ngDriver.FindElement(By.CssSelector("#mat-radio-2"));
+                    uiAmalgamatedYes.Click();
+
+                    // upload certificate of amalgamation
+                    FileUpload("certificate_of_amalgamation.pdf", "(//input[@type='file'])[8]");
+
+                    // upload central securities register
+                    FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+
+                    // upload notice of articles
+                    FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[14]");
+
+                    /*
+                    *  EXTERNAL SHARE TRANSFER
+                    */
+
+                    // upload central securities register
+                    FileUpload("central_securities_register.pdf", "(//input[@type='file'])[17]");
+
+                    // upload supporting business documentation
+                    FileUpload("business_plan.pdf", "(//input[@type='file'])[20]");
+
+                    // upload Shareholders (individuals) Holding Less Than 10% Interest
+                    FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[23]");
+
+                    /*
+                     *  CHANGE OF DIRECTORS OR OFFICERS
+                     */
+
+                    // upload notice of articles
+                    FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[26]");
+
                     /* 
                     *  PERSON'S NAME CHANGE
                     */
 
                     // enter person first name
-                    NgWebElement uiFirstNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
+                    NgWebElement uiFirstNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-2"));
                     uiFirstNamePublicCorporation.SendKeys(firstName);
 
                     // enter person last name
@@ -358,7 +401,7 @@ namespace bdd_tests
                     uiNewLastNamePublicCorporation.SendKeys(newLastName);
 
                     // upload copy of marriage certificate
-                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[6]");
+                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[29]");
 
                     /* 
                     *  CORPORATION NAME CHANGE
@@ -373,7 +416,7 @@ namespace bdd_tests
                     uiNewCompanyNamePublicCorporation.SendKeys(newCompanyName);
 
                     // upload certificate of name change
-                    FileUpload("certificate_of_name_change.pdf", "(//input[@type='file'])[8]");
+                    FileUpload("certificate_of_name_change.pdf", "(//input[@type='file'])[32]");
 
                     /* 
                     *  ADDITION OF EXECUTOR OR RECEIVER
@@ -388,10 +431,10 @@ namespace bdd_tests
                     uiExecutorLastNamePublicCorporation.SendKeys(executorLastName);
 
                     // upload assignment of executor
-                    FileUpload("assignment_of_executor.pdf", "(//input[@type='file'])[11]");
+                    FileUpload("assignment_of_executor.pdf", "(//input[@type='file'])[35]");
 
                     // upload death certificate
-                    FileUpload("death_certificate.pdf", "(//input[@type='file'])[14]");
+                    FileUpload("death_certificate.pdf", "(//input[@type='file'])[38]");
 
                     // enter receiver first name
                     NgWebElement uiReceiverFirstNamePublicCorporation = ngDriver.FindElement(By.CssSelector("input#mat-input-8"));
@@ -402,17 +445,17 @@ namespace bdd_tests
                     uiReceiverLastNamePublicCorporation.SendKeys(receiverLastName);
 
                     // upload receiver appointment order
-                    FileUpload("receiver_appointment_order.pdf", "(//input[@type='file'])[17]");
+                    FileUpload("receiver_appointment_order.pdf", "(//input[@type='file'])[41]");
 
                     // upload court order
-                    FileUpload("court_order.pdf", "(//input[@type='file'])[20]");
+                    FileUpload("court_order.pdf", "(//input[@type='file'])[44]");
 
                     /* 
                     *  PERSONAL HISTORY SUMMARY FORMS
                     */
 
                     // upload Personal History Summary document
-                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[24]");
+                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[47]");
 
                     break;
 
