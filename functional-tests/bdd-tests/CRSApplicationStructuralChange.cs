@@ -22,7 +22,7 @@ Feature: CRSApplicationStructuralChange
 Scenario: Cannabis Structural Changes (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Submit button
@@ -39,7 +39,7 @@ Scenario: Cannabis Structural Changes (Private Corporation)
 Scenario: Cannabis Structural Changes (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a society
     And I complete the Cannabis Retail Store application for a society
     And I click on the Submit button
@@ -56,7 +56,7 @@ Scenario: Cannabis Structural Changes (Society)
 Scenario: Cannabis Structural Changes (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a partnership
     And I complete the Cannabis Retail Store application for a partnership
     And I click on the Submit button
@@ -73,7 +73,7 @@ Scenario: Cannabis Structural Changes (Partnership)
 Scenario: Cannabis Structural Changes (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a sole proprietorship
     And I complete the Cannabis Retail Store application for a sole proprietorship
     And I click on the Submit button

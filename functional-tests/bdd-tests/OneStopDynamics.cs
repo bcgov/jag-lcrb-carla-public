@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
- Feature: OneStopDynamics
+Feature: OneStopDynamics
     As a logged in business user
     I want to test the OneStop features and confirm the status in Dynamics
 
@@ -23,9 +23,10 @@ using Xunit;
 # GUID: 463CF450-060B-404F-8487-004840A49D81
 Scenario: OneStop New Licence (Private Corporation)
     Given I confirm that autotest account deletion is switched off
+    And I am using the correct business number
     And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -43,9 +44,10 @@ Scenario: OneStop New Licence (Private Corporation)
 @onestopdynamics @manualonly
 Scenario: OneStop Cancel Licence (Private Corporation)
     Given I confirm that autotest account deletion is switched off
+    And I am using the correct business number
     And I am logged in to the dashboard as a private corporation    
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -88,9 +90,10 @@ Scenario: OneStop Remove Cancellation (Private Corporation)
 @onestopdynamics @manualonly
 Scenario: OneStop Enter Licence Dormancy (Private Corporation)
     Given I confirm that autotest account deletion is switched off
+    And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -129,9 +132,10 @@ Scenario: OneStop End Licence Dormancy (Private Corporation)
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Expired (Private Corporation)
     Given I confirm that autotest account deletion is switched off
+    And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -171,9 +175,10 @@ Scenario: OneStop Licence Renewed (Private Corporation)
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Suspended (Private Corporation)
     Given I confirm that autotest account deletion is switched off
+    And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -212,9 +217,10 @@ Scenario: OneStop Licence End Suspension (Private Corporation)
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Name Change (Private Corporation)
     Given I confirm that autotest account deletion is switched off
+    And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -223,7 +229,10 @@ Scenario: OneStop Licence Name Change (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee 
+    And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
+    And I run /api/OneStop/CheckQueue
     And I request a valid store name or branding change for Cannabis
+    And the application is approved
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I wait 2 minutes
@@ -237,9 +246,10 @@ Scenario: OneStop Licence Name Change (Private Corporation)
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Address Change (Private Corporation)
     Given I confirm that autotest account deletion is switched off
+    And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -248,7 +258,10 @@ Scenario: OneStop Licence Address Change (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
+    And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
+    And I run /api/OneStop/CheckQueue
     And I request a store relocation for Cannabis
+    And the application is approved
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I wait 2 minutes
@@ -262,9 +275,10 @@ Scenario: OneStop Licence Address Change (Private Corporation)
 @onestopdynamics @manualonly
 Scenario: OneStop Licence Transfer Ownership (Private Corporation)
     Given I confirm that autotest account deletion is switched off
+    And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -272,8 +286,11 @@ Scenario: OneStop Licence Transfer Ownership (Private Corporation)
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee 
+    And I pay the licensing fee
+    And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
+    And I run /api/OneStop/CheckQueue
     And I request a transfer of ownership
+    And the application is approved
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
     And I wait 2 minutes

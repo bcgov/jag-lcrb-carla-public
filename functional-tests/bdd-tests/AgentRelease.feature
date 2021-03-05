@@ -1,9 +1,9 @@
-﻿Feature: AgentThirdParty
+﻿Feature: AgentRelease
     As a logged in business user
-    I want to request a third party operator application for an Agent 
+    I want to run a release test for Agent licence
 
-@agent @privatecorporation
-Scenario: Agent Third Party (Private Corporation)
+@agent @privatecorporation @release1
+Scenario: Agent Release Test (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for an Agent Licence
     And I review the account profile for a private corporation
@@ -13,6 +13,9 @@ Scenario: Agent Third Party (Private Corporation)
     And I confirm the payment receipt for an Agent Licence
     And the application is approved
     And I click on the Licences tab
-    And I request a third party operator
+    And I click on the link for Download Licence
+    And I request a licensee representative
+    And I click on the Licences tab
+    And I request a transfer of ownership
     And the account is deleted
     Then I see the login page

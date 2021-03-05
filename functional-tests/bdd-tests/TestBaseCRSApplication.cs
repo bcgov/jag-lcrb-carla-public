@@ -20,12 +20,12 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I complete the eligibility disclosure")]
+        /*[And(@"I complete the eligibility disclosure")]
         public void CompleteEligibilityDisclosure()
         {
             /* 
             Page Title: Cannabis Retail Store Licence Eligibility Disclosure
-            */
+            
 
             // select response: On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?           
             // select Yes radio button 
@@ -82,7 +82,7 @@ namespace bdd_tests
             // click on the Submit button
             NgWebElement uiEligibilitySubmit = ngDriver.FindElement(By.CssSelector("app-eligibility-form button.btn-primary"));
             uiEligibilitySubmit.Click();
-        }
+        }*/
 
 
         [And(@"I complete the Cannabis Retail Store application for a(.*)")]
@@ -169,7 +169,7 @@ namespace bdd_tests
             uiIndigenousNation.SendKeys(indigenousNation);
 
             NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
-            uiIndigenousNation2.Click();
+            JavaScriptClick(uiIndigenousNation2);
 
             // search for and select the police jurisdiction
             NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));

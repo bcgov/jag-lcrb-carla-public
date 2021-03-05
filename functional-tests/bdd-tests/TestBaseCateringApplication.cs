@@ -56,11 +56,20 @@ namespace bdd_tests
 
             if (bizType == "public corporation")
             {
+                // upload a central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+
+                // upload supporting biz documents
+                FileUpload("business_plan.pdf", "(//input[@type='file'])[6]");
+
                 // upload notice of articles
-                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
 
                 // upload personal history summary documents
-                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
+                FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
+
+                // upload shareholders < 10% interest
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
 
             if (bizType == "private corporation")
@@ -163,7 +172,7 @@ namespace bdd_tests
             if ((bizType == "private corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "public corporation") || (bizType == "sole proprietorship"))
             {
                 NgWebElement uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-76-button"));
-                uiRuralAgencyStore.Click();
+                JavaScriptClick(uiRuralAgencyStore);
             }
 
             if ((bizType == "combined application"))
@@ -198,7 +207,7 @@ namespace bdd_tests
             NgWebElement uiTransportDetails = ngDriver.FindElement(By.CssSelector("textarea#description3"));
             uiTransportDetails.SendKeys(transportDetails);
 
-            if ((bizType == "partnership") || (bizType == "society") || (bizType == "public corporation"))
+            if ((bizType == "partnership") || (bizType == "society"))
             {
                 // upload a store signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[8]");
@@ -207,7 +216,7 @@ namespace bdd_tests
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
             }
 
-            if ((bizType == "private corporation") || (bizType == "combined application"))
+            if ((bizType == "private corporation") || (bizType == "combined application") || (bizType == "public corporation"))
             {
                 // upload a store signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[17]");
