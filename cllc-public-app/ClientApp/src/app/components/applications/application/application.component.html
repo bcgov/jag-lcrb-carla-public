@@ -257,7 +257,7 @@
     <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
     <span>Organizational leadership must provide completed Personal History Summary forms</span>
   </p>
-  <app-file-uploader *ngIf="true || applicationId" documentType="OrganizationDetails" 
+  <app-file-uploader *ngIf="true || applicationId" documentType="OrganizationDetails"
                      fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
                      (numberOfUploadedFiles)="uploadedPartnershipAgreement = $event" [entityId]="applicationId"
                      [uploadHeader]="'TO UPLOAD ORGANIZATION DETAILS, DRAG FILES HERE OR'">
@@ -266,9 +266,9 @@
 
 <!-- Other -->
 <section
-  *ngIf="!this.businessTypeIsPartnership() 
-  && !this.businessTypeIsCorporation() 
-  && !this.businessTypeIsSoleProp() 
+  *ngIf="!this.businessTypeIsPartnership()
+  && !this.businessTypeIsCorporation()
+  && !this.businessTypeIsSoleProp()
   && !this.businessTypeIsSociety()
   && !account.isOtherBusinessType()">
   <h4>Legal Entity Documentation</h4>
@@ -569,18 +569,34 @@
     </app-field>
   </address>
 
+  <app-field label="Is the proposed establishment on Treaty First Nation Land?"
+    *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)"
+    [valid]="isValidOrNotTouched('isOnINLand')" [showChevrons]="false" [isFullWidth]="true">
+    <mat-radio-group formControlName="isOnINLand">
+      <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
+      <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
+    </mat-radio-group>
+  </app-field>
+
+  <app-field label="PIN" [valid]="isValidOrNotTouched('pin')" *ngIf="form.get('isOnINLand').value"
+    errorMessage="Please enter the PIN"
+    [valid]="isValidOrNotTouched('pin')" [showChevrons]="false" [isFullWidth]="true">
+    <input type="text" class="form-control" style="width: 200px;" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+      maxlength="9" formControlName="pin" id="pin">
+  </app-field>
+
   <div class="light-blue-bg" style="display: flex;">
     <div style="flex: 0 0 210px;">
       <app-field label="Parcel Identifier (PID)" [valid]="isValidOrNotTouched('establishmentParcelId')"
-                 errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
+                 errorMessage="Please enter the Parcel Identifier (format: 9 digits)">
         <input type="text" class="form-control" style="width: 200px;"
                (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength="9"
                formControlName="establishmentParcelId" id="establishmentParcelId">
       </app-field>
     </div>
+
     <div style="flex: 1; font-size: 11px;">
       <span>
-
         <span>
           <fa-icon [icon]="faExclamationCircle" style="margin-right: 10px;"></fa-icon>The property’s PID may be
           found
@@ -616,15 +632,6 @@
   </section>
 
   <section>
-    <app-field label="Is the proposed establishment on Treaty First Nation Land?"
-               *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)"
-               [valid]="isValidOrNotTouched('isOnINLand')" [showChevrons]="false" [isFullWidth]="true">
-      <mat-radio-group formControlName="isOnINLand">
-        <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
-        <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
-      </mat-radio-group>
-    </app-field>
-
     <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
                [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status" [isFullWidth]="true"
                *ngIf="application?.applicationType?.hasALRQuestion">
@@ -1104,20 +1111,22 @@
 </section>
 
 <!-- Cooler access -->
-<mat-card *ngIf="application?.applicationType?.publicCooler =='Yes'" class="mat-elevation-z0" style="margin-bottom: 10px;">
-  <section style="display: flex; justify-content: space-between; width: 100%;">
-    <div class="question-label">
-      Is the public permitted to walk into the cooler space?
-    </div>
-    <div style="flex: 0 0 85px;">
-      <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('hasCoolerAccess')}"
-                               formControlName="hasCoolerAccess" aria-label="Font Style">
-        <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-        <mat-button-toggle [value]="false">No</mat-button-toggle>
-      </mat-button-toggle-group>
-    </div>
-  </section>
-</mat-card>
+<ng-container *ngIf="application?.applicationType?.publicCooler =='Yes'">
+  <app-field label="Is the public permitted to walk into the cooler space?" [required]="false"
+    errorMessage="This field is required." [valid]="isValidOrNotTouched('hasCoolerAccess')">
+    <mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
+      <section style="width: 100%;">
+        <div>
+          <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('hasCoolerAccess')}"
+            formControlName="hasCoolerAccess" aria-label="Font Style">
+            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+            <mat-button-toggle [value]="false">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </section>
+    </mat-card>
+  </app-field>
+</ng-container>
 
 <!-- Photos or Renderings of Signage-->
 <div class="ngtest-photo-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
@@ -2436,7 +2445,7 @@
 
     <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
             (click)="submit_application()" [disabled]="submitApplicationInProgress">
-      SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+      SUBMIT&nbsp;<span *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
       <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
     </button>
 
