@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm that the CRS functionality is ready for release
 
-@cannabis @validation @release1
+@cannabis @validation @release2
 Scenario: CRS Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
