@@ -118,6 +118,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   proceedToSecurityScreeningInProgress: boolean;
   dataLoaded: boolean;
   isShowLGINApproval = false;
+  uploadedNOA: number = 0;
+  uploadedOrganizationDetails: number = 0;
 
 
   get isOpenedByLGForApproval(): boolean {
@@ -1077,11 +1079,35 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('At least one site plan document is required.');
     }
+    
+    if (!this.isLiquor() &&
+      ((this.uploadedFinancialIntegrityDocuments || 0) < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one Financial Intergrity document is required.');
+    }
+    
+    if (this.account.isOtherBusinessType() &&
+      ((this.uploadedOrganizationDetails || 0) < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one Organization Details document is required.');
+    }
+    
+    if (this.businessTypeIsPartnership() &&
+      ((this.uploadedPartnershipAgreement || 0) < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one Partnership Agreement document is required.');
+    }
 
-    if (this.showExteriorRenderings() &&
+    if (this.businessTypeIsPrivateCorporation() &&
       ((this.uploadedPhotosOrRenderingsDocuments || 0) < 1)) {
       valid = false;
-      this.validationMessages.push('At least one store exterior rendering or photo is required.');
+      this.validationMessages.push('At least one Central Securities Register document is required.');
+    }
+    
+    if ((this.businessTypeIsSociety() || this.businessTypeIsCorporation()) &&
+      ((this.uploadedNOA || 0) < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one Notice of Articles document is required.');
     }
 
     if (this.application.applicationType.floorPlan === FormControlState.Show &&

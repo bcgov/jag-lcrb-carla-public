@@ -259,7 +259,7 @@
   </p>
   <app-file-uploader *ngIf="true || applicationId" documentType="OrganizationDetails" 
                      fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-                     (numberOfUploadedFiles)="uploadedPartnershipAgreement = $event" [entityId]="applicationId"
+                     (numberOfUploadedFiles)="uploadedOrganizationDetails = $event" [entityId]="applicationId"
                      [uploadHeader]="'TO UPLOAD ORGANIZATION DETAILS, DRAG FILES HERE OR'">
   </app-file-uploader>
 </section>
