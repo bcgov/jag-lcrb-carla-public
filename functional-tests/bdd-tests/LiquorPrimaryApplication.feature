@@ -127,3 +127,7 @@ Scenario: Liquor Primary Application (Military Mess)
     And I click on the Submit button
     And the account is deleted
     Then I see the login page
+
+Scenario: Generate Liquor Primary Applications For Comment
+    Given I am logged in to the dashboard as a private corporation
+    And I generate 50 Liquor Primary Applications in Kamloops LGIN, RCMP Kamloops Police
