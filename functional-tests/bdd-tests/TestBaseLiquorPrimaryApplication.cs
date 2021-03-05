@@ -23,6 +23,12 @@ namespace bdd_tests
         [And(@"I complete the Liquor Primary application for a (.*)")]
         public void CompleteLiquorPrimaryApplication(string bizType)
         {
+            CompleteLiquorPrimaryApplicationFull(bizType);
+        }
+
+        
+        public void CompleteLiquorPrimaryApplicationFull(string bizType, string localGovernment = "Parksville", string policeJurisdiction = "RCMP Oceanside")
+        {
             /* 
             Page Title: Liquor Primary Licence Application
             */
@@ -47,9 +53,7 @@ namespace bdd_tests
             string conRole = "CEO";
             string conPhone = "2508888888";
             string conEmail = "contact@email.com";
-            string localGovernmentParksville = "Parksville";
-            string policeJurisdictionParksville = "RCMP Oceanside";
-
+            
             string floorAreaDescription = "Sample floor area.";
             string occupantLoad = "180";
 
@@ -136,14 +140,14 @@ namespace bdd_tests
 
             // search for and select Parksville as the local government
             NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
-            uiIndigenousNation.SendKeys(localGovernmentParksville);
+            uiIndigenousNation.SendKeys(localGovernment);
 
             NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
             JavaScriptClick(uiIndigenousNation2);
 
             // search for and select RCMP Oceanside as the police jurisdiction
             NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
-            uiPoliceJurisdiction.SendKeys(policeJurisdictionParksville);
+            uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
             NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
             uiPoliceJurisdiction2.Click();
