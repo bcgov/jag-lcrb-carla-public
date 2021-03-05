@@ -207,7 +207,7 @@ namespace bdd_tests
             NgWebElement uiTransportDetails = ngDriver.FindElement(By.CssSelector("textarea#description3"));
             uiTransportDetails.SendKeys(transportDetails);
 
-            if ((bizType == "partnership") || (bizType == "society") || (bizType == "public corporation"))
+            if ((bizType == "partnership") || (bizType == "society"))
             {
                 // upload a store signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[8]");
@@ -216,7 +216,7 @@ namespace bdd_tests
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
             }
 
-            if ((bizType == "private corporation") || (bizType == "combined application"))
+            if ((bizType == "private corporation") || (bizType == "combined application") || (bizType == "public corporation"))
             {
                 // upload a store signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[17]");
