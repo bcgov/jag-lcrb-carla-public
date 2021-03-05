@@ -11,7 +11,7 @@
 Scenario: Deny CRS Licence Renewal Today (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Submit button
@@ -32,7 +32,7 @@ Scenario: Deny CRS Licence Renewal Today (Private Corporation)
 Scenario: Deny CRS Licence Renewal Yesterday (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Submit button
@@ -53,7 +53,7 @@ Scenario: Deny CRS Licence Renewal Yesterday (Private Corporation)
 Scenario: Deny CRS Licence Renewal 45 Days Ago (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Submit button
@@ -74,7 +74,7 @@ Scenario: Deny CRS Licence Renewal 45 Days Ago (Private Corporation)
 Scenario: Deny CRS Licence Renewal 60 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Submit button
@@ -95,7 +95,7 @@ Scenario: Deny CRS Licence Renewal 60 Days Future (Private Corporation)
 Scenario: Deny CRS Licence Renewal 30 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I complete the Cannabis Retail Store application for a private corporation
     And I click on the Submit button

@@ -11,7 +11,7 @@ Scenario: OneStop New Licence (Private Corporation)
     And I am using the correct business number
     And I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -32,7 +32,7 @@ Scenario: OneStop Cancel Licence (Private Corporation)
     And I am using the correct business number
     And I am logged in to the dashboard as a private corporation    
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -78,7 +78,7 @@ Scenario: OneStop Enter Licence Dormancy (Private Corporation)
     And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -120,7 +120,7 @@ Scenario: OneStop Licence Expired (Private Corporation)
     And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -163,7 +163,7 @@ Scenario: OneStop Licence Suspended (Private Corporation)
     And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -205,7 +205,7 @@ Scenario: OneStop Licence Name Change (Private Corporation)
     And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -234,7 +234,7 @@ Scenario: OneStop Licence Address Change (Private Corporation)
     And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -263,7 +263,7 @@ Scenario: OneStop Licence Transfer Ownership (Private Corporation)
     And I am using the correct business number
     And I am logged in to the dashboard as a private corporation 
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information

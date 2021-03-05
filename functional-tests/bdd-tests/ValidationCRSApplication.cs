@@ -21,7 +21,7 @@ Feature: ValidationCRSApplication
 Scenario: Validation for Private Corporation CRS Application 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -34,7 +34,7 @@ Scenario: Validation for Private Corporation CRS Application
 Scenario: Validation for IN CRS Application
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for an indigenous nation
     And I review the organization structure for an indigenous nation
     And I click on the button for Submit Organization Information
@@ -47,7 +47,7 @@ Scenario: Validation for IN CRS Application
 Scenario: Validation for CRS Branding Change 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -68,7 +68,7 @@ Scenario: Validation for CRS Branding Change
 Scenario: Validation for CRS Licence Renewal
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -88,7 +88,7 @@ Scenario: Validation for CRS Licence Renewal
 Scenario: Validation for CRS Store Relocation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -109,7 +109,7 @@ Scenario: Validation for CRS Store Relocation
 Scenario: Validation for CRS Structural Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
@@ -130,7 +130,7 @@ Scenario: Validation for CRS Structural Change
 Scenario: Validation for CRS Transfer of Ownership
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
-    And I complete the eligibility disclosure
+    # And I complete the eligibility disclosure
     And I review the account profile for a private corporation
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
