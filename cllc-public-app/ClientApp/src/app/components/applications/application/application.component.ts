@@ -530,6 +530,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('establishmentAddressPostalCode').disable();
       this.form.get('establishmentName').disable();
       this.form.get('establishmentParcelId').disable();
+      this.form.get('pin').disable();
     }
 
     if (this.application.applicationType.newEstablishmentAddress !== FormControlState.Show) {
@@ -537,6 +538,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('establishmentAddressCity').disable();
       this.form.get('establishmentAddressPostalCode').disable();
       this.form.get('establishmentParcelId').disable();
+      this.form.get('pin').disable();
     }
 
     if (this.application.applicationType.establishmentName !== FormControlState.Show) {
