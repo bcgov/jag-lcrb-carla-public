@@ -17,7 +17,7 @@ Feature: WorkerApplication
     As a logged in worker applicant
     I want to submit a cannabis worker application
 
-@workerapplication @release2
+@workerapplication @release4
 Scenario: Worker Application
     Given I login with no terms
     And the account is deleted

@@ -17,7 +17,7 @@ Feature: ManufacturerChangeHoursLiquorService
     As a logged in business user
     I want to update the liquor hours of service for lounge areas and special events
 
-@manufacturer @changehours @release2
+@manufacturer @changehours @release3
 Scenario: Lounge Area Within Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -34,7 +34,7 @@ Scenario: Lounge Area Within Service Hours (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @changehours @release2
+@manufacturer @changehours @release3
 Scenario: Lounge Area Outside Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -52,7 +52,7 @@ Scenario: Lounge Area Outside Service Hours (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @changehours @release2
+@manufacturer @changehours @release3
 Scenario: Special Event Area Within Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -69,7 +69,7 @@ Scenario: Special Event Area Within Service Hours (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @changehours @release2
+@manufacturer @changehours @release3
 Scenario: Special Event Area Outside Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

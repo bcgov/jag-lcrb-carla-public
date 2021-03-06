@@ -54,6 +54,9 @@ Scenario: Liquor Primary Temp Use Area Endorsement Approved (Private Corporation
     And I enter the payment information
     And the on-site endorsement application is approved
     And I click on the Licences tab
+    And I click on the link for Request Temporary Use Area Event Authorization
+    And I complete the TUA event application 
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page
 */
