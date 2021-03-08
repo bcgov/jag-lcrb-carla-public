@@ -34,13 +34,11 @@ namespace bdd_tests
             */
 
             // create test data
-            string areaDescription = "Sample area description";
             string patioPerimeter = "Sample patio perimeter";
             string patioLocation = "Sample patio location";
             string patioAccess = "Sample patio access";
             string liquorCarried = "Sample liquor carried details";
             string patioAccessControl = "Sample patio access control";
-            string occupantLoad = "180";
             string establishmentType = "Military mess";
 
             // click zoning checkbox
