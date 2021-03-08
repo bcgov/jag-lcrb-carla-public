@@ -120,6 +120,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   isShowLGINApproval = false;
   uploadedNOA: number = 0;
   uploadedOrganizationDetails: number = 0;
+  uploadedCentralSecuritiesRegisterDocuments: number = 0;
 
 
   get isOpenedByLGForApproval(): boolean {
@@ -1101,7 +1102,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.businessTypeIsPrivateCorporation() &&
-      ((this.uploadedPhotosOrRenderingsDocuments || 0) < 1)) {
+      ((this.uploadedCentralSecuritiesRegisterDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one Central Securities Register document is required.');
     }
