@@ -162,7 +162,7 @@
     <None Update="RuralLRSDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRS.feature">
+    <None Update="RuralLRSApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="UBrewUVinLicensingRenewal.feature">
