@@ -19,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static List<ViewModels.Endorsement> GetEndorsements(string licenceId, IDynamicsClient dynamicsClient)
         {
             var endorsementsList = new List<ViewModels.Endorsement>();
-            string filter = $"_adoxio_licence_value eq {licenceId} and statuscode eq {(int)EndorsementStatus.Active}";
+            string filter = $"_adoxio_licence_value eq {licenceId} and statuscode ne {(int)EndorsementStatus.Cancelled}";
             string[] expand = { "adoxio_ApplicationType" };
             try
             {

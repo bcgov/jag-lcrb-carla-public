@@ -120,6 +120,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   isShowLGINApproval = false;
   uploadedNOA: number = 0;
   uploadedOrganizationDetails: number = 0;
+  uploadedCentralSecuritiesRegisterDocuments: number = 0;
 
 
   get isOpenedByLGForApproval(): boolean {
@@ -1101,7 +1102,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.businessTypeIsPrivateCorporation() &&
-      ((this.uploadedPhotosOrRenderingsDocuments || 0) < 1)) {
+      ((this.uploadedCentralSecuritiesRegisterDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one Central Securities Register document is required.');
     }
@@ -1293,7 +1294,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       ruralAgencyStoreAppointment: 'Please enter a value for rural agency store appointment number',
       tiedhouseFederalInterest: 'Please enter a value for tied house federal interest',
       willHaveValidInterest: 'Please enter a value for will have valid interest',
-      zoningStatus: 'Please enter a value for zoning status'
+      zoningStatus: 'Please enter a value for zoning status',
+      pin: 'Please enter a PIN or PID',
+      policeJurisdiction: 'Please select a police jurisdiction for the establishment',
+      indigenousNation : 'Please select a local government or an Indigenous Nation'
 
     };
 
