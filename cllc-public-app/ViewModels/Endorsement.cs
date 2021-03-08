@@ -10,6 +10,12 @@ using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
+    public enum EndorsementStatus {
+        Active = 1,
+        Cancelled = 845280000,
+        Suspended = 845280001,
+    }
+    
     public class Endorsement
     {
         public string EndorsementId { get; set; }
