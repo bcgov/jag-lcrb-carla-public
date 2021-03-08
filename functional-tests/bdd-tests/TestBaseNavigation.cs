@@ -461,7 +461,7 @@ namespace bdd_tests
             // licenceID = parsedURL[5];
 
             // navigate to the Downloads folder
-            var environment = Environment.CurrentDirectory;
+            // var environment = Environment.CurrentDirectory;
 
             // check if the licence ID matches by name  
         }
