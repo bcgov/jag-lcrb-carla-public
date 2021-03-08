@@ -17,7 +17,7 @@ Feature: LiquorPrimaryApplication
     As a logged in business user
     I want to submit Liquor Primary Applications for different business types
 
-@liquorprimaryapp @release2
+@liquorprimaryapp @release1
 Scenario: Liquor Primary Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
@@ -38,7 +38,7 @@ Scenario: Liquor Primary Application (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp @release2
+@liquorprimaryapp
 Scenario: Liquor Primary Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Liquor Primary Licence
@@ -59,7 +59,7 @@ Scenario: Liquor Primary Application (Society)
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp @release2
+@liquorprimaryapp
 Scenario: Liquor Primary Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Liquor Primary Licence
@@ -80,7 +80,7 @@ Scenario: Liquor Primary Application (Partnership)
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp @release2
+@liquorprimaryapp
 Scenario: Liquor Primary Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Liquor Primary Licence
@@ -142,6 +142,10 @@ Scenario: Liquor Primary Application (Military Mess)
     And I click on the Submit button
     And the account is deleted
     Then I see the login page
+
+Scenario: Generate Liquor Primary Applications For Comment
+    Given I am logged in to the dashboard as a private corporation
+    And I generate 50 Liquor Primary Applications in Kamloops LGIN, RCMP Kamloops Police
 */
 
 namespace bdd_tests
