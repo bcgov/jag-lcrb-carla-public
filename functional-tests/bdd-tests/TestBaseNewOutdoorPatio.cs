@@ -57,7 +57,7 @@ namespace bdd_tests
 
             // click on Is Liquor Carried checkbox
             NgWebElement uiPatioIsLiquorCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox#patioIsLiquorCarried"));
-            uiPatioIsLiquorCarried.Click();
+            JavaScriptClick(uiPatioIsLiquorCarried);
 
             // enter Is Liquor Carried description
             NgWebElement uiPatioLiquorCarriedDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
