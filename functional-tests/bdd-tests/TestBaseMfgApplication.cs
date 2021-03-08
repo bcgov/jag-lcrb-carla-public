@@ -39,7 +39,7 @@ namespace bdd_tests
             string contactTitle = "Sommelier";
             string contactPhone = "778-181-1818";
             string contactEmail = "contact@email.com";
-            string indigenousNation = "Cowichan Tribes";
+            string indigenousNation = "Parksville";
             string policeJurisdiction = "RCMP Shawnigan Lake";
             string localGovernmentParksville = "Parksville";
             string policeJurisdictionParksville = "RCMP Oceanside";
