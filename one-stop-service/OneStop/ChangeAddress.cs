@@ -56,7 +56,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             var header = new SBNChangeAddressHeader();
 
             header.requestMode = OneStopUtils.ASYNCHRONOUS;
-            header.documentSubType = OneStopUtils.NAMECHANGE_SUBTYPE;
+            header.documentSubType = OneStopUtils.DOCUMENT_SUBTYPE_CHANGEADDRESS;
             header.senderID = OneStopUtils.SENDER_ID;
             header.receiverID = OneStopUtils.RECEIVER_ID;
             //any note wanted by LCRB. Currently in liquor is: licence Id, licence number - sequence number
