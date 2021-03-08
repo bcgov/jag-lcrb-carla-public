@@ -101,7 +101,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedFloorPlanDocuments: 0;
   uploadedPhotosOrRenderingsDocuments: 0;
   uploadedZoningDocuments: 0;
-  uploadedCentralSecuritiesRegister: 0;
   uploadedRegisterOfDirectorsAndOfficers: 0;
   uploadedPartnershipAgreement: 0;
   uploadedOtherDocuments: 0;
@@ -1099,6 +1098,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       ((this.uploadedPartnershipAgreement || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one Partnership Agreement document is required.');
+    }
+
+    if (this.showExteriorRenderings() &&
+      ((this.uploadedPhotosOrRenderingsDocuments || 0) < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one store exterior rendering or photo is required.');
     }
 
     if (this.businessTypeIsPrivateCorporation() &&
