@@ -74,7 +74,7 @@ Scenario: Catering Licensee Changes (Society)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges @release3
+@catering @licenseechanges @release4
 Scenario: Catering Licensee Changes (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
