@@ -186,7 +186,7 @@ namespace bdd_tests
             if ((bizType == "private corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "public corporation") || (bizType == "sole proprietorship"))
             { 
                 NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-79-button"));
-                uiOtherBusinessYes.Click();
+                JavaScriptClick(uiOtherBusinessYes);
             }
 
             if ((bizType == "combined application"))
