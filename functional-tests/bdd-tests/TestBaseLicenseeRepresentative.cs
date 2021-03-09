@@ -96,7 +96,7 @@ namespace bdd_tests
             JavaScriptClick(uiSubmitButton);
 
             // check that new licensee representation is displayed
-            Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/div[4]/a/span[contains(.,'Licensee Representative: ')]")).Displayed);
+            Assert.True(ngDriver.FindElement(By.XPath("//app-licence-row/div/div/form/table/tr[2]/td[2]/div[5]/a/span[contains(.,'Licensee Representative: ')]")).Displayed);
         }
     }
 }
