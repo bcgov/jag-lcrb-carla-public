@@ -180,7 +180,14 @@ namespace bdd_tests
             {
                 ClickDashboardTab();
                 ClickStartApplication("a Liquor Primary Licence");
-                ReviewAccountProfile(" private corporation");
+                if (i == 0) // only fill out account profile on the first pass.
+                {
+                    ReviewAccountProfile(" private corporation");
+                }
+                else
+                {
+                    ContinueToApplicationButton();
+                }
                 CompleteLiquorPrimaryApplicationFull("private corporation", lgin, policeJurisdiction);
             }
         }
