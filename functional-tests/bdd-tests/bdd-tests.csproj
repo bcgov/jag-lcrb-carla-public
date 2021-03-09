@@ -66,6 +66,9 @@
     <None Update="FoodPrimaryTESA.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="FoodPrimaryThirdPartyOperatorRenewal.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="LiquorPrimaryAllowFamilyFoodService.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
