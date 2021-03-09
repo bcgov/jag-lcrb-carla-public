@@ -90,8 +90,8 @@
 
 
 <!-- LE Document Upload Section -->
-<h3 class="blue-header" *ngIf="application?.applicationType?.hasLESection && !isOpenedByLGForApproval">Legal Entity Document Requirements</h3>
-<section *ngIf="application?.applicationType?.hasLESection && !isOpenedByLGForApproval" class="content-bottom">
+<h3 class="blue-header" *ngIf="showLEDocumentSection()">Legal Entity Document Requirements</h3>
+<section *ngIf="showLEDocumentSection()" class="content-bottom">
 
 <!-- if Private Corporation -->
 <section *ngIf="this.businessTypeIsPrivateCorporation()">
