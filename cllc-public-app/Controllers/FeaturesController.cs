@@ -36,7 +36,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("FEATURE_TUA_EVENTS", "TemporaryUseAreaEvents"),
                 ("FEATURE_ELIGIBILITY", "Eligibility"),
                 ("FEATURE_RLRS", "RLRS"), // used to switch to the RLRS and disable the RAS intake
-                ("FEATURE_LIQUOR_FREE_EVENTS", "LiquorFreeEvents") // All-ages Liquor-Free events for Liquor Primary and Liquor Primary Club
+                ("FEATURE_LIQUOR_FREE_EVENTS", "LiquorFreeEvents"), // All-ages Liquor-Free events for Liquor Primary and Liquor Primary Club
+                ("FEATURE_DISABLE_WORKER_QUALIFICATION", "DisableWorkerQualification")  // Removes worker qualification from the portal
             };
 
         public FeaturesController(IConfiguration configuration)
