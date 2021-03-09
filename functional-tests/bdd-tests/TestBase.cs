@@ -100,6 +100,36 @@ namespace bdd_tests
         }
 
         /// <summary>
+        /// Helper function to populate the Local Government / Indigenous Nation and Police Jurisdiction fields.
+        /// This function is centralized as the same code is used on all application types.
+        /// Past issues that have been attempted to be resolved with this code include the item being found but not clicked on properly. 
+        /// </summary>
+        /// <param name="lgin">Name of the lgin.  Defaults to "Parksville" in most cases</param>
+        /// <param name="police">Name of the police jurisdiction</param>
+        void FillLginAndPolice(string lgin, string police)
+        {
+            // search for and select Parksville as the local government
+            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+            uiIndigenousNation.SendKeys(lgin);
+
+            NgWebElement uiIndigenousNation2 = FindFirstElementByCssWithRetry("span[class='mat-option-text']");
+            if (uiIndigenousNation2 != null)
+            {
+                JavaScriptClick(uiIndigenousNation2);
+            }
+            
+            // search for and select RCMP Oceanside as the police jurisdiction
+            NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
+            uiPoliceJurisdiction.SendKeys(police);
+
+            NgWebElement uiPoliceJurisdiction2 = FindFirstElementByCssWithRetry("span[class='mat-option-text']");
+            if (uiIndigenousNation2 != null)
+            {
+                JavaScriptClick(uiPoliceJurisdiction2);
+            }
+        }
+
+        /// <summary>
         /// Find a given css selector, with a retry.  Useful for cases where a given control may not have been loaded at the time the selector is used.
         /// </summary>
         /// <param name="cssSelector">The Css Selector</param>
@@ -121,6 +151,20 @@ namespace bdd_tests
                     retry--;
                 }
             }
+
+            if (result == null)
+            {
+                // attempt to save a screenshot.
+                try
+                {
+                    ((ITakesScreenshot) ngDriver.WrappedDriver).GetScreenshot().SaveAsFile("error.png");
+                }
+                catch (Exception)
+                {
+                    // ignore any errors that occur when saving the screenshot.
+                }
+            }
+
             return result;
         }
 
