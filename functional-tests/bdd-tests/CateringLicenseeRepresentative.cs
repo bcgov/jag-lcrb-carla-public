@@ -37,7 +37,7 @@ namespace bdd_tests
 {
     [FeatureFile("./CateringApplicationLicenseeRepresentative.feature")]
     [Collection("Liquor")]
-    public sealed class CateringApplicationLicenseeRepresentative : TestBase
+    public sealed class CateringLicenseeRepresentative : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

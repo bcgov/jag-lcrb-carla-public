@@ -123,7 +123,7 @@ namespace bdd_tests
 {
     [FeatureFile("./CateringApplicationLicensingRenewalDenied.feature")]
     [Collection("Cannabis")]
-    public sealed class CateringApplicationLicensingRenewalDenied : TestBase
+    public sealed class CateringLicensingRenewalDenied : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LoggedInToDashboard(string businessType)
