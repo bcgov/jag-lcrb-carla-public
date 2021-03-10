@@ -13,13 +13,13 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplicationTransferLicence
+Feature: CRSRequestAStructuralChange
     As a logged in business user
     I want to submit a CRS Application for different business types
-    And request a transfer of ownership for the approved application
+    And request a structural change for the approved application
 
-@cannabis @privatecorporation @crstransferownership
-Scenario: Cannabis Transfer Ownership (Private Corporation)
+@cannabis @privatecorporation @crsstructuralchanges
+Scenario: Cannabis Structural Changes (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -28,13 +28,15 @@ Scenario: Cannabis Transfer Ownership (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee 
-    And I request a transfer of ownership
+    And I pay the licensing fee
+    And I request a structural change
+    And I click on the link for Dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@cannabis @society @crstransferownership
-Scenario: Cannabis Transfer Ownership (Society)
+@cannabis @society @crsstructuralchanges
+Scenario: Cannabis Structural Changes (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -43,13 +45,15 @@ Scenario: Cannabis Transfer Ownership (Society)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee 
-    And I request a transfer of ownership
+    And I pay the licensing fee
+    And I request a structural change
+    And I click on the link for Dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @crstransferownership
-Scenario: Cannabis Transfer Ownership (Partnership)
+@cannabis @partnership @crsstructuralchanges
+Scenario: Cannabis Structural Changes (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -59,12 +63,14 @@ Scenario: Cannabis Transfer Ownership (Partnership)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
-    And I request a transfer of ownership
+    And I request a structural change
+    And I click on the link for Dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@cannabis @soleproprietorship @crstransferownership
-Scenario: Cannabis Transfer Ownership (Sole Proprietorship)
+@cannabis @soleproprietorship @crsstructuralchanges
+Scenario: Cannabis Structural Changes (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -74,16 +80,18 @@ Scenario: Cannabis Transfer Ownership (Sole Proprietorship)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
-    And I request a transfer of ownership
+    And I request a structural change
+    And I click on the link for Dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplicationTransferLicence.feature")]
+    [FeatureFile("./CRSRequestAStructuralChange.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSApplicationTransferLicence : TestBase
+    public sealed class CRSRequestAStructuralChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

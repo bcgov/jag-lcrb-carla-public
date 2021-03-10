@@ -13,13 +13,13 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplicationStructuralChange
+Feature: CRSRequestStoreNameOrBrandingChange
     As a logged in business user
     I want to submit a CRS Application for different business types
-    And request a structural change for the approved application
+    And request a valid name or branding change for the approved application
 
-@cannabis @privatecorporation @crsstructuralchanges
-Scenario: Cannabis Structural Changes (Private Corporation)
+@cannabis @privatecorporation @crsbranding
+Scenario: CRS Name Branding Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -28,15 +28,17 @@ Scenario: Cannabis Structural Changes (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee
-    And I request a structural change
-    And I click on the link for Dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And I pay the licensing fee 
+    And I click on the button for CRS terms and conditions
+    And the correct terms and conditions are displayed for CRS
+    And I request a valid store name or branding change for Cannabis
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@cannabis @society @crsstructuralchanges
-Scenario: Cannabis Structural Changes (Society)
+@cannabis @society @crsbranding
+Scenario: CRS Name Branding Change (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -45,15 +47,17 @@ Scenario: Cannabis Structural Changes (Society)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee
-    And I request a structural change
-    And I click on the link for Dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And I pay the licensing fee 
+    And I click on the button for CRS terms and conditions
+    And the correct terms and conditions are displayed for CRS
+    And I request a valid store name or branding change for Cannabis
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @crsstructuralchanges
-Scenario: Cannabis Structural Changes (Partnership)
+@cannabis @partnership @crsbranding
+Scenario: CRS Name Branding Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -63,14 +67,16 @@ Scenario: Cannabis Structural Changes (Partnership)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
-    And I request a structural change
-    And I click on the link for Dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And I click on the button for CRS terms and conditions
+    And the correct terms and conditions are displayed for CRS
+    And I request a valid store name or branding change for Cannabis
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 
-@cannabis @soleproprietorship @crsstructuralchanges
-Scenario: Cannabis Structural Changes (Sole Proprietorship)
+@cannabis @soleproprietorship @crsbranding
+Scenario: CRS Name Branding Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -79,19 +85,21 @@ Scenario: Cannabis Structural Changes (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee
-    And I request a structural change
-    And I click on the link for Dashboard
-    And I confirm the structural change request is displayed on the dashboard
+    And I pay the licensing fee 
+    And I click on the button for CRS terms and conditions
+    And the correct terms and conditions are displayed for CRS
+    And I request a valid store name or branding change for Cannabis
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplicationStructuralChange.feature")]
+    [FeatureFile("./CRSRequestStoreNameOrBrandingChange.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSApplicationStructuralChange : TestBase
+    public sealed class CRSRequestStoreNameOrBrandingChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

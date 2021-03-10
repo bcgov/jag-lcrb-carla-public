@@ -1,10 +1,10 @@
-﻿Feature: CRSApplicationStoreRelocation
+﻿Feature: CRSRequestAStructuralChange
     As a logged in business user
     I want to submit a CRS Application for different business types
-    And request a store relocation for the approved application
+    And request a structural change for the approved application
 
-@cannabis @privatecorporation @crsstorerelocation
-Scenario: Cannabis Store Relocation (Private Corporation)
+@cannabis @privatecorporation @crsstructuralchanges
+Scenario: Cannabis Structural Changes (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -14,14 +14,14 @@ Scenario: Cannabis Store Relocation (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
-    And I request a store relocation for Cannabis
+    And I request a structural change
     And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@cannabis @society @crsstorerelocation
-Scenario: Cannabis Store Relocation (Society)
+@cannabis @society @crsstructuralchanges
+Scenario: Cannabis Structural Changes (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -31,14 +31,14 @@ Scenario: Cannabis Store Relocation (Society)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
-    And I request a store relocation for Cannabis
+    And I request a structural change
     And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @crsstorerelocation
-Scenario: Cannabis Store Relocation (Partnership)
+@cannabis @partnership @crsstructuralchanges
+Scenario: Cannabis Structural Changes (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -48,14 +48,14 @@ Scenario: Cannabis Store Relocation (Partnership)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
-    And I request a store relocation for Cannabis
+    And I request a structural change
     And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
 
-@cannabis @soleproprietorship @crsstorerelocation
-Scenario: Cannabis Store Relocation (Sole Proprietorship)
+@cannabis @soleproprietorship @crsstructuralchanges
+Scenario: Cannabis Structural Changes (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
     # And I complete the eligibility disclosure
@@ -65,8 +65,8 @@ Scenario: Cannabis Store Relocation (Sole Proprietorship)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
-    And I request a store relocation for Cannabis
+    And I request a structural change
     And I click on the link for Dashboard
-    And I confirm the relocation request is displayed on the dashboard
+    And I confirm the structural change request is displayed on the dashboard
     And the account is deleted
     Then I see the login page
