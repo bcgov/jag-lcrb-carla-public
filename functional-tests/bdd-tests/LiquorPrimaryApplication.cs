@@ -189,6 +189,8 @@ namespace bdd_tests
                     ContinueToApplicationButton();
                 }
                 CompleteLiquorPrimaryApplicationFull("private corporation", lgin, policeJurisdiction);
+
+                ClickOnLGSubmitButton();
             }
         }
 
