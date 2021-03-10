@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: ManufacturerChangeHoursLiquorService
+Feature: ManufacturerChangeToHoursOfLiquorService
     As a logged in business user
     I want to update the liquor hours of service for lounge areas and special events
 
@@ -87,9 +87,9 @@ Scenario: Special Event Area Outside Service Hours (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./ManufacturerChangeHoursLiquorService.feature")]
+    [FeatureFile("./ManufacturerChangeToHoursOfLiquorService.feature")]
     [Collection("Liquor")]
-    public sealed class ManufacturerChangeHoursLiquorService : TestBase
+    public sealed class ManufacturerChangeToHoursOfLiquorService : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
