@@ -62,7 +62,7 @@
            formControlName="licenseNumber">
   </app-field>
 
-  <app-field label="Establishment Name" [required]="false">
+  <app-field *ngIf="licence?.licenseType !== 'Agent'" label="Establishment Name" [required]="false">
     <input class="form-control" style="width: 500px;" type="text" [readonly]="true" formControlName="establishmentName">
   </app-field>
 
@@ -89,7 +89,7 @@
         <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
       </app-field>
     </address>
-    <div class="light-blue-bg" style="display: flex;">
+    <div  *ngIf="licence?.licenseType !== 'Agent'" class="light-blue-bg" style="display: flex;">
       <div style="flex: 0 0 210px;">
         <app-field label="Parcel Identifier (PID)">
           <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)"
