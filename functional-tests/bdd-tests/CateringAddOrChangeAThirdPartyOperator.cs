@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CateringApplicationThirdParty
+Feature: CateringAddOrChangeAThirdPartyOperator
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit a third party operator request for different business types
@@ -85,9 +85,9 @@ Feature: CateringApplicationThirdParty
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplicationThirdParty.feature")]
+    [FeatureFile("./CateringAddOrChangeAThirdPartyOperator.feature")]
     [Collection("Liquor")]
-    public sealed class CateringThirdParty : TestBase
+    public sealed class CateringAddOrChangeAThirdPartyOperator : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

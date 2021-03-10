@@ -1,4 +1,4 @@
-﻿Feature: CateringApplicationStoreRelocation
+﻿Feature: CateringRequestRelocation
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit a store relocation for different business types
