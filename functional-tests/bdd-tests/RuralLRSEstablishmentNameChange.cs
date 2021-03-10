@@ -1,4 +1,19 @@
-﻿Feature: RuralLRSNameBrandingChange
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support;
+using OpenQA.Selenium.Support.UI;
+using Protractor;
+using System;
+using Xunit.Gherkin.Quick;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using System.IO;
+using Xunit;
+
+/*
+Feature: RuralLRSEstablishmentNameChange
     As a logged in business user
     I want to request a name or branding change for a rural LRS application
 
@@ -81,3 +96,26 @@ Scenario: Rural LRS Name Branding Change (Sole Proprietorship)
     And I request a valid store name or branding change for Rural RLS
     And the account is deleted
     Then I see the login page
+*/
+
+namespace bdd_tests
+{
+    [FeatureFile("./RuralLRSEstablishmentNameChange.feature")]
+    [Collection("Cannabis")]
+    public sealed class RuralLRSEstablishmentNameChange : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as a(.*)")]
+        public void LogInToDashboard(string businessType)
+        {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureLEConnections();
+
+            IgnoreSynchronizationFalse();
+
+            CarlaLogin(businessType);
+        }
+    }
+}

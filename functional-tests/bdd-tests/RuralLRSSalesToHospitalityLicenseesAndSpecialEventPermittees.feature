@@ -1,23 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
-
-/*
-Feature: RuralLRSSalesSEP
+﻿Feature: RuralLRSSalesToHospitalityLicenseesAndSpecialEventPermittees
     As a logged in business user
     I want to request a sales to hospitality licensees and special event permittees for a rural LRS application
 
-@privatecorporation @ruralLRS
+@privatecorporation @ruralLRS 
 Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
@@ -116,26 +101,3 @@ Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees 
     And I enter the payment information
     And the account is deleted
     Then I see the login page
-*/
-
-namespace bdd_tests
-{
-    [FeatureFile("./RuralLRSSalesSEP.feature")]
-    [Collection("Cannabis")]
-    public sealed class RuralLRSSalesSEP : TestBase
-    {
-        [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void LogInToDashboard(string businessType)
-        {
-            NavigateToFeatures();
-
-            CheckFeatureFlagsLicenseeChanges();
-
-            CheckFeatureLEConnections();
-
-            IgnoreSynchronizationFalse();
-
-            CarlaLogin(businessType);
-        }
-    }
-}
