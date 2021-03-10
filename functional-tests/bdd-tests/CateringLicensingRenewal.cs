@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CateringApplicationLicensingRenewal
+Feature: CateringLicensingRenewal
     As a logged in business user
     I want to pay the first year licensing fee for an approved Catering Application
     And renew the licence
@@ -201,7 +201,7 @@ Scenario: Positive Catering Licence Renewal 30 Days Future (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplicationLicensingRenewal.feature")]
+    [FeatureFile("./CateringLicensingRenewal.feature")]
     [Collection("Cannabis")]
     public sealed class CateringLicensingRenewal : TestBase
     {

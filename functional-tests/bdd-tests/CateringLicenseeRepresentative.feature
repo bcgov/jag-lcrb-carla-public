@@ -1,4 +1,4 @@
-﻿ Feature: CateringApplicationLicenseeRepresentative
+﻿ Feature: CateringLicenseeRepresentative
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit a licensee representative request 

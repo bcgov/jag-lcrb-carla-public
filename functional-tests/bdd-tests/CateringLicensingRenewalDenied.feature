@@ -1,4 +1,4 @@
-﻿Feature: CateringApplicationLicensingRenewalDenied
+﻿Feature: CateringLicensingRenewalDenied
     As a logged in business user
     I want to pay the first year licensing fee for an approved Catering Application
     And confirm that autorenewal is set to 'No' to prevent renewal of the licence

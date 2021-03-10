@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
- Feature: CateringApplicationEventAuthorization
+ Feature: CateringEventAuthorization
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit an event authorization request for different business types
@@ -201,7 +201,7 @@ using Xunit;
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplicationEventAuthorization.feature")]
+    [FeatureFile("./CateringEventAuthorization.feature")]
     [Collection("Liquor")]
     public sealed class CateringEventAuthorization : TestBase
     {

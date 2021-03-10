@@ -1,4 +1,4 @@
-﻿ Feature: CateringApplicationEventAuthorization
+﻿ Feature: CateringEventAuthorization
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit an event authorization request for different business types

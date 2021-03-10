@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CateringApplicationLicensingRenewalDenied
+Feature: CateringLicensingRenewalDenied
     As a logged in business user
     I want to pay the first year licensing fee for an approved Catering Application
     And confirm that autorenewal is set to 'No' to prevent renewal of the licence
@@ -121,7 +121,7 @@ Scenario: Deny Catering Licence Renewal 30 Days Future (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplicationLicensingRenewalDenied.feature")]
+    [FeatureFile("./CateringLicensingRenewalDenied.feature")]
     [Collection("Cannabis")]
     public sealed class CateringLicensingRenewalDenied : TestBase
     {

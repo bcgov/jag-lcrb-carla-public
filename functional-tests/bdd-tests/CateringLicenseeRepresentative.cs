@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
- Feature: CateringApplicationLicenseeRepresentative
+ Feature: CateringLicenseeRepresentative
     As a logged in business user
     I want to pay the first year catering licence fee
     And submit a licensee representative request 
@@ -35,7 +35,7 @@ using Xunit;
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringApplicationLicenseeRepresentative.feature")]
+    [FeatureFile("./CateringLicenseeRepresentative.feature")]
     [Collection("Liquor")]
     public sealed class CateringLicenseeRepresentative : TestBase
     {
