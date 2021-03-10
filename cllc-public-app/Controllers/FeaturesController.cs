@@ -35,7 +35,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("FEATURE_LE_CONNECTIONS", "LEConnections"),
                 ("FEATURE_TUA_EVENTS", "TemporaryUseAreaEvents"),
                 ("FEATURE_ELIGIBILITY", "Eligibility"),
-                ("FEATURE_RESOLVED_APPS","ResolvedApplications"), // Applications that  have been resolved by the local government
                 ("FEATURE_RLRS", "RLRS"), // used to switch to the RLRS and disable the RAS intake
                 ("FEATURE_LIQUOR_FREE_EVENTS", "LiquorFreeEvents") // All-ages Liquor-Free events for Liquor Primary and Liquor Primary Club
             };
