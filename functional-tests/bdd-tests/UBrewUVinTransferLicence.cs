@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: UBrewUVinLicenceTransferLicence
+Feature: UBrewUVinTransferLicence
     As a logged in business user
     I want to submit a UBrew / UVin Licence transfer for different business types
 
@@ -96,9 +96,9 @@ Scenario: UBrew / UVin Application Transfer Licence (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinLicenceTransferLicence.feature")]
+    [FeatureFile("./UBrewUVinTransferLicence.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinLicenceTransferLicence : TestBase
+    public sealed class UBrewUVinTransferLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
