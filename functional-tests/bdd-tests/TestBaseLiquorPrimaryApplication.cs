@@ -153,7 +153,9 @@ namespace bdd_tests
             // first find the material radio group.
             var patioRadioGroup = ngDriver.FindElement(By.CssSelector("mat-radio-group[formcontrolname='isHasPatio']"));
             // then find the first radio button (YES)
-            patioRadioGroup.FindElements(By.TagName("mat-radio-button"))[0].Click();
+            ScrollToElement(patioRadioGroup);
+            var patioButton = patioRadioGroup.FindElements(By.TagName("mat-radio-button"))[0];
+            patioButton.Click();
 
             // enter the patio comp description
             NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));

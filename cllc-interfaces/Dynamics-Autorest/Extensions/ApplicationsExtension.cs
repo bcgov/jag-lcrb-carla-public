@@ -39,7 +39,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 ServiceClientTracing.Enter(_invocationId, this, "Get", tracingParameters);
             }
             // extract the last portion of the nextlink.
-            int slashPos = nextLink.LastIndexOf("/") + 1;
+            int questionPos = nextLink.IndexOf("?");
+            int slashPos = nextLink.LastIndexOf("/", questionPos) + 1;
             string adjustedNextLink = nextLink.Substring(slashPos);
 
             // Construct URL

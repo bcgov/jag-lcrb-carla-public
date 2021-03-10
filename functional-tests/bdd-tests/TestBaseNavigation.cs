@@ -486,7 +486,14 @@ namespace bdd_tests
 
         public void FileUpload(string fileName, string inputFile)
         {
-            NgWebElement uiUploadDocument = ngDriver.FindElement(By.XPath(inputFile));
+            var elements = ngDriver.FindElements(By.XPath(inputFile));
+            if (elements == null || elements.Count == 0)
+            {
+                // try again
+                elements = ngDriver.FindElements(By.XPath(inputFile));
+            }
+
+            NgWebElement uiUploadDocument = elements[0];
 
             // find the upload test files in the bdd-tests\upload_files folder
             var environment = Environment.CurrentDirectory;
