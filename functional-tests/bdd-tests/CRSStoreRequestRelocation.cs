@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplicationStoreRelocation
+Feature: CRSStoreRequestRelocation
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a store relocation for the approved application
@@ -89,9 +89,9 @@ Scenario: Cannabis Store Relocation (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplicationStoreRelocation.feature")]
+    [FeatureFile("./CRSStoreRequestRelocation.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSApplicationStoreRelocation : TestBase
+    public sealed class CRSStoreRequestRelocation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
