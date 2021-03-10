@@ -1,4 +1,4 @@
-﻿Feature: CateringApplicationDownloadLicence
+﻿Feature: CateringDownloadLicence
     As a logged in business user
     I want to pay the first year catering licence fee
     And download the licence for different business types
