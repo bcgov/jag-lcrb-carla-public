@@ -1,19 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
-
-/*
-Feature: ManufacturerTiedHouseExemption
+﻿Feature: ManufacturerInvitationForTiedHouseExemption
     As a logged in business user
     I want to submit a tied house exemption for different manufacturer types
 
@@ -80,30 +65,3 @@ Scenario: Manufacturer Tied House Exemption (Co-packer)
     And I click on the secondary Submit button
     And the account is deleted
     Then I see the login page
-*/
-
-namespace bdd_tests
-{
-    [FeatureFile("./ManufacturerTiedHouseExemption.feature")]
-    [Collection("Liquor")]
-    public sealed class ManufacturerTiedHouseExemption : TestBase
-    {
-        [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void LogInToDashboard(string businessType)
-        {
-            NavigateToFeatures();
-
-            CheckFeatureFlagsLiquorTwo();
-
-            CheckFeatureFlagsLicenseeChanges();
-
-            CheckFeatureFlagsSecurityScreening();
-
-            CheckFeatureLEConnections();
-
-            IgnoreSynchronizationFalse();
-
-            CarlaLogin(businessType);
-        }
-    }
-}
