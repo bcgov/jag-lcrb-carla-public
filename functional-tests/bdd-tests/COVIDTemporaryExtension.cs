@@ -52,7 +52,7 @@ Scenario: COVID Temp Extension (Manufacturer)
 
 namespace bdd_tests
 {
-    [FeatureFile("./COVIDTemporaryExtension.feature")]
+    [FeatureFile("./**.feature")]
     public sealed class COVIDTemporaryExtension : TestBase
     {
     }
