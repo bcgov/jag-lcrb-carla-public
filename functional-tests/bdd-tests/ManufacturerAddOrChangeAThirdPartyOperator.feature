@@ -1,4 +1,4 @@
-﻿Feature: ManufacturerThirdPartyOperator
+﻿Feature: ManufacturerAddOrChangeAThirdPartyOperator
     As a logged in business user
     I want to request a third party operator for a manufacturer licence
 

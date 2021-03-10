@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: ManufacturerThirdPartyOperator
+Feature: ManufacturerAddOrChangeAThirdPartyOperator
     As a logged in business user
     I want to request a third party operator for a manufacturer licence
 
@@ -84,9 +84,9 @@ Scenario: Third Party Operator (Co-packer)
 
 namespace bdd_tests
 {
-    [FeatureFile("./ManufacturerThirdPartyOperator.feature")]
+    [FeatureFile("./ManufacturerAddOrChangeAThirdPartyOperator.feature")]
     [Collection("Liquor")]
-    public sealed class ManufacturerThirdPartyOperator : TestBase
+    public sealed class ManufacturerAddOrChangeAThirdPartyOperator : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
