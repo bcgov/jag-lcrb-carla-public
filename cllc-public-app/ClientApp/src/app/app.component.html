@@ -114,7 +114,7 @@
               </li>
               <li class="nav-item" appRemoveIfFeatureOff="Sep">
                 <a (click)="toggleButton.click()" tabindex="2" routerLink="/sep">
-                  Special Events Permit
+                  Special Events Permits
                 </a>
               </li>
             </ul>
@@ -165,7 +165,7 @@
                 </a>
                 <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
                    class="nav-link" routerLink="/sep-dashboard">
-                  Special Event Permits Dashboard
+                  Special Events Permits Dashboard
                 </a>
                 <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
                   matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="!(showNoticesBadge$ | async)"
