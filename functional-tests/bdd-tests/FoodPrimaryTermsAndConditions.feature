@@ -1,9 +1,9 @@
-﻿Feature: FoodPrimaryTransferLicence
+﻿Feature: FoodPrimaryTermsAndConditions
     As a logged in business user
-    I want to transfer a Food Primary licence for different business types
+    I want to confirm the Terms and Conditions for a Food Primary licence
 
-@foodprimarylicencetransfer @privatecorporation
-Scenario: Food Primary Transfer Licence (Private Corporation)
+@foodprimary @privatecorporation
+Scenario: Food Primary Terms and Conditions (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -14,6 +14,7 @@ Scenario: Food Primary Transfer Licence (Private Corporation)
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I request a transfer of ownership for Food Primary
+    And I click on the Licences tab
+    And I confirm the terms and conditions for a Food Primary licence
     And the account is deleted
     Then I see the login page
