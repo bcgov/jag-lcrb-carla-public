@@ -14,7 +14,7 @@ Scenario: Rural LRS Licence Transfer (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
 
@@ -30,7 +30,7 @@ Scenario: Rural LRS Licence Transfer (Public Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
 
@@ -46,7 +46,7 @@ Scenario: Rural LRS Licence Transfer (Partnership)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
 
@@ -62,7 +62,7 @@ Scenario: Rural LRS Licence Transfer (Society)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
 
@@ -78,6 +78,6 @@ Scenario: Rural LRS Licence Transfer (Sole Proprietorship)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
