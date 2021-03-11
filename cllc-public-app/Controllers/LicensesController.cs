@@ -1247,7 +1247,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (adoxioLicense.AdoxioThirdPartyOperatorId != null)
                 {
-                        thirdPartyText = $"<tr><td>Third Party Operator</td><td>{adoxioLicense.AdoxioThirdPartyOperatorId.Name}</td></tr>";
+                    thirdPartyText = $"<tr><td>Third Party Operator</td><td>{adoxioLicense.AdoxioThirdPartyOperatorId.Name}</td></tr>";
                 }
 
                 var endorsementsText = "";
@@ -1255,37 +1255,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // show the service areas in a table that has 4 columns
 
-                if(licenceVM.ServiceAreas.Count > 0){
+                if (licenceVM.ServiceAreas.Count > 0)
+                {
 
-                        endorsementsText += "<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'><tr>";
+                    endorsementsText += "<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'><tr>";
 
-                        var cells = 0;
-                        var leftover = 0;
+                    var cells = 0;
+                    var leftover = 0;
 
-                        foreach (CapacityArea area in licenceVM.ServiceAreas)
+                    foreach (CapacityArea area in licenceVM.ServiceAreas)
+                    {
+                        cells++;
+
+                        endorsementsText += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AreaLocation}{area.AreaNumber}</td><td>{area.Capacity}</td></tr></table></td>";
+
+                        // every 4 cells
+                        leftover = cells % 4;
+
+                        if (leftover == 0)
                         {
-                            cells++;
-
-                            endorsementsText += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AreaLocation}{area.AreaNumber}</td><td>{area.Capacity}</td></tr></table></td>";
-
-                            // every 4 cells
-                            leftover = cells % 4;
-
-                            if (leftover == 0)
-                            {
-                                // do a new row
-                                endorsementsText += "</tr><tr>"; 
-                            }
-
-                        }
-                        // now we're out of service areas
-                        // fill in the remaining cells, so the table makes sense 
-                        for (int i = 0; i < leftover; i++)
-                        {
-                            endorsementsText += "<td class='space'>&nbsp;</td>";
+                            // do a new row
+                            endorsementsText += "</tr><tr>";
                         }
 
-                        endorsementsText += "</tr></table>";
+                    }
+                    // now we're out of service areas
+                    // fill in the remaining cells, so the table makes sense 
+                    for (int i = 0; i < leftover; i++)
+                    {
+                        endorsementsText += "<td class='space'>&nbsp;</td>";
+                    }
+
+                    endorsementsText += "</tr></table>";
                 }
 
 
@@ -1448,7 +1449,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "establishmentCity", adoxioLicense.AdoxioLicencee?.Address1City + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioLicencee?.Address1Postalcode },
                         { "licencee", adoxioLicense.AdoxioLicencee?.Name },
-                        { "thirdParty", thirdPartyText},
+                        { "thirdPartyText", thirdPartyText},
                         { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
@@ -1460,9 +1461,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     };
                 }
-
-
-
                 else // handle other types such as catering
                 {
                     String typeLabel = adoxioLicense?.AdoxioLicenceSubCategoryId?.AdoxioName != null ? adoxioLicense.AdoxioLicenceSubCategoryId?.AdoxioName : adoxioLicense.AdoxioLicenceType?.AdoxioName;
@@ -1481,7 +1479,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
                         { "licencee", adoxioLicense.AdoxioLicencee?.Name },
-                        { "thirdParty", thirdPartyText},
+                        { "thirdPartyText", thirdPartyText},
                         { "licenceType", typeLabel},
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
