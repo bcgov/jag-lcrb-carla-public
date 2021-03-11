@@ -60,9 +60,9 @@ namespace bdd_tests
 
             if (licenceType == "a Food Primary licence")
             {
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'')]")).Displayed);
-                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'For the sale and consumption of all types of liquor in establishments with a primary focus on the service of food.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Liquor may only be sold, served and consumed within the service areas outlined on the official plan, unless otherwise endorsed or approved by the LCRB')]")).Displayed);
             }
         }
     }
