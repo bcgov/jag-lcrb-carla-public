@@ -20,8 +20,8 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request a transfer of ownership")]
-        public void RequestOwnershipTransfer()
+        [And(@"I request a transfer of ownership for (.*)")]
+        public void RequestOwnershipTransfer(string licenceType)
         {
             /* 
             Page Title: Licences & Authorizations
@@ -38,10 +38,13 @@ namespace bdd_tests
             string fieldValueLicenseNumber = uiLicenseNumber.GetProperty("value");
             Assert.False(string.IsNullOrEmpty(fieldValueLicenseNumber));
 
-            // check that establishment name field is populated
-            NgWebElement uiEstablishmentName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
-            string fieldValueEstablishmentName = uiEstablishmentName.GetProperty("value");
-            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentName));
+            if (licenceType != "an agent")
+            {
+                // check that establishment name field is populated
+                NgWebElement uiEstablishmentName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
+                string fieldValueEstablishmentName = uiEstablishmentName.GetProperty("value");
+                Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentName));
+            }
 
             // check that establishment address street field is populated
             NgWebElement uiEstablishmentAddressStreet = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
@@ -68,10 +71,13 @@ namespace bdd_tests
             string fieldValueEstablishmentCountry = uiEstablishmentAddressCountry.GetProperty("value");
             Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentCountry));
 
-            // check that establishment PID is populated
-            NgWebElement uiEstablishmentParcelId = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
-            string fieldValueEstablishmentParcelId = uiEstablishmentParcelId.GetProperty("value");
-            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentParcelId));
+            if (licenceType != "an agent")
+            {
+                // check that establishment PID is populated
+                NgWebElement uiEstablishmentParcelId = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
+                string fieldValueEstablishmentParcelId = uiEstablishmentParcelId.GetProperty("value");
+                Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentParcelId));
+            }
 
             string licensee = "GunderCorp";
 

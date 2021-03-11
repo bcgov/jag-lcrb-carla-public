@@ -39,6 +39,6 @@ Scenario: Rural LRS Release (Private Corporation)
     And I click on the Licences tab
     And I request a third party operator
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
