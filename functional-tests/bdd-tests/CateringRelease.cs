@@ -47,7 +47,7 @@ Scenario: Catering Release (Private Corporation)
     # And I click on the link for Renew Licence
     # And I renew the licence with positive responses for Catering
     # And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Catering
     And the account is deleted
     Then I see the login page
 
@@ -80,7 +80,7 @@ Scenario: Catering Release (Sole Proprietorship)
     And I click on the link for Renew Licence
     And I renew the licence with positive responses for Catering
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Catering
     And the account is deleted
     Then I see the login page
 */
