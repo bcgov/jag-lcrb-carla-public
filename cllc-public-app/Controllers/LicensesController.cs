@@ -1208,7 +1208,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_LicenceType",
                 "adoxio_establishment",
                 "adoxio_ProposedOwner",
-                "adoxio_LicenceSubCategoryId"
+                "adoxio_LicenceSubCategoryId",
+                "adoxio_ThirdPartyOperatorId"
             };
 
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(licenceId, expand: expand);
@@ -1241,8 +1242,53 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
                 }
 
+                // if there's a third party operator, add to licence, otherwise show nothing
+                var thirdPartyText = "";
+
+                if (adoxioLicense.AdoxioThirdPartyOperatorId != null)
+                {
+                        thirdPartyText = $"<tr><td>Third Party Operator</td><td>{adoxioLicense.AdoxioThirdPartyOperatorId.Name}</td></tr>";
+                }
+
                 var endorsementsText = "";
                 License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
+
+                // show the service areas in a table that has 4 columns
+
+                if(licenceVM.ServiceAreas.Count > 0){
+
+                        endorsementsText += "<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'><tr>";
+
+                        var cells = 0;
+                        var leftover = 0;
+
+                        foreach (CapacityArea area in licenceVM.ServiceAreas)
+                        {
+                            cells++;
+
+                            endorsementsText += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AreaLocation}{area.AreaNumber}</td><td>{area.Capacity}</td></tr></table></td>";
+
+                            // every 4 cells
+                            leftover = cells % 4;
+
+                            if (leftover == 0)
+                            {
+                                // do a new row
+                                endorsementsText += "</tr><tr>"; 
+                            }
+
+                        }
+                        // now we're out of service areas
+                        // fill in the remaining cells, so the table makes sense 
+                        for (int i = 0; i < leftover; i++)
+                        {
+                            endorsementsText += "<td class='space'>&nbsp;</td>";
+                        }
+
+                        endorsementsText += "</tr></table>";
+                }
+
+
 
                 if (licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0)
                 {
@@ -1379,6 +1425,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "establishmentCity", adoxioLicense.AdoxioLicencee?.Address1City + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioLicencee?.Address1Postalcode },
                         { "licencee", adoxioLicense.AdoxioLicencee?.Name },
+                        { "thirdPartyText", thirdPartyText},
                         { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
@@ -1401,6 +1448,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "establishmentCity", adoxioLicense.AdoxioLicencee?.Address1City + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioLicencee?.Address1Postalcode },
                         { "licencee", adoxioLicense.AdoxioLicencee?.Name },
+                        { "thirdParty", thirdPartyText},
                         { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
@@ -1433,6 +1481,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C." },
                         { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
                         { "licencee", adoxioLicense.AdoxioLicencee?.Name },
+                        { "thirdParty", thirdPartyText},
                         { "licenceType", typeLabel},
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },

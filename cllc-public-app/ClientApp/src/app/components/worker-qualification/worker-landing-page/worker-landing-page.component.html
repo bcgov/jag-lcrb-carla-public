@@ -1,0 +1,3 @@
+<app-worker-home *ngIf="!(disableQualification$ | async)"></app-worker-home>
+
+<app-policy-document #policyDocs [slug]="policySlug" *ngIf="disableQualification$ | async"></app-policy-document>

@@ -90,8 +90,8 @@
 
 
 <!-- LE Document Upload Section -->
-<h3 class="blue-header" *ngIf="application?.applicationType?.hasLESection && !isOpenedByLGForApproval">Legal Entity Document Requirements</h3>
-<section *ngIf="application?.applicationType?.hasLESection && !isOpenedByLGForApproval" class="content-bottom">
+<h3 class="blue-header" *ngIf="showLEDocumentSection()">Legal Entity Document Requirements</h3>
+<section *ngIf="showLEDocumentSection()" class="content-bottom">
 
 <!-- if Private Corporation -->
 <section *ngIf="this.businessTypeIsPrivateCorporation()">
@@ -103,7 +103,7 @@
   <img src="assets/central-securities-register-example.png" style="border: solid #e0e0e0 1px; margin: 10px; width: 500px;">
   <app-file-uploader *ngIf="true || applicationId" documentType="CentralSecuritiesRegister"
                      fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
-                     (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event" [entityId]="applicationId"
+                     (numberOfUploadedFiles)="uploadedCentralSecuritiesRegisterDocuments = $event" [entityId]="applicationId"
                      [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
   </app-file-uploader>
   <p>

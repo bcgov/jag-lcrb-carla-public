@@ -101,7 +101,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedFloorPlanDocuments: 0;
   uploadedPhotosOrRenderingsDocuments: 0;
   uploadedZoningDocuments: 0;
-  uploadedCentralSecuritiesRegister: 0;
   uploadedRegisterOfDirectorsAndOfficers: 0;
   uploadedPartnershipAgreement: 0;
   uploadedOtherDocuments: 0;
@@ -175,7 +174,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         Validators.required,
         this.establishmentWatchWordsService.forbiddenNameValidator()
       ]],
-      establishmentParcelId: ['', [ Validators.maxLength(9), Validators.minLength(9), this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
+      establishmentParcelId: ['', [Validators.maxLength(9), Validators.minLength(9), this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
       contactPersonRole: [''],
@@ -1082,35 +1081,43 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('At least one site plan document is required.');
     }
-    
-    if (!this.isLiquor() &&
-      ((this.uploadedFinancialIntegrityDocuments || 0) < 1)) {
+
+    if (this.showExteriorRenderings() &&
+      ((this.uploadedPhotosOrRenderingsDocuments || 0) < 1)) {
       valid = false;
-      this.validationMessages.push('At least one Financial Intergrity document is required.');
-    }
-    
-    if (this.account.isOtherBusinessType() &&
-      ((this.uploadedOrganizationDetails || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('At least one Organization Details document is required.');
-    }
-    
-    if (this.businessTypeIsPartnership() &&
-      ((this.uploadedPartnershipAgreement || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('At least one Partnership Agreement document is required.');
+      this.validationMessages.push('At least one store exterior rendering or photo is required.');
     }
 
-    if (this.businessTypeIsPrivateCorporation() &&
-      ((this.uploadedCentralSecuritiesRegisterDocuments || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('At least one Central Securities Register document is required.');
-    }
-    
-    if ((this.businessTypeIsSociety() || this.businessTypeIsCorporation()) &&
-      ((this.uploadedNOA || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('At least one Notice of Articles document is required.');
+    if (this.showLEDocumentSection()) {
+      if (this.businessTypeIsPrivateCorporation() &&
+        ((this.uploadedCentralSecuritiesRegisterDocuments || 0) < 1)) {
+        valid = false;
+        this.validationMessages.push('At least one Central Securities Register document is required.');
+      }
+
+      if ((this.businessTypeIsSociety() || this.businessTypeIsCorporation()) &&
+        ((this.uploadedNOA || 0) < 1)) {
+        valid = false;
+        this.validationMessages.push('At least one Notice of Articles document is required.');
+      }
+
+      if (!this.isLiquor() &&
+        ((this.uploadedFinancialIntegrityDocuments || 0) < 1)) {
+        valid = false;
+        this.validationMessages.push('At least one Financial Intergrity document is required.');
+      }
+
+      if (this.account.isOtherBusinessType() &&
+        ((this.uploadedOrganizationDetails || 0) < 1)) {
+        valid = false;
+        this.validationMessages.push('At least one Organization Details document is required.');
+      }
+
+      if (this.businessTypeIsPartnership() &&
+        ((this.uploadedPartnershipAgreement || 0) < 1)) {
+        valid = false;
+        this.validationMessages.push('At least one Partnership Agreement document is required.');
+      }
     }
 
     if (this.application.applicationType.floorPlan === FormControlState.Show &&
@@ -1141,7 +1148,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
       if (!this.form.get('hasValidInterest').value) {
         this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
-       }
+      }
 
       if (!this.form.get('willHaveValidInterest').value) {
         this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
@@ -1152,11 +1159,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // special validation for RLRS
 
     if (this.form.get('isRlrsLocatedInRuralCommunityAlone')
-        && this.form.get('isRlrsLocatedAtTouristDestinationAlone')
-        && this.form.get('isRlrsLocatedInRuralCommunityAlone').value
-        && this.form.get('isRlrsLocatedInRuralCommunityAlone').value !== 845280000 // NOT YES
-        && !this.form.get('isRlrsLocatedAtTouristDestinationAlone').value // NO VALUE FOR IS LOCATED AT TOURIST DESTINATION ALONE
-      ) {
+      && this.form.get('isRlrsLocatedAtTouristDestinationAlone')
+      && this.form.get('isRlrsLocatedInRuralCommunityAlone').value
+      && this.form.get('isRlrsLocatedInRuralCommunityAlone').value !== 845280000 // NOT YES
+      && !this.form.get('isRlrsLocatedAtTouristDestinationAlone').value // NO VALUE FOR IS LOCATED AT TOURIST DESTINATION ALONE
+    ) {
       valid = false;
       this.validationMessages.push('Please enter a value for Is the proposed RLRS located in a tourist destination resort with no other RLRS?');
     }
@@ -1166,12 +1173,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
       && this.form.get('isRlrsLocatedAtTouristDestinationAlone').value
       && this.form.get('isRlrsLocatedAtTouristDestinationAlone').value === 845280000 // IS YES
       && !this.form.get('rlrsResortCommunityDescription').value // NO VALUE FOR DESCRIPTION
-      ) {
+    ) {
       valid = false;
       this.validationMessages.push('Resort community description is required.');
     }
 
     return valid && (this.form.valid || this.form.disabled);
+  }
+
+  showLEDocumentSection(): boolean {
+    let show = this?.application?.applicationType?.hasLESection && !this.isOpenedByLGForApproval;
+    return show;
   }
 
   getValidationErrorMap() {
@@ -1297,7 +1309,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       zoningStatus: 'Please enter a value for zoning status',
       pin: 'Please enter a PIN or PID',
       policeJurisdiction: 'Please select a police jurisdiction for the establishment',
-      indigenousNation : 'Please select a local government or an Indigenous Nation'
+      indigenousNation: 'Please select a local government or an Indigenous Nation'
 
     };
 
@@ -1471,9 +1483,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType === "Wine Store");
   }
 
-  showDynamicForm(formReference, tabs)
-{
-  if (this.form.get('isHasPatio').enabled) {
+  showDynamicForm(formReference, tabs) {
+    if (this.form.get('isHasPatio').enabled) {
       this.updateDynamicValidation();
       return this.form.get('isHasPatio').value && formReference && tabs;
     }
