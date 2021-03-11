@@ -44,6 +44,11 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time. ')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Licensee may only serve liquor at a catered event for which LCRB has issued a catering authorization. ')]")).Displayed);
             }
+
+            if (licenceType == "a CRS licence")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'')]")).Displayed);
+            }
         }
     }
 }

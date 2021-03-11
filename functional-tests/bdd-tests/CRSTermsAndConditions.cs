@@ -17,7 +17,7 @@ Feature: CRSTermsAndConditions
     As a logged in business user
     I want to confirm the Terms and Conditions for a CRS licence 
 
-@agent @privatecorporation
+@cannabis @privatecorporation
 Scenario: CRS Terms and Conditions (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
