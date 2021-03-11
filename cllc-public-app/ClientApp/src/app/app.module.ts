@@ -116,6 +116,7 @@ import { ServiceCardAuthGuard } from "@services/service-card-auth-guard.service"
 import { metaReducers, reducers } from "./app-state/reducers/reducers";
 import { StoreModule } from "@ngrx/store";
 import { DashboardComponent } from "@components/dashboard/dashboard.component";
+import { DashboardComponent as SepDashboardComponent } from "@components/sep/dashboard/dashboard.component";
 import { ApplicationComponent } from "@components/applications/application/application.component";
 import { TermsOfUseComponent } from "@components/terms-of-use/terms-of-use.component";
 import { WorkerApplicationComponent } from
@@ -266,6 +267,7 @@ import { ResolvedApplicationsComponent } from './components/lg-approvals/resolve
 import { RelatedLicencePickerComponent } from './shared/components/related-licence-picker/related-licence-picker.component';
 import { ApplicationTiedHouseExemptionComponent } from './components/applications/application-tied-house-exemption/application-tied-house-exemption.component';
 import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-free-event.component";
+import { LoginComponent } from './components/sep/login/login.component';
 
 @NgModule({
   declarations: [
@@ -285,6 +287,7 @@ import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-f
     ConnectionToProducersComponent,
     CorporateDetailsComponent,
     DashboardComponent,
+    SepDashboardComponent,
     DelayedFileUploaderComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
@@ -406,6 +409,7 @@ import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-f
     RelatedLicencePickerComponent,
     ApplicationTiedHouseExemptionComponent,
     LiquorFreeEventComponent,
+    LoginComponent,
   ],
   imports: [
     AppRoutingModule,
