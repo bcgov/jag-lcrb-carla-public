@@ -266,6 +266,7 @@ import { ResolvedApplicationsComponent } from './components/lg-approvals/resolve
 import { RelatedLicencePickerComponent } from './shared/components/related-licence-picker/related-licence-picker.component';
 import { ApplicationTiedHouseExemptionComponent } from './components/applications/application-tied-house-exemption/application-tied-house-exemption.component';
 import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-free-event.component";
+import { WorkerLandingPageComponent } from "@components/worker-qualification/worker-landing-page/worker-landing-page.component";
 
 @NgModule({
   declarations: [
@@ -406,6 +407,7 @@ import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-f
     RelatedLicencePickerComponent,
     ApplicationTiedHouseExemptionComponent,
     LiquorFreeEventComponent,
+    WorkerLandingPageComponent,
   ],
   imports: [
     AppRoutingModule,

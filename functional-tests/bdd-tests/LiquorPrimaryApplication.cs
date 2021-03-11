@@ -17,7 +17,7 @@ Feature: LiquorPrimaryApplication
     As a logged in business user
     I want to submit Liquor Primary Applications for different business types
 
-@liquorprimaryapp @release1
+@liquorprimaryapp
 Scenario: Liquor Primary Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
@@ -180,8 +180,17 @@ namespace bdd_tests
             {
                 ClickDashboardTab();
                 ClickStartApplication("a Liquor Primary Licence");
-                ReviewAccountProfile(" private corporation");
+                if (i == 0) // only fill out account profile on the first pass.
+                {
+                    ReviewAccountProfile(" private corporation");
+                }
+                else
+                {
+                    ContinueToApplicationButton();
+                }
                 CompleteLiquorPrimaryApplicationFull("private corporation", lgin, policeJurisdiction);
+
+                ClickOnLGSubmitButton();
             }
         }
 

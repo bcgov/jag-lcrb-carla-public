@@ -371,6 +371,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     preferHeader.Add($"odata.maxpagesize={pageSize}");
 
                     customHeaders.Add("Prefer", preferHeader);
+                    var odataVersionHeader = new List<string>();
+                    odataVersionHeader.Add("4.0");
+
+                    customHeaders.Add("OData-Version",  odataVersionHeader);
+                    customHeaders.Add("OData-MaxVersion", odataVersionHeader);
                     var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
 
                     while (pageIndex > 0)
