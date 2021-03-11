@@ -269,6 +269,7 @@ import { ApplicationTiedHouseExemptionComponent } from './components/application
 import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-free-event.component";
 import { LoginComponent } from './components/sep/login/login.component';
 import { WorkerLandingPageComponent } from "@components/worker-qualification/worker-landing-page/worker-landing-page.component";
+import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -304,6 +305,7 @@ import { WorkerLandingPageComponent } from "@components/worker-qualification/wor
     KeyPersonnelComponent,
     LicenceFeePaymentConfirmationComponent,
     LicenceRepresentativeFormComponent,
+    LoginComponent,
     CateringEventFormComponent,
     EventSecurityFormComponent,
     TemporaryOffsiteComponent,
@@ -546,6 +548,7 @@ import { WorkerLandingPageComponent } from "@components/worker-qualification/wor
     WorkerDataService,
     FeatureFlagService,
     LEConnectionsDataService,
+    BCeidOrServiceCardAuthGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: (featureFlagService: FeatureFlagService) => function () {
