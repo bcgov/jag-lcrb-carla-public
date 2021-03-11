@@ -17,7 +17,10 @@ export class PolicyDocumentComponent implements OnInit {
   category: string;
   body: SafeHtml;
   @Input()
-  fullWidth: false;
+  fullWidth = false;
+  // Optional slug input. If supplied, it will take precedence over the route parameter.
+  @Input()
+  slug: string;
   @Output()
   slugChange = new EventEmitter<string>();
   dataLoaded: boolean;
@@ -34,16 +37,19 @@ export class PolicyDocumentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap
-      .subscribe((data) => {
+    if (!!this.slug) {
+      this.setSlug(this.slug);
+    } else {
+      this.route.paramMap.subscribe((data) => {
         const slug = data.get("slug");
         if (slug) {
           this.setSlug(slug);
         }
       });
+    }
   }
 
-  setSlug(slug) {
+  setSlug(slug: string) {
     this.slugChange.emit(slug);
     this.busy = this.policyDocumentDataService.getPolicyDocument(slug)
       .toPromise()

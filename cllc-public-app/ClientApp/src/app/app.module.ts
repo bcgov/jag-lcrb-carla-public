@@ -268,6 +268,7 @@ import { RelatedLicencePickerComponent } from './shared/components/related-licen
 import { ApplicationTiedHouseExemptionComponent } from './components/applications/application-tied-house-exemption/application-tied-house-exemption.component';
 import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-free-event.component";
 import { LoginComponent } from './components/sep/login/login.component';
+import { WorkerLandingPageComponent } from "@components/worker-qualification/worker-landing-page/worker-landing-page.component";
 
 @NgModule({
   declarations: [
@@ -409,7 +410,7 @@ import { LoginComponent } from './components/sep/login/login.component';
     RelatedLicencePickerComponent,
     ApplicationTiedHouseExemptionComponent,
     LiquorFreeEventComponent,
-    LoginComponent,
+    WorkerLandingPageComponent,
   ],
   imports: [
     AppRoutingModule,
