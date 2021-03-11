@@ -57,6 +57,13 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'This licence is subject to the terms and conditions specified in the restriction or approval letter(s) and those contained in the Marketing Licence Handbook, which may be amended from time to time.')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Pursuant to Section 11, Cannabis Licensing Regulation, this licence allows the above named person or company to act as a marketing licensee to promote cannabis for the purpose of selling it.')]")).Displayed);
             }
+
+            if (licenceType == "a Food Primary licence")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'')]")).Displayed);
+            }
         }
     }
 }

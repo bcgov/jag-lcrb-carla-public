@@ -1,6 +1,6 @@
 ﻿Feature: CannabisMarketingTermsAndConditions
     As a logged in business user
-    I want to confirm the Terms and Conditions for an Cannabis Marketing licence
+    I want to confirm the Terms and Conditions for a Cannabis Marketing licence
 
 @cannabismktg @privatecorporation
 Scenario: Cannabis Marketing Terms and Conditions (Private Corporation)
