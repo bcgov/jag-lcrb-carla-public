@@ -7,13 +7,13 @@
       <tr class="mat-list-item">
         <td>Environment:</td>
         <td>{{versionInfo?.environment}}</td>
-      </tr>
+      </tr>      
       <tr class="mat-list-item">
-        <td>Last Updated:</td>
+        <td>API Last Updated:</td>
         <td>{{versionInfo?.fileCreationTime | date:'medium' }}</td>
       </tr>
       <tr class="mat-list-item">
-        <td>Reference:</td>
+        <td>API Git Reference:</td>        
         <td>{{versionInfo?.sourceReference}}</td>
       </tr>
       <tr class="mat-list-item">
@@ -24,6 +24,23 @@
         <td>Commit:</td>
         <td>{{versionInfo?.sourceCommit}}</td>
       </tr>
+      <tr class="mat-list-item">
+        <td>UI Git Reference:</td>        
+        <td><!-- UI_GIT_REF --></td>
+      </tr>
+      <tr class="mat-list-item">
+        <td>UI Repository:</td>
+        <td><!-- UI_GIT_REPO --></td>
+      </tr>
+      <tr class="mat-list-item">
+        <td>UI Commit:</td>
+        <td><!-- UI_GIT_COMMIT --></td>
+      </tr>
+      <tr class="mat-list-item">
+        <td>UI Code Date:</td>
+        <td><!-- UI_GIT_DATE --></td>
+      </tr>
+      
     </table>
   </section>
 </mat-dialog-content>
