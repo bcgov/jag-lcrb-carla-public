@@ -7,6 +7,8 @@ import { faChevronRight, faIdCard, faQuestion } from "@fortawesome/free-solid-sv
 import { PolicyDocumentDataService } from "@services/policy-document-data.service";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { PolicyDocument } from "@models/policy-document.model";
+import { FeatureFlagDataService } from "@services/feature-flag-data.service";
+import { FeatureFlagService } from "@services/feature-flag.service";
 
 @Component({
   selector: 'app-login',
@@ -23,11 +25,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
   faQuestion = faQuestion;
   @ViewChild("policyDocs", { static: true })
   policyDocs: PolicyDocumentComponent;
+  window = window;
+  disableLogin: boolean;
 
   constructor(public dialog: MatDialog,
     private sanitizer: DomSanitizer,
+    private featureFlagService: FeatureFlagService,
     private policyDocumentDataService: PolicyDocumentDataService,
     private cd: ChangeDetectorRef) {
+      featureFlagService.featureOn("DisableLogin")
+      .subscribe(featureOn => {
+        this.disableLogin = featureOn;
+      });
   }
 
   ngOnInit() {

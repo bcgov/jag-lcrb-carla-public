@@ -1,9 +1,7 @@
 <div class="ml-4 mr-4">
     <h1>{{title}}</h1>
-    <mat-card  class="m-3 mat-elevation-z0">
-        <section [innerHtml]="body">
-        </section>
-    </mat-card>
+    <section class="m-3 mat-elevation-z0" [innerHtml]="body">
+    </section>
 
     <section class="d-flex justify-content-around m-3">
         <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
@@ -14,22 +12,32 @@
                 <p>
                     Sign into our secure portal to create or view multiple permit applications
                 </p>
-                <section style="border: 2px solid #fff; border-radius: 5px;" class="d-flex flex-column align-items-center pb-3">
+                <section style="border: 2px solid #fff; border-radius: 5px;"
+                    class="d-flex flex-column align-items-center pb-3">
                     <h4>Login Using Business BCeID</h4>
                     <div class="d-flex justify-content-around w-100">
-                        <button mat-raised-button color="secondary">Register for BCeID</button>
-                        <button mat-raised-button color="primary">Login with BCeID</button>
+                        <button mat-raised-button color="secondary"
+                            (click)="window.location.href='https://www.bceid.ca/register/'">
+                            Register for BCeID
+                        </button>
+                        <button [disabled]="disableLogin" mat-raised-button color="primary"
+                            (click)="window.location.href='login'">
+                            Login with BCeID
+                        </button>
                     </div>
                 </section>
-                <section  style="border: 2px solid #fff; border-radius: 5px;" class="d-flex flex-column align-items-center mt-2 pb-3">
+                <section style="border: 2px solid #fff; border-radius: 5px;"
+                    class="d-flex flex-column align-items-center mt-2 pb-3">
                     <h4>BC Services Card</h4>
                     <div class="d-flex justify-content-around w-100">
-                        <button mat-raised-button color="primary">Login with BC Services Card</button>
+                        <button [disabled]="disableLogin" mat-raised-button color="primary"
+                            (click)="window.location.href='bcservice'">Login with BC Services
+                            Card</button>
                     </div>
                 </section>
             </mat-card-content>
         </mat-card>
-        <mat-card  style="flex: 1;" class="m-3 mat-elevation-z0">
+        <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
             <mat-card-header>
                 <mat-card-title>Apply as Guest</mat-card-title>
             </mat-card-header>
