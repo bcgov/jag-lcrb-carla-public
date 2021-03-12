@@ -80,8 +80,7 @@ podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', service
                 }            
             }
         }
-    }
-	},'Release 2': {	
+    },'Release 2': {	
         node('jenkins-agent-dotnet') {
             //the checkout is mandatory
             echo "checking out source"
@@ -105,9 +104,7 @@ podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', service
                 }            
             }
         }
-    }
-	},
-	'Release 3': {	
+	},'Release 3': {	
         node('jenkins-agent-dotnet') {
             //the checkout is mandatory
             echo "checking out source"
@@ -131,9 +128,7 @@ podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', service
                 }            
             }
         }
-    }
-	},
-	'Release 4': {	
+    },'Release 4': {	
         node('jenkins-agent-dotnet') {
             //the checkout is mandatory
             echo "checking out source"
@@ -157,9 +152,7 @@ podTemplate(label: 'jenkins-agent-dotnet', name: 'jenkins-agent-dotnet', service
                 }            
             }
         }
-    }
-	}
-	)
+    })
 }
 	
 }
