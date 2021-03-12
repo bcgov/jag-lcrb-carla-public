@@ -153,7 +153,22 @@ namespace bdd_tests
             // Do you or any of your shareholders currently hold, have held, or have previously applied for a British Columbia liquor licence?
             if ((bizType == "private corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "public corporation") || (bizType == "sole proprietorship"))
             {
-                NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-73-button"));
+                NgWebElement uiPreviousLicenceYes = null;
+                for (int i = 0; i < 10; i++)
+                {  
+                    try
+                    {
+                        var names = ngDriver.FindElements(By.Id("mat-button-toggle-73-button"));
+                        if (names.Count > 0)
+                        {
+                            uiEstabName = names[0];
+                            break;
+                        }
+                    }               
+                    catch (Exception)
+                    {
+                    }            
+                }
                 JavaScriptClick(uiPreviousLicenceYes);
             }
 
