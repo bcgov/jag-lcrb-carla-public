@@ -31,7 +31,6 @@ Scenario: Manufacturer Temp Change to Hours of Sale (Private Corporation)
     And I click on the Continue to Application button
     And I request a temporary change to hours of sale
     And I click on the Submit button
-    And I enter the payment information
     And the account is deleted
     Then I see the login page
 */
