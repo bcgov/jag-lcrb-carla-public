@@ -161,7 +161,7 @@ namespace bdd_tests
                         var names = ngDriver.FindElements(By.Id("mat-button-toggle-73-button"));
                         if (names.Count > 0)
                         {
-                            uiEstabName = names[0];
+                            uiPreviousLicenceYes = names[0];
                             break;
                         }
                     }               
