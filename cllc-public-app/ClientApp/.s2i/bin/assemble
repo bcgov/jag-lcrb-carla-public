@@ -49,10 +49,10 @@ OPENSHIFT_BUILD_REFERENCE=develop
 OPENSHIFT_BUILD_SOURCE=https://github.com/GeorgeWalker/jag-lcrb-carla-public.git
 
 # edit version info files.
-sed -i '' s/\<!-- UI_GIT_REF --\>/'"$OPENSHIFT_BUILD_REFERENCE"'/g src/app/components/version-info/version-info-dialog.component.html
-sed -i '' s/\<!-- UI_GIT_COMMIT --\>/'"$OPENSHIFT_BUILD_COMMIT"'/g src/app/components/version-info/version-info-dialog.component.html
-sed -i '' s/\<!-- UI_GIT_REPO --\>/'"$OPENSHIFT_BUILD_SOURCE"'/g src/app/components/version-info/version-info-dialog.component.html
-sed -i '' s/\<!-- UI_BUILD_DATE --\>/$(date)/g src/app/components/version-info/version-info-dialog.component.html
+sed -i '' "s/\<!-- UI_GIT_REF --\>/'"$OPENSHIFT_BUILD_REFERENCE"'/g" src/app/components/version-info/version-info-dialog.component.html
+sed -i '' "s/\<!-- UI_GIT_COMMIT --\>/'"$OPENSHIFT_BUILD_COMMIT"'/g" src/app/components/version-info/version-info-dialog.component.html
+sed -i '' "s/\<!-- UI_GIT_REPO --\>/'"$OPENSHIFT_BUILD_SOURCE"'/g" src/app/components/version-info/version-info-dialog.component.html
+sed -i '' "s/\<!-- UI_BUILD_DATE --\>/$(date)/g" src/app/components/version-info/version-info-dialog.component.html
 
 npm run build -- --prod --outputPath=/opt/app-root/src/dist
 
