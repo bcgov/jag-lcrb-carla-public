@@ -54,6 +54,9 @@
     <None Update="FoodPrimaryTemporaryChangeToHoursOfSaleAfterMidnight.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ManufacturerTemporaryChangeToHoursOfSale.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="FoodPrimaryTemporaryChangeToHoursOfSaleBeforeMidnight.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
