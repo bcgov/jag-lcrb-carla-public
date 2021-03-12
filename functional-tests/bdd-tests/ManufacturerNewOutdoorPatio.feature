@@ -15,6 +15,5 @@ Scenario: Manufacturer New Outdoor Patio (Winery)
     And I click on the link for New Outdoor Patio
     And I request a new outdoor patio application
     And I click on the Submit button
-    And I enter the payment information
     And the account is deleted
     Then I see the login page
