@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: FoodPrimaryChangeInTerms
+Feature: FoodPrimaryRequestOfChangeInTermsDiscretion
     As a logged in business user
     I want to submit a Request of Change in Terms and Conditions/Request for Discretion application for a Food Primary licence
 
@@ -39,9 +39,9 @@ Scenario: Food Primary Change in Terms (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./FoodPrimaryChangeInTerms.feature")]
+    [FeatureFile("./FoodPrimaryRequestOfChangeInTermsDiscretion.feature")]
     [Collection("Liquor")]
-    public sealed class FoodPrimaryChangeInTerms : TestBase
+    public sealed class FoodPrimaryRequestOfChangeInTermsDiscretion : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
