@@ -1,9 +1,9 @@
-﻿Feature: RuralLRSDownloadLicence
+﻿Feature: RuralLRSTermsAndConditions
     As a logged in business user
-    I want to download a licence for a rural LRS application
+    I want to confirm the Terms and Conditions for a Rural LRS licence
 
-@privatecorporation @ruralLRS
-Scenario: Rural LRS Download Licence (Private Corporation)
+@rurallrs @privatecorporation
+Scenario: Rural LRS Terms and Conditions (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a private corporation
@@ -15,5 +15,6 @@ Scenario: Rural LRS Download Licence (Private Corporation)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Download Licence
+    And I confirm the terms and conditions for a Rural LRS licence
     And the account is deleted
     Then I see the login page
