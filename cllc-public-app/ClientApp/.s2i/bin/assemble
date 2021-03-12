@@ -42,14 +42,17 @@ if [ -n "${PHASE2}" ]; then
 mkdir /opt/app-root/dist
 mkdir /opt/app-root/dist/lcrb
 
-
-npm run build -- --prod --outputPath=/opt/app-root/src/dist
+set
 
 # edit version info files.
 sed -i '' \"s/\<!-- UI_GIT_REF --\>/$(git rev-parse --abbrev-ref HEAD)/g\" src/app/components/version-info/version-info-dialog.component.html
 sed -i '' \"s/\<!-- UI_GIT_COMMIT --\>/$(git rev-parse HEAD)/g\" src/app/components/version-info/version-info-dialog.component.html
 sed -i '' \"s/\<!-- UI_GIT_REPO --\>/$(git remote get-url origin)/g\" src/app/components/version-info/version-info-dialog.component.html
 sed -i '' \"s/\<!-- UI_GIT_REPO --\>/$(git log -1 --pretty=format:'%cd')/g\" src/app/components/version-info/version-info-dialog.component.html
+
+npm run build -- --prod --outputPath=/opt/app-root/src/dist
+
+
 
 
 
