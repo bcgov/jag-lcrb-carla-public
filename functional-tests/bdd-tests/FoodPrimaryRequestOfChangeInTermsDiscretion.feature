@@ -1,4 +1,4 @@
-﻿Feature: FoodPrimaryChangeInTerms
+﻿Feature: FoodPrimaryRequestOfChangeInTermsDiscretion
     As a logged in business user
     I want to submit a Request of Change in Terms and Conditions/Request for Discretion application for a Food Primary licence
 

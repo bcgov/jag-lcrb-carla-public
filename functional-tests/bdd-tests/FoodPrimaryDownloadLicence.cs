@@ -15,7 +15,7 @@ using Xunit;
 /*
 Feature: FoodPrimaryDownloadLicence
     As a logged in business user
-    I want to download a Food Primary licence for different business types
+    I want to download a Food Primary licence
 
 @foodprimarydownloadlicence @privatecorporation
 Scenario: Food Primary Download Licence (Private Corporation)

@@ -65,7 +65,7 @@
   </div>
   <div
     *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
-    <a *ngIf="!item.hasPaidForRenewalApplication && item.autoRenewal"
+    <a *ngIf="item.autoRenewal"
        href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
       <span>
         <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
@@ -73,10 +73,6 @@
         Licence
       </span>
     </a>
-    <span *ngIf="item.hasPaidForRenewalApplication" color="accent">
-      Renewal Application
-      Submitted
-    </span>
   </div>
   <div class="flags" class="missing">
     <p *ngIf="item.dormant">
