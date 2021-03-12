@@ -29,7 +29,10 @@ Scenario: Catering Licence Request of Change in Terms and Conditions/Request for
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
-    #And the account is deleted
+    And I request a change in terms and conditions application
+    And I click on the Submit button
+    And I enter the payment information
+    And the account is deleted
     Then I see the login page
 */
 
