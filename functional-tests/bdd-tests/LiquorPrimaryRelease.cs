@@ -119,7 +119,7 @@ Scenario: Liquor Primary Release Test #2 (Private Corporation)
     #And I click on the Licences tab
     #And I request a third party operator
     #And I click on the Licences tab
-    #And I request a transfer of ownership
+    #And I request a transfer of ownership for Liquor Primary
     And the account is deleted
     Then I see the login page
 */

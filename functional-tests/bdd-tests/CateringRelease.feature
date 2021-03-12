@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm that the Catering functionality is ready for release
 
-@validation @privatecorporation @release1
+@validation @privatecorporation @release2
 Scenario: Catering Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -32,7 +32,7 @@ Scenario: Catering Release (Private Corporation)
     # And I click on the link for Renew Licence
     # And I renew the licence with positive responses for Catering
     # And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Catering
     And the account is deleted
     Then I see the login page
 
@@ -65,6 +65,6 @@ Scenario: Catering Release (Sole Proprietorship)
     And I click on the link for Renew Licence
     And I renew the licence with positive responses for Catering
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Catering
     And the account is deleted
     Then I see the login page

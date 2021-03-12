@@ -216,7 +216,7 @@ namespace bdd_tests
 
                 // select the crushing checkbox
                 NgWebElement uiCrushing = ngDriver.FindElement(By.CssSelector("#mat-checkbox-16 .mat-checkbox-inner-container"));
-                uiCrushing.Click();
+                JavaScriptClick(uiCrushing);
 
                 // select the filtering checkbox
                 NgWebElement uiFiltering = ngDriver.FindElement(By.CssSelector("#mat-checkbox-17 .mat-checkbox-inner-container"));

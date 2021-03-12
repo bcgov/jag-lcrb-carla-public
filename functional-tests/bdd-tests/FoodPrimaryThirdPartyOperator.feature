@@ -1,6 +1,6 @@
 ﻿Feature: FoodPrimaryThirdPartyOperator
     As a logged in business user
-    I want to designate a third party operator for a Food Primary licence for different business types
+    I want to designate a third party operator for a Food Primary licence
 
 @foodprimarythirdparty @privatecorporation
 Scenario: Food Primary Third Party Operator (Private Corporation)

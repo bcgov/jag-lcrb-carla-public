@@ -79,6 +79,7 @@ import { LicenseeRetailStoresComponent } from "./components/licensee-retail-stor
 import { TuaEventComponent } from "@components/tua-event/tua-event.component";
 import { ApplicationTiedHouseExemptionComponent } from "@components/applications/application-tied-house-exemption/application-tied-house-exemption.component";
 import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-free-event.component";
+import { WorkerLandingPageComponent } from "@components/worker-qualification/worker-landing-page/worker-landing-page.component";
 
 const routes: Routes = [
   {
@@ -367,13 +368,22 @@ const routes: Routes = [
   },
   {
     path: "policy-document/worker-qualification-training",
-    component: WorkerHomeComponent,
+    component: WorkerLandingPageComponent,
     data: { slug: "worker-qualification-training" }
   },
   {
     path: "policy-document/worker-qualification-home",
-    component: WorkerHomeComponent,
+    component: WorkerLandingPageComponent,
     data: { slug: "worker-qualification-home" }
+  },
+  {
+    // Only show this policy document when the feature flag is enabled
+    path: "policy-document/worker-qualification-no-longer-required",
+    component: WorkerLandingPageComponent,
+    canActivate: [FeatureGuard],
+    data: {
+      feature: "DisableWorkerQualification",
+    }
   },
   {
     path: "policy-document/:slug",

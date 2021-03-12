@@ -138,20 +138,9 @@ namespace bdd_tests
                 FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[5]");
             }
 
-            // search for and select Parksville as the local government
-            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
-            uiIndigenousNation.SendKeys(localGovernment);
-
-            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
-            JavaScriptClick(uiIndigenousNation2);
-
-            // search for and select RCMP Oceanside as the police jurisdiction
-            NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
-            uiPoliceJurisdiction.SendKeys(policeJurisdiction);
-
-            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
-            uiPoliceJurisdiction2.Click();
-
+            // fill in lgin and police
+            FillLginAndPolice(localGovernment, policeJurisdiction);
+            
             // enter the store email
             NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
             uiEstabEmail.SendKeys(estEmail);
@@ -161,8 +150,12 @@ namespace bdd_tests
             uiEstabPhone.SendKeys(estPhone);
 
             // select 'Yes' for patio
-            NgWebElement uiHasPatioYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-13"));
-            uiHasPatioYes.Click();
+            // first find the material radio group.
+            var patioRadioGroup = ngDriver.FindElement(By.CssSelector("mat-radio-group[formcontrolname='isHasPatio']"));
+            // then find the first radio button (YES)
+            ScrollToElement(patioRadioGroup);
+            var patioButton = patioRadioGroup.FindElements(By.TagName("mat-radio-button"))[0];
+            patioButton.Click();
 
             // enter the patio comp description
             NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
@@ -189,9 +182,11 @@ namespace bdd_tests
             uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
             // click Fixed option
-            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
-            uiFixedOption.Click();
+            var patioServiceBarGroup = ngDriver.FindElement(By.CssSelector("mat-button-toggle-group[id='patioServiceBar']"));
+            // click the first button in the group.
+            patioServiceBarGroup.FindElements(By.CssSelector("button"))[0].Click();
 
+            /* commented out as this is coming from the Dynamics meta data and is not hard coded
             // click Portable option
             NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
             uiPortableOption.Click();
@@ -199,36 +194,37 @@ namespace bdd_tests
             // click Interior option
             NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
             uiInteriorOption.Click();
+            */
 
             // enter the establishment type
             NgWebElement uiEstabType = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
             uiEstabType.SendKeys(estType);
 
-            if ((bizType == "partnership") || (bizType == "society"))
+
+            switch (bizType)
             {
-                // upload signage document
-                FileUpload("signage.pdf", "(//input[@type='file'])[11]");
+                case "partnership":
+                case "society":
+                    // upload signage document
+                    FileUpload("signage.pdf", "(//input[@type='file'])[11]");
 
-                // upload floor plan
-                FileUpload("floor_plan.pdf", "(//input[@type='file'])[14]");
-            }
+                    // upload floor plan
+                    FileUpload("floor_plan.pdf", "(//input[@type='file'])[14]");
+                    break;
+                case "private corporation":
+                    // upload signage document
+                    FileUpload("signage.pdf", "(//input[@type='file'])[20]");
 
-            if (bizType == "private corporation")
-            {
-                // upload signage document
-                FileUpload("signage.pdf", "(//input[@type='file'])[20]");
+                    // upload floor plan
+                    FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
+                    break;
+                case "sole proprietorship":
+                    // upload signage document
+                    FileUpload("signage.pdf", "(//input[@type='file'])[8]");
 
-                // upload floor plan
-                FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
-            }
-
-            if (bizType == "sole proprietorship")
-            {
-                // upload signage document
-                FileUpload("signage.pdf", "(//input[@type='file'])[8]");
-
-                // upload floor plan
-                FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
+                    // upload floor plan
+                    FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
+                    break;
             }
 
             // click on the Add Area button

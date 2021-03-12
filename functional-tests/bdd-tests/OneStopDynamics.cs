@@ -289,7 +289,7 @@ Scenario: OneStop Licence Transfer Ownership (Private Corporation)
     And I pay the licensing fee
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Cannabis
     And the application is approved
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
