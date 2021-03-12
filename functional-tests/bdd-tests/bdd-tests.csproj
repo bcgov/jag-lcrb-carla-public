@@ -72,6 +72,18 @@
     <None Update="ManufacturerRequestOfChangeInTermsDiscretion.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="RuralLRSRequestTCChangeApplication.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="UBrewUVinAddLicenseeRepresentative.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="UBrewUVinRequestOfChangeInTermsDiscretion.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="UBrewUVinRequestRelocation.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="UBrewUVinTermsAndConditions.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -120,7 +132,7 @@
     <None Update="LiquorPrimaryAllowFamilyFoodService.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LiquorPrimaryAllowMinors.feature">
+    <None Update="LiquorPrimaryApplyToAllowMinorsInRecreationFacilities.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LiquorPrimaryAllAgesLiquorFree.feature">

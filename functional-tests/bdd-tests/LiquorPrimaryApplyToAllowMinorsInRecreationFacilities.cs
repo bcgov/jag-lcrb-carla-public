@@ -1,4 +1,19 @@
-﻿Feature: LiquorPrimaryAllowMinors
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support;
+using OpenQA.Selenium.Support.UI;
+using Protractor;
+using System;
+using Xunit.Gherkin.Quick;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using System.IO;
+using Xunit;
+
+/*
+Feature: LiquorPrimaryApplyToAllowMinorsInRecreationFacilities
     As a logged in business user
     I want to submit a request to allow minors in recreation facilities for a Liquor Primary Application
 
@@ -30,3 +45,28 @@ Scenario: Liquor Primary Allow Minors Request (Private Corporation)
     And I enter the payment information
     And the account is deleted
     Then I see the login page
+*/
+
+namespace bdd_tests
+{
+    [FeatureFile("./LiquorPrimaryApplyToAllowMinorsInRecreationFacilities.feature")]
+    [Collection("Liquor")]
+    public sealed class LiquorPrimaryApplyToAllowMinorsInRecreationFacilities : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as a(.*)")]
+        public void LogInToDashboard(string businessType)
+        {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLiquorTwo();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureLEConnections();
+
+            IgnoreSynchronizationFalse();
+
+            CarlaLogin(businessType);
+        }
+    }
+}
