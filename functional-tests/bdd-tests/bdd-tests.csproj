@@ -60,6 +60,9 @@
     <None Update="FoodPrimaryTemporarySuspensionRequest.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ManufacturerNewOutdoorPatio.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ManufacturerTemporaryExtension.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
