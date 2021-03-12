@@ -51,6 +51,12 @@
     <None Update="CateringRequestOfChangeInTermsDiscretion.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="FoodPrimaryTemporaryChangeToHoursOfSaleAfterMidnight.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="FoodPrimaryTemporaryChangeToHoursOfSaleBeforeMidnight.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="FoodPrimaryTemporarySuspensionRequest.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -234,7 +240,7 @@
     <None Update="FoodPrimaryTemporaryUseArea.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="FoodPrimaryChangeInTerms.feature">
+    <None Update="FoodPrimaryRequestOfChangeInTermsDiscretion.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="FoodPrimaryCateringEndorsement.feature">
