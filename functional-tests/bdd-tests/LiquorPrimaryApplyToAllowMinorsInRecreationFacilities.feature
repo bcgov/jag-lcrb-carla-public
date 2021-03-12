@@ -1,4 +1,4 @@
-﻿Feature: LiquorPrimaryAllowMinors
+﻿Feature: LiquorPrimaryApplyToAllowMinorsInRecreationFacilities
     As a logged in business user
     I want to submit a request to allow minors in recreation facilities for a Liquor Primary Application
 
