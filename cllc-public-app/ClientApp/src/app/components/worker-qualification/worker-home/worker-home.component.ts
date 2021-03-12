@@ -22,7 +22,7 @@ export class WorkerHomeComponent implements OnInit, AfterViewInit {
 
   constructor(public dialog: MatDialog, private route: ActivatedRoute, private ref: ChangeDetectorRef) {
     this.route.data.pipe(
-        filter(data => !!data && !!data.slug))
+      filter(data => !!data && !!data.slug))
       .subscribe((data: any) => {
         this.policySlug = data.slug;
       });

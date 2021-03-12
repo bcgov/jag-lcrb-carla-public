@@ -30,11 +30,6 @@ namespace bdd_tests
             */
 
             // create test data
-            string proposedAddress = "645 Tyee Road";
-            string proposedCity = "Victoria";
-            string proposedPostalCode = "V9A 6X5";
-            string proposedPID = "111111111";
-
             string resortDescription = "Sample resort description.";
             string numberOfResidents = "18";
             string otherBusinesses = "Sample other businesses.";

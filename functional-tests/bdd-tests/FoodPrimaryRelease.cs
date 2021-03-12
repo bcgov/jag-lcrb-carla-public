@@ -53,7 +53,7 @@ Scenario: Food Primary Release Test #1 (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@foodprimary @privatecorporation @release1
+@foodprimary @privatecorporation @release2
 Scenario: Food Primary Release Test #2 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
@@ -83,7 +83,7 @@ Scenario: Food Primary Release Test #2 (Private Corporation)
     And I click on the Submit button
     And I click on the Licences tab
     And I request a third party operator
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Food Primary
     And the account is deleted
     Then I see the login page
 */

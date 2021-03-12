@@ -33,11 +33,42 @@ namespace bdd_tests
 
             ngDriver.WrappedDriver.FindElement(By.Name("trnCardNumber")).SendKeys(testCC);
             ngDriver.WrappedDriver.FindElement(By.Name("trnCardCvd")).SendKeys(testCVD);
+
+            string currentUrl = ngDriver.WrappedDriver.Url;
+
             ngDriver.WrappedDriver.FindElement(By.Name("submitButton")).Click();
 
-            System.Threading.Thread.Sleep(4000);
+            ngDriver.Manage().Timeouts().ImplicitWait = tempWait;   
+            
+            // wait for the page transition to occur
+            for (int i = 0; i < 10; i++)
+            {
+                if (ngDriver.WrappedDriver.Url != currentUrl)
+                {
+                    break;
+                }
+                else
+                {
+                    // wait a second
+                    System.Threading.Thread.Sleep(1000);
+                }
 
-            ngDriver.Manage().Timeouts().ImplicitWait = tempWait;            
+            }
+            // now ensure that angular is loaded.
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    ngDriver.WaitForAngular();
+                    break;
+                }
+                catch (Exception)
+                {
+                    // ignore exception but sleep for a second.
+                    System.Threading.Thread.Sleep(1000);
+                }
+            }
+            
         }
 
 
