@@ -194,7 +194,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
    * It should not be available for any Cannabis licence type.
    */
   showManageOffsiteStorage(item: ApplicationLicenseSummary) {
-    const exclusions = [ApplicationTypeNames.Catering, ApplicationTypeNames.UBV] as string[];
+    const exclusions = [ApplicationTypeNames.Catering, ApplicationTypeNames.UBV, ApplicationTypeNames.Agent] as string[];
     const result = this.isActive(item) &&
       this.actionsVisible(item) &&
       item.licenceTypeCategory === "Liquor" &&
@@ -337,8 +337,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     // search for an existing application type that matches the type specified
     const actionApplication = licence.actionApplications.find(
       app => app.applicationTypeName === actionName
-      && !app.isStructuralChange                        // we allow multiple structurals
-      && app.applicationStatus !== "Active");
+        && !app.isStructuralChange                        // we allow multiple structurals
+        && app.applicationStatus !== "Active");
 
     // if we found an action application
     if (actionApplication) {
@@ -346,15 +346,14 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       if (actionApplication.isPaid === false) {
         // open it up so we can continue it
         this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
-      // otherwise if it was paid for
-      } else if (actionApplication.isPaid === true)
-      {
+        // otherwise if it was paid for
+      } else if (actionApplication.isPaid === true) {
         // prevent a re-submission until the application status is no longer active
         this.snackBar.open(`${actionName} has already been submitted and is under review`,
           "Warning",
           { duration: 3500, panelClass: ["red-snackbar"] });
       }
-    // if we didn't find an action application
+      // if we didn't find an action application
     } else {
       // create one
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
