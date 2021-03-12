@@ -132,7 +132,7 @@
     <None Update="LiquorPrimaryAllowFamilyFoodService.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LiquorPrimaryAllowMinors.feature">
+    <None Update="LiquorPrimaryApplyToAllowMinorsInRecreationFacilities.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LiquorPrimaryAllAgesLiquorFree.feature">
