@@ -13,33 +13,37 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CateringDownloadLicence
+Feature: FoodPrimaryTemporarySuspensionRequest
     As a logged in business user
-    I want to pay the first year catering licence fee
-    And download the licence for review
+    I want to request a temporary suspension for a Food Primary licence
 
-@privatecorporation @cateringlicencedownload
-Scenario: Catering Licence Download (Private Corporation)
+@foodprimary @privatecorporation
+Scenario: Food Primary Temporary Suspension Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for Catering
+    And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
-    And I complete the Catering application for a private corporation
+    And I complete the Food Primary application for a private corporation
     And I click on the Submit button
     And I enter the payment information
+    And I confirm the payment receipt for a Food Primary application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee 
-    And I click on the link for Download Licence
-    And the licence is successfully downloaded
+    And I click on the link for Temporary Suspension Request
+    And I click on the Continue to Application button
+    And I complete the temporary suspension request
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./CateringDownloadLicence.feature")]
+    [FeatureFile("./FoodPrimaryTemporarySuspensionRequest.feature")]
     [Collection("Liquor")]
-    public sealed class CateringDownloadLicence : TestBase
+    public sealed class FoodPrimaryTemporarySuspensionRequest : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
@@ -47,6 +51,10 @@ namespace bdd_tests
             NavigateToFeatures();
 
             CheckFeatureFlagsLiquorOne();
+
+            CheckFeatureFlagsLiquorTwo();
+
+            CheckFeatureFlagsLiquorThree();
 
             CheckFeatureFlagsLGIN();
 

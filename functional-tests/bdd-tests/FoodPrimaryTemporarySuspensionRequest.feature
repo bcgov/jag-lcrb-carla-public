@@ -1,9 +1,9 @@
-﻿Feature: FoodPrimaryDownloadLicence
+﻿Feature: FoodPrimaryTemporarySuspensionRequest
     As a logged in business user
-    I want to download a Food Primary licence
+    I want to request a temporary suspension for a Food Primary licence
 
-@foodprimarydownloadlicence @privatecorporation
-Scenario: Food Primary Download Licence (Private Corporation)
+@foodprimary @privatecorporation
+Scenario: Food Primary Temporary Suspension Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -15,6 +15,10 @@ Scenario: Food Primary Download Licence (Private Corporation)
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Download Licence
+    And I click on the link for Temporary Suspension Request
+    And I click on the Continue to Application button
+    And I complete the temporary suspension request
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
