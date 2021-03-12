@@ -60,6 +60,12 @@
     <None Update="FoodPrimaryTemporarySuspensionRequest.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ManufacturerTemporaryExtension.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ManufacturerRequestOfChangeInTermsDiscretion.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="UBrewUVinTermsAndConditions.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
