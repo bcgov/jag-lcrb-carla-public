@@ -1,0 +1,214 @@
+<div class="form-wrapper" style="position: relative;">
+  <div [ngBusy]="[busy]"></div>
+  <form [formGroup]="form" class="col-lg-7 col-sm-12">
+    <div class="padded-section">
+      <h1>Take-Home Sampling Event</h1>
+    </div>
+
+    <h3 class="blue-header">TERMS AND CONDITIONS</h3>
+    <section class="content-bottom">
+      <ul>
+        <li>Minors are permitted unaccompanied by adults</li>
+        <li>The event must not extend past the closing time for liquor service as stated on your licence</li>
+        <li>You must:
+          <ul>
+            <li>Post signage outside the establishment to advertise a liquor-free event, the hours of the event and that
+              the service area is closed to liquor service</li>
+            <li>Ensure liquor is secured and inaccessible during the event</li>
+            <li>Ensure there is half an hour between the end of liquor service and the opening of the liquor-free event
+            </li>
+            <li>Ensure there is half an hour to clear minors from the service area if you will re-open for liquor
+              service before the end of the hours of liquor service, if your licence restricts the entry of minors</li>
+            <li>Take measures to ensure the operation of the event does not disturb people in the vicinity of the
+              establishment or jeopardize the safety of those attending the event</li>
+            <li>Keep a log of all liquor-free events whether they require notice or not, and the log must be available
+              upon request by a liquor inspector or local police</li>
+          </ul>
+        </li>
+        <li>The General Manager may, in the public interest, add terms and conditions to a licence that limit
+          liquor-free events</li>
+      </ul>
+    </section>
+
+    <div class="mt-4 padded-section">
+      <p>Please provide the details requested below regarding your event.</p>
+    </div>
+
+    <div class="padded-section">
+      <h2>Status: <b>{{status}}</b></h2>
+      <h3 *ngIf="licenceEvent != null && licenceEvent.eventNumber != null">Number: <b>{{licenceEvent.eventNumber}}</b>
+      </h3>
+    </div>
+
+    <h3 class="blue-header">EVENT DETAILS</h3>
+    <section class="content-bottom clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Event Name" [required]="true"
+          [valid]="isValidOrNotTouched('eventName')" errorMessage="Please enter the event name" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="eventName">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-8 col-xs-12" label="Event Note" [required]="false"
+          [valid]="isValidOrNotTouched('eventTypeDescription')" errorMessage="Please enter a description of the event"
+          [isFullWidth]="true">
+          <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" class="question-mark" matTooltip="Briefly describe the event."></fa-icon>
+      </div>
+    </section>
+
+    <h3 class="blue-header">CONTACT INFORMATION</h3>
+    <section class="content-bottom clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Name" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('contactName')" errorMessage="Please enter the contact name">
+          <input class="form-control" type="text" formControlName="contactName">
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" class="question-mark"
+          matTooltip="The name of the contact person for the event."></fa-icon>
+        <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('contactPhone')" errorMessage="Please enter the contact phone number">
+          <input class="form-control" type="text" formControlName="contactPhone" mask="(000) 000-0000">
+        </app-field>
+      </div>
+    </section>
+
+    <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
+    <section class="content-bottom clearfix">
+      <p>Note that if you submit a multi-day event, the locations and event details must be the same, otherwise you need
+        to submit separate events.</p>
+      <div class="row">
+        <app-field class="col-md-2 col-xs-6" label="Start Date" [required]="true"
+          [valid]="isValidOrNotTouched('startDate')" [isFullWidth]="true">
+          <input type="text" formControlName='startDate' placeholder="yyyy-mm-dd" class="form-control"
+            [min]="startDateMinimum" [matDatepicker]="startPicker" (focus)="startPicker.open()"
+            (click)="startPicker.open()" (dateChange)="startDateChanged()">
+          <mat-datepicker #startPicker></mat-datepicker>
+        </app-field>
+        <app-field class="col-md-2 col-xs-6" label="End Date" [required]="true" [valid]="isValidOrNotTouched('endDate')"
+          [isFullWidth]="true">
+          <input type="text" formControlName='endDate' placeholder="yyyy-mm-dd" class="form-control"
+            [min]="endDateMinimum" [matDatepicker]="endPicker" (focus)="endPicker.open()" (click)="endPicker.open()"
+            (dateChange)="endDateChanged()">
+          <mat-datepicker #endPicker></mat-datepicker>
+        </app-field>
+      </div>
+      <div *ngFor="let fg of timeForms.controls" class="row mx-0 mt-3 event-hours">
+        <form [formGroup]="fg" class="col-md-12">
+          <div class="row mt-3">
+            <div class="col-md-2 offset-md-2"><label>Event Start</label></div>
+            <div class="col-md-2"><label>Event End</label></div>
+          </div>
+          <div class="row">
+            <div class="col-md-2 time-picker-title">
+              <h4>{{fg.get('dateTitle').value === null ? 'Default Times' : fg.get('dateTitle').value}}</h4>
+            </div>
+            <div class="col-md-2">
+              <ngb-timepicker [meridian]="true" formControlName="startTime"></ngb-timepicker>
+            </div>
+            <div class="col-md-2">
+              <ngb-timepicker [meridian]="true" formControlName="endTime"></ngb-timepicker>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <app-field class="col-xs-12">
+          <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()"
+            [disabled]="form.get('startDate').invalid || form.get('endDate').invalid || isReadOnly">
+            The event times are different on specific dates.</mat-checkbox>
+        </app-field>
+      </div>
+    </section>
+
+    <h3 class="blue-header">NOTIFICATIONS</h3>
+    <section class="content-bottom">
+      <p>A copy of the event notification will be sent to this email address.</p>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Contact Email" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('contactEmail')">
+          <input class="form-control" type="text" formControlName="contactEmail">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Confirm email address" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('contactEmailConfirmation')">
+          <input class="form-control" type="text" formControlName="contactEmailConfirmation">
+        </app-field>
+      </div>
+    </section>
+
+    <h3 class="blue-header">AGREEMENT</h3>
+    <section class="content-bottom">
+      <div>
+        <mat-checkbox class="text-wrap" formControlName="isAgreement1">I understand that my event is subject to review
+          by LCRB and Terms and Conditions will prevail.</mat-checkbox>
+        <ul>
+          <li>Minors are permitted unaccompanied by adults as long as liquor is not served or sold during the hours of
+            the event</li>
+          <li>The event cannot extend past the hours of ordinary liquor service</li>
+        </ul>
+        You must:
+        <ul>
+          <li>Post signage outside the establishment to indicate the occurrence of an all-ages event, the hours of the
+            event and that the establishment is closed to liquor service</li>
+          <li>Ensure liquor is secured and inaccessible during the event</li>
+          <li>Ensure there is half an hour to clear minors from its establishment if the licensee re-opens for liquor
+            service before the end its hours of permissible liquor service</li>
+          <li>Take measures to ensure the operation of the event does not disturb persons in the vicinity of the
+            establishment, including that:</li>
+          <ul>
+            <li>You must ensure licensed security staff is present to monitor and control the event</li>
+            <li>If patrons depart during the event, they are not allowed to re-enter the establishment</li>
+          </ul>
+          <li>If you contravene the terms and conditions of your licence or any other legislated requirements,
+            enforcement action may be taken</li>
+          <li>This approval is subject to any existing laws or terms and conditions that restrict a licensee from
+            holding this type of event. The General Manager may review a licensee's compliance history and revoke
+            approval if there are identified criminal or gang affiliations</li>
+        </ul>
+      </div>
+      <div class="mt-3">
+        <mat-checkbox class="text-wrap" formControlName="isAgreement2">I have reviewed all the information above for
+          accuracy and have read all the notes provided above.
+        </mat-checkbox>
+      </div>
+    </section>
+
+    <section class="p-3 attention-section">
+      <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Section
+        26 (a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of
+        liquor licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act.
+        Should you have any questions about the collection, use, or disclosure of personal information, please contact
+        the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at
+        1-866-209-2111.</p>
+    </section>
+
+    <section class="error mt-3" *ngIf="showErrorSection">
+      <p *ngFor="let message of validationMessages">
+        <span class="app-cancel">
+          <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+          {{message}}
+        </span>
+      </p>
+    </section>
+
+    <div class="p-4 button-row" *ngIf="isReadOnly">
+      <button class="btn btn-link btn-cancel" routerLink="/licences">RETURN TO DASHBOARD</button>
+    </div>
+    <div class="p-4 button-row" *ngIf="!isReadOnly">
+      <button class="btn btn-secondary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
+        <span>
+          <fa-icon [icon]="faSave"></fa-icon>SAVE FOR LATER
+        </span>
+      </button>
+      <button class="btn btn-primary" (click)="save(true)" *ngIf="!isReadOnly">SUBMIT</button>
+      <button class="btn btn-link btn-cancel" (click)="cancel();">
+        <span>
+          <fa-icon [icon]="faTrash"></fa-icon>CANCEL EVENT
+        </span>
+      </button>
+    </div>
+  </form>
+</div>
