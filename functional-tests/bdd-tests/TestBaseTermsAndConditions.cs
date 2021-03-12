@@ -70,7 +70,12 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time.')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Subject to terms and conditions specified in the restriction or approval letter(s). A copy of restriction or approval letter(s) to be kept with current liquor licence.')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Liquor product sold in the on site store must be registered under the manufacturer licence.')]")).Displayed);
+            }
 
+            if (licenceType == "a Rural LRS licence")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Subject to terms and conditions specified in the restriction or approval letter(s). Copy of restriction or approval letter(s) must be kept with current liquor licence.')]")).Displayed);
             }
         }
     }
