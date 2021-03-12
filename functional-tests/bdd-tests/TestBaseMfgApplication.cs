@@ -220,7 +220,7 @@ namespace bdd_tests
 
                 // select the filtering checkbox
                 NgWebElement uiFiltering = ngDriver.FindElement(By.CssSelector("#mat-checkbox-17 .mat-checkbox-inner-container"));
-                uiFiltering.Click();
+                JavaScriptClick(uiFiltering);
 
                 // select the aging, for at least 3 months checkbox
                 NgWebElement uiAging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-18 .mat-checkbox-inner-container"));
