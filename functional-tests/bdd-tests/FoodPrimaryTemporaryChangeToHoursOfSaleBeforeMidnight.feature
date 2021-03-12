@@ -1,9 +1,9 @@
-﻿Feature: FoodPrimaryDownloadLicence
+﻿Feature: FoodPrimaryTemporaryChangeToHoursOfSaleBeforeMidnight
     As a logged in business user
-    I want to download a Food Primary licence
+    I want to request a Food Primary licence temporary change to hours of sale before midnight
 
-@foodprimarydownloadlicence @privatecorporation
-Scenario: Food Primary Download Licence (Private Corporation)
+@foodprimary @privatecorporation
+Scenario: Food Primary Temp Change to Hours of Sale Before Midnight (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
     And I review the account profile for a private corporation
@@ -15,6 +15,10 @@ Scenario: Food Primary Download Licence (Private Corporation)
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Download Licence
+    And I click on the link for Temporary Change to Hours of Sale (Before Midnight)
+    And I click on the Continue to Application button
+    And I request a before midnight temporary change to hours of sale
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
