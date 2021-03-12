@@ -40,7 +40,7 @@ Scenario: UBrew / UVin Application Release Test (Private Corporation)
     And I click on the link for Cancel Application
     And I cancel the third party operator application
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for UBrew / UVin
     And the account is deleted
     Then I see the login page
 */
