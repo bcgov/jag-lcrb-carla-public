@@ -234,7 +234,7 @@
     <None Update="FoodPrimaryTemporaryUseArea.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="FoodPrimaryChangeInTerms.feature">
+    <None Update="FoodPrimaryRequestOfChangeInTermsDiscretion.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="FoodPrimaryCateringEndorsement.feature">
