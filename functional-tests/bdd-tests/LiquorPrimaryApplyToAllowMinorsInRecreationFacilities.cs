@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: LiquorPrimaryAllowMinors
+Feature: LiquorPrimaryApplyToAllowMinorsInRecreationFacilities
     As a logged in business user
     I want to submit a request to allow minors in recreation facilities for a Liquor Primary Application
 
@@ -49,9 +49,9 @@ Scenario: Liquor Primary Allow Minors Request (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./LiquorPrimaryAllowMinors.feature")]
+    [FeatureFile("./LiquorPrimaryApplyToAllowMinorsInRecreationFacilities.feature")]
     [Collection("Liquor")]
-    public sealed class LiquorPrimaryAllowMinors : TestBase
+    public sealed class LiquorPrimaryApplyToAllowMinorsInRecreationFacilities : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
