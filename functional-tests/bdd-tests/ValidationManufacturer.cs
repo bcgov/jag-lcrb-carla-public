@@ -44,7 +44,7 @@ Scenario: Validation for Manufacturer Establishment Name Change
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I click on the branding change link for Manufacturing
+    And I click on the link for Establishment Name Change Application
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Branding Change application
