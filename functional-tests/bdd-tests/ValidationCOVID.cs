@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: ValidationCOVID
+Feature: ValidationCovid
     As a logged in business user
     I want to confirm the validation messages for the COVID temporary extension
 
@@ -28,7 +28,7 @@ Scenario: Validate COVID Temp Extension Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./ValidationCOVID.feature")]
+    [FeatureFile("./***.feature")]
     [Collection("Cannabis")]
     public sealed class ValidationCOVID : TestBase
     {

@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: ValidationCRSApplication
+Feature: ValidationCrsApplication
     As a logged in business user
     I want to confirm the validation messages for CRS Applications
 
@@ -149,9 +149,9 @@ Scenario: Validation for CRS Transfer of Ownership
 
 namespace bdd_tests
 {
-    [FeatureFile("./ValidationCRSApplication.feature")]
+    [FeatureFile("./ValidationCrsApplication.feature")]
     [Collection("Cannabis")]
-    public sealed class ValidationCRSApplication : TestBase
+    public sealed class ValidationCrsApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
