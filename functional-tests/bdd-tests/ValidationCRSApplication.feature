@@ -42,7 +42,7 @@ Scenario: Validation for CRS Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
-    And I click on the branding change link for Cannabis
+    And I click on the link for Request Store Name or Branding Change
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a CRS Branding Change application
