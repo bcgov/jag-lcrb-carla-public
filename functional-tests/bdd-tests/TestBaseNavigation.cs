@@ -46,32 +46,6 @@ namespace bdd_tests
         }
 
 
-        [And(@"I click on the branding change link for (.*)")]
-        public void ClickOnBrandingChangeLink(string changeType)
-        {
-            /* 
-            Page Title: Licences & Authorizations
-            */
-
-            string nameBrandingLinkCannabis = "Request Store Name or Branding Change";
-            string nameBrandingLinkCateringMfg = "Establishment Name Change Application";
-
-            if ((changeType == "Catering") || (changeType == "Manufacturing"))
-            {
-                // click on the Establishment Name Change Application link
-                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCateringMfg));
-                uiRequestChange.Click();
-            }
-
-            if (changeType == "Cannabis")
-            {
-                // click on the Request Store Name or Branding Change link
-                NgWebElement uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCannabis));
-                uiRequestChange.Click();
-            }
-        }
-
-
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
