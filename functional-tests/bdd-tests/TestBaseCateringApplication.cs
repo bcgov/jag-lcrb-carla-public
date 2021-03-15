@@ -154,7 +154,7 @@ namespace bdd_tests
             if ((bizType == "private corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "public corporation") || (bizType == "sole proprietorship"))
             {
                 NgWebElement uiPreviousLicenceYes = null;
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 30; i++)
                 {  
                     try
                     {
