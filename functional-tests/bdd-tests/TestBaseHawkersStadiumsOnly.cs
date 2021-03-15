@@ -28,11 +28,11 @@ namespace bdd_tests
             */
 
             // click on the authorized to submit checkbox
-            NgWebElement uiAuthorizedSubmit = ngDriver.FindElement(By.Id("mat-checkbox-2"));
+            NgWebElement uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             uiAuthorizedSubmit.Click();
 
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgree = ngDriver.FindElement(By.Id("mat-checkbox-3"));
+            NgWebElement uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgree.Click();
         }
     }
