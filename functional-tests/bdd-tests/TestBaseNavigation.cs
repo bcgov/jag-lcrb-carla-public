@@ -521,7 +521,7 @@ namespace bdd_tests
                     NgWebElement uploadedFile = ngDriver.FindElement(By.XPath(inputFile));
                     found = true;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     // do nothing
                 }
