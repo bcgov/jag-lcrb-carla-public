@@ -1,4 +1,4 @@
-﻿Feature: LGApprovalPicnicArea
+﻿Feature: LocalGovernmentApprovalPicnicArea
     As a logged in business user
     I want to submit a Picnic Area Endorsement Application for review and approval
 

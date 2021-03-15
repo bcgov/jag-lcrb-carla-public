@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSRequestStoreNameOrBrandingChange
+Feature: CrsRequestStoreNameOrBrandingChange
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a valid name or branding change for the approved application
@@ -97,9 +97,9 @@ Scenario: CRS Name Branding Change (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSRequestStoreNameOrBrandingChange.feature")]
+    [FeatureFile("./CrsRequestStoreNameOrBrandingChange.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSRequestStoreNameOrBrandingChange : TestBase
+    public sealed class CrsRequestStoreNameOrBrandingChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

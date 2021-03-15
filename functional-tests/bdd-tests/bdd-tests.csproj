@@ -117,7 +117,7 @@
     <None Update="CannabisMarketingTermsAndConditions.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSTermsAndConditions.feature">
+    <None Update="CrsTermsAndConditions.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringTermsAndConditions.feature">
@@ -141,7 +141,7 @@
     <None Update="CannabisMarketingRelease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="FoodPrimaryTESA.feature">
+    <None Update="FoodPrimaryTemporaryExpandedServiceArea.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="FoodPrimaryThirdPartyOperatorRenewal.feature">
@@ -156,7 +156,7 @@
     <None Update="LiquorPrimaryAllAgesLiquorFree.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LPrimaryClubApplication.feature">
+    <None Update="LiquorPrimaryClubApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LiquorPrimaryLiveTheatreRequest.feature">
@@ -180,7 +180,7 @@
     <None Update="LiquorPrimaryStructuralChangeNoCapacity.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LiquorPrimaryRequestTCChange.feature">
+    <None Update="LiquorPrimaryRequestTermsAndConditionChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LiquorPrimaryNewOutdoorPatio.feature">
@@ -207,13 +207,13 @@
     <None Update="LiquorPrimaryDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LiquorPrimaryTESA.feature">
+    <None Update="LiquorPrimaryTemporaryExpandedServiceArea.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ManufacturerInvitationForTiedHouseExemption.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ManufacturerTESA.feature">
+    <None Update="ManufacturerTemporaryExpandedServiceAreas.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="RuralLRSRelease.feature">
@@ -327,10 +327,10 @@
     <None Update="CateringLicensingRenewalDenied.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSDownloadLicence.feature">
+    <None Update="CrsDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSLicensingRenewalDenied.feature">
+    <None Update="CrsLicensingRenewalDenied.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Notices.feature">
@@ -375,7 +375,7 @@
     <None Update="CannabisMarketingApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LicencePDFVerification.feature">
+    <None Update="LicenceVerification.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CateringRequestRelocation.feature">
@@ -384,10 +384,10 @@
     <None Update="CateringLicensingRenewal.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSTransferLicence.feature">
+    <None Update="CrsTransferLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSRequestAStructuralChange.feature">
+    <None Update="CrsRequestAStructuralChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ManufacturerLicensingRenewal.feature">
@@ -399,10 +399,10 @@
     <None Update="CateringRelease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ValidationCRSApplication.feature">
+    <None Update="ValidationCrsApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSRelease.feature">
+    <None Update="CrsRelease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ValidationManufacturer.feature">
@@ -423,7 +423,7 @@
     <None Update="ValidationRuralAgencyStore.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ValidationCOVID.feature">
+    <None Update="ValidationCovid.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ReviewAccountProfileValidation.feature">
@@ -471,13 +471,13 @@
     <None Update="CateringLicenseeRepresentative.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CombinedCateringCRSApplications.feature">
+    <None Update="CombinedCateringCrsApplications.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LGApprovalLRSRelocation.feature">
+    <None Update="LocalGovtApprovalLocalRuralStoreRelocation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LGApprovalPicnicArea.feature">
+    <None Update="LocalGovernmentApprovalPicnicArea.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="_archive_CheckOrgStructure.feature">
@@ -486,16 +486,16 @@
     <None Update="Payments.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSLicensingRenewal.feature">
+    <None Update="CrsLicensingRenewal.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ManufacturerApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplication.feature">
+    <None Update="CrsApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="COVIDTemporaryExtension.feature">
+    <None Update="CovidTemporaryExtension.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="_archived_RuralAgencyStore.feature">
@@ -519,16 +519,16 @@
     <None Update="E2ECateringApplication_private_corp_transfer_of_ownership.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSFederalReportsShowMap.feature">
+    <None Update="CrsFederalReportsShowMap.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSRequestStoreNameOrBrandingChange.feature">
+    <None Update="CrsRequestStoreNameOrBrandingChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="_archive_CRSApplicationPersonnelNameChanges.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSStoreRequestRelocation.feature">
+    <None Update="CrsStoreRequestRelocation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="E2E_CRSApplication_Licence_society_transfer_ownership.feature">
@@ -540,7 +540,7 @@
     <None Update="MapView.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="CRSApplication.feature">
+    <None Update="CrsApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CRSApplication_privatecorp.feature">

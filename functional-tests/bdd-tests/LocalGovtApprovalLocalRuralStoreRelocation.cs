@@ -13,29 +13,24 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: LGApprovalPicnicArea
+Feature: LocalGovtApprovalLocalRuralStoreRelocation
     As a logged in business user
-    I want to submit a Picnic Area Endorsement Application for review and approval
+    I want to submit a LRS Relocation Application for review and approval
 
-@catering @picnic @lgapproval
-Scenario: Local Government Approval for Picnic Area Endorsement (Private Corporation)
+@catering @relocation @lgapproval
+Scenario: Local Government Approval for LRS Relocation (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for a Manufacturer Licence
-    And I review the account profile for a private corporation
-    And I complete the Manufacturer application for a winery in Parksville
-    And I enter the payment information
-    And I confirm the payment receipt for a Manufacturer Licence application
-    And the application is approved
-    And I pay the licensing fee
-    And I click on the link for Picnic Area Endorsement Application
-    And I request a picnic area endorsement
+    And an LRS licence has been created
+    And I click on the Licences tab 
+    And I click on the link for Request Relocation
+    And I click on the Continue to Application button
+    And I complete the LRS application
     And I log in as local government for Parksville
     And I click on the link for Applications for Review
     And I click on the link for Review Application
     And I specify my contact details as the approving authority
     And I log in as a return user
-    And I click on the link for Complete Application
-    And I review the local government response for a picnic area endorsement
+    And I review the local government response for a LRS relocation
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page 
@@ -43,9 +38,9 @@ Scenario: Local Government Approval for Picnic Area Endorsement (Private Corpora
 
 namespace bdd_tests
 {
-    [FeatureFile("./LGApprovalPicnicArea.feature")]
+    [FeatureFile("./LocalGovtApprovalLocalRuralStoreRelocation.feature")]
     [Collection("Liquor")]
-    public sealed class LGApprovalPicnicArea : TestBase
+    public sealed class LocalGovtApprovalLocalRuralStoreRelocation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

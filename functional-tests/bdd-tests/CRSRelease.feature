@@ -1,4 +1,4 @@
-﻿Feature: CRSRelease
+﻿Feature: CrsRelease
     As a logged in business user
     I want to confirm that the CRS functionality is ready for release
 

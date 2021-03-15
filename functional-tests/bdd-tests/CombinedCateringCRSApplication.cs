@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CombinedCateringCRSApplications
+Feature: CombinedCateringCrsApplications
     As a logged in business user
     I want to submit a CRS and Catering application for the same account
 
@@ -40,9 +40,9 @@ Scenario: Combined Catering / CRS Applications (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CombinedCateringCRSApplications.feature")]
+    [FeatureFile("./CombinedCateringCrsApplications.feature")]
     [Collection("Cannabis")]
-    public sealed class CombinedCateringCRSApplications : TestBase
+    public sealed class CombinedCateringCrsApplications : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
