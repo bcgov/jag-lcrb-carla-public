@@ -39,8 +39,24 @@ namespace bdd_tests
             string areaDescription = "Test automation area description.";
             string occupantLoad = "180";
 
-            // enter the description of the change
-            NgWebElement uiDescriptionOfChange = ngDriver.FindElement(By.CssSelector("textarea#description1"));
+            // enter the establishment name
+            NgWebElement uiDescriptionOfChange = null;
+            for (int i = 0; i < 30; i++)
+            {
+                try
+                {
+                    var names = ngDriver.FindElements(By.CssSelector("textarea#description1"));
+                    if (names.Count > 0)
+                    {
+                        uiDescriptionOfChange = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
             uiDescriptionOfChange.SendKeys(description1);
 
             // enter the location of the patio
