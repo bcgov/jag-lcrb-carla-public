@@ -57,6 +57,12 @@
     <None Update="LiquorPrimaryAddLicenseeRepresentative.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="LiquorPrimaryTemporaryChangeToHoursOfSale.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryRequestOfChangeInTermsDiscretion.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="LiquorPrimaryHawkersApplicationStadiumsOnly.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -162,7 +168,7 @@
     <None Update="LiquorPrimaryTemporaryExtension.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LiquorPrimaryChangeHours.feature">
+    <None Update="LiquorPrimaryChangeHoursWithinServiceHours.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LiquorPrimaryRelocation.feature">
