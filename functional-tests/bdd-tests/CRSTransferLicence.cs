@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSTransferLicence
+Feature: CrsTransferLicence
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a transfer of ownership for the approved application
@@ -81,9 +81,9 @@ Scenario: Cannabis Transfer Ownership (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSTransferLicence.feature")]
+    [FeatureFile("./CrsTransferLicence.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSTransferLicence : TestBase
+    public sealed class CrsTransferLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

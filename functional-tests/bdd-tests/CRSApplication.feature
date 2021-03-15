@@ -1,4 +1,4 @@
-﻿Feature: CRSApplication
+﻿Feature: CrsApplication
     As a logged in business user
     I want to submit a CRS Application for different business types
 

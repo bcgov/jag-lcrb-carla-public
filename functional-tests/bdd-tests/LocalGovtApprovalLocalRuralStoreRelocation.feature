@@ -1,4 +1,4 @@
-﻿Feature: LGApprovalLRSRelocation
+﻿Feature: LocalGovtApprovalLocalRuralStoreRelocation
     As a logged in business user
     I want to submit a LRS Relocation Application for review and approval
 

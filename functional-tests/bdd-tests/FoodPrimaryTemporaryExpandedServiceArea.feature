@@ -1,4 +1,4 @@
-﻿Feature: FoodPrimaryTESA
+﻿Feature: FoodPrimaryTemporaryExpandedServiceArea
     As a logged in business user
     I want to submit a TESA application for a Food Primary licence 
 

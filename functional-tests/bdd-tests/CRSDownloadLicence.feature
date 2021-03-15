@@ -1,4 +1,4 @@
-﻿Feature: CRSDownloadLicence
+﻿Feature: CrsDownloadLicence
     As a logged in business user
     I want to submit a CRS Application for different business types
     And download the licence for the approved application

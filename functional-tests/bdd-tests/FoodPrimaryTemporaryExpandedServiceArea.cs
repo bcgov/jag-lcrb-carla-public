@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: FoodPrimaryTESA
+Feature: FoodPrimaryTemporaryExpandedServiceArea
     As a logged in business user
     I want to submit a TESA application for a Food Primary licence 
 
@@ -40,9 +40,9 @@ Scenario: Food Primary TESA (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./FoodPrimaryTESA.feature")]
+    [FeatureFile("./FoodPrimaryTemporaryExpandedServiceArea.feature")]
     [Collection("Liquor")]
-    public sealed class FoodPrimaryTESA : TestBase
+    public sealed class FoodPrimaryTemporaryExpandedServiceArea : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
