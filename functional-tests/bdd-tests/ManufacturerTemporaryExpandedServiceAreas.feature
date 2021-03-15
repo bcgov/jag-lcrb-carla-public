@@ -1,4 +1,4 @@
-﻿Feature: ManufacturerTESA
+﻿Feature: ManufacturerTemporaryExpandedServiceAreas
     As a logged in business user
     I want to submit TESA applications for different manufacturer types
 
