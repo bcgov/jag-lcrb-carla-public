@@ -32,7 +32,7 @@ Scenario:
 namespace bdd_tests
 {
     [FeatureFile("./***.feature")]
-    public sealed class TemplateCS : TestBase
+    public sealed class Template : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
