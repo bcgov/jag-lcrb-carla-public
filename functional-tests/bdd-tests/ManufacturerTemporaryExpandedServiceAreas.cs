@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: ManufacturerTESA
+Feature: ManufacturerTemporaryExpandedServiceAreas
     As a logged in business user
     I want to submit TESA applications for different manufacturer types
 
@@ -88,9 +88,9 @@ Scenario: Manufacturer TESA Application (Co-packer)
 
 namespace bdd_tests
 {
-    [FeatureFile("./ManufacturerTESA.feature")]
+    [FeatureFile("./ManufacturerTemporaryExpandedServiceAreas.feature")]
     [Collection("Liquor")]
-    public sealed class ManufacturerTESA : TestBase
+    public sealed class ManufacturerTemporaryExpandedServiceAreas : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

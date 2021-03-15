@@ -1,4 +1,4 @@
-﻿Feature: LicencePDFVerification
+﻿Feature: LicenceVerification
     As a logged in business user
     I want to create different licences and manually verify the pdf formats
 

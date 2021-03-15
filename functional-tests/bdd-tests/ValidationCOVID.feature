@@ -1,4 +1,4 @@
-﻿Feature: ValidationCOVID
+﻿Feature: ValidationCovid
     As a logged in business user
     I want to confirm the validation messages for the COVID temporary extension
 
