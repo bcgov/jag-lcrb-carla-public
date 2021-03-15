@@ -54,6 +54,24 @@
     <None Update="FoodPrimaryTemporaryChangeToHoursOfSaleAfterMidnight.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="LiquorPrimaryAddLicenseeRepresentative.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryTemporaryChangeToHoursOfSale.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryRequestOfChangeInTermsDiscretion.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryHawkersApplicationStadiumsOnly.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryEstablishmentNameChange.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="LiquorPrimaryTermsAndConditions.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ManufacturerTemporaryChangeToHoursOfSale.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -150,7 +168,7 @@
     <None Update="LiquorPrimaryTemporaryExtension.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LiquorPrimaryChangeHours.feature">
+    <None Update="LiquorPrimaryChangeHoursWithinServiceHours.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LiquorPrimaryRelocation.feature">

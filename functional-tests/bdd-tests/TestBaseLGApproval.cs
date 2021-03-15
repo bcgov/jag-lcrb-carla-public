@@ -76,6 +76,14 @@ namespace bdd_tests
             {
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
             }
+            else if (applicationType == "hawkers")
+            {
+                // click on no objection checkbox
+                NgWebElement uiNoObjection = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='lgNoObjection']"));
+                uiNoObjection.Click();
+
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[2]");
+            }
             else
             {
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
