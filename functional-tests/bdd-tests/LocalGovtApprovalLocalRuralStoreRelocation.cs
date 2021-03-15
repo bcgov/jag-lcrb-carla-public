@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: LGApprovalLRSRelocation
+Feature: LocalGovtApprovalLocalRuralStoreRelocation
     As a logged in business user
     I want to submit a LRS Relocation Application for review and approval
 
@@ -38,9 +38,9 @@ Scenario: Local Government Approval for LRS Relocation (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./LGApprovalLRSRelocation.feature")]
+    [FeatureFile("./LocalGovtApprovalLocalRuralStoreRelocation.feature")]
     [Collection("Liquor")]
-    public sealed class LGApprovalLRSRelocation : TestBase
+    public sealed class LocalGovtApprovalLocalRuralStoreRelocation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

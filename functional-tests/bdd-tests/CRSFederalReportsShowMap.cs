@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSFederalReportsShowMap
+Feature: CrsFederalReportsShowMap
     As a logged in business user
     I want to submit a CRS Application for different business types
     And review the federal reports and show the store as open on the map for the approved application
@@ -37,9 +37,9 @@ Scenario: Federal Reports and Show Map (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSFederalReportsShowMap.feature")]
+    [FeatureFile("./CrsFederalReportsShowMap.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSFederalReportsShowMap : TestBase
+    public sealed class CrsFederalReportsShowMap : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSApplication
+Feature: CrsApplication
     As a logged in business user
     I want to submit a CRS Application for different business types
 
@@ -80,9 +80,9 @@ Scenario: CRS Application (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplication.feature")]
+    [FeatureFile("./CrsApplication.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSApplication : TestBase
+    public sealed class CrsApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSLicensingRenewal
+Feature: CrsLicensingRenewal
     As a logged in business user
     I want to pay the first year licensing fee for an approved CRS Application
     And renew the licence
@@ -211,9 +211,9 @@ Scenario: Positive CRS Licence Renewal 30 Days Future (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSLicensingRenewal.feature")]
+    [FeatureFile("./CrsLicensingRenewal.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSLicensingRenewal : TestBase
+    public sealed class CrsLicensingRenewal : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LoggedInToDashboard(string businessType)
