@@ -99,76 +99,60 @@ namespace bdd_tests
         [And(@"I click on the button for (.+)")]
         public void ClickOnButton(string specificButton)
         {
-            if (specificButton == "CRS terms and conditions")
+            switch (specificButton)
             {
-                // click on the Terms and Conditions button
-                NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-expansion-panel mat-expansion-panel-header[role='button']"));
-                uiTermsAndConditions.Click();
-            }
-
-            if (specificButton == "Catering terms and conditions")
-            {
-                // click on the Terms and Conditions button
-                NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-expansion-panel mat-expansion-panel-header[role='button']"));
-                uiTermsAndConditions.Click();
-            }
-
-            if (specificButton == "Confirm Organization Information is Complete")
-            {
-                // click on the Confirm Organization Information is Complete button
-                NgWebElement uiCompleteButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
-                uiCompleteButton.Click();
-            }
-
-            if (specificButton == "Pay for Application")
-            {
-                // click on the Pay for Application button
-                NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
-                uiPayButton.Click();
-            }
-
-            if (specificButton == "Pay for Application for Cannabis Marketing")
-            {
-                // click on the Pay for Application button
-                NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector(".mt-3 button.btn.btn-primary"));
-                uiPayButton.Click();
-            }
-
-            if (specificButton == "Submit Organization Information")
-            {
-                // click on the Submit Org Info button
-                NgWebElement uiSubmitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
-                JavaScriptClick(uiSubmitOrgInfoButton);
-            }
-
-            if (specificButton == "Save for Later")
-            {
-                // click on the Save For Later button
-                NgWebElement uiSaveForLaterButton = ngDriver.FindElement(By.CssSelector("button.btn-secondary span"));
-                uiSaveForLaterButton.Click();
-            }
-
-            if (specificButton == "Continue to Organization Review")
-            {
-                // click on the Continue to Organization Review button
-                NgWebElement uiContinueToOrganizationReview = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-                uiContinueToOrganizationReview.Click();
-            }
-
-            if (specificButton == "Proceed to Security Screening")
-            {
-                // click on the Proceed to Security Screening button
-                NgWebElement uiProceedToSecurityScreening = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
-                uiProceedToSecurityScreening.Click();
-            }
-
-            if (specificButton == "Submit a Change")
-            {
-                // click on the Submit a Change button
-                NgWebElement uiSubmitAChange = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
-                IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
-                executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiSubmitAChange);
-                uiSubmitAChange.Click();
+                case "CRS terms and conditions":
+                    // click on the Terms and Conditions button
+                    NgWebElement uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-expansion-panel mat-expansion-panel-header[role='button']"));
+                    uiTermsAndConditions.Click();
+                    break;
+                case "Catering terms and conditions":
+                    // click on the Terms and Conditions button
+                    NgWebElement uiTermsAndConditions2 = ngDriver.FindElement(By.CssSelector("mat-expansion-panel mat-expansion-panel-header[role='button']"));
+                    uiTermsAndConditions2.Click();
+                    break;
+                case "Confirm Organization Information is Complete":
+                    // click on the Confirm Organization Information is Complete button
+                    NgWebElement uiCompleteButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
+                    uiCompleteButton.Click();
+                    break;
+                case "Pay for Application":
+                    // click on the Pay for Application button
+                    NgWebElement uiPayButton = ngDriver.FindElement(By.CssSelector("button.btn-primary"));
+                    uiPayButton.Click();
+                    break;
+                case "Pay for Application for Cannabis Marketing":
+                    // click on the Pay for Application button
+                    NgWebElement uiPayButton2 = ngDriver.FindElement(By.CssSelector(".mt-3 button.btn.btn-primary"));
+                    uiPayButton2.Click();
+                    break;
+                case "Submit Organization Information":
+                    // click on the Submit Org Info button
+                    NgWebElement uiSubmitOrgInfoButton = ngDriver.FindElement(By.CssSelector("app-application-licensee-changes button.btn-primary"));
+                    JavaScriptClick(uiSubmitOrgInfoButton);
+                    break;
+                case "Save for Later":
+                    // click on the Save For Later button
+                    NgWebElement uiSaveForLaterButton = ngDriver.FindElement(By.CssSelector("button.btn-secondary span"));
+                    uiSaveForLaterButton.Click();
+                    break;
+                case "Continue to Organization Review":
+                    // click on the Continue to Organization Review button
+                    NgWebElement uiContinueToOrganizationReview = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+                    uiContinueToOrganizationReview.Click();
+                    break;
+                case "Proceed to Security Screening":
+                    // click on the Proceed to Security Screening button
+                    NgWebElement uiProceedToSecurityScreening = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
+                    uiProceedToSecurityScreening.Click();
+                    break;
+                case "Submit a Change":
+                    // click on the Submit a Change button
+                    NgWebElement uiSubmitAChange = ngDriver.FindElement(By.CssSelector("button.mat-primary"));
+                    IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
+                    executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiSubmitAChange);
+                    uiSubmitAChange.Click();
+                    break;
             }
         }
 
@@ -537,6 +521,7 @@ namespace bdd_tests
             IJavaScriptExecutor executor = (IJavaScriptExecutor)(ngDriver.WrappedDriver);
             executor.ExecuteScript("arguments[0].click();", element);
         }
+
 
         [And(@"No applications awaiting review is displayed")]
         public void NoApplicationsAwaitingReview()
