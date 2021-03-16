@@ -1,4 +1,4 @@
-﻿Feature: UBrewUVinRelease
+﻿Feature: UbrewUvinRelease
     As a logged in business user
     I want to submit a UBrew / UVin Licence application 
     And complete change requests 

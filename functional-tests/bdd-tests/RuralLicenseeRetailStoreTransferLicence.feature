@@ -1,4 +1,4 @@
-﻿Feature: RuralLRSTransferLicence
+﻿Feature: RuralLicenseeRetailStoreTransferLicence
     As a logged in business user
     I want to request a licence transfer for a rural LRS application
 

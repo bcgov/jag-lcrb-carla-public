@@ -1,4 +1,4 @@
-﻿Feature: UBrewUVinTermsAndConditions
+﻿Feature: UbrewUvinTermsAndConditions
     As a logged in business user
     I want to confirm the Terms and Conditions for a UBrew / UVin licence
 

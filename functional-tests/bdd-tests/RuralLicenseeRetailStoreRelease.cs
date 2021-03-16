@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: RuralLRSRelease
+Feature: RuralLicenseeRetailStoreRelease
     As a logged in business user
     I want to run a release test for a rural LRS application
 
@@ -50,9 +50,9 @@ Scenario: Rural LRS Release (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./RuralLRSRelease.feature")]
+    [FeatureFile("./RuralLicenseeRetailStoreRelease.feature")]
     [Collection("Cannabis")]
-    public sealed class RuralLRSRelease : TestBase
+    public sealed class RuralLicenseeRetailStoreRelease : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
