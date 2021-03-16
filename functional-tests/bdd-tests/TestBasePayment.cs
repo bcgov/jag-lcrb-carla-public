@@ -1,22 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
+using System.Threading;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
 using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
-using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography;
 
 namespace bdd_tests
 {
@@ -25,8 +11,8 @@ namespace bdd_tests
         [And(@"I enter the payment information")]
         public void MakePayment()
         {
-            string testCC = configuration["test_cc"];
-            string testCVD = configuration["test_ccv"];
+            var testCC = configuration["test_cc"];
+            var testCVD = configuration["test_ccv"];
             var tempWait = ngDriver.Manage().Timeouts().ImplicitWait;
 
             ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(120);
@@ -34,29 +20,21 @@ namespace bdd_tests
             ngDriver.WrappedDriver.FindElement(By.Name("trnCardNumber")).SendKeys(testCC);
             ngDriver.WrappedDriver.FindElement(By.Name("trnCardCvd")).SendKeys(testCVD);
 
-            string currentUrl = ngDriver.WrappedDriver.Url;
+            var currentUrl = ngDriver.WrappedDriver.Url;
 
             ngDriver.WrappedDriver.FindElement(By.Name("submitButton")).Click();
 
-            ngDriver.Manage().Timeouts().ImplicitWait = tempWait;   
-            
-            // wait for the page transition to occur
-            for (int i = 0; i < 10; i++)
-            {
-                if (ngDriver.WrappedDriver.Url != currentUrl)
-                {
-                    break;
-                }
-                else
-                {
-                    // wait a second
-                    System.Threading.Thread.Sleep(1000);
-                }
+            ngDriver.Manage().Timeouts().ImplicitWait = tempWait;
 
-            }
+            // wait for the page transition to occur
+            for (var i = 0; i < 10; i++)
+                if (ngDriver.WrappedDriver.Url != currentUrl)
+                    break;
+                else
+                    // wait a second
+                    Thread.Sleep(1000);
             // now ensure that angular is loaded.
-            for (int i = 0; i < 10; i++)
-            {
+            for (var i = 0; i < 10; i++)
                 try
                 {
                     ngDriver.WaitForAngular();
@@ -65,10 +43,8 @@ namespace bdd_tests
                 catch (Exception)
                 {
                     // ignore exception but sleep for a second.
-                    System.Threading.Thread.Sleep(1000);
+                    Thread.Sleep(1000);
                 }
-            }
-            
         }
 
 
@@ -80,19 +56,15 @@ namespace bdd_tests
             */
 
             // create test data
-            string firstYearLicenceFee = "Pay First Year Fee";
-            string returnToDashboard = "Return to Dashboard";
+            var firstYearLicenceFee = "Pay First Year Fee";
+            var returnToDashboard = "Return to Dashboard";
 
             // click on the pay first year licence fee link
             var uiFirstYearLicenceFees = ngDriver.FindElements(By.LinkText(firstYearLicenceFee));
             if (uiFirstYearLicenceFees.Count > 0)
-            {
                 uiFirstYearLicenceFees[0].Click();
-            }
-            else 
-            {
-                throw new Exception($"Unable to find Pay First Year Fee link");
-            }
+            else
+                throw new Exception("Unable to find Pay First Year Fee link");
 
             // pay the licence fee
             MakePayment();
@@ -104,7 +76,7 @@ namespace bdd_tests
             IgnoreSynchronizationFalse();
 
             // click on the return to dashboard link
-            NgWebElement uiReturnToDashboard = ngDriver.FindElement(By.LinkText(returnToDashboard));
+            var uiReturnToDashboard = ngDriver.FindElement(By.LinkText(returnToDashboard));
             JavaScriptClick(uiReturnToDashboard);
 
             ClickLicencesTab();
@@ -114,47 +86,35 @@ namespace bdd_tests
         [And(@"I confirm the payment receipt for a(.*)")]
         public void ConfirmPaymentReceipt(string applicationType)
         {
-            System.Threading.Thread.Sleep(3000);
-            
+            Thread.Sleep(3000);
+
             /* 
             Page Title: Payment Approved
             */
 
             if (applicationType == " Cannabis Retail Store application")
-            {
                 // confirm that payment receipt is for $7,500.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$7,500.00')]")).Displayed);
-            }
 
             if (applicationType == " Catering application")
-            {
                 // confirm that payment receipt is for $475.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$475.00')]")).Displayed);
-            }
 
             if (applicationType == " Manufacturer Licence application")
-            {
                 // confirm that payment receipt is for $550.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$550.00')]")).Displayed);
-            }
 
             if (applicationType == " UBrew / UVin application")
-            {
                 // confirm that payment receipt is for $550.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$550.00')]")).Displayed);
-            }
 
             if (applicationType == " Food Primary application")
-            {
                 // confirm that payment receipt is for $950.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$950.00')]")).Displayed);
-            }
 
             if (applicationType == "n Agent Licence")
-            {
                 // confirm that payment receipt is for $220.00
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
-            }
         }
 
 
