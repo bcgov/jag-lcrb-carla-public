@@ -45,6 +45,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "/" : _configuration["BASE_PATH"];
             // we want to redirect to the dashboard.
             string url = "dashboard";
+            if (source == "sep")
+            {
+                url = "sep-dashboard";
+            }
 
             return Redirect(basePath + "/" + url);
         }
@@ -105,7 +109,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             basePath += "/" + url;
 
             return Redirect(basePath);
-        }        
+        }
 
     }
 }
