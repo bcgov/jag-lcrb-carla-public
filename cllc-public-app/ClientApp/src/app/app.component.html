@@ -112,6 +112,11 @@
                   Temporary Expanded Service Areas
                 </a>
               </li>
+              <li class="nav-item" appRemoveIfFeatureOff="Sep">
+                <a (click)="toggleButton.click()" tabindex="2" routerLink="/sep">
+                  Special Events Permits
+                </a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -157,6 +162,10 @@
                 <a appRemoveIfFeatureOff="LGApprovals" *ngIf="account?.businessType === 'LocalGovernment' && account?.localGovernmentId" (click)="toggleButtonLoggedIn.click()"
                    class="nav-link" routerLink="/lg-approvals">
                   Applications for Review
+                </a>
+                <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
+                   class="nav-link" routerLink="/sep-dashboard">
+                  Special Events Permits Dashboard
                 </a>
                 <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
                   matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="!(showNoticesBadge$ | async)"
