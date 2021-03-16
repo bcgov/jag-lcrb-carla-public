@@ -1,4 +1,4 @@
-﻿Feature: RuralLRSStructuralAlteration
+﻿Feature: RuralLicenseeRetailStoreStructuralAlteration
     As a logged in business user
     I want to request a structural alteration application for a rural LRS application
 
