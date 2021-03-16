@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using OpenQA.Selenium;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: TemplateFeature
@@ -39,7 +28,7 @@ namespace bdd_tests
         {
             NavigateToFeatures();
 
-           // check correct feature flags
+            // check correct feature flags
 
             IgnoreSynchronizationFalse();
 
@@ -54,14 +43,14 @@ namespace bdd_tests
             */
 
             // create test data
-            string sampleTestData = " ";
+            var sampleTestData = " ";
 
             // sample input call
-            NgWebElement uiInputElement = ngDriver.FindElement(By.CssSelector("  "));
+            var uiInputElement = ngDriver.FindElement(By.CssSelector("  "));
             uiInputElement.SendKeys(sampleTestData);
 
             // sample selection call
-            NgWebElement uiSelectElement = ngDriver.FindElement(By.CssSelector("  "));
+            var uiSelectElement = ngDriver.FindElement(By.CssSelector("  "));
             uiSelectElement.Click();
         }
     }

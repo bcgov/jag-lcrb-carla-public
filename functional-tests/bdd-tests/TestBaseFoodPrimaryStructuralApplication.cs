@@ -1,20 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
 using Protractor;
-using System;
-using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
@@ -34,15 +21,14 @@ namespace bdd_tests
             */
 
             // create test data
-            string description1 = "Test automation outline of the proposed change.";
-            string description2 = "Test automation patio location.";
-            string areaDescription = "Test automation area description.";
-            string occupantLoad = "180";
+            var description1 = "Test automation outline of the proposed change.";
+            var description2 = "Test automation patio location.";
+            var areaDescription = "Test automation area description.";
+            var occupantLoad = "180";
 
             // enter the establishment name
             NgWebElement uiDescriptionOfChange = null;
-            for (int i = 0; i < 30; i++)
-            {
+            for (var i = 0; i < 30; i++)
                 try
                 {
                     var names = ngDriver.FindElements(By.CssSelector("textarea#description1"));
@@ -54,36 +40,35 @@ namespace bdd_tests
                 }
                 catch (Exception)
                 {
-
                 }
-            }
+
             uiDescriptionOfChange.SendKeys(description1);
 
             // enter the location of the patio
-            NgWebElement uiPatioLocation = ngDriver.FindElement(By.CssSelector("textarea#description2"));
+            var uiPatioLocation = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiPatioLocation.SendKeys(description2);
 
             // upload a floor plan document
             FileUpload("floor_plan.pdf", "(//input[@type='file'])[2]");
 
             // click on service area button
-            NgWebElement uiServiceAreas = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'serviceAreas'] button"));
+            var uiServiceAreas = ngDriver.FindElement(By.CssSelector("[formcontrolname= 'serviceAreas'] button"));
             uiServiceAreas.Click();
 
             // enter area description
-            NgWebElement uiAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
+            var uiAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
             uiAreaDescription.SendKeys(areaDescription);
 
             // enter occupant load
-            NgWebElement uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            var uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
             uiOccupantLoad.SendKeys(occupantLoad);
 
             // select authorizedToSubmit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            var uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             uiAuthorizedToSubmit.Click();
 
             // select signatureAgreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            var uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgreement.Click();
 
             // click on the Submit & Pay button
