@@ -64,6 +64,32 @@ namespace bdd_tests
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'For the sale and consumption of all types of liquor in establishments with a primary focus on the service of food.')]")).Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Liquor may only be sold, served and consumed within the service areas outlined on the official plan, unless otherwise endorsed or approved by the LCRB')]")).Displayed);
             }
+
+            if (licenceType == "a Manufacturer licence")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Subject to terms and conditions specified in the restriction or approval letter(s). A copy of restriction or approval letter(s) to be kept with current liquor licence.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Liquor product sold in the on site store must be registered under the manufacturer licence.')]")).Displayed);
+            }
+
+            if (licenceType == "a Rural LRS licence")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Subject to terms and conditions specified in the restriction or approval letter(s). Copy of restriction or approval letter(s) must be kept with current liquor licence.')]")).Displayed);
+            }
+
+            if (licenceType == "a UBrew / UVin licence")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time.')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'The licence is provided to operate a facility in the establishment that provides goods or services to a customer who manufactures beer, cider or wine in the establishment for their own consumption or consumption at no charge to others.')]")).Displayed);
+            }
+
+            if (licenceType == "a Liquor Primary licence")
+            {
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time. ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Liquor may only be sold, served and consumed within the service areas outlined on the official plan, unless otherwise endorsed or approved by the LCRB. ')]")).Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Subject to terms and conditions specified in the restriction or approval letter(s). Copy of restriction or approval letter(s) must be kept with current liquor licence. ')]")).Displayed);
+            }
         }
     }
 }

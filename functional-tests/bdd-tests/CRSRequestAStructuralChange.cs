@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSRequestAStructuralChange
+Feature: CrsRequestAStructuralChange
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a structural change for the approved application
@@ -89,9 +89,9 @@ Scenario: Cannabis Structural Changes (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSRequestAStructuralChange.feature")]
+    [FeatureFile("./CrsRequestAStructuralChange.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSRequestAStructuralChange : TestBase
+    public sealed class CrsRequestAStructuralChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

@@ -1,4 +1,4 @@
-﻿Feature: CRSStoreRequestRelocation
+﻿Feature: CrsStoreRequestRelocation
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a store relocation for the approved application

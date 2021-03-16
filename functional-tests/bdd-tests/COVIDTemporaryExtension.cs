@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: COVIDTemporaryExtension
+Feature: CovidTemporaryExtension
     As a business user who is not logged in
     I want to submit a COVID temporary extension application for different licence types
 
@@ -53,7 +53,7 @@ Scenario: COVID Temp Extension (Manufacturer)
 namespace bdd_tests
 {
     [FeatureFile("./**.feature")]
-    public sealed class COVIDTemporaryExtension : TestBase
+    public sealed class CovidTemporaryExtension : TestBase
     {
     }
 }

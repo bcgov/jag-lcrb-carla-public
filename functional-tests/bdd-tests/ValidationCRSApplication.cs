@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: ValidationCRSApplication
+Feature: ValidationCrsApplication
     As a logged in business user
     I want to confirm the validation messages for CRS Applications
 
@@ -57,7 +57,7 @@ Scenario: Validation for CRS Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
-    And I click on the branding change link for Cannabis
+    And I click on the link for Request Store Name or Branding Change
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a CRS Branding Change application
@@ -149,9 +149,9 @@ Scenario: Validation for CRS Transfer of Ownership
 
 namespace bdd_tests
 {
-    [FeatureFile("./ValidationCRSApplication.feature")]
+    [FeatureFile("./ValidationCrsApplication.feature")]
     [Collection("Cannabis")]
-    public sealed class ValidationCRSApplication : TestBase
+    public sealed class ValidationCrsApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
