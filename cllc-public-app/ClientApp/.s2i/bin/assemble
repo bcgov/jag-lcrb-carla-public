@@ -32,18 +32,28 @@ if [ ! -z $NPM_MIRROR ]; then
   npm config set registry $NPM_MIRROR
 fi
 
+
+# edit version info files.
+sed -i 's^<!-- UI_GIT_REF -->^'"$OPENSHIFT_BUILD_REFERENCE"'^g' src/app/components/version-info/version-info-dialog.component.html
+sed -i 's^<!-- UI_GIT_COMMIT -->^'"$OPENSHIFT_BUILD_COMMIT"'^g' src/app/components/version-info/version-info-dialog.component.html
+sed -i 's^<!-- UI_GIT_REPO -->^'"$OPENSHIFT_BUILD_SOURCE"'^g' src/app/components/version-info/version-info-dialog.component.html
+sed -i 's^<!-- UI_BUILD_DATE -->^'"$(date)"'^g' src/app/components/version-info/version-info-dialog.component.html
+
+
 if [ -n "${PHASE1}" ]; then
 
 # build the application.
 npm install @angular/cli@11.0.7
 npm install
 fi
+
+
 if [ -n "${PHASE2}" ]; then
 mkdir /opt/app-root/dist
 mkdir /opt/app-root/dist/lcrb
 
-
 npm run build -- --prod --outputPath=/opt/app-root/src/dist
+
 npm run build -- --prod --base-href /lcrb/ --deploy-url /lcrb/ --outputPath=/opt/app-root/src/dist/lcrb
 # fix permissions
 fix-permissions /opt/app-root/src/dist

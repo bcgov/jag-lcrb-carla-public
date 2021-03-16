@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: LiquorPrimaryTransferLicence
@@ -37,7 +26,7 @@ Scenario: Liquor Primary Transfer Licence (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Liquor Primary
     And the account is deleted
     Then I see the login page
 */

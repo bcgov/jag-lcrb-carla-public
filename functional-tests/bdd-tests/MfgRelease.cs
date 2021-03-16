@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: MfgRelease
@@ -74,7 +63,7 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And I complete the TESA application for a Manufacturer licence
     And I click on the Submit button
     And I request a third party operator
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Manufacturer
     And the account is deleted
     Then I see the login page
 */

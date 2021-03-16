@@ -37,6 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("FEATURE_ELIGIBILITY", "Eligibility"),
                 ("FEATURE_RLRS", "RLRS"), // used to switch to the RLRS and disable the RAS intake
                 ("FEATURE_LIQUOR_FREE_EVENTS", "LiquorFreeEvents"), // All-ages Liquor-Free events for Liquor Primary and Liquor Primary Club
+                ("FEATURE_SEP", "Sep"), // Controls Special Event Permits content
                 ("FEATURE_DISABLE_WORKER_QUALIFICATION", "DisableWorkerQualification")  // Removes worker qualification from the portal
             };
 

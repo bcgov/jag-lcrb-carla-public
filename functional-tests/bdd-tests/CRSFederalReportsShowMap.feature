@@ -1,4 +1,4 @@
-﻿Feature: CRSFederalReportsShowMap
+﻿Feature: CrsFederalReportsShowMap
     As a logged in business user
     I want to submit a CRS Application for different business types
     And review the federal reports and show the store as open on the map for the approved application

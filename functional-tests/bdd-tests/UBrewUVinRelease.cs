@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: UBrewUVinRelease
@@ -40,7 +29,7 @@ Scenario: UBrew / UVin Application Release Test (Private Corporation)
     And I click on the link for Cancel Application
     And I cancel the third party operator application
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for UBrew / UVin
     And the account is deleted
     Then I see the login page
 */

@@ -1,101 +1,105 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
 using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        [And(@"I request a transfer of ownership")]
-        public void RequestOwnershipTransfer()
+        [And(@"I request a transfer of ownership for (.*)")]
+        public void RequestOwnershipTransfer(string licenceType)
         {
             /* 
             Page Title: Licences & Authorizations
             */
 
-            string transferOwnership = "Transfer Licence";
+            var transferOwnership = "Transfer Licence";
 
             // click on the Transfer Ownership link
-            NgWebElement uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
+            var uiTransferOwnership = ngDriver.FindElement(By.LinkText(transferOwnership));
             uiTransferOwnership.Click();
 
             // check that licence number field is populated
-            NgWebElement uiLicenseNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='licenseNumber']"));
-            string fieldValueLicenseNumber = uiLicenseNumber.GetProperty("value");
+            var uiLicenseNumber = ngDriver.FindElement(By.CssSelector("input[formcontrolname='licenseNumber']"));
+            var fieldValueLicenseNumber = uiLicenseNumber.GetProperty("value");
             Assert.False(string.IsNullOrEmpty(fieldValueLicenseNumber));
 
-            // check that establishment name field is populated
-            NgWebElement uiEstablishmentName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
-            string fieldValueEstablishmentName = uiEstablishmentName.GetProperty("value");
-            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentName));
+            if (licenceType != "an agent")
+            {
+                // check that establishment name field is populated
+                var uiEstablishmentName =
+                    ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
+                var fieldValueEstablishmentName = uiEstablishmentName.GetProperty("value");
+                Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentName));
+            }
 
             // check that establishment address street field is populated
-            NgWebElement uiEstablishmentAddressStreet = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
-            string fieldValueEstablishmentAddressStreet = uiEstablishmentAddressStreet.GetProperty("value");
+            var uiEstablishmentAddressStreet =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
+            var fieldValueEstablishmentAddressStreet = uiEstablishmentAddressStreet.GetProperty("value");
             Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentAddressStreet));
 
             // check that establishment address city field is populated
-            NgWebElement uiEstablishmentAddressCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
-            string fieldValueEstablishmentAddressCity = uiEstablishmentAddressCity.GetProperty("value");
+            var uiEstablishmentAddressCity =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
+            var fieldValueEstablishmentAddressCity = uiEstablishmentAddressCity.GetProperty("value");
             Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentAddressCity));
 
             // check that establishment province field is populated
-            NgWebElement uiEstablishmentProvince = ngDriver.FindElement(By.CssSelector("input.form-control[value='British Columbia']"));
-            string fieldValueEstablishmentProvince = uiEstablishmentProvince.GetProperty("value");
+            var uiEstablishmentProvince =
+                ngDriver.FindElement(By.CssSelector("input.form-control[value='British Columbia']"));
+            var fieldValueEstablishmentProvince = uiEstablishmentProvince.GetProperty("value");
             Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentProvince));
 
             // check that establishment postal code field is populated
-            NgWebElement uiEstablishmentAddressPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
-            string fieldValueEstablishmentAddressPostalCode = uiEstablishmentAddressPostalCode.GetProperty("value");
+            var uiEstablishmentAddressPostalCode =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
+            var fieldValueEstablishmentAddressPostalCode = uiEstablishmentAddressPostalCode.GetProperty("value");
             Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentAddressPostalCode));
 
             // check that establishment country field is populated
-            NgWebElement uiEstablishmentAddressCountry = ngDriver.FindElement(By.CssSelector("input.form-control[value='Canada']"));
-            string fieldValueEstablishmentCountry = uiEstablishmentAddressCountry.GetProperty("value");
+            var uiEstablishmentAddressCountry =
+                ngDriver.FindElement(By.CssSelector("input.form-control[value='Canada']"));
+            var fieldValueEstablishmentCountry = uiEstablishmentAddressCountry.GetProperty("value");
             Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentCountry));
 
-            // check that establishment PID is populated
-            NgWebElement uiEstablishmentParcelId = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
-            string fieldValueEstablishmentParcelId = uiEstablishmentParcelId.GetProperty("value");
-            Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentParcelId));
+            if (licenceType != "an agent")
+            {
+                // check that establishment PID is populated
+                var uiEstablishmentParcelId =
+                    ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
+                var fieldValueEstablishmentParcelId = uiEstablishmentParcelId.GetProperty("value");
+                Assert.False(string.IsNullOrEmpty(fieldValueEstablishmentParcelId));
+            }
 
-            string licensee = "GunderCorp";
+            var licensee = "GunderCorp";
 
             // search for the proposed licensee
-            NgWebElement uiProposedLicensee = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));
+            var uiProposedLicensee = ngDriver.FindElement(By.CssSelector("input[formcontrolname='autocompleteInput']"));
             uiProposedLicensee.SendKeys(licensee);
 
-            NgWebElement uiThirdPartyOperatorOption = ngDriver.FindElement(By.CssSelector("mat-option[role='option'] span"));
+            var uiThirdPartyOperatorOption = ngDriver.FindElement(By.CssSelector("mat-option[role='option'] span"));
             uiThirdPartyOperatorOption.Click();
 
             // click on consent to licence transfer checkbox
-            NgWebElement uiConsentToTransfer = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='transferConsent']"));
+            var uiConsentToTransfer =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='transferConsent']"));
             uiConsentToTransfer.Click();
 
             // click on authorize signature checkbox
-            NgWebElement uiAuthorizeSignature = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
+            var uiAuthorizeSignature =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizeSignature.Click();
 
             // click on signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
+            var uiSignatureAgreement =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
             // click on submit transfer button
-            NgWebElement uiSubmitTransferButton = ngDriver.FindElement(By.CssSelector("app-application-ownership-transfer button.btn-primary"));
+            var uiSubmitTransferButton =
+                ngDriver.FindElement(By.CssSelector("app-application-ownership-transfer button.btn-primary"));
             uiSubmitTransferButton.Click();
 
             ClickLicencesTab();
