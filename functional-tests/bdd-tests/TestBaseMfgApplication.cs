@@ -39,7 +39,7 @@ namespace bdd_tests
             string contactTitle = "Sommelier";
             string contactPhone = "778-181-1818";
             string contactEmail = "contact@email.com";
-            string indigenousNation = "Parksville";
+            string indigenousNation = "Cowichan Tribes";
             string policeJurisdiction = "RCMP Shawnigan Lake";
             string localGovernmentParksville = "Parksville";
             string policeJurisdictionParksville = "RCMP Oceanside";
@@ -220,7 +220,7 @@ namespace bdd_tests
 
                 // select the filtering checkbox
                 NgWebElement uiFiltering = ngDriver.FindElement(By.CssSelector("#mat-checkbox-17 .mat-checkbox-inner-container"));
-                uiFiltering.Click();
+                JavaScriptClick(uiFiltering);
 
                 // select the aging, for at least 3 months checkbox
                 NgWebElement uiAging = ngDriver.FindElement(By.CssSelector("#mat-checkbox-18 .mat-checkbox-inner-container"));

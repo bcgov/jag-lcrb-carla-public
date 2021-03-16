@@ -13,7 +13,7 @@ using System.IO;
 using Xunit;
 
 /*
-Feature: CRSLicensingRenewalDenied
+Feature: CrsLicensingRenewalDenied
     As a logged in business user
     I want to pay the first year licensing fee for an approved CRS Application
     And confirm that autorenewal is set to 'No' to prevent renewal of the licence
@@ -126,9 +126,9 @@ Scenario: Deny CRS Licence Renewal 30 Days Future (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSLicensingRenewalDenied.feature")]
+    [FeatureFile("./CrsLicensingRenewalDenied.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSLicensingRenewalDenied : TestBase
+    public sealed class CrsLicensingRenewalDenied : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LoggedInToDashboard(string businessType)

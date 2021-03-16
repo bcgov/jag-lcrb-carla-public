@@ -1,4 +1,4 @@
-﻿Feature: CRSRequestStoreNameOrBrandingChange
+﻿Feature: CrsRequestStoreNameOrBrandingChange
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a valid name or branding change for the approved application
