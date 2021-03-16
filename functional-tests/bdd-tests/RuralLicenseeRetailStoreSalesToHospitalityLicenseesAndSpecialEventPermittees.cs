@@ -111,7 +111,7 @@ namespace bdd_tests
 {
     [FeatureFile("./RuralLRSSalesToHospitalityLicenseesAndSpecialEventPermittees.feature")]
     [Collection("Cannabis")]
-    public sealed class RuralLRSSalesToHospitalityLicenseesAndSpecialEventPermittees : TestBase
+    public sealed class RuralLicenseeRetailStoreSalesToHospitalityLicenseesAndSpecialEventPermittees : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
