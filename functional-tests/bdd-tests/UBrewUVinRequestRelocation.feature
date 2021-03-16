@@ -1,4 +1,4 @@
-﻿Feature: UBrewUVinRequestRelocation
+﻿Feature: UbrewUvinRequestRelocation
     As a logged in business user
     I want to submit a relocation request for a UBrew / UVin licence
 

@@ -1,4 +1,4 @@
-﻿Feature: UBrewUVinEstablishmentNameChange
+﻿Feature: UbrewUvinEstablishmentNameChange
     As a logged in business user
     I want to submit a UBrew / UVin Licence name change application for different business types
 

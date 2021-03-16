@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: UBrewUVinAddLicenseeRepresentative
+Feature: UbrewUvinAddLicenseeRepresentative
     As a logged in business user
     I want to request a licensee representative for a UBrew / UVin licence
 
@@ -28,7 +28,7 @@ Scenario: UBrew / UVin Application Licensee Representative (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinAddLicenseeRepresentative.feature")]
+    [FeatureFile("./UbrewUvinAddLicenseeRepresentative.feature")]
     [Collection("Liquor")]
     public sealed class UBrewUVinAddLicenseeRepresentative : TestBase
     {

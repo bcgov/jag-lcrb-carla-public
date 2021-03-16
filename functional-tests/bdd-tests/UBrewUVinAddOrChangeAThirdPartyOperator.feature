@@ -1,4 +1,4 @@
-﻿Feature: UBrewUVinAddOrChangeAThirdPartyOperator
+﻿Feature: UbrewUvinAddOrChangeAThirdPartyOperator
     As a logged in business user
     I want to submit a UBrew / UVin Licence third party operator applicaation for different business types
 
