@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: CRSApplication
+Feature: CrsApplication
     As a logged in business user
     I want to submit a CRS Application for different business types
 
@@ -80,9 +69,9 @@ Scenario: CRS Application (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplication.feature")]
+    [FeatureFile("./CrsApplication.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSApplication : TestBase
+    public sealed class CrsApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

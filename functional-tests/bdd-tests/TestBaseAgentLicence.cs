@@ -1,20 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
@@ -27,8 +13,8 @@ namespace bdd_tests
             Page Title: Agent Licence Application
             */
 
-            string contactPhone = "2501811818";
-            string contactEmail = "test@automation.com";
+            var contactPhone = "2501811818";
+            var contactEmail = "test@automation.com";
 
             if (bizType == "partnership")
             {
@@ -76,34 +62,32 @@ namespace bdd_tests
             }
 
             if (bizType == "sole proprietorship")
-            {
                 // upload personal history summary documents
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
-            }
 
             // enter the contact phone number
-            NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
+            var uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
             uiContactPhone.SendKeys(contactPhone);
 
             // enter the contact email
-            NgWebElement uiContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonEmail']"));
+            var uiContactEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonEmail']"));
             uiContactEmail.SendKeys(contactEmail);
 
             // click on the authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            var uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             uiAuthorizedToSubmit.Click();
 
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            var uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgreement.Click();
 
             // retrieve the current URL to get the application ID (needed downstream)
-            string URL = ngDriver.Url;
+            var URL = ngDriver.Url;
 
             // retrieve the application ID
-            string[] parsedURL = URL.Split('/');
+            var parsedURL = URL.Split('/');
 
-            string[] tempFix = parsedURL[5].Split(';');
+            var tempFix = parsedURL[5].Split(';');
 
             applicationID = tempFix[0];
         }

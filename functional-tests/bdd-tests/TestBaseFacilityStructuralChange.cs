@@ -1,20 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
@@ -27,10 +13,10 @@ namespace bdd_tests
             Page Title: Licences & Authorizations
             */
 
-            string facilityStructuralChange = "Facility Structural Change Application";
+            var facilityStructuralChange = "Facility Structural Change Application";
 
             // click on the Facility Structural Change Application link
-            NgWebElement uiFacilityStructuralChange = ngDriver.FindElement(By.LinkText(facilityStructuralChange));
+            var uiFacilityStructuralChange = ngDriver.FindElement(By.LinkText(facilityStructuralChange));
             uiFacilityStructuralChange.Click();
 
             /* 
@@ -44,15 +30,15 @@ namespace bdd_tests
             */
 
             // create test data
-            string applicationDetails = "Sample application details.";
-            string proposedChange = "Sample proposed change";
+            var applicationDetails = "Sample application details.";
+            var proposedChange = "Sample proposed change";
 
             // enter the application details into the text area
-            NgWebElement uiApplicationDetails = ngDriver.FindElement(By.CssSelector("textarea#otherBusinessesDetails"));
+            var uiApplicationDetails = ngDriver.FindElement(By.CssSelector("textarea#otherBusinessesDetails"));
             uiApplicationDetails.SendKeys(applicationDetails);
 
             // enter the proposed change into the text area
-            NgWebElement uiProposedChange = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
+            var uiProposedChange = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
             uiProposedChange.SendKeys(proposedChange);
 
             // upload the floor plan
@@ -62,11 +48,13 @@ namespace bdd_tests
             FileUpload("site_plan.pdf", "(//input[@type='file'])[5]");
 
             // select the authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
+            var uiAuthorizedToSubmit =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
 
             // select the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
+            var uiSignatureAgreement =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
             // click on the Submit & Pay button

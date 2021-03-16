@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: CombinedCateringCRSApplications
+Feature: CombinedCateringCrsApplications
     As a logged in business user
     I want to submit a CRS and Catering application for the same account
 
@@ -40,9 +29,9 @@ Scenario: Combined Catering / CRS Applications (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CombinedCateringCRSApplications.feature")]
+    [FeatureFile("./CombinedCateringCrsApplications.feature")]
     [Collection("Cannabis")]
-    public sealed class CombinedCateringCRSApplications : TestBase
+    public sealed class CombinedCateringCrsApplications : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
