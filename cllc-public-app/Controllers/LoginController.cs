@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult Login(string path)
+        public ActionResult Login(string path, [FromQuery] string source)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
             if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || (!_env.IsProduction() && path.Equals("headers"))))
