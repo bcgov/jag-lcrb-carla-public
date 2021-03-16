@@ -30,7 +30,7 @@ namespace bdd_tests
 {
     [FeatureFile("./UbrewUvinAddLicenseeRepresentative.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinAddLicenseeRepresentative : TestBase
+    public sealed class UbrewUvinAddLicenseeRepresentative : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

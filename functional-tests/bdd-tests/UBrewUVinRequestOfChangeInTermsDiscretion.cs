@@ -32,7 +32,7 @@ namespace bdd_tests
 {
     [FeatureFile("./UbrewUvinRequestOfChangeInTermsDiscretion.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinRequestOfChangeInTermsDiscretion : TestBase
+    public sealed class UbrewUvinRequestOfChangeInTermsDiscretion : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
