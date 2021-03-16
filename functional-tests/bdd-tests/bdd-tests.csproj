@@ -90,22 +90,22 @@
     <None Update="ManufacturerRequestOfChangeInTermsDiscretion.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSRequestTCChangeApplication.feature">
+    <None Update="RuralLicenseeRetailStoreRequestTermsAndConditionsChangeApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UBrewUVinAddLicenseeRepresentative.feature">
+    <None Update="UbrewUvinAddLicenseeRepresentative.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UBrewUVinRequestOfChangeInTermsDiscretion.feature">
+    <None Update="UbrewUvinRequestOfChangeInTermsDiscretion.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UBrewUVinRequestRelocation.feature">
+    <None Update="UbrewUvinRequestRelocation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UBrewUVinTermsAndConditions.feature">
+    <None Update="UbrewUvinTermsAndConditions.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSTermsAndConditions.feature">
+    <None Update="RuralLicenseeRetailStoreTermsAndConditions.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ManufacturerTermsAndConditions.feature">
@@ -216,37 +216,37 @@
     <None Update="ManufacturerTemporaryExpandedServiceAreas.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSRelease.feature">
+    <None Update="RuralLicenseeRetailStoreRelease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSEstablishmentNameChange.feature">
+    <None Update="RuralLicenseeRetailStoreEstablishmentNameChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSAddOrChangeAThirdPartyOperator.feature">
+    <None Update="RuralLicenseeRetailStoreAddOrChangeAThirdPartyOperator.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSTransferLicence.feature">
+    <None Update="RuralLicenseeRetailStoreTransferLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSLicenseeRepresentative.feature">
+    <None Update="RuralLicenceeRetailStoreLicenseeRepresentative.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSStructuralAlteration.feature">
+    <None Update="RuralLicenseeRetailStoreStructuralAlteration.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSSalesToHospitalityLicenseesAndSpecialEventPermittees.feature">
+    <None Update="RuralLicenseeRetailStoreSalesToHospitalityLicenseesAndSpecialEventPermittees.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSRequestRelocation.feature">
+    <None Update="RuralLicenseeRetailStoreRequestRelocation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSDownloadLicence.feature">
+    <None Update="RuralLicenseeRetailStoreDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="RuralLRSApplication.feature">
+    <None Update="RuralLicenseeRetailStoreApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UBrewUVinLicensingRenewal.feature">
+    <None Update="UbrewUvinLicensingRenewal.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="PermanentChangeToLicensee.feature">
@@ -354,22 +354,22 @@
     <None Update="_archived_RuralAgencyStoreDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UBrewUVinRelease.feature">
+    <None Update="UbrewUvinRelease.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UBrewUVinDownloadLicence.feature">
+    <None Update="UbrewUvinDownloadLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UBrewUVinEstablishmentNameChange.feature">
+    <None Update="UbrewUvinEstablishmentNameChange.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UBrewUVinAddOrChangeAThirdPartyOperator.feature">
+    <None Update="UbrewUvinAddOrChangeAThirdPartyOperator.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UBrewUVinTransferLicence.feature">
+    <None Update="UbrewUvinTransferLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UBrewUVinApplication.feature">
+    <None Update="UbrewUvinApplication.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="CannabisMarketingApplication.feature">
@@ -474,7 +474,7 @@
     <None Update="CombinedCateringCrsApplications.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LocalGovtApprovalLocalRuralStoreRelocation.feature">
+    <None Update="LocalGovtApprovalLicenseeRetailStoreRelocation.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="LocalGovernmentApprovalPicnicArea.feature">
