@@ -1,0 +1,54 @@
+<div class="ml-4 mr-4">
+    <h1>{{title}}</h1>
+    <section class="m-3 mat-elevation-z0" [innerHtml]="body">
+    </section>
+
+    <section class="d-flex justify-content-around m-3">
+        <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
+            <mat-card-header>
+                <mat-card-title>Secure Sign In</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    Sign into our secure portal to create or view multiple permit applications
+                </p>
+                <section style="border: 2px solid #fff; border-radius: 5px;"
+                    class="d-flex flex-column align-items-center pb-3">
+                    <h4>Login Using Business BCeID</h4>
+                    <div class="d-flex justify-content-around w-100">
+                        <button mat-raised-button color="secondary"
+                            (click)="window.location.href='https://www.bceid.ca/register/'">
+                            Register for BCeID
+                        </button>
+                        <button [disabled]="disableLogin" mat-raised-button color="primary"
+                            (click)="window.location.href='login?source=sep'">
+                            Login with BCeID
+                        </button>
+                    </div>
+                </section>
+                <section style="border: 2px solid #fff; border-radius: 5px;"
+                    class="d-flex flex-column align-items-center mt-2 pb-3">
+                    <h4>BC Services Card</h4>
+                    <div class="d-flex justify-content-around w-100">
+                        <button [disabled]="disableLogin" mat-raised-button color="primary"
+                            (click)="window.location.href='bcservice?source=sep'">Login with BC Services
+                            Card</button>
+                    </div>
+                </section>
+            </mat-card-content>
+        </mat-card>
+        <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
+            <mat-card-header>
+                <mat-card-title>Apply as Guest</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="d-flex flex-column align-items-center">
+                <p>
+                    If you are applying for a simple event for less than 500 people and [other low risk profile
+                    criteria] you may apply as a guest:
+                </p>
+                <button style="margin: auto;" mat-raised-button color="primary">Apply as Guest</button>
+            </mat-card-content>
+        </mat-card>
+    </section>
+
+</div>
