@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: UBrewUVinLicensingRenewal
+Feature: UbrewUvinLicensingRenewal
     As a logged in business user
     I want to pay the first year licensing fee for an approved UBrew/UVin Application
     And renew the licence
@@ -30,9 +30,9 @@ Scenario: Today Negative Licence Renewal (UBrew)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinLicensingRenewal.feature")]
+    [FeatureFile("./UbrewUvinLicensingRenewal.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinLicensingRenewal : TestBase
+    public sealed class UbrewUvinLicensingRenewal : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

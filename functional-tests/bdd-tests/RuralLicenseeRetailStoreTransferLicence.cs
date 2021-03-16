@@ -1,9 +1,13 @@
-﻿Feature: RuralLRSAddOrChangeAThirdPartyOperator
+﻿using Xunit;
+using Xunit.Gherkin.Quick;
+
+/*
+Feature: RuralLicenseeRetailStoreTransferLicence
     As a logged in business user
-    I want to request a third party operator for a rural LRS application
+    I want to request a licence transfer for a rural LRS application
 
 @privatecorporation @ruralLRS
-Scenario: Rural LRS Third Party Operator (Private Corporation)
+Scenario: Rural LRS Licence Transfer (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a private corporation
@@ -14,12 +18,12 @@ Scenario: Rural LRS Third Party Operator (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a third party operator
+    And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
 
 @publiccorporation @ruralLRS 
-Scenario: Rural LRS Third Party Operator (Public Corporation)
+Scenario: Rural LRS Licence Transfer (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a public corporation
@@ -30,12 +34,12 @@ Scenario: Rural LRS Third Party Operator (Public Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a third party operator
+    And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
 
 @partnership @ruralLRS 
-Scenario: Rural LRS Third Party Operator (Partnership)
+Scenario: Rural LRS Licence Transfer (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a partnership
@@ -46,12 +50,12 @@ Scenario: Rural LRS Third Party Operator (Partnership)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a third party operator
+    And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
 
 @society @ruralLRS 
-Scenario: Rural LRS Third Party Operator (Society)
+Scenario: Rural LRS Licence Transfer (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a society
@@ -62,12 +66,12 @@ Scenario: Rural LRS Third Party Operator (Society)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a third party operator
+    And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
 
 @soleproprietorship @ruralLRS
-Scenario: Rural LRS Third Party Operator (Sole Proprietorship)
+Scenario: Rural LRS Licence Transfer (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a sole proprietorship
@@ -78,6 +82,29 @@ Scenario: Rural LRS Third Party Operator (Sole Proprietorship)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a third party operator
+    And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
+*/
+
+namespace bdd_tests
+{
+    [FeatureFile("./RuralLicenseeRetailStoreTransferLicence.feature")]
+    [Collection("Cannabis")]
+    public sealed class RuralLicenseeRetailStoreTransferLicence : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as a(.*)")]
+        public void LogInToDashboard(string businessType)
+        {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureLEConnections();
+
+            IgnoreSynchronizationFalse();
+
+            CarlaLogin(businessType);
+        }
+    }
+}

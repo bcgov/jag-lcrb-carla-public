@@ -1,8 +1,4 @@
-﻿using Xunit;
-using Xunit.Gherkin.Quick;
-
-/*
-Feature: RuralLRSDownloadLicence
+﻿Feature: RuralLicenseeRetailStoreDownloadLicence
     As a logged in business user
     I want to download a licence for a rural LRS application
 
@@ -21,26 +17,3 @@ Scenario: Rural LRS Download Licence (Private Corporation)
     And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page
-*/
-
-namespace bdd_tests
-{
-    [FeatureFile("./RuralLRSDownloadLicence.feature")]
-    [Collection("Cannabis")]
-    public sealed class RuralLRSDownloadLicence : TestBase
-    {
-        [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void LogInToDashboard(string businessType)
-        {
-            NavigateToFeatures();
-
-            CheckFeatureFlagsLicenseeChanges();
-
-            CheckFeatureLEConnections();
-
-            IgnoreSynchronizationFalse();
-
-            CarlaLogin(businessType);
-        }
-    }
-}

@@ -1,4 +1,8 @@
-﻿Feature: RuralLRSApplication
+﻿using Xunit;
+using Xunit.Gherkin.Quick;
+
+/*
+Feature: RuralLicenseeRetailStore
     As a logged in business user
     I want to submit a rural LRS application for different business types
 
@@ -66,3 +70,26 @@ Scenario: Rural LRS Application (Sole Proprietorship)
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
+*/
+
+namespace bdd_tests
+{
+    [FeatureFile("./RuralLicenseeRetailStore.feature")]
+    [Collection("Cannabis")]
+    public sealed class RuralLicenseeRetailStoreApplication : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as a(.*)")]
+        public void LogInToDashboard(string businessType)
+        {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureLEConnections();
+
+            IgnoreSynchronizationFalse();
+
+            CarlaLogin(businessType);
+        }
+    }
+}

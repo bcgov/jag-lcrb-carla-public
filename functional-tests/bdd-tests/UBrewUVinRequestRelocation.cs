@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: UBrewUVinRequestRelocation
+Feature: UbrewUvinRequestRelocation
     As a logged in business user
     I want to submit a relocation request for a UBrew / UVin licence
 
@@ -28,9 +28,9 @@ Scenario: UBrew / UVin Request Relocation (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinRequestRelocation.feature")]
+    [FeatureFile("./UbrewUvinRequestRelocation.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinRequestRelocation : TestBase
+    public sealed class UbrewUvinRequestRelocation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

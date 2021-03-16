@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: UBrewUVinTransferLicence
+Feature: UbrewUvinTransferLicence
     As a logged in business user
     I want to submit a UBrew / UVin Licence transfer for different business types
 
@@ -85,9 +85,9 @@ Scenario: UBrew / UVin Application Transfer Licence (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinTransferLicence.feature")]
+    [FeatureFile("./UbrewUvinTransferLicence.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinTransferLicence : TestBase
+    public sealed class UbrewUvinTransferLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

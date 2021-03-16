@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: UBrewUVinAddOrChangeAThirdPartyOperator
+Feature: UbrewUvinAddOrChangeAThirdPartyOperator
     As a logged in business user
     I want to submit a UBrew / UVin Licence third party operator applicaation for different business types
 
@@ -93,9 +93,9 @@ Scenario: UBrew / UVin Application Third Party Operator (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinAddOrChangeAThirdPartyOperator.feature")]
+    [FeatureFile("./UbrewUvinAddOrChangeAThirdPartyOperator.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinAddOrChangeAThirdPartyOperator : TestBase
+    public sealed class UbrewUvinAddOrChangeAThirdPartyOperator : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
