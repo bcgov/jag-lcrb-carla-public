@@ -1,26 +1,37 @@
-﻿using Microsoft.Dynamics365.UIAutomation.Api;
+﻿using System.Collections.Generic;
+using Microsoft.ApplicationInsights;
+using Microsoft.Dynamics365.UIAutomation.Api;
 using Microsoft.Dynamics365.UIAutomation.Browser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasyReproTest
 {
     public class Telemetry
     {
-        private string _key = "";
         private string _executionId = "";
+        private string _key = "";
         private string _requestId = "";
 
-        public Telemetry AzureKey(string key) { _key = key; return this; }
-        public Telemetry ExecutionId(string id) { _executionId = id; return this; }
-        public Telemetry RequestId(string id) { _requestId = id; return this; }
+        public Telemetry AzureKey(string key)
+        {
+            _key = key;
+            return this;
+        }
+
+        public Telemetry ExecutionId(string id)
+        {
+            _executionId = id;
+            return this;
+        }
+
+        public Telemetry RequestId(string id)
+        {
+            _requestId = id;
+            return this;
+        }
 
         public void TrackEvents(List<PerformanceMarker> results)
         {
-            var telemetry = new Microsoft.ApplicationInsights.TelemetryClient { InstrumentationKey = _key };
+            var telemetry = new TelemetryClient {InstrumentationKey = _key};
 
             var properties = new Dictionary<string, string>();
             var metrics = new Dictionary<string, double>();
@@ -28,29 +39,29 @@ namespace EasyReproTest
             properties.Add("ExecutionId", _executionId);
             properties.Add("RequestId", _requestId);
 
-            foreach (PerformanceMarker result in results)
-            {
+            foreach (var result in results)
                 if (metrics.ContainsKey(result.Name))
                 {
                     var existingValue = metrics[result.Name];
-                    if (existingValue < (double)result.ExecutionTime)
-                        metrics[result.Name] = (double)result.ExecutionTime;
+                    if (existingValue < result.ExecutionTime)
+                        metrics[result.Name] = result.ExecutionTime;
                 }
                 else
-                    metrics.Add(result.Name, (double)result.ExecutionTime);
-            }
+                {
+                    metrics.Add(result.Name, result.ExecutionTime);
+                }
 
             telemetry.TrackEvent("Performance Markers", properties, metrics);
 
             telemetry.Flush();
         }
+
         public void TrackEvents(List<ICommandResult> results)
         {
-            var telemetry = new Microsoft.ApplicationInsights.TelemetryClient { InstrumentationKey = _key };
+            var telemetry = new TelemetryClient {InstrumentationKey = _key};
 
-            foreach (ICommandResult result in results)
+            foreach (var result in results)
             {
-
                 var properties = new Dictionary<string, string>();
                 var metrics = new Dictionary<string, double>();
 
@@ -64,7 +75,6 @@ namespace EasyReproTest
                 metrics.Add("ExecutionAttempts", result.ExecutionAttempts);
 
                 telemetry.TrackEvent(result.CommandName, properties, metrics);
-
             }
 
             telemetry.Flush();

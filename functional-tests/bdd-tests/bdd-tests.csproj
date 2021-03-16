@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="map-search.feature" />          
+    <None Remove="map-search.feature" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="map-search.feature">
