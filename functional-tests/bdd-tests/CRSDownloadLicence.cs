@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: CRSDownloadLicence
+Feature: CrsDownloadLicence
     As a logged in business user
     I want to submit a CRS Application for different business types
     And download the licence for the approved application
@@ -36,9 +25,9 @@ Scenario: Download Licence (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSDownloadLicence.feature")]
+    [FeatureFile("./CrsDownloadLicence.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSDownloadLicence : TestBase
+    public sealed class CrsDownloadLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

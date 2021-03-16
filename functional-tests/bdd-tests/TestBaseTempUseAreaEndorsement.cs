@@ -1,20 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
@@ -34,56 +20,58 @@ namespace bdd_tests
             */
 
             // create test data
-            string patioCompDescription = "Patio comp description.";
-            string patioAccessControlDescription = "Patio access control description.";
-            string patioLiquorCarriedDescription = "Patio liquor carried description.";
-            string removeIntoxicatedPatrons = "Removal of intoxicated patrons description.";
-            string respectForNeighbours = "Respect for neighbours description.";
-            string areaDescription = "Area description.";
-            string occupantLoad = "180";
+            var patioCompDescription = "Patio comp description.";
+            var patioAccessControlDescription = "Patio access control description.";
+            var patioLiquorCarriedDescription = "Patio liquor carried description.";
+            var removeIntoxicatedPatrons = "Removal of intoxicated patrons description.";
+            var respectForNeighbours = "Respect for neighbours description.";
+            var areaDescription = "Area description.";
+            var occupantLoad = "180";
 
             // enter patio comp description
-            NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
+            var uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
             uiPatioCompDescription.SendKeys(patioCompDescription);
 
             // enter patio access control description
-            NgWebElement uiPatioAccessControlDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
+            var uiPatioAccessControlDescription =
+                ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
             uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
             // enter patio liquor carried description
-            NgWebElement uiPatioLiquorCarriedDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
+            var uiPatioLiquorCarriedDescription =
+                ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
 
             // enter removal of intoxicated patrons description
-            NgWebElement uiRemoveIntoxicatedPatrons = ngDriver.FindElement(By.CssSelector("textarea#description1"));
+            var uiRemoveIntoxicatedPatrons = ngDriver.FindElement(By.CssSelector("textarea#description1"));
             uiRemoveIntoxicatedPatrons.SendKeys(removeIntoxicatedPatrons);
 
             // enter respect for neighbours
-            NgWebElement uiRespectForNeighbours = ngDriver.FindElement(By.CssSelector("textarea#description2"));
+            var uiRespectForNeighbours = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiRespectForNeighbours.SendKeys(respectForNeighbours);
 
             // click Fixed option
-            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-25-button"));
+            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-25-button"));
             JavaScriptClick(uiFixedOption);
 
             // click Portable option
-            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-26-button"));
+            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-26-button"));
             uiPortableOption.Click();
 
             // click Interior option
-            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-27-button"));
+            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-27-button"));
             uiInteriorOption.Click();
 
             // select the outside areas button
-            NgWebElement uiOutsideAreas = ngDriver.FindElement(By.CssSelector("[formcontrolname='outsideAreas'] button"));
+            var uiOutsideAreas = ngDriver.FindElement(By.CssSelector("[formcontrolname='outsideAreas'] button"));
             uiOutsideAreas.Click();
 
             // enter the area description
-            NgWebElement uiAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
+            var uiAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));
             uiAreaDescription.SendKeys(areaDescription);
 
             // enter the occupant load
-            NgWebElement uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
+            var uiOccupantLoad = ngDriver.FindElement(By.CssSelector("input[formcontrolname='capacity']"));
             uiOccupantLoad.SendKeys(occupantLoad);
 
             // upload the signage document
@@ -96,18 +84,20 @@ namespace bdd_tests
             FileUpload("associates.pdf", "(//input[@type='file'])[8]");
 
             // click on the authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
+            var uiAuthorizedToSubmit =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
 
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
+            var uiSignatureAgreement =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
             // retrieve the current URL to get the application ID (needed downstream)
-            string URL = ngDriver.Url;
+            var URL = ngDriver.Url;
 
             // retrieve the application ID
-            string[] parsedURL = URL.Split('/');
+            var parsedURL = URL.Split('/');
 
             endorsementID = parsedURL[5];
         }

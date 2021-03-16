@@ -1,4 +1,4 @@
-﻿Feature: CRSTransferLicence
+﻿Feature: CrsTransferLicence
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a transfer of ownership for the approved application

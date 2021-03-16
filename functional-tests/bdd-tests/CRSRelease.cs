@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: CRSRelease
+Feature: CrsRelease
     As a logged in business user
     I want to confirm that the CRS functionality is ready for release
 
@@ -82,9 +71,9 @@ Scenario: CRS Release (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSRelease.feature")]
+    [FeatureFile("./CrsRelease.feature")]
     [Collection("Liquor")]
-    public sealed class CRSRelease : TestBase
+    public sealed class CrsRelease : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

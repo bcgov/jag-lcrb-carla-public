@@ -1,4 +1,4 @@
-﻿Feature: CRSTermsAndConditions
+﻿Feature: CrsTermsAndConditions
     As a logged in business user
     I want to confirm the Terms and Conditions for a CRS licence 
 

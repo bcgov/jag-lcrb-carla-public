@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: CRSRequestStoreNameOrBrandingChange
+Feature: CrsRequestStoreNameOrBrandingChange
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a valid name or branding change for the approved application
@@ -97,9 +86,9 @@ Scenario: CRS Name Branding Change (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSRequestStoreNameOrBrandingChange.feature")]
+    [FeatureFile("./CrsRequestStoreNameOrBrandingChange.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSRequestStoreNameOrBrandingChange : TestBase
+    public sealed class CrsRequestStoreNameOrBrandingChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: CRSTermsAndConditions
+Feature: CrsTermsAndConditions
     As a logged in business user
     I want to confirm the Terms and Conditions for a CRS licence 
 
@@ -34,9 +23,9 @@ Scenario: CRS Terms and Conditions (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSTermsAndConditions.feature")]
+    [FeatureFile("./CrsTermsAndConditions.feature")]
     [Collection("Liquor")]
-    public sealed class CRSTermsAndConditions : TestBase
+    public sealed class CrsTermsAndConditions : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
