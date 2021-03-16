@@ -1,6 +1,6 @@
-﻿using Microsoft.Dynamics365.UIAutomation.Api;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.Dynamics365.UIAutomation.Api;
 using Xunit;
 
 namespace FunctionalTest
@@ -26,17 +26,17 @@ namespace FunctionalTest
 
             var fields = new List<Field>
             {
-                new Field() {Id = "firstname", Value = "Test"},
-                new Field() {Id = "lastname", Value = "Contact"}
+                new Field {Id = "firstname", Value = "Test"},
+                new Field {Id = "lastname", Value = "Contact"}
             };
             //6. Set the attribute values in the form
-            XrmTestBrowser.Entity.SetValue(new CompositeControl() { Id = "fullname", Fields = fields });
+            XrmTestBrowser.Entity.SetValue(new CompositeControl {Id = "fullname", Fields = fields});
             XrmTestBrowser.Entity.SetValue("emailaddress1", "test@contoso.com");
             XrmTestBrowser.Entity.SetValue("mobilephone", "555-555-5555");
             XrmTestBrowser.Entity.SetValue("birthdate", DateTime.Parse("11/1/1980"));
 
             //7. Save the new record
-            XrmTestBrowser.CommandBar.ClickCommand("Save");            
+            XrmTestBrowser.CommandBar.ClickCommand("Save");
         }
     }
 }

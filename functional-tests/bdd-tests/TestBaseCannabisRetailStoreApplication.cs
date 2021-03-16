@@ -1,20 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
@@ -93,18 +79,18 @@ namespace bdd_tests
             */
 
             // create application info
-            string estName = "Point Ellis Greenhouse";
-            string estAddress = "645 Tyee Rd";
-            string estCity = "Victoria";
-            string estPostal = "V9A 6X5";
-            string estPID = "012345678";
-            string estEmail = "test@test.com";
-            string estPhone = "2505555555";
-            string conRole = "CEO";
-            string conPhone = "2508888888";
-            string conEmail = "contact@email.com";
-            string indigenousNation = "Cowichan Tribes";
-            string policeJurisdiction = "RCMP Shawnigan Lake";
+            var estName = "Point Ellis Greenhouse";
+            var estAddress = "645 Tyee Rd";
+            var estCity = "Victoria";
+            var estPostal = "V9A 6X5";
+            var estPID = "012345678";
+            var estEmail = "test@test.com";
+            var estPhone = "2505555555";
+            var conRole = "CEO";
+            var conPhone = "2508888888";
+            var conEmail = "contact@email.com";
+            var indigenousNation = "Cowichan Tribes";
+            var policeJurisdiction = "RCMP Shawnigan Lake";
 
             if (businessType != " sole proprietorship")
             {
@@ -120,159 +106,128 @@ namespace bdd_tests
 
             // upload cannabis associate screening form
             if (businessType == " sole proprietorship")
-            {
                 FileUpload("cannabis_associate_security_screening.pdf", "(//input[@type='file'])[3]");
-            }
             else
-            {
                 FileUpload("cannabis_associate_security_screening.pdf", "(//input[@type='file'])[12]");
-            }
 
             // upload financial integrity form
             if (businessType == " sole proprietorship")
-            {
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[6]");
-            }
             else
-            {
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
-            }
 
             // upload shareholders < 10% interest
             if (businessType != " sole proprietorship")
-            {
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[18]");
-            }
 
             // enter the establishment name
-            NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
+            var uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address
-            NgWebElement uiEstabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
+            var uiEstabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
             uiEstabAddress.SendKeys(estAddress);
 
             // enter the establishment city
-            NgWebElement uiEstabCity = ngDriver.FindElement(By.Id("establishmentAddressCity"));
+            var uiEstabCity = ngDriver.FindElement(By.Id("establishmentAddressCity"));
             uiEstabCity.SendKeys(estCity);
 
             // enter the establishment postal code
-            NgWebElement uiEstabPostal = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
+            var uiEstabPostal = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
             uiEstabPostal.SendKeys(estPostal);
 
             // enter the PID
-            NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
+            var uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
             // search for and select the indigenous nation
-            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+            var uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
             uiIndigenousNation.SendKeys(indigenousNation);
 
-            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
+            var uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
             JavaScriptClick(uiIndigenousNation2);
 
             // search for and select the police jurisdiction
-            NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
+            var uiPoliceJurisdiction =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
             uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
-            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
+            var uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
             uiPoliceJurisdiction2.Click();
 
             // enter the store email
-            NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
+            var uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
             uiEstabEmail.SendKeys(estEmail);
 
             // enter the store phone number
-            NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
+            var uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
             // upload a store signage document
             if (businessType == " sole proprietorship")
-            {
                 FileUpload("signage.pdf", "(//input[@type='file'])[8]");
-            }
             else
-            {
                 FileUpload("signage.pdf", "(//input[@type='file'])[20]");
-            }
 
             // select not visible from outside checkbox
-            NgWebElement uiVisibleFromOutside = ngDriver.FindElement(By.CssSelector(".mat-checkbox-inner-container"));
+            var uiVisibleFromOutside = ngDriver.FindElement(By.CssSelector(".mat-checkbox-inner-container"));
             uiVisibleFromOutside.Click();
 
             // upload a floor plan document
             if (businessType == " sole proprietorship")
-            {
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[11]");
-            }
             else
-            {
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[23]");
-            }
 
             // upload a site plan document
             if (businessType == " sole proprietorship")
-            {
                 FileUpload("site_plan.pdf", "(//input[@type='file'])[14]");
-            }
             else
-            {
                 FileUpload("site_plan.pdf", "(//input[@type='file'])[26]");
-            }
 
             // upload a financial integrity form
             if (businessType == " sole proprietorship")
-            {
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[18]");
-            }
             else
-            {
                 FileUpload("fin_integrity.pdf", "(//input[@type='file'])[30]");
-            }
 
             // upload a ownership details document
             if (businessType == " private corporation")
-            {
                 FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
-            }
 
             // upload a ownership details document
             if (businessType != " sole proprietorship")
-            {
                 FileUpload("ownership_details.pdf", "(//input[@type='file'])[33]");
-            }
 
             // upload a ownership details document
             if (businessType == " sole proprietorship")
-            {
                 FileUpload("ownership_details.pdf", "(//input[@type='file'])[21]");
-            }
 
             // enter the role of the application contact
-            NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
+            var uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
             uiContactRole.SendKeys(conRole);
 
             // enter the phone number of the application contact
-            NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonPhone]"));
+            var uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonPhone]"));
             uiContactPhone.SendKeys(conPhone);
 
             // enter the email of the application contact
-            NgWebElement uiContactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
+            var uiContactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
             uiContactEmail.SendKeys(conEmail);
 
             // click on the authorized to submit checkbox
-            NgWebElement uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            var uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             uiAuthorizedSubmit.Click();
 
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
+            var uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgree.Click();
 
             // retrieve the current URL to get the application ID (needed downstream)
-            string URL = ngDriver.Url;
+            var URL = ngDriver.Url;
 
             // retrieve the application ID
-            string[] parsedURL = URL.Split('/');
+            var parsedURL = URL.Split('/');
 
             applicationID = parsedURL[5];
         }
