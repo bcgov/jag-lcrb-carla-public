@@ -34,7 +34,11 @@ namespace bdd_tests
             {
                 Assert.True(ngDriver
                     .FindElement(By.XPath(
-                        "//body[contains(.,' For sale and service of liquor at another person's event where food service is catered by the licensee, unless otherwise permitted. ')]"))
+                        "//body[contains(.,' For sale and service of liquor at another person')]"))
+                    .Displayed);
+                Assert.True(ngDriver
+                    .FindElement(By.XPath(
+                        "//body[contains(.,'s event where food service is catered by the licensee, unless otherwise permitted. ')]"))
                     .Displayed);
                 Assert.True(ngDriver.FindElement(By.XPath(
                         "//body[contains(.,' The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time. ')]"))
