@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: RuralLRSAddOrChangeAThirdPartyOperator
+Feature: RuralLicenseeRetailStoreAddOrChangeAThirdPartyOperator
     As a logged in business user
     I want to request a third party operator for a rural LRS application
 
@@ -89,9 +89,9 @@ Scenario: Rural LRS Third Party Operator (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./RuralLRSAddOrChangeAThirdPartyOperator.feature")]
+    [FeatureFile("./RuralLicenseeRetailStoreAddOrChangeAThirdPartyOperator.feature")]
     [Collection("Cannabis")]
-    public sealed class RuralLRSAddOrChangeAThirdPartyOperator : TestBase
+    public sealed class RuralLicenseeRetailStoreAddOrChangeAThirdPartyOperator : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
