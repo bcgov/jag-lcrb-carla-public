@@ -1,20 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
@@ -27,12 +13,12 @@ namespace bdd_tests
             Page Title: Submit the Cannabis Marketing Licence Application
             */
 
-            string nameOfFederalProducer = "Canadian Cannabis";
-            string marketerConnectionToCrsDetails = "Details of association (marketer to store)";
-            string crsConnectionToMarketer = "Details of association (store to marketer)";
-            string contactTitle = "VP Marketing";
-            string contactPhone = "5555555555";
-            string contactEmail = "vp@cannabis_marketing.com";
+            var nameOfFederalProducer = "Canadian Cannabis";
+            var marketerConnectionToCrsDetails = "Details of association (marketer to store)";
+            var crsConnectionToMarketer = "Details of association (store to marketer)";
+            var contactTitle = "VP Marketing";
+            var contactPhone = "5555555555";
+            var contactEmail = "vp@cannabis_marketing.com";
 
             // upload a central securities register
             FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -52,31 +38,37 @@ namespace bdd_tests
             // upload shareholders < 10% interest
             FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[18]");
 
-            if ((bizType != "a local government") && (bizType != "a university"))
+            if (bizType != "a local government" && bizType != "a university")
             {
                 // enter name of federal producer
-                NgWebElement uiFederalProducer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='federalProducerNames']"));
+                var uiFederalProducer =
+                    ngDriver.FindElement(By.CssSelector("input[formcontrolname='federalProducerNames']"));
                 uiFederalProducer.SendKeys(nameOfFederalProducer);
 
                 // select 'Yes'
                 // Does the corporation have any association, connection or financial interest in a B.C. non-medical cannabis retail store licensee or applicant of cannabis?
-                NgWebElement uiMarketerConnectionToCrs = ngDriver.FindElement(By.CssSelector("input[formcontrolname='marketerConnectionToCrs'][type='radio'][value='Yes']"));
+                var uiMarketerConnectionToCrs = ngDriver.FindElement(
+                    By.CssSelector("input[formcontrolname='marketerConnectionToCrs'][type='radio'][value='Yes']"));
                 uiMarketerConnectionToCrs.Click();
 
                 // enter the details
-                NgWebElement uiMarketerConnectionToCrsDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='marketerConnectionToCrsDetails']"));
+                var uiMarketerConnectionToCrsDetails =
+                    ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='marketerConnectionToCrsDetails']"));
                 uiMarketerConnectionToCrsDetails.SendKeys(marketerConnectionToCrsDetails);
 
                 // !society !indigenousnation
-                if ((bizType == "a private corporation") || (bizType == "a partnership"))
+                if (bizType == "a private corporation" || bizType == "a partnership")
                 {
                     // select 'Yes'
                     // Does a B.C. non-medical cannabis retail store licensee or applicant of cannabis have any association, connection or financial interest in the corporation? 
-                    NgWebElement uiCrsConnectionToMarketer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
+                    var uiCrsConnectionToMarketer = ngDriver.FindElement(
+                        By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
                     uiCrsConnectionToMarketer.Click();
 
                     // enter the details
-                    NgWebElement uiCrsConnectionToMarketerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
+                    var uiCrsConnectionToMarketerDetails =
+                        ngDriver.FindElement(
+                            By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
                     uiCrsConnectionToMarketerDetails.SendKeys(crsConnectionToMarketer);
                 }
 
@@ -84,11 +76,14 @@ namespace bdd_tests
                 {
                     // select 'Yes'
                     // Does any shareholder with 20% or more voting shares have any association, connection or financial interest in a B.C. non-medical cannabis retail store licensee or applicant of cannabis?
-                    NgWebElement uiCrsConnectionToMarketer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
+                    var uiCrsConnectionToMarketer = ngDriver.FindElement(
+                        By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
                     uiCrsConnectionToMarketer.Click();
 
                     // enter the details
-                    NgWebElement uiCrsConnectionToMarketerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
+                    var uiCrsConnectionToMarketerDetails =
+                        ngDriver.FindElement(
+                            By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
                     uiCrsConnectionToMarketerDetails.SendKeys(crsConnectionToMarketer);
                 }
 
@@ -96,11 +91,14 @@ namespace bdd_tests
                 {
                     // select 'Yes'
                     // Does the sole proprietor have an immediate family member that has any interest in a licensee or applicant?
-                    NgWebElement uiCrsConnectionToMarketer = ngDriver.FindElement(By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
+                    var uiCrsConnectionToMarketer = ngDriver.FindElement(
+                        By.CssSelector("input[formcontrolname='crsConnectionToMarketer'][type='radio'][value='Yes']"));
                     uiCrsConnectionToMarketer.Click();
 
                     // enter the details
-                    NgWebElement uiCrsConnectionToMarketerDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
+                    var uiCrsConnectionToMarketerDetails =
+                        ngDriver.FindElement(
+                            By.CssSelector("textarea[formcontrolname='crsConnectionToMarketerDetails']"));
                     uiCrsConnectionToMarketerDetails.SendKeys(crsConnectionToMarketer);
                 }
             }
@@ -115,27 +113,32 @@ namespace bdd_tests
             FileUpload("central_securities_register.pdf", "(//input[@type='file'])[23]");
 
             // enter the contact title
-            NgWebElement uiContactPersonRole = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
+            var uiContactPersonRole =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
             uiContactPersonRole.SendKeys(contactTitle);
 
             // enter the contact phone number
-            NgWebElement uiContactPersonPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
+            var uiContactPersonPhone =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
             uiContactPersonPhone.SendKeys(contactPhone);
 
             // enter the contact email address
-            NgWebElement uiContactPersonEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonEmail']"));
+            var uiContactPersonEmail =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonEmail']"));
             uiContactPersonEmail.SendKeys(contactEmail);
 
             // select authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
+            var uiAuthorizedToSubmit =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizedToSubmit.Click();
 
             // select signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
+            var uiSignatureAgreement =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
             // retrieve the application ID
-            string[] parsedURL = ngDriver.Url.Split('/');
+            var parsedURL = ngDriver.Url.Split('/');
 
             applicationID = parsedURL[5];
         }

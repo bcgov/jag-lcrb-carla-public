@@ -1,20 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
@@ -28,26 +14,26 @@ namespace bdd_tests
             */
 
             // create test data
-            string estName = "Point Ellis Greenhouse";
-            string estAddress = "645 Tyee Rd";
-            string estCity = "Victoria";
-            string estPostal = "V9A 6X5";
-            string estPID = "012345678";
+            var estName = "Point Ellis Greenhouse";
+            var estAddress = "645 Tyee Rd";
+            var estCity = "Victoria";
+            var estPostal = "V9A 6X5";
+            var estPID = "012345678";
 
-            string estEmail = "test@test.com";
-            string estPhone = "2505555555";
+            var estEmail = "test@test.com";
+            var estPhone = "2505555555";
 
-            string patioCompDescription = "Sample patio comp description";
-            string patioLocationDescription = "Sample patio location description";
-            string patioAccessDescription = "Sample patio access description";
-            string patioLiquorCarriedDescription = "Sample liquor carried description";
-            string patioAccessControlDescription = "Sample patio access control description";
+            var patioCompDescription = "Sample patio comp description";
+            var patioLocationDescription = "Sample patio location description";
+            var patioAccessDescription = "Sample patio access description";
+            var patioLiquorCarriedDescription = "Sample liquor carried description";
+            var patioAccessControlDescription = "Sample patio access control description";
 
-            string conRole = "CEO";
-            string conPhone = "2508888888";
-            string conEmail = "contact@email.com";
-            string indigenousNation = "Cowichan Tribes";
-            string policeJurisdiction = "RCMP Shawnigan Lake";
+            var conRole = "CEO";
+            var conPhone = "2508888888";
+            var conEmail = "contact@email.com";
+            var indigenousNation = "Cowichan Tribes";
+            var policeJurisdiction = "RCMP Shawnigan Lake";
 
             // upload a central securities register
             FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -85,133 +71,130 @@ namespace bdd_tests
             */
 
             // enter the establishment name
-            NgWebElement uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
+            var uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address
-            NgWebElement uiEstabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
+            var uiEstabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
             uiEstabAddress.SendKeys(estAddress);
 
             // enter the establishment city
-            NgWebElement uiEstabCity = ngDriver.FindElement(By.Id("establishmentAddressCity"));
+            var uiEstabCity = ngDriver.FindElement(By.Id("establishmentAddressCity"));
             uiEstabCity.SendKeys(estCity);
 
             // enter the establishment postal code
-            NgWebElement uiEstabPostal = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
+            var uiEstabPostal = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
             uiEstabPostal.SendKeys(estPostal);
 
             // enter the PID
-            NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
+            var uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
             // select the zoning checkbox
-            NgWebElement uiIsPermittedInZoning = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
+            var uiIsPermittedInZoning =
+                ngDriver.FindElement(
+                    By.CssSelector(
+                        "mat-checkbox[formcontrolname='isPermittedInZoning'] .mat-checkbox-inner-container"));
             JavaScriptClick(uiIsPermittedInZoning);
 
             // search for and select the indigenous nation
-            NgWebElement uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
+            var uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
             uiIndigenousNation.SendKeys(indigenousNation);
 
-            NgWebElement uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
+            var uiIndigenousNation2 = ngDriver.FindElement(By.CssSelector("#mat-option-0 span"));
             JavaScriptClick(uiIndigenousNation2);
 
             // search for and select the police jurisdiction
-            NgWebElement uiPoliceJurisdiction = ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
+            var uiPoliceJurisdiction =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
             uiPoliceJurisdiction.SendKeys(policeJurisdiction);
 
-            NgWebElement uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
+            var uiPoliceJurisdiction2 = ngDriver.FindElement(By.CssSelector("#mat-option-2 span"));
             JavaScriptClick(uiPoliceJurisdiction2);
 
             // enter the store email
-            NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
+            var uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
             uiEstabEmail.SendKeys(estEmail);
 
             // enter the store phone number
-            NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
+            var uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
             // select 'Yes' for patio
-            NgWebElement uiHasPatio = ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-13"));
+            var uiHasPatio =
+                ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-13"));
             uiHasPatio.Click();
 
             // enter the patio comp description
-            NgWebElement uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
+            var uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
             uiPatioCompDescription.SendKeys(patioCompDescription);
 
             // enter the patio location description
-            NgWebElement uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
+            var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
             uiPatioLocationDescription.SendKeys(patioLocationDescription);
 
             // enter the patio access description
-            NgWebElement uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
+            var uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
             uiPatioAccessDescription.SendKeys(patioAccessDescription);
 
             // click patio liquor is carried checkbox
-            NgWebElement uiPatioIsLiquorCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox#patioIsLiquorCarried"));
+            var uiPatioIsLiquorCarried = ngDriver.FindElement(By.CssSelector("mat-checkbox#patioIsLiquorCarried"));
             uiPatioIsLiquorCarried.Click();
 
             // enter patio liquor carried description
-            NgWebElement uiPatioLiquorCarriedDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
+            var uiPatioLiquorCarriedDescription =
+                ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
 
             // enter patio access control description
-            NgWebElement uiPatioAccessControlDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
+            var uiPatioAccessControlDescription =
+                ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
             uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
             // click Fixed option
-            NgWebElement uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
             uiFixedOption.Click();
 
             // click Portable option
-            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
+            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
             uiPortableOption.Click();
 
             // click Interior option
-            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
+            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
             uiInteriorOption.Click();
 
-            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
-            {
+            if (bizType == "partnership" || bizType == "public corporation" || bizType == "society")
                 // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[5]");
-            }
             else if (bizType == "private corporation")
-            {
                 // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[17]");
-            }
             else if (bizType == "sole proprietorship")
-            {
                 // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[2]");
-            }
 
-            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
-            {
+            if (bizType == "partnership" || bizType == "public corporation" || bizType == "society")
                 // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
-            }
             else if (bizType == "private corporation")
-            {
                 // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[20]");
-            }
             else if (bizType == "sole proprietorship")
-            {
                 // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[5]");
-            }
 
             // select the owner checkbox
-            NgWebElement uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwnerBusiness']"));
+            var uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwnerBusiness']"));
             uiOwner.Click();
 
             // select the valid interest checkbox
-            NgWebElement uiValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='hasValidInterest']"));
+            var uiValidInterest =
+                ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='hasValidInterest']"));
             uiValidInterest.Click();
 
             // select the future valid interest checkbox
-            NgWebElement uiFutureValidInterest = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willHaveValidInterest']"));
+            var uiFutureValidInterest =
+                ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willHaveValidInterest']"));
             uiFutureValidInterest.Click();
 
             /*
@@ -235,32 +218,32 @@ namespace bdd_tests
             */
 
             // enter the role of the application contact
-            NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
+            var uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
             uiContactRole.SendKeys(conRole);
 
             // enter the phone number of the application contact
-            NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonPhone]"));
+            var uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonPhone]"));
             uiContactPhone.SendKeys(conPhone);
 
             // enter the email of the application contact
-            NgWebElement uiContactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
+            var uiContactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
             uiContactEmail.SendKeys(conEmail);
 
             // click on the authorized to submit checkbox
-            NgWebElement uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            var uiAuthorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             uiAuthorizedSubmit.Click();
 
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
+            var uiSignatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgree.Click();
 
             // retrieve the current URL to get the application ID (needed downstream)
-            string URL = ngDriver.Url;
+            var URL = ngDriver.Url;
 
             // retrieve the application ID
-            string[] parsedURL = URL.Split('/');
+            var parsedURL = URL.Split('/');
 
-            string[] tempFix = parsedURL[5].Split(';');
+            var tempFix = parsedURL[5].Split(';');
 
             applicationID = tempFix[0];
         }

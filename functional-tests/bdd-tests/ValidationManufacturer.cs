@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: ValidationManufacturer
@@ -44,7 +33,7 @@ Scenario: Validation for Manufacturer Establishment Name Change
     And the application is approved
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I click on the branding change link for Manufacturing
+    And I click on the link for Establishment Name Change Application
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Branding Change application

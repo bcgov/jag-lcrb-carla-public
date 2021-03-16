@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: OneStopDynamics
@@ -289,7 +278,7 @@ Scenario: OneStop Licence Transfer Ownership (Private Corporation)
     And I pay the licensing fee
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Cannabis
     And the application is approved
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue

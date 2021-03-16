@@ -1,0 +1,55 @@
+﻿using Xunit;
+using Xunit.Gherkin.Quick;
+
+/*
+Feature: FoodPrimaryTermsAndConditions
+    As a logged in business user
+    I want to confirm the Terms and Conditions for a Food Primary licence
+
+@foodprimary @privatecorporation
+Scenario: Food Primary Terms and Conditions (Private Corporation)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the Start Application button for Food Primary
+    And I review the account profile for a private corporation
+    And I complete the Food Primary application for a private corporation
+    And I click on the Submit button
+    And I enter the payment information
+    And I confirm the payment receipt for a Food Primary application
+    And I click on the Dashboard tab
+    And the dashboard status is updated as Application Under Review
+    And the application is approved
+    And I click on the Licences tab
+    And I confirm the terms and conditions for a Food Primary licence
+    And the account is deleted
+    Then I see the login page
+*/
+
+namespace bdd_tests
+{
+    [FeatureFile("./FoodPrimaryTermsAndConditions.feature")]
+    [Collection("Liquor")]
+    public sealed class FoodPrimaryTermsAndConditions : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as a(.*)")]
+        public void LogInToDashboard(string businessType)
+        {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLiquorOne();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            CheckFeatureLEConnections();
+
+            IgnoreSynchronizationFalse();
+
+            CarlaLogin(businessType);
+        }
+    }
+}

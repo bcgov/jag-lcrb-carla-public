@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: UBrewUVinTransferLicence
@@ -32,7 +21,7 @@ Scenario: UBrew / UVin Application Transfer Licence (Partnership)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for UBrew / UVin
     And the account is deleted
     Then I see the login page
 
@@ -51,7 +40,7 @@ Scenario: UBrew / UVin Application Transfer Licence (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for UBrew / UVin
     And the account is deleted
     Then I see the login page
 
@@ -70,7 +59,7 @@ Scenario: UBrew / UVin Application Transfer Licence (Public Corporation)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for UBrew / UVin
     And the account is deleted
     Then I see the login page
 
@@ -89,7 +78,7 @@ Scenario: UBrew / UVin Application Transfer Licence (Sole Proprietorship)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a transfer of ownership
+    And I request a transfer of ownership for UBrew / UVin
     And the account is deleted
     Then I see the login page
 */

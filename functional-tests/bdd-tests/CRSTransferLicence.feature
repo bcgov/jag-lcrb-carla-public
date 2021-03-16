@@ -1,4 +1,4 @@
-﻿Feature: CRSTransferLicence
+﻿Feature: CrsTransferLicence
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a transfer of ownership for the approved application
@@ -14,7 +14,7 @@ Scenario: Cannabis Transfer Ownership (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee 
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
 
@@ -29,7 +29,7 @@ Scenario: Cannabis Transfer Ownership (Society)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee 
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
 
@@ -44,7 +44,7 @@ Scenario: Cannabis Transfer Ownership (Partnership)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
 
@@ -59,6 +59,6 @@ Scenario: Cannabis Transfer Ownership (Sole Proprietorship)
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
-    And I request a transfer of ownership
+    And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page

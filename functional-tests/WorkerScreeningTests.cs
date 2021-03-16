@@ -1,11 +1,10 @@
-﻿using Microsoft.Dynamics365.UIAutomation.Api;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Xunit;
-using RandomDataGenerator;
-using RandomDataGenerator.Randomizers;
-using RandomDataGenerator.FieldOptions;
+using Microsoft.Dynamics365.UIAutomation.Api;
 using OpenQA.Selenium;
+using RandomDataGenerator.FieldOptions;
+using RandomDataGenerator.Randomizers;
+using Xunit;
 
 namespace FunctionalTest
 {
@@ -14,17 +13,16 @@ namespace FunctionalTest
         [Fact]
         public void CreateWorkerScreening()
         {
-            string email = RandomizerFactory.GetRandomizer(new FieldOptionsEmailAddress()).Generate() + ".xom";
+            var email = RandomizerFactory.GetRandomizer(new FieldOptionsEmailAddress()).Generate() + ".xom";
 
-            string firstName = RandomizerFactory.GetRandomizer(new FieldOptionsFirstName()).Generate();
+            var firstName = RandomizerFactory.GetRandomizer(new FieldOptionsFirstName()).Generate();
 
-            string lastName = RandomizerFactory.GetRandomizer(new FieldOptionsLastName()).Generate() + "-WS-Test";
+            var lastName = RandomizerFactory.GetRandomizer(new FieldOptionsLastName()).Generate() + "-WS-Test";
 
-            
 
             // first create a contact.
 
-            
+
             // 1. Go to Sales/Accounts using the Sitemap
             XrmTestBrowser.Navigation.OpenSubArea("Licensing", "Contacts");
 
@@ -38,12 +36,12 @@ namespace FunctionalTest
 
             var fields = new List<Field>
             {
-                new Field() {Id = "firstname", Value = firstName},
-                new Field() {Id = "lastname", Value = lastName}
+                new Field {Id = "firstname", Value = firstName},
+                new Field {Id = "lastname", Value = lastName}
             };
 
             //3. Set the attribute values in the form
-            XrmTestBrowser.Entity.SetValue(new CompositeControl() { Id = "fullname", Fields = fields });
+            XrmTestBrowser.Entity.SetValue(new CompositeControl {Id = "fullname", Fields = fields});
             XrmTestBrowser.Entity.SetValue("emailaddress1", email);
             XrmTestBrowser.Entity.SetValue("mobilephone", "555-555-5555");
             XrmTestBrowser.Entity.SetValue("birthdate", DateTime.Parse("1/1/1970"));
@@ -59,7 +57,7 @@ namespace FunctionalTest
             // 3. Go to Sales/Accounts using the Sitemap
             XrmTestBrowser.Navigation.OpenSubArea("Compliance & Enforcement", "Worker Verifications");
 
-            
+
             //5. Click on the "New" button
             XrmTestBrowser.CommandBar.ClickCommand("New");
 
@@ -73,19 +71,18 @@ namespace FunctionalTest
 
             // Click on the contact field.
             XrmTestBrowser.ThinkTime(500);
-            IWebElement contactDiv = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid\"]"));
+            var contactDiv = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid\"]"));
             contactDiv.Click();
 
-             // set the contact
-             // Change the text field.
-             IWebElement contactIdText = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid_ledit\"]"));
+            // set the contact
+            // Change the text field.
+            var contactIdText = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid_ledit\"]"));
             contactIdText.SendKeys(firstName + " " + lastName);
 
             XrmTestBrowser.ThinkTime(500);
-            IWebElement userOrTeamDiv = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid_i\"]"));
+            var userOrTeamDiv = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid_i\"]"));
             userOrTeamDiv.Click();
 
-            
 
             // click the search button.
             //IWebElement searchButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid_lookupSearch\"]"));
@@ -93,11 +90,11 @@ namespace FunctionalTest
             //searchButton.Click();
 
             // find the first item and click on it.
-            IWebElement firstItem = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"item0\"]"));
+            var firstItem = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"item0\"]"));
             firstItem.Click();
 
             XrmTestBrowser.ThinkTime(1000);
-           
+
 
             // switch back to the main frame.
 
@@ -106,7 +103,7 @@ namespace FunctionalTest
             XrmTestBrowser.ThinkTime(500);
 
             // save the new record
-            XrmTestBrowser.CommandBar.ClickCommand("Save");            
+            XrmTestBrowser.CommandBar.ClickCommand("Save");
         }
     }
 }

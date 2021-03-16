@@ -14,6 +14,7 @@ import { CanDeactivateGuard } from "@services/can-deactivate-guard.service";
 import { BCeidAuthGuard } from "@services/bceid-auth-guard.service";
 import { ServiceCardAuthGuard } from "@services/service-card-auth-guard.service";
 import { DashboardComponent } from "@components/dashboard/dashboard.component";
+import { DashboardComponent as SepDashboardComponent } from "@components/sep/dashboard/dashboard.component";
 import { ApplicationComponent } from "@components/applications/application/application.component";
 import { WorkerQualificationComponent } from "@components/worker-qualification/worker-qualification.component";
 import { WorkerDashboardComponent } from "@components/worker-qualification/dashboard/dashboard.component";
@@ -79,12 +80,27 @@ import { LicenseeRetailStoresComponent } from "./components/licensee-retail-stor
 import { TuaEventComponent } from "@components/tua-event/tua-event.component";
 import { ApplicationTiedHouseExemptionComponent } from "@components/applications/application-tied-house-exemption/application-tied-house-exemption.component";
 import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-free-event.component";
+import { LoginComponent } from "@components/sep/login/login.component";
+import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-auth-guard.service";
 import { WorkerLandingPageComponent } from "@components/worker-qualification/worker-landing-page/worker-landing-page.component";
 
 const routes: Routes = [
   {
     path: "",
     component: HomeComponent
+  },
+  {
+    path: "sep",
+    component: LoginComponent,
+    canActivate: [FeatureGuard],
+    canDeactivate: [CanDeactivateGuard],
+    data: { feature: "Sep" }
+  },
+  {
+    path: "sep-dashboard",
+    component: SepDashboardComponent,
+    canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
+    data: { feature: "Sep" }
   },
   {
     path: "covid-temporary-extension",
