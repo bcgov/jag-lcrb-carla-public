@@ -241,7 +241,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       pin: ['', [this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
     });
 
-  
+
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.form.get('establishmentParcelId').updateValueAndValidity();
@@ -1479,8 +1479,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showValidInterestforTransfer() {
-    return this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
-      (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType === "Wine Store");
+    return (this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
+      (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType === "Wine Store")
+      || this.application.applicationType.name === ApplicationTypeNames.MFG);
   }
 
   showDynamicForm(formReference, tabs) {
