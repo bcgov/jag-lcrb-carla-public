@@ -12,5 +12,5 @@ Scenario: Smoke Test Private Corporation CRS Application
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    # And the account is deleted
-    # Then I see the login page
+    And the account is deleted
+    Then I see the login page

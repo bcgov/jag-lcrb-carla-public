@@ -6,71 +6,6 @@ namespace bdd_tests
 {
     public abstract partial class TestBase : Feature, IDisposable
     {
-        /*[And(@"I complete the eligibility disclosure")]
-        public void CompleteEligibilityDisclosure()
-        {
-            /* 
-            Page Title: Cannabis Retail Store Licence Eligibility Disclosure
-            
-
-            // select response: On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?           
-            // select Yes radio button 
-            NgWebElement uiYesRadio1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isConnectedToUnlicencedStore'] mat-radio-button"));
-            uiYesRadio1.Click();
-
-            // complete field: Please indicate the name and location of the retailer or store 
-            string nameAndLocation = "Automated test name and location of retailer";
-
-            NgWebElement uiNameAndLocation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='nameLocationUnlicencedRetailer']"));
-            uiNameAndLocation.SendKeys(nameAndLocation);
-
-            // select response: Does the retailer or store continue to operate?
-            // select Yes for Question 2 using radio button
-            NgWebElement uiYesRadio2 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isRetailerStillOperating'] mat-radio-button"));
-
-            ScrollToElement(uiYesRadio2);
-            uiYesRadio2.Click();
-
-            // select response: On or after March 1, 2020, were you or any of your associates involved with the distribution or supply of cannabis to a licensed or unlicensed cannabis retail store or retailer?
-            // select Yes using radio button
-            NgWebElement uiYesRadio3 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isInvolvedIllegalDistribution'] mat-radio-button"));
-            uiYesRadio3.Click();
-
-            // complete field: Please indicate the details of your involvement
-            string involvementDetails = "Automated test - details of the involvement";
-
-            NgWebElement uiInvolvementDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='illegalDistributionInvolvementDetails']"));
-            uiInvolvementDetails.SendKeys(involvementDetails);
-
-            // scroll the view down.
-
-            // complete field: Please indicate the name and location of the retailer or store           
-            string nameAndLocation2 = "Automated test name and location of retailer (2)";
-
-            NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.CssSelector("input[formControlName='nameLocationRetailer']"));
-            uiNameAndLocation2.SendKeys(nameAndLocation2);
-
-            // select response: Do you continue to be involved?
-            // select Yes for Question 2 using radio button
-            NgWebElement uiYesRadio4 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isInvolvementContinuing'] mat-radio-button"));
-            uiYesRadio4.Click();
-
-            // select certification checkbox
-            NgWebElement uiCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isEligibilityCertified']"));
-            uiCheckbox.Click();
-
-            // enter the electronic signature
-            string electricSignature = "Automated Test";
-
-            NgWebElement uiSigCheckbox = ngDriver.FindElement(By.CssSelector("input[formcontrolname='eligibilitySignature']"));
-            uiSigCheckbox.SendKeys(electricSignature);
-
-            // click on the Submit button
-            NgWebElement uiEligibilitySubmit = ngDriver.FindElement(By.CssSelector("app-eligibility-form button.btn-primary"));
-            uiEligibilitySubmit.Click();
-        }*/
-
-
         [And(@"I complete the Cannabis Retail Store application for a(.*)")]
         public void CompleteCannabisApplication(string businessType)
         {
@@ -232,4 +167,68 @@ namespace bdd_tests
             applicationID = parsedURL[5];
         }
     }
+
+    /*[And(@"I complete the eligibility disclosure")]
+    public void CompleteEligibilityDisclosure()
+    {
+    /* 
+    Page Title: Cannabis Retail Store Licence Eligibility Disclosure
+
+
+    // select response: On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?           
+    // select Yes radio button 
+    NgWebElement uiYesRadio1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isConnectedToUnlicencedStore'] mat-radio-button"));
+    uiYesRadio1.Click();
+
+    // complete field: Please indicate the name and location of the retailer or store 
+    string nameAndLocation = "Automated test name and location of retailer";
+
+    NgWebElement uiNameAndLocation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='nameLocationUnlicencedRetailer']"));
+    uiNameAndLocation.SendKeys(nameAndLocation);
+
+    // select response: Does the retailer or store continue to operate?
+    // select Yes for Question 2 using radio button
+    NgWebElement uiYesRadio2 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isRetailerStillOperating'] mat-radio-button"));
+
+    ScrollToElement(uiYesRadio2);
+    uiYesRadio2.Click();
+
+    // select response: On or after March 1, 2020, were you or any of your associates involved with the distribution or supply of cannabis to a licensed or unlicensed cannabis retail store or retailer?
+    // select Yes using radio button
+    NgWebElement uiYesRadio3 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isInvolvedIllegalDistribution'] mat-radio-button"));
+    uiYesRadio3.Click();
+
+    // complete field: Please indicate the details of your involvement
+    string involvementDetails = "Automated test - details of the involvement";
+
+    NgWebElement uiInvolvementDetails = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='illegalDistributionInvolvementDetails']"));
+    uiInvolvementDetails.SendKeys(involvementDetails);
+
+    // scroll the view down.
+
+    // complete field: Please indicate the name and location of the retailer or store           
+    string nameAndLocation2 = "Automated test name and location of retailer (2)";
+
+    NgWebElement uiNameAndLocation2 = ngDriver.FindElement(By.CssSelector("input[formControlName='nameLocationRetailer']"));
+    uiNameAndLocation2.SendKeys(nameAndLocation2);
+
+    // select response: Do you continue to be involved?
+    // select Yes for Question 2 using radio button
+    NgWebElement uiYesRadio4 = ngDriver.FindElement(By.CssSelector("[formcontrolname='isInvolvementContinuing'] mat-radio-button"));
+    uiYesRadio4.Click();
+
+    // select certification checkbox
+    NgWebElement uiCheckbox = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isEligibilityCertified']"));
+    uiCheckbox.Click();
+
+    // enter the electronic signature
+    string electricSignature = "Automated Test";
+
+    NgWebElement uiSigCheckbox = ngDriver.FindElement(By.CssSelector("input[formcontrolname='eligibilitySignature']"));
+    uiSigCheckbox.SendKeys(electricSignature);
+
+    // click on the Submit button
+    NgWebElement uiEligibilitySubmit = ngDriver.FindElement(By.CssSelector("app-eligibility-form button.btn-primary"));
+    uiEligibilitySubmit.Click();
+}*/
 }
