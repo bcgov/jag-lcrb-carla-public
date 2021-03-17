@@ -1,4 +1,4 @@
-﻿Feature: ManufacturerTemporaryExtension
+﻿Feature: ManufacturerTemporaryExtensionOfLicensedArea
     As a logged in business user
     I want to request a temporary extension for a Liquor Primary Application
 

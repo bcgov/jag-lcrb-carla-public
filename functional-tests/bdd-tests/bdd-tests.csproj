@@ -84,7 +84,7 @@
     <None Update="ManufacturerNewOutdoorPatio.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ManufacturerTemporaryExtension.feature">
+    <None Update="ManufacturerTemporaryExtensionOfLicensedArea.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ManufacturerRequestOfChangeInTermsDiscretion.feature">
