@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: UBrewUVinTermsAndConditions
+Feature: UbrewUvinTermsAndConditions
     As a logged in business user
     I want to confirm the Terms and Conditions for a UBrew / UVin licence
 
@@ -29,9 +29,9 @@ Scenario: UBrew / UVin Terms and Conditions (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinTermsAndConditions.feature")]
+    [FeatureFile("./UbrewUvinTermsAndConditions.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinTermsAndConditions : TestBase
+    public sealed class UbrewUvinTermsAndConditions : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

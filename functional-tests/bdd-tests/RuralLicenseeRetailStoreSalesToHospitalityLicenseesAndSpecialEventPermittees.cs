@@ -2,12 +2,12 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: RuralLRSLicenseeRepresentative
+Feature: RuralLRSSalesToHospitalityLicenseesAndSpecialEventPermittees
     As a logged in business user
-    I want to request a licensee representative for a rural LRS application
+    I want to request a sales to hospitality licensees and special event permittees for a rural LRS application
 
 @privatecorporation @ruralLRS
-Scenario: Rural LRS Licensee Representative (Private Corporation)
+Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a private corporation
@@ -18,12 +18,16 @@ Scenario: Rural LRS Licensee Representative (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I request a licensee representative
+    And I click on the link for Sales to Hospitality Licensees and Special Event Permittees
+    And I click on the Continue to Application button
+    And I request a sales to hospitality licensees and special event permittees application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
 @publiccorporation @ruralLRS 
-Scenario: Rural LRS Licensee Representative (Public Corporation)
+Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a public corporation
@@ -34,13 +38,16 @@ Scenario: Rural LRS Licensee Representative (Public Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I click on the link for Add Licensee Representative
-    And I request a licensee representative
+    And I click on the link for Sales to Hospitality Licensees and Special Event Permittees
+    And I click on the Continue to Application button
+    And I request a sales to hospitality licensees and special event permittees application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
 @partnership @ruralLRS 
-Scenario: Rural LRS Licensee Representative (Partnership)
+Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a partnership
@@ -51,13 +58,16 @@ Scenario: Rural LRS Licensee Representative (Partnership)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I click on the link for Add Licensee Representative
-    And I request a licensee representative
+    And I click on the link for Sales to Hospitality Licensees and Special Event Permittees
+    And I click on the Continue to Application button
+    And I request a sales to hospitality licensees and special event permittees application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
 @society @ruralLRS 
-Scenario: Rural LRS Licensee Representative (Society)
+Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a society
@@ -68,13 +78,16 @@ Scenario: Rural LRS Licensee Representative (Society)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I click on the link for Add Licensee Representative
-    And I request a licensee representative
+    And I click on the link for Sales to Hospitality Licensees and Special Event Permittees
+    And I click on the Continue to Application button
+    And I request a sales to hospitality licensees and special event permittees application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 
 @soleproprietorship @ruralLRS
-Scenario: Rural LRS Licensee Representative (Sole Proprietorship)
+Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a sole proprietorship
@@ -85,17 +98,20 @@ Scenario: Rural LRS Licensee Representative (Sole Proprietorship)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
-    And I click on the link for Add Licensee Representative
-    And I request a licensee representative
+    And I click on the link for Sales to Hospitality Licensees and Special Event Permittees
+    And I click on the Continue to Application button
+    And I request a sales to hospitality licensees and special event permittees application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./RuralLRSLicenseeRepresentative.feature")]
+    [FeatureFile("./RuralLRSSalesToHospitalityLicenseesAndSpecialEventPermittees.feature")]
     [Collection("Cannabis")]
-    public sealed class RuralLRSLicenseeRepresentative : TestBase
+    public sealed class RuralLicenseeRetailStoreSalesToHospitalityLicenseesAndSpecialEventPermittees : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

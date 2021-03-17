@@ -25,7 +25,7 @@ namespace bdd_tests
             var physCity = "Victoria";
             var physPostalCode = "V9A 6X5";
 
-            var mailStreet1 = "#22";
+            var mailStreet1 = "#22 Horizon St";
             var mailStreet2 = "700 Bellevue Way NE";
             var mailCity = "Bellevue";
             var mailPostalCode = "T2E 8A2";

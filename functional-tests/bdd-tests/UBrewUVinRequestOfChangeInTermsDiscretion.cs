@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: UBrewUVinRequestOfChangeInTermsDiscretion
+Feature: UbrewUvinRequestOfChangeInTermsDiscretion
     As a logged in business user
     I want to submit a Request of Change in Terms and Conditions/Request for Discretion application for a UBrew / UVin licence
 
@@ -30,9 +30,9 @@ Scenario: UBrew / UVin Application Change In Terms (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinRequestOfChangeInTermsDiscretion.feature")]
+    [FeatureFile("./UbrewUvinRequestOfChangeInTermsDiscretion.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinRequestOfChangeInTermsDiscretion : TestBase
+    public sealed class UbrewUvinRequestOfChangeInTermsDiscretion : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

@@ -1,4 +1,4 @@
-﻿Feature: UBrewUVinLicensingRenewal
+﻿Feature: UbrewUvinLicensingRenewal
     As a logged in business user
     I want to pay the first year licensing fee for an approved UBrew/UVin Application
     And renew the licence

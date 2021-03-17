@@ -2,12 +2,12 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: RuralLRSTermsAndConditions
+Feature: RuralLicenseeRetailStoreRequestTermsAndConditionsChangeApplication
     As a logged in business user
-    I want to confirm the Terms and Conditions for a Rural LRS licence
+    I want to request a T&C change application for a rural LRS licence
 
-@rurallrs @privatecorporation
-Scenario: Rural LRS Terms and Conditions (Private Corporation)
+@privatecorporation @ruralLRS
+Scenario: Rural LRS T&C Change Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
     And I review the account profile for a private corporation
@@ -17,33 +17,24 @@ Scenario: Rural LRS Terms and Conditions (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
-    And I click on the Licences tab
-    And I click on the link for Download Licence
-    And I confirm the terms and conditions for a Rural LRS licence
+    And I click on the link for Request T&C Change Application
+    And I request a T&C change application
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./RuralLRSTermsAndConditions.feature")]
-    [Collection("Liquor")]
-    public sealed class RuralLRSTermsAndConditions : TestBase
+    [FeatureFile("./RuralLicenseeRetailStoreRequestTermsAndConditionsChangeApplication.feature")]
+    [Collection("Cannabis")]
+    public sealed class RuralLicenseeRetailStoreRequestTermsAndConditionsChangeApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
 
-            CheckFeatureFlagsLiquorOne();
-
-            CheckFeatureFlagsLGIN();
-
-            CheckFeatureFlagsIN();
-
             CheckFeatureFlagsLicenseeChanges();
-
-            CheckFeatureFlagsSecurityScreening();
 
             CheckFeatureLEConnections();
 

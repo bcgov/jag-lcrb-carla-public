@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: UBrewUVinDownloadLicence
+Feature: UbrewUvinDownloadLicence
     As a logged in business user
     I want to download a UBrew / UVin licence
 
@@ -28,9 +28,9 @@ Scenario: UBrew / UVin Application Licence Download (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinDownloadLicence.feature")]
+    [FeatureFile("./UbrewUvinDownloadLicence.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinDownloadLicence : TestBase
+    public sealed class UbrewUvinDownloadLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

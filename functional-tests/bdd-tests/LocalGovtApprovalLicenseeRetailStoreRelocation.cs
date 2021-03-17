@@ -1,4 +1,8 @@
-﻿Feature: LocalGovtApprovalLocalRuralStoreRelocation
+﻿using Xunit;
+using Xunit.Gherkin.Quick;
+
+/*
+Feature: LocalGovtApprovalLicenseeRetailStoreRelocation
     As a logged in business user
     I want to submit a LRS Relocation Application for review and approval
 
@@ -19,3 +23,28 @@ Scenario: Local Government Approval for LRS Relocation (Private Corporation)
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page 
+*/
+
+namespace bdd_tests
+{
+    [FeatureFile("./LocalGovtApprovalLicenseeRetailStoreRelocation.feature")]
+    [Collection("Liquor")]
+    public sealed class LocalGovtApprovalLicenseeRetailStoreRelocation : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as a(.*)")]
+        public void LogInToDashboard(string businessType)
+        {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLiquorTwo();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureLEConnections();
+
+            IgnoreSynchronizationFalse();
+
+            CarlaLogin(businessType);
+        }
+    }
+}

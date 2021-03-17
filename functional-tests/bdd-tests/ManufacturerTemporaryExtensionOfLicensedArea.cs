@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: ManufacturerTemporaryExtension
+Feature: ManufacturerTemporaryExtensionOfLicensedArea
     As a logged in business user
     I want to request a temporary extension for a Liquor Primary Application
 
@@ -24,9 +24,9 @@ Scenario: Manufacturer Temporary Extension (Winery)
 
 namespace bdd_tests
 {
-    [FeatureFile("./ManufacturerTemporaryExtension.feature")]
+    [FeatureFile("./ManufacturerTemporaryExtensionOfLicensedArea.feature")]
     [Collection("Liquor")]
-    public sealed class ManufacturerTemporaryExtension : TestBase
+    public sealed class ManufacturerTemporaryExtensionOfLicensedArea : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
