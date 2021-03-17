@@ -107,7 +107,13 @@ namespace bdd_tests
             if (licenceType == "a Rural LRS licence")
             {
                 Assert.True(ngDriver.FindElement(By.XPath(
-                        "//body[contains(.,'The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website. The Terms and Conditions Handbook is amended from time to time.')]"))
+                        "//body[contains(.,'The terms and conditions to which this licence is subject include the terms and conditions contained in the licensee Terms and Conditions Handbook')]"))
+                    .Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath(
+                        "//body[contains(.,'which is available on the Liquor and Cannabis Regulation Branch website')]"))
+                    .Displayed);
+                Assert.True(ngDriver.FindElement(By.XPath(
+                        "//body[contains(.,'The Terms and Conditions Handbook is amended from time to time')]"))
                     .Displayed);
                 Assert.True(ngDriver
                     .FindElement(By.XPath(
