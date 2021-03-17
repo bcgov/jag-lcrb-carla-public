@@ -1,4 +1,4 @@
-﻿Feature: RuralLRSTermsAndConditions
+﻿Feature: RuralLicenseeRetailStoreTermsAndConditions
     As a logged in business user
     I want to confirm the Terms and Conditions for a Rural LRS licence
 

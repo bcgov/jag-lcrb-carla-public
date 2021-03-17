@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: UBrewUVinRelease
+Feature: UbrewUvinRelease
     As a logged in business user
     I want to submit a UBrew / UVin Licence application 
     And complete change requests 
@@ -36,9 +36,9 @@ Scenario: UBrew / UVin Application Release Test (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinRelease.feature")]
+    [FeatureFile("./UbrewUvinRelease.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinRelease : TestBase
+    public sealed class UbrewUvinRelease : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

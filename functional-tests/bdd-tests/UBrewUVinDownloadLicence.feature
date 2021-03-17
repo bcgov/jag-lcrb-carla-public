@@ -1,4 +1,4 @@
-﻿Feature: UBrewUVinDownloadLicence
+﻿Feature: UbrewUvinDownloadLicence
     As a logged in business user
     I want to download a UBrew / UVin licence
 

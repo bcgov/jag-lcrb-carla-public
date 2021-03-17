@@ -1,4 +1,4 @@
-﻿Feature: RuralLRSRelease
+﻿Feature: RuralLicenseeRetailStoreRelease
     As a logged in business user
     I want to run a release test for a rural LRS application
 
