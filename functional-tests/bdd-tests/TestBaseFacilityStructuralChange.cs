@@ -10,22 +10,6 @@ namespace bdd_tests
         public void FacilityStructuralChange()
         {
             /* 
-            Page Title: Licences & Authorizations
-            */
-
-            var facilityStructuralChange = "Facility Structural Change Application";
-
-            // click on the Facility Structural Change Application link
-            var uiFacilityStructuralChange = ngDriver.FindElement(By.LinkText(facilityStructuralChange));
-            uiFacilityStructuralChange.Click();
-
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Manufacturing Facility Structural Change Application
             */
 
