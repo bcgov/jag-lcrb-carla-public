@@ -28,6 +28,7 @@ Scenario: Food Primary Release Test #1 (Private Corporation)
     And I enter the payment information
     And I click on the Licences tab
     And I click on the link for Download Licence
+    And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And I click on the link for New Outdoor Patio
     And I request a new outdoor patio application
@@ -55,6 +56,7 @@ Scenario: Food Primary Release Test #2 (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I click on the link for Structural Change Application
+    And I click on the Continue to Application button
     And I submit a Food Primary structural change application
     And I click on the Licences tab
     And I click on the link for Temporary Extension of Licensed Area
