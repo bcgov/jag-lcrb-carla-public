@@ -18,6 +18,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Serilog;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -965,6 +967,59 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public static int? GetLoginTypePicklistValue(this IDynamicsClient system, bool isServicesCard)
+        {
+            int? adoxioType;
+            if (isServicesCard)
+            {
+                adoxioType = 845280000;
+            }
+            else
+            {
+                adoxioType = 845280001;
+            }
+
+            return adoxioType;
+        }
+
+        /// <summary>
+        /// Get a contact by their Siteminder ID
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="siteminderId"></param>
+        /// <returns></returns>
+        public static MicrosoftDynamicsCRMcontact GetActiveContactByExternalIdBridged(this IDynamicsClient dynamicsClient, bool isServicesCard, string siteminderId)
+        {
+            int? adoxioType = dynamicsClient.GetLoginTypePicklistValue(isServicesCard);
+            
+            string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
+            MicrosoftDynamicsCRMcontact result = null;
+            try
+            {
+                var bridgeQueryResults = dynamicsClient.Logins
+                    .Get(filter: $"adoxio_type eq {adoxioType} and adoxio_externalid eq '{sanitizedSiteminderId}'").Value;
+                foreach (var item in bridgeQueryResults)
+                {
+                    var temp = dynamicsClient.GetContactById(item._adoxioContactValue).GetAwaiter().GetResult();
+                    if (temp.Statecode == 0) // only allow login from active accounts.
+                    {
+                        result = temp;
+                        break;
+                    }
+                }
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Get a contact by their Siteminder ID
         /// </summary>
@@ -1374,6 +1429,119 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="smGuid"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
+        public static async Task<User> LoadUserLegacy(this IDynamicsClient _dynamicsClient, string smGuid, IHeaderDictionary Headers, ILogger _logger)
+        {
+            User user = null;
+            MicrosoftDynamicsCRMcontact contact = null;
+            Guid userGuid;
+
+            _logger.LogDebug(">>>> LoadUserLegacy for BCEID.");
+            if (Guid.TryParse(smGuid, out userGuid))
+            {
+                user = _dynamicsClient.GetActiveUserBySmGuid(smGuid);
+                if (user == null)
+                {
+                    // try by other means.
+                    var contactVM = new Public.ViewModels.Contact();
+                    contactVM.CopyHeaderValues(Headers);
+                    user = _dynamicsClient.GetUserByContactVmBlankSmGuid(contactVM);
+                }
+                if (user != null)
+                {
+                    _logger.LogDebug(">>>> LoadUserLegacy for BCEID: user != null");
+                    // Update the contact with info from Siteminder
+                    var contactVM = new Public.ViewModels.Contact();
+                    contactVM.CopyHeaderValues(Headers);
+                    _logger.LogDebug(">>>> After reading headers: " + JsonConvert.SerializeObject(contactVM));
+                    MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
+                    patchContact.CopyValues(contactVM);
+                    try
+                    {
+                        _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error updating Contact");
+                        // fail if we can't create.
+                        throw (httpOperationException);
+                    }
+
+                    // The account will be patched when we fetch data from bceid.
+
+
+                }
+            }
+            else
+            { //BC service card login
+
+                _logger.LogDebug(">>>> LoadUserLegacy for BC Services Card.");
+                string externalId = GetServiceCardID(smGuid);
+                contact = _dynamicsClient.GetActiveContactByExternalId(externalId);
+
+                if (contact == null)
+                {
+                    string firstInitial = Headers["smgov_givenname"];
+                    string lastName = Headers["smgov_surname"];
+                    string birthDate = Headers["smgov_birthdate"];
+                    contact = _dynamicsClient.GetContactByNameAndBirthdate(firstInitial, lastName, birthDate);
+                }
+
+                if (contact != null)
+                {
+                    _logger.LogDebug(">>>> LoadUserLegacy for BC Services Card: contact != null");
+                    user = new User();
+                    user.FromContact(contact);
+
+                    // Update the contact and worker with info from Siteminder
+                    var contactVM = new Public.ViewModels.Contact();
+                    var workerVm = new Public.ViewModels.Worker();
+                    contactVM.CopyHeaderValues(Headers);
+                    workerVm.CopyHeaderValues(Headers);
+                    MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
+
+                    patchContact.CopyValuesNoEmailPhone(contactVM);
+                    try
+                    {
+                        _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error updating Contact");
+                        // fail if we can't update.
+                        throw (httpOperationException);
+                    }
+
+                    // update worker(s)
+                    try
+                    {
+                        string filter = $"_adoxio_contactid_value eq {contact.Contactid}";
+                        var workers = _dynamicsClient.Workers.Get(filter: filter).Value;
+                        foreach (var item in workers)
+                        {
+                            MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
+                            patchWorker.CopyValuesNoEmailPhone(workerVm);
+                            _dynamicsClient.Workers.Update(item.AdoxioWorkerid, patchWorker);
+                        }
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error updating Worker");
+                    }
+
+                }
+            }
+
+            return user;
+
+        }
+
+        /// <summary>
+        /// Load User from database using their userId and guid
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="smGuid"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
         public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string smGuid, IHeaderDictionary Headers, ILogger _logger)
         {
             User user = null;
@@ -1512,6 +1680,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             Guid id = new Guid(guid);
             User user = null;
+            // try the new method first
+
+            // fallback
+
             var contact = _dynamicsClient.GetActiveContactByExternalId(id.ToString());
             if (contact != null)
             {
@@ -1521,6 +1693,31 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             return user;
         }
+
+        /// <summary>
+        /// Returns a User based on the guid
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public static User GetActiveUserBySmGuidBridged(this IDynamicsClient _dynamicsClient, bool isServicesCard, string guid)
+        {
+            User user = null;
+            // try the new method first
+
+            // fallback
+
+            var contact = _dynamicsClient.GetActiveContactByExternalIdBridged(isServicesCard, guid);
+            if (contact != null)
+            {
+                user = new User();
+                user.FromContact(contact);
+            }
+
+            return user;
+        }
+
+        
 
         /// <summary>
         /// Returns a User based on certain contact details
@@ -1737,6 +1934,35 @@ namespace Gov.Lclb.Cllb.Interfaces
             // If the account has more liquor licences then use liquor.
 
             return result;
+        }
+
+        public static void UpdateContactBridgeLogin(this IDynamicsClient dynamicsClient, string contactId, string externalGuid, string accountId, string externalBusinessGuid)
+        {
+            bool isServiceCard = externalBusinessGuid == null;
+            // create a "Login" entity.
+            MicrosoftDynamicsCRMadoxioLogin login = new MicrosoftDynamicsCRMadoxioLogin()
+            {
+                AdoxioType = dynamicsClient.GetLoginTypePicklistValue(isServiceCard),
+                AdoxioExternalid = externalGuid,
+                ContactODataBind = dynamicsClient.GetEntityURI("contacts", contactId)
+            };
+            if (accountId != null)
+            {
+                login.RelatedAccountODataBind = dynamicsClient.GetEntityURI("accounts", accountId);
+            }
+
+            try
+            {
+                dynamicsClient.Logins.Create(login);
+            }
+            catch (HttpOperationException h)
+            {
+                Log.Logger.Error(h,"Error creating Login record.");
+            }
+            catch (Exception e)
+            {
+                Log.Logger.Error(e, "Unexpected Error creating Login record.");
+            }
         }
     }
 }
