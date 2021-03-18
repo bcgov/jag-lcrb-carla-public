@@ -40,11 +40,6 @@ namespace bdd_tests
             var uiSignatureAgreement =
                 ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
-
-            // click on the Submit & Pay button
-            ClickOnSubmitButton();
-
-            MakePayment();
         }
     }
 }
