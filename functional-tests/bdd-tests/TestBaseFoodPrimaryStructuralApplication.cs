@@ -11,12 +11,6 @@ namespace bdd_tests
         public void FPStructuralChange()
         {
             /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Food Primary Structural Change Application
             */
 

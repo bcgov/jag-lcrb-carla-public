@@ -21,6 +21,7 @@ Scenario: Catering Release (Private Corporation)
     # And I click on the Dashboard tab
     # And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
+    And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And I click on the Licences tab
     And I request a store relocation for Catering
@@ -57,6 +58,7 @@ Scenario: Catering Release (Sole Proprietorship)
     # And I click on the Dashboard tab
     # And the dashboard status is updated as Application Under Review
     And I click on the Licences tab
+    And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And I click on the Licences tab
     And I request a store relocation for Catering
