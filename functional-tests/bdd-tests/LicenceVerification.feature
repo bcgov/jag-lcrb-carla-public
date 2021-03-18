@@ -112,6 +112,7 @@ Scenario: Brewery Licence PDF Verification (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I click on the link for Download Licence
     Then the correct brewery licence PDF is generated with hours of sale and terms and conditions
 
@@ -130,6 +131,7 @@ Scenario: Distillery Licence PDF Verification (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I click on the link for Download Licence
     Then the correct distillery licence PDF is generated with hours of sale and terms and conditions
 
@@ -148,6 +150,7 @@ Scenario: Co-packer Licence PDF Verification (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I click on the link for Download Licence
     Then the correct co-packer licence PDF is generated with hours of sale and terms and conditions
 
@@ -180,6 +183,7 @@ Scenario: Food Primary Licence PDF Verification (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I click on the link for Download Licence
     Then the correct licence PDF is generated with hours of sale and terms and conditions
 
