@@ -391,7 +391,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         [HttpPost]
         [Authorize(Policy = "Can-Create-Account")]
-        public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
+        public async Task<IActionResult> CreateAccount([FromBody] ViewModels.Account item)
         {
             _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpPost, "Account parameters: " + JsonConvert.SerializeObject(item));
@@ -636,6 +636,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw new Exception("Error binding account to contact");
                     }
 
+                }
+
+                // create the bridge entity for login.
+
+                if (!string.IsNullOrEmpty(_configuration["FEATURE_BRIDGE_LOGIN"]))
+                {
+                    _dynamicsClient.UpdateContactBridgeLogin(userContact.Contactid, contactSiteminderGuid, account.Accountid, accountSiteminderGuid);
                 }
 
                 // create the sharepoint document location for the account
