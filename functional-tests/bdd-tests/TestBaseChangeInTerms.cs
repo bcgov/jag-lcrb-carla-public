@@ -10,12 +10,6 @@ namespace bdd_tests
         public void ChangeInTermsApplication()
         {
             /* 
-            Page Title: Please Review Your Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Request of Change in Terms and Conditions/Request for Discretion
             */
 
