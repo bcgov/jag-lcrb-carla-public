@@ -14,6 +14,7 @@ Scenario: Catering Licence Download (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Download Licence
     And the licence is successfully downloaded
     And the account is deleted

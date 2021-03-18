@@ -22,6 +22,7 @@ Scenario: Liquor Primary Transfer Licence (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a transfer of ownership for Liquor Primary
     And the account is deleted
     Then I see the login page

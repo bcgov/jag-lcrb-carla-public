@@ -18,6 +18,7 @@ Scenario: Food Primary Establishment Name Change (Private Corporation)
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
+    And I click on the Licences tab
     And I request a valid store name or branding change for Food Primary
     And the account is deleted
     Then I see the login page

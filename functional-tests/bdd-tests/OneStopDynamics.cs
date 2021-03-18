@@ -23,6 +23,7 @@ Scenario: OneStop New Licence (Private Corporation)
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
@@ -44,6 +45,7 @@ Scenario: OneStop Cancel Licence (Private Corporation)
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I log in to Dynamics
     And I find the new licence
@@ -90,6 +92,7 @@ Scenario: OneStop Enter Licence Dormancy (Private Corporation)
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I log in to Dynamics
     And I select the 'Yes' option in the Dormant dropdown
@@ -132,6 +135,7 @@ Scenario: OneStop Licence Expired (Private Corporation)
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     # Select 45 days ago option
     And the expiry date is changed using the Dynamics workflow named 97c9eac3-9e8e-443d-83d1-6174b5a59676
@@ -175,6 +179,7 @@ Scenario: OneStop Licence Suspended (Private Corporation)
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I log in to Dynamics
     And I select the 'Yes' option in the Suspended dropdown
@@ -217,6 +222,7 @@ Scenario: OneStop Licence Name Change (Private Corporation)
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
@@ -246,6 +252,7 @@ Scenario: OneStop Licence Address Change (Private Corporation)
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
@@ -275,6 +282,7 @@ Scenario: OneStop Licence Transfer Ownership (Private Corporation)
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue

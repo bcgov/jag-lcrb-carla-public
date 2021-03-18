@@ -51,7 +51,7 @@ namespace bdd_tests
 
             ngDriver = new NgWebDriver(driver);
 
-            baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
+            baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/lcrb/";
         }
 
 
