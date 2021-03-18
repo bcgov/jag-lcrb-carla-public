@@ -61,12 +61,6 @@ namespace bdd_tests
 
             // pay for the structural change application
             MakePayment();
-
-            /* 
-            Page Title: Payment Approved
-            */
-
-            ClickLicencesTab();
         }
     }
 }

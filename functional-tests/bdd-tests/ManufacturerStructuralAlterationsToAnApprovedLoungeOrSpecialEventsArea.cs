@@ -15,7 +15,9 @@ Scenario: Structural Alterations (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I pay the licensing fee
+    And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
@@ -29,7 +31,9 @@ Scenario: Structural Alterations (Brewery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
@@ -43,7 +47,9 @@ Scenario: Structural Alterations (Distillery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
@@ -57,7 +63,9 @@ Scenario: Structural Alterations (Co-packer)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee 
+    And I click on the Licences tab
+    And I pay the licensing fee
+    And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
