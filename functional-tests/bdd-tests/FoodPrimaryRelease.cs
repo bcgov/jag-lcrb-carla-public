@@ -39,6 +39,7 @@ Scenario: Food Primary Release Test #1 (Private Corporation)
     And I click on the Submit button
     And I click on the Licences tab
     And I click on the link for Relocation Application
+    And I click on the Continue to Application button
     And I request a Food Primary relocation application
     And the account is deleted
     Then I see the login page

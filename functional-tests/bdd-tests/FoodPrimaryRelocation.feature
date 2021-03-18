@@ -16,6 +16,7 @@ Scenario: Food Primary Relocation Application (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I click on the link for Relocation Application
+    And I click on the Continue to Application button
     And I request a Food Primary relocation application
     And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
