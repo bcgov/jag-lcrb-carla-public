@@ -11,12 +11,6 @@ namespace bdd_tests
         public void FPStructuralChange()
         {
             /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Food Primary Structural Change Application
             */
 
@@ -76,12 +70,6 @@ namespace bdd_tests
 
             // pay for the structural change application
             MakePayment();
-
-            /* 
-            Page Title: Payment Approved
-            */
-
-            ClickLicencesTab();
         }
     }
 }

@@ -21,7 +21,6 @@ namespace bdd_tests
         // Protractor driver
         protected NgWebDriver ngDriver;
 
-
         protected TestBaseWorker()
         {
             var path = Directory.GetCurrentDirectory();
@@ -51,7 +50,7 @@ namespace bdd_tests
 
             ngDriver = new NgWebDriver(driver);
 
-            baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
+            baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/lcrb/";
         }
 
 
@@ -112,7 +111,6 @@ namespace bdd_tests
             Thread.Sleep(2000);
             ngDriver.Manage().Timeouts().ImplicitWait = tempWait;
         }
-
 
         public void CarlaDeleteCurrentAccount()
         {

@@ -10,9 +10,6 @@ namespace bdd_tests
         [And(@"I request a third party operator")]
         public void RequestThirdPartyOperator()
         {
-            // navigate back to Licenses tab
-            ClickLicencesTab();
-
             /* 
             Page Title: Licences & Authorizations
             Subtitle:   Catering Licences

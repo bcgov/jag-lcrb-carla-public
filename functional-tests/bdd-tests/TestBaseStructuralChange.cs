@@ -11,23 +11,6 @@ namespace bdd_tests
         public void RequestStructuralChange()
         {
             /* 
-            Page Title: Licences & Authorizations
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            var structuralChange = "Request a Structural Change";
-
-            // click on the request structural change link
-            var uiStructuralChange = ngDriver.FindElement(By.LinkText(structuralChange));
-            uiStructuralChange.Click();
-
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Submit the Cannabis Retail Store Structural Change Application
             */
 
@@ -61,12 +44,6 @@ namespace bdd_tests
 
             // pay for the structural change application
             MakePayment();
-
-            /* 
-            Page Title: Payment Approved
-            */
-
-            ClickLicencesTab();
         }
 
 

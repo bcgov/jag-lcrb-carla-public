@@ -10,12 +10,6 @@ namespace bdd_tests
         public void TempUseAreaApplication()
         {
             /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Temporary Use Area Endorsement at a Ski Hill or Golf Course Application
             */
 

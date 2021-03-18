@@ -10,13 +10,6 @@ namespace bdd_tests
         public void PatronParticipationApplication()
         {
             /* 
-            Page Title: Please Review Your Account Profile
-            */
-
-            // click on Continue to Application button
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Patron Participation Entertainment Endorsement Application
             */
 

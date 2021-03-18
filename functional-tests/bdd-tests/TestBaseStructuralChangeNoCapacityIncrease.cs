@@ -10,12 +10,6 @@ namespace bdd_tests
         public void RequestStructuralChangeNoCapacity()
         {
             /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Structural Change Application (No Capacity Increase)
             */
 

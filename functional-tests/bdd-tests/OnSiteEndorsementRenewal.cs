@@ -17,6 +17,7 @@ Scenario: On-Site Endorsement Licence Renewal (Winery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -41,6 +42,7 @@ Scenario: On-Site Endorsement Licence Renewal (Brewery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -65,6 +67,7 @@ Scenario: On-Site Endorsement Licence Renewal (Distillery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -89,6 +92,7 @@ Scenario: On-Site Endorsement Licence Renewal (Co-packer)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved

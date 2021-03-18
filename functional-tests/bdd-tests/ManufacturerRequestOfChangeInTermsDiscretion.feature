@@ -11,8 +11,11 @@ Scenario: Manufacturer Change in Terms (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
+    And I click on the Continue to Application button
     And I request a change in terms and conditions application
     And I click on the Submit button
     And I enter the payment information

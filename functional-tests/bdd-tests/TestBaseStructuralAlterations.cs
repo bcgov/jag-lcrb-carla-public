@@ -9,18 +9,6 @@ namespace bdd_tests
         [And(@"I request structural alterations to an approved lounge or special events area")]
         public void StructuralAlterations()
         {
-            /* 
-            Page Title: Licences & Authorizations
-            */
-
-            var structuralAlterations = "Structural Alterations to an Approved Lounge or Special Events Area";
-
-            // click on the Structural Alterations Application link
-            var uiStructuralAlterations = ngDriver.FindElement(By.LinkText(structuralAlterations));
-            uiStructuralAlterations.Click();
-
-            ContinueToApplicationButton();
-
             // create test data
             var outdoorAreaDescription = "Sample outdoor area description";
             var outdoorAreaCapacity = "10";
