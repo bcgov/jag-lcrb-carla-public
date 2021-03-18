@@ -18,6 +18,7 @@ Scenario: Rural LRS Licensee Representative (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
+    And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And the account is deleted
     Then I see the login page
@@ -34,6 +35,7 @@ Scenario: Rural LRS Licensee Representative (Public Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
+    And I click on the link for Add Licensee Representative
     And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And the account is deleted
@@ -52,6 +54,7 @@ Scenario: Rural LRS Licensee Representative (Partnership)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Add Licensee Representative
+    And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And the account is deleted
     Then I see the login page
@@ -69,6 +72,7 @@ Scenario: Rural LRS Licensee Representative (Society)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Add Licensee Representative
+    And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And the account is deleted
     Then I see the login page
@@ -85,6 +89,7 @@ Scenario: Rural LRS Licensee Representative (Sole Proprietorship)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
+    And I click on the link for Add Licensee Representative
     And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And the account is deleted

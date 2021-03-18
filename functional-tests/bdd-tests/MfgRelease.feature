@@ -17,7 +17,11 @@ Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Manufacturing
     And I click on the Licences tab
+    And I click on the link for Facility Structural Change Application
+    And I click on the Continue to Application button
     And I request a facility structural change
+    And I click on the Submit button
+    And I enter the payment information
     And I click on the Licences tab
     And I request a relocation change
     And I click on the Licences tab
