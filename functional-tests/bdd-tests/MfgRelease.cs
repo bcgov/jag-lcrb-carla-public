@@ -15,6 +15,7 @@ Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the link for Download Licence
     And I request a valid store name or branding change for Manufacturing
@@ -40,6 +41,7 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
     And I click on the link for Picnic Area Endorsement Application
