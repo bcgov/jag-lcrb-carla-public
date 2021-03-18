@@ -17,6 +17,7 @@ Scenario: Federal Reports and Show Map (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I show the store as open on the map
     And I review the federal reports

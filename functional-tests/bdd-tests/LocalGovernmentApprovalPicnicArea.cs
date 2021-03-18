@@ -15,6 +15,7 @@ Scenario: Local Government Approval for Picnic Area Endorsement (Private Corpora
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement

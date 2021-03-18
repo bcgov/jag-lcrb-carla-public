@@ -20,6 +20,7 @@ Scenario: Deny Today Licence Renewal (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
     # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
@@ -41,6 +42,7 @@ Scenario: Deny Yesterday Licence Renewal (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
     # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
@@ -62,6 +64,7 @@ Scenario: Deny 45 Days Ago Licence Renewal (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
     # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
@@ -83,6 +86,7 @@ Scenario: Deny 60 Days From Today Licence Renewal (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
     # Note: The following workflow sets the Dynamics autorenewal flag to 'No'
@@ -104,6 +108,7 @@ Scenario: Deny 30 Days From Today Licence Renewal (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
     # Note: The following workflow sets the Dynamics autorenewal flag to 'No'

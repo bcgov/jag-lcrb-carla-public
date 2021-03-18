@@ -16,6 +16,7 @@ Scenario: Cannabis Retail Store Licence PDF Verification (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee for Cannabis
     And I click on the Licences tab
     And I click on the link for Download Licence
