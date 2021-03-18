@@ -18,6 +18,8 @@ Scenario: Structural Alterations (Winery)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
+    And I click on the link for Structural Alterations to an Approved Lounge or Special Events Area
+    And I click on the Continue to Application button
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
@@ -34,6 +36,8 @@ Scenario: Structural Alterations (Brewery)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
+    And I click on the link for Structural Alterations to an Approved Lounge or Special Events Area
+    And I click on the Continue to Application button
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
@@ -50,6 +54,8 @@ Scenario: Structural Alterations (Distillery)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
+    And I click on the link for Structural Alterations to an Approved Lounge or Special Events Area
+    And I click on the Continue to Application button
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
@@ -66,6 +72,8 @@ Scenario: Structural Alterations (Co-packer)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
+    And I click on the link for Structural Alterations to an Approved Lounge or Special Events Area
+    And I click on the Continue to Application button
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page

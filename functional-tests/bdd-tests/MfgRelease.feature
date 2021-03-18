@@ -56,6 +56,8 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the Continue to Application button
     And I request a special event area endorsement
     And I click on the Licences tab
+    And I click on the link for Structural Alterations to an Approved Lounge or Special Events Area
+    And I click on the Continue to Application button
     And I request structural alterations to an approved lounge or special events area
     And I click on the Licences tab
     And I click on the link for Manage Off-Site Storage
