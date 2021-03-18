@@ -16,6 +16,7 @@ Scenario: Third Party Operator (Winery)
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -32,6 +33,7 @@ Scenario: Third Party Operator (Brewery)
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -48,6 +50,7 @@ Scenario: Third Party Operator (Distillery)
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -64,6 +67,7 @@ Scenario: Third Party Operator (Co-packer)
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
