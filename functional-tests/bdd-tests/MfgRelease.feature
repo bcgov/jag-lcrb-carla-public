@@ -58,6 +58,7 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the Continue to Application button
     And I complete the TESA application for a Manufacturer licence
     And I click on the Submit button
+    And I click on the Licences tab
     And I request a third party operator
     And I request a transfer of ownership for Manufacturer
     And the account is deleted

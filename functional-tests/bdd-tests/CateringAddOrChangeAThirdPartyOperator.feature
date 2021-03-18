@@ -13,6 +13,7 @@
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -29,6 +30,7 @@
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -44,7 +46,8 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee 
+    And I pay the licensing fee
+    And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -61,6 +64,7 @@
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
