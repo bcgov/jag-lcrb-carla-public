@@ -30,6 +30,7 @@ Scenario: CRS Release (Private Corporation)
     And I request a store relocation for Cannabis
     And I click on the Licences tab
     And I request a structural change
+    And I click on the Licences tab
     And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
@@ -62,6 +63,7 @@ Scenario: CRS Release (Sole Proprietorship)
     And I request a store relocation for Cannabis
     And I click on the Licences tab
     And I request a structural change
+    And I click on the Licences tab
     And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
