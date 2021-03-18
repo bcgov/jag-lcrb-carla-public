@@ -54,6 +54,7 @@ Scenario: Liquor Primary Release Test #1 (Private Corporation)
     # And I click on the Submit button
     # And I click on the Licences tab
     # And I click on the link for New Outdoor Patio
+    # And I click on the Continue to Application button
     # And I request a new outdoor patio application
     # And I click on the Submit button
     # And I click on the Licences tab

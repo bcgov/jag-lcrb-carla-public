@@ -15,6 +15,7 @@ Scenario: Manufacturer New Outdoor Patio (Winery)
     And I pay the licensing fee
     And I click on the Licences tab
     And I click on the link for New Outdoor Patio
+    And I click on the Continue to Application button
     And I request a new outdoor patio application
     And I click on the Submit button
     And the account is deleted
