@@ -78,8 +78,6 @@ namespace bdd_tests
             // click on the return to dashboard link
             var uiReturnToDashboard = ngDriver.FindElement(By.LinkText(returnToDashboard));
             JavaScriptClick(uiReturnToDashboard);
-
-            ClickLicencesTab();
         }
 
 

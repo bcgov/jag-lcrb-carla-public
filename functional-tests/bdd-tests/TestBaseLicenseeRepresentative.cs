@@ -10,15 +10,6 @@ namespace bdd_tests
         [And(@"I request a licensee representative")]
         public void RequestLicenseeRepresentative()
         {
-            /* 
-            Page Title: Licences & Authorizations
-            */
-
-            // click on the Licensee Representative link
-            var addLicensee = "Add Licensee Representative";
-            var uiAddLicensee = ngDriver.FindElement(By.LinkText(addLicensee));
-            uiAddLicensee.Click();
-
             // create test data
             var representativeName = "Automated Test";
             var telephone = "2005081818";

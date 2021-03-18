@@ -11,17 +11,6 @@ namespace bdd_tests
         public void ReviewFederalReports()
         {
             /* 
-            Page Title: Licences & Authorizations
-            Subtitle:   Cannabis Retail Store Licences
-            */
-
-            var reviewReports = "Review Federal Reports";
-
-            // click on the Review Federal Reports link
-            var uiReviewFedReports = ngDriver.FindElement(By.LinkText(reviewReports));
-            JavaScriptClick(uiReviewFedReports);
-
-            /* 
             Page Title: Federal Reporting
             */
 

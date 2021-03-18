@@ -10,12 +10,6 @@ namespace bdd_tests
         public void LPTempExtensionAreaApplication()
         {
             /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Temporary Extension of Licensed Area
             */
 

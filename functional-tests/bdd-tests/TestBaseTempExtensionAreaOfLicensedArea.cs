@@ -10,12 +10,6 @@ namespace bdd_tests
         public void TempExtensionAreaApplication()
         {
             /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Temporary Extension of Licensed Area
             */
 
@@ -61,12 +55,6 @@ namespace bdd_tests
 
             // pay for the structural change application
             MakePayment();
-
-            /* 
-            Page Title: Payment Approved
-            */
-
-            ClickLicencesTab();
         }
     }
 }
