@@ -306,7 +306,7 @@ namespace bdd_tests
                 ngDriver.FindElement(By.CssSelector("textarea[formcontrolname = 'liquorFinancialInterestDetails']"));
             uiLiquorFinInterestTextArea.SendKeys(finDetails);
 
-            // click on Continue to Organization Review button
+            // click on Continue to Application button
             var uiContinueAppButton = ngDriver.FindElement(By.Id("continueToApp"));
             uiContinueAppButton.Click();
         }
