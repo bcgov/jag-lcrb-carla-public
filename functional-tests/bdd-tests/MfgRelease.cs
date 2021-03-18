@@ -57,6 +57,7 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
+    And I click on the Licences tab
     And I request a market event for one date only
     And I click on the secondary Submit button
     And I click on the Licences tab

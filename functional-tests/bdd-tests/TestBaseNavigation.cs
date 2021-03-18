@@ -315,8 +315,6 @@ namespace bdd_tests
         {
             var result = MakeAPICall($"{baseUri}api/applications/{endorsementID}/processEndorsement");
             Assert.Contains("OK", result);
-
-            ClickLicencesTab();
         }
 
 
