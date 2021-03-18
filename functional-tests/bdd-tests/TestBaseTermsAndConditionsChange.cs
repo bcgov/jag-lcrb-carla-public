@@ -10,12 +10,6 @@ namespace bdd_tests
         public void TCChangeApplication()
         {
             /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Request T&C Change Application
             */
 
@@ -29,9 +23,6 @@ namespace bdd_tests
             // select signatureAgreement checkbox
             var uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgreement.Click();
-
-            // click on the Submit button
-            ClickOnSubmitButton();
         }
     }
 }
