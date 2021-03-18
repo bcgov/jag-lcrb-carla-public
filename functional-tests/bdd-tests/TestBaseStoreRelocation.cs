@@ -78,17 +78,6 @@ namespace bdd_tests
 
             // pay for the relocation application
             MakePayment();
-
-            if (applicationType == "Cannabis")
-                /* 	
-                    Page Title: Payment Approved	
-                    */
-
-                // confirm correct payment amount
-                //Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'$220.00')]")).Displayed);
-
-                // return to the Licences tab
-                ClickLicencesTab();
         }
 
         [And(@"I confirm the relocation request is displayed on the dashboard")]

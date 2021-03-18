@@ -32,6 +32,7 @@ Scenario: CRS Release (Private Corporation)
     And I renew the licence with positive responses for Cannabis
     And I click on the Licences tab
     And I request a store relocation for Cannabis
+    And I click on the Licences tab
     And I request a structural change
     And I request a transfer of ownership for Cannabis
     And the account is deleted
@@ -63,6 +64,7 @@ Scenario: CRS Release (Sole Proprietorship)
     And I renew the licence with positive responses for Cannabis
     And I click on the Licences tab
     And I request a store relocation for Cannabis
+    And I click on the Licences tab
     And I request a structural change
     And I request a transfer of ownership for Cannabis
     And the account is deleted
