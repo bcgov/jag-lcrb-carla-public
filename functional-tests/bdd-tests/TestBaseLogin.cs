@@ -16,6 +16,7 @@ namespace bdd_tests
             GC.SuppressFinalize(this);
         }
 
+
         [And(@"I click on Home page")]
         public void ClickOnHomePage()
         {
@@ -279,12 +280,10 @@ namespace bdd_tests
             CheckFeatureFlag("MarketEvents");
         }
 
-
         public void CheckFeatureLEConnections()
         {
             CheckFeatureFlag("LEConnections");
         }
-
 
         public void CarlaDeleteCurrentAccount()
         {

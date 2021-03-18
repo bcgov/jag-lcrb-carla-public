@@ -16,6 +16,7 @@ Scenario: Food Primary Temporary Use Area Endorsement (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I click on the link for Temporary Use Area Endorsement Application
+    And I click on the Continue to Application button
     And I submit a temporary use area endorsement application
     And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
