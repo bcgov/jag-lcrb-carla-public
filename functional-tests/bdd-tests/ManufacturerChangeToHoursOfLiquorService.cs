@@ -15,6 +15,7 @@ Scenario: Lounge Area Within Service Hours (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
     And I complete the change hours application for a lounge area within service hours
@@ -32,6 +33,7 @@ Scenario: Lounge Area Outside Service Hours (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
     And I complete the change hours application for a lounge area outside of service hours
@@ -48,6 +50,7 @@ Scenario: Special Event Area Within Service Hours (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
     And I complete the change hours application for a special event area within service hours
@@ -65,6 +68,7 @@ Scenario: Special Event Area Outside Service Hours (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
     And I complete the change hours application for a special event area outside of service hours

@@ -27,6 +27,7 @@ Scenario: Liquor Primary Establishment Name Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a valid store name or branding change for Liquor Primary
     And the account is deleted
     Then I see the login page

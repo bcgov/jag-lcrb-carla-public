@@ -11,6 +11,7 @@ Scenario: Add Rows Offsite Storage (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
     And I click on the link for Manage Off-Site Storage
@@ -28,6 +29,7 @@ Scenario: Add and Remove Rows Offsite Storage (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Manage Off-Site Storage
@@ -47,6 +49,7 @@ Scenario: Add Rows and Return to Offsite Storage (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Manage Off-Site Storage

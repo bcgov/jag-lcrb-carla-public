@@ -14,6 +14,7 @@ Scenario: Catering Branding Change (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I request a valid store name or branding change for Catering
@@ -33,6 +34,7 @@ Scenario: Catering Branding Change (Society)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I request a valid store name or branding change for Catering
@@ -52,6 +54,7 @@ Scenario: Catering Branding Change (Partnership)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I request a valid store name or branding change for Catering
@@ -71,6 +74,7 @@ Scenario: Catering Branding Change (Sole Proprietorship)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I request a valid store name or branding change for Catering
