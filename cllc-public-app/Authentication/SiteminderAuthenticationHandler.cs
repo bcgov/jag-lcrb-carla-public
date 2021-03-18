@@ -240,6 +240,344 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             _options = new SiteMinderAuthOptions();
         }
 
+        private async Task<AuthenticateResult> HandleBridgeAuthentication(UserSettings userSettings, HttpContext context)
+        {
+            // **************************************************
+            // Authenticate based on SiteMinder Headers
+            // **************************************************
+            _logger.Debug("Parsing the HTTP headers for SiteMinder authentication credential");
+            _logger.Debug("Getting user data from headers");
+
+            FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
+
+            if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserDisplayNameKey]))
+            {
+                userSettings.UserDisplayName = context.Request.Headers[_options.SiteMinderUserDisplayNameKey];
+            }
+
+            if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderBusinessLegalNameKey]))
+            {
+                userSettings.BusinessLegalName = context.Request.Headers[_options.SiteMinderBusinessLegalNameKey];
+            }
+
+            var userId = context.Request.Headers[_options.SiteMinderUserNameKey];
+            if (string.IsNullOrEmpty(userId))
+            {
+                userId = context.Request.Headers[_options.SiteMinderUniversalIdKey];
+            }
+
+            string siteMinderGuid = context.Request.Headers[_options.SiteMinderUserGuidKey];
+            string siteMinderBusinessGuid = context.Request.Headers[_options.SiteMinderBusinessGuidKey];
+            string siteMinderUserType = context.Request.Headers[_options.SiteMinderUserTypeKey];
+
+
+            // **************************************************
+            // Validate credentials
+            // **************************************************
+            if (string.IsNullOrEmpty(userId))
+            {
+                _logger.Debug(_options.MissingSiteMinderUserIdError);
+                return AuthenticateResult.Fail(_options.MissingSiteMinderGuidError);
+            }
+
+            if (string.IsNullOrEmpty(siteMinderGuid))
+            {
+                _logger.Debug(_options.MissingSiteMinderGuidError);
+                return AuthenticateResult.Fail(_options.MissingSiteMinderGuidError);
+            }
+            if (string.IsNullOrEmpty(siteMinderUserType))
+            {
+                _logger.Debug(_options.MissingSiteMinderUserTypeError);
+                return AuthenticateResult.Fail(_options.MissingSiteMinderUserTypeError);
+            }
+
+            _logger.Debug("Loading user external id = " + siteMinderGuid);
+            // 3/18/2020 - Note that LoadUserLegacy will now work if there is a match on the guid, as well as a match on name in a case where there is no guid.
+            userSettings.AuthenticatedUser = await _dynamicsClient.LoadUserLegacy(siteMinderGuid, context.Request.Headers, _ms_logger);
+            _logger.Information("After getting authenticated user = " + userSettings.GetJson());
+
+            // check that the user is active
+            if (userSettings.AuthenticatedUser != null
+                && !userSettings.AuthenticatedUser.Active)
+            {
+                _logger.Debug(_options.InactivegDbUserIdError + " (" + userId + ")");
+                return AuthenticateResult.Fail(_options.InactivegDbUserIdError);
+            }
+
+            // set the usertype to siteminder
+            if (userSettings.AuthenticatedUser != null
+                && !string.IsNullOrEmpty(siteMinderUserType))
+            {
+                userSettings.AuthenticatedUser.UserType = siteMinderUserType;
+            }
+
+            userSettings.UserType = siteMinderUserType;
+
+            // Get the various claims for the current user.
+            ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
+
+            // **************************************************
+            // Create authenticated user
+            // **************************************************
+            _logger.Debug("Authentication successful: " + userId);
+            _logger.Debug("Setting identity and creating session for: " + userId);
+
+            // create session info for the current user
+            userSettings.UserId = userId;
+            userSettings.UserAuthenticated = true;
+            userSettings.IsNewUserRegistration = userSettings.AuthenticatedUser == null;
+
+            // set other session info
+            userSettings.SiteMinderGuid = siteMinderGuid;
+            userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
+            _logger.Debug("Before getting contact and account ids = " + userSettings.GetJson());
+
+            if (userSettings.AuthenticatedUser != null)
+            {
+                userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
+                // ensure that the given account has a documents folder.
+
+                if (siteMinderBusinessGuid != null) // BCeID user
+                {
+                    var contact = _dynamicsClient.GetActiveContactByExternalIdBridged(false, siteMinderGuid);
+                    if (contact == null)
+                    {
+                        // try by other means.
+                        var contactVM = new ViewModels.Contact();
+                        contactVM.CopyHeaderValues(context.Request.Headers);
+                        var temp = _dynamicsClient.GetContactByContactVmBlankSmGuid(contactVM);
+                        if (temp != null && temp.Statecode == 0) // ensure it is active.
+                        {
+                            contact = temp;
+                            // update the contact.
+                            _dynamicsClient.UpdateContactBridgeLogin(contact.Contactid, siteMinderGuid, contact._accountidValue, siteMinderBusinessGuid);
+                        }
+                    }
+                    if (contact != null && contact.Contactid != null)
+                    {
+                        await CreateSharePointContactDocumentLocation(_fileManagerClient, contact);
+                    }
+
+                    // Note that this will search for active accounts
+                    var account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
+                    if (account == null)
+                    {
+                        // try by other means.
+                        account = _dynamicsClient.GetActiveAccountByLegalName(userSettings.BusinessLegalName);
+                    }
+                    if (account != null && account.Accountid != null)
+                    {
+                        userSettings.AccountId = account.Accountid;
+                        userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
+
+                        // ensure that the given account has a documents folder.
+                        await CreateSharePointAccountDocumentLocation(_fileManagerClient, account);
+                    }
+                    else  // force the new user process if contact exists but account does not.
+                    {
+                        userSettings.AuthenticatedUser = null;
+                        userSettings.IsNewUserRegistration = true;
+                    }
+                }
+                
+            }
+
+            // add the worker settings if it is a new user.
+            if (userSettings.IsNewUserRegistration)
+            {
+                userSettings.NewWorker = new Worker();
+                userSettings.NewWorker.CopyHeaderValues(context.Request.Headers);
+
+                userSettings.NewContact = new ViewModels.Contact();
+                userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
+            }
+            else if (siteMinderUserType == "VerifiedIndividual")
+            {
+                await HandleVerifiedIndividualLogin(userSettings, context);
+                if (HttpUtility.ParseQueryString(context.Request.QueryString.ToString()).Get("path") != "cannabis-associate-screening")
+                {
+                    await HandleWorkerLogin(userSettings, context);
+                }
+            }
+
+            // **************************************************
+            // Update user settings
+            // **************************************************                
+            UserSettings.SaveUserSettings(userSettings, context);
+
+            return AuthenticateResult.Success(new AuthenticationTicket(userPrincipal, null, Options.Scheme));
+        }
+
+
+        private async Task<AuthenticateResult> HandleLegacyAuthentication(UserSettings userSettings, HttpContext context)
+        {
+            // **************************************************
+            // Authenticate based on SiteMinder Headers
+            // **************************************************
+            _logger.Debug("Parsing the HTTP headers for SiteMinder authentication credential");
+            _logger.Debug("Getting user data from headers");
+
+            FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
+
+            if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserDisplayNameKey]))
+            {
+                userSettings.UserDisplayName = context.Request.Headers[_options.SiteMinderUserDisplayNameKey];
+            }
+
+            if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderBusinessLegalNameKey]))
+            {
+                userSettings.BusinessLegalName = context.Request.Headers[_options.SiteMinderBusinessLegalNameKey];
+            }
+
+            var userId = context.Request.Headers[_options.SiteMinderUserNameKey];
+            if (string.IsNullOrEmpty(userId))
+            {
+                userId = context.Request.Headers[_options.SiteMinderUniversalIdKey];
+            }
+
+            string siteMinderGuid = context.Request.Headers[_options.SiteMinderUserGuidKey];
+            string siteMinderBusinessGuid = context.Request.Headers[_options.SiteMinderBusinessGuidKey];
+            string siteMinderUserType = context.Request.Headers[_options.SiteMinderUserTypeKey];
+
+
+            // **************************************************
+            // Validate credentials
+            // **************************************************
+            if (string.IsNullOrEmpty(userId))
+            {
+                _logger.Debug(_options.MissingSiteMinderUserIdError);
+                return AuthenticateResult.Fail(_options.MissingSiteMinderGuidError);
+            }
+
+            if (string.IsNullOrEmpty(siteMinderGuid))
+            {
+                _logger.Debug(_options.MissingSiteMinderGuidError);
+                return AuthenticateResult.Fail(_options.MissingSiteMinderGuidError);
+            }
+            if (string.IsNullOrEmpty(siteMinderUserType))
+            {
+                _logger.Debug(_options.MissingSiteMinderUserTypeError);
+                return AuthenticateResult.Fail(_options.MissingSiteMinderUserTypeError);
+            }
+
+            _logger.Debug("Loading user external id = " + siteMinderGuid);
+            // 3/18/2020 - Note that LoadUserLegacy will now work if there is a match on the guid, as well as a match on name in a case where there is no guid.
+            userSettings.AuthenticatedUser = await _dynamicsClient.LoadUserLegacy(siteMinderGuid, context.Request.Headers, _ms_logger);
+            _logger.Information("After getting authenticated user = " + userSettings.GetJson());
+
+            // check that the potential new user is 19.
+            if (userSettings.AuthenticatedUser != null
+                && userSettings.AuthenticatedUser.ContactId == null
+                && UserIsUnderage(context))
+            {
+                return AuthenticateResult.Fail(_options.UnderageError);
+            }
+
+            // check that the user is active
+            if (userSettings.AuthenticatedUser != null
+                && !userSettings.AuthenticatedUser.Active)
+            {
+                _logger.Debug(_options.InactivegDbUserIdError + " (" + userId + ")");
+                return AuthenticateResult.Fail(_options.InactivegDbUserIdError);
+            }
+
+            // set the usertype to siteminder
+            if (userSettings.AuthenticatedUser != null
+                && !string.IsNullOrEmpty(siteMinderUserType))
+            {
+                userSettings.AuthenticatedUser.UserType = siteMinderUserType;
+            }
+
+            userSettings.UserType = siteMinderUserType;
+
+            // Get the various claims for the current user.
+            ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
+
+            // **************************************************
+            // Create authenticated user
+            // **************************************************
+            _logger.Debug("Authentication successful: " + userId);
+            _logger.Debug("Setting identity and creating session for: " + userId);
+
+            // create session info for the current user
+            userSettings.UserId = userId;
+            userSettings.UserAuthenticated = true;
+            userSettings.IsNewUserRegistration = userSettings.AuthenticatedUser == null;
+
+            // set other session info
+            userSettings.SiteMinderGuid = siteMinderGuid;
+            userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
+            _logger.Debug("Before getting contact and account ids = " + userSettings.GetJson());
+
+            if (userSettings.AuthenticatedUser != null)
+            {
+                userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
+                // ensure that the given account has a documents folder.
+
+                if (siteMinderBusinessGuid != null) // BCeID user
+                {
+                    var contact = _dynamicsClient.GetActiveContactByExternalId(userSettings.ContactId);
+                    if (contact == null)
+                    {
+                        // try by other means.
+                        var contactVM = new ViewModels.Contact();
+                        contactVM.CopyHeaderValues(context.Request.Headers);
+                        contact = _dynamicsClient.GetContactByContactVmBlankSmGuid(contactVM);
+                    }
+                    if (contact != null && contact.Contactid != null)
+                    {
+                        await CreateSharePointContactDocumentLocation(_fileManagerClient, contact);
+                    }
+
+                    // Note that this will search for active accounts
+                    var account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
+                    if (account == null)
+                    {
+                        // try by other means.
+                        account = _dynamicsClient.GetActiveAccountByLegalName(userSettings.BusinessLegalName);
+                    }
+                    if (account != null && account.Accountid != null)
+                    {
+                        userSettings.AccountId = account.Accountid;
+                        userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
+
+                        // ensure that the given account has a documents folder.
+                        await CreateSharePointAccountDocumentLocation(_fileManagerClient, account);
+                    }
+                    else  // force the new user process if contact exists but account does not.
+                    {
+                        userSettings.AuthenticatedUser = null;
+                        userSettings.IsNewUserRegistration = true;
+                    }
+                }
+            }
+
+            // add the worker settings if it is a new user.
+            if (userSettings.IsNewUserRegistration)
+            {
+                userSettings.NewWorker = new Worker();
+                userSettings.NewWorker.CopyHeaderValues(context.Request.Headers);
+
+                userSettings.NewContact = new ViewModels.Contact();
+                userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
+            }
+            else if (siteMinderUserType == "VerifiedIndividual")
+            {
+                await HandleVerifiedIndividualLogin(userSettings, context);
+                if (HttpUtility.ParseQueryString(context.Request.QueryString.ToString()).Get("path") != "cannabis-associate-screening")
+                {
+                    await HandleWorkerLogin(userSettings, context);
+                }
+            }
+
+            // **************************************************
+            // Update user settings
+            // **************************************************                
+            UserSettings.SaveUserSettings(userSettings, context);
+
+            return AuthenticateResult.Success(new AuthenticationTicket(userPrincipal, null, Options.Scheme));
+        }
+
         /// <summary>
         /// Process Authentication Request
         /// </summary>
@@ -264,7 +602,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
                 _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
-                FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
+                
                 IWebHostEnvironment hostingEnv = (IWebHostEnvironment)context.RequestServices.GetService(typeof(IWebHostEnvironment));
 
                 // Fail if login disabled
@@ -325,169 +663,15 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     }
                 }
 
-                // **************************************************
-                // Authenticate based on SiteMinder Headers
-                // **************************************************
-                _logger.Debug("Parsing the HTTP headers for SiteMinder authentication credential");
-                _logger.Debug("Getting user data from headers");
-
-                if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserDisplayNameKey]))
+                // determine if it is the new bridge entity based flow or the legacy.
+                if (!string.IsNullOrEmpty(_configuration["FEATURE_BRIDGE_LOGIN"]))
                 {
-                    userSettings.UserDisplayName = context.Request.Headers[_options.SiteMinderUserDisplayNameKey];
+                    return await HandleBridgeAuthentication(userSettings, context);
                 }
-
-                if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderBusinessLegalNameKey]))
+                else
                 {
-                    userSettings.BusinessLegalName = context.Request.Headers[_options.SiteMinderBusinessLegalNameKey];
+                    return await HandleLegacyAuthentication(userSettings, context);
                 }
-
-                userId = context.Request.Headers[_options.SiteMinderUserNameKey];
-                if (string.IsNullOrEmpty(userId))
-                {
-                    userId = context.Request.Headers[_options.SiteMinderUniversalIdKey];
-                }
-
-                siteMinderGuid = context.Request.Headers[_options.SiteMinderUserGuidKey];
-                siteMinderBusinessGuid = context.Request.Headers[_options.SiteMinderBusinessGuidKey];
-                siteMinderUserType = context.Request.Headers[_options.SiteMinderUserTypeKey];
-
-
-                // **************************************************
-                // Validate credentials
-                // **************************************************
-                if (string.IsNullOrEmpty(userId))
-                {
-                    _logger.Debug(_options.MissingSiteMinderUserIdError);
-                    return AuthenticateResult.Fail(_options.MissingSiteMinderGuidError);
-                }
-
-                if (string.IsNullOrEmpty(siteMinderGuid))
-                {
-                    _logger.Debug(_options.MissingSiteMinderGuidError);
-                    return AuthenticateResult.Fail(_options.MissingSiteMinderGuidError);
-                }
-                if (string.IsNullOrEmpty(siteMinderUserType))
-                {
-                    _logger.Debug(_options.MissingSiteMinderUserTypeError);
-                    return AuthenticateResult.Fail(_options.MissingSiteMinderUserTypeError);
-                }
-
-                _logger.Debug("Loading user external id = " + siteMinderGuid);
-                // 3/18/2020 - Note that LoadUser will now work if there is a match on the guid, as well as a match on name in a case where there is no guid.
-                userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(siteMinderGuid, context.Request.Headers, _ms_logger);
-                _logger.Information("After getting authenticated user = " + userSettings.GetJson());
-
-                // check that the potential new user is 19.
-                if (userSettings.AuthenticatedUser != null
-                    && userSettings.AuthenticatedUser.ContactId == null
-                    && UserIsUnderage(context))
-                {
-                    return AuthenticateResult.Fail(_options.UnderageError);
-                }
-
-                // check that the user is active
-                if (userSettings.AuthenticatedUser != null
-                    && !userSettings.AuthenticatedUser.Active)
-                {
-                    _logger.Debug(_options.InactivegDbUserIdError + " (" + userId + ")");
-                    return AuthenticateResult.Fail(_options.InactivegDbUserIdError);
-                }
-
-                // set the usertype to siteminder
-                if (userSettings.AuthenticatedUser != null
-                    && !string.IsNullOrEmpty(siteMinderUserType))
-                {
-                    userSettings.AuthenticatedUser.UserType = siteMinderUserType;
-                }
-
-                userSettings.UserType = siteMinderUserType;
-
-                // Get the various claims for the current user.
-                ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
-
-                // **************************************************
-                // Create authenticated user
-                // **************************************************
-                _logger.Debug("Authentication successful: " + userId);
-                _logger.Debug("Setting identity and creating session for: " + userId);
-
-                // create session info for the current user
-                userSettings.UserId = userId;
-                userSettings.UserAuthenticated = true;
-                userSettings.IsNewUserRegistration = userSettings.AuthenticatedUser == null;
-
-                // set other session info
-                userSettings.SiteMinderGuid = siteMinderGuid;
-                userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
-                _logger.Debug("Before getting contact and account ids = " + userSettings.GetJson());
-                
-                if (userSettings.AuthenticatedUser != null)
-                {
-                    userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
-                    // ensure that the given account has a documents folder.
-                    
-                    if (siteMinderBusinessGuid != null) // BCeID user
-                    {
-                        var contact = _dynamicsClient.GetActiveContactByExternalId(userSettings.ContactId);
-                        if (contact == null)
-                        {
-                            // try by other means.
-                            var contactVM = new Contact();
-                            contactVM.CopyHeaderValues(context.Request.Headers);
-                            contact = _dynamicsClient.GetContactByContactVmBlankSmGuid(contactVM);
-                        }
-                        if (contact != null && contact.Contactid != null)
-                        {
-                            await CreateSharePointContactDocumentLocation(_fileManagerClient, contact);
-                        }
-
-                        // Note that this will search for active accounts
-                        var account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
-                        if (account == null)
-                        {
-                            // try by other means.
-                            account = _dynamicsClient.GetActiveAccountByLegalName(userSettings.BusinessLegalName);
-                        }
-                        if (account != null && account.Accountid != null)
-                        {
-                            userSettings.AccountId = account.Accountid;
-                            userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
-
-                            // ensure that the given account has a documents folder.
-                            await CreateSharePointAccountDocumentLocation(_fileManagerClient, account);
-                        }
-                        else  // force the new user process if contact exists but account does not.
-                        {
-                            userSettings.AuthenticatedUser = null;
-                            userSettings.IsNewUserRegistration = true;
-                        }
-                    }
-                }
-
-                // add the worker settings if it is a new user.
-                if (userSettings.IsNewUserRegistration)
-                {
-                    userSettings.NewWorker = new Worker();
-                    userSettings.NewWorker.CopyHeaderValues(context.Request.Headers);
-
-                    userSettings.NewContact = new Contact();
-                    userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
-                }
-                else if (siteMinderUserType == "VerifiedIndividual")
-                {
-                    await HandleVerifiedIndividualLogin(userSettings, context);
-                    if (HttpUtility.ParseQueryString(context.Request.QueryString.ToString()).Get("path") != "cannabis-associate-screening")
-                    {
-                        await HandleWorkerLogin(userSettings, context);
-                    }
-                }
-
-                // **************************************************
-                // Update user settings
-                // **************************************************                
-                UserSettings.SaveUserSettings(userSettings, context);
-
-                return AuthenticateResult.Success(new AuthenticationTicket(userPrincipal, null, Options.Scheme));
             }
             catch (Exception exception)
             {
@@ -590,7 +774,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
             FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
 
-            Contact contact = new Contact();
+            ViewModels.Contact contact = new ViewModels.Contact();
             contact.CopyHeaderValues(context.Request.Headers);
 
             MicrosoftDynamicsCRMcontact savedContact = _dynamicsClient.Contacts.GetByKey(userSettings.ContactId);
@@ -760,7 +944,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             _logger.Debug("DEV MODE Setting identity and creating session for: " + userId);
 
             // create session info for the current user
-            userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(userSettings.SiteMinderGuid, context.Request.Headers, _ms_logger);
+            userSettings.AuthenticatedUser = await _dynamicsClient.LoadUserLegacy(userSettings.SiteMinderGuid, context.Request.Headers, _ms_logger);
             if (userSettings.AuthenticatedUser == null)
             {
                 userSettings.UserAuthenticated = true;
@@ -795,5 +979,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
             return false;
         }
+
+        
+        
     }
 }
