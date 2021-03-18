@@ -96,6 +96,7 @@ Scenario: Liquor Primary Release Test #2 (Private Corporation)
     #And I request a no capacity structural change
     #And I click on the Licences tab
     #And I click on the link for Temporary Extension of Licensed Area
+    #And I click on the Continue to Application button
     #And I submit a liquor primary temporary extension of licensed area application
     #And I click on the Licences tab
     #And I click on the link for Temporary Suspension Request
