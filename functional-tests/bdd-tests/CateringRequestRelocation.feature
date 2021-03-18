@@ -12,6 +12,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I request a store relocation for Catering
     And I click on the Dashboard tab
@@ -28,6 +29,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request a store relocation for Catering
     And I click on the Dashboard tab
@@ -44,6 +46,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request a store relocation for Catering
     And I click on the Dashboard tab

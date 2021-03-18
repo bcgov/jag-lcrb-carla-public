@@ -15,6 +15,7 @@ Scenario: Establishment Name Change Application (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
@@ -31,6 +32,7 @@ Scenario: Establishment Name Change Application (Brewery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
@@ -47,6 +49,7 @@ Scenario: Establishment Name Change Application (Distillery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
@@ -63,6 +66,7 @@ Scenario: Establishment Name Change Application (Co-packer)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab

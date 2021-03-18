@@ -13,6 +13,7 @@ Scenario: CRS Name Branding Change (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
@@ -32,6 +33,7 @@ Scenario: CRS Name Branding Change (Society)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
@@ -51,6 +53,7 @@ Scenario: CRS Name Branding Change (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
@@ -70,6 +73,7 @@ Scenario: CRS Name Branding Change (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS

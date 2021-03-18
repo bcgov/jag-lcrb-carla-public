@@ -16,6 +16,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
@@ -31,6 +32,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
@@ -46,6 +48,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee  
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
@@ -61,6 +64,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
@@ -80,6 +84,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request an event authorization with more than 500 people
     And the event history is updated correctly for an application with more than 500 people
@@ -99,6 +104,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request an event authorization for an outdoor location
     And the event history is updated correctly for an application for an outdoor location
@@ -118,6 +124,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request an event authorization for an indoor and outdoor location
     And the event history is updated correctly for an application for an indoor and outdoor location
@@ -137,6 +144,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request an event authorization for after 2am
     And the event history is updated correctly for an application for after 2am
@@ -156,6 +164,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request an event authorization for a community event after 2am
     And the event history is updated correctly for an application for a community event after 2am
@@ -175,6 +184,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request an event authorization for a draft
     And the event history is updated correctly for an application for a draft

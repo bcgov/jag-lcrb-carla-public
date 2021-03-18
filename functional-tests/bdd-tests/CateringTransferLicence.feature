@@ -12,6 +12,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I request a transfer of ownership for Catering
     And the account is deleted
@@ -26,6 +27,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request a transfer of ownership for Catering
     And the account is deleted
@@ -40,6 +42,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request a transfer of ownership for Catering
     And the account is deleted
@@ -54,6 +57,7 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I request a transfer of ownership for Catering
     And the account is deleted
