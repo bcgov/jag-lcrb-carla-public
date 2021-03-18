@@ -10,7 +10,6 @@ using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utility;
 using Gov.Lclb.Cllb.Public.Utils;
-using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -60,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetContact(string id)
         {
-            Contact result = null;
+            ViewModels.Contact result = null;
 
             if (!string.IsNullOrEmpty(id))
             {
@@ -89,7 +88,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateContact([FromBody] Contact item, string id)
+        public async Task<IActionResult> UpdateContact([FromBody] ViewModels.Contact item, string id)
         {
             if (id != null && item.id != null && id != item.id) return BadRequest();
             var accessGranted = false;
@@ -147,7 +146,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpPut("security-screening/{token}")]
         [AllowAnonymous]
-        public async Task<IActionResult> UpdateContactByToken([FromBody] Contact item, string token)
+        public async Task<IActionResult> UpdateContactByToken([FromBody] ViewModels.Contact item, string token)
         {
             if (token == null || item == null) return BadRequest();
 
@@ -174,7 +173,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(contact.ToViewModel());
         }
 
-        private async Task<IActionResult> CreateAlias(Alias item, string contactId)
+        private async Task<IActionResult> CreateAlias(ViewModels.Alias item, string contactId)
         {
             if (item == null || string.IsNullOrEmpty(contactId)) return BadRequest();
 
@@ -219,7 +218,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> CreateContact([FromBody] Contact item)
+        public async Task<IActionResult> CreateContact([FromBody] ViewModels.Contact item)
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -310,7 +309,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost("worker")]
-        public async Task<IActionResult> CreateWorkerContact([FromBody] Contact item)
+        public async Task<IActionResult> CreateWorkerContact([FromBody] ViewModels.Contact item)
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -498,7 +497,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         Id = contact.Contactid,
                         token = code,
                         shortName = contact.Firstname.First() + " " + contact.Lastname,
-                        isComplete = contact.AdoxioPhscomplete == (int) YesNoOptions.Yes
+                        isComplete = contact.AdoxioPhscomplete == (int)ViewModels.YesNoOptions.Yes
                     };
                     return new JsonResult(result);
                 }
@@ -554,7 +553,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         token = code,
                         shortName = contact.Firstname + " " + contact.Lastname,
                         dateOfBirth = contact.AdoxioDateofbirthshortdatestring,
-                        gender = ((Gender?) contact.AdoxioGendercode).ToString(),
+                        gender = ((ViewModels.Gender?) contact.AdoxioGendercode).ToString(),
                         streetAddress = contact.Address1Line1,
                         city = contact.Address1City,
                         province = contact.Address1Stateorprovince,
