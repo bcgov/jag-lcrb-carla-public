@@ -91,6 +91,7 @@ Scenario: Winery Licence PDF Verification (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the link for Download Licence
     Then the correct winery licence PDF is generated with hours of sale and terms and conditions
@@ -108,6 +109,7 @@ Scenario: Brewery Licence PDF Verification (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the link for Download Licence
     Then the correct brewery licence PDF is generated with hours of sale and terms and conditions
@@ -125,6 +127,7 @@ Scenario: Distillery Licence PDF Verification (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the link for Download Licence
     Then the correct distillery licence PDF is generated with hours of sale and terms and conditions
@@ -142,6 +145,7 @@ Scenario: Co-packer Licence PDF Verification (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the link for Download Licence
     Then the correct co-packer licence PDF is generated with hours of sale and terms and conditions
@@ -157,6 +161,7 @@ Scenario: Rural Agency Store Licence PDF Verification (Private Corporation)
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
+    And I click on the Licences tab
     And I click on the link for Download Licence
     Then the correct Rural Agency Store PDF is generated with terms and conditions and hours of sales and without endorsements
 
@@ -172,6 +177,7 @@ Scenario: Food Primary Licence PDF Verification (Private Corporation)
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the link for Download Licence
     Then the correct licence PDF is generated with hours of sale and terms and conditions
