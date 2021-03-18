@@ -25,6 +25,8 @@ Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     And I click on the Licences tab
     And I request a relocation change
     And I click on the Licences tab
+    And I click on the link for Lounge Area Endorsement Application
+    And I click on the Continue to Application button
     And I request a lounge area endorsement
     And I click on the Licences tab
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
