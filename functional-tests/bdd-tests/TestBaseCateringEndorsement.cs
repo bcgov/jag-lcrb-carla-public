@@ -10,13 +10,6 @@ namespace bdd_tests
         public void CompleteCateringEndorsement()
         {
             /* 
-            Page Title: Please Review Your Account Profile
-            */
-
-            // click on the Continue to Application button
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Catering Endorsement Application
             */
 
