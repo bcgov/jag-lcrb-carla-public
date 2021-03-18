@@ -10,12 +10,6 @@ namespace bdd_tests
         public void LPRelocationApplication()
         {
             /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Liquor Primary and Liquor Primary Club Relocation Application
             */
 
