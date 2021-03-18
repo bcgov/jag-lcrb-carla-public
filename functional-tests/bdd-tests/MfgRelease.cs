@@ -56,6 +56,8 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And I click on the Licences tab
+    And I click on the link for Special Event Area Endorsement Application
+    And I click on the Continue to Application button
     And I request a special event area endorsement
     And I click on the Licences tab
     And I request structural alterations to an approved lounge or special events area

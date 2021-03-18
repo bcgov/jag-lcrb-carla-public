@@ -10,18 +10,6 @@ namespace bdd_tests
         public void SpecialEventAreaEndorsement()
         {
             /* 
-            Page Title: Licences & Authorizations
-            */
-
-            var specialEventAreaEndorsement = "Special Event Area Endorsement Application";
-
-            // click on the Special Event Area Endorsement Application link
-            var uiSpecialEventAreaEndorsement = ngDriver.FindElement(By.LinkText(specialEventAreaEndorsement));
-            uiSpecialEventAreaEndorsement.Click();
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Special Event Area Endorsement Application
             */
 
