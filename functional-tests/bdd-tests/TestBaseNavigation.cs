@@ -390,7 +390,7 @@ namespace bdd_tests
 
             var result = MakeAPICall($"{baseUri}api/Licenses/{workflowGUID}/setexpiry/{licenceID}");
             Assert.Contains("OK", result);
-            ClickDashboardTab(); // navigate away the back to cause data reload
+            ClickDashboardTab(); // navigate away then back to cause data reload
             ClickLicencesTab();
         }
 
