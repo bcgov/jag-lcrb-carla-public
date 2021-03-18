@@ -8,25 +8,24 @@
     <h3 class="blue-header">TERMS AND CONDITIONS</h3>
     <section class="content-bottom">
       <ul>
-        <li>Minors are permitted unaccompanied by adults</li>
-        <li>The event must not extend past the closing time for liquor service as stated on your licence</li>
-        <li>You must:
-          <ul>
-            <li>Post signage outside the establishment to advertise a liquor-free event, the hours of the event and that
-              the service area is closed to liquor service</li>
-            <li>Ensure liquor is secured and inaccessible during the event</li>
-            <li>Ensure there is half an hour between the end of liquor service and the opening of the liquor-free event
-            </li>
-            <li>Ensure there is half an hour to clear minors from the service area if you will re-open for liquor
-              service before the end of the hours of liquor service, if your licence restricts the entry of minors</li>
-            <li>Take measures to ensure the operation of the event does not disturb people in the vicinity of the
-              establishment or jeopardize the safety of those attending the event</li>
-            <li>Keep a log of all liquor-free events whether they require notice or not, and the log must be available
-              upon request by a liquor inspector or local police</li>
-          </ul>
-        </li>
-        <li>The General Manager may, in the public interest, add terms and conditions to a licence that limit
-          liquor-free events</li>
+        <li>No special provincial licence or permit is required to run a take-home sampling event</li>
+        <li>During take-home sampling events the liquor must not be opened by either those handing out samples or those
+          receiving a sample. There is no prohibition against an adult carrying unopened liquor in a public place. There
+          is also no requirement that unopened liquor be taken directly home</li>
+        <li>The samples should not be cooled and must only be handed out one per adult</li>
+        <li>Samples must not be given to individuals apparently under the influence of alcohol or drugs</li>
+        <li>When checking ID is required to verify a person's age, two pieces of ID must be requested, the first being a
+          government issued ID with a name, birth date and picture and the second piece must contain the person's name,
+          signature and/or picture</li>
+        <li>The maximum liquid volume of take-home samples are one standard drink sized beer or cooler, single serving
+          wine bottle (typically 200 ml) or a small spirits bottle (typically 50 ml)</li>
+        <li>At least one staff person at each take-home sampling site must be Serving It Right certified. That person
+          must oversee the take-home sampling</li>
+        <li>A sticker or similar device over the cap, printed with a phrase such as “Please enjoy responsibly at home”,
+          must be included on each sample</li>
+        <li>Each adult receiving a take-home sample must receive a hand stamp to prevent them from attempting to return
+          for a additional samples</li>
+        <li>Those receiving samples must be told that the sample is for home consumption</li>
       </ul>
     </section>
 
@@ -40,25 +39,7 @@
       </h3>
     </div>
 
-    <h3 class="blue-header">EVENT DETAILS</h3>
-    <section class="content-bottom clearfix">
-      <div class="row">
-        <app-field class="col-md-4 col-xs-12" label="Event Name" [required]="true"
-          [valid]="isValidOrNotTouched('eventName')" errorMessage="Please enter the event name" [isFullWidth]="true">
-          <input class="form-control" type="text" formControlName="eventName">
-        </app-field>
-      </div>
-      <div class="row">
-        <app-field class="col-md-8 col-xs-12" label="Event Note" [required]="false"
-          [valid]="isValidOrNotTouched('eventTypeDescription')" errorMessage="Please enter a description of the event"
-          [isFullWidth]="true">
-          <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
-        </app-field>
-        <fa-icon [icon]="faQuestionCircle" class="question-mark" matTooltip="Briefly describe the event."></fa-icon>
-      </div>
-    </section>
-
-    <h3 class="blue-header">CONTACT INFORMATION</h3>
+    <h3 class="blue-header">EVENT CONTACT INFORMATION</h3>
     <section class="content-bottom clearfix">
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Name" [required]="true" [isFullWidth]="true"
@@ -70,6 +51,97 @@
         <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true" [isFullWidth]="true"
           [valid]="isValidOrNotTouched('contactPhone')" errorMessage="Please enter the contact phone number">
           <input class="form-control" type="text" formControlName="contactPhone" mask="(000) 000-0000">
+        </app-field>
+      </div>
+    </section>
+
+    <h3 class="blue-header">EVENT DETAILS</h3>
+    <section class="content-bottom clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Type" [required]="true" [valid]="isValidOrNotTouched('eventType')"
+          errorMessage="Please enter the type of event" [isFullWidth]="true">
+          <select class="form-control" formControlName="eventType">
+            <option *ngFor="let item of eventType" [ngValue]="item.value">{{item.label}}</option>
+          </select>
+
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top: 30px;"
+          matTooltip="Select the type of event.">
+        </fa-icon>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Event Name" [required]="true"
+          [valid]="isValidOrNotTouched('eventName')" errorMessage="Please enter the event name" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="eventName">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-8 col-xs-12" label="Event Description" [required]="false"
+          [valid]="isValidOrNotTouched('eventTypeDescription')" errorMessage="Please enter a description of the event"
+          [isFullWidth]="true">
+          <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" class="question-mark" matTooltip="Briefly describe the event."></fa-icon>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Client or Host Name" [required]="true"
+          [valid]="isValidOrNotTouched('clientHostname')" errorMessage="Please enter the client or host name"
+          [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="clientHostname">
+        </app-field>
+      </div>
+    </section>
+
+    <h3 class="blue-header">VENUE LOCATION</h3>
+    <section class="content-bottom clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Venue Name/Description" [required]="true"
+          [valid]="isValidOrNotTouched('venueDescription')"
+          errorMessage="Please enter the name and a description of the venue" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="venueDescription"></textarea>
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top: 30px;"
+          matTooltip="Provide the name of and briefly describe the venue.">
+        </fa-icon>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Location" [required]="true"
+          [valid]="isValidOrNotTouched('specificLocation')" errorMessage="Please enter the location"
+          [isFullWidth]="true">
+          <select class="form-control" formControlName="specificLocation">
+            <option *ngFor="let item of specificLocation" [ngValue]="item.value">{{item.label}}</option>
+          </select>
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top: 30px;"
+          matTooltip="Select whether the event is being held indoors, outdoors, or both.">
+        </fa-icon>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Additional Information"
+          [valid]="isValidOrNotTouched('additionalLocationInformation')" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="additionalLocationInformation"></textarea>
+        </app-field>
+      </div>
+
+      <h3>Physical Address of Venue</h3>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Address 1" [required]="true"
+          [valid]="isValidOrNotTouched('street1')" errorMessage="Please enter the address line 1" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="street1">
+        </app-field>
+        <app-field class="col-md-4 col-xs-12" label="Address 2" [valid]="isValidOrNotTouched('street2')"
+          [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="street2">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [valid]="isValidOrNotTouched('city')"
+          errorMessage="Please enter the city" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="city">
+        </app-field>
+        <app-field class="col-md-4 col-xs-12" label="Postal Code" [required]="true"
+          [valid]="isValidOrNotTouched('postalCode')" errorMessage="Please enter the postal code" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="postalCode">
         </app-field>
       </div>
     </section>
@@ -97,8 +169,18 @@
       <div *ngFor="let fg of timeForms.controls" class="row mx-0 mt-3 event-hours">
         <form [formGroup]="fg" class="col-md-12">
           <div class="row mt-3">
-            <div class="col-md-2 offset-md-2"><label>Event Start</label></div>
-            <div class="col-md-2"><label>Event End</label></div>
+            <div class="col-md-2 offset-md-2">
+              <label>Event Start</label>
+            </div>
+            <div class="col-md-2">
+              <label>Event End</label>
+            </div>
+            <div class="col-md-2">
+              <label>Liquor Service Start</label>
+            </div>
+            <div class="col-md-2">
+              <label>Liquor Service End</label>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-2 time-picker-title">
@@ -109,6 +191,12 @@
             </div>
             <div class="col-md-2">
               <ngb-timepicker [meridian]="true" formControlName="endTime"></ngb-timepicker>
+            </div>
+            <div class="col-md-2">
+              <ngb-timepicker [meridian]="true" formControlName="liquorStartTime"></ngb-timepicker>
+            </div>
+            <div class="col-md-2">
+              <ngb-timepicker [meridian]="true" formControlName="liquorEndTime"></ngb-timepicker>
             </div>
           </div>
         </form>
@@ -144,30 +232,6 @@
       <div>
         <mat-checkbox class="text-wrap" formControlName="isAgreement1">I understand that my event is subject to review
           by LCRB and Terms and Conditions will prevail.</mat-checkbox>
-        <ul>
-          <li>Minors are permitted unaccompanied by adults as long as liquor is not served or sold during the hours of
-            the event</li>
-          <li>The event cannot extend past the hours of ordinary liquor service</li>
-        </ul>
-        You must:
-        <ul>
-          <li>Post signage outside the establishment to indicate the occurrence of an all-ages event, the hours of the
-            event and that the establishment is closed to liquor service</li>
-          <li>Ensure liquor is secured and inaccessible during the event</li>
-          <li>Ensure there is half an hour to clear minors from its establishment if the licensee re-opens for liquor
-            service before the end its hours of permissible liquor service</li>
-          <li>Take measures to ensure the operation of the event does not disturb persons in the vicinity of the
-            establishment, including that:</li>
-          <ul>
-            <li>You must ensure licensed security staff is present to monitor and control the event</li>
-            <li>If patrons depart during the event, they are not allowed to re-enter the establishment</li>
-          </ul>
-          <li>If you contravene the terms and conditions of your licence or any other legislated requirements,
-            enforcement action may be taken</li>
-          <li>This approval is subject to any existing laws or terms and conditions that restrict a licensee from
-            holding this type of event. The General Manager may review a licensee's compliance history and revoke
-            approval if there are identified criminal or gang affiliations</li>
-        </ul>
       </div>
       <div class="mt-3">
         <mat-checkbox class="text-wrap" formControlName="isAgreement2">I have reviewed all the information above for
