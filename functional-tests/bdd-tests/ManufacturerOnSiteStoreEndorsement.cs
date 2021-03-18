@@ -17,6 +17,7 @@ Scenario: On-Site Store Endorsement Application (Winery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -34,6 +35,7 @@ Scenario: On-Site Store Endorsement Application (Brewery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -51,6 +53,7 @@ Scenario: On-Site Store Endorsement Application (Distillery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -68,6 +71,7 @@ Scenario: On-Site Store Endorsement Application (Co-packer)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review

@@ -13,6 +13,7 @@ Scenario: Manufacturer Temp Change to Hours of Sale (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Temporary Change to Hours of Sale
     And I click on the Continue to Application button
     And I request a temporary change to hours of sale

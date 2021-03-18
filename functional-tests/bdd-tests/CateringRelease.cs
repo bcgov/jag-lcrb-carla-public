@@ -17,6 +17,7 @@ Scenario: Catering Release (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence
@@ -52,6 +53,7 @@ Scenario: Catering Release (Sole Proprietorship)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the button for Catering terms and conditions
     And the correct terms and conditions are displayed for Catering
     And I click on the link for Download Licence

@@ -15,6 +15,7 @@ Scenario: Federal Reports and Show Map (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I show the store as open on the map
     And I review the federal reports
     And the account is deleted

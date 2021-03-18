@@ -15,6 +15,7 @@ Scenario: Cannabis Store Relocation (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -33,6 +34,7 @@ Scenario: Cannabis Store Relocation (Society)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -51,6 +53,7 @@ Scenario: Cannabis Store Relocation (Partnership)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -69,6 +72,7 @@ Scenario: Cannabis Store Relocation (Sole Proprietorship)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard

@@ -17,6 +17,7 @@ Scenario: Relocation Change Application (Winery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -33,7 +34,8 @@ Scenario: Relocation Change Application (Brewery)
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee 
+    And I pay the licensing fee
+    And I click on the Licences tab
     And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -51,6 +53,7 @@ Scenario: Relocation Change Application (Distillery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -68,6 +71,7 @@ Scenario: Relocation Change Application (Co-packer)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a relocation change
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review

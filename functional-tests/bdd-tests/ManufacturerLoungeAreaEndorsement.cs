@@ -17,6 +17,7 @@ Scenario: Lounge Area Endorsement Application (Winery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a lounge area endorsement
     And the account is deleted
     Then I see the login page
@@ -31,7 +32,8 @@ Scenario: Lounge Area Endorsement Application (Brewery)
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee 
+    And I pay the licensing fee
+    And I click on the Licences tab
     And I request a lounge area endorsement
     And the account is deleted
     Then I see the login page
@@ -46,7 +48,8 @@ Scenario: Lounge Area Endorsement Application (Distillery)
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee 
+    And I pay the licensing fee
+    And I click on the Licences tab
     And I request a lounge area endorsement
     And the account is deleted
     Then I see the login page
@@ -62,6 +65,7 @@ Scenario: Lounge Area Endorsement Application (Co-packer)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a lounge area endorsement
     And the account is deleted
     Then I see the login page

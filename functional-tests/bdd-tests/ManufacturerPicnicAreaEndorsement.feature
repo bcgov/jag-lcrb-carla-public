@@ -13,6 +13,7 @@ Scenario: Picnic Area Endorsement Application (Winery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted
@@ -29,6 +30,7 @@ Scenario: Picnic Area Endorsement Application (Brewery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted
@@ -45,6 +47,7 @@ Scenario: Picnic Area Endorsement Application (Distillery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted
@@ -61,6 +64,7 @@ Scenario: Picnic Area Endorsement Application (Co-packer)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted

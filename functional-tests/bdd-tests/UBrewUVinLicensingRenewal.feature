@@ -18,6 +18,7 @@ Scenario: Today Negative Licence Renewal (UBrew)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
     And I renew the licence with negative responses for a UBrew operation

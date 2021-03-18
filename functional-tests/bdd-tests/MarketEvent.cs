@@ -21,6 +21,7 @@ using Xunit.Gherkin.Quick;
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -49,6 +50,7 @@ using Xunit.Gherkin.Quick;
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -78,6 +80,7 @@ using Xunit.Gherkin.Quick;
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -105,6 +108,7 @@ using Xunit.Gherkin.Quick;
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -133,6 +137,7 @@ using Xunit.Gherkin.Quick;
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -166,6 +171,7 @@ using Xunit.Gherkin.Quick;
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -199,6 +205,7 @@ using Xunit.Gherkin.Quick;
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
@@ -232,6 +239,7 @@ using Xunit.Gherkin.Quick;
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And I click on the Licences tab
     And the on-site endorsement application is approved
