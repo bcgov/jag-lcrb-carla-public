@@ -23,6 +23,8 @@ Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I click on the Licences tab
+    And I click on the link for Request Relocation
+    And I click on the Continue to Application button
     And I request a relocation change
     And I click on the Licences tab
     And I click on the link for Lounge Area Endorsement Application

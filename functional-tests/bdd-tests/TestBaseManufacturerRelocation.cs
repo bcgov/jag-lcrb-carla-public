@@ -10,18 +10,6 @@ namespace bdd_tests
         public void RelocationChange()
         {
             /* 
-            Page Title: Licences & Authorizations
-            */
-
-            var locationChange = "Request Relocation";
-
-            // click on the Request Relocation link
-            var uiLocationChange = ngDriver.FindElement(By.LinkText(locationChange));
-            uiLocationChange.Click();
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Manufacturer Relocation Application
             */
 
