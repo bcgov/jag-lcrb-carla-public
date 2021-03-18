@@ -1323,14 +1323,31 @@
 <!-- Service Area -->
 <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas">SERVICE AREAS</h3>
 <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
+
   <div *ngIf="htmlContent?.serviceAreas" [innerHTML]="htmlContent.serviceAreas"></div>
-  <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
-             errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
-    <app-capacity-table formControlName="serviceAreas"
-                        [areaCategory]="getAreaCategoryNumber('Service')"
-                        [enabled]="!isOpenedByLGForApproval && !lGHasApproved()">
+
+  <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid" errorMessage="All fields are required."
+    [showChevrons]="false" [isFullWidth]="true">
+    <app-capacity-table formControlName="serviceAreas" [areaCategory]="getAreaCategoryNumber('Service')"
+      [enabled]="!isOpenedByLGForApproval && !lGHasApproved()">
     </app-capacity-table>
   </app-field>
+
+  <mat-card class="mat-elevation-z0 mb-3" *ngIf="showHoldsOtherManufactureLicence()">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+      <div class="question-label">
+        Do you currently hold another manufacturer licence at the same site that is already endorsed for the same area?
+      </div>
+      <div style="flex: 0 0 85px;">
+        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('holdsOtherManufactureLicence')}"
+          formControlName="holdsOtherManufactureLicence" aria-label="Font Style">
+          <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+          <mat-button-toggle [value]="false">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+  </mat-card>
+
 </section>
 
 <!-- Outside Area -->
@@ -2428,10 +2445,7 @@
   -->
   <!-- LG Approval Required -->
   <button mat-raised-button class="ng-test-submit-for-lg-review" color="primary"
-          *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
-            && !lGHasApproved()
-            && !lGHasRejected()
-            && application?.applicationStatus === 'Intake'"
+          *ngIf="showSubmitToLG()"
           [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
     <span><fa-icon [icon]="faUniversity" class="mr-1"></fa-icon>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
     <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
@@ -2441,7 +2455,7 @@
 
   <!-- LG Approved OR NO LG Approvals Required -->
   <ng-container
-    *ngIf="lGHasApproved() || !application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation">
+    *ngIf="lGHasApproved() || ((!application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation) || !showSubmitToLG())">
 
     <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
             (click)="submit_application()" [disabled]="submitApplicationInProgress">
