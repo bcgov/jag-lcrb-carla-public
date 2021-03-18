@@ -11,6 +11,7 @@ Scenario: Manufacturer Terms and Conditions (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I confirm the terms and conditions for a Manufacturer licence
     And the account is deleted
