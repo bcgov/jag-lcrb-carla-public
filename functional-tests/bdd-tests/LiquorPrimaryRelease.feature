@@ -90,6 +90,7 @@ Scenario: Liquor Primary Release Test #2 (Private Corporation)
     # TODO: T&C change application needs to be approved
     # And I click on the Licences tab
     # And I click on the link for Structural Change Application (Capacity Increase)
+    # And I click on the Continue to Application button
     # And I request a capacity increase structural change
     # TODO: structural change application needs to be approved
     #And I click on the Licences tab
