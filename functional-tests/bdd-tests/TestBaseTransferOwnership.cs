@@ -101,8 +101,6 @@ namespace bdd_tests
             var uiSubmitTransferButton =
                 ngDriver.FindElement(By.CssSelector("app-application-ownership-transfer button.btn-primary"));
             uiSubmitTransferButton.Click();
-
-            ClickLicencesTab();
         }
     }
 }

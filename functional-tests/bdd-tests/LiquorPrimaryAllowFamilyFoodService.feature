@@ -23,6 +23,7 @@ Scenario: Liquor Primary Allow Family Food Service (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I click on the link for Application to Allow Family Food Service
     And I click on the Continue to Application button
     And I complete the Application to Allow Family Food Service

@@ -17,6 +17,7 @@ Scenario: CRS Release (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
     And I click on the button for CRS terms and conditions
@@ -32,7 +33,9 @@ Scenario: CRS Release (Private Corporation)
     And I renew the licence with positive responses for Cannabis
     And I click on the Licences tab
     And I request a store relocation for Cannabis
+    And I click on the Licences tab
     And I request a structural change
+    And I click on the Licences tab
     And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
@@ -48,6 +51,7 @@ Scenario: CRS Release (Sole Proprietorship)
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the application is approved
+    And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the button for CRS terms and conditions
@@ -63,7 +67,9 @@ Scenario: CRS Release (Sole Proprietorship)
     And I renew the licence with positive responses for Cannabis
     And I click on the Licences tab
     And I request a store relocation for Cannabis
+    And I click on the Licences tab
     And I request a structural change
+    And I click on the Licences tab
     And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
