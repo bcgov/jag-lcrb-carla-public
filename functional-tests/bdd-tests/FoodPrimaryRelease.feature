@@ -27,11 +27,13 @@ Scenario: Food Primary Release Test #1 (Private Corporation)
     And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And I click on the link for New Outdoor Patio
+    And I click on the Continue to Application button
     And I request a new outdoor patio application
     And I click on the Submit button
     And I enter the payment information
     And I click on the Licences tab
     And I click on the link for Patron Participation Entertainment Endorsement
+    And I click on the Continue to Application button
     And I request a Patron Participation Entertainment Endorsement application
     And I click on the Submit button
     And I click on the Licences tab
@@ -56,9 +58,11 @@ Scenario: Food Primary Release Test #2 (Private Corporation)
     And I submit a Food Primary structural change application
     And I click on the Licences tab
     And I click on the link for Temporary Extension of Licensed Area
+    And I click on the Continue to Application button
     And I submit a temporary extension of licensed area application
     And I click on the Licences tab
     And I click on the link for Temporary Use Area Endorsement Application
+    And I click on the Continue to Application button
     And I submit a temporary use area endorsement application
     And I click on the Licences tab
     And I click on the link for Catering Endorsement Application

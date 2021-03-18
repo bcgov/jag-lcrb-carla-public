@@ -54,6 +54,7 @@ Scenario: Liquor Primary Release Test #1 (Private Corporation)
     # And I click on the Submit button
     # And I click on the Licences tab
     # And I click on the link for New Outdoor Patio
+    # And I click on the Continue to Application button
     # And I request a new outdoor patio application
     # And I click on the Submit button
     # And I click on the Licences tab
@@ -85,14 +86,18 @@ Scenario: Liquor Primary Release Test #2 (Private Corporation)
     And I pay the licensing fee
     And I click on the Licences tab
     # And I click on the link for Request T&C Change Application
+    # And I click on the Continue to Application button
     # And I request a T&C change application
+    # And I click on the Submit button
     # TODO: T&C change application needs to be approved
     # And I click on the Licences tab
     # And I click on the link for Structural Change Application (Capacity Increase)
+    # And I click on the Continue to Application button
     # And I request a capacity increase structural change
     # TODO: structural change application needs to be approved
     #And I click on the Licences tab
     #And I click on the link for Structural Change Application (No Capacity Increase)
+    #And I click on the Continue to Application button
     #And I request a no capacity structural change
     #And I click on the Licences tab
     #And I click on the link for Temporary Extension of Licensed Area
@@ -106,6 +111,7 @@ Scenario: Liquor Primary Release Test #2 (Private Corporation)
     #And I enter the payment information
     #And I click on the Licences tab
     #And I click on the link for Temporary Use Area Endorsement Application
+    #And I click on the Continue to Application button
     #And I submit a temporary use area endorsement application
     #And I click on the Licences tab
     #And I request a third party operator
