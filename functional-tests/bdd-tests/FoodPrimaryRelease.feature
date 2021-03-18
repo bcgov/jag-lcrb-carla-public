@@ -58,6 +58,7 @@ Scenario: Food Primary Release Test #2 (Private Corporation)
     And I submit a temporary use area endorsement application
     And I click on the Licences tab
     And I click on the link for Catering Endorsement Application
+    And I click on the Continue to Application button
     And I request a catering endorsement application
     And I click on the Submit button
     And I enter the payment information
