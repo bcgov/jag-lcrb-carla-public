@@ -17,6 +17,7 @@ Scenario: Establishment Name Change Application (Winery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -34,6 +35,7 @@ Scenario: Establishment Name Change Application (Brewery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -51,6 +53,7 @@ Scenario: Establishment Name Change Application (Distillery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -68,6 +71,7 @@ Scenario: Establishment Name Change Application (Co-packer)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a valid store name or branding change for Manufacturing
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review

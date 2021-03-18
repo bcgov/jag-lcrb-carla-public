@@ -13,6 +13,7 @@ Scenario: Transfer Licence (Winery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a transfer of ownership for Manufacturer
     And the account is deleted
     Then I see the login page
@@ -28,6 +29,7 @@ Scenario: Transfer Licence (Brewery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a transfer of ownership for Manufacturer
     And the account is deleted
     Then I see the login page
@@ -43,6 +45,7 @@ Scenario: Transfer Licence (Distillery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a transfer of ownership for Manufacturer
     And the account is deleted
     Then I see the login page
@@ -58,6 +61,7 @@ Scenario: Transfer Licence (Co-packer)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a transfer of ownership for Manufacturer
     And the account is deleted
     Then I see the login page

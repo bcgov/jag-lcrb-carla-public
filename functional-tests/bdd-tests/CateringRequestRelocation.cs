@@ -18,6 +18,7 @@ Feature: CateringRequestRelocation
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a store relocation for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -35,6 +36,7 @@ Feature: CateringRequestRelocation
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a store relocation for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -52,6 +54,7 @@ Feature: CateringRequestRelocation
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a store relocation for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review

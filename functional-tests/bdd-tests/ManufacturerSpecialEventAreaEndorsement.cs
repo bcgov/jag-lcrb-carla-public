@@ -17,6 +17,7 @@ Scenario: Special Event Area Endorsement Application (Winery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a special event area endorsement
     And the account is deleted
     Then I see the login page
@@ -32,6 +33,7 @@ Scenario: Special Event Area Endorsement Application (Brewery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a special event area endorsement
     And the account is deleted
     Then I see the login page
@@ -47,6 +49,7 @@ Scenario: Special Event Area Endorsement Application (Distillery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a special event area endorsement
     And the account is deleted
     Then I see the login page
@@ -62,6 +65,7 @@ Scenario: Special Event Area Endorsement Application (Co-packer)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a special event area endorsement
     And the account is deleted
     Then I see the login page

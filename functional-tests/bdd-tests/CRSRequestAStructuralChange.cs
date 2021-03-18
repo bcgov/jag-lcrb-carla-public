@@ -19,6 +19,7 @@ Scenario: Cannabis Structural Changes (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
@@ -37,6 +38,7 @@ Scenario: Cannabis Structural Changes (Society)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
@@ -55,6 +57,7 @@ Scenario: Cannabis Structural Changes (Partnership)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
@@ -73,6 +76,7 @@ Scenario: Cannabis Structural Changes (Sole Proprietorship)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard

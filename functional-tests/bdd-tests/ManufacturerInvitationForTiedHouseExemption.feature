@@ -13,6 +13,7 @@ Scenario: Manufacturer Tied House Exemption (Winery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
     And I click on the secondary Submit button
@@ -30,6 +31,7 @@ Scenario: Manufacturer Tied House Exemption (Brewery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
     And I click on the secondary Submit button
@@ -47,6 +49,7 @@ Scenario: Manufacturer Tied House Exemption (Distillery)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
     And I click on the secondary Submit button
@@ -64,6 +67,7 @@ Scenario: Manufacturer Tied House Exemption (Co-packer)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
     And I click on the secondary Submit button

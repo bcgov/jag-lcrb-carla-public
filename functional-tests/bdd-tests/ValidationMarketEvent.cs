@@ -21,6 +21,7 @@ Scenario: Validation for Market Event Application
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request an on-site store endorsement
     And the application is approved
     And I click on the Licences tab

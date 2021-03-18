@@ -27,6 +27,7 @@ Scenario: Liquor Primary Allow Minors Request (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I click on the link for Apply to Allow Minors in Recreation Facilities
     And I click on the Continue to Application button
     And I complete the allow minors request

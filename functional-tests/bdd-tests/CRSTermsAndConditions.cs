@@ -17,6 +17,7 @@ Scenario: CRS Terms and Conditions (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I confirm the terms and conditions for a CRS licence
     And the account is deleted
     Then I see the login page

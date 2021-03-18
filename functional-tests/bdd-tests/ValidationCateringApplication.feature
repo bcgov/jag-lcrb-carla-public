@@ -28,6 +28,7 @@ Scenario: Validation for Catering Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I click on the link for Establishment Name Change Application
     And I click on the Continue to Application button
     And I do not complete the application correctly
@@ -47,7 +48,8 @@ Scenario: Validation for Catering Branding Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I pay the licensing fee 
+    And I pay the licensing fee
+    And I click on the Licences tab
     And I request an event authorization being validated
     And the event history is updated correctly for an application being validated
     And I click on the link for Draft

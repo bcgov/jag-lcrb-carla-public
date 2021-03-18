@@ -15,6 +15,7 @@ Scenario: Cannabis Transfer Ownership (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
@@ -31,6 +32,7 @@ Scenario: Cannabis Transfer Ownership (Society)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee 
+    And I click on the Licences tab
     And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
@@ -47,6 +49,7 @@ Scenario: Cannabis Transfer Ownership (Partnership)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
@@ -63,6 +66,7 @@ Scenario: Cannabis Transfer Ownership (Sole Proprietorship)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page

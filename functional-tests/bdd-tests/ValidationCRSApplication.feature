@@ -42,6 +42,7 @@ Scenario: Validation for CRS Branding Change
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
+    And I click on the Licences tab
     And I click on the link for Request Store Name or Branding Change
     And I click on the Continue to Application button
     And I do not complete the application correctly
@@ -62,6 +63,7 @@ Scenario: Validation for CRS Licence Renewal
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee
+    And I click on the Licences tab
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
     And I do not complete the licence renewal application correctly
