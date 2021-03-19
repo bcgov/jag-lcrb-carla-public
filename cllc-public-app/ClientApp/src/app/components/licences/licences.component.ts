@@ -194,6 +194,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       licenceType.indexOf("Wine Store") >= 0 ||
       licenceType.indexOf("Manufacturer") >= 0 ||
       licenceType.indexOf("Liquor Primary") >= 0 ||
+      licenceType.indexOf("Agent") >= 0 ||
       licenceType.indexOf("Food Primary") >= 0;
   }
 
