@@ -15,6 +15,7 @@ Scenario: Rural LRS Release (Private Corporation)
     And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Download Licence
+    And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And I click on the Licences tab
     And I request a valid store name or branding change for Rural RLS

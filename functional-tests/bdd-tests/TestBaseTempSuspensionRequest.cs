@@ -14,11 +14,10 @@ namespace bdd_tests
             */
 
             // create test data
-            //string estEmail = "test@test.com";
             var estPhone = "250-123-4567";
             var eventDetails = "Patio liquor carried description.";
 
-            // enter establishment email
+            // enter establishment phone
             var uiEstablishmentPhone =
                 ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentPhone']"));
             uiEstablishmentPhone.SendKeys(estPhone);

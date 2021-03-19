@@ -17,6 +17,7 @@ Scenario: Federal Reports and Show Map (Private Corporation)
     And I pay the licensing fee
     And I click on the Licences tab
     And I show the store as open on the map
+    And I click on the link for Review Federal Reports
     And I review the federal reports
     And the account is deleted
     Then I see the login page

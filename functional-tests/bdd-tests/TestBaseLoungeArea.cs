@@ -10,20 +10,6 @@ namespace bdd_tests
         public void LoungeAreaEndorsement()
         {
             /* 
-            Page Title: Licences & Authorizations
-            */
-
-            var loungeAreaEndorsement = "Lounge Area Endorsement Application";
-
-            // click on the Lounge Area Endorsement Application link
-            var uiLoungeAreaEndorsement = ngDriver.FindElement(By.LinkText(loungeAreaEndorsement));
-            uiLoungeAreaEndorsement.Click();
-
-            // click on the Continue to Application button
-            var uiContinueToApplicationButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            uiContinueToApplicationButton.Click();
-
-            /* 
             Page Title: Lounge Area Endorsement Application
             */
 

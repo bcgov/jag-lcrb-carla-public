@@ -26,6 +26,7 @@ Scenario: CRS Release (Private Corporation)
     And I click on the Licences tab
     And I click on the link for Download Licence
     And I show the store as open on the map
+    And I click on the link for Review Federal Reports
     And I review the federal reports
     And I click on the Licences tab
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
@@ -34,6 +35,8 @@ Scenario: CRS Release (Private Corporation)
     And I click on the Licences tab
     And I request a store relocation for Cannabis
     And I click on the Licences tab
+    And I click on the link for Request a Structural Change
+    And I click on the Continue to Application button
     And I request a structural change
     And I click on the Licences tab
     And I request a transfer of ownership for Cannabis
@@ -60,6 +63,7 @@ Scenario: CRS Release (Sole Proprietorship)
     And I click on the Licences tab
     And I click on the link for Download Licence
     And I show the store as open on the map
+    And I click on the link for Review Federal Reports
     And I review the federal reports
     And I click on the Licences tab
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
@@ -68,6 +72,8 @@ Scenario: CRS Release (Sole Proprietorship)
     And I click on the Licences tab
     And I request a store relocation for Cannabis
     And I click on the Licences tab
+    And I click on the link for Request a Structural Change
+    And I click on the Continue to Application button
     And I request a structural change
     And I click on the Licences tab
     And I request a transfer of ownership for Cannabis
