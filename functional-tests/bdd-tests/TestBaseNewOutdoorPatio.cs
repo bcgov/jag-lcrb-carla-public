@@ -10,13 +10,6 @@ namespace bdd_tests
         public void NewOutdoorPatioApplication()
         {
             /* 
-            Page Title: Please Review Your Account Profile
-            */
-
-            // click on Continue to Application button
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: New Outdoor Patio
             */
 

@@ -10,12 +10,6 @@ namespace bdd_tests
         public void RelocationApplication()
         {
             /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
-            /* 
             Page Title: Application to Request Relocation
             */
 

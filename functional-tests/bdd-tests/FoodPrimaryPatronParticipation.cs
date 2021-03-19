@@ -20,6 +20,7 @@ Scenario: Food Primary Patron Participation Entertainment Endorsement (Private C
     And the application is approved
     And I click on the Licences tab
     And I click on the link for Patron Participation Entertainment Endorsement
+    And I click on the Continue to Application button
     And I request a Patron Participation Entertainment Endorsement application
     And I click on the Submit button
     And the dashboard status is updated as Pending External Review

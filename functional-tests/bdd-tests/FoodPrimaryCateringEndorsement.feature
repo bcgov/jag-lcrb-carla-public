@@ -16,6 +16,7 @@ Scenario: Food Primary Catering Endorsement (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I click on the link for Catering Endorsement Application
+    And I click on the Continue to Application button
     And I request a catering endorsement application
     And I click on the Submit button
     And I enter the payment information

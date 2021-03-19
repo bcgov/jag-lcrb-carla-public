@@ -18,7 +18,11 @@ Scenario: Facility Structural Change Application (Winery)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
+    And I click on the link for Facility Structural Change Application
+    And I click on the Continue to Application button
     And I request a facility structural change
+    And I click on the Submit button
+    And I enter the payment information
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -36,7 +40,11 @@ Scenario: Facility Structural Change Application (Brewery)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
+    And I click on the link for Facility Structural Change Application
+    And I click on the Continue to Application button
     And I request a facility structural change
+    And I click on the Submit button
+    And I enter the payment information
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -54,7 +62,11 @@ Scenario: Facility Structural Change Application (Distillery)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
+    And I click on the link for Facility Structural Change Application
+    And I click on the Continue to Application button
     And I request a facility structural change
+    And I click on the Submit button
+    And I enter the payment information
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted
@@ -72,7 +84,11 @@ Scenario: Facility Structural Change Application (Co-packer)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
+    And I click on the link for Facility Structural Change Application
+    And I click on the Continue to Application button
     And I request a facility structural change
+    And I click on the Submit button
+    And I enter the payment information
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the account is deleted

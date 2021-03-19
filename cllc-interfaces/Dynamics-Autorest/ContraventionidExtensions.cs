@@ -19,13 +19,13 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static partial class ContraventionidExtensions
     {
             /// <summary>
-            /// Get adoxio_ContraventionId from adoxio_investigationrequests
+            /// Get adoxio_ContraventionId from invoices
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioInvestigationrequestid'>
-            /// key: adoxio_investigationrequestid of adoxio_investigationrequest
+            /// <param name='invoiceid'>
+            /// key: invoiceid of invoice
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -33,19 +33,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioContraventionadmin Get(this IContraventionid operations, string adoxioInvestigationrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioContravention Get(this IContraventionid operations, string invoiceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(adoxioInvestigationrequestid, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(invoiceid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get adoxio_ContraventionId from adoxio_investigationrequests
+            /// Get adoxio_ContraventionId from invoices
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioInvestigationrequestid'>
-            /// key: adoxio_investigationrequestid of adoxio_investigationrequest
+            /// <param name='invoiceid'>
+            /// key: invoiceid of invoice
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -56,22 +56,22 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioContraventionadmin> GetAsync(this IContraventionid operations, string adoxioInvestigationrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioContravention> GetAsync(this IContraventionid operations, string invoiceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioInvestigationrequestid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(invoiceid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Get adoxio_ContraventionId from adoxio_investigationrequests
+            /// Get adoxio_ContraventionId from invoices
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioInvestigationrequestid'>
-            /// key: adoxio_investigationrequestid of adoxio_investigationrequest
+            /// <param name='invoiceid'>
+            /// key: invoiceid of invoice
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -82,9 +82,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioContraventionadmin> GetWithHttpMessages(this IContraventionid operations, string adoxioInvestigationrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioContravention> GetWithHttpMessages(this IContraventionid operations, string invoiceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(adoxioInvestigationrequestid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(invoiceid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
