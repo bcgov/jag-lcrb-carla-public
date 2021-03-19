@@ -465,66 +465,66 @@ namespace bdd_tests
                 // 1. Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
                 var uiRenewalCriminalOffenceCheckYes = ngDriver.FindElement(
                     By.CssSelector(
-                        "[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-16-button"));
+                        "[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-10-button"));
                 JavaScriptClick(uiRenewalCriminalOffenceCheckYes);
 
                 // select 'Yes'
                 // 2. Have you or any of your partners, shareholders or directors of this establishment received any alcohol related driving infractions in the past 12 months?
                 var uiRenewalDUIYes =
                     ngDriver.FindElement(
-                        By.CssSelector("[formcontrolname='renewalDUI'] button#mat-button-toggle-18-button"));
+                        By.CssSelector("[formcontrolname='renewalDUI'] button#mat-button-toggle-12-button"));
                 JavaScriptClick(uiRenewalDUIYes);
 
                 // select 'Yes'
                 // 3. Our records show that this establishment is licensed as a PrivateCorporation. Has this changed?
                 var uiRenewalBusinessTypeYes = ngDriver.FindElement(
-                    By.CssSelector("[formcontrolname='renewalBusinessType'] button#mat-button-toggle-20-button"));
+                    By.CssSelector("[formcontrolname='renewalBusinessType'] button#mat-button-toggle-14-button"));
                 JavaScriptClick(uiRenewalBusinessTypeYes);
 
                 // select 'Yes'
                 // 4. Have you redistributed any shares within the past 12 months without notifying LCRB?
                 var uiRenewalShareholdersYes = ngDriver.FindElement(
-                    By.CssSelector("[formcontrolname='renewalShareholders'] button#mat-button-toggle-22-button"));
+                    By.CssSelector("[formcontrolname='renewalShareholders'] button#mat-button-toggle-16-button"));
                 JavaScriptClick(uiRenewalShareholdersYes);
 
                 // select 'Yes'
                 // 5. Have you entered into an agreement allowing another person or business to use your licence within the past 12 months?
                 var uiRenewalThirdPartyYes =
                     ngDriver.FindElement(
-                        By.CssSelector("[formcontrolname='renewalThirdParty'] button#mat-button-toggle-24-button"));
+                        By.CssSelector("[formcontrolname='renewalThirdParty'] button#mat-button-toggle-18-button"));
                 JavaScriptClick(uiRenewalThirdPartyYes);
 
                 // select 'Yes'
                 // 6. Have you made any unreported structural changes to your establishment within the past 12 months?
                 var uiRenewalFloorPlanYes =
                     ngDriver.FindElement(
-                        By.CssSelector("[formcontrolname='renewalFloorPlan'] button#mat-button-toggle-26-button"));
+                        By.CssSelector("[formcontrolname='renewalFloorPlan'] button#mat-button-toggle-20-button"));
                 JavaScriptClick(uiRenewalFloorPlanYes);
 
                 // select 'Yes'
                 // 7. Have you acquired a new interest or expanded an existing interest financial or otherwise in a winery, brewery, distillery, liquor agent and/or a UBrew/UVin within the past 12 months without notifying LCRB?
                 var uiRenewalTiedhouseYes =
                     ngDriver.FindElement(
-                        By.CssSelector("[formcontrolname='renewalTiedhouse'] button#mat-button-toggle-28-button"));
+                        By.CssSelector("[formcontrolname='renewalTiedhouse'] button#mat-button-toggle-22-button"));
                 JavaScriptClick(uiRenewalTiedhouseYes);
 
                 // select 'Yes'
                 // 8. Have you sold the business associated with this liquor licence within the last 12 months without notifying LCRB?
                 var uiRenewalUnreportedSaleOfBusinessYes = ngDriver.FindElement(
                     By.CssSelector(
-                        "[formcontrolname='renewalUnreportedSaleOfBusiness'] button#mat-button-toggle-30-button"));
+                        "[formcontrolname='renewalUnreportedSaleOfBusiness'] button#mat-button-toggle-24-button"));
                 JavaScriptClick(uiRenewalUnreportedSaleOfBusinessYes);
 
                 // select 'Yes'
                 // 9.Have you sold the property or transferred the lease associated with this liquor licence within the last 12 months?
                 var uiRenewalValidInterestYes = ngDriver.FindElement(
-                    By.CssSelector("[formcontrolname='renewalValidInterest'] button#mat-button-toggle-32-button"));
+                    By.CssSelector("[formcontrolname='renewalValidInterest'] button#mat-button-toggle-26-button"));
                 JavaScriptClick(uiRenewalValidInterestYes);
 
                 // select 'Yes'
                 // 10. Have you added, changed or removed a licensee representative within the past 12 months?
                 var uiRenewalKeyPersonnelYes = ngDriver.FindElement(
-                    By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-34-button"));
+                    By.CssSelector("[formcontrolname='renewalkeypersonnel'] button#mat-button-toggle-28-button"));
                 JavaScriptClick(uiRenewalKeyPersonnelYes);
 
                 // confirm that correct information re positive responses for a Catering licensing renewal is displayed
