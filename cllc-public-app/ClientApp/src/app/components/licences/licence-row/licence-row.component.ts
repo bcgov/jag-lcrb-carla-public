@@ -417,7 +417,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     // if we found a renewal application that hasn't been paid for
     if (renewalApplication && !renewalApplication.isPaid) {
       // let's go there
-      this.router.navigateByUrl(`/renew-licence/${renewalType}/${renewalApplication.applicationId}`);
+      this.router.navigateByUrl(`/account-profile/renewal/${renewalType}/${renewalApplication.applicationId}`);
       // otherwise if there's a paid renewal application
     } else if (renewalApplication && renewalApplication.isPaid) {
       // that shouldnt have happened
@@ -431,7 +431,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, renewalApplicationTypeName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
-          this.router.navigateByUrl(`/renew-licence/${renewalType}/${data.id}`);
+          this.router.navigateByUrl(`/account-profile/renewal/${renewalType}/${data.id}`);
         },
           () => {
             this.snackBar.open(`Error running licence action for ${renewalType}`,
