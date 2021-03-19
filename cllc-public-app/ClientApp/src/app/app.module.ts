@@ -269,6 +269,7 @@ import { ApplicationTiedHouseExemptionComponent } from './components/application
 import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-free-event.component";
 import { LoginComponent } from './components/sep/login/login.component';
 import { WorkerLandingPageComponent } from "@components/worker-qualification/worker-landing-page/worker-landing-page.component";
+import { TakeHomeEventComponent } from "@components/take-home-event/take-home-event.component";
 import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-auth-guard.service";
 
 @NgModule({
@@ -413,6 +414,7 @@ import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-aut
     ApplicationTiedHouseExemptionComponent,
     LiquorFreeEventComponent,
     WorkerLandingPageComponent,
+    TakeHomeEventComponent,
   ],
   imports: [
     AppRoutingModule,

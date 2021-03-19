@@ -83,6 +83,7 @@ import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-f
 import { LoginComponent } from "@components/sep/login/login.component";
 import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-auth-guard.service";
 import { WorkerLandingPageComponent } from "@components/worker-qualification/worker-landing-page/worker-landing-page.component";
+import { TakeHomeEventComponent } from "@components/take-home-event/take-home-event.component";
 
 const routes: Routes = [
   {
@@ -214,6 +215,18 @@ const routes: Routes = [
     component: LiquorFreeEventComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'LiquorFreeEvents' }
+  },
+  {
+    path: 'licence/:licenceId/take-home-event',
+    component: TakeHomeEventComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'TakeHomeEvents' }
+  },
+  {
+    path: 'licence/:licenceId/take-home-event/:eventId',
+    component: TakeHomeEventComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'TakeHomeEvents' }
   },
   {
     path: 'licence/:licenceId/offsite-storage',
