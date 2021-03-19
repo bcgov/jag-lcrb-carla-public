@@ -250,6 +250,152 @@
         }
       }
     },
+    "/accounts({accountid})/adoxio_account_adoxio_login_RelatedAccount": {
+      "get": {
+        "tags": [
+          "account_login_relatedaccount"
+        ],
+        "summary": "Get adoxio_account_adoxio_login_RelatedAccount from accounts",
+        "operationId": "accountadoxiologinrelatedaccount_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountid",
+            "description": "key: accountid of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_loginCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/accounts({accountid})/adoxio_account_adoxio_login_RelatedAccount({adoxio_loginid})": {
+      "get": {
+        "tags": [
+          "account_login_relatedaccount"
+        ],
+        "summary": "Get adoxio_account_adoxio_login_RelatedAccount from accounts",
+        "operationId": "accountadoxiologinrelatedaccount_Getadoxio_account_adoxio_login_RelatedAccountByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountid",
+            "description": "key: accountid of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/accounts({accountid})/adoxio_account_investigationrequests": {
       "get": {
         "tags": [
@@ -10088,6 +10234,152 @@
         }
       }
     },
+    "/adoxio_contraventions({adoxio_contraventionid})/adoxio_contravention_invoices": {
+      "get": {
+        "tags": [
+          "contravention_invoices"
+        ],
+        "summary": "Get adoxio_contravention_invoices from adoxio_contraventions",
+        "operationId": "contraventioninvoices_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_contraventionid",
+            "description": "key: adoxio_contraventionid of adoxio_contravention",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoiceCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_contraventions({adoxio_contraventionid})/adoxio_contravention_invoices({invoiceid})": {
+      "get": {
+        "tags": [
+          "contravention_invoices"
+        ],
+        "summary": "Get adoxio_contravention_invoices from adoxio_contraventions",
+        "operationId": "contraventioninvoices_Getadoxio_contravention_invoicesByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_contraventionid",
+            "description": "key: adoxio_contraventionid of adoxio_contravention",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "invoiceid",
+            "description": "key: invoiceid of invoice",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_contraventions({adoxio_contraventionid})/adoxio_InvestigationUnitId": {
       "get": {
         "tags": [
@@ -10132,6 +10424,58 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_contraventions({adoxio_contraventionid})/adoxio_Invoice": {
+      "get": {
+        "tags": [
+          "invoice"
+        ],
+        "summary": "Get adoxio_Invoice from adoxio_contraventions",
+        "operationId": "invoice_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_contraventionid",
+            "description": "key: adoxio_contraventionid of adoxio_contravention",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
             }
           },
           "default": {
@@ -11813,6 +12157,58 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_endorsements({adoxio_endorsementid})/adoxio_LicenceWhenCancelled": {
+      "get": {
+        "tags": [
+          "licencewhencancelled"
+        ],
+        "summary": "Get adoxio_LicenceWhenCancelled from adoxio_endorsements",
+        "operationId": "licencewhencancelled_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_endorsementid",
+            "description": "key: adoxio_endorsementid of adoxio_endorsement",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+            }
           },
           "default": {
             "description": "OData Error"
@@ -26662,6 +27058,152 @@
         }
       }
     },
+    "/adoxio_licenceses({adoxio_licencesid})/adoxio_licences_adoxio_endorsement_LicenceWhenCancelled": {
+      "get": {
+        "tags": [
+          "licences_endorsement_licencewhencancelled"
+        ],
+        "summary": "Get adoxio_licences_adoxio_endorsement_LicenceWhenCancelled from adoxio_licenceses",
+        "operationId": "licencesadoxioendorsementlicencewhencancelled_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_licencesid",
+            "description": "key: adoxio_licencesid of adoxio_licences",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_endorsementCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_licenceses({adoxio_licencesid})/adoxio_licences_adoxio_endorsement_LicenceWhenCancelled({adoxio_endorsementid})": {
+      "get": {
+        "tags": [
+          "licences_endorsement_licencewhencancelled"
+        ],
+        "summary": "Get adoxio_licences_adoxio_endorsement_LicenceWhenCancelled from adoxio_licenceses",
+        "operationId": "licencesadoxioendorsementlicencewhencancelled_Getadoxio_licences_adoxio_endorsement_LicenceWhenCancelledByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_licencesid",
+            "description": "key: adoxio_licencesid of adoxio_licences",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_endorsementid",
+            "description": "key: adoxio_endorsementid of adoxio_endorsement",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_endorsement"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_licenceses({adoxio_licencesid})/adoxio_licences_adoxio_onestopmessageitem_Licence": {
       "get": {
         "tags": [
@@ -28679,6 +29221,1518 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins": {
+      "get": {
+        "tags": [
+          "logins"
+        ],
+        "summary": "Get entities from adoxio_logins",
+        "operationId": "logins_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_loginCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "adoxio_logins.adoxio_login"
+        ],
+        "summary": "Add new entity to adoxio_logins",
+        "operationId": "logins_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Prefer",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})": {
+      "get": {
+        "tags": [
+          "logins"
+        ],
+        "summary": "Get entity from adoxio_logins by key",
+        "operationId": "logins_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "adoxio_logins.adoxio_login"
+        ],
+        "summary": "Update entity in adoxio_logins",
+        "operationId": "logins_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New property values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "adoxio_logins.adoxio_login"
+        ],
+        "summary": "Delete entity from adoxio_logins",
+        "operationId": "logins_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_Contact": {
+      "get": {
+        "tags": [
+          "contact"
+        ],
+        "summary": "Get adoxio_Contact from adoxio_logins",
+        "operationId": "contact_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_AsyncOperations": {
+      "get": {
+        "tags": [
+          "login_asyncoperations"
+        ],
+        "summary": "Get adoxio_login_AsyncOperations from adoxio_logins",
+        "operationId": "loginasyncoperations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperationCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_AsyncOperations({asyncoperationid})": {
+      "get": {
+        "tags": [
+          "login_asyncoperations"
+        ],
+        "summary": "Get adoxio_login_AsyncOperations from adoxio_logins",
+        "operationId": "loginasyncoperations_Getadoxio_login_AsyncOperationsByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "asyncoperationid",
+            "description": "key: asyncoperationid of asyncoperation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_BulkDeleteFailures": {
+      "get": {
+        "tags": [
+          "login_bulkdeletefailures"
+        ],
+        "summary": "Get adoxio_login_BulkDeleteFailures from adoxio_logins",
+        "operationId": "loginbulkdeletefailures_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailureCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_BulkDeleteFailures({bulkdeletefailureid})": {
+      "get": {
+        "tags": [
+          "login_bulkdeletefailures"
+        ],
+        "summary": "Get adoxio_login_BulkDeleteFailures from adoxio_logins",
+        "operationId": "loginbulkdeletefailures_Getadoxio_login_BulkDeleteFailuresByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "bulkdeletefailureid",
+            "description": "key: bulkdeletefailureid of bulkdeletefailure",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_DuplicateBaseRecord": {
+      "get": {
+        "tags": [
+          "login_duplicatebaserecord"
+        ],
+        "summary": "Get adoxio_login_DuplicateBaseRecord from adoxio_logins",
+        "operationId": "loginduplicatebaserecord_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecordCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_DuplicateBaseRecord({duplicateid})": {
+      "get": {
+        "tags": [
+          "login_duplicatebaserecord"
+        ],
+        "summary": "Get adoxio_login_DuplicateBaseRecord from adoxio_logins",
+        "operationId": "loginduplicatebaserecord_Getadoxio_login_DuplicateBaseRecordByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_DuplicateMatchingRecord": {
+      "get": {
+        "tags": [
+          "login_duplicatematchingrecord"
+        ],
+        "summary": "Get adoxio_login_DuplicateMatchingRecord from adoxio_logins",
+        "operationId": "loginduplicatematchingrecord_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecordCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_DuplicateMatchingRecord({duplicateid})": {
+      "get": {
+        "tags": [
+          "login_duplicatematchingrecord"
+        ],
+        "summary": "Get adoxio_login_DuplicateMatchingRecord from adoxio_logins",
+        "operationId": "loginduplicatematchingrecord_Getadoxio_login_DuplicateMatchingRecordByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_MailboxTrackingFolders": {
+      "get": {
+        "tags": [
+          "login_mailboxtrackingfolders"
+        ],
+        "summary": "Get adoxio_login_MailboxTrackingFolders from adoxio_logins",
+        "operationId": "loginmailboxtrackingfolders_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolderCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_MailboxTrackingFolders({mailboxtrackingfolderid})": {
+      "get": {
+        "tags": [
+          "login_mailboxtrackingfolders"
+        ],
+        "summary": "Get adoxio_login_MailboxTrackingFolders from adoxio_logins",
+        "operationId": "loginmailboxtrackingfolders_Getadoxio_login_MailboxTrackingFoldersByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "mailboxtrackingfolderid",
+            "description": "key: mailboxtrackingfolderid of mailboxtrackingfolder",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_PrincipalObjectAttributeAccesses": {
+      "get": {
+        "tags": [
+          "login_principalobjectattributeaccesses"
+        ],
+        "summary": "Get adoxio_login_PrincipalObjectAttributeAccesses from adoxio_logins",
+        "operationId": "loginprincipalobjectattributeaccesses_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccessCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_PrincipalObjectAttributeAccesses({principalobjectattributeaccessid})": {
+      "get": {
+        "tags": [
+          "login_principalobjectattributeaccesses"
+        ],
+        "summary": "Get adoxio_login_PrincipalObjectAttributeAccesses from adoxio_logins",
+        "operationId": "loginprincipalobjectattributeaccesses_Getadoxio_login_PrincipalObjectAttributeAccessesByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "principalobjectattributeaccessid",
+            "description": "key: principalobjectattributeaccessid of principalobjectattributeaccess",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_ProcessSession": {
+      "get": {
+        "tags": [
+          "login_processsession"
+        ],
+        "summary": "Get adoxio_login_ProcessSession from adoxio_logins",
+        "operationId": "loginprocesssession_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsessionCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_ProcessSession({processsessionid})": {
+      "get": {
+        "tags": [
+          "login_processsession"
+        ],
+        "summary": "Get adoxio_login_ProcessSession from adoxio_logins",
+        "operationId": "loginprocesssession_Getadoxio_login_ProcessSessionByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "processsessionid",
+            "description": "key: processsessionid of processsession",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_SyncErrors": {
+      "get": {
+        "tags": [
+          "login_syncerrors"
+        ],
+        "summary": "Get adoxio_login_SyncErrors from adoxio_logins",
+        "operationId": "loginsyncerrors_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerrorCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_login_SyncErrors({syncerrorid})": {
+      "get": {
+        "tags": [
+          "login_syncerrors"
+        ],
+        "summary": "Get adoxio_login_SyncErrors from adoxio_logins",
+        "operationId": "loginsyncerrors_Getadoxio_login_SyncErrorsByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "syncerrorid",
+            "description": "key: syncerrorid of syncerror",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_logins({adoxio_loginid})/adoxio_RelatedAccount": {
+      "get": {
+        "tags": [
+          "relatedaccount"
+        ],
+        "summary": "Get adoxio_RelatedAccount from adoxio_logins",
+        "operationId": "relatedaccount_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
+            }
           },
           "default": {
             "description": "OData Error"
@@ -39952,6 +42006,58 @@
         }
       }
     },
+    "/asyncoperations({asyncoperationid})/regardingobjectid_adoxio_login": {
+      "get": {
+        "tags": [
+          "regardingobjectid_login"
+        ],
+        "summary": "Get regardingobjectid_adoxio_login from asyncoperations",
+        "operationId": "Regardingobjectidadoxiologin_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "asyncoperationid",
+            "description": "key: asyncoperationid of asyncoperation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/asyncoperations({asyncoperationid})/regardingobjectid_adoxio_onestopmessageitem": {
       "get": {
         "tags": [
@@ -40308,6 +42414,58 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigationsubject"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/bulkdeletefailures({bulkdeletefailureid})/regardingobjectid_adoxio_login": {
+      "get": {
+        "tags": [
+          "regardingobjectid_login"
+        ],
+        "summary": "Get regardingobjectid_adoxio_login from bulkdeletefailures",
+        "operationId": "Regardingobjectidadoxiologin_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bulkdeletefailureid",
+            "description": "key: bulkdeletefailureid of bulkdeletefailure",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
             }
           },
           "default": {
@@ -41150,6 +43308,152 @@
         }
       }
     },
+    "/businessunits({businessunitid})/business_unit_adoxio_login": {
+      "get": {
+        "tags": [
+          "business_unit_login"
+        ],
+        "summary": "Get business_unit_adoxio_login from businessunits",
+        "operationId": "Businessunitadoxiologin_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessunitid",
+            "description": "key: businessunitid of businessunit",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_loginCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/businessunits({businessunitid})/business_unit_adoxio_login({adoxio_loginid})": {
+      "get": {
+        "tags": [
+          "business_unit_login"
+        ],
+        "summary": "Get business_unit_adoxio_login from businessunits",
+        "operationId": "Businessunitadoxiologin_Getbusiness_unit_adoxio_loginByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessunitid",
+            "description": "key: businessunitid of businessunit",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/businessunits({businessunitid})/business_unit_adoxio_onestopmessageitem": {
       "get": {
         "tags": [
@@ -41682,6 +43986,152 @@
         }
       }
     },
+    "/contacts({contactid})/adoxio_contact_adoxio_login_Contact": {
+      "get": {
+        "tags": [
+          "contact_login_contact"
+        ],
+        "summary": "Get adoxio_contact_adoxio_login_Contact from contacts",
+        "operationId": "contactadoxiologincontact_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactid",
+            "description": "key: contactid of contact",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_loginCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/contacts({contactid})/adoxio_contact_adoxio_login_Contact({adoxio_loginid})": {
+      "get": {
+        "tags": [
+          "contact_login_contact"
+        ],
+        "summary": "Get adoxio_contact_adoxio_login_Contact from contacts",
+        "operationId": "contactadoxiologincontact_Getadoxio_contact_adoxio_login_ContactByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactid",
+            "description": "key: contactid of contact",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/contacts({contactid})/adoxio_contact_investigationsubjects": {
       "get": {
         "tags": [
@@ -42036,6 +44486,58 @@
         }
       }
     },
+    "/duplicaterecords({duplicateid})/baserecordid_adoxio_login": {
+      "get": {
+        "tags": [
+          "baserecordid_login"
+        ],
+        "summary": "Get baserecordid_adoxio_login from duplicaterecords",
+        "operationId": "Baserecordidadoxiologin_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/duplicaterecords({duplicateid})/baserecordid_adoxio_onestopmessageitem": {
       "get": {
         "tags": [
@@ -42340,6 +44842,58 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigationsubject"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/duplicaterecords({duplicateid})/duplicaterecordid_adoxio_login": {
+      "get": {
+        "tags": [
+          "duplicaterecordid_login"
+        ],
+        "summary": "Get duplicaterecordid_adoxio_login from duplicaterecords",
+        "operationId": "Duplicaterecordidadoxiologin_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "duplicateid",
+            "description": "key: duplicateid of duplicaterecord",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
             }
           },
           "default": {
@@ -43224,6 +45778,204 @@
         }
       }
     },
+    "/invoices({invoiceid})/adoxio_ContraventionId": {
+      "get": {
+        "tags": [
+          "contraventionid"
+        ],
+        "summary": "Get adoxio_ContraventionId from invoices",
+        "operationId": "contraventionid_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "invoiceid",
+            "description": "key: invoiceid of invoice",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contravention"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/invoices({invoiceid})/adoxio_invoice_adoxio_contravention_Invoice": {
+      "get": {
+        "tags": [
+          "invoice_contravention_invoice"
+        ],
+        "summary": "Get adoxio_invoice_adoxio_contravention_Invoice from invoices",
+        "operationId": "invoiceadoxiocontraventioninvoice_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "invoiceid",
+            "description": "key: invoiceid of invoice",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contraventionCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/invoices({invoiceid})/adoxio_invoice_adoxio_contravention_Invoice({adoxio_contraventionid})": {
+      "get": {
+        "tags": [
+          "invoice_contravention_invoice"
+        ],
+        "summary": "Get adoxio_invoice_adoxio_contravention_Invoice from invoices",
+        "operationId": "invoiceadoxiocontraventioninvoice_Getadoxio_invoice_adoxio_contravention_InvoiceByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "invoiceid",
+            "description": "key: invoiceid of invoice",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_contraventionid",
+            "description": "key: adoxio_contraventionid of adoxio_contravention",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contravention"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/leads": {
       "get": {
         "tags": [
@@ -43964,6 +46716,58 @@
         }
       }
     },
+    "/mailboxtrackingfolders({mailboxtrackingfolderid})/regardingobjectid_adoxio_login": {
+      "get": {
+        "tags": [
+          "regardingobjectid_login"
+        ],
+        "summary": "Get regardingobjectid_adoxio_login from mailboxtrackingfolders",
+        "operationId": "Regardingobjectidadoxiologin_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "mailboxtrackingfolderid",
+            "description": "key: mailboxtrackingfolderid of mailboxtrackingfolder",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/mailboxtrackingfolders({mailboxtrackingfolderid})/regardingobjectid_adoxio_onestopmessageitem": {
       "get": {
         "tags": [
@@ -44328,6 +47132,58 @@
         }
       }
     },
+    "/principalobjectattributeaccessset({principalobjectattributeaccessid})/objectid_adoxio_login": {
+      "get": {
+        "tags": [
+          "objectid_login"
+        ],
+        "summary": "Get objectid_adoxio_login from principalobjectattributeaccessset",
+        "operationId": "Objectidadoxiologin_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "principalobjectattributeaccessid",
+            "description": "key: principalobjectattributeaccessid of principalobjectattributeaccess",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/principalobjectattributeaccessset({principalobjectattributeaccessid})/objectid_adoxio_onestopmessageitem": {
       "get": {
         "tags": [
@@ -44684,6 +47540,58 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigationsubject"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/processsessions({processsessionid})/regardingobjectid_adoxio_login": {
+      "get": {
+        "tags": [
+          "regardingobjectid_login"
+        ],
+        "summary": "Get regardingobjectid_adoxio_login from processsessions",
+        "operationId": "Regardingobjectidadoxiologin_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "processsessionid",
+            "description": "key: processsessionid of processsession",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
             }
           },
           "default": {
@@ -45966,6 +48874,58 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigationsubject"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/syncerrors({syncerrorid})/regardingobjectid_adoxio_login": {
+      "get": {
+        "tags": [
+          "regardingobjectid_login"
+        ],
+        "summary": "Get regardingobjectid_adoxio_login from syncerrors",
+        "operationId": "Regardingobjectidadoxiologin_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "syncerrorid",
+            "description": "key: syncerrorid of syncerror",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
             }
           },
           "default": {
@@ -49624,6 +52584,590 @@
         }
       }
     },
+    "/systemusers({ownerid})/lk_adoxio_login_createdby": {
+      "get": {
+        "tags": [
+          "lk_login_createdby"
+        ],
+        "summary": "Get lk_adoxio_login_createdby from systemusers",
+        "operationId": "Lkadoxiologincreatedby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_loginCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_login_createdby({adoxio_loginid})": {
+      "get": {
+        "tags": [
+          "lk_login_createdby"
+        ],
+        "summary": "Get lk_adoxio_login_createdby from systemusers",
+        "operationId": "Lkadoxiologincreatedby_Getlk_adoxio_login_createdbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_login_createdonbehalfby": {
+      "get": {
+        "tags": [
+          "lk_login_createdonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_login_createdonbehalfby from systemusers",
+        "operationId": "Lkadoxiologincreatedonbehalfby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_loginCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_login_createdonbehalfby({adoxio_loginid})": {
+      "get": {
+        "tags": [
+          "lk_login_createdonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_login_createdonbehalfby from systemusers",
+        "operationId": "Lkadoxiologincreatedonbehalfby_Getlk_adoxio_login_createdonbehalfbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_login_modifiedby": {
+      "get": {
+        "tags": [
+          "lk_login_modifiedby"
+        ],
+        "summary": "Get lk_adoxio_login_modifiedby from systemusers",
+        "operationId": "Lkadoxiologinmodifiedby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_loginCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_login_modifiedby({adoxio_loginid})": {
+      "get": {
+        "tags": [
+          "lk_login_modifiedby"
+        ],
+        "summary": "Get lk_adoxio_login_modifiedby from systemusers",
+        "operationId": "Lkadoxiologinmodifiedby_Getlk_adoxio_login_modifiedbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_login_modifiedonbehalfby": {
+      "get": {
+        "tags": [
+          "lk_login_modifiedonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_login_modifiedonbehalfby from systemusers",
+        "operationId": "Lkadoxiologinmodifiedonbehalfby_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_loginCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/lk_adoxio_login_modifiedonbehalfby({adoxio_loginid})": {
+      "get": {
+        "tags": [
+          "lk_login_modifiedonbehalfby"
+        ],
+        "summary": "Get lk_adoxio_login_modifiedonbehalfby from systemusers",
+        "operationId": "Lkadoxiologinmodifiedonbehalfby_Getlk_adoxio_login_modifiedonbehalfbyByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/systemusers({ownerid})/lk_adoxio_onestopmessageitem_createdby": {
       "get": {
         "tags": [
@@ -51522,6 +55066,152 @@
         }
       }
     },
+    "/systemusers({ownerid})/user_adoxio_login": {
+      "get": {
+        "tags": [
+          "user_login"
+        ],
+        "summary": "Get user_adoxio_login from systemusers",
+        "operationId": "Useradoxiologin_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_loginCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/systemusers({ownerid})/user_adoxio_login({adoxio_loginid})": {
+      "get": {
+        "tags": [
+          "user_login"
+        ],
+        "summary": "Get user_adoxio_login from systemusers",
+        "operationId": "Useradoxiologin_Getuser_adoxio_loginByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of systemuser",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/systemusers({ownerid})/user_adoxio_onestopmessageitem": {
       "get": {
         "tags": [
@@ -52536,6 +56226,152 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigationsubject"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/teams({ownerid})/team_adoxio_login": {
+      "get": {
+        "tags": [
+          "team_login"
+        ],
+        "summary": "Get team_adoxio_login from teams",
+        "operationId": "Teamadoxiologin_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of team",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_loginCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/teams({ownerid})/team_adoxio_login({adoxio_loginid})": {
+      "get": {
+        "tags": [
+          "team_login"
+        ],
+        "summary": "Get team_adoxio_login from teams",
+        "operationId": "Teamadoxiologin_Getteam_adoxio_loginByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ownerid",
+            "description": "key: ownerid of team",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "adoxio_loginid",
+            "description": "key: adoxio_loginid of adoxio_login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
             }
           },
           "default": {
@@ -55028,6 +58864,12 @@
         },
         "modifiedonbehalfby": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "adoxio_account_adoxio_login_RelatedAccount": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+          }
         }
       }
     },
@@ -58675,6 +62517,10 @@
           "type": "string"
         },
         "adoxio_mfgacresofgrapes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_checklistendorsementapprovedfinal": {
           "format": "int32",
           "type": "integer"
         },
@@ -62744,6 +66590,9 @@
         "adoxio_street2": {
           "type": "string"
         },
+        "adoxio_importid": {
+          "type": "string"
+        },
         "adoxio_onsiteconsumption": {
           "type": "boolean"
         },
@@ -63337,10 +67186,14 @@
         "adoxio_jobnumber": {
           "type": "string"
         },
+        "adoxio_completeddate": {
+          "format": "date-time",
+          "type": "string"
+        },
         "_modifiedby_value": {
           "type": "string"
         },
-        "_owningbusinessunit_value": {
+        "adoxio_importid": {
           "type": "string"
         },
         "modifiedon": {
@@ -63417,8 +67270,7 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_completeddate": {
-          "format": "date-time",
+        "_owningbusinessunit_value": {
           "type": "string"
         },
         "_adoxio_regionid_value": {
@@ -63747,6 +67599,9 @@
           "type": "string"
         },
         "adoxio_meetinglocation": {
+          "type": "string"
+        },
+        "adoxio_importid": {
           "type": "string"
         },
         "adoxio_datetime": {
@@ -64188,9 +68043,6 @@
           "format": "decimal",
           "type": "number"
         },
-        "adoxio_ismonetarypenalty": {
-          "type": "boolean"
-        },
         "adoxio_itemnumber": {
           "format": "int32",
           "type": "integer"
@@ -64237,6 +68089,10 @@
         "adoxio_petitionreceiveddate": {
           "format": "date-time",
           "type": "string"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_delegatedecisionreceiveddate": {
           "format": "date-time",
@@ -64307,6 +68163,9 @@
           "format": "date-time",
           "type": "string"
         },
+        "_adoxio_invoice_value": {
+          "type": "string"
+        },
         "adoxio_istandcwordtemplate": {
           "type": "string"
         },
@@ -64324,6 +68183,9 @@
         },
         "adoxio_waiverresponseduedate": {
           "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_lpcnumber": {
           "type": "string"
         },
         "timezoneruleversionnumber": {
@@ -64387,6 +68249,9 @@
           "type": "string"
         },
         "adoxio_contraventionid": {
+          "type": "string"
+        },
+        "adoxio_importid": {
           "type": "string"
         },
         "adoxio_maxpenalty": {
@@ -64468,10 +68333,6 @@
         "adoxio_name": {
           "type": "string"
         },
-        "importsequencenumber": {
-          "format": "int32",
-          "type": "integer"
-        },
         "_adoxio_contraventiontitleid_value": {
           "type": "string"
         },
@@ -64524,8 +68385,9 @@
           "format": "date-time",
           "type": "string"
         },
-        "_createdby_value": {
-          "type": "string"
+        "adoxio_invoicetrigger": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_iscontraventionconfirmed": {
           "format": "int32",
@@ -64546,6 +68408,9 @@
         "adoxio_reference": {
           "type": "string"
         },
+        "adoxio_ismonetarypenalty": {
+          "type": "boolean"
+        },
         "modifiedon": {
           "format": "date-time",
           "type": "string"
@@ -64564,11 +68429,9 @@
         "adoxio_isreconsiderationapplicationpaid": {
           "type": "boolean"
         },
-        "adoxio_lpcnumber": {
-          "type": "string"
-        },
-        "adoxio_inspectorsummary": {
-          "type": "string"
+        "adoxio_nearsummarycategory": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_numberofoffence": {
           "format": "int32",
@@ -64591,8 +68454,14 @@
         "adoxio_recommendedactionreasoning": {
           "type": "string"
         },
+        "adoxio_inspectorsummary": {
+          "type": "string"
+        },
         "adoxio_waiversigneddate": {
           "format": "date-time",
+          "type": "string"
+        },
+        "_createdby_value": {
           "type": "string"
         },
         "adoxio_policynamereference": {
@@ -64732,6 +68601,15 @@
         },
         "adoxio_InvestigationUnitId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "adoxio_contravention_invoices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
+          }
+        },
+        "adoxio_Invoice": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
         }
       }
     },
@@ -65719,6 +69597,13 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_cancelledsuspendedreason": {
+          "type": "string"
+        },
+        "adoxio_datecancelledsuspended": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_endorsementid": {
           "type": "string"
         },
@@ -65733,6 +69618,9 @@
           "type": "string"
         },
         "_modifiedonbehalfby_value": {
+          "type": "string"
+        },
+        "_adoxio_licencewhencancelled_value": {
           "type": "string"
         },
         "importsequencenumber": {
@@ -65764,6 +69652,10 @@
           "type": "string"
         },
         "_ownerid_value": {
+          "type": "string"
+        },
+        "adoxio_dateissuedreinstated": {
+          "format": "date-time",
           "type": "string"
         },
         "_owninguser_value": {
@@ -65891,6 +69783,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtermsconditionslimitation"
           }
+        },
+        "adoxio_LicenceWhenCancelled": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
         }
       }
     },
@@ -66194,6 +70089,9 @@
         "adoxio_lgcontactemail": {
           "type": "string"
         },
+        "adoxio_judicialhearinglocation": {
+          "type": "string"
+        },
         "adoxio_checklistalldocsuploaded": {
           "format": "int32",
           "type": "integer"
@@ -66236,6 +70134,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_importid": {
+          "type": "string"
+        },
         "adoxio_delegatefinaldecision": {
           "format": "int32",
           "type": "integer"
@@ -66253,6 +70154,10 @@
           "type": "string"
         },
         "_adoxio_areaid_value": {
+          "type": "string"
+        },
+        "adoxio_writsubbranchdiscdocduedate": {
+          "format": "date-time",
           "type": "string"
         },
         "adoxio_delegateaddress": {
@@ -66401,6 +70306,10 @@
         "adoxio_noeanumber": {
           "type": "string"
         },
+        "adoxio_writsublicenseesubduedate": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_checklistpenaltyletterapproved": {
           "format": "int32",
           "type": "integer"
@@ -66485,6 +70394,10 @@
         "adoxio_checklistpartialwaiverssignednoea": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_writsubbranchdiscdocrecddate": {
+          "format": "date-time",
+          "type": "string"
         },
         "adoxio_checklistappliedjudicialreview": {
           "format": "int32",
@@ -66597,8 +70510,9 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_judicialhearinglocation": {
-          "type": "string"
+        "adoxio_recommendedsuspensionduration": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_checklistphcscheduled": {
           "format": "int32",
@@ -66817,6 +70731,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_writsublicenseesubrecddate": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_initiallicenseedecisionresult": {
           "format": "int32",
           "type": "integer"
@@ -66854,10 +70772,6 @@
         },
         "_modifiedonbehalfby_value": {
           "type": "string"
-        },
-        "adoxio_recommendedsuspensionduration": {
-          "format": "int32",
-          "type": "integer"
         },
         "_owninguser_value": {
           "type": "string"
@@ -67257,255 +71171,7 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_establishment",
       "type": "object",
       "properties": {
-        "adoxio_mailsenttorestaurant": {
-          "type": "boolean"
-        },
-        "_adoxio_licencetypeid_value": {
-          "type": "string"
-        },
-        "adoxio_establishmentid": {
-          "type": "string"
-        },
-        "adoxio_lastinspectiontype": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_expectedopendate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_longitude": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_mondayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_saturdayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_primaryinspectorid_value": {
-          "type": "string"
-        },
-        "_owninguser_value": {
-          "type": "string"
-        },
-        "adoxio_lastinspectionlink": {
-          "type": "string"
-        },
-        "adoxio_lastinspectiondate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_standardhours": {
-          "type": "boolean"
-        },
-        "adoxio_isoninland": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_mfgstepcrushing": {
-          "type": "boolean"
-        },
-        "adoxio_sendmailtoestablishmentuponapproval": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_rlrssubcategory": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_owningteam_value": {
-          "type": "string"
-        },
-        "adoxio_sundayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_latitude": {
-          "format": "decimal",
-          "type": "number"
-        },
-        "adoxio_parcelid": {
-          "type": "string"
-        },
-        "adoxio_locatedatwinery": {
-          "type": "boolean"
-        },
-        "adoxio_thursdayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_locatedonfirstnationland": {
-          "type": "boolean"
-        },
-        "adoxio_tuesdayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_occupantcapacity": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_isopen": {
-          "type": "boolean"
-        },
-        "adoxio_establishmentisalr": {
-          "type": "boolean"
-        },
-        "_owningbusinessunit_value": {
-          "type": "string"
-        },
-        "_adoxio_lgin_value": {
-          "type": "string"
-        },
-        "adoxio_fridayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_primarybusinesspurposes": {
-          "type": "string"
-        },
-        "_modifiedby_value": {
-          "type": "string"
-        },
-        "_adoxio_regionid_value": {
-          "type": "string"
-        },
-        "adoxio_mfgstepblending": {
-          "type": "boolean"
-        },
-        "adoxio_saturdayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "importsequencenumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_tuesdayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_mfgacresoffruit": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_mondayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_patronparticipation": {
-          "type": "boolean"
-        },
-        "_createdby_value": {
-          "type": "string"
-        },
-        "_adoxio_licencee_value": {
-          "type": "string"
-        },
-        "_adoxio_territory_value": {
-          "type": "string"
-        },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_mfgacresofhoney": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_hasduallicence": {
-          "type": "boolean"
-        },
-        "createdon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_wednesdayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_addresscity": {
-          "type": "string"
-        },
-        "adoxio_name": {
-          "type": "string"
-        },
-        "adoxio_sundayopen": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "modifiedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_adoxio_area_value": {
-          "type": "string"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        },
-        "adoxio_mfgstepfiltering": {
-          "type": "boolean"
-        },
-        "adoxio_alreadyopen": {
-          "type": "boolean"
-        },
-        "_adoxio_pdjurisdiction_value": {
-          "type": "string"
-        },
-        "adoxio_isstandalonepatio": {
-          "type": "boolean"
-        },
-        "adoxio_mfgmeetsproductionminimum": {
-          "type": "boolean"
-        },
-        "adoxio_addressstreet": {
-          "type": "string"
-        },
-        "adoxio_occupantload": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_adoxio_pmuareaid_value": {
-          "type": "string"
-        },
-        "_modifiedonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_phone": {
-          "type": "string"
-        },
-        "adoxio_mfgacresofgrapes": {
-          "format": "int32",
-          "type": "integer"
-        },
         "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
-        "adoxio_email": {
-          "type": "string"
-        },
-        "statecode": {
           "format": "int32",
           "type": "integer"
         },
@@ -67513,26 +71179,286 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_lastinspectiontype": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "_adoxio_area_value": {
+          "type": "string"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "adoxio_parcelid": {
+          "type": "string"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_mondayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_fridayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_email": {
+          "type": "string"
+        },
+        "adoxio_mfgmeetsproductionminimum": {
+          "type": "boolean"
+        },
+        "adoxio_mfgacresoffruit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentisalr": {
+          "type": "boolean"
+        },
+        "_adoxio_pdjurisdiction_value": {
+          "type": "string"
+        },
+        "adoxio_rlrsprimarybusinesspurposes": {
+          "type": "string"
+        },
+        "adoxio_tuesdayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_occupantload": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_occupantcapacity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_latitude": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "_adoxio_lgin_value": {
+          "type": "string"
+        },
+        "_adoxio_primaryinspectorid_value": {
+          "type": "string"
+        },
+        "adoxio_mfgstepcrushing": {
+          "type": "boolean"
+        },
+        "adoxio_establishmentcontactname": {
+          "type": "string"
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string"
+        },
+        "_createdby_value": {
+          "type": "string"
+        },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_adoxio_territory_value": {
+          "type": "string"
+        },
+        "adoxio_tuesdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_addressstreet": {
+          "type": "string"
+        },
+        "adoxio_phone": {
+          "type": "string"
+        },
+        "adoxio_isoninland": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mfgstepfiltering": {
+          "type": "boolean"
+        },
+        "adoxio_name": {
+          "type": "string"
+        },
+        "adoxio_locatedonfirstnationland": {
+          "type": "boolean"
+        },
+        "adoxio_mfgstepblending": {
+          "type": "boolean"
+        },
+        "_adoxio_licencetypeid_value": {
+          "type": "string"
+        },
+        "_adoxio_pmuareaid_value": {
+          "type": "string"
+        },
+        "adoxio_saturdayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mfgacresofgrapes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_lastinspectiondate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_rlrssubcategory": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_addresspostalcode": {
+          "type": "string"
+        },
+        "adoxio_locatedatwinery": {
+          "type": "boolean"
+        },
+        "adoxio_isstandalonepatio": {
+          "type": "boolean"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "statecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_patronparticipation": {
+          "type": "boolean"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_sendmailtoestablishmentuponapproval": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_pidlist": {
+          "type": "string"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "adoxio_expectedopendate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_sundayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_longitude": {
+          "format": "decimal",
+          "type": "number"
+        },
+        "adoxio_sundayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_saturdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_standardhours": {
+          "type": "boolean"
+        },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_alreadyopen": {
+          "type": "boolean"
+        },
+        "adoxio_establishmentid": {
+          "type": "string"
+        },
+        "adoxio_fridayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_wednesdayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_lastinspectionlink": {
+          "type": "string"
+        },
+        "adoxio_mailsenttorestaurant": {
+          "type": "boolean"
+        },
+        "adoxio_thursdayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_establishmentcontactphone": {
           "type": "string"
         },
         "adoxio_mfgstepsecfermorcarb": {
           "type": "boolean"
         },
-        "adoxio_addresspostalcode": {
+        "adoxio_hasduallicence": {
+          "type": "boolean"
+        },
+        "adoxio_addresscity": {
+          "type": "string"
+        },
+        "adoxio_establishmentcontactemail": {
           "type": "string"
         },
         "adoxio_wednesdayopen": {
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_fridayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_isrural": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_primarybusinesspurposes": {
+          "type": "string"
+        },
+        "_adoxio_regionid_value": {
+          "type": "string"
+        },
+        "_owninguser_value": {
+          "type": "string"
+        },
+        "adoxio_mondayclose": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_mfgacresofhoney": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_adoxio_licencee_value": {
+          "type": "string"
+        },
+        "adoxio_isopen": {
+          "type": "boolean"
+        },
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
         },
         "createdbyname": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
@@ -72130,6 +76056,9 @@
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_importid": {
+          "type": "string"
+        },
         "adoxio_name": {
           "type": "string"
         },
@@ -73721,6 +77650,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_dormancyreasons": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_licencesid": {
           "type": "string"
         },
@@ -73747,9 +77680,6 @@
         "importsequencenumber": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_cansigngrocerystoreproofofsales": {
-          "type": "boolean"
         },
         "adoxio_effectivedate": {
           "format": "date-time",
@@ -73788,12 +77718,14 @@
         "_modifiedby_value": {
           "type": "string"
         },
+        "adoxio_createinspection": {
+          "type": "boolean"
+        },
         "adoxio_establishmentphone": {
           "type": "string"
         },
-        "adoxio_orgbookcredentialresult": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_establishmentcontactname": {
+          "type": "string"
         },
         "_createdonbehalfby_value": {
           "type": "string"
@@ -73804,7 +77736,7 @@
         "adoxio_breweryequipmentlist": {
           "type": "string"
         },
-        "adoxio_establishmentnametemp": {
+        "adoxio_establishmenttype": {
           "type": "string"
         },
         "createdon": {
@@ -73831,6 +77763,9 @@
         "_adoxio_pdjurisdiction_value": {
           "type": "string"
         },
+        "adoxio_establishmentnametemp": {
+          "type": "string"
+        },
         "adoxio_expiryyear": {
           "format": "int32",
           "type": "integer"
@@ -73849,9 +77784,16 @@
         "adoxio_businessprogramaccountreferencenumber": {
           "type": "string"
         },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_rlrssubcategory": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_cansigngrocerystoreproofofsales": {
+          "type": "boolean"
         },
         "adoxio_mfgcopackerequipmentlist": {
           "type": "string"
@@ -73870,6 +77812,9 @@
           "type": "string"
         },
         "_ownerid_value": {
+          "type": "string"
+        },
+        "adoxio_establishmentcontactemail": {
           "type": "string"
         },
         "adoxio_dormancynotes": {
@@ -73935,9 +77880,8 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_dormancyreasons": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_establishmentcontactphone": {
+          "type": "string"
         },
         "adoxio_ldbordertotals": {
           "format": "decimal",
@@ -73945,6 +77889,10 @@
         },
         "_modifiedonbehalfby_value": {
           "type": "string"
+        },
+        "adoxio_orgbookcredentialresult": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_cansigntemporarychangeapplications": {
           "type": "boolean"
@@ -73957,6 +77905,9 @@
         },
         "modifiedon": {
           "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_rlrsprimarybusinesspurposes": {
           "type": "string"
         },
         "adoxio_representativeemail": {
@@ -73995,10 +77946,6 @@
         },
         "adoxio_representativename": {
           "type": "string"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
         },
         "adoxio_effectiveyear": {
           "format": "int32",
@@ -74401,6 +78348,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
           }
+        },
+        "adoxio_licences_adoxio_endorsement_LicenceWhenCancelled": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_endorsement"
+          }
         }
       }
     },
@@ -74638,6 +78591,10 @@
         "_modifiedby_value": {
           "type": "string"
         },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
         "versionnumber": {
           "format": "int64",
           "type": "string"
@@ -74658,6 +78615,9 @@
         },
         "adoxio_code": {
           "type": "string"
+        },
+        "adoxio_showlicenseerepresentativetab": {
+          "type": "boolean"
         },
         "_owningbusinessunit_value": {
           "type": "string"
@@ -74689,10 +78649,6 @@
         "adoxio_onestopprogramaccounttype": {
           "format": "int32",
           "type": "integer"
-        },
-        "createdon": {
-          "format": "date-time",
-          "type": "string"
         },
         "statecode": {
           "format": "int32",
@@ -75656,6 +79612,169 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.activityparty"
           }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_login": {
+      "description": "Microsoft.Dynamics.CRM.adoxio_login",
+      "type": "object",
+      "properties": {
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_name": {
+          "type": "string"
+        },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "_adoxio_contact_value": {
+          "type": "string"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
+        "_createdby_value": {
+          "type": "string"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owninguser_value": {
+          "type": "string"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string"
+        },
+        "statecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_externalid": {
+          "type": "string"
+        },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_loginid": {
+          "type": "string"
+        },
+        "_adoxio_relatedaccount_value": {
+          "type": "string"
+        },
+        "adoxio_type": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_login_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_login_DuplicateMatchingRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_login_DuplicateBaseRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_login_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_login_MailboxTrackingFolders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
+          }
+        },
+        "adoxio_login_ProcessSession": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
+          }
+        },
+        "adoxio_login_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_login_PrincipalObjectAttributeAccesses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
+          }
+        },
+        "adoxio_Contact": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
+        },
+        "adoxio_RelatedAccount": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
         }
       }
     },
@@ -79647,143 +83766,155 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_specialevent",
       "type": "object",
       "properties": {
-        "adoxio_eventname": {
-          "type": "string"
-        },
-        "adoxio_responsibleindividualfirstname": {
-          "type": "string"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_specialeventid": {
-          "type": "string"
-        },
-        "adoxio_specialeventstreet1": {
-          "type": "string"
-        },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_specialeventcity": {
-          "type": "string"
-        },
-        "adoxio_tastingevent": {
-          "type": "boolean"
-        },
-        "adoxio_specialeventapplicantphone": {
-          "type": "string"
-        },
-        "_owninguser_value": {
-          "type": "string"
-        },
-        "adoxio_capacity": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_specialeventprovince": {
-          "type": "string"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_owningbusinessunit_value": {
-          "type": "string"
-        },
-        "_createdby_value": {
-          "type": "string"
-        },
         "_modifiedonbehalfby_value": {
           "type": "string"
         },
-        "_ownerid_value": {
+        "adoxio_admissionfee": {
+          "type": "boolean"
+        },
+        "adoxio_eventstartdate": {
+          "format": "date-time",
           "type": "string"
         },
-        "adoxio_responsibleindividuallastname": {
+        "adoxio_eventname": {
           "type": "string"
-        },
-        "adoxio_cancellationreason": {
-          "type": "string"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_specialeventdescripton": {
-          "type": "string"
-        },
-        "adoxio_responsibleindividualses": {
-          "type": "string"
-        },
-        "adoxio_typeofevent": {
-          "format": "int32",
-          "type": "integer"
         },
         "overriddencreatedon": {
           "format": "date-time",
           "type": "string"
         },
-        "createdon": {
+        "adoxio_createinspection": {
+          "type": "boolean"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "adoxio_responsibleindividualmiddleinitial": {
+          "type": "string"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "adoxio_responsibleindividualfirstname": {
+          "type": "string"
+        },
+        "adoxio_specialeventapplicant": {
+          "type": "string"
+        },
+        "adoxio_responsibleindividualsir": {
+          "type": "string"
+        },
+        "adoxio_responsibleindividuallastname": {
+          "type": "string"
+        },
+        "modifiedon": {
           "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_specialeventpostalcode": {
           "type": "string"
         },
         "statecode": {
           "format": "int32",
           "type": "integer"
         },
-        "_modifiedby_value": {
+        "_createdby_value": {
           "type": "string"
         },
-        "adoxio_specialeventpermitnumber": {
+        "adoxio_beergarden": {
+          "type": "boolean"
+        },
+        "adoxio_responsibleindividualses": {
+          "type": "string"
+        },
+        "adoxio_tastingevent": {
+          "type": "boolean"
+        },
+        "adoxio_specialeventapplicantemail": {
+          "type": "string"
+        },
+        "adoxio_specialeventprovince": {
+          "type": "string"
+        },
+        "adoxio_typeofevent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_specialeventdescripton": {
           "type": "string"
         },
         "adoxio_responsibleindividualposition": {
           "type": "string"
         },
-        "adoxio_specialeventapplicantemail": {
-          "type": "string"
-        },
-        "adoxio_specialeventpostalcode": {
-          "type": "string"
-        },
-        "adoxio_responsibleindividualsir": {
-          "type": "string"
+        "adoxio_capacity": {
+          "format": "int32",
+          "type": "integer"
         },
         "_owningteam_value": {
           "type": "string"
         },
-        "importsequencenumber": {
+        "adoxio_drinksincluded": {
+          "type": "boolean"
+        },
+        "timezoneruleversionnumber": {
           "format": "int32",
           "type": "integer"
         },
-        "modifiedon": {
-          "format": "date-time",
+        "adoxio_specialeventpermitnumber": {
           "type": "string"
         },
-        "adoxio_responsibleindividualmiddleinitial": {
-          "type": "string"
-        },
-        "adoxio_createinspection": {
-          "type": "boolean"
-        },
-        "adoxio_specialeventapplicant": {
-          "type": "string"
-        },
-        "adoxio_eventenddate": {
-          "format": "date-time",
+        "adoxio_specialeventapplicantphone": {
           "type": "string"
         },
         "versionnumber": {
           "format": "int64",
           "type": "string"
         },
-        "adoxio_eventstartdate": {
-          "format": "date-time",
+        "adoxio_specialeventcity": {
           "type": "string"
         },
         "adoxio_specialeventstreet2": {
+          "type": "string"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "adoxio_eventenddate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_owninguser_value": {
+          "type": "string"
+        },
+        "adoxio_cancellationreason": {
+          "type": "string"
+        },
+        "adoxio_specialeventstreet1": {
+          "type": "string"
+        },
+        "adoxio_maximumnumberofguests": {
+          "type": "string"
+        },
+        "adoxio_specialeventid": {
           "type": "string"
         },
         "createdby": {
@@ -84287,6 +88418,9 @@
         },
         "regardingobjectid_resourcegroup": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.resourcegroup"
+        },
+        "regardingobjectid_adoxio_login": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
         }
       }
     },
@@ -86937,6 +91071,9 @@
         },
         "regardingobjectid_subject": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.subject"
+        },
+        "regardingobjectid_adoxio_login": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
         }
       }
     },
@@ -88995,6 +93132,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+          }
+        },
+        "business_unit_adoxio_login": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
           }
         }
       }
@@ -94115,6 +98258,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.letter"
           }
+        },
+        "adoxio_contact_adoxio_login_Contact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+          }
         }
       }
     },
@@ -96839,6 +100988,12 @@
         },
         "baserecordid_quote": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.quote"
+        },
+        "duplicaterecordid_adoxio_login": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+        },
+        "baserecordid_adoxio_login": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
         }
       }
     },
@@ -103150,9 +107305,8 @@
         "blockedprofile": {
           "type": "boolean"
         },
-        "adoxio_inspchecklistproductnotvisibleroutine": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_sendenoticenotification": {
+          "type": "boolean"
         },
         "adoxio_checklistsellingitright": {
           "format": "int32",
@@ -103437,6 +107591,9 @@
         "adoxio_checklistbondedwarehousediscussednotes": {
           "type": "string"
         },
+        "adoxio_inspchecklisttakeawayordeliveryonlynotes": {
+          "type": "string"
+        },
         "adoxio_sepchecklistmarketqualifiesnotes": {
           "type": "string"
         },
@@ -103647,9 +107804,8 @@
         "adoxio_routinechecklistsellingitrightnotes": {
           "type": "string"
         },
-        "adoxio_checklistnootherbusinessassociated": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_importid": {
+          "type": "string"
         },
         "versionnumber": {
           "format": "int64",
@@ -103752,8 +107908,9 @@
         "adoxio_checklistagentiddiscussednotes": {
           "type": "string"
         },
-        "adoxio_inspchecklisttakeawayordeliveryonlynotes": {
-          "type": "string"
+        "adoxio_checklistnootherbusinessassociated": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_pschecklistworkerreviewed": {
           "format": "int32",
@@ -103810,9 +107967,6 @@
           "type": "string"
         },
         "adoxio_pschecklistunlawfulcannabisnotes": {
-          "type": "string"
-        },
-        "adoxio_inspchecklistphototakennotes": {
           "type": "string"
         },
         "adoxio_mktrchecklistadvertisingreviewed": {
@@ -104164,6 +108318,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_inspchecklistphototakennotes": {
+          "type": "string"
+        },
         "adoxio_inspectioncompleteddate": {
           "type": "string"
         },
@@ -104260,6 +108417,9 @@
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_rlrsprimarybusinesspurposes": {
+          "type": "string"
+        },
         "adoxio_checklistdiscusscateringrequirements": {
           "format": "int32",
           "type": "integer"
@@ -104330,6 +108490,10 @@
         },
         "adoxio_sepchecklistliquorreceiptscomment": {
           "type": "string"
+        },
+        "adoxio_inspchecklistproductnotvisibleroutine": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_checklistcontractmanufacturingreqsnotes": {
           "type": "string"
@@ -105417,6 +109581,10 @@
         "_modifiedonbehalfby_value": {
           "type": "string"
         },
+        "adoxio_refunddate": {
+          "format": "date-time",
+          "type": "string"
+        },
         "shippingmethodcode": {
           "format": "int32",
           "type": "integer"
@@ -105450,12 +109618,15 @@
           "format": "decimal",
           "type": "number"
         },
+        "totalamount_base": {
+          "format": "decimal",
+          "type": "number"
+        },
         "lastbackofficesubmit": {
           "format": "date-time",
           "type": "string"
         },
-        "lastonholdtime": {
-          "format": "date-time",
+        "_adoxio_contraventionid_value": {
           "type": "string"
         },
         "billto_name": {
@@ -105500,10 +109671,6 @@
         },
         "shipto_composite": {
           "type": "string"
-        },
-        "totalamount_base": {
-          "format": "decimal",
-          "type": "number"
         },
         "importsequencenumber": {
           "format": "int32",
@@ -105599,8 +109766,7 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_refunddate": {
-          "format": "date-time",
+        "billto_composite": {
           "type": "string"
         },
         "totallineitemamount": {
@@ -105631,12 +109797,13 @@
         "shipto_fax": {
           "type": "string"
         },
-        "billto_composite": {
-          "type": "string"
-        },
         "totallineitemamount_base": {
           "format": "decimal",
           "type": "number"
+        },
+        "lastonholdtime": {
+          "format": "date-time",
+          "type": "string"
         },
         "description": {
           "type": "string"
@@ -105795,6 +109962,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
+          }
+        },
+        "adoxio_ContraventionId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contravention"
+        },
+        "adoxio_invoice_adoxio_contravention_Invoice": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contravention"
           }
         },
         "sla_invoice_sla": {
@@ -110770,6 +114946,9 @@
         },
         "modifiedby": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "regardingobjectid_adoxio_login": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
         }
       }
     },
@@ -117749,6 +121928,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.contract"
           }
+        },
+        "owner_adoxio_login": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+          }
         }
       }
     },
@@ -120357,6 +124542,9 @@
         },
         "objectid_phonecall": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.phonecall"
+        },
+        "objectid_adoxio_login": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
         }
       }
     },
@@ -121298,6 +125486,9 @@
         },
         "completedby": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "regardingobjectid_adoxio_login": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
         }
       }
     },
@@ -142394,6 +146585,36 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.opportunitysalesprocess"
           }
+        },
+        "lk_adoxio_login_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+          }
+        },
+        "lk_adoxio_login_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+          }
+        },
+        "lk_adoxio_login_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+          }
+        },
+        "lk_adoxio_login_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+          }
+        },
+        "user_adoxio_login": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+          }
         }
       }
     },
@@ -144212,6 +148433,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.goal"
+          }
+        },
+        "team_adoxio_login": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
           }
         }
       }
@@ -148301,6 +152528,19 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.adoxio_loginCollection": {
+      "title": "Collection of adoxio_login",
+      "description": "Microsoft.Dynamics.CRM.adoxio_loginCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_login"
+          }
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_investigationrequestCollection": {
       "title": "Collection of adoxio_investigationrequest",
       "description": "Microsoft.Dynamics.CRM.adoxio_investigationrequestCollection",
@@ -148843,6 +153083,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contravention"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.invoiceCollection": {
+      "title": "Collection of invoice",
+      "description": "Microsoft.Dynamics.CRM.invoiceCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
           }
         }
       }
@@ -149870,19 +154123,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.OptionSetMetadataBase"
-          }
-        }
-      }
-    },
-    "Microsoft.Dynamics.CRM.invoiceCollection": {
-      "title": "Collection of invoice",
-      "description": "Microsoft.Dynamics.CRM.invoiceCollection",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
           }
         }
       }

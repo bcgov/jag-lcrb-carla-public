@@ -203,6 +203,15 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return result;
   }
 
+  // Take Home Sampling event is only available to Agent licensees
+  showTakeHomeSampling(item: ApplicationLicenseSummary) {
+    const result = this.isActive(item) &&
+      this.actionsVisible(item) &&
+      item.licenceTypeCategory === "Liquor" &&
+      item.licenceTypeName === ApplicationTypeNames.Agent;
+    return result;
+  }
+
   showLicenceTransferAction(item: ApplicationLicenseSummary) {
     const result = this.isActive(item) &&
       !item.transferRequested &&
@@ -325,9 +334,15 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return licence.licenceTypeName.includes("Liquor Primary");
   }
 
-  // At the moment all events have authorization letters to download, EXCEPT for Liquor-Free events.
+  /**
+   * At the moment all events have authorization letters to download, EXCEPT for:
+   *   - Liquor-Free
+   *   - Take Home Sampling events
+   */
   hasAuthorizationLetter(event: LicenceEvent): boolean {
-    return event.eventCategory !== this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value;
+    const exclusions = ["All Ages Liquor Free", "Take Home Sampling"];
+    const excludedValues: number[] = exclusions.map(label => this.getOptionFromLabel(this.eventCategory, label)?.value);
+    return !excludedValues.includes(event.eventCategory);
   }
 
   /*
@@ -562,6 +577,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       return "/tua-event/";
     } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value) {
       return "/liquor-free-event/";
+    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Take Home Sampling").value) {
+      return "/take-home-event/";
     }
     return "/event/";
   }

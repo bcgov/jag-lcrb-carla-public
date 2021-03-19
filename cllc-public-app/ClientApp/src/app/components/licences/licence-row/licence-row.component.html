@@ -230,6 +230,11 @@
                                     <fa-icon [icon]="faCalendarAlt" style="margin-right: 10px;"></fa-icon>Request All-Ages Liquor-Free Event Authorization
                                   </a>
                                 </div>
+                                <div *ngIf="showTakeHomeSampling(item)" appRemoveIfFeatureOff="TakeHomeEvents">
+                                  <a [routerLink]="[ '/licence/' + item.licenseId + '/take-home-event']">
+                                    <fa-icon [icon]="faCalendarAlt" style="margin-right: 10px;"></fa-icon>Request Take Home Sampling Event Authorization
+                                  </a>
+                                </div>
                                 <div
                                     *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActive(item) && actionsVisible(item)">
                                     <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
