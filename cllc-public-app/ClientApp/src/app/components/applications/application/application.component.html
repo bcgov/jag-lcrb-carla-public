@@ -2283,7 +2283,10 @@
 <!-- Proceed to Pay-->
 
 <section class="d-flex" style="margin-top: 15px;"
-         *ngIf="!isOpenedByLGForApproval && !isRAS() && !isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation ">
+         *ngIf="!isOpenedByLGForApproval 
+         && !isRAS() 
+         && ((!isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation) 
+              ||!showSubmitToLG()) ">
 
   <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
   <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
@@ -2350,7 +2353,8 @@
                 && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')
                 && !lgApprovalDecisionMade()
                 && !lgHasReviewedZoning()
-                && !lGHasApproved()">
+                && !lGHasApproved()
+                && showSubmitToLG()">
   <br>
   <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
   <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
