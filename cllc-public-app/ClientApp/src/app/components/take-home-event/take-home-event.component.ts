@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
 import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDaysArray } from '@shared/date-fns';
-import { EventCategory, EventStatus, LicenceEvent, TuaEventType } from '@models/licence-event.model';
+import { EventCategory, EventStatus, EventType, LicenceEvent, SpecificLocation } from '@models/licence-event.model';
 import { AppState } from '@app/app-state/models/app-state';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { LicenseDataService } from '@services/license-data.service';
@@ -14,11 +14,11 @@ import { LicenceEventSchedule } from '@models/licence-event-schedule';
 import { License } from '@models/license.model';
 
 @Component({
-  selector: 'app-liquor-free-event',
-  templateUrl: './liquor-free-event.component.html',
-  styleUrls: ['./liquor-free-event.component.scss']
+  selector: 'app-take-home-event',
+  templateUrl: './take-home-event.component.html',
+  styleUrls: ['./take-home-event.component.scss']
 })
-export class LiquorFreeEventComponent extends FormBase implements OnInit {
+export class TakeHomeEventComponent extends FormBase implements OnInit {
   // icons
   faSave = faSave;
   faTrash = faTrash;
@@ -27,6 +27,8 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
   // enums
   eventCategory = EventCategory;
   eventStatus = EventStatus;
+  eventType = EventType;
+  specificLocation = SpecificLocation;
 
   // component state
   busy: Subscription;
@@ -40,18 +42,28 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
   endDateMinimum = new Date(this.startDateMinimum.valueOf());
   scheduleIsInconsistent = false;
 
-  // Liquor-Free event form
+  // Take-Home Sampling event form
   timeForms = this.fb.array([]);
   form = this.fb.group({
     id: ['', []],
     status: ['', [Validators.required]],
     licenceId: ['', []],
     accountId: ['', []],
-    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'All Ages Liquor Free').value, []],
+    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Take Home Sampling').value, []],
 
     // event details
     eventName: ['', [Validators.required]],
     eventTypeDescription: ['', []],
+    eventType: ['', [Validators.required]],
+    clientHostname: ['', [Validators.required]],
+    venueDescription: ['', [Validators.required]],
+    specificLocation: ['', [Validators.required]],
+    additionalLocationInformation: ['', []],
+    street1: ['', [Validators.required]],
+    street2: ['', []],
+    city: ['', [Validators.required]],
+    province: ["BC", [Validators.required]],
+    postalCode: ['', [Validators.required]],
 
     // contact information
     contactName: ['', [Validators.required]],
@@ -63,8 +75,8 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
 
-    isAgreement1: [false, [Validators.required]],
-    isAgreement2: [false, [Validators.required]],
+    isAgreement1: [false, [Validators.requiredTrue]],
+    isAgreement2: [false, [Validators.requiredTrue]],
   }, {
     // end date must be later than or equal to start date
     validators: dateRangeValidator('startDate', 'endDate')
@@ -133,6 +145,16 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
       eventName: licenceEvent.eventName,
       eventTypeDescription: licenceEvent.eventTypeDescription,
       eventCategory: this.getOptionFromLabel(this.eventCategory, 'All Ages Liquor Free').value,
+      eventType: licenceEvent.eventType,
+      clientHostname: licenceEvent.clientHostname,
+      venueDescription: licenceEvent.venueDescription,
+      specificLocation: licenceEvent.specificLocation,
+      additionalLocationInformation: licenceEvent.additionalLocationInformation,
+      street1: licenceEvent.street1,
+      street2: licenceEvent.street2,
+      city: licenceEvent.city,
+      province: licenceEvent.province,
+      postalCode: licenceEvent.postalCode,
       // contact information
       contactName: licenceEvent.contactName,
       contactPhone: licenceEvent.contactPhone,
@@ -141,7 +163,7 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
       // date & time
       startDate: new Date(licenceEvent.startDate),
       endDate: new Date(licenceEvent.endDate),
-
+      // agreements
       isAgreement1: licenceEvent.isAgreement1,
       isAgreement2: licenceEvent.isAgreement2,
     });
@@ -282,7 +304,8 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
   }
 
   updateLicence(schedules: LicenceEventSchedule[]) {
-    this.busy = this.licenceEvents.updateLicenceEvent(this.form.get('id').value, { ...this.form.value, schedules })
+    this.busy = this.licenceEvents
+      .updateLicenceEvent(this.form.get('id').value, { ...this.form.value, schedules })
       .subscribe((licenceEvent) => {
         this.router.navigate(['/licences']);
       });
@@ -290,7 +313,8 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
 
   createLicence(schedules: LicenceEventSchedule[]) {
     this.form.removeControl('id');
-    this.busy = this.licenceEvents.createLicenceEvent({ ...this.form.value, schedules: schedules })
+    this.busy = this.licenceEvents
+      .createLicenceEvent({ ...this.form.value, schedules: schedules })
       .subscribe((licenceEvent) => {
         this.router.navigate(['/licences']);
       });
@@ -351,9 +375,16 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
       contactPhone: 'Please enter the contact phone number',
       contactEmail: 'Please enter the contact email address',
       contactEmailConfirmation: 'The email address confirmation does not match provided email',
+      eventType: 'Please enter the type of event',
+      eventTypeDescription: 'Please enter a description of the event',
+      clientHostname: 'Please enter the client or host name',
+      venueDescription: 'Please enter the name and a description of the venue',
+      specificLocation: 'Please enter the location',
+      street1: 'Please enter the address line 1',
+      city: 'Please enter the city',
+      postalCode: 'Please enter the postal code',
       startDate: 'Please enter the start date',
       endDate: 'Please enter the end date',
-      eventTypeDescription: 'Please enter a description of the event',
       isAgreement1: 'Please agree to all terms',
       isAgreement2: 'Please agree to all terms',
     };
@@ -361,13 +392,10 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
 
   validateForm(): boolean {
     this.validationMessages = [...new Set(this.listControlsWithErrors(this.form, this.validationErrorMap))];
-
     if (this.timeForms.controls.length < 1) {
       this.validationMessages.push('No event dates selected');
     }
-
     this.markControlsAsTouched(this.form);
-
     if (this.validationMessages.length > 0) {
       return false; // form is invalid
     }
