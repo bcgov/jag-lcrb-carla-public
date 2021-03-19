@@ -105,6 +105,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   account: Account;
   tiedHouseFormData: Observable<TiedHouseConnection>;
   validationMessages: string[];
+  renewalType: string;
 
   get contacts(): FormArray {
     return this.form.get("otherContacts") as FormArray;
@@ -122,6 +123,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   ) {
     super();
     this.route.paramMap.subscribe(params => this.applicationId = params.get("applicationId"));
+    this.route.paramMap.subscribe(params => this.renewalType = params.get("renewalType"));
     this.route.paramMap.subscribe(params => this.applicationMode = params.get("mode"));
   }
 
@@ -224,7 +226,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   getBusinessTypeName() {
     if (!(this.saveFormData && this.saveFormData.businessProfile)
-    || this.account.isOtherBusinessType()) {
+      || this.account.isOtherBusinessType()) {
       return "";
     }
     let name = "";
@@ -364,8 +366,13 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         if (this.useInStepperMode) {
           this.saveComplete.emit(true);
         } else if (this.applicationId) {
-          // divert catering.
-          if (this.applicationMode === "catering") {
+          if (this.renewalType) {
+            const route: any[] = [`/renew-licence/${this.renewalType}/${this.applicationId}`];
+            if (this.applicationMode) {
+              route.push({ mode: this.applicationMode });
+            }
+            this.router.navigate(route);
+          } else if (this.applicationMode === "catering") {// divert catering
             const route: any[] = [`/application/catering/${this.applicationId}`];
             if (this.applicationMode) {
               route.push({ mode: this.applicationMode });
