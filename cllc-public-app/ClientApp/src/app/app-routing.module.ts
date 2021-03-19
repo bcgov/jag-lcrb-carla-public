@@ -300,7 +300,11 @@ const routes: Routes = [
   {
     path: "account-profile/:applicationId",
     component: AccountProfileComponent,
-    // canDeactivate: [CanDeactivateGuard],
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: "account-profile/renewal/:renewalType/:applicationId",
+    component: AccountProfileComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
