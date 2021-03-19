@@ -11,6 +11,9 @@ namespace bdd_tests
         [And(@"I renew the licence with (.*)")]
         public void RenewLicence(string responses)
         {
+            // click on the Continue to Application button
+            ContinueToApplicationButton();
+
             if (responses == "negative responses for Cannabis")
             {
                 // select 'No'
