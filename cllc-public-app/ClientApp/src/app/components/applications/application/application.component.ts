@@ -239,6 +239,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       tempDateFrom: [''],
       tempDateTo: [''],
       pin: ['', [this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
+      holdsOtherManufactureLicence: [false]
     });
 
   
@@ -1182,7 +1183,22 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showLEDocumentSection(): boolean {
-    let show = this?.application?.applicationType?.hasLESection && !this.isOpenedByLGForApproval;
+    const show = this?.application?.applicationType?.hasLESection && !this.isOpenedByLGForApproval;
+    return show;
+  }
+
+  showHoldsOtherManufactureLicence(): boolean {
+    const show = ['Special Event Area Endorsement', 'Lounge Area Endorsement']
+    .indexOf(this?.application?.applicationType?.name) !== -1;
+    return show;
+  }
+
+  showSubmitToLG(): boolean {
+    let show = (this?.application?.applicationType?.isShowLGINApproval || this?.application?.applicationType?.isShowLGZoningConfirmation)
+    && !this.lGHasApproved()
+    && !this.lGHasRejected()
+    && this.form.get('holdsOtherManufactureLicence').value !== true
+    && this?.application?.applicationStatus === 'Intake';
     return show;
   }
 
