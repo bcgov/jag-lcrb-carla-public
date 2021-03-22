@@ -381,8 +381,7 @@
     <app-field label="Phone Number (main)" [required]="true"
                [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
                errorMessage="Please enter the business contact's 10-digit phone number">
-      <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-             (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text"
+      <input class="form-control" style="width: 250px;" mask="(000) 000-0000" autocomplete="tel" type="text"
              formControlName="contactPersonPhone">
     </app-field>
 
