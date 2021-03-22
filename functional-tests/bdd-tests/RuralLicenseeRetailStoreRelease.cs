@@ -24,6 +24,7 @@ Scenario: Rural LRS Release (Private Corporation)
     And I click on the Continue to Application button
     And I request a T&C change application
     And I click on the Submit button
+    And I click on the Licences tab
     And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And I click on the Licences tab
