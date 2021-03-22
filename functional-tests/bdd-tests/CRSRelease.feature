@@ -21,6 +21,7 @@ Scenario: CRS Release (Private Corporation)
     And I request a valid store name or branding change for Cannabis
     And I click on the Licences tab
     And I click on the link for Download Licence
+    And I confirm the terms and conditions for a CRS licence
     And I show the store as open on the map
     And I click on the link for Review Federal Reports
     And I review the federal reports
