@@ -94,7 +94,7 @@ namespace bdd_tests
             // check mailing address street 1 is correct
             var uiMailingAddressStreet =
                 ngDriver.FindElement(By.CssSelector("input[formcontrolname='mailingAddressStreet']"));
-            Assert.True(uiMailingAddressStreet.GetAttribute("value") == "#22");
+            Assert.True(uiMailingAddressStreet.GetAttribute("value") == "#22 Horizon St");
 
             // check mailing address street 2 is correct
             var uiMailingAddressStreet2 =
