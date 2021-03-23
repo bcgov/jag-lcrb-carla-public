@@ -24,13 +24,12 @@ Scenario: Liquor Primary Change Hours Outside Service Hours (Private Corporation
     And I pay the licensing fee
     And I click on the Licences tab
     And I click on the link for Change to Hours of Liquor Service (outside Service Hours)
-    And I click on the Continue to Application button
     And I complete the change hours application for liquor service outside service hours
     And I click on the Submit button
     And I log in as local government for Parksville
     And I click on the link for Applications for Review
     And I click on the link for Review Application
-    And I specify my contact details as the approving authority for liquor primary
+    And I specify my contact details as the approving authority for outside service hours
     And I click on the Submit button
     And I click on the overlay Submit button
     And No applications awaiting review is displayed
