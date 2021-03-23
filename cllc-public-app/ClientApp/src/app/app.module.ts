@@ -271,6 +271,8 @@ import { LoginComponent } from './components/sep/login/login.component';
 import { WorkerLandingPageComponent } from "@components/worker-qualification/worker-landing-page/worker-landing-page.component";
 import { TakeHomeEventComponent } from "@components/take-home-event/take-home-event.component";
 import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-auth-guard.service";
+import { StarterChecklistComponent } from './components/sep/starter-checklist/starter-checklist.component';
+import { ResourcesComponent } from './components/sep/resources/resources.component';
 
 @NgModule({
   declarations: [
@@ -415,6 +417,8 @@ import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-aut
     LiquorFreeEventComponent,
     WorkerLandingPageComponent,
     TakeHomeEventComponent,
+    StarterChecklistComponent,
+    ResourcesComponent,
   ],
   imports: [
     AppRoutingModule,
