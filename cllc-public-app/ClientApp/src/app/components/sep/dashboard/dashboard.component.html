@@ -1,18 +1,20 @@
 <div class="form-wrapper">
     <h1>Welcome, {{currentUser?.name}}</h1>
 
+    <p>Where would you like to go from here?</p>
+
     <div class="row">
         <section class="col-md-8">
-            <div class="d-flex justify-content-between">
-                <section>
+            <div class="d-flex justify-content-between border">
+                <section class="border">
                     <h5>MY APPLICATIONS</h5>
                     <p>Check the status of your applications or search for past applications</p>
                     <button mat-raised-button color="secondary">GO TO MY APPLICATIONS</button>
                 </section>
-                <section>
+                <section class="border"> 
                     <h5>START AN APPLICATION</h5>
                     <p>See the application checklist and get started</p>
-                    <button mat-raised-button color="primary">START NEW APPLICATION</button>
+                    <button mat-raised-button color="primary" (click)="startApplication()">START NEW APPLICATION</button>
                 </section>
             </div>
 
