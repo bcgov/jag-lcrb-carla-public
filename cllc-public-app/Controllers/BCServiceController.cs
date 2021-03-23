@@ -137,7 +137,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string basePath = string.IsNullOrEmpty(configuration["BASE_PATH"]) ? "" : configuration["BASE_PATH"];
             if (source == "sep")
             {
-                basePath += "/sep-dashboard";
+                basePath += "/sep/dashboard";
             }
             else if (path != null && path.Equals("cannabis-associate-screening"))
             {
@@ -156,7 +156,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string basePath = string.IsNullOrEmpty(configuration["BASE_PATH"]) ? "" : configuration["BASE_PATH"];
             if (source == "sep")
             {
-                basePath += "/sep-dashboard";
+                basePath += "/sep/dashboard";
             }
             else if (path != null && path.Equals("cannabis-associate-screening"))
             {
