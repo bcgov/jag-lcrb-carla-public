@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string url = "dashboard";
             if (source == "sep")
             {
-                url = "sep-dashboard";
+                url = "sep/dashboard";
             }
 
             return Redirect(basePath + "/" + url);
