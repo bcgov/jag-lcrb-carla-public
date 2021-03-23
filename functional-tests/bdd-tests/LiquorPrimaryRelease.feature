@@ -25,6 +25,7 @@ Scenario: Liquor Primary Release Test #1 (Private Corporation)
     And I pay the licensing fee
     And I click on the Licences tab
     And I click on the link for Download Licence
+    And I confirm the terms and conditions for a Liquor Primary licence
     And I click on the link for Application to Allow Family Food Service
     And I click on the Continue to Application button
     And I complete the Application to Allow Family Food Service
@@ -62,6 +63,8 @@ Scenario: Liquor Primary Release Test #1 (Private Corporation)
     # And I click on the Continue to Application button
     # And I complete a liquor primary relocation request
     # And I click on the Submit button
+    # And I click on the Licences tab
+    # And I request a valid store name or branding change for Liquor Primary
     And the account is deleted
     Then I see the login page
 
@@ -84,38 +87,78 @@ Scenario: Liquor Primary Release Test #2 (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I pay the licensing fee
-    And I click on the Licences tab
-    # And I click on the link for Request T&C Change Application
-    # And I click on the Continue to Application button
-    # And I request a T&C change application
-    # And I click on the Submit button
-    # TODO: T&C change application needs to be approved
     # And I click on the Licences tab
     # And I click on the link for Structural Change Application (Capacity Increase)
     # And I click on the Continue to Application button
     # And I request a capacity increase structural change
     # TODO: structural change application needs to be approved
-    #And I click on the Licences tab
-    #And I click on the link for Structural Change Application (No Capacity Increase)
-    #And I click on the Continue to Application button
-    #And I request a no capacity structural change
-    #And I click on the Licences tab
-    #And I click on the link for Temporary Extension of Licensed Area
-    #And I click on the Continue to Application button
-    #And I submit a liquor primary temporary extension of licensed area application
-    #And I click on the Licences tab
-    #And I click on the link for Temporary Suspension Request
-    #And I click on the Continue to Application button
-    #And I complete the temporary suspension request
-    #And I click on the Submit button
-    #And I enter the payment information
-    #And I click on the Licences tab
-    #And I click on the link for Temporary Use Area Endorsement Application
-    #And I click on the Continue to Application button
-    #And I submit a temporary use area endorsement application
-    #And I click on the Licences tab
-    #And I request a third party operator
-    #And I click on the Licences tab
-    #And I request a transfer of ownership for Liquor Primary
+    # And I click on the Licences tab
+    # And I click on the link for Structural Change Application (No Capacity Increase)
+    # And I click on the Continue to Application button
+    # And I request a no capacity structural change
+    # And I click on the Licences tab
+    # And I click on the link for Temporary Extension of Licensed Area
+    # And I click on the Continue to Application button
+    # And I submit a liquor primary temporary extension of licensed area application
+    # And I click on the Licences tab
+    # And I click on the link for Temporary Suspension Request
+    # And I click on the Continue to Application button
+    # And I complete the temporary suspension request
+    # And I click on the Submit button
+    # And I enter the payment information
+    # And I click on the Licences tab
+    # And I click on the link for Temporary Use Area Endorsement Application
+    # And I click on the Continue to Application button
+    # And I submit a temporary use area endorsement application
+    # And I click on the Licences tab
+    # And I request a third party operator
+    # And I click on the Licences tab
+    # And I request a transfer of ownership for Liquor Primary
+    # And I click on the Licences tab
+    # And I click on the link for Request T&C Change Application
+    # And I click on the Continue to Application button
+    # And I request a T&C change application
+    # And I click on the Submit button
+    # And I log in as local government for Parksville
+    # And I click on the link for Applications for Review
+    # And I click on the link for Review Application
+    # And I specify my contact details as the approving authority for T&C Change
+    # And I click on the Submit button
+    # And I click on the overlay Submit button
+    # And No applications awaiting review is displayed
+    # And I log in as a return user
+    # And I click on the link for Complete Application
+    # And I click on the Continue to Application button
+    # And I click on the Submit button
+    # And I enter the payment information
+    # And I click on the Licences tab
+    # And I click on the link for Change to Hours of Liquor Service (within Service Hours)
+    # And I complete the change hours application for liquor service within service hours
+    # And I click on the Submit button
+    # And I enter the payment information
+    # And I click on the Licences tab
+    # And I click on the link for Temporary Change to Hours of Sale
+    # And I click on the Continue to Application button
+    # And I request a temporary change to hours of sale
+    # And I click on the Submit button
+    # And I click on the Licences tab
+    # And I click on the link for Hawkers Application (Stadiums Only)
+    # And I click on the Continue to Application button
+    # And I complete the stadiums only application for hawkers
+    # And I click on the Submit button
+    # And I log in as local government for Parksville
+    # And I click on the link for Applications for Review
+    # And I click on the link for Review Application
+    # And I specify my contact details as the approving authority for hawkers
+    # And I click on the Submit button
+    # And I click on the overlay Submit button
+    # And No applications awaiting review is displayed
+    # And I log in as a return user
+    # And I click on the link for Complete Application
+    # And I click on the Continue to Application button
+    # And I click on the Submit button
+    # And I click on the Licences tab
+    # And I click on the link for Add Licensee Representative
+    # And I request a licensee representative
     And the account is deleted
     Then I see the login page
