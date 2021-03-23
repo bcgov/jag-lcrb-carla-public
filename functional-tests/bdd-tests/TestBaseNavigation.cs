@@ -15,7 +15,7 @@ namespace bdd_tests
         public void ClickOnLink(string specificLink)
         {
             NgWebElement uiRequestedLink = null;
-            for (var i = 0; i < 30; i++)
+            for (var i = 0; i < 50; i++)
                 try
                 {
                     var names = ngDriver.FindElements(By.LinkText(specificLink));
@@ -203,7 +203,6 @@ namespace bdd_tests
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
             Log.Logger.Information("ENTERING ClickStartApplication");
-            ngDriver.WaitForAngular();
 
             switch (applicationType)
             {

@@ -18,6 +18,7 @@ Scenario: Agent Release Test (Private Corporation)
     And the application is approved
     And I click on the Licences tab
     And I click on the link for Download Licence
+    And I confirm the terms and conditions for an agent licence
     And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And I click on the Licences tab

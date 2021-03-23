@@ -139,7 +139,7 @@ namespace bdd_tests
                 bizType == "public corporation" || bizType == "sole proprietorship")
             {
                 NgWebElement uiPreviousLicenceYes = null;
-                for (var i = 0; i < 30; i++)
+                for (var i = 0; i < 50; i++)
                     try
                     {
                         var names = ngDriver.FindElements(By.Id("mat-button-toggle-73-button"));
