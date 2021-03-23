@@ -1,0 +1,24 @@
+.res{
+    max-width: 300px;
+}
+
+.border-container {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.res-content {
+    flex-grow: 1;
+    margin-left: -1px;
+}
+
+button {
+    float: right;
+}
+
+.icon{
+    display: flex;
+    align-items: center;
+}
+
