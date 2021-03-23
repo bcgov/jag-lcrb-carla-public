@@ -126,7 +126,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
             }
 
-            if (licence == null)
+            if (licence == null || licence.AdoxioEstablishment == null)
             {
                 if (hangfireContext != null)
                 {
@@ -186,7 +186,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
             }
 
-            if (licence == null)
+            if (licence == null || licence.AdoxioEstablishment == null)
             {
                 if (hangfireContext != null)
                 {
@@ -247,20 +247,22 @@ namespace Gov.Jag.Lcrb.OneStopService
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
             }
 
-            if (licence == null)
+            if (licence == null || licence.AdoxioEstablishment == null)
             {
                 if (hangfireContext != null)
                 {
-                    hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
+                    hangfireContext.WriteLine($"Unable to get complete licence {licenceGuid}.");
                 }
 
                 if (Log.Logger != null)
                 {
-                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
+                    Log.Logger.Error($"Unable to get complete licence {licenceGuid}.");
                 }
             }
             else
             {
+
+
                 var innerXML = req.CreateXML(licence, statusChange);
 
                 if (Log.Logger != null)
