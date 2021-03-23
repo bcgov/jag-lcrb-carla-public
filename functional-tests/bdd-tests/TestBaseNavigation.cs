@@ -203,7 +203,6 @@ namespace bdd_tests
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
             Log.Logger.Information("ENTERING ClickStartApplication");
-            ngDriver.WaitForAngular();
 
             switch (applicationType)
             {
