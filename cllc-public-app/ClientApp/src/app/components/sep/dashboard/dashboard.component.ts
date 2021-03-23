@@ -29,13 +29,18 @@ export class DashboardComponent implements OnInit {
       disableClose: true,
       autoFocus: true,
       width: "500px",
+      data: {
+        showStartApp: true
+      }
     };
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(StarterChecklistComponent, dialogConfig);
     dialogRef.afterClosed()
-      .subscribe(cancelApplication => {
-
+      .subscribe((startApplication: boolean) => {
+        if(startApplication){
+          //TODO start application process
+        }
       });
   }
 
