@@ -2,12 +2,12 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: LiquorPrimaryChangeHoursWithinServiceHours
+Feature: LiquorPrimaryChangeHoursOutsideServiceHours
     As a logged in business user
-    I want to request a change of hours within service hours for a Liquor Primary Application
+    I want to request a change of hours outside service hours for a Liquor Primary Application
 
 @liquorprimary
-Scenario: Liquor Primary Change Hours Within Service Hours (Private Corporation)
+Scenario: Liquor Primary Change Hours Outside Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
     And I review the account profile for a private corporation
@@ -27,20 +27,26 @@ Scenario: Liquor Primary Change Hours Within Service Hours (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee
     And I click on the Licences tab
-    And I click on the link for Change to Hours of Liquor Service (within Service Hours)
+    And I click on the link for Change to Hours of Liquor Service (outside Service Hours)
     And I click on the Continue to Application button
-    And I complete the change hours application for liquor service within service hours
+    And I complete the change hours application for liquor service outside service hours
     And I click on the Submit button
-    And I enter the payment information
+    And I log in as local government for Parksville
+    And I click on the link for Applications for Review
+    And I click on the link for Review Application
+    And I specify my contact details as the approving authority for liquor primary
+    And I click on the Submit button
+    And I click on the overlay Submit button
+    And No applications awaiting review is displayed
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./LiquorPrimaryChangeHoursWithinServiceHours.feature")]
+    [FeatureFile("./LiquorPrimaryChangeHoursOutsideServiceHours.feature")]
     [Collection("Liquor")]
-    public sealed class LiquorPrimaryChangeHoursWithinServiceHours : TestBase
+    public sealed class LiquorPrimaryChangeHoursOutsideServiceHours : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
