@@ -8,11 +8,12 @@ import { ApplicationCancellationDialogComponent } from '@components/dashboard/ap
   styleUrls: ['./starter-checklist.component.scss']
 })
 export class StarterChecklistComponent implements OnInit {
-  @Input() showCreateButton = false;
+  showCreateButton = false;
 
   constructor(
     public dialogRef: MatDialogRef<ApplicationCancellationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.showCreateButton = data.showStartApp;
 
   }
 
