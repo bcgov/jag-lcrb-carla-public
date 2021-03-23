@@ -98,7 +98,7 @@ const routes: Routes = [
     data: { feature: "Sep" }
   },
   {
-    path: "sep-dashboard",
+    path: "sep/dashboard",
     component: SepDashboardComponent,
     canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
