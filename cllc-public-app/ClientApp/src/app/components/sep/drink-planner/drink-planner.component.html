@@ -1,0 +1,45 @@
+<div class="form-wrapper" style="position: relative;">
+  <div [ngBusy]="[busy]"></div>
+  <form [formGroup]="form" class="col-lg-7 col-sm-12">
+    <div class="padded-section">
+      <h1>Drink Planner</h1>
+    </div>
+    <div class="padded-section">
+      <p>Use this tool as a guide to plan how many drinks to serve at your event. For an example, view the tooltip.</p>
+    </div>
+
+    <h3>1. Enter guests and hours</h3>
+    <div class="row">
+      <app-field class="col-md-4 col-xs-6" label="Liquor Service Duration (hrs)" [required]="true" [isFullWidth]="false"
+        errorMessage="Please enter the Liquor Service Duration in hours (must be a number)"
+        [valid]="isValidOrNotTouched('hours')">
+        <input class="form-control" type="number" formControlName="hours">
+      </app-field>
+      <app-field class="col-md-4 col-xs-6" label="Number of Guests" [required]="true" [isFullWidth]="false"
+        errorMessage="Please enter the number of guests (must be a number)" [valid]="isValidOrNotTouched('guests')">
+        <input class="form-control" type="number" formControlName="guests">
+      </app-field>
+    </div>
+
+    <hr>
+
+    <h3>2. Enter the &#37; of each drink type appropriate for your event</h3>
+    <div class="row">
+      <div *ngFor="let item of settings" class="col-md-4 col-xs-12">
+        <app-field [label]="item.description" [required]="false" [isFullWidth]="false">
+          <input class="form-control" type="number" [formControlName]="item.group">
+        </app-field>
+        <h4>
+          <small>{{560}}</small>
+          <small>
+            servings of {{item.group}}
+          </small>
+        </h4>
+
+      </div>
+    </div>
+
+    <hr>
+
+  </form>
+</div>
