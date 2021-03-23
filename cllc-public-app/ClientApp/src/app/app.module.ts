@@ -582,7 +582,8 @@ import { ResourcesComponent } from './components/sep/resources/resources.compone
     ShareholdersAndPartnersComponent,
     OrganizationLeadershipComponent,
     VersionInfoDialogComponent,
-    ModalComponent
+    ModalComponent,
+    StarterChecklistComponent
   ],
   bootstrap: [AppComponent]
 })
