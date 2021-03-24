@@ -15,6 +15,6 @@ Scenario: Agent Take Home Sampling Event (Private Corporation)
     And I click on the Licences tab
     And I click on the link for Request Take Home Sampling Event Authorization
     And I complete the Take Home Sampling Event Authorization request
-    And I click on the Submit button
+    And I click on the secondary Submit button
     And the account is deleted
     Then I see the login page

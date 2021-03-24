@@ -23,6 +23,10 @@ namespace bdd_tests
             var venueNameDescription = "Venue Name/Description";
             var additionalInfo = "Additional info";
             var contactEmail = "contact@test.com";
+            var address1 = "1 Nice St";
+            var address2 = "2 Nice Ave";
+            var city = "Niceville";
+            var postalCode = "V8V4Y3";
 
             // enter contact name
             var uiContactName =
@@ -177,8 +181,12 @@ namespace bdd_tests
             uiContactEmail2.SendKeys(contactEmail);
 
             // select agreement checkbox
-            var uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreement']"));
+            var uiAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAgreement1']"));
             uiAgreement.Click();
+
+            // select agreement2 checkbox
+            var uiAgreement2 = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAgreement2']"));
+            uiAgreement2.Click();
         }
     }
 }
