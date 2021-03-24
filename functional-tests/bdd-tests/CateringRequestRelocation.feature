@@ -12,9 +12,9 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -30,9 +30,9 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -48,9 +48,9 @@
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Catering
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review

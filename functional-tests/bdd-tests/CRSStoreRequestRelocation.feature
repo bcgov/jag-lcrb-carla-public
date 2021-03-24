@@ -13,9 +13,9 @@ Scenario: Cannabis Store Relocation (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -32,9 +32,9 @@ Scenario: Cannabis Store Relocation (Society)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -51,9 +51,9 @@ Scenario: Cannabis Store Relocation (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -70,9 +70,9 @@ Scenario: Cannabis Store Relocation (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard

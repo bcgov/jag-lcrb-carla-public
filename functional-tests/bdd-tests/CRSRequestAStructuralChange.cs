@@ -17,9 +17,9 @@ Scenario: Cannabis Structural Changes (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request a Structural Change
     And I click on the Continue to Application button
     And I request a structural change
@@ -38,9 +38,9 @@ Scenario: Cannabis Structural Changes (Society)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request a Structural Change
     And I click on the Continue to Application button
     And I request a structural change
@@ -59,9 +59,9 @@ Scenario: Cannabis Structural Changes (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request a Structural Change
     And I click on the Continue to Application button
     And I request a structural change
@@ -80,9 +80,9 @@ Scenario: Cannabis Structural Changes (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request a Structural Change
     And I click on the Continue to Application button
     And I request a structural change
