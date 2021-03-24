@@ -63,7 +63,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// <summary>
         /// Maximum number of new licenses that will be sent per interval.
         /// </summary>
-        private const int MAX_LICENCES_PER_INTERVAL = 10;
+        private int maxLicencesPerInterval;
 
         private IConfiguration _configuration { get; }
 
@@ -76,6 +76,18 @@ namespace Gov.Jag.Lcrb.OneStopService
             _configuration = configuration;
             _cache = cache;
             _onestopRestClient = SetupOneStopClient(configuration, Log.Logger);
+
+            if (!string.IsNullOrEmpty(_configuration["maxLicencesPerInterval"]))
+            {
+                if (!int.TryParse(_configuration["maxLicencesPerInterval"], out maxLicencesPerInterval))
+                {
+                    maxLicencesPerInterval = 10;
+                }
+            }
+            else
+            {
+                maxLicencesPerInterval = 10;
+            }
         }
 
         private void UpdateQueueItemForSend(IDynamicsClient dynamicsClient, PerformContext hangfireContext, string queueItemId, string payload, string response)
@@ -536,7 +548,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                     {
                         Log.Logger.Error($"Skipping Licence {item.AdoxioName}");
                     }
-                    if (currentItem > MAX_LICENCES_PER_INTERVAL)
+                    if (currentItem > maxLicencesPerInterval)
                     {
                         break; // exit foreach    
                     }
