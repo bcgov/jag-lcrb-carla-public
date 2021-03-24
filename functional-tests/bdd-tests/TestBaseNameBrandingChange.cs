@@ -9,19 +9,6 @@ namespace bdd_tests
         [And(@"I request a valid store name or branding change for (.*)")]
         public void RequestNameBrandingChange(string changeType)
         {
-            /* 
-            Page Title: Licences & Authorizations
-            */
-
-            var nameBrandingLinkCateringMfgUBrewFP = "Establishment Name Change Application";
-
-            if (changeType == "" || changeType == "Manufacturing" || changeType == "UBrew" ||
-                changeType == "Food Primary" || changeType == "Rural RLS" || changeType == "Liquor Primary")
-            {
-                // click on the Establishment Name Change Application link
-                var uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCateringMfgUBrewFP));
-                uiRequestChange.Click();
-            }
             /*
             Page Title: Submit a Name or Branding Change Application
             */
