@@ -20,7 +20,7 @@ Scenario: Catering Release (Private Corporation)
     And I click on the link for Establishment Name Change Application
     And I click on the Continue to Application button
     And I request a valid store name or branding change for Catering
-    # And I click on the Dashboard tab
+    # And I click on the link for Dashboard
     # And the dashboard status is updated as Application Under Review
     And I click on the link for Licences & Authorizations
     And I click on the link for Add Licensee Representative
@@ -66,7 +66,7 @@ Scenario: Catering Release (Sole Proprietorship)
     And I click on the link for Establishment Name Change Application
     And I click on the Continue to Application button
     And I request a valid store name or branding change for Catering
-    # And I click on the Dashboard tab
+    # And I click on the link for Dashboard
     # And the dashboard status is updated as Application Under Review
     And I click on the link for Licences & Authorizations
     And I click on the link for Add Licensee Representative

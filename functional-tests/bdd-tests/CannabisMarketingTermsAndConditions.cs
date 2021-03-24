@@ -15,7 +15,7 @@ Scenario: Cannabis Marketing Terms and Conditions (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Marketing Licence
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the application is approved
     And I click on the link for Licences & Authorizations
     And I confirm the terms and conditions for a Cannabis marketing licence
