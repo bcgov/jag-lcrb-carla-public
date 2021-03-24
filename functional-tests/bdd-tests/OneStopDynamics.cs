@@ -226,6 +226,8 @@ Scenario: OneStop Licence Name Change (Private Corporation)
     And I pay the licensing fee 
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html
     And I run /api/OneStop/CheckQueue
+    And I click on the link for Establishment Name Change Application
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Cannabis
     And the application is approved
     And I go to https://one-stop-testing-b7aa30-dev.apps.silver.devops.gov.bc.ca/swagger/index.html

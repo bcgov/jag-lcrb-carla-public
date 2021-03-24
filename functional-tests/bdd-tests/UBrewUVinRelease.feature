@@ -30,6 +30,8 @@ Scenario: UBrew / UVin Application Release Test (Private Corporation)
     And I click on the Licences tab
     And I request a store relocation for UBrew / UVin
     And I click on the Licences tab
+    And I click on the link for Establishment Name Change Application
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for UBrew
     And I click on the Licences tab
     And I request a third party operator
