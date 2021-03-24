@@ -15,7 +15,7 @@ Scenario: On-Site Store Endorsement Application (Winery)
     And I pay the licensing fee 
     And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -33,7 +33,7 @@ Scenario: On-Site Store Endorsement Application (Brewery)
     And I pay the licensing fee 
     And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -51,7 +51,7 @@ Scenario: On-Site Store Endorsement Application (Distillery)
     And I pay the licensing fee 
     And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -69,7 +69,7 @@ Scenario: On-Site Store Endorsement Application (Co-packer)
     And I pay the licensing fee 
     And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
