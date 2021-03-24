@@ -96,7 +96,6 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the Continue to Application button
     And I request a temporary change to hours of sale
     And I click on the Submit button
-    And I click on the Submit button
     And I click on the link for Licences & Authorizations
     And I request a third party operator
     And I request a transfer of ownership for Manufacturer
