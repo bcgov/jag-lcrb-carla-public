@@ -15,9 +15,9 @@ Scenario: Manufacturer TESA Application (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Expanded Service Areas Application
     And I click on the Continue to Application button
     And I complete the TESA application for a Manufacturer licence
@@ -34,9 +34,9 @@ Scenario: Manufacturer TESA Application (Brewery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Expanded Service Areas Application
     And I click on the Continue to Application button
     And I complete the TESA application for a Manufacturer licence
@@ -53,9 +53,9 @@ Scenario: Manufacturer TESA Application (Distillery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Expanded Service Areas Application
     And I click on the Continue to Application button
     And I complete the TESA application for a Manufacturer licence
@@ -72,9 +72,9 @@ Scenario: Manufacturer TESA Application (Co-packer)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Expanded Service Areas Application
     And I click on the Continue to Application button
     And I complete the TESA application for a Manufacturer licence
