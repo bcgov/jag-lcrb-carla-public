@@ -18,7 +18,7 @@ Scenario: Food Primary TESA (Private Corporation)
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Expanded Service Area Application
     And I click on the Continue to Application button
     And I complete the TESA application for a Food Primary licence
