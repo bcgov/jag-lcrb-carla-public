@@ -25,9 +25,9 @@ Scenario: Liquor Primary Hawkers Application
     And I click on the Continue to Application button
     And I review the local government response for a liquor primary licence
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Hawkers Application (Stadiums Only)
     And I click on the Continue to Application button
     And I complete the stadiums only application for hawkers

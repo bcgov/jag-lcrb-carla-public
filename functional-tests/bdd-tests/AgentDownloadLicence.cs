@@ -16,7 +16,7 @@ Scenario: Agent Download Licence (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for an Agent Licence
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page

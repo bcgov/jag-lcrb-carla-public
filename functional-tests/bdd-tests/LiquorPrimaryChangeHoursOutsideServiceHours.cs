@@ -24,9 +24,9 @@ Scenario: Liquor Primary Change Hours Outside Service Hours (Private Corporation
     And I click on the link for Complete Application
     And I review the local government response for a liquor primary licence
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Change to Hours of Liquor Service (outside Service Hours)
     And I complete the change hours application for liquor service outside service hours
     And I click on the Submit button

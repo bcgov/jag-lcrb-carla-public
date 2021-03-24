@@ -15,12 +15,12 @@ Scenario: Validation for Market Event Application
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request Market Event Authorization
     And I click on the Submit button
     And the expected validation errors are thrown for a market event
