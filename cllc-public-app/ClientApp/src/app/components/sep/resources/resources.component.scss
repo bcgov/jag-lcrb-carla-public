@@ -10,8 +10,9 @@
 .res-content {
     flex-grow: 1;
     margin-left: -1px;
+    background-color: #F1F4FA;
 }
-
+a[mat-raised-button],
 button {
     float: right;
 }
@@ -19,5 +20,6 @@ button {
 .icon{
     display: flex;
     align-items: center;
+    background-color: #F1F4FA;
 }
 
