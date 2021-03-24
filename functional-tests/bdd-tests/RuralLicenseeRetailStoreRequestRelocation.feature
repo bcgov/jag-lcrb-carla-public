@@ -11,9 +11,9 @@ Scenario: Rural LRS Request Relocation (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I complete the Rural LRS relocation application
@@ -31,9 +31,9 @@ Scenario: Rural LRS Request Relocation (Public Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I complete the Rural LRS relocation application
@@ -51,9 +51,9 @@ Scenario: Rural LRS Request Relocation (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I complete the Rural LRS relocation application
@@ -71,9 +71,9 @@ Scenario: Rural LRS Request Relocation (Society)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I complete the Rural LRS relocation application
@@ -91,9 +91,9 @@ Scenario: Rural LRS Request Relocation (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I complete the Rural LRS relocation application
