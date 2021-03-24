@@ -13,30 +13,15 @@ namespace bdd_tests
             Page Title: Licences & Authorizations
             */
 
-            var nameBrandingLinkCannabis = "Request Store Name or Branding Change";
             var nameBrandingLinkCateringMfgUBrewFP = "Establishment Name Change Application";
 
-            if (changeType == "Catering" || changeType == "Manufacturing" || changeType == "UBrew" ||
+            if (changeType == "" || changeType == "Manufacturing" || changeType == "UBrew" ||
                 changeType == "Food Primary" || changeType == "Rural RLS" || changeType == "Liquor Primary")
             {
                 // click on the Establishment Name Change Application link
                 var uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCateringMfgUBrewFP));
                 uiRequestChange.Click();
             }
-
-            if (changeType == "Cannabis")
-            {
-                // click on the Request Store Name or Branding Change link
-                var uiRequestChange = ngDriver.FindElement(By.LinkText(nameBrandingLinkCannabis));
-                uiRequestChange.Click();
-            }
-
-            /* 
-            Page Title: Please Review the Account Profile
-            */
-
-            ContinueToApplicationButton();
-
             /*
             Page Title: Submit a Name or Branding Change Application
             */
