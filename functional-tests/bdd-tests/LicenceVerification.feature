@@ -69,7 +69,7 @@ Scenario: UBrew / UVin Licence PDF Verification (Private Corporation)
     And I click on the button for Pay for Application
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the link for Licences & Authorizations
@@ -162,7 +162,7 @@ Scenario: Rural Agency Store Licence PDF Verification (Private Corporation)
     And I review the organization structure for a private corporation
     And I click on the button for Submit Organization Information
     And I complete the Rural Agency Store application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the link for Licences & Authorizations
@@ -178,7 +178,7 @@ Scenario: Food Primary Licence PDF Verification (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the link for Licences & Authorizations
