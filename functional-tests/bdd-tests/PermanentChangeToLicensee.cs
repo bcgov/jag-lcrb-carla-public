@@ -17,7 +17,7 @@ Scenario: Catering Licensee Changes (Private Corporation)
     And the application is approved
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a private corporation
     And I click on the Submit button
@@ -35,7 +35,7 @@ Scenario: Catering Licensee Changes (Partnership)
     And the application is approved
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a partnership
     And I click on the Submit button
@@ -53,7 +53,7 @@ Scenario: Catering Licensee Changes (Sole Proprietorship)
     And the application is approved
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a sole proprietorship
     And I click on the Submit button
@@ -71,7 +71,7 @@ Scenario: Catering Licensee Changes (Society)
     And the application is approved
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a society
     And I click on the Submit button
@@ -89,7 +89,7 @@ Scenario: Catering Licensee Changes (Public Corporation)
     And the application is approved
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a public corporation
     And I click on the Submit button
@@ -107,7 +107,7 @@ Scenario: Catering Licensee Changes (Co-op)
     And the application is approved
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a co-op
     And I click on the Submit button
@@ -125,7 +125,7 @@ Scenario: Catering Licensee Changes (Military Mess)
     And the application is approved
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a military mess
     And I click on the Submit button

@@ -14,7 +14,7 @@ Scenario: Rural LRS Application (Private Corporation)
     And I complete the Rural LRS application for a private corporation
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -27,7 +27,7 @@ Scenario: Rural LRS Application (Public Corporation)
     And I complete the Rural LRS application for a public corporation
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -40,7 +40,7 @@ Scenario: Rural LRS Application (Partnership)
     And I complete the Rural LRS application for a partnership
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -53,7 +53,7 @@ Scenario: Rural LRS Application (Society)
     And I complete the Rural LRS application for a society
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -66,7 +66,7 @@ Scenario: Rural LRS Application (Sole Proprietorship)
     And I complete the Rural LRS application for a sole proprietorship
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page

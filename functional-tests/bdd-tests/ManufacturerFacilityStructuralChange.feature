@@ -19,7 +19,7 @@ Scenario: Facility Structural Change Application (Winery)
     And I request a facility structural change
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -41,7 +41,7 @@ Scenario: Facility Structural Change Application (Brewery)
     And I request a facility structural change
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -63,7 +63,7 @@ Scenario: Facility Structural Change Application (Distillery)
     And I request a facility structural change
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -85,7 +85,7 @@ Scenario: Facility Structural Change Application (Co-packer)
     And I request a facility structural change
     And I click on the Submit button
     And I enter the payment information
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page

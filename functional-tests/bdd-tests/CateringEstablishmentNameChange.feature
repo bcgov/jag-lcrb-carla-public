@@ -20,7 +20,7 @@ Scenario: Catering Branding Change (Private Corporation)
     And I click on the link for Establishment Name Change Application
     And I click on the Continue to Application button
     And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -42,7 +42,7 @@ Scenario: Catering Branding Change (Society)
     And I click on the link for Establishment Name Change Application
     And I click on the Continue to Application button
     And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -64,7 +64,7 @@ Scenario: Catering Branding Change (Partnership)
     And I click on the link for Establishment Name Change Application
     And I click on the Continue to Application button
     And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -86,7 +86,7 @@ Scenario: Catering Branding Change (Sole Proprietorship)
     And I click on the link for Establishment Name Change Application
     And I click on the Continue to Application button
     And I request a valid store name or branding change for Catering
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page

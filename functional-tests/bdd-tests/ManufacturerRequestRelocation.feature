@@ -17,7 +17,7 @@ Scenario: Relocation Change Application (Winery)
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I request a relocation change
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -37,7 +37,7 @@ Scenario: Relocation Change Application (Brewery)
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I request a relocation change
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -57,7 +57,7 @@ Scenario: Relocation Change Application (Distillery)
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I request a relocation change
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -77,7 +77,7 @@ Scenario: Relocation Change Application (Co-packer)
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I request a relocation change
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
