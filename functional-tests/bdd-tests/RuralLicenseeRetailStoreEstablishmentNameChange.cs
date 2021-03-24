@@ -18,6 +18,8 @@ Scenario: Rural LRS Name Branding Change (Private Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
+    And I click on the link for Establishment Name Change Application
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Rural RLS
     And the account is deleted
     Then I see the login page
@@ -34,6 +36,8 @@ Scenario: Rural LRS Name Branding Change (Public Corporation)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
+    And I click on the link for Establishment Name Change Application
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Rural RLS
     And the account is deleted
     Then I see the login page
@@ -50,6 +54,8 @@ Scenario: Rural LRS Name Branding Change (Partnership)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
+    And I click on the link for Establishment Name Change Application
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Rural RLS
     And the account is deleted
     Then I see the login page
@@ -66,6 +72,8 @@ Scenario: Rural LRS Name Branding Change (Society)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
+    And I click on the link for Establishment Name Change Application
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Rural RLS
     And the account is deleted
     Then I see the login page
@@ -82,6 +90,8 @@ Scenario: Rural LRS Name Branding Change (Sole Proprietorship)
     And I click on the Licences tab
     And I pay the licensing fee 
     And I click on the Licences tab
+    And I click on the link for Establishment Name Change Application
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Rural RLS
     And the account is deleted
     Then I see the login page

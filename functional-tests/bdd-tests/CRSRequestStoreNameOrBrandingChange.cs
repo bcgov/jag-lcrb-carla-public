@@ -18,10 +18,12 @@ Scenario: CRS Name Branding Change (Private Corporation)
     And I enter the payment information
     And the application is approved
     And I click on the Licences tab
-    And I pay the licensing fee
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
+    And I click on the link for Request Store Name or Branding Change
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Cannabis
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -43,6 +45,8 @@ Scenario: CRS Name Branding Change (Society)
     And I click on the Licences tab
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
+    And I click on the link for Request Store Name or Branding Change
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Cannabis
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -64,6 +68,8 @@ Scenario: CRS Name Branding Change (Partnership)
     And I click on the Licences tab
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
+    And I click on the link for Request Store Name or Branding Change
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Cannabis
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review
@@ -85,6 +91,8 @@ Scenario: CRS Name Branding Change (Sole Proprietorship)
     And I click on the Licences tab
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
+    And I click on the link for Request Store Name or Branding Change
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Cannabis
     And I click on the Dashboard tab
     And the dashboard status is updated as Application Under Review

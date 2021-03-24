@@ -2,12 +2,12 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: AgentRelease
+Feature: AgentRequestTakeHomeSamplingEvent
     As a logged in business user
-    I want to run a release test for Agent licence
+    I want to request a take home sampling event for an Agent licence
 
-@agent @privatecorporation @release1
-Scenario: Agent Release Test (Private Corporation)
+@agent @privatecorporation
+Scenario: Agent Take Home Sampling Event (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for an Agent Licence
     And I review the account profile for a private corporation
@@ -17,25 +17,18 @@ Scenario: Agent Release Test (Private Corporation)
     And I confirm the payment receipt for an Agent Licence
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Download Licence
-    And I confirm the terms and conditions for an agent licence
-    And I click on the link for Add Licensee Representative
-    And I request a licensee representative
-    And I click on the Licences tab
     And I click on the link for Request Take Home Sampling Event Authorization
     And I complete the Take Home Sampling Event Authorization request
     And I click on the secondary Submit button
-    And I click on the Licences tab
-    And I request a transfer of ownership for an agent
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./AgentRelease.feature")]
+    [FeatureFile("./AgentRequestTakeHomeSamplingEvent.feature")]
     [Collection("Liquor")]
-    public sealed class AgentRelease : TestBase
+    public sealed class AgentRequestTakeHomeSamplingEvent : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

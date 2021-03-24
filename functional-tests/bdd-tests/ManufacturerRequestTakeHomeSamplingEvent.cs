@@ -2,51 +2,41 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: AgentRelease
+Feature: ManufacturerRequestTakeHomeSamplingEvent
     As a logged in business user
-    I want to run a release test for Agent licence
+    I want to request a take home sampling event for a manufacturer licence
 
-@agent @privatecorporation @release1
-Scenario: Agent Release Test (Private Corporation)
+@manufacturer @winery @mfglicencedownload
+Scenario: Manufacturer Download Licence (Winery)
     Given I am logged in to the dashboard as a private corporation
-    And I click on the Start Application button for an Agent Licence
+    And I click on the Start Application button for a Manufacturer Licence
     And I review the account profile for a private corporation
-    And I complete the Agent Licence application for a private corporation
-    And I click on the Submit button
+    And I complete the Manufacturer application for a winery
     And I enter the payment information
-    And I confirm the payment receipt for an Agent Licence
+    And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
     And I click on the Licences tab
-    And I click on the link for Download Licence
-    And I confirm the terms and conditions for an agent licence
-    And I click on the link for Add Licensee Representative
-    And I request a licensee representative
+    And I pay the licensing fee 
     And I click on the Licences tab
     And I click on the link for Request Take Home Sampling Event Authorization
     And I complete the Take Home Sampling Event Authorization request
     And I click on the secondary Submit button
-    And I click on the Licences tab
-    And I request a transfer of ownership for an agent
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./AgentRelease.feature")]
+    [FeatureFile("./ManufacturerRequestTakeHomeSamplingEvent.feature")]
     [Collection("Liquor")]
-    public sealed class AgentRelease : TestBase
+    public sealed class ManufacturerRequestTakeHomeSamplingEvent : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
         {
             NavigateToFeatures();
 
-            CheckFeatureFlagsLiquorOne();
-
-            CheckFeatureFlagsLGIN();
-
-            CheckFeatureFlagsIN();
+            CheckFeatureFlagsLiquorTwo();
 
             CheckFeatureFlagsLicenseeChanges();
 
