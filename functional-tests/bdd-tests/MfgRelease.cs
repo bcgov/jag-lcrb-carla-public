@@ -26,6 +26,10 @@ Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I click on the link for Licences & Authorizations
+    And I click on the link for Request Take Home Sampling Event Authorization
+    And I complete the Take Home Sampling Event Authorization request
+    And I click on the secondary Submit button
+    And I click on the link for Licences & Authorizations
     # And I click on the link for Temporary Extension of Licensed Area
     # And I click on the Continue to Application button
     # And I submit a liquor primary temporary extension of licensed area application
@@ -65,6 +69,11 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
     And I click on the link for Licences & Authorizations
+    And I click on the link for New Outdoor Patio
+    And I click on the Continue to Application button
+    And I request a new outdoor patio application
+    And I click on the Submit button
+    And I click on the link for Licences & Authorizations
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And I click on the link for Licences & Authorizations
@@ -89,11 +98,6 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the link for Temporary Expanded Service Areas Application
     And I click on the Continue to Application button
     And I complete the TESA application for a Manufacturer licence
-    And I click on the Submit button
-    And I click on the link for Licences & Authorizations
-    And I click on the link for New Outdoor Patio
-    And I click on the Continue to Application button
-    And I request a new outdoor patio application
     And I click on the Submit button
     And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Change to Hours of Sale

@@ -15,7 +15,7 @@ namespace bdd_tests
         public void ClickOnLink(string specificLink)
         {
             NgWebElement uiRequestedLink = null;
-            for (var i = 0; i < 50; i++)
+            for (var i = 0; i < 60; i++)
                 try
                 {
                     var names = ngDriver.FindElements(By.LinkText(specificLink));
