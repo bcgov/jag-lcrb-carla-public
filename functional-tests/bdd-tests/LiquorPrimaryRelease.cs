@@ -83,6 +83,11 @@ Scenario: Liquor Primary Release Test #2 (Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
     And I click on the link for Licences & Authorizations
+    And I click on the link for New Outdoor Patio
+    And I click on the Continue to Application button
+    And I request a new outdoor patio application
+    And I click on the Submit button
+    And I click on the link for Licences & Authorizations
     And I click on the link for Live Theatre Request For Liquor Service
     And I click on the Continue to Application button
     And I complete the live theatre request
@@ -99,11 +104,6 @@ Scenario: Liquor Primary Release Test #2 (Private Corporation)
     And I click on the Continue to Application button
     And I click on the Submit button
     And I enter the payment information
-    # And I click on the link for Licences & Authorizations
-    # And I click on the link for New Outdoor Patio
-    # And I click on the Continue to Application button
-    # And I request a new outdoor patio application
-    # And I click on the Submit button
     # And I click on the link for Licences & Authorizations
     # And I click on the link for Liquor Primary Relocation Application
     # And I click on the Continue to Application button
