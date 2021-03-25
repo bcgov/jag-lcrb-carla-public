@@ -23,11 +23,6 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
                 throw new Exception("The licence can not be null");
             }
 
-            if (licence.AdoxioEstablishment == null)
-            {
-                throw new Exception("The licence must have an Establishment");
-            }
-
             if (licence.AdoxioLicencee == null)
             {
                 throw new Exception("The licence must have an AdoxioLicencee");
@@ -87,8 +82,10 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             //the name of the applicant (licensee)- last name, first name middle initial or company name
             userCredentials.legalName = licence.AdoxioLicencee.Name;
             //establishment (physical location of store)
-            userCredentials.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
-
+            if (licence.AdoxioEstablishment != null)
+            {
+                userCredentials.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+            }
             return userCredentials;
         }
 
@@ -103,8 +100,13 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             body.updateReasonCode = OneStopUtils.UPDATE_REASON_CODE_ADDRESS;
             body.address = new SBNChangeAddressBodyAddress();
             body.address.foreignLegacy = new SBNChangeAddressBodyAddressForeignLegacy();
-            body.address.foreignLegacy.addressDetailLine1 = licence.AdoxioEstablishment.AdoxioAddressstreet;
-            body.address.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
+
+            if (licence.AdoxioEstablishment != null)
+            {
+                body.address.foreignLegacy.addressDetailLine1 = licence.AdoxioEstablishment.AdoxioAddressstreet;
+                body.address.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
+            }
+
             body.address.provinceStateCode = OneStopUtils.PROVINCE_STATE_CODE;
             body.address.countryCode = OneStopUtils.COUNTRY_CODE;
             body.businessRegistrationNumber = licence.AdoxioLicencee.AdoxioBusinessregistrationnumber;
