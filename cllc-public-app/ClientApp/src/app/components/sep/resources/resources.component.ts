@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StarterChecklistComponent } from '@components/sep/starter-checklist/starter-checklist.component';
+import { faCocktail, faCalculator, faCheck, faQuestion, faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-resources',
@@ -8,7 +9,11 @@ import { StarterChecklistComponent } from '@components/sep/starter-checklist/sta
   styleUrls: ['./resources.component.scss']
 })
 export class ResourcesComponent implements OnInit {
-
+  faCocktail = faCocktail;
+  faCalculator = faCalculator;
+  faCheck = faCheck;
+  faQuestion = faQuestion;
+  faShoppingCart = faShoppingCart;
   constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {

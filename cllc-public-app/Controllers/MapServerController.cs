@@ -67,7 +67,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                             // Set the cache to expire far in the future.                    
-                            .SetAbsoluteExpiration(TimeSpan.FromDays(365 * 5));
+                            .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
 
                 // Save data in cache.
                 _cache.Set(cacheKey, result, cacheEntryOptions);

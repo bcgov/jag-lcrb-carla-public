@@ -4,6 +4,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { User } from '@models/user.model';
 import { Store } from '@ngrx/store';
 import { StarterChecklistComponent } from '@components/sep/starter-checklist/starter-checklist.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,7 @@ export class DashboardComponent implements OnInit {
   currentUser: User;
 
   constructor(public dialog: MatDialog,
+    private router: Router,
     private store: Store<AppState>) {
     store.select(state => state.currentUserState.currentUser)
       .subscribe((user: User) => {
@@ -39,7 +41,7 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe((startApplication: boolean) => {
         if(startApplication){
-          //TODO start application process
+          this.router.navigateByUrl('/sep/application')
         }
       });
   }

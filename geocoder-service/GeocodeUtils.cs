@@ -169,7 +169,20 @@ namespace Gov.Lclb.Cllb.Geocoder
             // get licenses
             IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
-            string licenseFilter = "statuscode eq 1"; // only active licenses
+
+
+            string crsTypeId = _dynamics.GetAdoxioLicencetypeByName("Cannabis Retail Store")?.AdoxioLicencetypeid;
+            string s119TypeId = _dynamics.GetAdoxioLicencetypeByName("Section 119 Authorization")?.AdoxioLicencetypeid; 
+
+
+            string licenseFilter = $"statuscode eq 1 and _adoxio_licencetype_value eq {crsTypeId}"; // only active licenses
+
+            if (s119TypeId != null)
+            {
+                licenseFilter += $" or _adoxio_licencetype_value eq {s119TypeId} and statuscode eq 1";
+            }
+
+            
             string[] licenseExpand = { "adoxio_LicenceType" };
 
             try
