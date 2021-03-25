@@ -90,11 +90,11 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the link for New Outdoor Patio
     And I click on the Continue to Application button
     And I request a new outdoor patio application
+    And I click on the Submit button
     And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Change to Hours of Sale
     And I click on the Continue to Application button
     And I request a temporary change to hours of sale
-    And I click on the Submit button
     And I click on the Submit button
     And I click on the link for Licences & Authorizations
     And I request a third party operator
