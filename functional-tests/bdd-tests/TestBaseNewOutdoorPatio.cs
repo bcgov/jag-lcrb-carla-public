@@ -20,7 +20,7 @@ namespace bdd_tests
             var patioLiquorCarriedDescription = "Sample liquor carried description.";
             var patioAccessControlDescription = "Sample patio access control description.";
             var areaDescription = "Sample area description";
-            var occupantLoad = "180";
+            var occupantLoad = "99999";
 
             // enter patio composition description
             var uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));

@@ -16,7 +16,7 @@ namespace bdd_tests
 
             // create test data
             var description = "Test automation event details";
-            var capacity = "180";
+            var capacity = "99999";
 
             // enter the event details
             var uiEventDetails = ngDriver.FindElement(By.CssSelector("textarea#description2"));
