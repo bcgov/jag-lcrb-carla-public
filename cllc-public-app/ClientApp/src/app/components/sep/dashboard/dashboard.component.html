@@ -5,13 +5,13 @@
 
     <div class="row">
         <section class="col-md-8">
-            <div class="d-flex justify-content-between border">
-                <section class="border">
+            <div class="d-flex justify-content-between border header-wrap">
+                <section class="border app-button">
                     <h5>MY APPLICATIONS</h5>
                     <p>Check the status of your applications or search for past applications</p>
-                    <button mat-raised-button color="secondary">GO TO MY APPLICATIONS</button>
+                    <button disabled mat-raised-button color="secondary">GO TO MY APPLICATIONS</button>
                 </section>
-                <section class="border"> 
+                <section class="border app-button"> 
                     <h5>START AN APPLICATION</h5>
                     <p>See the application checklist and get started</p>
                     <button mat-raised-button color="primary" (click)="startApplication()">START NEW APPLICATION</button>
