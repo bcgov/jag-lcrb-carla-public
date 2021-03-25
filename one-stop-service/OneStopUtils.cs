@@ -445,7 +445,9 @@ namespace Gov.Jag.Lcrb.OneStopService
             try
             {
                 string filter = "adoxio_datetimesent eq null";
-                result = dynamicsClient.Onestopmessageitems.Get(filter: filter).Value;
+                List<string> _orderby = new List<String>() { "createdon" };
+                
+                result = dynamicsClient.Onestopmessageitems.Get(filter: filter, orderby: _orderby).Value;
             }
             catch (HttpOperationException odee)
             {
@@ -466,7 +468,6 @@ namespace Gov.Jag.Lcrb.OneStopService
             // now for each one process it.
             foreach (var queueItem in result)
             {
-                
                 if (!string.IsNullOrEmpty(queueItem._adoxioLicenceValue))
                 {
                     var item = dynamicsClient.GetLicenceByIdWithChildren(queueItem._adoxioLicenceValue);
