@@ -112,11 +112,11 @@ Scenario: Liquor Primary Release Test #2 (Private Corporation)
     And I click on the Continue to Application button
     And I click on the Submit button
     And I enter the payment information
-    # And I click on the link for Licences & Authorizations
-    # And I click on the link for Liquor Primary Relocation Application
-    # And I click on the Continue to Application button
-    # And I complete a liquor primary relocation request
-    # And I click on the Submit button
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Liquor Primary Relocation Application
+    And I click on the Continue to Application button
+    And I complete a liquor primary relocation request
+    And I click on the Submit button
     # And I click on the link for Licences & Authorizations
     # And I click on the link for Establishment Name Change Application
     # And I click on the Continue to Application button
@@ -161,10 +161,10 @@ Scenario: Liquor Primary Release Test #3 (Private Corporation)
     # And I click on the Continue to Application button
     # And I request a capacity increase structural change
     # TODO: structural change application needs to be approved
-    # And I click on the link for Licences & Authorizations
-    # And I click on the link for Structural Change Application (No Capacity Increase)
-    # And I click on the Continue to Application button
-    # And I request a no capacity structural change
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Structural Change Application (No Capacity Increase)
+    And I click on the Continue to Application button
+    And I request a no capacity structural change
     # And I click on the link for Licences & Authorizations
     # And I click on the link for Temporary Extension of Licensed Area
     # And I click on the Continue to Application button
