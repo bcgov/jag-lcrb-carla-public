@@ -18,7 +18,7 @@ namespace bdd_tests
             var description1 = "Test automation outline of the proposed change.";
             var description2 = "Test automation patio location.";
             var areaDescription = "Test automation area description.";
-            var occupantLoad = "180";
+            var occupantLoad = "99999";
 
             // enter the establishment name
             NgWebElement uiDescriptionOfChange = null;

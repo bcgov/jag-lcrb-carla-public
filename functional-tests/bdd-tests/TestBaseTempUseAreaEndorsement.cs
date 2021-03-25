@@ -20,7 +20,7 @@ namespace bdd_tests
             var removeIntoxicatedPatrons = "Removal of intoxicated patrons description.";
             var respectForNeighbours = "Respect for neighbours description.";
             var areaDescription = "Area description.";
-            var occupantLoad = "180";
+            var occupantLoad = "99999";
 
             // enter patio comp description
             var uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));

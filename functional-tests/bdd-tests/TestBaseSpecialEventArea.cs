@@ -17,7 +17,7 @@ namespace bdd_tests
             var serviceAreaDescription = "Service area description";
             var serviceAreaOccupantLoad = "100";
             var outdoorAreaDescription = "Outdoor area description";
-            var outdoorAreaCapacity = "150";
+            var outdoorAreaCapacity = "99999";
             var contactTitle = "Tester";
 
             // select the zoning checkbox
