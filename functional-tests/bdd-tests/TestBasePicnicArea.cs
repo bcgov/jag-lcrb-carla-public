@@ -25,7 +25,7 @@ namespace bdd_tests
                 "Description of proposed change(s) such as moving, adding or changing approved picnic area(s)";
             var otherBizDetails = "Description of other business details";
             var patioCompositionDescription = "Description of patio composition";
-            var capacity = "100";
+            var capacity = "99999";
 
             // enter the description of the proposed change
             var uiProposedChange = ngDriver.FindElement(By.CssSelector("textarea#description1"));
