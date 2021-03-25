@@ -63,7 +63,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// <summary>
         /// Maximum number of new licenses that will be sent per interval.
         /// </summary>
-        private const int MAX_LICENCES_PER_INTERVAL = 10;
+        private int maxLicencesPerInterval;
 
         private IConfiguration _configuration { get; }
 
@@ -76,6 +76,18 @@ namespace Gov.Jag.Lcrb.OneStopService
             _configuration = configuration;
             _cache = cache;
             _onestopRestClient = SetupOneStopClient(configuration, Log.Logger);
+
+            if (!string.IsNullOrEmpty(_configuration["maxLicencesPerInterval"]))
+            {
+                if (!int.TryParse(_configuration["maxLicencesPerInterval"], out maxLicencesPerInterval))
+                {
+                    maxLicencesPerInterval = 10;
+                }
+            }
+            else
+            {
+                maxLicencesPerInterval = 10;
+            }
         }
 
         private void UpdateQueueItemForSend(IDynamicsClient dynamicsClient, PerformContext hangfireContext, string queueItemId, string payload, string response)
@@ -247,16 +259,16 @@ namespace Gov.Jag.Lcrb.OneStopService
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
             }
 
-            if (licence == null || licence.AdoxioEstablishment == null)
+            if ( licence == null )
             {
                 if (hangfireContext != null)
                 {
-                    hangfireContext.WriteLine($"Unable to get complete licence {licenceGuid}.");
+                    hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
                 }
 
                 if (Log.Logger != null)
                 {
-                    Log.Logger.Error($"Unable to get complete licence {licenceGuid}.");
+                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
                 }
             }
             else
@@ -433,7 +445,9 @@ namespace Gov.Jag.Lcrb.OneStopService
             try
             {
                 string filter = "adoxio_datetimesent eq null";
-                result = dynamicsClient.Onestopmessageitems.Get(filter: filter).Value;
+                List<string> _orderby = new List<String>() { "createdon" };
+                
+                result = dynamicsClient.Onestopmessageitems.Get(filter: filter, orderby: _orderby).Value;
             }
             catch (HttpOperationException odee)
             {
@@ -454,18 +468,17 @@ namespace Gov.Jag.Lcrb.OneStopService
             // now for each one process it.
             foreach (var queueItem in result)
             {
-                
                 if (!string.IsNullOrEmpty(queueItem._adoxioLicenceValue))
                 {
                     var item = dynamicsClient.GetLicenceByIdWithChildren(queueItem._adoxioLicenceValue);
-
+                    
                     string licenceId = item.AdoxioLicencesid;
 
-                    switch ((OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription)
+                    switch ((OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription)
                     {
                         case OneStopHubStatusChange.Issued:
                         case OneStopHubStatusChange.TransferComplete:
-                            if ((OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription ==
+                            if ((OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription ==
                                 OneStopHubStatusChange.TransferComplete)
                             {
                                 // send a change status to the old licensee
@@ -475,7 +488,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                             // Do not attempt to send licence records that have no establishment (for example, Marketer Licence records)
                             if (item.AdoxioEstablishment != null)
                             {
-                                
+
                                 string programAccountCode = "001";
                                 if (item.AdoxioBusinessprogramaccountreferencenumber != null)
                                 {
@@ -500,7 +513,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                                     hangfireContext.WriteLine($"SET key {cacheKey} to {newNumber}");
                                 }
                                 await SendProgramAccountRequestREST(hangfireContext, licenceId, suffix, queueItem.AdoxioOnestopmessageitemid);
-                                
+
                             }
 
                             break;
@@ -514,7 +527,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                         case OneStopHubStatusChange.SuspensionEnded:
 
                             await SendChangeStatusRest(hangfireContext, licenceId,
-                                (OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription, queueItem.AdoxioOnestopmessageitemid);
+                                (OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription, queueItem.AdoxioOnestopmessageitemid);
                             break;
 
                         case OneStopHubStatusChange.ChangeOfAddress:
@@ -525,13 +538,13 @@ namespace Gov.Jag.Lcrb.OneStopService
                             await SendChangeNameRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid);
                             break;
                     }
-
                     currentItem++;
 
-                    if (currentItem > MAX_LICENCES_PER_INTERVAL)
+                    if (currentItem > maxLicencesPerInterval)
                     {
                         break; // exit foreach    
                     }
+
                 }
 
             }

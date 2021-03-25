@@ -1138,17 +1138,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
-        {
-            MicrosoftDynamicsCRMadoxioLicencetype result = null;
-            string typeFilter = "adoxio_name eq '" + name + "'";
-
-            IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.Licencetypes.Get(filter: typeFilter).Value;
-
-            result = licenceTypes.FirstOrDefault();
-
-            return result;
-        }
+        
 
         public static MicrosoftDynamicsCRMadoxioLicencesubcategory GetAdoxioSubLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
         {

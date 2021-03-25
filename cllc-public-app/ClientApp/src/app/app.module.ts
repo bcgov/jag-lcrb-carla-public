@@ -273,6 +273,7 @@ import { TakeHomeEventComponent } from "@components/take-home-event/take-home-ev
 import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-auth-guard.service";
 import { StarterChecklistComponent } from './components/sep/starter-checklist/starter-checklist.component';
 import { ResourcesComponent } from './components/sep/resources/resources.component';
+import { SepApplicationComponent } from './components/sep/sep-application/sep-application.component';
 
 @NgModule({
   declarations: [
@@ -419,6 +420,7 @@ import { ResourcesComponent } from './components/sep/resources/resources.compone
     TakeHomeEventComponent,
     StarterChecklistComponent,
     ResourcesComponent,
+    SepApplicationComponent,
   ],
   imports: [
     AppRoutingModule,
