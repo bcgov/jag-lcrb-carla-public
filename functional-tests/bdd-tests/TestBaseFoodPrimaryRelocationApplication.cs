@@ -15,7 +15,7 @@ namespace bdd_tests
 
             // create test data
             var areaDescription = "Sample area description";
-            var occupantLoad = "180";
+            var occupantLoad = "99999";
 
             // click zoning checkbox
             var uiIsPermittedInZoning =

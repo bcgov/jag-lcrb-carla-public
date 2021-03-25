@@ -37,7 +37,7 @@ namespace bdd_tests
             var policeJurisdictionParksville = "RCMP Oceanside";
 
             var floorAreaDescription = "Sample floor area.";
-            var occupantLoad = "180";
+            var occupantLoad = "99999";
 
             if (bizType == "partnership")
             {
