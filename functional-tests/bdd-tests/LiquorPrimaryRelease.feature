@@ -37,23 +37,23 @@ Scenario: Liquor Primary Release Test #1 (Private Corporation)
     And I complete the allow minors request
     And I click on the Submit button
     And I enter the payment information
-    # And I click on the link for Licences & Authorizations
-    # And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
-    # And I click on the Continue to Application button
-    # And I request a change in terms and conditions application
-    # And I click on the Submit button
-    # And I enter the payment information
-    # And I click on the link for Licences & Authorizations
-    # And I click on the link for Catering Endorsement Application
-    # And I click on the Continue to Application button
-    # And I request a catering endorsement application
-    # And I click on the Submit button
-    # And I enter the payment information
-    # And I click on the link for Licences & Authorizations
-    # And I click on the link for Change to Hours of Liquor Service (within Service Hours)
-    # And I complete the change hours application for liquor service within service hours
-    # And I click on the Submit button
-    # And I enter the payment information
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
+    And I click on the Continue to Application button
+    And I request a change in terms and conditions application
+    And I click on the Submit button
+    And I enter the payment information
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Catering Endorsement Application
+    And I click on the Continue to Application button
+    And I request a catering endorsement application
+    And I click on the Submit button
+    And I enter the payment information
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Change to Hours of Liquor Service (within Service Hours)
+    And I complete the change hours application for liquor service within service hours
+    And I click on the Submit button
+    And I enter the payment information
     # And I click on the link for Licences & Authorizations
     # And I click on the link for Live Theatre Request For Liquor Service
     # And I click on the Continue to Application button
