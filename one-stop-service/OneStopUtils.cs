@@ -259,16 +259,16 @@ namespace Gov.Jag.Lcrb.OneStopService
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
             }
 
-            if (licence == null || licence.AdoxioEstablishment == null)
+            if ( licence == null )
             {
                 if (hangfireContext != null)
                 {
-                    hangfireContext.WriteLine($"Unable to get complete licence {licenceGuid}.");
+                    hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
                 }
 
                 if (Log.Logger != null)
                 {
-                    Log.Logger.Error($"Unable to get complete licence {licenceGuid}.");
+                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
                 }
             }
             else
