@@ -218,14 +218,9 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     log.LogInformation("Creating Hangfire jobs for SPD Export ...");
-                    if (!string.IsNullOrEmpty(_configuration["FEATURE_LE_CONNECTIONS"]))
-                    {
-                        RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration).SendFoundApplicationsV2(null), Cron.MinuteInterval(15));
-                    }
-                    else
-                    {
-                        RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration).SendFoundApplications(null), Cron.MinuteInterval(15));
-                    }
+                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration).SendFoundApplicationsV2(null), Cron.MinuteInterval(15));
+                    
+                    
                     RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration).SendFoundWorkers(null), Cron.MinuteInterval(15));
                     log.LogInformation("Hangfire Send Export job done.");
                 }
