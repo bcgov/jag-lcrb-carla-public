@@ -82,6 +82,9 @@ namespace bdd_tests
                 case "local government":
                     businessTypeValue = "LocalGovernment";
                     break;
+                case "military mess":
+                    businessTypeValue = "MilitaryMess";
+                    break;
                 default:
                     businessTypeValue = "ERROR - unknown business type.";
                     break;

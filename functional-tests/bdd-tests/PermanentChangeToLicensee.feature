@@ -92,7 +92,7 @@ Scenario: Catering Licensee Changes (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges
+@catering @licenseechanges @release4
 Scenario: Catering Licensee Changes (Co-op)
     Given I am logged in to the dashboard as a co-op
     And I click on the Start Application button for Catering
@@ -110,7 +110,7 @@ Scenario: Catering Licensee Changes (Co-op)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges
+@catering @licenseechanges @release4
 Scenario: Catering Licensee Changes (Military Mess)
     Given I am logged in to the dashboard as a military mess
     And I click on the Start Application button for Catering
