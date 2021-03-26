@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: ManufacturerApplication
@@ -25,7 +14,7 @@ Scenario: Manufacturer Application (Winery)
     And I complete the Manufacturer application for a winery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -38,7 +27,7 @@ Scenario: Manufacturer Application (Distillery)
     And I complete the Manufacturer application for a distillery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -51,7 +40,7 @@ Scenario: Manufacturer Application (Brewery)
     And I complete the Manufacturer application for a brewery
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -64,7 +53,7 @@ Scenario: Manufacturer Application (Co-packer)
     And I complete the Manufacturer application for a co-packer
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page

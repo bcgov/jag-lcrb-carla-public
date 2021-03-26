@@ -42,7 +42,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> BCServiceLogin(string path, string code)
+        public async Task<IActionResult> BCServiceLogin(string path, string code, [FromQuery] string source)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
             if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || (!_env.IsProduction() && path.Equals("headers"))))
@@ -60,7 +60,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (string.IsNullOrEmpty(_configuration["ENABLE_SERVICECARD_TOKEN_TEST"]))
             {
-                string basePath = GetRedirectPath(_configuration, path, code);
+                string basePath = GetRedirectPath(_configuration, path, code, source);
                 return Redirect(basePath);
             }
 
@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet]
         [Route("token/{userid}")]
         [AllowAnonymous]
-        public virtual IActionResult GetDevAuthenticationCookie(string userId)
+        public virtual IActionResult GetDevAuthenticationCookie(string userId, [FromQuery]string source)
         {
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
@@ -128,14 +128,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             string path = HttpUtility.ParseQueryString(Request.QueryString.ToString()).Get("path");
             string code = HttpUtility.ParseQueryString(Request.QueryString.ToString()).Get("code");
-            string basePath = GetDevRedirectPath(_configuration, path, code);
+            string basePath = GetDevRedirectPath(_configuration, path, code, source);
             return Redirect(basePath);
         }
 
-        private string GetRedirectPath(IConfiguration configuration, string path, string code)
+        private string GetRedirectPath(IConfiguration configuration, string path, string code, string source)
         {
             string basePath = string.IsNullOrEmpty(configuration["BASE_PATH"]) ? "" : configuration["BASE_PATH"];
-            if (path != null && path.Equals("cannabis-associate-screening"))
+            if (source == "sep")
+            {
+                basePath += "/sep/dashboard";
+            }
+            else if (path != null && path.Equals("cannabis-associate-screening"))
             {
                 basePath += "/cannabis-associate-screening/" + code;
             }
@@ -147,10 +151,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return basePath;
         }
 
-        private string GetDevRedirectPath(IConfiguration configuration, string path, string code)
+        private string GetDevRedirectPath(IConfiguration configuration, string path, string code, string source)
         {
             string basePath = string.IsNullOrEmpty(configuration["BASE_PATH"]) ? "" : configuration["BASE_PATH"];
-            if (path != null && path.Equals("cannabis-associate-screening"))
+            if (source == "sep")
+            {
+                basePath += "/sep/dashboard";
+            }
+            else if (path != null && path.Equals("cannabis-associate-screening"))
             {
                 basePath += $"/bcservice?path={path}&code={code}";
             }

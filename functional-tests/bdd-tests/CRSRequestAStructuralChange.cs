@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: CRSRequestAStructuralChange
+Feature: CrsRequestAStructuralChange
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a structural change for the approved application
@@ -28,7 +17,11 @@ Scenario: Cannabis Structural Changes (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Request a Structural Change
+    And I click on the Continue to Application button
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
@@ -45,7 +38,11 @@ Scenario: Cannabis Structural Changes (Society)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Request a Structural Change
+    And I click on the Continue to Application button
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
@@ -62,7 +59,11 @@ Scenario: Cannabis Structural Changes (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Request a Structural Change
+    And I click on the Continue to Application button
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
@@ -79,7 +80,11 @@ Scenario: Cannabis Structural Changes (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Request a Structural Change
+    And I click on the Continue to Application button
     And I request a structural change
     And I click on the link for Dashboard
     And I confirm the structural change request is displayed on the dashboard
@@ -89,9 +94,9 @@ Scenario: Cannabis Structural Changes (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSRequestAStructuralChange.feature")]
+    [FeatureFile("./CrsRequestAStructuralChange.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSRequestAStructuralChange : TestBase
+    public sealed class CrsRequestAStructuralChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

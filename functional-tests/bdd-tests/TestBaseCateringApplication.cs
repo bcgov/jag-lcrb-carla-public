@@ -1,20 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
 using Protractor;
-using System;
-using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
@@ -28,22 +15,22 @@ namespace bdd_tests
             */
 
             // create application info
-            string estName = "Point Ellis Greenhouse";
-            string estAddress = "645 Tyee Rd";
-            string estCity = "Victoria";
-            string estPostal = "V9A 6X5";
-            string estPID = "012345678";
-            string estPhone = "2505555555";
-            string estEmail = "test@automation.com";
-            string conGiven = "Given";
-            string conSurname = "Surname";
-            string conRole = "CEO";
-            string conPhone = "2508888888";
-            string conEmail = "test2@automation.com";
-            string prevAppDetails = "Here are the previous application details (automated test).";
-            string liqConnectionDetails = "Here are the liquor industry connection details (automated test).";
-            string kitchenDetails = "Here are the details of the kitchen equipment.";
-            string transportDetails = "Here are the transport details.";
+            var estName = "Point Ellis Greenhouse";
+            var estAddress = "645 Tyee Rd";
+            var estCity = "Victoria";
+            var estPostal = "V9A 6X5";
+            var estPID = "012345678";
+            var estPhone = "2505555555";
+            var estEmail = "test@automation.com";
+            var conGiven = "Given";
+            var conSurname = "Surname";
+            var conRole = "CEO";
+            var conPhone = "2508888888";
+            var conEmail = "test2@automation.com";
+            var prevAppDetails = "Here are the previous application details (automated test).";
+            var liqConnectionDetails = "Here are the liquor industry connection details (automated test).";
+            var kitchenDetails = "Here are the details of the kitchen equipment.";
+            var transportDetails = "Here are the transport details.";
 
             if (bizType == "partnership")
             {
@@ -90,7 +77,7 @@ namespace bdd_tests
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
 
-            if (bizType == "society")
+            if (bizType == "society" || bizType == "military mess" || bizType == "co-op")
             {
                 // upload notice of articles
                 FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
@@ -100,15 +87,12 @@ namespace bdd_tests
             }
 
             if (bizType == "sole proprietorship")
-            {
                 // upload personal history summary documents
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
-            }
 
             // enter the establishment name
             NgWebElement uiEstabName = null;
-            for (int i = 0; i < 10; i++)
-            {
+            for (var i = 0; i < 10; i++)
                 try
                 {
                     var names = ngDriver.FindElements(By.CssSelector("input[formcontrolname='establishmentName']"));
@@ -120,42 +104,42 @@ namespace bdd_tests
                 }
                 catch (Exception)
                 {
-
                 }
-            }
+
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address
-            NgWebElement uiEstabAddress = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
+            var uiEstabAddress =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
             uiEstabAddress.SendKeys(estAddress);
 
             // enter the establishment city
-            NgWebElement uiEstabCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
+            var uiEstabCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
             uiEstabCity.SendKeys(estCity);
 
             // enter the establishment postal code
-            NgWebElement uiEstabPostal = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
+            var uiEstabPostal = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
             uiEstabPostal.SendKeys(estPostal);
 
             // enter the PID
-            NgWebElement uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
+            var uiEstabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
             uiEstabPID.SendKeys(estPID);
 
             // enter the store email
-            NgWebElement uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
+            var uiEstabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
             uiEstabEmail.SendKeys(estEmail);
 
             // enter the store phone number
-            NgWebElement uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
+            var uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
             // select 'Yes'
             // Do you or any of your shareholders currently hold, have held, or have previously applied for a British Columbia liquor licence?
-            if ((bizType == "private corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "public corporation") || (bizType == "sole proprietorship"))
+            if (bizType == "private corporation" || bizType == "partnership" || bizType == "society" ||
+                bizType == "public corporation" || bizType == "sole proprietorship" || bizType == "military mess" || bizType == "co-op")
             {
                 NgWebElement uiPreviousLicenceYes = null;
-                for (int i = 0; i < 10; i++)
-                {  
+                for (var i = 0; i < 50; i++)
                     try
                     {
                         var names = ngDriver.FindElements(By.Id("mat-button-toggle-73-button"));
@@ -164,65 +148,67 @@ namespace bdd_tests
                             uiPreviousLicenceYes = names[0];
                             break;
                         }
-                    }               
+                    }
                     catch (Exception)
                     {
-                    }            
-                }
+                    }
+
                 JavaScriptClick(uiPreviousLicenceYes);
             }
 
-            if ((bizType == "combined application"))
+            if (bizType == "combined application")
             {
-                NgWebElement uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-55-button"));
+                var uiPreviousLicenceYes = ngDriver.FindElement(By.Id("mat-button-toggle-55-button"));
                 JavaScriptClick(uiPreviousLicenceYes);
             }
 
             // enter the previous application details
-            NgWebElement uiPreviousApplicationDetails = ngDriver.FindElement(By.Id("previousApplicationDetails"));
+            var uiPreviousApplicationDetails = ngDriver.FindElement(By.Id("previousApplicationDetails"));
             uiPreviousApplicationDetails.SendKeys(prevAppDetails);
 
             // select 'Yes'
             // Do you hold a Rural Agency Store Appointment?
-            if ((bizType == "private corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "public corporation") || (bizType == "sole proprietorship"))
+            if (bizType == "private corporation" || bizType == "partnership" || bizType == "society" ||
+                bizType == "public corporation" || bizType == "sole proprietorship" || bizType == "military mess" || bizType == "co-op")
             {
-                NgWebElement uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-76-button"));
+                var uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-76-button"));
                 JavaScriptClick(uiRuralAgencyStore);
             }
 
-            if ((bizType == "combined application"))
+            if (bizType == "combined application")
             {
-                NgWebElement uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-58-button"));
+                var uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-58-button"));
                 uiRuralAgencyStore.Click();
             }
 
             // select 'Yes'
             // Do you, or any of your shareholders, have any connection, financial or otherwise, direct or indirect, with a distillery, brewery or winery?
-            if ((bizType == "private corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "public corporation") || (bizType == "sole proprietorship"))
-            { 
-                NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-79-button"));
+            if (bizType == "private corporation" || bizType == "partnership" || bizType == "society" ||
+                bizType == "public corporation" || bizType == "sole proprietorship" || bizType == "military mess" || bizType == "co-op")
+            {
+                var uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-79-button"));
                 JavaScriptClick(uiOtherBusinessYes);
             }
 
-            if ((bizType == "combined application"))
+            if (bizType == "combined application")
             {
-                NgWebElement uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-61-button"));
+                var uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-61-button"));
                 uiOtherBusinessYes.Click();
             }
 
             // enter the connection details
-            NgWebElement uiLiqIndConnection = ngDriver.FindElement(By.Id("liquorIndustryConnectionsDetails"));
+            var uiLiqIndConnection = ngDriver.FindElement(By.Id("liquorIndustryConnectionsDetails"));
             uiLiqIndConnection.SendKeys(liqConnectionDetails);
 
             // enter the kitchen details
-            NgWebElement uiKitchenDescription = ngDriver.FindElement(By.CssSelector("textarea#description2"));
+            var uiKitchenDescription = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiKitchenDescription.SendKeys(kitchenDetails);
 
             // enter the transport details
-            NgWebElement uiTransportDetails = ngDriver.FindElement(By.CssSelector("textarea#description3"));
+            var uiTransportDetails = ngDriver.FindElement(By.CssSelector("textarea#description3"));
             uiTransportDetails.SendKeys(transportDetails);
 
-            if ((bizType == "partnership") || (bizType == "society"))
+            if (bizType == "partnership" || bizType == "society" || bizType == "military mess" || bizType == "co-op")
             {
                 // upload a store signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[8]");
@@ -231,7 +217,8 @@ namespace bdd_tests
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
             }
 
-            if ((bizType == "private corporation") || (bizType == "combined application") || (bizType == "public corporation"))
+            if (bizType == "private corporation" || bizType == "combined application" ||
+                bizType == "public corporation")
             {
                 // upload a store signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[17]");
@@ -250,40 +237,40 @@ namespace bdd_tests
             }
 
             // enter the first name of the application contact
-            NgWebElement uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
+            var uiContactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
             uiContactGiven.SendKeys(conGiven);
 
             // enter the last name of the application contact
-            NgWebElement uiContactSurname = ngDriver.FindElement(By.Id("contactPersonLastName"));
+            var uiContactSurname = ngDriver.FindElement(By.Id("contactPersonLastName"));
             uiContactSurname.SendKeys(conSurname);
 
             // enter the role of the application contact
-            NgWebElement uiContactRole = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
+            var uiContactRole = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
             uiContactRole.SendKeys(conRole);
 
             // enter the phone number of the application contact
-            NgWebElement uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
+            var uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
             uiContactPhone.SendKeys(conPhone);
 
             // enter the email of the application contact
-            NgWebElement uiContactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
+            var uiContactEmail = ngDriver.FindElement(By.Id("contactPersonEmail"));
             uiContactEmail.SendKeys(conEmail);
 
             // click on the authorized to submit checkbox
-            NgWebElement uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            var uiAuthorizedToSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
             uiAuthorizedToSubmit.Click();
 
             // click on the signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
+            var uiSignatureAgreement = ngDriver.FindElement(By.Id("signatureAgreement"));
             uiSignatureAgreement.Click();
 
             // retrieve the current URL to get the application ID (needed downstream)
-            string URL = ngDriver.Url;
+            var URL = ngDriver.Url;
 
             // retrieve the application ID
-            string[] parsedURL = URL.Split('/');
+            var parsedURL = URL.Split('/');
 
-            string[] tempFix = parsedURL[5].Split(';');
+            var tempFix = parsedURL[5].Split(';');
 
             applicationID = tempFix[0];
         }

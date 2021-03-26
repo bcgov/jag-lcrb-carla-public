@@ -329,6 +329,10 @@ export const EventCategory = [
   {
     label: 'All Ages Liquor Free',
     value: 100000000
+  },
+  {
+    label: 'Take Home Sampling',
+    value: 100000001
   }
 ];
 

@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: CRSApplication
+Feature: CrsApplication
     As a logged in business user
     I want to submit a CRS Application for different business types
 
@@ -27,7 +16,7 @@ Scenario: CRS Application (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -42,7 +31,7 @@ Scenario: CRS Application (Society)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -57,7 +46,7 @@ Scenario: CRS Application (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -72,7 +61,7 @@ Scenario: CRS Application (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -80,9 +69,9 @@ Scenario: CRS Application (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSApplication.feature")]
+    [FeatureFile("./CrsApplication.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSApplication : TestBase
+    public sealed class CrsApplication : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

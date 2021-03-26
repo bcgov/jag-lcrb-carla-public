@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
  Feature: MarketEvent
@@ -30,14 +19,16 @@ using Xunit;
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event for one date only
     And I click on the secondary Submit button
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a one day event
@@ -57,14 +48,16 @@ using Xunit;
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event weekly
     And I click on the Submit button
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a weekly event
@@ -85,11 +78,13 @@ using Xunit;
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event bi-weekly
     And I click on the Submit button
     And I click on the event history for markets
@@ -111,14 +106,16 @@ using Xunit;
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event monthly
     And I click on the Submit button
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a monthly event
@@ -138,14 +135,16 @@ using Xunit;
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event for one date only
     And I click on the button for Save for Later
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a one day event saved for later
@@ -170,14 +169,16 @@ using Xunit;
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event weekly
     And I click on the button for Save for Later
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a weekly event saved for later
@@ -202,14 +203,16 @@ using Xunit;
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event bi-weekly
     And I click on the button for Save for Later
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a bi-weekly event saved for later
@@ -234,14 +237,16 @@ using Xunit;
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event monthly
     And I click on the button for Save for Later
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a monthly event saved for later

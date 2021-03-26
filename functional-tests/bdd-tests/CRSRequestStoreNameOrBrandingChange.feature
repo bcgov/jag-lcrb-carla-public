@@ -1,4 +1,4 @@
-﻿Feature: CRSRequestStoreNameOrBrandingChange
+﻿Feature: CrsRequestStoreNameOrBrandingChange
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a valid name or branding change for the approved application
@@ -13,11 +13,15 @@ Scenario: CRS Name Branding Change (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
+    And I click on the link for Request Store Name or Branding Change
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Cannabis
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -32,11 +36,15 @@ Scenario: CRS Name Branding Change (Society)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
+    And I click on the link for Request Store Name or Branding Change
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Cannabis
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -51,11 +59,15 @@ Scenario: CRS Name Branding Change (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
+    And I click on the link for Request Store Name or Branding Change
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Cannabis
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -70,11 +82,15 @@ Scenario: CRS Name Branding Change (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
+    And I click on the link for Request Store Name or Branding Change
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Cannabis
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page

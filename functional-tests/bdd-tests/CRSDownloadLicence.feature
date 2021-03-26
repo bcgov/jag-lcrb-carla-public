@@ -1,4 +1,4 @@
-﻿Feature: CRSDownloadLicence
+﻿Feature: CrsDownloadLicence
     As a logged in business user
     I want to submit a CRS Application for different business types
     And download the licence for the approved application
@@ -13,7 +13,9 @@ Scenario: Download Licence (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
     And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page

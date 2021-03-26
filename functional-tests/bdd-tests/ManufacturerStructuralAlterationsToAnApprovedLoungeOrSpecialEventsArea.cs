@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: ManufacturerStructuralAlterationsToAnApprovedLoungeOrSpecialEventsArea
@@ -26,7 +15,11 @@ Scenario: Structural Alterations (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
+    And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Structural Alterations to an Approved Lounge or Special Events Area
+    And I click on the Continue to Application button
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
@@ -40,7 +33,11 @@ Scenario: Structural Alterations (Brewery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Structural Alterations to an Approved Lounge or Special Events Area
+    And I click on the Continue to Application button
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
@@ -54,7 +51,11 @@ Scenario: Structural Alterations (Distillery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Structural Alterations to an Approved Lounge or Special Events Area
+    And I click on the Continue to Application button
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page
@@ -68,7 +69,11 @@ Scenario: Structural Alterations (Co-packer)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
+    And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Structural Alterations to an Approved Lounge or Special Events Area
+    And I click on the Continue to Application button
     And I request structural alterations to an approved lounge or special events area
     And the account is deleted
     Then I see the login page

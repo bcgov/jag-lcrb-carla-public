@@ -11,7 +11,9 @@ Scenario: Manufacturer Tied House Exemption (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
     And I click on the secondary Submit button
@@ -27,7 +29,9 @@ Scenario: Manufacturer Tied House Exemption (Brewery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
     And I click on the secondary Submit button
@@ -43,7 +47,9 @@ Scenario: Manufacturer Tied House Exemption (Distillery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
     And I click on the secondary Submit button
@@ -59,7 +65,9 @@ Scenario: Manufacturer Tied House Exemption (Co-packer)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Invitation for Tied House Exemption
     And I complete the tied house exemption request
     And I click on the secondary Submit button

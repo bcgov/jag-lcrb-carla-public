@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioContravention class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioContravention(string _adoxioRegionalmanageridValue = default(string), string adoxioRmsummary = default(string), System.DateTimeOffset? adoxioDatetime = default(System.DateTimeOffset?), int? adoxioPenaltytype = default(int?), string _adoxioAreaidValue = default(string), System.DateTimeOffset? adoxioCommunicationdistributiondate = default(System.DateTimeOffset?), int? adoxioWaiverapprovedbyrm = default(int?), string adoxioIsactwordtemplate = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioNoeareportapproved = default(int?), string _adoxioInspectionidValue = default(string), decimal? adoxioFinalmonetarypenaltyBase = default(decimal?), bool? adoxioIsmonetarypenalty = default(bool?), int? adoxioItemnumber = default(int?), string adoxioIsregwordtemplate = default(string), System.DateTimeOffset? adoxioSuspensionperioddefineddate = default(System.DateTimeOffset?), bool? adoxioIsreg = default(bool?), System.DateTimeOffset? adoxioSuspensionstartdate = default(System.DateTimeOffset?), int? adoxioDelegategmdecision = default(int?), int? adoxioNoeareportapprovaldecision = default(int?), string _adoxioRegionidValue = default(string), int? adoxioCategory = default(int?), System.DateTimeOffset? adoxioSuspensionenddate = default(System.DateTimeOffset?), bool? adoxioIsunderreconsideration = default(bool?), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? adoxioPetitionreceiveddate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDelegatedecisionreceiveddate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioCourtdecisiondate = default(System.DateTimeOffset?), int? adoxioRmapprovaldecision = default(int?), System.DateTimeOffset? adoxioActiondate = default(System.DateTimeOffset?), int? adoxioCourtdecisionresult = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? adoxioDelegatedecisionsentdate = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? adoxioReconsiderationapplicationdate = default(System.DateTimeOffset?), bool? adoxioIswqr = default(bool?), int? adoxioMaxperiod = default(int?), System.DateTimeOffset? adoxioReconsiderationapplicationduedate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioWaiverapprovedbyrmdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioWaiversenttolicenseedate = default(System.DateTimeOffset?), string _owningteamValue = default(string), decimal? adoxioRecommendedmonetarypenaltyBase = default(decimal?), System.DateTimeOffset? adoxioWaiversubmittedforreviewdate = default(System.DateTimeOffset?), string adoxioIstandcwordtemplate = default(string), int? adoxioFinalsuspensionperiod = default(int?), int? adoxioIswaiverrequested = default(int?), decimal? adoxioFinalmonetarypenalty = default(decimal?), System.DateTimeOffset? adoxioWaiverresponseduedate = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? adoxioRecommendedclosureperiod = default(int?), bool? adoxioIsact = default(bool?), int? adoxioDelegatefinding = default(int?), int? adoxioDelegatedecisionresult = default(int?), System.DateTimeOffset? adoxioJudicialreviewdeadlinedate = default(System.DateTimeOffset?), string adoxioContraventionnumber = default(string), System.DateTimeOffset? adoxioOrderstayeduntildate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioRmapprovaldecisiondate = default(System.DateTimeOffset?), int? adoxioFinalpenaltytype = default(int?), string _adoxioInvestigationunitidValue = default(string), int? adoxioContraventionoutcome = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioType = default(int?), string _adoxioLicenceidValue = default(string), System.DateTimeOffset? adoxioStaylettersentdate = default(System.DateTimeOffset?), string adoxioContraventionid = default(string), decimal? adoxioMaxpenalty = default(decimal?), decimal? adoxioMinpenaltyBase = default(decimal?), System.DateTimeOffset? adoxioPenaltylettercreateddate = default(System.DateTimeOffset?), decimal? adoxioMaxpenaltyBase = default(decimal?), string _adoxioInvestigationidValue = default(string), int? adoxioMinperiod = default(int?), System.DateTimeOffset? adoxioCnissueddate = default(System.DateTimeOffset?), int? adoxioDelegatefinaldecision = default(int?), string adoxioReconsiderationdelegatename = default(string), string versionnumber = default(string), bool? adoxioIspaymentconfirmedbyfinance = default(bool?), string _adoxioEstablishmentidValue = default(string), int? statecode = default(int?), string adoxioBadgenumber = default(string), string _adoxioCompliantidValue = default(string), int? statuscode = default(int?), int? adoxioRegistrarsreconsiderationdecision = default(int?), string _adoxioLicenseeidValue = default(string), System.DateTimeOffset? adoxioNoeaapprovaldate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioPenaltyletterapproveddate = default(System.DateTimeOffset?), string _adoxioEnforcementactionidValue = default(string), string adoxioName = default(string), int? importsequencenumber = default(int?), string _adoxioContraventiontitleidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? adoxioMonetarypenaltypaymentdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioIncidentdatetime = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioCourtdatetime = default(System.DateTimeOffset?), string adoxioContraventionevidencesummary = default(string), int? adoxioActiontaken = default(int?), System.DateTimeOffset? adoxioPenaltylettersentdate = default(System.DateTimeOffset?), bool? adoxioIstandc = default(bool?), string adoxioInterpretation = default(string), bool? adoxioIsfinancenotified = default(bool?), string adoxioCourthearinglocation = default(string), string _owninguserValue = default(string), System.DateTimeOffset? adoxioNoeasubmitteddate = default(System.DateTimeOffset?), string _createdbyValue = default(string), int? adoxioIscontraventionconfirmed = default(int?), int? adoxioIswaiversigned = default(int?), System.DateTimeOffset? adoxioSuspensionfulfillmentdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioStaylettercompletedate = default(System.DateTimeOffset?), string adoxioReference = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? adoxioRecommendedmonetarypenalty = default(decimal?), string _createdonbehalfbyValue = default(string), decimal? adoxioMinpenalty = default(decimal?), bool? adoxioIsreconsiderationapplicationpaid = default(bool?), string adoxioLpcnumber = default(string), string adoxioInspectorsummary = default(string), int? adoxioNumberofoffence = default(int?), System.DateTimeOffset? adoxioNoeasentdate = default(System.DateTimeOffset?), string adoxioIswqrwordtemplate = default(string), int? adoxioReconsiderationdelegatefinding = default(int?), string _owneridValue = default(string), string adoxioRecommendedactionreasoning = default(string), System.DateTimeOffset? adoxioWaiversigneddate = default(System.DateTimeOffset?), string adoxioPolicynamereference = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioContraventionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioContraventionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioContraventionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioContraventionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioContraventionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioContraventionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMadoxioContraventionadmin adoxioContraventionTitleID = default(MicrosoftDynamicsCRMadoxioContraventionadmin), MicrosoftDynamicsCRMadoxioComplaint adoxioCompliantId = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMincident adoxioInspectionId = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMsystemuser adoxioRegionalManagerId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMaccount adoxioLicenseeId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioComplianceinvestigation adoxioInvestigationId = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> adoxioContraventionInvestigationactivities = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioContraventionSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> adoxioContraventionCompliancemeetings = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMannotation> adoxioContraventionAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMadoxioEnforcementaction adoxioEnforcementActionId = default(MicrosoftDynamicsCRMadoxioEnforcementaction), MicrosoftDynamicsCRMadoxioInvestigation adoxioInvestigationUnitId = default(MicrosoftDynamicsCRMadoxioInvestigation))
+        public MicrosoftDynamicsCRMadoxioContravention(string _adoxioRegionalmanageridValue = default(string), string adoxioRmsummary = default(string), System.DateTimeOffset? adoxioDatetime = default(System.DateTimeOffset?), int? adoxioPenaltytype = default(int?), string _adoxioAreaidValue = default(string), System.DateTimeOffset? adoxioCommunicationdistributiondate = default(System.DateTimeOffset?), int? adoxioWaiverapprovedbyrm = default(int?), string adoxioIsactwordtemplate = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioNoeareportapproved = default(int?), string _adoxioInspectionidValue = default(string), decimal? adoxioFinalmonetarypenaltyBase = default(decimal?), int? adoxioItemnumber = default(int?), string adoxioIsregwordtemplate = default(string), System.DateTimeOffset? adoxioSuspensionperioddefineddate = default(System.DateTimeOffset?), bool? adoxioIsreg = default(bool?), System.DateTimeOffset? adoxioSuspensionstartdate = default(System.DateTimeOffset?), int? adoxioDelegategmdecision = default(int?), int? adoxioNoeareportapprovaldecision = default(int?), string _adoxioRegionidValue = default(string), int? adoxioCategory = default(int?), System.DateTimeOffset? adoxioSuspensionenddate = default(System.DateTimeOffset?), bool? adoxioIsunderreconsideration = default(bool?), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? adoxioPetitionreceiveddate = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), System.DateTimeOffset? adoxioDelegatedecisionreceiveddate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioCourtdecisiondate = default(System.DateTimeOffset?), int? adoxioRmapprovaldecision = default(int?), System.DateTimeOffset? adoxioActiondate = default(System.DateTimeOffset?), int? adoxioCourtdecisionresult = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? adoxioDelegatedecisionsentdate = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? adoxioReconsiderationapplicationdate = default(System.DateTimeOffset?), bool? adoxioIswqr = default(bool?), int? adoxioMaxperiod = default(int?), System.DateTimeOffset? adoxioReconsiderationapplicationduedate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioWaiverapprovedbyrmdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioWaiversenttolicenseedate = default(System.DateTimeOffset?), string _owningteamValue = default(string), decimal? adoxioRecommendedmonetarypenaltyBase = default(decimal?), System.DateTimeOffset? adoxioWaiversubmittedforreviewdate = default(System.DateTimeOffset?), string _adoxioInvoiceValue = default(string), string adoxioIstandcwordtemplate = default(string), int? adoxioFinalsuspensionperiod = default(int?), int? adoxioIswaiverrequested = default(int?), decimal? adoxioFinalmonetarypenalty = default(decimal?), System.DateTimeOffset? adoxioWaiverresponseduedate = default(System.DateTimeOffset?), string adoxioLpcnumber = default(string), int? timezoneruleversionnumber = default(int?), int? adoxioRecommendedclosureperiod = default(int?), bool? adoxioIsact = default(bool?), int? adoxioDelegatefinding = default(int?), int? adoxioDelegatedecisionresult = default(int?), System.DateTimeOffset? adoxioJudicialreviewdeadlinedate = default(System.DateTimeOffset?), string adoxioContraventionnumber = default(string), System.DateTimeOffset? adoxioOrderstayeduntildate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioRmapprovaldecisiondate = default(System.DateTimeOffset?), int? adoxioFinalpenaltytype = default(int?), string _adoxioInvestigationunitidValue = default(string), int? adoxioContraventionoutcome = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioType = default(int?), string _adoxioLicenceidValue = default(string), System.DateTimeOffset? adoxioStaylettersentdate = default(System.DateTimeOffset?), string adoxioContraventionid = default(string), string adoxioImportid = default(string), decimal? adoxioMaxpenalty = default(decimal?), decimal? adoxioMinpenaltyBase = default(decimal?), System.DateTimeOffset? adoxioPenaltylettercreateddate = default(System.DateTimeOffset?), decimal? adoxioMaxpenaltyBase = default(decimal?), string _adoxioInvestigationidValue = default(string), int? adoxioMinperiod = default(int?), System.DateTimeOffset? adoxioCnissueddate = default(System.DateTimeOffset?), int? adoxioDelegatefinaldecision = default(int?), string adoxioReconsiderationdelegatename = default(string), string versionnumber = default(string), bool? adoxioIspaymentconfirmedbyfinance = default(bool?), string _adoxioEstablishmentidValue = default(string), int? statecode = default(int?), string adoxioBadgenumber = default(string), string _adoxioCompliantidValue = default(string), int? statuscode = default(int?), int? adoxioRegistrarsreconsiderationdecision = default(int?), string _adoxioLicenseeidValue = default(string), System.DateTimeOffset? adoxioNoeaapprovaldate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioPenaltyletterapproveddate = default(System.DateTimeOffset?), string _adoxioEnforcementactionidValue = default(string), string adoxioName = default(string), string _adoxioContraventiontitleidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? adoxioMonetarypenaltypaymentdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioIncidentdatetime = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioCourtdatetime = default(System.DateTimeOffset?), string adoxioContraventionevidencesummary = default(string), int? adoxioActiontaken = default(int?), System.DateTimeOffset? adoxioPenaltylettersentdate = default(System.DateTimeOffset?), bool? adoxioIstandc = default(bool?), string adoxioInterpretation = default(string), bool? adoxioIsfinancenotified = default(bool?), string adoxioCourthearinglocation = default(string), string _owninguserValue = default(string), System.DateTimeOffset? adoxioNoeasubmitteddate = default(System.DateTimeOffset?), int? adoxioInvoicetrigger = default(int?), int? adoxioIscontraventionconfirmed = default(int?), int? adoxioIswaiversigned = default(int?), System.DateTimeOffset? adoxioSuspensionfulfillmentdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioStaylettercompletedate = default(System.DateTimeOffset?), string adoxioReference = default(string), bool? adoxioIsmonetarypenalty = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? adoxioRecommendedmonetarypenalty = default(decimal?), string _createdonbehalfbyValue = default(string), decimal? adoxioMinpenalty = default(decimal?), bool? adoxioIsreconsiderationapplicationpaid = default(bool?), int? adoxioNearsummarycategory = default(int?), int? adoxioNumberofoffence = default(int?), System.DateTimeOffset? adoxioNoeasentdate = default(System.DateTimeOffset?), string adoxioIswqrwordtemplate = default(string), int? adoxioReconsiderationdelegatefinding = default(int?), string _owneridValue = default(string), string adoxioRecommendedactionreasoning = default(string), string adoxioInspectorsummary = default(string), System.DateTimeOffset? adoxioWaiversigneddate = default(System.DateTimeOffset?), string _createdbyValue = default(string), string adoxioPolicynamereference = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioContraventionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioContraventionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioContraventionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioContraventionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioContraventionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioContraventionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMadoxioContraventionadmin adoxioContraventionTitleID = default(MicrosoftDynamicsCRMadoxioContraventionadmin), MicrosoftDynamicsCRMadoxioComplaint adoxioCompliantId = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMincident adoxioInspectionId = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMsystemuser adoxioRegionalManagerId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMaccount adoxioLicenseeId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioComplianceinvestigation adoxioInvestigationId = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> adoxioContraventionInvestigationactivities = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioContraventionSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> adoxioContraventionCompliancemeetings = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMannotation> adoxioContraventionAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMadoxioEnforcementaction adoxioEnforcementActionId = default(MicrosoftDynamicsCRMadoxioEnforcementaction), MicrosoftDynamicsCRMadoxioInvestigation adoxioInvestigationUnitId = default(MicrosoftDynamicsCRMadoxioInvestigation), IList<MicrosoftDynamicsCRMinvoice> adoxioContraventionInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), MicrosoftDynamicsCRMinvoice adoxioInvoice = default(MicrosoftDynamicsCRMinvoice))
         {
             this._adoxioRegionalmanageridValue = _adoxioRegionalmanageridValue;
             AdoxioRmsummary = adoxioRmsummary;
@@ -43,7 +43,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioNoeareportapproved = adoxioNoeareportapproved;
             this._adoxioInspectionidValue = _adoxioInspectionidValue;
             AdoxioFinalmonetarypenaltyBase = adoxioFinalmonetarypenaltyBase;
-            AdoxioIsmonetarypenalty = adoxioIsmonetarypenalty;
             AdoxioItemnumber = adoxioItemnumber;
             AdoxioIsregwordtemplate = adoxioIsregwordtemplate;
             AdoxioSuspensionperioddefineddate = adoxioSuspensionperioddefineddate;
@@ -57,6 +56,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioIsunderreconsideration = adoxioIsunderreconsideration;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             AdoxioPetitionreceiveddate = adoxioPetitionreceiveddate;
+            Importsequencenumber = importsequencenumber;
             AdoxioDelegatedecisionreceiveddate = adoxioDelegatedecisionreceiveddate;
             AdoxioCourtdecisiondate = adoxioCourtdecisiondate;
             AdoxioRmapprovaldecision = adoxioRmapprovaldecision;
@@ -75,11 +75,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owningteamValue = _owningteamValue;
             AdoxioRecommendedmonetarypenaltyBase = adoxioRecommendedmonetarypenaltyBase;
             AdoxioWaiversubmittedforreviewdate = adoxioWaiversubmittedforreviewdate;
+            this._adoxioInvoiceValue = _adoxioInvoiceValue;
             AdoxioIstandcwordtemplate = adoxioIstandcwordtemplate;
             AdoxioFinalsuspensionperiod = adoxioFinalsuspensionperiod;
             AdoxioIswaiverrequested = adoxioIswaiverrequested;
             AdoxioFinalmonetarypenalty = adoxioFinalmonetarypenalty;
             AdoxioWaiverresponseduedate = adoxioWaiverresponseduedate;
+            AdoxioLpcnumber = adoxioLpcnumber;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioRecommendedclosureperiod = adoxioRecommendedclosureperiod;
             AdoxioIsact = adoxioIsact;
@@ -97,6 +99,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._adoxioLicenceidValue = _adoxioLicenceidValue;
             AdoxioStaylettersentdate = adoxioStaylettersentdate;
             AdoxioContraventionid = adoxioContraventionid;
+            AdoxioImportid = adoxioImportid;
             AdoxioMaxpenalty = adoxioMaxpenalty;
             AdoxioMinpenaltyBase = adoxioMinpenaltyBase;
             AdoxioPenaltylettercreateddate = adoxioPenaltylettercreateddate;
@@ -119,7 +122,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioPenaltyletterapproveddate = adoxioPenaltyletterapproveddate;
             this._adoxioEnforcementactionidValue = _adoxioEnforcementactionidValue;
             AdoxioName = adoxioName;
-            Importsequencenumber = importsequencenumber;
             this._adoxioContraventiontitleidValue = _adoxioContraventiontitleidValue;
             Overriddencreatedon = overriddencreatedon;
             this._owningbusinessunitValue = _owningbusinessunitValue;
@@ -135,26 +137,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioCourthearinglocation = adoxioCourthearinglocation;
             this._owninguserValue = _owninguserValue;
             AdoxioNoeasubmitteddate = adoxioNoeasubmitteddate;
-            this._createdbyValue = _createdbyValue;
+            AdoxioInvoicetrigger = adoxioInvoicetrigger;
             AdoxioIscontraventionconfirmed = adoxioIscontraventionconfirmed;
             AdoxioIswaiversigned = adoxioIswaiversigned;
             AdoxioSuspensionfulfillmentdate = adoxioSuspensionfulfillmentdate;
             AdoxioStaylettercompletedate = adoxioStaylettercompletedate;
             AdoxioReference = adoxioReference;
+            AdoxioIsmonetarypenalty = adoxioIsmonetarypenalty;
             Modifiedon = modifiedon;
             AdoxioRecommendedmonetarypenalty = adoxioRecommendedmonetarypenalty;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             AdoxioMinpenalty = adoxioMinpenalty;
             AdoxioIsreconsiderationapplicationpaid = adoxioIsreconsiderationapplicationpaid;
-            AdoxioLpcnumber = adoxioLpcnumber;
-            AdoxioInspectorsummary = adoxioInspectorsummary;
+            AdoxioNearsummarycategory = adoxioNearsummarycategory;
             AdoxioNumberofoffence = adoxioNumberofoffence;
             AdoxioNoeasentdate = adoxioNoeasentdate;
             AdoxioIswqrwordtemplate = adoxioIswqrwordtemplate;
             AdoxioReconsiderationdelegatefinding = adoxioReconsiderationdelegatefinding;
             this._owneridValue = _owneridValue;
             AdoxioRecommendedactionreasoning = adoxioRecommendedactionreasoning;
+            AdoxioInspectorsummary = adoxioInspectorsummary;
             AdoxioWaiversigneddate = adoxioWaiversigneddate;
+            this._createdbyValue = _createdbyValue;
             AdoxioPolicynamereference = adoxioPolicynamereference;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
@@ -189,6 +193,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioContraventionAnnotations = adoxioContraventionAnnotations;
             AdoxioEnforcementActionId = adoxioEnforcementActionId;
             AdoxioInvestigationUnitId = adoxioInvestigationUnitId;
+            AdoxioContraventionInvoices = adoxioContraventionInvoices;
+            AdoxioInvoice = adoxioInvoice;
             CustomInit();
         }
 
@@ -259,11 +265,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ismonetarypenalty")]
-        public bool? AdoxioIsmonetarypenalty { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_itemnumber")]
         public int? AdoxioItemnumber { get; set; }
 
@@ -326,6 +327,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_petitionreceiveddate")]
         public System.DateTimeOffset? AdoxioPetitionreceiveddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -419,6 +425,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_invoice_value")]
+        public string _adoxioInvoiceValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_istandcwordtemplate")]
         public string AdoxioIstandcwordtemplate { get; set; }
 
@@ -441,6 +452,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_waiverresponseduedate")]
         public System.DateTimeOffset? AdoxioWaiverresponseduedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_lpcnumber")]
+        public string AdoxioLpcnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -526,6 +542,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_contraventionid")]
         public string AdoxioContraventionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_importid")]
+        public string AdoxioImportid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -639,11 +660,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_adoxio_contraventiontitleid_value")]
         public string _adoxioContraventiontitleidValue { get; set; }
 
@@ -719,8 +735,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_invoicetrigger")]
+        public int? AdoxioInvoicetrigger { get; set; }
 
         /// <summary>
         /// </summary>
@@ -749,6 +765,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ismonetarypenalty")]
+        public bool? AdoxioIsmonetarypenalty { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
@@ -774,13 +795,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lpcnumber")]
-        public string AdoxioLpcnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspectorsummary")]
-        public string AdoxioInspectorsummary { get; set; }
+        [JsonProperty(PropertyName = "adoxio_nearsummarycategory")]
+        public int? AdoxioNearsummarycategory { get; set; }
 
         /// <summary>
         /// </summary>
@@ -814,8 +830,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_inspectorsummary")]
+        public string AdoxioInspectorsummary { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_waiversigneddate")]
         public System.DateTimeOffset? AdoxioWaiversigneddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -986,6 +1012,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_InvestigationUnitId")]
         public MicrosoftDynamicsCRMadoxioInvestigation AdoxioInvestigationUnitId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contravention_invoices")]
+        public IList<MicrosoftDynamicsCRMinvoice> AdoxioContraventionInvoices { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_Invoice")]
+        public MicrosoftDynamicsCRMinvoice AdoxioInvoice { get; set; }
 
     }
 }

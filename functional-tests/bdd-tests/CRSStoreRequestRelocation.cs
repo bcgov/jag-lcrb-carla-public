@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: CRSStoreRequestRelocation
+Feature: CrsStoreRequestRelocation
     As a logged in business user
     I want to submit a CRS Application for different business types
     And request a store relocation for the approved application
@@ -28,7 +17,9 @@ Scenario: Cannabis Store Relocation (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -45,7 +36,9 @@ Scenario: Cannabis Store Relocation (Society)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -62,7 +55,9 @@ Scenario: Cannabis Store Relocation (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -79,7 +74,9 @@ Scenario: Cannabis Store Relocation (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Cannabis
     And I click on the link for Dashboard
     And I confirm the relocation request is displayed on the dashboard
@@ -89,9 +86,9 @@ Scenario: Cannabis Store Relocation (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSStoreRequestRelocation.feature")]
+    [FeatureFile("./CrsStoreRequestRelocation.feature")]
     [Collection("Cannabis")]
-    public sealed class CRSStoreRequestRelocation : TestBase
+    public sealed class CrsStoreRequestRelocation : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

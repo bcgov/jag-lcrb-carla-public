@@ -11,7 +11,9 @@ Scenario: Picnic Area Endorsement Application (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted
@@ -26,7 +28,9 @@ Scenario: Picnic Area Endorsement Application (Brewery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted
@@ -41,7 +45,9 @@ Scenario: Picnic Area Endorsement Application (Distillery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted
@@ -56,7 +62,9 @@ Scenario: Picnic Area Endorsement Application (Co-packer)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted

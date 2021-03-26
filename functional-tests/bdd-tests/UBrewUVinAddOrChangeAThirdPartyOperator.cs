@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: UBrewUVinAddOrChangeAThirdPartyOperator
+Feature: UbrewUvinAddOrChangeAThirdPartyOperator
     As a logged in business user
     I want to submit a UBrew / UVin Licence third party operator applicaation for different business types
 
@@ -26,12 +15,12 @@ Scenario: UBrew / UVin Application Third Party Operator (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -47,12 +36,12 @@ Scenario: UBrew / UVin Application Third Party Operator (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -68,12 +57,12 @@ Scenario: UBrew / UVin Application Third Party Operator (Public Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -89,12 +78,12 @@ Scenario: UBrew / UVin Application Third Party Operator (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -104,9 +93,9 @@ Scenario: UBrew / UVin Application Third Party Operator (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinAddOrChangeAThirdPartyOperator.feature")]
+    [FeatureFile("./UbrewUvinAddOrChangeAThirdPartyOperator.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinAddOrChangeAThirdPartyOperator : TestBase
+    public sealed class UbrewUvinAddOrChangeAThirdPartyOperator : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

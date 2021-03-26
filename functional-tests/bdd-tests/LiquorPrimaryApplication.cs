@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: LiquorPrimaryApplication
@@ -174,25 +163,20 @@ namespace bdd_tests
         public void GenerateApplications(string amount, string lgin, string policeJurisdiction)
         {
             // convert amount to a number
-            int numberApplications = int.Parse(amount);
+            var numberApplications = int.Parse(amount);
 
-            for (int i = 0; i < numberApplications; i++)
+            for (var i = 0; i < numberApplications; i++)
             {
                 ClickDashboardTab();
                 ClickStartApplication("a Liquor Primary Licence");
                 if (i == 0) // only fill out account profile on the first pass.
-                {
                     ReviewAccountProfile(" private corporation");
-                }
                 else
-                {
                     ContinueToApplicationButton();
-                }
                 CompleteLiquorPrimaryApplicationFull("private corporation", lgin, policeJurisdiction);
 
                 ClickOnLGSubmitButton();
             }
         }
-
     }
 }

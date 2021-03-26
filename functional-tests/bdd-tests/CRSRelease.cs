@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: CRSRelease
+Feature: CrsRelease
     As a logged in business user
     I want to confirm that the CRS functionality is ready for release
 
@@ -28,22 +17,31 @@ Scenario: CRS Release (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
+    And I click on the link for Request Store Name or Branding Change
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Cannabis
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Download Licence
+    And I confirm the terms and conditions for a CRS licence
     And I show the store as open on the map
+    And I click on the link for Review Federal Reports
     And I review the federal reports
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
     And I renew the licence with positive responses for Cannabis
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Cannabis
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Request a Structural Change
+    And I click on the Continue to Application button
     And I request a structural change
+    And I click on the link for Licences & Authorizations
     And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
@@ -59,22 +57,30 @@ Scenario: CRS Release (Sole Proprietorship)
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
+    And I click on the link for Request Store Name or Branding Change
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for Cannabis
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Download Licence
     And I show the store as open on the map
+    And I click on the link for Review Federal Reports
     And I review the federal reports
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
     And I renew the licence with positive responses for Cannabis
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a store relocation for Cannabis
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Request a Structural Change
+    And I click on the Continue to Application button
     And I request a structural change
+    And I click on the link for Licences & Authorizations
     And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
@@ -82,9 +88,9 @@ Scenario: CRS Release (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSRelease.feature")]
+    [FeatureFile("./CrsRelease.feature")]
     [Collection("Liquor")]
-    public sealed class CRSRelease : TestBase
+    public sealed class CrsRelease : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

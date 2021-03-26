@@ -1,23 +1,16 @@
-﻿using Microsoft.Dynamics365.UIAutomation.Api;
-using Microsoft.Dynamics365.UIAutomation.Browser;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace FunctionalTest
 {
     public class CannabisRetailLicenceTests : TestBase
     {
-
-        
-
         [Fact]
         public void ApproveCRL()
         {
-            string currentWindow = XrmTestBrowser.Driver.CurrentWindowHandle;
-            
+            var currentWindow = XrmTestBrowser.Driver.CurrentWindowHandle;
+
 
             XrmTestBrowser.ThinkTime(500);
             // 3. Go to Applications using the Sitemap
@@ -43,30 +36,30 @@ namespace FunctionalTest
             XrmTestBrowser.Driver.SwitchTo().Frame("InlineDialog_Iframe");
 
             // Set the "Assign To" field to "1" - User or Team
-            SelectElement assignToSelect = new SelectElement(XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"rdoMe_id_i\"]")));
+            var assignToSelect =
+                new SelectElement(XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"rdoMe_id_i\"]")));
 
             var option = assignToSelect.SelectedOption;
-            IWebElement temp = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"rdoMe_id\"]"));
-            if (temp.Text == "Me")
-            {
-                temp.Click();
-            }
+            var temp = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"rdoMe_id\"]"));
+            if (temp.Text == "Me") temp.Click();
 
             XrmTestBrowser.ThinkTime(500);
-            IWebElement userOrTeamDiv = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"systemuserview_id_lookupValue\"]"));
+            var userOrTeamDiv =
+                XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"systemuserview_id_lookupValue\"]"));
             userOrTeamDiv.Click();
 
             // Change the text field.
-            IWebElement userOrTeamText = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"systemuserview_id_ledit\"]"));
+            var userOrTeamText = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"systemuserview_id_ledit\"]"));
             userOrTeamText.SendKeys(configuration["APPLICATION_ASSIGNEE"]);
 
             // click the search button.
-            IWebElement searchButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"systemuserview_id_lookupSearch\"]"));
+            var searchButton =
+                XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"systemuserview_id_lookupSearch\"]"));
 
             searchButton.Click();
 
             // find the first item and click on it.
-            IWebElement firstItem = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"item0\"]"));
+            var firstItem = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"item0\"]"));
             firstItem.Click();
 
             XrmTestBrowser.ThinkTime(1000);
@@ -77,15 +70,16 @@ namespace FunctionalTest
                 XrmTestBrowser.Driver.FindElement(By.XPath("//button[@id=\"ok_id\"]")).Click();
             }
             catch (StaleElementReferenceException)
-            { // ignore the stale element, we have moved on. 
+            {
+                // ignore the stale element, we have moved on. 
             }
-            
+
             //XrmTestBrowser.ThinkTime(2000);
 
             // switch back to the main frame.
 
             XrmTestBrowser.Driver.SwitchTo().ParentFrame();
-            
+
             XrmTestBrowser.ThinkTime(500);
 
             // now we need to go through the chevrons.
@@ -97,29 +91,26 @@ namespace FunctionalTest
 
             XrmTestBrowser.Driver.SwitchTo().ParentFrame();
 
-            SetOptionSet("header_process_adoxio_appchecklistpaymentreceived", "Yes");            
-            SetOptionSet("header_process_adoxio_checklistverifybusinessprofile", "Yes");            
-            SetOptionSet("header_process_adoxio_checklistverifyapplication", "Yes");            
-            SetOptionSet("header_process_adoxio_checklistverifypostalcode", "Yes");            
-            SetOptionSet("header_process_adoxio_checklistsitemapreceived", "Yes");             
-            SetOptionSet("header_process_adoxio_checklistfloorplanreceived", "Yes");            
+            SetOptionSet("header_process_adoxio_appchecklistpaymentreceived", "Yes");
+            SetOptionSet("header_process_adoxio_checklistverifybusinessprofile", "Yes");
+            SetOptionSet("header_process_adoxio_checklistverifyapplication", "Yes");
+            SetOptionSet("header_process_adoxio_checklistverifypostalcode", "Yes");
+            SetOptionSet("header_process_adoxio_checklistsitemapreceived", "Yes");
+            SetOptionSet("header_process_adoxio_checklistfloorplanreceived", "Yes");
             SetOptionSet("header_process_adoxio_checklistphotosreceived", "Yes");
-            SetOptionSet("header_process_adoxio_checklistassociateformreceived", "Yes");            
+            SetOptionSet("header_process_adoxio_checklistassociateformreceived", "Yes");
             SetOptionSet("header_process_adoxio_checklistvalidinterestreceived", "Yes");
             SetOptionSet("header_process_adoxio_checklistlebuilt", "Yes");
             SetOptionSet("header_process_adoxio_checklistspdconsentreceived", "Yes");
             SetOptionSet("header_process_adoxio_checklistfinintegrityreceived", "Yes");
 
             var nextButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"stageNavigateActionContainer\"]"));
-            if (nextButton.Displayed && nextButton.Enabled)
-            {
-                nextButton.Click();
-            }
+            if (nextButton.Displayed && nextButton.Enabled) nextButton.Click();
 
             // SLA Review
             JavaScriptClick("stage_1");
-            
-            SetOptionSet("header_process_adoxio_checklistsenttolgin", "Yes");            
+
+            SetOptionSet("header_process_adoxio_checklistsenttolgin", "Yes");
             SetOptionSet("header_process_adoxio_checklistmarketcapacity", "Yes");
             SetOptionSet("header_process_adoxio_checklistsentforfisla", "Yes");
             SetOptionSet("header_process_adoxio_checklistsenttospd", "Yes");
@@ -134,27 +125,21 @@ namespace FunctionalTest
             // save the entity.
 
             nextButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"stageNavigateActionContainer\"]"));
-            if (nextButton.Displayed && nextButton.Enabled)
-            {
-                nextButton.Click();
-            }
+            if (nextButton.Displayed && nextButton.Enabled) nextButton.Click();
 
             // External Approvals
             JavaScriptClick("stage_2");
             SetOptionSet("header_process_adoxio_checklistsecurityclearancestatus", "Passed");
-            SetOptionSet("header_process_adoxio_investigationstatus", "Investigation Concluded");            
+            SetOptionSet("header_process_adoxio_investigationstatus", "Investigation Concluded");
             SetOptionSet("header_process_adoxio_checklistfinancialcheckpassed", "Yes");
             SetOptionSet("header_process_adoxio_checklistlginapproval", "Yes");
 
             nextButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"stageNavigateActionContainer\"]"));
-            if (nextButton.Displayed && nextButton.Enabled)
-            {
-                nextButton.Click();
-            }
+            if (nextButton.Displayed && nextButton.Enabled) nextButton.Click();
 
             // Approval In Principal
             JavaScriptClick("stage_3");
-            
+
             SetOptionSet("header_process_adoxio_checklisttermsconditionsadded", "Yes");
             SetOptionSet("header_process_adoxio_checklistfloorplanlined", "AIP");
             SetOptionSet("header_process_adoxio_checklistzoningaip", "Yes");
@@ -164,10 +149,7 @@ namespace FunctionalTest
             SetOptionSet("header_process_adoxio_checklistdecisionlettersentaip", "Yes");
 
             nextButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"stageNavigateActionContainer\"]"));
-            if (nextButton.Displayed && nextButton.Enabled)
-            {
-                nextButton.Click();
-            }
+            if (nextButton.Displayed && nextButton.Enabled) nextButton.Click();
 
             // Inspection
             JavaScriptClick("stage_4");
@@ -177,25 +159,21 @@ namespace FunctionalTest
             SetOptionSet("header_process_adoxio_appchecklistinspectionresults", "Pass");
 
             nextButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"stageNavigateActionContainer\"]"));
-            if (nextButton.Displayed && nextButton.Enabled)
-            {
-                nextButton.Click();
-            }
+            if (nextButton.Displayed && nextButton.Enabled) nextButton.Click();
 
             // Licence Approval
             JavaScriptClick("stage_5");
 
-            
+
             SetOptionSet("header_process_adoxio_checklistinspectionresultsassessed", "Meets Requirements");
             SetOptionSet("header_process_adoxio_checklistfloorplanapproved", "Meets Requirements");
-            SetOptionSet("header_process_adoxio_appchecklistvalidinterestreceivedfinal", "Owned");            
+            SetOptionSet("header_process_adoxio_appchecklistvalidinterestreceivedfinal", "Owned");
             SetOptionSet("header_process_adoxio_checklistfinalreviewcomplete", "Yes");
             SetOptionSet("header_process_adoxio_appchecklistfinaldecision", "Approved");
             SetOptionSet("header_process_adoxio_checklistfinaldecisionlettersent", "Yes");
 
-            IWebElement saveButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"footer_statuscontrol\"]/div[2]/a"));
+            var saveButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"footer_statuscontrol\"]/div[2]/a"));
             saveButton.Click();
-
 
 
             XrmTestBrowser.Driver.SwitchTo().Window(currentWindow); // switch back to main frame

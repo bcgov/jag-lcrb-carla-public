@@ -1,0 +1,57 @@
+<mat-dialog-content>
+    <h3>Application Checklist</h3>
+
+    <p>Here is a list of items and information you need to start an pplication:</p>
+
+    <strong>Event Information:</strong>
+    <ul>
+        <li>Location, date, time & guest count</li>
+    </ul>
+
+    <strong>Applying on behalf of a Business:</strong>
+    <ul>
+        <li>A business number issued by Canada Revenue Agency is required</li>
+    </ul>
+
+    <strong>Municipal Resolution:</strong>
+    <ul>
+        <li>Events of municipal significance must have written approval from local
+            government/first nation
+        </li>
+    </ul>
+
+    <strong>Drinks:</strong>
+    <ul>
+        <li>What types of drinks will you serve & how many?</li>
+        <li> If you are charging for drinks, what are the drink prices?</li>
+    </ul>
+
+    <strong>Responsible Beverage Service (RBS) Certification:</strong>
+    <ul>
+        <li>You and anyone who may be serving liquor at your event must complete a training
+            program before your event starts. You can apply now and complete training later.</li>
+        <li>If you have already completed training, enter your certificate number when applying</li>
+        <li>The Special Event Server (SES) course is required for all events under 500 guests</li>
+        <li>The Serving it Right (SIR) course is required for events over 500 guests</li>
+        <li>For more information about certifications,click here</li>
+    </ul>
+
+    <strong>Security Plan & Event Site Map:</strong>
+    <ul>
+        <li>Required for all events over 500 people</li>
+        <li>Include security staffing, contractors and other measures to ensure safety and prevent disturbances</li>
+    </ul>
+
+    <strong>Valid Credit Card for Fee Payment:</strong>
+    <ul>
+        <li>Visa, MasterCard, American Express, Visa Debit</li>
+    </ul>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div class="d-flex justify-content-end w-100">
+        <button mat-raised-button color="secondary" class="mr-2" (click)="close(false)" id="closeBtn">CLOSE</button>
+        <button mat-raised-button color="primary" (click)="close(true)" *ngIf="showCreateButton" id="startAppBtn">START
+            APPLICATION</button>
+    </div>
+</mat-dialog-actions>

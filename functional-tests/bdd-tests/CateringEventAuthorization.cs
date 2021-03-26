@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
  Feature: CateringEventAuthorization
@@ -31,7 +20,9 @@ using Xunit;
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
     And the account is deleted
@@ -46,7 +37,9 @@ using Xunit;
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
     And the account is deleted
@@ -61,7 +54,9 @@ using Xunit;
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee  
+    And I click on the link for Licences & Authorizations
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
     And the account is deleted
@@ -76,7 +71,9 @@ using Xunit;
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
     And the account is deleted
@@ -95,7 +92,9 @@ using Xunit;
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an event authorization with more than 500 people
     And the event history is updated correctly for an application with more than 500 people
     And the account is deleted
@@ -114,7 +113,9 @@ using Xunit;
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an event authorization for an outdoor location
     And the event history is updated correctly for an application for an outdoor location
     And the account is deleted
@@ -133,7 +134,9 @@ using Xunit;
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an event authorization for an indoor and outdoor location
     And the event history is updated correctly for an application for an indoor and outdoor location
     And the account is deleted
@@ -152,7 +155,9 @@ using Xunit;
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an event authorization for after 2am
     And the event history is updated correctly for an application for after 2am
     And the account is deleted
@@ -171,7 +176,9 @@ using Xunit;
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an event authorization for a community event after 2am
     And the event history is updated correctly for an application for a community event after 2am
     And the account is deleted
@@ -190,7 +197,9 @@ using Xunit;
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an event authorization for a draft
     And the event history is updated correctly for an application for a draft
     And I click on the link for Draft

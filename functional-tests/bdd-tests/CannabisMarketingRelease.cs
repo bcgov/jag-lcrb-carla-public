@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: CannabisMarketingRelease
@@ -26,11 +15,11 @@ Scenario: Cannabis Marketing Release (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Marketing Licence
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Download Licence
-    And the licence is successfully downloaded
+    And I confirm the terms and conditions for a Cannabis marketing licence
     And the account is deleted
     Then I see the login page
 */
