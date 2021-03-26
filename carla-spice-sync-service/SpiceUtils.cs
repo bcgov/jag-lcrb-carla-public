@@ -540,76 +540,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         BusinessType = businessType.ToString()
                     };
 
-                    if (businessType == BusinessType.SoleProprietorship && application.AdoxioApplicant?._primarycontactidValue != null)
-                    {
-                        MicrosoftDynamicsCRMcontact owner = await _dynamicsClient.GetContactById(application.AdoxioApplicant._primarycontactidValue);
-                        var contact = new Interfaces.Spice.Models.Contact()
-                        {
-                            SpdJobId = owner.AdoxioSpdjobid.ToString(),
-                            ContactId = owner.Contactid,
-                            FirstName = owner.Firstname,
-                            LastName = owner.Lastname,
-                            MiddleName = owner.Middlename,
-                            Email = owner.Emailaddress1,
-                            PhoneNumber = owner.Telephone1 ?? owner.Mobilephone,
-                            SelfDisclosure = (owner.AdoxioSelfdisclosure == null) ? null : ((GeneralYesNo)owner.AdoxioSelfdisclosure).ToString(),
-                            Gender = (owner.AdoxioGendercode == null) ? null : ((AdoxioGenderCode)owner.AdoxioGendercode).ToString(),
-                            Birthplace = owner.AdoxioBirthplace,
-                            BirthDate = owner.Birthdate,
-                            BcIdCardNumber = owner.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? owner.AdoxioPrimaryidnumber : null,
-                            DriversLicenceNumber = owner.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? owner.AdoxioPrimaryidnumber : null,
-                            DriverLicenceJurisdiction = owner.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence && owner.AdoxioIdentificationjurisdiction != null ? ((IdentificationJurisdiction)owner.AdoxioIdentificationjurisdiction).ToString() : null,
-                            Address = new Address()
-                            {
-                                AddressStreet1 = owner.Address1Line1,
-                                AddressStreet2 = owner.Address1Line2,
-                                AddressStreet3 = owner.Address1Line3,
-                                City = owner.Address1City,
-                                StateProvince = owner.Address1Stateorprovince,
-                                Postal = (Validation.ValidatePostalCode(owner.Address1Postalcode)) ? owner.Address1Postalcode : null,
-                                Country = owner.Address1Country
-                            }
-                        };
-                        LegalEntity entity = new LegalEntity()
-                        {
-                            EntityId = owner.Contactid,
-                            IsIndividual = true,
-                            Positions = new List<string> { "owner" },
-                            Contact = contact,
-                            PreviousAddresses = new List<Address>(),
-                            Aliases = new List<Alias>()
-                        };
-
-                        /* Add previous addresses */
-                        var previousAddresses = _dynamicsClient.Previousaddresses.Get(filter: "_adoxio_contactid_value eq " + owner.Contactid).Value;
-                        foreach (var address in previousAddresses)
-                        {
-                            var newAddress = new Address()
-                            {
-                                AddressStreet1 = address.AdoxioStreetaddress,
-                                City = address.AdoxioCity,
-                                StateProvince = address.AdoxioProvstate,
-                                Postal = (Validation.ValidatePostalCode(address.AdoxioPostalcode)) ? address.AdoxioPostalcode : null,
-                                Country = address.AdoxioCountry,
-                                ToDate = address.AdoxioTodate,
-                                FromDate = address.AdoxioFromdate
-                            };
-                            entity.PreviousAddresses.Add(newAddress);
-                        }
-
-                        /* Add aliases */
-                        var aliases = _dynamicsClient.Aliases.Get(filter: "_adoxio_contactid_value eq " + owner.Contactid).Value;
-                        foreach (var alias in aliases)
-                        {
-                            entity.Aliases.Add(new Alias()
-                            {
-                                GivenName = alias.AdoxioFirstname,
-                                Surname = alias.AdoxioLastname,
-                                SecondName = alias.AdoxioMiddlename
-                            });
-                        }
-                        screeningRequest.Associates.Add(entity);
-                    }
                 }
 
                 /* Add establishment */
@@ -666,61 +596,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
         }
 
-        private List<LegalEntity> CreateAssociatesForAccount(string accountId, List<string> accounts)
-        {
-            try
-            {
-                List<LegalEntity> newAssociates = new List<LegalEntity>();
-                if (accounts.Contains(accountId))
-                {
-                    return newAssociates;
-                }
-                else
-                {
-                    accounts.Add(accountId);
-                }
-
-                if (string.IsNullOrEmpty(accountId))
-                {
-                    Log.Logger.Error("CreateAssociatesForAccount received a null accountId");
-                    return newAssociates;
-                }
-                string entityFilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
-                entityFilter += " and adoxio_isdonotsendtospd ne true";
-                string[] expand = { "adoxio_Contact", "adoxio_Account" };
-
-                var legalEntities = _dynamicsClient.Legalentities.Get(filter: entityFilter, expand: expand).Value;
-                if (legalEntities != null)
-                {
-                    foreach (var legalEntity in legalEntities)
-                    {
-                        try
-                        {
-                            LegalEntity associate = CreateAssociate(legalEntity);
-                            if ((bool)associate.IsIndividual)
-                            {
-                                newAssociates.Add(associate);
-                            }
-                            else
-                            {
-                                var moreAssociates = CreateAssociatesForAccount(associate.Account.AccountId, accounts);
-                                newAssociates.AddRange(moreAssociates);
-                            }
-                        }
-                        catch (ArgumentNullException e)
-                        {
-                            Log.Logger.Error(e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
-                        }
-                    }
-                }
-                return newAssociates;
-            }
-            catch (System.NullReferenceException e)
-            {
-                Log.Logger.Error(e, $"NullReferenceException in CreateAssociatesForAccount for accountId: {accountId}");
-                throw e;
-            }
-        }
 
         private List<LegalEntity> CreateAssociatesForAccountV2(string accountId, List<string> accounts)
         {
