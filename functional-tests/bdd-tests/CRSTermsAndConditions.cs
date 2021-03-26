@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: CRSTermsAndConditions
+Feature: CrsTermsAndConditions
     As a logged in business user
     I want to confirm the Terms and Conditions for a CRS licence 
 
@@ -26,7 +15,9 @@ Scenario: CRS Terms and Conditions (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
     And I confirm the terms and conditions for a CRS licence
     And the account is deleted
     Then I see the login page
@@ -34,9 +25,9 @@ Scenario: CRS Terms and Conditions (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CRSTermsAndConditions.feature")]
+    [FeatureFile("./CrsTermsAndConditions.feature")]
     [Collection("Liquor")]
-    public sealed class CRSTermsAndConditions : TestBase
+    public sealed class CrsTermsAndConditions : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

@@ -1,4 +1,4 @@
-﻿Feature: COVIDTemporaryExtension
+﻿Feature: CovidTemporaryExtension
     As a business user who is not logged in
     I want to submit a COVID temporary extension application for different licence types
 

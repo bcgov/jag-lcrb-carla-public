@@ -1,0 +1,278 @@
+<div class="form-wrapper" style="position: relative;">
+  <div [ngBusy]="[busy]"></div>
+  <form [formGroup]="form" class="col-lg-7 col-sm-12">
+    <div class="padded-section">
+      <h1>Take-Home Sampling Event</h1>
+    </div>
+
+    <h3 class="blue-header">TERMS AND CONDITIONS</h3>
+    <section class="content-bottom">
+      <ul>
+        <li>No special provincial licence or permit is required to run a take-home sampling event</li>
+        <li>During take-home sampling events the liquor must not be opened by either those handing out samples or those
+          receiving a sample. There is no prohibition against an adult carrying unopened liquor in a public place. There
+          is also no requirement that unopened liquor be taken directly home</li>
+        <li>The samples should not be cooled and must only be handed out one per adult</li>
+        <li>Samples must not be given to individuals apparently under the influence of alcohol or drugs</li>
+        <li>When checking ID is required to verify a person's age, two pieces of ID must be requested, the first being a
+          government issued ID with a name, birth date and picture and the second piece must contain the person's name,
+          signature and/or picture</li>
+        <li>The maximum liquid volume of take-home samples are one standard drink sized beer or cooler, single serving
+          wine bottle (typically 200 ml) or a small spirits bottle (typically 50 ml)</li>
+        <li>At least one staff person at each take-home sampling site must be Serving It Right certified. That person
+          must oversee the take-home sampling</li>
+        <li>A sticker or similar device over the cap, printed with a phrase such as “Please enjoy responsibly at home”,
+          must be included on each sample</li>
+        <li>Each adult receiving a take-home sample must receive a hand stamp to prevent them from attempting to return
+          for a additional samples</li>
+        <li>Those receiving samples must be told that the sample is for home consumption</li>
+      </ul>
+    </section>
+
+    <div class="mt-4 padded-section">
+      <p>Please provide the details requested below regarding your event.</p>
+    </div>
+
+    <div class="padded-section">
+      <h2>Status: <b>{{status}}</b></h2>
+      <h3 *ngIf="licenceEvent != null && licenceEvent.eventNumber != null">Number: <b>{{licenceEvent.eventNumber}}</b>
+      </h3>
+    </div>
+
+    <h3 class="blue-header">EVENT CONTACT INFORMATION</h3>
+    <section class="content-bottom clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Name" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('contactName')" errorMessage="Please enter the contact name">
+          <input class="form-control" type="text" formControlName="contactName">
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" class="question-mark"
+          matTooltip="The name of the contact person for the event."></fa-icon>
+        <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('contactPhone')" errorMessage="Please enter the contact phone number">
+          <input class="form-control" type="text" formControlName="contactPhone" mask="(000) 000-0000">
+        </app-field>
+      </div>
+    </section>
+
+    <h3 class="blue-header">EVENT DETAILS</h3>
+    <section class="content-bottom clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Type" [required]="true" [valid]="isValidOrNotTouched('eventType')"
+          errorMessage="Please enter the type of event" [isFullWidth]="true">
+          <select class="form-control" formControlName="eventType">
+            <option *ngFor="let item of eventType" [ngValue]="item.value">{{item.label}}</option>
+          </select>
+
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top: 30px;"
+          matTooltip="Select the type of event.">
+        </fa-icon>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Event Name" [required]="true"
+          [valid]="isValidOrNotTouched('eventName')" errorMessage="Please enter the event name" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="eventName">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-8 col-xs-12" label="Event Description" [required]="false"
+          [valid]="isValidOrNotTouched('eventTypeDescription')" errorMessage="Please enter a description of the event"
+          [isFullWidth]="true">
+          <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" class="question-mark" matTooltip="Briefly describe the event."></fa-icon>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Client or Host Name" [required]="true"
+          [valid]="isValidOrNotTouched('clientHostname')" errorMessage="Please enter the client or host name"
+          [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="clientHostname">
+        </app-field>
+      </div>
+    </section>
+
+    <h3 class="blue-header">VENUE LOCATION</h3>
+    <section class="content-bottom clearfix">
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Venue Name/Description" [required]="true"
+          [valid]="isValidOrNotTouched('venueDescription')"
+          errorMessage="Please enter the name and a description of the venue" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="venueDescription"></textarea>
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top: 30px;"
+          matTooltip="Provide the name of and briefly describe the venue.">
+        </fa-icon>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Location" [required]="true"
+          [valid]="isValidOrNotTouched('specificLocation')" errorMessage="Please enter the location"
+          [isFullWidth]="true">
+          <select class="form-control" formControlName="specificLocation">
+            <option *ngFor="let item of specificLocation" [ngValue]="item.value">{{item.label}}</option>
+          </select>
+        </app-field>
+        <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top: 30px;"
+          matTooltip="Select whether the event is being held indoors, outdoors, or both.">
+        </fa-icon>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Additional Information"
+          [valid]="isValidOrNotTouched('additionalLocationInformation')" [isFullWidth]="true">
+          <textarea class="form-control" formControlName="additionalLocationInformation"></textarea>
+        </app-field>
+      </div>
+
+      <h3>Physical Address of Venue</h3>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Address 1" [required]="true"
+          [valid]="isValidOrNotTouched('street1')" errorMessage="Please enter the address line 1" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="street1">
+        </app-field>
+        <app-field class="col-md-4 col-xs-12" label="Address 2" [valid]="isValidOrNotTouched('street2')"
+          [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="street2">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [valid]="isValidOrNotTouched('city')"
+          errorMessage="Please enter the city" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="city">
+        </app-field>
+        <app-field class="col-md-4 col-xs-12" label="Postal Code" [required]="true"
+          [valid]="isValidOrNotTouched('postalCode')" errorMessage="Please enter the postal code" [isFullWidth]="true">
+          <input class="form-control" type="text" formControlName="postalCode">
+        </app-field>
+      </div>
+    </section>
+
+    <h3 class="blue-header">TIME AND DATE OF EVENT</h3>
+    <section class="content-bottom clearfix">
+      <p>Note that if you submit a multi-day event, the locations and event details must be the same, otherwise you need
+        to submit separate events.</p>
+      <div class="row">
+        <app-field class="col-md-2 col-xs-6" label="Start Date" [required]="true"
+          [valid]="isValidOrNotTouched('startDate')" [isFullWidth]="true">
+          <input type="text" formControlName='startDate' placeholder="yyyy-mm-dd" class="form-control"
+            [min]="startDateMinimum" [matDatepicker]="startPicker" (focus)="startPicker.open()"
+            (click)="startPicker.open()" (dateChange)="startDateChanged()">
+          <mat-datepicker #startPicker></mat-datepicker>
+        </app-field>
+        <app-field class="col-md-2 col-xs-6" label="End Date" [required]="true" [valid]="isValidOrNotTouched('endDate')"
+          [isFullWidth]="true">
+          <input type="text" formControlName='endDate' placeholder="yyyy-mm-dd" class="form-control"
+            [min]="endDateMinimum" [matDatepicker]="endPicker" (focus)="endPicker.open()" (click)="endPicker.open()"
+            (dateChange)="endDateChanged()">
+          <mat-datepicker #endPicker></mat-datepicker>
+        </app-field>
+      </div>
+      <div *ngFor="let fg of timeForms.controls" class="row mx-0 mt-3 event-hours">
+        <form [formGroup]="fg" class="col-md-12">
+          <div class="row mt-3">
+            <div class="col-md-2 offset-md-2">
+              <label>Event Start</label>
+            </div>
+            <div class="col-md-2">
+              <label>Event End</label>
+            </div>
+            <div class="col-md-2">
+              <label>Liquor Service Start</label>
+            </div>
+            <div class="col-md-2">
+              <label>Liquor Service End</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2 time-picker-title">
+              <h4>{{fg.get('dateTitle').value === null ? 'Default Times' : fg.get('dateTitle').value}}</h4>
+            </div>
+            <div class="col-md-2">
+              <ngb-timepicker [meridian]="true" formControlName="startTime"></ngb-timepicker>
+            </div>
+            <div class="col-md-2">
+              <ngb-timepicker [meridian]="true" formControlName="endTime"></ngb-timepicker>
+            </div>
+            <div class="col-md-2">
+              <ngb-timepicker [meridian]="true" formControlName="liquorStartTime"></ngb-timepicker>
+            </div>
+            <div class="col-md-2">
+              <ngb-timepicker [meridian]="true" formControlName="liquorEndTime"></ngb-timepicker>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <app-field class="col-xs-12">
+          <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()"
+            [disabled]="form.get('startDate').invalid || form.get('endDate').invalid || isReadOnly">
+            The event times are different on specific dates.</mat-checkbox>
+        </app-field>
+      </div>
+    </section>
+
+    <h3 class="blue-header">NOTIFICATIONS</h3>
+    <section class="content-bottom">
+      <p>A copy of the event notification will be sent to this email address.</p>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Contact Email" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('contactEmail')">
+          <input class="form-control" type="text" formControlName="contactEmail">
+        </app-field>
+      </div>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Confirm email address" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('contactEmailConfirmation')">
+          <input class="form-control" type="text" formControlName="contactEmailConfirmation">
+        </app-field>
+      </div>
+    </section>
+
+    <h3 class="blue-header">AGREEMENT</h3>
+    <section class="content-bottom">
+      <div>
+        <mat-checkbox class="text-wrap" formControlName="isAgreement1">I understand that my event is subject to review
+          by LCRB and Terms and Conditions will prevail.</mat-checkbox>
+      </div>
+      <div class="mt-3">
+        <mat-checkbox class="text-wrap" formControlName="isAgreement2">I have reviewed all the information above for
+          accuracy and have read all the notes provided above.
+        </mat-checkbox>
+      </div>
+    </section>
+
+    <section class="p-3 attention-section">
+      <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Section
+        26 (a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of
+        liquor licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act.
+        Should you have any questions about the collection, use, or disclosure of personal information, please contact
+        the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at
+        1-866-209-2111.</p>
+    </section>
+
+    <section class="error mt-3" *ngIf="showErrorSection">
+      <p *ngFor="let message of validationMessages">
+        <span class="app-cancel">
+          <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+          {{message}}
+        </span>
+      </p>
+    </section>
+
+    <div class="p-4 button-row" *ngIf="isReadOnly">
+      <button class="btn btn-link btn-cancel" routerLink="/licences">RETURN TO DASHBOARD</button>
+    </div>
+    <div class="p-4 button-row" *ngIf="!isReadOnly">
+      <button class="btn btn-secondary" style="margin-right:10px;" (click)="save(false);" *ngIf="!isReadOnly">
+        <span>
+          <fa-icon [icon]="faSave"></fa-icon>SAVE FOR LATER
+        </span>
+      </button>
+      <button class="btn btn-primary" (click)="save(true)" *ngIf="!isReadOnly">SUBMIT</button>
+      <button class="btn btn-link btn-cancel" (click)="cancel();">
+        <span>
+          <fa-icon [icon]="faTrash"></fa-icon>CANCEL EVENT
+        </span>
+      </button>
+    </div>
+  </form>
+</div>

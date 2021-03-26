@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: UBrewUVinRelease
+Feature: UbrewUvinRelease
     As a logged in business user
     I want to submit a UBrew / UVin Licence application 
     And complete change requests 
@@ -27,19 +16,32 @@ Scenario: UBrew / UVin Application Release Test (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
-    And the dashboard status is updated as Application Under Review
+    And I click on the link for Dashboard
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Download Licence
+    And I confirm the terms and conditions for a UBrew / UVin licence
+    And I click on the link for Add Licensee Representative
+    And I request a licensee representative
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
+    And I click on the Continue to Application button
+    And I request a change in terms and conditions application
+    And I click on the Submit button
+    And I enter the payment information
+    And I click on the link for Licences & Authorizations
+    And I request a store relocation for UBrew / UVin
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Establishment Name Change Application
+    And I click on the Continue to Application button
     And I request a valid store name or branding change for UBrew
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a transfer of ownership for UBrew / UVin
     And the account is deleted
     Then I see the login page
@@ -47,9 +49,9 @@ Scenario: UBrew / UVin Application Release Test (Private Corporation)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinRelease.feature")]
+    [FeatureFile("./UbrewUvinRelease.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinRelease : TestBase
+    public sealed class UbrewUvinRelease : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

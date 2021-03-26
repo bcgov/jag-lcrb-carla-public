@@ -239,6 +239,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       tempDateFrom: [''],
       tempDateTo: [''],
       pin: ['', [this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
+      holdsOtherManufactureLicence: [false]
     });
 
   
@@ -1043,12 +1044,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Associate form is required.');
     }
 
-    if (this.application.applicationType.showFinancialIntegrityFormUpload &&
-      ((this.uploadedFinancialIntegrityDocuments || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('Financial Integrity form is required.');
-    }
-
     // if we're showing supporting documents and it's not a marketing soleprop application add validation
     if (this.application.applicationType.showSupportingDocuments && !marketing_soleprop &&
       ((this.uploadedSupportingDocuments || 0) < 1)) {
@@ -1102,6 +1097,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
 
       if (!this.isLiquor() &&
+        this.application.applicationType.showFinancialIntegrityFormUpload &&
         ((this.uploadedFinancialIntegrityDocuments || 0) < 1)) {
         valid = false;
         this.validationMessages.push('At least one Financial Intergrity document is required.');
@@ -1182,7 +1178,22 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showLEDocumentSection(): boolean {
-    let show = this?.application?.applicationType?.hasLESection && !this.isOpenedByLGForApproval;
+    const show = this?.application?.applicationType?.hasLESection && !this.isOpenedByLGForApproval;
+    return show;
+  }
+
+  showHoldsOtherManufactureLicence(): boolean {
+    const show = ['Special Event Area Endorsement', 'Lounge Area Endorsement']
+    .indexOf(this?.application?.applicationType?.name) !== -1;
+    return show;
+  }
+
+  showSubmitToLG(): boolean {
+    let show = (this?.application?.applicationType?.isShowLGINApproval || this?.application?.applicationType?.isShowLGZoningConfirmation)
+    && !this.lGHasApproved()
+    && !this.lGHasRejected()
+    && this.form.get('holdsOtherManufactureLicence').value !== true
+    && this?.application?.applicationStatus === 'Intake';
     return show;
   }
 

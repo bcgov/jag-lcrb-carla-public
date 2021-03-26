@@ -11,7 +11,7 @@ Scenario: Food Primary Application (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -25,7 +25,7 @@ Scenario: Food Primary Application (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -39,7 +39,7 @@ Scenario: Food Primary Application (Public Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -53,7 +53,7 @@ Scenario: Food Primary Application (Society)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -67,7 +67,7 @@ Scenario: Food Primary Application (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -81,7 +81,7 @@ Scenario: Food Primary Application (Co-op)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -95,7 +95,7 @@ Scenario: Food Primary Application (Military Mess)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page

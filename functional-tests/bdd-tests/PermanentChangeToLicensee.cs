@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: PermanentChangeToLicensee
@@ -26,9 +15,9 @@ Scenario: Catering Licensee Changes (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a private corporation
     And I click on the Submit button
@@ -44,9 +33,9 @@ Scenario: Catering Licensee Changes (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a partnership
     And I click on the Submit button
@@ -62,9 +51,9 @@ Scenario: Catering Licensee Changes (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a sole proprietorship
     And I click on the Submit button
@@ -80,9 +69,9 @@ Scenario: Catering Licensee Changes (Society)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a society
     And I click on the Submit button
@@ -98,16 +87,16 @@ Scenario: Catering Licensee Changes (Public Corporation)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a public corporation
     And I click on the Submit button
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges
+@catering @licenseechanges @release4
 Scenario: Catering Licensee Changes (Co-op)
     Given I am logged in to the dashboard as a co-op
     And I click on the Start Application button for Catering
@@ -116,16 +105,16 @@ Scenario: Catering Licensee Changes (Co-op)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a co-op
     And I click on the Submit button
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges
+@catering @licenseechanges @release4
 Scenario: Catering Licensee Changes (Military Mess)
     Given I am logged in to the dashboard as a military mess
     And I click on the Start Application button for Catering
@@ -134,9 +123,9 @@ Scenario: Catering Licensee Changes (Military Mess)
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the button for Submit a Change
     And I complete the Permanent Change to a Licensee application for a military mess
     And I click on the Submit button

@@ -20,9 +20,11 @@ Scenario: Liquor Primary Temp Use Area Endorsement (Private Corporation)
     And I click on the link for Complete Application
     And I review the local government response for a liquor primary licence
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Use Area Endorsement Application
+    And I click on the Continue to Application button
     And I submit a temporary use area endorsement application
     And I click on the Submit button
     And I log in as local government for Parksville

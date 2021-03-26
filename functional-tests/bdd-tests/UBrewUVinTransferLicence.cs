@@ -1,19 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
-Feature: UBrewUVinTransferLicence
+Feature: UbrewUvinTransferLicence
     As a logged in business user
     I want to submit a UBrew / UVin Licence transfer for different business types
 
@@ -26,12 +15,12 @@ Scenario: UBrew / UVin Application Transfer Licence (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a transfer of ownership for UBrew / UVin
     And the account is deleted
     Then I see the login page
@@ -45,12 +34,12 @@ Scenario: UBrew / UVin Application Transfer Licence (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a transfer of ownership for UBrew / UVin
     And the account is deleted
     Then I see the login page
@@ -64,12 +53,12 @@ Scenario: UBrew / UVin Application Transfer Licence (Public Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a transfer of ownership for UBrew / UVin
     And the account is deleted
     Then I see the login page
@@ -83,12 +72,12 @@ Scenario: UBrew / UVin Application Transfer Licence (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I request a transfer of ownership for UBrew / UVin
     And the account is deleted
     Then I see the login page
@@ -96,9 +85,9 @@ Scenario: UBrew / UVin Application Transfer Licence (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./UBrewUVinTransferLicence.feature")]
+    [FeatureFile("./UbrewUvinTransferLicence.feature")]
     [Collection("Liquor")]
-    public sealed class UBrewUVinTransferLicence : TestBase
+    public sealed class UbrewUvinTransferLicence : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

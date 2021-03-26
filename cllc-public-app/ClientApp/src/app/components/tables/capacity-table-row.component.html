@@ -12,7 +12,7 @@
     <mat-checkbox formControlName="isPatio" [disabled]="!enabled"></mat-checkbox>
   </td>
   <td>
-    <input type="text" formControlName="capacity" placeholder="Enter Occupant Load" mask="0*" maxlength="4" [readonly]="!enabled"/>
+    <input type="text" formControlName="capacity" placeholder="Enter Occupant Load" mask="0*" maxlength="5" [readonly]="!enabled"/>
   </td>
   <td>
     <button (click)="removeRow()" class="btn-clear" *ngIf="enabled">

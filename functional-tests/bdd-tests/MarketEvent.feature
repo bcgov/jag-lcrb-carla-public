@@ -15,14 +15,16 @@
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event for one date only
     And I click on the secondary Submit button
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a one day event
@@ -42,14 +44,16 @@
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event weekly
     And I click on the Submit button
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a weekly event
@@ -70,11 +74,13 @@
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event bi-weekly
     And I click on the Submit button
     And I click on the event history for markets
@@ -96,14 +102,16 @@
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event monthly
     And I click on the Submit button
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Approved
     And the market event data is correct for a monthly event
@@ -123,14 +131,16 @@
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event for one date only
     And I click on the button for Save for Later
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a one day event saved for later
@@ -155,14 +165,16 @@
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event weekly
     And I click on the button for Save for Later
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a weekly event saved for later
@@ -187,14 +199,16 @@
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event bi-weekly
     And I click on the button for Save for Later
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a bi-weekly event saved for later
@@ -219,14 +233,16 @@
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an on-site store endorsement
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
+    And I click on the link for Licences & Authorizations
     And I request a market event monthly
     And I click on the button for Save for Later
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the event history for markets
     And I click on the link for Draft
     And the market event data is correct for a monthly event saved for later

@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: LiquorPrimaryRelocation
@@ -35,10 +24,11 @@ Scenario: Liquor Primary Relocation (Private Corporation)
     And I click on the link for Complete Application
     And I review the local government response for a liquor primary licence
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request Relocation
+    And I click on the Continue to Application button
     And I complete a liquor primary relocation request
     And I click on the Submit button
     And I log in as local government for Parksville

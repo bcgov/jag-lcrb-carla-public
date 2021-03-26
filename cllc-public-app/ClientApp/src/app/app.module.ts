@@ -116,6 +116,7 @@ import { ServiceCardAuthGuard } from "@services/service-card-auth-guard.service"
 import { metaReducers, reducers } from "./app-state/reducers/reducers";
 import { StoreModule } from "@ngrx/store";
 import { DashboardComponent } from "@components/dashboard/dashboard.component";
+import { DashboardComponent as SepDashboardComponent } from "@components/sep/dashboard/dashboard.component";
 import { ApplicationComponent } from "@components/applications/application/application.component";
 import { TermsOfUseComponent } from "@components/terms-of-use/terms-of-use.component";
 import { WorkerApplicationComponent } from
@@ -266,7 +267,13 @@ import { ResolvedApplicationsComponent } from './components/lg-approvals/resolve
 import { RelatedLicencePickerComponent } from './shared/components/related-licence-picker/related-licence-picker.component';
 import { ApplicationTiedHouseExemptionComponent } from './components/applications/application-tied-house-exemption/application-tied-house-exemption.component';
 import { LiquorFreeEventComponent } from "@components/liquor-free-event/liquor-free-event.component";
+import { LoginComponent } from './components/sep/login/login.component';
 import { WorkerLandingPageComponent } from "@components/worker-qualification/worker-landing-page/worker-landing-page.component";
+import { TakeHomeEventComponent } from "@components/take-home-event/take-home-event.component";
+import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-auth-guard.service";
+import { StarterChecklistComponent } from './components/sep/starter-checklist/starter-checklist.component';
+import { ResourcesComponent } from './components/sep/resources/resources.component';
+import { SepApplicationComponent } from './components/sep/sep-application/sep-application.component';
 
 @NgModule({
   declarations: [
@@ -286,6 +293,7 @@ import { WorkerLandingPageComponent } from "@components/worker-qualification/wor
     ConnectionToProducersComponent,
     CorporateDetailsComponent,
     DashboardComponent,
+    SepDashboardComponent,
     DelayedFileUploaderComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
@@ -301,6 +309,7 @@ import { WorkerLandingPageComponent } from "@components/worker-qualification/wor
     KeyPersonnelComponent,
     LicenceFeePaymentConfirmationComponent,
     LicenceRepresentativeFormComponent,
+    LoginComponent,
     CateringEventFormComponent,
     EventSecurityFormComponent,
     TemporaryOffsiteComponent,
@@ -408,6 +417,10 @@ import { WorkerLandingPageComponent } from "@components/worker-qualification/wor
     ApplicationTiedHouseExemptionComponent,
     LiquorFreeEventComponent,
     WorkerLandingPageComponent,
+    TakeHomeEventComponent,
+    StarterChecklistComponent,
+    ResourcesComponent,
+    SepApplicationComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -543,6 +556,7 @@ import { WorkerLandingPageComponent } from "@components/worker-qualification/wor
     WorkerDataService,
     FeatureFlagService,
     LEConnectionsDataService,
+    BCeidOrServiceCardAuthGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: (featureFlagService: FeatureFlagService) => function () {
@@ -570,7 +584,8 @@ import { WorkerLandingPageComponent } from "@components/worker-qualification/wor
     ShareholdersAndPartnersComponent,
     OrganizationLeadershipComponent,
     VersionInfoDialogComponent,
-    ModalComponent
+    ModalComponent,
+    StarterChecklistComponent
   ],
   bootstrap: [AppComponent]
 })

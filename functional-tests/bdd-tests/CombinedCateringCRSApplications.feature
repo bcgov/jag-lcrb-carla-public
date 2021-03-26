@@ -1,4 +1,4 @@
-﻿Feature: CombinedCateringCRSApplications
+﻿Feature: CombinedCateringCrsApplications
     As a logged in business user
     I want to submit a CRS and Catering application for the same account
 
@@ -12,7 +12,7 @@ Scenario: Combined Catering / CRS Applications (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And I click on the Start Application button for Catering
     And I click on the button for Continue to Organization Review
     And I complete the Catering application for a combined application

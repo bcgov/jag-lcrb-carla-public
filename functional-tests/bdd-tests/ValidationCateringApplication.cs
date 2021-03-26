@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
  Feature: ValidationCateringApplication
@@ -41,9 +30,10 @@ Scenario: Validation for Catering Branding Change
     And I click on the button for Pay for Application
     And I enter the payment information
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the branding change link for Catering
+    And I click on the link for Licences & Authorizations
+    And I click on the link for Establishment Name Change Application
     And I click on the Continue to Application button
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Branding Change application
@@ -63,6 +53,7 @@ Scenario: Validation for Catering Branding Change
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request an event authorization being validated
     And the event history is updated correctly for an application being validated
     And I click on the link for Draft
@@ -84,7 +75,7 @@ Scenario: Validation for Catering Branding Change
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Add Licensee Representative
     And I do not complete the application correctly
     And the expected validation errors are thrown for a licensee representative
@@ -104,7 +95,7 @@ Scenario: Validation for Catering Store Relocation
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request Relocation
     And I click on the Continue to Application button
     And I do not complete the application correctly
@@ -125,7 +116,7 @@ Scenario: Validation for Catering Third Party Operator
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Add or Change a Third Party Operator
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering third party application
@@ -145,7 +136,7 @@ Scenario: Validation for Catering Third Party Operator
     And I enter the payment information
     And the application is approved
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Transfer Licence
     And I do not complete the application correctly
     And the expected validation errors are thrown for a Catering transfer of ownership

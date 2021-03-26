@@ -354,8 +354,8 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
       startDate: 'Please enter the start date',
       endDate: 'Please enter the end date',
       eventTypeDescription: 'Please enter a description of the event',
-      agreement1: 'Please agree to all terms',
-      agreement2: 'Please agree to all terms',
+      isAgreement1: 'Please agree to all terms',
+      isAgreement2: 'Please agree to all terms',
     };
   }
 

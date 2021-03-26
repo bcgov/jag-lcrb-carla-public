@@ -1,20 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
-using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace bdd_tests
 {
@@ -23,16 +9,16 @@ namespace bdd_tests
         [And(@"I complete the UBrew / UVin application for (.*)")]
         public void UBrewUVinApplication(string businessType)
         {
-            string establishmentName = "Point Ellis Greenhouse";
-            string streetAddress = "645 Tyee Road";
-            string city = "Victoria";
-            string postalCode = "V9A6X5";
-            string PID = "999999999";
-            string storeEmail = "auto@test.com";
-            string storePhone = "2222222222";
-            string contactTitle = "Brewmaster";
-            string contactPhone = "3333333333";
-            string contactEmail = "contact@email.com";
+            var establishmentName = "Point Ellis Greenhouse";
+            var streetAddress = "645 Tyee Road";
+            var city = "Victoria";
+            var postalCode = "V9A6X5";
+            var PID = "999999999";
+            var storeEmail = "auto@test.com";
+            var storePhone = "2222222222";
+            var contactTitle = "Brewmaster";
+            var contactPhone = "3333333333";
+            var contactEmail = "contact@email.com";
 
             if (businessType != " sole proprietorship")
             {
@@ -48,107 +34,108 @@ namespace bdd_tests
 
             // upload personal history summary form
             if (businessType == " sole proprietorship")
-            {
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
-            }
             else
-            {
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[12]");
-            }
 
             // upload shareholders < 10% interest
             if (businessType != " sole proprietorship")
-            {
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
-            }
 
             // enter the establishment name
-            NgWebElement uiEstablishmentName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
+            var uiEstablishmentName =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentName']"));
             uiEstablishmentName.SendKeys(establishmentName);
 
             // enter the street address
-            NgWebElement uiEstablishmentAddressStreet = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
+            var uiEstablishmentAddressStreet =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressStreet']"));
             uiEstablishmentAddressStreet.SendKeys(streetAddress);
 
             // enter the city
-            NgWebElement uiEstablishmentAddressCity = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
+            var uiEstablishmentAddressCity =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressCity']"));
             uiEstablishmentAddressCity.SendKeys(city);
 
             // enter the postal code
-            NgWebElement uiEstablishmentAddressPostalCode = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
+            var uiEstablishmentAddressPostalCode =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentAddressPostalCode']"));
             uiEstablishmentAddressPostalCode.SendKeys(postalCode);
 
             // enter the PID
-            NgWebElement uiEstablishmentParcelId = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
+            var uiEstablishmentParcelId =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentParcelId']"));
             uiEstablishmentParcelId.SendKeys(PID);
 
             // enter the store email
-            NgWebElement uiEstablishmentEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentEmail']"));
+            var uiEstablishmentEmail =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentEmail']"));
             uiEstablishmentEmail.SendKeys(storeEmail);
 
             // enter the store phone
-            NgWebElement uiEstablishmentPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentPhone']"));
+            var uiEstablishmentPhone =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='establishmentPhone']"));
             uiEstablishmentPhone.SendKeys(storePhone);
 
             if (businessType == " sole proprietorship")
-            {
                 // upload the signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[5]");
-            }
             else
-            {
                 // upload the signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[17]");
-            }
 
             // select owner business checkbox
-            NgWebElement uiIsOwnerBusiness = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
+            var uiIsOwnerBusiness =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isOwnerBusiness']"));
             uiIsOwnerBusiness.Click();
 
             // select has valid interest checkbox
-            NgWebElement uiHasValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='hasValidInterest']"));
+            var uiHasValidInterest =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='hasValidInterest']"));
             uiHasValidInterest.Click();
 
             // select will have valid interest checkbox
-            NgWebElement uiWillhaveValidInterest = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willHaveValidInterest']"));
+            var uiWillhaveValidInterest =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='willHaveValidInterest']"));
             uiWillhaveValidInterest.Click();
 
             if (businessType == " sole proprietorship")
-            {
                 // upload the valid interest document
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
-            }
             else
-            {
                 // upload the valid interest document
                 FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
-            }
 
             // enter the contact title
-            NgWebElement uiContactPersonRole = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
+            var uiContactPersonRole =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonRole']"));
             uiContactPersonRole.SendKeys(contactTitle);
 
             // enter the contact phone number
-            NgWebElement uiContactPersonPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
+            var uiContactPersonPhone =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
             uiContactPersonPhone.SendKeys(contactPhone);
 
             // enter the contact email address
-            NgWebElement uiContactPersonEmail = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonEmail']"));
+            var uiContactPersonEmail =
+                ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonEmail']"));
             uiContactPersonEmail.SendKeys(contactEmail);
 
             // click on authorize signature checkbox
-            NgWebElement uiAuthorizeSignature = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
+            var uiAuthorizeSignature =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='authorizedToSubmit']"));
             uiAuthorizeSignature.Click();
 
             // click on signature agreement checkbox
-            NgWebElement uiSignatureAgreement = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
+            var uiSignatureAgreement =
+                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='signatureAgreement']"));
             uiSignatureAgreement.Click();
 
             // retrieve the current URL to get the application ID (needed downstream)
-            string URL = ngDriver.Url;
+            var URL = ngDriver.Url;
 
             // retrieve the application ID
-            string[] parsedURL = URL.Split('/');
+            var parsedURL = URL.Split('/');
 
             applicationID = parsedURL[5];
         }

@@ -23,11 +23,6 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
                 throw new Exception("The licence can not be null");
             }
 
-            if (licence.AdoxioEstablishment == null)
-            {
-                throw new Exception("The licence must have an Establishment");
-            }
-
             if (licence.AdoxioLicencee == null)
             {
                 throw new Exception("The licence must have an AdoxioLicencee");
@@ -86,7 +81,11 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             //the name of the applicant (licensee)- last name, first name middle initial or company name
             userCredentials.legalName = licence.AdoxioLicencee.Name;
             //establishment (physical location of store)
-            userCredentials.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+
+            if (licence.AdoxioEstablishment != null)
+            {
+                userCredentials.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+            }
             
             return userCredentials;
         }

@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: CateringAddOrChangeAThirdPartyOperator
@@ -27,7 +16,9 @@ Feature: CateringAddOrChangeAThirdPartyOperator
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -43,7 +34,9 @@ Feature: CateringAddOrChangeAThirdPartyOperator
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -59,7 +52,9 @@ Feature: CateringAddOrChangeAThirdPartyOperator
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application
@@ -75,7 +70,9 @@ Feature: CateringAddOrChangeAThirdPartyOperator
     And I click on the Submit button
     And I enter the payment information
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
+    And I click on the link for Licences & Authorizations
     And I request a third party operator
     And I click on the link for Cancel Application
     And I cancel the third party operator application

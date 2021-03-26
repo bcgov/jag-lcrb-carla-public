@@ -3,7 +3,6 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
-using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,7 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             if (TestUtility.InUnitTestMode())
             {
-                List<Invoice> result = new List<Invoice>();
+                List<ViewModels.Invoice> result = new List<ViewModels.Invoice>();
                 IEnumerable<MicrosoftDynamicsCRMinvoice> invoices = null;
 
                 invoices = _dynamicsClient.Invoices.Get().Value;
@@ -72,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             if (TestUtility.InUnitTestMode())
             {
-                Invoice result = null;
+                ViewModels.Invoice result = null;
                 // query the Dynamics system to get the invoice record.
                 if (string.IsNullOrEmpty(id))
                 {
@@ -110,7 +109,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> CreateInvoice([FromBody] Invoice item)
+        public async Task<IActionResult> CreateInvoice([FromBody] ViewModels.Invoice item)
         {
             if (TestUtility.InUnitTestMode())
             {
@@ -163,7 +162,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateInvoice([FromBody] Invoice item, string id)
+        public async Task<IActionResult> UpdateInvoice([FromBody] ViewModels.Invoice item, string id)
         {
             if (TestUtility.InUnitTestMode())
             {

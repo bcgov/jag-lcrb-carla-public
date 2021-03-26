@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: CateringApplication
@@ -26,7 +15,7 @@ Scenario: Catering Application (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -40,7 +29,7 @@ Scenario: Catering Application (Society)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -54,7 +43,7 @@ Scenario: Catering Application (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -68,7 +57,7 @@ Scenario: Catering Application (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -82,7 +71,7 @@ Scenario: Catering Application (Public Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -96,7 +85,7 @@ Scenario: Catering Application (Co-op)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -110,7 +99,7 @@ Scenario: Catering Application (Military Mess)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Catering application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page

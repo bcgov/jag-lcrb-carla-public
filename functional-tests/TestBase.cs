@@ -1,22 +1,17 @@
-﻿using Microsoft.Dynamics365.UIAutomation.Api;
+﻿using System;
+using System.Linq;
+using Microsoft.Dynamics365.UIAutomation.Api;
 using Microsoft.Dynamics365.UIAutomation.Browser;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
-using System;
-using System.Diagnostics;
-using System.Linq;
 
 namespace FunctionalTest
 {
-
-
     public abstract class TestBase
     {
         protected IConfigurationRoot configuration;
 
         protected Browser XrmTestBrowser;
-
-        public bool HasData { get; set; }
 
         protected TestBase()
         {
@@ -41,15 +36,15 @@ namespace FunctionalTest
                 .AddUserSecrets("a004e634-29c7-48b6-becc-87fe16be7538")
                 .Build();
 
-            string xrmUriStr = configuration["D365_URL"] ?? "http://acme.crm.dynamics.com";
-            string usernameStr = configuration["D365_USER"] ?? "admin@acme.onmicrosoft.com";
-            string passwordStr = configuration["D365_PWD"] ?? "Password@12345";
+            var xrmUriStr = configuration["D365_URL"] ?? "http://acme.crm.dynamics.com";
+            var usernameStr = configuration["D365_USER"] ?? "admin@acme.onmicrosoft.com";
+            var passwordStr = configuration["D365_PWD"] ?? "Password@12345";
 
-            Uri xrmUri = new Uri(xrmUriStr);
+            var xrmUri = new Uri(xrmUriStr);
             var username = usernameStr.ToSecureString();
             var password = passwordStr.ToSecureString();
 
-            XrmTestBrowser = new Browser(new BrowserOptions()
+            XrmTestBrowser = new Browser(new BrowserOptions
             {
                 BrowserType = BrowserType.Chrome,
                 Headless = false,
@@ -60,7 +55,6 @@ namespace FunctionalTest
                 Width = 1920
             });
 
-            
 
             XrmTestBrowser.LoginPage.Login(xrmUri, username, password);
 
@@ -80,8 +74,9 @@ namespace FunctionalTest
                     d.SwitchTo().Frame(0);
                     d.WaitForPageToLoad();
                 });
-
         }
+
+        public bool HasData { get; set; }
 
         public void CustomLoginAction(LoginRedirectEventArgs args)
         {
@@ -112,10 +107,10 @@ namespace FunctionalTest
 
         protected void SetOptionSet(string id, string value)
         {
-            OptionSet optionset = new OptionSet() { Name = id, Value = value };
+            var optionset = new OptionSet {Name = id, Value = value};
 
             try
-            {                
+            {
                 XrmTestBrowser.Entity.SetValue(optionset);
             }
             catch (ElementClickInterceptedException)
@@ -124,33 +119,33 @@ namespace FunctionalTest
                 //JavaScriptClick($"{id}_i");
                 //XrmTestBrowser.ThinkTime(100);
 
-                
+
                 XrmTestBrowser.Driver.ExecuteScript($"var selectObj = document.getElementById('{id}_i');"
-                    + "for (var i=0; i<selectObj.options.length; i++){"
-                    + $"if (selectObj.options[i].text == '{value}')"
-                    + "{ selectObj.options[i].selected = true; }} selectObj.click(); "                    
-                    );
+                                                    + "for (var i=0; i<selectObj.options.length; i++){"
+                                                    + $"if (selectObj.options[i].text == '{value}')"
+                                                    + "{ selectObj.options[i].selected = true; }} selectObj.click(); "
+                );
                 try
                 {
                     XrmTestBrowser.Entity.SetValue(optionset);
                 }
                 catch (ElementClickInterceptedException)
-                { }               
+                {
+                }
             }
 
             XrmTestBrowser.ThinkTime(500);
-
         }
 
         // Avoid Selenium nags about control intercepts
-        protected void JavaScriptClick (string id)
-        {            
+        protected void JavaScriptClick(string id)
+        {
             XrmTestBrowser.Driver.ExecuteScript($"document.getElementById(\"{id}\").click();");
         }
 
 
         /// <summary>
-        /// Cleanup
+        ///     Cleanup
         /// </summary>
         public void Dispose()
         {
@@ -169,13 +164,9 @@ namespace FunctionalTest
         {
             var entityGrid = XrmTestBrowser.Grid.GetGridItems(20).Value;
             if (entityGrid?.FirstOrDefault() != null)
-            {
                 XrmTestBrowser.Entity.OpenEntity(entityGrid[0].EntityName, entityGrid[0].Id);
-            }
             else
-            {
                 return false;
-            }
             return true;
         }
     }

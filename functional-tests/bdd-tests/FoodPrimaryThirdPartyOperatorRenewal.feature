@@ -11,9 +11,10 @@ Scenario: Food Primary Third Party Operator/Licence Renewal (Private Corporation
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I request a third party operator
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence

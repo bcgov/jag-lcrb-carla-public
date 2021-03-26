@@ -1,16 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
-using Protractor;
-using System;
+﻿using Xunit;
 using Xunit.Gherkin.Quick;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.IO;
-using Xunit;
 
 /*
 Feature: ManufacturerPicnicAreaEndorsement
@@ -26,7 +15,9 @@ Scenario: Picnic Area Endorsement Application (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted
@@ -41,7 +32,9 @@ Scenario: Picnic Area Endorsement Application (Brewery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted
@@ -56,7 +49,9 @@ Scenario: Picnic Area Endorsement Application (Distillery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted
@@ -71,7 +66,9 @@ Scenario: Picnic Area Endorsement Application (Co-packer)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
+    And I click on the link for Licences & Authorizations
     And I click on the link for Picnic Area Endorsement Application
     And I request a picnic area endorsement
     And the account is deleted
