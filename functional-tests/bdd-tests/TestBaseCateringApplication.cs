@@ -77,7 +77,7 @@ namespace bdd_tests
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
 
-            if (bizType == "society" || bizType == "military mess")
+            if (bizType == "society" || bizType == "military mess" || bizType == "co-op")
             {
                 // upload notice of articles
                 FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
@@ -136,7 +136,7 @@ namespace bdd_tests
             // select 'Yes'
             // Do you or any of your shareholders currently hold, have held, or have previously applied for a British Columbia liquor licence?
             if (bizType == "private corporation" || bizType == "partnership" || bizType == "society" ||
-                bizType == "public corporation" || bizType == "sole proprietorship" || bizType == "military mess")
+                bizType == "public corporation" || bizType == "sole proprietorship" || bizType == "military mess" || bizType == "co-op")
             {
                 NgWebElement uiPreviousLicenceYes = null;
                 for (var i = 0; i < 50; i++)
@@ -169,7 +169,7 @@ namespace bdd_tests
             // select 'Yes'
             // Do you hold a Rural Agency Store Appointment?
             if (bizType == "private corporation" || bizType == "partnership" || bizType == "society" ||
-                bizType == "public corporation" || bizType == "sole proprietorship" || bizType == "military mess")
+                bizType == "public corporation" || bizType == "sole proprietorship" || bizType == "military mess" || bizType == "co-op")
             {
                 var uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-76-button"));
                 JavaScriptClick(uiRuralAgencyStore);
@@ -184,7 +184,7 @@ namespace bdd_tests
             // select 'Yes'
             // Do you, or any of your shareholders, have any connection, financial or otherwise, direct or indirect, with a distillery, brewery or winery?
             if (bizType == "private corporation" || bizType == "partnership" || bizType == "society" ||
-                bizType == "public corporation" || bizType == "sole proprietorship" || bizType == "military mess")
+                bizType == "public corporation" || bizType == "sole proprietorship" || bizType == "military mess" || bizType == "co-op")
             {
                 var uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-79-button"));
                 JavaScriptClick(uiOtherBusinessYes);
@@ -208,7 +208,7 @@ namespace bdd_tests
             var uiTransportDetails = ngDriver.FindElement(By.CssSelector("textarea#description3"));
             uiTransportDetails.SendKeys(transportDetails);
 
-            if (bizType == "partnership" || bizType == "society" || bizType == "military mess")
+            if (bizType == "partnership" || bizType == "society" || bizType == "military mess" || bizType == "co-op")
             {
                 // upload a store signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[8]");
