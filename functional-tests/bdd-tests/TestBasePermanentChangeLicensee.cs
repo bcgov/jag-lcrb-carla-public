@@ -585,23 +585,23 @@ namespace bdd_tests
                     */
 
                     // click on Change of Directors or Officers
-                    var uiChangeOfDirectorsOrOfficersMM =
+                    var uiChangeOfDirectorsOrOfficersMilitaryMess =
                         ngDriver.FindElement(By.CssSelector("#mat-checkbox-9.mat-checkbox"));
-                    uiChangeOfDirectorsOrOfficersMM.Click();
+                    uiChangeOfDirectorsOrOfficersMilitaryMess.Click();
 
                     // click on Name Change, Licensee -- Society
-                    var uiNameChangeLicenseeSocietyMM =
+                    var uiNameChangeLicenseeMilitaryMess =
                         ngDriver.FindElement(By.CssSelector("#mat-checkbox-10.mat-checkbox"));
-                    uiNameChangeLicenseeSocietyMM.Click();
+                    uiNameChangeLicenseeMilitaryMess.Click();
 
                     // click on Name Change, Person
-                    var uiNameChangePersonMM = ngDriver.FindElement(By.CssSelector("#mat-checkbox-11.mat-checkbox"));
-                    uiNameChangePersonMM.Click();
+                    var uiNameChangePersonMilitaryMess = ngDriver.FindElement(By.CssSelector("#mat-checkbox-11.mat-checkbox"));
+                    uiNameChangePersonMilitaryMess.Click();
 
                     // click on Addition of Receiver or Executor
-                    var uiAdditionOfReceiverOrExecutorMM =
+                    var uiAdditionOfReceiverOrExecutorMilitaryMess =
                         ngDriver.FindElement(By.CssSelector("#mat-checkbox-12.mat-checkbox"));
-                    uiAdditionOfReceiverOrExecutorMM.Click();
+                    uiAdditionOfReceiverOrExecutorMilitaryMess.Click();
 
                     /* 
                     *  CHANGE OF DIRECTORS OR OFFICERS
@@ -615,20 +615,20 @@ namespace bdd_tests
                     */
 
                     // enter person first name
-                    var uiFirstNameSocietyMM = ngDriver.FindElement(By.CssSelector("input#mat-input-2"));
-                    uiFirstNameSocietyMM.SendKeys(firstName);
+                    var uiFirstNameMilitaryMess = ngDriver.FindElement(By.CssSelector("input#mat-input-2"));
+                    uiFirstNameMilitaryMess.SendKeys(firstName);
 
                     // enter person last name
-                    var uiLastNameSocietyMM = ngDriver.FindElement(By.CssSelector("input#mat-input-3"));
-                    uiLastNameSocietyMM.SendKeys(lastName);
+                    var uiLastNameMilitaryMess = ngDriver.FindElement(By.CssSelector("input#mat-input-3"));
+                    uiLastNameMilitaryMess.SendKeys(lastName);
 
                     // enter person new first name
-                    var uiNewFirstNameSocietyMM = ngDriver.FindElement(By.CssSelector("input#mat-input-4"));
-                    uiNewFirstNameSocietyMM.SendKeys(newFirstName);
+                    var uiNewFirstNameMilitaryMess = ngDriver.FindElement(By.CssSelector("input#mat-input-4"));
+                    uiNewFirstNameMilitaryMess.SendKeys(newFirstName);
 
                     // enter person new last name
-                    var uiNewLastNameSocietyMM = ngDriver.FindElement(By.CssSelector("input#mat-input-5"));
-                    uiNewLastNameSocietyMM.SendKeys(newLastName);
+                    var uiNewLastNameMilitaryMess = ngDriver.FindElement(By.CssSelector("input#mat-input-5"));
+                    uiNewLastNameMilitaryMess.SendKeys(newLastName);
 
                     // upload copy of marriage certificate
                     FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[6]");
@@ -638,12 +638,12 @@ namespace bdd_tests
                     */
 
                     // enter company name
-                    var uiCompanyNamePrivateCorporationMM = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
-                    uiCompanyNamePrivateCorporationMM.SendKeys(companyName);
+                    var uiCompanyNameMilitaryMess = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
+                    uiCompanyNameMilitaryMess.SendKeys(companyName);
 
                     // enter new company name
-                    var uiNewCompanyNamePrivateCorporationMM = ngDriver.FindElement(By.CssSelector("input#mat-input-1"));
-                    uiNewCompanyNamePrivateCorporationMM.SendKeys(newCompanyName);
+                    var uiNewCompanyNameMilitaryMess = ngDriver.FindElement(By.CssSelector("input#mat-input-1"));
+                    uiNewCompanyNameMilitaryMess.SendKeys(newCompanyName);
 
                     // upload certificate of name change
                     FileUpload("certificate_of_name_change.pdf", "(//input[@type='file'])[8]");
