@@ -646,6 +646,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
                 return newAssociates;
             }
+            catch (HttpOperationException hoe)
+            {
+                Log.Logger.Error(hoe, $"HttpOperationException in CreateAssociatesForAccountV2 for accountId: {accountId}");
+                throw hoe;
+            }
             catch (System.NullReferenceException e)
             {
                 Log.Logger.Error(e, $"NullReferenceException in CreateAssociatesForAccountV2 for accountId: {accountId}");
