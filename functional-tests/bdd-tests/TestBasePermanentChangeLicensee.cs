@@ -586,21 +586,21 @@ namespace bdd_tests
 
                     // click on Change of Directors or Officers
                     var uiChangeOfDirectorsOrOfficersMilitaryMess =
-                        ngDriver.FindElement(By.CssSelector("#mat-checkbox-9.mat-checkbox"));
+                        ngDriver.FindElement(By.CssSelector("#mat-checkbox-3.mat-checkbox"));
                     uiChangeOfDirectorsOrOfficersMilitaryMess.Click();
 
                     // click on Name Change, Licensee -- Society
                     var uiNameChangeLicenseeMilitaryMess =
-                        ngDriver.FindElement(By.CssSelector("#mat-checkbox-10.mat-checkbox"));
+                        ngDriver.FindElement(By.CssSelector("#mat-checkbox-4.mat-checkbox"));
                     uiNameChangeLicenseeMilitaryMess.Click();
 
                     // click on Name Change, Person
-                    var uiNameChangePersonMilitaryMess = ngDriver.FindElement(By.CssSelector("#mat-checkbox-11.mat-checkbox"));
+                    var uiNameChangePersonMilitaryMess = ngDriver.FindElement(By.CssSelector("#mat-checkbox-5.mat-checkbox"));
                     uiNameChangePersonMilitaryMess.Click();
 
                     // click on Addition of Receiver or Executor
                     var uiAdditionOfReceiverOrExecutorMilitaryMess =
-                        ngDriver.FindElement(By.CssSelector("#mat-checkbox-12.mat-checkbox"));
+                        ngDriver.FindElement(By.CssSelector("#mat-checkbox-6.mat-checkbox"));
                     uiAdditionOfReceiverOrExecutorMilitaryMess.Click();
 
                     /* 
@@ -688,6 +688,12 @@ namespace bdd_tests
 
                     // upload Personal History Summary document
                     FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[23]");
+
+                    break;
+
+                case "co-op":
+
+                    // TODO
 
                     break;
             }
