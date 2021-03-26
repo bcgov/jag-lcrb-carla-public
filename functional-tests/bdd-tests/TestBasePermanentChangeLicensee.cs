@@ -577,6 +577,119 @@ namespace bdd_tests
                     FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[6]");
 
                     break;
+
+                case "military mess":
+
+                    /* 
+                    *  TYPES OF CHANGES REQUESTED
+                    */
+
+                    // click on Change of Directors or Officers
+                    var uiChangeOfDirectorsOrOfficersMM =
+                        ngDriver.FindElement(By.CssSelector("#mat-checkbox-9.mat-checkbox"));
+                    uiChangeOfDirectorsOrOfficersMM.Click();
+
+                    // click on Name Change, Licensee -- Society
+                    var uiNameChangeLicenseeSocietyMM =
+                        ngDriver.FindElement(By.CssSelector("#mat-checkbox-10.mat-checkbox"));
+                    uiNameChangeLicenseeSocietyMM.Click();
+
+                    // click on Name Change, Person
+                    var uiNameChangePersonMM = ngDriver.FindElement(By.CssSelector("#mat-checkbox-11.mat-checkbox"));
+                    uiNameChangePersonMM.Click();
+
+                    // click on Addition of Receiver or Executor
+                    var uiAdditionOfReceiverOrExecutorMM =
+                        ngDriver.FindElement(By.CssSelector("#mat-checkbox-12.mat-checkbox"));
+                    uiAdditionOfReceiverOrExecutorMM.Click();
+
+                    /* 
+                    *  CHANGE OF DIRECTORS OR OFFICERS
+                    */
+
+                    // upload notice of articles
+                    FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[2]");
+
+                    /* 
+                    *  PERSON'S NAME CHANGE
+                    */
+
+                    // enter person first name
+                    var uiFirstNameSocietyMM = ngDriver.FindElement(By.CssSelector("input#mat-input-2"));
+                    uiFirstNameSocietyMM.SendKeys(firstName);
+
+                    // enter person last name
+                    var uiLastNameSocietyMM = ngDriver.FindElement(By.CssSelector("input#mat-input-3"));
+                    uiLastNameSocietyMM.SendKeys(lastName);
+
+                    // enter person new first name
+                    var uiNewFirstNameSocietyMM = ngDriver.FindElement(By.CssSelector("input#mat-input-4"));
+                    uiNewFirstNameSocietyMM.SendKeys(newFirstName);
+
+                    // enter person new last name
+                    var uiNewLastNameSocietyMM = ngDriver.FindElement(By.CssSelector("input#mat-input-5"));
+                    uiNewLastNameSocietyMM.SendKeys(newLastName);
+
+                    // upload copy of marriage certificate
+                    FileUpload("marriage_certificate.pdf", "(//input[@type='file'])[6]");
+
+                    /* 
+                    *  CORPORATION NAME CHANGE
+                    */
+
+                    // enter company name
+                    var uiCompanyNamePrivateCorporationMM = ngDriver.FindElement(By.CssSelector("input#mat-input-0"));
+                    uiCompanyNamePrivateCorporationMM.SendKeys(companyName);
+
+                    // enter new company name
+                    var uiNewCompanyNamePrivateCorporationMM = ngDriver.FindElement(By.CssSelector("input#mat-input-1"));
+                    uiNewCompanyNamePrivateCorporationMM.SendKeys(newCompanyName);
+
+                    // upload certificate of name change
+                    FileUpload("certificate_of_name_change.pdf", "(//input[@type='file'])[8]");
+
+                    /* 
+                    *  ADDITION OF EXECUTOR OR RECEIVER
+                    */
+
+                    // enter executor first name
+                    var uiExecutorFirstNameMilitaryMess =
+                        ngDriver.FindElement(By.CssSelector("input#mat-input-6"));
+                    uiExecutorFirstNameMilitaryMess.SendKeys(executorFirstName);
+
+                    // enter executor last name
+                    var uiExecutorLastNameMilitaryMess = ngDriver.FindElement(By.CssSelector("input#mat-input-7"));
+                    uiExecutorLastNameMilitaryMess.SendKeys(executorLastName);
+
+                    // upload assignment of executor
+                    FileUpload("assignment_of_executor.pdf", "(//input[@type='file'])[11]");
+
+                    // upload death certificate
+                    FileUpload("death_certificate.pdf", "(//input[@type='file'])[14]");
+
+                    // enter receiver first name
+                    var uiReceiverFirstNameMilitaryMess =
+                        ngDriver.FindElement(By.CssSelector("input#mat-input-8"));
+                    uiReceiverFirstNameMilitaryMess.SendKeys(receiverFirstName);
+
+                    // enter receiver last name
+                    var uiReceiverLastNameMilitaryMess = ngDriver.FindElement(By.CssSelector("input#mat-input-9"));
+                    uiReceiverLastNameMilitaryMess.SendKeys(receiverLastName);
+
+                    // upload receiver appointment order
+                    FileUpload("receiver_appointment_order.pdf", "(//input[@type='file'])[17]");
+
+                    // upload court order
+                    FileUpload("court_order.pdf", "(//input[@type='file'])[20]");
+
+                    /* 
+                    *  PERSONAL HISTORY SUMMARY FORMS
+                    */
+
+                    // upload Personal History Summary document
+                    FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[23]");
+
+                    break;
             }
 
             // select the authorized to submit checkbox
