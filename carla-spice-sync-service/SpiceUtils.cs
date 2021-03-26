@@ -616,7 +616,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     Log.Logger.Error("CreateAssociatesForAccountV2 received a null accountId");
                     return newAssociates;
                 }
-                string entityFilter = $"_adoxio_parentaccount_value eq {accountId} and _adoxio_childprofilename_value ne {accountId}";
+                // Select ACTIVE le-connections that match the key personnel or deemed associate filter
+                string entityFilter = $"statecode eq 0 and _adoxio_parentaccount_value eq {accountId} and _adoxio_childprofilename_value ne {accountId}";
                 entityFilter += $" and adoxio_securityscreeningrequired eq true";
                 string[] expand = { "adoxio_ChildProfileName_contact", "adoxio_ChildProfileName_account", "adoxio_ParentAccount" };
 
