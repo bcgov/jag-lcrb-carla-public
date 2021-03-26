@@ -77,7 +77,7 @@ namespace bdd_tests
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[15]");
             }
 
-            if (bizType == "society")
+            if (bizType == "society" || bizType == "military mess")
             {
                 // upload notice of articles
                 FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[3]");
