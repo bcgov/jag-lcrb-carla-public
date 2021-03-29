@@ -22,6 +22,7 @@ import { AppState } from "@app/app-state/models/app-state";
 import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrash } from
   "@fortawesome/free-solid-svg-icons";
 import * as moment from 'moment';
+import { UserDataService } from "@services/user-data.service";
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -60,12 +61,12 @@ const ValidationFieldNameMap = {
   'businessProfile.mailingAddressProvince': "Mailing Address Province",
   'businessProfile.mailingAddressCountry': "Mailing Address Country",
 
-  'primarycontact.id': "Corporation Contact ID",
-  'primarycontact.firstname': "Corporation Contact First Name",
-  'primarycontact.lastname': "Corporation Contact LastName",
-  'primarycontact.jobTitle': "Corporation Contact Job Title",
-  'primarycontact.telephone1': "Corporation Contact Telephone",
-  'primarycontact.emailaddress1': "Corporation Contact Email",
+  'contact.id': "Corporation Contact ID",
+  'contact.firstname': "Corporation Contact First Name",
+  'contact.lastname': "Corporation Contact LastName",
+  'contact.jobTitle': "Corporation Contact Job Title",
+  'contact.telephone1': "Corporation Contact Telephone",
+  'contact.emailaddress1': "Corporation Contact Email",
 };
 
 @Component({
@@ -116,6 +117,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   constructor(private store: Store<AppState>,
     private accountDataService: AccountDataService,
     private contactDataService: ContactDataService,
+    private userDataService: UserDataService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -156,15 +158,17 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         mailingAddressCountry: ["Canada", Validators.required],
         websiteUrl: [""],
       }),
-      primarycontact: this.fb.group({
+      contact: this.fb.group({
         id: [],
-        firstname: ["", Validators.required],
-        lastname: ["", Validators.required],
+        firstname: [{ value: "", disabled: true }, Validators.required],
+        lastname: [{ value: "", disabled: true }, Validators.required],
         jobTitle: [""],
-        telephone1: ["", [Validators.required, /*Validators.minLength(10), Validators.maxLength(10)*/]],
+        telephone1: ["", [Validators.required]],
         emailaddress1: ["", [Validators.required, Validators.email]],
       }),
     });
+
+    // Watch for changes to the current user and account
     this.subscribeForData();
 
     this.form.get("businessProfile._mailingSameAsPhysicalAddress").valueChanges.pipe(
@@ -271,41 +275,55 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(filter(s => !!s))
-      .subscribe(account => {
-        this.account = account;
-        // Make a copy of the account object stored in Ngrx (which is read-only)
-        // See https://stackoverflow.com/questions/57591012/ngrx-cannot-assign-to-read-only-property-property-of-object-object
-        const businessProfile: Partial<Account> = { ...account };
-        businessProfile.physicalAddressProvince = businessProfile.physicalAddressProvince || "British Columbia";
-        businessProfile.physicalAddressCountry = "Canada";
-        businessProfile.mailingAddressProvince = businessProfile.mailingAddressProvince || "British Columbia";
-        businessProfile.mailingAddressCountry = "Canada";
+      .subscribe(account => this.loadAccount(account));
 
-        this.form.patchValue({
-          businessProfile: businessProfile,
-          primarycontact: account.primarycontact || {}
+    this.store.select(state => state.currentUserState.currentUser)
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(filter(user => !!user))
+      .subscribe(user => this.loadUser(user));
+  }
+
+  private loadAccount(account: Account) {
+    this.account = account;
+    // Make a copy of the account object stored in Ngrx (which is read-only)
+    // See https://stackoverflow.com/questions/57591012/ngrx-cannot-assign-to-read-only-property-property-of-object-object
+    const businessProfile: Partial<Account> = { ...account };
+    businessProfile.physicalAddressProvince = businessProfile.physicalAddressProvince || "British Columbia";
+    businessProfile.physicalAddressCountry = "Canada";
+    businessProfile.mailingAddressProvince = businessProfile.mailingAddressProvince || "British Columbia";
+    businessProfile.mailingAddressCountry = "Canada";
+
+    this.form.patchValue({ businessProfile: businessProfile });
+    this.saveFormData = this.form.value;
+
+    // normalize postal codes
+    this.form.get("businessProfile.mailingAddressPostalCode").setValue(
+      (this.form.get("businessProfile.mailingAddressPostalCode").value || "").replace(/\s+/g, "")
+    );
+    this.form.get("businessProfile.physicalAddressPostalCode").setValue(
+      (this.form.get("businessProfile.physicalAddressPostalCode").value || "").replace(/\s+/g, "")
+    );
+
+    if (this.account.isPrivateCorporation()) {
+      this.form.get("businessProfile.bcIncorporationNumber")
+        .setValidators([Validators.pattern("^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$")]);
+    } else if (this.account.businessType === "Society") {
+      this.form.get("businessProfile.bcIncorporationNumber")
+        .setValidators([Validators.pattern("^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$")]);
+    } else {
+      this.form.get("businessProfile.bcIncorporationNumber").clearValidators();
+    }
+  }
+
+  private loadUser(user: User) {
+    this.currentUser = user;
+    if (this.currentUser && this.currentUser.contactid) {
+      this.contactDataService.getContact(this.currentUser.contactid)
+        .subscribe(contact => {
+          this.form.patchValue({ contact: contact });
+          this.saveFormData = this.form.value;
         });
-
-        this.saveFormData = this.form.value;
-
-        // normalize postal codes
-        this.form.get("businessProfile.mailingAddressPostalCode").setValue(
-          (this.form.get("businessProfile.mailingAddressPostalCode").value || "").replace(/\s+/g, "")
-        );
-        this.form.get("businessProfile.physicalAddressPostalCode").setValue(
-          (this.form.get("businessProfile.physicalAddressPostalCode").value || "").replace(/\s+/g, "")
-        );
-
-        if (this.account.isPrivateCorporation()) {
-          this.form.get("businessProfile.bcIncorporationNumber")
-            .setValidators([Validators.pattern("^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$")]);
-        } else if (this.account.businessType === "Society") {
-          this.form.get("businessProfile.bcIncorporationNumber")
-            .setValidators([Validators.pattern("^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$")]);
-        } else {
-          this.form.get("businessProfile.bcIncorporationNumber").clearValidators();
-        }
-      });
+    }
   }
 
   canDeactivate(): Observable<boolean> {
@@ -325,7 +343,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     } as Account;
     const saves = [
       this.accountDataService.updateAccount(value),
-      this.contactDataService.updateContact(this.form.get("primarycontact").value)
+      this.contactDataService.updateContact(this.form.get("contact").value)
     ];
 
     if (this.connectionsToProducers) {
@@ -338,6 +356,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       .pipe(catchError(() => of(false)),
         map(() => {
           this.accountDataService.loadCurrentAccountToStore(this.account.id).subscribe(() => { });
+          // reload the user to fetch updated contact information
+          this.userDataService.loadUserToStore().then(() => { });
           return true;
         }));
   }
@@ -378,7 +398,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
   }
 
-
   prepareTiedHouseSaveRequest(_tiedHouseData) {
     const data = { ...this.account.tiedHouse, ..._tiedHouseData };
 
@@ -400,12 +419,11 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       }
     }
 
-    const primarycontactControls = ((this.form.get("primarycontact")) as FormGroup).controls;
-    for (const c in primarycontactControls) {
-      if (typeof (primarycontactControls[c].markAsTouched) === "function") {
-        primarycontactControls[c].markAsTouched();
+    const contactControls = ((this.form.get("contact")) as FormGroup).controls;
+    for (const c in contactControls) {
+      if (typeof (contactControls[c].markAsTouched) === "function") {
+        contactControls[c].markAsTouched();
       }
     }
-
   }
 }
