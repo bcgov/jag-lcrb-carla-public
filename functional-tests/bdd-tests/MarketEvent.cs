@@ -10,7 +10,7 @@ using Xunit.Gherkin.Quick;
 # One Market Event
 #-----------------------
 
- @marketevent @marketoneday @winery
+ @marketevent @marketoneday @winery @release1
  Scenario: One Day Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
