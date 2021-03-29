@@ -98,10 +98,10 @@ namespace bdd_tests
                     .FindElement(By.XPath(
                         "//body[contains(.,'Subject to terms and conditions specified in the restriction or approval letter(s). A copy of restriction or approval letter(s) to be kept with current liquor licence.')]"))
                     .Displayed);
-                Assert.True(ngDriver
-                    .FindElement(By.XPath(
-                        "//body[contains(.,'Liquor product sold in the on site store must be registered under the manufacturer licence.')]"))
-                    .Displayed);
+                // Assert.True(ngDriver
+                //    .FindElement(By.XPath(
+                //        "//body[contains(.,'Liquor product sold in the on site store must be registered under the manufacturer licence.')]"))
+                //    .Displayed);
             }
 
             if (licenceType == "a Rural LRS licence")
