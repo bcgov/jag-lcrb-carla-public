@@ -27,7 +27,7 @@ node('master') {
 						def buildSelector2 = bc2.startBuild()
 						
 						timeout(10) { 
-							buildSelector1.logs('-f')
+							buildSelector2.logs('-f')
 						}
 					}
 					
