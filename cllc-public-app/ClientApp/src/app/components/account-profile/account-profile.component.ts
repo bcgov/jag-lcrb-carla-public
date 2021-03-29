@@ -308,23 +308,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       });
   }
 
-  confirmContact(confirm: boolean) {
-    if (confirm) {
-      // create contact here
-      const contact = new Contact();
-      contact.firstname = this.currentUser.firstname;
-      contact.lastname = this.currentUser.lastname;
-      contact.emailaddress1 = this.currentUser.email;
-      this.busy = this.contactDataService.createWorkerContact(contact)
-        .subscribe(() => {
-          this.subscribeForData();
-        },
-          () => alert("Failed to create contact"));
-    } else {
-      window.location.href = "logout";
-    }
-  }
-
   canDeactivate(): Observable<boolean> {
     if (!this.connectionsToProducers.formHasChanged() &&
       JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
