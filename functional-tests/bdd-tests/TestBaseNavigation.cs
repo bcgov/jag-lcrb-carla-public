@@ -512,5 +512,12 @@ namespace bdd_tests
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'No applications awaiting review')]"))
                 .Displayed);
         }
+
+
+        [And(@"I refresh the page to reload the elements")]
+        public void RefreshPage()
+        {
+            ngDriver.Navigate().Refresh();
+        }
     }
 }
