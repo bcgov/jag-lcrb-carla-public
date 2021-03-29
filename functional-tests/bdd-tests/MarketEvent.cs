@@ -26,6 +26,7 @@ using Xunit.Gherkin.Quick;
     And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
     And I click on the link for Licences & Authorizations
+    And I refresh the page to reload the elements
     And I click on the link for Request Market Event Authorization
     And I request a market event for one date only
     And I click on the secondary Submit button
@@ -56,6 +57,7 @@ using Xunit.Gherkin.Quick;
     And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
     And I click on the link for Licences & Authorizations
+    And I refresh the page to reload the elements
     And I click on the link for Request Market Event Authorization
     And I request a market event weekly
     And I click on the Submit button
@@ -87,6 +89,7 @@ using Xunit.Gherkin.Quick;
     And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
     And I click on the link for Licences & Authorizations
+    And I refresh the page to reload the elements
     And I click on the link for Request Market Event Authorization
     And I request a market event bi-weekly
     And I click on the Submit button
@@ -116,6 +119,7 @@ using Xunit.Gherkin.Quick;
     And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
     And I click on the link for Licences & Authorizations
+    And I refresh the page to reload the elements
     And I click on the link for Request Market Event Authorization
     And I request a market event monthly
     And I click on the Submit button
@@ -146,6 +150,7 @@ using Xunit.Gherkin.Quick;
     And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
     And I click on the link for Licences & Authorizations
+    And I refresh the page to reload the elements
     And I click on the link for Request Market Event Authorization
     And I request a market event for one date only
     And I click on the button for Save for Later
@@ -181,6 +186,7 @@ using Xunit.Gherkin.Quick;
     And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
     And I click on the link for Licences & Authorizations
+    And I refresh the page to reload the elements
     And I click on the link for Request Market Event Authorization
     And I request a market event weekly
     And I click on the button for Save for Later
@@ -216,6 +222,7 @@ using Xunit.Gherkin.Quick;
     And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
     And I click on the link for Licences & Authorizations
+    And I refresh the page to reload the elements
     And I click on the link for Request Market Event Authorization
     And I request a market event bi-weekly
     And I click on the button for Save for Later
@@ -251,6 +258,7 @@ using Xunit.Gherkin.Quick;
     And I click on the link for Licences & Authorizations
     And the on-site endorsement application is approved
     And I click on the link for Licences & Authorizations
+    And I refresh the page to reload the elements
     And I click on the link for Request Market Event Authorization
     And I request a market event monthly
     And I click on the button for Save for Later
