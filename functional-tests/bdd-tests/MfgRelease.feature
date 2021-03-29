@@ -88,6 +88,7 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And I click on the link for Licences & Authorizations
     # And the on-site endorsement application is approved
     # And I click on the link for Licences & Authorizations
+    # And I click on the link for Request Market Event Authorization
     # And I request a market event for one date only
     # And I click on the secondary Submit button
     # And I click on the link for Licences & Authorizations
