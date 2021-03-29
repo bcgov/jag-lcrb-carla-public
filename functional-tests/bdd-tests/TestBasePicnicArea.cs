@@ -40,27 +40,27 @@ namespace bdd_tests
             uiPatioCompDesc.SendKeys(patioCompositionDescription);
 
             // select 'Grass' for patio location
-            var uiGrass = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-33-button"));
+            var uiGrass = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-89-button"));
             uiGrass.Click();
 
             // select 'Earth' for patio location
-            var uiEarth = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-34-button"));
+            var uiEarth = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-90-button"));
             uiEarth.Click();
 
             // select 'Gravel' for patio location
-            var uiGravel = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-35-button"));
+            var uiGravel = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-91-button"));
             uiGravel.Click();
 
             // select 'Finished Flooring' for patio location
-            var uiFinishedFlooring = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-36-button"));
+            var uiFinishedFlooring = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-92-button"));
             uiFinishedFlooring.Click();
 
             // select 'Cement Sidewalk' for patio location
-            var uiCementSidewalk = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-37-button"));
+            var uiCementSidewalk = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-93-button"));
             uiCementSidewalk.Click();
 
             // select 'Other' for patio location
-            var uiOther = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-38-button"));
+            var uiOther = ngDriver.FindElement(By.CssSelector("button#mat-button-toggle-94-button"));
             uiOther.Click();
 
             // enter the capacity
