@@ -1,14 +1,9 @@
+using System.Reflection;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 using Serilog;
-using System;
-using System.Net;
-using System.Reflection;
-
 
 namespace Gov.Lclb.Cllb.Services.FileManager
 {
@@ -16,18 +11,18 @@ namespace Gov.Lclb.Cllb.Services.FileManager
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args)                
+            CreateWebHostBuilder(args)
                 .Build()
                 .Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.AddUserSecrets(Assembly.GetExecutingAssembly());
                     config.AddEnvironmentVariables();
-                    
                 })
                 .ConfigureLogging((hostingContext, logging) =>
                 {
@@ -39,12 +34,14 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 .UseSerilog()
                 .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
                 .UseStartup<Startup>()
-                .UseKestrel(options => {
+                .UseKestrel(options =>
+                {
                     options.Limits.MaxRequestBodySize = 512 * 1024 * 1024; // allow large transfers
                     // for macOS local dev but don't have env
                     // options.ListenLocalhost(5001, o => {
                     //     o.Protocols = HttpProtocols.Http2;
                     // });
                 });
+        }
     }
 }
