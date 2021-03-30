@@ -35,40 +35,29 @@ namespace bdd_tests
             var indigenousNation = "Cowichan Tribes";
             var policeJurisdiction = "RCMP Shawnigan Lake";
 
-            // upload a central securities register
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+            if (bizType == "private corporation")
+            {
+                // upload a central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
-            // upload supporting business documentation
-            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+                // upload supporting business documentation
+                FileUpload("associates.pdf", "(//input[@type='file'])[6]");
 
-            // upload notice of articles
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
 
-            // upload personal history form
-            FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+                // upload personal history form
+                FileUpload("associates.pdf", "(//input[@type='file'])[12]");
 
-            // upload shareholders < 10% interest
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+                // upload shareholders < 10% interest
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+            }
 
-            /*
-            if ((bizType == "public corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "private corporation"))
+            if (bizType == "sole proprietorship")
             {
                 // upload register of directors and officers
                 FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[3]");
             }
-
-            if (bizType == "private corporation")
-            {
-                // upload supporting business documentation
-                FileUpload("distribution_plan.pdf", "(//input[@type='file'])[6]");
-
-                // upload register of directors and officers
-                FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[9]");
-
-                // upload shareholders holding less than 10% interest
-                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[12]");
-            }
-            */
 
             // enter the establishment name
             var uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
