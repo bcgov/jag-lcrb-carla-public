@@ -152,25 +152,21 @@ namespace bdd_tests
             var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
             uiInteriorOption.Click();
 
+            // upload signage document
             if (bizType == "partnership" || bizType == "public corporation" || bizType == "society")
-                // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[5]");
             else if (bizType == "private corporation")
-                // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[17]");
             else if (bizType == "sole proprietorship")
-                // upload signage document
-                FileUpload("signage.pdf", "(//input[@type='file'])[2]");
+                FileUpload("signage.pdf", "(//input[@type='file'])[5]");
 
+            // upload floor plan
             if (bizType == "partnership" || bizType == "public corporation" || bizType == "society")
-                // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
             else if (bizType == "private corporation")
-                // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[20]");
             else if (bizType == "sole proprietorship")
-                // upload floor plan
-                FileUpload("floor_plan.pdf", "(//input[@type='file'])[5]");
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
 
             // select the owner checkbox
             var uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwnerBusiness']"));
@@ -185,26 +181,6 @@ namespace bdd_tests
             var uiFutureValidInterest =
                 ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willHaveValidInterest']"));
             uiFutureValidInterest.Click();
-
-            /*
-            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
-            {
-                // upload proof of valid interest
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
-            }
-
-            if (bizType == "private corporation")
-            {
-                // upload proof of valid interest
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
-            }
-
-            if (bizType == "sole proprietorship")
-            {
-                // upload proof of valid interest
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
-            }
-            */
 
             // enter the role of the application contact
             var uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
