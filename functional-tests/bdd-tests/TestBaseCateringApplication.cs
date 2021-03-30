@@ -142,7 +142,7 @@ namespace bdd_tests
                 for (var i = 0; i < 50; i++)
                     try
                     {
-                        var names = ngDriver.FindElements(By.Id("mat-button-toggle-91-button"));
+                        var names = ngDriver.FindElements(By.Id("mat-button-toggle-109-button"));
                         if (names.Count > 0)
                         {
                             uiPreviousLicenceYes = names[0];
@@ -171,7 +171,7 @@ namespace bdd_tests
             if (bizType == "private corporation" || bizType == "partnership" || bizType == "society" ||
                 bizType == "public corporation" || bizType == "sole proprietorship" || bizType == "military mess" || bizType == "co-op")
             {
-                var uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-94-button"));
+                var uiRuralAgencyStore = ngDriver.FindElement(By.Id("mat-button-toggle-112-button"));
                 JavaScriptClick(uiRuralAgencyStore);
             }
 
@@ -186,7 +186,7 @@ namespace bdd_tests
             if (bizType == "private corporation" || bizType == "partnership" || bizType == "society" ||
                 bizType == "public corporation" || bizType == "sole proprietorship" || bizType == "military mess" || bizType == "co-op")
             {
-                var uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-97-button"));
+                var uiOtherBusinessYes = ngDriver.FindElement(By.Id("mat-button-toggle-115-button"));
                 JavaScriptClick(uiOtherBusinessYes);
             }
 
