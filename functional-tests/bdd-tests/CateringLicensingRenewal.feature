@@ -21,6 +21,7 @@ Scenario: Negative Catering Licence Renewal Today (Private Corporation)
     And I click on the link for Licences & Authorizations
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
+    And I click on the Continue to Application button
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -39,6 +40,7 @@ Scenario: Positive Catering Licence Renewal Today (Private Corporation)
     And I click on the link for Licences & Authorizations
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
+    And I click on the Continue to Application button
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -61,6 +63,7 @@ Scenario: Negative Catering Licence Renewal Yesterday (Private Corporation)
     And I click on the link for Licences & Authorizations
     And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I click on the link for Renew Licence
+    And I click on the Continue to Application button
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -79,6 +82,7 @@ Scenario: Positive Catering Licence Renewal Yesterday (Private Corporation)
     And I click on the link for Licences & Authorizations
     And the expiry date is changed using the Dynamics workflow named 26BE4A57-0066-4441-AC60-5910272C944C
     And I click on the link for Renew Licence
+    And I click on the Continue to Application button
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -141,6 +145,7 @@ Scenario: Negative Catering Licence Renewal 60 Days Future (Private Corporation)
     And I click on the link for Licences & Authorizations
     And the expiry date is changed using the Dynamics workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I click on the link for Renew Licence
+    And I click on the Continue to Application button
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -159,6 +164,7 @@ Scenario: Positive Catering Licence Renewal 60 Days Future (Private Corporation)
     And I click on the link for Licences & Authorizations
     And the expiry date is changed using the Dynamics workflow named aeb0a12f-ec61-4774-a7be-2cff9ffa1cd5
     And I click on the link for Renew Licence
+    And I click on the Continue to Application button
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
@@ -181,6 +187,7 @@ Scenario: Negative Catering Licence Renewal 30 Days Future (Private Corporation)
     And I click on the link for Licences & Authorizations
     And the expiry date is changed using the Dynamics workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I click on the link for Renew Licence
+    And I click on the Continue to Application button
     And I renew the licence with negative responses for Catering
     And the account is deleted
     Then I see the login page
@@ -199,6 +206,7 @@ Scenario: Positive Catering Licence Renewal 30 Days Future (Private Corporation)
     And I click on the link for Licences & Authorizations
     And the expiry date is changed using the Dynamics workflow named 0EA6A9CA-AC55-44CB-A1BE-1B6E420DD69B
     And I click on the link for Renew Licence
+    And I click on the Continue to Application button
     And I renew the licence with positive responses for Catering
     And the account is deleted
     Then I see the login page
