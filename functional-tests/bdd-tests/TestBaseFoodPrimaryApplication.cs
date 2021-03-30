@@ -35,40 +35,29 @@ namespace bdd_tests
             var indigenousNation = "Cowichan Tribes";
             var policeJurisdiction = "RCMP Shawnigan Lake";
 
-            // upload a central securities register
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+            if (bizType == "private corporation")
+            {
+                // upload a central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
-            // upload supporting business documentation
-            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+                // upload supporting business documentation
+                FileUpload("associates.pdf", "(//input[@type='file'])[6]");
 
-            // upload notice of articles
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
 
-            // upload personal history form
-            FileUpload("associates.pdf", "(//input[@type='file'])[12]");
+                // upload personal history form
+                FileUpload("associates.pdf", "(//input[@type='file'])[12]");
 
-            // upload shareholders < 10% interest
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+                // upload shareholders < 10% interest
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+            }
 
-            /*
-            if ((bizType == "public corporation") || (bizType == "partnership") || (bizType == "society") || (bizType == "private corporation"))
+            if (bizType == "sole proprietorship")
             {
                 // upload register of directors and officers
                 FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[3]");
             }
-
-            if (bizType == "private corporation")
-            {
-                // upload supporting business documentation
-                FileUpload("distribution_plan.pdf", "(//input[@type='file'])[6]");
-
-                // upload register of directors and officers
-                FileUpload("register_of_directors_officers.pdf", "(//input[@type='file'])[9]");
-
-                // upload shareholders holding less than 10% interest
-                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[12]");
-            }
-            */
 
             // enter the establishment name
             var uiEstabName = ngDriver.FindElement(By.Id("establishmentName"));
@@ -163,25 +152,21 @@ namespace bdd_tests
             var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
             uiInteriorOption.Click();
 
+            // upload signage document
             if (bizType == "partnership" || bizType == "public corporation" || bizType == "society")
-                // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[5]");
             else if (bizType == "private corporation")
-                // upload signage document
                 FileUpload("signage.pdf", "(//input[@type='file'])[17]");
             else if (bizType == "sole proprietorship")
-                // upload signage document
-                FileUpload("signage.pdf", "(//input[@type='file'])[2]");
+                FileUpload("signage.pdf", "(//input[@type='file'])[5]");
 
+            // upload floor plan
             if (bizType == "partnership" || bizType == "public corporation" || bizType == "society")
-                // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
             else if (bizType == "private corporation")
-                // upload floor plan
                 FileUpload("floor_plan.pdf", "(//input[@type='file'])[20]");
             else if (bizType == "sole proprietorship")
-                // upload floor plan
-                FileUpload("floor_plan.pdf", "(//input[@type='file'])[5]");
+                FileUpload("floor_plan.pdf", "(//input[@type='file'])[8]");
 
             // select the owner checkbox
             var uiOwner = ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='isOwnerBusiness']"));
@@ -196,26 +181,6 @@ namespace bdd_tests
             var uiFutureValidInterest =
                 ngDriver.FindElement(By.CssSelector(".mat-checkbox[formcontrolname='willHaveValidInterest']"));
             uiFutureValidInterest.Click();
-
-            /*
-            if ((bizType == "partnership") || (bizType == "public corporation") || (bizType == "society"))
-            {
-                // upload proof of valid interest
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[12]");
-            }
-
-            if (bizType == "private corporation")
-            {
-                // upload proof of valid interest
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[21]");
-            }
-
-            if (bizType == "sole proprietorship")
-            {
-                // upload proof of valid interest
-                FileUpload("valid_interest.pdf", "(//input[@type='file'])[9]");
-            }
-            */
 
             // enter the role of the application contact
             var uiContactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));

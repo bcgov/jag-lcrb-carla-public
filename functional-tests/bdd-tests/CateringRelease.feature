@@ -48,7 +48,7 @@ Scenario: Catering Release (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@validation @soleproprietorship @release2
+@validation @soleproprietorship @release6
 Scenario: Catering Release (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
