@@ -59,8 +59,6 @@ namespace bdd_tests
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Mailing Address City')]")).Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Mailing Address Postal Code')]"))
                         .Displayed);
-                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Mailing Address Country')]"))
-                        .Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Corporation Contact Telephone')]"))
                         .Displayed);
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Corporation Contact Email')]"))
