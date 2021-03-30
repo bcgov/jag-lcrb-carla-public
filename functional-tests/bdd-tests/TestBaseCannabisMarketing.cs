@@ -20,7 +20,7 @@ namespace bdd_tests
             var contactPhone = "5555555555";
             var contactEmail = "vp@cannabis_marketing.com";
 
-            if (bizType == "private corporation")
+            if (bizType == "a private corporation")
             {
                 // upload a central securities register
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
@@ -41,7 +41,7 @@ namespace bdd_tests
                 FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[18]");
             }
 
-            if (bizType == "sole proprietorship")
+            if (bizType == "a sole proprietorship")
             {
                 // upload cannabis associate security screening
                 FileUpload("cannabis_associate_security_screening.pdf", "(//input[@type='file'])[3]");
@@ -115,7 +115,7 @@ namespace bdd_tests
                 }
             }
 
-            if (bizType != "sole proprietorship")
+            if (bizType != "a sole proprietorship")
             {
                 // upload the Associates form
                 FileUpload("associates.pdf", "(//input[@type='file'])[21]");
