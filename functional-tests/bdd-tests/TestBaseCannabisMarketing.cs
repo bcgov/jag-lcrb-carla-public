@@ -20,23 +20,35 @@ namespace bdd_tests
             var contactPhone = "5555555555";
             var contactEmail = "vp@cannabis_marketing.com";
 
-            // upload a central securities register
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
+            if (bizType == "private corporation")
+            {
+                // upload a central securities register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
 
-            // upload supporting business documentation
-            FileUpload("associates.pdf", "(//input[@type='file'])[6]");
+                // upload supporting business documentation
+                FileUpload("associates.pdf", "(//input[@type='file'])[6]");
 
-            // upload notice of articles
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
+                // upload notice of articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[9]");
 
-            // upload cannabis associate security screening
-            FileUpload("cannabis_associate_security_screening.pdf", "(//input[@type='file'])[12]");
+                // upload cannabis associate security screening
+                FileUpload("cannabis_associate_security_screening.pdf", "(//input[@type='file'])[12]");
 
-            // upload financial integrity documents
-            FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
+                // upload financial integrity documents
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[15]");
 
-            // upload shareholders < 10% interest
-            FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[18]");
+                // upload shareholders < 10% interest
+                FileUpload("shareholders_less_10_interest.pdf", "(//input[@type='file'])[18]");
+            }
+
+            if (bizType == "sole proprietorship")
+            {
+                // upload cannabis associate security screening
+                FileUpload("cannabis_associate_security_screening.pdf", "(//input[@type='file'])[3]");
+
+                // upload financial integrity documents
+                FileUpload("fin_integrity.pdf", "(//input[@type='file'])[6]");
+            }
 
             if (bizType != "a local government" && bizType != "a university")
             {
@@ -103,14 +115,17 @@ namespace bdd_tests
                 }
             }
 
-            // upload the Associates form
-            FileUpload("associates.pdf", "(//input[@type='file'])[21]");
+            if (bizType != "sole proprietorship")
+            {
+                // upload the Associates form
+                FileUpload("associates.pdf", "(//input[@type='file'])[21]");
 
-            // upload the Notice of Articles
-            FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[23]");
+                // upload the Notice of Articles
+                FileUpload("notice_of_articles.pdf", "(//input[@type='file'])[23]");
 
-            // upload the Central Securities Register
-            FileUpload("central_securities_register.pdf", "(//input[@type='file'])[23]");
+                // upload the Central Securities Register
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[23]");
+            }
 
             // enter the contact title
             var uiContactPersonRole =
