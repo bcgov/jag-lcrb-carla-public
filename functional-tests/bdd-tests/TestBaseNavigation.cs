@@ -172,7 +172,9 @@ namespace bdd_tests
         {
             // click on the Continue to Application button
             var uiContinueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            JavaScriptClick(uiContinueButton);
+            var executor = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+            executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiContinueButton);
+            uiContinueButton.Click();
         }
 
 
