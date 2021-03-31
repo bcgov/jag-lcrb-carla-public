@@ -21,7 +21,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="6.1.1" />
     <PackageReference Include="Unchase.Swashbuckle.AspNetCore.Extensions" Version="2.6.0" />
-    <PackageReference Include="Wkhtmltopdf.NetCore" Version="3.0.2" />
+    <PackageReference Include="Wkhtmltopdf.NetCore" Version="5.0.2-preview" />
   </ItemGroup>
 
   <ItemGroup>
