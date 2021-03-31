@@ -30,7 +30,7 @@ namespace bdd_tests
 
             // create test data
             var areaDescription = "Area description";
-            var occupantLoad = "100";
+            var occupantLoad = "99999";
 
             // enter the area description
             var uiAreaDescription = ngDriver.FindElement(By.CssSelector("input[formcontrolname='areaLocation']"));

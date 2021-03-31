@@ -153,6 +153,7 @@ namespace bdd_tests
                 uiLiquorPolicyLink.SendKeys(liquorPolicyLink);
             }
 
+            /*
             // enter the contact given name
             var uiFirstName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='firstname']"));
             uiFirstName.SendKeys(corpGiven);
@@ -160,6 +161,7 @@ namespace bdd_tests
             // enter the contact surname
             var uiLastName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='lastname']"));
             uiLastName.SendKeys(corpSurname);
+            */
 
             // enter the contact title
             var uiCorpTitle = ngDriver.FindElement(By.CssSelector("input[formControlName='jobTitle']"));

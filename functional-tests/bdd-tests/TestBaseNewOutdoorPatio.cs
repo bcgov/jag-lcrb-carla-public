@@ -20,7 +20,7 @@ namespace bdd_tests
             var patioLiquorCarriedDescription = "Sample liquor carried description.";
             var patioAccessControlDescription = "Sample patio access control description.";
             var areaDescription = "Sample area description";
-            var occupantLoad = "180";
+            var occupantLoad = "99999";
 
             // enter patio composition description
             var uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
@@ -49,15 +49,15 @@ namespace bdd_tests
             uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
             // click Fixed option
-            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-25-button"));
+            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-33-button"));
             uiFixedOption.Click();
 
             // click Portable option
-            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-26-button"));
+            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-34-button"));
             uiPortableOption.Click();
 
             // click Interior option
-            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-27-button"));
+            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-35-button"));
             uiInteriorOption.Click();
 
             // upload floor plan

@@ -84,6 +84,7 @@ import { LoginComponent } from "@components/sep/login/login.component";
 import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-auth-guard.service";
 import { WorkerLandingPageComponent } from "@components/worker-qualification/worker-landing-page/worker-landing-page.component";
 import { TakeHomeEventComponent } from "@components/take-home-event/take-home-event.component";
+import { SepApplicationComponent } from "@components/sep/sep-application/sep-application.component";
 
 const routes: Routes = [
   {
@@ -95,11 +96,17 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [FeatureGuard],
     canDeactivate: [CanDeactivateGuard],
+    data: { feature: "Sep" },
+  },
+  {
+    path: "sep/dashboard",
+    component: SepDashboardComponent,
+    canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
   },
   {
-    path: "sep-dashboard",
-    component: SepDashboardComponent,
+    path: "sep/application",
+    component: SepApplicationComponent,
     canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
   },

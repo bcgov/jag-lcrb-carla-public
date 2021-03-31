@@ -251,22 +251,22 @@
   {{getBusinessTypeName().toLocaleUpperCase()}} CONTACT
 </h3>
 <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation' || getBusinessTypeName() == 'Local Government'">AUTHORIZED PERSON</h3>
-<div formGroupName="primarycontact" class="padded-section content-bottom">
+<div formGroupName="contact" class="padded-section content-bottom">
   <i>
     The name and contact information of the person LCRB should contact for ongoing communication. The contact
     must be authorized to represent the applicant and have the authority to bind the applicant.
   </i><br>
 
   <app-field label="First Name" [required]="true"
-             [valid]="form.get('primarycontact.firstname').valid || !form.get('primarycontact.firstname').touched"
+             [valid]="isValidOrNotTouched('contact.firstname')"
              errorMessage="Please enter the business contact's first name">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="firstname">
+    <input class="form-control" style="width: 350px;" type="text" formControlName="firstname" readonly>
   </app-field>
 
   <app-field label="Last Name" [required]="true"
-             [valid]="form.get('primarycontact.lastname').valid || !form.get('primarycontact.lastname').touched"
+             [valid]="isValidOrNotTouched('contact.lastname')"
              errorMessage="Please enter the business contact's last name">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="lastname">
+    <input class="form-control" style="width: 350px;" type="text" formControlName="lastname" readonly>
   </app-field>
 
   <app-field label="Title/Position" [required]="false" [valid]="true">
@@ -274,7 +274,7 @@
   </app-field>
 
   <app-field label="Phone Number" [required]="true"
-             [valid]="form.get('primarycontact.telephone1').valid || !form.get('primarycontact.telephone1').touched"
+             [valid]="isValidOrNotTouched('contact.telephone1')"
              errorMessage="Please enter the business contact's 10-digit phone number">
     <input class="form-control" style="width: 250px;" mask="(000) 000-0000"
            type="text" formControlName="telephone1">
@@ -286,10 +286,10 @@
   </app-field> -->
 
   <app-field label="Email" [required]="true"
-             [valid]="form.get('primarycontact.emailaddress1').valid || !form.get('primarycontact.emailaddress1').touched"
-             errorMessage="Please enter the business contact's emailaddress1 address">
+             [valid]="isValidOrNotTouched('contact.emailaddress1')"
+             errorMessage="Please enter the business contact's email address">
     <input class="form-control" style="width: 350px;" type="text" formControlName="emailaddress1"
-           (blur)="trimValue(form.get('primarycontact.emailaddress1'))">
+           (blur)="trimValue(form.get('contact.emailaddress1'))">
   </app-field>
 </div>
 

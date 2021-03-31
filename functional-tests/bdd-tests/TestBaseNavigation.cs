@@ -15,7 +15,7 @@ namespace bdd_tests
         public void ClickOnLink(string specificLink)
         {
             NgWebElement uiRequestedLink = null;
-            for (var i = 0; i < 30; i++)
+            for (var i = 0; i < 60; i++)
                 try
                 {
                     var names = ngDriver.FindElements(By.LinkText(specificLink));
@@ -172,7 +172,9 @@ namespace bdd_tests
         {
             // click on the Continue to Application button
             var uiContinueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
-            JavaScriptClick(uiContinueButton);
+            var executor = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+            executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiContinueButton);
+            uiContinueButton.Click();
         }
 
 
@@ -203,7 +205,6 @@ namespace bdd_tests
             Page Title: Welcome to Liquor and Cannabis Licensing
             */
             Log.Logger.Information("ENTERING ClickStartApplication");
-            ngDriver.WaitForAngular();
 
             switch (applicationType)
             {
@@ -512,6 +513,13 @@ namespace bdd_tests
             //Confirm that "No applications awaiting review" message is displayed
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'No applications awaiting review')]"))
                 .Displayed);
+        }
+
+
+        [And(@"I refresh the page to reload the elements")]
+        public void RefreshPage()
+        {
+            ngDriver.Navigate().Refresh();
         }
     }
 }

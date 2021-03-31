@@ -22,11 +22,6 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
                 throw new Exception("The licence can not be null");
             }
 
-            if (licence.AdoxioEstablishment == null)
-            {
-                throw new Exception("The licence must have an Establishment");
-            }
-
             if (licence.AdoxioLicencee == null)
             {
                 throw new Exception("The licence must have an AdoxioLicencee");
@@ -79,7 +74,11 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             //the name of the applicant (licensee)- last name, first name middle initial or company name
             userCredentials.legalName = licence.AdoxioLicencee.Name;
             //establishment (physical location of store)
-            userCredentials.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+            if (licence.AdoxioEstablishment != null)
+            {
+                userCredentials.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+            }
+            
             //last name of sole proprietor (if not sole prop then null)
             if (licence.AdoxioLicencee != null && licence.AdoxioLicencee.Primarycontactid != null && !string.IsNullOrEmpty(licence.AdoxioLicencee.Primarycontactid.Lastname))
             {
@@ -213,8 +212,15 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
         {
             var operatingName = new SBNProgramAccountDetailsBroadcastBodyOperatingName();
 
+
             //store name
-            operatingName.operatingName = licence.AdoxioEstablishment.AdoxioName;
+
+            if (licence.AdoxioEstablishment != null)
+            {
+                operatingName.operatingName = licence.AdoxioEstablishment.AdoxioName;
+            }
+
+            
             //only ever have 1 operating name
             operatingName.operatingNamesequenceNumber = OneStopUtils.OPERATING_NAME_SEQUENCE_NUMBER;
 
@@ -230,9 +236,16 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             var businessAddress = new SBNProgramAccountDetailsBroadcastBodyBusinessAddress();
 
             businessAddress.foreignLegacy = GetForeignLegacyBusiness(licence);
-            businessAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
+
+            if (licence.AdoxioEstablishment != null)
+            {
+                businessAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
+                businessAddress.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+            }
+
+            
             businessAddress.provinceStateCode = "BC";
-            businessAddress.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+
             businessAddress.countryCode = "CA";
 
             return businessAddress;
@@ -241,8 +254,10 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
         private SBNProgramAccountDetailsBroadcastBodyBusinessAddressForeignLegacy GetForeignLegacyBusiness(MicrosoftDynamicsCRMadoxioLicences licence)
         {
             var foreignLegacy = new SBNProgramAccountDetailsBroadcastBodyBusinessAddressForeignLegacy();
-
-            foreignLegacy.addressDetailLine1 = licence.AdoxioEstablishment.AdoxioAddressstreet;
+            if (licence.AdoxioEstablishment != null)
+            {
+                foreignLegacy.addressDetailLine1 = licence.AdoxioEstablishment.AdoxioAddressstreet;
+            }
             //foreignLegacy.addressDetailLine2 = "ToGetFromDynamics";
 
             return foreignLegacy;
@@ -257,9 +272,14 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             var mailingAddress = new SBNProgramAccountDetailsBroadcastBodyMailingAddress();
 
             mailingAddress.foreignLegacy = GetForeignLegacyMailing(licence);
-            mailingAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
+
+            if (licence.AdoxioEstablishment != null)
+            {
+                mailingAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
+                mailingAddress.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+            }
+
             mailingAddress.provinceStateCode = "BC";
-            mailingAddress.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             mailingAddress.countryCode = "CA";
 
             return mailingAddress;
@@ -268,10 +288,10 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
         private SBNProgramAccountDetailsBroadcastBodyMailingAddressForeignLegacy GetForeignLegacyMailing(MicrosoftDynamicsCRMadoxioLicences licence)
         {
             var foreignLegacyMailing = new SBNProgramAccountDetailsBroadcastBodyMailingAddressForeignLegacy();
-
-            foreignLegacyMailing.addressDetailLine1 = licence.AdoxioEstablishment.AdoxioAddressstreet;
-            //foreignLegacyMailing.addressDetailLine2 = "ToGetFromDynamics";
-
+            if (licence.AdoxioEstablishment != null)
+            {
+                foreignLegacyMailing.addressDetailLine1 = licence.AdoxioEstablishment.AdoxioAddressstreet;
+            }
             return foreignLegacyMailing;
         }
 

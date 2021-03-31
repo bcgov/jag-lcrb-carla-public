@@ -11,19 +11,6 @@ namespace bdd_tests
         public void MarketEvents(string frequency)
         {
             /* 
-            Page Title: Licences & Authorizations
-            */
-
-            // refresh page required for link display
-            ngDriver.Navigate().Refresh();
-
-            var marketEvent = "Request Market Event Authorization";
-
-            // click on the Request Market Event Authorization link
-            var uiOnSiteStoreEndorsement = ngDriver.FindElement(By.LinkText(marketEvent));
-            uiOnSiteStoreEndorsement.Click();
-
-            /* 
             Page Title: Market Authorization Request
             */
 

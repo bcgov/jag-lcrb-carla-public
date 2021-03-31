@@ -24,9 +24,9 @@ Scenario: Liquor Primary Catering Endorsement (Private Corporation)
     And I click on the link for Complete Application
     And I review the local government response for a liquor primary licence
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Catering Endorsement Application
     And I click on the Continue to Application button
     And I request a catering endorsement application

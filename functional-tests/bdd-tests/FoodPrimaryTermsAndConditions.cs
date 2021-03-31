@@ -15,10 +15,10 @@ Scenario: Food Primary Terms and Conditions (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I confirm the terms and conditions for a Food Primary licence
     And the account is deleted
     Then I see the login page

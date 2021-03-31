@@ -21,9 +21,9 @@ Scenario: Liquor Primary Download Licence
     And I click on the Continue to Application button
     And I review the local government response for a liquor primary licence
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Download Licence
     And the account is deleted
     Then I see the login page

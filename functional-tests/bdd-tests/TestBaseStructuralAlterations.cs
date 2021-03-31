@@ -11,8 +11,8 @@ namespace bdd_tests
         {
             // create test data
             var outdoorAreaDescription = "Sample outdoor area description";
-            var outdoorAreaCapacity = "10";
-            var capacityAreaOccupants = "20";
+            var outdoorAreaCapacity = "99999";
+            var capacityAreaOccupants = "99999";
 
             // upload the floor plan
             FileUpload("floor_plan.pdf", "(//input[@type='file'])[2]");

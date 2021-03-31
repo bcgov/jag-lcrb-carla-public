@@ -203,12 +203,13 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return result;
   }
 
-  // Take Home Sampling event is only available to Agent licensees
+  // Take Home Sampling event is only available to Agents and Manufacturers
   showTakeHomeSampling(item: ApplicationLicenseSummary) {
+    const whitelist = [ApplicationTypeNames.Agent, ApplicationTypeNames.MFG] as string[];
     const result = this.isActive(item) &&
       this.actionsVisible(item) &&
       item.licenceTypeCategory === "Liquor" &&
-      item.licenceTypeName === ApplicationTypeNames.Agent;
+      whitelist.includes(item.licenceTypeName);
     return result;
   }
 

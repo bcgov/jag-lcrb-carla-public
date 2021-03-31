@@ -17,13 +17,13 @@ namespace bdd_tests
             var serviceAreaDescription = "Service area description";
             var serviceAreaOccupantLoad = "100";
             var outdoorAreaDescription = "Outdoor area description";
-            var outdoorAreaCapacity = "150";
+            var outdoorAreaCapacity = "99999";
             var contactTitle = "Tester";
 
             // select the zoning checkbox
             var uiZoningCheckbox =
                 ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isPermittedInZoning']"));
-            uiZoningCheckbox.Click();
+            JavaScriptClick(uiZoningCheckbox);
 
             // upload the letter of intent
             FileUpload("letter_of_intent.pdf", "(//input[@type='file'])[2]");

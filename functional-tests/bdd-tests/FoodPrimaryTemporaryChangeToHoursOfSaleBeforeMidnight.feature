@@ -11,10 +11,10 @@ Scenario: Food Primary Temp Change to Hours of Sale Before Midnight (Private Cor
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Food Primary application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Change to Hours of Sale (Before Midnight)
     And I click on the Continue to Application button
     And I request a before midnight temporary change to hours of sale
