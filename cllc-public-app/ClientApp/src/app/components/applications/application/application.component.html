@@ -204,8 +204,9 @@
 
 <!-- If Private Corporation, Public Corporation or Societies-->
 <section *ngIf="this.businessTypeIsCorporation() || this.businessTypeIsSociety()">
-  <h4>Notice of Articles (or Register of Directors and Officers)</h4>
-  <p>Provide the Notice of Articles for your corporation. Alternatively, you can provide list of all current directors/officers by full legal name, position and date of appointment.</p>
+  <h4 *ngIf="this.businessTypeIsCorporation()">Notice of Articles (or Register of Directors and Officers)</h4>
+  <h4 *ngIf="this.businessTypeIsSociety()">List of Directors and Officers</h4>
+  <p>Provide the Notice of Articles for your <span *ngIf="this.businessTypeIsSociety()">Society</span><span *ngIf="this.businessTypeIsCorporation()">Corporation</span>. Alternatively, you can provide list of all current directors/officers by full legal name, position and date of appointment.</p>
   <p *ngIf="this.isLiquor() && !this.businessTypeIsSociety()">
     <strong>Directors and Officers are <u>not</u> required to submit a Personal History Summary form for liquor-related applications.</strong>
   </p>
@@ -2283,9 +2284,9 @@
 <!-- Proceed to Pay-->
 
 <section class="d-flex" style="margin-top: 15px;"
-         *ngIf="!isOpenedByLGForApproval 
-         && !isRAS() 
-         && ((!isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation) 
+         *ngIf="!isOpenedByLGForApproval
+         && !isRAS()
+         && ((!isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation)
               ||!showSubmitToLG()) ">
 
   <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
