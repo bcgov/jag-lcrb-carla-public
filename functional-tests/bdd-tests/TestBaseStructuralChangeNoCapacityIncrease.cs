@@ -17,7 +17,7 @@ namespace bdd_tests
             var description = "Test automation outline of the proposed change.";
             var patioLocation = "Location of the patio";
             var areaDescription = "Description of area";
-            var occupantLoad = "180";
+            var occupantLoad = "99999";
 
             // enter the description of the change
             var uiDescriptionOfChange = ngDriver.FindElement(By.CssSelector("textarea#description1"));

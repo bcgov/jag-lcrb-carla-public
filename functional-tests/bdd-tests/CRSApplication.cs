@@ -16,7 +16,7 @@ Scenario: CRS Application (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -31,7 +31,7 @@ Scenario: CRS Application (Society)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -46,7 +46,7 @@ Scenario: CRS Application (Partnership)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page
@@ -61,7 +61,7 @@ Scenario: CRS Application (Sole Proprietorship)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a Cannabis Retail Store application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the account is deleted
     Then I see the login page

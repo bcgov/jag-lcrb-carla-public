@@ -11,7 +11,7 @@ Scenario: Manufacturer Download Licence (Winery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
     And I click on the link for Download Licence
     And the account is deleted
@@ -26,7 +26,7 @@ Scenario: Manufacturer Download Licence (Brewery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
     And I click on the link for Download Licence
     And the account is deleted
@@ -41,7 +41,7 @@ Scenario: Manufacturer Download Licence (Distillery)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
     And I click on the link for Download Licence
     And the account is deleted
@@ -56,7 +56,7 @@ Scenario: Manufacturer Download Licence (Co-packer)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
     And I click on the link for Download Licence
     And the account is deleted

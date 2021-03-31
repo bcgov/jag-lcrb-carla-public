@@ -42,7 +42,7 @@ namespace bdd_tests
             var conEmail = "contact@email.com";
 
             var floorAreaDescription = "Sample floor area.";
-            var occupantLoad = "180";
+            var occupantLoad = "99999";
 
             if (bizType == "partnership")
             {

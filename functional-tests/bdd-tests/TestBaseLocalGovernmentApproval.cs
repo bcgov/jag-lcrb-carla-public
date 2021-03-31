@@ -74,7 +74,7 @@ namespace bdd_tests
             }
             else
             {
-                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[11]");
+                FileUpload("central_securities_register.pdf", "(//input[@type='file'])[2]");
             }
         }
 

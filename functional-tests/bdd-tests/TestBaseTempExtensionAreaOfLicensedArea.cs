@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
+using Protractor;
 using Xunit.Gherkin.Quick;
 
 namespace bdd_tests
@@ -15,21 +16,47 @@ namespace bdd_tests
 
             // create test data
             var description = "Test automation event details";
-            var capacity = "180";
+            var capacity = "99999";
 
             // enter the event details
             var uiEventDetails = ngDriver.FindElement(By.CssSelector("textarea#description2"));
             uiEventDetails.SendKeys(description);
 
             // add a date from
-            var uiDateFrom = ngDriver.FindElement(By.CssSelector("input#tempDateFrom"));
+            NgWebElement uiDateFrom = null;
+            for (var i = 0; i < 10; i++)
+                try
+                {
+                    var names = ngDriver.FindElements(By.CssSelector("input#tempDateFrom"));
+                    if (names.Count > 0)
+                    {
+                        uiDateFrom = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
+                }
             uiDateFrom.Click();
 
             // select the date
             SharedCalendarDate();
 
             // add a date to
-            var uiDateTo = ngDriver.FindElement(By.CssSelector("input#tempDateTo"));
+            NgWebElement uiDateTo = null;
+            for (var i = 0; i < 10; i++)
+                try
+                {
+                    var names = ngDriver.FindElements(By.CssSelector("input#tempDateTo"));
+                    if (names.Count > 0)
+                    {
+                        uiDateTo = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
+                }
             uiDateTo.Click();
 
             // select the date

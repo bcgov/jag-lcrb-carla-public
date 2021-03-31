@@ -11,12 +11,12 @@ Scenario: UBrew / UVin Application Licensee Representative (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And the account is deleted

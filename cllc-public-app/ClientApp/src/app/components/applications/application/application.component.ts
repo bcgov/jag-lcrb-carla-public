@@ -1044,12 +1044,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Associate form is required.');
     }
 
-    if (this.application.applicationType.showFinancialIntegrityFormUpload &&
-      ((this.uploadedFinancialIntegrityDocuments || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('Financial Integrity form is required.');
-    }
-
     // if we're showing supporting documents and it's not a marketing soleprop application add validation
     if (this.application.applicationType.showSupportingDocuments && !marketing_soleprop &&
       ((this.uploadedSupportingDocuments || 0) < 1)) {
@@ -1103,6 +1097,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
 
       if (!this.isLiquor() &&
+        this.application.applicationType.showFinancialIntegrityFormUpload &&
         ((this.uploadedFinancialIntegrityDocuments || 0) < 1)) {
         valid = false;
         this.validationMessages.push('At least one Financial Intergrity document is required.');

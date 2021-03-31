@@ -1,0 +1,25 @@
+.res{
+    max-width: 300px;
+}
+
+.border {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.res-content {
+    flex-grow: 1;
+    margin-left: -1px;
+    background-color: #F1F4FA;
+}
+a[mat-raised-button],
+button {
+    float: right;
+}
+
+.icon{
+    display: flex;
+    align-items: center;
+    background-color: #F1F4FA;
+}
+

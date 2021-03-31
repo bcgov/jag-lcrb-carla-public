@@ -11,9 +11,9 @@ Scenario: Lounge Area Within Service Hours (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I complete the change hours application for a lounge area within service hours
     And I click on the Submit button
     And I enter the payment information
@@ -29,9 +29,9 @@ Scenario: Lounge Area Outside Service Hours (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I complete the change hours application for a lounge area outside of service hours
     And I click on the LG Submit button
     And the account is deleted
@@ -46,9 +46,9 @@ Scenario: Special Event Area Within Service Hours (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I complete the change hours application for a special event area within service hours
     And I click on the Submit button
     And I enter the payment information
@@ -64,9 +64,9 @@ Scenario: Special Event Area Outside Service Hours (Private Corporation)
     And I enter the payment information
     And I confirm the payment receipt for a Manufacturer Licence application
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I complete the change hours application for a special event area outside of service hours
     And I click on the Submit button
     And I enter the payment information

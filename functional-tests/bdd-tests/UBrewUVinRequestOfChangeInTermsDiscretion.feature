@@ -11,12 +11,12 @@ Scenario: UBrew / UVin Application Change In Terms (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I confirm the payment receipt for a UBrew / UVin application
-    And I click on the Dashboard tab
+    And I click on the link for Dashboard
     And the dashboard status is updated as Application Under Review
     And the application is approved
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
-    And I click on the Licences tab
+    And I click on the link for Licences & Authorizations
     And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
     And I click on the Continue to Application button
     And I request a change in terms and conditions application
