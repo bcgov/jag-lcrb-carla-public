@@ -38,30 +38,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         public static bool IsEligibilityCheckRequired(string accountId, IConfiguration config, IDynamicsClient dynamics)
         {   
+            // if the eligibility feature is disabled or the accountID isn't created (yet?)
             if (config["FEATURE_ELIGIBILITY"] == null || string.IsNullOrEmpty(accountId) || accountId.Equals ("00000000-0000-0000-0000-000000000000"))
             {
                 return false;
             }
 
+            // keep track of whether there are cannabis applications in progress
             bool cannabisApplicationInProgress = false;
             var applicationType = dynamics.GetApplicationTypeByName("Cannabis Retail Store");
+            // if they have no cannabis apps (regardless of state) 
             if (applicationType == null)
             {
+                // then we don't need to question eligibility
                 return false;
             }
+            // look for cannabis apps that are in progress (also intake, or under review)
             string filter = $"_adoxio_applicant_value eq {accountId} and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} and ( statuscode eq {(int)AdoxioApplicationStatusCodes.InProgress} or statuscode eq {(int)AdoxioApplicationStatusCodes.Intake} or statuscode eq {(int)AdoxioApplicationStatusCodes.UnderReview} )";
             MicrosoftDynamicsCRMadoxioApplicationCollection dynamicsApplicationListCollection = dynamics.Applications.Get(filter: filter);
             if (dynamicsApplicationListCollection.Value.Count > 0)
             {
+                // we found one (or more)
                 cannabisApplicationInProgress = true;
             }
+
+            // next, check the account to see if they've answered the eligibility question
             try
             {
+                // if they  have a cannabis application in progress and they have not yet certified, then they will be asked to certify
                 MicrosoftDynamicsCRMaccount account = dynamics.Accounts.GetByKey(accountId);
                 return (account.AdoxioIseligibilitycertified == null || account.AdoxioIseligibilitycertified == false) && cannabisApplicationInProgress;
             }
             catch (HttpOperationException)
             {
+                // if we fail, then all G. 
                 return false;
             }
         }
