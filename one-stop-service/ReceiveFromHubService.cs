@@ -54,13 +54,13 @@ namespace Gov.Jag.Lcrb.OneStopService
             return result;
         }
 
-        private void ClearProgramAccountDetails(string licenceId, IDynamicsClient dynamicsClient)
+        private void ClearProgramAccountDetails(string licenceId, IDynamicsClient dynamicsClient, string payload)
         {
             // search for any queue items that match the licenceId.
             IList<MicrosoftDynamicsCRMadoxioOnestopmessageitem> result = null;
             try
             {
-                string filter = $"adoxio_datetimesent eq null and _adoxioLicenceValue eq {licenceId}";
+                string filter = $"adoxio_dateacknowledgementreceived eq null and _adoxioLicenceValue eq {licenceId}";
                 List<string> _orderby = new List<String>() { "createdon" };
 
                 result = dynamicsClient.Onestopmessageitems.Get(filter: filter, orderby: _orderby).Value;
@@ -83,8 +83,8 @@ namespace Gov.Jag.Lcrb.OneStopService
                             MicrosoftDynamicsCRMadoxioOnestopmessageitem update =
                                 new MicrosoftDynamicsCRMadoxioOnestopmessageitem()
                                 {
-                                    AdoxioDatetimesent = DateTimeOffset.Now,
-
+                                    AdoxioDateacknowledgementreceived = DateTimeOffset.Now,
+                                    AdoxioAcknowledgementstatus = payload
                                 };
                             try
                             {
@@ -174,7 +174,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                     throw (odee);
                 }
                 // now clear out the cache item.
-                ClearProgramAccountDetails(licence.AdoxioLicencesid);
+                ClearProgramAccountDetails(licence.AdoxioLicencesid, dynamicsClient, inputXML);
 
 
 
