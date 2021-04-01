@@ -27,7 +27,7 @@ node('master') {
 						def buildSelector2 = bc2.startBuild()
                         sleep(5)
 						def builds = openshift.selector("bc", 'cllc-public-frontend').related('builds')
-                        timeout(5) { 
+                        timeout(50) { 
                             builds.untilEach(1) {
                             return (it.object().status.phase == "Complete")
                             }
@@ -67,7 +67,7 @@ podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', 
     containerTemplate(
         name: 'jnlp',
         activeDeadlineSeconds: 9000,
-        image: "${env.image_registry}/openshift/jenkins-slave-zap",
+        image: "${env.image_registry}/jenkins-slave-zap",
         resourceRequestCpu: '500m',
         resourceLimitCpu: '1000m',
         resourceRequestMemory: '3Gi',
