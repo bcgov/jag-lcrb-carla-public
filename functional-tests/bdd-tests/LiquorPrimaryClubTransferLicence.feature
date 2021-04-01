@@ -1,13 +1,9 @@
-﻿using Xunit;
-using Xunit.Gherkin.Quick;
-
-/*
-Feature: LiquorPrimaryClubDownloadLicence
+﻿Feature: LiquorPrimaryClubTransferLicence
     As a logged in business user
-    I want to download a Liquor Primary Club licence
+    I want to transfer a Liquor Primary Club Application
 
 @liquorprimaryclub
-Scenario: Liquor Primary Club Application (Private Corporation)
+Scenario: Liquor Primary Club Transfer Licence (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a LPC Licence
     And I review the account profile for a private corporation
@@ -26,31 +22,6 @@ Scenario: Liquor Primary Club Application (Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
+    And I request a transfer of ownership for Liquor Primary
     And the account is deleted
     Then I see the login page
-*/
-
-namespace bdd_tests
-{
-    [FeatureFile("./LiquorPrimaryClubDownloadLicence.feature")]
-    [Collection("Liquor")]
-    public sealed class LiquorPrimaryClubDownloadLicence : TestBase
-    {
-        [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void LogInToDashboard(string businessType)
-        {
-            NavigateToFeatures();
-
-            CheckFeatureFlagsLiquorTwo();
-
-            CheckFeatureFlagsLicenseeChanges();
-
-            CheckFeatureLEConnections();
-
-            IgnoreSynchronizationFalse();
-
-            CarlaLogin(businessType);
-        }
-    }
-}
