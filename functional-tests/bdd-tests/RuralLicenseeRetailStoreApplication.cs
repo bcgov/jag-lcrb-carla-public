@@ -2,7 +2,7 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: RuralLicenseeRetailStore
+Feature: RuralLicenseeRetailStoreApplication
     As a logged in business user
     I want to submit a rural LRS application for different business types
 
@@ -74,7 +74,7 @@ Scenario: Rural LRS Application (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./RuralLicenseeRetailStore.feature")]
+    [FeatureFile("./RuralLicenseeRetailStoreApplication.feature")]
     [Collection("Cannabis")]
     public sealed class RuralLicenseeRetailStoreApplication : TestBase
     {
