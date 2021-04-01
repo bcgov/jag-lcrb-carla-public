@@ -17,7 +17,7 @@ Scenario: Liquor Primary Club Application (Private Corporation)
     And I log in as a return user
     And I click on the link for Complete Application
     And I click on the Continue to Application button
-    And I review the local government response for a liquor primary licence
+    And I review the local government response for a liquor primary club licence
     And the application is approved
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
