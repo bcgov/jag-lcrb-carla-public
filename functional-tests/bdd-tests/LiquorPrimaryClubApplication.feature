@@ -2,7 +2,7 @@
     As a logged in business user
     I want to submit Liquor Primary Club Applications for different business types
 
-@liquorprimaryclub
+@liquorprimaryclub @release8
 Scenario: Liquor Primary Club Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a LPC Licence
@@ -50,7 +50,7 @@ Scenario: Liquor Primary Club Application (Partnership)
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryclub
+@liquorprimaryclub @release8
 Scenario: Liquor Primary Club Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a LPC Licence
