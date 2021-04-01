@@ -10,7 +10,7 @@ namespace bdd_tests
         public void CompleteLiquorPrimaryClubApplication(string bizType)
         {
             /* 
-            Page Title: Liquor Primary Licence Application
+            Page Title: Liquor Primary Club Licence Application
             */
 
             // create test data
