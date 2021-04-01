@@ -1,13 +1,9 @@
-﻿using Xunit;
-using Xunit.Gherkin.Quick;
-
-/*
-Feature: LiquorPrimaryClubDownloadLicence
+﻿Feature: LiquorPrimaryClubRequestOfChangeInTermsDiscretion
     As a logged in business user
-    I want to download a Liquor Primary Club licence
+    I want to submit a Request of Change in Terms and Conditions/Request for Discretion application for a Liquor Primary Club licence
 
 @liquorprimaryclub
-Scenario: Liquor Primary Club Application (Private Corporation)
+Scenario: Liquor Primary Club Request Change In Terms Discretion (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a LPC Licence
     And I review the account profile for a private corporation
@@ -26,31 +22,10 @@ Scenario: Liquor Primary Club Application (Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
+    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
+    And I click on the Continue to Application button
+    And I request a change in terms and conditions application
+    And I click on the Submit button
+    And I enter the payment information
     And the account is deleted
     Then I see the login page
-*/
-
-namespace bdd_tests
-{
-    [FeatureFile("./LiquorPrimaryClubDownloadLicence.feature")]
-    [Collection("Liquor")]
-    public sealed class LiquorPrimaryClubDownloadLicence : TestBase
-    {
-        [Given(@"I am logged in to the dashboard as a(.*)")]
-        public void LogInToDashboard(string businessType)
-        {
-            NavigateToFeatures();
-
-            CheckFeatureFlagsLiquorTwo();
-
-            CheckFeatureFlagsLicenseeChanges();
-
-            CheckFeatureLEConnections();
-
-            IgnoreSynchronizationFalse();
-
-            CarlaLogin(businessType);
-        }
-    }
-}

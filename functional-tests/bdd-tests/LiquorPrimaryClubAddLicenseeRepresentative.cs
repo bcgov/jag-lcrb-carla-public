@@ -2,12 +2,12 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: LiquorPrimaryClubDownloadLicence
+Feature: LiquorPrimaryClubAddLicenseeRepresentative
     As a logged in business user
-    I want to download a Liquor Primary Club licence
+    I want to add a licensee representative for a Liquor Primary Club Application
 
 @liquorprimaryclub
-Scenario: Liquor Primary Club Application (Private Corporation)
+Scenario: Liquor Primary Club Licensee Representative (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a LPC Licence
     And I review the account profile for a private corporation
@@ -26,16 +26,17 @@ Scenario: Liquor Primary Club Application (Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
+    And I click on the link for Add Licensee Representative
+    And I request a licensee representative
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./LiquorPrimaryClubDownloadLicence.feature")]
+    [FeatureFile("./LiquorPrimaryClubAddLicenseeRepresentative.feature")]
     [Collection("Liquor")]
-    public sealed class LiquorPrimaryClubDownloadLicence : TestBase
+    public sealed class LiquorPrimaryClubAddLicenseeRepresentative : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)

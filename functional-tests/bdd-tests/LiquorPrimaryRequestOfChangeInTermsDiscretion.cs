@@ -4,7 +4,7 @@ using Xunit.Gherkin.Quick;
 /*
 Feature: LiquorPrimaryRequestOfChangeInTermsDiscretion
     As a logged in business user
-    I want to submit a Request of Change in Terms and Conditions/Request for Discretion application for a Food Primary licence
+    I want to submit a Request of Change in Terms and Conditions/Request for Discretion application for a Liquor Primary licence
 
 @liquorprimaryapp
 Scenario: Liquor Primary Change in Terms (Private Corporation) 

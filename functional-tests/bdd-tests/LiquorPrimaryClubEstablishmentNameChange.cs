@@ -2,12 +2,12 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: LiquorPrimaryClubDownloadLicence
+Feature: LiquorPrimaryClubEstablishmentNameChange
     As a logged in business user
-    I want to download a Liquor Primary Club licence
+    I want to submit an establishment name change for a Liquor Primary Club licence
 
 @liquorprimaryclub
-Scenario: Liquor Primary Club Application (Private Corporation)
+Scenario: Liquor Primary Club Establishment Name Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a LPC Licence
     And I review the account profile for a private corporation
@@ -26,16 +26,18 @@ Scenario: Liquor Primary Club Application (Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
+    And I click on the link for Establishment Name Change Application
+    And I click on the Continue to Application button
+    And I request a valid store name or branding change for Liquor Primary
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./LiquorPrimaryClubDownloadLicence.feature")]
+    [FeatureFile("./LiquorPrimaryClubEstablishmentNameChange.feature")]
     [Collection("Liquor")]
-    public sealed class LiquorPrimaryClubDownloadLicence : TestBase
+    public sealed class LiquorPrimaryClubEstablishmentNameChange : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
