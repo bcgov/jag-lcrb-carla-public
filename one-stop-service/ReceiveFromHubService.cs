@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Rest;
 using Serilog;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -50,6 +52,54 @@ namespace Gov.Jag.Lcrb.OneStopService
                 result = xmlDocument.ChildNodes[1]?.Name;
             }
             return result;
+        }
+
+        private void ClearProgramAccountDetails(string licenceId, IDynamicsClient dynamicsClient, string payload)
+        {
+            // search for any queue items that match the licenceId.
+            IList<MicrosoftDynamicsCRMadoxioOnestopmessageitem> result = null;
+            try
+            {
+                string filter = $"adoxio_dateacknowledgementreceived eq null and _adoxioLicenceValue eq {licenceId}";
+                List<string> _orderby = new List<String>() { "createdon" };
+
+                result = dynamicsClient.Onestopmessageitems.Get(filter: filter, orderby: _orderby).Value;
+            }
+            catch (HttpOperationException odee)
+            {
+                Log.Logger.Error(odee, $"ERROR getting related queue items for licence {licenceId}");
+
+            }
+
+            if (result != null)
+            {
+                foreach (var item in result)
+                {
+                    // Only update issued and transfer complete
+                    switch ((OneStopHubStatusChange) item.AdoxioStatuschangedescription)
+                    {
+                        case OneStopHubStatusChange.Issued:
+                        case OneStopHubStatusChange.TransferComplete:
+                            MicrosoftDynamicsCRMadoxioOnestopmessageitem update =
+                                new MicrosoftDynamicsCRMadoxioOnestopmessageitem()
+                                {
+                                    AdoxioDateacknowledgementreceived = DateTimeOffset.Now,
+                                    AdoxioAcknowledgementstatus = payload
+                                };
+                            try
+                            {
+                                dynamicsClient.Onestopmessageitems.Update(item.AdoxioOnestopmessageitemid, update);
+                            }
+                            catch (HttpOperationException odee)
+                            {
+                                Log.Logger.Error(odee, $"ERROR updating queue items for licence {licenceId}");
+
+                            }
+
+                            break;
+                    }
+                }
+            }
         }
 
         private string HandleSBNCreateProgramAccountResponse(string inputXML)
@@ -110,7 +160,6 @@ namespace Gov.Jag.Lcrb.OneStopService
                 MicrosoftDynamicsCRMadoxioLicences pathLicence = new MicrosoftDynamicsCRMadoxioLicences
                 {
                     AdoxioBusinessprogramaccountreferencenumber = sanitizedBpan,
-                    AdoxioOnestopsent = true
                 };
                 Log.Logger.Information("Sending update to Dynamics for BusinessProgramAccountNumber.");
                 try
@@ -124,6 +173,11 @@ namespace Gov.Jag.Lcrb.OneStopService
                     // fail if we can't get results.
                     throw (odee);
                 }
+                // now clear out the cache item.
+                ClearProgramAccountDetails(licence.AdoxioLicencesid, dynamicsClient, inputXML);
+
+
+
 
                 //Trigger the Send ProgramAccountDetailsBroadcast Message                
                 BackgroundJob.Enqueue(() => new OneStopUtils(_configuration, _cache).SendProgramAccountDetailsBroadcastMessageRest(null, licence.AdoxioLicencesid));
