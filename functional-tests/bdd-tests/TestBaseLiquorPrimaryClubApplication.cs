@@ -136,18 +136,13 @@ namespace bdd_tests
             var uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            // select 'No' for patio
-            var uiHasPatioNo =
-                ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-3"));
-            uiHasPatioNo.Click();
-
             // enter the establishment type
             var uiEstabType = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
             uiEstabType.SendKeys(estType);
 
             // select 'Yes' for patio
             var uiHasPatioYes =
-                ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-2"));
+                ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-13"));
             uiHasPatioYes.Click();
 
             // enter the patio comp description
