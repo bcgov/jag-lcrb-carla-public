@@ -460,11 +460,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   startNewLPApplication(LPOngoing: boolean) {
-    if (LPOngoing) {
-      this.startLPOngoing = true;
-    } else {
-      this.startLPCOngoing = true;
-    }
+    this.startLPOngoing = true;
     const newLicenceApplicationData = {
       licenseType: "Liquor Primary",
       applicantType: this.account.businessType,
@@ -475,22 +471,14 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
         const route: any[] = [`/account-profile/${data.id}`];
-        if (LPOngoing) {
-          this.startLPOngoing = false;
-        } else {
-          this.startLPCOngoing = false;
-        }
+        this.startLPOngoing = false;
         this.router.navigate(route);
       },
       () => {
         this.snackBar.open("Error starting a Liquor Primary Application",
           "Fail",
           { duration: 3500, panelClass: ["red-snackbar"] });
-        if (LPOngoing) {
           this.startLPOngoing = false;
-        } else {
-          this.startLPCOngoing = false;
-        }
         console.log("Error starting a Liquor Primary Application");
       }
     );
