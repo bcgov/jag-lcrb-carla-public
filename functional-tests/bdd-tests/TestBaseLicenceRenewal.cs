@@ -263,6 +263,11 @@ namespace bdd_tests
 
             if (responses == "negative responses for Catering")
             {
+                // temporary fix
+                Thread.Sleep(5000);
+
+                ContinueToApplicationButton();
+
                 // select 'No'
                 // 1.Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB ?
                 var uiCriminalOffence =
@@ -336,6 +341,11 @@ namespace bdd_tests
 
             if (responses == "positive responses for Catering")
             {
+                // temporary fix
+                Thread.Sleep(5000);
+
+                ContinueToApplicationButton();
+
                 // select 'Yes'
                 // 1.Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB ?
                 var uiCriminalOffence =

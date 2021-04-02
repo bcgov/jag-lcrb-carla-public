@@ -197,7 +197,7 @@ Scenario: Liquor Primary Licence PDF Verification
     And I log in as local government for Parksville
     And I click on the link for Applications for Review
     And I click on the link for Review Application
-    And I specify my contact details as the approving authority
+    And I specify my contact details as the approving authority for liquor primary
     And I log in as a return user
     And I click on the link for Complete Application
     And I review the local government response for a liquor primary licence
