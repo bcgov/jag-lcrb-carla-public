@@ -47,10 +47,9 @@ export class SepApplicationComponent implements OnInit {
     if (this.applicationId) {
       this.db.getSepApplication(parseInt(this.applicationId, 10))
         .then(app => {
-          debugger;
           this.application = app;
         }, err => {
-          debugger;
+          console.error(err);
         });
     }
   }
