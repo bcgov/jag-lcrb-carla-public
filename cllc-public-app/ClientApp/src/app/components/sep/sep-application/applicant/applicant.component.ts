@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { PolicyDocumentComponent } from '@components/policy-document/policy-document.component';
 import { Account } from '@models/account.model';
 import { SepApplication } from '@models/sep-application.model';
 import { IndexDBService } from '@services/index-db.service';
@@ -10,6 +11,9 @@ import { IndexDBService } from '@services/index-db.service';
   styleUrls: ['./applicant.component.scss']
 })
 export class ApplicantComponent implements OnInit {
+  policySlug = "sep-terms-and-conditions";
+  @ViewChild("policyDocs", { static: true })
+  policyDocs: PolicyDocumentComponent;
   @Input() account: Account;
   _app: SepApplication = {} as SepApplication;
   @Input()
@@ -51,6 +55,8 @@ export class ApplicantComponent implements OnInit {
           this.form.get('dateAgreedToTnC').setValue(new Date());
         }
       });
+
+      this.policyDocs.setSlug(this.policySlug);
   }
 
   save(event) {
