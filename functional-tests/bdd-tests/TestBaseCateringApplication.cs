@@ -142,12 +142,10 @@ namespace bdd_tests
                 for (var i = 0; i < 50; i++)
                     try
                     {
-                        var names = ngDriver.FindElements(By.CssSelector("mat-button-toggle-group[id='previousApplication']"));
+                        var names = ngDriver.FindElements(By.Id("mat-button-toggle-109-button"));
                         if (names.Count > 0)
                         {
                             uiPreviousLicenceYes = names[0];
-                            var toggleButton = uiPreviousLicenceYes.FindElements(By.TagName("mat-button-toggle-button"))[0];
-                            toggleButton.Click();
                             break;
                         }
                     }
