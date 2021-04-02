@@ -1,1 +1,68 @@
-<p>applicant works!</p>
+<div class="form-wrapper">
+    <h1>Applicant Info</h1>
+
+    <div class="row">
+        <section [formGroup]="form" class="col-md-8">
+            <p>
+                Collect the information outlined on your application checklist to begin your application. The more
+                information you have about your event, the eaiser it should be to complete your application. Stuck on a
+                question? Don't worry, you can log out at any time and come back to your question when you're ready.
+                Answers will automatically be saved on your applcation so you can continue where you left off next time
+                you sign in.
+            </p>
+
+            <p>
+                View Frequently Asked Questions (FAQS) located on the Help page for everything you need to know about
+                SEPs.
+            </p>
+
+            <hr>
+            <app-field label="Event Name">
+                <input type="text" formControlName="eventName" class="form-control">
+            </app-field>
+
+            <hr>
+            <app-field label="Applicant information">
+                <div>
+                    <h6>{{account?.primarycontact?.firstname}} {{account?.primarycontact?.lastname}}</h6>
+                    {{account?.primarycontact?.address1_line1}} <br>
+                    {{account?.primarycontact?.address1_city}}, {{account?.primarycontact?.address1_stateorprovince}}
+                    <br>
+                    {{account?.primarycontact?.address1_postalcode}} <br>
+                    <br>
+                    {{account?.primarycontact?.telephone1}} <br>
+                    {{account?.primarycontact?.emailaddress1}}
+                </div>
+
+            </app-field>
+            <p>
+                Please ensure your legal name is used for the application and the information is correct. If you need to
+                update
+                your information visit Manage Account.
+            </p>
+
+            <hr>
+            <app-field label="General Terms and Conditions">
+                <p>
+                    Please read and acknowledge the Terms and Conditions to begin your application:
+                </p>
+
+                <div>
+                    T&Cs <br>
+                    T&Cs <br>
+                    T&Cs <br>
+                    T&Cs <br>
+                    T&Cs <br>
+                </div>
+
+                <mat-checkbox formControlName="agreeToTnC">
+                    <span class="error-states">*</span>
+                    <span class="ml-2 question-label">
+                        I have read and agree to these terms and conditions.
+                    </span>
+                </mat-checkbox>
+            </app-field>
+            <button mat-raised-button color="primary" (click)="save($event)">Next</button>
+        </section>
+    </div>
+</div>

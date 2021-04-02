@@ -279,6 +279,8 @@ import { EligibilityComponent } from './components/sep/sep-application/eligibili
 import { EventComponent } from './components/sep/sep-application/event/event.component';
 import { LiquorComponent } from './components/sep/sep-application/liquor/liquor.component';
 import { SummaryComponent } from './components/sep/sep-application/summary/summary.component';
+import { IndexDBService } from "@services/index-db.service";
+import { MyApplicationsComponent } from './components/sep/my-applications/my-applications.component';
 
 @NgModule({
   declarations: [
@@ -431,6 +433,7 @@ import { SummaryComponent } from './components/sep/sep-application/summary/summa
     EventComponent,
     LiquorComponent,
     SummaryComponent,
+    MyApplicationsComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -554,6 +557,7 @@ import { SummaryComponent } from './components/sep/sep-application/summary/summa
     PolicyDocumentDataService,
     PreviousAddressDataService,
     ServiceCardAuthGuard,
+    IndexDBService,
     EligibilityFormDataService,
     SurveyDataService,
     TiedHouseConnectionsDataService,

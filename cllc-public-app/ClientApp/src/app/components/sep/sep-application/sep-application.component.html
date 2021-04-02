@@ -9,7 +9,7 @@
 
             <ng-container *ngIf="step === 'applicant'">
                 <ng-template matStepLabel>Applicant</ng-template>
-                <app-applicant *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()"
+                <app-applicant [account]="account" [application]="application" *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()"
                     #applicant>
                 </app-applicant>
             </ng-container>
