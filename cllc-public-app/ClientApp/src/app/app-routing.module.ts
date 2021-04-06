@@ -85,6 +85,7 @@ import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-aut
 import { WorkerLandingPageComponent } from "@components/worker-qualification/worker-landing-page/worker-landing-page.component";
 import { TakeHomeEventComponent } from "@components/take-home-event/take-home-event.component";
 import { SepApplicationComponent } from "@components/sep/sep-application/sep-application.component";
+import { MyApplicationsComponent } from "@components/sep/my-applications/my-applications.component";
 
 const routes: Routes = [
   {
@@ -105,8 +106,14 @@ const routes: Routes = [
     data: { feature: "Sep" }
   },
   {
-    path: "sep/application",
+    path: "sep/application/:id/:step",
     component: SepApplicationComponent,
+    canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
+    data: { feature: "Sep" }
+  },
+  {
+    path: "sep/my-applications",
+    component: MyApplicationsComponent,
     canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
   },
