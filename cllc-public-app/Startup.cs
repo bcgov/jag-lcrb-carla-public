@@ -188,13 +188,16 @@ namespace Gov.Lclb.Cllb.Public
                 // health checks
                 services.AddHealthChecks()
                     .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
-                // No longer checking SQL Server in health checks as the SQL components are no longer active.
+                    // No longer checking SQL Server in health checks as the SQL components are no longer active.
 #if (USE_MSSQL)
                 .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
 #endif
-               .AddRedis(config, name: "Redis")
-               .AddCheck<DynamicsHealthCheck>("Dynamics")
-               .AddCheck<GeocoderHealthCheck>("Geocoder");
+                    .AddRedis(config, name: "Redis");
+                /*
+                 * .AddCheck<DynamicsHealthCheck>("Dynamics")
+                 * .AddCheck<GeocoderHealthCheck>("Geocoder");
+                 */
+
 
             }
             else // checks with no redis.
@@ -269,9 +272,9 @@ namespace Gov.Lclb.Cllb.Public
                 builder =>
                 {
                     builder.WithOrigins("https://localhost",
-                                        "http://cannabis-licensing-dev.pathfinder.bcgov",
-                                        "http://cannabis-licensing-test.pathfinder.bcgov",
-                                        "http://cannabis-licensing-prod.pathfinder.bcgov",
+                                        "https://lcrb-cllcms-portal-dev.silver.devops.bcgov",
+                                        "https://lcrb-cllcms-portal-test.silver.devops.bcgov",
+                                        "https://lcrb-cllcms-portal-prod.silver.devops.bcgov",
                                         "https://dev.justice.gov.bc.ca",
                                         "https://test.justice.gov.bc.ca",
                                         "https://justice.gov.bc.ca");
