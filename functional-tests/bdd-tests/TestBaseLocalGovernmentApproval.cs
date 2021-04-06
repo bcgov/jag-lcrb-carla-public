@@ -37,7 +37,7 @@ namespace bdd_tests
             uiOfficialEmail.SendKeys(email);
 
             // upload the supporting reports
-            if (applicationType == "liquor primary" || applicationType == "relocation")
+            if (applicationType == "liquor primary" || applicationType == "relocation" || applicationType == "liquor primary club")
             {
                 FileUpload("central_securities_register.pdf", "(//input[@type='file'])[14]");
 
