@@ -1,4 +1,5 @@
 export interface SepApplication {
+    id: number
     tempJobNumber: string;
     dateCreated: Date;
     lastUpdated: Date;
@@ -6,6 +7,6 @@ export interface SepApplication {
     applicantInfo: any;
     agreeToTnC: boolean;
     dateAgreedToTnC: Date;
-    stepCompleted: number;
+    stepCompleted: string;
     status: string;
 }

@@ -34,13 +34,29 @@ export class SepApplicationComponent implements OnInit {
   application: any;
   steps = ["applicant", "eligibility", "event", "liquor", "summary"];
   account: Account;
+  step: string;
+  get selectedIndex(): number {
+    let index = 0;
+    if(this.step){
+      index = this.steps.indexOf(this.step);
+      if(index === -1){
+        index = 0
+      }
+    }
+    
+    return index;
+  }
 
   constructor(private store: Store<AppState>,
     private db: IndexDBService,
     private route: ActivatedRoute) {
     this.store.select(state => state.currentAccountState.currentAccount)
       .subscribe(account => this.account = account);
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('id'));
+    this.route.paramMap.subscribe(pmap => {
+      // if the id is 'new' set it to null ( this will dictate whether the save is a create or an update)
+      this.applicationId = pmap.get('id') === 'new'? null : pmap.get('id');
+      this.step = pmap.get('step');
+    });
   }
 
   ngOnInit() {
@@ -52,9 +68,10 @@ export class SepApplicationComponent implements OnInit {
           console.error(err);
         });
     }
+
   }
 
-  canDeactivate(): Observable<boolean> {
+  canactivate(): Observable<boolean> {
     let result: Observable<boolean> = of(true);
     return result;
   }

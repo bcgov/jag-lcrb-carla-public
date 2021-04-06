@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import Dexie, { Table } from 'dexie';
+import { SepApplication } from '@models/sep-application.model';
+import Dexie, { PromiseExtended, Table } from 'dexie';
 
 @Injectable()
 export class IndexDBService {
@@ -12,14 +13,20 @@ export class IndexDBService {
     this.applications = this.db.table("applications");
   }
 
-  public async addSepApplication(data: any) {
-    await this.db.table("applications").add(data);
+  public async addSepApplication(data: SepApplication) {
+    let res = await this.applications.add(data);
+    return res;
   }
 
   public getSepApplication(id: number) {
-    return this.applications.where({ id }).first();
+    return this.applications.where({ id }).first() as PromiseExtended<SepApplication>;
   }
-  public getSepApplications() {
-    return this.applications.toArray();
+
+  public deleteSepApplication(id: number) {
+    return this.applications.delete(id);
+  }
+
+  public async getSepApplications() {
+    return this.applications.toArray()  as PromiseExtended<SepApplication[]>;
   }
 }

@@ -106,13 +106,7 @@ const routes: Routes = [
     data: { feature: "Sep" }
   },
   {
-    path: "sep/application",
-    component: SepApplicationComponent,
-    canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
-    data: { feature: "Sep" }
-  },
-  {
-    path: "sep/application/:id",
+    path: "sep/application/:id/:step",
     component: SepApplicationComponent,
     canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
     data: { feature: "Sep" }

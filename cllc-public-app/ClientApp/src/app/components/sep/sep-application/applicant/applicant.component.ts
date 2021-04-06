@@ -40,9 +40,7 @@ export class ApplicantComponent implements OnInit {
       eventName: [''],
       applicantInfo: [''],
       agreeToTnC: [''],
-      dateAgreedToTnC: [''],
-      stepCompleted: [''],
-      status: [''],
+      dateAgreedToTnC: ['']
     });
 
     if (this.application) {
@@ -56,13 +54,14 @@ export class ApplicantComponent implements OnInit {
         }
       });
 
-      this.policyDocs.setSlug(this.policySlug);
+    this.policyDocs.setSlug(this.policySlug);
   }
 
   save(event) {
     const data = {
-      dateCreated: new Date(),
+      ...this.application,
       lastUpdated: new Date(),
+      status: 'unsubmitted',
       contact: {
         firstname: this?.account?.primarycontact?.firstname,
         lastname: this?.account?.primarycontact?.lastname,
@@ -75,9 +74,14 @@ export class ApplicantComponent implements OnInit {
         emailaddress1: this?.account?.primarycontact?.emailaddress1,
       },
       ...this.form.value
-    };
-    
-    this.db.addSepApplication(data);
+    } as SepApplication;
+
+    if (data.id) {
+      this.db.applications.update(data.id, data);
+    } else {
+      data.dateCreated = new Date();
+      this.db.addSepApplication(data);
+    }
     this.saveComplete.emit(true);
   }
 }
