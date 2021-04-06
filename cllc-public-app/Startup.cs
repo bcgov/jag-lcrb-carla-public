@@ -204,13 +204,13 @@ namespace Gov.Lclb.Cllb.Public
             {
                 // health checks
                 services.AddHealthChecks()
-                    .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
+                    .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy());
                 // No longer checking SQL Server in health checks as the SQL components are no longer active.
 #if (USE_MSSQL)
                 .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
 #endif
-                .AddCheck<DynamicsHealthCheck>("Dynamics")
-                .AddCheck<GeocoderHealthCheck>("Geocoder");
+                //.AddCheck<DynamicsHealthCheck>("Dynamics")
+                //.AddCheck<GeocoderHealthCheck>("Geocoder");
             }
 
             // session will automatically use redis or another distributed cache if it is available.
