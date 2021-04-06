@@ -59,6 +59,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         dateSubmitted = contact.AdoxioCasdatesubmitted;
                     }
 
+                    // 2021-03-31 ASR: changed the birthdate field to DateTime (from DateTimeOffset) to ignore the timezone on the birthdate field in Dynamics.
+                    // Accordingly the security screening Angular page has been modified to display this date in GMT to match the value set here.
                     var newItem = new SecurityScreeningStatusItem
                     {
                         ContactId = contact.Contactid,
@@ -66,7 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         FirstName = contact.Firstname,
                         MiddleName = contact.Middlename,
                         LastName = contact.Lastname,
-                        Birthdate = contact.Birthdate,
+                        Birthdate = contact.Birthdate?.Date, // LCSD-5366 ignore the timezone as it is not relevant to birth dates
                         PhsLink = contact.PhsLink,
                         CasLink = contact.CasLink,
                         DateSubmitted = dateSubmitted,

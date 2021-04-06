@@ -1,4 +1,4 @@
-﻿Feature: RuralLicenseeRetailStore
+﻿Feature: RuralLicenseeRetailStoreApplication
     As a logged in business user
     I want to submit a rural LRS application for different business types
 

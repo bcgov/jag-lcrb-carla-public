@@ -39,7 +39,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("FEATURE_LIQUOR_FREE_EVENTS", "LiquorFreeEvents"), // All-ages Liquor-Free events for Liquor Primary and Liquor Primary Club
                 ("FEATURE_SEP", "Sep"), // Controls Special Event Permits content
                 ("FEATURE_DISABLE_WORKER_QUALIFICATION", "DisableWorkerQualification"),  // Removes worker qualification from the portal
-                ("FEATURE_TAKE_HOME_EVENTS", "TakeHomeEvents") // Take Home Public Sampling events - covers samples handed out in public for home consumption
+                ("FEATURE_TAKE_HOME_EVENTS", "TakeHomeEvents"), // Take Home Public Sampling events - covers samples handed out in public for home consumption
+                ("FEATURE_BRIDGE_LOGIN", "BridgeLogin") // Login using bridge entity
             };
 
         public FeaturesController(IConfiguration configuration)
