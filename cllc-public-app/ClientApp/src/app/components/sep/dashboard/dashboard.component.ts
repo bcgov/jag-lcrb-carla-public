@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe((startApplication: boolean) => {
         if(startApplication){
-          this.router.navigateByUrl('/sep/application')
+          this.router.navigateByUrl('/sep/application/new/applicant')
         }
       });
   }
