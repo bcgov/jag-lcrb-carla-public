@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm that the Catering functionality is ready for release
 
-@validation @privatecorporation @release2
+@validation @privatecorporation @release8
 Scenario: Catering Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
