@@ -1,7 +1,7 @@
 <div class="form-wrapper">
     <h1>Applicant Info</h1>
 
-    <div class="row">
+    <div class="row pl-3">
         <section [formGroup]="form" class="col-md-8">
             <p>
                 Collect the information outlined on your application checklist to begin your application. The more
@@ -18,12 +18,12 @@
 
             <hr>
             <app-field label="Event Name">
-                <input type="text" formControlName="eventName" class="form-control">
+                <input type="text" formControlName="eventName" class="form-control ml-3">
             </app-field>
 
             <hr>
             <app-field label="Applicant information">
-                <div>
+                <div class="ml-3 p-3 applcant-info">
                     <h6>{{account?.primarycontact?.firstname}} {{account?.primarycontact?.lastname}}</h6>
                     {{account?.primarycontact?.address1_line1}} <br>
                     {{account?.primarycontact?.address1_city}}, {{account?.primarycontact?.address1_stateorprovince}}
@@ -33,7 +33,6 @@
                     {{account?.primarycontact?.telephone1}} <br>
                     {{account?.primarycontact?.emailaddress1}}
                 </div>
-
             </app-field>
             <p>
                 Please ensure your legal name is used for the application and the information is correct. If you need to
@@ -47,7 +46,7 @@
                     Please read and acknowledge the Terms and Conditions to begin your application:
                 </p>
 
-                <div>
+                <div class="tnc mb-3">
                     <app-policy-document [fullWidth]="true" #policyDocs></app-policy-document>
                 </div>
 
@@ -58,7 +57,11 @@
                     </span>
                 </mat-checkbox>
             </app-field>
-            <button mat-raised-button color="primary" (click)="save($event)">Next</button>
+
+            <section class="d-flex justify-content-between">
+                <button mat-raised-button color="primary" (click)="save($event)">Next</button>
+                <button mat-button color="primary" routerLink="/sep/my-applications">My Applications</button>
+            </section>
         </section>
     </div>
 </div>

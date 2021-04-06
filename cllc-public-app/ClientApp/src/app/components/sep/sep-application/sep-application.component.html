@@ -1,6 +1,6 @@
 <div>
     <!-- <h1></h1> -->
-    <mat-horizontal-stepper [linear]="true" (selectionChange)="selectionChange($event)" #stepper>
+    <mat-horizontal-stepper [linear]="true" [selectedIndex]="selectedIndex" (selectionChange)="selectionChange($event)" #stepper>
         <ng-template matStepperIcon="edit">
             <fa-icon [icon]="faCheck"></fa-icon>
         </ng-template>
