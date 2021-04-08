@@ -1250,6 +1250,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     thirdPartyText = $"<tr><td>Third Party Operator</td><td>{adoxioLicense.AdoxioThirdPartyOperatorId.Name}</td></tr>";
                 }
 
+                var serviceAreaText = "";
                 var endorsementsText = "";
                 License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
 
@@ -1257,17 +1258,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (licenceVM.ServiceAreas.Count > 0)
                 {
+                    serviceAreaText += $@"<h3 style=""text-align: center;"">CAPACITY</h3>";
 
-                    endorsementsText += "<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'><tr>";
+                    serviceAreaText += "<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'><tr>";
 
                     var cells = 0;
                     var leftover = 0;
 
                     foreach (CapacityArea area in licenceVM.ServiceAreas)
                     {
+                        // sometimes we have bad data and should not try to spend our life fixing other people's problems
+                        if(area.AreaLocation == null || area.Capacity == null || area.AreaCategory != 845280000){
+                            continue;
+                        }
+
                         cells++;
 
-                        endorsementsText += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AreaLocation}{area.AreaNumber}</td><td>{area.Capacity}</td></tr></table></td>";
+                        serviceAreaText += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AreaLocation}</td><td>{area.Capacity}</td></tr></table></td>";
 
                         // every 4 cells
                         leftover = cells % 4;
@@ -1275,7 +1282,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         if (leftover == 0)
                         {
                             // do a new row
-                            endorsementsText += "</tr><tr>";
+                            serviceAreaText += "</tr><tr>";
                         }
 
                     }
@@ -1283,10 +1290,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // fill in the remaining cells, so the table makes sense 
                     for (int i = 0; i < leftover; i++)
                     {
-                        endorsementsText += "<td class='space'>&nbsp;</td>";
+                        serviceAreaText += "<td class='space'>&nbsp;</td>";
                     }
 
-                    endorsementsText += "</tr></table>";
+                    serviceAreaText += "</tr></table>";
                 }
 
 
@@ -1480,6 +1487,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
                         { "licencee", adoxioLicense.AdoxioLicencee?.Name },
                         { "thirdPartyText", thirdPartyText},
+                        { "serviceAreaText", serviceAreaText},
                         { "licenceType", typeLabel},
                         { "effectiveDate", effectiveDateParam },
                         { "expiryDate", expiraryDateParam },
