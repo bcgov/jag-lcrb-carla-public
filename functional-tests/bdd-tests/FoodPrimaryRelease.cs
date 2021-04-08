@@ -105,7 +105,7 @@ Scenario: Food Primary Release Test #2 (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@foodprimary @release6
+@foodprimary
 Scenario: Food Primary Release Test #1 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
@@ -149,7 +149,7 @@ Scenario: Food Primary Release Test #1 (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@foodprimary @release6
+@foodprimary
 Scenario: Food Primary Release Test #2 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
