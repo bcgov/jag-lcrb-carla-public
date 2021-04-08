@@ -113,6 +113,9 @@ export class Account {
       case "LimitedLiabilityCorporation":
         name = "Private Corporation";
         break;
+      case "MilitaryMess":
+        name = "Military Mess";
+        break;
       default:
         name = businessType;
         break;

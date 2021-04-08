@@ -22,10 +22,10 @@
     </section>
     <section class="col-md-4 col-xs-12 sign-container">
       <span class="sign" *ngIf="currentUser">
-        <span>{{currentUser.name}}</span>
-
+        <a routerLink="/account-profile" class="profile-link">{{currentUser.name}}</a>
 
         &nbsp;
+
         <span class="text-right signin">
           <a href="logout">Sign Out</a>
         </span>
@@ -102,6 +102,12 @@
                   Cannabis Application Statistics
                 </a>
               </li>
+              <li class="nav-item">
+                <a (click)="toggleButton.click()" tabindex="2"  appRemoveIfFeatureOff="Sep"
+                   routerLink="/policy-document/completing-an-application">
+                   Special Event Permit Help Centre
+                </a>
+              </li>
               <li class="nav-item" *ngIf="showMap">
                 <a (click)="toggleButton.click()" tabindex="2" routerLink="/map">
                   Map of Cannabis Stores
@@ -166,6 +172,10 @@
                 <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
                    class="nav-link" routerLink="/sep/dashboard">
                   Special Events Permits Dashboard
+                </a>
+                <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
+                   class="nav-link" routerLink="/policy-document/completing-an-application">
+                   Special Event Permit Help Centre
                 </a>
                 <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
                   matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="!(showNoticesBadge$ | async)"

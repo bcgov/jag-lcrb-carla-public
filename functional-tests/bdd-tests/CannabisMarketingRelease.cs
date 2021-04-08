@@ -23,7 +23,7 @@ Scenario: Cannabis Marketing Release (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@cannabismktg @release6
+@cannabismktg
 Scenario: Cannabis Marketing Release (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Marketing Licence
