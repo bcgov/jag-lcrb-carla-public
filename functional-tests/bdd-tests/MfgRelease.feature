@@ -108,7 +108,7 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @winery @release6
+@manufacturer @winery 
 Scenario: Manufacturer Release #1 (Winery/Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
@@ -159,7 +159,7 @@ Scenario: Manufacturer Release #1 (Winery/Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @winery @release6
+@manufacturer @winery 
 Scenario: Manufacturer Release #2 (Winery/Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
