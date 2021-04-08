@@ -71,7 +71,7 @@ export class SepApplicationComponent implements OnInit {
 
   }
 
-  canactivate(): Observable<boolean> {
+  canActivate(): Observable<boolean> {
     let result: Observable<boolean> = of(true);
     return result;
   }
