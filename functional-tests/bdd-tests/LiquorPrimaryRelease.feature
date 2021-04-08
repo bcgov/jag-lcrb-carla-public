@@ -232,7 +232,7 @@ Scenario: Liquor Primary Release Test #3 (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@liquorprimary @release7
+@liquorprimary 
 Scenario: Liquor Primary Release Test #1 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Liquor Primary Licence
@@ -287,7 +287,7 @@ Scenario: Liquor Primary Release Test #1 (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@liquorprimary @release7
+@liquorprimary 
 Scenario: Liquor Primary Release Test #2 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Liquor Primary Licence
@@ -365,7 +365,7 @@ Scenario: Liquor Primary Release Test #2 (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@liquorprimary @release7
+@liquorprimary 
 Scenario: Liquor Primary Release Test #3 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Liquor Primary Licence

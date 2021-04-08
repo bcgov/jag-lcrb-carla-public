@@ -1,22 +1,16 @@
-using System.Collections.Generic;
-using System.IO;
-using CsvHelper;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Rest;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
+using Microsoft.Rest;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Serilog;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -25,20 +19,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize(Policy = "Business-User")]
     public class MonthlyReportsController : ControllerBase
     {
-        private readonly IMemoryCache _cache;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
 
-        public MonthlyReportsController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor,
-            IConfiguration configuration, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
+        public MonthlyReportsController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor)
         {
-            _cache = memoryCache;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
-            _configuration = configuration;
-            _logger = loggerFactory.CreateLogger(typeof(MonthlyReportsController));
+            _logger = Log.Logger;
         }
 
         private List<MonthlyReport> GetMonthlyReportsByUser(string licenceeId, bool expandInventoryReports)
@@ -108,7 +97,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error querying monthly reports");
+                _logger.Error(ex, "Error querying monthly reports");
                 monthlyReports = null;
             }
 
@@ -156,7 +145,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException ex)
             {
-                _logger.LogError(ex, "Error getting cannabis monthly report");
+                _logger.Error(ex, "Error getting cannabis monthly report");
             }
             return new NotFoundResult();
         }
@@ -181,67 +170,77 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            try
+            // Update inventory reports
+            if (item.inventorySalesReports != null && item.inventorySalesReports.Count > 0)
             {
-                // Update monthly report
-                MicrosoftDynamicsCRMadoxioCannabismonthlyreport monthlyReport = new MicrosoftDynamicsCRMadoxioCannabismonthlyreport
+                foreach (InventorySalesReport invReport in item.inventorySalesReports)
                 {
-                    AdoxioEmployeesmanagement = item.employeesManagement,
-                    AdoxioEmployeesadministrative = item.employeesAdministrative,
-                    AdoxioEmployeessales = item.employeesSales,
-                    AdoxioEmployeesproduction = item.employeesProduction,
-                    AdoxioEmployeesother = item.employeesOther,
-                    Statuscode = item.statusCode
-                };
-                _dynamicsClient.Cannabismonthlyreports.Update(item.monthlyReportId, monthlyReport);
-
-                // Update inventory reports
-                if (item.inventorySalesReports != null && item.inventorySalesReports.Count > 0)
-                {
-                    foreach (InventorySalesReport invReport in item.inventorySalesReports)
+                    MicrosoftDynamicsCRMadoxioCannabisinventoryreport updateReport = new MicrosoftDynamicsCRMadoxioCannabisinventoryreport
                     {
-                        MicrosoftDynamicsCRMadoxioCannabisinventoryreport updateReport = new MicrosoftDynamicsCRMadoxioCannabisinventoryreport
-                        {
-                            AdoxioOpeninginventory = invReport.openingInventory == null ? 0 : invReport.openingInventory,
-                            AdoxioQtyreceiveddomestic = invReport.domesticAdditions == null ? 0 : invReport.domesticAdditions,
-                            AdoxioQtyreceivedreturns = invReport.returnsAdditions == null ? 0 : invReport.returnsAdditions,
-                            AdoxioQtyreceivedother = invReport.otherAdditions == null ? 0 : invReport.otherAdditions,
-                            AdoxioQtyshippeddomestic = invReport.domesticReductions == null ? 0 : invReport.domesticReductions,
-                            AdoxioQtyshippedreturned = invReport.returnsReductions == null ? 0 : invReport.returnsReductions,
-                            AdoxioQtydestroyed = invReport.destroyedReductions == null ? 0 : invReport.destroyedReductions,
-                            AdoxioQtyloststolen = invReport.lostReductions == null ? 0 : invReport.lostReductions,
-                            AdoxioOtherreductions = invReport.otherReductions == null ? 0 : invReport.otherReductions,
-                            AdoxioClosinginventory = invReport.closingNumber == null ? 0 : invReport.closingNumber,
-                            AdoxioValueofclosinginventory = invReport.closingValue == null ? 0 : invReport.closingValue,
-                            AdoxioPackagedunitsnumber = invReport.totalSalesToConsumerQty == null ? 0 : invReport.totalSalesToConsumerQty,
-                            AdoxioTotalvalue = invReport.totalSalesToConsumerValue == null ? 0 : invReport.totalSalesToConsumerValue,
-                            AdoxioPackagedunitsnumberretailer = invReport.totalSalesToRetailerQty == null ? 0 : invReport.totalSalesToRetailerQty,
-                            AdoxioTotalvalueretailer = invReport.totalSalesToRetailerValue == null ? 0 : invReport.totalSalesToRetailerValue
-                        };
-                        if (invReport.product == "Seeds")
-                        {
-                            updateReport.AdoxioTotalnumberseeds = invReport.totalSeeds == null ? 0 : invReport.totalSeeds;
-                        }
-                        else if (invReport.product == "Extracts - Other" || invReport.product == "Other")
-                        {
-                            updateReport.AdoxioOtherdescription = invReport.otherDescription;
-                        }
+                        AdoxioOpeninginventory = invReport.openingInventory == null ? 0 : invReport.openingInventory,
+                        AdoxioQtyreceiveddomestic = invReport.domesticAdditions == null ? 0 : invReport.domesticAdditions,
+                        AdoxioQtyreceivedreturns = invReport.returnsAdditions == null ? 0 : invReport.returnsAdditions,
+                        AdoxioQtyreceivedother = invReport.otherAdditions == null ? 0 : invReport.otherAdditions,
+                        AdoxioQtyshippeddomestic = invReport.domesticReductions == null ? 0 : invReport.domesticReductions,
+                        AdoxioQtyshippedreturned = invReport.returnsReductions == null ? 0 : invReport.returnsReductions,
+                        AdoxioQtydestroyed = invReport.destroyedReductions == null ? 0 : invReport.destroyedReductions,
+                        AdoxioQtyloststolen = invReport.lostReductions == null ? 0 : invReport.lostReductions,
+                        AdoxioOtherreductions = invReport.otherReductions == null ? 0 : invReport.otherReductions,
+                        AdoxioClosinginventory = invReport.closingNumber == null ? 0 : invReport.closingNumber,
+                        AdoxioValueofclosinginventory = invReport.closingValue == null ? 0 : invReport.closingValue,
+                        AdoxioPackagedunitsnumber = invReport.totalSalesToConsumerQty == null ? 0 : invReport.totalSalesToConsumerQty,
+                        AdoxioTotalvalue = invReport.totalSalesToConsumerValue == null ? 0 : invReport.totalSalesToConsumerValue,
+                        AdoxioPackagedunitsnumberretailer = invReport.totalSalesToRetailerQty == null ? 0 : invReport.totalSalesToRetailerQty,
+                        AdoxioTotalvalueretailer = invReport.totalSalesToRetailerValue == null ? 0 : invReport.totalSalesToRetailerValue
+                    };
+                    if (invReport.product == "Seeds")
+                    {
+                        updateReport.AdoxioTotalnumberseeds = invReport.totalSeeds == null ? 0 : invReport.totalSeeds;
+                    }
+                    else if (invReport.product == "Extracts - Other" || invReport.product == "Other")
+                    {
+                        updateReport.AdoxioOtherdescription = invReport.otherDescription;
+                    }
 
-                        if (invReport.product != "Vegetative Cannabis")
-                        {
-                            updateReport.AdoxioWeightofclosinginventory = invReport.closingWeight == null ? 0 : invReport.closingWeight;
-                        }
-
+                    if (invReport.product != "Vegetative Cannabis")
+                    {
+                        updateReport.AdoxioWeightofclosinginventory = invReport.closingWeight == null ? 0 : invReport.closingWeight;
+                    }
+                    try
+                    {
                         _dynamicsClient.Cannabisinventoryreports.Update(invReport.inventoryReportId, updateReport);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.Error(httpOperationException, "Error updating inventory report");
+                        // fail if we can't update.
+                        throw (httpOperationException);
                     }
                 }
             }
+
+            try
+            {
+                // Update monthly report.  Changed 4/7/2021 to occur after the inventory reports are done.
+                MicrosoftDynamicsCRMadoxioCannabismonthlyreport monthlyReport =
+                    new MicrosoftDynamicsCRMadoxioCannabismonthlyreport
+                    {
+                        AdoxioEmployeesmanagement = item.employeesManagement,
+                        AdoxioEmployeesadministrative = item.employeesAdministrative,
+                        AdoxioEmployeessales = item.employeesSales,
+                        AdoxioEmployeesproduction = item.employeesProduction,
+                        AdoxioEmployeesother = item.employeesOther,
+                        Statuscode = item.statusCode
+                    };
+                _dynamicsClient.Cannabismonthlyreports.Update(item.monthlyReportId, monthlyReport);
+            }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Error updating monthly report");
+                _logger.Error(httpOperationException, "Error updating monthly report");
                 // fail if we can't update.
                 throw (httpOperationException);
             }
+
 
             return GetMonthlyReport(id);
         }
