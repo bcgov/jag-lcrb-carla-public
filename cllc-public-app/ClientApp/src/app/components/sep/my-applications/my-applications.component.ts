@@ -41,7 +41,7 @@ export class MyApplicationsComponent implements OnInit {
     apps = apps.sort((a, b) => {
       var dateA = new Date(a.dateCreated).getTime();
       var dateB = new Date(b.dateCreated).getTime();
-      return dateA > dateB ? -1 : 1;
+      return dateB - dateA;
     });
     this.applications = apps;
   }
