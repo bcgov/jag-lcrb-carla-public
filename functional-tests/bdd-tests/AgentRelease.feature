@@ -26,7 +26,7 @@ Scenario: Agent Release Test (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@agent @release6
+@agent
 Scenario: Agent Release Test (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for an Agent Licence
