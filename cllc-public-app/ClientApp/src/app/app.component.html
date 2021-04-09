@@ -22,7 +22,10 @@
     </section>
     <section class="col-md-4 col-xs-12 sign-container">
       <span class="sign" *ngIf="currentUser">
-        <a routerLink="/account-profile" class="profile-link">{{currentUser.name}}</a>
+        <a *ngIf="currentUser.userType == 'Business'" routerLink="/account-profile" class="profile-link">{{currentUser.name}}</a>
+
+        <a appRemoveIfFeatureOff="Sep" *ngIf="currentUser.userType == 'VerifiedIndividual'" routerLink="/servicecard-profile" class="profile-link">{{currentUser.name}}</a>
+        <span appRemoveIfFeatureOn="Sep" *ngIf="currentUser.userType == 'VerifiedIndividual'">{{currentUser.name}}</span>
 
         &nbsp;
 
@@ -81,7 +84,7 @@
                    routerLink="/policy-document/application-timelines">Application Requirements</a>
               </li-->
               <li class="nav-item">
-                <a (click)="toggleButton.click()" tabindex="2"
+                <a appRemoveIfFeatureOn="DisableWorkerQualification" (click)="toggleButton.click()" tabindex="2"
                    routerLink="/policy-document/worker-qualification-training">
                   Cannabis Worker Security Verification
                 </a>
@@ -153,7 +156,7 @@
                   Security
                   Screening
                 </a>
-                <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
+                <a appRemoveIfFeatureOn="DisableWorkerQualification" *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
                    class="nav-link" routerLink="/worker-qualification/dashboard">
                   Dashboard
                 </a>
@@ -163,11 +166,10 @@
                   Applications for Review
                 </a>
                 <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
-                matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="!(showNoticesBadge$ | async)"
-                class="nav-link with-badge" routerLink="/notices">
-                Notices
-              </a>
-
+                  matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="!(showNoticesBadge$ | async)"
+                  class="nav-link with-badge" routerLink="/notices">
+                  Notices
+                </a>
 
                 <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
                    class="nav-link" routerLink="/sep/dashboard">
