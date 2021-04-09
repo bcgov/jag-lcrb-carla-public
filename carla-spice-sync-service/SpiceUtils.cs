@@ -467,11 +467,12 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 {
                     licenceType = _dynamicsClient.Licencetypes.Get(filter: $"adoxio_licencetypeid eq {application._adoxioLicencetypeValue}").Value[0];
                 }
+                /*
                 else
                 {
                     // LCSD-3203 default to CRS if no licence type
                     licenceType = _dynamicsClient.Licencetypes.Get(filter: $"adoxio_name eq 'Cannabis Retail Store'").Value[0];
-                }
+                }*/
 
                 var screeningRequest = new IncompleteApplicationScreening()
                 {
