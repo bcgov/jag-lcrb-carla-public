@@ -21,6 +21,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 using Newtonsoft.Json;
+using Winista.Mime;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using FileSystemItem = Gov.Lclb.Cllb.Public.ViewModels.FileSystemItem;
 
@@ -76,7 +77,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var account = await _dynamicsClient.GetAccountByIdAsync(id).ConfigureAwait(true);
                     if (account != null)
                     {
-                        result = account != null && CurrentUserHasAccessToAccount(account.Accountid);
+                        result = CurrentUserHasAccessToAccount(account.Accountid);
                         folderName = account.GetDocumentFolderName();
                     }
                     break;
@@ -688,48 +689,66 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (!hasAccess) return new NotFoundResult();
 
-            // Sanitize file name
-            var illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
-            var fileName = illegalInFileName.Replace(file.FileName, "");
-            illegalInFileName = new Regex(@"[&:/\\|]");
-            fileName = illegalInFileName.Replace(fileName, "-");
-
-            fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
-
-            var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
-
-            _dynamicsClient.CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
-
             var ms = new MemoryStream();
             file.OpenReadStream().CopyTo(ms);
             var data = ms.ToArray();
 
-            // call the web service
-            var uploadRequest = new UploadFileRequest
+            // Check for a bad file type.
+            
+            var mimeTypes = new MimeTypes();
+
+            var mimeType = mimeTypes.GetMimeType(data);
+
+            // Add additional allowed mime types here
+            if (mimeType == null || !(mimeType.Name.Equals("image/png") || mimeType.Name.Equals("image/jpeg") ||
+                                     mimeType.Name.Equals("application/pdf")))
             {
-                ContentType = file.ContentType,
-                Data = ByteString.CopyFrom(data),
-                EntityName = entityName,
-                FileName = fileName,
-                FolderName = folderName
-            };
-
-            var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
-
-            var logFolderName = WordSanitizer.Sanitize(folderName);
-            var logFileName = WordSanitizer.Sanitize(fileName);
-
-            if (uploadResult.ResultStatus == ResultStatus.Success)
-            {
-                // Update modifiedon to current time
-                UpdateEntityModifiedOnDate(entityName, entityId, true);
-                _logger.LogInformation($"SUCCESS in uploading file {logFileName} to folder {logFolderName}");
+                _logger.LogError($"ERROR in uploading file due to invalid mime type {mimeType?.Name}");
+                return new NotFoundResult();
             }
             else
             {
-                _logger.LogError($"ERROR in uploading file {logFileName} to folder {logFolderName}");
-                throw new Exception($"ERROR in uploading file {logFileName} to folder {logFolderName}");
+                // Sanitize file name
+                var illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
+                var fileName = illegalInFileName.Replace(file.FileName, "");
+                illegalInFileName = new Regex(@"[&:/\\|]");
+                fileName = illegalInFileName.Replace(fileName, "-");
+
+                fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
+
+                var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+
+                _dynamicsClient.CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
+
+                // call the web service
+                var uploadRequest = new UploadFileRequest
+                {
+                    ContentType = file.ContentType,
+                    Data = ByteString.CopyFrom(data),
+                    EntityName = entityName,
+                    FileName = fileName,
+                    FolderName = folderName
+                };
+
+                var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
+
+                var logFolderName = WordSanitizer.Sanitize(folderName);
+                var logFileName = WordSanitizer.Sanitize(fileName);
+
+                if (uploadResult.ResultStatus == ResultStatus.Success)
+                {
+                    // Update modifiedon to current time
+                    UpdateEntityModifiedOnDate(entityName, entityId, true);
+                    _logger.LogInformation($"SUCCESS in uploading file {logFileName} to folder {logFolderName}");
+                }
+                else
+                {
+                    _logger.LogError($"ERROR in uploading file {logFileName} to folder {logFolderName}");
+                    throw new Exception($"ERROR in uploading file {logFileName} to folder {logFolderName}");
+                }
             }
+
+            
 
             return new JsonResult(result);
         }
