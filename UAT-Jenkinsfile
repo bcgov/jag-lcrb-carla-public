@@ -12,10 +12,10 @@ node('master') {
 					sleep(5)
 					buildSelector1.logs('-f')
 					sleep(30)
-					def bc2 = openshift.selector('bc', 'cllc-public-frontend')
+					def bc2 = openshift.selector('bc', 'cllc-public-frontend-test')
 						def buildSelector2 = bc2.startBuild()
                         sleep(5)
-						def builds = openshift.selector("bc", 'cllc-public-frontend').related('builds')
+						def builds = openshift.selector("bc", 'cllc-public-frontend-test').related('builds')
                         timeout(50) { 
                             builds.untilEach(1) {
                             return (it.object().status.phase == "Complete")
