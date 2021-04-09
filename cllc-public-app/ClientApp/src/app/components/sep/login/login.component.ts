@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.getPolicyDocumentHTML();
   }
   getPolicyDocumentHTML() {
-    const policySlug = "worker-qualification-home";
+    const policySlug = "sep-welcome";
     this.policyDocumentDataService.getPolicyDocument(policySlug)
       .subscribe((data: PolicyDocument) => {
         this.title = data.title;
