@@ -30,6 +30,9 @@ import {
   faShoppingCart,
   faTrashAlt
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBan
+} from "@fortawesome/free-solid-svg-icons";
 
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
@@ -59,6 +62,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   faBusinessTime = faBusinessTime;
   faExchangeAlt = faExchangeAlt;
   faBolt = faBolt;
+  faBan = faBan;
   mainForm: FormGroup;
   busy: Subscription;
   licenceForms = {};
