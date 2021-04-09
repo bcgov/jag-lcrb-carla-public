@@ -102,25 +102,21 @@
                   Cannabis Application Statistics
                 </a>
               </li>
-              <li class="nav-item">
-                <a (click)="toggleButton.click()" tabindex="2"  appRemoveIfFeatureOff="Sep"
-                   routerLink="/policy-document/completing-an-application">
-                   Special Event Permit Help Centre
-                </a>
-              </li>
+
               <li class="nav-item" *ngIf="showMap">
                 <a (click)="toggleButton.click()" tabindex="2" routerLink="/map">
                   Map of Cannabis Stores
                 </a>
               </li>
-              <li class="nav-item" appRemoveIfFeatureOff="CovidApplication">
-                <a (click)="toggleButton.click()" tabindex="2" routerLink="/covid-temporary-extension" appRemoveIfFeatureOn="DisableLogin">
-                  Temporary Expanded Service Areas
-                </a>
-              </li>
               <li class="nav-item" appRemoveIfFeatureOff="Sep">
                 <a (click)="toggleButton.click()" tabindex="2" routerLink="/sep">
                   Special Events Permits
+                </a>
+              </li>
+              <li class="nav-item">
+                <a (click)="toggleButton.click()" tabindex="2"  appRemoveIfFeatureOff="Sep"
+                   routerLink="/policy-document/completing-an-application">
+                   Special Events Permits Help Centre
                 </a>
               </li>
             </ul>
@@ -161,27 +157,27 @@
                    class="nav-link" routerLink="/worker-qualification/dashboard">
                   Dashboard
                 </a>
-                <a appRemoveIfFeatureOff="CovidApplication" (click)="toggleButtonLoggedIn.click()"
-                   class="nav-link" routerLink="/covid-temporary-extension">
-                  Covid Temporary Extension
-                </a>
+
                 <a appRemoveIfFeatureOff="LGApprovals" *ngIf="account?.businessType === 'LocalGovernment' && account?.localGovernmentId" (click)="toggleButtonLoggedIn.click()"
                    class="nav-link" routerLink="/lg-approvals">
                   Applications for Review
                 </a>
+                <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
+                matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="!(showNoticesBadge$ | async)"
+                class="nav-link with-badge" routerLink="/notices">
+                Notices
+              </a>
+
+
                 <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
                    class="nav-link" routerLink="/sep/dashboard">
                   Special Events Permits Dashboard
                 </a>
                 <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
                    class="nav-link" routerLink="/policy-document/completing-an-application">
-                   Special Event Permit Help Centre
+                   Special Events Permits Help Centre
                 </a>
-                <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
-                  matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="!(showNoticesBadge$ | async)"
-                  class="nav-link with-badge" routerLink="/notices">
-                  Notices
-                </a>
+
               </li>
             </ul>
           </div>
