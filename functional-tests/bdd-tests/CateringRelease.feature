@@ -14,8 +14,12 @@ Scenario: Catering Release (Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee 
     And I click on the link for Licences & Authorizations
-    And I click on the button for Catering terms and conditions
-    And the correct terms and conditions are displayed for Catering
+    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
+    And I click on the Continue to Application button
+    And I request a change in terms and conditions application
+    And I click on the Submit button
+    And I enter the payment information
+    And I click on the link for Licences & Authorizations
     And I click on the link for Download Licence
     And I click on the link for Establishment Name Change Application
     And I click on the Continue to Application button
@@ -35,14 +39,6 @@ Scenario: Catering Release (Private Corporation)
     And I click on the link for Renew Licence
     And I click on the Continue to Application button
     And I renew the licence with positive responses for Catering
-    And I click on the link for Licences & Authorizations
-    And I confirm the terms and conditions for a Catering licence
-    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
-    And I click on the Continue to Application button
-    And I request a change in terms and conditions application
-    And I click on the Submit button
-    And I enter the payment information
-    And I click on the link for Licences & Authorizations
     And I request a transfer of ownership for Catering
     And the account is deleted
     Then I see the login page
