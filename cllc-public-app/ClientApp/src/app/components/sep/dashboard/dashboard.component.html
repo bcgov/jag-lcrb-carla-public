@@ -11,7 +11,7 @@
                     <p>Check the status of your applications or search for past applications</p>
                     <button routerLink="/sep/my-applications" mat-raised-button color="secondary">GO TO MY APPLICATIONS</button>
                 </section>
-                <section class="border app-button"> 
+                <section class="border app-button">
                     <h5>START AN APPLICATION</h5>
                     <p>See the application checklist and get started</p>
                     <button mat-raised-button color="primary" (click)="startApplication()">START NEW APPLICATION</button>
@@ -40,7 +40,7 @@
             </div>
         </section>
         <section class="col-md-4">
-            <app-resources></app-resources>
+            <app-resources [currentUser]="currentUser"></app-resources>
         </section>
     </div>
 
