@@ -12,11 +12,11 @@ import { filter, takeWhile } from 'rxjs/operators';
 import { User } from '@models/user.model';
 
 @Component({
-  selector: 'app-bcsc-profile',
-  templateUrl: './bcsc-profile.component.html',
-  styleUrls: ['./bcsc-profile.component.scss']
+  selector: 'app-servicecard-profile',
+  templateUrl: './servicecard-profile.component.html',
+  styleUrls: ['./servicecard-profile.component.scss']
 })
-export class BcscProfileComponent extends FormBase implements OnInit {
+export class ServiceCardProfileComponent extends FormBase implements OnInit {
   // icons
   faExclamationTriangle = faExclamationTriangle;
   faTrash = faTrash;
