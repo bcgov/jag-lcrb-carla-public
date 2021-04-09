@@ -121,7 +121,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (folderName != null && result  && relativeUrl != null) // do a case insensitive comparison of the first part.
             {
-                result = relativeUrl.ToUpper().StartsWith(folderName.ToUpper());
+                int slashPos = relativeUrl.IndexOf("/");
+                if (slashPos != -1  && slashPos < relativeUrl.Length)
+                {
+                    slashPos = relativeUrl.IndexOf("/", slashPos + 1);
+                }
+                result = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderName.ToUpper());
             }
 
             return result;
@@ -311,7 +316,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (folderName != null && authorized && relativeUrl != null) // do a case insensitive comparison of the first part.
             {
-                authorized = relativeUrl.ToUpper().StartsWith(folderName.ToUpper());
+                int slashPos = relativeUrl.IndexOf("/");
+                if (slashPos != -1 && slashPos < relativeUrl.Length)
+                {
+                    slashPos = relativeUrl.IndexOf("/", slashPos + 1);
+                }
+                authorized = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderName.ToUpper());
             }
 
             return authorized;
