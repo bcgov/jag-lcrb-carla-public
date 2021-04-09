@@ -65,6 +65,8 @@ namespace bdd_tests
                 // upload personal history summary documents
                 FileUpload("personal_history_summary.pdf", "(//input[@type='file'])[3]");
 
+
+
             // enter the contact phone number
             var uiContactPhone = ngDriver.FindElement(By.CssSelector("input[formcontrolname='contactPersonPhone']"));
             uiContactPhone.SendKeys(contactPhone);
