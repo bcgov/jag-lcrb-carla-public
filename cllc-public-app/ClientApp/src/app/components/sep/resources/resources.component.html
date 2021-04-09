@@ -1,43 +1,57 @@
 <div class="res border">
-    <h5>Resources</h5>
-    <section class="d-flex mb-2">
-        <div class="icon border">
-            <fa-icon [icon]="faCheck"></fa-icon>
-        </div>
-        <div class="border res-content">
-            <h5>APPLICATION CHECKLIST</h5>
-            <p>know what you need before starting your application.</p>
-            <button mat-raised-button color="secondary" (click)="openChecklist()">SEE CHECKLIST</button>
-        </div>
-    </section>
-    <section class="d-flex mb-2">
-        <div class="icon border">            
-            <fa-icon [icon]="faCocktail"></fa-icon>
-        </div>
-        <div class="border res-content">
-            <h5>GET CERTIFIED</h5>
-            <p>Find out what RBS training course certificate you need for your event and complete and online course</p>
-            <a href="https://www.responsibleservicebc.gov.bc.ca/" target="blank" mat-raised-button color="secondary">LEARN MORE</a>
-        </div>
-    </section>
-    <section class="d-flex mb-2">
-        <div class="icon border">
-            <fa-icon [icon]="faCalculator"></fa-icon>
-        </div>
-        <div class="border res-content">
-            <h5>PLAN YOUR DRINKS</h5>
-            <p>know what you need before starting your application.</p>
-            <button mat-raised-button color="secondary">PLAN</button>
-        </div>
-    </section>
-    <section class="d-flex mb-2 ">
-        <div class="icon border">
-            <fa-icon [icon]="faQuestion"></fa-icon>
-        </div>
-        <div class="border res-content">
-            <h5>LEARN MORE</h5>
-            <p>About SEP policies - visit the BC Liquor and Cannabis Regulation Branch website.</p>
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing" target="blank" mat-raised-button color="secondary">LEARN MORE</a>
-        </div>
-    </section>
+  <h5>Resources</h5>
+  <section class="d-flex mb-2">
+    <div class="icon border">
+      <fa-icon [icon]="faUserCircle"></fa-icon>
+    </div>
+    <div class="border res-content">
+      <h5>MANAGE ACCOUNT</h5>
+      <p>View your complete account profile, and update your address or contact details.</p>
+      <a routerLink="/sep/bcsc-profile" mat-raised-button color="secondary">
+        <fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Edit Account Profile
+      </a>
+    </div>
+  </section>
+  <section class="d-flex mb-2">
+    <div class="icon border">
+      <fa-icon [icon]="faCheck"></fa-icon>
+    </div>
+    <div class="border res-content">
+      <h5>APPLICATION CHECKLIST</h5>
+      <p>know what you need before starting your application.</p>
+      <button mat-raised-button color="secondary" (click)="openChecklist()">SEE CHECKLIST</button>
+    </div>
+  </section>
+  <section class="d-flex mb-2">
+    <div class="icon border">
+      <fa-icon [icon]="faCocktail"></fa-icon>
+    </div>
+    <div class="border res-content">
+      <h5>GET CERTIFIED</h5>
+      <p>Find out what RBS training course certificate you need for your event and complete and online course</p>
+      <a href="https://www.responsibleservicebc.gov.bc.ca/" target="blank" mat-raised-button color="secondary">LEARN
+        MORE</a>
+    </div>
+  </section>
+  <section class="d-flex mb-2">
+    <div class="icon border">
+      <fa-icon [icon]="faCalculator"></fa-icon>
+    </div>
+    <div class="border res-content">
+      <h5>PLAN YOUR DRINKS</h5>
+      <p>know what you need before starting your application.</p>
+      <button mat-raised-button color="secondary">PLAN</button>
+    </div>
+  </section>
+  <section class="d-flex mb-2 ">
+    <div class="icon border">
+      <fa-icon [icon]="faQuestion"></fa-icon>
+    </div>
+    <div class="border res-content">
+      <h5>LEARN MORE</h5>
+      <p>About SEP policies - visit the BC Liquor and Cannabis Regulation Branch website.</p>
+      <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing"
+        target="blank" mat-raised-button color="secondary">LEARN MORE</a>
+    </div>
+  </section>
 </div>

@@ -1,0 +1,220 @@
+<div class="form-wrapper" style="position: relative;">
+  <div class="row">
+    <section class="col-lg-8 col-sm-12">
+      <form [formGroup]="form">
+        <div>
+          <section>
+            <h1>Account Profile</h1>
+            <p>
+              Please complete the account profile below. The information will only be saved once you click the Save
+              button at the end of the page.
+            </p>
+          </section>
+
+          <h3 class="blue-header">CONTACT INFORMATION</h3>
+          <div formGroupName="contact" class="padded-section content-bottom">
+            <app-field label="First Name" [required]="true" [valid]="isValidOrNotTouched('contact.firstname')"
+              errorMessage="Please enter your first name">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="firstname" readonly>
+            </app-field>
+
+            <app-field label="Last Name" [required]="true" [valid]="isValidOrNotTouched('contact.lastname')"
+              errorMessage="Please enter your last name">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="lastname" readonly>
+            </app-field>
+
+            <app-field label="Phone Number" [required]="true" [valid]="isValidOrNotTouched('contact.mobilePhone')"
+              errorMessage="Please enter your 10-digit phone number">
+              <input class="form-control" style="width: 250px;" mask="(000) 000-0000" type="text"
+                formControlName="mobilePhone">
+            </app-field>
+
+            <app-field label="Email" [required]="true" [valid]="isValidOrNotTouched('contact.emailaddress1')"
+              errorMessage="Please enter your email address">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="emailaddress1"
+                (blur)="trimValue(form.get('contact.emailaddress1'))">
+            </app-field>
+          </div>
+
+          <h3 class="blue-header">PHYSICAL ADDRESS</h3>
+          <div formGroupName="contact" class="padded-section content-bottom">
+            <address class="row">
+              <app-field class="col-md-12 col-xs-12" label="Street Address" [required]="true"
+                errorMessage="Please enter the street address" [valid]="isValidOrNotTouched('contact.address1_line1')"
+                [isFullWidth]="true">
+                <input class="form-control" type="text" formControlName="address1_line1">
+              </app-field>
+              <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true"
+                errorMessage="Please enter the city" [required]="true"
+                [valid]="isValidOrNotTouched('contact.address1_city')">
+                <input class="form-control" type="text" formControlName="address1_city">
+              </app-field>
+              <section class="col-md-4 col-xs-12">
+                <app-field label="Province/State" [isFullWidth]="true" errorMessage="Please enter the province"
+                  [required]="true" [valid]="isValidOrNotTouched('contact.address1_stateorprovince')">
+                  <select class="form-control" formControlName="address1_stateorprovince">
+                    <option value="British Columbia">British Columbia</option>
+                    <option value="Ontario">Ontario</option>
+                    <option value="Alberta">Alberta</option>
+                    <option value="Quebec">Quebec</option>
+                    <option value="Manitoba">Manitoba</option>
+                    <option value="Nova Scotia">Nova Scotia</option>
+                    <option value="New Brunswick">New Brunswick</option>
+                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                    <option value="Saskatchewan">Saskatchewan</option>
+                    <option value="Prince Edward Island">Prince Edward Island</option>
+                    <option value="Northwest Territories">Northwest Territories</option>
+                    <option value="Yukon">Yukon</option>
+                    <option value="Nunavut">Nunavut</option>
+                  </select>
+                </app-field>
+              </section>
+              <section class="col-md-4 col-xs-12">
+                <app-field label="Postal Code"
+                  errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)"
+                  [required]="true" [valid]="isValidOrNotTouched('contact.address1_postalcode')">
+                  <input class="form-control" type="text" formControlName="address1_postalcode">
+                </app-field>
+              </section>
+              <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true"
+                errorMessage="Please enter Country" [required]="true"
+                [valid]="!form.get('contact.address1_country').touched || form.get('contact.address1_country').valid">
+                <input formControlName="address1_country" class="form-control" type="text" readonly>
+              </app-field>
+            </address>
+          </div>
+
+          <h3 class="blue-header">MAILING ADDRESS</h3>
+          <div formGroupName="contact" class="padded-section content-bottom">
+            <section>
+              <mat-checkbox formControlName="_mailingSameAsPhysicalAddress">Same as physical address</mat-checkbox>
+            </section>
+            <address class="row">
+              <app-field class="col-md-12 col-xs-12" label="PO Box or Street Address" [required]="true"
+                errorMessage="Please enter the street address" [valid]="isValidOrNotTouched('contact.address2_line1')"
+                [isFullWidth]="true">
+                <input class="form-control" type="text" formControlName="address2_line1">
+              </app-field>
+              <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true"
+                errorMessage="Please enter the city" [required]="true"
+                [valid]="isValidOrNotTouched('contact.address2_city')">
+                <input class="form-control" type="text" formControlName="address2_city">
+              </app-field>
+              <section class="col-md-4 col-xs-12">
+                <app-field label="Province/State" [isFullWidth]="true" errorMessage="Please enter the province"
+                  [required]="true" [valid]="isValidOrNotTouched('contact.address2_stateorprovince')">
+                  <select class="form-control" formControlName="address2_stateorprovince">
+                    <option value="British Columbia">British Columbia</option>
+                    <option value="Ontario">Ontario</option>
+                    <option value="Alberta">Alberta</option>
+                    <option value="Quebec">Quebec</option>
+                    <option value="Manitoba">Manitoba</option>
+                    <option value="Nova Scotia">Nova Scotia</option>
+                    <option value="New Brunswick">New Brunswick</option>
+                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                    <option value="Saskatchewan">Saskatchewan</option>
+                    <option value="Prince Edward Island">Prince Edward Island</option>
+                    <option value="Northwest Territories">Northwest Territories</option>
+                    <option value="Yukon">Yukon</option>
+                    <option value="Nunavut">Nunavut</option>
+                  </select>
+                </app-field>
+              </section>
+              <section class="col-md-4 col-xs-12">
+                <app-field label="Postal Code"
+                  errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)"
+                  [required]="true" [valid]="isValidOrNotTouched('contact.address2_postalcode')">
+                  <input class="form-control" type="text" formControlName="address2_postalcode">
+                </app-field>
+              </section>
+              <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true"
+                errorMessage="Please enter Country" [required]="true"
+                [valid]="!form.get('contact.address1_country').touched || form.get('contact.address1_country').valid">
+                <input formControlName="address2_country" class="form-control" type="text" readonly>
+              </app-field>
+            </address>
+          </div>
+
+          <section class="error mt-3" *ngIf="showErrorSection">
+            <p *ngFor="let message of validationMessages">
+              <span class="app-cancel">
+                <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+                {{message}}
+              </span>
+            </p>
+          </section>
+
+          <section style="position: relative;" class="py-4 button-row">
+            <button color="primary" mat-raised-button (click)="save()" class="save-cont">
+              <span>SAVE</span>
+              <fa-icon [icon]="faChevronRight" class="ml-3 mr-0"></fa-icon>
+            </button>
+            <button class="btn btn-link btn-cancel" routerLink="/sep/dashboard">
+              <fa-icon [icon]="faTrash"></fa-icon>CANCEL
+            </button>
+          </section>
+        </div>
+      </form>
+    </section>
+    <section class="col-lg-4 col-sm-12" style="padding-left: 50px; position: relative;">
+      <section class="submit-container mt-3">
+        <table>
+          <tr>
+            <td>
+              <h2 class="round-icon-wrapper">
+                <fa-icon [icon]="faAddressCard"></fa-icon>
+              </h2>
+            </td>
+            <td style="padding-left: 10px">
+              <h2>Update your BCeID information</h2>
+            </td>
+          </tr>
+        </table>
+        <section class="submit-content">
+          <p>
+            Your Legal Name is imported from BCeID. If there is an error or change in
+            this information, you must contact BCeID to correct it.
+          </p>
+          <div>
+            <fa-icon [icon]="faPhone" style="margin-right: 10px"></fa-icon>
+            <strong>Phone</strong>
+            <br>
+            <span>1 888 356-2741 (Canada and USA toll free)</span>
+            <br>
+            <span>604 660-2355 (Within lower mainland or outside Canada and USA)</span>
+          </div>
+          <div>
+            <fa-icon [icon]="faEnvelope" style="margin-right: 10px"></fa-icon>
+            <strong>Email</strong>
+            <br>
+            <span>
+              Contact us using our
+              <a href="https://www.bceid.ca/help_request/default.aspx?referrer=AB%2f2" style="color: white">online
+                form</a>
+              or at
+              <a href="mailto:BCeIDREgistrationDesk@gov.bc.ca" style="color: white">
+                BCeIDRegistrationDesk@gov.bc.ca
+              </a>
+            </span>
+          </div>
+          <p>
+            All other information can be changed on this Account Profile page.
+          </p>
+        </section>
+      </section>
+      <section class="submit-container" style="background-color: #F2F2F2; border: none; color: #000;">
+        <h2 style="color: #000">Collection Notice:</h2>
+        <div class="submit-content">
+          <p>
+            The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under
+            Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act for the purpose of
+            cannabis licensing, compliance and enforcement matters in accordance with the Cannabis Control and Licensing
+            Act. Should you have any questions about the collection, use, or disclosure of personal information, please
+            contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone
+            toll free at 1-866-209-2111.
+          </p>
+        </div>
+      </section>
+    </section>
+  </div>
+</div>
