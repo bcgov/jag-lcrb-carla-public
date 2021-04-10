@@ -86,8 +86,9 @@ podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', 
             dir('/home/jenkins') {
                 echo "Running zap scan..."
                 def retVal = sh returnStatus: true, script: '/zap/zap-baseline.py -r baseline.html -t https://lcrb-cllcms-portal-dev.silver.devops.bcgov'
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '/home/jenkins/', reportFiles: 'baseline.html', reportName: 'ZAP Baseline Scan', reportTitles: 'ZAP Baseline Scan'])
                 echo "Return value is: ${retVal}"
+                publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '/home/jenkins', reportFiles: 'baseline.html', reportName: 'ZAP Baseline Scan', reportTitles: 'ZAP Baseline Scan'])
+                
             }
         }
     }
