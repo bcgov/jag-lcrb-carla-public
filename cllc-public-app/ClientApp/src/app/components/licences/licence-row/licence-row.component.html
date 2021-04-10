@@ -251,18 +251,17 @@
     <strong
       style="color: #1a5a96;">
       {{item.thirdPartyOperatorAccountName}}
-    </strong>
-    <br>
+    </strong>    <a *ngIf="item.operated && !item.isOperated"
+    [routerLink]="[ '/terminate-third-party-operator/' + item.licenseId]" alt="Terminate Third-Party Operator Relationship">
+     <fa-icon [icon]="faTrashAlt" style="margin-right: 10px;"></fa-icon></a>
+
+     <br>
+
     <span>Licenced To: </span><strong style="color: #1a5a96;">{{item.currentOwner}}</strong>
 
+
   </ng-container>
-  <a *ngIf="item.operated && !item.isOperated"
-     [routerLink]="[ '/terminate-third-party-operator/' + item.licenseId]">
-    <span>
-      <fa-icon [icon]="faTrashAlt" style="margin-right: 10px;"></fa-icon>Terminate Third Party
-      Operator Relationship
-    </span>
-  </a>
+
 </td>
 
                         <!-- REQUEST CHANGES column -->

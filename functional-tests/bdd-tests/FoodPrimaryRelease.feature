@@ -59,10 +59,10 @@ Scenario: Food Primary Release Test #2 (Private Corporation)
     And I click on the link for Structural Change Application
     And I click on the Continue to Application button
     And I submit a Food Primary structural change application
-    And I click on the link for Licences & Authorizations
-    And I click on the link for Temporary Extension of Licensed Area
-    And I click on the Continue to Application button
-    And I submit a temporary extension of licensed area application
+    # And I click on the link for Licences & Authorizations
+    # And I click on the link for Temporary Extension of Licensed Area
+    # And I click on the Continue to Application button
+    # And I submit a temporary extension of licensed area application
     And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Use Area Endorsement Application
     And I click on the Continue to Application button
@@ -74,11 +74,11 @@ Scenario: Food Primary Release Test #2 (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I click on the link for Licences & Authorizations
-    And I click on the link for Temporary Expanded Service Area Application
-    And I click on the Continue to Application button
-    And I complete the TESA application for a Food Primary licence
-    And I click on the Submit button
-    And I click on the link for Licences & Authorizations
+    # And I click on the link for Temporary Expanded Service Area Application
+    # And I click on the Continue to Application button
+    # And I complete the TESA application for a Food Primary licence
+    # And I click on the Submit button
+    # And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Change to Hours of Sale (After Midnight)
     And I click on the Continue to Application button
     And I request an after midnight temporary change to hours of sale
@@ -101,7 +101,7 @@ Scenario: Food Primary Release Test #2 (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@foodprimary @release6
+@foodprimary
 Scenario: Food Primary Release Test #1 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
@@ -145,7 +145,7 @@ Scenario: Food Primary Release Test #1 (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@foodprimary @release6
+@foodprimary
 Scenario: Food Primary Release Test #2 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
@@ -158,10 +158,10 @@ Scenario: Food Primary Release Test #2 (Sole Proprietorship)
     And I click on the link for Structural Change Application
     And I click on the Continue to Application button
     And I submit a Food Primary structural change application
-    And I click on the link for Licences & Authorizations
-    And I click on the link for Temporary Extension of Licensed Area
-    And I click on the Continue to Application button
-    And I submit a temporary extension of licensed area application
+    # And I click on the link for Licences & Authorizations
+    # And I click on the link for Temporary Extension of Licensed Area
+    # And I click on the Continue to Application button
+    # And I submit a temporary extension of licensed area application
     And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Use Area Endorsement Application
     And I click on the Continue to Application button
@@ -172,11 +172,11 @@ Scenario: Food Primary Release Test #2 (Sole Proprietorship)
     And I request a catering endorsement application
     And I click on the Submit button
     And I enter the payment information
-    And I click on the link for Licences & Authorizations
-    And I click on the link for Temporary Expanded Service Area Application
-    And I click on the Continue to Application button
-    And I complete the TESA application for a Food Primary licence
-    And I click on the Submit button
+    # And I click on the link for Licences & Authorizations
+    # And I click on the link for Temporary Expanded Service Area Application
+    # And I click on the Continue to Application button
+    # And I complete the TESA application for a Food Primary licence
+    # And I click on the Submit button
     And I click on the link for Licences & Authorizations
     And I click on the link for Temporary Change to Hours of Sale (After Midnight)
     And I click on the Continue to Application button
