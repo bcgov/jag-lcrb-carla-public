@@ -467,7 +467,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 var screeningRequest = new IncompleteApplicationScreening()
                 {
                     Name = application.AdoxioName,                    
-                    ApplicationType = application.ApplicationType.AdoxioName,
+                    ApplicationType = application.AdoxioApplicationTypeId.AdoxioName,
                     RecordIdentifier = application.AdoxioJobnumber,
                     UrgentPriority = false,
                     Associates = new List<LegalEntity>(),
