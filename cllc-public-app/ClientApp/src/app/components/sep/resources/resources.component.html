@@ -7,7 +7,10 @@
     <div class="border res-content">
       <h5>MANAGE ACCOUNT</h5>
       <p>View your complete account profile, and update your address or contact details.</p>
-      <a routerLink="/sep/bcsc-profile" mat-raised-button color="secondary">
+      <a *ngIf="currentUser.userType == 'VerifiedIndividual'" routerLink="/servicecard-profile" mat-raised-button color="secondary">
+        <fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Edit Account Profile
+      </a>
+      <a *ngIf="currentUser.userType == 'Business'" routerLink="/account-profile" mat-raised-button color="secondary">
         <fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Edit Account Profile
       </a>
     </div>
