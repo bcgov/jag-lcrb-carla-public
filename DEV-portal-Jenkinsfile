@@ -84,9 +84,8 @@ podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', 
             //the checkout is mandatory
             echo "checking out source"
             echo "Build: ${BUILD_ID}"
-            checkout scm
-
-            dir('/zap') {
+            dir('/home/jenkins') {
+                //checkout scm
                 def retVal = sh returnStatus: true, script: '/zap/zap-baseline.py -r /home/jenkins/baseline.html -t https://lcrb-cllcms-portal-dev.silver.devops.bcgov'
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '/home/jenkins', reportFiles: 'baseline.html', reportName: 'ZAP Baseline Scan', reportTitles: 'ZAP Baseline Scan'])
                 echo "Return value is: ${retVal}"
