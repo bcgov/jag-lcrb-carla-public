@@ -24,12 +24,12 @@ namespace bdd_tests
             FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[3]");
 
             // select 'Yes' for 'Is the proposed RLRS located in a rural community with no other RLRS?'
-            var uiIsRlrsLocatedInRuralCommunityAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-127-button"));
+            var uiIsRlrsLocatedInRuralCommunityAloneYes = ngDriver.FindElement(By.Id("mat-button-toggle-169-button"));
             JavaScriptClick(uiIsRlrsLocatedInRuralCommunityAloneYes);
 
             // select 'Yes' for 'Is the proposed RLRS located in a tourist destination resort with no other RLRS?'
             var uiIsRlrsLocatedAtTouristDestinationAloneYes =
-                ngDriver.FindElement(By.Id("mat-button-toggle-130-button"));
+                ngDriver.FindElement(By.Id("mat-button-toggle-172-button"));
             JavaScriptClick(uiIsRlrsLocatedAtTouristDestinationAloneYes);
 
             // enter resort community description
@@ -38,11 +38,11 @@ namespace bdd_tests
             uiRlrsResortCommunityDescription.SendKeys(resortDescription);
 
             // select 'Yes' for 'Is there year-round all-weather road access to the community?'
-            var uiHasYearRoundAllWeatherRoadAccessYes = ngDriver.FindElement(By.Id("mat-button-toggle-133-button"));
+            var uiHasYearRoundAllWeatherRoadAccessYes = ngDriver.FindElement(By.Id("mat-button-toggle-175-button"));
             JavaScriptClick(uiHasYearRoundAllWeatherRoadAccessYes);
 
             // select 'Yes' for 'Does your general store operate seasonally?'
-            var uiDoesGeneralStoreOperateSeasonallyYes = ngDriver.FindElement(By.Id("mat-button-toggle-136-button"));
+            var uiDoesGeneralStoreOperateSeasonallyYes = ngDriver.FindElement(By.Id("mat-button-toggle-178-button"));
             JavaScriptClick(uiDoesGeneralStoreOperateSeasonallyYes);
 
             // enter the number of residents
@@ -50,7 +50,7 @@ namespace bdd_tests
             uiNumberOfResidents.SendKeys(numberOfResidents);
 
             // select 'Yes' for 'Is the proposed RLRS located at least 10 km, by all-weather road, from another RLRS, LRS, or GLS?'
-            var uiIsRlrsAtLeast10kmFromAnotherStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-139-button"));
+            var uiIsRlrsAtLeast10kmFromAnotherStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-181-button"));
             JavaScriptClick(uiIsRlrsAtLeast10kmFromAnotherStoreYes);
 
             // enter the other businesses
@@ -58,7 +58,7 @@ namespace bdd_tests
             uiOtherBusinesses.SendKeys(otherBusinesses);
 
             // select 'Yes' for 'Is the applicant the legal and beneficial owner of the general store?'
-            var uiIsApplicantOwnerOfStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-142-button"));
+            var uiIsApplicantOwnerOfStoreYes = ngDriver.FindElement(By.Id("mat-button-toggle-184-button"));
             JavaScriptClick(uiIsApplicantOwnerOfStoreYes);
 
             // enter the legal owners
@@ -66,7 +66,7 @@ namespace bdd_tests
             uiLegalOwners.SendKeys(legalOwners);
 
             // select 'Yes' for 'Is the applicant a franchisee or otherwise affiliated with another business?'
-            var uiIsApplicantFranchiseOrAffiliatedYes = ngDriver.FindElement(By.Id("mat-button-toggle-145-button"));
+            var uiIsApplicantFranchiseOrAffiliatedYes = ngDriver.FindElement(By.Id("mat-button-toggle-187-button"));
             JavaScriptClick(uiIsApplicantFranchiseOrAffiliatedYes);
 
             // enter the business

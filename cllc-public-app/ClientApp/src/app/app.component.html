@@ -22,10 +22,13 @@
     </section>
     <section class="col-md-4 col-xs-12 sign-container">
       <span class="sign" *ngIf="currentUser">
-        <span>{{currentUser.name}}</span>
+        <a *ngIf="currentUser.userType == 'Business'" routerLink="/account-profile" class="profile-link">{{currentUser.name}}</a>
 
+        <a appRemoveIfFeatureOff="Sep" *ngIf="currentUser.userType == 'VerifiedIndividual'" routerLink="/servicecard-profile" class="profile-link">{{currentUser.name}}</a>
+        <span appRemoveIfFeatureOn="Sep" *ngIf="currentUser.userType == 'VerifiedIndividual'">{{currentUser.name}}</span>
 
         &nbsp;
+
         <span class="text-right signin">
           <a href="logout">Sign Out</a>
         </span>
@@ -81,7 +84,7 @@
                    routerLink="/policy-document/application-timelines">Application Requirements</a>
               </li-->
               <li class="nav-item">
-                <a (click)="toggleButton.click()" tabindex="2"
+                <a appRemoveIfFeatureOn="DisableWorkerQualification" (click)="toggleButton.click()" tabindex="2"
                    routerLink="/policy-document/worker-qualification-training">
                   Cannabis Worker Security Verification
                 </a>
@@ -102,19 +105,21 @@
                   Cannabis Application Statistics
                 </a>
               </li>
+
               <li class="nav-item" *ngIf="showMap">
                 <a (click)="toggleButton.click()" tabindex="2" routerLink="/map">
                   Map of Cannabis Stores
                 </a>
               </li>
-              <li class="nav-item" appRemoveIfFeatureOff="CovidApplication">
-                <a (click)="toggleButton.click()" tabindex="2" routerLink="/covid-temporary-extension" appRemoveIfFeatureOn="DisableLogin">
-                  Temporary Expanded Service Areas
-                </a>
-              </li>
               <li class="nav-item" appRemoveIfFeatureOff="Sep">
                 <a (click)="toggleButton.click()" tabindex="2" routerLink="/sep">
                   Special Events Permits
+                </a>
+              </li>
+              <li class="nav-item">
+                <a (click)="toggleButton.click()" tabindex="2"  appRemoveIfFeatureOff="Sep"
+                   routerLink="/policy-document/completing-an-application">
+                   Special Events Permits Help Centre
                 </a>
               </li>
             </ul>
@@ -151,27 +156,30 @@
                   Security
                   Screening
                 </a>
-                <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
+                <a appRemoveIfFeatureOn="DisableWorkerQualification" *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
                    class="nav-link" routerLink="/worker-qualification/dashboard">
                   Dashboard
                 </a>
-                <a appRemoveIfFeatureOff="CovidApplication" (click)="toggleButtonLoggedIn.click()"
-                   class="nav-link" routerLink="/covid-temporary-extension">
-                  Covid Temporary Extension
-                </a>
+
                 <a appRemoveIfFeatureOff="LGApprovals" *ngIf="account?.businessType === 'LocalGovernment' && account?.localGovernmentId" (click)="toggleButtonLoggedIn.click()"
                    class="nav-link" routerLink="/lg-approvals">
                   Applications for Review
-                </a>
-                <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
-                   class="nav-link" routerLink="/sep/dashboard">
-                  Special Events Permits Dashboard
                 </a>
                 <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
                   matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="!(showNoticesBadge$ | async)"
                   class="nav-link with-badge" routerLink="/notices">
                   Notices
                 </a>
+
+                <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
+                   class="nav-link" routerLink="/sep/dashboard">
+                  Special Events Permits Dashboard
+                </a>
+                <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
+                   class="nav-link" routerLink="/policy-document/completing-an-application">
+                   Special Events Permits Help Centre
+                </a>
+
               </li>
             </ul>
           </div>

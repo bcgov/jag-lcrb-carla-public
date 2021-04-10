@@ -274,6 +274,14 @@ import { BCeidOrServiceCardAuthGuard } from "@services/bceid-or-service-card-aut
 import { StarterChecklistComponent } from './components/sep/starter-checklist/starter-checklist.component';
 import { ResourcesComponent } from './components/sep/resources/resources.component';
 import { SepApplicationComponent } from './components/sep/sep-application/sep-application.component';
+import { ApplicantComponent } from './components/sep/sep-application/applicant/applicant.component';
+import { EligibilityComponent } from './components/sep/sep-application/eligibility/eligibility.component';
+import { EventComponent } from './components/sep/sep-application/event/event.component';
+import { LiquorComponent } from './components/sep/sep-application/liquor/liquor.component';
+import { SummaryComponent } from './components/sep/sep-application/summary/summary.component';
+import { IndexDBService } from "@services/index-db.service";
+import { MyApplicationsComponent } from './components/sep/my-applications/my-applications.component';
+import { ServiceCardProfileComponent } from "@components/servicecard-profile/servicecard-profile.component";
 
 @NgModule({
   declarations: [
@@ -421,6 +429,13 @@ import { SepApplicationComponent } from './components/sep/sep-application/sep-ap
     StarterChecklistComponent,
     ResourcesComponent,
     SepApplicationComponent,
+    ApplicantComponent,
+    EligibilityComponent,
+    EventComponent,
+    LiquorComponent,
+    SummaryComponent,
+    MyApplicationsComponent,
+    ServiceCardProfileComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -544,6 +559,7 @@ import { SepApplicationComponent } from './components/sep/sep-application/sep-ap
     PolicyDocumentDataService,
     PreviousAddressDataService,
     ServiceCardAuthGuard,
+    IndexDBService,
     EligibilityFormDataService,
     SurveyDataService,
     TiedHouseConnectionsDataService,
