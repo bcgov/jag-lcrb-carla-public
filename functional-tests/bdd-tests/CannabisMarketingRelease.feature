@@ -2,7 +2,7 @@
     As a logged in business user
     I want to run a release test for a Cannabis Marketing Licence
 
-@cannabismktg @release2
+@cannabismktg @release6
 Scenario: Cannabis Marketing Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
