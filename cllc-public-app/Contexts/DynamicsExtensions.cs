@@ -52,6 +52,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static List<Public.ViewModels.ApplicationLicenseSummary> GetPaidLicensesOnTransfer(this IDynamicsClient _dynamicsClient, string licenceeId)
         {
             var applicationFilter = $"_adoxio_applicant_value eq {licenceeId} and adoxio_paymentrecieved eq true ";
+            applicationFilter += " and _adoxio_assignedlicence_value ne null"; // avoid problems caused by applications that lack an assigned licence
             applicationFilter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
             applicationFilter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
             applicationFilter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved}";
