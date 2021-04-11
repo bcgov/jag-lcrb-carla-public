@@ -7,7 +7,7 @@ Feature: UbrewUvinRelease
     I want to submit a UBrew / UVin Licence application 
     And complete change requests 
 
-@ubrewuvin @release4
+@ubrewuvin
 Scenario: UBrew / UVin Application Release Test (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
