@@ -6,7 +6,7 @@ Feature: FoodPrimaryRelease
     As a logged in business user
     I want to run a release test for a Food Primary licence
 
-@foodprimary @privatecorporation @release2
+@foodprimary @privatecorporation
 Scenario: Food Primary Release Test #1 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
@@ -50,7 +50,7 @@ Scenario: Food Primary Release Test #1 (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@foodprimary @privatecorporation @release2
+@foodprimary @privatecorporation
 Scenario: Food Primary Release Test #2 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
