@@ -63,11 +63,11 @@ node('master') {
 
 // ZAP security scan
 
-podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
+podTemplate(label: 'jenkins-agent-zap', name: 'jenkins-agent-zap', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
     containerTemplate(
         name: 'jnlp',
         activeDeadlineSeconds: 9000,
-        image: "${env.image_registry}/jenkins-slave-zap",
+        image: "${env.image_registry}/jenkins-agent-zap",
         resourceRequestCpu: '500m',
         resourceLimitCpu: '1000m',
         resourceRequestMemory: '3Gi',
@@ -79,16 +79,15 @@ podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', 
     )
 ]) {
     stage('ZAP Security Scan') {        
-        node('owasp-zap2') {
+        node('jenkins-agent-zap') {
             sleep(300)
-            //the checkout is mandatory
             
-            dir('/home/jenkins') {
-                echo "Running zap scan..."
-                def retVal = sh returnStatus: true, script: '/zap/zap-baseline.py -r baseline.html -t https://lcrb-cllcms-portal-dev.silver.devops.bcgov'
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '/home/jenkins/', reportFiles: 'baseline.html', reportName: 'ZAP Baseline Scan', reportTitles: 'ZAP Baseline Scan'])
-                echo "Return value is: ${retVal}"
-            }
+            echo "Running zap scan..."
+            def retVal = sh returnStatus: true, script: '/zap/zap-baseline.py -r baseline.html -t https://lcrb-cllcms-portal-dev.silver.devops.bcgov'
+            echo "Return value is: ${retVal}"
+            publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '/zap/wrk', reportFiles: 'baseline.html', reportName: 'ZAP Baseline Scan', reportTitles: 'ZAP Baseline Scan'])
+                
+            
         }
     }
 }
