@@ -53,7 +53,7 @@ Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @winery @release3
+@manufacturer @winery 
 Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
