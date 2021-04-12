@@ -27,10 +27,10 @@ Scenario: CRS Release (Private Corporation)
     And I show the store as open on the map
     And I click on the link for Review Federal Reports
     And I review the federal reports
-    And I click on the link for Licences & Authorizations
-    And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
-    And I click on the link for Renew Licence
-    And I renew the licence with positive responses for Cannabis
+    # And I click on the link for Licences & Authorizations
+    # And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
+    # And I click on the link for Renew Licence
+    # And I renew the licence with positive responses for Cannabis
     And I click on the link for Licences & Authorizations
     And I request a store relocation for Cannabis
     And I click on the link for Licences & Authorizations
