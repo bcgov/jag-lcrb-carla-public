@@ -281,6 +281,7 @@ import { LiquorComponent } from './components/sep/sep-application/liquor/liquor.
 import { SummaryComponent } from './components/sep/sep-application/summary/summary.component';
 import { IndexDBService } from "@services/index-db.service";
 import { MyApplicationsComponent } from './components/sep/my-applications/my-applications.component';
+import { ServiceCardProfileComponent } from "@components/servicecard-profile/servicecard-profile.component";
 
 @NgModule({
   declarations: [
@@ -434,6 +435,7 @@ import { MyApplicationsComponent } from './components/sep/my-applications/my-app
     LiquorComponent,
     SummaryComponent,
     MyApplicationsComponent,
+    ServiceCardProfileComponent,
   ],
   imports: [
     AppRoutingModule,

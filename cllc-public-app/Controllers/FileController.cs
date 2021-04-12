@@ -21,6 +21,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 using Newtonsoft.Json;
+using Winista.Mime;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using FileSystemItem = Gov.Lclb.Cllb.Public.ViewModels.FileSystemItem;
 
@@ -65,35 +66,70 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="entityId"></param>
         /// <param name="isDelete">Some access rules are different for deletes</param>
         /// <returns></returns>
-        private async Task<bool> CanAccessEntity(string entityName, string entityId, bool isDelete = false)
+        private async Task<bool> CanAccessEntity(string entityName, string entityId, string relativeUrl, bool isDelete = false)
         {
             var result = false;
             var id = Guid.Parse(entityId);
+            string folderName = null;
             switch (entityName.ToLower())
             {
                 case "account":
                     var account = await _dynamicsClient.GetAccountByIdAsync(id).ConfigureAwait(true);
-                    result = account != null && CurrentUserHasAccessToAccount(account.Accountid);
+                    if (account != null)
+                    {
+                        result = CurrentUserHasAccessToAccount(account.Accountid);
+                        folderName = account.GetDocumentFolderName();
+                    }
                     break;
                 case "application":
                     var application = await _dynamicsClient.GetApplicationById(id).ConfigureAwait(true);
-                    result = application != null && CurrentUserHasAccessToAccount(application._adoxioApplicantValue);
-                    var allowLGAccess = await CurrentUserIsLGForApplication(application);
-                    result = result || allowLGAccess && !isDelete;
+                    if (application != null)
+                    {
+                        result = CurrentUserHasAccessToAccount(application._adoxioApplicantValue);
+                        var allowLGAccess = await CurrentUserIsLGForApplication(application);
+                        result = result || allowLGAccess && !isDelete;
+                        folderName = application.GetDocumentFolderName();
+                    }
+                    
                     break;
                 case "contact":
                     var contact = await _dynamicsClient.GetContactById(id).ConfigureAwait(true);
-                    result = contact != null && CurrentUserHasAccessToContactOwnedBy(contact.Contactid);
+                    if (contact != null)
+                    {
+                        result = CurrentUserHasAccessToContactOwnedBy(contact.Contactid);
+                        folderName = contact.GetDocumentFolderName();
+                    }
+                    
                     break;
                 case "worker":
                     var worker = await _dynamicsClient.GetWorkerById(id).ConfigureAwait(true);
-                    result = worker != null && CurrentUserHasAccessToContactOwnedBy(worker._adoxioContactidValue);
+                    if (worker != null)
+                    {
+                        result = CurrentUserHasAccessToContactOwnedBy(worker._adoxioContactidValue);
+                        folderName = worker.GetDocumentFolderName();
+                    }
                     break;
                 case "event":
                     var eventEntity = _dynamicsClient.GetEventById(id);
-                    result = eventEntity != null && CurrentUserHasAccessToAccount(eventEntity._adoxioAccountValue);
+                    if (eventEntity != null)
+                    {
+                        result = CurrentUserHasAccessToAccount(eventEntity._adoxioAccountValue);
+                        folderName = eventEntity.GetDocumentFolderName();
+                    }
+                    
                     break;
             }
+
+            if (folderName != null && result  && relativeUrl != null) // do a case insensitive comparison of the first part.
+            {
+                int slashPos = relativeUrl.IndexOf("/");
+                if (slashPos != -1  && slashPos < relativeUrl.Length)
+                {
+                    slashPos = relativeUrl.IndexOf("/", slashPos + 1);
+                }
+                result = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderName.ToUpper());
+            }
+
             return result;
         }
 
@@ -108,8 +144,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<bool> CanAccessEntityFile(string entityName, string entityId, string documentType, string serverRelativeUrl, bool isDelete = false)
         {
             var logUrl = WordSanitizer.Sanitize(serverRelativeUrl);
-
-            var result = await CanAccessEntity(entityName, entityId, isDelete).ConfigureAwait(true);
+            
+            var result = await CanAccessEntity(entityName, entityId, serverRelativeUrl, isDelete).ConfigureAwait(true);
             //get list of files for entity
             var hasFile = false;
 
@@ -253,10 +289,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         ///  helper function used by the public file upload features to verify that the user has access.
         /// </summary>
         /// <returns></returns>
-        private async Task<bool> IsPublicUserAuthorized(string entityName, string entityId)
+        private async Task<bool> IsPublicUserAuthorized(string entityName, string entityId, string relativeUrl)
         {
             // currently this service only supports contacts
             var authorized = true;
+            string folderName = null;
             if (string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(entityId) || entityName != "contact")
             {
                 authorized = false;
@@ -273,9 +310,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     // treat empty value as incomplete.
                     if (contact.AdoxioPhscomplete == null && contact.AdoxioPhscomplete == 845280001) authorized = false;
+                    folderName = contact.GetDocumentFolderName();
                 }
 
             }
+
+            if (folderName != null && authorized && relativeUrl != null) // do a case insensitive comparison of the first part.
+            {
+                int slashPos = relativeUrl.IndexOf("/");
+                if (slashPos != -1 && slashPos < relativeUrl.Length)
+                {
+                    slashPos = relativeUrl.IndexOf("/", slashPos + 1);
+                }
+                authorized = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderName.ToUpper());
+            }
+
             return authorized;
         }
 
@@ -286,7 +335,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // decode the entityID
             var entityId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
 
-            var authorized = await IsPublicUserAuthorized(entityName, entityId).ConfigureAwait(true);
+            var authorized = await IsPublicUserAuthorized(entityName, entityId, serverRelativeUrl).ConfigureAwait(true);
 
             if (authorized)
                 return await DeleteFileInternal(serverRelativeUrl, documentType, entityId, entityName, false).ConfigureAwait(true);
@@ -309,7 +358,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // decode the entityID
             var entityId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
 
-            var authorized = await IsPublicUserAuthorized(entityName, entityId).ConfigureAwait(true);
+            var authorized = await IsPublicUserAuthorized(entityName, entityId, serverRelativeUrl).ConfigureAwait(true);
 
             if (authorized)
                 return await DownloadAttachmentInternal(entityId, entityName, serverRelativeUrl, documentType, false).ConfigureAwait(true);
@@ -329,7 +378,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // decode the entityID
             var entityId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
 
-            var authorized = await IsPublicUserAuthorized(entityName, entityId).ConfigureAwait(true);
+            var authorized = await IsPublicUserAuthorized(entityName, entityId, null).ConfigureAwait(true);
 
             if (authorized)
                 return await GetAttachmentsInternal(entityId, entityName, documentType, false);
@@ -354,7 +403,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // decode the entityID
             var entityId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
 
-            var authorized = await IsPublicUserAuthorized(entityName, entityId).ConfigureAwait(true);
+            var authorized = await IsPublicUserAuthorized(entityName, entityId, null).ConfigureAwait(true);
 
             if (authorized)
                 return await UploadAttachmentInternal(entityId, entityName, file, documentType, false).ConfigureAwait(true);
@@ -398,7 +447,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (checkUser)
             {
                 ValidateSession();
-                hasAccess = await CanAccessEntity(entityName, entityId);
+                hasAccess = await CanAccessEntity(entityName, entityId, null);
             }
 
             if (!hasAccess) return new NotFoundResult();
@@ -434,30 +483,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(formId)) return BadRequest();
 
-            // lookup the entity
-            string folderName = null;
-            switch (entityName.ToLower())
-            {
-                case "account":
-                    var account = _dynamicsClient.GetAccountById(entityId);
-                    folderName = account.GetDocumentFolderName();
-                    break;
-
-                case "application":
-                    var application = await _dynamicsClient.GetApplicationById(entityId);
-                    folderName = application.GetDocumentFolderName();
-                    break;
-
-                case "contact":
-                    var contact = await _dynamicsClient.GetContactById(entityId);
-                    folderName = contact.GetDocumentFolderName();
-                    break;
-
-                case "worker":
-                    var worker = await _dynamicsClient.GetWorkerById(entityId);
-                    folderName = worker.GetDocumentFolderName();
-                    break;
-            }
+            string folderName = await _dynamicsClient.GetFolderName(entityName, entityId, false);
 
             if (folderName != null)
             {
@@ -493,6 +519,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             return new JsonResult(result);
         }
+
 
         /// <summary>
         /// Return the list of files in a given folder.
@@ -657,53 +684,71 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (checkUser)
             {
                 ValidateSession();
-                hasAccess = await CanAccessEntity(entityName, entityId).ConfigureAwait(true);
+                hasAccess = await CanAccessEntity(entityName, entityId, null).ConfigureAwait(true);
             }
 
             if (!hasAccess) return new NotFoundResult();
-
-            // Sanitize file name
-            var illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
-            var fileName = illegalInFileName.Replace(file.FileName, "");
-            illegalInFileName = new Regex(@"[&:/\\|]");
-            fileName = illegalInFileName.Replace(fileName, "-");
-
-            fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
-
-            var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
-
-            _dynamicsClient.CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
 
             var ms = new MemoryStream();
             file.OpenReadStream().CopyTo(ms);
             var data = ms.ToArray();
 
-            // call the web service
-            var uploadRequest = new UploadFileRequest
+            // Check for a bad file type.
+            
+            var mimeTypes = new MimeTypes();
+
+            var mimeType = mimeTypes.GetMimeType(data);
+
+            // Add additional allowed mime types here
+            if (mimeType == null || !(mimeType.Name.Equals("image/png") || mimeType.Name.Equals("image/jpeg") ||
+                                     mimeType.Name.Equals("application/pdf")))
             {
-                ContentType = file.ContentType,
-                Data = ByteString.CopyFrom(data),
-                EntityName = entityName,
-                FileName = fileName,
-                FolderName = folderName
-            };
-
-            var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
-
-            var logFolderName = WordSanitizer.Sanitize(folderName);
-            var logFileName = WordSanitizer.Sanitize(fileName);
-
-            if (uploadResult.ResultStatus == ResultStatus.Success)
-            {
-                // Update modifiedon to current time
-                UpdateEntityModifiedOnDate(entityName, entityId, true);
-                _logger.LogInformation($"SUCCESS in uploading file {logFileName} to folder {logFolderName}");
+                _logger.LogError($"ERROR in uploading file due to invalid mime type {mimeType?.Name}");
+                return new NotFoundResult();
             }
             else
             {
-                _logger.LogError($"ERROR in uploading file {logFileName} to folder {logFolderName}");
-                throw new Exception($"ERROR in uploading file {logFileName} to folder {logFolderName}");
+                // Sanitize file name
+                var illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
+                var fileName = illegalInFileName.Replace(file.FileName, "");
+                illegalInFileName = new Regex(@"[&:/\\|]");
+                fileName = illegalInFileName.Replace(fileName, "-");
+
+                fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
+
+                var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+
+                _dynamicsClient.CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
+
+                // call the web service
+                var uploadRequest = new UploadFileRequest
+                {
+                    ContentType = file.ContentType,
+                    Data = ByteString.CopyFrom(data),
+                    EntityName = entityName,
+                    FileName = fileName,
+                    FolderName = folderName
+                };
+
+                var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
+
+                var logFolderName = WordSanitizer.Sanitize(folderName);
+                var logFileName = WordSanitizer.Sanitize(fileName);
+
+                if (uploadResult.ResultStatus == ResultStatus.Success)
+                {
+                    // Update modifiedon to current time
+                    UpdateEntityModifiedOnDate(entityName, entityId, true);
+                    _logger.LogInformation($"SUCCESS in uploading file {logFileName} to folder {logFolderName}");
+                }
+                else
+                {
+                    _logger.LogError($"ERROR in uploading file {logFileName} to folder {logFolderName}");
+                    throw new Exception($"ERROR in uploading file {logFileName} to folder {logFolderName}");
+                }
             }
+
+            
 
             return new JsonResult(result);
         }

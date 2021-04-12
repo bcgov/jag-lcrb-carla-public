@@ -33,6 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_establishmentparcelid", new FieldMapping("establishmentParcelId", true)},
                 {"adoxio_establishmentphone", new FieldMapping("establishmentPhone", true)},
                 {"adoxio_establishmentemail", new FieldMapping("establishmentEmail", true)},
+                {"adoxio_establishmentcomplytoallbylaws", new FieldMapping("establishmentComplyToBylaws", true)},
                 {"adoxio_contactpersonfirstname", new FieldMapping("contactPersonFirstName", true)},
                 {"adoxio_contactpersonlastname", new FieldMapping("contactPersonLastName", true)},
                 {"adoxio_role", new FieldMapping("contactPersonRole", true)},

@@ -167,14 +167,17 @@ namespace Gov.Lclb.Cllb.Public.Extensions
         /// </summary>
         /// <param name="entityName"></param>
         /// <param name="entityId"></param>
+        /// <param name="getFromDocumentLocation"></param>
         /// <param name="_dynamicsClient"></param>
         /// <returns></returns>
-        public static async Task<string> GetFolderName(this IDynamicsClient _dynamicsClient, string entityName, string entityId)
+        public static async Task<string> GetFolderName(this IDynamicsClient _dynamicsClient, string entityName, string entityId, bool getFromDocumentLocation = true)
         {
 
             string folderName = null;
-
-            folderName = _dynamicsClient.GetEntitySharePointDocumentLocation(entityName, entityId);
+            if (getFromDocumentLocation)
+            {
+                folderName = _dynamicsClient.GetEntitySharePointDocumentLocation(entityName, entityId);
+            }
 
             if (folderName == null)
                 switch (entityName.ToLower())

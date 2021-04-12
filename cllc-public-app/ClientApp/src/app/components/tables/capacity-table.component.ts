@@ -133,6 +133,6 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
   }
 
   get areaLocationHeading(): string {
-    return this.isOutsideArea() ? "Size (in m<sup>2</sup>)" : "Floor Level";
+    return this.isOutsideArea() ? "Size (in m<sup>2</sup>)" : "Area/Floor Level";
   }
 }

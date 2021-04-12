@@ -120,7 +120,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             foreach (var applicationResponse in responses)
             {
                 string appFilter = $"adoxio_jobnumber eq '{applicationResponse.RecordIdentifier}'";
-                string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
+                string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact", "adoxio_ApplicationTypeId" };
                 MicrosoftDynamicsCRMadoxioApplication application = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value.FirstOrDefault();
 
                 if (application != null)
@@ -238,7 +238,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         {
             MicrosoftDynamicsCRMadoxioApplicationCollection applications;
             string appFilter = $"adoxio_applicationid eq {applicationId}";
-            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact", "owninguser" };
+
+            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact", "owninguser", "adoxio_applicationtypeid_value" };
             try
             {
                 applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
@@ -462,21 +463,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         {
             try
             {
-                MicrosoftDynamicsCRMadoxioLicencetype licenceType;
-                if (application._adoxioLicencetypeValue != null)
-                {
-                    licenceType = _dynamicsClient.Licencetypes.Get(filter: $"adoxio_licencetypeid eq {application._adoxioLicencetypeValue}").Value[0];
-                }
-                else
-                {
-                    // LCSD-3203 default to CRS if no licence type
-                    licenceType = _dynamicsClient.Licencetypes.Get(filter: $"adoxio_name eq 'Cannabis Retail Store'").Value[0];
-                }
 
                 var screeningRequest = new IncompleteApplicationScreening()
                 {
-                    Name = application.AdoxioName,
-                    ApplicationType = licenceType.AdoxioName == null ? "Cannabis Retail Store" : licenceType.AdoxioName,
+                    Name = application.AdoxioName,                    
+                    ApplicationType = application.AdoxioApplicationTypeId.AdoxioName,
                     RecordIdentifier = application.AdoxioJobnumber,
                     UrgentPriority = false,
                     Associates = new List<LegalEntity>(),
