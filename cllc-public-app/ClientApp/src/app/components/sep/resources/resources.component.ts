@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StarterChecklistComponent } from '@components/sep/starter-checklist/starter-checklist.component';
-import { faCocktail, faCalculator, faCheck, faQuestion, faShoppingCart} from '@fortawesome/free-solid-svg-icons';
+import { faCocktail, faCalculator, faCheck, faQuestion, faShoppingCart, faPencilAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { User } from '@models/user.model';
 
 @Component({
   selector: 'app-resources',
@@ -14,6 +15,12 @@ export class ResourcesComponent implements OnInit {
   faCheck = faCheck;
   faQuestion = faQuestion;
   faShoppingCart = faShoppingCart;
+  faUserCircle = faUserCircle;
+  faPencilAlt = faPencilAlt;
+
+  @Input()
+  currentUser: User;
+
   constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
