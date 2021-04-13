@@ -25,21 +25,42 @@
 
     <h3>2. Enter the &#37; of each drink type appropriate for your event</h3>
     <div class="row">
-      <div *ngFor="let item of settings" class="col-md-4 col-xs-12">
-        <app-field [label]="item.description" [required]="false" [isFullWidth]="false">
+      <div *ngFor="let item of configuration" class="col-md-4 col-xs-12">
+        <div class="row">
+          <div class="text-center w-100">
+            <img src="{{'assets/sep/' + item.group + '.png'}}">
+          </div>
+        </div>
+        <app-field class="row text-center" [label]="item.description" [required]="false" [isFullWidth]="true">
           <input class="form-control" type="number" [formControlName]="item.group">
         </app-field>
-        <h4>
-          <small>{{560}}</small>
-          <small>
-            servings of {{item.group}}
-          </small>
-        </h4>
-
+        <div class="row">
+          <h4>
+            <img src="{{'assets/sep/small-' + item.group + '.png'}}">
+            &nbsp; = &nbsp;
+            <small>{{getServings(item.group).toFixed(0)}}</small>
+            <small>
+              servings of {{item.group}}
+              <br>
+              <span class="per-serving">{{item.perServingDescription}}</span>
+            </small>
+          </h4>
+          <h4>
+            <img src="{{'assets/sep/big-' + item.group + '.png'}}">
+            &nbsp; = &nbsp;
+            <small>{{getStorage(item.group).toFixed(0)}}</small>
+            <small>
+              {{item.storageMethod}} of {{item.group}}
+            </small>
+          </h4>
+        </div>
       </div>
     </div>
 
     <hr>
+
+    <span class="total-servings">{{totalServings.toFixed(0)}}</span>
+    <small> total servings</small>
 
   </form>
 </div>
