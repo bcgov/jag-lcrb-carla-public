@@ -2,7 +2,6 @@
     As a logged in business user
     I want to designate a third party operator for a Food Primary licence
 
-@foodprimarythirdparty @privatecorporation
 Scenario: Food Primary Third Party Operator (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
