@@ -11,7 +11,6 @@ using Xunit.Gherkin.Quick;
 # No Approval Requests
 #-----------------------
 
- @hourlyTest
  Scenario: No Approval Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
