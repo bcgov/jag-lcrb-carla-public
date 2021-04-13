@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit TESA applications for a liquor primary licence
 
-@liquorprimary @tesa
 Scenario: Liquor Primary TESA Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
