@@ -2,7 +2,6 @@
     As a logged in business user
     I want to download licences for different manufacturer types
 
-@manufacturer @winery @mfglicencedownload
 Scenario: Manufacturer Download Licence (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -17,7 +16,6 @@ Scenario: Manufacturer Download Licence (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @brewery @mfglicencedownload
 Scenario: Manufacturer Download Licence (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -32,7 +30,6 @@ Scenario: Manufacturer Download Licence (Brewery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @distillery @mfglicencedownload
 Scenario: Manufacturer Download Licence (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -47,7 +44,6 @@ Scenario: Manufacturer Download Licence (Distillery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @copacker @mfglicencedownload
 Scenario: Manufacturer Download Licence (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
