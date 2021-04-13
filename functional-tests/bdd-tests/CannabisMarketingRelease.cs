@@ -6,7 +6,7 @@ Feature: CannabisMarketingRelease
     As a logged in business user
     I want to run a release test for a Cannabis Marketing Licence
 
-@release6
+@6release
 Scenario: Cannabis Marketing Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
@@ -22,7 +22,6 @@ Scenario: Cannabis Marketing Release (Private Corporation)
     And I confirm the terms and conditions for a Cannabis marketing licence
     And the account is deleted
     Then I see the login page
-
 
 Scenario: Cannabis Marketing Release (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
