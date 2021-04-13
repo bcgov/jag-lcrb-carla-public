@@ -6,7 +6,6 @@ Feature: RuralLicenseeRetailStoreRelease
     As a logged in business user
     I want to run a release test for a rural LRS application
 
-@privatecorporation @ruralLRS @release4
 Scenario: Rural LRS Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
@@ -55,8 +54,7 @@ Scenario: Rural LRS Release (Private Corporation)
     And I request a transfer of ownership for RLRS
     And the account is deleted
     Then I see the login page
-
-@ruralLRS 
+ 
 Scenario: Rural LRS Release (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Rural LRS
