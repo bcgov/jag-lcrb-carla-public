@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit a rural LRS application for different business types
 
-@privatecorporation @ruralLRS 
 Scenario: Rural LRS Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
@@ -15,7 +14,6 @@ Scenario: Rural LRS Application (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@publiccorporation @ruralLRS 
 Scenario: Rural LRS Application (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Rural LRS
@@ -28,7 +26,6 @@ Scenario: Rural LRS Application (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@partnership @ruralLRS 
 Scenario: Rural LRS Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Rural LRS
@@ -41,7 +38,6 @@ Scenario: Rural LRS Application (Partnership)
     And the account is deleted
     Then I see the login page
 
-@society @ruralLRS 
 Scenario: Rural LRS Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Rural LRS
@@ -54,7 +50,6 @@ Scenario: Rural LRS Application (Society)
     And the account is deleted
     Then I see the login page
 
-@soleproprietorship @ruralLRS 
 Scenario: Rural LRS Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Rural LRS

@@ -6,7 +6,6 @@ Feature: LiquorPrimaryClubAddLicenseeRepresentative
     As a logged in business user
     I want to add a licensee representative for a Liquor Primary Club Application
 
-@liquorprimaryclub
 Scenario: Liquor Primary Club Licensee Representative (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a LPC Licence

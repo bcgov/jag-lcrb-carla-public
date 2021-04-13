@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit Manufacturer Applications for different manufacturer types
 
-@manufacturerapp @winery
 Scenario: Manufacturer Application (Winery - Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -15,7 +14,6 @@ Scenario: Manufacturer Application (Winery - Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturerapp @distillery
 Scenario: Manufacturer Application (Distillery - Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -28,7 +26,6 @@ Scenario: Manufacturer Application (Distillery - Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturerapp @brewery
 Scenario: Manufacturer Application (Brewery - Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -41,7 +38,6 @@ Scenario: Manufacturer Application (Brewery - Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturerapp @copacker
 Scenario: Manufacturer Application (Co-packer - Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -54,7 +50,6 @@ Scenario: Manufacturer Application (Co-packer - Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturerapp @winery
 Scenario: Manufacturer Application (Winery - Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
@@ -67,7 +62,6 @@ Scenario: Manufacturer Application (Winery - Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@manufacturerapp @distillery
 Scenario: Manufacturer Application (Distillery - Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
@@ -80,7 +74,6 @@ Scenario: Manufacturer Application (Distillery - Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@manufacturerapp @brewery
 Scenario: Manufacturer Application (Brewery - Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
@@ -93,7 +86,6 @@ Scenario: Manufacturer Application (Brewery - Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@manufacturerapp @copacker
 Scenario: Manufacturer Application (Co-packer - Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence

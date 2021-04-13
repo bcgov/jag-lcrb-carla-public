@@ -6,7 +6,6 @@ Feature: AgentRequestTakeHomeSamplingEvent
     As a logged in business user
     I want to request a take home sampling event for an Agent licence
 
-@agent @privatecorporation
 Scenario: Agent Take Home Sampling Event (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for an Agent Licence

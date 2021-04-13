@@ -3,7 +3,6 @@
     I want to submit a CRS Application for different business types
     And request a valid name or branding change for the approved application
 
-@cannabis @privatecorporation @crsbranding
 Scenario: CRS Name Branding Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -26,7 +25,6 @@ Scenario: CRS Name Branding Change (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@cannabis @society @crsbranding
 Scenario: CRS Name Branding Change (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -49,7 +47,6 @@ Scenario: CRS Name Branding Change (Society)
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @crsbranding
 Scenario: CRS Name Branding Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -72,7 +69,6 @@ Scenario: CRS Name Branding Change (Partnership)
     And the account is deleted
     Then I see the login page
 
-@cannabis @soleproprietorship @crsbranding
 Scenario: CRS Name Branding Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store

@@ -6,7 +6,6 @@
 # One Market Event
 #-----------------------
 
- @marketevent @marketoneday @winery
  Scenario: One Day Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -37,7 +36,6 @@
 # Weekly Market Event
 #-----------------------
 
- @marketevent @marketweekly @winery
  Scenario: Weekly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -69,7 +67,6 @@
 # Note that 'bi-weekly' refers to twice per month
 #-------------------------------------------------
 
- @marketevent @marketbiweekly @winery
  Scenario: Bi-Weekly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -99,7 +96,6 @@
 # Monthly Market Event
 #-----------------------
 
- @marketevent @marketmonthly @winery
  Scenario: Monthly Market Event (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -130,7 +126,6 @@
 # One Market Event - Save for Later
 #-----------------------------------
 
- @marketeventonedaysave @marketoneday @winery
  Scenario: One Day Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -166,7 +161,6 @@
 # Weekly Market Event - Save for Later
 #--------------------------------------
 
- @marketeventweeklysave @marketweekly @winery
  Scenario: Weekly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -202,7 +196,6 @@
 # Bi-Weekly Market Event - Save for Later
 #-----------------------------------------
 
- @marketeventbiweeklysave @marketbiweekly @winery
  Scenario: Bi-Weekly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -238,7 +231,6 @@
 # Monthly Market Event - Save for Later
 #---------------------------------------
 
- @marketeventmonthlysave @marketmonthly @winery
  Scenario: Monthly Market Event Save For Later (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

@@ -2,7 +2,6 @@
     As a logged in business user
     I want to download a Cannabis Marketing Licence
 
-@cannabismktglicencedownload @privatecorporation
 Scenario: Cannabis Marketing Licence Download (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
