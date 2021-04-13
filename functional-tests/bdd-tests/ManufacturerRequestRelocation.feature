@@ -2,7 +2,6 @@
     As a logged in business user
     I want to request a relocation change for a manufacturer licence
 
-@manufacturer @winery @relocationchange
 Scenario: Relocation Change Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -22,7 +21,6 @@ Scenario: Relocation Change Application (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @brewery @relocationchange
 Scenario: Relocation Change Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -42,7 +40,6 @@ Scenario: Relocation Change Application (Brewery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @distillery @relocationchange
 Scenario: Relocation Change Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -62,7 +59,6 @@ Scenario: Relocation Change Application (Distillery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @copacker @relocationchange
 Scenario: Relocation Change Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit a licensee changes for different business types
 
-@catering @licenseechanges
 Scenario: Catering Licensee Changes (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -20,7 +19,6 @@ Scenario: Catering Licensee Changes (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges 
 Scenario: Catering Licensee Changes (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -38,7 +36,6 @@ Scenario: Catering Licensee Changes (Partnership)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges 
 Scenario: Catering Licensee Changes (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -56,7 +53,6 @@ Scenario: Catering Licensee Changes (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges
 Scenario: Catering Licensee Changes (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -74,7 +70,6 @@ Scenario: Catering Licensee Changes (Society)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges
 Scenario: Catering Licensee Changes (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
@@ -92,7 +87,6 @@ Scenario: Catering Licensee Changes (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges
 Scenario: Catering Licensee Changes (Co-op)
     Given I am logged in to the dashboard as a co-op
     And I click on the Start Application button for Catering
@@ -110,7 +104,6 @@ Scenario: Catering Licensee Changes (Co-op)
     And the account is deleted
     Then I see the login page
 
-@catering @licenseechanges
 Scenario: Catering Licensee Changes (Military Mess)
     Given I am logged in to the dashboard as a military mess
     And I click on the Start Application button for Catering
