@@ -6,7 +6,7 @@ Feature: CateringRelease
     As a logged in business user
     I want to confirm that the Catering functionality is ready for release
 
-@validation @privatecorporation @release7
+@release7
 Scenario: Catering Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -47,7 +47,6 @@ Scenario: Catering Release (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@validation @soleproprietorship
 Scenario: Catering Release (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering

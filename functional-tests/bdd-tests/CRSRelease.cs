@@ -6,7 +6,7 @@ Feature: CrsRelease
     As a logged in business user
     I want to confirm that the CRS functionality is ready for release
 
-@cannabis @validation @release2
+@2release
 Scenario: CRS Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -46,7 +46,7 @@ Scenario: CRS Release (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@cannabis @validation @soleproprietorship
+
 Scenario: CRS Release (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
