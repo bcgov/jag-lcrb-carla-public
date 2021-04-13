@@ -2,7 +2,6 @@
     As a logged in business user
     I want to ***
 
-@suitabletags
 Scenario: 
     Given I am logged in to the dashboard as ***
     And I click on the ***

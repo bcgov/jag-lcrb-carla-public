@@ -6,7 +6,6 @@ Feature: ValidationCovid
     As a logged in business user
     I want to confirm the validation messages for the COVID temporary extension
 
-@covid @validation
 Scenario: Validate COVID Temp Extension Application
     Given I am not logged in to the Liquor and Cannabis Portal
     And I click on the COVID Temporary Extension link

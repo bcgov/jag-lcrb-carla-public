@@ -6,7 +6,6 @@ Feature: UbrewUvinAddOrChangeAThirdPartyOperator
     As a logged in business user
     I want to submit a UBrew / UVin Licence third party operator applicaation for different business types
 
-@ubrewuvinthirdparty @partnership 
 Scenario: UBrew / UVin Application Third Party Operator (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a UBrew UVin application
@@ -27,7 +26,6 @@ Scenario: UBrew / UVin Application Third Party Operator (Partnership)
     And the account is deleted
     Then I see the login page
 
-@ubrewuvinthirdparty @privatecorporation 
 Scenario: UBrew / UVin Application Third Party Operator (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
@@ -48,7 +46,6 @@ Scenario: UBrew / UVin Application Third Party Operator (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@ubrewuvinthirdparty @publiccorporation 
 Scenario: UBrew / UVin Application Third Party Operator (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a UBrew UVin application
@@ -69,7 +66,6 @@ Scenario: UBrew / UVin Application Third Party Operator (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@ubrewuvinthirdparty @soleproprietorship 
 Scenario: UBrew / UVin Application Third Party Operator (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a UBrew UVin application

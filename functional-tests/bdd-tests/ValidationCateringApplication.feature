@@ -2,7 +2,6 @@
     As a logged in business user
     I want to confirm the validation messages for the Catering applications
 
-@catering @validation
 Scenario: Validation for Catering Application 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -14,7 +13,6 @@ Scenario: Validation for Catering Application
     And the account is deleted
     Then I see the login page
 
-@catering @privatecorporation @validation
 Scenario: Validation for Catering Branding Change 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -36,7 +34,6 @@ Scenario: Validation for Catering Branding Change
     And the account is deleted
     Then I see the login page
 
- @cateringevent @privatecorporation @validation
  Scenario: Validation for No Approval Event Authorization Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -58,7 +55,6 @@ Scenario: Validation for Catering Branding Change
     And the account is deleted
     Then I see the login page
 
- @licenseerep @validation
  Scenario: Validation for Licensee Representative Request
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -78,7 +74,6 @@ Scenario: Validation for Catering Branding Change
     And the account is deleted
     Then I see the login page
 
-@catering @privatecorporation @validation
 Scenario: Validation for Catering Store Relocation
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -99,7 +94,6 @@ Scenario: Validation for Catering Store Relocation
     And the account is deleted
     Then I see the login page
 
-@catering @privatecorporation @validation
 Scenario: Validation for Catering Third Party Operator
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -119,7 +113,6 @@ Scenario: Validation for Catering Third Party Operator
     And the account is deleted
     Then I see the login page
 
- @catering @privatecorporation @validation
  Scenario: Validation for Catering Transfer of Ownership
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering

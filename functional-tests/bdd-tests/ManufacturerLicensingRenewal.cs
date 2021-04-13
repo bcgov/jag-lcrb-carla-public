@@ -11,7 +11,6 @@ Feature: ManufacturerLicensingRenewal
 # Expiry = Today
 #-----------------------
 
-@manufacturer @licencerenewal
 Scenario: Today Negative Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -29,7 +28,6 @@ Scenario: Today Negative Licence Renewal (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @licencerenewal
 Scenario: Today Positive Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -47,7 +45,6 @@ Scenario: Today Positive Licence Renewal (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @licencerenewal
 Scenario:  Today Negative Licence Renewal (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -65,7 +62,6 @@ Scenario:  Today Negative Licence Renewal (Brewery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @licencerenewal
 Scenario:  Today Negative Licence Renewal (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -83,7 +79,6 @@ Scenario:  Today Negative Licence Renewal (Co-packer)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @licencerenewal
 Scenario:  Today Negative Licence Renewal (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -105,7 +100,6 @@ Scenario:  Today Negative Licence Renewal (Distillery)
 # Expiry = Yesterday
 #-----------------------
 
-@manufacturer @licencerenewal
 Scenario: Yesterday Negative Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -123,7 +117,6 @@ Scenario: Yesterday Negative Licence Renewal (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @licencerenewal
 Scenario: Yesterday Positive Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -145,7 +138,6 @@ Scenario: Yesterday Positive Licence Renewal (Winery)
 # Expiry = 45 Days Ago
 #-----------------------
 
-@manufacturer @licencerenewal
 Scenario: 45 Days Ago Negative Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -163,7 +155,6 @@ Scenario: 45 Days Ago Negative Licence Renewal (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @licencerenewal
 Scenario: 45 Days Ago Positive Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -185,7 +176,6 @@ Scenario: 45 Days Ago Positive Licence Renewal (Winery)
 # Expiry = 60 Days From Today
 #-----------------------------
 
-@manufacturer @licencerenewal
 Scenario: 60 Days From Today Negative Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -203,7 +193,6 @@ Scenario: 60 Days From Today Negative Licence Renewal (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @licencerenewal
 Scenario: 60 Days From Today Positive Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -225,7 +214,6 @@ Scenario: 60 Days From Today Positive Licence Renewal (Winery)
 # Expiry = 30 Days From Today
 #-----------------------------
 
-@manufacturer @licencerenewal
 Scenario: 30 Days From Today Negative Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -243,7 +231,6 @@ Scenario: 30 Days From Today Negative Licence Renewal (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @licencerenewal
 Scenario: 30 Days From Today Positive Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
