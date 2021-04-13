@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit a UBrew / UVin Licence application for different business types
 
-@ubrewuvinapplication @privatecorporation
 Scenario: UBrew / UVin Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
@@ -16,7 +15,6 @@ Scenario: UBrew / UVin Application (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@ubrewuvinapplication @partnership 
 Scenario: UBrew / UVin Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a UBrew UVin application
@@ -30,7 +28,6 @@ Scenario: UBrew / UVin Application (Partnership)
     And the account is deleted
     Then I see the login page
 
-@ubrewuvinapplication @publiccorporation 
 Scenario: UBrew / UVin Application (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a UBrew UVin application
@@ -44,7 +41,6 @@ Scenario: UBrew / UVin Application (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@ubrewuvinapplication @soleproprietorship 
 Scenario: UBrew / UVin Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a UBrew UVin application
