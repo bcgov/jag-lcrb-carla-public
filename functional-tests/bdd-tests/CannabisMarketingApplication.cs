@@ -6,7 +6,6 @@ Feature: CannabisMarketingApplication
     As a logged in business user
     I want to submit a Cannabis Marketing application for different business types
 
-@cannabismktg @privatecorporation
 Scenario: Cannabis Marketing Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
@@ -20,7 +19,6 @@ Scenario: Cannabis Marketing Application (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@cannabismktg @society 
 Scenario: Cannabis Marketing Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Marketing Licence
@@ -34,7 +32,6 @@ Scenario: Cannabis Marketing Application (Society)
     And the account is deleted
     Then I see the login page
 
-@cannabismktg @partnership 
 Scenario: Cannabis Marketing Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Marketing Licence
@@ -48,7 +45,6 @@ Scenario: Cannabis Marketing Application (Partnership)
     And the account is deleted
     Then I see the login page
 
-@cannabismktg @soleproprietorship 
 Scenario: Cannabis Marketing Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Marketing Licence

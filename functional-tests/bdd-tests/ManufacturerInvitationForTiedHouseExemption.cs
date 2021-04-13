@@ -6,7 +6,6 @@ Feature: ManufacturerInvitationForTiedHouseExemption
     As a logged in business user
     I want to submit a tied house exemption for different manufacturer types
 
-@manufacturer @winery @mfglicencetiedhouse
 Scenario: Manufacturer Tied House Exemption (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -24,7 +23,6 @@ Scenario: Manufacturer Tied House Exemption (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @brewery @mfglicencetiedhouse
 Scenario: Manufacturer Tied House Exemption (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -42,7 +40,6 @@ Scenario: Manufacturer Tied House Exemption (Brewery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @distillery @mfglicencetiedhouse
 Scenario: Manufacturer Tied House Exemption (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -60,7 +57,6 @@ Scenario: Manufacturer Tied House Exemption (Distillery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @copacker @mfglicencetiedhouse
 Scenario: Manufacturer Tied House Exemption (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

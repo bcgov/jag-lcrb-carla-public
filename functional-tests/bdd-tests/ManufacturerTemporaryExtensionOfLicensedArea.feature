@@ -2,7 +2,6 @@
     As a logged in business user
     I want to request a temporary extension for a Liquor Primary Application
 
-@manufacturer @winery 
 Scenario: Manufacturer Temporary Extension (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

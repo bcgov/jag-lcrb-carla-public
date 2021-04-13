@@ -6,7 +6,6 @@ Feature: LiquorPrimaryApplication
     As a logged in business user
     I want to submit Liquor Primary Applications for different business types
 
-@liquorprimaryapp
 Scenario: Liquor Primary Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
@@ -27,7 +26,6 @@ Scenario: Liquor Primary Application (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp
 Scenario: Liquor Primary Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Liquor Primary Licence
@@ -48,7 +46,6 @@ Scenario: Liquor Primary Application (Society)
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp
 Scenario: Liquor Primary Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Liquor Primary Licence
@@ -69,7 +66,6 @@ Scenario: Liquor Primary Application (Partnership)
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp
 Scenario: Liquor Primary Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Liquor Primary Licence
@@ -89,8 +85,7 @@ Scenario: Liquor Primary Application (Sole Proprietorship)
     And I click on the Submit button
     And the account is deleted
     Then I see the login page
-
-@liquorprimaryapp 
+ 
 Scenario: Liquor Primary Application (Co-op)
     Given I am logged in to the dashboard as a co-op
     And I click on the Start Application button for a Liquor Primary Licence
@@ -111,7 +106,6 @@ Scenario: Liquor Primary Application (Co-op)
     And the account is deleted
     Then I see the login page
 
-@liquorprimaryapp 
 Scenario: Liquor Primary Application (Military Mess)
     Given I am logged in to the dashboard as a military mess
     And I click on the Start Application button for a Liquor Primary Licence

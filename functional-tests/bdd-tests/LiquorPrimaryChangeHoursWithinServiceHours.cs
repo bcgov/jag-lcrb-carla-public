@@ -6,7 +6,6 @@ Feature: LiquorPrimaryChangeHoursWithinServiceHours
     As a logged in business user
     I want to request a change of hours within service hours for a Liquor Primary Application
 
-@liquorprimary
 Scenario: Liquor Primary Change Hours Within Service Hours (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence

@@ -2,7 +2,6 @@
     As a logged in business user
     I want to request a third party operator for a rural LRS application
 
-@privatecorporation @ruralLRS
 Scenario: Rural LRS Third Party Operator (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
@@ -18,7 +17,6 @@ Scenario: Rural LRS Third Party Operator (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@publiccorporation @ruralLRS 
 Scenario: Rural LRS Third Party Operator (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Rural LRS
@@ -34,7 +32,6 @@ Scenario: Rural LRS Third Party Operator (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@partnership @ruralLRS 
 Scenario: Rural LRS Third Party Operator (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Rural LRS
@@ -50,7 +47,6 @@ Scenario: Rural LRS Third Party Operator (Partnership)
     And the account is deleted
     Then I see the login page
 
-@society @ruralLRS 
 Scenario: Rural LRS Third Party Operator (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Rural LRS
@@ -66,7 +62,6 @@ Scenario: Rural LRS Third Party Operator (Society)
     And the account is deleted
     Then I see the login page
 
-@soleproprietorship @ruralLRS
 Scenario: Rural LRS Third Party Operator (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Rural LRS
