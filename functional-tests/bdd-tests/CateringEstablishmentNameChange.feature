@@ -3,7 +3,6 @@
     I want to pay the first year catering licence fee
     And submit a name branding change for different business types
 
-@cateringbranding @privatecorporation
 Scenario: Catering Branding Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -25,7 +24,6 @@ Scenario: Catering Branding Change (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@cateringbranding @soleproprietorship 
 Scenario: Catering Branding Change (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -47,7 +45,6 @@ Scenario: Catering Branding Change (Society)
     And the account is deleted
     Then I see the login page
 
-@cateringbranding @partnership @cateringbranding
 Scenario: Catering Branding Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -69,7 +66,6 @@ Scenario: Catering Branding Change (Partnership)
     And the account is deleted
     Then I see the login page
 
-@cateringbranding @soleproprietorship 
 Scenario: Catering Branding Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering

@@ -7,7 +7,7 @@
 # No Approval Requests
 #-----------------------
 
- @cateringevent @privatecorporation @noapproval @hourlyTest
+@hourlyTest
  Scenario: No Approval Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -24,7 +24,6 @@
     And the account is deleted
     Then I see the login page
 
- @cateringevent @society @noapproval
  Scenario: No Approval Event Authorization Request (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -41,7 +40,6 @@
     And the account is deleted
     Then I see the login page
 
- @cateringevent @partnership @noapproval
  Scenario: No Approval Event Authorization Request (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -58,7 +56,6 @@
     And the account is deleted
     Then I see the login page
 
-  @cateringevent @soleproprietorship @noapproval
   Scenario: No Approval Event Authorization Request (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -79,7 +76,6 @@
 # 500+ Attendees Request
 #-----------------------
 
- @cateringevent @privatecorporation @500attendees
  Scenario: 500+ Attendees Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -100,7 +96,6 @@
 # Outdoor Request
 #-----------------------
 
- @cateringevent @outdoor
  Scenario: Outdoor Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -121,7 +116,6 @@
 # Indoor/Outdoor Request
 #-----------------------
 
- @cateringevent @indooroutdoor
  Scenario: Both Indoor and Outdoor Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -142,7 +136,6 @@
 # Past 2am (non-community)
 #-------------------------
 
- @cateringevent @past2amnoncommunity
  Scenario: Past 2am Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -163,7 +156,6 @@
 # Past 2am (community)
 #-------------------------
 
- @cateringevent @past2amcommunity
  Scenario: Past 2am Community Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -184,7 +176,6 @@
 # Save For Later
 #-------------------------
 
- @cateringevent @saveforlater
  Scenario: Save For Later Event Authorization Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
