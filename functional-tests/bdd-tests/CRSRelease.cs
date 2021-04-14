@@ -87,7 +87,7 @@ Scenario: CRS Release (Sole Proprietorship)
 
 namespace bdd_tests
 {
-    [FeatureFile("./CrsRelease.feature")]
+    [FeatureFile("./CRSRelease.feature")]
     [Collection("Liquor")]
     public sealed class CrsRelease : TestBase
     {
