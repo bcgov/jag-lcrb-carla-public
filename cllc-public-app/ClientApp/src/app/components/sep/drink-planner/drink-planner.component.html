@@ -1,6 +1,6 @@
-<div class="form-wrapper" style="position: relative;">
+<div class="position-relative">
   <div [ngBusy]="[busy]"></div>
-  <form [formGroup]="form" class="col-lg-7 col-sm-12">
+  <form [formGroup]="form" class="col">
     <div class="padded-section">
       <h1>Drink Planner</h1>
     </div>
@@ -25,20 +25,23 @@
 
     <h3>2. Enter the &#37; of each drink type appropriate for your event</h3>
     <div class="row">
-      <div *ngFor="let item of configuration" class="col-md-4 col-xs-12">
+      <div *ngFor="let item of config" class="col-md-3 col-md-offset-1 col-xs-12">
         <div class="row">
           <div class="text-center w-100">
-            <img src="{{'assets/sep/' + item.group + '.png'}}">
+            <img src="{{item.imageUrl}}">
           </div>
         </div>
+
         <app-field class="row text-center" [label]="item.description" [required]="false" [isFullWidth]="true">
-          <input class="form-control" type="number" [formControlName]="item.group">
+          <input class="form-control text-center m-auto mb-2" type="number" [formControlName]="item.group" min="0"
+            max="100">
         </app-field>
+
         <div class="row">
           <h4>
-            <img src="{{'assets/sep/small-' + item.group + '.png'}}">
+            <img src="{{item.servingImageUrl}}">
             &nbsp; = &nbsp;
-            <small>{{getServings(item.group).toFixed(0)}}</small>
+            <small>{{servings(item).toFixed(0) | mask : 'separator' : ','}}</small>
             <small>
               servings of {{item.group}}
               <br>
@@ -46,21 +49,33 @@
             </small>
           </h4>
           <h4>
-            <img src="{{'assets/sep/big-' + item.group + '.png'}}">
+            <img src="{{item.storageImageUrl}}">
             &nbsp; = &nbsp;
-            <small>{{getStorage(item.group).toFixed(0)}}</small>
-            <small>
-              {{item.storageMethod}} of {{item.group}}
-            </small>
+            <small class="storage-unit">{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</small>
+            <small class="storage-method">{{storageMethodDescription(item)}}</small>
           </h4>
+        </div>
+      </div> <!-- ngFor -->
+    </div>
+
+    <div class="row">
+      <div class="col-8 offset-4">
+        <hr>
+        <div class="row">
+          <div class="col-4 offset-2">
+            <h3 class="text-right">
+              <span class="total-percent">{{totalPercentage.toFixed(0)}} %</span>
+            </h3>
+          </div>
+          <div class="col-6">
+            <h3>
+              &nbsp; = &nbsp;
+              <span class="total-servings">{{totalServings.toFixed(0) | mask : 'separator' : ','}}</span>
+              <small> total servings</small>
+            </h3>
+          </div>
         </div>
       </div>
     </div>
-
-    <hr>
-
-    <span class="total-servings">{{totalServings.toFixed(0)}}</span>
-    <small> total servings</small>
-
   </form>
 </div>
