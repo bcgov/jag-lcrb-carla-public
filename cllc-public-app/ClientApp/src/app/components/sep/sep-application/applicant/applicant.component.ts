@@ -62,6 +62,14 @@ export class ApplicantComponent implements OnInit {
       ...this.application,
       lastUpdated: new Date(),
       status: 'unsubmitted',
+      stepCompleted: (_=>{
+        const step = 'eligibility';
+        let steps = this?.application?.stepCompleted || [];
+        if(steps.indexOf(step) === -1){
+          steps.push(step);
+        }
+        return steps;
+      })(),
       contact: {
         firstname: this?.account?.primarycontact?.firstname,
         lastname: this?.account?.primarycontact?.lastname,

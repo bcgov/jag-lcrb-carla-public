@@ -1,0 +1,9 @@
+<section [ngClass]="{ 'sep-alert': type === 'alert', 'sep-error': type === 'error'}" class="sep-alert mat-elevation-z2">
+    <section class="header">
+        <fa-icon mat-card-avatar size="2x" [icon]="faExclamationCircle"></fa-icon>
+        <span class="mat-title">{{ type === 'error' ? 'Error': 'Alert'}}</span>
+    </section>
+    <p>
+        <ng-content></ng-content>        
+    </p>
+</section>

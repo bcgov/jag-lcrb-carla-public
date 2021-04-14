@@ -282,6 +282,7 @@ import { SummaryComponent } from './components/sep/sep-application/summary/summa
 import { IndexDBService } from "@services/index-db.service";
 import { MyApplicationsComponent } from './components/sep/my-applications/my-applications.component';
 import { ServiceCardProfileComponent } from "@components/servicecard-profile/servicecard-profile.component";
+import { ErrorAlertComponent } from './components/sep/error-alert/error-alert.component';
 
 @NgModule({
   declarations: [
@@ -436,6 +437,7 @@ import { ServiceCardProfileComponent } from "@components/servicecard-profile/ser
     SummaryComponent,
     MyApplicationsComponent,
     ServiceCardProfileComponent,
+    ErrorAlertComponent,
   ],
   imports: [
     AppRoutingModule,

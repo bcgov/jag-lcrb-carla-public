@@ -1,17 +1,17 @@
 <div class="form-wrapper row">
-    <h1 class="col-md-12">{{currentUser.name}}'s applications</h1>
+    <h1 class="col-md-12 mat-heading">{{currentUser.name}}'s applications</h1>
 
     <section class="col-md-8">
-        <p>
+        <p class="mat-body-1">
             Here is a list of your SEP applications - current and past.
             To create a new application from a previous one, simply find it and select Copy.
         </p>
 
         <button mat-raised-button color="primary" (click)="startApplication()">START NEW APPLICATION</button>
 
-        <hr>
+        <mat-divider></mat-divider>
 
-        <h2>Current Applications</h2>
+        <h2 class="mat-title">Current Applications</h2>
 
         <table mat-table [dataSource]="applications" class="mat-elevation-z0 w-100">
 
@@ -20,16 +20,21 @@
 
             <!-- Status Column -->
             <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef>Status </th>
-                <td mat-cell *matCellDef="let element"> 
+                <th mat-header-cell *matHeaderCellDef>
+                    <span class="mat-subheading-2">Status</span>
+                </th>
+                <td mat-cell *matCellDef="let element" class="mat-body-1">
                     <fa-icon [icon]="faEdit"></fa-icon>
                     <br>
-                    {{element.status}} </td>
+                    {{element.status}}
+                </td>
             </ng-container>
 
             <!-- Info Column -->
             <ng-container matColumnDef="info">
-                <th mat-header-cell *matHeaderCellDef> Info </th>
+                <th mat-header-cell *matHeaderCellDef>
+                    <span class="mat-subheading-2">Info</span>
+                </th>
                 <td mat-cell *matCellDef="let element">
                     <table>
                         <h4>{{element.eventName}}</h4>
@@ -51,7 +56,7 @@
                         </tr>
                         <tr>
                             <td>Event Date(s)</td>
-                            <td>{{element.id}}</td>
+                            <td>{{element.eventDate  | date: 'short'}}</td>
                         </tr>
                         <tr>
                             <td>Licence Number</td>
@@ -63,11 +68,15 @@
 
             <!-- Actions Column -->
             <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <th mat-header-cell *matHeaderCellDef>
+                    <span class="mat-subheading-2">Actions</span>
+                </th>
                 <td mat-cell *matCellDef="let element">
-                    <button routerLink="/sep/application/{{element.id}}/{{element.stepCompleted || 'applicant'}}" mat-raised-button color="primary">View</button>
+                    <button routerLink="/sep/application/{{element.id}}/{{element.stepCompleted || 'applicant'}}"
+                        mat-raised-button color="primary">View</button>
                     <br>
-                    <button mat-button color="primary" (click)="cancelApplication(element.id, element.eventName, element.id)">Cancel</button>
+                    <button mat-button color="primary"
+                        (click)="cancelApplication(element.id, element.eventName, element.id)">Cancel</button>
                     <br>
                     <button mat-button color="primary" (click)="cloneApplication(element)">Clone</button>
                 </td>

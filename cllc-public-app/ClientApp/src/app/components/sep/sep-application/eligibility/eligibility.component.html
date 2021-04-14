@@ -1,4 +1,151 @@
-<p>eligibility works!</p>
+<div class="wrapp">
+    <h1 class="mat-heading">Eligibility</h1>
 
-<button mat-raised-button color="secondary" matStepperPrevious>Back</button>
-<button mat-raised-button color="primary" matStepperNext>Next</button>
+    <span class="mat-title">{{application?.eventName}}</span>
+
+    <div class="mat-subheading-1">Application number: {{application?.id}}</div>
+    <p>Tell us about your event. This information is used to determine the eligibility of your event and what type of
+        permit you require.
+    </p>
+    <span class="error-states">*All fields are required</span>
+
+    <mat-divider></mat-divider>
+
+    <h3>Tell us about your event</h3>
+    <section [formGroup]="form" style="padding: 16px 32px;">
+        <app-field label="Is this event being hosted at a private residence?" [required]="true">
+            <mat-radio-group formControlName="eligibilityAtPrivateResidence">
+                <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
+                <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+            <app-error-alert *ngIf="form.get('eligibilityAtPrivateResidence').value" type="error">
+                Private residences are not eligible for Special Event Permits. You may serve liquor free of charge
+                without a liquor permit, but cannot sell liquor at a residence. You can also hire a licensed commercial
+                caterer to serve liquor, but cannot sell liquor under a catering licence at a residence. For more
+                information on the definition of a private residence please see the Special Event Permit Policy Manual.
+            </app-error-alert>
+        </app-field>
+
+        <mat-divider></mat-divider>
+        <app-field label="Is your event being held on public property?" [required]="true">
+            <mat-radio-group formControlName="eligibilityOnPublicProperty">
+                <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
+                <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+            <app-error-alert *ngIf="form.get('eligibilityOnPublicProperty').value">
+                <p>
+                    Events on public property require approval from the local authority (local government, First Nation,
+                    Provincial or Federal government) to qualify for a Special Event Permit. A copy of this application
+                    may be reviewed by the local authority.
+                </p>
+                <p>
+                    Please note that if you do not obtain written approval for permitted events on public property then
+                    your permit could be cancelled with no fees refunded
+                </p>
+                <p>
+                    Unique requirements exist for the University of British Columbia. To learn more about application
+                    requirements at UBC visit the UBC Student Services website.
+                </p>
+            </app-error-alert>
+        </app-field>
+
+        <mat-divider></mat-divider>
+        <app-field [isFullWidth]="true" label="Is this an event of provincial, national, or international significance?"
+            [required]="true">
+            <mat-radio-group formControlName="eligibilityMajorSignificance">
+                <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
+                <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+            <app-error-alert *ngIf="form.get('eligibilityMajorSignificance').value">
+                <p>
+                    Please complete the rationale section below and state why you believe your event is of a provincial,
+                    national, or international significance.
+                </p>
+                <p>
+                    The branch will review the rationale and may contact you for more information. Please see tool tip
+                    to the right of the text box for more information.
+                </p>
+            </app-error-alert>
+            <br *ngIf="form.get('eligibilityMajorSignificance').value">
+            <app-field *ngIf="form.get('eligibilityMajorSignificance').value" [isFullWidth]="true"
+                label="Decribe rationale" [required]="true">
+                <textarea formControlName="eventDescription" class="w-80 form-control" rows="3"></textarea>
+            </app-field>
+        </app-field>
+
+        <mat-divider></mat-divider>
+        <app-field label="When does your event start? " [required]="true">
+            <input type="text" formControlName="eventStartDate" style="background-color: #fff; width: 200px;"
+                placeholder="yyyy-mm-dd" readonly class="form-control" [min]="minDate" [matDatepicker]="picker"
+                (focus)="picker.open()" (click)="picker.open()">
+            <mat-datepicker #picker></mat-datepicker>
+
+            <app-error-alert *ngIf="form.get('eventStartDate').value">
+                Your event starts soon. Please be aware that if your application requires review, you may or may not
+                receive an SEP before the event start date. Continue and submit your application or change your event to
+                a later date.
+            </app-error-alert>
+        </app-field>
+
+        <mat-divider></mat-divider>
+        <app-field label="Is your event private or public?" [required]="true">
+            <select formControlName="eligibilityPrivateOrPublic" class="form-control">
+                <option value=""></option>
+                <option value="2">Private – An organization's members or staff, invited guests and ticket holders
+                </option>
+                <option selected="selected" value="1">Private – Family and invited friends only</option>
+                <option value="5">Private – Hobbyist competition</option>
+                <option value="3">Public – Open to the general public or anyone who wishes to participate or buy a
+                    ticket
+                </option>
+            </select>
+        </app-field>
+
+        <mat-divider></mat-divider>
+        <app-field label="Responsible Beverage Service Number (SIR or SES)" [required]="true">
+            <input formControlName="eligibilityResponsibleBevServiceNumber" type="text" class="form-control">
+            <br>
+            <mat-checkbox formControlName="eligibilityResponsibleBevServiceNumberDoesNotHave" color="primary">
+                I don’t have a BC Responsible Beverage Service Certificate Number
+            </mat-checkbox>
+            <app-error-alert *ngIf="form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').value">
+                You are required to complete Responsible Beverage Service certification prior to hosting your event. For
+                more information and to get started with a training course, click here.
+            </app-error-alert>
+        </app-field>
+
+        <mat-divider></mat-divider>
+        <app-field [isFullWidth]="true" label="What’s the occasion of your event? (maximum 255 characters) "
+            [required]="true">
+            <textarea formControlName="eventDescription" class="w-80 form-control" rows="5"></textarea>
+        </app-field>
+
+        <mat-divider></mat-divider>
+        <app-field label="Are you charging an event admission price?" [required]="true">
+            <mat-radio-group formControlName="eligibilityChargingAdmission">
+                <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
+                <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+        </app-field>
+
+        <mat-divider></mat-divider>
+        <app-field label="Is there currently a liquor licence at your event location?" [required]="true">
+            <mat-radio-group formControlName="eligibilityLocalIsLicensed">
+                <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
+                <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
+                <mat-radio-button color="primary" class="mr-3" [value]="null">Not sure</mat-radio-button>
+            </mat-radio-group>
+            <app-error-alert  *ngIf="form.get('eligibilityLocalIsLicensed').value">
+                If your event location is licensed, the liquor licence must be temporarily suspended for your event
+                date/s before you can apply for an SEP. It is the responsibility of the venue establishment owner to
+                temporarily suspend their licence for your event date/s. Contact the LCRB for more information at 1-866
+                209-2111.
+            </app-error-alert>
+        </app-field>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <button mat-raised-button color="secondary" matStepperPrevious>BACK</button>
+    <button mat-raised-button color="primary" (click)="save()" matStepperNext>NEXT</button>
+</div>

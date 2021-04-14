@@ -16,7 +16,7 @@
 
             <ng-container *ngIf="step === 'eligibility'">
                 <ng-template matStepLabel>Eligibility</ng-template>
-                <app-eligibility *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()"
+                <app-eligibility  [account]="account" [application]="application" *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()"
                     #eligibility>
                 </app-eligibility>
             </ng-container>
