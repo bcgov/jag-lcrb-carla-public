@@ -2,7 +2,7 @@
     As a logged in business user
     I want to run a release test for Agent licence
 
-@agent @privatecorporation @release1
+@4release
 Scenario: Agent Release Test (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for an Agent Licence
@@ -26,7 +26,6 @@ Scenario: Agent Release Test (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@agent
 Scenario: Agent Release Test (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for an Agent Licence

@@ -6,7 +6,6 @@ Feature: ManufacturerAddOrChangeAThirdPartyOperator
     As a logged in business user
     I want to request a third party operator for a manufacturer licence
 
-@manufacturer @winery @thirdparty
 Scenario: Third Party Operator (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -24,7 +23,6 @@ Scenario: Third Party Operator (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @brewery @thirdparty
 Scenario: Third Party Operator (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -42,7 +40,6 @@ Scenario: Third Party Operator (Brewery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @distillery @thirdparty
 Scenario: Third Party Operator (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -60,7 +57,6 @@ Scenario: Third Party Operator (Distillery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @copacker @thirdparty
 Scenario: Third Party Operator (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

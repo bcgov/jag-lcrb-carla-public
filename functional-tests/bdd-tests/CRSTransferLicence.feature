@@ -3,7 +3,6 @@
     I want to submit a CRS Application for different business types
     And request a transfer of ownership for the approved application
 
-@cannabis @privatecorporation @crstransferownership
 Scenario: Cannabis Transfer Ownership (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -20,7 +19,6 @@ Scenario: Cannabis Transfer Ownership (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@cannabis @society @crstransferownership
 Scenario: Cannabis Transfer Ownership (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -37,7 +35,6 @@ Scenario: Cannabis Transfer Ownership (Society)
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @crstransferownership
 Scenario: Cannabis Transfer Ownership (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -54,7 +51,6 @@ Scenario: Cannabis Transfer Ownership (Partnership)
     And the account is deleted
     Then I see the login page
 
-@cannabis @soleproprietorship @crstransferownership
 Scenario: Cannabis Transfer Ownership (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store

@@ -2,7 +2,6 @@
     As a logged in business user
     I want to run a release test for Liquor Primary Club
 
-@liquorprimaryclub @release8
 Scenario: Liquor Primary Club Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a LPC Licence

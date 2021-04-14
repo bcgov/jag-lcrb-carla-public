@@ -7,7 +7,6 @@ using Xunit.Gherkin.Quick;
     I want to pay the first year catering licence fee
     And submit a licensee representative request 
 
- @catering @licenseerep
  Scenario: Licensee Representative Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering

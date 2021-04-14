@@ -2,7 +2,6 @@
     As a logged in user
     I want to confirm that a cannabis worker application is no longer displayed
 
-@workerapplicationnotreqd
 Scenario: Worker Application No Longer Required
     Given I login with no terms
     And the account is deleted

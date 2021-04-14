@@ -7,7 +7,6 @@ Feature: CateringAddOrChangeAThirdPartyOperator
     I want to pay the first year catering licence fee
     And submit a third party operator request for different business types
 
- @catering @privatecorporation @cateringtpo
  Scenario: Catering Third Party Operator Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -25,7 +24,6 @@ Feature: CateringAddOrChangeAThirdPartyOperator
     And the account is deleted
     Then I see the login page
 
- @catering @society @cateringtpo2
  Scenario: Catering Third Party Operator Request (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -43,7 +41,6 @@ Feature: CateringAddOrChangeAThirdPartyOperator
     And the account is deleted
     Then I see the login page
 
- @catering @partnership @cateringtpo
  Scenario: Catering Third Party Operator Request (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -61,7 +58,6 @@ Feature: CateringAddOrChangeAThirdPartyOperator
     And the account is deleted
     Then I see the login page
 
- @catering @soleproprietorship @cateringtpo
  Scenario: Catering Third Party Operator Request (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering

@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit a Request of Change in Terms and Conditions/Request for Discretion application for a UBrew / UVin licence
 
-@ubrewuvinlicence @privatecorporation 
 Scenario: UBrew / UVin Application Change In Terms (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
