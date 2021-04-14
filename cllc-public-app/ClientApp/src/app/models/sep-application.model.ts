@@ -1,4 +1,4 @@
-export interface SepApplication {
+export class SepApplication {
     id: number
     tempJobNumber: string;
     dateCreated: Date;
@@ -7,6 +7,12 @@ export interface SepApplication {
     applicantInfo: any;
     agreeToTnC: boolean;
     dateAgreedToTnC: Date;
-    stepCompleted: string;
+    stepCompleted: string[];
     status: string;
+
+    eligibilityAtPrivateResidence: boolean;
+    eligibilityMajorSignificance: boolean;
+    eligibilityMajorSignificanceRational: string;
+    eligibilityLocalSignificance: boolean;
+
 }

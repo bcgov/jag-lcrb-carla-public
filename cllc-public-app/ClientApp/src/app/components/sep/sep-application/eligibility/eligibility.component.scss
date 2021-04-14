@@ -1,0 +1,15 @@
+.wrapp {
+    max-width: 900px;
+    button {
+        margin-right: 8px;
+    }
+}
+
+mat-divider {
+    margin: 20px 0;
+}
+::ng-deep {
+    app-field label {
+        font-size: 16px;
+    }
+}
