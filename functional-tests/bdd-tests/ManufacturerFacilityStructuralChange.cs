@@ -6,7 +6,6 @@ Feature: ManufacturerFacilityStructuralChange
     As a logged in business user
     I want to request a facility structural change for a manufacturer licence
 
-@manufacturer @winery @structuralchange
 Scenario: Facility Structural Change Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -28,7 +27,6 @@ Scenario: Facility Structural Change Application (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @brewery @structuralchange
 Scenario: Facility Structural Change Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -50,7 +48,6 @@ Scenario: Facility Structural Change Application (Brewery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @distillery @structuralchange
 Scenario: Facility Structural Change Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -72,7 +69,6 @@ Scenario: Facility Structural Change Application (Distillery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @copacker @structuralchange
 Scenario: Facility Structural Change Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit TESA applications for different manufacturer types
 
-@manufacturer @winery @tesa 
 Scenario: Manufacturer TESA Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -21,7 +20,6 @@ Scenario: Manufacturer TESA Application (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @brewery @tesa 
 Scenario: Manufacturer TESA Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -40,7 +38,6 @@ Scenario: Manufacturer TESA Application (Brewery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @distillery @tesa 
 Scenario: Manufacturer TESA Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -59,7 +56,6 @@ Scenario: Manufacturer TESA Application (Distillery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @copacker @tesa 
 Scenario: Manufacturer TESA Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

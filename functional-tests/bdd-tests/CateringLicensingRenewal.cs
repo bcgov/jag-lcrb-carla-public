@@ -11,7 +11,6 @@ Feature: CateringLicensingRenewal
 # Expiry = Today
 #-----------------------
 
-@catering @licencerenewal
 Scenario: Negative Catering Licence Renewal Today (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -29,7 +28,6 @@ Scenario: Negative Catering Licence Renewal Today (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@catering @licencerenewal @release5
 Scenario: Positive Catering Licence Renewal Today (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -51,7 +49,6 @@ Scenario: Positive Catering Licence Renewal Today (Private Corporation)
 # Expiry = Yesterday
 #-----------------------
 
-@catering @licencerenewal
 Scenario: Negative Catering Licence Renewal Yesterday (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -69,7 +66,6 @@ Scenario: Negative Catering Licence Renewal Yesterday (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@catering @licencerenewal @release5
 Scenario: Positive Catering Licence Renewal Yesterday (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -91,7 +87,6 @@ Scenario: Positive Catering Licence Renewal Yesterday (Private Corporation)
 # Expiry = 45 Days Ago
 #-----------------------
 
-@catering @licencerenewal
 Scenario: Negative Catering Licence Renewal 45 Days Ago (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -109,7 +104,6 @@ Scenario: Negative Catering Licence Renewal 45 Days Ago (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@catering @licencerenewal @release5
 Scenario: Positive Catering Licence Renewal 45 Days Ago (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -131,7 +125,6 @@ Scenario: Positive Catering Licence Renewal 45 Days Ago (Private Corporation)
 # Expiry = 60 Days From Today
 #-----------------------------
 
-@catering @licencerenewal
 Scenario: Negative Catering Licence Renewal 60 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -149,7 +142,6 @@ Scenario: Negative Catering Licence Renewal 60 Days Future (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@catering @licencerenewal @release5
 Scenario: Positive Catering Licence Renewal 60 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -171,7 +163,6 @@ Scenario: Positive Catering Licence Renewal 60 Days Future (Private Corporation)
 # Expiry = 30 Days From Today
 #-----------------------------
 
-@catering @licencerenewal
 Scenario: Negative Catering Licence Renewal 30 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -189,7 +180,6 @@ Scenario: Negative Catering Licence Renewal 30 Days Future (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@catering @licencerenewal @release5
 Scenario: Positive Catering Licence Renewal 30 Days Future (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
