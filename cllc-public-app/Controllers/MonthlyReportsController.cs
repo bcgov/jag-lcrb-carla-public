@@ -10,6 +10,7 @@ using Microsoft.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -22,12 +23,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
+        private readonly IConfiguration _configuration;
+        private readonly int monthlyReportsMaxMonths;
 
-        public MonthlyReportsController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor)
+        public MonthlyReportsController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
             _logger = Log.Logger;
+            _configuration = configuration;
+
+            if (!string.IsNullOrEmpty(_configuration["MONTHLY_REPORTS_MAX_MONTHS"]))
+            {
+                if (!int.TryParse(_configuration["MONTHLY_REPORTS_MAX_MONTHS"], out monthlyReportsMaxMonths))
+                {
+                    monthlyReportsMaxMonths = 12;
+                }
+            }
+            else
+            {
+                monthlyReportsMaxMonths = 12;
+            }
         }
 
         private List<MonthlyReport> GetMonthlyReportsByUser(string licenceeId, bool expandInventoryReports)
@@ -41,8 +57,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
+
+                // filter the data to only show data for the given licensee and only since the start date.
+                var filter = $"_adoxio_licenseeid_value eq {licenceeId} and createdon ge {GetStartDateForMonthlyReports()}";
+
                 // Sort monthly reports so that they display in the proper order (Jan -> Feb, Feb -> Mar etc)
-                var filter = $"_adoxio_licenseeid_value eq {licenceeId}";
                 monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, @orderby: new List<string> { "adoxio_reportingperiodyear asc", "adoxio_reportingperiodmonth asc" }).Value;
             }
             catch (HttpOperationException)
@@ -92,7 +111,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             IEnumerable<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> monthlyReports;
             try
             {
-                var filter = $"_adoxio_licenceid_value eq {licenceId} and _adoxio_licenseeid_value eq {userSettings.AccountId}";
+                var filter = $"_adoxio_licenceid_value eq {licenceId} and _adoxio_licenseeid_value eq {userSettings.AccountId} and createdon ge {GetStartDateForMonthlyReports()}";
                 monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, orderby: new List<string> { "modifiedon desc" }).Value;
             }
             catch (Exception ex)
@@ -128,6 +147,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<MonthlyReport> monthlyReports = GetMonthlyReportsByUser(userSettings.AccountId, expandInventoryReports);
 
             return new JsonResult(monthlyReports);
+        }
+
+        private string GetStartDateForMonthlyReports()
+        {
+            var startDate = DateTimeOffset.Now.AddMonths(-1 * monthlyReportsMaxMonths);
+            // return as YYYY/MM/DD
+            return startDate.ToString("yyyy-MM-dd");
         }
 
         /// GET monthly report by id in Dynamics by if owned by user
