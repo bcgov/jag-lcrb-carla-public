@@ -13,7 +13,7 @@ fa-icon[mattooltip]{
     color: #38598A;
 }
 ::ng-deep {
-    app-field label {
+    .app-field > label {
         font-size: 16px;
     }
 

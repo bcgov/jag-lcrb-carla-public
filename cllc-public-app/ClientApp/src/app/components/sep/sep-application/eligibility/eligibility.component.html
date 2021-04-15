@@ -120,7 +120,7 @@
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
-            <app-field label="Is your event private or public?" [required]="true">
+            <app-field [isFullWidth]="true" label="Is your event private or public?" [required]="true">
                 <select formControlName="eligibilityPrivateOrPublic" class="form-control">
                     <option value=""></option>
                     <option value="2">Private – An organization's members or staff, invited guests and ticket holders
@@ -141,13 +141,53 @@
                 </fa-icon>
             </div>
         </div>
+        <section class="d-flex justify-content-between" style="padding: 0 32px 0 32px;">
+            <app-field style="flex: 1" [isFullWidth]="true"
+                label="What is the name of the organization hosting the event?" [required]="true">
+                <input class="form-control w-100">
+            </app-field>
+            <div>
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3a.toggle()"
+                    matTooltip="Responsible beverage service (RBS) programs educate permittees, managers and servers about their responsibilities when serving alcohol 
+                    and provide effective techniques to prevent problems related to liquor service. An online self-study course is available to anyone to complete and 
+                    obtain the SIR or SES certificate. The SEP applicant must possess certification before the event starts. RBS certification is required for all events, 
+                    including family events.  the Serving it Right website for more information or to complete the course online." #tooltip3a="matTooltip">
+                </fa-icon>
+            </div>
+        </section>
+        <section style="padding: 0 50px 0 32px;">
+            <app-field [isFullWidth]="true" label="What is the address of the organization?" [required]="true">
+                <input class="form-control w-100">
+            </app-field>
+        </section>
+        <section class="d-flex justify-content-between" style="padding: 0 32px 0 32px;">
+            <app-field style="flex: 1" [isFullWidth]="true"
+                label="Select a category that best describes your organization " [required]="true">
+                <i>Before selecting a category, please read tool tip</i>
+                <select class="form-control w-100">
+                    <option value=""></option>
+                    <option value="incorporated_non_profit">Incorporated Non-profit organization</option>
+                    <option value="unincorporated_non_profit">Unincorporated Non-profit organization</option>
+                    <option value="incorporated_business_or_partnership">Incorporated Business or Partnership</option>
+                    <option value="unincorporated_business">Unincorporated Business</option>
+                    <option value="government_or_public_organization">Government or Public organization</option>
+                </select>
+            </app-field>
+            <div>
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3b.toggle()" matTooltip="If you are not sure, please confirm which category your organization falls under with a senior manager or board member before completing the application.
+                    It is extremely important for you to know what category your organization falls under because the permittee is subject to legal and financial obligations. Whether the 
+                    proper permittee is an individual or an organization depends on the type of organization.
+                    Entering the wrong type of organization could result in an individual being held legally responsible for any contraventions when it should have been the organization, 
+                    or it will cause issues regarding PST payment and/or PST rebate." #tooltip3b="matTooltip">
+                </fa-icon>
+            </div>
+        </section>
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
             <app-field label="Responsible Beverage Service Number (SIR or SES)" [required]="true">
                 <input formControlName="eligibilityResponsibleBevServiceNumber" type="text" class="form-control">
-                <br>
-                <mat-checkbox formControlName="eligibilityResponsibleBevServiceNumberDoesNotHave" color="primary">
+                <mat-checkbox class="mt-2" formControlName="eligibilityResponsibleBevServiceNumberDoesNotHave" color="primary">
                     I don’t have a BC Responsible Beverage Service Certificate Number
                 </mat-checkbox>
                 <app-error-alert *ngIf="form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').value">
@@ -217,8 +257,7 @@
             <div>
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip7.toggle()"
                     matTooltip="i.e. Does your event venue have a permanent liquor licence in place? Establishments that serve liquor on a frequent 
-                    basis normally have a permanent liquor licence. If you are not sure, contact the establishment owner or operator or the LCRB at 1-866 209-2111." 
-                    #tooltip7="matTooltip">
+                    basis normally have a permanent liquor licence. If you are not sure, contact the establishment owner or operator or the LCRB at 1-866 209-2111." #tooltip7="matTooltip">
                 </fa-icon>
             </div>
         </div>

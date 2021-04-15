@@ -77,14 +77,13 @@ export class EligibilityComponent implements OnInit {
       ...this.application,
       lastUpdated: new Date(),
       status: 'unsubmitted',
-      stepCompleted: (_=>{
-        const step = 'event';
-        let steps = this?.application?.stepCompleted || [];
-        if(steps.indexOf(step) === -1){
+      stepsCompleted: (steps => {
+        const step = 'eligibility';
+        if (steps.indexOf(step) === -1) {
           steps.push(step);
         }
         return steps;
-      })(),
+      })(this?.application?.stepsCompleted || []),
       ...this.form.value
     } as SepApplication;
 

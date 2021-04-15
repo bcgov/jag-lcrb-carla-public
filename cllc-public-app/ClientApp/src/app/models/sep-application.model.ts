@@ -7,7 +7,7 @@ export class SepApplication {
     applicantInfo: any;
     agreeToTnC: boolean;
     dateAgreedToTnC: Date;
-    stepCompleted: string[];
+    stepsCompleted: string[];
     status: string;
 
     eligibilityAtPrivateResidence: boolean;
