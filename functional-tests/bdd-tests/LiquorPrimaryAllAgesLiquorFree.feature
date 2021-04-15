@@ -2,7 +2,6 @@
     As a logged in business user
     I want to request an all ages liquor free event authorization
 
-@liquorprimaryapp
 Scenario: Liquor Primary All Ages Liquor Free 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence

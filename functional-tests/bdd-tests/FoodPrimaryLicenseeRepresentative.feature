@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit a Food Primary Licensee Representative application for different business types
 
-@foodprimarylicenseerepresentative @privatecorporation
 Scenario: Food Primary Licensee Representative (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary

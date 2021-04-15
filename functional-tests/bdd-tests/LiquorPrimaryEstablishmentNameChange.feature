@@ -2,7 +2,6 @@
     As a logged in business user
     I want to request an establishment name change for a Liquor Primary licence
 
-@liquorprimaryapp
 Scenario: Liquor Primary Establishment Name Change
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence

@@ -7,7 +7,6 @@ Feature: CrsDownloadLicence
     I want to submit a CRS Application for different business types
     And download the licence for the approved application
 
-@cannabis @CRSdownloadlicence
 Scenario: Download Licence (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store

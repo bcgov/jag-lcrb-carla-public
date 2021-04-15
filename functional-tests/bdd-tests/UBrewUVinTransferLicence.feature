@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit a UBrew / UVin Licence transfer for different business types
 
-@ubrewuvintransferlicence @partnership 
 Scenario: UBrew / UVin Application Transfer Licence (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a UBrew UVin application
@@ -21,7 +20,6 @@ Scenario: UBrew / UVin Application Transfer Licence (Partnership)
     And the account is deleted
     Then I see the login page
 
-@ubrewuvintransferlicence @privatecorporation 
 Scenario: UBrew / UVin Application Transfer Licence (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
@@ -40,7 +38,6 @@ Scenario: UBrew / UVin Application Transfer Licence (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@ubrewuvintransferlicence @publiccorporation 
 Scenario: UBrew / UVin Application Transfer Licence (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a UBrew UVin application
@@ -59,7 +56,6 @@ Scenario: UBrew / UVin Application Transfer Licence (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@ubrewuvintransferlicence @soleproprietorship 
 Scenario: UBrew / UVin Application Transfer Licence (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a UBrew UVin application

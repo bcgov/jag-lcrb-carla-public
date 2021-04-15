@@ -167,13 +167,13 @@ namespace bdd_tests
             applicationID = parsedURL[5];
         }
 
-        /*
+        
         [And(@"I complete the eligibility disclosure")]
         public void CompleteEligibilityDisclosure()
         {
             /* 
             Page Title: Cannabis Retail Store Licence Eligibility Disclosure
-            
+            */
 
             // select response: On or after March 1, 2020, did you or any of your associates own, operate, provide financial support to, or receive income from an unlicensed cannabis retail store or retailer?           
             // select Yes radio button 
@@ -231,6 +231,5 @@ namespace bdd_tests
             var uiEligibilitySubmit = ngDriver.FindElement(By.CssSelector("app-eligibility-form button.btn-primary"));
             uiEligibilitySubmit.Click();
         }
-        */
     }
 }

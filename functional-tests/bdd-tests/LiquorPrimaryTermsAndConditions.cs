@@ -6,7 +6,6 @@ Feature: LiquorPrimaryTermsAndConditions
     As a logged in business user
     I want to confirm the Terms and Conditions for a Liquor Primary licence
 
-@liquorprimary @privatecorporation
 Scenario: Liquor Primary Terms and Conditions (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence

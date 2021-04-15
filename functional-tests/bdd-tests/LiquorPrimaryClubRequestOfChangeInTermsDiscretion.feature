@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit a Request of Change in Terms and Conditions/Request for Discretion application for a Liquor Primary Club licence
 
-@liquorprimaryclub
 Scenario: Liquor Primary Club Request Change In Terms Discretion (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a LPC Licence

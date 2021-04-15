@@ -2,7 +2,6 @@
     As a logged in business user
     I want to create different licences and manually verify the pdf formats
 
-@manualtestonly
 Scenario: Cannabis Retail Store Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -22,7 +21,6 @@ Scenario: Cannabis Retail Store Licence PDF Verification (Private Corporation)
     And I click on the link for Download Licence
     Then the correct licence PDF is generated with terms and conditions and without endorsements or hours of sales
 
-@manualtestonly
 Scenario: Cannabis Marketing Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Marketing Licence
@@ -38,7 +36,6 @@ Scenario: Cannabis Marketing Licence PDF Verification (Private Corporation)
     And I click on the link for Download Licence
     Then the correct licence PDF is generated with terms and conditions and without endorsements or hours of sales
 
-@manualtestonly
 Scenario: Catering Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -56,7 +53,6 @@ Scenario: Catering Licence PDF Verification (Private Corporation)
     And I click on the link for Download Licence
     Then the correct Catering licence PDF is generated with terms and conditions and without endorsements or hours of sales
 
-@manualtestonly
 Scenario: UBrew / UVin Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
@@ -78,7 +74,6 @@ Scenario: UBrew / UVin Licence PDF Verification (Private Corporation)
     And I click on the link for Download Licence
     Then the correct UBrew / UVin licence PDF is generated with terms and conditions and without endorsements or hours of sales
 
-@manualtestonly
 Scenario: Winery Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -97,7 +92,6 @@ Scenario: Winery Licence PDF Verification (Private Corporation)
     And I click on the link for Download Licence
     Then the correct winery licence PDF is generated with hours of sale and terms and conditions
 
-@manualtestonly
 Scenario: Brewery Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -116,7 +110,6 @@ Scenario: Brewery Licence PDF Verification (Private Corporation)
     And I click on the link for Download Licence
     Then the correct brewery licence PDF is generated with hours of sale and terms and conditions
 
-@manualtestonly
 Scenario: Distillery Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -135,7 +128,6 @@ Scenario: Distillery Licence PDF Verification (Private Corporation)
     And I click on the link for Download Licence
     Then the correct distillery licence PDF is generated with hours of sale and terms and conditions
 
-@manualtestonly
 Scenario: Co-packer Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -154,7 +146,6 @@ Scenario: Co-packer Licence PDF Verification (Private Corporation)
     And I click on the link for Download Licence
     Then the correct co-packer licence PDF is generated with hours of sale and terms and conditions
 
-@manualtestonly
 Scenario: Rural Agency Store Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Rural Agency Store
@@ -169,7 +160,6 @@ Scenario: Rural Agency Store Licence PDF Verification (Private Corporation)
     And I click on the link for Download Licence
     Then the correct Rural Agency Store PDF is generated with terms and conditions and hours of sales and without endorsements
 
-@manualtestonly
 Scenario: Food Primary Licence PDF Verification (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
@@ -187,7 +177,6 @@ Scenario: Food Primary Licence PDF Verification (Private Corporation)
     And I click on the link for Download Licence
     Then the correct licence PDF is generated with hours of sale and terms and conditions
 
-@manualtestonly
 Scenario: Liquor Primary Licence PDF Verification
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence

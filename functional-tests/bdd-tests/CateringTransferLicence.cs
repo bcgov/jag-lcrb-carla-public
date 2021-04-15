@@ -7,7 +7,6 @@ using Xunit.Gherkin.Quick;
     I want to pay the first year catering licence fee
     And submit a transfer of ownership request for different business types
 
- @catering @privatecorporation @cateringeventtransfer
  Scenario: Catering Transfer Ownership Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -23,7 +22,6 @@ using Xunit.Gherkin.Quick;
     And the account is deleted
     Then I see the login page
 
- @catering @society @cateringeventtransfer
  Scenario: Catering Transfer Ownership Request (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -39,7 +37,6 @@ using Xunit.Gherkin.Quick;
     And the account is deleted
     Then I see the login page
 
- @catering @partnership @cateringeventtransfer
  Scenario: Catering Transfer Ownership Request (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -55,7 +52,6 @@ using Xunit.Gherkin.Quick;
     And the account is deleted
     Then I see the login page
 
-  @catering @soleproprietorship @cateringeventtransfer
   Scenario: Catering Transfer Ownership Request (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering

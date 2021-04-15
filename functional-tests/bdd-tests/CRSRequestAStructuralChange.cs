@@ -7,7 +7,6 @@ Feature: CrsRequestAStructuralChange
     I want to submit a CRS Application for different business types
     And request a structural change for the approved application
 
-@cannabis @privatecorporation @crsstructuralchanges
 Scenario: Cannabis Structural Changes (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -28,7 +27,6 @@ Scenario: Cannabis Structural Changes (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@cannabis @society @crsstructuralchanges
 Scenario: Cannabis Structural Changes (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -49,7 +47,6 @@ Scenario: Cannabis Structural Changes (Society)
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @crsstructuralchanges
 Scenario: Cannabis Structural Changes (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -70,7 +67,6 @@ Scenario: Cannabis Structural Changes (Partnership)
     And the account is deleted
     Then I see the login page
 
-@cannabis @soleproprietorship @crsstructuralchanges
 Scenario: Cannabis Structural Changes (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store
