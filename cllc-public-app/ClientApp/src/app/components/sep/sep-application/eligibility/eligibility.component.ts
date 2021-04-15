@@ -4,6 +4,7 @@ import { Account } from '@models/account.model';
 import { SepApplication } from '@models/sep-application.model';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { IndexDBService } from '@services/index-db.service';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-eligibility',
   templateUrl: './eligibility.component.html',
@@ -28,6 +29,7 @@ export class EligibilityComponent implements OnInit {
   @Input() _app: SepApplication;
   @Output()
   saveComplete = new EventEmitter<boolean>();
+  faQuestionCircle = faQuestionCircle;
   form: FormGroup;
   get minDate() {
     return new Date();
