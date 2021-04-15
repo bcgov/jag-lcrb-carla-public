@@ -6,7 +6,6 @@ Feature: CateringApplication
     As a logged in business user
     I want to submit a Catering Application for different business types
 
-@cateringapp @privatecorporation
 Scenario: Catering Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -20,7 +19,6 @@ Scenario: Catering Application (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@cateringapp @society
 Scenario: Catering Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -34,7 +32,6 @@ Scenario: Catering Application (Society)
     And the account is deleted
     Then I see the login page
 
-@cateringapp @partnership 
 Scenario: Catering Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
@@ -48,7 +45,6 @@ Scenario: Catering Application (Partnership)
     And the account is deleted
     Then I see the login page
 
-@cateringapp @soleproprietorship
 Scenario: Catering Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Catering
@@ -62,7 +58,6 @@ Scenario: Catering Application (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@cateringapp @publiccorporation
 Scenario: Catering Application (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Catering
@@ -76,7 +71,6 @@ Scenario: Catering Application (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@cateringapp @coop
 Scenario: Catering Application (Co-op)
     Given I am logged in to the dashboard as a co-op
     And I click on the Start Application button for Catering
@@ -90,7 +84,6 @@ Scenario: Catering Application (Co-op)
     And the account is deleted
     Then I see the login page
 
-@cateringapp @militarymess
 Scenario: Catering Application (Military Mess)
     Given I am logged in to the dashboard as a military mess
     And I click on the Start Application button for Catering

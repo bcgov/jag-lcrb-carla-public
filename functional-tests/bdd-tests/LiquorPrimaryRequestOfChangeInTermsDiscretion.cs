@@ -6,7 +6,6 @@ Feature: LiquorPrimaryRequestOfChangeInTermsDiscretion
     As a logged in business user
     I want to submit a Request of Change in Terms and Conditions/Request for Discretion application for a Liquor Primary licence
 
-@liquorprimaryapp
 Scenario: Liquor Primary Change in Terms (Private Corporation) 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence

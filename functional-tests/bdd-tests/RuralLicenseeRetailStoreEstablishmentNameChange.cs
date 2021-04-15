@@ -6,7 +6,6 @@ Feature: RuralLicenseeRetailStoreEstablishmentNameChange
     As a logged in business user
     I want to request a name or branding change for a rural LRS application
 
-@privatecorporation @ruralLRS 
 Scenario: Rural LRS Name Branding Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
@@ -24,7 +23,6 @@ Scenario: Rural LRS Name Branding Change (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@publiccorporation @ruralLRS 
 Scenario: Rural LRS Name Branding Change (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Rural LRS
@@ -42,7 +40,6 @@ Scenario: Rural LRS Name Branding Change (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@partnership @ruralLRS 
 Scenario: Rural LRS Name Branding Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Rural LRS
@@ -60,7 +57,6 @@ Scenario: Rural LRS Name Branding Change (Partnership)
     And the account is deleted
     Then I see the login page
 
-@society @ruralLRS 
 Scenario: Rural LRS Name Branding Change (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Rural LRS
@@ -78,7 +74,6 @@ Scenario: Rural LRS Name Branding Change (Society)
     And the account is deleted
     Then I see the login page
 
-@soleproprietorship @ruralLRS
 Scenario: Rural LRS Name Branding Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Rural LRS

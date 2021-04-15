@@ -6,7 +6,6 @@ Feature: AgentApplication
     As a logged in business user
     I want to submit an Agent application for different business types
 
-@agent @privatecorporation
 Scenario: Agent Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for an Agent Licence
@@ -20,7 +19,6 @@ Scenario: Agent Application (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@agent @society 
 Scenario: Agent Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for an Agent Licence
@@ -34,7 +32,6 @@ Scenario: Agent Application (Society)
     And the account is deleted
     Then I see the login page
 
-@agent @partnership 
 Scenario: Agent Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for an Agent Licence
@@ -48,7 +45,6 @@ Scenario: Agent Application (Partnership)
     And the account is deleted
     Then I see the login page
 
-@agent @soleproprietorship 
 Scenario: Agent Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for an Agent Licence

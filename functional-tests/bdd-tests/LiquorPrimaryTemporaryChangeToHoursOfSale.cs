@@ -6,7 +6,6 @@ Feature: LiquorPrimaryTemporaryChangeToHoursOfSale
     As a logged in business user
     I want to request a Liquor Primary licence temporary change to hours of sale 
 
-@liquorprimaryapp
 Scenario: Liquor Primary Temporary Change To Hours Of Sale
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence

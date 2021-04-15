@@ -6,7 +6,6 @@ Feature: CombinedCateringCrsApplications
     As a logged in business user
     I want to submit a CRS and Catering application for the same account
 
-@cannabis @catering @crsapp
 Scenario: Combined Catering / CRS Applications (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store

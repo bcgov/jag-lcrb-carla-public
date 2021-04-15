@@ -6,7 +6,6 @@ Feature: RuralLicenseeRetailStoreRequestTermsAndConditionsChangeApplication
     As a logged in business user
     I want to request a T&C change application for a rural LRS licence
 
-@privatecorporation @ruralLRS
 Scenario: Rural LRS T&C Change Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS

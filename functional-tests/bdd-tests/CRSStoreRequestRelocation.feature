@@ -3,7 +3,6 @@
     I want to submit a CRS Application for different business types
     And request a store relocation for the approved application
 
-@cannabis @privatecorporation @crsstorerelocation
 Scenario: Cannabis Store Relocation (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -22,7 +21,6 @@ Scenario: Cannabis Store Relocation (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@cannabis @society @crsstorerelocation
 Scenario: Cannabis Store Relocation (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -41,7 +39,6 @@ Scenario: Cannabis Store Relocation (Society)
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @crsstorerelocation
 Scenario: Cannabis Store Relocation (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -60,7 +57,6 @@ Scenario: Cannabis Store Relocation (Partnership)
     And the account is deleted
     Then I see the login page
 
-@cannabis @soleproprietorship @crsstorerelocation
 Scenario: Cannabis Store Relocation (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store

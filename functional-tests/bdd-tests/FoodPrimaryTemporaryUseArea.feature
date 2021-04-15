@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit a Temporary Use Area Endorsement Application for a Food Primary licence
 
-@foodprimarytemporaryuse @privatecorporation
 Scenario: Food Primary Temporary Use Area Endorsement (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
