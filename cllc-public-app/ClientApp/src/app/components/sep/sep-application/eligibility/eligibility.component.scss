@@ -8,8 +8,20 @@
 mat-divider {
     margin: 20px 0;
 }
+
+fa-icon[mattooltip]{
+    color: #38598A;
+}
 ::ng-deep {
     app-field label {
         font-size: 16px;
+    }
+
+    .mat-tooltip-panel .mat-tooltip {
+        background-color: #F1F4FA;
+        margin: 4px;
+        color: #38598A;
+        font-size: 16px;
+        border: solid 1px #ccc;
     }
 }
