@@ -62,14 +62,13 @@ export class ApplicantComponent implements OnInit {
       ...this.application,
       lastUpdated: new Date(),
       status: 'unsubmitted',
-      stepCompleted: (_=>{
-        const step = 'eligibility';
-        let steps = this?.application?.stepCompleted || [];
+      stepsCompleted: (steps =>{
+        const step = 'applicant';
         if(steps.indexOf(step) === -1){
           steps.push(step);
         }
         return steps;
-      })(),
+      })(this?.application?.stepsCompleted || []),
       contact: {
         firstname: this?.account?.primarycontact?.firstname,
         lastname: this?.account?.primarycontact?.lastname,
@@ -83,7 +82,7 @@ export class ApplicantComponent implements OnInit {
       },
       ...this.form.value
     } as SepApplication;
-
+debugger;
     if (data.id) {
       this.db.applications.update(data.id, data);
     } else {

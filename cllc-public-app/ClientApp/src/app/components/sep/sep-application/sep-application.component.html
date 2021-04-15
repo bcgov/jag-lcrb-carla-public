@@ -5,7 +5,7 @@
             <fa-icon [icon]="faCheck"></fa-icon>
         </ng-template>
 
-        <mat-step *ngFor="let step of steps; let index = index;">
+        <mat-step [completed]="isStepCompleted(step)" *ngFor="let step of steps; let index = index;">
 
             <ng-container *ngIf="step === 'applicant'">
                 <ng-template matStepLabel>Applicant</ng-template>
