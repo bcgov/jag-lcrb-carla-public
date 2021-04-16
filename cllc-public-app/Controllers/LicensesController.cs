@@ -1546,7 +1546,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             break;
                     }
 
-                    _logger.LogInformation($"Attempting to Generate Licence: {adoxioLicense.AdoxioLicencenumber}");
+                    //_logger.LogInformation($"Attempting to generate licence: {adoxioLicense.AdoxioLicencenumber}");
 
                     byte[] data = await _pdfClient.GetPdf(parameters, templateName);
 
