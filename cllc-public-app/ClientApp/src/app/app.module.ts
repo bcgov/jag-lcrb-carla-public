@@ -283,6 +283,7 @@ import { IndexDBService } from "@services/index-db.service";
 import { MyApplicationsComponent } from './components/sep/my-applications/my-applications.component';
 import { ServiceCardProfileComponent } from "@components/servicecard-profile/servicecard-profile.component";
 import { DrinkPlannerComponent } from "@components/sep/drink-planner/drink-planner.component";
+import { DrinkPlannerDialog } from "@components/sep/drink-planner/drink-planner.dialog";
 
 @NgModule({
   declarations: [
@@ -438,6 +439,7 @@ import { DrinkPlannerComponent } from "@components/sep/drink-planner/drink-plann
     MyApplicationsComponent,
     ServiceCardProfileComponent,
     DrinkPlannerComponent,
+    DrinkPlannerDialog,
   ],
   imports: [
     AppRoutingModule,
@@ -603,7 +605,8 @@ import { DrinkPlannerComponent } from "@components/sep/drink-planner/drink-plann
     OrganizationLeadershipComponent,
     VersionInfoDialogComponent,
     ModalComponent,
-    StarterChecklistComponent
+    StarterChecklistComponent,
+    DrinkPlannerDialog,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,15 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
 import { Subscription } from 'rxjs';
+import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 import configuration, { DrinkConfig, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSON } from './config';
 
 @Component({
   selector: 'app-drink-planner',
   templateUrl: './drink-planner.component.html',
-  styleUrls: ['./drink-planner.component.scss']
+  styleUrls: ['./drink-planner.component.scss'],
 })
 export class DrinkPlannerComponent extends FormBase implements OnInit {
+  // icons
+  faLightbulb = faLightbulb;
 
   @Input()
   config: Array<DrinkConfig> = configuration;
@@ -25,6 +28,16 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     wine: 0,
     spirits: 0,
   });
+
+  get totalServings(): number {
+    const { hours, guests } = this.form.value as { hours: number; guests: number };
+    return (hours / HOURS_OF_LIQUOR_SERVICE * guests * SERVINGS_PER_PERSON);
+  }
+
+  get totalPercentage(): number {
+    const { beer, wine, spirits } = this.form.value as { beer: number; wine: number; spirits: number };
+    return beer + wine + spirits;
+  }
 
   constructor(private fb: FormBuilder) {
     super();
@@ -62,16 +75,6 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       this.form.get('beer').setValue(Math.ceil(half), { emitEvent: false });
       this.form.get('wine').setValue(Math.floor(half), { emitEvent: false });
     });
-  }
-
-  get totalServings(): number {
-    const { hours, guests } = this.form.value as { hours: number; guests: number };
-    return (hours / HOURS_OF_LIQUOR_SERVICE * guests * SERVINGS_PER_PERSON);
-  }
-
-  get totalPercentage(): number {
-    const { beer, wine, spirits } = this.form.value as { beer: number; wine: number; spirits: number };
-    return beer + wine + spirits;
   }
 
   servings(config: DrinkConfig): number {
