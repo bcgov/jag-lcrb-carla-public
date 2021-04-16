@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { User } from '@models/user.model';
-import { Store } from '@ngrx/store';
 import { StarterChecklistComponent } from '@components/sep/starter-checklist/starter-checklist.component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,10 +40,9 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(StarterChecklistComponent, dialogConfig);
     dialogRef.afterClosed()
       .subscribe((startApplication: boolean) => {
-        if(startApplication){
+        if (startApplication) {
           this.router.navigateByUrl('/sep/application/new/applicant')
         }
       });
   }
-
 }
