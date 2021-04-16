@@ -1,33 +1,43 @@
 <div class="position-relative">
   <div [ngBusy]="[busy]"></div>
-  <form [formGroup]="form" class="col">
+  <form [formGroup]="form">
     <div class="padded-section">
-      <h1>Drink Planner</h1>
-    </div>
-    <div class="padded-section">
+      <fa-icon [icon]="faLightbulb" class="float-right rounded-tooltip-icon" data-html="true"
+        matTooltipClass="multiline-tooltip custom-tooltip" matTooltip="Enter the number of hours and the number of guests you’ll be serving. Next, estimate the percentage of beer, wine and spirits suitable for your event.&#010;
+        For example, if you choose to serve only beer and wine, enter 50% for beer, 50% for wine and 0% for spirits.&#010;
+        Note: These are simply buying guidelines. You may enter your own amounts to better suit your event.">
+      </fa-icon>
       <p>Use this tool as a guide to plan how many drinks to serve at your event. For an example, view the tooltip.</p>
     </div>
 
+    <!-- Section 1 -->
     <h3>1. Enter guests and hours</h3>
     <div class="row">
-      <app-field class="col-md-4 col-xs-6" label="Liquor Service Duration (hrs)" [required]="true" [isFullWidth]="false"
-        errorMessage="Please enter the Liquor Service Duration in hours (must be a number)"
+      <app-field class="col-md-4 col-xs-12" label="Liquor Service Duration (hrs)" [required]="true"
+        [isFullWidth]="false" errorMessage="Please enter the Liquor Service Duration in hours (must be a number)"
         [valid]="isValidOrNotTouched('hours')">
         <input class="form-control" type="number" formControlName="hours">
       </app-field>
-      <app-field class="col-md-4 col-xs-6" label="Number of Guests" [required]="true" [isFullWidth]="false"
+      <app-field class="col-md-4 col-xs-12" label="Number of Guests" [required]="true" [isFullWidth]="false"
         errorMessage="Please enter the number of guests (must be a number)" [valid]="isValidOrNotTouched('guests')">
         <input class="form-control" type="number" formControlName="guests">
       </app-field>
     </div>
 
     <hr>
-
+    <!-- Section 2 -->
+    <fa-icon [icon]="faLightbulb" class="float-right rounded-tooltip-icon" data-html="true"
+      matTooltipClass="multiline-tooltip custom-tooltip" matTooltip="Standard Drink Serving Sizes:&#010;
+      &bull; 1.5 ounce for spirits
+      &bull; 340ml (12 ounce) cans or bottles for beer, cider or coolers
+      &bull; 12 ounces for draught beer, cider or coolers
+      &bull; 5 ounces for individual glasses of wine">
+    </fa-icon>
     <h3>2. Enter the &#37; of each drink type appropriate for your event</h3>
     <div class="row">
       <div *ngFor="let item of config" class="col-md-3 col-md-offset-1 col-xs-12">
         <div class="row">
-          <div class="text-center w-100">
+          <div class="text-center w-100 img-container-120">
             <img src="{{item.imageUrl}}">
           </div>
         </div>
@@ -38,8 +48,10 @@
         </app-field>
 
         <div class="row">
-          <h4>
-            <img src="{{item.servingImageUrl}}">
+          <h4 class="w-100">
+            <span class="d-inline-block img-container-35">
+              <img src="{{item.servingImageUrl}}">
+            </span>
             &nbsp; = &nbsp;
             <small>{{servings(item).toFixed(0) | mask : 'separator' : ','}}</small>
             <small>
@@ -48,8 +60,10 @@
               <span class="per-serving">{{item.perServingDescription}}</span>
             </small>
           </h4>
-          <h4>
-            <img src="{{item.storageImageUrl}}">
+          <h4 class="w-100">
+            <span class="d-inline-block img-container-50">
+              <img src="{{item.storageImageUrl}}">
+            </span>
             &nbsp; = &nbsp;
             <small class="storage-unit">{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</small>
             <small class="storage-method">{{storageMethodDescription(item)}}</small>
@@ -58,20 +72,21 @@
       </div> <!-- ngFor -->
     </div>
 
+    <!-- Drink Totals -->
     <div class="row">
-      <div class="col-8 offset-4">
+      <div class="col-md-8 offset-md-4 col-12">
         <hr>
         <div class="row">
-          <div class="col-4 offset-2">
+          <div class="col-md-4 offset-md-2 col-6">
             <h3 class="text-right">
               <span class="total-percent">{{totalPercentage.toFixed(0)}} %</span>
             </h3>
           </div>
           <div class="col-6">
-            <h3>
+            <h3 class="w-100">
               &nbsp; = &nbsp;
               <span class="total-servings">{{totalServings.toFixed(0) | mask : 'separator' : ','}}</span>
-              <small> total servings</small>
+              <small class="ml-2">total servings</small>
             </h3>
           </div>
         </div>
