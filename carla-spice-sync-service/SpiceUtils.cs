@@ -245,9 +245,9 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
             }
-            catch
+            catch (Exception e)
             {
-                Log.Logger.Error($"Unable to get applications");
+                Log.Logger.Error(e, $"Unable to get applications");
                 return null;
             }
 
@@ -262,9 +262,9 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 return _dynamicsClient.Workers.Get(filter: $"adoxio_workerid eq {workerId.ToString()}").Value[0];
             }
-            catch
+            catch (Exception e)
             {
-                Log.Logger.Error($"Unable to find worker {workerId.ToString()}");
+                Log.Logger.Error(e, $"Unable to find worker {workerId.ToString()}");
                 return null;
             }
         }
@@ -1081,19 +1081,29 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 foreach (var application in applications)
                 {
                     Guid.TryParse(application.AdoxioApplicationid, out Guid applicationId);
-
-                    var screeningRequest = await GenerateApplicationScreeningRequestV2(applicationId);
-                    var response = SendApplicationScreeningRequest(applicationId, screeningRequest);
-                    if (response)
+                    try
                     {
-                        hangfireContext.WriteLine($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
-                        Log.Logger.Error($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
+                        var screeningRequest = await GenerateApplicationScreeningRequestV2(applicationId);
+                        var response = SendApplicationScreeningRequest(applicationId, screeningRequest);
+                        if (response)
+                        {
+                            hangfireContext.WriteLine(
+                                $"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
+                            Log.Logger.Error(
+                                $"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
+                        }
+                        else
+                        {
+                            hangfireContext.WriteLine(
+                                $"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
+                            Log.Logger.Error($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        hangfireContext.WriteLine($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
-                        Log.Logger.Error($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
+                        Log.Logger.Error(e,$"Error occured during Generate / Send Application Screening Request");
                     }
+                    
                 }
             }
             
