@@ -239,7 +239,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             MicrosoftDynamicsCRMadoxioApplicationCollection applications;
             string appFilter = $"adoxio_applicationid eq {applicationId}";
 
-            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact", "owninguser", "adoxio_applicationtypeid_value" };
+            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact", "owninguser", "adoxio_ApplicationTypeId" };
             try
             {
                 applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
