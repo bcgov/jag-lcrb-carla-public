@@ -2,7 +2,6 @@
     As a logged in business user
     I want to request a Food Primary licence temporary change to hours of sale after midnight
 
-@foodprimary @privatecorporation
 Scenario: Food Primary Temp Change to Hours of Sale After Midnight (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { StarterChecklistComponent } from '@components/sep/starter-checklist/starter-checklist.component';
 import { faCocktail, faCalculator, faCheck, faQuestion, faShoppingCart, faPencilAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { User } from '@models/user.model';
+import { DrinkPlannerDialog } from '../drink-planner/drink-planner.dialog';
 
 @Component({
   selector: 'app-resources',
@@ -30,7 +31,7 @@ export class ResourcesComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: "500px",
+      width: '500px',
       data: {
         showStartApp: false
       }
@@ -44,4 +45,16 @@ export class ResourcesComponent implements OnInit {
       });
   }
 
+  openDrinkPlanner() {
+    const dialogConfig = {
+      disableClose: false,
+      autoFocus: true,
+      width: '800px',
+      data: {}
+    };
+
+    // open dialog, get reference and process returned data from dialog
+    const dialogRef = this.dialog.open(DrinkPlannerDialog, dialogConfig);
+    dialogRef.afterClosed().subscribe(() => { });
+  }
 }

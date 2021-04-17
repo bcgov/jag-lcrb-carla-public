@@ -6,7 +6,6 @@ Feature: LiquorPrimaryAddLicenseeRepresentative
     As a logged in business user
     I want to request a licensee representative for a Liquor Primary licence
 
-@liquorprimaryapp
 Scenario: Liquor Primary Add Licensee Representative Licence 
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence

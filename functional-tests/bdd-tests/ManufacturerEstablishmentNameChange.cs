@@ -6,7 +6,6 @@ Feature: ManufacturerEstablishmentNameChange
     As a logged in business user
     I want to request a valid store name or branding change for a manufacturer licence
 
-@manufacturer @winery @namechange
 Scenario: Establishment Name Change Application (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -26,7 +25,6 @@ Scenario: Establishment Name Change Application (Winery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @brewery @namechange
 Scenario: Establishment Name Change Application (Brewery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -46,7 +44,6 @@ Scenario: Establishment Name Change Application (Brewery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @distillery @namechange
 Scenario: Establishment Name Change Application (Distillery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -66,7 +63,6 @@ Scenario: Establishment Name Change Application (Distillery)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @copacker @namechange
 Scenario: Establishment Name Change Application (Co-packer)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

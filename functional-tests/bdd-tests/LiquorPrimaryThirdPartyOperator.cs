@@ -6,7 +6,6 @@ Feature: LiquorPrimaryThirdPartyOperator
     As a logged in business user
     I want to request a third party operator for a Liquor Primary Application
 
-@liquorprimaryapp
 Scenario: Liquor Primary Third Party Operator (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence

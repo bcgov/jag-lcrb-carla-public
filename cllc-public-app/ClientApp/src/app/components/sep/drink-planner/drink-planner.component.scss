@@ -1,0 +1,70 @@
+// We need ng-deep to override Material UI default styles
+::ng-deep {
+  .app-field {
+    width: 100%;
+  }
+
+  .mat-tooltip {
+    &.custom-tooltip {
+      font-size: 14px;
+      white-space: pre-line;
+      background: #fedd35;
+      color: #222222;
+    }
+  }
+
+  .mat-dialog-content {
+    max-height: 75vh;
+  }
+}
+
+fa-icon {
+  &.rounded-tooltip-icon {
+    font-size: 20px;
+    color: black;
+    border-radius: 50%;
+    width: 30px;
+    background-color: #fec221;
+    text-align: center;
+    line-height: 30px;
+  }
+}
+
+hr {
+  border: solid #dddddd;
+  border-width: 1px 0 0;
+  clear: both;
+  margin: 1.25rem 0 1.1875rem;
+  height: 0;
+}
+
+.storage-unit {
+  font-size: 2.5em;
+  position: relative;
+  top: 6px;
+}
+
+.storage-method {
+  display: block;
+  position: relative;
+  top: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.img-container {
+  &-35 {
+    min-height: 35px;
+  }
+  &-50 {
+    min-height: 50px;
+  }
+  &-120 {
+    min-height: 120px;
+  }
+}

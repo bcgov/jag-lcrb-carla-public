@@ -2,7 +2,6 @@
     As a logged in business user
     I want to confirm the Terms and Conditions for a Food Primary licence
 
-@foodprimary @privatecorporation
 Scenario: Food Primary Terms and Conditions (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary

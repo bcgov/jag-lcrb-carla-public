@@ -7,7 +7,6 @@ Feature: CateringRequestRelocation
     I want to pay the first year catering licence fee
     And submit a store relocation for different business types
 
- @catering @privatecorporation @cateringrelocation
  Scenario: Catering Store Relocation Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering
@@ -25,7 +24,6 @@ Feature: CateringRequestRelocation
     And the account is deleted
     Then I see the login page
 
- @catering @society @cateringrelocation
  Scenario: Catering Store Relocation Request (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Catering
@@ -43,7 +41,6 @@ Feature: CateringRequestRelocation
     And the account is deleted
     Then I see the login page
 
- @catering @partnership @cateringrelocation
  Scenario: Catering Store Relocation Request (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Catering
