@@ -6,7 +6,6 @@ Feature: LiquorPrimaryTransferLicence
     As a logged in business user
     I want to transfer a Liquor Primary Application
 
-@liquorprimaryapp
 Scenario: Liquor Primary Transfer Licence (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence

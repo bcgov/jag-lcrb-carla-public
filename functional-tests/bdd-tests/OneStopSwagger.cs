@@ -6,7 +6,6 @@ Feature: OneStopSwagger
     As a logged in business user
     I want to test the OneStop features via Swagger
 
-@onestopswagger
 Scenario: OneStop Send Change of Address
     Given I click on the Swagger link for OneStop
     And I click on the SwaggerUI Authorize button
@@ -19,7 +18,6 @@ Scenario: OneStop Send Change of Address
     And the correct 200 response is displayed
     Then I click on the Clear button
 
-@onestopswagger
 Scenario: OneStop Send Change of Name
     Given I click on the Swagger link for OneStop
     And I click on the SwaggerUI Authorize button
@@ -32,7 +30,6 @@ Scenario: OneStop Send Change of Name
     And the correct 200 response is displayed
     Then I click on the Clear button
 
-@onestopswagger
 Scenario: OneStop Send Change of Status
     Given I click on the Swagger link for OneStop
     And I click on the SwaggerUI Authorize button
@@ -45,7 +42,6 @@ Scenario: OneStop Send Change of Status
     And the correct 200 response is displayed
     Then I click on the Clear button
 
-@onestopswagger
 Scenario: OneStop Send Licence Creation Message
     Given I click on the Swagger link for OneStop
     And I click on the SwaggerUI Authorize button
@@ -58,7 +54,6 @@ Scenario: OneStop Send Licence Creation Message
     And the correct 200 response is displayed
     Then I click on the Clear button
 
-@onestopswagger
 Scenario: OneStop Send Program Account Details Broadcast
     Given I click on the Swagger link for OneStop
     And I click on the SwaggerUI Authorize button
@@ -71,7 +66,6 @@ Scenario: OneStop Send Program Account Details Broadcast
     And the correct 200 response is displayed
     Then I click on the Clear button
 
-# @onestoprelease
 # Scenario: OneStop Release
     # Given I click on the Swagger link for OneStop
     # And I click on the Authorize button

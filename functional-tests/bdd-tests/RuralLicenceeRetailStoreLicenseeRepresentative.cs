@@ -6,7 +6,6 @@ Feature: RuralLicenceeRetailStoreLicenseeRepresentative
     As a logged in business user
     I want to request a licensee representative for a rural LRS application
 
-@privatecorporation @ruralLRS
 Scenario: Rural LRS Licensee Representative (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
@@ -23,7 +22,6 @@ Scenario: Rural LRS Licensee Representative (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@publiccorporation @ruralLRS 
 Scenario: Rural LRS Licensee Representative (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Rural LRS
@@ -41,7 +39,6 @@ Scenario: Rural LRS Licensee Representative (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@partnership @ruralLRS 
 Scenario: Rural LRS Licensee Representative (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Rural LRS
@@ -59,7 +56,6 @@ Scenario: Rural LRS Licensee Representative (Partnership)
     And the account is deleted
     Then I see the login page
 
-@society @ruralLRS 
 Scenario: Rural LRS Licensee Representative (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Rural LRS
@@ -77,7 +73,6 @@ Scenario: Rural LRS Licensee Representative (Society)
     And the account is deleted
     Then I see the login page
 
-@soleproprietorship @ruralLRS
 Scenario: Rural LRS Licensee Representative (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Rural LRS

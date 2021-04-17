@@ -6,7 +6,6 @@ Feature: CateringRequestOfChangeInTermsDiscretion
     As a logged in business user
     I want to apply for a Request of Change in Terms and Conditions/Request for Discretion
 
-@privatecorporation @cateringlicencedownload
 Scenario: Catering Licence Request of Change in Terms and Conditions/Request for Discretion (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Catering

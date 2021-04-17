@@ -6,7 +6,6 @@ Feature: UbrewUvinEstablishmentNameChange
     As a logged in business user
     I want to submit a UBrew / UVin Licence name change application for different business types
 
-@ubrewuvinnamechange @partnership 
 Scenario: UBrew / UVin Application Establishment Name Change (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a UBrew UVin application
@@ -29,7 +28,6 @@ Scenario: UBrew / UVin Application Establishment Name Change (Partnership)
     And the account is deleted
     Then I see the login page
 
-@ubrewuvinnamechange @privatecorporation 
 Scenario: UBrew / UVin Application Establishment Name Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a UBrew UVin application
@@ -52,7 +50,6 @@ Scenario: UBrew / UVin Application Establishment Name Change (Private Corporatio
     And the account is deleted
     Then I see the login page
 
-@ubrewuvinnamechange @publiccorporation 
 Scenario: UBrew / UVin Application Establishment Name Change (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for a UBrew UVin application
@@ -75,7 +72,6 @@ Scenario: UBrew / UVin Application Establishment Name Change (Public Corporation
     And the account is deleted
     Then I see the login page
 
-@ubrewuvinnamechange @soleproprietorship 
 Scenario: UBrew / UVin Application Establishment Name Change (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a UBrew UVin application

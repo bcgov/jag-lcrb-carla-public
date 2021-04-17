@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit a Request of Change in Terms and Conditions/Request for Discretion application for a Food Primary licence
 
-@foodprimarychangeterms @privatecorporation
 Scenario: Food Primary Change in Terms (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary

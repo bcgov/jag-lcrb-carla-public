@@ -7,7 +7,6 @@
 # Expiry = Today
 #-----------------------
 
-@manufacturer @licencerenewal
 Scenario: Deny Today Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -29,7 +28,6 @@ Scenario: Deny Today Licence Renewal (Winery)
 # Expiry = Yesterday
 #-----------------------
 
-@manufacturer @licencerenewal
 Scenario: Deny Yesterday Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -51,7 +49,6 @@ Scenario: Deny Yesterday Licence Renewal (Winery)
 # Expiry = 45 Days Ago
 #-----------------------
 
-@manufacturer @licencerenewal
 Scenario: Deny 45 Days Ago Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -73,7 +70,6 @@ Scenario: Deny 45 Days Ago Licence Renewal (Winery)
 # Expiry = 60 Days From Today
 #-----------------------------
 
-@manufacturer @licencerenewal
 Scenario: Deny 60 Days From Today Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -95,7 +91,6 @@ Scenario: Deny 60 Days From Today Licence Renewal (Winery)
 # Expiry = 30 Days From Today
 #-----------------------------
 
-@manufacturer @licencerenewal
 Scenario: Deny 30 Days From Today Licence Renewal (Winery)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence

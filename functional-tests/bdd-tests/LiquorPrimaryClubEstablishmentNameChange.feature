@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit an establishment name change for a Liquor Primary Club licence
 
-@liquorprimaryclub
 Scenario: Liquor Primary Club Establishment Name Change (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a LPC Licence

@@ -6,7 +6,6 @@ Feature: LiquorPrimaryTemporarySuspensionRequest
     As a logged in business user
     I want to request a temporary suspension request for a Liquor Primary Application
 
-@liquorprimary
 Scenario: Liquor Primary Temporary Suspension Request (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
