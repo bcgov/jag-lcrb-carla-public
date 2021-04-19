@@ -77,10 +77,8 @@ namespace ldb_orders_service
                 {
                     fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", Configuration["SPLUNK_CHANNEL"]));
                 }
-                var splunkUri = new Uri(Configuration["SPLUNK_COLLECTOR_URL"]);
-
+                
                 // Fix for bad SSL issues 
-
 
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
@@ -113,7 +111,6 @@ namespace ldb_orders_service
             Serilog.Debugging.SelfLog.Enable(Console.Error);
 
             Log.Logger.Information("LDB-Orders-Service Container Starting");
-
 
             bool startHangfire = true;
 #if DEBUG
@@ -148,7 +145,6 @@ namespace ldb_orders_service
 
             app.UseAuthentication();
 
-
             app.UseHealthChecks("/hc", new HealthCheckOptions
             {
                 Predicate = _ => true,
@@ -176,7 +172,6 @@ namespace ldb_orders_service
         /// <param name="cache"></param>
         private void SetupHangfireJobs(IApplicationBuilder app)
         {
-
             Log.Logger.Information("Starting setup of Hangfire job ...");
 
             try
