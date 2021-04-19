@@ -27,8 +27,8 @@ Scenario: Catering Release (Private Corporation)
     # And I click on the link for Add Licensee Representative
     # And I request a licensee representative
     # And I click on the link for Licences & Authorizations
-    And I request a store relocation for Catering
-    And I click on the link for Licences & Authorizations
+    # And I request a store relocation for Catering
+    # And I click on the link for Licences & Authorizations
     And I request an event authorization that doesn't require approval
     And the event history is updated correctly for an application without approval
     And I click on the link for Licences & Authorizations
