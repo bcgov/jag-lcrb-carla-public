@@ -5,6 +5,7 @@ import { SepApplication } from '@models/sep-application.model';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { IndexDBService } from '@services/index-db.service';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-eligibility',
   templateUrl: './eligibility.component.html',
@@ -26,7 +27,8 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 })
 export class EligibilityComponent implements OnInit {
   @Input() account: Account;
-  @Input() _app: SepApplication;
+  _appID: number;
+  application: SepApplication;
   @Output()
   saveComplete = new EventEmitter<boolean>();
   faQuestionCircle = faQuestionCircle;
@@ -35,26 +37,31 @@ export class EligibilityComponent implements OnInit {
     return new Date();
   }
   @Input()
-  set application(value) {
-    this._app = value;
-    if (this.form) {
-      this.form.patchValue(value);
-    }
+  set applicationId(value: number) {
+    this._appID = value;
+    //get the last saved application
+    this.db.getSepApplication(value)
+      .then(app => {
+        this.application = app;
+        if (this.form) {
+          this.form.patchValue(this.application);
+        }
+      });
   };
-  get application() {
-    return this._app;
-  }
+
 
   constructor(private fb: FormBuilder,
-    private db: IndexDBService) { }
+    private router: Router,
+    private db: IndexDBService) {
+  }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       eligibilityAtPrivateResidence: ['', [Validators.required]],
       eligibilityOnPublicProperty: ['', [Validators.required]],
-      eligibilityMajorSignificance: ['', [Validators.required]],
+      eligibilityMajorSignificance: [false, [Validators.required]],
       eligibilityMajorSignificanceRationale: ['', [Validators.required]],
-      eligibilityLocalSignificance: ['', [Validators.required]],
+      eligibilityLocalSignificance: [false, [Validators.required]],
       eventStartDate: ['', [Validators.required]],
       eligibilityPrivateOrPublic: ['', [Validators.required]],
       eligibilityResponsibleBevServiceNumber: ['', [Validators.required]],
@@ -70,6 +77,11 @@ export class EligibilityComponent implements OnInit {
     if (this.application) {
       this.form.patchValue(this.application);
     }
+  }
+
+  isValid() {
+    this.form.markAsTouched();
+    return this.form.valid;
   }
 
   save() {
@@ -92,7 +104,18 @@ export class EligibilityComponent implements OnInit {
     } else {
       console.error("The id should already exist at this point.")
     }
-    this.saveComplete.emit(true);
+  }
+
+  next() {
+    if (this.isValid()) {
+      this.save();
+      this.saveComplete.emit(true);
+    }
+  }
+
+  saveForLater() {
+    this.save();
+    this.router.navigateByUrl('/sep/my-applications')
   }
 
 }
