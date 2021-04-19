@@ -14,7 +14,7 @@ Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
+    # And I click on the link for Download Licence
     # And I confirm the terms and conditions for a Manufacturer licence
     And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
     And I click on the Continue to Application button
