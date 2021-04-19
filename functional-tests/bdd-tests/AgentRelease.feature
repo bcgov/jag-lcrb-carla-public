@@ -13,8 +13,8 @@ Scenario: Agent Release Test (Private Corporation)
     And I confirm the payment receipt for an Agent Licence
     And the application is approved
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
-    And I confirm the terms and conditions for an agent licence
+    # And I click on the link for Download Licence
+    # And I confirm the terms and conditions for an agent licence
     And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And I click on the link for Licences & Authorizations
