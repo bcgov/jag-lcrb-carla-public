@@ -16,16 +16,16 @@ Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     And I click on the link for Licences & Authorizations
     # And I click on the link for Download Licence
     # And I confirm the terms and conditions for a Manufacturer licence
-    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
-    And I click on the Continue to Application button
-    And I request a change in terms and conditions application
-    And I click on the Submit button
-    And I enter the payment information
-    And I click on the link for Licences & Authorizations
-    And I click on the link for Request Take Home Sampling Event Authorization
-    And I complete the Take Home Sampling Event Authorization request
-    And I click on the secondary Submit button
-    And I click on the link for Licences & Authorizations
+    # And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
+    # And I click on the Continue to Application button
+    # And I request a change in terms and conditions application
+    # And I click on the Submit button
+    # And I enter the payment information
+    # And I click on the link for Licences & Authorizations
+    # And I click on the link for Request Take Home Sampling Event Authorization
+    # And I complete the Take Home Sampling Event Authorization request
+    # And I click on the secondary Submit button
+    # And I click on the link for Licences & Authorizations
     # And I click on the link for Temporary Extension of Licensed Area
     # And I click on the Continue to Application button
     # And I submit a liquor primary temporary extension of licensed area application

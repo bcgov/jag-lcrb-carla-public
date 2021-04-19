@@ -25,10 +25,10 @@ Scenario: Food Primary Release Test #1 (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
+    # And I click on the link for Download Licence
     And I confirm the terms and conditions for a Food Primary licence
-    And I click on the link for Add Licensee Representative
-    And I request a licensee representative
+    # And I click on the link for Add Licensee Representative
+    # And I request a licensee representative
     And I click on the link for New Outdoor Patio
     And I click on the Continue to Application button
     And I request a new outdoor patio application
