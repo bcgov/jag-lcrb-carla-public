@@ -4,7 +4,7 @@
 
 Scenario: First Login
     Given I log in with the new contact and account (cantest4 - everything deleted - employee deleted)
-    And the new user contact is created in Dynamics
+    And the new user contact is created in Dynamics (cantest4employee)
     And the new account is created in Dynamics
     And the login is created and linked in Dynamics under Accounts > [account name] > Login
     And this login record is unique
