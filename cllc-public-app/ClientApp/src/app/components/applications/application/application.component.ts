@@ -1068,7 +1068,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.validInterest === FormControlState.Show &&
       ((this.uploadedValidInterestDocuments || 0) < 1)) {
       valid = false;
-      this.validationMessages.push('At least proof of ownership document is required.');
+      this.validationMessages.push('At least one proof of ownership document is required.');
     }
 
     if (this.showSitePlan() &&
@@ -1267,7 +1267,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       lGTitlePosition: 'Please enter a value for local government title of position',
       lgZoning: 'Please enter a value for local government zoning',
       licenceSubCategory: 'Please select the licence sub category',
-      liquorIndustryConnections: 'Please enter industry connections',
+      liquorIndustryConnections: 'Please specify whether you or any of your shareholders, have any connection with a distillery, brewery or winery',
       liquorIndustryConnectionsDetails: 'Please enter industry connection details',
       locatedAboveDescription: 'Please enter a value for located above description',
       mfgAcresOfFruit: 'Please enter a value for acres of fruit',
@@ -1314,7 +1314,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       renewalZoning: 'Please enter a value for renewal zoning',
       renewalkeypersonnel: 'Please enter a value for renewal key personnel',
       resolutionDocsUploaded: 'Please enter a value for renewal documentation uploaded',
-      ruralAgencyStoreAppointment: 'Please enter a value for rural agency store appointment number',
+      ruralAgencyStoreAppointment: 'Please specify if you hold a Rural Agency Store Appointment',
       tiedhouseFederalInterest: 'Please enter a value for tied house federal interest',
       willHaveValidInterest: 'Please enter a value for will have valid interest',
       zoningStatus: 'Please enter a value for zoning status',
