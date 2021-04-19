@@ -87,6 +87,7 @@ import { TakeHomeEventComponent } from "@components/take-home-event/take-home-ev
 import { SepApplicationComponent } from "@components/sep/sep-application/sep-application.component";
 import { MyApplicationsComponent } from "@components/sep/my-applications/my-applications.component";
 import { ServiceCardProfileComponent } from "@components/servicecard-profile/servicecard-profile.component";
+import { DrinkPlannerComponent } from "@components/sep/drink-planner/drink-planner.component";
 
 const routes: Routes = [
   {
@@ -122,6 +123,12 @@ const routes: Routes = [
     path: "servicecard-profile",
     component: ServiceCardProfileComponent,
     canActivate: [ServiceCardAuthGuard, FeatureGuard],
+    data: { feature: "Sep" }
+  },
+  {
+    path: "sep/drink-planner",
+    component: DrinkPlannerComponent,
+    canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
   },
   {
