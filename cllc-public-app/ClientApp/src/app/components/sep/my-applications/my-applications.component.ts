@@ -10,6 +10,7 @@ import { IndexDBService } from '@services/index-db.service';
 import { takeWhile } from 'rxjs/operators';
 import { StarterChecklistComponent } from '../starter-checklist/starter-checklist.component';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { SEP_APPLICATION_STEPS } from '../sep-application/sep-application.component';
 @Component({
   selector: 'app-my-applications',
   templateUrl: './my-applications.component.html',
@@ -94,6 +95,17 @@ export class MyApplicationsComponent implements OnInit {
         }
       });
 
+  }
+
+  getLastStep(stepsCompleted: string[] = []): string {
+    let lastIndex = -1;
+    //get index of the last completed step
+    stepsCompleted.forEach(element => {
+      lastIndex = Math.max(lastIndex, SEP_APPLICATION_STEPS.indexOf(element));
+    });
+
+    // return the next step to be completed
+    return SEP_APPLICATION_STEPS[lastIndex + 1];
   }
 
   async cloneApplication(app: SepApplication) {
