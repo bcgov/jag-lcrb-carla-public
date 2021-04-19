@@ -384,11 +384,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
             this.application = data;
             this.isShowLGINApproval = (
-                this?.application?.applicationType?.isShowLGINApproval ||
-                (this?.application?.applicationStatus === "Pending for LG/FN/Police Feedback"
-                 && this?.application?.applicationType?.isShowLGZoningConfirmation !== true
-                )
-              );
+              this?.application?.applicationType?.isShowLGINApproval ||
+              (this?.application?.applicationStatus === "Pending for LG/FN/Police Feedback"
+                && this?.application?.applicationType?.isShowLGZoningConfirmation !== true
+              )
+            );
 
             this.hideFormControlByType();
 
@@ -520,8 +520,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if ((this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
-        && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) &&
-        !this.application.applicationType.showPatio) {
+      && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) &&
+      !this.application.applicationType.showPatio) {
       this.form.get('isHasPatio').disable();
     }
 
@@ -1058,12 +1058,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applicationTypeName === ApplicationTypeNames.LRSTransferofLocation
     );
 
-//    if ((this.establishmentNameIsChanging() || !signageNotRequired)
-//      && this.application.applicationType.signage === FormControlState.Show
-//       && ((this.uploadedSignageDocuments || 0) < 1)) {
-//      valid = false;
-//      this.validationMessages.push('At least one signage document is required.');
-//    }
+    //    if ((this.establishmentNameIsChanging() || !signageNotRequired)
+    //      && this.application.applicationType.signage === FormControlState.Show
+    //       && ((this.uploadedSignageDocuments || 0) < 1)) {
+    //      valid = false;
+    //      this.validationMessages.push('At least one signage document is required.');
+    //    }
 
     if (this.application.applicationType.validInterest === FormControlState.Show &&
       ((this.uploadedValidInterestDocuments || 0) < 1)) {
@@ -1184,16 +1184,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showHoldsOtherManufactureLicence(): boolean {
     const show = ['Special Event Area Endorsement', 'Lounge Area Endorsement']
-    .indexOf(this?.application?.applicationType?.name) !== -1;
+      .indexOf(this?.application?.applicationType?.name) !== -1;
     return show;
   }
 
   showSubmitToLG(): boolean {
     let show = (this?.application?.applicationType?.isShowLGINApproval || this?.application?.applicationType?.isShowLGZoningConfirmation)
-    && !this.lGHasApproved()
-    && !this.lGHasRejected()
-    && this.form.get('holdsOtherManufactureLicence').value !== true
-    && this?.application?.applicationStatus === 'Intake';
+      && !this.lGHasApproved()
+      && !this.lGHasRejected()
+      && this.form.get('holdsOtherManufactureLicence').value !== true
+      && this?.application?.applicationStatus === 'Intake';
     return show;
   }
 
@@ -1307,13 +1307,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
       renewalShareholders: 'Please enter a value for renewal shareholder',
       renewalSignage: 'Please enter a value for renewal signage',
       renewalSiteMap: 'Please enter a value for renewal site map',
-      renewalThirdParty: 'Please enter a value for renwal third party',
-      renewalTiedhouse: 'Please enter a value for renwal tied house',
-      renewalUnreportedSaleOfBusiness: 'Please enter a value for renwal unreported sale of business',
-      renewalValidInterest: 'Please enter a value for renwal valid interest',
-      renewalZoning: 'Please enter a value for renwal zoning',
-      renewalkeypersonnel: 'Please enter a value for renwal key personnel',
-      resolutionDocsUploaded: 'Please enter a value for renwal documentation uploaded',
+      renewalThirdParty: 'Please enter a value for renewal third party',
+      renewalTiedhouse: 'Please enter a value for renewal tied house',
+      renewalUnreportedSaleOfBusiness: 'Please enter a value for renewal unreported sale of business',
+      renewalValidInterest: 'Please enter a value for renewal valid interest',
+      renewalZoning: 'Please enter a value for renewal zoning',
+      renewalkeypersonnel: 'Please enter a value for renewal key personnel',
+      resolutionDocsUploaded: 'Please enter a value for renewal documentation uploaded',
       ruralAgencyStoreAppointment: 'Please enter a value for rural agency store appointment number',
       tiedhouseFederalInterest: 'Please enter a value for tied house federal interest',
       willHaveValidInterest: 'Please enter a value for will have valid interest',
@@ -1321,7 +1321,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       pin: 'Please enter a PIN or PID',
       policeJurisdiction: 'Please select a police jurisdiction for the establishment',
       indigenousNation: 'Please select a local government or an Indigenous Nation'
-
     };
 
 
