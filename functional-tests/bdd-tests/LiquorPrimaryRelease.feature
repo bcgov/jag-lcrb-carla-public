@@ -24,8 +24,8 @@ Scenario: Liquor Primary Release Test #1 (Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
-    And I confirm the terms and conditions for a Liquor Primary licence
+    # And I click on the link for Download Licence
+    # And I confirm the terms and conditions for a Liquor Primary licence
     And I click on the link for Application to Allow Family Food Service
     And I click on the Continue to Application button
     And I complete the Application to Allow Family Food Service
