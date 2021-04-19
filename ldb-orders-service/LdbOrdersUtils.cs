@@ -15,11 +15,11 @@ using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Renci.SshNet;
 using System.IO;
-using ldb_orders_service.Models;
+using LdbOrdersService .Models;
 using System.Linq;
 using CsvHelper;
 
-namespace ldb_orders_service
+namespace LdbOrdersService 
 {
     public class LdbOrdersUtils
     {

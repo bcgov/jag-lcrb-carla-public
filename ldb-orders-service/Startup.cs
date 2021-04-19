@@ -23,7 +23,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
 using Serilog.Exceptions;
 
-namespace ldb_orders_service
+namespace LdbOrdersService 
 {
     public class Startup
     {
@@ -42,7 +42,7 @@ namespace ldb_orders_service
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ldb_orders_service", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LdbOrdersService ", Version = "v1" });
             });
 
             services.AddHangfire(config =>
