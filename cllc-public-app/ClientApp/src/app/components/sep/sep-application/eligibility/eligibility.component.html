@@ -13,7 +13,9 @@
 
     <h3>Tell us about your event</h3>
     <section [formGroup]="form" style="padding: 16px 32px;">
-        <app-field label="Is this event being hosted at a private residence?" [required]="true">
+        <app-field label="Is this event being hosted at a private residence?" [required]="true"
+        [valid]="!form.get('eligibilityAtPrivateResidence').touched || form.get('eligibilityAtPrivateResidence').valid"
+        errorMessage="Events held in a private residence are not eligible for Special Event Permits">
             <mat-radio-group formControlName="eligibilityAtPrivateResidence">
                 <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
                 <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
@@ -28,7 +30,9 @@
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
-            <app-field label="Is your event being held on public property?" [required]="true">
+            <app-field label="Is your event being held on public property?" [required]="true"
+            [valid]="!form.get('eligibilityOnPublicProperty').touched || form.get('eligibilityOnPublicProperty').valid"
+            errorMessage="Is public property Question Can't be blank">
                 <mat-radio-group formControlName="eligibilityOnPublicProperty">
                     <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
                     <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
@@ -120,7 +124,9 @@
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
-            <app-field [isFullWidth]="true" label="Is your event private or public?" [required]="true">
+            <app-field [isFullWidth]="true" label="Is your event private or public?" [required]="true"
+            [valid]="!form.get('eligibilityPrivateOrPublic').touched || form.get('eligibilityPrivateOrPublic').valid"
+            errorMessage="Licence category can't be blank">
                 <select formControlName="eligibilityPrivateOrPublic" class="form-control">
                     <option value=""></option>
                     <option value="2">Private – An organization's members or staff, invited guests and ticket holders
@@ -185,7 +191,9 @@
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
-            <app-field label="Responsible Beverage Service Number (SIR or SES)" [required]="true">
+            <app-field label="Responsible Beverage Service Number (SIR or SES)" [required]="true"
+            [valid]="!form.get('eligibilityResponsibleBevServiceNumber').touched || form.get('eligibilityResponsibleBevServiceNumber').valid"
+            errorMessage="Responsible Beverage Service Number (SIR or SES) must be entered to continue.">
                 <input formControlName="eligibilityResponsibleBevServiceNumber" type="text" class="form-control">
                 <mat-checkbox class="mt-2" formControlName="eligibilityResponsibleBevServiceNumberDoesNotHave" color="primary">
                     I don’t have a BC Responsible Beverage Service Certificate Number
@@ -207,7 +215,9 @@
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
             <app-field style="flex: 1" [isFullWidth]="true"
-                label="What’s the occasion of your event? (maximum 255 characters) " [required]="true">
+                label="What’s the occasion of your event? (maximum 255 characters) " [required]="true"
+                [valid]="!form.get('eventDescription').touched || form.get('eventDescription').valid"
+                errorMessage="Family event description can't be blank">
                 <textarea formControlName="eventDescription" class="w-100 form-control" rows="5"></textarea>
             </app-field>
             <div>
@@ -223,7 +233,9 @@
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
-            <app-field label="Are you charging an event admission price?" [required]="true">
+            <app-field label="Are you charging an event admission price?" [required]="true"
+            [valid]="!form.get('eligibilityChargingAdmission').touched || form.get('eligibilityChargingAdmission').valid"
+            errorMessage="Licence exists is not included in the list">
                 <mat-radio-group formControlName="eligibilityChargingAdmission">
                     <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
                     <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
