@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Serilog;
 
-namespace ldb_orders_service
+namespace LdbOrdersService 
 {
     public class Program
     {
