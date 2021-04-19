@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PolicyDocumentComponent } from '@components/policy-document/policy-document.component';
 import { Account } from '@models/account.model';
 import { SepApplication } from '@models/sep-application.model';
 import { IndexDBService } from '@services/index-db.service';
+import { FormBase } from '@shared/form-base';
 
 @Component({
   selector: 'app-applicant',
@@ -32,14 +34,15 @@ export class ApplicantComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
+    private router: Router,
     private db: IndexDBService) {
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      eventName: [''],
+      eventName: ['', [Validators.required]],
       applicantInfo: [''],
-      agreeToTnC: [''],
+      agreeToTnC: ['', [this.customRequiredCheckboxValidator()]],
       dateAgreedToTnC: ['']
     });
 
@@ -57,11 +60,33 @@ export class ApplicantComponent implements OnInit {
     this.policyDocs.setSlug(this.policySlug);
   }
 
-  save(event) {
+  customRequiredCheckboxValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (control.value === true) {
+        return null;
+      } else {
+        return { 'shouldBeTrue': 'But value is false' };
+      }
+    };
+  }
+
+  isValid(){
+    this.form.markAsTouched();
+    return this.form.valid;
+  }
+
+  save() {
     const data = {
       ...this.application,
       lastUpdated: new Date(),
       status: 'unsubmitted',
+      stepsCompleted: (steps =>{
+        const step = 'applicant';
+        if(steps.indexOf(step) === -1){
+          steps.push(step);
+        }
+        return steps;
+      })(this?.application?.stepsCompleted || []),
       contact: {
         firstname: this?.account?.primarycontact?.firstname,
         lastname: this?.account?.primarycontact?.lastname,
@@ -82,6 +107,17 @@ export class ApplicantComponent implements OnInit {
       data.dateCreated = new Date();
       this.db.addSepApplication(data);
     }
-    this.saveComplete.emit(true);
+  }
+
+  next(){  
+    if(this.isValid()){
+      this.save();
+      this.saveComplete.emit(true);
+    }
+  }
+
+  saveForLater(){  
+      this.save();
+      this.router.navigateByUrl('/sep/my-applications')
   }
 }
