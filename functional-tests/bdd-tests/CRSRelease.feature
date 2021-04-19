@@ -18,11 +18,11 @@ Scenario: CRS Release (Private Corporation)
     And I click on the link for Licences & Authorizations
     And I click on the button for CRS terms and conditions
     And the correct terms and conditions are displayed for CRS
-    And I click on the link for Request Store Name or Branding Change
-    And I click on the Continue to Application button
-    And I request a valid store name or branding change for Cannabis
+    # And I click on the link for Request Store Name or Branding Change
+    # And I click on the Continue to Application button
+    # And I request a valid store name or branding change for Cannabis
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
+    # And I click on the link for Download Licence
     And I confirm the terms and conditions for a CRS licence
     And I show the store as open on the map
     And I click on the link for Review Federal Reports
@@ -37,8 +37,8 @@ Scenario: CRS Release (Private Corporation)
     And I click on the link for Request a Structural Change
     And I click on the Continue to Application button
     And I request a structural change
-    And I click on the link for Licences & Authorizations
-    And I request a transfer of ownership for Cannabis
+    # And I click on the link for Licences & Authorizations
+    # And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
 
