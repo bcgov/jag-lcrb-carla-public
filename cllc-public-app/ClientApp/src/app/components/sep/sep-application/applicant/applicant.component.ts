@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormGroupDirective, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PolicyDocumentComponent } from '@components/policy-document/policy-document.component';
 import { Account } from '@models/account.model';
@@ -35,6 +35,7 @@ export class ApplicantComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
+    private ctrlContainer: FormGroupDirective,
     private db: IndexDBService) {
   }
 
@@ -45,6 +46,8 @@ export class ApplicantComponent implements OnInit {
       agreeToTnC: ['', [this.customRequiredCheckboxValidator()]],
       dateAgreedToTnC: ['']
     });
+
+    this.ctrlContainer.form.addControl("eligibility", this.form);
 
     if (this.application) {
       this.form.patchValue(this.application);

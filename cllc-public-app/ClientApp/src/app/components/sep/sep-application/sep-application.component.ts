@@ -12,6 +12,7 @@ import { Account } from '@models/account.model';
 import { ActivatedRoute } from '@angular/router';
 import { IndexDBService } from '@services/index-db.service';
 import { SepApplication } from '@models/sep-application.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 export const SEP_APPLICATION_STEPS = ["applicant", "eligibility", "event", "liquor", "summary"];
 
@@ -38,6 +39,9 @@ export class SepApplicationComponent implements OnInit {
   steps = SEP_APPLICATION_STEPS;
   account: Account;
   step: string;
+  applicantForm: FormGroup;
+  eligibilityForm: FormGroup;
+  eventForm: FormGroup;
   get selectedIndex(): number {
     let index = 0;
     if (this.step) {
@@ -52,6 +56,7 @@ export class SepApplicationComponent implements OnInit {
 
   constructor(private store: Store<AppState>,
     private db: IndexDBService,
+    private fb: FormBuilder,
     private route: ActivatedRoute) {
     this.store.select(state => state.currentAccountState.currentAccount)
       .subscribe(account => this.account = account);
@@ -63,6 +68,10 @@ export class SepApplicationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.applicantForm = this.fb.group({});
+    this.eligibilityForm = this.fb.group({});
+    this.eventForm = this.fb.group({});
+    
     if (this.applicationId) {
       this.db.getSepApplication(parseInt(this.applicationId, 10))
         .then(app => {
