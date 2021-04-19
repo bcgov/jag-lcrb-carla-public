@@ -23,11 +23,6 @@ namespace LdbOrdersService
 {
     public class LdbOrdersUtils
     {
-        
-        /// <summary>
-        /// Maximum number of new licenses that will be sent per interval.
-        /// </summary>
-        private int maxLicencesPerInterval;
 
         private IConfiguration Configuration { get; }
         private bool _debugMode = false;
@@ -202,7 +197,6 @@ namespace LdbOrdersService
                     }
                 }
             }
-            
 
             hangfireContext.WriteLine("End of check for new OneStop queue items");
         }
