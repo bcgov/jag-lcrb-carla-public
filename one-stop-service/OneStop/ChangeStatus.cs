@@ -133,7 +133,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             body.statusData = new SBNChangeStatusBodyStatusData();
 
 
-            body.statusData.businessRegistrationNumber = licence.AdoxioLicencee.AdoxioBusinessregistrationnumber;
+            body.statusData.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             body.statusData.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
 
             body.statusData.businessProgramAccountReferenceNumber = licence.AdoxioBusinessprogramaccountreferencenumber;
