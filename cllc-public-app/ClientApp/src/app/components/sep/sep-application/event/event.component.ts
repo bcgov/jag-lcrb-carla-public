@@ -111,7 +111,6 @@ export class EventComponent extends FormBase implements OnInit {
       });
     } else {
       this.addEventDate({} as SepSchedule, locationForm.get('eventDates') as FormArray);
-      this.addEventDate({} as SepSchedule, locationForm.get('eventDates') as FormArray);
     }
 
     if (location?.serviceAreas?.length > 0) {
@@ -119,7 +118,6 @@ export class EventComponent extends FormBase implements OnInit {
         this.addServiceArea(ed, locationForm.get('serviceAreas') as FormArray);
       });
     } else {
-      this.addServiceArea({} as SepServiceArea, locationForm.get('serviceAreas') as FormArray);
       this.addServiceArea({} as SepServiceArea, locationForm.get('serviceAreas') as FormArray);
     }
 
