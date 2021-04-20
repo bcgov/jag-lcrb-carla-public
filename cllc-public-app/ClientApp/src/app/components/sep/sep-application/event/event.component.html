@@ -1,1 +1,258 @@
-<p>event works!</p>
+<div class="wrapp">
+    <h1 class="mat-heading">Event Location</h1>
+
+    <span class="mat-title">{{sepApplication?.eventName}}</span>
+
+    <div class="mat-subheading-1">Application number: {{application?.id}}</div>
+    <p>Tell us about your event. and venue location
+    </p>
+    <span class="error-states">*All fields are required</span>
+
+    <mat-divider></mat-divider>
+
+    <h3>Event Information</h3>
+    <section [formGroup]="form" style="padding: 16px 32px;">
+        <div class="d-flex justify-content-between">
+            <app-field label="Please select your event location (city/town/district or First Nation)" [required]="true"
+                [valid]="!form.get('lgIn').touched || form.get('lgIn').valid"
+                errorMessage="Events held in a private residence are not eligible for Special Event Permits">
+                <select formControlName="lgIn" class="form-control">
+                    <option value=""></option>
+                    <option value="334">100 Mile House</option>
+                    <option value="27">Abbotsford</option>
+                    <option value="49">Agassiz</option>
+                    <option value="39">Burnaby</option>
+                    <option value="259">Kelowna</option>
+                    <option value="261">Lake Country</option>
+                    <option value="36">Langley (Township Of)</option>
+                    <option value="397">Terrace</option>
+                    <option value="10">Vancouver</option>
+                </select>
+            </app-field>
+            <div>
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" matTooltip="All locations in the application must be in the same municipality. You may submit more than one application 
+                    if your event is in multiple municipalities." #tooltip="matTooltip">
+                </fa-icon>
+            </div>
+        </div>
+
+        <app-field label="Is this an annual event?" [required]="true"
+            [valid]="!form.get('isAnnualEvent').touched || form.get('isAnnualEvent').valid"
+            errorMessage="Please choose a value">
+            <mat-radio-group formControlName="isAnnualEvent">
+                <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
+                <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+        </app-field>
+
+        <mat-divider></mat-divider>
+        <section formGroupName="locations">
+            <mat-card [formGroupName]="i" *ngFor="let location of locations.controls; let i = index;">
+                <mat-card-header>
+                    <fa-icon [icon]="faMapMarkerAlt" mat-card-avatar>
+
+                    </fa-icon>
+                    <mat-card-title>Location {{i + 1}}</mat-card-title>
+                </mat-card-header>
+
+                <div class="d-flex justify-content-between">
+                    <app-field label="Event Location Name" [required]="true"
+                        [valid]="!location.get('locationName').touched || location.get('locationName').valid"
+                        errorMessage="Name can't be blank">
+                        <input type="text" formControlName="locationName" class="form-control">
+                    </app-field>
+                    <div>
+                        <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()"
+                            matTooltip="For example: community centre, sports field, wedding hall etc."
+                            #tooltip="matTooltip">
+                        </fa-icon>
+                    </div>
+                </div>
+                <app-field label="Venue Type" [required]="true"
+                    [valid]="!location.get('venueType').touched || location.get('venueType').valid"
+                    errorMessage="Please enter a value">
+                    <input type="text" formControlName="venueType" class="form-control"
+                        placeholder="For example, community centre, convention centre, banquet hall">
+                </app-field>
+                <app-field label="Address Line 1" [required]="true"
+                    [valid]="!location.get('eventLocationStreet1').touched || location.get('eventLocationStreet1').valid"
+                    errorMessage="Address line 1 can't be blank">
+                    <input type="text" formControlName="eventLocationStreet1" class="form-control">
+                </app-field>
+                <app-field label="Address Line 2">
+                    <input type="text" formControlName="eventLocationStreet2" class="form-control">
+                </app-field>
+                <app-field label="Postal Code" [required]="true"
+                    [valid]="!location.get('eventLocationPostalCode').touched || location.get('eventLocationPostalCode').valid"
+                    errorMessage="Postal code is in the wrong format 'X3X 9Y9'">
+                    <input type="text" formControlName="eventLocationPostalCode" class="form-control">
+                </app-field>
+                <app-field label="Maximum number of guests at this location at any time" [required]="true"
+                    [valid]="!location.get('locationMaxGuests').touched || location.get('locationMaxGuests').valid"
+                    errorMessage="Name can't be blank">
+                    <mat-radio-group formControlName="locationMaxGuests">
+                        <mat-radio-button color="primary" class="mr-3" value="indoors">Indoors</mat-radio-button>
+                        <mat-radio-button color="primary" class="mr-3" value="outdoors">Outdoors</mat-radio-button>
+                        <mat-radio-button color="primary" class="mr-3" value="both">Both</mat-radio-button>
+                    </mat-radio-group>
+                </app-field>
+
+                <mat-divider></mat-divider>
+                <section formGroupName="serviceAreas">
+                    <mat-card>
+                        <h3>Service Areas</h3>
+                        <mat-accordion  multi>
+                            <mat-expansion-panel [formGroupName]="j"
+                                *ngFor="let area of getServiceAreas(locations.at(i)); let j = index;">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        {{ area.get('description').value }}
+                                    </mat-panel-title>
+                                    <mat-panel-title>
+                                        Guests : {{area.get('numAreaMaxGuests').value }}
+                                    </mat-panel-title>
+                                    <mat-panel-title>
+                                        Minors present
+                                    </mat-panel-title>
+
+                                </mat-expansion-panel-header>
+                                <app-field label="Describe the area(s) where liquor will be served, sold and consumed">
+                                    <p>
+                                        The area within the event location where liquor will be consumed by guests at
+                                        any time
+                                        i.e.
+                                        beverage garden, bar area, courtyard, etc.
+                                    </p>
+                                    <input type="text" formControlName="description" class="form-control"
+                                        placeholder="For example, beverage garden, bar area, courtyard, etc.">
+                                </app-field>
+                                <app-field label="Maximum number of guests in the service area at any given time">
+                                    <input type="text" formControlName="numAreaMaxGuests" class="form-control">
+                                </app-field>
+                                <app-field label="Will minors be in the service area?">
+                                    <mat-radio-group formControlName="isMinorsPresent">
+                                        <mat-radio-button color="primary" class="mr-3" [value]="true">Yes
+                                        </mat-radio-button>
+                                        <mat-radio-button color="primary" class="mr-3" [value]="false">No
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </app-field>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                        <button mat-raised-button color="secondary"
+                            (click)="addServiceArea({}, location.get('serviceAreas'))">Add Service Area</button>
+                    </mat-card>
+                </section>
+
+                <mat-card style="margin-top: 16px;" formGroupName="eventDates">
+                    <h3>Event Date(s)</h3>
+                    <p>
+                        The start time of an event is the time when guests are first admitted to the event venue; e.g.,
+                        when the doors to the theatre open before the performance or the stadium opens before the game
+                        to allow
+                        time for the audience to be admitted and seated.
+                    </p>
+                    <p>
+                        Permitted event times are: Indoor events: 9:00a.m. ? 2:00 a.m. the following day Outdoor events:
+                        9:00a.m. ? 10:00p.m. the same day Under very limited circumstances, you may receive permission
+                        from the Liquor and Cannabis Regulation Branch to extend these hours.
+                    </p>
+
+                    <mat-accordion class="example-headers-align" multi>
+                        <mat-expansion-panel [formGroupName]="k"
+                            *ngFor="let area of getEventDates(locations.at(i)); let k = index;">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Event Date: {{ area.get('eventDate').value | date}}
+                                </mat-panel-title>
+                                <mat-panel-title>
+                                    Event Times: 7:00 PM - 11: 30 PM
+                                </mat-panel-title>
+                                <mat-panel-title>
+                                    Liquor will be served: 7:00 PM - 11: 30 PM
+                                </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+
+                            <table class="w-100">
+                                <tr>
+                                    <td>
+                                        <app-field label="Date of your event">
+                                            <input type="text" formControlName="eventDate"
+                                                style="background-color: #fff; width: 200px;" placeholder="yyyy-mm-dd"
+                                                readonly class="form-control" [min]="minDate" [matDatepicker]="picker"
+                                                (focus)="picker.open()" (click)="picker.open()">
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </app-field>
+                                    </td>
+                                    <td>
+                                        <app-field label="From">
+                                            <select class="form-control">
+                                                <option value=""></option>
+                                                <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                    {{item.name}}
+                                                </option>
+                                            </select>
+                                        </app-field>
+                                    </td>
+                                    <td>
+                                        <app-field label="To">
+                                            <select class="form-control">
+                                                <option value=""></option>
+                                                <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                    {{item.name}}
+                                                </option>
+                                            </select>
+                                        </app-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">
+                                        <label>Liquor will be served:</label>
+                                    </td>
+                                    <td>
+                                        <app-field label="From">
+                                            <select class="form-control">
+                                                <option value=""></option>
+                                                <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                    {{item.name}}
+                                                </option>
+                                            </select>
+                                        </app-field>
+                                    </td>
+                                    <td>
+                                        <app-field label="To">
+                                            <select class="form-control">
+                                                <option value=""></option>
+                                                <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                    {{item.name}}
+                                                </option>
+                                            </select>
+                                        </app-field>
+                                    </td>
+                                </tr>
+                            </table>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <button mat-raised-button color="secondary"
+                        (click)="addEventDate({}, location.get('eventDates'))">Add Event Date</button>
+                </mat-card>
+                <mat-divider></mat-divider>
+            </mat-card>
+        </section>
+    </section>
+    <mat-divider></mat-divider>
+
+
+    <section class="error mt-3" *ngIf="showValidationMessages">
+        <p *ngFor="let message of validationMessages">
+            <span class="app-cancel">
+                <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+                {{message}}
+            </span>
+        </p>
+    </section>
+
+    <button mat-raised-button color="secondary" matStepperPrevious>BACK</button>
+    <button mat-raised-button color="primary" (click)="next()">NEXT</button>
+</div>

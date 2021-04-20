@@ -89,9 +89,12 @@ export class EligibilityComponent extends FormBase implements OnInit {
           this.form.get('hostingOrganizationAddress').setValidators([Validators.required]);
           this.form.get('hostingOrganizationCategory').setValidators([Validators.required]);
         } else {
-          this.form.get('hostingOrganizationName').clearAsyncValidators();
-          this.form.get('hostingOrganizationAddress').clearAsyncValidators();
-          this.form.get('hostingOrganizationCategory').clearAsyncValidators();
+          this.form.get('hostingOrganizationName').clearValidators();
+          this.form.get('hostingOrganizationName').reset();
+          this.form.get('hostingOrganizationAddress').clearValidators();
+          this.form.get('hostingOrganizationAddress').reset();
+          this.form.get('hostingOrganizationCategory').clearValidators();
+          this.form.get('hostingOrganizationCategory').reset();
         }
       });
 
@@ -100,7 +103,8 @@ export class EligibilityComponent extends FormBase implements OnInit {
     .subscribe(value => {
         if (value) {
           // if the value is entered disable the checkbox and clear its validation
-          this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').clearAsyncValidators();
+          this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').clearValidators();
+          this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').reset();
           this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').disable();
         } else {
           // enable the checkbox and its validation
@@ -117,6 +121,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
           this.form.get('eligibilityResponsibleBevServiceNumber').enable();
         } else {
           this.form.get('eligibilityResponsibleBevServiceNumber').clearValidators();
+          this.form.get('eligibilityResponsibleBevServiceNumber').reset();
           this.form.get('eligibilityResponsibleBevServiceNumber').disable();
         }
       });
