@@ -448,25 +448,18 @@ namespace DataTool
                     AdoxioDatefirstyearpaymentreceived = application.AdoxioDatefirstyearpaymentreceived,
                     AdoxioPolicedecision = application.AdoxioPolicedecision,
                     AdoxioEstablishmentotherbusinessname = application.AdoxioEstablishmentotherbusinessname,
-                    AdoxioUploadedfloorplans = application.AdoxioUploadedfloorplans,
-                    AdoxioSignaturedate = application.AdoxioSignaturedate,
-                    AdoxioChecklisttiedhouseassessed = application.AdoxioChecklisttiedhouseassessed,
+                    
                     AdoxioChecklistspdconsentreceived = application.AdoxioChecklistspdconsentreceived,
                     AdoxioAreyouthemaincontactafterlicensing = application.AdoxioAreyouthemaincontactafterlicensing,
-                    AdoxioAppchecklistvalidinterestreceivedfinal = application.AdoxioAppchecklistvalidinterestreceivedfinal,
                     AdoxioDateaip = application.AdoxioDateaip,
                     AdoxioChecklistverifypostalcode = application.AdoxioChecklistverifypostalcode,
                     AdoxioChecklistfloorplanapproved = application.AdoxioChecklistfloorplanapproved,
                     AdoxioTerminatereason = application.AdoxioTerminatereason,
-                    AdoxioChecklistfloorplanassessed = application.AdoxioChecklistfloorplanassessed,
                     AdoxioDatereceivedinvestigations = application.AdoxioDatereceivedinvestigations,
                     AdoxioEstablishmentlocatedatwinery = application.AdoxioEstablishmentlocatedatwinery,
                     AdoxioChecklistsitemapreceived = application.AdoxioChecklistsitemapreceived,
                     AdoxioDateaipexpired = application.AdoxioDateaipexpired,
-                    AdoxioAppchecklistfinalreviewcomplete = application.AdoxioAppchecklistfinalreviewcomplete,
                     AdoxioDatereceivedlgin = application.AdoxioDatereceivedlgin,
-                    AdoxioChecklistbrandingassessed = application.AdoxioChecklistbrandingassessed,
-                    AdoxioAppchecklistverifyapplication = application.AdoxioAppchecklistverifyapplication,
                     AdoxioLicenceexpiry = application.AdoxioLicenceexpiry,
                     AdoxioChecklistlicencefeepaid = application.AdoxioChecklistlicencefeepaid,
                     AdoxioOtherbusinessesatthesamelocation = application.AdoxioOtherbusinessesatthesamelocation,
@@ -477,9 +470,7 @@ namespace DataTool
                     AdoxioAppchecklistinspectionreviewcomplete = application.AdoxioAppchecklistinspectionreviewcomplete,
                     AdoxioEstablishmentdeclarationoption1 = application.AdoxioEstablishmentdeclarationoption1,
                     AdoxioChecklistsenttolgin = application.AdoxioChecklistsenttolgin,
-                    AdoxioHastiedhouseassociations = application.AdoxioHastiedhouseassociations,
                     AdoxioEstablishmentcomplytoallbylaws = application.AdoxioEstablishmentcomplytoallbylaws,
-                    AdoxioChecklistvalidinterestassessed = application.AdoxioChecklistvalidinterestassessed,
                     AdoxioCasemanagerassigned = application.AdoxioCasemanagerassigned,
                     
                     AdoxioAppchecklistfinaldecision = application.AdoxioAppchecklistfinaldecision,
@@ -604,13 +595,6 @@ namespace DataTool
                     newItem.AdoxioLGIN = new MicrosoftDynamicsCRMadoxioLocalgovindigenousnation
                     {
                         AdoxioLocalgovindigenousnationid = LocalgovindigenousnationMap[licence._adoxioLginValue]
-                    };
-                }
-                if (licence._adoxioAccountidValue != null && AccountMap.ContainsKey (licence._adoxioAccountidValue))
-                {
-                    newItem.AdoxioAccountId = new MicrosoftDynamicsCRMaccount
-                    {
-                        Accountid = AccountMap[licence._adoxioAccountidValue]
                     };
                 }
                 if (licence._adoxioLicenceeValue != null && AccountMap.ContainsKey(licence._adoxioLicenceeValue))

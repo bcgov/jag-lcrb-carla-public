@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Rest;
 
 namespace DataTool
 {
@@ -33,7 +34,7 @@ namespace DataTool
                             };
                             _dynamicsClient.Applications.Update(application.AdoxioApplicationid, newItem);
                         }
-                        catch (OdataerrorException odee)
+                        catch (HttpOperationException odee)
                         {
                             Console.Out.WriteLine("Error updating application");
                             Console.Out.WriteLine("Request:");

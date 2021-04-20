@@ -300,6 +300,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // get JSON response objects into a list
             List<JToken> responseResults = responseObject["value"].Children().ToList();
+
             // create file details list to add from response
             List<FileDetailsList> fileDetailsList = new List<FileDetailsList>();
             // create .NET objects
@@ -319,7 +320,11 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
                 fileDetailsList.Add(searchResult);
             }
-            fileDetailsList = fileDetailsList.Where(f => string.IsNullOrEmpty(documentType) || f.DocumentType == documentType).ToList();
+
+            if (documentType != null)
+            {
+                fileDetailsList = fileDetailsList.Where(f => f.DocumentType == documentType).ToList();
+            }
             return fileDetailsList;
         }
 
