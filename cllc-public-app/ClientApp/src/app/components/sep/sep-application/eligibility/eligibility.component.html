@@ -150,7 +150,7 @@
                 </fa-icon>
             </div>
         </div>
-        <ng-container *ngIf="this.form.get('eligibilityPrivateOrPublic').value !== '1'">
+        <ng-container *ngIf="this.form.get('eligibilityPrivateOrPublic').value && this.form.get('eligibilityPrivateOrPublic').value !== '1'">
             <section class="d-flex justify-content-between" style="padding: 0 32px 0 32px;">
                 <app-field style="flex: 1" [isFullWidth]="true"
                     label="What is the name of the organization hosting the event?" [required]="true">
