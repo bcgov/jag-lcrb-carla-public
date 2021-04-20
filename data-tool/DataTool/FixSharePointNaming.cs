@@ -4,6 +4,7 @@ using RandomDataGenerator.FieldOptions;
 using RandomDataGenerator.Randomizers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +16,59 @@ namespace DataTool
 {
     class FixSharePointNaming
     {
+        private bool IsSuspect(string data)
+        {
+            bool result = false;
+            if (!data.Contains("__"))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        private string FixName(string data)
+        {
+            string result = null;
+            // Determine if it is just a Floor_Plan.pdf
+            if (data.ToLower().Contains("floor_plan.pdf") || data.ToLower().Contains("floor plan.pdf") || data.ToLower().Contains("floor plans.pdf"))
+            {
+                // ignore.
+            }
+            else
+            {
+                // Remove "Floor_Plan"
+                int floorPos = data.ToLower().IndexOf("floor_plan");
+                if (floorPos > -1)
+                {
+                    data = data.Substring(0, floorPos) + data.Substring(floorPos + 11);
+                    int extensionPos = data.LastIndexOf(".");
+                    string extension = data.Substring(extensionPos);
+                    data = data.Substring(0, extensionPos);
+
+                    // sometimes a space is used instead of an underscore.
+                    data = data.Replace(" ", "_");
+
+                    var splitData = data.Split("_");
+                    // reverse the strings.
+                    result = "Floor Plan__";
+                    for (var i = splitData.Length; i > 0; i--)
+                    {
+                        result += splitData[i - 1];
+                        if (i > 1)
+                        {
+                            result += "_";
+                        }
+                    }
+
+                    result += extension;
+                }
+                
+            }
+
+            return result;
+        }
+
         public void Execute(IConfiguration config, bool doRename)
         {  
             // get a connection to Dynamics.
@@ -22,7 +76,7 @@ namespace DataTool
 
             // get the list of application files.
             SharePointFileManager sharePoint = new SharePointFileManager(config);
-
+            string[] orderby = {"adoxio_licencenumber"};
             string[] expand = {"adoxio_licences_SharePointDocumentLocations"};
             //var licences = dynamicsClient.Licenceses.Get(expand: expand).Value;
             
@@ -37,25 +91,49 @@ namespace DataTool
 
             customHeaders.Add("OData-Version", odataVersionHeader);
             customHeaders.Add("OData-MaxVersion", odataVersionHeader);
-            var licencesQuery = dynamicsClient.Licenceses.GetWithHttpMessagesAsync( expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+            string odataNextLink = "1";
             bool firstTime = true;
             int totalCount = 5000;
             int currentCount = 0;
-            while (currentCount < totalCount)
+            int renameCount = 0;
+            HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesCollection> licencesQuery = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesCollection>();
+            while (odataNextLink != null)
             {
-                Console.Out.WriteLine($"Currently on licence {currentCount} of {totalCount}");
-                var licences = licencesQuery.Body.Value;
                 if (firstTime)
                 {
                     firstTime = false;
-                    //totalCount = 0;
+                    licencesQuery = dynamicsClient.Licenceses.GetWithHttpMessagesAsync(expand: expand, customHeaders: customHeaders, count: true, orderby: orderby).GetAwaiter().GetResult();
                 }
+                else
+                {
+                    odataNextLink = licencesQuery.Body.OdataNextLink;
+                    if (odataNextLink != null)
+                    {
+                        licencesQuery = dynamicsClient.Licenceses.GetNextLink(odataNextLink, customHeaders);
 
+                        totalCount += licencesQuery.Body.Value.Count;
+                    }
+                    else
+                    {
+                        licencesQuery = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencesCollection>();
+                    }
+                }
+                Console.Out.WriteLine($"Currently on licence {currentCount} of {totalCount}");
+                var licences = licencesQuery.Body.Value;
                 
 
                 foreach (var licence in licences)
                 {
-                    currentCount++;
+                    bool isInRange = false;
+                    int licenceNumber = -1;
+                    int.TryParse(licence.AdoxioLicencenumber, out licenceNumber);
+                    
+                    if (licenceNumber >= 1114 && licenceNumber <= 18573)
+                    {
+                        isInRange = true;
+                        //Console.Out.WriteLine($"Licence #{licenceNumber}");
+                    }
+                        currentCount++;
                     string folderName = licence.GetDocumentFolderName();
                     if (licence.AdoxioLicencesSharePointDocumentLocations != null &&
                         licence.AdoxioLicencesSharePointDocumentLocations.Count > 0 &&
@@ -67,46 +145,51 @@ namespace DataTool
                     List<FileDetailsList> fileList = null;
                     try
                     {
-                        fileList = sharePoint.GetFileDetailsListInFolder(SharePointFileManager.LicenceDocumentListTitle,
+                        fileList = sharePoint.GetFileDetailsListInFolder(SharePointFileManager.LicenceDocumentUrlTitle,
                                 folderName, null)
                             .GetAwaiter().GetResult();
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine($"Folder not found [{folderName}]");
+                        // Console.WriteLine($"Folder not found [{folderName}]");
                     }
 
                     if (fileList != null && fileList.Count > 0)
                     {
-                        Console.WriteLine($"Found {fileList.Count} Files.");
+                        //Console.WriteLine($"Found {fileList.Count} Files.");
                         foreach (var file in fileList)
                         {
-
-                            // see if the file matches the regex.
-                            Regex regex = new Regex("^[0-9]+_[0-9]+_([a-zA-Z]+(_[a-zA-Z]+)+) 1\\.[a-zA-Z]+$",
-                                RegexOptions.IgnoreCase);
-                            if (regex.IsMatch(file.Name))
+                            if (isInRange)
                             {
-                                var matches = regex.Matches(file.Name);
-                                string newName =
-                                    $"{matches[2].Value} {matches[3].Value}__{matches[5].Value}_{matches[4].Value}_{matches[1].Value}_{matches[0].Value}.{matches[6].Value}";
-                                Console.WriteLine($"{file.Name} will be renamed to {newName}");
+                                // Console.Out.WriteLine($"Current filename: {file.Name}");
+                            }
+
+                            if (IsSuspect(file.Name))
+                            {
+                                
+                                string newName = FixName(file.Name);
+                                if (newName != null)
+                                {
+                                    Console.Out.WriteLine($"Filename {file.Name} is suspect.");
+                                    Console.Out.WriteLine($"New name is {newName}");
+
+                                    string oldFileName =
+                                        $"{SharePointFileManager.LicenceDocumentUrlTitle}/{folderName}/{file.Name}";
+                                    string newFileName = $"{SharePointFileManager.LicenceDocumentUrlTitle}/{folderName}/{newName}";
+                                    Console.Out.WriteLine($"Rename File {oldFileName} to {newFileName}");
+                                    sharePoint.RenameFile(oldFileName, newFileName).GetAwaiter().GetResult();
+                                    renameCount++;
+                                }
                             }
                         }
                     }
                 }
 
-                // get the next window.
-                string odataNextLink = licencesQuery.Body.OdataNextLink;
-                if (odataNextLink != null)
-                {
-                    licencesQuery = dynamicsClient.Licenceses.GetNextLink(odataNextLink, customHeaders);
-
-                    totalCount += int.Parse(licencesQuery.Body.Count);
-                }
                
-                Console.Out.WriteLine($"Licence count is {totalCount}");
+               
             }
+            Console.Out.WriteLine($"Licence count is {totalCount}");
+            Console.Out.WriteLine($"Rename count is {renameCount}");
         }
     }
 }
