@@ -6,6 +6,7 @@ Feature: RuralLicenseeRetailStoreRelease
     As a logged in business user
     I want to run a release test for a rural LRS application
 
+@9release
 Scenario: Rural LRS Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
