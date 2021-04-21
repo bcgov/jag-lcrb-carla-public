@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Rest;
 
 namespace DataTool
 {
@@ -27,7 +28,7 @@ namespace DataTool
                         _dynamicsClient.Applications.Delete(application.AdoxioApplicationid);
                         Console.Out.WriteLine("Deleted Application " + application.AdoxioApplicationid);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         Console.Out.WriteLine("Error deleting application");
                         Console.Out.WriteLine("Request:");
@@ -37,7 +38,7 @@ namespace DataTool
                     }
                 }
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 Console.Out.WriteLine("Error getting applications");
                 Console.Out.WriteLine("Request:");

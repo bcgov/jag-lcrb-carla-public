@@ -1,44 +1,51 @@
 <div>
     <!-- <h1></h1> -->
-    <mat-horizontal-stepper [linear]="true" [selectedIndex]="selectedIndex" (selectionChange)="selectionChange($event)" #stepper>
+    <mat-horizontal-stepper [linear]="true" [selectedIndex]="selectedIndex" (selectionChange)="selectionChange($event)"
+        #stepper>
         <ng-template matStepperIcon="edit">
             <fa-icon [icon]="faCheck"></fa-icon>
         </ng-template>
 
-        <mat-step *ngFor="let step of steps; let index = index;">
-
-            <ng-container *ngIf="step === 'applicant'">
+        <ng-container *ngFor="let step of steps; let index = index;">
+            <mat-step [stepControl]="applicantForm" [completed]="isStepCompleted(step)" *ngIf="step === 'applicant'">
                 <ng-template matStepLabel>Applicant</ng-template>
-                <app-applicant [account]="account" [application]="application" *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()"
-                    #applicant>
-                </app-applicant>
-            </ng-container>
+                <form [formGroup]="applicantForm">
+                    <app-applicant [account]="account" [application]="application"
+                        *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()"
+                        #applicant>
+                    </app-applicant>
+                </form>
+            </mat-step>
 
-            <ng-container *ngIf="step === 'eligibility'">
+            <mat-step [stepControl]="eligibilityForm" [completed]="isStepCompleted(step)"
+                *ngIf="step === 'eligibility'">
                 <ng-template matStepLabel>Eligibility</ng-template>
-                <app-eligibility *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()"
-                    #eligibility>
-                </app-eligibility>
-            </ng-container>
+                <form [formGroup]="eligibilityForm">
+                    <app-eligibility [account]="account" [applicationId]="application?.id"
+                        *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()"
+                        #eligibility>
+                    </app-eligibility>
+                </form>
+            </mat-step>
 
-            <ng-container *ngIf="step === 'event'">
+            <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'event'">
                 <ng-template matStepLabel>Event</ng-template>
                 <app-event *ngIf="stepper.selectedIndex === index" class="w-100" #event>
                 </app-event>
-            </ng-container>
+            </mat-step>
 
-            <ng-container *ngIf="step === 'liquor'">
+            <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'liquor'">
                 <ng-template matStepLabel>Liquor</ng-template>
                 <app-liquor *ngIf="stepper.selectedIndex === index" class="w-100" #liquor>
                 </app-liquor>
-            </ng-container>
+            </mat-step>
 
-            <ng-container *ngIf="step === 'summary'">
+            <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'summary'">
                 <ng-template matStepLabel>Summary</ng-template>
                 <app-summary *ngIf="stepper.selectedIndex === index" class="w-100" #summary>
                 </app-summary>
-            </ng-container>
+            </mat-step>
 
-        </mat-step>
+        </ng-container>
     </mat-horizontal-stepper>
 </div>

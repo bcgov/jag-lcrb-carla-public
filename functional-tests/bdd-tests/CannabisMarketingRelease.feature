@@ -15,7 +15,7 @@ Scenario: Cannabis Marketing Release (Private Corporation)
     And the application is approved
     And I click on the link for Licences & Authorizations
     And I click on the link for Download Licence
-    And I confirm the terms and conditions for a Cannabis marketing licence
+    # And I confirm the terms and conditions for a Cannabis marketing licence
     And the account is deleted
     Then I see the login page
 

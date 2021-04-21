@@ -141,7 +141,13 @@ TEST builds are triggered by source code being committed to the master branch of
 Login to the OpenShift Web Console and navigate to the Tools project for the system, and view the status of the TEST portal pipeline build config to see the status of the build 
 
 ## Promotion to PROD
-Login to the OpenShift Web Console and navigate to the Tools project for the system.  Go to the Build Config for the PROD Pipeline.  Click  Start Build. You will then have to CONFIRM the build by clicking on the related log item for the build that has been started.
+Login to the OpenShift Web Console and navigate to the Tools project for the system.  Go to the Build Config for the PROD Pipeline.  Click  Start Build. 
+
+Navigate to the Logs for the build and click the link to go to the Jenkins logs.
+
+View the Console Logs.
+
+You will then have to CONFIRM the build by clicking on the related log item for the build that has been started.
 
 ## Feature Management
 Features are managed by adding environment variables (or secrets in the case of a developer's PC) to the API environment.  As a general rule the environment variable name should begin with FEATURE_ and be all caps.  Empty string for a value is the same as not being set; anything other than empty string will set the value.
