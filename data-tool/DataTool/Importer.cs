@@ -1,5 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Microsoft.Rest;
 using RandomDataGenerator.FieldOptions;
 using RandomDataGenerator.Randomizers;
 using System;
@@ -119,7 +120,7 @@ namespace DataTool
                 contact = _dynamicsClient.Contacts.Create(newItem);
                 Console.Out.WriteLine("created contact " + contact.Firstname);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 contact.Contactid = _dynamicsClient.GetCreatedRecord(odee, "Error creating contact");
             }
@@ -137,14 +138,14 @@ namespace DataTool
                 {
                     _dynamicsClient.Contacts.Update(contact.Contactid, patchUserContact);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     //_logger.LogError(LoggingEvents.Error, "Error binding contact to account");
                     //_logger.LogError("Request:");
                     Console.Out.WriteLine(odee.Request.Content);
                     //_logger.LogError("Response:");
                     Console.Out.WriteLine(odee.Response.Content);
-                    throw new OdataerrorException("Error binding contact to account");
+                    throw new HttpOperationException("Error binding contact to account");
                 }
             }
         }
@@ -242,7 +243,7 @@ namespace DataTool
                 account = _dynamicsClient.Accounts.Create(newItem);
                 Console.Out.WriteLine("created account " + account.Name);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 account.Accountid = _dynamicsClient.GetCreatedRecord(odee, "Error creating account");
             }
@@ -341,7 +342,7 @@ namespace DataTool
                 worker = _dynamicsClient.Workers.Create(newItem);
                 Console.Out.WriteLine("created worker " + newItem.AdoxioFirstname + " " + newItem.AdoxioLastname);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 worker.AdoxioWorkerid = _dynamicsClient.GetCreatedRecord(odee, "Error creating worker");
             }
@@ -435,7 +436,7 @@ namespace DataTool
                 alias = _dynamicsClient.Aliases.Create(newAlias);
                 Console.Out.WriteLine("created alias " + alias.AdoxioName);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 alias.AdoxioAliasid = _dynamicsClient.GetCreatedRecord(odee, "Error creating contact");
             }
@@ -449,7 +450,7 @@ namespace DataTool
                 {
                     _dynamicsClient.Aliases.Update(newAlias.AdoxioAliasid, patchAlias);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.WriteLine("Error updating alias");
                     Console.WriteLine(odee.Message);
@@ -548,7 +549,7 @@ namespace DataTool
                 localGovIndigenousNation = _dynamicsClient.Localgovindigenousnations.Create(newLocalGovIndigenousNation);
                 Console.Out.WriteLine("created LocalGovIndigenousNation " + localGovIndigenousNation.AdoxioName);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 localGovIndigenousNation.AdoxioLocalgovindigenousnationid = _dynamicsClient.GetCreatedRecord(odee, "Error creating lgin record");
             }
@@ -650,25 +651,17 @@ namespace DataTool
                 AdoxioDatefirstyearpaymentreceived = application.AdoxioDatefirstyearpaymentreceived,
                 AdoxioPolicedecision = application.AdoxioPolicedecision,
                 AdoxioEstablishmentotherbusinessname = application.AdoxioEstablishmentotherbusinessname,
-                AdoxioUploadedfloorplans = application.AdoxioUploadedfloorplans,
-                AdoxioSignaturedate = application.AdoxioSignaturedate,
-                AdoxioChecklisttiedhouseassessed = application.AdoxioChecklisttiedhouseassessed,
                 AdoxioChecklistspdconsentreceived = application.AdoxioChecklistspdconsentreceived,
                 AdoxioAreyouthemaincontactafterlicensing = application.AdoxioAreyouthemaincontactafterlicensing,
-                AdoxioAppchecklistvalidinterestreceivedfinal = application.AdoxioAppchecklistvalidinterestreceivedfinal,
                 AdoxioDateaip = application.AdoxioDateaip,
                 AdoxioChecklistverifypostalcode = application.AdoxioChecklistverifypostalcode,
                 AdoxioChecklistfloorplanapproved = application.AdoxioChecklistfloorplanapproved,
                 AdoxioTerminatereason = application.AdoxioTerminatereason,
-                AdoxioChecklistfloorplanassessed = application.AdoxioChecklistfloorplanassessed,
                 AdoxioDatereceivedinvestigations = application.AdoxioDatereceivedinvestigations,
                 AdoxioEstablishmentlocatedatwinery = application.AdoxioEstablishmentlocatedatwinery,
                 AdoxioChecklistsitemapreceived = application.AdoxioChecklistsitemapreceived,
                 AdoxioDateaipexpired = application.AdoxioDateaipexpired,
-                AdoxioAppchecklistfinalreviewcomplete = application.AdoxioAppchecklistfinalreviewcomplete,
                 AdoxioDatereceivedlgin = application.AdoxioDatereceivedlgin,
-                AdoxioChecklistbrandingassessed = application.AdoxioChecklistbrandingassessed,
-                AdoxioAppchecklistverifyapplication = application.AdoxioAppchecklistverifyapplication,
                 AdoxioLicenceexpiry = application.AdoxioLicenceexpiry,
                 AdoxioChecklistlicencefeepaid = application.AdoxioChecklistlicencefeepaid,
                 AdoxioOtherbusinessesatthesamelocation = application.AdoxioOtherbusinessesatthesamelocation,
@@ -679,9 +672,7 @@ namespace DataTool
                 AdoxioAppchecklistinspectionreviewcomplete = application.AdoxioAppchecklistinspectionreviewcomplete,
                 AdoxioEstablishmentdeclarationoption1 = application.AdoxioEstablishmentdeclarationoption1,
                 AdoxioChecklistsenttolgin = application.AdoxioChecklistsenttolgin,
-                AdoxioHastiedhouseassociations = application.AdoxioHastiedhouseassociations,
                 AdoxioEstablishmentcomplytoallbylaws = application.AdoxioEstablishmentcomplytoallbylaws,
-                AdoxioChecklistvalidinterestassessed = application.AdoxioChecklistvalidinterestassessed,
                 AdoxioCasemanagerassigned = application.AdoxioCasemanagerassigned,
                 
 
@@ -724,7 +715,7 @@ namespace DataTool
                 newItem = _dynamicsClient.Applications.Create(newItem);
                 Console.Out.WriteLine("created application " + newItem.AdoxioName);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 newItem.AdoxioApplicationid = _dynamicsClient.GetCreatedRecord(odee, "Error creating application");
             }
@@ -742,7 +733,7 @@ namespace DataTool
                 {
                     _dynamicsClient.Applications.Update(newItem.AdoxioApplicationid, invoiceLinkItem);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.WriteLine("Error updating invoice for application");
                     Console.WriteLine(odee.Message);
@@ -763,7 +754,7 @@ namespace DataTool
                 {
                     _dynamicsClient.Applications.Update(newItem.AdoxioApplicationid, invoiceLinkItem);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.WriteLine("Error updating licence invoice for application");
                     Console.WriteLine(odee.Message);
@@ -783,7 +774,7 @@ namespace DataTool
                 {
                     _dynamicsClient.Applications.Update(newItem.AdoxioApplicationid, invoiceLinkItem);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.WriteLine("Error updating assigned licence for application");
                     Console.WriteLine(odee.Message);
@@ -804,7 +795,7 @@ namespace DataTool
                 {
                     _dynamicsClient.Applications.Update(newItem.AdoxioApplicationid, localGovLinkItem);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.WriteLine("Error updating local government for application");
                     Console.WriteLine(odee.Message);
@@ -869,7 +860,6 @@ namespace DataTool
                 {
                     if (
                             item.AdoxioName == licence.AdoxioName
-                            && (item.AdoxioAccountId == null || (item.AdoxioAccountId != null && licence.AdoxioAccountId != null && item.AdoxioAccountId.Accountid == licence.AdoxioAccountId.Accountid))
                             && (item.AdoxioEffectivedate == licence.AdoxioEffectivedate)
                        )
                     {
@@ -890,10 +880,7 @@ namespace DataTool
             string licenceeId = null;
 
 
-            if (licence.AdoxioAccountId != null)
-            {
-                accountId = licence.AdoxioAccountId.Accountid;
-            }
+           
             if (licence.AdoxioEstablishment != null)
             {
                 establishmentId = licence.AdoxioEstablishment.AdoxioEstablishmentid;
@@ -922,7 +909,7 @@ namespace DataTool
                 licence = _dynamicsClient.Licenceses.Create(newLicence);
                 Console.Out.WriteLine("Created licence " + licence.AdoxioName);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 licence.AdoxioLicencesid = _dynamicsClient.GetCreatedRecord(odee, "Error creating contact");
             }
@@ -938,7 +925,7 @@ namespace DataTool
                     _dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, patchLicence);
                     Console.Out.WriteLine("Updated licence " + licence.AdoxioName);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.WriteLine("Error updating licence");
                     Console.WriteLine(odee.Message);
@@ -959,7 +946,7 @@ namespace DataTool
                     _dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, patchLicence);
                     Console.Out.WriteLine("Updated licence " + licence.AdoxioName);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.WriteLine("Error updating licence");
                     Console.WriteLine(odee.Message);
@@ -980,7 +967,7 @@ namespace DataTool
                     _dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, patchLicence);
                     Console.Out.WriteLine("Updated licence " + licence.AdoxioName);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.WriteLine("Error updating licence");
                     Console.WriteLine(odee.Message);
@@ -1001,7 +988,7 @@ namespace DataTool
                     _dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, patchLicence);
                     Console.Out.WriteLine("Updated licence " + licence.AdoxioName);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.WriteLine("Error updating licence");
                     Console.WriteLine(odee.Message);
@@ -1028,10 +1015,6 @@ namespace DataTool
 
             foreach (var licence in licences)
             {
-                if (licence.AdoxioAccountId != null && licence.AdoxioAccountId.Accountid != null)
-                {
-                    licence.AdoxioAccountId.Accountid = AccountMap[licence.AdoxioAccountId.Accountid];
-                }
 
                 string originalKey = licence.AdoxioLicencesid;
                 if (LicenceNotFound(currentLicences, licence))
@@ -1133,7 +1116,7 @@ namespace DataTool
                 legalEntity = _dynamicsClient.Legalentities.Create(newLegalEntity);
                 Console.Out.WriteLine("Created legalEntity " + legalEntity.AdoxioName);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 legalEntity.AdoxioLegalentityid = _dynamicsClient.GetCreatedRecord(odee, "Error creating legal entity");
             }
@@ -1150,7 +1133,7 @@ namespace DataTool
                     _dynamicsClient.Legalentities.Update(legalEntity.AdoxioLegalentityid, patchLegalEntity);
                     Console.Out.WriteLine("Updated legalentities " + legalEntity.AdoxioName);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.WriteLine("Error updated legalEntity");
                     Console.WriteLine(odee.Message);
@@ -1286,31 +1269,12 @@ namespace DataTool
                 establishment = _dynamicsClient.Establishments.Create(newEstablishment);
                 Console.Out.WriteLine("Created establishment " + establishment.AdoxioName);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 establishment.AdoxioEstablishmentid = _dynamicsClient.GetCreatedRecord(odee, "Error creating legal entity");
             }
 
-            if (accountId != null)
-            {
-                var patchEstablishment = new MicrosoftDynamicsCRMadoxioEstablishment()
-                {
-                    AdoxioLicenceeODataBind = _dynamicsClient.GetEntityURI("accounts", AccountMap[accountId])
-                };
-
-                try
-                {
-                    _dynamicsClient.Establishments.Update(establishment.AdoxioEstablishmentid, patchEstablishment);
-                    Console.Out.WriteLine("Updated establishment " + establishment.AdoxioName);
-                }
-                catch (OdataerrorException odee)
-                {
-                    Console.WriteLine("Error updated establishment");
-                    Console.WriteLine(odee.Message);
-                    Console.WriteLine(odee.Request.Content);
-                    Console.WriteLine(odee.Response.Content);
-                }
-            }
+            
 
         }
 
@@ -1408,7 +1372,7 @@ namespace DataTool
                 invoice = _dynamicsClient.Invoices.Create(newInvoice);
                 Console.Out.WriteLine("created invoice " + invoice.Name);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 invoice.Invoiceid = _dynamicsClient.GetCreatedRecord(odee, "Error creating contact");
             }
