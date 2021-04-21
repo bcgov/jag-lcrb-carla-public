@@ -1037,19 +1037,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Rename a file
+        /// Rename a file.  Note that this only works for files with relatively short names due to the max URL length.  It may be possible to allow that to work by using @variables in the URL.
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
         public async Task<bool> RenameFile(string oldServerRelativeUrl, string newServerRelativeUrl)
         {
             bool result = false;
-            string url = $"{ApiEndpoint}web/GetFileByServerRelativeUrl('{EscapeApostrophe(oldServerRelativeUrl)}')/moveto(newurl='{newServerRelativeUrl}', flags=1)";
-
+            string url = $"{ApiEndpoint}web/GetFileByServerRelativeUrl('{EscapeApostrophe(oldServerRelativeUrl)}')/moveto(newurl='{EscapeApostrophe(newServerRelativeUrl)}', flags=1)";
             HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, url);
 
-            // We want to delete this file.
-            endpointRequest.Headers.Add("IF-MATCH", "*");
 
             // make the request.
             var response = await _Client.SendAsync(endpointRequest);
@@ -1065,7 +1062,6 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
-
                 endpointRequest.Dispose();
                 if (response != null)
                 {
