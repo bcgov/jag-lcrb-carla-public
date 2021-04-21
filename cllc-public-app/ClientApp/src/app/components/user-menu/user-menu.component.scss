@@ -1,0 +1,7 @@
+.user-menu {
+  color: #ffffff;
+  background-color: none;
+  a.mat-menu-item:focus {
+    outline: none !important;
+  }
+}
