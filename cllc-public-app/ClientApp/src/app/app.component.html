@@ -21,7 +21,8 @@
       </span>
     </section>
     <section class="col-md-4 col-xs-12 sign-container">
-      <span class="sign" *ngIf="currentUser">
+      <app-user-menu class="float-right" [currentUser]="currentUser"></app-user-menu>
+      <!-- <span class="sign" *ngIf="currentUser">
         <a *ngIf="currentUser.userType == 'Business'" routerLink="/account-profile" class="profile-link">{{currentUser.name}}</a>
 
         <a appRemoveIfFeatureOff="Sep" *ngIf="currentUser.userType == 'VerifiedIndividual'" routerLink="/servicecard-profile" class="profile-link">{{currentUser.name}}</a>
@@ -34,7 +35,7 @@
         </span>
         <br/>
         <span>{{currentUser.businessname}}</span>
-      </span>
+      </span> -->
       <span class="sign" *ngIf="!currentUser">
         <span appRemoveIfFeatureOff="DisableLogin" class="text-right signin">
           <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>

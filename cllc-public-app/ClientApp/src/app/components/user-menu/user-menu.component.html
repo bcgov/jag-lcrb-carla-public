@@ -1,0 +1,18 @@
+<div class="user-menu">
+  <button class="user-button" mat-button [matMenuTriggerFor]="userMenu">
+    <fa-icon [icon]="faUserCircle" size="lg"></fa-icon>
+    <span class="ml-2">{{currentUser?.name}}</span>
+    <fa-icon [icon]="faChevronDown" class="float-right mr-2"></fa-icon>
+    <fa-icon [icon]="faChevronUp" class="float-right mr-2 d-none"></fa-icon>
+  </button>
+  <mat-menu #userMenu="matMenu">
+    <a mat-menu-item *ngIf="currentUser?.userType == 'Business'" routerLink="/account-profile">
+      Manage account
+    </a>
+    <a mat-menu-item appRemoveIfFeatureOff="Sep" *ngIf="currentUser.userType == 'VerifiedIndividual'"
+      routerLink="/servicecard-profile">
+      Manage account
+    </a>
+    <a mat-menu-item href="logout">Sign out</a>
+  </mat-menu>
+</div>
