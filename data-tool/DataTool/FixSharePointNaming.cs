@@ -119,74 +119,88 @@ namespace DataTool
                     }
                 }
                 Console.Out.WriteLine($"Currently on licence {currentCount} of {totalCount}");
-                var licences = licencesQuery.Body.Value;
-                
-
-                foreach (var licence in licences)
+                if (licencesQuery?.Body?.Value != null)
                 {
-                    bool isInRange = false;
-                    int licenceNumber = -1;
-                    int.TryParse(licence.AdoxioLicencenumber, out licenceNumber);
-                    
-                    if (licenceNumber >= 1114 && licenceNumber <= 18573)
-                    {
-                        isInRange = true;
-                        //Console.Out.WriteLine($"Licence #{licenceNumber}");
-                    }
-                        currentCount++;
-                    string folderName = licence.GetDocumentFolderName();
-                    if (licence.AdoxioLicencesSharePointDocumentLocations != null &&
-                        licence.AdoxioLicencesSharePointDocumentLocations.Count > 0 &&
-                        licence.AdoxioLicencesSharePointDocumentLocations[0].Relativeurl != null)
-                    {
-                        folderName = licence.AdoxioLicencesSharePointDocumentLocations[0].Relativeurl;
-                    }
+                    var licences = licencesQuery.Body.Value;
 
-                    List<FileDetailsList> fileList = null;
-                    try
-                    {
-                        fileList = sharePoint.GetFileDetailsListInFolder(SharePointFileManager.LicenceDocumentUrlTitle,
-                                folderName, null)
-                            .GetAwaiter().GetResult();
-                    }
-                    catch (Exception e)
-                    {
-                        // Console.WriteLine($"Folder not found [{folderName}]");
-                    }
 
-                    if (fileList != null && fileList.Count > 0)
+                    foreach (var licence in licences)
                     {
-                        //Console.WriteLine($"Found {fileList.Count} Files.");
-                        foreach (var file in fileList)
+                        bool isInRange = false;
+                        int licenceNumber = -1;
+                        int.TryParse(licence.AdoxioLicencenumber, out licenceNumber);
+
+                        if (licenceNumber >= 1114 && licenceNumber <= 18573)
                         {
-                            if (isInRange)
-                            {
-                                // Console.Out.WriteLine($"Current filename: {file.Name}");
-                            }
+                            isInRange = true;
+                            //Console.Out.WriteLine($"Licence #{licenceNumber}");
+                        }
+                        currentCount++;
+                        string folderName = licence.GetDocumentFolderName();
+                        if (licence.AdoxioLicencesSharePointDocumentLocations != null &&
+                            licence.AdoxioLicencesSharePointDocumentLocations.Count > 0 &&
+                            licence.AdoxioLicencesSharePointDocumentLocations[0].Relativeurl != null)
+                        {
+                            folderName = licence.AdoxioLicencesSharePointDocumentLocations[0].Relativeurl;
+                        }
 
-                            if (IsSuspect(file.Name))
+                        List<FileDetailsList> fileList = null;
+                        try
+                        {
+                            fileList = sharePoint.GetFileDetailsListInFolder(SharePointFileManager.LicenceDocumentUrlTitle,
+                                    folderName, null)
+                                .GetAwaiter().GetResult();
+                        }
+                        catch (Exception e)
+                        {
+                            // Console.WriteLine($"Folder not found [{folderName}]");
+                        }
+
+                        if (fileList != null && fileList.Count > 0)
+                        {
+                            //Console.WriteLine($"Found {fileList.Count} Files.");
+                            foreach (var file in fileList)
                             {
-                                
-                                string newName = FixName(file.Name);
-                                if (newName != null)
+                                if (isInRange)
                                 {
-                                    Console.Out.WriteLine($"Filename {file.Name} is suspect.");
-                                    Console.Out.WriteLine($"New name is {newName}");
+                                    // Console.Out.WriteLine($"Current filename: {file.Name}");
+                                }
 
-                                    string oldFileName =
-                                        $"{SharePointFileManager.LicenceDocumentUrlTitle}/{folderName}/{file.Name}";
-                                    string newFileName = $"{SharePointFileManager.LicenceDocumentUrlTitle}/{folderName}/{newName}";
-                                    Console.Out.WriteLine($"Rename File {oldFileName} to {newFileName}");
-                                    sharePoint.RenameFile(oldFileName, newFileName).GetAwaiter().GetResult();
-                                    renameCount++;
+                                if (IsSuspect(file.Name))
+                                {
+
+                                    string newName = FixName(file.Name);
+                                    if (newName != null)
+                                    {
+                                        Console.Out.WriteLine($"Filename {file.Name} is suspect.");
+                                        Console.Out.WriteLine($"New name is {newName}");
+
+                                        string oldFileName =
+                                            $"/{SharePointFileManager.LicenceDocumentUrlTitle}/{folderName}/{file.Name}";
+                                        string newFileName = $"{SharePointFileManager.LicenceDocumentUrlTitle}/{folderName}/{newName}";
+                                        Console.Out.WriteLine($"Rename File {oldFileName} to {newFileName}");
+                                        byte[] data = sharePoint.DownloadFile(oldFileName).GetAwaiter().GetResult();
+                                        if (data != null)
+                                        {
+                                            var success = sharePoint.UploadFile(newName,
+                                                    SharePointFileManager.LicenceDocumentUrlTitle, folderName, data, "application/pdf").GetAwaiter().GetResult();
+                                            if (success != null)
+                                            {
+                                                // cleanup the old file.
+                                                sharePoint.DeleteFile(oldFileName).GetAwaiter().GetResult();
+                                                Console.Out.WriteLine($"Rename File Complete");
+                                            }
+
+                                        }
+
+                                        renameCount++;
+                                    }
                                 }
                             }
                         }
                     }
                 }
 
-               
-               
             }
             Console.Out.WriteLine($"Licence count is {totalCount}");
             Console.Out.WriteLine($"Rename count is {renameCount}");
