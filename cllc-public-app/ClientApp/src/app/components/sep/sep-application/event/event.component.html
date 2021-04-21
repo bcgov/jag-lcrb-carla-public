@@ -45,214 +45,246 @@
             </mat-radio-group>
         </app-field>
 
-        <mat-divider></mat-divider>
         <section formGroupName="locations">
-            <mat-card [formGroupName]="i" *ngFor="let location of locations.controls; let i = index;">
-                <mat-card-header>
-                    <fa-icon [icon]="faMapMarkerAlt" mat-card-avatar>
 
-                    </fa-icon>
-                    <mat-card-title>Location {{i + 1}}</mat-card-title>
-                </mat-card-header>
-
-                <div class="d-flex justify-content-between">
-                    <app-field label="Event Location Name" [required]="true"
-                        [valid]="!location.get('locationName').touched || location.get('locationName').valid"
-                        errorMessage="Name can't be blank">
-                        <input type="text" formControlName="locationName" class="form-control">
-                    </app-field>
-                    <div>
-                        <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()"
-                            matTooltip="For example: community centre, sports field, wedding hall etc."
-                            #tooltip="matTooltip">
-                        </fa-icon>
-                    </div>
-                </div>
-                <app-field label="Venue Type" [required]="true"
-                    [valid]="!location.get('venueType').touched || location.get('venueType').valid"
-                    errorMessage="Please enter a value">
-                    <input type="text" formControlName="venueType" class="form-control"
-                        placeholder="For example, community centre, convention centre, banquet hall">
-                </app-field>
-                <app-field label="Address Line 1" [required]="true"
-                    [valid]="!location.get('eventLocationStreet1').touched || location.get('eventLocationStreet1').valid"
-                    errorMessage="Address line 1 can't be blank">
-                    <input type="text" formControlName="eventLocationStreet1" class="form-control">
-                </app-field>
-                <app-field label="Address Line 2">
-                    <input type="text" formControlName="eventLocationStreet2" class="form-control">
-                </app-field>
-                <app-field label="Postal Code" [required]="true"
-                    [valid]="!location.get('eventLocationPostalCode').touched || location.get('eventLocationPostalCode').valid"
-                    errorMessage="Postal code is in the wrong format 'X3X 9Y9'">
-                    <input type="text" formControlName="eventLocationPostalCode" class="form-control">
-                </app-field>
-                <app-field label="Maximum number of guests at this location at any time" [required]="true"
-                    [valid]="!location.get('locationMaxGuests').touched || location.get('locationMaxGuests').valid"
-                    errorMessage="Name can't be blank">
-                    <mat-radio-group formControlName="locationMaxGuests">
-                        <mat-radio-button color="primary" class="mr-3" value="indoors">Indoors</mat-radio-button>
-                        <mat-radio-button color="primary" class="mr-3" value="outdoors">Outdoors</mat-radio-button>
-                        <mat-radio-button color="primary" class="mr-3" value="both">Both</mat-radio-button>
-                    </mat-radio-group>
-                </app-field>
-
-                <mat-divider></mat-divider>
-                <section formGroupName="serviceAreas">
-                    <mat-card>
-                        <h3>Service Areas</h3>
-                        <mat-accordion multi>
-                            <mat-expansion-panel [formGroupName]="j"
-                                *ngFor="let area of getServiceAreas(locations.at(i)); let j = index;">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        {{ area.get('description').value }}
-                                    </mat-panel-title>
-                                    <mat-panel-title>
-                                        Guests : {{area.get('numAreaMaxGuests').value }}
-                                    </mat-panel-title>
-                                    <mat-panel-title>
-                                        Minors present
-                                    </mat-panel-title>
-
-                                </mat-expansion-panel-header>
-                                <div class="d-flex justify-content-between">
-                                    <section>
-                                        <app-field
-                                            label="Describe the area(s) where liquor will be served, sold and consumed">
-                                            <p>
-                                                The area within the event location where liquor will be consumed by
-                                                guests at
-                                                any time
-                                                i.e.
-                                                beverage garden, bar area, courtyard, etc.
-                                            </p>
-                                            <input type="text" formControlName="description" class="form-control"
-                                                placeholder="For example, beverage garden, bar area, courtyard, etc.">
-                                        </app-field>
-                                        <app-field
-                                            label="Maximum number of guests in the service area at any given time">
-                                            <input type="text" formControlName="numAreaMaxGuests" class="form-control">
-                                        </app-field>
-                                        <app-field label="Will minors be in the service area?">
-                                            <mat-radio-group formControlName="isMinorsPresent">
-                                                <mat-radio-button color="primary" class="mr-3" [value]="true">Yes
-                                                </mat-radio-button>
-                                                <mat-radio-button color="primary" class="mr-3" [value]="false">No
-                                                </mat-radio-button>
-                                            </mat-radio-group>
-                                        </app-field>
-                                    </section>
-                                    <div>
-                                        <button mat-raised-button color="warn">Remove Area</button>
-                                    </div>
+            <mat-accordion multi>
+                <mat-expansion-panel [expanded]="true" [formGroupName]="i" class="location-panel"
+                    *ngFor="let location of locations.controls; let i = index;">
+                    <!-- <mat-expansion-panel-header> -->
+                        <h3>
+                            <fa-icon [icon]="faMapMarkerAlt" mat-card-avatar></fa-icon>
+                            Location {{i + 1}}
+                        </h3>
+                    <!-- </mat-expansion-panel-header> -->
+                    <div class="d-flex justify-content-between">
+                        <mat-card class="mat-elevation-z0 location-panel">
+                            <div class="d-flex justify-content-between">
+                                <app-field label="Event Location Name" [required]="true"
+                                    [valid]="!location.get('locationName').touched || location.get('locationName').valid"
+                                    errorMessage="Name can't be blank">
+                                    <input type="text" formControlName="locationName" class="form-control">
+                                </app-field>
+                                <div>
+                                    <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()"
+                                        matTooltip="For example: community centre, sports field, wedding hall etc."
+                                        #tooltip="matTooltip">
+                                    </fa-icon>
                                 </div>
-                            </mat-expansion-panel>
-                        </mat-accordion>
-                        <button mat-raised-button color="secondary" class="mt-3"
-                            (click)="addServiceArea({}, location.get('serviceAreas'))">Add Service Area</button>
-                    </mat-card>
-                </section>
+                            </div>
+                            <app-field label="Venue Type" [required]="true"
+                                [valid]="!location.get('venueType').touched || location.get('venueType').valid"
+                                errorMessage="Please enter a value">
+                                <input type="text" formControlName="venueType" class="form-control"
+                                    placeholder="For example, community centre, convention centre, banquet hall">
+                            </app-field>
+                            <app-field label="Address Line 1" [required]="true"
+                                [valid]="!location.get('eventLocationStreet1').touched || location.get('eventLocationStreet1').valid"
+                                errorMessage="Address line 1 can't be blank">
+                                <input type="text" formControlName="eventLocationStreet1" class="form-control">
+                            </app-field>
+                            <app-field label="Address Line 2">
+                                <input type="text" formControlName="eventLocationStreet2" class="form-control">
+                            </app-field>
+                            <app-field label="Postal Code" [required]="true"
+                                [valid]="!location.get('eventLocationPostalCode').touched || location.get('eventLocationPostalCode').valid"
+                                errorMessage="Postal code is in the wrong format 'X3X 9Y9'">
+                                <input type="text" formControlName="eventLocationPostalCode" class="form-control">
+                            </app-field>
+                            <app-field label="Maximum number of guests at this location at any time" [required]="true"
+                                [valid]="!location.get('locationMaxGuests').touched || location.get('locationMaxGuests').valid"
+                                errorMessage="Name can't be blank">
+                                <mat-radio-group formControlName="locationMaxGuests">
+                                    <mat-radio-button color="primary" class="mr-3" value="indoors">Indoors
+                                    </mat-radio-button>
+                                    <mat-radio-button color="primary" class="mr-3" value="outdoors">Outdoors
+                                    </mat-radio-button>
+                                    <mat-radio-button color="primary" class="mr-3" value="both">Both
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </app-field>
 
-                <mat-card style="margin-top: 16px;" formGroupName="eventDates">
-                    <h3>Event Date(s)</h3>
-                    <p>
-                        The start time of an event is the time when guests are first admitted to the event venue; e.g.,
-                        when the doors to the theatre open before the performance or the stadium opens before the game
-                        to allow
-                        time for the audience to be admitted and seated.
-                    </p>
-                    <p>
-                        Permitted event times are: Indoor events: 9:00a.m. ? 2:00 a.m. the following day Outdoor events:
-                        9:00a.m. ? 10:00p.m. the same day Under very limited circumstances, you may receive permission
-                        from the Liquor and Cannabis Regulation Branch to extend these hours.
-                    </p>
+                            <section formGroupName="serviceAreas">
+                                <mat-card class="mat-elevation-z0">
+                                    <h3>Service Areas</h3>
+                                    <mat-accordion multi>
+                                        <mat-expansion-panel [expanded]="true" [formGroupName]="j"
+                                            *ngFor="let area of getServiceAreas(i).controls; let j = index;">
+                                            <!-- <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    {{ area.get('description').value }}
+                                                </mat-panel-title>
+                                                <mat-panel-title>
+                                                    Guests : {{area.get('numAreaMaxGuests').value }}
+                                                </mat-panel-title>
+                                                <mat-panel-title>
+                                                    Minors present
+                                                </mat-panel-title>
 
-                    <mat-accordion class="example-headers-align" multi>
-                        <mat-expansion-panel [formGroupName]="k"
-                            *ngFor="let area of getEventDates(locations.at(i)); let k = index;">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    Event Date: {{ area.get('eventDate').value | date}}
-                                    <br>
-                                    Event Times: 7:00 PM - 11: 30 PM
-                                </mat-panel-title>
-                                <mat-panel-title>
-                                    Liquor will be served: 7:00 PM - 11: 30 PM
-                                </mat-panel-title>
-                                <mat-panel-title>
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
+                                            </mat-expansion-panel-header> -->
+                                            <br>
+                                            <div class="d-flex justify-content-between">
+                                                <section>
+                                                    <app-field
+                                                        label="Describe the area(s) where liquor will be served, sold and consumed">
+                                                        <p>
+                                                            The area within the event location where liquor will be
+                                                            consumed by
+                                                            guests at
+                                                            any time
+                                                            i.e.
+                                                            beverage garden, bar area, courtyard, etc.
+                                                        </p>
+                                                        <input type="text" formControlName="description"
+                                                            class="form-control"
+                                                            placeholder="For example, beverage garden, bar area, courtyard, etc.">
+                                                    </app-field>
+                                                    <app-field
+                                                        label="Maximum number of guests in the service area at any given time">
+                                                        <input type="text" formControlName="numAreaMaxGuests"
+                                                            class="form-control">
+                                                    </app-field>
+                                                    <app-field label="Will minors be in the service area?">
+                                                        <mat-radio-group formControlName="isMinorsPresent">
+                                                            <mat-radio-button color="primary" class="mr-3"
+                                                                [value]="true">Yes
+                                                            </mat-radio-button>
+                                                            <mat-radio-button color="primary" class="mr-3"
+                                                                [value]="false">No
+                                                            </mat-radio-button>
+                                                        </mat-radio-group>
+                                                    </app-field>
+                                                </section>
+                                                <div>
+                                                    <button mat-raised-button color="warn"
+                                                        (click)="removeServiceArea(j,i)">Remove
+                                                        Area</button>
+                                                </div>
+                                            </div>
+                                        </mat-expansion-panel>
+                                    </mat-accordion>
+                                    <button mat-raised-button color="secondary" class="mt-3"
+                                        (click)="addServiceArea({}, location.get('serviceAreas'))">Add Service
+                                        Area</button>
+                                </mat-card>
+                            </section>
 
-                            <table class="w-100">
-                                <tr>
-                                    <td>
-                                        <app-field label="Date of your event">
-                                            <input type="text" formControlName="eventDate"
-                                                style="background-color: #fff; width: 200px;" placeholder="yyyy-mm-dd"
-                                                readonly class="form-control" [min]="minDate" [matDatepicker]="picker"
-                                                (focus)="picker.open()" (click)="picker.open()">
-                                            <mat-datepicker #picker></mat-datepicker>
-                                        </app-field>
-                                    </td>
-                                    <td>
-                                        <app-field label="From">
-                                            <select class="form-control">
-                                                <option value=""></option>
-                                                <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
-                                                </option>
-                                            </select>
-                                        </app-field>
-                                    </td>
-                                    <td>
-                                        <app-field label="To">
-                                            <select class="form-control">
-                                                <option value=""></option>
-                                                <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
-                                                </option>
-                                            </select>
-                                        </app-field>
-                                    </td>
-                                    <td class="text-right">
-                                        <button mat-raised-button color="warn">Remove Date</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right">
-                                        <label>Liquor will be served:</label>
-                                    </td>
-                                    <td>
-                                        <app-field label="From">
-                                            <select class="form-control">
-                                                <option value=""></option>
-                                                <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
-                                                </option>
-                                            </select>
-                                        </app-field>
-                                    </td>
-                                    <td>
-                                        <app-field label="To">
-                                            <select class="form-control">
-                                                <option value=""></option>
-                                                <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
-                                                </option>
-                                            </select>
-                                        </app-field>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                        </mat-expansion-panel>
-                    </mat-accordion>
-                    <button mat-raised-button color="secondary" class="mt-3"
-                        (click)="addEventDate({}, location.get('eventDates'))">Add Event Date</button>
-                </mat-card>
-                <mat-divider></mat-divider>
-            </mat-card>
+                            <mat-card formGroupName="eventDates" class="mat-elevation-z0 mt-3">
+                                <h3>Event Date(s)</h3>
+                                <p>
+                                    The start time of an event is the time when guests are first admitted to the
+                                    event venue;
+                                    e.g.,
+                                    when the doors to the theatre open before the performance or the stadium opens
+                                    before the
+                                    game
+                                    to allow
+                                    time for the audience to be admitted and seated.
+                                </p>
+                                <p>
+                                    Permitted event times are: Indoor events: 9:00a.m. ? 2:00 a.m. the following day
+                                    Outdoor
+                                    events:
+                                    9:00a.m. ? 10:00p.m. the same day Under very limited circumstances, you may
+                                    receive
+                                    permission
+                                    from the Liquor and Cannabis Regulation Branch to extend these hours.
+                                </p>
+
+                                <mat-accordion>
+                                    <mat-expansion-panel [expanded]="true" [formGroupName]="k" (opened)="isOpen = true"
+                                    (closed)="isOpen = false"
+                                        *ngFor="let item of getEventDates(i).controls; let isOpen = true; let k = index;">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title  *ngIf="!isOpen">
+                                                Event Date: {{ item.get('eventDate').value | date}}
+                                                <br>
+                                                Event Times: 7:00 PM - 11: 30 PM
+                                            </mat-panel-title>
+                                            <mat-panel-title  *ngIf="!isOpen">
+                                                Liquor will be served: 7:00 PM - 11: 30 PM
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+
+                                        <table class="w-100">
+                                            <tr>
+                                                <td>
+                                                    <app-field label="Date of your event">
+                                                        <input type="text" formControlName="eventDate"
+                                                            style="background-color: #fff; width: 200px;"
+                                                            placeholder="yyyy-mm-dd" readonly class="form-control"
+                                                            [min]="minDate" [matDatepicker]="picker"
+                                                            (focus)="picker.open()" (click)="picker.open()">
+                                                        <mat-datepicker #picker></mat-datepicker>
+                                                    </app-field>
+                                                </td>
+                                                <td>
+                                                    <app-field label="From">
+                                                        <select class="form-control">
+                                                            <option value=""></option>
+                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                {{item.name}}
+                                                            </option>
+                                                        </select>
+                                                    </app-field>
+                                                </td>
+                                                <td>
+                                                    <app-field label="To">
+                                                        <select class="form-control">
+                                                            <option value=""></option>
+                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                {{item.name}}
+                                                            </option>
+                                                        </select>
+                                                    </app-field>
+                                                </td>
+                                                <td class="text-right">
+                                                    <button mat-raised-button color="warn"
+                                                        (click)="removeEventDate(k, i)">Remove
+                                                        Date</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right">
+                                                    <label>Liquor will be served:</label>
+                                                </td>
+                                                <td>
+                                                    <app-field label="From">
+                                                        <select class="form-control">
+                                                            <option value=""></option>
+                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                {{item.name}}
+                                                            </option>
+                                                        </select>
+                                                    </app-field>
+                                                </td>
+                                                <td>
+                                                    <app-field label="To">
+                                                        <select class="form-control">
+                                                            <option value=""></option>
+                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                {{item.name}}
+                                                            </option>
+                                                        </select>
+                                                    </app-field>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                                <button mat-raised-button color="secondary" class="mt-3"
+                                    (click)="addEventDate({}, location.get('eventDates'))">Add Event Date</button>
+                            </mat-card>
+                        </mat-card>
+                        <div>
+                            <button mat-raised-button color="warn" (click)="removeLocation(i)">Remove
+                                Area</button>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <button mat-raised-button color="secondary" class="mt-3" (click)="addLocation()">Add Location</button>
         </section>
     </section>
     <mat-divider></mat-divider>
