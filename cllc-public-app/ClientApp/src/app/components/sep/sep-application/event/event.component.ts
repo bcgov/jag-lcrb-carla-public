@@ -72,18 +72,20 @@ export class EventComponent extends FormBase implements OnInit {
 
   }
 
-  getServiceAreas(location: FormGroup): AbstractControl[] {
-    let result = [];
+  getServiceAreas(locationIndex: number): FormArray {
+    let result = this.fb.array([]);
     if (location) {
-      result = (location.get('serviceAreas') as FormArray).controls;
+      result = this.locations.at(locationIndex)
+        .get('serviceAreas') as FormArray;
     }
     return result;
   }
 
-  getEventDates(location: FormGroup): AbstractControl[] {
-    let result = [];
+  getEventDates(locationIndex: number): FormArray {
+    let result = this.fb.array([]);
     if (location) {
-      result = (location.get('eventDates') as FormArray).controls;
+      result = this.locations.at(locationIndex)
+        .get('eventDates') as FormArray;
     }
     return result;
   }
@@ -124,6 +126,11 @@ export class EventComponent extends FormBase implements OnInit {
     this.locations.push(locationForm);
   }
 
+  
+  removeLocation(locationIndex: number) {
+    this.locations.removeAt(locationIndex);
+  }
+
   addEventDate(eventDate: SepSchedule, eventDates: FormArray) {
     let datesForm = this.fb.group({
       eventDate: [''],
@@ -136,6 +143,12 @@ export class EventComponent extends FormBase implements OnInit {
     eventDates.push(datesForm);
   }
 
+  removeEventDate(eventDateIndex: number, locationIndex: number) {
+    let eventDates = this.locations.at(locationIndex).get('eventDates') as FormArray;
+    eventDates.removeAt(eventDateIndex);
+  }
+
+
   addServiceArea(area: SepServiceArea, serviceAreas: FormArray) {
     let areaForm = this.fb.group({
       description: [''],
@@ -147,6 +160,13 @@ export class EventComponent extends FormBase implements OnInit {
     areaForm.patchValue(area);
     serviceAreas.push(areaForm);
   }
+
+
+  removeServiceArea(serviceAreaIndex: number, locationIndex: number) {
+    let serviceAreas = this.locations.at(locationIndex).get('serviceAreas') as FormArray;
+    serviceAreas.removeAt(serviceAreaIndex);
+  }
+
 
   isValid() {
     this.markControlsAsTouched(this.form);
@@ -167,7 +187,7 @@ export class EventComponent extends FormBase implements OnInit {
         }
         return steps;
       })(this?.sepApplication?.stepsCompleted || []),
-      ...this.form.value
+      ...this.form.value,
     } as SepApplication;
 
     if (data.id) {
