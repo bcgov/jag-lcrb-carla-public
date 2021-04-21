@@ -1,7 +1,7 @@
 <div class="wrapp">
     <h1 class="mat-heading">Eligibility</h1>
 
-    <span class="mat-title">{{application?.eventName}}</span>
+    <span class="mat-title">{{sepApplication?.eventName}}</span>
 
     <div class="mat-subheading-1">Application number: {{application?.id}}</div>
     <p>Tell us about your event. This information is used to determine the eligibility of your event and what type of
@@ -14,8 +14,8 @@
     <h3>Tell us about your event</h3>
     <section [formGroup]="form" style="padding: 16px 32px;">
         <app-field label="Is this event being hosted at a private residence?" [required]="true"
-        [valid]="!form.get('eligibilityAtPrivateResidence').touched || form.get('eligibilityAtPrivateResidence').valid"
-        errorMessage="Events held in a private residence are not eligible for Special Event Permits">
+            [valid]="!form.get('eligibilityAtPrivateResidence').touched || form.get('eligibilityAtPrivateResidence').valid"
+            errorMessage="Events held in a private residence are not eligible for Special Event Permits">
             <mat-radio-group formControlName="eligibilityAtPrivateResidence">
                 <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
                 <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
@@ -31,8 +31,8 @@
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
             <app-field label="Is your event being held on public property?" [required]="true"
-            [valid]="!form.get('eligibilityOnPublicProperty').touched || form.get('eligibilityOnPublicProperty').valid"
-            errorMessage="Is public property Question Can't be blank">
+                [valid]="!form.get('eligibilityOnPublicProperty').touched || form.get('eligibilityOnPublicProperty').valid"
+                errorMessage="Is public property Question Can't be blank">
                 <mat-radio-group formControlName="eligibilityOnPublicProperty">
                     <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
                     <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
@@ -87,8 +87,9 @@
                 </app-error-alert>
                 <br *ngIf="form.get('eligibilityMajorSignificance').value">
                 <app-field *ngIf="form.get('eligibilityMajorSignificance').value" [isFullWidth]="true"
-                    label="Decribe rationale" [required]="true">
-                    <textarea formControlName="eventDescription" class="w-80 form-control" rows="3"></textarea>
+                    label="Describe rationale" [required]="true">
+                    <textarea formControlName="eligibilityMajorSignificanceRationale" class="w-80 form-control"
+                        rows="3"></textarea>
                 </app-field>
             </app-field>
             <div>
@@ -101,7 +102,9 @@
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
-            <app-field label="When does your event start? " [required]="true">
+            <app-field label="When does your event start? " [required]="true"
+            [valid]="!form.get('eventStartDate').touched || form.get('eventStartDate').valid"
+            errorMessage="Event start date is required and cannot be in the past">
                 <input type="text" formControlName="eventStartDate" style="background-color: #fff; width: 200px;"
                     placeholder="yyyy-mm-dd" readonly class="form-control" [min]="minDate" [matDatepicker]="picker"
                     (focus)="picker.open()" (click)="picker.open()">
@@ -125,8 +128,8 @@
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
             <app-field [isFullWidth]="true" label="Is your event private or public?" [required]="true"
-            [valid]="!form.get('eligibilityPrivateOrPublic').touched || form.get('eligibilityPrivateOrPublic').valid"
-            errorMessage="Licence category can't be blank">
+                [valid]="!form.get('eligibilityPrivateOrPublic').touched || form.get('eligibilityPrivateOrPublic').valid"
+                errorMessage="Licence category can't be blank">
                 <select formControlName="eligibilityPrivateOrPublic" class="form-control">
                     <option value=""></option>
                     <option value="2">Private – An organization's members or staff, invited guests and ticket holders
@@ -147,55 +150,60 @@
                 </fa-icon>
             </div>
         </div>
-        <section class="d-flex justify-content-between" style="padding: 0 32px 0 32px;">
-            <app-field style="flex: 1" [isFullWidth]="true"
-                label="What is the name of the organization hosting the event?" [required]="true">
-                <input class="form-control w-100">
-            </app-field>
-            <div>
-                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3a.toggle()"
-                    matTooltip="Responsible beverage service (RBS) programs educate permittees, managers and servers about their responsibilities when serving alcohol 
+        <ng-container *ngIf="this.form.get('eligibilityPrivateOrPublic').value && this.form.get('eligibilityPrivateOrPublic').value !== '1'">
+            <section class="d-flex justify-content-between" style="padding: 0 32px 0 32px;">
+                <app-field style="flex: 1" [isFullWidth]="true"
+                    label="What is the name of the organization hosting the event?" [required]="true">
+                    <input formControlName="hostingOrganizationName" class="form-control w-100">
+                </app-field>
+                <div>
+                    <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3a.toggle()"
+                        matTooltip="Responsible beverage service (RBS) programs educate permittees, managers and servers about their responsibilities when serving alcohol 
                     and provide effective techniques to prevent problems related to liquor service. An online self-study course is available to anyone to complete and 
                     obtain the SIR or SES certificate. The SEP applicant must possess certification before the event starts. RBS certification is required for all events, 
                     including family events.  the Serving it Right website for more information or to complete the course online." #tooltip3a="matTooltip">
-                </fa-icon>
-            </div>
-        </section>
-        <section style="padding: 0 50px 0 32px;">
-            <app-field [isFullWidth]="true" label="What is the address of the organization?" [required]="true">
-                <input class="form-control w-100">
-            </app-field>
-        </section>
-        <section class="d-flex justify-content-between" style="padding: 0 32px 0 32px;">
-            <app-field style="flex: 1" [isFullWidth]="true"
-                label="Select a category that best describes your organization " [required]="true">
-                <i>Before selecting a category, please read tool tip</i>
-                <select class="form-control w-100">
-                    <option value=""></option>
-                    <option value="incorporated_non_profit">Incorporated Non-profit organization</option>
-                    <option value="unincorporated_non_profit">Unincorporated Non-profit organization</option>
-                    <option value="incorporated_business_or_partnership">Incorporated Business or Partnership</option>
-                    <option value="unincorporated_business">Unincorporated Business</option>
-                    <option value="government_or_public_organization">Government or Public organization</option>
-                </select>
-            </app-field>
-            <div>
-                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3b.toggle()" matTooltip="If you are not sure, please confirm which category your organization falls under with a senior manager or board member before completing the application.
+                    </fa-icon>
+                </div>
+            </section>
+            <section style="padding: 0 50px 0 32px;">
+                <app-field [isFullWidth]="true" label="What is the address of the organization?" [required]="true">
+                    <input formControlName="hostingOrganizationAddress" class="form-control w-100">
+                </app-field>
+            </section>
+            <section class="d-flex justify-content-between" style="padding: 0 32px 0 32px;">
+                <app-field style="flex: 1" [isFullWidth]="true"
+                    label="Select a category that best describes your organization " [required]="true">
+                    <i>Before selecting a category, please read tool tip</i>
+                    <select formControlName="hostingOrganizationCategory" class="form-control w-100">
+                        <option value=""></option>
+                        <option value="incorporated_non_profit">Incorporated Non-profit organization</option>
+                        <option value="unincorporated_non_profit">Unincorporated Non-profit organization</option>
+                        <option value="incorporated_business_or_partnership">Incorporated Business or Partnership
+                        </option>
+                        <option value="unincorporated_business">Unincorporated Business</option>
+                        <option value="government_or_public_organization">Government or Public organization</option>
+                    </select>
+                </app-field>
+                <div>
+                    <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3b.toggle()" matTooltip="If you are not sure, please confirm which category your organization falls under with a senior manager or board member before completing the application.
                     It is extremely important for you to know what category your organization falls under because the permittee is subject to legal and financial obligations. Whether the 
                     proper permittee is an individual or an organization depends on the type of organization.
                     Entering the wrong type of organization could result in an individual being held legally responsible for any contraventions when it should have been the organization, 
                     or it will cause issues regarding PST payment and/or PST rebate." #tooltip3b="matTooltip">
-                </fa-icon>
-            </div>
-        </section>
+                    </fa-icon>
+                </div>
+            </section>
+        </ng-container>
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
             <app-field label="Responsible Beverage Service Number (SIR or SES)" [required]="true"
-            [valid]="!form.get('eligibilityResponsibleBevServiceNumber').touched || form.get('eligibilityResponsibleBevServiceNumber').valid"
-            errorMessage="Responsible Beverage Service Number (SIR or SES) must be entered to continue.">
-                <input formControlName="eligibilityResponsibleBevServiceNumber" type="text" class="form-control">
-                <mat-checkbox class="mt-2" formControlName="eligibilityResponsibleBevServiceNumberDoesNotHave" color="primary">
+                [valid]="!form.get('eligibilityResponsibleBevServiceNumber').touched || form.get('eligibilityResponsibleBevServiceNumber').valid"
+                errorMessage="Responsible Beverage Service Number (SIR or SES) must be entered to continue.">
+                <input formControlName="eligibilityResponsibleBevServiceNumber" maxlength="6" type="text"
+                    class="form-control">
+                <mat-checkbox class="mt-2" formControlName="eligibilityResponsibleBevServiceNumberDoesNotHave"
+                    color="primary">
                     I don’t have a BC Responsible Beverage Service Certificate Number
                 </mat-checkbox>
                 <app-error-alert *ngIf="form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').value">
@@ -218,7 +226,8 @@
                 label="What’s the occasion of your event? (maximum 255 characters) " [required]="true"
                 [valid]="!form.get('eventDescription').touched || form.get('eventDescription').valid"
                 errorMessage="Family event description can't be blank">
-                <textarea formControlName="eventDescription" class="w-100 form-control" rows="5"></textarea>
+                <textarea maxlength="255" formControlName="eventDescription" class="w-100 form-control"
+                    rows="5"></textarea>
             </app-field>
             <div>
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip5.toggle()"
@@ -234,8 +243,8 @@
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
             <app-field label="Are you charging an event admission price?" [required]="true"
-            [valid]="!form.get('eligibilityChargingAdmission').touched || form.get('eligibilityChargingAdmission').valid"
-            errorMessage="Licence exists is not included in the list">
+                [valid]="!form.get('eligibilityChargingAdmission').touched || form.get('eligibilityChargingAdmission').valid"
+                errorMessage="Admission charge Question Can't be blank">
                 <mat-radio-group formControlName="eligibilityChargingAdmission">
                     <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
                     <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
@@ -252,11 +261,13 @@
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
-            <app-field label="Is there currently a liquor licence at your event location?" [required]="true">
+            <app-field label="Is there currently a liquor licence at your event location?" [required]="true"
+            [valid]="!form.get('eligibilityLocalIsLicensed').touched || form.get('eligibilityLocalIsLicensed').valid"
+            errorMessage="Licence exists is not included in the list">
                 <mat-radio-group formControlName="eligibilityLocalIsLicensed">
-                    <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
-                    <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
-                    <mat-radio-button color="primary" class="mr-3" [value]="null">Not sure</mat-radio-button>
+                    <mat-radio-button color="primary" class="mr-3" value="yes">Yes</mat-radio-button>
+                    <mat-radio-button color="primary" class="mr-3" value="no">No</mat-radio-button>
+                    <mat-radio-button color="primary" class="mr-3" value="notSure">Not sure</mat-radio-button>
                 </mat-radio-group>
                 <app-error-alert *ngIf="form.get('eligibilityLocalIsLicensed').value">
                     If your event location is licensed, the liquor licence must be temporarily suspended for your event
@@ -277,6 +288,16 @@
 
     <mat-divider></mat-divider>
 
+
+    <section class="error mt-3" *ngIf="showValidationMessages">
+        <p *ngFor="let message of validationMessages">
+            <span class="app-cancel">
+                <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+                {{message}}
+            </span>
+        </p>
+    </section>
+
     <button mat-raised-button color="secondary" matStepperPrevious>BACK</button>
-    <button mat-raised-button color="primary" (click)="save()" matStepperNext>NEXT</button>
+    <button mat-raised-button color="primary" (click)="next()">NEXT</button>
 </div>
