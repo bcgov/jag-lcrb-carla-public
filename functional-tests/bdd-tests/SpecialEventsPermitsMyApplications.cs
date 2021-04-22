@@ -1,0 +1,46 @@
+﻿using Xunit;
+using Xunit.Gherkin.Quick;
+
+/*
+Feature: SpecialEventsPermitsMyApplications
+    As a logged in business user
+    I want to view my Special Event Permit applications
+
+Scenario: My SEP Applications (Private Corporation)
+    Given I am logged in to the dashboard as a private corporation
+    And I click on the link for Special Events Permits Dashboard
+    And I click on the button for Go To My Applications
+    And the Current Applications label is displayed
+    And the account is deleted
+    Then I see the login page
+*/
+
+namespace bdd_tests
+{
+    [FeatureFile("./SpecialEventsPermitsMyApplications.feature")]
+    [Collection("Liquor")]
+    public sealed class SpecialEventsPermitsMyApplications : TestBase
+    {
+        [Given(@"I am logged in to the dashboard as a(.*)")]
+        public void LogInToDashboard(string businessType)
+        {
+            NavigateToFeatures();
+
+            CheckFeatureFlagsLiquorOne();
+
+            CheckFeatureFlagsLGIN();
+
+            CheckFeatureFlagsIN();
+
+            CheckFeatureFlagsLicenseeChanges();
+
+            CheckFeatureFlagsSecurityScreening();
+
+            CheckFeatureLEConnections();
+
+            IgnoreSynchronizationFalse();
+
+            CarlaLogin(businessType);
+        }
+    }
+}
