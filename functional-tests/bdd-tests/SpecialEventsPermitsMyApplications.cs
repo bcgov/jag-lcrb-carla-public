@@ -2,32 +2,24 @@
 using Xunit.Gherkin.Quick;
 
 /*
-Feature: SpecialEventsPermitsApplication
+Feature: SpecialEventsPermitsMyApplications
     As a logged in business user
-    I want to submit a Special Events Permits application
+    I want to view my Special Events Permits applications
 
-Scenario: SEP Application (Private Corporation)
+Scenario: My SEP Applications (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the link for Special Events Permits Dashboard
-    # Start New Application button
-    And I click on the Submit button
-    # Start Application button (splash)
-    And I click on the Submit button
-    And I complete the special events permits applicant info
-    # Next button
-    And I click on the Submit button
-    # Next button
-    And I click on the Submit button
-    # To be completed
+    And I click on the button for Go To My Applications
+    And the Current Applications label is displayed
     And the account is deleted
     Then I see the login page
 */
 
 namespace bdd_tests
 {
-    [FeatureFile("./SpecialEventsPermitsApplication.feature")]
+    [FeatureFile("./SpecialEventsPermitsMyApplications.feature")]
     [Collection("Liquor")]
-    public sealed class SpecialEventsPermitsApplication : TestBase
+    public sealed class SpecialEventsPermitsMyApplications : TestBase
     {
         [Given(@"I am logged in to the dashboard as a(.*)")]
         public void LogInToDashboard(string businessType)
