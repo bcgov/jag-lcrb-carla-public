@@ -1,78 +1,68 @@
 <div style="height: 100%;" *ngIf="featureFlagService.initialized">
-<section class="container not-supported-browser" *ngIf="isIE()">
-  <p><fa-icon [icon]="faInternetExplorer" style="margin-right: 10px;"></fa-icon>Internet Explorer is no longer supported.</p>
-  <p>
-    Please use <a href="https://google.com/chrome" target="_blank" class="IE">Google Chrome</a>,
-    <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank" class="IE">Firefox</a> or
-    <a href="https://www.microsoft.com/en-us/edge" target="_blank" class="IE">Microsoft Edge</a>.
-  </p>
-</section>
+  <section class="container not-supported-browser" *ngIf="isIE()">
+    <p>
+      <fa-icon [icon]="faInternetExplorer" style="margin-right: 10px;"></fa-icon>Internet Explorer is no longer
+      supported.
+    </p>
+    <p>
+      Please use <a href="https://google.com/chrome" target="_blank" class="IE">Google Chrome</a>,
+      <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank" class="IE">Firefox</a> or
+      <a href="https://www.microsoft.com/en-us/edge" target="_blank" class="IE">Microsoft Edge</a>.
+    </p>
+  </section>
 
-<div class="app-outer" *ngIf="!isIE()">
-<header class="app-header">
-  <div class="top-menu row" style="margin: 0; padding-left: 30px; padding-right: 30px;">
-    <section class="col-md-8 col-xs-12">
-      <a href="http://www2.gov.bc.ca/" tabindex="1">
-        <img class="header-logo" alt="B.C. Government Logo" src="assets/bc-logo.svg">
-      </a>
-      <span class="title" role="banner">
-        Liquor and Cannabis Licensing
+  <div class="app-outer" *ngIf="!isIE()">
+    <header class="app-header">
+      <div class="top-menu row" style="margin: 0; padding-left: 30px; padding-right: 30px;">
+        <section class="col-md-8 col-xs-12">
+          <a href="http://www2.gov.bc.ca/" tabindex="1">
+            <img class="header-logo" alt="B.C. Government Logo" src="assets/bc-logo.svg">
+          </a>
+          <span class="title" role="banner">
+            Liquor and Cannabis Licensing
 
-      </span>
-    </section>
-    <section class="col-md-4 col-xs-12 sign-container">
-      <span class="sign" *ngIf="currentUser">
-        <a *ngIf="currentUser.userType == 'Business'" routerLink="/account-profile" class="profile-link">{{currentUser.name}}</a>
+          </span>
+        </section>
+        <section class="col-md-4 col-xs-12 sign-container">
+          <app-user-menu *ngIf="currentUser" [currentUser]="currentUser" class="user-menu-container"></app-user-menu>
+          <span class="sign" *ngIf="!currentUser">
+            <span appRemoveIfFeatureOff="DisableLogin" class="text-right signin">
+              <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
+            </span>
+            <span appRemoveIfFeatureOn="DisableLogin" class="text-right signin">
+              <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
+              or
+              <a href="login" tabindex="1">Log In</a>
+            </span>
+          </span>
+        </section>
+      </div>
+    </header>
 
-        <a appRemoveIfFeatureOff="Sep" *ngIf="currentUser.userType == 'VerifiedIndividual'" routerLink="/servicecard-profile" class="profile-link">{{currentUser.name}}</a>
-        <span appRemoveIfFeatureOn="Sep" *ngIf="currentUser.userType == 'VerifiedIndividual'">{{currentUser.name}}</span>
+    <div *ngIf="showBceidTermsOfUse()">
+      <main class="app-content">
+        <app-bceid-confirmation (reloadUser)="reloadUser()" [currentUser]="currentUser"></app-bceid-confirmation>
+      </main>
+    </div>
 
-        &nbsp;
-
-        <span class="text-right signin">
-          <a href="logout">Sign Out</a>
-        </span>
-        <br/>
-        <span>{{currentUser.businessname}}</span>
-      </span>
-      <span class="sign" *ngIf="!currentUser">
-        <span appRemoveIfFeatureOff="DisableLogin" class="text-right signin">
-          <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
-        </span>
-        <span appRemoveIfFeatureOn="DisableLogin" class="text-right signin">
-          <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
-          or
-          <a href="login" tabindex="1">Log In</a>
-        </span>
-      </span>
-    </section>
-  </div>
-</header>
-
-<div *ngIf="showBceidTermsOfUse()">
-  <main class="app-content">
-    <app-bceid-confirmation (reloadUser)="reloadUser()" [currentUser]="currentUser"></app-bceid-confirmation>
-  </main>
-</div>
-
-<div class="content-wrapper" *ngIf="!showBceidTermsOfUse()">
-  <!-- /NAVBAR -->
-  <div class="navigationRibbon" *ngIf="!currentUser && showNavbar">
-    <div class="level2Navigation">
-      <div class="">
-        <nav class="navbar navbar-expand-md navbar-light justify-content-end"
-             style="margin-bottom: 0; width: 100%;">
-          <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right"
-                  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                  aria-label="Toggle navigation" #toggleButton>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a (click)="toggleButton.click()" tabindex="2" routerLink="/" title="Home">Home</a>
-              </li>
-              <!--li class="nav-item">
+    <div class="content-wrapper" *ngIf="!showBceidTermsOfUse()">
+      <!-- /NAVBAR -->
+      <div class="navigationRibbon" *ngIf="!currentUser && showNavbar">
+        <div class="level2Navigation">
+          <div class="">
+            <nav class="navbar navbar-expand-md navbar-light justify-content-end"
+              style="margin-bottom: 0; width: 100%;">
+              <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation" #toggleButton>
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/" title="Home">Home</a>
+                  </li>
+                  <!--li class="nav-item">
               <a (click)="toggleButton.click()" tabindex="2"
                  routerLink="/policy-document/cannabis-retail-licence">
                 Licence
@@ -83,13 +73,13 @@
                 <a (click)="toggleButton.click()" tabindex="2"
                    routerLink="/policy-document/application-timelines">Application Requirements</a>
               </li-->
-              <li class="nav-item">
-                <a appRemoveIfFeatureOn="DisableWorkerQualification" (click)="toggleButton.click()" tabindex="2"
-                   routerLink="/policy-document/worker-qualification-training">
-                  Cannabis Worker Security Verification
-                </a>
-              </li>
-              <!--li class="nav-item">
+                  <li class="nav-item">
+                    <a appRemoveIfFeatureOn="DisableWorkerQualification" (click)="toggleButton.click()" tabindex="2"
+                      routerLink="/policy-document/worker-qualification-training">
+                      Cannabis Worker Security Verification
+                    </a>
+                  </li>
+                  <!--li class="nav-item">
               <a (click)="toggleButton.click()" tabindex="2" routerLink="/policy-document/ordering-cannabis">
                 Ordering
                 Cannabis
@@ -99,169 +89,172 @@
                 <a (click)="toggleButton.click()" tabindex="2"
                    routerLink="/policy-document/reporting-sales">Reporting</a>
               </li-->
-              <li class="nav-item">
-                <a (click)="toggleButton.click()" tabindex="2"
-                   routerLink="/policy-document/application-stats">
-                  Cannabis Application Statistics
-                </a>
-              </li>
+                  <li class="nav-item">
+                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/policy-document/application-stats">
+                      Cannabis Application Statistics
+                    </a>
+                  </li>
 
-              <li class="nav-item" *ngIf="showMap">
-                <a (click)="toggleButton.click()" tabindex="2" routerLink="/map">
-                  Map of Cannabis Stores
-                </a>
-              </li>
-              <li class="nav-item" appRemoveIfFeatureOff="Sep">
-                <a (click)="toggleButton.click()" tabindex="2" routerLink="/sep">
-                  Special Events Permits
-                </a>
-              </li>
-              <li class="nav-item">
-                <a (click)="toggleButton.click()" tabindex="2"  appRemoveIfFeatureOff="Sep"
-                   routerLink="/policy-document/completing-an-application">
-                   Special Events Permits Help Centre
-                </a>
-              </li>
-            </ul>
+                  <li class="nav-item" *ngIf="showMap">
+                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/map">
+                      Map of Cannabis Stores
+                    </a>
+                  </li>
+                  <li class="nav-item" appRemoveIfFeatureOff="Sep">
+                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/sep">
+                      Special Events Permits
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a (click)="toggleButton.click()" tabindex="2" appRemoveIfFeatureOff="Sep"
+                      routerLink="/policy-document/completing-an-application">
+                      Special Events Permits Help Centre
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
           </div>
-        </nav>
+        </div>
+
       </div>
-    </div>
 
-  </div>
+      <section *ngIf="currentUser && !isAssociate && showNavbar" class="navigationRibbon">
+        <div class="level2Navigation ">
+          <div class="d-flex justify-content-between align-items-center">
+            <nav class="navbar navbar-expand-md navbar-light justify-content-end"
+              style="margin-bottom: 0; width: 100%;">
+              <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right"
+                data-target="#loggedInMenu" aria-controls="loggedInMenu" aria-expanded="false"
+                aria-label="Toggle navigation" #toggleButtonLoggedIn>
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="loggedInMenu">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
+                      class="nav-link" routerLink="/dashboard">
+                      Dashboard
+                    </a>
+                    <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
+                      class="nav-link" routerLink="/licences">
+                      Licences & Authorizations
+                    </a>
+                    <a appRemoveIfFeatureOff="SecurityScreening" *ngIf="currentUser.userType == 'Business'"
+                      (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/security-screening">
+                      Security
+                      Screening
+                    </a>
+                    <a appRemoveIfFeatureOn="DisableWorkerQualification"
+                      *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
+                      class="nav-link" routerLink="/worker-qualification/dashboard">
+                      Dashboard
+                    </a>
 
-  <section *ngIf="currentUser && !isAssociate && showNavbar" class="navigationRibbon">
-    <div class="level2Navigation ">
-      <div class="d-flex justify-content-between align-items-center">
-        <nav class="navbar navbar-expand-md navbar-light justify-content-end"
-             style="margin-bottom: 0; width: 100%;">
-          <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right"
-                  data-target="#loggedInMenu" aria-controls="loggedInMenu" aria-expanded="false"
-                  aria-label="Toggle navigation" #toggleButtonLoggedIn>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="loggedInMenu">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
-                   class="nav-link" routerLink="/dashboard">
-                  Dashboard
-                </a>
-                <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
-                   class="nav-link" routerLink="/licences">
-                  Licences & Authorizations
-                </a>
-                <a appRemoveIfFeatureOff="SecurityScreening" *ngIf="currentUser.userType == 'Business'"
-                   (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/security-screening">
-                  Security
-                  Screening
-                </a>
-                <a appRemoveIfFeatureOn="DisableWorkerQualification" *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
-                   class="nav-link" routerLink="/worker-qualification/dashboard">
-                  Dashboard
-                </a>
+                    <a appRemoveIfFeatureOff="LGApprovals"
+                      *ngIf="account?.businessType === 'LocalGovernment' && account?.localGovernmentId"
+                      (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/lg-approvals">
+                      Applications for Review
+                    </a>
+                    <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'"
+                      (click)="toggleButtonLoggedIn.click()" matBadgeSize="medium" matBadge="!" matBadgePosition="after"
+                      matBadgeColor="warn" [matBadgeHidden]="!(showNoticesBadge$ | async)" class="nav-link with-badge"
+                      routerLink="/notices">
+                      Notices
+                    </a>
 
-                <a appRemoveIfFeatureOff="LGApprovals" *ngIf="account?.businessType === 'LocalGovernment' && account?.localGovernmentId" (click)="toggleButtonLoggedIn.click()"
-                   class="nav-link" routerLink="/lg-approvals">
-                  Applications for Review
-                </a>
-                <a appRemoveIfFeatureOff="Notices" *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
-                  matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="!(showNoticesBadge$ | async)"
-                  class="nav-link with-badge" routerLink="/notices">
-                  Notices
-                </a>
+                    <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()" class="nav-link"
+                      routerLink="/sep/dashboard">
+                      Special Events Permits Dashboard
+                    </a>
+                    <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()" class="nav-link"
+                      routerLink="/policy-document/completing-an-application">
+                      Special Events Permits Help Centre
+                    </a>
 
-                <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
-                   class="nav-link" routerLink="/sep/dashboard">
-                  Special Events Permits Dashboard
-                </a>
-                <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonLoggedIn.click()"
-                   class="nav-link" routerLink="/policy-document/completing-an-application">
-                   Special Events Permits Help Centre
-                </a>
-
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <span *ngIf="linkedFederalReports && linkedFederalReports.length"
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            <span *ngIf="linkedFederalReports && linkedFederalReports.length"
               (click)="showMessageCenterContent = !showMessageCenterContent" style="cursor: pointer; padding: 10px;">
-          <button color="primary"
-                  style="background-color: transparent; border: none; color: #FFF; margin-right: 10px; margin-top: 20px; padding: 0;"
-                  matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn">
-            <fa-icon [icon]="faBell" class="fa-lg"></fa-icon>&nbsp;&nbsp;&nbsp;
-          </button>
-        </span>
-      </div>
-    </div>
-  </section>
-  <!-- /NAVBAR END -->
-  <section *ngIf="showMessageCenterContent" style="background-color: #FFF; padding: 10px;">
-    <mat-card *ngFor="let item of linkedFederalReports" style="margin-bottom: 5px;">
-      <fa-icon [icon]="faBusinessTime" class="fa-2x"></fa-icon> &nbsp;
-      <strong>Federal Tracking Report</strong> for <strong>{{item.establishmentName}}</strong> for
-      <strong>{{Months[parseInt(item.reportingPeriodMonth, 10) -1]}} {{item.reportingPeriodYear}}</strong> has not
-      been submitted. The report
-      is due on the 10th of each month.
-      <a style="color: #1a5a96;" (click)="showMessageCenterContent = !showMessageCenterContent"
-         [routerLink]="['/federal-reporting/' + item.licenseId + '/' + item.monthlyReportId]">
-        Click to action
-      </a>.
-    </mat-card>
-  </section>
-  <main class="app-content">
-    <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
+              <button color="primary"
+                style="background-color: transparent; border: none; color: #FFF; margin-right: 10px; margin-top: 20px; padding: 0;"
+                matBadgeSize="medium" matBadge="!" matBadgePosition="after" matBadgeColor="warn">
+                <fa-icon [icon]="faBell" class="fa-lg"></fa-icon>&nbsp;&nbsp;&nbsp;
+              </button>
+            </span>
+          </div>
+        </div>
+      </section>
+      <!-- /NAVBAR END -->
+      <section *ngIf="showMessageCenterContent" style="background-color: #FFF; padding: 10px;">
+        <mat-card *ngFor="let item of linkedFederalReports" style="margin-bottom: 5px;">
+          <fa-icon [icon]="faBusinessTime" class="fa-2x"></fa-icon> &nbsp;
+          <strong>Federal Tracking Report</strong> for <strong>{{item.establishmentName}}</strong> for
+          <strong>{{Months[parseInt(item.reportingPeriodMonth, 10) -1]}} {{item.reportingPeriodYear}}</strong> has not
+          been submitted. The report
+          is due on the 10th of each month.
+          <a style="color: #1a5a96;" (click)="showMessageCenterContent = !showMessageCenterContent"
+            [routerLink]="['/federal-reporting/' + item.licenseId + '/' + item.monthlyReportId]">
+            Click to action
+          </a>.
+        </mat-card>
+      </section>
+      <main class="app-content">
+        <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
 
-    <div class="app-main">
-      <breadcrumb></breadcrumb>
-      <router-outlet></router-outlet>
+        <div class="app-main">
+          <breadcrumb></breadcrumb>
+          <router-outlet></router-outlet>
+        </div>
+
+        <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
+      </main>
     </div>
 
-    <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
-  </main>
-</div>
-
-<footer class="app-footer">
-  <nav class="navbar navbar-default navbar-expand navbar-footer navbar-static-bottom">
-    <div class="container c1">
-      <ul class="navbar-nav">
-        <li class="c2">
-          <a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank" rel="noopener noreferrer"
-             title="Goes to BC Gov Disclaimer Page">
-            Disclaimer
-          </a>
-        </li>
-        <li class="c2">
-          <a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank" rel="noopener noreferrer"
-             title="Goes to BC Gov Privacy Page">
-            Privacy
-          </a>
-        </li>
-        <li class="c2">
-          <a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank" rel="noopener noreferrer"
-             title="Goes to BC Gov Accessibility Page">
-            Accessibility
-          </a>
-        </li>
-        <li class="c2">
-          <a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" rel="noopener noreferrer"
-             title="Goes to BC Gov Copyright Page">
-            Copyright
-          </a>
-        </li>
-      </ul>
-    </div>
-    <a *ngIf="versionInfo && versionInfo.fileVersion" (click)="openVersionInfoDialog()"
-       class="nav-link version-info">
-      {{versionInfo.fileVersion}}
-    </a>
-  </nav>
-</footer>
-</div>
+    <footer class="app-footer">
+      <nav class="navbar navbar-default navbar-expand navbar-footer navbar-static-bottom">
+        <div class="container c1">
+          <ul class="navbar-nav">
+            <li class="c2">
+              <a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank" rel="noopener noreferrer"
+                title="Goes to BC Gov Disclaimer Page">
+                Disclaimer
+              </a>
+            </li>
+            <li class="c2">
+              <a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank" rel="noopener noreferrer"
+                title="Goes to BC Gov Privacy Page">
+                Privacy
+              </a>
+            </li>
+            <li class="c2">
+              <a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank" rel="noopener noreferrer"
+                title="Goes to BC Gov Accessibility Page">
+                Accessibility
+              </a>
+            </li>
+            <li class="c2">
+              <a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" rel="noopener noreferrer"
+                title="Goes to BC Gov Copyright Page">
+                Copyright
+              </a>
+            </li>
+          </ul>
+        </div>
+        <a *ngIf="versionInfo && versionInfo.fileVersion" (click)="openVersionInfoDialog()"
+          class="nav-link version-info">
+          {{versionInfo.fileVersion}}
+        </a>
+      </nav>
+    </footer>
+  </div>
 </div>
 
 <section style="height: 1px; position: absolute; width: 1px; z-index: 10;">
   <input style="border: none; height: 1px; margin: 0; padding: 0; width: 1px;" type="text" id="testUrl" #testUrl>
-  <button style="border: none; height: 3px; margin: 0; padding: 0; width: 3px;" id="testAPIButton" (click)="makeAPICall(testUrl.value)"></button>
+  <button style="border: none; height: 3px; margin: 0; padding: 0; width: 3px;" id="testAPIButton"
+    (click)="makeAPICall(testUrl.value)"></button>
   <span style="height: 1px; width: 1px;" id="testAPIResult">{{testAPIRestul}}</span>
 </section>
