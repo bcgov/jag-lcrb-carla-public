@@ -16,7 +16,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
          * XML Message sent to the Hub broadcasting the details of the new cannabis licence issued.
          * The purpose is to broadcast licence details to partners subscribed to the Hub
          */
-        public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence)
+        public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence, bool isTransfer)
         {
             if (licence == null)
             {
@@ -36,7 +36,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
                 licence.AdoxioBusinessprogramaccountreferencenumber = "1";
             }
             var sbnChangeStatus = new SBNChangeName();
-            sbnChangeStatus.header = GetHeader(licence);
+            sbnChangeStatus.header = GetHeader(licence, isTransfer);
             sbnChangeStatus.body = GetBody(licence);
 
             var serializer = new XmlSerializer(typeof(SBNChangeName));
@@ -47,12 +47,22 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             }
         }
 
-        private SBNChangeNameHeader GetHeader(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNChangeNameHeader GetHeader(MicrosoftDynamicsCRMadoxioLicences licence, bool isTransfer)
         {
             var header = new SBNChangeNameHeader();
 
             header.requestMode = OneStopUtils.ASYNCHRONOUS;
-            header.documentSubType = OneStopUtils.DOCUMENT_SUBTYPE_CHANGENAME;
+            if (isTransfer)
+            {
+                header.documentSubType = OneStopUtils.DOCUMENT_SUBTYPE_CHANGENAME_TRANSFER;
+            }
+            else
+            {
+                header.documentSubType = OneStopUtils.DOCUMENT_SUBTYPE_CHANGENAME;
+            }
+            
+
+
             header.senderID = OneStopUtils.SENDER_ID;
             header.receiverID = OneStopUtils.RECEIVER_ID;
             //any note wanted by LCRB. Currently in liquor is: licence Id, licence number - sequence number
@@ -107,7 +117,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             body.name.operatingNamesequenceNumber = 1;
             body.name.updateReasonCode = OneStopUtils.UPDATE_REASON_CODE;
 
-            body.businessRegistrationNumber = licence.AdoxioLicencee.AdoxioBusinessregistrationnumber;
+            body.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             body.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
 
             body.businessProgramAccountReferenceNumber = licence.AdoxioBusinessprogramaccountreferencenumber;

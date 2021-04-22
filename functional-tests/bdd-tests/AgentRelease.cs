@@ -17,16 +17,16 @@ Scenario: Agent Release Test (Private Corporation)
     And I confirm the payment receipt for an Agent Licence
     And the application is approved
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
-    And I confirm the terms and conditions for an agent licence
+    # And I click on the link for Download Licence
+    # And I confirm the terms and conditions for an agent licence
     And I click on the link for Add Licensee Representative
     And I request a licensee representative
     And I click on the link for Licences & Authorizations
     And I click on the link for Request Take Home Sampling Event Authorization
     And I complete the Take Home Sampling Event Authorization request
     And I click on the secondary Submit button
-    And I click on the link for Licences & Authorizations
-    And I request a transfer of ownership for an agent
+    # And I click on the link for Licences & Authorizations
+    # And I request a transfer of ownership for an agent
     And the account is deleted
     Then I see the login page
 

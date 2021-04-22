@@ -472,6 +472,24 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public MicrosoftDynamicsCRMadoxioLicences GetLicenceByNumber(string licenceNumber)
+        {
+            MicrosoftDynamicsCRMadoxioLicences result;
+            try
+            {
+                string filter = $"adoxio_licencenumber eq '{licenceNumber}'";
+                result = Licenceses.Get(filter:filter).Value[0];
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+        
+
         public MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(Guid id)
         {
             return GetLicenceByIdWithChildren(id.ToString());
