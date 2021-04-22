@@ -1,18 +1,21 @@
-<div class="user-menu">
-  <button class="user-button" mat-button [matMenuTriggerFor]="userMenu">
-    <fa-icon [icon]="faUserCircle" size="lg"></fa-icon>
-    <span class="ml-2">{{currentUser?.name}}</span>
-    <fa-icon [icon]="faChevronDown" class="float-right mr-2"></fa-icon>
-    <fa-icon [icon]="faChevronUp" class="float-right mr-2 d-none"></fa-icon>
+<div class="user-menu" [class.open]="t.menuOpen">
+  <button class="user-button" mat-button disableRipple="true" [matMenuTriggerFor]="userMenu" #t="matMenuTrigger">
+    <fa-icon [icon]="userIcon" size="2x" transform="down-3"></fa-icon>
+    <div class="user-name pl-3 pr-4">
+      <span class="strong">{{currentUser?.name}}</span>
+      <i *ngIf="currentUser.userType == 'Business'">{{currentUser.businessname}}</i>
+    </div>
+    <fa-icon *ngIf="!t.menuOpen" [icon]="faChevronDown"></fa-icon>
+    <fa-icon *ngIf="t.menuOpen" [icon]="faChevronUp"></fa-icon>
   </button>
-  <mat-menu #userMenu="matMenu">
-    <a mat-menu-item *ngIf="currentUser?.userType == 'Business'" routerLink="/account-profile">
-      Manage account
-    </a>
-    <a mat-menu-item appRemoveIfFeatureOff="Sep" *ngIf="currentUser.userType == 'VerifiedIndividual'"
-      routerLink="/servicecard-profile">
-      Manage account
-    </a>
-    <a mat-menu-item href="logout">Sign out</a>
-  </mat-menu>
 </div>
+<mat-menu #userMenu="matMenu" backdropClass="custom__menu">
+  <a mat-menu-item *ngIf="currentUser?.userType == 'Business'" routerLink="/account-profile">
+    Manage account
+  </a>
+  <a mat-menu-item appRemoveIfFeatureOff="Sep" *ngIf="currentUser?.userType == 'VerifiedIndividual'"
+    routerLink="/servicecard-profile">
+    Manage account
+  </a>
+  <a mat-menu-item href="logout">Sign out</a>
+</mat-menu>
