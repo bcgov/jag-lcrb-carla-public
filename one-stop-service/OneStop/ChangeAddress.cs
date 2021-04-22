@@ -111,6 +111,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             body.address.countryCode = OneStopUtils.COUNTRY_CODE;
             body.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             body.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
+            body.address.effectiveDate = DateTime.Now;
 
             body.businessProgramAccountReferenceNumber = licence.AdoxioBusinessprogramaccountreferencenumber;
             
