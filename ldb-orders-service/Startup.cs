@@ -23,7 +23,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
 using Serilog.Exceptions;
 
-namespace ldb_orders_service
+namespace LdbOrdersService 
 {
     public class Startup
     {
@@ -42,7 +42,7 @@ namespace ldb_orders_service
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ldb_orders_service", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LdbOrdersService ", Version = "v1" });
             });
 
             services.AddHangfire(config =>
@@ -77,10 +77,8 @@ namespace ldb_orders_service
                 {
                     fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", Configuration["SPLUNK_CHANNEL"]));
                 }
-                var splunkUri = new Uri(Configuration["SPLUNK_COLLECTOR_URL"]);
-
+                
                 // Fix for bad SSL issues 
-
 
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
@@ -113,7 +111,6 @@ namespace ldb_orders_service
             Serilog.Debugging.SelfLog.Enable(Console.Error);
 
             Log.Logger.Information("LDB-Orders-Service Container Starting");
-
 
             bool startHangfire = true;
 #if DEBUG
@@ -148,7 +145,6 @@ namespace ldb_orders_service
 
             app.UseAuthentication();
 
-
             app.UseHealthChecks("/hc", new HealthCheckOptions
             {
                 Predicate = _ => true,
@@ -176,7 +172,6 @@ namespace ldb_orders_service
         /// <param name="cache"></param>
         private void SetupHangfireJobs(IApplicationBuilder app)
         {
-
             Log.Logger.Information("Starting setup of Hangfire job ...");
 
             try

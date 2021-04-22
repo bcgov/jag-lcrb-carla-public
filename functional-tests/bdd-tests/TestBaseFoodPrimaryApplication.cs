@@ -34,6 +34,8 @@ namespace bdd_tests
             var conEmail = "contact@email.com";
             var indigenousNation = "Cowichan Tribes";
             var policeJurisdiction = "RCMP Shawnigan Lake";
+            // var indigenousNation = "Parksville";
+            // var policeJurisdiction = "RCMP Oceanside";
 
             if (bizType == "private corporation")
             {

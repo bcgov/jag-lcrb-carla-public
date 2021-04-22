@@ -11,6 +11,10 @@ import { SummaryComponent } from './summary/summary.component';
 import { Account } from '@models/account.model';
 import { ActivatedRoute } from '@angular/router';
 import { IndexDBService } from '@services/index-db.service';
+import { SepApplication } from '@models/sep-application.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+export const SEP_APPLICATION_STEPS = ["applicant", "eligibility", "event", "liquor", "summary"];
 
 @Component({
   selector: 'app-sep-application',
@@ -31,35 +35,43 @@ export class SepApplicationComponent implements OnInit {
   @ViewChild("event") applicationComponent: EventComponent;
   @ViewChild("liquor") dynamicApplicationComponent: LiquorComponent;
   stepType: "summary";
-  application: any;
-  steps = ["applicant", "eligibility", "event", "liquor", "summary"];
+  application: SepApplication;
+  steps = SEP_APPLICATION_STEPS;
   account: Account;
   step: string;
+  applicantForm: FormGroup;
+  eligibilityForm: FormGroup;
+  eventForm: FormGroup;
   get selectedIndex(): number {
     let index = 0;
-    if(this.step){
+    if (this.step) {
       index = this.steps.indexOf(this.step);
-      if(index === -1){
+      if (index === -1) {
         index = 0
       }
     }
-    
+
     return index;
   }
 
   constructor(private store: Store<AppState>,
     private db: IndexDBService,
+    private fb: FormBuilder,
     private route: ActivatedRoute) {
     this.store.select(state => state.currentAccountState.currentAccount)
       .subscribe(account => this.account = account);
     this.route.paramMap.subscribe(pmap => {
       // if the id is 'new' set it to null ( this will dictate whether the save is a create or an update)
-      this.applicationId = pmap.get('id') === 'new'? null : pmap.get('id');
+      this.applicationId = pmap.get('id') === 'new' ? null : pmap.get('id');
       this.step = pmap.get('step');
     });
   }
 
   ngOnInit() {
+    this.applicantForm = this.fb.group({});
+    this.eligibilityForm = this.fb.group({});
+    this.eventForm = this.fb.group({});
+    
     if (this.applicationId) {
       this.db.getSepApplication(parseInt(this.applicationId, 10))
         .then(app => {
@@ -74,6 +86,16 @@ export class SepApplicationComponent implements OnInit {
   canActivate(): Observable<boolean> {
     let result: Observable<boolean> = of(true);
     return result;
+  }
+
+  isStepCompleted(step: string): boolean {
+    let completed = false;
+    if (this?.application?.stepsCompleted && step) {
+      if (this.application.stepsCompleted.indexOf(step) !== -1) {
+        completed = true;
+      }
+    }
+    return completed;
   }
 
   selectionChange(event) {
