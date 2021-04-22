@@ -1,6 +1,6 @@
 ﻿Feature: SpecialEventsPermitsMyApplications
     As a logged in business user
-    I want to view my Special Event Permit applications
+    I want to view my Special Events Permits applications
 
 Scenario: My SEP Applications (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
