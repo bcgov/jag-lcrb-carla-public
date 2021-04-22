@@ -4,7 +4,7 @@ using Xunit.Gherkin.Quick;
 /*
 Feature: SpecialEventsPermitsApplication
     As a logged in business user
-    I want to submit a Special Event Permit application
+    I want to submit a Special Events Permits application
 
 Scenario: SEP Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
