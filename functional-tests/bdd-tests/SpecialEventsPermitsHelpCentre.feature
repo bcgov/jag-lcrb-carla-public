@@ -1,6 +1,6 @@
 ﻿Feature: SpecialEventsPermitsHelpCentre
     As a logged in business user
-    I want to access the Special Event Permit help pages
+    I want to access the Special Events Permits help pages
 
 Scenario: SEP Help Centre (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
