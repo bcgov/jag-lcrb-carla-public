@@ -136,6 +136,12 @@ namespace bdd_tests
                     executor2.ExecuteScript("arguments[0].scrollIntoView(true);", uiSEPStartApplication);
                     uiSEPStartApplication.Click();
                     break;
+                case "Go To My Applications":
+                    var uiSEPMyApplications = ngDriver.FindElement(By.CssSelector("button.mat-secondary[routerlink='/sep/my-applications']"));
+                    var executor3 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor3.ExecuteScript("arguments[0].scrollIntoView(true);", uiSEPMyApplications);
+                    uiSEPMyApplications.Click();
+                    break;
             }
         }
 
