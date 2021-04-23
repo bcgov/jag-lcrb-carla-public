@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit a Food Primary Application for different business types
 
-@foodprimaryapp @partnership 
 Scenario: Food Primary Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Food Primary
@@ -16,7 +15,6 @@ Scenario: Food Primary Application (Partnership)
     And the account is deleted
     Then I see the login page
 
-@foodprimaryapp @privatecorporation
 Scenario: Food Primary Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
@@ -30,7 +28,6 @@ Scenario: Food Primary Application (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@foodprimaryapp @publiccorporation
 Scenario: Food Primary Application (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Food Primary
@@ -44,7 +41,6 @@ Scenario: Food Primary Application (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@foodprimaryapp @society
 Scenario: Food Primary Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Food Primary
@@ -58,7 +54,6 @@ Scenario: Food Primary Application (Society)
     And the account is deleted
     Then I see the login page
 
-@foodprimaryapp @soleproprietorship
 Scenario: Food Primary Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
@@ -72,7 +67,6 @@ Scenario: Food Primary Application (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@foodprimaryapp @coop
 Scenario: Food Primary Application (Co-op)
     Given I am logged in to the dashboard as a co-op
     And I click on the Start Application button for Food Primary
@@ -86,7 +80,6 @@ Scenario: Food Primary Application (Co-op)
     And the account is deleted
     Then I see the login page
 
-@foodprimaryapp @militarymess
 Scenario: Food Primary Application (Military Mess)
     Given I am logged in to the dashboard as a military mess
     And I click on the Start Application button for Food Primary

@@ -53,6 +53,9 @@ namespace DemoTool
 
             bool isFixBadAccountData = false;
 
+            bool isFixSharePointNaming = false;
+            bool doRename = false;
+
 
 
             // start by getting secrets.
@@ -97,6 +100,28 @@ namespace DemoTool
                         isFixBadAccountData = true;
                         Console.Out.WriteLine("fix-bad-account-data enabled");
                     }
+                    else if (arg.ToLower().Equals("fix-sharepoint-naming"))
+                    {
+                        isFixSharePointNaming = true;
+                        Console.Out.WriteLine("fix-sharepoint-naming enabled");
+
+                        if (args.Length > 1)
+                        {
+                            string secondArg = args[1];
+                            if (secondArg.ToLower().Equals("rename"))
+                            {
+                                Console.Out.WriteLine("rename enabled");
+                                doRename = true;
+                            }
+                            else
+                            {
+                                Console.Out.WriteLine(
+                                    "Dry run only - rename not enabled.  Add parameter 'rename' to enable.");
+                            }
+                        }
+
+                    }
+
                     else
                     {
                         Console.Out.WriteLine("USAGE - enter the obfuscate parameter to obfuscate data");
@@ -203,7 +228,7 @@ namespace DemoTool
                         _dynamicsClient.Businesscontacts.Delete(businessContact.BcgovBusinesscontactid);
                         Console.Out.WriteLine("Deleted BusinessContact " + businessContact.BcgovBusinesscontactid);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         Console.Out.WriteLine("Error deleting business contact");
                         Console.Out.WriteLine("Request:");
@@ -353,7 +378,11 @@ namespace DemoTool
             }
 
 
-
+            if (isFixSharePointNaming)
+            {
+                FixSharePointNaming fix = new FixSharePointNaming();
+                fix.Execute(Configuration, doRename);
+            }
         }
     }
 }

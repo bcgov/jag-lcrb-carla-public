@@ -6,7 +6,6 @@ Feature: CrsApplication
     As a logged in business user
     I want to submit a CRS Application for different business types
 
-@cannabis @privatecorporation @crsapp
 Scenario: CRS Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -21,7 +20,6 @@ Scenario: CRS Application (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@cannabis @society @crsapp
 Scenario: CRS Application (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for a Cannabis Retail Store
@@ -36,7 +34,6 @@ Scenario: CRS Application (Society)
     And the account is deleted
     Then I see the login page
 
-@cannabis @partnership @crsapp
 Scenario: CRS Application (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for a Cannabis Retail Store
@@ -51,7 +48,6 @@ Scenario: CRS Application (Partnership)
     And the account is deleted
     Then I see the login page
 
-@cannabis @soleproprietorship @crsapp
 Scenario: CRS Application (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store

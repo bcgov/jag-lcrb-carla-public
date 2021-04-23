@@ -2,7 +2,7 @@
     As a logged in business user
     I want to confirm that the CRS functionality is ready for release
 
-@cannabis @validation @release2
+@2release
 Scenario: CRS Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Cannabis Retail Store
@@ -16,14 +16,14 @@ Scenario: CRS Release (Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
     And I click on the link for Licences & Authorizations
-    And I click on the button for CRS terms and conditions
-    And the correct terms and conditions are displayed for CRS
-    And I click on the link for Request Store Name or Branding Change
-    And I click on the Continue to Application button
-    And I request a valid store name or branding change for Cannabis
-    And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
-    And I confirm the terms and conditions for a CRS licence
+    # And I click on the button for CRS terms and conditions
+    # And the correct terms and conditions are displayed for CRS
+    # And I click on the link for Request Store Name or Branding Change
+    # And I click on the Continue to Application button
+    # And I request a valid store name or branding change for Cannabis
+    # And I click on the link for Licences & Authorizations
+    # And I click on the link for Download Licence
+    # And I confirm the terms and conditions for a CRS licence
     And I show the store as open on the map
     And I click on the link for Review Federal Reports
     And I review the federal reports
@@ -37,12 +37,11 @@ Scenario: CRS Release (Private Corporation)
     And I click on the link for Request a Structural Change
     And I click on the Continue to Application button
     And I request a structural change
-    And I click on the link for Licences & Authorizations
-    And I request a transfer of ownership for Cannabis
+    # And I click on the link for Licences & Authorizations
+    # And I request a transfer of ownership for Cannabis
     And the account is deleted
     Then I see the login page
 
-@cannabis @validation @soleproprietorship
 Scenario: CRS Release (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Cannabis Retail Store

@@ -117,9 +117,10 @@
               <section *ngIf="data?.cannabis?.outstandingItems?.length">
                 <hr>
                 <p>
-                  Each Cannabis licence associate must provide a completed Cannabis Associate Security
-                  Screening form along with required documents.
+                  When applying for <strong>a new cannabis licence</strong>, each licence associate must provide a completed Cannabis Associate Security
+                  Screening form along with the required documents.
                 </p>
+                <p><strong>Note:</strong> Cannabis Associate Security Screening forms are not required for annual licence renewals.</p>
                 <p>
                   Sole proprietors and associates of applicants for a non-medical cannabis licence are required to
                   submit documentation for security screenings and/or financial integrity checks.
@@ -127,7 +128,7 @@
                   received.
                 </p>
 
-                <p>
+                <p appRemoveIfFeatureOn="DisableWorkerQualification">
                   Please note, the security screening for sole proprietors and associates differs from
                   the
                   <a href="policy-document/worker-qualification-training" target="_blank">

@@ -6,7 +6,6 @@ Feature: RuralLRSSalesToHospitalityLicenseesAndSpecialEventPermittees
     As a logged in business user
     I want to request a sales to hospitality licensees and special event permittees for a rural LRS application
 
-@privatecorporation @ruralLRS
 Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Rural LRS
@@ -26,7 +25,6 @@ Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees 
     And the account is deleted
     Then I see the login page
 
-@publiccorporation @ruralLRS 
 Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the Start Application button for Rural LRS
@@ -46,7 +44,6 @@ Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees 
     And the account is deleted
     Then I see the login page
 
-@partnership @ruralLRS 
 Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the Start Application button for Rural LRS
@@ -66,7 +63,6 @@ Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees 
     And the account is deleted
     Then I see the login page
 
-@society @ruralLRS 
 Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees (Society)
     Given I am logged in to the dashboard as a society
     And I click on the Start Application button for Rural LRS
@@ -86,7 +82,6 @@ Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees 
     And the account is deleted
     Then I see the login page
 
-@soleproprietorship @ruralLRS
 Scenario: Rural LRS Sales to Hospitality Licensees and Special Event Permittees (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Rural LRS

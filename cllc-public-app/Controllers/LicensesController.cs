@@ -1254,62 +1254,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var endorsementsText = "";
                 License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
 
-                // show the service areas in a table that has 4 columns
+                // we will use these variables to track whether there are specific endorsements
+                var licenceHasSEA = -1; 
+                var licenceHasLounge = -1;
+                var licenceHasStore = -1;
+                var licenceHasCatering = -1;
+                var licenceHasOffsite = -1;
+                var licenceHasPPEE = -1;
+                var licenceHasTUA = -1;
+                var licenceHasPicnic = -1;
+                var licenceHasTempOffsite = -1;
 
-                if (licenceVM.ServiceAreas.Count > 0)
-                {
-                    serviceAreaText += $@"<h3 style=""text-align: center;"">CAPACITY</h3>";
-
-                    serviceAreaText += "<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'><tr>";
-
-                    var cells = 0;
-                    var leftover = 0;
-
-                    foreach (CapacityArea area in licenceVM.ServiceAreas)
-                    {
-                        // sometimes we have bad data and should not try to spend our life fixing other people's problems
-                        if(area.AreaLocation == null || area.Capacity == null || area.AreaCategory != 845280000){
-                            continue;
-                        }
-
-                        cells++;
-
-                        serviceAreaText += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AreaLocation}</td><td>{area.Capacity}</td></tr></table></td>";
-
-                        // every 4 cells
-                        leftover = cells % 4;
-
-                        if (leftover == 0)
-                        {
-                            // do a new row
-                            serviceAreaText += "</tr><tr>";
-                        }
-
-                    }
-                    // now we're out of service areas
-                    // fill in the remaining cells, so the table makes sense 
-                    for (int i = 0; i < leftover; i++)
-                    {
-                        serviceAreaText += "<td class='space'>&nbsp;</td>";
-                    }
-
-                    serviceAreaText += "</tr></table>";
-                }
-
-
-
+                // if we have some endorsements...
                 if (licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0)
                 {
-
-                    var licenceHasSEA = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Special Event Area Endorsement");
-                    var licenceHasLounge = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Lounge Area Endorsement");
-                    var licenceHasStore = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "On-Site Store Endorsement");
-                    var licenceHasCatering = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Catering Endorsement");
-                    var licenceHasOffsite = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Off-Site Store Endorsement");
-                    var licenceHasPPEE = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Patron Participation Entertainment Endorsement");
-                    var licenceHasTUA = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Temporary Use Area Endorsement");
-                    var licenceHasPicnic = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Picnic Area Endorsement"); ;
-                    var licenceHasTempOffsite = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Temporary Off-Site Sales Endorsement");
+                    licenceHasSEA = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Special Event Area Endorsement");
+                    licenceHasLounge = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Lounge Area Endorsement");
+                    licenceHasStore = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "On-Site Store Endorsement");
+                    licenceHasCatering = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Catering Endorsement");
+                    licenceHasOffsite = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Off-Site Store Endorsement");
+                    licenceHasPPEE = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Patron Participation Entertainment Endorsement");
+                    licenceHasTUA = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Temporary Use Area Endorsement");
+                    licenceHasPicnic = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Picnic Area Endorsement"); ;
+                    licenceHasTempOffsite = licenceVM.Endorsements.FindIndex(x => x.EndorsementName == "Temporary Off-Site Sales Endorsement");
 
                     if (licenceHasSEA > -1)
                     {
@@ -1358,6 +1325,50 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                 }
+
+                // show the service areas in a table that has 4 columns, but not if we have SEA or Lounge area endorsements
+
+                if (licenceVM.ServiceAreas.Count > 0 
+                    && licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0 && licenceHasSEA < 0 && licenceHasLounge < 0)
+                {
+                    serviceAreaText += $@"<h3 style=""text-align: center;"">CAPACITY</h3>";
+
+                    serviceAreaText += "<table style='border: black 0px; padding:2px; border-collapse: separate; border-spacing: 2px;'><tr>";
+
+                    var cells = 0;
+                    var leftover = 0;
+
+                    foreach (CapacityArea area in licenceVM.ServiceAreas)
+                    {
+                        // sometimes we have bad data and should not try to spend our life fixing other people's problems
+                        if(area.AreaLocation == null || area.Capacity == null || area.AreaCategory != 845280000){
+                            continue;
+                        }
+
+                        cells++;
+
+                        serviceAreaText += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AreaLocation}</td><td>{area.Capacity}</td></tr></table></td>";
+
+                        // every 4 cells
+                        leftover = cells % 4;
+
+                        if (leftover == 0)
+                        {
+                            // do a new row
+                            serviceAreaText += "</tr><tr>";
+                        }
+
+                    }
+                    // now we're out of service areas
+                    // fill in the remaining cells, so the table makes sense 
+                    for (int i = 0; i < leftover; i++)
+                    {
+                        serviceAreaText += "<td class='space'>&nbsp;</td>";
+                    }
+
+                    serviceAreaText += "</tr></table>";
+                }
+
                 var storeHours = "";
 
                 MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null");

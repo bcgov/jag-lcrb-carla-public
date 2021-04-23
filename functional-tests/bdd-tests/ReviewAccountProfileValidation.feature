@@ -2,7 +2,6 @@
     As a logged in business user
     I want to confirm the validation messages for the account profile
 
-@privatecorporation @reviewaccount
 Scenario: Validation for Review Account Profile (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the link for Edit Account Profile
@@ -11,7 +10,6 @@ Scenario: Validation for Review Account Profile (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@partnership @reviewaccount
 Scenario: Validation for Review Account Profile (Partnership)
     Given I am logged in to the dashboard as a partnership
     And I click on the link for Edit Account Profile
@@ -20,7 +18,6 @@ Scenario: Validation for Review Account Profile (Partnership)
     And the account is deleted
     Then I see the login page
 
-@publiccorporation @reviewaccount
 Scenario: Validation for Review Account Profile (Public Corporation)
     Given I am logged in to the dashboard as a public corporation
     And I click on the link for Edit Account Profile
@@ -29,7 +26,6 @@ Scenario: Validation for Review Account Profile (Public Corporation)
     And the account is deleted
     Then I see the login page
 
-@society @reviewaccount
 Scenario: Validation for Review Account Profile (Society)
     Given I am logged in to the dashboard as a society
     And I click on the link for Edit Account Profile
@@ -38,7 +34,6 @@ Scenario: Validation for Review Account Profile (Society)
     And the account is deleted
     Then I see the login page
 
-@soleproprietorship @reviewaccount
 Scenario: Validation for Review Account Profile (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the link for Edit Account Profile
@@ -47,7 +42,6 @@ Scenario: Validation for Review Account Profile (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
- @indigenousnation @reviewaccount
  Scenario: Validation for Review Account Profile (Indigenous Nation)
     Given I am logged in to the dashboard as an indigenous nation
     And I click on the link for Edit Account Profile
@@ -56,7 +50,6 @@ Scenario: Validation for Review Account Profile (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
- @localgovernment @reviewaccount
  Scenario: Validation for Review Account Profile (Local Government)
     Given I am logged in to the dashboard as a local government
     And I click on the link for Edit Account Profile

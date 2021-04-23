@@ -2,7 +2,6 @@
     As a logged in business user
     I want to test the OneStop features and confirm the status in Dynamics
 
-@onestopdynamics @manualonly
 # Note: The Dynamics workflow for OneStop New Licences must be enabled prior to running this test
 # Name of this workflow: 'Licence: OneStopMessage - Issued'
 # GUID: 463CF450-060B-404F-8487-004840A49D81
@@ -27,7 +26,6 @@ Scenario: OneStop New Licence (Private Corporation)
     And I confirm the OneStop message field is 'Yes' on the licence record
     Then the next steps are to be confirmed
 
-@onestopdynamics @manualonly
 Scenario: OneStop Cancel Licence (Private Corporation)
     Given I confirm that autotest account deletion is switched off
     And I am using the correct business number
@@ -59,7 +57,6 @@ Scenario: OneStop Cancel Licence (Private Corporation)
     And I click on the OneStop Cancelled message
     Then the payload shows the programAccountStatusCode as 02 and the programAccountReasonCode as 111
 
-@onestopdynamics @manualonly
 Scenario: OneStop Remove Cancellation (Private Corporation)
     Given I am logged in to Dynamics
     And I find the cancelled licence
@@ -74,7 +71,6 @@ Scenario: OneStop Remove Cancellation (Private Corporation)
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 01 and the programAccountReasonCode is not displayed
 
-@onestopdynamics @manualonly
 Scenario: OneStop Enter Licence Dormancy (Private Corporation)
     Given I confirm that autotest account deletion is switched off
     And I am using the correct business number
@@ -102,7 +98,6 @@ Scenario: OneStop Enter Licence Dormancy (Private Corporation)
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 02 and the programAccountReasonCode as 115
 
-@onestopdynamics @manualonly
 Scenario: OneStop End Licence Dormancy (Private Corporation)
     Given I am logged in to Dynamics
     And I find the dormant licence
@@ -117,7 +112,6 @@ Scenario: OneStop End Licence Dormancy (Private Corporation)
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 01 and the programAccountReasonCode is not displayed
 
-@onestopdynamics @manualonly
 Scenario: OneStop Licence Expired (Private Corporation)
     Given I confirm that autotest account deletion is switched off
     And I am using the correct business number
@@ -145,7 +139,6 @@ Scenario: OneStop Licence Expired (Private Corporation)
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 02 and the programAccountReasonCode as 112
 
-@onestopdynamics @manualonly
 Scenario: OneStop Licence Renewed (Private Corporation)
     Given I am logged in to Dynamics
     And I find the expired licence
@@ -161,7 +154,6 @@ Scenario: OneStop Licence Renewed (Private Corporation)
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 01 and the programAccountReasonCode is not displayed
 
-@onestopdynamics @manualonly
 Scenario: OneStop Licence Suspended (Private Corporation)
     Given I confirm that autotest account deletion is switched off
     And I am using the correct business number
@@ -189,7 +181,6 @@ Scenario: OneStop Licence Suspended (Private Corporation)
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 02 and the programAccountReasonCode as 114
 
-@onestopdynamics @manualonly
 Scenario: OneStop Licence End Suspension (Private Corporation)
     Given I am logged in to Dynamics
     And I find the expired licence
@@ -204,7 +195,6 @@ Scenario: OneStop Licence End Suspension (Private Corporation)
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as 01 and the programAccountReasonCode is not displayed
 
-@onestopdynamics @manualonly
 Scenario: OneStop Licence Name Change (Private Corporation)
     Given I confirm that autotest account deletion is switched off
     And I am using the correct business number
@@ -236,7 +226,6 @@ Scenario: OneStop Licence Name Change (Private Corporation)
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as ? and the programAccountReasonCode as ?
 
-@onestopdynamics @manualonly
 Scenario: OneStop Licence Address Change (Private Corporation)
     Given I confirm that autotest account deletion is switched off
     And I am using the correct business number
@@ -266,7 +255,6 @@ Scenario: OneStop Licence Address Change (Private Corporation)
     And the sent date is populated
     Then the payload shows the programAccountStatusCode as ? and the programAccountReasonCode as ?
 
-@onestopdynamics @manualonly
 Scenario: OneStop Licence Transfer Ownership (Private Corporation)
     Given I confirm that autotest account deletion is switched off
     And I am using the correct business number
