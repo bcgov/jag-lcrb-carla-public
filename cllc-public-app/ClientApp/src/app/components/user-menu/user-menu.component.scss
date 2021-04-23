@@ -1,0 +1,52 @@
+.user-menu {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  color: #ffffff;
+  background-color: none;
+  &.open {
+    background-color: #4a6a9d;
+  }
+
+  .user-button {
+    height: 100%;
+    .mat-button-wrapper {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+
+    .user-name {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 18px;
+    }
+  }
+}
+
+// Override Material UI menu drop down styles
+.custom__menu {
+  + * .cdk-overlay-pane {
+    > .mat-menu-panel {
+      border-radius: 0;
+      background-color: #4a6a9d;
+      box-shadow: none;
+      > .mat-menu-content {
+        padding: 0;
+        .mat-menu-item {
+          color: #ffffff;
+          text-decoration: none;
+          &:hover {
+            background-color: #5a78a7;
+            text-decoration: underline;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}

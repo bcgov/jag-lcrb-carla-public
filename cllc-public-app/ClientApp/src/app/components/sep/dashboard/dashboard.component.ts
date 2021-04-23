@@ -13,17 +13,23 @@ import { StarterChecklistComponent } from '@components/sep/starter-checklist/sta
 })
 export class DashboardComponent implements OnInit {
   currentUser: User;
+  isNewUser = false;
+  dataLoaded = false;
 
   constructor(public dialog: MatDialog,
     private router: Router,
     private store: Store<AppState>) {
-    store.select(state => state.currentUserState.currentUser)
-      .subscribe((user: User) => {
-        this.currentUser = user;
-      })
   }
 
   ngOnInit(): void {
+    this.store.select(state => state.currentUserState.currentUser)
+      .subscribe(user => this.loadUser(user));
+  }
+
+  loadUser(user: User) {
+    this.currentUser = user;
+    this.isNewUser = this.currentUser.isNewUser;
+    this.dataLoaded = true;
   }
 
   startApplication() {

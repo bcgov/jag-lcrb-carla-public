@@ -55,7 +55,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             header.senderID = OneStopUtils.SENDER_ID;
             header.receiverID = OneStopUtils.RECEIVER_ID;
             //any note wanted by LCRB. Currently in liquor is: licence Id, licence number - sequence number
-            header.partnerNote = licence.AdoxioLicencenumber;
+            header.partnerNote = licence.AdoxioLicencenumber + "-" + DateTime.Now.Ticks;
 
             header.CCRAHeader = GetCCRAHeader(licence);
 
@@ -111,11 +111,14 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             body.address.countryCode = OneStopUtils.COUNTRY_CODE;
             body.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             body.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
+            body.address.effectiveDate = DateTime.Now;
 
             body.businessProgramAccountReferenceNumber = licence.AdoxioBusinessprogramaccountreferencenumber;
             
             // partnerInfo1
             body.partnerInfo1 = licence.AdoxioLicencenumber;
+
+            body.timeStamp = DateTime.Now.ToString("yyyy-MM-DD-hh.mm.ss");
 
             return body;
         }
