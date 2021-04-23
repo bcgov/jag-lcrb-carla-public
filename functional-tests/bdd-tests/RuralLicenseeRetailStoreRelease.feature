@@ -28,12 +28,12 @@ Scenario: Rural LRS Release (Private Corporation)
     # And I click on the Continue to Application button
     # And I request a valid store name or branding change for Rural RLS
     # And I click on the link for Licences & Authorizations
-    And I click on the link for Request Relocation
-    And I click on the Continue to Application button
-    And I complete the Rural LRS relocation application
-    And I click on the Submit button
-    And I enter the payment information
-    And I click on the link for Licences & Authorizations
+    # And I click on the link for Request Relocation
+    # And I click on the Continue to Application button
+    # And I complete the Rural LRS relocation application
+    # And I click on the Submit button
+    # And I enter the payment information
+    # And I click on the link for Licences & Authorizations
     And I click on the link for Sales to Hospitality Licensees and Special Event Permittees
     And I click on the Continue to Application button
     And I request a sales to hospitality licensees and special event permittees application
