@@ -1328,8 +1328,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // show the service areas in a table that has 4 columns, but not if we have SEA or Lounge area endorsements
 
-                if (licenceVM.ServiceAreas.Count > 0 
-                    && licenceVM.Endorsements != null && licenceVM.Endorsements.Count > 0 && licenceHasSEA < 0 && licenceHasLounge < 0)
+                if (licenceVM.ServiceAreas.Count > 0 && licenceHasSEA < 0 && licenceHasLounge < 0)
                 {
                     serviceAreaText += $@"<h3 style=""text-align: center;"">CAPACITY</h3>";
 
