@@ -130,6 +130,12 @@ namespace bdd_tests
                     executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiSubmitAChange);
                     uiSubmitAChange.Click();
                     break;
+                case "SEP Start Application":
+                    var uiSEPStartApplication = ngDriver.FindElement(By.CssSelector("button#startAppBtn.mat-raised-button.mat-primary"));
+                    var executor2 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor2.ExecuteScript("arguments[0].scrollIntoView(true);", uiSEPStartApplication);
+                    uiSEPStartApplication.Click();
+                    break;
             }
         }
 
