@@ -37,5 +37,17 @@ namespace bdd_tests
 
             Assert.True(ngDriver.FindElement(By.XPath("//mat-dialog-content[contains(.,'Application Checklist')]")).Displayed);
         }
+
+        [And(@"Account Profile is displayed")]
+        public void AccountProfileDisplayed()
+        {
+            /* 
+            Page Title: Account Profile
+            */
+
+            //Thread.Sleep(5000);
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Account Profile ')]")).Displayed);
+        }
     }
 }
