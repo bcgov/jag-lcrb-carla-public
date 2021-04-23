@@ -8,10 +8,12 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
 
     // NOTE: Generated code may require at least .NET Framework 4.5 or .NET Core/Standard 2.0.
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    [System.Xml.Serialization.XmlRootAttribute("SBNChangeName", Namespace = "", IsNullable = false)]
     public partial class SBNChangeName
     {
 
@@ -269,6 +271,8 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
 
         private string partnerInfo1Field;
 
+        private string partnerInfo2Field;
+
         private string[] textField;
 
         /// <remarks/>
@@ -346,6 +350,19 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop.Util
             set
             {
                 this.partnerInfo1Field = value;
+            }
+        }
+
+        /// <remarks/>
+        public string partnerInfo2
+        {
+            get
+            {
+                return this.partnerInfo2Field;
+            }
+            set
+            {
+                this.partnerInfo2Field = value;
             }
         }
 
