@@ -213,7 +213,18 @@ namespace Gov.Jag.Lcrb.OneStopService
             }
             else
             {
-                var innerXML = req.CreateXML(licence, isTransfer);
+                string targetBusinessNumber = null;
+                if (isTransfer && !string.IsNullOrEmpty(licence._adoxioProposedownerValue))
+                {
+                    var targetOwner = dynamicsClient.GetAccountById(licence._adoxioProposedownerValue);
+                    if (targetOwner != null)
+                    {
+                        targetBusinessNumber = targetOwner.Accountnumber;
+                    }
+                }
+                var innerXML = req.CreateXML(licence, isTransfer, targetBusinessNumber);
+
+
 
                 if (Log.Logger != null)
                 {

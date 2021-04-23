@@ -16,7 +16,7 @@
                     </app-applicant>
                 </form>
             </mat-step>
-
+            <!--
             <mat-step [stepControl]="eligibilityForm" [completed]="isStepCompleted(step)"
                 *ngIf="step === 'eligibility'">
                 <ng-template matStepLabel>Eligibility</ng-template>
@@ -27,6 +27,7 @@
                     </app-eligibility>
                 </form>
             </mat-step>
+            -->
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'event'">
                 <ng-template matStepLabel>Event</ng-template>

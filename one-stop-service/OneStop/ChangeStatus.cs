@@ -54,7 +54,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             header.senderID = OneStopUtils.SENDER_ID;
             header.receiverID = OneStopUtils.RECEIVER_ID;
             //any note wanted by LCRB. Currently in liquor is: licence Id, licence number - sequence number
-            header.partnerNote = licence.AdoxioLicencenumber;
+            header.partnerNote = licence.AdoxioLicencenumber + "-" + DateTime.Now.Ticks;
 
             header.CCRAHeader = GetCCRAHeader(licence);
 
@@ -90,38 +90,6 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             return userCredentials;
         }
 
-        string GetPrimaryContact(MicrosoftDynamicsCRMadoxioLicences licence)
-        {
-            // first create an XML object.
-            var primaryContactDetails = new PrimaryContactDetails();
-
-            if (licence.AdoxioLicencee != null)
-            {
-                primaryContactDetails.name = licence.AdoxioLicencee.Name;
-                primaryContactDetails.email = licence.AdoxioLicencee.Emailaddress1;
-
-                // 2019-07-11 - LDB has requested that the phone number only contain digits.
-
-                string phoneDigitsOnly = "";
-
-                if (licence.AdoxioLicencee.Telephone1 != null)
-                {
-                    phoneDigitsOnly = Regex.Replace(licence.AdoxioLicencee.Telephone1, "[^0-9]", "");
-                }
-
-
-                primaryContactDetails.phone = phoneDigitsOnly;
-            }
-
-            // convert the XML to a string.
-            using (var stringwriter = new StringWriter())
-            {
-
-                XmlSerializer serializer = new XmlSerializer(primaryContactDetails.GetType());
-                serializer.Serialize(stringwriter, primaryContactDetails);
-                return stringwriter.ToString();
-            }
-        }
 
         private SBNChangeStatusBody GetBody(MicrosoftDynamicsCRMadoxioLicences licence, OneStopHubStatusChange statusChange)
         {
@@ -144,21 +112,17 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             body.partnerInfo1 = licence.AdoxioLicencenumber;
             
             // partnerInfo2 - date
+            if (licence.AdoxioExpirydate != null)
+            {
+                body.partnerInfo2 = licence.AdoxioExpirydate.Value.DateTime; // may need to be ("yyyy-MM-dd");
+            }
+            
+
+            body.statusData.timeStamp = DateTime.Now.ToString("yyyy-MM-DD-hh.mm.ss");
 
             return body;
         }
 
-        private SBNProgramAccountDetailsBroadcastBodyBusinessCore GetBusinessCore(MicrosoftDynamicsCRMadoxioLicences licence)
-        {
-            var businessCore = new SBNProgramAccountDetailsBroadcastBodyBusinessCore();
-
-            //always 01 for our requests
-            businessCore.programAccountTypeCode = OneStopUtils.PROGRAM_ACCOUNT_TYPE_CODE;
-            //licence number - dash sequence number. Sequence is always 1
-            businessCore.crossReferenceProgramNumber = licence.AdoxioLicencenumber;
-
-            return businessCore;
-        }
 
         private SBNChangeStatusBodyStatusDataProgramAccountStatus GetProgramAccountStatus(MicrosoftDynamicsCRMadoxioLicences licence, OneStopHubStatusChange statusChange)
         {

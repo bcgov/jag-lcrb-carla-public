@@ -134,11 +134,11 @@ Dev builds are triggered by source code being committed to the repository.  This
 Login to the OpenShift Web Console and navigate to the Tools project for the system, and view the status of the DEV portal pipeline build config to see the status of the build.
 
 ## TEST Builds
-Merge code to the "master" branch.
+Merge code to the "master" branch from the "develop" branch to trigger a TEST build.
 
 TEST builds are triggered by source code being committed to the master branch of the repository.  This process triggers a webhook which initiates the TEST build pipeline.
 
-Login to the OpenShift Web Console and navigate to the Tools project for the system, and view the status of the TEST portal pipeline build config to see the status of the build 
+Login to the OpenShift Web Console and navigate to the Tools project for the system, and view the status of the TEST portal pipeline build config to see the status of the build. 
 
 ## Promotion to PROD
 Login to the OpenShift Web Console and navigate to the Tools project for the system.  Go to the Build Config for the PROD Pipeline.  Click  Start Build. 
@@ -148,6 +148,24 @@ Navigate to the Logs for the build and click the link to go to the Jenkins logs.
 View the Console Logs.
 
 You will then have to CONFIRM the build by clicking on the related log item for the build that has been started.
+
+## Builds for supporting microservices
+
+Supporting microservices such as the PDF service, File Manager, Geocoder are built by starting the given Build Config.
+
+Navigate to Build Configs in the OpenShift web console, click on the given Build Config, and start the build with the Actions menu in the upper right hand side of the page.
+Note that you will need to Tag the given build using the CLI if your intent is to deploy to TEST or PROD.
+
+The CLI command sequence for this is:
+
+`oc project <TOOLS NAMESPACE>`
+`oc tag <IMAGENAME>:latest <IMAGENAME>:test`
+`oc tag <IMAGENAME>:latest <IMAGENAME>:prod`
+
+For example, to promote an image for the PDF service to PROD, the command would be:
+`oc tag pdf-service:latest pdf-service:prod`
+
+Once the image has been tagged you can verify deployment by navigating to the related Deployment Config in the web console.
 
 ## Feature Management
 Features are managed by adding environment variables (or secrets in the case of a developer's PC) to the API environment.  As a general rule the environment variable name should begin with FEATURE_ and be all caps.  Empty string for a value is the same as not being set; anything other than empty string will set the value.
