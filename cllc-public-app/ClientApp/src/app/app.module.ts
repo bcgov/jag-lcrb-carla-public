@@ -286,6 +286,8 @@ import { ErrorAlertComponent } from './components/sep/error-alert/error-alert.co
 import { DrinkPlannerComponent } from "@components/sep/drink-planner/drink-planner.component";
 import { DrinkPlannerDialog } from "@components/sep/drink-planner/drink-planner.dialog";
 import { UserMenuComponent } from "@components/user-menu/user-menu.component";
+import { ServicecardUserConfirmationComponent } from "@components/sep/servicecard-user-confirmation/servicecard-user-confirmation.component";
+import { ServicecardUserTermsAndConditionsComponent } from "@components/sep/servicecard-user-terms-and-conditions/servicecard-user-terms-and-conditions.component";
 
 @NgModule({
   declarations: [
@@ -444,6 +446,8 @@ import { UserMenuComponent } from "@components/user-menu/user-menu.component";
     DrinkPlannerComponent,
     DrinkPlannerDialog,
     UserMenuComponent,
+    ServicecardUserConfirmationComponent,
+    ServicecardUserTermsAndConditionsComponent,
   ],
   imports: [
     AppRoutingModule,
