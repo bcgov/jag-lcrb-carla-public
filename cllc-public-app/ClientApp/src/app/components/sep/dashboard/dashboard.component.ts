@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { User } from '@models/user.model';
 import { StarterChecklistComponent } from '@components/sep/starter-checklist/starter-checklist.component';
-import { ContactDataService } from '@services/contact-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,8 +18,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
     private router: Router,
-    private store: Store<AppState>,
-    private contactDataService: ContactDataService) {
+    private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
