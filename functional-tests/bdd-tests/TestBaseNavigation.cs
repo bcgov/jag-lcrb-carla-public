@@ -142,6 +142,12 @@ namespace bdd_tests
                     executor3.ExecuteScript("arguments[0].scrollIntoView(true);", uiSEPMyApplications);
                     uiSEPMyApplications.Click();
                     break;
+                case "Plan Your Drinks":
+                    var uiSEPPlanYourDrinks = ngDriver.FindElement(By.CssSelector(""));
+                    var executor4 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor4.ExecuteScript("arguments[0].scrollIntoView(true);", uiSEPPlanYourDrinks);
+                    uiSEPPlanYourDrinks.Click();
+                    break;
             }
         }
 
