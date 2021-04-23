@@ -45,6 +45,6 @@
   </div>
 </section>
 
-<section *ngIf="isNewUser && dataLoaded">
-  <!-- TODO: <app-servicecard-user-confirmation> -->
+<section class="form-wrapper" *ngIf="isNewUser && dataLoaded">
+  <app-servicecard-user-confirmation [currentUser]="currentUser"></app-servicecard-user-confirmation>
 </section>
