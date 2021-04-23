@@ -339,4 +339,11 @@ button:focus {
     padding: 20px;
     margin-bottom: 20px;
   }
+
+  .user-menu-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
 }

@@ -6,7 +6,7 @@ Feature: MfgRelease
     As a logged in business user
     I want to confirm that the Manufacturer functionality is ready for release
 
-@manufacturer @winery @release3 
+@3release
 Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -18,25 +18,25 @@ Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
-    And I confirm the terms and conditions for a Manufacturer licence
-    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
-    And I click on the Continue to Application button
-    And I request a change in terms and conditions application
-    And I click on the Submit button
-    And I enter the payment information
-    And I click on the link for Licences & Authorizations
-    And I click on the link for Request Take Home Sampling Event Authorization
-    And I complete the Take Home Sampling Event Authorization request
-    And I click on the secondary Submit button
-    And I click on the link for Licences & Authorizations
+    # And I click on the link for Download Licence
+    # And I confirm the terms and conditions for a Manufacturer licence
+    # And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
+    # And I click on the Continue to Application button
+    # And I request a change in terms and conditions application
+    # And I click on the Submit button
+    # And I enter the payment information
+    # And I click on the link for Licences & Authorizations
+    # And I click on the link for Request Take Home Sampling Event Authorization
+    # And I complete the Take Home Sampling Event Authorization request
+    # And I click on the secondary Submit button
+    # And I click on the link for Licences & Authorizations
     # And I click on the link for Temporary Extension of Licensed Area
     # And I click on the Continue to Application button
     # And I submit a liquor primary temporary extension of licensed area application
-    And I click on the link for Establishment Name Change Application
-    And I click on the Continue to Application button
-    And I request a valid store name or branding change for Manufacturing
-    And I click on the link for Licences & Authorizations
+    # And I click on the link for Establishment Name Change Application
+    # And I click on the Continue to Application button
+    # And I request a valid store name or branding change for Manufacturing
+    # And I click on the link for Licences & Authorizations
     And I click on the link for Facility Structural Change Application
     And I click on the Continue to Application button
     And I request a facility structural change
@@ -57,7 +57,6 @@ Scenario: Manufacturer Release #1 (Winery/Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @winery
 Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Manufacturer Licence
@@ -112,7 +111,6 @@ Scenario: Manufacturer Release #2 (Winery/Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @winery 
 Scenario: Manufacturer Release #1 (Winery/Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence
@@ -163,7 +161,6 @@ Scenario: Manufacturer Release #1 (Winery/Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@manufacturer @winery 
 Scenario: Manufacturer Release #2 (Winery/Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Manufacturer Licence

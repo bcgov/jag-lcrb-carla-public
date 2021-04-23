@@ -6,7 +6,6 @@ Feature: FoodPrimaryRelocation
     As a logged in business user
     I want to submit a relocation request for a Food Primary licence
 
-@foodprimaryrelocation @privatecorporation
 Scenario: Food Primary Relocation Application (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary

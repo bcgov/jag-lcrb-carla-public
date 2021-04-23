@@ -2,7 +2,7 @@
     As a logged in business user
     I want to run a release test for a Food Primary licence
 
-@foodprimary @privatecorporation @release8
+@8release
 Scenario: Food Primary Release Test #1 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
@@ -15,9 +15,9 @@ Scenario: Food Primary Release Test #1 (Private Corporation)
     And the dashboard status is updated as Application Under Review
     And the application is approved
     And I click on the link for Licences & Authorizations
-    And I click on the link for Establishment Name Change Application
-    And I click on the Continue to Application button
-    And I request a valid store name or branding change for Food Primary
+    # And I click on the link for Establishment Name Change Application
+    # And I click on the Continue to Application button
+    # And I request a valid store name or branding change for Food Primary
     And I click on the link for Licences & Authorizations
     And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
     And I click on the Continue to Application button
@@ -25,10 +25,10 @@ Scenario: Food Primary Release Test #1 (Private Corporation)
     And I click on the Submit button
     And I enter the payment information
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
+    # And I click on the link for Download Licence
     And I confirm the terms and conditions for a Food Primary licence
-    And I click on the link for Add Licensee Representative
-    And I request a licensee representative
+    # And I click on the link for Add Licensee Representative
+    # And I request a licensee representative
     And I click on the link for New Outdoor Patio
     And I click on the Continue to Application button
     And I request a new outdoor patio application
@@ -39,14 +39,13 @@ Scenario: Food Primary Release Test #1 (Private Corporation)
     And I click on the Continue to Application button
     And I request a Patron Participation Entertainment Endorsement application
     And I click on the Submit button
-    And I click on the link for Licences & Authorizations
-    And I click on the link for Relocation Application
-    And I click on the Continue to Application button
-    And I request a Food Primary relocation application
+    # And I click on the link for Licences & Authorizations
+    # And I click on the link for Relocation Application
+    # And I click on the Continue to Application button
+    # And I request a Food Primary relocation application
     And the account is deleted
     Then I see the login page
 
-@foodprimary @privatecorporation
 Scenario: Food Primary Release Test #2 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary
@@ -101,7 +100,6 @@ Scenario: Food Primary Release Test #2 (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@foodprimary
 Scenario: Food Primary Release Test #1 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary
@@ -145,7 +143,6 @@ Scenario: Food Primary Release Test #1 (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@foodprimary
 Scenario: Food Primary Release Test #2 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for Food Primary

@@ -1,13 +1,13 @@
 <div class="form-wrapper">
-    <h1>Applicant Info</h1>
+    <h1>Applicant Information</h1>
 
     <div class="row pl-3">
         <section [formGroup]="form" class="col-md-8">
             <p>
                 Collect the information outlined on your application checklist to begin your application. The more
-                information you have about your event, the eaiser it should be to complete your application. Stuck on a
+                information you have about your event, the easier it should be to complete your application. Stuck on a
                 question? Don't worry, you can log out at any time and come back to your question when you're ready.
-                Answers will automatically be saved on your applcation so you can continue where you left off next time
+                Answers will automatically be saved on your application so you can continue where you left off next time
                 you sign in.
             </p>
 
@@ -17,8 +17,9 @@
             </p>
 
             <hr>
-            <app-field label="Event Name">
-                <input type="text" formControlName="eventName" class="form-control ml-3">
+            <app-field label="Event Name" [valid]="!form.get('eventName').touched || form.get('eventName').valid"
+                errorMessage="Name must have a descriptive name">
+                <input type="text" formControlName="eventName" class="form-control ml-3" maxlength="100">
             </app-field>
 
             <hr>
@@ -37,11 +38,12 @@
             <p>
                 Please ensure your legal name is used for the application and the information is correct. If you need to
                 update
-                your information visit Manage Account.
+                your information, visit Manage Account.
             </p>
 
             <hr>
-            <app-field label="General Terms and Conditions">
+            <app-field label="General Terms and Conditions"  [valid]="!form.get('agreeToTnC').touched || form.get('agreeToTnC').valid"
+            errorMessage="Please read and acknowledge the terms and conditions to continue your application">
                 <p>
                     Please read and acknowledge the Terms and Conditions to begin your application:
                 </p>
@@ -49,6 +51,7 @@
                 <div class="tnc mb-3">
                     <app-policy-document [fullWidth]="true" #policyDocs></app-policy-document>
                 </div>
+
 
                 <mat-checkbox color="primary" formControlName="agreeToTnC">
                     <span class="error-states">*</span>
@@ -59,7 +62,7 @@
             </app-field>
 
             <section class="d-flex justify-content-between">
-                <button mat-raised-button color="primary" (click)="save($event)">Next</button>
+                <button mat-raised-button color="primary" (click)="next()">Next</button>
                 <button mat-button color="primary" routerLink="/sep/my-applications">My Applications</button>
             </section>
         </section>

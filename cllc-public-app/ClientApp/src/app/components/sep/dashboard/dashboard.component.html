@@ -1,24 +1,24 @@
 <div class="form-wrapper">
     <h1>Welcome, {{currentUser?.name}}</h1>
 
-    <p>Where would you like to go from here?</p>
+    <p class="mat-body-2">Where would you like to go from here?</p>
 
     <div class="row">
         <section class="col-md-8">
-            <div class="d-flex justify-content-between border header-wrap">
-                <section class="border app-button">
+            <div class="d-flex justify-content-between border header-wrap mat-elevation-z0">
+                <mat-card class="app-button">
                     <h5>MY APPLICATIONS</h5>
                     <p>Check the status of your applications or search for past applications</p>
                     <button routerLink="/sep/my-applications" mat-raised-button color="secondary">GO TO MY APPLICATIONS</button>
-                </section>
-                <section class="border app-button">
+                </mat-card>
+                <mat-card class="app-button">
                     <h5>START AN APPLICATION</h5>
                     <p>See the application checklist and get started</p>
                     <button mat-raised-button color="primary" (click)="startApplication()">START NEW APPLICATION</button>
-                </section>
+                </mat-card>
             </div>
 
-            <div>
+            <mat-card class="mat-elevation-z0">
                 <h5>Most applications are approved instantly</h5>
                 <p>An application will require review if:</p>
                 <ul>
@@ -37,7 +37,7 @@
                     At a minimum, all applications requiring approval must be submitted within 14 days of the start
                     date. Applications submitted with less time may not be approved due to late notice.
                 </p>
-            </div>
+            </mat-card>
         </section>
         <section class="col-md-4">
             <app-resources [currentUser]="currentUser"></app-resources>

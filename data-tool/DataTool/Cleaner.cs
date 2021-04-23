@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Rest;
 
 namespace DataTool
 {
@@ -23,7 +24,7 @@ namespace DataTool
                     _dynamicsClient.Licenceses.Delete(licence.AdoxioLicencesid);
                     Console.Out.WriteLine("Deleted Licence " + licence.AdoxioLicencesid);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.Out.WriteLine("Error deleting licence");
                     Console.Out.WriteLine("Request:");
@@ -45,7 +46,7 @@ namespace DataTool
                     _dynamicsClient.Applications.Delete(application.AdoxioApplicationid);
                     Console.Out.WriteLine("Deleted Application " + application.AdoxioApplicationid);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.Out.WriteLine("Error deleting application");
                     Console.Out.WriteLine("Request:");
@@ -65,7 +66,7 @@ namespace DataTool
                     _dynamicsClient.Legalentities.Delete(legalEntity.AdoxioLegalentityid);
                     Console.Out.WriteLine("Deleted LegalEntity " + legalEntity.AdoxioLegalentityid);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.Out.WriteLine("Error deleting application");
                     Console.Out.WriteLine("Request:");
@@ -84,7 +85,7 @@ namespace DataTool
                     _dynamicsClient.Establishments.Delete(item.AdoxioEstablishmentid);
                     Console.Out.WriteLine("Deleted Establishment " + item.AdoxioEstablishmentid);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.Out.WriteLine("Error deleting Establishment");
                     Console.Out.WriteLine("Request:");
@@ -104,7 +105,7 @@ namespace DataTool
                     _dynamicsClient.Accounts.Delete(account.Accountid);
                     Console.Out.WriteLine("Deleted BusinessProfile " + account.Accountid);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.Out.WriteLine("Error deleting business profile");
                     Console.Out.WriteLine("Request:");
@@ -126,7 +127,7 @@ namespace DataTool
                     _dynamicsClient.Workers.Delete(item.AdoxioWorkerid);
                     Console.Out.WriteLine("Deleted worker " + item.AdoxioWorkerid);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.Out.WriteLine("Error deleting worker");
                     Console.Out.WriteLine("Request:");
@@ -145,7 +146,7 @@ namespace DataTool
                     _dynamicsClient.Aliases.Delete(item.AdoxioAliasid);
                     Console.Out.WriteLine("Deleted alias " + item.AdoxioAliasid);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.Out.WriteLine("Error deleting alias");
                     Console.Out.WriteLine("Request:");
@@ -166,7 +167,7 @@ namespace DataTool
                     _dynamicsClient.Contacts.Delete(contact.Contactid);
                     Console.Out.WriteLine("Deleted Contact " + contact.Contactid);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.Out.WriteLine("Error deleting contact");
                     Console.Out.WriteLine("Request:");
@@ -186,7 +187,7 @@ namespace DataTool
                     _dynamicsClient.Invoices.Delete(invoice.Invoiceid);
                     Console.Out.WriteLine("Deleted Invoice " + invoice.Invoiceid);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     Console.Out.WriteLine("Error deleting invoice");
                     Console.Out.WriteLine("Request:");

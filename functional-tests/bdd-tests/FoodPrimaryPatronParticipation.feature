@@ -2,7 +2,6 @@
     As a logged in business user
     I want to request a Patron Participation Entertainment Endorsement Application for a Food Primary licence
 
-@foodprimarypatronparticipation @privatecorporation
 Scenario: Food Primary Patron Participation Entertainment Endorsement (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary

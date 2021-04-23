@@ -6,7 +6,6 @@ Feature: FoodPrimaryThirdPartyOperatorRenewal
     As a logged in business user
     I want to designate a third party operator and renew the licence for a Food Primary licence
 
-@foodprimarythirdparty @privatecorporation
 Scenario: Food Primary Third Party Operator/Licence Renewal (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary

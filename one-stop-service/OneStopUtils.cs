@@ -39,6 +39,7 @@ namespace Gov.Jag.Lcrb.OneStopService
 
         public const string DOCUMENT_SUBTYPE_CHANGESTATUS = "113";
         public const string DOCUMENT_SUBTYPE_CHANGENAME = "150";
+        public const string DOCUMENT_SUBTYPE_CHANGENAME_TRANSFER = "155";
         public const string DOCUMENT_SUBTYPE_CHANGEADDRESS = "107";
 
         public const string SENDER_ID = "LCRB";
@@ -179,7 +180,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// <summary>
         /// Hangfire job to send Change Status message to One stop.
         /// </summary>
-        public async Task SendChangeNameRest(PerformContext hangfireContext, string licenceGuidRaw, string queueItemId)
+        public async Task SendChangeNameRest(PerformContext hangfireContext, string licenceGuidRaw, string queueItemId, bool isTransfer)
         {
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             if (hangfireContext != null)
@@ -212,7 +213,7 @@ namespace Gov.Jag.Lcrb.OneStopService
             }
             else
             {
-                var innerXML = req.CreateXML(licence);
+                var innerXML = req.CreateXML(licence, isTransfer);
 
                 if (Log.Logger != null)
                 {
@@ -534,8 +535,10 @@ namespace Gov.Jag.Lcrb.OneStopService
                             await SendChangeAddressRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid);
                             break;
                         case OneStopHubStatusChange.ChangeOfName:
+                            await SendChangeNameRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid, false);
+                            break;
                         case OneStopHubStatusChange.LicenceDeemedAtTransfer:
-                            await SendChangeNameRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid);
+                            await SendChangeNameRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid, true);
                             break;
                     }
                     currentItem++;

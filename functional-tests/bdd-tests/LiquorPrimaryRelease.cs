@@ -6,7 +6,7 @@ Feature: LiquorPrimaryRelease
     As a logged in business user
     I want to run a release test for Liquor Primary
 
-@liquorprimary @release1
+@1release
 Scenario: Liquor Primary Release Test #1 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
@@ -28,8 +28,8 @@ Scenario: Liquor Primary Release Test #1 (Private Corporation)
     And I click on the link for Licences & Authorizations
     And I pay the licensing fee
     And I click on the link for Licences & Authorizations
-    And I click on the link for Download Licence
-    And I confirm the terms and conditions for a Liquor Primary licence
+    # And I click on the link for Download Licence
+    # And I confirm the terms and conditions for a Liquor Primary licence
     And I click on the link for Application to Allow Family Food Service
     And I click on the Continue to Application button
     And I complete the Application to Allow Family Food Service
@@ -41,27 +41,26 @@ Scenario: Liquor Primary Release Test #1 (Private Corporation)
     And I complete the allow minors request
     And I click on the Submit button
     And I enter the payment information
-    And I click on the link for Licences & Authorizations
-    And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
-    And I click on the Continue to Application button
-    And I request a change in terms and conditions application
-    And I click on the Submit button
-    And I enter the payment information
+    # And I click on the link for Licences & Authorizations
+    # And I click on the link for Request of Change in Terms and Conditions/Request for Discretion
+    # And I click on the Continue to Application button
+    # And I request a change in terms and conditions application
+    # And I click on the Submit button
+    # And I enter the payment information
     And I click on the link for Licences & Authorizations
     And I click on the link for Catering Endorsement Application
     And I click on the Continue to Application button
     And I request a catering endorsement application
     And I click on the Submit button
     And I enter the payment information
-    And I click on the link for Licences & Authorizations
-    And I click on the link for Change to Hours of Liquor Service (within Service Hours)
-    And I complete the change hours application for liquor service within service hours
-    And I click on the Submit button
-    And I enter the payment information
+    # And I click on the link for Licences & Authorizations
+    # And I click on the link for Change to Hours of Liquor Service (within Service Hours)
+    # And I complete the change hours application for liquor service within service hours
+    # And I click on the Submit button
+    # And I enter the payment information
     And the account is deleted
     Then I see the login page
 
-@liquorprimary 
 Scenario: Liquor Primary Release Test #2 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
@@ -116,11 +115,11 @@ Scenario: Liquor Primary Release Test #2 (Private Corporation)
     And I click on the Continue to Application button
     And I click on the Submit button
     And I enter the payment information
-    And I click on the link for Licences & Authorizations
-    And I click on the link for Liquor Primary Relocation Application
-    And I click on the Continue to Application button
-    And I complete a liquor primary relocation request
-    And I click on the Submit button
+    # And I click on the link for Licences & Authorizations
+    # And I click on the link for Liquor Primary Relocation Application
+    # And I click on the Continue to Application button
+    # And I complete a liquor primary relocation request
+    # And I click on the Submit button
     # And I click on the link for Licences & Authorizations
     # And I click on the link for Establishment Name Change Application
     # And I click on the Continue to Application button
@@ -139,7 +138,6 @@ Scenario: Liquor Primary Release Test #2 (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@liquorprimary
 Scenario: Liquor Primary Release Test #3 (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for a Liquor Primary Licence
@@ -236,7 +234,6 @@ Scenario: Liquor Primary Release Test #3 (Private Corporation)
     And the account is deleted
     Then I see the login page
 
-@liquorprimary 
 Scenario: Liquor Primary Release Test #1 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Liquor Primary Licence
@@ -291,7 +288,6 @@ Scenario: Liquor Primary Release Test #1 (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@liquorprimary 
 Scenario: Liquor Primary Release Test #2 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Liquor Primary Licence
@@ -369,7 +365,6 @@ Scenario: Liquor Primary Release Test #2 (Sole Proprietorship)
     And the account is deleted
     Then I see the login page
 
-@liquorprimary 
 Scenario: Liquor Primary Release Test #3 (Sole Proprietorship)
     Given I am logged in to the dashboard as a sole proprietorship
     And I click on the Start Application button for a Liquor Primary Licence

@@ -2,7 +2,6 @@
     As a logged in business user
     I want to request a Catering Endorsement Application for a Food Primary licence
 
-@foodprimarycateringendorsement @privatecorporation
 Scenario: Food Primary Catering Endorsement (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the Start Application button for Food Primary

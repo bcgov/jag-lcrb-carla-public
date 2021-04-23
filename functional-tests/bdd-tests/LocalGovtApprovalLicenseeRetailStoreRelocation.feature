@@ -2,7 +2,6 @@
     As a logged in business user
     I want to submit a LRS Relocation Application for review and approval
 
-@catering @relocation @lgapproval
 Scenario: Local Government Approval for LRS Relocation (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And an LRS licence has been created
