@@ -78,6 +78,9 @@
     <None Update="LiquorPrimaryClubTransferLicence.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="SpecialEventsPermitsPlanYourDrinks.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="SpecialEventsPermitsMyApplications.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
