@@ -8,7 +8,7 @@ Scenario: SEP Application (Private Corporation)
     # Start New Application button
     And I click on the Submit button
     # Start Application button (splash)
-    And I click on the Submit button
+    And I click on the button for SEP Start Application
     And I complete the special events permits applicant info
     # Next button
     And I click on the Submit button
