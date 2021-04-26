@@ -35,7 +35,9 @@ namespace bdd_tests
 
             Thread.Sleep(5000);
 
-            Assert.True(ngDriver.FindElement(By.XPath("//mat-dialog-content[contains(.,'Application Checklist')]")).Displayed);
+            // add try/catch
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Application Checklist')]")).Displayed);
         }
 
         [And(@"Account Profile is displayed")]
