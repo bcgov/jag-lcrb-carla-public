@@ -11,7 +11,6 @@ Scenario: Manage Account Profile
     And I click on the button for my user account
     And I click on the link for Manage account    
     And I click on the Submit button
-    And the dashboard is displayed
     And the account is deleted
     Then I see the login page
 */
