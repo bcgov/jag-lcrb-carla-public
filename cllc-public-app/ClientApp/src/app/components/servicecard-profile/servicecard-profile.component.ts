@@ -29,6 +29,7 @@ export class ServiceCardProfileComponent extends FormBase implements OnInit {
   showErrorSection = false;
   validationMessages: string[];
   currentUser: User;
+  isPrimaryAddressReadOnly = false;
 
   // account profile form
   form = this.fb.group({
@@ -82,8 +83,18 @@ export class ServiceCardProfileComponent extends FormBase implements OnInit {
     if (this.currentUser && this.currentUser.contactid) {
       this.contactDataService.getContact(this.currentUser.contactid)
         .subscribe(contact => {
-          this.form.patchValue({ contact: contact });
+          this.form.patchValue({
+            contact: { ...contact, address1_country: 'Canada' }
+          });
+          this.makePrimaryAddressReadOnly(contact);
         });
+    }
+  }
+
+  private makePrimaryAddressReadOnly(contact: Contact) {
+    const { address1_line1, address1_city, address1_postalcode, address1_stateorprovince, address1_country } = contact;
+    if (address1_line1 || address1_city || address1_postalcode || address1_stateorprovince) {
+      this.isPrimaryAddressReadOnly = true;
     }
   }
 
