@@ -36,6 +36,8 @@ namespace bdd_tests
             for (var i = 0; i < 10; i++)
                 try
                 {
+                    Thread.Sleep(3000);
+
                     Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Application Checklist')]")).Displayed);
                     break;
                 }
