@@ -33,11 +33,14 @@ namespace bdd_tests
             Page Title: Application Checklist
             */
 
-            Thread.Sleep(5000);
-
-            // add try/catch
-
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Application Checklist')]")).Displayed);
+            for (var i = 0; i < 10; i++)
+                try
+                {
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Application Checklist')]")).Displayed);
+                    break;
+                }
+                catch (Exception e)
+                { }
         }
 
         [And(@"Account Profile is displayed")]
@@ -47,7 +50,14 @@ namespace bdd_tests
             Page Title: Account Profile
             */
 
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Account Profile ')]")).Displayed);
+            for (var i = 0; i < 10; i++)
+                try
+                {
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Account Profile ')]")).Displayed);
+                    break;
+                }
+                catch (Exception e)
+                { }
         }
 
         [And(@"the Current Applications label is displayed")]
