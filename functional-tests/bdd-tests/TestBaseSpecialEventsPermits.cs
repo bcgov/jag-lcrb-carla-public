@@ -47,7 +47,14 @@ namespace bdd_tests
             Page Title: Account Profile
             */
 
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Account Profile ')]")).Displayed);
+            for (var i = 0; i < 10; i++)
+                try
+                {
+                    Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,' Account Profile ')]")).Displayed);
+                    break;
+                }
+                catch (Exception e)
+                { }
         }
 
         [And(@"the Current Applications label is displayed")]
