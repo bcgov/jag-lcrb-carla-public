@@ -102,22 +102,27 @@ namespace bdd_tests
 
             // enter the event hours
             var uiEventHours = ngDriver.FindElement(By.CssSelector("input[formcontrolname='hours']"));
+            uiEventHours.Clear();
             uiEventHours.SendKeys(hours);
 
             // enter the event guests
             var uiEventGuests = ngDriver.FindElement(By.CssSelector("input[formcontrolname='guests']"));
+            uiEventGuests.Clear();
             uiEventGuests.SendKeys(guests);
  
             // enter the beer percentage
             var uiBeer = ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[3]/div[1]/app-field/section/div/section/input"));
+            uiBeer.Clear();
             uiBeer.SendKeys(beer);
 
             // enter the wine percentage
             var uiWine = ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[3]/div[2]/app-field/section/div/section/input"));
+            uiWine.Clear();
             uiWine.SendKeys(wine);
     
             // enter the spirits percentage
             var uiSpirits = ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[3]/div[3]/app-field/section/div/section/input"));
+            uiSpirits.Clear();
             uiSpirits.SendKeys(spirits);
         }
 
@@ -129,8 +134,17 @@ namespace bdd_tests
             Page Title: Drink Planner
             */
 
-            // check the total number of calculations
-            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'3,333')]")).Displayed);
+                for (var i = 0; i< 10; i++)
+                try
+                {
+                    Thread.Sleep(3000);
+
+                    // check the total number of drinks
+                    Assert.True(ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[4]/div/div/div[2]/h3/span[contains(.,'3,333')]")).Displayed);
+                    break;
+                }
+                catch (Exception e)
+                { }
         }
     }
 }
