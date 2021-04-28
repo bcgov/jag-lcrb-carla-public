@@ -14,7 +14,7 @@
     <section [formGroup]="form" style="padding: 16px 32px;">
         <div class="d-flex justify-content-between">
             <app-field label="Please select your event location (city/town/district or First Nation)" [required]="true"
-                [valid]="!form.get('lgIn').touched || form.get('lgIn').valid"
+                [valid]="isValidOrNotTouched('lgIn')"
                 errorMessage="Events held in a private residence are not eligible for Special Event Permits">
                 <select formControlName="lgIn" class="form-control">
                     <option value=""></option>
@@ -37,7 +37,7 @@
         </div>
 
         <app-field label="Is this an annual event?" [required]="true"
-            [valid]="!form.get('isAnnualEvent').touched || form.get('isAnnualEvent').valid"
+            [valid]="isValidOrNotTouched('isAnnualEvent')"
             errorMessage="Please choose a value">
             <mat-radio-group formControlName="isAnnualEvent">
                 <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
