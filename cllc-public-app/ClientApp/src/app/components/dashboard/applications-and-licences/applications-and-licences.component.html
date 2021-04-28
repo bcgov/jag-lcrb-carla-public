@@ -481,10 +481,23 @@
     </div>
   </td>
   <td style="background-color: #E1E8F2; padding: 10px;">
-    <div *ngIf="item.applicationStatus === 'Not Submitted' || item.applicationStatus ===  'Pending External Review'">
 
-      <!-- Not yet approved by LG/IN-->
-      <ng-container *ngIf="!item.lgHasApproved">
+    <!-- If the application has been sent to LG/IN, the applicant cannot access it, unless they have approved it -->
+    <div *ngIf="item.applicationStatus === 'Pending External Review'">
+
+      <ng-container *ngIf="item.lgHasApproved">
+        <a appRemoveIfFeatureOff="LicenseeChanges"
+           *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
+           routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
+          <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
+          <span>Complete Application</span>
+        </a>
+      </ng-container>
+
+
+    </div>
+
+    <div *ngIf="item.applicationStatus === 'Not Submitted'">
 
         <a *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal
                   && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal
@@ -493,36 +506,13 @@
           <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
           <span>Complete Application</span>
         </a>
-      </ng-container>
-      <!-- approved by LG/IN -->
-      <ng-container *ngIf="item.lgHasApproved">
-        <a appRemoveIfFeatureOff="LicenseeChanges"
-           *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
-           routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
-          <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-          <span>Complete Application</span>
-        </a>
-        <a appRemoveIfFeatureOff="LicenseeChanges"
-           *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName === ApplicationTypeNames.Catering"
-           [routerLink]="['/account-profile/' + item.id]"
-           id="completeApp{{item.id}}">
-          <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-          <span>Complete Application</span>
-        </a>
-      </ng-container>
-
-      <!--a appRemoveIfFeatureOn="LicenseeChanges"
-         *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && !item.isPaid && !"
-         routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
-        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Complete Application4</span>
-      </a-->
 
       <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal || item.applicationTypeName === ApplicationTypeNames.LiquorRenewal || item.applicationTypeName === ApplicationTypeNames.MarketingRenewal"
          routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
         <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
         <span>Complete Renewal</span>
       </a>
+
     </div>
 
     <div *ngIf="item.applicationStatus === 'Relocation Initiated'">
