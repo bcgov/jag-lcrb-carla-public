@@ -119,11 +119,6 @@ namespace bdd_tests
             // enter the spirits percentage
             var uiSpirits = ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[3]/div[3]/app-field/section/div/section/input"));
             uiSpirits.SendKeys(spirits);
-
-            // click on the terms and conditions checkbox
-            var uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreeToTnC']"));
-            uiTermsAndConditions.Click();
         }
-
     }
 }
