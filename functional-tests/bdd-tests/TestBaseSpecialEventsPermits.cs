@@ -80,10 +80,50 @@ namespace bdd_tests
         public void DrinkPlannerDisplayed()
         {
             /* 
-            Page Title: Current Applications
+            Page Title: Drink Planner
             */
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Drink Planner')]")).Displayed);
         }
+
+
+        [And(@"I complete the Drink Planner form")]
+        public void CompleteDrinkPlanner()
+        {
+            /* 
+            Page Title: Drink Planner
+            */
+
+            string hours = "5";
+            string guests = "500";
+            string beer = "30";
+            string wine = "20";
+            string spirits = "10";
+
+            // enter the event hours
+            var uiEventHours = ngDriver.FindElement(By.CssSelector("input[formcontrolname='hours']"));
+            uiEventHours.SendKeys(hours);
+
+            // enter the event guests
+            var uiEventGuests = ngDriver.FindElement(By.CssSelector("input[formcontrolname='guests']"));
+            uiEventGuests.SendKeys(guests);
+ 
+            // enter the beer percentage
+            var uiBeer = ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[3]/div[1]/app-field/section/div/section/input"));
+            uiBeer.SendKeys(beer);
+
+            // enter the wine percentage
+            var uiWine = ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[3]/div[2]/app-field/section/div/section/input"));
+            uiWine.SendKeys(wine);
+    
+            // enter the spirits percentage
+            var uiSpirits = ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[3]/div[3]/app-field/section/div/section/input"));
+            uiSpirits.SendKeys(spirits);
+
+            // click on the terms and conditions checkbox
+            var uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreeToTnC']"));
+            uiTermsAndConditions.Click();
+        }
+
     }
 }
