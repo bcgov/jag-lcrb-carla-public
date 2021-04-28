@@ -15,9 +15,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string MaximumNumberOfGuests { get; set; }
         public string LocationName { get; set; }
         public string PermitNumber { get; set; }
-        public int? MaxNumberOfGuests { get; set; }
-        public List<SepEventDates> EventDates { get; set; }
-        public List<SepServiceArea> ServiceAreas { get; set; }
+         public List<SepServiceArea> ServiceAreas { get; set; }
         public int? Statecode { get; set; }
 
     }

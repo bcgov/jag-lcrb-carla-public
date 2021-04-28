@@ -22,7 +22,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             result = new ViewModels.SepEventLocation
             {
-                EventDates = new List<ViewModels.SepEventDates>(),
                 ServiceAreas = new List<ViewModels.SepServiceArea>(),
             };
             result.Id = location.AdoxioSpecialeventlocationid;
@@ -36,21 +35,20 @@ namespace Gov.Lclb.Cllb.Public.Models
             result.MaximumNumberOfGuests = location.AdoxioMaximumnumberofguests;
             result.LocationName = location.AdoxioLocationname;
             result.PermitNumber = location.AdoxioPermitnumber;
-            result.MaxNumberOfGuests = location.AdoxioMaxnumberofguests;
 
-            if (location.AdoxioSpecialeventlocationLicencedareas?.Count > 0)
-            {
-                result.ServiceAreas = location.AdoxioSpecialeventlocationLicencedareas
-                .Select(area => area.ToViewModel())
-                .ToList();
-            }
+            // if (location.AdoxioSpecialeventlocationLicencedareas?.Count > 0)
+            // {
+            //     result.ServiceAreas = location.AdoxioSpecialeventlocationLicencedareas
+            //     .Select(area => area.ToViewModel())
+            //     .ToList();
+            // }
 
-            if (location.AdoxioSpecialeventlocationSchedule?.Count > 0)
-            {
-                result.EventDates = location.AdoxioSpecialeventlocationSchedule
-                .Select(sched => sched.ToViewModel())
-                .ToList();
-            }
+            // if (location.AdoxioSpecialeventlocationSchedule?.Count > 0)
+            // {
+            //     result.EventDates = location.AdoxioSpecialeventlocationSchedule
+            //     .Select(sched => sched.ToViewModel())
+            //     .ToList();
+            // }
             return result;
         }
 
@@ -72,7 +70,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMaximumnumberofguests = from.MaximumNumberOfGuests;
             to.AdoxioLocationname = from.LocationName;
             to.AdoxioPermitnumber = from.PermitNumber;
-            to.AdoxioMaxnumberofguests = from.MaxNumberOfGuests;
+            // to.AdoxioMaxnumberofguests = from.MaxNumberOfGuests;
         }
     }
 }

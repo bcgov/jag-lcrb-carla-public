@@ -19,13 +19,13 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static partial class InspectionidExtensions
     {
             /// <summary>
-            /// Get adoxio_InspectionId from adoxio_hoursofservices
+            /// Get adoxio_InspectionId from adoxio_additionalinspectors
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioHoursofserviceid'>
-            /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
+            /// <param name='adoxioAdditionalinspectorid'>
+            /// key: adoxio_additionalinspectorid of adoxio_additionalinspector
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -33,19 +33,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMincident Get(this IInspectionid operations, string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMincident Get(this IInspectionid operations, string adoxioAdditionalinspectorid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(adoxioHoursofserviceid, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(adoxioAdditionalinspectorid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get adoxio_InspectionId from adoxio_hoursofservices
+            /// Get adoxio_InspectionId from adoxio_additionalinspectors
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioHoursofserviceid'>
-            /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
+            /// <param name='adoxioAdditionalinspectorid'>
+            /// key: adoxio_additionalinspectorid of adoxio_additionalinspector
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -56,22 +56,22 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMincident> GetAsync(this IInspectionid operations, string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMincident> GetAsync(this IInspectionid operations, string adoxioAdditionalinspectorid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioHoursofserviceid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioAdditionalinspectorid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Get adoxio_InspectionId from adoxio_hoursofservices
+            /// Get adoxio_InspectionId from adoxio_additionalinspectors
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioHoursofserviceid'>
-            /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
+            /// <param name='adoxioAdditionalinspectorid'>
+            /// key: adoxio_additionalinspectorid of adoxio_additionalinspector
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -82,9 +82,78 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMincident> GetWithHttpMessages(this IInspectionid operations, string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMincident> GetWithHttpMessages(this IInspectionid operations, string adoxioAdditionalinspectorid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(adoxioHoursofserviceid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(adoxioAdditionalinspectorid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get adoxio_InspectionId from adoxio_relatedparties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioRelatedpartyid'>
+            /// key: adoxio_relatedpartyid of adoxio_relatedparty
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            public static MicrosoftDynamicsCRMincident Get1(this IInspectionid operations, string adoxioRelatedpartyid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            {
+                return operations.Get1Async(adoxioRelatedpartyid, select, expand).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get adoxio_InspectionId from adoxio_relatedparties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioRelatedpartyid'>
+            /// key: adoxio_relatedpartyid of adoxio_relatedparty
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MicrosoftDynamicsCRMincident> Get1Async(this IInspectionid operations, string adoxioRelatedpartyid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.Get1WithHttpMessagesAsync(adoxioRelatedpartyid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get adoxio_InspectionId from adoxio_relatedparties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioRelatedpartyid'>
+            /// key: adoxio_relatedpartyid of adoxio_relatedparty
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse<MicrosoftDynamicsCRMincident> Get1WithHttpMessages(this IInspectionid operations, string adoxioRelatedpartyid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.Get1WithHttpMessagesAsync(adoxioRelatedpartyid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
