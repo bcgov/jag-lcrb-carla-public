@@ -26,6 +26,7 @@ namespace bdd_tests
             uiTermsAndConditions.Click();
         }
 
+
         [And(@"the SEP Checklist content is displayed")]
         public void SpecialEventsPermtsChecklist()
         {
@@ -45,6 +46,7 @@ namespace bdd_tests
                 { }
         }
 
+
         [And(@"Account Profile is displayed")]
         public void AccountProfileDisplayed()
         {
@@ -62,6 +64,7 @@ namespace bdd_tests
                 { }
         }
 
+
         [And(@"the Current Applications label is displayed")]
         public void CurrentApplicationsDisplayed()
         {
@@ -70,6 +73,17 @@ namespace bdd_tests
             */
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Current Applications')]")).Displayed);
+        }
+
+
+        [And(@"the Plan Your Drinks label is displayed")]
+        public void DrinkPlannerDisplayed()
+        {
+            /* 
+            Page Title: Current Applications
+            */
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Drink Planner')]")).Displayed);
         }
     }
 }
