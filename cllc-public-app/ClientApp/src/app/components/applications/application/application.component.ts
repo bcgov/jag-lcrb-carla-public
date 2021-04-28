@@ -629,6 +629,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   private isHoursOfSaleValid(): boolean {
     return !this.application.applicationType.showHoursOfSale ||
+        this.application.applicationType.name === ApplicationTypeNames.FP ||
+        this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
       (this.form.get('serviceHoursSundayOpen').valid
         && this.form.get('serviceHoursMondayOpen').valid
         && this.form.get('serviceHoursTuesdayOpen').valid
