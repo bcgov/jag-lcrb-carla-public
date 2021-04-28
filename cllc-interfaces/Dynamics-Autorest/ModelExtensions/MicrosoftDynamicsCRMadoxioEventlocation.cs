@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
@@ -10,5 +11,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "adoxio_ServiceAreaId@odata.bind")]
         public string ServiceAreaODataBind { get; set; }
+        
     }
 }
