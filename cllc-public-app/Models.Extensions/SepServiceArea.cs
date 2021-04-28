@@ -24,16 +24,16 @@ namespace Gov.Lclb.Cllb.Public.Models
                     SpecialEventId = serviceArea._adoxioSpecialeventidValue,
                     MinorPresent = serviceArea.AdoxioMinorpresent,
                     LicencedAreaMaxNumberOfGuests = serviceArea.AdoxioLicencedareamaxnumberofguests,
-                    MaximumNumberOfGuests = serviceArea.AdoxioMaximumnumberofguests,
-                    IsBothOutdoorIndoor = serviceArea.AdoxioIsbothoutdoorindoor,
-                    IsIndoors = serviceArea.AdoxioIsindoors,
-                    NumberOfMinors = serviceArea.AdoxioNumberofminors,
+                    MaximumNumberOfGuests = serviceArea.AdoxioLicencedareamaxnumberofguests,
+                    // IsBothOutdoorIndoor = serviceArea.,
+                    // IsIndoors = serviceArea.,
+                    // IsOutdoors = serviceArea.,
+                    NumberOfMinors = serviceArea.AdoxioLicencedareanumberofminors,
                     LicencedAreaNumberOfMinors = serviceArea.AdoxioLicencedareanumberofminors,
                     Setting = serviceArea.AdoxioSetting,
                     StatusCode = serviceArea.Statecode,
                     StateCode = serviceArea.Statecode,
                     EventName = serviceArea.AdoxioEventname,
-                    IsOutdoors = serviceArea.AdoxioIsoutdoors,
                     LicencedAreaDescription = serviceArea.AdoxioLicencedareadescription,
                 };
 
@@ -48,16 +48,16 @@ namespace Gov.Lclb.Cllb.Public.Models
             to._adoxioSpecialeventidValue = from.SpecialEventId;
             to.AdoxioMinorpresent = from.MinorPresent;
             to.AdoxioLicencedareamaxnumberofguests = from.LicencedAreaMaxNumberOfGuests;
-            to.AdoxioMaximumnumberofguests = from.MaximumNumberOfGuests;
-            to.AdoxioIsbothoutdoorindoor = from.IsBothOutdoorIndoor;
-            to.AdoxioIsindoors = from.IsIndoors;
-            to.AdoxioNumberofminors = from.NumberOfMinors;
+            to.AdoxioLicencedareamaxnumberofguests = from.MaximumNumberOfGuests;
+            // to.AdoxioIsbothoutdoorindoor = from.IsBothOutdoorIndoor;
+            // to.AdoxioIsindoors = from.IsIndoors;
+            // to.AdoxioIsoutdoors = from.IsOutdoors;
+            to.AdoxioLicencedareanumberofminors = from.NumberOfMinors;
             to.AdoxioLicencedareanumberofminors = from.LicencedAreaNumberOfMinors;
             to.AdoxioSetting = from.Setting;
             to.Statecode = from.StatusCode;
             to.Statecode = from.StateCode;
             to.AdoxioEventname = from.EventName;
-            to.AdoxioIsoutdoors = from.IsOutdoors;
             to.AdoxioLicencedareadescription = from.LicencedAreaDescription;
         }
 

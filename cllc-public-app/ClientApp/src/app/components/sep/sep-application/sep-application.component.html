@@ -16,18 +16,15 @@
                     </app-applicant>
                 </form>
             </mat-step>
-            <!--
+
             <mat-step [stepControl]="eligibilityForm" [completed]="isStepCompleted(step)"
                 *ngIf="step === 'eligibility'">
                 <ng-template matStepLabel>Eligibility</ng-template>
-                <form [formGroup]="eligibilityForm">
-                    <app-eligibility [account]="account" [applicationId]="application?.id"
-                        *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()"
-                        #eligibility>
-                    </app-eligibility>
-                </form>
+                <app-eligibility [account]="account" [applicationId]="application?.id"
+                    *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()" #eligibility>
+                </app-eligibility>
             </mat-step>
-            -->
+
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'event'">
                 <ng-template matStepLabel>Event</ng-template>

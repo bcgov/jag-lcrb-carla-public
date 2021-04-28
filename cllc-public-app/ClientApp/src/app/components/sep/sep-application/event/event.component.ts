@@ -81,11 +81,10 @@ export class EventComponent extends FormBase implements OnInit {
     return result;
   }
 
-  getEventDates(locationIndex: number): FormArray {
+  getEventDates(location: FormGroup): FormArray {
     let result = this.fb.array([]);
     if (location) {
-      result = this.locations.at(locationIndex)
-        .get('eventDates') as FormArray;
+      result = location.get('eventDates') as FormArray;
     }
     return result;
   }
@@ -102,36 +101,43 @@ export class EventComponent extends FormBase implements OnInit {
       eventLocationCity: [''],
       eventLocationProvince: [''],
       eventLocationPostalCode: [''],
-      eventDates: this.fb.array([]),
       serviceAreas: this.fb.array([]),
     });
     locationForm.patchValue(location);
 
-    if (location?.eventDates?.length > 0) {
-      location.eventDates.forEach(ed => {
-        this.addEventDate(ed, locationForm.get('eventDates') as FormArray);
-      });
-    } else {
-      this.addEventDate({} as SepSchedule, locationForm.get('eventDates') as FormArray);
+    if (!location.serviceAreas || location.serviceAreas.length == 0) {
+      location.serviceAreas = [{} as SepServiceArea];
     }
+    location.serviceAreas.forEach(area => {
+      const areaForm = this.createServiceArea(area);
+      (locationForm.get('serviceAreas') as FormArray).push(areaForm);
 
-    if (location?.serviceAreas?.length > 0) {
-      location.serviceAreas.forEach(ed => {
-        this.addServiceArea(ed, locationForm.get('serviceAreas') as FormArray);
+      if (!area.eventDates || area.eventDates.length == 0) {
+        area.eventDates = [{} as SepSchedule];
+      }
+      area.eventDates.forEach(ed => {
+        const edForm = this.createEventDate(ed);
+        (areaForm.get('eventDates') as FormArray).push(edForm);
       });
-    } else {
-      this.addServiceArea({} as SepServiceArea, locationForm.get('serviceAreas') as FormArray);
-    }
+
+    });
+
 
     this.locations.push(locationForm);
   }
 
-  
+
   removeLocation(locationIndex: number) {
     this.locations.removeAt(locationIndex);
   }
 
-  addEventDate(eventDate: SepSchedule, eventDates: FormArray) {
+  addEventDate(sched: SepSchedule, area: FormGroup){
+    const eventDates = area.get('eventDates') as FormArray;
+    const dates = this.createEventDate(sched);
+    eventDates.push(dates);
+  }
+
+  createEventDate(eventDate: SepSchedule) {
     let datesForm = this.fb.group({
       eventDate: [''],
       eventStart: [''],
@@ -140,30 +146,36 @@ export class EventComponent extends FormBase implements OnInit {
       ServiceEnd: [''],
     });
     datesForm.patchValue(eventDate);
-    eventDates.push(datesForm);
+    return datesForm;
   }
 
-  removeEventDate(eventDateIndex: number, locationIndex: number) {
-    let eventDates = this.locations.at(locationIndex).get('eventDates') as FormArray;
+  removeEventDate(eventDateIndex: number, serviceArea: FormGroup) {
+    const eventDates = serviceArea.get('eventDates') as FormArray;
     eventDates.removeAt(eventDateIndex);
   }
 
+  addServiceArea(area: SepServiceArea, location: FormGroup){
+    const areaArray = location.get('serviceAreas') as FormArray;
+    const areaFormGroup = this.createServiceArea(area);
+    areaArray.push(areaFormGroup);
+  }
 
-  addServiceArea(area: SepServiceArea, serviceAreas: FormArray) {
+  createServiceArea(area: SepServiceArea) {
     let areaForm = this.fb.group({
       description: [''],
       numAreaMaxGuests: [''],
       setting: [''],
       isMinorsPresent: [''],
       numMinors: [''],
+      eventDates: this.fb.array([]),
     });
     areaForm.patchValue(area);
-    serviceAreas.push(areaForm);
+    return areaForm;
   }
 
 
-  removeServiceArea(serviceAreaIndex: number, locationIndex: number) {
-    let serviceAreas = this.locations.at(locationIndex).get('serviceAreas') as FormArray;
+  removeServiceArea(serviceAreaIndex: number, location: FormGroup) {
+    let serviceAreas = location.get('serviceAreas') as FormArray;
     serviceAreas.removeAt(serviceAreaIndex);
   }
 

@@ -19,10 +19,10 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface IInspectionid
     {
         /// <summary>
-        /// Get adoxio_InspectionId from adoxio_hoursofservices
+        /// Get adoxio_InspectionId from adoxio_additionalinspectors
         /// </summary>
-        /// <param name='adoxioHoursofserviceid'>
-        /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
+        /// <param name='adoxioAdditionalinspectorid'>
+        /// key: adoxio_additionalinspectorid of adoxio_additionalinspector
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -45,6 +45,34 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMincident>> GetWithHttpMessagesAsync(string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMincident>> GetWithHttpMessagesAsync(string adoxioAdditionalinspectorid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get adoxio_InspectionId from adoxio_relatedparties
+        /// </summary>
+        /// <param name='adoxioRelatedpartyid'>
+        /// key: adoxio_relatedpartyid of adoxio_relatedparty
+        /// </param>
+        /// <param name='select'>
+        /// Select properties to be returned
+        /// </param>
+        /// <param name='expand'>
+        /// Expand related entities
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMincident>> Get1WithHttpMessagesAsync(string adoxioRelatedpartyid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

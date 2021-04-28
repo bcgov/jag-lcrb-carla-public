@@ -288,6 +288,10 @@ import { DrinkPlannerDialog } from "@components/sep/drink-planner/drink-planner.
 import { UserMenuComponent } from "@components/user-menu/user-menu.component";
 import { ServicecardUserConfirmationComponent } from "@components/sep/servicecard-user-confirmation/servicecard-user-confirmation.component";
 import { ServicecardUserTermsAndConditionsComponent } from "@components/sep/servicecard-user-terms-and-conditions/servicecard-user-terms-and-conditions.component";
+import { TotalServingsComponent } from './components/sep/sep-application/liquor/tabs/total-servings/total-servings.component';
+import { SellingDrinksComponent } from './components/sep/sep-application/liquor/tabs/selling-drinks/selling-drinks.component';
+import { DrinkAmountsComponent } from './components/sep/sep-application/liquor/tabs/drink-amounts/drink-amounts.component';
+import { ConversionToolComponent } from './components/sep/sep-application/liquor/tabs/total-servings/conversion-tool/conversion-tool.component';
 
 @NgModule({
   declarations: [
@@ -448,6 +452,10 @@ import { ServicecardUserTermsAndConditionsComponent } from "@components/sep/serv
     UserMenuComponent,
     ServicecardUserConfirmationComponent,
     ServicecardUserTermsAndConditionsComponent,
+    TotalServingsComponent,
+    SellingDrinksComponent,
+    DrinkAmountsComponent,
+    ConversionToolComponent,
   ],
   imports: [
     AppRoutingModule,

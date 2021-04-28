@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class SepEventDates

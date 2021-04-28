@@ -51,10 +51,10 @@
                 <mat-expansion-panel [expanded]="true" [formGroupName]="i" class="location-panel"
                     *ngFor="let location of locations.controls; let i = index;">
                     <!-- <mat-expansion-panel-header> -->
-                        <h3>
-                            <fa-icon [icon]="faMapMarkerAlt" mat-card-avatar></fa-icon>
-                            Location {{i + 1}}
-                        </h3>
+                    <h3>
+                        <fa-icon [icon]="faMapMarkerAlt" mat-card-avatar></fa-icon>
+                        Location {{i + 1}}
+                    </h3>
                     <!-- </mat-expansion-panel-header> -->
                     <div class="d-flex justify-content-between">
                         <mat-card class="mat-elevation-z0 location-panel">
@@ -156,129 +156,123 @@
                                                 </section>
                                                 <div>
                                                     <button mat-raised-button color="warn"
-                                                        (click)="removeServiceArea(j,i)">Remove
+                                                        (click)="removeServiceArea(j, location)">Remove
                                                         Area</button>
                                                 </div>
                                             </div>
+
+                                            <mat-card formGroupName="eventDates" class="mat-elevation-z0 mt-3">
+                                                <h3>Event Date(s)</h3>
+                                                <p>
+                                                    The start time of an event is the time when guests are first admitted to the event
+                                                    venue; e.g., when the doors to the theatre open before the performance or the
+                                                    stadium opens before the game to allow time for the audience to be admitted and
+                                                    seated.
+                                                </p>
+                                                <p>
+                                                    Permitted event times are: Indoor events: 9:00a.m. ? 2:00 a.m. the following day
+                                                    Outdoor events: 9:00a.m. ? 10:00p.m. the same day Under very limited circumstances,
+                                                    you may receive permission from the Liquor and Cannabis Regulation Branch to extend
+                                                    these hours.
+                                                </p>
+                
+                                                <mat-accordion>
+                                                    <mat-expansion-panel [expanded]="true" [formGroupName]="k" (opened)="isOpen = true"
+                                                        (closed)="isOpen = false"
+                                                        *ngFor="let item of getEventDates(area).controls; let isOpen = true; let k = index;">
+                                                        <mat-expansion-panel-header>
+                                                            <mat-panel-title *ngIf="!isOpen">
+                                                                Event Date: {{ item.get('eventDate').value | date}}
+                                                                <br>
+                                                                Event Times: 7:00 PM - 11: 30 PM
+                                                            </mat-panel-title>
+                                                            <mat-panel-title *ngIf="!isOpen">
+                                                                Liquor will be served: 7:00 PM - 11: 30 PM
+                                                            </mat-panel-title>
+                                                        </mat-expansion-panel-header>
+                
+                                                        <table class="w-100">
+                                                            <tr>
+                                                                <td>
+                                                                    <app-field label="Date of your event">
+                                                                        <input type="text" formControlName="eventDate"
+                                                                            style="background-color: #fff; width: 200px;"
+                                                                            placeholder="yyyy-mm-dd" readonly class="form-control"
+                                                                            [min]="minDate" [matDatepicker]="picker"
+                                                                            (focus)="picker.open()" (click)="picker.open()">
+                                                                        <mat-datepicker #picker></mat-datepicker>
+                                                                    </app-field>
+                                                                </td>
+                                                                <td>
+                                                                    <app-field label="From">
+                                                                        <select class="form-control">
+                                                                            <option value=""></option>
+                                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                                {{item.name}}
+                                                                            </option>
+                                                                        </select>
+                                                                    </app-field>
+                                                                </td>
+                                                                <td>
+                                                                    <app-field label="To">
+                                                                        <select class="form-control">
+                                                                            <option value=""></option>
+                                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                                {{item.name}}
+                                                                            </option>
+                                                                        </select>
+                                                                    </app-field>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <button mat-raised-button color="warn"
+                                                                        (click)="removeEventDate(k, area)">Remove
+                                                                        Date</button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right">
+                                                                    <label>Liquor will be served:</label>
+                                                                </td>
+                                                                <td>
+                                                                    <app-field label="From">
+                                                                        <select class="form-control">
+                                                                            <option value=""></option>
+                                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                                {{item.name}}
+                                                                            </option>
+                                                                        </select>
+                                                                    </app-field>
+                                                                </td>
+                                                                <td>
+                                                                    <app-field label="To">
+                                                                        <select class="form-control">
+                                                                            <option value=""></option>
+                                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                                {{item.name}}
+                                                                            </option>
+                                                                        </select>
+                                                                    </app-field>
+                                                                </td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </table>
+                                                    </mat-expansion-panel>
+                                                </mat-accordion>
+                                                <button mat-raised-button color="secondary" class="mt-3"
+                                                    (click)="addEventDate({}, area)">Add Event Date</button>
+                                            </mat-card>
+
                                         </mat-expansion-panel>
                                     </mat-accordion>
                                     <button mat-raised-button color="secondary" class="mt-3"
-                                        (click)="addServiceArea({}, location.get('serviceAreas'))">Add Service
+                                        (click)="addServiceArea({}, location)">Add Service
                                         Area</button>
                                 </mat-card>
                             </section>
-
-                            <mat-card formGroupName="eventDates" class="mat-elevation-z0 mt-3">
-                                <h3>Event Date(s)</h3>
-                                <p>
-                                    The start time of an event is the time when guests are first admitted to the
-                                    event venue;
-                                    e.g.,
-                                    when the doors to the theatre open before the performance or the stadium opens
-                                    before the
-                                    game
-                                    to allow
-                                    time for the audience to be admitted and seated.
-                                </p>
-                                <p>
-                                    Permitted event times are: Indoor events: 9:00a.m. ? 2:00 a.m. the following day
-                                    Outdoor
-                                    events:
-                                    9:00a.m. ? 10:00p.m. the same day Under very limited circumstances, you may
-                                    receive
-                                    permission
-                                    from the Liquor and Cannabis Regulation Branch to extend these hours.
-                                </p>
-
-                                <mat-accordion>
-                                    <mat-expansion-panel [expanded]="true" [formGroupName]="k" (opened)="isOpen = true"
-                                    (closed)="isOpen = false"
-                                        *ngFor="let item of getEventDates(i).controls; let isOpen = true; let k = index;">
-                                        <mat-expansion-panel-header>
-                                            <mat-panel-title  *ngIf="!isOpen">
-                                                Event Date: {{ item.get('eventDate').value | date}}
-                                                <br>
-                                                Event Times: 7:00 PM - 11: 30 PM
-                                            </mat-panel-title>
-                                            <mat-panel-title  *ngIf="!isOpen">
-                                                Liquor will be served: 7:00 PM - 11: 30 PM
-                                            </mat-panel-title>
-                                        </mat-expansion-panel-header>
-
-                                        <table class="w-100">
-                                            <tr>
-                                                <td>
-                                                    <app-field label="Date of your event">
-                                                        <input type="text" formControlName="eventDate"
-                                                            style="background-color: #fff; width: 200px;"
-                                                            placeholder="yyyy-mm-dd" readonly class="form-control"
-                                                            [min]="minDate" [matDatepicker]="picker"
-                                                            (focus)="picker.open()" (click)="picker.open()">
-                                                        <mat-datepicker #picker></mat-datepicker>
-                                                    </app-field>
-                                                </td>
-                                                <td>
-                                                    <app-field label="From">
-                                                        <select class="form-control">
-                                                            <option value=""></option>
-                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                                {{item.name}}
-                                                            </option>
-                                                        </select>
-                                                    </app-field>
-                                                </td>
-                                                <td>
-                                                    <app-field label="To">
-                                                        <select class="form-control">
-                                                            <option value=""></option>
-                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                                {{item.name}}
-                                                            </option>
-                                                        </select>
-                                                    </app-field>
-                                                </td>
-                                                <td class="text-right">
-                                                    <button mat-raised-button color="warn"
-                                                        (click)="removeEventDate(k, i)">Remove
-                                                        Date</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right">
-                                                    <label>Liquor will be served:</label>
-                                                </td>
-                                                <td>
-                                                    <app-field label="From">
-                                                        <select class="form-control">
-                                                            <option value=""></option>
-                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                                {{item.name}}
-                                                            </option>
-                                                        </select>
-                                                    </app-field>
-                                                </td>
-                                                <td>
-                                                    <app-field label="To">
-                                                        <select class="form-control">
-                                                            <option value=""></option>
-                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                                {{item.name}}
-                                                            </option>
-                                                        </select>
-                                                    </app-field>
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                        </table>
-                                    </mat-expansion-panel>
-                                </mat-accordion>
-                                <button mat-raised-button color="secondary" class="mt-3"
-                                    (click)="addEventDate({}, location.get('eventDates'))">Add Event Date</button>
-                            </mat-card>
                         </mat-card>
                         <div>
                             <button mat-raised-button color="warn" (click)="removeLocation(i)">Remove
-                                Area</button>
+                                Location</button>
                         </div>
                     </div>
                 </mat-expansion-panel>
