@@ -59,11 +59,13 @@
                     <div class="d-flex justify-content-between">
                         <mat-card class="mat-elevation-z0 location-panel">
                             <div class="d-flex justify-content-between">
-                                <app-field label="Event Location Name" [required]="true"
-                                    [valid]="!location.get('locationName').touched || location.get('locationName').valid"
-                                    errorMessage="Name can't be blank">
-                                    <input type="text" formControlName="locationName" class="form-control">
-                                </app-field>
+                                <section class="flex-fill">
+                                    <app-field label="Event Location Name" [required]="true" [isFullWidth]="true"
+                                        [valid]="!location.get('locationName').touched || location.get('locationName').valid"
+                                        errorMessage="Name can't be blank">
+                                        <input type="text" formControlName="locationName" class="form-control">
+                                    </app-field>
+                                </section>
                                 <div>
                                     <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()"
                                         matTooltip="For example: community centre, sports field, wedding hall etc."
@@ -71,18 +73,18 @@
                                     </fa-icon>
                                 </div>
                             </div>
-                            <app-field label="Venue Type" [required]="true"
+                            <app-field label="Venue Type" [required]="true"  [isFullWidth]="true"
                                 [valid]="!location.get('venueType').touched || location.get('venueType').valid"
                                 errorMessage="Please enter a value">
                                 <input type="text" formControlName="venueType" class="form-control"
                                     placeholder="For example, community centre, convention centre, banquet hall">
                             </app-field>
-                            <app-field label="Address Line 1" [required]="true"
+                            <app-field label="Address Line 1" [required]="true"  [isFullWidth]="true"
                                 [valid]="!location.get('eventLocationStreet1').touched || location.get('eventLocationStreet1').valid"
                                 errorMessage="Address line 1 can't be blank">
                                 <input type="text" formControlName="eventLocationStreet1" class="form-control">
                             </app-field>
-                            <app-field label="Address Line 2">
+                            <app-field label="Address Line 2"  [isFullWidth]="true">
                                 <input type="text" formControlName="eventLocationStreet2" class="form-control">
                             </app-field>
                             <app-field label="Postal Code" [required]="true"
@@ -119,7 +121,6 @@
                                                 <mat-panel-title>
                                                     Minors present
                                                 </mat-panel-title>
-
                                             </mat-expansion-panel-header> -->
                                             <br>
                                             <div class="d-flex justify-content-between">
@@ -164,50 +165,58 @@
                                             <mat-card formGroupName="eventDates" class="mat-elevation-z0 mt-3">
                                                 <h3>Event Date(s)</h3>
                                                 <p>
-                                                    The start time of an event is the time when guests are first admitted to the event
-                                                    venue; e.g., when the doors to the theatre open before the performance or the
-                                                    stadium opens before the game to allow time for the audience to be admitted and
+                                                    The start time of an event is the time when guests are first
+                                                    admitted to the event
+                                                    venue; e.g., when the doors to the theatre open before the
+                                                    performance or the
+                                                    stadium opens before the game to allow time for the audience to be
+                                                    admitted and
                                                     seated.
                                                 </p>
                                                 <p>
-                                                    Permitted event times are: Indoor events: 9:00a.m. ? 2:00 a.m. the following day
-                                                    Outdoor events: 9:00a.m. ? 10:00p.m. the same day Under very limited circumstances,
-                                                    you may receive permission from the Liquor and Cannabis Regulation Branch to extend
+                                                    Permitted event times are: Indoor events: 9:00a.m. ? 2:00 a.m. the
+                                                    following day
+                                                    Outdoor events: 9:00a.m. ? 10:00p.m. the same day Under very limited
+                                                    circumstances,
+                                                    you may receive permission from the Liquor and Cannabis Regulation
+                                                    Branch to extend
                                                     these hours.
                                                 </p>
-                
                                                 <mat-accordion>
-                                                    <mat-expansion-panel [expanded]="true" [formGroupName]="k" (opened)="isOpen = true"
-                                                        (closed)="isOpen = false"
+                                                    <mat-expansion-panel [expanded]="true" [formGroupName]="k"
+                                                        (opened)="isOpen = true" (closed)="isOpen = false"
                                                         *ngFor="let item of getEventDates(area).controls; let isOpen = true; let k = index;">
                                                         <mat-expansion-panel-header>
                                                             <mat-panel-title *ngIf="!isOpen">
-                                                                Event Date: {{ item.get('eventDate').value | date}}
+                                                                Event Date: {{ item.get('eventDate')?.value | date}}
                                                                 <br>
-                                                                Event Times: 7:00 PM - 11: 30 PM
+                                                                Event Times: {{ item.get('eventStart').value}} - {{ item.get('eventEnd').value}}
                                                             </mat-panel-title>
                                                             <mat-panel-title *ngIf="!isOpen">
-                                                                Liquor will be served: 7:00 PM - 11: 30 PM
+                                                                Liquor will be served: {{ item.get('serviceStart').value}} - {{ item.get('serviceEnd').value}}
                                                             </mat-panel-title>
                                                         </mat-expansion-panel-header>
-                
+
                                                         <table class="w-100">
                                                             <tr>
                                                                 <td>
                                                                     <app-field label="Date of your event">
                                                                         <input type="text" formControlName="eventDate"
-                                                                            style="background-color: #fff; width: 200px;"
-                                                                            placeholder="yyyy-mm-dd" readonly class="form-control"
-                                                                            [min]="minDate" [matDatepicker]="picker"
-                                                                            (focus)="picker.open()" (click)="picker.open()">
+                                                                            style="background-color: #fff; width: 170px;"
+                                                                            placeholder="yyyy-mm-dd" readonly
+                                                                            class="form-control" [min]="minDate"
+                                                                            [matDatepicker]="picker"
+                                                                            (focus)="picker.open()"
+                                                                            (click)="picker.open()">
                                                                         <mat-datepicker #picker></mat-datepicker>
                                                                     </app-field>
                                                                 </td>
                                                                 <td>
                                                                     <app-field label="From">
-                                                                        <select class="form-control">
+                                                                        <select class="form-control" formControlName="eventStart">
                                                                             <option value=""></option>
-                                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                            <option [value]="item.value"
+                                                                                *ngFor="let item of timeSlots">
                                                                                 {{item.name}}
                                                                             </option>
                                                                         </select>
@@ -215,9 +224,10 @@
                                                                 </td>
                                                                 <td>
                                                                     <app-field label="To">
-                                                                        <select class="form-control">
+                                                                        <select class="form-control"  formControlName="eventEnd">
                                                                             <option value=""></option>
-                                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                            <option [value]="item.value"
+                                                                                *ngFor="let item of timeSlots">
                                                                                 {{item.name}}
                                                                             </option>
                                                                         </select>
@@ -225,8 +235,7 @@
                                                                 </td>
                                                                 <td class="text-right">
                                                                     <button mat-raised-button color="warn"
-                                                                        (click)="removeEventDate(k, area)">Remove
-                                                                        Date</button>
+                                                                        (click)="removeEventDate(k, area)">Remove</button>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -235,9 +244,10 @@
                                                                 </td>
                                                                 <td>
                                                                     <app-field label="From">
-                                                                        <select class="form-control">
+                                                                        <select class="form-control"  formControlName="serviceStart">
                                                                             <option value=""></option>
-                                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                            <option [value]="item.value"
+                                                                                *ngFor="let item of timeSlots">
                                                                                 {{item.name}}
                                                                             </option>
                                                                         </select>
@@ -245,9 +255,10 @@
                                                                 </td>
                                                                 <td>
                                                                     <app-field label="To">
-                                                                        <select class="form-control">
+                                                                        <select class="form-control"  formControlName="serviceEnd">
                                                                             <option value=""></option>
-                                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                                            <option [value]="item.value"
+                                                                                *ngFor="let item of timeSlots">
                                                                                 {{item.name}}
                                                                             </option>
                                                                         </select>
@@ -261,7 +272,6 @@
                                                 <button mat-raised-button color="secondary" class="mt-3"
                                                     (click)="addEventDate({}, area)">Add Event Date</button>
                                             </mat-card>
-
                                         </mat-expansion-panel>
                                     </mat-accordion>
                                     <button mat-raised-button color="secondary" class="mt-3"
