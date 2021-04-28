@@ -1492,8 +1492,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showValidInterestforTransfer() {
     return (this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
-      (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType === "Wine Store")
-      || this.application.applicationType.name === ApplicationTypeNames.MFG);
+      (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType === "Wine Store"));
   }
 
   showDynamicForm(formReference, tabs) {
