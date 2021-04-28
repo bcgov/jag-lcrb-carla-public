@@ -120,5 +120,17 @@ namespace bdd_tests
             var uiSpirits = ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[3]/div[3]/app-field/section/div/section/input"));
             uiSpirits.SendKeys(spirits);
         }
+
+
+        [And(@"the Drink Planner calculations are correct")]
+        public void DrinkPlannerCalculations()
+        {
+            /* 
+            Page Title: Drink Planner
+            */
+
+            // check the total number of calculations
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'3,333')]")).Displayed);
+        }
     }
 }
