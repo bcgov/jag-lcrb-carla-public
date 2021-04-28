@@ -2,6 +2,7 @@
     As a logged in business user
     I want to run a Special Events Permits release test
 
+@11release
 Scenario: SEP Release (Private Corporation)
     Given I am logged in to the dashboard as a private corporation
     And I click on the link for Special Events Permits Dashboard
