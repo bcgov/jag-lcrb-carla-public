@@ -1,0 +1,59 @@
+<form>
+    <p>
+        Almost there... Give us a few more details
+    </p>
+
+    <app-field label="Are you charging drinks at your event?" [required]="true">
+        <select class="form-control">
+            <option value=""></option>
+            <option value="recover_cost">Yes - To recover event operating costs</option>
+            <option value="money_raise">Yes - To raise money for a charitable purpose</option>
+            <option selected="selected" value="liquor_is_free">No - Drinks will be free of charge</option>
+            <option value="combination">Combination - Some drinks will be sold and some will be given away for free
+            </option>
+            <option value="for_profit" style="display: none;">Yes - Municipal, Provincial, National and International
+                Exemption</option>
+        </select>
+    </app-field>
+
+    <section class="p-3">
+        <app-field label="Enter the name of the non-profit organization receiving charitable proceeds from this event"
+            [required]="true">
+            <input type="text" class="form-control">
+        </app-field>
+        <app-field label="Select the fund-raising purpose of your event " [required]="true">
+            <select class="form-control">
+                <option value=""></option>
+                <option value="poverty">Relief of poverty</option>
+                <option value="education">Advancement of education</option>
+                <option value="religious">Religious purposes</option>
+                <option value="recreation">Recreation</option>
+                <option value="sports">Sports or athletics</option>
+                <option value="disabled">Aid to the disabled and/or handicapped</option>
+                <option value="culture">Advancement of culture</option>
+                <option value="youth_and_seniors">Benefit to youth or senior citizens</option>
+                <option value="other">Other purpose beneficial to the community</option>
+            </select>
+        </app-field>
+        <app-field label="How will the proceeds from this event be used? " [required]="true">
+<textarea class="w-100" rows="5"></textarea>
+        </app-field>
+    </section>
+
+    <app-field label="Are you hosting this event as a GST registered organization?" [required]="true">
+        <mat-radio-group>
+            <mat-radio-button value="true">Yes</mat-radio-button>
+            <mat-radio-button value="false">No</mat-radio-button>
+        </mat-radio-group>
+    </app-field>
+
+    <app-field
+        label="Are any of the liquor products at the event donated or have they been provided under consular privilege?"
+        [required]="true">
+        <mat-radio-group>
+            <mat-radio-button value="true">Yes</mat-radio-button>
+            <mat-radio-button value="false">No</mat-radio-button>
+        </mat-radio-group>
+    </app-field>
+
+</form>

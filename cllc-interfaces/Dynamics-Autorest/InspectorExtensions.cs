@@ -19,13 +19,13 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static partial class InspectorExtensions
     {
             /// <summary>
-            /// Get adoxio_Inspector from adoxio_inspectorreports
+            /// Get adoxio_Inspector from adoxio_specialevents
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioInspectorreportid'>
-            /// key: adoxio_inspectorreportid of adoxio_inspectorreport
+            /// <param name='adoxioSpecialeventid'>
+            /// key: adoxio_specialeventid of adoxio_specialevent
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -33,19 +33,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMsystemuser Get(this IInspector operations, string adoxioInspectorreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMsystemuser Get(this IInspector operations, string adoxioSpecialeventid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(adoxioInspectorreportid, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(adoxioSpecialeventid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get adoxio_Inspector from adoxio_inspectorreports
+            /// Get adoxio_Inspector from adoxio_specialevents
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioInspectorreportid'>
-            /// key: adoxio_inspectorreportid of adoxio_inspectorreport
+            /// <param name='adoxioSpecialeventid'>
+            /// key: adoxio_specialeventid of adoxio_specialevent
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -56,22 +56,22 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMsystemuser> GetAsync(this IInspector operations, string adoxioInspectorreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMsystemuser> GetAsync(this IInspector operations, string adoxioSpecialeventid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioInspectorreportid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioSpecialeventid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Get adoxio_Inspector from adoxio_inspectorreports
+            /// Get adoxio_Inspector from adoxio_specialevents
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioInspectorreportid'>
-            /// key: adoxio_inspectorreportid of adoxio_inspectorreport
+            /// <param name='adoxioSpecialeventid'>
+            /// key: adoxio_specialeventid of adoxio_specialevent
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -82,9 +82,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMsystemuser> GetWithHttpMessages(this IInspector operations, string adoxioInspectorreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMsystemuser> GetWithHttpMessages(this IInspector operations, string adoxioSpecialeventid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(adoxioInspectorreportid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(adoxioSpecialeventid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
