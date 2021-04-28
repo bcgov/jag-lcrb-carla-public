@@ -42,17 +42,18 @@
               <app-field class="col-md-12 col-xs-12" label="Street Address" [required]="true"
                 errorMessage="Please enter the street address" [valid]="isValidOrNotTouched('contact.address1_line1')"
                 [isFullWidth]="true">
-                <input class="form-control" type="text" formControlName="address1_line1">
+                <input class="form-control" type="text" formControlName="address1_line1" [readonly]="isPrimaryAddressReadOnly">
               </app-field>
               <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true"
                 errorMessage="Please enter the city" [required]="true"
                 [valid]="isValidOrNotTouched('contact.address1_city')">
-                <input class="form-control" type="text" formControlName="address1_city">
+                <input class="form-control" type="text" formControlName="address1_city" [readonly]="isPrimaryAddressReadOnly">
               </app-field>
               <section class="col-md-4 col-xs-12">
                 <app-field label="Province/State" [isFullWidth]="true" errorMessage="Please enter the province"
                   [required]="true" [valid]="isValidOrNotTouched('contact.address1_stateorprovince')">
-                  <select class="form-control" formControlName="address1_stateorprovince">
+                  <input *ngIf="isPrimaryAddressReadOnly" class="form-control" type="text" formControlName="address1_stateorprovince" readonly>
+                  <select *ngIf="!isPrimaryAddressReadOnly" class="form-control" formControlName="address1_stateorprovince">
                     <option value="British Columbia">British Columbia</option>
                     <option value="Ontario">Ontario</option>
                     <option value="Alberta">Alberta</option>
@@ -73,13 +74,13 @@
                 <app-field label="Postal Code"
                   errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)"
                   [required]="true" [valid]="isValidOrNotTouched('contact.address1_postalcode')">
-                  <input class="form-control" type="text" formControlName="address1_postalcode">
+                  <input class="form-control" type="text" formControlName="address1_postalcode" [readonly]="isPrimaryAddressReadOnly">
                 </app-field>
               </section>
               <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true"
                 errorMessage="Please enter Country" [required]="true"
                 [valid]="!form.get('contact.address1_country').touched || form.get('contact.address1_country').valid">
-                <input formControlName="address1_country" class="form-control" type="text" readonly>
+                <input formControlName="address1_country" class="form-control" type="text" value="Canada" readonly>
               </app-field>
             </address>
           </div>
