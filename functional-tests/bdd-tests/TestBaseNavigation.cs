@@ -149,6 +149,12 @@ namespace bdd_tests
                     executor4.ExecuteScript("arguments[0].scrollIntoView(true);", uiSEPPlanYourDrinks);
                     uiSEPPlanYourDrinks.Click();
                     break;
+                case "my user account":
+                    var uiMyUserAccount = ngDriver.FindElement(By.CssSelector("svg.fa-chevron-down[data-icon='chevron-down']"));
+                    var executor5 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor5.ExecuteScript("arguments[0].scrollIntoView(true);", uiMyUserAccount);
+                    uiMyUserAccount.Click();
+                    break;
             }
         }
 
