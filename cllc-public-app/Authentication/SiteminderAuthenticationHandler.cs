@@ -342,15 +342,23 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     var contact = _dynamicsClient.GetActiveContactByExternalIdBridged(false, siteMinderGuid);
                     if (contact == null)
                     {
+                        _logger.Information($"No bridged contact found for {siteMinderGuid}");
                         // try by other means.
                         var contactVM = new ViewModels.Contact();
                         contactVM.CopyHeaderValues(context.Request.Headers);
                         var temp = _dynamicsClient.GetContactByContactVmBlankSmGuid(contactVM);
-                        if (temp != null && temp.Statecode == 0) // ensure it is active.
+                        if (temp != null) // ensure it is active.
                         {
                             contact = temp;
                             // update the contact.
-                            _dynamicsClient.UpdateContactBridgeLogin(contact.Contactid, siteMinderGuid, contact._accountidValue, siteMinderBusinessGuid);
+                            _logger.Information(
+                                $"Adding bridge record for login.  ContactID is {contact.Contactid}, GUID is {siteMinderGuid}");
+                            _dynamicsClient.UpdateContactBridgeLogin(contact.Contactid, siteMinderGuid,
+                                contact._accountidValue, siteMinderBusinessGuid);
+                        }
+                        else
+                        {
+                            _logger.Error("No existing contact found by search by header info.");
                         }
                     }
                     if (contact != null && contact.Contactid != null)
