@@ -29,29 +29,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioPolicejurisdiction class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioPolicejurisdiction(string adoxioPosition = default(string), string adoxioFaxnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string adoxioContactname = default(string), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string adoxioPhonenumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), int? statecode = default(int?), string adoxioName = default(string), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), string _createdbyValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string adoxioEmail = default(string), string adoxioPolicejurisdictionid = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioPolicejurisdictionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPolicejurisdictionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPolicejurisdictionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPolicejurisdictionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioPolicejurisdictionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioPolicejurisdictionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPolicejurisdictionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioPolicejurisdictionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioPolicejurisdictionAdoxioEstablishmentPDJurisdiction = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioPolicejurisdictionAdoxioLicencesPDJurisdiction = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioPolicejurisdictionApplications = default(IList<MicrosoftDynamicsCRMadoxioApplication>))
+        public MicrosoftDynamicsCRMadoxioPolicejurisdiction(string _createdonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), int? statecode = default(int?), string adoxioPolicejurisdictionid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string adoxioFaxnumber = default(string), int? statuscode = default(int?), string versionnumber = default(string), string adoxioPosition = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string adoxioName = default(string), string adoxioEmail = default(string), string adoxioContactname = default(string), string _adoxioLginidValue = default(string), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioPhonenumber = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioPolicejurisdictionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPolicejurisdictionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPolicejurisdictionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPolicejurisdictionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioPolicejurisdictionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioPolicejurisdictionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPolicejurisdictionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioPolicejurisdictionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioPolicejurisdictionAdoxioEstablishmentPDJurisdiction = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioPolicejurisdictionAdoxioLicencesPDJurisdiction = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioPolicejurisdictionApplications = default(IList<MicrosoftDynamicsCRMadoxioApplication>), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation adoxioLGINId = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), IList<MicrosoftDynamicsCRMaccount> adoxioPolicejurisdictionAccount = default(IList<MicrosoftDynamicsCRMaccount>))
         {
-            AdoxioPosition = adoxioPosition;
-            AdoxioFaxnumber = adoxioFaxnumber;
-            Overriddencreatedon = overriddencreatedon;
-            this._organizationidValue = _organizationidValue;
-            AdoxioContactname = adoxioContactname;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioPhonenumber = adoxioPhonenumber;
-            Modifiedon = modifiedon;
-            Versionnumber = versionnumber;
-            Statecode = statecode;
-            AdoxioName = adoxioName;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Importsequencenumber = importsequencenumber;
-            this._createdbyValue = _createdbyValue;
-            Statuscode = statuscode;
-            Createdon = createdon;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            AdoxioEmail = adoxioEmail;
+            this._organizationidValue = _organizationidValue;
+            Statecode = statecode;
             AdoxioPolicejurisdictionid = adoxioPolicejurisdictionid;
+            Overriddencreatedon = overriddencreatedon;
+            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioFaxnumber = adoxioFaxnumber;
+            Statuscode = statuscode;
+            Versionnumber = versionnumber;
+            AdoxioPosition = adoxioPosition;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Createdon = createdon;
+            this._createdbyValue = _createdbyValue;
+            AdoxioName = adoxioName;
+            AdoxioEmail = adoxioEmail;
+            AdoxioContactname = adoxioContactname;
+            this._adoxioLginidValue = _adoxioLginidValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Importsequencenumber = importsequencenumber;
+            Modifiedon = modifiedon;
+            AdoxioPhonenumber = adoxioPhonenumber;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -68,6 +69,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioPolicejurisdictionAdoxioEstablishmentPDJurisdiction = adoxioPolicejurisdictionAdoxioEstablishmentPDJurisdiction;
             AdoxioPolicejurisdictionAdoxioLicencesPDJurisdiction = adoxioPolicejurisdictionAdoxioLicencesPDJurisdiction;
             AdoxioPolicejurisdictionApplications = adoxioPolicejurisdictionApplications;
+            AdoxioLGINId = adoxioLGINId;
+            AdoxioPolicejurisdictionAccount = adoxioPolicejurisdictionAccount;
             CustomInit();
         }
 
@@ -78,68 +81,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_position")]
-        public string AdoxioPosition { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_faxnumber")]
-        public string AdoxioFaxnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contactname")]
-        public string AdoxioContactname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phonenumber")]
-        public string AdoxioPhonenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -148,13 +91,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdictionid")]
+        public string AdoxioPolicejurisdictionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_faxnumber")]
+        public string AdoxioFaxnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -163,8 +126,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_position")]
+        public string AdoxioPosition { get; set; }
 
         /// <summary>
         /// </summary>
@@ -173,13 +141,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_email")]
         public string AdoxioEmail { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_policejurisdictionid")]
-        public string AdoxioPolicejurisdictionid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_contactname")]
+        public string AdoxioContactname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_lginid_value")]
+        public string _adoxioLginidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phonenumber")]
+        public string AdoxioPhonenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -260,6 +268,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_policejurisdiction_applications")]
         public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioPolicejurisdictionApplications { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_LGINId")]
+        public MicrosoftDynamicsCRMadoxioLocalgovindigenousnation AdoxioLGINId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_account")]
+        public IList<MicrosoftDynamicsCRMaccount> AdoxioPolicejurisdictionAccount { get; set; }
 
     }
 }
